@@ -5518,3 +5518,483 @@ Frozen held-source inventory below; actual activation changes only contracts eve
 ```
 
 Not executed by this fix preparation: Source on PC, Native/SDKruntime/MF/I0, any key/CF/production/OAuth/customer action, PC-off, Native16 or Max. Source bodies are assembled/hashed as bounded data only; no clone/dependencies/build/temp Source files locally. Self-review covered integration seams, static branches, literal five+one inventory, exact2exports, N6 immutable-dir separation, actual MF/outcome hooks and three key bindings. This is implementer self-review, not independent CLEAN or Native permission.
+
+
+### Fix1 sole NEW qualification — ACTUAL GREEN, Native still HELD
+
+Implementation384b36d88984dddfbd4ea6c32fc0b79867974933/treec2148ed77d7b0b6dc969ef7241f29cf30923256b was exact full-file readback on all6paths/3194leaves/3188protected. Frozen activation4ceaeaf4f98c6595844f3e0c405cc9803bc98135/tree7f20b3398f908dff5a3d891851ac7dc3f9d6af76 changed ONLY contracts event/runlabel/two gates; active contracts21420B/blob3ea5891fce0f65aa744c0f22316bcdac1aeea686/SHA25659c5568742cab0ef1a3ce197d8598c507f80e62566724d8c7ca63b4dbf25f45c, other frozen hashes unchanged. Five active states0 before push. This is NEW run43331779408/attempt1/push at source4ceae, created2026-11-12T23:47:25Z, terminalSUCCESS2026-11-12T23:48:53Z. Producer131577995361 SUCCESS and independent verifier131578423619 SUCCESS; BOTH inspected. Old43325790437 was never rerun.
+
+Actual covering commands all succeeded: three node --check files; current-identity pure preflight; MODEL upload/uploader-API-rawZIP integrity and REAL-ID protected readback; AFW_POST_ACK_MODE=controls node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs; AFW_BUDGET_CONTROL_PHASE=green node --experimental-vm-modules test/fixtures/finite-budget-world.mjs verify-native-preparation-round1 (unchanged45s); node --test --test-concurrency=1 --test-reporter=tap test/finite-budget-diagnostics.test.mjs test/mcp-qa-finite-observer.test.mjs; contracts-proof; SAFE upload; independent MODEL+SAFE triple-digest/path/CRC/UTF8/duplicate-key/EOF/bounds checks; verifyBudgetArtifact on the independently downloaded real model ID; verify-contracts binding current checkout pins and complete closed proof.
+
+Counts: exactly24named callbacks executed/completed/PASS,0FAIL, firstFailurenull, authentic post-final-assertion exactly-once witness true; ONE node:test wrapper PASS1/FAIL0/SKIP0/CANCEL0,1673.57598ms. Related unchanged F1–F8 eight/eight groups PASS (their reported group caseCount summaries are included below, not inflated into TAP test counts); separate named pure files TAP17PASS/0FAIL/0SKIP/0CANCEL,4170.470317ms. C2 pure oracle21predicate mutation families all rejected, protected test533dafb5 and oracle37ac0b66 pinned; original-success/evidence-failure, original/qualification same-object rejection, pre-MF unavailable and future-job rejection controls all passed. N7 absent/empty/unknown registration/env-access controls passed under profile_scope; no qualification was claimed for the inactive branch.
+
+MODEL artifact13993744947 afw-post-ack-model-43331779408-1: rawZIP10428B/SHA2567861542375b88249c32135ea45b2ac36fe4386b50ad4ba7c88e7106b4b476281, expires2026-11-19T23:48:04Z, expiredfalse at metadata read. Exactlymodel.json+protectedbudget-artifact.json, compressed+uncompressed<=4MiB and manifest<=65536 checked in BOTH runners. Exact model.json UTF8 SHA/preflightSha256a8d61903d245951975312b47a9f66a295d9df247024c560284bd8042436a0af3; protected manifest410B/SHAe86da6843e9b728cb952e22a7bee1f5915fbac66d5f71182dcd115b90fd684c7. Actual assigned-ID readback logged independently by both jobs. Builder/RootMCP did NOT download MODEL; metadata and SAFE receipt only. Sanitized model remains MODEL ONLY, never Native bundle prediction or runtime evidence.
+
+SAFE artifact13993764885 afw-post-ack-contracts-43331779408-1: rawZIP3972B/SHA256e4c80634a8fc33dca2e4d03bd1ad3fe8fad42a6489efeec71a49b23ac963c1ad, expires2026-11-19T23:48:18Z, expiredfalse at metadata read. Exactlyresult.json9696B/SHAecea96976c0ed0a75c5712fd3a18e56d99225a6c481123ecafea8ef877e58ac6 andmanifest.json391B/SHA9cd8e5292faa0797099790ce6e67a9a37778c6cce466ee18cb798701fa988a2b;10087Bcombined. Independent job verified uploader/API/rawZIP all3 and full current context/program/control/closed model data. Builder inspected only this allowed small SAFE ZIP in memory, verified its exact metadata digest/paths/bounds/CRC/UTF8/EOF and JSON; no filesystem download, Worker source, private Raw, key, cipher or Native producer logs. Transport download URLs are not copied into this report.
+
+Actual same-once-captured inputs/defines ORIGINAL408 vs candidate OFF: M2066727B/hash600290bcc20005eb6ec9c757d8640b9b85d28e7cd4e90dbf141064d3b38b7bbd,61records/0originalSYN; QA2726174B/hashcbc0a877b4561230ebee202dd4353c2784bae025367f6ed734ba0cd0fc3c6aad,115records/3originalSYN. OFF records also exactly matched ON pre-diagnostic records after unique role/path normalization. ON M unchanged; ON MODEL QA2730922B/hash377252d9d94f025736f05a9bcdd426514be89597cf0401921ce9742e6a24ba54. Exactly TWO QA emissions validated, stdin budgetSnapshot1 and phase entry1/notice1/protocol5/pair1/expected1/exit1/ACK1; emitted/literal/base hashes, closed fields/enums and Node-module absence are in exact SAFE proof below. SDK251149B/bb2b8524/44KVsites, lock36a8cd4b/SHA846c4d28, rawlib/F7 and protected original test pins unchanged. No actual Native graph hashes/provenance or original R2 outcome is asserted by this model/control result.
+
+Bounded actual closed job outputs (no private/raw logs):
+
+```json
+{
+  "producer": [
+    "BUDGET SAME ID READBACK VERIFIED {\"source\":\"4ceaeaf4f98c6595844f3e0c405cc9803bc98135\",\"run\":\"43331779408\",\"attempt\":\"1\",\"kind\":\"pure\",\"artifactId\":\"13993744947\",\"files\":2,\"manifestBytes\":410,\"manifestSha256\":\"e86da6843e9b728cb952e22a7bee1f5915fbac66d5f71182dcd115b90fd684c7\",\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false}",
+    "# {\"purpose\":\"AFW_POST_ACK_CONTROLS/1\",\"expected\":24,\"completed\":24,\"pass\":24,\"fail\":0,\"inventory\":[\"off_graphs\",\"sdk_pins\",\"profile_scope\",\"sites_exact\",\"sealer_graph\",\"lexical_op\",\"one_shot\",\"nested_scope\",\"late_scope\",\"entry_check\",\"notice_guard\",\"protocol_guard\",\"pair_wait\",\"expected_mismatch\",\"exit_check\",\"unbranded\",\"same_error\",\"observer_throws\",\"same_effects\",\"pair_orders\",\"no_rejection\",\"overflow\",\"schema\",\"provenance\"],\"firstFailure\":null,\"postAssertionExactlyOnce\":true,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false,\"nativeExecuted\":false,\"mfAllocated\":false,\"I0Created\":false}",
+    "# tests 1",
+    "# pass 1",
+    "# fail 0",
+    "# cancelled 0",
+    "# skipped 0",
+    "# duration_ms 1673.57598",
+    "# tests 17",
+    "# pass 17",
+    "# fail 0",
+    "# cancelled 0",
+    "# skipped 0",
+    "# duration_ms 4170.470317"
+  ],
+  "verifier": [
+    "BUDGET SAME ID READBACK VERIFIED {\"source\":\"4ceaeaf4f98c6595844f3e0c405cc9803bc98135\",\"run\":\"43331779408\",\"attempt\":\"1\",\"kind\":\"pure\",\"artifactId\":\"13993744947\",\"files\":2,\"manifestBytes\":410,\"manifestSha256\":\"e86da6843e9b728cb952e22a7bee1f5915fbac66d5f71182dcd115b90fd684c7\",\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false}",
+    "{\"purpose\":\"afw.post-ack-independent-verdict.safe.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"ref\":\"refs/heads/feat/finite-native-cleanup-20261101\",\"source\":\"4ceaeaf4f98c6595844f3e0c405cc9803bc98135\",\"run\":\"43331779408\",\"attempt\":1,\"case\":\"R2\"},\"nativeCertificate\":false,\"valid\":true,\"modelArtifactId\":\"13993744947\",\"modelSha256\":\"a8d61903d245951975312b47a9f66a295d9df247024c560284bd8042436a0af3\",\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false}"
+  ]
+}
+```
+
+Exact downloaded SAFE data/proof inventory, for inspectable command coverage and source/model/program pins:
+
+```json
+{
+  "zipBytes": 3972,
+  "zipSha256": "e4c80634a8fc33dca2e4d03bd1ad3fe8fad42a6489efeec71a49b23ac963c1ad",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 391,
+      "sha256": "9cd8e5292faa0797099790ce6e67a9a37778c6cce466ee18cb798701fa988a2b"
+    },
+    {
+      "path": "result.json",
+      "bytes": 9696,
+      "sha256": "ecea96976c0ed0a75c5712fd3a18e56d99225a6c481123ecafea8ef877e58ac6"
+    }
+  ],
+  "result": {
+    "purpose": "afw.post-ack-contracts.safe.v1",
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+      "source": "4ceaeaf4f98c6595844f3e0c405cc9803bc98135",
+      "run": "43331779408",
+      "attempt": 1,
+      "case": "R2"
+    },
+    "controls": {
+      "purpose": "AFW_POST_ACK_CONTROLS/1",
+      "expected": 24,
+      "completed": 24,
+      "pass": 24,
+      "fail": 0,
+      "inventory": [
+        "off_graphs",
+        "sdk_pins",
+        "profile_scope",
+        "sites_exact",
+        "sealer_graph",
+        "lexical_op",
+        "one_shot",
+        "nested_scope",
+        "late_scope",
+        "entry_check",
+        "notice_guard",
+        "protocol_guard",
+        "pair_wait",
+        "expected_mismatch",
+        "exit_check",
+        "unbranded",
+        "same_error",
+        "observer_throws",
+        "same_effects",
+        "pair_orders",
+        "no_rejection",
+        "overflow",
+        "schema",
+        "provenance"
+      ],
+      "firstFailure": null,
+      "postAssertionExactlyOnce": true,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false,
+      "nativeExecuted": false,
+      "mfAllocated": false,
+      "I0Created": false
+    },
+    "programs": [
+      {
+        "path": "test/fixtures/finite-budget-world.mjs",
+        "bytes": 234909,
+        "sha256": "e80fad6e84c3a2ee9ec0d466a51c02a0c90d1afb3c1979a8fc332ea9d5e3ac39"
+      },
+      {
+        "path": "test/fixtures/finite-post-ack-diagnostic.mjs",
+        "bytes": 73508,
+        "sha256": "6d48912cc571517d0adccc3fc8e9f56e36049ede91f23f7e91a973d0521c9a35"
+      },
+      {
+        "path": "test/finite-post-ack-diagnostic.test.mjs",
+        "bytes": 1923,
+        "sha256": "cbe41b778c68e74516f9008061d27cdcdc6e8dcf212a93d8ddb24caf8079e462"
+      },
+      {
+        "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+        "bytes": 21420,
+        "sha256": "59c5568742cab0ef1a3ce197d8598c507f80e62566724d8c7ca63b4dbf25f45c"
+      },
+      {
+        "path": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+        "bytes": 30086,
+        "sha256": "da20759fd7be5e64f7f62164a0a58bc701b33c89d35175a746868eed56c38fb0"
+      },
+      {
+        "path": ".github/workflows/afw-finite-budget-qualification.yml",
+        "bytes": 126209,
+        "sha256": "1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 445991,
+        "sha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34"
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "bytes": 126504,
+        "sha256": "d97d07f69916c45f58af511a6dfb57322ed3fe7d8fa1f6fbb2220d44be15b921"
+      },
+      {
+        "path": "test/fixtures/finite-initial-entry-world.mjs",
+        "bytes": 87501,
+        "sha256": "0a1bcfa9721673386b08af45e4a24c33fa2db939d5edf021628d92590e883abb"
+      },
+      {
+        "path": "test/fixtures/finite-checkpoint-custody.mjs",
+        "bytes": 21159,
+        "sha256": "7751921bfaf10cd02dc777305d384d84ee7834f7bfbf2669dc60da50d7f1814f"
+      },
+      {
+        "path": "test/mcp-qa-finite-budget-native.test.mjs",
+        "bytes": 12749,
+        "sha256": "7194f50e3974076da519b1b99103d28537cc2d33813e8bf6eae83cf014d24948"
+      }
+    ],
+    "preflight": {
+      "purpose": "afw.post-ack-preflight.syn.v1",
+      "profile": "r2-post-ack-v1",
+      "stage": "MODEL ONLY",
+      "offGraphs": [
+        {
+          "role": "M",
+          "baselineBytes": 2066727,
+          "candidateBytes": 2066727,
+          "baselineSha256": "600290bcc20005eb6ec9c757d8640b9b85d28e7cd4e90dbf141064d3b38b7bbd",
+          "candidateSha256": "600290bcc20005eb6ec9c757d8640b9b85d28e7cd4e90dbf141064d3b38b7bbd",
+          "equal": true,
+          "sameCapturedInputs": true,
+          "sameDefines": true,
+          "onPreDiagnosticEqual": true,
+          "baselineRecordsSha256": "d435513e0a2c9bf627a9d44a251a119891445616faabd0206c0681b9f3a90f81",
+          "offRecordsSha256": "d435513e0a2c9bf627a9d44a251a119891445616faabd0206c0681b9f3a90f81",
+          "onPreDiagnosticRecordsSha256": "d435513e0a2c9bf627a9d44a251a119891445616faabd0206c0681b9f3a90f81",
+          "recordCount": 61,
+          "originalAdditionalSYN": 0
+        },
+        {
+          "role": "QA",
+          "baselineBytes": 2726174,
+          "candidateBytes": 2726174,
+          "baselineSha256": "cbc0a877b4561230ebee202dd4353c2784bae025367f6ed734ba0cd0fc3c6aad",
+          "candidateSha256": "cbc0a877b4561230ebee202dd4353c2784bae025367f6ed734ba0cd0fc3c6aad",
+          "equal": true,
+          "sameCapturedInputs": true,
+          "sameDefines": true,
+          "onPreDiagnosticEqual": true,
+          "baselineRecordsSha256": "c3ae0dbfef6012249d53681f4b6fcb9e00302df392a6eb9be2030d3677ef570f",
+          "offRecordsSha256": "c3ae0dbfef6012249d53681f4b6fcb9e00302df392a6eb9be2030d3677ef570f",
+          "onPreDiagnosticRecordsSha256": "c3ae0dbfef6012249d53681f4b6fcb9e00302df392a6eb9be2030d3677ef570f",
+          "recordCount": 115,
+          "originalAdditionalSYN": 3
+        }
+      ],
+      "supplement": {
+        "purpose": "afw.post-ack-supplement.syn.v1",
+        "profile": "r2-post-ack-v1",
+        "context": {
+          "repository": "tokenizartinfo-ops/agent-friendly-web",
+          "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+          "source": "4ceaeaf4f98c6595844f3e0c405cc9803bc98135",
+          "run": "43331779408",
+          "attempt": 1,
+          "case": "R2"
+        },
+        "records": [
+          {
+            "purpose": "afw.post-ack-emission.syn.v1",
+            "version": 1,
+            "profile": "r2-post-ack-v1",
+            "path": "<stdin>",
+            "phase": "after-baseline",
+            "baselineBytes": 124640,
+            "baselineSha256": "3b6ada1b5083ef8fe283829845c477badd715496429708e3df3e0f311948a4fa",
+            "emittedBytes": 124768,
+            "emittedSha256": "c6456b0f5436150127d9d42644e05ff021499f3735acb7a6050da455b07287b6",
+            "transformLiteralSha256": "38fd9c021890c48872e95a693394bdcdfb75784f650b2f0ecbc4adca191c3ac5",
+            "sites": {
+              "budgetSnapshot": 1
+            },
+            "fields": [
+              "invocationOrdinal",
+              "operation",
+              "ackReturned",
+              "postAckEntered",
+              "outcome",
+              "boundary",
+              "sameError"
+            ],
+            "enums": [
+              "entry_check",
+              "notice_guard",
+              "protocol_invariant",
+              "pair_wait",
+              "expected_mismatch",
+              "exit_check",
+              "unknown"
+            ],
+            "businessAuthority": false,
+            "addsAwait": 0,
+            "addsPromise": 0,
+            "addsNativeCall": 0,
+            "changesRetention": false
+          },
+          {
+            "purpose": "afw.post-ack-emission.syn.v1",
+            "version": 1,
+            "profile": "r2-post-ack-v1",
+            "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+            "phase": "after-baseline",
+            "baselineBytes": 171207,
+            "baselineSha256": "65dea4c7ed9c2ac048a1be026ce55cefe3a91ceb3f338a2488a5d7cb633d1070",
+            "emittedBytes": 174438,
+            "emittedSha256": "3780fa1ac0abd40864c619bcad0c7f92f1ad774a2dbeb72084ba076a48854076",
+            "transformLiteralSha256": "266704f8de7172d713f6f31f545447341a490f5b97c4b07a0a1875115fe3b8b3",
+            "sites": {
+              "entry_check": 1,
+              "notice_guard": 1,
+              "protocol_invariant": 5,
+              "pair_wait": 1,
+              "expected_mismatch": 1,
+              "exit_check": 1,
+              "issuer_ack": 1
+            },
+            "fields": [
+              "invocationOrdinal",
+              "operation",
+              "ackReturned",
+              "postAckEntered",
+              "outcome",
+              "boundary",
+              "sameError"
+            ],
+            "enums": [
+              "entry_check",
+              "notice_guard",
+              "protocol_invariant",
+              "pair_wait",
+              "expected_mismatch",
+              "exit_check",
+              "unknown"
+            ],
+            "businessAuthority": false,
+            "addsAwait": 0,
+            "addsPromise": 0,
+            "addsNativeCall": 0,
+            "changesRetention": false
+          }
+        ],
+        "nodeModuleAbsent": true,
+        "businessAuthority": false
+      },
+      "modelGraphs": {
+        "QA": {
+          "bytes": 2730922,
+          "sha256": "377252d9d94f025736f05a9bcdd426514be89597cf0401921ce9742e6a24ba54"
+        },
+        "M": {
+          "bytes": 2066727,
+          "sha256": "600290bcc20005eb6ec9c757d8640b9b85d28e7cd4e90dbf141064d3b38b7bbd"
+        }
+      },
+      "privateCompileHashes": {
+        "phaseSha256": "65dea4c7ed9c2ac048a1be026ce55cefe3a91ceb3f338a2488a5d7cb633d1070",
+        "entrySha256": "3b6ada1b5083ef8fe283829845c477badd715496429708e3df3e0f311948a4fa",
+        "qaMetafileSha256": "bd7a1aefb08e59118fd0c94c51250c82773dd135a8449387bf13c6da53297221"
+      },
+      "sdkFileSha256": "bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80",
+      "sdkBytes": 251149,
+      "sdkSites": 44,
+      "lockBlob": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+      "lockSha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34",
+      "worldSha256": "e80fad6e84c3a2ee9ec0d466a51c02a0c90d1afb3c1979a8fc332ea9d5e3ac39",
+      "transformSha256": "6d48912cc571517d0adccc3fc8e9f56e36049ede91f23f7e91a973d0521c9a35",
+      "protectedTestBlob": "533dafb5df5f8e57442c5b9029dc8dec6dded434",
+      "oracleSha256": "37ac0b6658d7ec789247e5fb89521dacf585b7d818cefbfdc429b742a142775e",
+      "preflightSha256": "a8d61903d245951975312b47a9f66a295d9df247024c560284bd8042436a0af3"
+    },
+    "modelReceipt": {
+      "artifactId": "13993744947",
+      "uploaderDigest": "7861542375b88249c32135ea45b2ac36fe4386b50ad4ba7c88e7106b4b476281",
+      "apiDigest": "sha256:7861542375b88249c32135ea45b2ac36fe4386b50ad4ba7c88e7106b4b476281",
+      "rawZipSha256": "7861542375b88249c32135ea45b2ac36fe4386b50ad4ba7c88e7106b4b476281",
+      "modelSha256": "a8d61903d245951975312b47a9f66a295d9df247024c560284bd8042436a0af3",
+      "verified": true,
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+        "source": "4ceaeaf4f98c6595844f3e0c405cc9803bc98135",
+        "run": "43331779408",
+        "attempt": 1,
+        "case": "R2"
+      }
+    },
+    "oracle": {
+      "protectedTestBlob": "533dafb5df5f8e57442c5b9029dc8dec6dded434",
+      "assertionInventory": 21,
+      "negativeFamilies": 21,
+      "allRejected": true,
+      "oracleSha256": "37ac0b6658d7ec789247e5fb89521dacf585b7d818cefbfdc429b742a142775e",
+      "outcomeIsolation": {
+        "knownSuccessNormal": true,
+        "primaryRejectionSame": true,
+        "qualificationErrorSame": true,
+        "preMfUnavailable": true,
+        "futureJobStartRejected": true
+      }
+    },
+    "related": {
+      "purpose": "afw.closed-pure-controls.syn.v2",
+      "groups": [
+        {
+          "group": "F1",
+          "passed": true,
+          "evidence": {
+            "bytes": 904,
+            "sha256": "dcae1ea26b1b09c6f2eacc5fd66701bdb3c61d2ccd431281b3c5325827b0909f"
+          },
+          "caseCount": 2
+        },
+        {
+          "group": "F2",
+          "passed": true,
+          "evidence": {
+            "bytes": 3332,
+            "sha256": "dac450adc2e8566f01427d907b835f22a7e64301654f58a58cd9ef5557d12a21"
+          },
+          "caseCount": 1
+        },
+        {
+          "group": "F3",
+          "passed": true,
+          "evidence": {
+            "bytes": 5431,
+            "sha256": "5fad4492f2eec31e901c2d0a8c3715f0ff8a71bc08d4369280f3ceba6203153a"
+          },
+          "caseCount": 4
+        },
+        {
+          "group": "F4",
+          "passed": true,
+          "evidence": {
+            "bytes": 2528,
+            "sha256": "fde2eea49ef543f0d36347cda87d7035f10657716cc6cd418bff1fb4548bb33b"
+          },
+          "caseCount": 1
+        },
+        {
+          "group": "F5",
+          "passed": true,
+          "evidence": {
+            "bytes": 16524,
+            "sha256": "46246d9f7d0c795f5fd22ff5908df8e745be38f608298ae45ec0b891f51392d4"
+          },
+          "caseCount": 3
+        },
+        {
+          "group": "F6",
+          "passed": true,
+          "evidence": {
+            "bytes": 218,
+            "sha256": "0cf03851592354cf957c3248d37b1585d924dfc009b79704db924a8145070e5a"
+          },
+          "caseCount": 1
+        },
+        {
+          "group": "F7",
+          "passed": true,
+          "evidence": {
+            "bytes": 599,
+            "sha256": "7362a7cc15236bd1958794837bccc943ebf5ea87ef2f3db7c06b8d6382c08036"
+          },
+          "caseCount": 4
+        },
+        {
+          "group": "F8",
+          "passed": true,
+          "evidence": {
+            "bytes": 1532,
+            "sha256": "ac5c7c49185dc53cdd285c8e87294359d23d4fbcb31f60ba816c8fa2d3398d68"
+          },
+          "caseCount": 6
+        }
+      ],
+      "passed": true,
+      "pureTests": {
+        "tests": 17,
+        "pass": 17,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0,
+        "tapSha256": "28b4b0c9d01ddeac44bb577af0d4dcdc32cf09a994b819d63a47835fad480d72"
+      }
+    },
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false,
+    "nativeExecuted": false,
+    "mfAllocated": false,
+    "I0Created": false
+  },
+  "manifest": {
+    "purpose": "afw.native-post-ack-r2-manifest.safe.v1",
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+      "source": "4ceaeaf4f98c6595844f3e0c405cc9803bc98135",
+      "run": "43331779408",
+      "attempt": 1,
+      "case": "R2"
+    },
+    "files": [
+      {
+        "path": "result.json",
+        "bytes": 9696,
+        "sha256": "ecea96976c0ed0a75c5712fd3a18e56d99225a6c481123ecafea8ef877e58ac6"
+      }
+    ]
+  }
+}
+```
+
+After PASS closure target: retain fixed Worlddd93fc81dcefde271502626fdd5e02a0f9ab0a1a; fixturec71926a067a79168a4d30f80901fb76d308d06e7; testaaf4894d1b411a8ac59debb63ca9368e803141c5; Native8d5b04da0eff2890c70b8ef15a2f51a99c896810 remainsmanual/noinputs/nopush/twofalse; contracts restored EXACTheldfix1body1c4d054487e781157cf4fa633f9fc58a5a9cbbf5/manual/noinputs/nopush/twofalse; F7unchangedf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/sevenfalse. Full report prefix/history preserved. Final post-CAS ref/tree/files/protected/main/five-state0 readback will be appended below. Fix1 permit consumed successfully; no further qualification/retry/Source code fix without a new scoped Root instruction. Independent scoped rereview still required. No Native, AFW key, MF/I0, SDK runtime, CF/production/OAuth/customer action, PC-off, Native16 or Max executed. All five readiness flags false; same-runner trust/synchronous overhead/pair call-boundary/model-only limitations remain. No known remaining scoped implementation concern was found by implementer self-review; this is not independent CLEAN or Native authorization.
