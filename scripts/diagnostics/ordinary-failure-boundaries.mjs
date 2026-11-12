@@ -179,6 +179,7 @@ function emit(value){try{const s=JSON.stringify(value);if(Buffer.byteLength(s)<=
 function installChild(){
  if(process.env.AFB_CHILD!=='FIXED_TWO_CASES'||process.env.AFB_SUBJECT!==SUBJECT)reject();
  const note=(stage,phase,error)=>{
+  if(!STAGES.includes(stage))return;
   try{emit({kind:'boundary',stage,phase});if(phase==='throw')emit({kind:'error',stage,errors:safeError(error)});}catch{}
  };
  const observe=(stage,fn,receiver,args)=>{
@@ -192,8 +193,8 @@ function installChild(){
  // Controls observe the original identity, including async return and error identity.
  let methodTouches=0;const receiver={value:7,call(x){methodTouches++;if(this!==receiver)throw new Error('receiver');return x;}};
  const identity={},p=Promise.resolve(identity),thrown=new TypeError('AFB_PRIVATE_CONTROL_THROW');
- const returned=globalThis.__afbMethod('rest_control',receiver,'call')(p);
- let sameError=false;try{globalThis.__afbWrap('rest_control',()=>{throw thrown;})();}catch(e){sameError=e===thrown;}
+ const returned=globalThis.__afbMethod(null,receiver,'call')(p);
+ let sameError=false;try{globalThis.__afbWrap(null,()=>{throw thrown;})();}catch(e){sameError=e===thrown;}
  emit({kind:'identity_control',pass:returned===p&&sameError&&methodTouches===1,promiseIdentity:returned===p,errorIdentity:sameError,receiverIdentity:methodTouches===1});
  const deny=()=>{emit({kind:'network_denied'});throw new Error('AFB network disabled');};
  globalThis.fetch=deny;net.Socket.prototype.connect=deny;

@@ -20,7 +20,7 @@ Tres únicos archivos nuevos, todos modo Git 100644:
 
 | Ruta | Bytes UTF-8 | Git blob | SHA-256 |
 | --- | ---: | --- | --- |
-| scripts/diagnostics/ordinary-failure-boundaries.mjs | 25567 | 745cff12779074702b457feaf651fa061cc8bb4c | 276f972648fac2c3eb1fc8c5df1bebefef84d30df6b2bf60c954ebdc209011f9 |
+| scripts/diagnostics/ordinary-failure-boundaries.mjs | 25584 | 67ac2f192c767b56b356a41ee6e9db6e1601fe53 | 7687d91c990fbd438c963367b5afb6375d49dbb28f22a16f437c575f6114635b |
 | .github/workflows/afw-ordinary-failure-boundaries.yml | 4732 | c082ab9bacc8b3cf975fa611aebd95edcf144fd0 | 5eafd022655c8122de813ed3b3ffe57ce6566f0bc23050ccc5a1c28045ac7e5a |
 | docs/superpowers/reports/2026-11-12-ordinary-failure-boundaries.es.md | contrato externo | contrato externo | contrato externo |
 
@@ -49,7 +49,7 @@ name/code mantienen enums cerrados; mensajes propios de datos sólo dan SHA-256 
 
 Las envolturas sin await devuelven el mismo valor/Promise; Reflect.apply conserva this y argumentos. Métodos ctl/store usan un wrapper que captura el receptor y obtiene el método antes de evaluar argumentos, conservando el orden original. Una rama de Promise observa retorno/rechazo sin envolver el valor devuelto. No se sustituyen algoritmos, relojes, fixture clocks, plan, pin ni producto. La instrumentación sólo existe en una copia temporal cloud; el checkout sujeto f5 conserva bytes/modos.
 
-Controles preparados, NO EJECUTADOS: TypeError ordinario y cross-realm; objeto que falsifica TypeError.prototype; getters arrojadores de stack/code/name/tag/cause (touches esperado cero); mensaje sobredimensionado; causa cíclica; canary privado ausente de la salida. Controles en padre y dos procesos de test. También se comprueban identidad del receptor, Promise y excepción con una llamada sintética; los marcadores de estos controles están separados del contador de tests. Todos deberán pasar en el futuro; la sintaxis no los acredita.
+Controles preparados, NO EJECUTADOS: TypeError ordinario y cross-realm; objeto que falsifica TypeError.prototype; getters arrojadores de stack/code/name/tag/cause (touches esperado cero); mensaje sobredimensionado; causa cíclica; canary privado ausente de la salida. Controles en padre y dos procesos de test. También se comprueban identidad del receptor, Promise y excepción con una llamada sintética; los controles no emiten ninguna de las 16 etapas de fixtures; sólo su recibo identity_control, separado del contador de tests. Todos deberán pasar en el futuro; la sintaxis no los acredita.
 
 Hay exactamente 16 etapas cerradas: own_build, own_import, cf_fixture, cf_finalizer, final_restore, final_project, rest_init, rest_control, rest_prepare, rest_proof, rest_capture, rest_read, rest_claim, trial_generation, http_build, http_import. No se añadió instrumentación a qa-generation-ledger ni finite-cleanup-proof. finite-http-module sólo emitirá marcas si las llamadas originales se alcanzan.
 
@@ -250,7 +250,7 @@ Realizado: SourceTextModule analizó helper y siete overlays y el inline de fall
 
 La comprobación Actions por rama exacta devolvió total_count=0 antes de escribir. CI existente sólo hace push a main o pull_request; no se abre PR, y el commit de preparación incluye [skip ci]. El nuevo workflow es sólo manual/inactivo. No se despacha workflow ni se habilita ninguna ejecución durante preparación.
 
-Publicación preparada en Git Data: crear árbol con base exacta 7bc8b997a968dca32fc567b627de70b774d6489c y sólo las tres nuevas rutas; crear un commit con único padre f5; mover sólo diag/afw-failure-boundaries-20261112 mediante expected_sha=f5 y force=false. Ante rechazo CAS, no reintentar sin inspeccionar el ref. El material de reversión son los 3188 blobs inmutables/base f5; esta entrega no autoriza reset/force/delete ni activar el job.
+Publicación preparada en Git Data: crear árbol con base exacta 7bc8b997a968dca32fc567b627de70b774d6489c y sólo las tres nuevas rutas; crear un commit con único padre f5; mover sólo diag/afw-failure-boundaries-20261112 mediante expected_sha=f5 y force=false. Ante rechazo CAS, no reintentar sin inspeccionar el ref. Corrección acotada posterior al primer commit preparado 421febef4da38ffefeab00cd6ec9a838ce3c7f00: los controles de identidad usaban inicialmente la etapa rest_control y podían aparentar una frontera de fixture no alcanzada. Se reemplazaron por etapa nula descartada antes de emitir; sólo queda el recibo identity_control. Se repitió la gramática estática y el commit corrector es fast-forward con padre 421febef, expected_sha exacto y force=false; todas las comprobaciones finales se repiten. No se ejecutaron controles o tests. El material de reversión son los 3188 blobs inmutables/base f5; esta entrega no autoriza reset/force/delete ni activar el job.
 
 Criterio externo de entrega: readback independiente de ref, commit/padre, árbol completo no truncado (3191 blobs), los 3188 tuples path/mode/sha originales intactos y exactamente tres altas; lectura completa de los tres blobs y comparación byte por byte+hashes; nueva consulta de runs exacta cero. Los SHA reales del commit/árbol/informe y los resultados de estas comprobaciones quedan en el contrato externo posterior a este contenido. STOP_WRITES al concluir ese contrato, sin commits autorreferenciales.
 
