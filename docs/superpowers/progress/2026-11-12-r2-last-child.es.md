@@ -1,10 +1,10 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-12-r2-last-child.md
 
-## CURRENT — Task1 fix round1/5 GREEN; scoped re-review pending; actual Task2 HELD
+## CURRENT — Task1 COMPLETE/CLEAN after fix1; Task2 ONE actual5+2 released
 
-Sourcec7ed76a1/WF7813487a bothfalse/manual/noinputs/nopush. Newkeyless43301802047/1success91+40+16+16; Rootindependentsafeproof/framehash/scope/protected3188/reportprefix/main/0activechecked. [Fix1package](../reviews/2026-11-12-r2-last-child-fix1-package.md), completevalidatedbothfilediff. OriginalimplementerSTOPPED. Allreadinessfalse/noOriginal/private/nativeexecution. IndependentADDRESSEDverdict pending; noactualrelease.
+2026-11-12. [Task1clean](../reviews/2026-11-12-r2-last-child-task1-clean.md): priorImportantADDRESSED/newfix0Critical0Important0Minor. Sourcec7ed76a1/WF7813487a preparedinactive, allactorsSTOPPED. Root [exactTask2brief](../briefs/2026-11-12-r2-last-child-task2-single-projection.md) releasesfreshsoleexecutorONEfixedOriginal5+2, noNative/runtime. Event/twofalseprefix/runlabel/reportONLY; freezeSHA/bothterminal; exactF7/fullreadbacks/0activeSTOPafterANYoutcome. Priornewkeyless43301802047consumed, noreplay. Rootauditsnewclosedcertificate andBOTHoldrowsunchangedwithpriorsafeactual; no causalguess. Allreadinessfalse/nohumanstepneeded.
 
-Task1: fix round1/5 (0 accepted addressed yet,1 open pending re-review — R2oversize negative shadowing; commits6c4b13c2..c7ed76a1).
+Task1: fix round1/5 (1 addressed,0 open — R2oversize negative shadowing; commits6c4b13c2..c7ed76a1).
 Task1: minor (deferred): positive real fixed-file R2→reader→coordinator seam fixture absent; finalwholeplanreviewmusttriage beforeNativepromotion.
 
 ## Prior proposal checkpoint
