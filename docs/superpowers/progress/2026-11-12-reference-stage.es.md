@@ -1,9 +1,8 @@
 # SDD ledger — docs/superpowers/plans/2026-11-12-reference-stage.md
 
-## CURRENT — preflight bound; Task1 prep+ONE KEYLESS2+2 released; Task2 HELD
+## CURRENT — Task1 review pending; Root found expanded-test invocation gap; Task2 HELD
 
-2026-11-12. Astra/xhigh preflight0Critical/1Important singletonsourcepaircontradiction accepted/fixed BEFORESourcewrite. [Bindingruling](../reviews/2026-11-12-reference-stage-preflight.md) requireconcretenonpairentrywithlastpaircount>=2; count1unknown; rehashedcounterexamplesallsemanticpaths. EntryviaactiveMetricnotoperation-specificACK/cause. [ExactTask1brief](../briefs/2026-11-12-reference-stage-task1.md) releasesfreshsolewriterONEkeyless2+2/noOriginal/env/SDK/native; PASScompleteinactive5+2/review, failureF7/fullreads0activeSTOP/noretry. BASEF59/protected3188/Core/ZIP/bounds preserved. MandatorypositivefixedfilefixtureaddressespriorMinoronlyifpasses. Allreadinessfalse, Task2HELD.
-
+Sourceb0dfcf50/WFcc7bed8a216100chars bothfalse/manual/noinputs/nopush, allactorsSTOPPED/protected3188/main0c9/0active. Nominalkeyless43307790578/1 91+40+16+16green andRootsafeZIP/wholemanifest/hashchecks genuine, BUT newexpansiondefinitions/registration nestedinsideLASTlegacy lc_bounds callback, so promisednewassertions/positivefilefixture DIDNOTexecute. Newstagequalification/priorMinorclosureNOTaccredited. [Fullreviewpackage](../reviews/2026-11-12-reference-stage-task1-package.md) asksindependentseverity/repaircriterion beforefix. No Source/privateactual/nativepermit; allreadinessfalse.
 
 ## Prior proposal checkpoint
 
