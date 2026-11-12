@@ -1,15 +1,10 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — inspector fix4/5 fresh stronger implementer; actualpair I7/I8; no privateaccess
+## CURRENT — freshfix4 ALLPASS123controls+crypto; actualcandidatec433 INACTIVE; scopedreviewpending
 
-2026-11-12 16:14UTC. FULL7freview closesI6cross-jobtransport; twoNEWImportant actualbranchgaps I7result.inspector Source/runnotcurrent-bound, I8allowsinspectedwithfixtures1/TAPnot_examined0unknowncases. [Fullreview](../reviews/2026-11-12-native-inspector-fix3-full-review.md). Rootverifiedproduceralreadyrequirespresent3forinspected, otherwisepartial. Ruling: independentpairmustmirror91/TAP3/observednonunknownstatuses, includingfail/skipped/todoasDIAGNOSTICdata, notNativePASS; core77k unchanged.
+2026-11-12 16:34UTC. FreshAstraxhighfix4 trial43258702864/1 Source7a58SUCCESS (serialproducer12s/verifier6s):91CORE+16ZIP+16ACTUALpairCURRENTGREEN, I7/I8oldREDSTATICONLY. Metadata200/776B andrawZIPtripleSHA/full2JSON allpass. Rootartifact13961714753/1824B/SHAb2997086/schema/counts/context/manifest andEXACT4closedrecords/codeSource-reconstructed573f9c32 verified. [Primary](../reviews/2026-11-12-native-inspector-pair-fix4-primary.md).
 
-[Fix4brief](../briefs/2026-11-12-native-inspector-fix-round4.md) forfreshAstraxhighimplementer underSDDcapabilityrule: onlyindependentactualpairchecks+≤16meaningfulinertpaircontrols, preserve91COREd514+16ZIPb36cbyteexact, one2+2minkeylessattempt/nokey/private/SDK/I0; afterALLPASS COMPLETEamendedactual5+2INACTIVE/fullreadbacksSTOP thenSAMEscopedreview. ActualprivateinspectionNOTreleased. Source7f/current2falsebeforewriter; allreadinessfalse. M2deferred, originalRcause/statusUNKNOWN.
-
-Task inspector: fixround3/5 (I6addressed,2newopenI7/I8; Sourcea51..7f). Nextfreshround4FIX_BASE7f. PriorwriterSTOP; Rootdocsbranchseparate.
-
-
-Rootruling: [STATIC-RED/context allowance](../briefs/2026-11-12-native-inspector-fix4-context-red-ruling.md), no vulnerablebaselineexecution required; dynamicCURRENTactualpairGREEN remainsmandatory. Fresh /root/inspector_pair_fix4 confirmedAFWscope/7f/e26a/3190leaves and proposes credentialless isolatedsyntheticpairtestchild only; parent+network/currentartifact/originalAAD identity remainsuntouched. NoSourcewrites/runs reported atthischeckpoint; privateaccessheld.
+Completec433b925/treed6040d79/WF43a926fd/reportb3efc0f7 manual/noinputs/noPush/BOTHfalse5+2proposal; Rootfullbody/ref/appendprefix/coveredCOREZIPDTODRIVERPAIRTESTS/complete7f..c433U10/twopath/0active readbacks. [Scopedpackage](../reviews/2026-11-12-native-inspector-fix4-scoped-review-package.md) toSAMEreviewerI7/I8/newbreakage; original+freshwritersSTOP. Core91d514/ZIPb36cunchanged, parentidentityreal vschildzeroisolationpreserved. ActualprivateinspectionNOTreleased; needscleanreview+Rootexplicit5+2amendment/oneinspection. M2deferred, originalRcause/statusUNKNOWN, allreadinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
