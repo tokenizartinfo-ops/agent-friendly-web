@@ -539,4 +539,7 @@ async function coldPhaseReentry(){
  assert.deepEqual(result.rows.map(r=>[r.rootOrdinal,r.childOrdinal,r.rootDeadline,r.childDeadline]),[
   [1,1,30000,5000],[1,2,30000,4000],[1,1,30000,5000],[2,null,31000,null],[1,1,30000,5000],[1,1,30000,5000],[1,null,30000,null]]);
  assert.deepEqual(result.rows.map(r=>r.phase),['sdk_lookup','sdk_lookup','sdk_lookup','monitoring_post','sdk_lookup','cleanup_before_restore','cleanup_before_restore'],'cold-C explicit phase same-root reentry');
+ const callback=function(){'use strict';return this;};
+ const receivers=[runtime.run(child,callback),runtime.run(child,()=>runtime.phase('sdk_lookup',callback)),runtime.run(child,()=>runtime.phase('sdk_lookup',()=>runtime.run(child,callback)))];
+ assert.deepEqual(receivers,[undefined,undefined,undefined],'cold-C original strict callback receiver');
 }
