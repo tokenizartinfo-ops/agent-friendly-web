@@ -1,8 +1,8 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-12-r2-last-child.md
 
-## CURRENT — Task1 COMPLETE/CLEAN after fix1; Task2 ONE actual5+2 released
+## CURRENT — Task2 valid PARTIAL certificate; mandatory F7 closure underway
 
-2026-11-12. [Task1clean](../reviews/2026-11-12-r2-last-child-task1-clean.md): priorImportantADDRESSED/newfix0Critical0Important0Minor. Sourcec7ed76a1/WF7813487a preparedinactive, allactorsSTOPPED. Root [exactTask2brief](../briefs/2026-11-12-r2-last-child-task2-single-projection.md) releasesfreshsoleexecutorONEfixedOriginal5+2, noNative/runtime. Event/twofalseprefix/runlabel/reportONLY; freezeSHA/bothterminal; exactF7/fullreadbacks/0activeSTOPafterANYoutcome. Priornewkeyless43301802047consumed, noreplay. Rootauditsnewclosedcertificate andBOTHoldrowsunchangedwithpriorsafeactual; no causalguess. Allreadinessfalse/nohumanstepneeded.
+ONEactual43303568700/1 at83e12af6 BOTHsuccess. [Rootprimary](../reviews/2026-11-12-r2-last-child-task2-primary.md): strictsmallSAFE2JSON/realwholemanifest/currentidentity/Originalfacts checked; BOTHoldrowsunchanged. R2lastINSERTEDchild5/elapsed5018/abortedtrue/settled→issuer-ack/steps9/lastsource-pair706 directlyobserved; notNativecause/ACKop/pairexclusiveownership. R1invalidreasonUNKNOWN. SourceexecutorrestoresEXACTF7/fullref-WF-report-tree-protected-main/five0active/STOP; independentclosurepending. No nexttrial/nativepermit. Allreadinessfalse.
 
 Task1: fix round1/5 (1 addressed,0 open — R2oversize negative shadowing; commits6c4b13c2..c7ed76a1).
 Task1: minor (deferred): positive real fixed-file R2→reader→coordinator seam fixture absent; finalwholeplanreviewmusttriage beforeNativepromotion.
