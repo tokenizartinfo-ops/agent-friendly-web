@@ -1,6 +1,14 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 2026-11-12 00:25:44 UTC: regresiones puras causales autorizadas
+## CURRENT — 2026-11-12 01:13:58 UTC: 8Q pasan; preservar receptor del callback antes de full9
+
+A/B/C se reprodujeron en RED43128157794/1 (8Q,5pass/3ERR_ASSERTION) y pasaron tras corrección en GREEN43128506060/1 (8/8,syntax/lint,preflight176/130/635/54). Artefactos13904395425 y13904770974 tuvieron readback; Root leyó TAP/logs y delta. No se abrió I0 ni se ejecutó P1. Source final limpio da70e2358b18f9db750e67ea6eab37fb54a96257/treec807af716c5dd14e09a59df7f9b082646bf90bf2/3188hojas,TEMPausente; reporte5173c1033d88ae18f9d494f686fa2fd2ea4dd708.
+
+Ruling: corregir la regresión concreta de this del callback en run/runWithPhase, detectada por Root y autoinspección: entregar invoke directamente a ALS.run cambió undefined por null para callbacks ordinarios strict. Los sitios emitidos actuales son flechas; no afirmar fallo de negocio por ello. Costo de corregir: un RED puro Q3 y GREEN8Q/preflight, sin nuevo ciclo900s. Conservar las dos trampolines originales ()=>invoke() y los controles de fase/lease. Autoridad única: docs/superpowers/briefs/2026-11-12-finite-budget-callback-receiver-preservation-task1.md.
+
+La sesión de herramientas se renovó y los caches/seat anteriores dejaron de estar accesibles. Root recuperó refs y reporte primarios; el antiguo escritor dejó su bloque cerrado, no hay writer activo. Se permite un reemplazo fresco para este addendum acotado, sin reiniciar Task1 ni repetir A/B/C. Branches Source/Rootdocs separados, sin local builds. Task1 sigue IN_PROGRESS; ningún cierre Spec+Quality ni Task2/full9 nuevo autorizado por este punto. operationalReadiness=false; completePackage=false; PCoff=false; no paso humano pendiente.
+
+## Bloque previo preservado — 12 noviembre, 00:25:44 UTC
 
 Ruling: ejecutar primero un RED pequeño del transformador/runtime real para las hipótesis A (fachada put abreviada), B (argumento tx frío de c.transaction) y C (fase perdida en reentrada de la misma Root), y corregir sólo cada comportamiento que falle por la causa esperada. Motivo: el diagnóstico autenticado identificó invocationIdentity y cobertura de fases, pero no guarda los sitios de las 16 llamadas; otro descifrado idéntico no resolvería esa falta. Costo si una hipótesis es falsa: una comprobación pura breve y ninguna mutación de ese candidato. No repetir P1 ni usar retención/tiempo/clave como explicación por descarte.
 
