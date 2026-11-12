@@ -116,3 +116,202 @@ Los errores de ensamblado JS de la herramienta se corrigieron en RAM antes de pu
 Crear árbol sobre7bc8b997 con exactamente las tres altas100644; commit con único padre f5 y [skip ci]; CAS sólo esta rama expected_sha=f5/force=false. Rollback material f5 y3188blobs preservados; no se autoriza reset/force/delete/merge/deploy.
 
 Contrato externo posterior: ref exacto, padre/tree/árbol completo no truncado3191 blobs,3188tuples originales idénticos, exactamente tres altas, tres lecturas completas de blobs comparadas por bytes/pins y cero runs. Los hashes finales del propio informe/head/tree/diff y el resultado efectivo de CAS/readbacks se entregan externamente. STOP_WRITES después, para revisión independiente. No ejecutar, importar emisión, rearmar o asumir guardia/PCoff con esta preparación.
+
+
+## Única inspección O4 consumida — resultado incomplete y restauración
+
+Liberación leída antes de actuar: docs/superpowers/briefs/2026-11-12-own-import-literal-single-inspection.md @e4eb197cdae98dabb28a5f6abcb5f3560469fb9e, blob c806691a78e1420e29b1236beb3024f0dbb8e04b. Revisión independiente Spec/Quality aprobada sin findings, paquete2fd96f56. BASE53176240de1fcac9d9a423a62ec44cea1e88b3e8/árbol dfebda4f66fe727610e2f77d02511449c8b6c6b8; helper f47651bc41648cafd805553cde183bf66bebf392 intacto. Esta sección es APPEND del informe3e82adb35e5974846a70bf82c0e977565bb31256.
+
+Se consumió exactamente una activación y un run. No hubo ensayo manual de catálogo, rerun, retry, segundo build diagnóstico, import de emisión, test, Miniflare, I0, instancias SDK, OAuth/CF/keys/runtime/main/Source/otros diagnósticos. Native16 quedó HELD por Root durante esta unidad.
+
+### Fuente y ejecución congeladas
+
+Activación única: sólo header de workflow a push/rama exacta/selfpath exacto, nombre SOLE INSPECTION, evento push y eliminación única de false&&. Normalización inversa recuperó exactamente el workflow preparado af862de67987090a3b0e4debc528a0f9abff0020; no cambió el cuerpo. Blob activado77c26547c0db8661aad75ce1c3626a20c4bb9e0d; SHA-25616b4749d14b5c7227700e35907cb2cda854495c9d0c751262bcb7eb0de68450d.
+
+Commit real bc17654a1b6d87b4018e81db9fe668dfeb3f774e, árbol e495c9798370ab4aa4363132d859ba95c3c14861, padre53176240; CAS exacto force=false. Fulltree no truncado3191blobs y3190tuples fuera del workflow intactos. Ref congelado en bc176 durante run/terminal/metadata y aceptación de auditoría primaria.
+
+Run [43189735097](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43189735097), evento push, attempt1, único job inspect131085705528: TERMINAL FAILURE. run_started_at2026-11-12T09:14:39Z / updated_at2026-11-12T09:15:10Z, intervalo metadata31s (no duración fina de build/parser). Inicial/setup/checkout/Node/install y preservación/upload/validación de artifact metadata con conclusión success. El paso compile contiene continue-on-error: su conclusión success no se usó para afirmar éxito de inspección; el último gate falló correctamente por el recibo incomplete.
+
+Comandos exactos del cuerpo revisado, sin cambios:
+
+```text
+timeout --signal=TERM --kill-after=3s 25s npm ci --ignore-scripts --no-audit --no-fund
+timeout --signal=TERM --kill-after=3s 60s node diagnostic-code/scripts/diagnostics/own-import-literal-inspection.mjs
+```
+
+Job2min/hijo45s+3. No se ejercitó deadline: termination=null, exit.code1, signal=null, spawnFailed=false. Contexto real Nodev22.23.4/Ubuntu24.04/workflowSHA/run/push separado del testSourcef5 y del hijo MODELED_STERILE_SYNTHETIC; no es autoridad o frescura de servicio.
+
+### Resultado observado: cap de creación AST antes del diccionario
+
+Fuente original3188 hojas/modos preservada: before=after=c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7. HelperHash1b19768d05fb20e2a823384688a78cf07e006d5cf30eb9d38e2d59dde2a3a3ac igual al preparado. Privacidad y siete controles de metadata pass en padre/hijo, getter/Proxy touches0, networkDenied0.
+
+El build original retornó un outputFile de 2111553 bytes, SHA-2562b2334f3bb333d13b6e7a6238fe8091a681a986d233fc1253157e64bdbd0f2f2, warnings0, compiler0.28.2/profilefinite_trial_event, literalHash79f548435ad46645bd22d1a036aa108dee5dc98a1861d567312d6bf19eee7a7b. imported=false/evaluated=false. Ningún bundle o AST se subió o ejecutó.
+
+La fase parse quedó incomplete/reason ast_nodes al alcanzar el presupuesto fijo de200000 construcciones de nodos. Este contador se incrementa en startNode/startNodeAt/copyNode antes de crear el siguiente nodo; no equivale a los nodos únicos alcanzables de un AST terminado. No se produjo parser result completo ni se entró al diccionario. Conteos de candidatos/folds/matches y nodos únicos finales son DESCONOCIDOS, nunca cero por defecto.
+
+No existe conclusión match/no-match, ni prueba del origen own9b4, reparación, credenciales o CF. La única evidencia nueva es el tamaño/hash real de emisión y que el presupuesto de construcción AST actual fue insuficiente para completar parse. No se elevó el cap, cambió helper ni reintentó.
+
+DTO cerrado relevante de la auditoría primaria:
+
+```json
+{
+  "status": "incomplete",
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "workflowRef": "refs/heads/diag/afw-own-literal-20261112",
+    "trigger": "push",
+    "workflowSource": "bc17654a1b6d87b4018e81db9fe668dfeb3f774e",
+    "testSource": "f5f52660d19ec9fc634bbc49558db75582fdaf88",
+    "runId": "43189735097",
+    "attempt": 1,
+    "node": "v22.23.4",
+    "os": "Ubuntu24.04",
+    "mode": "SYN_COMPILE_ONLY_NO_IMPORT",
+    "childContext": "MODELED_STERILE_SYNTHETIC",
+    "workflowContextIsAdmissionAuthority": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false
+  },
+  "protectedBase": {
+    "leaves": 3188,
+    "before": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+    "after": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+    "equal": true
+  },
+  "privacy": {
+    "pass": true,
+    "getterTouches": 0,
+    "proxyTrapTouches": 0,
+    "proxyPrototypesSafe": true,
+    "ordinaryNative": true,
+    "crossRealmNative": true,
+    "crossRealmExactUnknown": true,
+    "spoofRejected": true,
+    "oversizeSuppressed": true,
+    "cycleBounded": true,
+    "rawCanaryAbsent": true
+  },
+  "metadata": {
+    "pass": true,
+    "cases": 7,
+    "touches": 0,
+    "literal": true,
+    "addition": true,
+    "template": true,
+    "primitiveAddition": true,
+    "gettersUntouched": true,
+    "proxyUntouched": true,
+    "callNotEvaluated": true
+  },
+  "execution": {
+    "exit": {
+      "code": 1,
+      "signal": null,
+      "spawnFailed": false
+    },
+    "termination": null,
+    "evidence": {
+      "purpose": "afw.own-literal.child.v1",
+      "status": "incomplete",
+      "networkDenied": 0,
+      "phase": "parse",
+      "reason": "ast_nodes",
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "privacy": {
+        "pass": true,
+        "proxyPrototypesSafe": true,
+        "ordinaryNative": true,
+        "crossRealmNative": true,
+        "crossRealmExactUnknown": true,
+        "spoofRejected": true,
+        "oversizeSuppressed": true,
+        "cycleBounded": true,
+        "rawCanaryAbsent": true,
+        "getterTouches": 0,
+        "proxyTrapTouches": 0
+      },
+      "metadata": {
+        "pass": true,
+        "literal": true,
+        "addition": true,
+        "template": true,
+        "primitiveAddition": true,
+        "gettersUntouched": true,
+        "proxyUntouched": true,
+        "callNotEvaluated": true,
+        "cases": 7,
+        "touches": 0
+      },
+      "error": [
+        {
+          "nativeError": true,
+          "currentRealmPrototype": "Error",
+          "observedDataPrototypeName": "Error",
+          "prototypeDepth": 1,
+          "prototypeObservationIsExactIntrinsicClass": false,
+          "name": null,
+          "code": null,
+          "messageHash": "22008a736efabd5ba4602a4dca0dcfb3a34dbab8a9990917b51ab797f6cec2f1",
+          "messageTooLarge": false,
+          "depth": 0,
+          "causeDepth": 0
+        }
+      ],
+      "emission": {
+        "bytes": 2111553,
+        "sha256": "2b2334f3bb333d13b6e7a6238fe8091a681a986d233fc1253157e64bdbd0f2f2",
+        "imported": false,
+        "evaluated": false
+      },
+      "build": {
+        "profile": "finite_trial_event",
+        "literalHash": "79f548435ad46645bd22d1a036aa108dee5dc98a1861d567312d6bf19eee7a7b",
+        "compiler": "0.28.2",
+        "warnings": 0,
+        "outputFiles": 1
+      }
+    },
+    "rawFiles": [
+      {
+        "name": "raw.stdout",
+        "bytes": 1261,
+        "sha256": "7d78abfc6455285eb85e3731f22fbb8d7563ef49eec43e66d4554e522d97fd3a",
+        "uploaded": false
+      },
+      {
+        "name": "raw.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uploaded": false
+      }
+    ],
+    "rawLogsUploaded": false
+  }
+}
+```
+
+### Artefacto y aceptación independiente: un solo auditor de bytes
+
+Listing especializado del actor por run/nombre exactos: ID13929264129, nombreafw-own-literal-43189735097-1, 2083bytes, digestsha256:96bd98c73807d72658cae65bff8fabf744060925952d34441e03133c83c933cc, expired=false, creación2026-11-12T09:15:06Z, expiración2026-11-19T09:15:05Z, branch/run/head/repositoryId coincidentes. Listing medido593ms, no timeout impuesto por esa herramienta.
+
+Root hizo la ÚNICA descarga/auditoría de contenido autorizada; el actor NO repitió download/fetch del artefacto ni leyó logs. Se adoptó la aceptación primaria de Root, no se presenta como lectura ZIP independiente del actor.
+
+Auditoría inmutable leída: docs/superpowers/reviews/2026-11-12-own-import-literal-primary-audit.md @b577693ec19a9d43084a438ba45f69b3a6a84f21, blob cf6f1fef139286da1563d59f036627629ea3948e. Root registró lectura2026-11-12 09:18:38UTC, fetch193.67850000038743ms, Abort5s/sin redirects/cap128KiB; RAM sin filesystem ni URLs impresas. ZIP2083B/SHA96bd98c73807d72658cae65bff8fabf744060925952d34441e03133c83c933cc igual al digest primario. CRC vector conocido correcto; local/central/nombres/métodos/tamaños/descriptores/CRC/sin symlinks/exactamente dos archivos/sin extras; manifiesto y flags verificados:
+
+- result.json4399bytes/SHAf0a2cf72302e094e00d8e5bb3860ff83e6a0a05963d6f70522ca96c59cb77d56/CRC6da616e8.
+- manifest.json259bytes/SHA548b18e809a6c2ab9d03cfd6b308633d198de5e188140923d4cacb0e1164d111/CRCe742a43b.
+- Total expandido4658bytes; inventario manifiesto exacto result size/hash y flagsfalse, retención7d hasta2026-11-19T09:15:05Z.
+- Logs privados: stdout1261bytes, stderr0; ambos uploaded=false; no se leyó contenido ni se expuso errorbody/stack/code/bundle/AST/payload.
+
+El valor de cualquier referencia/URL temporal de descarga no se copió, imprimió ni persistió en este informe o por el actor en esta unidad.
+
+### Cierre inactivo y separación de la propuesta siguiente
+
+Tras terminal/metadata/ref congelado y aceptación Root se restaura EXACTAMENTE workflowaf862de67987090a3b0e4debc528a0f9abff0020, manual/literal false/sin inputs. Sólo workflow+este APPEND cambian respecto a bc176; helper y3189tuples fuera de ambos intactos. Respecto a BASE53176240, sólo cambia el informe.
+
+Commit de cierre separado del run: padrebc176, expected_sha exacto, force=false, [skip ci]. Contrato externo posterior verifica ref/commit/árbol completo3191/no truncado, tres archivos completos, helperf476, workflowaf862, prefijo de informe intacto, sólo delta permitido, exactamente un run/attempt1 terminal y0jobs activos. Los hashes propios finales de informe/head/tree/CAS efectivo van fuera del cuerpo, sin autorreferencia.
+
+STOP_WRITES. Sola inspección consumida e incomplete; ninguna autorización para otro job o aumento de cap. Sólo una evaluación READONLY posterior podrá proponer un presupuesto de parse medido y distinguir construcciones de nodos/nodos únicos/heap/tiempo bajo nueva decisión Root. operationalReadiness=false; completePackage=false; PCoff=false.
