@@ -2,11 +2,13 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — cross-job107 controls+cryptoPASS; COMPLETEactualcandidate7f inactive; fullreviewpending
+## CURRENT — inspector fix4/5 fresh stronger implementer; actualpair I7/I8; no privateaccess
 
-2026-11-12 16:08UTC. Sole43253820290/1 Sourcef736SUCCESS, producer91controls, dependentverifier16ZIP/capturecontrols+metadata200+rawZIPtripleSHA+exact2JSON/inventory; serial11s+17s afterproducerterminal. Rootindependentartifact13959882163/1825B/SHA1d37df74 +strict3records+sourceprogramreconstruction(verifierec07235c/ZIPb36c40c0) allverified. [Primary](../reviews/2026-11-12-native-inspector-cross-job-primary.md). Prior404causeUNKNOWN; privateoriginal/key/SDK/I0untouched.
+2026-11-12 16:14UTC. FULL7freview closesI6cross-jobtransport; twoNEWImportant actualbranchgaps I7result.inspector Source/runnotcurrent-bound, I8allowsinspectedwithfixtures1/TAPnot_examined0unknowncases. [Fullreview](../reviews/2026-11-12-native-inspector-fix3-full-review.md). Rootverifiedproduceralreadyrequirespresent3forinspected, otherwisepartial. Ruling: independentpairmustmirror91/TAP3/observednonunknownstatuses, includingfail/skipped/todoasDIAGNOSTICdata, notNativePASS; core77k unchanged.
 
-COMPLETEINACTIVE Source7f213f4f/treee26a4c5c/WF537caafb/report4cf882bb, bothfalse/manual/noinputs/noPush/proposed5+2min, Rootfullbodies/ref/exactcoveredcode/appendonly2path/0active readbacks. [Fullcandidatepackage](../reviews/2026-11-12-native-inspector-fix3-complete-review-package.md) toSAMEreviewer; actualprivatebranchNOTexecuted/released. I5/M1addressed, I6controlsintegrationPASSpendingfullreview; M2deferred. NeedcleanreviewthenRootexplicit5+2amendment/singleactualreceiptinspectionrelease; noNative16retryyet. OriginalRcause/statusUNKNOWN, allreadinessfalse.
+[Fix4brief](../briefs/2026-11-12-native-inspector-fix-round4.md) forfreshAstraxhighimplementer underSDDcapabilityrule: onlyindependentactualpairchecks+≤16meaningfulinertpaircontrols, preserve91COREd514+16ZIPb36cbyteexact, one2+2minkeylessattempt/nokey/private/SDK/I0; afterALLPASS COMPLETEamendedactual5+2INACTIVE/fullreadbacksSTOP thenSAMEscopedreview. ActualprivateinspectionNOTreleased. Source7f/current2falsebeforewriter; allreadinessfalse. M2deferred, originalRcause/statusUNKNOWN.
+
+Task inspector: fixround3/5 (I6addressed,2newopenI7/I8; Sourcea51..7f). Nextfreshround4FIX_BASE7f. PriorwriterSTOP; Rootdocsbranchseparate.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
