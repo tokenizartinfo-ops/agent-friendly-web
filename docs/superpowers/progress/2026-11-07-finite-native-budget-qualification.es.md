@@ -2,11 +2,9 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — Task2 formal fix round2/5 · F8/preflight READONLY failure assessment
+## CURRENT — Task2 formal fix round2/5 · proven sealer framing/inventory fixes released
 
-2026-11-12T12:38Z. Covering43218944283/1 Source2f79c17c terminalFAIL. Actual syntax/lint/inactive/invalid/Q8exact8pass andF1–F7 controls pass. F8fail19B/SHAf6482776 location/causeUNKNOWN. Three-profile commandSUCCESS but ALL3 output preflights rejected by strictsealer AssertionError: qualificationUNKNOWN. Root independent ONE3415B ZIP13945235907/digest8d5c6711/CRC/exact6inventory/context/manifest proof in [partial covering audit](../reviews/2026-11-12-finite-budget-native-round2-covering-partial.md). No actualNative16/MF/I0.
-
-STOPad244d8c/treeb34e9f72/report13863365 restoresEXACTc72 complete7manualfalse; writer0active/3183protected reported. Same writer only READONLY assessment of exactCURRENTF8 failure/validator sites and smallest bounded diagnostic options; no writes/job/fix/retry authorized. Formalround2 remainsopen/FIX_BASEd9b7; same reviewer only after qualified report. Native16/Task2final/GLOBAL296/PCoff held. O4final0248 closed and own-import causeunresolved; no extra probe. Readinessfalse.
+2026-11-12T12:41Z. Actual43218944283 failedF8/3preflight validation after syntax/lint/Q8/inactive/F1–F7pass. READONLY diagnosis proven: closing here-doc EOF framing leavesbareNODE/error19B fingerprint; expectedQA descriptor array116 vs unique compiler115 due repeatednative-receiver path. Root source/descriptorprimaryconfirmed; firstactualprofile assertionUNKNOWN, not assumed. [Two minimal fixes + ONE covering GREEN ruling](../briefs/2026-11-12-finite-budget-native-round2-sealer-fix-green.md), same7paths/3183protected/no relaxed validation; reject actualdups/unknown/missing paths. Sourcead244/WFexactc72 closed; samewriter repair andallF/Q8/3profile qualification, thencompleteFIXED7/manualallfalse/reportSTOP. No autoretry, no actualNative16. FIX_BASEd9b7/same scoped reviewer afterpass. O4final0248closed/no more probes; ordinaryownimportunresolved. readiness/PCofffalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 

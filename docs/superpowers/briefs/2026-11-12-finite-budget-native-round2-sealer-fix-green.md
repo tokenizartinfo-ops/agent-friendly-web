@@ -1,0 +1,24 @@
+# Task2 formal fix round2/5 · exact sealer framing/inventory repairs
+
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT keyless SYN GitHub Actions; ORIGIN feat/finite-native-cleanup-20261101; RESOURCE_TYPE scoped Source/workflow; RESOURCE_IDad244d8c036a22b1c56725dd3f77dc4b902b4ba3; ALLOWED_ACTION two proven validation fixes, focused regression controls, ONE covering GREEN and closed reconciliation/STOP.
+
+## Evidence / precise limits
+Actual covering43218944283/1 Source2f79c17c passed syntax/lint/inactive/invalid/Q8exact8 andF1–F7 pure controls; F8 failed19B/SHAf64827765de7c62a07813e3df64f2a0dd123ffc205a014cfd41c8a916f1a256b. All3 preflight command outputs rejected by current sealer, qualificationUNKNOWN. Root independent6JSON ZIP proof44399b0d @c02c5bac. Closed Sourcead244 preserves all code and exactc72/manual7false; no actual16.
+
+Writer's READONLY diagnosis and Root primary source/descriptor reads identify:
+1. worlda66dedef line1836 separates the sealer step at the next upload heading. The here-doc closing NODE is then at EOF, but delimiter requires a following newline, so bare NODE remains in the assembled program. Its fixed undefined-identifier error fingerprint matches the actual19B hash. This attributes F8 harness failure, not a sealer privacy failure.
+2. TEMP053ebded line173 concatenates sourceDescriptors/packages/scopeInputPins without deduplication; line185 compares that array to compiler's unique Set/map inventory (world758–759). Descriptorbe695028 repeats lib/mcp-qa-finite-owner-native-receiver.mjs for QA in source and scope categories. Root independently counted QA115 rows/114unique BEFORE required stdin; with stdin expected116 vs compiler115unique. M61/61. This is a proven invalid expected inventory, but not proof of the first actual failing assertion in each profile. Caps2MiB were not exceeded.
+
+## Minimal code release
+Same original writer, same7allowedpaths and3183protected blobs/modes.
+- Repair actual CURRENT sealer extraction to recognize exactly one correctly indented closing here-doc marker with newline OR EOF. Require exactly one opening/closing frame and no trailing bare marker; reject missing/duplicate/malformed frames. Keep exact interior program bytes/indent validation and exact current sealer identity; no arbitrary import/target.
+- Align expected descriptor path inventory to the SAME unique Set union used by the compiler, including QA stdin exactly once. Preserve all raw hashes/pins/roles/schema/path allowlists/full preflight fields. Continue requiring exactly the unique expected ACTUAL inventory; duplicated actual records, unknown or missing paths must still fail. Do not remove inventory comparison, truncate reports or suppress rejected records.
+- Add focused causal regression controls for EOF/newline-equivalent framing and missing/duplicate marker rejection, and duplicate descriptor-category overlap vs rejected duplicated ACTUAL records. These are Node-only pure controls tied to the CURRENT extraction/validator path. Existing failed run is the actual RED evidence; the first rejected preflight site stays unknown until a successful repaired qualification. No timer/12observer/SDK/production pin changes.
+Do not opportunistically change other fixtures, sealer schemas or lint config. Protect the four lexical rename fix already present.
+
+## One covering / closure
+All other requirements of current GREEN brief5d9acc759e1ce7ba872fc8df7e37d0ca39eca6ec and lint-fix brief206d8836 remain binding. After exact two-fix diff/self-review, ONE fresh attempt1 <=2min Node22.23.4/keyless with only contracts runnable, six native jobsfalse. Same5 syntax/lint; inactive1/business0/invalid rejection; Q8exact8pass/0fail/cancel/skip/todo; allF1–F8 controls including current sealer adversarial canaries and new regression controls; three compile profiles positive/readonly/reduction_a with FULL successfully validated outputs. No MF/I0/actualSDK/business execution/newsecret. Fixed publisher only closed validated JSON, raw pure logs runner-private until cleanup.
+
+Freeze Source through terminal and assigned same-ID full inventory/digest readback. Any unexpected failure: preserve closed evidence, restore EXACTc72 complete7manualfalse, append report/readbacks/0active/STOP. No automatic repair/retry. Allpass: reconcile COMPLETE7job MANUAL/noinputs/nopush/allfalse workflow with latest FIXED sealer and SAME current validated preflight/wiring, not old unsafe publisher. Readback exact source/ref/tree/report/fullprotected scope/0active, actual commands/output and STOP.
+
+Formalround2 remainsopen; reviewFIX_BASEd9b7ea752466ee6c5865b1529aeed28072a085ff, same reviewer FULL d9b7..final only after qualified covering report. No Native16/main/production/Cloudflare/runtime/OAuth/permissions/tokens/keys/mail/Max actions. All readiness/PCoff false.
