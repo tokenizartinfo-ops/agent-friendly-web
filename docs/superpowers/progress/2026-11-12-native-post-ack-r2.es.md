@@ -89,3 +89,11 @@ Ruling: accept fixed24 actual module-scope action callbacks with callback-own pr
 ## Proportional existing inert regression controls
 
 Ruling: accept unchanged verify-native-preparation-round1 fixed F1–F8 (original45s cap) plus existing pure finite-budget-diagnostics and mcp-qa-finite-observer tests in the SAME single7-minute contracts producer. World compiler/ownership/sealer integration shares those interfaces; using the fixed inert CLI avoids a new arbitrary group export. Cost if wrong: extra bounded inert validation time, no Native authority. Builder must verify actual bodies allocate no MF/I0 or SDK runtime; compilation/import alone is not Native execution. If an allegedly inert command allocates Native, omit and report the gap. Separate framework/control counts truthfully, no blanket suite or second run.
+
+## Task1 initial execution FAILED / closed / review pending
+
+Implementation6599b33d, one activation4e37de51, KEYLESS43325790437/1 producer131557776153failed/verifier131558005612skipped, noartifact. Actual wrapper0pass/1fail; QA transform preflight6!==5 BEFORE24callbacks. No ACTUALGREEN, qualifiedgraph or Native evidence. Permit CONSUMED. Sourcewriter STOPPED, no repair/retry.
+
+Closure79afec41 then final append efa4bd8b/tree42840228: World EXACT original; bothnewWFmanual/twofalse; F7seventhfalse unchanged;3188protected/3194leaves/reportoriginalprefix531979current/main0c9/fivestate0 independently Root-verified. All readinessfalse, Native held.
+
+Review package docs/superpowers/reviews/2026-11-12-native-post-ack-r2-task1-failed-candidate-package.md: intended full codeBASE408→6599 (allpatchescomplete), separately actualactivation4e37 and explicit rollbackcurrentefa4. Fresh independent reviewer to return fullTask1spec/quality findings; then original Sourcebuilder gets scoped fix round1/new exact permit, never controller source fix. No run released by this entry.
