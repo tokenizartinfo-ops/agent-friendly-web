@@ -1,17 +1,15 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 11NOV23:42:57UTC: ciclo original SYN en ejecución
+## CURRENT — 12NOV00:02:54UTC: fallo P1 preservado, sin repetir el ensayo
 
-Objetivopendiente: ensayo real desde nube conPCapagada ydespuéscasoMaxseparado. No confundir Source/SYN con operaciónreal/guardia.
+El objetivo real conPCapagada ydespuésMax siguenpendientes. Run43121646075/1 cerróFAILURE:8Q/productor/custodiaentre runnersPASS,peroP1exit1. No afirmar9/9 ni alarma/retiro de negocio sinel recibofallido.
 
-Run43121646075/attempt1/eventpush ENCURSO, Source14071b396f8c9c66b70cf630d8823692a4521bd3/tree32208a45c1f55a17bb327b466942f720e2a240df,TEMPe2b057db. SOURCECONGELADA hasta terminal, escritorbudget_chronology_impl. Root sólo docs. Prohibidoredisparar, mutarSource, rearmarC0ocombinarruns. Bodyworkflow exacto alstaging910líneas revisado; sólo5elementosactivados.
+Sourcee0d42bab78438ce4e1e1204f81f9caa0470ef8d5/tree8ade8b13c40b5c04131e901d4d4592accb193b1c/3188leaves,TEMPausente; reportf95f36a9, escritorSTOP. Root sólo docs. ElSourceejecutadofue14071b396f8c9c66b70cf630d8823692a4521bd3; códigohelper/observador intacto.
 
-Pure130863336304SUCCESS (8Q+lint/preflight+sameID); producer130863622662IN_PROGRESS yvalidóclave/pureartifactantesdelprincipal. NoI0exactopublicado,noP1niconsumidorcompletos. AFW_SYN_CHECKPOINT_KEY quedóguardadoenGitHubenvironment27007821967/Sourceúnica/0tags ykey-preflightyaSUCCESS; nohayacciónhumanapendiente.
+ClaveGitHub válida enambosjobs; noacciónhumana. Paqueteprincipal22417540Bcifrados yfallo5395225Bcifrados estuvieronbajo128MiB ypasaronaperturas/inventarios/readbacks. Falloexactoartefacto13902156351/source140/run43121646075/attempt1/kindconsumer-failure. No descifraralPC, nohacerreplay.
 
-Autoridad: brief .../briefs/2026-11-11-finite-budget-custody-full-lifecycle-task1.md @197400ad1d2b2a38e54cafbde7b7ef1eef12b114/blob2f4708aa; ledger vivo .../progress/2026-11-07-finite-native-budget-qualification.es.md. Mantener3jobs/original900s/mismoestado/ready≤C0−30s yrawsólopublicacióncifrada/contexto/hash/readbacks. Elcliente/token sonSYNdeMiniflare; no datosdeowner/Max ni APIreal. El ratio128MiB/recuperación/alarmaoriginaltodavíanoestánprobados.
-
-Alterminal SourcewriterretiraTEMP/appendreport/preserva/STOP. RootverificayrequierefreshSpec+Quality antesTask1aceptado; despuésTask2ylosrestantescierres(recorrido/traspaso/candidato/custodia/ejecutor/receptor/avisoútil/ACK/retirada/UNAocurrenciarealPCoff). operationalReadiness=false;completePackage=false;PCoff=false. No repetirfaseA/custodiaunit9/old56 desdehistoria.
-
+Next:UNjobGitHubRO para analizareseúnicoartefacto concontextooriginal yproyeccióncerradadecódigos/frames/métricas/bitmaps,sinI0niMiniflare. Brief finite-budget-custody-failure-inspection-task1. DespuésRootdecidecausaantesdecualquierfix/repetición. RevisiónformalTask1/Task2/restantescierres/ensayoPCoff aúnpendientes. operationalReadiness=false;completePackage=false;PCoff=false. No enlazarconCloudflare/OTP/claveporpresunción.
+ 
 ## Checkpoint anterior preservado — 7 noviembre2026,17:31UTC
 
 SOURCE final29681cae2bf1094ec5c66d5b2784254f77bec697/tree0200cf32ac4e020bd35c56c307fbc8060cf8bd64, rama feat/finite-native-cleanup-20261101, writerSTOP yqualifiertemporalretirado. El plan de SDKReference yretiro/restauración delcicloactual está COMPLETO únicamente SOURCE/SYN: Task1aceptada, Task2aceptada trasfixround1I1/I2, revisiónconjunta frescaPASS/0Critical/Important/7Minorretenidos. Calificación coherente42390108314/attempt1 SUCCESS17:01:58UTC,56PASS/0fail/cancel/skip/todo,16jobs/24artifacts. No combinar fallidos ni repetirlos desde un tailantiguo.
