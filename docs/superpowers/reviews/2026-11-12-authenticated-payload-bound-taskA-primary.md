@@ -363,3 +363,7 @@ Root independentlyretrievedrun/jobs/artifactmetadata, keylessclosedrecords, ONLY
 ## Complete inactive candidate
 
 Sourcec4c98844bc96538d955d28cc434d25e6b3f66177/tree4d499a8e7f97ac2c4cfd4ed09e51e72a4880b2cc/WF480a9878bac51628b73774c0b81598466a7ed6dc/reportde4914c550e82b9ae2a663893e7b7121acc8b7f9/314399chars. Rootfullbodies/ref/reportprefix290697charschecked, testedhelper/test/bootstrapbodiesexactbetweenqualifiedandactual. COMPLETEactual5+2INACTIVE/manual/noinputs/nopush/BOTHfalse. AuthorSTOPPED. Tree/activityindependentRootcheckfollows; authorreported3188protected/mainunchanged/0active. TaskBactualHELDpendingindependentreview+separateRootrelease. 17MiBtestisnotmaximumsizeperformanceproof; no causerepair/native/PCoffclaim.
+
+## Root final inactive scope
+
+Independent18:36:38Z fulltree3190leaves, all3188protectedSHAs/types/modes equalBASE415; onlyWF/reportchanged. Sourcec4/WF480a9878/fullreportde4914c5 ref/bodies/prefixverified, main0c9c475b3ebaa970fc11d628b40e50a90cceb727 unchanged; queued/in_progress/waiting/pending/requested each0. TestedhelperbodiesmatchqualifiedSourceb30. TaskBHELDforSAMEexpertreview.

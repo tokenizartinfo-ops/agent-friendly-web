@@ -1,8 +1,10 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-12-authenticated-payload-bounded-reference.md
 
-## CURRENT — preflight accepted; TaskA preparation+ONE keyless2+2 released; TaskB held
+## CURRENT — TaskA keyless PASS; COMPLETE inactive proposal under independent implementation review
 
-2026-11-12 18:20 UTC. SAMEexpertpreflightfavorable; Rootbindingrulings in [preflight](../reviews/2026-11-12-authenticated-payload-bound-preflight.md). Literal298888337cap/exactbasis128+298888337 guard, genuine17MiBpositive/sparsecap+1pre-readnegative, globalcapcontradictionrejectedinactualANDfinaltransport; missing/invalidpartialretained, old16MiBpartialnotrewritten. Alltimecaps/Core/ZIP/outputfieldsunchanged. [TaskAbrief](../briefs/2026-11-12-authenticated-payload-bound-taskA.md) releasedfreshsolewriter+ONEKEYLESS2+2, noactualprivateopen. Source415F7safeuntilauthorchanges; failureF7/0activeSTOP, successCOMPLETEactualinactive+independentreview. No useractionneeded; allreadinessfalse.
+2026-11-12 18:37 UTC. SoleKEYLESS43280472462/1 atb30b7f4fed395d007bef81aab5323b238c7a6cb0 SUCCESS91+24+16+16, including17MiBpositive+sparse298888338pre-readfaultproof+authmutants+globalcapruntime/transportrejection. Rootstrictsafeartifact13970844891/2311B/38a08bf2.../wholemanifest/currentSource-run/codepin/CRC auditPASS, standaloneverifier40595B/204f8290 matchesDATAreconstruction. NoOriginalcipher/key/SDK/I0.
+
+FinalSourcec4c98844bc96538d955d28cc434d25e6b3f66177/tree4d499a8e7f97ac2c4cfd4ed09e51e72a4880b2cc/WF480a9878bac51628b73774c0b81598466a7ed6dc/reportde4914c5/314399chars. COMPLETEactual5+2INACTIVE/BOTHfalse/manual/noinputs/nopush; testedbodyreuse/prefix/ref/fullbodies/protected3188/mainunchanged/5activecounts0 Rootverified18:36:38Z, authorSTOPPED. SAMEexpertimplementation/specreview active under [fullpackage](../reviews/2026-11-12-authenticated-payload-bound-taskA-review.md), [primary](../reviews/2026-11-12-authenticated-payload-bound-taskA-primary.md), Rootdocs6ff80035. ActualTaskBHELDuntilcleanreview/separateRootrelease. Priorplanoversizepartialremainsvalidlegacy; currentmetricsstillUNKNOWN, no Nativecause/repair/PCoffclaim, allreadinessfalse.
 ## Evidence and proposed ruling
 
 Exactknownauthenticatedtotal298888337B/128files, sameOriginal13.7MBZIP/hash/AAD. ProposedMAXselectedfile298888337+exactbasisguard128/298888337, parser/time/output/Core/ZIPunchanged; tests17MiBpositive+sparsecap+1. Costifwrong: cloudRAM/time/rejection, nofalsegreen/PCcost/nativeeffect. PrivateactualTaskBstillrequirescleanpreparationreviewandseparateRootrelease. Noautomaticwidening/retry.
