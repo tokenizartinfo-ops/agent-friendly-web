@@ -568,3 +568,202 @@ Root release206d88364057a3b8961fde8b0d4bf83fcb34ca0d @648fdee49c3c35fb55ce9a95e8
 Reuse exact latest fixed-sealer workflow053ebded from7fc9, unchanged: one contracts job <=2min/Node22.23.4/keyless, six native jobs literalfalse, full complete graph preserved. Sole new covering entitlement executes same fixed5 syntax/lint, inactive wrapper1/business0/no output, invalid-group pre-I0, unchanged Q8exact8/8 fail/cancel/skip/todo0, F1–F8 current controls including F2 causal order/F5 actual producer/evidence/recovery/callback unroll/F8 exact current sealer adversarial sandbox, and three strict positive/readonly/reduction_a compile profiles. No MF/business Root/I0/Native16. Full schema-valid preflights retained; raw pure logs runner-private only; fixed closed sealer and independent exact-ID inventory proof.
 
 Candidate Source freezes through actual terminal/readbacks. No skipped prior phase is qualified by history. Any failure preserves actual closed proof and restores EXACTc72 COMPLETE7/manual/allfalse/report/STOP without repair/retry. Allpass reconciles COMPLETE7 with FIXED sealer/manual/noinputs/nopush/allfalse and full wiring/readbacks; no Native16 release. Formal FIX_BASEd9b7 stays and full history retained for same reviewer. Actual run/job/artifact facts will be appended only after observed terminal.
+
+
+## Round2 renamed-binding covering FAILURE — exact safe evidence and STOP
+
+Sole authorized fresh covering run43218944283/attempt1/Source2f79c17c1eba7b30bf4d7b9d199165a9574d2899/treec41622fb60b4b1024d7be56a47d65d19c5f0157b, worlda66dedef192dcff4cbf55c1cbb9786afe8d468b1, TEMPexact053ebded. Contracts131185233664 terminalFAILURE; job2026-11-12T12:33:17Z..2026-11-12T12:33:56Z, runupdated2026-11-12T12:33:57Z. Six native jobs terminalSKIPPED; no MF/I0/business Root/Native16.
+
+Actual initial gate PASS: five node --check + scoped lint, inactive unset-group wrapper1/pass1/business0/nooutput, invalid-group rejected beforeoutput/I0, unchanged Q8exact8/pass8/fail0/cancelled0/skipped0/todo0. Controls command FAIL: closed groupsF1–F7passed, F8failed. This proves execution of those pure groups, not native/business coverage. F8 pure error safeDTO below; no raw message/source/stack retained publicly. Cause/location UNKNOWN from this DTO alone. Private full control records/trace retain only runner lifetime; public group evidence hash/bytes preserved as released. No repair/rerun follows failure.
+
+Strict3profile command step SUCCESS, but fixed public validator rejected all three actual preflight files with AssertionError; no individual validator location was recorded. Preflight qualification UNKNOWN, never claim compiled profiles complete from stepSUCCESS. Actual rejected-file bytes/SHA preserved in status.validationFailures below. Public diagnostics deliberately reports missing_or_invalid. All subsequent pure sealer/upload/readback steps succeeded; final require-covering gate FAILs.
+
+Artifact13945235907, finite-budget-fixed-preparation-2f79c17c1eba7b30bf4d7b9d199165a9574d2899, ZIP3415B/SHA2568d5c6711162276f7401d13f9dbbdb9f4713e2c9e056667741015d3487ad101f4; expires2026-11-19T12:33:49Z. First assigned same-ID retrieval actually NOTFOUND (continue-on-error step conclusion alone is misleading); after2s retrieval2 SUCCEEDED, retrieval3SKIPPED. Uploaded/downloaded digest matched; independent six-file inventory/context/manifest and local manifest byte equality SUCCEEDED. Manifest1001B/SHAd768c2fcdd9c5b55338d989175c70a665be7d8de4b2f2247302957fb58ee33b3. One tiny connector ZIP read in RAM only verified exact3415B/digest and actual sixJSON names/status facts at Root request; no files/project execution/raw material.
+
+Exact public inventory and validation failures (safe artifact fields only):
+
+```json
+{
+  "inventory": [
+    {
+      "name": "budget-artifact.json",
+      "bytes": 1001,
+      "sha256": "d768c2fcdd9c5b55338d989175c70a665be7d8de4b2f2247302957fb58ee33b3"
+    },
+    {
+      "name": "diagnostics.json",
+      "bytes": 915,
+      "sha256": "b6b480cce9545c77d0af6c80eda9af7a3d087e3271eff9cbbc2bb46466e5e6a7"
+    },
+    {
+      "name": "controls.json",
+      "bytes": 2621,
+      "sha256": "77429d814591f28e041ce54030769a907477bf4381e650023613479aefdd882f"
+    },
+    {
+      "name": "inactive.json",
+      "bytes": 199,
+      "sha256": "b45cfb6f89a79a1f15b842a71fff8b2003b8812ee5dd41e4a578d9037376b12c"
+    },
+    {
+      "name": "q-counts.json",
+      "bytes": 89,
+      "sha256": "a194a9895da45c53381b398c277e252ab18778d338ae51331a5800121510c6ae"
+    },
+    {
+      "name": "status.json",
+      "bytes": 2230,
+      "sha256": "732f32b015bd80e06ee3ad2afa61c29a981708e8f6ed97fc745fc0f28e3aa238"
+    }
+  ],
+  "validationFailures": [
+    {
+      "file": "preflight-positive.json",
+      "input": {
+        "bytes": 201677,
+        "sha256": "688b22b0da4638815bcefc6b423bfdf019690e1fdea3bb359aeff39a065c85e1"
+      },
+      "error": {
+        "name": "AssertionError"
+      }
+    },
+    {
+      "file": "preflight-readonly.json",
+      "input": {
+        "bytes": 210747,
+        "sha256": "527d2c6b6d243356b5cc8668e432952cad0cb0127d10faf1ccee79aee2f23be5"
+      },
+      "error": {
+        "name": "AssertionError"
+      }
+    },
+    {
+      "file": "preflight-reduction_a.json",
+      "input": {
+        "bytes": 210752,
+        "sha256": "23eef93783e0dd61c0bb6defcb83a0d7fb4c1db12a87bfa61ff8281f9650b0a5"
+      },
+      "error": {
+        "name": "AssertionError"
+      }
+    }
+  ]
+}
+```
+
+Exact closed controls result (safe projection only):
+
+```json
+{
+  "purpose": "afw.closed-pure-controls.syn.v2",
+  "source": "2f79c17c1eba7b30bf4d7b9d199165a9574d2899",
+  "run": "43218944283",
+  "attempt": "1",
+  "groups": [
+    {
+      "group": "F1",
+      "passed": true,
+      "caseCount": 2,
+      "evidence": {
+        "bytes": 904,
+        "sha256": "dcae1ea26b1b09c6f2eacc5fd66701bdb3c61d2ccd431281b3c5325827b0909f"
+      },
+      "error": null
+    },
+    {
+      "group": "F2",
+      "passed": true,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 3332,
+        "sha256": "dac450adc2e8566f01427d907b835f22a7e64301654f58a58cd9ef5557d12a21"
+      },
+      "error": null
+    },
+    {
+      "group": "F3",
+      "passed": true,
+      "caseCount": 4,
+      "evidence": {
+        "bytes": 5431,
+        "sha256": "195edd3960c3b9128194f2a06d95072fc6b1d54af09c3cdb50050de597c817a5"
+      },
+      "error": null
+    },
+    {
+      "group": "F4",
+      "passed": true,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 2528,
+        "sha256": "fde2eea49ef543f0d36347cda87d7035f10657716cc6cd418bff1fb4548bb33b"
+      },
+      "error": null
+    },
+    {
+      "group": "F5",
+      "passed": true,
+      "caseCount": 3,
+      "evidence": {
+        "bytes": 16098,
+        "sha256": "3f0739f932e0de2cb06b9023b99307bd7787508cfd53ac7847027c759a11a398"
+      },
+      "error": null
+    },
+    {
+      "group": "F6",
+      "passed": true,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 218,
+        "sha256": "0cf03851592354cf957c3248d37b1585d924dfc009b79704db924a8145070e5a"
+      },
+      "error": null
+    },
+    {
+      "group": "F7",
+      "passed": true,
+      "caseCount": 4,
+      "evidence": {
+        "bytes": 599,
+        "sha256": "7362a7cc15236bd1958794837bccc943ebf5ea87ef2f3db7c06b8d6382c08036"
+      },
+      "error": null
+    },
+    {
+      "group": "F8",
+      "passed": false,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 400,
+        "sha256": "92b22223f5e533d2802253a6c2223046609837aff4d9f319358af93cf77f35b3"
+      },
+      "error": {
+        "name": "other",
+        "nativeError": true,
+        "code": "absent",
+        "operator": "absent",
+        "actual": {
+          "type": "undefined"
+        },
+        "expected": {
+          "type": "undefined"
+        },
+        "message": {
+          "bytes": 19,
+          "sha256": "f64827765de7c62a07813e3df64f2a0dd123ffc205a014cfd41c8a916f1a256b",
+          "publicLabelSha256": "915c0f60e80855f6455a521d4d3df9e7a5f9c78452335b3deb332dbff239b594"
+        }
+      }
+    }
+  ],
+  "passed": false,
+  "I0Opened": false,
+  "nativeExecutionProduced": false,
+  "businessCases": 0
+}
+```
+
+Pure raw logs/TAP/stdout/stderr and rejected preflight bytes remain runner-private until runner cleanup, not seven-day encrypted-native custody. Public raw materials absent; only closed count/status/hash/error DTO and valid safe JSON published. Independent evidence completeness does not turn this failed covering GREEN.
+
+Failure closure restores EXACTbaselinec72e31919d477280c9eef39b63ca46708acb82e7 COMPLETE7/manual/noinputs/nopush/all7false. Historical unsafe sealer restored INACTIVE as required, not qualified foractivation. Latest fixed-sealer full7draft still exact053ebded recoverable from candidate, no completionclaim. Code/worlda66dedef and all F2/F5/F8 implementation preserved UNQUALIFIED, no further changes. Formal FIX_BASEd9b7 unchanged for later same review. Full ref/tree/3190leaves/3183protected/currentworld/closure0runs/branch0active readback follows this append. STOP; Root may inspect read-only and must rule separately before any Source repair, diagnostic, covering or native clock.
