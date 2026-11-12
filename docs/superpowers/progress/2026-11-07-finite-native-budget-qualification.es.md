@@ -2,11 +2,11 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — inspector fix2/5; one instrumented keyless integration released
+## CURRENT — keyless91 pass; observedHTTP404; safe closure; sequencing proposal review
 
-2026-11-12 15:16UTC. SAMEreview fix1: I5/M1ADDRESSED, I6OPENintegration afterstep8metadatafailure, noothernewbreakage; M2deferred. [Review](../reviews/2026-11-12-native-inspector-fix1-review.md). Source844safeexactF7, Rootverifiedzeroactive; all76controlsANDcorehash audited butwholejobFAILURE, privateoriginal untouched.
+2026-11-12 15:34UTC. Run43248453374/1 Source82cb1cf5,91currentfixturesPASS45ms, wholejobFAILURE atmetadata. EXACTONEcloseddiagnostic provesresponse/http_status/HTTP404/bytes0/timeoutfalse beforebody/field/digest checks; underlyingcauseUNKNOWN. [Primary](../reviews/2026-11-12-native-inspector-metadata404-primary.md). Root strictsafeartifact13959006495/1825B/SHA4506c493 +91IDs/core77,002B/SHA d514b190 verified. Originalcipher/key/SDK/I0untouched; allreadinessfalse.
 
-[Fix2brief](../briefs/2026-11-12-native-inspector-fix-round2.md) releases minimal CLOSED firstpredicate/stage/HTTP/bytes/timeout diagnostic and one<=2min KEYLESS76+finitecurrentchecks+sameIDmetadatainventoryintegration, noAFWkey/data/SDK/I0. Preserve existingvalidation, no speculativefix/retry. Failure=>exactF7restore+proofSTOP; success=>COMPLETEamendedactualinspector/manualfalse/coveredcode/report/readbacksSTOP thensamefullreview. Actualreceiptinspection NOTreleased. R1–R3cause/statusUNKNOWN; allreadinessfalse.
+Sourcea51c074e/tree64b0042e, exactF7manualsevenfalse/report95f5d131, Rootref/fullbody/appendonly/0active readbacks; writerSTOP. SAMEreviewerfix2 scopedU10+actualevidence and proposedTWOjob producer->keylessverifier sequencing discriminator, NOexecutionreleaseyet. [Package](../reviews/2026-11-12-native-inspector-fix2-review-package.md). I6integrationOPEN; I5/M1addressed; M2deferred. No blindretry, keyrotation or providerattribution. Actualprivateinspection/fullNative16rerun/PCoff NOTreleased/accredited.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
