@@ -87,6 +87,30 @@ test('SYN directory custody contract',async t=>{
   assert.equal((await stat(dest)).mode&0o777,0o700);assert.equal((await stat(join(dest,'datos'))).mode&0o777,0o700);assert.equal((await stat(join(dest,'datos','obra-ñ.bin'))).mode&0o777,0o600);
  });
 
+ const resultKinds=['readonly-result','reduction-checkpoint','reduction-result-a','reduction-result-b'];
+ for(const kind of resultKinds){
+  await t.test('C9 fixed custody kind '+kind,async()=>{
+   const bound={...context,kind};
+   const sealed=join(sandbox,'sealed-'+kind),restored=join(sandbox,'opened-'+kind);
+   const receipt=await seal(source,sealed,bound);
+   assert.deepEqual(receipt.context,bound);
+   assert.deepEqual(await open(sealed,restored,bound),receipt);
+   assert.equal(sha(await readFile(join(restored,'datos','obra-ñ.bin'))),sha(original));
+   const rejected=join(sandbox,'denied-'+kind);
+   for(const other of ['checkpoint','positive-result','producer-failure','consumer-failure',...resultKinds,'unknown-result']){
+    if(other!==kind)await rejectNew(()=>open(sealed,rejected,{...context,kind:other}),rejected);
+   }
+   const binary=await readFile(join(sealed,'envelope.bin'));
+   binary[binary.length-1]^=1;
+   await writeFile(join(sealed,'envelope.bin'),binary);
+   await rejectNew(()=>open(sealed,rejected,bound),rejected);
+  });
+ }
+ await t.test('C10 unknown custody kind fails before sealing',async()=>{
+  const dest=join(sandbox,'unknown-kind');
+  await rejectNew(()=>seal(source,dest,{...context,kind:'unknown-result'}),dest);
+ });
+
  await t.test('C2 wrong key, absent key and every different context fail without output',async()=>{
   const dest=join(sandbox,'bad-context');
   for(const secret of [undefined,'',key.toString('hex').slice(2),key.toString('hex')+'\n',otherKey.toString('hex')]){
