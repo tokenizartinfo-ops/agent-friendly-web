@@ -1,10 +1,11 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-12-r2-last-child.md
 
-## CURRENT — Task1 fix round1/5 released; actual Task2 HELD
+## CURRENT — Task1 fix round1/5 GREEN; scoped re-review pending; actual Task2 HELD
 
-2026-11-12 20:15UTC. Independent review0Critical/1Important/1Minor at6c4b13c2. [Finding/ruling](../reviews/2026-11-12-r2-last-child-task1-review.md): R2oversize negative shadowed by stalecertificate; productioncheckpresent, bindingqualificationgapaccepted. [Fix1brief](../briefs/2026-11-12-r2-last-child-task1-fix1.md) resumesoriginalimplementer for SAMEcontrol+pinsonly, oneDISTINCTkeyless2+2 newsource/attempt1, noOriginal/runtime/native. Priorrunconsumed/notretry. PASSinactive5+2/newscopedreview; failureF7/0activeSTOP. Task2stillHELD. Allreadinessfalse.
+Sourcec7ed76a1/WF7813487a bothfalse/manual/noinputs/nopush. Newkeyless43301802047/1success91+40+16+16; Rootindependentsafeproof/framehash/scope/protected3188/reportprefix/main/0activechecked. [Fix1package](../reviews/2026-11-12-r2-last-child-fix1-package.md), completevalidatedbothfilediff. OriginalimplementerSTOPPED. Allreadinessfalse/noOriginal/private/nativeexecution. IndependentADDRESSEDverdict pending; noactualrelease.
 
-Task1: minor (deferred): positive real fixed-file R2→reader→coordinator seam fixture absent. Finalwholeplanreview must triage; noobservedlogicdefect, notpartofround1.
+Task1: fix round1/5 (0 accepted addressed yet,1 open pending re-review — R2oversize negative shadowing; commits6c4b13c2..c7ed76a1).
+Task1: minor (deferred): positive real fixed-file R2→reader→coordinator seam fixture absent; finalwholeplanreviewmusttriage beforeNativepromotion.
 
 ## Prior proposal checkpoint
 
