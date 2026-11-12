@@ -1,10 +1,10 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — owner save/stop, primaryclock2026-11-12 09:32:18 UTC
+## CURRENT — resumed 2026-11-12 11:07:30 UTC; Task2 fixround2 PhaseA readonly
 
-Gabriel requests PCshutdownfor~1hour. STOP/no newwork orround2untilresume. Cloudcheckpoint docs/superpowers/progress/2026-11-12-shutdown-0932.es.md. Sourcefinald9b7/tree f5f5a676/report5f512869/workflowc72e3191 complete7manualfalse; latest43189940398 Q8/allF/all3profilesPASS/noI0. Rootprimary3190/3184protected/ref/diff allverified.
-Task2fixround1 reviewed:5addressed(F1,F3,F4,F6,F7),3openImportant(F2causaldeadlineclassification,F5disposefailurecontinuation,F8rawfailurelogpublication). Verbatim docs/superpowers/reviews/2026-11-12-finite-budget-native-fix-round1-review.md. Native16HELD; round2notdispatched. NextresumeSAMEwriter/SAMEreviewer d9b7base/readfixloopfresh; anyscopeextensionrecordedbeforeedit.
-O4priorinspectionclosedbc0d7382/inactiveaf862/Rootauditcf6f1fef: buildPASSED2.1MiB, parserallocationcap→INCOMPLETE/nooriginclaim. O4capamendmentPARTIAL_UNREVIEWED SAVED6ecd5762/helper e0385852/report38e22eb8/workflowaf862exact/1previousrunterminal/0active; no newjob. Source/O4queued0+in_progress0 at09:32:18UTC. No realruntime/keys/mail/main/Maxchanges; actualprovider/runtimeUNKNOWN. Allreadinessfalse; localRootnotcloudguard. Root finalclosing09:34:12UTC and relay0new verified. Complete stop/resume details in checkpoint.
+Gabrielreturned/continua; earlierownerstoprevoked. Fresh primaryrefs unchanged: Source d9b7ea75/all7manualfalse, Rootdocs05a47aa9, O4partial6ecd5762/inactiveaf862. ExistingTask1complete and all consumeddiagnosticrun entitlements preserved.
+Task2round1=5addressed/3openImportant(F2,F5,F8); exactbodies61bd0cbf. Formalround2/5 resumesSAMEwriter with readonly proposal BEFORE anyscopeexpansion/code. Brief docs/superpowers/briefs/2026-11-12-finite-budget-native-fix-round2.md; FIX_BASE d9b7. No Native16/I0/code/testdispatch yet; SAMEreviewer afteramendedcodecovered. New Node-onlytimer/producerseam or privatecustodyplanconflict requiresRootruling recordedbeforeedit, not blindretry.
+O4capdraft6ecd/e038/report38e remainsPARTIAL_UNREVIEWED; finishinactiveprep afterreadingpartialreport; no newjob untilSAMEreviewer+newRootrelease. Independentbranches; no simultaneous conflictingwriters or actualnativeclockoverlap. Useravailableagain; no credentials/browser step needed now. Actualprovider/runtimeUNKNOWN; alloperationalreadiness/PCofffalse. Developmentcloudpreferred; no localclone/deps/build.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
