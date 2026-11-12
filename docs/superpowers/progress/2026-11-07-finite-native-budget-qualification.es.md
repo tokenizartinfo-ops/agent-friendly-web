@@ -2,12 +2,12 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — Native16 not qualified; closed receipt-inspector preparation released
+## CURRENT — receipt-inspector preparation; partial review findings open
 
-2026-11-12 14:08UTC. Sole43229236340/1 Source19789b5f terminalFAILURE. Root independently verified all7terminal primary timestamps and observed native-job interval peak3. Q8/P1/D1–D2 validation passed; readonlyfailed/Rcasecounts+causeUNKNOWN; B/D3D4skipped. [Terminal primary audit](../reviews/2026-11-12-native16-terminal-primary.md). Five native payloads encrypted/seven-day; no private data to PC.
-FINALSTOP62517772/tree3f231956/report7fd17ef3/WFEXACTsafeF7a71/0active/3183protected. Rootref/fullWF/report primaryreadback matches. Allcode stillreviewed5fb78c05, F1–F9prepclosed. Single-run entitlement consumed, no repair/retry.
-[Receipt-inspector preparation brief](../briefs/2026-11-12-native-readonly-receipt-inspector-preparation.md): onlyWF+appendreport; manual/disabled job, NO EXECUTION yet. Exact originalreadonlycipher13949168304/digest8a408941/originalAAD; builtin custody only, separate failureidentity, safe fixedJSON/TAP projection; no SDK/I0 or newkey. Root independent code review before one future cloud inspection.
-O5 stack-location proposal preserved/deferred, no O5 code/probe. Task2actual16/final/global review and PCoff pending; readinessfalse.
+2026-11-12 14:35UTC. Native16 sole43229236340 failedreadonly/Bskipped; original safeclosure625/WFf7a71, metadata/interval audit0a5283b0. No native retry or private payload toPC. RcasecauseUNKNOWN.
+Durable inactive PREPARED_UNQUALIFIED inspector checkpoint550051af/tree16480e46/WFe2b517dc/reportae020f10 preserves CURRENT fixed decoder/parser/schema, driver/fixtures/publication stillpending. Manual/noinputs/nopush/jobfalse, noexecution/key/download/decryption. SameSourcewriter continues scopeWF+appendreport/3188others unchanged.
+One independent review seat inspected core inpasses. [Partial review](../reviews/2026-11-12-native-receipt-inspector-partial-review.md) has I1 blocking heredoc/replacement generation, I2 incomplete authentication/inventory output gate, I3 TAPnumber/block attribution, I4 scalar-union/hash typing. Writer acknowledged all; fixes and actual-code fixtures being prepared. Finalwholeworkflowreview required beforeONEfutureinspection; no approval/probe yet.
+PreparationF1–F9 remainsclosed; Native16/finalTask2/GLOBAL296/realPCoff pending. O5 proposal deferred; allreadinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
