@@ -1,0 +1,25 @@
+# Plan: authenticated-payload-bounded R1/R2 reference read
+
+Spec docs/superpowers/specs/2026-11-12-authenticated-payload-bounded-reference-design.md. ProjectAFW/repo1347578006/SourceSYNonly/Rootdocscloudcheckpoint. Userexplicitcontinuouscloud-firstwork+decisiondelegationpersists; Hermesbackgroundnotactivegoal. No usercheck-in needed for keylesspreparation; freshimplementerperTask, Sourceonewriter, Rootcoordinator/reviewerread-only, no localSourceexecution. RootownsRootdocs, SourceauthorownsWF+sameappendreportonly. BEFORETaskA preflightreviewmandatory. CurrentplanproposalONLY; no Sourcewrite/run/privateopen releasedyet.
+
+BASE41520e037d80e6a658e92932709cd1df11e13c39/treee9bb6cd7776f45c2cf3a4918b2173298da9fc0b9/WFf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/report4b7d4c11c8f8678769f96318707e806faca48583/290697chars. main0c9c475b3ebaa970fc11d628b40e50a90cceb727. SourcepathsWF .github/workflows/afw-finite-budget-qualification.yml and APPEND docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task2.md ONLY. TemplatesD5actuald5cdaabd4c096bca089c11f9b5e414e2007ef12b/WFa0e1d838; keyless2b970b496b993fca1a6879478601b5dfa4c18a6e/WF666e76f. Allother3188protected. No otherMain/native runtimechange.
+
+## TaskA: minimal bound+exact authenticated basis gate, one keyless qualification
+
+Consumespreflightclean+Rootexactbriefrelease. ChangeMAXonlyforselectedfiles to298888337 andnewbasisgate128files/298888337authenticatedbytes beforeadditionalread/transportacceptance. Core/ZIP literalsunchanged; currentprogramsemanticsotherwiseunchanged. Update24existingtests fixturebasis inventorycounts, wrongmetadatafailedgate, actualcurrentreader17MiBvalidJSONwhitespace case, sparse298888338Boversizecase (ownedtemp only), noothermetrics/schema/scope changes. Newcodehelpersidenticalbetweenqualifiedkeylessandcompleteinactiveactual.
+
+One2+2serialkeylessSourcepush/attempt1, noenvironment/secrets/Originaldata/SDK/native/I0; freezeSource/run, pass91+24+16+16, assignedsafeartifact/hash/inventory/currentSource proof. FailureF7/report/fullbodies/ref/tree/protected/main/0activeSTOP,noretry. Successcompleteactual5+2INACTIVE/manual/noinputs/nopush/BOTHfalse, appendcoveringcommands/output/IDs/hashes/STATICvsdynamic/protected/readbacks/0active, STOP. IndependentfullTaskAreviewbeforeTaskB.
+
+## TaskB: one separatelyreleased actualprojection, close
+
+ConsumescleanTaskAreview+Rootseparateexactrelease. Onlyevent/twofalseprefix/runlabel+reportchange, no code/cap/Originchanges. ONE5+2fixedOriginalartifact/context/keyONLYGitHubrunner, only2additionalfixedR1/R2filepaths plusunchangedCoreV1paths. Same10/15deadlines, noNativeSDKcase/replay. AfterterminalrestoreexactF7/report/fullreadback/protected/main/0activeSTOPregardlessoutcome. RootreadsONLYsmallsafeartifact+closedverifierrecords, strictwholeenvelope/currentidentity/Original/nestedbasis+bytebound/metrics audit. Dataobservationsdeterminecausalnextstep; nopass/causefromcounteralone, noretry/widenwithoutnewplan.
+
+## Preflight conflicts/rulings toconfirm
+
+1 Fixedfilecapgreaterthanold16MiB is justifiedbyactualoversizeandknownauthenticatedtotal, not providerproblem. PriorpermitconsumedandSourceclosed; newplannewauthority.
+2 Exactinventoryguard insharedvalidateInspectionBasis beforeprojector andacceptance; credentiallesssyntheticbasisfixtureonlyupdatedmetadata, noGitHubactualidentityoverride/noauthclaim.
+3 ExistingfullJSONstrictparserreusevsnewstreamparser: minimalchangepreferred; RAM/timeoutfailureclosed, noPCwork; fixedhash+inventoryownedfileslimitactualsum. Keepalltimecaps.
+4Sparseoversizefixture avoids300MBbufferallocation; one17MiBpositivecloudfixture isneededtocoveramendedrealfunction. Preserve24IDs/oldnegativecases.
+5Partialremainscorrectwhenclassifieddataunavailable; unchangedOriginalNativeFAILED/allreadinessfalse; exactF7restorationand0active mandatory.
+
+Selfreview: allnewspecsectionsmappedAorB; no codecustody/SourceprivateauthorityinferredfromRootproposal. No hiddennewcontracts/dependencies/services/costplans. Localworktree/Sddscripts omitted byexplicitownercloudpreference; durableperplanRootdocshere plusGitfeaturebranchCAS/checkpoints substitutes, no temporarySourcefiles/clones/buildsonPC.
