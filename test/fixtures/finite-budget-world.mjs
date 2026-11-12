@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,readdir,copyFile} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,readdir,copyFile,cp} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+import {AsyncLocalStorage} from 'node:async_hooks';
 import {resolve,relative,join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import ts from 'typescript';
@@ -645,26 +646,61 @@ function fixedSdkSettlementSequence(source,label){
  return {end:matches[0],sites:matches.length,sameNameReceivers:receivers,receiver:'api',method:'revokeGrant',args:['selector','i.subject'],adjacency:['const-actual-retain-api','await-actual','check','bounded-facts']};
 }
 
-function fixedQueueObservation(baseline,originalSdk){
- const ast=sourceAST(baseline,'SYN-fixed-queue-observation'),sites=[],sdk=fixedSdkSettlementSequence(baseline,'emitted-baseline'),sdkSites=[sdk.end];
- const walk=node=>{
-  if(ts.isExpressionStatement(node)&&ts.isCallExpression(node.expression)&&ts.isPropertyAccessExpression(node.expression.expression)&&node.expression.expression.getText(ast)==='queue.push'){
-   let owner=node.parent,family=null;
-   while(owner){if(ts.isFunctionDeclaration(owner)&&['readonlyGrantKv','reductionKv'].includes(owner.name?.text)){family=owner.name.text==='readonlyGrantKv'?1:2;break;}owner=owner.parent;}
-   if(family!==null){
-    assert.equal(node.expression.arguments.length,1);assert(ts.isObjectLiteralExpression(node.expression.arguments[0]));
-    assert.deepEqual(node.expression.arguments[0].properties.map(p=>p.name.getText(ast)),['method','args','resolve','reject']);
-    sites.push({family,end:node.end});
+
+async function instrumentFixedSynLibrary(baseline,path,originalSdk){
+ const ast=sourceAST(baseline,'SYN-fixed-observation-baseline'),edits=[],counts={childBlocks:0,work:0,wait:0,selectReadonly:0,selectReduction:0,queueReadonly:0,queueReduction:0,capReadonlyList:0,capReadonlyGet:0,capReductionList:0,capReductionDelete:0,send:0,sdk:0};
+ const owner=(node,name)=>{for(let n=node.parent;n;n=n.parent)if(ts.isFunctionDeclaration(n)&&n.name?.text===name)return n;return null;};
+ const named=(node,name)=>ts.isCallExpression(node)&&node.expression.getText(ast)===name;
+ const insert=(position,text)=>edits.push({start:position,end:position,text});
+ const replace=(node,text)=>edits.push({start:node.getStart(ast),end:node.end,text});
+ if(path==='lib/mcp-qa-finite-initial-lease.mjs'){
+  const walk=node=>{
+   if(ts.isCallExpression(node)&&node.expression.getText(ast)==='retain'&&node.arguments.length===1&&node.arguments[0].getText(ast)==='actual'&&ts.isExpressionStatement(node.parent)){
+    const block=node.parent.parent;assert(ts.isBlock(block)&&block.getText(ast).includes('__afwBudget.childCall(lease, l, until'),'original initial child block provenance');
+    insert(node.parent.getStart(ast),"__afwSynWork(l,until,actual,lease.signal);\n");counts.work++;counts.childBlocks++;
    }
-  }ts.forEachChild(node,walk);
- };walk(ast);assert.deepEqual(sites.map(s=>s.family),[1,2],'exact two original enqueue notifications after pinned baseline transform');
- assert.equal(sdkSites.length,1,'single passive actual SDK settlement site');
- const edits=sites.map(site=>({end:site.end,text:"\ntry{globalThis.__afwFixedSynBudgetQueueObserve?.(alias,"+site.family+",queue.length,active,Date.now());}catch{}\n"}));
- edits.push({end:sdkSites[0],text:"\n{try{const __afwSynSdkObserver=Reflect.apply(__afwFixedSynPromiseThen,actual,[()=>{try{globalThis.__afwFixedSynBudgetSdkObserve?.(life.alias,1,Date.now());}catch{}},()=>{try{globalThis.__afwFixedSynBudgetSdkObserve?.(life.alias,2,Date.now());}catch{}}]);Reflect.apply(__afwFixedSynPromiseThen,__afwSynSdkObserver,[()=>undefined,()=>undefined]);}catch{}}\n"});
- let source=baseline;for(const edit of edits.sort((a,b)=>b.end-a.end))source=source.slice(0,edit.end)+edit.text+source.slice(edit.end);
- source="const __afwFixedSynPromiseThen=Promise.prototype.then;\n"+source;
- sourceAST(source,'SYN-fixed-queue-emission');
- return {source,proof:{purpose:'afw.fixed-syn-queue-observation.v1',baselineBytes:Buffer.byteLength(baseline),baselineSha256:hash(baseline),emittedBytes:Buffer.byteLength(source),emittedSha256:hash(source),sites:sites.map(s=>s.family),sdkSettlementSites:sdkSites.length,sdkDeclarationProvenance:{original:originalSdk,emitted:Object.fromEntries(Object.entries(sdk).filter(([key])=>key!=='end')),protectedModuleBlob:'1a5a2583d266179cdd89f799c64199f29044fec5',originalStatementSha256:hash('const actual=retain(api.revokeGrant(selector,i.subject));')},fields:['alias-identity','numeric-family','queued','active','timestamp'],businessAuthority:false}};
+   if(named(node,'wait')&&node.arguments.length===2&&node.arguments.map(x=>x.getText(ast)).join('|')==='actual|l'){replace(node,'__afwSynWait(l,'+node.getText(ast)+')');counts.wait++;}
+   ts.forEachChild(node,walk);
+  };walk(ast);assert.equal(counts.childBlocks,1);assert.equal(counts.work,1);assert.equal(counts.wait,1);
+ }else{
+  assert.equal(path,'lib/mcp-qa-finite-owner-cleanup.mjs');const sdk=fixedSdkSettlementSequence(baseline,'emitted-baseline');
+  const walk=node=>{
+   if(ts.isVariableStatement(node)&&owner(node,'cleanupLifetime')){
+    const ds=node.declarationList.declarations;
+    if(ds.length===1&&ds[0].name.getText(ast)==='actual'&&ds[0].initializer?.getText(ast).includes('__afwBudget.childCall(originalLease, clock.lease, end,')){
+     insert(node.end,'\n__afwSynWork(clock.lease,end,actual,originalLease.signal);');counts.work++;counts.childBlocks++;
+    }
+   }
+   if(named(node,'clock.wait')&&node.arguments.length===1&&node.arguments[0].getText(ast)==='actual'&&owner(node,'cleanupLifetime')){replace(node,'__afwSynWait(clock.lease,'+node.getText(ast)+')');counts.wait++;}
+   if(ts.isExpressionStatement(node)&&named(node.expression,'guard')&&node.expression.arguments.length===0&&owner(node,'readPrivateQaFiniteOwnerSdkGrant')){
+    const siblings=node.parent.statements,index=siblings?.indexOf(node);if(index!==undefined&&index>=0&&siblings[index+1]?.getText(ast).includes('observeFiniteFactualReadWork')){insert(node.end,'\n__afwSynSelectGuard(alias,lease,guard,1);');counts.selectReadonly++;}
+   }
+   if(ts.isVariableStatement(node)&&node.declarationList.declarations.some(d=>d.name.getText(ast)==='bounded'&&d.initializer&&named(d.initializer,'reductionKv'))){
+    assert(owner(node,'finishPrivateQaFiniteOwnerCleanup'));insert(node.end,'\n__afwSynSelectGuard(life.alias,l,check,2);');counts.selectReduction++;
+   }
+   if(ts.isCallExpression(node)&&ts.isCallExpression(node.expression)&&node.expression.expression.getText(ast)==='__afwBudget.reflect'&&node.expression.arguments[0]?.getText(ast)==='Reflect.apply'&&node.arguments.length===3&&node.arguments.map(x=>x.getText(ast)).join('|')==='methods[q.method]|alias|q.args'){
+    const ro=owner(node,'readonlyGrantKv'),red=owner(node,'reductionKv');assert(Boolean(ro)!==Boolean(red));let statement=node;while(!ts.isExpressionStatement(statement)&&!ts.isVariableStatement(statement))statement=statement.parent;
+    const block=statement.parent,index=block.statements?.indexOf(statement);assert(ts.isBlock(block)&&index>0&&ts.isExpressionStatement(block.statements[index-1])&&named(block.statements[index-1].expression,'check'),'native continuation original guard adjacency');
+    const family=ro?1:2;insert(statement.getStart(ast),"__afwSynNote('queue',alias,"+family+",__afwSynGuardChildren.get(guard)??0,queue.length,active,q.method);\n");counts[ro?'queueReadonly':'queueReduction']++;
+   }
+   if(ts.isBinaryExpression(node)&&node.operatorToken.kind===ts.SyntaxKind.GreaterThanEqualsToken){
+    const counter=node.left.getText(ast),limit=node.right.getText(ast),ro=owner(node,'readonlyGrantKv'),red=owner(node,'reductionKv');
+    const key=ro&&counter==='lists'&&limit==='2'?'capReadonlyList':ro&&counter==='gets'&&limit==='200'?'capReadonlyGet':red&&counter==='lists'&&limit==='2'?'capReductionList':red&&counter==='deletes'&&limit==='200'?'capReductionDelete':null;
+    if(key){assert(ts.isBinaryExpression(node.parent)&&node.parent.operatorToken.kind===ts.SyntaxKind.BarBarToken&&node.parent.right===node,'original final cap disjunct');replace(node,"__afwSynCap("+node.getText(ast)+",alias,guard,"+(ro?1:2)+",'"+(counter==='lists'?'list':counter==='gets'?'get':'delete')+"',"+counter+","+limit+")");counts[key]++;}
+   }
+   if(ts.isCallExpression(node)&&node.expression.getText(ast)==='api.revokeGrant'&&node.arguments.map(x=>x.getText(ast)).join('|')==='selector|i.subject'){
+    let sdkStatement=node;while(!ts.isVariableStatement(sdkStatement))sdkStatement=sdkStatement.parent;assert.equal(sdkStatement.end,sdk.end,'SDK declaration structural identity');replace(node.expression,'__afwSynSdkCallee(api.revokeGrant,api,life.alias,check)');counts.sdk++;
+    const sdkBlock=sdkStatement.parent;assert(ts.isBlock(sdkBlock));
+    const sends=[];const scan=n=>{if(ts.isCallExpression(n)&&n.expression.getText(ast)==='journal.appendSend')sends.push(n);ts.forEachChild(n,scan);};scan(sdkBlock);
+    assert.equal(sends.length,1,'same SDK child exact SEND call');const send=sends[0];assert.equal(send.arguments.length,2);assert.equal(send.arguments[1].getText(ast),'l');replace(send.expression,'__afwSynSendCallee(journal.appendSend,journal,life.alias,check)');counts.send++;
+   }
+   ts.forEachChild(node,walk);
+  };walk(ast);
+  assert.deepEqual(counts,{childBlocks:1,work:1,wait:1,selectReadonly:1,selectReduction:1,queueReadonly:1,queueReduction:1,capReadonlyList:1,capReadonlyGet:1,capReductionList:1,capReductionDelete:1,send:1,sdk:1},'eleven cleanup primary blocks plus work/wait subcounts');
+ }
+ let source=baseline;for(const edit of edits.sort((a,b)=>b.start-a.start)){assert(edit.start<=edit.end);source=source.slice(0,edit.start)+edit.text+source.slice(edit.end);}
+ const {finiteBudgetSynLibraryPrefix}=await import('./finite-owner-cleanup.mjs');source=finiteBudgetSynLibraryPrefix+'\n'+source;sourceAST(source,'SYN-fixed-observation-emission');
+ return {source,proof:{purpose:'afw.fixed-syn-passive-observations.v2',baselineBytes:Buffer.byteLength(baseline),baselineSha256:hash(baseline),emittedBytes:Buffer.byteLength(source),emittedSha256:hash(source),primaryBlocks:path.includes('initial-lease')?1:11,counts,...originalSdk?{sdkDeclarationProvenance:{original:originalSdk,protectedModuleBlob:'1a5a2583d266179cdd89f799c64199f29044fec5',originalStatementSha256:hash('const actual=retain(api.revokeGrant(selector,i.subject));')}}:{},fields:['opaque-alias','child-ordinal','family','deadline','status','counter','limit','queue-length','active','time','send-record-hash'],businessAuthority:false}};
 }
 async function appendFixedSynAdapter(baseline,family){
  const ast=sourceAST(baseline,'SYN-baseline-entry'),classes=ast.statements.filter(n=>ts.isClassDeclaration(n)&&n.name?.text==='Initial');
@@ -678,7 +714,7 @@ async function appendFixedSynAdapter(baseline,family){
  assert(['readonly','reduction'].includes(family));
  const literal="const __afwFiniteBudgetFamily="+JSON.stringify(family)+";\n"+finiteBudgetSynAdapterSource;
  const extension=sourceAST(literal,'SYN-fixed-prototype-adapter'),calls=[];
- const operationInventory=Object.fromEntries(["Reflect.apply(","Object.defineProperty(","Object.defineProperties(","Promise.allSettled(","new WeakMap("].map(marker=>[marker,finiteBudgetSynAdapterSource.split(marker).length-1]));assert.deepEqual(operationInventory,{"Reflect.apply(":21,"Object.defineProperty(":2,"Object.defineProperties(":1,"Promise.allSettled(":1,"new WeakMap(":2},'closed fixed adapter operation inventory');
+ const operationInventory=Object.fromEntries(["Reflect.apply(","Object.defineProperty(","Object.defineProperties(","Promise.allSettled(","new WeakMap("].map(marker=>[marker,finiteBudgetSynAdapterSource.split(marker).length-1]));assert.deepEqual(operationInventory,{"Reflect.apply(":23,"Object.defineProperty(":1,"Object.defineProperties(":1,"Promise.allSettled(":1,"new WeakMap(":3},'closed fixed adapter operation inventory');
  const walk=n=>{if(ts.isCallExpression(n)){const expression=n.expression.getText(extension);if(expression==='Object.defineProperties'){
   assert.equal(n.arguments[0].getText(extension),'Initial.prototype');assert(ts.isObjectLiteralExpression(n.arguments[1]));calls.push(n.arguments[1].properties.map(p=>p.name.getText(extension)));
  }}ts.forEachChild(n,walk);};walk(extension);assert.deepEqual(calls,[added]);
@@ -704,7 +740,7 @@ export function createBudgetCompiler(role){
   const family=fixedAdapterFamily(),originalSdk=family&&role==='QA'&&path==='lib/mcp-qa-finite-owner-cleanup.mjs'?fixedSdkSettlementSequence(source,'original-prepared'):null;
   let result=transformBudgetPreparedSource(source,path,role);let additionalSYN=null;
   if(family&&role==='QA'&&path==='<stdin>'){const emitted=await appendFixedSynAdapter(result.source,family);additionalSYN=emitted.proof;result={...result,source:emitted.source};}
-  if(family&&role==='QA'&&path==='lib/mcp-qa-finite-owner-cleanup.mjs'){assert.equal(source.split('const actual=retain(api.revokeGrant(selector,i.subject));').length-1,1,'original SDK call and retain unchanged');const emitted=fixedQueueObservation(result.source,Object.fromEntries(Object.entries(originalSdk).filter(([key])=>key!=='end')));additionalSYN=emitted.proof;result={...result,source:emitted.source};}
+  if(family&&role==='QA'&&['lib/mcp-qa-finite-owner-cleanup.mjs','lib/mcp-qa-finite-initial-lease.mjs'].includes(path)){if(originalSdk)assert.equal(source.split('const actual=retain(api.revokeGrant(selector,i.subject));').length-1,1,'original SDK call and retain unchanged');const emitted=await instrumentFixedSynLibrary(result.source,path,originalSdk?Object.fromEntries(Object.entries(originalSdk).filter(([key])=>key!=='end')):null);additionalSYN=emitted.proof;result={...result,source:emitted.source};}
   records.set(path,{role,path,rawBytes:Buffer.byteLength(raw),rawSha256:hash(raw),preparedBytes:Buffer.byteLength(source),preparedSha256:hash(source),emittedBytes:Buffer.byteLength(result.source),emittedSha256:hash(result.source),counts:result.counts,selectors:result.selectorCounts,readerSites:result.readerSites,...additionalSYN?{additionalSYN}:{}});
   prepared.set(path,result.source);return result.source;
  }
@@ -744,10 +780,84 @@ export function createBudgetCompiler(role){
  }
  return Object.freeze({role,plugin,entry:source=>transform('<stdin>',source),records:()=>[...records.values()],prepared:()=>[...prepared]});
 }
+
+const fixedBudgetOwners=new AsyncLocalStorage(),fixedBudgetOwnerErrors=new WeakMap();
+let fixedBudgetAllocationOrdinal=0;const fixedBudgetOwnedLive=new Set();
+function assertFixedBudgetAllocationSafe(){assert(![...fixedBudgetOwnedLive].some(record=>record.disposalUncertain),'SYN previous owned disposal uncertain before allocation');assert(fixedBudgetOwnedLive.size<2,'SYN fixed job maximum two owned MF');}
+function ownedFailure(record,phase,error){record.failures.push({phase,error});}
+function createFixedOwnedRecord(frame,kind){
+ const record={ordinal:++fixedBudgetAllocationOrdinal,caseName:frame.caseName,kind,persist:null,mf:null,fixture:null,callbacks:[],failures:[],epochs:[],closing:null,disposed:false,archived:false,archive:null,terminalCapture:'not_available',events:[]};
+ frame.records.push(record);
+ record.attachPersist=path=>{assert.equal(record.persist,null);record.persist=path;record.events.push('persist-attached');};
+ record.attachFixture=f=>{assert(!record.fixture||record.fixture===f);record.fixture=f;record.events.push('fixture-attached');};
+ record.attachMiniflare=mf=>{
+  assert(!record.mf||record.mf===mf);if(record.mf)return;assertFixedBudgetAllocationSafe();record.mf=mf;fixedBudgetOwnedLive.add(record);const original=mf.dispose;assert.equal(typeof original,'function');
+  mf.dispose=()=>record.dispose();record.originalDispose=()=>Reflect.apply(original,mf,[]);record.events.push('miniflare-attached');
+ };
+ record.dispose=()=>record.disposal??= (async()=>{
+  const f=record.fixture;
+  if(f?.firstConnectionBuild&&f.cleanupCheckpointInputs)try{const mounted=f.cleanupCheckpointInputs().currentMountedOptions;record.graphs=['M','QA'].map(role=>{const worker=mounted.workers.find(v=>v.name===(role==='M'?'canary-first-connection':'qa-first-connection'));assert(worker);assert.equal(hash(worker.script),f.firstConnectionBuild[role].sha256);return {role,worker:worker.name,sha256:hash(worker.script),bytes:Buffer.byteLength(worker.script),mounted:true};});}catch(error){ownedFailure(record,'mount_provenance',error);}
+  if(f?.captureBudgetEpoch)try{const failureCount=record.failures.length;await f.captureBudgetEpoch('terminal-owned-before-dispose');record.terminalCapture=record.failures.length===failureCount?'captured':'failed';record.epochs=structuredClone(f.budgetEpochs);}catch(error){record.terminalCapture='failed';ownedFailure(record,'terminal_epoch',error);}
+  else if(record.mf){record.terminalCapture='unavailable_partial_setup';ownedFailure(record,'terminal_epoch',Error('SYN partial setup has no epoch capture'));}
+  if(record.originalDispose)try{await record.originalDispose();record.disposed=true;fixedBudgetOwnedLive.delete(record);record.events.push('disposed');}catch(error){record.disposalUncertain=true;record.events.push('disposal-uncertain');ownedFailure(record,'dispose',error);}
+  if(record.persist&&record.disposed)try{
+   const destination=join(frame.root,'owned-native-'+record.ordinal);await mkdir(frame.root,{recursive:true});await cp(record.persist,destination,{recursive:true,errorOnExist:true,force:false});
+   const source=await inventoryFiles(record.persist),copy=await inventoryFiles(destination);assert(source.length>0&&source.length<=512);assert(source.reduce((n,f)=>n+f.bytes,0)<=134217728);assert.deepEqual(copy,source,'owned cold native bytes exact');
+   record.archive={path:destination,files:copy};record.archived=true;record.events.push('archived');
+  }catch(error){ownedFailure(record,'cold_archive',error);}
+ })();
+ record.beforeDelete=async()=>{await record.dispose();if(!record.archived){record.events.push('delete-skipped-unsafe');return false;}record.events.push('delete-authorized');return true;};
+ return record;
+}
+export function beginFixedBudgetOwnedAllocation(){
+ const frame=fixedBudgetOwners.getStore();if(!frame)return null;assertFixedBudgetAllocationSafe();assert(!frame.records.some(r=>r.kind==='initial'),'one initial allocation per fixed occurrence');return createFixedOwnedRecord(frame,'initial');
+}
+export function attachFixedBudgetRecoveryOwner(f){
+ const frame=fixedBudgetOwners.getStore();if(!frame)return;
+ let record=frame.records.find(r=>r.kind==='recovery');if(!record)return;
+ if(record.fixture){assert.equal(record.fixture,f);return;}record.attachFixture(f);
+ assert(!Object.hasOwn(f,'mf'),'recovery hook precedes actual assignment');
+ Object.defineProperty(f,'mf',{configurable:true,enumerable:true,set(mf){Object.defineProperty(f,'mf',{value:mf,writable:true,enumerable:true,configurable:true});record.attachMiniflare(mf);}});
+}
+function registerFixedOwnedCleanup(fn){const frame=fixedBudgetOwners.getStore();assert(frame);frame.callbacks.push(fn);}
+async function closeFixedOwnedFrame(frame,primary){
+ if(frame.closed)return frame.closed;
+ frame.closed=(async()=>{
+  // Release and restore each owned fixture independently before disposal.
+  await Promise.allSettled(frame.records.map(async record=>{
+   for(const phase of ['release','restore'])try{const f=record.fixture;if(f?.stub)await f.stub[phase==='release'?'finiteBudgetRelease':'finiteBudgetRestore']();record.events.push(phase);}catch(error){ownedFailure(record,phase,error);}
+   try{await record.dispose();}catch{}
+  }));
+  for(const callback of frame.callbacks.reverse())try{await callback();}catch(error){frame.failures.push({phase:'registered_cleanup',error});}
+  for(const record of frame.records){
+   // A pre-assignment allocation can still own a persistence directory.
+   if(record.persist&&!record.mf)try{
+    const destination=join(frame.root,'owned-partial-'+record.ordinal);await mkdir(frame.root,{recursive:true});await cp(record.persist,destination,{recursive:true,errorOnExist:true,force:false});const files=await inventoryFiles(record.persist);assert.deepEqual(await inventoryFiles(destination),files);record.archive={path:destination,files};record.archived=true;
+   }catch(error){ownedFailure(record,'partial_archive',error);}
+  }
+  const failures=[...frame.failures,...frame.records.flatMap(r=>r.failures)];
+  const result={purpose:'afw.fixed-budget-owned-lifecycle.syn.v1',caseName:frame.caseName,records:frame.records.map(r=>({ordinal:r.ordinal,caseName:r.caseName,kind:r.kind,graphs:r.graphs??[],disposalUncertain:r.disposalUncertain===true,disposed:r.disposed,archived:r.archived,terminalCapture:r.terminalCapture,archive:r.archive,events:r.events,failures:r.failures.map(x=>({phase:x.phase,name:Object.getOwnPropertyDescriptor(x.error??{},'name')?.value??'Error'})),epochs:r.epochs})),callbackCount:frame.callbacks.length,ancillaryFailureCount:failures.length,primaryPreserved:primary!==null,complete:failures.length===0};
+  try{await mkdir(frame.root,{recursive:true});await writeFile(join(frame.root,'ownership.json'),JSON.stringify(result,null,2));}catch(error){failures.push({phase:'ownership_preservation',error});result.complete=false;result.ancillaryFailureCount=failures.length;}
+  const error=primary??failures[0]?.error;if(error){fixedBudgetOwnerErrors.set(error,{primary,failures,result});throw error;}return result;
+ })();return frame.closed;
+}
+async function withFixedBudgetOwner(caseName,root,operation,{recovery=false}={}){
+ assert(['R1','R2','R3','D1','D2','D3','D4','P1','positive_producer','reduction_producer'].includes(caseName));
+ const frame={caseName,root,records:[],callbacks:[],failures:[],closed:null};let value,primary=null;
+ return fixedBudgetOwners.run(frame,async()=>{
+  if(recovery){assertFixedBudgetAllocationSafe();const r=createFixedOwnedRecord(frame,'recovery');r.attachPersist(join('output','r2-native-'+(caseName==='P1'?'finite-budget-positive':'budget-'+caseName),'state'));}
+  try{value=await operation();}catch(error){primary=error;}
+  const ownership=await closeFixedOwnedFrame(frame,primary);
+  if(value&&typeof value==='object'){value.ownership=ownership;value.diagnostics??={};value.diagnostics.epochs=frame.records.flatMap(r=>r.epochs);if(value.caseName)await fixedBudgetPersist((caseName.startsWith('R')?'readonly/':'reduction/')+caseName,value);}
+  return value;
+ });
+}
+
 export function attachBudgetEpochCapture(f,{segment='producer',epochs=[],epoch=0}={}){
  assert(['producer','consumer'].includes(segment));let current=epoch;
  f.budgetEpochs=epochs;
- f.captureBudgetEpoch=async reason=>{
+ const frame=fixedBudgetOwners.getStore(),ownedRecord=frame?.records.find(record=>record.fixture===f);
+ const capture=async reason=>{
   const qaValue=await f.stub.budgetSnapshot();let QA;try{QA=JSON.parse(JSON.stringify(qaValue));}finally{qaValue[Symbol.dispose]?.();}
   const worker=await f.mf.getWorker('canary-first-connection'),response=await worker.fetch('https://delegated-canary.agentfriendlyweb.dev/_fixture/finite-budget');
   assert.equal(response.status,200);const M=await response.json();
@@ -758,6 +868,7 @@ export function attachBudgetEpochCapture(f,{segment='producer',epochs=[],epoch=0
   }
   return epochs;
  };
+ f.captureBudgetEpoch=async reason=>{try{return await capture(reason);}catch(error){if(!ownedRecord)throw error;ownedFailure(ownedRecord,'capture_epoch',error);return epochs;}};
  f.nextBudgetEpoch=()=>{current++;};
  return f;
 }
@@ -770,8 +881,8 @@ export async function preflightBudgetCompilation(){
  assert.equal(graphs.I0Opened,false);assert.equal(graphs.nativeExecutionProduced,false);
  assert(graphs.budget?.M?.length&&graphs.budget?.QA?.length);
  assert(graphs.compatibility.M.compatibility_flags.includes('nodejs_compat'));assert(graphs.compatibility.QA.flags.includes('nodejs_compat'));
- const additions=graphs.budget.QA.filter(record=>record.additionalSYN).map(record=>({path:record.path,...record.additionalSYN}));assert.equal(additions.length,requestedGroup==='positive'?0:2);
- if(requestedGroup!=='positive'){assert.deepEqual(additions.find(r=>r.path==='lib/mcp-qa-finite-owner-cleanup.mjs').sites,[1,2]);assert.equal(additions.find(r=>r.path==='lib/mcp-qa-finite-owner-cleanup.mjs').sdkSettlementSites,1);assert.equal(additions.find(r=>r.path==='<stdin>').family,requestedGroup==='readonly'?'readonly':'reduction');}
+ const additions=graphs.budget.QA.filter(record=>record.additionalSYN).map(record=>({path:record.path,...record.additionalSYN}));assert.equal(additions.length,requestedGroup==='positive'?0:3);
+ if(requestedGroup!=='positive'){const cleanup=additions.find(r=>r.path==='lib/mcp-qa-finite-owner-cleanup.mjs'),lease=additions.find(r=>r.path==='lib/mcp-qa-finite-initial-lease.mjs');assert.equal(cleanup.primaryBlocks+lease.primaryBlocks,12);assert.equal(cleanup.counts.queueReadonly,1);assert.equal(cleanup.counts.queueReduction,1);assert.equal(cleanup.counts.sdk,1);assert.equal(cleanup.counts.send,1);assert.equal(cleanup.counts.work+lease.counts.work,2);assert.equal(cleanup.counts.wait+lease.counts.wait,2);assert.equal(additions.find(r=>r.path==='<stdin>').family,requestedGroup==='readonly'?'readonly':'reduction');}
  const result={purpose:'afw.finite-budget-preflight.syn.v1',group:requestedGroup,additionalSYN:additions,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,inputs:graphs.budget,I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
  result.observerChronology='afw.finite-budget-chronology.syn.v2';
  await mkdir('output/finite-budget/pure',{recursive:true});await writeFile('output/finite-budget/pure/preflight-'+requestedGroup+'.json',JSON.stringify(result,null,2));if(requestedGroup==='positive')await writeFile('output/finite-budget/pure/preflight.json',JSON.stringify(result,null,2));
@@ -787,10 +898,10 @@ export function extendBudgetQualification(entry){
 }
 function positiveKind(kind){assert.equal(kind,'positive','SYN budget kind unsupported before I0');assert.equal(process.env.AFW_BUDGET_GROUP,'positive');}
 export async function prepareBudgetProducer(kind,root){
- if(kind==='reduction')return prepareReductionProducer(root);
+ if(kind==='reduction')return withFixedBudgetOwner('reduction_producer','output/finite-budget/owned/reduction_producer',()=>prepareReductionProducer(root));
  positiveKind(kind);
  const {produceCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
- return produceCheckpoint(root,{variant:'principal',budgetQualification:true});
+ return withFixedBudgetOwner('positive_producer','output/finite-budget/owned/positive_producer',()=>produceCheckpoint(root,{variant:'principal',budgetQualification:true}));
 }
 
 async function preparePositiveProbe(root){
@@ -801,7 +912,7 @@ async function preparePositiveProbe(root){
  const checkpoint='output/chronology-native-checkpoint';
  const {produceCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
  console.info('AFW_PROBE {"kind":"step","step":"producer-entered"}');
- await produceCheckpoint(checkpoint,{variant:'principal',budgetQualification:true,deferWait:true});
+ await withFixedBudgetOwner('positive_producer','output/finite-budget/owned/positive_producer',()=>produceCheckpoint(checkpoint,{variant:'principal',budgetQualification:true,deferWait:true}));
  console.info('AFW_PROBE {"kind":"step","step":"producer-returned"}');
  const returnedAt=Date.now();
  const {manifest,data}=await verifyBudgetCheckpoint('positive',checkpoint);
@@ -904,6 +1015,7 @@ export async function verifyBudgetCheckpoint(kind,root){
  return value;
 }
 export async function runBudgetConsumer(kind,root){
+ if(!fixedBudgetOwners.getStore())return withFixedBudgetOwner('P1','output/finite-budget/positive',()=>runBudgetConsumer(kind,root),{recovery:true});
  positiveKind(kind);await verifyBudgetCheckpoint(kind,root);
  const {recoverCheckpoint,observeOriginalAlarm}=await import('./finite-owner-cleanup-persistence.mjs');
  const {plain}=await import('./finite-first-connection-publication.mjs');
@@ -926,6 +1038,37 @@ export async function runBudgetConsumer(kind,root){
 
 const budgetFixedFlags={operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
 const fixedBudgetPause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+
+function fixedQueueCausality(value){
+ const held=value.heldOperations??[];if(held.length!==2)return false;
+ const [a,b]=held,child=a.childOrdinal;if(!Number.isSafeInteger(child)||child<1||b.childOrdinal!==child)return false;
+ if(a.ordinal===b.ordinal||a.outwardSettledAt!==null||b.outwardSettledAt!==null)return false;
+ if(!held.every(op=>op.sample?.childOrdinal===child&&op.sample.family===(value.caseName.startsWith('R')?1:2)&&op.sample.active===2&&op.sample.queued>0&&op.sample.method===op.method&&op.nativeSettledAt!==null&&op.heldSequence>op.sample.sequence))return false;
+ const start=Math.min(a.sample.sequence,b.sample.sequence),end=Math.max(a.heldSequence,b.heldSequence);
+ return !(value.observerEvents??[]).some(e=>e.kind==='outward_settled'&&e.sequence>start&&e.sequence<end);
+}
+function fixedChildDeadlineProof(before,after){
+ assert.equal(before.observerInvalid,false);assert.equal(after.observerInvalid,false);
+ assert.equal(before.children.length,1,'same selected SDK child only');const child=before.children[0],last=after.children.find(c=>c.childOrdinal===child.childOrdinal);assert(last);
+ assert.equal(child.waitStatus,'rejected','actual original child wait rejected');assert(Number.isSafeInteger(child.deadline)&&Number.isSafeInteger(child.waitSettledAt));assert(child.waitSettledAt>=child.deadline&&child.waitSettledAt<child.deadline+5000,'actual original deadline denial timing');
+ assert.equal(child.parentAliveAtAbort,true);assert(child.abortAt>=child.deadline&&child.abortAt<child.deadline+5000);
+ assert.equal(before.outwardPending,2);assert.equal(before.heldNativeSettled,2);assert(fixedQueueCausality(before),'two actual held operations bound to same current queue');
+ assert(after.released&&after.outwardPending===0&&after.nativeUnsettled===0);return {childOrdinal:child.childOrdinal,deadline:child.deadline,waitSettledAt:child.waitSettledAt,abortAt:child.abortAt,workStatusAtHold:child.workStatus,workStatusAfterRelease:last.workStatus,waitStatus:last.waitStatus,denialAfterDeadline:true,parentAlive:true,queueCausal:true};
+}
+function fixedNegativeBoundaryProof(value,family){
+ const events=value.capEvents??[],method='list',childs=new Set(events.map(e=>e.childOrdinal));
+ assert.equal(value.observerInvalid,false);assert.equal(events.length,1,'one actual reached final list cap');const e=events[0];assert.equal(e.family,family);assert(e.childOrdinal>0);assert.equal(childs.size,1);assert.equal(e.kind,'cap_'+method);assert.equal(e.counter,2);assert.equal(e.limit,2);assert.equal(value.lists,2);assert.equal(value.thirdListEntered,false);
+ if(family===1)assert.equal(value.gets,200);else{assert.equal(value.gets,1);assert.equal(value.deletes,200);assert.equal(value.grantDeleteEntered,false);}
+ return {method,childOrdinal:e.childOrdinal,counter:e.counter,limit:e.limit,exactPrecedingPages:2};
+}
+function fixedSendSdkProof(value,rows,{negative=false}={}){
+ for(const name of ['sendCalls','sdkCalls']){const c=value[name];assert.equal(c.invoke,1,'actual single '+name+' invocation');assert.equal(c.sync_throw,0);assert.equal(c.fulfilled+c.rejected,1);}
+ assert.equal(value.sendCalls.fulfilled,1,'original SEND ACK settled before SDK');assert.equal(value.sendCalls.sendHashes.length,1);
+ const sendRows=rows.filter(([key])=>key.startsWith('afw.finite-owner-cleanup.v1:')&&key.endsWith(':sdk_revoke:send'));assert.equal(sendRows.length,1);
+ assert.equal(JSON.parse(sendRows[0][1]).recordHash,value.sendCalls.sendHashes[0]);if(negative)assert.equal(value.sdkCalls.rejected,1,'actual SDK rejection for negative boundary');
+ return {sendInvocations:1,sendAcknowledged:true,durablePendingSendHash:value.sendCalls.sendHashes[0],sdkInvocations:1,sdkOutcome:value.sdkCalls.fulfilled?'fulfilled':'rejected'};
+}
+
 async function fixedBudgetWait(read,predicate,deadline){
  for(;;){const value=await read();if(predicate(value))return value;assert(Date.now()<deadline,'SYN fixed budget observation deadline');await fixedBudgetPause(20);}
 }
@@ -938,13 +1081,14 @@ async function fixedBudgetPersist(name,value){
 }
 export async function runBudgetReadonlyCase(caseName){
  assert.equal(process.env.AFW_BUDGET_GROUP,'readonly');assert(['R1','R2','R3'].includes(caseName));
+ if(!fixedBudgetOwners.getStore())return withFixedBudgetOwner(caseName,'output/finite-budget/readonly/'+caseName,()=>runBudgetReadonlyCase(caseName));
  const {ownerReferenceFixture,prepareOwnerReference,recordOwnerReference}=await import('./finite-owner-cleanup.mjs'),{plain}=await import('./finite-first-connection-publication.mjs');
  const cleanups=[];let f,response,rootDuring,rootAfter,rootBefore,beforeRelease,afterRelease;
  try{
-  f=await ownerReferenceFixture({after(fn){cleanups.push(fn);}},{cleanupCheckpoint:true,budgetQualification:true});f.finiteBudgetReadonlyCase=caseName;
+  f=await ownerReferenceFixture({after(fn){cleanups.push(fn);registerFixedOwnedCleanup(fn);}},{cleanupCheckpoint:true,budgetQualification:true});f.finiteBudgetReadonlyCase=caseName;
   const prepared=await prepareOwnerReference(f);rootBefore=await plain(f.stub.firstConnectionAvailability());assert.equal(rootBefore.available,true);
   const issue=prepared.issue();
-  if(caseName==='R3'){const held=await fixedBudgetWait(()=>plain(f.stub.finiteBudgetSignals()),s=>s.heldNativeSettled===2,Date.now()+30000);assert.equal(held.queueObserverInvalid,false);assert(held.queuedAtHold>0,'actual populated readonly queue');}
+  if(caseName==='R3'){const held=await fixedBudgetWait(()=>plain(f.stub.finiteBudgetSignals()),s=>s.heldNativeSettled===2,Date.now()+30000);assert.equal(held.queueObserverInvalid,false);assert(fixedQueueCausality(held),'actual causal populated readonly queue');}
   response=await issue;await response.body?.cancel();
   const observed=await plain(f.stub.ownerReferenceObserve());
   if(caseName==='R3'){
@@ -963,12 +1107,13 @@ export async function runBudgetReadonlyCase(caseName){
   });
   const lineage={I0:plan.I0,C0:plan.C0,C1:plan.C1,sdkRootHash:sdkRoot.recordHash,sdkReferenceHash:sdkReference?.recordHash??null,graphs};
 
-  const facts={...native,completeWrites:observed.completeWrites,completeNormal:observed.completeNormal,responseStatus:response.status,referenceRows:reference.rows.filter(([key])=>key.endsWith(':reference')).length,
+  const deadlineProof=caseName==='R3'?fixedChildDeadlineProof(beforeRelease,afterRelease):null,boundaryProof=caseName==='R2'?fixedNegativeBoundaryProof(native,1):null;
+  const facts={...native,deadlineProof,boundaryProof,completeWrites:observed.completeWrites,completeNormal:observed.completeNormal,responseStatus:response.status,referenceRows:reference.rows.filter(([key])=>key.endsWith(':reference')).length,
    referenceBefore302:referenceIndex>=0&&responseIndex>referenceIndex,sdkReplay:Math.max(0,observed.completeWrites-1),rootBefore,rootDuring,rootAfter,
-   originalChildElapsedMs:observed.lookupChild?.actualElapsedMs??null,callsAfterRelease:beforeRelease?native.nativeInvoked-beforeRelease.nativeInvoked:0,lateReference:caseName==='R3'&&reference.rows.some(([key])=>key.endsWith(':reference'))};
-  return await fixedBudgetPersist('readonly/'+caseName,{...fixedBudgetEnvelope('consumer','readonly',[caseName],{consumerGroup:'readonly'}),caseName,facts,record,lineage,privateLineage:{sdkRoot,sdkReference,originalCleanupPlan:plan,actualBuildPair:f.firstConnectionBuild},diagnostics:{epochs:structuredClone(f.budgetEpochs)},preparedInputs:f.firstConnectionBuild.budget});
+   originalChildElapsedMs:deadlineProof?deadlineProof.waitSettledAt-(deadlineProof.deadline-5000):null,callsAfterRelease:beforeRelease?native.nativeInvoked-beforeRelease.nativeInvoked:0,lateReference:caseName==='R3'&&reference.rows.some(([key])=>key.endsWith(':reference'))};
+  return ({...fixedBudgetEnvelope('consumer','readonly',[caseName],{consumerGroup:'readonly'}),caseName,facts,record,lineage,privateLineage:{sdkRoot,sdkReference,originalCleanupPlan:plan,actualBuildPair:f.firstConnectionBuild},diagnostics:{epochs:structuredClone(f.budgetEpochs)},preparedInputs:f.firstConnectionBuild.budget});
  }finally{
-  if(f){try{await f.stub.finiteBudgetRelease();await f.stub.finiteBudgetRestore();}finally{for(const cleanup of cleanups.reverse())await cleanup();}}
+  // The scope owns callbacks and partial allocations even when external f assignment failed.
  }
 }
 async function prepareReductionProducer(root){
@@ -999,7 +1144,7 @@ async function observeFixedReduction(f,caseName,shared){
  try{
   if(caseName==='D4'){
    const held=await fixedBudgetWait(()=>plain(f.stub.finiteBudgetSignals()),s=>s.heldNativeSettled===2,f.plan.C0+15000);
-   assert.equal(held.queueObserverInvalid,false);assert(held.queuedAtHold>0,'actual populated reduction queue');
+   assert.equal(held.queueObserverInvalid,false);assert(fixedQueueCausality(held),'actual causal populated reduction queue');
   }
   const original=await observeOriginalAlarm(f);
   if(caseName==='D4'){
@@ -1012,11 +1157,12 @@ async function observeFixedReduction(f,caseName,shared){
   assert.equal(afterRelease.sdkObserverInvalid,false);assert.equal(afterRelease.sdkFulfilled+afterRelease.sdkRejected,1,'actual SDK promise outcome observed exactly once');
   const sdkObserved=ownerRows.some(([key])=>key.endsWith(':sdk_revoke:observed')),ownerReceipt=ownerRows.some(([key])=>key.endsWith(':receipt'));
   await f.captureBudgetEpoch('fixed-'+caseName+'-after-original-alarm');
-  const facts={...afterRelease,sdkReplay:Math.max(0,afterRelease.sdkFulfilled+afterRelease.sdkRejected-1),sdkReturned:afterRelease.sdkFulfilled===1,sdkObserved,ownerReceipt,completed:state.status==='complete',pendingPreserved:state.status!=='complete',
-   uncertainSendRetried:original.signal.entered!==1,rootBefore:f.budgetRootBefore,rootDuring,rootAfter,
-   originalChildElapsedMs:caseName==='D4'?Math.max(0,...final.children.filter(child=>child.startedAt>=f.plan.C0).map(child=>child.elapsedMs)):null,
+  const deadlineProof=caseName==='D4'?fixedChildDeadlineProof(beforeRelease,afterRelease):null,boundaryProof=caseName==='D3'?fixedNegativeBoundaryProof(afterRelease,2):null,sendSdkProof=fixedSendSdkProof(afterRelease,rows,{negative:caseName!=='D1'});
+  const facts={...afterRelease,deadlineProof,boundaryProof,sendSdkProof,sdkReplay:Math.max(0,afterRelease.sdkFulfilled+afterRelease.sdkRejected-1),sdkReturned:afterRelease.sdkFulfilled===1,sdkObserved,ownerReceipt,completed:state.status==='complete',pendingPreserved:state.status!=='complete',
+   uncertainSendRetried:afterRelease.sendCalls.invoke!==1,rootBefore:f.budgetRootBefore,rootDuring,rootAfter,
+   originalChildElapsedMs:deadlineProof?deadlineProof.waitSettledAt-(deadlineProof.deadline-5000):null,
    callsAfterRelease:beforeRelease?afterRelease.nativeInvoked-beforeRelease.nativeInvoked:0,falseSdkReturn:caseName==='D4'&&afterRelease.sdkFulfilled>0};
-  return await fixedBudgetPersist('reduction/'+caseName,{...fixedBudgetEnvelope('consumer','reduction',[caseName],{consumerGroup:shared.group}),caseName,plan:f.plan,facts,alarm:original,final,
+  return ({...fixedBudgetEnvelope('consumer','reduction',[caseName],{consumerGroup:shared.group}),caseName,plan:f.plan,facts,alarm:original,final,
    producer:{unexchanged:true,codeExchanged:false,normalComplete:f.checkpoint.budget.ownerReference.completeNormal,sameCheckpoint:true,consumerGroup:shared.group,manifestSha256:f.recovery.manifestSha256,artifactId:shared.producerArtifactId,digest:shared.producerDigest},
    recovery:{...f.recovery,pairSize:2,pairReady:shared.pairReady,restart:false,coldInventoryVerified:true,bothAliases:f.kvSemanticProof.bothAliases,pairEntered:shared.entered,consumerFinished:Date.now()},
    diagnostics:{epochs:structuredClone(f.budgetEpochs)},preparedInputs:f.checkpoint.budget.preparedInputs});
@@ -1054,13 +1200,146 @@ async function runActualBudgetWrapperControl(family){
  new Script(script,{filename:'SYN-fixed-actual-wrapper-control.mjs'}).runInContext(context,{timeout:1000});
  let timer;try{return await Promise.race([context.__controlPromise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('SYN inert wrapper control timeout')),3000);})]);}finally{clearTimeout(timer);}
 }
+
+async function runFixedObserverControls(){
+ const {Script,createContext}=await import('node:vm'),{finiteBudgetSynAdapterSource,finiteBudgetSynLibraryPrefix}=await import('./finite-owner-cleanup.mjs');
+ const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer,console:{info(){},error(){}}});
+ const body=String.raw`
+ globalThis.__observerControl=(async()=>{
+  const records=[],kv={},owner={env:{AFW_FINITE_OWNER_OAUTH_KV:kv},ctx:{storage:{}}};for(const method of ['get','list','put','delete'])kv[method]=async()=>null;
+  const state=__afwFiniteBudgetState(owner,'D4'),abort=new AbortController(),parent=new AbortController(),lease={signal:abort.signal};
+  let resolveWork,rejectWait;const work=new Promise(r=>{resolveWork=r;}),wait=new Promise((_,r)=>{rejectWait=r;}),deadline=Date.now()+15,error=Error('SYN inert deadline');
+  if(__afwSynWork(lease,deadline,work,parent.signal)!==work||__afwSynWait(lease,wait)!==wait)throw Error('SYN original Promise identity changed');
+  const guard=()=>{};__afwSynSelectGuard(kv,lease,guard,2);
+  await new Promise(resolve=>setTimeout(()=>{abort.abort();rejectWait(error);resolve();},20));for(let i=0;i<4;i++)await Promise.resolve();
+  const child=state.children[0];if(child.workStatus!=='pending'||child.waitStatus!=='rejected'||child.waitError!==error||child.deadline!==deadline||!child.parentAliveAtAbort||child.abortAt<deadline)throw Error('SYN actual child observation mismatch');
+  resolveWork('SYN inert work');await work;for(let i=0;i<4;i++)await Promise.resolve();if(child.workStatus!=='fulfilled')throw Error('SYN work never observed');
+  records.push({group:'F2',workPromiseSame:true,waitPromiseSame:true,waitErrorSame:true,separateWorkSettlement:true,actualDeadlineObserved:true,genuineBusinessRoot:false});
+  for(const kind of ['sdk','send']){
+   const helper=kind==='sdk'?__afwSynSdkCallee:__afwSynSendCallee,counts=state[kind==='sdk'?'sdkCalls':'sendCalls'],trace=[],args=[{record:{recordHash:'a'.repeat(64)}},'SYN-second'],result=Promise.resolve('SYN-result'),receiver={get method(){trace.push('getter');return function(...actual){trace.push('call');if(this!==receiver||actual[0]!==args[0]||actual[1]!==args[1])throw Error('SYN receiver or args');return result;};}};
+   const arg=n=>{trace.push('arg'+n);return args[n];},actual=helper(receiver.method,receiver,kv,guard)(arg(0),arg(1));
+   if(actual!==result||trace.join('|')!=='getter|arg0|arg1|call')throw Error('SYN callee order or result');await actual;for(let i=0;i<4;i++)await Promise.resolve();
+   const before=counts.invoke,thrown=Error('SYN original sync'),badReceiver={get method(){trace.push('sync-getter');return()=>{throw thrown;};}};
+   try{helper(badReceiver.method,badReceiver,kv,guard)(...args);throw Error('SYN missing sync throw');}catch(e){if(e!==thrown)throw e;}if(counts.invoke!==before+1||counts.sync_throw!==1)throw Error('SYN sync count');
+   const getterError=Error('SYN getter'),argError=Error('SYN arg'),prior=counts.invoke;
+   try{helper(({get method(){throw getterError;}}).method,receiver,kv,guard)(...args);}catch(e){if(e!==getterError)throw e;}
+   try{helper(receiver.method,receiver,kv,guard)((()=>{throw argError;})(),args[1]);}catch(e){if(e!==argError)throw e;}
+   if(counts.invoke!==prior)throw Error('SYN getter/arg counted as invocation');
+   const rejection=Error('SYN original rejection'),promise=Promise.reject(rejection);Object.defineProperty(promise,'then',{get(){throw Error('SYN then getter read');}});
+   const returned=helper(()=>promise,receiver,kv,guard)(...args);if(returned!==promise)throw Error('SYN rejected promise replaced');try{await returned;}catch(e){if(e!==rejection)throw e;}
+   for(let i=0;i<4;i++)await Promise.resolve();if(counts.rejected!==1||counts.fulfilled!==1)throw Error('SYN real outcomes not observed');
+   records.push({group:'F4',kind,getterArgumentCallOrder:true,receiverArgsPreserved:true,resultPromiseSame:true,syncErrorSame:true,rejectionSame:true,getterArgThrowInvocations:0,intrinsicThen:true,actualCounts:{sendCalls:state.sendCalls,sdkCalls:state.sdkCalls}});
+  }
+  return records;
+ })();
+`;
+ new Script('class Initial{}\nconst __afwFiniteBudgetFamily="reduction";\n'+finiteBudgetSynAdapterSource+'\n'+finiteBudgetSynLibraryPrefix+'\n'+body).runInContext(context,{timeout:1000});
+ const proof=await context.__observerControl;const counts=proof.at(-1).actualCounts;assert.throws(()=>fixedSendSdkProof(counts,[]),'actual duplicate SEND or SDK attempts rejected');for(const row of proof){delete row.actualCounts;row.duplicateAttemptsRejected=true;}return proof;
+}
+async function runFixedFacetControls(){
+ const {Script,createContext}=await import('node:vm'),raw=await readFile('lib/mcp-qa-finite-owner-cleanup.mjs','utf8'),names=['readonlyGrantKv','reductionKv'];
+ // Exercise exact protected facet bodies; splice ONLY the approved queue/cap observations using the same structural compiler.
+ const selected=await validateBudgetPreparedSource({path:'lib/mcp-qa-finite-owner-cleanup.mjs',role:'QA',prepared:raw,raw});
+ assert(selected);const transformed=transformBudgetPreparedSource(raw,'lib/mcp-qa-finite-owner-cleanup.mjs','QA');
+ const observed=await instrumentFixedSynLibrary(transformed.source,'lib/mcp-qa-finite-owner-cleanup.mjs',null),prepared=sourceAST(observed.source,'fixed-pure-prepared-facets');
+ const bodies=names.map(name=>{const list=prepared.statements.filter(n=>ts.isFunctionDeclaration(n)&&n.name?.text===name);assert.equal(list.length,1);return list[0].getText(prepared);});
+ const stage=await readFile('lib/mcp-qa-finite-stage-work.mjs','utf8'),stageAST=sourceAST(stage,'protected-retain'),retain=stageAST.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='retainFiniteOwnerStagePromise').getText(stageAST).replace('export function retainFiniteOwnerStagePromise','function retain');
+ const records=await readFile('lib/mcp-qa-finite-initial-material-records.mjs','utf8'),recordAST=sourceAST(records,'protected-own'),own=recordAST.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='initialOwn').getText(recordAST).replace('export function initialOwn','function own');
+ const {finiteBudgetSynAdapterSource,finiteBudgetSynLibraryPrefix}=await import('./finite-owner-cleanup.mjs');
+ const evidence=await readFile('lib/mcp-finite-evidence.mjs','utf8'),evidenceAST=sourceAST(evidence,'protected-fields'),fieldsSource=evidenceAST.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='finiteFields').getText(evidenceAST).replace('export function','function');
+ const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer});
+ const body=String.raw`
+ globalThis.__facetControl=(async()=>{
+  const proof=[];
+  for(const family of [1,2]){
+   const kv={},owner={env:{AFW_FINITE_OWNER_OAUTH_KV:kv},ctx:{storage:{}}},subject='SYN-facet',id='AAAAAAAAAAAAAAAA',prefix=(family===1?'grant:':'token:')+subject+':'+(family===1?'':id+':');
+   const calls=[],methods={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}};
+   for(const method of ['get','list','delete'])kv[method]=methods[method];kv.put=async()=>{};
+   const state=__afwFiniteBudgetState(owner,family===1?'R3':'D4');state.grantKey='grant:'+subject+':'+id;__afwFiniteBudgetInstall(owner,state);
+   const guard=()=>{},child={signal:new AbortController().signal};__afwSynSelectGuard(kv,child,guard,family);
+   const captured={get:kv.get,list:kv.list,delete:kv.delete},facet=family===1?readonlyGrantKv(kv,captured,subject,guard):reductionKv(kv,captured,subject,id,guard).facet;
+   const jobs=[];for(let n=0;n<6;n++)jobs.push(family===1?facet.get('grant:'+subject+':'+id,{type:'json'}):facet.delete(prefix+'SYN'+n));
+   for(const p of jobs)p.catch(()=>{});for(let i=0;i<12;i++)await Promise.resolve();
+   const actual=await owner.finiteBudgetSignals();if(actual.heldNativeSettled!==2||actual.outwardPending!==2||actual.nativeInvoked!==2)throw Error('SYN actual facet did not hold exactly two');
+   proof.push({family,signals:JSON.parse(JSON.stringify(actual))});
+   await owner.finiteBudgetRelease();await Promise.allSettled(jobs);await owner.finiteBudgetRestore();
+   // Actual final cap disjunct vs earlier invalid argument on fresh protected facet.
+   const alias={},simple={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}},capOwner={env:{AFW_FINITE_OWNER_OAUTH_KV:alias},ctx:{storage:{}}};Object.assign(alias,simple,{put:async()=>{}});
+   const capState=__afwFiniteBudgetState(capOwner,family===1?'R2':'D3'),capGuard=()=>{},capChild={signal:new AbortController().signal};__afwSynSelectGuard(alias,capChild,capGuard,family);
+   const capFacet=family===1?readonlyGrantKv(alias,simple,subject,capGuard):reductionKv(alias,simple,subject,id,capGuard).facet;
+   for(let n=0;n<2;n++)await capFacet.list({prefix});
+   let rejected=false;try{await capFacet.list({prefix});}catch{rejected=true;}if(!rejected||capState.capEvents.length!==1||capState.capEvents[0].counter!==2)throw Error('SYN actual list cap not reached');
+   const earlier=family===1?readonlyGrantKv(alias,simple,subject,capGuard):reductionKv(alias,simple,subject,id,capGuard).facet,before=capState.capEvents.length;
+   try{await earlier.list({prefix:'invalid'});}catch{}if(capState.capEvents.length!==before)throw Error('SYN early failure mistaken for cap');
+   proof.push({family,boundaryReached:true,earlierFailureExcluded:true,actualProtectedFacet:true});
+  }return proof;
+ })();
+`;
+ const prelude="class Initial{}\nconst __afwFiniteBudgetFamily='reduction';\n"+finiteBudgetSynAdapterSource+'\n'+finiteBudgetSynLibraryPrefix+"\n"+fieldsSource+"\nconst scopes={getStore(){return undefined;}},outstanding=new WeakMap();\n"+retain+"\nconst fail=()=>{throw Error('SYN facet denied');},canonical=JSON.stringify,fields=finiteFields,initialCanonical=JSON.stringify;\n"+own+"\nconst __afwBudget={reflect:fn=>(...args)=>Reflect.apply(fn,Reflect,args),readMethod:(v,k)=>v[k],facadeHolder:v=>v,facade:v=>v,guardValue:e=>e};\n"+bodies.join('\n')+'\n'+body;
+ new Script(prelude).runInContext(context,{timeout:1000});const proof=await context.__facetControl;
+ for(const item of proof.filter(p=>p.signals))assert(fixedQueueCausality(item.signals),'actual facet native entry current queue bound');
+ const good=proof.find(p=>p.signals)?.signals;for(const mutate of [x=>{x.heldOperations[0].sample.queued=0;},x=>{x.heldOperations[1].sample.active=1;},x=>{x.heldOperations[1].sample.family=3;},x=>{x.observerEvents.push({kind:'outward_settled',sequence:x.heldOperations[0].sample.sequence+0.5});},x=>{x.heldOperations[1].childOrdinal++;},x=>{x.heldOperations[0].outwardSettledAt=Date.now();}]){const bad=structuredClone(good);mutate(bad);assert.equal(fixedQueueCausality(bad),false);}
+ return proof.map(p=>p.signals?{family:p.family,currentQueueWithTwoHeld:true,actualNativeInvocations:p.signals.nativeInvoked,genuineBusinessRoot:false}:p);
+}
+
+
+async function runFixedOwnershipControls(){
+ const results=[];
+ for(const scenario of ['normal','preassignment','multiple_cleanup']){
+  const root='output/finite-budget/round1-controls/ownership-'+scenario,persist=join(root,'source');await mkdir(persist,{recursive:true});await writeFile(join(persist,'native.bin'),'SYN cold database bytes');
+  const trace=[],primary=Error('SYN original preassignment'),releaseError=Error('SYN release'),restoreError=Error('SYN restore'),disposeError=Error('SYN dispose');let actual,record;
+  try{
+   await withFixedBudgetOwner('R1',join(root,'preserved'),async()=>{
+    record=beginFixedBudgetOwnedAllocation();record.attachPersist(persist);
+    const fixture={budgetEpochs:[],captureBudgetEpoch:async reason=>{trace.push('epoch');fixture.budgetEpochs.push({reason,role:'QA',epoch:0});},stub:{async finiteBudgetRelease(){trace.push('release');if(scenario==='multiple_cleanup')throw releaseError;},async finiteBudgetRestore(){trace.push('restore');if(scenario==='multiple_cleanup')throw restoreError;}}};
+    record.attachFixture(fixture);record.attachMiniflare({async dispose(){trace.push('dispose');if(scenario==='multiple_cleanup')throw disposeError;await writeFile(join(persist,'terminal.bin'),'SYN final cold bytes');}});
+    registerFixedOwnedCleanup(async()=>{trace.push('cleanup-one');if(scenario==='multiple_cleanup')throw Error('SYN callback one');await record.beforeDelete();trace.push('delete-after-archive');});
+    registerFixedOwnedCleanup(async()=>{trace.push('cleanup-two');if(scenario==='multiple_cleanup')throw Error('SYN callback two');});
+    if(scenario==='preassignment'||scenario==='multiple_cleanup')throw primary;return {caseName:null};
+   });
+  }catch(error){actual=error;}
+  assert(trace.indexOf('epoch')<trace.indexOf('dispose'));assert(trace.includes('release')&&trace.includes('restore')&&trace.includes('cleanup-one')&&trace.includes('cleanup-two'));
+  if(scenario==='normal'){assert.equal(actual,undefined);assert.equal(record.archived,true);assert((await readFile(join(record.archive.path,'native.bin'))).equals(await readFile(join(persist,'native.bin'))));assert(trace.includes('delete-after-archive'));}
+  else{assert.equal(actual,primary);const saved=fixedBudgetOwnerErrors.get(actual);assert.equal(saved.primary,primary);if(scenario==='multiple_cleanup'){assert(saved.failures.some(f=>f.error===releaseError));assert(saved.failures.some(f=>f.error===restoreError));assert(saved.failures.some(f=>f.error===disposeError));assert.equal(saved.failures.length,5);}else{assert.equal(saved.failures.length,0);assert.equal(record.archived,true);}}
+  const before=trace.length;try{await record.dispose();}catch{}assert.equal(trace.length,before,'idempotent owned disposal');
+  if(scenario==='multiple_cleanup'){assert.equal(record.disposalUncertain,true);assert.equal(record.archived,false);assert.equal(await record.beforeDelete(),false);let assigned=false;await assert.rejects(()=>withFixedBudgetOwner('R2',join(root,'blocked-next'),async()=>{beginFixedBudgetOwnedAllocation();assigned=true;}),/previous owned disposal uncertain before allocation/);assert.equal(assigned,false);}
+  results.push({scenario,primaryIdentityPreserved:scenario==='normal'?true:actual===primary,allPhasesAttempted:true,epochBeforeDispose:true,coldBytesVerified:record.archived,ancillaryCount:record.failures.length+(scenario==='multiple_cleanup'?2:0)});
+ }
+ return results;
+}
+async function runFixedManifestControls(){
+ const job='reduction_prepare',cfg=fixedBudgetJobs[job],sourceTree='d'.repeat(40),context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:'tokenizartinfo-ops/agent-friendly-web',ref:'refs/heads/feat/finite-native-cleanup-20261101',sourceSha:process.env.GITHUB_SHA,runId:process.env.GITHUB_RUN_ID,runAttempt:1,kind:cfg.kind},expected={job,sourceTree,artifactId:'123',digest:'a'.repeat(64),context};
+ const manifest={purpose:'afw.fixed-budget-job.syn.v1',repository:context.repository,ref:context.ref,source:context.sourceSha,sourceTree,run:context.runId,attempt:1,job,...cfg,commandSucceeded:true,...budgetFixedFlags};
+ assert.equal(validateFixedBudgetJobManifest(manifest,expected).fullIdentityVerified,true);const cases=[];
+ for(const key of ['purpose','repository','ref','source','sourceTree','run','attempt','job','role','group','lane','kind','cases','commandSucceeded']){
+  const bad=structuredClone(manifest);bad[key]=key==='attempt'?2:key==='cases'?['D1']:key==='commandSucceeded'?false:'invalid';let mounted=false;assert.throws(()=>{validateFixedBudgetJobManifest(bad,expected);mounted=true;});assert.equal(mounted,false);cases.push(key);
+ }
+ for(const key of ['artifactId','digest','context']){const bad={...expected,[key]:key==='context'?{...context,kind:'checkpoint'}:'invalid'};let mounted=false;assert.throws(()=>{validateFixedBudgetJobManifest(manifest,bad);mounted=true;});assert.equal(mounted,false);cases.push(key);}
+ return {mutations:cases.length,allRejectedBeforeMount:true,fullIdentity:true};
+}
+async function runFixedPeerWaitControls(){
+ const results=[];
+ for(const scenario of ['after_30_seconds','never_ready','headroom_exhausted','request_failure']){
+  let time=1000000,queries=0,last,requested=[],actualError;const startedAt=scenario==='headroom_exhausted'?time-780000:time-720000,sentinel=Error('SYN request failure');
+  try{await collectFixedBudgetPeers({startedAt,now:()=>time,read:async timeout=>{queries++;assert(timeout>0&&timeout<=10000);if(scenario==='request_failure')throw sentinel;return {ready:scenario==='after_30_seconds'&&time>=1035000,artifactCount:queries,terminalPeers:queries>7?6:4};},sleep:async ms=>{requested.push(ms);time+=ms;},persist:async facts=>{last=structuredClone(facts);}});}catch(error){actualError=error;}
+  if(scenario==='after_30_seconds'){assert.equal(actualError,undefined);assert(time>=1035000);assert.equal(last.status,'ready');}
+  else{assert(actualError);assert.equal(last.status,'failed');if(scenario==='headroom_exhausted')assert.equal(queries,0);if(scenario==='request_failure')assert.equal(actualError,sentinel);}
+  assert(last.remaining>=0);assert(last.queries.every(q=>q.actualWaitMs===q.requestedWaitMs));results.push({scenario,queries,elapsed:time-1000000,preserved:true,headroom:last.remaining,requestedWaitMs:requested.reduce((n,v)=>n+v,0)});
+ }return results;
+}
+
 async function verifyNativePreparationRound1(){
- const cases=[];let stage='readonly',error=null;
- try{cases.push(await runActualBudgetWrapperControl('readonly'));stage='reduction';cases.push(await runActualBudgetWrapperControl('reduction'));stage='complete';}
- catch(value){error={name:['Error','AssertionError','TypeError','SyntaxError'].includes(value?.name)?value.name:'other',messageSha256:hash(String(value?.message??''))};}
- const r=cases.find(value=>value.family==='readonly'),d=cases.find(value=>value.family==='reduction'),passed=stage==='complete'&&r.held&&d.held&&cases.every(value=>value.originalMethodsRestored&&value.baseReceiversPreserved&&value.outwardSettledAfterRelease===2);
- const result={purpose:'afw.native-preparation-round1-controls.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,phase:process.env.AFW_BUDGET_CONTROL_PHASE??'unspecified',groups:[{group:'F1',stage,passed,cases,error},...['F2','F3','F4','F5','F6','F7'].map(group=>({group,status:'pending_implementation',businessCases:0}))],passed,causalF1Deficit:stage==='complete'&&r?.held===true&&d?.lostInterception===true,I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};
- await mkdir('output/finite-budget/round1-controls',{recursive:true});await writeFile('output/finite-budget/round1-controls/result.json',JSON.stringify(result,null,2));assert.equal(passed,true,'actual wrapper ordering preserves reduction interception and held ACKs');return result;
+ const groups=[];let stage='F1',error=null;
+ try{
+  const cases=[await runActualBudgetWrapperControl('readonly'),await runActualBudgetWrapperControl('reduction')];assert(cases.every(v=>v.held&&v.originalMethodsRestored&&v.baseReceiversPreserved&&v.outwardSettledAfterRelease===2));groups.push({group:'F1',passed:true,cases});
+  stage='F2_F4';const observers=await runFixedObserverControls();groups.push({group:'F2',passed:true,cases:observers.filter(v=>v.group==='F2')});
+  stage='F3_F4';const facets=await runFixedFacetControls();groups.push({group:'F3',passed:true,cases:facets.filter(v=>v.currentQueueWithTwoHeld)});groups.push({group:'F4',passed:true,cases:[...observers.filter(v=>v.group==='F4'),...facets.filter(v=>v.boundaryReached)]});
+  stage='F5';await verifyFixedPairDisposer();groups.push({group:'F5',passed:true,cases:await runFixedOwnershipControls(),actualPairedDisposerControl:true});
+  stage='F6';groups.push({group:'F6',passed:true,cases:await runFixedManifestControls()});
+  stage='F7';groups.push({group:'F7',passed:true,cases:await runFixedPeerWaitControls()});stage='complete';
+ }catch(value){error={name:['Error','AssertionError','TypeError','SyntaxError'].includes(value?.name)?value.name:'other',messageSha256:hash(String(value?.message??''))};}
+ const passed=stage==='complete'&&groups.length===7&&groups.every(g=>g.passed),result={purpose:'afw.native-preparation-round1-controls.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,phase:process.env.AFW_BUDGET_CONTROL_PHASE??'unspecified',stage,error,groups,passed,I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};
+ await mkdir('output/finite-budget/round1-controls',{recursive:true});await writeFile('output/finite-budget/round1-controls/result.json',JSON.stringify(result,null,2));assert.equal(passed,true,'all seven fixed preparation control groups');return result;
 }
 
 async function verifyFixedPairDisposer(){
@@ -1086,12 +1365,13 @@ export async function prepareBudgetReductionPair(group,root){
  const {recoverCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs'),{plain}=await import('./finite-first-connection-publication.mjs');
  const cases=group==='reduction_a'?['D1','D2']:['D3','D4'],fixtures=[],results=new Map(),shared={group,entered:Date.now(),pairReady:null,producerArtifactId:process.env.AFW_BUDGET_PRODUCER_ARTIFACT_ID,producerDigest:process.env.AFW_BUDGET_PRODUCER_DIGEST};
  let closing;
- const dispose=()=>closing??=disposeFixedBudgetPair(fixtures);
+ const frames=new Map(cases.map(caseName=>{const frame={caseName,root:'output/finite-budget/reduction/'+caseName,records:[],callbacks:[],failures:[],closed:null};const record=createFixedOwnedRecord(frame,'recovery');record.attachPersist(join('output','r2-native-budget-'+caseName,'state'));return [caseName,frame];}));
+ const dispose=()=>closing??=(async()=>{await Promise.allSettled([...results.values()]);const settled=await Promise.allSettled([...frames.values()].map(frame=>closeFixedOwnedFrame(frame,null)));const failure=settled.find(s=>s.status==='rejected');if(failure)throw failure.reason;})();
  try{
   // Register each fulfilled mount immediately, including a late sibling after a
   // partial rejection. No replica starts after its sibling passes C0.
   const mounts=await Promise.allSettled(cases.map(async caseName=>{
-   const f=await recoverCheckpoint(join(root,'native'),{label:'budget-'+caseName,restart:false,budgetQualification:true});fixtures.push(f);f.budgetCase=caseName;
+   assertFixedBudgetAllocationSafe();const f=await fixedBudgetOwners.run(frames.get(caseName),()=>recoverCheckpoint(join(root,'native'),{label:'budget-'+caseName,restart:false,budgetQualification:true}));fixtures.push(f);f.budgetCase=caseName;
    f.budgetRootBefore=await plain(f.stub.firstConnectionAvailability());assert.equal(f.budgetRootBefore.available,true);
    const input=await plain(f.stub.finiteBudgetReduction(caseName));assert.equal(input.sameKvBinding,true);
    f.budgetInputReady=Date.now();assert(f.budgetInputReady<=f.plan.C0-30000);return f;
@@ -1099,9 +1379,43 @@ export async function prepareBudgetReductionPair(group,root){
   const rejected=mounts.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;
   shared.pairReady=Math.max(...fixtures.map(f=>f.budgetInputReady));assert(shared.pairReady<=verified.lineage.C0-30000,'both original cold replicas and input readbacks ready');
   assert.equal(fixtures.length,2);assert(fixtures.every(f=>f.recovery.manifestSha256===verified.lineage.nativeManifestSha256));
-  for(const f of fixtures){const result=observeFixedReduction(f,f.budgetCase,shared);result.catch(()=>{});results.set(f.budgetCase,result);}
+  for(const f of fixtures){const frame=frames.get(f.budgetCase),result=fixedBudgetOwners.run(frame,async()=>{let value,primary=null;try{value=await observeFixedReduction(f,f.budgetCase,shared);}catch(error){primary=error;}const ownership=await closeFixedOwnedFrame(frame,primary);value.ownership=ownership;value.diagnostics.epochs=frame.records.flatMap(r=>r.epochs);return fixedBudgetPersist('reduction/'+f.budgetCase,value);});result.catch(()=>{});results.set(f.budgetCase,result);}
   return {result(name){assert(cases.includes(name));return results.get(name);},dispose};
- }catch(error){await dispose();throw error;}
+ }catch(error){try{await dispose();}catch(ancillary){fixedBudgetOwnerErrors.set(error,{primary:error,ancillary});}throw error;}
+}
+
+
+const fixedBudgetJobs=Object.freeze({
+ positive_prepare:{role:'producer',group:'positive',lane:'positive',kind:'checkpoint',cases:['P1']},
+ positive_consume:{role:'consumer',group:'positive',lane:'positive',kind:'positive-result',cases:['P1']},
+ reduction_prepare:{role:'producer',group:'reduction_a',lane:'reduction',kind:'reduction-checkpoint',cases:['D1','D2','D3','D4']},
+ reduction_consume_a:{role:'consumer',group:'reduction_a',lane:'reduction_a',kind:'reduction-result-a',cases:['D1','D2']},
+ readonly:{role:'consumer',group:'readonly',lane:'readonly',kind:'readonly-result',cases:['R1','R2','R3']},
+ reduction_consume_b:{role:'consumer',group:'reduction_b',lane:'reduction_b',kind:'reduction-result-b',cases:['D3','D4']}
+});
+export function validateFixedBudgetJobManifest(manifest,{job,sourceTree,artifactId,digest,context}){
+ const cfg=fixedBudgetJobs[job];assert(cfg,'fixed authenticated job role');
+ assert.match(artifactId,/^[1-9][0-9]*$/);assert.match(digest,/^[a-f0-9]{64}$/);assert.match(sourceTree,/^[a-f0-9]{40}$/);
+ const expected={purpose:'afw.fixed-budget-job.syn.v1',repository:'tokenizartinfo-ops/agent-friendly-web',ref:'refs/heads/feat/finite-native-cleanup-20261101',source:process.env.GITHUB_SHA,sourceTree,run:process.env.GITHUB_RUN_ID,attempt:1,job,role:cfg.role,group:cfg.group,lane:cfg.lane,kind:cfg.kind,cases:cfg.cases,commandSucceeded:true};
+ for(const [key,value]of Object.entries(expected))assert.deepEqual(manifest[key],value,'full inner fixed identity '+key);
+ assert.deepEqual(context,{purpose:'afw.finite-checkpoint-custody.syn.v1',repository:expected.repository,ref:expected.ref,sourceSha:expected.source,runId:expected.run,runAttempt:1,kind:cfg.kind},'same authenticated AAD identity');
+ for(const key of ['operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified'])assert.equal(manifest[key],false);
+ return {artifactId,digest,job,kind:cfg.kind,sourceTree,fullIdentityVerified:true};
+}
+export async function collectFixedBudgetPeers({startedAt,read,sleep,persist,now=Date.now}){
+ assert(Number.isSafeInteger(startedAt)&&startedAt>0);const deadline=startedAt+900000-120000,maxQueries=120,entered=now(),facts={purpose:'afw.fixed-budget-postnative-polls.syn.v1',startedAt,entered,deadline,reserveMs:120000,maxQueries,queries:[],status:'running'};
+ let value,primary=null;
+ try{
+  for(let query=0;query<maxQueries;query++){
+   const before=now(),remaining=deadline-before;assert(remaining>0,'postnative polling sealing headroom reached');
+   const timeoutMs=Math.min(10000,remaining);value=await read(timeoutMs);
+   const after=now(),ready=value.ready===true,record={query:query+1,before,after,remainingBefore:remaining,remainingAfter:deadline-after,timeoutMs,ready,artifacts:value.artifactCount,terminalPeers:value.terminalPeers,requestedWaitMs:0,actualWaitMs:0};facts.queries.push(record);await persist(facts);
+   if(ready){facts.status='ready';return value;}
+   const available=deadline-now();assert(available>0&&query+1<maxQueries,'postnative polling finite budget exhausted');
+   record.requestedWaitMs=Math.min(5000,available);const waitStart=now();await sleep(record.requestedWaitMs);record.actualWaitMs=now()-waitStart;record.afterWait=now();record.remainingAfterWait=deadline-record.afterWait;await persist(facts);
+  }
+ }catch(error){primary=error;facts.status='failed';throw error;}
+ finally{facts.finished=now();facts.remaining=deadline-facts.finished;facts.failed=primary!==null;try{await persist(facts);}catch(error){if(primary)fixedBudgetOwnerErrors.set(primary,{primary,failures:[{phase:'poll_preservation',error}]});else throw error;}}
 }
 
 export async function sealBudgetArtifact(root,kind){

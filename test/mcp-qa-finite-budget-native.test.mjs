@@ -110,8 +110,9 @@ if(group==='readonly'){
   assert.equal(f.sdkReplay,0);assert.equal(f.nativeUnsettled,0);assert.equal(f.outwardPending,0);
   if(name==='R1'){assert.equal(f.lists,2);assert.equal(f.gets,200);assert.equal(f.scopePeak,2);assert.equal(f.responseStatus,302);assert.equal(f.referenceRows,1);assert.equal(f.referenceBefore302,true);}
   else{assert.notEqual(f.responseStatus,302);assert.equal(f.referenceRows,0);assert.equal(f.thirdListEntered,false);}
+  if(name==='R2'){assert.equal(f.boundaryProof.exactPrecedingPages,2);assert.equal(f.boundaryProof.counter,2);}
   if(name==='R3'){
-   assert.equal(f.holdLabel,'holdpostnativeACK');assert.equal(f.heldNativeSettled,2);assert(f.queuedAtHold>0);
+   assert.equal(f.holdLabel,'holdpostnativeACK');assert.equal(f.heldNativeSettled,2);assert(f.queuedAtHold>0);assert.equal(f.deadlineProof.queueCausal,true);assert.equal(f.deadlineProof.denialAfterDeadline,true);
    assert.equal(f.rootBefore.available,true);assert.equal(f.rootDuring.available,false);assert.equal(f.rootDuring.live,true);assert.equal(f.rootAfter.available,true);
    assert(f.originalChildElapsedMs>=4900&&f.originalChildElapsedMs<10000);
    assert.equal(f.callsAfterRelease,0);assert.equal(f.lateReference,false);
@@ -131,11 +132,11 @@ if(group==='reduction_a'||group==='reduction_b'){
   assert.equal(result.recovery.pairSize,2);assert(result.recovery.pairReady<=result.plan.C0-30000);assert.equal(result.recovery.restart,false);
   assert.equal(result.recovery.coldInventoryVerified,true);assert.equal(result.recovery.bothAliases,true);
   assert.equal(f.input.ownTokens,name==='D2'?200:name==='D3'?201:199);assert.equal(f.input.expirationPreserved,true);assert.equal(f.foreignUnchanged,true);
-  assert(f.lists<=2&&f.deletes<=200&&f.scopePeak<=2);assert.equal(f.sdkReplay,0);
+  assert(f.lists<=2&&f.deletes<=200&&f.scopePeak<=2);assert.equal(f.sdkReplay,0);assert.equal(f.sendSdkProof.sendInvocations,1);assert.equal(f.sendSdkProof.sdkInvocations,1);assert.equal(f.sendSdkProof.sendAcknowledged,true);
   if(name==='D1'){assert.equal(f.deletes,200);assert.equal(f.grantRemaining,false);assert.equal(f.sdkReturned,true);assert.equal(f.sdkObserved,true);assert.equal(f.ownerReceipt,true);assert.equal(f.completed,true);}
   else{assert.equal(f.sdkReturned,false);assert.equal(f.sdkObserved,false);assert.equal(f.ownerReceipt,false);assert.equal(f.completed,false);assert.equal(f.uncertainSendRetried,false);}
   if(name==='D2'){assert.equal(f.deletes,200);assert.equal(f.grantRemaining,true);assert.equal(f.grantDeleteEntered,false);}
-  if(name==='D3'){assert.equal(f.thirdListEntered,false);assert.equal(f.grantRemaining,true);assert.equal(f.pendingPreserved,true);}
+  if(name==='D3'){assert.equal(f.boundaryProof.exactPrecedingPages,2);assert.equal(f.boundaryProof.counter,2);assert.equal(f.thirdListEntered,false);assert.equal(f.grantRemaining,true);assert.equal(f.pendingPreserved,true);}
   if(name==='D4'){
    assert.equal(f.holdLabel,'holdpostnativeACK');assert.equal(f.heldNativeSettled,2);assert(f.queuedAtHold>0);
    assert.equal(f.rootBefore.available,true);assert.equal(f.rootDuring.available,false);assert.equal(f.rootDuring.live,true);assert.equal(f.rootAfter.available,true);
