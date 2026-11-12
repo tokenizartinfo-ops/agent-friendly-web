@@ -1,7 +1,9 @@
-name: AFW own-import fixed literal inspection (INACTIVE)
+name: AFW own-import fixed literal inspection (SOLE INSPECTION)
 # Preparation only. One compile-only job remains behind literal false.
 'on':
-  workflow_dispatch:
+  push:
+    branches: [diag/afw-own-literal-20261112]
+    paths: [.github/workflows/afw-own-import-literal-inspection.yml]
 permissions:
   contents: read
   actions: read
@@ -10,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   inspect:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-own-literal-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-own-literal-20261112' && github.event_name == 'push' && github.run_attempt == '1' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
