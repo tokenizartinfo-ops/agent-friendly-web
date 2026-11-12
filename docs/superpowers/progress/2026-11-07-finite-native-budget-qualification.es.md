@@ -2,10 +2,10 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — Task2 formal fix round2/5 · coveringPASS / SAME scoped reviewer gate
+## CURRENT — Task2 formal fix round3/5 · persisted resource closure finding
 
-2026-11-12T13:02Z. Actual43222147327/1 Source8735e1b9 PASS syntax/lint/inactive/invalid/Q8exact8/F1–F8/all3FULLprofiles. Root independent assigned111851B ZIP13944719793/digest91a2ddba/CRC/exact10inventory/context/manifest/pinnedM61QA115/SYN0/3/3 verified in [primary proof](../reviews/2026-11-12-finite-budget-native-round2-green-primary.md).
-FINALSTOPSource2baae765/tree60dbb301/report901479df/WFf7a71f1aCOMPLETE7FIXEDsealer/manual/allfalse/codecovered/0active. Root ref/fullcontent/reportappend/complete13commit5pathcompare andvalidatedU10patches. [FULL re-review package](../reviews/2026-11-12-finite-budget-native-round2-review-package.md) includes verbatimF2/F5/F8, all7snapshots/allcommits/reportappend. Same reviewer scopeFULLd9b7..2baae765; formalround2 OPEN untilverdict. No newjobs/code/native16 authorized. Task2actual16/finalreview/GLOBAL296/PCoff stillheld; O4final0248/ownimportunresolved. Readinessfalse.
+2026-11-12T13:08Z. SAMEreviewerround2 FULLd9b7..2baa: F2/F5/F8 ADDRESSED, NEWImportantF9 ownershipcomplete cantruewithdisposalUncertaintrue/disposedfalse/archivedfalse whenonlyDprimaryandancillary0. [Reviewverdict](../reviews/2026-11-12-finite-budget-native-fix-round2-review.md). Task2: fix round2/5 (3addressed/1newopen;commitsd9b7..2baa). No out-of-scopeobservations.
+[Round3 originalwriter release](../briefs/2026-11-12-finite-budget-native-fix-round3.md): fixedinertcausalRED first; onlyexactexpectedRED permitsminimalcompleteconditionfix+ONEcoveringGREEN, safeclosedrollbackEXACTf7a71COMPLETE7manualfalse; unexpectedfailureSTOP. SAME7paths/3183protected; newreviewFIX_BASE2baae765. No Native16/MF/I0/main/CF/keys. Alloldfindingsclosed unlessintroducedbreakage. CurrentSource2baaSTOP; futurejobentitlements onlyround3brief. Task2actual16/finalreview/GLOBAL296/realPCoffheld. OwnImport9b4unresolved/O4closed/O5READONLYproposalonly. Readinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
