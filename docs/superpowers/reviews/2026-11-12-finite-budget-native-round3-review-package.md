@@ -393,4 +393,4 @@ diff --git a/test/fixtures/finite-budget-world.mjs b/test/fixtures/finite-budget
 `````
 
 ## Verdict required
-F9ADDRESSED/NOTADDRESSED withfinalfile:line; anyNEWCritical/Important/Minorbreakage infixdiff; out-of-scope observationsnonblocking; formalround3verdict. Purepassedtestsarenative16authority. No implementation orruntime action.
+F9ADDRESSED/NOTADDRESSED withfinalfile:line; anyNEWCritical/Important/Minorbreakage infixdiff; out-of-scope observationsnonblocking; formalround3verdict. Passing pure tests does NOT authorize Native16 execution. No implementation orruntime action.
