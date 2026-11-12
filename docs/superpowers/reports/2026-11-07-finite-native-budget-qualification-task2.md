@@ -1663,3 +1663,200 @@ Full nativeprograms/graphs/state/logs/TAP/results/failures remain in existingaut
 ANYfailure, including setup/key/deadlinemiss: no repair/retry/newbatch. Let authorized bounded jobs settle/preserve actualfailure/unknown/evidence gaps. Afterterminal fullassigned-ID/custody/publicsummary/primarytimestamps readbacks, restore EXACTSAFEf7a71 COMPLETE7/manual/noinputs/nopush/allfalse +appendactualreport/protectedtree/ref/0active/STOP. Allpass permits only finalTask2specqualityreview then freshGLOBAL296review, not readiness/PCoff certification. Native16clock/replica/actualcasefacts NOTyetobserved atthiscommit; metadata will be supplied externally while Sourcefrozen and appended only afterterminal.
 
 No actualCF/provider/runtime/OAuth/permissions/tokens/cron/Containers/subscriptions/main/PR/publish/Max/mail ornewuserchat. operationalReadiness/completePackage/PCoff/globalNativeDrainVerified/sdkNamespaceEmptyVerified remainfalse. This is finite GitHubSYN execution, no permanentguard or instruction to turn offPC.
+
+
+## ONE Native16 attempt terminal FAILURE — preserved, NO retry, SAFE inactive closure
+
+Activation Source19789b5f31935e0b5be00cbb24c5f45de2a0100a/tree5c8298022ed85903a8f9d50f598d9c58fbba6f71/WF26ca75181d7c76d3ddf9797fe66727baa5028b82/report1f32d426. Sole push run43229236340/attempt1, created2026-11-12T13:38:32Z/terminalFAILURE updated2026-11-12T13:56:12Z. Source remained EXACT19789b5f fromactivation through all7terminal and all assigned-ID runner authentication markers; no Source/body/code change, repair, retry, cancellation or secondbatch.
+
+ACTUAL job verdicts: contractsSUCCESS; positive_prepareSUCCESS; reduction_prepareSUCCESS; positive_consumeSUCCESS; reduction_consume_aSUCCESS; readonlyFAILURE; reduction_consume_bSKIPPED due failed dependency. This DOES NOT QUALIFY coherent16. Q8 actual8/pass8/fail0/cancelled0/skipped0/todo0 plus inactivewrapper1/business0/invalidpreI0 and allF1–F8/3profiles passed in this SAME run/Source before nativejobs. P1 and D1–D2 execution/TAPguards succeeded onrunner. Readonly's fixed execution+TAP-check shell step exited1 at13:45:14Z/COMMAND_OKfalse; private per-R-case counts/SDKassertion/error vs TAP-checkcause UNKNOWN to this coordinator because rawTAP/logs/state remainencrypted. Do NOT infer a particular Rcase/SDK/product/root cause. D3–D4 and coherentB aggregation were NOTRUN; no coherent16summary artifact or allfourDready/overlap proof exists. OldTask1/preparationpasses are not substituted.
+
+Five actual nativejobs passed existing Source/lock/key-preflight and authenticated same-run compiler profile gates before their native commands. Live secret was NEVERread/printed; no newkey/environment/credential/userstep. Two producers succeeded with authenticated originalcheckpoint artifacts; positive/A consumers authenticated their exact assigned original producer beforemount. Actual privateI0/C0/C1/SDKrecords/replica timestamps remain in encrypted artifacts; they were not downloaded or reconstructed from publicjobtimes. Successful P1/A commands validated their reviewed clock/replica assertions onrunner; no claim that skipped B or failed readonly qualified all requested observations.
+
+Primary publicAPI all7terminal timestamps (Root independently audits these; skips are not runningnativeintervals):
+
+```json
+[
+  {
+    "id": 131219969596,
+    "name": "contracts",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-11-12T13:39:03Z",
+    "completedAt": "2026-11-12T13:40:10Z"
+  },
+  {
+    "id": 131220486739,
+    "name": "readonly",
+    "status": "completed",
+    "conclusion": "failure",
+    "startedAt": "2026-11-12T13:40:18Z",
+    "completedAt": "2026-11-12T13:45:39Z"
+  },
+  {
+    "id": 131220487200,
+    "name": "reduction_prepare",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-11-12T13:40:18Z",
+    "completedAt": "2026-11-12T13:54:10Z"
+  },
+  {
+    "id": 131220491777,
+    "name": "positive_prepare",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-11-12T13:40:18Z",
+    "completedAt": "2026-11-12T13:54:02Z"
+  },
+  {
+    "id": 131228470578,
+    "name": "positive_consume",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-11-12T13:54:06Z",
+    "completedAt": "2026-11-12T13:56:11Z"
+  },
+  {
+    "id": 131228550933,
+    "name": "reduction_consume_a",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-11-12T13:54:14Z",
+    "completedAt": "2026-11-12T13:56:11Z"
+  },
+  {
+    "id": 131228555583,
+    "name": "reduction_consume_b",
+    "status": "completed",
+    "conclusion": "skipped",
+    "startedAt": "2026-11-12T13:54:10Z",
+    "completedAt": "2026-11-12T13:54:10Z"
+  }
+]
+```
+
+Observed nativeJOB interval peak=3, within static3; logicalMFbound remains2/job and6global. This is scheduling evidence, NOT physicalSDK drain/MFlifetime/namespace-empty certification; globalNativeDrainVerified and sdkNamespaceEmptyVerified remainfalse. A and P1consumer intervals overlap, but B skipped so required A/B coherentD overlap is absent. B never fabricated ownfutureend and no eighthjob was added.
+
+Native fullprograms/graphs/state/logs/TAP/results/failureevidence preserved by existingciphercustody for7days. All FIVE executed nativejobs successfully encrypted/uploaded, downloaded THEIR exact assignedID onrunner, matched upload/downloaddigest and openDirectory authenticated complete innerinventory/context; markers below. Readonlyfailurekindconsumer-failure retained fullfailurematerial; it is not discarded or relabelled success. No privatepayload (plaintext OR cipherZIP) was downloaded toRoot/PC by writer. Only publicAPI/jobstep/artifactmetadata/closedmarkers were read. Root's current authority remains publicmetadata only.
+
+```json
+[
+  {
+    "job": "positive_prepare",
+    "kind": "checkpoint",
+    "artifactId": 13950256910,
+    "bytes": 27504047,
+    "digest": "sha256:fe1b1de738b80668d57e967aa941ef2ba3638ec3aaf0770095ff9935630b1180",
+    "expiresAt": "2026-11-19T13:53:44Z",
+    "runnerAuthenticatedInnerInventory": true,
+    "publicReadbackAt": "2026-11-12T13:53:59.0507214Z",
+    "privatePayloadDownloadedToPC": false
+  },
+  {
+    "job": "reduction_prepare",
+    "kind": "reduction-checkpoint",
+    "artifactId": 13950822384,
+    "bytes": 27403684,
+    "digest": "sha256:646aa74d7b4f4feabdca542f970485590548131ede9d31563dbb378ad120f65e",
+    "expiresAt": "2026-11-19T13:53:55Z",
+    "runnerAuthenticatedInnerInventory": true,
+    "publicReadbackAt": "2026-11-12T13:54:07.0682179Z",
+    "privatePayloadDownloadedToPC": false
+  },
+  {
+    "job": "positive_consume",
+    "kind": "positive-result",
+    "artifactId": 13950067554,
+    "bytes": 10023862,
+    "digest": "sha256:8df7c953a10650cf1dd16d4737c5cbb7ed4da4dfde695d2a4b50052e044928b2",
+    "expiresAt": "2026-11-19T13:55:59Z",
+    "runnerAuthenticatedInnerInventory": true,
+    "publicReadbackAt": "2026-11-12T13:56:09.7495387Z",
+    "privatePayloadDownloadedToPC": false
+  },
+  {
+    "job": "reduction_consume_a",
+    "kind": "reduction-result-a",
+    "artifactId": 13949344928,
+    "bytes": 14818059,
+    "digest": "sha256:eada1532ec0e161d6914333065c4a6906f1d6e07b748c7b7bdfdbd9bb51c02cc",
+    "expiresAt": "2026-11-19T13:56:01Z",
+    "runnerAuthenticatedInnerInventory": true,
+    "publicReadbackAt": "2026-11-12T13:56:09.1761168Z",
+    "privatePayloadDownloadedToPC": false
+  },
+  {
+    "job": "readonly",
+    "kind": "consumer-failure",
+    "artifactId": 13949168304,
+    "bytes": 13680188,
+    "digest": "sha256:8a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5",
+    "expiresAt": "2026-11-19T13:45:23Z",
+    "runnerAuthenticatedInnerInventory": true,
+    "publicReadbackAt": "2026-11-12T13:45:36.4687999Z",
+    "privatePayloadDownloadedToPC": false
+  }
+]
+```
+
+All actual artifact metadata (pure publicJSON +five encryptednative artifacts; noB/closedcoherentsummary):
+
+```json
+[
+  {
+    "id": 13950822384,
+    "name": "finite-budget-reduction_prepare-19789b5f31935e0b5be00cbb24c5f45de2a0100a-43229236340",
+    "bytes": 27403684,
+    "digest": "sha256:646aa74d7b4f4feabdca542f970485590548131ede9d31563dbb378ad120f65e",
+    "expiresAt": "2026-11-19T13:53:55Z",
+    "expired": false
+  },
+  {
+    "id": 13950256910,
+    "name": "finite-budget-positive_prepare-19789b5f31935e0b5be00cbb24c5f45de2a0100a-43229236340",
+    "bytes": 27504047,
+    "digest": "sha256:fe1b1de738b80668d57e967aa941ef2ba3638ec3aaf0770095ff9935630b1180",
+    "expiresAt": "2026-11-19T13:53:44Z",
+    "expired": false
+  },
+  {
+    "id": 13950067554,
+    "name": "finite-budget-positive_consume-19789b5f31935e0b5be00cbb24c5f45de2a0100a-43229236340",
+    "bytes": 10023862,
+    "digest": "sha256:8df7c953a10650cf1dd16d4737c5cbb7ed4da4dfde695d2a4b50052e044928b2",
+    "expiresAt": "2026-11-19T13:55:59Z",
+    "expired": false
+  },
+  {
+    "id": 13949344928,
+    "name": "finite-budget-reduction_consume_a-19789b5f31935e0b5be00cbb24c5f45de2a0100a-43229236340",
+    "bytes": 14818059,
+    "digest": "sha256:eada1532ec0e161d6914333065c4a6906f1d6e07b748c7b7bdfdbd9bb51c02cc",
+    "expiresAt": "2026-11-19T13:56:01Z",
+    "expired": false
+  },
+  {
+    "id": 13949168304,
+    "name": "finite-budget-readonly-19789b5f31935e0b5be00cbb24c5f45de2a0100a-43229236340",
+    "bytes": 13680188,
+    "digest": "sha256:8a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5",
+    "expiresAt": "2026-11-19T13:45:23Z",
+    "expired": false
+  },
+  {
+    "id": 13949167467,
+    "name": "finite-budget-fixed-preparation-19789b5f31935e0b5be00cbb24c5f45de2a0100a",
+    "bytes": 111688,
+    "digest": "sha256:a4a6f090b4df4d984749a11d7913de7a01590ba7e11f52c2c39f0af25ff1796b",
+    "expiresAt": "2026-11-19T13:39:46Z",
+    "expired": false
+  }
+]
+```
+
+Pure assignedartifact13949167467 is111688B/SHAa4a6f090b4df4d984749a11d7913de7a01590ba7e11f52c2c39f0af25ff1796b, expiry2026-11-19T13:39:46Z; full10JSONinventory/context sameIDverified onrunner13:40:08Z, manifest1635B/SHAe977d7335c331b2f07a8691a157dabde278789f89502204bbcdc719ab001db22. Its fullprivatecontroltrace was not promoted; closeddataonly. All nativeartifactmetadata expiry/digest/size/IDs are actual APIreadbacks above, no payloadaudit toPC and no inferred missingnativecasecounts.
+
+Required terminal closure restores EXACTSAFEf7a71f1a0fa4f5ddf069ff411f008a098455e5cc COMPLETE7/manual/noinputs/nopush/all7literalfalse, plus thisappend; all stepbodies/code/perms/keybindings remain reviewed872e. No otherSourcecode changed. Postclosure ref/tree/full3190leaves/3183protected+all5codeblobs/mainunchanged/closure0runs/0active readbacks follow. Root may independently verify all7primaryterminal intervals/assignedmetadata; closedcoherent16 proof remains absent. Failure cause requires a separately authorized cloud-only evidence-inspection scope if desired; no suchjob/read/decryption/repair is performed here.
+
+STOP. One-run entitlement consumed. Native16notqualified; Task2finalspecquality/GLOBAL296/PCoff/operationalreadiness remainpendingfalse. No nextbatch, remediation, replay, newI0/clock, main/PR/publish/runtime/actualCF/OAuth/permissions/tokens/cron/Containers/subscriptions/Max/mail/newuserchat.
