@@ -4667,3 +4667,228 @@ GitHub-only commands before CAS: fetch_file full Source WF/report/exactF7; fetch
 Mandatory after BOTH jobs terminal ANY outcome: restore EXACT complete F7 WF blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209 characters from093e00793de9a9eac193281a7ec4e55d018a476b, seven jobs/manual/noinputs/nopush/all7false; append exact outcomes/clocks/closed verifier records; full ref/WF/report/tree/protected3188/main/five0active readbacks then STOP. Preserve487009-character original report prefix and all new appendices. All readiness flags remain false.
 
 NOT EXECUTED by this activation: SDK/MF/I0/Native16/R3/SQL/search/Cloudflare/runtime/OAuth/OTP/cron/consumer/callback/Max/mail/deploy/main/PR/merge/publish/newcredential/newcost/local Source execution. No private Original/key/plain/producer-log download. No further Source action or diagnostic trial follows consumed permit. Groups/entry are not cause, operation-specific ACK, Native repair, global drain or PC-off readiness.
+
+
+### Reference-stage Task2 actual result and mandatory F7 restoration — toolclock2026-11-12 21:31:24 UTC
+
+Single activation expected_sha CAS cf223f03857ede51af6943eab293fdc8d24102df→1b6aab04b72b494ae2020ba43fb6d4482c0d47df succeeded ONCE at toolclock21:30:21UTC. Frozen Source treef550168da606829e3d855ad7ba2afc1c11bfa0aa / WF02c77caebd08b0588921880a7b0891eb7bc1b3a0/220884characters / reportb7c0b5f83813c23287985ae8f54f819929c37a09/491485characters. Full staged commit,parent,WF/report text,tree3190/protected3188/main0c9/fivezero preCAS readbacks passed. Reverse wrapper substitution reproduced FULLBASEWF; all seven inline bodies identical. Source remained FROZEN until BOTH terminal.
+
+Exact new run43313662894/attempt1/eventpush/currentSource1b6aab04b72b494ae2020ba43fb6d4482c0d47df/path.github/workflows/afw-finite-budget-qualification.yml is terminalSUCCESS. GitHub literalcreated_at/run_started_at2026-11-12T21:47:16Z/updated_at2026-11-12T21:47:55Z. Toolclock21:30:43UTC saw produceropen in progress;21:31:10UTC exactrun completed;21:31:24UTC closedrecords validated. Provider clocks differ; preserve literal, no assumed offset/compensation.
+
+Full metadata for BOTH jobs and all step outcomes (no private actual producer logs retrieved):
+```json
+[
+  {
+    "id": 131515959276,
+    "name": "producer",
+    "status": "completed",
+    "conclusion": "success",
+    "run_id": 43313662894,
+    "logs_url": null,
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Materialize fixed current inspector",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Materialize shared reference supplement and isolated controls",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Pin exact previously tested core bytes",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Run fixed inert safety fixtures first",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Download and validate the one fixed ciphertext ZIP",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Authenticate original readonly custody privately",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Project fixed safe facts and clean owned temporary data",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10
+      },
+      {
+        "name": "Publish full closed supplement and whole-envelope inventory only",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Preserve exact safe pair for seven days",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12
+      },
+      {
+        "name": "Require successful authenticated producer and safe upload",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 25
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 26
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 27
+      }
+    ]
+  },
+  {
+    "id": 131516184013,
+    "name": "verifier",
+    "status": "completed",
+    "conclusion": "success",
+    "run_id": 43313662894,
+    "logs_url": null,
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Reconstruct and pin validators from this frozen Source",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Verify sixteen synthetic inspection pairs before artifact access",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Verify sixteen controls then the assigned safe artifact exactly once",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      }
+    ]
+  }
+]
+```
+ONLY KEYLESS verifier131516184013 logs read; filtered output to FOUR whitelisted closed JSON records <=2048B each. No private producer logs, original cipher/key/plain, keyless witness or third artifact retrieved.
+```json
+{"marker":"INSPECTION_PAIR_CONTROLS","expected":16,"completed":16,"pass":16,"fail":0,"inventory":[{"id":"observed_pass","status":"passed"},{"id":"observed_failure","status":"passed"},{"id":"observed_skip_todo","status":"passed"},{"id":"result_source","status":"passed"},{"id":"result_run","status":"passed"},{"id":"manifest_source","status":"passed"},{"id":"manifest_run","status":"passed"},{"id":"foreign_pair","status":"passed"},{"id":"fixture_count","status":"passed"},{"id":"unexamined","status":"passed"},{"id":"two_records","status":"passed"},{"id":"unknown_case","status":"passed"},{"id":"wrapper_only","status":"passed"},{"id":"manifest_bytes","status":"passed"},{"id":"manifest_digest","status":"passed"},{"id":"case_order","status":"passed"}],"firstFailure":null}
+{"marker":"SAFE_ZIP_CONTROLS","expected":16,"completed":16,"pass":16,"fail":0,"inventory":[{"id":"validator_capture_after_success","status":"passed"},{"id":"validator_rejection_identity_no_capture","status":"passed"},{"id":"zip_valid_store_crc_vector","status":"passed"},{"id":"zip_valid_deflate","status":"passed"},{"id":"zip_signed_unsigned_descriptors","status":"passed"},{"id":"zip_wrong_size","status":"passed"},{"id":"zip_wrong_upload_sha","status":"passed"},{"id":"zip_wrong_metadata_sha","status":"passed"},{"id":"zip_extra_entry","status":"passed"},{"id":"zip_duplicate_entry","status":"passed"},{"id":"zip_traversal_entry","status":"passed"},{"id":"zip_symlink","status":"passed"},{"id":"zip_bad_crc","status":"passed"},{"id":"zip_noncontiguous_ranges","status":"passed"},{"id":"zip_declared_and_inflate_caps","status":"passed"},{"id":"download_stream_redirect_auth_bounds","status":"passed"}],"failure":null}
+{"marker":"AFW_METADATA_READBACK/1","source":"1b6aab04b72b494ae2020ba43fb6d4482c0d47df","run":"43313662894","attempt":1,"assignedArtifactId":"13985819598","stage":"complete","firstFailedPredicate":"none","reason":"none","httpStatus":200,"receivedBytes":776,"timeoutObserved":false,"verified":true}
+{"marker":"AFW_SAFE_READBACK/1","kind":"supplement","source":"1b6aab04b72b494ae2020ba43fb6d4482c0d47df","run":"43313662894","attempt":1,"artifactId":"13985819598","coreSha256":"d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246","verifierSha256":"4a79caf3863c5c606b12f19ee49cb4bdb48045d758186f306db41315f3d33296","safeZipModuleSha256":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d","producerCoreVerified":true,"sourceCoreVerified":true,"safeControlsPass":true,"metadataVerified":true,"rawZipVerified":true,"inventoryVerified":true,"producerControlCount":null,"supplementStatus":"partial","zipBytes":3142,"metadataZipBytes":3142,"uploadDigest":"3337abac0295bd2c333fcd3d22ffdb8669339b6e355d8cb6604288334cefcd54","metadataDigest":"sha256:3337abac0295bd2c333fcd3d22ffdb8669339b6e355d8cb6604288334cefcd54","rawZipSha256":"3337abac0295bd2c333fcd3d22ffdb8669339b6e355d8cb6604288334cefcd54","resultBytes":14830,"resultSha256":"6f5fc095f4737bc2d80ffdf851b5dce9c0ed0fba03ed4c4550b8d6b729fa128d","manifestBytes":342,"manifestSha256":"4d75881d8b2c9220c02e6d856d71c0d3dd218679099bd39a25c015735f734495","stage":"complete","reason":"none","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+Record lengths no LF in order773/919/297/1293bytes. Pair16PASS+ZIP16PASS; metadata assigned exactID verified/HTTP200/stagecomplete; summaryproducerCoreVerified/sourceCoreVerified/safeControlsPass/metadataVerified/rawZipVerified/inventoryVerified ALLtrue; wholeDTO accepted with supplementStatuspartial/stagecomplete/reasonnone. Verified cored514b190.../generatedverifier4a79caf3.../ZIPmoduleb36c40c0... match immutable reviewed pins. This is authenticated bounded projection transport, not cause/operation-specific ACK/Native repair/globaldrain/PCoff readiness. Root independent small SAFE audit is separate and must compare BOTH old rows AND WHOLE oldR2certificate to43303568700, plus new strict stage/wholemanifest/currentidentity/Original facts. No interpretation or replay authorization follows partial.
+
+Assigned SMALL SAFE metadata ONLY:
+```json
+[
+  {
+    "id": 13985819598,
+    "name": "afw-readonly-receipt-inspection-43313662894-1",
+    "size_in_bytes": 3142,
+    "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/13985819598",
+    "archive_download_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/13985819598/zip",
+    "expired": false,
+    "created_at": "2026-11-12T21:47:37Z",
+    "expires_at": "2026-11-19T21:47:36Z",
+    "updated_at": "2026-11-12T21:47:37Z",
+    "digest": "sha256:3337abac0295bd2c333fcd3d22ffdb8669339b6e355d8cb6604288334cefcd54",
+    "workflow_run": {
+      "id": 43313662894,
+      "repository_id": 1347578006,
+      "head_repository_id": 1347578006,
+      "head_branch": "feat/finite-native-cleanup-20261101",
+      "head_sha": "1b6aab04b72b494ae2020ba43fb6d4482c0d47df"
+    }
+  }
+]
+```
+Actual safe ZIP3142B/SHA3337abac0295bd2c333fcd3d22ffdb8669339b6e355d8cb6604288334cefcd54; result14830B/SHA6f5fc095f4737bc2d80ffdf851b5dce9c0ed0fba03ed4c4550b8d6b729fa128d; manifest342B/SHA4d75881d8b2c9220c02e6d856d71c0d3dd218679099bd39a25c015735f734495. Existing assigned safeartifact13985819598 expires2026-11-19T21:47:36Z, no thirdartifact. Executor did NOT download artifact; Root may audit only this assigned smallSAFE2JSON.
+
+Executed GitHub connector operations: full fetch_file and GET refs/commit/tree/five-active preflight; create_tree(base45e4c541,twoallowedpaths)→f550168da606829e3d855ad7ba2afc1c11bfa0aa; create_commit(parentcf223f03)→1b6aab04b72b494ae2020ba43fb6d4482c0d47df; full staged WF/report/tree/protected/main/active readback; update_ref(expected_shacf223f03,forcefalse)→success once; GET branch then actions/runs filtered exacthead/eventpush→single43313662894/1; GET exactrun plus fetch_workflow_run_jobs and BOTH fetch_workflow_job_steps→both/allstepssuccess; fetch_workflow_run_artifacts exactassignedname→13985819598; fetch_workflow_job_logs ONLYkeylessverifier131516184013→four closed records above. No dispatch/rerun/retry/repair/backoff/alternate API/credentials/extraprobes. Local string-only F7 job-count check initially included workflow_dispatch and failed; corrected scope after jobs: proved seven names/seven false. No Source code executed or changed by that check.
+
+GitHub runner commands BYTEEXACT reviewed candidate: node --check materialized current helpers; node afw-core-pin.mjs; node afw-readonly-inspector-current.mjs fixtures/download/open (all private redirected); node afw-reference-supplement-current.mjs coordinate/publish (private redirected); successful authenticated producer/upload gate; verifier reconstruct/pin, timeout --kill-after=1s 5s env -i GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-inspection-pair-controls.mjs; node afw-safe-verifier-current.mjs. ActualStep metadata+closedverifier establish scoped evidence; no new reference40/22qualification/witness execution claimed in actual5+2. Source code and all bounds/AAD unchanged.
+
+BOTHterminal ANYoutcome now requires exactF7 restoration. Restoring complete blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209characters from093e00793de9a9eac193281a7ec4e55d018a476b, sevenjobs contracts/positive_prepare/positive_consume/reduction_prepare/reduction_consume_a/readonly/reduction_consume_b; manualworkflow_dispatch/noinputs/nopush/ALL7literalfalse. OnlyWF+APPENDreport. Original487009-character reportprefix and complete491485-character activationprefix preserved. Full restoration ref/WF/report/tree/protected3188/main/fivezeroactive readbacks follow; then final reportcheckpoint/STOP. Existing Original, F7 rollback, current frozen actual candidate and history remain recoverable through immutable commits. No reset/force/delete/merge.
+
+NOT EXECUTED: any Source repair/replay/rerun/newqualification/Native16/SDK/MF/I0/R3/SQL/search/Cloudflare/runtime/OAuth/OTP/credentials/rotation/cron/consumer/callback/Max/mail/deploy/main/PR/merge/publish/newcost; no Original cipher/key/plain/privateproducerlog download; no local Source execution/clone/dependencies/temp Source files. No permission change or runtime opening. operationalReadiness=false;completePackage=false;PCoff=false;globalNativeDrainVerified=false;sdkNamespaceEmptyVerified=false. Permit consumed; after closure Source executor STOPPED, no further action/diagnosis/trial/newpermit inferred.
