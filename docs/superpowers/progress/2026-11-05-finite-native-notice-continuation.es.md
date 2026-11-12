@@ -1,14 +1,10 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — Native16 not qualified; closed receipt-inspector preparation released
+## CURRENT — keyless76 pass; integration failed; safe closure; diagnosis/re-review pending
 
-2026-11-12 14:08UTC. Sole43229236340/1 Source19789b5f terminalFAILURE. Root independently verified all7terminal primary timestamps and observed native-job interval peak3. Q8/P1/D1–D2 validation passed; readonlyfailed/Rcasecounts+causeUNKNOWN; B/D3D4skipped. [Terminal primary audit](../reviews/2026-11-12-native16-terminal-primary.md). Five native payloads encrypted/seven-day; no private data to PC.
-FINALSTOP62517772/tree3f231956/report7fd17ef3/WFEXACTsafeF7a71/0active/3183protected. Rootref/fullWF/report primaryreadback matches. Allcode stillreviewed5fb78c05, F1–F9prepclosed. Single-run entitlement consumed, no repair/retry.
-[Receipt-inspector preparation brief](../briefs/2026-11-12-native-readonly-receipt-inspector-preparation.md): onlyWF+appendreport; manual/disabled job, NO EXECUTION yet. Exact originalreadonlycipher13949168304/digest8a408941/originalAAD; builtin custody only, separate failureidentity, safe fixedJSON/TAP projection; no SDK/I0 or newkey. Root independent code review before one future cloud inspection.
-O5 stack-location proposal preserved/deferred, no O5 code/probe. Task2actual16/final/global review and PCoff pending; readinessfalse.
+2026-11-12 15:12UTC. Sole controlsrun43244518810/1 Source59bb67d6:76/76 current inert checksPASS, old954 counterexamplesEXECUTED, coreSHA41e3b76e. OveralljobFAILURE at assignedID remote/upload metadata check; reasonUNKNOWN, remoteinventorySKIPPED. Root independently strict-audited safe artifact13955248447/1682B/SHA c13f9bfe (complete2JSON, schema/context/hash/counts/core). [Primary evidence](../reviews/2026-11-12-native-inspector-controls-primary.md). No key/nativeoriginalcipher/SDK/I0; no more tests/trials released.
 
-
-Task1 complete. Last preparationreviewpassed at872e; current native failure is new observed evidence, not a reopened speculative finding. Existing afw-finite-syn-checkpoint key worked in five jobs; no current credential/OTP/browser intervention is needed. ActualCF/provider/runtime UNKNOWN, no main/prod/OAuth/permissions/Max/mail changes. This Root is local coordination, not permanent guard. Chavo relay last checked12:32Z with no AFW request.
+SafeSource844246c9/tree d14e30dc, exactF7a71 manual/noinputs/nopush/sevenfalse; reportb2918582, two-pathappend-only scope; Rootref/fullbody/0active readbacks. COMPLETEamendedactual-inspector was not reconciled afterfailure. [Scoped current-helper re-review package](../reviews/2026-11-12-native-inspector-fix1-controls-package.md) for SAME reviewer I5/I6/M1 and failedintegration; M2deferred. Need concrete bounded diagnosis before new release; no blindretry/newkey. OriginalNative16 failedreadonly/Bskipped closed; R1–R3cause/statusUNKNOWN, encryptedpayloadGitHubonly; allreadinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
