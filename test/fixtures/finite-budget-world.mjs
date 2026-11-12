@@ -1879,10 +1879,28 @@ async function runRound2SealerControls(){
  return cases;
 }
 
+
+async function verifyRound3OwnedRed(){
+ let stage='owned_case',facts=null,error=null;
+ try{
+  const actual=await runRound2OwnedCase('dispose_reject');stage='ownership_readback';
+  const file=join(process.env.RUNNER_TEMP,'afw-round2-fixed-owned','dispose_reject','owned','ownership.json'),owned=JSON.parse(await readFile(file,'utf8'));
+  assert.equal(owned.purpose,'afw.fixed-budget-owned-lifecycle.syn.v1');assert.equal(owned.records.length,1);const record=owned.records[0];stage='criteria';
+  facts={actualComplete:owned.complete,expectedComplete:false,ancillaryFailureCount:owned.ancillaryFailureCount,disposalUncertain:record.disposalUncertain,disposed:record.disposed,archived:record.archived,originalErrorSame:actual.primarySame,originalAttempts:actual.originalAttempts,checkpointCopies:actual.copies,sourceRetained:actual.sourceRetained,poisonPreserved:actual.poisonPreserved};
+  stage='complete';
+ }catch(cause){error=fixedControlError(cause);}
+ const expectedCausalRed=stage==='complete'&&error===null&&facts.actualComplete===true&&facts.expectedComplete===false&&facts.ancillaryFailureCount===0&&facts.disposalUncertain===true&&facts.disposed===false&&facts.archived===false&&facts.originalErrorSame===true&&facts.originalAttempts===1&&facts.checkpointCopies===0&&facts.sourceRetained===true&&facts.poisonPreserved===true;
+ const result={purpose:'afw.round3-owned-closure-red.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,case:'dispose_reject',stage,facts,error,expectedCausalRed,I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};
+ const root=join(process.env.RUNNER_TEMP,'afw-round3-private');await mkdir(root,{recursive:true,mode:0o700});await writeFile(join(root,'result.json'),JSON.stringify(result,null,2));
+ assert.equal(expectedCausalRed,true,'round3 exact current persisted closure causal deficit');
+ assert.equal(facts.actualComplete,facts.expectedComplete,'round3 persisted uncertain resource custody must be incomplete');return result;
+}
+
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const main=async()=>{
   const [command,root]=process.argv.slice(2);
-  if(command==='verify-round2-owned-case')await runRound2OwnedCase(root);
+  if(command==='verify-round3-owned-red')await verifyRound3OwnedRed();
+  else if(command==='verify-round2-owned-case')await runRound2OwnedCase(root);
   else if(command==='verify-round2-red')await verifyRound2CausalRed();
   else if(command==='preflight-budget')await preflightBudgetCompilation();
   else if(command==='prepare-positive-probe')await preparePositiveProbe(root);
