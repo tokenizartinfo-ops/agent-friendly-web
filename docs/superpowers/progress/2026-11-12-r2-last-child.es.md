@@ -1,8 +1,8 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-12-r2-last-child.md
 
-## CURRENT — Task2 valid PARTIAL certificate; mandatory F7 closure underway
+## CURRENT — Tasks1+2 COMPLETE/PARTIAL; exactF7 closed; whole-plan finalreview pending
 
-ONEactual43303568700/1 at83e12af6 BOTHsuccess. [Rootprimary](../reviews/2026-11-12-r2-last-child-task2-primary.md): strictsmallSAFE2JSON/realwholemanifest/currentidentity/Originalfacts checked; BOTHoldrowsunchanged. R2lastINSERTEDchild5/elapsed5018/abortedtrue/settled→issuer-ack/steps9/lastsource-pair706 directlyobserved; notNativecause/ACKop/pairexclusiveownership. R1invalidreasonUNKNOWN. SourceexecutorrestoresEXACTF7/fullref-WF-report-tree-protected-main/five0active/STOP; independentclosurepending. No nexttrial/nativepermit. Allreadinessfalse.
+Sourcef59b0327/F7f7a71f1a/report35fe5001/all3188protected/main0c9/5activecounts0 independentlyRootchecked. Global295..f59onlyreport+302/−0; full84592patchreconstructionmatched. [Finalpackage](../reviews/2026-11-12-r2-last-child-final-package.md). Actual43303568700/1validPARTIAL, strictprimary997d8ae9 oldrowsunchanged/closedcertobserved; noNativecause/readiness. AllSourceactorsSTOPPED/no permit. [Contingentresearch](../reviews/2026-11-12-r1-validation-r2-entry-research.md) proposesminimalR1group+R2entrydiscriminator fromsameexistingRaw, NOTnewauthority. Finalreviewrequired beforeanynextSourceplanrelease. Allreadinessfalse.
 
 Task1: fix round1/5 (1 addressed,0 open — R2oversize negative shadowing; commits6c4b13c2..c7ed76a1).
 Task1: minor (deferred): positive real fixed-file R2→reader→coordinator seam fixture absent; finalwholeplanreviewmusttriage beforeNativepromotion.
