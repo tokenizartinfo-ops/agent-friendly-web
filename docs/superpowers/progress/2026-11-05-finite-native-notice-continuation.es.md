@@ -1,10 +1,13 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — keyless76 pass; integration failed; safe closure; diagnosis/re-review pending
+## CURRENT — fix3/5 released: two-job keyless sequencing and raw safeZIP readback
 
-2026-11-12 15:12UTC. Sole controlsrun43244518810/1 Source59bb67d6:76/76 current inert checksPASS, old954 counterexamplesEXECUTED, coreSHA41e3b76e. OveralljobFAILURE at assignedID remote/upload metadata check; reasonUNKNOWN, remoteinventorySKIPPED. Root independently strict-audited safe artifact13955248447/1682B/SHA c13f9bfe (complete2JSON, schema/context/hash/counts/core). [Primary evidence](../reviews/2026-11-12-native-inspector-controls-primary.md). No key/nativeoriginalcipher/SDK/I0; no more tests/trials released.
+2026-11-12 15:42UTC. SAMEreview acceptedfix2diagnostic; I6integrationOPEN HTTP404beforebody, no newregression; I5/M1addressed, M2deferred. [Review](../reviews/2026-11-12-native-inspector-fix2-review.md). [Fix3brief](../briefs/2026-11-12-native-inspector-fix-round3.md) explicitly releases ONEattempt/TWOserialkeylessjobs<=2+2min: exact91CORE+d514SHA producer/upload, then dependentverifier currentclosedmetadata/sameID1GET and1rawZIPdownload withSHA(upload,metadata,bytes)/strict2JSON/inventory; max16separatecurrent safeZIPcontrols beforefetch. No oldlocalfsassumption, no retries/polls/sleep/key/privatecipher/SDK/I0. Failure=>exactF7restore+proof0activeSTOP; PASS=>COMPLETEactualinspector INACTIVE proposal5+2min/fullreviewSTOP. ActualprivateinspectionNOTreleased.
 
-SafeSource844246c9/tree d14e30dc, exactF7a71 manual/noinputs/nopush/sevenfalse; reportb2918582, two-pathappend-only scope; Rootref/fullbody/0active readbacks. COMPLETEamendedactual-inspector was not reconciled afterfailure. [Scoped current-helper re-review package](../reviews/2026-11-12-native-inspector-fix1-controls-package.md) for SAME reviewer I5/I6/M1 and failedintegration; M2deferred. Need concrete bounded diagnosis before new release; no blindretry/newkey. OriginalNative16 failedreadonly/Bskipped closed; R1–R3cause/statusUNKNOWN, encryptedpayloadGitHubonly; allreadinessfalse.
+Sourcea51safeF7 beforewriterstarts; Rootsafe1825B/91/coreaudit andclosed316BHTTP404proofpreserved. OriginalNative16/RcauseUNKNOWN; allreadinessfalse. Newsequence tests boundary, doesnotclaim404cause.
+
+
+Verifier-only validatedmetadata capture seam approved in [narrow ruling](../briefs/2026-11-12-native-inspector-fix3-verifier-seam.md), no91COREedit/extraGET/parse, exactoriginalreturn/errorpreserved, separatecurrentcontrols. Actualprivateinspection remainsheld.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
