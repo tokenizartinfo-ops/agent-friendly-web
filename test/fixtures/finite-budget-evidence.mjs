@@ -206,7 +206,8 @@ export function verifyPositiveBudgetEpochInventory(epochs){
  list(epochs,8);valid(epochs.length===8,'positive epoch inventory');
  const expected=new Set(['producer|0|M','producer|0|QA','producer|1|M','producer|1|QA','producer|2|M','producer|2|QA','consumer|0|M','consumer|0|QA']);
  for(const epoch of epochs){
-  shape(epoch,['segment','epoch','role','snapshot']);
+  shape(epoch,['segment','epoch','role','reason','capturedAt','snapshot']);
+  valid(typeof epoch.reason==='string'&&count(epoch.capturedAt),'positive epoch capture metadata');
   valid(['producer','consumer'].includes(epoch.segment)&&count(epoch.epoch)&&['M','QA'].includes(epoch.role),'positive epoch identity');
   valid(epoch.snapshot&&typeof epoch.snapshot==='object'&&!types.isProxy(epoch.snapshot)&&[Object.prototype,null].includes(Object.getPrototypeOf(epoch.snapshot)),'positive epoch snapshot');
   valid(expected.delete(epoch.segment+'|'+epoch.epoch+'|'+epoch.role),'positive epoch key');
