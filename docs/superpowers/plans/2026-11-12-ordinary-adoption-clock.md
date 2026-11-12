@@ -8,7 +8,7 @@
 **Spec:** docs/superpowers/specs/2026-11-12-ordinary-adoption-clock-design.md
 
 ## Global Constraints
-- PROJECT AFW; repo tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT GitHub/Actions isolated SYN; ORIGIN GitHubconnector. Branch diag/afw-adoption-clock-20261112 starts immutablef5f52660d19ec9fc634bbc49558db75582fdaf88/tree7bc8b997058a899e1938535c86a627a775004622 (verify actualtree beforewrite; cachedRootf5tree is authority if fullSHA differs). No Source/main/otherbranch/runtime/lib/pin/receipt mutations.
+- PROJECT AFW; repo tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT GitHub/Actions isolated SYN; ORIGIN GitHubconnector. Branch diag/afw-adoption-clock-20261112 starts immutablef5f52660d19ec9fc634bbc49558db75582fdaf88/tree7bc8b997a968dca32fc567b627de70b774d6489c. No Source/main/otherbranch/runtime/lib/pin/receipt mutations.
 - Native Task2 source3590/all7false and real I0/C0/C1/SDK/Root clocks remain untouched; this unit changes only an ordinary MODELED fixture-time literal in a disposable overlay. No realcurrentauth/freshness/runtime/PCoff claim.
 - Node22.23.4/Ubuntu24.04/currentf5lock; no lifecycleinstall scripts; no newdependency/key/token/permissions/actualCF/OAuth/networkbusiness/Max/mail/UI/localclone/build/deps/test.
 - Sole behavior variable: A preserves exact const T0=Date.now(),sha='b'.repeat(40); B replaces it exactly ONCE with const T0=Date.parse('2026-11-08T02:40:00.000Z'),sha='b'.repeat(40). Commonpassiveobservers/runner/Node/lock/testSource/assertions/SDK/pins/receipt unchanged. No Bpin replacement or libraryoverlay. No arbitrary input/URL/target.
