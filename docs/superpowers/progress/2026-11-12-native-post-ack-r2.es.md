@@ -65,3 +65,7 @@ Fresh Astra implementer identified a genuine incompatibility: original protected
 Ruling: distinguish preallocation model/transform qualification from actual captured build/configuration provenance; no synthetic prediction of actual graph hash, no protected harness/time/ID/history rewrite. Validate actual compiler onEnd before mounting (after original I0 for QA), then require successful mount and existing BOTH-worker retained-options + completed ownership proof. Cost if wrong: provenance stays unavailable and no valid diagnostic; never inferred verified. Independent Astra design assessment accepted the correction with this mounted-options qualification, explicitly not runtime attestation.
 
 SPEC N5 and PLAN updated; revised Task1 brief in this commit. Same implementer to resume after scoped preflight readback. Source408 unchanged, all permits unconsumed; Native still held.
+
+## N5 accepted and Task1 resumed
+
+Independent Astra confirmed timing/ownership: QA actual compile after original rounded/backdated I0, before setOptions; command date is not headroom basis; both actual retained mounted options/lifecycle required. Root N5 contains these conditions. Revised brief18f3e74/blob30a9b65 reissued to SAME /root/native_postack_impl_escalated, no fix round/no permit consumed. Implementation in progress; one KEYLESS permit available; Native HELD.

@@ -11,3 +11,14 @@ Initial HOLD identified two concrete conflicts: same-job step-binding versus ind
 Root current Source read at preflight: 408e82abe63178319862c99c3c24684e2258296d and main0c9c475b3ebaa970fc11d628b40e50a90cceb727 unchanged; five active statuses zero. This is GitHub branch/run evidence, not fresh Cloudflare runtime closure.
 
 This design review alone grants no Source or Native execution. A separate exact Task1 brief releases one KEYLESS contracts run; Native remains held until independent implementation CLEAN and another Root brief.
+
+## N5 scoped design correction — independently accepted
+
+Before any Source write, the upgraded implementer found legitimate dynamic compile inputs in the protected harness. Root independently verified the source; Astra independently accepted the bounded correction and timing/ownership qualification:
+- Model preflight and actual allocated build use different inputs even at identical Source; never equate modeled full graph digest to Native bundle.
+- Actual QA onEnd follows original COMMAND9001.created_at/I0 assignment and precedes setOptions/first business invocation. Rounded/backdated command time is not job headroom timing; I0/C0/C1 unchanged.
+- onEnd==firstConnectionBuild is only build equality. Require BOTH actual retained mounted-option script hashes plus completed owned lifecycle and successful mount path; not runtime/remote attestation.
+- Existing World attachPersist records owned scratch before preallocation failure, allowing original pre-MF unwind/archive without new allocation/RPC.
+- OFF byte-identity control shares exact captured inputs/defines.
+
+No protected harness edit required. Root published binding N5 in SPEC/PLAN/revised brief at18f3e74f61291ae0d6bf90651dff6a5f6ff918b2. Same implementer resumed under the unconsumed Task1 KEYLESS permit; Native held. Preflight findings N1–N5 resolved at contract level; implementation proof remains pending.
