@@ -1,0 +1,965 @@
+# COMPLETE proposed receipt inspector — full candidate review (fix3)
+
+Source7f213f4f3aa9162b148e9f55c2efa9599a0efb0f / treee26a4c5c8e50137173234617e68cd6d93c2d7f89 / WF537caafba053ed6f1b5de7f0f2648d17cec5bcf5. Fullactualworkflow below, notcontrolsonlyskeleton. Root [primarycrossjobproof](2026-11-12-native-inspector-cross-job-primary.md) covers91CORE+16separatecurrentZIP/capturecontrols+actualsameIDmetadata200+rawbytesSHA(upload,metadata,download)+complete2JSONreadback in43253820290/1. EveryjobterminalSUCCESS. ExactCOREd514/77002B, ZIPmoduleb36c40c0/13305B, generatedverifierec07235c/39282B reconstructedbyRootasdata+matchedruntime. FullSourcecheckout/materialization/digest/closedrecordprovenancechecked. Prior404causeunknown; testscoversequenceonly.
+
+This package supplies FULL finalactualworkflow and FULLappend-onlyreporta51..7f (prefixchecked). Root validatedcompletef736controls->7freconciliationU10againstbefore/afterbodies,59078chars; APIomitslargera51..7fWFpatch, so do notclaimthatomitteddiffvalidated. Twofinalpaths,3188othersprotected. I5/M1alreadyaddressed; I6controlsintegrationPASS but actualinspectionbranch/fullprivatepipelineunexecuted. M2MINORDEFERRED. Bothjobsinactive/manual/noinputs/noPush; proposed5+2minneedsRootexplicitactualreleaseAFTERcleanreview.
+
+SAME reviewer: review FULLcandidate for actualprivatebranch/controller/publisher/schema/verifiercorrespondence, coreandrawmodulebyteprovenance, originalimmutableartifact13,680,188B/SHA8a408941 and literal1978/43229236340/1/consumer-failureAAD, authentication+bothinventories+failureidentity gates beforedata, asyncboundaries/timing/cleanup/keyonlyopenstep, exactclosedpublic≤64KiBpair, readbackrawbytesbeforedecode/digests/identity/SourcecurrentvsOrigincontext, Sourcepinning/separatejobnoFSassumption/nooriginalnamespaceimport/SDK/native/I0/no extraURLs/keyleak. Check inspected verdict respectsreject/failure/timing and independentpublisher+actualpairvalidation; do nottreatoriginalRfailureasinspectionfailureorclaim91/16originalcasesPASS. Review onlyrealnewbreakage; do NOT extendforM2deferred. Need explicitcritical/important/minorverdict and whether singleactualreadonlyreceiptinspection5+2 canbereleased. No edits/probes/runs/key/originalpayloadaccessduringreview.
+
+## FULL actual inactiveworkflow
+
+```yaml
+name: AFW readonly receipt inspector PREPARED_UNQUALIFIED
+run-name: AFW readonly receipt inspector INACTIVE ${{ github.sha }}
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-readonly-receipt-inspector
+  cancel-in-progress: false
+jobs:
+  producer:
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    environment: afw-finite-syn-checkpoint
+    outputs:
+      artifact-id: ${{ steps.artifact.outputs.artifact-id }}
+      artifact-digest: ${{ steps.artifact.outputs.artifact-digest }}
+      core-sha256: ${{ steps.corepin.outputs.core-sha256 }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: '19789b5f31935e0b5be00cbb24c5f45de2a0100a'
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - name: Materialize fixed current inspector
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test ! -e "$RUNNER_TEMP/afw-readonly-inspector-current.mjs"
+          cat >"$RUNNER_TEMP/afw-readonly-inspector-current.mjs" <<'NODE_CORE'
+          import assert from 'node:assert/strict';
+          import {readFile,writeFile,mkdir,mkdtemp,readdir,lstat,realpath,rm,open} from 'node:fs/promises';
+          import {constants as FSC} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import {inflateRawSync} from 'node:zlib';
+          import {resolve,join,dirname,sep} from 'node:path';
+          import {pathToFileURL} from 'node:url';
+          import {execFile} from 'node:child_process';
+          
+          const ORIGINAL=Object.freeze({purpose:'afw.finite-checkpoint-custody.syn.v1',repository:'tokenizartinfo-ops/agent-friendly-web',ref:'refs/heads/feat/finite-native-cleanup-20261101',sourceSha:'19789b5f31935e0b5be00cbb24c5f45de2a0100a',runId:'43229236340',runAttempt:1,kind:'consumer-failure'});
+          const ORIGINAL_TREE='5c8298022ed85903a8f9d50f598d9c58fbba6f71',ARTIFACT=13949168304,ZIP_BYTES=13680188,ZIP_SHA='8a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5';
+          const HELPER='test/fixtures/finite-checkpoint-custody.mjs',HELPER_BLOB='4d05b5ec0f7b074be88ef9733a47c984b0212351';
+          const PUBLIC_SOURCES=Object.freeze({native_test:{path:'test/mcp-qa-finite-budget-native.test.mjs',blob:'533dafb5df5f8e57442c5b9029dc8dec6dded434'},budget_world:{path:'test/fixtures/finite-budget-world.mjs',blob:'5fb78c057b7e80260ae683abf4af892767ce110e'}});
+          const CASES=['R1','R2','R3'],NAMES=['envelope.bin','manifest.json','receipt.json'],CAPS={'envelope.bin':128*1024*1024,'manifest.json':128*1024,'receipt.json':128*1024};
+          const LIMIT={native:512*1024*1024,jsonl:768*1024*1024,files:4096,record:128*1024,jsonFile:16*1024*1024,tap:32*1024*1024,line:16*1024,block:64*1024,result:64*1024};
+          const FLAGS={operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
+          const sha=b=>createHash('sha256').update(b).digest('hex'),gitBlob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
+          class Rejected extends Error{constructor(reason){super(reason);this.reason=reason;}}
+          const need=(ok,reason)=>{if(!ok)throw new Rejected(reason);};
+          const isObj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+          const fields=(v,allowed,required=allowed)=>{need(isObj(v),'json_shape');need(Object.keys(v).every(k=>allowed.includes(k))&&required.every(k=>Object.hasOwn(v,k)),'json_fields');};
+          const own=(v,k)=>isObj(v)&&Object.hasOwn(v,k)?v[k]:undefined;
+          const num=(v,max=1000000)=>Number.isSafeInteger(v)&&v>=0&&v<=max;
+          const bool=v=>typeof v==='boolean';
+          const duration=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0&&v<=900000;
+          const enumValue=(v,values)=>values.includes(v)?v:'unknown';
+          const utf8=b=>{const s=new TextDecoder('utf-8',{fatal:true}).decode(b);need(Buffer.from(s).equals(b),'utf8');return s;};
+          const elapsed=t=>Math.max(0,Math.round(performance.now()-t));
+          
+          const crcTable=Uint32Array.from({length:256},(_,n)=>{let c=n;for(let k=0;k<8;k++)c=c&1?0xedb88320^(c>>>1):c>>>1;return c>>>0;});
+          function crc32(bytes){let c=0xffffffff;for(const b of bytes)c=crcTable[(c^b)&255]^(c>>>8);return (c^0xffffffff)>>>0;}
+          function extraFields(bytes){let n=0;while(n<bytes.length){need(n+4<=bytes.length,'zip_extra');const kind=bytes.readUInt16LE(n),size=bytes.readUInt16LE(n+2);need(kind!==1&&n+4+size<=bytes.length,'zip_extra');n+=4+size;}need(n===bytes.length,'zip_extra');}
+          export function decodeFixedZip(bytes){
+           need(Buffer.isBuffer(bytes)&&bytes.length>=22&&bytes.length<=128*1024*1024+2*LIMIT.record,'zip_bound');
+           const end=bytes.length-22;need(bytes.readUInt32LE(end)===0x06054b50&&bytes.readUInt16LE(end+20)===0,'zip_eocd');
+           need(bytes.readUInt16LE(end+4)===0&&bytes.readUInt16LE(end+6)===0&&bytes.readUInt16LE(end+8)===3&&bytes.readUInt16LE(end+10)===3,'zip_entries');
+           const directorySize=bytes.readUInt32LE(end+12),directory=bytes.readUInt32LE(end+16);need(directory>0&&directory+directorySize===end,'zip_directory');
+           const entries=[],seen=new Set();let cursor=directory;
+           for(let n=0;n<3;n++){
+            need(cursor+46<=end&&bytes.readUInt32LE(cursor)===0x02014b50,'zip_central');
+            const flags=bytes.readUInt16LE(cursor+8),method=bytes.readUInt16LE(cursor+10),crc=bytes.readUInt32LE(cursor+16),compressed=bytes.readUInt32LE(cursor+20),size=bytes.readUInt32LE(cursor+24),nameLength=bytes.readUInt16LE(cursor+28),extraLength=bytes.readUInt16LE(cursor+30),commentLength=bytes.readUInt16LE(cursor+32),disk=bytes.readUInt16LE(cursor+34),attributes=bytes.readUInt32LE(cursor+38),local=bytes.readUInt32LE(cursor+42);
+            need((flags&~0x0808)===0&&(method===0||method===8)&&disk===0&&nameLength>0&&nameLength<=32&&commentLength===0,'zip_flags');
+            need(cursor+46+nameLength+extraLength<=end,'zip_central_range');const rawName=bytes.subarray(cursor+46,cursor+46+nameLength),name=utf8(rawName);
+            need(NAMES.includes(name)&&!seen.has(name),'zip_paths');seen.add(name);
+            const kind=(attributes>>>16)&0xf000;need((kind===0||kind===0x8000)&&(attributes&0x10)===0,'zip_link');
+            need(size<=CAPS[name]&&compressed<=bytes.length&&local<directory,'zip_entry_bound');extraFields(bytes.subarray(cursor+46+nameLength,cursor+46+nameLength+extraLength));
+            need(local+30<=directory&&bytes.readUInt32LE(local)===0x04034b50,'zip_local');
+            const lf=bytes.readUInt16LE(local+6),lm=bytes.readUInt16LE(local+8),lc=bytes.readUInt32LE(local+14),lz=bytes.readUInt32LE(local+18),lu=bytes.readUInt32LE(local+22),ln=bytes.readUInt16LE(local+26),le=bytes.readUInt16LE(local+28),start=local+30+ln+le;
+            need(lf===flags&&lm===method&&ln===nameLength&&start<=directory,'zip_local_identity');
+            need(bytes.subarray(local+30,local+30+ln).equals(rawName),'zip_local_name');extraFields(bytes.subarray(local+30+ln,start));
+            need(start+compressed<=directory,'zip_data_range');let finish=start+compressed;
+            if(flags&8){
+             need((lc===0&&lz===0&&lu===0)||(lc===crc&&lz===compressed&&lu===size),'zip_local_sizes');
+             const ends=[];if(finish+12<=directory&&bytes.readUInt32LE(finish)===crc&&bytes.readUInt32LE(finish+4)===compressed&&bytes.readUInt32LE(finish+8)===size)ends.push(finish+12);
+             if(finish+16<=directory&&bytes.readUInt32LE(finish)===0x08074b50&&bytes.readUInt32LE(finish+4)===crc&&bytes.readUInt32LE(finish+8)===compressed&&bytes.readUInt32LE(finish+12)===size)ends.push(finish+16);
+             need(ends.length===1,'zip_descriptor');finish=ends[0];
+            }else need(lc===crc&&lz===compressed&&lu===size,'zip_local_sizes');
+            entries.push({name,method,crc,compressed,size,local,start,finish});cursor+=46+nameLength+extraLength;
+           }
+           need(cursor===end&&seen.size===3,'zip_directory');
+           const ranges=entries.slice().sort((a,b)=>a.local-b.local);need(ranges[0].local===0,'zip_ranges');for(let n=1;n<ranges.length;n++)need(ranges[n-1].finish===ranges[n].local,'zip_ranges');need(ranges.at(-1).finish===directory,'zip_ranges');
+           const files=new Map();for(const e of entries){const input=bytes.subarray(e.start,e.start+e.compressed);let value;try{value=e.method===0?input:inflateRawSync(input,{maxOutputLength:CAPS[e.name]});}catch{throw new Rejected('zip_inflate');}need(value.length===e.size&&(e.method!==0||e.compressed===e.size),'zip_inflate');need(crc32(value)===e.crc,'zip_crc');files.set(e.name,value);}
+           return files;
+          }
+          
+          export function validateFailureIdentity(v){
+           fields(v,['purpose','repository','ref','source','sourceTree','run','attempt','job','role','kind','group','lane','cases','commandSucceeded','jobStarted','sealedAt',...Object.keys(FLAGS)]);
+           const exact={purpose:'afw.fixed-budget-job.syn.v1',repository:ORIGINAL.repository,ref:ORIGINAL.ref,source:ORIGINAL.sourceSha,sourceTree:ORIGINAL_TREE,run:ORIGINAL.runId,attempt:1,job:'readonly',role:'consumer',kind:'consumer-failure',group:'readonly',lane:'readonly',commandSucceeded:false,...FLAGS};
+           for(const[k,value]of Object.entries(exact))need(v[k]===value,'failure_identity');need(Array.isArray(v.cases)&&JSON.stringify(v.cases)===JSON.stringify(CASES),'failure_identity');need(num(v.jobStarted,Number.MAX_SAFE_INTEGER)&&num(v.sealedAt,Number.MAX_SAFE_INTEGER)&&duration(v.sealedAt-v.jobStarted),'failure_identity');
+           return {verified:true,commandSucceeded:false,elapsedMs:v.sealedAt-v.jobStarted};
+          }
+          function unknownOwnership(status='missing'){return {status,complete:null,primaryPreserved:null,ancillaryFailureCount:null,callbackCount:null,recordCount:null,disposedCount:null,archivedCount:null,uncertainCount:null,terminalCapture:{captured:null,failed:null,unavailable:null}};}
+          export function projectOwnership(v,caseName){
+           try{
+            fields(v,['purpose','caseName','records','callbackCount','ancillaryFailureCount','primaryPreserved','complete']);need(v.purpose==='afw.fixed-budget-owned-lifecycle.syn.v1'&&v.caseName===caseName,'json_identity');need(bool(v.complete)&&bool(v.primaryPreserved)&&num(v.ancillaryFailureCount,128)&&num(v.callbackCount,128)&&Array.isArray(v.records)&&v.records.length<=2,'json_shape');
+            const terminal={captured:0,failed:0,unavailable:0};let disposed=0,archived=0,uncertain=0;
+            for(const r of v.records){
+             fields(r,['ordinal','caseName','kind','graphs','disposalUncertain','disposed','archived','terminalCapture','archive','events','phases','failures','epochs']);
+             need(r.caseName===caseName&&['initial','recovery'].includes(r.kind)&&num(r.ordinal,1000000)&&[r.disposalUncertain,r.disposed,r.archived].every(bool),'json_shape');
+             need(['not_available','captured','failed','unavailable_partial_setup'].includes(r.terminalCapture),'json_enum');need(Array.isArray(r.graphs)&&r.graphs.length<=2&&Array.isArray(r.events)&&r.events.length<=128&&Array.isArray(r.phases)&&r.phases.length<=16&&Array.isArray(r.failures)&&r.failures.length<=128&&Array.isArray(r.epochs)&&r.epochs.length<=128,'json_shape');
+             disposed+=Number(r.disposed);archived+=Number(r.archived);uncertain+=Number(r.disposalUncertain);if(r.terminalCapture==='captured')terminal.captured++;else if(r.terminalCapture==='failed')terminal.failed++;else terminal.unavailable++;
+            }
+            return {status:'present',complete:v.complete,primaryPreserved:v.primaryPreserved,ancillaryFailureCount:v.ancillaryFailureCount,callbackCount:v.callbackCount,recordCount:v.records.length,disposedCount:disposed,archivedCount:archived,uncertainCount:uncertain,terminalCapture:terminal};
+           }catch{return unknownOwnership('invalid');}
+          }
+          const BOOL_FACTS=['foreignUnchanged','referenceBefore302','thirdListEntered','lateReference'],COUNT_FACTS=['completeWrites','completeNormal','lists','gets','scopePeak','responseStatus','referenceRows','sdkReplay','nativeUnsettled','outwardPending','heldNativeSettled','queuedAtHold','callsAfterRelease'];
+          function unknownFull(status='missing'){return {status,booleans:Object.fromEntries(BOOL_FACTS.map(k=>[k,null])),counts:Object.fromEntries(COUNT_FACTS.map(k=>[k,null])),originalChildElapsedMs:null,rootAvailability:{before:null,during:null,after:null}};}
+          export function projectFull(v,caseName){
+           try{
+            fields(v,['purpose','repository','ref','source','run','attempt','role','kind','cases','consumerGroup','caseName','facts','record','lineage','privateLineage','diagnostics','preparedInputs','ownership',...Object.keys(FLAGS)],['purpose','repository','ref','source','run','attempt','role','kind','cases','consumerGroup','caseName','facts',...Object.keys(FLAGS)]);
+            need(v.purpose==='afw.fixed-budget-lineage.syn.v1'&&v.repository===ORIGINAL.repository&&v.ref===ORIGINAL.ref&&v.source===ORIGINAL.sourceSha&&v.run===ORIGINAL.runId&&v.attempt===1&&v.role==='consumer'&&v.kind==='readonly'&&v.consumerGroup==='readonly'&&v.caseName===caseName&&JSON.stringify(v.cases)===JSON.stringify([caseName])&&isObj(v.facts),'json_identity');
+            for(const[k,value]of Object.entries(FLAGS))need(v[k]===value,'json_identity');const out=unknownFull('present');
+            for(const k of BOOL_FACTS){const x=own(v.facts,k);if(x!==undefined){need(bool(x),'json_fact');out.booleans[k]=x;}}
+            for(const k of COUNT_FACTS){const x=own(v.facts,k);if(x!==undefined){need(num(x,1000000),'json_fact');out.counts[k]=x;}}
+            const elapsed=own(v.facts,'originalChildElapsedMs');if(elapsed!==null&&elapsed!==undefined){need(duration(elapsed),'json_fact');out.originalChildElapsedMs=elapsed;}
+            for(const[k,source]of Object.entries({before:'rootBefore',during:'rootDuring',after:'rootAfter'})){const x=own(v.facts,source);if(x!==undefined&&x!==null){need(isObj(x)&&bool(own(x,'available')),'json_fact');out.rootAvailability[k]=x.available;}}
+            return out;
+           }catch{return unknownFull('invalid');}
+          }
+          export function projectCounts(v){
+           if(v===null)return {status:'missing',tests:null,pass:null,fail:null,cancelled:null,skipped:null,todo:null};
+           try{fields(v,['tests','pass','fail','cancelled','skipped','todo']);need(Object.values(v).every(n=>num(n,1000000)),'json_counts');return {status:'present',...v};}catch{return {status:'invalid',tests:null,pass:null,fail:null,cancelled:null,skipped:null,todo:null};}
+          }
+          
+          const OPERATORS=['strictEqual','deepStrictEqual','notStrictEqual','notDeepStrictEqual','equal','notEqual','==','!=','===','!==','ok','match','doesNotMatch','throws','rejects'];
+          function scalarUnknown(type='missing',bytes=null){return {known:false,type,value:null,recordedFieldBytes:bytes?.length??null,recordedFieldSha256:bytes?sha(bytes):null};}
+          function tapScalar(value,bytes,multiline){
+           if(!multiline&&/^(?:true|false|null|-?(?:0|[1-9][0-9]*))$/.test(value)){
+            const v=value==='true'?true:value==='false'?false:value==='null'?null:Number(value);if(v===null||typeof v==='boolean'||Number.isSafeInteger(v))return {known:true,type:v===null?'null':typeof v,value:v,recordedFieldBytes:bytes.length,recordedFieldSha256:sha(bytes)};
+           }
+           const type=value.startsWith('[')?'array':value.startsWith('{')?'object':/^-?[0-9]+(?:\.[0-9]+)?$/.test(value)?'number':value.startsWith("'")||value.startsWith('"')?'string':'unsupported';
+           return scalarUnknown(type,bytes);
+          }
+          function closedToken(value,values){for(const v of values)if(value===v||value==="'"+v+"'"||value==='"'+v+'"')return v;return 'unknown';}
+          function sourceCandidate(text,bounds,label){
+           const found=[];for(const[id,row]of Object.entries(PUBLIC_SOURCES)){
+            const marker=row.path+':',at=text.lastIndexOf(marker);if(at<0)continue;const before=text.slice(0,at);if(!(at===0||before.endsWith('/')||before.endsWith('(')||before==="'"||before==='"'))continue;
+            const match=/^([1-9][0-9]*):([1-9][0-9]*)(?:[)'"]|\s)*$/.exec(text.slice(at+marker.length));if(!match)continue;
+            const line=Number(match[1]),column=Number(match[2]),bound=bounds[id];if(num(line,bound.lines)&&line>=1&&num(column,65536)&&column>=1&&column<=(bound.columns[line-1]??0)+1)found.push({label,publicFile:id,line,column});
+           }return found;
+          }
+          function emptyTap(){return {status:'unknown',durationMs:null,failureType:'unknown',code:'unknown',operator:'unknown',actual:scalarUnknown(),expected:scalarUnknown(),tapErrorFieldBytes:null,tapErrorFieldSha256:null,registrationCandidate:null,stackCandidates:[],assertionLocation:'unknown',unsupportedFieldCount:0};}
+          export function parseFixedTap(bytes,bounds){
+           need(Buffer.isBuffer(bytes)&&bytes.length<=LIMIT.tap,'tap_bound');const cases=Object.fromEntries(CASES.map(c=>[c,emptyTap()])),counts={},seen=new Set(),recordNumbers=new Set();let wrapper={status:'unknown',durationMs:null},wrapperSeen=false,pending=null,diag=null,field=null;
+           const finishField=()=>{
+            if(!field)return;const raw=Buffer.concat(field.parts),target=diag.target,value=field.value,multi=field.parts.length>1;
+            if(field.key==='error'){target.tapErrorFieldBytes=raw.length;target.tapErrorFieldSha256=sha(raw);}
+            else if(field.key==='actual'||field.key==='expected')target[field.key]=tapScalar(value,raw,multi);
+            else if(field.key==='operator')target.operator=closedToken(value,OPERATORS);
+            else if(field.key==='code')target.code=closedToken(value,['ERR_ASSERTION','ERR_TEST_FAILURE','ERR_TEST_TIMEOUT','ABORT_ERR','ERR_INVALID_ARG_TYPE','ERR_MODULE_NOT_FOUND']);
+            else if(field.key==='failureType')target.failureType=closedToken(value,['testCodeFailure','testTimeoutFailure','cancelledByParent','subtestsFailed','hookFailed','testAborted']);
+            else if(field.key==='duration_ms'){if(!multi&&/^[0-9]+(?:\.[0-9]+)?$/.test(value)&&duration(Number(value)))target.durationMs=Number(value);}
+            else if(field.key==='location'){const values=sourceCandidate(value,bounds,'registration_candidate');need(values.length<=1,'tap_location_ambiguous');target.registrationCandidate=values[0]??null;}
+            else if(field.key==='stack'){
+             const values=[];for(const part of field.parts){for(const candidate of sourceCandidate(utf8(part).replace(/\r?\n$/,''),bounds,'stack_candidate'))if(!values.some(v=>v.publicFile===candidate.publicFile&&v.line===candidate.line&&v.column===candidate.column))values.push(candidate);}
+             need(values.length<=8,'tap_candidate_bound');target.stackCandidates=values;
+            }else if(!['type','exitCode','signal'].includes(field.key)){target.unsupportedFieldCount++;need(target.unsupportedFieldCount<=64,'tap_field_bound');}
+            field=null;
+           };
+           const finishDiag=()=>{finishField();if(diag.wrapper){wrapper.durationMs=diag.target.durationMs;}diag=null;};
+           let position=0;
+           while(position<bytes.length){
+            const n=bytes.indexOf(10,position),end=n<0?bytes.length:n+1,part=bytes.subarray(position,end);need(part.length<=LIMIT.line,'tap_line_bound');const text=utf8(part).replace(/\r?\n$/,'');position=end;
+            if(diag){
+             diag.bytes+=part.length;need(diag.bytes<=LIMIT.block,'tap_block_bound');
+             if(text==='  ...'){finishDiag();pending=null;continue;}
+             need(text===''||text.startsWith('  '),'tap_diag_indent');
+             const match=/^  ([A-Za-z][A-Za-z0-9_]*):(?: (.*))?$/.exec(text);
+             if(match){finishField();need(!diag.fields.has(match[1]),'tap_duplicate_field');diag.fields.add(match[1]);field={key:match[1],value:match[2]??'',parts:[part]};}
+             else if(field){need(text===''||text.startsWith('    '),'tap_diag_indent');field.parts.push(part);}
+             else need(text.trim()==='','tap_diag_field');
+             continue;
+            }
+            if(text==='  ---'){need(pending!==null,'tap_orphan_diag');diag={target:pending.target,wrapper:pending.wrapper,bytes:part.length,fields:new Set()};continue;}
+            const header=/^(ok|not ok) ([1-9][0-9]*) - (.*)$/.exec(text);
+            if(header){
+             const number=Number(header[2]);need(num(number,1000000)&&!recordNumbers.has(number),'tap_record_collision');recordNumbers.add(number);pending=null;
+             const name=header[3],business=/^(R[123]) fixed original SDK readonly budget(?: # (SKIP|TODO)(?: .*)?)?$/.exec(name);
+             if(business){const caseName=business[1];need(!seen.has(caseName),'tap_duplicate_case');seen.add(caseName);cases[caseName].status=business[2]==='SKIP'?'skipped':business[2]==='TODO'?'todo':header[1]==='ok'?'pass':'fail';pending={target:cases[caseName],wrapper:false};continue;}
+             need(!/^R[123]\b/.test(name),'tap_ambiguous_case');
+             const normalized=name.replace(/^file:\/\//,'');if(normalized===PUBLIC_SOURCES.native_test.path||normalized.endsWith('/'+PUBLIC_SOURCES.native_test.path)){
+              need(!wrapperSeen,'tap_duplicate_wrapper');wrapperSeen=true;wrapper.status=header[1]==='ok'?'pass':'fail';pending={target:emptyTap(),wrapper:true};continue;
+             }
+             pending=null;continue;
+            }
+            pending=null;
+            if(/^\s+(?:ok|not ok) [1-9][0-9]* - R[123]\b/.test(text))throw new Rejected('tap_nested_case');
+            const count=/^# (tests|pass|fail|cancelled|skipped|todo) ([0-9]+)$/.exec(text);if(count){need(!Object.hasOwn(counts,count[1])&&num(Number(count[2]),1000000),'tap_counts_ambiguous');counts[count[1]]=Number(count[2]);}
+           }
+           need(diag===null,'tap_truncated_diag');
+           const summary=Object.keys(counts).length===6?projectCounts(counts):projectCounts(null);
+           return {cases:CASES.map(caseName=>({case:caseName,...cases[caseName]})),fileWrapper:wrapper,summary,recordedCaseCount:seen.size};
+          }
+          
+          const PHASES=['not_attempted','passed','verified','authenticated','projected','complete','failed','unknown'];
+          function baseResult(){
+           return {purpose:'afw.readonly-receipt-inspection.safe.v1',inspector:{repository:ORIGINAL.repository,ref:ORIGINAL.ref,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,node:'22.23.4'},originalContext:{...ORIGINAL},artifact:{id:ARTIFACT,zipBytes:ZIP_BYTES,zipSha256:ZIP_SHA,verified:false},sources:Object.entries(PUBLIC_SOURCES).map(([id,v])=>({id,blob:v.blob,lines:null})),status:'rejected',phases:{fixtures:'not_attempted',download:'not_attempted',authentication:'not_attempted',identity:'not_attempted',projection:'not_attempted',cleanup:'not_attempted'},fixtures:{checks:0},authentication:{authenticated:false,innerInventoryVerified:false,fileCount:null,totalBytes:null},failureIdentity:{verified:false,commandSucceeded:null,elapsedMs:null},cases:CASES.map(caseName=>({case:caseName,tap:emptyTap(),ownership:unknownOwnership('not_examined'),fullResult:unknownFull('not_examined')})),businessCounts:{...projectCounts(null),status:'not_examined'},tap:{status:'not_examined',recordedCaseCount:0,fileWrapper:{status:'unknown',durationMs:null},summary:{...projectCounts(null),status:'not_examined'},reason:'none'},timings:{downloadMs:null,openMs:null,parseCleanupMs:null},failure:null,...FLAGS};
+          }
+          function validateCandidate(v,sources,label){
+           if(v===null)return;fields(v,['label','publicFile','line','column']);need(v.label===label&&typeof v.publicFile==='string'&&Object.hasOwn(PUBLIC_SOURCES,v.publicFile)&&num(v.line,sources.find(x=>x.id===v.publicFile)?.lines??0)&&v.line>=1&&num(v.column,65536)&&v.column>=1,'public_candidate');
+          }
+          function validateCountProjection(v){fields(v,['status','tests','pass','fail','cancelled','skipped','todo']);need(['present','missing','invalid','not_examined'].includes(v.status),'public_enum');for(const k of ['tests','pass','fail','cancelled','skipped','todo'])need(v[k]===null||num(v[k]),'public_count');}
+          function validateScalarProjection(v){
+           fields(v,['known','type','value','recordedFieldBytes','recordedFieldSha256']);need(bool(v.known),'public_scalar');
+           const absent=v.recordedFieldBytes===null&&v.recordedFieldSha256===null,present=num(v.recordedFieldBytes,LIMIT.block)&&v.recordedFieldBytes>=1&&typeof v.recordedFieldSha256==='string'&&/^[a-f0-9]{64}$/.test(v.recordedFieldSha256);
+           need(absent||present,'public_scalar');
+           if(v.known){need(present&&((v.type==='boolean'&&bool(v.value))||(v.type==='null'&&v.value===null)||(v.type==='number'&&Number.isSafeInteger(v.value))),'public_scalar');}
+           else{need(v.value===null&&((v.type==='missing'&&absent)||(['number','string','array','object','unsupported'].includes(v.type)&&present)),'public_scalar');}
+          }
+          function validateTapProjection(v,sources){
+           fields(v,['status','durationMs','failureType','code','operator','actual','expected','tapErrorFieldBytes','tapErrorFieldSha256','registrationCandidate','stackCandidates','assertionLocation','unsupportedFieldCount']);
+           need(['unknown','pass','fail','skipped','todo'].includes(v.status)&&['unknown','testCodeFailure','testTimeoutFailure','cancelledByParent','subtestsFailed','hookFailed','testAborted'].includes(v.failureType)&&['unknown','ERR_ASSERTION','ERR_TEST_FAILURE','ERR_TEST_TIMEOUT','ABORT_ERR','ERR_INVALID_ARG_TYPE','ERR_MODULE_NOT_FOUND'].includes(v.code)&&['unknown',...OPERATORS].includes(v.operator),'public_enum');
+           need(v.durationMs===null||duration(v.durationMs),'public_duration');validateScalarProjection(v.actual);validateScalarProjection(v.expected);need((v.tapErrorFieldBytes===null&&v.tapErrorFieldSha256===null)||(num(v.tapErrorFieldBytes,LIMIT.block)&&v.tapErrorFieldBytes>=1&&typeof v.tapErrorFieldSha256==='string'&&/^[a-f0-9]{64}$/.test(v.tapErrorFieldSha256)),'public_error_field');validateCandidate(v.registrationCandidate,sources,'registration_candidate');need(Array.isArray(v.stackCandidates)&&v.stackCandidates.length<=8,'public_candidate');for(const c of v.stackCandidates)validateCandidate(c,sources,'stack_candidate');need(v.assertionLocation==='unknown'&&num(v.unsupportedFieldCount,64),'public_candidate');
+          }
+          export function validatePublic(v){
+           fields(v,['purpose','inspector','originalContext','artifact','sources','status','phases','fixtures','authentication','failureIdentity','cases','businessCounts','tap','timings','failure',...Object.keys(FLAGS)]);
+           need(v.purpose==='afw.readonly-receipt-inspection.safe.v1','public_identity');fields(v.inspector,['repository','ref','source','run','attempt','node']);need(v.inspector.repository===ORIGINAL.repository&&v.inspector.ref===ORIGINAL.ref&&typeof v.inspector.source==='string'&&/^[a-f0-9]{40}$/.test(v.inspector.source)&&typeof v.inspector.run==='string'&&/^[1-9][0-9]*$/.test(v.inspector.run)&&v.inspector.attempt===1&&v.inspector.node==='22.23.4','public_identity');fields(v.originalContext,Object.keys(ORIGINAL));for(const[k,x]of Object.entries(ORIGINAL))need(v.originalContext[k]===x,'public_identity');fields(v.artifact,['id','zipBytes','zipSha256','verified']);need(v.artifact.id===ARTIFACT&&v.artifact.zipBytes===ZIP_BYTES&&v.artifact.zipSha256===ZIP_SHA&&bool(v.artifact.verified),'public_identity');
+           need(Array.isArray(v.sources)&&v.sources.length===2&&new Set(v.sources.map(x=>x.id)).size===2,'public_sources');for(const s of v.sources){fields(s,['id','blob','lines']);need(typeof s.id==='string'&&Object.hasOwn(PUBLIC_SOURCES,s.id)&&s.blob===PUBLIC_SOURCES[s.id].blob&&(s.lines===null||num(s.lines,100000)&&s.lines>=1),'public_sources');}
+           need(['inspected','partial','rejected'].includes(v.status),'public_enum');fields(v.phases,['fixtures','download','authentication','identity','projection','cleanup']);for(const x of Object.values(v.phases))need(PHASES.includes(x),'public_enum');fields(v.fixtures,['checks']);need(num(v.fixtures.checks,128),'public_count');
+           fields(v.authentication,['authenticated','innerInventoryVerified','fileCount','totalBytes']);need(bool(v.authentication.authenticated)&&bool(v.authentication.innerInventoryVerified)&&(v.authentication.fileCount===null||num(v.authentication.fileCount,LIMIT.files))&&(v.authentication.totalBytes===null||num(v.authentication.totalBytes,LIMIT.native)),'public_auth');
+           fields(v.failureIdentity,['verified','commandSucceeded','elapsedMs']);need(bool(v.failureIdentity.verified)&&(v.failureIdentity.commandSucceeded===null||v.failureIdentity.commandSucceeded===false)&&(v.failureIdentity.elapsedMs===null||duration(v.failureIdentity.elapsedMs)),'public_identity');
+           need(Array.isArray(v.cases)&&JSON.stringify(v.cases.map(x=>x.case))===JSON.stringify(CASES),'public_cases');
+           for(const c of v.cases){
+            fields(c,['case','tap','ownership','fullResult']);validateTapProjection(c.tap,v.sources);
+            fields(c.ownership,['status','complete','primaryPreserved','ancillaryFailureCount','callbackCount','recordCount','disposedCount','archivedCount','uncertainCount','terminalCapture']);need(['present','missing','invalid','oversize','not_examined'].includes(c.ownership.status),'public_enum');for(const k of ['complete','primaryPreserved'])need(c.ownership[k]===null||bool(c.ownership[k]),'public_bool');for(const k of ['ancillaryFailureCount','callbackCount','recordCount','disposedCount','archivedCount','uncertainCount'])need(c.ownership[k]===null||num(c.ownership[k],128),'public_count');fields(c.ownership.terminalCapture,['captured','failed','unavailable']);for(const x of Object.values(c.ownership.terminalCapture))need(x===null||num(x,2),'public_count');
+            fields(c.fullResult,['status','booleans','counts','originalChildElapsedMs','rootAvailability']);need(['present','missing','invalid','oversize','not_examined'].includes(c.fullResult.status),'public_enum');fields(c.fullResult.booleans,BOOL_FACTS);for(const x of Object.values(c.fullResult.booleans))need(x===null||bool(x),'public_bool');fields(c.fullResult.counts,COUNT_FACTS);for(const x of Object.values(c.fullResult.counts))need(x===null||num(x),'public_count');need(c.fullResult.originalChildElapsedMs===null||duration(c.fullResult.originalChildElapsedMs),'public_duration');fields(c.fullResult.rootAvailability,['before','during','after']);for(const x of Object.values(c.fullResult.rootAvailability))need(x===null||bool(x),'public_bool');
+           }
+           validateCountProjection(v.businessCounts);fields(v.tap,['status','recordedCaseCount','fileWrapper','summary','reason']);need(['not_examined','present','missing','rejected','oversize'].includes(v.tap.status)&&num(v.tap.recordedCaseCount,3),'public_tap');fields(v.tap.fileWrapper,['status','durationMs']);need(['unknown','pass','fail'].includes(v.tap.fileWrapper.status)&&(v.tap.fileWrapper.durationMs===null||duration(v.tap.fileWrapper.durationMs)),'public_tap');validateCountProjection(v.tap.summary);need(REASONS.includes(v.tap.reason),'public_reason');
+           fields(v.timings,['downloadMs','openMs','parseCleanupMs']);for(const x of Object.values(v.timings))need(x===null||num(x,300000),'public_duration');
+           if(v.failure!==null){fields(v.failure,['reason','type']);need(REASONS.includes(v.failure.reason)&&['rejected','timeout','io','program','crypto'].includes(v.failure.type),'public_reason');}
+           for(const[k,x]of Object.entries(FLAGS))need(v[k]===x,'public_flag');const ready=v.artifact.verified===true&&v.authentication.authenticated===true&&v.authentication.innerInventoryVerified===true&&v.failureIdentity.verified===true;
+           if(!ready){
+            need(v.failureIdentity.verified===false&&v.failureIdentity.commandSucceeded===null&&v.failureIdentity.elapsedMs===null&&v.authentication.fileCount===null&&v.authentication.totalBytes===null,'public_partial_auth');
+            const empty=baseResult();assert.deepEqual(v.cases,empty.cases);assert.deepEqual(v.businessCounts,empty.businessCounts);assert.deepEqual(v.tap,empty.tap);
+           }else need(num(v.authentication.fileCount,LIMIT.files)&&v.authentication.fileCount>=1&&num(v.authentication.totalBytes,LIMIT.native)&&v.authentication.totalBytes>=1,'public_auth');
+           need(Buffer.byteLength(JSON.stringify(v))<=LIMIT.result,'public_bound');return v;
+          }
+          const REASONS=['none','metadata_diagnostic','metadata_digest','metadata_identity','metadata_bound','fixtures_failed','scope','source_pin','program_unavailable','state_missing','download_failed','download_timeout','download_bound','download_digest','download_redirect','download_status','zip_bound','zip_eocd','zip_entries','zip_directory','zip_central','zip_flags','zip_central_range','zip_paths','zip_link','zip_entry_bound','zip_extra','zip_local','zip_local_identity','zip_local_name','zip_local_sizes','zip_data_range','zip_descriptor','zip_ranges','zip_inflate','zip_crc','opening_failed','opening_timeout','identity_rejected','json_shape','json_fields','json_identity','json_enum','json_fact','json_counts','tap_missing','tap_bound','tap_line_bound','tap_block_bound','tap_location_ambiguous','tap_candidate_bound','tap_field_bound','tap_duplicate_field','tap_orphan_diag','tap_diag_indent','tap_diag_field','tap_duplicate_case','tap_record_collision','tap_ambiguous_case','tap_duplicate_wrapper','tap_nested_case','tap_counts_ambiguous','tap_truncated_diag','tap_utf8','parse_failed','parse_timeout','cleanup_failed','cleanup_timeout','temp_path','io'];
+          const reasonOf=e=>e instanceof Rejected&&REASONS.includes(e.reason)?e.reason:'io';
+          
+          
+          function inspectionAccepted(out){
+           validatePublic(out);
+           return out.status==='inspected'&&out.failure===null&&out.artifact.verified===true&&out.authentication.authenticated===true&&out.authentication.innerInventoryVerified===true&&out.failureIdentity.verified===true&&out.failureIdentity.commandSucceeded===false&&out.phases.fixtures==='passed'&&out.fixtures.checks>=1&&out.phases.download==='verified'&&out.phases.authentication==='authenticated'&&out.phases.identity==='verified'&&out.phases.projection==='projected'&&out.phases.cleanup==='complete'&&num(out.timings.downloadMs,30000)&&num(out.timings.openMs,120000)&&num(out.timings.parseCleanupMs,15000);
+          }
+          
+          const METADATA_STAGES=['input','request','response','stream','utf8','json','validate','output','complete'];
+          const METADATA_PREDICATES=['none','unknown','assigned_id','upload_digest_type','upload_digest_format','http_status','response_body','stream_cap','utf8_decode','json_decode','metadata_object','artifact_id','artifact_name','artifact_expired','artifact_size','remote_digest_format','digest_equality','workflow_run_id','source_sha','source_branch','retention','output_write'];
+          function metadataFailure(observation,predicate,reason){if(observation&&observation.firstFailedPredicate==='none'){observation.firstFailedPredicate=predicate;observation.reason=reason;}}
+          function metadataCheck(ok,reason,predicate,observation){if(!ok){metadataFailure(observation,predicate,reason);throw new Rejected(reason);}}
+          function uploadDigest(value,observation=null){
+           metadataCheck(typeof value==='string','metadata_digest','upload_digest_type',observation);const digest=value.startsWith('sha256:')?value.slice(7):value;metadataCheck(/^[a-f0-9]{64}$/.test(digest),'metadata_digest','upload_digest_format',observation);return digest;
+          }
+          function validateAssignedMetadata(v,id,uploaded,observation=null){
+           if(observation)observation.stage='validate';
+           metadataCheck(typeof id==='string'&&/^[1-9][0-9]*$/.test(id),'metadata_identity','assigned_id',observation);const digest=uploadDigest(uploaded,observation);
+           metadataCheck(isObj(v),'metadata_identity','metadata_object',observation);
+           metadataCheck(String(v.id)===id,'metadata_identity','artifact_id',observation);
+           metadataCheck(v.name==='afw-readonly-receipt-inspection-'+process.env.GITHUB_RUN_ID+'-1','metadata_identity','artifact_name',observation);
+           metadataCheck(v.expired===false,'metadata_identity','artifact_expired',observation);
+           metadataCheck(Number.isSafeInteger(v.size_in_bytes)&&v.size_in_bytes>0&&v.size_in_bytes<=131072,'metadata_identity','artifact_size',observation);
+           metadataCheck(typeof v.digest==='string'&&/^sha256:[a-f0-9]{64}$/.test(v.digest),'metadata_digest','remote_digest_format',observation);
+           metadataCheck(v.digest==='sha256:'+digest,'metadata_digest','digest_equality',observation);
+           metadataCheck(String(v.workflow_run?.id)===process.env.GITHUB_RUN_ID,'metadata_identity','workflow_run_id',observation);
+           metadataCheck(v.workflow_run?.head_sha===process.env.GITHUB_SHA,'metadata_identity','source_sha',observation);
+           metadataCheck(v.workflow_run?.head_branch==='feat/finite-native-cleanup-20261101','metadata_identity','source_branch',observation);
+           const created=Date.parse(v.created_at),expires=Date.parse(v.expires_at);metadataCheck(Number.isFinite(created)&&Number.isFinite(expires)&&expires-created>=6*86400000&&expires-created<=8*86400000,'metadata_identity','retention',observation);return true;
+          }
+          async function readMetadataResponse(response,observation=null){
+           if(observation)observation.stage='response';const status=response.status;if(observation)observation.httpStatus=Number.isInteger(status)&&status>=100&&status<=599?status:null;
+           metadataCheck(status===200,'metadata_identity','http_status',observation);const body=response.body;metadataCheck(body!==null,'metadata_identity','response_body',observation);
+           if(observation)observation.stage='stream';const parts=[],reader=body.getReader();let total=0;
+           try{for(;;){const part=await reader.read();if(part.done)break;total+=part.value.byteLength;if(observation)observation.receivedBytes=total;metadataCheck(total<=65536,'metadata_bound','stream_cap',observation);parts.push(Buffer.from(part.value));}}
+           catch(error){try{await reader.cancel();}catch{}throw error;}
+           if(observation)observation.stage='utf8';let text;try{text=utf8(Buffer.concat(parts));}catch(error){metadataFailure(observation,'utf8_decode','unknown');throw error;}
+           if(observation)observation.stage='json';try{return JSON.parse(text);}catch(error){metadataFailure(observation,'json_decode','unknown');throw error;}
+          }
+          function metadataDiagnostic(id){
+           return {marker:'AFW_METADATA_READBACK/1',source:typeof process.env.GITHUB_SHA==='string'&&/^[a-f0-9]{40}$/.test(process.env.GITHUB_SHA)?process.env.GITHUB_SHA:null,run:typeof process.env.GITHUB_RUN_ID==='string'&&/^[1-9][0-9]{0,19}$/.test(process.env.GITHUB_RUN_ID)?process.env.GITHUB_RUN_ID:null,attempt:process.env.GITHUB_RUN_ATTEMPT==='1'?1:null,assignedArtifactId:typeof id==='string'&&/^[1-9][0-9]{0,19}$/.test(id)?id:null,stage:'input',firstFailedPredicate:'none',reason:'none',httpStatus:null,receivedBytes:0,timeoutObserved:null,verified:false};
+          }
+          function validateMetadataDiagnostic(v){
+           const keys=['marker','source','run','attempt','assignedArtifactId','stage','firstFailedPredicate','reason','httpStatus','receivedBytes','timeoutObserved','verified'];metadataCheck(isObj(v)&&Object.keys(v).length===keys.length&&Object.keys(v).every(k=>keys.includes(k)),'metadata_diagnostic','unknown',null);
+           const optional=(x,pattern)=>x===null||(typeof x==='string'&&pattern.test(x));
+           metadataCheck(v.marker==='AFW_METADATA_READBACK/1'&&optional(v.source,/^[a-f0-9]{40}$/)&&optional(v.run,/^[1-9][0-9]{0,19}$/)&&(v.attempt===null||v.attempt===1)&&optional(v.assignedArtifactId,/^[1-9][0-9]{0,19}$/),'metadata_diagnostic','unknown',null);
+           metadataCheck(METADATA_STAGES.includes(v.stage)&&METADATA_PREDICATES.includes(v.firstFailedPredicate)&&['none','unknown','metadata_identity','metadata_digest','metadata_bound'].includes(v.reason)&&(v.httpStatus===null||Number.isInteger(v.httpStatus)&&v.httpStatus>=100&&v.httpStatus<=599)&&num(v.receivedBytes,4295032832)&&(v.timeoutObserved===null||bool(v.timeoutObserved))&&bool(v.verified),'metadata_diagnostic','unknown',null);
+           metadataCheck(v.verified?v.stage==='complete'&&v.firstFailedPredicate==='none'&&v.reason==='none':v.firstFailedPredicate!=='none'&&v.reason!=='none','metadata_diagnostic','unknown',null);return v;
+          }
+          function encodeMetadataDiagnostic(v){const line=JSON.stringify(v);metadataCheck(Buffer.byteLength(line)<=2048,'metadata_diagnostic','unknown',null);validateMetadataDiagnostic(v);return line;}
+          async function runMetadataReadback(id,uploaded,request,writeVerified,emitDiagnostic,signal){
+           const observation=metadataDiagnostic(id);let primary=null,diagnosticError=null;
+           try{
+            metadataCheck(typeof id==='string'&&/^[1-9][0-9]*$/.test(id),'metadata_identity','assigned_id',observation);uploadDigest(uploaded,observation);
+            observation.stage='request';const response=await request();const value=await readMetadataResponse(response,observation);validateAssignedMetadata(value,id,uploaded,observation);
+            observation.stage='output';try{await writeVerified();}catch(error){metadataFailure(observation,'output_write','unknown');throw error;}observation.verified=true;observation.stage='complete';
+           }catch(error){primary=error;metadataFailure(observation,'unknown','unknown');}
+           try{observation.timeoutObserved=typeof signal?.aborted==='boolean'?signal.aborted:null;}catch{}
+           try{await emitDiagnostic(encodeMetadataDiagnostic(observation));}catch(error){diagnosticError=error;}
+           if(primary!==null)throw primary;if(diagnosticError!==null)throw diagnosticError;return observation;
+          }
+          
+          const programPath=()=>join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs');
+          const statePath=()=>join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-state.json');
+          const projectedPath=()=>join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-projected.json');
+          const safePath=()=>join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-safe.json');
+          const projectErrorPath=()=>join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-project-error.json');
+          const cleanupPath=()=>join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-cleanup.json');
+          function scope(){need(process.env.GITHUB_REPOSITORY===ORIGINAL.repository&&process.env.GITHUB_REF===ORIGINAL.ref&&process.env.GITHUB_RUN_ATTEMPT==='1'&&/^[a-f0-9]{40}$/.test(process.env.GITHUB_SHA??'')&&/^[1-9][0-9]*$/.test(process.env.GITHUB_RUN_ID??'')&&process.versions.node==='22.23.4','scope');}
+          function noKey(){need(!Object.hasOwn(process.env,'AFW_SYN_CHECKPOINT_KEY'),'scope');}
+          async function readBound(path,limit){
+           const h=await open(path,FSC.O_RDONLY|FSC.O_NOFOLLOW);try{const before=await h.stat({bigint:true});need(before.isFile()&&before.nlink===1n&&before.size<=BigInt(limit),'json_shape');const bytes=await h.readFile();const after=await h.stat({bigint:true});need(before.dev===after.dev&&before.ino===after.ino&&before.size===after.size&&before.mtimeNs===after.mtimeNs&&BigInt(bytes.length)===before.size,'io');return bytes;}finally{await h.close();}
+          }
+          async function writeState(s){const h=await open(statePath(),FSC.O_WRONLY|FSC.O_TRUNC|FSC.O_NOFOLLOW);try{await h.writeFile(JSON.stringify(s));}finally{await h.close();}}
+          async function checkedRoot(root){const tmp=await realpath(resolve(process.env.RUNNER_TEMP));need(typeof root==='string'&&dirname(root)===tmp&&/^afw-readonly-receipt-[A-Za-z0-9]{6}$/.test(root.slice(tmp.length+1)),'temp_path');need(await realpath(root)===root,'temp_path');return root;}
+          async function readState(){
+           scope();const s=JSON.parse(utf8(await readBound(statePath(),2*1024*1024)));need(isObj(s)&&s.inspectorSource===process.env.GITHUB_SHA&&s.inspectorRun===process.env.GITHUB_RUN_ID&&s.programSha256===sha(await readBound(programPath(),256*1024)),'state_missing');await checkedRoot(s.root);return s;
+          }
+          async function sourceBounds(){
+           const helper=await readBound(HELPER,65536);need(gitBlob(helper)===HELPER_BLOB,'source_pin');
+           const bounds={};for(const[id,row]of Object.entries(PUBLIC_SOURCES)){const b=await readBound(row.path,1024*1024);need(gitBlob(b)===row.blob,'source_pin');const lines=utf8(b).split('\n');bounds[id]={lines:lines.length,columns:lines.map(x=>x.length)};}return bounds;
+          }
+          async function optionalJson(root,relative){
+           try{const b=await readBound(join(root,relative),LIMIT.jsonFile);return {status:'present',value:JSON.parse(utf8(b))};}catch(error){if(error?.code==='ENOENT')return {status:'missing',value:null};return {status:'invalid',value:null};}
+          }
+          async function runChild(mode,timeout){
+           return new Promise((resolveChild,reject)=>{execFile(process.execPath,[programPath(),mode],{timeout,killSignal:'SIGKILL',maxBuffer:65536,env:{...process.env}},error=>error?reject(error):resolveChild());});
+          }
+          function transferState(out,s){if(!s)return out;out.phases={...out.phases,...s.phases};out.fixtures.checks=s.fixtureChecks??0;out.artifact.verified=s.zipVerified===true;if(s.bounds)out.sources=Object.entries(PUBLIC_SOURCES).map(([id,v])=>({id,blob:v.blob,lines:s.bounds[id].lines}));out.timings.downloadMs=s.downloadMs??null;out.timings.openMs=s.openMs??null;if(s.authentication){out.authentication={authenticated:s.authentication.authenticated===true,innerInventoryVerified:s.authentication.innerInventoryVerified===true,fileCount:null,totalBytes:null};}if(s.failure)out.failure=s.failure;return out;}
+          
+          async function fixtureMode(){
+           scope();noKey();const bounds=await sourceBounds(),tmp=await realpath(resolve(process.env.RUNNER_TEMP)),root=await mkdtemp(join(tmp,'afw-readonly-receipt-'));
+           const s={inspectorSource:process.env.GITHUB_SHA,inspectorRun:process.env.GITHUB_RUN_ID,programSha256:sha(await readBound(programPath(),256*1024)),root,bounds,phases:{fixtures:'not_attempted',download:'not_attempted',authentication:'not_attempted',identity:'not_attempted',projection:'not_attempted',cleanup:'not_attempted'},fixtureChecks:0,failure:null};
+           await writeFile(statePath(),JSON.stringify(s),{flag:'wx',mode:0o600});try{s.fixtureChecks=await runFixtures(bounds);s.phases.fixtures='passed';}catch{s.phases.fixtures='failed';s.failure={reason:'fixtures_failed',type:'rejected'};}await writeState(s);need(s.phases.fixtures==='passed','fixtures_failed');
+          }
+          async function downloadMode(){
+           noKey();const s=await readState();need(s.phases.fixtures==='passed','fixtures_failed');const started=performance.now(),abort=AbortSignal.timeout(30000);
+           try{
+            const token=process.env.GH_ARTIFACT_TOKEN;need(typeof token==='string'&&token.length>0,'download_failed');let url='https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/13949168304/zip',response;
+            for(let hop=0;hop<4;hop++){
+             response=await fetch(url,{redirect:'manual',headers:hop===0?{Authorization:'Bearer '+token,Accept:'application/vnd.github+json'}:{},signal:abort});
+             if(response.status===200)break;need([301,302,303,307,308].includes(response.status)&&hop<3,'download_status');const location=response.headers.get('location');need(typeof location==='string','download_redirect');const next=new URL(location);need(next.protocol==='https:'&&!next.username&&!next.password&&(!next.port||next.port==='443')&&!next.hash,'download_redirect');await response.body?.cancel();url=next.href;
+            }
+            need(response?.status===200,'download_status');const declared=response.headers.get('content-length');if(declared!==null)need(/^[0-9]+$/.test(declared)&&Number(declared)===ZIP_BYTES,'download_bound');
+            const parts=[];let total=0;const reader=response.body.getReader();for(;;){const part=await reader.read();if(part.done)break;total+=part.value.length;if(total>ZIP_BYTES){await reader.cancel();throw new Rejected('download_bound');}parts.push(Buffer.from(part.value));}
+            const bytes=Buffer.concat(parts);need(bytes.length===ZIP_BYTES,'download_bound');need(sha(bytes)===ZIP_SHA,'download_digest');const files=decodeFixedZip(bytes);need(elapsed(started)<=30000,'download_timeout');
+            await writeFile(join(s.root,'artifact.zip'),bytes,{flag:'wx',mode:0o600});const stage=join(s.root,'stage');await mkdir(stage,{mode:0o700});for(const name of NAMES)await writeFile(join(stage,name),files.get(name),{flag:'wx',mode:0o600});
+            need(elapsed(started)<=30000,'download_timeout');s.zipVerified=true;s.phases.download='verified';
+           }catch(error){s.phases.download='failed';s.failure={reason:abort.aborted?'download_timeout':reasonOf(error)==='io'?'download_failed':reasonOf(error),type:abort.aborted?'timeout':'rejected'};}
+           s.downloadMs=elapsed(started);await writeState(s);need(s.phases.download==='verified','download_failed');
+          }
+          async function openChildMode(){
+           const s=await readState();need(s.phases.fixtures==='passed'&&s.zipVerified===true,'opening_failed');need(gitBlob(await readBound(HELPER,65536))===HELPER_BLOB,'source_pin');
+           const {openDirectory}=await import(pathToFileURL(resolve(HELPER)).href);
+           const receipt=await openDirectory({stagingDir:join(s.root,'stage'),destinationDir:join(s.root,'plain'),context:{...ORIGINAL}});
+           need(receipt.authenticated===true&&receipt.innerInventoryVerified===true&&num(receipt.fileCount,LIMIT.files)&&num(receipt.totalBytes,LIMIT.native),'opening_failed');
+           await writeFile(join(s.root,'authenticated.json'),JSON.stringify({authenticated:true,innerInventoryVerified:true,fileCount:receipt.fileCount,totalBytes:receipt.totalBytes}),{flag:'wx',mode:0o600});
+          }
+          async function openingMode(){
+           const s=await readState();need(s.phases.fixtures==='passed'&&s.phases.download==='verified'&&s.zipVerified===true,'opening_failed');const started=performance.now();
+           try{await runChild('open-child',120000);const a=JSON.parse(utf8(await readBound(join(s.root,'authenticated.json'),LIMIT.record)));fields(a,['authenticated','innerInventoryVerified','fileCount','totalBytes']);need(a.authenticated===true&&a.innerInventoryVerified===true&&num(a.fileCount,LIMIT.files)&&num(a.totalBytes,LIMIT.native),'opening_failed');s.authentication=a;s.phases.authentication='authenticated';}
+           catch(error){s.phases.authentication='failed';s.failure={reason:error?.killed?'opening_timeout':'opening_failed',type:error?.killed?'timeout':'crypto'};}
+           s.openMs=elapsed(started);await writeState(s);need(s.phases.authentication==='authenticated','opening_failed');
+          }
+          async function projectChildMode(){
+           noKey();const s=await readState(),out=transferState(baseResult(),s);need(s.phases.authentication==='authenticated'&&s.authentication?.authenticated===true,'opening_failed');const plain=join(s.root,'plain');
+           out.authentication={...s.authentication};const job=await optionalJson(plain,'job-manifest.json');need(job.status==='present','identity_rejected');
+           try{out.failureIdentity=validateFailureIdentity(job.value);}catch{throw new Rejected('identity_rejected');}out.phases.identity='verified';
+           for(const c of out.cases){
+            const base='output/finite-budget/readonly/'+c.case,owner=await optionalJson(plain,base+'/ownership.json'),full=await optionalJson(plain,base+'/full-result.json');
+            c.ownership=owner.status==='present'?projectOwnership(owner.value,c.case):unknownOwnership(owner.status);c.fullResult=full.status==='present'?projectFull(full.value,c.case):unknownFull(full.status);
+           }
+           const counts=await optionalJson(plain,'business-counts.json');out.businessCounts=counts.status==='present'?projectCounts(counts.value):projectCounts(null);
+           try{const bytes=await readBound(join(plain,'logs','command-output.log'),LIMIT.tap),tap=parseFixedTap(bytes,s.bounds);for(const c of out.cases)c.tap=tap.cases.find(x=>x.case===c.case);out.tap={status:'present',recordedCaseCount:tap.recordedCaseCount,fileWrapper:tap.fileWrapper,summary:tap.summary,reason:'none'};for(const c of out.cases)delete c.tap.case;}
+           catch(error){out.tap={status:error?.code==='ENOENT'?'missing':'rejected',recordedCaseCount:0,fileWrapper:{status:'unknown',durationMs:null},summary:projectCounts(null),reason:error?.code==='ENOENT'?'tap_missing':error instanceof Rejected?reasonOf(error):'tap_utf8'};}
+           out.phases.projection='projected';out.status=out.tap.status==='present'&&out.tap.recordedCaseCount===3?'inspected':'partial';if(out.tap.reason!=='none')out.failure={reason:out.tap.reason,type:'rejected'};
+           validatePublic(out);await writeFile(projectedPath(),JSON.stringify(out),{flag:'wx',mode:0o600});
+          }
+          async function cleanupChildMode(){
+           noKey();const s=await readState(),root=await checkedRoot(s.root);await rm(root,{recursive:true,force:false,maxRetries:0});await writeFile(cleanupPath(),JSON.stringify({complete:true}),{flag:'wx',mode:0o600});
+          }
+          async function projectionMode(){
+           noKey();let s=null,out=baseResult();const started=performance.now();
+           try{s=await readState();out=transferState(out,s);if(s.phases.authentication==='authenticated'){try{await runChild('project-child',10000);out=JSON.parse(utf8(await readBound(projectedPath(),LIMIT.result)));validatePublic(out);}catch(error){out=transferState(baseResult(),s);let reason=error?.killed?'parse_timeout':'parse_failed';try{const detail=JSON.parse(utf8(await readBound(projectErrorPath(),1024)));if(REASONS.includes(detail.reason))reason=detail.reason;}catch{}out.failure={reason,type:error?.killed?'timeout':'rejected'};out.phases.projection='failed';if(reason==='identity_rejected')out.phases.identity='failed';}}
+            const remaining=Math.max(1,15000-elapsed(started));try{await runChild('cleanup-child',remaining);const receipt=JSON.parse(utf8(await readBound(cleanupPath(),1024)));need(receipt.complete===true,'cleanup_failed');out.phases.cleanup='complete';}catch(error){out.phases.cleanup='failed';out.failure={reason:error?.killed?'cleanup_timeout':'cleanup_failed',type:error?.killed?'timeout':'io'};out.status='rejected';}
+           }catch{out.phases.cleanup='unknown';out.failure={reason:'state_missing',type:'program'};}
+           out.timings.parseCleanupMs=elapsed(started);if(out.timings.parseCleanupMs>15000){out.status='rejected';out.failure={reason:'parse_timeout',type:'timeout'};}validatePublic(out);await writeFile(safePath(),JSON.stringify(out),{flag:'wx',mode:0o600});
+          }
+          export async function publishResult(){
+           scope();noKey();let out;try{out=JSON.parse(utf8(await readBound(safePath(),LIMIT.result)));validatePublic(out);}catch{out=baseResult();out.failure={reason:'program_unavailable',type:'program'};validatePublic(out);}
+           const dest=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-public');await mkdir(dest,{mode:0o700});need((await readdir(dest)).length===0,'public_bound');const bytes=Buffer.from(JSON.stringify(out,null,2));need(bytes.length<=LIMIT.result,'public_bound');await writeFile(join(dest,'result.json'),bytes,{flag:'wx',mode:0o600});const manifest={purpose:'afw.readonly-receipt-inspection-manifest.safe.v1',inspectorSource:process.env.GITHUB_SHA,inspectorRun:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:bytes.length,sha256:sha(bytes)}]};await writeFile(join(dest,'manifest.json'),JSON.stringify(manifest,null,2),{flag:'wx',mode:0o600});
+           const valid=inspectionAccepted(out);await writeFile(process.env.GITHUB_OUTPUT,'inspection-valid='+valid+'\n',{flag:'a'});return out;
+          }
+          
+          
+          const FIXTURE_PROGRESS={completed:0,current:null};
+          const FIXTURE_IDS=Object.freeze(["zip_valid","zip_signed_descriptor","zip_extra","zip_traversal","zip_duplicate","zip_bad_crc","zip_link","zip_bad_range","failure_identity_valid","failure_identity_success_reject","failure_identity_role_reject","failure_identity_kind_reject","failure_identity_unknown_reject","ownership_valid","ownership_unknown_reject","ownership_enum_reject","optional_missing_unknown","full_result_valid","full_result_unknown_reject","tap_valid_canaries","tap_unknown_scalar","tap_duplicate_case","tap_case_number_collision","tap_wrapper_number_collision","tap_unknown_number_collision","tap_late_diag_comment","tap_late_diag_unrelated","tap_injected_name","tap_long_line","tap_long_block","public_authenticated_valid","gate_artifact_count","gate_artifact_actual","gate_artifact_candidate","gate_artifact_duration","gate_artifact_business","gate_authenticated_count","gate_authenticated_actual","gate_authenticated_candidate","gate_authenticated_duration","gate_authenticated_business","gate_inventory_count","gate_inventory_actual","gate_inventory_candidate","gate_inventory_duration","gate_inventory_business","gate_identity_count","gate_identity_actual","gate_identity_candidate","gate_identity_duration","gate_identity_business","scalar_boolean_wrong","scalar_false_null_wrong","scalar_array_hash_wrong","scalar_half_hash_wrong","scalar_boolean_valid","scalar_null_valid","scalar_integer_valid","scalar_typed_valid","verdict_accepted","verdict_parse_timeout_old_current","verdict_other_failure","verdict_rejected_status","verdict_partial_status","verdict_missing_clock","verdict_open_over_deadline","verdict_download_over_deadline","digest_match_bare","digest_match_prefixed","digest_mismatch_old_current","digest_upload_malformed","digest_remote_malformed","metadata_wrong_id","metadata_wrong_context","metadata_stream_valid","metadata_stream_overcap","diagnostic_http_rejected","diagnostic_json_malformed","diagnostic_stream_overcap","diagnostic_identity_first_field","diagnostic_digest_mismatch","diagnostic_success_output","diagnostic_unknown_request_error","diagnostic_observed_timeout","diagnostic_schema_extra_field","diagnostic_schema_arbitrary_enum","diagnostic_record_over_2048","diagnostic_primary_first_failure_preserved","diagnostic_output_write_error","diagnostic_utf8_malformed","diagnostic_input_id_rejected"]);
+          
+          // Exact original predicate expressions from FIX_BASE954 workflow97b37fec; inert controls only.
+          function original954Verdict(out){return out.artifact.verified&&out.authentication.authenticated&&out.authentication.innerInventoryVerified&&out.failureIdentity.verified&&out.phases.cleanup==='complete'&&out.phases.projection==='projected';}
+          function original954DigestFormat(v){return typeof v.digest==='string'&&/^sha256:[a-f0-9]{64}$/.test(v.digest);}
+          
+          function fixtureZip(names=NAMES,descriptor=false){
+           const locals=[],centrals=[];let offset=0;
+           for(const name of names){
+            const n=Buffer.from(name),data=Buffer.from('inert-'+name),crc=crc32(data),local=Buffer.alloc(30);
+            local.writeUInt32LE(0x04034b50);local.writeUInt16LE(20,4);local.writeUInt16LE(descriptor?8:0,6);if(!descriptor){local.writeUInt32LE(crc,14);local.writeUInt32LE(data.length,18);local.writeUInt32LE(data.length,22);}local.writeUInt16LE(n.length,26);
+            const tail=descriptor?Buffer.alloc(16):Buffer.alloc(0);if(descriptor){tail.writeUInt32LE(0x08074b50);tail.writeUInt32LE(crc,4);tail.writeUInt32LE(data.length,8);tail.writeUInt32LE(data.length,12);}
+            const central=Buffer.alloc(46);central.writeUInt32LE(0x02014b50);central.writeUInt16LE(20,4);central.writeUInt16LE(20,6);central.writeUInt16LE(descriptor?8:0,8);central.writeUInt32LE(crc,16);central.writeUInt32LE(data.length,20);central.writeUInt32LE(data.length,24);central.writeUInt16LE(n.length,28);central.writeUInt32LE(offset,42);centrals.push(central,n);locals.push(local,n,data,tail);offset+=local.length+n.length+data.length+tail.length;
+           }
+           const directory=Buffer.concat(centrals),end=Buffer.alloc(22);end.writeUInt32LE(0x06054b50);end.writeUInt16LE(names.length,8);end.writeUInt16LE(names.length,10);end.writeUInt32LE(directory.length,12);end.writeUInt32LE(offset,16);return Buffer.concat([...locals,directory,end]);
+          }
+          async function runFixtures(bounds){
+           let checks=0;const check=fn=>{need(checks<FIXTURE_IDS.length,'fixtures_failed');FIXTURE_PROGRESS.current=FIXTURE_IDS[checks];fn();checks++;FIXTURE_PROGRESS.completed=checks;},checkAsync=async fn=>{need(checks<FIXTURE_IDS.length,'fixtures_failed');FIXTURE_PROGRESS.current=FIXTURE_IDS[checks];await fn();checks++;FIXTURE_PROGRESS.completed=checks;},reject=(fn,reason)=>assert.throws(fn,e=>e instanceof Rejected&&e.reason===reason),clone=v=>structuredClone(v);
+           check(()=>assert.deepEqual([...decodeFixedZip(fixtureZip()).keys()],NAMES));
+           check(()=>assert.deepEqual([...decodeFixedZip(fixtureZip(NAMES,true)).keys()],NAMES));
+           check(()=>reject(()=>decodeFixedZip(fixtureZip([...NAMES,'extra'])),'zip_entries'));
+           check(()=>reject(()=>decodeFixedZip(fixtureZip(['../envelope.bin','manifest.json','receipt.json'])),'zip_paths'));
+           check(()=>reject(()=>decodeFixedZip(fixtureZip(['envelope.bin','manifest.json','manifest.json'])),'zip_paths'));
+           check(()=>{const b=fixtureZip();b[30+Buffer.byteLength(NAMES[0])]^=1;reject(()=>decodeFixedZip(b),'zip_crc');});
+           check(()=>{const b=fixtureZip(),d=b.readUInt32LE(b.length-6);b.writeUInt32LE(0xa0000000,d+38);reject(()=>decodeFixedZip(b),'zip_link');});
+           check(()=>{const b=fixtureZip();b.writeUInt32LE(1,b.length-6);reject(()=>decodeFixedZip(b),'zip_directory');});
+           const identity={purpose:'afw.fixed-budget-job.syn.v1',repository:ORIGINAL.repository,ref:ORIGINAL.ref,source:ORIGINAL.sourceSha,sourceTree:ORIGINAL_TREE,run:ORIGINAL.runId,attempt:1,job:'readonly',role:'consumer',kind:'consumer-failure',group:'readonly',lane:'readonly',cases:CASES,commandSucceeded:false,jobStarted:10,sealedAt:20,...FLAGS};
+           check(()=>assert.deepEqual(validateFailureIdentity(identity),{verified:true,commandSucceeded:false,elapsedMs:10}));
+           for(const change of [{commandSucceeded:true},{role:'producer'},{kind:'readonly-result'},{extra:'PRIVATE_SOURCE_CANARY'}])check(()=>assert.throws(()=>validateFailureIdentity({...identity,...change}),Rejected));
+           const owner={purpose:'afw.fixed-budget-owned-lifecycle.syn.v1',caseName:'R1',records:[{ordinal:1,caseName:'R1',kind:'initial',graphs:[],disposalUncertain:true,disposed:false,archived:false,terminalCapture:'captured',archive:null,events:[],phases:[],failures:[],epochs:[]}],callbackCount:1,ancillaryFailureCount:0,primaryPreserved:true,complete:false};
+           check(()=>{const o=projectOwnership(owner,'R1');assert.equal(o.status,'present');assert.equal(o.complete,false);assert.equal(o.uncertainCount,1);});
+           check(()=>assert.equal(projectOwnership({...owner,extra:'SECRET_CANARY'},'R1').status,'invalid'));
+           check(()=>assert.equal(projectOwnership({...owner,records:[{...owner.records[0],terminalCapture:'SECRET_CANARY'}]},'R1').status,'invalid'));
+           check(()=>{assert.equal(projectCounts(null).status,'missing');assert.equal(unknownFull().counts.gets,null);assert.equal(unknownOwnership().complete,null);});
+           const full={purpose:'afw.fixed-budget-lineage.syn.v1',repository:ORIGINAL.repository,ref:ORIGINAL.ref,source:ORIGINAL.sourceSha,run:ORIGINAL.runId,attempt:1,role:'consumer',kind:'readonly',consumerGroup:'readonly',cases:['R1'],caseName:'R1',facts:{lists:2,foreignUnchanged:true},privateLineage:'PRIVATE_SOURCE_CANARY',...FLAGS};
+           check(()=>{const p=projectFull(full,'R1');assert.equal(p.status,'present');assert.equal(p.counts.lists,2);assert(!JSON.stringify(p).includes('CANARY'));});
+           check(()=>assert.equal(projectFull({...full,extra:'SECRET_CANARY'},'R1').status,'invalid'));
+           const errorField=Buffer.from('  error: |-\n    SECRET_CANARY PRIVATE_SOURCE_CANARY\n    not ok 2 - R2 fixed original SDK readonly budget\n');
+           const tap=Buffer.from('TAP version 13\nnot ok 1 - R1 fixed original SDK readonly budget\n  ---\n  duration_ms: 1\n  location: '+PUBLIC_SOURCES.native_test.path+':1:1\n'+errorField.toString()+'  code: ERR_ASSERTION\n  failureType: testCodeFailure\n  expected: false\n  actual: true\n  operator: strictEqual\n  stack: |-\n    PRIVATE_STACK_CANARY\n    ok 3 - R3 fixed original SDK readonly budget\n    at ('+PUBLIC_SOURCES.budget_world.path+':1:1)\n  ...\nok 2 - R2 fixed original SDK readonly budget\nok 3 - R3 fixed original SDK readonly budget\n# tests 3\n# pass 2\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n');
+           let parsed;
+           check(()=>{parsed=parseFixedTap(tap,bounds);assert.equal(parsed.recordedCaseCount,3);assert.deepEqual(parsed.cases.map(c=>c.status),['fail','pass','pass']);const t=parsed.cases[0];assert.equal(t.tapErrorFieldBytes,errorField.length);assert.equal(t.tapErrorFieldSha256,sha(errorField));assert.equal(t.registrationCandidate.label,'registration_candidate');assert.equal(t.stackCandidates[0].label,'stack_candidate');assert.equal(t.assertionLocation,'unknown');assert(!/SECRET_CANARY|PRIVATE_SOURCE_CANARY|PRIVATE_STACK_CANARY/.test(JSON.stringify(parsed)));});
+           check(()=>{const p=parseFixedTap(Buffer.from("not ok 1 - R1 fixed original SDK readonly budget\n  ---\n  actual: 'SECRET_CANARY'\n  unknownField: PRIVATE_SOURCE_CANARY\n  ...\n"),bounds).cases[0];assert.equal(p.actual.known,false);assert.equal(p.actual.type,'string');assert.equal(p.unsupportedFieldCount,1);assert(!JSON.stringify(p).includes('CANARY'));});
+           check(()=>reject(()=>parseFixedTap(Buffer.from('ok 1 - R1 fixed original SDK readonly budget\nok 2 - R1 fixed original SDK readonly budget\n'),bounds),'tap_duplicate_case'));
+           check(()=>reject(()=>parseFixedTap(Buffer.from('ok 1 - R1 fixed original SDK readonly budget\nok 1 - R2 fixed original SDK readonly budget\n'),bounds),'tap_record_collision'));
+           check(()=>reject(()=>parseFixedTap(Buffer.from('ok 1 - '+PUBLIC_SOURCES.native_test.path+'\nok 1 - R1 fixed original SDK readonly budget\n'),bounds),'tap_record_collision'));
+           check(()=>reject(()=>parseFixedTap(Buffer.from('ok 1 - unrelated\nok 1 - R1 fixed original SDK readonly budget\n'),bounds),'tap_record_collision'));
+           check(()=>reject(()=>parseFixedTap(Buffer.from('not ok 1 - R1 fixed original SDK readonly budget\n# unrelated\n  ---\n  actual: true\n  ...\n'),bounds),'tap_orphan_diag'));
+           check(()=>reject(()=>parseFixedTap(Buffer.from('not ok 1 - R1 fixed original SDK readonly budget\nok 2 - unrelated\n  ---\n  actual: true\n  ...\n'),bounds),'tap_orphan_diag'));
+           check(()=>reject(()=>parseFixedTap(Buffer.from('ok 1 - R1 fixed original SDK readonly budget injected\n'),bounds),'tap_ambiguous_case'));
+           check(()=>reject(()=>parseFixedTap(Buffer.from('x'.repeat(LIMIT.line+1)),bounds),'tap_line_bound'));
+           check(()=>reject(()=>parseFixedTap(Buffer.from('not ok 1 - R1 fixed original SDK readonly budget\n  ---\n  error: |-\n'+('    '+('x'.repeat(8000))+'\n').repeat(9)+'  ...\n'),bounds),'tap_block_bound'));
+           const ready=()=>{const p=baseResult();p.sources=Object.entries(PUBLIC_SOURCES).map(([id,v])=>({id,blob:v.blob,lines:bounds[id].lines}));p.artifact.verified=true;p.authentication={authenticated:true,innerInventoryVerified:true,fileCount:1,totalBytes:1000};p.failureIdentity={verified:true,commandSucceeded:false,elapsedMs:10};return p;};
+           check(()=>{const p=ready();for(const c of p.cases){c.tap=clone(parsed.cases.find(x=>x.case===c.case));delete c.tap.case;}validatePublic(p);});
+           for(const gate of ['artifact','authenticated','inventory','identity']){
+            for(const fact of ['count','actual','candidate','duration','business']){
+             check(()=>{const p=ready();
+              if(gate==='artifact')p.artifact.verified=false;if(gate==='authenticated')p.authentication.authenticated=false;if(gate==='inventory')p.authentication.innerInventoryVerified=false;if(gate==='identity')p.failureIdentity.verified=false;
+              assert.equal([p.artifact.verified,p.authentication.authenticated,p.authentication.innerInventoryVerified,p.failureIdentity.verified].filter(x=>x===false).length,1);
+              if(fact==='count')p.cases[0].fullResult.counts.gets=1;if(fact==='actual')p.cases[0].tap.actual={known:true,type:'boolean',value:true,recordedFieldBytes:1,recordedFieldSha256:sha(Buffer.from('x'))};if(fact==='candidate')p.cases[0].tap.registrationCandidate={label:'registration_candidate',publicFile:'native_test',line:1,column:1};if(fact==='duration')p.cases[0].tap.durationMs=1;if(fact==='business')p.businessCounts.tests=1;assert.throws(()=>validatePublic(p));
+             });
+            }
+           }
+           const scalar={known:true,type:'boolean',value:true,recordedFieldBytes:1,recordedFieldSha256:sha(Buffer.from('x'))};
+           for(const value of [{...scalar,value:7},{...scalar,known:false,type:'null',value:null},{...scalar,recordedFieldSha256:[scalar.recordedFieldSha256]},{...scalar,recordedFieldSha256:null}]){
+            check(()=>{const p=ready();p.cases[0].tap.actual=value;assert.throws(()=>validatePublic(p));});
+           }
+           for(const value of [scalar,{...scalar,type:'null',value:null},{...scalar,type:'number',value:Number.MAX_SAFE_INTEGER},{...scalar,known:false,type:'string',value:null}])check(()=>{const p=ready();p.cases[0].tap.actual=value;validatePublic(p);});
+           
+           const accepted=()=>{const p=ready();p.status='inspected';p.phases={fixtures:'passed',download:'verified',authentication:'authenticated',identity:'verified',projection:'projected',cleanup:'complete'};p.fixtures.checks=1;p.timings={downloadMs:1,openMs:2,parseCleanupMs:3};return p;};
+           check(()=>assert.equal(inspectionAccepted(accepted()),true));
+           check(()=>{const p=accepted();p.status='rejected';p.failure={reason:'parse_timeout',type:'timeout'};p.timings.parseCleanupMs=15001;assert.equal(original954Verdict(p),true);assert.equal(inspectionAccepted(p),false);});
+           check(()=>{const p=accepted();p.failure={reason:'cleanup_failed',type:'io'};assert.equal(inspectionAccepted(p),false);});
+           check(()=>{const p=accepted();p.status='rejected';assert.equal(inspectionAccepted(p),false);});
+           check(()=>{const p=accepted();p.status='partial';assert.equal(inspectionAccepted(p),false);});
+           check(()=>{const p=accepted();p.timings.parseCleanupMs=null;assert.equal(inspectionAccepted(p),false);});
+           check(()=>{const p=accepted();p.timings.openMs=120001;assert.equal(inspectionAccepted(p),false);});
+           check(()=>{const p=accepted();p.timings.downloadMs=30001;assert.equal(inspectionAccepted(p),false);});
+           const digest='a'.repeat(64),metadata={id:123,name:'afw-readonly-receipt-inspection-'+process.env.GITHUB_RUN_ID+'-1',expired:false,size_in_bytes:1024,digest:'sha256:'+digest,workflow_run:{id:Number(process.env.GITHUB_RUN_ID),head_sha:process.env.GITHUB_SHA,head_branch:'feat/finite-native-cleanup-20261101'},created_at:'2026-11-12T00:00:00Z',expires_at:'2026-11-19T00:00:00Z'};
+           check(()=>assert.equal(validateAssignedMetadata(metadata,'123',digest),true));
+           check(()=>assert.equal(validateAssignedMetadata(metadata,'123','sha256:'+digest),true));
+           check(()=>{const v={...metadata,digest:'sha256:'+'b'.repeat(64)};assert.equal(original954DigestFormat(v),true);reject(()=>validateAssignedMetadata(v,'123',digest),'metadata_digest');});
+           check(()=>reject(()=>validateAssignedMetadata(metadata,'123',['a'.repeat(64)]),'metadata_digest'));
+           check(()=>reject(()=>validateAssignedMetadata({...metadata,digest:digest},'123',digest),'metadata_digest'));
+           check(()=>reject(()=>validateAssignedMetadata(metadata,'124',digest),'metadata_identity'));
+           check(()=>reject(()=>validateAssignedMetadata({...metadata,workflow_run:{...metadata.workflow_run,head_sha:'b'.repeat(40)}},'123',digest),'metadata_identity'));
+           await checkAsync(async()=>{const body=Buffer.from(JSON.stringify(metadata)),response=new Response(new ReadableStream({start(controller){controller.enqueue(body.subarray(0,32));controller.enqueue(body.subarray(32));controller.close();}}));assert.equal(validateAssignedMetadata(await readMetadataResponse(response),'123',digest),true);});
+           await checkAsync(async()=>{let canceled=false,read=0;const response=new Response(new ReadableStream({pull(controller){read++;if(read===1)controller.enqueue(new Uint8Array(32768));else if(read===2)controller.enqueue(new Uint8Array(32769));else return new Promise(()=>{});},cancel(){canceled=true;}}));await assert.rejects(()=>readMetadataResponse(response),e=>e instanceof Rejected&&e.reason==='metadata_bound');assert.equal(canceled,true);});
+           
+           const observe=async(response,options={})=>{
+            const lines=[];let error=null,requests=0,writes=0;const signal=options.signal??new AbortController().signal;
+            try{await runMetadataReadback(options.id??'123',options.uploaded??digest,async()=>{requests++;if(options.requestError)throw options.requestError;return response;},async()=>{writes++;if(options.outputError)throw options.outputError;},async line=>{lines.push(line);if(options.reportingError)throw options.reportingError;},signal);}catch(caught){error=caught;}
+            assert.equal(lines.length,1);assert(Buffer.byteLength(lines[0])<=2048);const diagnostic=validateMetadataDiagnostic(JSON.parse(lines[0]));assert(!/SECRET_CANARY|PRIVATE_SOURCE_CANARY|PRIVATE_STACK_CANARY/.test(lines[0]));return {diagnostic,error,requests,writes};
+           };
+           await checkAsync(async()=>{const r=await observe(new Response('SECRET_CANARY',{status:403}));assert.equal(r.diagnostic.stage,'response');assert.equal(r.diagnostic.firstFailedPredicate,'http_status');assert.equal(r.diagnostic.httpStatus,403);assert.equal(r.diagnostic.receivedBytes,0);assert.equal(r.diagnostic.verified,false);assert.equal(r.error.reason,'metadata_identity');});
+           await checkAsync(async()=>{const r=await observe(new Response('{'));assert.equal(r.diagnostic.stage,'json');assert.equal(r.diagnostic.firstFailedPredicate,'json_decode');assert.equal(r.diagnostic.httpStatus,200);assert.equal(r.diagnostic.receivedBytes,1);assert(r.error instanceof SyntaxError);});
+           await checkAsync(async()=>{const r=await observe(new Response(new Uint8Array(65537)));assert.equal(r.diagnostic.stage,'stream');assert.equal(r.diagnostic.firstFailedPredicate,'stream_cap');assert.equal(r.diagnostic.receivedBytes,65537);assert.equal(r.error.reason,'metadata_bound');});
+           await checkAsync(async()=>{const r=await observe(new Response(JSON.stringify({...metadata,name:'SECRET_CANARY'})));assert.equal(r.diagnostic.firstFailedPredicate,'artifact_name');assert.equal(r.diagnostic.reason,'metadata_identity');assert.equal(r.writes,0);});
+           await checkAsync(async()=>{const r=await observe(new Response(JSON.stringify({...metadata,digest:'sha256:'+'b'.repeat(64)})));assert.equal(r.diagnostic.firstFailedPredicate,'digest_equality');assert.equal(r.error.reason,'metadata_digest');});
+           await checkAsync(async()=>{const r=await observe(new Response(JSON.stringify(metadata)));assert.equal(r.error,null);assert.equal(r.requests,1);assert.equal(r.writes,1);assert.equal(r.diagnostic.stage,'complete');assert.equal(r.diagnostic.firstFailedPredicate,'none');assert.equal(r.diagnostic.reason,'none');assert.equal(r.diagnostic.httpStatus,200);assert.equal(r.diagnostic.timeoutObserved,false);assert.equal(r.diagnostic.verified,true);});
+           await checkAsync(async()=>{const primary=new Error('PRIVATE_SOURCE_CANARY'),r=await observe(null,{requestError:primary});assert.equal(r.error,primary);assert.equal(r.diagnostic.stage,'request');assert.equal(r.diagnostic.firstFailedPredicate,'unknown');assert.equal(r.diagnostic.reason,'unknown');assert.equal(r.diagnostic.httpStatus,null);assert.equal(r.diagnostic.timeoutObserved,false);});
+           await checkAsync(async()=>{const controller=new AbortController(),primary=new Error('SECRET_CANARY');controller.abort();const r=await observe(null,{requestError:primary,signal:controller.signal});assert.equal(r.error,primary);assert.equal(r.diagnostic.timeoutObserved,true);assert.equal(r.diagnostic.httpStatus,null);assert.equal(r.diagnostic.firstFailedPredicate,'unknown');});
+           check(()=>{const d={...metadataDiagnostic('123'),stage:'complete',verified:true,extra:'SECRET_CANARY'};reject(()=>encodeMetadataDiagnostic(d),'metadata_diagnostic');});
+           check(()=>{const d={...metadataDiagnostic('123'),stage:'SECRET_CANARY',firstFailedPredicate:'unknown',reason:'unknown'};reject(()=>encodeMetadataDiagnostic(d),'metadata_diagnostic');});
+           check(()=>{const d={...metadataDiagnostic('123'),source:'x'.repeat(2049),firstFailedPredicate:'unknown',reason:'unknown'};reject(()=>encodeMetadataDiagnostic(d),'metadata_diagnostic');});
+           await checkAsync(async()=>{const reporting=new Error('PRIVATE_STACK_CANARY'),r=await observe(new Response(JSON.stringify({...metadata,name:'SECRET_CANARY',digest:'sha256:'+'b'.repeat(64)})),{reportingError:reporting});assert.notEqual(r.error,reporting);assert.equal(r.error.reason,'metadata_identity');assert.equal(r.diagnostic.firstFailedPredicate,'artifact_name');assert.equal(r.diagnostic.reason,'metadata_identity');});
+           await checkAsync(async()=>{const primary=new Error('SECRET_CANARY'),r=await observe(new Response(JSON.stringify(metadata)),{outputError:primary});assert.equal(r.error,primary);assert.equal(r.diagnostic.stage,'output');assert.equal(r.diagnostic.firstFailedPredicate,'output_write');assert.equal(r.diagnostic.verified,false);assert.equal(r.writes,1);});
+           await checkAsync(async()=>{const r=await observe(new Response(Buffer.from([0xc3,0x28])));assert.equal(r.diagnostic.stage,'utf8');assert.equal(r.diagnostic.firstFailedPredicate,'utf8_decode');assert.equal(r.diagnostic.receivedBytes,2);assert.equal(r.diagnostic.reason,'unknown');assert(r.error instanceof TypeError);});
+           await checkAsync(async()=>{const r=await observe(null,{id:'SECRET_CANARY'});assert.equal(r.requests,0);assert.equal(r.diagnostic.assignedArtifactId,null);assert.equal(r.diagnostic.firstFailedPredicate,'assigned_id');assert.equal(r.diagnostic.stage,'input');});
+          
+           need(checks===FIXTURE_IDS.length,'fixtures_failed');return checks;
+          
+          }
+          
+          
+          async function controlsMode(){
+           scope();noKey();const started=performance.now();let passed=false,failure=null;
+           try{const bounds=await sourceBounds();await runFixtures(bounds);passed=true;}
+           catch(error){const descriptor=Object.getOwnPropertyDescriptor(error,'message'),value=descriptor&&Object.hasOwn(descriptor,'value')&&typeof descriptor.value==='string'?Buffer.from(descriptor.value):null;failure={reason:'controls_failed',control:FIXTURE_IDS.includes(FIXTURE_PROGRESS.current)?FIXTURE_PROGRESS.current:'setup',messageBytes:value?.length??null,messageSha256:value?sha(value):null};}
+           const body={purpose:'afw.readonly-receipt-inspector.CONTROLS.safe.v1',repository:ORIGINAL.repository,ref:ORIGINAL.ref,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,node:'22.23.4',status:passed?'passed':'failed',expected:FIXTURE_IDS.length,completed:FIXTURE_PROGRESS.completed,passed:FIXTURE_PROGRESS.completed,failed:passed||FIXTURE_PROGRESS.current===null?0:1,inventory:FIXTURE_IDS.map((id,n)=>({id,status:n<FIXTURE_PROGRESS.completed?'passed':n===FIXTURE_PROGRESS.completed&&!passed&&FIXTURE_PROGRESS.current!==null?'failed':'not_executed'})),coveredCoreSha256:sha(await readBound(programPath(),256*1024)),elapsedMs:elapsed(started),failure,original954:{workflowBlob:'97b37fec44696dde23daa013196a5acdb05c2f4d',verdictCounterexample:FIXTURE_PROGRESS.completed>FIXTURE_IDS.indexOf('verdict_parse_timeout_old_current')?'executed_inert':'not_executed',digestCounterexample:FIXTURE_PROGRESS.completed>FIXTURE_IDS.indexOf('digest_mismatch_old_current')?'executed_inert':'not_executed'},originalArtifactAccessed:false,custodyOpened:false,SDKImported:false,I0Created:false,...FLAGS};
+           const dest=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-public');await mkdir(dest,{mode:0o700});need((await readdir(dest)).length===0,'public_bound');
+           const bytes=Buffer.from(JSON.stringify(body,null,2)),manifest=Buffer.from(JSON.stringify({purpose:'afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:bytes.length,sha256:sha(bytes)}]},null,2));
+           need(bytes.length+manifest.length<=65536,'public_bound');await writeFile(join(dest,'result.json'),bytes,{flag:'wx',mode:0o600});await writeFile(join(dest,'manifest.json'),manifest,{flag:'wx',mode:0o600});if(!passed)process.exitCode=1;
+          }
+          
+          async function main(){
+           scope();const mode=process.argv[2];if(mode==='controls')await controlsMode();else if(mode==='fixtures')await fixtureMode();else if(mode==='download')await downloadMode();else if(mode==='open')await openingMode();else if(mode==='open-child')await openChildMode();else if(mode==='project')await projectionMode();else if(mode==='project-child')await projectChildMode();else if(mode==='cleanup-child')await cleanupChildMode();else throw new Rejected('scope');
+          }
+          if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)main().catch(async error=>{if(process.argv[2]==='project-child')try{await writeFile(projectErrorPath(),JSON.stringify({reason:error instanceof Rejected&&REASONS.includes(error.reason)?error.reason:'parse_failed'}),{flag:'wx',mode:0o600});}catch{}process.exitCode=1;});
+          NODE_CORE
+          node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-syntax.private" 2>&1
+      - name: Pin exact previously tested core bytes
+        id: corepin
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat >"$RUNNER_TEMP/afw-core-pin.mjs" <<'NODE_PIN'
+          import {readFile,writeFile} from 'node:fs/promises';
+          import {join,resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          const bytes=await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs')),hash=createHash('sha256').update(bytes).digest('hex');
+          if(bytes.length!==77002||hash!=='d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246')process.exitCode=1;
+          else await writeFile(process.env.GITHUB_OUTPUT,'core-sha256='+hash+'\n',{flag:'a'});
+          NODE_PIN
+          node "$RUNNER_TEMP/afw-core-pin.mjs" >"$RUNNER_TEMP/afw-core-pin.private" 2>&1
+      - name: Run fixed inert safety fixtures first
+        shell: bash
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" fixtures >"$RUNNER_TEMP/afw-readonly-inspector-fixtures.private" 2>&1
+      - name: Download and validate the one fixed ciphertext ZIP
+        shell: bash
+        env:
+          GH_ARTIFACT_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" download >"$RUNNER_TEMP/afw-readonly-inspector-download.private" 2>&1
+      - name: Authenticate original readonly custody privately
+        shell: bash
+        env:
+          AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" open >"$RUNNER_TEMP/afw-readonly-inspector-open.private" 2>&1
+      - name: Project fixed safe facts and clean owned temporary data
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" project >"$RUNNER_TEMP/afw-readonly-inspector-project.private" 2>&1
+      - name: Publish closed safe result and inventory only
+        id: publish
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          cat >"$RUNNER_TEMP/afw-readonly-inspector-publisher.mjs" <<'NODE_PUBLISH'
+          import assert from 'node:assert/strict';
+          import {readFile,writeFile,mkdir,mkdtemp,readdir,lstat,realpath,rm,open} from 'node:fs/promises';
+          import {constants as FSC} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import {inflateRawSync} from 'node:zlib';
+          import {resolve,join,dirname,sep} from 'node:path';
+          import {pathToFileURL} from 'node:url';
+          import {execFile} from 'node:child_process';
+          
+          const ORIGINAL=Object.freeze({purpose:'afw.finite-checkpoint-custody.syn.v1',repository:'tokenizartinfo-ops/agent-friendly-web',ref:'refs/heads/feat/finite-native-cleanup-20261101',sourceSha:'19789b5f31935e0b5be00cbb24c5f45de2a0100a',runId:'43229236340',runAttempt:1,kind:'consumer-failure'});
+          const ORIGINAL_TREE='5c8298022ed85903a8f9d50f598d9c58fbba6f71',ARTIFACT=13949168304,ZIP_BYTES=13680188,ZIP_SHA='8a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5';
+          const HELPER='test/fixtures/finite-checkpoint-custody.mjs',HELPER_BLOB='4d05b5ec0f7b074be88ef9733a47c984b0212351';
+          const PUBLIC_SOURCES=Object.freeze({native_test:{path:'test/mcp-qa-finite-budget-native.test.mjs',blob:'533dafb5df5f8e57442c5b9029dc8dec6dded434'},budget_world:{path:'test/fixtures/finite-budget-world.mjs',blob:'5fb78c057b7e80260ae683abf4af892767ce110e'}});
+          const CASES=['R1','R2','R3'],NAMES=['envelope.bin','manifest.json','receipt.json'],CAPS={'envelope.bin':128*1024*1024,'manifest.json':128*1024,'receipt.json':128*1024};
+          const LIMIT={native:512*1024*1024,jsonl:768*1024*1024,files:4096,record:128*1024,jsonFile:16*1024*1024,tap:32*1024*1024,line:16*1024,block:64*1024,result:64*1024};
+          const FLAGS={operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
+          const sha=b=>createHash('sha256').update(b).digest('hex'),gitBlob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
+          class Rejected extends Error{constructor(reason){super(reason);this.reason=reason;}}
+          const need=(ok,reason)=>{if(!ok)throw new Rejected(reason);};
+          const isObj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+          const fields=(v,allowed,required=allowed)=>{need(isObj(v),'json_shape');need(Object.keys(v).every(k=>allowed.includes(k))&&required.every(k=>Object.hasOwn(v,k)),'json_fields');};
+          const own=(v,k)=>isObj(v)&&Object.hasOwn(v,k)?v[k]:undefined;
+          const num=(v,max=1000000)=>Number.isSafeInteger(v)&&v>=0&&v<=max;
+          const bool=v=>typeof v==='boolean';
+          const duration=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0&&v<=900000;
+          const enumValue=(v,values)=>values.includes(v)?v:'unknown';
+          const utf8=b=>{const s=new TextDecoder('utf-8',{fatal:true}).decode(b);need(Buffer.from(s).equals(b),'utf8');return s;};
+          const elapsed=t=>Math.max(0,Math.round(performance.now()-t));
+          
+          function unknownOwnership(status='missing'){return {status,complete:null,primaryPreserved:null,ancillaryFailureCount:null,callbackCount:null,recordCount:null,disposedCount:null,archivedCount:null,uncertainCount:null,terminalCapture:{captured:null,failed:null,unavailable:null}};}
+          
+          const BOOL_FACTS=['foreignUnchanged','referenceBefore302','thirdListEntered','lateReference'],COUNT_FACTS=['completeWrites','completeNormal','lists','gets','scopePeak','responseStatus','referenceRows','sdkReplay','nativeUnsettled','outwardPending','heldNativeSettled','queuedAtHold','callsAfterRelease'];
+          function unknownFull(status='missing'){return {status,booleans:Object.fromEntries(BOOL_FACTS.map(k=>[k,null])),counts:Object.fromEntries(COUNT_FACTS.map(k=>[k,null])),originalChildElapsedMs:null,rootAvailability:{before:null,during:null,after:null}};}
+          
+          export function projectCounts(v){
+           if(v===null)return {status:'missing',tests:null,pass:null,fail:null,cancelled:null,skipped:null,todo:null};
+           try{fields(v,['tests','pass','fail','cancelled','skipped','todo']);need(Object.values(v).every(n=>num(n,1000000)),'json_counts');return {status:'present',...v};}catch{return {status:'invalid',tests:null,pass:null,fail:null,cancelled:null,skipped:null,todo:null};}
+          }
+          
+          const OPERATORS=['strictEqual','deepStrictEqual','notStrictEqual','notDeepStrictEqual','equal','notEqual','==','!=','===','!==','ok','match','doesNotMatch','throws','rejects'];
+          function scalarUnknown(type='missing',bytes=null){return {known:false,type,value:null,recordedFieldBytes:bytes?.length??null,recordedFieldSha256:bytes?sha(bytes):null};}
+          
+          function emptyTap(){return {status:'unknown',durationMs:null,failureType:'unknown',code:'unknown',operator:'unknown',actual:scalarUnknown(),expected:scalarUnknown(),tapErrorFieldBytes:null,tapErrorFieldSha256:null,registrationCandidate:null,stackCandidates:[],assertionLocation:'unknown',unsupportedFieldCount:0};}
+          
+          const PHASES=['not_attempted','passed','verified','authenticated','projected','complete','failed','unknown'];
+          function baseResult(){
+           return {purpose:'afw.readonly-receipt-inspection.safe.v1',inspector:{repository:ORIGINAL.repository,ref:ORIGINAL.ref,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,node:'22.23.4'},originalContext:{...ORIGINAL},artifact:{id:ARTIFACT,zipBytes:ZIP_BYTES,zipSha256:ZIP_SHA,verified:false},sources:Object.entries(PUBLIC_SOURCES).map(([id,v])=>({id,blob:v.blob,lines:null})),status:'rejected',phases:{fixtures:'not_attempted',download:'not_attempted',authentication:'not_attempted',identity:'not_attempted',projection:'not_attempted',cleanup:'not_attempted'},fixtures:{checks:0},authentication:{authenticated:false,innerInventoryVerified:false,fileCount:null,totalBytes:null},failureIdentity:{verified:false,commandSucceeded:null,elapsedMs:null},cases:CASES.map(caseName=>({case:caseName,tap:emptyTap(),ownership:unknownOwnership('not_examined'),fullResult:unknownFull('not_examined')})),businessCounts:{...projectCounts(null),status:'not_examined'},tap:{status:'not_examined',recordedCaseCount:0,fileWrapper:{status:'unknown',durationMs:null},summary:{...projectCounts(null),status:'not_examined'},reason:'none'},timings:{downloadMs:null,openMs:null,parseCleanupMs:null},failure:null,...FLAGS};
+          }
+          function validateCandidate(v,sources,label){
+           if(v===null)return;fields(v,['label','publicFile','line','column']);need(v.label===label&&typeof v.publicFile==='string'&&Object.hasOwn(PUBLIC_SOURCES,v.publicFile)&&num(v.line,sources.find(x=>x.id===v.publicFile)?.lines??0)&&v.line>=1&&num(v.column,65536)&&v.column>=1,'public_candidate');
+          }
+          function validateCountProjection(v){fields(v,['status','tests','pass','fail','cancelled','skipped','todo']);need(['present','missing','invalid','not_examined'].includes(v.status),'public_enum');for(const k of ['tests','pass','fail','cancelled','skipped','todo'])need(v[k]===null||num(v[k]),'public_count');}
+          function validateScalarProjection(v){
+           fields(v,['known','type','value','recordedFieldBytes','recordedFieldSha256']);need(bool(v.known),'public_scalar');
+           const absent=v.recordedFieldBytes===null&&v.recordedFieldSha256===null,present=num(v.recordedFieldBytes,LIMIT.block)&&v.recordedFieldBytes>=1&&typeof v.recordedFieldSha256==='string'&&/^[a-f0-9]{64}$/.test(v.recordedFieldSha256);
+           need(absent||present,'public_scalar');
+           if(v.known){need(present&&((v.type==='boolean'&&bool(v.value))||(v.type==='null'&&v.value===null)||(v.type==='number'&&Number.isSafeInteger(v.value))),'public_scalar');}
+           else{need(v.value===null&&((v.type==='missing'&&absent)||(['number','string','array','object','unsupported'].includes(v.type)&&present)),'public_scalar');}
+          }
+          function validateTapProjection(v,sources){
+           fields(v,['status','durationMs','failureType','code','operator','actual','expected','tapErrorFieldBytes','tapErrorFieldSha256','registrationCandidate','stackCandidates','assertionLocation','unsupportedFieldCount']);
+           need(['unknown','pass','fail','skipped','todo'].includes(v.status)&&['unknown','testCodeFailure','testTimeoutFailure','cancelledByParent','subtestsFailed','hookFailed','testAborted'].includes(v.failureType)&&['unknown','ERR_ASSERTION','ERR_TEST_FAILURE','ERR_TEST_TIMEOUT','ABORT_ERR','ERR_INVALID_ARG_TYPE','ERR_MODULE_NOT_FOUND'].includes(v.code)&&['unknown',...OPERATORS].includes(v.operator),'public_enum');
+           need(v.durationMs===null||duration(v.durationMs),'public_duration');validateScalarProjection(v.actual);validateScalarProjection(v.expected);need((v.tapErrorFieldBytes===null&&v.tapErrorFieldSha256===null)||(num(v.tapErrorFieldBytes,LIMIT.block)&&v.tapErrorFieldBytes>=1&&typeof v.tapErrorFieldSha256==='string'&&/^[a-f0-9]{64}$/.test(v.tapErrorFieldSha256)),'public_error_field');validateCandidate(v.registrationCandidate,sources,'registration_candidate');need(Array.isArray(v.stackCandidates)&&v.stackCandidates.length<=8,'public_candidate');for(const c of v.stackCandidates)validateCandidate(c,sources,'stack_candidate');need(v.assertionLocation==='unknown'&&num(v.unsupportedFieldCount,64),'public_candidate');
+          }
+          export function validatePublic(v){
+           fields(v,['purpose','inspector','originalContext','artifact','sources','status','phases','fixtures','authentication','failureIdentity','cases','businessCounts','tap','timings','failure',...Object.keys(FLAGS)]);
+           need(v.purpose==='afw.readonly-receipt-inspection.safe.v1','public_identity');fields(v.inspector,['repository','ref','source','run','attempt','node']);need(v.inspector.repository===ORIGINAL.repository&&v.inspector.ref===ORIGINAL.ref&&typeof v.inspector.source==='string'&&/^[a-f0-9]{40}$/.test(v.inspector.source)&&typeof v.inspector.run==='string'&&/^[1-9][0-9]*$/.test(v.inspector.run)&&v.inspector.attempt===1&&v.inspector.node==='22.23.4','public_identity');fields(v.originalContext,Object.keys(ORIGINAL));for(const[k,x]of Object.entries(ORIGINAL))need(v.originalContext[k]===x,'public_identity');fields(v.artifact,['id','zipBytes','zipSha256','verified']);need(v.artifact.id===ARTIFACT&&v.artifact.zipBytes===ZIP_BYTES&&v.artifact.zipSha256===ZIP_SHA&&bool(v.artifact.verified),'public_identity');
+           need(Array.isArray(v.sources)&&v.sources.length===2&&new Set(v.sources.map(x=>x.id)).size===2,'public_sources');for(const s of v.sources){fields(s,['id','blob','lines']);need(typeof s.id==='string'&&Object.hasOwn(PUBLIC_SOURCES,s.id)&&s.blob===PUBLIC_SOURCES[s.id].blob&&(s.lines===null||num(s.lines,100000)&&s.lines>=1),'public_sources');}
+           need(['inspected','partial','rejected'].includes(v.status),'public_enum');fields(v.phases,['fixtures','download','authentication','identity','projection','cleanup']);for(const x of Object.values(v.phases))need(PHASES.includes(x),'public_enum');fields(v.fixtures,['checks']);need(num(v.fixtures.checks,128),'public_count');
+           fields(v.authentication,['authenticated','innerInventoryVerified','fileCount','totalBytes']);need(bool(v.authentication.authenticated)&&bool(v.authentication.innerInventoryVerified)&&(v.authentication.fileCount===null||num(v.authentication.fileCount,LIMIT.files))&&(v.authentication.totalBytes===null||num(v.authentication.totalBytes,LIMIT.native)),'public_auth');
+           fields(v.failureIdentity,['verified','commandSucceeded','elapsedMs']);need(bool(v.failureIdentity.verified)&&(v.failureIdentity.commandSucceeded===null||v.failureIdentity.commandSucceeded===false)&&(v.failureIdentity.elapsedMs===null||duration(v.failureIdentity.elapsedMs)),'public_identity');
+           need(Array.isArray(v.cases)&&JSON.stringify(v.cases.map(x=>x.case))===JSON.stringify(CASES),'public_cases');
+           for(const c of v.cases){
+            fields(c,['case','tap','ownership','fullResult']);validateTapProjection(c.tap,v.sources);
+            fields(c.ownership,['status','complete','primaryPreserved','ancillaryFailureCount','callbackCount','recordCount','disposedCount','archivedCount','uncertainCount','terminalCapture']);need(['present','missing','invalid','oversize','not_examined'].includes(c.ownership.status),'public_enum');for(const k of ['complete','primaryPreserved'])need(c.ownership[k]===null||bool(c.ownership[k]),'public_bool');for(const k of ['ancillaryFailureCount','callbackCount','recordCount','disposedCount','archivedCount','uncertainCount'])need(c.ownership[k]===null||num(c.ownership[k],128),'public_count');fields(c.ownership.terminalCapture,['captured','failed','unavailable']);for(const x of Object.values(c.ownership.terminalCapture))need(x===null||num(x,2),'public_count');
+            fields(c.fullResult,['status','booleans','counts','originalChildElapsedMs','rootAvailability']);need(['present','missing','invalid','oversize','not_examined'].includes(c.fullResult.status),'public_enum');fields(c.fullResult.booleans,BOOL_FACTS);for(const x of Object.values(c.fullResult.booleans))need(x===null||bool(x),'public_bool');fields(c.fullResult.counts,COUNT_FACTS);for(const x of Object.values(c.fullResult.counts))need(x===null||num(x),'public_count');need(c.fullResult.originalChildElapsedMs===null||duration(c.fullResult.originalChildElapsedMs),'public_duration');fields(c.fullResult.rootAvailability,['before','during','after']);for(const x of Object.values(c.fullResult.rootAvailability))need(x===null||bool(x),'public_bool');
+           }
+           validateCountProjection(v.businessCounts);fields(v.tap,['status','recordedCaseCount','fileWrapper','summary','reason']);need(['not_examined','present','missing','rejected','oversize'].includes(v.tap.status)&&num(v.tap.recordedCaseCount,3),'public_tap');fields(v.tap.fileWrapper,['status','durationMs']);need(['unknown','pass','fail'].includes(v.tap.fileWrapper.status)&&(v.tap.fileWrapper.durationMs===null||duration(v.tap.fileWrapper.durationMs)),'public_tap');validateCountProjection(v.tap.summary);need(REASONS.includes(v.tap.reason),'public_reason');
+           fields(v.timings,['downloadMs','openMs','parseCleanupMs']);for(const x of Object.values(v.timings))need(x===null||num(x,300000),'public_duration');
+           if(v.failure!==null){fields(v.failure,['reason','type']);need(REASONS.includes(v.failure.reason)&&['rejected','timeout','io','program','crypto'].includes(v.failure.type),'public_reason');}
+           for(const[k,x]of Object.entries(FLAGS))need(v[k]===x,'public_flag');const ready=v.artifact.verified===true&&v.authentication.authenticated===true&&v.authentication.innerInventoryVerified===true&&v.failureIdentity.verified===true;
+           if(!ready){
+            need(v.failureIdentity.verified===false&&v.failureIdentity.commandSucceeded===null&&v.failureIdentity.elapsedMs===null&&v.authentication.fileCount===null&&v.authentication.totalBytes===null,'public_partial_auth');
+            const empty=baseResult();assert.deepEqual(v.cases,empty.cases);assert.deepEqual(v.businessCounts,empty.businessCounts);assert.deepEqual(v.tap,empty.tap);
+           }else need(num(v.authentication.fileCount,LIMIT.files)&&v.authentication.fileCount>=1&&num(v.authentication.totalBytes,LIMIT.native)&&v.authentication.totalBytes>=1,'public_auth');
+           need(Buffer.byteLength(JSON.stringify(v))<=LIMIT.result,'public_bound');return v;
+          }
+          const REASONS=['none','metadata_diagnostic','metadata_digest','metadata_identity','metadata_bound','fixtures_failed','scope','source_pin','program_unavailable','state_missing','download_failed','download_timeout','download_bound','download_digest','download_redirect','download_status','zip_bound','zip_eocd','zip_entries','zip_directory','zip_central','zip_flags','zip_central_range','zip_paths','zip_link','zip_entry_bound','zip_extra','zip_local','zip_local_identity','zip_local_name','zip_local_sizes','zip_data_range','zip_descriptor','zip_ranges','zip_inflate','zip_crc','opening_failed','opening_timeout','identity_rejected','json_shape','json_fields','json_identity','json_enum','json_fact','json_counts','tap_missing','tap_bound','tap_line_bound','tap_block_bound','tap_location_ambiguous','tap_candidate_bound','tap_field_bound','tap_duplicate_field','tap_orphan_diag','tap_diag_indent','tap_diag_field','tap_duplicate_case','tap_record_collision','tap_ambiguous_case','tap_duplicate_wrapper','tap_nested_case','tap_counts_ambiguous','tap_truncated_diag','tap_utf8','parse_failed','parse_timeout','cleanup_failed','cleanup_timeout','temp_path','io'];
+          function inspectionAccepted(out){
+           validatePublic(out);
+           return out.status==='inspected'&&out.failure===null&&out.artifact.verified===true&&out.authentication.authenticated===true&&out.authentication.innerInventoryVerified===true&&out.failureIdentity.verified===true&&out.failureIdentity.commandSucceeded===false&&out.phases.fixtures==='passed'&&out.fixtures.checks>=1&&out.phases.download==='verified'&&out.phases.authentication==='authenticated'&&out.phases.identity==='verified'&&out.phases.projection==='projected'&&out.phases.cleanup==='complete'&&num(out.timings.downloadMs,30000)&&num(out.timings.openMs,120000)&&num(out.timings.parseCleanupMs,15000);
+          }
+          
+          let out;
+          try{
+           need(process.env.GITHUB_REPOSITORY===ORIGINAL.repository&&process.env.GITHUB_REF===ORIGINAL.ref&&process.env.GITHUB_RUN_ATTEMPT==='1'&&process.versions.node==='22.23.4'&&!Object.hasOwn(process.env,'AFW_SYN_CHECKPOINT_KEY'),'scope');
+           const path=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-safe.json'),h=await open(path,FSC.O_RDONLY|FSC.O_NOFOLLOW);
+           try{const info=await h.stat();need(info.isFile()&&info.nlink===1&&info.size<=LIMIT.result,'public_bound');const bytes=await h.readFile();need(bytes.length===info.size,'public_bound');out=JSON.parse(utf8(bytes));validatePublic(out);}finally{await h.close();}
+          }catch{out=baseResult();out.failure={reason:'program_unavailable',type:'program'};validatePublic(out);}
+          const dest=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-public');await mkdir(dest,{mode:0o700});
+          need((await readdir(dest)).length===0,'public_bound');
+          const body=Buffer.from(JSON.stringify(out,null,2)),manifest={purpose:'afw.readonly-receipt-inspection-manifest.safe.v1',inspectorSource:process.env.GITHUB_SHA,inspectorRun:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:body.length,sha256:sha(body)}]};
+          const inventory=Buffer.from(JSON.stringify(manifest,null,2));need(body.length+inventory.length<=LIMIT.result,'public_bound');
+          await writeFile(join(dest,'result.json'),body,{flag:'wx',mode:0o600});await writeFile(join(dest,'manifest.json'),inventory,{flag:'wx',mode:0o600});
+          const valid=inspectionAccepted(out);
+          await writeFile(process.env.GITHUB_OUTPUT,'inspection-valid='+valid+'\n',{flag:'a'});
+          NODE_PUBLISH
+          node "$RUNNER_TEMP/afw-readonly-inspector-publisher.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-publish.private" 2>&1
+      - name: Preserve exact safe pair for seven days
+        id: artifact
+        if: ${{ always() && steps.publish.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-readonly-receipt-inspection-${{ github.run_id }}-1
+          path: |
+            ${{ runner.temp }}/afw-readonly-inspector-public/result.json
+            ${{ runner.temp }}/afw-readonly-inspector-public/manifest.json
+          if-no-files-found: error
+          retention-days: 7
+          overwrite: false
+          include-hidden-files: false
+      - name: Require successful authenticated producer and safe upload
+        if: ${{ always() }}
+        shell: bash
+        env:
+          INSPECTION_VALID: ${{ steps.publish.outputs.inspection-valid }}
+          UPLOAD_OUTCOME: ${{ steps.artifact.outcome }}
+          CORE_SHA: ${{ steps.corepin.outputs.core-sha256 }}
+        run: |
+          set -euo pipefail
+          test "$INSPECTION_VALID" = true
+          test "$UPLOAD_OUTCOME" = success
+          test "$CORE_SHA" = d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246
+
+  verifier:
+    needs: producer
+    if: ${{ false && success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - name: Reconstruct and pin validators from this frozen Source
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          cat >"$RUNNER_TEMP/afw-safe-pair-current.mjs" <<'NODE_SAFE_ZIP'
+          import assert from 'node:assert/strict';
+          import {createHash} from 'node:crypto';
+          import {inflateRawSync,deflateRawSync} from 'node:zlib';
+          export class SafeZipRejected extends Error{constructor(reason){super(reason);this.reason=reason;}}
+          const Rejected=SafeZipRejected,need=(ok,reason)=>{if(!ok)throw new SafeZipRejected(reason);},NAMES=['result.json','manifest.json'],CAPS={'result.json':65536,'manifest.json':65536};
+          const utf8=b=>{const s=new TextDecoder('utf-8',{fatal:true}).decode(b);need(Buffer.from(s).equals(b),'zip_utf8');return s;};
+          export const zipSha=b=>createHash('sha256').update(b).digest('hex');
+          export function bindRawZip(bytes,size,uploaded,metadataDigest){
+           need(Buffer.isBuffer(bytes)&&Number.isSafeInteger(size)&&size>0&&size<=131072&&bytes.length===size,'zip_binding_size');
+           need(typeof uploaded==='string'&&/^[a-f0-9]{64}$/.test(uploaded)&&typeof metadataDigest==='string'&&/^sha256:[a-f0-9]{64}$/.test(metadataDigest),'zip_binding_digest');
+           const digest=zipSha(bytes);need(digest===uploaded&&'sha256:'+digest===metadataDigest,'zip_binding_digest');return digest;
+          }
+          const crcTable=Uint32Array.from({length:256},(_,n)=>{let c=n;for(let k=0;k<8;k++)c=c&1?0xedb88320^(c>>>1):c>>>1;return c>>>0;});
+          function crc32(bytes){let c=0xffffffff;for(const b of bytes)c=crcTable[(c^b)&255]^(c>>>8);return (c^0xffffffff)>>>0;}
+          function extraFields(bytes){let n=0;while(n<bytes.length){need(n+4<=bytes.length,'zip_extra');const kind=bytes.readUInt16LE(n),size=bytes.readUInt16LE(n+2);need(kind!==1&&n+4+size<=bytes.length,'zip_extra');n+=4+size;}need(n===bytes.length,'zip_extra');}
+          export function decodeSafePair(bytes){
+           need(Buffer.isBuffer(bytes)&&bytes.length>=22&&bytes.length<=131072,'zip_bound');
+           const end=bytes.length-22;need(bytes.readUInt32LE(end)===0x06054b50&&bytes.readUInt16LE(end+20)===0,'zip_eocd');
+           need(bytes.readUInt16LE(end+4)===0&&bytes.readUInt16LE(end+6)===0&&bytes.readUInt16LE(end+8)===2&&bytes.readUInt16LE(end+10)===2,'zip_entries');
+           const directorySize=bytes.readUInt32LE(end+12),directory=bytes.readUInt32LE(end+16);need(directory>0&&directory+directorySize===end,'zip_directory');
+           const entries=[],seen=new Set();let cursor=directory;
+           for(let n=0;n<2;n++){
+            need(cursor+46<=end&&bytes.readUInt32LE(cursor)===0x02014b50,'zip_central');
+            const flags=bytes.readUInt16LE(cursor+8),method=bytes.readUInt16LE(cursor+10),crc=bytes.readUInt32LE(cursor+16),compressed=bytes.readUInt32LE(cursor+20),size=bytes.readUInt32LE(cursor+24),nameLength=bytes.readUInt16LE(cursor+28),extraLength=bytes.readUInt16LE(cursor+30),commentLength=bytes.readUInt16LE(cursor+32),disk=bytes.readUInt16LE(cursor+34),attributes=bytes.readUInt32LE(cursor+38),local=bytes.readUInt32LE(cursor+42);
+            need((flags&~0x0808)===0&&(method===0||method===8)&&disk===0&&nameLength>0&&nameLength<=32&&commentLength===0,'zip_flags');
+            need(cursor+46+nameLength+extraLength<=end,'zip_central_range');const rawName=bytes.subarray(cursor+46,cursor+46+nameLength),name=utf8(rawName);
+            need(NAMES.includes(name)&&!seen.has(name),'zip_paths');seen.add(name);
+            const kind=(attributes>>>16)&0xf000;need((kind===0||kind===0x8000)&&(attributes&0x10)===0,'zip_link');
+            need(size<=CAPS[name]&&compressed<=bytes.length&&local<directory,'zip_entry_bound');extraFields(bytes.subarray(cursor+46+nameLength,cursor+46+nameLength+extraLength));
+            need(local+30<=directory&&bytes.readUInt32LE(local)===0x04034b50,'zip_local');
+            const lf=bytes.readUInt16LE(local+6),lm=bytes.readUInt16LE(local+8),lc=bytes.readUInt32LE(local+14),lz=bytes.readUInt32LE(local+18),lu=bytes.readUInt32LE(local+22),ln=bytes.readUInt16LE(local+26),le=bytes.readUInt16LE(local+28),start=local+30+ln+le;
+            need(lf===flags&&lm===method&&ln===nameLength&&start<=directory,'zip_local_identity');
+            need(bytes.subarray(local+30,local+30+ln).equals(rawName),'zip_local_name');extraFields(bytes.subarray(local+30+ln,start));
+            need(start+compressed<=directory,'zip_data_range');let finish=start+compressed;
+            if(flags&8){
+             need((lc===0&&lz===0&&lu===0)||(lc===crc&&lz===compressed&&lu===size),'zip_local_sizes');
+             const ends=[];if(finish+12<=directory&&bytes.readUInt32LE(finish)===crc&&bytes.readUInt32LE(finish+4)===compressed&&bytes.readUInt32LE(finish+8)===size)ends.push(finish+12);
+             if(finish+16<=directory&&bytes.readUInt32LE(finish)===0x08074b50&&bytes.readUInt32LE(finish+4)===crc&&bytes.readUInt32LE(finish+8)===compressed&&bytes.readUInt32LE(finish+12)===size)ends.push(finish+16);
+             need(ends.length===1,'zip_descriptor');finish=ends[0];
+            }else need(lc===crc&&lz===compressed&&lu===size,'zip_local_sizes');
+            entries.push({name,method,crc,compressed,size,local,start,finish});cursor+=46+nameLength+extraLength;
+           }
+           need(cursor===end&&seen.size===2,'zip_directory');
+           const ranges=entries.slice().sort((a,b)=>a.local-b.local);need(ranges[0].local===0,'zip_ranges');for(let n=1;n<ranges.length;n++)need(ranges[n-1].finish===ranges[n].local,'zip_ranges');need(ranges.at(-1).finish===directory,'zip_ranges');
+           need(entries.reduce((n,e)=>n+e.size,0)<=65536,'zip_output_cap');const files=new Map();for(const e of entries){const input=bytes.subarray(e.start,e.start+e.compressed);let value;try{value=e.method===0?input:inflateRawSync(input,{maxOutputLength:CAPS[e.name]});}catch{throw new Rejected('zip_inflate');}need(value.length===e.size&&(e.method!==0||e.compressed===e.size),'zip_inflate');need(crc32(value)===e.crc,'zip_crc');files.set(e.name,value);}
+           return files;
+          }
+          
+          
+          export async function collectZipBody(response,signal){
+           need(response.status===200&&response.body!==null,'zip_http');const reader=response.body.getReader(),parts=[];let total=0;
+           try{for(;;){const item=await reader.read();if(item.done)break;total+=item.value.byteLength;need(total<=131072,'zip_download_cap');parts.push(Buffer.from(item.value));}}
+           catch(error){try{await reader.cancel();}catch{}throw error;}
+           need(!signal.aborted,'zip_download_timeout');return Buffer.concat(parts);
+          }
+          export function deliveryLocation(value){
+           need(typeof value==='string','zip_redirect');let next;try{next=new URL(value);}catch{throw new SafeZipRejected('zip_redirect');}
+           need(next.protocol==='https:'&&!next.username&&!next.password&&(!next.port||next.port==='443')&&!next.hash,'zip_redirect');return next.href;
+          }
+          export async function downloadAssignedZip(id,token){
+           need(typeof id==='string'&&/^[1-9][0-9]*$/.test(id)&&typeof token==='string'&&token.length>0,'zip_download_input');
+           const signal=AbortSignal.timeout(30000),seen=new Set();let url='https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/'+id+'/zip';
+           for(let redirects=0;redirects<=3;redirects++){
+            need(!seen.has(url),'zip_redirect');seen.add(url);
+            const response=await fetch(url,{redirect:'manual',signal,headers:redirects===0?{Authorization:'Bearer '+token,Accept:'application/vnd.github+json'}:{}});
+            if(response.status===200)return await collectZipBody(response,signal);
+            need([301,302,303,307,308].includes(response.status)&&redirects<3,'zip_http');
+            const next=deliveryLocation(response.headers.get('location'));await response.body?.cancel();url=next;
+           }throw new SafeZipRejected('zip_redirect');
+          }
+          
+          function fixedZip({names=NAMES,method=0,descriptor=0,data={},declared={},gap=false}={}){
+           const locals=[],central=[];let offset=0;
+           for(let index=0;index<names.length;index++){
+            const name=names[index],n=Buffer.from(name),value=data[name]??Buffer.from(name==='result.json'?'{"fixture":true}':'{"fixture":"manifest"}'),packed=method===8?deflateRawSync(value):value,crc=crc32(value),size=declared[name]??value.length,local=Buffer.alloc(30),flags=descriptor?8:0;
+            local.writeUInt32LE(0x04034b50);local.writeUInt16LE(20,4);local.writeUInt16LE(flags,6);local.writeUInt16LE(method,8);if(!descriptor){local.writeUInt32LE(crc,14);local.writeUInt32LE(packed.length,18);local.writeUInt32LE(size,22);}local.writeUInt16LE(n.length,26);
+            const tail=Buffer.alloc(descriptor===1?16:descriptor===2?12:0);if(descriptor){const at=descriptor===1?4:0;if(at)tail.writeUInt32LE(0x08074b50);tail.writeUInt32LE(crc,at);tail.writeUInt32LE(packed.length,at+4);tail.writeUInt32LE(size,at+8);}
+            const row=Buffer.alloc(46);row.writeUInt32LE(0x02014b50);row.writeUInt16LE(20,4);row.writeUInt16LE(20,6);row.writeUInt16LE(flags,8);row.writeUInt16LE(method,10);row.writeUInt32LE(crc,16);row.writeUInt32LE(packed.length,20);row.writeUInt32LE(size,24);row.writeUInt16LE(n.length,28);row.writeUInt32LE(offset,42);central.push(row,n);locals.push(local,n,packed,tail);offset+=local.length+n.length+packed.length+tail.length;if(gap&&index===0){locals.push(Buffer.from([0]));offset++;}
+           }
+           const dir=Buffer.concat(central),end=Buffer.alloc(22);end.writeUInt32LE(0x06054b50);end.writeUInt16LE(names.length,8);end.writeUInt16LE(names.length,10);end.writeUInt32LE(dir.length,12);end.writeUInt32LE(offset,16);return Buffer.concat([...locals,dir,end]);
+          }
+          export const ZIP_CONTROL_IDS=Object.freeze(['zip_valid_store_crc_vector','zip_valid_deflate','zip_signed_unsigned_descriptors','zip_wrong_size','zip_wrong_upload_sha','zip_wrong_metadata_sha','zip_extra_entry','zip_duplicate_entry','zip_traversal_entry','zip_symlink','zip_bad_crc','zip_noncontiguous_ranges','zip_declared_and_inflate_caps','download_stream_redirect_auth_bounds']);
+          export async function runZipControls(){
+           const results=[],decode=bytes=>{bindRawZip(bytes,bytes.length,zipSha(bytes),'sha256:'+zipSha(bytes));return decodeSafePair(bytes);},reject=(fn,reason)=>assert.throws(fn,e=>e instanceof SafeZipRejected&&e.reason===reason),check=async(id,fn)=>{try{await fn();results.push({id,status:'passed'});}catch{results.push({id,status:'failed'});throw Object.assign(new SafeZipRejected('zip_controls_failed'),{results});}};
+           await check(ZIP_CONTROL_IDS[0],()=>{assert.equal(crc32(Buffer.from('123456789')),0xcbf43926);assert.deepEqual([...decode(fixedZip()).keys()],NAMES);});
+           await check(ZIP_CONTROL_IDS[1],()=>assert.equal(decode(fixedZip({method:8})).get('result.json').toString(),'{"fixture":true}'));
+           await check(ZIP_CONTROL_IDS[2],()=>{for(const descriptor of [1,2])assert.equal(decode(fixedZip({method:8,descriptor})).size,2);});
+           await check(ZIP_CONTROL_IDS[3],()=>{const b=fixedZip();reject(()=>bindRawZip(b,b.length+1,zipSha(b),'sha256:'+zipSha(b)),'zip_binding_size');});
+           await check(ZIP_CONTROL_IDS[4],()=>{const b=fixedZip();reject(()=>bindRawZip(b,b.length,'a'.repeat(64),'sha256:'+zipSha(b)),'zip_binding_digest');});
+           await check(ZIP_CONTROL_IDS[5],()=>{const b=fixedZip();reject(()=>bindRawZip(b,b.length,zipSha(b),'sha256:'+'b'.repeat(64)),'zip_binding_digest');reject(()=>bindRawZip(b,b.length,zipSha(b),[zipSha(b)]),'zip_binding_digest');});
+           await check(ZIP_CONTROL_IDS[6],()=>reject(()=>decode(fixedZip({names:[...NAMES,'extra']})),'zip_entries'));
+           await check(ZIP_CONTROL_IDS[7],()=>reject(()=>decode(fixedZip({names:['result.json','result.json']})),'zip_paths'));
+           await check(ZIP_CONTROL_IDS[8],()=>reject(()=>decode(fixedZip({names:['../result.json','manifest.json']})),'zip_paths'));
+           await check(ZIP_CONTROL_IDS[9],()=>{const b=fixedZip(),at=b.readUInt32LE(b.length-6);b.writeUInt32LE(0xa0000000,at+38);reject(()=>decode(b),'zip_link');});
+           await check(ZIP_CONTROL_IDS[10],()=>{const b=fixedZip();b[30+Buffer.byteLength(NAMES[0])]^=1;reject(()=>decode(b),'zip_crc');});
+           await check(ZIP_CONTROL_IDS[11],()=>reject(()=>decode(fixedZip({gap:true})),'zip_ranges'));
+           await check(ZIP_CONTROL_IDS[12],()=>{reject(()=>decode(fixedZip({method:8,data:{'result.json':Buffer.alloc(40000),'manifest.json':Buffer.alloc(40000)}})),'zip_output_cap');reject(()=>decode(fixedZip({method:8,data:{'result.json':Buffer.alloc(70000,120)},declared:{'result.json':1}})),'zip_inflate');});
+           await check(ZIP_CONTROL_IDS[13],async()=>{
+            await assert.rejects(()=>collectZipBody(new Response(new Uint8Array(131073)),new AbortController().signal),e=>e instanceof SafeZipRejected&&e.reason==='zip_download_cap');
+            assert.equal(deliveryLocation('https://delivery.example.invalid/fixed'),'https://delivery.example.invalid/fixed');for(const value of ['http://delivery.example.invalid/','https://u:p@delivery.example.invalid/','https://delivery.example.invalid:444/','https://delivery.example.invalid/#x'])reject(()=>deliveryLocation(value),'zip_redirect');
+            const originalFetch=globalThis.fetch,calls=[];try{
+             globalThis.fetch=async(url,options)=>{calls.push({url,headers:options.headers});return calls.length===1?new Response(null,{status:302,headers:{location:'https://delivery.example.invalid/fixed'}}):new Response(Buffer.from('inert'));};
+             assert.equal((await downloadAssignedZip('123','INERT_SYN_TOKEN')).toString(),'inert');assert.equal(calls.length,2);assert.equal(calls[0].url,'https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/123/zip');assert.equal(calls[0].headers.Authorization,'Bearer INERT_SYN_TOKEN');assert.equal(Object.hasOwn(calls[1].headers,'Authorization'),false);
+            }finally{globalThis.fetch=originalFetch;}
+            let count=0;try{globalThis.fetch=async()=>new Response(null,{status:302,headers:{location:'https://delivery.example.invalid/fixed-'+(++count)}});await assert.rejects(()=>downloadAssignedZip('123','INERT_SYN_TOKEN'),e=>e instanceof SafeZipRejected&&e.reason==='zip_http');assert.equal(count,4);}finally{globalThis.fetch=originalFetch;}
+           });
+           return results;
+          }
+          NODE_SAFE_ZIP
+          cat >"$RUNNER_TEMP/afw-safe-materialize.mjs" <<'NODE_MATERIALIZE'
+          import {readFile,writeFile} from 'node:fs/promises';
+          import {join,resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          const expected='d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246',hash=b=>createHash('sha256').update(b).digest('hex'),need=x=>{if(!x)throw Error('source_materialization_rejected');};
+          need(process.env.GITHUB_REPOSITORY==='tokenizartinfo-ops/agent-friendly-web'&&process.env.GITHUB_REF==='refs/heads/feat/finite-native-cleanup-20261101'&&process.env.GITHUB_RUN_ATTEMPT==='1'&&process.versions.node==='22.23.4');
+          const wf=await readFile('.github/workflows/afw-finite-budget-qualification.yml','utf8'),opener="<<'NODE_CORE'\n",ending="          NODE_CORE\n";need(wf.split(opener).length===2);
+          const start=wf.indexOf(opener)+opener.length,end=wf.indexOf(ending,start);need(end>start);
+          const rows=wf.slice(start,end).split('\n');need(rows.pop()==='');const core=rows.map(row=>{need(row.startsWith('          '));return row.slice(10);}).join('\n')+'\n';
+          need(Buffer.byteLength(core)===77002&&hash(Buffer.from(core))===expected);
+          function part(first,last){need(core.split(first).length===2);const a=core.indexOf(first),b=core.indexOf(last,a);need(b>a);return core.slice(a,b);}
+          const pre=core.slice(0,core.indexOf('const crcTable='));
+          const publicSlices=[
+          part('function unknownOwnership(','export function projectOwnership'),
+          part('const BOOL_FACTS=','export function projectFull'),
+          part('export function projectCounts(','const OPERATORS='),
+          part('const OPERATORS=','function scalarUnknown('),
+          part('function scalarUnknown(','function tapScalar('),
+          part('function emptyTap(','export function parseFixedTap'),
+          part('const PHASES=','const REASONS='),
+          part('const REASONS=','const reasonOf='),
+          part('function inspectionAccepted(','const METADATA_STAGES=')
+          ].join('\n');
+          const metadata=part('const METADATA_STAGES=','\nconst programPath');
+          const dto="function validateControlsPair(files){\n const ids=[\"zip_valid\",\"zip_signed_descriptor\",\"zip_extra\",\"zip_traversal\",\"zip_duplicate\",\"zip_bad_crc\",\"zip_link\",\"zip_bad_range\",\"failure_identity_valid\",\"failure_identity_success_reject\",\"failure_identity_role_reject\",\"failure_identity_kind_reject\",\"failure_identity_unknown_reject\",\"ownership_valid\",\"ownership_unknown_reject\",\"ownership_enum_reject\",\"optional_missing_unknown\",\"full_result_valid\",\"full_result_unknown_reject\",\"tap_valid_canaries\",\"tap_unknown_scalar\",\"tap_duplicate_case\",\"tap_case_number_collision\",\"tap_wrapper_number_collision\",\"tap_unknown_number_collision\",\"tap_late_diag_comment\",\"tap_late_diag_unrelated\",\"tap_injected_name\",\"tap_long_line\",\"tap_long_block\",\"public_authenticated_valid\",\"gate_artifact_count\",\"gate_artifact_actual\",\"gate_artifact_candidate\",\"gate_artifact_duration\",\"gate_artifact_business\",\"gate_authenticated_count\",\"gate_authenticated_actual\",\"gate_authenticated_candidate\",\"gate_authenticated_duration\",\"gate_authenticated_business\",\"gate_inventory_count\",\"gate_inventory_actual\",\"gate_inventory_candidate\",\"gate_inventory_duration\",\"gate_inventory_business\",\"gate_identity_count\",\"gate_identity_actual\",\"gate_identity_candidate\",\"gate_identity_duration\",\"gate_identity_business\",\"scalar_boolean_wrong\",\"scalar_false_null_wrong\",\"scalar_array_hash_wrong\",\"scalar_half_hash_wrong\",\"scalar_boolean_valid\",\"scalar_null_valid\",\"scalar_integer_valid\",\"scalar_typed_valid\",\"verdict_accepted\",\"verdict_parse_timeout_old_current\",\"verdict_other_failure\",\"verdict_rejected_status\",\"verdict_partial_status\",\"verdict_missing_clock\",\"verdict_open_over_deadline\",\"verdict_download_over_deadline\",\"digest_match_bare\",\"digest_match_prefixed\",\"digest_mismatch_old_current\",\"digest_upload_malformed\",\"digest_remote_malformed\",\"metadata_wrong_id\",\"metadata_wrong_context\",\"metadata_stream_valid\",\"metadata_stream_overcap\",\"diagnostic_http_rejected\",\"diagnostic_json_malformed\",\"diagnostic_stream_overcap\",\"diagnostic_identity_first_field\",\"diagnostic_digest_mismatch\",\"diagnostic_success_output\",\"diagnostic_unknown_request_error\",\"diagnostic_observed_timeout\",\"diagnostic_schema_extra_field\",\"diagnostic_schema_arbitrary_enum\",\"diagnostic_record_over_2048\",\"diagnostic_primary_first_failure_preserved\",\"diagnostic_output_write_error\",\"diagnostic_utf8_malformed\",\"diagnostic_input_id_rejected\"];const bodies=Object.fromEntries(files);\n const result=JSON.parse(utf8(bodies['result.json'])),manifest=JSON.parse(utf8(bodies['manifest.json']));\n fields(result,['purpose','repository','ref','source','run','attempt','node','status','expected','completed','passed','failed','inventory','coveredCoreSha256','elapsedMs','failure','original954','originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified']);\n need(result.purpose==='afw.readonly-receipt-inspector.CONTROLS.safe.v1'&&result.repository==='tokenizartinfo-ops/agent-friendly-web'&&result.ref==='refs/heads/feat/finite-native-cleanup-20261101'&&result.source===process.env.GITHUB_SHA&&result.run===process.env.GITHUB_RUN_ID&&result.attempt===1&&result.node==='22.23.4');\n need(['passed','failed'].includes(result.status)&&result.expected===ids.length&&Number.isInteger(result.completed)&&result.completed>=0&&result.completed<=ids.length&&result.passed===result.completed&&[0,1].includes(result.failed)&&Number.isSafeInteger(result.elapsedMs)&&result.elapsedMs>=0&&result.elapsedMs<=120000);\n need(Array.isArray(result.inventory)&&result.inventory.length===ids.length);for(let n=0;n<ids.length;n++){const row=result.inventory[n];fields(row,['id','status']);need(row.id===ids[n]&&['passed','failed','not_executed'].includes(row.status));}\n need(result.coveredCoreSha256===EXPECTED_CORE);need(result.status==='passed');\n fields(result.original954,['workflowBlob','verdictCounterexample','digestCounterexample']);need(result.original954.workflowBlob==='97b37fec44696dde23daa013196a5acdb05c2f4d'&&['executed_inert','not_executed'].includes(result.original954.verdictCounterexample)&&['executed_inert','not_executed'].includes(result.original954.digestCounterexample));\n for(const key of ['originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified'])need(result[key]===false);\n if(result.failure!==null){fields(result.failure,['reason','control','messageBytes','messageSha256']);need(result.failure.reason==='controls_failed'&&(result.failure.control==='setup'||ids.includes(result.failure.control)));need((result.failure.messageBytes===null&&result.failure.messageSha256===null)||(Number.isSafeInteger(result.failure.messageBytes)&&result.failure.messageBytes>=0&&result.failure.messageBytes<=1048576&&typeof result.failure.messageSha256==='string'&&/^[a-f0-9]{64}$/.test(result.failure.messageSha256)));}\n if(result.status==='passed')need(result.completed===ids.length&&result.failed===0&&result.inventory.every(x=>x.status==='passed')&&result.failure===null&&result.original954.verdictCounterexample==='executed_inert'&&result.original954.digestCounterexample==='executed_inert');\n fields(manifest,['purpose','source','run','attempt','files']);need(manifest.purpose==='afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1'&&manifest.source===process.env.GITHUB_SHA&&manifest.run===process.env.GITHUB_RUN_ID&&manifest.attempt===1&&Array.isArray(manifest.files)&&manifest.files.length===1);fields(manifest.files[0],['path','bytes','sha256']);need(manifest.files[0].path==='result.json'&&manifest.files[0].bytes===bodies['result.json'].length&&manifest.files[0].sha256===sha(bodies['result.json']));\n \n return result;\n}\n\n\nfunction validateInspectionPair(files){\n const resultBytes=files.get('result.json'),manifestBytes=files.get('manifest.json'),result=JSON.parse(utf8(resultBytes)),manifest=JSON.parse(utf8(manifestBytes));\n validatePublic(result);need(inspectionAccepted(result),'inspection_rejected');\n fields(manifest,['purpose','inspectorSource','inspectorRun','attempt','files']);need(manifest.purpose==='afw.readonly-receipt-inspection-manifest.safe.v1'&&manifest.inspectorSource===process.env.GITHUB_SHA&&manifest.inspectorRun===process.env.GITHUB_RUN_ID&&manifest.attempt===1&&Array.isArray(manifest.files)&&manifest.files.length===1,'inspection_manifest');\n fields(manifest.files[0],['path','bytes','sha256']);need(manifest.files[0].path==='result.json'&&manifest.files[0].bytes===resultBytes.length&&manifest.files[0].sha256===sha(resultBytes),'inspection_manifest');return result;\n}\n";
+          const driver="\nconst EXPECTED_CORE='d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246';\nconst {SafeZipRejected,zipSha,bindRawZip,decodeSafePair,downloadAssignedZip,runZipControls,ZIP_CONTROL_IDS}=await import(pathToFileURL(join(resolve(process.env.RUNNER_TEMP),'afw-safe-pair-current.mjs')).href);\nlet capturedMetadata=null;\nconst originalMetadataValidator=validateAssignedMetadata;\nvalidateAssignedMetadata=function(...args){\n const result=Reflect.apply(originalMetadataValidator,this,args),size=Object.getOwnPropertyDescriptor(args[0],'size_in_bytes'),digest=Object.getOwnPropertyDescriptor(args[0],'digest');\n need(size&&Object.hasOwn(size,'value')&&num(size.value,131072)&&size.value>0&&digest&&Object.hasOwn(digest,'value')&&typeof digest.value==='string'&&/^sha256:[a-f0-9]{64}$/.test(digest.value),'metadata_capture');\n capturedMetadata={bytes:size.value,digest:digest.value};return result;\n};\nconst SEAM_IDS=['validator_capture_after_success','validator_rejection_identity_no_capture'],SAFE_IDS=[...SEAM_IDS,...ZIP_CONTROL_IDS];\nfunction emitSafeControls(results){\n const inventory=SAFE_IDS.map(id=>({id,status:results.find(x=>x.id===id)?.status??'not_executed'})),pass=inventory.filter(x=>x.status==='passed').length,fail=inventory.filter(x=>x.status==='failed').length;\n const value={marker:'SAFE_ZIP_CONTROLS',expected:16,completed:pass+fail,pass,fail,inventory,failure:pass===16&&fail===0?null:'controls_failed'};\n fields(value,['marker','expected','completed','pass','fail','inventory','failure']);need(value.marker==='SAFE_ZIP_CONTROLS'&&value.expected===16&&num(value.completed,16)&&num(value.pass,16)&&num(value.fail,1)&&value.completed===value.pass+value.fail&&Array.isArray(value.inventory)&&value.inventory.length===16,'zip_controls_schema');\n for(let n=0;n<16;n++){fields(value.inventory[n],['id','status']);need(value.inventory[n].id===SAFE_IDS[n]&&['passed','failed','not_executed'].includes(value.inventory[n].status),'zip_controls_schema');}need(value.failure===null||value.failure==='controls_failed','zip_controls_schema');\n const line=JSON.stringify(value);need(Buffer.byteLength(line)<=2048,'zip_controls_bound');process.stdout.write(line+'\\n');return pass===16&&fail===0;\n}\nasync function runSafeControls(){\n const rows=[];let active=null;\n try{\n  const digest='a'.repeat(64),value={id:123,name:'afw-readonly-receipt-inspection-'+process.env.GITHUB_RUN_ID+'-1',expired:false,size_in_bytes:1000,digest:'sha256:'+digest,workflow_run:{id:Number(process.env.GITHUB_RUN_ID),head_sha:process.env.GITHUB_SHA,head_branch:'feat/finite-native-cleanup-20261101'},created_at:'2026-11-12T00:00:00Z',expires_at:'2026-11-19T00:00:00Z'};\n  active=SEAM_IDS[0];capturedMetadata=null;assert.equal(validateAssignedMetadata(value,'123',digest),true);assert.deepEqual(capturedMetadata,{bytes:1000,digest:'sha256:'+digest});rows.push({id:active,status:'passed'});\n  active=SEAM_IDS[1];capturedMetadata=null;const primary=new Error('INERT_REJECTION'),input={...value};Object.defineProperty(input,'id',{get(){throw primary;}});assert.throws(()=>validateAssignedMetadata(input,'123',digest),error=>error===primary);assert.equal(capturedMetadata,null);assert.throws(()=>validateAssignedMetadata({...value,name:'inert wrong name'},'123',digest),error=>error instanceof Rejected&&error.reason==='metadata_identity');assert.equal(capturedMetadata,null);rows.push({id:active,status:'passed'});active=null;\n  try{rows.push(...await runZipControls());}catch(error){if(Array.isArray(error?.results))rows.push(...error.results);else throw error;}\n }catch{if(active&&!rows.some(x=>x.id===active))rows.push({id:active,status:'failed'});}\n capturedMetadata=null;return emitSafeControls(rows);\n}\nfunction emitSummary(v){\n const keys=['marker','kind','source','run','attempt','artifactId','coreSha256','verifierSha256','safeZipModuleSha256','producerCoreVerified','sourceCoreVerified','safeControlsPass','metadataVerified','rawZipVerified','inventoryVerified','producerControlCount','zipBytes','metadataZipBytes','uploadDigest','metadataDigest','rawZipSha256','resultBytes','resultSha256','manifestBytes','manifestSha256','stage','reason',...Object.keys(FLAGS)];\n fields(v,keys);need(v.marker==='AFW_SAFE_READBACK/1'&&['controls','inspection'].includes(v.kind)&&typeof v.source==='string'&&/^[a-f0-9]{40}$/.test(v.source)&&typeof v.run==='string'&&/^[1-9][0-9]*$/.test(v.run)&&v.attempt===1&&(v.artifactId===null||typeof v.artifactId==='string'&&/^[1-9][0-9]*$/.test(v.artifactId)),'summary_schema');\n for(const key of ['coreSha256','verifierSha256','safeZipModuleSha256'])need(typeof v[key]==='string'&&/^[a-f0-9]{64}$/.test(v[key]),'summary_schema');\n for(const key of ['producerCoreVerified','sourceCoreVerified','safeControlsPass','metadataVerified','rawZipVerified','inventoryVerified'])need(bool(v[key]),'summary_schema');\n need(v.producerControlCount===null||v.producerControlCount===91,'summary_schema');for(const key of ['zipBytes','metadataZipBytes','resultBytes','manifestBytes'])need(v[key]===null||num(v[key],131072),'summary_schema');\n for(const key of ['uploadDigest','rawZipSha256','resultSha256','manifestSha256'])need(v[key]===null||typeof v[key]==='string'&&/^[a-f0-9]{64}$/.test(v[key]),'summary_schema');need(v.metadataDigest===null||typeof v.metadataDigest==='string'&&/^sha256:[a-f0-9]{64}$/.test(v.metadataDigest),'summary_schema');\n need(['input','controls','metadata','download','binding','decode','dto','complete'].includes(v.stage)&&['none','controls_failed','metadata_failed','download_failed','binding_failed','zip_failed','dto_failed','source_failed','unknown'].includes(v.reason),'summary_schema');for(const[k,x]of Object.entries(FLAGS))need(v[k]===x,'summary_schema');\n const line=JSON.stringify(v);need(Buffer.byteLength(line)<=2048,'summary_bound');process.stdout.write(line+'\\n');\n}\nconst kind=process.env.READBACK_KIND,id=process.env.ASSIGNED_ARTIFACT_ID,uploaded=process.env.UPLOADED_ARTIFACT_DIGEST;\nconst summary={marker:'AFW_SAFE_READBACK/1',kind,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,artifactId:typeof id==='string'&&/^[1-9][0-9]*$/.test(id)?id:null,coreSha256:EXPECTED_CORE,verifierSha256:sha(await readFile(import.meta.filename)),safeZipModuleSha256:sha(await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-safe-pair-current.mjs'))),producerCoreVerified:false,sourceCoreVerified:false,safeControlsPass:false,metadataVerified:false,rawZipVerified:false,inventoryVerified:false,producerControlCount:null,zipBytes:null,metadataZipBytes:null,uploadDigest:null,metadataDigest:null,rawZipSha256:null,resultBytes:null,resultSha256:null,manifestBytes:null,manifestSha256:null,stage:'input',reason:'none',...FLAGS};\ntry{\n need(process.env.GITHUB_REPOSITORY===ORIGINAL.repository&&process.env.GITHUB_REF===ORIGINAL.ref&&process.env.GITHUB_RUN_ATTEMPT==='1'&&process.versions.node==='22.23.4'&&['controls','inspection'].includes(kind),'verifier_scope');\n need(process.env.PRODUCER_CORE_SHA===EXPECTED_CORE&&SOURCE_CORE_SHA===EXPECTED_CORE,'verifier_core');summary.producerCoreVerified=true;summary.sourceCoreVerified=true;\n summary.stage='controls';summary.safeControlsPass=await runSafeControls();need(summary.safeControlsPass,'controls_failed');\n summary.stage='metadata';const signal=AbortSignal.timeout(15000);\n await runMetadataReadback(id,uploaded,()=>fetch('https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/'+id,{redirect:'error',signal,headers:{Authorization:'Bearer '+process.env.GH_ARTIFACT_TOKEN,Accept:'application/vnd.github+json'}}),()=>writeFile(process.env.GITHUB_OUTPUT,'assigned-id-verified=true\\n',{flag:'a'}),line=>{process.stdout.write(line+'\\n');},signal);\n need(capturedMetadata!==null,'metadata_capture');summary.metadataVerified=true;summary.uploadDigest=uploadDigest(uploaded);summary.metadataDigest=capturedMetadata.digest;summary.metadataZipBytes=capturedMetadata.bytes;\n summary.stage='download';const bytes=await downloadAssignedZip(id,process.env.GH_ARTIFACT_TOKEN);summary.zipBytes=bytes.length;\n summary.stage='binding';summary.rawZipSha256=bindRawZip(bytes,capturedMetadata.bytes,summary.uploadDigest,capturedMetadata.digest);summary.rawZipVerified=true;\n summary.stage='decode';const files=decodeSafePair(bytes);\n summary.stage='dto';if(kind==='controls'){validateControlsPair(files);summary.producerControlCount=91;}else validateInspectionPair(files);summary.inventoryVerified=true;summary.resultBytes=files.get('result.json').length;summary.resultSha256=sha(files.get('result.json'));summary.manifestBytes=files.get('manifest.json').length;summary.manifestSha256=sha(files.get('manifest.json'));summary.stage='complete';summary.reason='none';\n}catch{\n summary.reason=({input:'source_failed',controls:'controls_failed',metadata:'metadata_failed',download:'download_failed',binding:'binding_failed',decode:'zip_failed',dto:'dto_failed'})[summary.stage]??'unknown';process.exitCode=1;\n}\nemitSummary(summary);\n";
+          await writeFile(join(resolve(process.env.RUNNER_TEMP),'afw-safe-verifier-current.mjs'),pre+publicSlices+metadata+'\nconst SOURCE_CORE_SHA='+JSON.stringify(hash(Buffer.from(core)))+';\n'+dto+driver,{flag:'wx',mode:0o600});
+          NODE_MATERIALIZE
+          node "$RUNNER_TEMP/afw-safe-materialize.mjs" >"$RUNNER_TEMP/afw-safe-materialize.private" 2>&1
+          node --check "$RUNNER_TEMP/afw-safe-verifier-current.mjs" >"$RUNNER_TEMP/afw-safe-verifier-syntax.private" 2>&1
+      - name: Verify sixteen controls then the assigned safe artifact exactly once
+        shell: bash
+        env:
+          READBACK_KIND: inspection
+          PRODUCER_CORE_SHA: ${{ needs.producer.outputs.core-sha256 }}
+          ASSIGNED_ARTIFACT_ID: ${{ needs.producer.outputs.artifact-id }}
+          UPLOADED_ARTIFACT_DIGEST: ${{ needs.producer.outputs.artifact-digest }}
+          GH_ARTIFACT_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/afw-safe-verifier-current.mjs" 2>"$RUNNER_TEMP/afw-safe-verifier.private"
+
+```
+
+## FULL report append a51..7f
+
+```markdown
+
+
+## Inspector fix3 — finite TWO-JOB keyless discriminator / PENDING
+
+Root releasefb80946de1cd0202514afed1dd5c702740b704dd @d4119fb0a5c1b4d8ff374525b2abfad9284fc308; passive verifier seam explicitly approved and recorded094d82fc4e8b0a90672f83498dca4d386574372f @6b6065153fd5fdca9fbf7e2ebef1deffa8010adb. SAFEBASEa51c074e/tree64b0042e/exactF7. Only workflow+appendreport,3188other blobs/modes/main protected. Previous immediate samejob HTTP404 is observed; credential/provider/timing/job-completion cause remainsUNKNOWN. This bounded sequence tests AFTER successfulproducerterminal, not a causality claim or retry of private/native work.
+
+ExactlyONE scoped Sourcepush attempt1, TWOserial jobs via needs:producer and success guard, <=2min each/criticalpath<=4min, contents/actionsread only; no environments/secrets.* or AFWkey/token bindings. Producer executes EXACT91 CORE77002UTF8B/SHA256d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246, unchanged byte-for-byte from82cb/fcd20785. It emits existing closed CONTROLS result.json+manifest.json once and exports ONLY assignedartifactID/uploadactiondigest/coveredcorehash; no metadata/selfdownload inproducer. Current core pin and successfulfixture/localproof/upload gate required before verifier starts. Commands: node--check currentcore; node currentcore controls; independentfallback/strictlocal seal; upload safe pair. No91inventory/schema/parser/validation drift.
+
+Separateverifier checks immutable currentGITHUB_SHA checkout/gitHEAD, reconstructs77002Bcore directly from UNIQUE Sourceworkflow NODE_CORE heredoc, independentlySHA-pinsd514 and compares produceroutput/currentcore/result declaration. It materializes only currentpublicvalidators and metadatahelpers, not91CLI/coremain/domainmodules, and does not assume producerfilesystem. Materialized verifier expected39282B (beforejobmeasurement), source-traceable bootstrap +fixeddriver; verifier/ZIPmodule runtimeSHA are emitted in finalsummary. Wrapper is explicitly ADDITIONAL verifiercode, not a claim wholeprogram equals91CORE. The approved wrapper Reflect.apply invokes exactoriginal validateAssignedMetadata ONCE/same receiver+args; only normal validated return permits private capture of own primitive boundedsize/digest. Original rejection is never caught/replaced bywrapper. No secondGET/parse/fullbodyprojection; failed/missingcapture failsclosed.
+
+Sixteen separate CURRENT controls, not original91 businesscases/flatassertcount: validator_capture_after_success; validator_rejection_identity_no_capture; zip_valid_store_crc_vector; zip_valid_deflate; zip_signed_unsigned_descriptors; zip_wrong_size; zip_wrong_upload_sha; zip_wrong_metadata_sha; zip_extra_entry; zip_duplicate_entry; zip_traversal_entry; zip_symlink; zip_bad_crc; zip_noncontiguous_ranges; zip_declared_and_inflate_caps; download_stream_redirect_auth_bounds. Includes actualoriginal-validator inert getterrejection identity, knownCRC32('123456789')=cbf43926, signed+unsigneddescriptors, declaredcombined-output and true boundedinflate rejection, stream131073B rejection, HTTPSlocator guards, CURRENT downloadfunction with private inertfetch adapters proving firstAPIauth/no deliveryauth and maximum4requests/3followedredirects; restoredinfinally beforeanyrealrequest. All16executeonremoteverifier BEFORE actualartifactmetadata/download. Strict closedSAFE_ZIP_CONTROLS<=2048B line gives16namedresults/counts; no rawerror/Source. 91CORE unchanged; tests are max16 separatelylabelled.
+
+Actualverifier metadata uses exactlyONE sameassignedID GET,15s/current65536Bstreamcap/current9stage+22firstpredicate/allidentity/digest/retention guards, same closedAFW_METADATA_READBACK/1<=2048B line. No retries/polls/sleeps/alternateAPI. On success only, exactlyONE rawZIP download ofthatID, overall30s/max3HTTPSdeliveryredirects/tokenONLYinitialapi.github.com request, never forwarded. Stream cap EXACT131072B (128KiB), checked BEFORE accumulation. Raw bytecount must equal capturedvalidatedmetadata.size; SHA256(rawZIP) must equal BOTH normalizedupload and verifiedmetadatadigest BEFORE anyinflate/JSON. This replaces unavailablecrossrunnerlocalbytecomparison, never declaredhash-only acceptance.
+
+New fixedsafeZIP decoder accepts ONLYresult.json+manifest.json: single-disk2uniqueentries, local/centralnames/methods/flags/sizes/ranges/descriptors, no traversal/link/extras, strictCRC, store/deflate, noZIP64, boundedinflate and combineduncompressed<=65536B. Exact currentCONTROLS DTO/manifest validator derives from existing strict91schema, now requiresstatuspassed/completed91/failed0/allorderedunique91IDs/currentSource-run-attempt/Node22.23.4/readinessfalse/corehashd514/resultmanifestbytesSHA. No producerlocalfiles assumed. Allpass finalclosedAFW_SAFE_READBACK/1<=2048B summary reports actual IDs/hashes/counts/flags only; verifier emits NO artifact (no self-cycle). Wholeworkflow success +rawtripleSHA+complete2fileproof required.
+
+All preparation is RAM/staticgrammar/framing ONLY so far; no generated functions/controls executed duringpreparation. Six finalcontrols here-doc payloads comparedexact; canonical91core unchanged. COMPLETE amended actualinspector draft preserved blob537caafba053ed6f1b5de7f0f2648d17cec5bcf5/140647bytes, MANUAL/noinputs/noPush/TWOliteralfalsejobs, proposed5min originalprivateproducer +2min keylessverifier. All originalproducerdrivers/publisher/keyonlyopening/original1978AAD/helper pins remain; actualschema separate validateInspectionPair/validatePublic/inspectionAccepted, not91caseclaims. Currentsharedcore/metadata/wrapper/ZIP/driver bytes retained; finalproposal changes onlyknownkindinspection, heldguards and prepared5minproducer. It is UNQUALIFIED/uninstalled and no actualprivateinspection is released.
+
+Source freezes throughbothterminal/assignedIDs/closeddiagnostic/rawbinding/inventory readbacks. ANYfailure=>preserveactualproof, EXACTF7complete7manualfalse/report/fullrefbodytree/protected0active/STOP, no fix/retry. OnlyALLPASS=>reconcile COMPLETE inactiveactualproposal+report/commands/actualcounts/traceablebytes/fullreadbacks0active/STOP for SAMEreviewer. CurrentoutputsPENDING. No originalartifact13949168304/key/open/project, nativeSDK/MF/I0/business/runtime/permission/token/CF/OAuth/mail/Max action. OriginalR1–R3cause/status remainUNKNOWN; M2minor deferred; allreadiness/PCoff/drainflagsfalse.
+
+
+## Inspector fix3 — actual ALLPASS keyless serial proof / COMPLETE INACTIVE proposal / STOP
+
+Sole released run43253820290/attempt1 on frozenSourcef7368b790216482910932e45ebb7e52dc45c471c/treeb02e6cd2ffd4622cd5db2a93ccee0a2e7fd5e971/WF3d5b54657ef8c100a0b82dbbcd19bc71ee7c01f6/reportd7a987187c41155ad66e4e1c28dbd998b127761f. Created2026-11-12T15:59:56Z; terminalSUCCESS updated16:00:31Z. Producer131306581984 SUCCESS16:00:00Z–16:00:11Z, with exactcorepin/91fixtures/localstrictproof/upload/finalgate SUCCESS. Verifier131306721812 SUCCESS16:00:13Z–16:00:30Z, Source reconstruction/pin16:00:27Z; current16controls +metadata/rawZIP/fullinventory step SUCCESS16:00:27Z–16:00:28Z. Observed verifierstart is AFTER producerterminal (2s); no overlap. Both jobs far below their individual2min bounds. This successful after-producer sequence is an observation, NOT proofjobcompletion caused historical404. Fix1firstcause remainsUNKNOWN; fix2actualHTTP404 remainshistoricalfact.
+
+Actual unique closed runtime outputs (919B,297B,1259B respectively; each<=2048B):
+{"marker":"SAFE_ZIP_CONTROLS","expected":16,"completed":16,"pass":16,"fail":0,"inventory":[{"id":"validator_capture_after_success","status":"passed"},{"id":"validator_rejection_identity_no_capture","status":"passed"},{"id":"zip_valid_store_crc_vector","status":"passed"},{"id":"zip_valid_deflate","status":"passed"},{"id":"zip_signed_unsigned_descriptors","status":"passed"},{"id":"zip_wrong_size","status":"passed"},{"id":"zip_wrong_upload_sha","status":"passed"},{"id":"zip_wrong_metadata_sha","status":"passed"},{"id":"zip_extra_entry","status":"passed"},{"id":"zip_duplicate_entry","status":"passed"},{"id":"zip_traversal_entry","status":"passed"},{"id":"zip_symlink","status":"passed"},{"id":"zip_bad_crc","status":"passed"},{"id":"zip_noncontiguous_ranges","status":"passed"},{"id":"zip_declared_and_inflate_caps","status":"passed"},{"id":"download_stream_redirect_auth_bounds","status":"passed"}],"failure":null}
+{"marker":"AFW_METADATA_READBACK/1","source":"f7368b790216482910932e45ebb7e52dc45c471c","run":"43253820290","attempt":1,"assignedArtifactId":"13959882163","stage":"complete","firstFailedPredicate":"none","reason":"none","httpStatus":200,"receivedBytes":776,"timeoutObserved":false,"verified":true}
+{"marker":"AFW_SAFE_READBACK/1","kind":"controls","source":"f7368b790216482910932e45ebb7e52dc45c471c","run":"43253820290","attempt":1,"artifactId":"13959882163","coreSha256":"d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246","verifierSha256":"ec07235cd6ba641dca203755e0e944d810136c634e144df1fbb97caacfc0f059","safeZipModuleSha256":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d","producerCoreVerified":true,"sourceCoreVerified":true,"safeControlsPass":true,"metadataVerified":true,"rawZipVerified":true,"inventoryVerified":true,"producerControlCount":91,"zipBytes":1825,"metadataZipBytes":1825,"uploadDigest":"1d37df747a9da298d5f472db27f78e9f44e50e5e62da849796a4a2631e1181c9","metadataDigest":"sha256:1d37df747a9da298d5f472db27f78e9f44e50e5e62da849796a4a2631e1181c9","rawZipSha256":"1d37df747a9da298d5f472db27f78e9f44e50e5e62da849796a4a2631e1181c9","resultBytes":7940,"resultSha256":"654f7c424dab3609941ab98a3770af93394dac97f8684a8a02a6b2638da0d895","manifestBytes":334,"manifestSha256":"049fac9f363da4ba435419f4682ff83f85c55018df501dc204f7cfc127efcbd2","stage":"complete","reason":"none","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+
+Exactassigned safeCONTROLS artifactmetadata:
+{
+  "id": 13959882163,
+  "name": "afw-readonly-receipt-inspection-43253820290-1",
+  "bytes": 1825,
+  "digest": "sha256:1d37df747a9da298d5f472db27f78e9f44e50e5e62da849796a4a2631e1181c9",
+  "created": "2026-11-12T16:00:06Z",
+  "expires": "2026-11-19T16:00:05Z",
+  "expired": false,
+  "source": "f7368b790216482910932e45ebb7e52dc45c471c",
+  "run": 43253820290
+}
+Producer exported ONLY assignedID13959882163/uploaddigest/corehash. Verifier independently reconstructed Sourcecore77002B/SHA256d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246; producerdeclared/receivedresult core matched. Additional verifierprogram SHAec07235cd6ba641dca203755e0e944d810136c634e144df1fbb97caacfc0f059 and safeZIPmodule SHAb36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d are ACTUAL runtime hashes; approvedwrapper is additionalcode, not a91CORE byteidentity claim. Current91CORE itself is unchanged and pinned by BOTH runners.
+
+Primary metadataGET afterproducerterminal observedHTTP200/776receivedbytes/timeoutfalse/verifiedtrue/firstnone. RawZIP was EXACT1825B=validatedmetadata.size, and RAW SHA2561d37df747a9da298d5f472db27f78e9f44e50e5e62da849796a4a2631e1181c9 matched BOTH upload and metadata BEFOREdecode/inflate/JSON. StrictCRC/ranges/names/noextra/link/path, boundedinflate and exact2files passed. Full currentCONTROLS DTO had91pass0fail/orderedIDs/currentSource-run-attempt/Node22.23.4/d514/readinessfalse; result.json7940B/SHA654f7c424dab3609941ab98a3770af93394dac97f8684a8a02a6b2638da0d895; manifest.json334B/SHA049fac9f363da4ba435419f4682ff83f85c55018df501dc204f7cfc127efcbd2. Combined8274B<65536B. Singleartifact only; verifierpublished NO artifact. All16separatecontrols passed, all91originalcurrentcontrols passed; neither is a nativeR/D businesscase claim. This seat fetched only publicprimarymetadata and safeclosedlogrecords, no artifactpayload/private/nativebytes toPC.
+
+Actual literal Node commands (stdout/stderr handling is recorded in the immutable executedworkflow): producer `node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs"`; `node "$RUNNER_TEMP/afw-core-pin.mjs"`; `node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" controls`; `node "$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs"`; `node "$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" seal`. Separateverifier SourceSHAcheckout/gitHEAD match; `node "$RUNNER_TEMP/afw-safe-materialize.mjs"`; `node --check "$RUNNER_TEMP/afw-safe-verifier-current.mjs"`; `node "$RUNNER_TEMP/afw-safe-verifier-current.mjs"`. Exactsafe2fileupload used actions/upload-artifact@v4. Current16controls executed BEFORE the singular realmetadataGET; exactlyone rawassignedsafeZIP download aftersuccess, bounded30s/max3HTTPSdeliveryredirects, no forwardedauth; no retries/polls/alternateAPI or extraJSONparse. Originalvalidatortarget calledonce byapprovedReflect.apply wrapper, primitivecapture onlyaftervalidation. RawZIP tripleSHA replaced unavailableproducerlocalbytecomparison; Sourcecore/outputs/artifactdeclarations independentlychecked. Fullbody/core/ZIP/bootstrap source bytecomparisons and immutablehistory support re-review without repeating tests.
+
+ALLPASS now permits ONLY reconciliation of COMPLETE actualreceipt-inspector proposal537caafba053ed6f1b5de7f0f2648d17cec5bcf5/140647bytes. Installedpreparation is MANUALworkflow_dispatch/noinputs/noPush; producer+verifier BOTHliteralfalse/repo-ref-attempt1guards, serialneeds, proposed5min producer +2min keylessverifier. Original producercheckout19789b5f/helper4d05b5ec/literal1978+432292+1+consumer-failureAAD/30soriginaldownload/120sprivateopening/15sparsecleanup and originalallgates/closedpublisher remain. Existingafw-finite-syn-checkpoint environment onlyproducer; existingkeyONLYcustody-openingstep. Producerexports threeoutputs, requireauthaccepted/noFailure/deadlines/currentcore/upload success. The secondjob has NOenvironment/secrets/key, pins frozenCURRENTSource/core independently and uses the EXACT qualifiedmetadata/wrapper/ZIP/bootstrap/driver bytes; only knownREADBACK_KIND changescontrols→inspection. The actualschema path is its own validateInspectionPair plus currentvalidatePublic/inspectionAccepted, not CONTROLS validator or91caseclaims. Publicactualpurpose/schema distinct; originalprivatepayload never goes toverifier/PC. Own Source-framing compares for bothjobs remainexact; fullactualproducerdrivers/publisher present, not acontrols skeleton.
+
+NOTEXECUTED/HELD: originalartifact13949168304 download/open/project, actualcustodykey, nativeSDK/MF/I0/business, originalR1–R3forensicprojection, 5+2actualinspection proposal, Native16 replay. Onlykeylesssafecontrols ran. OriginalR1–R3cause/statusUNKNOWN, Native16consumed/unqualified; alloperationalReadiness/completePackage/PCoff/globalNativeDrainVerified/sdkNamespaceEmptyVerified remainfalse. M2minor invalid-vs-missingcounts DEFERRED. No historical404causeclaim, credential/permission/providerchange or extrauserstep.
+
+Only workflow+thisappend changed; all3188otherblobs/modes/mainprotected. ReconcileSource viaCAS, fullref/tree3190leaves/WF/report/corebyte/framing/0active readbacks thenSTOP for SAMEreviewer COMPLETEcandidate. No nextjob/actualinspection until Rootseparateamendedrelease followingcleanreview. ExactF7safe complete7/manualallfalse remains recoverable as future rollback; currentinstalled2jobproposal staysINACTIVE.
+
+```

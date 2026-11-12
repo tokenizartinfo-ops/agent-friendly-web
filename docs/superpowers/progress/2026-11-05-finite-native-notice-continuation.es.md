@@ -1,13 +1,10 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — fix3/5 released: two-job keyless sequencing and raw safeZIP readback
+## CURRENT — cross-job107 controls+cryptoPASS; COMPLETEactualcandidate7f inactive; fullreviewpending
 
-2026-11-12 15:42UTC. SAMEreview acceptedfix2diagnostic; I6integrationOPEN HTTP404beforebody, no newregression; I5/M1addressed, M2deferred. [Review](../reviews/2026-11-12-native-inspector-fix2-review.md). [Fix3brief](../briefs/2026-11-12-native-inspector-fix-round3.md) explicitly releases ONEattempt/TWOserialkeylessjobs<=2+2min: exact91CORE+d514SHA producer/upload, then dependentverifier currentclosedmetadata/sameID1GET and1rawZIPdownload withSHA(upload,metadata,bytes)/strict2JSON/inventory; max16separatecurrent safeZIPcontrols beforefetch. No oldlocalfsassumption, no retries/polls/sleep/key/privatecipher/SDK/I0. Failure=>exactF7restore+proof0activeSTOP; PASS=>COMPLETEactualinspector INACTIVE proposal5+2min/fullreviewSTOP. ActualprivateinspectionNOTreleased.
+2026-11-12 16:08UTC. Sole43253820290/1 Sourcef736SUCCESS, producer91controls, dependentverifier16ZIP/capturecontrols+metadata200+rawZIPtripleSHA+exact2JSON/inventory; serial11s+17s afterproducerterminal. Rootindependentartifact13959882163/1825B/SHA1d37df74 +strict3records+sourceprogramreconstruction(verifierec07235c/ZIPb36c40c0) allverified. [Primary](../reviews/2026-11-12-native-inspector-cross-job-primary.md). Prior404causeUNKNOWN; privateoriginal/key/SDK/I0untouched.
 
-Sourcea51safeF7 beforewriterstarts; Rootsafe1825B/91/coreaudit andclosed316BHTTP404proofpreserved. OriginalNative16/RcauseUNKNOWN; allreadinessfalse. Newsequence tests boundary, doesnotclaim404cause.
-
-
-Verifier-only validatedmetadata capture seam approved in [narrow ruling](../briefs/2026-11-12-native-inspector-fix3-verifier-seam.md), no91COREedit/extraGET/parse, exactoriginalreturn/errorpreserved, separatecurrentcontrols. Actualprivateinspection remainsheld.
+COMPLETEINACTIVE Source7f213f4f/treee26a4c5c/WF537caafb/report4cf882bb, bothfalse/manual/noinputs/noPush/proposed5+2min, Rootfullbodies/ref/exactcoveredcode/appendonly2path/0active readbacks. [Fullcandidatepackage](../reviews/2026-11-12-native-inspector-fix3-complete-review-package.md) toSAMEreviewer; actualprivatebranchNOTexecuted/released. I5/M1addressed, I6controlsintegrationPASSpendingfullreview; M2deferred. NeedcleanreviewthenRootexplicit5+2amendment/singleactualreceiptinspectionrelease; noNative16retryyet. OriginalRcause/statusUNKNOWN, allreadinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
