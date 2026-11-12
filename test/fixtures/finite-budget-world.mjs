@@ -619,7 +619,7 @@ function requireOrdinaryObserver(){
 
 
 const fixedControlCountKeys=['childBlocks','work','wait','selectReadonly','selectReduction','queueReadonly','queueReduction','capReadonlyList','capReadonlyGet','capReductionList','capReductionDelete','send','sdk'];
-const fixedControlStages=new Set(['start','complete','wrapper_readonly','wrapper_reduction','observer_child','observer_calls','read_raw','legacy_composition','prepared_validate','baseline_transform','syn_instrument','adjacency_ro','adjacency_d','syn_counts','body_extract','cached_assembly','vm_start','vm_hold','vm_boundary','queue_verdict','queue_mutator','ownership','manifest','peer_wait']);
+const fixedControlStages=new Set(['start','complete','wrapper_readonly','wrapper_reduction','observer_child','observer_calls','read_raw','legacy_composition','prepared_validate','baseline_transform','syn_instrument','adjacency_ro','adjacency_d','syn_counts','body_extract','cached_assembly','vm_start','facet_setup','facet_cleanup','vm_hold','vm_boundary','queue_verdict','queue_mutator','ownership','manifest','peer_wait']);
 let fixedControlState=null;
 function fixedControlOwn(value,key){if(!value||typeof value!=='object'||fixedNodeTypes.isProxy(value))return undefined;const d=Object.getOwnPropertyDescriptor(value,key);return d&&Object.hasOwn(d,'value')?d.value:undefined;}
 function fixedControlSafe(value){
@@ -1294,16 +1294,32 @@ async function runFixedFacetControls(group){
  assert(['F3','F4'].includes(group));const prepared=await prepareFixedFacetControls(),{Script,createContext}=await import('node:vm');
  const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer,__facetGroup:group,__facetProgress:(family,stage,metrics)=>fixedControlProgress(stage,{family,...metrics})});
  const body=String.raw`
+
+ globalThis.__facetCleanupRecords=[];
+ async function __closeFixedFacetControl(owner,jobs,primary,family,variant){
+  const errors=[];let releaseSucceeded=true;
+  try{await owner.finiteBudgetRelease();}catch(error){releaseSucceeded=false;errors.push({phase:'release',error});}
+  if(releaseSucceeded)try{await Promise.allSettled(jobs);}catch(error){errors.push({phase:'settle',error});}
+  try{await owner.finiteBudgetRestore();}catch(error){errors.push({phase:'restore',error});}
+  globalThis.__facetCleanupRecords.push({family,variant,primary,errors,settlementSkipped:!releaseSucceeded,primaryPreserved:primary!==null});
+  if(primary!==null)throw primary;if(errors.length)throw errors[0].error;
+ }
+ function __checkFixedFacetSetup(owner,state,family,variant,prefix){
+  const inherited=owner instanceof Initial,signals=owner.finiteBudgetSignals===Initial.prototype.finiteBudgetSignals&&typeof owner.finiteBudgetSignals==='function',release=owner.finiteBudgetRelease===Initial.prototype.finiteBudgetRelease&&typeof owner.finiteBudgetRelease==='function',restore=owner.finiteBudgetRestore===Initial.prototype.finiteBudgetRestore&&typeof owner.finiteBudgetRestore==='function',prefixValid=family===1||state.tokenPrefix===prefix;
+  __facetProgress(family,'facet_setup',{variant,inherited,signals,release,restore,prefixValid});
+  if(!inherited||!signals||!release||!restore||!prefixValid)throw Error('SYN fixed facet setup premise');
+ }
  globalThis.__facetControl=(async()=>{
   const proof=[];
   for(const family of [1,2]){
    const subject='SYN-facet',id='AAAAAAAAAAAAAAAA',prefix=(family===1?'grant:':'token:')+subject+':'+(family===1?'':id+':');
    if(__facetGroup==='F3')for(const variant of ['two_only','queued']){
-    const kv={},owner={env:{AFW_FINITE_OWNER_OAUTH_KV:kv},ctx:{storage:{}}},methods={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}};
+    const kv={},owner=Object.assign(new Initial(),{env:{AFW_FINITE_OWNER_OAUTH_KV:kv},ctx:{storage:{}}}),methods={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}};
     for(const method of ['get','list','delete'])kv[method]=methods[method];kv.put=async()=>{};
-    const state=__afwFiniteBudgetState(owner,family===1?'R3':'D4');state.grantKey='grant:'+subject+':'+id;__afwFiniteBudgetInstall(owner,state);
-    const jobs=[];
+    const state=__afwFiniteBudgetState(owner,family===1?'R3':'D4');state.grantKey='grant:'+subject+':'+id;if(family===2)state.tokenPrefix=prefix;__afwFiniteBudgetInstall(owner,state);
+    const jobs=[];let primary=null;
     try{
+     __checkFixedFacetSetup(owner,state,family,variant,prefix);
      const guard=()=>{},child={signal:new AbortController().signal};__afwSynSelectGuard(kv,child,guard,family);
      const captured={get:kv.get,list:kv.list,delete:kv.delete},facet=family===1?readonlyGrantKv(kv,captured,subject,guard):reductionKv(kv,captured,subject,id,guard).facet;
      for(let n=0;n<(variant==='two_only'?2:6);n++)jobs.push(family===1?facet.get('grant:'+subject+':'+id,{type:'json'}):facet.delete(prefix+'SYN'+n));
@@ -1312,11 +1328,12 @@ async function runFixedFacetControls(group){
      __facetProgress(family,'vm_hold',{variant,heldNativeSettled:actual.heldNativeSettled,outwardPending:actual.outwardPending,nativeInvoked:actual.nativeInvoked,samples:actual.heldOperations.slice(0,2).map(op=>({ordinal:op.ordinal,childOrdinal:op.childOrdinal,method:op.method,active:op.sample?.active??null,queued:op.sample?.queued??null,family:op.sample?.family??null,sequence:op.sample?.sequence??null,heldSequence:op.heldSequence,nativeSettledAt:op.nativeSettledAt,outwardSettledAt:op.outwardSettledAt}))});
      if(actual.heldNativeSettled!==2||actual.outwardPending!==2||actual.nativeInvoked!==2)throw Error('SYN actual facet did not hold exactly two');
      proof.push({family,variant,signals:JSON.parse(JSON.stringify(actual))});
-    }finally{await owner.finiteBudgetRelease();await Promise.allSettled(jobs);await owner.finiteBudgetRestore();}
+    }catch(error){primary=error;}finally{await __closeFixedFacetControl(owner,jobs,primary,family,variant);}
    }else{
-    const alias={},simple={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}},owner={env:{AFW_FINITE_OWNER_OAUTH_KV:alias},ctx:{storage:{}}};Object.assign(alias,simple,{put:async()=>{}});
-    const state=__afwFiniteBudgetState(owner,family===1?'R2':'D3'),guard=()=>{},child={signal:new AbortController().signal};__afwSynSelectGuard(alias,child,guard,family);
-    try{
+    const alias={},simple={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}},owner=Object.assign(new Initial(),{env:{AFW_FINITE_OWNER_OAUTH_KV:alias},ctx:{storage:{}}});Object.assign(alias,simple,{put:async()=>{}});
+    const state=__afwFiniteBudgetState(owner,family===1?'R2':'D3'),guard=()=>{},child={signal:new AbortController().signal};if(family===2)state.tokenPrefix=prefix;__afwSynSelectGuard(alias,child,guard,family);
+    let primary=null;try{
+     __checkFixedFacetSetup(owner,state,family,'boundary',prefix);
      const facet=family===1?readonlyGrantKv(alias,simple,subject,guard):reductionKv(alias,simple,subject,id,guard).facet;
      for(let n=0;n<2;n++)await facet.list({prefix});
      let rejected=false;try{await facet.list({prefix});}catch{rejected=true;}
@@ -1325,12 +1342,16 @@ async function runFixedFacetControls(group){
      const earlier=family===1?readonlyGrantKv(alias,simple,subject,guard):reductionKv(alias,simple,subject,id,guard).facet,before=state.capEvents.length;
      try{await earlier.list({prefix:'invalid'});}catch{}if(state.capEvents.length!==before)throw Error('SYN early failure mistaken for cap');
      proof.push({family,boundaryReached:true,earlierFailureExcluded:true,actualProtectedFacet:true});
-    }finally{await owner.finiteBudgetRelease();await owner.finiteBudgetRestore();}
+    }catch(error){primary=error;}finally{await __closeFixedFacetControl(owner,[],primary,family,'boundary');}
    }
   }return proof;
  })();
 `;
- fixedControlProgress('vm_start',{caseGroup:group});new Script(prepared.prelude+'\n'+body).runInContext(context,{timeout:1000});const proof=await fixedControlBound(context.__facetControl);
+ fixedControlProgress('vm_start',{caseGroup:group});let proof,primary=null;
+ try{new Script(prepared.prelude+'\n'+body).runInContext(context,{timeout:1000});proof=await fixedControlBound(context.__facetControl);}catch(error){primary=error;}
+ const cleanupRecords=fixedControlOwn(context,'__facetCleanupRecords')??[],failureStage=primary!==null?fixedControlState?.stage??null:null;
+ for(const record of cleanupRecords){fixedControlProgress('facet_cleanup',{failureStage,family:record.family,variant:record.variant,primaryPreserved:record.primaryPreserved,thrownMatchesPrimary:record.primary!==null&&record.primary===primary,primaryError:record.primary===null?null:fixedControlError(record.primary),cleanupErrors:record.errors.map(value=>({phase:value.phase,error:fixedControlError(value.error)})),settlementSkipped:record.settlementSkipped});}
+ if(primary!==null)throw primary;
  if(group==='F3'){
   for(const item of proof){const queueCausal=fixedQueueCausality(item.signals),expected=item.variant==='queued';fixedControlProgress('queue_verdict',{family:item.family,variant:item.variant,queueCausal,expected});assert.equal(queueCausal,expected,'actual facet native entry current queue bound');}
   const good=proof.find(item=>item.variant==='queued').signals,mutations=[x=>{x.heldOperations[0].sample.queued=0;},x=>{x.heldOperations[1].sample.active=1;},x=>{x.heldOperations[1].sample.family=3;},x=>{x.observerEvents.push({kind:'outward_settled',sequence:x.heldOperations[0].sample.sequence+0.5});},x=>{x.heldOperations[1].childOrdinal++;},x=>{x.heldOperations[0].outwardSettledAt=Date.now();}];
