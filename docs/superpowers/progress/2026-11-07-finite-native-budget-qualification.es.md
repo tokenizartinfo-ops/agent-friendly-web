@@ -10,6 +10,11 @@ Ruling: release ONE coherent3job8Q+P1 qualification afterreviewedcodegate — re
 
 ORD-1remainsOPENintegration; read-onlypreflight returned23files/threehypothesisfamilies, noRootcauseclaimed. Rootprepares separateINACTIVEdiagnosticbranch only, no jobs duringNativeclockwindow. DoesnotmutateSource orapproveproductfix. Ownerasleepbefore08Argentina; readiness/package/PCofffalse. NoCloudflare/OAuth/Max/main/merge/deploy.
 
+
+
+### ORD-1 cloud isolation/preparation ruling
+Root accepts readonlypreflight as hypothesesonly and preserves23-file report. Ruling: prepare concreteINACTIVE2armdiagnostic in NEWdiag/afw-ordinary-fourfile-20261112 fromf5, exactly3newfiles/cleanseparatesubjectcheckout — permitsparallelpreparationwithouttouchingtime-sensitiveSource — costoneGitHubbranch+inertfiles, nojobs/credentials/productpatch. Rootcreate/readbackbeforewriter; SourcecallbackretainsSYNbranch, ordinary_fourfile_preflight getsdiagbranchonly. Existingmatched109/73/36isredbaseline; no anotherbroadtestorlocalsetup. Cloudbranch+per-runcheckoutsadaptusing-git-worktrees toownercloudpreference, no localworktree/clone. Plan/specRootautonomyapproved; genericaskreviewmenuoverriddenbyowner'sexplicitcontinuousauthorization. Rootfreshreviewbeforeactivation, notduringnativeclock. Main/Source/Rootdocs protectedfromworker. R3passiveplanwasapprovedconditionallyandnowclearsreview; Native9driveronlyobservesitsrun.
+
 ## Estado anterior — 2026-11-12 04:17:26 UTC: round2 R3 entregado; comisión re-review2
 
 Task1fixround1/5 4addressed1open; round2/5awaitingreviewR3. Source59d7bb15c01772550c8f38a90d771dba4a5342f5/tree8478646e/3189leaves; runtime3aba82b3/test1f8b02d5 sameGREEN54db; report46de4d04 append9519chars; only3netpaths vsBASE2eb3/3186protectedexact. TEMP6f48restoredINACTIVE/0runs; main0c9cunchanged. RED43152754915 Q5causal7/1;GREEN43152967723 8/8/syntaxlint/preflight176/130/635/54. Rootverifiedlogs/artifactmetadata/refs/nontruncatedtree/prefix. No actualnative9newrun.

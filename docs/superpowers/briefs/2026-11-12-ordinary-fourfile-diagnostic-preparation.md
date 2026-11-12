@@ -1,0 +1,11 @@
+# ORD-1 — prepare inactive two-arm diagnostic in isolated cloud branch
+
+Read spec specs/2026-11-12-ordinary-fourfile-diagnostic-design.md FIRST, then plan plans/2026-11-12-ordinary-fourfile-diagnostic.md and your readonlyreport. Those are requirements. This is same ORD-1 investigation advanced fromread-onlypreflight to preparation, NOT product repair or Task1 review.
+
+PROJECTAFW/repo tokenizartinfo-ops/agent-friendly-web/public1347578006. ENVIRONMENT isolatedGitHubbranch diag/afw-ordinary-fourfile-20261112, BASE f5f52660d19ec9fc634bbc49558db75582fdaf88. ORIGIN GitHubconnector. RESOURCE_TYPEnewdiagnosticbranch, ALLOWED_ACTIONpreparationonly exact3newfiles; Root willcreate/verifybranch atf5 andprovideitsreadbackbeforedispatch. You are solewriterofTHISbranch; NEVER feat/finite-native-cleanup-20261101, Rootdocs ormain. CAS/fulltree/refs/codepreservation,no force/reset/delete. No helpers/subagents/reviewer. Returnfullreportinallowedreportfile, shortcontractasmessage. No activeworkflow/run now.
+
+Use original4file/safe40matrix/pins fromread-onlybrief. Requiredclosedgates/privacy/deadlines/context in spec. Workflow2falsejobs/manualnoinputs, helper fixed A/B/subjectf5, no arbitrarytarget/compiler substitution. Separateworkflow+subjectcheckout, exactNode/lock, no secrets/environment, no CF/networkbusinesscalls. No productionvalidator/pin edits: BonlySYNVMcurrent-pinsubstitution. If concreteinstrumentationseam cannotpreservebehavior/pins, reportproposalbeforewidening. Stage labelsactualbounds, no rawstacks/dataURLparse. Recordsdiagnosticnotbusinessauthority. Do notwriteyourself anapproval toactivate.
+
+No localprojectexecution/install/deps/build/clone. TinyRAMsyntax/formatparse only withalreadyavailabletools canbeusedanddisclosed; do notinstallparser. CurrentTask1nativequalification mayrun whileyouprepare; ZEROdiagjobsuntilRootexplicitlyreleasesaftercriticalclock. Do notinteractwithSourcewriter orreviewTask1R3.
+
+Finalreport: exacthelpers/seams/occurrencehashes, A/Bonlydifference, plannedcommands/expectedfalsifiableoutcomes, control/privacyproofdesign, YAMLguards/syntaxinspection, all3fileblobs/commits/tree/leaves/protected3188proof/0runs/exactactivationdelta/concerns. STOP_WRITES. Rootfreshreview+readbackbeforeany execution. No humanstepbefore08Argentina; Source/runtime/credentials/Max/offPC stillunqualified.

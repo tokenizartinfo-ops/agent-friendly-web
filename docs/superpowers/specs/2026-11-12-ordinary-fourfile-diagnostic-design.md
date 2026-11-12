@@ -1,0 +1,27 @@
+# ORD-1 — bounded synthetic diagnostic, not a product repair
+
+Owner authorized continuous AFW diagnosis/improvement and cloud-first work. Root accepts a reversible diagnostic preparation, while real runtime/credentials/PCoff remain excluded. Motivation: four-file matched A/B eaf/f5 gives109tests/73pass/36fail but safe messagehashes do not reveal throw boundaries. Read preflight reviews/2026-11-12-ordinary-fourfile-readonly-preflight.es.md; causes remain hypotheses.
+
+## Goal and boundaries
+
+On immutable subject f5f52660d19ec9fc634bbc49558db75582fdaf88, distinguish build/import/fixture initialization from synthetic nativeCLI artifact-load/controller failures and test ONE artifact/pin mismatch hypothesis. No product repair, no productionpin change, businessalgorithm copy, broadsuite, Miniflare/native900s, actualCF/HTTP/OAuth/OTP/secret/Max. Only4files: mcp-own-finite-entrypoints, mcp-qa-cloud-native-cli, mcp-qa-finite-adoption-wait,mcp-qa-finite-command undertest/*.test.mjs. Twoarms share Node22.23.4/Ubuntu24.04/current f5package+lock/fullhistory/unsetgroup and unchanged tests' logical clocks. Prior725file ordinary andthreependingnativecases remain unqualified.
+
+## Source and isolation
+
+A NEW isolated GitHubbranch diag/afw-ordinary-fourfile-20261112 from exactf5 (notmain/notmovingSource). Root verifiescreation andexistingref before anywrite. Sole writer for THISbranch ordinary_fourfile_preflight; callback_receiver_impl retains separatefeat/finite-native-cleanup-20261101. RootonlyRootdocs, no localclone/build/deps/tests. Exactly3allowed paths: .github/workflows/afw-ordinary-fourfile-diagnostic.yml, scripts/diagnostics/ordinary-fourfile.mjs, docs/superpowers/reports/2026-11-12-ordinary-fourfile-diagnostic.es.md. All3188baseleavesexact. No existingbudgetTEMP atf5 and nonecreatedhere. No branch/main merge/reset/force/delete/permissions.
+
+WorkflowSource and SUBJECTtestSourcef5 are separate: checkout diagnosticcode, then a separate clean f5 subject checkout for tests/builds; never contaminate subject with newdiagnosticfiles. ChildSHA truthfullyf5, actualworkflowSHA/ref retained. If emulating any original A/B env for matching, labelMODELEDtestcontext, never actualjob/admissionauthority. DefaultgroupUNSET. Exactpackage/lockhashes f4fd38ac380c46a149d8cf0f3bd828a28406f761 and36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b. No secrets/environment/credential inheritance or arbitrary inputs.
+
+## Experiment
+
+A: existingbehavior, same fourfile test entrypoint; record only fixedstage enums(build,import,fixture,artifact_load,controller,settlement), safecode/location/counts and boundedmessageSHA, plus generatedcurrentwrapperbytes/SHA/equalitybooleans againstcommittedpin. Use actual exported helpers/classes/validator and exact verified instrumentation seams; no substitute implementation. Boundarylogging mustnot alteractualresult/this/args/errors/clocks. Temporary test/fixture overlays inrunner may add ONLY explicitdiagnostic markers; report their exactoriginal/newhashes/occurrencecounts, preserve original subject andnormalization proof. If such a seam needs businesssemanticschanges, STOP/propose ratherthanwiden.
+
+B: IDENTICALA except the current built wrapperbytes/hash are substituted for expectedpin only INSIDE existing SYNnativeCLI VM. Actualvalidatorunchanged; committedproductionpinunchanged. This is explicitly MODELEDtestinput substitution, not authorization of currentbuild inproduction. Record controllercounts/refusalclassification. Do not force success, bypassauth/otherchecks or change source/price/permission policies. If builtbytes/pinequal already, record it anddo not fabricate mismatch. No conclusion absentA baseline matching109/73/36 or an explainedcontextdifference. Recoveryonlywherepredicted supports causalhypothesis; else reject/inconclusive, no patch.
+
+## Control, privacy, clocks and acceptance
+
+Prepareworkflow INACTIVEfirst: manualworkflow_dispatch/noinputs/nopush/schedule, botharmjobsif:false, attempt1/pinnedrepo+branchguards/contentsread/actionsread/cancelinprogressfalse. Root commissions read-onlyreview BEFORE activation. No execution inpreparation. Futureexecution onlyby Rootruling, and NOT during Task1's clock-sensitive nativequalification; no Sourcewritesfor thisprobe.
+
+Each futurearm command deadline120s with bounded+5sown-process-group termination; job<=7min, no retry. Reportergate validates diagnosticcompleteness, not testPASS. Baselinefailures retained. Saferecorder neverreads/scans rawstack/errors; boundedmessageSHA<=1MiB else null+tooLarge, fixederrorname/codeenums/sourcefilepositions only. Prefer explicitboundaryseams tostackparsing. No dataURL regex, exceptiontext/titles/actual/expected/body/env/headers/bundle/credentials inpublicoutputs. Ephemeralcanary/oversizedpayloadcontrol ensures no leak/hang; keepcounts test vswrapperdistinct. FinalsafeJSONtotal<=64KiB withcontext/source/helperhashes/results/unknowns. Rawlogsrunnerprivateonly, bytes/hash onlypublic, boundedprivatefilegrowth/failurepreserved. 7dayartifact/exactIDinventory/hashreadback withbounded2s/5sGETretrieval as existingpattern; no operational authority fromartifacts.
+
+Finish preparation with completecode/report/protectedtree/refreadbacks andSTOP. LaterONE2armexperiment then safeevidence/report/STOP; do notfix anythingorautomaticallyrepeat. operationalReadiness=false;completePackage=false;PCoff=false;integrationORD-1remainsOPEN unlessRootseparatelyclosesitsactualrequirements.
