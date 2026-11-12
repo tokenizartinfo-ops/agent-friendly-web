@@ -2,9 +2,11 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — Task2 formal fix round2/5 · minimal lint fix / one covering GREEN released
+## CURRENT — Task2 formal fix round2/5 · F8/preflight READONLY failure assessment
 
-2026-11-12T12:32Z. Focused43218146435/1 actual ESLint exit1 with4errors @next/next/no-assign-module-variable in world41be lines1710/1711/1844/1845; other4files clean. Root independently verified ZIP13945435031/1399B/digest5dbfa0fb/CRC/full2JSONinventory/closed DTO. [Primary proof](../reviews/2026-11-12-finite-budget-native-round2-lint-primary.md). STOP9b01fe6a restoresexactc72 complete7manualfalse Rootreadback. [Minimal four local lexical renames + ONE covering GREEN released](../briefs/2026-11-12-finite-budget-native-round2-lint-fix-green.md), no config suppression, tests or business scope expansion. Previous43215549201 test phases skipped/unqualified. Same writer/7paths/3183protected/FIX_BASEd9b7; after actualpass reconcilecomplete7FIXEDsealer/allfalse, report and STOP, then same scoped reviewer. Native16/Task2final/GLOBAL296/PCoff held. O4final0248 closed/no further probe; own-import cause unresolved. readinessfalse.
+2026-11-12T12:38Z. Covering43218944283/1 Source2f79c17c terminalFAIL. Actual syntax/lint/inactive/invalid/Q8exact8pass andF1–F7 controls pass. F8fail19B/SHAf6482776 location/causeUNKNOWN. Three-profile commandSUCCESS but ALL3 output preflights rejected by strictsealer AssertionError: qualificationUNKNOWN. Root independent ONE3415B ZIP13945235907/digest8d5c6711/CRC/exact6inventory/context/manifest proof in [partial covering audit](../reviews/2026-11-12-finite-budget-native-round2-covering-partial.md). No actualNative16/MF/I0.
+
+STOPad244d8c/treeb34e9f72/report13863365 restoresEXACTc72 complete7manualfalse; writer0active/3183protected reported. Same writer only READONLY assessment of exactCURRENTF8 failure/validator sites and smallest bounded diagnostic options; no writes/job/fix/retry authorized. Formalround2 remainsopen/FIX_BASEd9b7; same reviewer only after qualified report. Native16/Task2final/GLOBAL296/PCoff held. O4final0248 closed and own-import causeunresolved; no extra probe. Readinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
