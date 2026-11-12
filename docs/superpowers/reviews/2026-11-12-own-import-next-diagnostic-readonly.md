@@ -1,0 +1,14 @@
+# Own-import9b4 — readonly next-diagnostic assessment
+Clockreadback2026-11-12 12:01:11 UTC; originaldiagnostic implementer failure_boundaries_impl, primaryNode22.23.4 readsONLY/no implementation/probe. O4complete793candidate/363folded/430unknown/0matches on exact2.1MiBemission leavesown-import9b4unresolved; no more capincrease is usefulaftercompleteAST.
+Byte-preserving smallestproposal: afteroriginalline8importfails, requireactualnativeErrorfamily+same9b4hash; usecapturedown-descriptor primitives/Proxyrejection, processOWNDATAstackstringonly<=4MiB privately; emitboundedframeordinal/line/column+exactexpectedmoduleURLfingerprint, neverstack/filename/dataURL/source. Coordinates remainstack-stringobservations, notauthenticatedorigin.
+Accessor/absent/oversized/mismatch ->closedUNAVAILABLE/noinvoke. O2provednativeError/currentrealmError and0forbiddentouches, NOTstackdescriptor/cache/location availability. PinnedNode22normallyusesaccessors, so data-onlymayyieldnothing. Root doesNOTauthorize a newprobejustforthislikelyunavailablepath atthisstage.
+Intrinsic-accessorroute NOTapproved: V8cachesformatterreturnontheError; globalprepareStackTracerestoredoesnotundoerrorcache. Nodeprivateper-erroroverriderunsBEFOREuserformatter andmaystringifyError/CallSites; accessoridentity/controlErrorsdon'tproveoverrideabsent. Needexplicitadditionalguard/proof+acceptedcacheeffectbeforeanyfutureproposal, nottransparentgetterfreeclaim. Do notraise stackTraceLimitbeforeimport/recaptureafterthrow; eitherwouldchangeobservedsemantics.
+Primarysources:
+- https://github.com/nodejs/node/blob/v22.23.4/deps/v8/src/execution/messages.cc#L1051
+- https://github.com/nodejs/node/blob/v22.23.4/lib/internal/errors.js#L130
+- https://github.com/nodejs/node/blob/v22.23.4/lib/internal/errors.js#L946
+- https://github.com/nodejs/node/blob/v22.23.4/deps/v8/src/builtins/builtins-callsite.cc#L41
+- https://github.com/nodejs/node/blob/v22.23.4/doc/api/errors.md#L229
+AlternativeError-resultWeakMaptaggingrewrite isalsonotapproved: changesmodulebytes/dataURL/import.meta/source-reflection/stacklayout. Requirespairedraw/taggedwithsamepreannotationemission+9b4identity andsamevalue/receiver/order/Promise/strictnetworkboundarycontrols.793syntaxcandidatesarenot793executedErrors/taggableconstructors; firsttagcouldbere-throw, notorigin.
+Root extraTINYMETADATAhypothesisonly:44publicDynamic-require messagevariants against9b4 gave0matches; no Sourceexecution. Do notrepeatcompiler-messageguessingasruntimeproof.
+NativeTask2round2fix remainspriority. Futureown-error workrequiresconcretejustifiedspec/release; ideally capturedescriptor-onlyavailabilityduringanalready-requiredtargetedtestwithoutanextraSourceimportprobe, thenrulefromactualfacts. This note createsno test/job/branch/API/sourcechange, no runtime/readiness/PCoffclaim.
