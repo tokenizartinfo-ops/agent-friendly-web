@@ -38,3 +38,7 @@ Root received independent scoped preflight CLEAN at f8ab3ca2 with N1–N4 bound,
 Task1 requirements: docs/superpowers/briefs/2026-11-12-native-post-ack-r2-task1.md; separate reviewer record docs/superpowers/reviews/2026-11-12-native-post-ack-r2-preflight.md. Fresh sole implementer to be assigned. Ruling: isolated GitHub branch/CAS + Rootdocs durable ledger substitutes local worktree/scripts under the owner's cloud-first instruction; no local Source execution, clones, dependencies or temp Source files. Source report is the implementer's append-only report artifact; Rootdocs review package/ledger remain controller-owned.
 
 Release exactly ONE KEYLESS contracts 7+2, attempt1, no environment/key/MF/I0/Native. Preserve F7 and all3188 protected old leaves; only six named paths. New Native pipeline complete but inactive. Any failed run consumed; close gates and STOP, no hidden repair/retry. Native Task2 NOT released.
+
+## Implementer assignment
+
+Fresh sole implementer /root/native_postack_impl, gpt-6.1-terra/high, isolated context, assigned Task1 brief411b6ad7. Tier ruling: standard integration model for six-file implementation from complete design; escalate on concrete architecture uncertainty. Controller owns review/Rootdocs, implementer Source only and no subagents. One KEYLESS permit, Native held. Current state: implementation in progress.
