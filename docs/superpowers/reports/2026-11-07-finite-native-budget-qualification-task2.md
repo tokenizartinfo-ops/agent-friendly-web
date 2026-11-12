@@ -3054,3 +3054,67 @@ NOT EXECUTED: any retry/rerun/backoff/repair/keyless replay/Native16/SDK/MF/I0/R
 ### Task2 post-restoration full readback — 2026-11-12 20:32:22 UTC
 
 Restoration expected_sha CAS83e12af6→e65d39cb33f5c2ef0e8e7dbdd28a571d0952c817 returned success at toolclock 2026-11-12 20:31:52 UTC. Subsequent GET full ref and git commit confirmed e65d39cb parent83e12af6/treefaa0a0bd1a281dbb74a8f6b0d4ae46a81b27855c. Full fetch_file bodies exact: WFf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209characters and report1addbbf8687129fb8d39347ffed5e7baf37499d4/412996characters. Recursive tree GET nontruncated3190leaves, all3188protected paths/modes/types/SHAs identical to c7ed76a1. Main GET0c9c475b3ebaa970fc11d628b40e50a90cceb727 unchanged. All five branch active-count GETs queued/in_progress/waiting/pending/requested ZERO. Complete398143-char original prefix, activation appendix and closure evidence preserved exactly. All7 F7false/manual/noinputs/nopush verified. No Source execution occurred after BOTHterminal; only restoration and append-only report evidence. This final report-only checkpoint preserves that F7 and every other leaf; final ref/body/tree/main/zeroactive readbacks returned to Root, then executor STOPPED. No permit for another attempt. Allreadinessfalse.
+
+
+## 2026-11-12 Reference-stage Task1 — one KEYLESS preparation and permit consumption
+
+Fresh sole Source implementer /root/reference_stage_impl; Root controller and previous Source actors do not write Source. Read FULL Root brief at 14e4742a4c63c8d69225f767b55d8aded390135a: docs/superpowers/briefs/2026-11-12-reference-stage-task1.md, FULL design/plan/binding preflight and progressive repository AGENTS. Actual Task2 HELD. PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web (1347578006); ENVIRONMENT Source/SYN GitHub Actions; ORIGIN GitHub connector; RESOURCE_TYPE isolated feature branch/workflow; RESOURCE_ID feat/finite-native-cleanup-20261101 + .github/workflows/afw-finite-budget-qualification.yml. ALLOWED_ACTION implement closed reference-stage contract + exactly ONE serial KEYLESS producer2m/verifier2m path-scoped push/attempt1; failure exact F7, success complete qualified actual5+2 INACTIVE; then full readbacks and STOP. Rollback is complete F7 blob f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209 characters, available from exact BASE f59b032782a730b6151e54d87d55aee228f757bd before any mutation.
+
+Base full ref/commit/tree8cc30566795c8c6750065ace69ade8c348bba730, full F7 body, full report35fe50019287b1fde4631516feadcfbe6acbf98a/414181 characters read. Recursive tree nontruncated3190 leaves, protected3188 excludes ONLY workflow and this report; sole repository AGENTS.md, no descendant instructions. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727, five branch active counts queued/in_progress/waiting/pending/requested all0. All report content before this appendix is preserved byte-exact as a prefix. Root documentation branch is not a write destination.
+
+New exact purpose afw.readonly-reference-stage.safe.v1; whole-envelope manifest afw.readonly-reference-stage-manifest.safe.v1; exact referenceStage two closed string enums r1FirstRejectedGroup/r2LastNonPairOperation. Same selected two file reads/UTF8/JSON parses produce old rows, entire old R2 certificate and stage. R1 captures the identity of the exact error thrown by the first false legacy guard in a per-call local scope, rethrows the same error, preserves guard operands/evaluation/short-circuit/order and legacy exception mapping. Incidental/spoofed TypeError stays invalid+unknown. Selected file-policy association is local to readBoundary and its selected stableFile callback; other state/intermediate stableFile uses retain defaults. ENOENT missing+unknown; ELOOP/ENOTDIR invalid+file_policy; EIO/EACCES propagate; oversize rejection unchanged and reset unknown. No duplicate validator, Raw copy/persistence/path, global mutable capture or extra production IO.
+
+R2 scans only the SAME last inserted child after the unchanged whole certificate construction. It skips only object operation EXACT source-pair; first any other item consume/grant else unknown and STOP. Known <=1000000-step bound; no peek when unknown/overbound/empty. Shared semantic validation covers coordinator, publication, producer and independent verifier. Singleton source-pair/stepCount1 requires unknown; concrete entry under source-pair requires >=2. At2+ all three enum values remain admissible without inferring absent history. Rejection/late/unclean/unsettled clears both enums and all old fields. Old certificate and old complete/partial calculation unchanged. ActiveMetric hook records entry, not operation-specific ACK, effect, exclusive cause or Native failure predicate.
+
+All forty pre-existing IDs and original assertions remain; expansions wrap the same named controls. Canonical old R2 oversize comparator retained. Mandatory NEW owned canonical fixed-file fixture writes synthetic budget-R1.json and budget-R2.json in a unique owned runner-temp directory, then actual readActualReferences is the io.references callback of actual coordinateSupplement. Independently specified FULL expected BOTH rows and FULL lastChild are compared before and after coordinator, for consume and grant tails. No mirrored projectedSet supplies this positive. Other expansions cover first group with multiple defects, short-circuit and incidental error identity/properties, read isolation, filesystem/UTF8/JSON/EIO/EACCES/oversize, enums/schema/coherence, literal backwards stopping cases, non-last maximum/abort, bounds/no peek, rejection/time/cleanup reset, current identity and whole manifest. Singleton-pair unknown positive and BOTH rehashed consume/grant counterexamples go through producer, verifier and actual coordinator rejection/reset; [consume,pair]/[grant,pair] stay positive. Existing 40-record1728BnoLF/1729LF/worst1985LF and <=2048 cap unchanged.
+
+STATIC RED only: old actual c7ed76a1898928bf887ebbd73eb040bcfa46e2f6/7813487a lacks new purpose and both stage fields; it cannot satisfy these new assertions. No old or current Source code was executed locally. Local exception limited to bounded in-memory public string framing/hashes and SourceTextModule grammar parsing without linking/evaluation/file writes; no clones, dependencies, builds or temporary Source files. Current GREEN must come exclusively from this ONE GitHub Actions qualification, not grammar.
+
+Seven shared program bodies of the KEYLESS candidate and prepared actual5+2 INACTIVE template are byte-identical. Inert string-data SHA256 inventory (bytes):
+```json
+{
+  "reference": {
+    "bytes": 30826,
+    "sha256": "cc2026e03bb7bf62e81d1c504e922694183e4aac37015f28263bfdb20bfb7653"
+  },
+  "tests": {
+    "bytes": 48316,
+    "sha256": "6d40c3e2f7ea2aacd3b0a8b4d8480240dd95201fb1151f5195ca646ca5242b2f"
+  },
+  "bootstrap": {
+    "bytes": 1370,
+    "sha256": "2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1"
+  },
+  "zip": {
+    "bytes": 13305,
+    "sha256": "b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"
+  },
+  "core": {
+    "bytes": 77002,
+    "sha256": "d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246"
+  },
+  "materialize": {
+    "bytes": 20630,
+    "sha256": "c7b4d4af36836bff19b543951c34d78e989ff314ef8170849d8384521f7ef636"
+  },
+  "pairTests": {
+    "bytes": 4471,
+    "sha256": "7effcec7fc9e2dda841519a450bc7cd79971ba1f8d76f94c254d657f2cb2a597"
+  },
+  "generatedVerifier": {
+    "bytes": 40595,
+    "sha256": "1b6465e67af138cd9b0065605797f7f4c52fdd4d7cf1a3442819ba0b71b5f03a"
+  },
+  "generatedV1": {
+    "bytes": 16568,
+    "sha256": "b83c7a2421e16e51e4183dd9bd4abee01de52530dcb94e0724eca59dcb53003e"
+  }
+}
+```
+Core77002/d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246, ZIP13305/b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d and bootstrap1370/2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1 unchanged. Reference30826/cc2026e03bb7bf62e81d1c504e922694183e4aac37015f28263bfdb20bfb7653; tests48316/6d40c3e2f7ea2aacd3b0a8b4d8480240dd95201fb1151f5195ca646ca5242b2f. Materializer pins current module/tests, generated independent verifier40595/1b6465e67af138cd9b0065605797f7f4c52fdd4d7cf1a3442819ba0b71b5f03a. All inherited authenticated128files/298888337B/MAX298888337/arrays256/steps1e6/combinedJSON65536/rawZIP131072/shared10s+15stotal/physical-close/time/crypto/privacy/currentidentity fences unchanged.
+
+ONE KEYLESS push is path-scoped to exact branch and workflow path, attempt1, no environment/key/Original opening/SDK/MF/I0/native/runtime operation. Its existing GitHub artifact token remains bound only to assigned safe artifact; no new credentials or permissions. Serial producer2m/verifier2m, ninety-one Core inert controls + forty current reference controls + sixteen inspection-pair + sixteen ZIP controls. Workflow commits consume the permit at CAS irrespective result. Source freezes until BOTH jobs terminal; no blind retry, rerun, repair, backoff or alternate probe. On failure exact F7 restoration/full readbacks/zero active STOP. On success complete actual5+2 INACTIVE/manual/noinputs/nopush/BOTHliteralfalse and identical tested seven bodies; no actual execution permission. No Original ciphertext/key/plain/private producer logs downloaded.
+
+Exact runner command inventory: node --check current Core/helper/tests; node afw-reference-bootstrap-current.mjs; node afw-core-pin.mjs; node afw-readonly-inspector-current.mjs controls (private redirected); timeout --kill-after=1s 10s env -i RUNNER_TEMP=<runner-temp> GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-reference-controls-current.mjs (only strict <=2048 closed record public); current control proof attaches hashes to whole current controls pair; fallback/seal strict safe pair and successful producer/upload gate; node afw-safe-materialize.mjs; node --check generated current verifier; timeout --kill-after=1s 5s env -i GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-inspection-pair-controls.mjs; node afw-safe-verifier-current.mjs for assigned controls artifact. No widened timeout/cap.
+
+Pending: exact staged Git blobs/ref/tree/protected/main/counts pre-CAS, one qualification terminal logs/closed digests, then inactive completion OR exact F7 rollback and final readbacks. No dynamic pass is claimed in this preparation appendix. All operationalReadiness/completePackage/PCoff/globalNativeDrainVerified/sdkNamespaceEmptyVerified false. NOT EXECUTED/NOT AUTHORIZED: actualTask2, Native16, Original access outside runner, new SDK/MF/I0/R3/SQL/search/CF/runtime/OAuth/OTP/credential/consumer/callback/cron/Max/mail/deploy/main/PR/merge/new service/cost.
