@@ -1,8 +1,10 @@
 # SDD ledger — docs/superpowers/plans/2026-11-12-reference-stage.md
 
-## CURRENT — Task1 review pending; Root found expanded-test invocation gap; Task2 HELD
+## CURRENT — Task1 NOT CLEAN;3Important qualification gaps; fix round1/5 released; Task2 HELD
 
-Sourceb0dfcf50/WFcc7bed8a216100chars bothfalse/manual/noinputs/nopush, allactorsSTOPPED/protected3188/main0c9/0active. Nominalkeyless43307790578/1 91+40+16+16green andRootsafeZIP/wholemanifest/hashchecks genuine, BUT newexpansiondefinitions/registration nestedinsideLASTlegacy lc_bounds callback, so promisednewassertions/positivefilefixture DIDNOTexecute. Newstagequalification/priorMinorclosureNOTaccredited. [Fullreviewpackage](../reviews/2026-11-12-reference-stage-task1-package.md) asksindependentseverity/repaircriterion beforefix. No Source/privateactual/nativepermit; allreadinessfalse.
+IndependentAstrareview0Critical/3Important/0newMinor acceptsRootlate-expansionfindingandaddsR1oversizeshadowednamednegative+falseENOTDIRfixture. [Review](../reviews/2026-11-12-reference-stage-task1-review.md), [exactfix1brief](../briefs/2026-11-12-reference-stage-task1-fix1.md). OriginalimplementerresumesONLYtests/harness+pins/report; productionhelper/Core/ZIP/bootstrapunchanged. ONE DISTINCT NEWkeyless2+2/attempt1foramendedcode; old43307790578consumedNOTreplay. FailureF7/0activeSTOP; PASSinactive5+2/scopedreview. Allreadinessfalse. PriorpositivefilefixtureMinorstillunqualifieduntil22expansionsactuallyrun.
+
+Task1: fix round1/5 (0 addressed yet,3 open — expandedcallbacksneverexecute; R1oversizenegativeshadowedbystalegroup; ENOTDIRbranchunreached; FIX_BASEb0dfcf50).
 
 ## Prior proposal checkpoint
 
