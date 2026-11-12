@@ -12,6 +12,11 @@ Ruling: se añade verificador Node compartido del conjunto exacto8épocas enP1/p
 
 Owner: Gabriel dejaPCencendida y se va a dormir; no puede intervenir antes del12Nov08:00Argentina/11:00UTC. Su posterior «continua» mantiene objetivo/autoridad y no abre una ventana de ingreso. No pedirOTP,claves,clics ni ventanas temporales antes de esa hora. Desarrollar enGitHub/Actions; no trabajo pesado local. operationalReadiness=false;completePackage=false;PCoff=false.
 
+
+### Root ruling — R1 probe context, 12Nov02:20UTC
+
+Round1 remains0addressed/5open. RED1(43140111119) confirmed four, Q1 probe was noncausal due nestedNodeTestcontext. RED2(43140336358) test-only direct-load probe had expected5markers but no underlying stderr guard check. Source15df40fb488660c6510b4d55866320b3cb577c7f frozen; runtime/evidence/P1 stillBASEeaf. Root read handling-reports again and permits ONE final corrected pureRED, directNode+childNODE_TEST_CONTEXT/group removal and exact baseline guard literal 'SYN budget group unsupported before I0' before accepting default exit1. No Re-runjobs or implementation until causal; if another unexpected cause persists, STOP. Brief updated in same path. R2 clarifies max<=global<=sum for each independent partition. No new human need or nativeI0. Owner unavailable before08Argentina.
+
 ## Bloque previo preservado — 12 noviembre, 01:13:58 UTC
 
 A/B/C se reprodujeron en RED43128157794/1 (8Q,5pass/3ERR_ASSERTION) y pasaron tras corrección en GREEN43128506060/1 (8/8,syntax/lint,preflight176/130/635/54). Artefactos13904395425 y13904770974 tuvieron readback; Root leyó TAP/logs y delta. No se abrió I0 ni se ejecutó P1. Source final limpio da70e2358b18f9db750e67ea6eab37fb54a96257/treec807af716c5dd14e09a59df7f9b082646bf90bf2/3188hojas,TEMPausente; reporte5173c1033d88ae18f9d494f686fa2fd2ea4dd708.
