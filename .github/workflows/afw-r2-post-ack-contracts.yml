@@ -1,5 +1,5 @@
 name: AFW R2 post-ACK contracts
-run-name: AFW R2 post-ACK contracts HELD ${{ github.sha }}
+run-name: AFW R2 post-ACK contracts FIX1 HELD ${{ github.sha }}
 on:
   workflow_dispatch:
 permissions:
@@ -15,6 +15,9 @@ jobs:
     timeout-minutes: 7
     outputs:
       artifact-id: ${{ steps.safe.outputs.artifact-id }}
+      artifact-digest: ${{ steps.safe.outputs.artifact-digest }}
+      model-id: ${{ steps.model.outputs.artifact-id }}
+      model-digest: ${{ steps.model.outputs.artifact-digest }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,7 +29,7 @@ jobs:
           node-version: '22.23.4'
       - name: Install exact lock without lifecycle scripts
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Pin current identity and preserve immutable baseline on this runner
+      - name: Pin current identity and immutable baseline
         shell: bash
         run: |
           set -euo pipefail
@@ -42,19 +45,125 @@ jobs:
           test "$(git hash-object test/fixtures/.finite-post-ack-original.mjs)" = 5fb78c057b7e80260ae683abf4af892767ce110e
           test "$(git hash-object package-lock.json)" = 36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b
           test "$(git hash-object .github/workflows/afw-finite-budget-qualification.yml)" = f7a71f1a0fa4f5ddf069ff411f008a098455e5cc
-      - name: Execute exactly 24 named controls with allocation traps
+          node --check test/fixtures/finite-budget-world.mjs
+          node --check test/fixtures/finite-post-ack-diagnostic.mjs
+          node --check test/finite-post-ack-diagnostic.test.mjs
+      - name: Current-identity pure model preflight without allocation
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import {preflightPostAckDiagnostic} from './test/fixtures/finite-budget-world.mjs';
+          await preflightPostAckDiagnostic();
+          NODE
+      - name: Upload immutable sanitized MODEL only
+        id: model
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-post-ack-model-${{ github.run_id }}-1
+          path: output/finite-budget/post-ack-model/*.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Verify model upload API raw ZIP digests bounds CRC and exact paths
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ARTIFACT_KIND: model
+          ARTIFACT_ID: ${{ steps.model.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.model.outputs.artifact-digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          case "$ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
+          case "$ARTIFACT_KIND" in model) limit=4194304;; safe) limit=131072;; cipher) limit=136314880;; *) exit 1;; esac
+          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND-meta.json"
+          curl --fail --silent --show-error --location --max-time 20 --max-filesize "$limit" -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND.zip"
+          python - <<'PY'
+          import os,json,hashlib,zipfile,stat,pathlib,struct
+          def closed(pairs):
+           d={}
+           for k,v in pairs:
+            if k in d:raise ValueError("duplicate JSON key")
+            d[k]=v
+           return d
+          root=pathlib.Path(os.environ["RUNNER_TEMP"])
+          kind=os.environ["ARTIFACT_KIND"]
+          names,limit,total,out,prefix={
+           "model":(["budget-artifact.json","model.json"],4194304,4194304,root/"afw-post-ack-model-readback","afw-post-ack-model-"),
+           "safe":(["manifest.json","result.json"],131072,65536,root/"afw-post-ack-proof",os.environ.get("SAFE_ARTIFACT_PREFIX","afw-post-ack-contracts-")),
+           "cipher":(["envelope.bin","manifest.json","receipt.json"],136314880,134225920,root/"afw-post-ack-native"/"download","afw-post-ack-cipher-")
+          }[kind]
+          m=json.loads((root/("afw-"+kind+"-meta.json")).read_text(),object_pairs_hook=closed)
+          assert str(m["id"])==os.environ["ARTIFACT_ID"] and not m["expired"]
+          assert str(m["workflow_run"]["id"])==os.environ["GITHUB_RUN_ID"] and m["workflow_run"]["head_sha"]==os.environ["GITHUB_SHA"]
+          assert m["name"]==prefix+os.environ["GITHUB_RUN_ID"]+"-1"
+          b=(root/("afw-"+kind+".zip")).read_bytes()
+          digest=hashlib.sha256(b).hexdigest()
+          assert len(b)<=limit and m["size_in_bytes"]==len(b)
+          assert len(os.environ["ARTIFACT_DIGEST"])==64 and digest==os.environ["ARTIFACT_DIGEST"] and m["digest"]=="sha256:"+digest
+          assert len(b)>=22 and b[-22:-18]==b"PK\x05\x06"
+          e=struct.unpack("<4s4H2LH",b[-22:])
+          assert e[1]==e[2]==0 and e[3]==e[4]==len(names) and e[-1]==0 and e[5]+e[6]==len(b)-22
+          out.mkdir(mode=0o700)
+          with zipfile.ZipFile(root/("afw-"+kind+".zip")) as z:
+           infos=z.infolist()
+           assert len(infos)==len(names) and sorted(i.filename for i in infos)==names and z.comment==b""
+           assert min(i.header_offset for i in infos)==0 and sum(i.file_size for i in infos)<=total
+           for i in infos:
+            mode=i.external_attr>>16
+            assert not i.is_dir() and (mode&0o170000) in (0,stat.S_IFREG) and not i.flag_bits&1
+            assert i.compress_type in (zipfile.ZIP_STORED,zipfile.ZIP_DEFLATED) and i.file_size<=total
+            if i.filename in ("manifest.json","budget-artifact.json","receipt.json"):assert i.file_size<=65536
+            with z.open(i) as f:body=f.read(total+1)
+            assert len(body)==i.file_size
+            if i.filename.endswith(".json"):json.loads(body.decode("utf-8"),object_pairs_hook=closed)
+            with (out/i.filename).open("xb") as f:f.write(body)
+           assert z.testzip() is None
+          receipt={"artifactId":os.environ["ARTIFACT_ID"],"uploaderDigest":os.environ["ARTIFACT_DIGEST"],"apiDigest":m["digest"],"rawZipSha256":digest}
+          (root/("afw-"+kind+"-download-check.json")).write_text(json.dumps(receipt,separators=(",",":")))
+          if kind=="cipher":(root/"afw-post-ack-native"/"cipher.zip").write_bytes(b)
+          PY
+      - name: Protected MODEL inventory readback using its REAL assigned artifact ID
+        env:
+          MODEL_ARTIFACT_ID: ${{ steps.model.outputs.artifact-id }}
+          MODEL_ARTIFACT_DIGEST: ${{ steps.model.outputs.artifact-digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile,writeFile} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';
+          const root=process.env.RUNNER_TEMP+'/afw-post-ack-model-readback',id=process.env.MODEL_ARTIFACT_ID;
+          await verifyBudgetArtifact(root,'pure',id);
+          const bytes=await readFile(root+'/model.json'),model=JSON.parse(bytes),check=JSON.parse(await readFile(process.env.RUNNER_TEMP+'/afw-model-download-check.json'));
+          const context={repository:process.env.GITHUB_REPOSITORY,ref:process.env.GITHUB_REF,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,case:'R2'};
+          assert.deepEqual(model.context,context);assert.equal(model.modelOnly,true);assert.equal(check.artifactId,id);assert.equal(check.uploaderDigest,process.env.MODEL_ARTIFACT_DIGEST);
+          await writeFile(process.env.RUNNER_TEMP+'/afw-post-ack-model-receipt.json',JSON.stringify({...check,modelSha256:createHash('sha256').update(bytes).digest('hex'),verified:true,context}),{flag:'wx',mode:0o600});
+          NODE
+      - name: Execute exactly 24 composed named controls and authentic witness barrier
+        env:
+          MODEL_ARTIFACT_ID: ${{ steps.model.outputs.artifact-id }}
+          MODEL_ARTIFACT_DIGEST: ${{ steps.model.outputs.artifact-digest }}
         shell: bash
         run: |
           set -euo pipefail
           AFW_POST_ACK_MODE=controls node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs
-      - name: Run unchanged related inert compiler observer facet and sealer controls
+      - name: Run unchanged fixed F1-F8 and pure diagnostics observer tests
+        env:
+          MODEL_ARTIFACT_ID: ${{ steps.model.outputs.artifact-id }}
+          MODEL_ARTIFACT_DIGEST: ${{ steps.model.outputs.artifact-digest }}
         shell: bash
         run: |
           set -euo pipefail
           AFW_BUDGET_CONTROL_PHASE=green node --experimental-vm-modules test/fixtures/finite-budget-world.mjs verify-native-preparation-round1
-          node --test --test-concurrency=1 test/finite-budget-diagnostics.test.mjs test/mcp-qa-finite-observer.test.mjs
+          result=0
+          node --test --test-concurrency=1 --test-reporter=tap test/finite-budget-diagnostics.test.mjs test/mcp-qa-finite-observer.test.mjs >output/finite-budget/post-ack-private/related.tap 2>&1 || result=$?
+          tail -n 40 output/finite-budget/post-ack-private/related.tap
+          test "$result" = 0
           node test/fixtures/finite-post-ack-diagnostic.mjs contracts-proof
-      - name: Upload only the closed two-JSON proof
+      - name: Upload closed exact two-JSON SAFE proof only
         id: safe
         uses: actions/upload-artifact@v4
         with:
@@ -62,9 +171,8 @@ jobs:
           path: output/finite-budget/post-ack-safe/*.json
           if-no-files-found: error
           retention-days: 7
-      - name: Remove only this task's baseline scratch
+      - name: Remove own baseline runner scratch only
         if: always()
-        shell: bash
         run: rm -f -- test/fixtures/.finite-post-ack-original.mjs
   verify:
     if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
@@ -76,52 +184,149 @@ jobs:
         with:
           ref: ${{ github.sha }}
           persist-credentials: false
-          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22.23.4'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Independently check same-ID ZIP metadata digest CRC paths and bounds
+      - name: Verify model upload API raw ZIP digests bounds CRC and exact paths
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          SAFE_ARTIFACT_ID: ${{ needs.contracts.outputs.artifact-id }}
+          ARTIFACT_KIND: model
+          ARTIFACT_ID: ${{ needs.contracts.outputs.model-id }}
+          ARTIFACT_DIGEST: ${{ needs.contracts.outputs.model-digest }}
         shell: bash
         run: |
           set -euo pipefail
           umask 077
-          test -n "$SAFE_ARTIFACT_ID"
-          case "$SAFE_ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
-          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$SAFE_ARTIFACT_ID" -o "$RUNNER_TEMP/afw-safe-meta.json"
-          curl --fail --silent --show-error --location --max-time 20 --max-filesize 131072 -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$SAFE_ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-safe.zip"
+          case "$ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
+          case "$ARTIFACT_KIND" in model) limit=4194304;; safe) limit=131072;; cipher) limit=136314880;; *) exit 1;; esac
+          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND-meta.json"
+          curl --fail --silent --show-error --location --max-time 20 --max-filesize "$limit" -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND.zip"
           python - <<'PY'
-          import os,json,hashlib,zipfile,stat,pathlib
+          import os,json,hashlib,zipfile,stat,pathlib,struct
           def closed(pairs):
            d={}
            for k,v in pairs:
-            if k in d: raise ValueError("duplicate JSON key")
+            if k in d:raise ValueError("duplicate JSON key")
             d[k]=v
            return d
           root=pathlib.Path(os.environ["RUNNER_TEMP"])
-          m=json.loads((root/"afw-safe-meta.json").read_text(),object_pairs_hook=closed)
-          assert str(m["id"])==os.environ["SAFE_ARTIFACT_ID"] and not m["expired"]
+          kind=os.environ["ARTIFACT_KIND"]
+          names,limit,total,out,prefix={
+           "model":(["budget-artifact.json","model.json"],4194304,4194304,root/"afw-post-ack-model-readback","afw-post-ack-model-"),
+           "safe":(["manifest.json","result.json"],131072,65536,root/"afw-post-ack-proof",os.environ.get("SAFE_ARTIFACT_PREFIX","afw-post-ack-contracts-")),
+           "cipher":(["envelope.bin","manifest.json","receipt.json"],136314880,134225920,root/"afw-post-ack-native"/"download","afw-post-ack-cipher-")
+          }[kind]
+          m=json.loads((root/("afw-"+kind+"-meta.json")).read_text(),object_pairs_hook=closed)
+          assert str(m["id"])==os.environ["ARTIFACT_ID"] and not m["expired"]
           assert str(m["workflow_run"]["id"])==os.environ["GITHUB_RUN_ID"] and m["workflow_run"]["head_sha"]==os.environ["GITHUB_SHA"]
-          b=(root/"afw-safe.zip").read_bytes()
-          assert len(b)<=131072 and m["size_in_bytes"]==len(b)
-          assert m["digest"]=="sha256:"+hashlib.sha256(b).hexdigest()
-          out=root/"afw-post-ack-proof"
+          assert m["name"]==prefix+os.environ["GITHUB_RUN_ID"]+"-1"
+          b=(root/("afw-"+kind+".zip")).read_bytes()
+          digest=hashlib.sha256(b).hexdigest()
+          assert len(b)<=limit and m["size_in_bytes"]==len(b)
+          assert len(os.environ["ARTIFACT_DIGEST"])==64 and digest==os.environ["ARTIFACT_DIGEST"] and m["digest"]=="sha256:"+digest
+          assert len(b)>=22 and b[-22:-18]==b"PK\x05\x06"
+          e=struct.unpack("<4s4H2LH",b[-22:])
+          assert e[1]==e[2]==0 and e[3]==e[4]==len(names) and e[-1]==0 and e[5]+e[6]==len(b)-22
           out.mkdir(mode=0o700)
-          with zipfile.ZipFile(root/"afw-safe.zip") as z:
+          with zipfile.ZipFile(root/("afw-"+kind+".zip")) as z:
            infos=z.infolist()
-           assert len(infos)==2 and sorted(i.filename for i in infos)==["manifest.json","result.json"]
-           assert sum(i.file_size for i in infos)<=65536
+           assert len(infos)==len(names) and sorted(i.filename for i in infos)==names and z.comment==b""
+           assert min(i.header_offset for i in infos)==0 and sum(i.file_size for i in infos)<=total
            for i in infos:
-            assert not i.is_dir() and not i.flag_bits&1 and not stat.S_ISLNK(i.external_attr>>16)
-            assert i.compress_type in (zipfile.ZIP_STORED,zipfile.ZIP_DEFLATED)
-            body=z.read(i)
+            mode=i.external_attr>>16
+            assert not i.is_dir() and (mode&0o170000) in (0,stat.S_IFREG) and not i.flag_bits&1
+            assert i.compress_type in (zipfile.ZIP_STORED,zipfile.ZIP_DEFLATED) and i.file_size<=total
+            if i.filename in ("manifest.json","budget-artifact.json","receipt.json"):assert i.file_size<=65536
+            with z.open(i) as f:body=f.read(total+1)
             assert len(body)==i.file_size
-            value=json.loads(body.decode("utf-8"),object_pairs_hook=closed)
-            with (out/i.filename).open("xb") as f: f.write(body)
+            if i.filename.endswith(".json"):json.loads(body.decode("utf-8"),object_pairs_hook=closed)
+            with (out/i.filename).open("xb") as f:f.write(body)
            assert z.testzip() is None
+          receipt={"artifactId":os.environ["ARTIFACT_ID"],"uploaderDigest":os.environ["ARTIFACT_DIGEST"],"apiDigest":m["digest"],"rawZipSha256":digest}
+          (root/("afw-"+kind+"-download-check.json")).write_text(json.dumps(receipt,separators=(",",":")))
+          if kind=="cipher":(root/"afw-post-ack-native"/"cipher.zip").write_bytes(b)
           PY
-      - name: Verify full closed current control and program manifest
+      - name: Protected MODEL inventory readback using its REAL assigned artifact ID
+        env:
+          MODEL_ARTIFACT_ID: ${{ needs.contracts.outputs.model-id }}
+          MODEL_ARTIFACT_DIGEST: ${{ needs.contracts.outputs.model-digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFile,writeFile} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';
+          const root=process.env.RUNNER_TEMP+'/afw-post-ack-model-readback',id=process.env.MODEL_ARTIFACT_ID;
+          await verifyBudgetArtifact(root,'pure',id);
+          const bytes=await readFile(root+'/model.json'),model=JSON.parse(bytes),check=JSON.parse(await readFile(process.env.RUNNER_TEMP+'/afw-model-download-check.json'));
+          const context={repository:process.env.GITHUB_REPOSITORY,ref:process.env.GITHUB_REF,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,case:'R2'};
+          assert.deepEqual(model.context,context);assert.equal(model.modelOnly,true);assert.equal(check.artifactId,id);assert.equal(check.uploaderDigest,process.env.MODEL_ARTIFACT_DIGEST);
+          await writeFile(process.env.RUNNER_TEMP+'/afw-post-ack-model-receipt.json',JSON.stringify({...check,modelSha256:createHash('sha256').update(bytes).digest('hex'),verified:true,context}),{flag:'wx',mode:0o600});
+          NODE
+      - name: Verify safe upload API raw ZIP digests bounds CRC and exact paths
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ARTIFACT_KIND: safe
+          ARTIFACT_ID: ${{ needs.contracts.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ needs.contracts.outputs.artifact-digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          case "$ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
+          case "$ARTIFACT_KIND" in model) limit=4194304;; safe) limit=131072;; cipher) limit=136314880;; *) exit 1;; esac
+          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND-meta.json"
+          curl --fail --silent --show-error --location --max-time 20 --max-filesize "$limit" -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND.zip"
+          python - <<'PY'
+          import os,json,hashlib,zipfile,stat,pathlib,struct
+          def closed(pairs):
+           d={}
+           for k,v in pairs:
+            if k in d:raise ValueError("duplicate JSON key")
+            d[k]=v
+           return d
+          root=pathlib.Path(os.environ["RUNNER_TEMP"])
+          kind=os.environ["ARTIFACT_KIND"]
+          names,limit,total,out,prefix={
+           "model":(["budget-artifact.json","model.json"],4194304,4194304,root/"afw-post-ack-model-readback","afw-post-ack-model-"),
+           "safe":(["manifest.json","result.json"],131072,65536,root/"afw-post-ack-proof",os.environ.get("SAFE_ARTIFACT_PREFIX","afw-post-ack-contracts-")),
+           "cipher":(["envelope.bin","manifest.json","receipt.json"],136314880,134225920,root/"afw-post-ack-native"/"download","afw-post-ack-cipher-")
+          }[kind]
+          m=json.loads((root/("afw-"+kind+"-meta.json")).read_text(),object_pairs_hook=closed)
+          assert str(m["id"])==os.environ["ARTIFACT_ID"] and not m["expired"]
+          assert str(m["workflow_run"]["id"])==os.environ["GITHUB_RUN_ID"] and m["workflow_run"]["head_sha"]==os.environ["GITHUB_SHA"]
+          assert m["name"]==prefix+os.environ["GITHUB_RUN_ID"]+"-1"
+          b=(root/("afw-"+kind+".zip")).read_bytes()
+          digest=hashlib.sha256(b).hexdigest()
+          assert len(b)<=limit and m["size_in_bytes"]==len(b)
+          assert len(os.environ["ARTIFACT_DIGEST"])==64 and digest==os.environ["ARTIFACT_DIGEST"] and m["digest"]=="sha256:"+digest
+          assert len(b)>=22 and b[-22:-18]==b"PK\x05\x06"
+          e=struct.unpack("<4s4H2LH",b[-22:])
+          assert e[1]==e[2]==0 and e[3]==e[4]==len(names) and e[-1]==0 and e[5]+e[6]==len(b)-22
+          out.mkdir(mode=0o700)
+          with zipfile.ZipFile(root/("afw-"+kind+".zip")) as z:
+           infos=z.infolist()
+           assert len(infos)==len(names) and sorted(i.filename for i in infos)==names and z.comment==b""
+           assert min(i.header_offset for i in infos)==0 and sum(i.file_size for i in infos)<=total
+           for i in infos:
+            mode=i.external_attr>>16
+            assert not i.is_dir() and (mode&0o170000) in (0,stat.S_IFREG) and not i.flag_bits&1
+            assert i.compress_type in (zipfile.ZIP_STORED,zipfile.ZIP_DEFLATED) and i.file_size<=total
+            if i.filename in ("manifest.json","budget-artifact.json","receipt.json"):assert i.file_size<=65536
+            with z.open(i) as f:body=f.read(total+1)
+            assert len(body)==i.file_size
+            if i.filename.endswith(".json"):json.loads(body.decode("utf-8"),object_pairs_hook=closed)
+            with (out/i.filename).open("xb") as f:f.write(body)
+           assert z.testzip() is None
+          receipt={"artifactId":os.environ["ARTIFACT_ID"],"uploaderDigest":os.environ["ARTIFACT_DIGEST"],"apiDigest":m["digest"],"rawZipSha256":digest}
+          (root/("afw-"+kind+"-download-check.json")).write_text(json.dumps(receipt,separators=(",",":")))
+          if kind=="cipher":(root/"afw-post-ack-native"/"cipher.zip").write_bytes(b)
+          PY
+      - name: Independently bind full SAFE model and current checkout pins
+        env:
+          MODEL_ARTIFACT_ID: ${{ needs.contracts.outputs.model-id }}
+          MODEL_ARTIFACT_DIGEST: ${{ needs.contracts.outputs.model-digest }}
         run: node test/fixtures/finite-post-ack-diagnostic.mjs verify-contracts

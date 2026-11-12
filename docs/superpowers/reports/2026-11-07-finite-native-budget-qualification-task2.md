@@ -5447,3 +5447,74 @@ Per explicit failure rollback, prepared closure restores World EXACT original5fb
 Verified closed Source79afec4178bbc82db2192d75619bbd4f36aaddf0/tree e4da5e528bdf27bbf96379e33572a30a1618feea by full nontruncated recursive readback:3194leaves; all3188protected old leaves exact. World original5fb78c057b7e80260ae683abf4af892767ce110e/218113chars restored exactly; contracts15d081b490014bdd5393ed376f70f326e86cd836/6453chars manual/noinputs/nopush/twofalse; Native6443a747df3f17c2adcbce6d6037dcc6f4ba364a/12093chars manual/noinputs/nopush/twofalse; F7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209chars unchanged/sevenfalse. Fixture08f9034068b937e18543fb569bfd88720a2822a8/47711chars and test2b514944054c9e0679527062ff148bd6764f9728/1643chars exact; both UNQUALIFIED. Full Source files plus F7 re-read byte/character-exact. Report16d1f57d1cec2e6ab43083b7b296f4c0306dc9cf/530341chars at closure preserved all original507875chars and every appended prefix verbatim; this final receipt is append-only.
 
 Main independently unchanged0c9c475b3ebaa970fc11d628b40e50a90cceb727. ExactlyONE run on activation head,43325790437/attempt1/completedfailure; producer131557776153failure/verifier131558005612skipped. All five repository active-state counts queued/in_progress/waiting/pending/requested=0 after closure. No attempt2/repair/secondqualification/Native dispatch. Git objects retain rollback and unique evidence. This final receipt commit changes REPORT ONLY; final branch/ref/tree/files/main/active0 are read back again after it. StatusBLOCKED: initial qualification failed with explicit6!==5 site-inventory assertion; sole permit consumed, no ACTUALGREEN and no Native release. STOP.
+
+
+## Native post-ACK R2 Task1 fix round1/5
+
+### Reviewed fix candidate, pre-qualification checkpoint
+
+Same original actual implementer; sole Source writer. Binding fixbrief93c84abc8892168d85dc7d2073fb62c9338e5950 atRootdocs3a26139bddd9bdf8a21ac2e2f10f3e959fe7c150, with Root N7 opt-in lab-entry ruling and N6 durable addendum06253443f266db4f565be70deb276530e6d1b640 atb76a19567fc634c7447e499adba4f944846dc04b and tighter MODEL rawZIP+uncompressed<=4MiB/manifest<=65536 clarification. Previousrun43325790437 remains consumed and is NOT rerun. ExactlyONE NEW7+2 KEYLESSpush/attempt1 is released after corrections; Native remains HELD. No additional actor/reviewer/subagent, Source path, key, environment binding for KEYLESS, CF/resource permission or local Source execution.
+
+Starting lease independently re-read: Sourceefa4bd8b2fd9327ea3658c344774eb8ad8084748/tree428402280145d596b6cfa8556e5f41525bd9943a;3194leaves/nontruncated, full six files plus F7 exact, main0c9c475b3ebaa970fc11d628b40e50a90cceb727, queued/in_progress/waiting/pending/requested all0. World was intentionally original5fb78c05; intended candidate reinstated from exact6599b33d/476ba287c08c50ab807394d09a0eed78d6d6c908 before scoped fixes, on current parent with CAS/no force/reset. Report ENTIRE531979char prefix/91ef722c3abfe191e282adefdb8003ef78884176 preserved. Six-path scope and all3188protected leaves/F7/SDK/lib/lock/protected tests remain unchanged.
+
+Used systematic-debugging and receiving-code-review guidance: traced actual initial failure through compiler property-read composition, rather than increasing a count. STATIC RED is observed initial run43325790437: literal canonical(pair.first) matcher counted the compiler-wrapped first read as sixth protocol predicate. No new local test is claimed. Tests/counterexamples were authored as string data before the targeted implementations; actual verification is only the forthcoming authorized cloud run. Skills do not broaden its test/Native budgets.
+
+C1: structural recognition now requires exact ordered OR of two !==canonical(expected) comparisons, canonical(pair.first) or the actual fixed __afwBudget.readMethod(pair,'first',false) form in first position, and canonical(pair.second) in second. Original predicate text/operands/order/short circuit remain untouched; only explicit fail remains branded. Still exactly5protocol+1expected mismatch. Controls consume actual current compiler-composed phase source in runner-private data, hash-bound to MODEL; missing/extra/wrong/reordered comparison, duplicate notice and missing ACK negatives use current AST sites, not fragile raw spacing/literal replacement.
+
+C2: private fixed R2 oracle reproduces ONLY all21 frozen R2 predicates from protected test533dafb5df5f8e57442c5b9029dc8dec6dded434: caseR2; writes1/normal1;201inputs/onecorrelation/expiration;foreign unchanged;lists<=2/gets<=200/scopePeak<=2;replay0/native unsettled0/outward pending0;non302/reference0/thirdlistfalse;two preceding pages/counter2;three original readiness flagsfalse. Protected test source/blob and private oracle SHA are pinned without importing/registering the3-case module. ExactlyONE helper invocation; 21 pure mutation families must fail the actual copied private oracle. No R1/R3 invocation or new native call.
+
+I1: original operation/qualification outcome and exact error are recorded before ownership/evidence unwind. Disposal, terminal capture, selection or filesystem failure cannot coerce a known original pass to failure or mask the original rejection/qualification object. Best-effort evidence wraps selector and writes; fixed adapter returns normally on original success, rethrows original object on failure. Evidence failure remains for producer proof/verifier/final job exit. Current private outcome helpers are VM-tested for successful return despite failed evidence, same original/qualification rejection, and unavailable pre-MF outcome; no actual Native execution.
+
+I2: actual MFattachment is tracked separately from owned scratch attachPersist. Pre-MF gate error keeps originalR2Outcome unavailable and preallocationBlocked true, so actual seal eligibility rejects it while existing partial archive preservation remains and deletion unverified. Current job started_at later than official response Date is rejected both at metadata read and synchronous headroom check; current conservative age/margins and>=240s gate remain. Controlled current helper tests cover future start and pre-MF refusal; no timer reset, clock override or budget extension.
+
+I3: current composed issuer/recheck code is VM-exercised against its pre-diagnostic composed original; within each scenario, exact native call args/receiver, issuer record identity/observe args, retain-returned promise and actual wait identity/order are checked, alongside original effects/error. Both pair rejection/abort settlement orders and late consume callback during in-flight grant are exercised; nested/late calls cannot borrow context. A private one-witness issuance guard binds each callback/run; the real runner executes missing/no-op/skipped/forged/double-issuance counterexamples and restores parent control state. Exactly24IDs/one node:test wrapper; failed controls emit a bounded truthful progress/firstFailure record instead of all-pass counts. No nested test registration or default Native registration.
+
+I4: full closed emission validation binds version/profile/phase/path/fields/enums/sites and literal digest, recomputes each actual transform from captured baseline bytes and checks actual output hashes/bytes, rejects missing/empty/Node-contaminated metafiles. ORIGINAL408 OFF and candidate OFF use one captured prepared/raw/virtual input+define set; normalized unique role/path records also match ON pre-diagnostic records for BOTH roles, M ON bytes unchanged. M1 naturally closed by this required normalization, no unrelated polish. Pure preflight produces immutable sanitized model.json+protected budget-artifact.json only; current composed code and actual metafile remain separately private and hash-tied, never uploaded. MODEL is uploaded once7days, max4MiB compressed AND uncompressed, manifest<=65536; actual assigned ID is independently downloaded to a separate readback dir and the protected verifyBudgetArtifact(readback,'pure',REAL_ID) must pass before controls/Native. No dummy ID, no later mutation of sealed MODEL.
+
+I5/N6: both workflows carry uploader ID/digest outputs; MODEL and SAFE download checks compare uploader/API/rawZIP digests plus exact current run/head/name/metadata, exact regular paths/count, UTF8/duplicate JSON keys/CRC/EOF and compressed/uncompressed bounds. Independent verifier downloads sanitized MODEL itself and binds EXACT model.json UTF8 bytes/preflightSha256, SDK bytes/hash, lock, transform/World/current programs, protected test and private oracle from its own checkout. Rejects empty/duplicate/missing/extra/default OFF proof drift, malformed nested flags/emissions and changed model hashes instead of trusting arbitrary64hex. Fixed pure current verifier helper has controlled malformed-proof counterexamples. SAFE remains exactlyresult.json+manifest.json/combined<=65536/rawZIP<=131072; only SAFE may be downloaded by Root/MCP. MODEL metadata only for Root. Native future outputs additionally carry exact assigned cipher ID/uploader digest and original R2 command OUTCOME (not continued conclusion); verifier reconciles all with known original outcome/custody. Unknown/quarantine never yields a verified Native certificate. Existing N1 trusted same-runner limitation preserved; key remains ONLY three terminating steps.
+
+Covering commands prepared for this ONE NEW run, all on GitHub runner: node --check World/newfixture/newtest; current-identity preflightPostAckDiagnostic() with original408 blob5fb78c05 and protected test blob533dafb5; real MODEL upload/digest/assigned-ID readback and verifyBudgetArtifact; AFW_POST_ACK_MODE=controls node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs; AFW_BUDGET_CONTROL_PHASE=green node --experimental-vm-modules test/fixtures/finite-budget-world.mjs verify-native-preparation-round1 at unchanged45s; node --test --test-concurrency=1 --test-reporter=tap test/finite-budget-diagnostics.test.mjs test/mcp-qa-finite-observer.test.mjs; contracts-proof; exact two-file SAFE upload; independent MODEL+SAFE verification and verify-contracts. Related F1–F8 and the named pure files remain inert by prior actual-body inspection, no full Native or generic npm-test invocation. N7 supersedes the earlier empty=>controls shorthand: absent/empty AFW_POST_ACK_MODE registers ZERO diagnostic tests and performs no key/context/model checks, proof or qualification; explicit controls alone requires the real MODEL receipt and registers one24-callback wrapper. Unknown nonempty mode rejects before allocation. profile_scope VM-exercises the actual test entrypoint statements under a guarded environment proxy for absent/empty/unknown modes. No dummy/local artifact fallback and no skip-based qualification. Production compiler/profile remains defaultOFF. No generic CI/main/PR is launched by this Source push.
+
+Frozen held-source inventory below; actual activation changes only contracts event/runlabel/two gates and its separate digest will be recorded before push. Both new workflows currentlymanual/noinputs/nopush/twofalse, F7exact/sevenfalse. Actual new run/attempt/job/test/control outputs, MODEL+SAFE artifact metadata/digests/expiry, model OFF/ON/supplement/readback and final closure readbacks will be APPENDED after terminal outcome, not invented here.
+
+```json
+[
+  {
+    "path": "test/fixtures/finite-budget-world.mjs",
+    "chars": 234903,
+    "bytes": 234909,
+    "sha256": "e80fad6e84c3a2ee9ec0d466a51c02a0c90d1afb3c1979a8fc332ea9d5e3ac39",
+    "blob": "dd93fc81dcefde271502626fdd5e02a0f9ab0a1a"
+  },
+  {
+    "path": "test/fixtures/finite-post-ack-diagnostic.mjs",
+    "chars": 73508,
+    "bytes": 73508,
+    "sha256": "6d48912cc571517d0adccc3fc8e9f56e36049ede91f23f7e91a973d0521c9a35",
+    "blob": "c71926a067a79168a4d30f80901fb76d308d06e7"
+  },
+  {
+    "path": "test/finite-post-ack-diagnostic.test.mjs",
+    "chars": 1923,
+    "bytes": 1923,
+    "sha256": "cbe41b778c68e74516f9008061d27cdcdc6e8dcf212a93d8ddb24caf8079e462",
+    "blob": "aaf4894d1b411a8ac59debb63ca9368e803141c5"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+    "chars": 21318,
+    "bytes": 21318,
+    "sha256": "548a99f9c577ae5212016b5f4cc3c7899f4b6902af47a88802000f0f3a84264c",
+    "blob": "1c4d054487e781157cf4fa633f9fc58a5a9cbbf5"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+    "chars": 30086,
+    "bytes": 30086,
+    "sha256": "da20759fd7be5e64f7f62164a0a58bc701b33c89d35175a746868eed56c38fb0",
+    "blob": "8d5b04da0eff2890c70b8ef15a2f51a99c896810"
+  }
+]
+```
+
+Not executed by this fix preparation: Source on PC, Native/SDKruntime/MF/I0, any key/CF/production/OAuth/customer action, PC-off, Native16 or Max. Source bodies are assembled/hashed as bounded data only; no clone/dependencies/build/temp Source files locally. Self-review covered integration seams, static branches, literal five+one inventory, exact2exports, N6 immutable-dir separation, actual MF/outcome hooks and three key bindings. This is implementer self-review, not independent CLEAN or Native permission.
