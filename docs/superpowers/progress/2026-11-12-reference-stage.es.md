@@ -1,10 +1,10 @@
 # SDD ledger — docs/superpowers/plans/2026-11-12-reference-stage.md
 
-## CURRENT — Tasks1+2 COMPLETE/PARTIAL; exactF7 closed; whole-plan finalreview pending
+## CURRENT — COMPLETE; whole-plan finalCLEAN; Source408 exactF7 closed
 
-Source408e82ab exactF7/7false/reportf9ec93f5/protected3188/main0c9/five0active independentlyRootchecked. GlobalF59..408onlyreport+1845/−0, FULL96830patchreconstructed. [Finalpackage](../reviews/2026-11-12-reference-stage-final-package.md). Actual43313662894validPARTIAL/newstagehttp-grant; BOTHoldrows+WHOLEoldcert+Originalfactsunchanged. NoNativecause/ACKownership/readiness. EverySourceactorSTOPPED/nopermit. Readonlycausal/NativefeasibilityresearchhasNOexecutionauthority. Allreadinessfalse.
+[Finalreview](../reviews/2026-11-12-reference-stage-plan-clean.md) CLEAN0openfindings; Task1fix1all3Important+positivefileMinorclosed bycurrentreal22witness+fixture/review. Task2validPARTIALstagehttp/grant, oldrows+WHOLEcert+Originalfactsunchanged, noNativecause/readiness. Source408e82ab/F7/all7false/reportf9ec93f5/protected3188/main0c9/five0active/allactorsSTOPPED. NoSourcepermit. NativepostACKSYNdiagnosticarchitecturestudy isnextCONTINGENTinputonly, notimplemented/run/authorizedbythisplan. Allreadinessfalse.
 
-Task1: fix round1/5 (3 addressed,0 open — invocation/witness; R1oversizeshadow; ENOTDIR; b0dfcf50..cf223f03). PriorpositivefileMinorCLOSEDbydynamicconsume+grantfixture/fullindependentrows+cert+realreader/coordinatorandindependentreview.
+Task1: fix round1/5 (3 addressed,0 open — invocation/witness; R1oversizeshadow; ENOTDIR; b0dfcf50..cf223f03). PriorpositivefileMinorCLOSEDbynowexecuted+reviewedfixture. 163namedIDs+22callbacks, not185distinctIDs.
 
 ## Prior proposal checkpoint
 
