@@ -1602,10 +1602,104 @@ export async function verifyBudgetArtifact(root,kind,artifactId){
  return m;
 }
 
+
+const ROUND2_OLD_PURE_SEALER="import assert from 'node:assert/strict';import {mkdir,readdir,writeFile,lstat,copyFile} from 'node:fs/promises';import {join} from 'node:path';\nimport {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';\ntry{\n const dest=join(process.env.RUNNER_TEMP,'afw-pure-public');await mkdir(dest,{mode:0o700});\n for(const name of ['tests.tap','inactive.tap']){try{await copyFile(join(process.env.RUNNER_TEMP,'afw-pure-private',name),join(dest,name));}catch(error){if(error.code!=='ENOENT')throw error;}}\n for(const name of ['syntax.log','lint.log','tests.tap','inactive.tap']){try{const path=join(process.env.RUNNER_TEMP,'afw-pure-private',name),st=await lstat(path);assert(st.size<=1048576);await copyFile(path,join(dest,name));}catch(error){if(error.code!=='ENOENT')throw error;}}\n const safeNames=[\"syntax.log\",\"control-progress.json\",\"controls.json\",\"utility-readonly.json\",\"utility-reduction.json\",\"tests.log\",\"tests.tap\",\"inactive.tap\",\"inactive.json\",\"lint.log\",\"preflight.json\",\"preflight-positive.json\",\"preflight-readonly.json\",\"preflight-reduction_a.json\",\"diagnostics.json\",\"diagnostic-manifest.json\"];\n for(const name of safeNames){const file=join('output/finite-budget/pure',name);let st;try{st=await lstat(file);}catch(error){if(error.code==='ENOENT')continue;throw error;}assert(st.isFile()&&st.nlink===1);await copyFile(file,join(dest,name));}\n await writeFile(join(dest,'status.json'),JSON.stringify({status:process.env.PURE_COMPLETE==='true'?'pure_passed':'pure_failed',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT}));\n await sealBudgetArtifact(dest,'pure');\n const names=await readdir(dest);assert(names.every(name=>[...safeNames,'budget-artifact.json','status.json'].includes(name)));\n}catch{console.log('evidence_not_preserved');process.exitCode=1;}";
+async function round2F2Regression(){
+ const prepared=await prepareFixedFacetControls(),{Script,createContext}=await import('node:vm');
+ const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer});
+ const body=String.raw`
+ globalThis.__round2=(async()=>{
+  const kv={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),put:async()=>{},delete:async()=>{}},owner=Object.assign(new Initial(),{env:{AFW_FINITE_OWNER_OAUTH_KV:kv},ctx:{storage:{}}}),state=__afwFiniteBudgetState(owner,'R3');
+  const subject='SYN-round2',id='AAAAAAAAAAAAAAAA',key='grant:'+subject+':'+id;state.grantKey=key;__afwFiniteBudgetInstall(owner,state);
+  const controller=new AbortController(),parent=new AbortController(),lease={signal:controller.signal},guard=()=>{},error=Error('SYN modeled ordinary work rejection');let rejectWork,rejectWait;
+  const work=new Promise((_,reject)=>{rejectWork=reject;}),wait=new Promise((_,reject)=>{rejectWait=reject;}),deadline=Date.now()-1;
+  __afwSynWork(lease,deadline,work,parent.signal);__afwSynWait(lease,wait);__afwSynSelectGuard(kv,lease,guard,1);
+  const facet=readonlyGrantKv(kv,{get:kv.get,list:kv.list},subject,guard),jobs=[];let before,after;
+  try{
+   for(let n=0;n<6;n++){const actual=facet.get(key,{type:'json'});actual.catch(()=>{});jobs.push(actual);}
+   for(let n=0;n<12;n++)await Promise.resolve();
+   rejectWork(error);for(let n=0;n<4;n++)await Promise.resolve();
+   rejectWait(error);for(let n=0;n<4;n++)await Promise.resolve();
+   controller.abort();for(let n=0;n<4;n++)await Promise.resolve();
+   before=JSON.parse(JSON.stringify(await owner.finiteBudgetSignals()));
+   await owner.finiteBudgetRelease();await Promise.allSettled(jobs);
+   after=JSON.parse(JSON.stringify(await owner.finiteBudgetSignals()));
+   return {before,after};
+  }finally{await owner.finiteBudgetRelease();await Promise.allSettled(jobs);await owner.finiteBudgetRestore();}
+ })();
+`;
+ new Script(prepared.prelude+'\n'+body).runInContext(context,{timeout:1000});const observed=await fixedControlBound(context.__round2),{before,after}=observed;
+ const child=before.children[0],events=before.observerEvents.filter(event=>event.childOrdinal===child?.childOrdinal),seq=kind=>events.find(event=>event.kind===kind)?.sequence;
+ assert.equal(child.sameWorkWaitError,true,'round2 ordinary error identity');assert.equal(child.workPendingAtAbort,false);assert(seq('child_work_rejected')<seq('child_wait_rejected')&&seq('child_wait_rejected')<seq('child_abort'),'round2 original finally order');
+ const actual=fixedChildDeadlineProof(before,after);
+ return {acceptedDeadline:actual.denialAfterDeadline===true,sameWorkWaitError:child.sameWorkWaitError,workPendingAtAbort:child.workPendingAtAbort,workStatus:child.workStatus,waitStatus:child.waitStatus,workBeforeWait:true,waitBeforeAbort:true,heldNative:before.heldNativeSettled,outwardAtDenial:before.outwardPending,originalQueue:fixedQueueCausality(before),genuineBusinessRoot:false};
+}
+async function round2ProducerContinuation(){
+ const source=await readFile('test/fixtures/finite-owner-cleanup-persistence.mjs','utf8'),blob=createHash('sha1').update('blob '+Buffer.byteLength(source)+'\0'+source).digest('hex');assert.equal(blob,'e317f58205b062adb6223a4dd5647b65e9c860b4','round2 protected producer blob');
+ const ast=sourceAST(source,'round2-protected-producer'),fn=ast.statements.filter(node=>ts.isFunctionDeclaration(node)&&node.name?.text==='produceCheckpoint');assert.equal(fn.length,1);
+ const matches=[];const walk=node=>{if(ts.isBlock(node))for(let n=0;n+3<node.statements.length;n++){const rows=node.statements.slice(n,n+4);if(rows[0].getText(ast)==='await f.mf.dispose();'&&rows[1].getText(ast)==='f.disposedForCheckpoint=true;'){assert.equal(rows[2].getText(ast),'await mkdir(root,{recursive:true});');assert.equal(rows[3].getText(ast),"await cp(input.persist,join(root,'state'),{recursive:true,errorOnExist:true,force:false});");matches.push(source.slice(rows[0].getStart(ast),rows[3].end));}}ts.forEachChild(node,walk);};walk(fn[0]);assert.equal(matches.length,1,'round2 exact producer await continuation');
+ return matches[0];
+}
+async function round2F5Regression(){
+ const continuation=await round2ProducerContinuation(),{Script,createContext}=await import('node:vm'),cases={};
+ for(const arm of ['normal','rejection']){
+  const root=join(process.env.RUNNER_TEMP,'afw-round2-private','f5-'+arm),persist=join(root,'source');await mkdir(persist,{recursive:true});await writeFile(join(persist,'native.bin'),'SYN round2 retained inert bytes');
+  const expected=Error('SYN round2 original disposer rejection');let record,fixture,attempts=0,copies=0,outward='not_entered',outerError=null,originalRejected=false,copiedAfterDispose=false,copyWhileUncertain=false;
+  try{await withFixedBudgetOwner('positive_producer',join(root,'owned'),async()=>{
+   record=beginFixedBudgetOwnedAllocation();record.attachPersist(persist);fixture={budgetEpochs:[],stub:{},async captureBudgetEpoch(reason){fixture.budgetEpochs.push({reason,role:'QA',epoch:0});}};
+   record.attachFixture(fixture);const inertMF={async dispose(){attempts++;if(arm==='rejection'){originalRejected=true;throw expected;}}};record.attachMiniflare(inertMF);fixture.mf=record.mf;
+   const actualDispose=fixture.mf.dispose;fixture.mf.dispose=async()=>{try{const value=await Reflect.apply(actualDispose,fixture.mf,[]);outward='fulfilled';return value;}catch(error){outward='rejected';throw error;}};
+   const context=createContext({f:fixture,root:join(root,'checkpoint'),input:{persist},mkdir:async()=>{},cp:async()=>{copies++;copiedAfterDispose=record.disposed;copyWhileUncertain=record.disposalUncertain===true;},join});
+   await new Script('(async()=>{'+continuation+'})()').runInContext(context,{timeout:1000});return {};
+  });}catch(error){outerError=error;}
+  const sourceRetained=await readFile(join(persist,'native.bin')).then(()=>true,()=>false);
+  cases[arm]={originalRejected,outward,flag:fixture.disposedForCheckpoint===true,copies,copiedAfterDispose,copyWhileUncertain,disposed:record.disposed,uncertain:record.disposalUncertain===true,archived:record.archived,sourceRetained,originalAttempts:attempts,outerErrorSame:outerError===expected};
+  if(arm==='normal'){assert.equal(outerError,null);assert.equal(copies,1);assert.equal(record.disposed,true);assert.equal(record.archived,true);}
+  else{assert.equal(outerError,expected,'round2 original disposer retained as outer failure');assert.equal(attempts,1);assert.equal(record.disposalUncertain,true);assert.equal(record.archived,false);}
+ }
+ return cases;
+}
+async function round2F8Regression(){
+ const {SourceTextModule,SyntheticModule,createContext}=await import('node:vm'),fs=await import('node:fs/promises');
+ assert.equal(typeof SourceTextModule,'function','round2 SourceTextModule available');
+ const base=join(process.env.RUNNER_TEMP,'afw-round2-private','f8-sandbox');await mkdir(join(base,'afw-pure-private'),{recursive:true,mode:0o700});await mkdir(join(base,'input-pure'),{recursive:true,mode:0o700});
+ const canary='SYN_ROUND2_PRIVATE_CANARY_6a793d',raw='const sourceLine="'+canary+'";\nError: '+canary+'\n at privateStack ('+canary+')\n actual: '+canary+'\n';
+ const names=['syntax.log','lint.log','tests.tap','inactive.tap'];for(const name of names)await writeFile(join(base,'afw-pure-private',name),raw);
+ const processView={env:{RUNNER_TEMP:base,PURE_COMPLETE:'false',GITHUB_SHA:process.env.GITHUB_SHA,GITHUB_RUN_ID:process.env.GITHUB_RUN_ID,GITHUB_RUN_ATTEMPT:process.env.GITHUB_RUN_ATTEMPT},exitCode:0},context=createContext({process:processView,console:{log(){}}});
+ const map=path=>{assert.equal(typeof path,'string');if(path.startsWith('output/finite-budget/pure/'))return join(base,'input-pure',path.slice('output/finite-budget/pure/'.length));assert(resolve(path).startsWith(resolve(base)+'/'),'round2 sealer private sandbox boundary');return path;};
+ const fileExports={mkdir:(path,options)=>fs.mkdir(map(path),options),readdir:path=>fs.readdir(map(path)),writeFile:(path,data,options)=>fs.writeFile(map(path),data,options),lstat:path=>fs.lstat(map(path)),copyFile:(from,to)=>fs.copyFile(map(from),map(to))};
+ const modules=new Map(),synthetic=(name,exports)=>{if(modules.has(name))return modules.get(name);const module=new SyntheticModule(Object.keys(exports),function(){for(const [key,value]of Object.entries(exports))this.setExport(key,value);},{context,identifier:name});modules.set(name,module);return module;};
+ const module=new SourceTextModule(ROUND2_OLD_PURE_SEALER,{context,identifier:'SYN-fixed-c72e3191-pure-sealer'});
+ await module.link(specifier=>{
+  if(specifier==='node:assert/strict')return synthetic(specifier,{default:assert});
+  if(specifier==='node:fs/promises')return synthetic(specifier,fileExports);
+  if(specifier==='node:path')return synthetic(specifier,{join});
+  if(specifier==='./test/fixtures/finite-budget-world.mjs')return synthetic(specifier,{sealBudgetArtifact});
+  throw Error('round2 unknown fixed sealer import');
+ });
+ await module.evaluate({timeout:1000});assert.equal(processView.exitCode,0,'round2 actual old sealer completed');
+ const destination=join(base,'afw-pure-public'),status=JSON.parse(await readFile(join(destination,'status.json'),'utf8'));let leaked=0;
+ for(const name of names){const value=await readFile(join(destination,name),'utf8');if(value.includes(canary))leaked++;}
+ return {baselineWorkflow:'c72e31919d477280c9eef39b63ca46708acb82e7',bodySha256:hash(ROUND2_OLD_PURE_SEALER),rawFiles:names.length,filesWithCanary:leaked,canaryReachedPrivateSandbox:leaked>0,sandboxOnly:true,baselineStatus:status.status};
+}
+async function verifyRound2CausalRed(){
+ const groups=[],tests=[['F2','observer_order',round2F2Regression],['F8','old_sealer_execute',round2F8Regression],['F5','producer_continuation',round2F5Regression]];
+ for(const [group,stage,run]of tests){
+  try{
+   const facts=await fixedControlBound(run()),causalDeficit=group==='F2'?facts.acceptedDeadline&&facts.sameWorkWaitError&&!facts.workPendingAtAbort&&facts.workBeforeWait&&facts.waitBeforeAbort:group==='F5'?facts.rejection.originalRejected&&facts.rejection.outward==='fulfilled'&&facts.rejection.flag&&facts.rejection.copies===1&&!facts.rejection.copiedAfterDispose&&facts.rejection.copyWhileUncertain&&facts.rejection.uncertain&&!facts.rejection.archived: facts.filesWithCanary===4&&facts.sandboxOnly;
+   groups.push({group,stage:'complete',causalDeficit,facts,error:null});
+  }catch(error){groups.push({group,stage,causalDeficit:false,facts:null,error:fixedControlError(error)});}
+ }
+ const result={purpose:'afw.round2-causal-red.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,groups,expectedCausalRed:groups.length===3&&groups.every(group=>group.stage==='complete'&&group.causalDeficit),I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};
+ const root=join(process.env.RUNNER_TEMP,'afw-round2-private');await mkdir(root,{recursive:true,mode:0o700});await writeFile(join(root,'result.json'),JSON.stringify(result,null,2));
+ assert.equal(result.expectedCausalRed,true,'round2 each regression produced its named causal deficit');assert.equal(result.expectedCausalRed,false,'round2 actual causal deficits require fixes');return result;
+}
+
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const main=async()=>{
   const [command,root]=process.argv.slice(2);
-  if(command==='preflight-budget')await preflightBudgetCompilation();
+  if(command==='verify-round2-red')await verifyRound2CausalRed();
+  else if(command==='preflight-budget')await preflightBudgetCompilation();
   else if(command==='prepare-positive-probe')await preparePositiveProbe(root);
   else if(command==='prepare-positive')await prepareBudgetProducer('positive',root);
   else if(command==='prepare-reduction')await prepareBudgetProducer('reduction',root);
