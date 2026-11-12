@@ -1526,7 +1526,7 @@ async function runFixedPeerWaitControls(){
 
 async function verifyNativePreparationRound1(){
  const groups=[],failures=[],started=Date.now(),root='output/finite-budget/round1-controls';await mkdir(root,{recursive:true});
- const persist=async()=>{const passed=groups.length===8&&groups.every(g=>g.passed),result={purpose:'afw.native-preparation-round1-controls.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,phase:process.env.AFW_BUDGET_CONTROL_PHASE??'unspecified',stage:groups.length===7?'complete':'partial',groups,passed,started,observedAt:Date.now(),I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};await writeFile(join(root,'result.json'),JSON.stringify(result,null,2));
+ const persist=async()=>{const passed=groups.length===8&&groups.every(g=>g.passed),result={purpose:'afw.native-preparation-round1-controls.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,phase:process.env.AFW_BUDGET_CONTROL_PHASE??'unspecified',stage:groups.length===8?'complete':'partial',groups,passed,started,observedAt:Date.now(),I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};await writeFile(join(root,'result.json'),JSON.stringify(result,null,2));
  const summary={purpose:'afw.closed-pure-controls.syn.v2',source:result.source,run:result.run,attempt:result.attempt,groups:groups.map(group=>{const bytes=Buffer.from(JSON.stringify(group));return {group:group.group,passed:group.passed,caseCount:Array.isArray(group.cases)?group.cases.length:group.group==='F5'?group.round2?.length??0:1,evidence:{bytes:bytes.length,sha256:hash(bytes)},error:group.error??null};}),passed:result.passed,I0Opened:false,nativeExecutionProduced:false,businessCases:0};
  await mkdir('output/finite-budget/pure',{recursive:true});await writeFile('output/finite-budget/pure/controls.json',JSON.stringify(summary,null,2));return result;};
  const tests=[
@@ -1737,7 +1737,7 @@ async function verifyRound2CausalRed(){
 
 async function runRound2DeadlineControls(){
  const prepared=await prepareFixedFacetControls(),{Script,createContext}=await import('node:vm'),cases=[];
- for(const variant of ['abort_wait_work','abort_work_wait','ordinary_work','same_error_race','fulfilled_guard','missing_order']){
+ for(const variant of ['abort_wait_work','abort_work_wait','ordinary_work','same_error_race','fulfilled_guard','finally_close','missing_order','duplicate_order']){
   const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer,__variant:variant});
   const body=String.raw`
   globalThis.__deadline=(async()=>{
@@ -1749,6 +1749,7 @@ async function runRound2DeadlineControls(){
    let before,after;
    try{
     if(__variant==='ordinary_work'){rejectWork(E);await flush();rejectWait(E);await flush();controller.abort();await flush();}
+    else if(__variant==='finally_close'){rejectWait(D);await flush();controller.abort();await flush();}
     else{
      controller.abort();await flush();
      if(__variant==='abort_work_wait'||__variant==='same_error_race'){rejectWork(E);await flush();rejectWait(__variant==='same_error_race'?E:D);await flush();}
@@ -1763,7 +1764,8 @@ async function runRound2DeadlineControls(){
 `;
   new Script(prepared.prelude+'\n'+body).runInContext(context,{timeout:1000});const observed=await fixedControlBound(context.__deadline);
   if(variant==='missing_order')observed.after.observerEvents=observed.after.observerEvents.filter(event=>event.kind!=='child_abort');
-  const actual=classifyFixedChildDeadline(observed.before,observed.after),expected=['abort_wait_work','abort_work_wait'].includes(variant)?'confirmed_deadline':variant==='ordinary_work'?'propagated_work':'indeterminate';
+  if(variant==='duplicate_order')observed.after.observerEvents.push({...observed.after.observerEvents.find(event=>event.kind==='child_abort')});
+  const actual=classifyFixedChildDeadline(observed.before,observed.after),expected=['abort_wait_work','abort_work_wait'].includes(variant)?'confirmed_deadline':variant==='ordinary_work'?'propagated_work':variant==='finally_close'?'close_abort':'indeterminate';
   assert.equal(actual.classification,expected,'fixed child causal discriminator '+variant);
   cases.push({variant,classification:actual.classification,denialAfterDeadline:actual.denialAfterDeadline,promiseIdentity:observed.promiseIdentity,genuineBusinessRoot:false});
  }
@@ -1810,7 +1812,7 @@ async function runRound2OwnedCase(name){
   if(expected!==D){assert(errors.includes(D),'disposer retained ancillary');assert.equal(errors.filter(error=>error===D).length,1,'propagation deduplicated by identity');}
   if(name==='operation_evidence_dispose')assert(errors.includes(F));if(name==='callback_dispose_sibling'){assert(errors.includes(B));assert(trace.includes('sibling'));assert(trace.indexOf('legacy_restore')<trace.indexOf('dispose'));}
  }
- const result={subcase:name,passed:true,stage:'complete',originalAttempts:attempts,copies,flag:fixture.disposedForCheckpoint===true,copyAfterDispose:afterDisposed,primarySame:true,ancillaryCount:errors.length,disposeAncillaryOnce:expected===D?null:errors.filter(error=>error===D).length,sourceRetained:name==='normal'?null:true,poisonPreserved:name!=='normal',exactCurrentBodies:parts.proof,noMF:true,I0Opened:false};
+ const result={subcase:name,passed:true,stage:'complete',originalAttempts:attempts,copies,cleanupCalls,flag:fixture.disposedForCheckpoint===true,copyAfterDispose:afterDisposed,primarySame:true,ancillaryCount:errors.length,disposeAncillaryOnce:expected===D?null:errors.filter(error=>error===D).length,sourceRetained:name==='normal'?null:true,poisonPreserved:name!=='normal',exactCurrentBodies:parts.proof,noMF:true,I0Opened:false};
  await writeFile(join(root,'result.json'),JSON.stringify(result));return result;
 }
 async function runRound2OwnedControls(){
@@ -1831,7 +1833,7 @@ async function runRound2OwnedControls(){
 
 async function runRound2SealerControls(){
  fixedControlProgress('round2_sealer');
- const workflow=await readFile('.github/workflows/afw-finite-budget-qualification.yml','utf8'),step=workflow.split('      - name: Seal a closed pure evidence directory\n');assert.equal(step.length,2,'actual current sealer step exactly once');const block=step[1].split("          node --input-type=module <<'NODE'\n");assert.equal(block.length,2);const source=block[1].split('\n          NODE\n')[0].split('\n').map(line=>{assert(line.startsWith('          '));return line.slice(10);}).join('\n')+'\n';assert.equal(source.split('AFW_CLOSED_PURE_SEALER_V2').length,2);
+ const workflow=await readFile('.github/workflows/afw-finite-budget-qualification.yml','utf8'),step=workflow.split('      - name: Seal a closed pure evidence directory\n');assert.equal(step.length,2,'actual current sealer step exactly once');const block=step[1].split("\n      - name: Upload finite-budget-pure only")[0].split("          node --input-type=module <<'NODE'\n");assert.equal(block.length,2);const source=block[1].split('\n          NODE\n')[0].split('\n').map(line=>{assert(line.startsWith('          '));return line.slice(10);}).join('\n')+'\n';assert.equal(source.split('AFW_CLOSED_PURE_SEALER_V2').length,2);
  const {SourceTextModule,SyntheticModule,createContext}=await import('node:vm'),fs=await import('node:fs/promises'),cases=[],canary='SYN_ROUND2_PRIVATE_CANARY_6a793d',raw='const source="'+canary+'";\nError: '+canary+'\n at privateStack('+canary+')\n actual: '+canary+'\n';
  for(const variant of ['failed_logs','unknown_field','unknown_string']){
   const base=join(process.env.RUNNER_TEMP,'afw-round2-fixed-sealer',variant),privateRoot=join(base,'afw-pure-private'),input=join(base,'input-pure');await mkdir(privateRoot,{recursive:true,mode:0o700});await mkdir(input,{recursive:true,mode:0o700});
