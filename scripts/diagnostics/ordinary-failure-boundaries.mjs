@@ -320,11 +320,11 @@ async function preserve(output,report){
 }
 async function main(){
  if(process.argv.length!==2||process.platform!=='linux'||process.version!=='v22.23.4')reject();
- if(process.env.GITHUB_REPOSITORY!==REPO||process.env.GITHUB_REF!==BRANCH||process.env.GITHUB_EVENT_NAME!=='workflow_dispatch'||process.env.GITHUB_RUN_ATTEMPT!=='1'||!/^[1-9][0-9]{0,19}$/.test(process.env.GITHUB_RUN_ID??'')||!/^[a-f0-9]{40}$/.test(process.env.AFB_WORKFLOW_SHA??''))reject();
+ if(process.env.GITHUB_REPOSITORY!==REPO||process.env.GITHUB_REF!==BRANCH||!['workflow_dispatch','push'].includes(process.env.GITHUB_EVENT_NAME)||process.env.GITHUB_RUN_ATTEMPT!=='1'||!/^[1-9][0-9]{0,19}$/.test(process.env.GITHUB_RUN_ID??'')||!/^[a-f0-9]{40}$/.test(process.env.AFB_WORKFLOW_SHA??''))reject();
  const subject=resolve('subject'),runner=process.env.RUNNER_TEMP;
  if(!runner||!isAbsolute(runner)||resolve(runner)===subject)reject();
  const output=resolve('failure-boundaries-safe');await mkdir(output,{recursive:true,mode:0o700});
- const context={repository:REPO,workflowRef:BRANCH,trigger:'workflow_dispatch',workflowSource:process.env.AFB_WORKFLOW_SHA,testSource:SUBJECT,runId:process.env.GITHUB_RUN_ID,attempt:1,node:process.version,os:'Ubuntu24.04',group:'UNSET',childContext:'MODELED_STERILE_SYNTHETIC',workflowContextIsAdmissionAuthority:false,...flags};
+ const context={repository:REPO,workflowRef:BRANCH,trigger:process.env.GITHUB_EVENT_NAME,workflowSource:process.env.AFB_WORKFLOW_SHA,testSource:SUBJECT,runId:process.env.GITHUB_RUN_ID,attempt:1,node:process.version,os:'Ubuntu24.04',group:'UNSET',childContext:'MODELED_STERILE_SYNTHETIC',workflowContextIsAdmissionAuthority:false,...flags};
  let report={purpose:'afw.failure-boundaries.diagnostic.v1',status:'incomplete',context,noRetry:true,...flags};
  await preserve(output,report);
  let before=null,leaves=null,parent=null,overlays=[];
