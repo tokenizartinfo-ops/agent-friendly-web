@@ -1,9 +1,7 @@
-name: AFW reference stage FIX1 TWO-JOB KEYLESS CONTROLS
-run-name: AFW reference stage FIX1 SERIAL KEYLESS CONTROLS ONLY ${{ github.sha }}
+name: AFW reference stage FIX1 QUALIFIED_INACTIVE
+run-name: AFW reference stage FIX1 INACTIVE ${{ github.sha }}
 on:
-  push:
-    branches: [feat/finite-native-cleanup-20261101]
-    paths: [.github/workflows/afw-finite-budget-qualification.yml]
+  workflow_dispatch:
 permissions:
   contents: read
   actions: read
@@ -12,9 +10,10 @@ concurrency:
   cancel-in-progress: false
 jobs:
   producer:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 2
+    timeout-minutes: 5
+    environment: afw-finite-syn-checkpoint
     outputs:
       artifact-id: ${{ steps.artifact.outputs.artifact-id }}
       artifact-digest: ${{ steps.artifact.outputs.artifact-digest }}
@@ -22,16 +21,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: '19789b5f31935e0b5be00cbb24c5f45de2a0100a'
           persist-credentials: false
           fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22.23.4'
-      - name: Materialize current exact code and finite safe proof validators
+      - name: Materialize fixed current inspector
         shell: bash
         run: |
           set -euo pipefail
           umask 077
+          test ! -e "$RUNNER_TEMP/afw-readonly-inspector-current.mjs"
           cat >"$RUNNER_TEMP/afw-readonly-inspector-current.mjs" <<'NODE_CORE'
           import assert from 'node:assert/strict';
           import {readFile,writeFile,mkdir,mkdtemp,readdir,lstat,realpath,rm,open} from 'node:fs/promises';
@@ -536,52 +538,7 @@ jobs:
           }
           if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)main().catch(async error=>{if(process.argv[2]==='project-child')try{await writeFile(projectErrorPath(),JSON.stringify({reason:error instanceof Rejected&&REASONS.includes(error.reason)?error.reason:'parse_failed'}),{flag:'wx',mode:0o600});}catch{}process.exitCode=1;});
           NODE_CORE
-          cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" <<'NODE_FALLBACK'
-          
-          import {access,readFile,writeFile,mkdir} from 'node:fs/promises';
-          import {join,resolve} from 'node:path';
-          import {createHash} from 'node:crypto';
-          const ids=["zip_valid","zip_signed_descriptor","zip_extra","zip_traversal","zip_duplicate","zip_bad_crc","zip_link","zip_bad_range","failure_identity_valid","failure_identity_success_reject","failure_identity_role_reject","failure_identity_kind_reject","failure_identity_unknown_reject","ownership_valid","ownership_unknown_reject","ownership_enum_reject","optional_missing_unknown","full_result_valid","full_result_unknown_reject","tap_valid_canaries","tap_unknown_scalar","tap_duplicate_case","tap_case_number_collision","tap_wrapper_number_collision","tap_unknown_number_collision","tap_late_diag_comment","tap_late_diag_unrelated","tap_injected_name","tap_long_line","tap_long_block","public_authenticated_valid","gate_artifact_count","gate_artifact_actual","gate_artifact_candidate","gate_artifact_duration","gate_artifact_business","gate_authenticated_count","gate_authenticated_actual","gate_authenticated_candidate","gate_authenticated_duration","gate_authenticated_business","gate_inventory_count","gate_inventory_actual","gate_inventory_candidate","gate_inventory_duration","gate_inventory_business","gate_identity_count","gate_identity_actual","gate_identity_candidate","gate_identity_duration","gate_identity_business","scalar_boolean_wrong","scalar_false_null_wrong","scalar_array_hash_wrong","scalar_half_hash_wrong","scalar_boolean_valid","scalar_null_valid","scalar_integer_valid","scalar_typed_valid","verdict_accepted","verdict_parse_timeout_old_current","verdict_other_failure","verdict_rejected_status","verdict_partial_status","verdict_missing_clock","verdict_open_over_deadline","verdict_download_over_deadline","digest_match_bare","digest_match_prefixed","digest_mismatch_old_current","digest_upload_malformed","digest_remote_malformed","metadata_wrong_id","metadata_wrong_context","metadata_stream_valid","metadata_stream_overcap","diagnostic_http_rejected","diagnostic_json_malformed","diagnostic_stream_overcap","diagnostic_identity_first_field","diagnostic_digest_mismatch","diagnostic_success_output","diagnostic_unknown_request_error","diagnostic_observed_timeout","diagnostic_schema_extra_field","diagnostic_schema_arbitrary_enum","diagnostic_record_over_2048","diagnostic_primary_first_failure_preserved","diagnostic_output_write_error","diagnostic_utf8_malformed","diagnostic_input_id_rejected"],root=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-public'),hash=b=>createHash('sha256').update(b).digest('hex');
-          try{await access(join(root,'result.json'));}
-          catch{
-           await mkdir(root,{mode:0o700,recursive:true});let core;try{core=await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs'));}catch{core=Buffer.alloc(0);}
-           const result={purpose:'afw.readonly-receipt-inspector.CONTROLS.safe.v1',repository:'tokenizartinfo-ops/agent-friendly-web',ref:'refs/heads/feat/finite-native-cleanup-20261101',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,node:'22.23.4',status:'failed',expected:ids.length,completed:0,passed:0,failed:0,inventory:ids.map(id=>({id,status:'not_executed'})),coveredCoreSha256:hash(core),elapsedMs:0,failure:{reason:'controls_failed',control:'setup',messageBytes:null,messageSha256:null},original954:{workflowBlob:'97b37fec44696dde23daa013196a5acdb05c2f4d',verdictCounterexample:'not_executed',digestCounterexample:'not_executed'},originalArtifactAccessed:false,custodyOpened:false,SDKImported:false,I0Created:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-           const bytes=Buffer.from(JSON.stringify(result,null,2)),manifest=Buffer.from(JSON.stringify({purpose:'afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:bytes.length,sha256:hash(bytes)}]},null,2));if(bytes.length+manifest.length>65536)throw Error('closed_fallback_bound');
-           await writeFile(join(root,'result.json'),bytes,{flag:'wx',mode:0o600});await writeFile(join(root,'manifest.json'),manifest,{flag:'wx',mode:0o600});
-          }
-          NODE_FALLBACK
-          cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" <<'NODE_VERIFY'
-          
-          import assert from 'node:assert/strict';
-          import {validateControlProof} from './afw-reference-supplement-current.mjs';
-          import {readFile,readdir,lstat,writeFile} from 'node:fs/promises';
-          import {join,resolve} from 'node:path';
-          import {createHash} from 'node:crypto';
-          const ids=["zip_valid","zip_signed_descriptor","zip_extra","zip_traversal","zip_duplicate","zip_bad_crc","zip_link","zip_bad_range","failure_identity_valid","failure_identity_success_reject","failure_identity_role_reject","failure_identity_kind_reject","failure_identity_unknown_reject","ownership_valid","ownership_unknown_reject","ownership_enum_reject","optional_missing_unknown","full_result_valid","full_result_unknown_reject","tap_valid_canaries","tap_unknown_scalar","tap_duplicate_case","tap_case_number_collision","tap_wrapper_number_collision","tap_unknown_number_collision","tap_late_diag_comment","tap_late_diag_unrelated","tap_injected_name","tap_long_line","tap_long_block","public_authenticated_valid","gate_artifact_count","gate_artifact_actual","gate_artifact_candidate","gate_artifact_duration","gate_artifact_business","gate_authenticated_count","gate_authenticated_actual","gate_authenticated_candidate","gate_authenticated_duration","gate_authenticated_business","gate_inventory_count","gate_inventory_actual","gate_inventory_candidate","gate_inventory_duration","gate_inventory_business","gate_identity_count","gate_identity_actual","gate_identity_candidate","gate_identity_duration","gate_identity_business","scalar_boolean_wrong","scalar_false_null_wrong","scalar_array_hash_wrong","scalar_half_hash_wrong","scalar_boolean_valid","scalar_null_valid","scalar_integer_valid","scalar_typed_valid","verdict_accepted","verdict_parse_timeout_old_current","verdict_other_failure","verdict_rejected_status","verdict_partial_status","verdict_missing_clock","verdict_open_over_deadline","verdict_download_over_deadline","digest_match_bare","digest_match_prefixed","digest_mismatch_old_current","digest_upload_malformed","digest_remote_malformed","metadata_wrong_id","metadata_wrong_context","metadata_stream_valid","metadata_stream_overcap","diagnostic_http_rejected","diagnostic_json_malformed","diagnostic_stream_overcap","diagnostic_identity_first_field","diagnostic_digest_mismatch","diagnostic_success_output","diagnostic_unknown_request_error","diagnostic_observed_timeout","diagnostic_schema_extra_field","diagnostic_schema_arbitrary_enum","diagnostic_record_over_2048","diagnostic_primary_first_failure_preserved","diagnostic_output_write_error","diagnostic_utf8_malformed","diagnostic_input_id_rejected"],hash=b=>createHash('sha256').update(b).digest('hex'),need=x=>{if(!x)throw Error('controls_inventory_rejected');},object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v),fields=(v,keys)=>need(object(v)&&Object.keys(v).length===keys.length&&Object.keys(v).every(x=>keys.includes(x)));
-          async function file(root,name){const p=join(root,name),s=await lstat(p);need(s.isFile()&&!s.isSymbolicLink()&&s.nlink===1&&s.size<=65536);const b=await readFile(p);need(b.length===s.size);return b;}
-          try{
-           const local=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-public'),remote=process.argv[2]==='seal'?local:join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-downloaded');
-           need(['seal','remote'].includes(process.argv[2]));
-           for(const root of [local,remote])assert.deepEqual((await readdir(root)).sort(),['manifest.json','result.json']);
-           const bodies={};for(const name of ['result.json','manifest.json']){const a=await file(local,name),b=await file(remote,name);need(a.equals(b));bodies[name]=b;}need(bodies['result.json'].length+bodies['manifest.json'].length<=65536);
-           const result=JSON.parse(bodies['result.json']),manifest=JSON.parse(bodies['manifest.json']);
-           fields(result,['purpose','repository','ref','source','run','attempt','node','status','expected','completed','passed','failed','inventory','coveredCoreSha256','elapsedMs','failure','original954','originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified','referenceSupplement']);
-           need(result.purpose==='afw.readonly-receipt-inspector.CONTROLS.safe.v1'&&result.repository==='tokenizartinfo-ops/agent-friendly-web'&&result.ref==='refs/heads/feat/finite-native-cleanup-20261101'&&result.source===process.env.GITHUB_SHA&&result.run===process.env.GITHUB_RUN_ID&&result.attempt===1&&result.node==='22.23.4');
-           need(['passed','failed'].includes(result.status)&&result.expected===ids.length&&Number.isInteger(result.completed)&&result.completed>=0&&result.completed<=ids.length&&result.passed===result.completed&&[0,1].includes(result.failed)&&Number.isSafeInteger(result.elapsedMs)&&result.elapsedMs>=0&&result.elapsedMs<=120000);
-           need(Array.isArray(result.inventory)&&result.inventory.length===ids.length);for(let n=0;n<ids.length;n++){const row=result.inventory[n];fields(row,['id','status']);need(row.id===ids[n]&&['passed','failed','not_executed'].includes(row.status));}
-           validateControlProof(result.referenceSupplement);
-           for(const [key,name]of [['moduleSha256','afw-reference-supplement-current.mjs'],['testsSha256','afw-reference-controls-current.mjs'],['bootstrapSha256','afw-reference-bootstrap-current.mjs']])need(result.referenceSupplement[key]===hash(await readFile(join(resolve(process.env.RUNNER_TEMP),name))));
-           const core=await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs'));need(result.coveredCoreSha256===hash(core));
-           fields(result.original954,['workflowBlob','verdictCounterexample','digestCounterexample']);need(result.original954.workflowBlob==='97b37fec44696dde23daa013196a5acdb05c2f4d'&&['executed_inert','not_executed'].includes(result.original954.verdictCounterexample)&&['executed_inert','not_executed'].includes(result.original954.digestCounterexample));
-           for(const key of ['originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified'])need(result[key]===false);
-           if(result.failure!==null){fields(result.failure,['reason','control','messageBytes','messageSha256']);need(result.failure.reason==='controls_failed'&&(result.failure.control==='setup'||ids.includes(result.failure.control)));need((result.failure.messageBytes===null&&result.failure.messageSha256===null)||(Number.isSafeInteger(result.failure.messageBytes)&&result.failure.messageBytes>=0&&result.failure.messageBytes<=1048576&&typeof result.failure.messageSha256==='string'&&/^[a-f0-9]{64}$/.test(result.failure.messageSha256)));}
-           if(result.status==='passed')need(result.completed===ids.length&&result.failed===0&&result.inventory.every(x=>x.status==='passed')&&result.failure===null&&result.original954.verdictCounterexample==='executed_inert'&&result.original954.digestCounterexample==='executed_inert');
-           fields(manifest,['purpose','source','run','attempt','files']);need(manifest.purpose==='afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1'&&manifest.source===process.env.GITHUB_SHA&&manifest.run===process.env.GITHUB_RUN_ID&&manifest.attempt===1&&Array.isArray(manifest.files)&&manifest.files.length===1);fields(manifest.files[0],['path','bytes','sha256']);need(manifest.files[0].path==='result.json'&&manifest.files[0].bytes===bodies['result.json'].length&&manifest.files[0].sha256===hash(bodies['result.json']));
-           await writeFile(process.env.GITHUB_OUTPUT,'inventory-verified=true\ncontrols-passed='+(result.status==='passed')+'\n',{flag:'a'});
-           console.log(JSON.stringify({purpose:'CONTROLS_READBACK',expected:result.expected,completed:result.completed,passed:result.passed,failed:result.failed,failure:result.failure,bytes:bodies['result.json'].length,sha256:hash(bodies['result.json']),manifestBytes:bodies['manifest.json'].length,manifestSha256:hash(bodies['manifest.json'])}));
-          }catch{process.exitCode=1;}
-          NODE_VERIFY
-          node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-syntax.private" 2>&1
+          node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-syntax.private" 2>&1
       - name: Materialize shared reference supplement and isolated controls
         shell: bash
         run: |
@@ -1131,81 +1088,68 @@ jobs:
           else await writeFile(process.env.GITHUB_OUTPUT,'core-sha256='+hash+'\n',{flag:'a'});
           NODE_PIN
           node "$RUNNER_TEMP/afw-core-pin.mjs" >"$RUNNER_TEMP/afw-core-pin.private" 2>&1
-      - name: Execute only the ninety-one fixed inert fixtures
-        id: controls
+      - name: Run fixed inert safety fixtures first
         shell: bash
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" controls >"$RUNNER_TEMP/afw-readonly-inspector-controls.private" 2>&1
-      - name: Execute forty reference-stage FIX1 controls and twenty-two completion barrier
-        id: reference_controls
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" fixtures >"$RUNNER_TEMP/afw-readonly-inspector-fixtures.private" 2>&1
+      - name: Download and validate the one fixed ciphertext ZIP
         shell: bash
+        env:
+          GH_ARTIFACT_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          result=0
-          timeout --kill-after=1s 10s env -i RUNNER_TEMP="$RUNNER_TEMP" GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 "$(command -v node)" --no-experimental-fetch "$RUNNER_TEMP/afw-reference-controls-current.mjs" >"$RUNNER_TEMP/afw-reference-controls-safe.json" 2>"$RUNNER_TEMP/afw-reference-controls.private" || result=$?
-          cat "$RUNNER_TEMP/afw-reference-controls-safe.json"
-          test "$result" = 0
-          node --input-type=module <<'NODE_REFERENCE_PROOF'
-          import {readFile,writeFile} from 'node:fs/promises';
-          import {join,resolve} from 'node:path';
-          import {createHash} from 'node:crypto';
-          import {pathToFileURL} from 'node:url';
-          const root=resolve(process.env.RUNNER_TEMP),hash=b=>createHash('sha256').update(b).digest('hex'),{validateControlProof}=await import(pathToFileURL(join(root,'afw-reference-supplement-current.mjs')).href);
-          const referenceSupplement={coreSha256:hash(await readFile(join(root,'afw-readonly-inspector-current.mjs'))),moduleSha256:hash(await readFile(join(root,'afw-reference-supplement-current.mjs'))),testsSha256:hash(await readFile(join(root,'afw-reference-controls-current.mjs'))),bootstrapSha256:hash(await readFile(join(root,'afw-reference-bootstrap-current.mjs'))),record:JSON.parse(await readFile(join(root,'afw-reference-controls-safe.json'),'utf8'))};
-          validateControlProof(referenceSupplement);
-          const witnessBytes=await readFile(join(root,'afw-reference-expansions-safe.json')),expectedWitness="{\"marker\":\"REFERENCE_EXPANSIONS/1\",\"expected\":22,\"completed\":22,\"inventory\":[{\"id\":\"two_valid\",\"count\":1},{\"id\":\"identities_flags\",\"count\":1},{\"id\":\"required_bounds\",\"count\":1},{\"id\":\"optional_types\",\"count\":1},{\"id\":\"array_bounds\",\"count\":1},{\"id\":\"private_canary\",\"count\":1},{\"id\":\"file_missing_bad\",\"count\":1},{\"id\":\"file_bound_links\",\"count\":1},{\"id\":\"gate_no_read\",\"count\":1},{\"id\":\"timeout_cleanup\",\"count\":1},{\"id\":\"uncertain_no_cleanup\",\"count\":1},{\"id\":\"strict_envelope\",\"count\":1},{\"id\":\"lc_pair\",\"count\":1},{\"id\":\"lc_last\",\"count\":1},{\"id\":\"lc_unknown\",\"count\":1},{\"id\":\"lc_ops\",\"count\":1},{\"id\":\"lc_steps\",\"count\":1},{\"id\":\"lc_schema\",\"count\":1},{\"id\":\"lc_clean\",\"count\":1},{\"id\":\"lc_clock\",\"count\":1},{\"id\":\"lc_manifest\",\"count\":1},{\"id\":\"lc_bounds\",\"count\":1}]}\n";
-          if(witnessBytes.length>2048||witnessBytes.toString('utf8')!==expectedWitness)throw Error('expansion_witness_rejected');
-          const witness=JSON.parse(witnessBytes.toString('utf8'));
-          if(JSON.stringify(witness)+'\n'!==expectedWitness)throw Error('expansion_witness_rejected');
-          process.stdout.write(JSON.stringify(witness)+'\n');
-          const dest=join(root,'afw-readonly-inspector-controls-public'),value=JSON.parse(await readFile(join(dest,'result.json'),'utf8'));
-          value.referenceSupplement=referenceSupplement;
-          const bytes=Buffer.from(JSON.stringify(value,null,2)),manifest=Buffer.from(JSON.stringify({purpose:'afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:bytes.length,sha256:hash(bytes)}]},null,2));
-          if(bytes.length+manifest.length>65536)throw Error('closed_controls_bound');
-          await writeFile(join(dest,'result.json'),bytes);await writeFile(join(dest,'manifest.json'),manifest);
-          NODE_REFERENCE_PROOF
-      - name: Preserve strict closed CONTROLS proof on success or failure
-        id: seal
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" download >"$RUNNER_TEMP/afw-readonly-inspector-download.private" 2>&1
+      - name: Authenticate original readonly custody privately
+        shell: bash
+        env:
+          AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" open >"$RUNNER_TEMP/afw-readonly-inspector-open.private" 2>&1
+      - name: Project fixed safe facts and clean owned temporary data
         if: ${{ always() }}
         shell: bash
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.private" 2>&1
-          node "$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" seal >"$RUNNER_TEMP/afw-readonly-inspector-controls-seal.private" 2>&1
-      - name: Preserve only the exact safe pair
+          node "$RUNNER_TEMP/afw-reference-supplement-current.mjs" coordinate >"$RUNNER_TEMP/afw-readonly-inspector-project.private" 2>&1
+      - name: Publish full closed supplement and whole-envelope inventory only
+        id: publish
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          node "$RUNNER_TEMP/afw-reference-supplement-current.mjs" publish >"$RUNNER_TEMP/afw-readonly-inspector-publish.private" 2>&1
+      - name: Preserve exact safe pair for seven days
         id: artifact
-        if: ${{ always() && steps.seal.outcome == 'success' }}
+        if: ${{ always() && steps.publish.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: afw-readonly-receipt-inspection-${{ github.run_id }}-1
           path: |
-            ${{ runner.temp }}/afw-readonly-inspector-controls-public/result.json
-            ${{ runner.temp }}/afw-readonly-inspector-controls-public/manifest.json
+            ${{ runner.temp }}/afw-readonly-inspector-public/result.json
+            ${{ runner.temp }}/afw-readonly-inspector-public/manifest.json
           if-no-files-found: error
           retention-days: 7
           overwrite: false
           include-hidden-files: false
-      - name: Require successful producer before any verifier
+      - name: Require successful authenticated producer and safe upload
         if: ${{ always() }}
         shell: bash
         env:
-          CONTROLS_OUTCOME: ${{ steps.controls.outcome }}
-          REFERENCE_OUTCOME: ${{ steps.reference_controls.outcome }}
-          SEAL_OUTCOME: ${{ steps.seal.outcome }}
+          INSPECTION_VALID: ${{ steps.publish.outputs.inspection-valid }}
           UPLOAD_OUTCOME: ${{ steps.artifact.outcome }}
           CORE_SHA: ${{ steps.corepin.outputs.core-sha256 }}
         run: |
           set -euo pipefail
-          test "$CONTROLS_OUTCOME" = success
-          test "$REFERENCE_OUTCOME" = success
-          test "$SEAL_OUTCOME" = success
+          test "$INSPECTION_VALID" = true
           test "$UPLOAD_OUTCOME" = success
           test "$CORE_SHA" = d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246
 
   verifier:
     needs: producer
-    if: ${{ success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ false && success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
@@ -1457,7 +1401,7 @@ jobs:
       - name: Verify sixteen controls then the assigned safe artifact exactly once
         shell: bash
         env:
-          READBACK_KIND: controls
+          READBACK_KIND: supplement
           PRODUCER_CORE_SHA: ${{ needs.producer.outputs.core-sha256 }}
           ASSIGNED_ARTIFACT_ID: ${{ needs.producer.outputs.artifact-id }}
           UPLOADED_ARTIFACT_DIGEST: ${{ needs.producer.outputs.artifact-digest }}
