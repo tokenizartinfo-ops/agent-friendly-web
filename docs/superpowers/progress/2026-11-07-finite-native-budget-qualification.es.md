@@ -2,7 +2,15 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — 2026-11-12 03:56:27 UTC: fix round1 entregado; re-review acotada en comisión
+## CURRENT — 2026-11-12 04:04:42 UTC: fix round1 4addressed/1open; round2 R3 y preflightORD-1 separados
+
+Task1: fix round1/5 (4addressed,1open — R3 ordinary then:null falselypending; commitseaf019a..eb3b4f2). SAME reviewer budget_task1_review: R1/R2/R4/R5ADDRESSED, R3NOTfullyaddressed, Spec❌/QualityNeedsfixes;0Critical/1Important/0Minor. Fullverbatimreport reviews/2026-11-12-finite-budget-task1-fix1-re-review.es.md. No Sourcewritesdesdeentregaeb3, TEMP6f48inactive/0runs.
+
+Root leyó fix-loop.md fresh y libera SAME writer callback_receiver_impl round2/5 desdeFIX_BASE2eb3: runtime+pureQ5+TEMP+appendreportsolamente, causalRED→GREEN8Q/syntax/lint/preflight, restoresameinactiveworkflow. Brief briefs/2026-11-12-finite-budget-task1-fix-round2.md gobierna; conservaciónpromisependinggetter+data-null, ninguna nuevacualificación900s/broad/A-B. R1/R2/R4/R5 aceptados no se reabren sin roturanueva.
+
+ORD-1OPENintegration: Root prepara investigaciónREADONLYseparada, Sourcesf5/eaf, cuatrofiles109/73/36matched40events, no pruebas/writes/provider/secret. Brief ordinary-fourfile-readonly-preflight ysafe-failuresJSON llevanmatriz. EsdominioindependientedeR3 ydeTask1review, no ayudante/revisor duplicado ni segundoSourcewriter. Root aún no infierecausa niatribuye3nativos. Task1IN_PROGRESS/Task2retenida/Readinessfalse, ownerasleep/nointervenciónantes08Argentina.
+
+## Estado anterior — 2026-11-12 03:56:27 UTC: fix round1 entregado; re-review acotada en comisión
 
 Source eb3b4f2337b9da2611164df5505f7a0d82b591fa/tree7e63ab6e728d9abd89851b37aad3c49f88efcd2a,3189leaves, seis netpaths vsFIX_BASEeaf,3183oldprotectedexact. Core4f5blobs coinciden GREEN43145051926; reportfbc552b95667f032034c45bceb8147789e6a01b4 append44,039chars; TEMP6f48afaaf998abc9a120410a10cfca27b1afed87 INACTIVO/manualsininputs/3falseguards/3-15-5. Root normalizóbodybaef/f0f20 exacto salvoguards+helperimport/call, verificó Source/mainrefs y0runsHEAD. Writer callback_receiver_impl STOP_WRITES. No native900s nuevo liberado.
 

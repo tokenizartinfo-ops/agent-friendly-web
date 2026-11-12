@@ -1,0 +1,596 @@
+{
+  "purpose": "afw.ordinary-four-file-comparison.documentation.v1",
+  "testSources": [
+    "eaf019aa872709d867aac53d9684ecdf1c21d013",
+    "f5f52660d19ec9fc634bbc49558db75582fdaf88"
+  ],
+  "workflowSource": "7fe2f275a0a0d43c9cb117d756c85836529cacc0",
+  "run": 43149728253,
+  "attempt": 1,
+  "tests": 109,
+  "passed": 73,
+  "failed": 36,
+  "failedEvents": 40,
+  "exactContextStrippedEquality": true,
+  "events": [
+    {
+      "file": "test/mcp-own-finite-entrypoints.test.mjs",
+      "line": 10,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 1,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "9b4dd8bed13ebaeeb9a8c7a0d998cb01b73b0dfdcedafa4dadb12f9631005bff"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-own-finite-entrypoints.test.mjs",
+      "line": 19,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 2,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "9b4dd8bed13ebaeeb9a8c7a0d998cb01b73b0dfdcedafa4dadb12f9631005bff"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-own-finite-entrypoints.test.mjs",
+      "line": 1,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 1,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "2512eeb638b3d8f4c36bea8feb2c71ea9829e6f73be08d61a92f8924f439f236",
+        null
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 1,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 2,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "2512eeb638b3d8f4c36bea8feb2c71ea9829e6f73be08d61a92f8924f439f236",
+        null
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 93,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 1,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "3bec950429f91db3456b3f7a0b3ede91c19793e10b30c9f4a9bda88c40b75cd5"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 99,
+      "column": 43,
+      "nesting": 0,
+      "testNumber": 2,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "3bec950429f91db3456b3f7a0b3ede91c19793e10b30c9f4a9bda88c40b75cd5"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 99,
+      "column": 43,
+      "nesting": 0,
+      "testNumber": 3,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "3bec950429f91db3456b3f7a0b3ede91c19793e10b30c9f4a9bda88c40b75cd5"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 108,
+      "column": 27,
+      "nesting": 0,
+      "testNumber": 33,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "3bec950429f91db3456b3f7a0b3ede91c19793e10b30c9f4a9bda88c40b75cd5"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 108,
+      "column": 27,
+      "nesting": 0,
+      "testNumber": 34,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "3bec950429f91db3456b3f7a0b3ede91c19793e10b30c9f4a9bda88c40b75cd5"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 108,
+      "column": 27,
+      "nesting": 0,
+      "testNumber": 35,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "3bec950429f91db3456b3f7a0b3ede91c19793e10b30c9f4a9bda88c40b75cd5"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 108,
+      "column": 27,
+      "nesting": 0,
+      "testNumber": 36,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "3bec950429f91db3456b3f7a0b3ede91c19793e10b30c9f4a9bda88c40b75cd5"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 108,
+      "column": 27,
+      "nesting": 0,
+      "testNumber": 37,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "3bec950429f91db3456b3f7a0b3ede91c19793e10b30c9f4a9bda88c40b75cd5"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 108,
+      "column": 27,
+      "nesting": 0,
+      "testNumber": 38,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "3bec950429f91db3456b3f7a0b3ede91c19793e10b30c9f4a9bda88c40b75cd5"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 111,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 39,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "fa19d80375bc52241e86d7f45c9363105f3868f93bb1e869275f23867ffdd1ba"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 124,
+      "column": 58,
+      "nesting": 0,
+      "testNumber": 56,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "17109c25b757665eb557d9275c7b50ef0112c59e0ea7915fee98603109e1503b"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-cloud-native-cli.test.mjs",
+      "line": 124,
+      "column": 58,
+      "nesting": 0,
+      "testNumber": 57,
+      "codes": [
+        "ERR_TEST_FAILURE",
+        "ERR_ASSERTION"
+      ],
+      "messageHashes": [
+        "17109c25b757665eb557d9275c7b50ef0112c59e0ea7915fee98603109e1503b"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 1,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 3,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "2512eeb638b3d8f4c36bea8feb2c71ea9829e6f73be08d61a92f8924f439f236",
+        null
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 38,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 1,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 41,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 2,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 42,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 3,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 43,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 4,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 5,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 6,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 7,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 8,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 9,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 10,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 11,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 12,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 13,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 14,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 15,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 44,
+      "column": 172,
+      "nesting": 0,
+      "testNumber": 16,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 46,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 17,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 47,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 18,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 49,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 19,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-adoption-wait.test.mjs",
+      "line": 51,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 20,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-command.test.mjs",
+      "line": 1,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 4,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "2512eeb638b3d8f4c36bea8feb2c71ea9829e6f73be08d61a92f8924f439f236",
+        null
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-command.test.mjs",
+      "line": 33,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 14,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-command.test.mjs",
+      "line": 53,
+      "column": 1,
+      "nesting": 0,
+      "testNumber": 16,
+      "codes": [
+        "ERR_TEST_FAILURE"
+      ],
+      "messageHashes": [
+        "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e"
+      ],
+      "messageTooLarge": 0
+    }
+  ],
+  "operationalReadiness": false,
+  "completePackage": false,
+  "PCoff": false
+}
