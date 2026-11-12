@@ -1,0 +1,7 @@
+# Binding preflight — reference stage
+
+IndependentAstra/xhigh preflight f604f0ca:0Critical/1Important. ACCEPTbeforeSource: oldlastChildstepCount1+lastStepsource-pair cannot haveearliernonpairstep; enforceR2entryunknown. Concreteconsume/grant withlastStepsource-pair REQUIRESstepCount>=2. At2+ allow3enumwithoutinventingearlierentry. Same semanticvalidator acrosscoordinator/producer/verifier. Testsingletonpairunknownpositive andBOTHotherwise-coherentrehashedconsume/grantnegative throughcoordinator(reset/rejected),producer andverifier. Keep[consume,pair]/[grant,pair]positive, existing40IDs/outputcapsunchanged. NoSourcecodewrittenbeforeamendment.
+
+Semanticsclarification: nonpair helperhookalso attaches toactiveMetric at ENTRY. Fieldisrecordedentry only. Endissuer-ackpluslastentrymaynarrowhypotheses usingpublictopology; it doesNOTbyitselfcertifyoperation-specificACK/cause/effect/drain or proveexclusivecausalownership. AnyfuturecausalNativefixrequiresseparatelysufficientevidence, notenumalone.
+
+MandatorynewpositiveownedfixedfileR1/R2→realreader→coordinatorfixture prospectivelyaddressespriorMinor; comparebothFULLrows+FULLlastChildagainstseparately specified expectedvalues. DoNOTclaimMinorcloseduntilactualcurrentfixturepassesandreviews. AllotherSPECprivacy/erroridentity/noninterference/bounds/reset/currentidentity fences binding. RootmayreleaseTask1oneKEYLESS2+2onlynow; Task2HELD untilcompleteinactiveactualreview+separaterelease. UsercontinuousSYN/cloud-firstdelegationapplies; nohumanstep.
