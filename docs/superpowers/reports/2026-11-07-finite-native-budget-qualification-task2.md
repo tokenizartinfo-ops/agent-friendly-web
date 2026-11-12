@@ -1894,3 +1894,94 @@ Driver CLI is closed to fixtures/download/open/open-child/project/project-child/
 Independent publisher reuses exact current closed-schema source slices, accepts only validated safe result or fullUNKNOWN/program_unavailable fallback, and publishes onlyresult.json+manifest.json with combined64KiB limit. All five readiness/PCoff/drain flags remainfalse. Upload is exact two paths/7d/no overwrite. One assigned artifact ID GET verifies same inspector run/head/ref/name/digest/size and retention; no artifact payload download or ambiguous latest lookup. Final gate requires all auth/inventory/identity/cleanup/projection gates and assigned-ID metadata readback. Failed inspected business cases remain factual data, not falsely repaired by this read-only job. Future raw stdout/stderr stays runner-private.
 
 Only workflow + this append change versus6251777232465e212a72a11c9628f7b1b18d7321; expected3190leaves/3188protected blobs+modes unchanged, SourceCAS/readbacks required. Parent Root's independent final fullworkflow review is still required before any activation. PREPARED_UNQUALIFIED, no actual per-R cause/status inference, no passingcontrols claim. STOP after preparation readbacks.
+
+
+## Receipt inspector fix1 — one KEYLESS CONTROLS candidate, NOT original inspection
+
+Root releasec1e04bf7bfc8e99b3fdd29c744aa1531786131ab @781bfccf7288192862440f2ffc69a9ca918c4437; FIX_BASE954bcbcc/tree9a003dc1. Only workflow+appendreport; all3188others unchanged. I1–I4 remain addressed. I5 current inspectionAccepted now requires statusinspected, failurenull, all four artifact/auth/inventory/identity gates, commandSucceededfalse, actual successful fixture/download/auth/identity/projection/cleanup phases and nonnull integer download<=30000/open<=120000/parseCleanup<=15000 elapsed bounds. Rejected or partial receipts can still publish safely but cannot yield inspection-validtrue. I6 shared validateAssignedMetadata now explicitly normalizes strict-string uploadSHA with optional single knownsha256: prefix, compares exact remote prefixed SHA, keeps assignedID/name/run/head/ref/retention checks. readMetadataResponse caps streamed bytes at65536 BEFORE accumulation/JSONparse, cancels on overflow, same15s singleGET/no retry. M1 current mutants make exactlyONE readiness gatefalse and keep otherthree true with nonnull count/scalar/candidate/duration/business facts. M2 invalid-vs-missingcounts remains DEFERRED; no scope expansion.
+
+Current exact fullcore shared with amended final inspector, including unchanged inert real-data definitions. Temporary workflow has ONE Source-push/attempt1 controls-only job<=2min/Node22.23.4/contents+actionsread, NO GitHubenvironment/secrets bindings, no AFWkey supplied and no original-artifact download/open/project invocation. Fixed private controls CLI runs only source-pin/line-bound reads, CURRENT runFixtures, and strict closed controls proof. No AFWSource module import, SDK, MF/I0, actual custody or native work. All code stdNode/no npm. Controls metadata GET and safe artifact retrieval concern ONLY this newly assigned CONTROLS artifact.
+
+Original954 old verdict and old digest-format predicates were copied exactly from pinnedWF97b37fec; their inert paired old/current counterexamples are prepared, NOT claimed executed yet. CURRENT 76-control inventory:
+[
+  "zip_valid",
+  "zip_signed_descriptor",
+  "zip_extra",
+  "zip_traversal",
+  "zip_duplicate",
+  "zip_bad_crc",
+  "zip_link",
+  "zip_bad_range",
+  "failure_identity_valid",
+  "failure_identity_success_reject",
+  "failure_identity_role_reject",
+  "failure_identity_kind_reject",
+  "failure_identity_unknown_reject",
+  "ownership_valid",
+  "ownership_unknown_reject",
+  "ownership_enum_reject",
+  "optional_missing_unknown",
+  "full_result_valid",
+  "full_result_unknown_reject",
+  "tap_valid_canaries",
+  "tap_unknown_scalar",
+  "tap_duplicate_case",
+  "tap_case_number_collision",
+  "tap_wrapper_number_collision",
+  "tap_unknown_number_collision",
+  "tap_late_diag_comment",
+  "tap_late_diag_unrelated",
+  "tap_injected_name",
+  "tap_long_line",
+  "tap_long_block",
+  "public_authenticated_valid",
+  "gate_artifact_count",
+  "gate_artifact_actual",
+  "gate_artifact_candidate",
+  "gate_artifact_duration",
+  "gate_artifact_business",
+  "gate_authenticated_count",
+  "gate_authenticated_actual",
+  "gate_authenticated_candidate",
+  "gate_authenticated_duration",
+  "gate_authenticated_business",
+  "gate_inventory_count",
+  "gate_inventory_actual",
+  "gate_inventory_candidate",
+  "gate_inventory_duration",
+  "gate_inventory_business",
+  "gate_identity_count",
+  "gate_identity_actual",
+  "gate_identity_candidate",
+  "gate_identity_duration",
+  "gate_identity_business",
+  "scalar_boolean_wrong",
+  "scalar_false_null_wrong",
+  "scalar_array_hash_wrong",
+  "scalar_half_hash_wrong",
+  "scalar_boolean_valid",
+  "scalar_null_valid",
+  "scalar_integer_valid",
+  "scalar_typed_valid",
+  "verdict_accepted",
+  "verdict_parse_timeout_old_current",
+  "verdict_other_failure",
+  "verdict_rejected_status",
+  "verdict_partial_status",
+  "verdict_missing_clock",
+  "verdict_open_over_deadline",
+  "verdict_download_over_deadline",
+  "digest_match_bare",
+  "digest_match_prefixed",
+  "digest_mismatch_old_current",
+  "digest_upload_malformed",
+  "digest_remote_malformed",
+  "metadata_wrong_id",
+  "metadata_wrong_context",
+  "metadata_stream_valid",
+  "metadata_stream_overcap"
+]
+
+Commands prepared: node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs"; node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" controls; independent closed fallback; strict local seal validator; same current metadata helper; actions/download-artifact@v4 ONLY newly assigned safe pair; strict remote complete-inventory validator. Raw syntax/controls output stays runner-private. Public exactresult.json+manifest.json purposeCONTROLS, combined<=65536B, knownIDs/counts/fixedreason/messagehash-only failure; all originalArtifactAccessed/custodyOpened/SDKImported/I0Created and five operationalflagsfalse. Same assigned artifact ID remote/upload digest comparison and7d retention, then full two-file byte-equal/readback/current corehash/context/manifest/inventory checks; no original/private payload readback. Final gate requires actual controls success plus metadata+complete inventory. Failure will preserve actual closed proof and restore EXACTSAFEf7a71 complete7/manualfalse/report/0active/STOP, no repair/retry.
+
+Amended COMPLETE inactive real-inspector workflow is durably preserved as blob24a33f5913d070e577295a9c73e307cd8199a1d7, 99343 UTF8bytes (no activation); all real drivers remain, core/publisher/verdict/readback helpers match tested candidate source exactly. All final generated heredoc bytes compared statically; grammar construction only, no generated function invoked in preparation. Current controls job has not started at this report append; outcomes arePENDING. Freeze candidate until terminal/assigned-ID/inventory. Allpass permits only reconciliation of complete MANUAL/noinputs/noPush/jobliteralfalse inspector, final report/readbacks/0active/STOP for SAMEreviewer FULL954..final. No actual private inspection or Native16 retry.
