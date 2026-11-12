@@ -27,3 +27,8 @@ Specdocs/superpowers/specs/2026-11-12-readonly-reference-supplement-design.md; p
 - Required private identity/counters malformed => row invalid/allfactsunknown. Optional absent metrics remain unknown; explicit malformed optional shapes fail closed to invalid. Do not coerce strings, NaN, null or missing into zero. Source record counters remain markers; no semantic deadline/success inference in projector.
 
 Ruling: no user design check-in because Gabriel explicitly delegated choices/continuous blocks and opted out of questions; the skill exception applies. No new security authority is inferred. Preflight is complete; a focused independent interface review is requested before a concrete Task1 release. Source stays 093/F7 closed; no CI/private input access authorized yet.
+
+
+## Independent preflight result
+
+Reviewer: viable, with three concrete conditions. Root rulings in docs/superpowers/reviews/2026-11-12-reference-supplement-preflight-rulings.md: HTTP from httpSpans and recorded-zero semantics, no cleanup while child termination unconfirmed or clock renewed, valid partial transport distinct from completeness. All resolved in spec/plan before Task1. Root may release one keyless preparation attempt; actual private projection remains held. Parent Source still093/F7.

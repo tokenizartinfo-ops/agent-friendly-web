@@ -46,3 +46,8 @@ NoCryptoCore/ZIP/nativebudget/SDK/world/business/runtime/main/PR/merge/deploy/Cl
 ## Preflight clarification
 
 “Only R1/R2 paths” means only TWO ADDITIONAL receipt reads; the unchanged Core retains its already-reviewed V1 projected paths/TAP. Pin aggregate and lookup keys exactly as the preflight ledger table, not arbitrary method/epoch fields. Arrays <=256, counters <=1000000, finite relative durations <=900000ms. Empty arrays and absent observations preserve the known-count distinctions. Task1 does not modify the Core or its baseline data reads.
+
+
+## Binding preflight rulings
+
+Apply docs/superpowers/reviews/2026-11-12-reference-supplement-preflight-rulings.md: raw.httpSpans mapping; recordedGuardCount (not original measurement certainty); no deletion or renewed deadline with unconfirmed child termination; valid authenticated/cleaned/timely PARTIAL must pass transport and retain partial status, while complete requires both valid rows. Auth/time/cleanup/termination failure remains rejected. These rules supersede any ambiguous “always cleanup” or “complete-only gate” phrasing above.

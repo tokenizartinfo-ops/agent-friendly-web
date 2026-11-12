@@ -65,3 +65,8 @@
 ## Self-review and rulings
 
 AllspecsectionsmappedTask1(contract/privacy/path/clock/cleanup/currenttests/transport)orTask2(actualauthScope/onepermit/closure). Typesfixedrowstatusesandnullablemetrics; rawaggregatekeysreadpublicsourcebeforeimplementationnotguessed.Agentmaychooseinternalfunctionbreakdownbutnotcontractauthority/caps. Cloudfeaturebranchsubstituteslocalworktreebyuserpreference/keybranchrestriction; RootledgeruniqueandSourceonewriter. ExistinguseroptoutandcontinuousauthorizationpreserveSDDexecution; no newusercheck-in. SpecdesignRootchoicewithread-onlyspecialistrecommendation; not claiminghumanreviewofnewdoc. RootpreflightreviewrequiredBEFORETask1Sourcewrite/runrelease.
+
+
+## Binding preflight amendment
+
+Root accepted docs/superpowers/reviews/2026-11-12-reference-supplement-preflight-rulings.md. Task1 tests must explicitly pin exact raw writer HTTP fields/default-zero semantics, no unsafe cleanup after unconfirmed termination/no deadline renewal, and complete-or-partial transport with full provenance while rejection remains failed. Actual Task2 requires a valid transport proof, not fabricated complete rows; partial ends with preserved UNKNOWN and no automatic repeat. New HTTP aggregate key is recordedGuardCount.
