@@ -1,0 +1,132 @@
+name: AFW ordinary four-file diagnostic (INACTIVE)
+# PREPARATION ONLY. Both jobs fail closed behind literal false.
+# No input can choose a subject, target, compiler, credential, or pin.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-ord1-${{ github.ref }}-${{ github.run_id }}
+  cancel-in-progress: false
+jobs:
+  arm_a:
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-ordinary-fourfile-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Checkout immutable diagnostic workflow source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: diagnostic-code
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Checkout separate immutable subject with full history
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: f5f52660d19ec9fc634bbc49558db75582fdaf88
+          path: subject
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Exact Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+          check-latest: false
+      - name: Install existing subject lock without lifecycle scripts
+        working-directory: subject
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: One fixed synthetic arm A
+        env:
+          ORD1_WORKFLOW_SHA: ${{ github.workflow_sha }}
+        run: timeout --signal=TERM --kill-after=5s 120s node diagnostic-code/scripts/diagnostics/ordinary-fourfile.mjs A
+      - name: Preserve a safe receipt even when setup or deadline failed
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          mkdir -p ord1-safe-A
+          if [ ! -f ord1-safe-A/result.json ]; then
+            printf '%s\n' '{"purpose":"afw.ordinary-fourfile.diagnostic.v1","status":"setup_or_deadline_incomplete","arm":"A","operationalReadiness":false,"completePackage":false,"PCoff":false}' > ord1-safe-A/result.json
+          fi
+      - name: Preserve only closed safe JSON files for seven days
+        if: ${{ always() }}
+        id: safe_artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-ord1-A-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ord1-safe-A/result.json
+            ord1-safe-A/manifest.json
+          retention-days: 7
+          if-no-files-found: error
+      - name: Publish exact artifact inventory for independent readback
+        if: ${{ always() && steps.safe_artifact.outcome == 'success' }}
+        env:
+          ARTIFACT_ID: ${{ steps.safe_artifact.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.safe_artifact.outputs.artifact-digest }}
+        shell: bash
+        run: |
+          [[ "$ARTIFACT_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$ARTIFACT_DIGEST" =~ ^[a-f0-9]{64}$ ]]
+          printf 'ORD1 artifact A: id=%s sha256=%s retention-days=7\n' "$ARTIFACT_ID" "$ARTIFACT_DIGEST"
+  arm_b:
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-ordinary-fourfile-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Checkout immutable diagnostic workflow source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: diagnostic-code
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Checkout separate immutable subject with full history
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: f5f52660d19ec9fc634bbc49558db75582fdaf88
+          path: subject
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Exact Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+          check-latest: false
+      - name: Install existing subject lock without lifecycle scripts
+        working-directory: subject
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: One fixed synthetic arm B
+        env:
+          ORD1_WORKFLOW_SHA: ${{ github.workflow_sha }}
+        run: timeout --signal=TERM --kill-after=5s 120s node diagnostic-code/scripts/diagnostics/ordinary-fourfile.mjs B
+      - name: Preserve a safe receipt even when setup or deadline failed
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          mkdir -p ord1-safe-B
+          if [ ! -f ord1-safe-B/result.json ]; then
+            printf '%s\n' '{"purpose":"afw.ordinary-fourfile.diagnostic.v1","status":"setup_or_deadline_incomplete","arm":"B","operationalReadiness":false,"completePackage":false,"PCoff":false}' > ord1-safe-B/result.json
+          fi
+      - name: Preserve only closed safe JSON files for seven days
+        if: ${{ always() }}
+        id: safe_artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-ord1-B-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ord1-safe-B/result.json
+            ord1-safe-B/manifest.json
+          retention-days: 7
+          if-no-files-found: error
+      - name: Publish exact artifact inventory for independent readback
+        if: ${{ always() && steps.safe_artifact.outcome == 'success' }}
+        env:
+          ARTIFACT_ID: ${{ steps.safe_artifact.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.safe_artifact.outputs.artifact-digest }}
+        shell: bash
+        run: |
+          [[ "$ARTIFACT_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$ARTIFACT_DIGEST" =~ ^[a-f0-9]{64}$ ]]
+          printf 'ORD1 artifact B: id=%s sha256=%s retention-days=7\n' "$ARTIFACT_ID" "$ARTIFACT_DIGEST"
