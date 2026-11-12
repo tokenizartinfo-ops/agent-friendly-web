@@ -229,3 +229,21 @@ Self-review: A/B tienen la misma instrumentación y fence; única sustitución c
 ```
 
 Registro de publicación y árbol: se añadirá después del primer commit/readback, antes de STOP_WRITES. El hash de este mismo informe y el tip final se entregan externamente para evitar una autorreferencia imposible.
+
+
+## Recibo de preparación publicado / ledger final
+
+Primer commit: `1935584b2e7b188b29151d8a4d2903aa147c85d9`, padre exacto f5, árbol `dbe6d58d79146643110a48ff54c19b01b3ff278b`. Publicado por CAS expected=f5, force=false, y ref leído de nuevo en ese mismo SHA.
+
+Blobs C1 leídos por commit inmutable y contenido comparado:
+- workflow `0f004c70976f5e4e64c1e554c0ebfad8039b9921`;
+- helper `ffb470aff1e2f3d79a745e470e82a2384b88f295`;
+- informe inicial `6ca7120b056ec5dbf14019c4362d9fed1b55c7ae`.
+
+Árbol recursivo C1 no truncado: 3191 blobs = 3188 base protegidos + tres altas exactas; cero blob/modo base cambiados y ninguna eliminación. Tras publicar C1, Actions API de la rama volvió a devolver `total_count:0, workflow_runs:[]`.
+
+Este apéndice constituye un segundo commit documental sólo dentro del tercer path permitido. Workflow/helper quedan con los mismos blobs C1. Se comprobarán nuevamente ref, árbol completo, tres contenidos y cero runs; el tip/árbol/hash de este informe se entregan en el contrato externo a Root para evitar autorreferencia. No nuevas pruebas ni ejecuciones para redactarlo.
+
+Self-review final del autor: ninguna reparación de producto; A/B comparten seams y cambios de seguridad; los dos false permanecen; Source/test f5 y workflow real se distinguen; no hubo helpers/reviewer/subagentes ni contactos con el writer de Source. Root conserva la revisión independiente y decisión de ejecución. No se declara que el harness esté cualificado por esta inspección estática.
+
+**STOP_WRITES al cerrar el readback de este apéndice. Cero jobs despachados. Preparación terminada; ejecución y cualificación pendientes.**
