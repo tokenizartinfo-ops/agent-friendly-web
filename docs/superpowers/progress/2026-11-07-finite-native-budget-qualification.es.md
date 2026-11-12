@@ -2,10 +2,12 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — Task2 formal fix round3/5 · exactRED/GREENPASS / SAME scoped reviewer gate
+## CURRENT — Task 2 preparation clean; one coherent native16 run released
 
-2026-11-12T13:23Z. RED43225144081/1 exactpersistedfalsecompletebug thenSAFEclosure3da; conditionalGREEN43225744579/1 Sourcea015 PASS syntaxlint/inactive/invalid/Q8/F1–F8/newownershipreadback/FULL3profiles0/3/3/12blocks. Root ONE902BRED +ONE111751BGREENZIP audits assignedIDs/digests/CRC/completeinventories/context/pins. [Primaryproof](../reviews/2026-11-12-finite-budget-native-round3-primary.md).
-FINALSTOPSource872ea434/tree07413d37/report9315ae53/world5fb78c05/WFEXACTsafeF7a71complete7manualfalse/3183protected/0active. Rootref/fullfiles/reportappend/4commit2filecompleteU10 compare verified. [SAMEreviewerpackage](../reviews/2026-11-12-finite-budget-native-round3-review-package.md) coversFULL2baae..872e/F9+newbreakageONLY. Round3OPENuntilverdict; priorF1–F8closed. No newSourcejob/native16 yet. O5independentROpostfailurecaptureproposalreceived; no code/probeauthorized. Native16/Task2final/GLOBAL296/PCoffpending, readinessfalse.
+2026-11-12 13:35UTC. Task 2: fix round3/5 (1 addressed, 0 open; commits2baae765..872ea434). The same reviewer approved F9 and found no new breakage; priorF1–F8 remain closed. [Review](../reviews/2026-11-12-finite-budget-native-fix-round3-review.md).
+Read-only activation preflight passed13:32:45UTC at Source872ea434/WFexactf7a71/zeroactive. Root independently checked seven held jobs, DAG width3 and existing environment references; live key/clock/replica facts remain unobserved.
+[ONE frozen-source native16 release](../briefs/2026-11-12-finite-budget-native16-single-run.md): only trigger+seven guards/report may change; original code/clocks/custody/Dlineage unchanged. Before-I0 gates, finite7jobs, no replay/repair/retry; exactsafe f7a71 restoration/report/readbacks/STOP after terminal. Source writer may execute only this one batch; actual activation SHA/run still pending.
+Success must be genuine coherent8Q+3R+4D+P1 with0fail/cancel/skip/todo; finalTask2 andGLOBAL296 review still required. O5 post-failure location proposal is read-only, no probe yet. ActualCF/runtime/PCoff pending and readinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 

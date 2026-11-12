@@ -1,14 +1,16 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 2026-11-12 13:04 UTC · Task2 round2 scoped review ACTIVE after coveringPASS
+## CURRENT — Task 2 preparation clean; one coherent native16 run released
 
-Actual covering43222147327/1 Source8735e1b9/contracts131196068335 SUCCESS: fixed5syntax/lint/inactive1/business0/invalidrejection, Q8exact8pass/0failcancelSkipTodo, F1–F8 allpass(F8sixcases) and3FULLstrictprofilespositive0SYN/readonly3/reduction_a3,12primaryblocks. Root ONE RAM111851B ZIP13944719793/digest91a2ddba/CRC/exact10inventory/context/fullmanifest/uniqueM61QA115/rawprotectedpins verified. [Primary proof](../reviews/2026-11-12-finite-budget-native-round2-green-primary.md) blobda5061c5.
+2026-11-12 13:35UTC. Task 2: fix round3/5 (1 addressed, 0 open; commits2baae765..872ea434). The same reviewer approved F9 and found no new breakage; priorF1–F8 remain closed. [Review](../reviews/2026-11-12-finite-budget-native-fix-round3-review.md).
+Read-only activation preflight passed13:32:45UTC at Source872ea434/WFexactf7a71/zeroactive. Root independently checked seven held jobs, DAG width3 and existing environment references; live key/clock/replica facts remain unobserved.
+[ONE frozen-source native16 release](../briefs/2026-11-12-finite-budget-native16-single-run.md): only trigger+seven guards/report may change; original code/clocks/custody/Dlineage unchanged. Before-I0 gates, finite7jobs, no replay/repair/retry; exactsafe f7a71 restoration/report/readbacks/STOP after terminal. Source writer may execute only this one batch; actual activation SHA/run still pending.
+Success must be genuine coherent8Q+3R+4D+P1 with0fail/cancel/skip/todo; finalTask2 andGLOBAL296 review still required. O5 post-failure location proposal is read-only, no probe yet. ActualCF/runtime/PCoff pending and readinessfalse.
 
-FINALSTOPSource2baae7652c450265a56acaf70aba772b0a12a727/tree60dbb30172bab4513c51cb46804f741b0db3a984/report901479df4f9c11de3f681bac5671e881e6d62d69/WFf7a71f1aCOMPLETE7latestFIXEDsealer/manual/noinputs/nopush/allfalse. Coveredcodeworld5f349fdb/cleanup2f5dad6c/persistencee0dda1fd; other2unchanged. Root fullref/content/reportappend/13commit5pathdiff validated, writerfull3190/3183protected/0active proof. Same prior reviewer budget_native_prequalification_review ACTIVE on formalround2 FULLd9b7..2baa. [Complete U10package](../reviews/2026-11-12-finite-budget-native-round2-review-package.md) blobfbcd3f16 includesallcommits/7snapshots/verbatimF2/F5/F8/reportappend. Formalround2 OPEN pendingverdict; no newSourcejobs/fixes/native16 licensed. Other5closedfindingsunlessnewbreakage.
 
-Task1complete; Task2 actualcoherent16, taskfinalreview and GLOBAL296review remainheld. OrdinaryOwnImport failure9b4 unresolved; O4closed0248/helperfd03/workflowaf862,0matches boundedstaticdictionary only. O5 independent failure_boundaries_impl READONLY now assesses explicitly post-failure stack-location observation vs earliertransparent-accessor constraints; proposal ONLY/no code/build/probe/jobs. New agency does not claim transparent cache/global restoration or alter originalimportbeforefailure.
-
-Fullcloudnotice/usefulwork/withdrawal/closure/realPCoff stillpending; no newuserstepneedednow and no launchdate asserted. Actualprovider/runtimeUNKNOWN inSYNunits; no main/production/CF/OAuth/keys/permissions/Max/mail changes. operationalReadiness/completePackage/PCofffalse. LastChavo relaycheck12:32:18Z:0AFWrequests; no monitorschanged.
+Task1 complete. Source872e/tree07413d37/code5fb78c05/report9315ae53 is the reviewed parent. All preparation controls and full compile profiles passed43225744579; Root independent artifact13946698704/digestea941332/full10manifest/pins verified. No unreviewed code activation.
+Ordinary own-import9b4 remains unresolved. O4closed0248/helperfd03/workflowaf862; the new O5 readonly proposal accepts explicitly post-failure cache/formatter effects and low-authority locations only. Implementation/probe not yet released.
+No browser/OTP/credentials needed now. Actual provider/runtime state is UNKNOWN in these SYN units. Full cloud notice/useful work/withdrawal/closure and real PC-off remain pending. Last Chavo relay check12:32Z: no AFW requests; no monitor changes.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
