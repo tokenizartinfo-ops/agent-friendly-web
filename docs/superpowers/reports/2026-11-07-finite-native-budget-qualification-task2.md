@@ -1436,3 +1436,53 @@ Regression FIRST; lifecycle complete calculation unchanged. One fixed verify-rou
 One Node22.23.4/Ubuntu24.04 <=2min keyless focused job, locked install, ONE fixed CLI invocation ONLY/no Q8/broadtests/F1–F8/compileprofiles/MF/I0/businessSDK. Raw commandstdout/stderr runner-private untilcleanup. Independent standardNode publisher strictly validates/projects closed result.json purpose afw.round3-owned-closure-red.safe.v1 and manifest.json purpose afw.round3-owned-closure-manifest.safe.v1; only booleans/numericcounts/fixed enums/context and typed/hash-only errors, no rawSource/messages/stack/TAP. First exact assignedID digest/fullinventory/context/local byte-equality readback, bounded retrieval2/3 only for visibility. Actual command exit retained; workflow terminalFAILURE expected only when exactcausaldeficitobserved. Source frozen through proof/readbacks.
 
 Consumers inspected: complete gates successful no-adapter custody and five occurrence/mount custody proof in aggregate; native business completed/status fields are separate. After exact expectedRED only, preauthorized minimal condition will require empty ancillarylist AND certainty/disposal/archive for each owned actual resource, without adding primaryD to ancillarycount or altering Erroridentity. Safe partial preassignment/no-MF archives and resource-free operation-error semantics remain permitted. No change yet. ExpectedRED closes safely to EXACTknownSAFEf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/manual7false/report/readbacks before conditionally continuing ONE fresh fullcoveringGREEN; unforeseenRED/GREENfailure means STOP/no repairretry. Oldunsafe c72 is NOT rollback for round3. Native16/main/production/SDK/pins/clock/keys/custody allHELD/unchanged.
+
+
+## Round3 exact causal RED observed and SAFE inactive closure
+
+Run43225144081/attempt1/Source276a2dad4ffadd1de3b978caedac70cfb7cb7ed6/treee0afce74932902de3319cb4061e6ce5ee1393f92, worlda2daecfd25dc3120a52b8f8cd9c9d77aad1bd811/TEMP15b4e825c5152028672c5e8a6c7d7e77a0f7a5cf. Job131206290914 terminalFAILURE as intended, actualCLIexit1; job2026-11-12T13:12:55Z..2026-11-12T13:13:21Z/runupdated2026-11-12T13:13:22Z. All setup/lockedinstall/currentfixedcase/publication/readbacks succeeded; final expectedcompletefalse assertion produced the business-test failure. No unrelated/setupfailure. Exactly one fixed case/no MF/I0/SDKbusiness/othercontrols/profiles.
+
+ACTUAL closed persistedfile proof:
+
+```json
+{
+  "purpose": "afw.round3-owned-closure-red.safe.v1",
+  "source": "276a2dad4ffadd1de3b978caedac70cfb7cb7ed6",
+  "run": "43225144081",
+  "attempt": 1,
+  "case": "dispose_reject",
+  "stage": "complete",
+  "facts": {
+    "actualComplete": true,
+    "expectedComplete": false,
+    "ancillaryFailureCount": 0,
+    "disposalUncertain": true,
+    "disposed": false,
+    "archived": false,
+    "originalErrorSame": true,
+    "originalAttempts": 1,
+    "checkpointCopies": 0,
+    "sourceRetained": true,
+    "poisonPreserved": true
+  },
+  "error": null,
+  "expectedCausalRed": true,
+  "commandExit": 1,
+  "valid": true,
+  "reason": "none",
+  "I0Opened": false,
+  "nativeExecutionProduced": false,
+  "businessCases": 0,
+  "operationalReadiness": false,
+  "completePackage": false,
+  "PCoff": false,
+  "globalNativeDrainVerified": false,
+  "sdkNamespaceEmptyVerified": false
+}
+```
+
+Every required exact conditional gate is true: stagecomplete/errornull/valid/expectedCausalRed, ownershipactualcompletetrue vsfalseexpected, uncertaintrue/disposedfalse/archivedfalse/ancillaryFailureCount0/originalDsame/oneattempt/copies0/sourceRetained/poisonpreserved. The new regression read actual ownership.json from CURRENT lifecycle; closurealgorithm unchanged at RED. This authorizes only the already released minimalF9condition+regression and ONEcoveringGREEN, not retryingRED or broadfix.
+
+Artifact13946878606/finite-budget-round3-owner-red-276a2dad4ffadd1de3b978caedac70cfb7cb7ed6, ZIP902B/SHA25674c63bd204078135be1a4c42749735d93eb15602f669e29ee542fb5b72ba6de1, expires2026-11-19T13:13:16Z. Exact result.json and manifest.json; purposes afw.round3-owned-closure-red.safe.v1 / afw.round3-owned-closure-manifest.safe.v1. FIRST assignedsameIDdownloadSUCCESS, actual uploaded/downloaded digestmatched/full2inventory+manifest/context/localbytes SUCCESS; retrieval2/3SKIPPED. PublicrawSource/messages/log/TAP/stack absent; privatecommandlog runner-only untilcleanup.
+
+Failure/RED closure restores EXACTknownSAFEf7a71f1a0fa4f5ddf069ff411f008a098455e5cc COMPLETE7/manual/noinputs/nopush/all7false, reportappend and fullref/tree/3183protected/3190leaf/closure0runs/zeroactive readbacks before conditionrepair. No unsafec72 fallback. This expectedRED closure is not a stop of preauthorized conditional work; after readback proceed minimalresource-complete predicate and persistedcontrol, oneGREEN. Unexpected nextfailure mustrestoreSAFEf7a71/reportSTOP with noautoretry. FormalFIX_BASE2baae765 andNative16HELD unchanged.
