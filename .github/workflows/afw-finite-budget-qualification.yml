@@ -1,7 +1,9 @@
-name: AFW readonly reference supplement QUALIFIED_INACTIVE
-run-name: AFW readonly reference supplement INACTIVE ${{ github.sha }}
+name: AFW reference supplement TWO-JOB KEYLESS CONTROLS
+run-name: AFW reference supplement FIX1 SERIAL CONTROLS ONLY ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
 permissions:
   contents: read
   actions: read
@@ -10,10 +12,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   producer:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    environment: afw-finite-syn-checkpoint
+    timeout-minutes: 2
     outputs:
       artifact-id: ${{ steps.artifact.outputs.artifact-id }}
       artifact-digest: ${{ steps.artifact.outputs.artifact-digest }}
@@ -21,19 +22,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: tokenizartinfo-ops/agent-friendly-web
-          ref: '19789b5f31935e0b5be00cbb24c5f45de2a0100a'
           persist-credentials: false
           fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22.23.4'
-      - name: Materialize fixed current inspector
+      - name: Materialize current exact code and finite safe proof validators
         shell: bash
         run: |
           set -euo pipefail
           umask 077
-          test ! -e "$RUNNER_TEMP/afw-readonly-inspector-current.mjs"
           cat >"$RUNNER_TEMP/afw-readonly-inspector-current.mjs" <<'NODE_CORE'
           import assert from 'node:assert/strict';
           import {readFile,writeFile,mkdir,mkdtemp,readdir,lstat,realpath,rm,open} from 'node:fs/promises';
@@ -538,7 +536,52 @@ jobs:
           }
           if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)main().catch(async error=>{if(process.argv[2]==='project-child')try{await writeFile(projectErrorPath(),JSON.stringify({reason:error instanceof Rejected&&REASONS.includes(error.reason)?error.reason:'parse_failed'}),{flag:'wx',mode:0o600});}catch{}process.exitCode=1;});
           NODE_CORE
-          node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-syntax.private" 2>&1
+          cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" <<'NODE_FALLBACK'
+          
+          import {access,readFile,writeFile,mkdir} from 'node:fs/promises';
+          import {join,resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          const ids=["zip_valid","zip_signed_descriptor","zip_extra","zip_traversal","zip_duplicate","zip_bad_crc","zip_link","zip_bad_range","failure_identity_valid","failure_identity_success_reject","failure_identity_role_reject","failure_identity_kind_reject","failure_identity_unknown_reject","ownership_valid","ownership_unknown_reject","ownership_enum_reject","optional_missing_unknown","full_result_valid","full_result_unknown_reject","tap_valid_canaries","tap_unknown_scalar","tap_duplicate_case","tap_case_number_collision","tap_wrapper_number_collision","tap_unknown_number_collision","tap_late_diag_comment","tap_late_diag_unrelated","tap_injected_name","tap_long_line","tap_long_block","public_authenticated_valid","gate_artifact_count","gate_artifact_actual","gate_artifact_candidate","gate_artifact_duration","gate_artifact_business","gate_authenticated_count","gate_authenticated_actual","gate_authenticated_candidate","gate_authenticated_duration","gate_authenticated_business","gate_inventory_count","gate_inventory_actual","gate_inventory_candidate","gate_inventory_duration","gate_inventory_business","gate_identity_count","gate_identity_actual","gate_identity_candidate","gate_identity_duration","gate_identity_business","scalar_boolean_wrong","scalar_false_null_wrong","scalar_array_hash_wrong","scalar_half_hash_wrong","scalar_boolean_valid","scalar_null_valid","scalar_integer_valid","scalar_typed_valid","verdict_accepted","verdict_parse_timeout_old_current","verdict_other_failure","verdict_rejected_status","verdict_partial_status","verdict_missing_clock","verdict_open_over_deadline","verdict_download_over_deadline","digest_match_bare","digest_match_prefixed","digest_mismatch_old_current","digest_upload_malformed","digest_remote_malformed","metadata_wrong_id","metadata_wrong_context","metadata_stream_valid","metadata_stream_overcap","diagnostic_http_rejected","diagnostic_json_malformed","diagnostic_stream_overcap","diagnostic_identity_first_field","diagnostic_digest_mismatch","diagnostic_success_output","diagnostic_unknown_request_error","diagnostic_observed_timeout","diagnostic_schema_extra_field","diagnostic_schema_arbitrary_enum","diagnostic_record_over_2048","diagnostic_primary_first_failure_preserved","diagnostic_output_write_error","diagnostic_utf8_malformed","diagnostic_input_id_rejected"],root=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-public'),hash=b=>createHash('sha256').update(b).digest('hex');
+          try{await access(join(root,'result.json'));}
+          catch{
+           await mkdir(root,{mode:0o700,recursive:true});let core;try{core=await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs'));}catch{core=Buffer.alloc(0);}
+           const result={purpose:'afw.readonly-receipt-inspector.CONTROLS.safe.v1',repository:'tokenizartinfo-ops/agent-friendly-web',ref:'refs/heads/feat/finite-native-cleanup-20261101',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,node:'22.23.4',status:'failed',expected:ids.length,completed:0,passed:0,failed:0,inventory:ids.map(id=>({id,status:'not_executed'})),coveredCoreSha256:hash(core),elapsedMs:0,failure:{reason:'controls_failed',control:'setup',messageBytes:null,messageSha256:null},original954:{workflowBlob:'97b37fec44696dde23daa013196a5acdb05c2f4d',verdictCounterexample:'not_executed',digestCounterexample:'not_executed'},originalArtifactAccessed:false,custodyOpened:false,SDKImported:false,I0Created:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
+           const bytes=Buffer.from(JSON.stringify(result,null,2)),manifest=Buffer.from(JSON.stringify({purpose:'afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:bytes.length,sha256:hash(bytes)}]},null,2));if(bytes.length+manifest.length>65536)throw Error('closed_fallback_bound');
+           await writeFile(join(root,'result.json'),bytes,{flag:'wx',mode:0o600});await writeFile(join(root,'manifest.json'),manifest,{flag:'wx',mode:0o600});
+          }
+          NODE_FALLBACK
+          cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" <<'NODE_VERIFY'
+          
+          import assert from 'node:assert/strict';
+          import {validateControlProof} from './afw-reference-supplement-current.mjs';
+          import {readFile,readdir,lstat,writeFile} from 'node:fs/promises';
+          import {join,resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          const ids=["zip_valid","zip_signed_descriptor","zip_extra","zip_traversal","zip_duplicate","zip_bad_crc","zip_link","zip_bad_range","failure_identity_valid","failure_identity_success_reject","failure_identity_role_reject","failure_identity_kind_reject","failure_identity_unknown_reject","ownership_valid","ownership_unknown_reject","ownership_enum_reject","optional_missing_unknown","full_result_valid","full_result_unknown_reject","tap_valid_canaries","tap_unknown_scalar","tap_duplicate_case","tap_case_number_collision","tap_wrapper_number_collision","tap_unknown_number_collision","tap_late_diag_comment","tap_late_diag_unrelated","tap_injected_name","tap_long_line","tap_long_block","public_authenticated_valid","gate_artifact_count","gate_artifact_actual","gate_artifact_candidate","gate_artifact_duration","gate_artifact_business","gate_authenticated_count","gate_authenticated_actual","gate_authenticated_candidate","gate_authenticated_duration","gate_authenticated_business","gate_inventory_count","gate_inventory_actual","gate_inventory_candidate","gate_inventory_duration","gate_inventory_business","gate_identity_count","gate_identity_actual","gate_identity_candidate","gate_identity_duration","gate_identity_business","scalar_boolean_wrong","scalar_false_null_wrong","scalar_array_hash_wrong","scalar_half_hash_wrong","scalar_boolean_valid","scalar_null_valid","scalar_integer_valid","scalar_typed_valid","verdict_accepted","verdict_parse_timeout_old_current","verdict_other_failure","verdict_rejected_status","verdict_partial_status","verdict_missing_clock","verdict_open_over_deadline","verdict_download_over_deadline","digest_match_bare","digest_match_prefixed","digest_mismatch_old_current","digest_upload_malformed","digest_remote_malformed","metadata_wrong_id","metadata_wrong_context","metadata_stream_valid","metadata_stream_overcap","diagnostic_http_rejected","diagnostic_json_malformed","diagnostic_stream_overcap","diagnostic_identity_first_field","diagnostic_digest_mismatch","diagnostic_success_output","diagnostic_unknown_request_error","diagnostic_observed_timeout","diagnostic_schema_extra_field","diagnostic_schema_arbitrary_enum","diagnostic_record_over_2048","diagnostic_primary_first_failure_preserved","diagnostic_output_write_error","diagnostic_utf8_malformed","diagnostic_input_id_rejected"],hash=b=>createHash('sha256').update(b).digest('hex'),need=x=>{if(!x)throw Error('controls_inventory_rejected');},object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v),fields=(v,keys)=>need(object(v)&&Object.keys(v).length===keys.length&&Object.keys(v).every(x=>keys.includes(x)));
+          async function file(root,name){const p=join(root,name),s=await lstat(p);need(s.isFile()&&!s.isSymbolicLink()&&s.nlink===1&&s.size<=65536);const b=await readFile(p);need(b.length===s.size);return b;}
+          try{
+           const local=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-public'),remote=process.argv[2]==='seal'?local:join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-downloaded');
+           need(['seal','remote'].includes(process.argv[2]));
+           for(const root of [local,remote])assert.deepEqual((await readdir(root)).sort(),['manifest.json','result.json']);
+           const bodies={};for(const name of ['result.json','manifest.json']){const a=await file(local,name),b=await file(remote,name);need(a.equals(b));bodies[name]=b;}need(bodies['result.json'].length+bodies['manifest.json'].length<=65536);
+           const result=JSON.parse(bodies['result.json']),manifest=JSON.parse(bodies['manifest.json']);
+           fields(result,['purpose','repository','ref','source','run','attempt','node','status','expected','completed','passed','failed','inventory','coveredCoreSha256','elapsedMs','failure','original954','originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified','referenceSupplement']);
+           need(result.purpose==='afw.readonly-receipt-inspector.CONTROLS.safe.v1'&&result.repository==='tokenizartinfo-ops/agent-friendly-web'&&result.ref==='refs/heads/feat/finite-native-cleanup-20261101'&&result.source===process.env.GITHUB_SHA&&result.run===process.env.GITHUB_RUN_ID&&result.attempt===1&&result.node==='22.23.4');
+           need(['passed','failed'].includes(result.status)&&result.expected===ids.length&&Number.isInteger(result.completed)&&result.completed>=0&&result.completed<=ids.length&&result.passed===result.completed&&[0,1].includes(result.failed)&&Number.isSafeInteger(result.elapsedMs)&&result.elapsedMs>=0&&result.elapsedMs<=120000);
+           need(Array.isArray(result.inventory)&&result.inventory.length===ids.length);for(let n=0;n<ids.length;n++){const row=result.inventory[n];fields(row,['id','status']);need(row.id===ids[n]&&['passed','failed','not_executed'].includes(row.status));}
+           validateControlProof(result.referenceSupplement);
+           for(const [key,name]of [['moduleSha256','afw-reference-supplement-current.mjs'],['testsSha256','afw-reference-controls-current.mjs'],['bootstrapSha256','afw-reference-bootstrap-current.mjs']])need(result.referenceSupplement[key]===hash(await readFile(join(resolve(process.env.RUNNER_TEMP),name))));
+           const core=await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs'));need(result.coveredCoreSha256===hash(core));
+           fields(result.original954,['workflowBlob','verdictCounterexample','digestCounterexample']);need(result.original954.workflowBlob==='97b37fec44696dde23daa013196a5acdb05c2f4d'&&['executed_inert','not_executed'].includes(result.original954.verdictCounterexample)&&['executed_inert','not_executed'].includes(result.original954.digestCounterexample));
+           for(const key of ['originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified'])need(result[key]===false);
+           if(result.failure!==null){fields(result.failure,['reason','control','messageBytes','messageSha256']);need(result.failure.reason==='controls_failed'&&(result.failure.control==='setup'||ids.includes(result.failure.control)));need((result.failure.messageBytes===null&&result.failure.messageSha256===null)||(Number.isSafeInteger(result.failure.messageBytes)&&result.failure.messageBytes>=0&&result.failure.messageBytes<=1048576&&typeof result.failure.messageSha256==='string'&&/^[a-f0-9]{64}$/.test(result.failure.messageSha256)));}
+           if(result.status==='passed')need(result.completed===ids.length&&result.failed===0&&result.inventory.every(x=>x.status==='passed')&&result.failure===null&&result.original954.verdictCounterexample==='executed_inert'&&result.original954.digestCounterexample==='executed_inert');
+           fields(manifest,['purpose','source','run','attempt','files']);need(manifest.purpose==='afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1'&&manifest.source===process.env.GITHUB_SHA&&manifest.run===process.env.GITHUB_RUN_ID&&manifest.attempt===1&&Array.isArray(manifest.files)&&manifest.files.length===1);fields(manifest.files[0],['path','bytes','sha256']);need(manifest.files[0].path==='result.json'&&manifest.files[0].bytes===bodies['result.json'].length&&manifest.files[0].sha256===hash(bodies['result.json']));
+           await writeFile(process.env.GITHUB_OUTPUT,'inventory-verified=true\ncontrols-passed='+(result.status==='passed')+'\n',{flag:'a'});
+           console.log(JSON.stringify({purpose:'CONTROLS_READBACK',expected:result.expected,completed:result.completed,passed:result.passed,failed:result.failed,failure:result.failure,bytes:bodies['result.json'].length,sha256:hash(bodies['result.json']),manifestBytes:bodies['manifest.json'].length,manifestSha256:hash(bodies['manifest.json'])}));
+          }catch{process.exitCode=1;}
+          NODE_VERIFY
+          node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-syntax.private" 2>&1
       - name: Materialize shared reference supplement and isolated controls
         shell: bash
         run: |
@@ -612,13 +655,13 @@ jobs:
            if(intermediate)need(v.phases.cleanup==='not_attempted'&&v.timings.parseCleanupMs===null,'inspection_intermediate');else need(inspectionAccepted(v),'inspection_rejected');return v;
           }
           const STAGES=['projection','cleanup','authentication','program'],REASONS=['project_failed','projection_deadline','termination_unverified','cleanup_failed','cleanup_deadline','basis_rejected','state_rejected','program_unavailable'];
-          export function makeSupplement(inspection,ownerReference,failure){return {purpose:PURPOSE,status:failure===null?(ownerReference.every(r=>r.status==='present')?'complete':'partial'):'rejected',inspection,ownerReference,failure,...FLAGS};}
+          export function makeSupplement(inspection,ownerReference,failure){if(failure!==null)ownerReference=CASES.map(c=>unknownReference(c));return {purpose:PURPOSE,status:failure===null?(ownerReference.every(r=>r.status==='present')?'complete':'partial'):'rejected',inspection,ownerReference,failure,...FLAGS};}
           export function validateSupplementResult(v){
            exact(v,['purpose','status','inspection','ownerReference','failure',...Object.keys(FLAGS)]);need(v.purpose===PURPOSE&&['complete','partial','rejected'].includes(v.status));for(const[k,x]of Object.entries(FLAGS))need(v[k]===x);
            validatePublic(v.inspection);need(v.inspection.inspector.source===process.env.GITHUB_SHA&&v.inspection.inspector.run===process.env.GITHUB_RUN_ID,'inspection_identity');
            need(Array.isArray(v.ownerReference)&&v.ownerReference.length===2);CASES.forEach((c,i)=>validateReferenceRow(v.ownerReference[i],c));
            if(v.failure!==null){exact(v.failure,['stage','reason']);need(STAGES.includes(v.failure.stage)&&REASONS.includes(v.failure.reason));}
-           if(v.status==='rejected')need(v.failure!==null);else{need(v.failure===null);validateInspectionBasis(v.inspection);need(v.ownerReference.every(r=>r.status!=='not_examined'));need(v.status===(v.ownerReference.every(r=>r.status==='present')?'complete':'partial'));}
+           if(v.status==='rejected'){need(v.failure!==null);assert.deepEqual(v.ownerReference,CASES.map(c=>unknownReference(c)));}else{need(v.failure===null);validateInspectionBasis(v.inspection);need(v.ownerReference.every(r=>r.status!=='not_examined'));need(v.status===(v.ownerReference.every(r=>r.status==='present')?'complete':'partial'));}
            return v;
           }
           export function encodeSupplement(v){
@@ -632,23 +675,38 @@ jobs:
           }
           export function producerTransportAccepted(files){try{validateSupplementPair(files);return true;}catch{return false;}}
           function sameStat(a,b){return a.dev===b.dev&&a.ino===b.ino&&a.size===b.size&&a.mtimeNs===b.mtimeNs&&a.ctimeNs===b.ctimeNs&&a.nlink===b.nlink;}
-          async function stableFile(path,limit){
-           const h=await open(path,FSC.O_RDONLY|FSC.O_NOFOLLOW);try{const before=await h.stat({bigint:true});need(before.isFile()&&before.nlink===1n);if(before.size>BigInt(limit)){const e=new Error('oversize');e.reason='oversize';throw e;}const b=await h.readFile();const after=await h.stat({bigint:true});need(sameStat(before,after)&&BigInt(b.length)===before.size);return b;}finally{await h.close();}
+          class ReferencePolicyRejected extends Error{constructor(reason='invalid'){super(reason);this.reason=reason;}}
+          function referencePolicy(ok,reason='invalid'){if(!ok)throw new ReferencePolicyRejected(reason);}
+          function readerFault(fault,stage){
+           if(fault===null)return;
+           // Narrow credentialless test fault only: no alternate path, filesystem implementation or runtime override.
+           need(process.env.GITHUB_SHA==='0'.repeat(40)&&process.env.GITHUB_RUN_ID==='1'&&!Object.hasOwn(process.env,'GITHUB_REPOSITORY')&&!Object.hasOwn(process.env,'AFW_SYN_CHECKPOINT_KEY'));
+           exact(fault,['stage','code']);need(['directory_stat','open','file_stat','file_read','directory_recheck'].includes(fault.stage)&&['EIO','EACCES'].includes(fault.code));
+           if(fault.stage===stage){const error=new Error('reader_unavailable');error.code=fault.code;throw error;}
           }
-          export async function readReference(plain,caseName){
+          async function stableFile(path,limit,fault=null){
+           readerFault(fault,'open');const h=await open(path,FSC.O_RDONLY|FSC.O_NOFOLLOW);
+           try{readerFault(fault,'file_stat');const before=await h.stat({bigint:true});referencePolicy(before.isFile()&&before.nlink===1n);referencePolicy(before.size<=BigInt(limit),'oversize');readerFault(fault,'file_read');const b=await h.readFile();const after=await h.stat({bigint:true});referencePolicy(sameStat(before,after)&&BigInt(b.length)===before.size);return b;}finally{await h.close();}
+          }
+          export async function readReference(plain,caseName,testFault=null){
            need(CASES.includes(caseName));try{
             const dirs=[plain,join(plain,'output'),join(plain,'output','owner-reference')],identities=[];
-            for(const d of dirs){const s=await lstat(d,{bigint:true});need(s.isDirectory()&&!s.isSymbolicLink()&&await realpath(d)===d);identities.push(s);}
-            const b=await stableFile(join(dirs[2],'budget-'+caseName+'.json'),MAX);
-            for(let n=0;n<dirs.length;n++){const s=await lstat(dirs[n],{bigint:true});need(s.isDirectory()&&!s.isSymbolicLink()&&sameStat(s,identities[n])&&await realpath(dirs[n])===dirs[n]);}
-            return projectReferenceReceipt(JSON.parse(utf8(b)),caseName);
-           }catch(e){return unknownReference(caseName,e?.code==='ENOENT'?'missing':e?.reason==='oversize'?'oversize':'invalid');}
+            for(const d of dirs){readerFault(testFault,'directory_stat');const s=await lstat(d,{bigint:true});referencePolicy(s.isDirectory()&&!s.isSymbolicLink()&&await realpath(d)===d);identities.push(s);}
+            const b=await stableFile(join(dirs[2],'budget-'+caseName+'.json'),MAX,testFault);
+            for(let n=0;n<dirs.length;n++){readerFault(testFault,'directory_recheck');const s=await lstat(dirs[n],{bigint:true});referencePolicy(s.isDirectory()&&!s.isSymbolicLink()&&sameStat(s,identities[n])&&await realpath(dirs[n])===dirs[n]);}
+            let raw;try{raw=JSON.parse(utf8(b));}catch(e){if(e instanceof SyntaxError||e?.code==='ERR_ENCODING_INVALID_ENCODED_DATA')throw new ReferencePolicyRejected();throw e;}
+            return projectReferenceReceipt(raw,caseName);
+           }catch(e){
+            if(e?.code==='ENOENT')return unknownReference(caseName,'missing');
+            if(e instanceof ReferencePolicyRejected||['ELOOP','ENOTDIR'].includes(e?.code))return unknownReference(caseName,e?.reason==='oversize'?'oversize':'invalid');
+            throw e;
+           }
           }
           export async function coordinateSupplement(io){
            const start=io.now(),projectionEnd=start+10000,totalEnd=start+15000;
            let inspection=io.base(),rows=CASES.map(c=>unknownReference(c)),failure=null,settled=true,cleanupComplete=false;
            const fail=(stage,reason)=>{if(failure===null)failure={stage,reason};};
-           const run=async(mode,end)=>{const r=await io.run(mode,end);if(!r.settled){settled=false;failure={stage:mode==='cleanup-child'?'cleanup':'projection',reason:'termination_unverified'};}else if(!r.ok)fail(mode==='cleanup-child'?'cleanup':'projection',mode==='cleanup-child'?'cleanup_failed':'project_failed');return r.settled&&r.ok;};
+           const run=async(mode,end)=>{const r=await io.run(mode,end);if(!r.settled){settled=false;fail(mode==='cleanup-child'?'cleanup':'projection','termination_unverified');}else if(!r.ok)fail(mode==='cleanup-child'?'cleanup':'projection',mode==='cleanup-child'?'cleanup_failed':'project_failed');return r.settled&&r.ok;};
            try{
             if(!await run('project-child',projectionEnd))throw 0;
             if(io.now()>projectionEnd){fail('projection','projection_deadline');throw 0;}
@@ -717,8 +775,11 @@ jobs:
            });
            await writeFile(path('afw-owner-reference-safe.json'),JSON.stringify(out),{flag:'wx',mode:0o600});return out;
           }
+          export function publicationResult(value){
+           try{return validateSupplementResult(value);}catch{return makeSupplement(baseResult(),CASES.map(c=>unknownReference(c)),{stage:'program',reason:'program_unavailable'});}
+          }
           async function publish(){
-           scope();let out;try{out=JSON.parse(utf8(await stableFile(path('afw-owner-reference-safe.json'),65536)));validateSupplementResult(out);}catch{out=makeSupplement(baseResult(),CASES.map(c=>unknownReference(c)),{stage:'program',reason:'program_unavailable'});}
+           scope();let out;try{out=publicationResult(JSON.parse(utf8(await stableFile(path('afw-owner-reference-safe.json'),65536))));}catch{out=publicationResult(null);}
            const files=encodeSupplement(out),dest=path('afw-readonly-inspector-public');await mkdir(dest,{mode:0o700});need((await readdir(dest)).length===0);for(const[name,b]of files)await writeFile(join(dest,name),b,{flag:'wx',mode:0o600});await writeFile(process.env.GITHUB_OUTPUT,'inspection-valid='+producerTransportAccepted(files)+'\n',{flag:'a'});
           }
           if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
@@ -740,11 +801,11 @@ jobs:
           function mustReject(fn){assert.throws(fn);}
           function unknown(row,status='invalid'){assert.deepEqual(row,S.unknownReference(row.case,status));}
           async function temporary(fn){const root=await mkdtemp(join(resolve(process.env.RUNNER_TEMP),'afw-supplement-fixture-'));try{return await fn(root);}finally{await rm(root,{recursive:true,force:true});}}
-          async function simulate({fail=null,settled=true,projectTime=1,cleanupTime=1,cleanupOk=true,lateValidation=false,mutate=null}={}){
+          async function simulate({fail=null,settled=true,projectTime=1,cleanupTime=1,cleanupOk=true,lateValidation=false,mutate=null,cleanupUnsettled=false,referenceOperation=null}={}){
            let clock=0;const calls=[],r=basis(true);if(mutate)mutate(r);
            const result=await S.coordinateSupplement({
             now:()=>clock,base:()=>baseResult(),
-            run:async(mode,deadline)=>{calls.push({mode,deadline});if(mode==='project-child')clock+=projectTime;if(mode==='reference-child')clock+=1;if(mode==='cleanup-child')clock+=cleanupTime;return {settled:mode===fail?settled:true,ok:mode!==fail};},
+            run:async(mode,deadline)=>{calls.push({mode,deadline});if(mode==='project-child')clock+=projectTime;if(mode==='reference-child'){clock+=1;if(referenceOperation)try{await referenceOperation();}catch{return {settled:true,ok:false};}}if(mode==='cleanup-child')clock+=cleanupTime;return {settled:mode==='cleanup-child'&&cleanupUnsettled?false:mode===fail?settled:true,ok:mode!==fail};},
             intermediate:async()=>{if(lateValidation)clock=10001;return r;},
             references:async()=>['R1','R2'].map(c=>S.projectReferenceReceipt(receipt(c),c)),
             cleaned:async()=>cleanupOk
@@ -761,18 +822,18 @@ jobs:
            empty_absent:()=>{const x=receipt();for(const k of ['children','roots','httpSpans'])x[k]=[];let r=S.projectReferenceReceipt(x,'R1');assert.deepEqual(r.children,{status:'present',count:0,knownDurationCount:0,maxElapsedMs:null,knownAbortCount:0,abortedCount:0});assert.equal(r.roots.minWindowMs,null);assert.equal(r.http.recordedGuardCount,0);for(const k of ['children','roots','httpSpans'])delete x[k];r=S.projectReferenceReceipt(x,'R1');assert.equal(r.children.status,'absent');assert.equal(r.children.count,null);assert.equal(r.http.maxBodyGuardMs,null);},
            writer_http:()=>{const r=S.projectReferenceReceipt(receipt(),'R1');assert.deepEqual(r.http,{status:'present',count:1,knownElapsedCount:1,maxElapsedMs:0.75,recordedGuardCount:1,maxBodyGuardMs:0});assert.equal(r.children.count,1);assert.equal(r.roots.minWindowMs,1.25);},
            private_canary:()=>{const x=receipt();x.trace=x.requests=x.subject=x.url=x.key=x.diagnostics='PRIVATE_CANARY';const out=JSON.stringify(S.projectReferenceReceipt(x,'R1'));assert(!out.includes('PRIVATE_CANARY'));for(const key of ['trace','requests','epoch','childStartedAt','sdkSuffixes'])assert(!out.includes('"'+key+'"'));},
-           file_missing_bad:()=>temporary(async root=>{unknown(await S.readReference(root,'R1'),'missing');await mkdir(join(root,'output','owner-reference'),{recursive:true});await writeFile(join(root,'output','owner-reference','budget-R1.json'),Buffer.from([0xff]));unknown(await S.readReference(root,'R1'));await writeFile(join(root,'output','owner-reference','budget-R1.json'),'{');unknown(await S.readReference(root,'R1'));}),
+           file_missing_bad:()=>temporary(async root=>{unknown(await S.readReference(root,'R1'),'missing');await mkdir(join(root,'output','owner-reference'),{recursive:true});await writeFile(join(root,'output','owner-reference','budget-R1.json'),Buffer.from([0xff]));unknown(await S.readReference(root,'R1'));await writeFile(join(root,'output','owner-reference','budget-R1.json'),'{');unknown(await S.readReference(root,'R1'));await writeFile(join(root,'output','owner-reference','budget-R1.json'),JSON.stringify(receipt()));for(const stage of ['directory_stat','open','file_stat','file_read','directory_recheck'])for(const code of ['EIO','EACCES']){const operation=()=>S.readReference(root,'R1',{stage,code});await assert.rejects(operation,e=>e.code===code);const {result,calls}=await simulate({referenceOperation:operation});assert.equal(result.status,'rejected');assert.equal(result.failure.reason,'project_failed');assert.deepEqual(result.ownerReference,['R1','R2'].map(c=>S.unknownReference(c)));assert.equal(calls.at(-1).mode,'cleanup-child');}}),
            file_bound_links:()=>temporary(async root=>{const p=join(root,'output','owner-reference');await mkdir(p,{recursive:true});const file=join(p,'budget-R1.json');await writeFile(file,Buffer.alloc(16*1024*1024+1));unknown(await S.readReference(root,'R1'),'oversize');await rm(file);const target=join(root,'fixture');await writeFile(target,JSON.stringify(receipt()));await symlink(target,file);unknown(await S.readReference(root,'R1'));await rm(file);await link(target,file);unknown(await S.readReference(root,'R1'));await rm(join(root,'output'),{recursive:true});await symlink(root,join(root,'output'));unknown(await S.readReference(root,'R1'));await assert.rejects(()=>S.readReference(root,'R3'));}),
            gate_no_read:async()=>{const mutations=[r=>r.inspector.source='1'.repeat(40),r=>r.inspector.run='2',r=>r.artifact.verified=false,r=>r.authentication.authenticated=false,r=>r.authentication.innerInventoryVerified=false,r=>r.failureIdentity.verified=false,r=>r.failureIdentity.commandSucceeded=null,r=>r.fixtures.checks=90,r=>r.tap.recordedCaseCount=2,r=>r.cases[0].tap.status='unknown',r=>r.failure={reason:'parse_failed',type:'rejected'},r=>r.phases.cleanup='complete'];for(const mutate of mutations){const {calls,result}=await simulate({mutate});assert(!calls.some(x=>x.mode==='reference-child'));assert.equal(result.status,'rejected');assert.equal(calls.filter(x=>x.mode==='cleanup-child').length,1);}},
            one_cleanup:async()=>{await temporary(async root=>{const p=join(root,'child.mjs');await writeFile(p,"process.stdout.write('fixture');");const t=performance.now();assert.deepEqual(await S.boundedChild(p,'unused',t+1500,t+2000),{ok:true,settled:true});await writeFile(p,"setTimeout(()=>{},10000);");const t2=performance.now();assert.deepEqual(await S.boundedChild(p,'unused',t2+100,t2+2000),{ok:false,settled:true});});const {calls,result}=await simulate();assert.deepEqual(calls.map(x=>x.mode),['project-child','reference-child','cleanup-child']);assert.equal(result.status,'complete');assert.equal(calls[0].deadline,calls[1].deadline);assert.equal(calls[2].deadline,15000);},
            primary_cleanup:async()=>{for(const fail of ['project-child','reference-child']){const {calls,result}=await simulate({fail});assert.equal(result.status,'rejected');assert.equal(calls.at(-1).mode,'cleanup-child');assert.equal(result.failure.reason,'project_failed');}},
            timeout_cleanup:async()=>{for(const options of [{projectTime:10001},{lateValidation:true}]){const {calls,result}=await simulate(options);assert.equal(result.status,'rejected');assert.equal(calls.at(-1).mode,'cleanup-child');assert.equal(result.failure.reason,'projection_deadline');}},
-           uncertain_no_cleanup:async()=>{const {calls,result}=await simulate({fail:'project-child',settled:false,projectTime:15000});assert.equal(result.failure.reason,'termination_unverified');assert.equal(result.inspection.phases.cleanup,'unknown');assert.deepEqual(calls.map(x=>x.mode),['project-child']);},
+           uncertain_no_cleanup:async()=>{const {calls,result}=await simulate({fail:'project-child',settled:false,projectTime:15000});assert.equal(result.failure.reason,'termination_unverified');assert.equal(result.inspection.phases.cleanup,'unknown');assert.deepEqual(calls.map(x=>x.mode),['project-child']);const combined=await simulate({fail:'reference-child',cleanupUnsettled:true});assert.deepEqual(combined.result.failure,{stage:'projection',reason:'project_failed'});assert.equal(combined.result.inspection.phases.cleanup,'unknown');assert.equal(combined.result.status,'rejected');assert.deepEqual(combined.result.ownerReference,['R1','R2'].map(c=>S.unknownReference(c)));},
            cleanup_late_fail:async()=>{for(const options of [{cleanupOk:false},{fail:'cleanup-child'},{cleanupTime:15000}]){const {result}=await simulate(options);assert.equal(result.status,'rejected');assert.notEqual(result.inspection.phases.cleanup,'complete');}},
            whole_hash_bytes:()=>{for(const f of [m=>m.files[0].bytes++,m=>m.files[0].sha256='0'.repeat(64)]){const p=pair(),m=JSON.parse(p.get('manifest.json'));f(m);p.set('manifest.json',Buffer.from(JSON.stringify(m)));mustReject(()=>S.validateSupplementPair(p));}const p=pair();p.set('result.json',Buffer.concat([p.get('result.json'),Buffer.from(' ')]));mustReject(()=>S.validateSupplementPair(p));},
            nested_identity:()=>{for(const f of [r=>r.inspector.source='1'.repeat(40),r=>r.inspector.run='2',r=>r.originalContext.sourceSha='1'.repeat(40),r=>r.artifact.id=1,r=>r.fixtures.checks=1,r=>r.tap.recordedCaseCount=2]){const v=value();f(v.inspection);const b=Buffer.from(JSON.stringify(v)),m={purpose:S.MANIFEST,inspectorSource:process.env.GITHUB_SHA,inspectorRun:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:b.length,sha256:hash(b)}]};mustReject(()=>S.validateSupplementPair(new Map([['result.json',b],['manifest.json',Buffer.from(JSON.stringify(m))]])));}},
            complete_partial:()=>{for(const status of ['missing','invalid','oversize']){const v=value();v.ownerReference[1]=S.unknownReference('R2',status);v.status='partial';assert.equal(S.validateSupplementPair(pair(v)).status,'partial');v.status='complete';mustReject(()=>S.validateSupplementPair(pair(v)));}},
-           strict_envelope:()=>{for(const f of [v=>v.extra=true,v=>v.ownerReference.reverse(),v=>v.PCoff=true,v=>v.ownerReference[0].basic.extra='PRIVATE_CANARY',v=>v.ownerReference[0].children.count=null,v=>v.failure={stage:'PRIVATE_CANARY',reason:'PRIVATE_CANARY'}]){const v=value();f(v);mustReject(()=>S.validateSupplementResult(v));}},
+           strict_envelope:()=>{const rejected=value();rejected.status='rejected';rejected.failure={stage:'projection',reason:'project_failed'};rejected.inspection=baseResult();mustReject(()=>S.validateSupplementResult(rejected));const published=S.publicationResult(rejected);assert.equal(published.status,'rejected');assert.deepEqual(published.ownerReference,['R1','R2'].map(c=>S.unknownReference(c)));const constructed=S.makeSupplement(baseResult(),value().ownerReference,{stage:'projection',reason:'basis_rejected'});assert.deepEqual(constructed.ownerReference,['R1','R2'].map(c=>S.unknownReference(c)));S.validateSupplementResult(constructed);for(const f of [v=>v.extra=true,v=>v.ownerReference.reverse(),v=>v.PCoff=true,v=>v.ownerReference[0].basic.extra='PRIVATE_CANARY',v=>v.ownerReference[0].children.count=null,v=>v.failure={stage:'PRIVATE_CANARY',reason:'PRIVATE_CANARY'}]){const v=value();f(v);mustReject(()=>S.validateSupplementResult(v));}},
            producer_transport:()=>{for(const v of [value(),S.makeSupplement(basis(),[S.unknownReference('R1','missing'),S.unknownReference('R2','invalid')],null)])assert.equal(S.producerTransportAccepted(S.encodeSupplement(v)),true);const v=value();v.status='rejected';v.failure={stage:'projection',reason:'project_failed'};assert.equal(S.producerTransportAccepted(S.encodeSupplement(v)),false);},
            verifier_transport:()=>{for(const v of [value(),S.makeSupplement(basis(),[S.unknownReference('R1','oversize'),S.unknownReference('R2','missing')],null)])assert.equal(S.validateSupplementPair(S.encodeSupplement(v)).status,v.status);const p=pair();p.set('third.json',Buffer.from('{}'));mustReject(()=>S.validateSupplementPair(p));}
           };
@@ -809,68 +870,76 @@ jobs:
           else await writeFile(process.env.GITHUB_OUTPUT,'core-sha256='+hash+'\n',{flag:'a'});
           NODE_PIN
           node "$RUNNER_TEMP/afw-core-pin.mjs" >"$RUNNER_TEMP/afw-core-pin.private" 2>&1
-      - name: Run fixed inert safety fixtures first
+      - name: Execute only the ninety-one fixed inert fixtures
+        id: controls
         shell: bash
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" fixtures >"$RUNNER_TEMP/afw-readonly-inspector-fixtures.private" 2>&1
-      - name: Download and validate the one fixed ciphertext ZIP
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" controls >"$RUNNER_TEMP/afw-readonly-inspector-controls.private" 2>&1
+      - name: Execute twenty-four current supplement controls in credentialless synthetic context
+        id: reference_controls
         shell: bash
-        env:
-          GH_ARTIFACT_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" download >"$RUNNER_TEMP/afw-readonly-inspector-download.private" 2>&1
-      - name: Authenticate original readonly custody privately
-        shell: bash
-        env:
-          AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
-        run: |
-          set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" open >"$RUNNER_TEMP/afw-readonly-inspector-open.private" 2>&1
-      - name: Project fixed safe facts and clean owned temporary data
+          result=0
+          timeout --kill-after=1s 10s env -i RUNNER_TEMP="$RUNNER_TEMP" GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 "$(command -v node)" --no-experimental-fetch "$RUNNER_TEMP/afw-reference-controls-current.mjs" >"$RUNNER_TEMP/afw-reference-controls-safe.json" 2>"$RUNNER_TEMP/afw-reference-controls.private" || result=$?
+          cat "$RUNNER_TEMP/afw-reference-controls-safe.json"
+          test "$result" = 0
+          node --input-type=module <<'NODE_REFERENCE_PROOF'
+          import {readFile,writeFile} from 'node:fs/promises';
+          import {join,resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          import {pathToFileURL} from 'node:url';
+          const root=resolve(process.env.RUNNER_TEMP),hash=b=>createHash('sha256').update(b).digest('hex'),{validateControlProof}=await import(pathToFileURL(join(root,'afw-reference-supplement-current.mjs')).href);
+          const referenceSupplement={coreSha256:hash(await readFile(join(root,'afw-readonly-inspector-current.mjs'))),moduleSha256:hash(await readFile(join(root,'afw-reference-supplement-current.mjs'))),testsSha256:hash(await readFile(join(root,'afw-reference-controls-current.mjs'))),bootstrapSha256:hash(await readFile(join(root,'afw-reference-bootstrap-current.mjs'))),record:JSON.parse(await readFile(join(root,'afw-reference-controls-safe.json'),'utf8'))};
+          validateControlProof(referenceSupplement);
+          const dest=join(root,'afw-readonly-inspector-controls-public'),value=JSON.parse(await readFile(join(dest,'result.json'),'utf8'));
+          value.referenceSupplement=referenceSupplement;
+          const bytes=Buffer.from(JSON.stringify(value,null,2)),manifest=Buffer.from(JSON.stringify({purpose:'afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:bytes.length,sha256:hash(bytes)}]},null,2));
+          if(bytes.length+manifest.length>65536)throw Error('closed_controls_bound');
+          await writeFile(join(dest,'result.json'),bytes);await writeFile(join(dest,'manifest.json'),manifest);
+          NODE_REFERENCE_PROOF
+      - name: Preserve strict closed CONTROLS proof on success or failure
+        id: seal
         if: ${{ always() }}
         shell: bash
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-reference-supplement-current.mjs" coordinate >"$RUNNER_TEMP/afw-readonly-inspector-project.private" 2>&1
-      - name: Publish full closed supplement and whole-envelope inventory only
-        id: publish
-        if: ${{ always() }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node "$RUNNER_TEMP/afw-reference-supplement-current.mjs" publish >"$RUNNER_TEMP/afw-readonly-inspector-publish.private" 2>&1
-      - name: Preserve exact safe pair for seven days
+          node "$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.private" 2>&1
+          node "$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" seal >"$RUNNER_TEMP/afw-readonly-inspector-controls-seal.private" 2>&1
+      - name: Preserve only the exact safe pair
         id: artifact
-        if: ${{ always() && steps.publish.outcome == 'success' }}
+        if: ${{ always() && steps.seal.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: afw-readonly-receipt-inspection-${{ github.run_id }}-1
           path: |
-            ${{ runner.temp }}/afw-readonly-inspector-public/result.json
-            ${{ runner.temp }}/afw-readonly-inspector-public/manifest.json
+            ${{ runner.temp }}/afw-readonly-inspector-controls-public/result.json
+            ${{ runner.temp }}/afw-readonly-inspector-controls-public/manifest.json
           if-no-files-found: error
           retention-days: 7
           overwrite: false
           include-hidden-files: false
-      - name: Require successful authenticated producer and safe upload
+      - name: Require successful producer before any verifier
         if: ${{ always() }}
         shell: bash
         env:
-          INSPECTION_VALID: ${{ steps.publish.outputs.inspection-valid }}
+          CONTROLS_OUTCOME: ${{ steps.controls.outcome }}
+          REFERENCE_OUTCOME: ${{ steps.reference_controls.outcome }}
+          SEAL_OUTCOME: ${{ steps.seal.outcome }}
           UPLOAD_OUTCOME: ${{ steps.artifact.outcome }}
           CORE_SHA: ${{ steps.corepin.outputs.core-sha256 }}
         run: |
           set -euo pipefail
-          test "$INSPECTION_VALID" = true
+          test "$CONTROLS_OUTCOME" = success
+          test "$REFERENCE_OUTCOME" = success
+          test "$SEAL_OUTCOME" = success
           test "$UPLOAD_OUTCOME" = success
           test "$CORE_SHA" = d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246
 
   verifier:
     needs: producer
-    if: ${{ false && success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
@@ -1027,7 +1096,7 @@ jobs:
           
           function inline(tag){const opener="<<'"+tag+"'\n",ending="          "+tag+"\n";need(wf.split(opener).length===2);const a=wf.indexOf(opener)+opener.length,b=wf.indexOf(ending,a);need(b>a);const rows=wf.slice(a,b).split('\n');need(rows.pop()==='');return rows.map(x=>{need(x.startsWith('          '));return x.slice(10);}).join('\n')+'\n';}
           const reference=inline('NODE_REFERENCE'),referenceTests=inline('NODE_REFERENCE_TESTS'),referenceBootstrap=inline('NODE_REFERENCE_BOOTSTRAP');
-          need(hash(reference)==='7fb8dea6e3fc6db00a1b320f591f223b06a0e3f81ab42ebf968ced8e17c03eeb'&&hash(referenceTests)==='e279e65887e093a5aced964dc2ea24c540b8ee031704ce46914318c590fe61bc'&&hash(referenceBootstrap)==='2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1');
+          need(hash(reference)==='8a136b3a3737450644c1c0d006952441c49cdb8986eced26ff9c141c4016d0f1'&&hash(referenceTests)==='a75191dc2288fe781cc45405097f24b68c06453645d28b408e2afe422c6c9b1a'&&hash(referenceBootstrap)==='2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1');
           for(const[name,body]of [['afw-readonly-inspector-current.mjs',core],['afw-reference-supplement-current.mjs',reference],['afw-reference-controls-current.mjs',referenceTests],['afw-reference-bootstrap-current.mjs',referenceBootstrap]])await writeFile(join(resolve(process.env.RUNNER_TEMP),name),body,{flag:'wx',mode:0o600});
           const referenceImports="\nimport {validateSupplementPair,validateControlProof} from './afw-reference-supplement-current.mjs';\nconst SOURCE_REFERENCE_SHA="+JSON.stringify(hash(reference))+",SOURCE_REFERENCE_TESTS_SHA="+JSON.stringify(hash(referenceTests))+",SOURCE_REFERENCE_BOOTSTRAP_SHA="+JSON.stringify(hash(referenceBootstrap))+";\n";
           
@@ -1122,7 +1191,7 @@ jobs:
       - name: Verify sixteen controls then the assigned safe artifact exactly once
         shell: bash
         env:
-          READBACK_KIND: supplement
+          READBACK_KIND: controls
           PRODUCER_CORE_SHA: ${{ needs.producer.outputs.core-sha256 }}
           ASSIGNED_ARTIFACT_ID: ${{ needs.producer.outputs.artifact-id }}
           UPLOADED_ARTIFACT_DIGEST: ${{ needs.producer.outputs.artifact-digest }}
