@@ -3792,3 +3792,72 @@ Next: full inactive ref/WF/report/recursive-tree/protected3188/main/five0active 
 After BOTH KEYLESS jobs terminal success, completion expected_sha CASa23c9128→712339ff066db0e4d1be9f42972a060bcbd38950 succeeded at toolclock20:57:23UTC. Full post-CAS ref+commit confirm712339ff/treeccd0b56a4723bf6fa3f018bbec2f4c93f5519d9a. Full WFcc7bed8a3f82b00248f01743b891ef4355542173/216100characters EXACT complete actual INACTIVE5+2, manual/noinputs/nopush/BOTHliteralfalse; full reporta1a5571d4ce612ac95bcfb681c3d8e4d0fdec996/446181characters EXACT, complete original414181-character prefix and all preparation/qualification appendices preserved. Recursive tree nontruncated3190leaves; EVERY3188protected path/mode/type/SHA identical to BASEf59. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 unchanged. Five branch active counts queued/in_progress/waiting/pending/requested ALLZERO. Qualification43307790578/1 remains sole new attempt; actual candidate not executed. All seven bodies/pins match dynamically tested KEYLESS code exactly; generated verifier digest independently matched its closed current output.
 
 This final report-only checkpoint preserves WFcc7bed8a and all other leaves; full final ref/WF/report/tree/protected/main/fivezeroactive readbacks are returned to Root, then sole implementer STOPPED. Task1 GREEN/complete INACTIVE awaiting independent FULL scoped review, no review-acceptance claim. ActualTask2 HELD. No additional Source action/diagnosis/trial under this permit. No Originalcipher/key/plain/privateproducerlog access, no Native16/CF/runtime/SDK/MF/I0/OAuth/OTP/cron/consumer/callback/Max/mail/deploy/main/PR/merge/newcost; no local Sourceexecution/clones/dependencies/tempSourcefiles. All five readiness flags false.
+
+
+## 2026-11-12 Reference-stage Task1 FIX1 — coverage correction and one distinct amended KEYLESS release
+
+Original implementer /root/reference_stage_impl resumes under FULL exact Root brief70b99bec97bc63dd9395e25361abde90e2668253 docs/superpowers/briefs/2026-11-12-reference-stage-task1-fix1.md and FULL independent review docs/superpowers/reviews/2026-11-12-reference-stage-task1-review.md: 0Critical/3Important. ActualTask2 HELD. Prior Source actors STOPPED; Root controller does not write Source. PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web1347578006; ENVIRONMENT Source/SYN GitHubActions; ORIGIN GitHub connector; RESOURCE_TYPE isolated branch/workflow; RESOURCE_ID feat/finite-native-cleanup-20261101 + .github/workflows/afw-finite-budget-qualification.yml; ALLOWED_ACTION the three reviewed test qualification fixes + ONE DISTINCT NEW serial KEYLESS2+2/path-scopedpush/attempt1, failure exactF7 or success complete actual5+2 INACTIVE, then full readbacks/STOP. Only this workflow and APPEND this report. Rollback exact complete F7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209characters preserved before CAS.
+
+COVERAGE CORRECTION, superseding the earlier Task1 expansion/fixture claims in this report: run43307790578/1 did pass the existing/adapted forty named checks and ninety-one Core + sixteen pair + sixteen ZIP controls and current artifact transport. It did NOT execute the twenty-two expansion callbacks. Their definitions/registration were accidentally inserted inside the last legacy lc_bounds loop, after the single ID runner had already passed their preceding IDs; the wrappers were never invoked. Therefore that run did NOT dynamically establish the new positive owned-file R1/R2→reader→coordinator fixture, singleton source-pair counterexamples, group/scan expansion matrix or the other twenty-two callback assertions. The prior claims that those new assertions executed were incorrect. The prior fixture Minor is NOT closed by43307790578. The report history and original records remain intact as evidence; this APPEND corrects their interpretation. No production helper defect was identified by that review for authenticated JSON; production code is not modified in FIX1. Run43307790578 is consumed and will NOT be rerun.
+
+BASEb0dfcf5053018aa34304ffea9717a756c13b6b5d/treec6d234acac31eea88d91cfd995958289a03e878d/WFcc7bed8a3f82b00248f01743b891ef4355542173/216100characters/reportb3e86e4434e90be43ff963f778f4f640bdcecc22/447919characters fully read. Recursive3190 leaves/nontruncated;3188protected exclude ONLY workflow/report; main0c9c475b3ebaa970fc11d628b40e50a90cceb727 unchanged; five branch active counts0. Complete447919-character historical prefix preserved exactly. FULL original Task1/spec/binding-preflight remain applicable; exact current authority comes from FIX1 brief, not historical green labels.
+
+I1 correction: restored the old lc_bounds loop body, moved all helpers/twenty-two expansions to module scope after checks object and BEFORE its ONE single ID runner; explicit fixed literal expected subset below is independent of whatever callbacks happen to run. Each real expansion callback completes its own assertions and returns its private per-ID Symbol token by calling its supplied completion function at the END. Wrapper awaits callback, checks exactly one issuance, exact unforgeable returned token and zero prior completions, then records one completion. The final barrier requires EVERY fixed expected ID count===1 before a successful normal forty-control result. Missing registration, skipped callback or no-op return cannot produce green. Same harness includes inert missing/skipped/no-op/forged/unreturned/double-issuance/assertion-failure/duplicate-completion counterexamples; no mirror harness or late recursive wrapping. Actual fixture in two_valid writes canonical synthetic R1/R2 files in owned runner temp, invokes REAL readActualReferences INSIDE actual coordinateSupplement io.references once, and independently compares BOTH FULL expected rows and FULL certificate for consume AND grant, R1none/R2entry. No mirrored projectedSet is its input or expectation.
+```json
+["two_valid","identities_flags","required_bounds","optional_types","array_bounds","private_canary","file_missing_bad","file_bound_links","gate_no_read","timeout_cleanup","uncertain_no_cleanup","strict_envelope","lc_pair","lc_last","lc_unknown","lc_ops","lc_steps","lc_schema","lc_clean","lc_clock","lc_manifest","lc_bounds"]
+```
+Test-only witness uses fixed closed marker REFERENCE_EXPANSIONS/1, expected22/completed22 and ONLY these existing IDs with actual completion counts. It is written only AFTER barrier to a separate owned safe runner-temp file (776B LF), never Raw, error/path/time/token data. Reference test stdout remains EXACTLY the single normal REFERENCE_CONTROLS/1 JSON record; its original40schema/IDs/cap1728BnoLF/1729LF/worst1985LF stay unchanged. KEYLESS NODE_REFERENCE_PROOF reads this witness, rejects >2048B or ANY deviation from its exact fixed expected serialized schema/values and parses it before printing one bounded closed witness log line. It is NEVER a third uploaded artifact/file or new public DTO field. Private actual path does not execute the test module or print witness. Root specifically accepted this separate bounded KEYLESS witness channel. Standard upload remains EXACT result.json+manifest.json.
+
+I2 correction: BOTH named producer_transport and verifier_transport now explicitly loop canonical R1 missing/invalid/oversize partial variants. R1group is unknown, unchanged R2 certificate/stage remains coherent; validateReferenceRow/validateLastChild/validateReferenceStage establish those other predicates, and EACH variant regenerates its full envelope/manifest pair. BOTH real producer and independent-verifier transport entrypoints accept missing/invalid and reject oversize; no stale none/group contradiction can shadow the intended global oversize gate. Existing correct canonical R2 complete_partial test and all its assertions remain unchanged.
+
+I3 correction: retained the old non-directory isDirectory policy negative and symlink/hardlink negatives. Added a candidate plain path BELOW an owned regular file; independently assert lstat(candidate) rejects with actual OS ENOTDIR, then REAL readActualReferences(candidate) must return both invalid rows, canonical empty certificate and R1invalid/file_policy/R2unknown. No race, wider fault seam, alternate private path or production IO change.
+
+Only NODE_REFERENCE_TESTS, its materializer SHA256 pin, KEYLESS proof witness validator and wrapper labels/report changed. Byte-exact immutable production reference30826/cc2026e03bb7bf62e81d1c504e922694183e4aac37015f28263bfdb20bfb7653, Core77002/d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246, ZIP13305/b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d, bootstrap1370/2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1 and pairtests4471/7effcec7fc9e2dda841519a450bc7cd79971ba1f8d76f94c254d657f2cb2a597. Same production old rows+whole certificate/status/stage semantics/crypto/AAD/Original/caps128files298888337B/MAX298888337/arrays256/steps1e6/JSON65536/rawZIP131072/10sprojection15stotal/physical-close/currentidentity/privacy. NO helper/projector/schema/validator/reader/coordinator/time/productionlogic change.
+Prepared inert-string hashes/grammar results (no linking/evaluation):
+```json
+{
+  "fix1tests": {
+    "bytes": 52722,
+    "sha256": "4b531da6b1ac707b0042562a39eb95ee752dfa5eac7f242fb93fcc903e0ac9bc"
+  },
+  "core": {
+    "bytes": 77002,
+    "sha256": "d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246"
+  },
+  "reference": {
+    "bytes": 30826,
+    "sha256": "cc2026e03bb7bf62e81d1c504e922694183e4aac37015f28263bfdb20bfb7653"
+  },
+  "bootstrap": {
+    "bytes": 1370,
+    "sha256": "2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1"
+  },
+  "zip": {
+    "bytes": 13305,
+    "sha256": "b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"
+  },
+  "pairTests": {
+    "bytes": 4471,
+    "sha256": "7effcec7fc9e2dda841519a450bc7cd79971ba1f8d76f94c254d657f2cb2a597"
+  },
+  "materialize": {
+    "bytes": 20630,
+    "sha256": "78a7e735601f1e13f6370f6f499485060b9aa91e9f026e4f55b25f245516a3aa"
+  },
+  "tests": {
+    "bytes": 52722,
+    "sha256": "4b531da6b1ac707b0042562a39eb95ee752dfa5eac7f242fb93fcc903e0ac9bc"
+  },
+  "generatedVerifier": {
+    "bytes": 40595,
+    "sha256": "4a79caf3863c5c606b12f19ee49cb4bdb48045d758186f306db41315f3d33296"
+  }
+}
+```
+Tests52722B/SHA4b531da6b1ac707b0042562a39eb95ee752dfa5eac7f242fb93fcc903e0ac9bc; materializer20630/78a7e735601f1e13f6370f6f499485060b9aa91e9f026e4f55b25f245516a3aa; expected generated verifier40595/4a79caf3863c5c606b12f19ee49cb4bdb48045d758186f306db41315f3d33296. All SEVEN bodies of prepared KEYLESS and complete actual5+2 INACTIVE are identical. The locally permitted work was only bounded public STRINGDATA framing/hash/grammar (SourceTextModule never linked/evaluated), no source execution/clones/deps/build/files. STATIC RED evidence: old code registration nested in lc_bounds, old named R1 oversize had groupnone, old purported ENOTDIR fixture failed isDirectory first; dynamic new coverage is PENDING and cannot be claimed from grammar.
+
+ONE NEW amended KEYLESS Source push is justified by those three known reviewed gaps, NOT a rerun/replay of old qualification. Exact2+2serial/attempt1/pathscope/noenvironment/secrets/Original/key/native/SDK/MF/I0/runtime. Permit consumed at CAS irrespective outcome, freeze Source until BOTH terminal, then failure exactF7/fullreadbacks0activeSTOP or success complete tested actual5+2 INACTIVE/BOTHfalse/manual/noinputs/nopush/currentpins/append evidence/fullreadbacksSTOP for scoped b0..newHEAD re-review. No retry/rerun/repair/backoff/alternateprobe/newcredential. No actualTask2 permission.
+
+Covering runner commands unchanged except strict test-only witness proof: node --check Core/reference/tests; bootstrap; corepin; Core controls91 private redirected; timeout --kill-after=1s 10s env -i RUNNER_TEMP=<owned-runner-temp> GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-reference-controls-current.mjs stdout redirected ONLY to normal40safeJSON; print normal40record; test exit0; NODE_REFERENCE_PROOF validates source-pinned normal40proof, separately reads/strictly validates/prints <=2048B closed22witness, then attaches proof and regenerates whole controls manifest; fallback/seal/uploadexact2/gate; verifier materialize+bootstrap+node --check; timeout --kill-after=1s 5s env -i GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch paircontrols16; current independent safe verifier ZIP16+assignedcontrols91+40/currenthashes. No increased timeout/cap/record schema.
+
+Next pending: full staged ref/body/tree/protected/main/five0active pre-CAS; ONE new qualification BOTH terminal and ACTUAL closed22witness/normal40records/digests; inactive completion or F7 restoration; full final readbacks/STOP. No current dynamic pass is claimed here. All five readiness flags false. NO actualTask2/Originalcipher/key/plain/privateproducerlog download/native/CF/OAuth/OTP/Native16/R3/SQL/search/consumer/callback/cron/Max/mail/deploy/main/PR/merge/newcredential/newcost/localSourceexecution.

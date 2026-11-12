@@ -1,7 +1,9 @@
-name: AFW reference stage boundaries QUALIFIED_INACTIVE
-run-name: AFW reference stage boundaries INACTIVE ${{ github.sha }}
+name: AFW reference stage FIX1 TWO-JOB KEYLESS CONTROLS
+run-name: AFW reference stage FIX1 SERIAL KEYLESS CONTROLS ONLY ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
 permissions:
   contents: read
   actions: read
@@ -10,10 +12,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   producer:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    environment: afw-finite-syn-checkpoint
+    timeout-minutes: 2
     outputs:
       artifact-id: ${{ steps.artifact.outputs.artifact-id }}
       artifact-digest: ${{ steps.artifact.outputs.artifact-digest }}
@@ -21,19 +22,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: tokenizartinfo-ops/agent-friendly-web
-          ref: '19789b5f31935e0b5be00cbb24c5f45de2a0100a'
           persist-credentials: false
           fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22.23.4'
-      - name: Materialize fixed current inspector
+      - name: Materialize current exact code and finite safe proof validators
         shell: bash
         run: |
           set -euo pipefail
           umask 077
-          test ! -e "$RUNNER_TEMP/afw-readonly-inspector-current.mjs"
           cat >"$RUNNER_TEMP/afw-readonly-inspector-current.mjs" <<'NODE_CORE'
           import assert from 'node:assert/strict';
           import {readFile,writeFile,mkdir,mkdtemp,readdir,lstat,realpath,rm,open} from 'node:fs/promises';
@@ -538,7 +536,52 @@ jobs:
           }
           if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)main().catch(async error=>{if(process.argv[2]==='project-child')try{await writeFile(projectErrorPath(),JSON.stringify({reason:error instanceof Rejected&&REASONS.includes(error.reason)?error.reason:'parse_failed'}),{flag:'wx',mode:0o600});}catch{}process.exitCode=1;});
           NODE_CORE
-          node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-syntax.private" 2>&1
+          cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" <<'NODE_FALLBACK'
+          
+          import {access,readFile,writeFile,mkdir} from 'node:fs/promises';
+          import {join,resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          const ids=["zip_valid","zip_signed_descriptor","zip_extra","zip_traversal","zip_duplicate","zip_bad_crc","zip_link","zip_bad_range","failure_identity_valid","failure_identity_success_reject","failure_identity_role_reject","failure_identity_kind_reject","failure_identity_unknown_reject","ownership_valid","ownership_unknown_reject","ownership_enum_reject","optional_missing_unknown","full_result_valid","full_result_unknown_reject","tap_valid_canaries","tap_unknown_scalar","tap_duplicate_case","tap_case_number_collision","tap_wrapper_number_collision","tap_unknown_number_collision","tap_late_diag_comment","tap_late_diag_unrelated","tap_injected_name","tap_long_line","tap_long_block","public_authenticated_valid","gate_artifact_count","gate_artifact_actual","gate_artifact_candidate","gate_artifact_duration","gate_artifact_business","gate_authenticated_count","gate_authenticated_actual","gate_authenticated_candidate","gate_authenticated_duration","gate_authenticated_business","gate_inventory_count","gate_inventory_actual","gate_inventory_candidate","gate_inventory_duration","gate_inventory_business","gate_identity_count","gate_identity_actual","gate_identity_candidate","gate_identity_duration","gate_identity_business","scalar_boolean_wrong","scalar_false_null_wrong","scalar_array_hash_wrong","scalar_half_hash_wrong","scalar_boolean_valid","scalar_null_valid","scalar_integer_valid","scalar_typed_valid","verdict_accepted","verdict_parse_timeout_old_current","verdict_other_failure","verdict_rejected_status","verdict_partial_status","verdict_missing_clock","verdict_open_over_deadline","verdict_download_over_deadline","digest_match_bare","digest_match_prefixed","digest_mismatch_old_current","digest_upload_malformed","digest_remote_malformed","metadata_wrong_id","metadata_wrong_context","metadata_stream_valid","metadata_stream_overcap","diagnostic_http_rejected","diagnostic_json_malformed","diagnostic_stream_overcap","diagnostic_identity_first_field","diagnostic_digest_mismatch","diagnostic_success_output","diagnostic_unknown_request_error","diagnostic_observed_timeout","diagnostic_schema_extra_field","diagnostic_schema_arbitrary_enum","diagnostic_record_over_2048","diagnostic_primary_first_failure_preserved","diagnostic_output_write_error","diagnostic_utf8_malformed","diagnostic_input_id_rejected"],root=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-public'),hash=b=>createHash('sha256').update(b).digest('hex');
+          try{await access(join(root,'result.json'));}
+          catch{
+           await mkdir(root,{mode:0o700,recursive:true});let core;try{core=await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs'));}catch{core=Buffer.alloc(0);}
+           const result={purpose:'afw.readonly-receipt-inspector.CONTROLS.safe.v1',repository:'tokenizartinfo-ops/agent-friendly-web',ref:'refs/heads/feat/finite-native-cleanup-20261101',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,node:'22.23.4',status:'failed',expected:ids.length,completed:0,passed:0,failed:0,inventory:ids.map(id=>({id,status:'not_executed'})),coveredCoreSha256:hash(core),elapsedMs:0,failure:{reason:'controls_failed',control:'setup',messageBytes:null,messageSha256:null},original954:{workflowBlob:'97b37fec44696dde23daa013196a5acdb05c2f4d',verdictCounterexample:'not_executed',digestCounterexample:'not_executed'},originalArtifactAccessed:false,custodyOpened:false,SDKImported:false,I0Created:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
+           const bytes=Buffer.from(JSON.stringify(result,null,2)),manifest=Buffer.from(JSON.stringify({purpose:'afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:bytes.length,sha256:hash(bytes)}]},null,2));if(bytes.length+manifest.length>65536)throw Error('closed_fallback_bound');
+           await writeFile(join(root,'result.json'),bytes,{flag:'wx',mode:0o600});await writeFile(join(root,'manifest.json'),manifest,{flag:'wx',mode:0o600});
+          }
+          NODE_FALLBACK
+          cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" <<'NODE_VERIFY'
+          
+          import assert from 'node:assert/strict';
+          import {validateControlProof} from './afw-reference-supplement-current.mjs';
+          import {readFile,readdir,lstat,writeFile} from 'node:fs/promises';
+          import {join,resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          const ids=["zip_valid","zip_signed_descriptor","zip_extra","zip_traversal","zip_duplicate","zip_bad_crc","zip_link","zip_bad_range","failure_identity_valid","failure_identity_success_reject","failure_identity_role_reject","failure_identity_kind_reject","failure_identity_unknown_reject","ownership_valid","ownership_unknown_reject","ownership_enum_reject","optional_missing_unknown","full_result_valid","full_result_unknown_reject","tap_valid_canaries","tap_unknown_scalar","tap_duplicate_case","tap_case_number_collision","tap_wrapper_number_collision","tap_unknown_number_collision","tap_late_diag_comment","tap_late_diag_unrelated","tap_injected_name","tap_long_line","tap_long_block","public_authenticated_valid","gate_artifact_count","gate_artifact_actual","gate_artifact_candidate","gate_artifact_duration","gate_artifact_business","gate_authenticated_count","gate_authenticated_actual","gate_authenticated_candidate","gate_authenticated_duration","gate_authenticated_business","gate_inventory_count","gate_inventory_actual","gate_inventory_candidate","gate_inventory_duration","gate_inventory_business","gate_identity_count","gate_identity_actual","gate_identity_candidate","gate_identity_duration","gate_identity_business","scalar_boolean_wrong","scalar_false_null_wrong","scalar_array_hash_wrong","scalar_half_hash_wrong","scalar_boolean_valid","scalar_null_valid","scalar_integer_valid","scalar_typed_valid","verdict_accepted","verdict_parse_timeout_old_current","verdict_other_failure","verdict_rejected_status","verdict_partial_status","verdict_missing_clock","verdict_open_over_deadline","verdict_download_over_deadline","digest_match_bare","digest_match_prefixed","digest_mismatch_old_current","digest_upload_malformed","digest_remote_malformed","metadata_wrong_id","metadata_wrong_context","metadata_stream_valid","metadata_stream_overcap","diagnostic_http_rejected","diagnostic_json_malformed","diagnostic_stream_overcap","diagnostic_identity_first_field","diagnostic_digest_mismatch","diagnostic_success_output","diagnostic_unknown_request_error","diagnostic_observed_timeout","diagnostic_schema_extra_field","diagnostic_schema_arbitrary_enum","diagnostic_record_over_2048","diagnostic_primary_first_failure_preserved","diagnostic_output_write_error","diagnostic_utf8_malformed","diagnostic_input_id_rejected"],hash=b=>createHash('sha256').update(b).digest('hex'),need=x=>{if(!x)throw Error('controls_inventory_rejected');},object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v),fields=(v,keys)=>need(object(v)&&Object.keys(v).length===keys.length&&Object.keys(v).every(x=>keys.includes(x)));
+          async function file(root,name){const p=join(root,name),s=await lstat(p);need(s.isFile()&&!s.isSymbolicLink()&&s.nlink===1&&s.size<=65536);const b=await readFile(p);need(b.length===s.size);return b;}
+          try{
+           const local=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-public'),remote=process.argv[2]==='seal'?local:join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-downloaded');
+           need(['seal','remote'].includes(process.argv[2]));
+           for(const root of [local,remote])assert.deepEqual((await readdir(root)).sort(),['manifest.json','result.json']);
+           const bodies={};for(const name of ['result.json','manifest.json']){const a=await file(local,name),b=await file(remote,name);need(a.equals(b));bodies[name]=b;}need(bodies['result.json'].length+bodies['manifest.json'].length<=65536);
+           const result=JSON.parse(bodies['result.json']),manifest=JSON.parse(bodies['manifest.json']);
+           fields(result,['purpose','repository','ref','source','run','attempt','node','status','expected','completed','passed','failed','inventory','coveredCoreSha256','elapsedMs','failure','original954','originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified','referenceSupplement']);
+           need(result.purpose==='afw.readonly-receipt-inspector.CONTROLS.safe.v1'&&result.repository==='tokenizartinfo-ops/agent-friendly-web'&&result.ref==='refs/heads/feat/finite-native-cleanup-20261101'&&result.source===process.env.GITHUB_SHA&&result.run===process.env.GITHUB_RUN_ID&&result.attempt===1&&result.node==='22.23.4');
+           need(['passed','failed'].includes(result.status)&&result.expected===ids.length&&Number.isInteger(result.completed)&&result.completed>=0&&result.completed<=ids.length&&result.passed===result.completed&&[0,1].includes(result.failed)&&Number.isSafeInteger(result.elapsedMs)&&result.elapsedMs>=0&&result.elapsedMs<=120000);
+           need(Array.isArray(result.inventory)&&result.inventory.length===ids.length);for(let n=0;n<ids.length;n++){const row=result.inventory[n];fields(row,['id','status']);need(row.id===ids[n]&&['passed','failed','not_executed'].includes(row.status));}
+           validateControlProof(result.referenceSupplement);
+           for(const [key,name]of [['moduleSha256','afw-reference-supplement-current.mjs'],['testsSha256','afw-reference-controls-current.mjs'],['bootstrapSha256','afw-reference-bootstrap-current.mjs']])need(result.referenceSupplement[key]===hash(await readFile(join(resolve(process.env.RUNNER_TEMP),name))));
+           const core=await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs'));need(result.coveredCoreSha256===hash(core));
+           fields(result.original954,['workflowBlob','verdictCounterexample','digestCounterexample']);need(result.original954.workflowBlob==='97b37fec44696dde23daa013196a5acdb05c2f4d'&&['executed_inert','not_executed'].includes(result.original954.verdictCounterexample)&&['executed_inert','not_executed'].includes(result.original954.digestCounterexample));
+           for(const key of ['originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified'])need(result[key]===false);
+           if(result.failure!==null){fields(result.failure,['reason','control','messageBytes','messageSha256']);need(result.failure.reason==='controls_failed'&&(result.failure.control==='setup'||ids.includes(result.failure.control)));need((result.failure.messageBytes===null&&result.failure.messageSha256===null)||(Number.isSafeInteger(result.failure.messageBytes)&&result.failure.messageBytes>=0&&result.failure.messageBytes<=1048576&&typeof result.failure.messageSha256==='string'&&/^[a-f0-9]{64}$/.test(result.failure.messageSha256)));}
+           if(result.status==='passed')need(result.completed===ids.length&&result.failed===0&&result.inventory.every(x=>x.status==='passed')&&result.failure===null&&result.original954.verdictCounterexample==='executed_inert'&&result.original954.digestCounterexample==='executed_inert');
+           fields(manifest,['purpose','source','run','attempt','files']);need(manifest.purpose==='afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1'&&manifest.source===process.env.GITHUB_SHA&&manifest.run===process.env.GITHUB_RUN_ID&&manifest.attempt===1&&Array.isArray(manifest.files)&&manifest.files.length===1);fields(manifest.files[0],['path','bytes','sha256']);need(manifest.files[0].path==='result.json'&&manifest.files[0].bytes===bodies['result.json'].length&&manifest.files[0].sha256===hash(bodies['result.json']));
+           await writeFile(process.env.GITHUB_OUTPUT,'inventory-verified=true\ncontrols-passed='+(result.status==='passed')+'\n',{flag:'a'});
+           console.log(JSON.stringify({purpose:'CONTROLS_READBACK',expected:result.expected,completed:result.completed,passed:result.passed,failed:result.failed,failure:result.failure,bytes:bodies['result.json'].length,sha256:hash(bodies['result.json']),manifestBytes:bodies['manifest.json'].length,manifestSha256:hash(bodies['manifest.json'])}));
+          }catch{process.exitCode=1;}
+          NODE_VERIFY
+          node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-syntax.private" 2>&1
       - name: Materialize shared reference supplement and isolated controls
         shell: bash
         run: |
@@ -824,7 +867,7 @@ jobs:
           NODE_REFERENCE
           cat >"$RUNNER_TEMP/afw-reference-controls-current.mjs" <<'NODE_REFERENCE_TESTS'
           import assert from 'node:assert/strict';
-          import {mkdtemp,mkdir,writeFile,symlink,link,rm,truncate} from 'node:fs/promises';
+          import {mkdtemp,mkdir,writeFile,symlink,link,rm,truncate,lstat} from 'node:fs/promises';
           import {join,resolve} from 'node:path';
           import {createHash} from 'node:crypto';
           import * as S from './afw-reference-supplement-current.mjs';
@@ -872,8 +915,8 @@ jobs:
            nested_identity:()=>{for(const f of [r=>r.inspector.source='1'.repeat(40),r=>r.inspector.run='2',r=>r.originalContext.sourceSha='1'.repeat(40),r=>r.artifact.id=1,r=>r.authentication.fileCount=127,r=>r.authentication.totalBytes=298888336,r=>r.fixtures.checks=1,r=>r.tap.recordedCaseCount=2]){const v=value();f(v.inspection);const b=Buffer.from(JSON.stringify(v)),m={purpose:S.MANIFEST,inspectorSource:process.env.GITHUB_SHA,inspectorRun:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:b.length,sha256:hash(b)}]};mustReject(()=>S.validateSupplementPair(new Map([['result.json',b],['manifest.json',Buffer.from(JSON.stringify(m))]])));}},
            complete_partial:()=>{for(const rowStatus of ['missing','invalid','oversize']){const v=value();v.ownerReference[1]=S.unknownReference('R2',rowStatus);v.lastChild=S.unknownLastChild();v.status='partial';const partial=pair(v);if(rowStatus==='oversize'){assert.equal(S.producerTransportAccepted(partial),false);mustReject(()=>S.validateSupplementPair(partial));}else{assert.equal(S.producerTransportAccepted(partial),true);assert.equal(S.validateSupplementPair(partial).status,'partial');}v.status='complete';const complete=pair(v);assert.equal(S.producerTransportAccepted(complete),false);mustReject(()=>S.validateSupplementPair(complete));}},
            strict_envelope:()=>{const rejected=value();rejected.status='rejected';rejected.failure={stage:'projection',reason:'project_failed'};rejected.inspection=baseResult();mustReject(()=>S.validateSupplementResult(rejected));const published=S.publicationResult(rejected);assert.equal(published.status,'rejected');assert.deepEqual(published.ownerReference,['R1','R2'].map(c=>S.unknownReference(c)));const constructed=S.makeSupplement(baseResult(),value().ownerReference,{stage:'projection',reason:'basis_rejected'});assert.deepEqual(constructed.ownerReference,['R1','R2'].map(c=>S.unknownReference(c)));S.validateSupplementResult(constructed);for(const f of [v=>v.extra=true,v=>v.ownerReference.reverse(),v=>v.PCoff=true,v=>v.ownerReference[0].basic.extra='PRIVATE_CANARY',v=>v.ownerReference[0].children.count=null,v=>v.failure={stage:'PRIVATE_CANARY',reason:'PRIVATE_CANARY'}]){const v=value();f(v);mustReject(()=>S.validateSupplementResult(v));}},
-           producer_transport:()=>{for(const v of [value(),S.makeSupplement(basis(),[S.unknownReference('R1','missing'),S.unknownReference('R2','invalid')],null)])assert.equal(S.producerTransportAccepted(S.encodeSupplement(v)),true);const bad=value();bad.status='partial';bad.ownerReference[0]=S.unknownReference('R1','oversize');assert.equal(S.producerTransportAccepted(S.encodeSupplement(bad)),false);const v=value();v.status='rejected';v.failure={stage:'projection',reason:'project_failed'};assert.equal(S.producerTransportAccepted(S.encodeSupplement(v)),false);},
-           verifier_transport:()=>{for(const v of [value(),S.makeSupplement(basis(),[S.unknownReference('R1','invalid'),S.unknownReference('R2','missing')],null)])assert.equal(S.validateSupplementPair(S.encodeSupplement(v)).status,v.status);const bad=value();bad.status='partial';bad.ownerReference[0]=S.unknownReference('R1','oversize');mustReject(()=>S.validateSupplementPair(S.encodeSupplement(bad)));const p=pair();p.set('third.json',Buffer.from('{}'));mustReject(()=>S.validateSupplementPair(p));},
+           producer_transport:()=>{for(const v of [value(),S.makeSupplement(basis(),[S.unknownReference('R1','missing'),S.unknownReference('R2','invalid')],null)])assert.equal(S.producerTransportAccepted(S.encodeSupplement(v)),true);for(const rowStatus of ['missing','invalid','oversize']){const variant=value();variant.status='partial';variant.ownerReference[0]=S.unknownReference('R1',rowStatus);variant.referenceStage.r1FirstRejectedGroup='unknown';S.validateReferenceRow(variant.ownerReference[0],'R1');S.validateLastChild(variant.lastChild,variant.ownerReference[1]);S.validateReferenceStage(variant.referenceStage,variant.ownerReference,variant.lastChild);const currentPair=pair(variant);assert.equal(S.producerTransportAccepted(currentPair),rowStatus!=='oversize');if(rowStatus==='oversize')mustReject(()=>S.validateSupplementPair(currentPair));else assert.deepEqual(S.validateSupplementPair(currentPair),variant);}const v=value();v.status='rejected';v.failure={stage:'projection',reason:'project_failed'};assert.equal(S.producerTransportAccepted(S.encodeSupplement(v)),false);},
+           verifier_transport:()=>{for(const v of [value(),S.makeSupplement(basis(),[S.unknownReference('R1','invalid'),S.unknownReference('R2','missing')],null)])assert.equal(S.validateSupplementPair(S.encodeSupplement(v)).status,v.status);for(const rowStatus of ['missing','invalid','oversize']){const variant=value();variant.status='partial';variant.ownerReference[0]=S.unknownReference('R1',rowStatus);variant.referenceStage.r1FirstRejectedGroup='unknown';S.validateReferenceRow(variant.ownerReference[0],'R1');S.validateLastChild(variant.lastChild,variant.ownerReference[1]);S.validateReferenceStage(variant.referenceStage,variant.ownerReference,variant.lastChild);const currentPair=pair(variant);assert.equal(S.producerTransportAccepted(currentPair),rowStatus!=='oversize');if(rowStatus==='oversize')mustReject(()=>S.validateSupplementPair(currentPair));else assert.deepEqual(S.validateSupplementPair(currentPair),variant);}const p=pair();p.set('third.json',Buffer.from('{}'));mustReject(()=>S.validateSupplementPair(p));},
           
            lc_pair:()=>{const r=receipt('R2');r.children=[{actualElapsedMs:5018,aborted:true,position:'settled',steps:[{operation:'source-pair',elapsedMs:6000}]},{actualElapsedMs:12,aborted:false,position:'sdk-pending',endPosition:'settled',steps:[{operation:'source-pair',elapsedMs:20.5}]}];const v=boundaryValue(r);assert.equal(v.ownerReference[1].children.maxElapsedMs,5018);assert.equal(v.ownerReference[1].children.abortedCount,1);assert.deepEqual(v.lastChild,{case:'R2',status:'present',childCount:2,ordinal:2,position:'sdk-pending',endPosition:'settled',elapsedMs:12,aborted:false,stepCount:1,lastStep:'source-pair',lastStepElapsedMs:20.5});assert.equal(S.validateSupplementPair(pair(v)).status,'complete');},
            lc_last:()=>{const r=receipt('R2');r.children=[{startedAt:99999,actualElapsedMs:900,aborted:true,position:'issuer-ack'},{startedAt:1,actualElapsedMs:3.25,aborted:false,position:'baseline',steps:[]}];const v=boundaryValue(r);assert.equal(v.lastChild.ordinal,2);assert.equal(v.lastChild.elapsedMs,3.25);assert.equal(v.lastChild.position,'baseline');assert.equal(v.lastChild.lastStep,'none');assert.equal(v.lastChild.aborted,false);assert.equal(v.lastChild.lastStepElapsedMs,null);S.validateSupplementPair(pair(v));},
@@ -906,7 +949,26 @@ jobs:
             v=>{v.purpose='afw.readonly-owner-reference-supplement.safe.v1';}
            ];for(const change of corrupt){const v=value();change(v);assert.equal(S.producerTransportAccepted(pair(v)),false);mustReject(()=>S.validateSupplementPair(pair(v)));const out=await simulate({referenceSet:{ownerReference:v.ownerReference,lastChild:v.lastChild,referenceStage:v.referenceStage}});if(v.purpose===S.PURPOSE){assert.equal(out.result.status,'rejected');assert.deepEqual(out.result.ownerReference,['R1','R2'].map(c=>S.unknownReference(c)));assert.deepEqual(out.result.lastChild,S.unknownLastChild());}}
            const rejected=S.makeSupplement(baseResult(),value().ownerReference,{stage:'cleanup',reason:'cleanup_failed'},value().lastChild);S.validateSupplementPair(pair(rejected),{allowRejected:true});assert.equal(S.producerTransportAccepted(pair(rejected)),false);},
-           lc_bounds:()=>{const r=receipt('R2');r.children=Array.from({length:256},()=>({actualElapsedMs:0,aborted:false}));r.children[255].steps=Array(1000000).fill(null);const v=boundaryValue(r);assert.equal(v.lastChild.childCount,256);assert.equal(v.lastChild.ordinal,256);assert.equal(v.lastChild.stepCount,1000000);S.validateSupplementPair(pair(v));r.children[255].steps.push({operation:'source-pair',elapsedMs:3});assert.equal(boundaryValue(r).lastChild.stepCount,null);const q=pair();q.set('result.json',Buffer.alloc(65536));mustReject(()=>S.validateSupplementPair(q));for(const passed of [true,false]){
+           lc_bounds:()=>{const r=receipt('R2');r.children=Array.from({length:256},()=>({actualElapsedMs:0,aborted:false}));r.children[255].steps=Array(1000000).fill(null);const v=boundaryValue(r);assert.equal(v.lastChild.childCount,256);assert.equal(v.lastChild.ordinal,256);assert.equal(v.lastChild.stepCount,1000000);S.validateSupplementPair(pair(v));r.children[255].steps.push({operation:'source-pair',elapsedMs:3});assert.equal(boundaryValue(r).lastChild.stepCount,null);const q=pair();q.set('result.json',Buffer.alloc(65536));mustReject(()=>S.validateSupplementPair(q));for(const passed of [true,false]){const inventory=IDS.map((id,i)=>({id,status:passed?'passed':i===0?'failed':'not_executed'})),record={marker:'REFERENCE_CONTROLS/1',expected:40,completed:passed?40:1,pass:passed?40:0,fail:passed?0:1,inventory,firstFailure:passed?null:IDS[0]};assert(Buffer.byteLength(JSON.stringify(record)+'\n')<=2048);}for(const firstFailure of ['setup',...IDS]){const inventory=IDS.map(id=>({id,status:'not_executed'})),worst={marker:'REFERENCE_CONTROLS/1',expected:40,completed:0,pass:0,fail:0,inventory,firstFailure};assert(Buffer.byteLength(JSON.stringify(worst)+'\n')<=2048);}assert.equal(IDS.length,40);}
+          };
+          
+          const EXPECTED_EXPANSION_IDS=Object.freeze(['two_valid','identities_flags','required_bounds','optional_types','array_bounds','private_canary','file_missing_bad','file_bound_links','gate_no_read','timeout_cleanup','uncertain_no_cleanup','strict_envelope','lc_pair','lc_last','lc_unknown','lc_ops','lc_steps','lc_schema','lc_clean','lc_clock','lc_manifest','lc_bounds']);
+          function createExpansionHarness(expected,callbacks){
+           assert.deepEqual(Object.keys(callbacks),expected);
+           const tokens=new Map(expected.map(id=>[id,Symbol(id)])),completed=new Map(expected.map(id=>[id,0]));
+           return {
+            wrap(id,original){
+             assert(expected.includes(id));assert.equal(typeof original,'function');assert.equal(typeof callbacks[id],'function');
+             return async()=>{
+              assert.equal(completed.get(id),0);await original();let issued=0;
+              const result=await callbacks[id](()=>{issued++;assert.equal(issued,1);return tokens.get(id);});
+              assert.equal(issued,1);assert.equal(result,tokens.get(id));assert.equal(completed.get(id),0);completed.set(id,1);
+             };
+            },
+            barrier(){assert.equal(completed.size,expected.length);for(const id of expected)assert.equal(completed.get(id),1);return expected.map(id=>({id,count:completed.get(id)}));}
+           };
+          }
+          
           // Expand the same forty named controls: these call current production projection/coordinator/transport, never a mirror.
           function group(raw,expected){const p=S.projectReferenceBoundary(raw,'R1');assert.equal(p.referenceStage.r1FirstRejectedGroup,expected);assert.equal(p.referenceStage.r2LastNonPairOperation,'unknown');return p;}
           function fullExpectedRow(caseName){return {case:caseName,status:'present',basic:{completeWrites:1,completeNormal:0,lists:2,gets:0,peak:2,referenceRows:0,responseStatus:200},lookup:{status:'present',budgetMs:5000,actualElapsedMs:0.25,aborted:false},children:{status:'present',count:1,knownDurationCount:1,maxElapsedMs:0.5,knownAbortCount:1,abortedCount:0},roots:{status:'present',count:1,knownWindowCount:1,minWindowMs:1.25,maxWindowMs:1.25},http:{status:'present',count:1,knownElapsedCount:1,maxElapsedMs:0.75,recordedGuardCount:1,maxBodyGuardMs:0}};}
@@ -921,7 +983,7 @@ jobs:
            S.validateSupplementResult(result);assert.equal(S.producerTransportAccepted(pair(result)),false);
           }
           const expansions={
-           two_valid:async()=>temporary(async root=>{
+           two_valid:async(done)=>temporary(async root=>{
             const dir=join(root,'output','owner-reference');await mkdir(dir,{recursive:true});
             for(const operation of ['consume','grant']){
              const r1=receipt('R1'),r2=receipt('R2');Object.assign(r2.children[0],{position:'settled',endPosition:'issuer-ack',steps:[{operation},{operation:'source-pair',elapsedMs:0.75}]});
@@ -933,8 +995,8 @@ jobs:
              assert.deepEqual(out.result.lastChild,expectedChild);assert.deepEqual(out.result.referenceStage,expectedStage);
              assert.deepEqual(S.validateSupplementPair(pair(out.result)),out.result);assert.equal(S.producerTransportAccepted(pair(out.result)),true);
             }
-           }),
-           identities_flags:()=>{
+           return done();}),
+           identities_flags:(done)=>{
             assert.deepEqual(S.R1_GROUPS,['none','file_policy','utf8_json','identity','syn_flags','basic','lookup','children','roots','http','unknown']);
             group(receipt(),'none');
             for(const raw of [null,[],{},false,1,'PRIVATE_CANARY'])group(raw,'identity');
@@ -950,14 +1012,14 @@ jobs:
             for(const key of ['children','roots','httpSpans']){const r=receipt();const primary=new TypeError('file_policy');r[key]=[{get actualElapsedMs(){throw primary;},get windowMs(){throw primary;},get elapsedMs(){throw primary;}}];group(r,'unknown');}
             const bad=receipt();bad.children=false;assert.equal(group(bad,'children').referenceStage.r1FirstRejectedGroup,'children');
             const r2=S.projectReferenceBoundary({...receipt('R2'),PCoff:true},'R2');assert.deepEqual(r2.referenceStage,S.unknownReferenceStage());group(receipt(),'none');
-           },
-           required_bounds:()=>{for(const key of ['completeWrites','completeNormal','lists','gets','peak','referenceRows','responseStatus']){const r=receipt();r[key]=-1;group(r,'basic');}},
-           optional_types:()=>{
+           return done();},
+           required_bounds:(done)=>{for(const key of ['completeWrites','completeNormal','lists','gets','peak','referenceRows','responseStatus']){const r=receipt();r[key]=-1;group(r,'basic');}return done();},
+           optional_types:(done)=>{
             for(const [key,raw,expected]of [['lookupChild',false,'lookup'],['lookupChild',{budgetMs:'1'},'lookup'],['lookupChild',{actualElapsedMs:-1},'lookup'],['lookupChild',{aborted:0},'lookup'],['children',[null],'children'],['children',[{aborted:0}],'children'],['children',[{actualElapsedMs:-1}],'children'],['roots',[{windowMs:-1}],'roots'],['httpSpans',[{elapsedMs:-1}],'http'],['httpSpans',[{bodyGuardMs:'0'}],'http']]){const r=receipt();r[key]=raw;group(r,expected);}
-           },
-           array_bounds:()=>{for(const [key,expected]of [['children','children'],['roots','roots'],['httpSpans','http']])for(const bad of [{},Array(257).fill({})]){const r=receipt();r[key]=bad;group(r,expected);}},
-           private_canary:()=>{const r=receipt();r.trace=r.reason=r.subject=r.url='PRIVATE_CANARY';const p=group(r,'none');assert(!JSON.stringify(p).includes('PRIVATE_CANARY'));},
-           file_missing_bad:async()=>temporary(async root=>{
+           return done();},
+           array_bounds:(done)=>{for(const [key,expected]of [['children','children'],['roots','roots'],['httpSpans','http']])for(const bad of [{},Array(257).fill({})]){const r=receipt();r[key]=bad;group(r,expected);}return done();},
+           private_canary:(done)=>{const r=receipt();r.trace=r.reason=r.subject=r.url='PRIVATE_CANARY';const p=group(r,'none');assert(!JSON.stringify(p).includes('PRIVATE_CANARY'));return done();},
+           file_missing_bad:async(done)=>temporary(async root=>{
             let set=await S.readActualReferences(root);assert.deepEqual(set.referenceStage,S.unknownReferenceStage());assert.deepEqual(set.ownerReference,['R1','R2'].map(c=>S.unknownReference(c,'missing')));
             const dir=join(root,'output','owner-reference');await mkdir(dir,{recursive:true});const file=join(dir,'budget-R1.json');
             await writeFile(join(dir,'budget-R2.json'),JSON.stringify(receipt('R2')));
@@ -969,8 +1031,8 @@ jobs:
             }
             // Read R2 alone after malformed R1 cannot inherit its classification; a later clean read resets locally.
             await writeFile(file,'{');unknown(await S.readReference(root,'R1'));assert.equal((await S.readReference(root,'R2')).status,'present');await writeFile(file,JSON.stringify(receipt()));assert.equal((await S.readActualReferences(root)).referenceStage.r1FirstRejectedGroup,'none');
-           }),
-           file_bound_links:async()=>temporary(async root=>{
+           return done();}),
+           file_bound_links:async(done)=>temporary(async root=>{
             const dir=join(root,'output','owner-reference');await mkdir(dir,{recursive:true});const file=join(dir,'budget-R1.json'),r2=join(dir,'budget-R2.json'),target=join(root,'target');
             await writeFile(r2,JSON.stringify(receipt('R2')));await writeFile(target,JSON.stringify(receipt()));
             await symlink(target,file);let set=await S.readActualReferences(root);assert.equal(set.referenceStage.r1FirstRejectedGroup,'file_policy');assert.equal(set.ownerReference[0].status,'invalid');await rm(file);
@@ -978,11 +1040,14 @@ jobs:
             await mkdir(file);set=await S.readActualReferences(root);assert.equal(set.referenceStage.r1FirstRejectedGroup,'file_policy');await rm(file,{recursive:true});
             // ENOTDIR retains the pre-existing invalid mapping and is scoped to the selected read.
             await rm(join(root,'output'),{recursive:true});await writeFile(join(root,'output'),'not a directory');set=await S.readActualReferences(root);assert.equal(set.ownerReference[0].status,'invalid');assert.equal(set.referenceStage.r1FirstRejectedGroup,'file_policy');
-           }),
-           gate_no_read:async()=>{const out=await simulate({mutate:r=>r.authentication.authenticated=false,references:()=>{throw Error('unreachable');}});assert.deepEqual(out.result.referenceStage,S.unknownReferenceStage());},
-           timeout_cleanup:async()=>{for(const options of [{projectTime:10001},{lateValidation:true},{cleanupTime:15000}]){const out=await simulate(options);assert.equal(out.result.status,'rejected');assert.deepEqual(out.result.referenceStage,S.unknownReferenceStage());}},
-           uncertain_no_cleanup:async()=>{const out=await simulate({fail:'reference-child',settled:false});assert.equal(out.result.inspection.phases.cleanup,'unknown');assert.deepEqual(out.result.referenceStage,S.unknownReferenceStage());},
-           strict_envelope:async()=>{
+            const belowFile=join(root,'output','plain');await assert.rejects(()=>lstat(belowFile),e=>e.code==='ENOTDIR');
+            set=await S.readActualReferences(belowFile);assert.deepEqual(set.ownerReference,['R1','R2'].map(c=>S.unknownReference(c,'invalid')));assert.deepEqual(set.lastChild,S.unknownLastChild());assert.deepEqual(set.referenceStage,{r1FirstRejectedGroup:'file_policy',r2LastNonPairOperation:'unknown'});
+          
+           return done();}),
+           gate_no_read:async(done)=>{const out=await simulate({mutate:r=>r.authentication.authenticated=false,references:()=>{throw Error('unreachable');}});assert.deepEqual(out.result.referenceStage,S.unknownReferenceStage());return done();},
+           timeout_cleanup:async(done)=>{for(const options of [{projectTime:10001},{lateValidation:true},{cleanupTime:15000}]){const out=await simulate(options);assert.equal(out.result.status,'rejected');assert.deepEqual(out.result.referenceStage,S.unknownReferenceStage());}return done();},
+           uncertain_no_cleanup:async(done)=>{const out=await simulate({fail:'reference-child',settled:false});assert.equal(out.result.inspection.phases.cleanup,'unknown');assert.deepEqual(out.result.referenceStage,S.unknownReferenceStage());return done();},
+           strict_envelope:async(done)=>{
             const mutations=[v=>delete v.referenceStage,v=>v.referenceStage=null,v=>v.referenceStage=[],v=>v.referenceStage='unknown',v=>v.referenceStage.extra=true,v=>delete v.referenceStage.r1FirstRejectedGroup,v=>delete v.referenceStage.r2LastNonPairOperation];
             for(const key of ['r1FirstRejectedGroup','r2LastNonPairOperation'])for(const bad of [null,false,0,{},[],'PRIVATE_CANARY','consume-private','NONE'])mutations.push(v=>v.referenceStage[key]=bad);
             for(const change of mutations){const v=value();change(v);await rejectedEverywhere(v);}
@@ -991,13 +1056,13 @@ jobs:
              const coherent=status==='present'?['none','unknown'].includes(g):status==='invalid'?g!=='none':g==='unknown';
              if(coherent&&!['not_examined','oversize'].includes(status)){assert.equal(S.producerTransportAccepted(pair(v)),true);S.validateSupplementPair(pair(v));}else{assert.equal(S.producerTransportAccepted(pair(v)),false);mustReject(()=>S.validateSupplementPair(pair(v)));}
             }
-           },
-           lc_pair:()=>{for(const operation of ['consume','grant']){const v=entryValue([{operation},{operation:'source-pair',elapsedMs:0.75}]);assert.equal(v.referenceStage.r2LastNonPairOperation,operation);assert.deepEqual(v.ownerReference,[fullExpectedRow('R1'),fullExpectedRow('R2')]);assert.deepEqual(v.lastChild,expectedPairChild());S.validateSupplementPair(pair(v));}},
-           lc_last:()=>{const raw=receipt('R2');raw.children=[{actualElapsedMs:900,aborted:true,steps:[{operation:'consume'}]},{actualElapsedMs:0.5,aborted:false,steps:[{operation:'grant'},{operation:'source-pair'}]}];const v=boundaryValue(raw);assert.equal(v.referenceStage.r2LastNonPairOperation,'grant');assert.equal(v.lastChild.ordinal,2);assert.equal(v.ownerReference[1].children.maxElapsedMs,900);},
-           lc_unknown:()=>{for(const item of [null,{},false,'PRIVATE_CANARY',{operation:'PRIVATE_CANARY'},{operation:'source-pair-private'},{operation:'Consume'},{operation:'authorization'},{operation:'GrantLink'},{operation:'open_fence'}]){const v=entryValue([{operation:'consume'},item,{operation:'source-pair'}]);assert.equal(v.referenceStage.r2LastNonPairOperation,'unknown');assert(!JSON.stringify(v).includes('PRIVATE_CANARY'));S.validateSupplementPair(pair(v));}},
-           lc_ops:()=>{assert.deepEqual(S.R2_ENTRIES,['consume','grant','unknown']);for(const operation of S.OPERATIONS){const v=entryValue([{operation:'grant'},{operation}]);assert.equal(v.referenceStage.r2LastNonPairOperation,operation==='source-pair'?'grant':['consume','grant'].includes(operation)?operation:'unknown');S.validateSupplementPair(pair(v));}},
-           lc_steps:()=>{for(const steps of [undefined,null,{},'PRIVATE_CANARY',3,[],[{operation:'source-pair'}],[{operation:'source-pair'},{operation:'source-pair'}]]){const v=entryValue(steps);assert.equal(v.referenceStage.r2LastNonPairOperation,'unknown');S.validateSupplementPair(pair(v));}},
-           lc_schema:async()=>{
+           return done();},
+           lc_pair:(done)=>{for(const operation of ['consume','grant']){const v=entryValue([{operation},{operation:'source-pair',elapsedMs:0.75}]);assert.equal(v.referenceStage.r2LastNonPairOperation,operation);assert.deepEqual(v.ownerReference,[fullExpectedRow('R1'),fullExpectedRow('R2')]);assert.deepEqual(v.lastChild,expectedPairChild());S.validateSupplementPair(pair(v));}return done();},
+           lc_last:(done)=>{const raw=receipt('R2');raw.children=[{actualElapsedMs:900,aborted:true,steps:[{operation:'consume'}]},{actualElapsedMs:0.5,aborted:false,steps:[{operation:'grant'},{operation:'source-pair'}]}];const v=boundaryValue(raw);assert.equal(v.referenceStage.r2LastNonPairOperation,'grant');assert.equal(v.lastChild.ordinal,2);assert.equal(v.ownerReference[1].children.maxElapsedMs,900);return done();},
+           lc_unknown:(done)=>{for(const item of [null,{},false,'PRIVATE_CANARY',{operation:'PRIVATE_CANARY'},{operation:'source-pair-private'},{operation:'Consume'},{operation:'authorization'},{operation:'GrantLink'},{operation:'open_fence'}]){const v=entryValue([{operation:'consume'},item,{operation:'source-pair'}]);assert.equal(v.referenceStage.r2LastNonPairOperation,'unknown');assert(!JSON.stringify(v).includes('PRIVATE_CANARY'));S.validateSupplementPair(pair(v));}return done();},
+           lc_ops:(done)=>{assert.deepEqual(S.R2_ENTRIES,['consume','grant','unknown']);for(const operation of S.OPERATIONS){const v=entryValue([{operation:'grant'},{operation}]);assert.equal(v.referenceStage.r2LastNonPairOperation,operation==='source-pair'?'grant':['consume','grant'].includes(operation)?operation:'unknown');S.validateSupplementPair(pair(v));}return done();},
+           lc_steps:(done)=>{for(const steps of [undefined,null,{},'PRIVATE_CANARY',3,[],[{operation:'source-pair'}],[{operation:'source-pair'},{operation:'source-pair'}]]){const v=entryValue(steps);assert.equal(v.referenceStage.r2LastNonPairOperation,'unknown');S.validateSupplementPair(pair(v));}return done();},
+           lc_schema:async(done)=>{
             const singleton=entryValue([{operation:'source-pair',elapsedMs:0.75}]);assert.deepEqual(singleton.lastChild,expectedPairChild(1));assert.equal(singleton.referenceStage.r2LastNonPairOperation,'unknown');
             assert.equal(S.producerTransportAccepted(pair(singleton)),true);S.validateSupplementPair(pair(singleton));const positive=await simulate({referenceSet:{ownerReference:singleton.ownerReference,lastChild:singleton.lastChild,referenceStage:singleton.referenceStage}});assert.equal(positive.result.status,'complete');
             for(const operation of ['consume','grant']){const v=structuredClone(singleton);v.referenceStage.r2LastNonPairOperation=operation;await rejectedEverywhere(v);}
@@ -1007,26 +1072,34 @@ jobs:
              const v=entryValue([{operation}]);for(const wrong of ['unknown',operation==='consume'?'grant':'consume']){const bad=structuredClone(v);bad.referenceStage.r2LastNonPairOperation=wrong;await rejectedEverywhere(bad);}
             }
             for(const lastStep of ['authorization','unknown','none']){const v=entryValue(lastStep==='none'?[]:[{operation:lastStep}]);for(const operation of ['consume','grant']){v.referenceStage.r2LastNonPairOperation=operation;await rejectedEverywhere(v);}}
-           },
-           lc_clean:async()=>{for(const options of [{cleanupOk:false},{fail:'cleanup-child'},{fail:'reference-child',settled:false},{cleanupUnsettled:true}]){const {result}=await simulate(options);assert.equal(result.status,'rejected');assert.deepEqual(result.referenceStage,S.unknownReferenceStage());}const v=value();v.status='rejected';v.failure={stage:'projection',reason:'project_failed'};v.ownerReference=['R1','R2'].map(c=>S.unknownReference(c));v.lastChild=S.unknownLastChild();mustReject(()=>S.validateSupplementResult(v));assert.deepEqual(S.publicationResult(v).referenceStage,S.unknownReferenceStage());},
-           lc_clock:async()=>{const v=entryValue([{operation:'grant'},{operation:'source-pair'}]);const set={ownerReference:v.ownerReference,lastChild:v.lastChild,referenceStage:v.referenceStage};const out=await simulate({referenceSet:set,cleanupTime:15000});assert.equal(out.result.status,'rejected');assert.deepEqual(out.result.referenceStage,S.unknownReferenceStage());},
-           lc_manifest:()=>{
+           return done();},
+           lc_clean:async(done)=>{for(const options of [{cleanupOk:false},{fail:'cleanup-child'},{fail:'reference-child',settled:false},{cleanupUnsettled:true}]){const {result}=await simulate(options);assert.equal(result.status,'rejected');assert.deepEqual(result.referenceStage,S.unknownReferenceStage());}const v=value();v.status='rejected';v.failure={stage:'projection',reason:'project_failed'};v.ownerReference=['R1','R2'].map(c=>S.unknownReference(c));v.lastChild=S.unknownLastChild();mustReject(()=>S.validateSupplementResult(v));assert.deepEqual(S.publicationResult(v).referenceStage,S.unknownReferenceStage());return done();},
+           lc_clock:async(done)=>{const v=entryValue([{operation:'grant'},{operation:'source-pair'}]);const set={ownerReference:v.ownerReference,lastChild:v.lastChild,referenceStage:v.referenceStage};const out=await simulate({referenceSet:set,cleanupTime:15000});assert.equal(out.result.status,'rejected');assert.deepEqual(out.result.referenceStage,S.unknownReferenceStage());return done();},
+           lc_manifest:(done)=>{
             const v=value(),p=pair(v),m=JSON.parse(p.get('manifest.json'));assert.equal(m.files[0].sha256,hash(p.get('result.json')));
             const changed=structuredClone(v);changed.referenceStage.r1FirstRejectedGroup='unknown';p.set('result.json',Buffer.from(JSON.stringify(changed)));mustReject(()=>S.validateSupplementPair(p));
             assert.equal(S.validateSupplementPair(pair(changed)).referenceStage.r1FirstRejectedGroup,'unknown');
             for(const f of [v=>v.purpose='afw.readonly-reference-boundaries.safe.v1',v=>v.inspection.inspector.source=ORIGINAL.sourceSha,v=>v.inspection.inspector.run=ORIGINAL.runId]){const q=value();f(q);mustReject(()=>S.validateSupplementPair(pair(q)));assert.equal(S.producerTransportAccepted(pair(q)),false);}
-           },
-           lc_bounds:()=>{
+           return done();},
+           lc_bounds:async(done)=>{
             const raw=receipt('R2'),steps=Array(1000001).fill(null);Object.defineProperty(steps,0,{get(){throw Error('must not peek over bound');}});raw.children[0].steps=steps;const v=boundaryValue(raw);assert.equal(v.lastChild.stepCount,null);assert.equal(v.referenceStage.r2LastNonPairOperation,'unknown');
             raw.children[0].steps=Array(1000000).fill({operation:'source-pair'});assert.equal(boundaryValue(raw).referenceStage.r2LastNonPairOperation,'unknown');
-           }
-          };
-          for(const [id,extra]of Object.entries(expansions)){assert(IDS.includes(id));const original=checks[id];checks[id]=async()=>{await original();await extra();};}
+            // The SAME harness must reject missing, skipped, no-op, forged, unreturned and duplicate completion.
+            const expected=['two_valid'];mustReject(()=>createExpansionHarness(expected,{}));
+            const skipped=createExpansionHarness(expected,{two_valid:async done=>done()});mustReject(()=>skipped.barrier());
+            for(const callback of [async()=>undefined,async()=>Symbol('forged'),async done=>{done();},async done=>{done();return done();},async done=>{assert.fail('inert assertion failure');return done();}]){
+             const failed=createExpansionHarness(expected,{two_valid:callback});await assert.rejects(()=>failed.wrap('two_valid',async()=>{})());mustReject(()=>failed.barrier());
+            }
+            const successful=createExpansionHarness(expected,{two_valid:async done=>{assert.equal(1,1);return done();}}),once=successful.wrap('two_valid',async()=>{});
+            await once();assert.deepEqual(successful.barrier(),[{id:'two_valid',count:1}]);await assert.rejects(()=>once());
           
-          const inventory=IDS.map((id,i)=>({id,status:passed?'passed':i===0?'failed':'not_executed'})),record={marker:'REFERENCE_CONTROLS/1',expected:40,completed:passed?40:1,pass:passed?40:0,fail:passed?0:1,inventory,firstFailure:passed?null:IDS[0]};assert(Buffer.byteLength(JSON.stringify(record)+'\n')<=2048);}for(const firstFailure of ['setup',...IDS]){const inventory=IDS.map(id=>({id,status:'not_executed'})),worst={marker:'REFERENCE_CONTROLS/1',expected:40,completed:0,pass:0,fail:0,inventory,firstFailure};assert(Buffer.byteLength(JSON.stringify(worst)+'\n')<=2048);}assert.equal(IDS.length,40);}
+           return done();}
           };
+          const expansionHarness=createExpansionHarness(EXPECTED_EXPANSION_IDS,expansions);
+          for(const id of EXPECTED_EXPANSION_IDS){assert(IDS.includes(id));checks[id]=expansionHarness.wrap(id,checks[id]);}
+          
           const inventory=IDS.map(id=>({id,status:'not_executed'}));let firstFailure=null;
-          try{assert.equal(process.env.GITHUB_SHA,'0'.repeat(40));assert.equal(process.env.GITHUB_RUN_ID,'1');assert(!Object.hasOwn(process.env,'AFW_SYN_CHECKPOINT_KEY'));assert.deepEqual(Object.keys(checks),IDS);for(const row of inventory){try{await checks[row.id]();row.status='passed';}catch{row.status='failed';firstFailure=row.id;break;}}}catch{firstFailure='setup';}
+          try{assert.equal(process.env.GITHUB_SHA,'0'.repeat(40));assert.equal(process.env.GITHUB_RUN_ID,'1');assert(!Object.hasOwn(process.env,'AFW_SYN_CHECKPOINT_KEY'));assert.deepEqual(Object.keys(checks),IDS);for(const row of inventory){try{await checks[row.id]();row.status='passed';}catch{row.status='failed';firstFailure=row.id;break;}}if(firstFailure===null){const witness={marker:'REFERENCE_EXPANSIONS/1',expected:22,completed:22,inventory:expansionHarness.barrier()},line=JSON.stringify(witness)+'\n';assert(Buffer.byteLength(line)<=2048);await writeFile(join(resolve(process.env.RUNNER_TEMP),'afw-reference-expansions-safe.json'),line,{flag:'wx',mode:0o600});}}catch{firstFailure='setup';}
           const pass=inventory.filter(x=>x.status==='passed').length,fail=inventory.filter(x=>x.status==='failed').length,record={marker:'REFERENCE_CONTROLS/1',expected:IDS.length,completed:pass+fail,pass,fail,inventory,firstFailure};
           const line=JSON.stringify(record);assert(Buffer.byteLength(line)+1<=2048);process.stdout.write(line+'\n');if(firstFailure!==null||pass!==IDS.length)process.exitCode=1;
           NODE_REFERENCE_TESTS
@@ -1058,68 +1131,81 @@ jobs:
           else await writeFile(process.env.GITHUB_OUTPUT,'core-sha256='+hash+'\n',{flag:'a'});
           NODE_PIN
           node "$RUNNER_TEMP/afw-core-pin.mjs" >"$RUNNER_TEMP/afw-core-pin.private" 2>&1
-      - name: Run fixed inert safety fixtures first
+      - name: Execute only the ninety-one fixed inert fixtures
+        id: controls
         shell: bash
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" fixtures >"$RUNNER_TEMP/afw-readonly-inspector-fixtures.private" 2>&1
-      - name: Download and validate the one fixed ciphertext ZIP
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" controls >"$RUNNER_TEMP/afw-readonly-inspector-controls.private" 2>&1
+      - name: Execute forty reference-stage FIX1 controls and twenty-two completion barrier
+        id: reference_controls
         shell: bash
-        env:
-          GH_ARTIFACT_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" download >"$RUNNER_TEMP/afw-readonly-inspector-download.private" 2>&1
-      - name: Authenticate original readonly custody privately
-        shell: bash
-        env:
-          AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
-        run: |
-          set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" open >"$RUNNER_TEMP/afw-readonly-inspector-open.private" 2>&1
-      - name: Project fixed safe facts and clean owned temporary data
+          result=0
+          timeout --kill-after=1s 10s env -i RUNNER_TEMP="$RUNNER_TEMP" GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 "$(command -v node)" --no-experimental-fetch "$RUNNER_TEMP/afw-reference-controls-current.mjs" >"$RUNNER_TEMP/afw-reference-controls-safe.json" 2>"$RUNNER_TEMP/afw-reference-controls.private" || result=$?
+          cat "$RUNNER_TEMP/afw-reference-controls-safe.json"
+          test "$result" = 0
+          node --input-type=module <<'NODE_REFERENCE_PROOF'
+          import {readFile,writeFile} from 'node:fs/promises';
+          import {join,resolve} from 'node:path';
+          import {createHash} from 'node:crypto';
+          import {pathToFileURL} from 'node:url';
+          const root=resolve(process.env.RUNNER_TEMP),hash=b=>createHash('sha256').update(b).digest('hex'),{validateControlProof}=await import(pathToFileURL(join(root,'afw-reference-supplement-current.mjs')).href);
+          const referenceSupplement={coreSha256:hash(await readFile(join(root,'afw-readonly-inspector-current.mjs'))),moduleSha256:hash(await readFile(join(root,'afw-reference-supplement-current.mjs'))),testsSha256:hash(await readFile(join(root,'afw-reference-controls-current.mjs'))),bootstrapSha256:hash(await readFile(join(root,'afw-reference-bootstrap-current.mjs'))),record:JSON.parse(await readFile(join(root,'afw-reference-controls-safe.json'),'utf8'))};
+          validateControlProof(referenceSupplement);
+          const witnessBytes=await readFile(join(root,'afw-reference-expansions-safe.json')),expectedWitness="{\"marker\":\"REFERENCE_EXPANSIONS/1\",\"expected\":22,\"completed\":22,\"inventory\":[{\"id\":\"two_valid\",\"count\":1},{\"id\":\"identities_flags\",\"count\":1},{\"id\":\"required_bounds\",\"count\":1},{\"id\":\"optional_types\",\"count\":1},{\"id\":\"array_bounds\",\"count\":1},{\"id\":\"private_canary\",\"count\":1},{\"id\":\"file_missing_bad\",\"count\":1},{\"id\":\"file_bound_links\",\"count\":1},{\"id\":\"gate_no_read\",\"count\":1},{\"id\":\"timeout_cleanup\",\"count\":1},{\"id\":\"uncertain_no_cleanup\",\"count\":1},{\"id\":\"strict_envelope\",\"count\":1},{\"id\":\"lc_pair\",\"count\":1},{\"id\":\"lc_last\",\"count\":1},{\"id\":\"lc_unknown\",\"count\":1},{\"id\":\"lc_ops\",\"count\":1},{\"id\":\"lc_steps\",\"count\":1},{\"id\":\"lc_schema\",\"count\":1},{\"id\":\"lc_clean\",\"count\":1},{\"id\":\"lc_clock\",\"count\":1},{\"id\":\"lc_manifest\",\"count\":1},{\"id\":\"lc_bounds\",\"count\":1}]}\n";
+          if(witnessBytes.length>2048||witnessBytes.toString('utf8')!==expectedWitness)throw Error('expansion_witness_rejected');
+          const witness=JSON.parse(witnessBytes.toString('utf8'));
+          if(JSON.stringify(witness)+'\n'!==expectedWitness)throw Error('expansion_witness_rejected');
+          process.stdout.write(JSON.stringify(witness)+'\n');
+          const dest=join(root,'afw-readonly-inspector-controls-public'),value=JSON.parse(await readFile(join(dest,'result.json'),'utf8'));
+          value.referenceSupplement=referenceSupplement;
+          const bytes=Buffer.from(JSON.stringify(value,null,2)),manifest=Buffer.from(JSON.stringify({purpose:'afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:bytes.length,sha256:hash(bytes)}]},null,2));
+          if(bytes.length+manifest.length>65536)throw Error('closed_controls_bound');
+          await writeFile(join(dest,'result.json'),bytes);await writeFile(join(dest,'manifest.json'),manifest);
+          NODE_REFERENCE_PROOF
+      - name: Preserve strict closed CONTROLS proof on success or failure
+        id: seal
         if: ${{ always() }}
         shell: bash
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-reference-supplement-current.mjs" coordinate >"$RUNNER_TEMP/afw-readonly-inspector-project.private" 2>&1
-      - name: Publish full closed supplement and whole-envelope inventory only
-        id: publish
-        if: ${{ always() }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node "$RUNNER_TEMP/afw-reference-supplement-current.mjs" publish >"$RUNNER_TEMP/afw-readonly-inspector-publish.private" 2>&1
-      - name: Preserve exact safe pair for seven days
+          node "$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.private" 2>&1
+          node "$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" seal >"$RUNNER_TEMP/afw-readonly-inspector-controls-seal.private" 2>&1
+      - name: Preserve only the exact safe pair
         id: artifact
-        if: ${{ always() && steps.publish.outcome == 'success' }}
+        if: ${{ always() && steps.seal.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: afw-readonly-receipt-inspection-${{ github.run_id }}-1
           path: |
-            ${{ runner.temp }}/afw-readonly-inspector-public/result.json
-            ${{ runner.temp }}/afw-readonly-inspector-public/manifest.json
+            ${{ runner.temp }}/afw-readonly-inspector-controls-public/result.json
+            ${{ runner.temp }}/afw-readonly-inspector-controls-public/manifest.json
           if-no-files-found: error
           retention-days: 7
           overwrite: false
           include-hidden-files: false
-      - name: Require successful authenticated producer and safe upload
+      - name: Require successful producer before any verifier
         if: ${{ always() }}
         shell: bash
         env:
-          INSPECTION_VALID: ${{ steps.publish.outputs.inspection-valid }}
+          CONTROLS_OUTCOME: ${{ steps.controls.outcome }}
+          REFERENCE_OUTCOME: ${{ steps.reference_controls.outcome }}
+          SEAL_OUTCOME: ${{ steps.seal.outcome }}
           UPLOAD_OUTCOME: ${{ steps.artifact.outcome }}
           CORE_SHA: ${{ steps.corepin.outputs.core-sha256 }}
         run: |
           set -euo pipefail
-          test "$INSPECTION_VALID" = true
+          test "$CONTROLS_OUTCOME" = success
+          test "$REFERENCE_OUTCOME" = success
+          test "$SEAL_OUTCOME" = success
           test "$UPLOAD_OUTCOME" = success
           test "$CORE_SHA" = d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246
 
   verifier:
     needs: producer
-    if: ${{ false && success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
@@ -1276,7 +1362,7 @@ jobs:
           
           function inline(tag){const opener="<<'"+tag+"'\n",ending="          "+tag+"\n";need(wf.split(opener).length===2);const a=wf.indexOf(opener)+opener.length,b=wf.indexOf(ending,a);need(b>a);const rows=wf.slice(a,b).split('\n');need(rows.pop()==='');return rows.map(x=>{need(x.startsWith('          '));return x.slice(10);}).join('\n')+'\n';}
           const reference=inline('NODE_REFERENCE'),referenceTests=inline('NODE_REFERENCE_TESTS'),referenceBootstrap=inline('NODE_REFERENCE_BOOTSTRAP');
-          need(hash(reference)==='cc2026e03bb7bf62e81d1c504e922694183e4aac37015f28263bfdb20bfb7653'&&hash(referenceTests)==='6d40c3e2f7ea2aacd3b0a8b4d8480240dd95201fb1151f5195ca646ca5242b2f'&&hash(referenceBootstrap)==='2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1');
+          need(hash(reference)==='cc2026e03bb7bf62e81d1c504e922694183e4aac37015f28263bfdb20bfb7653'&&hash(referenceTests)==='4b531da6b1ac707b0042562a39eb95ee752dfa5eac7f242fb93fcc903e0ac9bc'&&hash(referenceBootstrap)==='2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1');
           for(const[name,body]of [['afw-readonly-inspector-current.mjs',core],['afw-reference-supplement-current.mjs',reference],['afw-reference-controls-current.mjs',referenceTests],['afw-reference-bootstrap-current.mjs',referenceBootstrap]])await writeFile(join(resolve(process.env.RUNNER_TEMP),name),body,{flag:'wx',mode:0o600});
           const referenceImports="\nimport {validateSupplementPair,validateControlProof} from './afw-reference-supplement-current.mjs';\nconst SOURCE_REFERENCE_SHA="+JSON.stringify(hash(reference))+",SOURCE_REFERENCE_TESTS_SHA="+JSON.stringify(hash(referenceTests))+",SOURCE_REFERENCE_BOOTSTRAP_SHA="+JSON.stringify(hash(referenceBootstrap))+";\n";
           
@@ -1371,7 +1457,7 @@ jobs:
       - name: Verify sixteen controls then the assigned safe artifact exactly once
         shell: bash
         env:
-          READBACK_KIND: supplement
+          READBACK_KIND: controls
           PRODUCER_CORE_SHA: ${{ needs.producer.outputs.core-sha256 }}
           ASSIGNED_ARTIFACT_ID: ${{ needs.producer.outputs.artifact-id }}
           UPLOADED_ARTIFACT_DIGEST: ${{ needs.producer.outputs.artifact-digest }}
