@@ -778,3 +778,280 @@ Private fixedCurrentSealerProgram validates one exact sealer heading/next-upload
 CURRENT inline sealer expectedInventory builds SAME Set union as compiler from pinned descriptor roles and QA stdin once. Actual preflight still validates rawhashes/bytes/counts/selector/readers/additionalSYN/full schemas and exact inventory; verifyExpectedInventory compares ACTUAL array against unique expected paths, so actual duplicates, unknown and missing records fail. Focused fixed QA regression appended only inside private sandbox to SAME current module lexical helpers: pinned category overlap2 produces uniqueQA115/M61; valid record inventory accepted; duplicate/unknown/missing ACTUAL mutations all rejected. No copy of inventory algorithm. Reversing exactly helper/Set edits reconstructs prior053ebded workflow. No validator/pin relaxation or truncation. Previous first actual rejected profile assertion remains UNKNOWN; static duplicate defect was proven separately.
 
 After self-review one fresh attempt1 <=2min full covering: same5 syntax/lint; inactive1/business0/invalid pre-I0; Q8exact8; allF1–F8 including new current-frame/inventory and canary cases; three strict compile profiles positive/readonly/reduction_a with FULL validated outputs. Only contracts runnable/six nativefalse. No MF/SDKbusiness/I0/Native16/secrets. Public fixed JSON only; private raw runner lifetime. Source frozen through terminal/same-ID fullinventory proof. Failure exactc72/manual7false/report/STOP; allpass COMPLETE7latestFIXEDsealer/manual7false/currentwiring/readbacks/report/STOP. No automatic repair/retry/newdiagnostic. Formal FIX_BASEd9b7 and all history retained.
+
+
+## Round2 two-fix covering terminal FAILURE — valid full preflight evidence, F8 remains open
+
+ONE run43220608996/attempt1/Source306188a8c432506f3c334aad70c936bed04b8a0f/tree01698defdb0ce51d56125f401f682d5946483889/world122e74ace2b08f2791e63be2afbe87441c17d229/TEMP03a715eba7608b0026129b54790a2b86db8ac53c. Contracts131190870592 terminalFAILURE, job2026-11-12T12:44:06Z..2026-11-12T12:44:53Z, runupdated2026-11-12T12:44:54Z. All six native jobs terminalSKIPPED. No actualSDK/businessRoot/MF/I0/Native16.
+
+Actual initial PASS: same5 syntax/lint, inactive unset-group wrapper1/business0/nooutput, invalid rejection pre-I0/output, unchanged Q8exact8pass/fail0/cancelled0/skipped0/todo0. Actual closed controls F1–F7PASS again; F8FAIL typedAssertionError/codeERR_ASSERTION/operatorstrictEqual/actual1/expected0, message65B/SHA2569bc5ee0c3a036784a202eb6afe85019f0d6494796a67c0fcdb5cb1cdcc78bcb9, raw message/source/stack omitted. F8 control phase/cause not established by this DTO, no guessed attribution. Full safe groupDTO below. Individual F8 framing/inventory/canary subcases cannot be called qualified from a failed group.
+
+Strict three-profile command SUCCESS and CURRENT public validator now SUCCESSFULLY accepted full positive/readonly/reduction_a outputs. Closed diagnostics allPassedtrue, stagescomplete, positiveadditionalSYN0, readonly3, reduction_a3; allI0/nativefalse. Exact four full validated preflight JSONs are retained including positive alias; no rejected records and status.validationFailures exactempty. This is actual fixed pure compilation/provenance evidence, not native qualification or all-controls GREEN.
+
+Artifact13945287021 / finite-budget-fixed-preparation-306188a8c432506f3c334aad70c936bed04b8a0f, ZIP112100B/SHA256a2d38e39b9d6eeb677a5d3093d167e49dad3858cd867242f41dbc66c23af55ce, expires2026-11-19T12:44:46Z. First assigned ID retrieval actualNOTFOUND; second after2s SUCCEEDED, thirdSKIPPED. Uploaded/downloaded digest matched; independent full10fileinventory/context/hash and local manifest byte equality SUCCEEDED. Manifest1635B/SHA25602d57303d16ff350b5d009f22a11c7d0b5b219757a4be17dfdfb17450c7bc8a9. One bounded connector read112100B in RAM only verified actual ZIPdigest/names and safe status; no local files/project execution/raw Source/TAP/logs.
+
+Actual safe public inventory/status facts:
+
+```json
+{
+  "zipBytes": 112100,
+  "sha256": "a2d38e39b9d6eeb677a5d3093d167e49dad3858cd867242f41dbc66c23af55ce",
+  "rows": [
+    {
+      "name": "budget-artifact.json",
+      "bytes": 1635,
+      "sha256": "02d57303d16ff350b5d009f22a11c7d0b5b219757a4be17dfdfb17450c7bc8a9",
+      "files": [
+        {
+          "path": "controls.json",
+          "bytes": 2562,
+          "sha256": "980d4e435a3ee2303c9c9cfc9447137f7e50a3279faf5d2d725382dc64fdca1c"
+        },
+        {
+          "path": "diagnostics.json",
+          "bytes": 809,
+          "sha256": "c3ab7eb6aada5e2e62ebb3ada046c8bf08ad6ec4a1d53d6cd4b3fc5800d37811"
+        },
+        {
+          "path": "inactive.json",
+          "bytes": 199,
+          "sha256": "b45cfb6f89a79a1f15b842a71fff8b2003b8812ee5dd41e4a578d9037376b12c"
+        },
+        {
+          "path": "preflight-positive.json",
+          "bytes": 201677,
+          "sha256": "b095e851627e632f2653e9af9234b92dd29c3ac8ee5aeb8c996402df26253ed0"
+        },
+        {
+          "path": "preflight-readonly.json",
+          "bytes": 210747,
+          "sha256": "bf9914ca7e17df6e5565e91601b44912f15ed34462f043568dd5409df9db39d8"
+        },
+        {
+          "path": "preflight-reduction_a.json",
+          "bytes": 210752,
+          "sha256": "e1b1cea68919322becf969582e843c729b75589e93a532e768ff62e6f28fee87"
+        },
+        {
+          "path": "preflight.json",
+          "bytes": 201677,
+          "sha256": "b095e851627e632f2653e9af9234b92dd29c3ac8ee5aeb8c996402df26253ed0"
+        },
+        {
+          "path": "q-counts.json",
+          "bytes": 89,
+          "sha256": "a194a9895da45c53381b398c277e252ab18778d338ae51331a5800121510c6ae"
+        },
+        {
+          "path": "status.json",
+          "bytes": 1481,
+          "sha256": "64594c71b79153e7b1e190e68620166e98a7d1b6e0752c01d3de77a7e1d0ee4e"
+        }
+      ]
+    },
+    {
+      "name": "diagnostics.json",
+      "bytes": 809,
+      "sha256": "c3ab7eb6aada5e2e62ebb3ada046c8bf08ad6ec4a1d53d6cd4b3fc5800d37811"
+    },
+    {
+      "name": "controls.json",
+      "bytes": 2562,
+      "sha256": "980d4e435a3ee2303c9c9cfc9447137f7e50a3279faf5d2d725382dc64fdca1c"
+    },
+    {
+      "name": "inactive.json",
+      "bytes": 199,
+      "sha256": "b45cfb6f89a79a1f15b842a71fff8b2003b8812ee5dd41e4a578d9037376b12c"
+    },
+    {
+      "name": "preflight-positive.json",
+      "bytes": 201677,
+      "sha256": "b095e851627e632f2653e9af9234b92dd29c3ac8ee5aeb8c996402df26253ed0"
+    },
+    {
+      "name": "preflight-readonly.json",
+      "bytes": 210747,
+      "sha256": "bf9914ca7e17df6e5565e91601b44912f15ed34462f043568dd5409df9db39d8"
+    },
+    {
+      "name": "preflight-reduction_a.json",
+      "bytes": 210752,
+      "sha256": "e1b1cea68919322becf969582e843c729b75589e93a532e768ff62e6f28fee87"
+    },
+    {
+      "name": "preflight.json",
+      "bytes": 201677,
+      "sha256": "b095e851627e632f2653e9af9234b92dd29c3ac8ee5aeb8c996402df26253ed0"
+    },
+    {
+      "name": "q-counts.json",
+      "bytes": 89,
+      "sha256": "a194a9895da45c53381b398c277e252ab18778d338ae51331a5800121510c6ae"
+    },
+    {
+      "name": "status.json",
+      "bytes": 1481,
+      "sha256": "64594c71b79153e7b1e190e68620166e98a7d1b6e0752c01d3de77a7e1d0ee4e",
+      "status": "pure_failed",
+      "validationFailures": [],
+      "outcomes": {
+        "PURE_TEST_OUTCOME": "success",
+        "CONTROLS_OUTCOME": "failure",
+        "PREFLIGHT_OUTCOME": "success"
+      }
+    }
+  ]
+}
+```
+
+Actual closed controlDTO:
+
+```json
+{
+  "purpose": "afw.closed-pure-controls.syn.v2",
+  "source": "306188a8c432506f3c334aad70c936bed04b8a0f",
+  "run": "43220608996",
+  "attempt": "1",
+  "groups": [
+    {
+      "group": "F1",
+      "passed": true,
+      "caseCount": 2,
+      "evidence": {
+        "bytes": 904,
+        "sha256": "dcae1ea26b1b09c6f2eacc5fd66701bdb3c61d2ccd431281b3c5325827b0909f"
+      },
+      "error": null
+    },
+    {
+      "group": "F2",
+      "passed": true,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 3332,
+        "sha256": "dac450adc2e8566f01427d907b835f22a7e64301654f58a58cd9ef5557d12a21"
+      },
+      "error": null
+    },
+    {
+      "group": "F3",
+      "passed": true,
+      "caseCount": 4,
+      "evidence": {
+        "bytes": 5431,
+        "sha256": "5ccccc7bbfdbd01d5183c274ec1cbdab018aa0f165d3c42509b322d159147daf"
+      },
+      "error": null
+    },
+    {
+      "group": "F4",
+      "passed": true,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 2528,
+        "sha256": "fde2eea49ef543f0d36347cda87d7035f10657716cc6cd418bff1fb4548bb33b"
+      },
+      "error": null
+    },
+    {
+      "group": "F5",
+      "passed": true,
+      "caseCount": 3,
+      "evidence": {
+        "bytes": 16098,
+        "sha256": "3f0739f932e0de2cb06b9023b99307bd7787508cfd53ac7847027c759a11a398"
+      },
+      "error": null
+    },
+    {
+      "group": "F6",
+      "passed": true,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 218,
+        "sha256": "0cf03851592354cf957c3248d37b1585d924dfc009b79704db924a8145070e5a"
+      },
+      "error": null
+    },
+    {
+      "group": "F7",
+      "passed": true,
+      "caseCount": 4,
+      "evidence": {
+        "bytes": 599,
+        "sha256": "7362a7cc15236bd1958794837bccc943ebf5ea87ef2f3db7c06b8d6382c08036"
+      },
+      "error": null
+    },
+    {
+      "group": "F8",
+      "passed": false,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 383,
+        "sha256": "e9985577aa6e937bd6d6c4f56f2f1c17c4cb49831b339a88ffc5d18de092c896"
+      },
+      "error": {
+        "name": "AssertionError",
+        "nativeError": true,
+        "code": "ERR_ASSERTION",
+        "operator": "strictEqual",
+        "actual": 1,
+        "expected": 0,
+        "message": {
+          "bytes": 65,
+          "sha256": "9bc5ee0c3a036784a202eb6afe85019f0d6494796a67c0fcdb5cb1cdcc78bcb9",
+          "publicLabelSha256": "915c0f60e80855f6455a521d4d3df9e7a5f9c78452335b3deb332dbff239b594"
+        }
+      }
+    }
+  ],
+  "passed": false,
+  "I0Opened": false,
+  "nativeExecutionProduced": false,
+  "businessCases": 0
+}
+```
+
+Actual closed profileDTO:
+
+```json
+{
+  "purpose": "afw.closed-pure-diagnostic.syn.v2",
+  "source": "306188a8c432506f3c334aad70c936bed04b8a0f",
+  "run": "43220608996",
+  "attempt": "1",
+  "profiles": [
+    {
+      "profile": "positive",
+      "stage": "complete",
+      "passed": true,
+      "I0Opened": false,
+      "nativeExecutionProduced": false,
+      "additionalSYNCount": 0
+    },
+    {
+      "profile": "readonly",
+      "stage": "complete",
+      "passed": true,
+      "I0Opened": false,
+      "nativeExecutionProduced": false,
+      "additionalSYNCount": 3
+    },
+    {
+      "profile": "reduction_a",
+      "stage": "complete",
+      "passed": true,
+      "I0Opened": false,
+      "nativeExecutionProduced": false,
+      "additionalSYNCount": 3
+    }
+  ],
+  "allPassed": true,
+  "I0Opened": false,
+  "nativeExecutionProduced": false
+}
+```
+
+Required failure closure restores EXACTc72e31919d477280c9eef39b63ca46708acb82e7 COMPLETEseven/manual/noinputs/nopush/all7false. Old unsafe publisher restored INACTIVE exactly as required, never qualified foractivation. Latest FIXED-sealer complete7draft03a715eb and all code remain recoverable from306188a8, stillUNQUALIFIED becauseF8failed. No Source repair, new job, test/diagnostic retry or native release. Formalround2/FIX_BASEd9b7 remainopen; same reviewer gate pending an actual all-controls qualified covering. Full ref/tree/report/3183protected/3190leaves/closure0runs/zeroactive readback follows. STOP for Root ruling.
