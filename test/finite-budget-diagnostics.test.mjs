@@ -13,7 +13,7 @@ test('Q1 projection redacts secret markers and ignores accessors',()=>{
  assert(!raw.includes('SECRET_Q1'));assert(!raw.includes('url'));assert.equal(accessed,false);assert.equal(dto.rows[0].resourceClass,'KV');assert.equal(dto.testRevision,revision);
  const invalid=c.begin(r,child,{phase:'SECRET_Q1',resourceClass:'KV',operation:'get',at:3});assert.equal(invalid,null);assert(c.snapshot().coverage.invalid>0);assert(!JSON.stringify(c.snapshot()).includes('SECRET_Q1'));
 });
-test('Q2 one native entry and duplicate settlement retain consistent denominators',()=>{
+test('Q2 one native entry and duplicate settlement retain consistent denominators',async()=>{
  const {c,r,child}=fixture(),op=begin(c,r,child);c.settle(op,{at:10,status:'fulfilled'});c.settle(op,{at:20,status:'rejected'});
  const s=c.snapshot();assert.equal(s.rows.length,1);assert.equal(s.totals.nativeStarted,1);assert.equal(s.totals.nativeSettled,1);assert.equal(s.totals.nativeRejected,0);assert.equal(s.byPhaseResource[0].nativeSettled,1);assert.equal(s.totals.nativeDurationSumMs,10);assert.equal(s.totals.active,0);
  const c2=createBudgetDiagnostics({testRevision:revision,workerRole:'M'}),r2=c2.root({},{phase:'mcp_read',deadline:null,kind:'transport'});
@@ -30,6 +30,7 @@ test('Q2 one native entry and duplicate settlement retain consistent denominator
   assert.equal(verifyCompleteBudgetTrace(sameTime).level,'complete_trace');assert.equal(verifyObservedBudgetMetrics(sameTime).level,'observed_metrics');
   const altered=structuredClone(sameTime);altered.totals.peak=overlap?1:2;assert.throws(()=>verifyCompleteBudgetTrace(altered));
  }
+ await coldTransactionCallback();
 });
 test('Q3 fixed Root and phase survive a concurrent Root and late settlement',async()=>{
  const {c,r,child}=fixture(),a=begin(c,r,child,'authorize_get',0),r2=c.root({},{phase:'monitoring_post',deadline:31000,kind:'control'}),b=begin(c,r2,null,'monitoring_post',1);
@@ -43,6 +44,7 @@ test('Q3 fixed Root and phase survive a concurrent Root and late settlement',asy
  resolveTwo('two');await second;resolveOne('one');await first;
  const rows=runtime.snapshot().rows;assert.deepEqual(rows.map(v=>[v.rootOrdinal,v.phase]),[[1,'authorize_get'],[2,'monitoring_post']]);assert(rows[0].settledAt>=rows[1].settledAt);assert.equal(runtime.snapshot().totals.peak,2);
 
+ await coldPhaseReentry();
 });
 test('Q4 logical denial and cancellation do not fabricate native settlement',()=>{
  const {c,r,child}=fixture(),op=begin(c,r,child);c.logical(op,{at:5,reason:'timeout'});c.cancel(op,{at:6,stage:'started'});
@@ -224,6 +226,7 @@ test('Q5 observing preserves actual promise identity, resolution, rejection and 
  assert.notEqual(outerActual,bottom);assert.equal(await outerActual,value);
  const snapshot=runtime.snapshot();assert.equal(snapshot.totals.nativeStarted,4,'outer facade ACK is not a second native row');assert.equal(snapshot.totals.nativeRejected,1);assert.equal(snapshot.coverage.unattributed,0);
 
+ await coldFacadeBinding();
 });
 test('Q6 retained record bounds preserve native identity, observed metrics and omission evidence',async()=>{
  const bounded=createBudgetDiagnostics({testRevision:revision,workerRole:'QA',maxRows:1});
@@ -405,3 +408,135 @@ test('Q8 opaque wire bytes and linked body invocations preserve interval and byt
  assert.throws(()=>verifyObservedBudgetMetrics(wrongLink),/fetch parent/);
 
 });
+
+async function coldSourceExpressions(kind, controls=''){
+ const ts=(await import('typescript')).default;
+ const {transformBudgetPreparedSource}=await import('./fixtures/finite-budget-world.mjs');
+ const [file,pin]=kind==='initial'
+  ?['lib/mcp-qa-finite-initial-cleanup.mjs','f0e8a2720987d13d0011c437abd3c5ef7d1452493b3c0e67b5da5d319e474de5']
+  :['lib/mcp-qa-finite-owner-cleanup-journal.mjs','e40290e120266cd57bceb6faa5ea3c871ddd8aa00c9d02e98094aaf11dd4c888'];
+ const raw=await readFile(file,'utf8');
+ assert.equal(createHash('sha256').update(raw).digest('hex'),pin);
+ const emitted=transformBudgetPreparedSource(raw+controls,file,'QA').source;
+ const ast=ts.createSourceFile(file,emitted,ts.ScriptTarget.ESNext,true,ts.ScriptKind.JS);
+ assert.equal(ast.parseDiagnostics.length,0);
+ function exactly(predicate){
+  const found=[];
+  function visit(node){if(predicate(node))found.push(node);ts.forEachChild(node,visit);}
+  visit(ast);assert.equal(found.length,1,'unique emitted expression');return found[0];
+ }
+ function expression(node,bindings){
+  return Function(...Object.keys(bindings),'"use strict";return ('+node.getText(ast)+');')(...Object.values(bindings));
+ }
+ const transaction=exactly(n=>ts.isCallExpression(n)&&ts.isArrayLiteralExpression(n.arguments[2]??ast)&&ts.isArrowFunction(n.arguments[2].elements[0]??ast)&&n.expression.getText(ast).startsWith('__afwBudget.reflect('));
+ return {ts,ast,exactly,expression,transaction};
+}
+
+function memoryScope(){
+ const runtime=createBudgetRuntime({testRevision:revision,workerRole:'QA'}),root={},child={};
+ runtime.root(root,'cleanup_before_restore',30000);
+ runtime.descendant(root,child,5000);
+ return {runtime,root,child};
+}
+
+async function coldTransactionCallback(){
+ const journal=await coldSourceExpressions('journal'),initial=await coldSourceExpressions('initial');
+ const {runtime,child}=memoryScope();
+ const operations=[];
+ const tx={
+  get(key){assert.equal(this,tx);operations.push(key);return Promise.resolve('same');},
+  put(){assert.fail('existing journal record must stay untouched');},list(){assert.fail('unexpected list');}
+ };
+ let actual;
+ const storage={transaction(callback){assert.equal(this,storage);actual=callback(tx);return actual;}};
+ runtime.nativeHolder(storage,'DO','storage');
+ const c={storage,transaction:runtime.readMethod(storage,'transaction'),actorId:1,qa:2,wait:promise=>promise};
+ const read=runtime.run(child,()=>journal.expression(journal.transaction,{
+  __afwBudget:runtime,c,g:()=>{},inventory:async()=>({}),kind:'Identity',id:1,v:{preconnectionId:1,actorId:1,qaVersionId:2},
+  prefix:()=>'',suffix:'receipt',raw:'same',fail:()=>assert.fail('unexpected journal control')
+ }));
+ assert.equal(read,actual);assert.equal(await read,'existing');assert.deepEqual(operations,['receipt']);
+ const result=runtime.snapshot();
+ // Recognized native transaction form has distinct, freshly allocated method identities.
+ const control=memoryScope(),calls=[];
+ const nativeTx={get(key){assert.equal(this,nativeTx);calls.push(key);return Promise.resolve(key==='head'?undefined:'plan');},put(){},setAlarm(){},deleteAlarm(){}};
+ const nativeStorage={transaction(callback){assert.equal(this,nativeStorage);return callback(nativeTx);}};
+ control.runtime.nativeHolder(nativeStorage,'DO','storage');
+ const ok=control.runtime.run(control.child,()=>initial.expression(initial.transaction,{
+  __afwBudget:control.runtime,storage:nativeStorage,transaction:control.runtime.readMethod(nativeStorage,'transaction'),
+  parent:{retain:value=>value},current:()=>{},l:control.child,HEAD:'head',P:'',p:{},encode:()=>'plan',work:()=>123,fail:()=>assert.fail('unexpected control')
+ }));
+ assert.equal(await ok,123);assert.deepEqual(calls,['head','plan']);
+ assert.deepEqual(control.runtime.snapshot().rows.map(r=>[r.operation,r.rootOrdinal,r.childOrdinal]),[['transaction',1,1],['get',1,1],['get',1,1]]);
+ let unknown=0;control.runtime.run(control.child,()=>control.runtime.member({get(){unknown++;}},'get',{operation:'get'})());
+ assert.equal(unknown,1);assert.equal(control.runtime.snapshot().chronology.reasons.invocationIdentity,1);
+ assert.deepEqual([result.chronology.reasons.invocationIdentity,...result.rows.map(r=>[r.operation,r.status,r.rootOrdinal,r.childOrdinal])],
+  [0,['transaction','fulfilled',1,1],['get','fulfilled',1,1]],'cold-B cleanup journal callback attribution');
+}
+
+async function coldFacadeBinding(){
+ const initial=await coldSourceExpressions('initial'),{ts,ast,exactly,expression}=initial;
+ const facadeCall=exactly(n=>ts.isCallExpression(n)&&n.expression.getText(ast)==='work'&&n.arguments[0]?.getText(ast).includes('alarm:'));
+ const wrapper=exactly(n=>ts.isVariableDeclaration(n)&&n.name.getText(ast)==='put'&&ts.isArrowFunction(n.initializer??ast)&&n.initializer.getText(ast).includes('tp'));
+ const putCall=exactly(n=>ts.isCallExpression(n)&&ts.isCallExpression(n.expression)&&n.expression.expression.getText(ast)==='__afwBudget.member'&&n.expression.arguments[0]?.getText(ast)==='tx'&&n.expression.arguments[1]?.text==='put'&&n.arguments[1]?.getText(ast).includes('next'));
+ const controls=await coldSourceExpressions('initial',"\nfunction coldExplicit(put){return {put(...args){return Reflect.apply(put,this,args);}};}\nfunction coldAlias(put){return {put};}\n");
+ const controlFunction=name=>controls.exactly(n=>ts.isFunctionDeclaration(n)&&n.name?.text===name);
+ async function probe(mode){
+  const {runtime,child}=memoryScope(),effects=[],value=Object.freeze({}),nativeResult=Promise.resolve(value);
+  const tx={put(...args){effects.push({receiver:this,args});return nativeResult;}};
+  runtime.nativeHolder(tx,'DO','transaction');
+  const tp=runtime.readMethod(tx,'put');
+  let originalPromise,enteredThis,nativePromise,unknownCalls=0;
+  const put=expression(wrapper.initializer,{__afwBudget:runtime,check:()=>{},tp,tx,parent:{retain(p){nativePromise=p;return p;}}});
+  const watched=new Proxy(put,{apply(target,receiver,args){enteredThis=receiver;originalPromise=Reflect.apply(target,receiver,args);return originalPromise;}});
+  let adapter;
+  const generate=(name,fn)=>controls.expression(controlFunction(name),{__afwBudget:runtime})(fn);
+  if(mode==='wrapper')adapter=expression(facadeCall.arguments[0],{__afwBudget:runtime,r:()=>{},put:watched});
+  if(mode==='explicit')adapter=generate('coldExplicit',watched);
+  if(mode==='alias')adapter=generate('coldAlias',tp);
+  if(mode==='unknown')adapter=generate('coldAlias',function(){unknownCalls++;return nativeResult;});
+  const observed=runtime.run(child,()=>expression(putCall,{__afwBudget:runtime,tx:adapter,P:'',encode:(_kind,v)=>v,next:value}));
+  if(mode==='wrapper'||mode==='explicit'){
+   assert.equal(enteredThis,adapter);assert.equal(observed,originalPromise);assert.equal(nativePromise,nativeResult);assert.equal(await observed,undefined);
+  }else{assert.equal(observed,nativeResult);assert.equal(await observed,value);}
+  if(mode==='unknown'){assert.equal(unknownCalls,1);assert.deepEqual(effects,[]);}
+  else{assert.equal(effects.length,1);assert.equal(effects[0].receiver,mode==='alias'?adapter:tx);assert.deepEqual(effects[0].args,['state',value]);}
+  const snapshot=runtime.snapshot();
+  assert(snapshot.rows.every(row=>row.operation==='put'&&row.rootOrdinal===1&&row.childOrdinal===1&&row.status==='fulfilled'));
+  return [snapshot.totals.nativeStarted,snapshot.totals.nativeSettled,snapshot.chronology.reasons.invocationIdentity];
+ }
+ assert.deepEqual(await probe('explicit'),[1,1,0]);
+ assert.deepEqual(await probe('alias'),[1,1,0]);
+ assert.deepEqual(await probe('unknown'),[0,0,1]);
+ assert.deepEqual(await probe('wrapper'),[1,1,0],'cold-A shorthand local wrapper attribution');
+}
+
+async function coldPhaseReentry(){
+ const {runtime,root,child}=memoryScope(),nested={},alias={},other={},error=Error('fixed phase check');
+ runtime.descendant(child,nested,4000);runtime.alias(child,alias);runtime.root(other,'monitoring_post',31000);
+ const value={},rejected=Promise.reject(error);rejected.catch(()=>{});
+ const get={get(promise){return promise;}};runtime.nativeHolder(get,'KV');
+ const leaf=p=>runtime.member(get,'get',{operation:'get'})(p);
+ let release;
+ const pending=new Promise(resolve=>{release=resolve;});
+ const original=runtime.run(child,()=>runtime.phase('sdk_lookup',()=>runtime.run(child,()=>leaf(pending))));
+ assert.equal(original,pending);
+ const settled=Promise.resolve(value);
+ runtime.run(child,()=>{
+  runtime.phase('sdk_lookup',()=>{
+   assert.equal(runtime.run(nested,()=>leaf(settled)),settled);
+   assert.equal(runtime.run(alias,()=>leaf(settled)),settled);
+   assert.equal(runtime.run(other,()=>leaf(settled)),settled);
+   assert.throws(()=>runtime.run(nested,()=>{throw error;}),e=>e===error);
+   assert.equal(runtime.run(child,()=>leaf(rejected)),rejected);
+  });
+  assert.equal(leaf(settled),settled);
+ });
+ assert.equal(runtime.run(root,()=>leaf(settled)),settled);
+ release(value);assert.equal(await pending,value);await assert.rejects(rejected,e=>e===error);
+ const result=runtime.snapshot();
+ assert.equal(result.coverage.invalid,0);assert.equal(result.totals.nativeRejected,1);
+ assert.deepEqual(result.rows.map(r=>[r.rootOrdinal,r.childOrdinal,r.rootDeadline,r.childDeadline]),[
+  [1,1,30000,5000],[1,2,30000,4000],[1,1,30000,5000],[2,null,31000,null],[1,1,30000,5000],[1,1,30000,5000],[1,null,30000,null]]);
+ assert.deepEqual(result.rows.map(r=>r.phase),['sdk_lookup','sdk_lookup','sdk_lookup','monitoring_post','sdk_lookup','cleanup_before_restore','cleanup_before_restore'],'cold-C explicit phase same-root reentry');
+}

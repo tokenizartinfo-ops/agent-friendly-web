@@ -1,0 +1,178 @@
+name: AFW finite budget qualification
+run-name: AFW cold attribution red pure ${{ github.sha }}
+on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+env:
+  AFW_BUDGET_GROUP: positive
+jobs:
+  pure:
+    if: ${{ github.run_attempt == 1 }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - name: Require the fixed AFW source and first attempt
+        id: scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
+          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
+          mkdir -m 700 "$RUNNER_TEMP/afw-pure-private"
+      - name: Checkout this exact revision
+        uses: actions/checkout@v4
+        with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install the locked fixture dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-locked-install.log" 2>&1 || { echo locked_install_failed; exit 1; }
+      - name: Run eight pure qualifications on actual source
+        id: cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          mkdir -m 700 "$RUNNER_TEMP/afw-pure-public"
+          code=0
+          node --test --test-reporter=tap test/finite-budget-diagnostics.test.mjs >"$RUNNER_TEMP/afw-pure-private/tests.tap" 2>&1 || code=$?
+          AFW_EXIT="$code" node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          import {join} from 'node:path';
+          const env=process.env,stage='red',out=join(env.RUNNER_TEMP,'afw-pure-public');
+          const tap=readFileSync(join(env.RUNNER_TEMP,'afw-pure-private/tests.tap'),'utf8');
+          assert(Buffer.byteLength(tap)<=256*1024);
+          const expected={2:'cold-B cleanup journal callback attribution',3:'cold-C explicit phase same-root reentry',5:'cold-A shorthand local wrapper attribution'};
+          const blocks=[...tap.matchAll(/^(not ok|ok) (\d+) - Q(\d+)[^\n]*\n([\s\S]*?)(?=^# Subtest:|^1\.\.)/gm)];
+          const failures=[],counts={};
+          for(const key of ['tests','pass','fail','cancelled','skipped','todo']){
+           const m=tap.match(new RegExp('^# '+key+' (\\d+)$','m'));counts[key]=m?Number(m[1]):null;
+          }
+          let causal=blocks.length===8&&blocks.every((m,i)=>Number(m[2])===i+1&&Number(m[3])===i+1);
+          for(const [all,status,,q] of blocks){
+           if(status==='ok')continue;
+           const confirmed=Boolean(expected[q]&&all.includes(expected[q])&&all.includes('ERR_ASSERTION'));
+           const code=all.match(/^    code: ['"]?(ERR_[A-Z_]+)['"]?$/m)?.[1]??null;
+           const frame=all.match(/finite-budget-diagnostics\.test\.mjs:(\d+):(\d+)/g)?.at(1)??null;
+           failures.push({q:Number(q),confirmed,code,frame});causal&&=confirmed;
+          }
+          const wanted=stage==='red'?failures.length>0&&env.AFW_EXIT==='1':failures.length===0&&env.AFW_EXIT==='0';
+          const valid=causal&&wanted&&counts.tests===8&&counts.fail===failures.length&&counts.pass===8-counts.fail&&counts.cancelled===0&&counts.skipped===0&&counts.todo===0;
+          const result={stage,source:env.GITHUB_SHA,run:env.GITHUB_RUN_ID,attempt:env.GITHUB_RUN_ATTEMPT,exit:Number(env.AFW_EXIT),counts,failures,valid,I0Opened:false,nativeExecutionProduced:false};
+          writeFileSync(join(out,'result.json'),JSON.stringify(result));console.log('AFW_PURE '+JSON.stringify(result));
+          if(valid){writeFileSync(join(out,'tests.tap'),tap);console.log(tap);}else{console.log('unexpected pure gate');process.exitCode=1;}
+          NODE
+      - name: Seal pure TAP and source-bound outcome
+        id: pure_seal
+        if: always() && !cancelled() && steps.cases.outcome != 'skipped'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';
+          import {readdir,readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
+          const out=process.env.RUNNER_TEMP+'/afw-pure-public';
+          const r=JSON.parse(await readFile(out+'/result.json','utf8'));
+          assert.deepEqual((await readdir(out)).sort(),r.valid?['result.json','tests.tap']:['result.json']);
+          await sealBudgetArtifact(out,'pure');
+          NODE
+      - name: Upload finite-budget-pure only
+        id: upload
+        if: always() && !cancelled() && steps.pure_seal.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: finite-budget-pure-${{ github.sha }}
+          path: ${{ runner.temp }}/afw-pure-public/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download pure_receipt by exact ID attempt 1
+        id: pure_receipt_1
+        if: always() && !cancelled() && steps.upload.outcome == 'success' && steps.upload.outputs.artifact-id != ''
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/afw-pure-receipt
+          merge-multiple: true
+      - name: Wait 2s before pure_receipt retrieval 2
+        id: pure_receipt_wait2
+        if: always() && !cancelled() && steps.pure_receipt_1.outcome == 'failure'
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          sleep 2
+      - name: Download pure_receipt by exact ID attempt 2
+        id: pure_receipt_2
+        if: always() && !cancelled() && steps.pure_receipt_wait2.outcome == 'success' && steps.pure_receipt_1.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/afw-pure-receipt
+          merge-multiple: true
+      - name: Wait 5s before pure_receipt retrieval 3
+        id: pure_receipt_wait3
+        if: always() && !cancelled() && steps.pure_receipt_2.outcome == 'failure'
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          sleep 5
+      - name: Download pure_receipt by exact ID attempt 3
+        id: pure_receipt_3
+        if: always() && !cancelled() && steps.pure_receipt_wait3.outcome == 'success' && steps.pure_receipt_2.outcome == 'failure'
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/afw-pure-receipt
+          merge-multiple: true
+      - name: Verify exact same-ID pure inventory
+        id: pure_verified
+        if: always() && !cancelled() && steps.upload.outcome == 'success'
+        env:
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
+          DOWNLOADED: ${{ steps.pure_receipt_1.outcome == 'success' || steps.pure_receipt_2.outcome == 'success' || steps.pure_receipt_3.outcome == 'success' }}
+          READBACK: ${{ runner.temp }}/afw-pure-receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test -n "$ARTIFACT_ID"
+          test "$DOWNLOADED" = true || { echo evidence_not_preserved; exit 1; }
+          if ! node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'pure',process.env.ARTIFACT_ID);" >"$RUNNER_TEMP/afw-pure-private/readback.log" 2>&1; then echo evidence_not_preserved; exit 1; fi
+          if ! cmp -s "$RUNNER_TEMP/afw-pure-public/budget-artifact.json" "$READBACK/budget-artifact.json"; then echo evidence_not_preserved; exit 1; fi
+          cat "$RUNNER_TEMP/afw-pure-private/readback.log"
+          printf 'pure_verified artifact_id=%s\n' "$ARTIFACT_ID"
