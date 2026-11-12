@@ -1,12 +1,10 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — ONEactualreceiptSUCCESS; OriginalR1/R2/R3KNOWNFAIL; F7closed093; existingreceipt-supplement design
+## CURRENT — originalR1/R2/R3 FAIL known; supplemental existing-receipt Task1 active; Native16 pending
 
-2026-11-12 17:01UTC. Actualinspector43261551282/1 Source2ddSUCCESS (16sproducer/19sverifier), auth+inventories/failureidentity/ownedtempcleanup/91+16+16/currentidentity/rawZIPtripleSHA passed. Root ONLYsafeartifact13963493234/2635B/c408e8a8 ->2JSON11355+345B strictindependentSource/context/schema/hash audit. [Actualprimary](../reviews/2026-11-12-native-readonly-receipt-primary.md). Originalcipher/key/privatepayloadNEVERonPC/Roottools, permitCONSUMEDONCE.
+2026-11-12 17:30 UTC. First actual diagnostic43261551282/1 COMPLETE and Source093/F7 safelyclosed; original R1 SDKReferenceabsent, R2 capEvents0, R3 heldACK2observation timeout. Primary22c526b9/sourcecorrelationf7189511. No proved repair, no Native retry; ownershipprojectioninvalid remains UNKNOWN, notactualcleanupfailure.
 
-Original3RcasesallFAIL: R1sdkReferenceabsent(world1178:109),R2capEvents0vs1(1135:51),R3heldACK2 observationwaittimeout(1148:68/1166). UnderlyingcauseNOTproved; allownershipprojectionsinvalid/UNKNOWN, full-results/business-countsmissing. [Publicsourcecorrelation](../reviews/2026-11-12-readonly-failure-source-correlation.md) identifiesexistingbudget-R1/R2receiptswrittenbeforefailure/sealedALLoutput; Sourcepredictedmembership, notdirectobserved. Needboundedscalarprojection tolocateSDKcompletionvslookupfailure; R3nopre-failreceipt. NoNative rerun/timeoutrelax.
-
-Source093e0079/tree3ca84d0f/exactF7manualsevenfalse/reportf4780317, Rootfullref/body/twopath/protected/0active17:00readbacks; actorSTOP. PreparationunitCOMPLETE(c433clean), actualinspectionunitCOMPLETE(2dd..093), Task2Nativequalification/PCoffPENDING. /root/inspector_pair_fix4 nowREADONLYDESIGN minimalCore-preserving supplementalR1/R2projector; NOnewSource/CI/privateopenreleaseyet. M2deferred, allreadinessfalse.
+New bounded subplan [reference supplement](2026-11-12-readonly-reference-supplement.es.md), spec0db3ca43/planbf5387c3/preflight123cb23a: read only two EXTRA already-preserved R1/R2 receipts after baselineCoreauthentication. Fresh /root/supplement_reader_impl (Solhigh) implementing Task1 under brief3893289f, ONE KEYLESS2+2 qualification; Core91d514/ZIPb36c immutable, new data contract/coordinator bounded10s+cleanup15s. Actualnewprivateprojection Task2 HELD until cleanreview/separateRootrelease. No Sourcebusiness/SDK/budget/CF/keychanges, no useractionneeded. GoalPCoff and Max stillpending, allreadinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 

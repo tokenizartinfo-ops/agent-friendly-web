@@ -2,11 +2,11 @@
 
 PROJECTAFW; repositorytokenizartinfo-ops/agent-friendly-web/public1347578006; Source/SYN GitHubActions; originGitHubconnector; Sourcebranchfeat/finite-native-cleanup-20261101; allowedONLY2SourcepathsWF+appendreport/ownCAS/exactF7rollback. Rootdocsbranchdocs/finite-pcoff-continuation-20261103 ownsledger/spec/plan. ParentNativeTask2ledger2026-11-07 remainspending; thisisaseparateboundeddiagnosticunit.
 
-## CURRENT — spec/plan prepared; preflight review pending; NO Source/CI/privateopen release
+## CURRENT — Task1 fresh implementer active; one keyless qualification released; private Task2 held
 
-2026-11-12 17:18UTC. Source093/F7closed, firstreceiptinspectioncompleteNative3Rfail.Provedfailure-siteSourcecorrelation+Writer/sealerpredictR1/R2receipts.No repairproved. SelectedCore-preservingcoordinatorbetweenproject-child/cleanup-child +closedenvelopesupplement.Methodoptoutofquestionsrecorded.ParentrootOwnerauthorizedAFWcontinuouschoices; Hermesworkspaceheadernotactivetask.
+2026-11-12 17:30 UTC. Fresh /root/supplement_reader_impl (gpt-6.1-sol/high) owns Source Task1 under brief3893289f and Rootdocs5a60124c. Preflight rulings123cb23a resolve HTTP mapping/default-zero semantics, unsafe termination cleanup, and transport-valid partial. Spec0db3ca43/planbf5387c3. SourceBASE093/F7 closed before author starts; prior actors STOP.
 
-Specdocs/superpowers/specs/2026-11-12-readonly-reference-supplement-design.md; plandocs/superpowers/plans/2026-11-12-readonly-reference-supplement.md; readonlyarchitect/rootagreednarrowapproach.Public-sourcecustody/inputscope unchanged,91COREd514/ZIPb36c preserved. Needpreflightconflicts/contractReview; thenTask1freshimplementer underconcretebrief/releasedONEkeylessattempt; actualTask2stillheld. No keys/privateresources/toolcipherdownloads/NativeSDK/clockchanges. Allreadinessfalse.
+Release: minimal Core-preserving coordinator/projector/new closed envelope, immutable Core d514 and ZIP b36c; retain91+16+16 plus<=24current controls; ONE KEYLESS2+2min attempt, no AFWkey/originalcipher/SDK/native/I0. Failure F7/0activeSTOP, success COMPLETEactual5+2INACTIVE/report/readbacksSTOP for independent review. No actual supplemental private-open permit yet. R1/R2file membership/values unobserved; underlying Native failure cause unproved; all readiness false.
 
 ## Preflight scan and Root rulings
 
