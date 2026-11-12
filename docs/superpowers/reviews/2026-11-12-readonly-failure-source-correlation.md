@@ -1,0 +1,32 @@
+# Original R1–R3 failure sites and next existing-evidence discriminator
+
+2026-11-12. Originalimmutable19789b5f/tree5c829802, world5fb78c057b7e80260ae683abf4af892767ce110e (1926lines), native-test533dafb5 (148lines), ownercleanup2f5dad6c. [Actualauthenticatedsafeproof](2026-11-12-native-readonly-receipt-primary.md). Rootplusindependentfailure_boundaries_impl readpublicsourceonly; no furtherpayload/open/run/Sourcechange.
+
+## Proved failure-site correlation
+
+- R1: typedstrictEqualfalse/true, world1178:109correspondstoassertsdkReference!==null forR1; precedingSDKRootI0/C0/C1vsplanequalitiespassed. SDKReferencewasabsent. Whetheractualcompletefulfilled/lookupentered/childexpired remainsUNKNOWN.
+- R2: typedstrictEqual0/1, world1135:51correspondsto capEvents.length===1 in fixedNegativeBoundaryProof. PreviousobserverInvalidfalsecheckpassed; noactualfinal-list-cap eventrecorded. Whether scanstoppedearlier/rejectedanotherguard/observationmissedboundaryUNKNOWN.
+- R3: false/true operator==, world1148:68called1166:34 isfixedBudgetWaitforheldNativeSettled===2 with30s observationdeadline. No sampled2heldACKstatebeforedeadline. This is NOTproofitsoriginal5sSDKchilddeadlinefired; donotextendtimeouts togreen.
+
+Allstackfromnative_test105 insideawaitrunBudgetReadonlyCase; outer106+assertionsNOTreached, nofull-result write. Registration103isjusttestregistration. PublicSourceWorld901catchpreservesprimaryandwritesownershipduringclose; ownershipprojectioninvalid doesnotestablishrealinvalidcleanup.
+
+## Static trace and hypotheses, NOTrepairproof
+
+prepareOwnerReference fixture125–129 installsR adapterbeforeauthorizeGET/POST. Adapter atfixture302 seeds199extragrantsR1/R3,200R2, preservingexpiration/differentcorrelation. It awaitssequentialnativewrites+inventorychecks INSIDEoutwardgrant-putPromise beforeSDKcomplete returns. Thisaddsrealsetup latency onanSDKcompletionpath; whetheritexhaustedheadroom UNMEASURED. Originalphase-context831–845 awaitsSDKcompletion BEFOREfreshreadonlylookupchild/Reference. Lookuporiginalchild5sceiling retained; prerequisite reads precedelistUserGrants. Seed/completionbudget exhaustion vslookupchild/prerequisite exhaustion aredistincthypotheses. No minimalrepairprovedyet.
+
+## Existing two-file discriminator, no nativeexecution needed
+
+R1/R2reachedworld1174recordOwnerReference BEFORElaterfailure. Thatfunctionfixture136–141 awaitspersistBudgetEvidence paths:
+
+- output/owner-reference/budget-R1.json
+- output/owner-reference/budget-R2.json
+
+Sourceevidence.mjs7–16writesfullJSONbeforereturn; fixturecleanupdeletesonlytmpdirafw-entry-restartpersistence, notoutput/owner-reference. OriginalreadonlyfailureWF1184–1188recursivelycopiesALLoutputwithnofilterintoprivateroot; custody328–345inventoriesregularfilesandsealsthemall. Source+observedexecution predicttheseentriesaresealed; actualinventorymembershiphasNOTbeenindividuallyobserved. Projectonly boundedscalars completeWrites/completeNormal/lists/gets/peak/referenceRows/responseStatus and lookupChildbudgetMs/actualElapsedMs/aborted plusboundedchild/root/httpdurations asneeded. Do notexporttrace/requests/steps/epochs/subjects/keys/tokens/URLs/abspaths. Missing/invalid=>explicitUNKNOWN, neverzero/pass.
+
+completeNormal0wouldlocatebeforeNORMALSDKcompletion; lookupChildnullmeansnocapturedlookup (verifyhookmeaningbeforecausalclaim); entered/abortedlookup+lowcounts directslookup/prerequisiteanalysis. No singlemetricprovesdeadlinecausalrace withoutsource/ordercorrelation.
+
+R3failsBEFORErecordOwnerReference, so nopathreceipt expected. No standalonefinalsignalsJSONexists; ownership.json privateepochs pre-disposalcapture is apossiblefutureprojection, notcurrentauthorizedscope. Do notreopenorchangeNativebudgets basedonthisdesignnotealone.
+
+## Next decision
+
+PrepareaminimalSEPARATEclosed supplementalreceiptprojector forfixedR1/R2files, reusingreviewedcustody/inputidentity/transport; preferunchanged91CORE/crypto/ZIP andboundedseambeforeownedcleanup. Keylessnewparser/schemafixturesandindependentreviewBEFOREnewprivateprojectionrelease. Rootrequestedread-onlydesignonly; noSourcewrite/run currentlyreleased. OriginalNative16retrystillunreleased, allreadinessfalse.
