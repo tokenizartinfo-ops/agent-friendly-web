@@ -1,8 +1,9 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — 2026-11-12 06:44:34 UTC: source preparation inactive; ordinary diagnostic running separately
+## CURRENT — 2026-11-12 07:27:36 UTC: native preparation fixes executing; ordinary date diagnostic isolated
 
-Task1 native9 COMPLETE/reviewclean7852. Task2 fixedcases/workflow prepared3590/treeb666; all7guardsfalse/manual, sourceSTOP/native16HELD. Compiler pure profiles and disposer faultcontrol green; Root fullrange package/architecture prequalification beforeclock, then coherent16 and finalreviews stillpending. O2 two-case diagnosisonseparatebranch7b200 triggerbridge reviewedclean; replacementONEprobe released, oldreleaseunconsumed. No realCF/provider/runtime/mail/mainchanges, nohumanbefore11UTC. operationalReadiness/completePackage/PCofffalse. Currentbudgetledger authoritative for this plan.
+Task1native9COMPLETE7852; Task2native16HELD/all7false untilfixed. Fullprepared3590reviewidentifiedF1–F7, formalfixround1B1releasedtoSAMEwriter scoped6fixtures/typedSYNobservations+pureRED/GREENgates (noMF/I0), production/SDK/pins/originalclocksintact. Currentbudgetledgerauthoritative. Awaitactualgateevidence beforeSAMEreviewer/actual16/final/globalreviews.
+O2singleprobecloseddd5f9a6d/ONErun43170408910/inactive/0active, statusincomplete2selectedfailuresratherthanoldskipconvention. NewstaticcausecandidateadoptionfixtureDate.nowmakesR1laterthanimmutablecustodyexpiry8Nov; actualfirstguardstillunknown. O3isolateddiagbranchf5preparingfixedhistorical-vs-currentclockcomparisonwithreceipt/lib/pinsunchanged, nojobsoractualfreshauth. Ownimportcauseunresolved. No actualprovider/runtime/keys/permissions/mail/mainchanges, nohumanbefore11UTC. Alloperationalreadiness/package/PCofffalse. Currentrootsummaryisnotcloudguardorreallivenessproof.
 
 ## Estado anterior — 12Nov04:59UTC: Task1diagnóstico COMPLETE; Task2preflight yORD-1review
 
