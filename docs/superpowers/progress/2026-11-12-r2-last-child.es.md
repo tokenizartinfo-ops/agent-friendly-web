@@ -1,8 +1,8 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-12-r2-last-child.md
 
-## CURRENT — preflight bound; Task1 prep+ONE KEYLESS2+2 released; Task2 held
+## CURRENT — Task1 GREEN and inactive; independent review pending; Task2 HELD
 
-2026-11-12. BindingpreflightImportantaggregatecoherenceclosedby [amendment](../reviews/2026-11-12-r2-last-child-preflight.md) BEFORESourcewrite. [Exactbrief](../briefs/2026-11-12-r2-last-child-task1.md) releasesfreshsolewriter+ONEkeyless2+2, noOriginal/key/SDK/native/runtime. SameSource295base/protected3188/Core/ZIP/time/privacycaps. FailureF7/0activeSTOP; PASScompleteinactive5+2+independentreview. ActualTask2HELD. Allreadinessfalse/no useractionneeded.
+2026-11-12. Source6c4b13c2/WF1bc698f1 bothfalse5+2/manual/noinputs/nopush. ExactlyoneKEYLESS43299396438/1 BOTHsuccess; Core91+reference40+pair16+ZIP16 PASS. Root independently safeZIP/wholemanifest/currentidentity/40inventory/modulehashes/protected3188/reportappend/main/0active checked. [Fullreviewpackage](../reviews/2026-11-12-r2-last-child-task1-package.md) includes logicalfullWFpatch and globalfullreportpatch; GitHub globalWFpatch omitted and never claimedcomplete. ImplementerSTOPPED. Allreadinessfalse, no Original/private/nativeexecution inTask1. ActualTask2HELD pendingcleanindependentreview+separateRootrelease. Record1728withoutLF/1729withLF; conservativeworst1985withLF supersedespreflight1972estimate.
 
 ## Prior proposal checkpoint
 
