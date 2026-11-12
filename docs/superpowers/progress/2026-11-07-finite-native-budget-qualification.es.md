@@ -30,6 +30,11 @@ Root verified jobs/logs43141464770/1: pure8Q/preflight PASS/artifact13910245453;
 
 Ruling: replace blind ordinary replay with ONE reporter-instrumented equivalent of its complete Node test command, same glob/default execution policy/groupUNSET, custom safe lifecycle recorder +private spec log, internal8min vsjob12min and separate always preservation/readback — yields actionable file/line/partial counts even on timeout — cost: one bounded cloud diagnostic, no production change or relaxed assertions. First verify reporter on ephemeral synthetic pass/fail/hang and secret canary. No unencrypted raw log or dynamic test names; fixed filenames/numeric/enum/whitelistedcodes only. Exact command deviation disclosed; cannot call literalnpm PASS. On terminal/partial STOP for Root; no automatic furtherordinary/full9/staging until ruling. Binding addendum in SAME fixbrief. Same round1,0addressed/5open; owner asleep/no requests before08Argentina.
 
+
+
+### Ordinary diagnostic checkout context — 12Nov03:04UTC
+Root read fixed CI blob496e4327: established ordinary checkout fetch-depth0 serves pinned provenance tests. Prior ordinary depth1 differs; no causal timeout diagnosis. Ruling: pending diagnostic uses fullhistory at SAME SourceSHA/persist-credentialsfalse to match CI, not a changedtestpolicy — cost remote historyfetch only. Do not restart an activejob. Brief amended before release; Root notified solewriter tohold diagnosticpush until this readback. R4pure unaffected.
+
 ## Bloque previo preservado — 12 noviembre, 01:13:58 UTC
 
 A/B/C se reprodujeron en RED43128157794/1 (8Q,5pass/3ERR_ASSERTION) y pasaron tras corrección en GREEN43128506060/1 (8/8,syntax/lint,preflight176/130/635/54). Artefactos13904395425 y13904770974 tuvieron readback; Root leyó TAP/logs y delta. No se abrió I0 ni se ejecutó P1. Source final limpio da70e2358b18f9db750e67ea6eab37fb54a96257/treec807af716c5dd14e09a59df7f9b082646bf90bf2/3188hojas,TEMPausente; reporte5173c1033d88ae18f9d494f686fa2fd2ea4dd708.
