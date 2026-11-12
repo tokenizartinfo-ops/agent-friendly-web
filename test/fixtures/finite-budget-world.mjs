@@ -8,6 +8,8 @@ import {budgetReaderSiteCount} from './finite-budget-diagnostics.mjs';
 import {verifyObservedBudgetMetrics,verifyCompleteBudgetTrace} from './finite-budget-evidence.mjs';
 
 
+let fixedCompileProfileOverride=null;
+const fixedAdapterFamily=()=>{const group=fixedCompileProfileOverride??process.env.AFW_BUDGET_GROUP;return group==='readonly'?'readonly':['reduction_a','reduction_b'].includes(group)?'reduction':null;};
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const METHODS=new Set(['get','put','list','delete','first','all','run','exec','batch','transaction','sync','getAlarm','setAlarm','deleteAlarm','fetch','read','cancel']);
 const label=text=>text.replace(/'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`/g,'[literal]');
@@ -610,6 +612,49 @@ const scopeInputPins=budgetNativeDescriptorProposal.implementationSupplement.sco
 function requireOrdinaryObserver(){
  assert.equal(process.env.AFW_BUDGET_DIAGNOSTIC_CANDIDATE,undefined,'deprecated diagnostic candidate rejected before I0');
 }
+
+function fixedQueueObservation(baseline){
+ const ast=sourceAST(baseline,'SYN-fixed-queue-observation'),sites=[],sdkSites=[];
+ const walk=node=>{
+  if(ts.isVariableStatement(node)&&node.declarationList.declarations.some(d=>d.name.getText(ast)==='actual'&&d.initializer?.getText(ast).includes('revokeGrant')))sdkSites.push(node.end);
+  if(ts.isExpressionStatement(node)&&ts.isCallExpression(node.expression)&&ts.isPropertyAccessExpression(node.expression.expression)&&node.expression.expression.getText(ast)==='queue.push'){
+   let owner=node.parent,family=null;
+   while(owner){if(ts.isFunctionDeclaration(owner)&&['readonlyGrantKv','reductionKv'].includes(owner.name?.text)){family=owner.name.text==='readonlyGrantKv'?1:2;break;}owner=owner.parent;}
+   if(family!==null){
+    assert.equal(node.expression.arguments.length,1);assert(ts.isObjectLiteralExpression(node.expression.arguments[0]));
+    assert.deepEqual(node.expression.arguments[0].properties.map(p=>p.name.getText(ast)),['method','args','resolve','reject']);
+    sites.push({family,end:node.end});
+   }
+  }ts.forEachChild(node,walk);
+ };walk(ast);assert.deepEqual(sites.map(s=>s.family),[1,2],'exact two original enqueue notifications after pinned baseline transform');
+ assert.equal(sdkSites.length,1,'single passive actual SDK settlement site');
+ const edits=sites.map(site=>({end:site.end,text:"\ntry{globalThis.__afwFixedSynBudgetQueueObserve?.(alias,"+site.family+",queue.length,active,Date.now());}catch{}\n"}));
+ edits.push({end:sdkSites[0],text:"\n{try{const __afwSynSdkObserver=Reflect.apply(__afwFixedSynPromiseThen,actual,[()=>{try{globalThis.__afwFixedSynBudgetSdkObserve?.(life.alias,1,Date.now());}catch{}},()=>{try{globalThis.__afwFixedSynBudgetSdkObserve?.(life.alias,2,Date.now());}catch{}}]);Reflect.apply(__afwFixedSynPromiseThen,__afwSynSdkObserver,[()=>undefined,()=>undefined]);}catch{}}\n"});
+ let source=baseline;for(const edit of edits.sort((a,b)=>b.end-a.end))source=source.slice(0,edit.end)+edit.text+source.slice(edit.end);
+ source="const __afwFixedSynPromiseThen=Promise.prototype.then;\n"+source;
+ sourceAST(source,'SYN-fixed-queue-emission');
+ return {source,proof:{purpose:'afw.fixed-syn-queue-observation.v1',baselineBytes:Buffer.byteLength(baseline),baselineSha256:hash(baseline),emittedBytes:Buffer.byteLength(source),emittedSha256:hash(source),sites:sites.map(s=>s.family),sdkSettlementSites:sdkSites.length,fields:['alias-identity','numeric-family','queued','active','timestamp'],businessAuthority:false}};
+}
+async function appendFixedSynAdapter(baseline,family){
+ const ast=sourceAST(baseline,'SYN-baseline-entry'),classes=ast.statements.filter(n=>ts.isClassDeclaration(n)&&n.name?.text==='Initial');
+ assert.equal(classes.length,1,'same existing named DO class');const node=classes[0];
+ assert(node.modifiers?.some(m=>m.kind===ts.SyntaxKind.ExportKeyword));
+ assert.equal(node.heritageClauses?.[0]?.types[0]?.expression.getText(ast),'FiniteClosure');
+ const names=node.members.map(n=>n.name?.getText(ast)),added=['finiteBudgetReadonly','finiteBudgetReduction','finiteBudgetSignals','finiteBudgetRelease','finiteBudgetRestore'];
+ for(const name of ['ownerReferenceConfigure','ownerCleanupFault','firstConnectionAvailability'])assert.equal(names.filter(n=>n===name).length,1);
+ for(const name of added)assert(!names.includes(name)&&!baseline.includes(name),'no SYN method collision');
+ const {finiteBudgetSynAdapterSource}=await import('./finite-owner-cleanup.mjs');
+ assert(['readonly','reduction'].includes(family));
+ const literal="const __afwFiniteBudgetFamily="+JSON.stringify(family)+";\n"+finiteBudgetSynAdapterSource;
+ const extension=sourceAST(literal,'SYN-fixed-prototype-adapter'),calls=[];
+ const operationInventory=Object.fromEntries(["Reflect.apply(","Object.defineProperty(","Object.defineProperties(","Promise.allSettled(","new WeakMap("].map(marker=>[marker,finiteBudgetSynAdapterSource.split(marker).length-1]));assert.deepEqual(operationInventory,{"Reflect.apply(":21,"Object.defineProperty(":2,"Object.defineProperties(":1,"Promise.allSettled(":1,"new WeakMap(":2},'closed fixed adapter operation inventory');
+ const walk=n=>{if(ts.isCallExpression(n)){const expression=n.expression.getText(extension);if(expression==='Object.defineProperties'){
+  assert.equal(n.arguments[0].getText(extension),'Initial.prototype');assert(ts.isObjectLiteralExpression(n.arguments[1]));calls.push(n.arguments[1].properties.map(p=>p.name.getText(extension)));
+ }}ts.forEachChild(n,walk);};walk(extension);assert.deepEqual(calls,[added]);
+ const source=baseline+'\n'+literal;assert.equal(source.slice(0,baseline.length),baseline,'exact original emitted prefix');
+ return {source,proof:{purpose:'afw.fixed-syn-prototype-adapter.v1',family,baselineBytes:Buffer.byteLength(baseline),baselineSha256:hash(baseline),literalBytes:Buffer.byteLength(literal),literalSha256:hash(literal),emittedBytes:Buffer.byteLength(source),emittedSha256:hash(source),methods:added,operationInventory,nativeInputAndAckObservationsSeparate:true,businessAuthority:false,originalEntryBytes:64800,originalEntrySha256:'89ae285b8f00fdf95eecfeee37673138f4c136c7704f245152051a3be2985257'}};
+}
+
 export function createBudgetCompiler(role){
  assert(['M','QA'].includes(role));const testRevision=process.env.GITHUB_SHA;assert.match(testRevision??'',/^[a-f0-9]{40}$/,'budget actual Actions revision before I0');
  requireOrdinaryObserver();const runtimeOptions={testRevision,workerRole:role};
@@ -625,8 +670,10 @@ export function createBudgetCompiler(role){
   else if(path!=='<stdin>'&&!path.startsWith('node_modules/')){
    const pin=scopeInputPins.find(p=>p.path===path);assert(pin?.roles.includes(role));assert.equal(hash(raw),pin.rawSha256,'scope input raw pin '+path);assert.equal(Buffer.byteLength(raw),pin.rawBytes);if(role==='M')assert.equal(source,raw);
   }
-  const result=transformBudgetPreparedSource(source,path,role);
-  records.set(path,{role,path,rawBytes:Buffer.byteLength(raw),rawSha256:hash(raw),preparedBytes:Buffer.byteLength(source),preparedSha256:hash(source),emittedBytes:Buffer.byteLength(result.source),emittedSha256:hash(result.source),counts:result.counts,selectors:result.selectorCounts,readerSites:result.readerSites});
+  let result=transformBudgetPreparedSource(source,path,role);const family=fixedAdapterFamily();let additionalSYN=null;
+  if(family&&role==='QA'&&path==='<stdin>'){const emitted=await appendFixedSynAdapter(result.source,family);additionalSYN=emitted.proof;result={...result,source:emitted.source};}
+  if(family&&role==='QA'&&path==='lib/mcp-qa-finite-owner-cleanup.mjs'){assert.equal(source.split('const actual=retain(api.revokeGrant(selector,i.subject));').length-1,1,'original SDK call and retain unchanged');const emitted=fixedQueueObservation(result.source);additionalSYN=emitted.proof;result={...result,source:emitted.source};}
+  records.set(path,{role,path,rawBytes:Buffer.byteLength(raw),rawSha256:hash(raw),preparedBytes:Buffer.byteLength(source),preparedSha256:hash(source),emittedBytes:Buffer.byteLength(result.source),emittedSha256:hash(result.source),counts:result.counts,selectors:result.selectorCounts,readerSites:result.readerSites,...additionalSYN?{additionalSYN}:{}});
   prepared.set(path,result.source);return result.source;
  }
  function plugin(existing=null){
@@ -658,6 +705,7 @@ export function createBudgetCompiler(role){
      assert.equal(prior.observerChronology,'afw.finite-budget-chronology.syn.v2','same v2 preflight');
      const shape=list=>list.map(r=>({role:r.role,path:r.path,rawBytes:r.path==='<stdin>'?null:r.rawBytes,rawSha256:r.path==='<stdin>'?null:r.rawSha256,counts:r.counts,selectors:r.selectors,readerSites:r.readerSites})).sort((a,b)=>a.path.localeCompare(b.path));
      assert.deepEqual(shape([...records.values()]),shape(prior.inputs[role]),'native prepared role hooks match exact prior pure preflight before I0');
+     const extra=list=>list.filter(record=>record.additionalSYN).map(record=>({path:record.path,...record.additionalSYN})).sort((a,b)=>a.path.localeCompare(b.path));assert.deepEqual(extra([...records.values()]),extra(prior.inputs[role]),'exact fixed SYN additional-emission provenance before I0');
     }
    });
   }};
@@ -682,16 +730,19 @@ export function attachBudgetEpochCapture(f,{segment='producer',epochs=[],epoch=0
  return f;
 }
 export async function preflightBudgetCompilation(){
- assert.equal(process.env.AFW_BUDGET_GROUP,'positive');
+ const requestedGroup=process.env.AFW_BUDGET_GROUP;assert(['positive','readonly','reduction_a'].includes(requestedGroup));
  requireOrdinaryObserver();
  const {initialEntryHarness}=await import('./finite-initial-entry-world.mjs');
- const graphs=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint:true,budgetCompileOnly:true,budgetQualification:true});
+ let graphs;fixedCompileProfileOverride=requestedGroup;process.env.AFW_BUDGET_GROUP='positive';
+ try{graphs=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint:true,budgetCompileOnly:true,budgetQualification:true});}finally{fixedCompileProfileOverride=null;process.env.AFW_BUDGET_GROUP=requestedGroup;}
  assert.equal(graphs.I0Opened,false);assert.equal(graphs.nativeExecutionProduced,false);
  assert(graphs.budget?.M?.length&&graphs.budget?.QA?.length);
  assert(graphs.compatibility.M.compatibility_flags.includes('nodejs_compat'));assert(graphs.compatibility.QA.flags.includes('nodejs_compat'));
- const result={purpose:'afw.finite-budget-preflight.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,inputs:graphs.budget,I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
+ const additions=graphs.budget.QA.filter(record=>record.additionalSYN).map(record=>({path:record.path,...record.additionalSYN}));assert.equal(additions.length,requestedGroup==='positive'?0:2);
+ if(requestedGroup!=='positive'){assert.deepEqual(additions.find(r=>r.path==='lib/mcp-qa-finite-owner-cleanup.mjs').sites,[1,2]);assert.equal(additions.find(r=>r.path==='lib/mcp-qa-finite-owner-cleanup.mjs').sdkSettlementSites,1);assert.equal(additions.find(r=>r.path==='<stdin>').family,requestedGroup==='readonly'?'readonly':'reduction');}
+ const result={purpose:'afw.finite-budget-preflight.syn.v1',group:requestedGroup,additionalSYN:additions,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,inputs:graphs.budget,I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
  result.observerChronology='afw.finite-budget-chronology.syn.v2';
- await mkdir('output/finite-budget/pure',{recursive:true});await writeFile('output/finite-budget/pure/preflight.json',JSON.stringify(result,null,2));
+ await mkdir('output/finite-budget/pure',{recursive:true});await writeFile('output/finite-budget/pure/preflight-'+requestedGroup+'.json',JSON.stringify(result,null,2));if(requestedGroup==='positive')await writeFile('output/finite-budget/pure/preflight.json',JSON.stringify(result,null,2));
  return result;
 }
 
@@ -704,6 +755,7 @@ export function extendBudgetQualification(entry){
 }
 function positiveKind(kind){assert.equal(kind,'positive','SYN budget kind unsupported before I0');assert.equal(process.env.AFW_BUDGET_GROUP,'positive');}
 export async function prepareBudgetProducer(kind,root){
+ if(kind==='reduction')return prepareReductionProducer(root);
  positiveKind(kind);
  const {produceCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
  return produceCheckpoint(root,{variant:'principal',budgetQualification:true});
@@ -808,6 +860,7 @@ async function preparePositiveProbe(root){
 }
 
 export async function verifyBudgetCheckpoint(kind,root){
+ if(kind==='reduction')return verifyReductionCheckpoint(root);
  positiveKind(kind);
  const {verifyCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
  const value=await verifyCheckpoint(root),b=value.data.budget;
@@ -838,6 +891,120 @@ export async function runBudgetConsumer(kind,root){
   finally{await f.mf.dispose();}
  }
 }
+
+const budgetFixedFlags={operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
+const fixedBudgetPause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function fixedBudgetWait(read,predicate,deadline){
+ for(;;){const value=await read();if(predicate(value))return value;assert(Date.now()<deadline,'SYN fixed budget observation deadline');await fixedBudgetPause(20);}
+}
+function fixedBudgetEnvelope(role,kind,cases,extra={}){
+ assert.equal(process.env.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(process.env.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(process.env.GITHUB_RUN_ATTEMPT,'1');
+ return {purpose:'afw.fixed-budget-lineage.syn.v1',repository:process.env.GITHUB_REPOSITORY,ref:process.env.GITHUB_REF,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,role,kind,cases,...extra,...budgetFixedFlags};
+}
+async function fixedBudgetPersist(name,value){
+ const root='output/finite-budget/'+name;await mkdir(root,{recursive:true});await writeFile(join(root,'full-result.json'),JSON.stringify(value,null,2));return value;
+}
+export async function runBudgetReadonlyCase(caseName){
+ assert.equal(process.env.AFW_BUDGET_GROUP,'readonly');assert(['R1','R2','R3'].includes(caseName));
+ const {ownerReferenceFixture,prepareOwnerReference,recordOwnerReference}=await import('./finite-owner-cleanup.mjs'),{plain}=await import('./finite-first-connection-publication.mjs');
+ const cleanups=[];let f,response,rootDuring,rootAfter,rootBefore,beforeRelease,afterRelease;
+ try{
+  f=await ownerReferenceFixture({after(fn){cleanups.push(fn);}},{cleanupCheckpoint:true,budgetQualification:true});f.finiteBudgetReadonlyCase=caseName;
+  const prepared=await prepareOwnerReference(f);rootBefore=await plain(f.stub.firstConnectionAvailability());assert.equal(rootBefore.available,true);
+  const issue=prepared.issue();
+  if(caseName==='R3'){const held=await fixedBudgetWait(()=>plain(f.stub.finiteBudgetSignals()),s=>s.heldNativeSettled===2,Date.now()+30000);assert.equal(held.queueObserverInvalid,false);assert(held.queuedAtHold>0,'actual populated readonly queue');}
+  response=await issue;await response.body?.cancel();
+  const observed=await plain(f.stub.ownerReferenceObserve());
+  if(caseName==='R3'){
+   rootDuring=await plain(f.stub.firstConnectionAvailability());assert.equal(rootDuring.available,false);assert.equal(rootDuring.live,true);
+   beforeRelease=await plain(f.stub.finiteBudgetSignals());assert.equal(beforeRelease.nativeUnsettled,0);assert.equal(beforeRelease.outwardPending,2);
+   await f.stub.finiteBudgetRelease();await fixedBudgetPause(100);afterRelease=await plain(f.stub.finiteBudgetSignals());rootAfter=await plain(f.stub.firstConnectionAvailability());
+  }else{await f.stub.finiteBudgetRelease();afterRelease=await plain(f.stub.finiteBudgetSignals());}
+  const native=afterRelease,reference=await plain(f.stub.ownerReferenceObserve()),record=await recordOwnerReference(f,'budget-'+caseName,{responseStatus:response.status});
+  const referenceIndex=observed.trace.indexOf('reference-readback-native-settled'),responseIndex=observed.trace.indexOf('native-authorize-response:302');
+  const facts={...native,completeWrites:observed.completeWrites,completeNormal:observed.completeNormal,responseStatus:response.status,referenceRows:reference.rows.filter(([key])=>key.endsWith(':reference')).length,
+   referenceBefore302:referenceIndex>=0&&responseIndex>referenceIndex,sdkReplay:Math.max(0,observed.completeWrites-1),rootBefore,rootDuring,rootAfter,
+   originalChildElapsedMs:observed.lookupChild?.actualElapsedMs??null,callsAfterRelease:beforeRelease?native.nativeInvoked-beforeRelease.nativeInvoked:0,lateReference:caseName==='R3'&&reference.rows.some(([key])=>key.endsWith(':reference'))};
+  return await fixedBudgetPersist('readonly/'+caseName,{...fixedBudgetEnvelope('consumer','readonly',[caseName],{consumerGroup:'readonly'}),caseName,facts,record,diagnostics:{epochs:structuredClone(f.budgetEpochs)},preparedInputs:f.firstConnectionBuild.budget});
+ }finally{
+  if(f){try{await f.stub.finiteBudgetRelease();await f.stub.finiteBudgetRestore();}finally{for(const cleanup of cleanups.reverse())await cleanup();}}
+ }
+}
+async function prepareReductionProducer(root){
+ assert.equal(process.env.AFW_BUDGET_GROUP,'reduction_a');
+ const {produceCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
+ const manifest=await produceCheckpoint(join(root,'native'),{variant:'principal',unexchanged:true,budgetQualification:true,sdkOnly:false});
+ const lineage=fixedBudgetEnvelope('producer','reduction',['D1','D2','D3','D4'],{producerGroup:'reduction_a',nativeManifestSha256:hash(await readFile(join(root,'native','manifest.json'))),I0:manifest.I0,C0:manifest.C0,C1:manifest.C1});
+ await writeFile(join(root,'lineage.json'),JSON.stringify(lineage,null,2));return lineage;
+}
+async function verifyReductionCheckpoint(root,{consumer=false}={}){
+ const {verifyCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs');
+ const lineage=JSON.parse(await readFile(join(root,'lineage.json'),'utf8')),expected=fixedBudgetEnvelope('producer','reduction',['D1','D2','D3','D4'],{producerGroup:'reduction_a',nativeManifestSha256:lineage.nativeManifestSha256,I0:lineage.I0,C0:lineage.C0,C1:lineage.C1});
+ assert.deepEqual(lineage,expected,'fixed producer bindings separate from consumer group');
+ assert.equal(hash(await readFile(join(root,'native','manifest.json'))),lineage.nativeManifestSha256);
+ const value=await verifyCheckpoint(join(root,'native')),b=value.data.budget;
+ assert.equal(value.data.unexchanged,true);assert.equal(value.data.sdkOnlyBuild,null);assert.equal(value.data.sdkAfterExchange,null);assert.equal(value.data.lateToken,null);assert.equal(value.data.sdkUnexchanged.codeExchanged,false);
+ assert.equal(b.source,process.env.GITHUB_SHA);assert.equal(b.run,process.env.GITHUB_RUN_ID);assert.equal(b.attempt,process.env.GITHUB_RUN_ATTEMPT);assert.equal(b.ownerReference.completeNormal,1);assert.equal(b.ownerReference.referenceRows,1);
+ assert.deepEqual([value.manifest.I0,value.manifest.C0,value.manifest.C1],[lineage.I0,lineage.C0,lineage.C1]);
+ if(consumer){
+  assert.match(process.env.AFW_BUDGET_PRODUCER_ARTIFACT_ID??'',/^[1-9][0-9]*$/);assert.match(process.env.AFW_BUDGET_PRODUCER_DIGEST??'',/^[a-f0-9]{64}$/);
+  assert.equal(process.env.AFW_BUDGET_PRODUCER_KIND,'reduction-checkpoint');assert.equal(process.env.AFW_BUDGET_PRODUCER_GROUP,'reduction_a');assert.equal(process.env.AFW_BUDGET_PRODUCER_READBACK,'verified');
+ }
+ return {...value,lineage};
+}
+async function observeFixedReduction(f,caseName,shared){
+ const {plain}=await import('./finite-first-connection-publication.mjs'),{observeOriginalAlarm}=await import('./finite-owner-cleanup-persistence.mjs');
+ let rootDuring,rootAfter,beforeRelease,afterRelease;
+ try{
+  if(caseName==='D4'){
+   const held=await fixedBudgetWait(()=>plain(f.stub.finiteBudgetSignals()),s=>s.heldNativeSettled===2,f.plan.C0+15000);
+   assert.equal(held.queueObserverInvalid,false);assert(held.queuedAtHold>0,'actual populated reduction queue');
+  }
+  const original=await observeOriginalAlarm(f);
+  if(caseName==='D4'){
+   rootDuring=await plain(f.stub.firstConnectionAvailability());assert.equal(rootDuring.available,false);assert.equal(rootDuring.live,true);
+   beforeRelease=await plain(f.stub.finiteBudgetSignals());assert.equal(beforeRelease.nativeUnsettled,0);assert.equal(beforeRelease.outwardPending,2);
+  }
+  await f.stub.finiteBudgetRelease();await fixedBudgetPause(100);afterRelease=await plain(f.stub.finiteBudgetSignals());
+  if(caseName==='D4')rootAfter=await plain(f.stub.firstConnectionAvailability());
+  const final=await plain(f.stub.ownerCleanupFacts()),rows=final.rows,state=JSON.parse(rows.find(([key])=>key==='afw.finite-initial-cleanup.v1:state')[1]),ownerRows=rows.filter(([key])=>key.startsWith('afw.finite-owner-cleanup.v1:'));
+  assert.equal(afterRelease.sdkObserverInvalid,false);assert.equal(afterRelease.sdkFulfilled+afterRelease.sdkRejected,1,'actual SDK promise outcome observed exactly once');
+  const sdkObserved=ownerRows.some(([key])=>key.endsWith(':sdk_revoke:observed')),ownerReceipt=ownerRows.some(([key])=>key.endsWith(':receipt'));
+  await f.captureBudgetEpoch('fixed-'+caseName+'-after-original-alarm');
+  const facts={...afterRelease,sdkReplay:Math.max(0,afterRelease.sdkFulfilled+afterRelease.sdkRejected-1),sdkReturned:afterRelease.sdkFulfilled===1,sdkObserved,ownerReceipt,completed:state.status==='complete',pendingPreserved:state.status!=='complete',
+   uncertainSendRetried:original.signal.entered!==1,rootBefore:f.budgetRootBefore,rootDuring,rootAfter,
+   originalChildElapsedMs:caseName==='D4'?Math.max(0,...final.children.filter(child=>child.startedAt>=f.plan.C0).map(child=>child.elapsedMs)):null,
+   callsAfterRelease:beforeRelease?afterRelease.nativeInvoked-beforeRelease.nativeInvoked:0,falseSdkReturn:caseName==='D4'&&afterRelease.sdkFulfilled>0};
+  return await fixedBudgetPersist('reduction/'+caseName,{...fixedBudgetEnvelope('consumer','reduction',[caseName],{consumerGroup:shared.group}),caseName,plan:f.plan,facts,alarm:original,final,
+   producer:{unexchanged:true,codeExchanged:false,normalComplete:f.checkpoint.budget.ownerReference.completeNormal,sameCheckpoint:true,consumerGroup:shared.group,manifestSha256:f.recovery.manifestSha256,artifactId:shared.producerArtifactId,digest:shared.producerDigest},
+   recovery:{...f.recovery,pairSize:2,pairReady:shared.pairReady,restart:false,coldInventoryVerified:true,bothAliases:f.kvSemanticProof.bothAliases,pairEntered:shared.entered,consumerFinished:Date.now()},
+   diagnostics:{epochs:structuredClone(f.budgetEpochs)},preparedInputs:f.checkpoint.budget.preparedInputs});
+ }finally{await f.stub.finiteBudgetRelease();}
+}
+export async function prepareBudgetReductionPair(group,root){
+ assert(['reduction_a','reduction_b'].includes(group));assert.equal(process.env.AFW_BUDGET_GROUP,group);
+ const verified=await verifyReductionCheckpoint(root,{consumer:true});
+ const {recoverCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs'),{plain}=await import('./finite-first-connection-publication.mjs');
+ const cases=group==='reduction_a'?['D1','D2']:['D3','D4'],fixtures=[],results=new Map(),shared={group,entered:Date.now(),pairReady:null,producerArtifactId:process.env.AFW_BUDGET_PRODUCER_ARTIFACT_ID,producerDigest:process.env.AFW_BUDGET_PRODUCER_DIGEST};
+ let closing;
+ const dispose=()=>closing??=(async()=>{for(const f of fixtures){try{await f.stub.finiteBudgetRelease();await f.stub.finiteBudgetRestore();}finally{await f.mf.dispose();}}})();
+ try{
+  // Register each fulfilled mount immediately, including a late sibling after a
+  // partial rejection. No replica starts after its sibling passes C0.
+  const mounts=await Promise.allSettled(cases.map(async caseName=>{
+   const f=await recoverCheckpoint(join(root,'native'),{label:'budget-'+caseName,restart:false,budgetQualification:true});fixtures.push(f);f.budgetCase=caseName;
+   f.budgetRootBefore=await plain(f.stub.firstConnectionAvailability());assert.equal(f.budgetRootBefore.available,true);
+   const input=await plain(f.stub.finiteBudgetReduction(caseName));assert.equal(input.sameKvBinding,true);
+   f.budgetInputReady=Date.now();assert(f.budgetInputReady<=f.plan.C0-30000);return f;
+  }));
+  const rejected=mounts.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;
+  shared.pairReady=Math.max(...fixtures.map(f=>f.budgetInputReady));assert(shared.pairReady<=verified.lineage.C0-30000,'both original cold replicas and input readbacks ready');
+  assert.equal(fixtures.length,2);assert(fixtures.every(f=>f.recovery.manifestSha256===verified.lineage.nativeManifestSha256));
+  for(const f of fixtures){const result=observeFixedReduction(f,f.budgetCase,shared);result.catch(()=>{});results.set(f.budgetCase,result);}
+  return {result(name){assert(cases.includes(name));return results.get(name);},dispose};
+ }catch(error){await dispose();throw error;}
+}
+
 export async function sealBudgetArtifact(root,kind){
  assert(['pure','checkpoint','positive'].includes(kind));
  await mkdir(root,{recursive:true});
@@ -861,10 +1028,12 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
   if(command==='preflight-budget')await preflightBudgetCompilation();
   else if(command==='prepare-positive-probe')await preparePositiveProbe(root);
   else if(command==='prepare-positive')await prepareBudgetProducer('positive',root);
+  else if(command==='prepare-reduction')await prepareBudgetProducer('reduction',root);
+  else if(command==='verify-reduction')await verifyBudgetCheckpoint('reduction',root);
   else if(command==='verify-positive')await verifyBudgetCheckpoint('positive',root);
   else if(command==='inspect-budget-graphs')await inspectBudgetCompilation(root);
   else throw Error('SYN budget command unsupported before I0');
  };
  // Finish this module before command work imports fixtures that import it.
- setImmediate(()=>{main().catch(error=>{console.error(error);process.exitCode=1;});});
+ setImmediate(()=>{main().catch(()=>{console.error('SYN fixed budget command failed');process.exitCode=1;});});
 }
