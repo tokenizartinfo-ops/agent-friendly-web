@@ -2292,3 +2292,81 @@ Both seven-day artifacts contain only tests.tap, result.json and budget-artifact
 Cleanup removes TEMP and appends only this section. The final complete tree comparison against BASE must contain exactly the pure test, runtime fixture and this report; all other 3,185 BASE leaves, including compiler, descriptors, evidence, custody helper, native P1, worker, SDK, package/lock/config/compatibility, stay exact. TEMP is absent, restoring 3,188 leaves. The cleanup commit preserves the report's original prefix and introduces no runtime or main change.
 
 The receiver-semantic concern is cleared by this bounded pure RED/GREEN. This does not complete Task1, coherent full9, native qualification, delivery or PC-off readiness. No I0/Miniflare/native lifecycle, historical decryption, original P1, custody-nine repetition, Task2, browser, credential, email, provider operation, PR or deployment occurred. No concern requiring intervention remains in this correction; Root decides the next coherent full9 separately. operationalReadiness=false; completePackage=false; PCoff=false. STOP_WRITES after cleanup readback.
+
+
+## Corrected original lifecycle qualification — 2026-11-12 UTC
+
+The [Root-owned release brief](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/d221515e7c393e456c982182169232e134bf9208/docs/superpowers/briefs/2026-11-12-finite-budget-corrected-full-lifecycle-task1.md) authorized exactly one fresh original-clock full9 after the causal A/B/C and callback-receiver fixes. This continues the same Task1; it does not replay the historical failed lifecycle. BASE `bd00efd8eb5efec59dcf3a7cf69b4481d3942e06`, tree `18fa2db9600b1d7eebdab7a811e6a64f57b142ee`, 3,188 leaves. GLOBALBASE remains `29681cae2bf1094ec5c66d5b2784254f77bec697`.
+
+Executed Source `baef10ca4b50321bd4c19f91a0cfdf889201bfce`, tree `bd26408974aa0537c6ea043405467b669caace2d`, parent exactly BASE, TEMP `f0f20df9450142efbc6b0d8a1b10f42c80a0e25d`. Before CAS, the remotely read workflow normalized exactly to the previously executed template `e2b057db7408a8cf0ebdca24333c9452e4e39c20` at Source `14071b396f8c9c66b70cf630d8823692a4521bd3` (48,844 characters, 912 lines). The only difference was display run-name. The complete 3,189-leaf tree contained TEMP plus every one of the 3,188 exact BASE blobs. Main was freshly verified `0c9c475b3ebaa970fc11d628b40e50a90cceb727`. One push/attempt 1 only; no dispatch, rerun, helper, subagent, reviewer, new pin or code change. Source remained frozen through terminal and all evidence readbacks.
+
+[Run 43134302664/1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43134302664) completed SUCCESS:
+
+| Job | GitHub job ID | Result |
+| --- | --- | --- |
+| pure, timeout 3 minutes | [130905783124](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43134302664/job/130905783124) | SUCCESS; 8Q: 8 pass, 0 fail/cancelled/skipped/todo. Seven-file syntax/lint and strict source-bound M/QA prepared-role preflight passed before I0. |
+| positive_prepare, timeout 15 minutes | [130905992376](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43134302664/job/130905992376) | SUCCESS; original prepare-positive, checkpoint seal, local reopen, exact-ID post-upload reopen, reconstructed checkpoint and content-hash comparison passed. |
+| positive_consume, timeout 5 minutes | [130911146989](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43134302664/job/130911146989) | SUCCESS; exact checkpoint authenticated and mounted; P1: 1 pass, 0 fail/cancelled/skipped/todo; result local/post-upload reopen, inventory/hash comparison and closed projections passed. |
+
+Scripts ran Node 22.23.4 on Ubuntu 24.04, using the current locked dependencies and contents:read/actions:read. The unchanged preflight/compiler/descriptors retain the accepted 176 role inputs / 130 paths / 635 groups / 54 reader sites. The separate custody-nine suite was not rerun. Platform noise: GitHub warned that the reused actions targeting Node 20 were forced onto Node 24; actual fixture/script Node remained 22.23.4.
+
+Original lifecycle timing from the closed source/run/attempt-bound business projection:
+
+| Fact | Exact UTC | Milliseconds |
+| --- | --- | --- |
+| I0 | 2026-11-12 01:25:29.000 | 1794446729000 |
+| C0 = I0 + 900,000 | 2026-11-12 01:40:29.000 | 1794447629000 |
+| C1 = C0 + 180,000 | 2026-11-12 01:43:29.000 | 1794447809000 |
+| cold consumer ready | 2026-11-12 01:39:32.940 | 1794447572940 |
+| final observed dbNow | 2026-11-12 01:40:32.851 | 1794447632851 |
+
+Ready was C0 minus 56,060 ms, with 26,060 ms beyond the required 30,000 ms reserve. Final dbNow was C0 plus 3,851 ms. The unchanged producer uses the original C0 minus 120,000 ms stopping point; default deferWait=false, original alarm/state, SDK 1.2.1, both KV aliases, Root 30 seconds and child 5 seconds remained intact. No clock compensation, replacement Root, shortened alarm, mutant or deadline override.
+
+All unchanged P1 assertions passed, including twelve native phases: setup, authorize_get, authorize_post, sdk_lookup, token_exchange, mcp_read, monitoring_get, monitoring_post, cleanup_before_restore, restore, sdk_reduction, final_inventory. Both M and QA have actual observed leaves. The closed business projection confirms: alarm null; state complete; baseline restored once; both KV aliases; receipt business access closed; SDK reduction returned; native fence present; grant revoked; final inventory proof present; one normal SDK complete; one durable Reference row and one readback; exactly grant then revoke notices. P1 also requires SDK post-exchange expiry no later than original C0. Send/observed receipt hashes were present. This is the bounded SYN lifecycle: the unchanged P1 explicitly keeps globalNativeDrainVerified=false and sdkNamespaceEmptyVerified=false.
+
+Every epoch passed verifyObservedBudgetMetrics. A complete retained trace was checked only where traceComplete=true. Across all eight epochs: invalid=0, unattributed=0, numericOverflow=false, scope omissions=0, guard retained/omitted=0/0. Three QA epochs have retained-prefix loss; no claim that retention overflow is false is made.
+
+| Segment | Role | Epoch | Operation rows retained / omitted | Scope rows retained / omitted | Accepted proof |
+| --- | --- | --- | --- | --- | --- |
+| producer | M | 0 | 0 / 0 | 0 / 0 | complete_trace |
+| producer | QA | 0 | 7584 / 0 | 94 / 0 | complete_trace |
+| producer | M | 1 | 8 / 0 | 2 / 0 | complete_trace |
+| producer | QA | 1 | 16384 / 221563 | 11836 / 0 | observed_metrics |
+| producer | M | 2 | 56 / 0 | 9 / 0 | complete_trace |
+| producer | QA | 2 | 16384 / 266694 | 11498 / 0 | observed_metrics |
+| consumer | M | 0 | 0 / 0 | 0 / 0 | complete_trace |
+| consumer | QA | 0 | 16384 / 8397 | 1097 / 0 | observed_metrics |
+
+The three observed_metrics entries have traceComplete=false; the other five have traceComplete=true and complete_trace. Omitted rows remain explicitly accounted for; a prefix is not promoted to a complete trace. No scope/invalid/unattributed/numeric failure was discarded. Only the unchanged closed business and epoch projections were emitted, each no more than 2,048 UTF-8 bytes.
+
+| Artifact ID | Kind | ZIP bytes | ZIP SHA-256 | Expiry UTC |
+| --- | --- | --- | --- | --- |
+| [13907875527](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43134302664/artifacts/13907875527) | checkpoint | 22346845 | `3efc1fb2c81265564ff5d5966ae02de7d8908b4fbe5921a34bb8b657b6d70e45` | 2026-11-19T01:38:40Z |
+| [13906504336](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43134302664/artifacts/13906504336) | positive-result | 5342634 | `cfa3a74c6760fa5de898a5e9812ad146d8085785fdb6ba2f87a67f91bd25b6d1` | 2026-11-19T01:40:47Z |
+| [13906372582](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43134302664/artifacts/13906372582) | pure | 26894 | `eb854e90d9035c25914ab9a9ed15e7e80d83d796e615599947142d7f9b78525e` | 2026-11-19T01:24:57Z |
+
+Retrieval outcomes were read from primary logs, not inferred from step conclusion under continue-on-error:
+- Pure own-ID GET1 at 01:24:58.634 UTC failed because the provided ID was not yet found. The existing bounded 2-second wait ran; GET2 completed at 01:25:01.716 UTC with the exact ZIP digest and subsequent same-ID inventory verification PASS. GET3 was skipped. GET1's final conclusion success did not mean its download outcome succeeded.
+- Producer prior-pure GET1 and own-checkpoint GET1 succeeded; later retrieval attempts/waits were skipped.
+- Consumer prior-checkpoint GET1 and own-result GET1 succeeded; later retrieval attempts/waits were skipped.
+
+The producer checkpoint's public staging contained exactly envelope.bin, manifest.json and receipt.json. Its authenticated envelope was 22,338,913 bytes, SHA-256 `e5ce4624a6ce46576b76afe1f37daa35f7406a6474352d5cbd5ca0c2c7d9a8f1`, with 49 internal files / 230,495,629 total raw bytes. Local and post-upload authentication-before-inflation, inner inventory and original reconstructed checkpoint verification passed; consumer authenticated that same checkpoint independently.
+
+The consumer positive-result had the same exact three-file outer inventory. Its authenticated envelope was 5,339,878 bytes, SHA-256 `b681efdd887a74a2d7961aed16dd12c77b35e18d478b013bfbdd4cf9a9c01c69`, with five internal files / 198,449,747 raw bytes. Local and exact-ID post-upload reopen/inventory/content-hash comparison passed. The unchanged AES-256-GCM/gzip helper bound actual repository/ref/Source/run/attempt/kind, kept private checkpoint/results under runner.temp until sealed, and kept all per-file internal hashes inside the authenticated envelope. No raw private TAP, state, rows, identities, tokens or key appeared in this report.
+
+Frozen code blobs, equal to BASE throughout:
+
+| Path | Blob |
+| --- | --- |
+| test/finite-budget-diagnostics.test.mjs | f8745e0b8060e1d67066104690835f7ce25b1504 |
+| test/fixtures/finite-budget-diagnostics.mjs | f9884aa893d6ab6d74597921cc8925bf05437eea |
+| test/fixtures/finite-budget-world.mjs | f654001b027555c41dbe3f287445e73ac849094b |
+| test/fixtures/finite-budget-evidence.mjs | 81178d96e10784366ab1b11bbf0805e347dea173 |
+| test/mcp-qa-finite-budget-native.test.mjs | d63f6e5752894ddc7d52f2430fa8f1fd1c07156a |
+| test/fixtures/finite-budget-descriptors.json | be695028e4c12c3cb7d3b7bf2c5f2e7508f3db15 |
+| test/fixtures/finite-checkpoint-custody.mjs | 9a486b839874ed8e9a950f6a823b18e7585de52e |
+| test/finite-checkpoint-custody.test.mjs | c913c94be080597704fbf7d370475443e1f1b96d |
+
+Terminal cleanup removes TEMP and appends only this section. Complete comparison to BASE requires 3,188 leaves, TEMP absent, this report alone changed and all other 3,187 BASE leaves exact. Main remains `0c9c475b3ebaa970fc11d628b40e50a90cceb727`. The writer stops after cleanup readback; Root handles the separate fresh Task1 Spec+Quality gate. This qualification is not itself that review gate or Task1 completion.
+
+No local checkout/dependencies/build/test/runtime, real Cloudflare mutation, production credential, OAuth/OTP, cron, Container, customer/client action, mail, Chavo message, PR, merge, deployment or Task2 occurred. A SYN pass does not prove hosted receiver/subscription/notice/ACK/native withdrawal, permanent guard, production readiness or PC-off operation. operationalReadiness=false; completePackage=false; PCoff=false. STOP_WRITES.
