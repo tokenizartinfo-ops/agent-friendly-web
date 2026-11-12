@@ -85,3 +85,7 @@ Ruling: retain this bounded defensive scope and assign a fresh standard integrat
 Fresh sole implementer /root/native_postack_source_builder (Sol/xhigh) confirmed exact base/main/tree3190/F7/World/report/fournewabsent/60eventinventory/0active, no writes. Concrete ambiguity: 24 IDs versus24 Node test registrations.
 
 Ruling: accept fixed24 actual module-scope action callbacks with callback-own private postassertion witnesses and one controls-mode Node test wrapper; counts must be reported separately and honestly. Cost if wrong is no claim of24 independent framework tests; substantive24 current-code assertions and authenticity/exactonce barrier remain mandatory. Missing/no-op/skipped/forged negative cases required. No scope or run expansion; Native held.
+
+## Proportional existing inert regression controls
+
+Ruling: accept unchanged verify-native-preparation-round1 fixed F1–F8 (original45s cap) plus existing pure finite-budget-diagnostics and mcp-qa-finite-observer tests in the SAME single7-minute contracts producer. World compiler/ownership/sealer integration shares those interfaces; using the fixed inert CLI avoids a new arbitrary group export. Cost if wrong: extra bounded inert validation time, no Native authority. Builder must verify actual bodies allocate no MF/I0 or SDK runtime; compilation/import alone is not Native execution. If an allegedly inert command allocates Native, omit and report the gap. Separate framework/control counts truthfully, no blanket suite or second run.
