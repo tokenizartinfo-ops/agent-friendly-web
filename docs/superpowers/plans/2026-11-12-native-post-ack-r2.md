@@ -44,7 +44,7 @@
 **Files:** Only NativeWFactivation/close andAPPENDSourceReport; otherTask1filesBYTEEXACTapproved; contractsWF+F7closed.
 **Interfaces:** ConsumesTask1CLEANprofile/functions/workflow; producesfreshR2outcome+SAFE2JSON/custodymetadata; noOriginalcheckpointdownload/replay.
 - [ ] Freshsoleexecutor verifiesexactreviewedhead/files/pins/tree/protected/main/0active andexistingkeycustodyavailabilitywithNOkeyinNativeprocess; event/jobgates/runlabelONLYactivation/attempt1.
-- [ ] Currentexecutionidentitypurepreflight BEFOREMF/I0, qualifiedtransform+SDK/raw/sites+CURRENTgraphhashagreement; headroom>=240sknownelseblock, no budgetextension.
+- [ ] Currentexecutionidentitypurepreflight BEFOREMF/I0, qualified transform+SDK/raw/sites preallocation; actual captured build/mounted-options provenance under N5; headroom>=240sknownelseblock, no budgetextension. Under N5 actual QA graph validation is after original I0 but before QA mount/first business invocation; model preflight never predicts the actual graph digest.
 - [ ] RunexactONE NativeR2 entrypoint AFW_POST_ACK_MODE=native_r2_once node --test --test-concurrency=1 --test-reporter=tap test/finite-post-ack-diagnostic.test.mjs, privateTAP/logs; preserveoriginalfailure/sameerror/ownershipunwind+storagearchive, noothercase/MF/retry/recovery.
 - [ ] SealFULLownedfreshpayloadwithcurrentAEADAADkindreadonly-result/consumer-failure, exactencryptedartifactIDreopen/inventory+observationhash; publishstrictSAFEresult+manifest2JSONAFTERcustody; Nativefailedexitstillfailsproducer. VerifieralwayscurrentkeylesssmallSAFE+encryptedmetadata only.
 - [ ] BOTHterminalANYoutcome=>NativeWFmanual/allfalse/noinputs/nopush, contractsWF+F7remainclosed; APPENDsafecommands/outcomes/clocks/records/custody+NOTEXECUTED, fullref/files/treelikeTask1/protected/main/0activeSTOP.
@@ -58,3 +58,7 @@ Scope6filesmapped; newNodefixturemustnotimportworld(cycle); Worldfixedexports/te
 ## Binding preflight additions
 
 Read SPEC rulings N1–N4 as part of both tasks. N1 guarantees step environment binding only, not independent same-runner key isolation; key-preflight/seal/open are the only three key-bearing steps. N2 distinguishes original unavailable from failed and allows only nonqualifying encrypted quarantine of a partial producer-failure archive. N3 fixes digest projection bytes and known-answer controls within schema/provenance. N4 requires conservative current job timing; no timer reset or inferred headroom. Task1 must implement and qualify all four before Native pipeline review. No additional Source paths or runtime authority.
+
+## N5 implementation correction
+
+Read SPEC N5. Model preflight qualifies stable pins before MF/I0, but dynamic harness inputs prevent predicting Native graph hashes. Validate actual compiler outputs before mounting/first business invocation, after original I0 where applicable; reuse BOTH retained mounted-option proofs and completed ownership lifecycle before verified SAFE provenance. OFF baseline/candidate use the same captured compile inputs. N5 replaces all old full model-to-Native graph equality language; scope, one-run permits, unchanged harness/time/IDs/history and all five false flags remain.

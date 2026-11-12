@@ -57,3 +57,11 @@ Latest direct owner message: “continua”. Earlier direct instructions in this
 - “te renuevo autorizacion amplia para realizar ensayos, hacer cliks, aprobrar y abrir ventanas, crear ensayos, etc”
 
 Ruling: latest continuation preserves AFW objective and its scoped Source/SYN diagnosis; user-provided cwd AGENTS context does not replace it with Hermes implementation. Fork-none child lacks the prior dialogue, so Root supplied exact owner excerpts instead of asking for repeated permission. Cost if wrong would be reversible isolated Source work only; no Native/CF/credential/production authority is released in Task1. Root narrowed this delegated scope further via exact six-path/one-KEYLESS permit. Fresh implementer /root/native_postack_impl_escalated (Astra/xhigh), prior actor stopped.
+
+## Task 1 design defect discovered before writes — N5
+
+Fresh Astra implementer identified a genuine incompatibility: original protected harness creates actual MF namespace IDs and a current approval/history before QA compilation; model compile-only inputs are different. Root independently read the pinned lines and accepted the defect. Implementer returned NEEDS_CONTEXT, with zero writes/commits/tests/runs and one unconsumed KEYLESS permit.
+
+Ruling: distinguish preallocation model/transform qualification from actual captured build/configuration provenance; no synthetic prediction of actual graph hash, no protected harness/time/ID/history rewrite. Validate actual compiler onEnd before mounting (after original I0 for QA), then require successful mount and existing BOTH-worker retained-options + completed ownership proof. Cost if wrong: provenance stays unavailable and no valid diagnostic; never inferred verified. Independent Astra design assessment accepted the correction with this mounted-options qualification, explicitly not runtime attestation.
+
+SPEC N5 and PLAN updated; revised Task1 brief in this commit. Same implementer to resume after scoped preflight readback. Source408 unchanged, all permits unconsumed; Native still held.

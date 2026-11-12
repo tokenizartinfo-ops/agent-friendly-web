@@ -67,7 +67,7 @@ Full report: what implemented; exact source/commit/tree/blob/hash/size inventory
 
 Reply under15lines ONLY Status DONE|DONE_WITH_CONCERNS|BLOCKED|NEEDS_CONTEXT, created commits, one-line actual tests, concerns and Source report reference. For NEEDS_CONTEXT/BLOCKED give concrete uncertainty. No subagents/reviewers. Root separately reviews; your self-review is not approval.
 
-## Task 1 extracted verbatim
+## Task 1 extracted with binding N5 correction
 
 ### Task1: Implement observer/compiler integration and qualify KEYLESS; prepare INACTIVE Native pipeline
 
@@ -84,8 +84,7 @@ Reply under15lines ONLY Status DONE|DONE_WITH_CONCERNS|BLOCKED|NEEDS_CONTEXT, cr
 - [ ] IndependentfullTask1review+scopedfixloopifneeded (originalimplementerround1–3); NO NativeuntilCLEAN+separaterelease.
 
 
-
-## Full binding SPEC, including preflight rulings N1–N4
+## Full binding SPEC including N1–N5
 
 # Design — ONE R2 SYN Native post-ACK diagnostic
 
@@ -138,9 +137,9 @@ TestMODEempty/controls=>24KEYLESSonly; native_r2_once=>ONEtestR2onlystrictrepo/r
 ProfileOFF: same loaders/raw/prepared/emittedM+QAbytes+originaladditionalSYNrecords, no diagnosticcodeinsideWorkergraphs. Comparebaseline408worldandcandidateOFFunderIDENTICALcompileidentity/defines; graphsembedtestRevision, soold/newcommitSHAcomparisonisINVALID.
 ProfileON: Mbyteexactbaseline, QAraw/preparedunchanged, original3additionalSYNobjectsunchanged. OnlyTWOpost-baselineQAemissionsdeclared: phase-context and<stdin> budgetSnapshot. NewclosedpostAckSYNrecordseparatefromoriginaladditionalSYN:
 purpose/version/profile/path/phaseafter-baseline/baselinebytes+SHA/emittedbytes+SHA/transform-literalSHA/exactsites/enums+fields/businessAuthorityfalse/addsAwait0/addsPromise0/addsNativeCall0/changesRetentionfalse.
-CompilerMUSTverifyduringNativecurrentSource/run/attempt, unchangedSDK/raw/preparedpins/counts,exact2emissions+metafileNode-moduleabsence,expectedsiteinventoryandcurrentpreflightgraphhashes; unknownsite/no-match/multiple-matchrejectbeforeMF.
+CompilerMUSTverifyduringNativecurrentSource/run/attempt, unchangedSDK/raw/preparedpins/counts,exact2emissions+metafileNode-moduleabsence,expectedsiteinventory and actual captured build inputs/outputs under N5; unknownsite/no-match/multiple-match fails the relevant preallocation or pre-mount gate.
 DoNOTembedQAgraphhashinitsownQAgraph(selfreference). IsolateemitstypedrecordONLY; NodeattachesverifiedmountedSDK/M/QA/transform/preflighthashes.
-Stage1hashestieditsSourceidentitycannotblindlyequalStage2activationSHAgraphs. Stage2producerMUSTreruncurrentidentityPUREpreflightBEFOREMF/I0 usingSAMEcompilerprofile/definesasthatNativeallocation, verifyqualifiedtransformcode+SDK/raw/site-inventorypins, thenNativegraphsEXACTmatchthatCURRENTpreflight. NeverrewriteGITHUB_SHA/currentexecutioncontextorfakeoldSourceidentity; nocopyhistoricalpreflightascurrent. No addedNativepermissionfrompurepreflight.
+Stage1 hashes are tied to their captured compile inputs and Source identity. Stage2 MUST rerun current-identity PURE preflight before MF/I0 to qualify SDK/raw/transform/site-inventory pins, explicitly labeling graphs MODEL ONLY. Actual Native graphs use legitimate allocated IDs and current fixture data; verify their captured inputs/outputs and retained mounted options under N5, never compare their full digest to modeled preflight. Never rewrite GITHUB_SHA, time, namespace IDs, history or fixture ceilings. No Native authority from pure preflight.
 
 ## Causal observer, no behavior replacement
 
@@ -238,3 +237,19 @@ The 7-minute Native job and >=240-second preallocation headroom remain fixed. In
 
 Default OFF baseline and candidate compile comparisons use the same explicit identity/defines, no mutation/spoof of GITHUB_SHA; inability to perform that comparison is an unresolved preflight rather than equivalence. These rulings are binding at Task1 review and Task2 release.
 
+## Binding N5 — model preflight versus actual configured build provenance
+
+Root and independent Astra reviewer confirmed a design defect before Source writes: protected initial-entry harness creates MF at line44, uses actual namespace IDs at49 versus modeled compile-only IDs, then builds M and sets COMMAND9001.created_at/I0 at53 and approval=Date.now()+86400000 at54. Dynamic history, CEILING and virtual sources enter QA at68–75/125–129. Two compilations can differ with identical Source/ref. This N5 OVERRIDES ALL previous full-graph equality or “actual QA validation before I0” language in SPEC, PLAN and brief.
+
+1. Before allocation, current-identity PURE preflight qualifies the pinned SDK/raw source/transform/profile/sites/schema/sealer with modeled compile inputs. All modeled graph hashes must be labeled MODEL ONLY, never asserted as expected actual Native graph hashes. No MF/I0 created; unchanged stable pins and two allowed emissions are enforceable.
+2. During the single actual allocation, Node-only compiler context captures the real raw/prepared/emitted inputs, exact defines and output bytes under the legitimate dynamic inputs. Existing World createBudgetCompiler('M'/'QA') plugin onEnd is an allowed seam: validate exact two QA diagnostic emissions, baseline plus supplement, immutable SDK/raw/lib/lock/site counts and Node-module absence on the actual outputs BEFORE QA mounting/setOptions and before the first business invocation. Do not rewrite protected harness on disk or in memory, clocks/deadlines, approval, IDs, histories, source context or mounted bundle.
+3. Actual QA onEnd is AFTER original I0 assignment, so all original C0=I0+900000/C1=C0+180000 and test/root/child timing keep counting normally. Never claim actual QA validation occurred before I0. N4 headroom remains checked before MF/I0: current metadata may be obtained earlier and its age conservatively updated synchronously at existing owned record.attachPersist (harness41→MF44 has no intervening await). Attach ownership/persist path BEFORE any gate throw so the existing outer unwind can preserve and remove owned partial state. Unknown headroom blocks; no later timer restart.
+4. f.firstConnectionBuild is recorded BEFORE options conversion/setOptions, so equality with onEnd alone proves BUILD equality only. The existing World owner-closure checks (baseline around829 and1180–81) already compare BOTH named workers' retained mounted-option script bytes against firstConnectionBuild. Reuse that proof together with successful mount/harness return, exact current allocation identity and completed existing lifecycle; no extra runtime RPC/request. If any is absent, provenance cannot be verified. Do not call retained options a runtime readback or remote attestation.
+5. SAFE provenance mGraphSha256/qaGraphSha256 are hashes of the actual captured build/configured worker bytes, qualified by mounted-options/ownership evidence above. preflightSha256 identifies the current model/transform qualification document, NOT a prediction/equality claim for Native bundles. All SDK/lock/transform/preflight/context pins still required. “verified” is this bounded source/build/configuration provenance under the trusted runner; it is not an independent runtime/remote attestation.
+6. KEYLESS off_graphs comparison must feed ORIGINAL408 baseline and candidate OFF the EXACT SAME once-captured prepared/raw/virtual inputs and defines; never compare independently timed harness builds. VM/fake bindings and capture/rebuild are Node-only controls on GitHub, no MF/I0 and no protected-source mutation. Diagnostic actual-build/provenance controls must reject incorrect mount options, role, source/allocation identity, incomplete lifecycle, extra/missing emissions and misuse of model hash as actual. Use existing off_graphs/sealer_graph/provenance IDs, no extra control count or file scope.
+
+No new Native call, Worker emission beyond the fixed two, protected file edit or test budget. Task1 builder remains held until Root issues the revised brief; Native remains separately held until Task1 implementation CLEAN.
+
+## Resumption after design clarification
+
+Previous Task1 implementer /root/native_postack_impl_escalated is resumed, no fix round and no new permit: zero writes/tests/runs. N5 is binding and supersedes former model-to-Native graph equality. All six paths/one KEYLESS permit/Native hold unchanged. Its static 60-workflow inventory found no event matching these six-path pushes on Source branch; reverify as needed. Current source remains BASE408. Preallocation modeled qualification and actual configured build proof are distinct. Existing custody metadata endpoint is unsupported, not evidence of missing key.
