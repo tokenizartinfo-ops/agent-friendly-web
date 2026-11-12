@@ -1,0 +1,113 @@
+# Design — ONE R2 SYN Native post-ACK diagnostic
+
+## Intent, evidence and approach decision
+
+OverallAFWgoalNative16/fullcloudflow/PCoff/MaxremainsPENDING. Reference-stageplanCOMPLETE/finalAstraCLEAN, Source408e82abe63178319862c99c3c24684e2258296d exactF7all7false/main0c9c475b/protected3188/0active. Primary43313662894 onlyprovesR1firstrejectingreceiptgrouphttp andR2lastrecordedhelperentrygrant, oldrows+WHOLEcertunchanged: child5/5018abort/settled→issuer-ack/9entries/lastpair706. Nooperation-specificACK/cause/drain.
+Publicresearch provesexpectedSQLrow/issuerACK/anchorAREadvancedbeforechecks, historicalACKfieldsnormalized; noobviousdeterministicbaseline-updatebug. ExistingselectedRawepochs reducesguarderrors/discardsexacterrors andomits__t3Observation.failframes, soexactrecheckrejectioncannotberecoveredfromcurrent2fileprojection.
+Rootconsidered: (a) repeatNative16unchanged — noaddedcausaldiscriminator/unnecessaryresources; (b) keepcoarseRawprojections — cannotrestoremissingtypederror; (c) ONE R2SYNdiagnostic withfixture-onlytypedpostACKboundary. RootCHOOSES(c) underuserexplicitcontinuousAFWSYN/cloud-firstdecisiondelegation/optoutquestions; notclaimofuserdesigningimplementation. Nohuman/browser/OTP/newcredentialsneededforpreparation. ThisdocisPROPOSED, NOTSourceorNativepermit.
+Costifwrong: Source/reviewrework orinstrumentedfailure/no-reproduction, timingoverheadcaninfluence5s; noCFremote/userbusinessresources. EvenvalidcertificateonlylocatesCURRENTinstrumentedrejectionboundary, nothistoricalcause/nativefix/16qualification.
+
+## Resources and immutable inherited pins
+
+Native=realSDKinsideworkerd/Miniflare ONGitHubUbuntu24.04/Node22.23.4. NOTCloudflareremoteruntime. QAoutboundSYNmapsGH/CF/JWKS, Moutbound503, noexternalfetchfallback. Realnetworknpm+GitHubcheckout/Actions/artifactsONLY. NoCFtokens/policies/cron/Containers/Workerdeploy/OAuth/realcustomers/Max/mail.
+SDK@cloudflare/workers-oauth-provider1.2.1 dist/oauth-provider.js251149B SHA256bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80;44KVsites. LockGitblob36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b445991chars; MF5.20260831.0-alpha/workerd1.20260831.1/esbuild0.28.2/TS5.9.3/Wrangler4.128.0dependencyONLY. No dependencyupgrade.
+BaseWorldGitblob5fb78c057b7e80260ae683abf4af892767ce110e218113chars; basecleanup2f5dad6c306fac1be2f11845bef640bb204ad572; initialWorlda7b730dc9be336528f0971544099f79d05758b1a; descriptorsbe695028e4c12c3cb7d3b7bf2c5f2e7508f3db15.
+F7 .github/workflows/afw-finite-budget-qualification.yml MUSTremainbyteexactf7a71f1a0fa4f5ddf069ff411f008a098455e5cc126209chars/all7false/manual. rawlib/*, SDK, lock, cleanup/initialWorld/descriptors/budgetdiagnostics/custodyhelperUNCHANGED.
+I0=nominalSYNpreparationcommentcreated/COMMAND9001, notjobstart; preserveC0=I0+900000/C1=C0+180000, root30s/child5s/scopepeak2/lists2/gets200. ONE R2 Native job, ONEinitialMFallocation(M+QA); noothercases/recovery/restarts/nextallocationifdisposaluncertain. OriginalNative16=Q8+R3+D4+P1 not16Workers; no16rerunfromthisplan.
+
+## File map and Source scope
+
+ExistingmodifyONLY:
+1 test/fixtures/finite-budget-world.mjs — opt-inNode-onlyprofile/compiler+supplementalpreflight+fixedR2adapter/extraction; NORMALbehavior+prepared/emittedgraphs unchanged.
+2 APPEND docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task2.md — everyprior507875charpreserved.
+CreateONLY:
+3 test/fixtures/finite-post-ack-diagnostic.mjs — Node-onlytransform/literal/schema/selector/VMcontrols; MUSTNOTimportworld(circular), neverenterWorkergraphs.
+4 test/finite-post-ack-diagnostic.test.mjs — controlsMODEdefault, exactlyONE NativeR2testONLYexplicitauthorizednative_r2_onceMODE; noNativeR1/R3registrations/patternskips.
+5 .github/workflows/afw-r2-post-ack-contracts.yml — separateKEYLESS7+2 qualification; finalmanual/noinputs/nopush/alljobsfalse.
+6 .github/workflows/afw-r2-post-ack-diagnostic.yml — separateNativeproducer7+independentverifier2, initially/finalmanual/noinputs/nopush/alljobsfalse.
+TwoWFs areRootchoice tokeepKEYLESSnoenvironment/secrets andno unreviewedmode-switch afterqualification. ExistingF7protected. Old3190leaves: onlyworld/reportmutable,3188protected inclF7;4newfiles=>3194whencomplete. NootherSourcepath/main/PR/merge/runtimechange.
+UseexistingisolatedSourcebranch feat/finite-native-cleanup-20261101/cloudGitdatabaseexpected_shaCAS; noPCSourceexecution/clones/deps/build/files. BeforewriteinspectALLEVENTmatchesfornewpaths/ref: preexistingKEYLESSCI permitted/logged, ANYautomaticNativebesidestargetforbidden/STOP. F7/allnewNativegatesfalse duringpreparation.
+Rootdocsseparate. EveryTaskneedsnewexactRootbrief; noautodispatch/retries.
+
+## Module interfaces and profile
+
+Fixtureexports:
+POST_ACK_PROFILE='r2-post-ack-v1';
+transformPostAckEmission({role,modulePath,source,identity}) -> {source,record:null|PostAckEmissionRecord}, ONLYfixedQAphase-contextand<stdin>, rejectunexpectedprofile/sites;
+validatePostAckSupplement({records,baseline,identity,metafile}) -> verifiedsupplement;
+selectPostAckCertificate({snapshots,mountedProvenance,originalR2Outcome,context}) -> SafeObservation;
+validatePostAckResult(value,expectedContext) -> value;
+runPostAckObserverControls() -> exact24ControlRecord.
+WorldexportsONLYtwofixedadapters:
+preflightPostAckDiagnostic() -> DiagnosticPreflight;
+runPostAckR2Diagnostic() -> writesfixedownedSAFEobservationafterunwind, returnsnormallyonoriginalR2success, rethrowsSAMEoriginalR2erroronfailure.
+No exportsWeakMap/errors/fullsnapshots; noarbitrarytransform/module/case/destinationarg. NodeAsyncLocalStoragefixedprofilecontextmayisolatecompilerparallelism; oldAFW_BUDGET_DIAGNOSTIC_CANDIDATE remainsrejected.
+TestMODEempty/controls=>24KEYLESSonly; native_r2_once=>ONEtestR2onlystrictrepo/ref/workflow/attempt1gates. UnknownMODErejectsbeforeMF/I0. NativeentryinvokesrunBudgetReadonlyCase('R2')EXACTLYonce, NEVERold3Rtestfile/filter.
+
+## Default byteidentity and diagnostic emission/provenance
+
+ProfileOFF: same loaders/raw/prepared/emittedM+QAbytes+originaladditionalSYNrecords, no diagnosticcodeinsideWorkergraphs. Comparebaseline408worldandcandidateOFFunderIDENTICALcompileidentity/defines; graphsembedtestRevision, soold/newcommitSHAcomparisonisINVALID.
+ProfileON: Mbyteexactbaseline, QAraw/preparedunchanged, original3additionalSYNobjectsunchanged. OnlyTWOpost-baselineQAemissionsdeclared: phase-context and<stdin> budgetSnapshot. NewclosedpostAckSYNrecordseparatefromoriginaladditionalSYN:
+purpose/version/profile/path/phaseafter-baseline/baselinebytes+SHA/emittedbytes+SHA/transform-literalSHA/exactsites/enums+fields/businessAuthorityfalse/addsAwait0/addsPromise0/addsNativeCall0/changesRetentionfalse.
+CompilerMUSTverifyduringNativecurrentSource/run/attempt, unchangedSDK/raw/preparedpins/counts,exact2emissions+metafileNode-moduleabsence,expectedsiteinventoryandcurrentpreflightgraphhashes; unknownsite/no-match/multiple-matchrejectbeforeMF.
+DoNOTembedQAgraphhashinitsownQAgraph(selfreference). IsolateemitstypedrecordONLY; NodeattachesverifiedmountedSDK/M/QA/transform/preflighthashes.
+Stage1hashestieditsSourceidentitycannotblindlyequalStage2activationSHAgraphs. Stage2producerMUSTreruncurrentidentityPUREpreflightBEFOREMF/I0 usingSAMEcompilerprofile/definesasthatNativeallocation, verifyqualifiedtransformcode+SDK/raw/site-inventorypins, thenNativegraphsEXACTmatchthatCURRENTpreflight. NeverrewriteGITHUB_SHA/currentexecutioncontextorfakeoldSourceidentity; nocopyhistoricalpreflightascurrent. No addedNativepermissionfrompurepreflight.
+
+## Causal observer, no behavior replacement
+
+InstrumentONLYEXACTissuerCall site after awaitedissuerAppend('Ack',ack,op)returns andbeforeexisting awaitrecheckOwned(). CaptureopFROMTHATlexicalissuerCall, onlyconsume/granteligible.
+PerHANDLERlocalone-shotslotsetaroundEXISTINGawaitrecheckOwned, consumedSYNCHRONOUSLYatfirststatementofrecheckOwned intoCONSTctx, slotclearedBEFOREfirstawait. Finallyclear/restoreonlyowntoken; don'treadmutablecontextatemission. Nested/unrelatedcallsduringawaitcannotinheritctx. NoactiveMetric/last-stepcoupling. Eachctxownordinal1..32 atinvocationSTART(notbudgetchildordinal); collectorgetsCLOSEDprimitivesonly, noError/contextrefs. Overflow/duplicate/foreign/stale/orderambiguityinvalid.
+Observeexistingboundarieswithoutreorderingorcopyinglogic:
+entry_check initialcheckcall;
+notice_guard requireEmptyNotice;
+protocol_invariant explicitoriginalfalseinvariant->fail;
+pair_wait original awaitwait(observeOwnerPhasePair(...));
+expected_mismatch ONLYexplicitoriginalcomparisonfalse->fail;
+exit_check finalcheckcall;
+unknown otherwise.
+AssociateidentityofEXACTerror emittedbyoriginalguard/call withcapturedctx; outerpostACKcatchmustseesameErrorbeforequalification. Incidentalcanonical()/getter/typeexceptionsMUSTNOTbelabeledexplicitexpected_mismatch/protocolrejection. No stringmatchingarbitrarymessage/code/stack. ObserverfailuremarksqualityinvalidONLY, neverreplaces/throwsinsteadoforiginalreturn/error; rethrowSAMEoriginalobject.
+Noaddedawait/.then/Promise/nativecall/getter/SQLread/args/receiver/retain/recheck. Existingpredicateexpressions/order/shortcircuit/effects/deadlines/authorityunchanged. Synchronousobservationalcostremainsrisk, soinstrumentedtimeoutdoesnotprovehistoricalcause. pair_waitisCALLBOUNDARYnotunderlyingcause; pairrejectvswaitabortorderingambiguous=>unknowncause, noleaseinstrumentation/cancel-by-guess.
+Moduleglobalcollectoronlyclosedrecords+boundedcounts, neveractiveinvocation/errorrefs. Terminalsnapshotmustproveinitializedprofile/completecapture/nooverflow/pendingeligiblecontexts0; absenceofrecordwithoutqualifiedsnapshotNOTnot_observed.
+
+## Retrieval/selection and SAFE schema
+
+ExtendONLYdiagnosticemittedInitial.budgetSnapshot()return withclosedpostAckDiagnostic; reuseexistingattachBudgetEpochCapture'sQAterminal-owned-before-disposecapture. NoRPC/route/newNativecall. NodeafterEXISTINGunwindselectsQAownedallocation/currentprofile, validatescaptureidentity/freshness/quality/provenance. NoextraRPC/latepoll/secondMF. Missing/stale/foreign/incomplete=>unavailable/invalid, notfallbacktoearlierepoch.
+RootselectionchoiceUNIQUEqualifiedeligibleREJECTION, notcollectorarrival/first-by-timestamp. Exactonequalifiedrejection=>observed; zeroWITHqualifiedcompletecapture=>not_observed; multiple/ambiguous/overflow=>invalid. Owninvocationordinalnotowner-referencechild5. Noerror/privateSource/nonceidentifiersoutput.
+SAFEresultEXACTkeys:
+purpose='afw.native-post-ack-r2.safe.v1';
+status observed|not_observed|invalid|unavailable;
+context {repository,ref,source,run,attempt:1,case:'R2'} currentexecution;
+provenance {status:verified|unavailable,sdkPackage:'@cloudflare/workers-oauth-provider@1.2.1',sdkFileSha256,lockSha256,mGraphSha256,qaGraphSha256,transformSha256,preflightSha256};
+selection unique_qualified_rejection|none;
+invocationOrdinal;
+operation consume|grant|unknown;
+ackReturned;postAckEntered;
+outcome rejected|unknown;
+boundary entry_check|notice_guard|protocol_invariant|pair_wait|expected_mismatch|exit_check|unknown;
+quality qualified|incomplete|invalid;
+originalR2Outcome passed|failed|unavailable;
+custody {status:verified|unavailable,artifactId,zipSha256,observationSha256,reopenVerified};
+SAME5flagsoperationalReadiness/completePackage/PCoff/globalNativeDrainVerified/sdkNamespaceEmptyVerifiedALLfalse.
+Nullables: allprovenancehashes64lowerhexifverified, otherwiseALLnull; invocationOrdinal1..32observedonlyotherwiseNULL; ackReturned/postAckEnteredTRUEobservedotherwiseNULL; operationconsume/grantobservedotherwiseunknown; outcomerejectedobservedotherwiseunknown; selectionuniqueobservedotherwisenone; boundaryANYenumobserved(includingunknown), otherwiseunknown. observedrequiresqualityqualified+verifiedprovenance+sameerrorctxproof; not_observedrequiresqualityqualified+verifiedprovenance+completequalifiedemptyselection; invalidqualityinvalid/unavailablequalityincompleteallobservationunknowns. originalR2Outcomeindependent, failedcaseCANobserved/not_observed; neverrewritepass.
+custodyverified=>positive-decimalartifactIdstring,64hexzip+observationSHA,reopenVerifiedtrue; unavailable=>nullfields/false. ValidDIAGNOSTICacceptancerequiresprovenanceANDcustodyverified; otherwiseinconclusiveevenifobserverfactavailable. observationSHAhashescanonicalclosedobservation/context/provenancePREcustody, avoidingcipherartifactselfreference.
+Strictwhole-resultmanifestpurposeafw.native-post-ack-r2-manifest.safe.v1/contextcurrent/files[{path:result.json,bytes,sha256}], exactly2JSON/combined<=65536/rawZIP<=131072/tripleSHA/currentmetadata/CRC/paths/etc independentlyverified. NOerrors/codes/stacks/SQL/grants/tokens/epochs/timestamps/Sourceprivatevalues/freefields.
+
+## Ownership, fresh Native outcome and custody
+
+OnlyexistingownedGitHubSYNresources, oneR2allocation; preservewithFixedBudgetOwnerrelease/restore/callback/terminalcapture/archiveinventory+hash-before-delete/disposeonce/uncertainblocksnextallocation. NodeadapterNEVERexportsWeakMap/error/snapshots. CaptureSAFEevenifcaseassertfailsbeforefull-result; NodeentrytestRETHROWSoriginalR2error afterexistingunwind. Originalassertion/expectedcapnotchangedtopass. NativejobnativeStepfailurepreserved; workflowcontinuescustodyunderalways thenfinalproducerexitmatchesoriginalfailure. IndependentverifiermayvalidatecertificatewhileNativeworkflowFAILS; nevercallthatR2/Native16PASS.
+Freshdataset, NOTpreviousOriginalcheckpointreplay/download. Nativeproducer7min/test120s; ensure>=240sverifiedjobheadroomBEFOREMF/I0 (120case+120custody), elseblock/unavailable.Nokey/MF/I0duringcontrols/preflight, nobudgetextension. Existingclocksemanticsunchanged; unknownheadroomblocks, nooffsetcompensation.
+ReusesealBudgetArtifact/verifyBudgetArtifactforcompilationprovenanceONLY, notconfusedwithAEADcustody.
+AEADexistingsealDirectory/openDirectory purposeafw.finite-checkpoint-custody.syn.v1 withNEWcurrentrepo/ref/source/run/attempt1,kindreadonly-resultifsucceeded/consumer-failureiffailed; privatejob-manifesthasNEWdiagnosticpurpose/cases['R2']/diagnosticOnlytrue, NOTold3Rqualificationmanifest. SealFULLownedNativepayload/logs/storage+closedobservation; uploadONLYenvelope.bin/manifest.json/receipt.json7days; sameassignedartifactreopen+innerobservationSHA+inventoryverifiedINRUNNERONLY.
+AFW_SYN_CHECKPOINT_KEY existingafw-finite-syn-checkpoint ONLYkey-preflight/seal/opensteps, NEVERjobenv/Nativeprocess/KEYLESSverifier. No newtoken/secret/permission/CFservice. SAFEbundlepublishedAFTERcustodywithreceiptcurrentcipherArtifactID/digest/observationhash; nootherpublicRawpayload. Root/MCP/localNEVERdownloadcipher/key/plain/privateproducerlogs. KeylessverifieronlySMALLSAFE+encryptedmetadata, noprivateopen. RealR2outcomemetadataandcustodymustagree.
+AfterTask2ANYoutcomeSourceallnewWFsmanual/noinputs/nopush/alljobsfalse; originalF7unchanged7false. Fullref/body/report/tree/protected/main/active0STOP. No automaticNative16/retry/recovery/newMF/productiondeployment/subscription/PCoff/Max.
+
+## Exact KEYLESS controls and gates
+
+24fixedIDs:
+off_graphs,sdk_pins,profile_scope,sites_exact,sealer_graph,lexical_op,one_shot,nested_scope,late_scope,entry_check,notice_guard,protocol_guard,pair_wait,expected_mismatch,exit_check,unbranded,same_error,observer_throws,same_effects,pair_orders,no_rejection,overflow,schema,provenance.
+UseCURRENTtransform/compiler/observer/selector, NOTmirrors. VMfakeNativebindingsonly, MF/I0allocationtrapzero. SAMEerrors/args/receiver/callorder/promise/retentioncounts; nestedslotone-shot+latecrossop; controlledmodelvalid/mismatch; incidentalcanonicalthrowunknown; observerthrowsno-opcannotchangeNative; pairreject/abortbothorderspreserveoriginal+unknownambiguity; zero/multiple/foreign/overflow snapshots; wrongSource/run/attempt/SDK/sites/graph/preflight/stage; SDK/lib/F7tamperingreject.
+BaselineOFFvsoriginal408worldSAMEidentity/definesallprepared/emittedM/QAbytes+original3recordsEXACT; ONonly2declaredQAemissions/Munchanged/Node-moduleabsentmetafile.Sealerrejectswrongbaselines/extras/missing/profile.GenericCIeventinventoryverifiesnoautomaticNative.
+All24registeredMODULEscopeBEFOREsinglepass; FIXED24-IDexpectedregistry+callback-ownpostassertioncompletiontokens/oncebarrier+missing/skipped/no-opcounterexamples; proofonlyafterall24execute. PreserveboundedrecordAFW_POST_ACK_CONTROLS/1 exactexpected24/completed/pass/fail/inventory/firstFailure +fivefalseflags/nativeExecutedfalse/mfAllocatedfalse/I0Createdfalse, <=2048B; no fakeGreen/unregisterednewtests. Relevantexistinginertobserver/facet/compilercontrolsproportional, no fullNativecases.
+StaticbaselineREDonlyallowed; currentGREENmustexecuteGitHubKEYLESS.
+Task1exactbriefwillreleaseONEcontractsworkflowpush/attempt1KEYLESS7+2, noenv/key/SDKruntime/MF/I0/native; reportpreexistingKEYLESSCIseparately. Failureallnewgatesfalse/F7protected/fullreads0activeSTOP/norepair. PASScompleteNativeworkflowINACTIVE/reviewableallcode/commands/digests/controls/artifacts/defaultgraphsproof.
+Task2separatefreshsoleexecutorONLYafterCLEAN+Rootbrief, ONE NativeR2workflow7+2; reruncurrentidentitypurepreflightbeforeMF; allcodebyteexactapprovedexceptallowedactivationgates/event/runlabel. ThencloseANYoutcomeSTOP. No NativeexecutionauthorityfromthisSPEC.
