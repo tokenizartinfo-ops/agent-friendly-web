@@ -48,3 +48,12 @@ Fresh sole implementer /root/native_postack_impl, gpt-6.1-terra/high, isolated c
 /root/native_postack_impl (Terra/high) returned BLOCKED after read-only baseline checks: no Source mutation, no tests, no commits, no KEYLESS run. It confirmed exact Source408/main0c9/3190 nontruncated leaves/World-F7-report blobs and five-state0, but could not responsibly complete and review the multi-file integration within its execution. No correctness claim or evidence was fabricated.
 
 Ruling: use a fresh more-capable Astra/xhigh implementer for the SAME Task1 brief and unchanged one-run entitlement, because the original model escalated on integration judgment; no forced retry of the same model, no fix-round count (no implementation), no scope expansion. Cost if wrong: additional implementation effort; safety gates and Native hold unchanged. Previous implementer STOPPED, sole Source writer will be reassigned.
+
+## Owner scope provenance supplied to isolated implementer
+
+Latest direct owner message: “continua”. Earlier direct instructions in this SAME AFW conversation include:
+- “continua con lo que estabas haciendo antes que te pidiera esta tarea el chat de direccion compartida, avanza con todos los bloques y etapas que faltan para AFW este listo para hacer la prueba final en la nube con el ordenador apagado”
+- “avanza en todos bloques sin frenar entre bloque y bloque , solo frean si necesitas mi intervencion avanza hasta resolver todo y que este listo para hacer la prueba con ordenador apagado”
+- “te renuevo autorizacion amplia para realizar ensayos, hacer cliks, aprobrar y abrir ventanas, crear ensayos, etc”
+
+Ruling: latest continuation preserves AFW objective and its scoped Source/SYN diagnosis; user-provided cwd AGENTS context does not replace it with Hermes implementation. Fork-none child lacks the prior dialogue, so Root supplied exact owner excerpts instead of asking for repeated permission. Cost if wrong would be reversible isolated Source work only; no Native/CF/credential/production authority is released in Task1. Root narrowed this delegated scope further via exact six-path/one-KEYLESS permit. Fresh implementer /root/native_postack_impl_escalated (Astra/xhigh), prior actor stopped.
