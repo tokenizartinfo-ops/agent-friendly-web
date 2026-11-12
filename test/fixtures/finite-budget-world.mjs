@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,readdir,copyFile,cp} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {AsyncLocalStorage} from 'node:async_hooks';
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {types as fixedNodeTypes} from 'node:util';
 import {resolve,relative,join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import ts from 'typescript';
@@ -615,6 +617,32 @@ function requireOrdinaryObserver(){
 }
 
 
+
+const fixedControlCountKeys=['childBlocks','work','wait','selectReadonly','selectReduction','queueReadonly','queueReduction','capReadonlyList','capReadonlyGet','capReductionList','capReductionDelete','send','sdk'];
+const fixedControlStages=new Set(['start','complete','wrapper_readonly','wrapper_reduction','observer_child','observer_calls','read_raw','legacy_composition','prepared_validate','baseline_transform','syn_instrument','adjacency_ro','adjacency_d','syn_counts','body_extract','cached_assembly','vm_start','vm_hold','vm_boundary','queue_verdict','queue_mutator','ownership','manifest','peer_wait']);
+let fixedControlState=null;
+function fixedControlOwn(value,key){if(!value||typeof value!=='object'||fixedNodeTypes.isProxy(value))return undefined;const d=Object.getOwnPropertyDescriptor(value,key);return d&&Object.hasOwn(d,'value')?d.value:undefined;}
+function fixedControlSafe(value){
+ if(value===null||typeof value==='boolean'||typeof value==='number'&&Number.isFinite(value))return value;
+ if(typeof value==='string')return /^[a-f0-9]{64}$/.test(value)?{type:'sha256',value}:{type:'string',bytes:Buffer.byteLength(value),sha256:hash(value)};
+ if(value&&typeof value==='object'&&!fixedNodeTypes.isProxy(value)){
+  const ds=Object.getOwnPropertyDescriptors(value),keys=Reflect.ownKeys(ds);
+  if(keys.length===13&&fixedControlCountKeys.every(key=>keys.includes(key)&&Object.hasOwn(ds[key],'value')&&Number.isSafeInteger(ds[key].value)))return {type:'fixed_counts',counts:Object.fromEntries(fixedControlCountKeys.map(key=>[key,ds[key].value]))};
+ }
+ return {type:value===undefined?'undefined':typeof value};
+}
+function fixedControlError(error){
+ const name=fixedControlOwn(error,'name'),code=fixedControlOwn(error,'code'),operator=fixedControlOwn(error,'operator'),message=fixedControlOwn(error,'message');
+ const labels=['native continuation original guard adjacency','exact family native statement kind','D original return retain native unchanged','RO original native declaration unchanged','exact two queue statement kinds','eleven cleanup primary blocks plus work/wait subcounts','actual facet native entry current queue bound','legacy queue bodies unchanged','single structural actual SDK settlement sequence','all pinned readers emitted in','fixed prepared scope hook count','exact prepared AST count','actual duplicate SEND or SDK attempts rejected','SYN previous owned disposal uncertain before allocation','SYN fixed job maximum two owned MF'];
+ return {name:['Error','AssertionError','TypeError','SyntaxError','RangeError'].includes(name)?name:'other',nativeError:fixedNodeTypes.isNativeError(error),code:['ERR_ASSERTION','ERR_MODULE_NOT_FOUND','ERR_INVALID_ARG_TYPE','ERR_SCRIPT_EXECUTION_TIMEOUT'].includes(code)?code:code===undefined?'absent':'other',operator:['==','===','strictEqual','deepStrictEqual','match','ok','throws','rejects'].includes(operator)?operator:operator===undefined?'absent':'other',actual:fixedControlSafe(fixedControlOwn(error,'actual')),expected:fixedControlSafe(fixedControlOwn(error,'expected')),message:typeof message==='string'?{bytes:Buffer.byteLength(message),sha256:hash(message),publicLabel:labels.find(label=>message.includes(label))??'unmatched'}:{type:typeof message}};
+}
+function fixedControlProgress(stage,metrics={}){
+ if(!fixedControlState)return;assert(fixedControlStages.has(stage),'closed pure stage');assert(fixedControlState.trace.length<128,'bounded pure control trace');
+ fixedControlState.stage=stage;fixedControlState.trace.push({stage,...metrics});
+ const bytes=Buffer.from(JSON.stringify(fixedControlState));assert(bytes.length<=65536,'bounded closed pure progress');mkdirSync('output/finite-budget/round1-controls',{recursive:true});writeFileSync('output/finite-budget/round1-controls/progress.json',bytes);
+}
+async function fixedControlBound(promise){let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('SYN fixed pure control bound')),5000);})]);}finally{clearTimeout(timer);}}
+
 function fixedSdkSettlementSequence(source,label){
  const ast=sourceAST(source,'SYN-fixed-SDK-sequence-'+label),matches=[],receivers=[];
  const call=(node,receiver,method,args)=>ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.expression.getText(ast)===receiver&&node.expression.name.text===method&&node.arguments.length===args.length&&node.arguments.every((arg,index)=>arg.getText(ast)===args[index]);
@@ -648,7 +676,7 @@ function fixedSdkSettlementSequence(source,label){
 
 
 async function instrumentFixedSynLibrary(baseline,path,originalSdk){
- const ast=sourceAST(baseline,'SYN-fixed-observation-baseline'),edits=[],counts={childBlocks:0,work:0,wait:0,selectReadonly:0,selectReduction:0,queueReadonly:0,queueReduction:0,capReadonlyList:0,capReadonlyGet:0,capReductionList:0,capReductionDelete:0,send:0,sdk:0};
+ const ast=sourceAST(baseline,'SYN-fixed-observation-baseline'),edits=[],queueKinds=[],counts={childBlocks:0,work:0,wait:0,selectReadonly:0,selectReduction:0,queueReadonly:0,queueReduction:0,capReadonlyList:0,capReadonlyGet:0,capReductionList:0,capReductionDelete:0,send:0,sdk:0};
  const owner=(node,name)=>{for(let n=node.parent;n;n=n.parent)if(ts.isFunctionDeclaration(n)&&n.name?.text===name)return n;return null;};
  const named=(node,name)=>ts.isCallExpression(node)&&node.expression.getText(ast)===name;
  const insert=(position,text)=>edits.push({start:position,end:position,text});
@@ -679,9 +707,10 @@ async function instrumentFixedSynLibrary(baseline,path,originalSdk){
     assert(owner(node,'finishPrivateQaFiniteOwnerCleanup'));insert(node.end,'\n__afwSynSelectGuard(life.alias,l,check,2);');counts.selectReduction++;
    }
    if(ts.isCallExpression(node)&&ts.isCallExpression(node.expression)&&node.expression.expression.getText(ast)==='__afwBudget.reflect'&&node.expression.arguments[0]?.getText(ast)==='Reflect.apply'&&node.arguments.length===3&&node.arguments.map(x=>x.getText(ast)).join('|')==='methods[q.method]|alias|q.args'){
-    const ro=owner(node,'readonlyGrantKv'),red=owner(node,'reductionKv');assert(Boolean(ro)!==Boolean(red));let statement=node;while(!ts.isExpressionStatement(statement)&&!ts.isVariableStatement(statement))statement=statement.parent;
-    const block=statement.parent,index=block.statements?.indexOf(statement);assert(ts.isBlock(block)&&index>0&&ts.isExpressionStatement(block.statements[index-1])&&named(block.statements[index-1].expression,'check'),'native continuation original guard adjacency');
-    const family=ro?1:2;insert(statement.getStart(ast),"__afwSynNote('queue',alias,"+family+",__afwSynGuardChildren.get(guard)??0,queue.length,active,q.method);\n");counts[ro?'queueReadonly':'queueReduction']++;
+    const ro=owner(node,'readonlyGrantKv'),red=owner(node,'reductionKv');assert(Boolean(ro)!==Boolean(red));let statement=node;while(!ts.isExpressionStatement(statement)&&!ts.isVariableStatement(statement)&&!ts.isReturnStatement(statement))statement=statement.parent;
+    const block=statement.parent,index=block.statements?.indexOf(statement),family=ro?1:2,statementKind=ts.isVariableStatement(statement)?'variable':ts.isReturnStatement(statement)?'return':'expression',previousCheck=ts.isBlock(block)&&index>0&&ts.isExpressionStatement(block.statements[index-1])&&named(block.statements[index-1].expression,'check');fixedControlProgress(ro?'adjacency_ro':'adjacency_d',{family,statementKind,previousCheck});assert(ts.isBlock(block)&&index>0&&ts.isExpressionStatement(block.statements[index-1])&&named(block.statements[index-1].expression,'check'),'native continuation original guard adjacency');
+    assert.equal(statementKind,ro?'variable':'return','exact family native statement kind');if(red){assert(ts.isReturnStatement(statement)&&named(statement.expression,'retain')&&statement.expression.arguments.length===1&&statement.expression.arguments[0]===node,'D original return retain native unchanged');}else{assert(ts.isVariableStatement(statement)&&statement.declarationList.declarations.length===1&&statement.declarationList.declarations[0].name.getText(ast)==='native'&&statement.declarationList.declarations[0].initializer===node,'RO original native declaration unchanged');}
+    queueKinds.push({family,statementKind,originalCheckAdjacent:true,originalReceiver:'alias',originalArgs:'q.args'});insert(statement.getStart(ast),"__afwSynNote('queue',alias,"+family+",__afwSynGuardChildren.get(guard)??0,queue.length,active,q.method);\n");counts[ro?'queueReadonly':'queueReduction']++;
    }
    if(ts.isBinaryExpression(node)&&node.operatorToken.kind===ts.SyntaxKind.GreaterThanEqualsToken){
     const counter=node.left.getText(ast),limit=node.right.getText(ast),ro=owner(node,'readonlyGrantKv'),red=owner(node,'reductionKv');
@@ -696,11 +725,12 @@ async function instrumentFixedSynLibrary(baseline,path,originalSdk){
    }
    ts.forEachChild(node,walk);
   };walk(ast);
+  fixedControlProgress('syn_counts',{counts});assert.deepEqual(queueKinds.map(row=>({family:row.family,statementKind:row.statementKind})),[{family:1,statementKind:'variable'},{family:2,statementKind:'return'}],'exact two queue statement kinds');
   assert.deepEqual(counts,{childBlocks:1,work:1,wait:1,selectReadonly:1,selectReduction:1,queueReadonly:1,queueReduction:1,capReadonlyList:1,capReadonlyGet:1,capReductionList:1,capReductionDelete:1,send:1,sdk:1},'eleven cleanup primary blocks plus work/wait subcounts');
  }
  let source=baseline;for(const edit of edits.sort((a,b)=>b.start-a.start)){assert(edit.start<=edit.end);source=source.slice(0,edit.start)+edit.text+source.slice(edit.end);}
  const {finiteBudgetSynLibraryPrefix}=await import('./finite-owner-cleanup.mjs');source=finiteBudgetSynLibraryPrefix+'\n'+source;sourceAST(source,'SYN-fixed-observation-emission');
- return {source,proof:{purpose:'afw.fixed-syn-passive-observations.v2',baselineBytes:Buffer.byteLength(baseline),baselineSha256:hash(baseline),emittedBytes:Buffer.byteLength(source),emittedSha256:hash(source),primaryBlocks:path.includes('initial-lease')?1:11,counts,...originalSdk?{sdkDeclarationProvenance:{original:originalSdk,protectedModuleBlob:'1a5a2583d266179cdd89f799c64199f29044fec5',originalStatementSha256:hash('const actual=retain(api.revokeGrant(selector,i.subject));')}}:{},fields:['opaque-alias','child-ordinal','family','deadline','status','counter','limit','queue-length','active','time','send-record-hash'],businessAuthority:false}};
+ return {source,proof:{purpose:'afw.fixed-syn-passive-observations.v2',baselineBytes:Buffer.byteLength(baseline),baselineSha256:hash(baseline),emittedBytes:Buffer.byteLength(source),emittedSha256:hash(source),primaryBlocks:path.includes('initial-lease')?1:11,counts,queueKinds,...originalSdk?{sdkDeclarationProvenance:{original:originalSdk,protectedModuleBlob:'1a5a2583d266179cdd89f799c64199f29044fec5',originalStatementSha256:hash('const actual=retain(api.revokeGrant(selector,i.subject));')}}:{},fields:['opaque-alias','child-ordinal','family','deadline','status','counter','limit','queue-length','active','time','send-record-hash'],businessAuthority:false}};
 }
 async function appendFixedSynAdapter(baseline,family){
  const ast=sourceAST(baseline,'SYN-baseline-entry'),classes=ast.statements.filter(n=>ts.isClassDeclaration(n)&&n.name?.text==='Initial');
@@ -882,7 +912,7 @@ export async function preflightBudgetCompilation(){
  assert(graphs.budget?.M?.length&&graphs.budget?.QA?.length);
  assert(graphs.compatibility.M.compatibility_flags.includes('nodejs_compat'));assert(graphs.compatibility.QA.flags.includes('nodejs_compat'));
  const additions=graphs.budget.QA.filter(record=>record.additionalSYN).map(record=>({path:record.path,...record.additionalSYN}));assert.equal(additions.length,requestedGroup==='positive'?0:3);
- if(requestedGroup!=='positive'){const cleanup=additions.find(r=>r.path==='lib/mcp-qa-finite-owner-cleanup.mjs'),lease=additions.find(r=>r.path==='lib/mcp-qa-finite-initial-lease.mjs');assert.equal(cleanup.primaryBlocks+lease.primaryBlocks,12);assert.equal(cleanup.counts.queueReadonly,1);assert.equal(cleanup.counts.queueReduction,1);assert.equal(cleanup.counts.sdk,1);assert.equal(cleanup.counts.send,1);assert.equal(cleanup.counts.work+lease.counts.work,2);assert.equal(cleanup.counts.wait+lease.counts.wait,2);assert.equal(additions.find(r=>r.path==='<stdin>').family,requestedGroup==='readonly'?'readonly':'reduction');}
+ if(requestedGroup!=='positive'){const cleanup=additions.find(r=>r.path==='lib/mcp-qa-finite-owner-cleanup.mjs');assert.deepEqual(cleanup.queueKinds.map(row=>({family:row.family,statementKind:row.statementKind})),[{family:1,statementKind:'variable'},{family:2,statementKind:'return'}]);const lease=additions.find(r=>r.path==='lib/mcp-qa-finite-initial-lease.mjs');assert.equal(cleanup.primaryBlocks+lease.primaryBlocks,12);assert.equal(cleanup.counts.queueReadonly,1);assert.equal(cleanup.counts.queueReduction,1);assert.equal(cleanup.counts.sdk,1);assert.equal(cleanup.counts.send,1);assert.equal(cleanup.counts.work+lease.counts.work,2);assert.equal(cleanup.counts.wait+lease.counts.wait,2);assert.equal(additions.find(r=>r.path==='<stdin>').family,requestedGroup==='readonly'?'readonly':'reduction');}
  const result={purpose:'afw.finite-budget-preflight.syn.v1',group:requestedGroup,additionalSYN:additions,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,inputs:graphs.budget,I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
  result.observerChronology='afw.finite-budget-chronology.syn.v2';
  await mkdir('output/finite-budget/pure',{recursive:true});await writeFile('output/finite-budget/pure/preflight-'+requestedGroup+'.json',JSON.stringify(result,null,2));if(requestedGroup==='positive')await writeFile('output/finite-budget/pure/preflight.json',JSON.stringify(result,null,2));
@@ -1201,21 +1231,23 @@ async function runActualBudgetWrapperControl(family){
  let timer;try{return await Promise.race([context.__controlPromise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('SYN inert wrapper control timeout')),3000);})]);}finally{clearTimeout(timer);}
 }
 
-async function runFixedObserverControls(){
+async function runFixedObserverControls(group){
+ assert(['F2','F4'].includes(group));fixedControlProgress(group==='F2'?'observer_child':'observer_calls');
  const {Script,createContext}=await import('node:vm'),{finiteBudgetSynAdapterSource,finiteBudgetSynLibraryPrefix}=await import('./finite-owner-cleanup.mjs');
- const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer,console:{info(){},error(){}}});
+ const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer,__controlGroup:group,console:{info(){},error(){}}});
  const body=String.raw`
  globalThis.__observerControl=(async()=>{
   const records=[],kv={},owner={env:{AFW_FINITE_OWNER_OAUTH_KV:kv},ctx:{storage:{}}};for(const method of ['get','list','put','delete'])kv[method]=async()=>null;
-  const state=__afwFiniteBudgetState(owner,'D4'),abort=new AbortController(),parent=new AbortController(),lease={signal:abort.signal};
+  const state=__afwFiniteBudgetState(owner,'D4'),abort=new AbortController(),parent=new AbortController(),lease={signal:abort.signal},guard=()=>{};
+  __afwSynSelectGuard(kv,lease,guard,2);
+  if(__controlGroup==='F2'){
   let resolveWork,rejectWait;const work=new Promise(r=>{resolveWork=r;}),wait=new Promise((_,r)=>{rejectWait=r;}),deadline=Date.now()+15,error=Error('SYN inert deadline');
   if(__afwSynWork(lease,deadline,work,parent.signal)!==work||__afwSynWait(lease,wait)!==wait)throw Error('SYN original Promise identity changed');
-  const guard=()=>{};__afwSynSelectGuard(kv,lease,guard,2);
   await new Promise(resolve=>setTimeout(()=>{abort.abort();rejectWait(error);resolve();},20));for(let i=0;i<4;i++)await Promise.resolve();
   const child=state.children[0];if(child.workStatus!=='pending'||child.waitStatus!=='rejected'||child.waitError!==error||child.deadline!==deadline||!child.parentAliveAtAbort||child.abortAt<deadline)throw Error('SYN actual child observation mismatch');
   resolveWork('SYN inert work');await work;for(let i=0;i<4;i++)await Promise.resolve();if(child.workStatus!=='fulfilled')throw Error('SYN work never observed');
-  records.push({group:'F2',workPromiseSame:true,waitPromiseSame:true,waitErrorSame:true,separateWorkSettlement:true,actualDeadlineObserved:true,genuineBusinessRoot:false});
-  for(const kind of ['sdk','send']){
+  records.push({group:'F2',workPromiseSame:true,waitPromiseSame:true,waitErrorSame:true,separateWorkSettlement:true,actualDeadlineObserved:true,genuineBusinessRoot:false});}
+  if(__controlGroup==='F4')for(const kind of ['sdk','send']){
    const helper=kind==='sdk'?__afwSynSdkCallee:__afwSynSendCallee,counts=state[kind==='sdk'?'sdkCalls':'sendCalls'],trace=[],args=[{record:{recordHash:'a'.repeat(64)}},'SYN-second'],result=Promise.resolve('SYN-result'),receiver={get method(){trace.push('getter');return function(...actual){trace.push('call');if(this!==receiver||actual[0]!==args[0]||actual[1]!==args[1])throw Error('SYN receiver or args');return result;};}};
    const arg=n=>{trace.push('arg'+n);return args[n];},actual=helper(receiver.method,receiver,kv,guard)(arg(0),arg(1));
    if(actual!==result||trace.join('|')!=='getter|arg0|arg1|call')throw Error('SYN callee order or result');await actual;for(let i=0;i<4;i++)await Promise.resolve();
@@ -1234,52 +1266,77 @@ async function runFixedObserverControls(){
  })();
 `;
  new Script('class Initial{}\nconst __afwFiniteBudgetFamily="reduction";\n'+finiteBudgetSynAdapterSource+'\n'+finiteBudgetSynLibraryPrefix+'\n'+body).runInContext(context,{timeout:1000});
- const proof=await context.__observerControl;const counts=proof.at(-1).actualCounts;assert.throws(()=>fixedSendSdkProof(counts,[]),'actual duplicate SEND or SDK attempts rejected');for(const row of proof){delete row.actualCounts;row.duplicateAttemptsRejected=true;}return proof;
+ const proof=await fixedControlBound(context.__observerControl);if(group==='F4'){const counts=proof.at(-1).actualCounts;assert.throws(()=>fixedSendSdkProof(counts,[]),'actual duplicate SEND or SDK attempts rejected');for(const row of proof){delete row.actualCounts;row.duplicateAttemptsRejected=true;}}return proof;
 }
-async function runFixedFacetControls(){
- const {Script,createContext}=await import('node:vm'),raw=await readFile('lib/mcp-qa-finite-owner-cleanup.mjs','utf8'),names=['readonlyGrantKv','reductionKv'];
- // Exercise exact protected facet bodies; splice ONLY the approved queue/cap observations using the same structural compiler.
- const selected=await validateBudgetPreparedSource({path:'lib/mcp-qa-finite-owner-cleanup.mjs',role:'QA',prepared:raw,raw});
- assert(selected);const transformed=transformBudgetPreparedSource(raw,'lib/mcp-qa-finite-owner-cleanup.mjs','QA');
- const observed=await instrumentFixedSynLibrary(transformed.source,'lib/mcp-qa-finite-owner-cleanup.mjs',null),prepared=sourceAST(observed.source,'fixed-pure-prepared-facets');
- const bodies=names.map(name=>{const list=prepared.statements.filter(n=>ts.isFunctionDeclaration(n)&&n.name?.text===name);assert.equal(list.length,1);return list[0].getText(prepared);});
- const stage=await readFile('lib/mcp-qa-finite-stage-work.mjs','utf8'),stageAST=sourceAST(stage,'protected-retain'),retain=stageAST.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='retainFiniteOwnerStagePromise').getText(stageAST).replace('export function retainFiniteOwnerStagePromise','function retain');
- const records=await readFile('lib/mcp-qa-finite-initial-material-records.mjs','utf8'),recordAST=sourceAST(records,'protected-own'),own=recordAST.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='initialOwn').getText(recordAST).replace('export function initialOwn','function own');
- const {finiteBudgetSynAdapterSource,finiteBudgetSynLibraryPrefix}=await import('./finite-owner-cleanup.mjs');
- const evidence=await readFile('lib/mcp-finite-evidence.mjs','utf8'),evidenceAST=sourceAST(evidence,'protected-fields'),fieldsSource=evidenceAST.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='finiteFields').getText(evidenceAST).replace('export function','function');
- const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer});
+
+let fixedFacetPreparation=null,fixedFacetPreparationFailureStage=null;
+async function prepareFixedFacetControls(){
+ if(fixedFacetPreparation){fixedControlProgress('cached_assembly',{failed:fixedFacetPreparationFailureStage!==null,originStage:fixedFacetPreparationFailureStage});return fixedFacetPreparation;}
+ return fixedFacetPreparation=(async()=>{
+  fixedControlProgress('read_raw');const raw=await readFile('lib/mcp-qa-finite-owner-cleanup.mjs','utf8'),names=['readonlyGrantKv','reductionKv'];
+  const {instrumentCleanupConsumer,finiteBudgetSynAdapterSource,finiteBudgetSynLibraryPrefix}=await import('./finite-owner-cleanup.mjs');
+  const legacy=instrumentCleanupConsumer(raw);fixedControlProgress('legacy_composition');
+  const bodiesOf=(source,label)=>{const ast=sourceAST(source,label);return names.map(name=>{const list=ast.statements.filter(n=>ts.isFunctionDeclaration(n)&&n.name?.text===name);assert.equal(list.length,1);return list[0].getText(ast);});};
+  const originalBodies=bodiesOf(raw,'fixed-protected-raw-facets'),legacyBodies=bodiesOf(legacy,'fixed-normal-legacy-facets'),queueInvariance=originalBodies.map((body,index)=>({family:index+1,rawSha256:hash(body),legacySha256:hash(legacyBodies[index]),unchanged:body===legacyBodies[index]}));
+  fixedControlProgress('legacy_composition',{queueInvariance});assert.deepEqual(legacyBodies,originalBodies,'legacy queue bodies unchanged');
+  fixedControlProgress('prepared_validate');const selected=await validateBudgetPreparedSource({path:'lib/mcp-qa-finite-owner-cleanup.mjs',role:'QA',prepared:legacy,raw});
+  fixedControlProgress('baseline_transform',{selectors:selected.selectors});const transformed=transformBudgetPreparedSource(legacy,'lib/mcp-qa-finite-owner-cleanup.mjs','QA');
+  fixedControlProgress('syn_instrument');const observed=await instrumentFixedSynLibrary(transformed.source,'lib/mcp-qa-finite-owner-cleanup.mjs',null);
+  fixedControlProgress('body_extract',{counts:observed.proof.counts,queueKinds:observed.proof.queueKinds});const bodies=bodiesOf(observed.source,'fixed-pure-prepared-facets');
+  const stage=await readFile('lib/mcp-qa-finite-stage-work.mjs','utf8'),stageAST=sourceAST(stage,'protected-retain'),retain=stageAST.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='retainFiniteOwnerStagePromise').getText(stageAST).replace('export function retainFiniteOwnerStagePromise','function retain');
+  const records=await readFile('lib/mcp-qa-finite-initial-material-records.mjs','utf8'),recordAST=sourceAST(records,'protected-own'),own=recordAST.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='initialOwn').getText(recordAST).replace('export function initialOwn','function own');
+  const evidence=await readFile('lib/mcp-finite-evidence.mjs','utf8'),evidenceAST=sourceAST(evidence,'protected-fields'),fieldsSource=evidenceAST.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='finiteFields').getText(evidenceAST).replace('export function','function');
+  const prelude="class Initial{}\nconst __afwFiniteBudgetFamily='reduction';\n"+finiteBudgetSynAdapterSource+'\n'+finiteBudgetSynLibraryPrefix+"\n"+fieldsSource+"\nconst scopes={getStore(){return undefined;}},outstanding=new WeakMap();\n"+retain+"\nconst fail=()=>{throw Error('SYN facet denied');},canonical=JSON.stringify,fields=finiteFields,initialCanonical=JSON.stringify;\n"+own+"\nconst __afwBudget={reflect:fn=>(...args)=>Reflect.apply(fn,Reflect,args),readMethod:(v,k)=>v[k],facadeHolder:v=>v,facade:v=>v,guardValue:e=>e};\n"+bodies.join('\n');
+  return {prelude,queueInvariance,proof:observed.proof};
+ })().catch(error=>{fixedFacetPreparationFailureStage=fixedControlState?.stage??'unknown';throw error;});
+}
+async function runFixedFacetControls(group){
+ assert(['F3','F4'].includes(group));const prepared=await prepareFixedFacetControls(),{Script,createContext}=await import('node:vm');
+ const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer,__facetGroup:group,__facetProgress:(family,stage,metrics)=>fixedControlProgress(stage,{family,...metrics})});
  const body=String.raw`
  globalThis.__facetControl=(async()=>{
   const proof=[];
   for(const family of [1,2]){
-   const kv={},owner={env:{AFW_FINITE_OWNER_OAUTH_KV:kv},ctx:{storage:{}}},subject='SYN-facet',id='AAAAAAAAAAAAAAAA',prefix=(family===1?'grant:':'token:')+subject+':'+(family===1?'':id+':');
-   const calls=[],methods={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}};
-   for(const method of ['get','list','delete'])kv[method]=methods[method];kv.put=async()=>{};
-   const state=__afwFiniteBudgetState(owner,family===1?'R3':'D4');state.grantKey='grant:'+subject+':'+id;__afwFiniteBudgetInstall(owner,state);
-   const guard=()=>{},child={signal:new AbortController().signal};__afwSynSelectGuard(kv,child,guard,family);
-   const captured={get:kv.get,list:kv.list,delete:kv.delete},facet=family===1?readonlyGrantKv(kv,captured,subject,guard):reductionKv(kv,captured,subject,id,guard).facet;
-   const jobs=[];for(let n=0;n<6;n++)jobs.push(family===1?facet.get('grant:'+subject+':'+id,{type:'json'}):facet.delete(prefix+'SYN'+n));
-   for(const p of jobs)p.catch(()=>{});for(let i=0;i<12;i++)await Promise.resolve();
-   const actual=await owner.finiteBudgetSignals();if(actual.heldNativeSettled!==2||actual.outwardPending!==2||actual.nativeInvoked!==2)throw Error('SYN actual facet did not hold exactly two');
-   proof.push({family,signals:JSON.parse(JSON.stringify(actual))});
-   await owner.finiteBudgetRelease();await Promise.allSettled(jobs);await owner.finiteBudgetRestore();
-   // Actual final cap disjunct vs earlier invalid argument on fresh protected facet.
-   const alias={},simple={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}},capOwner={env:{AFW_FINITE_OWNER_OAUTH_KV:alias},ctx:{storage:{}}};Object.assign(alias,simple,{put:async()=>{}});
-   const capState=__afwFiniteBudgetState(capOwner,family===1?'R2':'D3'),capGuard=()=>{},capChild={signal:new AbortController().signal};__afwSynSelectGuard(alias,capChild,capGuard,family);
-   const capFacet=family===1?readonlyGrantKv(alias,simple,subject,capGuard):reductionKv(alias,simple,subject,id,capGuard).facet;
-   for(let n=0;n<2;n++)await capFacet.list({prefix});
-   let rejected=false;try{await capFacet.list({prefix});}catch{rejected=true;}if(!rejected||capState.capEvents.length!==1||capState.capEvents[0].counter!==2)throw Error('SYN actual list cap not reached');
-   const earlier=family===1?readonlyGrantKv(alias,simple,subject,capGuard):reductionKv(alias,simple,subject,id,capGuard).facet,before=capState.capEvents.length;
-   try{await earlier.list({prefix:'invalid'});}catch{}if(capState.capEvents.length!==before)throw Error('SYN early failure mistaken for cap');
-   proof.push({family,boundaryReached:true,earlierFailureExcluded:true,actualProtectedFacet:true});
+   const subject='SYN-facet',id='AAAAAAAAAAAAAAAA',prefix=(family===1?'grant:':'token:')+subject+':'+(family===1?'':id+':');
+   if(__facetGroup==='F3')for(const variant of ['two_only','queued']){
+    const kv={},owner={env:{AFW_FINITE_OWNER_OAUTH_KV:kv},ctx:{storage:{}}},methods={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}};
+    for(const method of ['get','list','delete'])kv[method]=methods[method];kv.put=async()=>{};
+    const state=__afwFiniteBudgetState(owner,family===1?'R3':'D4');state.grantKey='grant:'+subject+':'+id;__afwFiniteBudgetInstall(owner,state);
+    const jobs=[];
+    try{
+     const guard=()=>{},child={signal:new AbortController().signal};__afwSynSelectGuard(kv,child,guard,family);
+     const captured={get:kv.get,list:kv.list,delete:kv.delete},facet=family===1?readonlyGrantKv(kv,captured,subject,guard):reductionKv(kv,captured,subject,id,guard).facet;
+     for(let n=0;n<(variant==='two_only'?2:6);n++)jobs.push(family===1?facet.get('grant:'+subject+':'+id,{type:'json'}):facet.delete(prefix+'SYN'+n));
+     for(const p of jobs)p.catch(()=>{});for(let i=0;i<12;i++)await Promise.resolve();
+     const actual=await owner.finiteBudgetSignals();
+     __facetProgress(family,'vm_hold',{variant,heldNativeSettled:actual.heldNativeSettled,outwardPending:actual.outwardPending,nativeInvoked:actual.nativeInvoked,samples:actual.heldOperations.slice(0,2).map(op=>({ordinal:op.ordinal,childOrdinal:op.childOrdinal,method:op.method,active:op.sample?.active??null,queued:op.sample?.queued??null,family:op.sample?.family??null,sequence:op.sample?.sequence??null,heldSequence:op.heldSequence,nativeSettledAt:op.nativeSettledAt,outwardSettledAt:op.outwardSettledAt}))});
+     if(actual.heldNativeSettled!==2||actual.outwardPending!==2||actual.nativeInvoked!==2)throw Error('SYN actual facet did not hold exactly two');
+     proof.push({family,variant,signals:JSON.parse(JSON.stringify(actual))});
+    }finally{await owner.finiteBudgetRelease();await Promise.allSettled(jobs);await owner.finiteBudgetRestore();}
+   }else{
+    const alias={},simple={get:async()=>({}),list:async()=>({keys:[],list_complete:true}),delete:async()=>{}},owner={env:{AFW_FINITE_OWNER_OAUTH_KV:alias},ctx:{storage:{}}};Object.assign(alias,simple,{put:async()=>{}});
+    const state=__afwFiniteBudgetState(owner,family===1?'R2':'D3'),guard=()=>{},child={signal:new AbortController().signal};__afwSynSelectGuard(alias,child,guard,family);
+    try{
+     const facet=family===1?readonlyGrantKv(alias,simple,subject,guard):reductionKv(alias,simple,subject,id,guard).facet;
+     for(let n=0;n<2;n++)await facet.list({prefix});
+     let rejected=false;try{await facet.list({prefix});}catch{rejected=true;}
+     __facetProgress(family,'vm_boundary',{rejected,capEvents:state.capEvents.map(e=>({family:e.family,childOrdinal:e.childOrdinal,counter:e.counter,limit:e.limit})),lists:2});
+     if(!rejected||state.capEvents.length!==1||state.capEvents[0].counter!==2)throw Error('SYN actual list cap not reached');
+     const earlier=family===1?readonlyGrantKv(alias,simple,subject,guard):reductionKv(alias,simple,subject,id,guard).facet,before=state.capEvents.length;
+     try{await earlier.list({prefix:'invalid'});}catch{}if(state.capEvents.length!==before)throw Error('SYN early failure mistaken for cap');
+     proof.push({family,boundaryReached:true,earlierFailureExcluded:true,actualProtectedFacet:true});
+    }finally{await owner.finiteBudgetRelease();await owner.finiteBudgetRestore();}
+   }
   }return proof;
  })();
 `;
- const prelude="class Initial{}\nconst __afwFiniteBudgetFamily='reduction';\n"+finiteBudgetSynAdapterSource+'\n'+finiteBudgetSynLibraryPrefix+"\n"+fieldsSource+"\nconst scopes={getStore(){return undefined;}},outstanding=new WeakMap();\n"+retain+"\nconst fail=()=>{throw Error('SYN facet denied');},canonical=JSON.stringify,fields=finiteFields,initialCanonical=JSON.stringify;\n"+own+"\nconst __afwBudget={reflect:fn=>(...args)=>Reflect.apply(fn,Reflect,args),readMethod:(v,k)=>v[k],facadeHolder:v=>v,facade:v=>v,guardValue:e=>e};\n"+bodies.join('\n')+'\n'+body;
- new Script(prelude).runInContext(context,{timeout:1000});const proof=await context.__facetControl;
- for(const item of proof.filter(p=>p.signals))assert(fixedQueueCausality(item.signals),'actual facet native entry current queue bound');
- const good=proof.find(p=>p.signals)?.signals;for(const mutate of [x=>{x.heldOperations[0].sample.queued=0;},x=>{x.heldOperations[1].sample.active=1;},x=>{x.heldOperations[1].sample.family=3;},x=>{x.observerEvents.push({kind:'outward_settled',sequence:x.heldOperations[0].sample.sequence+0.5});},x=>{x.heldOperations[1].childOrdinal++;},x=>{x.heldOperations[0].outwardSettledAt=Date.now();}]){const bad=structuredClone(good);mutate(bad);assert.equal(fixedQueueCausality(bad),false);}
- return proof.map(p=>p.signals?{family:p.family,currentQueueWithTwoHeld:true,actualNativeInvocations:p.signals.nativeInvoked,genuineBusinessRoot:false}:p);
+ fixedControlProgress('vm_start',{caseGroup:group});new Script(prepared.prelude+'\n'+body).runInContext(context,{timeout:1000});const proof=await fixedControlBound(context.__facetControl);
+ if(group==='F3'){
+  for(const item of proof){const queueCausal=fixedQueueCausality(item.signals),expected=item.variant==='queued';fixedControlProgress('queue_verdict',{family:item.family,variant:item.variant,queueCausal,expected});assert.equal(queueCausal,expected,'actual facet native entry current queue bound');}
+  const good=proof.find(item=>item.variant==='queued').signals,mutations=[x=>{x.heldOperations[0].sample.queued=0;},x=>{x.heldOperations[1].sample.active=1;},x=>{x.heldOperations[1].sample.family=3;},x=>{x.observerEvents.push({kind:'outward_settled',sequence:x.heldOperations[0].sample.sequence+0.5});},x=>{x.heldOperations[1].childOrdinal++;},x=>{x.heldOperations[0].outwardSettledAt=Date.now();}];
+  for(let mutatorIndex=0;mutatorIndex<mutations.length;mutatorIndex++){const bad=structuredClone(good);mutations[mutatorIndex](bad);const queueCausal=fixedQueueCausality(bad);fixedControlProgress('queue_mutator',{mutatorIndex,queueCausal});assert.equal(queueCausal,false);}
+ }
+ return {queueInvariance:prepared.queueInvariance,queueKinds:prepared.proof.queueKinds,cases:proof.map(p=>p.signals?{family:p.family,variant:p.variant,currentQueueWithTwoHeld:fixedQueueCausality(p.signals),heldNativeSettled:p.signals.heldNativeSettled,outwardPending:p.signals.outwardPending,actualNativeInvocations:p.signals.nativeInvoked,genuineBusinessRoot:false}:p)};
 }
 
 
@@ -1328,18 +1385,26 @@ async function runFixedPeerWaitControls(){
  }return results;
 }
 
+
 async function verifyNativePreparationRound1(){
- const groups=[];let stage='F1',error=null;
- try{
-  const cases=[await runActualBudgetWrapperControl('readonly'),await runActualBudgetWrapperControl('reduction')];assert(cases.every(v=>v.held&&v.originalMethodsRestored&&v.baseReceiversPreserved&&v.outwardSettledAfterRelease===2));groups.push({group:'F1',passed:true,cases});
-  stage='F2_F4';const observers=await runFixedObserverControls();groups.push({group:'F2',passed:true,cases:observers.filter(v=>v.group==='F2')});
-  stage='F3_F4';const facets=await runFixedFacetControls();groups.push({group:'F3',passed:true,cases:facets.filter(v=>v.currentQueueWithTwoHeld)});groups.push({group:'F4',passed:true,cases:[...observers.filter(v=>v.group==='F4'),...facets.filter(v=>v.boundaryReached)]});
-  stage='F5';await verifyFixedPairDisposer();groups.push({group:'F5',passed:true,cases:await runFixedOwnershipControls(),actualPairedDisposerControl:true});
-  stage='F6';groups.push({group:'F6',passed:true,cases:await runFixedManifestControls()});
-  stage='F7';groups.push({group:'F7',passed:true,cases:await runFixedPeerWaitControls()});stage='complete';
- }catch(value){error={name:['Error','AssertionError','TypeError','SyntaxError'].includes(value?.name)?value.name:'other',messageSha256:hash(String(value?.message??''))};}
- const passed=stage==='complete'&&groups.length===7&&groups.every(g=>g.passed),result={purpose:'afw.native-preparation-round1-controls.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,phase:process.env.AFW_BUDGET_CONTROL_PHASE??'unspecified',stage,error,groups,passed,I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};
- await mkdir('output/finite-budget/round1-controls',{recursive:true});await writeFile('output/finite-budget/round1-controls/result.json',JSON.stringify(result,null,2));assert.equal(passed,true,'all seven fixed preparation control groups');return result;
+ const groups=[],failures=[],started=Date.now(),root='output/finite-budget/round1-controls';await mkdir(root,{recursive:true});
+ const persist=async()=>{const passed=groups.length===7&&groups.every(g=>g.passed),result={purpose:'afw.native-preparation-round1-controls.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,phase:process.env.AFW_BUDGET_CONTROL_PHASE??'unspecified',stage:groups.length===7?'complete':'partial',groups,passed,started,observedAt:Date.now(),I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};await writeFile(join(root,'result.json'),JSON.stringify(result,null,2));return result;};
+ const tests=[
+  ['F1',async()=>{const cases=[];for(const family of ['readonly','reduction']){fixedControlProgress(family==='readonly'?'wrapper_readonly':'wrapper_reduction');cases.push(await runActualBudgetWrapperControl(family));}assert(cases.every(v=>v.held&&v.originalMethodsRestored&&v.baseReceiversPreserved&&v.outwardSettledAfterRelease===2));return {cases};}],
+  ['F2',async()=>({cases:await runFixedObserverControls('F2')})],
+  ['F3',()=>runFixedFacetControls('F3')],
+  ['F4',async()=>({calls:await runFixedObserverControls('F4'),boundaries:await runFixedFacetControls('F4')})],
+  ['F5',async()=>{fixedControlProgress('ownership');await verifyFixedPairDisposer();return {cases:await runFixedOwnershipControls(),actualPairedDisposerControl:true};}],
+  ['F6',async()=>{fixedControlProgress('manifest');return {cases:await runFixedManifestControls()};}],
+  ['F7',async()=>{fixedControlProgress('peer_wait');return {cases:await runFixedPeerWaitControls()};}]
+ ];
+ for(const [group,run]of tests){
+  fixedControlState={group,stage:'start',trace:[]};fixedControlProgress('start');
+  try{assert(Date.now()-started<45000,'SYN finite pure group headroom');const value=await run();fixedControlProgress('complete');groups.push({group,passed:true,...value,progress:fixedControlState});}
+  catch(error){failures.push({group,error});groups.push({group,passed:false,error:fixedControlError(error),progress:fixedControlState});}
+  await persist();
+ }
+ fixedControlState=null;const result=await persist();if(failures.length)throw failures[0].error;return result;
 }
 
 async function verifyFixedPairDisposer(){
