@@ -1,7 +1,9 @@
 name: AFW finite budget qualification
-run-name: AFW finite SYN fix round1 inactive candidate ${{ github.sha }}
+run-name: AFW reviewed current SYN original lifecycle ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
 permissions:
   contents: read
   actions: read
@@ -12,7 +14,7 @@ env:
   AFW_BUDGET_GROUP: positive
 jobs:
   pure:
-    if: ${{ false }}
+    if: ${{ github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     outputs:
@@ -181,7 +183,7 @@ jobs:
           if ! cmp -s "$RUNNER_TEMP/afw-pure-public/budget-artifact.json" "$READBACK/budget-artifact.json"; then echo evidence_not_preserved; exit 1; fi
           printf 'pure_verified artifact_id=%s\n' "$ARTIFACT_ID"
   positive_prepare:
-    if: ${{ false }}
+    if: ${{ github.run_attempt == 1 && needs.pure.result == 'success' }}
     needs: pure
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -501,7 +503,7 @@ jobs:
           echo evidence_not_preserved
           exit 1
   positive_consume:
-    if: ${{ false }}
+    if: ${{ github.run_attempt == 1 && needs.positive_prepare.result == 'success' }}
     needs: positive_prepare
     runs-on: ubuntu-24.04
     timeout-minutes: 5
