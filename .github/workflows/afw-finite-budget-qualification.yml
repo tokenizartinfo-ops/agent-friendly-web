@@ -1,9 +1,7 @@
-name: AFW readonly inspector TWO-JOB KEYLESS CONTROLS
-run-name: AFW readonly inspector SERIAL CONTROLS ONLY ${{ github.sha }}
+name: AFW readonly receipt inspector PREPARED_UNQUALIFIED
+run-name: AFW readonly receipt inspector INACTIVE ${{ github.sha }}
 on:
-  push:
-    branches: [feat/finite-native-cleanup-20261101]
-    paths: [.github/workflows/afw-finite-budget-qualification.yml]
+  workflow_dispatch:
 permissions:
   contents: read
   actions: read
@@ -12,9 +10,10 @@ concurrency:
   cancel-in-progress: false
 jobs:
   producer:
-    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 2
+    timeout-minutes: 5
+    environment: afw-finite-syn-checkpoint
     outputs:
       artifact-id: ${{ steps.artifact.outputs.artifact-id }}
       artifact-digest: ${{ steps.artifact.outputs.artifact-digest }}
@@ -22,16 +21,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: '19789b5f31935e0b5be00cbb24c5f45de2a0100a'
           persist-credentials: false
           fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '22.23.4'
-      - name: Materialize current exact code and finite safe proof validators
+      - name: Materialize fixed current inspector
         shell: bash
         run: |
           set -euo pipefail
           umask 077
+          test ! -e "$RUNNER_TEMP/afw-readonly-inspector-current.mjs"
           cat >"$RUNNER_TEMP/afw-readonly-inspector-current.mjs" <<'NODE_CORE'
           import assert from 'node:assert/strict';
           import {readFile,writeFile,mkdir,mkdtemp,readdir,lstat,realpath,rm,open} from 'node:fs/promises';
@@ -536,49 +538,7 @@ jobs:
           }
           if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href)main().catch(async error=>{if(process.argv[2]==='project-child')try{await writeFile(projectErrorPath(),JSON.stringify({reason:error instanceof Rejected&&REASONS.includes(error.reason)?error.reason:'parse_failed'}),{flag:'wx',mode:0o600});}catch{}process.exitCode=1;});
           NODE_CORE
-          cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" <<'NODE_FALLBACK'
-          
-          import {access,readFile,writeFile,mkdir} from 'node:fs/promises';
-          import {join,resolve} from 'node:path';
-          import {createHash} from 'node:crypto';
-          const ids=["zip_valid","zip_signed_descriptor","zip_extra","zip_traversal","zip_duplicate","zip_bad_crc","zip_link","zip_bad_range","failure_identity_valid","failure_identity_success_reject","failure_identity_role_reject","failure_identity_kind_reject","failure_identity_unknown_reject","ownership_valid","ownership_unknown_reject","ownership_enum_reject","optional_missing_unknown","full_result_valid","full_result_unknown_reject","tap_valid_canaries","tap_unknown_scalar","tap_duplicate_case","tap_case_number_collision","tap_wrapper_number_collision","tap_unknown_number_collision","tap_late_diag_comment","tap_late_diag_unrelated","tap_injected_name","tap_long_line","tap_long_block","public_authenticated_valid","gate_artifact_count","gate_artifact_actual","gate_artifact_candidate","gate_artifact_duration","gate_artifact_business","gate_authenticated_count","gate_authenticated_actual","gate_authenticated_candidate","gate_authenticated_duration","gate_authenticated_business","gate_inventory_count","gate_inventory_actual","gate_inventory_candidate","gate_inventory_duration","gate_inventory_business","gate_identity_count","gate_identity_actual","gate_identity_candidate","gate_identity_duration","gate_identity_business","scalar_boolean_wrong","scalar_false_null_wrong","scalar_array_hash_wrong","scalar_half_hash_wrong","scalar_boolean_valid","scalar_null_valid","scalar_integer_valid","scalar_typed_valid","verdict_accepted","verdict_parse_timeout_old_current","verdict_other_failure","verdict_rejected_status","verdict_partial_status","verdict_missing_clock","verdict_open_over_deadline","verdict_download_over_deadline","digest_match_bare","digest_match_prefixed","digest_mismatch_old_current","digest_upload_malformed","digest_remote_malformed","metadata_wrong_id","metadata_wrong_context","metadata_stream_valid","metadata_stream_overcap","diagnostic_http_rejected","diagnostic_json_malformed","diagnostic_stream_overcap","diagnostic_identity_first_field","diagnostic_digest_mismatch","diagnostic_success_output","diagnostic_unknown_request_error","diagnostic_observed_timeout","diagnostic_schema_extra_field","diagnostic_schema_arbitrary_enum","diagnostic_record_over_2048","diagnostic_primary_first_failure_preserved","diagnostic_output_write_error","diagnostic_utf8_malformed","diagnostic_input_id_rejected"],root=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-public'),hash=b=>createHash('sha256').update(b).digest('hex');
-          try{await access(join(root,'result.json'));}
-          catch{
-           await mkdir(root,{mode:0o700,recursive:true});let core;try{core=await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs'));}catch{core=Buffer.alloc(0);}
-           const result={purpose:'afw.readonly-receipt-inspector.CONTROLS.safe.v1',repository:'tokenizartinfo-ops/agent-friendly-web',ref:'refs/heads/feat/finite-native-cleanup-20261101',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,node:'22.23.4',status:'failed',expected:ids.length,completed:0,passed:0,failed:0,inventory:ids.map(id=>({id,status:'not_executed'})),coveredCoreSha256:hash(core),elapsedMs:0,failure:{reason:'controls_failed',control:'setup',messageBytes:null,messageSha256:null},original954:{workflowBlob:'97b37fec44696dde23daa013196a5acdb05c2f4d',verdictCounterexample:'not_executed',digestCounterexample:'not_executed'},originalArtifactAccessed:false,custodyOpened:false,SDKImported:false,I0Created:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-           const bytes=Buffer.from(JSON.stringify(result,null,2)),manifest=Buffer.from(JSON.stringify({purpose:'afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:bytes.length,sha256:hash(bytes)}]},null,2));if(bytes.length+manifest.length>65536)throw Error('closed_fallback_bound');
-           await writeFile(join(root,'result.json'),bytes,{flag:'wx',mode:0o600});await writeFile(join(root,'manifest.json'),manifest,{flag:'wx',mode:0o600});
-          }
-          NODE_FALLBACK
-          cat >"$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" <<'NODE_VERIFY'
-          
-          import assert from 'node:assert/strict';
-          import {readFile,readdir,lstat,writeFile} from 'node:fs/promises';
-          import {join,resolve} from 'node:path';
-          import {createHash} from 'node:crypto';
-          const ids=["zip_valid","zip_signed_descriptor","zip_extra","zip_traversal","zip_duplicate","zip_bad_crc","zip_link","zip_bad_range","failure_identity_valid","failure_identity_success_reject","failure_identity_role_reject","failure_identity_kind_reject","failure_identity_unknown_reject","ownership_valid","ownership_unknown_reject","ownership_enum_reject","optional_missing_unknown","full_result_valid","full_result_unknown_reject","tap_valid_canaries","tap_unknown_scalar","tap_duplicate_case","tap_case_number_collision","tap_wrapper_number_collision","tap_unknown_number_collision","tap_late_diag_comment","tap_late_diag_unrelated","tap_injected_name","tap_long_line","tap_long_block","public_authenticated_valid","gate_artifact_count","gate_artifact_actual","gate_artifact_candidate","gate_artifact_duration","gate_artifact_business","gate_authenticated_count","gate_authenticated_actual","gate_authenticated_candidate","gate_authenticated_duration","gate_authenticated_business","gate_inventory_count","gate_inventory_actual","gate_inventory_candidate","gate_inventory_duration","gate_inventory_business","gate_identity_count","gate_identity_actual","gate_identity_candidate","gate_identity_duration","gate_identity_business","scalar_boolean_wrong","scalar_false_null_wrong","scalar_array_hash_wrong","scalar_half_hash_wrong","scalar_boolean_valid","scalar_null_valid","scalar_integer_valid","scalar_typed_valid","verdict_accepted","verdict_parse_timeout_old_current","verdict_other_failure","verdict_rejected_status","verdict_partial_status","verdict_missing_clock","verdict_open_over_deadline","verdict_download_over_deadline","digest_match_bare","digest_match_prefixed","digest_mismatch_old_current","digest_upload_malformed","digest_remote_malformed","metadata_wrong_id","metadata_wrong_context","metadata_stream_valid","metadata_stream_overcap","diagnostic_http_rejected","diagnostic_json_malformed","diagnostic_stream_overcap","diagnostic_identity_first_field","diagnostic_digest_mismatch","diagnostic_success_output","diagnostic_unknown_request_error","diagnostic_observed_timeout","diagnostic_schema_extra_field","diagnostic_schema_arbitrary_enum","diagnostic_record_over_2048","diagnostic_primary_first_failure_preserved","diagnostic_output_write_error","diagnostic_utf8_malformed","diagnostic_input_id_rejected"],hash=b=>createHash('sha256').update(b).digest('hex'),need=x=>{if(!x)throw Error('controls_inventory_rejected');},object=v=>v!==null&&typeof v==='object'&&!Array.isArray(v),fields=(v,keys)=>need(object(v)&&Object.keys(v).length===keys.length&&Object.keys(v).every(x=>keys.includes(x)));
-          async function file(root,name){const p=join(root,name),s=await lstat(p);need(s.isFile()&&!s.isSymbolicLink()&&s.nlink===1&&s.size<=65536);const b=await readFile(p);need(b.length===s.size);return b;}
-          try{
-           const local=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-public'),remote=process.argv[2]==='seal'?local:join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-controls-downloaded');
-           need(['seal','remote'].includes(process.argv[2]));
-           for(const root of [local,remote])assert.deepEqual((await readdir(root)).sort(),['manifest.json','result.json']);
-           const bodies={};for(const name of ['result.json','manifest.json']){const a=await file(local,name),b=await file(remote,name);need(a.equals(b));bodies[name]=b;}need(bodies['result.json'].length+bodies['manifest.json'].length<=65536);
-           const result=JSON.parse(bodies['result.json']),manifest=JSON.parse(bodies['manifest.json']);
-           fields(result,['purpose','repository','ref','source','run','attempt','node','status','expected','completed','passed','failed','inventory','coveredCoreSha256','elapsedMs','failure','original954','originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified']);
-           need(result.purpose==='afw.readonly-receipt-inspector.CONTROLS.safe.v1'&&result.repository==='tokenizartinfo-ops/agent-friendly-web'&&result.ref==='refs/heads/feat/finite-native-cleanup-20261101'&&result.source===process.env.GITHUB_SHA&&result.run===process.env.GITHUB_RUN_ID&&result.attempt===1&&result.node==='22.23.4');
-           need(['passed','failed'].includes(result.status)&&result.expected===ids.length&&Number.isInteger(result.completed)&&result.completed>=0&&result.completed<=ids.length&&result.passed===result.completed&&[0,1].includes(result.failed)&&Number.isSafeInteger(result.elapsedMs)&&result.elapsedMs>=0&&result.elapsedMs<=120000);
-           need(Array.isArray(result.inventory)&&result.inventory.length===ids.length);for(let n=0;n<ids.length;n++){const row=result.inventory[n];fields(row,['id','status']);need(row.id===ids[n]&&['passed','failed','not_executed'].includes(row.status));}
-           const core=await readFile(join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-current.mjs'));need(result.coveredCoreSha256===hash(core));
-           fields(result.original954,['workflowBlob','verdictCounterexample','digestCounterexample']);need(result.original954.workflowBlob==='97b37fec44696dde23daa013196a5acdb05c2f4d'&&['executed_inert','not_executed'].includes(result.original954.verdictCounterexample)&&['executed_inert','not_executed'].includes(result.original954.digestCounterexample));
-           for(const key of ['originalArtifactAccessed','custodyOpened','SDKImported','I0Created','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified'])need(result[key]===false);
-           if(result.failure!==null){fields(result.failure,['reason','control','messageBytes','messageSha256']);need(result.failure.reason==='controls_failed'&&(result.failure.control==='setup'||ids.includes(result.failure.control)));need((result.failure.messageBytes===null&&result.failure.messageSha256===null)||(Number.isSafeInteger(result.failure.messageBytes)&&result.failure.messageBytes>=0&&result.failure.messageBytes<=1048576&&typeof result.failure.messageSha256==='string'&&/^[a-f0-9]{64}$/.test(result.failure.messageSha256)));}
-           if(result.status==='passed')need(result.completed===ids.length&&result.failed===0&&result.inventory.every(x=>x.status==='passed')&&result.failure===null&&result.original954.verdictCounterexample==='executed_inert'&&result.original954.digestCounterexample==='executed_inert');
-           fields(manifest,['purpose','source','run','attempt','files']);need(manifest.purpose==='afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1'&&manifest.source===process.env.GITHUB_SHA&&manifest.run===process.env.GITHUB_RUN_ID&&manifest.attempt===1&&Array.isArray(manifest.files)&&manifest.files.length===1);fields(manifest.files[0],['path','bytes','sha256']);need(manifest.files[0].path==='result.json'&&manifest.files[0].bytes===bodies['result.json'].length&&manifest.files[0].sha256===hash(bodies['result.json']));
-           await writeFile(process.env.GITHUB_OUTPUT,'inventory-verified=true\ncontrols-passed='+(result.status==='passed')+'\n',{flag:'a'});
-           console.log(JSON.stringify({purpose:'CONTROLS_READBACK',expected:result.expected,completed:result.completed,passed:result.passed,failed:result.failed,failure:result.failure,bytes:bodies['result.json'].length,sha256:hash(bodies['result.json']),manifestBytes:bodies['manifest.json'].length,manifestSha256:hash(bodies['manifest.json'])}));
-          }catch{process.exitCode=1;}
-          NODE_VERIFY
-          node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-syntax.private" 2>&1
+          node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-syntax.private" 2>&1
       - name: Pin exact previously tested core bytes
         id: corepin
         shell: bash
@@ -593,51 +553,176 @@ jobs:
           else await writeFile(process.env.GITHUB_OUTPUT,'core-sha256='+hash+'\n',{flag:'a'});
           NODE_PIN
           node "$RUNNER_TEMP/afw-core-pin.mjs" >"$RUNNER_TEMP/afw-core-pin.private" 2>&1
-      - name: Execute only the ninety-one fixed inert fixtures
-        id: controls
+      - name: Run fixed inert safety fixtures first
         shell: bash
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" controls >"$RUNNER_TEMP/afw-readonly-inspector-controls.private" 2>&1
-      - name: Preserve strict closed CONTROLS proof on success or failure
-        id: seal
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" fixtures >"$RUNNER_TEMP/afw-readonly-inspector-fixtures.private" 2>&1
+      - name: Download and validate the one fixed ciphertext ZIP
+        shell: bash
+        env:
+          GH_ARTIFACT_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" download >"$RUNNER_TEMP/afw-readonly-inspector-download.private" 2>&1
+      - name: Authenticate original readonly custody privately
+        shell: bash
+        env:
+          AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
+        run: |
+          set -euo pipefail
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" open >"$RUNNER_TEMP/afw-readonly-inspector-open.private" 2>&1
+      - name: Project fixed safe facts and clean owned temporary data
         if: ${{ always() }}
         shell: bash
         run: |
           set -euo pipefail
-          node "$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-controls-fallback.private" 2>&1
-          node "$RUNNER_TEMP/afw-readonly-inspector-controls-verify.mjs" seal >"$RUNNER_TEMP/afw-readonly-inspector-controls-seal.private" 2>&1
-      - name: Preserve only the exact safe pair
+          node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" project >"$RUNNER_TEMP/afw-readonly-inspector-project.private" 2>&1
+      - name: Publish closed safe result and inventory only
+        id: publish
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          cat >"$RUNNER_TEMP/afw-readonly-inspector-publisher.mjs" <<'NODE_PUBLISH'
+          import assert from 'node:assert/strict';
+          import {readFile,writeFile,mkdir,mkdtemp,readdir,lstat,realpath,rm,open} from 'node:fs/promises';
+          import {constants as FSC} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import {inflateRawSync} from 'node:zlib';
+          import {resolve,join,dirname,sep} from 'node:path';
+          import {pathToFileURL} from 'node:url';
+          import {execFile} from 'node:child_process';
+          
+          const ORIGINAL=Object.freeze({purpose:'afw.finite-checkpoint-custody.syn.v1',repository:'tokenizartinfo-ops/agent-friendly-web',ref:'refs/heads/feat/finite-native-cleanup-20261101',sourceSha:'19789b5f31935e0b5be00cbb24c5f45de2a0100a',runId:'43229236340',runAttempt:1,kind:'consumer-failure'});
+          const ORIGINAL_TREE='5c8298022ed85903a8f9d50f598d9c58fbba6f71',ARTIFACT=13949168304,ZIP_BYTES=13680188,ZIP_SHA='8a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5';
+          const HELPER='test/fixtures/finite-checkpoint-custody.mjs',HELPER_BLOB='4d05b5ec0f7b074be88ef9733a47c984b0212351';
+          const PUBLIC_SOURCES=Object.freeze({native_test:{path:'test/mcp-qa-finite-budget-native.test.mjs',blob:'533dafb5df5f8e57442c5b9029dc8dec6dded434'},budget_world:{path:'test/fixtures/finite-budget-world.mjs',blob:'5fb78c057b7e80260ae683abf4af892767ce110e'}});
+          const CASES=['R1','R2','R3'],NAMES=['envelope.bin','manifest.json','receipt.json'],CAPS={'envelope.bin':128*1024*1024,'manifest.json':128*1024,'receipt.json':128*1024};
+          const LIMIT={native:512*1024*1024,jsonl:768*1024*1024,files:4096,record:128*1024,jsonFile:16*1024*1024,tap:32*1024*1024,line:16*1024,block:64*1024,result:64*1024};
+          const FLAGS={operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
+          const sha=b=>createHash('sha256').update(b).digest('hex'),gitBlob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
+          class Rejected extends Error{constructor(reason){super(reason);this.reason=reason;}}
+          const need=(ok,reason)=>{if(!ok)throw new Rejected(reason);};
+          const isObj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+          const fields=(v,allowed,required=allowed)=>{need(isObj(v),'json_shape');need(Object.keys(v).every(k=>allowed.includes(k))&&required.every(k=>Object.hasOwn(v,k)),'json_fields');};
+          const own=(v,k)=>isObj(v)&&Object.hasOwn(v,k)?v[k]:undefined;
+          const num=(v,max=1000000)=>Number.isSafeInteger(v)&&v>=0&&v<=max;
+          const bool=v=>typeof v==='boolean';
+          const duration=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0&&v<=900000;
+          const enumValue=(v,values)=>values.includes(v)?v:'unknown';
+          const utf8=b=>{const s=new TextDecoder('utf-8',{fatal:true}).decode(b);need(Buffer.from(s).equals(b),'utf8');return s;};
+          const elapsed=t=>Math.max(0,Math.round(performance.now()-t));
+          
+          function unknownOwnership(status='missing'){return {status,complete:null,primaryPreserved:null,ancillaryFailureCount:null,callbackCount:null,recordCount:null,disposedCount:null,archivedCount:null,uncertainCount:null,terminalCapture:{captured:null,failed:null,unavailable:null}};}
+          
+          const BOOL_FACTS=['foreignUnchanged','referenceBefore302','thirdListEntered','lateReference'],COUNT_FACTS=['completeWrites','completeNormal','lists','gets','scopePeak','responseStatus','referenceRows','sdkReplay','nativeUnsettled','outwardPending','heldNativeSettled','queuedAtHold','callsAfterRelease'];
+          function unknownFull(status='missing'){return {status,booleans:Object.fromEntries(BOOL_FACTS.map(k=>[k,null])),counts:Object.fromEntries(COUNT_FACTS.map(k=>[k,null])),originalChildElapsedMs:null,rootAvailability:{before:null,during:null,after:null}};}
+          
+          export function projectCounts(v){
+           if(v===null)return {status:'missing',tests:null,pass:null,fail:null,cancelled:null,skipped:null,todo:null};
+           try{fields(v,['tests','pass','fail','cancelled','skipped','todo']);need(Object.values(v).every(n=>num(n,1000000)),'json_counts');return {status:'present',...v};}catch{return {status:'invalid',tests:null,pass:null,fail:null,cancelled:null,skipped:null,todo:null};}
+          }
+          
+          const OPERATORS=['strictEqual','deepStrictEqual','notStrictEqual','notDeepStrictEqual','equal','notEqual','==','!=','===','!==','ok','match','doesNotMatch','throws','rejects'];
+          function scalarUnknown(type='missing',bytes=null){return {known:false,type,value:null,recordedFieldBytes:bytes?.length??null,recordedFieldSha256:bytes?sha(bytes):null};}
+          
+          function emptyTap(){return {status:'unknown',durationMs:null,failureType:'unknown',code:'unknown',operator:'unknown',actual:scalarUnknown(),expected:scalarUnknown(),tapErrorFieldBytes:null,tapErrorFieldSha256:null,registrationCandidate:null,stackCandidates:[],assertionLocation:'unknown',unsupportedFieldCount:0};}
+          
+          const PHASES=['not_attempted','passed','verified','authenticated','projected','complete','failed','unknown'];
+          function baseResult(){
+           return {purpose:'afw.readonly-receipt-inspection.safe.v1',inspector:{repository:ORIGINAL.repository,ref:ORIGINAL.ref,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,node:'22.23.4'},originalContext:{...ORIGINAL},artifact:{id:ARTIFACT,zipBytes:ZIP_BYTES,zipSha256:ZIP_SHA,verified:false},sources:Object.entries(PUBLIC_SOURCES).map(([id,v])=>({id,blob:v.blob,lines:null})),status:'rejected',phases:{fixtures:'not_attempted',download:'not_attempted',authentication:'not_attempted',identity:'not_attempted',projection:'not_attempted',cleanup:'not_attempted'},fixtures:{checks:0},authentication:{authenticated:false,innerInventoryVerified:false,fileCount:null,totalBytes:null},failureIdentity:{verified:false,commandSucceeded:null,elapsedMs:null},cases:CASES.map(caseName=>({case:caseName,tap:emptyTap(),ownership:unknownOwnership('not_examined'),fullResult:unknownFull('not_examined')})),businessCounts:{...projectCounts(null),status:'not_examined'},tap:{status:'not_examined',recordedCaseCount:0,fileWrapper:{status:'unknown',durationMs:null},summary:{...projectCounts(null),status:'not_examined'},reason:'none'},timings:{downloadMs:null,openMs:null,parseCleanupMs:null},failure:null,...FLAGS};
+          }
+          function validateCandidate(v,sources,label){
+           if(v===null)return;fields(v,['label','publicFile','line','column']);need(v.label===label&&typeof v.publicFile==='string'&&Object.hasOwn(PUBLIC_SOURCES,v.publicFile)&&num(v.line,sources.find(x=>x.id===v.publicFile)?.lines??0)&&v.line>=1&&num(v.column,65536)&&v.column>=1,'public_candidate');
+          }
+          function validateCountProjection(v){fields(v,['status','tests','pass','fail','cancelled','skipped','todo']);need(['present','missing','invalid','not_examined'].includes(v.status),'public_enum');for(const k of ['tests','pass','fail','cancelled','skipped','todo'])need(v[k]===null||num(v[k]),'public_count');}
+          function validateScalarProjection(v){
+           fields(v,['known','type','value','recordedFieldBytes','recordedFieldSha256']);need(bool(v.known),'public_scalar');
+           const absent=v.recordedFieldBytes===null&&v.recordedFieldSha256===null,present=num(v.recordedFieldBytes,LIMIT.block)&&v.recordedFieldBytes>=1&&typeof v.recordedFieldSha256==='string'&&/^[a-f0-9]{64}$/.test(v.recordedFieldSha256);
+           need(absent||present,'public_scalar');
+           if(v.known){need(present&&((v.type==='boolean'&&bool(v.value))||(v.type==='null'&&v.value===null)||(v.type==='number'&&Number.isSafeInteger(v.value))),'public_scalar');}
+           else{need(v.value===null&&((v.type==='missing'&&absent)||(['number','string','array','object','unsupported'].includes(v.type)&&present)),'public_scalar');}
+          }
+          function validateTapProjection(v,sources){
+           fields(v,['status','durationMs','failureType','code','operator','actual','expected','tapErrorFieldBytes','tapErrorFieldSha256','registrationCandidate','stackCandidates','assertionLocation','unsupportedFieldCount']);
+           need(['unknown','pass','fail','skipped','todo'].includes(v.status)&&['unknown','testCodeFailure','testTimeoutFailure','cancelledByParent','subtestsFailed','hookFailed','testAborted'].includes(v.failureType)&&['unknown','ERR_ASSERTION','ERR_TEST_FAILURE','ERR_TEST_TIMEOUT','ABORT_ERR','ERR_INVALID_ARG_TYPE','ERR_MODULE_NOT_FOUND'].includes(v.code)&&['unknown',...OPERATORS].includes(v.operator),'public_enum');
+           need(v.durationMs===null||duration(v.durationMs),'public_duration');validateScalarProjection(v.actual);validateScalarProjection(v.expected);need((v.tapErrorFieldBytes===null&&v.tapErrorFieldSha256===null)||(num(v.tapErrorFieldBytes,LIMIT.block)&&v.tapErrorFieldBytes>=1&&typeof v.tapErrorFieldSha256==='string'&&/^[a-f0-9]{64}$/.test(v.tapErrorFieldSha256)),'public_error_field');validateCandidate(v.registrationCandidate,sources,'registration_candidate');need(Array.isArray(v.stackCandidates)&&v.stackCandidates.length<=8,'public_candidate');for(const c of v.stackCandidates)validateCandidate(c,sources,'stack_candidate');need(v.assertionLocation==='unknown'&&num(v.unsupportedFieldCount,64),'public_candidate');
+          }
+          export function validatePublic(v){
+           fields(v,['purpose','inspector','originalContext','artifact','sources','status','phases','fixtures','authentication','failureIdentity','cases','businessCounts','tap','timings','failure',...Object.keys(FLAGS)]);
+           need(v.purpose==='afw.readonly-receipt-inspection.safe.v1','public_identity');fields(v.inspector,['repository','ref','source','run','attempt','node']);need(v.inspector.repository===ORIGINAL.repository&&v.inspector.ref===ORIGINAL.ref&&typeof v.inspector.source==='string'&&/^[a-f0-9]{40}$/.test(v.inspector.source)&&typeof v.inspector.run==='string'&&/^[1-9][0-9]*$/.test(v.inspector.run)&&v.inspector.attempt===1&&v.inspector.node==='22.23.4','public_identity');fields(v.originalContext,Object.keys(ORIGINAL));for(const[k,x]of Object.entries(ORIGINAL))need(v.originalContext[k]===x,'public_identity');fields(v.artifact,['id','zipBytes','zipSha256','verified']);need(v.artifact.id===ARTIFACT&&v.artifact.zipBytes===ZIP_BYTES&&v.artifact.zipSha256===ZIP_SHA&&bool(v.artifact.verified),'public_identity');
+           need(Array.isArray(v.sources)&&v.sources.length===2&&new Set(v.sources.map(x=>x.id)).size===2,'public_sources');for(const s of v.sources){fields(s,['id','blob','lines']);need(typeof s.id==='string'&&Object.hasOwn(PUBLIC_SOURCES,s.id)&&s.blob===PUBLIC_SOURCES[s.id].blob&&(s.lines===null||num(s.lines,100000)&&s.lines>=1),'public_sources');}
+           need(['inspected','partial','rejected'].includes(v.status),'public_enum');fields(v.phases,['fixtures','download','authentication','identity','projection','cleanup']);for(const x of Object.values(v.phases))need(PHASES.includes(x),'public_enum');fields(v.fixtures,['checks']);need(num(v.fixtures.checks,128),'public_count');
+           fields(v.authentication,['authenticated','innerInventoryVerified','fileCount','totalBytes']);need(bool(v.authentication.authenticated)&&bool(v.authentication.innerInventoryVerified)&&(v.authentication.fileCount===null||num(v.authentication.fileCount,LIMIT.files))&&(v.authentication.totalBytes===null||num(v.authentication.totalBytes,LIMIT.native)),'public_auth');
+           fields(v.failureIdentity,['verified','commandSucceeded','elapsedMs']);need(bool(v.failureIdentity.verified)&&(v.failureIdentity.commandSucceeded===null||v.failureIdentity.commandSucceeded===false)&&(v.failureIdentity.elapsedMs===null||duration(v.failureIdentity.elapsedMs)),'public_identity');
+           need(Array.isArray(v.cases)&&JSON.stringify(v.cases.map(x=>x.case))===JSON.stringify(CASES),'public_cases');
+           for(const c of v.cases){
+            fields(c,['case','tap','ownership','fullResult']);validateTapProjection(c.tap,v.sources);
+            fields(c.ownership,['status','complete','primaryPreserved','ancillaryFailureCount','callbackCount','recordCount','disposedCount','archivedCount','uncertainCount','terminalCapture']);need(['present','missing','invalid','oversize','not_examined'].includes(c.ownership.status),'public_enum');for(const k of ['complete','primaryPreserved'])need(c.ownership[k]===null||bool(c.ownership[k]),'public_bool');for(const k of ['ancillaryFailureCount','callbackCount','recordCount','disposedCount','archivedCount','uncertainCount'])need(c.ownership[k]===null||num(c.ownership[k],128),'public_count');fields(c.ownership.terminalCapture,['captured','failed','unavailable']);for(const x of Object.values(c.ownership.terminalCapture))need(x===null||num(x,2),'public_count');
+            fields(c.fullResult,['status','booleans','counts','originalChildElapsedMs','rootAvailability']);need(['present','missing','invalid','oversize','not_examined'].includes(c.fullResult.status),'public_enum');fields(c.fullResult.booleans,BOOL_FACTS);for(const x of Object.values(c.fullResult.booleans))need(x===null||bool(x),'public_bool');fields(c.fullResult.counts,COUNT_FACTS);for(const x of Object.values(c.fullResult.counts))need(x===null||num(x),'public_count');need(c.fullResult.originalChildElapsedMs===null||duration(c.fullResult.originalChildElapsedMs),'public_duration');fields(c.fullResult.rootAvailability,['before','during','after']);for(const x of Object.values(c.fullResult.rootAvailability))need(x===null||bool(x),'public_bool');
+           }
+           validateCountProjection(v.businessCounts);fields(v.tap,['status','recordedCaseCount','fileWrapper','summary','reason']);need(['not_examined','present','missing','rejected','oversize'].includes(v.tap.status)&&num(v.tap.recordedCaseCount,3),'public_tap');fields(v.tap.fileWrapper,['status','durationMs']);need(['unknown','pass','fail'].includes(v.tap.fileWrapper.status)&&(v.tap.fileWrapper.durationMs===null||duration(v.tap.fileWrapper.durationMs)),'public_tap');validateCountProjection(v.tap.summary);need(REASONS.includes(v.tap.reason),'public_reason');
+           fields(v.timings,['downloadMs','openMs','parseCleanupMs']);for(const x of Object.values(v.timings))need(x===null||num(x,300000),'public_duration');
+           if(v.failure!==null){fields(v.failure,['reason','type']);need(REASONS.includes(v.failure.reason)&&['rejected','timeout','io','program','crypto'].includes(v.failure.type),'public_reason');}
+           for(const[k,x]of Object.entries(FLAGS))need(v[k]===x,'public_flag');const ready=v.artifact.verified===true&&v.authentication.authenticated===true&&v.authentication.innerInventoryVerified===true&&v.failureIdentity.verified===true;
+           if(!ready){
+            need(v.failureIdentity.verified===false&&v.failureIdentity.commandSucceeded===null&&v.failureIdentity.elapsedMs===null&&v.authentication.fileCount===null&&v.authentication.totalBytes===null,'public_partial_auth');
+            const empty=baseResult();assert.deepEqual(v.cases,empty.cases);assert.deepEqual(v.businessCounts,empty.businessCounts);assert.deepEqual(v.tap,empty.tap);
+           }else need(num(v.authentication.fileCount,LIMIT.files)&&v.authentication.fileCount>=1&&num(v.authentication.totalBytes,LIMIT.native)&&v.authentication.totalBytes>=1,'public_auth');
+           need(Buffer.byteLength(JSON.stringify(v))<=LIMIT.result,'public_bound');return v;
+          }
+          const REASONS=['none','metadata_diagnostic','metadata_digest','metadata_identity','metadata_bound','fixtures_failed','scope','source_pin','program_unavailable','state_missing','download_failed','download_timeout','download_bound','download_digest','download_redirect','download_status','zip_bound','zip_eocd','zip_entries','zip_directory','zip_central','zip_flags','zip_central_range','zip_paths','zip_link','zip_entry_bound','zip_extra','zip_local','zip_local_identity','zip_local_name','zip_local_sizes','zip_data_range','zip_descriptor','zip_ranges','zip_inflate','zip_crc','opening_failed','opening_timeout','identity_rejected','json_shape','json_fields','json_identity','json_enum','json_fact','json_counts','tap_missing','tap_bound','tap_line_bound','tap_block_bound','tap_location_ambiguous','tap_candidate_bound','tap_field_bound','tap_duplicate_field','tap_orphan_diag','tap_diag_indent','tap_diag_field','tap_duplicate_case','tap_record_collision','tap_ambiguous_case','tap_duplicate_wrapper','tap_nested_case','tap_counts_ambiguous','tap_truncated_diag','tap_utf8','parse_failed','parse_timeout','cleanup_failed','cleanup_timeout','temp_path','io'];
+          function inspectionAccepted(out){
+           validatePublic(out);
+           return out.status==='inspected'&&out.failure===null&&out.artifact.verified===true&&out.authentication.authenticated===true&&out.authentication.innerInventoryVerified===true&&out.failureIdentity.verified===true&&out.failureIdentity.commandSucceeded===false&&out.phases.fixtures==='passed'&&out.fixtures.checks>=1&&out.phases.download==='verified'&&out.phases.authentication==='authenticated'&&out.phases.identity==='verified'&&out.phases.projection==='projected'&&out.phases.cleanup==='complete'&&num(out.timings.downloadMs,30000)&&num(out.timings.openMs,120000)&&num(out.timings.parseCleanupMs,15000);
+          }
+          
+          let out;
+          try{
+           need(process.env.GITHUB_REPOSITORY===ORIGINAL.repository&&process.env.GITHUB_REF===ORIGINAL.ref&&process.env.GITHUB_RUN_ATTEMPT==='1'&&process.versions.node==='22.23.4'&&!Object.hasOwn(process.env,'AFW_SYN_CHECKPOINT_KEY'),'scope');
+           const path=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-safe.json'),h=await open(path,FSC.O_RDONLY|FSC.O_NOFOLLOW);
+           try{const info=await h.stat();need(info.isFile()&&info.nlink===1&&info.size<=LIMIT.result,'public_bound');const bytes=await h.readFile();need(bytes.length===info.size,'public_bound');out=JSON.parse(utf8(bytes));validatePublic(out);}finally{await h.close();}
+          }catch{out=baseResult();out.failure={reason:'program_unavailable',type:'program'};validatePublic(out);}
+          const dest=join(resolve(process.env.RUNNER_TEMP),'afw-readonly-inspector-public');await mkdir(dest,{mode:0o700});
+          need((await readdir(dest)).length===0,'public_bound');
+          const body=Buffer.from(JSON.stringify(out,null,2)),manifest={purpose:'afw.readonly-receipt-inspection-manifest.safe.v1',inspectorSource:process.env.GITHUB_SHA,inspectorRun:process.env.GITHUB_RUN_ID,attempt:1,files:[{path:'result.json',bytes:body.length,sha256:sha(body)}]};
+          const inventory=Buffer.from(JSON.stringify(manifest,null,2));need(body.length+inventory.length<=LIMIT.result,'public_bound');
+          await writeFile(join(dest,'result.json'),body,{flag:'wx',mode:0o600});await writeFile(join(dest,'manifest.json'),inventory,{flag:'wx',mode:0o600});
+          const valid=inspectionAccepted(out);
+          await writeFile(process.env.GITHUB_OUTPUT,'inspection-valid='+valid+'\n',{flag:'a'});
+          NODE_PUBLISH
+          node "$RUNNER_TEMP/afw-readonly-inspector-publisher.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-publish.private" 2>&1
+      - name: Preserve exact safe pair for seven days
         id: artifact
-        if: ${{ always() && steps.seal.outcome == 'success' }}
+        if: ${{ always() && steps.publish.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: afw-readonly-receipt-inspection-${{ github.run_id }}-1
           path: |
-            ${{ runner.temp }}/afw-readonly-inspector-controls-public/result.json
-            ${{ runner.temp }}/afw-readonly-inspector-controls-public/manifest.json
+            ${{ runner.temp }}/afw-readonly-inspector-public/result.json
+            ${{ runner.temp }}/afw-readonly-inspector-public/manifest.json
           if-no-files-found: error
           retention-days: 7
           overwrite: false
           include-hidden-files: false
-      - name: Require successful producer before any verifier
+      - name: Require successful authenticated producer and safe upload
         if: ${{ always() }}
         shell: bash
         env:
-          CONTROLS_OUTCOME: ${{ steps.controls.outcome }}
-          SEAL_OUTCOME: ${{ steps.seal.outcome }}
+          INSPECTION_VALID: ${{ steps.publish.outputs.inspection-valid }}
           UPLOAD_OUTCOME: ${{ steps.artifact.outcome }}
           CORE_SHA: ${{ steps.corepin.outputs.core-sha256 }}
         run: |
           set -euo pipefail
-          test "$CONTROLS_OUTCOME" = success
-          test "$SEAL_OUTCOME" = success
+          test "$INSPECTION_VALID" = true
           test "$UPLOAD_OUTCOME" = success
           test "$CORE_SHA" = d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246
 
   verifier:
     needs: producer
-    if: ${{ success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ false && success() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     steps:
@@ -798,7 +883,7 @@ jobs:
       - name: Verify sixteen controls then the assigned safe artifact exactly once
         shell: bash
         env:
-          READBACK_KIND: controls
+          READBACK_KIND: inspection
           PRODUCER_CORE_SHA: ${{ needs.producer.outputs.core-sha256 }}
           ASSIGNED_ARTIFACT_ID: ${{ needs.producer.outputs.artifact-id }}
           UPLOADED_ARTIFACT_DIGEST: ${{ needs.producer.outputs.artifact-digest }}
