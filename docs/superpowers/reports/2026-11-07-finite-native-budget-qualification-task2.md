@@ -2464,3 +2464,92 @@ Frozen preflight BASEd5cdaabd4c096bca089c11f9b5e414e2007ef12b/tree00c75401f5484f
 Activation changes only workflow push selection restricted to this exact branch and workflow path, two literal false prefixes, and run-name label. Existing serial producer5+verifier2 deadlines, programs, all caps/timers/contracts, Original identity/AAD and environment/single existing key binding remain unchanged; verifier remains keyless. Complete current shared code/heredocs compare byte-for-byte with qualified2b970b496b993fca1a6879478601b5dfa4c18a6e. Original source19789b5f31935e0b5be00cbb24c5f45de2a0100a/run43229236340/attempt1/kindconsumer-failure remains literal; this inspector current Source/run is a distinct identity. Existing ciphertext13949168304 is fetched/opened only by GitHub runner; no private Original ciphertext/key/payload/raw producer logs through MCP or local tools. Only additional fixed plain/output/owner-reference/budget-R1.json and budget-R2.json after all reviewed guards; no R3 widening.
 
 One permit is consumed by the CAS ref update regardless of outcome. Hold activation Source frozen until both jobs terminate; no retry/rerun/repair or alternate credentials. Then restore exact complete F7/manual/no-input/no-push/all7false even on success, append actual run/step/evidence and preservation readbacks, STOP for Root's independent safe-pair audit. No local Source execution/clones/dependencies/temp Source files. NOT EXECUTED: Native16/SDK/Miniflare/I0/world/business/runtime/Cloudflare/OAuth/OTP/cron/callback/consumer/Max/mail/main/PR/merge/deploy/publication. All readiness flags remain false; no root-cause or PC-off claim.
+
+
+## Reference supplement Task2 — ONE actual projection terminal; exact F7 restored
+
+[Run43276435787/attempt1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43276435787), push, created2026-11-12T18:06:51Z, terminal2026-11-12T18:07:22Z, completed/SUCCESS. Frozen activation Sourcedfa0ec1224edd6de5e23020ece31615ed5680110/tree5929e793983adf2441aaaf9344feb0c0e23b9a1c/WF53e4d2ce4be29a06d2553bd27fac646031042e56/reportc10ca54ac767acbb6282837c0373b0e3b2e5fc17. Exactly one run/attempt, no retry/rerun/repair. Both serial jobs reached terminal success before any restore mutation; Source remained frozen through both terminal states.
+
+producer 131385957619 | completed/success | 2026-11-12T18:06:56Z to 2026-11-12T18:07:11Z
+- Set up job | success | 2026-11-12T18:06:57Z to 2026-11-12T18:06:57Z
+- Run actions/checkout@v4 | success | 2026-11-12T18:06:57Z to 2026-11-12T18:06:59Z
+- Run actions/setup-node@v4 | success | 2026-11-12T18:06:59Z to 2026-11-12T18:07:00Z
+- Materialize fixed current inspector | success | 2026-11-12T18:07:00Z to 2026-11-12T18:07:00Z
+- Materialize shared reference supplement and isolated controls | success | 2026-11-12T18:07:00Z to 2026-11-12T18:07:00Z
+- Pin exact previously tested core bytes | success | 2026-11-12T18:07:00Z to 2026-11-12T18:07:00Z
+- Run fixed inert safety fixtures first | success | 2026-11-12T18:07:00Z to 2026-11-12T18:07:00Z
+- Download and validate the one fixed ciphertext ZIP | success | 2026-11-12T18:07:00Z to 2026-11-12T18:07:01Z
+- Authenticate original readonly custody privately | success | 2026-11-12T18:07:01Z to 2026-11-12T18:07:08Z
+- Project fixed safe facts and clean owned temporary data | success | 2026-11-12T18:07:08Z to 2026-11-12T18:07:08Z
+- Publish full closed supplement and whole-envelope inventory only | success | 2026-11-12T18:07:08Z to 2026-11-12T18:07:08Z
+- Preserve exact safe pair for seven days | success | 2026-11-12T18:07:08Z to 2026-11-12T18:07:09Z
+- Require successful authenticated producer and safe upload | success | 2026-11-12T18:07:09Z to 2026-11-12T18:07:09Z
+- Post Run actions/setup-node@v4 | success | 2026-11-12T18:07:09Z to 2026-11-12T18:07:09Z
+- Post Run actions/checkout@v4 | success | 2026-11-12T18:07:09Z to 2026-11-12T18:07:09Z
+- Complete job | success | 2026-11-12T18:07:09Z to 2026-11-12T18:07:09Z
+
+verifier 131386156264 | completed/success | 2026-11-12T18:07:14Z to 2026-11-12T18:07:22Z
+- Set up job | success | 2026-11-12T18:07:14Z to 2026-11-12T18:07:15Z
+- Run actions/checkout@v4 | success | 2026-11-12T18:07:15Z to 2026-11-12T18:07:17Z
+- Run actions/setup-node@v4 | success | 2026-11-12T18:07:17Z to 2026-11-12T18:07:18Z
+- Reconstruct and pin validators from this frozen Source | success | 2026-11-12T18:07:18Z to 2026-11-12T18:07:18Z
+- Verify sixteen synthetic inspection pairs before artifact access | success | 2026-11-12T18:07:18Z to 2026-11-12T18:07:18Z
+- Verify sixteen controls then the assigned safe artifact exactly once | success | 2026-11-12T18:07:18Z to 2026-11-12T18:07:19Z
+- Post Run actions/setup-node@v4 | success | 2026-11-12T18:07:19Z to 2026-11-12T18:07:19Z
+- Post Run actions/checkout@v4 | success | 2026-11-12T18:07:19Z to 2026-11-12T18:07:20Z
+- Complete job | success | 2026-11-12T18:07:20Z to 2026-11-12T18:07:20Z
+
+Exact top-level shell commands from frozen workflow (materialization heredocs and validator source are pinned in that Source, not reproduced as executable report content; runner paths remain literal environment variables):
+```bash
+set -euo pipefail
+umask 077
+test ! -e "$RUNNER_TEMP/afw-readonly-inspector-current.mjs"
+node --check "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" >"$RUNNER_TEMP/afw-readonly-inspector-syntax.private" 2>&1
+set -euo pipefail
+umask 077
+node "$RUNNER_TEMP/afw-reference-bootstrap-current.mjs"
+node --check "$RUNNER_TEMP/afw-reference-supplement-current.mjs"
+node --check "$RUNNER_TEMP/afw-reference-controls-current.mjs"
+set -euo pipefail
+node "$RUNNER_TEMP/afw-core-pin.mjs" >"$RUNNER_TEMP/afw-core-pin.private" 2>&1
+set -euo pipefail
+node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" fixtures >"$RUNNER_TEMP/afw-readonly-inspector-fixtures.private" 2>&1
+set -euo pipefail
+node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" download >"$RUNNER_TEMP/afw-readonly-inspector-download.private" 2>&1
+set -euo pipefail
+node "$RUNNER_TEMP/afw-readonly-inspector-current.mjs" open >"$RUNNER_TEMP/afw-readonly-inspector-open.private" 2>&1
+set -euo pipefail
+node "$RUNNER_TEMP/afw-reference-supplement-current.mjs" coordinate >"$RUNNER_TEMP/afw-readonly-inspector-project.private" 2>&1
+set -euo pipefail
+umask 077
+node "$RUNNER_TEMP/afw-reference-supplement-current.mjs" publish >"$RUNNER_TEMP/afw-readonly-inspector-publish.private" 2>&1
+set -euo pipefail
+test "$INSPECTION_VALID" = true
+test "$UPLOAD_OUTCOME" = success
+test "$CORE_SHA" = d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246
+set -euo pipefail
+umask 077
+test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+node "$RUNNER_TEMP/afw-safe-materialize.mjs" >"$RUNNER_TEMP/afw-safe-materialize.private" 2>&1
+node "$RUNNER_TEMP/afw-reference-bootstrap-current.mjs"
+node --check "$RUNNER_TEMP/afw-safe-verifier-current.mjs" >"$RUNNER_TEMP/afw-safe-verifier-syntax.private" 2>&1
+set -euo pipefail
+timeout --kill-after=1s 5s env -i GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 "$(command -v node)" --no-experimental-fetch "$RUNNER_TEMP/afw-inspection-pair-controls.mjs" 2>"$RUNNER_TEMP/afw-inspection-pair-controls.private"
+set -euo pipefail
+node "$RUNNER_TEMP/afw-safe-verifier-current.mjs" 2>"$RUNNER_TEMP/afw-safe-verifier.private"
+```
+
+Materialization writes the unchanged current Core, supplement/helper/controls/bootstrap, Core pin, ZIP helper, materializer/verifier and sixteen-pair controls. Producer privately ran fixtures then exactly one fixed ciphertext download/open, current coordinate (one project-child, one reference-child for the two fixed receipts, one owned cleanup-child under shared10/15-second budget), publication/full-envelope inventory and one upload. Step outcomes above are the execution evidence; no private producer logs were fetched. Current24 supplement controls are qualification evidence from prior43274672298, not asserted as executed again here. Current verifier ran16 inspection-pair and16 ZIP/capture controls, one assigned-artifact metadata read, one raw ZIP delivery/triple SHA binding before decode and whole closed envelope validation. Closed verifier records below, each <=2048 bytes, were extracted only from the keyless verifier job; no producer logs or Original private data entered MCP/local tools.
+
+```jsonl
+{"marker":"INSPECTION_PAIR_CONTROLS","expected":16,"completed":16,"pass":16,"fail":0,"inventory":[{"id":"observed_pass","status":"passed"},{"id":"observed_failure","status":"passed"},{"id":"observed_skip_todo","status":"passed"},{"id":"result_source","status":"passed"},{"id":"result_run","status":"passed"},{"id":"manifest_source","status":"passed"},{"id":"manifest_run","status":"passed"},{"id":"foreign_pair","status":"passed"},{"id":"fixture_count","status":"passed"},{"id":"unexamined","status":"passed"},{"id":"two_records","status":"passed"},{"id":"unknown_case","status":"passed"},{"id":"wrapper_only","status":"passed"},{"id":"manifest_bytes","status":"passed"},{"id":"manifest_digest","status":"passed"},{"id":"case_order","status":"passed"}],"firstFailure":null}
+{"marker":"SAFE_ZIP_CONTROLS","expected":16,"completed":16,"pass":16,"fail":0,"inventory":[{"id":"validator_capture_after_success","status":"passed"},{"id":"validator_rejection_identity_no_capture","status":"passed"},{"id":"zip_valid_store_crc_vector","status":"passed"},{"id":"zip_valid_deflate","status":"passed"},{"id":"zip_signed_unsigned_descriptors","status":"passed"},{"id":"zip_wrong_size","status":"passed"},{"id":"zip_wrong_upload_sha","status":"passed"},{"id":"zip_wrong_metadata_sha","status":"passed"},{"id":"zip_extra_entry","status":"passed"},{"id":"zip_duplicate_entry","status":"passed"},{"id":"zip_traversal_entry","status":"passed"},{"id":"zip_symlink","status":"passed"},{"id":"zip_bad_crc","status":"passed"},{"id":"zip_noncontiguous_ranges","status":"passed"},{"id":"zip_declared_and_inflate_caps","status":"passed"},{"id":"download_stream_redirect_auth_bounds","status":"passed"}],"failure":null}
+{"marker":"AFW_METADATA_READBACK/1","source":"dfa0ec1224edd6de5e23020ece31615ed5680110","run":"43276435787","attempt":1,"assignedArtifactId":"13971740416","stage":"complete","firstFailedPredicate":"none","reason":"none","httpStatus":200,"receivedBytes":776,"timeoutObserved":false,"verified":true}
+{"marker":"AFW_SAFE_READBACK/1","kind":"supplement","source":"dfa0ec1224edd6de5e23020ece31615ed5680110","run":"43276435787","attempt":1,"artifactId":"13971740416","coreSha256":"d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246","verifierSha256":"42728b5c0250b48fbe219f9fa69e84bae8c06c4e47d676935a17b3743383631d","safeZipModuleSha256":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d","producerCoreVerified":true,"sourceCoreVerified":true,"safeControlsPass":true,"metadataVerified":true,"rawZipVerified":true,"inventoryVerified":true,"producerControlCount":null,"supplementStatus":"partial","zipBytes":2921,"metadataZipBytes":2921,"uploadDigest":"d1882379b043f573761220d504fcfc288d454dcd1cf5496dfa8098c3af0b66b9","metadataDigest":"sha256:d1882379b043f573761220d504fcfc288d454dcd1cf5496dfa8098c3af0b66b9","rawZipSha256":"d1882379b043f573761220d504fcfc288d454dcd1cf5496dfa8098c3af0b66b9","resultBytes":14496,"resultSha256":"855bc990b494e084894559e3fe9534ff355851db7d98b9abe8b909fcd40305b7","manifestBytes":353,"manifestSha256":"a7a392a0a44d683d3a99e7fac459c14df95130c81e907839c0f215543231dc4c","stage":"complete","reason":"none","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Transport SUCCESS means validated PARTIAL projection: supplementStatus=partial, not complete. No inference about R1/R2 membership/values or failure cause is made here; Root will independently audit ONLY the small public-safe pair. Exactly one artifact13971740416, afw-readonly-receipt-inspection-43276435787-1, 2921 bytes, digestsha256:d1882379b043f573761220d504fcfc288d454dcd1cf5496dfa8098c3af0b66b9, created2026-11-12T18:07:09Z, expires2026-11-19T18:07:08Z, expired=false; tied to this exact Source/run/attempt. Upload digest=metadata digest=actual raw ZIP SHA256d1882379b043f573761220d504fcfc288d454dcd1cf5496dfa8098c3af0b66b9. Exactly result.json14496B/SHA256855bc990b494e084894559e3fe9534ff355851db7d98b9abe8b909fcd40305b7 and manifest.json353B/SHA256a7a392a0a44d683d3a99e7fac459c14df95130c81e907839c0f215543231dc4c. Source executor did not download this pair; Root owns its independent DTO/schema/hash audit.
+
+Required unconditional restoration uses exact F7 full126209-byte body/blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc from093e00793de9a9eac193281a7ec4e55d018a476b, not inactive D5. Sole workflow_dispatch/no inputs/no push/all7literalfalse. Only workflow and appended report change; all prior report prefixes preserved. Full body/ref/tree/3188-protected/main and five zero-active readbacks follow this restore commit and will be recorded in a final append-only checkpoint before STOP. No code/helper/cap/timer/private-context/path/environment-binding changes during activation or execution.
+
+NOT EXECUTED: retries/reruns, Native16/R-case replay, SDK/Miniflare/I0/C0C1/world/business/runtime/Cloudflare/OAuth/OTP/cron/callback/consumer/Max/mail/main/PR/merge/deploy/publication, new key/token/permission or credential rotation. Original AAD/source/run remains19789b5f/43229236340, distinct from current inspector identity. No local Source execution/clones/dependencies/temp Source files. No cause/repair/Native qualification/PC-off conclusion. All readiness flags remain false.
