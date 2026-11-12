@@ -1,0 +1,7 @@
+# R2 last-child plan — final CLEAN, bounded diagnostic only
+
+Same independentAstra/xhigh wholeplanreview of2957681ebfe154b00bb586b8a53337e175ab5925..f59b032782a730b6151e54d87d55aee228f757bd returned CLEAN/newCritical0/Important0/Minor0. PriorImportantshadowedR2oversizenegativefixedinround1, accepted. Fullbaseline/rollback/finalF7 identical/all7false; globalonlyreport+302/−0, fullpatchreconstructed. Actual83e12af6 normalizedexactc7body. FullsmallSAFEprimary/oldrows/Originalfacts/realwholemanifest/currentidentity/tripleZIP/closedverifierrecords agree.
+
+Child5 duration5018ms equals recordedmax(possibletie), only recordedabortionamong5. Nineentries, settled→issuer-ack, lastsource-pair706: observedclosedfields only. No operation-specificACK, exclusivepairownership, causalrepair/drain orreadinessestablished. R1invalidreasonUNKNOWN. ValidPARTIALtransport, allreadinessfalse. Sourcef59F7closed/mainunchanged/protected3188/0active; allactorsSTOPPED/nopermit.
+
+DeferredMinor explicitlytriaged: add credentialless owned fixed-file R1/R2→realreader→coordinator positivefixture provingR2certificateandbothunchangedrows BEFOREfutureNativepromotion. Currentactualoneinputdoesnotcreate repeatableregressioncoverage; nofurtherrunneededtoclosethisplan. Rootaccepts COMPLETEdiagnosticplan withthisdeferredtask. AnynewSourceplanrequirespreflight/release; noNative/runtimeauthorityfromfinalCLEAN.
