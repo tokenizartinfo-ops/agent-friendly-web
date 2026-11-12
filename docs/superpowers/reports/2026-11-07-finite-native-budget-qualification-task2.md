@@ -2119,3 +2119,31 @@ Added controls exercise rejectedHTTP403, malformedJSON, actual65537B cap/receive
 ONE new keyless Sourcepush attempt1<=2min/Node22.23.4 authorized; no GitHubenvironment/secrets bindings, no AFWkey supplied, no actual originalartifact/download/open/project, domain/SDK import, MF/I0/nativebusiness. Current fullcore identical between controls and COMPLETE amended inactive realinspector. Fixed controls CLI source-pin reads +runFixtures+closedproof only. StdNode/no npm. Only safe newly assigned controlsartifact gets metadata GET/current exact uploaddigestcomparison/streamcap, then exact2file safe inventory readback. Rawsyntax/fixture/TAP/code logs private; publiconlyCONTROLS result.json+manifest.json<=65536B, exact91IDs/counts/hash-only failure/coreSHA/allreadinessfalse. Commands remain node--check currentmodule; node currentmodule controls; independentfallback +strictseal; currentmetadatareadback (closed diagnostic stdout); assignedsafeactiondownload +strictfullinventory. No test executed in preparation: only grammar construction and byte-exact final7heredoc payload comparisons.
 
 Complete amended actual-inspector draft is recoverably preserved blob9994894916158e92665f780a30513015d8489273/117088bytes, still UNQUALIFIED/manual/noinputs/noPush/jobfalse with allreal drivers/publisher/readback. It is NOT activated. Freeze solecontrolscandidate throughterminal/evidence. Anyfailure => preserveactualclosedproof+diagnostic, EXACTsafeF7complete7manualfalse/report/readbacks0active/STOP, no repair/retry. OnlyALLPASS allows reconcile that COMPLETE actualinspector +currentsharedhelpers/diagnostic +report/readbacks/STOP for SAMEreviewer; no privateinspection release. Current outcomesPENDING, originalR1–R3cause/statusUNKNOWN, Native16consumed/no replay.
+
+
+## Receipt inspector fix2 — observed HTTP404 / unexpected FAILURE / EXACTsafe restore / STOP
+
+Sole released run43248453374/attempt1, frozenSource82cb1cf51a89e88f065b10ee1ca162956c1dafc7/treefd20138d74298a4cb20ba27b26319b7c1696a307/WFfcd20785d8a6e9233d3a4949560550220435d172/report6b600417ea185741f11f3c2e415bd40c08879417. Created2026-11-12T15:30:06Z, terminalFAILURE updated15:30:22Z. Job131287433221 started15:30:09Z, completed15:30:21Z. Materialization/syntaxSUCCESS15:30:15;91currentinert-fixture stepSUCCESS15:30:15; strict closedlocalproofSUCCESS15:30:15..16; uploadSUCCESS15:30:16..17. Metadata step8FAILURE15:30:17..18. Assignedsafeartifact retrieval/fullremoteinventory steps9/10SKIPPED; finalgateFAILURE15:30:18. No retries/repairs or secondjob.
+
+ExactlyONE actual closed metadata line was extracted from primary joblogs;316UTF8B, valid current closed marker/context/enums:
+{"marker":"AFW_METADATA_READBACK/1","source":"82cb1cf51a89e88f065b10ee1ca162956c1dafc7","run":"43248453374","attempt":1,"assignedArtifactId":"13959006495","stage":"response","firstFailedPredicate":"http_status","reason":"metadata_identity","httpStatus":404,"receivedBytes":0,"timeoutObserved":false,"verified":false}
+This proves current request's observedHTTP404 atresponse/http_status, BEFORE metadata body UTF8/JSON, identityfield or digest checks (receivedBytes0; actual signal not aborted). It does NOT establish a credential/provider/proxy/timing cause, and does NOT recover fix1's previously lost firstfailure. No validator weakening, wait, alternate request or reclassification follows. Original fix1cause remainsUNKNOWN. Current I6 integration still fails despite accepted I5/M1 and currentunitstep success.
+
+Exactlyone assigned safe CONTROLS artifact:
+{
+  "id": 13959006495,
+  "name": "afw-readonly-receipt-inspection-43248453374-1",
+  "bytes": 1825,
+  "digest": "sha256:4506c493886b8aca18fe02f45af23f39b7f30b59501750205db57bd09be9788b",
+  "created": "2026-11-12T15:30:17Z",
+  "expires": "2026-11-19T15:30:16Z",
+  "expired": false,
+  "source": "82cb1cf51a89e88f065b10ee1ca162956c1dafc7",
+  "run": 43248453374
+}
+Upload action digest from actual log: not extracted.
+Expected exact public result.json+manifest.json, purposeCONTROLS only. Later terminal metadata/list presence is distinct from the actual earlierHTTP404 and supplies no cause. This seat did not download this safeZIP; Root independently audits safeDTO/CRC/manifest/exact91IDs/corehash when needed. Same assigned-ID metadata/inventory gate did notpass; this is NOT a qualified covering job. Rawsyntax/fixture/error logs remain runner-private; only closedproof and the safe diagnostic were public. Original artifact13949168304/key/custody/SDK/MF/I0/nativebusiness remained untouched.
+
+Prescribed closure restores EXACTsafe f7a71f1a0fa4f5ddf069ff411f008a098455e5cc COMPLETE7/manual/noinputs/noPush/all7literalfalse plus this append only, all3188other blobs/modes unchanged. The amended actual-inspector draft9994894916158e92665f780a30513015d8489273/117088bytes remains recoverable but UNQUALIFIED and notinstalled/activated. Full ref/tree/body/scope andzeroactive readbacks follow. No original/private receipt inspection/decryption or Native16 replay was authorized/performed. M2 minor invalid-vs-missingcounts staysdeferred.
+
+STOP. Await new bounded Root ruling; no automatic repair/retry/job, newpermission/key/env, actualdata integration, runtime or Sourcebusiness change.
