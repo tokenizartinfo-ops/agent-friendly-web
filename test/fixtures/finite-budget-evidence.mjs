@@ -145,6 +145,11 @@ function inspect(s){
   const combined=sum(entries.map(m=>m[k]));
   equalMetric(s.totals[k],combined??(['nativeBytesRead','chunksRead'].includes(k)?null:0),k);
  }
+ for(const entries of [s.byPhaseResource,s.totals.scopes]){
+  const peaks=entries.map(entry=>entry.peak),upper=sum(peaks)??0;
+  valid(peaks.every(peak=>peak<=s.totals.peak)&&s.totals.peak<=upper,'partition peak bounds');
+  for(const entry of entries)if(entry.nativeStarted===s.totals.nativeStarted)valid(entry.peak===s.totals.peak,'whole partition peak');
+ }
  const all=blank(),transitions=[],ordinals=new Set(),rows=new Map(),guards=new Set();
  let priorEnter=0,firstAt=null,lastAt=null;
  const rootMetadata=new Map(),childMetadata=new Map();
@@ -196,3 +201,15 @@ function inspect(s){
 const proof=(s,level)=>({purpose:'afw.finite-budget-metrics-proof.syn.v1',level,traceComplete:s.retention.traceComplete,operationalReadiness:false,completePackage:false,PCoff:false});
 export function verifyObservedBudgetMetrics(s){inspect(s);return proof(s,'observed_metrics');}
 export function verifyCompleteBudgetTrace(s){inspect(s);assert(s.retention.traceComplete,'incomplete retained trace');return proof(s,'complete_trace');}
+
+export function verifyPositiveBudgetEpochInventory(epochs){
+ list(epochs,8);valid(epochs.length===8,'positive epoch inventory');
+ const expected=new Set(['producer|0|M','producer|0|QA','producer|1|M','producer|1|QA','producer|2|M','producer|2|QA','consumer|0|M','consumer|0|QA']);
+ for(const epoch of epochs){
+  shape(epoch,['segment','epoch','role','snapshot']);
+  valid(['producer','consumer'].includes(epoch.segment)&&count(epoch.epoch)&&['M','QA'].includes(epoch.role),'positive epoch identity');
+  valid(epoch.snapshot&&typeof epoch.snapshot==='object'&&!types.isProxy(epoch.snapshot)&&[Object.prototype,null].includes(Object.getPrototypeOf(epoch.snapshot)),'positive epoch snapshot');
+  valid(expected.delete(epoch.segment+'|'+epoch.epoch+'|'+epoch.role),'positive epoch key');
+ }
+ valid(expected.size===0,'positive epoch completeness');
+}

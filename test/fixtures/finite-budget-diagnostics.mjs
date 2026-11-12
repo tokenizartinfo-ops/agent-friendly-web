@@ -28,6 +28,17 @@ const data=(value,key)=>{if(!value||typeof value!=='object')return undefined;con
 const nativeObject=value=>value!==null&&(typeof value==='object'||typeof value==='function');
 const number=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0;
 const integer=value=>Number.isSafeInteger(value)&&value>=0;
+const arrayBufferLength=Object.getOwnPropertyDescriptor(ArrayBuffer.prototype,'byteLength').get;
+const typedArrayLength=Object.getOwnPropertyDescriptor(Object.getPrototypeOf(Uint8Array.prototype),'byteLength').get;
+const dataViewLength=Object.getOwnPropertyDescriptor(DataView.prototype,'byteLength').get;
+const isArrayBufferView=ArrayBuffer.isView;
+function intrinsicBufferLength(value){
+ try{const length=Reflect.apply(arrayBufferLength,value,[]);return integer(length)?length:null;}catch{return null;}
+}
+function intrinsicViewLength(value){
+ for(const getter of [typedArrayLength,dataViewLength])try{const length=Reflect.apply(getter,value,[]);if(integer(length))return length;}catch{/* Unavailable bytes stay null. */}
+ return null;
+}
 const metric=()=>({nativeBytesUnavailable:0,nativeStarted:0,nativeSettled:0,nativeRejected:0,logicalDenied:0,cancelStarted:0,cancelSettled:0,active:0,peak:0,nativeBytesRead:null,chunksRead:null,nativeDurationSumMs:0});
 export const budgetProofVocabulary=Object.freeze(Object.fromEntries(Object.entries({
  phases:PHASES,resources:RESOURCES,operations:OPERATIONS,logicalReasons:REASONS,events:EVENTS,invalidReasons:INVALID_REASONS
@@ -182,16 +193,17 @@ export function createBudgetDiagnostics(options={}){
  });
  return Object.freeze({root,child,begin,bytes,logical,scopeLogical,cancel,settle,snapshot,incomplete});
 }
+const UNOBSERVABLE_THEN=Symbol('unobservable-then');
 function passiveThen(value){
  if(!nativeObject(value))return null;
- for(let object=value;object!==null;object=Object.getPrototypeOf(object)){const d=Object.getOwnPropertyDescriptor(object,'then');if(d)return Object.hasOwn(d,'value')&&typeof d.value==='function'?d.value:null;}
+ for(let object=value;object!==null;object=Object.getPrototypeOf(object)){const d=Object.getOwnPropertyDescriptor(object,'then');if(d)return Object.hasOwn(d,'value')&&typeof d.value==='function'?d.value:UNOBSERVABLE_THEN;}
  return null;
 }
 export function observeBudgetPromise(collector,opRef,promise){
  try{
-  const then=passiveThen(promise);if(!then){collector.settle(opRef,{at:performance.now(),status:null},'promiseThenMissing');return promise;}
+  const then=passiveThen(promise);if(typeof then!=='function'){collector.settle(opRef,{at:performance.now(),status:null},'promiseThenMissing');return promise;}
   const chain=Reflect.apply(then,promise,[()=>collector.settle(opRef,{at:performance.now(),status:'fulfilled'}),()=>collector.settle(opRef,{at:performance.now(),status:'rejected'})]);
-  const next=passiveThen(chain);if(next)Reflect.apply(next,chain,[undefined,()=>{}]);
+  const next=passiveThen(chain);if(typeof next==='function')Reflect.apply(next,chain,[undefined,()=>{}]);
  }catch{try{collector.settle(opRef,{at:performance.now(),status:null},'promiseThenException');}catch{/* A sensor never changes native output. */}}
  return promise;
 }
@@ -264,9 +276,10 @@ export function createBudgetRuntime(options={}){
  const thenObserve=(value,fulfilled,rejected)=>{
   try{
    const then=passiveThen(value);
-   if(!then){fulfilled(value);return;}
+   if(then===UNOBSERVABLE_THEN){incomplete('promiseThenMissing');return;}
+   if(then===null){fulfilled(value);return;}
    const chained=Reflect.apply(then,value,[v=>{try{fulfilled(v);}catch{incomplete('observerFulfilledCallback');}},()=>{try{rejected();}catch{incomplete('observerRejectedCallback');}}]);
-   const next=passiveThen(chained);if(next)Reflect.apply(next,chained,[undefined,()=>{}]);
+   const next=passiveThen(chained);if(typeof next==='function')Reflect.apply(next,chained,[undefined,()=>{}]);
   }catch{incomplete('observerThenException');}
  };
  function invoke(fn,receiver,args,meta,original=()=>Reflect.apply(fn,receiver,args)){
@@ -308,8 +321,9 @@ export function createBudgetRuntime(options={}){
    if(operation==='read'&&meta.exposedBytes){
     // Only exposed native ArrayBuffers/chunks. No text, JSON, cloning or probing.
     const chunk=data(value,'value'),done=data(value,'done');
-    if(value instanceof ArrayBuffer)collector.bytes(ref,{length:value.byteLength,chunks:1,durationMs:settled-at});
-    else if(ArrayBuffer.isView(chunk))collector.bytes(ref,{length:chunk.byteLength,chunks:1,durationMs:settled-at});
+    const directLength=intrinsicBufferLength(value);
+    if(directLength!==null)collector.bytes(ref,{length:directLength,chunks:1,durationMs:settled-at});
+    else if(isArrayBufferView(chunk)){const length=intrinsicViewLength(chunk);if(length!==null)collector.bytes(ref,{length,chunks:1,durationMs:settled-at});}
     else if(done===true)collector.bytes(ref,{length:0,chunks:0,durationMs:settled-at});
    }
    collector.settle(ref,{at:settled,status:'fulfilled'});

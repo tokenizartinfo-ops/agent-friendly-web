@@ -5,10 +5,10 @@ import {mkdir,readFile,writeFile,cp} from 'node:fs/promises';
 import {join} from 'node:path';
 import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,recordOwnerReference} from './fixtures/finite-owner-cleanup.mjs';
 
-import {verifyObservedBudgetMetrics,verifyCompleteBudgetTrace} from './fixtures/finite-budget-evidence.mjs';
+import {verifyObservedBudgetMetrics,verifyCompleteBudgetTrace,verifyPositiveBudgetEpochInventory} from './fixtures/finite-budget-evidence.mjs';
 
 const group=process.env.AFW_BUDGET_GROUP;
-if(!['red','positive'].includes(group))throw Error('SYN budget group unsupported before I0');
+if(group!==undefined&&!['red','positive'].includes(group))throw Error('SYN budget group unsupported before I0');
 const directory='output/finite-budget/red',hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 if(group==='red')test('R0 attributable diagnostics after genuine SDK complete and durable Reference',{timeout:180000},async t=>{
  await mkdir(directory,{recursive:true});
@@ -82,6 +82,7 @@ if(group==='positive')test('P1 original 900s native lifecycle proves observed me
  assert(native.fence.fenced_at);assert(!native.grant||native.grant.revoked_at);assert.deepEqual(native.notices.map(n=>n.action),['grant','revoke']);assert(facts.finalInventoryProof);
  assert.equal(result.producer.completeNormal,1);assert.equal(result.producer.referenceRows,1);assert(result.producer.referenceReadbacks>0);assert(result.sdkAfterExchange);assert(result.sdkAfterExchange.expiresAt*1000<=plan.C0);
  const epochs=result.diagnostics.epochs,identities=new Set(),phases=new Set(),roles=new Set();
+ verifyPositiveBudgetEpochInventory(epochs);
  assert(epochs.some(e=>e.segment==='producer'));assert(epochs.some(e=>e.segment==='consumer'));
  for(const epoch of epochs){
   const key=epoch.segment+'|'+epoch.epoch+'|'+epoch.role;assert(!identities.has(key));identities.add(key);roles.add(epoch.role);
