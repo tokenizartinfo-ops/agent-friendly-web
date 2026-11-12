@@ -1,10 +1,11 @@
 # SDD ledger — docs/superpowers/plans/2026-11-12-reference-stage.md
 
-## CURRENT — Task1 NOT CLEAN;3Important qualification gaps; fix round1/5 released; Task2 HELD
+## CURRENT — Task1 fix1 qualified current22execution; scoped review pending; Task2 HELD
 
-IndependentAstrareview0Critical/3Important/0newMinor acceptsRootlate-expansionfindingandaddsR1oversizeshadowednamednegative+falseENOTDIRfixture. [Review](../reviews/2026-11-12-reference-stage-task1-review.md), [exactfix1brief](../briefs/2026-11-12-reference-stage-task1-fix1.md). OriginalimplementerresumesONLYtests/harness+pins/report; productionhelper/Core/ZIP/bootstrapunchanged. ONE DISTINCT NEWkeyless2+2/attempt1foramendedcode; old43307790578consumedNOTreplay. FailureF7/0activeSTOP; PASSinactive5+2/scopedreview. Allreadinessfalse. PriorpositivefilefixtureMinorstillunqualifieduntil22expansionsactuallyrun.
+Sourcecf223f03/WF5155f694 completeinactive5+2/BOTHfalse; writerSTOPPED/protected3188/report447919prefix/main0c9/0activeRootchecked. New43311629787/1PASS91+40+16+16 AND22exact-oncewitness775B independentlyRootverified. SourceAPPENDcorrectionold43307790578not22coverage. [Fix1package](../reviews/2026-11-12-reference-stage-fix1-package.md) includescompletevalidatedscopedWF/reportpatches, sourceproductionmoduleunchanged. Witnessbarrier/positivefilefixture/realENOTDIR/R1canonicaloversize requireindependentADDRESSEDverdictbeforeActual. Allreadinessfalse.
 
-Task1: fix round1/5 (0 addressed yet,3 open — expandedcallbacksneverexecute; R1oversizenegativeshadowedbystalegroup; ENOTDIRbranchunreached; FIX_BASEb0dfcf50).
+Task1: fix round1/5 (0 accepted addressed yet,3 open pendingre-review — expandedinvocation/witness; R1oversizeshadow; ENOTDIRbranch; commitsb0dfcf50..cf223f03).
+PriorpositivefixedfileMinor isprospectivelycoveredbynowexecutedfixture, NOTcloseduntilindependentreview.
 
 ## Prior proposal checkpoint
 
