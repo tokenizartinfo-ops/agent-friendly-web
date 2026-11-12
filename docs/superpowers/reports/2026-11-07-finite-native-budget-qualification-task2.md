@@ -393,3 +393,169 @@ Root release afce378aa19868609c57a2e972eb64e90dcc77cb @b4cd57a42b410d9afb178c3e0
 Single attempt1 job <=2min, Ubuntu24.04/Node22.23.4, same lock/install flags. Only locked npx --no-install eslint on the failed candidate's fixed five literal files with --format json; no --fix, tests, SDK, MF, I0 or native methods. Raw lint JSON/stderr/install logs remain private until runner cleanup, never printed/uploaded. Independent standard-Node TEMP validator verifies exact five Git blobs, bounds raw JSON2MiB/messages256/closed output128KiB, rejects unknown files/structural keys/invalid coordinates or counts using fixed closed reasons, and emits only fixed context, command exit, counts, predeclared relative file/ruleId/coordinates/severity/fatal plus message byte-count/SHA. Missing coordinates are explicitnull. Nonpublic known ESLint auxiliary fields source/fix/suggestions/deprecations stay private; none is promoted. No unqualified-world import, key or newSource path.
 
 Artifact exact two filenames result.json and manifest.json; purposes afw.round2-lint-diagnostic.safe.v1 and afw.round2-lint-diagnostic-manifest.safe.v1. Independent assigned same-ID complete inventory/context/hash/local byte-equality readback precedes safe DTO logging. A valid diagnostic with findings records actual ESLint nonzero without claiming code fixed; malformed/incomplete diagnostic remains failed. After the one run, restore EXACTc72e3191 COMPLETE7/manual/noinputs/nopush/allfalse, append actual facts/readbacks/zeroactive and STOP. No lint fixes/covering/native activation authorized by this diagnostic. Formal FIX_BASEd9b7 remains.
+
+
+## Focused lint diagnostic terminal proof and exact inactive restoration
+
+ONE diagnostic run43218146435/attempt1/Sourcee40feceb66af157354fe6ea8247822f1d325bfa7/treeb7bb949021fdb899678548ccc8bd31229ed3798d; job131182553508 terminal SUCCESS. Run created2026-11-12T12:28:06Z, terminalupdated2026-11-12T12:28:40Z; job2026-11-12T12:28:09Z..2026-11-12T12:28:40Z. This success means diagnostic/evidence completion only. Actual ESLint command exited1; code remains failing/unqualified. No project tests/SDK/MF/I0/Native16 executed, no lint fix or retry.
+
+Actual safe DTO purpose afw.round2-lint-diagnostic.safe.v1: status lint_findings / reason none, exact five pinned files, four severity2 errors, zero warnings/fatal/fixable. All four findings are @next/next/no-assign-module-variable in test/fixtures/finite-budget-world.mjs blob41be914c5c2133e6f25104ed63cd58047c7fbf0e: line1710 col99 through line1710 col267; line1711 col2 through line1711 col114; line1844 col351 through line1844 col516; line1845 col3 through line1845 col100. All fatalfalse, each message103B/SHA25660c60f0ae07706b888bb26566290520af6db9879b3f35baff98d838a577d1326. Other four fixed files report zero errors. No raw message/source/stack was emitted or retained publicly; raw JSON/stderr remain runner-private only until cleanup. Exact filename/rule/coordinates are evidence, not an implemented fix.
+
+Artifact13945435031, finite-budget-round2-lint-e40feceb66af157354fe6ea8247822f1d325bfa7, ZIP1399B/SHA2565dbfa0fb4eef852eec2aa79b9d0bf459ca669837fba23dceb0da52a854c35140; expires2026-11-19T12:28:36Z. Exact two JSON filenames: result.json / manifest.json; purposes afw.round2-lint-diagnostic.safe.v1 / afw.round2-lint-diagnostic-manifest.safe.v1. First assigned same-ID download SUCCEEDED and actual uploaded/downloaded digest matched; retries2/3 SKIPPED. Independent full two-file inventory/context/manifest SHA and local byte equality SUCCEEDED before closed DTO log. No duplicate connector download needed. Same-ID artifact/readback does not qualify F1–F8/Q8/profiles or Native16.
+
+Full actual safe DTO, copied from verified closed log (never raw lint JSON):
+
+```json
+{
+  "purpose": "afw.round2-lint-diagnostic.safe.v1",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+  "source": "e40feceb66af157354fe6ea8247822f1d325bfa7",
+  "run": "43218146435",
+  "attempt": 1,
+  "node": "22.23.4",
+  "inputs": [
+    {
+      "file": "test/fixtures/finite-budget-world.mjs",
+      "blob": "41be914c5c2133e6f25104ed63cd58047c7fbf0e"
+    },
+    {
+      "file": "test/fixtures/finite-owner-cleanup.mjs",
+      "blob": "2f5dad6c306fac1be2f11845bef640bb204ad572"
+    },
+    {
+      "file": "test/mcp-qa-finite-budget-native.test.mjs",
+      "blob": "533dafb5df5f8e57442c5b9029dc8dec6dded434"
+    },
+    {
+      "file": "test/fixtures/finite-initial-entry-world.mjs",
+      "blob": "a7b730dc9be336528f0971544099f79d05758b1a"
+    },
+    {
+      "file": "test/fixtures/finite-owner-cleanup-persistence.mjs",
+      "blob": "e0dda1fd3d66c1864fd0b20f873c7fc0c452f6d8"
+    }
+  ],
+  "commandExit": 1,
+  "status": "lint_findings",
+  "reason": "none",
+  "counts": {
+    "files": 5,
+    "messages": 4,
+    "errors": 4,
+    "warnings": 0,
+    "fatal": 0,
+    "fixableErrors": 0,
+    "fixableWarnings": 0
+  },
+  "fileCounts": [
+    {
+      "file": "test/fixtures/finite-budget-world.mjs",
+      "errors": 4,
+      "warnings": 0,
+      "fatal": 0,
+      "fixableErrors": 0,
+      "fixableWarnings": 0
+    },
+    {
+      "file": "test/fixtures/finite-initial-entry-world.mjs",
+      "errors": 0,
+      "warnings": 0,
+      "fatal": 0,
+      "fixableErrors": 0,
+      "fixableWarnings": 0
+    },
+    {
+      "file": "test/fixtures/finite-owner-cleanup-persistence.mjs",
+      "errors": 0,
+      "warnings": 0,
+      "fatal": 0,
+      "fixableErrors": 0,
+      "fixableWarnings": 0
+    },
+    {
+      "file": "test/fixtures/finite-owner-cleanup.mjs",
+      "errors": 0,
+      "warnings": 0,
+      "fatal": 0,
+      "fixableErrors": 0,
+      "fixableWarnings": 0
+    },
+    {
+      "file": "test/mcp-qa-finite-budget-native.test.mjs",
+      "errors": 0,
+      "warnings": 0,
+      "fatal": 0,
+      "fixableErrors": 0,
+      "fixableWarnings": 0
+    }
+  ],
+  "entries": [
+    {
+      "file": "test/fixtures/finite-budget-world.mjs",
+      "ruleId": "@next/next/no-assign-module-variable",
+      "line": 1710,
+      "column": 99,
+      "endLine": 1710,
+      "endColumn": 267,
+      "severity": 2,
+      "fatal": false,
+      "message": {
+        "bytes": 103,
+        "sha256": "60c60f0ae07706b888bb26566290520af6db9879b3f35baff98d838a577d1326"
+      }
+    },
+    {
+      "file": "test/fixtures/finite-budget-world.mjs",
+      "ruleId": "@next/next/no-assign-module-variable",
+      "line": 1711,
+      "column": 2,
+      "endLine": 1711,
+      "endColumn": 114,
+      "severity": 2,
+      "fatal": false,
+      "message": {
+        "bytes": 103,
+        "sha256": "60c60f0ae07706b888bb26566290520af6db9879b3f35baff98d838a577d1326"
+      }
+    },
+    {
+      "file": "test/fixtures/finite-budget-world.mjs",
+      "ruleId": "@next/next/no-assign-module-variable",
+      "line": 1844,
+      "column": 351,
+      "endLine": 1844,
+      "endColumn": 516,
+      "severity": 2,
+      "fatal": false,
+      "message": {
+        "bytes": 103,
+        "sha256": "60c60f0ae07706b888bb26566290520af6db9879b3f35baff98d838a577d1326"
+      }
+    },
+    {
+      "file": "test/fixtures/finite-budget-world.mjs",
+      "ruleId": "@next/next/no-assign-module-variable",
+      "line": 1845,
+      "column": 3,
+      "endLine": 1845,
+      "endColumn": 100,
+      "severity": 2,
+      "fatal": false,
+      "message": {
+        "bytes": 103,
+        "sha256": "60c60f0ae07706b888bb26566290520af6db9879b3f35baff98d838a577d1326"
+      }
+    }
+  ],
+  "rawRetention": "runner_only_until_runner_cleanup",
+  "I0Opened": false,
+  "nativeExecutionProduced": false,
+  "businessCases": 0,
+  "operationalReadiness": false,
+  "completePackage": false,
+  "PCoff": false
+}
+```
+
+Closure restores EXACTc72e31919d477280c9eef39b63ca46708acb82e7 complete seven-job workflow/manual-only/noinputs/nopush/all7false, no code fixes. All five failed fixture blobs stay exact and formal FIX_BASEd9b7 unchanged. Ref/tree/report and full3190/3183protected/zeroactive closure readbacks follow. STOP pending a separate Root ruling; no covering rerun or new diagnostic is authorized by this result.
