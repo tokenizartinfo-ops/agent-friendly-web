@@ -1,7 +1,9 @@
 name: AFW finite budget qualification
-run-name: AFW fixed native qualification HELD ${{ github.sha }}
+run-name: AFW Native16 single coherent run ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
 permissions:
   contents: read
   actions: read
@@ -12,7 +14,7 @@ concurrency:
 # PREPARATION ONLY: all seven job gates remain false until separate Root release.
 jobs:
   contracts:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     env:
@@ -333,7 +335,7 @@ jobs:
           test '${{ steps.pure_verified.outcome }}' = success
           test '${{ steps.pure_seal.outcome }}' = success
   positive_prepare:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     needs: [contracts]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -493,7 +495,7 @@ jobs:
           test '${{ steps.native.outcome }}' = success
           test '${{ steps.own_verified.outcome }}' = success
   positive_consume:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     needs: [contracts, positive_prepare]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -702,7 +704,7 @@ jobs:
           test '${{ steps.native.outcome }}' = success
           test '${{ steps.own_verified.outcome }}' = success
   reduction_prepare:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     needs: [contracts]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -862,7 +864,7 @@ jobs:
           test '${{ steps.native.outcome }}' = success
           test '${{ steps.own_verified.outcome }}' = success
   reduction_consume_a:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     needs: [contracts, reduction_prepare]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -1071,7 +1073,7 @@ jobs:
           test '${{ steps.native.outcome }}' = success
           test '${{ steps.own_verified.outcome }}' = success
   readonly:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     needs: [contracts]
     runs-on: ubuntu-24.04
     timeout-minutes: 7
@@ -1237,7 +1239,7 @@ jobs:
           test '${{ steps.native.outcome }}' = success
           test '${{ steps.own_verified.outcome }}' = success
   reduction_consume_b:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     needs: [contracts, readonly, reduction_prepare]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
