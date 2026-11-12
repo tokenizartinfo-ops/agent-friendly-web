@@ -3118,3 +3118,670 @@ ONE KEYLESS push is path-scoped to exact branch and workflow path, attempt1, no 
 Exact runner command inventory: node --check current Core/helper/tests; node afw-reference-bootstrap-current.mjs; node afw-core-pin.mjs; node afw-readonly-inspector-current.mjs controls (private redirected); timeout --kill-after=1s 10s env -i RUNNER_TEMP=<runner-temp> GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-reference-controls-current.mjs (only strict <=2048 closed record public); current control proof attaches hashes to whole current controls pair; fallback/seal strict safe pair and successful producer/upload gate; node afw-safe-materialize.mjs; node --check generated current verifier; timeout --kill-after=1s 5s env -i GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-inspection-pair-controls.mjs; node afw-safe-verifier-current.mjs for assigned controls artifact. No widened timeout/cap.
 
 Pending: exact staged Git blobs/ref/tree/protected/main/counts pre-CAS, one qualification terminal logs/closed digests, then inactive completion OR exact F7 rollback and final readbacks. No dynamic pass is claimed in this preparation appendix. All operationalReadiness/completePackage/PCoff/globalNativeDrainVerified/sdkNamespaceEmptyVerified false. NOT EXECUTED/NOT AUTHORIZED: actualTask2, Native16, Original access outside runner, new SDK/MF/I0/R3/SQL/search/CF/runtime/OAuth/OTP/credential/consumer/callback/cron/Max/mail/deploy/main/PR/merge/new service/cost.
+
+
+## 2026-11-12 Reference-stage Task1 — one KEYLESS GREEN and complete actual INACTIVE
+
+The ONE permit was consumed at successful expected_sha CAS f59b032782a730b6151e54d87d55aee228f757bd → a23c9128e0fb0480466285245b3745a35ae9bd90 (toolclock2026-11-12 20:54:41UTC). Staged tree05e83acd301644f5400616e35b7b65d8e576611b; complete WF816b24584cea7244f3f2fc307da783d1465337d0/230636 characters and report11591068d959d061d365f3ffb3f3fa799ccb317e/423671 characters read back EXACT before CAS. Recursive3190 leaves/3188protected identical to BASE, original414181-character report prefix preserved, main0c9c475b unchanged, five active counts0. Source stayed frozen through BOTH terminal; after terminal ref+full WF still EXACTa23c9128/816b2458 and five active counts0.
+
+ONE run43307790578/attempt1/eventpush, head a23c9128e0fb0480466285245b3745a35ae9bd90. GitHub created/run_started2026-11-12T21:11:37Z, updated2026-11-12T21:12:01Z, completed/success. Tool terminal observation2026-11-12 20:55:28UTC; preserve both clock domains literally, no compensation. All steps in BOTH jobs completed/success:
+```json
+[
+  {
+    "id": 131495556021,
+    "name": "producer",
+    "status": "completed",
+    "conclusion": "success",
+    "run_id": 43307790578,
+    "logs_url": null,
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Materialize current exact code and finite safe proof validators",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Materialize shared reference supplement and isolated controls",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Pin exact previously tested core bytes",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Execute only the ninety-one fixed inert fixtures",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Execute forty current reference-stage controls in credentialless synthetic context",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Preserve strict closed CONTROLS proof on success or failure",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Preserve only the exact safe pair",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10
+      },
+      {
+        "name": "Require successful producer before any verifier",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 22
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 23
+      }
+    ]
+  },
+  {
+    "id": 131495664639,
+    "name": "verifier",
+    "status": "completed",
+    "conclusion": "success",
+    "run_id": 43307790578,
+    "logs_url": null,
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Reconstruct and pin validators from this frozen Source",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Verify sixteen synthetic inspection pairs before artifact access",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Verify sixteen controls then the assigned safe artifact exactly once",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      }
+    ]
+  }
+]
+```
+
+Current dynamic GREEN: ninety-one original Core controls verified by independent assigned-artifact verifier, ALL forty current reference IDs/pass40/fail0, all sixteen unchanged V1 pair controls/pass16/fail0, all sixteen unchanged ZIP controls/pass16/fail0. New owned fixed-file reader→coordinator fixture executed in passed two_valid; BOTH full expected rows+full certificate for consume/grant, no mirrored expected projection. Binding singletonpair unknown positive and BOTH consume/grant rehashed negative producer/verifier/coordinator assertions executed in passed lc_schema; complete_partial canonical oversize check retained and passed. This prospectively addresses the prior Minor with new dynamic evidence; independent scoped review still required before claiming review acceptance or advancing Task2.
+
+Fetched ONLY the two KEYLESS job logs131495556021/131495664639 to extract the following whitelisted closed records, each <=2048 bytes; no Original/private producer logs/cipher/key/plain data downloaded. Closed record timestamps/bytes and exact values:
+```json
+[
+  {
+    "timestamp": "2026-11-12T21:11:44.9757543Z",
+    "bytes": 1728,
+    "value": {
+      "marker": "REFERENCE_CONTROLS/1",
+      "expected": 40,
+      "completed": 40,
+      "pass": 40,
+      "fail": 0,
+      "inventory": [
+        {
+          "id": "two_valid",
+          "status": "passed"
+        },
+        {
+          "id": "zero_fraction_false",
+          "status": "passed"
+        },
+        {
+          "id": "lookup_states",
+          "status": "passed"
+        },
+        {
+          "id": "identities_flags",
+          "status": "passed"
+        },
+        {
+          "id": "required_bounds",
+          "status": "passed"
+        },
+        {
+          "id": "optional_types",
+          "status": "passed"
+        },
+        {
+          "id": "array_bounds",
+          "status": "passed"
+        },
+        {
+          "id": "empty_absent",
+          "status": "passed"
+        },
+        {
+          "id": "writer_http",
+          "status": "passed"
+        },
+        {
+          "id": "private_canary",
+          "status": "passed"
+        },
+        {
+          "id": "file_missing_bad",
+          "status": "passed"
+        },
+        {
+          "id": "file_bound_links",
+          "status": "passed"
+        },
+        {
+          "id": "gate_no_read",
+          "status": "passed"
+        },
+        {
+          "id": "one_cleanup",
+          "status": "passed"
+        },
+        {
+          "id": "primary_cleanup",
+          "status": "passed"
+        },
+        {
+          "id": "timeout_cleanup",
+          "status": "passed"
+        },
+        {
+          "id": "uncertain_no_cleanup",
+          "status": "passed"
+        },
+        {
+          "id": "cleanup_late_fail",
+          "status": "passed"
+        },
+        {
+          "id": "whole_hash_bytes",
+          "status": "passed"
+        },
+        {
+          "id": "nested_identity",
+          "status": "passed"
+        },
+        {
+          "id": "complete_partial",
+          "status": "passed"
+        },
+        {
+          "id": "strict_envelope",
+          "status": "passed"
+        },
+        {
+          "id": "producer_transport",
+          "status": "passed"
+        },
+        {
+          "id": "verifier_transport",
+          "status": "passed"
+        },
+        {
+          "id": "lc_pair",
+          "status": "passed"
+        },
+        {
+          "id": "lc_last",
+          "status": "passed"
+        },
+        {
+          "id": "lc_pos",
+          "status": "passed"
+        },
+        {
+          "id": "lc_unknown",
+          "status": "passed"
+        },
+        {
+          "id": "lc_ops",
+          "status": "passed"
+        },
+        {
+          "id": "lc_steps",
+          "status": "passed"
+        },
+        {
+          "id": "lc_scalars",
+          "status": "passed"
+        },
+        {
+          "id": "lc_absent",
+          "status": "passed"
+        },
+        {
+          "id": "lc_guard",
+          "status": "passed"
+        },
+        {
+          "id": "lc_invalid",
+          "status": "passed"
+        },
+        {
+          "id": "lc_schema",
+          "status": "passed"
+        },
+        {
+          "id": "lc_clean",
+          "status": "passed"
+        },
+        {
+          "id": "lc_clock",
+          "status": "passed"
+        },
+        {
+          "id": "lc_manifest",
+          "status": "passed"
+        },
+        {
+          "id": "lc_transport",
+          "status": "passed"
+        },
+        {
+          "id": "lc_bounds",
+          "status": "passed"
+        }
+      ],
+      "firstFailure": null
+    }
+  },
+  {
+    "timestamp": "2026-11-12T21:11:56.3606639Z",
+    "bytes": 773,
+    "value": {
+      "marker": "INSPECTION_PAIR_CONTROLS",
+      "expected": 16,
+      "completed": 16,
+      "pass": 16,
+      "fail": 0,
+      "inventory": [
+        {
+          "id": "observed_pass",
+          "status": "passed"
+        },
+        {
+          "id": "observed_failure",
+          "status": "passed"
+        },
+        {
+          "id": "observed_skip_todo",
+          "status": "passed"
+        },
+        {
+          "id": "result_source",
+          "status": "passed"
+        },
+        {
+          "id": "result_run",
+          "status": "passed"
+        },
+        {
+          "id": "manifest_source",
+          "status": "passed"
+        },
+        {
+          "id": "manifest_run",
+          "status": "passed"
+        },
+        {
+          "id": "foreign_pair",
+          "status": "passed"
+        },
+        {
+          "id": "fixture_count",
+          "status": "passed"
+        },
+        {
+          "id": "unexamined",
+          "status": "passed"
+        },
+        {
+          "id": "two_records",
+          "status": "passed"
+        },
+        {
+          "id": "unknown_case",
+          "status": "passed"
+        },
+        {
+          "id": "wrapper_only",
+          "status": "passed"
+        },
+        {
+          "id": "manifest_bytes",
+          "status": "passed"
+        },
+        {
+          "id": "manifest_digest",
+          "status": "passed"
+        },
+        {
+          "id": "case_order",
+          "status": "passed"
+        }
+      ],
+      "firstFailure": null
+    }
+  },
+  {
+    "timestamp": "2026-11-12T21:11:56.4625856Z",
+    "bytes": 919,
+    "value": {
+      "marker": "SAFE_ZIP_CONTROLS",
+      "expected": 16,
+      "completed": 16,
+      "pass": 16,
+      "fail": 0,
+      "inventory": [
+        {
+          "id": "validator_capture_after_success",
+          "status": "passed"
+        },
+        {
+          "id": "validator_rejection_identity_no_capture",
+          "status": "passed"
+        },
+        {
+          "id": "zip_valid_store_crc_vector",
+          "status": "passed"
+        },
+        {
+          "id": "zip_valid_deflate",
+          "status": "passed"
+        },
+        {
+          "id": "zip_signed_unsigned_descriptors",
+          "status": "passed"
+        },
+        {
+          "id": "zip_wrong_size",
+          "status": "passed"
+        },
+        {
+          "id": "zip_wrong_upload_sha",
+          "status": "passed"
+        },
+        {
+          "id": "zip_wrong_metadata_sha",
+          "status": "passed"
+        },
+        {
+          "id": "zip_extra_entry",
+          "status": "passed"
+        },
+        {
+          "id": "zip_duplicate_entry",
+          "status": "passed"
+        },
+        {
+          "id": "zip_traversal_entry",
+          "status": "passed"
+        },
+        {
+          "id": "zip_symlink",
+          "status": "passed"
+        },
+        {
+          "id": "zip_bad_crc",
+          "status": "passed"
+        },
+        {
+          "id": "zip_noncontiguous_ranges",
+          "status": "passed"
+        },
+        {
+          "id": "zip_declared_and_inflate_caps",
+          "status": "passed"
+        },
+        {
+          "id": "download_stream_redirect_auth_bounds",
+          "status": "passed"
+        }
+      ],
+      "failure": null
+    }
+  },
+  {
+    "timestamp": "2026-11-12T21:11:56.8562095Z",
+    "bytes": 297,
+    "value": {
+      "marker": "AFW_METADATA_READBACK/1",
+      "source": "a23c9128e0fb0480466285245b3745a35ae9bd90",
+      "run": "43307790578",
+      "attempt": 1,
+      "assignedArtifactId": "13984207755",
+      "stage": "complete",
+      "firstFailedPredicate": "none",
+      "reason": "none",
+      "httpStatus": 200,
+      "receivedBytes": 776,
+      "timeoutObserved": false,
+      "verified": true
+    }
+  },
+  {
+    "timestamp": "2026-11-12T21:11:57.4298483Z",
+    "bytes": 1284,
+    "value": {
+      "marker": "AFW_SAFE_READBACK/1",
+      "kind": "controls",
+      "source": "a23c9128e0fb0480466285245b3745a35ae9bd90",
+      "run": "43307790578",
+      "attempt": 1,
+      "artifactId": "13984207755",
+      "coreSha256": "d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246",
+      "verifierSha256": "1b6465e67af138cd9b0065605797f7f4c52fdd4d7cf1a3442819ba0b71b5f03a",
+      "safeZipModuleSha256": "b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d",
+      "producerCoreVerified": true,
+      "sourceCoreVerified": true,
+      "safeControlsPass": true,
+      "metadataVerified": true,
+      "rawZipVerified": true,
+      "inventoryVerified": true,
+      "producerControlCount": 91,
+      "supplementStatus": null,
+      "zipBytes": 2388,
+      "metadataZipBytes": 2388,
+      "uploadDigest": "e319ab3d16cf1f918d33f95918ba2690d04a5acdfb57ed49987e951be6f7927d",
+      "metadataDigest": "sha256:e319ab3d16cf1f918d33f95918ba2690d04a5acdfb57ed49987e951be6f7927d",
+      "rawZipSha256": "e319ab3d16cf1f918d33f95918ba2690d04a5acdfb57ed49987e951be6f7927d",
+      "resultBytes": 11815,
+      "resultSha256": "ad920d3624191ad38b20b4e40f33b96c490091741d265ab02e2e315bf7cdcc05",
+      "manifestBytes": 335,
+      "manifestSha256": "5ea9a93a713510438a867c9151cbb476a66a5bd3353ec0cee668d276930a3415",
+      "stage": "complete",
+      "reason": "none",
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  }
+]
+```
+Closed output digest inventory (sha256 excludes LF, withLFsha256 includes LF):
+```json
+[
+  {
+    "marker": "REFERENCE_CONTROLS/1",
+    "bytes": 1728,
+    "sha256": "cf429196b9ff7083bf57499a47873444ed47b266a60737ca9b8097d3de17e36b",
+    "withLFsha256": "bb4d38a5a2cb09859de8c7dd02a76c109a516cf0949de76937fe2c2ae6c348d0"
+  },
+  {
+    "marker": "INSPECTION_PAIR_CONTROLS",
+    "bytes": 773,
+    "sha256": "f740cb421a112d8bf722015dc3e6bceac2843eea4876eeb112b6494b266c989d",
+    "withLFsha256": "ca6c7ba663049e76b7be2e2fbe337bfa7e22aeb0a1012373d6b8dbf189c660b2"
+  },
+  {
+    "marker": "SAFE_ZIP_CONTROLS",
+    "bytes": 919,
+    "sha256": "91b1bb0c696d47443ccee3895e8649ecb95543d3fccb7562edd2a7fea649db6d",
+    "withLFsha256": "14f6d9bc219b70e14fcf6dad2b95beaad377828e48346f6fbd546c5ee5fc0f00"
+  },
+  {
+    "marker": "AFW_METADATA_READBACK/1",
+    "bytes": 297,
+    "sha256": "e50ac6442bda31164576706fc335a1901dee9587e06b253713ca3efc5974c521",
+    "withLFsha256": "d4ccf225cba957f190093e7ba0c247471ac0f1b8c5884a8cd608a6e735446a14"
+  },
+  {
+    "marker": "AFW_SAFE_READBACK/1",
+    "bytes": 1284,
+    "sha256": "61c95cb7812f3e8c57811904337a53882e822f4fe15cd6b68ab91aa7f0ea978a",
+    "withLFsha256": "64c6c8cb9fb0902260af968bf4daf1b57f548c6a04c4737cd06d9f042db0ec95"
+  }
+]
+```
+Assigned small safe CONTROLS artifact metadata, not Original; executor did NOT download ZIP:
+```json
+{
+  "artifacts": [
+    {
+      "id": 13984207755,
+      "name": "afw-readonly-receipt-inspection-43307790578-1",
+      "size_in_bytes": 2388,
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/13984207755",
+      "archive_download_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/13984207755/zip",
+      "expired": false,
+      "created_at": "2026-11-12T21:11:45Z",
+      "expires_at": "2026-11-19T21:11:45Z",
+      "updated_at": "2026-11-12T21:11:45Z",
+      "digest": "sha256:e319ab3d16cf1f918d33f95918ba2690d04a5acdfb57ed49987e951be6f7927d",
+      "workflow_run": {
+        "id": 43307790578,
+        "repository_id": 1347578006,
+        "head_repository_id": 1347578006,
+        "head_branch": "feat/finite-native-cleanup-20261101",
+        "head_sha": "a23c9128e0fb0480466285245b3745a35ae9bd90"
+      }
+    }
+  ]
+}
+```
+Independent verifier complete/none record confirms producerCoreVerified/sourceCoreVerified/safeControlsPass/metadataVerified/rawZipVerified/inventoryVerified=true, producerControlCount91, result11815B/SHAad920d3624191ad38b20b4e40f33b96c490091741d265ab02e2e315bf7cdcc05, manifest335B/SHA5ea9a93a713510438a867c9151cbb476a66a5bd3353ec0cee668d276930a3415, rawZIP2388B/SHAe319ab3d16cf1f918d33f95918ba2690d04a5acdfb57ed49987e951be6f7927d. Generated verifier40595B/SHA1b6465e67af138cd9b0065605797f7f4c52fdd4d7cf1a3442819ba0b71b5f03a matches independently framed inert-string expected hash EXACT. Output carries all five readiness flags false. Whole controls manifest/current source/run, all forty IDs and reference module/tests/bootstrap pins verified by current independent validator; no acceptance inferred from grammar or step names alone.
+
+Exact covering execution commands and outcomes: materialization node --check Core/helper/tests SUCCESS; bootstrap+corepin SUCCESS (Core77002/d514); node afw-readonly-inspector-current.mjs controls SUCCESS (91 verified in assigned current pair); timeout --kill-after=1s 10s env -i RUNNER_TEMP=<runner-temp> GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-reference-controls-current.mjs SUCCESS/closed40record1728B; node --input-type=module NODE_REFERENCE_PROOF SUCCESS hashes+closed proof+whole manifest; fallback/seal SUCCESS, upload SUCCESS, successful producer gates SUCCESS; node afw-safe-materialize.mjs + bootstrap + node --check generated verifier SUCCESS; timeout --kill-after=1s 5s env -i GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-inspection-pair-controls.mjs SUCCESS/closed16record773B; node afw-safe-verifier-current.mjs SUCCESS/closedZIP16record919B + current metadata297B + complete current controls readback1284B. Private redirects remain on runner; hashes and closed records above are the reviewable outputs.
+
+GitHub command outcomes: fetch_file FULL exact brief/spec/plan/preflight/progressiveAGENTS/baseF7/report/completec7+18Atemplates; GET git refs/commits/recursive tree and five active collections; create_tree(base8cc,two allowed paths)→05e83acd; create_commit(parentf59)→a23c9128; full staged WF/report/tree readback exact; update_ref(expected_shaf59,forcefalse)→success ONCE. GET branch run-list→43307790578/1; GET exact run+fetch_workflow_run_jobs→bothsuccess; fetch_workflow_run_artifacts→13984207755; fetch_workflow_job_logs ONLY KEYLESSproducer+verifier→whitelisted outputs above. A first metadata wrapper call used repository_full_name instead of required repo_full_name and failed schema validation before a remote action; the correctly named read succeeded. No workflow retry/rerun/dispatch/repair/alternate probe/new credential.
+
+COMPLETE actual candidate now uses actualc7 template with exact same SEVEN tested current program bodies, current pins, unchanged fixed Original/AAD/crypto/caps/10s+15stime/physical-close/privacy. Actual workflow216100characters, producer5minutes/environmentafw-finite-syn-checkpoint + verifier2minutes; INACTIVE with manual workflow_dispatch/noinputs/nopush/BOTHliteralfalse. No actual run is authorized or performed. Program inventory/hashes in preparation appendix remain authoritative; materializer hash c7b4d4af36836bff19b543951c34d78e989ff314ef8170849d8384521f7ef636; actual inline body spans (opener/closer, source lines between them):
+```json
+{
+  "NODE_CORE": {
+    "opener": 37,
+    "closer": 540
+  },
+  "NODE_REFERENCE": {
+    "opener": 547,
+    "closer": 824
+  },
+  "NODE_REFERENCE_TESTS": {
+    "opener": 825,
+    "closer": 1032
+  },
+  "NODE_REFERENCE_BOOTSTRAP": {
+    "opener": 1033,
+    "closer": 1043
+  },
+  "NODE_SAFE_ZIP": {
+    "opener": 1140,
+    "closer": 1249
+  },
+  "NODE_MATERIALIZE": {
+    "opener": 1250,
+    "closer": 1287
+  },
+  "NODE_PAIR_TESTS": {
+    "opener": 1295,
+    "closer": 1369
+  }
+}
+```
+Reviewed-program URL for the qualification is https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/a23c9128e0fb0480466285245b3745a35ae9bd90/.github/workflows/afw-finite-budget-qualification.yml . Inactive full candidate receives immutable completion SHA below. No implementation changes after dynamic pass: only compose complete actual template with byte-identical tested bodies, manual event/two false gates/name/run-name and append this report. Root Task2 HELD until independent full review and separate exact release.
+
+Next: full inactive ref/WF/report/recursive-tree/protected3188/main/five0active readbacks, append concise checkpoint and STOP. No Source replay/new permit/Native16/privateOriginal access/SDK/MF/I0/R3/SQL/search/CF/runtime/OAuth/OTP/credential/consumer/callback/cron/Max/mail/deploy/main/PR/merge/newcost or localSourceexecution/clones/dependencies/tempSourcefiles. operationalReadiness=false; completePackage=false; PCoff=false; globalNativeDrainVerified=false; sdkNamespaceEmptyVerified=false.
