@@ -595,3 +595,329 @@ Resultados saneados reales:
 Sólo helper+APPEND de este informe; workflow protegido EXACTO c082ab9bacc8b3cf975fa611aebd95edcf144fd0, manual/literal false/no inputs, sin activación. Los otros 3189 blobs/modos de BASE permanecen exactos. Se prepara commit con único padre 7993018a; CAS expected_sha=7993018a0b823cbff61012061f70de093af32eb3 y force=false sobre esta rama, mensaje [skip ci].
 
 Cierre externo requerido: readback independiente ref/commit/padre/árbol completo no truncado, 3191 blobs, exactamente dos modificaciones, 3189 protegidos intactos, helper/reporte completos y prefijo exacto, workflow idéntico y cero runs. Los hashes finales propios informe/head/tree y resultados efectivos se entregan fuera del cuerpo para evitar autorreferencia. No hay liberación ni activación con esta enmienda. STOP_WRITES tras readbacks; operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## O2: única sonda cloud consumida y cierre inactivo
+
+Autoridad sustituta leída antes de actuar: docs/superpowers/briefs/2026-11-12-ordinary-failure-boundaries-single-probe-trigger-corrected.md @1ff2b87d52c0b03c189a2fcc74638529162cc36b, blob c2705540cf975a6d8955511512d0366903794742. Revisión scoped del bridge declarada Spec/Quality aprobada sin findings; BASE cualificada 7b200bdf61eda65234e12cef008de8cae483aa6f / árbol a838ef8a295f30e811b578180b462cba8abfab74. La liberación b1aa anterior quedó obsoleta y sin consumir; esta sustituta autorizó exactamente una ejecución. Intención O2 ahora CONSUMIDA, sin retry/rerun/replacement/autorrearme.
+
+### Fuente, job y límites observados
+
+Se activó sólo .github/workflows/afw-ordinary-failure-boundaries.yml: push de rama exacta/selfpath exacto, eliminación única de false&&, evento push y nombre ONE PROBE. Reversión estática recupera exactamente workflow c082ab9bacc8b3cf975fa611aebd95edcf144fd0; cuerpo/Node/lock/checkouts/permisos/attempt 1 intactos. Activación workflow blob=66a4fea8729ece09057d3b2068f70dce36431ca0, SHA-256=82186e961221c67c2722c13a7b62ff3588c84563331e510339ca85d9206b2ca9.
+
+Commit real de ejecución dc1750630a10aa3d48d2d3db621d22a005e8eaef / árbol cebe77d69ddcc6b734cc100052d44e41f69912b7, padre 7b200bdf. CAS exacto sin force. Readback completo: 3191 blobs, 3190 blobs/modos fuera del workflow intactos. Helper inmutable 4db3321be9cffe7f948446e27aae43209f6d1d4f / SHA-256 f4f71ad31c2f2e68432d92b9cb2a02447148cf5e2176f1ac0d07ac3033f67ef6. La rama permaneció congelada en dc175 hasta terminal y lecturas requeridas.
+
+Run [43170408910](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43170408910), evento push, attempt 1, único job boundaries 131022048553: TERMINAL failure. GitHub run_started_at=2026-11-12T06:45:44Z; updated_at=2026-11-12T06:46:10Z (intervalo de metadata 26s, no duración fina del hijo). Checkout, Node e instalación del lock finalizaron success; sólo la sonda falló; fallback, manifiesto, upload y validación del formato de metadata finalizaron success. Cero jobs activos en lectura terminal.
+
+Artefacto declara Node v22.23.4/Ubuntu24.04, contexto real push/run/head separado del testSource f5f52660d19ec9fc634bbc49558db75582fdaf88 y del hijo MODELED_STERILE_SYNTHETIC, group UNSET; no es identidad ni permiso operativo. Guard de argv/repo/ref/attempt/SHA/versión se conservó. Las 3188 hojas/modos del sujeto f5 coinciden antes/después con hash c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7. Los siete overlays normalizados, hashes y conteos de literales coinciden exactamente con el inventario estático anterior.
+
+Límites codificados hijo110s+5 / comando120s+5 / job7m; no se ejercitaron como timeout: termination=null, signal=null, spawnFailed=false, exit.code=1. No se actualizó/reinició un reloj ni se abrió ventana nativa Task2; Root mantuvo Native16 HELD. No hay APIs reales, CF/runtime/secretos/Max/mail/productpin/Source/main/oldORD cambiados.
+
+### Resultado acotado: incomplete por convención de conteos
+
+La expectativa 22 registrados/2 fallos/20 filtrados NO coincide con los eventos reales de este Node: registered=2, selectedFailed=2, selectedPassed=0, filteredSkipped=0, wrapperFailed=0, unexpected=0; summary tests2/pass0/fail2/cancelled0/skipped0/todo0. El patrón anclado fijo seleccionó ambos nombres, y el reporter no recibió eventos de los otros veinte registros bajo este filtro. No se inventan skips ni se reescribe el resultado: selectionCountsMatch=false, status=incomplete y job failure quedan preservados. El fallo del conteo estricto no se confunde con un fallo de producto adicional o con credenciales.
+
+Ambos hashes de referencia se reprodujeron: own 9b4dd8bed13ebaeeb9a8c7a0d998cb01b73b0dfdcedafa4dadb12f9631005bff; adoption a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e. En los observadores dentro del hijo, ambas excepciones son nativeError=true y currentRealmPrototype/observedDataPrototypeName=Error, profundidad de prototipo 1, causeDepth0, own name/code NULL. Esto aclara los anteriores NULL sin identificar mensaje o causa exacta. El reporter recibe wrappers/cause con marca nativa false y causeDepth1; ambas observaciones se conservan separadas.
+
+Own: own_build enter+return y own_import enter+throw. Adoption: trial_generation, rest_init/control/prepare/proof/capture/read/claim y final_restore/final_project retornan; cf_finalizer y cf_fixture rechazan después. No hay marcas http_build/http_import. Sólo se delimita un intervalo de rechazo posterior a la proyección y anterior al retorno de finiteFinalizerFixture; no se atribuye un punto interno exacto ni se declara arreglado alguno de los 24 fallos restantes.
+
+Controles reales: privacidad de padre y dos hijos pass; native brand/cross-realm/spoof/oversize/cycle/canary pasan; getterTouches=0 y proxyTrapTouches=0, proxyPrototypesSafe=true en todos. Dos recibos identity_control pass con Promise/error/receiver identity=true, sin etapas de fixture contaminadas. networkDenied=0, errorOverflow=0. Estos controles acotados pasan en este run; el diagnóstico global sigue incomplete por conteos y no cualifica una suite amplia o runtime operativo.
+
+DTO cerrado observado (sin mensajes/stack/bundles/datos privados):
+
+```json
+{
+  "status": "incomplete",
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "workflowRef": "refs/heads/diag/afw-failure-boundaries-20261112",
+    "trigger": "push",
+    "workflowSource": "dc1750630a10aa3d48d2d3db621d22a005e8eaef",
+    "testSource": "f5f52660d19ec9fc634bbc49558db75582fdaf88",
+    "runId": "43170408910",
+    "attempt": 1,
+    "node": "v22.23.4",
+    "os": "Ubuntu24.04",
+    "group": "UNSET",
+    "childContext": "MODELED_STERILE_SYNTHETIC",
+    "workflowContextIsAdmissionAuthority": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false
+  },
+  "protectedBase": {
+    "leaves": 3188,
+    "before": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+    "after": "c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7",
+    "equal": true
+  },
+  "privacy": {
+    "pass": true,
+    "getterTouches": 0,
+    "proxyTrapTouches": 0,
+    "proxyPrototypesSafe": true,
+    "ordinaryNative": true,
+    "crossRealmNative": true,
+    "crossRealmExactUnknown": true,
+    "spoofRejected": true,
+    "oversizeSuppressed": true,
+    "cycleBounded": true,
+    "rawCanaryAbsent": true
+  },
+  "helperHash": "f4f71ad31c2f2e68432d92b9cb2a02447148cf5e2176f1ac0d07ac3033f67ef6",
+  "selectionCountsMatch": false,
+  "representativeHashesMatch": [
+    true,
+    true
+  ],
+  "execution": {
+    "exit": {
+      "code": 1,
+      "signal": null,
+      "spawnFailed": false
+    },
+    "termination": null,
+    "rawFiles": [
+      {
+        "name": "raw.stdout",
+        "bytes": 4178,
+        "sha256": "4025b16d6c7aa6d14935ac6bd62885c6cd4ed340243185425527bed17c1f2872",
+        "uploaded": false
+      },
+      {
+        "name": "raw.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "uploaded": false
+      }
+    ],
+    "privateLogsUploaded": false,
+    "evidence": {
+      "purpose": "afw.failure-boundaries.reporter.v1",
+      "testEvents": {
+        "selectedPassed": 0,
+        "selectedFailed": 2,
+        "filteredSkipped": 0,
+        "wrapperFailed": 0,
+        "unexpected": 0,
+        "registered": 2
+      },
+      "summary": {
+        "tests": 2,
+        "pass": 0,
+        "fail": 2,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "boundaries": {
+        "own_build:enter": 1,
+        "own_build:return": 1,
+        "own_import:enter": 1,
+        "own_import:throw": 1,
+        "cf_fixture:enter": 1,
+        "cf_fixture:throw": 1,
+        "cf_finalizer:enter": 1,
+        "cf_finalizer:throw": 1,
+        "final_restore:enter": 1,
+        "final_restore:return": 1,
+        "final_project:enter": 1,
+        "final_project:return": 1,
+        "rest_init:enter": 1,
+        "rest_init:return": 1,
+        "rest_control:enter": 1,
+        "rest_control:return": 1,
+        "rest_prepare:enter": 1,
+        "rest_prepare:return": 1,
+        "rest_proof:enter": 1,
+        "rest_proof:return": 1,
+        "rest_capture:enter": 1,
+        "rest_capture:return": 1,
+        "rest_read:enter": 3,
+        "rest_read:return": 3,
+        "rest_claim:enter": 1,
+        "rest_claim:return": 1,
+        "trial_generation:enter": 1,
+        "trial_generation:return": 1
+      },
+      "errors": [
+        {
+          "stage": "own_import",
+          "nativeError": true,
+          "currentRealmPrototype": "Error",
+          "observedDataPrototypeName": "Error",
+          "prototypeDepth": 1,
+          "prototypeObservationIsExactIntrinsicClass": false,
+          "name": null,
+          "code": null,
+          "messageHash": "9b4dd8bed13ebaeeb9a8c7a0d998cb01b73b0dfdcedafa4dadb12f9631005bff",
+          "messageTooLarge": false,
+          "depth": 0,
+          "causeDepth": 0,
+          "count": 1
+        },
+        {
+          "case": "own",
+          "failureType": "testCodeFailure",
+          "nativeError": false,
+          "currentRealmPrototype": null,
+          "observedDataPrototypeName": null,
+          "prototypeDepth": null,
+          "prototypeObservationIsExactIntrinsicClass": false,
+          "name": "Error",
+          "code": "ERR_TEST_FAILURE",
+          "messageHash": "9b4dd8bed13ebaeeb9a8c7a0d998cb01b73b0dfdcedafa4dadb12f9631005bff",
+          "messageTooLarge": false,
+          "depth": 0,
+          "causeDepth": 1,
+          "count": 1
+        },
+        {
+          "case": "own",
+          "failureType": "testCodeFailure",
+          "nativeError": false,
+          "currentRealmPrototype": null,
+          "observedDataPrototypeName": null,
+          "prototypeDepth": null,
+          "prototypeObservationIsExactIntrinsicClass": false,
+          "name": "Error",
+          "code": null,
+          "messageHash": "9b4dd8bed13ebaeeb9a8c7a0d998cb01b73b0dfdcedafa4dadb12f9631005bff",
+          "messageTooLarge": false,
+          "depth": 1,
+          "causeDepth": 1,
+          "count": 1
+        },
+        {
+          "stage": "cf_finalizer",
+          "nativeError": true,
+          "currentRealmPrototype": "Error",
+          "observedDataPrototypeName": "Error",
+          "prototypeDepth": 1,
+          "prototypeObservationIsExactIntrinsicClass": false,
+          "name": null,
+          "code": null,
+          "messageHash": "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e",
+          "messageTooLarge": false,
+          "depth": 0,
+          "causeDepth": 0,
+          "count": 1
+        },
+        {
+          "stage": "cf_fixture",
+          "nativeError": true,
+          "currentRealmPrototype": "Error",
+          "observedDataPrototypeName": "Error",
+          "prototypeDepth": 1,
+          "prototypeObservationIsExactIntrinsicClass": false,
+          "name": null,
+          "code": null,
+          "messageHash": "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e",
+          "messageTooLarge": false,
+          "depth": 0,
+          "causeDepth": 0,
+          "count": 1
+        },
+        {
+          "case": "adoption",
+          "failureType": "testCodeFailure",
+          "nativeError": false,
+          "currentRealmPrototype": null,
+          "observedDataPrototypeName": null,
+          "prototypeDepth": null,
+          "prototypeObservationIsExactIntrinsicClass": false,
+          "name": "Error",
+          "code": "ERR_TEST_FAILURE",
+          "messageHash": "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e",
+          "messageTooLarge": false,
+          "depth": 0,
+          "causeDepth": 1,
+          "count": 1
+        },
+        {
+          "case": "adoption",
+          "failureType": "testCodeFailure",
+          "nativeError": false,
+          "currentRealmPrototype": null,
+          "observedDataPrototypeName": null,
+          "prototypeDepth": null,
+          "prototypeObservationIsExactIntrinsicClass": false,
+          "name": "Error",
+          "code": null,
+          "messageHash": "a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e",
+          "messageTooLarge": false,
+          "depth": 1,
+          "causeDepth": 1,
+          "count": 1
+        }
+      ],
+      "errorOverflow": 0,
+      "privacyControls": [
+        {
+          "pass": true,
+          "proxyPrototypesSafe": true,
+          "ordinaryNative": true,
+          "crossRealmNative": true,
+          "crossRealmExactUnknown": true,
+          "spoofRejected": true,
+          "oversizeSuppressed": true,
+          "cycleBounded": true,
+          "rawCanaryAbsent": true,
+          "getterTouches": 0,
+          "proxyTrapTouches": 0
+        },
+        {
+          "pass": true,
+          "proxyPrototypesSafe": true,
+          "ordinaryNative": true,
+          "crossRealmNative": true,
+          "crossRealmExactUnknown": true,
+          "spoofRejected": true,
+          "oversizeSuppressed": true,
+          "cycleBounded": true,
+          "rawCanaryAbsent": true,
+          "getterTouches": 0,
+          "proxyTrapTouches": 0
+        }
+      ],
+      "identityControls": [
+        {
+          "pass": true,
+          "promiseIdentity": true,
+          "errorIdentity": true,
+          "receiverIdentity": true
+        },
+        {
+          "pass": true,
+          "promiseIdentity": true,
+          "errorIdentity": true,
+          "receiverIdentity": true
+        }
+      ],
+      "networkDenied": 0
+    }
+  }
+}
+```
+
+### Preservación verificada del único artefacto seguro
+
+Primary purpose-built listing del run devolvió exactamente 13922465417, nombre afw-failure-boundaries-43170408910-1, 4662 bytes, digest sha256:4526d902cd2b41a098c65a23dd21132679a1e572cff7a3b93e1ee04f6302c5a4, expired=false, creación 2026-11-12T06:46:06Z, expiración 2026-11-19T06:46:05Z; workflow_run.id/source/branch/repositoryId coinciden. Listing medido 564 ms frente a presupuesto2s; la herramienta no ofrece timeout impuesto.
+
+Una sola llamada exact-ID al downloader, medida 1518 ms, sin timeout impuesto ni reintentos; devolvió referencia al archivo. Una sola lectura HTTP y validación del ZIP seguro en RAM, medida 242 ms con AbortSignal.timeout(5000) impuesto a la lectura y límite256KiB. No se descargaron logs privados ni se extrajo/ejecutó/instaló nada en disco. Hubo un error local de orquestación por URL no definido antes de iniciar ese fetch; no produjo solicitud y se corrigió sin duplicar el download o la lectura.
+
+ZIP real=4662 bytes comprimidos / 15622 expandidos; SHA-256 coincide con primary digest. Exactamente result.json (15355 bytes, SHA-256 8acfb4f4ccc5f8427510dd9dbbb499abcf07b289d885580f8bc0ae7b18416f80) y manifest.json (267 bytes, SHA-256 a057e87df17624c86c52924d7daba5e78e1a959f57241ecfcbbb459b45cd9772); ambos CRC32 verificados. manifest.inventory declara exactamente el tamaño/hash del resultado y coincide. Sin otros archivos; rawLogsUploaded=false; result<=64KiB; compressed+expanded cada uno<=256KiB.
+
+La metadata por ID procede del listing primario y del digest real del ZIP. Los valores del stdout del upload no se releen independientemente: el paso de validación de formato fue success, pero las herramientas seguras disponibles no exponen sus líneas aisladas. No se recuperaron logs completos para suplir esa limitación. Un GET genérico de metadata de job tampoco estuvo disponible; se usó el listado especializado de jobs, sin insistir en ese endpoint.
+
+Incidente de herramienta: durante inspección de forma se imprimió accidentalmente un objeto anidado que contenía la URL temporal firmada del artefacto público seguro. No contenía secretos ni payload privado. No se repite ni se persiste aquí su valor; se continuó sólo con validación RAM del ZIP autorizado. Root fue informado.
+
+Logs de prueba permanecieron privados/no subidos: stdout4178 bytes/hash4025b16d6c7aa6d14935ac6bd62885c6cd4ed340243185425527bed17c1f2872; stderr0/hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. No se leyó su contenido.
+
+### Restauración terminal y cierre
+
+Tras el terminal, ZIP/readbacks y ref congelado dc175 se restaura EXACTAMENTE workflow inactivo c082ab9bacc8b3cf975fa611aebd95edcf144fd0 y sólo se añade esta sección al informe ec0a4e1adaf6d7cb3f20ffde035916f38293a69f. Los 3189 blobs fuera de workflow/informe, incluido el helper, permanecen intactos. Commit de limpieza separado del run, padre dc175, CAS expected_sha exacto/force=false/[skip ci]. No se habilita otro job ni se cambia el helper por el mismatch.
+
+Criterios de contrato externo: ref/commit/árbol completo no truncado de 3191 blobs; workflow c082 exacto; helper4db exacto; prefijo previo de informe íntegro; sólo workflow+informe modificados respecto a dc175 y sólo informe respecto a BASE7b; exactamente un run terminal/attempt1/0 jobs activos; no retry. Los hashes propios finales de informe/head/tree y CAS/readback efectivo se entregan externamente, sin autorreferencia. STOP_WRITES al cerrar.
+
+operationalReadiness=false; completePackage=false; PCoff=false; ORD integration OPEN. Sonda única consumida, diagnóstico incomplete, ambos fallos reproducidos y frontera más estrecha; causa exacta y reparación siguen pendientes de decisión Root.
