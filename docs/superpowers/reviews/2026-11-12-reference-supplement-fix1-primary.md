@@ -362,3 +362,7 @@ Root independent read-only run/jobs/artifacts metadata and keylessclosedrecords;
 ```
 
 Not a private inspection, Native16 pass or PC-off acceptance. OriginalR1/R2 receiptvalues unobserved. ActualTask2 remainsheld until fullinactivecandidate+SAMEscopedreview andseparateRootrelease. Allreadinessfalse.
+
+## Root final inactive scope
+
+Independent2026-11-12T18:01:12Z fullbody/ref/tree proof: Source d5cdaabd4c096bca089c11f9b5e414e2007ef12b, exactamendedWFa0e1d838, report9392d374 prefix256179chars preserved; all3188protectedleafSHAs/types/modes equalFIX_BASE498andBASE093, 3190total. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 unchanged; queued/in_progress/waiting/pending/requested each0. FullvalidatedU10scopedreviewpackage8094fe26 supplied toSAMEreviewer. ActualTask2HELD.
