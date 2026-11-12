@@ -1,0 +1,112 @@
+name: AFW own-import fixed literal inspection (INACTIVE)
+# Preparation only. One compile-only job remains behind literal false.
+'on':
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-own-literal-${{ github.ref }}-${{ github.run_id }}
+  cancel-in-progress: false
+jobs:
+  inspect:
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-own-literal-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Initial closed receipt before setup
+        shell: bash
+        run: |
+          umask 077
+          mkdir -p own-literal-safe
+          printf '%s\n' '{"purpose":"afw.own-literal.inspection.v1","status":"incomplete","reason":"setup_or_interrupted","operationalReadiness":false,"completePackage":false,"PCoff":false}' > own-literal-safe/result.json
+      - name: Checkout immutable diagnostic source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: diagnostic-code
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Checkout exact separate subject with full history
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: f5f52660d19ec9fc634bbc49558db75582fdaf88
+          path: subject
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Exact Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+          check-latest: false
+      - name: Install only the existing fixed lock without scripts
+        id: install
+        continue-on-error: true
+        working-directory: subject
+        run: timeout --signal=TERM --kill-after=3s 25s npm ci --ignore-scripts --no-audit --no-fund
+      - name: One fixed compile-only inspection without emission import
+        if: ${{ steps.install.outcome == 'success' }}
+        continue-on-error: true
+        env:
+          O4_WORKFLOW_SHA: ${{ github.workflow_sha }}
+        run: timeout --signal=TERM --kill-after=3s 60s node diagnostic-code/scripts/diagnostics/own-import-literal-inspection.mjs
+      - name: Preserve terminal closed receipt and manifest
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          umask 077
+          node --input-type=module <<'NODE'
+          import {mkdir,readFile,writeFile,chmod,lstat} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          const root='own-literal-safe';
+          await mkdir(root,{recursive:true,mode:0o700});
+          let bytes;
+          try{
+            const info=await lstat(root+'/result.json');
+            if(!info.isFile()||info.isSymbolicLink()||info.size>65536)throw 0;
+            bytes=await readFile(root+'/result.json');
+            const result=JSON.parse(bytes);
+            if(result.purpose!=='afw.own-literal.inspection.v1'||result.operationalReadiness!==false||result.completePackage!==false||result.PCoff!==false)throw 0;
+            if(result.status==='running_or_interrupted'){
+              result.status='incomplete';result.reason='deadline_or_interrupted';
+              bytes=Buffer.from(JSON.stringify(result)+'\n');
+              if(bytes.length>65536)throw 0;
+              await writeFile(root+'/result.json',bytes,{mode:0o600});
+            }
+            if(!['incomplete','inspection_complete'].includes(result.status))throw 0;
+          }catch{
+            bytes=Buffer.from(JSON.stringify({purpose:'afw.own-literal.inspection.v1',status:'incomplete',reason:'setup_or_interrupted',operationalReadiness:false,completePackage:false,PCoff:false})+'\n');
+            await writeFile(root+'/result.json',bytes,{mode:0o600});
+          }
+          await chmod(root+'/result.json',0o600);
+          await writeFile(root+'/manifest.json',JSON.stringify({purpose:'afw.own-literal.manifest.v1',inventory:[{name:'result.json',bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}],rawLogsUploaded:false,operationalReadiness:false,completePackage:false,PCoff:false})+'\n',{mode:0o600});
+          NODE
+      - name: Preserve only two closed JSON files for seven days
+        if: ${{ always() }}
+        id: safe_artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-own-literal-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            own-literal-safe/result.json
+            own-literal-safe/manifest.json
+          retention-days: 7
+          if-no-files-found: error
+      - name: Exact artifact identity metadata
+        if: ${{ always() && steps.safe_artifact.outcome == 'success' }}
+        env:
+          ARTIFACT_ID: ${{ steps.safe_artifact.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.safe_artifact.outputs.artifact-digest }}
+        shell: bash
+        run: |
+          [[ "$ARTIFACT_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$ARTIFACT_DIGEST" =~ ^[a-f0-9]{64}$ ]]
+          printf 'O4 artifact id=%s sha256=%s retention-days=7\n' "$ARTIFACT_ID" "$ARTIFACT_DIGEST"
+      - name: Fail incomplete only after safe preservation
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFile} from 'node:fs/promises';
+          try{const result=JSON.parse(await readFile('own-literal-safe/result.json','utf8'));process.exitCode=result.status==='inspection_complete'?0:1;}catch{process.exitCode=1;}
+          NODE
