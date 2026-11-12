@@ -2471,3 +2471,43 @@ All other code blobs are exact FIX_BASE, including compiler/world, descriptors, 
 Root next decides from the preserved ordinary partial evidence and conducts the scoped review of five findings/new breakage. All five Important remain open pending that verdict. Ordinary full-suite completion and current-source native qualification remain unverified; historical baef full9 remains its own valid dated SYN evidence. No intervention is requested from Gabriel. No further writer action after cleanup readback: STOP_WRITES.
 
 operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## Task1 round1 — first four-file A/B classification, INCONCLUSIVE — 2026-11-12 UTC
+
+The [Root A/B ruling and subsequent recorder-correction ruling](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/78937357cf5715a166bf48e6592fccbcfab71ca7/docs/superpowers/briefs/2026-11-12-finite-budget-task1-fix-round1.md) preserve this run as historical inconclusive evidence. Scope of this sub-block: TEMP plus append-only report only; all delivered code frozen. No ordinary/broad replay, pending native fixture,900s/P1, unrelated correction, production/credential/owner action or subagent.
+
+Workflow Source `41b7cefae63c5ba335ad846f4f3eb32bf47e27d7`, tree `341a9442e0e2f052ec9b013d746fe62f58159d14`, TEMP `672a5ed9fd0281eff42d97542708285e516423fd`, parent delivered `f5f52660d19ec9fc634bbc49558db75582fdaf88`. This workflow Source is DISTINCT from each actual test checkout. Both jobs verified git rev-parse HEAD, full history, persist-credentials:false, Node22.23.4/Ubuntu24.04 and identical package.json/blob `f4fd38ac380c46a149d8cf0f3bd828a28406f761` plus lock/blob `36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b`. Child GITHUB_SHA truthfully equaled its actual checkout; workflowSource and A/B side were preserved separately in payloads. Historical refs were only read, never reset/published.
+
+Exactly four existing files, same order/default concurrency/isolation, group UNSET:
+- test/mcp-own-finite-entrypoints.test.mjs
+- test/mcp-qa-cloud-native-cli.test.mjs
+- test/mcp-qa-finite-adoption-wait.test.mjs
+- test/mcp-qa-finite-command.test.mjs
+
+This is FOUR-FILE reporter-instrumented diagnostics, not the whole ordinary suite or literal npm test. The two jobs ran independently with fail-fast:false,120-second command deadline, bounded5-second process-group escalation and7-minute job deadline. Reporter pass/fail/hang/canary plumbing passed on both sides before comparison. No expected-failure assertion forced identical results.
+
+| Side / actual test Source | Job in run43148329682/1 | Terminal observation |
+| --- | --- | --- |
+| A / FIX_BASE `eaf019aa872709d867aac53d9684ecdf1c21d013` | [130951329493](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43148329682/job/130951329493) | timeout;125,030ms; child exit null; dequeued5/completed1/passed0/failed1; no per-file/global summaries |
+| B / delivered `f5f52660d19ec9fc634bbc49558db75582fdaf88` | [130951329761](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43148329682/job/130951329761) | timeout;125,027ms; child exit null; dequeued4/completed1/passed0/failed1; no per-file/global summaries |
+
+Both have totals:null, skipped0/todo0. These are partial EVENT counts, not final test totals. Both workflow jobs correctly failed the complete-classification gate after preserving their partial results. The test-command step's success conclusion under continue-on-error does NOT mean test success.
+
+Only ONE preserved failure identity matches across A/B:
+`test/mcp-qa-finite-adoption-wait.test.mjs:1:1`, nesting0, testNumber3, code ERR_TEST_FAILURE, message SHA-256 `2512eeb638b3d8f4c36bea8feb2c71ea9829e6f73be08d61a92f8924f439f236`, repository frames empty. This is a file-wrapper failure, not a complete matched inventory of the36 failed tests previously seen in four completed summaries. The A/B does NOT establish that those36 failures predate this fix round. A's latest pending entrypoint position was10:1; B had the same pending position. Other pending/unseen files and absent summaries remain explicit in safe progress.json. No test deadlock or failure cause is inferred.
+
+Both raw spec files were255bytes, SHA-256 `ffbd57338ff26d106300ed7df87d93ec97ab0ede163f916309944795d2e4f13b`; stderr0bytes/empty SHA-256 `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`. Raw output was not uploaded or printed. Safe reporter streams: A785bytes/SHA `57e6b1327bd8d2d000e7e1f2837e70e0114478f969ade1dee57a00d1cbb3648b`; B784bytes/SHA `15169cb862cb7400f0b1d9c96be930de304bd09dac57e169213f5f627df476eb`.
+
+| Side | Safe artifact | ZIP bytes | ZIP SHA-256 | Expiry UTC |
+| --- | --- | --- | --- | --- |
+| A | [13911894951](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43148329682/artifacts/13911894951) | 2931 | `40df89b157235d6bba34fb6251799a5fb88be2ce16531a5b56943aebf5d56c6d` | 2026-11-19T03:30:07Z |
+| B | [13912377834](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43148329682/artifacts/13912377834) | 2949 | `d70158f85717a8945e79f1a4e269b1d24d6ef7e60d15483cca2cba68ffbb46fc` | 2026-11-19T03:30:03Z |
+
+Both five-file bundles passed exact-ID inventory/hash verification. A GET1 could not yet find the provided artifact ID; the existing2-second wait and GET2 succeeded at03:30:12UTC. A GET3 was skipped. B GET1 succeeded at03:30:05UTC; later attempts/waits skipped. A manifest863bytes/SHA `d32b4b6e86205480a1320f88845994aa2aba37f57c050291586aaf35e2752f0b`; B manifest863bytes/SHA `9a75925dce7a031578b1294d5047dbdb2ea5f79ad6235c669d418e63931ad231`. Manifest source is the actual historical test Source, while result/progress separately preserve workflow Source. No ambiguous latest/name selection or waived readback.
+
+Recorder limitation found by Root: the optional failureDetails enrichment scanned an entire stack with an unanchored regex and lacked a length/line bound. The first small canary did not exercise giant data:base64 frames. This is a static correctness risk in the NEW temporary diagnostic recorder; stopped progress after the first failure is consistent with it but does not prove the actual prior stack payload or exact cause. No internal extraction-entry marker was recorded. No raw stack was inspected/published and no core code defect is inferred from this instrumentation risk. Root separately authorized one conservative recorder repair/control and one corrected A/B; this run is not erased or relabeled.
+
+Checkpoint cleanup retires this TEMP and appends only this section. Relative to delivered f5f, report alone changes;3,188leaves and3,187other blobs exact, including the four corrected core blobs. Main remains `0c9c475b3ebaa970fc11d628b40e50a90cceb727`. The five original Important findings, integration ordinary-suite debt and current-source native qualification remain OPEN. Any subsequent recorder work follows the separately pinned03:33 ruling, not an automatic retry of this run.
+
+operationalReadiness=false; completePackage=false; PCoff=false.
