@@ -1,7 +1,11 @@
-name: AFW ordinary adoption modeled clock (INACTIVE)
+name: AFW ordinary adoption modeled clock (ONE COMPARISON)
 # PREPARATION ONLY. Root review and a separate single-run release are required.
 'on':
-  workflow_dispatch:
+  push:
+    branches:
+      - diag/afw-adoption-clock-20261112
+    paths:
+      - .github/workflows/afw-ordinary-adoption-clock.yml
 permissions:
   contents: read
 concurrency:
@@ -9,7 +13,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   current:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-adoption-clock-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-adoption-clock-20261112' && github.event_name == 'push' && github.run_attempt == '1' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
@@ -93,7 +97,7 @@ jobs:
           [[ "$ARTIFACT_DIGEST" =~ ^[a-f0-9]{64}$ ]]
           printf 'AC artifact id=%s sha256=%s retention-days=7\n' "$ARTIFACT_ID" "$ARTIFACT_DIGEST"
   historical:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-adoption-clock-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-adoption-clock-20261112' && github.event_name == 'push' && github.run_attempt == '1' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
