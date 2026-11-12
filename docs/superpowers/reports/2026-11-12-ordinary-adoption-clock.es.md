@@ -61,3 +61,69 @@ Este append es únicamente evidencia de preparación: la revisión completa f5..
 La entrada anterior del inventario para lib/mcp-qa-finite-observer.mjs atribuyó por error el blob 68dcfcdbccb9060fb24a7b076618c58fe3ef02e3. Queda sustituida por la procedencia correcta: en el commit inmutable f5f52660d19ec9fc634bbc49558db75582fdaf88, lib/mcp-qa-finite-observer.mjs corresponde a b5a5245712a08684c40c28ceac70508516950a44. Se verificó mediante lectura primaria del archivo en ese ref y del árbol completo 7bc8b997a968dca32fc567b627de70b774d6489c (truncated=false).
 
 Esta errata añade documentación al informe preservando íntegramente su prefijo histórico. No cambia el archivo fuente, helper c9a22bc75ee0b66627baa64cf52955092f3c6c7f, workflow 0555cd08558d89d886e67800e1a6e4d9166b1d85 ni lógica/pins/recibos. Los dos gates permanecen false y el evento manual sin inputs. No tests, helper, jobs, activación ni comparación A/B ejecutados. Continúa PREPARED_INACTIVE; operationalReadiness=false, completePackage=false, PCoff=false. Root realizará readback documental antes de una futura autorización separada, fijada al nuevo HEAD. STOP_WRITES tras las comprobaciones finales.
+
+## O3 — comparación única ejecutada y cierre — 2026-11-12 UTC
+Autorización separada: docs/superpowers/briefs/2026-11-12-ordinary-adoption-clock-single-comparison.md en Rootdocs 8c1080b1d7c97b47ea0326ebfb775eb51b7d5267, leída antes de activar. Preflight confirmó BASE 5d747b632b75e10585098a2917ee2e89f1119363 y cero runs. Solo se activó el workflow: nombre ONE COMPARISON, push exacto a rama diag/afw-adoption-clock-20261112 y selfpath .github/workflows/afw-ordinary-adoption-clock.yml, dos gates para push sin false. Inversa verificada recupera literalmente el blob inactivo 0555cd08558d89d886e67800e1a6e4d9166b1d85. Los otros 3190 blobs/modos permanecieron exactos.
+
+Fuente cualificada del ensayo cd20c12c51f4b147bf8a6fffd3df61452847afa7; árbol ebac9da83c703042629491d23f8a5317268f8a1b; workflow activo 54812b5531be7ffa2b241c6c994b4982c003811b. CAS expected_sha=5d747b632b75e10585098a2917ee2e89f1119363, force=false, success=true. HEAD permaneció congelado hasta terminal y readbacks de ambos artefactos. Esta fuente cualificada es distinta del commit posterior de cierre.
+
+Run 43177133523, push, attempt 1, creado 2026-11-12T07:41:37Z y actualizado terminal 2026-11-12T07:42:14Z, status=completed/conclusion=success. Dos jobs exactos: current 131044007017; historical 131044006651. Ambos completed/success, incluidos caso, manifiesto, upload y metadata de artefacto. Éxito del job significa diagnóstico completo, separado del testPassed. No rerun/redispatch/reemplazo; entitlement consumido. Root mantuvo native16 HELD, sin I0 real; no cambio en Source/native, runtime, permisos o credenciales.
+
+### Resultado primario por brazo
+| Dato | A current | B historical |
+| --- | --- | --- |
+| diagnostic status | diagnostic_complete | diagnostic_complete |
+| testPassed | false | true |
+| Node tests/pass/fail/skipped/cancelled/todo | 1/0/1/0/0/0 | 1/1/0/0/0/0 |
+| registered/selectedPassed/selectedFailed/filteredSkipped | 1/0/1/0 | 1/1/0/0 |
+| wrapperFailed/unexpected | 0/0 | 0/0 |
+| hijo exit code/signal/spawnFailed | 1/null/false | 0/null/false |
+| termination / timeoutExercised | null / false | null / false |
+| T0 observado en cf_fixture y external_project | 1794469319056 | 1794105600000 |
+| R1 observado en external_project | 1794469799056 | 1794106080000 |
+| custodyExpiresAt observado | 1794106799000 | 1794106799000 |
+| custodyCoversR1 observado | false | true |
+| expiry-R1 aritmético ms | -363000056 | 719000 |
+| external_project enter/return/throw | 1/0/1 | 1/1/0 |
+| observer_validate enter/return/throw | 0/0/0 | 1/1/0 |
+| http_build enter/return/throw | 0/0/0 | 2/2/0 |
+| http_import enter/return/throw | 0/0/0 | 2/2/0 |
+| networkDenied | 0 | 0 |
+| errorhashes | a05103fbd0ff88dc813c210776c5091e37a711bf2e4fa21556296c29706d442e | [] |
+
+A: final_restore y final_project retornaron; external_project arrojó el hash compartido a051, propagado por cf_finalizer/cf_fixture al caso. B: external_project, observer_validate, cf_finalizer y cf_fixture retornaron; también ambas construcciones e importaciones HTTP. B observer_validate volvió a observar T0=1794105600000, R1=1794106080000, expiry=1794106799000, coverage=true. Los argumentos son observaciones del llamador; el primer guard interno sigue UNKNOWN porque varios comparten error literal. Ningún guard se anotó/cambió. Cierre causal final reservado a Root; no extrapolar este único caso a toda la suite, propia 9b4, autorización real o producción.
+
+Ambos contextos: Node v22.23.4, Ubuntu24.04, source f5f52660d19ec9fc634bbc49558db75582fdaf88/tree7bc8b997a968dca32fc567b627de70b774d6489c, procesos separados y modelo SYN. Helper blob c9a22bc75ee0b66627baa64cf52955092f3c6c7f, SHA256 medido 7408c84336ea2a4280975e9bb9f567021173de2f3dbbb601c659c94cc41183c9, idéntico. Los seis overlays originales y seams comunes normalizaron exactamente, con hashes nuevos iguales entre brazos salvo el archivo del caso: current clockLiteralChanges=0, historical=1; los restantes cinco=0 en ambos. A/B IDs y timestamps derivados pueden diferir por el fixture sin ampliar autoridad.
+
+Fuente protegida: 3188 hojas; digest before=after=c9554faf9cdb30283109a47cfc863867594e49669d0702f214a44cbcdfe361a7 en los dos brazos, equal=true. Recibo 6012e07fb3a518bfb2d18b62144067a22de02bef/pins/lib intactos. No cambio del reloj real, custodia expirada ni fechas del recibo.
+
+Controles efectivos: privacy parent PASS y una privacyControl hija PASS por brazo; getterTouches=0, proxyTrapTouches=0, proxyPrototypesSafe=true, ordinary/crossRealmNative=true, crossRealmExactUnknown=true, spoofRejected=true, oversizeSuppressed=true, cycleBounded=true, rawCanaryAbsent=true. Una identityControl por brazo PASS con Promise/error/receiver identity=true. Escaneo de DTO sin keys crudas message/stack/headers/body/bundle/dataURL/credentials/token/download_url; flags operativos false. Ningún timeout/cap fue ejercitado; no atribuir aceptación de timeout por este ensayo.
+
+### Custodia y lectura exacta de artefactos
+Listado purpose-built fetch_workflow_run_artifacts, run exacto: dos artefactos y ningún otro, ambos unexpired, repository 1347578006/head_branch exacto/head_sha cd20c12c51f4b147bf8a6fffd3df61452847afa7. Un único download_workflow_artifact por ID por brazo y una única recuperación file-service HTTPS .oaiusercontent.com por referencia; no URLs firmadas/base64 impresos ni filesystem/extracción/ejecución. fetch con AbortSignal.timeout(5000), redirect:error, HTTP200, lectura por chunks con cancelación >262144 bytes; ZIP comprimido/expandido acotado <=262144, dos entradas exactas, CRC32 y SHA256 del ZIP/manifest/result verificados en RAM.
+
+| Brazo | Artifact ID | ZIP bytes | Expanded bytes | ZIP SHA256 | Creado / expira UTC |
+| --- | --- | --- | --- | --- | --- |
+| current | 13925270033 | 4676 | 14256 | 0b45af88fb694f5afe90b5afe4074f46bb4428db67524fd6235b1a1c967b3a3f | 2026-11-12T07:42:00Z / 2026-11-19T07:41:59Z |
+| historical | 13923749573 | 4446 | 11970 | 6e54c3ac54fcd910b4bf02998dc226c79c442a8c7dd5b6faa7f3bd5326466230 | 2026-11-12T07:42:11Z / 2026-11-19T07:42:10Z |
+
+Inventario CRC32/SHA256/bytes, comprobado contra directorio ZIP y manifiesto:
+- current/result.json: 13993 bytes, CRC32 d655c9a9, SHA256 8d96ee8efdb57f047329833c11fb41f660358b05c5f5471d01783c74417275e3.
+- current/manifest.json: 263 bytes, CRC32 5a2d30db, SHA256 ae1be17b6116d4873b047747d495c6c567678650de9c0bc96804633a75ba7c82.
+- historical/result.json: 11707 bytes, CRC32 8ee0a678, SHA256 1815206123262800652160722a11d65c98ba4475708e4253615679db168fe059.
+- historical/manifest.json: 263 bytes, CRC32 9b4a3e86, SHA256 ce94ca983e56eb0faa122f047bf820836588373be917ef79c1371890441a27c1.
+result.json actual 13993 bytes A y 11707 B, ambos <=65536; manifest 263 bytes cada uno, declara solo result y rawLogsUploaded=false. Artefacto contiene exactamente result.json y manifest.json, retención siete días. DTO/manifest identifican run/head/source/arm y todos los indicadores operativos false.
+
+Tiempos medidos desde invocación: listado 489 ms; herramientas download current 1543 ms/historical 1718 ms; recuperación file-service current 222 ms/historical 56 ms. El downloader no expone timeout configurable: no se atribuye el plazo de 5s a esa herramienta. Duración propia del hijo y memoria RSS no medidas. Intentos de metadata directa actions/jobs/<id> fueron rechazados por el allowlist del conector; no se obtuvieron timestamps de jobs ni logs; los estados/pasos terminales se acreditaron por la herramienta purpose-built. Ninguna repetición del experimento por esas limitaciones.
+
+Logs privados solo se midieron por bytes/hash, no se recuperaron ni subieron:
+- current/raw.stdout: 3318 bytes, SHA256 cec90483ecb355f55e4fe69268b58085627f8c413ca3e2857dfe202ae3e1bda6, uploaded=false.
+- current/raw.stderr: 0 bytes, SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855, uploaded=false.
+- historical/raw.stdout: 1793 bytes, SHA256 e016be132d2f95fddc5836f00f6403ea567d1acfa74768bd2a7160523ab54661, uploaded=false.
+- historical/raw.stderr: 0 bytes, SHA256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855, uploaded=false.
+No procesos/dependencias/archivos de proyecto locales creados. El trabajo cloud terminó; no se reclama borrado de logs efímeros no inspeccionados ni capacidad operativa persistente/PC apagado.
+
+### Restauración y límites finales
+Se conserva íntegro el prefijo previo de este informe y se añade solo este recibo. El commit de cierre restaura exactamente workflow 0555cd08558d89d886e67800e1a6e4d9166b1d85: manual sin inputs, ambos gates false. Helper y todos los otros 3190 archivos respecto al BASE previo al ensayo quedan intactos; únicamente este informe añade evidencia. CAS/ref/árbol/contenidos completos y conteo ONErun/0activejobs se entregan a Root tras el readback final, sin inventar autorreferencia del hash del informe.
+
+Ensayo único CONSUMIDO/CERRADO. No reparación automática, repetición, pruebas adicionales ni promoción. operationalReadiness=false; completePackage=false; PCoff=false; primer guard interno UNKNOWN. B pasó este caso SYN modelado; no acredita frescura/autorización actual, SDK real con credenciales, CF/OAuth/runtime, cobertura universal ni operación con el PC apagado. Root realiza readback independiente y dictamen causal. STOP_WRITES tras comprobaciones finales.
