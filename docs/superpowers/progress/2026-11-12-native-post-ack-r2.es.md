@@ -42,3 +42,9 @@ Release exactly ONE KEYLESS contracts 7+2, attempt1, no environment/key/MF/I0/Na
 ## Implementer assignment
 
 Fresh sole implementer /root/native_postack_impl, gpt-6.1-terra/high, isolated context, assigned Task1 brief411b6ad7. Tier ruling: standard integration model for six-file implementation from complete design; escalate on concrete architecture uncertainty. Controller owns review/Rootdocs, implementer Source only and no subagents. One KEYLESS permit, Native held. Current state: implementation in progress.
+
+## Task 1 implementation escalation — no permit consumed
+
+/root/native_postack_impl (Terra/high) returned BLOCKED after read-only baseline checks: no Source mutation, no tests, no commits, no KEYLESS run. It confirmed exact Source408/main0c9/3190 nontruncated leaves/World-F7-report blobs and five-state0, but could not responsibly complete and review the multi-file integration within its execution. No correctness claim or evidence was fabricated.
+
+Ruling: use a fresh more-capable Astra/xhigh implementer for the SAME Task1 brief and unchanged one-run entitlement, because the original model escalated on integration judgment; no forced retry of the same model, no fix-round count (no implementation), no scope expansion. Cost if wrong: additional implementation effort; safety gates and Native hold unchanged. Previous implementer STOPPED, sole Source writer will be reassigned.
