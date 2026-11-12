@@ -1,0 +1,94 @@
+name: AFW ordinary failure boundaries (INACTIVE)
+# PREPARATION ONLY. Root review and a separate single-run release are required.
+'on':
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-failure-boundaries-${{ github.ref }}-${{ github.run_id }}
+  cancel-in-progress: false
+jobs:
+  boundaries:
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/diag/afw-failure-boundaries-20261112' && github.event_name == 'workflow_dispatch' && github.run_attempt == '1' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Checkout immutable diagnostic workflow source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.workflow_sha }}
+          path: diagnostic-code
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Checkout separate immutable subject and full history
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: f5f52660d19ec9fc634bbc49558db75582fdaf88
+          path: subject
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Exact Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+          check-latest: false
+      - name: Initial closed receipt
+        shell: bash
+        run: |
+          umask 077
+          mkdir -p failure-boundaries-safe
+          printf '%s\n' '{"purpose":"afw.failure-boundaries.diagnostic.v1","status":"setup_or_deadline_incomplete","operationalReadiness":false,"completePackage":false,"PCoff":false}' > failure-boundaries-safe/result.json
+      - name: Install fixed subject lock without lifecycle scripts
+        working-directory: subject
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: One fixed synthetic two-case probe
+        env:
+          AFB_WORKFLOW_SHA: ${{ github.workflow_sha }}
+        run: timeout --signal=TERM --kill-after=5s 120s node diagnostic-code/scripts/diagnostics/ordinary-failure-boundaries.mjs
+      - name: Final closed receipt and exact two-file manifest
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          umask 077
+          node --input-type=module <<'NODE'
+          import {mkdir,readFile,writeFile,chmod,lstat} from 'node:fs/promises';
+          import {createHash} from 'node:crypto';
+          const dir='failure-boundaries-safe';
+          await mkdir(dir,{recursive:true,mode:0o700});
+          let bytes;
+          try{
+            const info=await lstat(dir+'/result.json');
+            if(!info.isFile()||info.isSymbolicLink()||info.size>65536)throw 0;
+            bytes=await readFile(dir+'/result.json');
+            const result=JSON.parse(bytes);
+            if(result.purpose!=='afw.failure-boundaries.diagnostic.v1'||result.operationalReadiness!==false||result.completePackage!==false||result.PCoff!==false)throw 0;
+          }catch{
+            bytes=Buffer.from(JSON.stringify({purpose:'afw.failure-boundaries.diagnostic.v1',status:'setup_or_deadline_incomplete',operationalReadiness:false,completePackage:false,PCoff:false})+'\n');
+            await writeFile(dir+'/result.json',bytes,{mode:0o600});
+          }
+          await chmod(dir+'/result.json',0o600);
+          const manifest={purpose:'afw.failure-boundaries.manifest.v1',inventory:[{name:'result.json',bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}],rawLogsUploaded:false,operationalReadiness:false,completePackage:false,PCoff:false};
+          await writeFile(dir+'/manifest.json',JSON.stringify(manifest)+'\n',{mode:0o600});
+          NODE
+      - name: Preserve only closed result and manifest for seven days
+        if: ${{ always() }}
+        id: safe_artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-failure-boundaries-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            failure-boundaries-safe/result.json
+            failure-boundaries-safe/manifest.json
+          retention-days: 7
+          if-no-files-found: error
+      - name: Exact artifact metadata for independent readback
+        if: ${{ always() && steps.safe_artifact.outcome == 'success' }}
+        env:
+          ARTIFACT_ID: ${{ steps.safe_artifact.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.safe_artifact.outputs.artifact-digest }}
+        shell: bash
+        run: |
+          [[ "$ARTIFACT_ID" =~ ^[1-9][0-9]*$ ]]
+          [[ "$ARTIFACT_DIGEST" =~ ^[a-f0-9]{64}$ ]]
+          printf 'AFB artifact id=%s sha256=%s retention-days=7\n' "$ARTIFACT_ID" "$ARTIFACT_DIGEST"
