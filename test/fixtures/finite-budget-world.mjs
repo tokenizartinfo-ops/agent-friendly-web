@@ -619,7 +619,7 @@ function requireOrdinaryObserver(){
 
 
 const fixedControlCountKeys=['childBlocks','work','wait','selectReadonly','selectReduction','queueReadonly','queueReduction','capReadonlyList','capReadonlyGet','capReductionList','capReductionDelete','send','sdk'];
-const fixedControlStages=new Set(['start','complete','wrapper_readonly','wrapper_reduction','observer_child','observer_calls','read_raw','legacy_composition','prepared_validate','baseline_transform','syn_instrument','adjacency_ro','adjacency_d','syn_counts','body_extract','cached_assembly','vm_start','facet_setup','facet_cleanup','vm_hold','vm_boundary','queue_verdict','queue_mutator','ownership','f5_no_adapter','f5_callback_extract','f5_callback_setup','f5_callback_invoke','f5_callback_return','f5_callback_assert','f5_legacy_case','manifest','peer_wait']);
+const fixedControlStages=new Set(['start','complete','wrapper_readonly','wrapper_reduction','observer_child','observer_calls','read_raw','legacy_composition','prepared_validate','baseline_transform','syn_instrument','adjacency_ro','adjacency_d','syn_counts','body_extract','cached_assembly','vm_start','facet_setup','facet_cleanup','vm_hold','vm_boundary','queue_verdict','queue_mutator','ownership','f5_no_adapter','f5_callback_extract','f5_callback_setup','f5_callback_invoke','f5_callback_return','f5_callback_assert','f5_legacy_case','manifest','peer_wait','round2_owned_child','round2_sealer']);
 let fixedControlState=null;
 function fixedControlOwn(value,key){if(!value||typeof value!=='object'||fixedNodeTypes.isProxy(value))return undefined;const d=Object.getOwnPropertyDescriptor(value,key);return d&&Object.hasOwn(d,'value')?d.value:undefined;}
 function fixedControlSafe(value){
@@ -822,14 +822,14 @@ function createFixedOwnedRecord(frame,kind){
  record.attachFixture=f=>{assert(!record.fixture||record.fixture===f);record.fixture=f;record.events.push('fixture-attached');};
  record.attachMiniflare=mf=>{
   assert(!record.mf||record.mf===mf);if(record.mf)return;assertFixedBudgetAllocationSafe();record.mf=mf;fixedBudgetOwnedLive.add(record);const original=mf.dispose;assert.equal(typeof original,'function');
-  mf.dispose=()=>record.dispose();record.originalDispose=()=>Reflect.apply(original,mf,[]);record.events.push('miniflare-attached');
+  mf.dispose=()=>record.outwardDisposal??=(async()=>{await record.dispose();if(record.disposeError)throw record.disposeError;})();record.originalDispose=()=>Reflect.apply(original,mf,[]);record.events.push('miniflare-attached');
  };
  record.dispose=()=>record.disposal??= (async()=>{
   const f=record.fixture;
   if(f?.firstConnectionBuild&&f.cleanupCheckpointInputs)try{const mounted=f.cleanupCheckpointInputs().currentMountedOptions;record.graphs=['M','QA'].map(role=>{const worker=mounted.workers.find(v=>v.name===(role==='M'?'canary-first-connection':'qa-first-connection'));assert(worker);assert.equal(hash(worker.script),f.firstConnectionBuild[role].sha256);return {role,worker:worker.name,sha256:hash(worker.script),bytes:Buffer.byteLength(worker.script),mounted:true};});}catch(error){ownedFailure(record,'mount_provenance',error);}
   if(f?.captureBudgetEpoch)try{const failureCount=record.failures.length;await f.captureBudgetEpoch('terminal-owned-before-dispose');record.terminalCapture=record.failures.length===failureCount?'captured':'failed';record.epochs=structuredClone(f.budgetEpochs);}catch(error){record.terminalCapture='failed';ownedFailure(record,'terminal_epoch',error);}
   else if(record.mf){record.terminalCapture='unavailable_partial_setup';ownedFailure(record,'terminal_epoch',Error('SYN partial setup has no epoch capture'));}
-  if(record.originalDispose)try{await record.originalDispose();record.disposed=true;fixedBudgetOwnedLive.delete(record);record.events.push('disposed');}catch(error){record.disposalUncertain=true;record.events.push('disposal-uncertain');ownedFailure(record,'dispose',error);}
+  if(record.originalDispose)try{await record.originalDispose();record.disposed=true;fixedBudgetOwnedLive.delete(record);record.events.push('disposed');}catch(error){record.disposeError=error;record.disposalUncertain=true;record.events.push('disposal-uncertain');ownedFailure(record,'dispose',error);}
   if(record.persist&&record.disposed)try{
    const destination=join(frame.root,'owned-native-'+record.ordinal);await mkdir(frame.root,{recursive:true});await cp(record.persist,destination,{recursive:true,errorOnExist:true,force:false});
    const source=await inventoryFiles(record.persist),copy=await inventoryFiles(destination);assert(source.length>0&&source.length<=512);assert(source.reduce((n,f)=>n+f.bytes,0)<=134217728);assert.deepEqual(copy,source,'owned cold native bytes exact');
@@ -849,10 +849,22 @@ export function attachFixedBudgetRecoveryOwner(f){
  assert(!Object.hasOwn(f,'mf'),'recovery hook precedes actual assignment');
  Object.defineProperty(f,'mf',{configurable:true,enumerable:true,set(mf){Object.defineProperty(f,'mf',{value:mf,writable:true,enumerable:true,configurable:true});record.attachMiniflare(mf);}});
 }
+
+export function noteFixedBudgetOwnedFailure(error,phase){
+ const frame=fixedBudgetOwners.getStore();if(!frame)return;
+ assert(['producer_operation','recovery_operation','fixture_callback','producer_evidence'].includes(phase),'fixed Node-owned failure phase');
+ frame.notes??=[];frame.notes.push({phase,error});
+ if(['producer_operation','recovery_operation','producer_evidence'].includes(phase))frame.operationPrimary??=error;
+ else if(phase==='fixture_callback')frame.cleanupPrimary??=error;
+}
+function noteFixedOwnedUnwind(frame,error){
+ const primary=frame.operationPrimary;if(primary&&error!==primary){frame.failures.push({phase:'operation_unwind',error});}return primary??error;
+}
 function registerFixedOwnedCleanup(fn){const frame=fixedBudgetOwners.getStore();assert(frame);frame.callbacks.push(fn);}
 async function closeFixedOwnedFrame(frame,primary){
  if(frame.closed)return frame.closed;
- frame.closed=(async()=>{
+ frame.closed=fixedBudgetOwners.run(frame,async()=>{
+  primary=frame.operationPrimary??primary??frame.cleanupPrimary??null;
   // SYN RPCs belong only to fixed R/D adapters before owned disposal begins.
   await Promise.allSettled(frame.records.map(async record=>{
    for(const phase of ['release','restore']){
@@ -874,18 +886,19 @@ async function closeFixedOwnedFrame(frame,primary){
     const destination=join(frame.root,'owned-partial-'+record.ordinal);await mkdir(frame.root,{recursive:true});await cp(record.persist,destination,{recursive:true,errorOnExist:true,force:false});const files=await inventoryFiles(record.persist);assert.deepEqual(await inventoryFiles(destination),files);record.archive={path:destination,files};record.archived=true;
    }catch(error){ownedFailure(record,'partial_archive',error);}
   }
-  const failures=[...frame.failures,...frame.records.flatMap(r=>r.failures)];
+  primary=frame.operationPrimary??primary??frame.cleanupPrimary??null;
+  const phaseFacts=[...(frame.notes??[]),...frame.failures,...frame.records.flatMap(r=>r.failures)],failures=[];const identities=new Set();for(const fact of phaseFacts){if(fact.error!==primary&&!identities.has(fact.error)){identities.add(fact.error);failures.push(fact);}}
   const result={purpose:'afw.fixed-budget-owned-lifecycle.syn.v1',caseName:frame.caseName,records:frame.records.map(r=>({ordinal:r.ordinal,caseName:r.caseName,kind:r.kind,graphs:r.graphs??[],disposalUncertain:r.disposalUncertain===true,disposed:r.disposed,archived:r.archived,terminalCapture:r.terminalCapture,archive:r.archive,events:r.events,phases:r.phases??[],failures:r.failures.map(x=>({phase:x.phase,name:Object.getOwnPropertyDescriptor(x.error??{},'name')?.value??'Error'})),epochs:r.epochs})),callbackCount:frame.callbacks.length,ancillaryFailureCount:failures.length,primaryPreserved:primary!==null,complete:failures.length===0};
   try{await mkdir(frame.root,{recursive:true});await writeFile(join(frame.root,'ownership.json'),JSON.stringify(result,null,2));}catch(error){failures.push({phase:'ownership_preservation',error});result.complete=false;result.ancillaryFailureCount=failures.length;}
-  const error=primary??failures[0]?.error;if(error){fixedBudgetOwnerErrors.set(error,{primary,failures,result});throw error;}return result;
- })();return frame.closed;
+  const error=primary??failures[0]?.error;if(error){fixedBudgetOwnerErrors.set(error,{primary,failures,result,phaseFacts});throw error;}return result;
+ });return frame.closed;
 }
 async function withFixedBudgetOwner(caseName,root,operation,{recovery=false}={}){
  assert(['R1','R2','R3','D1','D2','D3','D4','P1','positive_producer','reduction_producer'].includes(caseName));
  const frame={caseName,root,records:[],callbacks:[],failures:[],closed:null};let value,primary=null;
  return fixedBudgetOwners.run(frame,async()=>{
   if(recovery){assertFixedBudgetAllocationSafe();const r=createFixedOwnedRecord(frame,'recovery');r.attachPersist(join('output','r2-native-'+(caseName==='P1'?'finite-budget-positive':'budget-'+caseName),'state'));}
-  try{value=await operation();}catch(error){primary=error;}
+  try{value=await operation();}catch(error){primary=noteFixedOwnedUnwind(frame,error);}
   const ownership=await closeFixedOwnedFrame(frame,primary);
   if(value&&typeof value==='object'){value.ownership=ownership;value.diagnostics??={};value.diagnostics.epochs=frame.records.flatMap(r=>r.epochs);if(value.caseName)await fixedBudgetPersist((caseName.startsWith('R')?'readonly/':'reduction/')+caseName,value);}
   return value;
@@ -1086,14 +1099,37 @@ function fixedQueueCausality(value){
  const start=Math.min(a.sample.sequence,b.sample.sequence),end=Math.max(a.heldSequence,b.heldSequence);
  return !(value.observerEvents??[]).some(e=>e.kind==='outward_settled'&&e.sequence>start&&e.sequence<end);
 }
-function fixedChildDeadlineProof(before,after){
- assert.equal(before.observerInvalid,false);assert.equal(after.observerInvalid,false);
- assert.equal(before.children.length,1,'same selected SDK child only');const child=before.children[0],last=after.children.find(c=>c.childOrdinal===child.childOrdinal);assert(last);
- assert.equal(child.waitStatus,'rejected','actual original child wait rejected');assert(Number.isSafeInteger(child.deadline)&&Number.isSafeInteger(child.waitSettledAt));assert(child.waitSettledAt>=child.deadline&&child.waitSettledAt<child.deadline+5000,'actual original deadline denial timing');
- assert.equal(child.parentAliveAtAbort,true);assert(child.abortAt>=child.deadline&&child.abortAt<child.deadline+5000);
- assert.equal(before.outwardPending,2);assert.equal(before.heldNativeSettled,2);assert(fixedQueueCausality(before),'two actual held operations bound to same current queue');
- assert(after.released&&after.outwardPending===0&&after.nativeUnsettled===0);return {childOrdinal:child.childOrdinal,deadline:child.deadline,waitSettledAt:child.waitSettledAt,abortAt:child.abortAt,workStatusAtHold:child.workStatus,workStatusAfterRelease:last.workStatus,waitStatus:last.waitStatus,denialAfterDeadline:true,parentAlive:true,queueCausal:true};
+
+function classifyFixedChildDeadline(before,after){
+ const indeterminate=reason=>({classification:'indeterminate',denialAfterDeadline:false,reason});
+ if(before.observerInvalid!==false||after.observerInvalid!==false||before.children?.length!==1)return indeterminate('invalid_or_missing_observation');
+ const child=before.children[0],last=after.children?.find(value=>value.childOrdinal===child.childOrdinal);
+ if(!last||last.family!==child.family||!Number.isSafeInteger(child.childOrdinal)||child.childOrdinal<1)return indeterminate('child_identity');
+ if(child.waitStatus!=='rejected'||last.waitStatus!=='rejected'||![child.deadline,child.waitSettledAt,child.abortAt].every(Number.isSafeInteger))return indeterminate('missing_wait_or_abort');
+ const events=(after.observerEvents??[]).filter(event=>event.childOrdinal===child.childOrdinal),select=kind=>events.filter(event=>event.kind===kind),aborts=select('child_abort'),waits=select('child_wait_rejected'),work=events.filter(event=>['child_work_rejected','child_work_fulfilled'].includes(event.kind));
+ if(aborts.length!==1||waits.length!==1||work.length>1||events.some(event=>!Number.isSafeInteger(event.sequence)||event.sequence<1)||new Set(events.map(event=>event.sequence)).size!==events.length)return indeterminate('missing_or_contradictory_order');
+ const abort=aborts[0],wait=waits[0],settled=work[0];
+ if(last.workStatus==='rejected'&&last.sameWorkWaitError===true&&settled&&settled.sequence<wait.sequence&&wait.sequence<abort.sequence)return {classification:'propagated_work',denialAfterDeadline:false,reason:'same_work_error_before_finally_abort'};
+ if(wait.sequence<abort.sequence)return {classification:'close_abort',denialAfterDeadline:false,reason:'wait_precedes_finally_abort'};
+ if(!(abort.sequence<wait.sequence)||child.parentAliveAtAbort!==true||child.workPendingAtAbort!==true)return indeterminate('abort_cause_not_proven');
+ if(child.abortAt<child.deadline||child.abortAt>=child.deadline+5000||child.waitSettledAt<child.abortAt||child.waitSettledAt>=child.deadline+5000)return indeterminate('deadline_window');
+ if(last.workStatus==='pending'){
+  if(last.workSettledAt!==null||settled)return indeterminate('pending_settlement_conflict');
+ }else if(last.workStatus==='rejected'){
+  if(!settled||settled.kind!=='child_work_rejected'||!Number.isSafeInteger(last.workSettledAt)||last.workSettledAt<child.abortAt||settled.sequence<abort.sequence||typeof last.sameWorkWaitError!=='boolean')return indeterminate('work_rejection_order');
+  if(last.sameWorkWaitError)return indeterminate('work_race_error_not_distinguished');
+ }else if(last.workStatus==='fulfilled'){
+  if(!settled||settled.kind!=='child_work_fulfilled'||!Number.isSafeInteger(last.workSettledAt)||last.workSettledAt<child.abortAt)return indeterminate('work_fulfillment_order');
+  if(settled.sequence<wait.sequence)return indeterminate('fulfilled_guard_cause_unknown');
+ }else return indeterminate('work_not_registered');
+ return {classification:'confirmed_deadline',denialAfterDeadline:true,reason:'abort_race_distinguished',childOrdinal:child.childOrdinal,deadline:child.deadline,waitSettledAt:child.waitSettledAt,abortAt:child.abortAt,workSettledAt:last.workSettledAt,workStatusAtHold:child.workStatus,workStatusAfterRelease:last.workStatus,waitStatus:last.waitStatus,parentAlive:true};
 }
+function fixedChildDeadlineProof(before,after){
+ const result=classifyFixedChildDeadline(before,after);assert.equal(result.classification,'confirmed_deadline','same selected child causal deadline required');
+ assert.equal(before.outwardPending,2);assert.equal(before.heldNativeSettled,2);assert(fixedQueueCausality(before),'two actual held operations bound to same current queue');
+ assert(after.released&&after.outwardPending===0&&after.nativeUnsettled===0);return {...result,queueCausal:true};
+}
+
 function fixedNegativeBoundaryProof(value,family){
  const events=value.capEvents??[],method='list',childs=new Set(events.map(e=>e.childOrdinal));
  assert.equal(value.observerInvalid,false);assert.equal(events.length,1,'one actual reached final list cap');const e=events[0];assert.equal(e.family,family);assert(e.childOrdinal>0);assert.equal(childs.size,1);assert.equal(e.kind,'cap_'+method);assert.equal(e.counter,2);assert.equal(e.limit,2);assert.equal(value.lists,2);assert.equal(value.thirdListEntered,false);
@@ -1372,12 +1408,12 @@ async function runFixedFacetControls(group){
 
 
 async function fixedOriginalFixtureCleanup(){
- const source=await readFile('test/fixtures/finite-owner-cleanup.mjs','utf8'),blob=createHash('sha1').update('blob '+Buffer.byteLength(source)+'\0'+source).digest('hex');assert.equal(blob,'cda4ab10544fc8be127aa7a89f86b74141784dd3','fixed original cleanup fixture blob');
+ const source=await readFile('test/fixtures/finite-owner-cleanup.mjs','utf8'),blob=createHash('sha1').update('blob '+Buffer.byteLength(source)+'\0'+source).digest('hex');assert.equal(blob,'2f5dad6c306fac1be2f11845bef640bb204ad572','fixed current Node cleanup fixture blob');
  const ast=sourceAST(source,'fixed-original-owner-cleanup-callback'),owners=ast.statements.filter(node=>ts.isFunctionDeclaration(node)&&node.name?.text==='ownerReferenceFixture');assert.equal(owners.length,1);
  const matches=[];const walk=node=>{if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.expression.getText(ast)==='t'&&node.expression.name.text==='after')matches.push(node);ts.forEachChild(node,walk);};walk(owners[0]);assert.equal(matches.length,1,'unique actual ownerReferenceFixture cleanup callback');
  const call=matches[0];assert.equal(call.arguments.length,1);const arrow=call.arguments[0];assert(ts.isArrowFunction(arrow)&&arrow.parameters.length===0&&arrow.modifiers?.some(m=>m.kind===ts.SyntaxKind.AsyncKeyword));
- const references=new Set();const refs=node=>{if(ts.isIdentifier(node)){const property=ts.isPropertyAccessExpression(node.parent)&&node.parent.name===node;if(!property)references.add(node.text);}ts.forEachChild(node,refs);};refs(arrow);assert.deepEqual([...references].sort(),['f'],'original cleanup callback f-only closure');
- return {source:arrow.getText(ast),proof:{blob,bytes:Buffer.byteLength(arrow.getText(ast)),sha256:hash(arrow.getText(ast)),matches:1,freeReferences:['f']}};
+ const references=new Set();const refs=node=>{if(ts.isIdentifier(node)){const property=ts.isPropertyAccessExpression(node.parent)&&node.parent.name===node;if(!property&&!(ts.isCatchClause(node.parent)&&node.parent.variableDeclaration?.name===node)&&node.text!=='error')references.add(node.text);}ts.forEachChild(node,refs);};refs(arrow);assert.deepEqual([...references].sort(),['budgetQualification','f','noteFixedBudgetOwnedFailure'],'current cleanup callback closed Node bindings');
+ return {source:arrow.getText(ast),proof:{blob,bytes:Buffer.byteLength(arrow.getText(ast)),sha256:hash(arrow.getText(ast)),matches:1,freeReferences:['budgetQualification','f','noteFixedBudgetOwnedFailure']}};
 }
 async function runFixedNoAdapterControls(){
  const cases=[];
@@ -1418,7 +1454,7 @@ async function runFixedActualCleanupControls(){
    record.attachFixture(fixture);const inertMF={async dispose(){assert(alive);disposed++;trace.push('dispose');alive=false;}};record.attachMiniflare(inertMF);fixture.mf=record.mf;
    const setup={sameMF:fixture.mf===record.mf&&fixture.mf===inertMF,sameWrappedDispose:fixture.mf.dispose===record.mf.dispose,ownerReferenceControl:typeof Object.getOwnPropertyDescriptor(fixture.stub,'ownerReferenceControl')?.value==='function',firstConnectionRestore:typeof Object.getOwnPropertyDescriptor(fixture.stub,'firstConnectionRestore')?.value==='function',restoreMethods:typeof Object.getOwnPropertyDescriptor(fixture.stub,'restoreMethods')?.value==='function',captureBudgetEpoch:typeof Object.getOwnPropertyDescriptor(fixture,'captureBudgetEpoch')?.value==='function',dispose:typeof Object.getOwnPropertyDescriptor(fixture.mf,'dispose')?.value==='function',cleanup:typeof Object.getOwnPropertyDescriptor(fixture,'cleanup')?.value==='function'};
    fixedControlProgress('f5_callback_setup',{scenario,step:'before_registration',setup});assert(Object.values(setup).every(Boolean),'fixed actual callback complete f member premise');
-   const context=createContext({__fixedOwnedFixture:fixture});const callback=new Script('(function(f){return '+extracted.source+';})(__fixedOwnedFixture)').runInContext(context,{timeout:1000});assert.equal(typeof callback,'function');
+   const context=createContext({__fixedOwnedFixture:fixture,budgetQualification:true,noteFixedBudgetOwnedFailure});const callback=new Script('(function(f){return '+extracted.source+';})(__fixedOwnedFixture)').runInContext(context,{timeout:1000});assert.equal(typeof callback,'function');
    registerFixedOwnedCleanup(async()=>{
     fixedControlProgress('f5_callback_invoke',{scenario,setup});let originalError=null,observerError=null;
     try{await callback();}catch(error){originalError=error;}
@@ -1490,15 +1526,18 @@ async function runFixedPeerWaitControls(){
 
 async function verifyNativePreparationRound1(){
  const groups=[],failures=[],started=Date.now(),root='output/finite-budget/round1-controls';await mkdir(root,{recursive:true});
- const persist=async()=>{const passed=groups.length===7&&groups.every(g=>g.passed),result={purpose:'afw.native-preparation-round1-controls.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,phase:process.env.AFW_BUDGET_CONTROL_PHASE??'unspecified',stage:groups.length===7?'complete':'partial',groups,passed,started,observedAt:Date.now(),I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};await writeFile(join(root,'result.json'),JSON.stringify(result,null,2));return result;};
+ const persist=async()=>{const passed=groups.length===8&&groups.every(g=>g.passed),result={purpose:'afw.native-preparation-round1-controls.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,phase:process.env.AFW_BUDGET_CONTROL_PHASE??'unspecified',stage:groups.length===7?'complete':'partial',groups,passed,started,observedAt:Date.now(),I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};await writeFile(join(root,'result.json'),JSON.stringify(result,null,2));
+ const summary={purpose:'afw.closed-pure-controls.syn.v2',source:result.source,run:result.run,attempt:result.attempt,groups:groups.map(group=>{const bytes=Buffer.from(JSON.stringify(group));return {group:group.group,passed:group.passed,caseCount:Array.isArray(group.cases)?group.cases.length:group.group==='F5'?group.round2?.length??0:1,evidence:{bytes:bytes.length,sha256:hash(bytes)},error:group.error??null};}),passed:result.passed,I0Opened:false,nativeExecutionProduced:false,businessCases:0};
+ await mkdir('output/finite-budget/pure',{recursive:true});await writeFile('output/finite-budget/pure/controls.json',JSON.stringify(summary,null,2));return result;};
  const tests=[
   ['F1',async()=>{const cases=[];for(const family of ['readonly','reduction']){fixedControlProgress(family==='readonly'?'wrapper_readonly':'wrapper_reduction');cases.push(await runActualBudgetWrapperControl(family));}assert(cases.every(v=>v.held&&v.originalMethodsRestored&&v.baseReceiversPreserved&&v.outwardSettledAfterRelease===2));return {cases};}],
-  ['F2',async()=>({cases:await runFixedObserverControls('F2')})],
+  ['F2',async()=>({cases:await runFixedObserverControls('F2'),causalCases:await runRound2DeadlineControls()})],
   ['F3',()=>runFixedFacetControls('F3')],
   ['F4',async()=>({calls:await runFixedObserverControls('F4'),boundaries:await runFixedFacetControls('F4')})],
-  ['F5',async()=>{fixedControlProgress('ownership');await verifyFixedPairDisposer();const noAdapter=await runFixedNoAdapterControls(),actualCleanup=await runFixedActualCleanupControls();return {noAdapter,actualCleanup,cases:await runFixedOwnershipControls(),actualPairedDisposerControl:true};}],
+  ['F5',async()=>{fixedControlProgress('ownership');await verifyFixedPairDisposer();const noAdapter=await runFixedNoAdapterControls(),actualCleanup=await runFixedActualCleanupControls();return {noAdapter,actualCleanup,cases:await runFixedOwnershipControls(),actualPairedDisposerControl:true,round2:await runRound2OwnedControls()};}],
   ['F6',async()=>{fixedControlProgress('manifest');return {cases:await runFixedManifestControls()};}],
-  ['F7',async()=>{fixedControlProgress('peer_wait');return {cases:await runFixedPeerWaitControls()};}]
+  ['F7',async()=>{fixedControlProgress('peer_wait');return {cases:await runFixedPeerWaitControls()};}],
+  ['F8',async()=>({cases:await runRound2SealerControls()})]
  ];
  for(const [group,run]of tests){
   fixedControlState={group,stage:'start',trace:[]};fixedControlProgress('start');
@@ -1538,7 +1577,7 @@ export async function prepareBudgetReductionPair(group,root){
   // Register each fulfilled mount immediately, including a late sibling after a
   // partial rejection. No replica starts after its sibling passes C0.
   const mounts=await Promise.allSettled(cases.map(async caseName=>{
-   assertFixedBudgetAllocationSafe();const f=await fixedBudgetOwners.run(frames.get(caseName),()=>recoverCheckpoint(join(root,'native'),{label:'budget-'+caseName,restart:false,budgetQualification:true}));fixtures.push(f);f.budgetCase=caseName;
+   assertFixedBudgetAllocationSafe();const frame=frames.get(caseName),f=await fixedBudgetOwners.run(frame,async()=>{try{return await recoverCheckpoint(join(root,'native'),{label:'budget-'+caseName,restart:false,budgetQualification:true});}catch(error){throw noteFixedOwnedUnwind(frame,error);}});fixtures.push(f);f.budgetCase=caseName;
    f.budgetRootBefore=await plain(f.stub.firstConnectionAvailability());assert.equal(f.budgetRootBefore.available,true);
    const input=await plain(f.stub.finiteBudgetReduction(caseName));assert.equal(input.sameKvBinding,true);
    f.budgetInputReady=Date.now();assert(f.budgetInputReady<=f.plan.C0-30000);return f;
@@ -1695,10 +1734,126 @@ async function verifyRound2CausalRed(){
  assert.equal(result.expectedCausalRed,true,'round2 each regression produced its named causal deficit');assert.equal(result.expectedCausalRed,false,'round2 actual causal deficits require fixes');return result;
 }
 
+
+async function runRound2DeadlineControls(){
+ const prepared=await prepareFixedFacetControls(),{Script,createContext}=await import('node:vm'),cases=[];
+ for(const variant of ['abort_wait_work','abort_work_wait','ordinary_work','same_error_race','fulfilled_guard','missing_order']){
+  const context=createContext({setTimeout,clearTimeout,Date,performance,AbortController,Buffer,__variant:variant});
+  const body=String.raw`
+  globalThis.__deadline=(async()=>{
+   const kv={get:async()=>null,list:async()=>null,put:async()=>null,delete:async()=>null},owner=Object.assign(new Initial(),{env:{AFW_FINITE_OWNER_OAUTH_KV:kv},ctx:{storage:{}}}),state=__afwFiniteBudgetState(owner,'R3'),controller=new AbortController(),parent=new AbortController(),lease={signal:controller.signal};
+   let resolveWork,rejectWork,rejectWait;const work=new Promise((resolve,reject)=>{resolveWork=resolve;rejectWork=reject;}),wait=new Promise((_,reject)=>{rejectWait=reject;}),E=Error('SYN fixed work'),D=Error('SYN fixed denial'),deadline=Date.now()-1;
+   const flush=async()=>{for(let n=0;n<5;n++)await Promise.resolve();};
+   if(__afwSynWork(lease,deadline,work,parent.signal)!==work||__afwSynWait(lease,wait)!==wait)throw Error('SYN deadline Promise identity');
+   __afwSynSelectGuard(kv,lease,()=>{},1);
+   let before,after;
+   try{
+    if(__variant==='ordinary_work'){rejectWork(E);await flush();rejectWait(E);await flush();controller.abort();await flush();}
+    else{
+     controller.abort();await flush();
+     if(__variant==='abort_work_wait'||__variant==='same_error_race'){rejectWork(E);await flush();rejectWait(__variant==='same_error_race'?E:D);await flush();}
+     else if(__variant==='fulfilled_guard'){resolveWork(null);await flush();rejectWait(D);await flush();}
+     else{rejectWait(D);await flush();}
+    }
+    before=JSON.parse(JSON.stringify(await owner.finiteBudgetSignals()));
+    resolveWork(null);await flush();after=JSON.parse(JSON.stringify(await owner.finiteBudgetSignals()));
+    return {before,after,promiseIdentity:true};
+   }finally{controller.abort();resolveWork(null);rejectWait(D);await Promise.allSettled([work,wait]);await owner.finiteBudgetRelease();await owner.finiteBudgetRestore();}
+  })();
+`;
+  new Script(prepared.prelude+'\n'+body).runInContext(context,{timeout:1000});const observed=await fixedControlBound(context.__deadline);
+  if(variant==='missing_order')observed.after.observerEvents=observed.after.observerEvents.filter(event=>event.kind!=='child_abort');
+  const actual=classifyFixedChildDeadline(observed.before,observed.after),expected=['abort_wait_work','abort_work_wait'].includes(variant)?'confirmed_deadline':variant==='ordinary_work'?'propagated_work':'indeterminate';
+  assert.equal(actual.classification,expected,'fixed child causal discriminator '+variant);
+  cases.push({variant,classification:actual.classification,denialAfterDeadline:actual.denialAfterDeadline,promiseIdentity:observed.promiseIdentity,genuineBusinessRoot:false});
+ }
+ return cases;
+}
+async function round2CurrentProducerParts(){
+ const source=await readFile('test/fixtures/finite-owner-cleanup-persistence.mjs','utf8'),ast=sourceAST(source,'round2-current-producer'),functions=name=>ast.statements.filter(node=>ts.isFunctionDeclaration(node)&&node.name?.text===name);
+ const producer=functions('produceCheckpoint');assert.equal(producer.length,1);const tries=producer[0].body.statements.filter(ts.isTryStatement);assert.equal(tries.length,1);const current=tries[0];assert(current.catchClause&&current.finallyBlock);
+ const rows=current.tryBlock.statements,matches=[];
+ for(let n=0;n+3<rows.length;n++)if(rows[n].getText(ast)==='await f.mf.dispose();'&&rows[n+1].getText(ast)==='f.disposedForCheckpoint=true;'){assert.equal(rows[n+2].getText(ast),'await mkdir(root,{recursive:true});');assert.equal(rows[n+3].getText(ast),"await cp(input.persist,join(root,'state'),{recursive:true,errorOnExist:true,force:false});");matches.push(source.slice(rows[n].getStart(ast),rows[n+3].end));}
+ assert.equal(matches.length,1,'current original producer continuation exactly once');
+ assert(current.catchClause.getText(ast).includes("noteFixedBudgetOwnedFailure(error,'producer_operation')"));assert(current.finallyBlock.getText(ast).includes("noteFixedBudgetOwnedFailure(error,'producer_evidence')"));
+ const recovery=functions('recoverCheckpoint');assert.equal(recovery.length,1);const recoveries=recovery[0].body.statements.filter(ts.isTryStatement);assert.equal(recoveries.length,1);const recoveryCatch=recoveries[0].catchClause.getText(ast);assert(recoveryCatch.includes("noteFixedBudgetOwnedFailure(error,'recovery_operation')"));
+ return {continuation:matches[0],catchText:current.catchClause.getText(ast),finallyText:current.finallyBlock.getText(ast),recoveryCatch,proof:{blob:createHash('sha1').update('blob '+Buffer.byteLength(source)+'\0'+source).digest('hex'),continuationSha256:hash(matches[0]),catchSha256:hash(current.catchClause.getText(ast)),finallySha256:hash(current.finallyBlock.getText(ast)),recoveryCatchSha256:hash(recoveryCatch),continuations:1}};
+}
+const round2OwnedCases=['normal','dispose_reject','operation_dispose','evidence_dispose','operation_evidence_dispose','recovery_dispose','callback_dispose_sibling'];
+async function runRound2OwnedCase(name){
+ assert(round2OwnedCases.includes(name));assert(process.env.RUNNER_TEMP&&process.env.GITHUB_SHA);const root=join(process.env.RUNNER_TEMP,'afw-round2-fixed-owned',name),persist=join(root,'source');await mkdir(persist,{recursive:true});await writeFile(join(persist,'native.bin'),'SYN fixed round2 inert bytes');
+ const parts=await round2CurrentProducerParts(),{Script,createContext}=await import('node:vm'),E=Error('SYN operation'),F=Error('SYN evidence'),D=Error('SYN disposer'),A=Error('SYN callback'),B=Error('SYN sibling');const trace=[];let record,fixture,actual=null,attempts=0,copies=0,afterDisposed=false,cleanupCalls=0;
+ const stage={subcase:name,stage:'setup',primary:null,cleanup:[]};const progress=async()=>writeFile(join(root,'progress.json'),JSON.stringify(stage));await progress();
+ try{await withFixedBudgetOwner(name==='callback_dispose_sibling'?'R1':'positive_producer',join(root,'owned'),async()=>{
+  record=beginFixedBudgetOwnedAllocation();record.attachPersist(persist);fixture={budgetEpochs:[],stub:{
+   async finiteBudgetRelease(){trace.push('syn_release');},async finiteBudgetRestore(){trace.push('syn_restore');},
+   async ownerReferenceControl(){trace.push('legacy_release');},async firstConnectionRestore(){trace.push('legacy_restore');if(name==='callback_dispose_sibling')throw A;},async restoreMethods(){trace.push('legacy_methods');}
+  },async captureBudgetEpoch(reason){trace.push('capture');fixture.budgetEpochs.push({reason,role:'QA',epoch:0});},
+  async cleanup(){cleanupCalls++;trace.push('cleanup');if(await record.beforeDelete()){trace.push('delete');await rm(persist,{recursive:true});}else trace.push('skip_unsafe');}};
+  record.attachFixture(fixture);record.attachMiniflare({async dispose(){attempts++;trace.push('dispose');if(name!=='normal')throw D;}});fixture.mf=record.mf;
+  if(name==='callback_dispose_sibling'){
+   const extracted=await fixedOriginalFixtureCleanup(),context=createContext({__fixedOwnedFixture:fixture,budgetQualification:true,noteFixedBudgetOwnedFailure}),callback=new Script('(function(f){return '+extracted.source+';})(__fixedOwnedFixture)').runInContext(context,{timeout:1000});
+   registerFixedOwnedCleanup(async()=>{trace.push('sibling');throw B;});registerFixedOwnedCleanup(async()=>{stage.stage='callback';await progress();try{await callback();}catch(error){stage.primary=fixedControlError(error);await progress();throw error;}});return {};
+  }
+  const evidenceFailure=['evidence_dispose','operation_evidence_dispose'].includes(name),context=createContext({f:fixture,mf:fixture.mf,E,budgetQualification:true,noteFixedBudgetOwnedFailure,root:join(root,'checkpoint'),input:{persist},process:{env:{GITHUB_SHA:process.env.GITHUB_SHA}},json:JSON.stringify,join,
+   mkdir:async path=>{if(evidenceFailure&&path==='output/finite-budget/producer'){trace.push('evidence_failure');throw F;}trace.push('mkdir');},
+   writeFile:async()=>{trace.push('evidence_write');},cp:async()=>{copies++;afterDisposed=record.disposed;trace.push('copy');}});
+  const body=name==='recovery_dispose'?'try{throw E;}'+parts.recoveryCatch:'try{'+(['operation_dispose','operation_evidence_dispose'].includes(name)?'throw E;':['normal','dispose_reject'].includes(name)?parts.continuation:'')+'}'+parts.catchText+'finally'+parts.finallyText;
+  stage.stage='actual_body';await progress();try{await new Script('(async()=>{'+body+'})()').runInContext(context,{timeout:1000});}catch(error){stage.primary=fixedControlError(error);await progress();throw error;}return {};
+ });}catch(error){actual=error;}
+ const expected=name==='normal'?null:name==='callback_dispose_sibling'?A:['operation_dispose','operation_evidence_dispose','recovery_dispose'].includes(name)?E:name==='evidence_dispose'?F:D,saved=actual?fixedBudgetOwnerErrors.get(actual):null,errors=saved?.failures.map(value=>value.error)??[];
+ stage.stage='assert';stage.primary=actual?fixedControlError(actual):null;stage.cleanup=saved?.failures.map(value=>({phase:value.phase,error:fixedControlError(value.error)}))??[];await progress();
+ assert.equal(actual,expected,'current exact Node primary identity '+name);assert.equal(attempts,1,'one original disposer attempt');assert.equal(copies,name==='normal'?1:0);assert.equal(fixture.disposedForCheckpoint===true,name==='normal');
+ if(name==='normal'){assert(afterDisposed);assert(record.disposed&&record.archived);assert.equal(saved,null);}
+ else{
+  assert(record.disposalUncertain&&!record.disposed&&!record.archived);assert.equal(await readFile(join(persist,'native.bin'),'utf8'),'SYN fixed round2 inert bytes');assert(!trace.includes('delete'));assert.throws(()=>assertFixedBudgetAllocationSafe(),'uncertainty blocks next allocation');
+  if(expected!==D){assert(errors.includes(D),'disposer retained ancillary');assert.equal(errors.filter(error=>error===D).length,1,'propagation deduplicated by identity');}
+  if(name==='operation_evidence_dispose')assert(errors.includes(F));if(name==='callback_dispose_sibling'){assert(errors.includes(B));assert(trace.includes('sibling'));assert(trace.indexOf('legacy_restore')<trace.indexOf('dispose'));}
+ }
+ const result={subcase:name,passed:true,stage:'complete',originalAttempts:attempts,copies,flag:fixture.disposedForCheckpoint===true,copyAfterDispose:afterDisposed,primarySame:true,ancillaryCount:errors.length,disposeAncillaryOnce:expected===D?null:errors.filter(error=>error===D).length,sourceRetained:name==='normal'?null:true,poisonPreserved:name!=='normal',exactCurrentBodies:parts.proof,noMF:true,I0Opened:false};
+ await writeFile(join(root,'result.json'),JSON.stringify(result));return result;
+}
+async function runRound2OwnedControls(){
+ const {execFile}=await import('node:child_process'),cases=[];
+ for(const name of round2OwnedCases){
+  fixedControlProgress('round2_owned_child',{subcase:name,stage:'start'});
+  try{
+   await new Promise((resolve,reject)=>execFile(process.execPath,['--experimental-vm-modules','test/fixtures/finite-budget-world.mjs','verify-round2-owned-case',name],{timeout:8000,maxBuffer:65536,env:{...process.env,AFW_BUDGET_GROUP:undefined}},error=>error?reject(error):resolve()));
+   const value=JSON.parse(await readFile(join(process.env.RUNNER_TEMP,'afw-round2-fixed-owned',name,'result.json'),'utf8'));assert.equal(value.subcase,name);assert.equal(value.passed,true);cases.push(value);
+  }catch(error){
+   let progress=null;try{progress=JSON.parse(await readFile(join(process.env.RUNNER_TEMP,'afw-round2-fixed-owned',name,'progress.json'),'utf8'));}catch{}
+   fixedControlProgress('round2_owned_child',{subcase:name,stage:'failed',progress,error:fixedControlError(error)});throw error;
+  }
+ }
+ return cases;
+}
+
+
+async function runRound2SealerControls(){
+ fixedControlProgress('round2_sealer');
+ const workflow=await readFile('.github/workflows/afw-finite-budget-qualification.yml','utf8'),step=workflow.split('      - name: Seal a closed pure evidence directory\n');assert.equal(step.length,2,'actual current sealer step exactly once');const block=step[1].split("          node --input-type=module <<'NODE'\n");assert.equal(block.length,2);const source=block[1].split('\n          NODE\n')[0].split('\n').map(line=>{assert(line.startsWith('          '));return line.slice(10);}).join('\n')+'\n';assert.equal(source.split('AFW_CLOSED_PURE_SEALER_V2').length,2);
+ const {SourceTextModule,SyntheticModule,createContext}=await import('node:vm'),fs=await import('node:fs/promises'),cases=[],canary='SYN_ROUND2_PRIVATE_CANARY_6a793d',raw='const source="'+canary+'";\nError: '+canary+'\n at privateStack('+canary+')\n actual: '+canary+'\n';
+ for(const variant of ['failed_logs','unknown_field','unknown_string']){
+  const base=join(process.env.RUNNER_TEMP,'afw-round2-fixed-sealer',variant),privateRoot=join(base,'afw-pure-private'),input=join(base,'input-pure');await mkdir(privateRoot,{recursive:true,mode:0o700});await mkdir(input,{recursive:true,mode:0o700});
+  for(const name of ['syntax.log','lint.log','tests.tap','inactive.tap'])await writeFile(join(privateRoot,name),raw);
+  const q={tests:8,pass:8,fail:0,cancelled:0,skipped:0,todo:0};if(variant==='unknown_field')q.sourceLine=raw;if(variant==='unknown_string')q.tests=canary;await writeFile(join(input,'q-counts.json'),JSON.stringify(q));
+  const processView={env:{RUNNER_TEMP:base,PURE_COMPLETE:'false',GITHUB_SHA:process.env.GITHUB_SHA,GITHUB_RUN_ID:process.env.GITHUB_RUN_ID,GITHUB_RUN_ATTEMPT:process.env.GITHUB_RUN_ATTEMPT},exitCode:0},context=createContext({process:processView,Buffer,console:{log(){}}});
+  const map=path=>{if(path==='test/fixtures/finite-budget-descriptors.json')return path;if(path.startsWith('output/finite-budget/pure/'))return join(input,path.slice('output/finite-budget/pure/'.length));assert(resolve(path).startsWith(resolve(base)+'/'),'fixed current sealer private sandbox');return path;};
+  const exports={readFile:(path,options)=>fs.readFile(map(path),options),writeFile:(path,data,options)=>fs.writeFile(map(path),data,options),mkdir:(path,options)=>fs.mkdir(map(path),options),readdir:path=>fs.readdir(map(path)),lstat:path=>fs.lstat(map(path))},modules=new Map(),synthetic=(name,values)=>{if(modules.has(name))return modules.get(name);const module=new SyntheticModule(Object.keys(values),function(){for(const[key,value]of Object.entries(values))this.setExport(key,value);},{context,identifier:name});modules.set(name,module);return module;};
+  const module=new SourceTextModule(source,{context,identifier:'SYN-current-fixed-closed-sealer'});await module.link(name=>{if(name==='node:assert/strict')return synthetic(name,{default:assert});if(name==='node:fs/promises')return synthetic(name,exports);if(name==='node:crypto')return synthetic(name,{createHash});if(name==='node:path')return synthetic(name,{join});throw Error('SYN current sealer unknown import');});await module.evaluate({timeout:1000});
+  assert.equal(processView.exitCode,0,'actual current failure sealer preserved closed evidence');const dest=join(base,'afw-pure-public'),names=await readdir(dest),status=JSON.parse(await readFile(join(dest,'status.json'),'utf8'));assert(names.every(name=>name.endsWith('.json')));assert.equal(status.status,'pure_failed');assert.equal(status.rawObservations.length,4);assert.equal(status.validationFailures.length,variant==='failed_logs'?0:1);
+  for(const name of names){const text=await readFile(join(dest,name),'utf8');assert(!text.includes(canary)&&!text.includes('privateStack')&&!text.includes('const source='),'current sealer rejected raw bytes');}
+  assert.equal(names.includes('q-counts.json'),variant==='failed_logs');const manifest=JSON.parse(await readFile(join(dest,'budget-artifact.json'),'utf8'));assert.deepEqual((await inventoryFiles(dest)).filter(file=>file.path!=='budget-artifact.json'),manifest.files);
+  cases.push({variant,passed:true,actualSealerSha256:hash(source),rawInputs:4,publicRawFiles:0,canaryPublished:false,malformedRejected:variant==='failed_logs'?null:true,closedFailurePreserved:true,sandboxOnly:true});
+ }
+ return cases;
+}
+
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
  const main=async()=>{
   const [command,root]=process.argv.slice(2);
-  if(command==='verify-round2-red')await verifyRound2CausalRed();
+  if(command==='verify-round2-owned-case')await runRound2OwnedCase(root);
+  else if(command==='verify-round2-red')await verifyRound2CausalRed();
   else if(command==='preflight-budget')await preflightBudgetCompilation();
   else if(command==='prepare-positive-probe')await preparePositiveProbe(root);
   else if(command==='prepare-positive')await prepareBudgetProducer('positive',root);

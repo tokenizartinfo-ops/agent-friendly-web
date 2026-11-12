@@ -1,3 +1,4 @@
+import {noteFixedBudgetOwnedFailure} from './finite-budget-world.mjs';
 import {persistBudgetEvidence} from './finite-budget-evidence.mjs';
 import {build as buildCleanupComponent} from 'esbuild';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
@@ -113,7 +114,7 @@ export function instrumentFiniteOwnerCleanup(source){
 }
 export async function ownerReferenceFixture(t,{cleanupCheckpoint=false,budgetQualification=false}={}){
  const f=await initialEntryHarness('first-connection-publication',{ownerCleanup:true,cleanupCheckpoint,budgetQualification});f.cleanupQualification=cleanupCheckpoint;
- t.after(async()=>{try{await f.stub.ownerReferenceControl('released').catch(()=>{});await f.stub.firstConnectionRestore();await f.stub.restoreMethods();}finally{try{if(f.captureBudgetEpoch)await f.captureBudgetEpoch('before-fixture-dispose');}finally{try{await f.mf.dispose();}finally{await f.cleanup();}}}});
+ t.after(async()=>{try{await f.stub.ownerReferenceControl('released').catch(()=>{});await f.stub.firstConnectionRestore();await f.stub.restoreMethods();}catch(error){if(budgetQualification)noteFixedBudgetOwnedFailure(error,'fixture_callback');throw error;}finally{try{if(f.captureBudgetEpoch)await f.captureBudgetEpoch('before-fixture-dispose');}finally{try{await f.mf.dispose();}finally{await f.cleanup();}}}});
  await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();await f.mountFirstConnection();await f.stub.firstConnectionConfigure('normal');
  const initial=f.firstConnectionBuild.M;assert.equal(initial.sha256,f.resident.module.sha256);assert(initial.inputs.includes('worker/mcp-own/finite.mjs'));
  const connected=await approveFirstConnection(f);assert.equal(connected.status,200);await connected.body?.cancel();const probe=await readFirstConnectionProbe(f),receipt=JSON.parse(probe.rows.find(([k])=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':receipt'))[1]);assert.equal(receipt.moduleHash,initial.sha256);

@@ -8,7 +8,7 @@ import {ownerReferenceFixture,prepareOwnerReference,assertActualComplete,downstr
 import {createInitialEntrySynOutbound} from './finite-initial-entry-world.mjs';
 import {plain,compileCleanupSdkOnlyWorker,compileFirstConnectionCandidate} from './finite-first-connection-publication.mjs';
 import {build} from 'esbuild';
-import {attachBudgetEpochCapture} from './finite-budget-world.mjs';
+import {attachBudgetEpochCapture,noteFixedBudgetOwnedFailure} from './finite-budget-world.mjs';
 
 const P='afw.finite-initial-cleanup.v1:',sha=x=>createHash('sha256').update(x).digest('hex');
 const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -138,7 +138,7 @@ export async function produceCheckpoint(root,{variant='principal',deferWait=fals
   await f.cleanup();if(!deferWait)await waitUntil(plan.C0-120000);
   assert(Date.now()<started+885000,'export/upload margin exhausted');
   return manifest;
- }finally{if(f&&!f.disposedForCheckpoint){try{if(budgetQualification){await f.captureBudgetEpoch('producer-failure-before-dispose');await mkdir('output/finite-budget/producer',{recursive:true});await writeFile('output/finite-budget/producer/failure-epochs.json',json({source:process.env.GITHUB_SHA,epochs:f.budgetEpochs}));}}finally{try{await f.mf.dispose();}finally{await f.cleanup();}}}}
+ }catch(error){if(budgetQualification)noteFixedBudgetOwnedFailure(error,'producer_operation');throw error;}finally{if(f&&!f.disposedForCheckpoint){try{if(budgetQualification){await f.captureBudgetEpoch('producer-failure-before-dispose');await mkdir('output/finite-budget/producer',{recursive:true});await writeFile('output/finite-budget/producer/failure-epochs.json',json({source:process.env.GITHUB_SHA,epochs:f.budgetEpochs}));}}catch(error){if(budgetQualification)noteFixedBudgetOwnedFailure(error,'producer_evidence');throw error;}finally{try{await f.mf.dispose();}finally{await f.cleanup();}}}}
 }
 export async function recoverCheckpoint(root,{label='principal',restart=false,budgetQualification=false}={}){
  const {data,manifest}=await verifyCheckpoint(root);
@@ -171,7 +171,7 @@ export async function recoverCheckpoint(root,{label='principal',restart=false,bu
   await f.stub.ownerCleanupFault('normal');
   f.plan=data.plan;f.checkpoint=data;f.directory=dest;f.recovery={entered,ready:Date.now(),nativeDbNow:current.dbNow,manifestSha256:sha(await readFile(join(root,'manifest.json')))};
   return f;
- }catch(error){await mf.dispose();throw error;}
+ }catch(error){if(budgetQualification)noteFixedBudgetOwnedFailure(error,'recovery_operation');await mf.dispose();throw error;}
 }
 export async function observeOriginalAlarm(f,{settled=1}={}){
  const until=f.plan.C1;
