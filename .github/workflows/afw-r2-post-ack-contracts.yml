@@ -1,0 +1,127 @@
+name: AFW R2 post-ACK contracts
+run-name: AFW R2 post-ACK contracts HELD ${{ github.sha }}
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-r2-post-ack-contracts
+  cancel-in-progress: false
+jobs:
+  contracts:
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    outputs:
+      artifact-id: ${{ steps.safe.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - name: Install exact lock without lifecycle scripts
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Pin current identity and preserve immutable baseline on this runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
+          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$(node -v)" = v22.23.4
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          if printenv AFW_SYN_CHECKPOINT_KEY >/dev/null; then exit 1; fi
+          if printenv AFW_BUDGET_DIAGNOSTIC_CANDIDATE >/dev/null; then exit 1; fi
+          git show 408e82abe63178319862c99c3c24684e2258296d:test/fixtures/finite-budget-world.mjs >test/fixtures/.finite-post-ack-original.mjs
+          test "$(git hash-object test/fixtures/.finite-post-ack-original.mjs)" = 5fb78c057b7e80260ae683abf4af892767ce110e
+          test "$(git hash-object package-lock.json)" = 36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b
+          test "$(git hash-object .github/workflows/afw-finite-budget-qualification.yml)" = f7a71f1a0fa4f5ddf069ff411f008a098455e5cc
+      - name: Execute exactly 24 named controls with allocation traps
+        shell: bash
+        run: |
+          set -euo pipefail
+          AFW_POST_ACK_MODE=controls node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs
+      - name: Run unchanged related inert compiler observer facet and sealer controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          AFW_BUDGET_CONTROL_PHASE=green node --experimental-vm-modules test/fixtures/finite-budget-world.mjs verify-native-preparation-round1
+          node --test --test-concurrency=1 test/finite-budget-diagnostics.test.mjs test/mcp-qa-finite-observer.test.mjs
+          node test/fixtures/finite-post-ack-diagnostic.mjs contracts-proof
+      - name: Upload only the closed two-JSON proof
+        id: safe
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-post-ack-contracts-${{ github.run_id }}-1
+          path: output/finite-budget/post-ack-safe/*.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Remove only this task's baseline scratch
+        if: always()
+        shell: bash
+        run: rm -f -- test/fixtures/.finite-post-ack-original.mjs
+  verify:
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    needs: contracts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Independently check same-ID ZIP metadata digest CRC paths and bounds
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SAFE_ARTIFACT_ID: ${{ needs.contracts.outputs.artifact-id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test -n "$SAFE_ARTIFACT_ID"
+          case "$SAFE_ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
+          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$SAFE_ARTIFACT_ID" -o "$RUNNER_TEMP/afw-safe-meta.json"
+          curl --fail --silent --show-error --location --max-time 20 --max-filesize 131072 -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$SAFE_ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-safe.zip"
+          python - <<'PY'
+          import os,json,hashlib,zipfile,stat,pathlib
+          def closed(pairs):
+           d={}
+           for k,v in pairs:
+            if k in d: raise ValueError("duplicate JSON key")
+            d[k]=v
+           return d
+          root=pathlib.Path(os.environ["RUNNER_TEMP"])
+          m=json.loads((root/"afw-safe-meta.json").read_text(),object_pairs_hook=closed)
+          assert str(m["id"])==os.environ["SAFE_ARTIFACT_ID"] and not m["expired"]
+          assert str(m["workflow_run"]["id"])==os.environ["GITHUB_RUN_ID"] and m["workflow_run"]["head_sha"]==os.environ["GITHUB_SHA"]
+          b=(root/"afw-safe.zip").read_bytes()
+          assert len(b)<=131072 and m["size_in_bytes"]==len(b)
+          assert m["digest"]=="sha256:"+hashlib.sha256(b).hexdigest()
+          out=root/"afw-post-ack-proof"
+          out.mkdir(mode=0o700)
+          with zipfile.ZipFile(root/"afw-safe.zip") as z:
+           infos=z.infolist()
+           assert len(infos)==2 and sorted(i.filename for i in infos)==["manifest.json","result.json"]
+           assert sum(i.file_size for i in infos)<=65536
+           for i in infos:
+            assert not i.is_dir() and not i.flag_bits&1 and not stat.S_ISLNK(i.external_attr>>16)
+            assert i.compress_type in (zipfile.ZIP_STORED,zipfile.ZIP_DEFLATED)
+            body=z.read(i)
+            assert len(body)==i.file_size
+            value=json.loads(body.decode("utf-8"),object_pairs_hook=closed)
+            with (out/i.filename).open("xb") as f: f.write(body)
+           assert z.testzip() is None
+          PY
+      - name: Verify full closed current control and program manifest
+        run: node test/fixtures/finite-post-ack-diagnostic.mjs verify-contracts

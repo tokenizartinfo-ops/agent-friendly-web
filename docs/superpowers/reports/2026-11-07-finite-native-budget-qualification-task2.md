@@ -4899,3 +4899,533 @@ NOT EXECUTED: any Source repair/replay/rerun/newqualification/Native16/SDK/MF/I0
 After BOTH actual jobs terminalSUCCESS, create_tree(basef550168d,exactF7+APPENDreport)→615d624c70ef90858f6705f67ca80e8a118a4aad; create_commit(parent1b6aab04)→5f5259f2402f9468386f02454f3b4928a83a611c; FULL staged WF/report readback exact; GETSource ref exact1b6aab04; update_ref(expected_sha1b6aab04,forcefalse)→success ONCE at toolclock21:32:37UTC. Full subsequent ref/commit confirmed5f5259f2402f9468386f02454f3b4928a83a611c/tree615d624c70ef90858f6705f67ca80e8a118a4aad. Full WFf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209characters EXACT F7 from093e00793de9a9eac193281a7ec4e55d018a476b, complete seven jobs/manualworkflow_dispatch/noinputs/nopush/all7literalfalse. Full reportb3aa4ef2105476295648fed59e25021c9b9730fd/505804characters EXACT; original487009-characterprefix and full491485-characteractivationprefix preserved. Recursive tree nontruncated3190leaves; ALL3188protected path/mode/type/SHA identical to BASEcf223f03. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 unchanged. Active queued/in_progress/waiting/pending/requested ALLZERO. Restoration has no push trigger. No new actual/keyless/native run.
 
 This final REPORT-ONLY checkpoint leaves exactF7 and ALLother leaves unchanged, preserving every prior report byte. Its final expected_sha CAS and full ref/WF/report/tree/protected3188/main/fivezero readbacks are returned to Root, followed by executor STOP. Frozen actualSource1b6aab04/run43313662894/attempt1, assignedSMALLSAFE13985819598/3142B/digest3337abac0295bd2c333fcd3d22ffdb8669339b6e355d8cb6604288334cefcd54 remain exact. Root independent two-JSON audit and interpretation are separate; no Source mutation/diagnosis/replay follows this consumed permit. No private actual producer logs/Original artifact/cipher/key/plain downloaded. No local Source execution/clones/dependencies/temp Source files. ALLfive readiness flags false; no Native repair/ACK/cause/globaldrain/PCoff claim. Source executor STOPPED after final readbacks; no further permit inferred.
+
+
+## Native post-ACK R2 Task1 — initial implementation and KEYLESS qualification.
+
+### Initial implementation freeze (qualification NOT YET EXECUTED)
+
+Sole builder, Source-only GitHub Git database CAS. Binding brief e3ac3b599787695cee65b2a5e5a3bb23ed345f36 at Rootdocs1866379041f05a24f5d3502028fe2919e5a83cdf; N1–N5 and pre-MF archive-not-delete correction apply. Owner authorization is inherited from Root's exact brief; Native remains HELD pending independent CLEAN and a new separate Root release. No local clone/dependencies/build/Source import/eval/execution/temp files; authored/public strings were assembled and hashed in bounded memory only. The Node REPL rejected one >64000-byte serialized hashing input; smaller data-only calls met the per-call cap without Source execution or filesystem writes.
+
+Before mutation verified Source408e82abe63178319862c99c3c24684e2258296d/tree552faa898d2bb049680ddd3fabf12cf9770a84d4, main0c9c475b3ebaa970fc11d628b40e50a90cceb727; recursive tree nontruncated3351entries/3190leaves, four new paths absent, 3188 old leaves protected. Original World5fb78c057b7e80260ae683abf4af892767ce110e/218113chars (218119UTF8bytes); F7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209chars; reportf9ec93f51a9a16f53081633c89cf8cfaf069fd56/507875chars fully preserved as prefix. Lock36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b/445991chars unchanged. All five repository active state queries queued/in_progress/waiting/pending/requested returned0. Read stable AGENTS scope/Project boundary/Security/Engineering/continuity; historical entries are dated only.
+
+Implemented fixed Node-only profile/compiler captures, ORIGINAL408/candidate OFF same-once-captured prepared/raw/virtual inputs and defines replay, fixed two QA diagnostic emissions and M byte check; no Node fixture module in Worker metafile. Same original issuerCall ACK/recheck sequence, lexical consume/grant scope, one-shot consumed synchronously before await; local error references never enter global closed collector, unchanged original calls/errors/retention/deadlines, existing budgetSnapshot return extension only. Selector uses current QA terminal-owned-before-dispose allocation, unique eligible rejection, strict closed SAFE schema and exact N3 canonical observation projection. N5 model hashes are MODEL ONLY; actual output hashes require compiler onEnd, owned lifecycle, successful fixture return, both retained mounted-options bytes and existing terminal capture, without a new RPC. These are build/configuration provenance under a trusted runner, not runtime attestation.
+
+Exactly24 module-scope control IDs/callbacks, one node:test wrapper, callback-owned private post-final-assertion completion tokens, exactly-once barrier and missing/no-op/forged completion negatives. Existing current original issuer/recheck functions are exercised in VM with fake bindings, same errors/effects and constructor/I0 traps; no Worker SDK execution. Unknown mode rejects before allocation. Explicit native_r2_once alone registers one120s R2 test; not executed by Task1. STATIC RED: original pinned World lacks preflightPostAckDiagnostic/runPostAckR2Diagnostic and the four new paths; this is export/path inventory only, not a test run or fabricated RED output.
+
+Contracts WF prepared 7min producer+2min independent verifier without environment/key, initially manual/noinputs/nopush/all2false. Planned sole command: AFW_POST_ACK_MODE=controls node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs. Unchanged inert verify-native-preparation-round1 F1–F8 is authorized by Root ruling at original45s, plus finite-budget-diagnostics.test.mjs and mcp-qa-finite-observer.test.mjs; body inspection found VM/fakes, no actual MF/I0/SDK runtime/native case. Broad native suites/old3R file omitted. SAFE proof exactlyresult.json+manifest.json, combined<=65536, ZIP<=131072; verifier checks same assigned artifact metadata/run/head/digest, paths/CRC/JSON duplicate keys and all current program/control hashes. No Root cipher/private Native producer logs/downloads permitted.
+
+Native WF is complete for independent review but manual/noinputs/nopush/all2false. Producer7+verifier2, existing afw-finite-syn-checkpoint environment only future producer; existing key bound ONLY terminating key-preflight, seal and same-ID open steps. Native command/keyless verifier have no key; this is step binding under a trusted same runner, NOT independent process/host isolation. Fresh exact Actions job metadata/official Date and monotonic elapsed age feed conservative job deadline and>=240s pre-MF/I0 headroom; unknown/stale timing blocks without a new timer. Preflight model runs before MF; actual QAonEnd is after originalI0 and before mounting, original clocks keep counting. Successful/failing original R2 remains independent from custody/certificate verdict; unknown maps unavailable, partial consumer-failure archive is evidence failure only, no new AEAD kind. Existing sealDirectory/openDirectory reused; upload cipher envelope.bin/manifest.json/receipt.json7days only, same-ID in-runner reopen/full inventory/inner observation hash, then two-file SAFE. Pre-MF archive copy does not prove original scratch deletion, disposal, native drain or namespace emptiness; no cleanup semantics broadened. All five readiness flags false.
+
+Frozen authored file inventory (UTF8 bytes; Git blob and SHA256; held WF bytes before later sole activation):
+
+```json
+[
+  {
+    "path": "test/fixtures/finite-budget-world.mjs",
+    "chars": 230553,
+    "bytes": 230559,
+    "sha256": "7a48de202ce99d012bf40b01f09fcb8199d461d8c70904b8f8491f7714c7a1af",
+    "blob": "476ba287c08c50ab807394d09a0eed78d6d6c908"
+  },
+  {
+    "path": "test/fixtures/finite-post-ack-diagnostic.mjs",
+    "chars": 47711,
+    "bytes": 47711,
+    "sha256": "6bdb081715abe1bba2424190af5f8fb1312741d64c2c638c0f9a96ee879661b6",
+    "blob": "08f9034068b937e18543fb569bfd88720a2822a8"
+  },
+  {
+    "path": "test/finite-post-ack-diagnostic.test.mjs",
+    "chars": 1643,
+    "bytes": 1643,
+    "sha256": "5cbeff23420da70c9556962a8f4b3a65c917ff50fc233f4677b823aabb0ee61f",
+    "blob": "2b514944054c9e0679527062ff148bd6764f9728"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+    "chars": 6453,
+    "bytes": 6453,
+    "sha256": "fd8b0a88d058529eabb127e6d53417a1f1c98d238918d1842a44e5824f8d6bf2",
+    "blob": "15d081b490014bdd5393ed376f70f326e86cd836"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+    "chars": 12093,
+    "bytes": 12093,
+    "sha256": "b6463a4d47a71c9963f025a5aa7182108d95f6f0dd796a717b0b3f111faed58a",
+    "blob": "6443a747df3f17c2adcbce6d6037dcc6f4ba364a"
+  }
+]
+```
+
+All preexisting60workflow event blocks inspected; automatic push matches main only except afw-preparation-closed-origin.yml whose three paths do not match the six scoped paths. Source branch receives no preexisting automatic Native. Generic test glob would include controls under broader CI, but no PR/main/merge is authorized. F7 unchanged sevenfalse/manual/noinputs/nopush. Detailed initial event inventory:
+
+```json
+[
+  {
+    "path": ".github/workflows/afw-canary-cloud-upload.yml",
+    "blob": "47ebf94c1d7dc8d6c22c529c57296dbc10498d8e",
+    "events": [
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-delegated-edge.yml",
+    "blob": "36dc1ba8cbb1cc3fae37dec80cd230fa00de8573",
+    "events": [
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-delivery-recipe-guidance.yml",
+    "blob": "2fd232c486cc6150d752a45d7e9c9e618981b6ef",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-finite-budget-qualification.yml",
+    "blob": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "events": [
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-finite-finalizer.yml",
+    "blob": "566d597223497c5cf3c0435dd0f4e8b3ab7557ea",
+    "events": [
+      "issue_comment:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-finite-native-package.yml",
+    "blob": "92729f5952fd2d8bec107b4072bb569216d21863",
+    "events": [
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "events": [
+      "issue_comment:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-home-hero-art.yml",
+    "blob": "bf197aa0a7a06b2891cbdda48a134e64f91d9358",
+    "events": [
+      "pull_request:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-independent-closure-build.yml",
+    "blob": "741b21bbd00e7da0454e5f84532b23a52533b421",
+    "events": [
+      "workflow_dispatch:",
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-independent-container-control.yml",
+    "blob": "2c5bfd41119552a659a075833c9f95fe798b980a",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-named-confirmation-package.yml",
+    "blob": "282bff4d04efd495b84681dbb1953c959ab91a69",
+    "events": [
+      "workflow_dispatch:",
+      "pull_request:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-original-native-observer.yml",
+    "blob": "0dd840a967c9f6d6f4b766d059262ba36d8cfab2",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-own-closed-readback.yml",
+    "blob": "c1a5b4b5881a9d890e6556a7851c917911685195",
+    "events": [
+      "issue_comment:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-own-worker-build.yml",
+    "blob": "063fd026824c09e13a1705d2017e166fa8bada88",
+    "events": [
+      "workflow_dispatch:",
+      "pull_request:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-client-draft.yml",
+    "blob": "f1ae3e894bf2c55be089a941bddeb7a556678805",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-client-maintenance.yml",
+    "blob": "6979c6874ec9c567f8b4af53754c8e9e94026b34",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-closed-origin.yml",
+    "blob": "3c09bcb4bcb4d3f1f33280fa690f3b0806d5c299",
+    "events": [
+      "push:",
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-maintenance-api-plan.yml",
+    "blob": "2a857568bc5a539d11baa09fcd9acf67838b67f9",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-maintenance-caller.yml",
+    "blob": "7af5278a2940c021b871db476d7b738fcb471fa5",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-maintenance-worker.yml",
+    "blob": "ad8cd6765fa0b2202d8a711c99a57977f7b61365",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-record-owner.yml",
+    "blob": "e1ba948e59070c3c2998a881b81fa10f5921adb3",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-release-preflight.yml",
+    "blob": "b5fbd64d0db4f31249a2e6916a9053023fc7a019",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-schema.yml",
+    "blob": "caa208e912b8f715115780d94845bdb7e2628384",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-create-worker.yml",
+    "blob": "740e48ccd1015b8ad5f3f389ef026020f8c01812",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-inspect.yml",
+    "blob": "4da051fa70890542a0cf1da46ceabf8a00717a98",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-intake-http.yml",
+    "blob": "f59ee72086960474591bdedc9610bae2ede1bcd3",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-intake.yml",
+    "blob": "3e46ef491ae0977f3911a02b77eefe5ec1cf6eb9",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-session.yml",
+    "blob": "ae487e0117dde6cda36dfa9fd16663a1bf7d9aaa",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-worker.yml",
+    "blob": "4f0e8238333f6e4f0bf580396895f241b1ff3f70",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-view-qa.yml",
+    "blob": "cc686287e4561f70c4e0847cca7479acbd9748de",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-preparation-worker-build.yml",
+    "blob": "26505421f62bb9587f08d5f354748ccf6956d9ff",
+    "events": [
+      "workflow_dispatch:",
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-provider-preflight.yml",
+    "blob": "5ac2de34874c3f055d66ae45c9c97c14a6c76199",
+    "events": [
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-provider-readonly-check.yml",
+    "blob": "36faefbe250ba57d936a182b5cf07f80c20b9d14",
+    "events": [
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-delivery-qualification.yml",
+    "blob": "afa732a0e31dd0fd7a0a5e78dc4b2c12b90f5129",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-edge-check.yml",
+    "blob": "296286892c515d3d2c2bef5e0099e5601a180a93",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-guide-start-qa.yml",
+    "blob": "0a263ab85999aebd0c8e048402cd4fa8c0badb9e",
+    "events": [
+      "pull_request:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-home-activation.yml",
+    "blob": "d11540abb72143e1cee973e5abdcd5217a810e98",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-home-inactive-upload.yml",
+    "blob": "617935510b1ed42ef3ac9af0d269c18e06e3c53f",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-inactive-upload.yml",
+    "blob": "a1e0ac904fa31501e26186dc0f318473a50f7664",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-journey-activation.yml",
+    "blob": "05cab1e3cb661336c68c29ef77d8030f46c686d5",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-journey-inactive-upload.yml",
+    "blob": "25063993ada3c4d2c08079fdf3f8fde69e95ffe2",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-json-activation.yml",
+    "blob": "7fdffb9c516d6b91eb937fe53c49c2cb45f7ff68",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-json-inactive-upload.yml",
+    "blob": "61390672bffc33996e445f263c8b0faf8d27308c",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-json-qualification.yml",
+    "blob": "b8611390a25da9802bf79402c56e1e531508acfb",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-methodology-once.yml",
+    "blob": "ad94df4b4c174c72f62f27dd14646244947c60e9",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-public-upload-read-probe.yml",
+    "blob": "51af06841e144ed44ce9cf9b34e94117744d545d",
+    "events": [
+      "pull_request:",
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-publication-template-build.yml",
+    "blob": "f72adaa9221157b68be2b2075dbbfd8dff2615a2",
+    "events": [
+      "workflow_dispatch:",
+      "pull_request:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-arm-observation-qualification.yml",
+    "blob": "07e25529a0dc5c73a5d9efe8d3dfa7e8665b38aa",
+    "events": [
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-bootstrap-custody-inspection.yml",
+    "blob": "b8e7ecf0f90b8ef24bdbe06a93ef3eef646ade0e",
+    "events": [
+      "issue_comment:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-closed-observation-v2-qualification.yml",
+    "blob": "583a94180db9d79613846c8ad93d4e2e69bb6e1d",
+    "events": [
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-cloud-clone-source-qualification.yml",
+    "blob": "ff342ecb37e5f31711f07915233cff6e2df10933",
+    "events": [
+      "pull_request:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-cloud-clone.yml",
+    "blob": "713f0b83130e57af3263c591638f1fd9ea95c326",
+    "events": [
+      "issue_comment:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-cloud-closed-rollback.yml",
+    "blob": "74493a4b0702498b71cefd2761e443e87db1b145",
+    "events": [
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-cloud-native-observation.yml",
+    "blob": "c2f7d3f883db369b20fab294759dece9ab4d393e",
+    "events": [
+      "issue_comment:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-legacy-baseline-qualification.yml",
+    "blob": "0e63bc9cb094474a11ff92733d4fedaa65ee3a7a",
+    "events": [
+      "workflow_dispatch:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-native-observation-source-qualification.yml",
+    "blob": "36c3af76fa962fc1a435a31e7de3e9dc9023627e",
+    "events": [
+      "pull_request:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-qa-writer-queue-qualification.yml",
+    "blob": "24974c071363fc5a9e96fae2c5ef9e8b93917d09",
+    "events": [
+      "pull_request:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-release-operator-build.yml",
+    "blob": "c95329e11064417f227e41431efc939bd1411cff",
+    "events": [
+      "workflow_dispatch:",
+      "pull_request:"
+    ]
+  },
+  {
+    "path": ".github/workflows/afw-verified-access-expiry.yml",
+    "blob": "0ea41f39ef6d11dc3c620ecf3026e61a603a3059",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  },
+  {
+    "path": ".github/workflows/ci.yml",
+    "blob": "496e4327b3b1bfb9e05d2c02ae33f7810a3a0d04",
+    "events": [
+      "pull_request:",
+      "push:"
+    ]
+  }
+]
+```
+
+Self-review fixed in-memory source framing, synthetic repeated-operation reset, input replay resolveDir, exact original-error outcome distinction, explicit fixture-return provenance and conservative metadata age accounting before any Source write/run. Remaining inherent limits: synchronous observer overhead can alter timing; pair_wait labels only a call boundary, never the underlying race cause; trusted Source/runner custody and mounted options are not remote attestation. Actual qualification/result/artifact/final closure evidence follows in a new append after the sole attempt. NOT EXECUTED: Native R2, CF remote runtime, I0, MF, PC-off, Native16, Max, production/OAuth/customer resources.

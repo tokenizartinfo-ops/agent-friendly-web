@@ -1,0 +1,221 @@
+name: AFW R2 post-ACK diagnostic
+run-name: AFW R2 post-ACK Native HELD ${{ github.sha }}
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: afw-r2-post-ack-diagnostic
+  cancel-in-progress: false
+# INACTIVE. Native needs independent CLEAN plus a fresh separate Root release.
+# The three key-bound steps trust this reviewed runner; no independent same-runner isolation claim.
+jobs:
+  native:
+    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    environment: afw-finite-syn-checkpoint
+    outputs:
+      artifact-id: ${{ steps.safe.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - name: Capture current exact Actions job timing once before setup
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          (async()=>{
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const before=process.hrtime.bigint();
+          const response=await fetch('https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/'+process.env.GITHUB_RUN_ID+'/attempts/1/jobs?per_page=100',{headers:{Authorization:'Bearer '+process.env.GITHUB_TOKEN,Accept:'application/vnd.github+json'},redirect:'error',signal:AbortSignal.timeout(10000)});
+          const after=process.hrtime.bigint();assert.equal(response.status,200);
+          const responseDate=Date.parse(response.headers.get('date'));assert(Number.isFinite(responseDate));
+          const value=await response.json();assert(value.total_count<=100);
+          const jobs=value.jobs.filter(j=>j.name==='native'&&j.status==='in_progress'&&String(j.run_id)===process.env.GITHUB_RUN_ID&&j.run_attempt===1&&j.head_sha===process.env.GITHUB_SHA);
+          assert.equal(jobs.length,1);const startedAt=Date.parse(jobs[0].started_at);assert(Number.isFinite(startedAt)&&startedAt<=responseDate+1000);assert(Math.abs(Date.now()-responseDate)<15000);
+          const context={repository:process.env.GITHUB_REPOSITORY,ref:process.env.GITHUB_REF,source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:1,case:'R2'};
+          fs.writeFileSync(process.env.RUNNER_TEMP+'/afw-post-ack-job-time.json',JSON.stringify({job:'native',jobId:String(jobs[0].id),timeoutMinutes:7,context,startedAt,responseDate,requestElapsed:Number(after-before)/1e6,observedHrtime:after.toString(),localObservedAt:Date.now()}),{flag:'wx',mode:0o600});
+          })().catch(()=>{console.error('current_job_timing_unavailable');process.exitCode=1;});
+          NODE
+      - name: Install locked dependencies without scripts
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Pin exact current input and baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
+          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$(node -v)" = v22.23.4
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          if printenv AFW_SYN_CHECKPOINT_KEY >/dev/null; then exit 1; fi
+          if printenv AFW_BUDGET_DIAGNOSTIC_CANDIDATE >/dev/null; then exit 1; fi
+          git show 408e82abe63178319862c99c3c24684e2258296d:test/fixtures/finite-budget-world.mjs >test/fixtures/.finite-post-ack-original.mjs
+          test "$(git hash-object test/fixtures/.finite-post-ack-original.mjs)" = 5fb78c057b7e80260ae683abf4af892767ce110e
+          test "$(git hash-object package-lock.json)" = 36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b
+          test "$(git hash-object .github/workflows/afw-finite-budget-qualification.yml)" = f7a71f1a0fa4f5ddf069ff411f008a098455e5cc
+          mkdir -m 700 "$RUNNER_TEMP/afw-post-ack-native"
+          mkdir -m 700 "$RUNNER_TEMP/afw-post-ack-native/logs"
+      - name: Key preflight in terminating helper only
+        id: key
+        env:
+          AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
+        shell: bash
+        run: node test/fixtures/finite-checkpoint-custody.mjs key-preflight readonly-result >"$RUNNER_TEMP/afw-post-ack-native/logs/key.log" 2>&1
+      - name: One R2 original outcome and fixed observer after current model preflight
+        id: r2
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          if printenv AFW_SYN_CHECKPOINT_KEY >/dev/null; then exit 1; fi
+          AFW_POST_ACK_MODE=native_r2_once node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs >"$RUNNER_TEMP/afw-post-ack-native/logs/r2.log" 2>&1
+      - name: Preserve full owned payload with existing AEAD helper
+        id: seal
+        if: always() && steps.key.outcome == 'success'
+        continue-on-error: true
+        env:
+          AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
+        shell: bash
+        run: node test/fixtures/finite-post-ack-diagnostic.mjs seal-native >"$RUNNER_TEMP/afw-post-ack-native/logs/seal.log" 2>&1
+      - name: Upload only the current encrypted envelope
+        id: cipher
+        if: always() && steps.seal.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-post-ack-cipher-${{ github.run_id }}-1
+          path: ${{ runner.temp }}/afw-post-ack-native/cipher/*
+          if-no-files-found: error
+          retention-days: 7
+      - name: Download only the same assigned cipher artifact into this runner
+        if: always() && steps.cipher.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CIPHER_ARTIFACT_ID: ${{ steps.cipher.outputs.artifact-id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          case "$CIPHER_ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
+          curl --fail --silent --show-error --location --max-time 20 -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$CIPHER_ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-post-ack-native/cipher.zip"
+          python - <<'PY'
+          import os,pathlib,zipfile,stat
+          root=pathlib.Path(os.environ["RUNNER_TEMP"])/"afw-post-ack-native"
+          out=root/"download"
+          out.mkdir(mode=0o700)
+          with zipfile.ZipFile(root/"cipher.zip") as z:
+           infos=z.infolist()
+           assert len(infos)==3 and sorted(i.filename for i in infos)==["envelope.bin","manifest.json","receipt.json"]
+           assert sum(i.file_size for i in infos)<=134225920
+           for i in infos:
+            assert not i.is_dir() and not stat.S_ISLNK(i.external_attr>>16) and not i.flag_bits&1
+            body=z.read(i)
+            with (out/i.filename).open("xb") as f:f.write(body)
+           assert z.testzip() is None
+          PY
+      - name: Same-ID authenticated open and full private inventory readback
+        id: reopen
+        if: always() && steps.cipher.outcome == 'success'
+        continue-on-error: true
+        env:
+          AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+          CIPHER_ARTIFACT_ID: ${{ steps.cipher.outputs.artifact-id }}
+        shell: bash
+        run: node test/fixtures/finite-post-ack-diagnostic.mjs reopen-native >"$RUNNER_TEMP/afw-post-ack-native/logs/reopen.log" 2>&1
+      - name: Publish only closed observation or unavailable evidence verdict
+        id: proof
+        if: always()
+        continue-on-error: true
+        run: node test/fixtures/finite-post-ack-diagnostic.mjs native-proof
+      - name: Upload two-file SAFE after custody attempt
+        id: safe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-post-ack-native-safe-${{ github.run_id }}-1
+          path: output/finite-budget/post-ack-safe/*.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Preserve original R2 failure independently of certificate status
+        if: always()
+        shell: bash
+        run: |
+          test '${{ steps.r2.outcome }}' = success
+          test '${{ steps.reopen.outcome }}' = success
+          test '${{ steps.proof.outcome }}' = success
+          test '${{ steps.safe.outcome }}' = success
+      - name: Remove this task baseline scratch only
+        if: always()
+        run: rm -f -- test/fixtures/.finite-post-ack-original.mjs
+  verify:
+    if: ${{ false && always() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    needs: native
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Independent SAFE ZIP and current artifact metadata verification
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SAFE_ARTIFACT_ID: ${{ needs.native.outputs.artifact-id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test -n "$SAFE_ARTIFACT_ID"
+          case "$SAFE_ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
+          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$SAFE_ARTIFACT_ID" -o "$RUNNER_TEMP/afw-safe-meta.json"
+          curl --fail --silent --show-error --location --max-time 20 --max-filesize 131072 -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$SAFE_ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-safe.zip"
+          python - <<'PY'
+          import os,json,hashlib,zipfile,stat,pathlib
+          def closed(pairs):
+           d={}
+           for k,v in pairs:
+            if k in d: raise ValueError("duplicate JSON key")
+            d[k]=v
+           return d
+          root=pathlib.Path(os.environ["RUNNER_TEMP"])
+          m=json.loads((root/"afw-safe-meta.json").read_text(),object_pairs_hook=closed)
+          assert str(m["id"])==os.environ["SAFE_ARTIFACT_ID"] and not m["expired"]
+          assert str(m["workflow_run"]["id"])==os.environ["GITHUB_RUN_ID"] and m["workflow_run"]["head_sha"]==os.environ["GITHUB_SHA"]
+          b=(root/"afw-safe.zip").read_bytes()
+          assert len(b)<=131072 and m["size_in_bytes"]==len(b)
+          assert m["digest"]=="sha256:"+hashlib.sha256(b).hexdigest()
+          out=root/"afw-post-ack-proof"
+          out.mkdir(mode=0o700)
+          with zipfile.ZipFile(root/"afw-safe.zip") as z:
+           infos=z.infolist()
+           assert len(infos)==2 and sorted(i.filename for i in infos)==["manifest.json","result.json"]
+           assert sum(i.file_size for i in infos)<=65536
+           for i in infos:
+            assert not i.is_dir() and not i.flag_bits&1 and not stat.S_ISLNK(i.external_attr>>16)
+            assert i.compress_type in (zipfile.ZIP_STORED,zipfile.ZIP_DEFLATED)
+            body=z.read(i)
+            assert len(body)==i.file_size
+            value=json.loads(body.decode("utf-8"),object_pairs_hook=closed)
+            with (out/i.filename).open("xb") as f: f.write(body)
+           assert z.testzip() is None
+          PY
+      - name: Verify closed observation and encrypted metadata without a key
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node test/fixtures/finite-post-ack-diagnostic.mjs verify-native
