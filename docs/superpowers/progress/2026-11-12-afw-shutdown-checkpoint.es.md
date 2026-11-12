@@ -1,0 +1,31 @@
+# AFW — pausa solicitada por Gabriel; reanudación segura
+
+2026-11-12T18:38:08Z (15:38Argentina). USER: “cierra y guarda todo que tengo que apagar el ordenador, seguiremos mas tarde”. TrabajoPAUSADO porpedidoexpreso, noobjetivocompleto. NoTaskB/ensayo nuevo liberado; no avanzarhastaqueretome. TodoslossubagentesCOMPLETED/STOPPED, sinprocesoslocalesSource/dependencias/clones/temporalescreadosporRoot.
+
+## Último bloque completado
+
+NuevaTaskA authenticated-payload-bound: revisiónindependienteCLEAN0Critical/Important/Minornew. PruebaúnicaKEYLESS43280472462/1 atb30b7f4fed395d007bef81aab5323b238c7a6cb0 SUCCESS91Core+24supplement+16pair+16ZIP. ActualTaskBPRIVATE NOliberado. [Primary](../reviews/2026-11-12-authenticated-payload-bound-taskA-primary.md), [fullreviewpackage](../reviews/2026-11-12-authenticated-payload-bound-taskA-review.md), [cleanreview](../reviews/2026-11-12-authenticated-payload-bound-taskA-clean.md).
+
+Sourcebranchfeat/finite-native-cleanup-20261101 exacttip c4c98844bc96538d955d28cc434d25e6b3f66177/tree4d499a8e7f97ac2c4cfd4ed09e51e72a4880b2cc. WF480a9878bac51628b73774c0b81598466a7ed6dc COMPLETEactual5+2INACTIVO/BOTHliteralfalse/manualworkflow_dispatch/noinputs/nopush, no codechangeonshutdown. Reportde4914c550e82b9ae2a663893e7b7121acc8b7f9/314399chars, append-onlyprefixpreserved. Rootfullbody/ref/tree3188protected/main0c9c475b3ebaa970fc11d628b40e50a90cceb727 unchangedverified18:36:38Z. Finalshutdownrefsamec4 andqueued/in_progress/waiting/pending/requested EACH0 at18:38:08Z. No prueba deestebloqueen marcha. No runtimeCloudflareconsultado/mutadohoyporRoot, no asumirclosedglobal/guardpermanente.
+
+## Por qué fue necesario este bloque
+
+OriginalNative43229236340/1 FAILED (R1SDKReferenceabsent/R2capEvents0/R3heldACK2waittimeout), causayreparaciónaúnUNKNOWN. PrimerainspecciónV1 real43261551282 abrióOriginalsoloGitHubyexportódatosseguros. PlanSupplementactual43276435787/1 obtuvoPARTIAL: ambosR1/R2existenpero>16MiB, exactsizes yTODASnuevasmétricasUNKNOWN/null. Primary docs/superpowers/reviews/2026-11-12-reference-supplement-actual-primary.md. PlanviejoCOMPLETO/finalAstrawholeplanreviewCLEAN, permitconsumido, Source415F7restauradoantesnuevoplan. No reeditarlo/repetirlo.
+
+NuevoMAXselectedfile298888337 exactamenteTOTALauthenticatedOriginalplaintext; sharedbasisguard128files/298888337B beforeadditionalreadANDacceptance. ActualfileoverthatTOTAL=>integritycontradiction/rejected/not_examined; missing/knowninvalidpartialsiguenvalidos. Test17MiBcorrectoigualfilapequeña; sparse298888338B+file_readfaultprobórechazoANTESbody. Los17MiBNOacreditanrendimientoatamaño máximo, inputbytesNOpeakRAM. Same10sprojection+validation/15scleanup/5+2outer remain, physicalsettlement/noexpiredcleanup/noautorery.
+
+## Pines para retomar
+
+Spec docs/superpowers/specs/2026-11-12-authenticated-payload-bounded-reference-design.md; plan docs/superpowers/plans/2026-11-12-authenticated-payload-bounded-reference.md (82f543e5). Bindingpreflight docs/superpowers/reviews/2026-11-12-authenticated-payload-bound-preflight.md yTaskAbrief docs/superpowers/briefs/2026-11-12-authenticated-payload-bound-taskA.md (59f79743). Rootplanledger docs/superpowers/progress/2026-11-12-authenticated-payload-bounded-reference.es.md.
+
+Core77002/d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246, ZIP13305/b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d immutable. Currenthelpercd5591be711f253a0f4269ece4abd9bf7ec5b39cc062c78aebd50d72a11c5778/test1503df1943d6bf28d59fbd57186ff565c3cce503342dc4c1db031666d047f631/bootstrap2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1, standaloneverifier40595B/204f829009b1fabe3d241b536e97354e086b08c31b63d9bc5caf8ae0832e8a22 RootreconstructedASDATA(noSourceexecution)matchedruntime. Safecontrolartifact13970844891/2311B/SHA38a08bf25644b9a39931e5b275be491d60c443dc6c0eba450e7d8eff4ee8d1b0, strictRootZIP/CRC/schema/wholemanifest/currentSource/run/codepinsverified.
+
+Originalprivateartifact13949168304/13680188B/SHA8a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5; OriginalSource19789b5f31935e0b5be00cbb24c5f45de2a0100a/tree5c8298022ed85903a8f9d50f598d9c58fbba6f71/run43229236340/attempt1/kindconsumer-failure; sameAADliteral/source-currentinspectoridentityDISTINCT. ExistingkeyONLYGitHubafw-finite-syn-checkpoint/openstep, nonewkey/credential/UI/OTPneededforSYNunlessactualfailureevidence. RootneverdownloadsOriginalcipher/key/plainpayload/privateproducerlogs. OnlyfixedR1/R2extraJSON+unchangedCoreV1projectedpaths, noR3/SQLite/search/SDK/MF/I0/nativeworld/business/Cloudflare/runtime/callback/cron/consumer/Max/mail.
+
+## Próximo paso ALRETOMAR, noejecutarahora
+
+1 Readthischeckpoint/newplanledger, verifySourcec4/ref/code/currentactivity and cleanreview. DoNOTrepeatTaskAkeylesspermit oroldTask2actualpermit, bothconsumed.
+2 Root mayprepareNEWexactTaskBsingleactual5+2release afteruserresumes (existingbroadSYNauthoritypersists; no userbrowserstepcurrentlyrequired). FreshsoleSourceexecutor, onlyevent+twofalseprefixes/runlabel/reportappend, codeBYTEEXACTc4, sameOriginal/key/twoRfilesONLYinsideGitHub. No automaticNative16retry.
+3 Bothterminal=>restoreEXACTF7wf126209B/blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc from093e00793de9a9eac193281a7ec4e55d018a476b, appendcurrentreport/fullref/body/tree3188protected/main/5activecounts0/STOP. RootauditsONLYsmallsafepairandclosedkeylessverifierrecords. Ifmemory/time/invalid/partial, preserveUNKNOWN; noautomaticwiden/retry. Ifmetricsobserved, correlatepublicSourcebeforecausalfix/newNativeentitlement.
+
+AlloperationalReadiness/completePackage/PCoff/globalNativeDrainVerified/sdkNamespaceEmptyVerified false. PC-offfinaltrial andMax remainPENDING. User'sshutdownisapause, notaproductacceptanceclaim. Chavorelayprivateoperations#176 readsince16:36through18:17:35Z:0newcomments/0AFWrequests; nooutboundmessageornewmonitor. No promiseofcontinuation/guardwhilePCoff. Resumeonlyonnewuserinstruction.
