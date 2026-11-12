@@ -426,6 +426,23 @@ export function rewriteBudgetIdentityAccess(original,node,{ast,path,hook,count})
  return node;
 }
 
+// Pinned cleanup source gives work() a local put adapter around the captured transaction leaf.
+function isInitialCleanupPutAdapter(node,ast,path){
+ if(path!=='lib/mcp-qa-finite-initial-cleanup.mjs')return false;
+ const call=node.parent;
+ if(!ts.isCallExpression(call)||call.expression.getText(ast)!=='work'||call.arguments[0]!==node)return false;
+ if(!node.properties.some(p=>ts.isShorthandPropertyAssignment(p)&&p.name.text==='put'))return false;
+ let block=call.parent;
+ while(block&&!ts.isBlock(block))block=block.parent;
+ if(!block)return false;
+ const definitions=block.statements.filter(ts.isVariableStatement)
+  .filter(statement=>statement.declarationList.flags&ts.NodeFlags.Const)
+  .flatMap(statement=>[...statement.declarationList.declarations])
+  .filter(d=>ts.isIdentifier(d.name)&&d.name.text==='put');
+ const wrapper=definitions.length===1?definitions[0].initializer:null;
+ return Boolean(wrapper&&ts.isArrowFunction(wrapper)&&wrapper.getText(ast)==='async(key,value)=>{check();await parent.retain(Reflect.apply(tp,tx,[key,value]));check();}');
+}
+
 export function transformBudgetPreparedSource(source,path,role){
  source=budgetScopeSeams(source,path);
  const selected=nativeDescriptorByPath.has(path)?selectBudgetCallsites(source,path,role):budgetNativeDescriptorProposal.packages.some(p=>p.path===path)?packageSelection(source,path,role):path==='<stdin>'?entrySelection(source):null;
@@ -446,15 +463,17 @@ export function transformBudgetPreparedSource(source,path,role){
  const transactionCallbacks=new Set();
  for(const node of selectedNodes.keys()){
   const shape=callShape(node,ast);
-  const transaction=shape.method==='transaction'||['transaction','native.transaction','nt'].includes(shape.target);
+  const cleanupJournalTransaction=path==='lib/mcp-qa-finite-owner-cleanup-journal.mjs'&&shape.form==='Reflect.apply'&&shape.target==='c.transaction'&&shape.receiver==='c.storage';
+  const transaction=cleanupJournalTransaction||shape.method==='transaction'||['transaction','native.transaction','nt'].includes(shape.target);
   if(!transaction)continue;
   const arg=shape.form==='Reflect.apply'&&ts.isArrayLiteralExpression(node.arguments[2])?node.arguments[2].elements[0]:shape.form==='Function.call'?node.arguments[1]:node.arguments[0];
+  if(cleanupJournalTransaction)assert(arg&&ts.isArrowFunction(arg),'fixed cleanup journal transaction callback');
   if(arg&&(ts.isArrowFunction(arg)||ts.isFunctionExpression(arg)))transactionCallbacks.add(arg);
  }
  const f=ts.factory,id=()=>f.createIdentifier(BUDGET_ID),access=name=>f.createPropertyAccessExpression(id(),name);
  const literal=createBudgetLiteral;
  const hook=(name,args)=>f.createCallExpression(access(name),undefined,args);
- let nativeCalls=0,identityEdges=0,bodyEdges=0,facadeEdges=0,scopeEdges=0,guardEdges=0;
+ let nativeCalls=0,identityEdges=0,bodyEdges=0,facadeEdges=0,scopeEdges=0,guardEdges=0,cleanupPutAdapters=0;
  const closure=expression=>f.createArrowFunction(undefined,undefined,[],undefined,f.createToken(ts.SyntaxKind.EqualsGreaterThanToken),expression);
  const result=ts.transform(ast,[context=>{
   const visit=node=>{
@@ -555,6 +574,7 @@ export function transformBudgetPreparedSource(source,path,role){
    }
    if(ts.isObjectLiteralExpression(original)){
     const names=original.properties.filter(p=>(ts.isMethodDeclaration(p)||ts.isPropertyAssignment(p)&&(ts.isArrowFunction(p.initializer)||ts.isFunctionExpression(p.initializer)))&&p.name&&!ts.isComputedPropertyName(p.name)).map(p=>p.name.getText(ast).replace(/^['"]|['"]$/g,'')).filter(name=>CAPTURE_METHODS.has(name)||name==='fetch'||name==='rpc');
+    if(isInitialCleanupPutAdapter(original,ast,path)){cleanupPutAdapters++;names.push('put');}
     if(names.length){facadeEdges++;return hook('facadeHolder',[node,literal(names)]);}
    }
    if(ts.isBinaryExpression(original)&&original.operatorToken.kind===ts.SyntaxKind.EqualsToken&&(ts.isPropertyAccessExpression(original.left)||ts.isElementAccessExpression(original.left))&&
@@ -580,6 +600,7 @@ export function transformBudgetPreparedSource(source,path,role){
   'lib/mcp-qa-finite-initial-old-guard.mjs':1,
   'lib/mcp-qa-finite-initial-custody-probe.mjs':1
  };
+ assert.equal(cleanupPutAdapters,path==='lib/mcp-qa-finite-initial-cleanup.mjs'?1:0,'fixed local cleanup put adapter');
  assert.equal(scopeEdges,expectedScopes[path]??0,'fixed prepared scope hook count '+role+' '+path);
  const transformed=ts.createPrinter({newLine:ts.NewLineKind.LineFeed}).printFile(result.transformed[0]);result.dispose();sourceAST(transformed,path);
  return {source:"import {budget as "+BUDGET_ID+"} from 'afw:budget-runtime';\n"+transformed,counts:{nativeCalls,identityEdges,bodyEdges,facadeEdges,scopeEdges,guardEdges},selectorCounts:selected?.counts??[],readerSites};

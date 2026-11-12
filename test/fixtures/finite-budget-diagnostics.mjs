@@ -212,17 +212,21 @@ export function createBudgetRuntime(options={}){
   const parentStore=leases.get(parent),currentStore=als.getStore(),store=currentStore?.root===parentStore?.root?currentStore:parentStore;
   if(!store||!nativeObject(child)){incomplete(!store?'descendantStore':'descendantChild');return child;}
   const ref=collector.child(store.root,child,{deadline});
-  if(ref)leases.set(child,immutable({...store,child:ref}));
+  if(ref)leases.set(child,immutable({...store,child:ref,phaseOverlay:undefined}));
   return child;
  };
+ const runWithPhase=(store,value,invoke)=>als.run(immutable({...store,phase:value,phaseOverlay:value}),invoke);
  const run=(lease,invoke)=>{
-  const store=leases.get(lease);if(!store&&als.getStore()?.excluded)return invoke();if(!store)incomplete('runMissingLease');
-  return als.run(store,()=>invoke());
+  const store=leases.get(lease),active=als.getStore();
+  if(!store&&active?.excluded)return invoke();
+  if(!store)incomplete('runMissingLease');
+  if(store&&active?.root===store.root&&active.phaseOverlay)return runWithPhase(store,active.phaseOverlay,invoke);
+  return als.run(store,invoke);
  };
  const phase=(value,invoke)=>{
   const store=als.getStore();
   if(!store||!PHASES.has(value)){incomplete(!store?'phaseStore':'phaseValue');return invoke();}
-  return als.run(immutable({...store,phase:value}),()=>invoke());
+  return runWithPhase(store,value,invoke);
  };
  const guardValue=value=>{const store=als.getStore();if(store?.excluded)return value;if(store?.root)collector.scopeLogical(store.root,store.child,{phase:store.phase,at:now(),reason:'guard'});else incomplete('guardRoot');return value;};
  const fixture=invoke=>als.run(immutable({excluded:true}),()=>invoke());
