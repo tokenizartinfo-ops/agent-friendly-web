@@ -2,7 +2,13 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — 12Nov03:36UTC: core corregido; clasificación de ordinary aún inconclusa
+## CURRENT — 12Nov03:43UTC: A/B clasificado; preparar candidato inactivo y scoped re-review
+
+Root verificó43149728253: A(eaf)/B(f5)109tests cadauno,73pass/36fail,0cancel/skip/todo;40failureevents idénticos(file/line/column/nesting/testNumber/codes/messagehash/tooLarge). Los36fallos de cuatrofiles preceden ESTA ronda, sin causa/preTask1/producción inferidos. RecordercontrolMODELEDoldtimeout1s/new<50ms confirma debilidad modelada delscanner, no payloadreal; A/Bviejoinconcluso preservado. No másordinary/recorder/A-B. Ordinaries completos siguenOPEN/integrationnotclean (ORD-1); los3nativos pendientes no clasificados.
+
+Task1fixround1/5:5open hasta scopedreview. Core f5blobs/tests8QfinalGREEN43145051926 ypreflight intactos. Mismo writer callback_receiver_impl cierra A/B y prepara sólo TEMP INACTIVO/reporte usando exactbaefbody+sharedinventoryhelper, no push/manualsininputs/3jobsfalse; NO actual900s. Briefcurrent últimoaddendum03:43 gobierna. Root despuéspaquete eaf..final y SAMEreviewer budget_task1_review (5hallazgosverbatim+nuevaroturafixsolamente). Task1 NOcomplete/Task2retenida. operationalReadiness=false;completePackage=false;PCoff=false. Owner asleep/nointervenciónantes08Argentina; ningún paso humano necesario.
+
+## Estado anterior — 12Nov03:36UTC: core corregido; clasificación de ordinary aún inconclusa
 
 Task1 fix round1/5 IN_PROGRESS:0addressed/5open hasta re-review acotada. FIX_BASEeaf019aa872709d867aac53d9684ecdf1c21d013. Core final entregadof5f52660d19ec9fc634bbc49558db75582fdaf88 (tree7bc8b997...,3188hojas,TEMPausente enesaentrega); sólo4codefiles+appendreport,3183blobsprotegidos. Tests5ae2d79a/runtime2e911fd4/evidence0d95b161/nativeP1082340b6. REDfinal43141085705 yR4fidelityRED43144954855 preservados; GREENfinal43145051926/1 8/8+syntax/lint/preflight176/130/635/54. NO repetirlos. RevisióncodecambiosU10 preparada en Rootdocs b673fa99 / reviews/2026-11-12-finite-budget-task1-fix1-code-f5f52660.md (blob4dec2869f8aa5c3c664a0fdfa4410d564ed59c72); aún no gate re-review ni Task2.
 
