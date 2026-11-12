@@ -1,11 +1,10 @@
 # AFW — continuidad vigente del circuito nativo
 
-## CURRENT — originalR1/R2/R3 FAIL known; supplemental existing-receipt Task1 active; Native16 pending
+## CURRENT — supplemental Task1 keyless PASS; inactive candidate under independent review; Native16 pending
 
-2026-11-12 17:30 UTC. First actual diagnostic43261551282/1 COMPLETE and Source093/F7 safelyclosed; original R1 SDKReferenceabsent, R2 capEvents0, R3 heldACK2observation timeout. Primary22c526b9/sourcecorrelationf7189511. No proved repair, no Native retry; ownershipprojectioninvalid remains UNKNOWN, notactualcleanupfailure.
+2026-11-12 17:49 UTC. OriginalR1/R2/R3 FAIL known from firstsafeinspection43261551282; Sourceclosed093 preserved before newpreparation. No provedrepair/Native retry; ownershipprojectioninvalid remainsUNKNOWN, notactualcleanupfailure.
 
-New bounded subplan [reference supplement](2026-11-12-readonly-reference-supplement.es.md), spec0db3ca43/planbf5387c3/preflight123cb23a: read only two EXTRA already-preserved R1/R2 receipts after baselineCoreauthentication. Fresh /root/supplement_reader_impl (Solhigh) implementing Task1 under brief3893289f, ONE KEYLESS2+2 qualification; Core91d514/ZIPb36c immutable, new data contract/coordinator bounded10s+cleanup15s. Actualnewprivateprojection Task2 HELD until cleanreview/separateRootrelease. No Sourcebusiness/SDK/budget/CF/keychanges, no useractionneeded. GoalPCoff and Max stillpending, allreadinessfalse.
-
+[Existing-receipt supplement](2026-11-12-readonly-reference-supplement.es.md) Task1 solekeyless43272182415/1 SUCCESS:91Core+24new+16pair+16ZIP controls. Root independentlyvalidatedonlysafe2312Bpair/wholemanifest/currentSource/run/allcontrols/hash. COMPLETEactual5+2candidate Source498791705aa1715da3fb3bf43961e90920b098bc/WF05ca1fbe9eaf3aa7d75e939a28ad9553d7cb0da3 INACTIVE/BOTHfalse/manual/noinputs/nopush; writerSTOPPED. FullBody/ref/tree3188protected/mainunchanged/0active independentlychecked17:48:48Z. Sameexpertreviewer checkingfullspec+code; actualprivateTask2HELD pendingcleanreview/separateRootrelease. Cored514/ZIPb36c unchanged; noprivatecipher/key/SDK/I0/native/CF operation. No useractionneeded. PCoff/Max pending, allreadinessfalse.
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: native fix1 queue-selector repair; ordinary time diagnostic complete
 
 Task1native9COMPLETE7852. Task2native16HELD; formalfix1 partialcoveringf772 passed8Q/F1/F2butfailedF3F4. Closed4f35/TEMPecabeall7manualfalse. Rootexact14640hash+SourceflowprovesDReturnStatementselectorbug; targetedrepairtorecovercorrectinnercheck/+granularallgroupdata/independentprofilesONEcoveringreleased(e39f4256), SAMEwriteractive. Rawproduction/SDK/pins/originalclocksunchanged. InertUNVERIFIEDfull7jobdraftblob67486underreviewsoutsideActions, notrunnableevidence. Nextcoveringallpass→publishupdated7false→SAMEreviewerfixscope3590..head→actualcoherent16→task/globalreviews; noneclaimedcomplete.

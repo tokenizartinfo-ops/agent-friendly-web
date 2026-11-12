@@ -2,12 +2,13 @@
 
 PROJECTAFW; repositorytokenizartinfo-ops/agent-friendly-web/public1347578006; Source/SYN GitHubActions; originGitHubconnector; Sourcebranchfeat/finite-native-cleanup-20261101; allowedONLY2SourcepathsWF+appendreport/ownCAS/exactF7rollback. Rootdocsbranchdocs/finite-pcoff-continuation-20261103 ownsledger/spec/plan. ParentNativeTask2ledger2026-11-07 remainspending; thisisaseparateboundeddiagnosticunit.
 
-## CURRENT — Task1 fresh implementer active; one keyless qualification released; private Task2 held
+## CURRENT — Task1 keyless PASS; COMPLETE actual proposal inactive; independent review active
 
-2026-11-12 17:30 UTC. Fresh /root/supplement_reader_impl (gpt-6.1-sol/high) owns Source Task1 under brief3893289f and Rootdocs5a60124c. Preflight rulings123cb23a resolve HTTP mapping/default-zero semantics, unsafe termination cleanup, and transport-valid partial. Spec0db3ca43/planbf5387c3. SourceBASE093/F7 closed before author starts; prior actors STOP.
+2026-11-12 17:49 UTC. Solekeyless43272182415/1 atc0524de57c4b688c11df67c58bcc72cd3f472870 SUCCESS:91Core+24supplement+16V1pair+16ZIP ALLPASS. Root independent safe2312BZIP/CRC/twoJSON/closedDTO/currentidentity/wholemanifest/91+24orderedIDs/codehash audit PASS. Reference7fb8dea6/tests e279e658/bootstrap2a04ef50; reconstructedverifier40595B/73d5579a matchesruntime. [Primaryproof](../reviews/2026-11-12-reference-supplement-keyless-primary.md). No privatecipher/key/native/SDK/I0 accessed; permitconsumed.
 
-Release: minimal Core-preserving coordinator/projector/new closed envelope, immutable Core d514 and ZIP b36c; retain91+16+16 plus<=24current controls; ONE KEYLESS2+2min attempt, no AFWkey/originalcipher/SDK/native/I0. Failure F7/0activeSTOP, success COMPLETEactual5+2INACTIVE/report/readbacksSTOP for independent review. No actual supplemental private-open permit yet. R1/R2file membership/values unobserved; underlying Native failure cause unproved; all readiness false.
+Source498791705aa1715da3fb3bf43961e90920b098bc/treeb05da0dfee25b37fca3d4d67ef579b6362f49c5d, WF05ca1fbe9eaf3aa7d75e939a28ad9553d7cb0da3 COMPLETEactual5+2INACTIVE/BOTHfalse/manual/noinputs/nopush. Report5adaf9a6 retains233078prefix. Root fullbodies/ref/tree verified3190leaves/3188protected/only2paths, main0c9c475 unchanged, queued/inprogress/waiting/pending/requested all0 at17:48:48Z. Testedhelperbodies/Cored514/ZIPb36c byteidentical. FreshimplementerSTOPPED.
 
+SAMEexpertprequalificationreviewer now reviewing COMPLETE task range BASE093..498, fullvalidatedU10global/logical/reportdiffs andwholefinalcode/spec/plan/preflight/brief under [package](../reviews/2026-11-12-reference-supplement-task1-review-package.md), Rootdocs30f7731d. ActualTask2 HELD pendingcleanreview/separateexactRootrelease. R1/R2membership/values unobserved; OriginalNative43229236340 FAILED, no provedcause/repair, noNative retry. Allreadinessfalse; no userintervention needed.
 ## Preflight scan and Root rulings
 
 | Scope | Producer -> consumer / internal agreement | Finding and ruling |
