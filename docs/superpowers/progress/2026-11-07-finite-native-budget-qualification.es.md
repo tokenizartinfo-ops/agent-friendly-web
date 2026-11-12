@@ -2,12 +2,13 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — Task 2 preparation clean; one coherent native16 run released
+## CURRENT — one Native16 batch active; readonly failed, cause still unknown
 
-2026-11-12 13:35UTC. Task 2: fix round3/5 (1 addressed, 0 open; commits2baae765..872ea434). The same reviewer approved F9 and found no new breakage; priorF1–F8 remain closed. [Review](../reviews/2026-11-12-finite-budget-native-fix-round3-review.md).
-Read-only activation preflight passed13:32:45UTC at Source872ea434/WFexactf7a71/zeroactive. Root independently checked seven held jobs, DAG width3 and existing environment references; live key/clock/replica facts remain unobserved.
-[ONE frozen-source native16 release](../briefs/2026-11-12-finite-budget-native16-single-run.md): only trigger+seven guards/report may change; original code/clocks/custody/Dlineage unchanged. Before-I0 gates, finite7jobs, no replay/repair/retry; exactsafe f7a71 restoration/report/readbacks/STOP after terminal. Source writer may execute only this one batch; actual activation SHA/run still pending.
-Success must be genuine coherent8Q+3R+4D+P1 with0fail/cancel/skip/todo; finalTask2 andGLOBAL296 review still required. O5 post-failure location proposal is read-only, no probe yet. ActualCF/runtime/PCoff pending and readinessfalse.
+2026-11-12 13:54UTC. Actual run43229236340/attempt1/push, frozen Source19789b5f31935e0b5be00cbb24c5f45de2a0100a/tree5c8298022ed85903a8f9d50f598d9c58fbba6f71/WF26ca7518. Root independently checked one activation commit/onlyWF+report, same code, and primary run/jobs.
+Contracts131219969596 passed13:39:03..13:40:10. Native readonly131220486739 failed13:40:18..13:45:39; actualcommandexit1, exact casecounts/cause UNKNOWN. Its failure custody succeeded: encrypted consumer-failure artifact13949168304/13680188B/SHA8a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5, expires19Nov13:45:23Z; runner same-ID authenticated readback reported. No private payload transferred to PC.
+Primary jobs read13:53 confirms positive_prepare131220491777 and reduction_prepare131220487200 remainactive from13:40:18; no downstream jobs yet. Original bounds remain; no timer reset, repair, retry, cancellation or further Source write while active. Actual coherent16 NOTqualified. Source writer lets authorized finite jobs settle, then preserves evidence/restores exactsafe f7a71/report/readbacks/STOP.
+Independent failure_boundaries_impl now READONLY designs a finite AFTER-RUN authenticated receipt inspector on same Source environment/key, no actual decryption/job yet. No new credential or human step. [O5 stack-location proposal](../reviews/2026-11-12-own-import-postfailure-location-readonly.md) preserved but deferred; no O5 code/probe.
+Preparation F1–F9 closed; final Task2/global review pending. All operational/PCoff flagsfalse. Actual provider/runtime UNKNOWN; no CF/main/OAuth/permissions/Max/mail action.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
