@@ -2,10 +2,10 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — Task2 formal fix round3/5 · persisted resource closure finding
+## CURRENT — Task2 formal fix round3/5 · exactRED/GREENPASS / SAME scoped reviewer gate
 
-2026-11-12T13:08Z. SAMEreviewerround2 FULLd9b7..2baa: F2/F5/F8 ADDRESSED, NEWImportantF9 ownershipcomplete cantruewithdisposalUncertaintrue/disposedfalse/archivedfalse whenonlyDprimaryandancillary0. [Reviewverdict](../reviews/2026-11-12-finite-budget-native-fix-round2-review.md). Task2: fix round2/5 (3addressed/1newopen;commitsd9b7..2baa). No out-of-scopeobservations.
-[Round3 originalwriter release](../briefs/2026-11-12-finite-budget-native-fix-round3.md): fixedinertcausalRED first; onlyexactexpectedRED permitsminimalcompleteconditionfix+ONEcoveringGREEN, safeclosedrollbackEXACTf7a71COMPLETE7manualfalse; unexpectedfailureSTOP. SAME7paths/3183protected; newreviewFIX_BASE2baae765. No Native16/MF/I0/main/CF/keys. Alloldfindingsclosed unlessintroducedbreakage. CurrentSource2baaSTOP; futurejobentitlements onlyround3brief. Task2actual16/finalreview/GLOBAL296/realPCoffheld. OwnImport9b4unresolved/O4closed/O5READONLYproposalonly. Readinessfalse.
+2026-11-12T13:23Z. RED43225144081/1 exactpersistedfalsecompletebug thenSAFEclosure3da; conditionalGREEN43225744579/1 Sourcea015 PASS syntaxlint/inactive/invalid/Q8/F1–F8/newownershipreadback/FULL3profiles0/3/3/12blocks. Root ONE902BRED +ONE111751BGREENZIP audits assignedIDs/digests/CRC/completeinventories/context/pins. [Primaryproof](../reviews/2026-11-12-finite-budget-native-round3-primary.md).
+FINALSTOPSource872ea434/tree07413d37/report9315ae53/world5fb78c05/WFEXACTsafeF7a71complete7manualfalse/3183protected/0active. Rootref/fullfiles/reportappend/4commit2filecompleteU10 compare verified. [SAMEreviewerpackage](../reviews/2026-11-12-finite-budget-native-round3-review-package.md) coversFULL2baae..872e/F9+newbreakageONLY. Round3OPENuntilverdict; priorF1–F8closed. No newSourcejob/native16 yet. O5independentROpostfailurecaptureproposalreceived; no code/probeauthorized. Native16/Task2final/GLOBAL296/PCoffpending, readinessfalse.
 
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
