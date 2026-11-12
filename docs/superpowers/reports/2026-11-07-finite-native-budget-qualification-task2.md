@@ -169,3 +169,11 @@ Artefacto seguro `13924387090`, 1182 bytes ZIP, digest `683f5821b26667bbe02d9c63
 Se retira la activación pura restaurando exactamente el workflow manual previo `ecabe4d997869b4316e11810f5a0e2d6e36151c5`, con siete gates false. No se aplicó la corrección F1 ni los cambios F2–F7/M1/M2, no se tocó el fixture Node adicional/persistencia/lib/SDK/pins y no se repite el control. El único código nuevo respecto a BASE es el CLI de control parcial. F2–F7 siguen pendientes explícitos, no RED fabricados por ausencia de funciones.
 
 **STOP_WRITES por fallo inesperado.** Root conserva el siguiente ruling. Native16/I0/MF/SDK authorization/alarm/network/businessCases=0 en este intento; todas las flags de disponibilidad permanecen false.
+
+### Reparación acotada del entorno de control
+
+Root verificó por lectura primaria que el VM carecía de TextEncoder y que la rama D lo usa en __afwFiniteBudgetHash. El SHA256 del literal público fijo `TextEncoder is not defined` coincide EXACTAMENTE con `5174b5810987135b01f2db8a60cecbdf3b8fa9310cf7b3a32495f6dd0b774064`. Por tanto la causa del intento anterior queda probada como defecto del entorno del control, sin reclasificar ese intento como RED causal.
+
+Bajo el brief `5a15920fdd45e2336d1de523283373e85c43e271`, sólo se importa TextEncoder builtin desde node:util y se incorpora al mismo contexto VM. Un precheck de utilidad publica exclusivamente tipos, longitud y digest de un literal público fijo; no ejecuta el adaptador ni crea MF/SDK/Root. Revertir las DOS sustituciones literales de import/contexto recupera exactamente world `1d7f9086d18a219d6178f1dde8172d6a0a3ea6c8`. No se adivinan ni agregan otros globals.
+
+Se autoriza una sola nueva revisión/attempt1 del mismo control F1 causal, sin corregir todavía el adaptador. Si R pasa y D demuestra realmente la pérdida de intercepción/hold se continuará el B1 ya autorizado; cualquier nuevo fallo inesperado obliga otra vez a preservar/retirar/STOP. No hay Q8/custodia/preflights/MF/I0 nativos en este control. La rama O3 independiente no se modifica.

@@ -1039,13 +1039,17 @@ const FIXED_WRAPPER_CONTROL_BODY="\nglobalThis.__controlPromise=(async()=>{\n co
 
 async function runActualBudgetWrapperControl(family){
  assert(['readonly','reduction'].includes(family));
- const {Script,createContext}=await import('node:vm'),{webcrypto}=await import('node:crypto');
+ const {Script,createContext}=await import('node:vm'),{webcrypto}=await import('node:crypto'),{TextEncoder}=await import('node:util');
  const {extendFiniteOwnerCleanup,finiteBudgetSynAdapterSource}=await import('./finite-owner-cleanup.mjs');
  const scaffold="class FiniteClosure{constructor(env,ctx){this.env=env;this.ctx=ctx;}fetch(){throw Error('INERT unused fetch');}}\n export class Initial extends FiniteClosure{ async fetch(request){let actual;actual=super.fetch(request);return actual;} }\n";
  let generated=extendFiniteOwnerCleanup(scaffold);
  const imported="import {observeFiniteReadOnlyWork} from './lib/mcp-qa-finite-stage-work.mjs';\n";assert.equal(generated.split(imported).length-1,1);
  generated=generated.replace(imported,'').replace(' export class Initial extends FiniteClosure{',' class Initial extends FiniteClosure{');
- const context=createContext({Buffer,crypto:webcrypto,performance,setTimeout,clearTimeout,console:{info(){},log(){},error(){}}});
+ const context=createContext({Buffer,TextEncoder,crypto:webcrypto,performance,setTimeout,clearTimeout,console:{info(){},log(){},error(){}}});
+ const utility=new Script("({constructorType:typeof TextEncoder,encodeType:typeof TextEncoder.prototype.encode,bytes:new TextEncoder().encode('SYN-fixed-control-utility')})").runInContext(context,{timeout:100});
+ const utilityProjection={constructorType:utility.constructorType,encodeType:utility.encodeType,literalBytes:utility.bytes.length,literalSha256:hash(utility.bytes)};
+ assert.equal(utilityProjection.constructorType,'function');assert.equal(utilityProjection.encodeType,'function');assert.equal(utilityProjection.literalSha256,hash(Buffer.from('SYN-fixed-control-utility')));
+ await mkdir('output/finite-budget/round1-controls',{recursive:true});await writeFile('output/finite-budget/round1-controls/utility-'+family+'.json',JSON.stringify(utilityProjection,null,2));
  const script=generated+"\nconst __afwFiniteBudgetFamily="+JSON.stringify(family)+";\n"+finiteBudgetSynAdapterSource+"\n"+FIXED_WRAPPER_CONTROL_BODY;
  new Script(script,{filename:'SYN-fixed-actual-wrapper-control.mjs'}).runInContext(context,{timeout:1000});
  let timer;try{return await Promise.race([context.__controlPromise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('SYN inert wrapper control timeout')),3000);})]);}finally{clearTimeout(timer);}
