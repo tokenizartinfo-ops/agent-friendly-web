@@ -619,7 +619,7 @@ function requireOrdinaryObserver(){
 
 
 const fixedControlCountKeys=['childBlocks','work','wait','selectReadonly','selectReduction','queueReadonly','queueReduction','capReadonlyList','capReadonlyGet','capReductionList','capReductionDelete','send','sdk'];
-const fixedControlStages=new Set(['start','complete','wrapper_readonly','wrapper_reduction','observer_child','observer_calls','read_raw','legacy_composition','prepared_validate','baseline_transform','syn_instrument','adjacency_ro','adjacency_d','syn_counts','body_extract','cached_assembly','vm_start','facet_setup','facet_cleanup','vm_hold','vm_boundary','queue_verdict','queue_mutator','ownership','manifest','peer_wait']);
+const fixedControlStages=new Set(['start','complete','wrapper_readonly','wrapper_reduction','observer_child','observer_calls','read_raw','legacy_composition','prepared_validate','baseline_transform','syn_instrument','adjacency_ro','adjacency_d','syn_counts','body_extract','cached_assembly','vm_start','facet_setup','facet_cleanup','vm_hold','vm_boundary','queue_verdict','queue_mutator','ownership','f5_no_adapter','f5_callback_extract','f5_callback_setup','f5_callback_invoke','f5_callback_return','f5_callback_assert','f5_legacy_case','manifest','peer_wait']);
 let fixedControlState=null;
 function fixedControlOwn(value,key){if(!value||typeof value!=='object'||fixedNodeTypes.isProxy(value))return undefined;const d=Object.getOwnPropertyDescriptor(value,key);return d&&Object.hasOwn(d,'value')?d.value:undefined;}
 function fixedControlSafe(value){
@@ -633,7 +633,7 @@ function fixedControlSafe(value){
 }
 function fixedControlError(error){
  const name=fixedControlOwn(error,'name'),code=fixedControlOwn(error,'code'),operator=fixedControlOwn(error,'operator'),message=fixedControlOwn(error,'message');
- const labels=['native continuation original guard adjacency','exact family native statement kind','D original return retain native unchanged','RO original native declaration unchanged','exact two queue statement kinds','eleven cleanup primary blocks plus work/wait subcounts','actual facet native entry current queue bound','legacy queue bodies unchanged','single structural actual SDK settlement sequence','all pinned readers emitted in','fixed prepared scope hook count','exact prepared AST count','actual duplicate SEND or SDK attempts rejected','SYN previous owned disposal uncertain before allocation','SYN fixed job maximum two owned MF'];
+ const labels=['fixed actual callback complete f member premise','fixed original cleanup fixture blob','unique actual ownerReferenceFixture cleanup callback','original cleanup callback f-only closure','fallback original dispose once','actual original callback preserves its own failure control flow','native continuation original guard adjacency','exact family native statement kind','D original return retain native unchanged','RO original native declaration unchanged','exact two queue statement kinds','eleven cleanup primary blocks plus work/wait subcounts','actual facet native entry current queue bound','legacy queue bodies unchanged','single structural actual SDK settlement sequence','all pinned readers emitted in','fixed prepared scope hook count','exact prepared AST count','actual duplicate SEND or SDK attempts rejected','SYN previous owned disposal uncertain before allocation','SYN fixed job maximum two owned MF'];
  return {name:['Error','AssertionError','TypeError','SyntaxError','RangeError'].includes(name)?name:'other',nativeError:fixedNodeTypes.isNativeError(error),code:['ERR_ASSERTION','ERR_MODULE_NOT_FOUND','ERR_INVALID_ARG_TYPE','ERR_SCRIPT_EXECUTION_TIMEOUT'].includes(code)?code:code===undefined?'absent':'other',operator:['==','===','strictEqual','deepStrictEqual','match','ok','throws','rejects'].includes(operator)?operator:operator===undefined?'absent':'other',actual:fixedControlSafe(fixedControlOwn(error,'actual')),expected:fixedControlSafe(fixedControlOwn(error,'expected')),message:typeof message==='string'?{bytes:Buffer.byteLength(message),sha256:hash(message),publicLabel:labels.find(label=>message.includes(label))??'unmatched'}:{type:typeof message}};
 }
 function fixedControlProgress(stage,metrics={}){
@@ -1382,6 +1382,7 @@ async function fixedOriginalFixtureCleanup(){
 async function runFixedNoAdapterControls(){
  const cases=[];
  for(const identity of ['P1','positive_producer','reduction_producer']){
+  fixedControlProgress('f5_no_adapter',{identity,step:'start'});
   const root='output/finite-budget/round1-controls/no-adapter-'+identity,persist=join(root,'source'),bytes=Buffer.from('SYN fixed no-adapter cold bytes');await mkdir(persist,{recursive:true});await writeFile(join(persist,'native.bin'),bytes);
   const trace=[];let touched=0,disposed=0,captured=0,cleaned=0,record;
   const value=await withFixedBudgetOwner(identity,join(root,'preserved'),async()=>{
@@ -1391,6 +1392,7 @@ async function runFixedNoAdapterControls(){
    record.attachFixture(fixture);record.attachMiniflare({async dispose(){disposed++;trace.push('dispose');}});
    registerFixedOwnedCleanup(()=>fixture.cleanup());return {};
   });
+  fixedControlProgress('f5_no_adapter',{identity,step:'assert',adapterTouches:touched,disposed,captured,cleaned,archived:record.archived,phases:record.phases});
   assert.equal(touched,0);assert.equal(disposed,1);assert.equal(captured,1);assert.equal(cleaned,1);assert.equal(record.archived,true);assert.equal(record.events.filter(event=>event==='archived').length,1);assert(trace.indexOf('capture')<trace.indexOf('dispose'));assert(trace.indexOf('dispose')<trace.indexOf('delete'));assert((await readFile(join(record.archive.path,'native.bin'))).equals(bytes));await assert.rejects(()=>readFile(join(persist,'native.bin')),{code:'ENOENT'});
   assert.equal(value.ownership.complete,true);assert(record.phases.length===2&&record.phases.every(phase=>phase.status==='not_applicable'&&phase.reason==='case_identity'));
   cases.push({identity,adapterTouches:touched,originalDisposeAttempts:disposed,terminalCaptures:captured,originalCleanupCalls:cleaned,coldArchiveVerified:true,deletedAfterArchive:true,phaseEvidence:record.phases});
@@ -1398,10 +1400,11 @@ async function runFixedNoAdapterControls(){
  return cases;
 }
 async function runFixedActualCleanupControls(){
- const extracted=await fixedOriginalFixtureCleanup(),{Script,createContext}=await import('node:vm'),cases=[];
+ fixedControlProgress('f5_callback_extract',{step:'start'});const extracted=await fixedOriginalFixtureCleanup(),{Script,createContext}=await import('node:vm'),cases=[];fixedControlProgress('f5_callback_extract',{step:'complete',callback:extracted.proof});
  for(const scenario of ['normal','preassignment','ancillary']){
+  fixedControlProgress('f5_callback_setup',{scenario,step:'start'});
   const root='output/finite-budget/round1-controls/actual-callback-'+scenario,persist=join(root,'source'),bytes=Buffer.from('SYN actual callback cold bytes');await mkdir(persist,{recursive:true});await writeFile(join(persist,'native.bin'),bytes);
-  const trace=[],primary=Error('SYN preassignment original'),rpcError=Error('SYN legacy RPC cleanup'),callbackError=Error('SYN independent cleanup');let alive=true,disposed=0,cleaned=0,record,actual;
+  const trace=[],primary=Error('SYN preassignment original'),rpcError=Error('SYN legacy RPC cleanup'),callbackError=Error('SYN independent cleanup');let alive=true,disposed=0,cleaned=0,record,actual;const callbackOutcomes=[];
   try{await withFixedBudgetOwner('R1',join(root,'preserved'),async()=>{
    record=beginFixedBudgetOwnedAllocation();record.attachPersist(persist);
    const fixture={budgetEpochs:[],stub:{
@@ -1412,11 +1415,22 @@ async function runFixedActualCleanupControls(){
     async restoreMethods(){assert(alive);trace.push('legacy-methods-restore');}
    },async captureBudgetEpoch(reason){assert(alive);trace.push('capture:'+reason);fixture.budgetEpochs.push({reason,role:'QA',epoch:0});},
    async cleanup(){cleaned++;trace.push('cleanup');assert.equal(await record.beforeDelete(),true);assert(record.archived);trace.push('delete');await rm(persist,{recursive:true});}};
-   record.attachFixture(fixture);record.attachMiniflare({async dispose(){assert(alive);disposed++;trace.push('dispose');alive=false;}});
-   const context=createContext({__fixedOwnedFixture:fixture});const callback=new Script('(function(f){return '+extracted.source+';})(__fixedOwnedFixture)').runInContext(context,{timeout:1000});assert.equal(typeof callback,'function');registerFixedOwnedCleanup(callback);
+   record.attachFixture(fixture);const inertMF={async dispose(){assert(alive);disposed++;trace.push('dispose');alive=false;}};record.attachMiniflare(inertMF);fixture.mf=record.mf;
+   const setup={sameMF:fixture.mf===record.mf&&fixture.mf===inertMF,sameWrappedDispose:fixture.mf.dispose===record.mf.dispose,ownerReferenceControl:typeof Object.getOwnPropertyDescriptor(fixture.stub,'ownerReferenceControl')?.value==='function',firstConnectionRestore:typeof Object.getOwnPropertyDescriptor(fixture.stub,'firstConnectionRestore')?.value==='function',restoreMethods:typeof Object.getOwnPropertyDescriptor(fixture.stub,'restoreMethods')?.value==='function',captureBudgetEpoch:typeof Object.getOwnPropertyDescriptor(fixture,'captureBudgetEpoch')?.value==='function',dispose:typeof Object.getOwnPropertyDescriptor(fixture.mf,'dispose')?.value==='function',cleanup:typeof Object.getOwnPropertyDescriptor(fixture,'cleanup')?.value==='function'};
+   fixedControlProgress('f5_callback_setup',{scenario,step:'before_registration',setup});assert(Object.values(setup).every(Boolean),'fixed actual callback complete f member premise');
+   const context=createContext({__fixedOwnedFixture:fixture});const callback=new Script('(function(f){return '+extracted.source+';})(__fixedOwnedFixture)').runInContext(context,{timeout:1000});assert.equal(typeof callback,'function');
+   registerFixedOwnedCleanup(async()=>{
+    fixedControlProgress('f5_callback_invoke',{scenario,setup});let originalError=null,observerError=null;
+    try{await callback();}catch(error){originalError=error;}
+    const outcome={scenario,originalError:originalError===null?null:fixedControlError(originalError)};callbackOutcomes.push(outcome);
+    try{fixedControlProgress('f5_callback_return',outcome);}catch(error){observerError=error;ownedFailure(record,'control_progress',error);}
+    if(originalError!==null)throw originalError;if(observerError!==null)throw observerError;
+   });
    if(scenario==='ancillary')registerFixedOwnedCleanup(async()=>{trace.push('independent-callback');throw callbackError;});
    if(scenario!=='normal')throw primary;return {};
   });}catch(error){actual=error;}
+  const savedOutcome=actual&&typeof actual==='object'?fixedBudgetOwnerErrors.get(actual):null;
+  fixedControlProgress('f5_callback_assert',{scenario,disposed,cleaned,archived:record?.archived??false,actualError:actual===undefined?null:fixedControlError(actual),operationPrimaryMatched:actual===primary,operationPrimary:savedOutcome?.primary?fixedControlError(savedOutcome.primary):null,cleanupErrors:savedOutcome?.failures.map(value=>({phase:value.phase,error:fixedControlError(value.error)}))??[],callbackOutcomes});
   assert.equal(disposed,1);assert.equal(cleaned,1);assert.equal(record.archived,true);assert(trace.indexOf('legacy-release')<trace.indexOf('dispose'));assert(trace.indexOf('legacy-first-restore')<trace.indexOf('dispose'));assert(trace.indexOf('capture:before-fixture-dispose')<trace.indexOf('dispose'));assert(trace.indexOf('capture:terminal-owned-before-dispose')<trace.indexOf('dispose'));assert(trace.indexOf('dispose')<trace.indexOf('delete'));assert((await readFile(join(record.archive.path,'native.bin'))).equals(bytes));
   if(scenario==='normal'){assert.equal(actual,undefined);assert(trace.indexOf('legacy-methods-restore')<trace.indexOf('dispose'));}
   else{assert.equal(actual,primary);const saved=fixedBudgetOwnerErrors.get(primary);assert.equal(saved.primary,primary);if(scenario==='ancillary'){assert.equal(saved.failures.length,2);assert(saved.failures.some(value=>value.error===rpcError));assert(saved.failures.some(value=>value.error===callbackError));assert(!trace.includes('legacy-methods-restore'),'actual original callback preserves its own failure control flow');}else assert.equal(saved.failures.length,0);}
@@ -1429,6 +1443,7 @@ async function runFixedActualCleanupControls(){
 async function runFixedOwnershipControls(){
  const results=[];
  for(const scenario of ['normal','preassignment','multiple_cleanup']){
+  fixedControlProgress('f5_legacy_case',{scenario,step:'start'});
   const root='output/finite-budget/round1-controls/ownership-'+scenario,persist=join(root,'source');await mkdir(persist,{recursive:true});await writeFile(join(persist,'native.bin'),'SYN cold database bytes');
   const trace=[],primary=Error('SYN original preassignment'),releaseError=Error('SYN release'),restoreError=Error('SYN restore'),disposeError=Error('SYN dispose');let actual,record;
   try{
@@ -1441,6 +1456,7 @@ async function runFixedOwnershipControls(){
     if(scenario==='preassignment'||scenario==='multiple_cleanup')throw primary;return {caseName:null};
    });
   }catch(error){actual=error;}
+  fixedControlProgress('f5_legacy_case',{scenario,step:'assert',actualError:actual===undefined?null:fixedControlError(actual),primaryMatched:actual===primary,disposed:record.disposed,archived:record.archived,ancillaryCount:record.failures.length});
   assert(trace.indexOf('epoch')<trace.indexOf('dispose'));assert(trace.includes('release')&&trace.includes('restore')&&trace.includes('cleanup-one')&&trace.includes('cleanup-two'));
   if(scenario==='normal'){assert.equal(actual,undefined);assert.equal(record.archived,true);assert((await readFile(join(record.archive.path,'native.bin'))).equals(await readFile(join(persist,'native.bin'))));assert(trace.includes('delete-after-archive'));}
   else{assert.equal(actual,primary);const saved=fixedBudgetOwnerErrors.get(actual);assert.equal(saved.primary,primary);if(scenario==='multiple_cleanup'){assert(saved.failures.some(f=>f.error===releaseError));assert(saved.failures.some(f=>f.error===restoreError));assert(saved.failures.some(f=>f.error===disposeError));assert.equal(saved.failures.length,5);}else{assert.equal(saved.failures.length,0);assert.equal(record.archived,true);}}
