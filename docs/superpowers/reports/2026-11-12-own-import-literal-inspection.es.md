@@ -315,3 +315,20 @@ Tras terminal/metadata/ref congelado y aceptación Root se restaura EXACTAMENTE 
 Commit de cierre separado del run: padrebc176, expected_sha exacto, force=false, [skip ci]. Contrato externo posterior verifica ref/commit/árbol completo3191/no truncado, tres archivos completos, helperf476, workflowaf862, prefijo de informe intacto, sólo delta permitido, exactamente un run/attempt1 terminal y0jobs activos. Los hashes propios finales de informe/head/tree/CAS efectivo van fuera del cuerpo, sin autorreferencia.
 
 STOP_WRITES. Sola inspección consumida e incomplete; ninguna autorización para otro job o aumento de cap. Sólo una evaluación READONLY posterior podrá proponer un presupuesto de parse medido y distinguir construcciones de nodos/nodos únicos/heap/tiempo bajo nueva decisión Root. operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## Checkpoint de apagado — enmienda de cap PARCIAL, inactiva y sin revisión
+
+El owner debe apagar el equipo durante una hora. Se detuvo inmediatamente la implementación nueva y toda prueba/job. Se conserva sólo el borrador ya escrito en RAM y esta nota de estado, dentro de las rutas diagnósticas aprobadas. No es una enmienda terminada ni permiso de ejecución.
+
+BASEbc0d7382b1a3c233a77aa2ae0baa7b87a50e9e7e/treefa01aec5255327569afb8e819c20413d21271d75; workflow se mantiene EXACTOaf862de67987090a3b0e4debc528a0f9abff0020/manual/literal false/sin inputs. Único run previo43189735097/1 consumido y terminal; ninguna ejecución adicional autorizada.
+
+Requisitos de la preparación leídos en Rootdocs279b33f83bedd251c096b538d9ee404665abdcef: brief51be52b18f8d2b24ad7ba84416e687f10c2066a0, spec5b4f14d962d043f2924d1247f4f0143ff606e068, plan9cd4dc8dc643cfb26b08e60ea3becb26ef82a4f3. Auditoría original cf6f1fef139286da1563d59f036627629ea3948e leída.
+
+Borrador de helper guardado: 33529bytes, blobe038585284fdf266be0d885dc15357cfddfd6830, SHA-256ca187bcddcaf408c305331d306b03d82fa56337a524cd72abd2be16f414a29c1. Contiene límites separados600000allocationAttempts/600000uniqueVisitAttempts con completions separadas, progreso fuera del try del hijo y UNKNOWN explícito si no hay evidencia terminal; flag fijo --max-heap-size=256 y gate futuro heap_size_limit<=268435456 (sólo V8, nunca RSS/buffers/esbuild); pin exacto emisión2111553/SHA2b2334f3bb333d13b6e7a6238fe8091a681a986d233fc1253157e64bdbd0f2f2 antes de parse. Captura/preservación de progreso incluye fallos manejados, sin canales nuevos.
+
+Antes de la orden SAVE/CLOSE se verificó sólo gramática del borrador en SourceTextModule sin evaluate/import y comparación textual: build literal/call, privacidad, fold y los siete controles existentes permanecen exactos. No se ejecutaron nuevos controles numéricos de frontera, heap flags, Acorn, proyecto, npm, build, tests ni jobs. No se afirma que600k o256MiB basten.
+
+PENDIENTE al retomar: completar/verificar metadata de contadores/límites/progreso fatal y cerramiento DTO; preparar paquete BASE..checkpoint para SAME-reviewer; sólo después de revisión y nueva liberación Root podría existir otra inspección. No repetir el run anterior, aumentar caps por inferencia ni activar al retomar. Este checkpoint es PARTIAL_DRAFT_UNREVIEWED; las lecturas finales de head/tree/blobs/ref/cero activos se entregan externamente, no por autorreferencia.
+
+El prefijo completo del informe37f0195d se conserva. Sólo helper+este APPEND cambian; workflow y los otros3189blobs/modos permanecen intactos. Commit [skip ci], CAS exacto sin force. STOP_WRITES después de checkpoint/readbacks; operationalReadiness=false; completePackage=false; PCoff=false.
