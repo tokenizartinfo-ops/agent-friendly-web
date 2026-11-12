@@ -2,11 +2,11 @@
 
 PROJECTAFW; repositorytokenizartinfo-ops/agent-friendly-web/public1347578006; Source/SYN GitHubActions; originGitHubconnector; Sourcebranchfeat/finite-native-cleanup-20261101; allowedONLY2SourcepathsWF+appendreport/ownCAS/exactF7rollback. Rootdocsbranchdocs/finite-pcoff-continuation-20261103 ownsledger/spec/plan. ParentNativeTask2ledger2026-11-07 remainspending; thisisaseparateboundeddiagnosticunit.
 
-## CURRENT — Task2 COMPLETE/PARTIAL: both R1/R2 oversize; exactF7 closed; no metrics inferred
+## CURRENT — PLAN COMPLETE/PARTIAL, finalreview CLEAN; no further permit
 
-2026-11-12 18:11 UTC. Soleactual43276435787/1 SUCCESS atdfa0ec1; safeartifact13971740416/2921B/d1882379... RootstrictZIP/envelope/nestedOriginalinspection/currentidentity/wholemanifestauditPASS. BOTHrequestedR1/R2files exist butexceed16MiB; rowstatusesoversize, ALLmetricsUNKNOWN/null. Exactfilesizesunobserved. Authenticatedplaintexttotal128files/298888337B. [Primaryproof](../reviews/2026-11-12-reference-supplement-actual-primary.md). Sourceactivationbodyunchanged; permitCONSUMED/no repeat.
+2026-11-12 18:26 UTC. FinalAstrawholeplanreview0newfindings [closure](../reviews/2026-11-12-reference-supplement-plan-final-clean.md). Actual43276435787/1observedbothR1/R2oversize>16MiB/allnewmetricsUNKNOWN, authenticatedtotal128files/298888337B. Rootprimarysafe2921B/schema/hash/wholemanifest/currentidentityauditPASS. Source41520e037d80e6a658e92932709cd1df11e13c39 exactF7/onlyreportchanged/mainprotected/0active18:11:26Z; permitsconsumed/actorsSTOPPED. No SDKcause/repair/Native/PCoffqualification.
 
-FinalSource41520e037d80e6a658e92932709cd1df11e13c39/WFexactF7f7a71f1a/report4b7d4c11, complete7manual/noinputs/nopush/all7false. Rootfullbodies/ref/tree/protected3188/mainunchanged/5activecounts0 verified18:11:26Z. ONLYreportdiffersfromBASE093; executorsSTOPPED. Task1cleanafterfix1; Task2diagnosticCOMPLETEwithPARTIALdata, no SDKcause/repair/Native/PCoffproof. Noautomaticcapincrease/privateopenretry; RootevaluatingNEWboundedinputdesignbasedonobservedoversizeandknownauthenticatedpayloadtotal. Allreadinessfalse, no useractionneeded.
+NEWseparate [authenticated-payload-boundplan](2026-11-12-authenticated-payload-bounded-reference.es.md) preflightaccepted andTaskAKEYLESSpreparationreleased59f79743 toFRESHsole /root/bounded_reference_impl. NoOriginalactualreadpermitteduntilnewcandidate/independentreview/separateTaskBrelease. Thisclosedplanisnotreopened; allreadinessfalse.
 ## Preflight scan and Root rulings
 
 | Scope | Producer -> consumer / internal agreement | Finding and ruling |

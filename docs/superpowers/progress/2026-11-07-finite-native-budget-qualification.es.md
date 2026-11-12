@@ -2,11 +2,11 @@
 
 PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web/public1347578006; ENVIRONMENT SOURCE/SYN GitHub+Actions; ORIGIN GitHubconnector; RESOURCE_TYPE Sourcebranch; RESOURCE_ID feat/finite-native-cleanup-20261101; ALLOWED_ACTION test-onlydiagnostics/qualification under explicitplan; ROLLBACK ownchangesonly/CAS/readback/noresetforce. Rootdocs docs/finite-pcoff-continuation-20261103 owns thisledger. This is a NEW planworkspace, not the completed owner-restoration ledger.
 
-## CURRENT — actual supplement safelyclosed/PARTIAL: both receipts >16MiB; Native16 pending
+## CURRENT — NEW authenticated-payload bound TaskA keyless preparation active; Native16 pending
 
-2026-11-12 18:11 UTC. [Supplementledger](2026-11-12-readonly-reference-supplement.es.md) carriesprimaryproof. ONEactual43276435787/1 atdfa0ec1 SUCCESStransport, safeartifact13971740416/2921B/d1882379... Rootstrictschema/hash/contextauditPASS. BothR1/R2receipts exist but exceed16MiBreadcap; ALLnewmetricsUNKNOWN/null, cause/repairunproved. Knownauthenticatedplaintext128files/298888337B. No automaticcapincrease/retry.
+2026-11-12 18:26 UTC. Prior [supplementplan](2026-11-12-readonly-reference-supplement.es.md) COMPLETE/PARTIAL/finalreviewCLEAN: actual43276435787bothRreceiptsoversize>16MiB/allmetricsUNKNOWN, authenticatedOriginal128files/298888337B, exactF7closedSource415/mainprotected/0active18:11Z. Oldpermitsconsumed, no originalNative/SDKrepairorPCoffproof.
 
-Source41520e037d80e6a658e92932709cd1df11e13c39 restoredEXACTF7f7a71f1a/manual/noinputs/nopush/7false; report4b7d4c11appendonly. Rootref/fullbodies/tree3188protected/mainunchanged/0activeverified18:11:26Z, executorSTOPPED. CurrentdiagnosticplanTasks1+2complete butpartialdata; RootevaluatingNEWboundedread proposal, notNative replay. OriginalNativeFAILED/PCoff/Maxpending/allreadinessfalse. No userinterventionneeded.
+NEW [boundedreferenceplan](2026-11-12-authenticated-payload-bounded-reference.es.md) preflightaccepted: fixedfileMAX298888337+sharedauth128/298888337gate, globalcapcontradictionrejected, ordinarymissing/invalidpartialretained; same10/15s/Core/ZIP/outputscope. Fresh /root/bounded_reference_impl TaskAONLYunderbrief59f79743, ONEKEYLESS2+2 coveringattempt, noenv/key/Originalcipher/SDK/I0. FailureF7/0activeSTOP; successCOMPLETEinactiveactual5+2forindependentreview; TaskBactualHELD. No useractionneeded; allreadinessfalse.
 ## Prior checkpoint — 2026-11-12 08:37:10 UTC: proven D-return selector repair active; native16 HELD
 
 Task1COMPLETE7852/native9/cleanreviewpreserved; no replay. Task2formalfixround1/5 active(SAMEbudget_native_fixture_impl). ValidcausalF1RED43177259207/1/source81d46d69/job131044418790/art13924766451/1301B/SHA7ab58670… verifiedINDEPENDENTLYbyRootpublicsafeZIPaudit(e75a11f9 @6108a686): Rheld2 vsDbase2/observer0/held0/outward2, utilityready/noMF/I0. PriorRED431761 setupTextEncodermissingwasinvalid/recordednotcounted; narrowbuiltinVMrepairprovenbyexact5174hash.
