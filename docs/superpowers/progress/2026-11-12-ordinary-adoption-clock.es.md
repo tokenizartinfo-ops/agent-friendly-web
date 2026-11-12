@@ -1,0 +1,7 @@
+# SDD ledger — plan: docs/superpowers/plans/2026-11-12-ordinary-adoption-clock.md
+
+2026-11-12 07:20:20 UTC. Rootcreatedisolatedbranchdiag/afw-adoption-clock-20261112 fromimmutablef5afteremptycollisionquery/refreadback. CurrentTask1PREFLIGHT/PREPARATIONnotstarted; no runsorproductchanges. NativeSource3590heldinindependentplan; no overlap/nativeclock.
+
+Ruling: ownerexplicitcontinuousAFWdiagnosticdelegationincludesroutineSYNplan choices and isolatedcloudwork, so proceedwithoutanewplanningquestionwhileownerasleep — nosecurityscope, keys/runtime/permissions oractualSourceexpirychange — costifwrongboundedreversibleprivatefixturepreparation. Ruling: this is a new causallydistinct current-vs-historicalcomparisonafterO2provedexpiryinconsistency, notrerunofconsumedO2/no retryentitlement. BfullPASSunknown; no main/lib/receipt/pinmodification. A/Bonebehaviorvariablewithcommonobservation. Rootownsledger/review, freshwriteronlydiagthreepaths.
+
+Preflightcoveragefiveclasseschecked; specplaninterfacesconsistent; no productfeatureorsecondsubsystem/ownimport included. Actualf5treefullSHA mustverifyprimary beforefilewriting ratherthantrusthumantranscription. Freshmidfloorimplementationpreparationseatnext; SourcewriterB0readonlydisjointandRootonlyRootdocs. No parallelnativejobs.
