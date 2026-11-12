@@ -1,5 +1,5 @@
 name: AFW finite budget qualification
-run-name: AFW callback receiver red pure ${{ github.sha }}
+run-name: AFW callback receiver green pure ${{ github.sha }}
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -62,7 +62,7 @@ jobs:
           import assert from 'node:assert/strict';
           import {readFileSync,writeFileSync} from 'node:fs';
           import {join} from 'node:path';
-          const env=process.env,stage='red',out=join(env.RUNNER_TEMP,'afw-pure-public');
+          const env=process.env,stage='green',out=join(env.RUNNER_TEMP,'afw-pure-public');
           const tap=readFileSync(join(env.RUNNER_TEMP,'afw-pure-private/tests.tap'),'utf8');
           assert(Buffer.byteLength(tap)<=256*1024);
           const expected={3:'cold-C original strict callback receiver'};
@@ -79,11 +79,37 @@ jobs:
            const frame=all.match(/finite-budget-diagnostics\.test\.mjs:(\d+):(\d+)/g)?.at(1)??null;
            failures.push({q:Number(q),confirmed,code,frame});causal&&=confirmed;
           }
-          const wanted=stage==='red'?failures.length===1&&failures[0].q===3&&env.AFW_EXIT==='1':failures.length===0&&env.AFW_EXIT==='0';
+          const wanted=stage==='red'?failures.length>0&&env.AFW_EXIT==='1':failures.length===0&&env.AFW_EXIT==='0';
           const valid=causal&&wanted&&counts.tests===8&&counts.fail===failures.length&&counts.pass===8-counts.fail&&counts.cancelled===0&&counts.skipped===0&&counts.todo===0;
           const result={stage,source:env.GITHUB_SHA,run:env.GITHUB_RUN_ID,attempt:env.GITHUB_RUN_ATTEMPT,exit:Number(env.AFW_EXIT),counts,failures,valid,I0Opened:false,nativeExecutionProduced:false};
           writeFileSync(join(out,'result.json'),JSON.stringify(result));console.log('AFW_PURE '+JSON.stringify(result));
           if(valid){writeFileSync(join(out,'tests.tap'),tap);console.log(tap);}else{console.log('unexpected pure gate');process.exitCode=1;}
+          NODE
+      - name: Check syntax and lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(test/fixtures/finite-budget-world.mjs test/fixtures/finite-budget-diagnostics.mjs test/finite-budget-diagnostics.test.mjs)
+          for file in "${files[@]}"; do node --check "$file"; done
+          npx --no-install eslint "${files[@]}"
+      - name: Verify exact compilation before I0
+        shell: bash
+        run: |
+          set -euo pipefail
+          node test/fixtures/finite-budget-world.mjs preflight-budget >"$RUNNER_TEMP/afw-pure-private/preflight.log" 2>&1 || { echo preflight_failed; exit 1; }
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync,writeFileSync} from 'node:fs';
+          const p=JSON.parse(readFileSync('output/finite-budget/pure/preflight.json','utf8'));
+          assert.equal(p.source,process.env.GITHUB_SHA);assert.equal(p.run,process.env.GITHUB_RUN_ID);assert.equal(p.attempt,process.env.GITHUB_RUN_ATTEMPT);
+          assert.equal(p.I0Opened,false);assert.equal(p.nativeExecutionProduced,false);
+          const rows=[...p.inputs.M,...p.inputs.QA];
+          const d=JSON.parse(readFileSync('test/fixtures/finite-budget-descriptors.json','utf8'));
+          const paths=d.sourceDescriptors.length,groups=d.sourceDescriptors.reduce((sum,entry)=>sum+entry.selectors.length,0),sites=rows.flatMap(entry=>entry.readerSites.map(site=>site.id));
+          assert.equal(paths,130);assert.equal(groups,635);assert.equal(sites.length,54);assert.equal(new Set(sites).size,54);
+          const observations={roles:['M','QA'],inputs:rows.length,paths,groups,readerSites:sites.length,I0Opened:false,nativeExecutionProduced:false,syntax:true,lint:true};
+          console.log('AFW_PREFLIGHT '+JSON.stringify(observations));
+          const out=process.env.RUNNER_TEMP+'/afw-pure-public/result.json',r=JSON.parse(readFileSync(out,'utf8'));writeFileSync(out,JSON.stringify({...r,preflight:observations}));
           NODE
       - name: Seal pure TAP and source-bound outcome
         id: pure_seal

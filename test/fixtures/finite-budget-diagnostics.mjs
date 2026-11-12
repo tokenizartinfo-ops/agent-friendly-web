@@ -215,13 +215,13 @@ export function createBudgetRuntime(options={}){
   if(ref)leases.set(child,immutable({...store,child:ref,phaseOverlay:undefined}));
   return child;
  };
- const runWithPhase=(store,value,invoke)=>als.run(immutable({...store,phase:value,phaseOverlay:value}),invoke);
+ const runWithPhase=(store,value,invoke)=>als.run(immutable({...store,phase:value,phaseOverlay:value}),()=>invoke());
  const run=(lease,invoke)=>{
   const store=leases.get(lease),active=als.getStore();
   if(!store&&active?.excluded)return invoke();
   if(!store)incomplete('runMissingLease');
   if(store&&active?.root===store.root&&active.phaseOverlay)return runWithPhase(store,active.phaseOverlay,invoke);
-  return als.run(store,invoke);
+  return als.run(store,()=>invoke());
  };
  const phase=(value,invoke)=>{
   const store=als.getStore();
