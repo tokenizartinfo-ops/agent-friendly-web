@@ -1,8 +1,10 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-12-r2-last-child.md
 
-## CURRENT — Task1 GREEN and inactive; independent review pending; Task2 HELD
+## CURRENT — Task1 fix round1/5 released; actual Task2 HELD
 
-2026-11-12. Source6c4b13c2/WF1bc698f1 bothfalse5+2/manual/noinputs/nopush. ExactlyoneKEYLESS43299396438/1 BOTHsuccess; Core91+reference40+pair16+ZIP16 PASS. Root independently safeZIP/wholemanifest/currentidentity/40inventory/modulehashes/protected3188/reportappend/main/0active checked. [Fullreviewpackage](../reviews/2026-11-12-r2-last-child-task1-package.md) includes logicalfullWFpatch and globalfullreportpatch; GitHub globalWFpatch omitted and never claimedcomplete. ImplementerSTOPPED. Allreadinessfalse, no Original/private/nativeexecution inTask1. ActualTask2HELD pendingcleanindependentreview+separateRootrelease. Record1728withoutLF/1729withLF; conservativeworst1985withLF supersedespreflight1972estimate.
+2026-11-12 20:15UTC. Independent review0Critical/1Important/1Minor at6c4b13c2. [Finding/ruling](../reviews/2026-11-12-r2-last-child-task1-review.md): R2oversize negative shadowed by stalecertificate; productioncheckpresent, bindingqualificationgapaccepted. [Fix1brief](../briefs/2026-11-12-r2-last-child-task1-fix1.md) resumesoriginalimplementer for SAMEcontrol+pinsonly, oneDISTINCTkeyless2+2 newsource/attempt1, noOriginal/runtime/native. Priorrunconsumed/notretry. PASSinactive5+2/newscopedreview; failureF7/0activeSTOP. Task2stillHELD. Allreadinessfalse.
+
+Task1: minor (deferred): positive real fixed-file R2→reader→coordinator seam fixture absent. Finalwholeplanreview must triage; noobservedlogicdefect, notpartofround1.
 
 ## Prior proposal checkpoint
 
