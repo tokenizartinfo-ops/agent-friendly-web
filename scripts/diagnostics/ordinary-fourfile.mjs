@@ -206,7 +206,7 @@ export default async function* reporter(source){
  yield Buffer.byteLength(text)<=MAX_SAFE?text+'\n':JSON.stringify({purpose:state.purpose,status:'safe_output_cap',...flags})+'\n';
 }
 function git(cwd,args){const r=spawnSync('git',args,{cwd,encoding:'utf8',timeout:10000,maxBuffer:2097152,env:{PATH:process.env.PATH,HOME:process.env.RUNNER_TEMP,GIT_CONFIG_NOSYSTEM:'1'}});if(r.status!==0)reject();return r.stdout;}
-function tuples(raw){return raw.split('\0').filter(Boolean).map(x=>{const m=/^([0-9]{6}) blob ([a-f0-9]{40})\t([^\n]+)$/.exec(x);if(!m||m[4].startsWith('/')||m[4].split('/').includes('..'))reject();return {mode:m[1],sha:m[2],path:m[4]};});}
+function tuples(raw){return raw.split('\0').filter(Boolean).map(x=>{const m=/^([0-9]{6}) blob ([a-f0-9]{40})\t([^\n]+)$/.exec(x);if(!m||m[3].startsWith('/')||m[3].split('/').includes('..'))reject();return {mode:m[1],sha:m[2],path:m[3]};});}
 async function inventory(root,leaves){
  const rows=[];for(const leaf of leaves){const p=join(root,leaf.path),s=await lstat(p);if(!s.isFile()||s.isSymbolicLink()||((s.mode&0o111)!==0)!==(leaf.mode==='100755'))reject();const bytes=await readFile(p);if(blob(bytes)!==leaf.sha)reject();rows.push([leaf.path,leaf.mode,leaf.sha]);}
  return hash(JSON.stringify(rows));

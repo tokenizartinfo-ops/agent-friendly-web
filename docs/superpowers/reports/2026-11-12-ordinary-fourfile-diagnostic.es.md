@@ -247,3 +247,78 @@ Este apéndice constituye un segundo commit documental sólo dentro del tercer p
 Self-review final del autor: ninguna reparación de producto; A/B comparten seams y cambios de seguridad; los dos false permanecen; Source/test f5 y workflow real se distinguen; no hubo helpers/reviewer/subagentes ni contactos con el writer de Source. Root conserva la revisión independiente y decisión de ejecución. No se declara que el harness esté cualificado por esta inspección estática.
 
 **STOP_WRITES al cerrar el readback de este apéndice. Cero jobs despachados. Preparación terminada; ejecución y cualificación pendientes.**
+
+
+## ORD-1 — formal fix round 1/5 (preparación, sin ejecución cloud)
+
+FIX_BASE `f143b866840a6d862ad63c4691c0700fa03b14e5`, árbol `74dd2255bbe224c199b7ed23fce26fe915177cf0`. Nuevo brief Rootdocs `ef331c59a7ace7bbac9514b5b51461ca2f4ab027`, blob `1459c7e459472d6bb15bf6ace9e163d637a2a9f7`. Reapertura autorizada exclusivamente para este finding Important; sin Critical/Minor, cleanup o refactor.
+
+Finding confirmado: el regex de tuples captura modo m[1], SHA m[2] y ruta m[3], pero tres referencias usaban m[4], causando TypeError en todo registro válido. Se sustituyen exactamente esas tres referencias por m[3]. Regex, validaciones, default y todas las demás líneas del helper permanecen idénticos. Base helper `ffb470aff1e2f3d79a745e470e82a2384b88f295`; base informe `21d6d7ef66c43ac3e260f36ef2469e342ee8852d`. Este apartado se añade al final sin modificar ningún byte del informe anterior.
+
+Prueba cubriente permitida: herramienta existente `mcp__node_repl__js`, builtin `node:vm`. Se extrajo solamente la línea `function tuples(...)` del helper fijado; no se importó ni ejecutó el helper. Cada llamada fue exactamente:
+```js
+vm.runInNewContext(rejectSource + extractedTuples + ';tuples(raw)', {raw}, {timeout:100})
+```
+`rejectSource` define únicamente reject() que lanza un Error de mensaje fijo sintético. Los inputs fueron strings inertes NUL-delimited de git ls-tree; SHA sintético: cuarenta letras a. RED utilizó la función vieja con `100644 blob <sha>\\ttest/example.mjs\\0`: TypeError observado. GREEN utilizó la corregida y comparó modo/SHA/ruta exactos para rutas normal y con espacios; los otros cinco casos conservaron el rechazo sintético Error: registro malformado, ruta absoluta, segmento .., registro tree/no blob y registro sin campos de ruta. No se registraron stacks, objetos de error, mensajes privados ni datos del proyecto.
+
+Resultado observado:
+```json
+{
+  "causalRED": {
+    "case": "normal",
+    "errorName": "TypeError",
+    "observed": true
+  },
+  "GREEN": {
+    "passed": 7,
+    "total": 7,
+    "cases": [
+      {
+        "case": "normal",
+        "pass": true,
+        "errorName": null
+      },
+      {
+        "case": "space",
+        "pass": true,
+        "errorName": null
+      },
+      {
+        "case": "malformed",
+        "pass": true,
+        "errorName": "Error"
+      },
+      {
+        "case": "leading_slash",
+        "pass": true,
+        "errorName": "Error"
+      },
+      {
+        "case": "parent_traversal",
+        "pass": true,
+        "errorName": "Error"
+      },
+      {
+        "case": "nonblob",
+        "pass": true,
+        "errorName": "Error"
+      },
+      {
+        "case": "missing_record_fields",
+        "pass": true,
+        "errorName": "Error"
+      }
+    ]
+  },
+  "maximumVMTimeoutMs": 100,
+  "inertRecordInvocations": 8,
+  "fullHelperExecuted": false,
+  "projectImports": false
+}
+```
+
+Excepción local mínima expresa del brief: ocho invocaciones de registros inertes (RED 1 + GREEN 7), menos de diez; máximo 100 ms por VM y timeout del tool 1000 ms. Trabajo sólo en RAM, sin filesystem, red, child_process, instalación, dependencias ni imports del proyecto. Es evidencia causal del parser de metadatos, NO cualificación cloud/Node22 del harness. Ningún A/B, build, suite o test de proyecto ejecutado.
+
+Comprobación independiente del texto: exactamente tres cambios m[4]→m[3] dentro de tuples; al invertir esa única línea se recupera byte a byte el helper base. El informe conserva íntegro el prefijo base. El commit sólo puede cambiar helper e informe; se comprobarán los otros 3189 blobs/modos íntegros y árbol total 3191, ref/CAS y cero runs. Workflow debe conservar blob exacto `0f004c70976f5e4e64c1e554c0ebfad8039b9921`, manual-only, dos false. Hashes/tip finales se entregan externamente, sin autorreferencia.
+
+No otra conclusión nueva sobre las 36 fallas. El mismo reviewer de Root debe hacer re-review scoped FIX_BASE..FIX_HEAD del finding y cualquier regresión nueva antes de un probe. Cero jobs autorizados/despachados por este fix. Tras los readbacks finales: **STOP_WRITES**. `operationalReadiness=false; completePackage=false; PCoff=false`.
