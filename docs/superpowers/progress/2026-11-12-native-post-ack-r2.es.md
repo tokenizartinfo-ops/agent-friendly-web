@@ -1,6 +1,6 @@
 # SDD ledger — docs/superpowers/plans/2026-11-12-native-post-ack-r2.md
 
-## CURRENT — PROPOSED; preflight pending; NO Source or Native permit
+## CURRENT — Task 1 RELEASED; one KEYLESS contracts attempt; Native HELD
 
 2026-11-12. Reference-stageplanCOMPLETE/finalAstraCLEAN, Source408F7/all7false/main0c9/protected3188/0active; actorsSTOPPED. Primaryhttp/grant narrowsbutdoesnotprovecause. Publicauditexpectedmodelupdatescorrect, existingRawlosesexactrecheckerror. FeasibilityNative=GitHub-ownedMF/SDK/SYNoutbound, noCFremote. RootchoosesONEfutureR2SYNtypedpostACKdiagnostic overblind16retry/morecoarseRawreads, underusercontinuousAFWSYN/cloud-firstdelegation. PREPARATIONANDNATIVEbothHELDpendingSPEC/PLANpreflight+separateexactreleases.
 Scopeworld+report+4newfiles/F7and3188oldleavesprotected; defaultgraphsbyteidenticalSAMEidentity; only2declaredQAemissions. Uniquequalifiedrejection/one-shotlocalctx/sameError/noextraawait/nativecalls; noRaw/privateleak; 24inertcurrent-codecontrols+completionwitness. Task1KEYLESS7+2/noMF/I0/env; Task2separateONE NativeR2 7+2/currentpurepreflight/keyONLYcustody/closeallnewgatesANYoutcome. Allreadinessfalse.
@@ -30,3 +30,11 @@ Ruling: exact rebuilt JSON field order/UTF8/no-newline SHA contract + fixed know
 Ruling: current official job metadata/Date + precision/request/age margins supplies conservative headroom; missing or <240s blocks before allocation — possible lost trial opportunity, never budget expansion.
 
 Spec/plan updated; independent scoped preflight re-review PENDING. Task1 and Native permits still NOT RELEASED.
+
+## Task 1 release — preflight CLEAN
+
+Root received independent scoped preflight CLEAN at f8ab3ca2 with N1–N4 bound, including independently reproduced hash vector. Source408/main0c9/five-state0 reverified. Builder will reverify full immutable base/tree before CAS.
+
+Task1 requirements: docs/superpowers/briefs/2026-11-12-native-post-ack-r2-task1.md; separate reviewer record docs/superpowers/reviews/2026-11-12-native-post-ack-r2-preflight.md. Fresh sole implementer to be assigned. Ruling: isolated GitHub branch/CAS + Rootdocs durable ledger substitutes local worktree/scripts under the owner's cloud-first instruction; no local Source execution, clones, dependencies or temp Source files. Source report is the implementer's append-only report artifact; Rootdocs review package/ledger remain controller-owned.
+
+Release exactly ONE KEYLESS contracts 7+2, attempt1, no environment/key/MF/I0/Native. Preserve F7 and all3188 protected old leaves; only six named paths. New Native pipeline complete but inactive. Any failed run consumed; close gates and STOP, no hidden repair/retry. Native Task2 NOT released.
