@@ -954,10 +954,19 @@ export async function runBudgetReadonlyCase(caseName){
   }else{await f.stub.finiteBudgetRelease();afterRelease=await plain(f.stub.finiteBudgetSignals());}
   const native=afterRelease,reference=await plain(f.stub.ownerReferenceObserve()),record=await recordOwnerReference(f,'budget-'+caseName,{responseStatus:response.status});
   const referenceIndex=observed.trace.indexOf('reference-readback-native-settled'),responseIndex=observed.trace.indexOf('native-authorize-response:302');
+  const cleanupFacts=await plain(f.stub.ownerCleanupFacts()),plan=JSON.parse(cleanupFacts.rows.find(([key])=>key==='afw.finite-initial-cleanup.v1:plan')[1]);
+  const sdkRoot=JSON.parse(reference.rows.find(([key])=>key.endsWith(':root'))[1]),referenceRow=reference.rows.find(([key])=>key.endsWith(':reference')),sdkReference=referenceRow?JSON.parse(referenceRow[1]):null;
+  assert.equal(sdkRoot.I0,plan.I0);assert.equal(sdkRoot.C0,plan.C0);assert.equal(sdkRoot.C1,plan.C1);assert.equal(sdkReference!==null,caseName==='R1');
+  const mounted=f.cleanupCheckpointInputs().currentMountedOptions,graphs=[['M','canary-first-connection'],['QA','qa-first-connection']].map(([role,worker])=>{
+   const actual=mounted.workers.find(value=>value.name===worker);assert(actual);assert.equal(hash(actual.script),f.firstConnectionBuild[role].sha256);
+   return {role,worker,sha256:f.firstConnectionBuild[role].sha256,bytes:f.firstConnectionBuild[role].bytes,mounted:true};
+  });
+  const lineage={I0:plan.I0,C0:plan.C0,C1:plan.C1,sdkRootHash:sdkRoot.recordHash,sdkReferenceHash:sdkReference?.recordHash??null,graphs};
+
   const facts={...native,completeWrites:observed.completeWrites,completeNormal:observed.completeNormal,responseStatus:response.status,referenceRows:reference.rows.filter(([key])=>key.endsWith(':reference')).length,
    referenceBefore302:referenceIndex>=0&&responseIndex>referenceIndex,sdkReplay:Math.max(0,observed.completeWrites-1),rootBefore,rootDuring,rootAfter,
    originalChildElapsedMs:observed.lookupChild?.actualElapsedMs??null,callsAfterRelease:beforeRelease?native.nativeInvoked-beforeRelease.nativeInvoked:0,lateReference:caseName==='R3'&&reference.rows.some(([key])=>key.endsWith(':reference'))};
-  return await fixedBudgetPersist('readonly/'+caseName,{...fixedBudgetEnvelope('consumer','readonly',[caseName],{consumerGroup:'readonly'}),caseName,facts,record,diagnostics:{epochs:structuredClone(f.budgetEpochs)},preparedInputs:f.firstConnectionBuild.budget});
+  return await fixedBudgetPersist('readonly/'+caseName,{...fixedBudgetEnvelope('consumer','readonly',[caseName],{consumerGroup:'readonly'}),caseName,facts,record,lineage,privateLineage:{sdkRoot,sdkReference,originalCleanupPlan:plan,actualBuildPair:f.firstConnectionBuild},diagnostics:{epochs:structuredClone(f.budgetEpochs)},preparedInputs:f.firstConnectionBuild.budget});
  }finally{
   if(f){try{await f.stub.finiteBudgetRelease();await f.stub.finiteBudgetRestore();}finally{for(const cleanup of cleanups.reverse())await cleanup();}}
  }
@@ -1013,13 +1022,43 @@ async function observeFixedReduction(f,caseName,shared){
    diagnostics:{epochs:structuredClone(f.budgetEpochs)},preparedInputs:f.checkpoint.budget.preparedInputs});
  }finally{await f.stub.finiteBudgetRelease();}
 }
+
+async function disposeFixedBudgetPair(fixtures){
+ assert(Array.isArray(fixtures)&&fixtures.length<=2,'fixed owned pair only');
+ const settled=await Promise.allSettled(fixtures.map(async fixture=>{
+  const failures=[];
+  for(const phase of ['release','restore','dispose']){
+   try{if(phase==='release')await fixture.stub.finiteBudgetRelease();else if(phase==='restore')await fixture.stub.finiteBudgetRestore();else await fixture.mf.dispose();}
+   catch(error){failures.push(error);}
+  }
+  if(failures.length)throw failures[0];
+ }));
+ const failure=settled.find(result=>result.status==='rejected');if(failure)throw failure.reason;
+}
+async function verifyFixedPairDisposer(){
+ const scenarios=[];let failed=false;
+ for(const phase of ['release','restore','dispose']){
+  const expected=Error('SYN inert '+phase),calls=[[],[]];
+  const fixtures=[0,1].map(index=>({stub:{
+   async finiteBudgetRelease(){calls[index].push('release');if(index===0&&phase==='release')throw expected;},
+   async finiteBudgetRestore(){calls[index].push('restore');if(index===0&&phase==='restore')throw expected;}
+  },mf:{async dispose(){calls[index].push('dispose');if(index===0&&phase==='dispose')throw expected;}}}));
+  let actual;try{await disposeFixedBudgetPair(fixtures);}catch(error){actual=error;}
+  const sameError=actual===expected,allPhases=calls.every(value=>JSON.stringify(value)===JSON.stringify(['release','restore','dispose']));
+  scenarios.push({faultPhase:phase,sameError,allPhases,fixtureCount:2,attempts:calls.map(value=>value.length)});failed||=!sameError||!allPhases;
+ }
+ const result={purpose:'afw.fixed-budget-pair-disposer-control.syn.v1',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT,tests:1,scenarios,passed:!failed,I0Opened:false,nativeExecutionProduced:false,businessCases:0,...budgetFixedFlags};
+ await mkdir('output/finite-budget/disposer-control',{recursive:true});await writeFile('output/finite-budget/disposer-control/result.json',JSON.stringify(result,null,2));
+ assert.equal(failed,false,'actual fixed pair disposer covers every sibling phase and error identity');return result;
+}
+
 export async function prepareBudgetReductionPair(group,root){
  assert(['reduction_a','reduction_b'].includes(group));assert.equal(process.env.AFW_BUDGET_GROUP,group);
  const verified=await verifyReductionCheckpoint(root,{consumer:true});
  const {recoverCheckpoint}=await import('./finite-owner-cleanup-persistence.mjs'),{plain}=await import('./finite-first-connection-publication.mjs');
  const cases=group==='reduction_a'?['D1','D2']:['D3','D4'],fixtures=[],results=new Map(),shared={group,entered:Date.now(),pairReady:null,producerArtifactId:process.env.AFW_BUDGET_PRODUCER_ARTIFACT_ID,producerDigest:process.env.AFW_BUDGET_PRODUCER_DIGEST};
  let closing;
- const dispose=()=>closing??=(async()=>{for(const f of fixtures){try{await f.stub.finiteBudgetRelease();await f.stub.finiteBudgetRestore();}finally{await f.mf.dispose();}}})();
+ const dispose=()=>closing??=disposeFixedBudgetPair(fixtures);
  try{
   // Register each fulfilled mount immediately, including a late sibling after a
   // partial rejection. No replica starts after its sibling passes C0.
@@ -1062,6 +1101,7 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
   else if(command==='prepare-positive')await prepareBudgetProducer('positive',root);
   else if(command==='prepare-reduction')await prepareBudgetProducer('reduction',root);
   else if(command==='verify-reduction')await verifyBudgetCheckpoint('reduction',root);
+  else if(command==='verify-pair-disposer')await verifyFixedPairDisposer();
   else if(command==='verify-positive')await verifyBudgetCheckpoint('positive',root);
   else if(command==='inspect-budget-graphs')await inspectBudgetCompilation(root);
   else throw Error('SYN budget command unsupported before I0');

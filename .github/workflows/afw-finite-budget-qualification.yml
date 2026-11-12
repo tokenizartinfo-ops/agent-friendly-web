@@ -1,5 +1,5 @@
-name: AFW finite budget qualification
-run-name: AFW fixed SYN structural-selector covering pure ${{ github.sha }}
+name: AFW fixed SYN pair disposal control
+run-name: AFW paired disposer pure control ${{ github.sha }}
 on:
   push:
     branches: [feat/finite-native-cleanup-20261101]
@@ -10,17 +10,22 @@ permissions:
 concurrency:
   group: afw-finite-budget-qualification
   cancel-in-progress: false
-env:
-  AFW_BUDGET_GROUP: positive
 jobs:
-  pure:
+  diagnostic:
     if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 2
-    outputs:
-      artifact-id: ${{ steps.upload.outputs.artifact-id }}
     steps:
-      - name: Require the fixed AFW source and first attempt
+      - uses: actions/checkout@v4
+        with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - name: Require exact keyless source and install current lock
         id: scope
         shell: bash
         run: |
@@ -29,189 +34,74 @@ jobs:
           test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
           test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
           test "$GITHUB_RUN_ATTEMPT" = 1
-          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
-          mkdir -m 700 "$RUNNER_TEMP/afw-pure-private"
-      - name: Checkout this exact revision
-        uses: actions/checkout@v4
-        with:
-          repository: tokenizartinfo-ops/agent-friendly-web
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
-      - name: Use Node 22
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.23.4'
-      - name: Install the locked fixture dependencies
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-locked-install.log" 2>&1 || { echo locked_install_failed; exit 1; }
-      - name: Check fixed fixture syntax, lint, inactive module and eight contracts
-        id: pure_test
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
           test -z "${AFW_SYN_CHECKPOINT_KEY+x}"
           test "$(node -v)" = v22.23.4
           test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          files=(test/fixtures/finite-budget-world.mjs test/fixtures/finite-owner-cleanup.mjs test/mcp-qa-finite-budget-native.test.mjs)
-          for file in "${files[@]}"; do node --check "$file" >>"$RUNNER_TEMP/afw-pure-private/syntax.log" 2>&1 || { echo syntax_failed; exit 1; }; done
-          npx --no-install eslint "${files[@]}" >"$RUNNER_TEMP/afw-pure-private/lint.log" 2>&1 || { echo lint_failed; exit 1; }
-          test ! -e output/finite-budget
-          env -u AFW_BUDGET_GROUP node --test --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs >"$RUNNER_TEMP/afw-pure-private/inactive.tap" 2>&1 || { echo inactive_load_failed; exit 1; }
-          test ! -e output/finite-budget && test ! -e output/t2-native-graphs
-          if AFW_BUDGET_GROUP=invalid-fixed-group node --test --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs >"$RUNNER_TEMP/afw-pure-private/invalid.tap" 2>&1; then echo invalid_group_accepted; exit 1; fi
-          test ! -e output/finite-budget && test ! -e output/t2-native-graphs
-          mkdir -p output/finite-budget/pure
-          printf 'focused lint passed\n' > output/finite-budget/pure/lint.log
-          node --test --test-reporter=tap test/finite-budget-diagnostics.test.mjs >"$RUNNER_TEMP/afw-pure-private/tests.tap" 2>&1 || { echo pure_contract_failed; exit 1; }
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';import {readFileSync,writeFileSync,copyFileSync} from 'node:fs';import {join} from 'node:path';
-          const root=join(process.env.RUNNER_TEMP,'afw-pure-private'),dest='output/finite-budget/pure';
-          function counts(file,expected){const text=readFileSync(join(root,file),'utf8'),actual={};for(const [name,value]of Object.entries(expected)){const matches=[...text.matchAll(new RegExp('^# '+name+' (\\d+)$','gm'))];assert.equal(matches.length,1);actual[name]=Number(matches[0][1]);assert.equal(actual[name],value);}return actual;}
-          const business=counts('tests.tap',{tests:8,pass:8,fail:0,cancelled:0,skipped:0,todo:0});
-          const inactive=counts('inactive.tap',{tests:1,pass:1,fail:0,cancelled:0,skipped:0,todo:0});
-          assert(readFileSync(join(root,'invalid.tap'),'utf8').includes('SYN budget group unsupported before I0'));
-          for(const file of ['tests.tap','inactive.tap'])copyFileSync(join(root,file),join(dest,file));
-          writeFileSync(join(dest,'tests.log'),'AFW_PURE '+JSON.stringify(business)+'\n');
-          writeFileSync(join(dest,'inactive.json'),JSON.stringify({fileWrapper:inactive,businessCases:0,I0Opened:false,invalidGroupRejected:true}));
-          console.log('AFW_PURE '+JSON.stringify(business));console.log('inactive_file_wrapper_verified 1 business_cases 0 invalid_group_rejected');
-          NODE
-      - name: Strict three-profile preflight with safe failure DTO
-        id: preflight
+          mkdir -m 700 "$RUNNER_TEMP/afw-diagnostic-public"
+          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-diagnostic-install.log" 2>&1 || { echo locked_install_failed; exit 1; }
+      - name: Check syntax lint and actual paired disposer with inert callbacks
+        id: diagnostic
         shell: bash
         run: |
           set -euo pipefail
           umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-pure-private/preflight.log" 2>&1
-          import {createHash} from 'node:crypto';import {writeFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';
-          const hash=value=>createHash('sha256').update(value).digest('hex'),root='output/finite-budget/pure';
-          const labels=['single structural actual SDK settlement sequence','two distinct original revokeGrant receivers','SDK actual standalone await adjacency','SDK original check adjacency','SDK bounded metrics same-block adjacency','same existing named DO class','no SYN method collision','closed fixed adapter operation inventory','exact original emitted prefix','exact two original enqueue notifications after pinned baseline transform','single passive actual SDK settlement site','original SDK call and retain unchanged','composed QA entry bytes','composed QA entry pin','exact composed entry native member selectors','exact composed entry SQL/body selectors','complete role reader catalog before I0','closed prepared role input map','scope input raw pin','raw SHA256 pin','raw byte pin','exact prepared AST count','exact installed package selector','installed package byte pin','installed package hash pin','native prepared role hooks match exact prior pure preflight before I0','exact fixed SYN additional-emission provenance before I0'];
-          function data(value,key){try{for(let n=0;value&&n<4;n++,value=Object.getPrototypeOf(value)){const descriptor=Object.getOwnPropertyDescriptor(value,key);if(descriptor)return Object.hasOwn(descriptor,'value')?descriptor.value:undefined;}}catch{}return undefined;}
-          function safe(value){if(typeof value==='number'&&Number.isFinite(value)||typeof value==='boolean'||value===null)return value;if(typeof value==='string')return {type:'string',bytes:Buffer.byteLength(value),sha256:hash(value)};return {type:typeof value};}
-          const profiles=[];
-          for(const profile of ['positive','readonly','reduction_a']){
-            process.env.AFW_BUDGET_GROUP=profile;let stage='import';
-            try{const mod=await import('./test/fixtures/finite-budget-world.mjs');stage='preflight';const result=await mod.preflightBudgetCompilation();profiles.push({profile,stage:'complete',passed:true,I0Opened:result.I0Opened,nativeExecutionProduced:result.nativeExecutionProduced,additionalSYNCount:result.additionalSYN.length,additionalSYN:result.additionalSYN.map(x=>({path:x.path,family:x.family??null,sites:x.sites??null,sdkSettlementSites:x.sdkSettlementSites??null,baselineBytes:x.baselineBytes,baselineSha256:x.baselineSha256,literalBytes:x.literalBytes??null,literalSha256:x.literalSha256??null,emittedBytes:x.emittedBytes,emittedSha256:x.emittedSha256}))});}
-            catch(error){const message=data(error,'message'),name=data(error,'name'),code=data(error,'code'),operator=data(error,'operator');profiles.push({profile,stage,passed:false,error:{name:['Error','AssertionError','TypeError','SyntaxError','RangeError'].includes(name)?name:'other',code:['ERR_ASSERTION','ERR_MODULE_NOT_FOUND','ERR_INVALID_ARG_TYPE','ERR_UNKNOWN_FILE_EXTENSION','ERR_REQUIRE_ESM'].includes(code)?code:code===undefined?'absent':'other',operator:['strictEqual','deepStrictEqual','==','===','match','ok'].includes(operator)?operator:operator===undefined?'absent':'other',actual:safe(data(error,'actual')),expected:safe(data(error,'expected')),message:typeof message==='string'?{bytes:Buffer.byteLength(message),sha256:hash(message),publicLabel:labels.find(label=>message.includes(label))??'unmatched'}:{type:typeof message}}});}
-          }
-          const result={purpose:'afw.fixed-budget-pure-diagnostic.syn.v1',source:process.env.GITHUB_SHA,tree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),run:process.env.GITHUB_RUN_ID,attempt:1,profiles,allPassed:profiles.every(x=>x.passed),I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
-          const bytes=Buffer.from(JSON.stringify(result,null,2));if(bytes.length>65536)throw Error('safe_diagnostic_limit');
-          await writeFile(root+'/diagnostics.json',bytes);
-          await writeFile(root+'/diagnostic-manifest.json',JSON.stringify({purpose:'afw.fixed-budget-pure-diagnostic-manifest.syn.v1',source:result.source,run:result.run,attempt:1,files:[{path:'diagnostics.json',bytes:bytes.length,sha256:hash(bytes)}]}));
-          await writeFile(process.env.GITHUB_OUTPUT,'all-passed='+result.allPassed+'\n',{flag:'a'});
-          NODE
-      - name: Seal a closed pure evidence directory
-        id: pure_seal
-        if: always() && !cancelled() && steps.scope.outcome == 'success'
-        env:
-          PURE_COMPLETE: ${{ steps.pure_test.outcome == 'success' && steps.preflight.outputs.all-passed == 'true' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
+          syntax=0; lint=0; control=0
+          node --check test/fixtures/finite-budget-world.mjs >"$RUNNER_TEMP/afw-disposer-syntax.log" 2>&1 || syntax=$?
+          if test "$syntax" = 0; then npx --no-install eslint test/fixtures/finite-budget-world.mjs >"$RUNNER_TEMP/afw-disposer-lint.log" 2>&1 || lint=$?; else lint=1; fi
+          if test "$syntax" = 0 && test "$lint" = 0; then env -u AFW_BUDGET_GROUP node test/fixtures/finite-budget-world.mjs verify-pair-disposer >"$RUNNER_TEMP/afw-disposer-control.log" 2>&1 || control=$?; else control=1; fi
+          export AFW_CONTROL_SYNTAX="$syntax" AFW_CONTROL_LINT="$lint" AFW_CONTROL_EXIT="$control"
           node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';import {mkdir,readdir,writeFile,lstat,copyFile} from 'node:fs/promises';import {join} from 'node:path';
-          import {sealBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';
-          try{
-           const dest=join(process.env.RUNNER_TEMP,'afw-pure-public');await mkdir(dest,{mode:0o700});
-           const safeNames=["tests.log","tests.tap","inactive.tap","inactive.json","lint.log","preflight.json","preflight-positive.json","preflight-readonly.json","preflight-reduction_a.json","diagnostics.json","diagnostic-manifest.json"];
-           for(const name of safeNames){const file=join('output/finite-budget/pure',name);let st;try{st=await lstat(file);}catch(error){if(error.code==='ENOENT')continue;throw error;}assert(st.isFile()&&st.nlink===1);await copyFile(file,join(dest,name));}
-           await writeFile(join(dest,'status.json'),JSON.stringify({status:process.env.PURE_COMPLETE==='true'?'pure_passed':'pure_failed',source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT}));
-           await sealBudgetArtifact(dest,'pure');
-           const names=await readdir(dest);assert(names.every(name=>[...safeNames,'budget-artifact.json','status.json'].includes(name)));
-          }catch{console.log('evidence_not_preserved');process.exitCode=1;}
+          import {readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+          const e=process.env,root=e.RUNNER_TEMP+'/afw-diagnostic-public',hash=bytes=>createHash('sha256').update(bytes).digest('hex');let control=null;
+          try{control=JSON.parse(await readFile('output/finite-budget/disposer-control/result.json','utf8'));}catch{}
+          if(control){assert.equal(control.purpose,'afw.fixed-budget-pair-disposer-control.syn.v1');assert.equal(control.source,e.GITHUB_SHA);assert.equal(control.tests,1);assert.equal(control.businessCases,0);assert.equal(control.I0Opened,false);assert.equal(control.nativeExecutionProduced,false);assert.equal(control.scenarios.length,3);}
+          const allPassed=e.AFW_CONTROL_SYNTAX==='0'&&e.AFW_CONTROL_LINT==='0'&&e.AFW_CONTROL_EXIT==='0'&&control?.passed===true;
+          const result={purpose:'afw.fixed-budget-disposer-covering.syn.v1',source:e.GITHUB_SHA,run:e.GITHUB_RUN_ID,attempt:1,syntaxPassed:e.AFW_CONTROL_SYNTAX==='0',lintPassed:e.AFW_CONTROL_LINT==='0',controlCompleted:e.AFW_CONTROL_EXIT==='0',control,allPassed,I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false};
+          const bytes=Buffer.from(JSON.stringify(result,null,2));assert(bytes.length<65536);await writeFile(root+'/diagnostics.json',bytes);
+          await writeFile(root+'/manifest.json',JSON.stringify({purpose:'afw.fixed-budget-pure-diagnostic-manifest.syn.v1',source:e.GITHUB_SHA,run:e.GITHUB_RUN_ID,attempt:1,files:[{path:'diagnostics.json',bytes:bytes.length,sha256:hash(bytes)}]}));await writeFile(e.GITHUB_OUTPUT,'all-passed='+allPassed+'\n',{flag:'a'});
           NODE
-      - name: Upload finite-budget-pure only
+      - name: Upload safe diagnostic on success and failure
         id: upload
-        if: always() && !cancelled() && steps.pure_seal.outcome == 'success'
+        if: always() && !cancelled() && steps.diagnostic.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
-          name: finite-budget-fixed-preparation-${{ github.sha }}
-          path: ${{ runner.temp }}/afw-pure-public/
-          if-no-files-found: error
+          name: finite-budget-pair-disposer-control-${{ github.sha }}
+          path: ${{ runner.temp }}/afw-diagnostic-public/
           retention-days: 7
-      - name: Download pure_receipt by exact ID attempt 1
-        id: pure_receipt_1
-        if: always() && !cancelled() && steps.upload.outcome == 'success' && steps.upload.outputs.artifact-id != ''
-        continue-on-error: true
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-pure-receipt
-          merge-multiple: true
-      - name: Wait 2s before pure_receipt retrieval 2
-        id: pure_receipt_wait2
-        if: always() && !cancelled() && steps.pure_receipt_1.outcome == 'failure'
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          sleep 2
-      - name: Download pure_receipt by exact ID attempt 2
-        id: pure_receipt_2
-        if: always() && !cancelled() && steps.pure_receipt_wait2.outcome == 'success' && steps.pure_receipt_1.outcome == 'failure'
-        continue-on-error: true
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-pure-receipt
-          merge-multiple: true
-      - name: Wait 5s before pure_receipt retrieval 3
-        id: pure_receipt_wait3
-        if: always() && !cancelled() && steps.pure_receipt_2.outcome == 'failure'
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          sleep 5
-      - name: Download pure_receipt by exact ID attempt 3
-        id: pure_receipt_3
-        if: always() && !cancelled() && steps.pure_receipt_wait3.outcome == 'success' && steps.pure_receipt_2.outcome == 'failure'
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-pure-receipt
-          merge-multiple: true
-      - name: Verify exact same-ID pure inventory
-        id: pure_verified
+          if-no-files-found: error
+      - name: Download same assigned diagnostic artifact ID
+        id: download
         if: always() && !cancelled() && steps.upload.outcome == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.run_id }}
+          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
+          path: ${{ runner.temp }}/afw-diagnostic-readback
+          merge-multiple: true
+      - name: Verify exact safe inventory and print bounded diagnostic
+        id: verified
+        if: always() && !cancelled() && steps.download.outcome == 'success'
         env:
           ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
-          DOWNLOADED: ${{ steps.pure_receipt_1.outcome == 'success' || steps.pure_receipt_2.outcome == 'success' || steps.pure_receipt_3.outcome == 'success' }}
-          READBACK: ${{ runner.temp }}/afw-pure-receipt
         shell: bash
         run: |
           set -euo pipefail
           umask 077
-          test -n "$ARTIFACT_ID"
-          test "$DOWNLOADED" = true || { echo evidence_not_preserved; exit 1; }
-          if ! node --input-type=module -e "import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs'; await verifyBudgetArtifact(process.env.READBACK,'pure',process.env.ARTIFACT_ID);" >"$RUNNER_TEMP/afw-pure-private/readback.log" 2>&1; then echo evidence_not_preserved; exit 1; fi
-          if ! cmp -s "$RUNNER_TEMP/afw-pure-public/budget-artifact.json" "$READBACK/budget-artifact.json"; then echo evidence_not_preserved; exit 1; fi
-          printf 'pure_verified artifact_id=%s\n' "$ARTIFACT_ID"
-      - name: Print verified closed profile diagnostic
-        if: always() && !cancelled() && steps.pure_verified.outcome == 'success'
-        shell: bash
-        run: |
           node --input-type=module <<'NODE'
-          import {readFile} from 'node:fs/promises';const raw=await readFile(process.env.RUNNER_TEMP+'/afw-pure-receipt/diagnostics.json','utf8');if(Buffer.byteLength(raw)>65536)throw Error('safe_diagnostic_limit');console.log(raw);
+          import assert from 'node:assert/strict';import {readFile,readdir} from 'node:fs/promises';import {createHash} from 'node:crypto';
+          const e=process.env,root=e.RUNNER_TEMP+'/afw-diagnostic-readback';assert.match(e.ARTIFACT_ID,/^[1-9][0-9]*$/);
+          assert.deepEqual((await readdir(root)).sort(),['diagnostics.json','manifest.json']);
+          const raw=await readFile(root+'/diagnostics.json'),manifestRaw=await readFile(root+'/manifest.json'),manifest=JSON.parse(manifestRaw);
+          assert.equal(manifest.source,e.GITHUB_SHA);assert.equal(manifest.run,e.GITHUB_RUN_ID);assert.equal(manifest.attempt,1);
+          assert.deepEqual(manifest.files,[{path:'diagnostics.json',bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')}]);
+          for(const file of ['diagnostics.json','manifest.json'])assert((await readFile(e.RUNNER_TEMP+'/afw-diagnostic-public/'+file)).equals(await readFile(root+'/'+file)));
+          console.log('DISPOSER_CONTROL_SAME_ID_VERIFIED '+e.ARTIFACT_ID);console.log(raw.toString('utf8'));
           NODE
-      - name: Require all covering profiles and retained readback
+      - name: Preserve actual disposer control outcome
         if: always() && !cancelled()
         shell: bash
         run: |
-          test '${{ steps.pure_test.outcome }}' = success
-          test '${{ steps.preflight.outputs.all-passed }}' = true
-          test '${{ steps.pure_verified.outcome }}' = success
+          test '${{ steps.diagnostic.outputs.all-passed }}' = true
+          test '${{ steps.verified.outcome }}' = success
