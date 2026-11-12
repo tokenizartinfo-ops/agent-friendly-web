@@ -2612,3 +2612,50 @@ Raw spec stayed private: A33,809,117bytes/SHA `f9e1077e96043469c88bdf18663d5b6b1
 Cleanup retires TEMP and appends only this section. Relative to delivered f5, report alone differs;3,188leaves/3,187other blobs remain exact, including all four corrected core code blobs. Main freshly checked `0c9c475b3ebaa970fc11d628b40e50a90cceb727`. No inactive full9 candidate is prepared. No further test, recorder iteration, npm/broad/native run or unrelated repair follows automatically.
 
 The writer returns STOP_WRITES after cleanup readback for Root's decision. The five Important findings remain open until scoped review; ordinary-suite integration debt and current-source native qualification remain OPEN, not waived. operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## Task1 round1 — inactive full9 projection candidate for scoped review — 2026-11-12 UTC
+
+The [Root03:43 classification/inactive-candidate ruling](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/d39668827a2b96490d517d44f210a6eefe39da05/docs/superpowers/briefs/2026-11-12-finite-budget-task1-fix-round1.md), blob `d4d241eea70f5fa059fed303495bd4cff655f5de`, accepts the matched four-file classification and releases ONLY this inert candidate. The [metadata-only parser ruling](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/01ed8e81709a8d9779bdda9dc759c8bc9b789c63/docs/superpowers/briefs/2026-11-12-finite-budget-task1-fix-round1.md), blob `4585318aeb235cce4c2f19548237c6447fe9f3e8`, authorizes the small RAM-only YAML format check. No activation, test replay, new native clock or runtime action is authorized.
+
+Completed A/B evidence was preserved and read back BEFORE staging this candidate: cleanup Source `6248c62dc01d56661d3f0791dc2a2cf8ce4e2761`, tree `4e365aef0b063709ec0036259f10f861e59842ce`, report `89b56880eb740642898e3bd87d1313da62ff7525`, TEMP absent. The original inconclusive comparison and the corrected comparison/control both remain in this append-only history. Root independently confirmed equality including testNumber, codes, message hashes and tooLarge flags across all40event identities.
+
+### Exact inactive candidate and allowed delta
+
+Path: .github/workflows/afw-finite-budget-qualification.yml  
+Candidate blob: `6f48afaaf998abc9a120410a10cfca27b1afed87` (48,724characters/911lines).
+
+Freshly read executed baef template: Source `baef10ca4b50321bd4c19f91a0cfdf889201bfce`, blob `f0f20df9450142efbc6b0d8a1b10f42c80a0e25d` (48,857characters/912lines). ONLY these changes are present:
+- Display run-name labels the candidate inactive.
+- Replace self-path push trigger with workflow_dispatch WITHOUT inputs; no push trigger.
+- All THREE job guards are exactly `${{ false }}`.
+- Safe projection imports verifyPositiveBudgetEpochInventory from the existing evidence module.
+- Safe projection calls verifyPositiveBudgetEpochInventory(result.diagnostics.epochs) on REAL captured wrappers before iterating their unchanged per-epoch Source/role/metric checks.
+
+Reversing exactly these allowed changes reconstructs the executed template byte-for-byte/Git-blob hash `f0f20df9450142efbc6b0d8a1b10f42c80a0e25d`. No job-body redesign, new pin/input/group, fixture metadata stripping or weaker union check was introduced. Original pure8Q/P1,3/15/5-minute jobs, clocks900s/C0/C1, SDK/lease/alias behavior, encrypted custody, size caps, environment/secret REFERENCES and same-ID readback bodies remain exact baef. Secret values were not accessed.
+
+The shared helper is the corrected six-field export already covered by final8Q. P1 retains its call and all original assertions; the candidate now makes the workflow's R4 projection correction reviewable without starting it. All four core after-blobs MUST and do remain delivered f5 exact:
+- test/finite-budget-diagnostics.test.mjs — `5ae2d79aa657a5bdf71d11c2e764d4fa23f749ef`
+- test/fixtures/finite-budget-diagnostics.mjs — `2e911fd4e9d2287da687bef9b0389fbec48a5114`
+- test/fixtures/finite-budget-evidence.mjs — `0d95b1616a167f7f089e3a8ca59ca9628aa8aaa9`
+- test/mcp-qa-finite-budget-native.test.mjs — `082340b6ede2a252a8602721ec19063cc68fafc8`
+
+### Static metadata verification only
+
+yaml/js-yaml were unavailable in the tool Node REPL; nothing was installed. Under Root's explicit minimal-local exception, the existing Python/PyYAML parsed the49KB candidate entirely in RAM (about1second), with no file creation, checkout, dependency install, build, test or persistent task. BaseLoader kept scalar keys as strings, avoiding YAML1.1's on→boolean pitfall. Exit0/zero parse errors; independently checked:
+- exact on.workflow_dispatch empty/no inputs/no push;
+- exactly pure/positive_prepare/positive_consume;
+- all job guards false;
+- all runners ubuntu-24.04;
+- timeouts3/15/5, unchanged read-only permissions/concurrency/environment;
+- candidate Git-blob SHA and normalized original baef Git-blob SHA.
+
+This is YAML syntax/metadata plus exact template-delta verification, NOT GitHub runtime acceptance or a new test result. No test run is needed or was started for these inactive/documentary changes. No Code-U10 component was regenerated or reviewed by the implementer; Root owns the scoped review packet/gate.
+
+### ORD-1 disclosure and stop boundary
+
+R1 requires the optional entrypoint to load with group absent; the causal final8Q covers that and the other amended behavior. It does not promise universal npm-green. Root keeps ORD-1 OPEN: the725-file ordinary run was incomplete, the36 failed pure tests in four completed files predate THIS round under matched setup, and the three pending native cases remain unclassified. This scope correction does not waive the integration gate or authorize unrelated repairs, and does not claim these failures predate Task1 or identify their cause.
+
+Final delivery intentionally has TEMP PRESENT BUT INACTIVE (3,189leaves if otherwise unchanged), for scoped review BEFORE any activation. Relative to delivered f5, only TEMP plus append-only report differ;3,187other base blobs, including every core/production/dependency blob, remain exact. Main remains `0c9c475b3ebaa970fc11d628b40e50a90cceb727`. Final fulltree/ref/report readbacks and absence of a run on the inactive head are checked at handoff. A later authorized qualification must retire TEMP again.
+
+All five Important findings remain OPEN until reviewer verdict. No new ordinary/A-B/900s/P1 run, inactive activation, subagent/reviewer, PR/main/merge/deploy/Cloudflare/credential/owner action follows from this staging. STOP_WRITES after final readback. operationalReadiness=false; completePackage=false; PCoff=false.
