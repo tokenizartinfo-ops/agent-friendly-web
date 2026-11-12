@@ -1,0 +1,13 @@
+# Binding preflight: R2 last-child
+
+Astra/xhigh conditionalYES,0Critical/1Importantcoherenceomission. Rootaccepts/fixesomissioninTHIScontractbeforeSourcewrite; keylessTask1only, actualTask2HELD.
+
+Sharedsemanticvalidator(coordinator,producer,independentverifier): oldR2rowpresent+childrenpresentnonempty=>certificatepresent/count=oldcount/ordinal=count; knownempty=>absent,count0,strictnulls; childrenaggregateabsent=>unavailable; entireR2notpresentORrejection=>not_examined/allunknown. Rejectmixedstates.
+
+Foroldn=count,k=knownDurationCount,m=maxElapsedMs: certificateelapsedknown requiresk>0,elapsed<=m,equalmifk=1; elapsedNULLrequiresk<n. ForK=knownAbortCount,t=abortedCount: true requirest>=1,false requiresK-t>=1,NULLrequiresK<n. FeasibilityONLY: neverrequirelastelapsed=maxgenerally, inferabortfrommax, orcomparesource-pairelapsedtochildelapsed. Noexclusivecausalownershipfrompair-emissionattachment.
+
+TestrehashedcontradictoryDTOs throughACTUALcoordinator/producer/verifier withinlc_schema/lc_transport; reject/sanitizestalenumericfieldsinrejectedcertificate. No additionalIDs/instrumentation. Fortycontrolrecordallpass1728B/worsttruthfulfirstfail1972BwithLF<2048, enforcebound. SourcebaselineREDSTATICONLYallowed,currentGREENrequired.
+
+RootactualauditwilldeepcompareBOTHoldownerReferencerowsagainstpriorprimary33db8b15ontheSAMEsealedinput, noauthorityfromchangedrows; differences=>UNKNOWN/investigation,noretry. PublicsemanticsintheSPEC/evidencebinding: exact10positions/7stepvalues+unknown; lastINSERTEDnotfailed/finished/aborted; stepentry/emissionnotnativeeffect, pairfinallyevenerrorandactiveMetricatemissionnotcausalownership.
+
+Ruling: newSYNclosedcertificate+newpurpose isminimalexisting-dataobservation, notNativefix/replay. Costifwrong: Source/reviewreworkorfalse-rejectedcertificate, no runtime/SDK/admission/permissioneffect. CloudGitHubbranch/RootdocCASsubstitutelocalworktreeperownerpreference. Existingbroadcontinuousdecisiondelegationmeansnousercheck-in. Task1onlyreleasesONEKEYLESS2+2now; Task2requirescleanimplementationreview+separateRootrelease.

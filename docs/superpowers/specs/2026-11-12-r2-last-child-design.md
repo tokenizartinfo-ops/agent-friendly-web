@@ -29,3 +29,19 @@ NonrejectedR2rowpresent requireslastChildpresent/absent/unavailable; R2rownotpre
 Task1prepare+ONEkeylessserial2+2onlyafterpreflightRootbrief. Retain91Core+16V1pair+16ZIP+all24existingreferencecontrolIDs/cases, updatefixturesfornewfield/purposewithoutlosingassertions. AddEXACT16IDs: lc_pair,lc_last,lc_pos,lc_unknown,lc_ops,lc_steps,lc_scalars,lc_absent,lc_guard,lc_invalid,lc_schema,lc_clean,lc_clock,lc_manifest,lc_transport,lc_bounds. CombinedREFERENCE_CONTROLS/1 record40 allpassinventory1728B(<2048), worstnotexecutedstill<2048; keepbound/firstfailure. Samecurrentfunctions, nomirrors. Covermax-abortnotlast(syntheticmax5018+trueinfirst,last12+falseoutputs12false), ordinal,allliteral+unknownprivatecanaries, empty/missing/invalidsteps,scalar0falsefractions, identity/flag/oldrowfailgate, strictschemas, failurecleanup/unsettledsanitize, wholemanifest/currentidentity/completepartialproducer+verifier, allcaps. SourceREDstaticonlyallowedtruthful,currentGREENmandatory. Noenv/key/Originaldata/SDK/I0 duringkeyless. FailureexactF7/report/0activeSTOP/no retry; successCOMPLETEnewactual5+2INACTIVE/BOTHfalse/manual/noinputs/nopush/fullreadbacksSTOP/independentreview.
 
 Task2actualSEPARATELYreleasedaftercleanreview, ONEfixedOriginal5+2projection/codeunchanged, RootONLYsmallsafepair/closedverifierrecords, restoreexactF7afterterminalregardlessoutcome. No newcred/OAuth/OTP/provider/runtime/cron/consumer/callback/Max/mail/main/PR/merge/deploy/nativeSDKtrial. Partial/unknowncertificate=>preserveunknown/newcausalruling, NOautomaticretry/cap/budgetexpansion. Allreadinessfalse.
+
+## Binding preflight coherence amendment
+
+# Binding preflight: R2 last-child
+
+Astra/xhigh conditionalYES,0Critical/1Importantcoherenceomission. Rootaccepts/fixesomissioninTHIScontractbeforeSourcewrite; keylessTask1only, actualTask2HELD.
+
+Sharedsemanticvalidator(coordinator,producer,independentverifier): oldR2rowpresent+childrenpresentnonempty=>certificatepresent/count=oldcount/ordinal=count; knownempty=>absent,count0,strictnulls; childrenaggregateabsent=>unavailable; entireR2notpresentORrejection=>not_examined/allunknown. Rejectmixedstates.
+
+Foroldn=count,k=knownDurationCount,m=maxElapsedMs: certificateelapsedknown requiresk>0,elapsed<=m,equalmifk=1; elapsedNULLrequiresk<n. ForK=knownAbortCount,t=abortedCount: true requirest>=1,false requiresK-t>=1,NULLrequiresK<n. FeasibilityONLY: neverrequirelastelapsed=maxgenerally, inferabortfrommax, orcomparesource-pairelapsedtochildelapsed. Noexclusivecausalownershipfrompair-emissionattachment.
+
+TestrehashedcontradictoryDTOs throughACTUALcoordinator/producer/verifier withinlc_schema/lc_transport; reject/sanitizestalenumericfieldsinrejectedcertificate. No additionalIDs/instrumentation. Fortycontrolrecordallpass1728B/worsttruthfulfirstfail1972BwithLF<2048, enforcebound. SourcebaselineREDSTATICONLYallowed,currentGREENrequired.
+
+RootactualauditwilldeepcompareBOTHoldownerReferencerowsagainstpriorprimary33db8b15ontheSAMEsealedinput, noauthorityfromchangedrows; differences=>UNKNOWN/investigation,noretry. PublicsemanticsintheSPEC/evidencebinding: exact10positions/7stepvalues+unknown; lastINSERTEDnotfailed/finished/aborted; stepentry/emissionnotnativeeffect, pairfinallyevenerrorandactiveMetricatemissionnotcausalownership.
+
+Ruling: newSYNclosedcertificate+newpurpose isminimalexisting-dataobservation, notNativefix/replay. Costifwrong: Source/reviewreworkorfalse-rejectedcertificate, no runtime/SDK/admission/permissioneffect. CloudGitHubbranch/RootdocCASsubstitutelocalworktreeperownerpreference. Existingbroadcontinuousdecisiondelegationmeansnousercheck-in. Task1onlyreleasesONEKEYLESS2+2now; Task2requirescleanimplementationreview+separateRootrelease.
