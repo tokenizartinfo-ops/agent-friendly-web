@@ -622,10 +622,10 @@ async function positiveEpochInventory(){
   if(!(segment==='consumer'&&role==='M'))for(const [i,phase]of (segment==='producer'&&epoch===0&&role==='QA'?phases:['setup']).entries()){
    const op=c.begin(r,null,{phase,resourceClass:'KV',operation:'get',at:i*2});c.settle(op,{at:i*2+1,status:'fulfilled'});
   }
-  return {segment,epoch,role,snapshot:c.snapshot()};
+  return {segment,epoch,role,reason:'MODELED',capturedAt:1000+epoch,snapshot:c.snapshot()};
  });
  const check=value=>validate(assert,{diagnostics:{epochs:value}},{env:{GITHUB_SHA:revision}},{info(){}},verifyObservedBudgetMetrics,verifyCompleteBudgetTrace,evidence.verifyPositiveBudgetEpochInventory);
- check(epochs);
+ assert.doesNotThrow(()=>check(epochs),'R4 source-faithful six-field captures accepted');
  assert.throws(()=>check(epochs.filter(e=>!(e.segment==='consumer'&&e.role==='M'&&e.epoch===0))),{code:'ERR_ASSERTION'},'R4 missing empty consumer epoch rejected');
  const invalid=[
   [...epochs,epochs[0]],
@@ -634,6 +634,10 @@ async function positiveEpochInventory(){
   [...epochs.slice(0,-1),{...epochs.at(-1),epoch:'0'}]
  ];
  for(const value of invalid)assert.throws(()=>check(value),{code:'ERR_ASSERTION'});
+ for(const mutate of [
+  e=>{e.reason=17;},e=>{e.capturedAt=NaN;},e=>{e.capturedAt='1000';},
+  e=>{e.snapshot.testRevision='b'.repeat(40);},e=>{e.snapshot.workerRole='fixture';}
+ ]){const altered=structuredClone(epochs);mutate(altered[0]);assert.throws(()=>check(altered),{code:'ERR_ASSERTION'});}
 }
 
 async function intrinsicReadBytes(){
