@@ -332,3 +332,247 @@ Antes de la orden SAVE/CLOSE se verificó sólo gramática del borrador en Sourc
 PENDIENTE al retomar: completar/verificar metadata de contadores/límites/progreso fatal y cerramiento DTO; preparar paquete BASE..checkpoint para SAME-reviewer; sólo después de revisión y nueva liberación Root podría existir otra inspección. No repetir el run anterior, aumentar caps por inferencia ni activar al retomar. Este checkpoint es PARTIAL_DRAFT_UNREVIEWED; las lecturas finales de head/tree/blobs/ref/cero activos se entregan externamente, no por autorreferencia.
 
 El prefijo completo del informe37f0195d se conserva. Sólo helper+este APPEND cambian; workflow y los otros3189blobs/modos permanecen intactos. Commit [skip ci], CAS exacto sin force. STOP_WRITES después de checkpoint/readbacks; operationalReadiness=false; completePackage=false; PCoff=false.
+
+
+## Reanudación y cierre de preparación INACTIVA de la enmienda
+
+El owner volvió y revocó SAVE/CLOSE. Se retomó desde6ecd57629a588e6ac46eabb9fe65bffce6bca4f5/treeb5b963aaa7e6403a810960c8c7ac7276567e4be6, helpere038585284fdf266be0d885dc15357cfddfd6830, informe38e22eb881e387f017d6a8f4c67a8a843de0d184 y workflowaf862de67987090a3b0e4debc528a0f9abff0020 exacto. La nota PARTIAL anterior queda como checkpoint histórico; la preparación descrita aquí queda terminada para SAME-reviewer, todavía sin autorización de ejecución.
+
+Releídos en Rootdocs149dd4e63485e778baa4fcf50f82a5146fee600a: brief51be52b18f8d2b24ad7ba84416e687f10c2066a0; spec5b4f14d962d043f2924d1247f4f0143ff606e068; plan9cd4dc8dc643cfb26b08e60ea3becb26ef82a4f3. Conservan autoridad de PREPARACIÓN, no siguiente job. Única ejecución previa43189735097/1 consumida y terminal; cero adicionales.
+
+### Estado preparado y límites
+
+Helper final propuesto: 34252bytes, Git blobfd03d1e611a607b2011c2c519158e468f5e9d976, SHA-256de88e032aa15542eeaf7adf01a0e820a2904e63397032176843450a5948e0fd2. Workflow sigue byte por byteaf862, manual/literal false/sin inputs/job2min. No cambios a Native, Source, otras ramas, Rootdocs, permisos, runtime, claves, mail o Max.
+
+La enmienda completa respecto al helper revisadof476 mantiene separados:
+
+- allocationAttempts: cada llamada a startNode/startNodeAt/copyNode incrementa antes de permitir construcción; límite600000. Intento600001 se conserva como rechazado.
+- allocationCompletions: sólo tras retornar la construcción/copia. Copias o construcciones luego descartadas no se confunden con objetos únicos del árbol final.
+- uniqueVisitAttempts: sólo nodos AST tipados y todavía no vistos, después de deduplicar referencias. Límite600000; intento rechazado600001 también se conserva.
+- uniqueVisitCompletions: sólo tras procesar ese nodo y encolar hijos; no se deriva de allocations.
+- Progreso fuera del try del hijo, serializado también en fallos manejados con reasons allocation_cap/visit_cap distintos. Estado observed puede contener cero si ese contador efectivamente no empezó. Sin evidencia terminal válida, el padre preserva state UNKNOWN y los cuatro números null; no inventa ceros, no crea IPC/checkpoints/canales nuevos y no diagnostica OOM por inferencia.
+- Flag fijo del hijo --max-heap-size=256, sin otros flags de heap; gate de argv del hijo y lectura futura node:v8 heap_size_limit positiva/entera<=268435456. Sólo V8_HEAP_ONLY: RSS, buffers externos y subprocess esbuild NO acotados por esa afirmación.
+- Antes de parser/diccionario se exigen EXACTOS2111553bytes/SHA2b2334f3bb333d13b6e7a6238fe8091a681a986d233fc1253157e64bdbd0f2f2. Un mismatch preserva metadata y termina incomplete; no se repinea ni reintenta.
+- Los demás caps permanecen: emisión4MiB/candidatos4096/depth32/payload1MiB/fold8MiB/matches128/result64KiB/raw8MiB; hijo45s+3/comando60s+3/job2min; dos JSON/7d. No se afirma que600k o256MiB basten.
+
+La comprobación de progreso/heap real sigue FUTURA. No hubo proceso con ese flag ni lectura real de heap, npm, Acorn, build, parser de proyecto/emisión, tests o job en esta reanudación.
+
+### Tres ajustes necesarios al DTO del borrador
+
+Los controles inertes RED reprodujeron tres aceptaciones indebidas del borrador: status complete con intento sin completion; metadata de heap con flag contradictorio; y control pass con cantidad/touches inconsistentes. Se ajustó sólo closedChild en tres seams:
+
+1. La evidencia de heap requiere además sus campos cerrados kind/flag/requestedBytes/verified y las tres negativas de RSS/buffers/subprocess coherentes.
+2. Para complete, ambos pares attempts/completions deben coincidir, además de concordar con parser/visitas; los fallos manejados conservan deliberadamente diferencias.
+3. Para complete, casos de metadata=7/touches=0, flags de esos controles verdaderos y getter/Proxy touches0. No basta un pass aislado contradictorio.
+
+No se cambiaron funciones de privacidad, folding, controles runtime existentes, build literal/call, plugin, opciones, package/lock/target/source pins o timeout. Comparaciones textuales contra53176240/f476 verificaron esas regiones exactas; contra6ecd verificaron que las funciones de counters/heap del borrador permanecen iguales y sólo se endureció su DTO. El report de ejecución cerrado se conserva antes del inventario posterior para no perder progreso al fallar ese readback.
+
+### Controles realmente ejecutados: sólo metadata pequeña
+
+Se analizó gramática con SourceTextModule sin evaluate/link/import del helper. Se ejecutaron dos VM de builtins, cada una con timeout100ms: RED sobre tres paquetes JSON fabricados y GREEN sobre diez grupos de metadata, incluyendo un AST manual de dos nodos con una referencia compartida. No se generó ni parseó fuente con Acorn, no se iteró600000veces, no se consumió un heap de256MiB, no se evaluó bundle/proyecto y no se ejecutó el helper completo. HostNodeVersion=unavailable_from_node_repl; no es cualificación cloud Node22.
+
+Comandos exactos de evaluación usados por node_repl, tras preparar las cadenas reproducibles descritas debajo:
+
+```js
+var vm=await import('node:vm');
+var crypto=await import('node:crypto');
+var types=(await import('node:util')).types;
+var capMetaRed=vm.runInNewContext(capMetaRedProgram,
+ {types,createHash:crypto.createHash},{timeout:100});
+var capMetaGreen=vm.runInNewContext(capMetaGreenProgram,
+ {types,createHash:crypto.createHash},{timeout:100});
+new vm.SourceTextModule(capResumeHelper); // sólo gramática
+```
+
+Para reproducir únicamente esta metadata, oldHelper es el texto del blobe038585284fdf266be0d885dc15357cfddfd6830 y newHelper es el texto del blobfd03d1e611a607b2011c2c519158e468f5e9d976; se tratan como strings, nunca como módulos. Construcción exacta de programas:
+
+```js
+const prefixes=["const HEAP_BYTES=","const EXPECTED_EMISSION=","const LIMITS=","const REASONS=","const PHASES=","const STATES=","const UNKNOWN=","const TARGET=","const flags=","const CODES=","const NAMES=","const INTRINSICS=","const PROTOS=","const CLASS_NAMES=","const ORIGINAL_BUILD=","const hash=","const own=","const hex=","const number=","const stop="];
+function region(s,a,b){return s.slice(s.indexOf(a),s.indexOf(b,s.indexOf(a)));}
+const common=prefixes.map(p=>oldHelper.split('\n').find(x=>x.startsWith(p))).join('\n')+'\n'
+ +region(oldHelper,'function closedError(','function controls(')
+ +region(oldHelper,'function closedControl(','function newProgress(')
+ +region(oldHelper,'function newProgress(','function fold(');
+const capMetaRedProgram=common
+ +region(oldHelper,'function closedChild(','function git(')
+ +packetSource+redCases;
+const capMetaGreenProgram=common
+ +region(newHelper,'function fold(','function metadataControls(')
+ +region(newHelper,'function closedChild(','function git(')
+ +packetSource+greenCases;
+```
+
+packetSource exacto:
+
+```js
+function packet(){
+ const progress=newProgress();progress.allocationAttempts=12;progress.allocationCompletions=12;progress.uniqueVisitAttempts=10;progress.uniqueVisitCompletions=10;
+ const privacy=Object.fromEntries(['pass','proxyPrototypesSafe','ordinaryNative','crossRealmNative','crossRealmExactUnknown','spoofRejected','oversizeSuppressed','cycleBounded','rawCanaryAbsent'].map(key=>[key,true]));privacy.getterTouches=0;privacy.proxyTrapTouches=0;
+ const metadata=Object.fromEntries(['pass','literal','addition','template','primitiveAddition','gettersUntouched','proxyUntouched','callNotEvaluated'].map(key=>[key,true]));metadata.cases=7;metadata.touches=0;
+ return {purpose:'afw.own-literal.child.v1',status:'inspection_complete',phase:'complete',networkDenied:0,progress,heap:heapRecord(HEAP_BYTES),privacy,metadata,emission:{bytes:EXPECTED_EMISSION.bytes,sha256:EXPECTED_EMISSION.sha256,imported:false,evaluated:false},build:{literalHash:hash(ORIGINAL_BUILD),warnings:0,outputFiles:1},parser:{allocationAttempts:12,allocationCompletions:12},inspection:{nodes:10,candidates:1,folded:0,foldedBytes:0,unknown:{unsupported_ast:1},matches:[]}};
+}
+
+```
+
+redCases exactos:
+
+```js
+const a=packet();a.progress.allocationAttempts=600001;a.progress.allocationCompletions=600000;a.parser.allocationAttempts=600001;a.parser.allocationCompletions=600000;
+const b=packet();b.heap.flag='WRONG_FIXED_FLAG';
+const c=packet();c.metadata.cases=6;c.metadata.touches=1;
+({counterFalseCompleteAccepted:closedChild(a)!==null,wrongHeapMetadataAccepted:closedChild(b)!==null,wrongControlMetadataAccepted:closedChild(c)!==null});
+
+```
+
+greenCases exactos:
+
+```js
+const cases=[];
+const check=(name,pass,facts={})=>cases.push({case:name,pass,...facts});
+const allocation=newProgress();allocation.allocationAttempts=599999;allocation.allocationCompletions=599999;
+beginProgress(allocation,'allocation');completeProgress(allocation,'allocation');
+check('allocation_limit_inclusive',allocation.allocationAttempts===600000&&allocation.allocationCompletions===600000,closedProgress(allocation));
+let allocationReason=null;try{beginProgress(allocation,'allocation');}catch(error){allocationReason=own(error,'o4Reason');}
+check('allocation_rejected_attempt_preserved',allocationReason==='allocation_cap'&&allocation.allocationAttempts===600001&&allocation.allocationCompletions===600000,{reason:allocationReason,...closedProgress(allocation)});
+const visit=newProgress();visit.uniqueVisitAttempts=600000;visit.uniqueVisitCompletions=600000;
+let visitReason=null;try{inspect({type:'Program',start:0,end:0,body:[]},visit);}catch(error){visitReason=own(error,'o4Reason');}
+check('unique_visit_rejected_attempt_preserved',visitReason==='visit_cap'&&visit.uniqueVisitAttempts===600001&&visit.uniqueVisitCompletions===600000,{reason:visitReason,...closedProgress(visit)});
+const independent=newProgress();independent.allocationAttempts=8;independent.allocationCompletions=8;
+const shared={type:'Literal',start:0,end:1,value:1};const scanned=inspect({type:'Program',start:0,end:1,body:[shared,shared]},independent);
+check('unique_visit_deduplicates_not_allocations',scanned.nodes===2&&independent.uniqueVisitAttempts===2&&independent.uniqueVisitCompletions===2&&independent.allocationCompletions===8,closedProgress(independent));
+const handled=packet();handled.status='incomplete';handled.phase='parse';handled.reason='allocation_cap';handled.progress=allocation;handled.parser.allocationAttempts=600001;handled.parser.allocationCompletions=600000;
+const handledOut=closedChild(handled);
+check('handled_failure_keeps_partial_facts',handledOut?.progress.allocationAttempts===600001&&handledOut?.progress.allocationCompletions===600000&&handledOut?.reason==='allocation_cap');
+const fatal=closedProgress(own(null,'progress'));
+check('missing_terminal_evidence_is_UNKNOWN',fatal.state==='UNKNOWN'&&Object.values(fatal).filter(v=>v===null).length===4,fatal);
+const heapGood=heapRecord(268435456),heapBad=heapRecord(268435457),heapZero=heapRecord(0);
+check('heap_numeric_metadata_only',heapGood.verified&&!heapBad.verified&&!heapZero.verified&&!heapGood.rssBounded&&!heapGood.externalBuffersBounded&&!heapGood.compilerSubprocessBounded,{limit:heapGood.heapSizeLimitBytes,overLimitVerified:heapBad.verified,actualHeapTest:false});
+const good=closedChild(packet());
+check('consistent_complete_metadata_accepted',good?.status==='inspection_complete'&&good.progress.allocationAttempts===good.progress.allocationCompletions&&good.progress.uniqueVisitAttempts===good.progress.uniqueVisitCompletions);
+const badCounter=packet();badCounter.progress.allocationAttempts=600001;badCounter.progress.allocationCompletions=600000;badCounter.parser.allocationAttempts=600001;badCounter.parser.allocationCompletions=600000;
+const badHeap=packet();badHeap.heap.flag='WRONG_FIXED_FLAG';
+const badControls=packet();badControls.metadata.cases=6;badControls.metadata.touches=1;
+check('inconsistent_complete_metadata_rejected',closedChild(badCounter)===null&&closedChild(badHeap)===null&&closedChild(badControls)===null,{counterRejected:closedChild(badCounter)===null,heapRejected:closedChild(badHeap)===null,controlsRejected:closedChild(badControls)===null});
+let touches=0;const guarded={};Object.defineProperty(guarded,'state',{get(){touches++;throw 0;}});
+const proxy=new Proxy({},{get(){touches++;throw 0;},getOwnPropertyDescriptor(){touches++;throw 0;}});
+check('progress_getters_and_proxy_untouched',closedProgress(guarded).state==='UNKNOWN'&&closedProgress(proxy).state==='UNKNOWN'&&touches===0,{touches});
+({passed:cases.filter(x=>x.pass).length,total:cases.length,cases});
+
+```
+
+Resultados saneados reales, sin source/payload de aplicación:
+
+```json
+{
+  "kind": "handcrafted_metadata_RED",
+  "vmTimeoutMs": 100,
+  "hostNodeVersion": "unavailable_from_node_repl",
+  "cases": 3,
+  "result": {
+    "counterFalseCompleteAccepted": true,
+    "wrongHeapMetadataAccepted": true,
+    "wrongControlMetadataAccepted": true
+  },
+  "projectOrParserOrHeapRun": false
+}
+```
+
+```json
+{
+  "kind": "handcrafted_metadata_GREEN",
+  "vmTimeoutMs": 100,
+  "hostNodeVersion": "unavailable_from_node_repl",
+  "projectParserImported": false,
+  "actualHeapTest": false,
+  "result": {
+    "passed": 10,
+    "total": 10,
+    "cases": [
+      {
+        "case": "allocation_limit_inclusive",
+        "pass": true,
+        "state": "observed",
+        "allocationAttempts": 600000,
+        "allocationCompletions": 600000,
+        "uniqueVisitAttempts": 0,
+        "uniqueVisitCompletions": 0
+      },
+      {
+        "case": "allocation_rejected_attempt_preserved",
+        "pass": true,
+        "reason": "allocation_cap",
+        "state": "observed",
+        "allocationAttempts": 600001,
+        "allocationCompletions": 600000,
+        "uniqueVisitAttempts": 0,
+        "uniqueVisitCompletions": 0
+      },
+      {
+        "case": "unique_visit_rejected_attempt_preserved",
+        "pass": true,
+        "reason": "visit_cap",
+        "state": "observed",
+        "allocationAttempts": 0,
+        "allocationCompletions": 0,
+        "uniqueVisitAttempts": 600001,
+        "uniqueVisitCompletions": 600000
+      },
+      {
+        "case": "unique_visit_deduplicates_not_allocations",
+        "pass": true,
+        "state": "observed",
+        "allocationAttempts": 8,
+        "allocationCompletions": 8,
+        "uniqueVisitAttempts": 2,
+        "uniqueVisitCompletions": 2
+      },
+      {
+        "case": "handled_failure_keeps_partial_facts",
+        "pass": true
+      },
+      {
+        "case": "missing_terminal_evidence_is_UNKNOWN",
+        "pass": true,
+        "state": "UNKNOWN",
+        "allocationAttempts": null,
+        "allocationCompletions": null,
+        "uniqueVisitAttempts": null,
+        "uniqueVisitCompletions": null
+      },
+      {
+        "case": "heap_numeric_metadata_only",
+        "pass": true,
+        "limit": 268435456,
+        "overLimitVerified": false,
+        "actualHeapTest": false
+      },
+      {
+        "case": "consistent_complete_metadata_accepted",
+        "pass": true
+      },
+      {
+        "case": "inconsistent_complete_metadata_rejected",
+        "pass": true,
+        "counterRejected": true,
+        "heapRejected": true,
+        "controlsRejected": true
+      },
+      {
+        "case": "progress_getters_and_proxy_untouched",
+        "pass": true,
+        "touches": 0
+      }
+    ]
+  }
+}
+```
+
+Los valores600000/600001 se establecieron en registros manuales para comprobar el borde; no son mediciones reales de Acorn. La prueba de heap usa sólo números literales268435456/268435457/0 en heapRecord; no prueba soporte de flags ni consumo de memoria. El control de deduplicación conserva8completions de allocation modeladas y observa2visitas únicas reales sobre ese AST manual, sin equiparar ambos dominios.
+
+### Paquete de revisión, preservación y cierre
+
+Rango completo de SAME-reviewer:53176240de1fcac9d9a423a62ec44cea1e88b3e8..HEAD externo, incluyendo todo el historial de informes. Rango de esta reanudación:6ecd57629a588e6ac46eabb9fe65bffce6bca4f5..HEAD. Ambos sólo afectan helper+informe respecto a sus bases; workflowaf862 exacto. Se conserva íntegro el prefijo38e22eb... y con él la evidencia del primer run y del apagado. No se sobrescribe historia.
+
+Commit con padre6ecd, [skip ci], expected_sha6ecd/force=false. Criterio externo de cierre: ref/commit/árbol completo no truncado3191blobs,3189tuples fuera de helper+informe intactos,3188originales f5 preservados, tres archivos completos leídos, workflow manualfalse, prefijo de informe exacto, un solo run histórico terminal/attempt1 y cero adicionales/activos. Head/tree/blob final del informe y CAS/readbacks efectivos van en contrato externo, sin autorreferencia.
+
+Preparación terminada INACTIVA; SAME-reviewer y nueva decisión Root pendientes. No autoactivación, nuevo job, rerun o cambio de cap por inferencia. STOP_WRITES al cerrar. operationalReadiness=false; completePackage=false; PCoff=false.

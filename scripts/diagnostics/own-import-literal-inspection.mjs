@@ -297,7 +297,10 @@ function closedChild(value){
  if(own(value,'purpose')!=='afw.own-literal.child.v1'||!STATES.includes(own(value,'status')))return null;
  const out={purpose:'afw.own-literal.child.v1',status:own(value,'status'),progress:closedProgress(own(value,'progress')),networkDenied:number(own(value,'networkDenied')),phase:PHASES.includes(own(value,'phase'))?own(value,'phase'):null,reason:REASONS.includes(own(value,'reason'))?own(value,'reason'):null,...flags};
  const rawHeap=own(value,'heap');
- if(rawHeap)out.heap=heapRecord(own(rawHeap,'heapSizeLimitBytes'));
+ if(rawHeap){
+  out.heap=heapRecord(own(rawHeap,'heapSizeLimitBytes'));
+  out.heap.verified=out.heap.verified&&own(rawHeap,'verified')===true&&own(rawHeap,'kind')==='V8_HEAP_ONLY'&&own(rawHeap,'flag')===HEAP_FLAG&&own(rawHeap,'requestedBytes')===HEAP_BYTES&&own(rawHeap,'rssBounded')===false&&own(rawHeap,'externalBuffersBounded')===false&&own(rawHeap,'compilerSubprocessBounded')===false;
+ }
  out.privacy=closedControl(own(value,'privacy'));
  const meta=own(value,'metadata');
  out.metadata=Object.fromEntries(['pass','literal','addition','template','primitiveAddition','gettersUntouched','proxyUntouched','callNotEvaluated'].map(key=>[key,own(meta,key)===true]));
@@ -323,7 +326,7 @@ function closedChild(value){
  }
  if(out.status==='inspection_complete'){
   const i=out.inspection,b=out.build,e=out.emission;
-  if(!out.privacy.pass||!out.metadata.pass||out.networkDenied!==0||!i||!b||!e||e.bytes===null||e.sha256===null||b.literalHash!==hash(ORIGINAL_BUILD)||b.warnings===null||b.outputFiles!==1||!out.heap?.verified||!e.identityMatches||out.progress.state!=='observed'||!out.parser||out.parser.allocationAttempts===null||out.parser.allocationCompletions===null||out.progress.allocationAttempts!==out.parser.allocationAttempts||out.progress.allocationCompletions!==out.parser.allocationCompletions||out.progress.uniqueVisitCompletions!==i.nodes||i.nodes===null||i.candidates===null||i.folded===null||i.foldedBytes===null||i.folded+Object.values(i.unknown).reduce((a,n)=>a+n,0)!==i.candidates||i.matches.length>i.folded)return null;
+  if(!out.privacy.pass||out.privacy.getterTouches!==0||out.privacy.proxyTrapTouches!==0||!out.metadata.pass||out.metadata.cases!==7||out.metadata.touches!==0||!['literal','addition','template','primitiveAddition','gettersUntouched','proxyUntouched','callNotEvaluated'].every(key=>out.metadata[key])||out.networkDenied!==0||!i||!b||!e||e.bytes===null||e.sha256===null||b.literalHash!==hash(ORIGINAL_BUILD)||b.warnings===null||b.outputFiles!==1||!out.heap?.verified||!e.identityMatches||out.progress.state!=='observed'||out.progress.allocationAttempts!==out.progress.allocationCompletions||out.progress.uniqueVisitAttempts!==out.progress.uniqueVisitCompletions||!out.parser||out.parser.allocationAttempts===null||out.parser.allocationCompletions===null||out.progress.allocationAttempts!==out.parser.allocationAttempts||out.progress.allocationCompletions!==out.parser.allocationCompletions||out.progress.uniqueVisitCompletions!==i.nodes||i.nodes===null||i.candidates===null||i.folded===null||i.foldedBytes===null||i.folded+Object.values(i.unknown).reduce((a,n)=>a+n,0)!==i.candidates||i.matches.length>i.folded)return null;
  }
  return out;
 }
