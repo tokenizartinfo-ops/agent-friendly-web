@@ -1064,3 +1064,364 @@ Root release7e02164f5cdb4a212475a3f73b689dfb10f56e94 @e59314be2ab1698bdc3da2c322
 Paired current predicate control uses actual Node22.23.4 host fs empty-directory Array: original hostempty REJECTS against VM[]; marshalledempty ACCEPTS; marshalled actual one-extra-entry REJECTS. Separate actual two-entry fs result verifies exact order/elements and all marshalled constructors/prototypes equal VM intrinsic. Same actual current sealer same()/deepStrictEqual; no weakened equality/canary/schema. Fixed source framing/inventory regressions and three existing failedlogs/unknownfield/unknownstring privacy cases remain. This paired proof diagnoses the deterministic realm defect; first historical innercatchsite remainsUNKNOWN.
 
 Single fresh attempt1 <=2min keyless fullcovering onlycontracts runnable/sixnativefalse: fixed5 syntax/lint; inactive1/business0/nooutput/invalid pre-I0; Q8exact8/0failcancelSkipTodo; allF1–F8 with paired actual realm + currentsealer tests; three FULL strictly validated profiles positive/readonly/reduction_a. No SDKbusiness/MF/I0/Native16/newsecret. Freeze through terminal/assignedsameID/fullinventory/digest. Failure exactc72/manual7false/report/readbacks/STOP/noautoretry. Allpass reconcile COMPLETE7 latestFIXEDsealer/manual/noinputs/nopush/all7false/currentwiring/readbacks/report/STOP. Formalround2/FIX_BASEd9b7 remains and same review pending.
+
+
+## Round2 covering ALL PASS — COMPLETE7 reconciled INACTIVE for same-reviewer gate
+
+Latest authorized pure covering run43222147327/attempt1/Source8735e1b975b9aad058c81f362cdfebc1c4dfbb84/treecb87e79b7ef4e8c65a6b3de53cfe69cc7b430581/world5f349fdbece8a38f3dc78c82f57131b0efbd01da/TEMPexact03a715eba7608b0026129b54790a2b86db8ac53c. Contracts131196068335 terminalSUCCESS, job2026-11-12T12:54:00Z..2026-11-12T12:54:38Z, runcreated2026-11-12T12:53:57Z/terminalupdated2026-11-12T12:54:39Z. Exactly one attempt1, no retries/rerun. Six native jobs terminalSKIPPED. No actualSDK/businessRoot/MF/I0/nativeclock/Native16.
+
+Executed validation: same five files node --check + locked scoped ESLint; explicitly unset AFW_BUDGET_GROUP single native-file module wrapper1/pass1/business0/no output; invalid fixed group rejected before output/I0; unchanged Q8exact8/pass8/fail0/cancelled0/skipped0/todo0. All F1–F8 pure groups PASS/errornull. F2 actual observer-order controls cover two conservative confirmed deadline orders, late ordinary SAME-error propagation, SAME-error race, fulfilled-guard ambiguity, finallyclose, missing and duplicate observations; these are pure models, not genuine native SDK timelines. F5 actual CURRENT producer continuation/catch/evidence/finally/recovery and exact current Node callback controls cover normal plus D/E+D/F+D/E+F+D/recoveryE+D/callbackA+D+siblingB; each fixed Node child preserves one disposer attempt, primary identity/ancillary errors/poison, no MF. F8 six fixed proof entries cover EOF/LF strict framing+invalidframes, CURRENT expectedSet/actualinventory mutations, paired actual22.23.4 realm arrays, and three current-sealer rawlog/canary/unknownfield/unknownstring sandbox cases. Public summary caseCount is its named-case-array count, NOT an additional8Q or native16 business count; F2 causal subcases/F5 seven child cases are bound by each full private group evidence bytes/SHA. Full private traces retained runner-only untilcleanup as released, no claim of seven-day raw pure logs.
+
+Three FULL compile profiles positive/readonly/reduction_a strictly validated and published. Unique M61/QA115 each; additionalSYN module records0/3/3. Original positive emitted entry106772B/SHAf5458d1d7f94665c8b02915972c95614b3a3bd2125d6d6a89ef6bea737c999ec; readonly/reduction preserve same baselineprefix before private extension. Rawentry64800B/SHA89ae285b... and SDK251149B/SHAbb2b8524... unchanged; readonly/reduction twelve PRIMARY observation blocks with work2/wait2 explicit subcounts, no addedpositive/default SYN. No descriptor refresh/rawlib/SDK/production/clock changes. First historical sealer catch attribution staysUNKNOWN; paired realm proof establishes deterministic defect+repair only.
+
+Artifact13944719793 / finite-budget-fixed-preparation-8735e1b975b9aad058c81f362cdfebc1c4dfbb84, ZIP111851B/SHA25691a2ddbac2115b8a047d47816e775cc79fe528ee12f31f43baa6c86d3234b1ca, expires2026-11-19T12:54:31Z. FIRST assigned exact-ID retrieval SUCCESS; retrieval2/3SKIPPED. Uploaded/downloaded digests match; independent full10file inventory/context/manifest/local byte equality SUCCESS, manifest1635B/SHA2562a6d021f64c260121712d40129bc2b56bc6a7224fcf46041a5a156e0fb35edb1. One bounded in-RAM connector read only verifies actualZIPdigest/inventory/status and metadata; no local files/project execution. status pure_passed / validationFailures[] / all three outcomes success. Public exactJSON only, no raw Source/log/TAP/stack/canary bytes; raw pure material runner-only untilcleanup. Native encrypted custody unchanged/notrerun.
+
+Exact safe artifact facts:
+
+```json
+{
+  "zipBytes": 111851,
+  "sha256": "91a2ddbac2115b8a047d47816e775cc79fe528ee12f31f43baa6c86d3234b1ca",
+  "inventory": [
+    {
+      "name": "budget-artifact.json",
+      "bytes": 1635,
+      "sha256": "2a6d021f64c260121712d40129bc2b56bc6a7224fcf46041a5a156e0fb35edb1"
+    },
+    {
+      "name": "diagnostics.json",
+      "bytes": 809,
+      "sha256": "ab2fbc629b3dd23f7adf0ffc3976bad214b997e4370e826644132eb8b7518d3f"
+    },
+    {
+      "name": "controls.json",
+      "bytes": 2141,
+      "sha256": "f87829e74cbeff7fe8c0e9e80f6e7d2f8141e69f59469d8e187e396bf0d14fa7"
+    },
+    {
+      "name": "inactive.json",
+      "bytes": 199,
+      "sha256": "b45cfb6f89a79a1f15b842a71fff8b2003b8812ee5dd41e4a578d9037376b12c"
+    },
+    {
+      "name": "preflight-positive.json",
+      "bytes": 201677,
+      "sha256": "ed02d96c0d496573380d1af7f3b2950a03b3066acb3e75e13675c6dfe5535767"
+    },
+    {
+      "name": "preflight-readonly.json",
+      "bytes": 210747,
+      "sha256": "476e922a2e91aabda9ff26d340fddf599a4198439792f00ce8ea786fe48b0004"
+    },
+    {
+      "name": "preflight-reduction_a.json",
+      "bytes": 210752,
+      "sha256": "6f5db1fcb961ee13dec1a99ba9c4a419d8329669ae2d74b0b677733a6b305042"
+    },
+    {
+      "name": "preflight.json",
+      "bytes": 201677,
+      "sha256": "ed02d96c0d496573380d1af7f3b2950a03b3066acb3e75e13675c6dfe5535767"
+    },
+    {
+      "name": "q-counts.json",
+      "bytes": 89,
+      "sha256": "a194a9895da45c53381b398c277e252ab18778d338ae51331a5800121510c6ae"
+    },
+    {
+      "name": "status.json",
+      "bytes": 1481,
+      "sha256": "dee5a76fca1b04774a22c23b3db75d48269a6f977818ffff1026bc5338342e4c"
+    }
+  ],
+  "status": "pure_passed",
+  "validationFailures": [],
+  "outcomes": {
+    "PURE_TEST_OUTCOME": "success",
+    "CONTROLS_OUTCOME": "success",
+    "PREFLIGHT_OUTCOME": "success"
+  },
+  "profiles": [
+    {
+      "group": "positive",
+      "source": "8735e1b975b9aad058c81f362cdfebc1c4dfbb84",
+      "run": "43222147327",
+      "attempt": "1",
+      "M": 61,
+      "uniqueM": 61,
+      "QA": 115,
+      "uniqueQA": 115,
+      "additionalSYN": 0,
+      "I0Opened": false,
+      "nativeExecutionProduced": false
+    },
+    {
+      "group": "readonly",
+      "source": "8735e1b975b9aad058c81f362cdfebc1c4dfbb84",
+      "run": "43222147327",
+      "attempt": "1",
+      "M": 61,
+      "uniqueM": 61,
+      "QA": 115,
+      "uniqueQA": 115,
+      "additionalSYN": 3,
+      "I0Opened": false,
+      "nativeExecutionProduced": false
+    },
+    {
+      "group": "reduction_a",
+      "source": "8735e1b975b9aad058c81f362cdfebc1c4dfbb84",
+      "run": "43222147327",
+      "attempt": "1",
+      "M": 61,
+      "uniqueM": 61,
+      "QA": 115,
+      "uniqueQA": 115,
+      "additionalSYN": 3,
+      "I0Opened": false,
+      "nativeExecutionProduced": false
+    }
+  ]
+}
+```
+
+Actual closed control proof:
+
+```json
+{
+  "purpose": "afw.closed-pure-controls.syn.v2",
+  "source": "8735e1b975b9aad058c81f362cdfebc1c4dfbb84",
+  "run": "43222147327",
+  "attempt": "1",
+  "groups": [
+    {
+      "group": "F1",
+      "passed": true,
+      "caseCount": 2,
+      "evidence": {
+        "bytes": 904,
+        "sha256": "dcae1ea26b1b09c6f2eacc5fd66701bdb3c61d2ccd431281b3c5325827b0909f"
+      },
+      "error": null
+    },
+    {
+      "group": "F2",
+      "passed": true,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 3332,
+        "sha256": "dac450adc2e8566f01427d907b835f22a7e64301654f58a58cd9ef5557d12a21"
+      },
+      "error": null
+    },
+    {
+      "group": "F3",
+      "passed": true,
+      "caseCount": 4,
+      "evidence": {
+        "bytes": 5431,
+        "sha256": "58a26c8fd64bdaf1dd9e116982e1ca80610b765aa8a816f214b73f4a1cda44fe"
+      },
+      "error": null
+    },
+    {
+      "group": "F4",
+      "passed": true,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 2528,
+        "sha256": "fde2eea49ef543f0d36347cda87d7035f10657716cc6cd418bff1fb4548bb33b"
+      },
+      "error": null
+    },
+    {
+      "group": "F5",
+      "passed": true,
+      "caseCount": 3,
+      "evidence": {
+        "bytes": 16098,
+        "sha256": "3f0739f932e0de2cb06b9023b99307bd7787508cfd53ac7847027c759a11a398"
+      },
+      "error": null
+    },
+    {
+      "group": "F6",
+      "passed": true,
+      "caseCount": 1,
+      "evidence": {
+        "bytes": 218,
+        "sha256": "0cf03851592354cf957c3248d37b1585d924dfc009b79704db924a8145070e5a"
+      },
+      "error": null
+    },
+    {
+      "group": "F7",
+      "passed": true,
+      "caseCount": 4,
+      "evidence": {
+        "bytes": 599,
+        "sha256": "7362a7cc15236bd1958794837bccc943ebf5ea87ef2f3db7c06b8d6382c08036"
+      },
+      "error": null
+    },
+    {
+      "group": "F8",
+      "passed": true,
+      "caseCount": 6,
+      "evidence": {
+        "bytes": 1532,
+        "sha256": "ac5c7c49185dc53cdd285c8e87294359d23d4fbcb31f60ba816c8fa2d3398d68"
+      },
+      "error": null
+    }
+  ],
+  "passed": true,
+  "I0Opened": false,
+  "nativeExecutionProduced": false,
+  "businessCases": 0
+}
+```
+
+Validated original entry/SDK and SYN counts:
+
+```json
+[
+  {
+    "group": "positive",
+    "entry": {
+      "rawBytes": 64800,
+      "rawSha256": "89ae285b8f00fdf95eecfeee37673138f4c136c7704f245152051a3be2985257",
+      "emittedBytes": 106772,
+      "emittedSha256": "f5458d1d7f94665c8b02915972c95614b3a3bd2125d6d6a89ef6bea737c999ec",
+      "baselineBytes": null,
+      "baselineSha256": null
+    },
+    "sdk": {
+      "bytes": 251149,
+      "sha256": "bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80"
+    },
+    "primaryBlocks": 0,
+    "work": 0,
+    "wait": 0
+  },
+  {
+    "group": "readonly",
+    "entry": {
+      "rawBytes": 64800,
+      "rawSha256": "89ae285b8f00fdf95eecfeee37673138f4c136c7704f245152051a3be2985257",
+      "emittedBytes": 124640,
+      "emittedSha256": "3b6ada1b5083ef8fe283829845c477badd715496429708e3df3e0f311948a4fa",
+      "baselineBytes": 106772,
+      "baselineSha256": "f5458d1d7f94665c8b02915972c95614b3a3bd2125d6d6a89ef6bea737c999ec"
+    },
+    "sdk": {
+      "bytes": 251149,
+      "sha256": "bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80"
+    },
+    "primaryBlocks": 12,
+    "work": 2,
+    "wait": 2
+  },
+  {
+    "group": "reduction_a",
+    "entry": {
+      "rawBytes": 64800,
+      "rawSha256": "89ae285b8f00fdf95eecfeee37673138f4c136c7704f245152051a3be2985257",
+      "emittedBytes": 124641,
+      "emittedSha256": "f2f0340445b8ab8be6c519864c20b546dbb12c7f8d5f55755f1623d0adec6948",
+      "baselineBytes": 106772,
+      "baselineSha256": "f5458d1d7f94665c8b02915972c95614b3a3bd2125d6d6a89ef6bea737c999ec"
+    },
+    "sdk": {
+      "bytes": 251149,
+      "sha256": "bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80"
+    },
+    "primaryBlocks": 12,
+    "work": 2,
+    "wait": 2
+  }
+]
+```
+
+Reconciliation after terminal/readbacks changes only workflow metadata/gates and this report; CODE REMAINS exact covering world5f349fdb + cleanup2f5dad6c + persistencee0dda1fd + unchanged initial-entrya7b730dc/nativetest533dafb5. COMPLETE seven-job latest FIXED publisher and original native body/wiring retained, MANUAL workflow_dispatch ONLY/noinputs/nopush/no schedule, ALL7 job guards literallyfalse. Original c72 unsafe raw publisher is NOT restored on this success. Fixed public sealer body remains byte-exact03a715eb; closed Q8 JSON replaces raw TAP aggregation; full preflight downloads remain current-schema guarded before I0. No actual native execution is authorized by reconciliation.
+
+Static full graph/role/case/timeouts (all literalfalse, acyclic; consumerB intentionally has no positive/A completion dependency):
+
+```json
+[
+  {
+    "job": "contracts",
+    "needs": "[]",
+    "group": "positive",
+    "role": null,
+    "lane": null,
+    "cases": null,
+    "timeout": "2",
+    "literalFalse": true
+  },
+  {
+    "job": "positive_prepare",
+    "needs": "[contracts]",
+    "group": "positive",
+    "role": "producer",
+    "lane": "positive",
+    "cases": "'[\"P1\"]'",
+    "timeout": "15",
+    "literalFalse": true
+  },
+  {
+    "job": "positive_consume",
+    "needs": "[contracts, positive_prepare]",
+    "group": "positive",
+    "role": "consumer",
+    "lane": "positive",
+    "cases": "'[\"P1\"]'",
+    "timeout": "15",
+    "literalFalse": true
+  },
+  {
+    "job": "reduction_prepare",
+    "needs": "[contracts]",
+    "group": "reduction_a",
+    "role": "producer",
+    "lane": "reduction",
+    "cases": "'[\"D1\",\"D2\",\"D3\",\"D4\"]'",
+    "timeout": "15",
+    "literalFalse": true
+  },
+  {
+    "job": "reduction_consume_a",
+    "needs": "[contracts, reduction_prepare]",
+    "group": "reduction_a",
+    "role": "consumer",
+    "lane": "reduction_a",
+    "cases": "'[\"D1\",\"D2\"]'",
+    "timeout": "15",
+    "literalFalse": true
+  },
+  {
+    "job": "readonly",
+    "needs": "[contracts]",
+    "group": "readonly",
+    "role": "consumer",
+    "lane": "readonly",
+    "cases": "'[\"R1\",\"R2\",\"R3\"]'",
+    "timeout": "7",
+    "literalFalse": true
+  },
+  {
+    "job": "reduction_consume_b",
+    "needs": "[contracts, readonly, reduction_prepare]",
+    "group": "reduction_b",
+    "role": "consumer",
+    "lane": "reduction_b",
+    "cases": "'[\"D3\",\"D4\"]'",
+    "timeout": "15",
+    "literalFalse": true
+  }
+]
+```
+
+Contracts remains2min; native protected limits unchanged. B starts with contracts/readonly/reductionproducer dependencies, resolves other terminal artifacts only after native/disposal under existing same-run unique role/kind/identity/digest policy. B self observation remains in-progress/currenttime until upload; Root must later supply all7terminal/interval proof, no fabricated future end/8thjob. Existing F7 remaining-time request checks/pollfacts retained; no new clockpoll/control execution during reconciliation. All four D cases share original fixed reduction producer lineage. These are static PREPARATION facts, not observed native clocks.
+
+F2/F5/F8 code and covering regressions are now ready for SAME reviewer on FULL formal FIX_BASEd9b7ea752466ee6c5865b1529aeed28072a085ff..final including all commits/seven authorized paths. Formal round2 remains open pending that review; five prior closed findings stay closed unless introduced breakage is found. Full3190 leaves/3183 outside-scope hashes+modes, currentref/tree/report/workflow exact content/closure0runs/branch0active readbacks follow. No main/Rootdocs/ORD/O4/production changes, no helpers, no localprojectsetup/deps/build/tests. Native16/finalTask2/GLOBAL296/realPCoff remain HELD/readinessfalse. STOP after closure; no extra test/job/native action without Root ruling.
