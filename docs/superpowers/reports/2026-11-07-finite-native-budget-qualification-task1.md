@@ -2370,3 +2370,104 @@ Frozen code blobs, equal to BASE throughout:
 Terminal cleanup removes TEMP and appends only this section. Complete comparison to BASE requires 3,188 leaves, TEMP absent, this report alone changed and all other 3,187 BASE leaves exact. Main remains `0c9c475b3ebaa970fc11d628b40e50a90cceb727`. The writer stops after cleanup readback; Root handles the separate fresh Task1 Spec+Quality gate. This qualification is not itself that review gate or Task1 completion.
 
 No local checkout/dependencies/build/test/runtime, real Cloudflare mutation, production credential, OAuth/OTP, cron, Container, customer/client action, mail, Chavo message, PR, merge, deployment or Task2 occurred. A SYN pass does not prove hosted receiver/subscription/notice/ACK/native withdrawal, permanent guard, production readiness or PC-off operation. operationalReadiness=false; completePackage=false; PCoff=false. STOP_WRITES.
+
+
+## Task1 fix round1/5 — five Important findings and bounded ordinary diagnostic — 2026-11-12 UTC
+
+Status: implementation and directed covering checks recorded; the five findings remain open for Root's scoped Spec+Quality review. Ordinary suite completion remains unverified. No Task1 acceptance, Task2, new native qualification or readiness claim.
+
+Authority: [five verbatim review findings](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e284548c6ac6df533c425cf249d7cd100d80804c/docs/superpowers/reviews/2026-11-12-finite-budget-task1-review.es.md), [final round1 brief including timeout and checkout-context rulings](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/4e6f3b826abe04c039d1d9136d2349b6cbe2c5af/docs/superpowers/briefs/2026-11-12-finite-budget-task1-fix-round1.md), blob `46787c625c8711c15544d6bd048731fea1c0af1a`. The dated addenda supersede the earlier immediate-repeat-npm/inactive-candidate instructions. FIX_BASE `eaf019aa872709d867aac53d9684ecdf1c21d013`, tree `0e6c789011d32f46e0b6542a7b7e8f3776fd7942`, 3,188 leaves, report prefix `faaf70bbab2ccb21319812413b4ff47e53f69738`. Global Task1 BASE remains `29681cae2bf1094ec5c66d5b2784254f77bec697`.
+
+All work used remote GitHub connector commits/CAS and GitHub-hosted Actions; no local checkout, dependency install, build, test, model or persistent process. The same implementer remained sole Source writer. No helper agent, reviewer, production change, secret value read, owner intervention, browser, OAuth/OTP, Cloudflare operation, mail, Chavo message, PR, merge or deployment.
+
+### Causal tests and implementation
+
+The original eight Q identities and their earlier controls remain. New cases are independent across Q1/Q3/Q5/Q6/Q8. No native fixture construction, qualification I0 or SDK lifecycle is opened by these focused cases.
+
+| Finding | Regression and actual command | Minimal implementation / covering result |
+| --- | --- | --- |
+| R1 optional file breaks ordinary entrypoint | Q1 directly loads `node test/mcp-qa-finite-budget-native.test.mjs` in a bounded child, removing only child AFW_BUDGET_GROUP and NODE_TEST_CONTEXT. On baseline default exit1, it first requires stderr to contain exactly `SYN budget group unsupported before I0`, then fails the expected-default0 assertion `R1 optional qualification inactive in ordinary command`. Explicit empty/unknown modes must reject1 with the same literal; no recognized opt-in mode is launched. | Guard rejects explicit unsupported values while undefined leaves the optional file inactive. Red/positive registrations and all original P1 assertions remain. Final covering Q1 PASS includes default0, no R0/P1 registration and unknown-mode rejection controls. This focused load is distinct from whole-project npm coverage. |
+| R2 inconsistent scope/group/global peaks | Q6 uses a real collector with two sequential operations/maxRows1; its correct truncated sample passes. Independent mutations of scope peak2/global1, group peak2/global1 and global2/sole scope+group1 each wrongly pass baseline. A second real three-operation/two-scope/two-group sample has each partition member peak1; global3 wrongly passes baseline. All four rejection booleans are evaluated before the assertion `R2 scope group and global peak reconciliation`. | For EACH independent full partition, max(part.peak) <= global.peak <= sum(part.peak). A member containing all nativeStarted must have the global peak. No arbitrary cross-comparison of a scope with a group. Existing prefix bounds and full reconstruction remain. Final covering Q6 PASS accepts both correct samples and rejects all four mutations. |
+| R3 pending promise falsely fulfilled | Q5 uses runtime.member on an actual pending Promise with an own then accessor, preserving receiver/argument/result and one native call. Getter count stays0. Baseline certifies fulfillment; assertion `R3 uninspectable pending Promise remains unsettled` expects pending/settled0/active1/incomplete. | passiveThen distinguishes no-then synchronous values from unobservable descriptors. Unobservable values mark incompleteness without settlement or fake rejection; the actual result/promise is returned. Both passiveThen consumers handle the distinction. Final covering Q5 PASS checks active/settled truth, getters0, normal data-method Promise and genuinely synchronous value controls, existing error/identity/phase/callback controls, plus observeBudgetPromise incompleteness. |
+| R4 missing empty epoch accepted | Q3 parses the actual P1 callback and executes its actual epoch-check statements with real evidence verifiers and collector-generated MODELED snapshots covering both roles/all twelve phases. It does not import a missing API as RED or stub metric verifiers. Baseline accepts all8 then wrongly accepts7 after removing only empty consumer/M/0; assertion `R4 missing empty consumer epoch rejected` fails. | Shared Node-only verifyPositiveBudgetEpochInventory enforces the exact eight identities, including empty captures, and is called by P1. After the source-fidelity correction below, it closes the real SIX data fields segment/epoch/role/reason/capturedAt/snapshot, validates reason string and nonnegative safe-integer capturedAt, and rejects missing/extra/duplicate/malformed entries. Per-snapshot Source/role and metric verification remain. Final covering Q3 PASS also rejects wrong snapshot Source/role and malformed metadata. Full9 projection wiring is deliberately deferred by the latest STOP ruling; no inactive candidate was prepared. |
+| R5 byteLength business getters invoked | Q8 observes actual native reads returning an ArrayBuffer, Uint8Array chunk and DataView chunk with own byteLength getters; two getters throw and one lies. Original promises/results and one call per case remain. Assertion `R5 byte lengths bypass own business getters` fails on baseline. | Captured ArrayBuffer/%TypedArray%/DataView byteLength intrinsics obtain recognized byte lengths without own getters. Unavailable lengths remain null; EOF zero semantics, read/fetch/cancel links and settlement remain. Final covering Q8 PASS: getter calls0, actual bytes7/5/3, fulfilled/settled1/active0/invalid0 for each case. |
+
+The runtime retains the two ordinary strict-callback trampolines, same-Root phase overlay, weak identity stores and original record caps. Compiler/world, fixed selector/reader maps, descriptors and custody code/tests were not changed.
+
+### Initial RED harness corrections, then accepted RED
+
+[RED1 43140111119/1, job130924770320](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43140111119/job/130924770320), Source `96fffacd23525a0c3be66ce5dce071ba0035b6a0`, had8Q/3pass/5fail. Q1 was NOT causal: nested node --test inherited NODE_TEST_CONTEXT and the unknown-mode probe was unreliable. Four other markers were causal; result.valid=false. Only safe result+manifest (two files) were published. This is not an accepted complete RED.
+
+[RED2 43140336358/1, job130925513376](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43140336358/job/130925513376), Source `15df40fb488660c6510b4d55866320b3cb577c7f`, switched to direct Node loading and added R2's upper-bound control. It had8Q/3pass/5 expected markers, but Q1 did not yet verify the child's stderr cause. That test-only push occurred before Root's wait-for-new-ref message arrived; this chronology was disclosed immediately. No runtime/evidence/native.test implementation had changed. Root required one final corrected RED rather than inferring causality from exit1.
+
+[Accepted RED 43141085705/1, job130927960494](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43141085705/job/130927960494), Source `ca6a776be0be5289f7891533061520f743808beb`, tree `0dd3bf4cc40b9c0f507c6aeb96e25098e077afb8`, test `a1cd2da044c39870b57db1aacf9bdc5486a47762`, verified the corrected child environment and exact before-I0 guard literal before the intended R1 failure. Runtime/evidence/native.test remained FIX_BASE. Command `node --test --test-reporter=tap test/finite-budget-diagnostics.test.mjs`: exit1,8tests/3pass/5fail,0cancelled/skipped/todo; exactly Q1/Q3/Q5/Q6/Q8, all ERR_ASSERTION with the five fixed markers. No unrelated setup failure was accepted.
+
+[Initial covering 43141464770/1, pure job130929201063](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43141464770/job/130929201063), Source `1c7c4d191b3eb03a0d74882af7d87fde07076a18`, tree `e6bd7574668e9820ca41728fca738603886fac92`, retained that exact RED test blob and passed8Q, four-file syntax/lint and source-bound176/130/635/54 preflight. It did not expose the new four-field R4 mistake; this covering evidence is superseded for the delivered helper.
+
+The literal ordinary `env -u AFW_BUDGET_GROUP npm test` in job130929409824 of that same run was CANCELLED at the20-minute outer job cap (job02:27:27–02:47:34UTC; command did not finish). No summary, counts, named failures or ordinary artifact were produced. Raw stdout redirected into runner.temp was lost with the runner; seal/upload/readbacks were SKIPPED. This preservation gap is acknowledged; no test PASS/failure/root-cause inference is made. That run used checkoutdepth1; established CI uses depth0 for pinned-revision provenance tests. This difference is factual, NOT a demonstrated cause of cancellation.
+
+### R4 source-fidelity regression and final directed covering
+
+Root found that unchanged world capture emits SIX fields at world:676: segment,epoch,role,reason,capturedAt,snapshot; the first helper incorrectly closed four. Focused read of FIX_BASE world655–685 confirmed the actual pinned capture shape, blob `f654001b027555c41dbe3f287445e73ac849094b`. World was not changed.
+
+[Source-faithful RED 43144954855/1, job130940498190](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43144954855/job/130940498190), Source `985a75812f514454c1cfa476e2f9779eda2283fa`, tree `3cb4e50453b6e32e7d8076e970dab7f0cfe9b540`, test `5ae2d79aa657a5bdf71d11c2e764d4fa23f749ef`, changed only the test/TEMP. MODELED reason/time now match the actual six-field wrapper. Command above:8Q/7pass/1fail, exit1,0cancelled/skipped/todo; only Q3 ERR_ASSERTION `R4 source-faithful six-field captures accepted`, caused by rejection of the valid full8 set. Current helper was still the four-field implementation.
+
+[Final directed GREEN 43145051926/1, job130940814217](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43145051926/job/130940814217), Source `f6ab4f01c0b867703477fc836424a5e02cc04c40`, tree `48f28e37082bc84693cb56af98ed40e562d27fd2`, retained the exact source-faithful RED test blob.8Q/8pass/0fail/cancelled/skipped/todo, exit0. Commands: node --check and eslint on diagnostics runtime, evidence, pure test and native test; strict compile-only preflight then independently checked actual Source/run/attempt,176role inputs,130fixed paths,635groups,54unique reader sites, I0Opened=false/nativeExecutionProduced=false. All PASS. No custody-nine or full900s/P1 was run in this round.
+
+### One bounded reporter-only ordinary diagnostic
+
+The latest rulings authorize this new diagnostic evidence, not an identical replay of the failed20-minute npm command. [Run43145877512/1, job130943429694](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43145877512/job/130943429694), Source `d1b3a78eec70ae20a3fe17ed9500e3df3e4f3c86`, tree `c96ca3251adaa3bb89b738ec045bd0bfb011edc7`, TEMP `1444381a86f8e9e94937da1ab56647f0432fe73a`. Only TEMP changed from final directed GREEN; code was frozen. Exact Source checkout, persist-credentials:false, fetch-depth:0 matching established CI, Node22.23.4/current lock, contents:read/actions:read, attempt1/self-path push, no secrets/environment.
+
+Package script was verified as `node --test --test-reporter=spec test/*.test.mjs`. The actual diagnostic expanded the SAME shell glob/order (725files), preserved default concurrency/isolation and UNSET group, and added only ordered custom-reporter/destination options alongside spec:
+
+```text
+node --test --test-reporter=spec --test-reporter=<temporary-safe-reporter> --test-reporter-destination=<private-spec> --test-reporter-destination=<safe-progress> test/*.test.mjs
+```
+
+This is a REPORTER-INSTRUMENTED EQUIVALENT, not literal npm test and never npm PASS. The reporter/wrapper existed only under fixed runner.temp paths, embedded in TEMP; no tracked helper was added. It uses the official [Node custom/multiple reporter API](https://nodejs.org/download/release/latest-jod/docs/api/test.html#custom-reporters). Only dequeue/complete/summary events, finite numeric counts, fixed enums, Source/run/attempt, UTC/elapsed time, allowlisted checked-out test-file paths/line/column/nesting and whitelisted ERR_* codes are projected. No titles, messages, stacks, actual/expected, native state, environment values or raw stdout/stderr are published. Per-file latest lifecycle and counts are bounded by the exact725-file allowlist; absent cumulative totals stay null.
+
+Reporter plumbing passed BEFORE the full diagnostic: three ephemeral synthetic pass/fail/hang cases; pass1/fail1/hang1, canaryEmitted=0, partialPreserved=1. The hang case proved safe progress survived its internal deadline. This is reporter validation, not AFW coverage. The full command had an8-minute internal deadline and a12-minute job deadline. Only the runner-owned process group received SIGTERM then bounded SIGKILL after5seconds. Safe progress was emitted every15seconds, while checkpoint state was updated separately.
+
+**Terminal diagnostic status: timeout / partial, job FAILURE.** Internal deadline480,000ms; observed wrapper elapsed485,023ms; child exit1; NO global summary (`totals:null`). Event counters at preservation: dequeued3,727; completed3,723; passed3,682; failed41; skipped1; todo0; summaries408. These are PARTIAL EVENT COUNTERS (including execution-level records), not final test/suite totals or a complete named failure inventory.417files had started and408had summaries in the last breadcrumb. No root cause is assigned to the41 failed completion events; per-file counts/codes/latest positions are in the safe progress.json. A file's latest position is not necessarily its earlier failure location.
+
+Last pending positions exposed by the bounded breadcrumb:
+- test/mcp-qa-finite-first-connection-publication-native.test.mjs:201:119
+- test/mcp-qa-finite-initial-capsule-native.test.mjs:1:1
+- test/mcp-qa-finite-initial-cleanup-native.test.mjs:1:1
+
+They indicate observed dequeue state, not proven deadlock/failure causes. No unrelated code was diagnosed or repaired; no diagnostic, npm, native qualification or full9 was repeated.
+
+Raw spec stdout stayed private:400,800bytes, SHA-256 `57cb9ab9d3e9bf72ba6d843fd7284467e8a9285688f48fc7ae9cb4513095034b`. Private stderr:0bytes, SHA-256 `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`. Safe reporter stream:216,593bytes, SHA-256 `263bd04356a8a0f52d698c8268348f6ce152573b487aafd2aa87b96968484488`. Only bytes/hashes of raw logs are public; raw logs were not uploaded. The safe artifact contains result.json, progress.json, plumbing.json, plumbing-progress.json and budget-artifact.json.
+
+Command failure had continue-on-error, so its step conclusion success does NOT mean test success; the wrapper returned1/status timeout. Separate always preservation, seal/upload, exact-ID download/verification all succeeded before the final required-pass gate correctly failed. No waiver or forced green.
+
+### Safe artifacts and readbacks
+
+| Evidence | Artifact ID | ZIP bytes | ZIP SHA-256 | Expiry UTC |
+| --- | --- | --- | --- | --- |
+| RED1 | [13909665579](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43140111119/artifacts/13909665579) | 828 | `e55c87ac31a18a0ceb18fd1370bb34d25b2eec0d8de1789dd9cba73a79917c1f` | 2026-11-19T02:15:47Z |
+| RED2 | [13909616186](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43140336358/artifacts/13909616186) | 2543 | `432119b6b3ecafcd58522912e1b52cd03e36496bb63848b3d85d4b4388ef7b20` | 2026-11-19T02:17:38Z |
+| accepted RED | [13909612479](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43141085705/artifacts/13909612479) | 2542 | `71e0fd305f8bbe5a4e60b8837ba88ef97c442c3bccbe23f5b2d14a7950292c31` | 2026-11-19T02:24:07Z |
+| initial covering | [13910245453](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43141464770/artifacts/13910245453) | 1542 | `7f9103497fcbe37d3bbe0368297c2b33947726ec4e4a46b23150cf49fc0fc346` | 2026-11-19T02:27:20Z |
+| R4 fidelity RED | [13911003211](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43144954855/artifacts/13911003211) | 2052 | `5ffb8c2591df07c79b324bbe515f4a10a1f07a3dbddb968633e84cd2676e342d` | 2026-11-19T02:58:12Z |
+| final covering GREEN | [13910354300](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43145051926/artifacts/13910354300) | 1548 | `5226375c90c056be04a23e706df40fa46430add05f9ae0b684821c1d649bd00f` | 2026-11-19T02:59:29Z |
+| ordinary diagnostic | [13912410675](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43145877512/artifacts/13912410675) | 15131 | `80ae692fd89d9aceafbcef356b0a201a9aec1504c4692da33fa02bdb809c5f2a` | 2026-11-19T03:14:46Z |
+
+Every listed safe artifact had exact same-ID download/inventory/hash verification, with seven-day retention. All used the first GET; no retrieval retries were required in this round. RED1 contains only result+manifest (2files); accepted RED/covering artifacts contain tests.tap/result.json/budget-artifact.json (3files). Diagnostic5-file manifest:864bytes, SHA-256 `ac8fbd55ca759633e66eded3557fe0c49536a2bf8584832a16f5b4a3ed062ae0`; same-ID readback at03:14:50UTC PASS. Original source/run/attempt are preserved in each manifest/result.
+
+All scripts ran Node22.23.4 on Ubuntu24.04. Platform warning: reused actions targeting Node20 were forced to Node24; this was not the script/fixture Node version. No warning is promoted to a test verdict.
+
+### Delivered code, scope and remaining gate
+
+| Changed code path | Final blob |
+| --- | --- |
+| test/finite-budget-diagnostics.test.mjs | 5ae2d79aa657a5bdf71d11c2e764d4fa23f749ef |
+| test/fixtures/finite-budget-diagnostics.mjs | 2e911fd4e9d2287da687bef9b0389fbec48a5114 |
+| test/fixtures/finite-budget-evidence.mjs | 0d95b1616a167f7f089e3a8ca59ca9628aa8aaa9 |
+| test/mcp-qa-finite-budget-native.test.mjs | 082340b6ede2a252a8602721ec19063cc68fafc8 |
+
+All other code blobs are exact FIX_BASE, including compiler/world, descriptors, custody helper/test, lib/worker/SDK/package/lock/config/compatibility. The delivered cleanup retires active TEMP and appends only this report section:3,188leaves; precisely these four code paths plus this report differ from FIX_BASE;3,183other BASE leaves exact. No inactive full9 candidate is prepared, per latest ruling. Main freshly verified unchanged `0c9c475b3ebaa970fc11d628b40e50a90cceb727`.
+
+Root next decides from the preserved ordinary partial evidence and conducts the scoped review of five findings/new breakage. All five Important remain open pending that verdict. Ordinary full-suite completion and current-source native qualification remain unverified; historical baef full9 remains its own valid dated SYN evidence. No intervention is requested from Gabriel. No further writer action after cleanup readback: STOP_WRITES.
+
+operationalReadiness=false; completePackage=false; PCoff=false.
