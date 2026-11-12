@@ -73,3 +73,9 @@ Independent Astra confirmed timing/ownership: QA actual compile after original r
 ## Concrete pre-MF preservation limitation
 
 Implementer correctly found that existing885–887 verifies an archive but does not delete the original temporary directory when attachPersist fails before harness callback installation. Root corrected “preserve and remove” in SPEC; no Source repair or broadened cleanup task is authorized here. Any such preMF outcome remains unavailable, with deletion/disposal unverified. This prevents an unsupported cleanup claim; all5flagsfalse. Zero Source writes/tests/runs so far.
+
+## Implementation handoff — defensive scope assessed by Root
+
+Second implementer supplied useful N5/directory-preservation findings, accepted and bound, but then declined passive future R2 integration as possible security-failure reproduction. No Source writes/tests/runs occurred. Root independently reviewed actual scope: an existing owned SYN functional fixture with simulated providers/identities and no bypass/exploit input; Task1 executes ONLY inert controls and leaves all Native jobs inactive. Root does not accept an implication that ordinary authorized SDK/own-software diagnosis itself is prohibited. No control or safety boundary is removed; independent implementation review and all original gates remain.
+
+Ruling: retain this bounded defensive scope and assign a fresh standard integration implementer, with full transparency about prior refusal and concrete no-exploit/no-third-party/no-guard-change limits. Cost if wrong is reversible isolated Source work, never Native effects in Task1. All prior actors STOPPED; base408 and one KEYLESS entitlement remain unchanged. This is not a fix round because no implementation exists.
