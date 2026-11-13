@@ -58,3 +58,9 @@ La única ejecución KEYLESS de corrección `43371939381/1` terminó correctamen
 Source quedó cerrado en `171de189`, con F7 restaurado, informe de 20509 caracteres y su prefijo anterior completo. Los 3194 archivos previos conservan hash, modo y tipo; main sigue intacta y no quedaron ejecuciones activas en los cinco estados consultados. Root confirmó que el patch reconstruye exactamente la candidata corregida.
 
 El paquete `native-r1-oracle-task1-fix1-package.md` conserva el diff completo, el informe y las comprobaciones saneadas para la revisión SCOPED del mismo revisor Astra. Native Task2 continúa retenida hasta SPEC PASS y QUALITY CLEAN. No requiere intervención de Gabriel.
+
+## Revisión FIX1: tres puntos pendientes, ronda formal 2
+
+La revisión acotada resolvió la atribución temprana/tardía del fallo original y la referencia al entorno de cifrado. Quedaron tres puntos importantes: admitir como auténtica una captura parcial del estado sin marcarla como prueba Native aprobada; conservar las relaciones originales de tiempos y la capacidad nativa de 16384 registros; y clasificar un TAP aprobado sin resultado completo como evidencia incompleta.
+
+Root contrastó los hallazgos con World y el validador protegido. P10 fija las correcciones, sin alterar el test original ni el contrato público. Se libera al mismo implementador una única cualificación KEYLESS para la ronda 2/5, desde Source cerrado `171de189`, preservando el informe completo de 20509 caracteres. Native Task2 continúa retenida. No requiere sesión, claves ni intervención de Gabriel.
