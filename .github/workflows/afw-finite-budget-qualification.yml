@@ -1,7 +1,10 @@
 name: AFW finite budget qualification
-run-name: AFW decoded key-scope qualification HELD ${{ github.sha }}
+run-name: AFW decoded key-scope qualification ${{ github.sha }}
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
 permissions:
   contents: read
   actions: read
@@ -3327,7 +3330,7 @@ jobs:
           node "$RUNNER_TEMP/afw-suite-verifier.mjs"
 
   keyless_controls:
-    if: ${{ false && github.event_name == 'push' && github.event.head_commit.message == 'AFW DECODED KEY SCOPE QUALIFICATION HELD' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'AFW DECODED KEY SCOPE QUALIFICATION 20261113-R2' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     outputs:
@@ -3408,7 +3411,7 @@ jobs:
           test '${{ steps.pair_written.outputs.status }}' = passed
           test '${{ steps.summary_upload.outcome }}' = success
   keyless_verify:
-    if: ${{ false && always() && github.event_name == 'push' && github.event.head_commit.message == 'AFW DECODED KEY SCOPE QUALIFICATION HELD' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ always() && github.event_name == 'push' && github.event.head_commit.message == 'AFW DECODED KEY SCOPE QUALIFICATION 20261113-R2' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     needs: [keyless_controls]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
