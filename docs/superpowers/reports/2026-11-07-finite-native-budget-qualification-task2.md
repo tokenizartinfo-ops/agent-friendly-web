@@ -9789,3 +9789,198 @@ Pinned STRINGDATA candidates (not yet execution evidence):
 ```
 
 Self-review reviewed full new Reference/test wiring/whole template changes, original pair/cap/identity preservation and both current-vs-Original bindings; immutable Core/ZIP/Bootstrap/pin helper/pair appendix exact in both wrappers. Source not frozen/qualification not executed at this report's preparation commit. One activation follows full lease/readbacks; after BOTH jobs terminal ANY outcome exactF7 restore/full report+3192protected/main/five-state0 readbacks and STOP; failure is no automatic repair/retry. Root independent Task1 review remains separate and Task2 is HELD.
+
+
+### R1 HTTP frontier Task1 — sole KEYLESS terminal FAILURE, permit consumed
+
+INACTIVE actual5+2 staged by expected-head CAS19c9b250 -> 0daca3c0e6661d09da3597a23db4cab7e9fa339f/tree7a7c900c1c9e5e367d6de4fd0d6ebfe5166a715b; complete candidate workflow blobf1c25f215cebc6e38047b02133242ccb33e35249/240781B/SHA2565f955211c4dedd77c541ba8d8a8b0112ccc93f49aa9884c245fe8609b0445ee0/manual/noinputs/nopush/twofalse remains recoverable in Source history. Full stage readback verified all3194leaves/3192protected, both full files, main0c9 and all five active states0 before activation.
+
+Sole KEYLESS activation CAS0daca3c0 -> bd9c731c5f2a3fed6747895cb0905a37250e53fe/treef81e1497b166f5c4ef7814fda2cea19645a74ab8/blob bdec728d9290772cf11b3a7834aed3eb7f146ceb/258428B/SHA25650c3d85084c9f158449c53e8cb4648d41f0b06899cdb8ae22c899ef60f29cf4e. Full ref/workflow readback exact. GitHub run43351510829/attempt1/eventpush, created2026-11-13T02:20:48Z/updated02:21:04Z, matching Source/path/title. Source frozen until BOTH jobs terminal. No retries, reruns, repair, actual projection or second qualification.
+
+Observed outcome: producer131643410933 completed/failure; independent verifier131643509474 completed/skipped. Current event root and fixed nested Original public-code HEAD checks succeeded; Core/reference/tests materialization syntax, Corepin, same7program reconstruction and derived verifier syntax succeeded. Immutable Core pure-controls step succeeded from the permitted fixed Original public-source cwd. Forty+22+18 step FAILED; seal and final producer gate failed; upload skipped; artifact inventory EMPTY. Therefore no assigned SMALLSAFE ID, ZIP/hash/CRC/ranges/fullmanifest/expiry/readback or full18 witness exists for this attempt. Pair16/ZIP16 and independent closed-proof validation did not run. No overall Task1 qualification, actual HTTP predicate or Native outcome is claimed.
+
+Exact actual runner commands/outcomes: current node --check Core/reference/tests PASS; node afw-reference-bootstrap-current.mjs PASS; node afw-core-pin.mjs PASS; current Node materializer in owned child temp PASS; node --check generated verifier PASS; node afw-readonly-inspector-current.mjs controls from afw-original-public-source PASS; timeout --kill-after=1s45s env-i RUNNER_TEMP=<owned> GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-reference-controls-current.mjs FAIL/exit1. Only whitelisted closed pure KEYLESS records and exit metadata were surfaced, no private Native producer log, actual Raw/cipher/plain, key, signed URL/header/token or stack.
+
+Closed stdout established the original40record PASS, followed by HTTP_FRONTIER_FAILURE/read_policy. The current runner executes old22 private callbacks/barrier before HTTP cases, but their runner-temp witness was not surfaced/accepted by the independent job; do not claim independent22 qualification from that path. HTTP suite stopped at read_policy; no full18 postassertion witness or proof artifact was produced. Framework Node test counts were not substituted for callback counts.
+```json
+[
+  {
+    "marker": "REFERENCE_CONTROLS/1",
+    "expected": 40,
+    "completed": 40,
+    "pass": 40,
+    "fail": 0,
+    "inventory": [
+      {
+        "id": "two_valid",
+        "status": "passed"
+      },
+      {
+        "id": "zero_fraction_false",
+        "status": "passed"
+      },
+      {
+        "id": "lookup_states",
+        "status": "passed"
+      },
+      {
+        "id": "identities_flags",
+        "status": "passed"
+      },
+      {
+        "id": "required_bounds",
+        "status": "passed"
+      },
+      {
+        "id": "optional_types",
+        "status": "passed"
+      },
+      {
+        "id": "array_bounds",
+        "status": "passed"
+      },
+      {
+        "id": "empty_absent",
+        "status": "passed"
+      },
+      {
+        "id": "writer_http",
+        "status": "passed"
+      },
+      {
+        "id": "private_canary",
+        "status": "passed"
+      },
+      {
+        "id": "file_missing_bad",
+        "status": "passed"
+      },
+      {
+        "id": "file_bound_links",
+        "status": "passed"
+      },
+      {
+        "id": "gate_no_read",
+        "status": "passed"
+      },
+      {
+        "id": "one_cleanup",
+        "status": "passed"
+      },
+      {
+        "id": "primary_cleanup",
+        "status": "passed"
+      },
+      {
+        "id": "timeout_cleanup",
+        "status": "passed"
+      },
+      {
+        "id": "uncertain_no_cleanup",
+        "status": "passed"
+      },
+      {
+        "id": "cleanup_late_fail",
+        "status": "passed"
+      },
+      {
+        "id": "whole_hash_bytes",
+        "status": "passed"
+      },
+      {
+        "id": "nested_identity",
+        "status": "passed"
+      },
+      {
+        "id": "complete_partial",
+        "status": "passed"
+      },
+      {
+        "id": "strict_envelope",
+        "status": "passed"
+      },
+      {
+        "id": "producer_transport",
+        "status": "passed"
+      },
+      {
+        "id": "verifier_transport",
+        "status": "passed"
+      },
+      {
+        "id": "lc_pair",
+        "status": "passed"
+      },
+      {
+        "id": "lc_last",
+        "status": "passed"
+      },
+      {
+        "id": "lc_pos",
+        "status": "passed"
+      },
+      {
+        "id": "lc_unknown",
+        "status": "passed"
+      },
+      {
+        "id": "lc_ops",
+        "status": "passed"
+      },
+      {
+        "id": "lc_steps",
+        "status": "passed"
+      },
+      {
+        "id": "lc_scalars",
+        "status": "passed"
+      },
+      {
+        "id": "lc_absent",
+        "status": "passed"
+      },
+      {
+        "id": "lc_guard",
+        "status": "passed"
+      },
+      {
+        "id": "lc_invalid",
+        "status": "passed"
+      },
+      {
+        "id": "lc_schema",
+        "status": "passed"
+      },
+      {
+        "id": "lc_clean",
+        "status": "passed"
+      },
+      {
+        "id": "lc_clock",
+        "status": "passed"
+      },
+      {
+        "id": "lc_manifest",
+        "status": "passed"
+      },
+      {
+        "id": "lc_transport",
+        "status": "passed"
+      },
+      {
+        "id": "lc_bounds",
+        "status": "passed"
+      }
+    ],
+    "firstFailure": null
+  },
+  {
+    "marker": "HTTP_FRONTIER_FAILURE/1",
+    "id": "read_policy"
+  }
+]
+```
+
+Static causal concern for Root, not a runtime assertion diagnosis: read_policy's sparse oversize subcase calls readActualReferences and then expects a returned oversize row; the unchanged validateActualReferenceRows deliberately rejects any oversize row. Historical file_bound_links correctly checks oversize through readReference, and verifies global rejection through the coordinator. This appears to be a new control expectation error. No automatic correction/requalification is authorized by this failed attempt; the candidate remains unqualified and needs Root's causal ruling plus a separate concrete release if work continues.
+
+ANY-terminal rollback contract now restores exactF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual/noinputs/nopush/sevenfalse, plus this append preserving the entire historical718543-character prefix and preparation appendix. Contracts2006beb4/Nativebaa84420 and all other3192leaves/modes remain unchanged. Actual5+2 candidate retained ONLY INACTIVE at0daca/f1c25f21; Task2 actual projection remains HELD. originalArtifactAccessed=false, custodyOpened=false, SDKImported=false, I0Created=false; all five readinessflags=false. No current predicate of actual historical Raw was observed. Final full ref/commit/tree3194/protected3192/F7/report/main/five-state0 readbacks follow closure; Source executor then STOPPED.
