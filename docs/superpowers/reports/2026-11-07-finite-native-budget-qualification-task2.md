@@ -10060,3 +10060,620 @@ Prepared string pins (not execution evidence):
 ```
 
 ONE new covering only. Current forty+old22+new18 and pair16/ZIP16/full smallSAFE proof must all actually complete before a qualification claim. After BOTH terminal ANY outcome restore exactF7f7a71/126209/manualsevenfalse plus APPEND/report/fullprefix/protected/main/0active readbacks and STOP. No automatic residual repair or second run; Task2 actual projection HELD. All five readiness flags and originalArtifactAccessed/custodyOpened/SDKImported/I0Created false. Root independent full Task1 review follows successful covering, separately from this self-review.
+
+
+### R1 frontier Task1 fixture fix1 — one fresh covering PASSED, actual projection HELD
+
+Updated complete actual5+2 INACTIVE candidate preserved first atdb4a9ad4226e46150b24226eb8c7d9be6926416a/tree414e73f58cfa097fa9aa2a26631482e3f8f4ef91/blob8b31a4b0552f24a28e05caa98e06d72320f6352e/241728B/SHA25625db3cbd46567b5d297235b74cd9e53d150d2ef930db3ebb3864ac5e8d5e5b01/manual/noinputs/nopush/twofalse. All3192protected leaves/modes, current source two-file/fullprefix, main0c9/five0 read back before activation. Same bodies in new KEYLESS front-end.
+
+ONE fresh activation expected-head CASdb4a9ad4 -> ac80f7248467b9f8e3a99d6108e75ac71e8eb899/tree6cf659aaf565362ff80ec8f4754febe1732e0e7f/blob284331e70a60746fccec19870eb3659e50573fda/259375B/SHA2560cfc3d266ff5a3a98335a2e3dce7112e5f8d28892a1397db5d12063d201e1ce7. Full activation ref/workflow matched exact candidate. Run43352803969/attempt1/eventpush created2026-11-13T02:31:49Z/updated02:32:16Z. Source frozen through BOTH terminalSUCCESS: producer131647660012 and verifier131647738012. All steps succeeded. No rerun of consumed43351510829, no additional qualification/diagnostic attempt.
+
+Actual covering commands/outcomes: current event/nested fixed Original public-code HEAD checks PASS; node --check Core/reference/tests PASS; node afw-reference-bootstrap-current.mjs PASS; node afw-core-pin.mjs PASS; current node materializer from event-root/owned child temp PASS; node --check generated verifier PASS; immutable Core controls from afw-original-public-source PASS. timeout --kill-after=1s45s env-i RUNNER_TEMP=<owned> GITHUB_SHA=0000000000000000000000000000000000000000 GITHUB_RUN_ID=1 node --no-experimental-fetch afw-reference-controls-current.mjs PASS. Current full closed proof extension/seal/upload/producer gates PASS. Independent current Source materializer/bootstrap/verifier syntax, timeout5s credentialless afw-inspection-pair-controls.mjs and node afw-safe-verifier-current.mjs PASS.
+
+Separate actual counts: immutableCore91, publicreference40, oldprivatepostassertion22, newHTTPprivatepostassertion18, inspectionpair16 and SAFEZIP16 all PASSED. Counts are control IDs/callback witness records, not inflated Node framework-test totals. Each fixed22+18 callback has count1/postAssertiontrue, expected/completed/pass matching22/18, fail0/firstFailurenull. No HTTP failure marker on this run. Independent validateControlsPair validated the entire mandatory current referenceSupplement context/source/program bindings/forty record/twenty-two/eighteen witnesses, in addition to unchanged Core control envelope. Verified sourceCore/producerCore/safeControls/metadata/rawZIP/inventory alltrue; no green inferred just from process exit or a declared count.
+
+Assigned current SMALLSAFE artifact14004358203, nameafw-readonly-receipt-inspection-43352803969-1, rawZIP2936B, API digest/upload digest/runner-observed rawZIP SHA256 ALLfef8b5d7ee9c170a7a0a0394f5785a2d4a6dd07d82225923183e777896152807. Metadata expiredfalse, created2026-11-13T02:31:59Z/expires2026-11-20T02:31:59Z; actual workflow_run id43352803969/headSourceac80f724/branch exact. Exactly result.json16884B/SHA256fd2c928ca77952f1fcd1de42dced1a249bfe8fbef2ed5084fd0839a71b3badf3 plus manifest.json335B/SHA256b97a3e166ed1c8285fae357c3df5ad2a6c557f327a00c273032d06bafecf6e91;17219Bcombined<=65536/raw2936<=131072. Independent runner enforced CRC, exact two paths, full contiguous ranges through central directory/EOF, inflate limits and full strict manifest/DTO/current identity. No PC/MCP artifact was downloaded by this builder; only current bounded closed KEYLESS records surfaced. Root can independently audit this exact current SMALLSAFE; no Original artifact/private Raw/cipher/plain/keys/Native producer logs or signedURL/token/header/stack was retrieved.
+
+Whole canonical manifest reconstructed from actual current independent summary fields matched actual335B/manifestSHA exactly as STRINGDATA; the independent runner validated original pair bytes:
+```json
+{
+  "purpose": "afw.readonly-receipt-inspector.CONTROLS.manifest.safe.v1",
+  "source": "ac80f7248467b9f8e3a99d6108e75ac71e8eb899",
+  "run": "43352803969",
+  "attempt": 1,
+  "files": [
+    {
+      "path": "result.json",
+      "bytes": 16884,
+      "sha256": "fd2c928ca77952f1fcd1de42dced1a249bfe8fbef2ed5084fd0839a71b3badf3"
+    }
+  ]
+}
+```
+
+Whitelisted actual closed outputs (each original line<=2048B; expanded formatting below only for report readability):
+```json
+{
+  "producer": [
+    {
+      "marker": "REFERENCE_CONTROLS/1",
+      "expected": 40,
+      "completed": 40,
+      "pass": 40,
+      "fail": 0,
+      "inventory": [
+        {
+          "id": "two_valid",
+          "status": "passed"
+        },
+        {
+          "id": "zero_fraction_false",
+          "status": "passed"
+        },
+        {
+          "id": "lookup_states",
+          "status": "passed"
+        },
+        {
+          "id": "identities_flags",
+          "status": "passed"
+        },
+        {
+          "id": "required_bounds",
+          "status": "passed"
+        },
+        {
+          "id": "optional_types",
+          "status": "passed"
+        },
+        {
+          "id": "array_bounds",
+          "status": "passed"
+        },
+        {
+          "id": "empty_absent",
+          "status": "passed"
+        },
+        {
+          "id": "writer_http",
+          "status": "passed"
+        },
+        {
+          "id": "private_canary",
+          "status": "passed"
+        },
+        {
+          "id": "file_missing_bad",
+          "status": "passed"
+        },
+        {
+          "id": "file_bound_links",
+          "status": "passed"
+        },
+        {
+          "id": "gate_no_read",
+          "status": "passed"
+        },
+        {
+          "id": "one_cleanup",
+          "status": "passed"
+        },
+        {
+          "id": "primary_cleanup",
+          "status": "passed"
+        },
+        {
+          "id": "timeout_cleanup",
+          "status": "passed"
+        },
+        {
+          "id": "uncertain_no_cleanup",
+          "status": "passed"
+        },
+        {
+          "id": "cleanup_late_fail",
+          "status": "passed"
+        },
+        {
+          "id": "whole_hash_bytes",
+          "status": "passed"
+        },
+        {
+          "id": "nested_identity",
+          "status": "passed"
+        },
+        {
+          "id": "complete_partial",
+          "status": "passed"
+        },
+        {
+          "id": "strict_envelope",
+          "status": "passed"
+        },
+        {
+          "id": "producer_transport",
+          "status": "passed"
+        },
+        {
+          "id": "verifier_transport",
+          "status": "passed"
+        },
+        {
+          "id": "lc_pair",
+          "status": "passed"
+        },
+        {
+          "id": "lc_last",
+          "status": "passed"
+        },
+        {
+          "id": "lc_pos",
+          "status": "passed"
+        },
+        {
+          "id": "lc_unknown",
+          "status": "passed"
+        },
+        {
+          "id": "lc_ops",
+          "status": "passed"
+        },
+        {
+          "id": "lc_steps",
+          "status": "passed"
+        },
+        {
+          "id": "lc_scalars",
+          "status": "passed"
+        },
+        {
+          "id": "lc_absent",
+          "status": "passed"
+        },
+        {
+          "id": "lc_guard",
+          "status": "passed"
+        },
+        {
+          "id": "lc_invalid",
+          "status": "passed"
+        },
+        {
+          "id": "lc_schema",
+          "status": "passed"
+        },
+        {
+          "id": "lc_clean",
+          "status": "passed"
+        },
+        {
+          "id": "lc_clock",
+          "status": "passed"
+        },
+        {
+          "id": "lc_manifest",
+          "status": "passed"
+        },
+        {
+          "id": "lc_transport",
+          "status": "passed"
+        },
+        {
+          "id": "lc_bounds",
+          "status": "passed"
+        }
+      ],
+      "firstFailure": null
+    },
+    {
+      "marker": "REFERENCE_EXPANSIONS/2",
+      "expected": 22,
+      "completed": 22,
+      "pass": 22,
+      "fail": 0,
+      "inventory": [
+        {
+          "id": "two_valid",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "identities_flags",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "required_bounds",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "optional_types",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "array_bounds",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "private_canary",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "file_missing_bad",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "file_bound_links",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "gate_no_read",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "timeout_cleanup",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "uncertain_no_cleanup",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "strict_envelope",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_pair",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_last",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_unknown",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_ops",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_steps",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_schema",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_clean",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_clock",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_manifest",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "lc_bounds",
+          "count": 1,
+          "postAssertion": true
+        }
+      ],
+      "firstFailure": null
+    },
+    {
+      "marker": "HTTP_FRONTIER_CONTROLS/1",
+      "expected": 18,
+      "completed": 18,
+      "pass": 18,
+      "fail": 0,
+      "inventory": [
+        {
+          "id": "present_http",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "absent_http",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "collection_type",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "collection_limit",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "boundary_256",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "row_type",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "elapsed_ms",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "body_guard_ms",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "ordered_fields",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "ordered_rows",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "earlier_basic",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "earlier_children",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "case_r2",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "unbranded_error",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "read_policy",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "public_schema",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "canary",
+          "count": 1,
+          "postAssertion": true
+        },
+        {
+          "id": "no_op_registration",
+          "count": 1,
+          "postAssertion": true
+        }
+      ],
+      "firstFailure": null
+    }
+  ],
+  "verifier": [
+    {
+      "marker": "INSPECTION_PAIR_CONTROLS",
+      "expected": 16,
+      "completed": 16,
+      "pass": 16,
+      "fail": 0,
+      "inventory": [
+        {
+          "id": "observed_pass",
+          "status": "passed"
+        },
+        {
+          "id": "observed_failure",
+          "status": "passed"
+        },
+        {
+          "id": "observed_skip_todo",
+          "status": "passed"
+        },
+        {
+          "id": "result_source",
+          "status": "passed"
+        },
+        {
+          "id": "result_run",
+          "status": "passed"
+        },
+        {
+          "id": "manifest_source",
+          "status": "passed"
+        },
+        {
+          "id": "manifest_run",
+          "status": "passed"
+        },
+        {
+          "id": "foreign_pair",
+          "status": "passed"
+        },
+        {
+          "id": "fixture_count",
+          "status": "passed"
+        },
+        {
+          "id": "unexamined",
+          "status": "passed"
+        },
+        {
+          "id": "two_records",
+          "status": "passed"
+        },
+        {
+          "id": "unknown_case",
+          "status": "passed"
+        },
+        {
+          "id": "wrapper_only",
+          "status": "passed"
+        },
+        {
+          "id": "manifest_bytes",
+          "status": "passed"
+        },
+        {
+          "id": "manifest_digest",
+          "status": "passed"
+        },
+        {
+          "id": "case_order",
+          "status": "passed"
+        }
+      ],
+      "firstFailure": null
+    },
+    {
+      "marker": "SAFE_ZIP_CONTROLS",
+      "expected": 16,
+      "completed": 16,
+      "pass": 16,
+      "fail": 0,
+      "inventory": [
+        {
+          "id": "validator_capture_after_success",
+          "status": "passed"
+        },
+        {
+          "id": "validator_rejection_identity_no_capture",
+          "status": "passed"
+        },
+        {
+          "id": "zip_valid_store_crc_vector",
+          "status": "passed"
+        },
+        {
+          "id": "zip_valid_deflate",
+          "status": "passed"
+        },
+        {
+          "id": "zip_signed_unsigned_descriptors",
+          "status": "passed"
+        },
+        {
+          "id": "zip_wrong_size",
+          "status": "passed"
+        },
+        {
+          "id": "zip_wrong_upload_sha",
+          "status": "passed"
+        },
+        {
+          "id": "zip_wrong_metadata_sha",
+          "status": "passed"
+        },
+        {
+          "id": "zip_extra_entry",
+          "status": "passed"
+        },
+        {
+          "id": "zip_duplicate_entry",
+          "status": "passed"
+        },
+        {
+          "id": "zip_traversal_entry",
+          "status": "passed"
+        },
+        {
+          "id": "zip_symlink",
+          "status": "passed"
+        },
+        {
+          "id": "zip_bad_crc",
+          "status": "passed"
+        },
+        {
+          "id": "zip_noncontiguous_ranges",
+          "status": "passed"
+        },
+        {
+          "id": "zip_declared_and_inflate_caps",
+          "status": "passed"
+        },
+        {
+          "id": "download_stream_redirect_auth_bounds",
+          "status": "passed"
+        }
+      ],
+      "failure": null
+    },
+    {
+      "marker": "AFW_SAFE_READBACK/1",
+      "kind": "controls",
+      "source": "ac80f7248467b9f8e3a99d6108e75ac71e8eb899",
+      "run": "43352803969",
+      "attempt": 1,
+      "artifactId": "14004358203",
+      "coreSha256": "d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246",
+      "verifierSha256": "16234197d426dd9745a2801067407691396891826faba459dd532bb8d964390e",
+      "safeZipModuleSha256": "b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d",
+      "producerCoreVerified": true,
+      "sourceCoreVerified": true,
+      "safeControlsPass": true,
+      "metadataVerified": true,
+      "rawZipVerified": true,
+      "inventoryVerified": true,
+      "producerControlCount": 91,
+      "supplementStatus": null,
+      "zipBytes": 2936,
+      "metadataZipBytes": 2936,
+      "uploadDigest": "fef8b5d7ee9c170a7a0a0394f5785a2d4a6dd07d82225923183e777896152807",
+      "metadataDigest": "sha256:fef8b5d7ee9c170a7a0a0394f5785a2d4a6dd07d82225923183e777896152807",
+      "rawZipSha256": "fef8b5d7ee9c170a7a0a0394f5785a2d4a6dd07d82225923183e777896152807",
+      "resultBytes": 16884,
+      "resultSha256": "fd2c928ca77952f1fcd1de42dced1a249bfe8fbef2ed5084fd0839a71b3badf3",
+      "manifestBytes": 335,
+      "manifestSha256": "b97a3e166ed1c8285fae357c3df5ad2a6c557f327a00c273032d06bafecf6e91",
+      "stage": "complete",
+      "reason": "none",
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  ]
+}
+```
+
+Immutable Reference algorithm remains34180/672b054312d8c23c38662719b5183e6e345a322e6db74c6f761719b9bfdf4e36. Updated tests68946/e534d4275873d0eb2dc27c9b66b7fa91d52f7f8c833ab8d39f09173e571ea050; materializer21125/b2e9beda4f17d45745df42029ab2c780c96f13ae69eee36f58ba12fb913818d7; independently generated actual verifier41119/16234197d426dd9745a2801067407691396891826faba459dd532bb8d964390e confirmed in current runner summary. Core77002/d514b190...,ZIP13305/b36c40c0...,Bootstrap1370/2a04ef50..., pin helper/pair appendix/derivedCoreSubset unchanged. No policy/guard/cap change was needed. This successful corrected control does not establish which substep first failed in consumed43351510829; that runtime distinction remains unknown.
+
+Mandatory terminal closure restores EXACTF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual/noinputs/nopush/sevenfalse; APPEND only this report preserving full738243-character prefix. Contracts2006beb4/Nativebaa84420 and other3192leaves/modes remain exact. Updated actual5+2 candidate retained INACTIVE atdb4a9ad4; Task2 actual historical projection remains HELD pending fresh independent Task1CLEAN+separate release. This is pure KEYLESS qualification, no actual historical HTTP predicate/Native cause/fix/runtime/PC-off acceptance. originalArtifactAccessed/custodyOpened/SDKImported/I0Created=false and allfive readinessfalse. Full closure readbacks follow; Source writer then STOPPED.
