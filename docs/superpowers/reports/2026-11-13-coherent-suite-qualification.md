@@ -2716,3 +2716,172 @@ A complete recursive comparison of the restored tree excluding this SAME report 
 Validation was proportional: public Source and hashes in RAM, GitHub GitDB mutations, this single bounded cloud control/inspection/receiver run, Root's single assigned SmallSAFE validation and exact closure comparisons. No local Source files, clones, dependencies, builds, Source imports/execution or tests were used; no private content or source bodies are copied into this report.
 
 Executor self-review found no unresolved implementation concern in the finite diagnostic scope. Root's independent inactive/active gates passed; combined task/final review remains a separate closure step and is not claimed by this paragraph. Current retained compatibility passes; original immediate HTTP/composite write, positive Native failure and missing readonly seal causes remain unresolved. No autofix, rerun, additional Native cycle, traffic, repair, subscription/useful delivery/review/withdrawal/autoclose/PC-off acceptance or Max action is licensed by this result.
+
+
+## 2026-11-13 — Task1 INCOMPLETE UNATTACHED preparation checkpoint
+
+Owner requested saving before a few-minute disconnect, without closing anything. This checkpoint is inert public Source preparation only. Source branch remains b5873e87d1f00ad10985171959e93015bc6045e3, baseline tree af758fa96434fd7a88e97f890f3796de15d5c14a; main remains 0c9c475b3ebaa970fc11d628b40e50a90cceb727. No Source ref update, run, test execution, local Source evaluation/file/dependency/build, Native/World/SDK/private-log/archive/key/runtime operation occurred.
+
+The helper and 34 focused test families are drafted. Catalog selection is the deterministic raw public-line token expression /\bassert(?:\.|\s*\()|\bthrow\b/ plus explicitly named public boundary lines. Six pinned source files yield 631 finite alias_line IDs: world394, native47, custody8, persistence117, cleanup4, adapter61. Current Root ruling selects the first/innermost valid public frame of an ordinary stack chain, while malformed/multi-match individual frames and conflicting explicit markers remain unknown.
+
+Root further required support for actual Node22 native stack accessors through exact intrinsic getter identity, no proxy/custom getter/name/message/prototype-formatting/prepareStackTrace invocation. The intrinsic-identity guard and actual VM Error/AssertionError tests are drafted but unexecuted and unqualified. This is NOT a passing privacy/location qualification.
+
+Known incomplete items at save:
+- The newest helper has a sourceSite conditional with an unmatched parenthesis from draft substitution; correct and inspect before sealing.
+- World is still the prior single-line catch draft, with an obsolete helper pin. Refresh its helper Git blob pin after final helper bytes and re-hash World. Only old line1933 is permitted to change; preserve physical line numbering.
+- Q/S/V templates still contain unsubstituted __PINS__/catalog/control placeholders. They are preserved as COMMENTED DATA in this checkpoint F7; no qualification code is executable in this carrier. Both jobs are literal false, manual/inputfree, and merely exit1 if incorrectly forced.
+- Need finalize current canonical result.json+manifest.json schema/receiver, hash gates, upload/assignment, exact two-job inactive qualification, tests RED all-unknown stub/GREEN actual helper, and Root independent exact-source gate.
+- No qualification or activation is released. After resume, finish public-string preparation, create a NEW inactive unattached candidate, return its complete pins/schema/diffs to Root, and HOLD for a separate one-use activation release.
+
+Original F7 restoration remains blob f7a71f1a0fa4f5ddf069ff411f008a098455e5cc,126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a. This report preserves exact prior b4bcbad28c7ab5b3313c97eb54c0145b5c957f77 prefix:310494 characters,310591 bytes,SHA256e95f3b0016053270ef8610662e7381a2feb4819f0fc4e1d36b5cd1dfb8bab15d. Checkpoint commit is UNATTACHED and does not establish any Source head or execution evidence.
+
+The commented F7 stores the Q/S/V drafts and exact frozen generic Z (13305B/SHA256b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d), public catalog input pins, explicit extra lines, 34 IDs and old/current catch strings. No private content is included. Rootdocs brief/spec/plan ref e889f89d73ee039df50757e8ec0287d749aa6786 supplies exact requirements. All historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified claims remain false.
+
+## 2026-11-13 — Task1 resumed: complete INACTIVE preparation, qualification HELD
+
+This append resumes the exact saved unattached draft be297ada3c97e0b6b99dd10fb8c16113bc157cf3/tree f0c45608ed306bcb271472f0f48de1a332598e21. Owner returned and asked to resume. Root verified the same Source b5873e87d1f00ad10985171959e93015bc6045e3/main 0c9c475b3ebaa970fc11d628b40e50a90cceb727 and five active Actions collections zero before resuming preparation. This is NOT an activation release or an executed qualification. Source branch is untouched. Rootdocs resume reference 9b1e5ac28b29423aa713ba0d8943ee0d8e02c5a7 and exact brief/spec/Task1 remain applicable. No Task2 work occurred.
+
+### Declared scope and immutable public source pins
+
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; repository ID1347578006; ENVIRONMENT Source-only inactive GitDB preparation; ORIGIN GitHub; RESOURCE_TYPE unattached blobs/tree/commit; RESOURCE_ID Source baseline b5873e87d1f00ad10985171959e93015bc6045e3/tree af758fa96434fd7a88e97f890f3796de15d5c14a; ALLOWED_ACTION prepare only. Neither Source attach nor Actions run is released. No local Source file, evaluation, dependency install, build or test execution; public strings were constructed, compared and hashed only as data. No private log/artifact/model/key/runtime access, credentials, native operation, Cloudflare operation, owner data, relay or external message is involved.
+
+Permanent code changes are exactly new pure helper, new focused tests, and World's existing line1933 catch body. F7 is a transient independent zero-AFW-key qualification carrier, not the original 26-key suite client. The same report is append-only. Every other leaf/mode/type/blob is inherited unchanged from the exact baseline tree; main is outside this unit.
+
+| Public source | Git blob | Bytes | SHA256 |
+|---|---|---:|---|
+| helper | 7ca7eb56811eadaef06e686aeaf444f3fc7a5c2e | 10306 | 2c84dce4c13c4f5d8522f60d28397723ddf311b240436c4b11fff50950beea2d |
+| tests | 65deb058efd66d7b3bcd8efd68cc450e1f37592a | 12791 | 68585ad22837bb7a08670d2aa4cecb1fa01a122c5998230e984fbb7a501f6c50 |
+| world | ba426c76afb2f23b2fe79cd49ef49004cbbfe834 | 243530 | 2740e257b7e1023aeb61c10482d3edc21efd546a6565232acac5b468b257718f |
+| zip | frozen generic Z | 13305 | b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d |
+| inactive F7 | 071764cdb9927e8dc2d3ebfcd239c10f0d21ed88 | 43869 | 40a7a9eb567fa276f344748cce017558322aa7dbe60b8bc9ea297241424d2bb7 |
+
+Original World blob0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b is deliberately changed; it must NOT be described as unchanged. World's physical line count remains2098, and only existing line1933 differs. Catch first preserves generic console.error and exitCode1. Extra observation is restricted to argv command prepare-positive AND GITHUB_JOB positive_prepare. It reads the fixed helper URL, hashes exact Git-blob header+bytes with SHA1, checks helper blob7ca7eb56811eadaef06e686aeaf444f3fc7a5c2e, then imports those same verified bytes using data:text/javascript;base64. Diagnostic failures are swallowed; no exception message/stack/value is emitted. World emits at most a fixed AFW_SYN_FAILURE/1 JSON {code,site} line from the pure projector.
+
+Exact scoped World diff at old/current line1933:
+```diff
+- setImmediate(()=>{main().catch(()=>{console.error('SYN fixed budget command failed');process.exitCode=1;});});
++ setImmediate(()=>{main().catch(async error=>{console.error('SYN fixed budget command failed');process.exitCode=1;try{if(process.argv[2]==='prepare-positive'&&process.env.GITHUB_JOB==='positive_prepare'){const bytes=await readFile(new URL('./finite-budget-failure-diagnostic.mjs',import.meta.url));const blob=createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');if(blob!=='7ca7eb56811eadaef06e686aeaf444f3fc7a5c2e')return;const {projectFixedBudgetFailure}=await import('data:text/javascript;base64,'+bytes.toString('base64'));console.error('AFW_SYN_FAILURE/1 '+JSON.stringify(projectFixedBudgetFailure(error)));}}catch{}});});
+```
+
+### Pure helper and actual native-stack safety
+
+Exports projectFixedBudgetFailure(error) and projectFixedBudgetLog(text), each returns exactly fresh {code,site}. Code enum is ["unknown","assertion","EEXIST","ENOENT","EACCES","ENOSPC","ETIMEDOUT","custody_format","custody_limit","custody_size","custody_destination","custody_authentication","custody_io","custody_cleanup"]. Site is unknown or one of631 static alias_line IDs. No free path, column, numeric value, arbitrary property name, message, stack, actual/expected, private name or serialized error is returned. Both functions fail to fixed unknown on malformed/oversized/unsupported input. Log cap65536 UTF8 bytes, each line1024 bytes, maximum4096 lines; only one exact canonical AFW_SYN_FAILURE/1 record ending in newline is accepted. Conflicting/repeated/truncated/forged records fail closed. Future Task2 markers are not parsed.
+
+Descriptor reads reject proxy/native-error impostors and error-supplied getters without invoking them. Code/message bounds are checked before a native stack getter can format them. A stack DATA descriptor is parsed directly. An accessor stack is accepted only when getter AND setter identities equal those captured from a pristine native Error, the input is a non-proxy native Error/AssertionError with exact admitted prototypes, name/message remain primitive bounded data, formatting/constructor descriptors are admitted identities, Symbol.toStringTag hooks are absent, and no prepareStackTrace property exists anywhere on the Error constructor chain. Only the captured intrinsic getter is invoked. Custom getter/proxy/prototype formatting/prepareStackTrace cases must have side-effect counters0. Native support is NOT presumed: cloud d12/d13 MUST prove actual VM-thrown native Error and AssertionError project to persistence_100. A safe unknown for all actual native stacks will fail qualification, not masquerade as useful location capture.
+
+Parser chooses the first/innermost valid finite public frame in a normal call chain, permits ordinary async/new frame prefixes, and never returns columns/paths. A malformed or multi-match public frame is unavailable; unknown numeric/public sites remain unavailable. Recognized sites/codes are untrusted observations, not authenticated causal proof.
+
+Catalog selection is deterministic raw public-line token matching /\bassert(?:\.|\s*\()|\bthrow\b/ plus the already named public async IO/unwind/return-call boundaries below. Raw matching is intentionally syntactic, so text inside a source string/comment may be selected; every selected line is still a finite real line of the exact pinned public source. It does not claim AST executable coverage. No unpinned file is admitted. Qualification recomputes this exact catalog from source bytes. For World it replaces the exact single-line new catch with the exact old catch, asserts no line-count delta, and proves the reconstructed old Git blob0631f9a4 before deriving the original631-site table. This avoids circular helper/World hashes while retaining physical line mapping.
+
+| Alias | Exact public source | Original source Git blob | Selected lines | Explicit extra lines |
+|---|---|---|---:|---|
+| world | test/fixtures/finite-budget-world.mjs | 0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b | 394 | 960,965 |
+| native | test/mcp-qa-finite-budget-native.test.mjs | 533dafb5df5f8e57442c5b9029dc8dec6dded434 | 47 | 78,83 |
+| custody | test/fixtures/finite-checkpoint-custody.mjs | 4d05b5ec0f7b074be88ef9733a47c984b0212351 | 8 | 20,22,302,321 |
+| persistence | test/fixtures/finite-owner-cleanup-persistence.mjs | e0dda1fd3d66c1864fd0b20f873c7fc0c452f6d8 | 117 | 72,100,128,131,139,141 |
+| cleanup | lib/mcp-qa-finite-owner-cleanup.mjs | 1a5a2583d266179cdd89f799c64199f29044fec5 | 4 | 41,42 |
+| adapter | test/fixtures/finite-owner-cleanup.mjs | 2f5dad6c306fac1be2f11845bef640bb204ad572 | 61 | 128,133,134 |
+
+### Inactive qualification carrier and strict current SMALLSAFE role
+
+F7 is manual workflow_dispatch, input-free, no push trigger, two finite jobs qualify and verify, Node22.23.4, ubuntu24.04, three-minute limits, read-only contents/actions permissions, fixed concurrency/cancel-in-progress false, and BOTH literal false guards. Guards also pin repository name/ID, Source ref, attempt1, workflow name/manual event, and a fixed future one-use commit-message sentinel. No environment or secrets.* reference; no npm, World import/execution, SDK, Native, I0, AES, original key programs or provider request. github.token exists ONLY in verifier transfer env for current same-repository run/artifact metadata and assigned raw ZIP download. No new credential/custody is created. Current prepare carrier cannot execute even if merely attached; the independent Root gate and separate active one-use carrier readback/release remain necessary.
+
+Four public source-carried programs are written by qualify and extracted by verify from the SAME checkout F7; every program is SHA256-gated before import/execute. Z is the exact frozen generic ZIP utility from historical9927aea/F7 b6a000da, never the old role-specific client.
+- Q qualify7045B/SHA811edfe71f26552ad18ba8e9ca0265e0138f16f389468864f507eaeb0eae9c77.
+- S role receiver8794B/SHA1c2940f5ca11a4da77a75d42c3a96db8604b1f8859ef7461ad665486baeb9cf0.
+- V verify4540B/SHA1940a2fa6a1315143a476b65b3a4b12036c9deb16655d51a86a71a248d73f944.
+- Z13305B/SHAb36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d.
+
+Q verifies helper/test/World Git-blob, bytes and SHA pins before tests, verifies source catalog and native representation, copies the SAME focused test bytes into a private runner-only red directory and substitutes a two-function all-unknown stub. Stub RED must actually exit1 with both passing and failing cases, exact34 known test IDs and genuine TAP counts. Then checked-out REAL helper/test must exit0 with34/34 pass, fail/cancelled/skipped/todo0. Failed real tests fail the whole qualification; missing/malformed counts or IDs also fail it. Hashes are rechecked after tests. No legacy business failure is executed or represented as TDD RED.
+
+Q runs14 frozen generic ZIP controls and12 new role receiver controls, validates its own canonical pair and uploads ONLY result.json and manifest.json in a current-run SMALLSAFE artifact, no other files, raw and expanded combined caps65536. Retention7days, compression0, no overwrite. verify receives ONLY declared qualify artifact-id/digest outputs; no artifact name search/fallback, historical substitution or borrowed needs.
+
+Result JSON closed keys in canonical order:
+purpose,role,context,pins,tests,controls,nativeDescriptors,nonclaims.
+purpose=afw.sanitized-stage-observations.task1.qualification.syn.v1; role=independent-zero-afw-key-diagnostic-qualification.
+context exact keys repository,repositoryId,ref,source,tree,workflowBlob,run,attempt,node; current GitHub revision/tree/F7/run/attempt1/Node22.23.4 are required.
+pins are the exact static helper/tests/World/Z entries above.
+tests.red and tests.green exact keys exit,tests,pass,fail,cancelled,skipped,todo; all are integer counts, pass+fail=tests34.
+controls exact keys diagnosticIds,zip,receiver; all IDs and statuses must equal the fixed successful lists.
+nativeDescriptors exact keys errorStack,assertionStack; each is data/accessor/absent; actual location support is separately forced by positive test assertions.
+nonclaims exact keys historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified, all false.
+
+Manifest JSON closed keys purpose,context,files; purpose=afw.sanitized-stage-observations.task1.manifest.syn.v1; exact same context; files is exactly one result.json record with actual byte size and SHA256. Both JSON files require fatal UTF8 decode, byte round trip and exact canonical JSON plus single final newline. Duplicate JSON keys, extras/order/whitespace, unexpected IDs/counts/pins/context/nonclaims are rejected.
+
+V independently checks current run metadata source/ref/repository/event/path/attempt; assigned artifact ID/name/source/run/repository/head branch/head SHA/expiry/size/API digest; download raw size <=65536, uploader digest == API digest == raw SHA256; Z strict exact-two-entry ZIP including central/local consistency, supported descriptors, contiguous nonoverlapping ranges, EOF/no extras, no duplicate/traversal/symlink, inflate caps, CRC per entry and known-vector controls. V then verifies complete role schema, manifest hash, context and source pins, runs the same14+12 receiver controls, and emits ONLY fixed AFW_DIAGNOSTIC_SMALLSAFE/1 assigned-ID/digest/sizes/hashes/context/counts/nativeDescriptor/false-nonclaim fields. It never prints raw API/log/JSON failure content or token.
+
+### Exact planned control inventory — not executed
+
+34 diagnostic families:
+- d01_exact_system_codes
+- d02_assertion_data_fields
+- d03_exact_custody_messages
+- d04_no_code_prefix_inference
+- d05_exact_custody_message_only
+- d06_every_finite_public_site
+- d07_relative_public_frame
+- d08_no_free_paths
+- d09_no_free_line_or_columns
+- d10_normal_chain_and_ambiguous_frame
+- d11_message_cannot_forge_frame
+- d12_real_vm_native_error
+- d13_real_vm_assertion
+- d14_getters_never_called
+- d15_proxy_traps_never_called
+- d16_revoked_proxy
+- d17_arbitrary_objects_no_coercion
+- d18_error_private_fields_ignored
+- d19_huge_error_stack
+- d20_long_error_line
+- d21_canonical_fixed_log
+- d22_all_log_codes_and_sites
+- d23_log_secrets_not_echoed
+- d24_log_closed_schema
+- d25_log_exact_enum_only
+- d26_log_duplicate_json_fields
+- d27_log_ambiguous_or_repeated_markers
+- d28_log_truncation
+- d29_log_marker_forgery
+- d30_log_utf8_byte_limit
+- d31_log_line_limit
+- d32_log_count_limit
+- d33_nonstring_logs_no_coercion
+- d34_fresh_closed_results
+
+14 unchanged Z controls:
+- zip_valid_store_crc_vector
+- zip_valid_deflate
+- zip_signed_unsigned_descriptors
+- zip_wrong_size
+- zip_wrong_upload_sha
+- zip_wrong_metadata_sha
+- zip_extra_entry
+- zip_duplicate_entry
+- zip_traversal_entry
+- zip_symlink
+- zip_bad_crc
+- zip_noncontiguous_ranges
+- zip_declared_and_inflate_caps
+- download_stream_redirect_auth_bounds
+
+12 role receiver controls:
+- receiver_valid_pair
+- receiver_noncanonical_json
+- receiver_duplicate_json_field
+- receiver_extra_json_file
+- receiver_result_hash
+- receiver_wrong_context
+- receiver_wrong_source_pin
+- receiver_true_nonclaim
+- receiver_counts_fail_closed
+- receiver_unknown_controls
+- receiver_native_descriptor_closed
+- receiver_utf8_fatal
+
+### Verification state, self-review and next gate
+
+Public strings/data hashes and exact scoped World reconstruction/line count were checked during preparation. The known saved draft syntax issue, stale helper pin and qualification placeholders are resolved in this proposed inactive candidate. No code was evaluated/imported/tested locally. No cloud test/run has occurred in Task1, so RED/GREEN, actual Node22 accessor support, schema controls and qualification SUCCESS are all PENDING. Native compatibility is a required cloud gate, not a local-host inference.
+
+Self-review was limited to the prepared public sources, explicit diff/pins, closed schema/control list and cloud-only carrier. Full report preserves exact prior Source report b4bcbad28c7ab5b3313c97eb54c0145b5c957f77 (310494chars/310591B/SHAe95f3b0016053270ef8610662e7381a2feb4819f0fc4e1d36b5cd1dfb8bab15d) AND the saved checkpoint append. Only this SAME report is extended. Original F7 f7a71f1a0fa4f5ddf069ff411f008a098455e5cc,126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a remains the exact rollback target.
+
+Next: Root independently exact-reads inactive commit/tree/F7/helper/tests/World and report, reconciles only the five declared leaves, and decides a separate one-use activation release. No Source attachment, push/dispatch, run, rerun, fix overlay, Task2 or actual Native attempt is licensed by preparation. If released later, Source freezes until BOTH jobs terminal; executor restores exact original F7 and every undeclared baseline leaf, retains the explicit helper/test/World changes, appends actual evidence to this report and performs full ref/tree/prefix/62-workflow/run closure readbacks. All seven nonclaims remain false regardless of privacy/source qualification outcome.
