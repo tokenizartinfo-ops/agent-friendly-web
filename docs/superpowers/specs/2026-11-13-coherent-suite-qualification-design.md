@@ -1,51 +1,141 @@
-# Coherent fixed suite — 8 pure contracts + 8 original Native cases
+# Coherent fixed suite: 8 pure tests and 8 original Native cases
 
-DRAFT PREPARATION / Source HELD until fresh preflight resolves exactinterfaces and Root recordsCLEAR. ContinuingownerAFWPCoffworkautonomously/cloudfirst/nohumanbefore08AR; no changeofproject toHermes/Tokenizart. Notimplementationapprovalfromthisdraft. PreviousNativeR1unitwholeCLEAN59e8d17b; actualR1Source416c/pass43379486549 and corrected548KEYLESSonly remainseparate.
+Status: binding design prepared after read-only preflight. Source remains HELD until the scoped preflight confirmation and a separate Task 1 release. Root owns the technical decisions under Gabriel's standing instruction to advance AFW autonomously. No request to Gabriel before 08:00 Argentina. This is AFW, not Hermes, Tokenizart or FCO.
 
-## Intent / goal
-One coherent current Source/run/attempt proving originalQ8+P1+R1R2R3+D1D2D3D4=16 TOTALtests, with fixedproducercheckpointlineages, realconsumerreplicaoverlap and originalbusinessoracles, confidentialnativecustody, independentlyverifiedcurrentSMALLSAFE and exactSourceclosure. 16 doesNOTmean16Nativecases. No overallAFWreadiness/SDKnamespaceempty/globaldrain/providerresolution/realcloudAFWnotice/PCoff/Maxclaim; allfiveflagsfalse.
+## Goal and evidence boundary
 
-## Root architecture choice, not claimed as an owner-selected implementation
-A (CHOSEN): reuse dormant seven-job originalsuite, scopeexistingkeyto cryptographicsteps, preserve alloriginalbusinesssemantics/peeraggregation and add eighth KEYLESS verifier plus twoJSON publicresult. Reuses currentWorld/SDK/oracles and the alreadyencodedproducer-consumer lineage/overlap/peakchecks.
-B: shard and generalizeR1singlecaseadapter acrossallcases. Morejobs/newprivatemodels and riskschanging D-pairsharedcheckpoint/beforehooks; notchosen.
-C: move straighttorealhostedAFWtrial. Leavescoherentengine/replicagatesunproven; notchosen.
-RootchoosesA underownerexplicitauthorizationtochoose/continuewithoutquestions. Costifwrong: a largerworkflowwrappersurface; preflightmustsettleinterfacesbeforeSourcewrites, testsandoneactualruncouldfailclosedratherthanmaskgaps.
+Run the existing coherent suite as one current Source/run/attempt: Q8 + P1 + R1/R2/R3 + D1/D2/D3/D4 = 16 TOTAL tests, including 8 Native cases. Reuse the original seven-job producer/consumer graph and business oracles, remove broad key exposure, add an independent eighth KEYLESS verifier, and return a current two-JSON SAFE with confidential runner-only Native evidence.
 
-## Verified baseline / permittedSource
-Repo tokenizartinfo-ops/agent-friendly-web ID1347578006; Sourcebranchfeat/finite-native-cleanup-20261101.
-CLOSED BASE0479fdd5db3b957ecbb9302e8a45ac88f333fcba/tree8942513f440fd25b188c196090e790a561bdb688/3195leaves. All3194originalpriorleavesexact inclrestoredF7; NativeR1reportf7aa7d2a3fbdc07c480e446e3860afe2dc559f35/62739chars nowPROTECTED. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727.
-Only temporary .github/workflows/afw-finite-budget-qualification.yml and NEWdocs/superpowers/reports/2026-11-13-coherent-suite-qualification.md. Afternewreport3196leaves; ALL3195BASEleaves/modes/types exactafterclosure (including R1report). Rootdocsseparatecloudbranch.
-F7exactrollback blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual/noinputs/nopush/7false.
-CloudGitDB/CAS/Actions ONLY. No localSource/worktrees/clones/deps/build/SDK/MF/eval/import/execution/files onPC; publicSource strings/metadata/hashRAMonly. NoCFAPI/runtime/deploy/token/permission/OAuth/OTP/Max/mail/main/PR/merge.
-NativeTest533dafb5df5f8e57442c5b9029dc8dec6dded434/World0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b/custody4d05b5ec0f7b074be88ef9733a47c984b0212351/lock36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b/SDK1.2.1 IMMUTABLE. Allbusinessassertions/Nativecase timeouts120sR/300sP-D/C0900s/C1C0+180s/root30s/child5s unchanged; no helper-substitution/shorterclock/capincrease.
+The previous Native R1 unit is complete at Rootdocs 59e8d17b. Its real pass is Source416c67646ff502f2781e9c11c3595b7ec17bf778/run43379486549; corrected548c68f8 is KEYLESS-only qualified. Neither proves this coherent suite. All five flags remain exactly false: operationalReadiness, completePackage, PCoff, globalNativeDrainVerified, sdkNamespaceEmptyVerified. No real AFW deployment, notification, owner operation or PC-off claim.
 
-## Original seven-job topology / required preservedfacts
-contracts2min; positive_prepare15→positive_consume15; reduction_prepare15→reduction_consume_a15; readonly7; reduction_consume_b15 needscontracts+readonly+reduction_prepare. Eachnativejobmax2ownedMF; actualnativejobpeak<=3/globalMFbound6. Preserve dependencygraph neededforA/Bactualreplicaintervalsoverlap; no serializationtoreplaceconcurrency.
-contracts executes8puretests plusF1–F8purecontrols/threecompile-onlyprofiles. P1positive1; readonlyR1R2R3=3; reduction_aD1D2=2; reduction_bD3D4=2. Twooriginalproduceroccurrences+threeRoccurrences=5lineages/10M-QAgraphs. OriginalaggregatechecksproducerSource/run/checkpoint/digest/sharedC0,C1/A-Boverlap/allfourreadybeforeC0-30/completeownedrecords/peerterminalsuccess.
-Currentbaseline has6job-level masterkeybindings; MUSTNOTactivateas-is. Existingafw-finite-syn-checkpoint permittedonlyrequiredactualcrypto jobs. Removejob-levelsecret; bindAFW_SYN_CHECKPOINT_KEY ONLYtrustedcrypto/key-preflightsteps. Nativecommands, checkout/setup/install/Worldsemanticvalidators and finalKEYLESSreceiver no masterkeyenvironment. Splitinstall/keypreflight andcombineddecrypt/Worldsemanticstepswhere needed; no World/SDK/MF imports underkeybinding. Genericcustodymoduleonlyallowedsecretcrypto import. PreferexistingWorldexports/wrappers; noprotectedWorldeditsfromthisplan.
+Chosen architecture: reuse original seven jobs, existing World/oracles and private coherent proof. Do not shard the R1 typed adapter across eight cases, create another business oracle, add a generic framework, or skip to a live trial.
 
-## Coherent orchestration / eighth receiver
-Actual8jobs = original7 + new independent KEYLESS verify. OriginalredBaggregate assumes jobs.total_count7 and filtersallothers; preflightmustmapexactchanges toavoiddeadlockonpendingreceiver:
-- preservefixedoriginal7producer/puregraph identities; totalworkflow8 namesexact;
-- waitterminalsuccessonly6requiredotherlegacyjobs while redB inprogress, excludependingreceiverexplicitly;
-- nativepeakchecksconsideronlysixnativejobs, excludecontracts/receiver;
-- receiverneedsall7, always&&fixedscope; checksall7terminalsuccessful/currentSourceRun thenstrictcurrentSAFE metadata+uploadedDigest+rawZIP+fullmanifest/codehash/context;
-- RootawaitsruncompletedANDALL8terminalinclskippedbeforeSource restoration; no7-onlyassumption.
-No pollingunbounded/irrelevantrepos. Existingcollector/hardboundsremainunlesspreflightfindsaconcretecontradiction tosettlebeforewrites.
+## Immutable workspace and Source limits
 
-## Existing confidentialaggregate / publicpublication
-Reuseoriginalsuccessmanifest+Worldvalidations ofallrequiredcases/lineage/overlap, not copiedbusinessoracle. OriginalredBcomputescoherent-proof.json thenencryptsownprivatebundle. Afterauthenticatedown-IDreopen verifyreopenedcoherentproofdigest/manifest/currentidentity, THEN publishSMALLSAFE result.json+manifest.json fromkeylessstep; selfcipherID/digestknownonlyafterupload, nocircularidentity.
-Preflightmustsettleoriginalpublicpurecontractslikage(currentSourceRun,actualjobpassed,assignedID/digest/innerpure_passed/threeexactprofiles/readonlypreflightbeforeI0). PublicpureartifactisnonsensitiveclosedSource-only; preserveoriginalF8literal19126+functionalpublicpureupload. NoNativeplaintextpublicupload. DecideexactwrapperlinkagebeforeSourcewrites, no silentreinterpretationasexistingcrypto.
-Separatepoll/download/decrypt cryptostages fromkeylessWorldvalidation ifoldaggregatecombineskey andSDKimports. All privateproducer/consumer/TAP/models/plaintext/cipher stayrunner-only encryptedexistingcustody; Root/MCP/PC neverfetchprivatebytes/logs. Rootcanlistmetadata anddownloadONLYcurrentapprovedSMALLSAFE.
-Existingcustodybounds4096files/internal512MiB/JSONL768MiB/envelope128MiB/record128KiB/chunk65536/header4096, privateZIP3raw130MiB/expanded134225920 preserved; safeZIPraw131072/combinedJSON65536. Normal/partialarchive domainbounds andoriginalmetadata rules remain.
-Failure: command/aggregate/custody unavailable truthfulclosedresultifproducerable; missingSAFE fromlostrunner onlyverifierclosedpublication_unavailable RECORD,no fallbackartifact/phantomID. Validfailed/unavailableenvelope isnot suitepass.
+Repository tokenizartinfo-ops/agent-friendly-web, ID1347578006. Source branch feat/finite-native-cleanup-20261101. CLOSED BASE0479fdd5db3b957ecbb9302e8a45ac88f333fcba/tree8942513f440fd25b188c196090e790a561bdb688, 3195 leaves. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 is not changed.
 
-## Newqualifiedfourprogram boundary
-Oneuniqueheredoc eachsuite adapter/controls/verifier +immutable safeZip13305 SHA b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d. Sourceboundbootstrapextract/hashbeforeimport; same4bodiesinactive/KEYLESS/actual; wholeWorkflowGitblob/source additionallybindslegacyinlinebodies, norecursivehash.
-DO NOTrelabelfixedR1typedmodel/schemaaswhole-suite. Reusegenericcustody/safeZIP/mechanics, originalfullgroupWorldvalidators. InternalfixedI/Ofixturesokay,nopublictransport/env/CLIoverride/unforgeabilityframework.
-PublicNativepurpose proposedafw.coherent-suite.safe.v1/controlspurposeafw.coherent-suite.controls.safe.v1 andpairedmanifestpurposes. ExactDTOtypes/statecoherencetable/fixedcontrolIDs/functions/programmaterialization arePRE-FLIGHTBINDING ITEMS; RootwillsettleandpublishbeforeTask1release. NoSourceimplementationagainstambiguousfields. Requiredpublicproof: currentrepo/ref/source/tree/workflowblob/run/attempt1/node22.23.4/SDKpins/programhashes; countsQ8/P1/R3/D4/total16; 5lineages/10graphs; actualconsumer-overlap/allfourready+C0-C1/peakbounds; ownciphermetadata+runnerreopen/privateproofhash; original7identityresults andRootall8terminal requirement; all5flagsfalse. Neverarbitraryrawvalues/errorstrings/ownerdata.
+Only temporary .github/workflows/afw-finite-budget-qualification.yml (F7) and NEW docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md may change. After closure: 3196 leaves, every one of the 3195 BASE leaves/type/mode/blob exact, including protected R1 report f7aa7d2a3fbdc07c480e446e3860afe2dc559f35 (62739 characters), all62 workflows exact, main unchanged. Append new suite report as a complete preserved prefix after Task1.
+Exact F7 rollback: blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc,126209bytes,SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a; original manual/no-input/no-push/seven false&& guards.
 
-## Two gated tasks
-Task1: completeINACTIVEactual8jobtemplate(allfalse/manualnoinputs/nopush), fixedhelpers/meaningfulnegativecontrols, ONEKEYLESSoverlay10declared(8disabled+2active7+2). NoOriginalNativeTest/World/SDK/MF/I0/realkeyimport/executioninKEYLESS, onlynewhelpers/inertfixtures/genericINERTcrypto/staticpins. ALL10terminal+runcomplete→exactF7restore+newreport/full3196/prior3195protected/main/62WF/fiveactive0STOP. FreshSPEC/QUALITYCLEAN beforeTask2.
-Task2: freshsoleSourceexecutor, onefixed8jobactualattempt/Sourcefrozen/selfpathbranchpush/uniquecommitmessage/attempt1. No implementationedits. Originalnativegroupsunaltered, exactexistingkeycrypto-step-only. ANYoutcomeALL8terminal+runcomplete→exactrestore/reportappend/full3196/prior3195/main/events/active0STOP, noautoadditionalrun/repair/capincrease. Freshtask+wholeplanreview; keepall5false/evidence-scoped.
-Preflightread-only buildercheck MUSTCLEARcrypto-step map/originalaggregate8job interfaces/safeDTO/functions/caps/casecount meaning beforeSourcewrite.
+Cloud GitDB/CAS/Actions only; one Source writer. No local Source files/worktree/clone/dependencies/build/eval/import/SDK/MF/Source execution. Public Source strings, hashing and metadata in RAM are allowed. Root never implements Source. No private artifact bytes, cipher/model/plaintext/producer logs or actual key to Root/MCP/PC/chat/Git. Root may fetch only current approved SMALLSAFE and KEYLESS records, and private metadata only. No CF API/runtime/deploy/OAuth/OTP/new keys/tokens/permissions/Max/mail/main/PR/merge.
+
+Protected Source pins:
+- test/finite-budget-diagnostics.test.mjs pureTestBlob1f8b02d5b2dddb474c7db7daa04aa24e2dc948d8.
+- test/mcp-qa-finite-budget-native.test.mjs nativeTestBlob533dafb5df5f8e57442c5b9029dc8dec6dded434.
+- test/fixtures/finite-budget-world.mjs worldBlob0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b.
+- test/fixtures/finite-checkpoint-custody.mjs custodyBlob4d05b5ec0f7b074be88ef9733a47c984b0212351.
+- package-lock.json lockBlob36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b; packages['node_modules/@cloudflare/workers-oauth-provider'].version is1.2.1. Read as JSON, never import SDK in KEYLESS.
+- Node22.23.4. Original tests/assertions/groups, R120s, P/D300s, C0=I0+900000, C1=C0+180000, root30s/child5s unchanged.
+
+## Original DAG and causal observations
+
+Preserve dependencies and timeouts exactly:
+contracts2min; positive_prepare15 needs contracts; positive_consume15 needs contracts+positive_prepare; reduction_prepare15 needs contracts; reduction_consume_a15 needs contracts+reduction_prepare; readonly7 needs contracts; reduction_consume_b15 needs contracts+readonly+reduction_prepare.
+Add verify2min, needs all seven, always() with fixed scope. Never add positive/A as dependencies of B: that would serialize the replicas.
+
+B must wait for six exact successful legacy peers: contracts,positive_prepare,positive_consume,reduction_prepare,reduction_consume_a,readonly. Require seven unique legacy identities including own reduction_consume_b currently in_progress. The optional verify job may be absent from early Jobs API, or present only nonexecuting pending/queued/waiting/requested; reject unknown/duplicate identities. Do not require a downstream job to be materialized early. Preserve original peer collector startedAt+780000, <=120 polls,10s metadata/5s waits, <256 request records. Use attempt1 current-run API.
+Native peak intervals use exactly six Native job names, not contracts or verify. Use finite start/end, own end at one observed timestamp, end before start on ties, peak1..3, MF/job bound2/global bound6. These are bounds, not a namespace/drain observation.
+
+B projects six observed successful peers and its own in-progress observation. Independent verify checks all seven actual terminal outcomes and direct needs outputs. Root checks all eight after completion. B never claims its own future success, all-seven final success or verifier success.
+
+## Key confinement and preserved legacy operations
+
+Remove six job-level AFW_SYN_CHECKPOINT_KEY expressions (baseline F7 L347/507/716/876/1085/1251). Keep the existing six afw-finite-syn-checkpoint environment associations. Bind existing real key only at trusted generic-custody key-preflight/seal/open steps, never checkout/setup/npm/copy/general manifest preparation/network/World/SDK/Native/projection/verifier.
+Split install+key-preflight (L376 and analogues). Move copy and job-manifest creation outside generic seal. Remove unused World imports from all six own opens (L466 and analogues). Split producer auth L583/952/1327 into keyless metadata/raw validation, key-only generic open, keyless World validation. Split B aggregate L1376 into keyless collector/download, fixed five generic key-only opens, then keyless original World aggregation. Builtins needed by generic crypto are allowed. No protected World edits.
+
+Keep original Native commands/groups/TAP checks, all producer/consumer checkpoint identities, pairSize2/restartfalse/shared clock, actual A/B overlap and all four ready<=C0-30000; 5 lineages/10 M-QA graphs and complete single initial ownership records.
+B original manifest uses legacy COMPOSITE COMMAND_OK=native step success AND aggregate success (F7 L1481/1491/1493). Preserve it: native passed/aggregate failed yields consumer-failure and commandSucceeded:false. Public command separately records the observed exit of the full original Native+mandatory TAP step (L1368–1375). Do not infer a nonzero Native exit from that composite false field. Skipped/interrupted without observed exit => not_observed.
+
+## Pure and private artifact linkage
+
+Preserve F8 sealer literal19126bytes and its functional public Source-only upload (F7 L118–246) unchanged. No extra encrypted pure checkpoint. Add contracts outputs artifact-digest from upload and manifest-sha256 from pure_verified. All six Native jobs before I0 validate exact assigned needs.contracts ID/digest/manifest SHA, current metadata name/run/head/ref/nonexpiry; original verifyBudgetArtifact plus status pure_passed, all original outcomes successful/no validation failures, Q8/8, F1–F8 and exact ordered three profiles positive/readonly/reduction_a (no I0 or Native; additionalSYN [0,3,3], alias equality). Preserve original World prepared-input checks before I0.
+B downloads bounded raw pure ZIP to hash against upload/API, reuses exact-ID materialized pure directory and original manifest verification; do not generic-unzip it or call it confidential Native evidence.
+
+Five peer private refs plus own B ref retain actual IDs/digests/kinds. Compare opened consumer producer-binding.json against actual producer identities, in addition to original all-D producer/checkpoint/C0/C1/manifest checks. Independent receiver compares all seven refs (pure + six Native) to direct needs outputs and current by-ID metadata, including job identities. No fabricated/fallback artifact.
+
+Original B writes private coherent-proof.json. Seal it with original full private evidence. Own exact-ID reopen must verify metadata+raw ZIP+AEAD, exact original/reopened job manifest, keyless success-kind World manifest validation, reopened proof bytes equal original bytes and captured digest, current identity and full proof checks BEFORE SAFE projection. No circular self-artifact ID inside private proof. Failure-kind manifest validation preserves original composite semantics, fixed identity/role/group/cases and explicit failure-kind; don't call the success-only World validator on failure-kind.
+
+## Qualified code and caps
+
+Historical inactive548c68f8e6df77a36da322735828ca4aaaf7842f/F7blob003d3af2908cb261138851eda13c4a8428d27390:
+- L232–249, strip ten spaces from each line plus final LF: generic PRIVATE_CAP/rangeEnd/CRC/decodePrivateZip stanza3380bytes/SHA2564ff44bd3adda54eb0816fab275e4b13078005d1bd1a4626cfbf67d31e8bf7af8. Embed exact in adapter with needed builtins/need/same. Do not copy R1 typed validators.
+- L745–852 NODE_SAFE_ZIP body13305bytes/SHA256b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d, unchanged.
+
+ZIP3 exactly envelope.bin/manifest.json/receipt.json; envelope<=128MiB, JSONeach<=4096, expanded<=134225920, raw<=136314880, complete classicZIP/CRC/local-central/descriptors/ranges/EOF validation. B original tighter raw134283264 remains in addition. Custody original4096 files/512MiB plain/768MiB JSONL/128MiB envelope/128KiB record/65536chunk/4096header unchanged. Normal archive1..512files/128MiB vs partial original general custody domain including empty; don't conflate domains.
+Pure original raw outer134283264 and perJSON2097152 remain separate. SAFE raw<=131072/combinedJSON<=65536. Retain14 SAFEZIP controls+two capture/rejection seams=16, separate from six wrapper controls, not business cases.
+
+## Four Source-bound helpers
+
+Unique markers/files, exact ten-space depad/final LF:
+NODE_SUITE_ADAPTER→afw-suite-adapter.mjs; NODE_SUITE_CONTROLS→afw-suite-controls.mjs; NODE_SUITE_VERIFIER→afw-suite-verifier.mjs; NODE_SAFE_ZIP→afw-suite-safe-zip.mjs.
+Every consumer bootstraps from current Source before imports: fixed repo/id/ref/attempt/path/Node, git HEAD/tree/current whole F7 Git blob, fixed Source pins/SDK JSON version, four unique bodies/distinct SHA256, exact qualified ZIP3 subbody and SAFEZIP hash. Exclusive fixed runner.temp files0600 and program map. Same four bodies in inactive/KEYLESS/actual overlays; context Source/tree/workflowBlob are current, not recursive embedded self-hashes. Whole workflowBlob binds legacy inline code.
+No helper top-level World/SDK/Native import; actual World semantic wrappers keyless. No arbitrary transport/directory/fixture override from CLI/env. Direct internal IO seams may inject inert fixtures only in controls; actual entry always uses fixed IO.
+
+Adapter APIs: validateSourcePins(); validatePeerInventory(jobs,observedAt); validateAssignedMetadata(meta,expected={job,kind,id,zipSha256}); bindPure(readback,assignment,manifestSha256); assignedPrivate(binding,destination) with fixed internal paths; decodePrivateZip(bytes)→Map; validateReopenedSuite({proofBytes,originalProofBytes,originalManifestBytes,reopenedManifestBytes,ownBinding,expectedContext,expectedPeers}); makeSuite({context,sourcePins,programHashes,command,aggregate,pure,custody,proof,failure}); validateSuite(result,expected); validateControls(result,expected); makeManifest(kind,resultBytes,context); publishPair(kind,result).
+Verifier APIs: validatePair(files,kind,expected); verifyRoute({kind,id,uploaded,expected},io=fixedGitHubIO)→{readback,valid}; verifySeven(jobInventory,needs,result)→{accepted,sevenTerminal,sevenSuccess}; verify() fixed job entry.
+Controls runControls(); unchanged SAFEZIP exports bindRawZip,decodeSafePair,downloadAssignedZip,runZipControls,ZIP_CONTROL_IDS and existing helpers.
+
+## Exact public schemas
+
+Only own enumerable fields, no extra/sibling properties; arrays preserve specified order. IDs are positive canonical decimal strings safe-integer roundtrippable; git hashes40 lowercase hex, SHA25664. JSON compact JSON.stringify(value)+'\n', fatal UTF8/canonical-byte roundtrip. Objects compare exact fields/values without requiring a JSON object key order. Same common context/pins/hashes in suite and controls:
+context={repository:'tokenizartinfo-ops/agent-friendly-web',repositoryId:'1347578006',ref:'refs/heads/feat/finite-native-cleanup-20261101',source,tree,workflowBlob,run,attempt:1,node:'22.23.4'}.
+sourcePins={pureTestBlob,nativeTestBlob,worldBlob,custodyBlob,lockBlob,sdkVersion:'1.2.1'} with exact values above.
+programHashes={adapter,controls,verifier,safeZip}; current Source bootstrap values, SAFEZIP fixedb36.
+Suite result={purpose:'afw.coherent-suite.safe.v1',context,sourcePins,programHashes,status,command,aggregate,pure,custody,proof,failure,...fiveFlags}.
+pure=null or {artifactId,zipSha256,manifestSha256,profiles:['positive','readonly','reduction_a'],purePassed:true,beforeI0:true}.
+command=not_observed|failed|passed; aggregate=not_observed|unverified|verified.
+custody={state:'unavailable',artifact:null} OR {state:'assigned'|'reopened',artifact:{id,zipSha256,kind:'consumer-failure'|'reduction-result-b'}}. Assigned means complete actual upload ID/digest received, NOT metadata verification. Preserve assignment on later metadata failure. Reopened requires metadata/raw/AEAD/inner checks, and successful kind requires reopened proof validation.
+
+proof=null unless status passed, otherwise exact:
+{counts:{Q:8,P:1,R:3,D:4,native:8,tests:16,pass:16,fail:0,cancelled:0,skipped:0,todo:0},cases:['P1','R1','R2','R3','D1','D2','D3','D4'],lineages:5,graphs:10,replicaOverlap:true,allFourReadyBeforeC0Minus30s:true,sharedReductionClock:true,C0MinusI0Ms:900000,C1MinusC0Ms:180000,observedNativeJobPeak:int1..3,nativeJobBound:3,miniflarePerJobBound:2,globalMiniflareBound:6,privateProofSha256,peerJobs:[{name,jobId,status:'completed',conclusion:'success'} exactly contracts,positive_prepare,positive_consume,reduction_prepare,reduction_consume_a,readonly],selfJob:{name:'reduction_consume_b',jobId,status:'in_progress',conclusion:null},peerArtifacts:[{job,kind,artifactId,zipSha256} exactly positive_prepare/checkpoint,positive_consume/positive-result,reduction_prepare/reduction-checkpoint,reduction_consume_a/reduction-result-a,readonly/readonly-result],requiresRootAllTerminalReadback:true}.
+Derive booleans/counts from validated reopened private proof. No public private timestamps/graphs/models. Pure and own B refs remain sibling fields, not repeated inside proof.
+
+### State table and truthful failures
+
+- pure null => command/aggregate not_observed. command failed/passed requires verified pure.
+- command not_observed or failed => aggregate not_observed; command passed permits aggregate not_observed/unverified/verified.
+- Assigned/reopened kind is reduction-result-b iff command passed AND aggregate verified, otherwise consumer-failure, preserving legacy composite.
+- passed iff command passed, aggregate verified, pure present, successful-kind reopened and proof valid; failure=null/proof present.
+- failed iff original full Native+TAP step has observed nonzero exit; failure={stage:'native_b',reason:'command_failed'}, proof=null; preserve any actual custody assignment.
+- Other nonpass is unavailable/proof=null, first primary failure:
+  pure null→pure/pure_unverified;
+  pure present+command not_observed→native_b/not_observed;
+  command passed+aggregate not_observed→aggregate/not_observed;
+  command passed+aggregate unverified→aggregate/evidence_unverified;
+  aggregate verified and assignment missing OR assigned metadata/raw not verified→custody/assignment_unverified;
+  assigned metadata/raw verified but AEAD open failed→custody/reopen_unverified;
+  AEAD open succeeded but inner manifest/proof mismatch→custody/proof_unverified (keep assigned, not reopened).
+No publication_unavailable inside an existing SAFE result. Missing both SAFE outputs or confirmed scoped metadata404 => verifier-only publication_unavailable; partial/malformed/non404/transport/permission => invalid_evidence, retain any valid known ID, never a ZIP claim or fallback.
+Publish failure pair via always()&&!cancelled()&&trusted bootstrap success BEFORE final failing actual_outcome. Upload only successful pair writer. B safe outputs remain assigned even if final job fails. Skipped/lost producer may yield no SAFE; valid failed/unavailable envelope is not a suite pass.
+
+Controls result exact:
+{purpose:'afw.coherent-suite.controls.safe.v1',context,sourcePins,programHashes,status:'passed'|'failed',expected:6,completed,passed,failed,inventory:[{id,status:'passed'|'failed'|'not_executed'} exactly six IDs below],firstFailure:null|oneID,realCustodyKeyBound:false,NativeExecuted:false,SDKImported:false,MFAllocated:false,...fiveFlags}.
+Stop first failure: exact passed prefix, one failed, remaining not_executed. Passed iff all6; otherwise failed exactly1.
+Both outputs exactly result.json and manifest.json. Manifest exact={purpose:'afw.coherent-suite-manifest.safe.v1' OR 'afw.coherent-suite.controls-manifest.safe.v1',source,run,attempt:1,files:[{path:'result.json',bytes,sha256}]}; validate entire object. No self SAFE ID inside payload.
+
+## Fixed controls and output wiring
+
+Six wrapper IDs in order:
+1 dag_peer_inventory: exact deps/names/peers/optional receiver/finite intervals/native-only peaks/actual overlap; missing/duplicate/extra/receiver included rejected.
+2 key_scope: actual workflow AST/text scopes, six existing environments, generic-only key-bound crypto, no key at application/network/World steps; inert env restoration.
+3 fixed_case_counts: current pins and original full group/TAP commands,8pure/8Native/16total, original clocks and all cases, F8 literal+functional upload unchanged; altered counts/cases/clocks rejected.
+4 metadata_custody_binding: current assigned ID/digest/head/ref/expiry/raw SHA/inner identity/pure profiles/status/manifest; actual inert generic AEAD reopen, corrupted/wrong proof bytes rejected; exact qualified ZIP3 and original caps.
+5 incomplete_or_contradictory: state table incl native-pass/aggregate-fail legacy composite, missing/partial assignment,404 vs non404, always guard hazards, sibling keys, retained known ID/no fallback/false pass.
+6 coherent_current_pair: same real make/publish/verify seams using inert pair; direct seven-job needs/eight-job closure; mutate every flag/profile/context/pin/run/source/receiver placement/extra field/lineage/count/status and require rejection.
+Controls never import original NativeTest/World/MF/SDK or use actual key. Generic inert fixture crypto only in isolated subprocess with fixed inert32 key and generic custody module.
+
+contracts outputs artifact-id,artifact-digest,manifest-sha256. Six Native jobs retain artifact-id,artifact-digest,kind. B adds safe-id/safe-digest from summary_upload. keyless_controls adds same safe outputs. Native SAFE name afw-coherent-suite-safe-${run}-1; controls afw-coherent-suite-controls-safe-${run}-1; retention7days.
+KEYLESS job keyless_controls7min runs node "$RUNNER_TEMP/afw-suite-controls.mjs", no npm; keyless_verify2min always() runs node "$RUNNER_TEMP/afw-suite-verifier.mjs", all16ZIP controls plus current pair verification. Task1 declares all eight actual jobs literally false plus two KEYLESS=10jobs; exact8skipped+2success/run success is qualification pass.
+Actual Task2 declares only original seven+verify=8, same four bodies; one run/attempt1.
+
+Verifier emits exactly one bounded <=4096B record:
+{marker:'AFW_COHERENT_SUITE_READBACK/1',kind:'suite'|'controls',source,run,attempt:1,artifactId:null|ID,uploadedDigest:null|H,status:'verified'|'unavailable',reason:'none'|'invalid_evidence'|'publication_unavailable',proof:'strict_current_safe_pair'|'absent',metadataBytes:null|positiveInt,metadataDigest:null|'sha256:'+H,rawZipBytes:null|positiveInt,rawZipSha256:null|H,resultBytes:null|positiveInt,resultSha256:null|H,manifestBytes:null|positiveInt,manifestSha256:null|H,expiresAt:null|validISO,producerStatus:null|'passed'|'failed'|'unavailable',upstream:'all_seven_success'|'not_all_seven_success'|'unverified'|'not_applicable',accepted:boolean,programHashes,...fiveFlags}.
+Verified transport/schema requires strict current pair/digest triple; accepted also controls success OR all seven actual successful/current needs and suite passed. Valid closed nonpass can be transport verified but accepted false/job fail. Root actual pass additionally all8successful/current run completed success.
+
+## Execution gates, rollback and review
+
+Task1: inactive complete eight-job candidate/four fixed bodies; ONE KEYLESS push-only self-path/Source-branch/unique-commit-message/attempt1 overlay (8disabled+2active). Freeze Source. Wait run complete and exact10terminal; restore exact F7, new report and all preservation readbacks; STOP. Fresh task spec+quality CLEAN, then separate Root Task2 release.
+Task2 fresh sole Source executor: one activation with same bodies, original groups/semantics/key confinement; Source frozen. Any outcome wait run completed/all8terminal, exact restore/report prefix append/all preservation readbacks; STOP, no auto-repeat/clock/cap changes. Root independently current SAFE, KEYLESS records, private metadata; fresh task and whole-plan review.
+
+Rollback-only exception: if completed Actions run positively materializes a subset/zero jobs (e.g. parser failure), wait all actually present jobs terminal, all five scoped branch-active inventories zero, same frozen Source tip and rollback rechecked; restore and report exact declared/materialized/missing sets as unavailable/unqualified. Do NOT invent skipped jobs, claim qualification/pass or retry. Missing/unavailable API is uncertainty, not a positive empty list; bounded read-only reconcile first.
+No merge/promotion to main. All flags false regardless success.

@@ -31,3 +31,12 @@ All five readiness flags remain false. No local Source execution, new credential
 - Ruling: reuse original full-group validators, original private coherent proof and exact custody/clock/request bounds, with explicit post-own-ID authenticated proof comparison before projection. No per-case oracle rewrite or general framework — cost if wrong: preparation or the one actual suite fails closed and is recorded.
 
 Source and main independently read unchanged (0479fdd5 / 0c9c475b); five branch active status queries all zero. Root prepared an in-memory closure metadata checker with one positive and eleven meaningful negative synthetic fixtures; these exercise only metadata completeness/preservation, are not Source execution or Native acceptance. Exact DTO/functions/controls still pending preflight; Source remains HELD.
+
+## Binding contract prepared
+
+Read-only preflight completed without Source execution or mutation. Sections1–6 and final wiring were consolidated into a single binding SPEC and task brief; optional receiver materialization and B legacy composite semantics explicitly resolved. Source remains HELD pending one scoped confirmation, then separate Task1 release. Custody assigned preserves complete actual upload outputs even when metadata fails. Exact10 KEYLESS qualification is8skipped+2success, not10success; actual suite pass requires8success. Rollback-only parser/nonmaterialization exception preserves the repository without claiming missing jobs completed.
+
+Ruling: preserve B's existing composite commandSucceeded definition after direct L1481/1491/1493 check corrected an overgeneralized Root reading — public native-step outcome remains separate — cost if wrong: controls reject contradiction, no new Native evidence.
+Ruling: completed parser failures may be restored only after all positively materialized jobs terminal and five active inventories zero; missing job identities are reported unavailable/unqualified — prevents a permanent restoration deadlock — cost if wrong: no pass/qualification, no automatic replay.
+
+Preflight source/provenance pointers are in SPEC. No source or runtime action occurred. Root in-memory metadata audits are independent of Source helper execution.
