@@ -142,3 +142,11 @@ El revisor final encontró cuatro hallazgos importantes en rutas negativas: tipo
 Ruling: corregir los cuatro en una única ola y cualificar la versión con KEYLESS; conservar el pase real atribuido a su versión original. El revisor confirmó que repetir Native solo hace falta para afirmar que la versión corregida procesó datos Native reales; no se hará esa afirmación. Costo si esta delimitación fuera insuficiente: esa versión requerirá después su prueba Native propia. No se relabelan hashes ni se debilita el oráculo.
 
 P12 y native-r1-oracle-final-fix.md fijan controles completos de captura, reapertura, publicación y verificación. Implementador nuevo, una cualificación, una revisión acotada; Source base cerrado78fcd591/informe49232prefix. No requiere intervención humana.
+
+## Única ola final aprobó controles y quedó cerrada — re-revisión pendiente
+
+La única ejecución KEYLESS `43385447465/1` aprobó 12 familias, 38 subcasos nuevos y 16 controles ZIP. Root comprobó el recibo pequeño `14018452023`, cuatro hashes, contexto, manifiesto y digest. Sus 604 marcadores forman 302 pares completos sin fallo, con 99 subcasos en total.
+
+Source quedó cerrado en `0479fdd5`, workflow exacto restaurado, los 3194 archivos previos intactos, informe completo de 62739 caracteres, main intacta y cero ejecuciones activas. La candidata corregida `548c68f8` conserva cualificación KEYLESS; el pase Native real sigue atribuido a `416c6764`. No se repitió R1.
+
+Se entrega al mismo revisor final el diff completo, el informe y los registros cerrados para la única revisión acotada F1–F4. No se libera otra ola ni una nueva ejecución durante esa revisión. No requiere intervención de Gabriel.
