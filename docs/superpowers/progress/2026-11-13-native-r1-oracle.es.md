@@ -64,3 +64,11 @@ El paquete `native-r1-oracle-task1-fix1-package.md` conserva el diff completo, e
 La revisión acotada resolvió la atribución temprana/tardía del fallo original y la referencia al entorno de cifrado. Quedaron tres puntos importantes: admitir como auténtica una captura parcial del estado sin marcarla como prueba Native aprobada; conservar las relaciones originales de tiempos y la capacidad nativa de 16384 registros; y clasificar un TAP aprobado sin resultado completo como evidencia incompleta.
 
 Root contrastó los hallazgos con World y el validador protegido. P10 fija las correcciones, sin alterar el test original ni el contrato público. Se libera al mismo implementador una única cualificación KEYLESS para la ronda 2/5, desde Source cerrado `171de189`, preservando el informe completo de 20509 caracteres. Native Task2 continúa retenida. No requiere sesión, claves ni intervención de Gabriel.
+
+## FIX2 falló y quedó cerrado; revisión causal pendiente
+
+La única cualificación `43374412749/1` terminó con fallo en la familia `custody_binding`: ocho familias aprobadas, una fallida y tres sin ejecutar. El recibo pequeño `14013887604` registra ese fallo honestamente; Root comprobó su identidad, integridad y manifiesto. Las 16 comprobaciones ZIP aprobaron. Los tres jobs reales de R1 quedaron omitidos.
+
+Los registros cerrados sí acreditan los controles inertes de captura parcial vacía y no vacía. La familia no registró el subcaso ni la excepción que falló después, y no se afirma una causa desconocida. Los controles posteriores del resultado completo ausente no se ejecutaron.
+
+Source quedó restaurado en `a20d8b0f`, con 3195 archivos, los 3194 previos intactos, informe completo de 30355 caracteres, main intacta y cero ejecuciones activas. El implementador se detuvo sin repetir el intento. El paquete `native-r1-oracle-task1-fix2-package.md` permite revisar de forma acotada el código y la falta de diagnóstico antes de decidir una tercera ronda. R1 real continúa retenido; no requiere intervención humana.
