@@ -1,0 +1,13 @@
+# Task2 review — actual coherent suite, exact closure
+
+RELEASED read-only review. FinalSourcee88ce70b8edd3bdc7bcda062b115578b3d26f1a1; report2b283b80/132654chars; run43414661211/1 completedfailure/all8terminal; currentSAFE absent; exactclosure independently checked. Read complete package docs/superpowers/reviews/2026-11-13-coherent-suite-task2-review-package.md in this same immutable publication. Full report at Sourcefinal, only Task2 appendix is reproduced in package because prior100977prefix was already reviewed/preserved.
+
+Authenticated owner scope: «continua con lo que estabas haciendo ... AFW ... prueba final en la nube con el ordenador apagado» and latest «continua» after13Nov08Argentina resume. Tokenizart/Hermes AGENTS in cwd is routing background, not a replacement task. Review AFW only.
+
+Read first Task2 exact brief at docs/superpowers/briefs/2026-11-13-coherent-suite-qualification-task2.md. Binding SPEC and complete package will be pinned at immutable Rootdocs. Review one task, spec compliance and code quality as two separate verdicts; full whole-plan review follows separately. No subagents or edits, no local Source execution/files/deps/clone/SDK/MF, no CF/runtime/OAuth/OTP/keys/Max/mail/main/PR. No repeat tests. Source/publicstrings and metadata RAM read-only allowed; no private/native/contracts logs or private/pure artifactbytes. Only provided current SMALLSAFE +KEYLESSverifyrecords allowed.
+
+BASE715ac94e20126dc43846e3e77ac2045c68a9dd1a; initial unitBASE0479fdd5 with3195leaves; onlyF7temporaryactivation/restoration+SAMEreportappend. Closed3196/all3195oldtype-mode-blobexact/62WFexact/main0c9/F7f7a71/fiveactive0; preserve100977reportprefix. Exactlyonecurrentrun/attempt1, frozenSource until completed+all8terminal, no code changes or extraattempts. Candidate23bda/fourapprovedbodies exact; trigger+8guards only, disabledhelpercarrier unchanged; original8names/deps/timeouts/keyscope/oracles unchanged.
+
+Review package must contain complete commit list, stats and full net Task2 diff plus complete activation delta, actual stepsmetadata and Root independent closure and current safe-or-absence audits. Inspect unchanged source only for a concrete named risk; cite what you checked. Do not infer a pass from a transport-valid nonpass pair, currentjobstep success from a downstreamskip, or failkeys/provider from a genericseal failure. Report may be wrong: independently judge claims against package.
+
+Output: SPEC compliant/issues/cannotverify; strengths; Critical/Important/Minor with exactsource/reportline or metadatareference; qualityApproved/Needsfixes. Each finding specific causalimpact and smallest remedy. Return fullreview directly; Root persists it. Do not broaden into other products or authorize another run.
