@@ -92,3 +92,31 @@ El acceso de cifrado real y Native R1 todavía no se ejecutaron. Task2 sigue ret
 La revisión independiente obtuvo SPEC PASS y QUALITY CLEAN. No quedaron hallazgos abiertos en la corrección ni regresiones dentro del alcance revisado. El acta `native-r1-oracle-task1-final-clean.md` conserva el dictamen y sus límites.
 
 Root libera por separado `native-r1-oracle-task2.md`: una única ejecución del test original completo de R1, usando el entorno de cifrado ya existente y los mismos cuatro programas cualificados. Un ejecutor nuevo tendrá a cargo la activación limitada, los tres jobs y la restauración exacta, sin modificar la implementación. El expediente sigue siendo sintético y propio; no es una prueba PC-off ni activación del runtime AFW. No requiere códigos ni intervención de Gabriel.
+
+## Task2 activada una sola vez — Source congelado
+
+El ejecutor nuevo verificó la revisión CLEAN, el estado cerrado y la ausencia de un intento previo con esta etiqueta. La activación única quedó en Source `416c6764` y ejecución [43379486549/1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43379486549), con los tres jobs previstos. Root comprobó que los cuatro programas son idénticos a la candidata revisada. La última observación muestra `contracts` en curso; todavía no acredita Native ni la custodia real.
+
+Esta autorización de ejecución ya está consumida: al retomar, conciliar este run, no iniciar otro. Source debe permanecer congelado hasta que termine el run y sus tres jobs. Después corresponde restaurar F7 exacto, conservar el informe completo y revisar el resultado. Si la aplicación se interrumpe, este registro permite recuperar el seguimiento sin repetir la prueba. No requiere intervención humana.
+```json
+{
+  "source": "416c67646ff502f2781e9c11c3595b7ec17bf778",
+  "tree": "d11e103a46c1415cee5d1426f046f71cfdd9fedf",
+  "run": "43379486549",
+  "attempt": 1,
+  "status": "in_progress",
+  "observedJobs": [
+    {
+      "name": "contracts",
+      "id": "131733658782",
+      "status": "in_progress"
+    }
+  ],
+  "oneAuthorizationConsumed": true,
+  "SourceFrozenUntilAll3Terminal": true,
+  "rollback": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+  "reportPrefix": 39626,
+  "NativeObservedYet": false,
+  "humanStepRequired": false
+}
+```
