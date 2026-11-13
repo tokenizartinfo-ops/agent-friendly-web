@@ -3098,3 +3098,66 @@ Generic Z exact14 IDs remain the prior frozen list. Q fixed stage enum and fixed
 Self-review during preparation checked source-string scopes/pins, no late Error snapshot, reader provenance, no formatter override, first import+catch reconstruction, line offset, exact carrier programs/guards and prefix preservation. No local Source execution or new Actions qualification occurred. The actual Node22 capture compatibility and all42fresh/control outcomes remain UNVERIFIED; the failed prior run is not repurposed as acceptance.
 
 Next: Root independently exact-reads this inactive unattached candidate and all new pins/schema/42+14+13 control lists. Only after a separate active proposal gate and NEW FIX1 one-use release may Source be attached. Never attach/rerun oldae383/5733/43504422934. On any future outcome Source freezes through BOTH terminal jobs, original F7f7a71/all undeclared leaves restore, explicit intended runtime/helper/test/World bytes remain, and the SAME report gets actual evidence/full closure readbacks. No Task2, Native/runtime/provider/PC-off action is released; allseven nonclaims remain false.
+
+## 2026-11-13 — Task1 FIX1 zero-key qualification SUCCESS; exact Source closure
+
+Qualification status: SUCCESS for the declared pure Node/source fixtures and current SMALLSAFE receiver only. Actual Node22 native accessor-to-finite-site positivity and declared privacy/substitution controls passed. Combined Task1 spec/quality review is the next separate Root gate; Task2/Native/runtime/PC-off remain HELD. This source qualification does not establish historical business cause or operational readiness.
+
+### One-use release, unique current run and both terminal jobs
+
+Root exact FIX1 gate/release is recorded in Rootdocs be245401b9784d759ecda6cee22c8b560402d633. Authorized sole Source executor no-force expected-head CAS was only523576c8a1a55303ab3e085ac05693b816838190→dc58ab16cadc62bc6a1c91e55564fafb7da24824, message AFW-DIAGNOSTIC-TASK1-FIX1-ONEUSE-20261113. Preflight CLI metadata briefly yielded; no mutation was attempted during that read-only wait. Fresh complete Source lease/main/fiveactive0 checks and full original rollback F7 bytes then passed before ONE CAS. CAS returned success and was reconciled by exact Source readback and ONE current push run. No ambiguous mutation/retry/second activation/dispatch/rerun/fix overlay occurred. Original43504422934 and oldae383/5733 intents stayed consumed/unused as previously documented.
+
+Activated current source dc58ab16cadc62bc6a1c91e55564fafb7da24824, tree20cfc99a40bd7487138114bd3d3c4fe956f6c0e0, F7e4ba3f88fde8dee51a8f53848f8f142494d19cac,46384B/SHA2562a72b5896c95e028fedf41db4ad3a01604d66dbd3665f851bbab962ba3b17210. Q/S/V/Z/runtime/helper/tests/World were byte-exact to the independently reviewed inactive fix1 pins; only active header/guard/shell push transformation differed.
+
+Unique run43511398408/attempt1, repositoryID1347578006, event push, exact Source branch and F7 path, created/started2026-11-13T21:31:09Z; terminal success21:31:33Z. Source remained frozen until BOTH declared jobs were terminal, with no writes or source overlay during the run.
+
+| Job | ID | Started UTC | Completed UTC | Conclusion |
+|---|---:|---|---|---|
+|qualify|132182275586|21:31:12|21:31:21|success|
+|verify|132182375946|21:31:24|21:31:33|success|
+
+Qualify role assertions/checkout/fixed Node/materialize+hash/actual RED+GREEN/SMALLSAFE upload all succeeded. Verify role assertions/checkout/fixed Node/same-carrier extraction+hash/current assigned metadata+raw ZIP+canonical pair checks all succeeded. Fresh job metadata re-proved both complete before restoration. Node startup scope checks were part of actual successful jobs; Node22.23.4 is the declared current context, not a local-host extrapolation.
+
+### Actual RED/GREEN and control evidence
+
+Executed current Q command node "$RUNNER_TEMP/afw-diagnostic-qualify.mjs" under its pinned7925B/SHA58ecf65ec65e1ba21204bcc56e2d04023ccf62e7824b612d2495a1441dc71a42. Child commands were node --test --test-reporter=tap against the actual runtime+same-test private RED fixture with an all-unknown helper, followed by the checked-out REAL helper/runtime/test. No World/Native/SDK/provider/business failure was executed.
+
+Root independently accepted the canonical current pair with these actual counts:
+| Invocation/control family | Total | Pass | Fail | Exit/meaning |
+|---|---:|---:|---:|---|
+| all-unknown stub RED |42|28|14|exit1, expected positive-behavior deficits|
+| real helper/runtime GREEN |42|42|0|exit0|
+| frozen generic ZIP |14|14|0|fixed generic controls|
+| role receiver |13|13|0|includes wrong-runtime-pin rejection|
+
+Both test invocations cancelled/skipped/todo0. The RED fixture included the ACTUAL runtime module, so it was not an absent-import failure. Current69 logical diagnostic+ZIP+receiver families passed their expected conditions; the14 RED failures are intentional stub failures, not failed real tests. Fixed IDs/pins/full inventories match the proposal, with no conditional native-positive skip and no weakened assertion. V's separate current receiver checks also succeeded.
+
+Current result nativeDescriptors is exactly {errorStack:"accessor",assertionStack:"accessor"}. Thus d12/d13 passed against ACTUAL Node22 accessor stacks using the early reader, including real VM Error/AssertionError→persistence_100. Fresh default formatter preservation, getter/proxy/exact-text-different-closure replacement after capture/before projector import, Error-global getter/proxy/constructor substitution, inherited code getter/Node-brand case and startup-refusal controls passed their fixed unknown/counter0 or positive expectations. This acceptance is confined to pinned trusted startup/source conditions. It does not prove arbitrary before-capture compromise safety, all possible Error subclasses or production failure location.
+
+All42 diagnostic IDs,14Z IDs and13 receiver IDs are the exact inventories documented in the preceding proposal; Root independently verified the entire current inventories/statuses. No child raw TAP/error/assertion/message/stack or private value is copied into this report.
+
+### Independent Root SMALLSAFE verification, exact current artifact only
+
+Root independently verified actual run/both success, exact assigned artifact metadata and fixed verify receipt; downloaded ONLY assigned SMALLSAFE14079075483; then independently checked strict exact-two-entry ZIP/CRC/ranges/EOF/bounds, fatal UTF8/canonical closed schemas/current context+pins+manifest and complete ID inventories. Executor separately read METADATA ONLY to reconcile the assigned identity and no other current artifact; no private archive/model/Native/contracts/producer log was accessed.
+
+| Current assigned item | Bytes | SHA256 |
+|---|---:|---|
+| raw artifact ZIP14079075483 |5401|9b417881bd2d860bd1559fd468bdd05b99acb4e9897e935ed8a848428151799c|
+| result.json |4599|70689eacdc7e749cc2a1b19b9bb524bb0f0b726ca379d4d736bcf5db03e94c4b|
+| manifest.json |548|ff41096ec40042be098152f75bb3d96d601160c60f902aefd8789bbc8ba43eaa|
+
+Expanded pair total5147B; raw5401B; both within65536 caps. Artifact API inventory exactly1, name diagnostic-task1-SMALLSAFE-dc58ab16cadc62bc6a1c91e55564fafb7da24824-43511398408, expiredfalse, created2026-11-13T21:31:18Z, expires2026-11-20T21:31:18Z, digestsha256:9b417881bd2d860bd1559fd468bdd05b99acb4e9897e935ed8a848428151799c; workflow_run repository/headRepository1347578006, headSource dc58ab16, exact branch/run43511398408. Uploader/API/raw digest binding and manifest result-byte/hash binding passed in current V and independent Root verification. No old artifact/name fallback or borrowed assignment was used.
+
+Qualified current context: repository tokenizartinfo-ops/agent-friendly-web; repositoryId "1347578006"; ref refs/heads/feat/finite-native-cleanup-20261101; source dc58ab16cadc62bc6a1c91e55564fafb7da24824; tree20cfc99a40bd7487138114bd3d3c4fe956f6c0e0; workflowBlob e4ba3f88fde8dee51a8f53848f8f142494d19cac; run "43511398408"; attempt1; node22.23.4. Runtime83878947/helper6b5b9f89/tests8b1580b5/World43aad5bd and frozenZ full pins are exactly the preceding proposal. Artifact/receiver transport validation is separate from historical business custody authentication; receiptAuthenticated remains false.
+
+### Exact F7 restoration and full closure before final report append
+
+After fresh exact frozen-source lease and two-terminal-job metadata, executor created restoration commitd034bae9a649892807e1aabe94c9f8fc3b443f79, parentdc58ab16, tree13d70e2849af605596d29d00b45524175c20d0ec. Only F7 changed back to original blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc; no-force expected-head CAS succeeded and exact Source readback reconciled. Original F7 was fully fetched and byte-equal126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a, original manual/inputfree/no-push/seven false guards.
+
+Complete recursive mode/type/blob comparison between pre-FIX1 closed tree68225f5b43fe39a33171ffa2b418d99df6a306b1 and restoration13d70e proved both responses untruncated,3198→3199 leaves, ALL62 workflows unchanged, ZERO workflow changes and ZERO undeclared changes. Exactly five deliberate paths differ: new runtime8387894721b0b4e8ccbf5d91eb4eed4cd0c7c5fd, helper6b5b9f8905d77d3f9cd9d89ea3058cfbdd57760f, tests8b1580b5cd46e29da2006ab21921f84cc50e8aec, World43aad5bddd844d591572c5868b73697dfd3463f9 and this SAME report. World has only first import+catch, exactly+1 line; every other preunit source leaf/mode/type/blob is exact. New runtime is deliberate, not an undeclared restoration exception.
+
+Full pre-append report fetch exactly0951e40a96b230b37f55b9e9c88b1a31888eb696,358935chars/359048B/SHAe08410135541cc2f408310b87a4d3f3b4f1695f3e723a26cc6a9e195b4401b0c was verified before this append. This preserves its full prefix, including original341981B report before FIX1 and all older checkpoint/failure evidence. No history is rewritten.
+
+Pre-append inventories positively proved consumed dc58 head exactly1 completed success run43511398408/attempt1; restorationd034 head0runs; current artifact inventory exactly assigned14079075483; main0c9c475b3ebaa970fc11d628b40e50a90cceb727; in_progress,pending,queued,requested,waiting each0. Final SAME-report-only append is followed by full Source/ref/tree/prefix/62-workflow/head1run/closed0run/fiveactive0 readbacks. No runtime resources, credentials, grants, subscription, notice/review/withdrawal/autoclose, repair, deployment or owner action were introduced.
+
+Executor self-review found no additional unresolved concern within this fixed Source qualification scope; before-capture substitution/compromised-process limitation remains explicit. Combined Task1 review belongs to Root and is pending; no Task2 or Native attempt begins from this paragraph. All historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified remain false.
