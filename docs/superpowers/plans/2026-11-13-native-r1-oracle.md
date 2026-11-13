@@ -41,10 +41,10 @@
 **Files:** temporaryF7activation/restore + APPENDownnewReport, no implementation changes.
 **Consumes:** Task1CLEAN exact bodies/INACTIVEcandidate/currentlease, existingkey oncrypto steps only.
 **Produces:** actual selected R1 originaloracle outcome, currentprivate custody+reopen, independentSMALLSAFE, closedSource.
-- [ ] Fresh soleexecutor currentlease/protected/rollback/active0; activate fixed3jobs once/attempt1/pattern/messageguard, freeze ALLterminal.
-- [ ] SameSourcecontracts7, actualNativeR1 job7 with all original asserts/caps, typed custody/safe proof; no otherNativecases/provider.
-- [ ] Metadata only privateproducer; parse KEYLESSverifier closedrecords, Root independentlystrictSAFE/currentcontext/programs/digest/wholemanifest.
-- [ ] ANYoutcome exactF7restore/newreportappend/fullreadbacksSTOP. No blindrepeat/Native16/permission renewal.
+- [x] Fresh soleexecutor currentlease/protected/rollback/active0; activate fixed3jobs once/attempt1/pattern/messageguard, freeze ALLterminal.
+- [x] SameSourcecontracts7, actualNativeR1 job7 with all original asserts/caps, typed custody/safe proof; no otherNativecases/provider.
+- [x] Metadata only privateproducer; parse KEYLESSverifier closedrecords, Root independentlystrictSAFE/currentcontext/programs/digest/wholemanifest.
+- [x] ANYoutcome exactF7restore/newreportappend/fullreadbacksSTOP. No blindrepeat/Native16/permission renewal.
 - [ ] Task2spec/quality + wholeplan review, Root causal decision; no global readiness claim.
 
 ## Self-review
@@ -63,3 +63,6 @@ Preflight completado y confirmado por revisión independiente. La primera cualif
 ## Task1 complete / Task2 release
 
 Task1 fullreview and threeformalfixrounds areclosed: originalAstra scopedfinal SPEC PASS / QUALITY CLEAN, currentSourcebde551ef restored. Fourprogramsbb80/d60/e832/b36 qualifiedon43377434048/1,12families+ZIP16,61fixedsubcases. Actual3jobs and key-acquisition stillunexecuted. RootseparatelyreleasesONE Task2 exactinactive55d84385/runlabelACTUAL20261113-a; onlyactivation/restore/reportappend, noimplementationchanges. Task2 isnotcompleteuntilactualevidence/closedSource/taskreview.
+
+## Task2 review clean; final whole-plan review pending
+Task2complete(commitsbde551ef..78fcd591,reviewclean). FreshAstraSPEC PASS/QUALITYCLEAN,no findings; originalR1 currentactualpassed/custody+scopeverified. Noimplementationchanges. Finalwhole-planreviewseparatebeforeunitcomplete; noSource/Native16releasebythisline.

@@ -128,3 +128,9 @@ La única ejecución `43379486549/1` terminó con los tres jobs aprobados. El re
 Source quedó restaurado y detenido en `78fcd591`, con F7 exacto, los 3194 archivos previos intactos, informe completo de 49232 caracteres, main intacta y cero ejecuciones activas. El paquete `native-r1-oracle-task2-package.md` conserva el diff de activación, el informe y la evidencia saneada para un revisor nuevo.
 
 Este pase corresponde únicamente a R1 sintético actual. Las cinco banderas continúan en false; Native16 coherente, entrega real, retirada y PC-off siguen pendientes. Todavía deben cerrarse la revisión de Task2 y la revisión completa de este plan antes de elegir el siguiente bloque.
+
+## Task2 revisión CLEAN — revisión completa del plan pendiente
+
+Un revisor nuevo confirmó SPEC PASS y QUALITY CLEAN, sin hallazgos. Contrastó la activación limitada, la prueba original completa, el manejo de la clave, el recibo saneado y el cierre. Task2 queda completa entre `bde551ef` y `78fcd591`.
+
+Corresponde ahora una revisión nueva del plan completo, incluyendo las decisiones de preflight y la integración entre la cualificación y la ejecución real. No se vuelve a ejecutar R1 ni se altera Source durante esta revisión. El siguiente bloque posterior se elegirá tras ese cierre; Native16 y PC-off siguen pendientes.
