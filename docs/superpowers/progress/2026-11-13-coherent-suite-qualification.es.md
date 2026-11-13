@@ -77,3 +77,9 @@ Task1: fix round1/5 DISPATCH READY (0 addressed,7 open — self-shadow mutations
 Ruling: Fix1 keyless aggregate enters only after native+bootstrap success under scoped always/not-cancelled and fails its actual prerequisite gate before World import when a fixed peer input failed — restores combined-phase failure attribution without inventing step outcomes — cost if wrong: direct outcome control rejects; no Native repeat.
 
 Ruling: accept fixed finalizePureBinding complete-stage receipt seam — tests the actual ordering defect without importing World in KEYLESS or duplicating its oracle — cost if wrong: direct failing-callback/no-write control and projection gate reject; SourceTask2 held.
+
+## Fix1 qualification and closure verified — scoped re-review pending
+
+Covering run43399028588/1 succeeded8skip+2success/all10terminal. Root independently strict-verified current SAFE14023878021, six passedfamilies,18closedsubcases/36phase records,110shell/63Node inspections and16ZIP. No actualNative/SDK/MF/World or realkey. Fourbody hashes and qualified ZIP bodies independently match candidate18183/overlaya99.
+Closed Source0ade3837/tree7634f0eb/report7e92d4ef61240chars; prior24731prefix exact,3196leaves/all3195initial leaves/62WF/F7/main0c9/fiveactive0/closedcommit0runs. Restore0f80090e is exact pre-fix tree9ad4552e. No automatic run afterclosure.
+Task1: fix round1/5 (7 awaiting scoped disposition,0 parked). Full complete fixdiff and covering report published in docs/superpowers/reviews/2026-11-13-coherent-suite-task1-fix1-review-package.md; original reviewer receives once. Task2HELD.
