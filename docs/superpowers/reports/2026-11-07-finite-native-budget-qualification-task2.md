@@ -10713,3 +10713,145 @@ After BOTH jobs terminalSUCCESS, expected-head restore CASac80f724 -> 6f80d70246
 ```
 
 This final report-only receipt commit is followed by a full ref/commit/tree/F7/report/main/0active readback before replying; it cannot record its own SHA. Scoped builder statusDONE: one authorized fixture fix and one fresh complete KEYLESS qualification, exact rollback complete. Task1 independent review is pending and actual Task2 remains HELD; no actual historical predicate/native cause/PC-off claim. Source writer STOPPED after final readback, no further Source action by inference.
+
+
+## R1 Task1 formal review fix round1/5 — P4 causal witness negatives
+
+Original sole Source builder resumes under immutable Rootdocs92c335345f48791a7bb9e094f3263d247c07d0e6/brief8750280ffece3ff5b064efb1e704cabfcd1215f8, read verbatim before Source writes. First FORMAL independent-review fix round (earlier fixture fix1 was a known setup correction). Same Task1/P1–P6/AGENTS/project/resource/privacy/GitDB cloud-only scope. No subagents/reviewers/human step. Starting CLOSED Source84cc51f535bbec00c0a7a100f05869476e406f59/treed9beb0a9486d3cbadd2b92f4564201e788ca166d; report770e7896cf29cdbdd0809213c0f4c048d462b53b/763873chars765205B ENTIRE prefix preserved. Full ref/commit/nontruncated3194leaves/3192protected/F7f7a71/fullreport/main0c9/fiveactivecounts0 verified before mutation. Fixed62workflow event inventory remains same protected hashes; Source paths remain ONLY temporaryF7+APPENDreport.
+
+Binding review finding: db4a/8b31a4b0 had a real return-token guard and duplicate-issue guard, but its supposed unreturned/doubled negatives invoked actual private_canary from substitute callbacks and failed identity before issuing anything. Removing only the return comparison would not have failed those old controls. Counterexample positives also re-invoked a real22 callback in separate harness instances; old count1 record was a MAIN-registry count, not global once. Run43352803969/1/main40+22+18/pair16/ZIP16/strictSAFE evidence remains historical with this P4 limitation; do not retroclaim its negative branch coverage or global-once behavior. Independent full review found no other Reference business/order/scope/pin defect; no actual Raw predicate/cause known.
+
+Narrow correction is Selftests only: private FIXED fixture callbacks/IDs separated from actual22+18; all real callback assertion bodies/IDs/final postassertion path preserved and invoked only through their main registries. Counterexample helper no longer references/calls expansions or httpChecks. Private issuer retains exact callback identity, same-ID, single issuance and private return-token requirements; reasons are closed literal test-only enums. No issuer/completion capability is passed to callbacks. Private attempt/success/received-token telemetry stays inside the same harness; output never contains a token/error/stack/Raw value. Positive fixture is private, and duplicate-wrapper rejection is accurately separate from issuing twice.
+
+Required causal branch assertions: missing registration->registration; skipped->barrier_incomplete; registered no-op and forged-with-no-issue->issuance_count0; registered fabricated-return and unreturned each actually receive first token (attempts1/issued1/received1) then fail return_token; registered doubled receives first token then reaches SECOND same-ID issue attempt (attempts2/issued1/received1) and fails duplicate_issue; bare substitute actually invokes issuer then fails identity (attempt1/issued0); inert fixed assertion verifies native AssertionError/code/message; positive private fixture completes once; repeated wrapper fails duplicate_completion with unchanged counts. Every failed constructed harness asserts incomplete barrier, positive/repeated-wrapper barrier remains complete. Each negative verifies EXACT intended reason and reached counts, not any throw.
+
+Direct branch/reason assertions are the chosen causal proof permitted by the brief. Static mutation reasoning: removing ONLY the return comparison makes fabricated/unreturned operations resolve, failing assert.rejects; removing ONLY duplicate-issue guard changes the doubled fixture to a later issuance_count error, failing its exact duplicate_issue reason check. No mutant program or additional mutation run was executed, and none is claimed.
+
+Root explicitly ruled YES before Source writes to a narrow KEYLESS-only evidence channel: normal40 stdout stays its original one <=2048B record; Selftests write separate owned runner scratch afw-p4-witness-negatives-safe.json ONLY after full22+18 completion. Fixed proof driver validates its entire exact literal shape/values and prints P4_WITNESS_NEGATIVES/1 (1245B LF). This is neither a new Source path, artifact field/schema, public control ID nor qualified program/extra job. It records private fixture IDs/literal reasons/attempts/issues/received counts/barrier outcomes, with invocations2 (same helper exercised from oldlc_bounds and HTTPno_op_registration). Private fixture executions are NOT counted as actual22/18. Actual5+2 driver is unchanged; only wrapper label/embedded Selftests/testhash bindings differ.
+
+Reference34180/672b054312d8c23c38662719b5183e6e345a322e6db74c6f761719b9bfdf4e36 algorithm/schema byte-exact. Core77002/d514b190...,ZIP13305/b36c40c0...,Bootstrap1370/2a04ef50...,pin helper/pair appendix/derived subsets exact. New read_policy correct API assertions and finite visited-stage output remain byte-exact. Materializer/generated-verifier logic changes ONLY necessary test/hash literals. No cap/order/enum/oldrow/publicproof/business/runtime policy changes. All other3192leaves/modes remain immutable.
+
+Prepared STRINGDATA pins and expected private proof (not execution evidence):
+```json
+{
+  "tests": {
+    "bytes": 74171,
+    "sha256": "c75f8610543dabfefb134462645769880f6fc78a0f5554667d9515584e5fff19"
+  },
+  "materializer": {
+    "bytes": 21125,
+    "sha256": "01b7b0351c85f4d07e76d11498b5e6b78e6d2baccf1d6e98633523a620bed1a4"
+  },
+  "p4Verifier": {
+    "bytes": 41119,
+    "sha256": "1d7ddac413679393425f979387e59bc7909c10d4e8dd68a2ea93215de9109e92",
+    "blob": "7c9128ae5c79281456e989dd47d2e97a96cfab0d"
+  },
+  "p4Actual": {
+    "bytes": 247345,
+    "sha256": "673ff0f024977b21f6c814d54824d64494ad6e9b9d3853531707f9e86b1f5269",
+    "blob": "d98fdf987e96ae6f42435c24264e88ea5f0debb4"
+  },
+  "p4Keyless": {
+    "bytes": 266702,
+    "sha256": "ffc682df187def43d57d4ebb7b65e01591940dd37be04c80876835c158192099",
+    "blob": "25d11143b59981109d9f2e825f1e3d5d1263814a"
+  },
+  "privateP4": {
+    "marker": "P4_WITNESS_NEGATIVES/1",
+    "invocations": 2,
+    "inventory": [
+      {
+        "id": "p4_missing",
+        "reason": "registration",
+        "attempts": 0,
+        "issued": 0,
+        "received": 0,
+        "barrier": "unavailable"
+      },
+      {
+        "id": "p4_skipped",
+        "reason": "barrier_incomplete",
+        "attempts": 0,
+        "issued": 0,
+        "received": 0,
+        "barrier": "incomplete"
+      },
+      {
+        "id": "p4_no_op",
+        "reason": "issuance_count",
+        "attempts": 0,
+        "issued": 0,
+        "received": 0,
+        "barrier": "incomplete"
+      },
+      {
+        "id": "p4_forged_no_issue",
+        "reason": "issuance_count",
+        "attempts": 0,
+        "issued": 0,
+        "received": 0,
+        "barrier": "incomplete"
+      },
+      {
+        "id": "p4_fabricated_return",
+        "reason": "return_token",
+        "attempts": 1,
+        "issued": 1,
+        "received": 1,
+        "barrier": "incomplete"
+      },
+      {
+        "id": "p4_unreturned",
+        "reason": "return_token",
+        "attempts": 1,
+        "issued": 1,
+        "received": 1,
+        "barrier": "incomplete"
+      },
+      {
+        "id": "p4_doubled",
+        "reason": "duplicate_issue",
+        "attempts": 2,
+        "issued": 1,
+        "received": 1,
+        "barrier": "incomplete"
+      },
+      {
+        "id": "p4_bare",
+        "reason": "identity",
+        "attempts": 1,
+        "issued": 0,
+        "received": 0,
+        "barrier": "incomplete"
+      },
+      {
+        "id": "p4_inert_assertion",
+        "reason": "inert_assertion",
+        "attempts": 0,
+        "issued": 0,
+        "received": 0,
+        "barrier": "incomplete"
+      },
+      {
+        "id": "p4_positive",
+        "reason": "none",
+        "attempts": 1,
+        "issued": 1,
+        "received": 1,
+        "barrier": "complete"
+      },
+      {
+        "id": "p4_positive",
+        "reason": "duplicate_completion",
+        "attempts": 1,
+        "issued": 1,
+        "received": 1,
+        "barrier": "complete"
+      }
+    ]
+  }
+}
+```
+
+Updated complete actual5+2 candidate stored INACTIVE/manual/noinputs/nopush/twofalse before ONE NEW7+2 KEYLESS push/attempt1. Same7programs/current-source binding/P6fixed publicOriginalcode checkout only, no environment/secrets/private Original139491 download/open/Raw/key/Native/SDK/MF/I0/CF/OAuth/OTP/cron/Max/main/PR/merge/newpermissions. No replay43352803969 or older head. Freeze activation through BOTH terminal; any outcome exactF7f7a71/126209/manualsevenfalse restore+APPENDreport/full763873prefix/protected/main/0active readbacks and STOP. No automatic residual repair/run. ActualTask2 HELD; independent scoped P4 review follows covering. All readiness/access flags false.
