@@ -1,6 +1,8 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-13-fresh-whole-syn-native.md
 
-Status: DESIGN/PREPARATION HELD pending builder check. Current Source CLOSED82626aada77c89c0fc03b5317d05f7c99c05f89e. NoSourcewriter dispatched. Prior decoded-keyscope unit COMPLETE/CLEAR; caps consumed and not reopened.
+Status: CLOSED - one failed/consumed SYN attempt; Source restored and report preserved. Current Source a15746888a3f3b76dc5232d865bb54aa11e9bfc3. Task1 combined review CLEAR; final whole-unit review approved technical closure with two documentation minors addressed in this wave; scoped re-review pending. Business qualification FAILED; all five global flags FALSE. No new Source implementation or run released.
+
+Historical initial state: DESIGN/PREPARATION HELD, Source82626, no writer dispatched. Prior decoded-keyscope unit COMPLETE/CLEAR; caps consumed and not reopened.
 
 ## Preflight conflict table
 
@@ -22,12 +24,12 @@ Ruling: retain existing restrictedSource/main boundaries and use owner standing 
 
 - [x] priorunit completion reconciled; docs48b40b56 andSource82626 refs read back.
 - [x] spec/plan frozen; preflighttable/rulings recorded.
-- [ ] builderdesigncheck CLEAR and any findings ruled.
-- [ ] freshsoleexecutor prep release, inactivegate.
-- [ ] exactoverlaygate, one-use CAS release.
-- [ ] actual8jobs/allterminal, currentSAFE independentacceptance.
-- [ ] exactrestore/fullprefix/fulltree/readbacks.
-- [ ] freshtask spec+quality review andfinalwholeunit review.
+- [x] builderdesigncheck CLEAR and any findings ruled.
+- [x] freshsoleexecutor prep release, inactivegate.
+- [x] exactoverlaygate, one-use CAS release.
+- [x] actual8jobs/allterminal; no currentSuiteSAFEassignment, typedunavailable/receiver16PASS, businessFAILED.
+- [x] exactrestore/fullprefix/fulltree/readbacks.
+- [x] freshtask spec+quality review andfinalwholeunit review: taskreviewCLEAR and finalwhole-unitreview approved technical closure; documentation scopedre-reviewpending.
 
 OperationalReadiness=false; completePackage=false;PCoff=false;globalNativeDrainVerified=false;sdkNamespaceEmptyVerified=false.
 
@@ -70,3 +72,8 @@ CORRECTION supersedes earlier Native success wording: RESTconclusion after conti
 Finala15746888a3f3b76dc5232d865bb54aa11e9bfc3/treee24f2a269faa177f34f1494ea833e9091d5e202c, report63144433a391fb73222e7b340a9e86e263960829/296132chars296227B/SHA8df274981fffaa8d295a3068687af7e83456afd3c24172443b392f95af245cc3; full264449prefixexact. Rootindependentwholeuntruncated3196tree/alloriginal3195/62WF/F7/mainexact,restoreab692tree38db/parent9927,currentexactSource1runattempt1,restore+finalheads0runs,fiveactive0. All8terminalbeforeSourcewrite. Attemptfailed/consumed; noSourcefix/rerun. NoSuiteSAFEassigned/zeroartifactbytes/16receiverPASS separate; Nativeoutcomecorrectionincurrentreport. CombinedtaskreviewthenONEwholeunitreviewpending; no nextunitimplementationreleaseyet.
 
 Task1: complete (Source82626..a157468, combinedreviewCLEAN forscopedattempt/anyoutcomeclosure; businessFAILED/consumed). Reviewerfresh_native_task_review. ONEfinalwhole-unitreviewpending; nonewSourceimplementation/runreleased.
+
+
+## Final documentation minor-fix record
+
+Two documentation-only corrections completed in this wave: (1) record the consumed failed attempt, restored Source/report, technical closure, failed business qualification, and pending scoped re-review; (2) clarify that fresh_native_executor executed the sole Root-authorized CAS to activate 9927. No business pass is claimed. Next scope held: scoped documentation re-review only; no new Source implementation or run released.

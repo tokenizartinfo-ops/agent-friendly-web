@@ -249,7 +249,7 @@ This is an operation/envelope-and-evidence task with frozen implementation, not 
   }
 }
 
-Each commit in Sourcechain: BASE82626→unattachedinactive91feed→unattachedactive9927→restoreab692→finalreporta157. ExactlyoneRootCASactivated9927. Restorecommit tree38db equals freshpreunitwhole tree; finaltreee24f has onlyreportdelta, alloriginal3195/62WF/5pins/main0c9 exact. Qualifiedf4c45F7 is immutableinputalreadyacceptedwithfourbodyhashes (A d76c,C a41c,V9413,Zb36), wholecurrentSource Root byte/hash gate recorded. No Sourceimplementationchange underthisnewtask. CurrentcombinedSourceclosedrangeBASE→HEAD is SAMEreportappendonly; no transientenvelope maybe omitted below.
+Each commit in Sourcechain: BASE82626→unattachedinactive91feed→unattachedactive9927→restoreab692→finalreporta157. Exactly one Root-authorized CAS was executed by fresh_native_executor to activate 9927. Restorecommit tree38db equals freshpreunitwhole tree; finaltreee24f has onlyreportdelta, alloriginal3195/62WF/5pins/main0c9 exact. Qualifiedf4c45F7 is immutableinputalreadyacceptedwithfourbodyhashes (A d76c,C a41c,V9413,Zb36), wholecurrentSource Root byte/hash gate recorded. No Sourceimplementationchange underthisnewtask. CurrentcombinedSourceclosedrangeBASE→HEAD is SAMEreportappendonly; no transientenvelope maybe omitted below.
 
 ## Complete task-scoped transient F7 diff, qualifiedf4c45→active9927 (context10, roundtrip verified)
 
