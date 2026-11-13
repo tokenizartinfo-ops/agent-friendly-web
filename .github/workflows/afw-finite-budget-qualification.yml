@@ -1,18 +1,20 @@
 name: AFW sanitized stage Task1 fix1 qualification
-run-name: AFW diagnostic Task1 FIX1 HELD ${{ github.sha }}
+run-name: AFW diagnostic Task1 FIX1 ONEUSE ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
 permissions:
   contents: read
   actions: read
 concurrency:
   group: afw-diagnostic-task1
   cancel-in-progress: false
-# INACTIVE UNATTACHED PREPARATION. No Source attach or run is released.
+# ACTIVE FIX1 ONE-USE PROPOSAL, UNATTACHED. Source attach and run remain held for Root release.
 # Independent zero-AFW-key role; generic frozen Z is a ZIP utility only.
 jobs:
   qualify:
-    if: ${{ false && github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'workflow_dispatch' && github.workflow == 'AFW sanitized stage Task1 fix1 qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-DIAGNOSTIC-TASK1-FIX1-ONEUSE-20261113' }}
+    if: ${{ github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.workflow == 'AFW sanitized stage Task1 fix1 qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-DIAGNOSTIC-TASK1-FIX1-ONEUSE-20261113' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     outputs:
@@ -28,7 +30,7 @@ jobs:
           test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
           test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
           test "$GITHUB_RUN_ATTEMPT" = 1
-          test "$GITHUB_EVENT_NAME" = workflow_dispatch
+          test "$GITHUB_EVENT_NAME" = push
           test "$GITHUB_WORKFLOW" = 'AFW sanitized stage Task1 fix1 qualification'
           test "$GITHUB_WORKFLOW_REF" = 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101'
           test -z "${NODE_OPTIONS+x}"
@@ -327,7 +329,7 @@ jobs:
           if-no-files-found: error
           overwrite: false
   verify:
-    if: ${{ always() && !cancelled() && false && github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'workflow_dispatch' && github.workflow == 'AFW sanitized stage Task1 fix1 qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-DIAGNOSTIC-TASK1-FIX1-ONEUSE-20261113' && needs.qualify.result == 'success' }}
+    if: ${{ always() && !cancelled() && github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.workflow == 'AFW sanitized stage Task1 fix1 qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-DIAGNOSTIC-TASK1-FIX1-ONEUSE-20261113' && needs.qualify.result == 'success' }}
     needs: qualify
     runs-on: ubuntu-24.04
     timeout-minutes: 3
@@ -341,7 +343,7 @@ jobs:
           test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
           test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
           test "$GITHUB_RUN_ATTEMPT" = 1
-          test "$GITHUB_EVENT_NAME" = workflow_dispatch
+          test "$GITHUB_EVENT_NAME" = push
           test "$GITHUB_WORKFLOW" = 'AFW sanitized stage Task1 fix1 qualification'
           test "$GITHUB_WORKFLOW_REF" = 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101'
           test -z "${NODE_OPTIONS+x}"
