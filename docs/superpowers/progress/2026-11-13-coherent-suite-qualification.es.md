@@ -62,3 +62,8 @@ Root prepared in-memory metadata observers, without executing Source: closure12 
 Chavo relay issue176 read once at08:02UTC:84comments, no ID newer than6839994085 and no AFW request; no message or duplicated monitor sent. Source/main preflight leases were0479/0c9, five branch active statuses0 before builder release.
 
 Source builder reports four bodies/control draft in RAM with qualified ZIP body hashes, original pipeline step splits still in progress; no run/mutation reported at08:12UTC. Actual Native suite remains held.
+
+## Task1 initial result — closed, qualification failed
+
+Source38ddef2b/tree9ad4552e, exact restorationa23a2c54→baseline tree8942513f, reportffe57366/24731chars. Root independently confirmed3196/prior3195exact/62WF/main0c9/fiveactive0/closedSource0runs. One KEYLESS run43392961036/attempt1:8skipped+2failed; four bodies preserved, no actual Native.
+Current controls SAFE14021936491 strictly verified as a closed failed DTO: firstdag_peer_inventory,0passed/1failed/5not_executed; ZIP16passed. Actor's static self-shadow diagnosis is a hypothesis about the precise first unlogged subcase, not a replayed reproduction. A valid-nonpass record semantics concern is independently observed. Full report and complete reconstructed diff are packaged for fresh task spec+quality review; no Source fix or retry has been released. Task2 stays HELD.
