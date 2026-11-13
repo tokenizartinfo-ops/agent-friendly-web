@@ -18,7 +18,7 @@
 ## Review Focus
 
 1. EarlierinvalidgroupplusHTTPbad: newfieldunknown/oldfirstgroupunchanged — Task1earlier_basic/earlier_children.
-2. Optionalfieldshortcircuit andcombinedtype/lengthguard: originaloperandscalls+exceptionidentitypreserved — Task1collection_type/record_limit/boundary_256/unbranded_error.
+2. Optionalfieldshortcircuit andcombinedtype/lengthguard: originaloperandscalls+exceptionidentitypreserved — Task1collection_type/collection_limit/boundary_256/unbranded_error.
 3. SecondRawreadorR2leak: selectedR1scopelocal/noadditionalread/parse, R2certunchanged — Task1case_r2/read_policy/canary.
 4. CurrentinspectorSourceversusOriginalcheckout/AAD/programhashes: distincttrueidentities/nofakeadoption — Task1public_schema;Task2realmetadata.
 5. No-op/skippednewcontrol orpartialclassificationfakegreen: privatepostassertion18witness/schema/statusreset — Task1no_op_registration/public_schema,Task2Rootdeepcomparison.
@@ -50,3 +50,6 @@
 ## Self-review
 
 Oneconcept/onereusedprojection; scope2Sourcepaths andfivegeneratedstrings plusunchangedtwoCoreZIP. Exactenum/interfaces/18controls fixed; firsterroridentity/readscope/unknownpolicy/status+oldfacts/privacy/currentvsOriginalbinding allcovered. Original18+existingfixedgroups countsverifiedbycurrentcode, notframeworkinflation. Sourcepreflightmustsettleanygeneratedbodycount/interfaceconflict; preparationdoesnotreleaseSourcewrites. OwnerdecisiondelegationallowsRootchooseCwithoutcheckin; no destructive/newaccess/publication.
+
+## Preflight binding amendments
+Read SPEC P1–P5. Preservelegacy(present,unknown)withnewunknown; noneonlypresent/oldnone; allrowtypesBEFOREanytimefields. PreservehistoricalvalidateControlsPair→validateControlProof+SOURCE_REFERENCE_*binding; addindependentlyverifiedold22/new18privatepostassertionwitness. Hardenonlynecessarycompletionwiring22+18, no publicdonecapability; invokedbarecompletionnegativeREQUIRED. Bootstrapbyteexact, exactlyfourmutablequalifiedbodies (notsevenheredocs). Immutableoldderivedprograms/pair-testappendixnotomitted. Task1currentKEYLESS7+2distinctfrominactiveactual5+2. SourcewritesstillHELDuntilRootbriefrelease.
