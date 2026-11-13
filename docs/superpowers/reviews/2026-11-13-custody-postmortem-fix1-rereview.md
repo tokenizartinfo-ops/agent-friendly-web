@@ -1,0 +1,9 @@
+# Task1 fix1 scoped re-review
+
+CP-I1 ADDRESSED; CP-I2 ADDRESSED. SPEC PASS and QUALITY APPROVED forfix1scope; no newCritical/Important/Minor orout-of-scopefindings.
+
+ActualF7b1f124c line546 replaceswrong14cardinalitywithactualclosedTargetRecordvalidator; metadata/rawforcederrorsalsoexerciseextra/missingfieldrejection. Noinventedfield/loosening. Lines468–490normalizer/sharedwrappervalidatefullinventory/ZIPprefix, rebuildfixedIDs/statuses/counters/onefailure/4096Bbound, arbitraryerrorsdiscarded. Producerallgroupslines614/822andindependentreceiver919usetheactualwrapper; failuresstillblocktargetreadsandSAFEpublication. Extendedredactionfixturescoverallgroups,validfull/prefix,malformedIDs/order/status/counters/accessors/unknownerrors; inventory23unchanged.
+
+Coveringrun43437695014/1/exact2success/23namedpasses+currentSAFE14043724282 independentlyRoot-verified. No realfailure-summarylineemitted; failurebranchescoveredininertfixtures. SuccessfuldiagnostictransportdoesNOTmeanold128MiBsuccesscapacceptsreceipts; bothrejectedtruthfully. Closureprefix189509/F7/alloriginalleaves/62WF/main/active0preserved. Firsthistoricalfailuresunknown; AEAD/readinessfalse; originalFF-I2/key/NativeholdOPEN.
+
+Reviewer /root/custody_postmortem_task_review; read-only,noSourceexec/tests/reruns/private retrieval.
