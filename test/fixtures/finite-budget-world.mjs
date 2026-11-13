@@ -907,7 +907,7 @@ async function withFixedBudgetOwner(caseName,root,operation,{recovery=false}={})
  return fixedBudgetOwners.run(frame,async()=>{
   if(recovery){assertFixedBudgetAllocationSafe();const r=createFixedOwnedRecord(frame,'recovery');r.attachPersist(join('output','r2-native-'+(caseName==='P1'?'finite-budget-positive':'budget-'+caseName),'state'));}
   try{value=await operation();}catch(error){primary=noteFixedOwnedUnwind(frame,error);}
-  const diagnostic=postAckContexts.getStore();if(diagnostic?.native&&caseName==='R2'){recordPostAckOriginal(diagnostic,value,primary);primary=diagnostic.originalError??primary;}
+  const diagnostic=postAckContexts.getStore();if(diagnostic?.native&&caseName==='R2')diagnostic.innerOperationReturned=primary===null;
   const ownership=await closeFixedOwnedFrame(frame,primary);
   if(value&&typeof value==='object'){value.ownership=ownership;value.diagnostics??={};value.diagnostics.epochs=frame.records.flatMap(r=>r.epochs);if(value.caseName)await fixedBudgetPersist((caseName.startsWith('R')?'readonly/':'reduction/')+caseName,value);}
   return value;
@@ -1978,7 +1978,8 @@ export async function preflightPostAckDiagnostic(){
  const privateDir='output/finite-budget/post-ack-private',modelDir='output/finite-budget/post-ack-model';await mkdir(privateDir,{recursive:true});await mkdir(modelDir,{recursive:true});
  const phase=qa.baseline.find(r=>r.path==='lib/mcp-qa-finite-owner-phase-context.mjs').source,entry=qa.baseline.find(r=>r.path==='<stdin>').source,metafileBytes=Buffer.from(JSON.stringify(qa.metafile));
  await writeFile(join(privateDir,'phase-composed.mjs'),phase,{flag:'wx'});await writeFile(join(privateDir,'entry-composed.mjs'),entry,{flag:'wx'});await writeFile(join(privateDir,'qa-metafile.json'),metafileBytes,{flag:'wx'});
- const result={purpose:'afw.post-ack-preflight.syn.v1',profile:POST_ACK_PROFILE,context:current,stage:'MODEL ONLY',modelOnly:true,mfAllocated:false,I0Created:false,nativeExecuted:false,offGraphs,supplement,baselineInputs,privateCompileHashes:{phaseSha256:hash(phase),entrySha256:hash(entry),qaMetafileSha256:hash(metafileBytes)},originalWorldBlob:'5fb78c057b7e80260ae683abf4af892767ce110e',protectedTestBlob:'533dafb5df5f8e57442c5b9029dc8dec6dded434',oracleSha256:hash(qualifyPostAckOriginalR2.toString()),worldSha256:hash(world),transformSha256:hash(transformBytes),sdkFileSha256:hash(sdk),sdkBytes:sdk.length,sdkSites:44,lockBlob:'36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b',lockSha256:hash(lock),modelGraphs:Object.fromEntries([...diagnostic.graphs].map(([role,v])=>[role,{bytes:v.output.length,sha256:hash(v.output)}])),...Object.fromEntries(['operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified'].map(k=>[k,false]))};
+ const handoffControls=await runPostAckOwnerHandoffControls();
+ const result={handoffControls,purpose:'afw.post-ack-preflight.syn.v1',profile:POST_ACK_PROFILE,context:current,stage:'MODEL ONLY',modelOnly:true,mfAllocated:false,I0Created:false,nativeExecuted:false,offGraphs,supplement,baselineInputs,privateCompileHashes:{phaseSha256:hash(phase),entrySha256:hash(entry),qaMetafileSha256:hash(metafileBytes)},originalWorldBlob:'5fb78c057b7e80260ae683abf4af892767ce110e',protectedTestBlob:'533dafb5df5f8e57442c5b9029dc8dec6dded434',oracleSha256:hash(qualifyPostAckOriginalR2.toString()),worldSha256:hash(world),transformSha256:hash(transformBytes),sdkFileSha256:hash(sdk),sdkBytes:sdk.length,sdkSites:44,lockBlob:'36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b',lockSha256:hash(lock),modelGraphs:Object.fromEntries([...diagnostic.graphs].map(([role,v])=>[role,{bytes:v.output.length,sha256:hash(v.output)}])),...Object.fromEntries(['operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified'].map(k=>[k,false]))};
  await writeFile(join(modelDir,'model.json'),JSON.stringify(result),{flag:'wx'});await sealBudgetArtifact(modelDir,'pure');return result;
 }
 function assertPostAckHeadroom(t){
@@ -1998,15 +1999,77 @@ function qualifyPostAckOriginalR2(result){
  assert.equal(result.operationalReadiness,false);assert.equal(result.completePackage,false);assert.equal(result.PCoff,false);
  return result;
 }
-function recordPostAckOriginal(diagnostic,value,error){
- diagnostic.originalError=error??null;
- if(!diagnostic.mfAttached||!diagnostic.harnessReturned){diagnostic.originalR2Outcome='unavailable';return;}
- if(error){diagnostic.originalR2Outcome='failed';return;}
+function recordPostAckOriginal(diagnostic,value,error,rejected=error!==null){
+ diagnostic.helperReturned=!rejected;diagnostic.helperRejected=rejected;diagnostic.originalError=error;diagnostic.originalRejected=rejected;
+ if(rejected){diagnostic.originalR2Outcome=diagnostic.mfAttached&&diagnostic.harnessReturned?'failed':'unavailable';return;}
+ diagnostic.oracleCalls=(diagnostic.oracleCalls??0)+1;
  try{qualifyPostAckOriginalR2(value);diagnostic.originalR2Outcome='passed';}
- catch(qualificationError){diagnostic.originalError=qualificationError;diagnostic.originalR2Outcome='failed';}
+ catch(qualificationError){diagnostic.originalError=qualificationError;diagnostic.originalRejected=true;diagnostic.originalR2Outcome='failed';}
+}
+async function settlePostAckOriginal(diagnostic,invoke){
+ let value,helperError=null,helperRejected=false;
+ try{value=await invoke();}catch(error){helperError=error;helperRejected=true;}
+ recordPostAckOriginal(diagnostic,value,helperError,helperRejected);
+ return {value,helperError,helperRejected};
 }
 function finishPostAckOriginal(diagnostic){
- if(diagnostic.originalError)throw diagnostic.originalError;
+ if(diagnostic.originalRejected)throw diagnostic.originalError;
+}
+function postAckEvidenceEligible(diagnostic,ownership,helperError){
+ if(diagnostic.originalR2Outcome==='unavailable'||diagnostic.evidenceFailure||ownership?.complete!==true)return false;
+ const required=new Set(['fixture_callback','registered_cleanup','release','restore','dispose','capture_epoch','terminal_epoch','cold_archive','partial_archive','ownership_preservation','mount_provenance']);
+ const retained=helperError?fixedBudgetOwnerErrors.get(helperError):null;
+ if(retained?.phaseFacts?.some(fact=>required.has(fact.phase)))return false;
+ if(ownership.records.some(record=>record.disposalUncertain||record.failures.length>0||record.phases.some(phase=>phase.status==='rejected')))return false;
+ // A helper rejection after the operation returned can also be required final persistence.
+ if(diagnostic.helperRejected&&diagnostic.innerOperationReturned===true)return false;
+ return true;
+}
+async function preservePostAckEvidence(diagnostic,work){
+ try{await work();return true;}catch{diagnostic.evidenceFailure=true;return false;}
+}
+
+async function runPostAckOwnerHandoffControls(){
+ const root=join(process.env.RUNNER_TEMP,'afw-post-ack-owner-handoff-'+process.env.GITHUB_RUN_ID);await mkdir(root,{mode:0o700});
+ const legacyResult=resolve('output/finite-budget/readonly/R2/full-result.json');try{await readFile(legacyResult);assert.fail('pure handoff requires absent owned result');}catch(error){assert.equal(error.code,'ENOENT');}let lastPersistedHash=null;
+ const valid=()=>({caseName:'R2',facts:{completeWrites:1,completeNormal:1,input:{entries:201,correlations:1,expirationPreserved:true},foreignUnchanged:true,lists:2,gets:200,scopePeak:2,sdkReplay:0,nativeUnsettled:0,outwardPending:0,responseStatus:400,referenceRows:0,thirdListEntered:false,boundaryProof:{exactPrecedingPages:2,counter:2}},operationalReadiness:false,completePackage:false,PCoff:false});
+ async function handoff(name,{invalid=false,cleanupReject=false,businessReject=false,sharedPrimary=false,addedPersistenceReject=false}={}){
+  // Synthetic progress premises only; no Miniflare constructor, Native handle, I0 or SDK.
+  const diagnostic={native:true,mfAttached:true,harnessReturned:true,originalR2Outcome:'unavailable',originalError:null,oracleCalls:0},cleanupError=Error('SYN required cleanup'),businessError=Error('SYN business primary'),inner=valid();if(invalid)inner.facts.completeWrites=0;
+  let callbackCalls=0;
+  const settled=await settlePostAckOriginal(diagnostic,()=>postAckContexts.run(diagnostic,async()=>{
+   return await withFixedBudgetOwner('R2',join(root,name),async()=>{
+    registerFixedOwnedCleanup(async()=>{callbackCalls++;if(cleanupReject){const error=sharedPrimary?businessError:cleanupError;noteFixedBudgetOwnedFailure(error,'fixture_callback');throw error;}});
+    if(businessReject){noteFixedBudgetOwnedFailure(businessError,'producer_operation');throw businessError;}
+    return inner;
+   });
+  }));
+  const ownership=settled.value?.ownership??(settled.helperError?fixedBudgetOwnerErrors.get(settled.helperError)?.result:null);assert(ownership);assert.equal(callbackCalls,1);assert.equal(ownership.records.length,0);
+  if(!settled.helperRejected){const bytes=await readFile(legacyResult);await writeFile(join(root,name,'legacy-result.json'),bytes,{flag:'wx'});lastPersistedHash=hash(bytes);}
+  let addedRejected=false;
+  if(addedPersistenceReject){
+   const blocker=join(root,name,'blocked-parent');await writeFile(blocker,'SYN',{flag:'wx'});
+   addedRejected=!await preservePostAckEvidence(diagnostic,()=>writeFile(join(blocker,'child.json'),'SYN',{flag:'wx'}));assert.equal(addedRejected,true);
+  }
+  const eligible=postAckEvidenceEligible(diagnostic,ownership,settled.helperError);let outward=null;try{finishPostAckOriginal(diagnostic);}catch(error){outward=error;}
+  return {diagnostic,settled,ownership,cleanupError,businessError,outward,callbackCalls,eligible,addedRejected};
+ }
+ const goodCleanup=await handoff('valid-inner-cleanup-reject',{cleanupReject:true});assert.equal(goodCleanup.settled.helperError,goodCleanup.cleanupError);assert.equal(goodCleanup.outward,goodCleanup.cleanupError);assert.equal(goodCleanup.diagnostic.oracleCalls,0);assert.equal(goodCleanup.diagnostic.originalR2Outcome,'failed');assert.equal(goodCleanup.ownership.complete,true);assert.equal(goodCleanup.eligible,false);
+ const badCleanup=await handoff('invalid-inner-cleanup-reject',{invalid:true,cleanupReject:true});assert.equal(badCleanup.settled.helperError,badCleanup.cleanupError);assert.equal(badCleanup.outward,badCleanup.cleanupError);assert.equal(badCleanup.diagnostic.oracleCalls,0);assert.equal(badCleanup.ownership.complete,true);assert.equal(badCleanup.eligible,false);
+ const added=await handoff('success-added-persistence-reject',{addedPersistenceReject:true});assert.equal(added.settled.helperError,null);assert.equal(added.outward,null);assert.equal(added.diagnostic.originalR2Outcome,'passed');assert.equal(added.diagnostic.oracleCalls,1);assert.equal(added.eligible,false);
+ const oracle=await handoff('returned-oracle-reject',{invalid:true});assert.equal(oracle.settled.helperError,null);assert(oracle.diagnostic.originalError);assert.equal(oracle.outward,oracle.diagnostic.originalError);assert.equal(oracle.diagnostic.oracleCalls,1);assert.equal(oracle.diagnostic.originalR2Outcome,'failed');assert.equal(oracle.eligible,true);
+ const primary=await handoff('business-primary-cleanup-success',{businessReject:true});assert.equal(primary.outward,primary.businessError);assert.equal(primary.diagnostic.oracleCalls,0);assert.equal(primary.ownership.complete,true);assert.equal(primary.eligible,true);
+ const uncertain=await handoff('business-primary-cleanup-reject',{businessReject:true,cleanupReject:true});assert.equal(uncertain.outward,uncertain.businessError);assert.equal(uncertain.settled.helperError,uncertain.businessError);assert.equal(uncertain.diagnostic.oracleCalls,0);assert.equal(uncertain.ownership.complete,false);assert.equal(uncertain.eligible,false);
+ const samePrimary=await handoff('business-primary-same-cleanup-error',{businessReject:true,cleanupReject:true,sharedPrimary:true});assert.equal(samePrimary.outward,samePrimary.businessError);assert.equal(samePrimary.diagnostic.oracleCalls,0);assert.equal(samePrimary.ownership.complete,true);assert.equal(samePrimary.eligible,false);
+ assert(lastPersistedHash);assert.equal(hash(await readFile(legacyResult)),lastPersistedHash);await rm(legacyResult);
+ const fact=(value,sameError)=>({outcome:value.diagnostic.originalR2Outcome,sameError,oracleCalls:value.diagnostic.oracleCalls,legacyComplete:value.ownership.complete,eligible:value.eligible,callbackCalls:value.callbackCalls});
+ return {purpose:'afw.post-ack-owner-handoff-controls.syn.v1',variants:[
+  {name:'valid_inner_cleanup_reject',...fact(goodCleanup,goodCleanup.outward===goodCleanup.cleanupError)},
+  {name:'invalid_inner_cleanup_reject',...fact(badCleanup,badCleanup.outward===badCleanup.cleanupError)},
+  {name:'success_added_persistence_reject',...fact(added,added.outward===null),normalReturn:true,addedPersistenceRejected:true},
+  {name:'returned_oracle_reject',...fact(oracle,oracle.outward===oracle.diagnostic.originalError)},
+  {name:'business_primary_cleanup',successful:fact(primary,primary.outward===primary.businessError),uncertain:fact(uncertain,uncertain.outward===uncertain.businessError),samePrimary:fact(samePrimary,samePrimary.outward===samePrimary.businessError)}
+ ],families:5,wholeHelperBeforeOracle:true,actualOwnerHandoff:true,mfAllocated:false,I0Created:false,nativeExecuted:false,businessAuthority:false};
 }
 
 export async function runPostAckR2Diagnostic(){
@@ -2016,20 +2079,19 @@ export async function runPostAckR2Diagnostic(){
  const timing=JSON.parse(await readFile(join(process.env.RUNNER_TEMP,'afw-post-ack-job-time.json'),'utf8'));timing.observedMono=performance.now();timing.metadataAgeMs=Number((process.hrtime.bigint()-BigInt(timing.observedHrtime))/1000000n);
  const diagnostic={identity:postAckIdentity(),enabled:true,graphs:new Map(),native:true,timing,mfAttached:false,harnessReturned:false,originalR2Outcome:'unavailable',originalError:null};assertPostAckHeadroom(timing);
  let value,helperError=null;const group=process.env.AFW_BUDGET_GROUP;process.env.AFW_BUDGET_GROUP='readonly';
- try{value=await postAckContexts.run(diagnostic,()=>runBudgetReadonlyCase('R2'));}
- catch(error){helperError=error;if(diagnostic.originalR2Outcome==='unavailable')diagnostic.originalError??=error;}
+ try{({value,helperError}=await settlePostAckOriginal(diagnostic,()=>postAckContexts.run(diagnostic,()=>runBudgetReadonlyCase('R2'))));}
  finally{if(group===undefined)delete process.env.AFW_BUDGET_GROUP;else process.env.AFW_BUDGET_GROUP=group;}
- // Everything below is best-effort evidence. It cannot replace a positively recorded original outcome/error.
- try{
+ // Added evidence follows whole-helper settlement and oracle; it cannot replace either outcome/error.
+ await preservePostAckEvidence(diagnostic,async()=>{
   const ownership=value?.ownership??(helperError?fixedBudgetOwnerErrors.get(helperError)?.result:null),record=ownership?.records.find(r=>r.ordinal===diagnostic.allocation);let mountedProvenance=null;
   try{
-   assert(record&&diagnostic.harnessReturned&&ownership.complete&&record.disposed&&record.archived&&!record.disposalUncertain);assert.equal(record.terminalCapture,'captured');assert.deepEqual(record.graphs.map(r=>r.role).sort(),['M','QA']);
+   assert(postAckEvidenceEligible(diagnostic,ownership,helperError));assert(record&&diagnostic.harnessReturned&&record.disposed&&record.archived&&!record.disposalUncertain);assert.equal(record.terminalCapture,'captured');assert.deepEqual(record.graphs.map(r=>r.role).sort(),['M','QA']);
    const captured=diagnostic.graphs;for(const role of ['M','QA']){const built=captured.get(role);assert(built?.output);const configured=record.graphs.find(r=>r.role===role);assert(configured.mounted);assert.equal(configured.sha256,hash(built.output));assert.equal(configured.bytes,built.output.length);}
    assert(captured.get('QA').verifiedSupplement);mountedProvenance={status:'verified',context:diagnostic.identity,stage:'actual_configured',profile:POST_ACK_PROFILE,allocationIdentity:record.ordinal,ownedAllocationIdentity:diagnostic.allocation,lifecycleComplete:true,successfulMount:true,actualOptionsVerified:true,modelOnly:false,sdkFileSha256:preflight.sdkFileSha256,sdkBytes:preflight.sdkBytes,sdkSites:preflight.sdkSites,lockBlob:preflight.lockBlob,lockSha256:preflight.lockSha256,mGraphSha256:hash(captured.get('M').output),qaGraphSha256:hash(captured.get('QA').output),transformSha256:preflight.transformSha256,preflightSha256:hash(modelBytes),emissions:captured.get('QA').supplement.length};
   }catch{diagnostic.evidenceFailure=true;}
   const snapshots=(record?.epochs??[]).filter(v=>v.role==='QA'&&v.reason==='terminal-owned-before-dispose').map(v=>({role:v.role,reason:v.reason,allocationIdentity:record.ordinal,snapshot:v.snapshot.postAckDiagnostic}));
   let observation;try{observation=selectPostAckCertificate({snapshots,mountedProvenance,originalR2Outcome:diagnostic.originalR2Outcome,context:diagnostic.identity});}catch{diagnostic.evidenceFailure=true;observation=selectPostAckCertificate({snapshots:[],mountedProvenance:null,originalR2Outcome:diagnostic.originalR2Outcome,context:diagnostic.identity});}
   const privateDir='output/finite-budget/post-ack-private';await mkdir(privateDir,{recursive:true});await writeFile(join(privateDir,'observation.json'),JSON.stringify(observation));await writeFile(join(privateDir,'job-manifest.json'),JSON.stringify({purpose:'afw.post-ack-private-job.syn.v1',context:diagnostic.identity,cases:['R2'],diagnosticOnly:true,originalR2Outcome:diagnostic.originalR2Outcome,kind:diagnostic.originalR2Outcome==='passed'?'readonly-result':'consumer-failure',preallocationBlocked:!diagnostic.mfAttached,mfAttached:diagnostic.mfAttached,persistAttached:diagnostic.persistAttached===true,preMfScratchDeletionVerified:false,operationalReadiness:false}));
- }catch{diagnostic.evidenceFailure=true;}
+ });
  finishPostAckOriginal(diagnostic);
 }

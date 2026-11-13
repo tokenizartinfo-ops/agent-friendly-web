@@ -6007,3 +6007,70 @@ Closed Source8e244d36d779e8f150f742233bdc292fd82fbf0b/tree1edc50111192528d8a2104
 Main independently unchanged0c9c475b3ebaa970fc11d628b40e50a90cceb727. After closure all five repository active-state counts queued/in_progress/waiting/pending/requested=0. Qualification43331779408/attempt1 terminalSUCCESS, producer131577995361 and verifier131578423619 bothSUCCESS; no re-run/retry/secondfix1run. MODEL13993744947 and SAFE13993764885 metadata remain current/unexpired with exact source4ceae/run43331779408 and digests/expiry recorded above. Only allowed SMALLSAFE was inspected as data in memory; model/cipher/rawNative not downloaded. No local Source execution or files were created; task-owned authored/hash buffers are released after receipt publication. Final receipt commit is REPORT ONLY and receives another full ref/tree/files/main/five-state0 readback before parent reply.
 
 StatusDONE for this fix round's scoped implementation and one KEYLESS qualification. C1/C2/I1–I5 have covering current-code controls and actual cloud outputs above; M1 normalization naturally included. Independent scoped rereview is PENDING and is not replaced by this self-review. Native remains HELD: no fresh Root Native brief/permission, no actual R2/MF/I0/SDKruntime/AFWkey/CF/runtime/production/OAuth/customer/PCoff/Native16/Max claim. Known limitations remain model-only/source/build/configuration provenance, trusted same-runner step-scoped custody, synchronous timing overhead and pair_wait call boundary without underlying-cause attribution. No further work dispatched; STOP.
+
+
+## Native post-ACK R2 Task1 fix round2/5
+
+### N8 remaining-I1 candidate — before the sole NEW qualification
+
+Same original implementer, only I1 ordering/eligibility remains in scope. Binding brief bb324a1811d694c7b8d261fbcf9b019c00e9d068 atRootdocs589ea21defb8c8d25f8dc907bfb1a8427d4c01c3; N8 supersedes earlier ambiguous before-ownership whole-case verdict wording. Original R2 means ONE awaited legacy runBudgetReadonlyCase('R2') INCLUDING required cleanup/persistence, then the pinned21predicate oracle on its RETURNED value. Prior actual green43331779408 is preserved/consumed, not replayed. C1/C2predicatecoverage/I2–I5/M1/N6/N7 remain in force; no broad refactor or extra Native permission.
+
+Starting Source2910fcdc512497e54da286b477c8662be7721fcc/tree98e9d674eb3e38aa860da96d7341a61c10d2e3b5; full6files plus F7 re-read exact;3194leaves/nontruncated;3188protected; main0c9c475b3ebaa970fc11d628b40e50a90cceb727; queued/in_progress/waiting/pending/requested all0. Entire report7019adbabc91fa3ba802557581144ef0813d72e9/569273chars is preserved verbatim as this section's prefix. Local work remains bounded string/data hashing and read-only metadata; no Source import/eval/execution, clone/deps/build/temp Source files on the PC. Skills systematic-debugging/receiving-code-review reused; no subagent or independent review is claimed.
+
+Static causal RED analysis: old withFixedBudgetOwner hook ran the oracle/marked passed before close. A required original callback could set cleanupPrimary and throw; legacy close promotes that error, excludes equal primary from ancillary failures, and can persist complete:true. Old adapter then preserved earlypass/swallowed the helper rejection. If inner result also violated a predicate, earlyoracle could replace the cleanup error the protected test would actually receive. No separate new RED execution was authorized; the old green did not cover this edge. New actual-handoff regressions are authored for the sole fresh cloud qualification below.
+
+Candidate fix removes oracle/verdict/error injection from withFixedBudgetOwner entirely. Its only new observation there is nonauthoritative innerOperationReturned, without altering primary or original callback order. Shared private settlePostAckOriginal awaits the WHOLE helper callback before record/oracle; any original helper rejection wins by identity, oracleCalls stays0, and only normally returned whole-helper value reaches the exact unchanged21oracle. Shared finish preserves exact helper/oracle rejection; later ADDED evidence work is caught by the shared preservePostAckEvidence wrapper and cannot change known success/error. Precompletion unknown still unavailable. Actual Native adapter still has exactlyONE fixed runBudgetReadonlyCase('R2') call site and two fixed exported adapters only; no R1/R3/test-module import.
+
+Eligibility is independently conservative: postAckEvidenceEligible checks retained required callback/phase failure facts in the existing private error map (fixture_callback,registered_cleanup,release/restore/dispose/capture/terminal/archive/ownership/mount failures), closed record failure/rejected-phase/uncertainty facts, and helper rejection after inner return. It does NOT infer required-cleanup success merely from complete:true, ancillary counts, or whether failure equals primary. Business-primary rejection with independently successful cleanup remains eligible for a truthful failed-original diagnostic; failed-case certificates are not banned indiscriminately. Legacy close semantics themselves are unchanged.
+
+Root accepted the actual-control seam: private World preflight runs ACTUAL withFixedBudgetOwner/registerFixedOwnedCleanup/noteFixedBudgetOwnedFailure/close through the SAME private whole-helper settlement/oracle/error-priority routine as Native adapter. Five pure families cover seven owned Node handoffs, NO Miniflare/native handle/I0/SDK/native-R2 invocation: (1)valid inner plus requiredcleanup rejection; (2)oracle-invalid inner plus requiredcleanup rejection; (3)returned helper+oracle success then actual added ENOTDIR persistence failure through the shared evidence wrapper; (4)returned helper then same oracle-error object; (5)business primary with successful cleanup, distinct cleanup uncertainty, and SAME-primary-object cleanup rejection (legacycomplete:true but required-phase fact must make eligiblefalse). Assertions require callback once, oracle0 on all unreturned values, original error identity/priority, whole-case status and expected eligibility.
+
+The pure controls return the genuine synthetic R2-shaped value through legacy ownership/persistence, without boxing or changing original callbacks. The fixed runner-only legacy full-result path must be absent first; normally persisted synthetic results are copied to unique owned control directories, then only that owned result file is removed after exact hash verification, avoiding contamination of any later Native fixture. No pre-MF original scratch cleanup or global legacy cleanup behavior is changed/claimed. Synthetic progress premises are clearly local test data; actual owner records assert0 and MODEL flags mfAllocated/I0Created/nativeExecuted remainfalse.
+
+Five closed family facts are included in sanitized MODEL and strictly validated by existing schema/provenance control IDs and independent downloaded-MODEL binding. The old evidenceFailure-boolean-only mirror was removed. Private oracle still has all21 predicate mutation families; pre-MF/future-job controls stay. Minimal MODEL/projection schema addition is the only proof consequence; no new exports, control IDs, Node tests, Source paths, workflow bodies, permissions, secrets, budgets or Native calls. Test entry1923B, contracts held21318B and Native held30086B remain exact reviewed fix1 bytes; all gates held/F7sevenfalse throughout preparation.
+
+Covering commands for ONE NEW7+2 KEYLESSpush/attempt1 are unchanged: three node --check files; current pure preflight including actual Node handoffs; sanitized MODEL upload/real assigned-ID triple-digest+protected inventory readback; AFW_POST_ACK_MODE=controls node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs (same24IDs/onewrapper); unchanged fixed F1–F8 at original45s;17 named pure diagnostics/observer tests; contracts-proof; exact2JSON SMALLSAFE upload; independent MODEL+SAFE/currentcheckout/command/provenance proof verification. Source qualification is required before scoped rereview; actual command outputs/run/job/artifact metadata and final readbacks will be appended after the sole terminal outcome, not invented here.
+
+Frozen held-file inventory:
+
+```json
+[
+  {
+    "path": "test/fixtures/finite-budget-world.mjs",
+    "chars": 242981,
+    "bytes": 242987,
+    "sha256": "007a4b39777dbd34645f7754556cfa1a9e152a0d2a6f55a27f6b1c30e334d867",
+    "blob": "0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b"
+  },
+  {
+    "path": "test/fixtures/finite-post-ack-diagnostic.mjs",
+    "chars": 74686,
+    "bytes": 74686,
+    "sha256": "245aae72303df50d824215cd207fea0ff052b16d7af31f3a6463848ac23f8868",
+    "blob": "cdc1fdca6d614183a0383e4734d2ffcfdd5ac422"
+  },
+  {
+    "path": "test/finite-post-ack-diagnostic.test.mjs",
+    "chars": 1923,
+    "bytes": 1923,
+    "sha256": "cbe41b778c68e74516f9008061d27cdcdc6e8dcf212a93d8ddb24caf8079e462",
+    "blob": "aaf4894d1b411a8ac59debb63ca9368e803141c5"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+    "chars": 21318,
+    "bytes": 21318,
+    "sha256": "548a99f9c577ae5212016b5f4cc3c7899f4b6902af47a88802000f0f3a84264c",
+    "blob": "1c4d054487e781157cf4fa633f9fc58a5a9cbbf5"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+    "chars": 30086,
+    "bytes": 30086,
+    "sha256": "da20759fd7be5e64f7f62164a0a58bc701b33c89d35175a746868eed56c38fb0",
+    "blob": "8d5b04da0eff2890c70b8ef15a2f51a99c896810"
+  }
+]
+```
+
+Self-review checked unchanged legacy primary/callback order, whole-helper and required persistence before oracle, retained-phase gate including equal-primary hole, business-failure/cleanup-success allowance, actual added persistence failure instead of manual flag, exact private/shared routine usage, strict closed MODEL/schema binding and existing N1–N7 contracts. No known concrete blocker remains; this is not independent CLEAN. On any new run failure originalWorld is restored and allnewWFheld/protected/main/0activeSTOP; no hidden repair/retry. On pass retain fixed code, close allnewWF, fullreadbackSTOP. Native/AFWkey/MF/I0/SDKruntime/CF/production/OAuth/customer/PCoff/Native16/Max NOT EXECUTED; all readinessflagsfalse.
