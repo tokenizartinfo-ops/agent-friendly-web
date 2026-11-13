@@ -3764,3 +3764,57 @@ Superseding INACTIVE UNATTACHED candidate:291c32f18aa7e3965cceab88703e3153a9c8e1
 ## PREP-I1 import-only correction — current inactive candidate
 
 Current candidateb2d40d2c72cd6c29e8d0ba3d87306eac78587b1b/tree58db7a19640442ea2e42cf511134915df58c6658/F7ef92e822d5f981575a19cc8b4cf01584df03fab8,355491B,SHA0b446c724d6c2011c6e1111b7296632cafad937ee604e22d97a565b7e9ddfe60; sole parentBASE72c108. Only missing builtin imports added relative291c, finalLF retained; other bodies/controlassertions/26slots/registryidentities/tenfalseguards exact. Adapter61225B/ad4c08de403c02b10140245c46143b2fd83872aa44401e877a369a6a1485dea6; controls58832B/3627dafe53c6b1c6d930cc8c6f747e5d9678ecc54438e6ae03213ee1f7f44ece; unchangedverifier15099B/94135538ab4fb8fa7f43fc2fe42c64563eb806e436117b4a404c26c855ee35bf andSafeZIP13305B/b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d. Root independently recomputedfullSourceSHA256/Gitblob/all4bodyhashes inRAM and readfullimportdelta; noSourceexecute. Completecurrenttree3196/onlyF7delta/reportprefixandallother3195leavesexact. All32subcaseIDs preserved. PREP-I1 addressedbyinspectionONLY; coveringcloudrun andscopedreview remainpending. No currentSourcepositive orqualification claimed.
+
+
+## R1 actual run and Root closure
+
+{
+  "run": 43459300386,
+  "source": "afed5ff612fc8618962f8b372ad054672175077e",
+  "attempt": 1,
+  "conclusion": "failure",
+  "all10Terminal": true,
+  "old8Skipped": true,
+  "actualPositiveAndProvenanceVerified": true,
+  "completedFamilies": 2,
+  "passedFamilies": 1,
+  "failedFamily": "key_scope",
+  "subcasesPassed": 5,
+  "subcasesFailed": 1,
+  "subcasesNotExecuted": 26,
+  "failingSubcase": "secret_run_and_ambiguous_context_references_rejected",
+  "receiverControlsPassed": 16,
+  "currentSAFEIndependentStrictVerified": true,
+  "artifact": {
+    "id": 14056095996,
+    "zipBytes": 1402,
+    "sha256": "b02fce117243a4bdac3057ba19015416d207bbfb5096db2473ea27c8608cd0e8"
+  },
+  "accepted": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
+
+{
+  "source": "c0c65836a677b23949624bc9afc14f4c59012a62",
+  "tree": "7b8922952555441abf96e8fe83f94c30e4de7f19",
+  "prior3195LeavesExact": true,
+  "leaves": 3196,
+  "soleNewReport": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+  "reportSha": "7096ec150ea9a4285930d96da85224b4f62b1e61",
+  "reportChars": 234732,
+  "F7exact": true,
+  "mainUnchanged": true,
+  "runId": "43459300386",
+  "runSource": "afed5ff612fc8618962f8b372ad054672175077e",
+  "runCompleted": true,
+  "allDeclaredJobsTerminal": true,
+  "declaredJobs": 10,
+  "fiveBranchActiveStatusesZero": true,
+  "all62WorkflowBlobsExact": true,
+  "providerRuntimeRead": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
+
+FullactualSourceappendix is in c0c658... sameSource report; Root taskreview package preserves wholetemporaryexecutedSource delta. CandidateFAILED/unqualified, PREP-I1 actualpositivecoveringseampassed; exactinnerfailurecause awaitsreview. No autofix/rerun.
