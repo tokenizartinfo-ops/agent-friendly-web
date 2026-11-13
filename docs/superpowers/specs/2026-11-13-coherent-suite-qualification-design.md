@@ -139,3 +139,7 @@ Task2 fresh sole Source executor: one activation with same bodies, original grou
 
 Rollback-only exception: if completed Actions run positively materializes a subset/zero jobs (e.g. parser failure), wait all actually present jobs terminal, all five scoped branch-active inventories zero, same frozen Source tip and rollback rechecked; restore and report exact declared/materialized/missing sets as unavailable/unqualified. Do NOT invent skipped jobs, claim qualification/pass or retry. Missing/unavailable API is uncertainty, not a positive empty list; bounded read-only reconcile first.
 No merge/promotion to main. All flags false regardless success.
+
+## Clarified internal argument — Task1 builder question
+
+validateReopenedSuite.expectedPeers is exactly {pure:{artifactId,zipSha256},peers:[five exact {job,kind,artifactId,zipSha256} in the public peer order]}. Compare all six reopened original private receipt refs. Pure manifest SHA remains independently bound by bindPure/current contracts output; do not add a redundant private proof field or change the public DTO. This is a fixed internal value, no transport or user override.

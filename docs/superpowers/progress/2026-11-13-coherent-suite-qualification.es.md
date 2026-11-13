@@ -50,3 +50,5 @@ Ruling: release ONLY Task1 inactive eight-job preparation and one ten-declared/t
 Testing ruling: controls are written first; the single bounded KEYLESS qualification must demonstrate rejection of known bad inputs and positive actual shared seams. Do not manufacture a pre-implementation RED execution or claim one occurred; no extra run is introduced for test ceremony under the one-run/cloud-only constraint. Report actual executed test evidence and any limitation transparently.
 
 Root owns Rootdocs and independent metadata/SAFE readback. Source implementation belongs to one fresh delegated actor. All flags remain false; no owner intervention required.
+
+Ruling: builder's expectedPeers internal DTO is accepted exactly as recorded in SPEC — original reopened proof receipts already contain pure ID/digest and the five peer refs, while manifest SHA is independently verified — cost if wrong: direct binding control fails, no public schema or business oracle change. Source actor was told before mutation; actual Native remains held.
