@@ -11638,3 +11638,429 @@ After BOTH jobs terminalSUCCESS, expected-head restore CASd807928c -> 03f18cac42
 ```
 
 Root separately reported independent current SMALLSAFE/CRC/ranges/fullmanifest/Core91 equality/40+22+18/all7hashes/digesttriple/P4reasons+reachedcounts audit passed; its scoped review remains separate, not self-certified here. This report-only receipt commit is followed by final full readback before reply and cannot self-record its Git SHA. Builder statusDONE for formal fix round1/5: only authorized P4 correction and one complete fresh KEYLESS covering, mandatory exact rollback. ActualTask2/Raw remains HELD. No human step or new permissions requested. Source writer STOPPED after final readback; no further Source work by inference.
+
+
+## R1 HTTP frontier Task2 — preflight STOP before activation (2026-11-13 UTC)
+
+Sole Source executor followed immutable Root release8bbdf0c9402662d71ed658da368060208d42b420, docs/superpowers/briefs/2026-11-12-r1-http-frontier-task2-single-projection.md, with Task1 formal review CLEAN. This was the separately released ONE historical actual5+2 projection; it did NOT activate or run. Original R1 first rejected inspector HTTP predicate remains UNKNOWN. No implementation, tests, current seven program bodies, budgets, custody, key, permissions, Native, Cloudflare, runtime, OAuth, OTP, Max, main, PR, merge or publication changed.
+
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web (verified repository ID1347578006); ENVIRONMENT finite GitHub runner historical inspection; ORIGIN GitHub connector/GitDB; RESOURCE_TYPE isolated Source branch F7/report; RESOURCE_ID feat/finite-native-cleanup-20261101/.github/workflows/afw-finite-budget-qualification.yml; ALLOWED_ACTION ONE actual5+2 followed by exact restore and report append; ROLLBACK F7 blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209bytes/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a. Actual activation remained unperformed, so exact rollback material was already the live F7; no redundant F7 write was made. Only this same-report append was prepared for the closed receipt.
+
+### Preflight evidence and fixed strategy
+
+Full ref and commit/tree reads verified CLOSED Sourcedad4e5c0f72911fdcb96e9b7c3bff5029efbb854/treee95f4a6334bcf99d150c5568daf6636654b7dcaa. Recursive tree was nontruncated with3194leaves. Full734head-ref inventory was read; later closed pre-append readback found zero changed refs. Main remained0c9c475b3ebaa970fc11d628b40e50a90cceb727. Full report4e480125ada1c9f6b68f3f624c00c0adf4bc06fd/797305chars was fetched twice; entire strings matched byte-for-byte as UTF-8 text and are preserved as the prefix of this append. F7 was recoverable as complete public string data and independently hashed using node:crypto only, without executing/evaluating/importing any Source. F7 is manualworkflow_dispatch/noinputs/nopush with seven literalfalsejobgates.
+
+Qualified actual candidate8afd3ce450f168d3542d95b0f0fc6b90567fd432/tree77981945c6f1e8a42af351840eb2c64a1e54be23/F7blobd98fdf987e96ae6f42435c24264e88ea5f0debb4/247345bytes was fetched as STRINGDATA. Its nontruncated3194-leaf tree exactly matched all3192protected baseline leaves, including modes. Six heredoc bodies were reconstructed by deindentation and the generated verifier by fixed string slicing/JSON string-literal decoding and concatenation; no eval, Source import, process invocation, local clone/files/dependencies/build or Source execution occurred. All seven hashes and sizes matched the Task1-qualified identities below. Only the already authorized front-end edits were prepared in RAM: fixed self-path push for the Source branch, run label AFW R1 HTTP frontier TASK2 ACTUAL ONE 5+2, and removal of precisely TWO literalfalseprefixes. Existing gates, intentional Original producer/current verifier checkouts and READBACK_KIND=supplement remained exact. No active blob, tree or commit was created and no ref moved for this candidate.
+
+```json
+{
+  "qualifiedProgramPins": {
+    "NODE_CORE": {
+      "bytes": 77002,
+      "sha256": "d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246"
+    },
+    "NODE_REFERENCE": {
+      "bytes": 34180,
+      "sha256": "672b054312d8c23c38662719b5183e6e345a322e6db74c6f761719b9bfdf4e36"
+    },
+    "NODE_REFERENCE_TESTS": {
+      "bytes": 74171,
+      "sha256": "c75f8610543dabfefb134462645769880f6fc78a0f5554667d9515584e5fff19"
+    },
+    "NODE_REFERENCE_BOOTSTRAP": {
+      "bytes": 1370,
+      "sha256": "2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1"
+    },
+    "NODE_SAFE_ZIP": {
+      "bytes": 13305,
+      "sha256": "b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"
+    },
+    "NODE_MATERIALIZE": {
+      "bytes": 21125,
+      "sha256": "01b7b0351c85f4d07e76d11498b5e6b78e6d2baccf1d6e98633523a620bed1a4"
+    },
+    "GENERATED_VERIFIER": {
+      "bytes": 41119,
+      "sha256": "1d7ddac413679393425f979387e59bc7909c10d4e8dd68a2ea93215de9109e92"
+    }
+  },
+  "protected": {
+    "world": "0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b",
+    "postACKFixture": "7e1ee778add7dbe317aa261b2073fe28295a0ad6",
+    "heldContracts": "2006beb4d081ef127d1192fd99967f5f76eeb7db",
+    "heldNative": "baa8442094731bea1413d2cc03028ab8682b300b"
+  },
+  "fiveActiveStates": [
+    {
+      "status": "queued",
+      "total_count": 0
+    },
+    {
+      "status": "in_progress",
+      "total_count": 0
+    },
+    {
+      "status": "waiting",
+      "total_count": 0
+    },
+    {
+      "status": "pending",
+      "total_count": 0
+    },
+    {
+      "status": "requested",
+      "total_count": 0
+    }
+  ],
+  "source": "dad4e5c0f72911fdcb96e9b7c3bff5029efbb854",
+  "sourceTree": "e95f4a6334bcf99d150c5568daf6636654b7dcaa",
+  "sourceActivated": false,
+  "actualRun": null,
+  "actualAttempt": null,
+  "producerJob": null,
+  "verifierJob": null,
+  "currentSafeArtifact": null,
+  "readbackKind": "not_run"
+}
+```
+
+### Exact preflight STOP boundary
+
+The executor issued ONE metadata-only request using generic mcp__codex_apps__github_fetch, route GET /repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/13949168304, with no query. The tool returned isError:true. The orchestration wrapper then threw its exact local message "preflight 3" before preserving the connector response text. Therefore the exact connector message and any HTTP status/category are UNAVAILABLE: this does not establish GitHub authentication failure, artifact expiry or unsupported route. It was not the purpose-built fetch_workflow_run_artifacts tool. No endpoint/body/auth/private value is inferred, and the request was not repeated through the same or another route. No Original ciphertext/plaintext/key/MODEL, private producer logs or child/SDK diagnostic values were fetched into tools or PC.
+
+Root was notified before any mutation and confirmed STOP/no activation/no repeat under the release, requiring a sanitized distinction between the missing connector message and actual GitHub auth/expiry. Root separately owns any later ruling. Under the immutable brief's unknown access/auth/expiry rule, no actual5+2 was activated, no producer or verifier ran, and no actual Original download/open occurred. No artifact expiry could be verified through the rejected metadata route. No current SMALLSAFE was produced; no actual readback success or historical predicate is claimed. This closed report does not consume or replay a historical run. No retry, automatic fix, new test, Raw run, cap increase or Native operation followed.
+
+### Allowed commands and observed output
+
+- GitHub fetch_file at immutable release8bbdf0c9: exact Task2 brief and Task1 CLEAN read; repository AGENTS scope/security/engineering sections read.
+- GET /repos/tokenizartinfo-ops/agent-friendly-web: full_name tokenizartinfo-ops/agent-friendly-web, id1347578006.
+- GET /git/ref/heads/feat/finite-native-cleanup-20261101 and /git/commits/dad4e5c0f72911fdcb96e9b7c3bff5029efbb854: exact CLOSED SHA/tree above.
+- GET /git/refs/heads:734refs; Source/main pins unchanged; a second inventory had zero changedrefs.
+- GET /git/trees/e95f4a6334bcf99d150c5568daf6636654b7dcaa recursive=1: truncatedfalse,3194leaves; same exact closed tree on second read.
+- GET /git/trees/77981945c6f1e8a42af351840eb2c64a1e54be23 recursive=1: truncatedfalse,3194leaves, all3192protectedleaves/modes exact.
+- Public STRINGDATA hash reconstruction with node:crypto: F7 rollback126209bytes/SHA2561e7af...282a; qualifiedcandidate247345bytes/Gitblobd98fdf987e96ae6f42435c24264e88ea5f0debb4; allsevenprogramhashes/sizes exact. Source programs were never executed.
+- GET /actions/runs with fixed Source branch, status separately queued,in_progress,waiting,pending,requested and per_page100: each total_count0, independently repeated for closed pre-append readback.
+- GET /actions/artifacts/13949168304: isError:true; exact connector message/HTTP status unavailable; local wrapper error "preflight 3"; NO repeat. This was metadata only, not a download.
+
+Complete62-workflow event inventory was fetched by immutable closed revision and retained below. Only F7/report were in authorized scope; report-only closed receipt triggers none of these workflows. Heldcontracts2006beb4 and heldNativebaa84420 stayed manual-only. No dispatch/rerun occurred.
+
+```json
+[
+  {
+    "path": ".github/workflows/afw-canary-cloud-upload.yml",
+    "blob": "47ebf94c1d7dc8d6c22c529c57296dbc10498d8e",
+    "events": "on:\n  workflow_dispatch:\n"
+  },
+  {
+    "path": ".github/workflows/afw-delegated-edge.yml",
+    "blob": "36dc1ba8cbb1cc3fae37dec80cd230fa00de8573",
+    "events": "on:\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-delivery-recipe-guidance.yml",
+    "blob": "2fd232c486cc6150d752a45d7e9c9e618981b6ef",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'lib/delivery-advisor.mjs'\n      - 'lib/delivery-instructions.mjs'\n      - 'lib/delivery-recipes.mjs'\n      - 'test/delivery-recipe-guidance.test.mjs'\n      - '.github/workflows/afw-delivery-recipe-guidance.yml'\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-finite-budget-qualification.yml",
+    "blob": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "events": "on:\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-finite-finalizer.yml",
+    "blob": "566d597223497c5cf3c0435dd0f4e8b3ab7557ea",
+    "events": "on:\n  issue_comment:\n    types: [created]"
+  },
+  {
+    "path": ".github/workflows/afw-finite-native-package.yml",
+    "blob": "92729f5952fd2d8bec107b4072bb569216d21863",
+    "events": "on:\n  push:\n    branches: [main]"
+  },
+  {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "events": "on:\n  issue_comment:\n    types: [created]"
+  },
+  {
+    "path": ".github/workflows/afw-home-hero-art.yml",
+    "blob": "bf197aa0a7a06b2891cbdda48a134e64f91d9358",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'config/home-hero-art-20261027.json'\n      - 'scripts/encode-home-hero-art.mjs'\n      - '.github/workflows/afw-home-hero-art.yml'"
+  },
+  {
+    "path": ".github/workflows/afw-independent-closure-build.yml",
+    "blob": "741b21bbd00e7da0454e5f84532b23a52533b421",
+    "events": "on:\n  workflow_dispatch:\n  pull_request:\n    paths:\n      - '.github/workflows/afw-independent-closure-build.yml'\n      - 'wrangler.independent-closure-qa.jsonc'\n      - 'wrangler.independent-closure-qa.rollback.jsonc'\n      - 'scripts/**'\n      - 'worker/**'\n      - 'tsconfig.json'\n      - '.npmrc'\n      - 'lib/**'\n      - 'package.json'\n      - 'package-lock.json'\n  push:\n    branches: [main]\n    paths:\n      - '.github/workflows/afw-independent-closure-build.yml'\n      - 'wrangler.independent-closure-qa.jsonc'\n      - 'wrangler.independent-closure-qa.rollback.jsonc'\n      - 'scripts/**'\n      - 'worker/**'\n      - 'tsconfig.json'\n      - '.npmrc'\n      - 'lib/**'\n      - 'package.json'\n      - 'package-lock.json'\n"
+  },
+  {
+    "path": ".github/workflows/afw-independent-container-control.yml",
+    "blob": "2c5bfd41119552a659a075833c9f95fe798b980a",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'examples/container-control-20261022/**'\n      - 'test/independent-container-control.test.mjs'\n      - 'test/independent-container-control-native.test.mjs'\n      - 'test/fixtures/independent-container-control-worker.mjs'\n      - '.github/workflows/afw-independent-container-control.yml'\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-named-confirmation-package.yml",
+    "blob": "282bff4d04efd495b84681dbb1953c959ab91a69",
+    "events": "on:\n  workflow_dispatch:\n  pull_request:\n    paths:\n      - '.github/workflows/afw-named-confirmation-package.yml'\n      - 'scripts/**'\n      - 'lib/**'\n      - 'worker/**'\n      - 'test/mcp-named-confirmation-package.native.mjs'\n      - 'test/mcp-private-confirmation-*.test.mjs'\n      - 'test/mcp-named-template-snapshot.test.mjs'\n      - 'test/mcp-successor-retirement-workflow.test.mjs'\n      - 'test/mcp-successor-retirement-workflow-native.test.mjs'\n      - 'test/fixtures/inert-named-confirmation-policy.mjs'\n      - 'test/fixtures/named-confirmation-compile-fault.mjs'\n      - 'test/fixtures/named-confirmation-native-rehearsal.mjs'\n      - 'test/fixtures/private-template-compile-observation.mjs'\n      - 'package.json'\n      - 'package-lock.json'\n"
+  },
+  {
+    "path": ".github/workflows/afw-original-native-observer.yml",
+    "blob": "0dd840a967c9f6d6f4b766d059262ba36d8cfab2",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'lib/mcp-own-native-observer.mjs'\n      - 'test/original-native-observer*.mjs'\n      - '.github/workflows/afw-original-native-observer.yml'\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-own-closed-readback.yml",
+    "blob": "c1a5b4b5881a9d890e6556a7851c917911685195",
+    "events": "on:\n  issue_comment:\n    types: [created]"
+  },
+  {
+    "path": ".github/workflows/afw-own-worker-build.yml",
+    "blob": "063fd026824c09e13a1705d2017e166fa8bada88",
+    "events": "on:\n  workflow_dispatch:\n  pull_request:\n    paths:\n      - '.github/workflows/afw-own-worker-build.yml'\n      - 'scripts/build-mcp-own-worker.mjs'\n      - 'scripts/build-mcp-node-program.mjs'\n      - 'scripts/mcp-release-source.mjs'\n"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-client-draft.yml",
+    "blob": "f1ae3e894bf2c55be089a941bddeb7a556678805",
+    "events": "on:\n  pull_request:\n    paths: ['lib/preparation-client-draft.mjs', 'lib/agent-consumption-input.mjs', 'test/preparation-client-draft.test.mjs', '.github/workflows/afw-preparation-client-draft.yml']\n  push:\n    branches: [main]\n    paths: ['lib/preparation-client-draft.mjs', 'lib/agent-consumption-input.mjs', 'test/preparation-client-draft.test.mjs', '.github/workflows/afw-preparation-client-draft.yml']"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-client-maintenance.yml",
+    "blob": "6979c6874ec9c567f8b4af53754c8e9e94026b34",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'lib/preparation-client-maintenance.mjs'\n      - 'db/preparation-client-bootstrap.sql'\n      - 'test/preparation-client-maintenance-native.test.mjs'\n      - 'test/fixtures/preparation-client-maintenance-worker.mjs'\n      - '.github/workflows/afw-preparation-client-maintenance.yml'\n  push:\n    branches: [main]\n    paths:\n      - 'lib/preparation-client-maintenance.mjs'\n      - 'db/preparation-client-bootstrap.sql'\n      - 'test/preparation-client-maintenance-native.test.mjs'\n      - 'test/fixtures/preparation-client-maintenance-worker.mjs'\n      - '.github/workflows/afw-preparation-client-maintenance.yml'"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-closed-origin.yml",
+    "blob": "3c09bcb4bcb4d3f1f33280fa690f3b0806d5c299",
+    "events": "on:\n  push:\n    paths:\n      - scripts/check-preparation-closed-origin.mjs\n      - test/preparation-closed-origin.test.mjs\n      - .github/workflows/afw-preparation-closed-origin.yml\n  pull_request:\n    paths:\n      - scripts/check-preparation-closed-origin.mjs\n      - test/preparation-closed-origin.test.mjs\n      - .github/workflows/afw-preparation-closed-origin.yml\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-maintenance-api-plan.yml",
+    "blob": "2a857568bc5a539d11baa09fcd9acf67838b67f9",
+    "events": "on:\n  pull_request:\n    paths: ['lib/preparation-maintenance-api-plan.mjs', 'lib/agent-consumption-input.mjs', 'test/preparation-maintenance-api-plan.test.mjs', '.github/workflows/afw-preparation-maintenance-api-plan.yml']\n  push:\n    branches: [main]\n    paths: ['lib/preparation-maintenance-api-plan.mjs', 'lib/agent-consumption-input.mjs', 'test/preparation-maintenance-api-plan.test.mjs', '.github/workflows/afw-preparation-maintenance-api-plan.yml']"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-maintenance-caller.yml",
+    "blob": "7af5278a2940c021b871db476d7b738fcb471fa5",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'worker/preparation-maintenance-caller/**'\n      - 'lib/preparation-client-maintenance.mjs'\n      - 'lib/preparation-maintenance-caller.mjs'\n      - 'lib/capsule-preparation-request-lease.mjs'\n      - 'lib/agent-consumption-input.mjs'\n      - 'db/preparation-client-bootstrap.sql'\n      - 'scripts/build-preparation-maintenance-caller.mjs'\n      - 'scripts/mcp-release-source.mjs'\n      - 'test/preparation-maintenance-caller-native.test.mjs'\n      - 'test/preparation-maintenance-caller.test.mjs'\n      - '.github/workflows/afw-preparation-maintenance-caller.yml'\n      - 'package*.json'\n  push:\n    branches: [main]\n    paths:\n      - 'worker/preparation-maintenance-caller/**'\n      - 'lib/preparation-client-maintenance.mjs'\n      - 'lib/preparation-maintenance-caller.mjs'\n      - 'lib/capsule-preparation-request-lease.mjs'\n      - 'lib/agent-consumption-input.mjs'\n      - 'db/preparation-client-bootstrap.sql'\n      - 'scripts/build-preparation-maintenance-caller.mjs'\n      - 'scripts/mcp-release-source.mjs'\n      - 'test/preparation-maintenance-caller-native.test.mjs'\n      - 'test/preparation-maintenance-caller.test.mjs'\n      - '.github/workflows/afw-preparation-maintenance-caller.yml'\n      - 'package*.json'"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-maintenance-worker.yml",
+    "blob": "ad8cd6765fa0b2202d8a711c99a57977f7b61365",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'worker/preparation-maintenance/**'\n      - 'lib/preparation-client-maintenance.mjs'\n      - 'lib/capsule-preparation-request-lease.mjs'\n      - 'lib/agent-consumption-input.mjs'\n      - 'db/preparation-client-bootstrap.sql'\n      - 'scripts/build-preparation-maintenance-worker.mjs'\n      - 'scripts/mcp-release-source.mjs'\n      - 'test/preparation-maintenance-worker-native.test.mjs'\n      - '.github/workflows/afw-preparation-maintenance-worker.yml'\n      - 'package*.json'\n  push:\n    branches: [main]\n    paths:\n      - 'worker/preparation-maintenance/**'\n      - 'lib/preparation-client-maintenance.mjs'\n      - 'lib/capsule-preparation-request-lease.mjs'\n      - 'lib/agent-consumption-input.mjs'\n      - 'db/preparation-client-bootstrap.sql'\n      - 'scripts/build-preparation-maintenance-worker.mjs'\n      - 'scripts/mcp-release-source.mjs'\n      - 'test/preparation-maintenance-worker-native.test.mjs'\n      - '.github/workflows/afw-preparation-maintenance-worker.yml'\n      - 'package*.json'"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-record-owner.yml",
+    "blob": "e1ba948e59070c3c2998a881b81fa10f5921adb3",
+    "events": "on:\n  pull_request:\n    paths: ['lib/delegated-preparation-consent-store.mjs', 'test/preparation-record-owner.test.mjs', 'test/fixtures/preparation-consent-store.mjs', '.github/workflows/afw-preparation-record-owner.yml']\n  push:\n    branches: [main]\n    paths: ['lib/delegated-preparation-consent-store.mjs', 'test/preparation-record-owner.test.mjs', 'test/fixtures/preparation-consent-store.mjs', '.github/workflows/afw-preparation-record-owner.yml']"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-release-preflight.yml",
+    "blob": "b5fbd64d0db4f31249a2e6916a9053023fc7a019",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/prepare-preparation-canary-release.py'\n      - 'scripts/check-preparation-closed-package.mjs'\n      - 'scripts/prepare-public-cloud-delivery.py'\n      - 'test/preparation_release_test.py'\n      - 'test/preparation-closed-package-native.test.mjs'\n      - 'config/preparation-canary-release.v1.json'\n      - 'config/preparation-canary-release.v2.json'\n      - '.github/workflows/afw-preparation-release-preflight.yml'\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-schema.yml",
+    "blob": "caa208e912b8f715115780d94845bdb7e2628384",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/preparation-schema-package.mjs'\n      - 'test/preparation-schema-package*.test.mjs'\n      - 'test/preparation-worker-native.test.mjs'\n      - 'drizzle/**'\n      - 'db/agent-capsule-preparations.sql'\n      - 'db/delegated-preparation-consents.sql'\n      - '.github/workflows/afw-preparation-schema.yml'\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-create-worker.yml",
+    "blob": "740e48ccd1015b8ad5f3f389ef026020f8c01812",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'worker/mcp-preparation/**'\n      - 'lib/preparation-source-intake-*.mjs'\n      - 'lib/cloudflare-access-identity.mjs'\n      - 'lib/capsule-preparation-request-lease.mjs'\n      - 'test/preparation-source-create-worker-native.test.mjs'\n      - 'test/fixtures/preparation-source-create-worker-native.mjs'\n      - '.github/workflows/afw-preparation-source-create-worker.yml'\n  push:\n    branches: [main]\n    paths:\n      - 'worker/mcp-preparation/**'\n      - 'lib/preparation-source-intake-*.mjs'\n      - 'test/preparation-source-create-worker-native.test.mjs'\n      - 'test/fixtures/preparation-source-create-worker-native.mjs'\n      - '.github/workflows/afw-preparation-source-create-worker.yml'"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-inspect.yml",
+    "blob": "4da051fa70890542a0cf1da46ceabf8a00717a98",
+    "events": "on:\n  pull_request:\n    paths: ['lib/preparation-source-intake-store.mjs', 'test/preparation-source-inspect.test.mjs', '.github/workflows/afw-preparation-source-inspect.yml']\n  push:\n    branches: [main]\n    paths: ['lib/preparation-source-intake-store.mjs', 'test/preparation-source-inspect.test.mjs', '.github/workflows/afw-preparation-source-inspect.yml']"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-intake-http.yml",
+    "blob": "f59ee72086960474591bdedc9610bae2ede1bcd3",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'lib/preparation-source-intake-*.mjs'\n      - 'lib/cloudflare-access-identity.mjs'\n      - 'lib/capsule-preparation-request-lease.mjs'\n      - 'test/preparation-source-intake-http-native.test.mjs'\n      - 'test/fixtures/preparation-source-intake-http-native.mjs'\n      - '.github/workflows/afw-preparation-source-intake-http.yml'\n  push:\n    branches: [main]\n    paths:\n      - 'lib/preparation-source-intake-*.mjs'\n      - 'test/preparation-source-intake-http-native.test.mjs'\n      - 'test/fixtures/preparation-source-intake-http-native.mjs'\n      - '.github/workflows/afw-preparation-source-intake-http.yml'"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-intake.yml",
+    "blob": "3e46ef491ae0977f3911a02b77eefe5ec1cf6eb9",
+    "events": "on:\n  pull_request:\n    paths: ['lib/preparation-source-intake-store.mjs', 'test/preparation-source-intake-store.test.mjs', '.github/workflows/afw-preparation-source-intake.yml']\n  push:\n    branches: [main]\n    paths: ['lib/preparation-source-intake-store.mjs', 'test/preparation-source-intake-store.test.mjs', '.github/workflows/afw-preparation-source-intake.yml']"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-session.yml",
+    "blob": "ae487e0117dde6cda36dfa9fd16663a1bf7d9aaa",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'lib/preparation-source-session-*.mjs'\n      - 'lib/cloudflare-access-identity.mjs'\n      - 'lib/capsule-preparation-request-lease.mjs'\n      - 'test/preparation-source-session-native.test.mjs'\n      - 'test/fixtures/preparation-source-session-native.mjs'\n      - '.github/workflows/afw-preparation-source-session.yml'\n  push:\n    branches: [main]\n    paths:\n      - 'lib/preparation-source-session-*.mjs'\n      - 'test/preparation-source-session-native.test.mjs'\n      - 'test/fixtures/preparation-source-session-native.mjs'\n      - '.github/workflows/afw-preparation-source-session.yml'"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-source-worker.yml",
+    "blob": "4f0e8238333f6e4f0bf580396895f241b1ff3f70",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'worker/mcp-preparation/**'\n      - 'lib/preparation-source-session-*.mjs'\n      - 'lib/cloudflare-access-identity.mjs'\n      - 'lib/capsule-preparation-request-lease.mjs'\n      - 'test/preparation-source-worker-native.test.mjs'\n      - 'test/fixtures/preparation-source-worker-native.mjs'\n      - '.github/workflows/afw-preparation-source-worker.yml'\n  push:\n    branches: [main]\n    paths:\n      - 'worker/mcp-preparation/**'\n      - 'lib/preparation-source-session-*.mjs'\n      - 'test/preparation-source-worker-native.test.mjs'\n      - 'test/fixtures/preparation-source-worker-native.mjs'\n      - '.github/workflows/afw-preparation-source-worker.yml'"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-view-qa.yml",
+    "blob": "cc686287e4561f70c4e0847cca7479acbd9748de",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'lib/delegated-preparation-consent-view.mjs'\n      - 'lib/delegated-preparation-consent-policy.mjs'\n      - 'lib/agent-consumption-input.mjs'\n      - 'test/delegated-preparation-consent-view.test.mjs'\n      - 'scripts/check-preparation-consent-view-browser.mjs'\n      - 'lib/preparation-source-session-view.mjs'\n      - 'scripts/check-preparation-source-session-browser.mjs'\n      - 'lib/preparation-source-intake-view.mjs'\n      - 'scripts/check-preparation-source-intake-browser.mjs'\n      - '.github/workflows/afw-preparation-view-qa.yml'\n  push:\n    branches: [main]\n    paths:\n      - 'lib/delegated-preparation-consent-view.mjs'\n      - 'lib/delegated-preparation-consent-policy.mjs'\n      - 'lib/agent-consumption-input.mjs'\n      - 'test/delegated-preparation-consent-view.test.mjs'\n      - 'scripts/check-preparation-consent-view-browser.mjs'\n      - 'lib/preparation-source-session-view.mjs'\n      - 'scripts/check-preparation-source-session-browser.mjs'\n      - 'lib/preparation-source-intake-view.mjs'\n      - 'scripts/check-preparation-source-intake-browser.mjs'\n      - '.github/workflows/afw-preparation-view-qa.yml'\n"
+  },
+  {
+    "path": ".github/workflows/afw-preparation-worker-build.yml",
+    "blob": "26505421f62bb9587f08d5f354748ccf6956d9ff",
+    "events": "on:\n  workflow_dispatch:\n  pull_request:\n    paths:\n      - '.github/workflows/afw-preparation-worker-build.yml'\n      - 'worker/mcp-preparation/**'\n      - 'lib/**'\n      - 'scripts/build-preparation-worker.mjs'\n      - 'scripts/mcp-release-source.mjs'\n      - 'test/preparation-worker*'\n      - 'test/fixtures/preparation-worker*'\n      - 'package.json'\n      - 'package-lock.json'\n      - 'tsconfig.json'\n      - '.npmrc'\n  push:\n    branches: [main]\n    paths:\n      - '.github/workflows/afw-preparation-worker-build.yml'\n      - 'worker/mcp-preparation/**'\n      - 'lib/**'\n      - 'scripts/build-preparation-worker.mjs'\n      - 'scripts/mcp-release-source.mjs'\n      - 'package.json'\n      - 'package-lock.json'\n      - 'tsconfig.json'\n      - '.npmrc'\n"
+  },
+  {
+    "path": ".github/workflows/afw-provider-preflight.yml",
+    "blob": "5ac2de34874c3f055d66ae45c9c97c14a6c76199",
+    "events": "on:\n  workflow_dispatch:\n"
+  },
+  {
+    "path": ".github/workflows/afw-provider-readonly-check.yml",
+    "blob": "36faefbe250ba57d936a182b5cf07f80c20b9d14",
+    "events": "on:\n  workflow_dispatch:\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-delivery-qualification.yml",
+    "blob": "afa732a0e31dd0fd7a0a5e78dc4b2c12b90f5129",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/prepare-public-cloud-delivery.py'\n      - 'test/public_cloud_delivery_test.py'\n      - 'config/public-cloud-delivery.v1.json'\n      - 'docs/evidence/2026-10-20-guide-delivery/**'\n      - 'docs/evidence/2026-10-21-a2a-delivery/**'\n      - 'docs/evidence/2026-10-23-public-mail-a2a/**'\n      - '.github/workflows/afw-public-delivery-qualification.yml'\n  workflow_dispatch:\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-edge-check.yml",
+    "blob": "296286892c515d3d2c2bef5e0099e5601a180a93",
+    "events": "on:\n  pull_request:\n    paths:\n      - '.github/workflows/afw-public-edge-check.yml'\n      - 'scripts/smoke-cloudflare-native-local.mjs'\n      - 'test/cloudflare-native-parity.test.mjs'\n      - 'scripts/check-public-reading-contracts.mjs'\n      - 'test/public-reading-contracts.test.mjs'\n      - 'scripts/check-public-waf-probe.mjs'\n      - 'test/public-waf-probe.test.mjs'\n      - 'lib/public-waf-snapshot.mjs'\n      - 'test/public-waf-snapshot.test.mjs'\n  workflow_dispatch:\n    inputs:\n      waf_probe:\n        description: 'One synthetic WAF observation within an already prepared original window'\n        type: boolean\n        default: false\n      probe_start:\n        description: 'Original UTC start, Unix seconds; never renew an expired trial'\n        type: string\n        default: '0'\n      probe_end:\n        description: 'Original UTC end, Unix seconds; maximum900s after start'\n        type: string\n        default: '1'\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-guide-start-qa.yml",
+    "blob": "0a263ab85999aebd0c8e048402cd4fa8c0badb9e",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'app/components/site-header.tsx'\n      - 'app/components/site-footer.tsx'\n      - 'app/components/readiness-comparison.tsx'\n      - 'app/components/intake-assistant-prototype.tsx'\n      - 'lib/public-capability-copy.mjs'\n      - 'lib/public-faq.mjs'\n      - 'lib/site-copy.mjs'\n      - 'lib/maturity-copy.mjs'\n      - 'lib/intake-assistant.mjs'\n      - 'app/page.tsx'\n      - 'app/components/comic-home-intro.tsx'\n      - 'app/components/maturity-map.tsx'\n      - 'lib/home-copy.mjs'\n      - 'lib/home-markdown.mjs'\n      - 'public/images/agent-friendly-call-robots-screen.webp'\n      - 'scripts/check-home-opening-browser.mjs'\n      - 'lib/public-mcp-http.mjs'\n      - 'test/public-mcp-http.test.mjs'\n      - 'public/.well-known/agent-readiness.json'\n      - 'public/.well-known/email-operations-contract.json'\n      - 'app/mapa-del-sitio/page.tsx'\n      - 'package.json'\n      - 'package-lock.json'\n      - 'app/api-catalog/route.ts'\n      - 'test/agent-discovery.test.mjs'\n      - 'test/public-a2a-discovery.test.mjs'\n      - 'test/public-guide-discovery.test.mjs'\n      - 'test/publication-capsule-discovery.test.mjs'\n      - 'lib/public-guide.mjs'\n      - 'lib/public-tools-copy.mjs'\n      - 'app/guia/page.tsx'\n      - 'app/components/public-guide-chat.tsx'\n      - 'app/globals.css'\n      - 'scripts/check-public-guide-start-browser.mjs'\n      - '.github/workflows/afw-public-guide-start-qa.yml'\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-home-activation.yml",
+    "blob": "d11540abb72143e1cee973e5abdcd5217a810e98",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/public-home-activate.py'\n      - 'scripts/public-home-acceptance.mjs'\n      - 'scripts/public-inactive-upload.py'\n      - 'scripts/smoke-cloudflare-native-local.mjs'\n      - 'config/public-home-entry-delivery.v1.json'\n      - 'docs/evidence/2026-10-27-public-home-entry/**'\n      - 'test/public_home_activation_test.py'\n      - 'test/public-home-acceptance.test.mjs'\n      - '.github/workflows/afw-public-home-activation.yml'\n  workflow_dispatch:\n    inputs:\n      operation:\n        type: choice\n        description: Verify source only, or activate the one fixed already-uploaded public candidate\n        default: verify_only\n        options:\n          - verify_only\n          - activate"
+  },
+  {
+    "path": ".github/workflows/afw-public-home-inactive-upload.yml",
+    "blob": "617935510b1ed42ef3ac9af0d269c18e06e3c53f",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/public-inactive-upload.py'\n      - 'scripts/public-home-inactive-upload.py'\n      - 'scripts/prepare-public-cloud-delivery.py'\n      - 'scripts/prepare-public-home-delivery.py'\n      - 'test/public_inactive_upload_test.py'\n      - 'test/public_home_upload_test.py'\n      - 'test/public_cloud_delivery_test.py'\n      - 'config/public-home-entry-delivery.v1.json'\n      - 'docs/evidence/2026-10-27-public-home-entry/**'\n      - '.github/workflows/afw-public-home-inactive-upload.yml'\n  workflow_dispatch:\n    inputs:\n      operation:\n        type: choice\n        description: Verify only, or explicitly upload one inactive public version\n        default: verify_only\n        options:\n          - verify_only\n          - upload_inactive\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-inactive-upload.yml",
+    "blob": "a1e0ac904fa31501e26186dc0f318473a50f7664",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/public-inactive-upload.py'\n      - 'test/public_inactive_upload_test.py'\n      - 'config/public-cloud-delivery.v1.json'\n      - 'docs/evidence/2026-10-21-a2a-delivery/**'\n      - 'docs/evidence/2026-10-23-public-mail-a2a/**'\n      - '.github/workflows/afw-public-inactive-upload.yml'\n  workflow_dispatch:\n    inputs:\n      operation:\n        type: choice\n        description: Verify only, or explicitly upload one inactive public version\n        default: verify_only\n        options:\n          - verify_only\n          - upload_inactive\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-journey-activation.yml",
+    "blob": "05cab1e3cb661336c68c29ef77d8030f46c686d5",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/public-journey-activate.py'\n      - 'scripts/public-journey-acceptance.mjs'\n      - 'scripts/public-inactive-upload.py'\n      - 'scripts/smoke-cloudflare-native-local.mjs'\n      - 'config/public-journey-delivery.v1.json'\n      - 'docs/evidence/2026-10-29-public-journey/**'\n      - 'test/public_journey_activation_test.py'\n      - 'test/public-journey-acceptance.test.mjs'\n      - '.github/workflows/afw-public-journey-activation.yml'\n  workflow_dispatch:\n    inputs:\n      operation:\n        type: choice\n        description: Verify source only, or activate the one fixed already-uploaded public candidate\n        default: verify_only\n        options:\n          - verify_only\n          - activate"
+  },
+  {
+    "path": ".github/workflows/afw-public-journey-inactive-upload.yml",
+    "blob": "25063993ada3c4d2c08079fdf3f8fde69e95ffe2",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/public-inactive-upload.py'\n      - 'scripts/public-journey-inactive-upload.py'\n      - 'scripts/prepare-public-cloud-delivery.py'\n      - 'scripts/prepare-public-journey-delivery.py'\n      - 'test/public_inactive_upload_test.py'\n      - 'test/public_journey_upload_test.py'\n      - 'test/public_cloud_delivery_test.py'\n      - 'config/public-journey-delivery.v1.json'\n      - 'docs/evidence/2026-10-29-public-journey/**'\n      - '.github/workflows/afw-public-journey-inactive-upload.yml'\n  workflow_dispatch:\n    inputs:\n      operation:\n        type: choice\n        description: Verify only, or explicitly upload one inactive public version\n        default: verify_only\n        options:\n          - verify_only\n          - upload_inactive\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-json-activation.yml",
+    "blob": "7fdffb9c516d6b91eb937fe53c49c2cb45f7ff68",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/public-json-activate.py'\n      - 'scripts/public-json-acceptance.mjs'\n      - 'scripts/public-inactive-upload.py'\n      - 'scripts/smoke-cloudflare-native-local.mjs'\n      - 'config/public-json-budget-delivery.v1.json'\n      - 'docs/evidence/2026-10-24-public-json-budget/**'\n      - 'test/public_json_activation_test.py'\n      - 'test/public-json-acceptance.test.mjs'\n      - '.github/workflows/afw-public-json-activation.yml'\n  workflow_dispatch:\n    inputs:\n      operation:\n        type: choice\n        description: Verify source only, or activate the one fixed already-uploaded public candidate\n        default: verify_only\n        options:\n          - verify_only\n          - continue_staged"
+  },
+  {
+    "path": ".github/workflows/afw-public-json-inactive-upload.yml",
+    "blob": "61390672bffc33996e445f263c8b0faf8d27308c",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/public-inactive-upload.py'\n      - 'scripts/public-json-inactive-upload.py'\n      - 'scripts/prepare-public-cloud-delivery.py'\n      - 'scripts/prepare-public-json-delivery.py'\n      - 'test/public_inactive_upload_test.py'\n      - 'test/public_json_upload_test.py'\n      - 'test/public_cloud_delivery_test.py'\n      - 'config/public-json-budget-delivery.v1.json'\n      - 'docs/evidence/2026-10-24-public-json-budget/**'\n      - '.github/workflows/afw-public-json-inactive-upload.yml'\n  workflow_dispatch:\n    inputs:\n      operation:\n        type: choice\n        description: Verify only, or explicitly upload one inactive public version\n        default: verify_only\n        options:\n          - verify_only\n          - upload_inactive\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-json-qualification.yml",
+    "blob": "b8611390a25da9802bf79402c56e1e531508acfb",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/prepare-public-cloud-delivery.py'\n      - 'scripts/prepare-public-json-delivery.py'\n      - 'test/public_cloud_delivery_test.py'\n      - 'config/public-json-budget-delivery.v1.json'\n      - 'docs/evidence/2026-10-24-public-json-budget/**'\n      - '.github/workflows/afw-public-json-qualification.yml'\n  workflow_dispatch:\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-methodology-once.yml",
+    "blob": "ad94df4b4c174c72f62f27dd14646244947c60e9",
+    "events": "on:\n  pull_request:\n    paths:\n      - '.github/workflows/afw-public-methodology-once.yml'\n      - 'scripts/check-public-methodology-once.mjs'\n      - 'test/public-methodology-once.test.mjs'\n  workflow_dispatch:\n    inputs:\n      not_before_ms:\n        description: 'Original UTC start in integer Unix milliseconds; default closed'\n        type: string\n        default: '0'\n      not_after_ms:\n        description: 'Original UTC expiry, max600000ms after start; never renew'\n        type: string\n        default: '1'\n"
+  },
+  {
+    "path": ".github/workflows/afw-public-upload-read-probe.yml",
+    "blob": "51af06841e144ed44ce9cf9b34e94117744d545d",
+    "events": "on:\n  pull_request:\n    paths:\n      - 'scripts/public-upload-read-probe.py'\n      - 'test/public_read_probe_test.py'\n      - '.github/workflows/afw-public-upload-read-probe.yml'\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-publication-template-build.yml",
+    "blob": "f72adaa9221157b68be2b2075dbbfd8dff2615a2",
+    "events": "on:\n  workflow_dispatch:\n  pull_request:\n    paths:\n      - '.github/workflows/afw-publication-template-build.yml'\n      - 'scripts/**'\n      - 'lib/**'\n      - 'worker/**'\n      - 'test/mcp-private-publication-template.test.mjs'\n      - 'test/mcp-publication-snapshot.test.mjs'\n      - 'package.json'\n      - 'package-lock.json'\n"
+  },
+  {
+    "path": ".github/workflows/afw-qa-arm-observation-qualification.yml",
+    "blob": "07e25529a0dc5c73a5d9efe8d3dfa7e8665b38aa",
+    "events": "on:\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-qa-bootstrap-custody-inspection.yml",
+    "blob": "b8e7ecf0f90b8ef24bdbe06a93ef3eef646ade0e",
+    "events": "on:\n  issue_comment:\n    types: [created]"
+  },
+  {
+    "path": ".github/workflows/afw-qa-closed-observation-v2-qualification.yml",
+    "blob": "583a94180db9d79613846c8ad93d4e2e69bb6e1d",
+    "events": "on:\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-qa-cloud-clone-source-qualification.yml",
+    "blob": "ff342ecb37e5f31711f07915233cff6e2df10933",
+    "events": "on:\n  pull_request:"
+  },
+  {
+    "path": ".github/workflows/afw-qa-cloud-clone.yml",
+    "blob": "713f0b83130e57af3263c591638f1fd9ea95c326",
+    "events": "on:\n  issue_comment:\n    types: [created]"
+  },
+  {
+    "path": ".github/workflows/afw-qa-cloud-closed-rollback.yml",
+    "blob": "74493a4b0702498b71cefd2761e443e87db1b145",
+    "events": "on:\n  workflow_dispatch:\n    inputs:\n      operation:\n        description: Inspect, or restore only the fixed already-qualified CLOSED QA candidate\n        required: true\n        type: choice\n        default: inspect\n        options: [inspect, restore_known_closed_candidate]\n      session_id:\n        description: Opaque 64-character lowercase hex diagnostic session\n        required: true\n        type: string\n      start_ms:\n        description: Original UTC epoch milliseconds; queued time consumes this window\n        required: true\n        type: string\n      expires_ms:\n        description: Original expiry epoch milliseconds, at most 10 minutes after start\n        required: true\n        type: string\n"
+  },
+  {
+    "path": ".github/workflows/afw-qa-cloud-native-observation.yml",
+    "blob": "c2f7d3f883db369b20fab294759dece9ab4d393e",
+    "events": "on:\n  issue_comment:\n    types: [created]"
+  },
+  {
+    "path": ".github/workflows/afw-qa-legacy-baseline-qualification.yml",
+    "blob": "0e63bc9cb094474a11ff92733d4fedaa65ee3a7a",
+    "events": "on:\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-qa-native-observation-source-qualification.yml",
+    "blob": "36c3af76fa962fc1a435a31e7de3e9dc9023627e",
+    "events": "on:\n  pull_request:"
+  },
+  {
+    "path": ".github/workflows/afw-qa-writer-queue-qualification.yml",
+    "blob": "24974c071363fc5a9e96fae2c5ef9e8b93917d09",
+    "events": "on:\n  pull_request:"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+    "blob": "2006beb4d081ef127d1192fd99967f5f76eeb7db",
+    "events": "on:\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+    "blob": "baa8442094731bea1413d2cc03028ab8682b300b",
+    "events": "on:\n  workflow_dispatch:"
+  },
+  {
+    "path": ".github/workflows/afw-release-operator-build.yml",
+    "blob": "c95329e11064417f227e41431efc939bd1411cff",
+    "events": "on:\n  workflow_dispatch:\n    inputs:\n      base_version_id:\n        description: 'Exact closed canary version to inherit; never latest'\n        required: true\n        default: 'f8feb421-4ef7-4051-a508-1ee490737a7d'\n        type: string\n      start_at_ms:\n        description: 'Plan start in epoch milliseconds; 0 produces inert preparation'\n        required: true\n        default: '0'\n        type: string\n      expires_at_ms:\n        description: 'Original deadline, at most 10 minutes after start; 1 is inert'\n        required: true\n        default: '1'\n        type: string\n  pull_request:\n    paths:\n      - '.github/workflows/afw-release-operator-build.yml'\n      - 'scripts/build-mcp-release-operator.mjs'\n      - 'scripts/build-mcp-own-worker.mjs'\n      - 'scripts/build-mcp-node-program.mjs'\n      - 'scripts/mcp-release-source.mjs'\n      - 'scripts/check-own-cron-provider.mjs'\n      - 'worker/**'\n      - 'lib/**'\n      - 'package.json'\n      - 'package-lock.json'\n"
+  },
+  {
+    "path": ".github/workflows/afw-verified-access-expiry.yml",
+    "blob": "0ea41f39ef6d11dc3c620ecf3026e61a603a3059",
+    "events": "on:\n  pull_request:\n    paths: ['lib/cloudflare-access-identity.mjs', 'test/cloudflare-access-identity-expiry.test.mjs', 'test/cloudflare-access-identity.test.mjs', '.github/workflows/afw-verified-access-expiry.yml']\n  push:\n    branches: [main]\n    paths: ['lib/cloudflare-access-identity.mjs', 'test/cloudflare-access-identity-expiry.test.mjs', 'test/cloudflare-access-identity.test.mjs', '.github/workflows/afw-verified-access-expiry.yml']"
+  },
+  {
+    "path": ".github/workflows/ci.yml",
+    "blob": "496e4327b3b1bfb9e05d2c02ae33f7810a3a0d04",
+    "events": "on:\n  pull_request:\n  push:\n    branches: [main]\n"
+  }
+]
+```
+
+### Root bounded ruling after executor STOP
+
+Root reported its separate bounded ruling24f3edaa permitting ONE dedicated metadata-only read. Root performed mcp__codex_apps__github_fetch_workflow_run_artifacts for Originalrun43229236340 (executor did not repeat it), listed6artifacts and matched exactOriginal13949168304/13680188bytes/SHA2568a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5/expiredfalse/expires2026-11-19T13:45:23Z/contextOriginalsource19789b5f31935e0b5be00cbb24c5f45de2a0100a/repository1347578006. This is explicitly Root-provided primary-metadata evidence, not an independent executor request or a diagnosis of the generic route error. No binary/log/key read was reported. Root required this executor to finish CLOSED/no-activation and return; Root will publish an amended separate preflight release before any resumed activation. No such activation is inferred here.
+
+Closure protocol: keep exact F7 already live, append preserving ENTIRE797305-character report prefix, then independently read full final ref/commit/nontruncated tree/F7/report/main/held workflow events/fiveactive0 and STOP. Net final change report-only; all3192protected leaves/modes and all3193non-report leaves must remain exact. This receipt commit cannot self-record its eventual SHA. No operationalReadiness/completePackage/PCoff/globalNativeDrainVerified/sdkNamespaceEmptyVerified promotion; all five remainfalse. Task2 actual projection remains NOT EXECUTED pending Root's amended separate preflight release, with the generic tool's exact failure category unresolved. Source writer STOP after closed readback.
