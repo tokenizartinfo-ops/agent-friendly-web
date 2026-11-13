@@ -1,6 +1,9 @@
 name: AFW R2 post-ACK diagnostic
-run-name: AFW R2 post-ACK Native FIX1 HELD ${{ github.sha }}
+run-name: AFW R2 post-ACK R2 single authorized Native Task2 ${{ github.sha }}
 on:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-r2-post-ack-diagnostic.yml]
   workflow_dispatch:
 permissions:
   contents: read
@@ -12,7 +15,7 @@ concurrency:
 # The three key-bound steps trust this reviewed runner; no independent same-runner isolation claim.
 jobs:
   native:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     environment: afw-finite-syn-checkpoint
@@ -295,7 +298,7 @@ jobs:
         if: always()
         run: rm -f -- test/fixtures/.finite-post-ack-original.mjs
   verify:
-    if: ${{ false && always() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ always() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     needs: native
     runs-on: ubuntu-24.04
     timeout-minutes: 2
