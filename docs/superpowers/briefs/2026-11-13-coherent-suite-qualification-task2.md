@@ -1,12 +1,12 @@
 # Task2 — ONE actual original coherent suite and exact closure
 
-STATUS HELD. This brief is preparation only. No Source writes, activation or actual run until a separate Root release after Task1 independent scoped SPEC/QUALITY CLEAN. Fresh sole executor required; not the Task1 implementer or reviewer. Read binding SPEC and this brief; technical questions to Root, no owner questions before08AR.
+STATUS RELEASED: Root authorizes exactly ONE actual eight-job coherent SYN suite after owner resumed on13Nov after08AR. Task1 is independently COMPLETE/CLEAN at Rootdocse729f43c. No implementation changes; all preservation/STOP limits below remain binding. Fresh sole executor required; not the Task1 implementer or reviewer. Read binding SPEC and this brief; technical questions to Root, no owner questions before08AR.
 
 ## Exact resource / closed checkpoint
 
 PROJECT AFW; repository tokenizartinfo-ops/agent-friendly-web ID1347578006; Sourcefeat/finite-native-cleanup-20261101; GitHub API origin. Current CLOSED715ac94e20126dc43846e3e77ac2045c68a9dd1a/treec66911bd0bc2b229852b024dcb46cd28d6136b01/3196leaves. SAME report docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md blob6e1122942dcf1ee4c7b56f9bbe476fe7c7b960a1/100977chars exact prefix. Initial3195unitBASEleaves0479/tree8942513f protected, including R1reportf7aa. Only temporaryF7 activation/restoration +appendSAMEreport; final3196, allinitial3195type/mode/blob exact,62WF/main0c9/fiveactive0. Root owns separateRootdocs, no Source implementation.
 
-Candidate intended for review (NOT approval by this brief): inactive23bda9c98ebb9faa636c59d46b20ab40c50e38a9/tree29b02bf9cae918817234c19d176bc28c9032366e/F767c3a7db105b4276a870ecebbdc71ba0e57a248d,304165B/SHA256cb5456433686e31bbfead88e7bd6d2dfc6ac554fed1d74e61c5818a959a53145.
+Approved candidate after independent Task1 CLEAN: inactive23bda9c98ebb9faa636c59d46b20ab40c50e38a9/tree29b02bf9cae918817234c19d176bc28c9032366e/F767c3a7db105b4276a870ecebbdc71ba0e57a248d,304165B/SHA256cb5456433686e31bbfead88e7bd6d2dfc6ac554fed1d74e61c5818a959a53145.
 FourbodySHA256: adaptera1e7a28f356cafde6e9486a9bcdb69aaa3fc98e00b928df11f36052bb915d9f3; controlsafe050bdb5a35a0c727a2b949fba4a58a7e222f4ef12c8e86756d0e24f21d6b0; verifierc6fac92623809ee41b69ee77260b32d50c1149ba5716ca0a39b8b024d7dfb849; SAFEZIPb36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d. QualifiedZIP33380/4ff44 exact. Same bodies in the intended original fix2 KEYLESS43404200555/1. No earlier candidate is substituted.
 
 Rollback exact originalF7 blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual-noinputs-nopush/sevenfalse&& guards. Preserve closed tree/report/rollback before activation, CAS expectedtip/no force/unknown mutation reconciliation before retry.
