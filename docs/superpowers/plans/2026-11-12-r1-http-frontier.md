@@ -42,7 +42,7 @@
 **Consumes:** Task1CLEAN/newwrapper/verifier/programset; exactOriginalartifact/AAD+existingOPENstepkey.
 **Produces:** actualSMALLSAFE2JSON/httpFrontierenum+preservedoldfacts, authenticatedcurrentreceipt, closedSource.
 - [ ] Freshsoleexecutorcurrentbase/immutablebodies/0activechecks; ONEfixedSourcebranchselfpathpush/runlabel/twofalseprefixactivation. FreezeSourceuntilBOTHterminal. No codes/newkeys.
-- [ ] Existingrunner-onlydownload/authenticate128files/298888337B; reuseexacttwoRawreads+Corepaths; outputnewwrapperonly/signedcurrentidentity. Node7daySAFE/privateactualproducerlogsnotreadtoMCP.
+- [ ] Existingrunner-onlydownload/authenticate128files/298888337B; reuseexacttwoRawreads+Corepaths; outputnewwrapperonly/currentidentityboundbywholemanifest/SHA256/authenticatedGitHubmetadata(noindependentinspectorsignature). Node7daySAFE/privateactualproducerlogsnotreadtoMCP.
 - [ ] Observejob/step/artifactmetadata andboundedclosedkeylessverifierONLY; waitBOTHterminalANYoutcome; exactF7restore+APPENDreport/fullreadbacksSTOP.
 - [ ] RootONLYSMALLSAFEauditnewenum/actualerrorguardsemantics/fullmanifest/currentSource/Originalcontext/old2rows+wholeR2certdeepidenticalbaseline43313662894; no nativecauseclaimfromHTTPenumalone.
 - [ ] Mostcapableindependentwholeplanreview; causalRootrulingnext, noautomaticcapincrease/Native16/PCoff.
