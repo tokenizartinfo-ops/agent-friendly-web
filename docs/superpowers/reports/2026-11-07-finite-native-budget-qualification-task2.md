@@ -9984,3 +9984,35 @@ Closed stdout established the original40record PASS, followed by HTTP_FRONTIER_F
 Static causal concern for Root, not a runtime assertion diagnosis: read_policy's sparse oversize subcase calls readActualReferences and then expects a returned oversize row; the unchanged validateActualReferenceRows deliberately rejects any oversize row. Historical file_bound_links correctly checks oversize through readReference, and verifies global rejection through the coordinator. This appears to be a new control expectation error. No automatic correction/requalification is authorized by this failed attempt; the candidate remains unqualified and needs Root's causal ruling plus a separate concrete release if work continues.
 
 ANY-terminal rollback contract now restores exactF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual/noinputs/nopush/sevenfalse, plus this append preserving the entire historical718543-character prefix and preparation appendix. Contracts2006beb4/Nativebaa84420 and all other3192leaves/modes remain unchanged. Actual5+2 candidate retained ONLY INACTIVE at0daca/f1c25f21; Task2 actual projection remains HELD. originalArtifactAccessed=false, custodyOpened=false, SDKImported=false, I0Created=false; all five readinessflags=false. No current predicate of actual historical Raw was observed. Final full ref/commit/tree3194/protected3192/F7/report/main/five-state0 readbacks follow closure; Source executor then STOPPED.
+
+
+### R1 HTTP frontier closure readback receipt
+
+After BOTH terminal, expected-head closure CASbd9c731c -> fd6da8c0f17bfc5d150f6c2eb1cfd9ba4957e6bc/tree6a3968823f218c131b600b10a4d72ecdbd11fef1 succeeded. Independent full ref/commit/recursive-tree/workflow/report/main/five-state reads verified all below. Only the report differs from the original19c9 full3194-leaf tree; all3192 excluded-path protected leaves/modes AND restored F7 are exact. Original718543-character history and the entire728489-character preparation report remain exact prefixes; full closure report read back as 9ca9c52aac60034f6cdf4bf5d31f74e54da576b4/736226chars. Current candidate remains recoverable at0daca3c0; no further implementation or run performed.
+```json
+{
+  "closedSource": "fd6da8c0f17bfc5d150f6c2eb1cfd9ba4957e6bc",
+  "tree": "6a3968823f218c131b600b10a4d72ecdbd11fef1",
+  "workflowBlob": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+  "reportBlob": "9ca9c52aac60034f6cdf4bf5d31f74e54da576b4",
+  "reportChars": 736226,
+  "originalPrefixChars": 718543,
+  "preparationPrefixChars": 728489,
+  "prefixExact": true,
+  "leaves": 3194,
+  "protectedExact": 3192,
+  "F7Exact": true,
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "fiveActiveStates": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "taskStatus": "BLOCKED",
+  "permitConsumed": true
+}
+```
+
+Minimal static frozen candidate anchors (at0daca3c0/.github/workflows/afw-finite-budget-qualification.yml): new read_policy oversize assertion line1104; unchanged validateActualReferenceRows oversize rejection line749; actual readActualReferences global validation line750; private witness issuer line932; closed proof validator line792. This report-only receipt commit is followed by final full readback before returning to Root; it cannot self-record its own Git SHA. Status BLOCKED: sole qualification consumed/failure; no current18/fullproof/SAFE qualification. ActualTask2 HELD. Root independently reviews causal concern/candidate; Source executor STOPPED after final readback.
