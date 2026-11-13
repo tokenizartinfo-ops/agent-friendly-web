@@ -1,0 +1,5 @@
+# Task1 fix2 scoped review — I1 code addressed, qualification incomplete
+
+Reviewer /root/native_postack_task1_review (Astra/xhigh), read-only/noexecution/mutation.
+I1 ADDRESSED in frozen026d8f2aa67a3efa79f922d098ffce2d517fee69. Adapterawaitsentirelegacyhelper includingrequiredcleanup BEFORE21predicates. Helperrejectionbypassesoracle/preservesexactError. Requiredcleanupfailureineligibleevenownershipcomplete:true orsharedsameErrorasbusinessprimary. Laterdiagnosticwritefailurepreservesknownoriginaloutcome. No newCritical/Important in2changedcodefiles. AnchorsWorld2002/2082; actualhandoffassertions2057.
+AlloriginalC1,C2,I1–I5+M1nowCODEaddressed underN1–N8. This is NOTTask1qualification/CLEANexecution:43336838877/1PUREpreflight5families7NodehandoffsSUCCESS/MODELuploadSUCCESS, followingfixedreadHTTP404beforeMODELreadback/24callbacks/Fgroups/17tests/SAFE/verifier. Noendpoint/causeproven; currentSourceWorldrolledbackoriginal68bad470.Sourcequalifstillrequired, NativeHELD.

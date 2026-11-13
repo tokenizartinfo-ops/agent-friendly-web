@@ -205,3 +205,16 @@ Add pure/inert regression through ACTUAL existing Node ownership/handoff (noMF/I
 - normallyreturnedhelper+oracle success thenADDEDevidencefailure: normaloriginalsuccess preserved, evidenceineligible;
 - normalhelperreturn thenoraclefailure retainsSAMEoracleError; existingbusinessprimaryfailure preservesidentitywithcleanupuncertainty.
 NoextraNativecall/secondcase/retry/Sourcepath/controlID; existingoracle/schema controls coverit.
+
+## Binding N9 — bounded fixed artifact GET availability and observability
+
+Observed43336838877 uploaded assignedMODEL13997192957, uploader/APIcurrentcollectiondigestmatches, then an immediate fixed read returned404/exit22. Existingstepcombinedmetadata andZIP reads, so the failinghop/cause are UNKNOWN. No claim of cache consistency, missingpermission, badcredential or provideroutage is established. The preservedI1fix passeditsPUREhandoffcommand and staticrereview; noNativewasrun.
+
+Root authorizes only a bounded reliability/observability change to the EXISTINGfixed artifact retrieval, retainingallintegritychecks. This handles retryable read responses; it does not assert a root-cause repair:
+- ONLYGET of the exact same assigned artifactID from fixed current repository/context and its GitHub-provided archive redirect; no arbitrary URL/repo/IDfallback, artifactsearch/substitution/uploadretry, workflowrerun, Native retry or authority expansion.
+- Separate sanitized phase metadata, zip_api and zip_body (or equivalent distinguishable fixed read hops). Closedboundedrecord purposeAFW_ARTIFACT_READ/1 with kind/phase/attempt/httpStatus-or-network/elapsedMs/outcome, no tokens/headers/body/signedURL/stack. Record hop so another404 is actionable.
+- Atmost3 attempts per fixed phase, waits2s then5s onlyafterretryable404/408/429/500/502/503/504 or boundednetworkfailure, allunderONEmonotonic retrieval deadline. MODEL/SAFE <=25s total perartifact; cipher <=60s total perartifact ifthissamepathused; neverextendjob7+2/test120/root/child/C0/C1. Remainingdeadlineboundsrequest/stream/wait; fewerattemptsifnoheadroom.
+- 401/403/othernonretryableHTTP, malformedmetadata, wrongrepo/run/source/attempt/name/ID/expired, invalidZIP/schema/digests failIMMEDIATELY, no retry-to-hidevalidation. No credentials/scopes/permissions changes. Exhaustionfailclosedwithinbudget.
+- GitHubAPIauthorization only to fixed api.github.com; onarchiveHTTPSredirect doNOTforwardGitHubtoken tostorage. ValidateHTTPS/noURLcredentials/trustedGitHub-suppliedLocation, no loggedLocation. Body/filecaps/sourcecontext/tripleuploader-API-rawSHA/CRC/path/EOF/UTF8/immutablemodelreadback ALLpreserved. No newdependency/service/endpoint.
+- Fake/inert tests throughSAMEprivate retrieval routine: phase-specific404thenvalid200, retrybound/deadline, immediate403/invalididentity/digestfailure, no credentialforwarding and boundedclosedlogs. Existingprofile_scope/provenance/schema IDs maycover, no newControlID/NativeCall.
+Read retries are NOTcase/run retries. ONEfreshqualification remains separatelyreleased; No oldrun43336838877replay. NoNativeauthority.
