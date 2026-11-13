@@ -49,3 +49,6 @@
 
 ## Self-review
 Oneunit/currentR1 only. Two implementation/review gates, preflight resolves concrete legacy3case→selected1/linkage/secret-scope interfaces. All five review-focus items map to controls/current actual evidence. No local workspace created; Rootdocs cloudnamespace is plan workspace; owner explicit opt-out means no approval check-in or human window before08AR.
+
+## Preflight binding amendments
+ReadSPEC P1–P7: preserve exactfunctionalF8pureframe+publicpureupload, addseparateencryptedcheckpointafterward; Nativeopenscheckpointthenverifypure_passed/3profiles/readonlybeforeI0. NewR1privatemodel+ownership/fullresult+noR2R3; old3case/R2validatorsnotrelabelled. SeparateprivateZIP3capsfromSAFE, fourbodies+sourceboundbootstrap; fatalcanonicalJSON. NoSAFEfallback ifrunnerlost: closedrecordpublication_unavailableonly. always&&scope, ALL3terminal/runcompleted. KEYLESSinertnamesonly; SourceWorld/testprotected; optionalfailuresitedeferred. AllRootrulingssavedbeforeSourcewrites; scopeSourceheldpendingscopedpreflightconfirmation.
