@@ -2905,3 +2905,48 @@ Root's explicit scope ruling authorizes reading ONLY the current zero-AFW-key qu
 Revised active F7 blob88d4ba26c5337322a382f2c7c3dc024ec39d230b,45088B/SHA2560c3e4905f78afdcd21844936f837e1eaed938abb7e1db28d211e9cacfd203c17 keeps the exact unused push message AFW-DIAGNOSTIC-TASK1-ONEUSE-20261113, Source branch, repositoryID/name, attempt1, workflow name/ref, both push shell-role checks and workflow_ref assertions from the reviewed first active proposal. Q is the only changed carried program; S8794/V4540/Z13305 and their SHA256 pins remain unchanged. Program payloads were compared as public strings, not executed.
 
 The revised ACTIVE proposal is an UNATTACHED child of inactive747f182118d20d20eabc6cc0546dc2fbce6b4674, deliberately outside superseded5733 ancestry. It changes only F7 and this SAME append-only report relative to inactive preparation. All original Source report and saved draft prefixes remain exact. Root still must independently exact-read this new proposal and explicitly release one no-force expected-head CAS from Sourceb5873e87 before any attachment or run. Source freeze, both-jobs-terminal requirement, exact original F7 restoration and declared helper/test/World retention remain unchanged. All seven nonclaims remain false.
+
+## 2026-11-13 — Task1 one-use zero-key qualification FAILED; Source restored
+
+Status: qualification FAILED, actual native stack-to-site support NOT qualified. The released attempt is consumed and closed. Task1 is not accepted and Task2/Native/business/runtime remain HELD. Scoped helper/test/World bytes are preserved for diagnosis only; they are not a qualified adoption baseline.
+
+### Exact release, preflight, activation and terminal observation
+
+Root's explicit one-use release is recorded in Rootdocs c31dfbe42e41ad0949f9826a42fe0f14cffda120. It permitted sole Source executor CAS only from b5873e87d1f00ad10985171959e93015bc6045e3 to ae383d2890d247d9c694be6deec59853a26bdec2, exact message AFW-DIAGNOSTIC-TASK1-ONEUSE-20261113. Fresh preflight positively rechecked Source lease, main0c9c475b3ebaa970fc11d628b40e50a90cceb727, all five active-status collections0 and exact readable original F7 rollback bytes. One no-force expected-head CAS returned success and was reconciled by current Source readback and exactly one new push run. No retry, second activation, dispatch, rerun or fix overlay occurred; superseded5733 remained unused.
+
+Activated source ae383d2890d247d9c694be6deec59853a26bdec2/tree dc2d42f1983c4bed0e9da5d698ba458e6847ee45/F7 blob88d4ba26c5337322a382f2c7c3dc024ec39d230b,45088B/SHA2560c3e4905f78afdcd21844936f837e1eaed938abb7e1db28d211e9cacfd203c17. Unique current run43504422934/attempt1, repositoryID1347578006, exact Source branch, event push, fixed F7 path; created/started2026-11-13T20:45:07Z. Run completed/failure20:45:21Z. Source remained frozen throughout both declared jobs.
+
+| Declared job | Job ID | Started UTC | Completed UTC | Terminal conclusion |
+|---|---:|---|---|---|
+| qualify |132158226251|20:45:10|20:45:20|failure|
+| verify |132158337220|20:45:20|20:45:20|skipped|
+
+Qualify setup, exact-role assertions, checkout, fixed Node setup and materialize/hash gate steps succeeded. Step6 “Qualify exact helper tests with all-unknown RED and real GREEN” failed. Upload skipped; verifier had no steps and was terminal/skipped. Fresh metadata rechecked both declared jobs completed before any Source restoration. Later artifact API metadata returned exactly0 artifacts. There is no assigned/published/received SMALLSAFE and no result/manifest/receiver acceptance to claim.
+
+### Bounded independent failure evidence and TDD outcome
+
+Under the explicit current zero-key qualifier-marker ruling, Root independently read ONLY the allowed fixed marker from qualify job132158226251 and supplied this exact observation:
+```json
+{"stage":"green_tests","failedIds":["d12_real_vm_native_error","d13_real_vm_assertion"]}
+```
+No executor downloaded or inspected Native/contracts/producer logs, private logs/archive/model/key or error text. No child stdout/stderr/error/assertion value was copied into this report. The fixed marker is a stage/test observation, not an authenticated root cause.
+
+Executed Q command: node "$RUNNER_TEMP/afw-diagnostic-qualify.mjs", with the pinned Q7482B/SHA256b0de66c1d84c5b1d628c6a4c245c902908d350de57402fbb26f14d7d54ab0b97 program. Its actual child commands use node --test --test-reporter=tap against the private runner-only copy with all-unknown stub, then against test/finite-budget-failure-diagnostic.test.mjs with the checked-out real helper. The source was not executed locally.
+
+RED evidence is bounded to Q's verified control flow: it reached green_tests only after the all-unknown stub test invocation, fixed known-ID/TAP parsing and required exit1 plus mixed pass/fail checks completed. Actual numerical RED counts were not exported before failure, so none are invented here. This was deliberate pure helper stub RED, not execution of any historical business failure.
+
+GREEN failed. The two independently extracted fixed failed IDs are d12_real_vm_native_error and d13_real_vm_assertion. These test families require actual Node-native Error and AssertionError from pure VM/source-filename fixtures to project to persistence_100. The actual assertion difference/representation/fixture cause is not contained in the permitted marker and remains UNKNOWN. Do not infer that the projector returned unknown, that the getter was rejected, that a particular frame syntax caused it, or that the other diagnostic families passed; no such values/counts were published. Q reached this stage after its exact Node22.23.4/pins/catalog prerequisites, but native stack-to-site compatibility was not qualified.
+
+Q did not reach ZIP controls, role receiver controls or pair publication. The success-only schemas stayed closed, verify skipped, and workflow failure preserved the real test failure. No ZIP14/receiver12/privacy/native/SDK/World/Native-case acceptance is credited to this attempt. No npm/full suite/contract/native operation or local execution was performed under this restricted zero-AFW-key role. No test was weakened or source overlaid after failure.
+
+### Exact restoration and complete pre-append readbacks
+
+After independently terminal job metadata and a fresh exact frozen-head lease read, executor created restore commit2839799ff7f1b1778fa59ab3ad069fff4b282e0a, parent ae383d2890d247d9c694be6deec59853a26bdec2, tree ee02925f3d61ae666856664a07ff193b972f882f. It changed ONLY F7 back to original blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc. One no-force expected-head restoration CAS succeeded and Source readback reconciled exactly2839799f. Original F7 was fully fetched and byte-equal:126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a, original manual/inputfree/no-push/seven false job guards.
+
+A complete recursive mode/type/blob comparison of original baseline treeaf758fa96434fd7a88e97f890f3796de15d5c14a and restored treeee02925f was performed on public metadata in memory, with both API responses explicitly untruncated. Baseline3196 leaves; closed3198 leaves; all62 workflows unchanged; ZERO workflow changes; ZERO undeclared changes. Exactly four intentional differences remain: new helper7ca7eb56811eadaef06e686aeaf444f3fc7a5c2e, new tests65deb058efd66d7b3bcd8efd68cc450e1f37592a, deliberately modified Worldba426c76afb2f23b2fe79cd49ef49004cbbfe834 and this SAME append-only report. Every other preunit leaf/mode/type/blob is exact. World is still only old physical line1933 changed, not an unchanged original World.
+
+Pre-append full report fetch remained exact7f327153bf70ae46f457474220e5c5adb69c123f:334071chars/334176B/SHA256ca3a374a5e529a2cdd2c388084204101a7e7823dd703901db93e7cfc4f266872. This final append preserves that entire prefix, which already preserves original310494chars/310591B b4bcbad2 and saved checkpoint append. No prior report text is rewritten.
+
+Pre-append closure inventories positively proved: consumed ae383 head exactly1 completed failure run43504422934/attempt1; restored2839799 head0 runs; current run artifact metadata0; in_progress,pending,queued,requested,waiting each0; main remains0c9c475b3ebaa970fc11d628b40e50a90cceb727. The final report-only commit must preserve this restored tree outside the SAME report and is followed by full final Source/ref/tree/prefix/62-workflow/one-run/closed-zero-run/five-zero-status readbacks.
+
+Self-review finding is explicit and unresolved: real VM Error/AssertionError location capture is not qualified. Further diagnosis must isolate the actual Node representation/fixture mismatch using a separately reviewed bounded source-only unit; this consumed attempt cannot be rerun or overlaid. No Task2 integration, original Native suite, deployment, runtime/credential/owner action, real AFW notice/review/withdrawal/autoclose or PC-off acceptance follows from this failure. All historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified remain false.
