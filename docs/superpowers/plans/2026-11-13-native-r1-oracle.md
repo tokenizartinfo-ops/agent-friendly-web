@@ -30,12 +30,12 @@
 **Files:** temporaryF7 + newSourceReport only. Test/World/custody/SDK/lock protected.
 **Consumes:** preflight-cleared exact interfaces, originalreadonly registered3/selectedR1 oracle, existingcontracts/custody/safeZIP.
 **Produces:** complete INACTIVE3job actualworkflow; adapter/controls/verifier/safeZip pinned bodies; typedNative/controlSAFE; separate currentKEYLESS7+2.
-- [ ] Write12 actual fixed controls first; focused RED invalid-input/control-boundary cases within onecovering, no Native substitution or separate REDrun.
-- [ ] Minimal adapter selection/TAP validation/closed serialization; keep original oracle and generic crypto intact.
-- [ ] Strict independent currentSource/run/program/digest/manifest verifier; preserve native failure vs schema acceptance distinction and unavailable receipt.
-- [ ] Self-review scope/key bindings/3jobs/checkpoints; preserve INACTIVEGitcandidate before ONE7+2/attempt1.
-- [ ] Exact F7restore/newconcise report+full3195/all3193protected/main/events/active0 STOP.
-- [ ] Independent task SPEC/QUALITY review; actualTask2HELDuntilCLEAN/separaterelease.
+- [x] Write12 actual fixed controls first; focused RED invalid-input/control-boundary cases within onecovering, no Native substitution or separate REDrun.
+- [x] Minimal adapter selection/TAP validation/closed serialization; keep original oracle and generic crypto intact.
+- [x] Strict independent currentSource/run/program/digest/manifest verifier; preserve native failure vs schema acceptance distinction and unavailable receipt.
+- [x] Self-review scope/key bindings/3jobs/checkpoints; preserve INACTIVEGitcandidate before ONE7+2/attempt1.
+- [x] Exact F7restore/newconcise report+full3195/all3193protected/main/events/active0 STOP.
+- [x] Independent task SPEC/QUALITY review; actualTask2HELDuntilCLEAN/separaterelease.
 
 ### Task2: ONE Native R1 and closure
 **Files:** temporaryF7activation/restore + APPENDownnewReport, no implementation changes.
@@ -59,3 +59,7 @@ Task1 allowed5declaredjobs(3actualdisabled+2KEYLESSactive7+2), all5terminalbefor
 ## Estado de ejecución al liberar la corrección Task1
 
 Preflight completado y confirmado por revisión independiente. La primera cualificación KEYLESS terminó y su Source quedó cerrado; la revisión completa de Task1 exigió cinco correcciones. La corrección formal 1/5 está liberada bajo P9, con una sola cualificación KEYLESS adicional autorizada. Task1 todavía no está CLEAN y Task2 no está liberada. No marcar los controles de Task1 como completos por el verde inicial.
+
+## Task1 complete / Task2 release
+
+Task1 fullreview and threeformalfixrounds areclosed: originalAstra scopedfinal SPEC PASS / QUALITY CLEAN, currentSourcebde551ef restored. Fourprogramsbb80/d60/e832/b36 qualifiedon43377434048/1,12families+ZIP16,61fixedsubcases. Actual3jobs and key-acquisition stillunexecuted. RootseparatelyreleasesONE Task2 exactinactive55d84385/runlabelACTUAL20261113-a; onlyactivation/restore/reportappend, noimplementationchanges. Task2 isnotcompleteuntilactualevidence/closedSource/taskreview.

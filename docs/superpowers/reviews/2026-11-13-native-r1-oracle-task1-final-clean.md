@@ -1,0 +1,9 @@
+# Native R1 Task1 — SPEC PASS / QUALITY CLEAN
+
+Original independent Astra/xhigh reviewer scoped FIX3 at Rootdocs469de41c72f599f258b1effa0241415e40ffc7c1. Final verdict SPEC PASS / QUALITY CLEAN; no openfinding/regression in remainingF2/F3/F5 or FIX3diff. F1early/lateoriginalassertion attribution and F4existing2environment/fourcryptostep acquisition path had already resolved and remainedunchanged.
+F2partialempty/nonempty authentication+inventory vsNativeeligibility andnegativearchive cases qualified.
+F3originalepochs equations/fixturelabels/strictpaths/native16384boundaries/own-dataeventCalls/descriptors/completeness/earliestfirstomission source-order scope-operation-guard qualified.
+F5TAPpassed+contractspassed+missingfullResult mapsvalidationinvalidwithbothcustodyvariants; sharedverifier rejectscontradictorynative:not_observed.
+Run43377434048/1completedSUCCESS, 12families/ZIP16,330closedphase=165start-passpairs/61fixedsubcases/nofailed/openphase; 2KEYLESSsuccess+3actualskipped/ALL5terminal. Root independentlystrictcurrentSAFE14014339553/1220/SHA1ec56015/fullmanifest/currentSourceRun/4hash/digesttriple/F8frame+pureupload/bodyidentity/fullpatchreconstruction/closure. Fullactualrecords preservedinfix3-keyless-records.md.
+ClosedSourcebde551ef2b9058ce968856fb281d386380ea0008/tree35b6f404af2d38c834bc0bf687d92b50f9b01be1/reportf0ba3c90f3fe499f22deb9b514816a97462f72e4/39626chars/all30355prefixexact. F7f7a71 restored,3195leaves/all3194priorleavesexact/main0c9/62WF/fiveactive0. AuthorSTOPPED. Sourceinactive55d843855804a2e9454980f0d06a98b9929eb865/F7b22f4e7aa53bb13bc3f680ea5c3a9b714fec9d2c/181741B is qualified intended3jobtemplate.
+This closesTask1, NOTactualNative/crypto-environment acquisition/Native16/globaldrain/PCoff. Allfiveflagsfalse. ActualfirstFIX2failingstatement remainsunobserved; labeldefectprovenstaticandfixed, notretrospectivecausalproof. Root separatelyreleasesONE Task2 next.

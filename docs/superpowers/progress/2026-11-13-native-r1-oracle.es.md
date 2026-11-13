@@ -86,3 +86,9 @@ La única ejecución `43377434048/1` aprobó las 12 familias y 16 verificaciones
 Source volvió a quedar cerrado en `bde551ef`: F7 exacto, 3194 archivos previos intactos, main intacta, informe completo de 39626 caracteres y cero ejecuciones activas. Los tres jobs reales quedaron omitidos. La revisión SCOPED del mismo Astra recibirá el patch completo, el informe y todos los registros cerrados. La causa exacta del primer subcaso fallido de FIX2 continúa sin atribuirse; el defecto de la etiqueta sí quedó corregido.
 
 El acceso de cifrado real y Native R1 todavía no se ejecutaron. Task2 sigue retenida hasta la revisión limpia; no requiere intervención de Gabriel.
+
+## Task1 CLEAN; liberación separada de una ejecución real de laboratorio
+
+La revisión independiente obtuvo SPEC PASS y QUALITY CLEAN. No quedaron hallazgos abiertos en la corrección ni regresiones dentro del alcance revisado. El acta `native-r1-oracle-task1-final-clean.md` conserva el dictamen y sus límites.
+
+Root libera por separado `native-r1-oracle-task2.md`: una única ejecución del test original completo de R1, usando el entorno de cifrado ya existente y los mismos cuatro programas cualificados. Un ejecutor nuevo tendrá a cargo la activación limitada, los tres jobs y la restauración exacta, sin modificar la implementación. El expediente sigue siendo sintético y propio; no es una prueba PC-off ni activación del runtime AFW. No requiere códigos ni intervención de Gabriel.
