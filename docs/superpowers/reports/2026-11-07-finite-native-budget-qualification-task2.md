@@ -7845,3 +7845,147 @@ Exact inspected SMALLSAFE proof/wholemanifest/program/context/model/hand-off inv
 ```
 
 PASSclosure targets fixed World0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b,fixturedc05c0410fc085062fb47e10bb29e6723d938821,testaaf4894d1b411a8ac59debb63ca9368e803141c5 retained; contracts exactheld2006beb4d081ef127d1192fd99967f5f76eeb7db/19347B/manual/noinputs/nopush/twofalse; Nativebaa8442094731bea1413d2cc03028ab8682b300b/27458B/manual/noinputs/nopush/twofalse; F7exactf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/sevenfalse. Fullreportprefix/history remains append-only. Fullpost-CASref/tree/files/protected/main/fiveactive0 readbacks follow. Independent scoped rereview remains required; implementer test success is not independentCLEAN or Native release. Known same-runner custody/source/build/model, synchronous overhead and pair-call-boundary limitations remain. Native/AFWkey/MF/I0/SDKruntime/CF/production/OAuth/customer/PCoff/Native16/Max NOTEXECUTED; allfive readinessflagsfalse. No more fixes/runs dispatched; STOP afterclosure.
+
+
+#### Task1 FIX3 closure readback and final handoff receipt
+
+The closure CAS succeeded at `2554a4d75d470b7ef64f176ea3daa96deac34a49` with tree `8db3d66ada67a24f9ccbb5fe6a4cb3d4bacc5714`. I fetched every one of the six allowed paths and F7 at that exact commit; their complete contents matched the frozen values. The recursive tree was complete: 3194 leaves, all 3188 protected leaves identical in SHA, size, mode, and type. The complete 644463-character report prefix (645773 UTF-8 bytes) matched blob `5dc43f897b2cbe1e5b1d75b0bfec82b2c331d3fe` and retained the entire previous report. Both new workflows have only manual dispatch, no inputs or push event, and two false job gates each. F7 retains seven false job gates and its original blob. Main remains unchanged. All five Source active-state inventories were zero.
+
+The following receipt records observations already made, before this final report-only commit. The final commit is limited to appending this receipt; its exact tip/tree/blob and report bytes are read back after CAS and supplied to Root. No additional qualification, repair, activation, Native execution, or reviewer was started.
+
+```json
+{
+  "purpose": "AFW_FIX3_CLOSURE_READBACK/1",
+  "closureCommit": "2554a4d75d470b7ef64f176ea3daa96deac34a49",
+  "closureTree": "8db3d66ada67a24f9ccbb5fe6a4cb3d4bacc5714",
+  "reportPrefix": {
+    "blob": "5dc43f897b2cbe1e5b1d75b0bfec82b2c331d3fe",
+    "characters": 644463,
+    "utf8Bytes": 645773,
+    "completeFix2PrefixRetained": true,
+    "exactWholeContentReadback": true
+  },
+  "files": [
+    {
+      "path": "test/fixtures/finite-budget-world.mjs",
+      "encoding": "utf-8",
+      "sha": "0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b",
+      "exact": true,
+      "chars": 242981,
+      "treeBytes": 242987
+    },
+    {
+      "path": "test/fixtures/finite-post-ack-diagnostic.mjs",
+      "encoding": "utf-8",
+      "sha": "dc05c0410fc085062fb47e10bb29e6723d938821",
+      "exact": true,
+      "chars": 91238,
+      "treeBytes": 91238
+    },
+    {
+      "path": "test/finite-post-ack-diagnostic.test.mjs",
+      "encoding": "utf-8",
+      "sha": "aaf4894d1b411a8ac59debb63ca9368e803141c5",
+      "exact": true,
+      "chars": 1923,
+      "treeBytes": 1923
+    },
+    {
+      "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+      "encoding": "utf-8",
+      "sha": "2006beb4d081ef127d1192fd99967f5f76eeb7db",
+      "exact": true,
+      "chars": 19347,
+      "treeBytes": 19347,
+      "held": {
+        "manual": true,
+        "noInputs": true,
+        "push": false,
+        "falseJobs": 2
+      }
+    },
+    {
+      "path": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+      "encoding": "utf-8",
+      "sha": "baa8442094731bea1413d2cc03028ab8682b300b",
+      "exact": true,
+      "chars": 27458,
+      "treeBytes": 27458,
+      "held": {
+        "manual": true,
+        "noInputs": true,
+        "push": false,
+        "falseJobs": 2
+      }
+    },
+    {
+      "path": "docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task2.md",
+      "encoding": "utf-8",
+      "sha": "5dc43f897b2cbe1e5b1d75b0bfec82b2c331d3fe",
+      "exact": true,
+      "chars": 644463,
+      "treeBytes": 645773
+    },
+    {
+      "path": ".github/workflows/afw-finite-budget-qualification.yml",
+      "sha": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+      "chars": 126209,
+      "held": {
+        "manual": true,
+        "noInputs": true,
+        "push": false,
+        "falseJobs": 7
+      }
+    }
+  ],
+  "tree": {
+    "truncated": false,
+    "leaves": 3194,
+    "protectedOldLeaves": 3188,
+    "protectedDifferences": 0
+  },
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "sourceBranchReadback": "2554a4d75d470b7ef64f176ea3daa96deac34a49",
+  "sourceActive": {
+    "queued": 0,
+    "in_progress": 0,
+    "waiting": 0,
+    "requested": 0,
+    "pending": 0
+  },
+  "qualification": {
+    "run": 43341317371,
+    "attempt": 1,
+    "event": "push",
+    "head": "255ecc18900647081d66f9617df110898983cc89",
+    "status": "completed",
+    "conclusion": "success",
+    "producerJob": 131610059140,
+    "verifierJob": 131610436472,
+    "producer": "success",
+    "verifier": "success"
+  },
+  "actualChecks": {
+    "namedControls": 24,
+    "nodeTestWrapper": 1,
+    "transportFakeScenarios": 29,
+    "ownerHandoffFamilies": 5,
+    "ownerHandoffs": 7,
+    "unchangedFGroups": 8,
+    "unchangedFGroupCases": 22,
+    "pureNodeTests": 17
+  },
+  "nativeExecuted": false,
+  "mfAllocated": false,
+  "I0Created": false,
+  "operationalReadiness": false,
+  "completePackage": false,
+  "PCoff": false,
+  "globalNativeDrainVerified": false,
+  "sdkNamespaceEmptyVerified": false
+}
+```
+
+All actual bounded artifact-read phase rows, the complete 29-scenario matrix, covering commands, actual command outputs, artifact metadata, independent verdict, and the strictly validated two-file SAFE receipt are preserved immediately above. Every real read in this successful qualification completed on attempt 1; this does not establish the cause of the previous 404, whose hop and cause remain unknown. The model remains model-only, with no Native execution or actual graph-equality claim. The immutable MODEL and SAFE artifacts retain seven-day expiry; only SAFE was downloaded by the implementer. No raw MODEL, cipher, source bundle, key, URL, token, header, or private response body was downloaded or logged by the implementer.
+
+Implementer FIX3 work is complete and stopped with both new workflows held. Independent scoped N9 review and Root qualification remain pending, followed by any separately authorized future Native release. The successful keyless run is not that authorization.
