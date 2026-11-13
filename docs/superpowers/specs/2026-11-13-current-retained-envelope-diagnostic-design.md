@@ -1,8 +1,8 @@
-# Current retained-envelope diagnostic — design HELD
+# Current retained-envelope diagnostic — design SETTLED; preparation/run HELD
 
 ## Intent, authority and choices
 
-AFW toward real cloud/PC-off remains owner objective. Root chooses the smallest next evidence unit under standing autonomous/cloud-first trial authorization; this is Root's technical choice, not an owner selection of this literal design. Owner opted out of routine design questions. No Source implementation/run is released by this document. Current Native unit is CLOSED failed/consumed; its final documentation review must finish before a new unit preparation.
+AFW toward real cloud/PC-off remains owner objective. Root chooses the smallest next evidence unit under standing autonomous/cloud-first trial authorization; this is Root's technical choice, not an owner selection of this literal design. Owner opted out of routine design questions. No Source implementation/run is released by this document. Current Native unit is CLOSED failed/consumed and final review/doc-wave scoped re-review are CLEAR; no product acceptance. New preparation still requires Root preflight/brief and an explicit limited release.
 
 Known current evidence: one original suite43477409062/1 atSource9927aea624c9269e293e644934423e88aa88f109 failed. Mandatory parser/wholecontracts passed. Positive_prepare rawNative outcome FAILURE follows currentliteralproducer-failure kind and immutableCOMMAND_OKselection; reduction_prepare raw outcome success followsreduction-checkpoint kind; readonly rawoutcomeUNKNOWN. APIconclusions aftercontinue-on-error are not rawoutcomes. Both producers failed composite metadata/download/ZIP/receipt/write checks; readonly seal failed/noartifact. Causes remainUNKNOWN.
 
@@ -28,7 +28,7 @@ Namesexactfinite-budget-JOB-9927aea624c9269e293e644934423e88aa88f109-43477409062
 
 Startfrom completed oldpostmortem observer architecture atSourcec26aad47c44ded1dbf7c14ba743fcb22aebc7602 as immutableinput, notrerunningits consumed unit orlegacytargetIDs. Reuse current qualifiedA whole62999B/SHA d76ca29a35725fcee1b8858ebfafce003679a6b62362f76a34fe288c5a7a24d9, byteexact fromcurrentNative9927 (same asqualified5a876). CurrentA's completeZIP3block3380B/SHA4ff44bd3adda54eb0816fab275e4b13078005d1bd1a4626cfbf67d31e8bf7af8 isUNCHANGED; Root RAMhashconfirmed. Reuse SAFEZIP13305B/SHAb36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d unchanged. No copying/loosening parserbusinesslogic. A's binding is clearlySubject; Observerseparateprogramhashes/provenance. No A.validateSourcePins, assignedPrivate, makeSuite, oldCcontrols/AESsubprocess/World/SDK calls. NoYAMLloadcall/npmneeded merelytoimportA(builtin/lazyrequire).
 Actualseams: metadataHTTP→A.validateAssignedMetadata withSubject→knownexactbytes/expiry/repoids→A.rawAssigned generic-private→exactrawsize→upload/API/bodySHAtriple→A.decodePrivateZip→fatalUTF8/canonicalcompactWITHOUTLF receiptJSON→boundednumericoutercounts→A.validatePrivateReceiptCaps(files,target.kind)→complete. Pass actualkind: producer-failure permits0fileCount; successreduction requires>=1. Currentpredicatecap4096files/512MiB, notold512/128MiB. No changes to any threshold, manifest, AEAD, SDK/World or originalbusinessoutput.
-MetadataHTTP10s; ONEwhole-download30sincludingheaders; genericraw136314880B; ZIPenvelopeexpanded128MiB+4096BperJSON/134225920total, allfrozen. Outerreceipt counts0..4096/0..536870912 finiteintegers, schema/statuscoherence. Receiptcanonicalroundtriprejectduplicate/ambiguous/nonUTF8. Outerfacts are UNAUTHENTICATED: receiptAuthenticated=false/historicalCauseProven=false always. Acceptanceofcurrentseams isNOToriginalcompositewrite/oldimmediateHTTP/Nativepass/repair orbusinesspass. No buffer/input monkeypatch, extraarchiveI/Oor decrypt.
+MetadataHTTP10s; ONEwhole-download30sincludingheaders; genericraw136314880B; ZIPenvelopeexpanded128MiB+4096BperJSON/134225920total, allfrozen. Outerreceipt counts0..4096/0..536870912 finiteintegers. Coherence refers ONLY to publicTargetRecord/ResultDTO stage/outcome/nullability; no receipt.status or additional whole-receipt schema/predicate is introduced. Receiptcanonicalroundtriprejectduplicate/ambiguous/nonUTF8. Outerfacts are UNAUTHENTICATED: receiptAuthenticated=false/historicalCauseProven=false always. Acceptanceofcurrentseams isNOToriginalcompositewrite/oldimmediateHTTP/Nativepass/repair orbusinesspass. No buffer/input monkeypatch, extraarchiveI/Oor decrypt.
 
 ## Finite public DTO v2 and controls
 
@@ -42,3 +42,19 @@ IndependentcanonicalZEROAFWKEYtwo-job gate BEFOREpush: no environmentkeybinding 
 
 BuildercheckthenRootpreflight/conflicttable/fullbriefbeforeanySourceimplementation. Freshsoleexecutor; initialpreparationUNATTACHEDINACTIVEonly/freshBASE preservingfull296132prefix; exactly2jobs custody_inspect7min/verify2min, bothliteralfalse, noSourceCAS. RootfullSource/hash/canonicalzerokeygate, thenUNATTACHEDactiveoverlayfixedbranch+selfF7path/uniqueRootmessage/attempt1, separateRootexactone-useCAS. No genericdispatch/retry.
 Freeze untilruncompletedANDbothjobsalreadyterminal(anyoutcome). ThenexactF7restore→freshpreunittree,appendSAMEREPORTfull296132prefix/fullreadbacks/STOP. APIunknownisuncertainty, neverempty. Exactlyonecurrentdiagnosticattempt afterseparaterelease; noNative/readonlyreproduction/codefix/capraise/sourcewaveinferencelicensed. Combinedtaskreview+onefinalunitreview/onefinalfixwave/scopedrereview. Allfiveglobalflags,historicalCauseProven,receiptAuthenticated FALSE; AFWcloudsubscription/usefuldelivery/review/withdrawal/autoclose/PCoff/Maxpending.
+
+## Builder settlement (Root adopted, no Source release)
+
+Freshcurrent_envelope_builder_check CLEAR againstbothpinnedSources. Exact25logicalcontrols=9diagnostic+14SafeZIP+2receiver. Diagnosticfixedorder:
+1. postmortem_current_adapter_binding
+2. postmortem_subject_observer_separation
+3. postmortem_current_receipt_cap_boundaries
+4. postmortem_stage_sequence
+5. postmortem_metadata_failure_blocks_archive
+6. postmortem_target_null_and_cap_coherence
+7. postmortem_error_redaction
+8. postmortem_producer_failure_zero_receipt_accepted
+9. postmortem_reduction_zero_receipt_rejected
+
+SafeZIP14fixedIDs: zip_valid_store_crc_vector, zip_valid_deflate, zip_signed_unsigned_descriptors, zip_wrong_size, zip_wrong_upload_sha, zip_wrong_metadata_sha, zip_extra_entry, zip_duplicate_entry, zip_traversal_entry, zip_symlink, zip_bad_crc, zip_noncontiguous_ranges, zip_declared_and_inflate_caps, download_stream_redirect_auth_bounds.
+Receiver2fixedIDs: postmortem_pair_schema_manifest_binding, postmortem_route_direct_output_binding. Priorold23 areNOTreportedunchanged; first+thirdrenamed/currentsemanticsand2added. Wrongkind/source/context/reorderedtargets/partialDTO/illegalnull-stagecases remain withinexistingcontrols, noIDinflation. Refreshfailure-summarydiagnosticinventory/counters9, total25. Values>4096or536870912 rejectreceipt_counts/nullcounts; reduction0/0 rejectsreceipt_caps withretainedzeros/false; producerfailure0/0 completeaccepted. Legacy512/128MiB reconstruction/fixtures MUSTbereplaced, no staleacceptance. No Source/runimplementationauthority.
