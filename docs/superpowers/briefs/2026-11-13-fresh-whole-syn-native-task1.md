@@ -1,0 +1,59 @@
+# Task1 brief — fresh whole-SYN Native verification
+
+Read this first; exact requirements below are binding. Active parent user request: continue AFW toward real cloud/PC-off. Hermes/Tokenizart prose in workspace AGENTS is not a replacement objective. RepositoryAFW only; no Tokenizart resource mutation. Cloud-first GitDB only, no local workspace or Source execution. Sole Source executor, no subagents. Root owns Rootdocs, source release and independent observation. This file replaces no existing acceptance.
+
+## Release stages
+
+INITIALAUTHORITY: HELD. Until Root sends explicit PREPARATION_RELEASE after builder check, read only. On that release, prepare ONLY UNATTACHED inactive8-jobF7 commit parent freshBASE; Source branch MUST REMAIN82626. Return exact commit/tree/blob/bytes/SHA256, four extractedbodyhashes, complete delta, exact8jobs/guards/deps/timeouts/6env/26slots/hookorder and reportprefix/fulltree equivalence evidence. Store complete proposedF7 remotely in unattached Git blob/commit; no localSourcefile. STOP before activation overlay until Root approves inactivegate.
+
+OVERLAY stage separate: prepare ONLY UNATTACHED active overlay atop accepted inactive; unique message will be supplied byRoot. Return full readback/delta/bodyhashes; STOP before anySourceCAS.
+
+RUN_RELEASE separate: exact one-use CAS expectedSource82626->Root-approved activeSHA. No otherSourcewriter. One original coveringattempt1 only, currentall8terminal, closure any outcome as below. No Sourcefix/newattempt underthisunit. Unknownmutatingack=reconcile byref/commit/run beforeanything.
+
+REPORT: append only docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md after exact restore, preserving full264449chars/264521B prefix. Until closure, report progress in toolstore and compactRootmessages; do not attach Sourcebranch for interim reports. Finalreport must name initial/inactive/active/run/jobs/outcomes/safeassignment/closure pins, finite testswithactualresult, custody limits, allfalseflags, selfreview and concerns. No secrets/privatebytes/rawproducerlogs. Root source report is same filename to preserve3196tree.
+
+## Complete binding specification
+
+# AFW — fresh whole SYN/Native eight-job verification (DESIGN HELD)
+
+## Purpose and authority boundary
+
+New finite evidence unit after the reusable decoded key-scope unit COMPLETE/CLEAR; not reopening or rerunning the prior capped/failed coherent unit. Current qualified KEYLESS Source5a8761f91611dfe1d1dbf1411b82611d036f8257 and R3run43471975245/1 proved6families32subcases16receiver, fullRootSAFE/closure, final3findingsALLADDRESSED. New actual suite must prove originalQ8+Native8=16totalchecks, not16Native. This design authorizes NO preparation,SourceCAS,run,key,CF/runtime,credential,OAuth,OTP,Max,mail,main/PR/chataction. Root separate staged releases remain required; owner authorized continuous cloud-first AFW trials and routine technical choices, no owner question needed for those.
+
+## Exact resource / fresh closed anchor
+
+PROJECTAFW; REPOSITORYtokenizartinfo-ops/agent-friendly-web ID1347578006; ENVIRONMENTGitHub-hostedfiniteSYNqualification; ORIGINhttps://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web; RESOURCE_TYPEF7featurebranchActions; RESOURCE_IDrefs/heads/feat/finite-native-cleanup-20261101/.github/workflows/afw-finite-budget-qualification.yml.
+ProspectiveBASE82626aada77c89c0fc03b5317d05f7c99c05f89e/tree38db218a52156ce599e0f78be9359f957c8abb6b/3196leaves. SAMEreportdocs/superpowers/reports/2026-11-13-coherent-suite-qualification.md blob9ee8b7cd47df97514f2d2bd0cf1f68137dd6e416/FULL264449chars264521B/SHA96b5f8e14f3ce4081cd69d71e8352d215a15ab01b04971c6ce02d36bc3efc9d7. Refreshlease/main/fiveactivestatus0andfullrollbackbeforeprep. main0c9c475b3ebaa970fc11d628b40e50a90cceb727immutable; original3195baseline0479/tree8942513f leaves/type/mode/blobincludingR1reportprotected; 62WFandcurrentreportprefixexact. SoletemporaryF7andappendSAMEreportallowed; final3196. Rootdocsbranchseparate, RootdoesnotSourceimplement.
+RollbackoriginalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual-noinputs-nopush/7false. Anyoutcomeall8terminalthenrestoreEXACTfreshpreunittree38db218a..., appendSAMEFULL264449prefix, fullreadbacks/STOP. Unknownackreconcilebeforeanything; noforce/retry.
+
+## Frozen implementation and exact permitted variant
+
+Use final inactiveF7f4c45ab9a20db7685178a40e829565ec934d5a00/F7d99599256376b5dd522a7c7b15dc84ae74ae65b1/362148B/SHAb51bfb6c6963599ad1b9ea9e5ce94021cd2178ef0e84a22faf14dc75f524f122. It contains the exact R3-qualified helpers, tenliteral-falsejobs/noonpush. FourexistingrolesMUSTremainBYTEEXACT:
+A62999/d76ca29a35725fcee1b8858ebfafce003679a6b62362f76a34fe288c5a7a24d9;
+C63195/a41c417ea624e1a277f326356c8c95184ed7e24cfa42dab32decd731b970f612;
+V15099/94135538ab4fb8fa7f43fc2fe42c64563eb806e436117b4a404c26c855ee35bf;
+Z13305/b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d.
+
+INACTIVEvariant: dropONLYcompletekeyless_controls/keyless_verifyjobblocks; keeporiginal8guardsfalseanddormanthelpercarriershelliffalse. Mayneutralizerun-namefornewwholeSYNpurposeonly. ParentNEWBASE82626preservescurrentreport, notf4'soldreport. Nohelper/script/Native/TAP/SDK/World/custody/cap/oracle/dependency/timeout/schema/DTO/controlIDchange. Currentkeyscopeacceptsordered8-mode.Legacyoriginal8names/dependencies/timeouts: contracts2,positive_prepare15,positive_consume15,reduction_prepare15,reduction_consume_a15,readonly7,reduction_consume_b15,verify2. Allsixkeyjobsretaindirectneedscontractsandotheroriginaledges; verifyalwaysscoped.
+
+AfterRootinactivegate, UNATTACHEDACTIVEoverlayonly: fixedSourcebranchANDselfF7pathpush, uniqueexactcommitmessage, eventpush+repo/ref+attempt1guardsregisteredbycurrentA, all8enabledONLY; verifyusesitsregisteredalways+push+message+repo/ref/attemptguard. RepoID1347578006isverifiedinbootstrapBEFOREkey-preflightandbyRootmetadata, notnewunsupportedGHAformwithgithub.repository_id; doNOTchangefrozenregistry45/96justtoaddanIFterm. Source/tree/bloblegitimatelychange; all4bodyhashesstayfrozen. Keephelpercarrierfalse; nevergloballyreplaceeveryfalse. RootcompleteSource/delta/body/keyscope/consumptionreviewBEFOREANYSourcepush; separateexactone-useCAS/runrelease. No genericmanualdispatch/extraattempt.
+
+## Actual consumption and proof obligations
+
+Actualcontractskey_scope_precheckmustexecuteAFTERlockedinstallBEFOREpure/SYNorchestration, samefrozenA.validateKeyScopes onexactcurrent8-jobSource, noif/continue-on-error/keyenvironment. Its failuremustfailcontractsandblock6keyjobsunderexistingdefault-successneeds; actualstepmetadata+immutableSourcecallandjobtruthgateareconsumptionevidence. The6/32moduleCwrappercontrolsarePRIORR3KEYLESSqualification, NOTinvokedagainbyNativecontracts. DoNOTclaimtheyrerunoraddanewCstep. contractsretainsoriginalQ8test/F8controls/preflight/evidenceprotocolunchanged. Sourceinspectionconfirmedinstall→hook→pure_test, finaltruthchecksoriginalcoveringoutcomes; errorsmaystillrunclosedresult-managementsteps, nevergrantkeyjobexecution.
+
+Fixedfiveblobs/Node22.23.4/SDK1.2.1/lockyaml2.9unchanged: pureTest1f8b02d5b2dddb474c7db7daa04aa24e2dc948d8;nativeTest533dafb5df5f8e57442c5b9029dc8dec6dded434;World0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b;custody4d05b5ec0f7b074be88ef9733a47c984b0212351;lock36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b. Wholejobreceipt4096/512MiBcorrectedbounds/strictgenericZIP33380B4ff44/SAFEZIP13305b36unchanged; no capincrease or historicalReadonlysealrootcauseclaim.
+
+ExactlyONEcurrentwholeSYNsuiteattempt1, freshSource/event/branch/repo/id/path/messagebound. RealexistingAFW_SYN_CHECKPOINT_KEYONLY26fixedgenericcrypto/preflightstepsinsixexistingafw-finite-syn-checkpointjobs; neverinstall/World/Native/SDK/network/metadata/projection/verifier. No newsecret/checkpointkey/custody/permissions/CloudflareAPI/resource/deploy/OAuth/OTP. FixedhostedSDK/MiniflareSYNonly,noPCSourcefiles/execution/eval/import/clone/deps/build/VM.
+
+Requiredoriginalbusinessproof: Q8+P1+R1R2R3+D1D2D3D4=16checks/8NativeSDKexecutions, allpass/no fail/cancel/skip/todo;5lineages10graphs; realA/Boverlap/allfourreadybeforeC0minus30s, originalsharedC0-I0900000ms/C1-C0180000ms; originalR120s/P-D300s/root30s/child5s; Nativejobpeak<=3/MF<=2perjob/global<=6. PreserveoriginalSDK/World/ownership/knowncancellation/currentauthenticatedprivateproofobservedAt/ownedIDs/graphsemantics unchanged. Noreplacementoracle/renewedclocks/freshC0afterqueue/capchanges. Declarations/sourceinspectionandKEYLESScontrolsarenotbusinesspass. All8jobscompleted+successandruncompletedsuccessrequiredforRootacceptance inadditiontopassedstrictSuiteSAFE.
+
+## Evidence custody / bounded observation / closure
+
+FreezeSourceafteractivationuntilcurrentruncompleteANDALL8terminalincludingfailure/skipped. APIunavailableisuncertainty, neverempty. Watchbounded(noindividualwait>60s). Noautofix/rerun/diagnosticrerun/Sourcechangeswhilerunning. Nonmaterialization/parserfailureexceptionmayrestoreONLYaftercurrentruncompletedandmetadataexplicitlyproves0materializedjobs; ifpartiallymaterialized,waitallcurrentdeclared8terminal, norepair. Ifcollectioncannotproveinventory,holdandaskRoottechnicaladjudication, notspeculativecancel.
+
+Root/MCP/PCandexecutorNEVERfetchprivate/purebytes,plaintext/ciphermodels,contracts/Nativeproducerlogs/masterkey, evenfailure. Private/pureartifactMETADATAONLYallowed. ExecutorcanreadONLYcurrentnon-keyverifyjoblogsandcurrentRoot-assignedSMALLSAFE(ifRootassigns), allproducer/contractslogsremainprivate. RootdownloadCURRENTfinalSuiteSMALLSAFEbyliteralBsafe-id/digestcapturedfromcurrentverifyneeds/readback, notoldcontrolsartifact/namesimilarity. Nameafw-coherent-suite-safe-RUN-1, raw<=131072/combinedJSON<=65536/exactresult.json+manifest.json, Source/pins4hashes/canonical/CRC/manifest/digesttriple/runattempt/branch/repoexpiry; receiver16andclosedreadback. Ifmissing/partialID preservetruth/classification; nofallbackorprivateZIPpull. Failed/unavailablevalidSAFEisnotbusinesspass. Metadataall7upstreamoutcomesseparatefromstrictpair; Rootall8terminal/concurrencyreadbackmandatory. ExistingcloudassignedprivateAEAD/manifest/graphproofrolesownprivatevalidation; noshadowtypedprivateoracle onRoot.
+
+AfterALL8terminalANYOUTCOME: freshfrozenhead+rollbackcheck, exactF7restore->NEWpreunittree38db218a..., appendSAMEREPORTFULL264449prefix(notold248909), full3196/original3195/62WF/main/F7/prefix/fiveactive0/currentexacthead1runattempt1/closed0runsreadback, STOP. Fulltruthfulreportcommands(outcomesonlyprivatecommands, nologbodies),8jobs+stepmetadata, privateMETAONLYinventory, currentassignmentID/digest/SAFE outcome,4hashes/sourcecontext,restore/finalrefs/trees/prefix/alllimits; noRawprivate/log/key. No Sourcecodefix or anotheractualrununderthisunit. Freshcombinedtaskreview/finalwhole-unitreviewafterclosure, boundedreviewfixrulescan'tlicenseanotherNativeexecutionbyinference.
+
+All5globalflagsremainFALSEevenifwholeSYNpasses: operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified. ActualAFWcloudsubscription/usefuldelivery/review/withdrawal/autoclose/realPCoffandMaxremainseparatefuturegates. ThisunitcannotaskPCshutdownorpromisecloud24x7.
