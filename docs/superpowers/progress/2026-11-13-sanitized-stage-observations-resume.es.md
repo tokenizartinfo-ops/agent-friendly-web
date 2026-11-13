@@ -30,3 +30,9 @@ Verificar numeración/catálogo World al sustituir catch; reconstrucción del Wo
 5. La prueba real AFW/avisos/revisión/retirada/parada y finalmente PC-off siguen pendientes. No inferir disponibilidad Cloudflare actual ni operación permanente.
 
 No se cierra Chrome ni otras ventanas. No se reactivan automatizaciones, no hay correo/relay enviado, runtime/despliegues/credenciales sin cambios. Trabajo Source remoto; no clon/dependencias/build/locales que limpiar.
+
+## Borrador recuperable confirmado antes de desconectar
+Commit NO ADJUNTADO: be297ada3c97e0b6b99dd10fb8c16113bc157cf3; árbol f0c45608ed306bcb271472f0f48de1a332598e21. Parent b5873e87d1f00ad10985171959e93015bc6045e3.
+Helper fdabfafc7412c86615ce3d39092520bda816b30e; tests5ffa7fb8086b91c7fde09913d3a4d9fd754aae90; World1d4c6218133058b6c6fb6f48ae92f2bf35dc66b2; F7inerte INCOMPLETO7ad92627181e5378285c58063bfce8a7679da368; SAME informe34fee4181f7dae39c2df74b102ff9ac60c4b7ddd. Q/S/V/Z/template/catálogo/catch están guardados como datos públicos comentados en ese F7; helper/test/World también en blobs separados.
+Root leyó independientemente commit/parent/árbol completo y refs:3198hojas frente3196, solo cinco diferencias declaradas,62workflows; Sourceb587/main0c9intactos. No ejecución, pruebas ni activación. Ejecutor detenido por pedido del owner.
+INCOMPLETO: error sintáctico conocido en guard sourceSite; pin helper de World obsoleto tras últimos borradores; marcadores de calificación aún sin completar. Retomar DESDE ESTE BORRADOR, no volver a escribir todo ni tratarlo como código validado. Antes de cualquier attach: terminar código/pins, gate exacto Root e inactivo nuevo coherente; release de run sigue retenido. La pausa es solicitud del owner, no fallo externo ni tarea completa.
