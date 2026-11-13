@@ -1,4 +1,4 @@
-# AFW — strict decoded key-scope qualification (design draft for builder check)
+# AFW — strict decoded key-scope qualification (settled for planning)
 
 Root's scoped structural follow-on to carried FF-I2. The prior coherent plan and its one final fix wave remain closed; the real load-bearing parser defect was explicitly held for new work. Postmortem unit is COMPLETE/CLEAR at Source72c10833654aa7226d8376e95d767455e1c144b2. This document authorizes NO Source mutation/run/Native/key/runtime. Owner delegated routine technical decisions and asked continuous cloud-first progress; approach choices below are Root's, not an invented literal owner selection.
 
@@ -65,3 +65,13 @@ Only temporaryF7 and append SAME report; final3196/original3195 type-mode-blob/6
 ## Primary technical references
 
 Existing source/lock are the main authority. Documented parser API/profile: [yaml2 documentation](https://eemeli.org/yaml/) (AST parseDocument, errors/warnings, scalar nodes/options). GitHub documents optional expression delimiters in if, job dependencies and default workflow-source identity: [workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax), [variables](https://docs.github.com/en/actions/reference/workflows-and-actions/variables). Root infers the bounded implementation design above; no external source claims it already qualifies AFW.
+
+## Builder check and Root settlements
+
+BuildercheckCLEARafter417058c: noimportantplanningdecisionsremain. QualificationrunsactualvalidatoronexactcurrentSource; becausecontractsisskipped, itskey_scope_precheckwireisprovedbySource/controlinspectionONLY, NOTobservedexecutionofthatstep. ActualprecheckexecutionawaitslaterseparatelyreleasedNativevariant. Do notconflatethesewitnesses.
+
+Rootboundsforplan:inputUTF8<=524288bytes; ASTwalk<=20000nodes/depth<=64, noaliasexpansion, oneDocument, primitiveStringmappingkeys(noautomaticstringcoercion). Parser2.9.0lazycheckoutresolver/lockintegritychecked, prettyErrorsfalse/no source extracts, allerrorswarnings/directivesfail. Nonsecretfield-formregistryisreviewablefixeddatafromapprovedseed+explicitqualifierforms, notderivedfrominputundercheck; exactrepresentationisbuilderroutinechoicebutmustbeshownatRootgate. NewStageNoSecretCanonicalScalarplainonly.SOURCE_ROLE4hashes/R+Zunchanged;extendinsideexistingkey_scope assertionsso6families32subcases/16receiverIDsremainunchanged.
+
+Addboundedparserpositiveprovenanceline AFW_KEY_SCOPE_PARSER/1 withEXACTfieldsversion,lockBlob,checkoutResolved,positiveSourceValidated,source,workflowBlob. version2.9.0,lock36a8...,twoboolstrue,source/workflowBloblowerhex40/currentcontext;<=1024B, no paths/URL/errorbody. It is emittedONLYafteractualcurrentSourcepositivevalidation, beforeadversarialchecks. Rootmustbindlinetoexactrun/job/currentSource. OtherDTO/publicpurpose/programHashkeysstayunchanged. Ifactualpositivesourcerejectsormoduleisabsent,nojobs/negativecountmayestablishqualification.
+
+Ruling: remoteapprovalregistrydeferredafterlockedASTdependencywasverified; minimalnewstructuralunitrepairsconcretecarriedFF-I2withoutnewresources/credentials/lockchanges. Priorcappedunitretainsitshistoricaldisposition; actualNativehelduntilNEWSourcequalificationandreview. Costifwrong: KEYLESSpositivefailsbeforeanyNative/key; exactSourcehold/rollbackremain.

@@ -1,0 +1,3 @@
+# Buildercheck — CLEARforplanning
+
+Freshtechnicalreview /root/exact_admission_builder_check (Astra/high), readonly/static. Withlocked yaml2.9.0 andRoot independentSourceapproval, scopedstructuralrepairrecommended. ThreequestionssettledinSPEC: implicitif+reviewedfieldforms; canonicalplain26/decodedotherfields/preservedcustody/envrules/documentprofile; lazyresolverfromcheckoutnotRUNNER_TEMP/actualpositivefirst. Finaldesign417058creadyforplanning,noimportanttechnicaldecisionsremain. QualificationrunsvalidatoronexactcurrentSource;contractsisskippedsohookwireSource/controlinspectionONLY,noactualhookexecutionclaim. OldFF-I2pendingimplementation/KEYLESS/review; Nativeheld.
