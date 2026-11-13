@@ -40,3 +40,13 @@ Ruling: preserve B's existing composite commandSucceeded definition after direct
 Ruling: completed parser failures may be restored only after all positively materialized jobs terminal and five active inventories zero; missing job identities are reported unavailable/unqualified — prevents a permanent restoration deadlock — cost if wrong: no pass/qualification, no automatic replay.
 
 Preflight source/provenance pointers are in SPEC. No source or runtime action occurred. Root in-memory metadata audits are independent of Source helper execution.
+
+## Task 1 release — scoped preflight CLEAR
+
+The independent preflight reviewer read back immutable129dbe5e and returned CLEAR (SPEC603b7668, brief e490f037, PLAN18823e5d). No Source or runtime action occurred in preflight.
+
+Ruling: release ONLY Task1 inactive eight-job preparation and one ten-declared/two-active KEYLESS qualification from Source0479, with exact restoration/report/STOP — the exact interfaces are now settled — cost if wrong: the bounded qualification or fresh review fails and Source remains closed. Actual eight-job suite is NOT released.
+
+Testing ruling: controls are written first; the single bounded KEYLESS qualification must demonstrate rejection of known bad inputs and positive actual shared seams. Do not manufacture a pre-implementation RED execution or claim one occurred; no extra run is introduced for test ceremony under the one-run/cloud-only constraint. Report actual executed test evidence and any limitation transparently.
+
+Root owns Rootdocs and independent metadata/SAFE readback. Source implementation belongs to one fresh delegated actor. All flags remain false; no owner intervention required.

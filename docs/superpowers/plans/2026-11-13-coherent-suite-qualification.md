@@ -28,8 +28,8 @@ One KEYLESS7+2/10declared (8skipped+2success), one actual8jobs; freeze/terminal/
 - [x] Read-only independent original DAG/key/World/artifact/cap mapping.
 - [x] Root rulings: optional nonexecuting receiver, six earlier successes/B running vs final seven/eight, public pure without extra ciphertext, legacy B composite manifest.
 - [x] Exact public schemas/state table/API/control IDs/materialization/output wiring and immutable code provenance specified.
-- [ ] Scoped reviewer confirmation of this immutable binding publication.
-- [ ] Separate Source Task1 release.
+- [x] Scoped reviewer confirmation at129dbe5e: CLEAR.
+- [x] Separate Source Task1 release: inactive preparation and ONE KEYLESS only.
 
 ### Task 1: Prepare and qualify inactive eight-job wrapper
 
