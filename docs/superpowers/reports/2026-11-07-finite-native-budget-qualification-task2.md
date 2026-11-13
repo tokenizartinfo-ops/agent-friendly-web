@@ -10016,3 +10016,47 @@ After BOTH terminal, expected-head closure CASbd9c731c -> fd6da8c0f17bfc5d150f6c
 ```
 
 Minimal static frozen candidate anchors (at0daca3c0/.github/workflows/afw-finite-budget-qualification.yml): new read_policy oversize assertion line1104; unchanged validateActualReferenceRows oversize rejection line749; actual readActualReferences global validation line750; private witness issuer line932; closed proof validator line792. This report-only receipt commit is followed by final full readback before returning to Root; it cannot self-record its own Git SHA. Status BLOCKED: sole qualification consumed/failure; no current18/fullproof/SAFE qualification. ActualTask2 HELD. Root independently reviews causal concern/candidate; Source executor STOPPED after final readback.
+
+
+## R1 frontier Task1 fixture fix1 — scoped static correction and one fresh covering
+
+Fresh release read in full at3257d9b1, brief blobf711129a; same original Task1/P1–P6 read. Original builder resumes as sole Source writer, no subagents/reviewers or human step. Starting CLOSED Source6f6165895a6aaa0a09fd6c0ecb7276bb2c415d23/tree04b9339dc715896665c47d4334f06ef4298853ba; current full report1f82837d23d5d313ffce954b86cb7d71733a9a01/738243chars preserved ENTIRE as prefix. Full current ref/commit/3194-leaf nontruncated inventory/3192protected/F7f7a71/fullreport/main0c9/fiveactivecounts0 verified before mutation. Fixed62workflow event inventory still hash-identical through protected-tree comparison; no other feature-branch/F7 push target. Same AFW/GitHubconnector/GitDB/isolatedSourcebranch/two-path scope/rollback authorization as original appendix, no runtime or private artifact access.
+
+Previous run43351510829/1 is consumed and is NEVER rerun. Actual evidence identifies only HTTP_FRONTIER_FAILURE/read_policy, without the first failing internal substep. Root independently confirmed a REAL STATIC fixture contradiction: unchanged readActualReferences/validateActualReferenceRows rejects oversize while old single-case readReference may return its canonical oversize row. This does not prove that exact substep was the first runtime throw; actual historical Raw/native cause remains unknown.
+
+Minimal fix ONLY new read_policy control: after ownedSYN truncate298888338, deep-compare readReference(root,'R1') to unknownReference('R1','oversize'); assert readActualReferences rejects; invoke real coordinator with that failing references operation and require rejected plus unknownHttpFrontier. Existing file/UTF8/IO/link/restored/cleanup controls preserved. Reviewed same control against existing reader/coordinator functions for comparable policy contradictions. No Reference algorithm/API, cap, guard, return, Core, ZIP or Bootstrap change. All other new17 controls and old22 assertions/private exact-once barriers/forty record/proof stay exact except necessary selftest literal/hash bindings.
+
+Selftest-only closed diagnostic adds HTTP_FRONTIER_FAILURE/1.stage with finite visited-test-stage enum missing,valid_http,utf8_json,io_fault,oversize,symlink,hardlink,restored,cleanup,unknown. Set BEFORE each action. Marker validates fixed HTTP ID, literal stage enum and exact marker/id/stage keys,<=2048B; no error/raw/path/stack/canary values. It records only the visited control substep, not Native/Raw causality or actual rejected legacy predicate. Failure never fabricates a full witness.
+
+Updated actual5+2 candidate stored INACTIVE/manual/noinputs/nopush/twofalse before one NEW7+2 KEYLESS path-filtered push/attempt1. Same exact seven program bodies across wrappers, P6 fixed nested Original PUBLIC code checkout only for Core controls, event-root/current materializer/program proof identity preserved. No environment/secret binding/private Original artifact13949168304/download/open/SDK/Native/MF/I0. Only tests, materializer tests hash, derived verifier hash bindings and wrapper labels change from0daca/f1c25f21. Reference34180/672b054312d8c23c38662719b5183e6e345a322e6db74c6f761719b9bfdf4e36 byte-exact, Core77002/d514b190...,ZIP13305/b36c40c0...,Bootstrap1370/2a04ef50..., pin helper/pair appendix/derived subsets exact. Self-hash binding remains nonrecursive as previously documented.
+
+Prepared string pins (not execution evidence):
+```json
+{
+  "tests": {
+    "bytes": 68946,
+    "sha256": "e534d4275873d0eb2dc27c9b66b7fa91d52f7f8c833ab8d39f09173e571ea050"
+  },
+  "materializer": {
+    "bytes": 21125,
+    "sha256": "b2e9beda4f17d45745df42029ab2c780c96f13ae69eee36f58ba12fb913818d7"
+  },
+  "fix1Verifier": {
+    "bytes": 41119,
+    "sha256": "16234197d426dd9745a2801067407691396891826faba459dd532bb8d964390e",
+    "blob": "65787b0fa85128ab0bc9d218eeac6d6e228474de"
+  },
+  "fix1Actual": {
+    "bytes": 241728,
+    "sha256": "25db3cbd46567b5d297235b74cd9e53d150d2ef930db3ebb3864ac5e8d5e5b01",
+    "blob": "8b31a4b0552f24a28e05caa98e06d72320f6352e"
+  },
+  "fix1Keyless": {
+    "bytes": 259375,
+    "sha256": "0cfc3d266ff5a3a98335a2e3dce7112e5f8d28892a1397db5d12063d201e1ce7",
+    "blob": "284331e70a60746fccec19870eb3659e50573fda"
+  }
+}
+```
+
+ONE new covering only. Current forty+old22+new18 and pair16/ZIP16/full smallSAFE proof must all actually complete before a qualification claim. After BOTH terminal ANY outcome restore exactF7f7a71/126209/manualsevenfalse plus APPEND/report/fullprefix/protected/main/0active readbacks and STOP. No automatic residual repair or second run; Task2 actual projection HELD. All five readiness flags and originalArtifactAccessed/custodyOpened/SDKImported/I0Created false. Root independent full Task1 review follows successful covering, separately from this self-review.
