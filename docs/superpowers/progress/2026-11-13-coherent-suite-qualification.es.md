@@ -54,3 +54,11 @@ Root owns Rootdocs and independent metadata/SAFE readback. Source implementation
 Ruling: builder's expectedPeers internal DTO is accepted exactly as recorded in SPEC — original reopened proof receipts already contain pure ID/digest and the five peer refs, while manifest SHA is independently verified — cost if wrong: direct binding control fails, no public schema or business oracle change. Source actor was told before mutation; actual Native remains held.
 
 Ruling: verifyRoute.valid is PublicResult|null, with exact existing two-field return shape — the final verifier needs the validated DTO for direct needs comparisons and a boolean would force an unrequested extra capture or refetch — cost if wrong: controls expose incorrect acceptance; public record remains unchanged and emitted once.
+
+## Independent Root observer preparation
+
+Root prepared in-memory metadata observers, without executing Source: closure12 synthetic checks, suite DTO32, controls DTO16, closed verifier record12, unique text-heredoc extraction2. They check current immutable identities, exact field/value schemas, negative mutations, nonpass/transport separation and preservation. The raw SAFE ZIP observer independently enforces CRC/ranges/EOF/fatal UTF8, compact JSON plus one LF, full manifest and byte/digest triple. These are observer tests only, not Source or Native acceptance.
+
+Chavo relay issue176 read once at08:02UTC:84comments, no ID newer than6839994085 and no AFW request; no message or duplicated monitor sent. Source/main preflight leases were0479/0c9, five branch active statuses0 before builder release.
+
+Source builder reports four bodies/control draft in RAM with qualified ZIP body hashes, original pipeline step splits still in progress; no run/mutation reported at08:12UTC. Actual Native suite remains held.
