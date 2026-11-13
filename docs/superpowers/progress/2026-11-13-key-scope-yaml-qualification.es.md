@@ -8,3 +8,19 @@ Ruling: choosepinnedASTstructuralrepairinsteadnewremoteapprovalregistrybecausene
 Ruling: parserbounds524288B/20000nodes/depth64; nonsecretpolicyfixedreviewablefromreviewedseed, notlearnedfrommutant. Costifwrong: acceptednormalSourcefailsclosed, noNativeauthority.
 Ruling: retain6/32/16existingIDs; extendactualassertions/positiveprovenance,wiresamefunctioncontractswithoutclaiminghookexecutedwhilejobskipped. Costifwrong: explicit10jobmetadata/Rootreviewrejectqualification.
 Ruling: remotebranchisolation/cloudnpmcionly,noLocalworktree/Sourceexecution/deps. Rootownsdocs; freshSourceimplementerONLYafterplanpreflightCLEARandRootpreparationrelease; Source/runNOTRELEASEDyethere.
+
+## Preflight scan — 2026-11-13, Root
+
+| Task pair / interface | Producer → consumer | Check and ruling |
+| --- | --- | --- |
+| Task1 → Task1, adapter / controls | Sync validator and lazy parser → current-positive then regression assertions | Same API and four-body contract. Assertions run actual function, positive first; loader failures cannot count as negative success. No conflict. |
+| Task1 → Task1, contracts / Native jobs | Mandatory no-key precheck → six direct needs dependencies | Actual contracts job skipped in KEYLESS, so only source wiring and shared-function execution are witnessed here. Spec expressly reserves actual hook execution for future Native. No conflict. |
+| Task1 → Root gate / one-use run | Inactive Source + complete policy / body hashes → Root activation decision | Preparation does not authorize run; original eight jobs remain false. Root must inspect ten-job source, not use postmortem two-job global no-secret gate. No conflict. |
+| Task1 → Task review / closure | One current attempt and restoration + report → independent spec/quality review | Temporary workflow must be included in immutable review package despite final net diff being report-only. Exact full prefix and original leaves retained. No conflict. |
+| Task1 internal | Files/tests specified → files and tests touched | Only temporary F7 and same report; four helper strings are hosted files, no new Source leaves. Six/32/16 IDs preserved; assertions extend existing key_scope case. No duplication or vacuous test mandated. |
+| Task1 internal, library / isolation | Existing lock parser → hosted caller after locked install | Lazy checkout resolver, no top-level external import, parser install only in hosted qualifier. PC public strings/metadata/hashes only. No conflict. |
+
+Ruling: plan contains one coherent task; pair rows above explicitly cover its internally shared interfaces and Root boundaries, rather than inventing a second implementation task — spec is binding — if a mismatch emerges implementation stops for Root adjudication before activation.
+Ruling: the brief is expanded to contain the full scoped requirements and exact values, rather than requiring the fresh implementer to read the whole plan — comply with SDD focused dispatch — if wrong the inactive gate catches omissions before any key/run.
+Ruling: existing remote feature/docs branches are the isolated workspace; no local sdd-workspace/worktree or scripts are created/executed — owner cloud-first and no local Source execution apply — no local cleanup is owed.
+Preflight outcome: CLEAR for INACTIVE PREPARATION ONLY. Root Source ref readback72c10833654aa7226d8376e95d767455e1c144b2, main0c9c475b3ebaa970fc11d628b40e50a90cceb727, all five active statuses zero. Fresh implementer must recheck lease/tree/prefix/rollback before writing. NO RUN or Native released.
