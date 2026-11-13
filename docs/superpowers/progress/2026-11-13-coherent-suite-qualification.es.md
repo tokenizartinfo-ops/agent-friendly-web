@@ -116,3 +116,11 @@ Sourceb8497734/tree1c0e1a87/F75eaf4f5e; run43414661211/1, exactoneusemessageAFW 
 Currentmetadata: contracts success; readonly original Native command success but Generic custody seal failure, no private artifact upload. Positive/reduction producers still running. This is an observed evidence-custody step failure with causeUNKNOWN, not proof of key orCloudflare defect. No private/native/contracts logs or private/pureZIP fetched; currentpure artifactMETADATA only. Root and soleexecutor explicitly retain noautomaticretry/noSourcefix/noCF/runtime authority. All5flagsfalse.
 
 Chavo relay read once11:13UTC:84comments/newest6839994085, no newAFWrequest; no message/monitor created. Next: allterminal→exactrestore/report→independentSAFEifpublished+metadata closure→freshTask2review, not another run.
+
+## Task2 bounded actual result — failure, exact F7 restored
+
+Run43414661211/1 completedfailure11:23:11UTC; Root fetched full attempt1jobsAPI total8, all8terminal. contracts success; readonly native+TAP step success thenGenericcustodyseal failure; positive_prepare/reduction_prepare nativecommand+seal+upload success thenownassignedmetadata/rawZIP3validation failure; positive_consume/reduction_consume_a/reduction_consume_b skipped; KEYLESSverify failure. No completeQ8+Native8qualification, noP1/Dpass inferred fromproducersuccess.
+
+Root strictly audited974Bclosedverifierrecord: unavailable/publication_unavailable/absent, noSAFEID/digest, upstreamnot_all_seven_success, acceptedfalse, currentSource/run/fourhashes/all5false. SixteenZIPcontrols passedseparately. Currentartifactlist contains exactlypure14031575810 +twoencryptedprivateproducerartifacts14032036855(27586034B)/14032480638(27469695B); no current suiteSAFE. METADATA ONLY; no private/pure ZIPs or producerlogs fetched.
+
+Executor restorationdb7603193ee72d0752203078fbfadaeb38fbbf15 independently checked byRoot: soleparentb8497734 and exactpreTask2treec66911bd. Reportappend/fullfinaltreechecks pendingexecutor. No newactualrun/codefix released. Preciseprivatefailures areUNKNOWN from allowedstepmetadata; keypreflightsuccess/nativecommandpass doesnotidentifyseal/metadatafault. Nativeprepares didnotfailbusinesscommands; downstreamskips nottests.
