@@ -120,3 +120,11 @@ Esta autorización de ejecución ya está consumida: al retomar, conciliar este 
   "humanStepRequired": false
 }
 ```
+
+## R1 original completo PASSED; Source restaurado; revisión Task2 pendiente
+
+La única ejecución `43379486549/1` terminó con los tres jobs aprobados. El recibo actual `14016011858` acredita R1 aprobado, comando aprobado, contratos aprobados y custodia reabierta. Root comprobó directamente el ZIP pequeño, esquema, manifiesto, cuatro hashes, contexto y digest. De los archivos privados solo consultó metadatos; el cifrado y la reapertura se hicieron en el runner.
+
+Source quedó restaurado y detenido en `78fcd591`, con F7 exacto, los 3194 archivos previos intactos, informe completo de 49232 caracteres, main intacta y cero ejecuciones activas. El paquete `native-r1-oracle-task2-package.md` conserva el diff de activación, el informe y la evidencia saneada para un revisor nuevo.
+
+Este pase corresponde únicamente a R1 sintético actual. Las cinco banderas continúan en false; Native16 coherente, entrega real, retirada y PC-off siguen pendientes. Todavía deben cerrarse la revisión de Task2 y la revisión completa de este plan antes de elegir el siguiente bloque.
