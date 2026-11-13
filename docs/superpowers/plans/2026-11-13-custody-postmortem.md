@@ -7,7 +7,7 @@
 **Tech stack:** Ubuntu24.04, Node22.23.4 builtins, GitHubGitDB/Actions, no npm/SDK/World/MF/AES/masterkey.
 **Spec:** docs/superpowers/specs/2026-11-13-custody-postmortem-design.md, scopedbuilderCLEARfe8f56e6; exact23controlIDs/closedDTO/states inSPEC.
 
-STATUS HELD: currentcoherentfinalfixscopedreviewpending. Rootmustrefreshsourcelease andappendprefixinSPEC/brief thenrelease. Thesevaluesareprepared, notauthorization: expectedclosedSource08f5d5f203efef09999ea2f6f0e899637af0bdf4/treed86acb49d2026d2207eeb35ff97f728dc014e7d9/reporta74aaaee7ac5ab5e3c42cc9d36e0c8395a17b1c6/177489chars/177547B/SHA0f0de84240db9b600cc3e75efcbfed5b2cb1b24dba4e9d693bdf295fc4d5344f.
+STATUS PREPARATION ONLY pendingRootrelease: coherentfinalreviewclosedwithFF-I2OPEN/securityhold. IndependentZERO-keypostmortemdoesnotdependonthatchecker. RootmustrefreshSource/prefixandreleasepreparedSourcebrief; actualarchivepushseparatelyHELDuntilstrictcanonicaltwo-jobzero-secretRootgate. Thesevaluesareprepared, notauthorization: expectedclosedSource08f5d5f203efef09999ea2f6f0e899637af0bdf4/treed86acb49d2026d2207eeb35ff97f728dc014e7d9/reporta74aaaee7ac5ab5e3c42cc9d36e0c8395a17b1c6/177489chars/177547B/SHA0f0de84240db9b600cc3e75efcbfed5b2cb1b24dba4e9d693bdf295fc4d5344f.
 
 ## Global constraints
 
@@ -33,6 +33,7 @@ Oneactualdiagnosticrun/attempt1/twojobscustody_inspect7min+verify2min/uniqueSour
 - [ ] Write7diagnostic+14unchangedZIP+2actualreceivercontrols FIRST usingactualSPECfunctions/seams/inertfixtures; no inventedREDexecution or extraqualificationrun.
 - [ ] ImplementinspectTarget(target,io=fixedTargetIO), closedstate/numberguards, validatePostmortemPair(files,expected), verifyPostmortemRoute(needs,expected,io=fixedReceiverIO). Bodies/specstrict,noCLI/envendpointoverrides. Fixedtargetorder/metadataextrasbeforearchive/onefetchpertarget/rawcaps/SHAtriple/originalZIP+capfunctions.
 - [ ] Sourcebootstrap5hashes/currentObserverseparatehistoricalbinding, nohelperCLIautorun/cyclicawait; inlineorchestrationboundbywholeF7blob. Canonical2JSON/fullmanifest/currentuploadonly.
+- [ ] SaveINACTIVEtwo-jobcandidateandSTOPFORROOTGATE: entirecanonicalYAMLoutside literalrunblocks/ALLcompleteknownnonsecretGitHubexpressions/noAFWenv/key/secretscontext; nofirst-close-regexclaim. Roothash/provenance/staticreleasebeforeactivation.
 - [ ] OneguardedSourcepush7+2run. ControlsfirstactualbotharchivesreadonlyifcontrolsPASS; fixedsubjecttargets/noAES; afterSource/bootstrapinvariantfaultnopurportedpair. ProducercollectionsuccessmustnotimplyinspectionCompleteorNativeacceptance.
 - [ ] Freeze+observebounded; collectONLYcurrentSMALLSAFE/KEYLESSclosedlogs+artifactmetadata; runcomplete+bothterminal, restoreexactF7 andappendSAMEreportprefix; full3196/prior3195/62WF/main/fiveactive0/currentrun1/closedcommit0runs; STOP.
 - [ ] RootstrictcurrentSAFE+actual23controls+typed2targetobservations/digests/context+exactclosure; freshtaskspec+qualityreview, thenbroadunitreview perSDD. NoSourcepromotion orNativefollow-onbythisplan.

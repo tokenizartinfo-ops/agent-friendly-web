@@ -1,0 +1,16 @@
+# Final wave closed — two findings addressed, security-control residual retained
+
+Originalwhole-reviewer /root/coherent_suite_whole_review performedtheONEauthorizedscopedre-review atpackage7291b2c3, no execution/mutation. FF-I1ADDRESSED (wholejobreceipt4096/512MiB,successmin1/partial0,604files142MiBfixture,boundarytests,Worldpercopyunchanged); FF-M1ADDRESSED (actualcapturefull7/1+entryshape-beforelookup, closedinvalid/noIO vsvalidabsence/404, partialknownrefs).
+
+FF-I2NOTADDRESSED/IMPORTANT. Newcheckerbinds26canonicalslotsandcoversliteralaliases/outer/run/case/fixtures, but expressionendregex takesfirstclosingbracepair instead of quote-awaretermination. RawYAMLinspectionalsoignoresdecodedescapedcharactersindoublequotedscalars. Thecurrentcandidatehas26canonicalactualreferences/noevidenceofexposure; thedefectisclaimingcoverageforunreviewedalternateSourceforms. Candidateb564F7L148/L202/L205, controlsL592. No otherCritical/Importantregressionfoundin10fixhunks. Keyless43425740095/1/10terminal8skip2success/32subcases16ZIP+strictSAFE1392B/Source08fclosureaccepted. Actual43414661211stillFAILED/all5false.
+
+Primaryreferences independentlyreadbyRoot13Nov12:49UTC: [GitHubtemplate-reader](https://github.com/actions/languageservices/blob/main/workflow-parser/src/templates/template-reader.ts) keepsstringstatebeforeclosinganexpression; [YAML1.2.2section5.7](https://yaml.org/spec/1.2.2/#57-escaped-characters) decodesescapesindoublequotedscalars. These supportthecontrolgap, notanobservedkeycompromise.
+
+## Root residual adjudication at FINALcap
+
+ONEwave+ONErereviewcomplete. NOsecondSourcefixwaveinthisunit. CurrentSource08fclosed, mainunchanged, noactivejobs. Preservebranches/candidates/reports; no integration/promotion. PositiveGoalFAILED/unqualified, notdeclaredcomplete. UniversalkeyscopeguaranteeNOTqualified.
+
+Ruling: retainFF-I2asREALload-bearingOPENsecurityholdforanyfutureactualkey-bearing/Nativeactivation; no waiver/nosilentpark/noactualkeyrotationorcompromiseclaim — staticreviewgapconfirmedandcapreached — costifwrong: furtherkeylessdesign/proofworkanddelay, butnoadditionalmasterkeyuseorNativeexecution.
+Ruling: independentKEYLESSretained-envelopepostmortem doesnotdependonFF-I2scanner: itusesNOAFWenvironment/NOmasterkey/NOsecretscontextatall, onlyoldadapterreaderswithSubjectbindingandGITHUB_TOKENtransport. Permitpreparationunderanewstrictcurrent-templatezero-secretgatebeforeSourcepush/run; currentI2remainsopenandnoactualSYNretryreleased — obtainsnumbersfromexistingcipherwithoutkey — costifwrong: Rootstaticpreflightmustrejectcandidateandnoarchivejobruns.
+
+Beforeanyfuturekey-bearingSYN, requireaseparatelydesignedindependentsemantic-or-canonicalSourceattestationwithquote/YAMLcasesandfreshreview; do notpretend32controlspasscertifiesuniversality. Thisisfutureblockedwork, notasecondwaveauthorizedhere. Currentunitpreservedevidenceonly; nomainmenu/mergewhilepositiveGoalfailed/securityholdopen.

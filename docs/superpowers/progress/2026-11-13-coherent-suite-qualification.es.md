@@ -170,3 +170,10 @@ Root strictcurrentcontrolsSAFE14037046667/1392B/SHA759148353c4fed51be11db85163af
 Sourcefinal08f5d5f2/treed86acb49/reporta74aaaee177489chars/177547B;132654prefixexact. Restore55b16c84/directparent4f382/exactpreWavetree31aa; independent3196/prior3195/62WF/F7/main0c9/fiveactive0/closedcommit0runs PASS. FullreportSHA2560f0de84240db9b600cc3e75efcbfed5b2cb1b24dba4e9d693bdf295fc4d5344f/Gitbloba74aa independentlyRAMverified; append44835chars/full317lines, all68boundedrecordsverbatiminreport. No SourcewriteractiveafterSTOP.
 
 ONEscopedfinalre-review originalwhole-reviewer receives docs/superpowers/reviews/2026-11-13-coherent-suite-final-fix-review-package.md withcomplete10hunkhelperfixdiff+317linefullreportappenddiff/fourcommitlist/currentSAFE+32cases/closure. Finalwave1of1:3findingsawaitdisposition,0parked; no secondwave/extraNative. NextpostmortemtechnicalCLEAR butSourceHELDuntilre-review+freshBASE/briefrelease; Rootalonechoosesroutineinterfaces underexistingownerpermission.
+
+## FINALcap disposition — FF-I1/M1 addressed, FF-I2 open/securityhold
+
+ONEscopedrereview completed: FF-I1ADDRESSED,FF-M1ADDRESSED,FF-I2NOTADDRESSEDImportant (expressionregexnotquote-aware +YAMLescapedscalars). NootherCritical/Importantfixregression. Fullacta docs/superpowers/reviews/2026-11-13-coherent-suite-final-fix-disposition.md. RootindependentlyreadprimaryGitHub/YAMLsupport, noactualexposureinferred. CurrentSource08fexactclosed; all5false; actualQ8+Native8FAILED/unqualified.
+
+Ruling: capONEwave/ONErereviewendsSourcefixingHERE; keepFF-I2REALload-bearingOPEN andholdANYactualmasterkey/Nativeactivationpendingnewindependentproof; no waiver or silentparking — avoidsfalseglobalkeyscopeguarantee — costifwrong: extraindependentkeylessproofwork/delay, noadditionalrealkeyuse.
+Ruling: permitONLYindependentretained-envelopepostmortempreparationunderSTRICTZERO-keycurrenttemplategate; itdoesnotuseI2checkerorAFWenvironment/key/secretscontext, soFF-I2isnotitstechnicaldependency — readexistingcipheronlyonrunner/noAES/plaintext — costifwrong: staticcandidatepreflightrejectsbeforeanyarchivejob. Allruntime/main/Nativeholdsremain.
