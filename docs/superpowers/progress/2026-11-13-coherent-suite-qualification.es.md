@@ -156,3 +156,11 @@ Finalfixwave1of1:0addressed/3open, SourceBASEe88ce70b/report132654prefix, origin
 Ruling: FF-M1 fullfixed7/1 needsentrydata-shape isvalidatedbeforelookup via sharedcaptureNeeds; allentries have{result,outputs}, outputs allowempty/partialstrings. MalformedSUITEupstreamunverified; malformedCONTROLSnot_applicable preserved (the7-jobgraphdoesnotapply) — clarifieskind-specificexistingclosedsemanticswithoutenumchange — costifwrong: meaningfulentry/routecontrols orscopedreviewreject, noartifactIOforbadcontext.
 
 FreshRootpreflight11:58:10UTC Sourcee88/main0c9/fiveactive0; soleSourcefinalfixactorcoherent_suite_source_builder re-readauthoritative132654reportprefixinstead ofstale715a. Its technicalclarificationresolvedbeforeedits. CurrentpostmortempreflightscopedCLEAR atfe8f56e6, stillexecutionHELDuntilfinalfixreview+freshBASE/prefix.
+
+## ONE final-wave covering KEYLESS passed — Root independent audit complete
+
+Newinactiveb5646538bb9f2d119e8943896990ac657d7bd518/tree5ed68e1b/F7be579ea2,317620B/SHA d1e028a2c4d82eef31cd95fd031dcb7dc98ed89893401c86a2dd80dd3f33ba3e. Root fourheredocbodyhashes independentlyverified: adapter45798/70e2a1e7...,controls51492/25d28b99...,verifier15099/94135538...,SAFEZIP13305/b36unchanged. WholepipelineOUTSIDE4bodies byteexactold23bda; qualifiedZIP3exact3380/4ff44. Completecandidatefixdiff10hunks173added24deleted roundtrippedexact.
+
+SolecoveringKEYLESSactive4f382419ad483ae3cc214e1a49d1d09d4b5db947/tree45f38baf/F71e68d7aa,330335chars, fourbodiesbyteexactnewinactive. Run43425740095/attempt1completedSUCCESS/exact10terminal8skip2success. Original8Native/suitejobsSKIPPED; actualTask2 remainsFAILED/unqualified.
+
+Root strictcurrentcontrolsSAFE14037046667/1392B/SHA759148353c4fed51be11db85163afe4301b864301de290e90c9ceb96dc96385b,expiry20Nov12:30:54Z:exact2JSON/CRC/ranges/EOF/fatalUTF8/canonical/fullmanifest/digesttriple/currentSource/pins/new4hashesPASS. Result1666B/333af0ec...,manifest265B/44432479.... Sixfamilies/32closedsubcases/64start-pass/0failed-open;16ZIP;110shell/63Nodesyntaxinspectiononly. KEYLESSrecordverified/none/strict_current_safe_pair/acceptedtrue. NoNative/SDK/MF/World/realkey/CF/privatebytes. Sourceactorrestoration/reportappendpending; ONEscopedrereview originalwhole-reviewerafterRootfinalclosure. No extraqualifieroractualNative release.
