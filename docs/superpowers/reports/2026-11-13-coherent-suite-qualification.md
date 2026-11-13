@@ -2605,3 +2605,114 @@ These are REST step conclusions. Where Source sets continue-on-error (the native
 | 9 | Post Run actions/setup-node@v4 | completed/skipped | 2026-11-13T18:09:12Z | 2026-11-13T18:09:12Z |
 | 10 | Post Run actions/checkout@v4 | completed/success | 2026-11-13T18:09:12Z | 2026-11-13T18:09:12Z |
 | 11 | Complete job | completed/success | 2026-11-13T18:09:12Z | 2026-11-13T18:09:12Z |
+
+
+## 2026-11-13 — Current retained-envelope zero-key diagnostic, consumed and closed
+
+### Result and limits
+
+One current GitHub-hosted diagnostic completed successfully: run [43488583034](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43488583034), attempt 1, push event, actual Node 22.23.4. The 25 logical controls passed before the two assigned retained-envelope reads; custody_inspect job 132103443970 and verify job 132103541916 both completed success. The independently bound current receiver reported verified/none and inspectionComplete=true.
+
+This qualifies present compatibility of the two CURRENT retained encrypted envelopes with the frozen adapter seams. It does not establish the historical cause, authenticate the outer receipt, repair the original composite write, explain the original immediate HTTP response, make positive Native pass, reconstruct the absent readonly seal, or establish business/PC-off readiness. Those original causes remain UNRESOLVED. No decryption, AEAD verification, Native cycle, SDK/World execution or product implementation fix occurred. No separate RED/GREEN chronology is claimed: the frozen adaptation was reviewed as text and its controls then executed once in this released cloud run.
+
+### Authority, immutable context and gates
+
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web, repository ID 1347578006; ENVIRONMENT GitHub-hosted finite zero-key diagnostic; ORIGIN https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web; RESOURCE_TYPE feature F7 Actions; RESOURCE_ID refs/heads/feat/finite-native-cleanup-20261101 and .github/workflows/afw-finite-budget-qualification.yml. Allowed effects were the reviewed one-use Source CAS, bounded diagnostic read/publication, exact restoration and this same-report append. No Cloudflare/runtime, main, PR, key/permission, OAuth/OTP, mail, Max, chat or automation change was authorized or performed.
+
+The Root brief is docs/superpowers/briefs/2026-11-13-current-retained-envelope-diagnostic-task1.md at Rootdocs a0a9b386d31dae6e7408cb47e8f186c80c078d7b. Fresh BASE was a15746888a3f3b76dc5232d865bb54aa11e9bfc3, tree e24f2a269faa177f34f1494ea833e9091d5e202c, 3196 leaves/62 workflows. The complete preappend SAME report was blob 63144433a391fb73222e7b340a9e86e263960829, 296132 characters/296227 UTF-8 bytes, SHA256 8df274981fffaa8d295a3068687af7e83456afd3c24172443b392f95af245cc3; every character is preserved as this report's prefix.
+
+Root's inactive gate accepted 3ff634bdd4c121b8952a4520d49e38f4f517417f (tree 48b8864c20e8e733e78f1ecf5766a28c4e3ac599; F7 3c729ff955cb3c781de04e2b6c6794c02d549a53; 153007 bytes/SHA256 31f7f1e7c796985706b139f0195df7dfb4c2ea13a60f38b1884d50512484de36), with input-free workflow_dispatch and both guards literal false. Its evidence ledger is Rootdocs 2e6345cbed488569007413c325d5d232f89938ac. One minor preparation header correction removed the inherited push trigger before that gate; no actual attempt was executed or repeated during preparation.
+
+Root's separate active gate accepted commit beb1f6c83954f47de4cacf9add62c6a8a17a75e3, parent 3ff634bdd4c121b8952a4520d49e38f4f517417f, exact message AFW CURRENT ENVELOPE DIAGNOSTIC 20261113-R1, tree 711673f8abf4c358caa78735a4c1dc2bb79aada6, F7 bd9a89bc6be2bcdbe95ebc5eafa2f7c9199af914, 154093 bytes/SHA256 a1fe1ba62b7cfaf9773e64c3ddb4635a3046fba5e60dd0498bdf408480b83704. Overlay scope was exactly the fixed feature-branch/self-F7 push trigger and two exact-message/repository-ID/ref/workflow-ref/attempt-1 guards, with always() prefixed for verify. Five bodies, both drivers, all steps/controls/caps and read-only token permissions remained byte-exact.
+
+Rootdocs 755b8b36c074d5c5fc161b194a086de5558a29ce released ONE non-force CAS from a15746888a3f3b76dc5232d865bb54aa11e9bfc3 to EXACT beb1f6c83954f47de4cacf9add62c6a8a17a75e3. It succeeded once and produced exactly run 43488583034/attempt 1. No dispatch, rerun, retry or additional Native attempt was performed.
+
+Actual Observer context: repository tokenizartinfo-ops/agent-friendly-web; repositoryId "1347578006"; ref refs/heads/feat/finite-native-cleanup-20261101; source beb1f6c83954f47de4cacf9add62c6a8a17a75e3; tree 711673f8abf4c358caa78735a4c1dc2bb79aada6; workflowBlob bd9a89bc6be2bcdbe95ebc5eafa2f7c9199af914; run "43488583034"; attempt 1; node 22.23.4.
+
+Fixed retained Subject context: same repository/repositoryId/ref/node, source 9927aea624c9269e293e644934423e88aa88f109; tree a976da0cb21063f9c6fd26e2d447c0f0f5c2289d; workflowBlob b6a000da8edbd5d581f3a5e59880a41ef6fd2316; run "43477409062"; attempt 1. Adapter binding belongs to this Subject; actual Observer was separately verified before imports. Historical environment values were never substituted for actual Observer values.
+
+### Frozen provenance, canonical zero-key scope and bounds
+
+| Program | Bytes | SHA256 |
+| --- | ---: | --- |
+| adapter | 62999 | d76ca29a35725fcee1b8858ebfafce003679a6b62362f76a34fe288c5a7a24d9 |
+| inspector | 10989 | 3ca240c3edd3e7da0714e46a428c1d7db9c15eb36c685223e9bf925b04715c71 |
+| controls | 26943 | fb79ad953d4bfc1d918ff967daba189a95d913830a4736c0be80d21546198984 |
+| safeZip | 13305 | b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d |
+| receiver | 5957 | 0ee3ecaf8a55b99023ed368e200065b4262ec8e0179b5b3846a6daf061aab06b |
+
+The current adapter and SAFE ZIP were reused byte-exact; adapter's ZIP3 block is 3380 bytes/SHA256 4ff44bd3adda54eb0816fab275e4b13078005d1bd1a4626cfbf67d31e8bf7af8. Producer driver is 9528 bytes/SHA256 34a23b42eb2adaf7c75cfae27379e87144311133cfd7ad2bea547c401c29e5d4; receiver driver 9127 bytes/SHA256 377a9d75d6e69305a5bafb20ee4a3b3410b05e609ad88afc5cbab42b4e43a437. The five protected product/test/lock source pins remained unchanged.
+
+Root independently checked the entire workflow and finite callgraph, complete-tree F7-only delta, exact literal shape and all helper hashes. This independent ZERO-AFW-KEY two-job role is not a client or qualification of the separate 26-key 8/10-job policy. There were zero actual secrets-expression references and zero AFW key environment bindings. Key absence was required before programs and target I/O. No key-scope/YAML-loader invocation, npm/dependency installation or substituted crypto/business oracle was used.
+
+The preserved interfaces remained canonical/parseCanonical/validateContext/validateExpected/inspectTarget/validateTargetRecord/validateControls/reachedDecision/validateResult/makeResult/makeManifest; normalizeControlFailure/invokeControlGroup/runDiagnosticControls/runReceiverControls/runAllControls; safeName/validatePostmortemPair/unavailableMarker/orchestratePostmortemReceiver/verifyPostmortemRoute. Bootstrap failure remains typed, bounded and redacted, preserving only already-verified context; no legacy SAFE fallback exists.
+
+Only two fixed assigned encrypted archives could be read, sequentially on the GitHub runner. Metadata HTTP bound was 10 seconds; whole-download bound 30 seconds including headers; generic raw cap 136314880 bytes; expanded encrypted envelope cap 128 MiB plus two JSON members of at most 4096 bytes each, total 134225920 bytes. Outer receipt counts were finite integers 0..4096 and 0..536870912. Canonical outer receipt JSON has no LF; result and manifest use compact canonical UTF-8 with LF. SAFE raw cap remained 131072 bytes and combined JSON cap 65536 bytes. No cap or clock was raised.
+
+The exact stage machine remained metadata_http -> metadata_binding -> raw_download -> raw_size -> raw_digest -> zip_decode -> receipt_json -> receipt_counts -> receipt_caps -> complete, with accepted/rejected/unavailable outcomes and truthful nullability. Actual adapter kind predicate determines receiptCapAccepted; the old 512-file/128-MiB DTO reconstruction was removed. Producer-failure 0/0 acceptance, reduction 0/0 receipt_caps rejection with retained zeros, and oversized receipt_counts rejection with null counts were exercised in controls. Invalid descriptor kind/ID/name rejected before any metadata or archive I/O; mismatched actual metadata ID/source/run/branch/context rejected after metadata with zero archive calls.
+
+### Actual current target outcomes
+
+Metadata records matched exact IDs/names/run/source/branch/repository IDs, known bytes/digests/expiry and unexpired status before archive reading. Current SAFE public outer facts independently checked by Root:
+
+| Job | Actual kind | Assigned retained artifact | Expected raw bytes | Stage / outcome | Outer fileCount | Outer totalBytes | receiptCapAccepted |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- |
+| positive_prepare | producer-failure | 14063997106 | 5114454 | complete / accepted | 51 | 115785239 | true |
+| reduction_prepare | reduction-checkpoint | 14065115503 | 27453498 | complete / accepted | 96 | 345073823 | true |
+
+Retained raw digests: positive_prepare 4bae6038a2eb3df7e47c653eaa9f265ba43464be0c2a8cd1ab11dfed4af98618, expiry 2026-11-20T17:57:21Z; reduction_prepare 6813feef63d01c1101984c80e8713a568ce30483869671b8c87f4f717c0db6d7, expiry 2026-11-20T18:09:01Z. Each name is the exact finite-budget-JOB-9927aea624c9269e293e644934423e88aa88f109-43477409062 literal.
+
+metadataVerified/rawVerified/zipVerified were true for both targets. Both reached the actual receipt-cap decision and inspectionComplete=true. Outer counts remain UNAUTHENTICATED and do not turn producer-failure into Native success.
+
+### Executed controls and independent current SAFE readback
+
+The producer completed all 25 fixed logical controls before actual target I/O: diagnostic 9/9, SAFE ZIP 14/14, receiver 2/2; 0 failed and 0 not_executed. The independent verify job also ran its two receiver-seam controls before reading direct current outputs. Fixed producer inventory:
+
+```text
+diagnostic: 9/9 passed, 0 failed
+- postmortem_current_adapter_binding: passed
+- postmortem_subject_observer_separation: passed
+- postmortem_current_receipt_cap_boundaries: passed
+- postmortem_stage_sequence: passed
+- postmortem_metadata_failure_blocks_archive: passed
+- postmortem_target_null_and_cap_coherence: passed
+- postmortem_error_redaction: passed
+- postmortem_producer_failure_zero_receipt_accepted: passed
+- postmortem_reduction_zero_receipt_rejected: passed
+
+zip: 14/14 passed, 0 failed
+- zip_valid_store_crc_vector: passed
+- zip_valid_deflate: passed
+- zip_signed_unsigned_descriptors: passed
+- zip_wrong_size: passed
+- zip_wrong_upload_sha: passed
+- zip_wrong_metadata_sha: passed
+- zip_extra_entry: passed
+- zip_duplicate_entry: passed
+- zip_traversal_entry: passed
+- zip_symlink: passed
+- zip_bad_crc: passed
+- zip_noncontiguous_ranges: passed
+- zip_declared_and_inflate_caps: passed
+- download_stream_redirect_auth_bounds: passed
+
+receiver: 2/2 passed, 0 failed
+- postmortem_pair_schema_manifest_binding: passed
+- postmortem_route_direct_output_binding: passed
+```
+
+The literal current producer assignment and independently received artifact were afw-current-custody-postmortem-safe-43488583034-1, ID 14068676052, 4276 raw ZIP bytes, SHA256 c32f8c98e177eda6ababba9a14e2f6ab1772cd77a187613dbeec09961500d5c4. API metadata bound the current source/run/repository IDs and expiry 2026-11-20T19:03:52Z. Upload digest, metadata digest and received raw ZIP SHA256 matched.
+
+The pair contains exactly result.json (3762 bytes/SHA256 1c7c52516223e8756bcd20dbb39881189510403581d8519c757b8e8e5fe5ed3e) and manifest.json (260 bytes/SHA256 5272c8fe8cfb438f64a2f77d235dae4e6f1bec6c03b6f490a896517ce6b8a05e), combined 4022 bytes. Purposes are afw.custody-postmortem.safe.v2 and afw.custody-postmortem-manifest.safe.v2. Root independently downloaded ONLY this assigned SmallSAFE and verified the two-member ZIP/CRC/ranges/EOF, canonical JSON, exact manifest, current Observer and fixed Subject, exact five hashes, 13-field Target/14-field Result/nine-key contexts, all 25 controls, and current receiver readback. No Root/executor/MCP/PC private archive, member, producer/contracts log or key was fetched.
+
+Seven flags remain FALSE: historicalCauseProven, receiptAuthenticated, operationalReadiness, completePackage, PCoff, globalNativeDrainVerified, sdkNamespaceEmptyVerified.
+
+### Closure, proportional validation and remaining concerns
+
+Source stayed frozen until run completed and BOTH jobs were terminal success. Exact restoration commit edfa03ac6e90e15badecd5ec59bab1a66a6cf0e6, parent beb1f6c83954f47de4cacf9add62c6a8a17a75e3, points to EXACT fresh preunit tree e24f2a269faa177f34f1494ea833e9091d5e202c. Its non-force Source CAS succeeded; independent commit/ref readbacks matched before this append. Original F7 f7a71f1a0fa4f5ddf069ff411f008a098455e5cc was fully read back byte-equal: 126209 bytes/SHA256 1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a.
+
+A complete recursive comparison of the restored tree excluding this SAME report against original 3195-leaf tree 8942513f440fd25b188c196090e790a561bdb688 found ZERO leaf differences. Full original 3195 files, all 62 workflows and five protected source pins remained intact. The complete report prefix was checked unchanged before append. Main remained 0c9c475b3ebaa970fc11d628b40e50a90cceb727. The consumed diagnostic head had exactly one run/attempt 1; restored head had zero runs; in_progress/queued/waiting/requested/pending lists were all zero in closure readback. Final append is report-only on the restored baseline and requires final complete-tree/ref/prefix/run readbacks.
+
+Validation was proportional: public Source and hashes in RAM, GitHub GitDB mutations, this single bounded cloud control/inspection/receiver run, Root's single assigned SmallSAFE validation and exact closure comparisons. No local Source files, clones, dependencies, builds, Source imports/execution or tests were used; no private content or source bodies are copied into this report.
+
+Executor self-review found no unresolved implementation concern in the finite diagnostic scope. Root's independent inactive/active gates passed; combined task/final review remains a separate closure step and is not claimed by this paragraph. Current retained compatibility passes; original immediate HTTP/composite write, positive Native failure and missing readonly seal causes remain unresolved. No autofix, rerun, additional Native cycle, traffic, repair, subscription/useful delivery/review/withdrawal/autoclose/PC-off acceptance or Max action is licensed by this result.
