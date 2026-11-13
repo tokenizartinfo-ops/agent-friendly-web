@@ -1,7 +1,11 @@
 name: AFW custody postmortem ZERO key
 run-name: AFW custody postmortem INACTIVE ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
+    paths:
+      - .github/workflows/afw-finite-budget-qualification.yml
 permissions:
   contents: read
   actions: read
@@ -11,7 +15,7 @@ concurrency:
 # PREPARATION ONLY. Both jobs are literally false. Root gate is required before any run.
 jobs:
   custody_inspect:
-    if: ${{ false }}
+    if: ${{ github.event_name == 'push' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.repository_id == '1347578006' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event.head_commit.message == 'AFW custody postmortem ZERO KEY one use 20261113-0e0c434146ad12ca-01' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     env:
@@ -771,7 +775,7 @@ jobs:
           compression-level: 0
           include-hidden-files: false
   verify:
-    if: ${{ false }}
+    if: ${{ always() && github.event_name == 'push' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.repository_id == '1347578006' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event.head_commit.message == 'AFW custody postmortem ZERO KEY one use 20261113-0e0c434146ad12ca-01' }}
     needs: custody_inspect
     runs-on: ubuntu-24.04
     timeout-minutes: 2
