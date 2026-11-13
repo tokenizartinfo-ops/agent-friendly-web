@@ -19,3 +19,9 @@ Task1PREPARATIONRELEASED atSource08f, singlefreshSourceimplementer; runHELD. Nod
 Root preparation release92f26ec8: fresh Sourceactor /root/custody_postmortem_builder, standardSolxhigh, solewriter. Initialclosedlease08f/main0c9/fiveactive0 and originaladapter43451/a1e7+SAFEZIP13305/b36+rollback/prefixbytes verified. Controls writtenfirst, three newfunction-onlymodules now drafted. No Sourceexecution/actualartifactmetadata/bytes/logs access orrun. InactiveSourcewillbe workflow_dispatch/noinputs/bothfalse, followedbySTOP_FOR_ROOT_ZERO_KEY_GATE. Futureactivepatchseparateandfivebodiesexact.
 
 Ruling: nullidentityONLY observer_unavailable closedMarker avoids fabricatedSource/hashafterbootstrapfailure; Result identities alwaysvalid — sourceproofnotavailablecannotbeclaimed — costifwrong: Root/receiverexacttypednegativefixturesrejectbeforeacceptance.
+
+## Inactive preparation STOP and Root finite ZERO-key gate
+
+Sourceactorpreparedcandidate0e0c4341/F75ad4e38/114557B, fivebodies43/10/13/13/5KBexactexpectedhashes. Rootreviewedallnewcode/drivers+14COMPLETEknownnonsecretexpressions/wholecanonicaloutside-literal-runYAML, noAFWenv/secretscontext; typedpair/marker observersprepared independently. Source5bodyhashesverified. Freshref/main/active0/3196/tree/reportprefix/candidate0runs allpassed. Fullgateacta docs/superpowers/reviews/2026-11-13-custody-postmortem-zero-key-gate.md.
+
+Ruling: approveONLYunattachedactiveoverlaypreparation, notrefpush; Rootmustreviewcompleteguard/triggerpatchandfivebodiesagainbeforeONErun — preventsunreviewedactiveSourcevariantunderI2hold — costifwrong: noautomaticjobstart, Rootrejectsvariant. OriginalcoherentFF-I2remainsOPEN/key-bearingNativeheld.
