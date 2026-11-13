@@ -7989,3 +7989,642 @@ The following receipt records observations already made, before this final repor
 All actual bounded artifact-read phase rows, the complete 29-scenario matrix, covering commands, actual command outputs, artifact metadata, independent verdict, and the strictly validated two-file SAFE receipt are preserved immediately above. Every real read in this successful qualification completed on attempt 1; this does not establish the cause of the previous 404, whose hop and cause remain unknown. The model remains model-only, with no Native execution or actual graph-equality claim. The immutable MODEL and SAFE artifacts retain seven-day expiry; only SAFE was downloaded by the implementer. No raw MODEL, cipher, source bundle, key, URL, token, header, or private response body was downloaded or logged by the implementer.
 
 Implementer FIX3 work is complete and stopped with both new workflows held. Independent scoped N9 review and Root qualification remain pending, followed by any separately authorized future Native release. The successful keyless run is not that authorization.
+
+
+### Native post-ACK R2 Task2 — single actual diagnostic and closure
+
+Exactly one authorized owned-SYN Native attempt completed on GitHub, and both jobs are terminal SUCCESS. The original whole R2 result is `passed`; the closed typed certificate is `not_observed`, quality `qualified`, with verified current provenance and authenticated same-ID custody/reopen. No qualifying post-ACK rejection was captured in this run; operation/boundary remain `unknown`, selection `none`. This does not establish the cause of any previous failure, universal reliability, Native16, PC-off, or production readiness.
+
+Release authority: Root's exact Task2 brief at `0d9b03f6000014767256ba85a0b3f690ba9d86aa` (`docs/superpowers/briefs/2026-11-12-native-post-ack-r2-task2-one-native.md`), following independent Task1 CLEAN. Sole Source executor; no implementation, repair, new helper, reviewer/subagent, PR, merge or main mutation. The isolated cloud Git Database workspace was used; no local Source files, clone, dependency installation or Source execution. The complete 650103-character/651413-UTF8-byte report prefix is preserved.
+
+Before activation, full ref/commit/tree and seven complete bodies were read back against the reviewed hashes. All 3192 current protected leaves and the 3188 original protected leaves were exact. Current 62-workflow inventory was reconciled against unchanged blob identities and live push-event prefixes: only this NativeWF can trigger for the changed workflow path on this Source branch. The candidate changes only its Source-branch/path push event, run label and two leading false prefixes; reversing those substitutions reproduces the full held body byte-for-byte. One expected-head CAS push created run `43343373924/1`; there was no rerun, recovery, second allocation, case change or deadline alteration.
+
+Fixed commands actually executed by the frozen workflow, with SUCCESS steps recorded below: `npm ci --ignore-scripts --no-audit --no-fund`; exact Node `v22.23.4`/Source/lock/F7/baseline pins and `node --check` for World, helper and test; current-identity `preflightPostAckDiagnostic()`; `node test/fixtures/finite-post-ack-diagnostic.mjs read-artifact` plus fixed Python ZIP/CRC/path/digest checks and `verifyBudgetArtifact(root,'pure',actualId)`; `node test/fixtures/finite-checkpoint-custody.mjs key-preflight readonly-result`; exactly one `AFW_POST_ACK_MODE=native_r2_once node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs`; fixed `seal-native`, current cipher upload/readback, `reopen-native`, `native-proof`, two-file SAFE upload and original-outcome preservation; independent keyless `verify-native`. The original R2 helper and all 21 frozen assertion families remain the reviewed original gate, and Root independently confirmed their captured whole result passed. The existing key was bound only to key-preflight/seal/open terminating helper steps. Native and independent verifier never received the key.
+
+Timing is based on actual GitHub job/step metadata and the successful reviewed same-job timing check, not a Root/desktop clock offset. Native job timeout stayed 7 minutes, verifier 2 minutes, original test 120 seconds; Root30s/child5s and original C0/I0/C1 budgets were not altered. The reviewed pre-MF final headroom gate ran inside the original command; its private numeric clock/headroom DTO was not fetched by the executor, so no exact internal numeric values are invented here. Actual configured graph hashes are Node build/options/lifecycle provenance under current legitimate IDs/history; they are not Cloudflare production attestation. The current sanitized pure MODEL is a preflight, not a prediction of an actual Native graph before allocation.
+
+The executor read only Native job/step status metadata, never private Native producer logs. After both jobs were terminal, only bounded whitelisted independent-verifier records were retained. Those actual records identify MODEL and SAFE metadata/ZIP API/ZIP body reads, all attempt1 with 200→302→200, plus cipher metadata200. No failure cause was inferred from transport/tool status. Producer MODEL and cipher custody steps succeeded; the full fresh owned encrypted payload remains only in GitHub. MODEL archive, cipher/envelope, key, plaintext, Original checkpoint, privateRaw and producer stdout were not downloaded to the executor/Root. The executor obtained an authorized SMALLSAFE download reference but did not fetch its archive bytes; Root independently downloaded only that current SMALLSAFE and supplied the strictly audited typed values copied below, with exact immutable audit attribution. Same-runner helper trust is not independent same-runner isolation.
+
+BOTH jobs terminated before exact restoration CAS `5df0c1d5b5828f9680629d82eadf93ff3c36e887`. Restoration uses the original tree `204f38186092af481c242fd7f1546f08e507f2bb`; full readback confirmed all seven bodies, the complete report prefix, 3194 leaves/all protected inventories, unchanged main and all five active Source counts zero. Native is manual/noinputs/nopush/twofalse again, Contracts remains exact manual/twofalse, F7 exact manual/sevenfalse. The next commit only appends this receipt; its exact final ref/tree/full report/protected-file readback is reported to Root after CAS.
+
+```json
+{
+  "purpose": "AFW_NATIVE_POST_ACK_R2_TASK2_CLOSURE/1",
+  "resource": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "GitHub-owned SYN runner/Miniflare/workerd",
+    "ORIGIN": "GitHub connector/Git Database CAS",
+    "RESOURCE_TYPE": "isolated Source branch/one workflow",
+    "RESOURCE_ID": "feat/finite-native-cleanup-20261101/.github/workflows/afw-r2-post-ack-diagnostic.yml",
+    "ALLOWED_ACTION": "Native event/run label/two false-prefix activation; one attempt1; exact held restore; append report; full readback STOP",
+    "ROLLBACK": "exact NativeWF baa8442094731bea1413d2cc03028ab8682b300b"
+  },
+  "before": {
+    "commit": "426b18bd5edee0f38ce4203ab7fd277ae46179e6",
+    "tree": "204f38186092af481c242fd7f1546f08e507f2bb",
+    "leaves": 3194,
+    "currentProtectedLeaves": 3192,
+    "oldProtectedLeaves": 3188,
+    "oldProtectedTree": "552faa898d2bb049680ddd3fabf12cf9770a84d4",
+    "protectedDifferences": 0,
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "active": {
+      "queued": 0,
+      "in_progress": 0,
+      "waiting": 0,
+      "requested": 0,
+      "pending": 0
+    },
+    "report": {
+      "sha": "54bac367e599b3b98c1535afe4e1cfd86d7f01fa",
+      "chars": 650103,
+      "bytes": 651413,
+      "sha256": "d30920305b2b9984ca989a0989f4e8a32f716547c4314da35231e394dedec3bc"
+    }
+  },
+  "candidate": {
+    "commit": "89f205839394582516b149b6113ce921d6cbab0f",
+    "tree": "59bbff450300cb285a620da2874aca6d7b2bd7df",
+    "workflowBlob": "0eb992ac774fb159462a18c1057bd0265b28c066",
+    "chars": 27579,
+    "bytes": 27579,
+    "sha256": "a6a2fd1261c5f86eeb97cb7a9dc9c7facdf0e3b39e3a6501c6a99884f1df0470",
+    "onlyChangedLeaf": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+    "normalizesExactlyToHeld": true,
+    "event": "push",
+    "branch": "feat/finite-native-cleanup-20261101",
+    "paths": [
+      ".github/workflows/afw-r2-post-ack-diagnostic.yml"
+    ],
+    "runLabel": "AFW R2 post-ACK R2 single authorized Native Task2 ${{ github.sha }}",
+    "removedLeadingFalsePrefixes": 2,
+    "all3192OtherLeavesExact": true
+  },
+  "run": {
+    "id": 43343373924,
+    "attempt": 1,
+    "source": "89f205839394582516b149b6113ce921d6cbab0f",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-13T01:14:18Z",
+    "jobs": [
+      {
+        "id": 131616791662,
+        "name": "native",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-13T01:14:23Z",
+        "completed_at": "2026-11-13T01:15:50Z",
+        "steps": [
+          {
+            "number": 1,
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:24Z",
+            "completed_at": "2026-11-13T01:14:25Z"
+          },
+          {
+            "number": 2,
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:25Z",
+            "completed_at": "2026-11-13T01:14:27Z"
+          },
+          {
+            "number": 3,
+            "name": "Run actions/setup-node@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:27Z",
+            "completed_at": "2026-11-13T01:14:27Z"
+          },
+          {
+            "number": 4,
+            "name": "Capture current exact Actions job timing once before setup",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:27Z",
+            "completed_at": "2026-11-13T01:14:28Z"
+          },
+          {
+            "number": 5,
+            "name": "Install locked dependencies without scripts",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:28Z",
+            "completed_at": "2026-11-13T01:14:38Z"
+          },
+          {
+            "number": 6,
+            "name": "Pin exact current input and baseline",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:38Z",
+            "completed_at": "2026-11-13T01:14:38Z"
+          },
+          {
+            "number": 7,
+            "name": "Current-identity pure model preflight without allocation",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:38Z",
+            "completed_at": "2026-11-13T01:14:45Z"
+          },
+          {
+            "number": 8,
+            "name": "Upload immutable sanitized MODEL only",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:45Z",
+            "completed_at": "2026-11-13T01:14:46Z"
+          },
+          {
+            "number": 9,
+            "name": "Verify model upload API raw ZIP digests bounds CRC and exact paths",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:46Z",
+            "completed_at": "2026-11-13T01:14:47Z"
+          },
+          {
+            "number": 10,
+            "name": "Protected MODEL inventory readback using its REAL assigned artifact ID",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:47Z",
+            "completed_at": "2026-11-13T01:14:47Z"
+          },
+          {
+            "number": 11,
+            "name": "Key preflight in terminating helper only",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:47Z",
+            "completed_at": "2026-11-13T01:14:47Z"
+          },
+          {
+            "number": 12,
+            "name": "One R2 original outcome and fixed observer after current model preflight",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:14:47Z",
+            "completed_at": "2026-11-13T01:15:34Z"
+          },
+          {
+            "number": 13,
+            "name": "Preserve full owned payload with existing AEAD helper",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:34Z",
+            "completed_at": "2026-11-13T01:15:40Z"
+          },
+          {
+            "number": 14,
+            "name": "Upload only the current encrypted envelope",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:40Z",
+            "completed_at": "2026-11-13T01:15:41Z"
+          },
+          {
+            "number": 15,
+            "name": "Verify same assigned cipher upload API raw ZIP and exact paths",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:41Z",
+            "completed_at": "2026-11-13T01:15:43Z"
+          },
+          {
+            "number": 16,
+            "name": "Same-ID authenticated open and full private inventory readback",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:43Z",
+            "completed_at": "2026-11-13T01:15:46Z"
+          },
+          {
+            "number": 17,
+            "name": "Publish only closed observation or unavailable evidence verdict",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:46Z",
+            "completed_at": "2026-11-13T01:15:46Z"
+          },
+          {
+            "number": 18,
+            "name": "Upload two-file SAFE after custody attempt",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:46Z",
+            "completed_at": "2026-11-13T01:15:47Z"
+          },
+          {
+            "number": 19,
+            "name": "Preserve original R2 failure independently of certificate status",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:47Z",
+            "completed_at": "2026-11-13T01:15:47Z"
+          },
+          {
+            "number": 20,
+            "name": "Remove this task baseline scratch only",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:47Z",
+            "completed_at": "2026-11-13T01:15:47Z"
+          },
+          {
+            "number": 39,
+            "name": "Post Run actions/setup-node@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:47Z",
+            "completed_at": "2026-11-13T01:15:47Z"
+          },
+          {
+            "number": 40,
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:47Z",
+            "completed_at": "2026-11-13T01:15:47Z"
+          },
+          {
+            "number": 41,
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:47Z",
+            "completed_at": "2026-11-13T01:15:47Z"
+          }
+        ]
+      },
+      {
+        "id": 131617443141,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-11-13T01:15:52Z",
+        "completed_at": "2026-11-13T01:16:20Z",
+        "steps": [
+          {
+            "number": 1,
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:53Z",
+            "completed_at": "2026-11-13T01:15:54Z"
+          },
+          {
+            "number": 2,
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:54Z",
+            "completed_at": "2026-11-13T01:15:58Z"
+          },
+          {
+            "number": 3,
+            "name": "Run actions/setup-node@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:58Z",
+            "completed_at": "2026-11-13T01:15:58Z"
+          },
+          {
+            "number": 4,
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:15:58Z",
+            "completed_at": "2026-11-13T01:16:12Z"
+          },
+          {
+            "number": 5,
+            "name": "Verify model upload API raw ZIP digests bounds CRC and exact paths",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:16:12Z",
+            "completed_at": "2026-11-13T01:16:14Z"
+          },
+          {
+            "number": 6,
+            "name": "Protected MODEL inventory readback using its REAL assigned artifact ID",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:16:14Z",
+            "completed_at": "2026-11-13T01:16:14Z"
+          },
+          {
+            "number": 7,
+            "name": "Verify safe upload API raw ZIP digests bounds CRC and exact paths",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:16:14Z",
+            "completed_at": "2026-11-13T01:16:16Z"
+          },
+          {
+            "number": 8,
+            "name": "Verify closed observation model pins cipher assignment and original outcome",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:16:16Z",
+            "completed_at": "2026-11-13T01:16:17Z"
+          },
+          {
+            "number": 15,
+            "name": "Post Run actions/setup-node@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:16:17Z",
+            "completed_at": "2026-11-13T01:16:17Z"
+          },
+          {
+            "number": 16,
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:16:17Z",
+            "completed_at": "2026-11-13T01:16:17Z"
+          },
+          {
+            "number": 17,
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-11-13T01:16:17Z",
+            "completed_at": "2026-11-13T01:16:17Z"
+          }
+        ]
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "id": 14000885673,
+      "name": "afw-post-ack-native-safe-43343373924-1",
+      "bytes": 1402,
+      "digest": "sha256:a1a9f591f49506ada2c84991b163774e998f72e97ded634ae72e32535a6a1cfd",
+      "expired": false,
+      "created_at": "2026-11-13T01:15:47Z",
+      "expires_at": "2026-11-20T01:15:46Z",
+      "workflow_run": {
+        "id": 43343373924,
+        "repository_id": 1347578006,
+        "head_repository_id": 1347578006,
+        "head_branch": "feat/finite-native-cleanup-20261101",
+        "head_sha": "89f205839394582516b149b6113ce921d6cbab0f"
+      }
+    },
+    {
+      "id": 14000213454,
+      "name": "afw-post-ack-model-43343373924-1",
+      "bytes": 10709,
+      "digest": "sha256:56991bd29ad82360f332b9101998fcd115c74dcf67cca1c81ccfa80afb6b9ba6",
+      "expired": false,
+      "created_at": "2026-11-13T01:14:46Z",
+      "expires_at": "2026-11-20T01:14:45Z",
+      "workflow_run": {
+        "id": 43343373924,
+        "repository_id": 1347578006,
+        "head_repository_id": 1347578006,
+        "head_branch": "feat/finite-native-cleanup-20261101",
+        "head_sha": "89f205839394582516b149b6113ce921d6cbab0f"
+      }
+    },
+    {
+      "id": 13999224827,
+      "name": "afw-post-ack-cipher-43343373924-1",
+      "bytes": 10324281,
+      "digest": "sha256:effdcf16864574fb48956ae97ec767d80c6d1ab19a82995e5813f141326db5c2",
+      "expired": false,
+      "created_at": "2026-11-13T01:15:41Z",
+      "expires_at": "2026-11-20T01:15:40Z",
+      "workflow_run": {
+        "id": 43343373924,
+        "repository_id": 1347578006,
+        "head_repository_id": 1347578006,
+        "head_branch": "feat/finite-native-cleanup-20261101",
+        "head_sha": "89f205839394582516b149b6113ce921d6cbab0f"
+      }
+    }
+  ],
+  "independentVerifierRecords": [
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "model",
+      "phase": "metadata",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 317,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "model",
+      "phase": "zip_api",
+      "attempt": 1,
+      "httpStatus": 302,
+      "elapsedMs": 691,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "model",
+      "phase": "zip_body",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 984,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "safe",
+      "phase": "metadata",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 312,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "safe",
+      "phase": "zip_api",
+      "attempt": 1,
+      "httpStatus": 302,
+      "elapsedMs": 702,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "safe",
+      "phase": "zip_body",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 1042,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "cipher",
+      "phase": "metadata",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 326,
+      "outcome": "success"
+    },
+    {
+      "purpose": "afw.post-ack-independent-verdict.safe.v1",
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+        "source": "89f205839394582516b149b6113ce921d6cbab0f",
+        "run": "43343373924",
+        "attempt": 1,
+        "case": "R2"
+      },
+      "nativeCertificate": true,
+      "valid": true,
+      "modelArtifactId": "14000213454",
+      "modelSha256": "e0651a1ed746a6e8a5c7bd719d35ae8259775393cf50cc3d51f5bd34e9282c8a",
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false
+    }
+  ],
+  "rootAudit": {
+    "source": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/5348fb7191653b58114a973f5be6bcddb0ccf0cf/docs/superpowers/reviews/2026-11-12-native-post-ack-r2-task2-primary.md",
+    "sourceBlob": "f1a1d30272c9a520a051ed202e9213b172008c2a",
+    "typedSchemaVerified": true,
+    "strictZIPCRC": true,
+    "wholeManifestVerified": true,
+    "observationBytes": 1207,
+    "observationSha256": "db197f02914c5e7ba588a051c3e2f4f807b4916ba71a7e3f81edf7b7ab0dfc4d",
+    "executorFetchedSafeArchiveBytes": false
+  },
+  "safe": {
+    "id": 14000885673,
+    "zipBytes": 1402,
+    "zipSha256": "a1a9f591f49506ada2c84991b163774e998f72e97ded634ae72e32535a6a1cfd",
+    "completeInventory": true,
+    "crcKnownVector": true,
+    "files": [
+      {
+        "name": "manifest.json",
+        "bytes": 391,
+        "sha256": "6083849b2501307a20d320280cb0ad8e9534348e5fbeddc27d13ece7ecf05523",
+        "crc32": "be498782",
+        "value": {
+          "purpose": "afw.native-post-ack-r2-manifest.safe.v1",
+          "context": {
+            "repository": "tokenizartinfo-ops/agent-friendly-web",
+            "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+            "source": "89f205839394582516b149b6113ce921d6cbab0f",
+            "run": "43343373924",
+            "attempt": 1,
+            "case": "R2"
+          },
+          "files": [
+            {
+              "path": "result.json",
+              "bytes": 1454,
+              "sha256": "7853c4cb7b095538a7bdc03aa92df7aaf0af5e8f0c778daa100ca49f3f5980ae"
+            }
+          ]
+        }
+      },
+      {
+        "name": "result.json",
+        "bytes": 1454,
+        "sha256": "7853c4cb7b095538a7bdc03aa92df7aaf0af5e8f0c778daa100ca49f3f5980ae",
+        "crc32": "c19c9b44",
+        "value": {
+          "purpose": "afw.native-post-ack-r2.safe.v1",
+          "status": "not_observed",
+          "context": {
+            "repository": "tokenizartinfo-ops/agent-friendly-web",
+            "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+            "source": "89f205839394582516b149b6113ce921d6cbab0f",
+            "run": "43343373924",
+            "attempt": 1,
+            "case": "R2"
+          },
+          "provenance": {
+            "status": "verified",
+            "sdkPackage": "@cloudflare/workers-oauth-provider@1.2.1",
+            "sdkFileSha256": "bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80",
+            "lockSha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34",
+            "mGraphSha256": "f5d9798a0ddc12ff82128b655c578e07947274fddef1e1bbfc47ee6b5f50684a",
+            "qaGraphSha256": "3108e10a0ec311db80fa312f4b4d11306eb19dd9a8ac2293b581ee954645708e",
+            "transformSha256": "5f84a7d77246511cecc3afcd3ff12107e8de713806d7e36964f8703c9ab1538a",
+            "preflightSha256": "e0651a1ed746a6e8a5c7bd719d35ae8259775393cf50cc3d51f5bd34e9282c8a"
+          },
+          "selection": "none",
+          "invocationOrdinal": null,
+          "operation": "unknown",
+          "ackReturned": null,
+          "postAckEntered": null,
+          "outcome": "unknown",
+          "boundary": "unknown",
+          "quality": "qualified",
+          "originalR2Outcome": "passed",
+          "custody": {
+            "status": "verified",
+            "artifactId": "13999224827",
+            "zipSha256": "effdcf16864574fb48956ae97ec767d80c6d1ab19a82995e5813f141326db5c2",
+            "observationSha256": "db197f02914c5e7ba588a051c3e2f4f807b4916ba71a7e3f81edf7b7ab0dfc4d",
+            "reopenVerified": true
+          },
+          "operationalReadiness": false,
+          "completePackage": false,
+          "PCoff": false,
+          "globalNativeDrainVerified": false,
+          "sdkNamespaceEmptyVerified": false
+        }
+      }
+    ]
+  },
+  "restore": {
+    "commit": "5df0c1d5b5828f9680629d82eadf93ff3c36e887",
+    "tree": "204f38186092af481c242fd7f1546f08e507f2bb",
+    "date": "2026-11-13T01:16:45Z",
+    "afterBothJobsTerminal": true,
+    "wholeSevenBodiesExact": true,
+    "leaves": 3194,
+    "all3192CurrentProtectedExact": true,
+    "all3188OriginalProtectedExact": true,
+    "reportPrefixCharacters": 650103,
+    "reportPrefixUTF8Bytes": 651413,
+    "reportPrefixBlob": "54bac367e599b3b98c1535afe4e1cfd86d7f01fa",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "active": {
+      "queued": 0,
+      "in_progress": 0,
+      "waiting": 0,
+      "requested": 0,
+      "pending": 0
+    }
+  },
+  "closedFileHashes": {
+    ".github/workflows/afw-r2-post-ack-contracts.yml": {
+      "sha": "2006beb4d081ef127d1192fd99967f5f76eeb7db",
+      "chars": 19347,
+      "bytes": 19347,
+      "sha256": "dffafee8d1347e869154d5bc7d34b71c2297b12bd1f20649bcb6b7dc710bb58e"
+    },
+    ".github/workflows/afw-finite-budget-qualification.yml": {
+      "sha": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+      "chars": 126209,
+      "bytes": 126209,
+      "sha256": "1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a"
+    },
+    "test/fixtures/finite-budget-world.mjs": {
+      "sha": "0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b",
+      "chars": 242981,
+      "bytes": 242987,
+      "sha256": "007a4b39777dbd34645f7754556cfa1a9e152a0d2a6f55a27f6b1c30e334d867"
+    },
+    "test/fixtures/finite-post-ack-diagnostic.mjs": {
+      "sha": "dc05c0410fc085062fb47e10bb29e6723d938821",
+      "chars": 91238,
+      "bytes": 91238,
+      "sha256": "5f84a7d77246511cecc3afcd3ff12107e8de713806d7e36964f8703c9ab1538a"
+    },
+    "test/finite-post-ack-diagnostic.test.mjs": {
+      "sha": "aaf4894d1b411a8ac59debb63ca9368e803141c5",
+      "chars": 1923,
+      "bytes": 1923,
+      "sha256": "cbe41b778c68e74516f9008061d27cdcdc6e8dcf212a93d8ddb24caf8079e462"
+    },
+    "docs/superpowers/reports/2026-11-07-finite-native-budget-qualification-task2.md": {
+      "sha": "54bac367e599b3b98c1535afe4e1cfd86d7f01fa",
+      "chars": 650103,
+      "bytes": 651413,
+      "sha256": "d30920305b2b9984ca989a0989f4e8a32f716547c4314da35231e394dedec3bc"
+    },
+    "native": {
+      "chars": 27458,
+      "bytes": 27458,
+      "sha256": "50a72c97cfffb2710c10a8127871f11893cefe778c61b61664e06c69905116e3"
+    }
+  },
+  "operationalReadiness": false,
+  "completePackage": false,
+  "PCoff": false,
+  "globalNativeDrainVerified": false,
+  "sdkNamespaceEmptyVerified": false
+}
+```
+
+NOTEXECUTED: Cloudflare remote API/runtime/production changes, OAuth/customer/real-owner operations, Native16/full-case qualification, PC-off, Max, recovery/restart/retry, additional Native case/run, deployment, cron/consumer changes, credential read/copy/rotation, private archive downloads. All five readiness flags remain false. This one-case diagnostic completed and closed; independent Root whole-plan review remains separate. STOP after final report-only CAS and full closure readback.
