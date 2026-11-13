@@ -1,0 +1,48 @@
+# Current Native R1 original oracle — bounded cloud design
+
+## Intent and authority
+Verify ONE current owned SYN Native R1 case with the entire unchanged original oracle, before a later coherent Native16 run. Owner explicitly delegated consecutive cloud AFW blocks and routine decisions; no questions/OTP/Chrome/credentials before 13Nov08:00Argentina. R1HTTP plan is COMPLETE/CLEAN at Rootdocs c013a9ff; Source d532c8309af30e0ab35d62fe400a5d392aac59b9/62a2d666a0e719360b8626f5982eafaf3565144b. Historical inspector record_limit (>256HTTP records) explains old reader rejection, NOT Native cause; historical non-null SDK-reference assertion failed. One later R2 Native case passed on another source/run. Current R1 remains untested.
+
+## Approaches / Root decision
+A. Run original selected R1 against current protected World/SDK with complete oracle and existing custody, then independently verify a tiny safe result. B. Repeat all Native16 now: broader15min+ lifecycle cost while R1 current behavior unknown. C. Add another historical Raw prefix projection: can narrow old state but cannot establish current Native R1. Root chooses A under owner delegation. Cost if wrong: one bounded case may fail and require diagnosis; do not infer repair or retry automatically. No business/SDK/cap change.
+
+## Sources and files
+Repository tokenizartinfo-ops/agent-friendly-web1347578006, isolated Source feat/finite-native-cleanup-20261101; Rootdocs docs/finite-pcoff-continuation-20261103. Baseline3194leaves, main0c9c475b3ebaa970fc11d628b40e50a90cceb727, F7rollbackf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manualnoinputsNOPUSHsevenfalse.
+ONLY temporary .github/workflows/afw-finite-budget-qualification.yml and NEW concise report docs/superpowers/reports/2026-11-13-native-r1-oracle.md. Preserve all3193 existing non-F7 leaves/modes, INCLUDING old877917char report f9def92f63519a73b2c0af63ec0c8ae15aaf31f3. New final leafcount3195. This replaces appending the near0.9MB historic report, not its evidence. No new implementation files or edits to World, originaltest, SDK, lock, crypto/helper libraries.
+Protected public inputs:
+```json
+{
+  "nativeTestBlob": "533dafb5df5f8e57442c5b9029dc8dec6dded434",
+  "worldBlob": "0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b",
+  "custodyBlob": "4d05b5ec0f7b074be88ef9733a47c984b0212351",
+  "lockBlob": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+  "sdkVersion": "1.2.1"
+}
+```
+Source test lines102–121 registers R1/R2/R3 in groupreadonly; selected command uses Node22.23.4, --test --test-concurrency=1 --test-reporter=tap --test-name-pattern='^R1 fixed original SDK readonly budget$' test/mcp-qa-finite-budget-native.test.mjs. Full original runBudgetReadonlyCase(R1) and all unchanged original assertions execute. Original case timeout120000ms, C0=900s and existing C1/root30s/child5s untouched. No shortening/cap increase/oracle copy/partial helper substitute. Other cases not executed, no count-as-Native16.
+
+## Workflow / privacy / rollback
+Cloud GitDB/Actions only, one Source writer/CAS. No Source eval/import/execution/localfiles/clones/deps/build on PC; Source strings/hash metadata only. Read relevant SourceAGENTS before editing. Before mutation exact refs/commit/nontruncatedtree3194(or3195afterreport)/protected/main/F7/62events/fiveactive0. Unknown mutation response reconcile ref/body/run before repeat.
+Prepare complete actual workflow INACTIVE/manual/noinputs/nopush/all job false. Actual fixed workflow contracts7min→nativeR1 7min→independent verifier2min, current same Source/run/attempt1; preserve existing pure-contract computations and authenticated checkpoint linkage. Qualified KEYLESS front-end producer7min+verifier2min separate, NO Native/SDKimport/MF/I0/real secret binding; may use clearly inert crypto fixtures. Actual one fixed branch/selfpathpush with exact unique release commit-message guard and attempt1; every stage checks scope before allocation. Source frozen until ALL actual jobs terminal (including skipped), never two-only assumption.
+Use existing AFW_SYN_CHECKPOINT_KEY only scoped needed crypto steps (contracts seal/open, native seal/reopen), never Native child environment, never new key/copy/rotation. Exact SDK/lock install only runner. Reuse generic sealDirectory/openDirectory/current bounds and kind readonly-result(success)/consumer-failure(failure), checkpoint for contract artifact; literal AAD purposeafw.finite-checkpoint-custody.syn.v1/repository/ref/sourceShaCURRENT/runIdCURRENT/runAttempt1/kind. Native model must bind selected R1, current source/tree/run/attempt/command/TAP outcome; own assigned artifact ID+digest+authenticated reopen/inventory/context before custody verified.
+R2 postACK module7e1ee778 hardcodes R2; never relabel/reinterpret its private result as R1. Generic custody and qualified safeZIP module can be reused.
+Private Native command logs, model, worker state, ciphertext and key NEVER downloaded to Root/MCP/PC or echoed. Native/provenance failures stay private; Root observes metadata + KEYLESS independent verifier closed records + current SMALLSAFE only. No retrospective Original artifact access. No CF API/production worker/Container/cron/tail/consumer/OAuth/OTP/Max/mail/main/PR/merge/publish/new services.
+Any outcome→exact F7restore+new concise report(append own prefix only)+full ref/commit/tree3195/all3193protected/main/events/fiveactive0 STOP. Failure: no automatic repair/retry/cap change/Native16.
+
+## Typed safe contract
+Native result purpose afw.native-r1-oracle.safe.v1; manifest afw.native-r1-oracle-manifest.safe.v1. Exact top keys purpose,status,context,selection,sourcePins,programHashes,tap,contracts,custody,failure plus five flags.
+- status passed|failed|unavailable, scope this ONE R1 only.
+- context exact repository/ref/source/run/attempt1/caseR1/node22.23.4.
+- selection exact groupreadonly/patternabove/registered[R1,R2,R3]/selected[R1]; static registration distinct from observed execution.
+- sourcePins exact five fields above; current workflow and program bodies additionally bound to actual Source/run metadata and strict hashes. programHashes exact adapter,controls,verifier,safeZip (all SHA256); preflight must settle materialization interfaces/count and any necessary immutable helper framing before Source release.
+- tap exact layout omitted|explicit_skips|unavailable, r1 passed|failed|cancelled|not_observed, commandSucceeded boolean|null. Parser accepts only coherent closed TAP profiles: selected R1 unique; no executed R2/R3; total1/pass1/skip0 OR total3/pass1/skip2 for success, with coherent failure/cancellation counterparts; no comments/injected names/duplicateR1/global-wrapper-only success. Nonselected omission is not claimed as observed skipped2. Exact Node22.23.4 KEYLESS selection control establishes actual behavior; official22.23.5 docs say omitted, exact22.23.4 web docs unavailable. This is framework accounting only, never a Native substitute.
+- contracts passed|unavailable, only after actual sameSource/Run checkpoint authenticated linkage.
+- custody exact status verified|unavailable, artifactId numericstring|null, zipSha256 hash|null, reopenVerified boolean. verified only after exact assigned download/digest/context/inventory/Native model-and-TAP consistency.
+- failure null on passed, else exact stage(scope|contracts|native|custody|publication|validation), reason(original_oracle_failed|not_observed|custody_unavailable|invalid_evidence|publication_unavailable); no arbitrary errors/paths/values. cancelled selected R1 is failed only when actually observed; missing/ambiguous outcome unavailable.
+- all five operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified ALWAYSfalse.
+Passed requires unchanged original R1 actually passed, command success, coherent TAP, source/provenance/contracts/custody verified. A valid failed/unavailable envelope is not a passing Native test: preserve job failure and schema acceptance separately. Always attempt safe unavailable publication under known no-allocation/cleanup/custody failure; never fake verified fields. Strict whole manifest purpose/source/run/attempt/files[{path:result.json,bytes,sha256}], twoJSON≤65536 combined/rawZIP≤131072, strictCRC/paths/ranges/EOF/UTF8/currentmetadata/digest triple. No independent inspector signature claim.
+
+KEYLESS controls purpose afw.native-r1-oracle.controls.safe.v1 and manifest afw.native-r1-oracle.controls-manifest.safe.v1, closed current context/hash/inventory/outcomes; realCustodyKeyBoundfalse/NativeExecutedfalse/SDKImportedfalse/MFAllocatedfalse/fiveflagsfalse. Fixed control IDs: selection_current_node,original_source_pins,tap_pass_profiles,tap_failed_cancelled,tap_missing_duplicate,tap_foreign_executed,tap_comment_injection,source_run_binding,custody_binding,schema_flags,manifest_integrity,unavailable_publication. Actual parser/serializer/verifier only, no cloned oracle or new completion-token framework; record completed only after fixed real assertions, strict inventory and current code hash binding.
+
+## Gates / interpretation
+Task1 ONE7+2 KEYLESS qualification + full task review CLEAN precedes separate Task2 ONEactual7+7+2 release. Both preserve exact new candidate programs/no substitutions. Task2 actual Native R1 before next fullNative16; passed proves only that source/case/window, failure new evidence not provider diagnosis. Final broad review then causal Root decision. Overall AFW PCoff still pending real cloud event delivery/useful read/withdrawal/recovery and final PCoff trial. No shutdown request or permanent guard claim.
