@@ -4242,3 +4242,59 @@ STOP_FOR_ROOT_GATE. Root must independently inspect full delta/hash/zero-execute
 ## Root inactive gate observation
 
 RootreadcompleteA/C4hunkdelta/currentF7+fixedstructuralmapdataexceptions+positiveadmittedquoteandoutside-termnegative+cp-boundaryactual-validatorassertions. IndependentfullSourceGitblob/SHA/4bodyhashesmatch. V/Zexact, old45/96forms/32IDs/Native/26slots6env/other3195leavesandFULL248909prefixexact. Currentinactivef4c45/tree1ac318/F7d99599,362148B/SHAb51bfb6..., parent356222. NoSourceexec/tests/refmove. CLEARFORUNATTACHEDOVERLAYPREPARATIONONLY. ONEcurrentcoveringrun/scopedfinalrereviewstillpending; noNative/readinessclaim.
+
+
+## Actual FINAL R3 covering pass / Source closed / scoped final review pending
+
+{
+  "run": 43471975245,
+  "source": "5a8761f91611dfe1d1dbf1411b82611d036f8257",
+  "attempt": 1,
+  "status": "completed",
+  "conclusion": "success",
+  "all10Terminal": true,
+  "old8Skipped": true,
+  "keyless2Success": true,
+  "actualPositiveProvenanceBeforeAllNegatives": true,
+  "families": 6,
+  "subcases": 32,
+  "allSubcasesPassed": true,
+  "receiverControls": 16,
+  "allReceiverPassed": true,
+  "currentSMALLSAFEIndependentStrictVerified": true,
+  "receiverAccepted": true,
+  "artifact": {
+    "id": 14060093188,
+    "bytes": 1390,
+    "sha256": "ab640302c492249f368929f6b349192de107d42c572ce56ea8cbb6d33e63148c"
+  },
+  "allThreeFinalFindingsCoveredInCurrentBodies": true,
+  "contractsHookExecuted": false,
+  "NativeExecuted": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
+
+{
+  "source": "82626aada77c89c0fc03b5317d05f7c99c05f89e",
+  "tree": "38db218a52156ce599e0f78be9359f957c8abb6b",
+  "prior3195LeavesExact": true,
+  "leaves": 3196,
+  "soleNewReport": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+  "reportSha": "9ee8b7cd47df97514f2d2bd0cf1f68137dd6e416",
+  "reportChars": 264449,
+  "F7exact": true,
+  "mainUnchanged": true,
+  "runId": "43471975245",
+  "runSource": "5a8761f91611dfe1d1dbf1411b82611d036f8257",
+  "runCompleted": true,
+  "allDeclaredJobsTerminal": true,
+  "declaredJobs": 10,
+  "fiveBranchActiveStatusesZero": true,
+  "all62WorkflowBlobsExact": true,
+  "providerRuntimeRead": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
+
+Current4frozenhashesd76c/a41c/9413/b36, currentstrict1390BSAFE14060093188Rootindependentlyverified/acceptedtrue. Coveringcommands/output+threefindingcoverageareinSource82626aada...sameSource reportappendafterFULL248909prefixandfinalscopedreviewpackage. NoSourceexeconPC/privatearchives/logs/key. ONEscopedfinalrereviewpending/noNative/globalclaims.
