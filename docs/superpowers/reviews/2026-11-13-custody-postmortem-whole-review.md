@@ -1,0 +1,16 @@
+# Final whole-unit review — fixes required
+
+Review /root/custody_postmortem_whole_review, freshgpt6astra/xhigh, read-only/static,no execution/private retrieval. Current43437695014/1diagnosticevidenceVALIDforplanning:23passes,twoouterreceiptcounts103/354960272and96/344974155,bothold134217728caprejections. ActualSAFEstringstages/currentMarkeridentitycorrect. Integralreceiverapprovalpending3Important; noCritical.
+
+PM-F-I1 Important — executedF7lines419–449/434: validateTargetRecord consultsstates[r.stage] withouttypeofstring; one-elementJSONarraycoercestoenumkey; reachedDecisionstrictcomparisonmaydisagree. Requiretypeofr.stage==='string'&&Object.hasOwn(states,r.stage) BEFORElookup; sameactualpairseamnegativefixturewithvalidmanifest. Rootownmetadataobserverhasanalogousgap, Rootmustfix/testseparately.
+
+PM-F-I2 Important — F7lines910–925:drivercatchcoversbootstrapandlaterreceivercontrols. AcontrolfailureafterverifiedObserver+5hashesreturnsobserver_unavailable/nullidentity, contrarySPEC80/94. Preserveverifiedexpectedafterbootstrap; post-bootstrapfailureunavailable/invalid_evidencewithidentity, unsuccessful/noartifactread. Coverbothactualreceiverdriver/seamroutes, no copiedoracle.
+
+PM-F-I3 Important — originaladapterF798/newInspector396–399: onlyString(meta.workflow_run.id) compared, no safeintegertype; malformedmetadataIDcanpermitarchivefetch. KeeporiginaladapterUNCHANGED; addnumeric-safeinteger/exacthistoricalrunchecktometadataBound wrapper; fixtureprovesZEROarchivecallsforstring/array/invalidID.
+
+PM-F-M1 Minor — run-name INACTIVEandbothjobsfalsecommentcontradictactiveguards. Usephase-neutralname/commentorincludeexplicitchangesinRootreviewedactivationtransform.
+PM-F-M2 Minor — SPECheader/metadata10sambiguity: codehasmetadatarequest10sandONEwholegenericdownload30sincludingarchiveheaders; clarifynotindependentarchive-header10s. Preservetransportcode/budgets.
+
+Strengths:Observer/Subjectseparation,controls-before-two-reads,hashbound5modules,independentSAFE/currentbinding,preservedSourceand13-key/failedinventorydecisions. AdditionalnamedriskcheckGitHubcompareconfirmedBASE08f..finalf1onlySAMEreport194addedlines0deleted/8commits, executableF7notleftinstalled.
+
+Declinedbehaviors/reasons: firsthistoricalexception/firstoldfailedcontrolunknown(notinreceipts/marker); AEAD/innerinventory(no decrypt); readonlyseal/caseMax(neithertargetexercises); otherFF-I2/keyNative/AFWavailability/drain/PCoff(scopeZERO-keytwojobdiagnostic). ExternalholdsremainOPEN. Assessment:preservedevidenceusefulfornextplanning; fullreusable diagnosticwithfixes, notAFWreadiness.
