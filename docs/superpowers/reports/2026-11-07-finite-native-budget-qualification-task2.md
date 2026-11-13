@@ -10677,3 +10677,39 @@ Whitelisted actual closed outputs (each original line<=2048B; expanded formattin
 Immutable Reference algorithm remains34180/672b054312d8c23c38662719b5183e6e345a322e6db74c6f761719b9bfdf4e36. Updated tests68946/e534d4275873d0eb2dc27c9b66b7fa91d52f7f8c833ab8d39f09173e571ea050; materializer21125/b2e9beda4f17d45745df42029ab2c780c96f13ae69eee36f58ba12fb913818d7; independently generated actual verifier41119/16234197d426dd9745a2801067407691396891826faba459dd532bb8d964390e confirmed in current runner summary. Core77002/d514b190...,ZIP13305/b36c40c0...,Bootstrap1370/2a04ef50..., pin helper/pair appendix/derivedCoreSubset unchanged. No policy/guard/cap change was needed. This successful corrected control does not establish which substep first failed in consumed43351510829; that runtime distinction remains unknown.
 
 Mandatory terminal closure restores EXACTF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual/noinputs/nopush/sevenfalse; APPEND only this report preserving full738243-character prefix. Contracts2006beb4/Nativebaa84420 and other3192leaves/modes remain exact. Updated actual5+2 candidate retained INACTIVE atdb4a9ad4; Task2 actual historical projection remains HELD pending fresh independent Task1CLEAN+separate release. This is pure KEYLESS qualification, no actual historical HTTP predicate/Native cause/fix/runtime/PC-off acceptance. originalArtifactAccessed/custodyOpened/SDKImported/I0Created=false and allfive readinessfalse. Full closure readbacks follow; Source writer then STOPPED.
+
+
+### R1 frontier Task1 fixture fix1 — exact closed-source readback receipt
+
+After BOTH jobs terminalSUCCESS, expected-head restore CASac80f724 -> 6f80d702465a66ad4ea2205350a41f7849457d70/tree7ffebc4259ae63e075b7deda5bcf980935b2c422 succeeded. Full independent ref/commit/nontruncated recursive3194leafinventory/twofiles/main/fivestates reads verified originalF7 exact126209B/manual/noinputs/nopush/sevenfalse; all3192protected leaves/modes AND F7 exact. Entire738243-character fix1 starting report and original718543-character history remain exact prefixes. Only report differs from original19c9 full tree. Candidate retained INACTIVE atdb4a9ad4/blob8b31a4b0 for fresh independent whole Task1 review; no actualTask2 activation.
+```json
+{
+  "closedSource": "6f80d702465a66ad4ea2205350a41f7849457d70",
+  "tree": "7ffebc4259ae63e075b7deda5bcf980935b2c422",
+  "reportBlob": "2841ad5fbb92692652e85fe2e88c3bf3d21896d8",
+  "reportChars": 761945,
+  "entireFix1PrefixChars": 738243,
+  "entireOriginalPrefixChars": 718543,
+  "prefixExact": true,
+  "fullFilesReadBack": true,
+  "allLeaves": 3194,
+  "protectedExact": 3192,
+  "F7Blob": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+  "F7Bytes": 126209,
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "active5": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "qualifiedRun": 43352803969,
+  "producer": 131647660012,
+  "verifier": 131647738012,
+  "smallSafe": 14004358203,
+  "task2Held": true
+}
+```
+
+This final report-only receipt commit is followed by a full ref/commit/tree/F7/report/main/0active readback before replying; it cannot record its own SHA. Scoped builder statusDONE: one authorized fixture fix and one fresh complete KEYLESS qualification, exact rollback complete. Task1 independent review is pending and actual Task2 remains HELD; no actual historical predicate/native cause/PC-off claim. Source writer STOPPED after final readback, no further Source action by inference.
