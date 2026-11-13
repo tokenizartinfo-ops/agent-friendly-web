@@ -26,3 +26,7 @@ OriginalpreflightreviewerscopedconfirmationCLEARP1–P5 at95c13574, nofurtherblo
 ## Task1 sole Source builder started read-only preparation
 
 Assigned /root/r1_http_source_builder, Sol/xhigh, freshforknone perSDD; exactbrief a0142665.../task1. BuilderconfirmedSPEC/PLANP1–P5, actualoldall-row-type-before-time andlegacypublicpresent/unknown; Sourcewrites/executionNONEsofar. Preparing22+18closedprivatewitness+distinctKEYLESSfront-end/4generatedbodies withstrategybeforeCAS. ScopeF7+APPENDreportONLY/all3192protected/CoreZIPBootstrapexact; actualprojectionHELD. Rootwaitingstrategy/contextquestionswhileuserasleep, nohumanstepopened.
+
+## Pre-CAS concrete sourceBounds conflict — P6 fixed checkout ruling
+
+Builderverifiedallcurrentlease/protected/report/F7/eventinventory/fivestates0; ZERO Sourcewrites/runs. CurrentRAMprograms Ref34180/672b0543,Tests68019/ea1aa8c4,Materializer21125/e67ab9fe,Verifier41119/4349a0fb; independentoldVerifier40595/4a79caf3reconstructionmatched. ImmutableCore91sourceBoundsexpectsOriginalWorld5fb78c05, currentprotectedWorld0631f9apostACKchanged; old81a25KEYLESSpredatesit. Ruling: additionalfixedpublicOriginal19789shallowcheckoutinrunnerafw-original-public-source; ONLYCorepurecontrolsworkingdirthere; currenteventrootHEAD/GITHUB_SHA/YAML/materializer/hashidentityremaincurrent. OriginalcodecheckoutnotprivateArtifactdownload; neverRaw139491/key/native/SDK/deps. Costonecloudshallowcheckout, nocurrentWorld/pinwaiver/extraSourcepath/run. P6SPEC/briefamendedBEFORESourceCAS; actual5+2unchanged. Source19c9remainsclosedpendingthisrelease.
