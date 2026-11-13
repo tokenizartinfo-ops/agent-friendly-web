@@ -1559,3 +1559,129 @@ Mandatory any-outcome restoration and prefix preservation:
 - Final append commit/tree/report blob/hash and fresh post-publication closure readbacks are returned to Root separately, avoiding self-referential hashes.
 
 Disposition: DONE_WITH_CONCERNS. The 23 controls and current diagnostic package verification passed; both actual retained OUTER receipts were rejected by the unchanged original success cap. inspectionComplete:true records completion of those two decisions. historicalCauseProven:false,receiptAuthenticated:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false. No Native/key/Cloudflare/runtime authority, repaired historical suite, PC-off acceptance or fix2 follows. STOP after final closure; no further Source work is released.
+
+
+## 2026-11-13 — Single final whole-review wave: ONE covering run, 23 passes, actual receiver-boundary fixtures and exact restoration
+
+Evidence dated 2026-11-13 14:37:21 UTC. The single final-wave covering run completed successfully with the existing23 controls, including the actual current-driver bootstrap child and shared post-bootstrap fault path. The current diagnostic package was independently verified. Both retained OUTER receipts again reached an unchanged original success-cap rejection. All seven nonclaims remain false: historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified. This is not Native/coherent-suite/AEAD/inner-inventory/drain/PC-off acceptance. Original FF-I2 and key-bearing Native holds remain OPEN.
+
+Authority and Source:
+- Whole-review final batch/spec/brief at Root docs d2ef8d9690ddda533855c6d62cef7e1c78e075d9; PM-F-I2 load-order/child settlement at f97ab711f3bbf5c6a604ef6bf571a391f0273753; inactive gate 3016a2d5575d9f5dd1135a46af0feea7eb2de250; exact ONE-run release12da5256505137cb22837a0d0b0d4cfd1f8d8e6a, docs/superpowers/briefs/2026-11-13-custody-postmortem-final-wave-one-run-release.md.
+- PROJECT AFW; repo tokenizartinfo-ops/agent-friendly-web ID1347578006; Source feat/finite-native-cleanup-20261101; GitHub API/GitDB/Actions only. Pre-wave closed Source f1a3d456dd4118edf155c7ecb60479d0881526bc/tree5c91e72178287f079607234f2a546641c014a7cc.
+- Inactive final-wave candidate87ed16664d4acdfa5f3c59e957514415bd5fd6d3/tree081b53b7920c5c9781ec03991a787df259145189/F7a417f040f2c191d69834e7a46014d61337a2da03,129774B,SHA256f2c99adfa0182e0b6fa026054c7ef7f8b8106f735da2bb3f5ee28e6c44f35a70. Root reviewed the entire scoped diff against prior inactive abb416f and all current Source/context/hash/scalar/expression boundaries. Only F7 changed in the new commit; entire report204637-character prefix and all other3195 leaves stayed exact.
+- Active overlay c26aad47c44ded1dbf7c14ba743fcb22aebc7602, parent87ed16664d4acdfa5f3c59e957514415bd5fd6d3, treefb2e4eda5064278baa895912ef5b3aab01377398, F70c6555885685013c5f58d971736dd01bd5dc826d,130908B,SHA25641f74889f7eee5d9c601405917ccf950fd8e7d26844ae5f78c5d0d69e84b6c87.
+- Exact consumed message: AFW custody postmortem ZERO KEY final one use 20261113-87ed16664d4acdfa-01. Whole active delta was only fixed Source-branch/self-F7 push trigger and the two complete one-use guards. Five bodies, inline code/driver fixture/neutral texts and all other bytes stayed exact.
+- Main remained0c9c475b3ebaa970fc11d628b40e50a90cceb727; no main/PR/merge, Cloudflare/runtime, OAuth/OTP/token/permission, AFW-environment, real-key, Native, World/SDK/MF or owner-data action was performed.
+
+Five current Source body hashes (adapter43451B; inspector10797B; controls24974B; safeZip13305B; receiver5949B):
+
+| Body | SHA256 |
+|---|---|
+| adapter | a1e7a28f356cafde6e9486a9bcdb69aaa3fc98e00b928df11f36052bb915d9f3 |
+| inspector | 918da72545766a44d72d22b0b86ff04873edde73888653bbc366d70ce6585be8 |
+| controls | 8238fc7b78a729600b3dc5a8a6c1d5c68f88a9dcbe51c458a9902a54809b289b |
+| safeZip | b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d |
+| receiver | 0b200c9e2ae1ab89baf361f2fc8de6da6a841ce6de570d3cc9532941d4accb4f |
+
+Original adapter43451B/a1e7, SAFEZIP13305B/b36 and embedded ZIP3 3380B/SHA2564ff44bd3adda54eb0816fab275e4b13078005d1bd1a4626cfbf67d31e8bf7af8 remain byte-exact. Public schemas remain13 TargetRecord/14 Result/20 ReadbackMarker/9 Context; programHashes has exactlyfive keys. Historical Subject stays b8497734abe5f6afdcc7c518e82a591438353f14/tree1c0e1a87fa759ea07dc117931c37258067d3b1c0/F75eaf4f5e5497711e219999fa14c51501a82f94d2/run43414661211/attempt1/Node22.23.4. Current Observer is the exact c26aad47.../fb2e4eda.../0c655588.../run43443934728/attempt1/Node22.23.4 in the closed marker below. No Subject/current-Observer identity spoofing.
+
+Actual run/commands/output:
+- [Run43443934728](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43443934728), push/attempt1/exact Source/ref/path; created2026-11-13T14:34:04Z, completed/success, updated2026-11-13T14:34:28Z. Exactly one run for this activation commit; no retry or extra attempt.
+- custody_inspect job131948359112 completed/success, including fixed-keyless Source, checkout, Node22.23.4, body preservation, controls/inspection and upload. verify job131948494258 completed/success, including its independent receiver. Source stayed frozen through both terminal jobs and completed run.
+- Actual producer Node driver invoked C.runAllControls(expected,provenance,line=>console.log(line),receiverDriver). Complete controls marker at2026-11-13T14:34:12.7785914Z reported diagnostic7/7/7 failed0, ZIP14/14/14 failed0, receiver2/2/2 failed0 with exact23 ordered IDs passed. Only then were the two fixed retained archives inspected sequentially.
+- Actual independent receiver invoked R.orchestratePostmortemReceiver(expected,{runControls,readNeeds}), whose runControls invokes C.invokeControlGroup('receiver',()=>C.runReceiverControls(expected,receiverDriver),line=>console.log(line)) and asserts passed2. The same shared Receiver entry is exercised by the post-bootstrap fault fixture; production does not use a duplicate fixture oracle.
+- Collection marker at2026-11-13T14:34:16.1945384Z reported inspectionComplete:true and positive_prepare/reduction_prepare both receipt_caps/rejected, with all seven nonclaims false. No real control-failure summary was emitted. Successful process/job status proves collection/current package validation, not original-cap acceptance.
+
+Actual23 inventory (unchanged7+14+2; new covering cases remain inside existing IDs):
+
+| Group | Fixed ID | Status |
+|---|---|---|
+| diagnostic | postmortem_original_prefix_binding | passed |
+| diagnostic | postmortem_subject_observer_separation | passed |
+| diagnostic | postmortem_original_receipt_cap_boundaries | passed |
+| diagnostic | postmortem_stage_sequence | passed |
+| diagnostic | postmortem_metadata_failure_blocks_archive | passed |
+| diagnostic | postmortem_target_null_and_cap_coherence | passed |
+| diagnostic | postmortem_error_redaction | passed |
+| zip | zip_valid_store_crc_vector | passed |
+| zip | zip_valid_deflate | passed |
+| zip | zip_signed_unsigned_descriptors | passed |
+| zip | zip_wrong_size | passed |
+| zip | zip_wrong_upload_sha | passed |
+| zip | zip_wrong_metadata_sha | passed |
+| zip | zip_extra_entry | passed |
+| zip | zip_duplicate_entry | passed |
+| zip | zip_traversal_entry | passed |
+| zip | zip_symlink | passed |
+| zip | zip_bad_crc | passed |
+| zip | zip_noncontiguous_ranges | passed |
+| zip | zip_declared_and_inflate_caps | passed |
+| zip | download_stream_redirect_auth_bounds | passed |
+| receiver | postmortem_pair_schema_manifest_binding | passed |
+| receiver | postmortem_route_direct_output_binding | passed |
+
+Exact complete controls JSON from the bounded current producer marker:
+
+```json
+{"diagnostic":{"expected":7,"completed":7,"passed":7,"failed":0,"inventory":[{"id":"postmortem_original_prefix_binding","status":"passed"},{"id":"postmortem_subject_observer_separation","status":"passed"},{"id":"postmortem_original_receipt_cap_boundaries","status":"passed"},{"id":"postmortem_stage_sequence","status":"passed"},{"id":"postmortem_metadata_failure_blocks_archive","status":"passed"},{"id":"postmortem_target_null_and_cap_coherence","status":"passed"},{"id":"postmortem_error_redaction","status":"passed"}]},"zip":{"expected":14,"completed":14,"passed":14,"failed":0,"inventory":[{"id":"zip_valid_store_crc_vector","status":"passed"},{"id":"zip_valid_deflate","status":"passed"},{"id":"zip_signed_unsigned_descriptors","status":"passed"},{"id":"zip_wrong_size","status":"passed"},{"id":"zip_wrong_upload_sha","status":"passed"},{"id":"zip_wrong_metadata_sha","status":"passed"},{"id":"zip_extra_entry","status":"passed"},{"id":"zip_duplicate_entry","status":"passed"},{"id":"zip_traversal_entry","status":"passed"},{"id":"zip_symlink","status":"passed"},{"id":"zip_bad_crc","status":"passed"},{"id":"zip_noncontiguous_ranges","status":"passed"},{"id":"zip_declared_and_inflate_caps","status":"passed"},{"id":"download_stream_redirect_auth_bounds","status":"passed"}]},"receiver":{"expected":2,"completed":2,"passed":2,"failed":0,"inventory":[{"id":"postmortem_pair_schema_manifest_binding","status":"passed"},{"id":"postmortem_route_direct_output_binding","status":"passed"}]}}
+```
+
+Consolidated final batch covering evidence:
+
+1. PM-F-I1 primitive stage/own enum: actual validateTargetRecord now requires typeof stage==='string' and Object.hasOwn(states,stage) before lookup. The passed postmortem_pair_schema_manifest_binding control rebuilt a valid result+manifest for one-element array stages and other invalid types/unknown or inherited enum names. Array fixtures set inspectionComplete:false and keep the other old-coercion state fields coherent, so the negative is not masked by a downstream inspection-flag inconsistency. It also checks a receipt_caps-array rejected record with valid counts and rebuilt manifest. No extra target field was invented, and no cap/schema was loosened. Prior Source was not executed to claim a synthetic RED result.
+
+2. PM-F-I3 historic metadata run ID: the new wrapper requires Number.isSafeInteger(meta.workflow_run.id) and exact String(id)===SUBJECT.run before original A.validateAssignedMetadata and before raw access. The passed postmortem_metadata_failure_blocks_archive control exercised string ID, one-element array ID, unsafe number and mismatched number through actual inspectTarget fixture I/O. Each required metadata_binding/rejected, null fileCount/totalBytes/cap flag, and archive counter0. Original Adapter bytes were unchanged.
+
+3. PM-F-I2 actual bootstrap-unavailable branch: both existing verified bootstraps extracted the EXACT CURRENT receiver JS driver from its existing NODE_POSTMORTEM_VERIFY block, using unique Source markers/10-space depad/LF after full workflow Gitblob/current context/five-body verification. They wrote a runner-temp .mjs copy and returned private source-derived byte/hash provenance. Current driver body9129B/SHA256fa6c078dcaa4a42fc37a68316de1f7ae992c1c9209528df8dec87219d8a38ef7 stayed identical across inactive/active overlays; no sixth Source body/heredoc/public hash key was added.
+   The existing postmortem_route_direct_output_binding callback re-read and verified written driver bytes/hash against that private provenance, Source/WorkflowBlob and actual current expected; then called the exact current driver through this Source-bound API command:
+
+```text
+spawnSync(process.execPath,[fixture.file],{
+  cwd:process.cwd(),
+  env:{GITHUB_REPOSITORY:'afw-inert-wrong-repository',RUNNER_TEMP:process.env.RUNNER_TEMP},
+  stdio:['ignore','pipe','ignore'],
+  timeout:5000,
+  maxBuffer:16384,
+  killSignal:'SIGKILL'
+})
+```
+
+   Absolute Node/current checkout cwd were used; stdin and stderr ignored; stdout bounded16384B; timeout5s. The minimal two-entry allowlist omitted GH_ARTIFACT_TOKEN and AFW_SYN_CHECKPOINT_KEY. The known wrong repository fails the first repo assertion immediately after key absence, before Git/file reads, dynamic Source-helper imports or API requests. The passed callback required no child.error, null signal, nonzero exit, and exactly one canonical closed marker<=4096B. That parsed marker had observer_unavailable/null identity, hashes, producer outcome, IDs and raw claims, inspectionComplete:false and all seven nonclaims:false.
+   One-per-process guard and the two actual receiver-controls invocation paths permit exactlytwo hosted children here: one in producer controls, one in the successful independent receiver controls. The child itself fails before helper imports and cannot recurse into controls. Child stdout was validated in memory and was not separately persisted/logged; evidence is the passed existing control/current Source-bound driver and successful independent receiver, not an invented extra test ID/count. No Source ran on Root/actor/MCP/PC.
+
+4. PM-F-I2 known post-bootstrap branch: actual driver retains verifiedExpected outside its catch; any later outer failure selects invalid_evidence with that verified Observer/five hashes, while only absence of verified bootstrap expected uses null observer_unavailable. The same production R.orchestratePostmortemReceiver function was called in the existing receiver fixture with actual current verified expected and a throwing control callback through the shared bounded invocation wrapper. It required retained exact Observer/fivehashes, unavailable/invalid_evidence, inspectionComplete:false, null artifact/raw/result/manifest claims, seven false nonclaims, one captured sanitized fixed control summary, lazy-needs calls0, artifact-metadata calls0 and raw calls0. A lazy-needs exception also retained known identity and zero artifact I/O; an inert valid route exercised the shared success path. These fixtures do not construct a replacement receiver oracle.
+
+5. PM-F-M1: run-name is phase-neutral AFW custody postmortem plus existing github.sha expression; comment exactly Execution requires the reviewed one-use Source trigger and guards. Root approved these two outside-run text changes before the separate activation delta.
+6. PM-F-M2: documentation clarified the existing budgets: metadata HTTP request10s; one whole generic-private download deadline30s INCLUDING archive-response headers. There is no separate archive-header10s deadline. Original transport code, raw/expanded/JSON caps and timeouts stayed exact; this wave introduced no transport change.
+7. Root's separate metadata-only observer type fix was Root-owned; Source actor did not edit Root docs. Original CP-I1/CP-I2 closed-schema/redacted-failure inventory behavior remains covered inside the passed controls.
+
+Current typed target facts:
+
+| Target | Artifact ID | Stage | Outcome | Unauthenticated OUTER fileCount | Unauthenticated OUTER totalBytes | Original success cap accepted |
+|---|---:|---|---|---:|---:|---|
+| positive_prepare | 14032036855 | receipt_caps | rejected | 103 | 354960272 | false |
+| reduction_prepare | 14032480638 | receipt_caps | rejected | 96 | 344974155 | false |
+
+For both current records metadataVerified/rawVerified/zipVerified are true. Fixed exact historical metadata, safe-integer run identity, expected raw sizes/digest triple and unchanged ZIP3 checks completed; compact fatal-UTF8 receipt syntax/numeric bounds were checked before original success-kind cap validation. Counts103/96 are within the unchanged512-file success cap, but observed totalBytes354960272/344974155 exceed unchanged134217728 bytes/128MiB. Both cap decisions are rejected; counts are preserved truthfully. These are unauthenticated OUTER receipt observations after retained encrypted ZIP integrity/CRC checks, not decrypted inner inventory or AEAD proof. No plaintext, private members/listing, key, SDK/World/MF/Native or namespace/drain operation was exposed/performed.
+
+The repeated present cap rejection is a current compatibility blocker. It does not prove the first historical exception, the historical immediate-postupload HTTP/metadata/ZIP behavior, a repaired old suite, or readonly's separate seal/missing-artifact cause. Earlier failed run43433569894 and its unknown first failed callback remain immutable evidence; no historical rerun was made.
+
+Current bounded SMALLSAFE:
+- Sole artifact14046442140/exact name afw-custody-postmortem-safe-43443934728-1/raw4150B, uploaded/API/body SHA256b6444996cc635eae507543736840fc043ce7785cfa8db9babe5e56b02d88f12b, created2026-11-13T14:34:17Z/expires2026-11-20T14:34:16Z/expired:false; current Sourcec26aad47.../run43443934728/repository IDs1347578006.
+- Exactly result.json3636B/SHA256b3a27ef6953f1219bea22b80f4d99871887cafc0fcc4572352056f060f5c053c and manifest.json260B/SHA256cbcfe3cc95ae3d134e5674205f74519faaa20dd2c0dc9f6413db93e3a3320575, combined3896B. Independent current receiver verified direct assignment, exact current metadata/name/provenance, strict ZIP/ranges/CRC, canonical pair/schema/typed targets/controls and full manifest.
+- Root independently downloaded ONLY this current4150B SAFE and validated the whole current pair, context/fivehashes/target facts and closed receiver. Actor downloaded no artifact. Metadata-only reconstruction from current controls/closed context+hashes and Root's typed numeric facts reproduced exact3636B/result hash and260B/manifest hash. No Source function was evaluated/imported on Root/actor/MCP/PC. No historical private/pure archive bytes, members, logs or keys were retrieved there; retained target cipher bytes stayed on hosted runner.
+
+Exact closed current receiver:
+
+```json
+{"marker":"AFW_CUSTODY_POSTMORTEM_READBACK/1","observer":{"repository":"tokenizartinfo-ops/agent-friendly-web","repositoryId":"1347578006","ref":"refs/heads/feat/finite-native-cleanup-20261101","source":"c26aad47c44ded1dbf7c14ba743fcb22aebc7602","tree":"fb2e4eda5064278baa895912ef5b3aab01377398","workflowBlob":"0c6555885685013c5f58d971736dd01bd5dc826d","run":"43443934728","attempt":1,"node":"22.23.4"},"programHashes":{"adapter":"a1e7a28f356cafde6e9486a9bcdb69aaa3fc98e00b928df11f36052bb915d9f3","inspector":"918da72545766a44d72d22b0b86ff04873edde73888653bbc366d70ce6585be8","controls":"8238fc7b78a729600b3dc5a8a6c1d5c68f88a9dcbe51c458a9902a54809b289b","safeZip":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d","receiver":"0b200c9e2ae1ab89baf361f2fc8de6da6a841ce6de570d3cc9532941d4accb4f"},"producerResult":"success","artifactId":"14046442140","uploadedDigest":"b6444996cc635eae507543736840fc043ce7785cfa8db9babe5e56b02d88f12b","status":"verified","reason":"none","inspectionComplete":true,"rawZipBytes":4150,"rawZipSha256":"b6444996cc635eae507543736840fc043ce7785cfa8db9babe5e56b02d88f12b","resultSha256":"b3a27ef6953f1219bea22b80f4d99871887cafc0fcc4572352056f060f5c053c","manifestSha256":"cbcfe3cc95ae3d134e5674205f74519faaa20dd2c0dc9f6413db93e3a3320575","historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Mandatory restoration and Source preservation:
+- After completed run and both terminal-success jobs, frozen Sourcec26aad47c44ded1dbf7c14ba743fcb22aebc7602, original rollback and unchanged full report prefix were freshly checked.
+- Restoration e6d3d9420613ac30f10a1dccb472fce486f858d4 has parentc26aad47c44ded1dbf7c14ba743fcb22aebc7602 and EXACT pre-wave tree5c91e72178287f079607234f2a546641c014a7cc. CAS used expected tip/no force. Original F7 read back byte-exact f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a.
+- Pre-append closure snapshot: restoration0runs, current activation exactlyone attempt1/completed run, main0c9c475b3ebaa970fc11d628b40e50a90cceb727 unchanged, queued/in_progress/waiting/requested/pending all0.
+- This appends ONLY the SAME report, preserving ENTIRE prior204637 characters/204699B exact prefix, prior blob68ae6784afe4cc05a55b737a564e8ca07a0b58b6/SHA25616975ae51a8ca2f0fd357500ff89def3aab8bc836284c1ad0ef94315b5fad62b. Final3196 leaves/62 workflows; all other3195 original type/mode/blob identities, including original F7/R1, remain exact.
+- Final append commit/tree/report blob/hash and fresh post-publication closure readbacks are returned separately to Root to avoid self-referential hashes.
+
+Disposition: DONE_WITH_CONCERNS. Single final-wave covering run passed23 controls and current package verification; two original-cap rejections remain valid current OUTER observations. inspectionComplete:true denotes those two decisions completed. All seven nonclaims stayfalse; key/Native/FF-I2 holds unchanged. ONE scoped final re-review is pending Root; no second final fix wave, retry, autofix, broad suite, Native/key/Cloudflare action or PC-off claim is authorized. STOP after final closure.
