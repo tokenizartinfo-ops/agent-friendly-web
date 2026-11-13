@@ -102,10 +102,7 @@ jobs:
         run: |
           set -euo pipefail
           umask 077
-          case "$ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
-          case "$ARTIFACT_KIND" in model) limit=4194304;; safe) limit=131072;; cipher) limit=136314880;; *) exit 1;; esac
-          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND-meta.json"
-          curl --fail --silent --show-error --location --max-time 20 --max-filesize "$limit" -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND.zip"
+          node test/fixtures/finite-post-ack-diagnostic.mjs read-artifact
           python - <<'PY'
           import os,json,hashlib,zipfile,stat,pathlib,struct
           def closed(pairs):
@@ -148,7 +145,7 @@ jobs:
             with (out/i.filename).open("xb") as f:f.write(body)
            assert z.testzip() is None
           receipt={"artifactId":os.environ["ARTIFACT_ID"],"uploaderDigest":os.environ["ARTIFACT_DIGEST"],"apiDigest":m["digest"],"rawZipSha256":digest}
-          (root/("afw-"+kind+"-download-check.json")).write_text(json.dumps(receipt,separators=(",",":")))
+          with (root/("afw-"+kind+"-download-check.json")).open("x") as f:f.write(json.dumps(receipt,separators=(",",":")))
           if kind=="cipher":(root/"afw-post-ack-native"/"cipher.zip").write_bytes(b)
           PY
       - name: Protected MODEL inventory readback using its REAL assigned artifact ID
@@ -215,10 +212,7 @@ jobs:
         run: |
           set -euo pipefail
           umask 077
-          case "$ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
-          case "$ARTIFACT_KIND" in model) limit=4194304;; safe) limit=131072;; cipher) limit=136314880;; *) exit 1;; esac
-          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND-meta.json"
-          curl --fail --silent --show-error --location --max-time 20 --max-filesize "$limit" -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND.zip"
+          node test/fixtures/finite-post-ack-diagnostic.mjs read-artifact
           python - <<'PY'
           import os,json,hashlib,zipfile,stat,pathlib,struct
           def closed(pairs):
@@ -261,7 +255,7 @@ jobs:
             with (out/i.filename).open("xb") as f:f.write(body)
            assert z.testzip() is None
           receipt={"artifactId":os.environ["ARTIFACT_ID"],"uploaderDigest":os.environ["ARTIFACT_DIGEST"],"apiDigest":m["digest"],"rawZipSha256":digest}
-          (root/("afw-"+kind+"-download-check.json")).write_text(json.dumps(receipt,separators=(",",":")))
+          with (root/("afw-"+kind+"-download-check.json")).open("x") as f:f.write(json.dumps(receipt,separators=(",",":")))
           if kind=="cipher":(root/"afw-post-ack-native"/"cipher.zip").write_bytes(b)
           PY
       - name: Same-ID authenticated open and full private inventory readback
@@ -324,10 +318,7 @@ jobs:
         run: |
           set -euo pipefail
           umask 077
-          case "$ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
-          case "$ARTIFACT_KIND" in model) limit=4194304;; safe) limit=131072;; cipher) limit=136314880;; *) exit 1;; esac
-          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND-meta.json"
-          curl --fail --silent --show-error --location --max-time 20 --max-filesize "$limit" -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND.zip"
+          node test/fixtures/finite-post-ack-diagnostic.mjs read-artifact
           python - <<'PY'
           import os,json,hashlib,zipfile,stat,pathlib,struct
           def closed(pairs):
@@ -370,7 +361,7 @@ jobs:
             with (out/i.filename).open("xb") as f:f.write(body)
            assert z.testzip() is None
           receipt={"artifactId":os.environ["ARTIFACT_ID"],"uploaderDigest":os.environ["ARTIFACT_DIGEST"],"apiDigest":m["digest"],"rawZipSha256":digest}
-          (root/("afw-"+kind+"-download-check.json")).write_text(json.dumps(receipt,separators=(",",":")))
+          with (root/("afw-"+kind+"-download-check.json")).open("x") as f:f.write(json.dumps(receipt,separators=(",",":")))
           if kind=="cipher":(root/"afw-post-ack-native"/"cipher.zip").write_bytes(b)
           PY
       - name: Protected MODEL inventory readback using its REAL assigned artifact ID
@@ -403,10 +394,7 @@ jobs:
         run: |
           set -euo pipefail
           umask 077
-          case "$ARTIFACT_ID" in *[!0-9]*|'') exit 1;; esac
-          case "$ARTIFACT_KIND" in model) limit=4194304;; safe) limit=131072;; cipher) limit=136314880;; *) exit 1;; esac
-          curl --fail --silent --show-error --max-time 15 -H "Authorization: Bearer $GITHUB_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND-meta.json"
-          curl --fail --silent --show-error --location --max-time 20 --max-filesize "$limit" -H "Authorization: Bearer $GITHUB_TOKEN" "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/$ARTIFACT_ID/zip" -o "$RUNNER_TEMP/afw-$ARTIFACT_KIND.zip"
+          node test/fixtures/finite-post-ack-diagnostic.mjs read-artifact
           python - <<'PY'
           import os,json,hashlib,zipfile,stat,pathlib,struct
           def closed(pairs):
@@ -449,7 +437,7 @@ jobs:
             with (out/i.filename).open("xb") as f:f.write(body)
            assert z.testzip() is None
           receipt={"artifactId":os.environ["ARTIFACT_ID"],"uploaderDigest":os.environ["ARTIFACT_DIGEST"],"apiDigest":m["digest"],"rawZipSha256":digest}
-          (root/("afw-"+kind+"-download-check.json")).write_text(json.dumps(receipt,separators=(",",":")))
+          with (root/("afw-"+kind+"-download-check.json")).open("x") as f:f.write(json.dumps(receipt,separators=(",",":")))
           if kind=="cipher":(root/"afw-post-ack-native"/"cipher.zip").write_bytes(b)
           PY
       - name: Verify closed observation model pins cipher assignment and original outcome

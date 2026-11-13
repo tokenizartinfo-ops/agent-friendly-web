@@ -6128,3 +6128,66 @@ Closed Source867c5f0d3c959eb9c62d64efcb80d50ac67d932d/tree dafd6be9be85ef70eb6c2
 Main independently unchanged0c9c475b3ebaa970fc11d628b40e50a90cceb727. Five active repository states queued/in_progress/waiting/pending/requested=0 after closure. Sole fix2run43336838877/attempt1 completedFAILURE; producer131595029246failure, verifier131595273354skipped. MODEL13997192957 metadata/currenthead91e3/10700B/digestea1c3f97/expiry2026-11-20T00:25:06Z recorded above; no SAFE and no MODEL archive/Native data downloaded. No repair/retry/rerun after HTTP404, no further task dispatched. Final report-only receipt commit receives full ref/tree/files/main/five-state0 readback before parent response; it cannot self-record its own SHA.
 
 StatusBLOCKED: overall fix2 qualification halted by fixed MODEL read HTTP404/exit22; no endpoint/cause diagnosis or false GREEN. Current pure preflight completed successfully, but named24controls/8groups/17pure and independent proof did not execute, so a fresh scoped Root authorization is required to qualify the preserved candidate. Native/key/MF/I0/SDKruntime/CF/production/OAuth/customer/PCoff/Native16/Max remain unexecuted/HELD, allfiveflagsfalse. Task-owned string/hash buffers are released; no local Source files/processes/dependencies were created. STOP.
+
+
+## Native post-ACK R2 Task1 fix round3/5
+
+### N9 bounded fixed artifact reads — frozen preparation
+
+Exact Root briefd3ae3a1b397a0923ce0e6ccffa38037444c9bc3e atb08deb12183e6117f9a61556282f37471474e7e0. Same original sole implementer; Sourcecloud/GitDB/Actions only, sixpaths, no subagent/reviewer/Rootdocs/main/PR/merge/deploy/CF/Native/key/SDKruntime/MF/I0. Current68bad470670fabf6e77e7b458e42874ebd6142eb/tree08c0731328cbf9ab4eccb07223d7b90ad7e8cc36/3194leaves/3188protected and all6files+F7 read exact, main0c9c475b3ebaa970fc11d628b40e50a90cceb727; fiveactive states0. Entire report584902char prefix/aa5ec79027e5642c2e97aad156bcf09cf1e70a0a preserved. Reviewed N8World reinstated BYTE-EXACT0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b/242981chars/242987B/SHA007a4b39777dbd34645f7754556cfa1a9e152a0d2a6f55a27f6b1c30e334d867; I1/shared whole-helper→oracle/actual5families7handoffs unchanged. No attempt to repair/reinterpret I1 code already addressed by scoped review.
+
+The previous fixed-read404 hop/cause remains UNKNOWN. This is bounded response handling and phase observability, not proof of an eventual-consistency, permission, credential, provider or root-cause repair. No oldrun43336838877 replay. [GitHub artifact REST](https://docs.github.com/en/rest/actions/artifacts) documents metadata GET and302 archive redirect; [runner communication reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners#communication-requirements-for-github-hosted-runners) lists artifact storage domains; [artifact toolkit client](https://github.com/actions/toolkit/blob/main/packages/artifact/src/internal/client.ts) supplies behavior context for transient read failures. These references do not identify the cause of our404.
+
+Private readFixedArtifact/closed read-artifact CLI now owns the existing fixed metadata,zip_api,zip_body GET hops. Fixed current repo/assigned ID/context/name/source/run/attempt/expiry/uploader digest only; no artifact search/substitution/uploadretry/runretry or arbitrary destination. Metadata fields/UTF8/duplicate JSON keys/size/identity/digest are checked before archive reads. API requests have Authorization only to exactapi.github.com paths, redirectmanual; archive302 Location must beHTTPS/noURLcredentials/nohash/nootherport and GitHub-provided results-receiver.actions.githubusercontent.com or one *.blob.core.windows.net hostname. Storage GET has no GitHub token/header and no redirect following; no token,header,body,Location/signedURL or stack is logged. Raw archive cap/hash and API/uploader agreement remain mandatory before local files are written once.
+
+Each owned retrieval has ONE monotonic deadline: MODEL/SAFE25s,cipher60s; every request/body/wait uses remaining time. Each phase at most3read attempts, waits2s then5s only on404/408/429/500/502/503/504/boundednetwork failure; fewer if headroom insufficient.401/403/otherHTTP (including501), malformedmetadata/identity/digest/redirect/bodylimit fail immediately; no retry hides validation. No timer/job/test/root/child/C0/C1 reset or extension. Closed purposeAFW_ARTIFACT_READ/1 rows contain exactlykind,phase,attempt,httpStatus-or-network,elapsedMs,outcome; max9rows/4096B, individual<=256B. Phase failure is now distinguishable without raw response data.
+
+Seven existing download front-ends (contracts3,Native4) replace only curl retrieval with the same private Node CLI; Python strict2/3files/regularpaths/CRC/EOF/UTF8/duplicateJSON/schema/compressed+uncompressed bounds/currentID/rawdigest validation remains outside retry loops. Download-check receipt now exclusive-write. Actual assigned MODEL protected verifyBudgetArtifact/readback/currentpins, SMALLSAFE twoJSON caps and all N1–N8 contracts remain. Approved N9 binding: same-ID cipher open revalidates immutable already-fetched raw metadata+receipt+uploader/API/rawZIP digest locally, NOT a new metadata observation/GET or new60s window; independent Native verifier separately performs bounded metadata-only read, no cipher download. Exactlythree Native key-bound terminating steps remain; allNativejobsheld. Additional wait time consumes existing job and current Native preallocation headroom.
+
+Tests-first current-routine fakefetch/monotonicclock/timer scenarios are incorporated in existing profile_scope (no new24ID/Node test/export/dependency): all3hop404→success, full retryable table,network→success,3read exhaustion/waits2+5, shared25s acrosshops/noreset/fewerattempts,403/501 immediate, malformed+duplicateJSON/wrongID/run/source/name/repo/expired/digest, rawdigest, rejectedHTTP/credentials/foreignhost/hash redirects, and no credential forwarding/private logs. Source fakes call the SAMEprivate transport with closed responses/timers; no real network, SDK or Native. Expected29scenarios, actual bounded summary will be recorded only after the authorized covering run. Fake IDs/URLs/tokens are labeledSYN and never used as assigned MODEL readback witnesses. N8actualhandoffs and21original oracle criteria remain intact.
+
+Prepared covering commands unchanged: node --check3files; currentmodelpreflight including actualN8handoffs; MODELupload and newbounded read-artifact then untouched strictZIP/triplehash and REAL-ID protected readback; AFW_POST_ACK_MODE=controls node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs (24callbacks/onewrapper); unchangedfixedF1–F8original45s;17puretests; contracts-proof/SMALLSAFE; independentMODEL+SAFE/currentcheckoutverify. ONE fresh7+2workflowpush/attempt1 only. No local Source execution: string assembly/hash data-only chunks<=60000serializedchars, no clone/deps/build/temp Source files. Actual run/job/phase/callback/fake/hand-off/artifact/proof outputs will be appended after bothterminal, not presumed here.
+
+Frozen held-source inventory:
+
+```json
+[
+  {
+    "path": "test/fixtures/finite-budget-world.mjs",
+    "chars": 242981,
+    "bytes": 242987,
+    "sha256": "007a4b39777dbd34645f7754556cfa1a9e152a0d2a6f55a27f6b1c30e334d867",
+    "blob": "0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b"
+  },
+  {
+    "path": "test/fixtures/finite-post-ack-diagnostic.mjs",
+    "chars": 91238,
+    "bytes": 91238,
+    "sha256": "5f84a7d77246511cecc3afcd3ff12107e8de713806d7e36964f8703c9ab1538a",
+    "blob": "dc05c0410fc085062fb47e10bb29e6723d938821"
+  },
+  {
+    "path": "test/finite-post-ack-diagnostic.test.mjs",
+    "chars": 1923,
+    "bytes": 1923,
+    "sha256": "cbe41b778c68e74516f9008061d27cdcdc6e8dcf212a93d8ddb24caf8079e462",
+    "blob": "aaf4894d1b411a8ac59debb63ca9368e803141c5"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+    "chars": 19347,
+    "bytes": 19347,
+    "sha256": "dffafee8d1347e869154d5bc7d34b71c2297b12bd1f20649bcb6b7dc710bb58e",
+    "blob": "2006beb4d081ef127d1192fd99967f5f76eeb7db"
+  },
+  {
+    "path": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+    "chars": 27458,
+    "bytes": 27458,
+    "sha256": "50a72c97cfffb2710c10a8127871f11893cefe778c61b61664e06c69905116e3",
+    "blob": "baa8442094731bea1413d2cc03028ab8682b300b"
+  }
+]
+```
+
+Source self-review checked trust/credential boundary, sameID/currentcontext/no fallbacks, no validation retries, total deadlines/bodycaps/closure of responses, per-phase logs, private same-routine fake coverage, all7workflow substitutions, exclusive receipts, unchanged N8World/twoexports/testN7default/3keybindings/F7sevenfalse, and strict original Python integrity gates. Independent review remains separate. BothnewWFmanual/noinputs/nopush/twofalse; no Native permission even if KEYLESSpasses. OnANYnewqualificationfailure restoreWorldoriginal/closeallnewWF/fullprefix/protected/main/0activeSTOP withoutrepair/retry. OnPASScloseallnewWF/retaincode/fullreadbackSTOP. Native/CF/runtime/PCoff/Native16/Max NOTEXECUTED, allreadinessflagsfalse.
