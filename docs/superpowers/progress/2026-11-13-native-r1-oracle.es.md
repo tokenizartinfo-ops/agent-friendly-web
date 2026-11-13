@@ -35,7 +35,7 @@ Closedc1c1b22a/treeb13c983e/newreportc373a08b/7920chars; Rootfull3195/all3194old
 FreshAstra SPEC/QUALITYCHANGESREQUIRED; five load-bearing findings (fourhigh,onemedium): genuineearly/lateroraclefailureclassification; knownvalidationreasonlostthroughreopen/publish; independentfilepresence/digest/fullstructure/archivecopy-inventorygaps; documentedAFWcustodyenvironmentomitted; incoherentpublicstates/absence-vs-malformed-vs404+manualonlypublicationtest. Rootreadrelevantactualcode/knownpriorEnvandcorroborates. InitialKEYLESSgreenretainedasanactualpurequalificationwithlimitations, noNativepermit. P9 clarificationsaddedbeforeSourcefix; publicschema/caps/oracleunchanged.
 Ruling: treatallfiveImportantbeforeactualduecross-taskdependency; sameoriginalSol/xhighresumeformalround1/5, minimaladapter/controls/verifier+actualenvironmentmetadata, immutableSAFEZIP/F8/protectedall3193/noNative. Costonefresh7+2/ALL5terminal/closedreport7920prefix, noRootSourcefix. Fullreviewpathnative-r1-oracle-task1-review.md/fixbriefnative-r1-oracle-task1-fix1.md. NativeTask2HELD, nohumanstepsbefore08AR.
 
-## Continuidad nocturna — 13 de noviembre, 04:55 UTC
+## Continuidad nocturna — 13 de noviembre, checkpoint preparado a las 04:53 UTC
 
 Gabriel dejó el ordenador encendido y pidió no solicitarle intervención hasta las 08:00 de Argentina. No se abrieron accesos temporales, códigos ni permisos. El trabajo de implementación y sus pruebas continúa exclusivamente en GitHub/Actions.
 
@@ -48,3 +48,5 @@ El verificador independiente de metadatos de Root ahora rechaza combinaciones in
 Consulta pública puntual del proveedor: la página oficial actualizada a `2026-11-13T04:28:00.856Z` mostraba el incidente `0ocqieaifg7h`, sobre notificaciones de cambios en Workers mediante Cloudflare Event Subscriptions. La descripción oficial indica que los Workers desplegados y los cambios mismos no están afectados. No se ha establecido una relación con los avisos propios de AFW. La ausencia del incidente antiguo en la lista no se interpreta como confirmación de resolución. No se creó otro monitor ni se consultó el runtime AFW.
 
 Próximo cierre: terminar la única cualificación KEYLESS de corrección, esperar los cinco jobs terminales, restaurar F7, conservar el informe y revisar el diff. Solo después de CLEAN se podrá liberar por separado una ejecución Native R1. Las cinco banderas de preparación continúan en `false`.
+
+El control reutilizable de cierre Git de Root se comprobó contra la evidencia ya guardada de Task1: árbol no truncado, 3194 archivos previos con hash/modo/tipo iguales, único informe nuevo, F7 exacto, main intacta, cinco jobs terminales y cero ejecuciones activas en los cinco estados consultados. Un caso válido y seis alteraciones deliberadas dieron el resultado esperado. Son pruebas propias sobre metadatos fechados; no una lectura nueva del runtime ni prueba de drenaje global.
