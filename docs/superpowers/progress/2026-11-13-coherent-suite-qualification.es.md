@@ -108,3 +108,11 @@ Ownerlatest: desconectaen5min/guardar/nocerrarventanas/continuardespués08AR. Ro
 
 Gabriel pidió «continua» después del guardado/desconexión. Root leyó checkpoint, actaTask1CLEAN y briefTask2. LecturasactualesSource715ac94e/main0c9/Rootdocse729exactos; queued/in_progress/waiting/pending/requested todos0. No repetirTask1.
 Ruling: liberar UNAsolapruebaactual8jobs desde candidato23bda, mismo4bodies, a ejecutorfresco; Source715a/report100977prefix protegidos — todaslascondicionespreviasCLEAN/lease/retornoowner están satisfechas — costifwrong: pruebaacotada falla,cierreexacto yreportesinreintento. EsSYNenActions, noPC-off real ni runtimeCloudflare. ExistingAESkey solo26cryptosteps; no nuevospermisos/claves/OTP. RootnoSourceimplementa.
+
+## Task2 actual suite in progress —13Nov11:14UTC
+
+Sourceb8497734/tree1c0e1a87/F75eaf4f5e; run43414661211/1, exactoneusemessageAFW COHERENT SUITE ACTUAL SYN 20261113T110740Z. Root compared complete8hunk activation delta, roundtrip exact, four approved helper bodies byte-identical. Only trigger/eight top-level guards changed; disabled helper carrier unchanged. Source frozen until completed+all8terminal.
+
+Currentmetadata: contracts success; readonly original Native command success but Generic custody seal failure, no private artifact upload. Positive/reduction producers still running. This is an observed evidence-custody step failure with causeUNKNOWN, not proof of key orCloudflare defect. No private/native/contracts logs or private/pureZIP fetched; currentpure artifactMETADATA only. Root and soleexecutor explicitly retain noautomaticretry/noSourcefix/noCF/runtime authority. All5flagsfalse.
+
+Chavo relay read once11:13UTC:84comments/newest6839994085, no newAFWrequest; no message/monitor created. Next: allterminal→exactrestore/report→independentSAFEifpublished+metadata closure→freshTask2review, not another run.
