@@ -90,3 +90,5 @@ Task1: fix round1/5 (4 addressed,4 open — F1mutation setup falsepositive; F4mi
 
 Ruling: next correction uses original-range mutation proof outside rejection assertion; always reconciles known direct assignments even withoutSAFE; selects receipt reads by actual captured success outcomes before parsing via fixed shared helper — these close concrete reviewed paths without changing publicschema or originalWorldoracle — costifwrong: covering control/scopedreview failsclosed. No finding parked.
 Fix round2/5 released only for one new bounded KEYLESS covering qualification and exactrestore/reportappend/STOP, currentSource0ade/reportprefix61240. Original3195/F7/main/62WF protected. Task2HELD/all5false.
+
+Ruling: FIX2 absent/partial suite reconciliation is suite-only; controlskind has one actual producer and a ten-job graph, so applying7/8suite topology would fabricate dependencies — preserve independent controls route — costifwrong: context-specific missingroutecontrol fails.

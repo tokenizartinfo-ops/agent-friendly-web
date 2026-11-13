@@ -181,3 +181,7 @@ Task1 prior Fix1 review: F2/F3/F5/F7 addressed; F1/F4/F6 remain open; new F8 Imp
 - Append a transparent correction to previous test-coverage claims: FIX1's 6/6 published result and phase records remain actual evidence, but the identity-rename assertion did not establish that its validator was reached. Preserve prior report in full, do not rewrite history.
 
 All prior clocks, original Native/TAP/F8/DAG, Source pins, four bodies, current schemas, qualified ZIP3/SAFEZIP, source-only/no actualkey/SDK/MF/World qualification, caps and closure requirements remain.
+
+### Fix2 suite versus controls graph
+
+The final attempt1 eight-job/seven-direct-assignment reconciliation applies only to kind suite, including a null suite route. Kind controls retains its separate keyless_controls needs and ten-job qualification graph; do not invent Native needs or apply the suite eight-job rules to that path. Both kinds retain exact absent/partial SAFE route classifications and bounded records. Cover missing/partial suite through reconcileSuite with seven fixed needs and direct verifyRoute absent/ID-only no-SAFE-traffic tests.
