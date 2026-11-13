@@ -2950,3 +2950,151 @@ Pre-append full report fetch remained exact7f327153bf70ae46f457474220e5c5adb69c1
 Pre-append closure inventories positively proved: consumed ae383 head exactly1 completed failure run43504422934/attempt1; restored2839799 head0 runs; current run artifact metadata0; in_progress,pending,queued,requested,waiting each0; main remains0c9c475b3ebaa970fc11d628b40e50a90cceb727. The final report-only commit must preserve this restored tree outside the SAME report and is followed by full final Source/ref/tree/prefix/62-workflow/one-run/closed-zero-run/five-zero-status readbacks.
 
 Self-review finding is explicit and unresolved: real VM Error/AssertionError location capture is not qualified. Further diagnosis must isolate the actual Node representation/fixture mismatch using a separately reviewed bounded source-only unit; this consumed attempt cannot be rerun or overlaid. No Task2 integration, original Native suite, deployment, runtime/credential/owner action, real AFW notice/review/withdrawal/autoclose or PC-off acceptance follows from this failure. All historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified remain false.
+
+## 2026-11-13 — Task1 fix1 INACTIVE preparation; no new run released
+
+Base is CLOSED Source523576c8a1a55303ab3e085ac05693b816838190/tree68225f5b43fe39a33171ffa2b418d99df6a306b1, main0c9c475b3ebaa970fc11d628b40e50a90cceb727. This append preserves full prior reportc569b4ea309b2602ca8dcd8699f6ab5bbec11a04,341870chars/341981B/SHA25634ca2cd3c36cff53488426499224ad82fe2b0a285319b3a75da2f630c6a46715. Original43504422934/1 remains consumed/FAILED; no rerun/overlay or old Source intent is reused.
+
+Root released FIX1 PREPARATION ONLY in exact brief docs/superpowers/briefs/2026-11-13-sanitized-stage-observations-task1-fix1.md and binding spec/ledger at Rootdocs b4904aa5fc9ce89b3e0f2603984a4ea8714a40d1. PROJECT AFW; repository tokenizartinfo-ops/agent-friendly-web/1347578006; environment Source-only unattached GitDB preparation; origin GitHub; resource current Source base above; allowed action prepare only. Source attach/run remain HELD for a new exact Root gate and separate one-use release under AFW-DIAGNOSTIC-TASK1-FIX1-ONEUSE-20261113.
+
+### Compatibility finding and trusted-startup boundary
+
+The prior failure marker established green_tests failures d12/d13, without raw assertion values. Subsequent official Node22 source confirms a compatibility deficit: bootstrap installs a data-valued default prepareStackTrace function, while the prior blanket guard rejected any such property. This Source finding is separate from unobserved cloud assertion details and does not qualify a repair. References: [Node22.23.4 realm bootstrap](https://github.com/nodejs/node/blob/v22.23.4/lib/internal/bootstrap/realm.js), [Node22.23.4 error formatting](https://github.com/nodejs/node/blob/v22.23.4/lib/internal/errors.js). The default formatting path can read name,code,message on Node-branded errors, so inherited code descriptors are included in the guard/counter controls.
+
+Root/Astra ruled that a function name, source text, lookalike closure or late-catch snapshot cannot authenticate the initial formatter. Fix1 instead captures the actual default descriptor/reference synchronously in the FIRST trusted World dependency, before thirdparty Source dependency evaluation. Only trusted pinned SYN code under controlled Node22.23.4 startup is covered. Arbitrary code substitution before that first capture is OUTSIDE the guarantee. This is not generic compromised-process security; no formatter is deleted, overwritten or temporarily disabled.
+
+Runtime startup fails closed unless Node22.23.4 is exact, NODE_OPTIONS is absent/empty, and process execArgv contains only the explicitly admitted non-preload flags --experimental-vm-modules,--test,--test-reporter=tap,--input-type=module. Qualification is stricter at its entry: both shell roles require NODE_OPTIONS unset before any Node bootstrap, and Q requires execArgv empty. The stdin-module flag is used only by fixed pinned fresh-child test input; it is not an authorization to execute arbitrary input. Preload/reflection fixtures below do not claim protection against arbitrary code that already ran before capture.
+
+### Exact proposed Source pins and World allowance
+
+| Source component | Git blob | Bytes | SHA256 |
+|---|---|---:|---|
+| runtime | 8387894721b0b4e8ccbf5d91eb4eed4cd0c7c5fd | 5863 | 34ff78a892a7aadbe9b6f8f2e810b7127d7a1409a42cf45ec28d946d1deedcc9 |
+| helper | 6b5b9f8905d77d3f9cd9d89ea3058cfbdd57760f | 7927 | 97dd3df67bfcaef8567975732b573f274d89be8b63a4e9020685fafe731f39f2 |
+| tests | 8b1580b5cd46e29da2006ab21921f84cc50e8aec | 18677 | 34e802afb65b6f3780e6a20b928d012ab3428f95389107c311345d5b3bd76d1d |
+| world | 43aad5bddd844d591572c5868b73697dfd3463f9 | 243656 | 05e50e17420c42f65f8c8c450efc6dd37f9ae429a32a070c9043ab0a50548238 |
+| zip | frozen Z | 13305 | b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d |
+| inactive FIX1 F7 | 4369c46741dd85ae3ce934d307e064defb45fc07 | 46383 | 96c11c25c03d90b81a9690854146d993d09f83a758f1abd48504698a5352227d |
+
+Add only test/fixtures/finite-budget-failure-runtime.mjs; modify helper, focused tests and ONLY World's first import+scoped catch. F7 is transient; this SAME report is append-only. All other Source leaves/modes/types/blobs inherit the exact closed base. Proposed leaf count3199, workflows62. No local Source files/evaluation/import/test/build/clone/dependencies; public strings and tree/hash data only. No npm/World/SDK/Native/provider/private log/archive/model/key/owner/runtime operation, external message, Source attachment or run occurred.
+
+World first physical line is exactly:
+```js
+import {readNativeStack as readFixedBudgetNativeStack} from './finite-budget-failure-runtime.mjs';
+```
+Current catch is physical line1934:
+```js
+ setImmediate(()=>{main().catch(async error=>{console.error('SYN fixed budget command failed');process.exitCode=1;try{if(process.argv[2]==='prepare-positive'&&process.env.GITHUB_JOB==='positive_prepare'){const bytes=await readFile(new URL('./finite-budget-failure-diagnostic.mjs',import.meta.url));const blob=createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');if(blob!=='6b5b9f8905d77d3f9cd9d89ea3058cfbdd57760f')return;const {projectFixedBudgetFailure}=await import('data:text/javascript;base64,'+bytes.toString('base64'));console.error('AFW_SYN_FAILURE/1 '+JSON.stringify(projectFixedBudgetFailure(error,readFixedBudgetNativeStack)));}}catch{}});});
+```
+Only those two hunks differ from the closed Worldba426c76; all original pre-Task1 World bytes reconstruct after stripping the exact first import and replacing the exact catch with the original line1933. OriginalWorld0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b reconstructs byte-for-byte, with exactly+1 physical line in current World. Generic error message and exit1 remain first. Only prepare-positive/positive_prepare can emit the fixed failure DTO. Helper Git blob6b5b9f89 is checked over exact file bytes before importing those SAME bytes via dataURL, and the reader is passed from the lexical first static import. No reader is read from an error property, global registry or mutable callback slot.
+
+### Early runtime and late pure projector
+
+Runtime imports ONLY node:util,node:assert/strict,node:process. No filesystem/network/key/World/SDK/Native dependency or await. It captures trusted intrinsic reflection/type primitives, global Error DATA descriptor/reference, Error/AssertionError prototype descriptors, actual default prepareStackTrace data function/reference+attributes along constructor chain, stackTraceLimit descriptor and the native stack getter/setter descriptor. Capture refuses accessor/proxy/unadmitted baseline shapes without invoking them. Captured state remains lexical/private; runtime exports only readNativeStack.
+
+Before any native getter call, runtime rechecks startup assumptions; exact current global Error descriptor/ref; current original prototype property/parent chains; exact captured default formatter descriptor/ref/attributes at each constructor-chain object; exact name/message/code/toString/constructor/Symbol.toStringTag descriptors on admitted original prototypes; primitive bounded own name/message/code data and absence of own formatting/constructor/tag hooks; exact native stack getter/setter descriptor. No name/text whitelist or unconditional function acceptance. Refusal throws only fixed null sentinel. Native raw stack text stays internal between reader and projector, never output/serialized by this role. No globals are mutated by runtime/projector.
+
+Late helper imports only node:util and contains ZERO Error/AssertionError/global formatter snapshot/new Error reads at import. Accessor stacks require OPTIONAL second argument readNativeStack from the trusted lexical caller; absence or proxy callback refuses as unknown. Error input cannot supply that function. Data stacks and fixed canonical log DTO parsing retain their old contract, bounds and fourteen exact code enums. Both public projections return only fresh {code,site} fixed vocabulary. No message, stack, arbitrary number/path/column/property/error serialization is public.
+
+Catalog remains631 finite source-site IDs over the same six pinned public files. Deterministic original raw assert/throw token matching plus previously declared extra boundaries is unchanged. Q strips first import, reconstructs original World bytes/blob and asserts exactly+1 line, then adds1 ONLY to World selected lines/IDs. Other aliases and persistence_100 remain unchanged.
+
+| Alias | Pinned original public source | Original blob | Selected sites | Current line offset |
+|---|---|---|---:|---|
+| world | test/fixtures/finite-budget-world.mjs | 0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b | 394 | +1 after original reconstruction |
+| native | test/mcp-qa-finite-budget-native.test.mjs | 533dafb5df5f8e57442c5b9029dc8dec6dded434 | 47 | 0 |
+| custody | test/fixtures/finite-checkpoint-custody.mjs | 4d05b5ec0f7b074be88ef9733a47c984b0212351 | 8 | 0 |
+| persistence | test/fixtures/finite-owner-cleanup-persistence.mjs | e0dda1fd3d66c1864fd0b20f873c7fc0c452f6d8 | 117 | 0 |
+| cleanup | lib/mcp-qa-finite-owner-cleanup.mjs | 1a5a2583d266179cdd89f799c64199f29044fec5 | 4 | 0 |
+| adapter | test/fixtures/finite-owner-cleanup.mjs | 2f5dad6c306fac1be2f11845bef640bb204ad572 | 61 | 0 |
+
+### Tests-first draft and exact new fixture boundary
+
+Original34 families are retained, with native d12/d13 still mandatory positive persistence_100 outcomes. Main test module imports runtime first, then passes that lexical reader to helper. d34 additionally proves absent reader declines an actual native accessor. d14 extends owned/prototype getter counters through the runtime and includes inherited Error.prototype.code with NO own code on the error. It obtains brand symbol KEYS from a trusted builtin-produced Node error without reading symbol getter values, defines data true on a genuine ordinary Error, and requires unknown/counter0. Removing the inherited-code guard would allow the default Node formatting branch to hit the getter; no arbitrary coercion or symbol hook is invoked by the test setup.
+
+Eight new FRESH child-process families are fixed public stdin-module programs, with no file writer/network/provider. Each child captures runtime before any replacement, creates a genuine error before global Error substitution, imports projector AFTER replacement, then requires unknown/counter0 and unchanged global descriptors. The default positive child requires actual Node default DATA formatter/function, real native site capture and exact descriptor preservation; there is no conditional skip.
+- Default formatter preserved.
+- Formatter getter after capture/before helper import, counter0.
+- Formatter function Proxy after capture/before import, all traps0.
+- Actual default formatter function TEXT cloned into a DIFFERENT closure, exact text equality but different reference; malicious closure counter0/unknown. This clone runs only as a controlled CLOUD test fixture. Runtime never uses name/text as identity.
+- Global Error getter substitution before helper import, counter0.
+- Global Error constructor Proxy substitution before helper import, all traps0.
+- Global Error different constructor substitution before helper import, constructor calls0.
+- Startup refusal for nonempty NODE_OPTIONS (--no-warnings) and --require node:util (builtin-only preload fixture, not arbitrary-before-capture protection).
+
+Exact42 diagnostic family IDs:
+- d01_exact_system_codes
+- d02_assertion_data_fields
+- d03_exact_custody_messages
+- d04_no_code_prefix_inference
+- d05_exact_custody_message_only
+- d06_every_finite_public_site
+- d07_relative_public_frame
+- d08_no_free_paths
+- d09_no_free_line_or_columns
+- d10_normal_chain_and_ambiguous_frame
+- d11_message_cannot_forge_frame
+- d12_real_vm_native_error
+- d13_real_vm_assertion
+- d14_getters_never_called
+- d15_proxy_traps_never_called
+- d16_revoked_proxy
+- d17_arbitrary_objects_no_coercion
+- d18_error_private_fields_ignored
+- d19_huge_error_stack
+- d20_long_error_line
+- d21_canonical_fixed_log
+- d22_all_log_codes_and_sites
+- d23_log_secrets_not_echoed
+- d24_log_closed_schema
+- d25_log_exact_enum_only
+- d26_log_duplicate_json_fields
+- d27_log_ambiguous_or_repeated_markers
+- d28_log_truncation
+- d29_log_marker_forgery
+- d30_log_utf8_byte_limit
+- d31_log_line_limit
+- d32_log_count_limit
+- d33_nonstring_logs_no_coercion
+- d34_fresh_closed_results
+- d35_fresh_default_formatter_preserved
+- d36_fresh_formatter_getter_before_helper
+- d37_fresh_formatter_proxy_before_helper
+- d38_fresh_identical_text_different_closure
+- d39_fresh_global_Error_getter_before_helper
+- d40_fresh_global_Error_proxy_before_helper
+- d41_fresh_global_Error_constructor_before_helper
+- d42_fresh_startup_options_refused
+
+No test has been executed for FIX1. These positive/negative assertions must be qualified in the new cloud run before any compatibility/privacy success is claimed. Q RED fixture copies the ACTUAL runtime module into the private red test fixture beside the SAME test bytes and an all-unknown helper stub. RED must fail positive behavior, not a missing runtime import. Real GREEN must pass all42, with actual native-positive tests and fresh substitution counters intact.
+
+### Updated independent zero-key qualification/schema
+
+Inactive carrier stays manual/inputfree/no-push, BOTH literal false guards, exact repositoryID/name/ref/workflow/workflow_ref/manual/attempt1/FIX1 future message, two jobs qualify+verify with three-minute limits, Node22.23.4, read-only contents/actions. Both scope shells assert unset NODE_OPTIONS. No secrets.* or GitHub environment. github.token remains confined to current same-repository run/artifact metadata+assigned raw ZIP transfer in verify. This remains an independent zero-AFW-key diagnostic role, not the26-key suite client.
+
+Source-carried programs are hash-gated before use; Q now pins runtime/helper/tests/World and copies runtime into RED, enforces exact startup, proves original World reconstruction/+1 catalog mapping, runs42families then14frozenZ+13role receiver controls. V also pins runtime. Exact program pins:
+- Q7925B/SHA25658ecf65ec65e1ba21204bcc56e2d04023ccf62e7824b612d2495a1441dc71a42.
+- S9491B/SHA2564891e42c02b1fb99aef81fce1adc5a88c34549f202d702d540d627177dbce4ae.
+- V4555B/SHA256eab05b842647de9b296c2eaf0f182b12ceda1094d19333dca8f26903d8ef87d5.
+- Z remains EXACT13305B/SHA256b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d.
+
+Success-only result/manifest canonical2JSON purpose/context/closed schema and strict metadata/raw ZIP/digest/context checks remain as previously specified, with exact pins object now runtime,helper,tests,world,zip, diagnostic vocabulary42 and receiver vocabulary13. Test counts are exact42 with green pass42/fail0/cancelled0/skipped0/todo0, RED exit1/mixed pass+fail/exact42 IDs. Controls statuses remain fixed passed only. A new receiver_wrong_runtime_pin negative control proves runtime SHA cannot be changed. All69 unique planned diagnostic+ZIP+role families are source controls, not business/Native acceptance. Z parsing/downloading/generic14control bytes are unchanged. Canonical SMALLSAFE pair and raw ZIP caps remain65536; retention7days; only literal declared outputs assign current artifact ID/digest; no historical/name fallback.
+
+Role receiver exact13 IDs:
+- receiver_valid_pair
+- receiver_noncanonical_json
+- receiver_duplicate_json_field
+- receiver_extra_json_file
+- receiver_result_hash
+- receiver_wrong_context
+- receiver_wrong_source_pin
+- receiver_true_nonclaim
+- receiver_counts_fail_closed
+- receiver_unknown_controls
+- receiver_native_descriptor_closed
+- receiver_utf8_fatal
+- receiver_wrong_runtime_pin
+Generic Z exact14 IDs remain the prior frozen list. Q fixed stage enum and fixed AFW_DIAGNOSTIC_QUALIFICATION_FAILED/1 {stage,failedIds} remain intact, now filtering only the exact42 IDs if actual real TAP was captured. No child stdout/stderr/error/values are printed. A real failure still exits1 and publishes no false success. Current zero-key marker extraction is distinct from forbidden Native/contracts/producer logs.
+
+Self-review during preparation checked source-string scopes/pins, no late Error snapshot, reader provenance, no formatter override, first import+catch reconstruction, line offset, exact carrier programs/guards and prefix preservation. No local Source execution or new Actions qualification occurred. The actual Node22 capture compatibility and all42fresh/control outcomes remain UNVERIFIED; the failed prior run is not repurposed as acceptance.
+
+Next: Root independently exact-reads this inactive unattached candidate and all new pins/schema/42+14+13 control lists. Only after a separate active proposal gate and NEW FIX1 one-use release may Source be attached. Never attach/rerun oldae383/5733/43504422934. On any future outcome Source freezes through BOTH terminal jobs, original F7f7a71/all undeclared leaves restore, explicit intended runtime/helper/test/World bytes remain, and the SAME report gets actual evidence/full closure readbacks. No Task2, Native/runtime/provider/PC-off action is released; allseven nonclaims remain false.
