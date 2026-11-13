@@ -125,3 +125,61 @@ Current ONLY SMALLSAFE artifact `14012797020`, `afw-r1-controls-safe-43371939381
 After ALL5 jobs were terminal and the run completed, this closure restores exact F7 `f7a71f1a0fa4f5ddf069ff411f008a098455e5cc` /126209B/SHA256 `1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a`, manual/no inputs/no push/seven false guards, and appends only this section. Target final leaf count remains3195; all3193 other prior leaves/modes and the full7920 report prefix are preserved. Final closed commit/tree/report blob, main0c9, 62 exact workflow events and five active-state zeros are carried in the external handoff to avoid recursive commit references.
 
 Limits/concerns: FIX1 evidence covers only current KEYLESS control families, inert crypto/capture/publication routes, Node selection and strict SAFE. Actual original Native R1, environment key acquisition, current checkpoint chain and private Native lifecycle remain unexecuted; no actual Task2 release, fresh scoped review CLEAN, global readiness, guard or PC-off claim. No further repair/rerun/Native16/cap or permission change follows this round. STOP after full restoration/readback.
+
+## Fix round 2/5 — failed qualification, exact closure
+
+Formal FIX2 authority/review/SPEC P10: Rootdocs `b46af6ebd588c836ce2fbd90f9ad54cd24d3dc2c`; pre-CAS precision durably amended in `63631b46b07885e836bb9a0196943ce52744a6ad`. The entire prior 20509-character report prefix is preserved. Base closed Source `171de18979f15a1965e4534a1586d4d70d2ed73b` / tree `d78f936a516935c17b51f3a728e2232e1d5205d0` / report `8f06376f138933706dbb76e4ceb2dad57a21b394`.
+
+Outcome: ONE FIX2 covering FAILED in custody_binding. No automatic repair or additional run was performed. Actual Native Task2 remains HELD. This failure is KEYLESS control evidence; it is not an actual Native failure or diagnosis.
+
+Prepared changes (qualification incomplete): minimal adapter/controls edits recognize the original pre-MF not_available/owned-partial-1 lifecycle and authoritative empty inventory without granting cleanOwned/Native eligibility. Empty partial directories may be absent after generic reopen; missing nonempty/extra/unknown-path/symlink/digest mismatch remains invalid. Normal archive retains512files/128MiB; partial uses the original generic4096files/512MiB, with whole sealed-tree and all existing bytecaps unchanged. Original C0=I0+900000/C1=C0+180000 are restored with safeinteger/copy checks. Only snapshot rows/logicalScopeEvents/totals.scopes and their corresponding retention descriptors use the protected16384 capacity. TAPpassed without full result is prepared to classify validation/invalid_evidence; the shared adapter DTO validator rejects passedTAP+native:not_observed with explicit passedcontracts for both custody variants. Verifier and SAFE ZIP bodies are byte-unchanged. Resolved F1 source-frame attribution, cleanOwned and F4 environment/key scope are unchanged.
+
+Tests were extended before production edits inside the existing twelve families: original-shaped partial empty/nonempty capture→generic inert-key seal/open→revalidate→publish; integrity negatives; coherently wrong epoch copies; 4096/4097/16384/16385 field-specific native-list boundaries; actual missing-full publisher and shared verifier routes with passedcontracts. Completion is recorded only per actual assertion/family. The failing family prevented later families; unrecorded subcase outcomes are not claimed.
+
+Complete inactive actual candidate preserved/read back before activation: `836c2449ed28d83dee7141f88dd446d63b9d197b`, tree `cce9aa02ff149c66ce2dd192c4c4100c21c9db3a`, F7 `be40f9b0f9e03a03b3b09254dfe842d5cf4209c5`, 170606B, SHA256 `b4c5c09109eae92f2906e75efec01204f4a988341a2f0c7ec87816565ab9db61`. All3194 prior non-F7 leaves/modes (including unchanged report prefix before append) were exact. Manual/no inputs/no push; all three actual jobs literal false,7→7→2; original F8literal19126 and original functional public-pure upload byte-exact. Original test/World/custody/lock/SDK/businessoracle/caps unchanged. Four unique final-LF/dedented program bodies match inactive/active Source and are git-blob-bound before imports.
+
+| Program | Bytes | SHA256 |
+| --- | ---: | --- |
+| adapter | 51960 | `a646359fdb1e739e801de48a3d1e36927855d98e13c273ac2348508a2e0222d4` |
+| controls | 37767 | `8ce51477b137f23c2f108b98f977b6a3a186bb9cd128fea497af45a991d765d9` |
+| verifier | 7909 | `e8320ab55c24fca8487ac2b789f44b4f783d415f3b7e89525683142a7f436c1c` |
+| safeZip | 13305 | `b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d` |
+
+Review inputs: [prior inactive](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/79170e2c7d734088160aae834bededbe7cf31c60/.github/workflows/afw-finite-budget-qualification.yml), [FIX2 inactive](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/836c2449ed28d83dee7141f88dd446d63b9d197b/.github/workflows/afw-finite-budget-qualification.yml). SAFE ZIP remains13305/b36. Only actualcontracts/native_r1 declare the existing afw-finite-syn-checkpoint environment; four actual crypto steps alone reference the existing key. Active KEYLESS and verifiers have no environment/key binding.
+
+Temporary overlay `0192b79cfdb64d6c651e359e32957593b9b1c52b`, tree `fa3c005ccc6e450852c2f024bb20fdae734bb001`, F7 `42a5f895a4c3b5a612a4ffb420e29a28551d252d`, 178757B/SHA256 `fe1a08e858b86c733d983f85f93440adb618a904faf95eae8213bf3e648ac9da`. Exact branch/repository/selfpath/unique FIX2 commit-message/attempt1 gates. Pre-CAS full refs/commit/nontruncated3195tree/all3194non-F7/report20509/F7/main0c9/62events/fiveactive0 reconciled. Source frozen until ALL5 declared jobs and the run completed.
+
+Run [43374412749](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43374412749), `AFW native R1 oracle KEYLESS FIX2 20261113-a`, push, attempt1, completed FAILURE, `2026-11-13T05:48:25Z` → `2026-11-13T05:48:50Z`. Commands: current Source-bound bootstrap, `node "$RUNNER_TEMP/afw-r1-controls.mjs"`, independent `node "$RUNNER_TEMP/afw-r1-verifier.mjs"`. Node22.23.4 inert filtering still omitted:3registered/1executed/0observedskips. No Native/SDK/MF/I0 or real key bound/executed.
+
+| All five declared jobs | Job ID | Terminal conclusion |
+| --- | ---: | --- |
+| keyless_contracts | 131717425304 | failure |
+| native_r1 | 131717427028 | skipped |
+| verify | 131717427162 | skipped |
+| contracts | 131717427215 | skipped |
+| keyless_verify | 131717496477 | failure |
+
+Actual control result: expected12, completed9, passed8, failed1, firstFailure=custody_binding. The first eight families passed; custody_binding failed; schema_flags, manifest_integrity and unavailable_publication were not_executed. ZIP qualification independently passed16/16; the verifier accepted strict_current_safe_pair with producerStatus=failed and correctly failed the job for the failed producer. Valid failure evidence is not qualification success.
+
+Sanitized diagnostic available from actual records: failure family custody_binding. Expected: its focused assertions complete successfully; actual: family exception caught, one failed row. The fixed registry did not emit subcase, expected/actual values, error or stack. These cannot be recovered from the authorized SAFE/closed logs and are not invented. The last emitted focused markers prove successful empty/nonempty partial capture/reopen/publication; no FIX2_BOUNDARIES completion marker was emitted. The exact failing subcase among subsequent integrity/epoch/retention assertions is unestablished. No private fixture model/cipher/log retrieval or additional experiment was used to infer it. Root causal review is the next gate.
+
+Observed closed focused records (inert fixtures only):
+```json
+{"marker":"AFW_R1_FIX1_PRIVATE_ROUTE/1","route":"early","captured":"failed","published":"failed","custody":"verified","failure":{"stage":"native","reason":"original_oracle_failed"}}
+{"marker":"AFW_R1_FIX1_PRIVATE_ROUTE/1","route":"late","captured":"failed","published":"failed","custody":"verified","failure":{"stage":"native","reason":"original_oracle_failed"}}
+{"marker":"AFW_R1_FIX1_PRIVATE_ROUTE/1","route":"passed","captured":"passed","published":"passed","custody":"verified","failure":null}
+{"marker":"AFW_R1_FIX1_PRIVATE_ROUTE/1","route":"infra","captured":"unavailable","published":"unavailable","custody":"verified","failure":{"stage":"validation","reason":"invalid_evidence"}}
+{"marker":"AFW_R1_FIX1_PRIVATE_ROUTE/1","route":"uncertain","captured":"unavailable","published":"unavailable","custody":"verified","failure":{"stage":"validation","reason":"invalid_evidence"}}
+{"marker":"AFW_R1_FIX2_PARTIAL_ROUTE/1","case":"empty","Native":"unavailable","custody":"verified","failure":{"stage":"validation","reason":"invalid_evidence"}}
+{"marker":"AFW_R1_FIX2_PARTIAL_ROUTE/1","case":"nonempty","Native":"unavailable","custody":"verified","failure":{"stage":"validation","reason":"invalid_evidence"}}
+{"marker":"AFW_R1_CONTROLS/1","status":"failed","expected":12,"completed":9,"passed":8,"failed":1,"firstFailure":"custody_binding","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Only current SMALLSAFE `14013887604`, afw-r1-controls-safe-43374412749-1, expiry `2026-11-20T05:48:35Z`; raw/API1233B. Raw/uploader SHA256 `57454f742b518c11758cc0f7ecc2bae8fe616952eedbd5ed0e4a42f92a06c58f`; API digest `sha256:57454f742b518c11758cc0f7ecc2bae8fe616952eedbd5ed0e4a42f92a06c58f`. Result1535B/`bdf41f8613c78d003c16d7c90b182abc75805c10204d337263eeabc091e3fbf4`; manifest267B/`10c37fb2b20a90ca75984df5b0e2c55b5d4b9a4fee1bae6745ec1791659b78ca`. Four code hashes/current Source/run/attempt and strict twoJSON/CRC/canonical/full-manifest/digest-triple verified. Whole manifest:
+```json
+{"purpose":"afw.native-r1-oracle.controls-manifest.safe.v1","source":"0192b79cfdb64d6c651e359e32957593b9b1c52b","run":"43374412749","attempt":1,"files":[{"path":"result.json","bytes":1535,"sha256":"bdf41f8613c78d003c16d7c90b182abc75805c10204d337263eeabc091e3fbf4"}]}
+```
+
+Closure after ALL5terminal/runcompleted: exact F7 f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a, manual/no inputs/no push/seven false, plus only this report append. Final3195leaves/all3193 other prior leaves/modes and full20509prefix must read back exact; final commit/tree/report/main/62events/fiveactive0/close0runs carried in handoff. All five operational flags and realCustodyKeyBound/NativeExecuted/SDKImported/MFAllocated remain false.
+
+Limit: FIX2 is NOT qualified/CLEAN. Empty/nonempty partial positive routes are established; complete F2/F3/F5 correction remains unestablished until causal review and an explicitly released next block. Original Native R1/actual environment-key/checkpoint lifecycle remains unexecuted. No Task2, retry, Source protected edit, cap/permission change, global readiness or PC-off claim. STOP after restoration/full readback.
