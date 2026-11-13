@@ -92,3 +92,9 @@ Ruling: next correction uses original-range mutation proof outside rejection ass
 Fix round2/5 released only for one new bounded KEYLESS covering qualification and exactrestore/reportappend/STOP, currentSource0ade/reportprefix61240. Original3195/F7/main/62WF protected. Task2HELD/all5false.
 
 Ruling: FIX2 absent/partial suite reconciliation is suite-only; controlskind has one actual producer and a ten-job graph, so applying7/8suite topology would fabricate dependencies — preserve independent controls route — costifwrong: context-specific missingroutecontrol fails.
+
+## Fix2 qualification and closure — scoped disposition pending
+
+Run43404200555/1 succeededexact10terminal8skip2success; RootstrictcurrentSAFE14025364645 passed6families,26closedsubcases/52records,110shell/63Nodeinspectiononly,16ZIP andverified/none/strict/acceptedtrue. Fourbodyhashes +qualifiedZIPexact/currentcontextindependently checked.
+Source715ac94e/treec66911bd/report6e112294100977chars,61240prefixexact; restoreced5946 exactpreFix2tree7634f0eb. Independent3196/original3195/F7/R1report/62WF/main0c9/fiveactive0/closedcommit0runs. No actualNative/World/SDK/MF/realkey.
+Task1: fix round2/5 coveringpassed; F1/F4/F6/F8 awaiting originalreviewer's scoped disposition; all otherfindings retainaddressedstatus unlessfixregression. Completefixpackagedocs/superpowers/reviews/2026-11-13-coherent-suite-task1-fix2-review-package.md. Task2HELD/all5false.
