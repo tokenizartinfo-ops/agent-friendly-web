@@ -52,3 +52,6 @@ Oneunit/currentR1 only. Two implementation/review gates, preflight resolves conc
 
 ## Preflight binding amendments
 ReadSPEC P1–P7: preserve exactfunctionalF8pureframe+publicpureupload, addseparateencryptedcheckpointafterward; Nativeopenscheckpointthenverifypure_passed/3profiles/readonlybeforeI0. NewR1privatemodel+ownership/fullresult+noR2R3; old3case/R2validatorsnotrelabelled. SeparateprivateZIP3capsfromSAFE, fourbodies+sourceboundbootstrap; fatalcanonicalJSON. NoSAFEfallback ifrunnerlost: closedrecordpublication_unavailableonly. always&&scope, ALL3terminal/runcompleted. KEYLESSinertnamesonly; SourceWorld/testprotected; optionalfailuresitedeferred. AllRootrulingssavedbeforeSourcewrites; scopeSourceheldpendingscopedpreflightconfirmation.
+
+### P8 KEYLESS and enum precision
+Task1 allowed5declaredjobs(3actualdisabled+2KEYLESSactive7+2), all5terminalbeforeclosure; onlynewfourbodycontrols/inertframework fixture/staticSourcepins executed. Do not run originalNativeinactive/invalidgroupSDK-importsmokes inKEYLESS; actualcontracts preserves/runs them. ActualTask2 remains3jobsALLterminal. Keepfailure.stageoriginalsixvalues; cleanupuncertaintyvalidation/invalid_evidence. Reopenedfullresultbindsmodel/context/digests/completeness, notcopiedoriginaloracle. ExactcontrolsDTO addedSPEC.
