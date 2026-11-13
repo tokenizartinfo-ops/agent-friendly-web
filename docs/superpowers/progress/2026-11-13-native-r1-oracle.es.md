@@ -134,3 +134,11 @@ Este pase corresponde únicamente a R1 sintético actual. Las cinco banderas con
 Un revisor nuevo confirmó SPEC PASS y QUALITY CLEAN, sin hallazgos. Contrastó la activación limitada, la prueba original completa, el manejo de la clave, el recibo saneado y el cierre. Task2 queda completa entre `bde551ef` y `78fcd591`.
 
 Corresponde ahora una revisión nueva del plan completo, incluyendo las decisiones de preflight y la integración entre la cualificación y la ejecución real. No se vuelve a ejecutar R1 ni se altera Source durante esta revisión. El siguiente bloque posterior se elegirá tras ese cierre; Native16 y PC-off siguen pendientes.
+
+## Revisión completa: cuatro hallazgos; única ola final
+
+El revisor final encontró cuatro hallazgos importantes en rutas negativas: tipos de fallo no cerrados, pérdida del recibo ante TAP aprobado con primario contradictorio, archivos hermanos ajenos presentes antes de capturar y declaraciones privadas duplicadas que podían divergir. Ninguno invalida el R1 aprobado en Source416c.
+
+Ruling: corregir los cuatro en una única ola y cualificar la versión con KEYLESS; conservar el pase real atribuido a su versión original. El revisor confirmó que repetir Native solo hace falta para afirmar que la versión corregida procesó datos Native reales; no se hará esa afirmación. Costo si esta delimitación fuera insuficiente: esa versión requerirá después su prueba Native propia. No se relabelan hashes ni se debilita el oráculo.
+
+P12 y native-r1-oracle-final-fix.md fijan controles completos de captura, reapertura, publicación y verificación. Implementador nuevo, una cualificación, una revisión acotada; Source base cerrado78fcd591/informe49232prefix. No requiere intervención humana.
