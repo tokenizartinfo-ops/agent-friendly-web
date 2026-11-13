@@ -3879,3 +3879,366 @@ YAML-I1 Important repairedONLYonefixtureline: from`\n    env:\n`/to`\n    env: &
 }
 
 CommandsandoutputareinSource356222sameappendafterFULL234732prefix andscopedrereviewpackage. Rootstrictcurrent1392BSAFEconfirmedalltypedfields+digesttriple/CRC/canonical/manifest/readbackacceptedtrue. Newfixedhead5e569 actual6/32/16pass, allreadinessfalse. Scopedre-reviewpending, notNativepermission.
+
+
+## SINGLE final-wave inactive preparation report
+
+# Single final YAML key-scope fix wave — INACTIVE / STOP_FOR_ROOT_GATE
+
+Exact brief and final review read at Root docs27308bc5d39e498062259b4ad2e5309e700e1b13. All three Important findings YAML-F-I1/I2/I3 are grouped in this one preparation wave. No second final wave or run is authorized. Root owns the eventual docs publication, release and one scoped final re-review.
+
+Tests were written FIRST as RAM Source strings, then the adapter was changed. No Source import/eval/parse/syntax check, validator call, test, npm install, local Source file, clone, dependency or VM was used. The only local computation handled public Source strings as data for passive counts, exact comparisons, diffs and hashes. No RED/GREEN is claimed; every new assertion below is NOT RUN.
+
+## Immutable candidate
+
+- Commit `f4c45ab9a20db7685178a40e829565ec934d5a00`, single parent NEWBASE35622248530269e527bae37f21ea52016ad726b5.
+- Tree `1ac318a050eb7c715f3aaceac07122825e792b94`; F7 `d99599256376b5dd522a7c7b15dc84ae74ae65b1`; 362148 UTF-8 bytes; SHA256 `b51bfb6c6963599ad1b9ea9e5ce94021cd2178ef0e84a22faf14dc75f524f122`.
+- [Full immutable F7](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/f4c45ab9a20db7685178a40e829565ec934d5a00/.github/workflows/afw-finite-budget-qualification.yml). Candidate is UNATTACHED.
+- Complete F7 code patch from actual historical R2 Source5e569a to this inactive candidate: GitDB blob `09e70ab60ce5696316ff09ebfe0c0053e1610684`, 12058 bytes,7 hunks. It includes the three inactive-envelope reversals plus the grouped A/C changes.
+- Complete helper-only scoped patch from inactive b87c9: GitDB blob `1eeee0b4f00990836e7baed1d4e875b48914b571`, 10115 bytes,4 hunks. Only adapter and controls differ.
+
+| Body | Bytes | SHA256 |
+| --- | ---: | --- |
+| NODE_SUITE_ADAPTER | 62999 | `d76ca29a35725fcee1b8858ebfafce003679a6b62362f76a34fe288c5a7a24d9` |
+| NODE_SUITE_CONTROLS | 63195 | `a41c417ea624e1a277f326356c8c95184ed7e24cfa42dab32decd731b970f612` |
+| NODE_SUITE_VERIFIER | 15099 | `94135538ab4fb8fa7f43fc2fe42c64563eb806e436117b4a404c26c855ee35bf` |
+| NODE_SAFE_ZIP | 13305 | `b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d` |
+
+Restoring the old A/C body strings reproduces the complete inactive b87c9 F7 exactly. V/Z are byte-exact. All other Native/crypto/scripts/hook/loader/pins/caps, 26 canonical bindings/six environments, four roles/DTOs,6 families/32subcase IDs/16receiver IDs remain unchanged. The non-secret KEY_SCOPE_FORMS literal remains exactly45/96; no new form was added. The fix2 newline-qualified env mutation and helper exact-one-match assertions remain exact.
+
+## YAML-F-I1 — exact structural map and free-data policy
+
+Root explicitly settled that this is a reserved/control property guard, not a universal Actions schema or blanket rejection of ordinary unknown property names. Unknown ordinary names retain their prior behavior. The implementation is fixed reviewable data, never learned from the input under validation:
+
+```json
+{
+  "root": [
+    "name",
+    "run-name",
+    "on",
+    "permissions",
+    "concurrency",
+    "jobs",
+    "env"
+  ],
+  "on": [
+    "workflow_dispatch",
+    "push"
+  ],
+  "push": [
+    "branches"
+  ],
+  "permissions": [
+    "contents",
+    "actions"
+  ],
+  "concurrency": [
+    "group",
+    "cancel-in-progress"
+  ],
+  "job": [
+    "if",
+    "runs-on",
+    "timeout-minutes",
+    "env",
+    "outputs",
+    "steps",
+    "needs",
+    "environment",
+    "snapshot"
+  ],
+  "step": [
+    "name",
+    "id",
+    "shell",
+    "run",
+    "uses",
+    "with",
+    "if",
+    "env",
+    "continue-on-error"
+  ]
+}
+```
+
+Map classes are determined by decoded AST path:
+
+- root: []
+- on / permissions / concurrency: exact one-component root paths
+- push: exact ['on','push']
+- job: exact ['jobs',JOB]
+- step: exact ['jobs',JOB,'steps',INDEX], integer INDEX
+- other: every remaining non-data map
+
+Free-name DATA exceptions are canonical root env, job env, job outputs, and step env/with paths; their data descendants inherit that data classification. The spelling/casing of variable/input/output labels is not treated as a control-property spelling. No unreviewed prefix such as an arbitrary unknown map's env/with is promoted into a DATA exception. The old global AFW-key/secret-key/reference, YAML type/tag/alias and expression checks still run unchanged on data content.
+
+For every NON-DATA map, any decoded if/IF/If property is rejected unless it is exact lowercase if in the exact job or step class. Other unknown non-data maps therefore cannot carry an off-path implicit if. In the job class snapshot in any casing is always unsupported, even with an inert false condition; no Snapshot API/capacity/image action is introduced. In the seven known structural classes, a name that case-folds to one of the fixed reserved names must retain that canonical spelling. Names that do not match those reserved names retain prior behavior.
+
+All structural inputs remain primitive decoded string keys; no String coercion, map flattening or ordinary JS object conversion was added. No claim is made that an otherwise unknown property is accepted by GitHub's primary workflow parser, or that a real Actions bypass/leak occurred.
+
+Actual full-validator regression inputs, all built from the valid surrounding actual Source with all26 canonical slots retained:
+
+- snapshot / Snapshot / SNAPSHOT job properties containing inert if:false: expected throw.
+- Unknown job and root control maps with if/IF/If:false, and a root if:false: expected throw, independent of snapshot.
+- Root Env, permissions Contents, concurrency Group, job Env, step Run/IF/Env, on Push and push Branches: expected throw at their respective structural meanings.
+- Canonical push source is positively admitted before its Push/Branches mutants. This works with either an existing push trigger or an inactive no-push input copy.
+- Root env, job env, step with and job outputs get free IF/Run/Env/snapshot labels with plain INERT values: each full Source copy must return true. These assert finite-validator data classification, not that an unfamiliar action input is consumed by a runner.
+
+## YAML-F-I2 — admitted quote-scanner witness
+
+The full contracts job guard is uniquely identified from actual Source, then replaced in a Source copy with the already-fixed admitted false+push+Root-message+repository/ref/attempt job.if form. The Root-message literal is runtime assembled to contain BOTH a doubled single quote and the complete closing delimiter: `it''s }} INERT`. Openers and sensitive context names remain runtime assembled, so no additional real workflow secret binding is embedded in F7.
+
+Positive assertion: validateKeyScopes(complete actual Source with that admitted guard) must return true. A first-closing-delimiter scanner would stop inside the quoted message and reject this positive; unlike the previous unknown-field negatives, admission now depends on the quote-aware scanner. The same complete form is separately extended OUTSIDE the literal with github.unreviewed==true and with the sensitive context/key term; each full-validator call must throw. These mutations preserve every original job,26 slots, environment and script.
+
+No new job.if registry form or parser/tokenizer logic was added for I2. Existing unknown-field negatives remain useful scope controls, but are not represented as the sole scanner witness. The existing actual currentSource positive/provenance still precedes every negative family globally.
+
+## YAML-F-I3 — copy-call boundary policy
+
+Old custody prohibition:
+
+```text
+/\b(?:fetch|npm|copyFile|execFileSync|World|finite-budget-world|cp\(|node --test|GITHUB_TOKEN|GH_ARTIFACT_TOKEN)\b/
+```
+
+New custody prohibition:
+
+```text
+/\b(?:fetch|npm|copyFile|execFileSync|World|finite-budget-world|node --test|GITHUB_TOKEN|GH_ARTIFACT_TOKEN)\b|\bcp\s*\(/
+```
+
+The existing word-token alternatives retain both their original boundaries and spelling. The copy-call alternative now owns a LEFT word boundary plus exact cp, optional whitespace and opening parenthesis, with NO trailing boundary after that parenthesis. Quotes/space immediately after '(' no longer suppress the intended prohibition; whitespace before '(' can be rejected conservatively. This is lexical custody policy, not arbitrary script non-exfiltration proof.
+
+Four inert copy-call text variants are inserted into a Generic custody RUN comment and passed only to the actual validator: cp('INERT_A','INERT_B'), cp( 'INERT_A','INERT_B'), cp ('INERT_A','INERT_B'), cp ( 'INERT_A','INERT_B'). All must throw. The mutant/copy is never executed. No Native command or other operator policy changed; the preliminary with.github-token observation remains withdrawn, and the existing legitimate form remains unchanged.
+
+## New regression block — written first, NOT RUN
+
+All assertions are inside the existing key_scope subcase; no inventory ID was added:
+
+```javascript
+// Final-wave I1: structural control keys are path-sensitive; free data names stay data.
+             const finalJobHeader='    runs-on: ubuntu-24.04\n';
+             for(const property of ['snapshot','Snapshot','SNAPSHOT'])expectMutationRejected(text,'positive_prepare',null,finalJobHeader,'    '+property+':\n      if: false\n'+finalJobHeader,A.validateKeyScopes);
+             for(const property of ['if','IF','If'])expectMutationRejected(text,'positive_prepare',null,finalJobHeader,'    unreviewed_control:\n      '+property+': false\n'+finalJobHeader,A.validateKeyScopes);
+             for(const property of ['if','IF'])expectTextRejected(mutatePreamble(text,'permissions:\n','unreviewed_control:\n  '+property+': false\npermissions:\n'),A.validateKeyScopes);
+             expectTextRejected(mutatePreamble(text,'permissions:\n','if: false\npermissions:\n'),A.validateKeyScopes);
+             expectTextRejected(mutatePreamble(text,'permissions:\n','Env:\n  IF: INERT\npermissions:\n'),A.validateKeyScopes);
+             expectTextRejected(mutatePreamble(text,'  contents: read\n','  Contents: read\n'),A.validateKeyScopes);
+             expectTextRejected(mutatePreamble(text,'  group: afw-finite-budget-qualification\n','  Group: afw-finite-budget-qualification\n'),A.validateKeyScopes);
+             expectMutationRejected(text,'positive_prepare',null,'\n    env:\n','\n    Env:\n',A.validateKeyScopes);
+             expectMutationRejected(text,'positive_prepare','install','        run: |\n','        Run: |\n',A.validateKeyScopes);
+             for(const property of ['IF','Env'])expectMutationRejected(text,'positive_prepare','install','        shell: bash\n','        '+property+': INERT\n        shell: bash\n',A.validateKeyScopes);
+             const finalPushSource=text.slice(0,text.indexOf('\njobs:\n')).includes('\n  push:\n')?text:mutatePreamble(text,'on:\n','on:\n  push:\n    branches:\n      - feat/finite-native-cleanup-20261101\n');
+             assert.equal(A.validateKeyScopes(finalPushSource),true);
+             expectTextRejected(mutatePreamble(finalPushSource,'  push:\n','  Push:\n'),A.validateKeyScopes);
+             expectTextRejected(mutatePreamble(finalPushSource,'    branches:\n','    Branches:\n'),A.validateKeyScopes);
+             const finalDataNames='      IF: INERT\n      Run: INERT\n      Env: INERT\n      snapshot: INERT\n',finalFreeCopies=[
+              mutatePreamble(text,'permissions:\n','env:\n  IF: INERT\n  Run: INERT\n  Env: INERT\n  snapshot: INERT\npermissions:\n'),
+              mutateActual(text,'positive_prepare',null,'      AFW_BUDGET_GROUP: positive',finalDataNames+'      AFW_BUDGET_GROUP: positive'),
+              mutateActual(text,'positive_prepare',null,'          fetch-depth: 1','          fetch-depth: 1\n          IF: INERT\n          Run: INERT\n          Env: INERT\n          snapshot: INERT'),
+              mutateActual(text,'positive_prepare',null,'    outputs:\n','    outputs:\n'+finalDataNames)
+             ];
+             for(const valid of finalFreeCopies)assert.equal(A.validateKeyScopes(valid),true);
+             // Final-wave I2: an ADMITTED complete guard must survive both quote cases.
+             const finalOldGuard=actualRegion(text,'contracts').text.match(/^    if: .+$/m)[0],finalGuardBody="false && github.event_name == 'push' && github.event.head_commit.message == 'it''s "+close+" INERT' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1";
+             const finalQuotedGuardSource=mutateActual(text,'contracts',null,finalOldGuard,'    if: '+expr(finalGuardBody));
+             assert.equal(A.validateKeyScopes(finalQuotedGuardSource),true);
+             for(const suffix of [' && github.unreviewed == true',' && '+secret+'.'+key])expectMutationRejected(text,'contracts',null,finalOldGuard,'    if: '+expr(finalGuardBody+suffix),A.validateKeyScopes);
+             // Final-wave I3: inert decoded copy-call text is never executed.
+             for(const call of ["cp('INERT_A','INERT_B')","cp( 'INERT_A','INERT_B')","cp ('INERT_A','INERT_B')","cp ( 'INERT_A','INERT_B')"])expectMutationRejected(text,'positive_prepare','custody','          umask 077\n','          umask 077\n          # INERT COPY TEXT '+call+'\n',A.validateKeyScopes);
+```
+
+## Passive setup and preservation evidence
+
+The metadata-only seam inventory found exactly one occurrence for all12 anchored mutation seams in the complete inactive Source, including the contracts guard; it did not invoke a validator. Actual mutation helpers still enforce unique setup and count the real validator invocation when the future separately released controls run.
+
+```json
+{
+  "onlyAdapterControlsChanged": true,
+  "verifierExact": true,
+  "safeZIPExact": true,
+  "same32IDs": true,
+  "subcaseCount": 32,
+  "passiveNeedleInventory": [
+    {
+      "label": "job header",
+      "count": 1
+    },
+    {
+      "label": "job env boundary",
+      "count": 1
+    },
+    {
+      "label": "job free env",
+      "count": 1
+    },
+    {
+      "label": "job outputs",
+      "count": 1
+    },
+    {
+      "label": "checkout input",
+      "count": 1
+    },
+    {
+      "label": "install run",
+      "count": 1
+    },
+    {
+      "label": "install shell",
+      "count": 1
+    },
+    {
+      "label": "custody umask",
+      "count": 1
+    },
+    {
+      "label": "preamble permissions",
+      "count": 1
+    },
+    {
+      "label": "preamble permission contents",
+      "count": 1
+    },
+    {
+      "label": "preamble concurrency group",
+      "count": 1
+    },
+    {
+      "label": "admitted contracts guard exact occurrence",
+      "count": 1
+    }
+  ],
+  "canonicalBindings": 26,
+  "literalFalseGuards": 10,
+  "noPush": true,
+  "EOF": true,
+  "fix2BoundaryPresent": true,
+  "registryLiteralUnchanged": true
+}
+```
+
+Full GitHub readback is byte-exact to the staged candidate. Complete tree is untruncated3196 leaves/62 workflows, with sole temporary F7 type-mode-blob delta; all other3195 leaves are exact to NEWBASE. This includes the FULL report prefix0c4d39c8efebf49f5f5358ca5764a1a057c7030f:248909 characters/248979 UTF-8 bytes/SHA256b9d260af83ae12f62d789116c4919c8f6b8550d707d1ddd6e305c75df5aec0b5, retaining all224620 history/R1failure/R2pass. No report reset or append was performed by this preparation worker.
+
+Rollback is originalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a -> exact NEW preunit tree8755d761b7198a28ed0989a3731f21aed1a1091e, never old7b/c6.
+
+Readback proof:
+
+```json
+{
+  "time": "2026-11-13 17:09:35 UTC",
+  "candidate": "f4c45ab9a20db7685178a40e829565ec934d5a00",
+  "tree": "1ac318a050eb7c715f3aaceac07122825e792b94",
+  "parent": [
+    "35622248530269e527bae37f21ea52016ad726b5"
+  ],
+  "SourceRef": "35622248530269e527bae37f21ea52016ad726b5",
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "SourceReadbackExact": true,
+  "sourceBlob": "d99599256376b5dd522a7c7b15dc84ae74ae65b1",
+  "leaves": 3196,
+  "other3195Exact": 3195,
+  "workflows": 62,
+  "truncated": false,
+  "changes": [
+    {
+      "path": ".github/workflows/afw-finite-budget-qualification.yml",
+      "before": {
+        "mode": "100644",
+        "type": "blob",
+        "sha": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc"
+      },
+      "after": {
+        "mode": "100644",
+        "type": "blob",
+        "sha": "d99599256376b5dd522a7c7b15dc84ae74ae65b1"
+      }
+    }
+  ],
+  "prefix": {
+    "blob": "0c4d39c8efebf49f5f5358ca5764a1a057c7030f",
+    "chars": 248909,
+    "bytes": 248979,
+    "sha256": "b9d260af83ae12f62d789116c4919c8f6b8550d707d1ddd6e305c75df5aec0b5",
+    "exact": true
+  },
+  "candidateRuns": 0,
+  "passiveScope": {
+    "onlyAdapterControlsChanged": true,
+    "verifierExact": true,
+    "safeZIPExact": true,
+    "same32IDs": true,
+    "subcaseCount": 32,
+    "passiveNeedleInventory": [
+      {
+        "label": "job header",
+        "count": 1
+      },
+      {
+        "label": "job env boundary",
+        "count": 1
+      },
+      {
+        "label": "job free env",
+        "count": 1
+      },
+      {
+        "label": "job outputs",
+        "count": 1
+      },
+      {
+        "label": "checkout input",
+        "count": 1
+      },
+      {
+        "label": "install run",
+        "count": 1
+      },
+      {
+        "label": "install shell",
+        "count": 1
+      },
+      {
+        "label": "custody umask",
+        "count": 1
+      },
+      {
+        "label": "preamble permissions",
+        "count": 1
+      },
+      {
+        "label": "preamble permission contents",
+        "count": 1
+      },
+      {
+        "label": "preamble concurrency group",
+        "count": 1
+      },
+      {
+        "label": "admitted contracts guard exact occurrence",
+        "count": 1
+      }
+    ],
+    "canonicalBindings": 26,
+    "literalFalseGuards": 10,
+    "noPush": true,
+    "EOF": true,
+    "fix2BoundaryPresent": true,
+    "registryLiteralUnchanged": true
+  },
+  "rollback": {
+    "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "tree": "8755d761b7198a28ed0989a3731f21aed1a1091e"
+  },
+  "testsRun": false,
+  "SourceCAS": false
+}
+```
+
+Source ref remains356222 and main0c9. All10 guards remain literally false, no on.push exists, and candidate Actions runs0; all6 environments/26AFW slots remain in disabled jobs. This is an inactive/no-event preparation observation, not runtime acceptance. No Source CAS/run was performed.
+
+STOP_FOR_ROOT_GATE. Root must independently inspect full delta/hash/zero-executed-key conditions and release any exact overlay/run separately. New current covering actual positive/provenance+6families32/32+16receiver/strict current SMALLSAFE is NOT RUN. Any such future attempt must end with all10 terminal, exact NEW8755/F7 restoration and append after the FULL248909 prefix before the single scoped final re-review. Historical R2 stays PASS/CLOSED for its own revision. No global readiness/Native envelope is promoted by this candidate.
+
+
+## Root inactive gate observation
+
+RootreadcompleteA/C4hunkdelta/currentF7+fixedstructuralmapdataexceptions+positiveadmittedquoteandoutside-termnegative+cp-boundaryactual-validatorassertions. IndependentfullSourceGitblob/SHA/4bodyhashesmatch. V/Zexact, old45/96forms/32IDs/Native/26slots6env/other3195leavesandFULL248909prefixexact. Currentinactivef4c45/tree1ac318/F7d99599,362148B/SHAb51bfb6..., parent356222. NoSourceexec/tests/refmove. CLEARFORUNATTACHEDOVERLAYPREPARATIONONLY. ONEcurrentcoveringrun/scopedfinalrereviewstillpending; noNative/readinessclaim.
