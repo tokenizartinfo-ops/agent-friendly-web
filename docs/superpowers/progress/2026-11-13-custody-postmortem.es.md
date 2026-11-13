@@ -25,3 +25,7 @@ Ruling: nullidentityONLY observer_unavailable closedMarker avoids fabricatedSour
 Sourceactorpreparedcandidate0e0c4341/F75ad4e38/114557B, fivebodies43/10/13/13/5KBexactexpectedhashes. Rootreviewedallnewcode/drivers+14COMPLETEknownnonsecretexpressions/wholecanonicaloutside-literal-runYAML, noAFWenv/secretscontext; typedpair/marker observersprepared independently. Source5bodyhashesverified. Freshref/main/active0/3196/tree/reportprefix/candidate0runs allpassed. Fullgateacta docs/superpowers/reviews/2026-11-13-custody-postmortem-zero-key-gate.md.
 
 Ruling: approveONLYunattachedactiveoverlaypreparation, notrefpush; Rootmustreviewcompleteguard/triggerpatchandfivebodiesagainbeforeONErun — preventsunreviewedactiveSourcevariantunderI2hold — costifwrong: noautomaticjobstart, Rootrejectsvariant. OriginalcoherentFF-I2remainsOPEN/key-bearingNativeheld.
+
+## Root active-overlay gate PASS / ONErunreleased
+
+Unattacheddfd37bd0/parent0e0/tree69c5/F7499bRootfullSource/metadata/tree/refindependentlyverified. Exact3replacementtransform/2hunkpatchonlytrigger+twofullguards, all5bodiesbyteexactinactive. ALL14completecanonicalnonsecretexpressions, twojobs/noAFWenvironment/key; sourceoldI2checkerNOTused. CurrentSourceRefstillinactive0e0. OneSource-refpushTODFD+twojobs7/2attempt1+exactclosure/report/STOP releasedvia docs/superpowers/briefs/2026-11-13-custody-postmortem-one-run-release.md. Noactualkey/Native/CFholdlift, no extraSourcechanges/attempts.
