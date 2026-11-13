@@ -13,3 +13,5 @@ The four assert.equal calls begin at columns3/36/69/102. Column109 points inside
 This is separate from the inspector rejecting the ownerReference receipt in grouphttp. It does not reveal response status, HTTP record count, timing cause, actual write sequence, authority/grant result, or repair; those remain unknown. It does not prove current code still fails R1. The later isolated R2 PASS is another Source/run/window and does not answer this R1 question. Task2 first HTTP guard still pending at writing. No new execution or Source change is authorized by this note. All five readiness flags false.
 
 [Original public source](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/19789b5f31935e0b5be00cbb24c5f45de2a0100a/test/fixtures/finite-budget-world.mjs#L1178)
+
+Clarification: sdkReference can be null either because no matching referenceRow was found or because a selected row parsed to JSONnull. The approved TAP/public-source mapping does not distinguish these; state the failed non-null predicate, not proven row absence.
