@@ -9675,3 +9675,117 @@ This run leaves all five readiness flags false. Historical Native run 4334337392
   }
 }
 ```
+
+
+## 2026-11-13 R1 HTTP frontier Task1 — preparation, one KEYLESS permit
+
+Fresh sole Source builder /root/r1_http_source_builder; Root controls Rootdocs only; no subagents/reviewers. Exact Task1 brief acda8e7e at a0142665, SPEC/PLAN P1–P5 at95c13574 and binding P6 at6c79b17b read before Source writes. Owner-authorized continuous AFW cloud SYN work applies; no human window, codes, key or new service requested. PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web1347578006; ENVIRONMENT owned-SYN GitHub KEYLESS; ORIGIN GitHub connector/GitDB; RESOURCE_TYPE isolated Source branch/workflow; RESOURCE_ID feat/finite-native-cleanup-20261101/.github/workflows/afw-finite-budget-qualification.yml; ALLOWED_ACTION sole Task1 preparation/ONE7+2 KEYLESS path-filtered push/attempt1/terminal exact rollback+report; ROLLBACK exactF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual/noinputs/nopush/sevenfalse. Actual Raw projection/Task2, Native, SDK, MF, I0, Cloudflare/runtime, credentials, cron, consumer, Max, mail, main, PR/merge/publish remain HELD.
+
+Starting lease: Source19c9b250bbe5090392e7d4404f205eec357fdb5a/tree2c588a7ab000a026b992642c06bd56ce14453044; main0c9c475b3ebaa970fc11d628b40e50a90cceb727; full recursive3194leaves/nontruncated/3192protected; report e7a1a72c5c5c34b3335a8164826603f5b69b7dfa/718543chars719861B preserved byte-exact as entire prefix. Current F7/commit/ref re-read; all62workflow event headers/gates inventoried, no other workflow matches this feature-branch/F7-only push; queued/in_progress/waiting/pending/requested all0. Applicable Source AGENTS root is the only inherited AGENTS. All3192 other leaves/modes remain immutable, especially World0631f9a, postACKfixture7e1ee778, contracts2006beb4 and Nativebaa84420 (manual/twofalse each).
+
+Honest static TDD baseline: old Reference30826/cc2026e0 contains no httpFrontier field; the new18 assertions explicitly require it. New fixed control cases were authored as data before the implementation was written to Source; no claim of a local RED execution. All preparation was progressive public Source STRINGDATA/framing/hash work in RAM; no local Source evaluation/import/execution, files, clone, dependency, build or temporary Source files. GitHub executes all real checks in the sole covering qualification.
+
+New actual wrapper purpose afw.readonly-http-frontier.safe.v1 and manifest afw.readonly-http-frontier-manifest.safe.v1 add only httpFrontier.r1FirstRejectedPredicate with exact seven-value enum. Legacy array/type/length operands execute once with original short circuit; all row object checks precede any time reads, then each row elapsedMs precedes bodyGuardMs. First false legacy guard error identity is associated privately and case-locally; earlier groups/unbranded operands/R2/global rejection stay unknown. Same selected two reads/parses and IO/file/UTF8/oversize/caps/crypto/Original AAD/10s+15s budgets are unchanged. Old rows, entire R2 lastChild certificate, referenceStage fields and status semantics preserve their meanings. New unknown is neutral for every old accepted state/group pair, including present/unknown; none only present/none; concrete only invalid/http. Strict_envelope old matrix stays positive where it was positive; lc_manifest positive unknown mutator sets frontier unknown and recomputes manifest; old purpose negative cases remain.
+
+The existing forty-control result remains its original closed <=2048B record. Hardened twenty-two expansion callbacks keep assertion bodies/mapping with only required new-purpose/coherent-fixture migration and final private issuance. Fixed module-owned22+18 callbacks receive NO completion capability. Private issuer checks actual active callback identity, exact ID, exactly one issuance and exact privately created returned token; barriers require all expected IDs exactly once. Missing/skipped/no-op/fabricated/unreturned/double/assertion-failure/duplicate/bare-completion counterexamples use the same harness. The bare completion callback is actually invoked and rejected before green. Source binding/static review are part of trust; this is not unforgeability against a Source author.
+
+Closed proof strategy: unchanged Core CONTROLS envelope plus minimally extended referenceSupplement fields current source/run/attempt, actual core/module/tests/bootstrap/materializer/ZIP/generated-verifier hashes, original40record, strict22stageWitness and18httpWitness. Witnesses include fixed ordered IDs, expected/completed/pass/fail/firstFailure and per-ID count1/postAssertiontrue; each separate line <=2048B (22:1277B;18:1080B). Whole artifact remains only result.json+manifest.json <=65536 combined/rawZIP<=131072. Historical validateControlsPair -> validateControlProof plus SOURCE_REFERENCE_* pins preserved; independent verifier additionally validates all mandatory witnesses/current context/all affected hashes. Old validators reject new mandatory fields; actual supplement gets new purpose version. Proof does not infer counts from import/exit/framework counts.
+
+No hash cycle: independent materializer is executed only after event-source checkout ref GITHUB_SHA and git HEAD equality; it frames SOURCE_MATERIALIZER_SHA from this current YAML's own exact materializer bytes and SOURCE_SAFE_ZIP_SHA from its current immutable ZIP body. Generated verifier computes its own file digest at runtime, never embeds its own digest. Producer proof hashes the generated file; independent job reconstructs it again from current event Source. Old verifier data reconstruction independently reproduced exact40595B/4a79caf3863c5c606b12f19ee49cb4bdb48045d758186f306db41315f3d33296 before framing the new bytes.
+
+P6 driver ruling: current World0631f9a cannot satisfy immutable Core's original PUBLIC_SOURCES pin5fb78c05. KEYLESS retains current event checkout at root, and adds exactly one nested public-code checkout19789b5f31935e0b5be00cbb24c5f45de2a0100a at afw-original-public-source, depth1/persist-credentialsfalse; both HEADs verified. ONLY immutable Core pure controls use this original-public-source cwd. Current YAML/materializer/generated modules/proofs remain event-root/current. This is public source fixture checkout, not access to private Original artifact13949168304; originalArtifactAccessed/custodyOpened/SDKImported/I0Created and all five readiness flags remain false. Actual5+2 already intentionally checks out Original code only for helper/public-source pins; its independent verifier still checks out current Source; no P6 steps added to actual5+2.
+
+Complete actual5+2 candidate is INACTIVE/manual/noinputs/nopush/TWO literalfalse gates; stored before qualification and retained in Git history. KEYLESS7+2 front-end carries no environment/secret binding, Original artifact download/open or runtime call; same seven qualified program bodies and old pin helper/pair appendix/derived subsets. The only differences are orchestration metadata/gates and fixed pure qualification driver. This preparation is not an actual Raw inspection or PC-off acceptance.
+
+Pinned STRINGDATA candidates (not yet execution evidence):
+```json
+{
+  "programs": {
+    "Core": {
+      "bytes": 77002,
+      "sha256": "d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246"
+    },
+    "ZIP": {
+      "bytes": 13305,
+      "sha256": "b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"
+    },
+    "Bootstrap": {
+      "bytes": 1370,
+      "sha256": "2a04ef50b5dbe6a0a404fcef3bd83795181010c66a3b36990461a9033c3035f1"
+    },
+    "Reference": {
+      "bytes": 34180,
+      "sha256": "672b054312d8c23c38662719b5183e6e345a322e6db74c6f761719b9bfdf4e36"
+    },
+    "Selftests": {
+      "bytes": 68019,
+      "sha256": "ea1aa8c4b910b84b933a05f0cf2586aea5964b5906bb91d28bc574d223a3c66c"
+    },
+    "Materializer": {
+      "bytes": 21125,
+      "sha256": "e67ab9fe962a0ba2d0ff5eb5de902caa5e3449fbabda0ecf43a46efd6c84d07d"
+    },
+    "generatedVerifier": {
+      "bytes": 41119,
+      "sha256": "4349a0fb49e84563a8a5315256c0786abd3054bc211f07cbd8e630c3516b481b",
+      "blob": "711729bab8d9b9b21d7ac31f53384c6e38553974"
+    }
+  },
+  "actualInactive": {
+    "bytes": 240781,
+    "sha256": "5f955211c4dedd77c541ba8d8a8b0112ccc93f49aa9884c245fe8609b0445ee0",
+    "blob": "f1c25f215cebc6e38047b02133242ccb33e35249"
+  },
+  "keyless": {
+    "bytes": 258428,
+    "sha256": "50c3d85084c9f158449c53e8cb4648d41f0b06899cdb8ae22c899ef60f29cf4e",
+    "blob": "bdec728d9290772cf11b3a7834aed3eb7f146ceb"
+  },
+  "new18": [
+    "present_http",
+    "absent_http",
+    "collection_type",
+    "collection_limit",
+    "boundary_256",
+    "row_type",
+    "elapsed_ms",
+    "body_guard_ms",
+    "ordered_fields",
+    "ordered_rows",
+    "earlier_basic",
+    "earlier_children",
+    "case_r2",
+    "unbranded_error",
+    "read_policy",
+    "public_schema",
+    "canary",
+    "no_op_registration"
+  ],
+  "stage22": [
+    "two_valid",
+    "identities_flags",
+    "required_bounds",
+    "optional_types",
+    "array_bounds",
+    "private_canary",
+    "file_missing_bad",
+    "file_bound_links",
+    "gate_no_read",
+    "timeout_cleanup",
+    "uncertain_no_cleanup",
+    "strict_envelope",
+    "lc_pair",
+    "lc_last",
+    "lc_unknown",
+    "lc_ops",
+    "lc_steps",
+    "lc_schema",
+    "lc_clean",
+    "lc_clock",
+    "lc_manifest",
+    "lc_bounds"
+  ]
+}
+```
+
+Self-review reviewed full new Reference/test wiring/whole template changes, original pair/cap/identity preservation and both current-vs-Original bindings; immutable Core/ZIP/Bootstrap/pin helper/pair appendix exact in both wrappers. Source not frozen/qualification not executed at this report's preparation commit. One activation follows full lease/readbacks; after BOTH jobs terminal ANY outcome exactF7 restore/full report+3192protected/main/five-state0 readbacks and STOP; failure is no automatic repair/retry. Root independent Task1 review remains separate and Task2 is HELD.
