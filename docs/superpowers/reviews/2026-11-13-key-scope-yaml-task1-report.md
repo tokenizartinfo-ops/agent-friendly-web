@@ -3823,3 +3823,59 @@ FullactualSourceappendix is in c0c658... sameSource report; Root taskreview pack
 ## Fix2 inactive preparation and Root gate
 
 YAML-I1 Important repairedONLYonefixtureline: from`\n    env:\n`/to`\n    env: &outer\n`, helperexact-oneassertionunchanged. Newinactiveb87c9bf8da9c02cc649d83a93854433456b89485/parentNEWBASEc0c658/tree081cfa327347e73004ff80411e1b843135ef45e0/F787649320634d57ad70fdfd328a3f8ea0122e5c93/355495B/SHA3e5f322dc1058840f8f68062f85abd77d59496d0664dc083d26e6bf76714bf44. Rootfullreadback/onehunk1add1delete/hash/other3195exact verified; Adapter/R/Z exact, onlycontrols58836B/SHA026e39154e8723d7184daea09f51bd9aae2d63b1b0a49ea5da813ccc0096c401 changed. Full234732prefix7096/SHA75b056 preserved, tenfalseguards/noSourcepush. NoSourceexecution/tests/refmove. RootgateCLEARONLYunattachedoverlaypreparation; newcoveringrun/scopedreviewpending, notqualified.
+
+
+## R2 actual covering pass and closed Source
+
+{
+  "run": 43462647650,
+  "source": "5e569a05763cb59960996c8c96df3b16f7745a0d",
+  "attempt": 1,
+  "status": "completed",
+  "conclusion": "success",
+  "all10Terminal": true,
+  "old8Skipped": true,
+  "keyless2Success": true,
+  "positiveCurrent": true,
+  "positiveBeforeAllNegatives": true,
+  "families": 6,
+  "subcases": 32,
+  "subcasesAllPassed": true,
+  "receiverControls": 16,
+  "receiverAllPassed": true,
+  "currentSmallSAFEIndependentStrictVerified": true,
+  "receiverAccepted": true,
+  "artifact": {
+    "id": 14055369763,
+    "bytes": 1392,
+    "sha256": "0d2b3ae165ea6e1b3878581f862da80e248808a4a712479de2db982ac719210f"
+  },
+  "operationalReadiness": false,
+  "PCoff": false,
+  "contractsHookActuallyExecuted": false,
+  "NativeExecuted": false
+}
+
+{
+  "source": "35622248530269e527bae37f21ea52016ad726b5",
+  "tree": "8755d761b7198a28ed0989a3731f21aed1a1091e",
+  "prior3195LeavesExact": true,
+  "leaves": 3196,
+  "soleNewReport": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+  "reportSha": "0c4d39c8efebf49f5f5358ca5764a1a057c7030f",
+  "reportChars": 248909,
+  "F7exact": true,
+  "mainUnchanged": true,
+  "runId": "43462647650",
+  "runSource": "5e569a05763cb59960996c8c96df3b16f7745a0d",
+  "runCompleted": true,
+  "allDeclaredJobsTerminal": true,
+  "declaredJobs": 10,
+  "fiveBranchActiveStatusesZero": true,
+  "all62WorkflowBlobsExact": true,
+  "providerRuntimeRead": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
+
+CommandsandoutputareinSource356222sameappendafterFULL234732prefix andscopedrereviewpackage. Rootstrictcurrent1392BSAFEconfirmedalltypedfields+digesttriple/CRC/canonical/manifest/readbackacceptedtrue. Newfixedhead5e569 actual6/32/16pass, allreadinessfalse. Scopedre-reviewpending, notNativepermission.
