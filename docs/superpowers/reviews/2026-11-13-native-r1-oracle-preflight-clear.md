@@ -1,0 +1,3 @@
+# Native R1 preflight CLEAR
+
+OriginalAstra/high reviewer /root/native_r1_preflight scopedconfirmation at a5a464b30a02c091122c36f0887e105a53c68a22: P1–P8 resolve F8/checkpoint/private singletonmodel/publication/SDK-import/enum interfaces. SPEC, PLAN andacta agree; no unresolvedblocker. No Sourceexecution/mutation/Native/Raw. Originaltest remainssolebusinessoracle; reopenchecksidentity/integrity/ownedcleanup, nooraclecopy. KEYLESS2active7+2/3actualdisabled/ALL5terminal; actualphase3jobs/fullcontracts+smokes. Uncertaincleanupunavailable/validation/invalid_evidence. NoSourceleaseuntilTask1separaterelease; actualTask2HELD.

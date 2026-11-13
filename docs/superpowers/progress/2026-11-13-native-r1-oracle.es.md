@@ -20,3 +20,7 @@ Threejobsviable; concreteF8exactSourceframe+oldpureplaintext+strictold3case/R2mo
 ## Scoped preflight response / P8 precision
 
 Astra confirmsP1–P7resolve3blockers, oneenumtextmismatch. Ruling: keeporiginalsixfailure.stage values; uncertaincleanup→unavailable/validation/invalid_evidence. NoSAFEfailure-siteaddition. RootstaticF7lines65/67actualcontracts inactive/invalidgroup smokesimportNativeTest→SDK; conflictsKEYLESSnoSDK. RulingP8: preservefullactual3jobframeallfalse+overlay2KEYLESS7+2activejobs(newfourbodies/inertNodefixture/staticpins only), noSDK/realkeyonexecutedjobs, all5declaredterminalbeforerestore; actual3jobcontractsfullsmokeslater. Costlargerworkflowframebutnoextraactivejob/Native/secret; avoidsfalsenoSDKclaim.Fourheredocsunique/codepinscurrent. SourceheldpendingP8scopedconfirmation; noSourcewriter/runs.
+
+## Preflight CLEAR; Task1 release
+
+OriginalAstra scopedP8confirmationCLEAR, SPEC/PLAN/actaagree; all3technicalblockers+SDK/enumcontradictionssettled, noSourcewrites/runs. FreshsoleTask1Sourceimplementer next, baseline d532/3194/all3193existingnonF7/newconciseReportexpected3195. Completeactual3jobINACTIVE+2activeKEYLESSoverlayONE7+2/ALL5terminal; fourbodies/safeZIPimmutable/12realcontrols/noNativeSDKrealkeyonexecutedjobs. ActualTask2HELD. Task1briefnative-r1-oracle-task1.md carriesverbatimAFWownertaskscope. Noquestionsbefore08AR; RootdoesnotSourceimplement.
