@@ -11601,3 +11601,40 @@ Actual whitelisted closed outputs (each original line<=2048B; expanded below onl
 ```
 
 ANY-terminal closure now restores exactF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual/noinputs/nopush/sevenfalse, APPEND preserving ENTIRE763873-character prior report. All3192otherleaves/modes/World/contracts2006beb4/Nativebaa84420 remain exact. Updated complete actual5+2 candidate stays INACTIVE at8afd3ce4/d98fdf98. Scoped independent P4 review remains pending; no self-CLEAN claim. ActualTask2/authenticated historical projection remains HELD. NOT EXECUTED: actual Original artifact/read/open/key/custody/Native/SDK/MF/I0/CF/OAuth/OTP/cron/Max/main/PR/merge/publication/newpermission. All five readiness and originalArtifactAccessed/custodyOpened/SDKImported/I0Created false. First actual historical R1 HTTP predicate remains unknown. Full closure readbacks follow then Source writer STOPPED.
+
+
+### R1 Task1 formal review fix round1/5 — exact closure receipt
+
+After BOTH jobs terminalSUCCESS, expected-head restore CASd807928c -> 03f18cac42dd5ae6b9d72a78c471625d8ba1435b/treea80db304f076816b02253d087dc695a2986d8e02 succeeded. Full ref/commit/nontruncated recursive3194-leaf inventory/F7/report/main/five-state reads verified originalF7f7a71 exact126209B/manual/noinputs/nopush/sevenfalse, all3192protected leaves/modes exact. Only report differs from original19c9 full tree. Entire763873-character formal-round starting report and all earlier history remain exact prefixes. Updated actual5+2 INACTIVE candidate retained at8afd3ce450f168d3542d95b0f0fc6b90567fd432/blobd98fdf987e96ae6f42435c24264e88ea5f0debb4. No Source code change or run after qualification.
+```json
+{
+  "closedSource": "03f18cac42dd5ae6b9d72a78c471625d8ba1435b",
+  "tree": "a80db304f076816b02253d087dc695a2986d8e02",
+  "reportBlob": "be33b321aee1bf9489c408c3fd7f8a795479d498",
+  "reportChars": 795142,
+  "entireFormalRoundPrefixChars": 763873,
+  "prefixExact": true,
+  "fullFilesReadBack": true,
+  "allLeaves": 3194,
+  "protectedExact": 3192,
+  "F7Blob": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+  "F7Bytes": 126209,
+  "manualNoInputsNoPushSevenFalse": true,
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "active5": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "qualifiedRun": 43356393264,
+  "producer": 131659332521,
+  "verifier": 131659419128,
+  "smallSafe": 14005449881,
+  "privateP4LineBytes": 1245,
+  "actualTask2Held": true
+}
+```
+
+Root separately reported independent current SMALLSAFE/CRC/ranges/fullmanifest/Core91 equality/40+22+18/all7hashes/digesttriple/P4reasons+reachedcounts audit passed; its scoped review remains separate, not self-certified here. This report-only receipt commit is followed by final full readback before reply and cannot self-record its Git SHA. Builder statusDONE for formal fix round1/5: only authorized P4 correction and one complete fresh KEYLESS covering, mandatory exact rollback. ActualTask2/Raw remains HELD. No human step or new permissions requested. Source writer STOPPED after final readback; no further Source work by inference.
