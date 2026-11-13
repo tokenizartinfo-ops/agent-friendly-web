@@ -188,3 +188,20 @@ N6 makes authoritative model readback depend on a real assigned cloud artifact. 
 - Other nonempty modes reject before allocation; no local/dummy ID or automatic Native fallback.
 
 The unchanged dedicated controls command explicitly sets controls; all original proof gates remain. Cover inactive/default and unknown mode behavior within existing profile_scope control, no new control ID/workflow/Source file/run. Cost: generic CI does not claim diagnostic coverage; explicit lab CI owns that coverage. No broad standalone support project is opened.
+
+## Binding N8 — original R2 is whole helper settlement, then oracle
+
+“Original R2 outcome” means the protected R2 test's ONE awaited runBudgetReadonlyCase('R2') INCLUDING its required original owned cleanup, then the exact21predicate oracle on the returned result. Inner business-operation completion alone is progress, NOT original R2 passed. This N8 supersedes ambiguous earlier “record pass before ownership/evidence unwind” wording.
+
+Do NOT evaluate/inject oracle failure or whole-case pass inside withFixedBudgetOwner before required helper cleanup settles. Observe inner operation state if necessary only as nonauthoritative private progress, without modifying primary-error priority. A legacy helper rejection (including required cleanup/restore error) keeps exact original error identity and has priority; the oracle must NOT run on a value the helper never returned. A normally returned wholehelpervalue then executesfixedoracle; only afteroracle passes iswholeR2passed. Oraclefailure retainsits own exactobject.
+
+Later ADDED observation/selection/persistence/custody errors cannot change that positively known original success/return or rejection. Positively diagnostic-only precompletion failures may remainunavailable if original counterfactualunknown; never coerceunknown topassed/failed.
+
+A helper rejection AFTER inner operation pass disqualifies actual evidence/provenance EVEN IF legacy ownership.complete=true (the legacy collector can promote cleanupError toprimary/excludeitfromancillary count). Do not use completealoneascleanupsuccess, and do not globally “fix” the protected legacyclose semantics. Business-operation failure with independently completedrequiredcleanup may still yielda truthfulfailedoriginal+typeddiagnostic; thisrulingdoesnotforbidallfailedcasecertificates.
+
+Add pure/inert regression through ACTUAL existing Node ownership/handoff (noMF/I0/SDK/key), not just evidenceFailureboolean:
+- inner valid result,required registeredcleanup throws: legacyhelperrejects SAMEcleanupError, oracleNOTcalled, wholecasefailed/noverifiedprovenance evenlegacycomplete:true;
+- inner result wouldfailoracle AND requiredcleanupthrows: SAMEcleanupErrorwins, oracleNOTcalled;
+- normallyreturnedhelper+oracle success thenADDEDevidencefailure: normaloriginalsuccess preserved, evidenceineligible;
+- normalhelperreturn thenoraclefailure retainsSAMEoracleError; existingbusinessprimaryfailure preservesidentitywithcleanupuncertainty.
+NoextraNativecall/secondcase/retry/Sourcepath/controlID; existingoracle/schema controls coverit.
