@@ -67,3 +67,9 @@ Source builder reports four bodies/control draft in RAM with qualified ZIP body 
 
 Source38ddef2b/tree9ad4552e, exact restorationa23a2c54→baseline tree8942513f, reportffe57366/24731chars. Root independently confirmed3196/prior3195exact/62WF/main0c9/fiveactive0/closedSource0runs. One KEYLESS run43392961036/attempt1:8skipped+2failed; four bodies preserved, no actual Native.
 Current controls SAFE14021936491 strictly verified as a closed failed DTO: firstdag_peer_inventory,0passed/1failed/5not_executed; ZIP16passed. Actor's static self-shadow diagnosis is a hypothesis about the precise first unlogged subcase, not a replayed reproduction. A valid-nonpass record semantics concern is independently observed. Full report and complete reconstructed diff are packaged for fresh task spec+quality review; no Source fix or retry has been released. Task2 stays HELD.
+
+## Independent Task1 review and fix-round1 release
+
+Review coherent_suite_task1_review: SPEC FAIL / quality changes required, seven Important F1–F7, no Critical/actualNative exposure; M1 Minor. Full findings preserved in docs/superpowers/reviews/2026-11-13-coherent-suite-task1-review.md. Root read full implementer report and review, verified original-source/mutation conditions and exact closure, then recorded binding interface rulings in SPEC; no finding parked.
+
+Task1: fix round1/5 DISPATCH READY (0 addressed,7 open — self-shadow mutations; premature pure receipt; synthetic peak/ownership; final verifier inventory/known assignments/attempt; nonpass/error record; actual seam coverage; operation caps/timeouts). Resume original implementer; one additional bounded KEYLESS qualification only, not a retry of an actual Native suite. Existing report24731chars exact prefix, final3196 unchanged. All five flagsfalse. ActualTask2HELD; no human request before08AR.
