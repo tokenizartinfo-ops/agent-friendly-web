@@ -12064,3 +12064,130 @@ Complete62-workflow event inventory was fetched by immutable closed revision and
 Root reported its separate bounded ruling24f3edaa permitting ONE dedicated metadata-only read. Root performed mcp__codex_apps__github_fetch_workflow_run_artifacts for Originalrun43229236340 (executor did not repeat it), listed6artifacts and matched exactOriginal13949168304/13680188bytes/SHA2568a408941c11e93e342fe2ccbf09763caf04e96fc5a1aaf12bde52da0fcaf19d5/expiredfalse/expires2026-11-19T13:45:23Z/contextOriginalsource19789b5f31935e0b5be00cbb24c5f45de2a0100a/repository1347578006. This is explicitly Root-provided primary-metadata evidence, not an independent executor request or a diagnosis of the generic route error. No binary/log/key read was reported. Root required this executor to finish CLOSED/no-activation and return; Root will publish an amended separate preflight release before any resumed activation. No such activation is inferred here.
 
 Closure protocol: keep exact F7 already live, append preserving ENTIRE797305-character report prefix, then independently read full final ref/commit/nontruncated tree/F7/report/main/held workflow events/fiveactive0 and STOP. Net final change report-only; all3192protected leaves/modes and all3193non-report leaves must remain exact. This receipt commit cannot self-record its eventual SHA. No operationalReadiness/completePackage/PCoff/globalNativeDrainVerified/sdkNamespaceEmptyVerified promotion; all five remainfalse. Task2 actual projection remains NOT EXECUTED pending Root's amended separate preflight release, with the generic tool's exact failure category unresolved. Source writer STOP after closed readback.
+
+
+## R1 HTTP frontier Task2 — ONE actual5+2 completed; exact closure (2026-11-13 UTC)
+
+Executed under original immutable release8bbdf0c9402662d71ed658da368060208d42b420 and narrow supported-metadata resume amendment8643fb99f24d07973c2c7d68d0c13574969249d2. The earlier preflight STOP had ZEROactualattempts. Fresh base223e1f7054744969939cfd4f2a2c6a5dacfe843f/tree25d4e16715ccae768e240198d24980fe7f30241d/reportd77b2ab223730ffb3507ee3e93ffc069386818f3/843009chars was independently read again; preserve ENTIRE843009-character prefix. Root's supported Original artifact metadata from the amendment was used without any repeated Original metadata request by executor. No claim about the cause of the earlier generic route failure.
+
+Preflight: full Source lease734heads/nontruncated3194leaves/all3192protectedleaves+modes/main0c9/62workflowinventory/heldcontracts2006beb4+Nativebaa84420/F7f7a71 exact manual/noinputs/nopush/sevenfalse/fiveactive0 verified. Exact rollback126209bytes/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a was already recoverable. Qualified actualcandidate8afd3ce4/blobd98fdf98 remained STRINGDATA only on executor; allsevenprogrambytes/hashes matched the original Task2 brief and prior report's qualified pin inventory, including generatedverifier41119B/1d7ddac413679393425f979387e59bc7909c10d4e8dd68a2ea93215de9109e92. No Source program was executed/evaluated/imported locally and no local Source clone/files/dependencies/build were used.
+
+Only front-end identity edits activated: fixedSourcebranch/selfpathpush, new exact runlabel AFW R1 HTTP frontier TASK2 ACTUAL ONE 5+2, removal of TWO literalfalseprefixes. No other gate/body/test/budget changed; intentionally Originalproducercheckout/currentverifiercheckout and READBACK_KIND=supplement stayed exact. GitDB blob5dabebc0/tree4fb34210/commit4e642405 were created and fullF7readback matched the prepared string. ONEexpected-headCAS moved223e1f70 to4e6424056df07b75ba1b99393aef0d7160e7efa2. Sole matching run43358557484/attempt1/eventpush/selfpath/currentSource was observed. Source was frozen without intervening writes until BOTHjobs terminal.
+
+Both jobs completedSUCCESS. Producer private stdout/logs were not read; recorded step metadata reported its inertfixtures, fixedciphertextdownload/validation, privateOriginalauthentication, safeprojection/ownedcleanup, closedpublishing/upload and finalgate successful. These are dated GitHub step/conclusion metadata, not reproduced private output. KEYLESS current verifier closedlogs alone were read and parsed only for the closed markers below. Both synthetic inspection-pair and SAFEZIP control sets completed16/16PASS. Current closed supplement readback reached stagecomplete/reasonnone with source/core/metadata/rawZIP/inventory checks true and matching upload/metadata/rawdigesttriple; supplementStatus is partial, an accepted closed schema result, and is preserved as partial. JobSUCCESS and verifiercomplete do not make the historical supplement complete or establish Native cause. Executor has not decoded currentSMALLSAFE; Root separately audits its exact twoJSON/wholemanifest/oldfactequality/ownerReference/lastChild/httpFrontierpredicate. No R1predicate value is invented here.
+
+```json
+{
+  "activation": {
+    "source": "4e6424056df07b75ba1b99393aef0d7160e7efa2",
+    "tree": "4fb34210faed0e79f9da321e69a38551c7b8783a",
+    "F7Blob": "5dabebc0ab6206b8c9070fa27fd734e7530557ca",
+    "base": "223e1f7054744969939cfd4f2a2c6a5dacfe843f",
+    "event": "push",
+    "selfPath": ".github/workflows/afw-finite-budget-qualification.yml",
+    "oneActualAttempt": true
+  },
+  "run": {
+    "id": 43358557484,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "createdAt": "2026-11-13T03:22:45Z",
+    "completedMetadataUpdatedAt": "2026-11-13T03:23:21Z"
+  },
+  "jobs": [
+    {
+      "id": 131666339832,
+      "name": "producer",
+      "status": "completed",
+      "conclusion": "success",
+      "allRecordedStepsTerminal": true,
+      "allRecordedStepsSuccess": true
+    },
+    {
+      "id": 131666489409,
+      "name": "verifier",
+      "status": "completed",
+      "conclusion": "success",
+      "allRecordedStepsTerminal": true,
+      "allRecordedStepsSuccess": true
+    }
+  ],
+  "safeArtifact": {
+    "id": 14006649146,
+    "name": "afw-readonly-receipt-inspection-43358557484-1",
+    "zipBytes": 3165,
+    "digest": "sha256:4a7cf0ef084e3f0013d4e84088e630a5d4b800b9254823b291e3032051685815",
+    "expired": false,
+    "createdAt": "2026-11-13T03:23:07Z",
+    "expiresAt": "2026-11-20T03:23:06Z",
+    "workflowRun": {
+      "id": 43358557484,
+      "repository_id": 1347578006,
+      "head_repository_id": 1347578006,
+      "head_branch": "feat/finite-native-cleanup-20261101",
+      "head_sha": "4e6424056df07b75ba1b99393aef0d7160e7efa2"
+    }
+  },
+  "independentClosedVerifier": {
+    "marker": "AFW_SAFE_READBACK/1",
+    "kind": "supplement",
+    "source": "4e6424056df07b75ba1b99393aef0d7160e7efa2",
+    "run": "43358557484",
+    "attempt": 1,
+    "artifactId": "14006649146",
+    "coreSha256": "d514b1906a8ab6bde818a1aba6f99a9f1a3ee91814f88b28560013d23f657246",
+    "verifierSha256": "1d7ddac413679393425f979387e59bc7909c10d4e8dd68a2ea93215de9109e92",
+    "safeZipModuleSha256": "b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d",
+    "producerCoreVerified": true,
+    "sourceCoreVerified": true,
+    "safeControlsPass": true,
+    "metadataVerified": true,
+    "rawZipVerified": true,
+    "inventoryVerified": true,
+    "producerControlCount": null,
+    "supplementStatus": "partial",
+    "zipBytes": 3165,
+    "metadataZipBytes": 3165,
+    "uploadDigest": "4a7cf0ef084e3f0013d4e84088e630a5d4b800b9254823b291e3032051685815",
+    "metadataDigest": "sha256:4a7cf0ef084e3f0013d4e84088e630a5d4b800b9254823b291e3032051685815",
+    "rawZipSha256": "4a7cf0ef084e3f0013d4e84088e630a5d4b800b9254823b291e3032051685815",
+    "resultBytes": 14900,
+    "resultSha256": "8414cbff3ec3293459c813e8ca5a19e26ba0294b0725c971bddd335c0cdd4ef0",
+    "manifestBytes": 340,
+    "manifestSha256": "63460c965f20219cb0ff64bd2d4b4a13939b4386f7a1cc0a77f9b6bb36988ec0",
+    "stage": "complete",
+    "reason": "none",
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "controls": [
+    {
+      "marker": "INSPECTION_PAIR_CONTROLS",
+      "expected": 16,
+      "completed": 16,
+      "pass": 16,
+      "fail": 0
+    },
+    {
+      "marker": "SAFE_ZIP_CONTROLS",
+      "expected": 16,
+      "completed": 16,
+      "pass": 16,
+      "fail": 0
+    }
+  ],
+  "actualPrivateProducerLogsRead": false,
+  "OriginalBinaryFetchedByExecutor": false,
+  "OriginalKeyFetchedByExecutor": false,
+  "currentSafeDownloadedByExecutor": false,
+  "RootCurrentSafeAudit": "pending separate Root audit"
+}
+```
+
+Allowed command/readback evidence: GitHub fetch_file at exact immutablebrief/amendment/currentbase; GET /git/ref/heads/feat/finite-native-cleanup-20261101, /git/refs/heads and /git/trees/<exacttree>?recursive=1; five fixed Sourcebranch active-state GETs each total_count0 beforeCAS; GitDB create_blob/create_tree/create_commit and expected_headupdate_ref; GET /actions/runs?head_sha=4e6424056df07b75ba1b99393aef0d7160e7efa2 found exactlyONErun; fetch_workflow_run_jobs(run43358557484) gave terminal producer131666339832/verifier131666489409; fetch_workflow_run_artifacts for this CURRENTactualrun listed only currentSAFE14006649146/3165B/expiry2026-11-20T03:23:06Z; GET /actions/runs/43358557484 concludedsuccess/attempt1/currenthead; KEYLESS fetch_workflow_job_logs(job131666489409) yielded only the reported closed markers used as evidence; final beforeclosure Source ref still4e642405. No originalrunmetadata request, producerlogfetch, Originalbinary/plaintext/key/MODEL download into tools/PC, rerun or dispatch occurred.
+
+ANYterminal mandatory closure now restores exactF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc in the same expected-head closure commit as this append, preserving full843009prefix; all3192otherprotectedleaves/modes and all3193non-reportleaves must read back exact. Full finalref/commit/nontruncatedtree/F7/report/main/heldworkflowevents/62inventory/fiveactive0 readbacks follow before STOP. Net finalchange report-only against priorCLOSED baseline; this receipt cannot self-record its eventualGitSHA. No implementation/newtests/completionproofchange/caps/Native/CF/runtime/OAuth/OTP/permission/key/Max/mail/customer/main/PR/merge/publication change; no autofix/retry/nextRaw. Allfive readinessflags remainfalse. Root currentSMALLSAFE audit and whole-plan review remain separate. Sourcewriter STOP after full closedreadback.
