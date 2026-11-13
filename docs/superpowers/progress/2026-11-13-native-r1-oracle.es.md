@@ -50,3 +50,11 @@ Consulta pública puntual del proveedor: la página oficial actualizada a `2026-
 Próximo cierre: terminar la única cualificación KEYLESS de corrección, esperar los cinco jobs terminales, restaurar F7, conservar el informe y revisar el diff. Solo después de CLEAN se podrá liberar por separado una ejecución Native R1. Las cinco banderas de preparación continúan en `false`.
 
 El control reutilizable de cierre Git de Root se comprobó contra la evidencia ya guardada de Task1: árbol no truncado, 3194 archivos previos con hash/modo/tipo iguales, único informe nuevo, F7 exacto, main intacta, cinco jobs terminales y cero ejecuciones activas en los cinco estados consultados. Un caso válido y seis alteraciones deliberadas dieron el resultado esperado. Son pruebas propias sobre metadatos fechados; no una lectura nueva del runtime ni prueba de drenaje global.
+
+## Corrección formal 1 cerrada — revisión acotada pendiente
+
+La única ejecución KEYLESS de corrección `43371939381/1` terminó correctamente: 12 familias de controles y 16 comprobaciones ZIP. Los dos jobs de control tuvieron éxito y los tres jobs reales quedaron omitidos. Root comprobó de forma independiente el recibo pequeño `14012797020`, sus hashes y la identidad de esta ejecución.
+
+Source quedó cerrado en `171de189`, con F7 restaurado, informe de 20509 caracteres y su prefijo anterior completo. Los 3194 archivos previos conservan hash, modo y tipo; main sigue intacta y no quedaron ejecuciones activas en los cinco estados consultados. Root confirmó que el patch reconstruye exactamente la candidata corregida.
+
+El paquete `native-r1-oracle-task1-fix1-package.md` conserva el diff completo, el informe y las comprobaciones saneadas para la revisión SCOPED del mismo revisor Astra. Native Task2 continúa retenida hasta SPEC PASS y QUALITY CLEAN. No requiere intervención de Gabriel.
