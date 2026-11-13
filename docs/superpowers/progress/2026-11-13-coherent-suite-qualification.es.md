@@ -98,3 +98,8 @@ Ruling: FIX2 absent/partial suite reconciliation is suite-only; controlskind has
 Run43404200555/1 succeededexact10terminal8skip2success; RootstrictcurrentSAFE14025364645 passed6families,26closedsubcases/52records,110shell/63Nodeinspectiononly,16ZIP andverified/none/strict/acceptedtrue. Fourbodyhashes +qualifiedZIPexact/currentcontextindependently checked.
 Source715ac94e/treec66911bd/report6e112294100977chars,61240prefixexact; restoreced5946 exactpreFix2tree7634f0eb. Independent3196/original3195/F7/R1report/62WF/main0c9/fiveactive0/closedcommit0runs. No actualNative/World/SDK/MF/realkey.
 Task1: fix round2/5 coveringpassed; F1/F4/F6/F8 awaiting originalreviewer's scoped disposition; all otherfindings retainaddressedstatus unlessfixregression. Completefixpackagedocs/superpowers/reviews/2026-11-13-coherent-suite-task1-fix2-review-package.md. Task2HELD/all5false.
+
+## Task1 COMPLETE/CLEAN; owner disconnect checkpoint
+
+Task1: fix round2/5 (4 addressed,0 open — F1/F4/F6/F8; no new regression; priorF2/F3/F5/F7 retained), implementation23bda/closed715ac94e; reviewdocs/superpowers/reviews/2026-11-13-coherent-suite-task1-fix2-clean.md. Task1 complete (unitBASE0479..715a, reviewclean). ActualQ8+Native8notexecuted; Task2HELD.
+Ownerlatest: desconectaen5min/guardar/nocerrarventanas/continuardespués08AR. Root09:59:38UTC recheckedSource715a/main0c9/fivebranchactive0. No runningSourcejob. Durablehandoffdocs/superpowers/progress/2026-11-13-afw-disconnect-continuation.es.md; no new actual run or humanrequest.

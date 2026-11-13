@@ -37,13 +37,13 @@ One KEYLESS7+2/10declared (8skipped+2success), one actual8jobs; freeze/terminal/
 **Files:** temporaryF7 and NEW docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md only.
 **Consumes:** binding SPEC; current Source0479 and originalF7; fixed historical generic ZIP3/SAFEZIP, no R1 typed oracle.
 **Produces:** complete eight-job inactive template, same four pinned helpers, six meaningful wrapper controls, one current KEYLESS qualification and exact restoration.
-- [ ] Write controls first for six fixed families; exercise actual seams using inert values/generic crypto, no Native/World/SDK/MF import.
-- [ ] Implement exact helper APIs/state schema and minimal original workflow splits; preserve original business assertions/deps/F8.
-- [ ] Save inactive eight-job candidate, activate ONE self-path/branch/unique-message push overlay with ten jobs.
-- [ ] Run Node helper controls/16 ZIP controls/current strict pair (7+2min), freeze through all terminal.
-- [ ] Exact rollback and new report; full3196/prior3195/main/62WF/fiveactive0 readback; STOP.
-- [ ] Root independent current metadata/strict SAFE/body hashes and fresh task spec+quality review.
-- [ ] Do not execute actual suite in Task1.
+- [x] Write controls first for six fixed families; exercise actual seams using inert values/generic crypto, no Native/World/SDK/MF import.
+- [x] Implement exact helper APIs/state schema and minimal original workflow splits; preserve original business assertions/deps/F8.
+- [x] Save inactive eight-job candidate, activate ONE self-path/branch/unique-message push overlay with ten jobs.
+- [x] Run Node helper controls/16 ZIP controls/current strict pair (7+2min), freeze through all terminal.
+- [x] Exact rollback and new report; full3196/prior3195/main/62WF/fiveactive0 readback; STOP.
+- [x] Root independent current metadata/strict SAFE/body hashes and fresh task spec+quality review.
+- [x] Do not execute actual suite in Task1.
 
 ### Task 2: One actual coherent suite
 
