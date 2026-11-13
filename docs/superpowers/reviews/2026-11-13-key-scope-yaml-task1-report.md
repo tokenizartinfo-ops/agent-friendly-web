@@ -3818,3 +3818,8 @@ Current candidateb2d40d2c72cd6c29e8d0ba3d87306eac78587b1b/tree58db7a19640442ea2e
 }
 
 FullactualSourceappendix is in c0c658... sameSource report; Root taskreview package preserves wholetemporaryexecutedSource delta. CandidateFAILED/unqualified, PREP-I1 actualpositivecoveringseampassed; exactinnerfailurecause awaitsreview. No autofix/rerun.
+
+
+## Fix2 inactive preparation and Root gate
+
+YAML-I1 Important repairedONLYonefixtureline: from`\n    env:\n`/to`\n    env: &outer\n`, helperexact-oneassertionunchanged. Newinactiveb87c9bf8da9c02cc649d83a93854433456b89485/parentNEWBASEc0c658/tree081cfa327347e73004ff80411e1b843135ef45e0/F787649320634d57ad70fdfd328a3f8ea0122e5c93/355495B/SHA3e5f322dc1058840f8f68062f85abd77d59496d0664dc083d26e6bf76714bf44. Rootfullreadback/onehunk1add1delete/hash/other3195exact verified; Adapter/R/Z exact, onlycontrols58836B/SHA026e39154e8723d7184daea09f51bd9aae2d63b1b0a49ea5da813ccc0096c401 changed. Full234732prefix7096/SHA75b056 preserved, tenfalseguards/noSourcepush. NoSourceexecution/tests/refmove. RootgateCLEARONLYunattachedoverlaypreparation; newcoveringrun/scopedreviewpending, notqualified.
