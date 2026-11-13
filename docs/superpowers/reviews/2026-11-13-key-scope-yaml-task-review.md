@@ -1,0 +1,11 @@
+# Task1 review — spec and quality
+
+Reviewed immutablepackage704a013d736880f547e2671cb3391b356d505087; executedSourceafed5/run43459300386/1; closedSourcec0c658. FreshSolxhigh readcompleteScopedDiff plusfocusedmutationhelper/wholejobcount, noSourceexecution/mutations/privatearchives.
+
+SpecNOTQUALIFIED:5subcasespassed1failed26unexecuted;16receiverpassdoesnotqualifyfailedproducer. Actualcontracts hookwiredbyinspectionONLY; stillskipped.
+
+Critical:none. ImportantYAML-I1 deterministicinvalidfixture atF7:740: wholepositive_prepare needle`    env:\n` matches8(onejobenv+7stepenv), butmutateActualF7:539–547 requires1 BEFOREinvokingvalidator. Use line-boundary-qualifiedneedle, preserveuniquenessassertion. This is deterministicallyinvalidwhenreached; runtimedoesNOTidentifyfirstfailinginnerassertion. Noadditionalnewdiffload-bearingdefectfound.
+
+MinorYAML-M1 deferred:ActionNode20forced24/punycode/url.parse warnings nonpristine, upstreamnoise; no demonstratedlinktofailure. PreserveexistingActionpins/scope; finalwholeunitreview mustsee thisminor.
+
+Strengths:lazycheckoutparser+package/version/realpath/exactlockguards; decodedASTbounds/quoteawareexpressions; actualSourcepositiveandboundedprovenanceBEFOREnegatives. PREP-I1's missingimports corrected andactualpositivecoveringseamexecuted. QualityNEEDSFIXESforYAML-I1, noNative/runtimeauthority.
