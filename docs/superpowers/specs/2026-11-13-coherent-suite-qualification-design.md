@@ -143,3 +143,5 @@ No merge/promotion to main. All flags false regardless success.
 ## Clarified internal argument — Task1 builder question
 
 validateReopenedSuite.expectedPeers is exactly {pure:{artifactId,zipSha256},peers:[five exact {job,kind,artifactId,zipSha256} in the public peer order]}. Compare all six reopened original private receipt refs. Pure manifest SHA remains independently bound by bindPure/current contracts output; do not add a redundant private proof field or change the public DTO. This is a fixed internal value, no transport or user override.
+
+verifyRoute.valid is the parsed strictly validated PUBLIC suite/controls result object, or null for invalid/unavailable; it is not a boolean. readback is the closed record under construction and is emitted exactly once after verifySeven sets upstream and accepted (controls: not_applicable). accepted remains a boolean, false for nonpass or unverified upstream. No additional return/public field or refetch is required.

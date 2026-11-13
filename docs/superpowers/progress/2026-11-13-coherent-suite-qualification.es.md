@@ -52,3 +52,5 @@ Testing ruling: controls are written first; the single bounded KEYLESS qualifica
 Root owns Rootdocs and independent metadata/SAFE readback. Source implementation belongs to one fresh delegated actor. All flags remain false; no owner intervention required.
 
 Ruling: builder's expectedPeers internal DTO is accepted exactly as recorded in SPEC — original reopened proof receipts already contain pure ID/digest and the five peer refs, while manifest SHA is independently verified — cost if wrong: direct binding control fails, no public schema or business oracle change. Source actor was told before mutation; actual Native remains held.
+
+Ruling: verifyRoute.valid is PublicResult|null, with exact existing two-field return shape — the final verifier needs the validated DTO for direct needs comparisons and a boolean would force an unrequested extra capture or refetch — cost if wrong: controls expose incorrect acceptance; public record remains unchanged and emitted once.
