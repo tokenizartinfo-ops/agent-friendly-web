@@ -1685,3 +1685,127 @@ Mandatory restoration and Source preservation:
 - Final append commit/tree/report blob/hash and fresh post-publication closure readbacks are returned separately to Root to avoid self-referential hashes.
 
 Disposition: DONE_WITH_CONCERNS. Single final-wave covering run passed23 controls and current package verification; two original-cap rejections remain valid current OUTER observations. inspectionComplete:true denotes those two decisions completed. All seven nonclaims stayfalse; key/Native/FF-I2 holds unchanged. ONE scoped final re-review is pending Root; no second final fix wave, retry, autofix, broad suite, Native/key/Cloudflare action or PC-off claim is authorized. STOP after final closure.
+
+
+## 2026-11-13 — decoded YAML key-scope R1: FAILED / CLOSED; no qualification
+
+Root's exact one-use release is docs ref7a441fa4b191f558a098e296d20ac97918425012, reviews/2026-11-13-key-scope-yaml-exact-keyless-release.md. This is a new structural key-scope unit; the previous coherent unit's historical disposition remains unchanged. Preparation claims were not test execution. The exact R1 attempt below has now executed on GitHub-hosted runners and FAILED; no Native acceptance or new runtime authority is established.
+
+### Source, gate and single activation
+
+- Existing Source feature branch: feat/finite-native-cleanup-20261101; main remained0c9c475b3ebaa970fc11d628b40e50a90cceb727.
+- Inactive reviewed Source: b2d40d2c72cd6c29e8d0ba3d87306eac78587b1b after EOF normalization and PREP-I1's missing builtin imports. Root inactive gate is docs d639cc50bf2ab91d684fc5b1198459b39570f514.
+- Exact active Source: afed5ff612fc8618962f8b372ad054672175077e, tree d61c882f5b2bdead9890f873a6e8c02291521289, F7 f8a3cac1977745f2998981abc1db22ae1d0d0152,355548 UTF-8 bytes,SHA2567d3edfa4657ccf0b3adc4954419aa3d4dcbcdcbe3f893571fb8166336b3f70e2.
+- Exact one-use commit message: AFW DECODED KEY SCOPE QUALIFICATION 20261113-R1.
+- One activation CAS, no force/no retry: expected72c10833654aa7226d8376e95d767455e1c144b2 -> exactafed5ff, success at2026-11-13 16:06:14UTC.
+- Original eight job guards remained byte-exact false. All six afw-finite-syn-checkpoint associations and26 canonical AFW secret expressions remained only in those disabled jobs. Executed keyless_controls/keyless_verify had no AFW environment/key bindings. All four helper bodies, protected files, Native commands and scripts were frozen by the Root gate.
+- Complete fixed45-field/96-form policy and passive expression inventory preparation report remains GitDB blob22ae185536fffc03f7e0c472fe0cc83bea4a4fa3 in this repository, read with fetch_blob; apply the subsequently reviewed EOF/PREP-I1/overlay metadata, not its superseded candidate identity. Complete tiny overlay patch is GitDB blob74f77164d33867f21682b5a472a9bd2d4f982760. No new Source leaf was added for either object.
+
+| Helper | Bytes | SHA256 |
+| --- | ---: | --- |
+| NODE_SUITE_ADAPTER | 61225 | `ad4c08de403c02b10140245c46143b2fd83872aa44401e877a369a6a1485dea6` |
+| NODE_SUITE_CONTROLS | 58832 | `3627dafe53c6b1c6d930cc8c6f747e5d9678ecc54438e6ae03213ee1f7f44ece` |
+| NODE_SUITE_VERIFIER | 15099 | `94135538ab4fb8fa7f43fc2fe42c64563eb806e436117b4a404c26c855ee35bf` |
+| NODE_SAFE_ZIP | 13305 | `b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d` |
+
+Both current keyless jobs emitted those exact program hashes. All five readiness flags remained false. No Source program ran on the PC; only authorized current keyless job logs and public metadata were read. No private/pure archive, private/pure log or actual AFW key was fetched.
+
+### Actual current attempt and terminal freeze
+
+[Run43459300386/attempt1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43459300386): repository1347578006, push, exact Source branch/path/head/message. Created2026-11-13T16:06:16Z; terminal failure recorded2026-11-13T16:07:15Z. This was the only current head run and only attempt1. No rerun/autofix/new active overlay was performed.
+
+| Job | ID | Status | Conclusion |
+| --- | ---: | --- | --- |
+| keyless_controls | 132001628683 | completed | failure |
+| reduction_prepare | 132001631039 | completed | skipped |
+| positive_prepare | 132001631052 | completed | skipped |
+| contracts | 132001631806 | completed | skipped |
+| readonly | 132001631903 | completed | skipped |
+| reduction_consume_b | 132001631914 | completed | skipped |
+| positive_consume | 132001632093 | completed | skipped |
+| reduction_consume_a | 132001632145 | completed | skipped |
+| verify | 132001633467 | completed | skipped |
+| keyless_verify | 132002082733 | completed | failure |
+
+All ten declared identities were reconciled and terminal before restoration. The original eight were skipped; both keyless jobs failed. Terminal gate was read at2026-11-13 16:07:53UTC. The contracts key_scope_precheck was SKIPPED: Source wiring/control inspection is separate from observed execution of that actual contracts step.
+
+### Positive parser evidence before every negative
+
+The locked parser install completed. At2026-11-13T16:06:59.0133970Z, the actual current Source positive produced exactly one bounded line:
+
+```text
+AFW_KEY_SCOPE_PARSER/1 {"version":"2.9.0","lockBlob":"36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b","checkoutResolved":true,"positiveSourceValidated":true,"source":"afed5ff612fc8618962f8b372ad054672175077e","workflowBlob":"f8a3cac1977745f2998981abc1db22ae1d0d0152"}
+```
+
+This precedes the first dag subcase start at16:06:59.0138663Z, and therefore every counted negative fixture. It binds yaml2.9.0/exact lock/checkout resolution/current source/workflowBlob; missing-library rejection did not masquerade as a passed negative. PREP-I1's mandatory current-positive covering seam executed successfully. This positive is not full qualification.
+
+### Controls failure and receiver result
+
+Six families: completed2, passed1, failed1; firstFailure=key_scope. dag_peer_inventory passed; key_scope failed; fixed_case_counts,metadata_custody_binding,incomplete_or_contradictory,coherent_current_pair were not_executed.
+
+Of the required32 subcases,6 started,5 passed,1 failed,26 were not executed. Actual observed results:
+
+| Family | Subcase | Phase |
+| --- | --- | --- |
+| dag_peer_inventory | b_inventory_optional_nonexecuting_receiver | passed |
+| dag_peer_inventory | mutation_setup_failure_cannot_count_as_validator_rejection | passed |
+| dag_peer_inventory | actual_b_dependency_and_attempt_endpoint_targets | passed |
+| key_scope | all_twenty_six_exact_crypto_step_bindings | passed |
+| key_scope | global_secret_alias_and_outer_scope_references_rejected | passed |
+| key_scope | secret_run_and_ambiguous_context_references_rejected | failed |
+
+The failure is bounded to secret_run_and_ambiguous_context_references_rejected. The sanitized logs do not identify which assertion within that subcase failed. No parser-defect, mutation-setup or fixture cause is inferred and no fix was attempted under this consumed run authorization.
+
+The independent receiver executed16/16 controls, all passed. It fetched and strictly verified the assigned SMALLSAFE pair but observed producerStatus=failed and correctly kept accepted=false; its job failed. Strict ZIP/schema/provenance validity does not convert failed producer controls into qualification.
+
+Assigned current artifact (metadata only inspected by this worker): id14056095996, nameafw-coherent-suite-controls-safe-43459300386-1,1402 bytes, digestsha256:b02fce117243a4bdac3057ba19015416d207bbfb5096db2473ea27c8608cd0e8, expired=false, exact current run/head/branch. Root separately owns independent assigned SMALLSAFE inspection; this worker did not download it.
+
+Receiver's bounded current readback:
+
+```json
+{
+  "marker": "AFW_COHERENT_SUITE_READBACK/1",
+  "kind": "controls",
+  "source": "afed5ff612fc8618962f8b372ad054672175077e",
+  "run": "43459300386",
+  "attempt": 1,
+  "artifactId": "14056095996",
+  "uploadedDigest": "b02fce117243a4bdac3057ba19015416d207bbfb5096db2473ea27c8608cd0e8",
+  "status": "verified",
+  "reason": "none",
+  "proof": "strict_current_safe_pair",
+  "metadataBytes": 1402,
+  "metadataDigest": "sha256:b02fce117243a4bdac3057ba19015416d207bbfb5096db2473ea27c8608cd0e8",
+  "rawZipBytes": 1402,
+  "rawZipSha256": "b02fce117243a4bdac3057ba19015416d207bbfb5096db2473ea27c8608cd0e8",
+  "resultBytes": 1697,
+  "resultSha256": "2092eb27275b596f85ac2bb77f4d9d2962e093d2c057442b17ffd3911188081e",
+  "manifestBytes": 265,
+  "manifestSha256": "5f1dab6cbf03796f3030ee357eee51369756890ed7d2869c486aba7cec2addc2",
+  "expiresAt": "2026-11-20T16:07:00Z",
+  "producerStatus": "failed",
+  "upstream": "not_applicable",
+  "accepted": false,
+  "programHashes": {
+    "adapter": "ad4c08de403c02b10140245c46143b2fd83872aa44401e877a369a6a1485dea6",
+    "controls": "3627dafe53c6b1c6d930cc8c6f747e5d9678ecc54438e6ae03213ee1f7f44ece",
+    "verifier": "94135538ab4fb8fa7f43fc2fe42c64563eb806e436117b4a404c26c855ee35bf",
+    "safeZip": "b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"
+  },
+  "operationalReadiness": false,
+  "completePackage": false,
+  "PCoff": false,
+  "globalNativeDrainVerified": false,
+  "sdkNamespaceEmptyVerified": false
+}
+```
+
+### Any-outcome restoration and prefix preservation
+
+After all10 terminal, one restoration CAS moved afed5ff -> b3f4f736b44c570e2b9c2900be2d0928d3a79d10 at2026-11-13 16:07:57UTC. Restoration commit points to the EXACT preunit treec6f985fa5dea6771442e835e38ed6754031dd7c1. Full F7 readback is byte-exact original blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc,126209B,SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a.
+
+Full tree readback was untruncated3196 leaves/62 workflows and exactly preunitc6f985. Its original3195 leaves plus SAME report are preserved. The complete SAME report was still exact ac1b323410baa2319ada28c32b4a153e8fddd21c,224620 characters/224684 UTF-8 bytes,SHA25675e775709e5dd61087622b19f122fcac4eb6d5f038a606d2845d1b63c75b3e75 before this append. This section is appended after that entire unchanged prefix; no historical text is overwritten.
+
+Pre-append reads confirm Source=b3f4f736b44c570e2b9c2900be2d0928d3a79d10, main0c9c475b3ebaa970fc11d628b40e50a90cceb727, restored-head runs0, and branch-active in_progress/queued/waiting/requested/pending each0. This append changes only this SAME report, on the closed Source tree; final head/tree/report/prefix/five-active/current-attempt readbacks are supplied to Root separately to avoid self-referential commit metadata.
+
+R1 is CONSUMED / FAILED / CLOSED. Root's independent review remains pending. Actual Native/key/SDK/MF/Cloudflare/runtime/OAuth/OTP/permission/client/mail/Max/main/PR/chat/automation actions remain HELD; operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified remain false. No automatic retry or repeat is authorized. STOP.
