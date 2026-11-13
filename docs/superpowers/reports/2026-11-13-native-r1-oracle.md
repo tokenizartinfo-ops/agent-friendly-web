@@ -183,3 +183,54 @@ Only current SMALLSAFE `14013887604`, afw-r1-controls-safe-43374412749-1, expiry
 Closure after ALL5terminal/runcompleted: exact F7 f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a, manual/no inputs/no push/seven false, plus only this report append. Final3195leaves/all3193 other prior leaves/modes and full20509prefix must read back exact; final commit/tree/report/main/62events/fiveactive0/close0runs carried in handoff. All five operational flags and realCustodyKeyBound/NativeExecuted/SDKImported/MFAllocated remain false.
 
 Limit: FIX2 is NOT qualified/CLEAN. Empty/nonempty partial positive routes are established; complete F2/F3/F5 correction remains unestablished until causal review and an explicitly released next block. Original Native R1/actual environment-key/checkpoint lifecycle remains unexecuted. No Task2, retry, Source protected edit, cap/permission change, global readiness or PC-off claim. STOP after restoration/full readback.
+
+## Fix round 3/5 — label, retention coherence and closed KEYLESS phases
+
+Authority: immutable Rootdocs `ae00e2fca761d20c74319447226e360853395667`, FIX3 brief/scoped FIX2 review/SPEC P11. Entire prior30355-character report prefix preserved. Base closed Source `a20d8b0f9dac665d08c7543124072df8fd2d8059` / tree `8cd0a2d77c0a87104807bdb8792169acc95cbedb` / report `e5770fc3e83ccbfc34c9e6fcacf959b164c5c95c`. ONE FIX3 covering passed. Actual Native Task2 remains HELD pending fresh scoped SPEC/QUALITY review and separate release; no author CLEAN claim.
+
+Minimal batch: (A) lowercase only wrong-epochs-c0/c1 fixture names; C0/C1 real property mutations and strict controlPaths regex unchanged. This corrects the proven conditional label defect; the exact first red subcase of FIX2 remains unknown. (B) diagnosticRetention now matches protected finite-budget-evidence61–80 structural metadata: own data/safe nonnegative chronology.eventCalls before comparisons; positive capacity<=16384; list length/admission/fullness; omitted ordinal within own eventCalls; traceComplete/coverage.overflow; earliest firstOmission with original scope→operation→guard tie order and permitted original events. This is metadata validation, not a copy/change of R1's21 business assertions. Existing capacities, bytecaps, partial/normal archive domains, epoch equations, cleanOwned, original-frame attribution and environment/key scope are unchanged. (C) Source-fixed controls-only subcase/phase start/pass and family-catch failed markers; no exception message/name/stack/raw expected/actual/private paths/models/ciphers/key/environment values, no SAFE fields or Native production logging.
+
+Root explicitly allowed an internal export of the existing pure diagnosticRetention helper for fixed controls, with no I/O/transport/CLI/environment capability. Own-data missing/inherited/accessor/noncount cases were tested without invoking the accessor getter. Production capture/reopen/publication also exercised valid and invalid JSON metadata; helper tests do not substitute for those routes. Inert defaults/boundaries now carry truthful chronology.eventCalls and coverage.overflow. Meaningful positive/negative fixtures were drafted before implementation inside the same one authorized covering.
+
+Inactive actual candidate preserved/read back: `55d843855804a2e9454980f0d06a98b9929eb865`, tree `60d8a97bc679b8b44930c9202b0104a0b51d0693`, F7 blob `b22f4e7aa53bb13bc3f680ea5c3a9b714fec9d2c`, 181741B/SHA256 `6507292c60e0f3e4f1ec8c5d9898a6d21897147d6f485985b716e6dd2c0d5973`. All3194 prior non-F7 leaves/modes were exact, including the unchanged report before append. Manual/no inputs/no push; actual3jobs all literal false,7→7→2. F8literal19126 and original functional public-pure upload byte-exact; original NativeTest/World/custody/lock/SDK/sourcepins/businessoracle untouched.
+
+| Program | Bytes | SHA256 |
+| --- | ---: | --- |
+| adapter | 52723 | `bb80cf0ba2c1ec690456eb65da1e7419de9d2355adac6fff6e3135111163a09d` |
+| controls | 47399 | `d60ed9d4d7cb7f92ddb4cdf0f4c85181cb02321f63fce95a925cb5f1658a86fa` |
+| verifier | 7909 | `e8320ab55c24fca8487ac2b789f44b4f783d415f3b7e89525683142a7f436c1c` |
+| safeZip | 13305 | `b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d` |
+
+Verifier e832 and SAFE ZIP13305/b36 unchanged. Four unique final-LF/dedented bodies match inactive/active workflow, bound to current git blob and hashed before import. Review inputs: [prior inactive](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/836c2449ed28d83dee7141f88dd446d63b9d197b/.github/workflows/afw-finite-budget-qualification.yml), [FIX3 inactive](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/55d843855804a2e9454980f0d06a98b9929eb865/.github/workflows/afw-finite-budget-qualification.yml).
+
+Overlay `1ce7c6d9df7cf469155f6bf088f69c44a69dd6be`, tree `aca257defe751972f86163624652051cf4e87e85`, F7 `833ce12b579cd60369e46d2f9fddb72b02e8e790`, 189892B/SHA256 `0b0f45e158b97fc477d6c2cd4c4ce5e17aacdc5f1dc56d335ee7f83e37cd104c`. Exact FIX3 label/unique commit-message/branch/repository/selfpath/attempt1 gates; three actual jobs disabled plus two active KEYLESS jobs. Before CAS: full current refs/commit/nontruncated3195tree/all3194non-F7/report30355/F7/main0c9/62events/fiveactive0 verified. Source frozen until all five declared jobs and run completed.
+
+Run [43377434048](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43377434048), `AFW native R1 oracle KEYLESS FIX3 20261113-a`, push, attempt1, completed SUCCESS, `2026-11-13T06:15:27Z` → `2026-11-13T06:15:53Z`. Commands: current Source-bound four-body bootstrap; `node "$RUNNER_TEMP/afw-r1-controls.mjs"`; independent `node "$RUNNER_TEMP/afw-r1-verifier.mjs"`. Node22.23.4 inert filtering: omitted,3registered/1executed/0observedskips. No Native/SDK/MF/I0/real key executed/bound; only fixed inert generic-crypto fixtures on the runner.
+
+| All five declared jobs | Job ID | Terminal conclusion |
+| --- | ---: | --- |
+| keyless_contracts | 131727098378 | success |
+| native_r1 | 131727100190 | skipped |
+| contracts | 131727100356 | skipped |
+| verify | 131727100684 | skipped |
+| keyless_verify | 131727196821 | success |
+
+Actual controls: expected/completed/passed12/12/12, failed0, firstFailure null. All twelve fixed ordered IDs passed. ZIP16/16 passed. Closed phase audit: 330 records / 165 matched start→passed pairs /0failed; custody_binding:153pairs, unavailable_publication:12pairs. No expected-rejection assertion was mislabeled an unexpected failure. Marker schema is exactly marker/control/subcase/phase/status; no raw diagnostic payload.
+
+Completed phase groups: partial empty/nonempty positives and all current partial integrity negatives; coherent C0/C1 mutation rejection; rows/logicalScopeEvents/totals.scopes boundaries4096/4097/16384accepted and16385rejected; valid no-omission/scope(begin or scopeLogical)/operation/guard/tie-order metadata; all specified admission/ordinal/completeness/earliest-event/own-data contradictions; actual valid/invalid metadata JSON capture→inert seal/open→revalidate→publish; both passedcontracts/passedTAP/missing-full custody variants and publisher/DTO/shared-verifier contradiction rejections. The catch path's failed-marker emission is preserved in code; this successful run emitted no failed marker. No causal assertion about FIX2's unknown first red follows from this pass.
+
+Closed focused completion records:
+```json
+{"marker":"AFW_R1_FIX2_BOUNDARIES/1","coherentlyWrongC0Rejected":true,"coherentlyWrongC1Rejected":true,"nativeLists":["rows","logicalScopeEvents","totals.scopes"],"accepted":[4096,4097,16384],"rejected":16385,"custodyFiles":4096,"normalArchiveFiles":512}
+{"marker":"AFW_R1_FIX2_OBSERVED_PASS/1","contracts":"passed","tap":"passed","fullResult":"absent","Native":"unavailable","failure":{"stage":"validation","reason":"invalid_evidence"},"verifiedAndUnavailableCustody":true,"contradictoryNativeNotObservedRejectedByPublisherDTOAndVerifier":true}
+{"marker":"AFW_R1_CONTROLS/1","status":"passed","expected":12,"completed":12,"passed":12,"failed":0,"firstFailure":null,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Current ONLY SMALLSAFE `14014339553`, afw-r1-controls-safe-43377434048-1, expiry `2026-11-20T06:15:40Z`; raw/API1220B. Raw/uploader SHA256 `1ec560151e9e51f4bfdeef6317697cc62972208ed1ef1883c0043a4d2061789f`; API digest `sha256:1ec560151e9e51f4bfdeef6317697cc62972208ed1ef1883c0043a4d2061789f`. Result1506B/`64a0ec4036a3b448ce3f6954ba3ca6d2e5dba361a4b5b37e9f8afd27b7be8254`; manifest267B/`78fd1f96b76c0d23f8409338ed314687563bc07103f5126eea4427c56e986e69`. Independent runner accepted strict_current_safe_pair/producerStatus passed, with current Source/run/attempt, four hashes, strict2JSON/CRC/canonical whole manifest and digest triple. Whole manifest:
+```json
+{"purpose":"afw.native-r1-oracle.controls-manifest.safe.v1","source":"1ce7c6d9df7cf469155f6bf088f69c44a69dd6be","run":"43377434048","attempt":1,"files":[{"path":"result.json","bytes":1506,"sha256":"64a0ec4036a3b448ce3f6954ba3ca6d2e5dba361a4b5b37e9f8afd27b7be8254"}]}
+```
+
+Closure after ALL5terminal/runcompleted: exact F7 f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a, manual/no inputs/no push/seven false, plus only this append. Final3195/all3193 other prior leaves/modes/full30355prefix must read back exact; final closed commit/tree/report/main/62events/fiveactive0/close0runs in handoff. No Source execution/import/eval/local files/clone/dependencies/build on PC; public Source strings/hash metadata only in RAM. All tests GitHub only; no private model/cipher/key/producer evidence retrieved.
+
+Limits: KEYLESS/inert controls qualify these metadata/diagnostic/custody/publication routes, not current original Native R1, real environment-key acquisition, checkpoint lifecycle, global readiness or PC-off. All five operational flags and realCustodyKeyBound/NativeExecuted/SDKImported/MFAllocated remain false. No automatic repair/rerun/Task2; any further formal round follows Root's fix-loop policy (fresh higher agent for round4 if needed). STOP after exact closure/full readback.
