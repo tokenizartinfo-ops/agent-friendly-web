@@ -18,3 +18,10 @@ Ruling: owner opted out of repeated questions/permissions and authorized ongoing
 Ruling: cloud GitDB/Actions is isolation; do not create local SDD scratch/clone/build. Preserve durable evidence here/report; no main merge/delete.
 Ruling: allow explicitly declared code leaves in Task1 closure; all OTHER baseline leaves and62workflows remain exact. Old original3195-identical claim does not apply to intentional new World/helper/test leaves. Cost: larger pinned baseline, reviewed once.
 Ruling: Source active lease/runtime authority remains separate. Task1 preparation RELEASED; Source attachment and any run NOT RELEASED. Task2/3 HELD.
+
+## Preparation rulings — 19:55 UTC
+Ruling: same-run artifact REST through github.token with actions/contents read is allowed in zero-AFW-key qualification; no secrets.* or environment. Helper/tests remain network-free. Cost if wrong: stop qualification, never provider access.
+Ruling: reuse frozen Z generic ZIP/body/digest helper (13305B/b36c40...) plus role-specific receiver, not a new ZIP parser. Signed/unsigned descriptors allowed only under exact existing Z validation; Root independent SMALLSAFE audit remains mandatory. Cost: one frozen helper carrier, reduced new boundary.
+Ruling: World verifies the exact helper bytes as Git blob then imports those SAME bytes via data: URL, inside scoped catch after generic message+exit1. No check/use second file read. Cost: builtin-only helper requirement, already specified.
+Ruling: 19 handpicked sites miss real assertions (persistence113/115), so deterministically cover all assert/throw lines plus existing known async IO/unwind/return-call boundaries in same six pinned files. Record exact catalog/pins and test it against public Source. No broadened paths/columns/arbitrary text. Cost: modest static catalog, no new runtime authority.
+Ruling: combined task review follows each task; whole-plan final review occurs once after tasks. No repeated broad review of Task1 merely to start Task2. Cost: integration issues caught by next task gate/final plan review, not redundant review seats.
