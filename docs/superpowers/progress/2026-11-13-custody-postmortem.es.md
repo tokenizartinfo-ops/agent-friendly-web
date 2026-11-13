@@ -15,3 +15,7 @@ PreflightbuilderNOTCLEARdraftbf8c→Rootsettled18kSPEC→ONEscopedtechnicalCLEAR
 Ruling: prepareINACTIVEcandidateonly; splitRootreleasebeforeanyarchivepush sozero-secretcurrenttemplatecheckedindependently — residualI2cannotprotectfuturekey-bearingwork — costifwrong: nojobstart/staticrejection, noactualkey orNativeuse.
 
 Task1PREPARATIONRELEASED atSource08f, singlefreshSourceimplementer; runHELD. Node22.23.4/builtins/cloudonly; no localSourceexec/files/deps orprivatebytes/logs/key toRoot. TechnicalquestionsRootonly; noowneractionneeded.
+
+Root preparation release92f26ec8: fresh Sourceactor /root/custody_postmortem_builder, standardSolxhigh, solewriter. Initialclosedlease08f/main0c9/fiveactive0 and originaladapter43451/a1e7+SAFEZIP13305/b36+rollback/prefixbytes verified. Controls writtenfirst, three newfunction-onlymodules now drafted. No Sourceexecution/actualartifactmetadata/bytes/logs access orrun. InactiveSourcewillbe workflow_dispatch/noinputs/bothfalse, followedbySTOP_FOR_ROOT_ZERO_KEY_GATE. Futureactivepatchseparateandfivebodiesexact.
+
+Ruling: nullidentityONLY observer_unavailable closedMarker avoids fabricatedSource/hashafterbootstrapfailure; Result identities alwaysvalid — sourceproofnotavailablecannotbeclaimed — costifwrong: Root/receiverexacttypednegativefixturesrejectbeforeacceptance.
