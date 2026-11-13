@@ -1,6 +1,6 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-13-current-retained-envelope-diagnostic.md
 
-Status: EXECUTION/CLOSURE VERIFIED; TASK AND FINAL REVIEWS PENDING. CurrentSourceb587CLOSED. Run43488583034/1SUCCESS/twojobsSUCCESS/25controlsPASS/current2targetscompleteaccepted. Historicalinitialstate: Sourcea157CLOSED/18:40UTCpreflight. PreviousNativeunitCLOSED/businessFAILED; thisunitZEROkey/noNative/nohistoricalcause/AEAD/businesspass.
+Status: EXECUTION/CLOSURE VERIFIED; TASK REVIEW CLEAR, FINAL REVIEW PENDING. CurrentSourceb587CLOSED. Run43488583034/1SUCCESS/twojobsSUCCESS/25controlsPASS/current2targetscompleteaccepted. Historicalinitialstate: Sourcea157CLOSED/18:40UTCpreflight. PreviousNativeunitCLOSED/businessFAILED; thisunitZEROkey/noNative/nohistoricalcause/AEAD/businesspass.
 
 ## Preflight conflict table
 
@@ -30,9 +30,10 @@ Ruling: Source current26keypolicydoesnotapplytwo-jobZEROkeyrole; exactclosedtemp
 - [x] separateoverlay/rootgate/exactone-useCAS.
 - [x] onecurrent25controls+2targets/SAFE/receiver, truthfulresult.
 - [x] all2terminal/exactrestore/reportprefix/fulltree/readbacks.
-- [ ] independentRootcurrentSmallSAFE andcombined+finalreviews.
+- [x] independentRootcurrentSmallSAFE andcombinedtaskreviewCLEAR.
+- [ ] ONEfinalwhole-unitreview.
 
-PREPARATION_RELEASE: ONLYunattachedinactiveGitobjects parenta157 underbindingbrief. NoSourcebranchCAS/overlay/run/reportappend orprivatearchive/log/keyaccess byexecutor. Rootcurrentimmutabletargets andbodypinsfixed; onefuturecloudattemptnotreleased. All7flagsfalse.
+HistoricalinitialPREPARATION_RELEASE: ONLYunattachedinactiveGitobjects parenta157 underbindingbrief. NoSourcebranchCAS/overlay/run/reportappend orprivatearchive/log/keyaccess byexecutor. Rootcurrentimmutabletargets andbodypinsfixed; onefuturecloudattemptnotreleased. All7flagsfalse.
 
 ## Root inactive gate PASS / overlay-only release
 
@@ -51,3 +52,5 @@ ONE-USE RUN_RELEASE: solecurrent_envelope_executor mayCAS featureSource expected
 Run43488583034/1SUCCESS2jobs; currentSmallSAFE14068676052/4276B/c32f8c98e177eda6ababba9a14e2f6ab1772cd77a187613dbeec09961500d5c4 strict2JSON/CRC/canonical/currentv2/5hashes/25controls/manifest/tripledigest/readbackverified. Publicouterfacts P1producer-failure51files115785239B andD96files345073823B, complete/accepted/captrue. ReceiptUNAUTHENTICATED/historicalCauseFALSE/5globalflagsFALSE. NoPrivateZIP/member/log/keyonRoot/executor. NoSourceWorld/SDK/Native/AESexecuted. Thiscurrentinspectiondoesnotproveoldcompositewrite/HTTPerror/nativepositive/readonlycause.
 
 Exactrestoreedfa03/treee24f thenfinalb587/treeaf758/reportb4bc/310494chars310591B/e95f3b...; full296132prefix8df274exact. Rootfull3196/original3195/62WF/F7/main0c9/currenthead1runattempt1/closed+restore0/fiveactive0independentlyverified. Taskcombinedreviewpending, ONEfinalreviewafter. NoSourcefix/newrunlicensed.
+
+Task1complete (Sourcea157..b587; combinedspec+qualityCLEAR, currentdiagnostic25pass/2targetscomplete). ReviewerfocusedactualAcountpredicatecheckmatchedDTO; nofindings. ONEwholefinalreviewpending; noSourcefix/newrunlicensed.
