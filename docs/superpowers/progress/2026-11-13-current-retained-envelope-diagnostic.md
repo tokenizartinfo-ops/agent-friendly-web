@@ -1,6 +1,6 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-13-current-retained-envelope-diagnostic.md
 
-Status: PREPARATION RELEASED ONLY FOR UNATTACHED INACTIVE; Sourcea157CLOSED. CurrentSource/run/active/main metadata verified18:40UTC. PreviousNativeunitCLOSED/reviewCLEAR/businessFAILED, capsconsumed. Newdiagnostic isZEROkey/noNative.
+Status: EXECUTION/CLOSURE VERIFIED; TASK AND FINAL REVIEWS PENDING. CurrentSourceb587CLOSED. Run43488583034/1SUCCESS/twojobsSUCCESS/25controlsPASS/current2targetscompleteaccepted. Historicalinitialstate: Sourcea157CLOSED/18:40UTCpreflight. PreviousNativeunitCLOSED/businessFAILED; thisunitZEROkey/noNative/nohistoricalcause/AEAD/businesspass.
 
 ## Preflight conflict table
 
@@ -25,11 +25,11 @@ Ruling: Source current26keypolicydoesnotapplytwo-jobZEROkeyrole; exactclosedtemp
 
 - [x] newdesignsettled/builderCLEAR/currentSourcea157/main0c9/fiveactive0/full296132prefixknown.
 - [x] preflightselfandsharedinterfaces/rulings/fullbrief.
-- [ ] freshsoleexecutor UNATTACHEDinactive2-jobproposal.
-- [ ] Rootfullinactivecanonical/hashscopegate.
-- [ ] separateoverlay/rootgate/exactone-useCAS.
-- [ ] onecurrent25controls+2targets/SAFE/receiver, truthfulresult.
-- [ ] all2terminal/exactrestore/reportprefix/fulltree/readbacks.
+- [x] freshsoleexecutorUNATTACHEDinactive2-jobproposal, headercorrectionbeforegate.
+- [x] Rootfullinactivecanonical/hashscopegate.
+- [x] separateoverlay/rootgate/exactone-useCAS.
+- [x] onecurrent25controls+2targets/SAFE/receiver, truthfulresult.
+- [x] all2terminal/exactrestore/reportprefix/fulltree/readbacks.
 - [ ] independentRootcurrentSmallSAFE andcombined+finalreviews.
 
 PREPARATION_RELEASE: ONLYunattachedinactiveGitobjects parenta157 underbindingbrief. NoSourcebranchCAS/overlay/run/reportappend orprivatearchive/log/keyaccess byexecutor. Rootcurrentimmutabletargets andbodypinsfixed; onefuturecloudattemptnotreleased. All7flagsfalse.
@@ -45,3 +45,9 @@ OVERLAY_RELEASE ONLY: solecurrent_envelope_executor mayprepareUNATTACHEDactiveov
 RootindependentfullSource/commit/tree/bodyreadbackbeb1f6c83954f47de4cacf9add62c6a8a17a75e3 parent3ff634/tree711673f8abf4c358caa78735a4c1dc2bb79aada6/F7bd9a89bc6be2bcdbe95ebc5eafa2f7c9199af914/154093B/SHAa1fe1ba62b7cfaf9773e64c3ddb4635a3046fba5e60dd0498bdf408480b83704. EntireSourceexactRootreconstruction: trigger+2guardsONLY, all5bodies/drivers/stepsunchanged; full3196tree onlyF7/reportprefixexact. Rootfirstguardcheckerassumednarrowerformula andfailedclosed; actualexistingtemplateguard additionallychecksrepository_id/workflow_ref. Rootverifiedboth[primaryGitHubcontexts](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#github-context), samefixedbootstrapconstraints, thenreconstructedexactstrongerformula. Ruling: retainthosetwoadditionalconjuncts inZEROkeyrole — supported/pinnedidentity, nocurrent26-keypolicyclient — costifwrong: runskipped/failsclosed, neverbroaderauthority. SourceprogramsNEVERexecutedonPC. FreshSourcea157/main0c9,fiveactive0,currentcandidate0runs.
 
 ONE-USE RUN_RELEASE: solecurrent_envelope_executor mayCAS featureSource expecteda15746888a3f3b76dc5232d865bb54aa11e9bfc3→EXACTbeb1f6c83954f47de4cacf9add62c6a8a17a75e3 ONCE/noforce, exactmessageAFW CURRENT ENVELOPE DIAGNOSTIC 20261113-R1, oneattempt1. No genericdispatch/rerun/alternativehead. ThisauthorizesONLYcurrentzero-key25controls+twofixedretainedencryptedarchivesonGitHub (5/27MB), noAES/key/Native/World/SDK/CF/runtime/permissions/main/mail/Max. Root/executor/MCP/PCneverprivateZIP/memberbytes/producerNative/contractslogs/masterkey; readONLYcurrentcustody_inspect+verifypublicdiagnosticlogs andRootassignedcurrentSmallSAFE(afterliteralID/digest+metadata). SourcefreezeuntilruncompleteANDbothjobsallterminal; ANYoutcomeexactoriginalF7restore→freshpreunittreee24f thenAPPENDSAMEREPORTFULL296132prefix/fullreadbacks/STOP. UnknownACKreconcile, noreplay/autofix. CurrentcompatibilityfactsNOhistoricalcause/AEAD/business/PCoff, all7flagsfalse. NoNativeiterationauthorityfromthisrelease.
+
+## Root independent current result and closure
+
+Run43488583034/1SUCCESS2jobs; currentSmallSAFE14068676052/4276B/c32f8c98e177eda6ababba9a14e2f6ab1772cd77a187613dbeec09961500d5c4 strict2JSON/CRC/canonical/currentv2/5hashes/25controls/manifest/tripledigest/readbackverified. Publicouterfacts P1producer-failure51files115785239B andD96files345073823B, complete/accepted/captrue. ReceiptUNAUTHENTICATED/historicalCauseFALSE/5globalflagsFALSE. NoPrivateZIP/member/log/keyonRoot/executor. NoSourceWorld/SDK/Native/AESexecuted. Thiscurrentinspectiondoesnotproveoldcompositewrite/HTTPerror/nativepositive/readonlycause.
+
+Exactrestoreedfa03/treee24f thenfinalb587/treeaf758/reportb4bc/310494chars310591B/e95f3b...; full296132prefix8df274exact. Rootfull3196/original3195/62WF/F7/main0c9/currenthead1runattempt1/closed+restore0/fiveactive0independentlyverified. Taskcombinedreviewpending, ONEfinalreviewafter. NoSourcefix/newrunlicensed.
