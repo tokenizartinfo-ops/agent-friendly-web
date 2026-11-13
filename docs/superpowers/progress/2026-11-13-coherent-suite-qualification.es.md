@@ -83,3 +83,10 @@ Ruling: accept fixed finalizePureBinding complete-stage receipt seam — tests t
 Covering run43399028588/1 succeeded8skip+2success/all10terminal. Root independently strict-verified current SAFE14023878021, six passedfamilies,18closedsubcases/36phase records,110shell/63Node inspections and16ZIP. No actualNative/SDK/MF/World or realkey. Fourbody hashes and qualified ZIP bodies independently match candidate18183/overlaya99.
 Closed Source0ade3837/tree7634f0eb/report7e92d4ef61240chars; prior24731prefix exact,3196leaves/all3195initial leaves/62WF/F7/main0c9/fiveactive0/closedcommit0runs. Restore0f80090e is exact pre-fix tree9ad4552e. No automatic run afterclosure.
 Task1: fix round1/5 (7 awaiting scoped disposition,0 parked). Full complete fixdiff and covering report published in docs/superpowers/reviews/2026-11-13-coherent-suite-task1-fix1-review-package.md; original reviewer receives once. Task2HELD.
+
+## Fix1 scoped disposition and fix2 release
+
+Task1: fix round1/5 (4 addressed,4 open — F1mutation setup falsepositive; F4missingSAFE skips direct reconciliation; F6removedabsent/partial tests; NEWF8eager optionalJSON parses suppress failure pair; commits38ddef2b..0ade3837). No Critical or out-of-scope observations. Actual qualification passed6/6 and16ZIP, but Source controls coverage claim needs correction because identityrename setup failed beforevalidator. History preserved.
+
+Ruling: next correction uses original-range mutation proof outside rejection assertion; always reconciles known direct assignments even withoutSAFE; selects receipt reads by actual captured success outcomes before parsing via fixed shared helper — these close concrete reviewed paths without changing publicschema or originalWorldoracle — costifwrong: covering control/scopedreview failsclosed. No finding parked.
+Fix round2/5 released only for one new bounded KEYLESS covering qualification and exactrestore/reportappend/STOP, currentSource0ade/reportprefix61240. Original3195/F7/main/62WF protected. Task2HELD/all5false.
