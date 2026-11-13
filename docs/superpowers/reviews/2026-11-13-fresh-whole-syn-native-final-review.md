@@ -1,0 +1,5 @@
+# Whole-unit final review — technical failed-attempt closure approved
+
+Reviewerfresh_native_final_review(gpt6Astra xhigh), readonly. Critical0/Important0 invalidatingclosure. Productremainsunqualified: positiveNativefailure, twoassignedPrivatecompositefailures, readonlyseal/rawoutcomegap, threeconsumersskipped. ActualSourceprecheck/direct8contractcounts independentlyinspectedbyreviewer. Rootcomplete-tree/custodyreadbacksretained. TwoMinors: NATIVE-DOC-M1staleinitialledgerstate/checklist; NATIVE-DOC-M2ambiguousRootCASwriter. BothaddressedONEgroupedRootdocswavefcb42→d385b; solefixerfresh_native_doc_fix_wave(gpt6luna medium) proposedunattached74eef/treed9a262, Rootpublishedsamecontent/tree. ONEscopedrereviewCLEAR, bothADDRESSED, nonewbreakage. NoSource/runtime/tests/runschangedbywave. Finalwavecapconsumed; noanotherreviewwave/newNativeexecutionauthorized.
+
+Declinedtojudge: readonlyrawoutcome; producercompositesubstage/cause; absentSuiteSAFEcontent/graphs; actualMFpeaks/globaldrain; actualcloud/PCoff; frozen4helperinputs; historicalActionsv4maintenance. Rootrulings/costsincompletiondoc; nothingdiscardedsilently. No merge/promotion/productacceptancefromthisreview.

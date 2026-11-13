@@ -1,6 +1,6 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-11-13-fresh-whole-syn-native.md
 
-Status: CLOSED - one failed/consumed SYN attempt; Source restored and report preserved. Current Source a15746888a3f3b76dc5232d865bb54aa11e9bfc3. Task1 combined review CLEAR; final whole-unit review approved technical closure with two documentation minors addressed in this wave; scoped re-review pending. Business qualification FAILED; all five global flags FALSE. No new Source implementation or run released.
+Status: CLOSED - one failed/consumed SYN attempt; Source restored and report preserved. Current Source a15746888a3f3b76dc5232d865bb54aa11e9bfc3. Task1 combined review CLEAR; final whole-unit review approved technical closure with two documentation minors addressed in this wave; scoped re-review CLEAR. Business qualification FAILED; all five global flags FALSE. No new Source implementation or run released.
 
 Historical initial state: DESIGN/PREPARATION HELD, Source82626, no writer dispatched. Prior decoded-keyscope unit COMPLETE/CLEAR; caps consumed and not reopened.
 
@@ -29,7 +29,7 @@ Ruling: retain existing restrictedSource/main boundaries and use owner standing 
 - [x] exactoverlaygate, one-use CAS release.
 - [x] actual8jobs/allterminal; no currentSuiteSAFEassignment, typedunavailable/receiver16PASS, businessFAILED.
 - [x] exactrestore/fullprefix/fulltree/readbacks.
-- [x] freshtask spec+quality review andfinalwholeunit review: taskreviewCLEAR and finalwhole-unitreview approved technical closure; documentation scopedre-reviewpending.
+- [x] freshtask spec+quality review andfinalwholeunit review: taskreviewCLEAR and finalwhole-unitreview approved technical closure; documentation scopedre-reviewCLEAR.
 
 OperationalReadiness=false; completePackage=false;PCoff=false;globalNativeDrainVerified=false;sdkNamespaceEmptyVerified=false.
 
@@ -77,3 +77,5 @@ Task1: complete (Source82626..a157468, combinedreviewCLEAN forscopedattempt/anyo
 ## Final documentation minor-fix record
 
 Two documentation-only corrections completed in this wave: (1) record the consumed failed attempt, restored Source/report, technical closure, failed business qualification, and pending scoped re-review; (2) clarify that fresh_native_executor executed the sole Root-authorized CAS to activate 9927. No business pass is claimed. Next scope held: scoped documentation re-review only; no new Source implementation or run released.
+
+Finalwhole-unitreviewCLOSED:0Critical/Importantinvalidatingclosure;2MinorADDRESSedONEdocwave/ONEscopedrereviewCLEAR. Task1complete/scopedattemptfailedconsumed; noSourceimplementation/runreleased. Rulings/declinedtopics+costsincompletiondoc. Retainremoteevidencebranches/mainheld; noextrafulltestrepeat/integrationonfailedsuite; nolocalworkspacecleanupowed.
