@@ -29,3 +29,9 @@ Ruling: approveONLYunattachedactiveoverlaypreparation, notrefpush; Rootmustrevie
 ## Root active-overlay gate PASS / ONErunreleased
 
 Unattacheddfd37bd0/parent0e0/tree69c5/F7499bRootfullSource/metadata/tree/refindependentlyverified. Exact3replacementtransform/2hunkpatchonlytrigger+twofullguards, all5bodiesbyteexactinactive. ALL14completecanonicalnonsecretexpressions, twojobs/noAFWenvironment/key; sourceoldI2checkerNOTused. CurrentSourceRefstillinactive0e0. OneSource-refpushTODFD+twojobs7/2attempt1+exactclosure/report/STOP releasedvia docs/superpowers/briefs/2026-11-13-custody-postmortem-one-run-release.md. Noactualkey/Native/CFholdlift, no extraSourcechanges/attempts.
+
+## Task1 actual one-run outcome / exact closure
+
+Run43433569894/1/sourceDFD completedfailure, exacttwojobsterminalfailure. Producer stagecontrols; individualcontrolsnotobservable, archiveinspectionloopnotreached, artifacts0. Receiver truthfulcurrentObserver/5hashes/unavailable-needs_unsuccessful/no byteclaims independentlyRoot-validated. Rootrecordobserver3positive17negativechecks (metadataonly). No SAFE or targetcounts orhistoricalcauseclaim; all5false.
+
+Restorea38d5969/treeexactpreunitd86; finaldcd70e89/tree d58bae64/reportab60f6a/189509chars189569B/SHA578ce358. Rootfull3196/original3195/62WF/F7/main0c9/prefix177489/fiveactive0/exact1attempt/closedcommit0runs checked; fullreporthashesindependent. Fullimplementation241712charcompletepatch+2guardhunks+fullreportappendroundtrip packaged for freshcombinedspec/qualitytaskgate. Tasknotcomplete: controlsfailed, diagnosticnotachieved. No fix/run released yet; SourceactorSTOP. FF-I2key/Nativehold remainsOPEN.
