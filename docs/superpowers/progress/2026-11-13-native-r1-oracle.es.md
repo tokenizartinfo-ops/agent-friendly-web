@@ -78,3 +78,11 @@ Source quedó restaurado en `a20d8b0f`, con 3195 archivos, los 3194 previos inta
 El revisor encontró un defecto determinista: la etiqueta del fixture usa `C0/C1` en mayúsculas, pero la ruta solo admite minúsculas. Es una causa segura de fallo si se alcanza esa línea; el primer subcaso que falló en la ejecución anterior sigue sin estar registrado. También deben completarse las relaciones de coherencia de los descriptores de retención con el contrato protegido.
 
 P11 libera una corrección mínima de la etiqueta, esos checks de metadatos y marcadores cerrados de subcaso/fase únicamente para controles KEYLESS. No se alteran aserciones para obtener un verde ni se exponen errores o archivos privados. La tercera ronda tiene una única cualificación y el mismo cierre obligatorio. Source de partida sigue cerrado en `a20d8b0f`, con el informe completo de 30355 caracteres. Native Task2 continúa retenida.
+
+## FIX3 aprobó los controles y quedó cerrado — revisión acotada pendiente
+
+La única ejecución `43377434048/1` aprobó las 12 familias y 16 verificaciones ZIP. Root comprobó el recibo actual `14014339553`, sus cuatro hashes, manifiesto y contexto. Los 330 marcadores de fase forman 165 pares completos sin fallo, con 61 subcasos fijos. Completaron los casos de retención, épocas y las dos variantes del resultado completo ausente que antes habían quedado sin ejecutar.
+
+Source volvió a quedar cerrado en `bde551ef`: F7 exacto, 3194 archivos previos intactos, main intacta, informe completo de 39626 caracteres y cero ejecuciones activas. Los tres jobs reales quedaron omitidos. La revisión SCOPED del mismo Astra recibirá el patch completo, el informe y todos los registros cerrados. La causa exacta del primer subcaso fallido de FIX2 continúa sin atribuirse; el defecto de la etiqueta sí quedó corregido.
+
+El acceso de cifrado real y Native R1 todavía no se ejecutaron. Task2 sigue retenida hasta la revisión limpia; no requiere intervención de Gabriel.
