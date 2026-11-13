@@ -52,3 +52,9 @@ ONE-USE RUN_RELEASE: soleSourceexecutor fresh_native_executor may CAS ref feat/f
 ## Actual execution started / consumption witness
 
 SingleCAS9927aea readback; EXACTcurrentrun43477409062/attempt1/push started2026-11-13T17:54:29Z. RootindependentAPI initially1materializedjobcontracts132064730353. Step `Install the locked fixture dependencies` success followed by `Validate decoded key scope before any orchestration` success, beforepure_test(in_progress); no Nativekeyjob yet. Thisisactualcurrent8-modeparserconsumption, notclaimedC6/32rerun. No contracts/producerlogsread. Rununfinished/Sourcefrozen/allglobalflagsfalse.
+
+## Partial failure boundaries — NOT acceptance / Source still frozen
+
+APIpositive_prepare132065216586: nativecommandstep10success, compositeown_metadatastep14failure/finaltruth17failure, jobterminal17:57:24; dependentpositive_consume skipped. Readonly132065216574: nativecommandstep10success17:55:50→18:00:03, custodysealstep12failure/finaltruth17failure, jobterminal18:00:07. Reduction_prepare stillrunning; full8inventorynotyetmaterialized. NoSourcewriteuntilall8terminal.
+
+RootcurrentpublicartifactMETAONLYpositive14063997106:5114454B/digest4bae6038a2eb3df7e47c653eaa9f265ba43464be0c2a8cd1ab11dfed4af98618/currentrunheadbranch/name/expiredfalse/expiry20nov17:57:21Z, rawsizebelow136314880. Matchingliteraluploadeddigestnotyetavailable, privateZIP/parser/receiptinnercountsnotread. This doesNOTidentifyfailedsubstageorRootcause. assignedPrivatecompositepublicSource coversmetadata→rawdownload→strictZIP→receiptcaps→write, anymayfail. Readonlysealreasonunknown; donotguessrepeatcap/permissions/provider/key. Rootdirectartifactgenericfetchunsupportedbyconnector (400 INVALID_ARGUMENT), so its nonmetadataresponsewasdiscarded/neverruntimeevidence; successfulrun-artifactwrapperisactualmetadata. Root/executorprivate/pureZIP+producer/contractslogs+keysstillneverread. Currentattemptbusinesspassimpossible; noautoNativefix/retryreleased.
