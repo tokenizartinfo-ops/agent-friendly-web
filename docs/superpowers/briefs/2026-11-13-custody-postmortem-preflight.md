@@ -1,0 +1,5 @@
+# Read-only builder preflight — fixed retained producer-envelope postmortem
+
+Read FIRST draftSPEC docs/superpowers/specs/2026-11-13-custody-postmortem-design.md at thisimmutableRootdocs. Sourcee88ce70bclosed; no implementation/mutation/run/replay isreleased. Thisisnextdiagnosticproposal, separatefromcoherent-unitfinalreview. Rootownsdesignunderowneroptoutofroutinequestions andauthenticatedlatestcontinuaAFWrequest; cwdHermesAGENTSisbackground.
+
+Assessbuildability/security/preciseinterfaces. Propose minimalexactDTO/types/coherence and Sourceprefixreuse/historicalSubjectvsactualObserver strategy, fixedmetadata/ZIP/receipt/cap stages, realfunctioncontrols/receiverbinding. VerifyfixedSourcefunctions in candidate23bda onlyifconcreterisk; usepublictextRAMonly. No Sourcefiles/exec/deps/SDK/MF/privatebytes/logs/keys/CF/resources/Sourcewrites/newtests/subagents. No privateartifactdownload. Return CLEAR ifbuildableexact, or concisegaps withspecificremedies; Rootwillsettle andfinalizeSPEC beforeimplementer. Do not writecode ordispatchwork.
