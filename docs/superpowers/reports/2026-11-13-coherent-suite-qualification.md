@@ -2356,3 +2356,252 @@ The complete SAME report was still exact fullprefix0c4d39c8efebf49f5f5358ca5764a
 Pre-append reads confirm Source14549a..., main0c9c475b3ebaa970fc11d628b40e50a90cceb727, restored-head runs0 and five branch-active status collections each0. Final immutable Source/report/tree/fullprefix/current1attempt/closed0runs/3196/original3195/62workflow readbacks are handed to Root separately to avoid self-referential commit metadata.
 
 FINAL R3 covering PASS/CLOSED is factual. One scoped final Root re-review remains; no second final wave, autofix or rerun. Actual Native/key/SDK/MF/Cloudflare/runtime/OAuth/OTP/permissions/newtokens/Max/mail/main/PR/chats/automation remain HELD; all5 global flags remainfalse. A later Native envelope must reconcile new exact pins only after final CLEAR and separate authorization. STOP.
+
+
+## Fresh original whole-SYN/Native attempt R1 — consumed, failed, exactly restored (2026-11-13)
+
+This fresh evidence unit is CLOSED as a failed whole-suite qualification. The one original attempt is [43477409062/1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43477409062/attempts/1), completed/failure at 2026-11-13T18:09:15Z. All eight declared jobs materialized and became terminal before restoration. No rerun, source repair, cancellation, renewed clock or cap change occurred. The original required Q8 + P1 + R1/R2/R3 + D1/D2/D3/D4 = 16 total checks / eight Native SDK executions was NOT accepted. Receiver controls passing are a different result.
+
+### Identity, authority and immutable source
+
+PROJECT AFW; repository tokenizartinfo-ops/agent-friendly-web / ID1347578006; ENVIRONMENT GitHub-hosted finite SYN qualification; ORIGIN https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web; RESOURCE_TYPE feature-branch F7 Actions; RESOURCE_ID refs/heads/feat/finite-native-cleanup-20261101 / .github/workflows/afw-finite-budget-qualification.yml. ALLOWED_ACTION was staged unattached preparation, Root-reviewed overlay, one exact no-force compare-and-swap and one original attempt, then exact restoration and this SAME-report append. No Cloudflare/runtime, credential/OAuth/OTP, mail/Max, main, PR, new secret or new checkpoint custody operation was authorized or performed by this executor.
+
+The first binding brief was read at Root docs revision4454886c7ec9b7200a075c3e0a86e747093200c1, path docs/superpowers/briefs/2026-11-13-fresh-whole-syn-native-task1.md. Root recorded its inactive acceptance in658ad9907b165d36b913538a07dcf771b94e7038 and the separate one-use run release inbbd93fa964c4d7c529ed38506c67dea467353f44. The sole Source executor used GitHub connector/GitDB and read-only in-memory text transformations/hashes; no Source execution, eval/import, checkout/clone, local dependencies, local tests/build or VM was used.
+
+| Pin | Commit / object | Evidence |
+| --- | --- | --- |
+| Fresh preunit Source | `82626aada77c89c0fc03b5317d05f7c99c05f89e` | tree38db218a52156ce599e0f78be9359f957c8abb6b;3196 leaves/62 workflows |
+| Original3195 baseline | `0479fdd5db3b957ecbb9302e8a45ac88f333fcba` | tree8942513f440fd25b188c196090e790a561bdb688; all original leaf type/mode/blob identities preserved |
+| Qualified inactive input | `f4c45ab9a20db7685178a40e829565ec934d5a00` | F7d99599256376b5dd522a7c7b15dc84ae74ae65b1;362148B;SHA256b51bfb6c6963599ad1b9ea9e5ce94021cd2178ef0e84a22faf14dc75f524f122 |
+| New inactive, initially unattached | `91feed3079da186774a24a86c2f8c1d7c0e7fc96` | parent82626;tree27842c2c325f909b9f338107f620b7badba20e33;F7074cbcf863a8a4a91210e075c53d2fd2d2d38826;349235B;SHA2567db0ed6767860b65bf23bca23b06ea34e4480a9bad1e3aec9b85a25c492df10e |
+| Active, independently reviewed before CAS | `9927aea624c9269e293e644934423e88aa88f109` | parent91feed;treea976da0cb21063f9c6fd26e2d447c0f0f5c2289d;F7b6a000da8edbd5d581f3a5e59880a41ef6fd2316;350142B;SHA2561ed31bfca0e8bd2bc50cbfc02174482bb18238242dd229032269cdd16ffd7a3c |
+| Exact restoration | `ab692ccf6dce1216608455144595277239a6435c` | parent9927aea; EXACT preunit tree38db218a52156ce599e0f78be9359f957c8abb6b |
+| Main, immutable throughout observed reads | `0c9c475b3ebaa970fc11d628b40e50a90cceb727` | no main/PR change |
+
+The inactive variant removed ONLY the complete keyless_controls/keyless_verify tail blocks, retained the original eight literal-false guards and dormant helper-carrier shell false, and neutralized the top run-name. Every retained Source byte except the run-name was exact against the qualified input. It was parented to the fresh preunit so the current full report was preserved. Root independently reviewed its complete readback before releasing overlay preparation.
+
+The active overlay changed ONLY the top run-name (removed HELD), manual trigger to a push trigger with the fixed Source branch AND the self F7 path, two one-attempt comments, and the eight named job guards. Exact commit message: `AFW FRESH WHOLE SYN NATIVE 20261113-R1`. Seven guards used the registered push/event+exact-message+repository/ref+attempt1 form; verify retained the registered always() prefix with the same scoped terms. No unsupported github.repository_id guard or registry change was added. Repository ID was verified by API and the immutable bootstrap before key-preflight. The dormant helper carrier remained shell `if false; then`. Both complete recursive tree readbacks were untruncated3196 leaves/62 workflows and changed ONLY F7; all other type/mode/blob identities and the whole report were exact. Root independently reconstructed the entire active file before its separate run release. Root independent terminal/readback and corrected API-truth evidence is recorded in docs revision83ae8f02.
+
+| Frozen helper | Bytes | SHA256 |
+| --- | --- | --- |
+| adapter | 62999 | `d76ca29a35725fcee1b8858ebfafce003679a6b62362f76a34fe288c5a7a24d9` |
+| controls | 63195 | `a41c417ea624e1a277f326356c8c95184ed7e24cfa42dab32decd731b970f612` |
+| verifier | 15099 | `94135538ab4fb8fa7f43fc2fe42c64563eb806e436117b4a404c26c855ee35bf` |
+| safeZip | 13305 | `b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d` |
+
+The five fixed source blobs remained pureTest1f8b02d5b2dddb474c7db7daa04aa24e2dc948d8; nativeTest533dafb5df5f8e57442c5b9029dc8dec6dded434; World0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b; custody4d05b5ec0f7b074be88ef9733a47c984b0212351; lock36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b. Node22.23.4, SDK1.2.1 and lock-pinned yaml2.9.0 stayed fixed. The current verify bootstrap completed and printed those same four helper hashes. The 3380-byte generic ZIP parser / SHA2564ff44bd3adda54eb0816fab275e4b13078005d1bd1a4626cfbf67d31e8bf7af8, SAFE ZIP13305-byte body, original receipt/cap/clock/Native/oracle/World semantics remained unchanged.
+
+Original job order/dependencies/timeouts stayed contracts2/no-needs; positive_prepare15/[contracts]; positive_consume15/[contracts,positive_prepare]; reduction_prepare15/[contracts]; reduction_consume_a15/[contracts,reduction_prepare]; readonly7/[contracts]; reduction_consume_b15/[contracts,readonly,reduction_prepare]; verify2/[all seven]. Six original afw-finite-syn-checkpoint environments and exactly26 canonical key bindings remained at the frozen generic custody step IDs (3+4+3+4+3+9 across those six jobs); contracts and verify had no key binding. The key was never bound to install, World, Native, SDK, metadata, projection, network or verifier steps. Existing custody only; no key value was read by Root/MCP/executor.
+
+### One actual run and consumed key-scope hook
+
+Before preparation and immediately before the single CAS, fresh Source82626/main0c9 and five explicit active-status collections (queued,in_progress,requested,waiting,pending) were positively0; the candidate exact-head run inventory was0. The one no-force CAS expected82626→exact9927aea returned success and was reconciled by Source readback plus exactly one exact-head push run43477409062/attempt1, repository ID1347578006, fixed branch and F7 path. Created/started2026-11-13T17:54:29Z. Source stayed frozen until this current run completed AND all declared eight jobs were terminal. No mutation-ack uncertainty occurred.
+
+The actual contracts key_scope_precheck succeeded. API step7 locked install ran17:54:38→17:54:53; step8 Validate decoded key scope before any orchestration ran17:54:53→17:54:53 success; step9 pure test began17:54:53 after it. The immutable Source call is the same frozen A.validateKeyScopes on the checked-out current eight-job F7. The hook immediately follows locked install and has no if, continue-on-error, env or key environment. Its failure would fail contracts and block the six key jobs through their original default-success needs. This is actual consumption evidence from immutable call+step metadata+job truth gate. The earlier R3 six-family/32-subcase C wrapper qualification is PRIOR evidence and was NOT rerun by Native contracts.
+
+Contracts step9 (no continue-on-error) completed success after syntax checks, eslint, inactive wrapper/invalid-group checks and `node --test --test-reporter=tap test/finite-budget-diagnostics.test.mjs`; its immutable assertions require Q8 tests8/pass8/fail0/cancelled0/skipped0/todo0. Step10 fixed preparation controls `AFW_BUDGET_CONTROL_PHASE=green env -u AFW_BUDGET_GROUP node --experimental-vm-modules test/fixtures/finite-budget-world.mjs verify-native-preparation-round1` completed success. Step11 three-profile preflight and final truthstep21 completed success. No pure/contracts bytes or logs were fetched; these are source+step-gate results, not a downloaded private proof or a whole-suite pass.
+
+### Current eight jobs and corrected outcome interpretation
+
+| Job | Current job ID | Terminal status/conclusion | Started UTC | Completed UTC |
+| --- | --- | --- | --- | --- |
+| contracts | 132064730353 | completed/success | 2026-11-13T17:54:32Z | 2026-11-13T17:55:21Z |
+| positive_prepare | 132065216586 | completed/failure | 2026-11-13T17:55:26Z | 2026-11-13T17:57:24Z |
+| positive_consume | 132066364088 | completed/skipped | 2026-11-13T17:57:25Z | 2026-11-13T17:57:25Z |
+| reduction_prepare | 132065216784 | completed/failure | 2026-11-13T17:55:26Z | 2026-11-13T18:09:05Z |
+| reduction_consume_a | 132072972599 | completed/skipped | 2026-11-13T18:09:06Z | 2026-11-13T18:09:06Z |
+| readonly | 132065216574 | completed/failure | 2026-11-13T17:55:26Z | 2026-11-13T18:00:07Z |
+| reduction_consume_b | 132072972257 | completed/skipped | 2026-11-13T18:09:06Z | 2026-11-13T18:09:06Z |
+| verify | 132072970022 | completed/failure | 2026-11-13T18:09:07Z | 2026-11-13T18:09:14Z |
+
+**Correction of an intermediate interpretation:** native steps use continue-on-error:true. Their REST API conclusion success is the post-continue-on-error conclusion and does NOT prove steps.native.outcome success. Earlier executor progress messages incorrectly called those API conclusions command success. This report corrects the claim. Current verify-needs literals and the immutable COMMAND_OK/kind selection provide the bounded interpretation below; no producer log was opened.
+
+| Native-role command | API step10 conclusion | Actual raw outcome supported by current evidence | Later boundary |
+| --- | --- | --- | --- |
+| positive_prepare: `node test/fixtures/finite-budget-world.mjs prepare-positive output/finite-budget/checkpoint` | success after continue-on-error | FAILURE: current outputs.kind=producer-failure; frozen seal_prepare selects that only when steps.native.outcome is not success | Assigned metadata/raw-ZIP composite step14 failure; truthstep17 failure |
+| reduction_prepare: `node test/fixtures/finite-budget-world.mjs prepare-reduction output/finite-budget/checkpoint` | success after continue-on-error | success supported by current outputs.kind=reduction-checkpoint and frozen COMMAND_OK selection; no claim of successful downstream consumption/business proof | Assigned metadata/raw-ZIP composite step14 failure; truthstep17 failure |
+| readonly: `node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs` | success after continue-on-error | UNKNOWN: no current output-kind/artifact/outcome literal; API conclusion alone is insufficient | Generic custody seal step12 failure; truthstep17 failure |
+| positive_consume / reduction_consume_a / reduction_consume_b | jobs skipped | Not executed | Original dependency fences retained |
+
+The first two step14 failures identify only the composite public Source boundary (metadata→raw download→strict generic ZIP→receipt caps→private write), not its failing substage. Readonly failed at seal; its cause and relation to any historical seal issue remain unresolved. No artifact size, native timing or masked/no-log evidence establishes a root cause. Positive raw metadata5114454B and reduction27453498B are below the unchanged generic raw cap136314880B; this does not prove which substage failed. No private ZIPs, plaintext/cipher models, master key, producer logs or contracts logs were fetched, including after failure.
+
+### Current verify readback, receiver controls and metadata-only custody
+
+Only current non-key verify job132072970022 logs were read. Its bootstrap succeeded; verify step5 failed at18:09:12. The exact current seven-needs results were contracts success; positive_prepare failure; positive_consume skipped; reduction_prepare failure; reduction_consume_a skipped; readonly failure; reduction_consume_b skipped. This outcome vector is separate from the strict SAFE pair result.
+
+Current verifier receiver controls reported expected16/completed16/passed16/failed0. Inventory: zip_valid_store_crc_vector, zip_valid_deflate, zip_signed_unsigned_descriptors, zip_wrong_size, zip_wrong_upload_sha, zip_wrong_metadata_sha, zip_extra_entry, zip_duplicate_entry, zip_traversal_entry, zip_symlink, zip_bad_crc, zip_noncontiguous_ranges, zip_declared_and_inflate_caps, download_stream_redirect_auth_bounds, receiver_capture_current_pair, receiver_rejection_no_zip_claim. These sixteen are ZIP/receiver controls, not the sixteen business checks or sixteen Native executions.
+
+The literal current suite readback was source9927aea/run43477409062/attempt1, artifactId=null, uploadedDigest=null, status=unavailable, reason=publication_unavailable, proof=absent, producerStatus=null, upstream=not_all_seven_success, accepted=false. All metadata/raw ZIP/result/manifest sizes and digests were null. No literal B safe-id/digest assignment existed. Root was notified to perform no download, name-based fallback or old-controls-artifact substitution. No Suite SMALLSAFE was assigned/fetched/accepted; canonical pair/CRC/manifest/digest-triple acceptance of a real current Suite artifact is therefore ABSENT, not inferred from controls. The unavailable SAFE and failed/skipped upstream jobs prevent business acceptance.
+
+Final run artifact API inventory contained exactly the following three records. All refer to repository ID1347578006, run43477409062, exact head9927aea and fixed branch. METADATA ONLY; no artifact bytes were fetched. No Readonly or SuiteSAFE artifact was listed.
+
+| Artifact ID | Name | Raw metadata bytes | Digest | Expired | Expires UTC |
+| --- | --- | --- | --- | --- | --- |
+| 14065115503 | finite-budget-reduction_prepare-9927aea624c9269e293e644934423e88aa88f109-43477409062 | 27453498 | `sha256:6813feef63d01c1101984c80e8713a568ce30483869671b8c87f4f717c0db6d7` | false | 2026-11-20T18:09:01Z |
+| 14063997106 | finite-budget-positive_prepare-9927aea624c9269e293e644934423e88aa88f109-43477409062 | 5114454 | `sha256:4bae6038a2eb3df7e47c653eaa9f265ba43464be0c2a8cd1ab11dfed4af98618` | false | 2026-11-20T17:57:21Z |
+| 14063158426 | finite-budget-fixed-preparation-9927aea624c9269e293e644934423e88aa88f109 | 111697 | `sha256:c1fad14b3e9cd8349068dcc572cf9065159ebbade3076fdaca1edff72732639d` | false | 2026-11-20T17:55:15Z |
+
+Current verify-needs bound pure14063158426 to digestc1fad14b3e9cd8349068dcc572cf9065159ebbade3076fdaca1edff72732639d and manifest0899c90f11fc57643ff7ff1dfb7cbc4a9dc1df55033fa9c96f2c6c26929e53d2; positive14063997106 to4bae6038a2eb3df7e47c653eaa9f265ba43464be0c2a8cd1ab11dfed4af98618/kindproducer-failure; reduction14065115503 to6813feef63d01c1101984c80e8713a568ce30483869671b8c87f4f717c0db6d7/kindreduction-checkpoint. Missing outputs for skipped consumers/Readonly stayed missing. No shadow private oracle was introduced on Root.
+
+At most three jobs were simultaneously running in current API metadata (positive_prepare, reduction_prepare and readonly started17:55:26). This bounds observed job concurrency only. No private current full proof established eight Native executions, five lineages/ten graphs, all-four-ready overlap before original C0−30s, full ownership/known-cancellation semantics, native/MF resource peaks, global Native drain or SDK namespace emptiness. Original shared C0−I0=900000ms/C1−C0=180000ms, R120s/P-D300s/root30s/child5s and caps were unchanged; they were not renewed or asserted passed from declarations.
+
+### Exact closure, full prefix and self-review
+
+Run completed/failure18:09:15 and the explicit current eight-job inventory proved all terminal. Fresh frozen-head9927aea and readable original rollback F7 were revalidated before creating restoration commitab692ccf6dce1216608455144595277239a6435c, parent9927aea, EXACT preunit tree38db218a52156ce599e0f78be9359f957c8abb6b. Its tree/parent were read back before the no-force expected-head CAS. Fresh Source then read ab692ccf; its entire untruncated recursive tree exactly equaled the fresh preunit3196-leaf tree. All original3195 baseline leaf type/mode/blob identities, protected R1 report and62 workflows were exact. Restored F7 was fetched back: original blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc,126209B,SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a; manual/no-input/no-push/seven false guards. All Source helper changes were temporary and restored.
+
+Pre-append readbacks positively proved Sourceab692ccf; main0c9c475b3ebaa970fc11d628b40e50a90cceb727; restored-head run inventory0; active-head inventory exactly one completed attempt1 run43477409062; five explicit active-status inventories each0. The SAME report remained exact blob9ee8b7cd47df97514f2d2bd0cf1f68137dd6e416, FULL264449 characters/264521 UTF-8 bytes/SHA25696b5f8e14f3ce4081cd69d71e8352d215a15ab01b04971c6ce02d36bc3efc9d7. This section is appended after that entire unchanged prefix. Final immutable Source/report/full-tree/current-attempt/closed-zero-run/five-active-zero readbacks are handed to Root separately to avoid self-referential commit metadata.
+
+Self-review: exact allowed Source transforms and both Root gates preceded the single CAS; the actual hook ran in order; no unsupported guard/key scope/body/Native/SDK/World/clock/cap/schema/DTO/control/dependency change; no while-running Source mutation; all declared jobs terminal before restore; full report prefix and original tree preserved; private custody respected; current SAFE absence not replaced by prior evidence; continue-on-error interpretation corrected. Remaining concerns: positive actual Native command FAILURE is an observed boundary in addition to the positive/reduction composite assigned-private failures and Readonly seal failure. Their root causes, the composite substages, and Readonly raw outcome remain unresolved. Any postmortem/fix or new Native run requires its own separately scoped release; this consumed unit authorizes no repair or repeat.
+
+All five global flags remain FALSE: operationalReadiness, completePackage, PCoff, globalNativeDrainVerified, sdkNamespaceEmptyVerified. No actual AFW cloud subscription/useful delivery/review/withdrawal/autoclose/full PC-off or Max gate was completed. Do not ask the owner to shut down the PC or claim continuous cloud/24×7 availability from this failed finite SYN unit.
+
+### contracts: API step metadata
+
+These are REST step conclusions. Where Source sets continue-on-error (the native step), they are post-continue-on-error and do not establish its raw outcome.
+
+| # | Step | API status/conclusion | Started UTC | Completed UTC |
+| --- | --- | --- | --- | --- |
+| 1 | Set up job | completed/success | 2026-11-13T17:54:33Z | 2026-11-13T17:54:35Z |
+| 2 | Require the fixed AFW source and first attempt | completed/success | 2026-11-13T17:54:35Z | 2026-11-13T17:54:35Z |
+| 3 | Checkout this exact revision | completed/success | 2026-11-13T17:54:35Z | 2026-11-13T17:54:37Z |
+| 4 | Use Node 22 | completed/success | 2026-11-13T17:54:37Z | 2026-11-13T17:54:38Z |
+| 5 | Preserve the four immutable Source helper bodies | completed/success | 2026-11-13T17:54:38Z | 2026-11-13T17:54:38Z |
+| 6 | Materialize current Source-bound suite programs before import | completed/success | 2026-11-13T17:54:38Z | 2026-11-13T17:54:38Z |
+| 7 | Install the locked fixture dependencies | completed/success | 2026-11-13T17:54:38Z | 2026-11-13T17:54:53Z |
+| 8 | Validate decoded key scope before any orchestration | completed/success | 2026-11-13T17:54:53Z | 2026-11-13T17:54:53Z |
+| 9 | Check fixed fixture syntax, lint, inactive module and eight contracts | completed/success | 2026-11-13T17:54:53Z | 2026-11-13T17:55:01Z |
+| 10 | Execute all fixed preparation controls once without I0 | completed/success | 2026-11-13T17:55:01Z | 2026-11-13T17:55:06Z |
+| 11 | Strict three-profile preflight with safe failure DTO | completed/success | 2026-11-13T17:55:06Z | 2026-11-13T17:55:15Z |
+| 12 | Seal a closed pure evidence directory | completed/success | 2026-11-13T17:55:15Z | 2026-11-13T17:55:15Z |
+| 13 | Upload finite-budget-pure only | completed/success | 2026-11-13T17:55:15Z | 2026-11-13T17:55:16Z |
+| 14 | Download pure_receipt by exact ID attempt 1 | completed/success | 2026-11-13T17:55:16Z | 2026-11-13T17:55:17Z |
+| 15 | Wait 2s before pure_receipt retrieval 2 | completed/skipped | 2026-11-13T17:55:17Z | 2026-11-13T17:55:17Z |
+| 16 | Download pure_receipt by exact ID attempt 2 | completed/skipped | 2026-11-13T17:55:17Z | 2026-11-13T17:55:17Z |
+| 17 | Wait 5s before pure_receipt retrieval 3 | completed/skipped | 2026-11-13T17:55:17Z | 2026-11-13T17:55:17Z |
+| 18 | Download pure_receipt by exact ID attempt 3 | completed/skipped | 2026-11-13T17:55:17Z | 2026-11-13T17:55:17Z |
+| 19 | Verify exact same-ID pure inventory | completed/success | 2026-11-13T17:55:17Z | 2026-11-13T17:55:18Z |
+| 20 | Print verified closed profile diagnostic | completed/success | 2026-11-13T17:55:18Z | 2026-11-13T17:55:18Z |
+| 21 | Require all covering profiles and retained readback | completed/success | 2026-11-13T17:55:18Z | 2026-11-13T17:55:18Z |
+| 41 | Post Use Node 22 | completed/success | 2026-11-13T17:55:18Z | 2026-11-13T17:55:18Z |
+| 42 | Post Checkout this exact revision | completed/success | 2026-11-13T17:55:18Z | 2026-11-13T17:55:18Z |
+| 43 | Complete job | completed/success | 2026-11-13T17:55:18Z | 2026-11-13T17:55:18Z |
+
+### positive_prepare: API step metadata
+
+These are REST step conclusions. Where Source sets continue-on-error (the native step), they are post-continue-on-error and do not establish its raw outcome.
+
+| # | Step | API status/conclusion | Started UTC | Completed UTC |
+| --- | --- | --- | --- | --- |
+| 1 | Set up job | completed/success | 2026-11-13T17:55:26Z | 2026-11-13T17:55:27Z |
+| 2 | Require fixed scope before any native work | completed/success | 2026-11-13T17:55:27Z | 2026-11-13T17:55:28Z |
+| 3 | Run actions/checkout@v4 | completed/success | 2026-11-13T17:55:28Z | 2026-11-13T17:55:29Z |
+| 4 | Run actions/setup-node@v4 | completed/success | 2026-11-13T17:55:29Z | 2026-11-13T17:55:34Z |
+| 5 | Materialize current Source-bound suite programs before import | completed/success | 2026-11-13T17:55:34Z | 2026-11-13T17:55:34Z |
+| 6 | Install exact lock without custody key | completed/success | 2026-11-13T17:55:34Z | 2026-11-13T17:55:54Z |
+| 7 | Generic custody key-preflight | completed/success | 2026-11-13T17:55:54Z | 2026-11-13T17:55:55Z |
+| 8 | Download exact contracts artifact | completed/success | 2026-11-13T17:55:55Z | 2026-11-13T17:55:55Z |
+| 9 | Verify prior pure inventory and select fixed graph profile | completed/success | 2026-11-13T17:55:55Z | 2026-11-13T17:55:56Z |
+| 10 | Execute fixed positive_prepare once | completed/success | 2026-11-13T17:55:56Z | 2026-11-13T17:57:17Z |
+| 11 | Prepare complete private inventory and legacy manifest without key | completed/success | 2026-11-13T17:57:17Z | 2026-11-13T17:57:18Z |
+| 12 | Generic custody seal | completed/success | 2026-11-13T17:57:18Z | 2026-11-13T17:57:21Z |
+| 13 | Upload encrypted envelope and closed receipts only | completed/success | 2026-11-13T17:57:21Z | 2026-11-13T17:57:22Z |
+| 14 | Validate own assigned metadata and raw ZIP3 without key | completed/failure | 2026-11-13T17:57:22Z | 2026-11-13T17:57:23Z |
+| 15 | Generic custody own open | completed/skipped | 2026-11-13T17:57:23Z | 2026-11-13T17:57:23Z |
+| 16 | Validate own original manifest and World semantics without key | completed/skipped | 2026-11-13T17:57:23Z | 2026-11-13T17:57:23Z |
+| 17 | Preserve actual command and custody outcome | completed/failure | 2026-11-13T17:57:23Z | 2026-11-13T17:57:23Z |
+| 33 | Post Run actions/setup-node@v4 | completed/skipped | 2026-11-13T17:57:23Z | 2026-11-13T17:57:23Z |
+| 34 | Post Run actions/checkout@v4 | completed/success | 2026-11-13T17:57:23Z | 2026-11-13T17:57:23Z |
+| 35 | Complete job | completed/success | 2026-11-13T17:57:23Z | 2026-11-13T17:57:23Z |
+
+### positive_consume: API step metadata
+
+These are REST step conclusions. Where Source sets continue-on-error (the native step), they are post-continue-on-error and do not establish its raw outcome.
+
+| # | Step | API status/conclusion | Started UTC | Completed UTC |
+| --- | --- | --- | --- | --- |
+
+
+### reduction_prepare: API step metadata
+
+These are REST step conclusions. Where Source sets continue-on-error (the native step), they are post-continue-on-error and do not establish its raw outcome.
+
+| # | Step | API status/conclusion | Started UTC | Completed UTC |
+| --- | --- | --- | --- | --- |
+| 1 | Set up job | completed/success | 2026-11-13T17:55:27Z | 2026-11-13T17:55:28Z |
+| 2 | Require fixed scope before any native work | completed/success | 2026-11-13T17:55:28Z | 2026-11-13T17:55:28Z |
+| 3 | Run actions/checkout@v4 | completed/success | 2026-11-13T17:55:28Z | 2026-11-13T17:55:30Z |
+| 4 | Run actions/setup-node@v4 | completed/success | 2026-11-13T17:55:30Z | 2026-11-13T17:55:30Z |
+| 5 | Materialize current Source-bound suite programs before import | completed/success | 2026-11-13T17:55:30Z | 2026-11-13T17:55:31Z |
+| 6 | Install exact lock without custody key | completed/success | 2026-11-13T17:55:31Z | 2026-11-13T17:55:46Z |
+| 7 | Generic custody key-preflight | completed/success | 2026-11-13T17:55:46Z | 2026-11-13T17:55:46Z |
+| 8 | Download exact contracts artifact | completed/success | 2026-11-13T17:55:46Z | 2026-11-13T17:55:47Z |
+| 9 | Verify prior pure inventory and select fixed graph profile | completed/success | 2026-11-13T17:55:47Z | 2026-11-13T17:55:48Z |
+| 10 | Execute fixed reduction_prepare once | completed/success | 2026-11-13T17:55:48Z | 2026-11-13T18:08:50Z |
+| 11 | Prepare complete private inventory and legacy manifest without key | completed/success | 2026-11-13T18:08:50Z | 2026-11-13T18:08:52Z |
+| 12 | Generic custody seal | completed/success | 2026-11-13T18:08:52Z | 2026-11-13T18:09:01Z |
+| 13 | Upload encrypted envelope and closed receipts only | completed/success | 2026-11-13T18:09:01Z | 2026-11-13T18:09:03Z |
+| 14 | Validate own assigned metadata and raw ZIP3 without key | completed/failure | 2026-11-13T18:09:03Z | 2026-11-13T18:09:03Z |
+| 15 | Generic custody own open | completed/skipped | 2026-11-13T18:09:03Z | 2026-11-13T18:09:03Z |
+| 16 | Validate own original manifest and World semantics without key | completed/skipped | 2026-11-13T18:09:03Z | 2026-11-13T18:09:03Z |
+| 17 | Preserve actual command and custody outcome | completed/failure | 2026-11-13T18:09:03Z | 2026-11-13T18:09:03Z |
+| 33 | Post Run actions/setup-node@v4 | completed/skipped | 2026-11-13T18:09:03Z | 2026-11-13T18:09:03Z |
+| 34 | Post Run actions/checkout@v4 | completed/success | 2026-11-13T18:09:03Z | 2026-11-13T18:09:04Z |
+| 35 | Complete job | completed/success | 2026-11-13T18:09:04Z | 2026-11-13T18:09:04Z |
+
+### reduction_consume_a: API step metadata
+
+These are REST step conclusions. Where Source sets continue-on-error (the native step), they are post-continue-on-error and do not establish its raw outcome.
+
+| # | Step | API status/conclusion | Started UTC | Completed UTC |
+| --- | --- | --- | --- | --- |
+
+
+### readonly: API step metadata
+
+These are REST step conclusions. Where Source sets continue-on-error (the native step), they are post-continue-on-error and do not establish its raw outcome.
+
+| # | Step | API status/conclusion | Started UTC | Completed UTC |
+| --- | --- | --- | --- | --- |
+| 1 | Set up job | completed/success | 2026-11-13T17:55:26Z | 2026-11-13T17:55:28Z |
+| 2 | Require fixed scope before any native work | completed/success | 2026-11-13T17:55:28Z | 2026-11-13T17:55:28Z |
+| 3 | Run actions/checkout@v4 | completed/success | 2026-11-13T17:55:28Z | 2026-11-13T17:55:30Z |
+| 4 | Run actions/setup-node@v4 | completed/success | 2026-11-13T17:55:30Z | 2026-11-13T17:55:30Z |
+| 5 | Materialize current Source-bound suite programs before import | completed/success | 2026-11-13T17:55:30Z | 2026-11-13T17:55:30Z |
+| 6 | Install exact lock without custody key | completed/success | 2026-11-13T17:55:30Z | 2026-11-13T17:55:48Z |
+| 7 | Generic custody key-preflight | completed/success | 2026-11-13T17:55:48Z | 2026-11-13T17:55:48Z |
+| 8 | Download exact contracts artifact | completed/success | 2026-11-13T17:55:48Z | 2026-11-13T17:55:49Z |
+| 9 | Verify prior pure inventory and select fixed graph profile | completed/success | 2026-11-13T17:55:49Z | 2026-11-13T17:55:50Z |
+| 10 | Execute fixed readonly once | completed/success | 2026-11-13T17:55:50Z | 2026-11-13T18:00:03Z |
+| 11 | Prepare complete private inventory and legacy manifest without key | completed/success | 2026-11-13T18:00:03Z | 2026-11-13T18:00:04Z |
+| 12 | Generic custody seal | completed/failure | 2026-11-13T18:00:04Z | 2026-11-13T18:00:04Z |
+| 13 | Upload encrypted envelope and closed receipts only | completed/skipped | 2026-11-13T18:00:04Z | 2026-11-13T18:00:04Z |
+| 14 | Validate own assigned metadata and raw ZIP3 without key | completed/skipped | 2026-11-13T18:00:04Z | 2026-11-13T18:00:04Z |
+| 15 | Generic custody own open | completed/skipped | 2026-11-13T18:00:04Z | 2026-11-13T18:00:04Z |
+| 16 | Validate own original manifest and World semantics without key | completed/skipped | 2026-11-13T18:00:04Z | 2026-11-13T18:00:04Z |
+| 17 | Preserve actual command and custody outcome | completed/failure | 2026-11-13T18:00:04Z | 2026-11-13T18:00:05Z |
+| 33 | Post Run actions/setup-node@v4 | completed/skipped | 2026-11-13T18:00:05Z | 2026-11-13T18:00:05Z |
+| 34 | Post Run actions/checkout@v4 | completed/success | 2026-11-13T18:00:05Z | 2026-11-13T18:00:05Z |
+| 35 | Complete job | completed/success | 2026-11-13T18:00:05Z | 2026-11-13T18:00:05Z |
+
+### reduction_consume_b: API step metadata
+
+These are REST step conclusions. Where Source sets continue-on-error (the native step), they are post-continue-on-error and do not establish its raw outcome.
+
+| # | Step | API status/conclusion | Started UTC | Completed UTC |
+| --- | --- | --- | --- | --- |
+
+
+### verify: API step metadata
+
+These are REST step conclusions. Where Source sets continue-on-error (the native step), they are post-continue-on-error and do not establish its raw outcome.
+
+| # | Step | API status/conclusion | Started UTC | Completed UTC |
+| --- | --- | --- | --- | --- |
+| 1 | Set up job | completed/success | 2026-11-13T18:09:08Z | 2026-11-13T18:09:08Z |
+| 2 | Run actions/checkout@v4 | completed/success | 2026-11-13T18:09:09Z | 2026-11-13T18:09:10Z |
+| 3 | Run actions/setup-node@v4 | completed/success | 2026-11-13T18:09:10Z | 2026-11-13T18:09:11Z |
+| 4 | Materialize current Source-bound suite programs before import | completed/success | 2026-11-13T18:09:11Z | 2026-11-13T18:09:11Z |
+| 5 | Verify all seven current direct outputs and the current SAFE pair | completed/failure | 2026-11-13T18:09:11Z | 2026-11-13T18:09:12Z |
+| 9 | Post Run actions/setup-node@v4 | completed/skipped | 2026-11-13T18:09:12Z | 2026-11-13T18:09:12Z |
+| 10 | Post Run actions/checkout@v4 | completed/success | 2026-11-13T18:09:12Z | 2026-11-13T18:09:12Z |
+| 11 | Complete job | completed/success | 2026-11-13T18:09:12Z | 2026-11-13T18:09:12Z |
