@@ -6074,3 +6074,48 @@ Frozen held-file inventory:
 ```
 
 Self-review checked unchanged legacy primary/callback order, whole-helper and required persistence before oracle, retained-phase gate including equal-primary hole, business-failure/cleanup-success allowance, actual added persistence failure instead of manual flag, exact private/shared routine usage, strict closed MODEL/schema binding and existing N1–N7 contracts. No known concrete blocker remains; this is not independent CLEAN. On any new run failure originalWorld is restored and allnewWFheld/protected/main/0activeSTOP; no hidden repair/retry. On pass retain fixed code, close allnewWF, fullreadbackSTOP. Native/AFWkey/MF/I0/SDKruntime/CF/production/OAuth/customer/PCoff/Native16/Max NOT EXECUTED; all readinessflagsfalse.
+
+
+### Fix2 sole NEW qualification FAILED at MODEL readback — permit consumed
+
+Implementation026d8f2aa67a3efa79f922d098ffce2d517fee69/treeb2584749f0c08118ddaa9c8d1fce0f518a4b1134 exact-readback on all6files; onlyWorld+fixture+report changed,3194leaves/3188protected. Sole frozen activation91e3fb7c49496d655a515fa1e467da9fab700a71/tree49c94bb3045caef149e44b3b86b8ed50761ee342 changed ONLY contracts event/runlabel/2gates. Active contracts21420B/blob b6b6721c9cf8f02282cdf23a828b8ce4d24b1124/SHA2569d0039bc0adc68576b3890c9a90bf144d2d84dcfd0513125b091fb94f0bb13cb; all other frozen hashes unchanged. Five active states0 before event.
+
+Actual NEW run43336838877/attempt1/push/source91e3fb7c49496d655a515fa1e467da9fab700a71, created2026-11-13T00:24:38Z, terminalFAILURE2026-11-13T00:25:11Z. Producer131595029246 FAILURE; verifier131595273354 terminalSKIPPED. This was not a rerun of43331779408. Install exact lock, identity/baseline/pins and THREE node --check commands all succeeded. Current-identity pure MODEL preflight completedSUCCESS, including current actual Node ownership/handoff regressions and their assertions; sanitized MODEL upload succeeded. No independent readback/proof of those model facts was completed, so this is not an overall qualification or ACTUALGREEN.
+
+Failure step was existing 'Verify model upload API raw ZIP digests bounds CRC and exact paths'. Closed actual output:
+
+```text
+2026-11-13T00:25:07.6411750Z MODEL upload finalized, artifact13997192957
+2026-11-13T00:25:07.6412728Z MODEL upload size10700bytes
+2026-11-13T00:25:08.0704508Z curl: (22) The requested URL returned error: 404
+2026-11-13T00:25:08.0739406Z Process completed with exit code22
+```
+
+The step contains two sequential fixed curl reads (metadata then ZIP); existing output does NOT distinguish which returned404. No temporal-consistency, permission, credential, outage or code-cause diagnosis is asserted. Python triple-digest/path/CRC/UTF8/EOF checks and protected verifyBudgetArtifact REAL-ID readback were not completed. No retry/backoff/source repair/rerun was performed. Post-run artifact collection metadata lists the assigned MODEL current/unexpired on this exact run/head; that later metadata does NOT retroactively qualify the failed read.
+
+MODEL metadata only (no MODEL archive download by builder/RootMCP):
+
+```json
+{
+  "id": 13997192957,
+  "name": "afw-post-ack-model-43336838877-1",
+  "size_in_bytes": 10700,
+  "digest": "sha256:ea1c3f978a31166dc208981cb74749fbf5e3167750657c8437361c9a3d4e2d72",
+  "created_at": "2026-11-13T00:25:07Z",
+  "expires_at": "2026-11-20T00:25:06Z",
+  "expired": false,
+  "workflow_run": {
+    "id": 43336838877,
+    "repository_id": 1347578006,
+    "head_repository_id": 1347578006,
+    "head_branch": "feat/finite-native-cleanup-20261101",
+    "head_sha": "91e3fb7c49496d655a515fa1e467da9fab700a71"
+  }
+}
+```
+
+Uploader digest in bounded log matches current API metadata ea1c3f978a31166dc208981cb74749fbf5e3167750657c8437361c9a3d4e2d72; raw ZIP digest and full verified model.json/preflightSha were NOT obtained. SAFE artifact NONE. Exact24 callback wrapper was SKIPPED (0registered/executed by this qualification step, no completion/pass witness and no forged24PASS); unchanged F1–F8 and17named pure tests SKIPPED; contracts-proof/SAFE upload SKIPPED; independent verifier SKIPPED. No new TAP pass/fail test count is invented. The preflight's closed 5families/7Node-handoff assertions passed at command level, but their MODEL proof was not independently read back; prior fix1 actual24/8groups/17tests remains historical evidence only.
+
+Required failure rollback now targets exact originalWorld5fb78c057b7e80260ae683abf4af892767ce110e/218113chars and exact reviewed held contracts1c4d054487e781157cf4fa633f9fc58a5a9cbbf5/21318B/manual/noinputs/nopush/twofalse. Native8d5b04da0eff2890c70b8ef15a2f51a99c896810 remainsmanual/noinputs/nopush/twofalse; F7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc unchanged/sevenfalse. Fix2 fixturecdc1fdca6d614183a0383e4734d2ffcfdd5ac422 and testaaf4894d1b411a8ac59debb63ca9368e803141c5 stay reviewable but current World rollback intentionally lacks new adapters; complete intended fix2World0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b is preserved in026d8f2a/91e3fb7c for scoped recovery, never force/reset. All ENTIRE569273starting prefix and fix2initial577867prefix preserved verbatim. Full post-closure readbacks will follow.
+
+StatusBLOCKED: one fix2 permit consumed by MODEL HTTP404 read failure; overall proof/qualification incomplete. Any next attempt needs a fresh scoped Root brief/permit. No hidden repair, extra qualification, Native, MF/I0/SDKruntime/AFWkey/CF/production/OAuth/customer/PCoff/Native16/Max executed; synthetic Node progress flags are not allocations/runtime evidence. All five readinessflagsfalse. STOP after closure/readback.
