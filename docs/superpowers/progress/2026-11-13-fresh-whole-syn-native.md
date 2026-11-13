@@ -36,3 +36,9 @@ OperationalReadiness=false; completePackage=false;PCoff=false;globalNativeDrainV
 Freshbuilder fresh_native_builder_check: CLEAR against frozenf4c45. Ordered8mode admittedL282–283; registeredmessageguardsL151/190–199; twotailkeylessblocks3381–3505 removablewithoutfourcarrierbodies; contractsbootstrap→lockedinstall→precheck1358–1368→pure. NoSourceexecution/mutation. Root checked requirements/delta constraints and rules no blocker.
 
 PREPARATION_RELEASE: freshsoleexecutor may create UNATTACHED inactive8-jobF7 Gitobjects parent82626 only under bindingbrief. NoSourcebranchCAS, activeoverlay, run or reportappend released. Root must independently read complete proposedSource/delta/fourhashes beforeoverlaystage. TestsNOTRUN atpreparation stage.
+
+## Root inactive gate PASS; overlay-only release
+
+Root independently fetched commit91feed3079da186774a24a86c2f8c1d7c0e7fc96/tree27842c2c325f909b9f338107f620b7badba20e33/F7blob074cbcf863a8a4a91210e075c53d2fd2d2d38826 and completeF7. Exact allowedtransform vs frozenf4c45: removeONLY2keyless tailjobs +neutralrunname. Root RAM data-onlyhashes349235B/SHA7db0ed6767860b65bf23bca23b06ea34e4480a9bad1e3aec9b85a25c492df10e; all4bodybytes/hashesseparatelymatchfrozenpins. Fulluntruncatedtree3196, onlyF7leafdiffvsfreshpreunit38db, same9ee8reportblob; currentSource82626. NoSourceprogram executed/imported/evaluated onRootPC. Keyscope gate staticequivalence atthisstage; actualmandatorydecoderexecution occursincontracts beforekeyjobs, not falsely claimed asalreadyrun.
+
+OVERLAY_RELEASE ONLY: fresh_native_executor may prepareUNATTACHEDactiveoverlay parent91feed using exactmessage `AFW FRESH WHOLE SYN NATIVE 20261113-R1`, pushANDfixedbranch+selfF7path, existingregistered8jobguards(event/message/repo/ref/attempt1; verifyalways), helpercarrierfalse. SourcebranchCAS/run remainHELD untilRootindependentfullreadback. NootherSourcebytechange, fourbodiesexact, no globalfalse replacement.
