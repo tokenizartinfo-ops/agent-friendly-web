@@ -150,3 +150,13 @@ La única ejecución KEYLESS `43385447465/1` aprobó 12 familias, 38 subcasos nu
 Source quedó cerrado en `0479fdd5`, workflow exacto restaurado, los 3194 archivos previos intactos, informe completo de 62739 caracteres, main intacta y cero ejecuciones activas. La candidata corregida `548c68f8` conserva cualificación KEYLESS; el pase Native real sigue atribuido a `416c6764`. No se repitió R1.
 
 Se entrega al mismo revisor final el diff completo, el informe y los registros cerrados para la única revisión acotada F1–F4. No se libera otra ola ni una nueva ejecución durante esa revisión. No requiere intervención de Gabriel.
+
+## Unidad Native R1 completada — revisión completa CLEAN
+
+La única revisión acotada final marcó los cuatro hallazgos como ADDRESSED y quedó CLEAN, sin observaciones residuales. El acta final es native-r1-oracle-final-clean.md; las decisiones de Root y sus límites quedan preservadas en native-r1-oracle-root-decisions.es.md.
+
+La unidad cierra con R1 original real aprobado en Source416c y la plantilla corregida Source548 cualificada con KEYLESS. Source0479 permanece cerrado, F7 restaurado, informe62739 completo, archivos previos intactos y cero ejecuciones activas. Las ramas remotas y la evidencia se conservan; no se fusiona main ni se elimina ningún workspace compartido.
+
+Aclaración para el siguiente bloque: el conjunto legado llamado Native16 combina 8 tests puros de contrato y 8 casos Native originales (P1,R1,R2,R3,D1,D2,D3,D4), no 16 casos Native. Su workflow de siete jobs está cerrado y tiene vínculos de clave a nivel de job que deben acotarse a pasos criptográficos antes de cualquier activación nueva. Solo hay una lectura estática inicial; ninguna nueva prueba está autorizada por esta anotación.
+
+El objetivo global AFW/PC-off sigue pendiente. La siguiente acción autónoma será diseñar y revisar ese conjunto coherente con las mismas restricciones, sin pedir intervención a Gabriel mientras duerme.

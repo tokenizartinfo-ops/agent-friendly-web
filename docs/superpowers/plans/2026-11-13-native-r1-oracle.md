@@ -45,7 +45,7 @@
 - [x] SameSourcecontracts7, actualNativeR1 job7 with all original asserts/caps, typed custody/safe proof; no otherNativecases/provider.
 - [x] Metadata only privateproducer; parse KEYLESSverifier closedrecords, Root independentlystrictSAFE/currentcontext/programs/digest/wholemanifest.
 - [x] ANYoutcome exactF7restore/newreportappend/fullreadbacksSTOP. No blindrepeat/Native16/permission renewal.
-- [ ] Task2spec/quality + wholeplan review, Root causal decision; no global readiness claim.
+- [x] Task2spec/quality + wholeplan review, Root causal decision; no global readiness claim.
 
 ## Self-review
 Oneunit/currentR1 only. Two implementation/review gates, preflight resolves concrete legacy3case→selected1/linkage/secret-scope interfaces. All five review-focus items map to controls/current actual evidence. No local workspace created; Rootdocs cloudnamespace is plan workspace; owner explicit opt-out means no approval check-in or human window before08AR.
@@ -66,3 +66,6 @@ Task1 fullreview and threeformalfixrounds areclosed: originalAstra scopedfinal S
 
 ## Task2 review clean; final whole-plan review pending
 Task2complete(commitsbde551ef..78fcd591,reviewclean). FreshAstraSPEC PASS/QUALITYCLEAN,no findings; originalR1 currentactualpassed/custody+scopeverified. Noimplementationchanges. Finalwhole-planreviewseparatebeforeunitcomplete; noSource/Native16releasebythisline.
+
+## Whole-plan final closure
+Alltaskscomplete: initialfullreview+threeTask1formalfixrounds+Task2freshCLEAN+whole-planreview+ONEfinalfixwave/ONEscopedre-reviewCLEAN. Source0479closed/exactrollback/protected/main; netnewreportonly. RealR1proof416c; correctedtemplate548KEYLESSonly. Unitgoalachieved, overallPCoffpending/all5false. RemoteSource/docskeptasis(noMain/PR/merge/localworktree/deletion). Nextunitrequiresfreshplan/preflight, notautoNativeactivation.
