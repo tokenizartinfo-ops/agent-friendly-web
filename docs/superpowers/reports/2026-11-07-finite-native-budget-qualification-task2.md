@@ -8628,3 +8628,1050 @@ BOTH jobs terminated before exact restoration CAS `5df0c1d5b5828f9680629d82eadf9
 ```
 
 NOTEXECUTED: Cloudflare remote API/runtime/production changes, OAuth/customer/real-owner operations, Native16/full-case qualification, PC-off, Max, recovery/restart/retry, additional Native case/run, deployment, cron/consumer changes, credential read/copy/rotation, private archive downloads. All five readiness flags remain false. This one-case diagnostic completed and closed; independent Root whole-plan review remains separate. STOP after final report-only CAS and full closure readback.
+
+## Final combined source correction and keyless qualification, 13 November 2026 UTC
+
+GitHub Actions run [43346843706/1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43346843706) completed successfully. Both jobs finished before the workflow returned to its held state. The applicable [amended brief](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/4955fd0c0af13f076bf6ef6221c0b24ad8c0ca89/docs/superpowers/briefs/2026-11-12-native-post-ack-r2-final-fix-wave.md) assigned a single reversible source correction and a single 7+2 minute qualification.
+
+**F1.** The fixed native publication command validates the archived observation receipt separately from diagnostic eligibility. For known failed cleanup and unavailable provenance, it writes the exact unavailable SAFE and its manifest, then fails qualification. The keyless control used the actual cleanup handoff result from the current model, inert reopen evidence and the same publication command and qualification predicate used in the native producer and verifier. The private receipt survived the synthetic publication. Four unqualified and two qualified publications were read back in owned scratch. Two malformed or inconsistent receipts were rejected before SAFE creation. The canonical observed digest remained `47a77ac116e8d5514defb5fa615de87bf01e16968d30254a8754f389be59a005`. The underlying helper, oracle and original workflow verdicts retain their original behavior. No native job was run for this correction.
+
+**F2.** All seven existing frontend calls reach one private byte-range check in the fixed read-artifact command before the first write. Contracts has three calls and Native has four. Each retains its existing extraction and CRC, name, raw SHA, file and JSON limits. Bounds include complete local records, name/extra fields, declared compressed sizes and applicable descriptors, every central record, EOCD and EOF. The current runner accepted the two actual assigned artifacts. Three valid fixed two-member byte specimens covered stored/no descriptor and deflated signed/unsigned classic descriptors. Nine numeric negative controls covered the shared boundary/extent invariants and one tuple mismatch exercised descriptor comparison. The baseline finding comes from static inspection. The old parser was not run, and no target-specific invalid archive or forged assignment was built. Format inspection before activation included the [v4 dependency lock](https://github.com/actions/upload-artifact/blob/v4/package-lock.json), the [6.0.2 writer](https://github.com/archiverjs/node-compress-commons/blob/6.0.2/lib/archivers/zip/zip-archive-output-stream.js#L330) and the [classic ZIP specification](https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT).
+
+**Commands and results.** Both jobs installed the existing lock with `npm ci --ignore-scripts --no-audit --no-fund`. The producer checked the three existing modules with `node --check`, called the current `preflightPostAckDiagnostic()`, uploaded the keyless MODEL and ran its fixed read-artifact command and protected MODEL readback against its assigned ID. The composed control command was `AFW_POST_ACK_MODE=controls node --test --test-concurrency=1 test/finite-post-ack-diagnostic.test.mjs`. TAP reported 1 test, 1 pass, 0 failures, skips or cancellations. It issued all 24 named completion witnesses exactly once. Transport retained 29 fake cases. N8 retained five families and seven actual handoffs. The original fixed oracle retained 21 negative families. The producer also ran `AFW_BUDGET_CONTROL_PHASE=green node --experimental-vm-modules test/fixtures/finite-budget-world.mjs verify-native-preparation-round1` (8 groups, 22 cases) and `node --test --test-concurrency=1 --test-reporter=tap test/finite-budget-diagnostics.test.mjs test/mcp-qa-finite-observer.test.mjs` (17 passed, 0 failed, skipped or cancelled), followed by `node test/fixtures/finite-post-ack-diagnostic.mjs contracts-proof`. The separate verifier read the current MODEL and SAFE and ran `node test/fixtures/finite-post-ack-diagnostic.mjs verify-contracts`. Its actual verdict, per-phase read records, program pins and full SAFE manifest follow below.
+
+**Closure and limits.** Branch tip at restoration `380f8901d0aacbda6d0891830ae81f25f63a246c` exactly reproduces the held candidate tree. Full recursive tree and seven body checks passed, including the unchanged original report prefix. Both manual workflows contain zero push triggers and no inputs. Their two job guards and the immutable F7 seven job guards are held false. All 62 Source workflow event definitions were read directly. The connector rejected the separate workflow-list collection GET, so the inventory came from the exact nontruncated tree and all workflow bodies. The sole push run at the activation head was checked separately. The reporting commit is a single-child report-only CAS on the same branch; its own content-derived commit/tree IDs are recorded in the final readback outside this self-referential document. Only the fixture and this append may differ at the final tip (3,192 other leaves exact). The five repository activity counts, protected bodies, main and prefix are rechecked at final delivery.
+
+This run leaves all five readiness flags false. Historical Native run 43343373924/1 keeps its original qualified `not_observed` result. The earlier failure cause remains unknown. Native paths have static integration coverage and keyless publication/format controls. No new Native execution, MF, I0, key access, SDK runtime, deployed resource or PC-off trial was part of this run. The agent inspected only the new SMALLSAFE bytes and keyless job logs. MODEL evidence came from the signed-in GitHub metadata and the runner’s validated receipt. During the permitted SMALLSAFE readback, tool output displayed its short-lived delivery link once. The report omits that link. Source execution, installation and tests ran on the GitHub runner. Independent scoped review remains pending.
+
+```json
+{
+  "source": {
+    "branch": "feat/finite-native-cleanup-20261101",
+    "base": "048fe9c2e7b9677085b50b48062dbe76e6e27692",
+    "baseTree": "e6678542b107fb38d76e3e7b7625b42132698998",
+    "heldCandidate": {
+      "commit": "10e6e9347ddb01ea9c7a391e186b98f5ff443263",
+      "tree": "d7cc5d62e7a19cf03c1ac8dae8591a5f787f475b",
+      "parent": "048fe9c2e7b9677085b50b48062dbe76e6e27692"
+    },
+    "activation": {
+      "commit": "b93e42756ec877bf031b55a6bca49cc558905d0e",
+      "tree": "36f19adecb733e81d35fefdcc584a22dde5fdf5e",
+      "parent": "10e6e9347ddb01ea9c7a391e186b98f5ff443263"
+    },
+    "heldAfterBothJobs": {
+      "commit": "380f8901d0aacbda6d0891830ae81f25f63a246c",
+      "tree": "d7cc5d62e7a19cf03c1ac8dae8591a5f787f475b",
+      "parent": "b93e42756ec877bf031b55a6bca49cc558905d0e"
+    },
+    "closedReadback": {
+      "head": "380f8901d0aacbda6d0891830ae81f25f63a246c",
+      "tree": "d7cc5d62e7a19cf03c1ac8dae8591a5f787f475b",
+      "leaves": 3194,
+      "protected": 3193,
+      "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "active": {
+        "queued": 0,
+        "in_progress": 0,
+        "waiting": 0,
+        "requested": 0,
+        "pending": 0
+      }
+    }
+  },
+  "inventory": {
+    "leaves": 3194,
+    "eventDefinitions": 62,
+    "pushDefinitions": 19,
+    "reportPrefixCharacters": 677599,
+    "reportPrefixUTF8Bytes": 678915,
+    "reportPrefixGit": "66dbb834ab4fd80dea9c0329091cb0ffd9fbb87e",
+    "reportPrefixSha256": "ea3b250c7e13c6e10da9cea5e7bbfe19985b96319603df1c12fbcef590d21ad9",
+    "codeAndWorkflowHashes": {
+      "baselineFixture": {
+        "size": 91238,
+        "sha256": "5f84a7d77246511cecc3afcd3ff12107e8de713806d7e36964f8703c9ab1538a",
+        "git": "dc05c0410fc085062fb47e10bb29e6723d938821"
+      },
+      "fixture": {
+        "size": 102842,
+        "sha256": "b7b6c453641ff93c621f78bc2f9244a52bdc734a7c2192bd85f2860c83d325ff",
+        "git": "7e1ee778add7dbe317aa261b2073fe28295a0ad6"
+      },
+      "activeContracts": {
+        "size": 19454,
+        "sha256": "22c0f85f9baacb54c5cecf50bf3716795472ba0faa4731a9d6f948d82574700d",
+        "git": "9135fadbeb7a205b617c2aa49b0645ad789fa77d"
+      },
+      "heldContracts": {
+        "size": 19347,
+        "sha256": "dffafee8d1347e869154d5bc7d34b71c2297b12bd1f20649bcb6b7dc710bb58e",
+        "git": "2006beb4d081ef127d1192fd99967f5f76eeb7db"
+      },
+      "heldNative": {
+        "size": 27458,
+        "sha256": "50a72c97cfffb2710c10a8127871f11893cefe778c61b61664e06c69905116e3",
+        "git": "baa8442094731bea1413d2cc03028ab8682b300b"
+      },
+      "world": {
+        "size": 242987,
+        "sha256": "007a4b39777dbd34645f7754556cfa1a9e152a0d2a6f55a27f6b1c30e334d867",
+        "git": "0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b"
+      }
+    },
+    "immutableTest": "aaf4894d1b411a8ac59debb63ca9368e803141c5",
+    "immutableF7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc"
+  },
+  "run": {
+    "id": 43346843706,
+    "attempt": 1,
+    "event": "push",
+    "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+    "title": "AFW R2 post-ACK contracts FINAL FIX ONE KEYLESS attempt1 b93e42756ec877bf031b55a6bca49cc558905d0e",
+    "head": "b93e42756ec877bf031b55a6bca49cc558905d0e",
+    "started": "2026-11-13T01:41:58Z",
+    "updated": "2026-11-13T01:43:24Z",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 131628130934,
+        "name": "contracts",
+        "status": "completed",
+        "conclusion": "success",
+        "start": "2026-11-13T01:42:01Z",
+        "end": "2026-11-13T01:42:57Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install exact lock without lifecycle scripts",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Pin current identity and immutable baseline",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Current-identity pure model preflight without allocation",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Upload immutable sanitized MODEL only",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify model upload API raw ZIP digests bounds CRC and exact paths",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Protected MODEL inventory readback using its REAL assigned artifact ID",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Execute exactly 24 composed named controls and authentic witness barrier",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run unchanged fixed F1-F8 and pure diagnostics observer tests",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Upload closed exact two-JSON SAFE proof only",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Remove own baseline runner scratch only",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "id": 131628507353,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "start": "2026-11-13T01:42:59Z",
+        "end": "2026-11-13T01:43:23Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify model upload API raw ZIP digests bounds CRC and exact paths",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Protected MODEL inventory readback using its REAL assigned artifact ID",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify safe upload API raw ZIP digests bounds CRC and exact paths",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Independently bind full SAFE model and current checkout pins",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "id": 14002236483,
+      "name": "afw-post-ack-model-43346843706-1",
+      "zipBytes": 10716,
+      "digest": "sha256:c2bfeff28b9e29cc3c20d78bdbd08b5f4514c99e55efb1126a15e45a8689c15c",
+      "created": "2026-11-13T01:42:38Z",
+      "expires": "2026-11-20T01:42:37Z",
+      "expired": false,
+      "workflow_run": {
+        "id": 43346843706,
+        "repository_id": 1347578006,
+        "head_repository_id": 1347578006,
+        "head_branch": "feat/finite-native-cleanup-20261101",
+        "head_sha": "b93e42756ec877bf031b55a6bca49cc558905d0e"
+      }
+    },
+    {
+      "id": 14001557815,
+      "name": "afw-post-ack-contracts-43346843706-1",
+      "zipBytes": 4238,
+      "digest": "sha256:337f2f1b609488f9478ba2a80e7f621ab0953cfe6196c0c518bbad28484795cd",
+      "created": "2026-11-13T01:42:53Z",
+      "expires": "2026-11-20T01:42:52Z",
+      "expired": false,
+      "workflow_run": {
+        "id": 43346843706,
+        "repository_id": 1347578006,
+        "head_repository_id": 1347578006,
+        "head_branch": "feat/finite-native-cleanup-20261101",
+        "head_sha": "b93e42756ec877bf031b55a6bca49cc558905d0e"
+      }
+    }
+  ],
+  "actualKeylessControls": {
+    "zip": {
+      "purpose": "AFW_POST_ACK_ZIP_COVERAGE_CONTROLS/1",
+      "validByteFormats": [
+        "stored",
+        "signed",
+        "unsigned"
+      ],
+      "numericRejects": [
+        "initial_offset",
+        "inter_member_gap",
+        "final_gap",
+        "overlap",
+        "central_mismatch",
+        "trailing",
+        "truncated_descriptor",
+        "negative_offset",
+        "unsafe_extent"
+      ],
+      "descriptorTupleMismatch": true
+    },
+    "f1": {
+      "purpose": "AFW_POST_ACK_PUBLICATION_CONTROLS/1",
+      "cases": [
+        {
+          "name": "cleanup_rejected",
+          "outcome": "failed",
+          "status": "unavailable",
+          "qualified": false,
+          "resultBytes": 946,
+          "resultSha256": "99b40ebdda547b8c0b2d187b76cd5ac162de5baea9e198100888c3a8510bb5a1",
+          "manifestBytes": 380,
+          "manifestSha256": "8be2b08f0c02ca9d307d06671c1b3fb369e79049319dab9d9acb3e11562a954b"
+        },
+        {
+          "name": "persistence_rejected",
+          "outcome": "passed",
+          "status": "unavailable",
+          "qualified": false,
+          "resultBytes": 946,
+          "resultSha256": "940fe6b233a82371904d0d6e9d015be202dc9da7a2b1d2a6d5e1435eab5207a6",
+          "manifestBytes": 380,
+          "manifestSha256": "89aefdb39b17abdc96000ddb95e90541a5e094517de1d0cd61a7be300cbbed5f"
+        },
+        {
+          "name": "unknown_original",
+          "outcome": "unavailable",
+          "status": "unavailable",
+          "qualified": false,
+          "resultBytes": 951,
+          "resultSha256": "b92330712c5e1b495f137f4d4266a320335ed696d9284aadac8ff47b69a88c51",
+          "manifestBytes": 380,
+          "manifestSha256": "b7defcf69be6289ead55127599a25a04f9921c6a66d45cffa41cd076eb121701"
+        },
+        {
+          "name": "missing_observation",
+          "outcome": "unavailable",
+          "status": "unavailable",
+          "qualified": false,
+          "resultBytes": 951,
+          "resultSha256": "b92330712c5e1b495f137f4d4266a320335ed696d9284aadac8ff47b69a88c51",
+          "manifestBytes": 380,
+          "manifestSha256": "b7defcf69be6289ead55127599a25a04f9921c6a66d45cffa41cd076eb121701"
+        },
+        {
+          "name": "qualified_observed",
+          "outcome": "failed",
+          "status": "observed",
+          "qualified": true,
+          "resultBytes": 1458,
+          "resultSha256": "15d184ef47b9dec86ae6cf52116afb11ac7fc9c42acfb3f2f8685c9681778f08",
+          "manifestBytes": 381,
+          "manifestSha256": "c7b148a428c6526b7ae6b00777a304841ce268187041a2105cf270940b64a1dc"
+        },
+        {
+          "name": "qualified_not_observed",
+          "outcome": "passed",
+          "status": "not_observed",
+          "qualified": true,
+          "resultBytes": 1434,
+          "resultSha256": "5461142b8b07fde4cf02d9fec6439d55173547cd4ac8192b2597e84895a22fea",
+          "manifestBytes": 381,
+          "manifestSha256": "ee73666cb5b857e2c5ede4d467714943e6bd572463f3a9037008036b86670931"
+        }
+      ],
+      "malformedReceiptsRejected": 2
+    },
+    "transport": {
+      "purpose": "AFW_ARTIFACT_READ_CONTROLS/1",
+      "passed": true,
+      "scenarios": 29,
+      "threePhases": true,
+      "sharedDeadlineMs": 25000,
+      "attemptLimit": 3,
+      "waitScheduleMs": [
+        2000,
+        5000
+      ],
+      "noCredentialForwarding": true,
+      "noPrivateLogs": true,
+      "cases": [
+        "metadata_404_then_success",
+        "zip_api_404_then_success",
+        "zip_body_404_then_success",
+        "retryable_408_then_success",
+        "retryable_429_then_success",
+        "retryable_500_then_success",
+        "retryable_502_then_success",
+        "retryable_503_then_success",
+        "retryable_504_then_success",
+        "network_then_success",
+        "exhaustion_three_reads",
+        "deadline_no_reset",
+        "deadline_fewer_attempts",
+        "403_immediate",
+        "501_not_retryable",
+        "invalid_metadata_immediate",
+        "invalid_metadata_immediate",
+        "invalid_metadata_immediate",
+        "invalid_metadata_immediate",
+        "invalid_metadata_immediate",
+        "invalid_metadata_immediate",
+        "invalid_metadata_immediate",
+        "malformed_metadata_immediate",
+        "duplicate_metadata_immediate",
+        "raw_digest_immediate",
+        "invalid_redirect_immediate",
+        "invalid_redirect_immediate",
+        "invalid_redirect_immediate",
+        "invalid_redirect_immediate"
+      ]
+    },
+    "reader": [
+      [
+        {
+          "purpose": "AFW_ARTIFACT_READ/1",
+          "kind": "model",
+          "phase": "metadata",
+          "attempt": 1,
+          "httpStatus": 200,
+          "elapsedMs": 212,
+          "outcome": "success"
+        },
+        {
+          "purpose": "AFW_ARTIFACT_READ/1",
+          "kind": "model",
+          "phase": "zip_api",
+          "attempt": 1,
+          "httpStatus": 302,
+          "elapsedMs": 531,
+          "outcome": "success"
+        },
+        {
+          "purpose": "AFW_ARTIFACT_READ/1",
+          "kind": "model",
+          "phase": "zip_body",
+          "attempt": 1,
+          "httpStatus": 200,
+          "elapsedMs": 793,
+          "outcome": "success"
+        }
+      ],
+      [
+        {
+          "purpose": "AFW_ARTIFACT_READ/1",
+          "kind": "model",
+          "phase": "metadata",
+          "attempt": 1,
+          "httpStatus": 200,
+          "elapsedMs": 229,
+          "outcome": "success"
+        },
+        {
+          "purpose": "AFW_ARTIFACT_READ/1",
+          "kind": "model",
+          "phase": "zip_api",
+          "attempt": 1,
+          "httpStatus": 302,
+          "elapsedMs": 481,
+          "outcome": "success"
+        },
+        {
+          "purpose": "AFW_ARTIFACT_READ/1",
+          "kind": "model",
+          "phase": "zip_body",
+          "attempt": 1,
+          "httpStatus": 200,
+          "elapsedMs": 743,
+          "outcome": "success"
+        },
+        {
+          "purpose": "AFW_ARTIFACT_READ/1",
+          "kind": "safe",
+          "phase": "metadata",
+          "attempt": 1,
+          "httpStatus": 200,
+          "elapsedMs": 212,
+          "outcome": "success"
+        },
+        {
+          "purpose": "AFW_ARTIFACT_READ/1",
+          "kind": "safe",
+          "phase": "zip_api",
+          "attempt": 1,
+          "httpStatus": 302,
+          "elapsedMs": 458,
+          "outcome": "success"
+        },
+        {
+          "purpose": "AFW_ARTIFACT_READ/1",
+          "kind": "safe",
+          "phase": "zip_body",
+          "attempt": 1,
+          "httpStatus": 200,
+          "elapsedMs": 723,
+          "outcome": "success"
+        }
+      ]
+    ],
+    "verdict": {
+      "purpose": "afw.post-ack-independent-verdict.safe.v1",
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+        "source": "b93e42756ec877bf031b55a6bca49cc558905d0e",
+        "run": "43346843706",
+        "attempt": 1,
+        "case": "R2"
+      },
+      "nativeCertificate": false,
+      "valid": true,
+      "modelArtifactId": "14002236483",
+      "modelSha256": "82987789e1d80a9b7b45eb4f90a8566a7ff3516ed583e6890d2641af3beb5dcb",
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false
+    }
+  },
+  "smallSafe": {
+    "archiveSha256": "337f2f1b609488f9478ba2a80e7f621ab0953cfe6196c0c518bbad28484795cd",
+    "archiveBytes": 4238,
+    "members": [
+      {
+        "name": "manifest.json",
+        "size": 392,
+        "sha256": "4b3a17dd49db3597942bb8347eb6e70f986f8b16a8f964c0407f4592ab4caeeb",
+        "crc32": "aeefc49f"
+      },
+      {
+        "name": "result.json",
+        "size": 10993,
+        "sha256": "3983afc5d01f432af826566777bfea382f18be78c94dae1cfd6b62fb6a9f3cc2",
+        "crc32": "f52b0759"
+      }
+    ],
+    "manifest": {
+      "purpose": "afw.native-post-ack-r2-manifest.safe.v1",
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+        "source": "b93e42756ec877bf031b55a6bca49cc558905d0e",
+        "run": "43346843706",
+        "attempt": 1,
+        "case": "R2"
+      },
+      "files": [
+        {
+          "path": "result.json",
+          "bytes": 10993,
+          "sha256": "3983afc5d01f432af826566777bfea382f18be78c94dae1cfd6b62fb6a9f3cc2"
+        }
+      ]
+    },
+    "result": {
+      "purpose": "afw.post-ack-contracts.safe.v1",
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+        "source": "b93e42756ec877bf031b55a6bca49cc558905d0e",
+        "run": "43346843706",
+        "attempt": 1,
+        "case": "R2"
+      },
+      "controls": {
+        "purpose": "AFW_POST_ACK_CONTROLS/1",
+        "expected": 24,
+        "completed": 24,
+        "pass": 24,
+        "fail": 0,
+        "inventory": [
+          "off_graphs",
+          "sdk_pins",
+          "profile_scope",
+          "sites_exact",
+          "sealer_graph",
+          "lexical_op",
+          "one_shot",
+          "nested_scope",
+          "late_scope",
+          "entry_check",
+          "notice_guard",
+          "protocol_guard",
+          "pair_wait",
+          "expected_mismatch",
+          "exit_check",
+          "unbranded",
+          "same_error",
+          "observer_throws",
+          "same_effects",
+          "pair_orders",
+          "no_rejection",
+          "overflow",
+          "schema",
+          "provenance"
+        ],
+        "firstFailure": null,
+        "postAssertionExactlyOnce": true,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false,
+        "nativeExecuted": false,
+        "mfAllocated": false,
+        "I0Created": false
+      },
+      "programs": [
+        {
+          "path": "test/fixtures/finite-budget-world.mjs",
+          "bytes": 242987,
+          "sha256": "007a4b39777dbd34645f7754556cfa1a9e152a0d2a6f55a27f6b1c30e334d867"
+        },
+        {
+          "path": "test/fixtures/finite-post-ack-diagnostic.mjs",
+          "bytes": 102842,
+          "sha256": "b7b6c453641ff93c621f78bc2f9244a52bdc734a7c2192bd85f2860c83d325ff"
+        },
+        {
+          "path": "test/finite-post-ack-diagnostic.test.mjs",
+          "bytes": 1923,
+          "sha256": "cbe41b778c68e74516f9008061d27cdcdc6e8dcf212a93d8ddb24caf8079e462"
+        },
+        {
+          "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+          "bytes": 19454,
+          "sha256": "22c0f85f9baacb54c5cecf50bf3716795472ba0faa4731a9d6f948d82574700d"
+        },
+        {
+          "path": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+          "bytes": 27458,
+          "sha256": "50a72c97cfffb2710c10a8127871f11893cefe778c61b61664e06c69905116e3"
+        },
+        {
+          "path": ".github/workflows/afw-finite-budget-qualification.yml",
+          "bytes": 126209,
+          "sha256": "1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a"
+        },
+        {
+          "path": "package-lock.json",
+          "bytes": 445991,
+          "sha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34"
+        },
+        {
+          "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+          "bytes": 126504,
+          "sha256": "d97d07f69916c45f58af511a6dfb57322ed3fe7d8fa1f6fbb2220d44be15b921"
+        },
+        {
+          "path": "test/fixtures/finite-initial-entry-world.mjs",
+          "bytes": 87501,
+          "sha256": "0a1bcfa9721673386b08af45e4a24c33fa2db939d5edf021628d92590e883abb"
+        },
+        {
+          "path": "test/fixtures/finite-checkpoint-custody.mjs",
+          "bytes": 21159,
+          "sha256": "7751921bfaf10cd02dc777305d384d84ee7834f7bfbf2669dc60da50d7f1814f"
+        },
+        {
+          "path": "test/mcp-qa-finite-budget-native.test.mjs",
+          "bytes": 12749,
+          "sha256": "7194f50e3974076da519b1b99103d28537cc2d33813e8bf6eae83cf014d24948"
+        }
+      ],
+      "preflight": {
+        "handoffControls": {
+          "purpose": "afw.post-ack-owner-handoff-controls.syn.v1",
+          "variants": [
+            {
+              "name": "valid_inner_cleanup_reject",
+              "outcome": "failed",
+              "sameError": true,
+              "oracleCalls": 0,
+              "legacyComplete": true,
+              "eligible": false,
+              "callbackCalls": 1
+            },
+            {
+              "name": "invalid_inner_cleanup_reject",
+              "outcome": "failed",
+              "sameError": true,
+              "oracleCalls": 0,
+              "legacyComplete": true,
+              "eligible": false,
+              "callbackCalls": 1
+            },
+            {
+              "name": "success_added_persistence_reject",
+              "outcome": "passed",
+              "sameError": true,
+              "oracleCalls": 1,
+              "legacyComplete": true,
+              "eligible": false,
+              "callbackCalls": 1,
+              "normalReturn": true,
+              "addedPersistenceRejected": true
+            },
+            {
+              "name": "returned_oracle_reject",
+              "outcome": "failed",
+              "sameError": true,
+              "oracleCalls": 1,
+              "legacyComplete": true,
+              "eligible": true,
+              "callbackCalls": 1
+            },
+            {
+              "name": "business_primary_cleanup",
+              "successful": {
+                "outcome": "failed",
+                "sameError": true,
+                "oracleCalls": 0,
+                "legacyComplete": true,
+                "eligible": true,
+                "callbackCalls": 1
+              },
+              "uncertain": {
+                "outcome": "failed",
+                "sameError": true,
+                "oracleCalls": 0,
+                "legacyComplete": false,
+                "eligible": false,
+                "callbackCalls": 1
+              },
+              "samePrimary": {
+                "outcome": "failed",
+                "sameError": true,
+                "oracleCalls": 0,
+                "legacyComplete": true,
+                "eligible": false,
+                "callbackCalls": 1
+              }
+            }
+          ],
+          "families": 5,
+          "wholeHelperBeforeOracle": true,
+          "actualOwnerHandoff": true,
+          "mfAllocated": false,
+          "I0Created": false,
+          "nativeExecuted": false,
+          "businessAuthority": false
+        },
+        "purpose": "afw.post-ack-preflight.syn.v1",
+        "profile": "r2-post-ack-v1",
+        "stage": "MODEL ONLY",
+        "offGraphs": [
+          {
+            "role": "M",
+            "baselineBytes": 2066727,
+            "candidateBytes": 2066727,
+            "baselineSha256": "cb576eb5aabbeaa974de29b4ad09a65604f373c30c12b93c31c96df75f7d985b",
+            "candidateSha256": "cb576eb5aabbeaa974de29b4ad09a65604f373c30c12b93c31c96df75f7d985b",
+            "equal": true,
+            "sameCapturedInputs": true,
+            "sameDefines": true,
+            "onPreDiagnosticEqual": true,
+            "baselineRecordsSha256": "d435513e0a2c9bf627a9d44a251a119891445616faabd0206c0681b9f3a90f81",
+            "offRecordsSha256": "d435513e0a2c9bf627a9d44a251a119891445616faabd0206c0681b9f3a90f81",
+            "onPreDiagnosticRecordsSha256": "d435513e0a2c9bf627a9d44a251a119891445616faabd0206c0681b9f3a90f81",
+            "recordCount": 61,
+            "originalAdditionalSYN": 0
+          },
+          {
+            "role": "QA",
+            "baselineBytes": 2726174,
+            "candidateBytes": 2726174,
+            "baselineSha256": "d2d8e6b30b379f6fbd784870025a9004bd5b9e0687404a92397611c485c7fa70",
+            "candidateSha256": "d2d8e6b30b379f6fbd784870025a9004bd5b9e0687404a92397611c485c7fa70",
+            "equal": true,
+            "sameCapturedInputs": true,
+            "sameDefines": true,
+            "onPreDiagnosticEqual": true,
+            "baselineRecordsSha256": "33b0d82afab3ec33a0f0e79aa5920c047954ebe4cbfe9bfef65bd8d69a825c34",
+            "offRecordsSha256": "33b0d82afab3ec33a0f0e79aa5920c047954ebe4cbfe9bfef65bd8d69a825c34",
+            "onPreDiagnosticRecordsSha256": "33b0d82afab3ec33a0f0e79aa5920c047954ebe4cbfe9bfef65bd8d69a825c34",
+            "recordCount": 115,
+            "originalAdditionalSYN": 3
+          }
+        ],
+        "supplement": {
+          "purpose": "afw.post-ack-supplement.syn.v1",
+          "profile": "r2-post-ack-v1",
+          "context": {
+            "repository": "tokenizartinfo-ops/agent-friendly-web",
+            "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+            "source": "b93e42756ec877bf031b55a6bca49cc558905d0e",
+            "run": "43346843706",
+            "attempt": 1,
+            "case": "R2"
+          },
+          "records": [
+            {
+              "purpose": "afw.post-ack-emission.syn.v1",
+              "version": 1,
+              "profile": "r2-post-ack-v1",
+              "path": "<stdin>",
+              "phase": "after-baseline",
+              "baselineBytes": 124640,
+              "baselineSha256": "3b6ada1b5083ef8fe283829845c477badd715496429708e3df3e0f311948a4fa",
+              "emittedBytes": 124768,
+              "emittedSha256": "c6456b0f5436150127d9d42644e05ff021499f3735acb7a6050da455b07287b6",
+              "transformLiteralSha256": "38fd9c021890c48872e95a693394bdcdfb75784f650b2f0ecbc4adca191c3ac5",
+              "sites": {
+                "budgetSnapshot": 1
+              },
+              "fields": [
+                "invocationOrdinal",
+                "operation",
+                "ackReturned",
+                "postAckEntered",
+                "outcome",
+                "boundary",
+                "sameError"
+              ],
+              "enums": [
+                "entry_check",
+                "notice_guard",
+                "protocol_invariant",
+                "pair_wait",
+                "expected_mismatch",
+                "exit_check",
+                "unknown"
+              ],
+              "businessAuthority": false,
+              "addsAwait": 0,
+              "addsPromise": 0,
+              "addsNativeCall": 0,
+              "changesRetention": false
+            },
+            {
+              "purpose": "afw.post-ack-emission.syn.v1",
+              "version": 1,
+              "profile": "r2-post-ack-v1",
+              "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+              "phase": "after-baseline",
+              "baselineBytes": 171207,
+              "baselineSha256": "65dea4c7ed9c2ac048a1be026ce55cefe3a91ceb3f338a2488a5d7cb633d1070",
+              "emittedBytes": 174438,
+              "emittedSha256": "08e86078503995ee2b2f03352094b0061b3d98089f9477fb01f6802ad06959f4",
+              "transformLiteralSha256": "4f07bcf13af7bfef5e926b54b03aa726dd8a64ab869cb600b6c14d95efb04557",
+              "sites": {
+                "entry_check": 1,
+                "notice_guard": 1,
+                "protocol_invariant": 5,
+                "pair_wait": 1,
+                "expected_mismatch": 1,
+                "exit_check": 1,
+                "issuer_ack": 1
+              },
+              "fields": [
+                "invocationOrdinal",
+                "operation",
+                "ackReturned",
+                "postAckEntered",
+                "outcome",
+                "boundary",
+                "sameError"
+              ],
+              "enums": [
+                "entry_check",
+                "notice_guard",
+                "protocol_invariant",
+                "pair_wait",
+                "expected_mismatch",
+                "exit_check",
+                "unknown"
+              ],
+              "businessAuthority": false,
+              "addsAwait": 0,
+              "addsPromise": 0,
+              "addsNativeCall": 0,
+              "changesRetention": false
+            }
+          ],
+          "nodeModuleAbsent": true,
+          "businessAuthority": false
+        },
+        "modelGraphs": {
+          "QA": {
+            "bytes": 2730922,
+            "sha256": "a567c0ee72e8c9aebfcc0d234495f718a84ee22462d96423fe3fbf86d1f0ad87"
+          },
+          "M": {
+            "bytes": 2066727,
+            "sha256": "cb576eb5aabbeaa974de29b4ad09a65604f373c30c12b93c31c96df75f7d985b"
+          }
+        },
+        "privateCompileHashes": {
+          "phaseSha256": "65dea4c7ed9c2ac048a1be026ce55cefe3a91ceb3f338a2488a5d7cb633d1070",
+          "entrySha256": "3b6ada1b5083ef8fe283829845c477badd715496429708e3df3e0f311948a4fa",
+          "qaMetafileSha256": "bd7a1aefb08e59118fd0c94c51250c82773dd135a8449387bf13c6da53297221"
+        },
+        "sdkFileSha256": "bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80",
+        "sdkBytes": 251149,
+        "sdkSites": 44,
+        "lockBlob": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+        "lockSha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34",
+        "worldSha256": "007a4b39777dbd34645f7754556cfa1a9e152a0d2a6f55a27f6b1c30e334d867",
+        "transformSha256": "b7b6c453641ff93c621f78bc2f9244a52bdc734a7c2192bd85f2860c83d325ff",
+        "protectedTestBlob": "533dafb5df5f8e57442c5b9029dc8dec6dded434",
+        "oracleSha256": "37ac0b6658d7ec789247e5fb89521dacf585b7d818cefbfdc429b742a142775e",
+        "preflightSha256": "82987789e1d80a9b7b45eb4f90a8566a7ff3516ed583e6890d2641af3beb5dcb"
+      },
+      "modelReceipt": {
+        "artifactId": "14002236483",
+        "uploaderDigest": "c2bfeff28b9e29cc3c20d78bdbd08b5f4514c99e55efb1126a15e45a8689c15c",
+        "apiDigest": "sha256:c2bfeff28b9e29cc3c20d78bdbd08b5f4514c99e55efb1126a15e45a8689c15c",
+        "rawZipSha256": "c2bfeff28b9e29cc3c20d78bdbd08b5f4514c99e55efb1126a15e45a8689c15c",
+        "modelSha256": "82987789e1d80a9b7b45eb4f90a8566a7ff3516ed583e6890d2641af3beb5dcb",
+        "verified": true,
+        "context": {
+          "repository": "tokenizartinfo-ops/agent-friendly-web",
+          "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+          "source": "b93e42756ec877bf031b55a6bca49cc558905d0e",
+          "run": "43346843706",
+          "attempt": 1,
+          "case": "R2"
+        }
+      },
+      "oracle": {
+        "protectedTestBlob": "533dafb5df5f8e57442c5b9029dc8dec6dded434",
+        "assertionInventory": 21,
+        "negativeFamilies": 21,
+        "allRejected": true,
+        "oracleSha256": "37ac0b6658d7ec789247e5fb89521dacf585b7d818cefbfdc429b742a142775e",
+        "outcomeIsolation": {
+          "knownSuccessNormal": true,
+          "primaryRejectionSame": true,
+          "qualificationErrorSame": true,
+          "preMfUnavailable": true,
+          "futureJobStartRejected": true
+        }
+      },
+      "related": {
+        "purpose": "afw.closed-pure-controls.syn.v2",
+        "groups": [
+          {
+            "group": "F1",
+            "passed": true,
+            "evidence": {
+              "bytes": 904,
+              "sha256": "dcae1ea26b1b09c6f2eacc5fd66701bdb3c61d2ccd431281b3c5325827b0909f"
+            },
+            "caseCount": 2
+          },
+          {
+            "group": "F2",
+            "passed": true,
+            "evidence": {
+              "bytes": 3332,
+              "sha256": "dac450adc2e8566f01427d907b835f22a7e64301654f58a58cd9ef5557d12a21"
+            },
+            "caseCount": 1
+          },
+          {
+            "group": "F3",
+            "passed": true,
+            "evidence": {
+              "bytes": 5431,
+              "sha256": "ddb77e706fb6b69007a8b6bb6b8cc63d81fe4d99b02b6d614de3694b44df57b8"
+            },
+            "caseCount": 4
+          },
+          {
+            "group": "F4",
+            "passed": true,
+            "evidence": {
+              "bytes": 2528,
+              "sha256": "fde2eea49ef543f0d36347cda87d7035f10657716cc6cd418bff1fb4548bb33b"
+            },
+            "caseCount": 1
+          },
+          {
+            "group": "F5",
+            "passed": true,
+            "evidence": {
+              "bytes": 16524,
+              "sha256": "46246d9f7d0c795f5fd22ff5908df8e745be38f608298ae45ec0b891f51392d4"
+            },
+            "caseCount": 3
+          },
+          {
+            "group": "F6",
+            "passed": true,
+            "evidence": {
+              "bytes": 218,
+              "sha256": "0cf03851592354cf957c3248d37b1585d924dfc009b79704db924a8145070e5a"
+            },
+            "caseCount": 1
+          },
+          {
+            "group": "F7",
+            "passed": true,
+            "evidence": {
+              "bytes": 599,
+              "sha256": "7362a7cc15236bd1958794837bccc943ebf5ea87ef2f3db7c06b8d6382c08036"
+            },
+            "caseCount": 4
+          },
+          {
+            "group": "F8",
+            "passed": true,
+            "evidence": {
+              "bytes": 1532,
+              "sha256": "ac5c7c49185dc53cdd285c8e87294359d23d4fbcb31f60ba816c8fa2d3398d68"
+            },
+            "caseCount": 6
+          }
+        ],
+        "passed": true,
+        "pureTests": {
+          "tests": 17,
+          "pass": 17,
+          "fail": 0,
+          "skipped": 0,
+          "cancelled": 0,
+          "tapSha256": "e6d4dcd5f93b01fbc88fee0a95c3c1249e13a90e1fadafc879732e160f34cf15"
+        }
+      },
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false,
+      "nativeExecuted": false,
+      "mfAllocated": false,
+      "I0Created": false
+    }
+  }
+}
+```
