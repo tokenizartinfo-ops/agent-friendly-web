@@ -34,3 +34,17 @@ Closedc1c1b22a/treeb13c983e/newreportc373a08b/7920chars; Rootfull3195/all3194old
 
 FreshAstra SPEC/QUALITYCHANGESREQUIRED; five load-bearing findings (fourhigh,onemedium): genuineearly/lateroraclefailureclassification; knownvalidationreasonlostthroughreopen/publish; independentfilepresence/digest/fullstructure/archivecopy-inventorygaps; documentedAFWcustodyenvironmentomitted; incoherentpublicstates/absence-vs-malformed-vs404+manualonlypublicationtest. Rootreadrelevantactualcode/knownpriorEnvandcorroborates. InitialKEYLESSgreenretainedasanactualpurequalificationwithlimitations, noNativepermit. P9 clarificationsaddedbeforeSourcefix; publicschema/caps/oracleunchanged.
 Ruling: treatallfiveImportantbeforeactualduecross-taskdependency; sameoriginalSol/xhighresumeformalround1/5, minimaladapter/controls/verifier+actualenvironmentmetadata, immutableSAFEZIP/F8/protectedall3193/noNative. Costonefresh7+2/ALL5terminal/closedreport7920prefix, noRootSourcefix. Fullreviewpathnative-r1-oracle-task1-review.md/fixbriefnative-r1-oracle-task1-fix1.md. NativeTask2HELD, nohumanstepsbefore08AR.
+
+## Continuidad nocturna — 13 de noviembre, 04:55 UTC
+
+Gabriel dejó el ordenador encendido y pidió no solicitarle intervención hasta las 08:00 de Argentina. No se abrieron accesos temporales, códigos ni permisos. El trabajo de implementación y sus pruebas continúa exclusivamente en GitHub/Actions.
+
+La publicación Rootdocs `1c527fc8` quedó reconciliada: no hay una escritura pendiente. El implementador original recibió la corrección formal 1/5 con los cinco hallazgos completos y la especificación P9. La ejecución Native real continúa retenida hasta una revisión limpia de esa corrección.
+
+Root autorizó la distinción privada entre la aserción original temprana y la aserción posterior del test, exigiendo contexto R1, fuente fijada y cierre propio comprobado. Las excepciones de preparación, registro, infraestructura y limpieza no se considerarán un fallo del oráculo. La inyección interna para probar el verificador queda limitada a funciones inertes del módulo; no añade destinos o transportes configurables a la producción.
+
+El verificador independiente de metadatos de Root ahora rechaza combinaciones incoherentes de contratos, observación Native y custodia. Pasaron cuatro casos sintéticos válidos y seis rechazos deliberados. Esto comprueba únicamente el verificador propio de Root; no ejecutó código Source, SDK, Miniflare ni Native y no sustituye la cualificación del implementador.
+
+Consulta pública puntual del proveedor: la página oficial actualizada a `2026-11-13T04:28:00.856Z` mostraba el incidente `0ocqieaifg7h`, sobre notificaciones de cambios en Workers mediante Cloudflare Event Subscriptions. La descripción oficial indica que los Workers desplegados y los cambios mismos no están afectados. No se ha establecido una relación con los avisos propios de AFW. La ausencia del incidente antiguo en la lista no se interpreta como confirmación de resolución. No se creó otro monitor ni se consultó el runtime AFW.
+
+Próximo cierre: terminar la única cualificación KEYLESS de corrección, esperar los cinco jobs terminales, restaurar F7, conservar el informe y revisar el diff. Solo después de CLEAN se podrá liberar por separado una ejecución Native R1. Las cinco banderas de preparación continúan en `false`.

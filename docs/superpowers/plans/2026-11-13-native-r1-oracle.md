@@ -22,9 +22,9 @@
 5. Scope gate/secret bleeds into Native or nonselected case, leftover onpush frame — Task1 source_scope/staticKEYLESS, Task2 full freeze/restore/ALLterminal.
 
 ## Preflight (before Source release)
-- [ ] Fresh read-only reviewer map generic custody APIs/kinds/caps, original contracts linkage and exact selected-case adapter semantics, safeZIP/materialization/program map.
-- [ ] Conflict table: Task1→Task2 F7/program/hash/SAFE/3job and own consistency; settle all findings in SPEC/brief before Source writes.
-- [ ] Check new report scope/all3193protected/baseline/no local resource usage. No Source mutation/Node source execution/Native/private reads in preflight.
+- [x] Fresh read-only reviewer map generic custody APIs/kinds/caps, original contracts linkage and exact selected-case adapter semantics, safeZIP/materialization/program map.
+- [x] Conflict table: Task1→Task2 F7/program/hash/SAFE/3job and own consistency; settle all findings in SPEC/brief before Source writes.
+- [x] Check new report scope/all3193protected/baseline/no local resource usage. No Source mutation/Node source execution/Native/private reads in preflight.
 
 ### Task1: Prepare and qualify fixed inactive Native R1 pipeline
 **Files:** temporaryF7 + newSourceReport only. Test/World/custody/SDK/lock protected.
@@ -55,3 +55,7 @@ ReadSPEC P1–P7: preserve exactfunctionalF8pureframe+publicpureupload, addsepar
 
 ### P8 KEYLESS and enum precision
 Task1 allowed5declaredjobs(3actualdisabled+2KEYLESSactive7+2), all5terminalbeforeclosure; onlynewfourbodycontrols/inertframework fixture/staticSourcepins executed. Do not run originalNativeinactive/invalidgroupSDK-importsmokes inKEYLESS; actualcontracts preserves/runs them. ActualTask2 remains3jobsALLterminal. Keepfailure.stageoriginalsixvalues; cleanupuncertaintyvalidation/invalid_evidence. Reopenedfullresultbindsmodel/context/digests/completeness, notcopiedoriginaloracle. ExactcontrolsDTO addedSPEC.
+
+## Estado de ejecución al liberar la corrección Task1
+
+Preflight completado y confirmado por revisión independiente. La primera cualificación KEYLESS terminó y su Source quedó cerrado; la revisión completa de Task1 exigió cinco correcciones. La corrección formal 1/5 está liberada bajo P9, con una sola cualificación KEYLESS adicional autorizada. Task1 todavía no está CLEAN y Task2 no está liberada. No marcar los controles de Task1 como completos por el verde inicial.
