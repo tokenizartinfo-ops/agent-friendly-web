@@ -52,10 +52,14 @@ One KEYLESS7+2/10declared (8skipped+2success), one actual8jobs; freeze/terminal/
 **Produces:** one eight-job current suite, original Q8+Native8 proof, strict independent SAFE, exact closure.
 - [x] Fresh sole executor verifies Source lease/rollback/protected baseline/active0.
 - [x] One actual Source-branch/self-path/unique-message/attempt1 activation, identical helper bodies, no subsequent writes until terminal.
-- [x] Preserve original groups/overlap/clocks and generic-crypto-only key; verify all seven current needs outputs and private proof.
+- [x] Preserve original groups/overlap/clocks and generic-crypto-only key; record current needs outcomes and whether private proof was reached (not reached in this failed run).
 - [x] Any result completed+terminal then exact restore/report append/readbacks/STOP; no repeat or cap increase.
 - [x] Root current SMALLSAFE+KEYLESS records+private metadata only, separate all8 success pass gate.
-- [ ] Fresh task and whole-plan review, no main promotion/allfivefalse.
+- [x] Fresh Task2 spec+quality review; no main promotion/allfivefalse.
+
+## Final review
+
+- [ ] Broad whole-plan review of preserved unit/report and all rulings; no new suite execution or Source/main promotion.
 
 ## Self-review
 
