@@ -1,7 +1,10 @@
 name: AFW native R1 oracle
-run-name: AFW native R1 oracle ACTUAL 20261113-a
+run-name: AFW native R1 oracle KEYLESS FIX3 20261113-a
 on:
   workflow_dispatch:
+  push:
+    branches: [feat/finite-native-cleanup-20261101]
+    paths: [.github/workflows/afw-finite-budget-qualification.yml]
 permissions:
   contents: read
   actions: read
@@ -1293,6 +1296,101 @@ jobs:
           SAFE_KIND: native
           SAFE_ID: ${{ needs.native_r1.outputs.safe-id }}
           SAFE_DIGEST: ${{ needs.native_r1.outputs.safe-digest }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "${AFW_SYN_CHECKPOINT_KEY+x}"
+          node "$RUNNER_TEMP/afw-r1-verifier.mjs"
+  keyless_contracts:
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.event.head_commit.message == 'AFW native R1 oracle KEYLESS FIX3 20261113-a' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    outputs:
+      safe-id: ${{ steps.controls_upload.outputs.artifact-id }}
+      safe-digest: ${{ steps.controls_upload.outputs.artifact-digest }}
+    steps:
+      - name: Checkout exact current Source
+        uses: actions/checkout@v4
+        with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Use exact Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - name: Materialize current Source-bound programs before import
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          node --input-type=module <<'NODE_R1_BOOTSTRAP'
+          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';import {join} from 'node:path';import {createHash} from 'node:crypto';import {execFileSync} from 'node:child_process';
+          const e=process.env,path='.github/workflows/afw-finite-budget-qualification.yml',git=(...a)=>execFileSync('git',a,{encoding:'utf8'}).trim(),hash=b=>createHash('sha256').update(b).digest('hex');
+          assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(process.versions.node,'22.23.4');assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);assert.equal(e.GITHUB_WORKFLOW_REF,e.GITHUB_REPOSITORY+'/'+path+'@'+e.GITHUB_REF);
+          const bytes=await readFile(path),source=bytes.toString('utf8');assert(Buffer.from(source).equals(bytes));assert.equal(createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex'),git('rev-parse','HEAD:'+path));assert(execFileSync('git',['show','HEAD:'+path]).equals(bytes));
+          const map={adapter:['NODE_R1_ADAPTER','afw-r1-adapter.mjs'],controls:['NODE_R1_CONTROLS','afw-r1-controls.mjs'],verifier:['NODE_R1_VERIFIER','afw-r1-verifier.mjs'],safeZip:['NODE_SAFE_ZIP','afw-r1-safe-zip.mjs']},out={};
+          for(const [key,[marker,file]]of Object.entries(map)){const begin="<<'"+marker+"'\n",parts=source.split(begin);assert.equal(parts.length,2);const end='\n          '+marker+'\n',rows=parts[1].split(end);assert.equal(rows.length,2);const body=rows[0].split('\n').map(line=>{assert(line.startsWith('          '));return line.slice(10);}).join('\n')+'\n';out[key]=hash(body);await writeFile(join(e.RUNNER_TEMP,file),body,{mode:0o600});}
+          assert.equal(out.safeZip,'b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d');assert.equal((await readFile(join(e.RUNNER_TEMP,'afw-r1-safe-zip.mjs'))).length,13305);assert.equal(new Set(Object.values(out)).size,4);
+          await writeFile(join(e.RUNNER_TEMP,'afw-r1-programs.json'),JSON.stringify(out)+'\n',{mode:0o600});console.log('AFW_R1_SOURCE_PROGRAMS '+JSON.stringify(out));
+          NODE_R1_BOOTSTRAP
+      - name: Execute twelve fixed real KEYLESS controls once
+        id: controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          test -z "${AFW_SYN_CHECKPOINT_KEY+x}"
+          node "$RUNNER_TEMP/afw-r1-controls.mjs"
+      - name: Upload closed current controls pair even after negative outcome
+        id: controls_upload
+        if: always() && !cancelled() && steps.controls.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: afw-r1-controls-safe-${{ github.run_id }}-1
+          path: ${{ runner.temp }}/afw-r1-controls-safe/
+          if-no-files-found: error
+          retention-days: 7
+  keyless_verify:
+    needs: keyless_contracts
+    if: ${{ always() && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.event.head_commit.message == 'AFW native R1 oracle KEYLESS FIX3 20261113-a' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Checkout exact current Source
+        uses: actions/checkout@v4
+        with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Use exact Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - name: Materialize current Source-bound programs before import
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          node --input-type=module <<'NODE_R1_BOOTSTRAP'
+          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';import {join} from 'node:path';import {createHash} from 'node:crypto';import {execFileSync} from 'node:child_process';
+          const e=process.env,path='.github/workflows/afw-finite-budget-qualification.yml',git=(...a)=>execFileSync('git',a,{encoding:'utf8'}).trim(),hash=b=>createHash('sha256').update(b).digest('hex');
+          assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(process.versions.node,'22.23.4');assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);assert.equal(e.GITHUB_WORKFLOW_REF,e.GITHUB_REPOSITORY+'/'+path+'@'+e.GITHUB_REF);
+          const bytes=await readFile(path),source=bytes.toString('utf8');assert(Buffer.from(source).equals(bytes));assert.equal(createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex'),git('rev-parse','HEAD:'+path));assert(execFileSync('git',['show','HEAD:'+path]).equals(bytes));
+          const map={adapter:['NODE_R1_ADAPTER','afw-r1-adapter.mjs'],controls:['NODE_R1_CONTROLS','afw-r1-controls.mjs'],verifier:['NODE_R1_VERIFIER','afw-r1-verifier.mjs'],safeZip:['NODE_SAFE_ZIP','afw-r1-safe-zip.mjs']},out={};
+          for(const [key,[marker,file]]of Object.entries(map)){const begin="<<'"+marker+"'\n",parts=source.split(begin);assert.equal(parts.length,2);const end='\n          '+marker+'\n',rows=parts[1].split(end);assert.equal(rows.length,2);const body=rows[0].split('\n').map(line=>{assert(line.startsWith('          '));return line.slice(10);}).join('\n')+'\n';out[key]=hash(body);await writeFile(join(e.RUNNER_TEMP,file),body,{mode:0o600});}
+          assert.equal(out.safeZip,'b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d');assert.equal((await readFile(join(e.RUNNER_TEMP,'afw-r1-safe-zip.mjs'))).length,13305);assert.equal(new Set(Object.values(out)).size,4);
+          await writeFile(join(e.RUNNER_TEMP,'afw-r1-programs.json'),JSON.stringify(out)+'\n',{mode:0o600});console.log('AFW_R1_SOURCE_PROGRAMS '+JSON.stringify(out));
+          NODE_R1_BOOTSTRAP
+      - name: Verify exact current controls SAFE and immutable ZIP controls
+        if: always() && !cancelled()
+        env:
+          GH_ARTIFACT_TOKEN: ${{ github.token }}
+          SAFE_KIND: controls
+          SAFE_ID: ${{ needs.keyless_contracts.outputs.safe-id }}
+          SAFE_DIGEST: ${{ needs.keyless_contracts.outputs.safe-digest }}
         shell: bash
         run: |
           set -euo pipefail
