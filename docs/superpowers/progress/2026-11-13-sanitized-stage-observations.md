@@ -76,3 +76,9 @@ Source03680f05/tree0ae2, report890a0d5c; Root full closure/readback passed,69log
 Ruling: add bounded metadata HTTP observation100..599 only after eligible metadata call; no body/header/URL/ID/cause inference. Cost: one small schema/test surface, no privilege.
 Ruling: store D/tests as normal Source leaves; candidate F7 stays unattached DATA; zero-key qualifier may read exactly one pinned same-repo Gitblob with standard contents-read. Cost: two declared Source leaves and fixed qualification network dependency; avoids base64 carrier/report bloat.
 Ruling: reject speculative threshold/timer/Native changes; Task2 qualifies observability only, Task3 held. Worker subagents prohibited. Builder check of exact task boundary precedes implementation; Task1 not repeated.
+
+
+## Task2 builder check closed / preparation released
+Astra found only three concrete precisions: actual frozen marker NODE_SAFE_ZIP; assignedPrivate already exported; metadata JSON decoding occurs before returned HTTP observation. All accepted in brief. No other viability conflict; actual frozen-parser candidate qualification still mandatory.
+Ruling: HTTPnull after failed200 JSON decode is correct unknown, not an instrumentation failure. Never add early body/status access beyond agreed return boundary. Cost: less specific hint at that exact boundary, no misleading status.
+Task2 preparation RELEASED to fresh sole Source executor; creates ONLY unattached inactive/candidate commits first. Source attachment/qualification activation and ALL Native/runtime operations remain HELD until Root independent exact gate and one-use release. Task1 done, not repeated. Source03680/main0c9 verified, relay88 unchanged.
