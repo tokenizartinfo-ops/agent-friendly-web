@@ -1,7 +1,9 @@
 name: AFW R2 post-ACK contracts
-run-name: AFW R2 post-ACK contracts FIX1 HELD ${{ github.sha }}
+run-name: AFW R2 post-ACK contracts FIX3 ONE KEYLESS attempt1 ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches: ['feat/finite-native-cleanup-20261101']
+    paths: ['.github/workflows/afw-r2-post-ack-contracts.yml']
 permissions:
   contents: read
   actions: read
@@ -10,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   contracts:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     outputs:
@@ -172,7 +174,7 @@ jobs:
         if: always()
         run: rm -f -- test/fixtures/.finite-post-ack-original.mjs
   verify:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     needs: contracts
     runs-on: ubuntu-24.04
     timeout-minutes: 2
