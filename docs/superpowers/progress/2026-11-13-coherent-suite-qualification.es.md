@@ -136,3 +136,9 @@ Task2 execution procedure and preservation are completed; positive suite qualifi
 FreshAstra reviewer returned SPECcompliant/qualityapproved/noCritical-Important. Verified91stepmetadata rows/activation/closure; focusedQ8+readonlycountAssertions and verifiernon-successsemantics checked. MinorM1needsprovenance addressed inRootacta docs/superpowers/reviews/2026-11-13-coherent-suite-task2-clean.md and supplement6c087cee/job131855998335L177–204; no Source change.
 
 Task2: complete as bounded execution-and-closure (commits715ac94e..e88ce70b, reviewclean). Task1complete/CLEAN retained. PositiveGoal Q8+Native8FAILED/UNQUALIFIED; all5false. Whole-planfinalreview next; no additionalactualrun/codefix hasbeenreleased. No owneractionrequired.
+
+## Whole-plan review in progress — Important static aggregate-cap defect
+
+Freshbroadreview named actualF7L293/controlL399: successjobouterreceipt uses512files/128MiB aswhole-envelope limit, while originalWorldL842–844 applies those bounds toONErecord.persist snapshot. Genericcustody4d05L267/333–342 computesreceipt overWHOLErunnerprivatetree and bounds4096files/512MiB. Root focusedunchangedWorldsearch independentlyfound onlyperrecord128MiB/512 guard. This is a concretecompatibilitydefect, not proof of historicalfirstexception; actualproducersealfailurecausesUNKNOWN, readonlysealUNKNOWN.
+
+NoSourcefixreleased untilcompleteconsolidatedfinalreview. FinalreviewruleONEfixwave+ONEscopedrereview applies; preserveoriginalWorld/SDK/Native/clocks/custodycrypto/oracles and correctwrapper/controlsemantics, not raisebusinesscaps. Nextretained-envelopepostmortemDRAFT isSourceHELD andprobes ORIGINALSubjectb849/adaptera1e7, notsilentlynewhelper. Publicmetadata/sourceonlysofar; no privatebytes/keys/Native/Sourcechanges.
