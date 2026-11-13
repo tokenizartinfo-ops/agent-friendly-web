@@ -30,3 +30,9 @@ Ruling: retain existing restrictedSource/main boundaries and use owner standing 
 - [ ] freshtask spec+quality review andfinalwholeunit review.
 
 OperationalReadiness=false; completePackage=false;PCoff=false;globalNativeDrainVerified=false;sdkNamespaceEmptyVerified=false.
+
+## Builder check and preparation release
+
+Freshbuilder fresh_native_builder_check: CLEAR against frozenf4c45. Ordered8mode admittedL282–283; registeredmessageguardsL151/190–199; twotailkeylessblocks3381–3505 removablewithoutfourcarrierbodies; contractsbootstrap→lockedinstall→precheck1358–1368→pure. NoSourceexecution/mutation. Root checked requirements/delta constraints and rules no blocker.
+
+PREPARATION_RELEASE: freshsoleexecutor may create UNATTACHED inactive8-jobF7 Gitobjects parent82626 only under bindingbrief. NoSourcebranchCAS, activeoverlay, run or reportappend released. Root must independently read complete proposedSource/delta/fourhashes beforeoverlaystage. TestsNOTRUN atpreparation stage.
