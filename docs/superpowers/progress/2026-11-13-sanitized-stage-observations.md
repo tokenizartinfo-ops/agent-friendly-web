@@ -28,3 +28,6 @@ Ruling: combined task review follows each task; whole-plan final review occurs o
 
 ## Pausa expresa del owner
 Punto recuperable: docs/superpowers/progress/2026-11-13-sanitized-stage-observations-resume.es.md. Borrador NO adjuntado be297ada3c97e0b6b99dd10fb8c16113bc157cf3; árbolf0c45608ed306bcb271472f0f48de1a332598e21. Root readback3198hojas/solo5diferencias declaradas/62WF/Sourceb587 y main0c9 intactos. Código incompleto/pins pendientes, cero pruebas/runs. NO retomar hasta mensaje del owner. Source attachment/Native release siguen retenidos.
+
+## Resume by owner — 2026-11-13 20:24:25 UTC
+Gabriel volvió y pidió retomar desde el punto guardado y avanzar todos los bloques posibles. La pausa queda levantada; mismo ejecutor Task1 retoma borrador be297ada3c97e0b6b99dd10fb8c16113bc157cf3. Root verificó Sourceb587/main0c9/Rootdocs9b1e y cinco colecciones activas0; relay176 sigue88comentarios, sin nueva lectura/ACK. Preparación Task1 RELEASED nuevamente; attach/run Task1 y Task2/Native siguen HELD hasta sus gates independientes. No repetir unidades completas.
