@@ -6191,3 +6191,1657 @@ Frozen held-source inventory:
 ```
 
 Source self-review checked trust/credential boundary, sameID/currentcontext/no fallbacks, no validation retries, total deadlines/bodycaps/closure of responses, per-phase logs, private same-routine fake coverage, all7workflow substitutions, exclusive receipts, unchanged N8World/twoexports/testN7default/3keybindings/F7sevenfalse, and strict original Python integrity gates. Independent review remains separate. BothnewWFmanual/noinputs/nopush/twofalse; no Native permission even if KEYLESSpasses. OnANYnewqualificationfailure restoreWorldoriginal/closeallnewWF/fullprefix/protected/main/0activeSTOP withoutrepair/retry. OnPASScloseallnewWF/retaincode/fullreadbackSTOP. Native/CF/runtime/PCoff/Native16/Max NOTEXECUTED, allreadinessflagsfalse.
+
+
+### Fix3 sole fresh qualification — ACTUAL GREEN, Native remains HELD
+
+Implementation4d749b410765e97cdf7bb8f6f8b41355a066d603/tree300e3b31e96f583c4cf6b632de55cbf97990b045 was full6file exact-readback/3194leaves/3188protected. Reviewed N8World0631f9a is byte-exact, no reinvention of I1. Frozen sole activation255ecc18900647081d66f9617df110898983cc89/tree4b2d6ae019c449ae9adde888084b0b0930efc97a changed ONLY contracts event/runlabel/2gates; active19449B/blobd52fbe871713812613be28052815792b97d53225/SHA2560ded8e510ba8631c9941ed9fd04db1b81fa627f5a752b13c4dc3d32085347de6. All other frozen file hashes unchanged. Fiveactive states0 beforepush.
+
+Actual NEW run43341317371/attempt1/push/source255ecc18900647081d66f9617df110898983cc89, created2026-11-13T00:58:42Z, completedSUCCESS2026-11-13T01:00:10Z. Producer131610059140 SUCCESS and independent verifier131610436472 SUCCESS, BOTH inspected. No rerun/replay of43336838877 or43331779408; this fresh permit is consumed successfully. All covering commands in preparation section ran and passed: node --check3; currentmodelpreflight inclactualN8ownership handoffs; sanitizedMODELupload; Node read-artifact+strictPythonZIP/uploader-API-rawSHA+REAL-IDprotectedreadback; same24control wrapper withN9fakes; unchangedF1–F8original45s;17puretests; contracts-proof+SMALLSAFE; independentMODEL+SAFE+checkout/proofvalidation. No blanket/full Native suite.
+
+Counts:24namedcallbacks expected/completed/PASS24,FAIL0,firstFailurenull,post-final-assertion exactlyonce witness true. One node:test wrapper PASS1/FAIL0/SKIP0/CANCEL0,1785.496055ms. UnchangedF1–F8 eight/eight groups passed (reported caseCount2,1,4,1,3,1,4,6=22group cases, notTAPinflation). Separate17puretests PASS17/FAIL0/SKIP0/CANCEL0,4199.22213ms. N9SAME-private-routine fake summary passed ALL29scenarios; deadline/wait/exhaustion403/501/identity/JSON/digest/redirect/no-token/private-log assertions passed. Exact bounded fake records are preserved below, not inferred from a shell exit alone.
+
+Observed REAL transport: producerMODEL metadata200/zip_api302/zip_body200, allattempt1, total613ms; independentMODEL allattempt1,total676ms; independentSAFE allattempt1,total809ms. ZEROrealreadretry needed in this run. The cause and hop of the prior404 remainUNKNOWN; a successful first-attempt run and fake retry coverage do not establish a service/permission/consistency/root-cause diagnosis. No headers/body/token/Location/signedURL/stack is in the phase records below. Same assigned ID only, no fallback/search/uploadretry/runretry. IndependentcurrentMODEL+SAFEuploader/API/rawZIP checks, closedJSON/paths/CRC/EOF/size caps and assigned-model protected readback all passed.
+
+Artifact metadata (builder/RootMCP readMODELmetadataONLY, no MODELarchive):
+
+```json
+[
+  {
+    "id": 14000545288,
+    "name": "afw-post-ack-model-43341317371-1",
+    "size_in_bytes": 10713,
+    "digest": "sha256:586818f0b3f445c0c9b7d2f19ed8c1b9d86465aa11828550217632f8689af823",
+    "created_at": "2026-11-13T00:59:21Z",
+    "expires_at": "2026-11-20T00:59:20Z",
+    "expired": false,
+    "workflow_run": {
+      "id": 43341317371,
+      "repository_id": 1347578006,
+      "head_repository_id": 1347578006,
+      "head_branch": "feat/finite-native-cleanup-20261101",
+      "head_sha": "255ecc18900647081d66f9617df110898983cc89"
+    }
+  },
+  {
+    "id": 13999826329,
+    "name": "afw-post-ack-contracts-43341317371-1",
+    "size_in_bytes": 4235,
+    "digest": "sha256:ccb160462e6d4e4f3abc95db3ba1af1197f3fb252beddc680cb7bc84bbfa2602",
+    "created_at": "2026-11-13T00:59:35Z",
+    "expires_at": "2026-11-20T00:59:35Z",
+    "expired": false,
+    "workflow_run": {
+      "id": 43341317371,
+      "repository_id": 1347578006,
+      "head_repository_id": 1347578006,
+      "head_branch": "feat/finite-native-cleanup-20261101",
+      "head_sha": "255ecc18900647081d66f9617df110898983cc89"
+    }
+  }
+]
+```
+
+MODEL14000545288 rawZIP10713B/SHA586818f0b3f445c0c9b7d2f19ed8c1b9d86465aa11828550217632f8689af823, exactlymodel.json+protectedbudget-artifact.json, <=4MiBcompressed ANDuncompressed; protectedmanifest410B/SHA8b49a8ef91588f96511426cf82df60d5c6840e61c31dadc8125bbf0107c50fd0. Bothjobs logged actual REAL-ID protected verifyBudgetArtifact success; exact model.json/preflightSHA5d4cb4d6ac0157618a3a4a47dd0bf3819282fb34c75a2f56b170f7a339061105 independently bound to currentcheckout. It is MODEL ONLY, not Native graph prediction, runtime attestation or original R2execution.
+
+SMALLSAFE13999826329 rawZIP4235B/SHAccb160462e6d4e4f3abc95db3ba1af1197f3fb252beddc680cb7bc84bbfa2602; exactlyresult.json10992B/SHA92ac5f8568431a831dc25914287cd39649bea1c980e76b3c4269195182a07111 andmanifest.json392B/SHAeca3fd8f16d8f9328161f160c9c4e658aeb1fe015430ea1bd29fbe49c09dd742;11384Bcombined<=65536/rawZIP<=131072. Builder inspected only this approvedSMALLSAFE in memory and verified metadata SHA/paths/bounds/CRC/UTF8/EOF; no filesystem Source/data download, MODEL/cipher/privateNative evidence or Nativeproducer logs. Transport file URLs are excluded from the report.
+
+N8actual proof now independently preserved: valid-inner/cleanupreject and invalid-inner/cleanupreject both sameError=true,oracleCalls0,legacyComplete:true,eligible:false; knownsuccess+actual addedpersistence rejection returnsnormally/eligible:false; returnedhelper oraclefailure sameerror/oneoracle/failed; businessprimary withsuccessfulcleanup eligible:true; distinctcleanupuncertainty eligible:false; SAME-primarycleanupError legacyComplete:true STILLeligible:false fromrequired-phasefacts. Fivefamilies/seven actual Node-owned handoffs, zero ownerNative records, noMF/I0/SDK/runtime. Exact21predicateoracle/counterfamilies/protectedtest533dafb5 and unchangedoracleSHA37ac0b66 passed. No old evidenceFailure-only mirror is used.
+
+Current samecapturedinput/defines ORIGINAL408/candidateOFF graphs: M2066727B/c38497cfb32f598baa4f71e270314f59e7f81e8f08bb67bc6fe24ba8cadfb31c,61records/0originalSYN; QA2726178B/7ea19fdccdd537aa34edf2bc1fbb659353917d607b8f0716604ef09a7ea263f3,115records/3originalSYN. BothOFF roles and ON pre-diagnostic records equal after uniqueness/normalization; ONMunchanged. ON MODEL QA2730926B/9b9bf8ad2313e1f338ddfdb558cc2353dfe3c975e227682026f64d5d07bf7b18. ExactlytwoQAemissions/stdin1snapshot andphase5protocol+1comparison retained, typedfullsupplement/baseline/emission/literalhashes/Node-moduleabsence inexactSAFE below. SDK251149B/bb2b8524/44sites,lock36a8cd4b/protectedlib/F7/test pins unchanged. These model hashes are not compared to hypothetical actual Native bundles.
+
+Bounded actual closed phase,29fake,24callback and verifier outputs:
+
+```json
+{
+  "producer": [
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "model",
+      "phase": "metadata",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 253,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "model",
+      "phase": "zip_api",
+      "attempt": 1,
+      "httpStatus": 302,
+      "elapsedMs": 570,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "model",
+      "phase": "zip_body",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 613,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ_CONTROLS/1",
+      "passed": true,
+      "scenarios": 29,
+      "threePhases": true,
+      "sharedDeadlineMs": 25000,
+      "attemptLimit": 3,
+      "waitScheduleMs": [
+        2000,
+        5000
+      ],
+      "noCredentialForwarding": true,
+      "noPrivateLogs": true,
+      "cases": [
+        {
+          "name": "metadata_404_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 2,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 404,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "metadata",
+              "attempt": 2,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "zip_api_404_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 2,
+            "zip_body": 1
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 404,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 2,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "zip_body_404_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 1,
+            "zip_body": 2
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 404,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 2,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "retryable_408_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 2,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 408,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "metadata",
+              "attempt": 2,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "retryable_429_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 2,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 429,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "metadata",
+              "attempt": 2,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "retryable_500_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 2,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 500,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "metadata",
+              "attempt": 2,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "retryable_502_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 2,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 502,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "metadata",
+              "attempt": 2,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "retryable_503_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 2,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 503,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "metadata",
+              "attempt": 2,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "retryable_504_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 2,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 504,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "metadata",
+              "attempt": 2,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "network_then_success",
+          "passed": true,
+          "counts": {
+            "metadata": 2,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [
+            2000
+          ],
+          "elapsedMs": 2000,
+          "terminal": "success",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": "network",
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "metadata",
+              "attempt": 2,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 2000
+            }
+          ]
+        },
+        {
+          "name": "exhaustion_three_reads",
+          "passed": true,
+          "counts": {
+            "metadata": 3,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [
+            2000,
+            5000
+          ],
+          "elapsedMs": 7000,
+          "terminal": "exhausted",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 404,
+              "outcome": "retryable",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "metadata",
+              "attempt": 2,
+              "httpStatus": 404,
+              "outcome": "retryable",
+              "elapsedMs": 2000
+            },
+            {
+              "phase": "metadata",
+              "attempt": 3,
+              "httpStatus": 404,
+              "outcome": "exhausted",
+              "elapsedMs": 7000
+            }
+          ]
+        },
+        {
+          "name": "deadline_no_reset",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [],
+          "elapsedMs": 25000,
+          "terminal": "deadline",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 7000
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 14000
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "deadline",
+              "elapsedMs": 25000
+            }
+          ]
+        },
+        {
+          "name": "deadline_fewer_attempts",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 24000,
+          "terminal": "deadline",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 404,
+              "outcome": "deadline",
+              "elapsedMs": 24000
+            }
+          ]
+        },
+        {
+          "name": "403_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "http",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 403,
+              "outcome": "rejected",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "501_not_retryable",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "http",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 501,
+              "outcome": "rejected",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_metadata_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_metadata_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_metadata_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_metadata_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_metadata_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_metadata_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_metadata_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "malformed_metadata_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "duplicate_metadata_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 0,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "raw_digest_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 1,
+            "zip_body": 1
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "integrity",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "success",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_body",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_redirect_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 1,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_redirect_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 1,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_redirect_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 1,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        },
+        {
+          "name": "invalid_redirect_immediate",
+          "passed": true,
+          "counts": {
+            "metadata": 1,
+            "zip_api": 1,
+            "zip_body": 0
+          },
+          "waits": [],
+          "elapsedMs": 0,
+          "terminal": "invalid",
+          "phaseEvidence": [
+            {
+              "phase": "metadata",
+              "attempt": 1,
+              "httpStatus": 200,
+              "outcome": "success",
+              "elapsedMs": 0
+            },
+            {
+              "phase": "zip_api",
+              "attempt": 1,
+              "httpStatus": 302,
+              "outcome": "invalid",
+              "elapsedMs": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "purpose": "AFW_POST_ACK_CONTROLS/1",
+      "expected": 24,
+      "completed": 24,
+      "pass": 24,
+      "fail": 0,
+      "inventory": [
+        "off_graphs",
+        "sdk_pins",
+        "profile_scope",
+        "sites_exact",
+        "sealer_graph",
+        "lexical_op",
+        "one_shot",
+        "nested_scope",
+        "late_scope",
+        "entry_check",
+        "notice_guard",
+        "protocol_guard",
+        "pair_wait",
+        "expected_mismatch",
+        "exit_check",
+        "unbranded",
+        "same_error",
+        "observer_throws",
+        "same_effects",
+        "pair_orders",
+        "no_rejection",
+        "overflow",
+        "schema",
+        "provenance"
+      ],
+      "firstFailure": null,
+      "postAssertionExactlyOnce": true,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false,
+      "nativeExecuted": false,
+      "mfAllocated": false,
+      "I0Created": false
+    }
+  ],
+  "verifier": [
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "model",
+      "phase": "metadata",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 316,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "model",
+      "phase": "zip_api",
+      "attempt": 1,
+      "httpStatus": 302,
+      "elapsedMs": 550,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "model",
+      "phase": "zip_body",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 676,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "safe",
+      "phase": "metadata",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 308,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "safe",
+      "phase": "zip_api",
+      "attempt": 1,
+      "httpStatus": 302,
+      "elapsedMs": 680,
+      "outcome": "success"
+    },
+    {
+      "purpose": "AFW_ARTIFACT_READ/1",
+      "kind": "safe",
+      "phase": "zip_body",
+      "attempt": 1,
+      "httpStatus": 200,
+      "elapsedMs": 809,
+      "outcome": "success"
+    },
+    {
+      "purpose": "afw.post-ack-independent-verdict.safe.v1",
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+        "source": "255ecc18900647081d66f9617df110898983cc89",
+        "run": "43341317371",
+        "attempt": 1,
+        "case": "R2"
+      },
+      "nativeCertificate": false,
+      "valid": true,
+      "modelArtifactId": "14000545288",
+      "modelSha256": "5d4cb4d6ac0157618a3a4a47dd0bf3819282fb34c75a2f56b170f7a339061105",
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false
+    }
+  ]
+}
+```
+
+Exact inspected SMALLSAFE proof/wholemanifest/program/context/model/hand-off inventory:
+
+```json
+{
+  "zipBytes": 4235,
+  "zipSha256": "ccb160462e6d4e4f3abc95db3ba1af1197f3fb252beddc680cb7bc84bbfa2602",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 392,
+      "sha256": "eca3fd8f16d8f9328161f160c9c4e658aeb1fe015430ea1bd29fbe49c09dd742"
+    },
+    {
+      "path": "result.json",
+      "bytes": 10992,
+      "sha256": "92ac5f8568431a831dc25914287cd39649bea1c980e76b3c4269195182a07111"
+    }
+  ],
+  "result": {
+    "purpose": "afw.post-ack-contracts.safe.v1",
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+      "source": "255ecc18900647081d66f9617df110898983cc89",
+      "run": "43341317371",
+      "attempt": 1,
+      "case": "R2"
+    },
+    "controls": {
+      "purpose": "AFW_POST_ACK_CONTROLS/1",
+      "expected": 24,
+      "completed": 24,
+      "pass": 24,
+      "fail": 0,
+      "inventory": [
+        "off_graphs",
+        "sdk_pins",
+        "profile_scope",
+        "sites_exact",
+        "sealer_graph",
+        "lexical_op",
+        "one_shot",
+        "nested_scope",
+        "late_scope",
+        "entry_check",
+        "notice_guard",
+        "protocol_guard",
+        "pair_wait",
+        "expected_mismatch",
+        "exit_check",
+        "unbranded",
+        "same_error",
+        "observer_throws",
+        "same_effects",
+        "pair_orders",
+        "no_rejection",
+        "overflow",
+        "schema",
+        "provenance"
+      ],
+      "firstFailure": null,
+      "postAssertionExactlyOnce": true,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false,
+      "nativeExecuted": false,
+      "mfAllocated": false,
+      "I0Created": false
+    },
+    "programs": [
+      {
+        "path": "test/fixtures/finite-budget-world.mjs",
+        "bytes": 242987,
+        "sha256": "007a4b39777dbd34645f7754556cfa1a9e152a0d2a6f55a27f6b1c30e334d867"
+      },
+      {
+        "path": "test/fixtures/finite-post-ack-diagnostic.mjs",
+        "bytes": 91238,
+        "sha256": "5f84a7d77246511cecc3afcd3ff12107e8de713806d7e36964f8703c9ab1538a"
+      },
+      {
+        "path": "test/finite-post-ack-diagnostic.test.mjs",
+        "bytes": 1923,
+        "sha256": "cbe41b778c68e74516f9008061d27cdcdc6e8dcf212a93d8ddb24caf8079e462"
+      },
+      {
+        "path": ".github/workflows/afw-r2-post-ack-contracts.yml",
+        "bytes": 19449,
+        "sha256": "0ded8e510ba8631c9941ed9fd04db1b81fa627f5a752b13c4dc3d32085347de6"
+      },
+      {
+        "path": ".github/workflows/afw-r2-post-ack-diagnostic.yml",
+        "bytes": 27458,
+        "sha256": "50a72c97cfffb2710c10a8127871f11893cefe778c61b61664e06c69905116e3"
+      },
+      {
+        "path": ".github/workflows/afw-finite-budget-qualification.yml",
+        "bytes": 126209,
+        "sha256": "1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 445991,
+        "sha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34"
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "bytes": 126504,
+        "sha256": "d97d07f69916c45f58af511a6dfb57322ed3fe7d8fa1f6fbb2220d44be15b921"
+      },
+      {
+        "path": "test/fixtures/finite-initial-entry-world.mjs",
+        "bytes": 87501,
+        "sha256": "0a1bcfa9721673386b08af45e4a24c33fa2db939d5edf021628d92590e883abb"
+      },
+      {
+        "path": "test/fixtures/finite-checkpoint-custody.mjs",
+        "bytes": 21159,
+        "sha256": "7751921bfaf10cd02dc777305d384d84ee7834f7bfbf2669dc60da50d7f1814f"
+      },
+      {
+        "path": "test/mcp-qa-finite-budget-native.test.mjs",
+        "bytes": 12749,
+        "sha256": "7194f50e3974076da519b1b99103d28537cc2d33813e8bf6eae83cf014d24948"
+      }
+    ],
+    "preflight": {
+      "handoffControls": {
+        "purpose": "afw.post-ack-owner-handoff-controls.syn.v1",
+        "variants": [
+          {
+            "name": "valid_inner_cleanup_reject",
+            "outcome": "failed",
+            "sameError": true,
+            "oracleCalls": 0,
+            "legacyComplete": true,
+            "eligible": false,
+            "callbackCalls": 1
+          },
+          {
+            "name": "invalid_inner_cleanup_reject",
+            "outcome": "failed",
+            "sameError": true,
+            "oracleCalls": 0,
+            "legacyComplete": true,
+            "eligible": false,
+            "callbackCalls": 1
+          },
+          {
+            "name": "success_added_persistence_reject",
+            "outcome": "passed",
+            "sameError": true,
+            "oracleCalls": 1,
+            "legacyComplete": true,
+            "eligible": false,
+            "callbackCalls": 1,
+            "normalReturn": true,
+            "addedPersistenceRejected": true
+          },
+          {
+            "name": "returned_oracle_reject",
+            "outcome": "failed",
+            "sameError": true,
+            "oracleCalls": 1,
+            "legacyComplete": true,
+            "eligible": true,
+            "callbackCalls": 1
+          },
+          {
+            "name": "business_primary_cleanup",
+            "successful": {
+              "outcome": "failed",
+              "sameError": true,
+              "oracleCalls": 0,
+              "legacyComplete": true,
+              "eligible": true,
+              "callbackCalls": 1
+            },
+            "uncertain": {
+              "outcome": "failed",
+              "sameError": true,
+              "oracleCalls": 0,
+              "legacyComplete": false,
+              "eligible": false,
+              "callbackCalls": 1
+            },
+            "samePrimary": {
+              "outcome": "failed",
+              "sameError": true,
+              "oracleCalls": 0,
+              "legacyComplete": true,
+              "eligible": false,
+              "callbackCalls": 1
+            }
+          }
+        ],
+        "families": 5,
+        "wholeHelperBeforeOracle": true,
+        "actualOwnerHandoff": true,
+        "mfAllocated": false,
+        "I0Created": false,
+        "nativeExecuted": false,
+        "businessAuthority": false
+      },
+      "purpose": "afw.post-ack-preflight.syn.v1",
+      "profile": "r2-post-ack-v1",
+      "stage": "MODEL ONLY",
+      "offGraphs": [
+        {
+          "role": "M",
+          "baselineBytes": 2066727,
+          "candidateBytes": 2066727,
+          "baselineSha256": "c38497cfb32f598baa4f71e270314f59e7f81e8f08bb67bc6fe24ba8cadfb31c",
+          "candidateSha256": "c38497cfb32f598baa4f71e270314f59e7f81e8f08bb67bc6fe24ba8cadfb31c",
+          "equal": true,
+          "sameCapturedInputs": true,
+          "sameDefines": true,
+          "onPreDiagnosticEqual": true,
+          "baselineRecordsSha256": "d435513e0a2c9bf627a9d44a251a119891445616faabd0206c0681b9f3a90f81",
+          "offRecordsSha256": "d435513e0a2c9bf627a9d44a251a119891445616faabd0206c0681b9f3a90f81",
+          "onPreDiagnosticRecordsSha256": "d435513e0a2c9bf627a9d44a251a119891445616faabd0206c0681b9f3a90f81",
+          "recordCount": 61,
+          "originalAdditionalSYN": 0
+        },
+        {
+          "role": "QA",
+          "baselineBytes": 2726178,
+          "candidateBytes": 2726178,
+          "baselineSha256": "7ea19fdccdd537aa34edf2bc1fbb659353917d607b8f0716604ef09a7ea263f3",
+          "candidateSha256": "7ea19fdccdd537aa34edf2bc1fbb659353917d607b8f0716604ef09a7ea263f3",
+          "equal": true,
+          "sameCapturedInputs": true,
+          "sameDefines": true,
+          "onPreDiagnosticEqual": true,
+          "baselineRecordsSha256": "0b65ff494d0b1a9eff439cccdb35be35711be38174184bb78606f4e8ed0d4fcc",
+          "offRecordsSha256": "0b65ff494d0b1a9eff439cccdb35be35711be38174184bb78606f4e8ed0d4fcc",
+          "onPreDiagnosticRecordsSha256": "0b65ff494d0b1a9eff439cccdb35be35711be38174184bb78606f4e8ed0d4fcc",
+          "recordCount": 115,
+          "originalAdditionalSYN": 3
+        }
+      ],
+      "supplement": {
+        "purpose": "afw.post-ack-supplement.syn.v1",
+        "profile": "r2-post-ack-v1",
+        "context": {
+          "repository": "tokenizartinfo-ops/agent-friendly-web",
+          "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+          "source": "255ecc18900647081d66f9617df110898983cc89",
+          "run": "43341317371",
+          "attempt": 1,
+          "case": "R2"
+        },
+        "records": [
+          {
+            "purpose": "afw.post-ack-emission.syn.v1",
+            "version": 1,
+            "profile": "r2-post-ack-v1",
+            "path": "<stdin>",
+            "phase": "after-baseline",
+            "baselineBytes": 124640,
+            "baselineSha256": "3b6ada1b5083ef8fe283829845c477badd715496429708e3df3e0f311948a4fa",
+            "emittedBytes": 124768,
+            "emittedSha256": "c6456b0f5436150127d9d42644e05ff021499f3735acb7a6050da455b07287b6",
+            "transformLiteralSha256": "38fd9c021890c48872e95a693394bdcdfb75784f650b2f0ecbc4adca191c3ac5",
+            "sites": {
+              "budgetSnapshot": 1
+            },
+            "fields": [
+              "invocationOrdinal",
+              "operation",
+              "ackReturned",
+              "postAckEntered",
+              "outcome",
+              "boundary",
+              "sameError"
+            ],
+            "enums": [
+              "entry_check",
+              "notice_guard",
+              "protocol_invariant",
+              "pair_wait",
+              "expected_mismatch",
+              "exit_check",
+              "unknown"
+            ],
+            "businessAuthority": false,
+            "addsAwait": 0,
+            "addsPromise": 0,
+            "addsNativeCall": 0,
+            "changesRetention": false
+          },
+          {
+            "purpose": "afw.post-ack-emission.syn.v1",
+            "version": 1,
+            "profile": "r2-post-ack-v1",
+            "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+            "phase": "after-baseline",
+            "baselineBytes": 171207,
+            "baselineSha256": "65dea4c7ed9c2ac048a1be026ce55cefe3a91ceb3f338a2488a5d7cb633d1070",
+            "emittedBytes": 174438,
+            "emittedSha256": "015dede3036dd1a09dbea867d77313000c19c7b7b42f4f9b178f9b6386191164",
+            "transformLiteralSha256": "027091f6e2b34e7592ed9a523348672c349da6e5f3ca73b1281745a9b1042951",
+            "sites": {
+              "entry_check": 1,
+              "notice_guard": 1,
+              "protocol_invariant": 5,
+              "pair_wait": 1,
+              "expected_mismatch": 1,
+              "exit_check": 1,
+              "issuer_ack": 1
+            },
+            "fields": [
+              "invocationOrdinal",
+              "operation",
+              "ackReturned",
+              "postAckEntered",
+              "outcome",
+              "boundary",
+              "sameError"
+            ],
+            "enums": [
+              "entry_check",
+              "notice_guard",
+              "protocol_invariant",
+              "pair_wait",
+              "expected_mismatch",
+              "exit_check",
+              "unknown"
+            ],
+            "businessAuthority": false,
+            "addsAwait": 0,
+            "addsPromise": 0,
+            "addsNativeCall": 0,
+            "changesRetention": false
+          }
+        ],
+        "nodeModuleAbsent": true,
+        "businessAuthority": false
+      },
+      "modelGraphs": {
+        "QA": {
+          "bytes": 2730926,
+          "sha256": "9b9bf8ad2313e1f338ddfdb558cc2353dfe3c975e227682026f64d5d07bf7b18"
+        },
+        "M": {
+          "bytes": 2066727,
+          "sha256": "c38497cfb32f598baa4f71e270314f59e7f81e8f08bb67bc6fe24ba8cadfb31c"
+        }
+      },
+      "privateCompileHashes": {
+        "phaseSha256": "65dea4c7ed9c2ac048a1be026ce55cefe3a91ceb3f338a2488a5d7cb633d1070",
+        "entrySha256": "3b6ada1b5083ef8fe283829845c477badd715496429708e3df3e0f311948a4fa",
+        "qaMetafileSha256": "51c3909730027232e86f728cd22e090c5f7bd34215c1841ae2a5953dedf21454"
+      },
+      "sdkFileSha256": "bb2b85243221906d1705653a82678dab2f0020a14ef8faa7d86d764890610e80",
+      "sdkBytes": 251149,
+      "sdkSites": 44,
+      "lockBlob": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+      "lockSha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34",
+      "worldSha256": "007a4b39777dbd34645f7754556cfa1a9e152a0d2a6f55a27f6b1c30e334d867",
+      "transformSha256": "5f84a7d77246511cecc3afcd3ff12107e8de713806d7e36964f8703c9ab1538a",
+      "protectedTestBlob": "533dafb5df5f8e57442c5b9029dc8dec6dded434",
+      "oracleSha256": "37ac0b6658d7ec789247e5fb89521dacf585b7d818cefbfdc429b742a142775e",
+      "preflightSha256": "5d4cb4d6ac0157618a3a4a47dd0bf3819282fb34c75a2f56b170f7a339061105"
+    },
+    "modelReceipt": {
+      "artifactId": "14000545288",
+      "uploaderDigest": "586818f0b3f445c0c9b7d2f19ed8c1b9d86465aa11828550217632f8689af823",
+      "apiDigest": "sha256:586818f0b3f445c0c9b7d2f19ed8c1b9d86465aa11828550217632f8689af823",
+      "rawZipSha256": "586818f0b3f445c0c9b7d2f19ed8c1b9d86465aa11828550217632f8689af823",
+      "modelSha256": "5d4cb4d6ac0157618a3a4a47dd0bf3819282fb34c75a2f56b170f7a339061105",
+      "verified": true,
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+        "source": "255ecc18900647081d66f9617df110898983cc89",
+        "run": "43341317371",
+        "attempt": 1,
+        "case": "R2"
+      }
+    },
+    "oracle": {
+      "protectedTestBlob": "533dafb5df5f8e57442c5b9029dc8dec6dded434",
+      "assertionInventory": 21,
+      "negativeFamilies": 21,
+      "allRejected": true,
+      "oracleSha256": "37ac0b6658d7ec789247e5fb89521dacf585b7d818cefbfdc429b742a142775e",
+      "outcomeIsolation": {
+        "knownSuccessNormal": true,
+        "primaryRejectionSame": true,
+        "qualificationErrorSame": true,
+        "preMfUnavailable": true,
+        "futureJobStartRejected": true
+      }
+    },
+    "related": {
+      "purpose": "afw.closed-pure-controls.syn.v2",
+      "groups": [
+        {
+          "group": "F1",
+          "passed": true,
+          "evidence": {
+            "bytes": 904,
+            "sha256": "dcae1ea26b1b09c6f2eacc5fd66701bdb3c61d2ccd431281b3c5325827b0909f"
+          },
+          "caseCount": 2
+        },
+        {
+          "group": "F2",
+          "passed": true,
+          "evidence": {
+            "bytes": 3332,
+            "sha256": "dac450adc2e8566f01427d907b835f22a7e64301654f58a58cd9ef5557d12a21"
+          },
+          "caseCount": 1
+        },
+        {
+          "group": "F3",
+          "passed": true,
+          "evidence": {
+            "bytes": 5431,
+            "sha256": "9be566302fc17d3511b726773ac5e49356a76c0b012c4d2ae2ef5f40c624e122"
+          },
+          "caseCount": 4
+        },
+        {
+          "group": "F4",
+          "passed": true,
+          "evidence": {
+            "bytes": 2528,
+            "sha256": "fde2eea49ef543f0d36347cda87d7035f10657716cc6cd418bff1fb4548bb33b"
+          },
+          "caseCount": 1
+        },
+        {
+          "group": "F5",
+          "passed": true,
+          "evidence": {
+            "bytes": 16524,
+            "sha256": "46246d9f7d0c795f5fd22ff5908df8e745be38f608298ae45ec0b891f51392d4"
+          },
+          "caseCount": 3
+        },
+        {
+          "group": "F6",
+          "passed": true,
+          "evidence": {
+            "bytes": 218,
+            "sha256": "0cf03851592354cf957c3248d37b1585d924dfc009b79704db924a8145070e5a"
+          },
+          "caseCount": 1
+        },
+        {
+          "group": "F7",
+          "passed": true,
+          "evidence": {
+            "bytes": 599,
+            "sha256": "7362a7cc15236bd1958794837bccc943ebf5ea87ef2f3db7c06b8d6382c08036"
+          },
+          "caseCount": 4
+        },
+        {
+          "group": "F8",
+          "passed": true,
+          "evidence": {
+            "bytes": 1532,
+            "sha256": "ac5c7c49185dc53cdd285c8e87294359d23d4fbcb31f60ba816c8fa2d3398d68"
+          },
+          "caseCount": 6
+        }
+      ],
+      "passed": true,
+      "pureTests": {
+        "tests": 17,
+        "pass": 17,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0,
+        "tapSha256": "06bf101b3e906f4737c9202169a0303b09c1f8f3923ff7124e4f58a045149920"
+      }
+    },
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false,
+    "nativeExecuted": false,
+    "mfAllocated": false,
+    "I0Created": false
+  },
+  "manifest": {
+    "purpose": "afw.native-post-ack-r2-manifest.safe.v1",
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+      "source": "255ecc18900647081d66f9617df110898983cc89",
+      "run": "43341317371",
+      "attempt": 1,
+      "case": "R2"
+    },
+    "files": [
+      {
+        "path": "result.json",
+        "bytes": 10992,
+        "sha256": "92ac5f8568431a831dc25914287cd39649bea1c980e76b3c4269195182a07111"
+      }
+    ]
+  }
+}
+```
+
+PASSclosure targets fixed World0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b,fixturedc05c0410fc085062fb47e10bb29e6723d938821,testaaf4894d1b411a8ac59debb63ca9368e803141c5 retained; contracts exactheld2006beb4d081ef127d1192fd99967f5f76eeb7db/19347B/manual/noinputs/nopush/twofalse; Nativebaa8442094731bea1413d2cc03028ab8682b300b/27458B/manual/noinputs/nopush/twofalse; F7exactf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/sevenfalse. Fullreportprefix/history remains append-only. Fullpost-CASref/tree/files/protected/main/fiveactive0 readbacks follow. Independent scoped rereview remains required; implementer test success is not independentCLEAN or Native release. Known same-runner custody/source/build/model, synchronous overhead and pair-call-boundary limitations remain. Native/AFWkey/MF/I0/SDKruntime/CF/production/OAuth/customer/PCoff/Native16/Max NOTEXECUTED; allfive readinessflagsfalse. No more fixes/runs dispatched; STOP afterclosure.
