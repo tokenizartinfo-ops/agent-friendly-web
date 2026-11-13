@@ -1,38 +1,26 @@
-# AFW — punto guardado para desconexión breve
-Solicitud expresa de Gabriel: guardar y continuar en unos minutos; dejar todo abierto. Comprobación 2026-11-13 19:56:50 UTC.
+# AFW — cierre y punto de continuación
+Fecha primaria: 2026-11-13 22:02:05 UTC (19:02:05 Argentina).
 
-## Estado remoto comprobado
-- Source feat/finite-native-cleanup-20261101: b5873e87d1f00ad10985171959e93015bc6045e3, sin cambios de esta preparación adjuntados.
-- main: 0c9c475b3ebaa970fc11d628b40e50a90cceb727, intacto.
-- Cinco colecciones activas de Actions (in_progress/pending/queued/requested/waiting): cero cada una. No ensayo activo ni recursos nuevos que cerrar.
-- Inspección anterior completa: run43488583034/1 SUCCESS,25 controles; Root SMALLSAFE14068676052/SHA c32f8c98e177eda6ababba9a14e2f6ab1772cd77a187613dbeec09961500d5c4. Solo compatibilidad actual de dos sobres exteriores, no causa histórica o AEAD.
-- SAME informe Source b4bcbad28c7ab5b3313c97eb54c0145b5c957f77:310494chars310591B/SHA e95f3b0016053270ef8610662e7381a2feb4819f0fc4e1d36b5cd1dfb8bab15d. No alterar prefijo.
-- operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified,historicalCauseProven,receiptAuthenticated siguen false.
+## Pausa explícita del owner
+Gabriel pidió guardar y cerrar porque apagará el ordenador; seguir mañana. Toda preparación y ejecución detenida. No retomar por autorizaciones históricas: esperar mensaje nuevo del owner.
 
-## Trabajo en preparación (no ensayado)
-Plan: docs/superpowers/plans/2026-11-13-sanitized-stage-observations.md
-Spec: docs/superpowers/specs/2026-11-13-sanitized-stage-observations-design.md
-Brief Task1: docs/superpowers/briefs/2026-11-13-sanitized-stage-observations-task1.md
-Ledger: docs/superpowers/progress/2026-11-13-sanitized-stage-observations.md
-Último Rootdocs anterior a este guardado: cf0748679d158af2e7ce5d4f6c528f3cfb8b303a.
-Ejecutor único /root/stage_diag_task1_executor, Sol xhigh. Recibió orden de detener preparación y preservar código como objetos GitDB/commit NO adjuntado; prohibidos attach/activación/run. Task2 y Native siguen retenidos.
+## Resultado completado
+Task1 de diagnóstico saneado COMPLETO: Source03680f05dcf051d3b2d3d2bd9829c9ac17592d2a/tree0ae2a53a251613137180592c5685986ca37c54e3. Run43511398408/1: 42pruebas GREEN,14controlesZIP y13recepción,69controles lógicos. Root verificó independientemente el único SMALLSAFE asignado. Revisión combinada Spec✅/Approved,0hallazgos, guardada en docs/superpowers/reviews/2026-11-13-sanitized-stage-task1-review.md. No repetir Task1 ni runs consumidos.
+Source report docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md blob890a0d5ce244713ab04515087dcddb4181d2dbfb,368869B/SHA344d81629a5a8860ef685d8b9fb12b123b9935dfbf21bcb66596d716ba681626; prefijo íntegro preservado. OriginalF7 f7a71f1a0fa4f5ddf069ff411f008a098455e5cc restaurado,62workflows y demás hojas intactos salvo cambios intencionales ya revisados.
 
-Task1 crea helper puro+tests y SOLO instrumenta catch World actual línea1933, scoped prepare-positive/positive_prepare. Mensaje genérico y exit1 primero; pin Gitblob de helper antes de importar las mismas bytes por data URL; error diagnóstico no modifica salida original. Biblioteca pura sin red/FS/SDK/World/Native/clave. Calificación futura cero clave AFW, Node22.23.4, dos jobs/SMALLSAFE, GitHub token únicamente para transferencia actual de artefacto.
-Diseño preparado:34 familias de pruebas; catálogo ampliado631 sitios públicos (world394/native47/custody8/persistence117/cleanup4/adapter61),14 códigos exactos. Aún NO resultados de ejecución. Z genérico congelado13305B/SHA b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d para ZIP, receptor de esquema separado.
-Última decisión pendiente de implementar/verificar: primer frame público válido de una cadena normal, no rechazar toda cadena por varios frames; reconocer solo getter stack intrínseco de Error si identidad/descriptores seguros, rechazar getters/proxies propios y prepareStackTrace personalizado. Probar stack REAL Node22 (fixture VM puro), no declarar captura de sitio si siempre unknown. La microsonda de plataforma de Root no es calificación de Node22.
-Verificar numeración/catálogo World al sustituir catch; reconstrucción del World original evita hashes circulares helper↔World. No modificar reglas del parser YAML, permisos ni límites de ensayo por esta mejora.
+## Preparación siguiente
+Task2 brief docs/superpowers/briefs/2026-11-13-sanitized-stage-observations-task2.md, Rootdocs antes del cierre cd957d092639f9794e8ba2d6897c53364ce6f274. Preflight Astra cerrado: NODE_SAFE_ZIP literal; assignedPrivate ya exportado; HTTP solo si metadata() retorna (fallo JSON200 deja pendiente/HTTPnull). Marcadores de etapa/HTTP acotado, recolector de archivos fijos y asignaciones seguras, calificación real del parser congelado. Sin cambios de clocks/caps/comandosNative/26slots/6env. Tarea permite solo preparación inactiva después de reanudación; todo attach/run exige gate independiente Root.
+Ejecutor /root/stage_diag_task2_executor interrumpido y confirmó: SOLO lecturas; NO blobs/árboles/commits/refs/archivos ni mutaciones ambiguas. No candidato ni propuesta creados. Insumos originales: F7 commit9927aea624c9269e293e644934423e88aa88f109/blob b6a000da8edbd5d581f3a5e59880a41ef6fd2316; scaffold calificación commitdc58ab16cadc62bc6a1c91e55564fafb7da24824/blob e4ba3f88fde8dee51a8f53848f8f142494d19cac. Leer como datos, nunca ejecutar las intenciones consumidas.
 
-## Al volver
-1. Leer este punto y conciliación del ejecutor; recuperar objetos inactivos conservados.
-2. Confirmar Source/main/Rootdocs y ausencia de mutación pendiente antes de reintentar nada.
-3. Retomar preparación Task1; Source attach y run necesitan gate Root exacto y release separado de un uso. Sin consultas a Gabriel ni OTP en este bloque.
-4. Después de calificación y revisión Task1: Task2 colector y marcadores constantes A.assignedPrivate, nuevos pins permitidos, parser/forms/26slots/Native comandos intactos; luego un único intento integrado materialmente instrumentado, nunca rerun de intentos consumidos.
-5. La prueba real AFW/avisos/revisión/retirada/parada y finalmente PC-off siguen pendientes. No inferir disponibilidad Cloudflare actual ni operación permanente.
+## Comprobación de cierre
+Root confirmó por GitHub22:02:05UTC: Source03680f05 exacto; main0c9c475b3ebaa970fc11d628b40e50a90cceb727 intacto; Source head0runs; cinco colecciones in_progress/pending/queued/requested/waiting0. No proceso local Source/npm/build ni ejecución remota nueva. No pestañas abiertas/controladas por Root en esta reanudación. No nuevos recursos CF, permisos, secretos, OAuth, OTP, correos o datosMax. Esto no es una lectura actual del runtimeCF; no inferir vigencia desde una rama.
+Relay privado176:88comentarios,updated2026-11-13T15:24:50Z sin cambio; no nuevas solicitudes/ACK duplicados.
 
-No se cierra Chrome ni otras ventanas. No se reactivan automatizaciones, no hay correo/relay enviado, runtime/despliegues/credenciales sin cambios. Trabajo Source remoto; no clon/dependencias/build/locales que limpiar.
+## Pendiente real hacia PC-off
+Terminar Task2, calificarlo y revisarlo; después una nueva prueba SYN completa materialmente instrumentada (Task3) para identificar/corregir las fallas que aún bloquean el recorrido. Luego aceptación integrada real de aviso útil/revisión/retirada/parada automática, y prueba PC-off correlacionada. No hay ETA demostrada ni reparaciónCF actual acreditada por este trabajo.
+Todos7flagsfalse: historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified. No pedir apagar como ensayo: este apagado es pausa de trabajo autorizada por Gabriel.
 
-## Borrador recuperable confirmado antes de desconectar
-Commit NO ADJUNTADO: be297ada3c97e0b6b99dd10fb8c16113bc157cf3; árbol f0c45608ed306bcb271472f0f48de1a332598e21. Parent b5873e87d1f00ad10985171959e93015bc6045e3.
-Helper fdabfafc7412c86615ce3d39092520bda816b30e; tests5ffa7fb8086b91c7fde09913d3a4d9fd754aae90; World1d4c6218133058b6c6fb6f48ae92f2bf35dc66b2; F7inerte INCOMPLETO7ad92627181e5378285c58063bfce8a7679da368; SAME informe34fee4181f7dae39c2df74b102ff9ac60c4b7ddd. Q/S/V/Z/template/catálogo/catch están guardados como datos públicos comentados en ese F7; helper/test/World también en blobs separados.
-Root leyó independientemente commit/parent/árbol completo y refs:3198hojas frente3196, solo cinco diferencias declaradas,62workflows; Sourceb587/main0c9intactos. No ejecución, pruebas ni activación. Ejecutor detenido por pedido del owner.
-INCOMPLETO: error sintáctico conocido en guard sourceSite; pin helper de World obsoleto tras últimos borradores; marcadores de calificación aún sin completar. Retomar DESDE ESTE BORRADOR, no volver a escribir todo ni tratarlo como código validado. Antes de cualquier attach: terminar código/pins, gate exacto Root e inactivo nuevo coherente; release de run sigue retenido. La pausa es solicitud del owner, no fallo externo ni tarea completa.
+## Reanudación
+1. Leer este checkpoint y brief Task2; verificar refs/no ejecuciones activas.
+2. Levantar pausa solo por nuevo mensaje owner.
+3. Continuar mismo ejecutor Task2 desde extracción de datos; no repetir tareas completas. Preparación inactiva→Root gate→calificación sin AFWkey→cierre/revisión; Native aún retenido.
