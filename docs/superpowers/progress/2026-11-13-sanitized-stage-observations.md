@@ -63,3 +63,16 @@ Task1: fix round1 cloud qualification PASS; exact restoration d034bae9a649892807
 
 ## Task1: complete
 Source03680f05/tree0ae2, report890a0d5c; Root full closure/readback passed,69logicalcontrols actual. Combined review docs/superpowers/reviews/2026-11-13-sanitized-stage-task1-review.md: Spec✅/Approved,0C/0I/0M. Fixround1 addressed native-default compatibility; no open/minor findings. Complete only diagnosticSource qualification, not Native/business/PCoff. Final whole-plan review remains after remainingtasks. Do NOT repeat Task1/oldruns. Task2 design/preflight next; its Source implementation/run still held until explicit Root task release. Completion docs/superpowers/progress/2026-11-13-sanitized-stage-task1-complete.es.md.
+
+
+## Task2 preflight — 2026-11-13 21:59 UTC
+| Pair | Shared interface | Ruling |
+|---|---|---|
+| Task2 self | candidate secret-expression YAML vs qualification | Fixed same-repo blob as DATA, never executable candidate/YAML interpolation; standard token only for fixed Source read |
+| Task1→Task2 | pure log API | canonical-only projector requires explicit finite legacy recognizers; no silent arbitrary raw log parser |
+| Task2→Task3 | A parser/forms vs diagnostic outputs | Original parser/forms exact; actual integrated8 keyscope qualification required,26slots/6env remain exact |
+| Task2→Task3 | Native outcome vs observation | literal aggregate native step; readonly count_check separate; stage pending is hint, never causal proof |
+| All tasks | source/report/closure | one writer, Root exact run gates, originalF7 restored, all other leaves exact, full existing report prefix |
+Ruling: add bounded metadata HTTP observation100..599 only after eligible metadata call; no body/header/URL/ID/cause inference. Cost: one small schema/test surface, no privilege.
+Ruling: store D/tests as normal Source leaves; candidate F7 stays unattached DATA; zero-key qualifier may read exactly one pinned same-repo Gitblob with standard contents-read. Cost: two declared Source leaves and fixed qualification network dependency; avoids base64 carrier/report bloat.
+Ruling: reject speculative threshold/timer/Native changes; Task2 qualifies observability only, Task3 held. Worker subagents prohibited. Builder check of exact task boundary precedes implementation; Task1 not repeated.
