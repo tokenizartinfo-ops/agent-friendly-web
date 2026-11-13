@@ -72,3 +72,9 @@ La única cualificación `43374412749/1` terminó con fallo en la familia `custo
 Los registros cerrados sí acreditan los controles inertes de captura parcial vacía y no vacía. La familia no registró el subcaso ni la excepción que falló después, y no se afirma una causa desconocida. Los controles posteriores del resultado completo ausente no se ejecutaron.
 
 Source quedó restaurado en `a20d8b0f`, con 3195 archivos, los 3194 previos intactos, informe completo de 30355 caracteres, main intacta y cero ejecuciones activas. El implementador se detuvo sin repetir el intento. El paquete `native-r1-oracle-task1-fix2-package.md` permite revisar de forma acotada el código y la falta de diagnóstico antes de decidir una tercera ronda. R1 real continúa retenido; no requiere intervención humana.
+
+## Revisión causal FIX2 y liberación FIX3/5
+
+El revisor encontró un defecto determinista: la etiqueta del fixture usa `C0/C1` en mayúsculas, pero la ruta solo admite minúsculas. Es una causa segura de fallo si se alcanza esa línea; el primer subcaso que falló en la ejecución anterior sigue sin estar registrado. También deben completarse las relaciones de coherencia de los descriptores de retención con el contrato protegido.
+
+P11 libera una corrección mínima de la etiqueta, esos checks de metadatos y marcadores cerrados de subcaso/fase únicamente para controles KEYLESS. No se alteran aserciones para obtener un verde ni se exponen errores o archivos privados. La tercera ronda tiene una única cualificación y el mismo cierre obligatorio. Source de partida sigue cerrado en `a20d8b0f`, con el informe completo de 30355 caracteres. Native Task2 continúa retenida.
