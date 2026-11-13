@@ -1,18 +1,20 @@
 name: AFW sanitized stage Task1 qualification
-run-name: AFW diagnostic Task1 HELD ${{ github.sha }}
+run-name: AFW diagnostic Task1 ONEUSE ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
 permissions:
   contents: read
   actions: read
 concurrency:
   group: afw-diagnostic-task1
   cancel-in-progress: false
-# INACTIVE UNATTACHED PREPARATION. No Source attach or run is released.
+# ACTIVE ONE-USE PROPOSAL, UNATTACHED. Source attach and run remain held for Root release.
 # Independent zero-AFW-key role; generic frozen Z is a ZIP utility only.
 jobs:
   qualify:
-    if: ${{ false && github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'workflow_dispatch' && github.workflow == 'AFW sanitized stage Task1 qualification' && github.event.head_commit.message == 'AFW-DIAGNOSTIC-TASK1-ONEUSE-20261113' }}
+    if: ${{ github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.workflow == 'AFW sanitized stage Task1 qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-DIAGNOSTIC-TASK1-ONEUSE-20261113' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     outputs:
@@ -28,8 +30,9 @@ jobs:
           test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
           test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
           test "$GITHUB_RUN_ATTEMPT" = 1
-          test "$GITHUB_EVENT_NAME" = workflow_dispatch
+          test "$GITHUB_EVENT_NAME" = push
           test "$GITHUB_WORKFLOW" = 'AFW sanitized stage Task1 qualification'
+          test "$GITHUB_WORKFLOW_REF" = 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101'
       - name: Checkout exact revision
         uses: actions/checkout@v4
         with:
@@ -57,24 +60,33 @@ jobs:
           
           const git=args=>execFileSync('git',args,{encoding:'utf8'}).trim();
           const blob=bytes=>createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex');
+          let stage='pins',failedIds=[];
           async function main(){
            assert.equal(process.versions.node,'22.23.4');assert.equal(process.env.NODE_OPTIONS,undefined);assert.equal(process.env.GITHUB_REPOSITORY_ID,'1347578006');assert.equal(process.env.GITHUB_JOB,'qualify');assert.equal(process.env.GITHUB_RUN_ATTEMPT,'1');
            const context={repository:process.env.GITHUB_REPOSITORY,repositoryId:process.env.GITHUB_REPOSITORY_ID,ref:process.env.GITHUB_REF,source:process.env.GITHUB_SHA,tree:git(['rev-parse','HEAD^{tree}']),workflowBlob:git(['rev-parse','HEAD:.github/workflows/afw-finite-budget-qualification.yml']),run:process.env.GITHUB_RUN_ID,attempt:Number(process.env.GITHUB_RUN_ATTEMPT),node:process.versions.node};S.validateContext(context);assert.equal(git(['rev-parse','HEAD']),context.source);
            for(const pin of [S.PINS.helper,S.PINS.tests,S.PINS.world]){const bytes=await readFile(pin.path);assert.equal(bytes.length,pin.bytes);assert.equal(blob(bytes),pin.blob);assert.equal(S.sha(bytes),pin.sha256);}
            assert.equal((await readFile(new URL('./afw-suite-safe-zip.mjs',import.meta.url))).length,13305);
            assert.equal(S.sha(await readFile(new URL('./afw-suite-safe-zip.mjs',import.meta.url))),'b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d');
+           stage='catalog';
            const helperBytes=await readFile(S.PINS.helper.path),D=await import('data:text/javascript;base64,'+helperBytes.toString('base64'));
            const catalogPins=[{"alias":"world","path":"test/fixtures/finite-budget-world.mjs","blob":"0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b"},{"alias":"native","path":"test/mcp-qa-finite-budget-native.test.mjs","blob":"533dafb5df5f8e57442c5b9029dc8dec6dded434"},{"alias":"custody","path":"test/fixtures/finite-checkpoint-custody.mjs","blob":"4d05b5ec0f7b074be88ef9733a47c984b0212351"},{"alias":"persistence","path":"test/fixtures/finite-owner-cleanup-persistence.mjs","blob":"e0dda1fd3d66c1864fd0b20f873c7fc0c452f6d8"},{"alias":"cleanup","path":"lib/mcp-qa-finite-owner-cleanup.mjs","blob":"1a5a2583d266179cdd89f799c64199f29044fec5"},{"alias":"adapter","path":"test/fixtures/finite-owner-cleanup.mjs","blob":"2f5dad6c306fac1be2f11845bef640bb204ad572"}],extraLines={"world":[960,965],"native":[78,83],"custody":[20,22,302,321],"persistence":[72,100,128,131,139,141],"cleanup":[41,42],"adapter":[128,133,134]};
            const catalog=[];for(const pin of catalogPins){let text=(await readFile(pin.path)).toString('utf8');if(pin.alias==='world'){const actual=" setImmediate(()=>{main().catch(async error=>{console.error('SYN fixed budget command failed');process.exitCode=1;try{if(process.argv[2]==='prepare-positive'&&process.env.GITHUB_JOB==='positive_prepare'){const bytes=await readFile(new URL('./finite-budget-failure-diagnostic.mjs',import.meta.url));const blob=createHash('sha1').update('blob '+bytes.length+'\\0').update(bytes).digest('hex');if(blob!=='7ca7eb56811eadaef06e686aeaf444f3fc7a5c2e')return;const {projectFixedBudgetFailure}=await import('data:text/javascript;base64,'+bytes.toString('base64'));console.error('AFW_SYN_FAILURE/1 '+JSON.stringify(projectFixedBudgetFailure(error)));}}catch{}});});",original=" setImmediate(()=>{main().catch(()=>{console.error('SYN fixed budget command failed');process.exitCode=1;});});";assert.equal(text.split(actual).length,2);assert.equal(actual.includes('\n'),false);assert.equal(original.includes('\n'),false);const count=text.split('\n').length;text=text.replace(actual,original);assert.equal(text.split('\n').length,count);}assert.equal(blob(Buffer.from(text)),pin.blob);const lines=[...new Set([...text.split('\n').flatMap((line,i)=>/\bassert(?:\.|\s*\()|\bthrow\b/.test(line)?[i+1]:[]),...extraLines[pin.alias]])].sort((a,b)=>a-b);catalog.push({alias:pin.alias,path:pin.path,lines});}assert.deepEqual(D.FIXED_BUDGET_FAILURE_SOURCES,catalog);
+           stage='red_tests';
            const directory=join(process.env.RUNNER_TEMP,'afw-diagnostic-task1-red'),fixtures=join(directory,'test','fixtures');await mkdir(fixtures,{recursive:true,mode:0o700});
            const stub="export const projectFixedBudgetFailure=()=>({code:'unknown',site:'unknown'});\nexport const projectFixedBudgetLog=()=>({code:'unknown',site:'unknown'});\n";
            await writeFile(join(fixtures,'finite-budget-failure-diagnostic.mjs'),stub,{flag:'wx',mode:0o600});
            await writeFile(join(directory,'test','finite-budget-failure-diagnostic.test.mjs'),await readFile(S.PINS.tests.path),{flag:'wx',mode:0o600});
-           const run=file=>{const child=spawnSync(process.execPath,['--test','--test-reporter=tap',file],{encoding:'utf8',timeout:60000,maxBuffer:1048576});assert.equal(child.error,undefined);assert.equal(child.signal,null);assert.equal(child.stderr,'');const counts={exit:child.status};for(const key of ['tests','pass','fail','cancelled','skipped','todo']){const found=[...child.stdout.matchAll(new RegExp('^# '+key+' (\\d+)$','gm'))];assert.equal(found.length,1);counts[key]=Number(found[0][1]);}assert.deepEqual([...child.stdout.matchAll(/^(?:not )?ok \d+ - (d\d+_[^\n]+)$/gm)].map(match=>match[1]),S.DIAGNOSTIC_IDS);return counts;};
+           const run=(file,real=false)=>{const child=spawnSync(process.execPath,['--test','--test-reporter=tap',file],{encoding:'utf8',timeout:60000,maxBuffer:1048576});if(real&&typeof child.stdout==='string'){const observed=new Set([...child.stdout.matchAll(/^not ok \d+ - (d\d+_[^\n]+)$/gm)].map(match=>match[1]));failedIds=S.DIAGNOSTIC_IDS.filter(id=>observed.has(id));}assert.equal(child.error,undefined);assert.equal(child.signal,null);assert.equal(child.stderr,'');const counts={exit:child.status};for(const key of ['tests','pass','fail','cancelled','skipped','todo']){const found=[...child.stdout.matchAll(new RegExp('^# '+key+' (\\d+)$','gm'))];assert.equal(found.length,1);counts[key]=Number(found[0][1]);}assert.deepEqual([...child.stdout.matchAll(/^(?:not )?ok \d+ - (d\d+_[^\n]+)$/gm)].map(match=>match[1]),S.DIAGNOSTIC_IDS);return counts;};
            const red=run(join(directory,'test','finite-budget-failure-diagnostic.test.mjs'));assert.equal(red.exit,1);assert(red.fail>0&&red.pass>0);
-           const green=run(S.PINS.tests.path);assert.equal(green.exit,0);assert.equal(green.fail,0);assert.equal(green.pass,S.DIAGNOSTIC_IDS.length);
+           stage='green_tests';
+           const green=run(S.PINS.tests.path,true);assert.equal(green.exit,0);assert.equal(green.fail,0);assert.equal(green.pass,S.DIAGNOSTIC_IDS.length);
+           stage='pins';
            for(const pin of [S.PINS.helper,S.PINS.tests,S.PINS.world])assert.equal(S.sha(await readFile(pin.path)),pin.sha256);
-           const zip=await Z.runZipControls(),receiver=S.runReceiverControls(context);
+           stage='zip_controls';
+           const zip=await Z.runZipControls();
+           stage='receiver_controls';
+           const receiver=S.runReceiverControls(context);
+           stage='pair';
            const kind=value=>{const descriptor=Object.getOwnPropertyDescriptor(value,'stack');return !descriptor?'absent':Object.hasOwn(descriptor,'value')?'data':'accessor';};
            let assertion;try{assert.equal(1,2,'SYN descriptor fixture');}catch(error){assertion=error;}
            const value={purpose:'afw.sanitized-stage-observations.task1.qualification.syn.v1',role:'independent-zero-afw-key-diagnostic-qualification',context,pins:S.PINS,tests:{red,green},controls:{diagnosticIds:S.DIAGNOSTIC_IDS,zip,receiver},nativeDescriptors:{errorStack:kind(new Error('SYN descriptor fixture')),assertionStack:kind(assertion)},nonclaims:S.NONCLAIMS};
@@ -82,7 +94,7 @@ jobs:
            const output=join(process.env.RUNNER_TEMP,'afw-diagnostic-task1-SMALLSAFE');await mkdir(output,{mode:0o700});for(const [name,bytes]of files)await writeFile(join(output,name),bytes,{flag:'wx',mode:0o600});
            console.log('AFW_DIAGNOSTIC_QUALIFIED/1 '+JSON.stringify({tests:green.tests,redFail:red.fail,zip:zip.length,receiver:receiver.length}));
           }
-          main().catch(()=>{console.error('AFW_DIAGNOSTIC_QUALIFICATION_FAILED/1');process.exitCode=1;});
+          main().catch(()=>{console.error('AFW_DIAGNOSTIC_QUALIFICATION_FAILED/1 '+JSON.stringify({stage,failedIds}));process.exitCode=1;});
           AFW_TASK1_QUALIFY
           cat >"$RUNNER_TEMP/afw-diagnostic-receiver.mjs" <<'AFW_TASK1_RECEIVER'
           import assert from 'node:assert/strict';
@@ -292,7 +304,7 @@ jobs:
           AFW_TASK1_ZIP
           node --input-type=module <<'AFW_TASK1_HASH_GATE'
           import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {join} from 'node:path';import {createHash} from 'node:crypto';
-          for(const pin of [{"name":"afw-diagnostic-qualify.mjs","marker":"AFW_TASK1_QUALIFY","sha256":"811edfe71f26552ad18ba8e9ca0265e0138f16f389468864f507eaeb0eae9c77"},{"name":"afw-diagnostic-receiver.mjs","marker":"AFW_TASK1_RECEIVER","sha256":"1c2940f5ca11a4da77a75d42c3a96db8604b1f8859ef7461ad665486baeb9cf0"},{"name":"afw-diagnostic-verify.mjs","marker":"AFW_TASK1_VERIFY","sha256":"1940a2fa6a1315143a476b65b3a4b12036c9deb16655d51a86a71a248d73f944"},{"name":"afw-suite-safe-zip.mjs","marker":"AFW_TASK1_ZIP","sha256":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"}]){const bytes=await readFile(join(process.env.RUNNER_TEMP,pin.name));assert.equal(createHash('sha256').update(bytes).digest('hex'),pin.sha256);}
+          for(const pin of [{"name":"afw-diagnostic-qualify.mjs","marker":"AFW_TASK1_QUALIFY","sha256":"b0de66c1d84c5b1d628c6a4c245c902908d350de57402fbb26f14d7d54ab0b97"},{"name":"afw-diagnostic-receiver.mjs","marker":"AFW_TASK1_RECEIVER","sha256":"1c2940f5ca11a4da77a75d42c3a96db8604b1f8859ef7461ad665486baeb9cf0"},{"name":"afw-diagnostic-verify.mjs","marker":"AFW_TASK1_VERIFY","sha256":"1940a2fa6a1315143a476b65b3a4b12036c9deb16655d51a86a71a248d73f944"},{"name":"afw-suite-safe-zip.mjs","marker":"AFW_TASK1_ZIP","sha256":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"}]){const bytes=await readFile(join(process.env.RUNNER_TEMP,pin.name));assert.equal(createHash('sha256').update(bytes).digest('hex'),pin.sha256);}
           AFW_TASK1_HASH_GATE
       - name: Qualify exact helper tests with all-unknown RED and real GREEN
         id: qualification
@@ -314,7 +326,7 @@ jobs:
           if-no-files-found: error
           overwrite: false
   verify:
-    if: ${{ always() && !cancelled() && false && github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'workflow_dispatch' && github.workflow == 'AFW sanitized stage Task1 qualification' && github.event.head_commit.message == 'AFW-DIAGNOSTIC-TASK1-ONEUSE-20261113' && needs.qualify.result == 'success' }}
+    if: ${{ always() && !cancelled() && github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.workflow == 'AFW sanitized stage Task1 qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-DIAGNOSTIC-TASK1-ONEUSE-20261113' && needs.qualify.result == 'success' }}
     needs: qualify
     runs-on: ubuntu-24.04
     timeout-minutes: 3
@@ -328,8 +340,9 @@ jobs:
           test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
           test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
           test "$GITHUB_RUN_ATTEMPT" = 1
-          test "$GITHUB_EVENT_NAME" = workflow_dispatch
+          test "$GITHUB_EVENT_NAME" = push
           test "$GITHUB_WORKFLOW" = 'AFW sanitized stage Task1 qualification'
+          test "$GITHUB_WORKFLOW_REF" = 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101'
       - name: Checkout exact revision
         uses: actions/checkout@v4
         with:
@@ -349,7 +362,7 @@ jobs:
           node --input-type=module <<'AFW_TASK1_EXTRACT'
           import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';import {join} from 'node:path';import {createHash} from 'node:crypto';
           const workflow=await readFile('.github/workflows/afw-finite-budget-qualification.yml','utf8');
-          for(const pin of [{"name":"afw-diagnostic-qualify.mjs","marker":"AFW_TASK1_QUALIFY","sha256":"811edfe71f26552ad18ba8e9ca0265e0138f16f389468864f507eaeb0eae9c77"},{"name":"afw-diagnostic-receiver.mjs","marker":"AFW_TASK1_RECEIVER","sha256":"1c2940f5ca11a4da77a75d42c3a96db8604b1f8859ef7461ad665486baeb9cf0"},{"name":"afw-diagnostic-verify.mjs","marker":"AFW_TASK1_VERIFY","sha256":"1940a2fa6a1315143a476b65b3a4b12036c9deb16655d51a86a71a248d73f944"},{"name":"afw-suite-safe-zip.mjs","marker":"AFW_TASK1_ZIP","sha256":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"}]){
+          for(const pin of [{"name":"afw-diagnostic-qualify.mjs","marker":"AFW_TASK1_QUALIFY","sha256":"b0de66c1d84c5b1d628c6a4c245c902908d350de57402fbb26f14d7d54ab0b97"},{"name":"afw-diagnostic-receiver.mjs","marker":"AFW_TASK1_RECEIVER","sha256":"1c2940f5ca11a4da77a75d42c3a96db8604b1f8859ef7461ad665486baeb9cf0"},{"name":"afw-diagnostic-verify.mjs","marker":"AFW_TASK1_VERIFY","sha256":"1940a2fa6a1315143a476b65b3a4b12036c9deb16655d51a86a71a248d73f944"},{"name":"afw-suite-safe-zip.mjs","marker":"AFW_TASK1_ZIP","sha256":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"}]){
            const opening='          cat >"$RUNNER_TEMP/'+pin.name+'" <<\''+pin.marker+'\'\n',closing='\n          '+pin.marker+'\n';
            assert.equal(workflow.split(opening).length,2);const tail=workflow.split(opening)[1];assert.equal(tail.split(closing).length,2);
            const lines=tail.split(closing)[0].split('\n');assert(lines.every(line=>line.startsWith('          ')));
