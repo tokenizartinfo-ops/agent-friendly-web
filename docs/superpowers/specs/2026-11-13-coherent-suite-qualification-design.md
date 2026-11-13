@@ -1,0 +1,51 @@
+# Coherent fixed suite — 8 pure contracts + 8 original Native cases
+
+DRAFT PREPARATION / Source HELD until fresh preflight resolves exactinterfaces and Root recordsCLEAR. ContinuingownerAFWPCoffworkautonomously/cloudfirst/nohumanbefore08AR; no changeofproject toHermes/Tokenizart. Notimplementationapprovalfromthisdraft. PreviousNativeR1unitwholeCLEAN59e8d17b; actualR1Source416c/pass43379486549 and corrected548KEYLESSonly remainseparate.
+
+## Intent / goal
+One coherent current Source/run/attempt proving originalQ8+P1+R1R2R3+D1D2D3D4=16 TOTALtests, with fixedproducercheckpointlineages, realconsumerreplicaoverlap and originalbusinessoracles, confidentialnativecustody, independentlyverifiedcurrentSMALLSAFE and exactSourceclosure. 16 doesNOTmean16Nativecases. No overallAFWreadiness/SDKnamespaceempty/globaldrain/providerresolution/realcloudAFWnotice/PCoff/Maxclaim; allfiveflagsfalse.
+
+## Root architecture choice, not claimed as an owner-selected implementation
+A (CHOSEN): reuse dormant seven-job originalsuite, scopeexistingkeyto cryptographicsteps, preserve alloriginalbusinesssemantics/peeraggregation and add eighth KEYLESS verifier plus twoJSON publicresult. Reuses currentWorld/SDK/oracles and the alreadyencodedproducer-consumer lineage/overlap/peakchecks.
+B: shard and generalizeR1singlecaseadapter acrossallcases. Morejobs/newprivatemodels and riskschanging D-pairsharedcheckpoint/beforehooks; notchosen.
+C: move straighttorealhostedAFWtrial. Leavescoherentengine/replicagatesunproven; notchosen.
+RootchoosesA underownerexplicitauthorizationtochoose/continuewithoutquestions. Costifwrong: a largerworkflowwrappersurface; preflightmustsettleinterfacesbeforeSourcewrites, testsandoneactualruncouldfailclosedratherthanmaskgaps.
+
+## Verified baseline / permittedSource
+Repo tokenizartinfo-ops/agent-friendly-web ID1347578006; Sourcebranchfeat/finite-native-cleanup-20261101.
+CLOSED BASE0479fdd5db3b957ecbb9302e8a45ac88f333fcba/tree8942513f440fd25b188c196090e790a561bdb688/3195leaves. All3194originalpriorleavesexact inclrestoredF7; NativeR1reportf7aa7d2a3fbdc07c480e446e3860afe2dc559f35/62739chars nowPROTECTED. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727.
+Only temporary .github/workflows/afw-finite-budget-qualification.yml and NEWdocs/superpowers/reports/2026-11-13-coherent-suite-qualification.md. Afternewreport3196leaves; ALL3195BASEleaves/modes/types exactafterclosure (including R1report). Rootdocsseparatecloudbranch.
+F7exactrollback blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a/manual/noinputs/nopush/7false.
+CloudGitDB/CAS/Actions ONLY. No localSource/worktrees/clones/deps/build/SDK/MF/eval/import/execution/files onPC; publicSource strings/metadata/hashRAMonly. NoCFAPI/runtime/deploy/token/permission/OAuth/OTP/Max/mail/main/PR/merge.
+NativeTest533dafb5df5f8e57442c5b9029dc8dec6dded434/World0631f9a44cbb37bec3ed1a2c3dc09ee93b86661b/custody4d05b5ec0f7b074be88ef9733a47c984b0212351/lock36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b/SDK1.2.1 IMMUTABLE. Allbusinessassertions/Nativecase timeouts120sR/300sP-D/C0900s/C1C0+180s/root30s/child5s unchanged; no helper-substitution/shorterclock/capincrease.
+
+## Original seven-job topology / required preservedfacts
+contracts2min; positive_prepare15→positive_consume15; reduction_prepare15→reduction_consume_a15; readonly7; reduction_consume_b15 needscontracts+readonly+reduction_prepare. Eachnativejobmax2ownedMF; actualnativejobpeak<=3/globalMFbound6. Preserve dependencygraph neededforA/Bactualreplicaintervalsoverlap; no serializationtoreplaceconcurrency.
+contracts executes8puretests plusF1–F8purecontrols/threecompile-onlyprofiles. P1positive1; readonlyR1R2R3=3; reduction_aD1D2=2; reduction_bD3D4=2. Twooriginalproduceroccurrences+threeRoccurrences=5lineages/10M-QAgraphs. OriginalaggregatechecksproducerSource/run/checkpoint/digest/sharedC0,C1/A-Boverlap/allfourreadybeforeC0-30/completeownedrecords/peerterminalsuccess.
+Currentbaseline has6job-level masterkeybindings; MUSTNOTactivateas-is. Existingafw-finite-syn-checkpoint permittedonlyrequiredactualcrypto jobs. Removejob-levelsecret; bindAFW_SYN_CHECKPOINT_KEY ONLYtrustedcrypto/key-preflightsteps. Nativecommands, checkout/setup/install/Worldsemanticvalidators and finalKEYLESSreceiver no masterkeyenvironment. Splitinstall/keypreflight andcombineddecrypt/Worldsemanticstepswhere needed; no World/SDK/MF imports underkeybinding. Genericcustodymoduleonlyallowedsecretcrypto import. PreferexistingWorldexports/wrappers; noprotectedWorldeditsfromthisplan.
+
+## Coherent orchestration / eighth receiver
+Actual8jobs = original7 + new independent KEYLESS verify. OriginalredBaggregate assumes jobs.total_count7 and filtersallothers; preflightmustmapexactchanges toavoiddeadlockonpendingreceiver:
+- preservefixedoriginal7producer/puregraph identities; totalworkflow8 namesexact;
+- waitterminalsuccessonly6requiredotherlegacyjobs while redB inprogress, excludependingreceiverexplicitly;
+- nativepeakchecksconsideronlysixnativejobs, excludecontracts/receiver;
+- receiverneedsall7, always&&fixedscope; checksall7terminalsuccessful/currentSourceRun thenstrictcurrentSAFE metadata+uploadedDigest+rawZIP+fullmanifest/codehash/context;
+- RootawaitsruncompletedANDALL8terminalinclskippedbeforeSource restoration; no7-onlyassumption.
+No pollingunbounded/irrelevantrepos. Existingcollector/hardboundsremainunlesspreflightfindsaconcretecontradiction tosettlebeforewrites.
+
+## Existing confidentialaggregate / publicpublication
+Reuseoriginalsuccessmanifest+Worldvalidations ofallrequiredcases/lineage/overlap, not copiedbusinessoracle. OriginalredBcomputescoherent-proof.json thenencryptsownprivatebundle. Afterauthenticatedown-IDreopen verifyreopenedcoherentproofdigest/manifest/currentidentity, THEN publishSMALLSAFE result.json+manifest.json fromkeylessstep; selfcipherID/digestknownonlyafterupload, nocircularidentity.
+Preflightmustsettleoriginalpublicpurecontractslikage(currentSourceRun,actualjobpassed,assignedID/digest/innerpure_passed/threeexactprofiles/readonlypreflightbeforeI0). PublicpureartifactisnonsensitiveclosedSource-only; preserveoriginalF8literal19126+functionalpublicpureupload. NoNativeplaintextpublicupload. DecideexactwrapperlinkagebeforeSourcewrites, no silentreinterpretationasexistingcrypto.
+Separatepoll/download/decrypt cryptostages fromkeylessWorldvalidation ifoldaggregatecombineskey andSDKimports. All privateproducer/consumer/TAP/models/plaintext/cipher stayrunner-only encryptedexistingcustody; Root/MCP/PC neverfetchprivatebytes/logs. Rootcanlistmetadata anddownloadONLYcurrentapprovedSMALLSAFE.
+Existingcustodybounds4096files/internal512MiB/JSONL768MiB/envelope128MiB/record128KiB/chunk65536/header4096, privateZIP3raw130MiB/expanded134225920 preserved; safeZIPraw131072/combinedJSON65536. Normal/partialarchive domainbounds andoriginalmetadata rules remain.
+Failure: command/aggregate/custody unavailable truthfulclosedresultifproducerable; missingSAFE fromlostrunner onlyverifierclosedpublication_unavailable RECORD,no fallbackartifact/phantomID. Validfailed/unavailableenvelope isnot suitepass.
+
+## Newqualifiedfourprogram boundary
+Oneuniqueheredoc eachsuite adapter/controls/verifier +immutable safeZip13305 SHA b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d. Sourceboundbootstrapextract/hashbeforeimport; same4bodiesinactive/KEYLESS/actual; wholeWorkflowGitblob/source additionallybindslegacyinlinebodies, norecursivehash.
+DO NOTrelabelfixedR1typedmodel/schemaaswhole-suite. Reusegenericcustody/safeZIP/mechanics, originalfullgroupWorldvalidators. InternalfixedI/Ofixturesokay,nopublictransport/env/CLIoverride/unforgeabilityframework.
+PublicNativepurpose proposedafw.coherent-suite.safe.v1/controlspurposeafw.coherent-suite.controls.safe.v1 andpairedmanifestpurposes. ExactDTOtypes/statecoherencetable/fixedcontrolIDs/functions/programmaterialization arePRE-FLIGHTBINDING ITEMS; RootwillsettleandpublishbeforeTask1release. NoSourceimplementationagainstambiguousfields. Requiredpublicproof: currentrepo/ref/source/tree/workflowblob/run/attempt1/node22.23.4/SDKpins/programhashes; countsQ8/P1/R3/D4/total16; 5lineages/10graphs; actualconsumer-overlap/allfourready+C0-C1/peakbounds; ownciphermetadata+runnerreopen/privateproofhash; original7identityresults andRootall8terminal requirement; all5flagsfalse. Neverarbitraryrawvalues/errorstrings/ownerdata.
+
+## Two gated tasks
+Task1: completeINACTIVEactual8jobtemplate(allfalse/manualnoinputs/nopush), fixedhelpers/meaningfulnegativecontrols, ONEKEYLESSoverlay10declared(8disabled+2active7+2). NoOriginalNativeTest/World/SDK/MF/I0/realkeyimport/executioninKEYLESS, onlynewhelpers/inertfixtures/genericINERTcrypto/staticpins. ALL10terminal+runcomplete→exactF7restore+newreport/full3196/prior3195protected/main/62WF/fiveactive0STOP. FreshSPEC/QUALITYCLEAN beforeTask2.
+Task2: freshsoleSourceexecutor, onefixed8jobactualattempt/Sourcefrozen/selfpathbranchpush/uniquecommitmessage/attempt1. No implementationedits. Originalnativegroupsunaltered, exactexistingkeycrypto-step-only. ANYoutcomeALL8terminal+runcomplete→exactrestore/reportappend/full3196/prior3195/main/events/active0STOP, noautoadditionalrun/repair/capincrease. Freshtask+wholeplanreview; keepall5false/evidence-scoped.
+Preflightread-only buildercheck MUSTCLEARcrypto-step map/originalaggregate8job interfaces/safeDTO/functions/caps/casecount meaning beforeSourcewrite.
