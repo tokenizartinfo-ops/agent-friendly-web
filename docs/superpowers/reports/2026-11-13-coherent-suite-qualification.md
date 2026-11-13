@@ -1365,3 +1365,100 @@ All five flags remain exactly false:
 ```
 
 **STOP after exact restoration, this prefix-preserving append and final readbacks. No second wave, extra qualification or Native retry.**
+
+
+## 2026-11-13 — ONE ZERO-key retained-envelope postmortem: controls failure, exact restoration
+
+Evidence recorded 2026-11-13 13:28:37 UTC. This independent diagnostic did not produce a target observation or a SMALLSAFE pair. It is not a coherent-suite pass, Native qualification, AEAD authentication, historical-cause proof or PC-off acceptance. All five readiness flags remain false. Coherent FF-I2 remains OPEN and actual-key/Native activation remains HELD.
+
+Authority and immutable Source:
+- Root preparation/spec/plan at docs commit 92f26ec8df110b190ef1a5a15f4988a77d4b26cf; fixed-template gate at ef63e2feb96180e8b494f2922f518f4d7bd2abf6; ONE-run release at dd71a4c1ecdc631d7ba6bb64a074ade6e96f55d9, docs/superpowers/briefs/2026-11-13-custody-postmortem-one-run-release.md.
+- PROJECT AFW; repository tokenizartinfo-ops/agent-friendly-web, ID 1347578006; Source feat/finite-native-cleanup-20261101; GitHub API/GitDB/Actions only.
+- Pre-unit closed Source 08f5d5f203efef09999ea2f6f0e899637af0bdf4, tree d86acb49d2026d2207eeb35ff97f728dc014e7d9. Inactive candidate 0e0c434146ad12caf703c34c114a17120d725d31, tree 27eede956a2cd4cb5b1f70d344741e7b002a8be5, F7 5ad4e38a8c97a2dacca661304067b68ce9f2cd2b, 114557 bytes, SHA256 b82fed697ff9c52f74ab2950510c221c83f68e5d69ba85f1c30d837a72935d6e.
+- Exact approved activation commit dfd37bd06d8f73bb9d93f70cfb64c03a2f9ac05d, tree 69c5f31fac6acfefe41c5523f9f3d39fbe8b6f0d, F7 499b437599694092a48714ad2bab1b75814b5f73, 115679 bytes, SHA256 f5abd48536faaa633b56b5018b7bfe2a80a7301927496bb4bd736493b2e30eda; parent 0e0c434146ad12caf703c34c114a17120d725d31.
+- Exact consumed one-use message: AFW custody postmortem ZERO KEY one use 20261113-0e0c434146ad12ca-01.
+- Active delta contained only the self-F7-path/fixed-branch push trigger and two complete fixed guards. Root reviewed all 14 complete nonsecret expressions, canonical outside-literal-run YAML and five unchanged bodies. Both jobs used Node 22.23.4; no AFW environment or master-key binding. Main remained 0c9c475b3ebaa970fc11d628b40e50a90cceb727.
+
+Five full body hashes:
+
+| Body | Bytes | SHA256 |
+|---|---:|---|
+| adapter (original historical reuse) | 43451 | a1e7a28f356cafde6e9486a9bcdb69aaa3fc98e00b928df11f36052bb915d9f3 |
+| inspector | 10590 | 78352e64e6b55c24ae21648907c835c684cbffaf26ecdd868c2b917bd8a6852f |
+| controls | 13187 | e724c18928f7fe21791165086d840333b0a1544109b8041b26966b801bbbcc3f |
+| safeZip (original reuse) | 13305 | b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d |
+| receiver | 5570 | 4d7bf001cef6979bf09bad2a2134ba21bbf4411c9957607439a2e015503ce7d1 |
+
+The actual current Observer in the receiver marker binds activation Source/tree/F7/run 43433569894/attempt 1/Node 22.23.4. Historical Subject remains separately b8497734abe5f6afdcc7c518e82a591438353f14/tree 1c0e1a87fa759ea07dc117931c37258067d3b1c0/F7 5eaf4f5e5497711e219999fa14c51501a82f94d2/run 43414661211/attempt 1. Subject program hashes are labeled historical reused-component pins; no environment identity was spoofed.
+
+Actual run and terminal evidence:
+- [Actions run 43433569894](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43433569894), event push, attempt 1, created 2026-11-13T13:25:49Z, completed/failure, updated 2026-11-13T13:26:10Z; exactly one run for the activation commit.
+- custody_inspect job 131912851433: completed/failure. Fixed-keyless Source check, checkout, exact Node and body-preservation steps succeeded. Run-controls/inspection step failed; upload was skipped.
+- verify job 131912949800: completed/failure. Fixed-keyless Source check, checkout and exact Node succeeded; independent receiver step failed with the closed needs_unsuccessful marker below.
+- Source remained frozen at activation through run completion and both declared jobs terminal. No rerun, additional attempt, extra qualification or new implementation was made.
+
+Actual commands and bounded outputs:
+1. Producer step invoked node --input-type=module (stderr discarded by the approved driver), bootstrapped current Source and imported the five pinned bodies, then invoked C.runAllControls(expected,provenance). Its phase was controls. No all-controls completion inventory was emitted; exact failing sub-control and arbitrary underlying error are UNKNOWN.
+2. Receiver step invoked node --input-type=module, bootstrapped independently, then C.runReceiverControls(); assert.equal(receiverControls.passed,2); followed by R.verifyPostmortemRoute(needs,expected). Reaching the needs_unsuccessful marker with valid current Observer means this receiver control-flow assertion returned; individual per-ID stdout was not emitted. This does not establish the producer's complete 23-control pass.
+3. No local Source evaluation/import, dependency install, build, SDK, World, MF, AES or Native invocation was used. Only current approved KEYLESS job logs were read and reduced to fixed markers. No historical/private/pure logs or archives were fetched to the actor, MCP or PC.
+
+Exact producer marker observed at 2026-11-13T13:25:59.6861454Z:
+
+```text
+AFW_CUSTODY_POSTMORTEM_PRODUCER_UNAVAILABLE/1 {"stage":"controls","historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Fixed 23-control inventory (7 diagnostic + 14 original ZIP + 2 receiver). The producer's per-ID status/counts were not published; these rows do not invent a failed ID or claim all 23 passed.
+
+| Group | Fixed ID | Observed status |
+|---|---|---|
+| diagnostic | postmortem_original_prefix_binding | Individual producer outcome unobserved |
+| diagnostic | postmortem_subject_observer_separation | Individual producer outcome unobserved |
+| diagnostic | postmortem_original_receipt_cap_boundaries | Individual producer outcome unobserved |
+| diagnostic | postmortem_stage_sequence | Individual producer outcome unobserved |
+| diagnostic | postmortem_metadata_failure_blocks_archive | Individual producer outcome unobserved |
+| diagnostic | postmortem_target_null_and_cap_coherence | Individual producer outcome unobserved |
+| diagnostic | postmortem_error_redaction | Individual producer outcome unobserved |
+| ZIP | zip_valid_store_crc_vector | Individual producer outcome unobserved |
+| ZIP | zip_valid_deflate | Individual producer outcome unobserved |
+| ZIP | zip_signed_unsigned_descriptors | Individual producer outcome unobserved |
+| ZIP | zip_wrong_size | Individual producer outcome unobserved |
+| ZIP | zip_wrong_upload_sha | Individual producer outcome unobserved |
+| ZIP | zip_wrong_metadata_sha | Individual producer outcome unobserved |
+| ZIP | zip_extra_entry | Individual producer outcome unobserved |
+| ZIP | zip_duplicate_entry | Individual producer outcome unobserved |
+| ZIP | zip_traversal_entry | Individual producer outcome unobserved |
+| ZIP | zip_symlink | Individual producer outcome unobserved |
+| ZIP | zip_bad_crc | Individual producer outcome unobserved |
+| ZIP | zip_noncontiguous_ranges | Individual producer outcome unobserved |
+| ZIP | zip_declared_and_inflate_caps | Individual producer outcome unobserved |
+| ZIP | download_stream_redirect_auth_bounds | Individual producer outcome unobserved |
+| receiver | postmortem_pair_schema_manifest_binding | Returned passed via receiver control flow; no individual stdout |
+| receiver | postmortem_route_direct_output_binding | Returned passed via receiver control flow; no individual stdout |
+
+Actual targets and numeric observations:
+
+| Fixed target | Artifact ID | Actual inspection stage | fileCount | totalBytes | successReceiptCapAccepted |
+|---|---:|---|---|---|---|
+| positive_prepare / checkpoint | 14032036855 | Not reached after producer controls failure | Unobserved | Unobserved | Unobserved |
+| reduction_prepare / reduction-checkpoint | 14032480638 | Not reached after producer controls failure | Unobserved | Unobserved | Unobserved |
+
+The source-bound actual-target loop follows successful completion of C.runAllControls. The producer marker's controls phase and skipped upload show that this loop/publication path was not reached. Inert controls use internal fixture I/O; this failure supplies no present retained-envelope metadata, raw ZIP digest, receipt count or cap decision. No actual private target archive read was reached by this diagnostic. No historical failure cause, wrong key, provider fault or repaired compatibility is inferred.
+
+Current SMALLSAFE and closed receiver:
+- Artifact list for this run is empty. No current result.json/manifest.json pair was uploaded; artifact ID, uploaded digest, raw ZIP size/hash and result/manifest hashes are null. No artifact download occurred.
+- inspectionComplete is false; historicalCauseProven and receiptAuthenticated are false; every readiness flag is false.
+- Exact closed marker at 2026-11-13T13:26:08.0342074Z (1233 bytes, below 4096 bytes):
+
+```json
+{"marker":"AFW_CUSTODY_POSTMORTEM_READBACK/1","observer":{"repository":"tokenizartinfo-ops/agent-friendly-web","repositoryId":"1347578006","ref":"refs/heads/feat/finite-native-cleanup-20261101","source":"dfd37bd06d8f73bb9d93f70cfb64c03a2f9ac05d","tree":"69c5f31fac6acfefe41c5523f9f3d39fbe8b6f0d","workflowBlob":"499b437599694092a48714ad2bab1b75814b5f73","run":"43433569894","attempt":1,"node":"22.23.4"},"programHashes":{"adapter":"a1e7a28f356cafde6e9486a9bcdb69aaa3fc98e00b928df11f36052bb915d9f3","inspector":"78352e64e6b55c24ae21648907c835c684cbffaf26ecdd868c2b917bd8a6852f","controls":"e724c18928f7fe21791165086d840333b0a1544109b8041b26966b801bbbcc3f","safeZip":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d","receiver":"4d7bf001cef6979bf09bad2a2134ba21bbf4411c9957607439a2e015503ce7d1"},"producerResult":"failure","artifactId":null,"uploadedDigest":null,"status":"unavailable","reason":"needs_unsuccessful","inspectionComplete":false,"rawZipBytes":null,"rawZipSha256":null,"resultSha256":null,"manifestSha256":null,"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Mandatory restoration and preservation:
+- After completed run and both terminal jobs, frozen Source dfd37bd06d8f73bb9d93f70cfb64c03a2f9ac05d, recoverable original F7 and unchanged report prefix were freshly checked.
+- Restoration commit a38d5969a0d52247008ba9a2c22620224446457d has parent dfd37bd06d8f73bb9d93f70cfb64c03a2f9ac05d and EXACT pre-unit closed tree d86acb49d2026d2207eeb35ff97f728dc014e7d9. Source was CAS-restored without force. Original F7 read back byte-exact at f7a71f1a0fa4f5ddf069ff411f008a098455e5cc, 126209 bytes, SHA256 1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a.
+- Before this append: restoration commit had zero runs; activation had exactly one attempt-1 run; queued/in_progress/waiting/requested/pending totals were all zero. Main remained exact 0c9c475b3ebaa970fc11d628b40e50a90cceb727.
+- This is an append to the SAME report only. The entire prior 177489 characters / 177547 bytes remain an exact prefix, prior blob a74aaaee7ac5ab5e3c42cc9d36e0c8395a17b1c6, SHA256 0f0de84240db9b600cc3e75efcbfed5b2cb1b24dba4e9d693bdf295fc4d5344f. All 3195 original leaf type/mode/blob identities other than this report, including original F7 and R1 report, must remain exact; final inventory 3196 leaves / 62 workflows.
+- The final append's immutable commit/tree/report blob and post-publication closure readbacks are returned separately to Root, avoiding self-referential report hashes. No further Source work is released.
+
+Disposition: DONE_WITH_CONCERNS. The ONE diagnostic failed at producer controls before actual target inspection; precise failed control/error remains unknown because only fixed redacted markers were emitted. Retained producer observations and historical causes remain unqualified. FF-I2 actual-key/Native hold is unchanged; no further run, code fix, promotion or PC-off claim follows from this receipt.
