@@ -231,3 +231,282 @@ All five flags remain exactly false:
 ```
 
 **STOP after restoration, this new report and final preservation readbacks. No auto-retry.**
+
+
+# Fix round 1/5 — newly released single KEYLESS qualification
+
+Date: 2026-11-13 UTC. Result: **DONE; covering KEYLESS qualification PASSED; original task review still required; Task 2 HELD**.
+
+This is an explicit new Root release after the preceding failure and independent review, not an automatic retry. The entire preceding 24731-character report, blob `ffe573665eba243be3204c6f1d4ab2c635a6e9df`, is preserved byte-for-byte as this report's prefix. The initial failure, its records and its limitations above are not rewritten.
+
+## Fix authority, boundaries and immutable package
+
+Root released fix round1/5 against immutable Rootdocs `6310892ec62d921f0a839e5256d281d5edc7ffbb`: brief `docs/superpowers/briefs/2026-11-13-coherent-suite-task1-fix1.md`, appended binding SPEC and the full independent F1–F7 review. The aggregate-entry clarification is durable at `0125ad91c808120f087e6f2ebeb6a37c1de8752d`; the minimal finalizePureBinding seam clarification is durable at `1db1028a1ad60c0c1336e20db96c05646acc701d`.
+
+The applicable resource declaration remains PROJECT AFW / REPOSITORY tokenizartinfo-ops/agent-friendly-web / ID1347578006 / Source branch feat/finite-native-cleanup-20261101 / GitHub API origin. Allowed mutations were temporary F7 and append-only SAME suite report, one newly authorized KEYLESS run, exact restoration, preservation readbacks and STOP. Actual Native/World/SDK/Miniflare execution, actual custody key, Cloudflare/runtime, OAuth/OTP, credentials/permissions, main, PR/merge, mail and Max were outside this unit.
+
+| Fix checkpoint | Commit | Tree / F7 |
+| --- | --- | --- |
+| Closed fix BASE | `38ddef2b431af0edbd5286622e4fa5398b845a17` | tree `9ad4552e0136adb5c11d567f1686d56d1b5e24cf`;3196 leaves; report prefix ffe57366 |
+| Inactive fix candidate | `18183bd24aa3cbacb74119e54ef28d6671bd45d5` | tree `c4b49299478ffcb6c76553789d45324398fcb66f`; F7 `d036c941c4f0a4dc8f23e7971feaa89402c4b13c` |
+| Single fix overlay | `a99aa733962e9733294a6ba8755f749e35f26d93` | tree `6192d33f27a95ea4545c90f4437a717f09b32cd4`; F7 `9a36ab33883099f8c9f40349821a7614336e5c86` |
+| Exact restoration | `0f80090e534fec781c2fbd37eda098c71e686f0a` | tree `9ad4552e0136adb5c11d567f1686d56d1b5e24cf`; exact original F7 and report prefix |
+
+Inactive F7: 293584 bytes / SHA256 `d3ae143c3bbd26b3143546306d52db99882aa4e689e67ef28d7ed7ec4520c444`. The complete candidate was remotely preserved, then fetched back and compared exactly. Root independently recomputed the four body hashes from this immutable candidate before the overlay.
+
+| Helper | Bytes | SHA256 |
+| --- | ---: | --- |
+| adapter | 42022 | `b273f0a7e1aae7f9036b02b358dcfae38e977c1826bd79f1e79bee1f244f71ef` |
+| controls | 35122 | `1a74b32453d6efa8443747a9462603cc8bcad5c1c847449c2002fad0b0a703bd` |
+| verifier | 13579 | `d2c800bca5dbe834c957a6d54eb663f809891717df7132cc8819d8821c49fe48` |
+| SAFEZIP | 13305 | `b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d` |
+
+The four helper bodies are exactly the same in inactive candidate and qualification overlay. The fixed four-heredoc Source bootstrap, complete workflow Git-blob binding, protected Source pins, Node22.23.4 and exclusive fixed runner files remain. Both actual KEYLESS bootstraps passed and emitted these exact hashes.
+
+Qualified ZIP3 remains exactly3380 bytes / SHA256 `4ff44bd3adda54eb0816fab275e4b13078005d1bd1a4626cfbf67d31e8bf7af8`. SAFEZIP remains exactly13305 bytes / SHA256 `b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d`. Neither generic body was edited. No R1 typed business oracle was reused.
+
+Complete scoped review references:
+
+- [Closed fix BASE through inactive fix candidate](https://github.com/tokenizartinfo-ops/agent-friendly-web/compare/38ddef2b431af0edbd5286622e4fa5398b845a17...18183bd24aa3cbacb74119e54ef28d6671bd45d5)
+- [Prior inactive candidate through fixed inactive candidate](https://github.com/tokenizartinfo-ops/agent-friendly-web/compare/deff87f240f4e33750b459168d54b80cd6d2d54c...18183bd24aa3cbacb74119e54ef28d6671bd45d5)
+- [Fixed full inactive F7](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/18183bd24aa3cbacb74119e54ef28d6671bd45d5/.github/workflows/afw-finite-budget-qualification.yml)
+- [Exact candidate-to-overlay diff](https://github.com/tokenizartinfo-ops/agent-friendly-web/compare/18183bd24aa3cbacb74119e54ef28d6671bd45d5...a99aa733962e9733294a6ba8755f749e35f26d93)
+- [Overlay-to-restoration diff](https://github.com/tokenizartinfo-ops/agent-friendly-web/compare/a99aa733962e9733294a6ba8755f749e35f26d93...0f80090e534fec781c2fbd37eda098c71e686f0a)
+- [Fix BASE through restoration, exact source equality](https://github.com/tokenizartinfo-ops/agent-friendly-web/compare/38ddef2b431af0edbd5286622e4fa5398b845a17...0f80090e534fec781c2fbd37eda098c71e686f0a)
+
+This append's own final commit/tree are identified by the final CAS/readback delivered to Root, rather than recursively embedded in the report content.
+
+## Finding-to-fix mapping and covering seams
+
+All seven Important findings were implemented and covered by this qualification. None was adjudicated away or parked. Their final disposition belongs to the original independent reviewer's scoped re-review.
+
+| Finding | Concrete source change | Executed covering evidence |
+| --- | --- | --- |
+| F1: mutation self-shadowing | Actual job headers are selected by anchored names; actual steps by unique fixed IDs. Every mutation requires exactly one target, proves the target changed and proves the surrounding Source bytes remained unchanged. Validator helper bodies and hashes cannot substitute for the behavioral target. | Actual B needs and attempt endpoint, actual environment/key step identities, readonly TAP count, B cases and every F8 upload property reject their targeted bad edits. |
+| F2: early pure receipt | New minimal shared finalizePureBinding invokes the unchanged original keyless World verification/profile selection/materialization closure, then exclusively writes the fixed receipt. All six actual pure_binding steps use it. Public projection also requires captured pure_binding success. | Real bindPure succeeds on inert input; rejecting inert original-stage closure produces zero writes; successful closure produces exactly one fixed exclusive0600 write. A leftover valid receipt with failed pure step projects pure=null, and observed Native after failed pure is rejected. |
+| F3: observation/peak/ownership | Original private coherent-proof adds only authenticated observedAt. B captures Date.now once with its successful final inventory, uses that observation for the sweep and stores it. Reopen recomputes peak from the authenticated inventory and exact observedAt, requires captured equality and projects the recomputed peak. Own start<=observation<=sealedAt and every observed peer end<=observation are checked. Actual ownership order is positive_producer,reduction_producer,R1,R2,R3. | Positive private proof accepted; contradictory captured peak2 against computed1 rejected; early/late observation, future peer endings, wrong ownership identities, altered protected clock deltas, overlap and graph inventory rejected. Native-only peak3/4 and tie ordering tested with inert job metadata. |
+| F4: final inventory/nonpass reconciliation | B retains its separate early seven-plus-optional-nonexecuting-receiver rule. Final verifySeven requires exact8 unique jobs with verify in_progress and seven legacy identities. Both Jobs call sites use current-run attempts/1/jobs. New shared reconcileSuite inspects every complete available direct needs assignment even when public proof is null and validates current by-ID metadata without private downloads. | Complete passed route accepted; absent/queued receiver and nonterminal legacy observations produce upstream unverified; terminal failed B produces not_all_seven_success. Nonpass fixture proves all7 available assignments were checked, including5 peers. Missing outputs are never fabricated. Source/run/head/ref/direct-output mismatches reject acceptance. |
+| F5: pair validity vs producer result | Once strict transport/schema is verified, status verified / reason none / strict proof is retained for valid nonpass or unverified upstream. accepted/upstream carry rejection. Receiver-control failure after trusted bootstrap returns the same closed <=4096B unavailable/invalid_evidence/absent record, retaining known SAFE ID/digest and no ZIP claims. | Real route+reconciliation on a valid failed controls pair returns verified/none/strict/acceptedfalse. A direct self-control failure exercises the actual guard, checks retained assignment, null ZIP claim, exact closed failure semantics and byte bound. Actual published passed pair returns acceptedtrue. |
+| F6: untested real decisions | Added adapter projectSuiteOutcome over exact six captured outcomes and validated receipts; actual B publisher calls it. Added verifier reconcileSuite; actual verify calls it with fixed IO. Real validators bind each of26 key steps to its exact job/step, check actual always guards/order/final truth tests, the complete original F8 action block and pure gate wiring. Fixed named subcase phase diagnostics localize failures without public schema changes. | Same publication/route/reconciliation seams exercised with native/aggregate/metadata/open/inner/skipped/cancelled outcomes, retained assignments, all actual26 key scopes, full F8 mutations, publication guard edits, final metadata and schema contradictions. 18 named subcases each logged start+passed. |
+| F7: operation cap/timeout drift | Fixed trusted operation enum: b-peer raw134283264/20000ms; generic-private raw136314880/30000ms; pure134283264/30000ms; SMALLSAFE131072/30000ms. Metadata GET timeout remains10000ms. assignedPrivate own/producer uses generic-private; B's5 peers and raw pure use b-peer. Shared checkedDownloadSize is used by the actual bounded stream collector. | Exact metadata cap accepted/cap+1 rejected for every domain; shared size accumulator accepts exact edge/rejects edge+1 without large allocation; inert streams exercise real reader; injected internal timeout capture proves20000 vs30000. Arbitrary operation rejected. |
+
+M1's elected improvement is implemented within F1/F6: fixed subcase IDs emit only family, ID, phase and false flags. No exception, raw value or private path is emitted. The six-ID public controls DTO remains unchanged.
+
+The fixed internal projection API is:
+
+```text
+projectSuiteOutcome({
+  outcomes:{pureBinding,native,aggregate,ownMetadata,ownOpen,ownValidation},
+  receipts:{pure,assignment,proof}
+}) -> existing exact SuiteResult
+```
+
+Each outcome is success|failure|skipped|cancelled|not_observed. Actual wrapper env bindings read only the six fixed GHA step IDs. Assignment is preserved even after metadata/open/inner failure. A failed pure step cannot confer verification from a leftover file; contradictory observed Native is rejected. Native-step failure remains distinct from the legacy native+aggregate composite used by the original private manifest.
+
+The split aggregate entry now uses scoped always()+!cancelled()+trusted bootstrap+native success, then checks every fixed peer collector/open prerequisite before any World import or aggregate read. A failed prerequisite yields an entered aggregate failure/evidence_unverified; skipped aggregate remains not_observed. It does not fabricate an outcome or call World on missing inputs.
+
+All actual entry points use fixed IO and fixed Source closures. Test capture IO/inert callbacks are internal control seams only; there is no CLI/env path, transport, cap, timeout or fixture override in the actual entry. The unchanged original business oracle remains the real World path; the shared helpers own orchestration, projection, custody and reconciliation decisions.
+
+## Preserved business pipeline and scope
+
+The six original Native/TAP command blocks were compared as complete Source strings and remain byte-for-byte exact. The full original F8 sealer-through-upload block is also exact:19458 bytes/SHA256 `8b239b4a5e7e4d5f424fef645a464e006c039a47763224902c4221bba2666231`; the protected World/F8 literal itself remains unchanged under its original blob pin. F8 controls now check the entire actual block and mutate the real upload action version/name/path/retention/error behavior.
+
+Original seven-job DAG, timeouts, six environments, protected tests/assertions/World, R120s/P-D300s, root30s/child5s, C0=I0+900000 and C1=C0+180000 remain unchanged. No A/positive dependency was added to B. Legacy B composite COMMAND_OK remains Native success AND aggregate success; public command still observes the full original Native+TAP step separately.
+
+All eight actual candidate jobs remain literally false; inactive candidate is manual/no-input/no-push. Existing actual key is confined to26 expected generic crypto steps, with zero job-level key bindings. Pure binding, World semantics, metadata/raw reads, installation, manifest/copy preparation, projection and verifier remain keyless. The original five-lineage/ten-graph/ownership/all-D/overlap/deadline business proof is not replaced with a typed case oracle.
+
+One new private-only observedAt field was authorized; no public timestamp or DTO field was added. The exact original/reopened private proof bytes, captured hash and authenticated reopen path bind that observation. No self-artifact ID is inserted into the private proof.
+
+Generic custody limits and protected modules are unchanged. The operation-specific reader restores the generic-private130MiB raw domain while preserving B's tighter original raw cap and20-second timeout. Pure per-JSON2097152, ZIP3 expanded134225920 and SMALLSAFE combined65536 remain separate.
+
+## Sole fix qualification and exact ten outcomes
+
+[Actions43399028588 / attempt1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43399028588)
+
+- Source `a99aa733962e9733294a6ba8755f749e35f26d93`.
+- Unique message `AFW COHERENT SUITE FIX1 KEYLESS QUALIFICATION 20261113090936Z`.
+- One self-path push on fixed Source branch, attempt1, eight disabled actual jobs plus two active KEYLESS jobs;7+2minute limits.
+- Completed **success**. Exactly10 jobs positively materialized and terminal: **8 skipped + 2 success**.
+- Source remained frozen at this overlay through completion and all10 terminal jobs.
+- No second fix-round run, rerun, cap increase, clock change or actual Native activation occurred.
+
+| Job | Job ID | Outcome |
+| --- | --- | --- |
+| contracts | 131796963528 | skipped |
+| positive_prepare | 131796964335 | skipped |
+| positive_consume | 131796964201 | skipped |
+| reduction_prepare | 131796964223 | skipped |
+| reduction_consume_a | 131796965152 | skipped |
+| readonly | 131796964343 | skipped |
+| reduction_consume_b | 131796965674 | skipped |
+| verify | 131796965512 | skipped |
+| keyless_controls | 131796961734 | success |
+| keyless_verify | 131797057958 | success |
+
+Actual covering commands were executed only on GitHub-hosted Ubuntu:
+
+```text
+# Both jobs: checkout exact Source; setup Node22.23.4.
+test -z "${AFW_SYN_CHECKPOINT_KEY+x}"
+node --input-type=module <<'NODE_SUITE_BOOTSTRAP'
+# Fixed git HEAD/tree/F7/pin reads and builtin hashing; fixed0600 program materialization.
+
+# keyless_controls7min:
+node "$RUNNER_TEMP/afw-suite-controls.mjs"
+# The shell captures its exit, validates exact pair and uploads controls SAFE,
+# then requires controls success + pair status passed + upload success.
+
+# Within fixed_case_counts, inspection only:
+bash -n                         # via spawnSync, each Source run body supplied on stdin
+node --input-type=module --check # inline module bodies on stdin, no imports executed
+node --check "$RUNNER_TEMP/afw-suite-adapter.mjs"
+node --check "$RUNNER_TEMP/afw-suite-controls.mjs"
+node --check "$RUNNER_TEMP/afw-suite-verifier.mjs"
+node --check "$RUNNER_TEMP/afw-suite-safe-zip.mjs"
+
+# Within metadata_custody_binding:
+node --input-type=module -e <fixed generic-custody inert fixture program>
+# Isolated subprocess only; fixed inert32-byte key; generic custody module/builtins;
+# real seal/open equality and corrupted-envelope rejection, captured exit0.
+
+# keyless_verify2min:
+node "$RUNNER_TEMP/afw-suite-verifier.mjs"
+# Unchanged14 ZIP controls +2 receiver seams, then real current SAFE route.
+```
+
+There was no npm/install or unrelated full project suite. This is the explicitly stated covering qualification, not original Native execution. Controls were amended first, then implementation and static self-review; the single authorized cloud run is the executed evidence. No pre-implementation RED or local Source execution is claimed.
+
+## Exact executed outputs, subcases and phases
+
+Wrapper controls: **6 expected / 6 completed / 6 passed / 0 failed**. First failure null. All six fixed inventory IDs passed.
+
+Named subcases: **18 started / 18 passed / 0 failed**,36 phase records; no open start. The table records actual paired phases:
+
+| Family | Fixed subcase ID | Observed phases |
+| --- | --- | --- |
+| dag_peer_inventory | b_inventory_optional_nonexecuting_receiver | start + passed |
+| dag_peer_inventory | actual_b_dependency_and_attempt_endpoint_targets | start + passed |
+| key_scope | all_twenty_six_exact_crypto_step_bindings | start + passed |
+| key_scope | inert_parent_environment_is_restored | start + passed |
+| fixed_case_counts | fixed_pins_native_tap_cases_and_complete_f8_action | start + passed |
+| fixed_case_counts | private_original_clocks_and_owned_case_identities | start + passed |
+| fixed_case_counts | all_rewritten_shell_and_node_bodies_compile_only | start + passed |
+| metadata_custody_binding | metadata_current_identity_and_complete_pure_binding | start + passed |
+| metadata_custody_binding | generic_aead_zip3_and_reopened_proof_bytes | start + passed |
+| metadata_custody_binding | operation_raw_cap_edges_and_b_twenty_second_timeout | start + passed |
+| incomplete_or_contradictory | pure_receipt_commits_after_original_stage_success_only | start + passed |
+| incomplete_or_contradictory | shared_projection_observed_failures_and_retained_assignment | start + passed |
+| incomplete_or_contradictory | actual_publication_guards_order_and_full_pure_gate | start + passed |
+| incomplete_or_contradictory | valid_failed_pair_and_receiver_self_control_failure_record | start + passed |
+| coherent_current_pair | same_full_suite_route_projection_and_final_reconciliation | start + passed |
+| coherent_current_pair | nonpass_reconciles_all_available_assignments | start + passed |
+| coherent_current_pair | final_current_metadata_source_run_and_direct_needs_edges | start + passed |
+| coherent_current_pair | closed_schema_flags_profiles_counts_and_extra_fields | start + passed |
+
+Runner compile-only inspection: **110 shell programs and63 Node programs** passed. Inspected bodies were not executed by those syntax commands. The wrapper helper and inert-control code itself did execute as authorized KEYLESS code. Original World/Native/SDK modules were never imported/executed; no Miniflare allocation or actual key binding occurred.
+
+Separate ZIP/receiver controls: **16 expected / 16 completed / 16 passed / 0 failed**. The injected receiver self-control failure above was a negative wrapper seam test, not an actual failure of these16 controls.
+
+Exact syntax output:
+
+```json
+{"marker":"AFW_COHERENT_SUITE_SYNTAX/1","shellPrograms":110,"nodePrograms":63,"inspectedBodiesExecuted":false,"NativeExecuted":false,"SDKImported":false,"MFAllocated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Exact six-control output:
+
+```json
+{"marker":"AFW_COHERENT_SUITE_CONTROLS/1","status":"passed","expected":6,"completed":6,"passed":6,"failed":0,"inventory":[{"id":"dag_peer_inventory","status":"passed"},{"id":"key_scope","status":"passed"},{"id":"fixed_case_counts","status":"passed"},{"id":"metadata_custody_binding","status":"passed"},{"id":"incomplete_or_contradictory","status":"passed"},{"id":"coherent_current_pair","status":"passed"}],"firstFailure":null,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Exact36 bounded subcase phase records:
+
+```jsonl
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"dag_peer_inventory","id":"b_inventory_optional_nonexecuting_receiver","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"dag_peer_inventory","id":"b_inventory_optional_nonexecuting_receiver","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"dag_peer_inventory","id":"actual_b_dependency_and_attempt_endpoint_targets","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"dag_peer_inventory","id":"actual_b_dependency_and_attempt_endpoint_targets","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"key_scope","id":"all_twenty_six_exact_crypto_step_bindings","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"key_scope","id":"all_twenty_six_exact_crypto_step_bindings","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"key_scope","id":"inert_parent_environment_is_restored","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"key_scope","id":"inert_parent_environment_is_restored","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"fixed_case_counts","id":"fixed_pins_native_tap_cases_and_complete_f8_action","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"fixed_case_counts","id":"fixed_pins_native_tap_cases_and_complete_f8_action","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"fixed_case_counts","id":"private_original_clocks_and_owned_case_identities","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"fixed_case_counts","id":"private_original_clocks_and_owned_case_identities","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"fixed_case_counts","id":"all_rewritten_shell_and_node_bodies_compile_only","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"fixed_case_counts","id":"all_rewritten_shell_and_node_bodies_compile_only","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"metadata_custody_binding","id":"metadata_current_identity_and_complete_pure_binding","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"metadata_custody_binding","id":"metadata_current_identity_and_complete_pure_binding","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"metadata_custody_binding","id":"generic_aead_zip3_and_reopened_proof_bytes","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"metadata_custody_binding","id":"generic_aead_zip3_and_reopened_proof_bytes","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"metadata_custody_binding","id":"operation_raw_cap_edges_and_b_twenty_second_timeout","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"metadata_custody_binding","id":"operation_raw_cap_edges_and_b_twenty_second_timeout","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"incomplete_or_contradictory","id":"pure_receipt_commits_after_original_stage_success_only","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"incomplete_or_contradictory","id":"pure_receipt_commits_after_original_stage_success_only","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"incomplete_or_contradictory","id":"shared_projection_observed_failures_and_retained_assignment","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"incomplete_or_contradictory","id":"shared_projection_observed_failures_and_retained_assignment","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"incomplete_or_contradictory","id":"actual_publication_guards_order_and_full_pure_gate","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"incomplete_or_contradictory","id":"actual_publication_guards_order_and_full_pure_gate","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"incomplete_or_contradictory","id":"valid_failed_pair_and_receiver_self_control_failure_record","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"incomplete_or_contradictory","id":"valid_failed_pair_and_receiver_self_control_failure_record","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"coherent_current_pair","id":"same_full_suite_route_projection_and_final_reconciliation","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"coherent_current_pair","id":"same_full_suite_route_projection_and_final_reconciliation","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"coherent_current_pair","id":"nonpass_reconciles_all_available_assignments","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"coherent_current_pair","id":"nonpass_reconciles_all_available_assignments","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"coherent_current_pair","id":"final_current_metadata_source_run_and_direct_needs_edges","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"coherent_current_pair","id":"final_current_metadata_source_run_and_direct_needs_edges","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"coherent_current_pair","id":"closed_schema_flags_profiles_counts_and_extra_fields","phase":"start","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+{"marker":"AFW_COHERENT_SUITE_SUBCASE/1","family":"coherent_current_pair","id":"closed_schema_flags_profiles_counts_and_extra_fields","phase":"passed","operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Exact ZIP output:
+
+```json
+{"marker":"AFW_COHERENT_SUITE_ZIP_CONTROLS/1","expected":16,"completed":16,"passed":16,"failed":0,"inventory":[{"id":"zip_valid_store_crc_vector","status":"passed"},{"id":"zip_valid_deflate","status":"passed"},{"id":"zip_signed_unsigned_descriptors","status":"passed"},{"id":"zip_wrong_size","status":"passed"},{"id":"zip_wrong_upload_sha","status":"passed"},{"id":"zip_wrong_metadata_sha","status":"passed"},{"id":"zip_extra_entry","status":"passed"},{"id":"zip_duplicate_entry","status":"passed"},{"id":"zip_traversal_entry","status":"passed"},{"id":"zip_symlink","status":"passed"},{"id":"zip_bad_crc","status":"passed"},{"id":"zip_noncontiguous_ranges","status":"passed"},{"id":"zip_declared_and_inflate_caps","status":"passed"},{"id":"download_stream_redirect_auth_bounds","status":"passed"},{"id":"receiver_capture_current_pair","status":"passed"},{"id":"receiver_rejection_no_zip_claim","status":"passed"}],"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+## Current approved controls SAFE and readback
+
+Only one artifact was published by this fix run; no readback artifact was added. The current SAFE contains exactly result.json and manifest.json.
+
+| Field | Observed value |
+| --- | --- |
+| Name | afw-coherent-suite-controls-safe-43399028588-1 |
+| Assigned ID | `14023878021` |
+| Uploaded/API/raw SHA256 | `27f8b22869723dbad9beb1af1a8bf17e91888eefdc150dc0a4ae14c32166ea98` |
+| ZIP bytes | 1389 |
+| Result bytes/SHA256 |1666 / `576af34d977c1c212a97037ba298639c72e100b06491e90a533172627416cce9` |
+| Manifest bytes/SHA256 |265 / `3fae2059958d8147e50937734434024226af0e29e61c8f49972a899e574332fc` |
+| Expiry |2026-11-20T09:10:10Z |
+| Producer status |passed |
+| Pair status/reason/proof |verified / none / strict_current_safe_pair |
+| Accepted/upstream |true / not_applicable |
+
+Root independently downloaded and strictly checked the current ZIP/CRC/digest/canonical JSON/full manifest/context/four program hashes and closed6/6 DTO. Root also independently checked producer job success, exact10 terminal outcomes, the36 paired subcase phases, syntax110/63, ZIP16 and the current readback record.
+
+Exact emitted <=4096B readback:
+
+```json
+{"marker":"AFW_COHERENT_SUITE_READBACK/1","kind":"controls","source":"a99aa733962e9733294a6ba8755f749e35f26d93","run":"43399028588","attempt":1,"artifactId":"14023878021","uploadedDigest":"27f8b22869723dbad9beb1af1a8bf17e91888eefdc150dc0a4ae14c32166ea98","status":"verified","reason":"none","proof":"strict_current_safe_pair","metadataBytes":1389,"metadataDigest":"sha256:27f8b22869723dbad9beb1af1a8bf17e91888eefdc150dc0a4ae14c32166ea98","rawZipBytes":1389,"rawZipSha256":"27f8b22869723dbad9beb1af1a8bf17e91888eefdc150dc0a4ae14c32166ea98","resultBytes":1666,"resultSha256":"576af34d977c1c212a97037ba298639c72e100b06491e90a533172627416cce9","manifestBytes":265,"manifestSha256":"3fae2059958d8147e50937734434024226af0e29e61c8f49972a899e574332fc","expiresAt":"2026-11-20T09:10:10Z","producerStatus":"passed","upstream":"not_applicable","accepted":true,"programHashes":{"adapter":"b273f0a7e1aae7f9036b02b358dcfae38e977c1826bd79f1e79bee1f244f71ef","controls":"1a74b32453d6efa8443747a9462603cc8bcad5c1c847449c2002fad0b0a703bd","verifier":"d2c800bca5dbe834c957a6d54eb663f809891717df7132cc8819d8821c49fe48","safeZip":"b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d"},"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+Only current approved SAFE metadata and bounded KEYLESS records were returned. No actual private artifact, private proof/model/cipher/plaintext, producer logs, actual key or owner data were fetched or exposed. Inert generic custody fixtures stayed runner-only.
+
+## Restoration, append preservation and next gate
+
+Before rollback, completed success and exact10 terminal jobs were positively read. All five Source-branch active status inventories (queued/in_progress/waiting/pending/requested) were0; the frozen tip was still a99aa733. Original F7 was reread from immutable fix BASE and matched its original blob and body before mutation.
+
+Exact restoration commit `0f80090e534fec781c2fbd37eda098c71e686f0a` points to closed fix BASE tree `9ad4552e0136adb5c11d567f1686d56d1b5e24cf`. F7 was independently fetched back as exact `f7a71f1a0fa4f5ddf069ff411f008a098455e5cc`,126209 bytes/SHA256 `1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a`, original manual/no-input/no-push/seven false&& guards. The pre-fix report was also read back as exact ffe57366 /24731-character prefix before this append.
+
+The overlay recursive tree was positively read with truncated:false,3196 leaves, unchanged report prefix and no changes to any of the original3195 leaves except temporary F7. Restoration restores that last leaf exactly. This append changes only the existing suite report leaf, retaining its complete prefix; final target remains3196 leaves. All original3195 BASE leaves/type/mode/blob, all62 workflows and protected R1 report remain exact. Main remains `0c9c475b3ebaa970fc11d628b40e50a90cceb727`. The final report CAS is followed by full current tree/ref/F7/report-prefix/main/62WF/five-active readbacks, delivered compactly to Root. No force or unknown mutation was retried.
+
+Fresh scoped re-review by the original task reviewer is the next gate. The covering run passed, but this writer does not adjudicate F1–F7 closed or release Task2. No actual eight-job run follows automatically. Original Native business cases executed in this unit: **0**. Planned original suite remains Q8+Native8=16 total, distinct from6 wrapper families,18 subcases and16 ZIP controls.
+
+All five flags remain exactly false:
+
+```json
+{"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+**STOP after exact restoration, this prefix-preserving append and final readbacks. Actual Task2 HELD; no auto-retry.**
