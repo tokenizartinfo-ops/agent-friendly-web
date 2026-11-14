@@ -20,7 +20,7 @@ helper6b5b9f8905d77d3f9cd9d89ea3058cfbdd57760f /7927/SHA97dd3df67bfcaef856797573
 D0197111834354a1e911b977a765b161591d48b18 /15604/SHA1c5a30301153ac92deb13efb4b84f4d5888e35fb27ae10e1078c7fb861039851.
 Dtests57dfbcfae29c8492acd1767693cc6fccdde45f7e /10425/SHAf206f685401be501cb9320286dea7638baa8d8f2cac5c6f796b5851da073bf8c.
 A63917B/SHA3c36b155aab486f82fb9b89f55e0b61ffe01be4a7502350391784195e552b6d0; C63195/1f2d53a7ae00b215634c0d6c9aaa40134e725d561d4334ef827ca54a418df261; V15099/94135538ab4fb8fa7f43fc2fe42c64563eb806e436117b4a404c26c855ee35bf; Z13305/b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d EXACT.
-Six original Native command blocks/eightjobs/needs/timeouts/fixedcases/frozenparser+forms/26keyslots6env/caps/clocks/concurrency EXACT. No extra tests/control reruns (Task1/Task2/old32keyscope/14Z not repeated).
+Six original Native command blocks/eightjobs/needs/timeouts/fixedcases/frozenparser+forms/26keyslots6env/caps/clocks/concurrency EXACT. No EXTRA or SEPARATE requalification runs of Task1/Task2/old32keyscope/14Z. Retain ALL checks inherently invoked by the frozen original full pipeline: in particular frozen V runs its14ZIP+2receiver controls once inside this original trial. Do not remove/rewrite V to avoid these checks, and do not count them as business Q8+Native8.
 R120s/P-D300s/root30s/child5s; I0→C0900000ms/C0→C1180000ms; peakNative3/Miniflareperjob2/global6. Q8+Native8=16 total, never call16Native.
 No changes to any other Source leaf; all3201baselineleaves/62WF immutable except transientF7+SAMEreport.
 
