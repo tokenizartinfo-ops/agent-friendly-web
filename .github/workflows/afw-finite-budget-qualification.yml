@@ -16,7 +16,7 @@ concurrency:
 # Candidate integrated Native workflow is fetched as pinned DATA only, never invoked.
 jobs:
   qualify:
-    if: ${{ false && github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.workflow == 'AFW sanitized stage finalfix qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-STAGE-FINALFIX-ONEUSE-20261114' }}
+    if: ${{ github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.workflow == 'AFW sanitized stage finalfix qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-STAGE-FINALFIX-ONEUSE-20261114' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 4
     outputs:
@@ -370,7 +370,7 @@ jobs:
           if-no-files-found: error
           overwrite: false
   verify:
-    if: ${{ false && always() && !cancelled() && github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.workflow == 'AFW sanitized stage finalfix qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-STAGE-FINALFIX-ONEUSE-20261114' && needs.qualify.result == 'success' }}
+    if: ${{ always() && !cancelled() && github.repository_id == '1347578006' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event_name == 'push' && github.workflow == 'AFW sanitized stage finalfix qualification' && github.workflow_ref == 'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101' && github.event.head_commit.message == 'AFW-STAGE-FINALFIX-ONEUSE-20261114' && needs.qualify.result == 'success' }}
     needs: qualify
     runs-on: ubuntu-24.04
     timeout-minutes: 3
