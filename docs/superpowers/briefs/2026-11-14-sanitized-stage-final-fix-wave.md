@@ -1,0 +1,45 @@
+# AFW Sanitized Stage — única ola de fixes finales
+Read this first — it is your requirements, with the exact values to use verbatim.
+
+## Scope and authority
+Project AFW ONLY, repository tokenizartinfo-ops/agent-friendly-web (1347578006). Not Tokenizart/Hermes/FCO/Atelier.
+Source branch feat/finite-native-cleanup-20261101 CLOSED tip3bdefc9189c163173c324ae48c7ebb3ed3de70e8/tree78b93e187ccaab15a7f571005d47446d390870c2.
+main0c9c475b3ebaa970fc11d628b40e50a90cceb727 MUST remain unchanged.
+Prepare INACTIVE/UNATTACHED Git objects only, cloud GitDB. No Source ref attach/run, main merge, provider/runtime/API/OAuth/secrets/environment/permissions/client/Max/mail/browser action. No Source files/npm/builds/containers/local execution. Only own string/byte hashing data is allowed locally.
+Sole implementation worker, NO subagents/reviewers. Read current repo AGENTS progressively. Preserve all unrelated leaves/modes/types and full existing SAMEreport prefix.
+Allowed Source paths: runtime, pure projector +focused tests, D+focused tests, World catch pins ONLY, SAMEreport append, transient originalF7. No business/custody/Native test source/caps changes. New regression fixture only if technically necessary for bounded actual freshchild/FIFO tests, declare exactpath first. No broad refactor.
+
+## Inputs
+Binding spec docs/superpowers/specs/2026-11-13-sanitized-stage-observations-design.md (latest Rootdocs; finalfix amendment authoritative).
+Complete final findings docs/superpowers/reviews/2026-11-14-sanitized-stage-plan-final-review.md.
+Plan and ledger docs/superpowers/{plans,progress}/2026-11-13-sanitized-stage-observations.md.
+Task2 full qualifier/candidate package: docs/superpowers/reviews/2026-11-14-sanitized-stage-task2-review-package.md @fde9a7bf (full exact SHA discover immutable Git object) and SAMEreport at Source3bdefc91. Do not read entire planhistory by default.
+Last qualified inactive Native8 candidate DATA2c390b182f6889e79480e7b1618f41af8d1e0d22, F753d9732130e96e75aa5e26038ac8b162c6032b30/367124B/SHA70ebdecad41f59b12f4057aa5607b715e75b1f828c38368c7c960fa1617e0553.
+Its A/C/V/Z body hashes 3c36b155aab486f82fb9b89f55e0b61ffe01be4a7502350391784195e552b6d0 /1f2d53a7ae00b215634c0d6c9aaa40134e725d561d4334ef827ca54a418df261 /94135538ab4fb8fa7f43fc2fe42c64563eb806e436117b4a404c26c855ee35bf /b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d.
+Previous ZERO-KEY qualifier task2 Q/S/V/Z is Sourceb07d1b65d6e448eb353f79e31bffc3ccecdb1182/F7e3419cde630aeabb72f0d8d2e45a1f6f22f73750, completed run43606148496/1. Use as data template, NEVER reattach/rerun.
+Fresh Node22.23.4, locked npm install scripts disabled GitHub ONLY if required for existing frozen AST parser; no SDK/World/native execution, no AFWkeys/environments.
+
+## Accepted findings to fix together
+I1 runtime:68 defaultformatter can coerce CallSite Symbol.toPrimitive aftercapture.
+BINDING ROOT DECISION: decline ALL lazy stack accessor reads. Keep runtime module path/export readNativeStack as tiny refusal (fixed null sentinel; don't inspect input, capture globals, invoke getters/formatter/hooks, or mutate globals). P DATA-stack/log contracts remain. Real VM Error/AssertionError without explicit DATAstack now MUST return unknown/siteunknown and hookcounter0. Adjust d12/d13 positive finite-site assumptions explicitly; don't claim original native-site coverage. Existing allunknown negative oracle must still fail meaningful supported DATA positivecases; report actualcounts, do not reuse14fail count blindly.
+I2 projector:25–54 native multiline message/name/codedheader can forge first frame. Validate own descriptor safety and reject header fields with newline/CR or unsafe values without getters/coercion. In malformed/ambiguousheader return unknown. Cover real Error and DATA-stack variant, name/message/code multiline, plus customgetter/proxy zero counters. Do not introduce rawtext output, extra sites/codes, or arbitrary paths.
+I3 D:100 add O_NONBLOCK to O_RDONLY|O_NOFOLLOW; keep fullparent/inode/identity/nlink/regularchecks BEFORE anyread. Regression must substitute real FIFO withoutwriter afterlstat and beforeopen in owned GitHub tempdirectory and prove boundedexit with independentexternalchild timeout. Mockedflag assertion alone insufficient; no FIFO/network/Sourcecode tests locally.
+I4 ONLY three diagnosticproducer pairs in inactive Nativecandidate: summary_pair+summary_upload in positive_prepare/reduction_prepare/readonly get continue-on-error:true (6steps). Preserve existing upload condition checking pair.outcome ==success. Keep all actual_outcome truthassertsteps and original Nativecommands exact, every other outcome semantics unchanged. Assignment missing/uploadfail→unavailable, no history/namefallback. Zero-key actual A/form/AST integration must admit changed YAML, assert all6flags/guard/outputbindings and failurepolicy pair/upload. No need repeat whole consumed Native trial.
+I5 legacy() normalize all recognized class/code/header-message codes to semantic enums; ANY conflicting recognizedclaim poisons whole legacyobservation, even with otherwise-valid canonicalmarker. AssertionError impliesassertion, CustodyError requires exactcustodycode/no explicitcode, generic Error can accept single consistentknowncode. Don't silently dropconflictingheader then acceptcanonical. Keep normal Error/AssertionError/CustodyError observedformats.
+M1 partialprefix checks only physicalfirst/lastnonemptyedge (settle exact definition and document); interior noise A between completevalidlines shouldn't invalidate; prefix atfirstedge stilltypedtruncated. No readcap growth.
+
+## Frozen invariants
+Original8DAG/jobs/needs/timeouts/clocks/concurrency; all6Nativeblockbytes; 26crypto refs6env; original businesskeyparser/forms unchanged except enumerated pinripple. A only existingmarkers+Worldpin; CWorldpin; V/Z byteexact. New changes I4 are wrapperonly. Stage schema/context/enums/16KiBcombined/assignedIDprojection unchanged. Native/source clocks and custodycaps unchanged.
+All7 false: historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified.
+Productionentryfixed logs only; absence AFW_SYN_CHECKPOINT_KEY and GH_ARTIFACT_TOKEN; no network/World/SDK/Native/AES/secret for sanitizer; no raw messages/paths/stacks/headers/logs/privatearchives exposed.
+Source restores originalF7 f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a after any later authorizedqualification. Every other undeclaredleaf exact,62WF.
+SAMEreport docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md baseblob2a73df3c961ee9166d41eec82c2bf723b99d68b9/445242B/SHA581d2d50c3ace260d3d64856a8a30cec4895affddaaeda30bdad1ae5cbbb2789. Preserve ENTIREprefix (not only oldbyte368869).
+No changes to business test/native/custody frozen files. Run43608448872 consumedFAILED/business16notaccepted, no replay.
+
+## Deliverable FIRST: inactive DATA proposal and cloud qualification carrier
+Implement all6findings and focusedregressions in unattachedobjects. Generate updated inactiveNative8candidate from2c390 with ONLYnewpinripple+6COE flags (and existingTask3startupabsenceguards if selectingcurrent startup template; declare exactbasis soRootreconstructs).
+Prepare ZERO-KEY qualification F7 separate fromnativecandidate, alljob guards FALSE and new exact message AFW-STAGE-FINALFIX-ONEUSE-20261114. Use bounded smallpair/result+manifest, currentcontext/exactpins/declaredcaseIDs/counts, existingstrictZbyteexact, verifierbindsuploader/metadata/raw. Qualification should run changedhelper/D focusedtests and actualA/parser/wrapperintegration with requiredregressionoracles; no duplicate Task1/Task2 native/producer/cloud trials.
+A meaningful RED regression control should exercise OLDbug for eachchangedbehavior, notfaildueto missingimport. Could run oldruntime/P/D againstnewregressions safely isolatedchildren understrictbudget toproveexpectedfailedchecks+hookcounts. Ensure no secret/network/outboundsink. GREEN fullypasses; allunknownoracle remainsmeaningful for supportedDATA. Specify plannedtests/IDs/counts inreport BEFOREexecution.
+No actual run yet. Parent3bde (or declaredinactivechain). Return exactcommit/tree/F7/newmodules/tests/World/candidate pins, precisefullfilediffinventory, reportpath/ownreport append, expectedtestcommand+counts. Root independentlygates activeunattached, thenoneuseSourceCAS separately.
+Ifneededchangeisoutsideenumeratedscope, reportNEEDS_CONTEXTwithminimaldecision; don'tguess/pushactive.
+Full worker report in docs/superpowers/reports/2026-11-14-sanitized-stage-final-fix-wave.md as inactiveGitobject; include fullpublicdiffreviewpackage or exactreferences, testsplannedvsactual, limitations and any concerns. Return compactstatus, immutablecommitrefs/testplan/concerns. Do not writeRootdocs ref.
