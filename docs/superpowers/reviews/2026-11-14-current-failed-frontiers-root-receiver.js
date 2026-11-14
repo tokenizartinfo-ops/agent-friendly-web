@@ -1,4 +1,4 @@
-function(record,context,schema){
+export function receive(record,context,schema){
  const need=(v,m)=>{if(!v)throw Error("frontiers:"+m);};
  const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
  function walk(v,s,p="$"){
@@ -16,7 +16,7 @@ function(record,context,schema){
  }
  need(typeof record==="string"&&/^[\x20-\x7E]*$/.test(record)&&record.length<=16384,"wire");
  const r=JSON.parse(record);need(JSON.stringify(r)===record,"canonical");walk(r,schema);
- need(r.source===context.source&&r.run===String(context.run)&&r.job===context.job&&r.attempt===1,"binding");
+ need(r.source===context.source&&r.run===String(context.run)&&r.job===context.job&&context.attempt===1&&r.attempt===context.attempt,"binding");
  need(r.sourceTree===null||r.sourceTree===context.tree,"tree");
  need(r.profile.group===(r.job==="readonly"?"readonly":"positive"),"group");
  for(const k of["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"])need(r[k]===false,k);
@@ -33,7 +33,7 @@ function(record,context,schema){
  if(n.ended===true)need(n.started===true,"ended");
  if(n.exitCode!==null)need(n.ended===true&&n.signal==="none","exit");
  need(!p.worldRestored||p.overlayInstalled===true,"restore");
- if(r.job==="positive_prepare"){need(r.readonly===null&&r.inventory===null,"positiverole");if(r.positive)need(n.started===true&&r.positive.error.wrapperFailureType==="unknown","primarywrapper");}
+ if(r.job==="positive_prepare"){need(r.readonly===null&&r.inventory===null,"positiverole");if(r.positive){need(n.started===true&&r.positive.error.wrapperFailureType==="unknown","primarywrapper");need(n.exitCode!==0,"primaryexit");}}
  else{need(r.positive===null&&!r.headroom.checked&&!r.headroom.admitted&&r.headroom.elapsedMs===null,"readonlyrole");}
  if(r.readonly){
   const q=r.readonly;need(same(q.rows.map(x=>x.case),["R1","R2","R3"]),"caseids");
@@ -54,6 +54,7 @@ function(record,context,schema){
  if(r.inventory){
   const x=r.inventory;need(r.job==="readonly"&&n.started===true&&x.filesCap===4096&&x.bytesCap===536870912,"inventoryscope");
   need(!x.hashFiles&&x.newRunOnly&&!x.openedFileStabilityProved,"inventoryclaims");
+  if(["complete","first_limit"].includes(x.state)){need(Number.isSafeInteger(x.prefixFiles)&&x.prefixFiles>=0&&x.prefixFiles<=4096,"prefixfiles");need(Number.isSafeInteger(x.prefixBytes)&&x.prefixBytes>=0&&x.prefixBytes<=536870912,"prefixbytes");}
   if(x.state==="complete")need(x.complete&&x.firstLimit==="none"&&x.firstLimitRegion==="none"&&x.attemptedOrdinal===null&&x.nextBytes===null&&!x.nextBytesClipped,"completeinventory");
   if(x.state==="first_limit"){
    need(!x.complete&&["files","bytes","both"].includes(x.firstLimit)&&x.firstLimitRegion!=="none"&&x.attemptedOrdinal===x.prefixFiles+1&&x.nextBytes!==null,"limit");
@@ -61,12 +62,12 @@ function(record,context,schema){
    need(x.firstLimit===(fs&&bs?"both":fs?"files":bs?"bytes":"none"),"dimension");
    need(!x.nextBytesClipped||x.nextBytes===536870913,"clipping");
   }
-  if(x.state==="unknown")need(!x.complete&&x.firstLimit==="unknown"&&x.firstLimitRegion==="unknown","unknowninventory");
+  if(x.state==="unknown")need(!x.complete&&x.firstLimit==="unknown"&&x.firstLimitRegion==="unknown"&&x.prefixFiles===null&&x.prefixBytes===null&&x.attemptedOrdinal===null&&x.nextBytes===null&&!x.nextBytesClipped,"unknowninventory");
  }
  if(r.stage==="complete"){
-  need(n.started===true&&n.ended===true&&n.signal==="none"&&p.worldAfterVerified,"complete");
-  if(r.job==="positive_prepare")need(p.worldRestored===true&&(n.exitCode===0||r.positive!==null),"positivecomplete");
-  else need(r.readonly?.valid===true&&r.inventory!==null,"readonlycomplete");
+  need(n.started===true&&n.ended===true&&n.signal==="none"&&Number.isSafeInteger(n.exitCode)&&n.exitCode>=0&&n.exitCode<=255&&p.worldAfterVerified,"complete");
+  if(r.job==="positive_prepare")need(p.worldRestored===true&&(n.exitCode===0?r.positive===null:r.positive!==null),"positivecomplete");
+  else need(r.readonly?.valid===true&&r.inventory!==null&&["complete","first_limit"].includes(r.inventory.state),"readonlycomplete");
  }
- return{record:r,diagnosticComplete:r.stage==="complete",nativeBusinessPassed:n.ended===true&&n.signal==="none"&&n.exitCode===0,operationalReadiness:false,PCoff:false};
+ return{record:r,diagnosticComplete:r.stage==="complete",nativeCommandExitedZero:n.ended===true&&n.signal==="none"&&n.exitCode===0,operationalReadiness:false,PCoff:false};
 }
