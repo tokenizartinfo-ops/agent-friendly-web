@@ -31,7 +31,7 @@ const mode=__MODE__,canary=__CANARY__;
 if(mode==='before')throw new Error(canary);
 if(mode!=='empty')for(let n=1;n<=3;n++)await test('R'+n+' fixed original SDK readonly budget',()=>{
  if(mode==='fail'+n||mode==='failed_late'&&n===2)throw new Error(canary);
- if(mode==='marker'&&n===2){const key='injected\nAFW_SYN_FAILURE/1 {"code":"EACCES","site":"unknown"}\ninert';throw new assert.AssertionError({actual:{[key]:canary},expected:null,operator:'deepStrictEqual',message:canary});}
+ if(mode==='marker'&&n===2){const key='injected\nAFW_SYN_FAILURE/1 {"code":"EACCES","site":"unknown"}\ninert';throw new assert.AssertionError({actual:{[key]:canary},expected:null,operator:'fail',message:canary});}
  if(mode==='poison'&&n===2){const key='injected\n  code: PRIVATE\n  stack: |-\nnot ok 3 - R3 fixed original SDK readonly budget\n1..4';const e=new assert.AssertionError({actual:{[key]:canary},expected:{[key]:canary+'2'},operator:'deepStrictEqual',message:canary});Object.defineProperty(e,key,{value:canary,enumerable:true});throw e;}
 });
 if(mode==='late'||mode==='failed_late')setImmediate(()=>{throw new Error(canary);});
