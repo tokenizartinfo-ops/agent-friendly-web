@@ -16,7 +16,7 @@ concurrency:
 # No environment, secrets context, private artifact transport, key or full16 attempt.
 jobs:
   positive_prepare:
-    if: ${{ false && github.event_name == 'push' && github.event.head_commit.message == 'AFW-CURRENT-FAILED-FRONTIERS-ONEUSE-20261114' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'AFW-CURRENT-FAILED-FRONTIERS-ONEUSE-20261114' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -125,7 +125,7 @@ jobs:
           const text=JSON.stringify(result);if(Buffer.byteLength(text)<=16384)console.log('AFW_CURRENT_FRONTIERS/1 '+text);
           AFW_FRONTIER_FINAL_OUTPUT
   readonly:
-    if: ${{ false && github.event_name == 'push' && github.event.head_commit.message == 'AFW-CURRENT-FAILED-FRONTIERS-ONEUSE-20261114' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'AFW-CURRENT-FAILED-FRONTIERS-ONEUSE-20261114' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
