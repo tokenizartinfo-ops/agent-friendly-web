@@ -121,3 +121,8 @@ Task3 brief docs/superpowers/briefs/2026-11-14-sanitized-stage-observations-task
 
 ## Task3 clarification before proposal
 Root reading frozenV confirms it inherently invokes14ZIP+2receiver controls. Ruling: 'do not repeat' prohibits extra/separate qualifier units, NOT checks already embedded in frozenoriginalwholetrial. KeepV exact and its16receivercontrols once; businesscount remainsQ8+Native8=16separate. This resolves an internal brief ambiguity without any Sourcebehaviorchange. Costifwrong: onlyreportcount distinction; no skippedfrozencheck or newrun. Task3brief updated before candidate gate.
+
+
+## Task3 inactive gate PASS — 2026-11-14
+Root primarycommit16d7c94e641a039fe5bf4c66b8bf00bbaa1cfeda/treeb5924f655522da74c046dad98a44fa60edcd03c2,parent77cff. F71e4c2f5e/367388B/SHA33473971… and report5f96b5c8/414375B/SHA45646ee3… independentlyhashed. Complete3201leaves/62WF, exactlyF7+SAMEreport, ENTIRE398970Bprefix preserved. ExactwholeF7 reconstruction fromqualified2c390 proves ONLY8messageliterals and8bootstrapNODE_OPTIONSabsenceguards; ALL4A/C/V/Zbodies and allothertext exact,8falseguards remain. Thus6Nativeblocks/26keyslots6env/8DAG/clocks/caps unchanged. NoSourceexec/newtests/Native/providers.
+Root authorizes ONLY ACTIVE UNATTACHED proposal, parent16d7c94e, exactmessageAFW-STAGE-TASK3-NATIVE-ONEUSE-20261114. Remove ONLY8falseguardprefixes; allothertext/programs/pins/report identical. SourceCAS/run stillHELD until independentactivegate. OriginalSourceclosed77cff/main0c9 restorationrefs and allsevenfalse nonclaims maintained. ActualnewSourceparser/Q8/Native8 acceptance remainsunverified; no inference fromproposal.
