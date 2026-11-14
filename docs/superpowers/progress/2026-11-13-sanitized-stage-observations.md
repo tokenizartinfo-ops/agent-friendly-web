@@ -159,3 +159,7 @@ Source3bde/main0c9/Rootdocs12de primary15:55UTC unchanged; relay17688same. Prepa
 
 ## Fase1 siguiente readonly — solo lectura
 Registro: docs/superpowers/progress/2026-11-14-readonly-investigation-phase1.es.md. No causaidentificada ni cambiodecaps. PreferirfuturaobservaciónTAP/guardcategoryyensayoreadonlyenfocado; no repetirwhole8idéntico. NingúnnuevoSource/Native/runtime release. Finalfixwavepreparaciónsigueindependiente.
+
+
+## I4 clarification / Ruling — 2026-11-14
+Ruling: preserve exact safe-id/safe-digest expressions and frozen A forms. The original finding requires diagnostics not to fail business jobs and absent assignment to be unavailable; it does not require suppression of a valid artifact left by a step that later fails. My brief's unqualified 'uploadfail→unavailable' was broader than that contract and conflicted with exact bindings. Missing/invalidoutputs→unavailable. A failed step with validliteral ID/digest can yield assigned, but assigned means only outputprovided; it proves neither uploadsuccess nor contentvalidity. Root current metadata/uploader/rawZIP/schema/manifest checks remain mandatory and failclosed. Add bounded fixture for that distinction; no alternateartifact/historyfallback. Cost if wrong: attempt to inspect one bounded assigned pair from a failed diagnosticupload; inconsistent/missing evidence is rejected and no business/runtime authority follows. No A-form expansion, newoutputs or secrets.
