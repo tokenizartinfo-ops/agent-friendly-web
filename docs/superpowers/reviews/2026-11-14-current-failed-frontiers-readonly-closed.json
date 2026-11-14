@@ -1,0 +1,156 @@
+{
+  "at": "2026-11-14T22:43:57.3039920Z",
+  "jobId": 132613611085,
+  "diagnosticComplete": true,
+  "nativeBusinessPassed": false,
+  "record": {
+    "purpose": "afw.current-failed-frontiers.safe.v1",
+    "sourceBase": "c8b913225716b9c8be06b649f7f275265f99a71e",
+    "source": "f56e4f18b8ae77ea3e3a4cb29b230a022e9ff1ca",
+    "sourceTree": "e3ad9031bd3de0ed69f06a2e48d63dbae8785301",
+    "run": "43649183563",
+    "attempt": 1,
+    "job": "readonly",
+    "node": "22.23.4",
+    "stage": "complete",
+    "controls": {
+      "passed": true,
+      "count": 10,
+      "expected": 10
+    },
+    "pure": {
+      "passed": true,
+      "cases": 8,
+      "expected": 8
+    },
+    "profile": {
+      "passed": true,
+      "group": "readonly"
+    },
+    "headroom": {
+      "checked": false,
+      "elapsedMs": null,
+      "admitted": false
+    },
+    "native": {
+      "started": true,
+      "ended": true,
+      "exitCode": 1,
+      "signal": "none",
+      "instrumentedWorld": false
+    },
+    "positive": null,
+    "readonly": {
+      "purpose": "afw.current-frontiers.readonly-stream.v1",
+      "state": "case_failure",
+      "valid": true,
+      "ended": true,
+      "summary": {
+        "counts": {
+          "cancelled": 0,
+          "failed": 3,
+          "passed": 0,
+          "skipped": 0,
+          "suites": 0,
+          "tests": 3,
+          "todo": 0,
+          "topLevel": 3
+        },
+        "success": false
+      },
+      "rows": [
+        {
+          "case": "R1",
+          "result": "failed",
+          "error": {
+            "wrapperFailureType": "testCodeFailure",
+            "causeCode": "ERR_ASSERTION",
+            "causeClass": "AssertionError",
+            "operator": "strictEqual",
+            "actual": false,
+            "expected": true
+          }
+        },
+        {
+          "case": "R2",
+          "result": "failed",
+          "error": {
+            "wrapperFailureType": "testCodeFailure",
+            "causeCode": "ERR_ASSERTION",
+            "causeClass": "AssertionError",
+            "operator": "strictEqual",
+            "actual": 0,
+            "expected": 1
+          }
+        },
+        {
+          "case": "R3",
+          "result": "failed",
+          "error": {
+            "wrapperFailureType": "testCodeFailure",
+            "causeCode": "ERR_ASSERTION",
+            "causeClass": "AssertionError",
+            "operator": "==",
+            "actual": false,
+            "expected": true
+          }
+        }
+      ],
+      "firstFailure": {
+        "target": "R1",
+        "error": {
+          "wrapperFailureType": "testCodeFailure",
+          "causeCode": "ERR_ASSERTION",
+          "causeClass": "AssertionError",
+          "operator": "strictEqual",
+          "actual": false,
+          "expected": true
+        }
+      },
+      "precase": null
+    },
+    "inventory": {
+      "state": "complete",
+      "prefixFiles": 128,
+      "prefixBytes": 299327164,
+      "attemptedOrdinal": null,
+      "nextBytes": null,
+      "nextBytesClipped": false,
+      "filesCap": 4096,
+      "bytesCap": 536870912,
+      "firstLimit": "none",
+      "firstLimitRegion": "none",
+      "complete": true,
+      "hashFiles": false,
+      "newRunOnly": true,
+      "openedFileStabilityProved": false
+    },
+    "provenance": {
+      "coreVerified": true,
+      "worldBeforeVerified": true,
+      "overlayInstalled": false,
+      "overlayVerified": false,
+      "worldRestored": false,
+      "worldAfterVerified": true,
+      "originalWorldBlob": "1e18873791e0520fff611e353232e38786c51941",
+      "overlaySha256": "dc3dde82b2e89cf1f6d1b3127c01ed86f108ceafbd80f51edb9f33d9e2e018dd"
+    },
+    "representation": {
+      "newRunOnly": true,
+      "originalWorkflowResident": true,
+      "originalTAPRedirection": true,
+      "diagnosticsOutsideInventory": true,
+      "custodyKeyLogAbsent": true,
+      "priorArtifactBindingLogAbsent": true,
+      "currentPureProfileGenerated": true,
+      "historicalByteEquivalence": false
+    },
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
