@@ -3845,3 +3845,127 @@ Future Root-only gate, NOT worker permission: one fresh SourceCAS/head/run/attem
 Rollback remains exactoriginalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a plus allundeclaredSourceleaves. Only after all8 positivelyterminal, Root obtains freshlease, restores those bytes/tuples, and appends actualreceipt after the ENTIRElatestSAMEprefix. Finalreadback requires Source/main, finalclosedhead0runs, consumedheadexact1run/attempt1, all5activestatuscounts0,3202leaves/62WF. ActualTask2 closes when consumedandclosed; it does not establish businesssuccess. SeparateTask2 review and broadfinalplanreview remain Root-owned.
 
 All7nonclaims remainfalse: historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified. Newreadonly observations are unauthenticated hints only: exact11key resultpurpose afw.readonly-boundary-observations.syn.v1 and4key manifestpurpose afw.readonly-boundary-observations.manifest.syn.v1,9fieldcontext/jobreadonly,16KiB,canonicalLF,oldclosedenums. No currentprovider/receipt-authentication/PCoff or completePackage claim. Full preparation proof is a SEPARATE bounded unattached report, never an attachable Source leaf. NEEDS_ROOT_GATE.
+
+
+# Task2 actual focused readonly observation — Root report
+
+2026-11-14. Observationtask completed execution/receipt/restoration; scopedreview pending. Productreadiness NOT achieved. All7false.
+
+## Actual one-use run and all eight terminal jobs
+Released oneCAS e8f7bc25→02f3b4b5c2d44d17540ac64396781bb8e010f5bf, exactFOCUSEDmessage. Run43625982576/attempt1 completedFAILURE. No rerun. ActiveSource02f3/tree80536afc23fd696fd8b96fffae68751520b8c505/F7e1f21aecb17e09ce3dc7bc1adb95a92efd1d40a8/367604B/SHA35af07f6af643a64a135ef508d22d1a6e1eab6172ef91ba35a076dc405a10dc2. Onlycontracts/readonly/verifyactive; fiveothersheld/alleightdeclared.
+
+| Job | ID | Conclusion | Started UTC | Completed UTC |
+|---|---|---|---|---|
+| contracts | 132541773908 | success | 2026-11-14T18:19:53Z | 2026-11-14T18:20:53Z |
+| readonly | 132542092985 | failure | 2026-11-14T18:20:57Z | 2026-11-14T18:26:05Z |
+| positive_prepare | 132542094595 | skipped | 2026-11-14T18:20:54Z | 2026-11-14T18:20:53Z |
+| reduction_prepare | 132542094659 | skipped | 2026-11-14T18:20:54Z | 2026-11-14T18:20:53Z |
+| reduction_consume_a | 132542094811 | skipped | 2026-11-14T18:20:54Z | 2026-11-14T18:20:53Z |
+| positive_consume | 132542095084 | skipped | 2026-11-14T18:20:54Z | 2026-11-14T18:20:53Z |
+| verify | 132543631030 | failure | 2026-11-14T18:26:06Z | 2026-11-14T18:26:13Z |
+| reduction_consume_b | 132543632519 | skipped | 2026-11-14T18:26:05Z | 2026-11-14T18:26:05Z |
+
+All8positivelyterminal before anySourcewrite. GitHubskipmetadata for4jobs hasend1secondbeforestart; preservedliteralAPIvalues, no causalinference. contractsSUCCESS. readonlyFAILURE at finalPreserve actual command and custody outcome; its preceding evidence collection/seal/upload/ownmetadata/open/manifestvalidation/diagnosticpair/uploadstepsSUCCESS. These stepconclusions do NOT establish bareNodeCLI or businesssuccess. verifyFAILURE at Verify all seven current direct outputs and the current SAFE pair is expectedwithfiveSKIPPED; V/truthassertions unchanged, no16claim.
+
+## Literal current assignments and bounded observation
+Finalverifyonly safeassignment read; no privateNative joblog/checkpointarchive. Exact3rowassignment: positive_prepareunavailable; reduction_prepareunavailable; readonlyassigned14126013469/digestc4a7566eefd46aa77f606b40622a9d80f50d7219ed470f00d1a595a5a2d13dc2. No history/namefallback. ArtifactAPI metadata viafilteredrunwrapper boundliteralID/currentrun/head/repository/branch/name/expiry. RawZIP1283B/SHA c4a7566eefd46aa77f606b40622a9d80f50d7219ed470f00d1a595a5a2d13dc2 matchesuploader-derivedassignment andAPI digest. Root own strictmemoryZIPaudit: exacttwoJSON, ranges/EOCD/CRC/size/decompressioncaps/fatalUTF8/canonicalLF; newpurpose/context/job/fields/enums/16KiB/manifest/nonclaims validatedindependently. result1383B/SHAe82af2fcdef20701ec200d249e91a5b29bb556f434c9e81702ec477e11a08a5b/CRC749e5a91; manifest561B/SHA71ab1c31653160b71479a2c201abe7891f236f8de51d7c2081d2d209f0ce85b4/CRCd10467cb.
+
+Closedcanonicalresult, safeonly:
+```json
+{
+  "purpose": "afw.readonly-boundary-observations.syn.v1",
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "repositoryId": "1347578006",
+    "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+    "source": "02f3b4b5c2d44d17540ac64396781bb8e010f5bf",
+    "tree": "80536afc23fd696fd8b96fffae68751520b8c505",
+    "workflowBlob": "e1f21aecb17e09ce3dc7bc1adb95a92efd1d40a8",
+    "run": "43625982576",
+    "attempt": 1,
+    "node": "22.23.4"
+  },
+  "job": "readonly",
+  "rawOutcome": "failure",
+  "logs": [
+    {
+      "log": "command",
+      "availability": "available",
+      "code": "unknown",
+      "site": "unknown"
+    },
+    {
+      "log": "seal",
+      "availability": "available",
+      "code": "unknown",
+      "site": "unknown"
+    },
+    {
+      "log": "metadata",
+      "availability": "available",
+      "code": "unknown",
+      "site": "unknown"
+    },
+    {
+      "log": "count",
+      "availability": "missing",
+      "code": "unknown",
+      "site": "unknown"
+    }
+  ],
+  "stage": {
+    "state": "not_observed",
+    "stage": null
+  },
+  "http": null,
+  "countCheck": "not_observed",
+  "tap": {
+    "state": "first_failure",
+    "cases": [
+      {
+        "id": "R1",
+        "result": "not_ok",
+        "directive": "none"
+      },
+      {
+        "id": "R2",
+        "result": "unknown",
+        "directive": "none"
+      },
+      {
+        "id": "R3",
+        "result": "unknown",
+        "directive": "none"
+      },
+      {
+        "id": "native_file",
+        "result": "unknown",
+        "directive": "none"
+      }
+    ],
+    "counts": null
+  },
+  "custodyLimit": {
+    "state": "not_observed",
+    "guard": null
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
+```
+
+Whatthisestablishes: firstliteralTAPfailure R1 not_ok. R2/R3/native_fileUNKNOWN under intentionalprefix-onlyrule; countsnull. It doesnot establish theiractualresults, exactfailurecode/site/AssertionError/timeout or businesscause. rawOutcomefailure is the existingcompoundNative/count outcome, not a bareNodeexitclaim. command/seal/metadataavailable withunknowncode/site; countlogmissing. No custody_limit observedinthisboundedsealprojection, butthis doesnot retrospectivelyresolvepriorquotaevent. stage not_observed/httpnull/countChecknot_observed; no HTTP200inference from successstepmetadata. All7false.
+
+## Exact restoration and Source preservation
+OriginalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a restored ONLYafterall8terminal at 6183fa4fb47d50972325576f81a64d2374a563e8/tree4ccfa2a06129b074ae81ec777370ca41d768b790. FreshSourceCAS lease02f3; no Sourcewritesduringrun. Root readbackfulltree vsTask1closed e8f7 showedONLYSAMEproposalchange,3202leaves62WF; D ea30/newtest5ebe/othercode untouched. Source/main0c9, consumedheadexact1run/attempt1 andfiveactivecollections0 checked18:29:25UTC. Root then appends thisactualreport afterENTIRElatestSAME479839B/blob06a70dae615c4dc83e0cede128a51091a73a119b/SHA90eabb3497d216ded783a3e0c3bd1dc588d0fc65295521322e886478bdfc34ef. Finalreportheadreadback/0runs willbeaddedseparately; not presumedhere.
+
+No realCF/provider/runtime/OAuth/cron/Containers/subscriptions/permissions/newkeys/customer/Max/mail/browseraction. GitHubclosedSYN SourceSDKemulation only, existinglabkeyscopedslots. No localSourceimport/eval/test/npm/build/clone/model. Allnonclaimsfalse: historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified.
+
+NextafterTask2scopedreview andonefinalwholeplanreview: cause-specificR1investigation frompublicSourceandboundednewevidence, withnewplan ifchangesneeded. No blindbudget/cap/credential/providerchanges, no repeatofconsumed43625982576.
