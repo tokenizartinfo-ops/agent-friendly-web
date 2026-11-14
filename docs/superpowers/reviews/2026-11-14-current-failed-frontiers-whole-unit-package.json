@@ -1,0 +1,288 @@
+{
+  "description": "Bounded causal diagnostic for failed positive_prepare and all readonly cases plus numeric keyless inventory. Diagnostic unit only, not AFW readiness.",
+  "base": "c8b913225716b9c8be06b649f7f275265f99a71e",
+  "inactive": "aba24397f270829bc0c1045706897b9b4971463d",
+  "active": "f56e4f18b8ae77ea3e3a4cb29b230a022e9ff1ca",
+  "originalF7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+  "coreTupleHash": "9e71af5d23fca660569f5c4c90ca202152c7f22d1b3a39a5be8bc24426c92304",
+  "rootDocs": "7d0c92f88a77ae4f12fb92d64d128a5e08c60b9c",
+  "requirements": [
+    "Read current spec, exact settled Root rulings and corrected gate/independent receiver.",
+    "Only F7 and full-prefix append SAME in Source; Source main/Core unchanged.",
+    "Future controls pre-native, exact Node22.23.4 original CLI/case timeouts and positive pre-I0 clock; maxone perrole.",
+    "Positive catch-only exact overlay, no fabricated wrapper, finally restore original; readonly original CLI supported dual reporter, cumulative complete all3/percase errors.",
+    "Qualified own descriptors/proxy guards, numeric boolean|integer0..65536 only, finite enums no raw paths/errors/private bytes.",
+    "Inventory exact original fragment/guard/caps/unsorted anchoring hashFilesfalse; newrun numeric prefix vs complete total and optional bounded region; no historical equivalence.",
+    "Seven global false fields, partial/unknown preserved; actual jobsuccess not business pass.",
+    "Source held until two terminal; Root closed receipt validation then originalF7 restore/full prefix actual append/readback.",
+    "Cloud only DATA preparation/Runner execution, no local Source eval/import/tests/install; no AFWkey/privateartifact/CF/livechanges."
+  ],
+  "preparationReport": "5308463e236d2a726c81ab74561b2276e5f0d6f0",
+  "detailReport": "d4da1eb1c2b60f84991bd3e53f7535dbcbe25ac6",
+  "closed": {
+    "commit": "1e4026ceb0c43efe1ccd815a874e10375646753b",
+    "tree": "c58cc07480661335060648bbb236d99b9ff58f13",
+    "same": "e3a3b0f2599fd1e8bc2ce61d22bbfc96676ca1be",
+    "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "parent": "f56e4f18b8ae77ea3e3a4cb29b230a022e9ff1ca"
+  },
+  "reviewScope": "ONE whole-unit review after actual proof; current diagnostics only, no re-review entire prior units. Source restore mandatory; not a request to fix/execute/replay.",
+  "actual": {
+    "run": 43649183563,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "positive": {
+      "job": 132613611303,
+      "at": "2026-11-14T22:52:24.3808550Z",
+      "record": {
+        "purpose": "afw.current-failed-frontiers.safe.v1",
+        "sourceBase": "c8b913225716b9c8be06b649f7f275265f99a71e",
+        "source": "f56e4f18b8ae77ea3e3a4cb29b230a022e9ff1ca",
+        "sourceTree": "e3ad9031bd3de0ed69f06a2e48d63dbae8785301",
+        "run": "43649183563",
+        "attempt": 1,
+        "job": "positive_prepare",
+        "node": "22.23.4",
+        "stage": "complete",
+        "controls": {
+          "passed": true,
+          "count": 10,
+          "expected": 10
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "positive"
+        },
+        "headroom": {
+          "checked": true,
+          "elapsedMs": 24145,
+          "admitted": true
+        },
+        "native": {
+          "started": true,
+          "ended": true,
+          "exitCode": 0,
+          "signal": "none",
+          "instrumentedWorld": true
+        },
+        "positive": null,
+        "readonly": null,
+        "inventory": null,
+        "provenance": {
+          "coreVerified": true,
+          "worldBeforeVerified": true,
+          "overlayInstalled": true,
+          "overlayVerified": true,
+          "worldRestored": true,
+          "worldAfterVerified": true,
+          "originalWorldBlob": "1e18873791e0520fff611e353232e38786c51941",
+          "overlaySha256": "dc3dde82b2e89cf1f6d1b3127c01ed86f108ceafbd80f51edb9f33d9e2e018dd"
+        },
+        "representation": {
+          "newRunOnly": true,
+          "originalWorkflowResident": true,
+          "originalTAPRedirection": false,
+          "diagnosticsOutsideInventory": true,
+          "custodyKeyLogAbsent": true,
+          "priorArtifactBindingLogAbsent": true,
+          "currentPureProfileGenerated": true,
+          "historicalByteEquivalence": false
+        },
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "readonly": {
+      "job": 132613611085,
+      "at": "2026-11-14T22:43:57.3039920Z",
+      "record": {
+        "purpose": "afw.current-failed-frontiers.safe.v1",
+        "sourceBase": "c8b913225716b9c8be06b649f7f275265f99a71e",
+        "source": "f56e4f18b8ae77ea3e3a4cb29b230a022e9ff1ca",
+        "sourceTree": "e3ad9031bd3de0ed69f06a2e48d63dbae8785301",
+        "run": "43649183563",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "complete",
+        "controls": {
+          "passed": true,
+          "count": 10,
+          "expected": 10
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "headroom": {
+          "checked": false,
+          "elapsedMs": null,
+          "admitted": false
+        },
+        "native": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none",
+          "instrumentedWorld": false
+        },
+        "positive": null,
+        "readonly": {
+          "purpose": "afw.current-frontiers.readonly-stream.v1",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 3,
+              "passed": 0,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testCodeFailure",
+                "causeCode": "ERR_ASSERTION",
+                "causeClass": "AssertionError",
+                "operator": "strictEqual",
+                "actual": false,
+                "expected": true
+              }
+            },
+            {
+              "case": "R2",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testCodeFailure",
+                "causeCode": "ERR_ASSERTION",
+                "causeClass": "AssertionError",
+                "operator": "strictEqual",
+                "actual": 0,
+                "expected": 1
+              }
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testCodeFailure",
+                "causeCode": "ERR_ASSERTION",
+                "causeClass": "AssertionError",
+                "operator": "==",
+                "actual": false,
+                "expected": true
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R1",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "strictEqual",
+              "actual": false,
+              "expected": true
+            }
+          },
+          "precase": null
+        },
+        "inventory": {
+          "state": "complete",
+          "prefixFiles": 128,
+          "prefixBytes": 299327164,
+          "attemptedOrdinal": null,
+          "nextBytes": null,
+          "nextBytesClipped": false,
+          "filesCap": 4096,
+          "bytesCap": 536870912,
+          "firstLimit": "none",
+          "firstLimitRegion": "none",
+          "complete": true,
+          "hashFiles": false,
+          "newRunOnly": true,
+          "openedFileStabilityProved": false
+        },
+        "provenance": {
+          "coreVerified": true,
+          "worldBeforeVerified": true,
+          "overlayInstalled": false,
+          "overlayVerified": false,
+          "worldRestored": false,
+          "worldAfterVerified": true,
+          "originalWorldBlob": "1e18873791e0520fff611e353232e38786c51941",
+          "overlaySha256": "dc3dde82b2e89cf1f6d1b3127c01ed86f108ceafbd80f51edb9f33d9e2e018dd"
+        },
+        "representation": {
+          "newRunOnly": true,
+          "originalWorkflowResident": true,
+          "originalTAPRedirection": true,
+          "diagnosticsOutsideInventory": true,
+          "custodyKeyLogAbsent": true,
+          "priorArtifactBindingLogAbsent": true,
+          "currentPureProfileGenerated": true,
+          "historicalByteEquivalence": false
+        },
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  },
+  "closure": {
+    "bothTerminal": true,
+    "fullProposalPrefixPreservedBytes": 679956,
+    "core3200Unchanged": true,
+    "originalF7Restored": true,
+    "SourceRefReadback": true,
+    "closedHeadRuns": 0,
+    "fiveActiveStates": 0,
+    "MainUnchanged": true,
+    "keysOrPrivateArtifactsOrCloudflareTouched": false
+  },
+  "rulings": [
+    "Git DB/no local Source execution supersedes local workspace utilities, equivalent diff/tree/data packages delivered remotely.",
+    "Qualified range boolean or integer0..65536; previous negative-range drafting note superseded.",
+    "Three pre-release prep HOLD issues corrected as ONE preparation correction, not formal final-review wave: workflowlimits, exact7falseglobalclaims, directprimaryunknownwrapper. Old oversized candidate neverexecuted.",
+    "Optional firstLimitRegion is bounded metadata enum and new-run only.",
+    "Original business/case/positive90s clocks retained; 15/7job caps no completionguarantee.",
+    "Source Git tuple immutability plus explicit workingcopyWorld overlay/restoration proof; not global runtime byteidentity.",
+    "No full16/recovery/Live/PCoff/historical repair inferred from diagnostic."
+  ],
+  "remaining": [
+    "All actual business-readonly cases failed; current cause/source site unknown.",
+    "Positive prepare passed this new instrumented run; prior positive failure cause unknown.",
+    "Current keyless inventory completed; historical limit count/dimension unknown.",
+    "Coherent16 package remains failed; no Main merge/livepublication/PCoffclaim."
+  ],
+  "instructions": "Read only targeted paths/public pinned blobs in cloud. Decode SAME payload as DATA ONLY if needed. Do not execute Source/import/eval/build/tests/deps locally or cloud; do not mutate Source/Rootdocs refs, run workflows, Cloudflare, keys or artifacts. You may create ONE unattached Git blob report with detailed findings/counts/precise code lines, no subagents. Return compact Critical/Important/Minor counts, reportblob, readiness for this diagnostic unit ONLY. Root handles any aggregate fix wave. No reviewer-created fixes/runs."
+}
