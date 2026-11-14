@@ -1,0 +1,420 @@
+{
+  "status": "NEEDS_ROOT_GATE",
+  "objective": "One aggregate final fix wave for I1-I5/M1; inactive control-only qualification plus corrected future Native DATA",
+  "authority": {
+    "briefRootdocs": "14640276b440dde0389ca4657f95f44d4b9bb802",
+    "briefBlob": "3b500ace0be41a9a1a0449e685920d9d498d41da",
+    "reviewBlob": "27a3f544f73661b579ed8dc5b994fff4ae8c9f77",
+    "base": "1e4026ceb0c43efe1ccd815a874e10375646753b",
+    "baseTree": "c58cc07480661335060648bbb236d99b9ff58f13"
+  },
+  "scope": {
+    "project": "AFW",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "unattached cloud Git DB objects",
+    "refsChanged": false,
+    "runsStarted": 0,
+    "SourceCodeExecuted": false,
+    "SourceSyntaxOrTestsRun": false,
+    "NativeSDKInvoked": false,
+    "keysOrPrivateArtifactsAccessed": false,
+    "CloudflareActions": false,
+    "localSourceFilesWritten": false,
+    "subagents": 0
+  },
+  "candidate": {
+    "commit": "053288df8e3465269539f800bfc9f4eaf2d800bd",
+    "tree": "2737feaacf09343d911fe419dea24e61993df03c",
+    "parent": "1e4026ceb0c43efe1ccd815a874e10375646753b",
+    "F7": {
+      "bytes": 16706,
+      "sha256": "c0d26625d563b2e2f78047956c2e7220764e4834e0f0815264206c8cdc933341",
+      "blob": "728433f15fb532e50d34ea9e93f6ad9519647204"
+    },
+    "SAME": {
+      "bytes": 847932,
+      "sha256": "7eb0e1ae26fcbe487cb0c84c8c1257b640418f62e45791d943cfb8e3d6bdf4a1",
+      "blob": "0a394831ef4f004c466df137e9165de3ff0d6747"
+    },
+    "preservedPrefix": {
+      "exact": true,
+      "bytes": 689075,
+      "sha256": "fadd768680490150424cb696f6dc2713bbe3a84dd35c0695a95064c050c169b9",
+      "blob": "e3a3b0f2599fd1e8bc2ce61d22bbfc96676ca1be"
+    },
+    "fullTreeReadback": {
+      "commit": "053288df8e3465269539f800bfc9f4eaf2d800bd",
+      "parent": "1e4026ceb0c43efe1ccd815a874e10375646753b",
+      "tree": "2737feaacf09343d911fe419dea24e61993df03c",
+      "truncated": false,
+      "leaves": 3202,
+      "unchanged": 3200,
+      "changed": [
+        {
+          "path": ".github/workflows/afw-finite-budget-qualification.yml",
+          "before": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+          "after": "728433f15fb532e50d34ea9e93f6ad9519647204"
+        },
+        {
+          "path": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+          "before": "e3a3b0f2599fd1e8bc2ce61d22bbfc96676ca1be",
+          "after": "0a394831ef4f004c466df137e9165de3ff0d6747"
+        }
+      ],
+      "added": [],
+      "removed": [],
+      "F7ReadbackExact": true,
+      "SAMEReadbackExact": true,
+      "complete689075BytePrefixStringExact": true,
+      "WorldUnchanged": true,
+      "NativeTestUnchanged": true,
+      "actualRunCharacters": [
+        301,
+        12557,
+        127,
+        1489
+      ],
+      "everyActualRunWithin21000": true
+    }
+  },
+  "workflow": {
+    "singleFalseJob": "controls",
+    "message": "AFW-CURRENT-FAILED-FRONTIERS-FINAL-FIX-ONEUSE-20261114",
+    "event": "push",
+    "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+    "attempt": 1,
+    "node": "22.23.4",
+    "runner": "ubuntu-24.04",
+    "jobMinutes": 5,
+    "actualRunCharacters": [
+      301,
+      12557,
+      127,
+      1489
+    ],
+    "workflowLimit": 500000,
+    "runLimit": 21000,
+    "permissions": {
+      "contents": "read"
+    },
+    "npmInstall": false,
+    "pureProfileOrNativeRun": false,
+    "environment": null,
+    "secretsContext": false,
+    "uploads": 0
+  },
+  "payload": {
+    "purpose": "afw.frontiers-final-fix.payload.v1",
+    "compressed": {
+      "bytes": 109745,
+      "sha256": "2d4e30ae4bb07d96b771e922b6d6475259db4f1fc18329aa0b5c31b9b7fa5e49",
+      "blob": "56aaf1b24d256362818f96a261c709b06dfec56d"
+    },
+    "expanded": {
+      "bytes": 570261,
+      "sha256": "16000dc2df60a458d96bf122fa9472064d3ca82964f8ea441700c94e7f913f62",
+      "blob": "51c5eef222f3c7cc43f0f291a4b1403fb1e580a1"
+    },
+    "base64Characters": 146328,
+    "programCount": 33,
+    "programSetSha256": "716cdeb6886a41584ee161eaca5f86246ff11ce6e1b448770d7c8eb2895a1ede",
+    "bounds": {
+      "compressed": 150000,
+      "expanded": 1000000,
+      "base64Characters": 200000,
+      "eachProgram": 100000
+    },
+    "canonicalAndEveryProgramVerifiedBeforeMaterializing": true,
+    "uniqueAppendOnlyMarker": true,
+    "noRemoteFallback": true,
+    "noSelfHashCycle": true
+  },
+  "fixes": {
+    "I1": "Receiver exposes nativeCommandExitedZero only; rejects exit0 plus primary catch and requires known complete exit. Historical actual exit0/nullcatch remains scoped, never an instrumented business/P1/consumer pass.",
+    "I2": "Safe numeric known inventory prefixes before arithmetic; full complete requires known complete/first_limit coverage. Corrected actual future sender calls senderFinalStage and holds unknown/null-prefix coverage.",
+    "I3": "Actual production measure/traversal/guard/exception/DTO is exercised via sparse truncate536870913, hashFilesfalse, bounded physical-block stat and no data read. Observer and conversion mutants must defeat real-path assertions while old metadata probes pass; receipts distinguish AssertionError after observed traversal from generic failure.",
+    "I4": "False before launch; nullable pending; true only after actual spawn. Preopen/sync/async failed launch is nonstarted. Confirmed-spawn error retains partial true and waits observed close; main restoration cannot advance on error alone. No controller kill/retry/helper or test timeout; only five-minute job ceiling and synthetic child's self-SIGTERM.",
+    "I5": "Trusted context.attempt strictly1 and wire.attempt equals it; negative changes only trusted attempt to2.",
+    "M1": "Unknown inventory numeric hints allNULL; actual regular-entry-then-invalid-link traversal uses observed private FS order. Receiver rejects one-field stale hints; no path/name is emitted."
+  },
+  "historical": {
+    "consumedRun": "43649183563",
+    "replayed": false,
+    "positivePreparationCommandExit": 0,
+    "positiveCatch": null,
+    "readonlyAllThreeFailed": true,
+    "newRunInventory": {
+      "files": 128,
+      "bytes": 299327164,
+      "state": "complete"
+    },
+    "rawRecordsUnchanged": true,
+    "obsoleteBusinessBitDeprecated": true,
+    "sourceFixtureBlob": "9658903a9c5fc5ec9b06218dd8f8ee63331c02a6"
+  },
+  "qualification": {
+    "preparedExpectationsOnly": true,
+    "actualRunCountsUnavailable": true,
+    "caseCount": 23,
+    "expectedBeforeFailures": 19,
+    "expectedBeforePasses": 4,
+    "expectedFixedPasses": 23,
+    "controlMatrix": "60049ae5f3e3558e243b1be0e67fe7189feede30",
+    "requiredMutationPairs": [
+      "observer disconnected: metadata0/realTraversal1+observed unknown+AssertionError",
+      "conversion disabled: metadata0/realTraversal1+observed unknown+AssertionError"
+    ],
+    "semanticFactsRequiredBeyondCounts": true,
+    "physicalBlocksWhenSupportedMaximum": 2048,
+    "sparseLogicalBytes": 536870913,
+    "materialFileBytesRead": false,
+    "closedMarker": "AFW_FRONTIERS_FINAL_FIX/1",
+    "receiptMaximumBytes": 16384,
+    "receiptSchema": {
+      "bytes": 19286,
+      "sha256": "8622dc5ccb81438664279edba25939f08451dd992aeafeeb1b0e948133abf891",
+      "blob": "8d7228346b38217fb3dc5b8361e81856f0d2b4bb"
+    },
+    "sevenFalse": [
+      "historicalCauseProven",
+      "receiptAuthenticated",
+      "operationalReadiness",
+      "completePackage",
+      "PCoff",
+      "globalNativeDrainVerified",
+      "sdkNamespaceEmptyVerified"
+    ]
+  },
+  "programs": {
+    "receiver-before.mjs": {
+      "bytes": 6333,
+      "sha256": "f9c47486f5f21d1865bcbe0f17c452d7edbdf63db47e5975c89e468ca25f2280",
+      "blob": "db678bfab073a38605ebf7607ccadcd637f552a5"
+    },
+    "receiver.mjs": {
+      "bytes": 6907,
+      "sha256": "41d64fa682c5b0581d5d53b993db5107cf664dadf9fa62b7012522f59ac42d5d",
+      "blob": "81799fa3b8fc675577dd083f77c7fa940f342bf0"
+    },
+    "runtime-before.mjs": {
+      "bytes": 2667,
+      "sha256": "2cb2726df56997e5127d579310542b278fbfcca7762865afba90bc96ab8b8587",
+      "blob": "b36c361e8cfe959bfddc79e9f9595a25bfbd2a8a"
+    },
+    "runtime-before-adapter.mjs": {
+      "bytes": 247,
+      "sha256": "d2ed2a125299f83a8b407924918117fc6403b0ce368af72d8de356204acf67fb",
+      "blob": "b3be59f619153ade6c2f438ef9abfd7349d641a4"
+    },
+    "runtime.mjs": {
+      "bytes": 3546,
+      "sha256": "7fde32c0df8b06ab3a01db30fb9e75fb7429cf6e4f95ed8152ed16bd7d0ab40a",
+      "blob": "815c32f1020ff1f32799ed47a652ced314a903f7"
+    },
+    "inventory-before.mjs": {
+      "bytes": 7276,
+      "sha256": "c133436712f21c460ff2f6034ab38f76dbc523fe7b5f100b02c3355304e46a97",
+      "blob": "09ee0c0c0803f621f891c7a0b037b07aa71f4220"
+    },
+    "inventory.mjs": {
+      "bytes": 7173,
+      "sha256": "034d66ccc96015830669f3bd3bc2ed13b8f8c5542e421f71907d947b0289bec5",
+      "blob": "33b802fc2042836306d3910d507b113f2c6c4a13"
+    },
+    "sender-stage-before.mjs": {
+      "bytes": 251,
+      "sha256": "b07dd0a9dc00dc64deb24e4bf081cf627bbb5d2f8f4a801d5b96a4ff99acd5e3",
+      "blob": "66fe0ee8a7dc3183e358c9e981e7fa6cf238e10b"
+    },
+    "sender-stage.mjs": {
+      "bytes": 632,
+      "sha256": "5143ba383966b884589b0b421c2000b5b20088bcb2347a829d74c33e63f597fb",
+      "blob": "31377a41bb4ad8824a545c507c0758840743996d"
+    },
+    "future-native-main.mjs": {
+      "bytes": 8625,
+      "sha256": "49c054cc6ba18776d32a8c10fa999664796ac3ebf74633e6020e3a4238d0f859",
+      "blob": "f51f0d101550c962353190b2d4cf094c22a978b8"
+    },
+    "reporter.mjs": {
+      "bytes": 380,
+      "sha256": "397f50c63e2d7ad6af79ec9189928db1362b3b1646850633a9a648857f8cd4a4",
+      "blob": "2c0392952a6d2fea538ff6ce85aa3785691d81ce"
+    },
+    "closed.mjs": {
+      "bytes": 5785,
+      "sha256": "cce547d7e23844003832498493e0d3b6d3bc352980408a66dd194949dab8e778",
+      "blob": "7d9e792fdcaac628f8c8724287904cba976772fd"
+    },
+    "schema.json": {
+      "bytes": 33701,
+      "sha256": "0cc6b948fd4932278692b7d1c55efaf7ed28c21791c1724a752b47cd196bdde4",
+      "blob": "5384415cb7c37f29bf0a5834e8dc851cace4f7b6"
+    },
+    "qualified-driver.mjs": {
+      "bytes": 8545,
+      "sha256": "fb168aed7ea6c508f7ca3d59b2bd125dfe5125f528a9d85ceb4bc4944198cf43",
+      "blob": "3ef70505e65c179dae68a9a1a504da591f840c49"
+    },
+    "preflight.mjs": {
+      "bytes": 9307,
+      "sha256": "ef91d5f26567162d9a877657ffee92b4f997e4bd7a5d6511d9da77e0be1be37b",
+      "blob": "1b3ad02d1cbf183ac82f79d7097b4fe506a2093b"
+    },
+    "seal-prepare.mjs": {
+      "bytes": 1047,
+      "sha256": "9d7d15d1b3bd8b45232e0751ad2b94fbd7ce3d337f33f9b201b9f0cc02bb4ecb",
+      "blob": "fcb11d119c5f364995c7ca4a03e664d4b4ff0ad5"
+    },
+    "tap-check.mjs": {
+      "bytes": 630,
+      "sha256": "b7e4dd4e9a3f4d13a174d6a7363d8624449eac05be283fd3c16de81677a6f6a6",
+      "blob": "8525cd0bb33f30a40f65aa97c3caa21031524673"
+    },
+    "positive-observer.txt": {
+      "bytes": 2710,
+      "sha256": "7cbb30e304113ee64e9996ed042d329e86d6cad1e6cf6f1700236de03357e8a7",
+      "blob": "d5e9a24340bc720780b1feb48f006ef47f97ed5b"
+    },
+    "future-native-emit.mjs": {
+      "bytes": 2125,
+      "sha256": "0c4ce82eaaee06b35c7a7cf3c5faa5c6474452eb88d27eeffe50350ef5af1cc8",
+      "blob": "95551f65f89e5ceaa942af1e1098d4f908c78330"
+    },
+    "historical-records.json": {
+      "bytes": 6612,
+      "sha256": "7e88b5371f8f9cf59e55a67c50e60dbf4ded02855e112849717e66749f38dddd",
+      "blob": "9658903a9c5fc5ec9b06218dd8f8ee63331c02a6"
+    },
+    "inventory-mutant-observer.mjs": {
+      "bytes": 7181,
+      "sha256": "bb701061d5335554b860bf1f6ac212df6d54140f36c2b1b1c0000a8c4a3a15e4",
+      "blob": "da4fa9e34af73d29761741faa5deb172079ece45"
+    },
+    "inventory-mutant-conversion.mjs": {
+      "bytes": 7101,
+      "sha256": "fb026ce7a9a330ef39650fd9a56e3b83bd3636adfd14df6f29ca28c4252bb43e",
+      "blob": "ba2ab01a9a397554c09c0988bef241874dfe5076"
+    },
+    "limit-control.mjs": {
+      "bytes": 1378,
+      "sha256": "f26000204f4c2af7f8b8d38cbd95ed8733e845ab28a7b12d11305c5f0cb35595",
+      "blob": "7fcfad5af462399a18df732eb8cb58f10193d8a8"
+    },
+    "limit-probe.mjs": {
+      "bytes": 1072,
+      "sha256": "764ccb176c001f5e6c06e8bd8214f086b6c03d2a77ea22a4f5e2ad78c87877b6",
+      "blob": "9fece71c980a284401be979333f4432aaec550cc"
+    },
+    "metadata-probe.mjs": {
+      "bytes": 665,
+      "sha256": "4e988295d0c555b8fcc6ec5f3ef3a009663467d0f68a0b70d3511184b0c55206",
+      "blob": "8cd86756cb4dd6e362b7298a404915e15c47d558"
+    },
+    "control-contract.mjs": {
+      "bytes": 1548,
+      "sha256": "fc46dbf05d16bee41f37b5b4b7dfa266e388be45a390f429c8a983757f8290be",
+      "blob": "410cae6fdd5f399ec6607dd45eae187d9ddcea39"
+    },
+    "case-suite.test.mjs": {
+      "bytes": 8663,
+      "sha256": "10aa818bf33811d3a7a8f2cd342e0fffdd60bb89420ff80763d0848476be6713",
+      "blob": "0ceda77ad62aad361dfd3615f5309a2c52e1a700"
+    },
+    "control-reporter.mjs": {
+      "bytes": 1322,
+      "sha256": "672b5ca036fafcc9cce87fdd5ef79947f20a12a5ce1ceb7978dba19cc88078d8",
+      "blob": "e08b256b1ca5af9bb9c3b41a8e450bfb5d929c21"
+    },
+    "future-native-contract.json": {
+      "bytes": 1016,
+      "sha256": "d0869e0b880a5ebe35d27a4e4d5414dc28becd5774d4bf8a717dab33f32c2883",
+      "blob": "8c7078ff814be772356b74f98d53913b839712c3"
+    },
+    "qualify.mjs": {
+      "bytes": 7962,
+      "sha256": "0c449b314a5387fb157204bcfd381ef0e6835492014c67eb9179f634edacc9eb",
+      "blob": "24af9b4951e69bb523e951470e26d58b1d9eb790"
+    },
+    "qualifier-schema.json": {
+      "bytes": 19286,
+      "sha256": "8622dc5ccb81438664279edba25939f08451dd992aeafeeb1b0e948133abf891",
+      "blob": "8d7228346b38217fb3dc5b8361e81856f0d2b4bb"
+    },
+    "qualifier-emit.mjs": {
+      "bytes": 1393,
+      "sha256": "7e76be32f6934d3dce482f74bb6e355f7ab696dd332dd8de81da1419d100e014",
+      "blob": "6ce72f16937eb7580f726304e823a3843d09f998"
+    },
+    "controls.mjs": {
+      "bytes": 9972,
+      "sha256": "1702c353dac1d600ab389090d406f3a9d2c73ad9e7d6040cd2350fb4eca348dc",
+      "blob": "b36574191eafba15827755394b8e5ae5bfeba04a"
+    }
+  },
+  "support": {
+    "loader": {
+      "bytes": 12403,
+      "sha256": "383313c3ebdc5680edac057053404074ebf7f803887da4337d2bb65d97799ea2",
+      "blob": "b7330ac5ce64ff64f844525973f3d87004a6742e"
+    },
+    "diff": {
+      "bytes": 32307,
+      "sha256": "e76375410afe5466bc4209a0c85d4673422a0fee54fc5b40809f4d520b5291fd",
+      "blob": "ae21fca48026664ec6997734fe8b5551dfcb92dc"
+    },
+    "controlMatrix": {
+      "bytes": 2958,
+      "sha256": "844344a05c523c77b570cad91aafca62d4b5012eba2174d72c1196ba6ca13a5f",
+      "blob": "60049ae5f3e3558e243b1be0e67fe7189feede30"
+    },
+    "selfReview": {
+      "bytes": 3362,
+      "sha256": "91506edd462d92f7423442d36685b7838a1b46c280c2d4f6e2e8fe9089a362b5",
+      "blob": "de0c7150c88a3283eac897439a5decd68c441164"
+    },
+    "runProof": {
+      "bytes": 360,
+      "sha256": "63c9ae92512acf586d2011152c731a057116d4c057d8d1f9b848d7ef10fb4c08",
+      "blob": "3a9c209055a28c68f6c5d98678bee9884b5facc8"
+    }
+  },
+  "dataProof": {
+    "compressed": {
+      "bytes": 109745,
+      "sha256": "2d4e30ae4bb07d96b771e922b6d6475259db4f1fc18329aa0b5c31b9b7fa5e49",
+      "blob": "56aaf1b24d256362818f96a261c709b06dfec56d"
+    },
+    "expanded": {
+      "bytes": 570261,
+      "sha256": "16000dc2df60a458d96bf122fa9472064d3ca82964f8ea441700c94e7f913f62",
+      "blob": "51c5eef222f3c7cc43f0f291a4b1403fb1e580a1"
+    },
+    "canonicalBase64": true,
+    "canonicalJSON": true,
+    "expandedEqualsPinned": true,
+    "programCount": 33,
+    "everyProgramPinExact": true,
+    "prefix": {
+      "exact": true,
+      "bytes": 689075,
+      "sha256": "fadd768680490150424cb696f6dc2713bbe3a84dd35c0695a95064c050c169b9",
+      "blob": "e3a3b0f2599fd1e8bc2ce61d22bbfc96676ca1be"
+    },
+    "originalWorkflow": {
+      "bytes": 367543,
+      "sha256": "335c0e042741efe06ac13634aa0cbd9236792f19908750b88e570d75da9473e6",
+      "blob": "4b128f8dec8bb9c45ccff7a41d5bbdecd9f47ff2"
+    },
+    "WorldAndNativeDataUnchanged": true
+  },
+  "limitations": [
+    "No Source eval/import/syntax/test/control/Native execution has occurred during preparation; only DATA string/JSON/hash/gzip operations in RAM.",
+    "Future Native main/reporter/preflight/controls and World observer are pinned DATA and not invoked by qualifier. Their Native paths remain untested and require separate Root release/binding.",
+    "Historical diagnostic wire sourceBase remains immutable core originc8b9132 for compatibility; new qualifier/payload/commit provenance is explicitly Source1e4026.",
+    "Original World/Native/Custody Git tuples and all3200 other tuples remain exact. Future Native15/7-minute ceilings, readonly120000ms and pre-I0<90000ms remain; qualifier does not repeat pure/profile/Native.",
+    "Root solely owns independent DATA/receiver gate, one future cloud control qualification, terminal/restore/full actual append and one scoped re-review. No second whole-unit review or source-site changes are included."
+  ],
+  "diffBlob": "ae21fca48026664ec6997734fe8b5551dfcb92dc",
+  "selfReviewBlob": "de0c7150c88a3283eac897439a5decd68c441164"
+}
