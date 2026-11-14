@@ -84,3 +84,7 @@ Cierre: una pareja fechada indica primer caso/archivo fallido ounknown y guard/c
 - Añadir exactamente un guard shell de ausencia NODE_OPTIONS inmediatamente ANTES de Node en cada uno de los ocho bootstraps del candidato, como en el ensayo anterior que exigía inicio controlado. No cambia los seis comandos Native. Es una defensa de startup, no prueba de proceso arbitrariamente comprometido.
 - La entrada de producción nueva exige GITHUB_JOB=readonly y Node22.23.4 además del argumento job=readonly y las ausencias de clave/token/opciones. Mantener la frontera sintética de pruebas separada.
 - Conservar nombres/directorios/outputs de las publicaciones diagnósticas existentes; el propósito nuevo y el contexto distinguen la pareja readonly. No añadir slots o expresiones al parser de claves.
+
+
+## Aclaración: representación y semántica
+Antes de interpretar TAP, validar la representación COMPLETA del string: tipo,65536UTF8bytes,4096líneas,1024bytes/línea, ausenciaCR y LFfinal. Este barrido de límites no interpreta YAML/resultados. Después, el parser semántico se detiene inmediatamente en el primer literal «not ok». Un sufijo con TAP/YAML inventado pero dentro de esos límites se ignora. Si el sufijo viola límites de representación, toda la observación esunknown; no rescatar el prefijo. Esta es la misma política conservadora del lector fijo.

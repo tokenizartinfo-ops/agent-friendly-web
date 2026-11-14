@@ -29,3 +29,6 @@ Ruling: continuarconSDD/aislamientoGitDByausados ysinpreguntasrutinarias segúno
 All rows resolved; no unresolvedblockingconflict. CurrentSource410b3701/main0c9 exact; in_progress/queued/waiting collections0 at17:07:35UTC. Pending/requested rechecked at actualrelease, not presumed.
 Ruling: this plan owns only cloudledger/docs, not a localSddworkspace. ExistingGitDBSourceisolation reused; no clone/deps/localSource. Costifwrong: incompletepipelinecaughtbyRootgates; no productruntimeeffect.
 Task1 INACTIVEPREPARATION ONLY released to solefreshworker. Qualification/Native/runtime NOTreleased. No owneractionneeded.
+
+
+Ruling: preflight de representación de TODOelstring permitido/obligatorio antes delparse; detener solo interpretaciónsemántica alprimerliteralnotok. Sufijosemánticamentemalformadodentrodecapsnoinfluye; sufijoconCR/sinLF/oversizedfuerzunknown. Resuelveconflictoaparente sinrelajarcaps. Costosiincorrecto: menorprecisiónconlogsdescartados, no autoridadextra ni datoprivadocopiado.
