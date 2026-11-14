@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import * as fs from 'node:fs/promises';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
+import {spawnSync} from 'node:child_process';
 import * as D from './fixtures/finite-budget-stage-observer.mjs';
 import * as P from './fixtures/finite-budget-failure-diagnostic.mjs';
 
@@ -48,3 +49,21 @@ test('s30_pair_fail_closed',async()=>owned(async root=>{const p=D.makeStagePair(
 test('s31_exact_assignment_projection',()=>{const needs=Object.fromEntries(D.NEEDS.map(job=>[job,{result:'failure',outputs:{}}]));for(const [i,job]of D.JOBS.entries())needs[job].outputs={'safe-id':String(i+1),'safe-digest':'a'.repeat(64)};const v=D.projectAssignments(JSON.stringify(needs));assert.deepEqual(v,D.JOBS.map((job,i)=>({job,state:'assigned',artifactId:String(i+1),zipSha256:'a'.repeat(64)})));assert(D.assignmentLine(JSON.stringify(needs)).startsWith('AFW_STAGE_DIAGNOSTIC_ASSIGNMENTS '));});
 test('s32_assignment_unavailability_no_borrow',()=>{for(const s of ['PRIVATE','{}','x'.repeat(65537)])assert(D.projectAssignments(s).every(x=>x.state==='unavailable'));const needs=Object.fromEntries(D.NEEDS.map(job=>[job,{result:'success',outputs:{'artifact-id':'999','artifact-digest':'b'.repeat(64)}}]));assert(D.projectAssignments(JSON.stringify(needs)).every(x=>x.state==='unavailable'));for(const job of D.JOBS)needs[job].outputs={'safe-id':'1','safe-digest':'a'.repeat(64)};assert(D.projectAssignments(JSON.stringify(needs)).every(x=>x.state==='unavailable'));});
 test('s33_production_token_not_inherited',async()=>{const previous=process.env.GH_ARTIFACT_TOKEN;process.env.GH_ARTIFACT_TOKEN='SYN_INERT';try{await assert.rejects(()=>D.collectFixedStagePair({context,job:'readonly',rawOutcome:'failure'}));}finally{if(previous===undefined)delete process.env.GH_ARTIFACT_TOKEN;else process.env.GH_ARTIFACT_TOKEN=previous;}});
+
+test('s34_legacy_conflicting_claims_poison_canonical',()=>{
+ const bad=['AssertionError [UNKNOWN_123]: PRIVATE','Error []: custody_limit','AssertionError [UNRECOGNIZED]: PRIVATE','Error [UNRECOGNIZED]: custody_limit','Error [UNRECOGNIZED]: PRIVATE','Error [ENOENT]: custody_limit','AssertionError [EACCES]: PRIVATE','AssertionError: EACCES: PRIVATE','CustodyError [ENOENT]: custody_limit','CustodyError [custody_limit]: custody_limit','Error [ERR_ASSERTION]: custody_limit','Error [EACCES]: ENOENT: PRIVATE'];
+ for(const header of bad){assert.deepEqual(text(header+'\n').failure,unknown);assert.deepEqual(text(header+'\n'+failure('ENOENT')).failure,unknown);}
+ for(const [header,code]of [['Error [ENOENT]: ENOENT: PRIVATE','ENOENT'],['AssertionError [ERR_ASSERTION]: PRIVATE','assertion'],['CustodyError: custody_limit','custody_limit'],['Error [EACCES]: PRIVATE','EACCES']])assert.equal(text(header+'\n').failure.code,code);
+});
+test('s35_real_fifo_swap_bounded_before_read',async()=>owned(async root=>{
+ const source="import assert from 'node:assert/strict';\nimport * as fs from 'node:fs/promises';\nimport {constants} from 'node:fs';\nimport {join} from 'node:path';\nimport {execFileSync} from 'node:child_process';\nconst D=await import(__OBSERVER__),P=await import(__PROJECTOR__),root=__ROOT__,path=join(root,'command-output.log');\nawait fs.writeFile(path,'SYN_PRIVATE\\n',{flag:'wx',mode:0o600});\nlet switched=false,reads=0,opened=0;\nconst io={...fs,lstat:async name=>{const st=await fs.lstat(name);if(name===path&&!switched){switched=true;await fs.rename(path,join(root,'preserved'));execFileSync('mkfifo',['--mode=600',path],{timeout:1000,stdio:'pipe'});}return st;},open:async(name,flags)=>{opened++;const fd=await fs.open(name,flags);assert.equal(flags&constants.O_NONBLOCK,constants.O_NONBLOCK);return {stat:()=>fd.stat(),read:async(...args)=>{reads++;return fd.read(...args);},close:()=>fd.close()};}};\nconst value=await D.collectOwnedLogRoot(root,P,io);\nassert(switched);assert.equal(opened,1);assert.equal(reads,0);assert.equal(value.logs[0].availability,'racing');\nconsole.log('{\"ok\":true}');\n".replace('__OBSERVER__',JSON.stringify(new URL('./fixtures/finite-budget-stage-observer.mjs',import.meta.url).href)).replace('__PROJECTOR__',JSON.stringify(new URL('./fixtures/finite-budget-failure-diagnostic.mjs',import.meta.url).href)).replace('__ROOT__',JSON.stringify(root));
+ const env={...process.env};delete env.NODE_OPTIONS;delete env.GH_ARTIFACT_TOKEN;delete env.AFW_SYN_CHECKPOINT_KEY;
+ // The parent process timeout is independent of the blocked child's event loop.
+ const child=spawnSync(process.execPath,['--input-type=module'],{input:source,encoding:'utf8',env,timeout:3000,maxBuffer:65536});
+ assert.equal(child.error,undefined);assert.equal(child.signal,null);assert.equal(child.status,0);assert.equal(child.stderr,'');assert.equal(child.stdout,'{"ok":true}\n');
+}));
+test('s36_partial_prefix_only_nonempty_edges',async()=>owned(async root=>{
+ const path=join(root,'command-output.log');
+ await fs.writeFile(path,'complete noise\nA\n'+failure());let value=await collect(root);assert.equal(value.logs[0].availability,'available');assert.equal(value.logs[0].code,'EACCES');
+ for(const log of ['\nA\n'+failure(),failure()+'A\n\n','AFW_SYN_STA\n'+failure()]){await fs.writeFile(path,log);assert.equal((await collect(root)).logs[0].availability,'truncated');}
+}));

@@ -13,8 +13,8 @@ const unavailable=()=>({code:'unknown',site:'unknown'});
 function stackValue(error,descriptor,readNativeStack){
  if(!descriptor)return undefined;
  if(Object.hasOwn(descriptor,'value'))return descriptor.value;
- if(typeof readNativeStack!=='function'||types.isProxy(readNativeStack))throw null;
- return readNativeStack(error);
+ // Decline every lazy representation, without calling even a supplied reader.
+ throw null;
 }
 function boundedLines(text){
  if(typeof text!=='string'||text.length>65536||Buffer.byteLength(text,'utf8')>65536)return null;
@@ -37,16 +37,18 @@ function sourceSite(stack){
 export function projectFixedBudgetFailure(error,readNativeStack){
  try{
   if(error===null||typeof error!=='object'||types.isProxy(error)||!types.isNativeError(error))return unavailable();
-  const descriptors={};for(const key of ['code','message','stack']){
+  const descriptors={};
+  // Header fields are own DATA strings only. Multiline fields can forge frames.
+  for(const key of ['name','message','code']){
    const descriptor=Object.getOwnPropertyDescriptor(error,key);
-   if(key==='stack'){descriptors[key]=stackValue(error,descriptor,readNativeStack);continue;}
    if(descriptor&&!Object.hasOwn(descriptor,'value'))return unavailable();
-   descriptors[key]=descriptor?.value;
-   if(descriptors[key]!==undefined&&!boundedLines(descriptors[key]))return unavailable();
+   const value=descriptor?.value;
+   if(value!==undefined&&(typeof value!=='string'||!boundedLines(value)||value.includes('\n')||value.includes('\r')))return unavailable();
+   descriptors[key]=value;
   }
-  const {code:rawCode,message,stack}=descriptors;
-  if((rawCode!==undefined&&typeof rawCode!=='string')||(message!==undefined&&typeof message!=='string')||(stack!==undefined&&typeof stack!=='string'))return unavailable();
-  if([rawCode,message,stack].some(value=>value!==undefined&&!boundedLines(value)))return unavailable();
+  const stack=stackValue(error,Object.getOwnPropertyDescriptor(error,'stack'),readNativeStack);
+  if(stack!==undefined&&(typeof stack!=='string'||!boundedLines(stack)))return unavailable();
+  const {code:rawCode,message}=descriptors;
   let code='unknown';
   if(rawCode==='ERR_ASSERTION')code='assertion';
   else if(['EEXIST','ENOENT','EACCES','ENOSPC','ETIMEDOUT'].includes(rawCode))code=rawCode;

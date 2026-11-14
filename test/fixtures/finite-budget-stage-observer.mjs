@@ -54,16 +54,19 @@ function stages(lines){
 }
 function legacy(lines,P){
  const codes=P.FIXED_BUDGET_FAILURE_CODES;
+ const semantic=code=>code==='ERR_ASSERTION'||code==='assertion'?'assertion':codes.includes(code)&&code!=='unknown'?code:null;
+ const conflict=()=>({value:unknown(),count:2});
  const observations=[];
  for(let n=0;n<lines.length;n++){
-  const line=lines[n],header=/^(Error|AssertionError|CustodyError)(?: \[(ERR_ASSERTION|EEXIST|ENOENT|EACCES|ENOSPC|ETIMEDOUT)\])?: (.*)$/.exec(line);
+  const line=lines[n],header=/^(Error|AssertionError|CustodyError)(?: \[([^\]\r\n]*)\])?: (.*)$/.exec(line);
   if(!header)continue;
-  const message=header[3];let code=header[2]??null,custody=null;
-  if(codes.includes(message)&&message.startsWith('custody_'))custody=message;
-  const system=/^(EEXIST|ENOENT|EACCES|ENOSPC|ETIMEDOUT): /.exec(message);if(system){if(code&&code!==system[1])return {value:unknown(),count:2};code=system[1];}
-  if(header[1]==='CustodyError'&&(!custody||code!==null))continue;
-  if(header[1]==='AssertionError'&&code===null)code='ERR_ASSERTION';
-  if(!code&&!custody)continue;
+  const message=header[3],explicit=semantic(header[2]),exact=semantic(message),token=/^([A-Za-z_]+): /.exec(message),messageCode=exact??semantic(token?.[1]);
+  if(header[2]!==undefined&&explicit===null)return conflict();
+  const claims=[header[1]==='AssertionError'?'assertion':null,explicit,messageCode].filter(Boolean);
+  if(header[1]==='CustodyError'&&(!exact?.startsWith('custody_')||header[2]!==undefined))return conflict();
+  if(new Set(claims).size>1)return conflict();
+  if(!claims.length)continue;
+  const recognized=claims[0],custody=recognized.startsWith('custody_')?recognized:null,code=recognized==='assertion'?'ERR_ASSERTION':custody?null:recognized;
   const frames=[];let unrecognizedSourceFrame=false;
   for(let k=n+1;k<lines.length&&/^ {4}at /.test(lines[k]);k++){
    const match=/^ {4}at (?:async )?(?:new )?(?:(?:[A-Za-z0-9_$.[\]<>]+) \(([^()\s]+):([1-9][0-9]{0,5}):([1-9][0-9]{0,3})\)|([^()\s]+):([1-9][0-9]{0,5}):([1-9][0-9]{0,3}))$/.exec(lines[k]);
@@ -97,7 +100,7 @@ async function readOwned(root,name,io){
  try{
   const parents=await controlledRoot(root,io),before=await io.lstat(path);if(!regular(before)||before.isSymbolicLink())return {availability:'unsafe'};
   if(before.size>1048576)return {availability:'oversized'};
-  fd=await io.open(path,constants.O_RDONLY|constants.O_NOFOLLOW);const initial=await fd.stat();
+  fd=await io.open(path,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);const initial=await fd.stat();
   if(!regular(initial)||JSON.stringify(identity(initial))!==JSON.stringify(identity(before)))return {availability:'racing'};
   const size=Math.min(initial.size,65536),bytes=Buffer.alloc(size),read=await fd.read(bytes,0,size,initial.size-size);
   const after=await fd.stat(),pathAfter=await io.lstat(path);let parentStable=false;try{parentStable=JSON.stringify(parents)===JSON.stringify(await controlledRoot(root,io));}catch{}
@@ -105,8 +108,10 @@ async function readOwned(root,name,io){
   if(initial.size>65536)return {availability:'truncated'};
   if(size&&bytes[size-1]!==10)return {availability:'truncated'};
   let text;try{text=new TextDecoder('utf-8',{fatal:true}).decode(bytes);assert(Buffer.from(text).equals(bytes));linesOf(text);}catch{return {availability:'malformed'};}
-  // A partial marker at either edge is unavailable, including an initial prefix.
-  for(const line of text.split('\n'))for(const prefix of ['AFW_SYN_STAGE/1','AFW_SYN_HTTP/1','AFW_SYN_FAILURE/1'])if(line&&prefix.startsWith(line)&&line!==prefix)return {availability:'truncated'};
+  // Physical first/last nonempty lines only; empty means exactly zero bytes.
+  // Interior noise, including a partial prefix, is not evidence of truncation.
+  const nonempty=text.slice(0,-1).split('\n').filter(line=>line!=='');
+  for(const line of [nonempty[0],nonempty.at(-1)])for(const prefix of ['AFW_SYN_STAGE/1','AFW_SYN_HTTP/1','AFW_SYN_FAILURE/1'])if(line&&prefix.startsWith(line)&&line!==prefix)return {availability:'truncated'};
   return {availability:'available',text};
  }catch(error){const code=Object.getOwnPropertyDescriptor(error??{},'code')?.value;return {availability:code==='ENOENT'?'missing':['ELOOP','ENOTDIR'].includes(code)?'unsafe':'unavailable'};}
  finally{if(fd)try{await fd.close();}catch{}}
@@ -125,8 +130,8 @@ export async function collectOwnedLogRoot(root,P,io=fs){
 }
 async function projector(){
  const bytes=await fs.readFile(join(process.cwd(),'test/fixtures/finite-budget-failure-diagnostic.mjs'));
- same(bytes.length,7927);same(sha(bytes),'97dd3df67bfcaef8567975732b573f274d89be8b63a4e9020685fafe731f39f2');
- same(createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex'),'6b5b9f8905d77d3f9cd9d89ea3058cfbdd57760f');
+ same(bytes.length,7871);same(sha(bytes),'6e1534c8a8d9df02a7df8ca3f2877e2cd0301be0714be9bf6a18044b9dbfba5c');
+ same(createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex'),'62965a9d5836e54563550fe29dff23abe9a62054');
  return import('data:text/javascript;base64,'+bytes.toString('base64'));
 }
 export async function collectFixedStagePair({context,job,rawOutcome}){
