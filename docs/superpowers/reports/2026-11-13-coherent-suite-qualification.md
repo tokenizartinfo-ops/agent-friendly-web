@@ -3333,3 +3333,105 @@ Pre-append fresh primary inventories proved consumed qualifierheadb07d exactlyON
 Executor self-review checked authorization/CAS reconciliation and freeze, exact pin/schema/test inventories, actual cloud evidence versus nonclaims, fixed artifact assignment and independent Root verification, full original F7 restoration, complete baseline-tree preservation and append-only historical prefix. No additional unresolved concern was identified within this bounded Task2 source qualification. Conservative unavailability, unauthenticated location hints and process-compromise/historical-cause limitations remain explicit. Root owns the pending combined Task2 review. No Task3/Native, deployment, permission/key/OAuth, runtime, private data or PC-off authority follows from this result.
 
 All historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified remain false.
+
+
+## 2026-11-14 — Task3 original whole SYN: INACTIVE UNATTACHED PREPARATION; Root gate HELD
+
+Status at 2026-11-14T15:00:12Z: preparation only. No Source ref was moved, no workflow was dispatched, no run/rerun was requested and no Native program was executed. This is the next materially instrumented original whole-SYN proposal after Task1 and Task2 COMPLETE/CLEAR. It is not AFW operational acceptance or PC-off evidence. All seven nonclaims remain false.
+
+### Authority, exact target and preserved prefix
+
+PROJECT=AFW; REPOSITORY=tokenizartinfo-ops/agent-friendly-web, repositoryId1347578006; ENVIRONMENT=GitHub GitDB preparation only, future finite SYN Actions run HELD; ORIGIN=GitHub plugin/API for this exact repository; RESOURCE_TYPE=unattached Git blob/tree/commit proposal; RESOURCE_ID=sole Source branch feat/finite-native-cleanup-20261101; ALLOWED_ACTION=read exact source/ref/tree/report, create inactive UNATTACHED proposal objects changing only F7 and this SAME report; ROLLBACK=leave refs untouched now, and after any separately released future trial restore original F7 plus all undeclared baseline leaves, retaining only this report append. Rootdocs docs/finite-pcoff-continuation-20261103 is Root-only and was not written by this executor.
+
+Binding brief is docs/superpowers/briefs/2026-11-14-sanitized-stage-observations-task3.md in Rootdocs03f60ca1198f0ca76b1520b5296048319e4bb2e0, clarified at Rootdocs5279d9f7d808332bdc91803b061dec7b8723ed2f/blob82619d7d4185527c23db6900fa24fac9dc698885. Scope AGENTS.md at Source base was read; there is no more-specific AGENTS path in the complete baseline tree. The Hermes/Tokenizart context does not change the AFW task or its resources.
+
+Fresh primary Source ref read was exactly 77cff1a07df0d2b41145137dd1cdd1b5627463b6, treeed8f813bd4cac718733c75043127a68da4c721e3; main was exactly0c9c475b3ebaa970fc11d628b40e50a90cceb727. The baseline recursive Git tree is untruncated,3362entries,3201leaves including62workflow blobs. Every baseline leaf/mode/type is protected except transient F7 and this SAME report. Closed baseline F7 is .github/workflows/afw-finite-budget-qualification.yml, blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc,126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a. It remains the restoration target.
+
+The ENTIRE pre-append report was fetched and byte-hashed as blobc4f993a6f53649b3e4a4e7cae2f5f2128d62a85d,398970B/SHA2567ec0c35c9346c3a569549410c1a11bd9ee967048f98ea708078939294d56d0de. This proposal is exactly that full398970B prefix followed by this appendix; no historical result, actual qualification evidence or authorization was rewritten. Git identities of the complete inactive proposal are emitted by the subsequent GitDB create/readback package to Root; this appendix cannot embed the hash of its own containing commit. Parent of that complete proposal must remain exactly77cff1a07df0d2b41145137dd1cdd1b5627463b6, without moving any ref.
+
+### Qualified DATA source and exact allowed delta
+
+Task2 integrated Native candidate2c390b182f6889e79480e7b1618f41af8d1e0d22/tree735c681809f4b53e3d8d675ca04b39c441a0e219 was fetched only as DATA. Its F7 blob53d9732130e96e75aa5e26038ac8b162c6032b30,367124B/SHA25670ebdecad41f59b12f4057aa5607b715e75b1f828c38368c7c960fa1617e0553 matches the brief. It was never attached or run. Task2 actual run43606148496/attempt1 and independent Root SMALLSAFE14118088928 qualified that earlier candidate under the declared zero-key controls; they do not qualify this new F7 byte-for-byte. No consumed intent/head/run is reused.
+
+New inactive F7 is blob1e4c2f5ec9c19d36ccf1b372963c96e234e899c9,367388B/SHA25633473971cca42150a268776722301b40e50fb4e18e04e37ff555674d5ad01b53. It is copied from the qualified DATA with exactly these16 textual changes:
+1. In all eight existing job guards only, replace old literal AFW STAGE OBSERVATIONS NATIVE HELD 20261114 with exact new literal AFW-STAGE-TASK3-NATIVE-ONEUSE-20261114. All eight existing false && prefixes remain. The final verify keeps its existing false && always() && guard shape.
+2. Immediately before the existing node --input-type=module <<'NODE_SUITE_BOOTSTRAP' command of each of the eight existing suite_bootstrap steps, insert exactly the shell line below, keeping every prior guard/line/order.
+
+```bash
+          test -z "${NODE_OPTIONS+x}"
+```
+
+The exact new line refuses even an explicitly set empty NODE_OPTIONS before that bootstrap's first Node entry. It enforces the Task1 trusted-startup precondition and does not broaden that trust boundary or make a general process-compromise claim. No CLI/preload option, KEY_SCOPE_PRECHECK byte or key environment was changed. Inactive has exactly8falseguards/8new-message guards/8startup additions. A string-level inverse of ONLY those eight literal changes and eight inserted lines reproduces the complete367124B qualified F7 byte-for-byte. Thus all other text, comments, assertion bodies, guards, steps, dependency/output/permission/env/timing data and frozen parser/forms are unchanged. This comparison is DATA inspection, not parser execution or a new passing qualification.
+
+### Frozen programs, pins, six Native blocks and graph
+
+All four embedded program bodies were extracted as text, preserving deindentation and trailing LF, and hashed without import/eval/execution. Exact A/C/V/Z bytes and hashes are unchanged:
+
+|Program|Bytes|SHA256|Git blob of body|
+|---|---:|---|---|
+|A|63917|3c36b155aab486f82fb9b89f55e0b61ffe01be4a7502350391784195e552b6d0|d815dc64d2a1dab5804bae3ca5578c2ee6cad3d6|
+|C|63195|1f2d53a7ae00b215634c0d6c9aaa40134e725d561d4334ef827ca54a418df261|026ceb8ac0135abbd84eefdc853a21d7e5d0351a|
+|V|15099|94135538ab4fb8fa7f43fc2fe42c64563eb806e436117b4a404c26c855ee35bf|d2b64db1ff7d4b916bc20902f268b806c0341e73|
+|Z|13305|b36c40c0a74159db5c8db783d9c615f3c3cfbee4e30c0296fe023b43c5646c1d|5450dec2ffb37a90c9454fc802453ea50cd31278|
+
+The qualified World/runtime/helper/D/Dtests source blobs remain exact baseline leaves. SHA256 values below are the binding brief's frozen content pins; their blob/size identities were read from the full baseline tree and their existing bootstrap declarations remain unchanged through the whole-workflow inverse proof.
+
+|Pin|Path|Git blob|Bytes|SHA256|
+|---|---|---|---:|---|
+|World|test/fixtures/finite-budget-world.mjs|43aad5bddd844d591572c5868b73697dfd3463f9|243656|05e50e17420c42f65f8c8c450efc6dd37f9ae429a32a070c9043ab0a50548238|
+|runtime|test/fixtures/finite-budget-failure-runtime.mjs|8387894721b0b4e8ccbf5d91eb4eed4cd0c7c5fd|5863|34ff78a892a7aadbe9b6f8f2e810b7127d7a1409a42cf45ec28d946d1deedcc9|
+|helper|test/fixtures/finite-budget-failure-diagnostic.mjs|6b5b9f8905d77d3f9cd9d89ea3058cfbdd57760f|7927|97dd3df67bfcaef8567975732b573f274d89be8b63a4e9020685fafe731f39f2|
+|D|test/fixtures/finite-budget-stage-observer.mjs|0197111834354a1e911b977a765b161591d48b18|15604|1c5a30301153ac92deb13efb4b84f4d5888e35fb27ae10e1078c7fb861039851|
+|Dtests|test/finite-budget-stage-observer.test.mjs|57dfbcfae29c8492acd1767693cc6fccdde45f7e|10425|f206f685401be501cb9320286dea7638baa8d8f2cac5c6f796b5851da073bf8c|
+
+Existing five-pin binding remains pureTestBlob1f8b02d5b2dddb474c7db7daa04aa24e2dc948d8, nativeTestBlob533dafb5df5f8e57442c5b9029dc8dec6dded434, worldBlob43aad5bddd844d591572c5868b73697dfd3463f9, custodyBlob4d05b5ec0f7b074be88ef9733a47c984b0212351 and lockBlob36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b, SDK1.2.1. All eight bootstraps retain independent exact runtime/helper/D blob+bytes+SHA checks and the existing verified observer byte transport. No source pin was changed to obtain a result.
+
+The six original Native step blocks below include their exact existing step header, env, shell/run content and terminating text before the next step. Each is unchanged by the sixteen allowed edits. These hashes record the original complete blocks as DATA; no command ran.
+
+|Native job block|Bytes|SHA256|Git blob of block|
+|---|---:|---|---|
+|positive_prepare|360|a5fb9018a15148200d9f974d88fceddd7b969dd1da34aec5d1d177e627a4bb1f|e4d289df7fc4cb3b326a739d0cbbc1491c985fd0|
+|positive_consume|1259|04372215e782289cf9f9369deb3e41b692c78c7ba69db390170edee7eeb5f1b5|7b8d268af609632fbecbfa9304efad1b8207b153|
+|reduction_prepare|362|0884130dfd71b58991ab0a5810d45ceb86140ba1037eb3e69a61199bc813f3f5|ff19f87a2167cab59475fa5d9a0e90e0c41c4850|
+|reduction_consume_a|1262|cafaa1cfe677ea408c3bd0430d87aefbac615ec55ceb621f85f1b161d3354fe4|3793543f16f3ae3eb85458763b9a4e2ec76149d3|
+|readonly|1164|b5fa881c10523d636b77a787b7e92bcc14bc64e13d658bd34476f00e1d4e9f0c|d0990f3d9edf9b4ca757fc65b1cfd87376d9fa1c|
+|reduction_consume_b|1262|c0566bba404f2a61b8d22f0b80272e2b1322f4799ef14f248e28736511a1d378|4715c7fcc12c939d44d5bad8128b4bdca9cdc56b|
+
+All eight declared jobs, needs/timeouts and key placements are unchanged. Secret references remain ONLY the26generic crypto slots across the same six native jobs/environments,0contracts/verify. No value was read/copied and custody did not change.
+
+|Declared job|Original needs|Timeout minutes|Frozen crypto slots|New startup absence check|
+|---|---|---:|---:|---|
+|contracts|none|2|0|yes|
+|positive_prepare|[contracts]|15|3|yes|
+|positive_consume|[contracts, positive_prepare]|15|4|yes|
+|reduction_prepare|[contracts]|15|3|yes|
+|reduction_consume_a|[contracts, reduction_prepare]|15|4|yes|
+|readonly|[contracts]|7|3|yes|
+|reduction_consume_b|[contracts, readonly, reduction_prepare]|15|9|yes|
+|verify|[contracts, positive_prepare, positive_consume, reduction_prepare, reduction_consume_a, readonly, reduction_consume_b]|2|0|yes|
+
+All clocks/caps/delays/cancellation semantics stay original: R120s, P-D300s, root30s, child5s; I0-to-C0 900000ms; C0-to-C1 180000ms; peakNative3, Miniflareperjob2/global6. Original concurrency group afw-finite-budget-qualification and cancel-in-progress:false remain unchanged. NativeScope, closure and provider assertions are original. Business acceptance remains Q8+Native8=16TOTAL, never16Native. No extra or separate Task1/Task2/old32keyscope/14Z requalification is planned or authorized. ALL checks inherently invoked by the frozen full pipeline remain: in particular V runs its original14ZIP+2receiver controls once inside the future original trial. They are separate from business Q8+Native8, and V is not rewritten to omit them. The unchanged actual contracts/parser will validate the final Source workflow before Q8/Native if Root later releases the one-use attempt.
+
+### Observation, acceptance, activation and closure contract
+
+The already-qualified three diagnostic summary pair/uploader sequences and safe-id/safe-digest outputs remain exact. Their eligible producers are positive_prepare,reduction_prepare,readonly. Existing source guards and original truth assertions are not weakened. The final verify projection remains exactly AFW_STAGE_DIAGNOSTIC_ASSIGNMENTS with three ordered rows: explicit current numeric artifact ID+64hex ZIP SHA, or unavailable/null/null. Missing/invalid/duplicate producer outputs stay unavailable; no name/history fallback, borrowed job/run output or fabricated assignment is permitted. SuiteSAFE is separate and a partial diagnostic success cannot establish whole-suite acceptance.
+
+Root alone may independently consume the literal current assigned three diagnostic pairs and literal assigned SuiteSAFE, after exact current run/attempt/job/repository/head/context/name/bytes/digest/manifest/schema binding. Executor observes compact GitHub run/job/step/artifact metadata only, never Native/contracts/producer logs or private cipher/model archives. No checkpoint key copy, private archive download/open, log download, CFAPI/provider/runtime operation, Max, OAuth/OTP/mail, owner action or credential/custody change is authorized. Existing previously-custodied synthetic key can be used only by the unchanged26crypto slots of the existing pipeline AFTER an exact Root one-use release.
+
+This inactive commit must first receive Root independent gate. Only if Root asks, a separate ACTIVE UNATTACHED proposal may remove ONLY8falseguard prefixes, with exact commit message AFW-STAGE-TASK3-NATIVE-ONEUSE-20261114 and all other text/programs/pins/report held. That remains HELD for a separate exact Root gate and ONE-USE RELEASE. No SourceCAS, attach, workflow_dispatch, old intent, rerun or activation follows from this preparation or its successful object creation.
+
+After a future exact release only: fresh closed Source lease, one no-force expected-head CAS to the exact approved active commit, reconcile the ACK and find UNIQUE workflow/ref/head run with attempt1. Unknown ACK or initial0run is not permission to repeat CAS/dispatch/rerun/overlay. Source freezes until ALL EIGHT DECLARED jobs are positively terminal; absent/unknown is not terminal. Record exact started/endedUTC, immutable source/tree/F7/programs, run/attempt/jobs/current artifact metadata and actual raw outcomes only if exposed. REST continue-on-error conclusion may differ from raw Native outcome. No failed/missing16checks can be reported as an accepted full suite.
+
+Once all8terminal, fresh Source lease and restore original F7 plus every undeclared baseline leaf; only this SAME report append survives. Preserve the ENTIRE active-proposal report prefix, append exact outcomes/Root sanitized acceptance/current metadata and closure readbacks. Required closure includes untruncated full baseline/current tree diff, all62workflow identities, main unchanged, consumed head exactly1run/attempt1, final head0runs and all five in_progress,pending,queued,requested,waiting inventories0. A failed frozen trial permits reporting/restoration, not a fix overlay or another run. A cause-location hint, pending stage, HTTP code or site is unauthenticated and is not historical cause or a credentials diagnosis.
+
+### Preparation verification and current limits
+
+Full baseline tree and complete historical report were inspected remotely through the GitHub plugin. Source head77cff returned0runs and each of the five Source active-state inventories returned0. Main and Source were read explicitly. Workflow data-only verification established all16allowed text edits by exact inverse equality; four program hashes match every binding brief value, all eight new guards remain false, eight bootstrap checks precede only the assigned Node commands,26keyslots remain across exactly6jobs, the eight-job DAG/timeouts and six Native blocks remain exact. Full inactive GitDB tree/commit/report readbacks follow before READY and must show exactly F7 plus this SAME report changed, no deleted/added baseline leaf and no other workflow change. A later gate cannot infer validity from this narrative alone.
+
+No extra tests, Node import/eval, source execution, local Source files/clone/npm/build, remote Actions run, key-scope replay, architecture review or runtime/provider access was performed. Task1/Task2 actual controls remain their prior dated evidence. New workflow parser acceptance, Q8/Native8 outcomes, diagnostic assignments, SuiteSAFE acceptance, actual execution clocks and Root artifact checks are UNKNOWN / NOT RUN at this preparation checkpoint. Runtime/native activation is HELD. No Source ref changed during preparation.
+
+All seven flags remain exactly:
+
+```json
+{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
