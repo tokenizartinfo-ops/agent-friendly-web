@@ -90,3 +90,8 @@ Owner pidió guardar/cerrar y seguir mañana. Ejecutor Task2 interrumpido, confi
 
 ## Reanudación owner — 2026-11-14 14:09 UTC
 Gabriel pidió «continua». Pausa levantada para mismo plan AFW. Root verificó Source03680/main0c9/Rootdocs8d7d intactos, head0runs/cincoactivos0, relay17688 sin cambio. Skills SDD/resuming disponibles y aplicados; Task1 COMPLETE/CLEAR no se repite. Ejecutor anterior no está disponible en inventario tras reinicio: reemplazo fresco SOLOTask2, mismo brief/pins/preflight cerrado, no nueva arquitectura. Preparación inactiva RELEASED; Source attach/qualificación y Native siguen HELD hasta exact Root gate. Ninguna clave/OAuth/CF/browser requerida para este bloque. Cloud GitDB/Actions conserva aislamiento; no Source local.
+
+
+## Task2 lectura independiente durante preparación — 14nov2026
+Ejecutor /root/stage_diag_task2_resume, modeloSolxhigh por SDD; Source/main siguen cerrados, todavía sin candidata/run autorizado. Root recuperó y verificó report890a0d5c/368869B/SHA344d8162… y originales A62999/d76ca29a,C63195/a41c417e,V15099/94135538,Z13305/b36c40; árbol3360entradas/3199hojas/62WF. Solo datos públicos Source, sin ejecutar Source local.
+Root pre-gate encontró dos brechas concretas en primeros blobs inactivos: legacy() omitía header real CustodyError (Sourcecustody21–22), y collector no exigía ausenciaGH_ARTIFACT_TOKEN. Ejecutor preparó corrección DATA: mismo enumcustody, s13formato real y guard+control s33; nuevos pins D0197111834354a1e911b977a765b161591d48b18,tests57dfbcfae29c8492acd1767693cc6fccdde45f7e, todavía NO cualificados. Pins previos c79c/e298 supersedidos, no ejecutar. No ampliación de enum, privacidad ni autoridad. Gate completo/ejecución/review siguen pendientes; esto no es un pase por inspección.
