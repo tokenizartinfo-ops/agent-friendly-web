@@ -8,3 +8,9 @@ BuilderAstraxhigh identificó ordinalFileTest1repetido y clavesLFenTAP; confirm�
 Ruling: aceptar soloexcepciónFileTest1después3Rok, probadaconfixtureNodeREAL; ausenciadefila noexcluyelateerror. Costosiincorrecto: señalunknown/retrabajo, noaceptaciónnegocio.
 Ruling: TAPprimerfalloprefixonly, NOparsingdedetalles/code/site, suffixignoradodesdeprimerliteralnot_ok. Corrigediseñomáscomplejoanterior; propiedadLFno puedeinyectarresultadosposterioresqueanalicemos. Costosiincorrecto: menorprecisión/podríamosnecesitarotraobservaciónacotada; nuncaRootdatosprivadosniestadopassedinventado.
 Rootaceptadiseñobajoinstrucciónownerautónoma/optoutpreguntas; siguienteplan+preflight. Sourcepreparación/run/runtime siguenNOreleased hastaesosgates. Source410b3701preservado, all7false.
+
+
+## Plan escrito y self-review — 2026-11-14
+Plan docs/superpowers/plans/2026-11-14-readonly-boundary-observations.md de2tasks: calificación pura/integración; un ensayo enfocado y restauración. Reviewfocus5 cubiertos por tests; interfaces y handoff exactos, nopinsfuturosinventados. Source410b3701main0c9preservados; preflightpendiente, noSourceprep/runrelease.
+Ruling: conservarstartupcontrolado con8testsdeausenciaNODE_OPTIONSantesdebootstrapNode, sin tocarcomandosNative; costosifalla: rechazo tempranoSource, noejecuciónpermisiva.
+Ruling: continuarconSDD/aislamientoGitDByausados ysinpreguntasrutinarias segúnowner. Costosiinterpretaciónincorrecta: trabajoSourceaisladorevisable, noactivaciónruntime/merge/permisos.
