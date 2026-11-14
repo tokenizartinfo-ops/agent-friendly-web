@@ -290,3 +290,32 @@ Whiletheboundedb09diagnostic isprepared, RootmayinspectONLYpinnedPUBLIC R1Native
 Root fully read18739B carrier and14680B program, no Sourceexecutionlocally. ImmutableD/P/testpins+exact32anchors/5365Bprefix/1593Bwholefamily;26reversibleliteralinstrumentationedits preserveallb09assertions. Onehelddiagnosejob/3min/Node22.23.4/no npm/SDK/Native/AES/AFWkeys/artifacts. Copiedfixturesonly; capturedchildTAPneverechoed; exactoneID/count/exit/canonicalcloseddiagnosticvalidation. Only30phaseenum/errorclass/safeintegeractualexpected/boundedmarkerlinebytecounts/oldgeneralcodeenum andcontext/pins/7false. Validobservedfailureissuccessfuldiagnosticcollection, NOTqualification.
 Inactive721ff3f8eea69e6a073e7f25fc1afb8d52afa921/tree89ba9061b01f49b5ee989d19005327d3a6bf0d8d/F73e1d9a89d49d26d71eabe92ad8d9a2bf6982465f/18739B/SHA06fdb8855dc5c2e7a7239c9a38e4e445f905fa3c5ef104c1b64d04efae02fc32. SAME22a4ad5c94f7670848c1146d4d68ca2c3a6fe5d4/500481B/SHA0c03ed0a194d870f6e6bdb4e84f7f968226f1b427701ef5782936592b6e0782c preservesENTIRE496628B4c286prefix. RootfulltreeauditonlyF7/SAME,3202leaves62WF; D/test/originalbusinessunchanged.
 Unattachedactivec6b189314a1e98f57193ebfe801d88635dae6975/treef1373166035d5f42e7a0afccc0ba83fd0790e828/F73fe17d18647dbfdf78cfd601892f18c7ca33b70d/18730B/SHA8d9132e6448f392cf56e61953ff63a27847c5d1a10d076aeac080a865d52fdcb removesONLYonefalse. Completecommit/tree/F7readbackdirectparentd896/head0runsverified. ReleaseONECASonlyafterfreshSourced896/main0c9/all5active0/head0; exactmessageAFW-READONLY-B09-DIAGNOSTIC-ONEUSE-20261114. FreezeSourceuntilsinglejobpositivelyterminal, inspectonlyclosedJSON thenrestoreoriginalF7 andappendactualSAMEfullprefix. No fullqualification/NativeR1rerunbyinference; sameaggregatefixwave, onefuturescopedrereview. R1publicstaticreadallowedunderprecedingruling, no mutation/rerun. All7false; owneractionunnecessary.
+
+
+## 2026-11-14 — B09 diagnostic actual: old-general precondition fails (CONSUMED)
+
+ONE run43632996599/attempt1 atc6b189314a1e98f57193ebfe801d88635dae6975/treef1373166035d5f42e7a0afccc0ba83fd0790e828/F73fe17d18647dbfdf78cfd601892f18c7ca33b70d completedSUCCESS as diagnostic collection, NOTqualification. Sole diagnose132563511133 andallstepspositivelyterminalSUCCESS. Root readonlytheclosedAFW_READONLY_B09_DIAGNOSTIC/1 line dated2026-11-14T19:36:22.1548044Z; exactcanonicalkeys/context/pins/bounds/enums/caps/7false independentlyvalidated. No rawTAP/message/stack/headers/privateNative/R1 data copied.
+
+Actualdiagnostic:
+```json
+{
+  "state": "observed_failure",
+  "phase": "old_general",
+  "errorclass": "assertion",
+  "actual": null,
+  "expected": null,
+  "stats": {
+    "markerExactCount": 1,
+    "markerMentionCount": 2,
+    "maxLineBytes": 115,
+    "rawBytes": 1741,
+    "oldGeneralCode": "unknown"
+  }
+}
+```
+
+Thisestablishes marker_countandmarker_location passed, thenold_general asserted becauseoldprojectorreturnedunknown. ExactlyONEcanonicalmarkerline butTWOoverallmarkermentions; oldP intentionallyrequiresoneoverallmention, so thefixturedoesnotyetproveoldcollectorEACCES vulnerability. No inferenceaboutwhichrawsecondaryfieldcontainssecondmention; inspectversionedprimaryNode codebeforeproposingminimalfixture-onlycorrection. Retainoldprojector/allrawcount/location/fullpairassertions; no expectedunknown/countfit/projectorweakening. No businessR1cause/qualification86/Nativecase claim. EarlierGenericErrorwrapperdefect remainsvalidbutwasnotthelastfailure.
+
+Onlyaftersinglejobandrunterminal, originalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc restored at348cdc3ee9545b4db723e49f09626b25b4b4ecb9/treeca60fe234efa9c4b62d381a08967801b5283a707; Rootfulltreevsd896 onlySAME22a4append,3202leaves62WF, D0c351/testef385unchanged. ThisappendpreservesENTIRE500481BSAME22a4ad5c94f7670848c1146d4d68ca2c3a6fe5d4/SHA0c03ed0a194d870f6e6bdb4e84f7f968226f1b427701ef5782936592b6e0782c. Consumeddiagnosticnotreplayed. All7nonclaimsfalse; Sourcebusiness/runtime/provider/OAuth/permissions/keysunchanged. Samefirstaggregatefixwave; nextfixturecause-specificprep only, noqualificationrununtilRootgate.
+
+FinalclosedSource68538634f9565223fd23728b0e69f6ae2dc4f43c/treea46fd0a71ea899dcddbea0fec5c3e970f74ec5eb/SAME822e3d7dbd0536c888cd1aacd7d6c7d88e73e8cc/502674B/SHA938e57aa7bf95cedd133f0aba12a756388684eb1d3f19c872ad498d0ccc869dd; readback/fulltree/head0/mainexact verified. Workerreasoningonly primarysource; no nextSourceprep/run untilconcretefixturecause/ruling.
