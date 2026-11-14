@@ -20,7 +20,7 @@ const summary=(n,pass=n,skip=0,todo=0)=>'1..'+n+'\n# tests '+n+'\n# suites 0\n# 
 const failure=(n=2)=>prefix(n-1)+'# Subtest: R'+n+' fixed original SDK readonly budget\nnot ok '+n+' - R'+n+' fixed original SDK readonly budget\n';
 const canonical=v=>Buffer.from(JSON.stringify(v)+'\n');
 async function owned(fn){const root=await fs.mkdtemp(join(tmpdir(),'afw-readonly-owned-'));try{return await fn(root);}finally{assert(root.startsWith(join(tmpdir(),'afw-readonly-owned-')));await fs.rm(root,{recursive:true,force:true});}}
-function environment(){const e={...process.env};for(const key of ['NODE_OPTIONS','GH_ARTIFACT_TOKEN','AFW_SYN_CHECKPOINT_KEY'])delete e[key];return e;}
+function environment(){const e={...process.env};for(const key of ['NODE_OPTIONS','GH_ARTIFACT_TOKEN','AFW_SYN_CHECKPOINT_KEY','NODE_TEST_CONTEXT'])delete e[key];return e;}
 const realCache=new Map();
 async function real(mode){
  if(realCache.has(mode))return realCache.get(mode);assert.equal(process.versions.node,'22.23.4');
@@ -36,7 +36,8 @@ if(mode!=='empty')for(let n=1;n<=3;n++)await test('R'+n+' fixed original SDK rea
 if(mode==='late'||mode==='failed_late')setImmediate(()=>{throw new Error(canary);});
 `.replace('__MODE__',JSON.stringify(mode)).replace('__CANARY__',JSON.stringify(canary));
   await fs.writeFile(join(root,file),code,{flag:'wx',mode:0o600});
-  const child=spawnSync(process.execPath,['--test','--test-reporter=tap',file],{cwd:root,env:environment(),encoding:'utf8',timeout:8000,maxBuffer:65536});assert.equal(child.error,undefined);assert.equal(child.signal,null);assert.equal(child.stderr,'');assert.equal(child.status,['normal','empty'].includes(mode)?0:1);return child.stdout;
+  const fixtureEnv=environment();assert.equal(fixtureEnv.NODE_TEST_CONTEXT,undefined);
+  const child=spawnSync(process.execPath,['--test','--test-reporter=tap',file],{cwd:root,env:fixtureEnv,encoding:'utf8',timeout:8000,maxBuffer:65536});assert.equal(child.error,undefined);assert.equal(child.signal,null);assert.equal(child.stderr,'');assert.equal(child.status,['normal','empty'].includes(mode)?0:1);return child.stdout;
  });realCache.set(mode,value);return value;
 }
 function first(v,n){assert.equal(v.state,'first_failure');assert.deepEqual(v.cases,ids.map((id,i)=>row(id,i<n-1?'ok':i===n-1?'not_ok':'unknown')));assert.equal(v.counts,null);}
