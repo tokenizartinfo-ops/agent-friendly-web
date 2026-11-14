@@ -333,3 +333,109 @@ PinnedNative533daf/World1e188unchanged: R1 invokesrunBudgetReadonlyCase→withFi
 Root independentlyreadnewtestdcd8a8b31838e3b1baf34dfd8e7ccbbd26ba7fca/23473B/SHAb43cc35686d0cdac04816164a89fb6d80bfbd282f93f5edc8dbd67f2e935337c; exactONE marker-lineoperator deepStrictEqual→fail/reverseef385, poisonmode/allassertions/32IDsuntouched. NativeDATAfc02dd4105512f0e29716f4c72e031d0910b1692/tree15d48bbac771b63173d9e89828b53773a0199057 directparent685, onlytest+F7; D0c351/NativeF74cf7exact.
 Inactive3732024880e9732c4c596216fc7daf69b9c6d3b1/tree668c7f4e62c4e547a6191374591c5de22e8618a5/F72c24a016b5a091f9ab7a7c1c2c7507cc1fe44bc8/61333B/SHA31bbbb4aa3516480f02160ee880da9417c0add804a157274d4d20968f43bd556. RootwholecarrierreconstructionmatchesONLYapprovedmessage/test/candidate/Ssha substitutionsfromprevious61347carrier. Q14975/V4601/Z13305exact; S12472/SHA58a5461652845d716a40f8877e1218771a52313b59d30569dc5e6f1ceaa285a7 constantsONLY. OLD_OBSERVER87bb/ea30 retained. SAME7bc3711075e8ed304bdae607e150584312c25b92/506921B/SHA10e3204447f19c28e07c9cce19a30b055f4223376ec350ca270b52d51a07453e preserveswhole502674B822eprefix. Fulltree3202/62 ONLYtest/F7/SAME; other3199exact.
 Unattachedactive1a6ead04c8745ea59d885b513ab19efb381ccf17/treef6ab9d614a02c5c214a57986f9f931718d636ca6/F775940a26dbd6b241f0862fd013e81736c3441f60/61315B/SHA1da848c6c01337467de6e7b8ff0b8347efbad29ded6f877b971973004e122840 removesONLYtwofalse; commit/tree/F7reread/directparent685/head0/fulltreeverified. RootstrictSMALLSAFEreceiverexpectsnewtest/candidatepins/currentcontext/old4RED+19unknown+86GREEN/all7false. RulingreleaseONEzeroAFWkeyqualification afterfreshSource685/main0c9/fiveactive0/head0lease; exactmessageAFW-READONLY-B09-OPERATOR-FIX-ONEUSE-20261114. Freezeuntilbothterminal→assignedSMALLSAFEonly→originalF7restore→actualSAMEappend→ONEscopedrereview. NoNativeR1/provider/runtime/permission/keybusinesschange. Sameaggregatefixwave; all7false.
+
+
+## 2026-11-14 — Aggregate readonly-boundary four-fix qualification ACCEPTED (scoped rereview pending)
+
+ONE fresh run43633743809/attempt1 atSource1a6ead04c8745ea59d885b513ab19efb381ccf17/treef6ab9d614a02c5c214a57986f9f931718d636ca6/F775940a26dbd6b241f0862fd013e81736c3441f60 completedSUCCESS. ExactmessageAFW-READONLY-B09-OPERATOR-FIX-ONEUSE-20261114. All declaredjobspositivelyterminalSUCCESS beforeSourcewrite:
+```json
+[
+  {
+    "id": 132565895848,
+    "name": "qualify",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-11-14T19:44:47Z",
+    "completedAt": "2026-11-14T19:45:17Z"
+  },
+  {
+    "id": 132566038608,
+    "name": "verify",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-11-14T19:45:19Z",
+    "completedAt": "2026-11-14T19:45:29Z"
+  }
+]
+```
+
+ActualzeroAFWkeyqualification: oldFourRed4/0pass/4fail (separateNOTGREEN); allUnknown32/13pass/19fail; currentreadonly32PASS; frozenoldstage36PASS; integration10PASS andreceiver8PASS, total86GREEN. cancelled/skipped/todo0 throughout. EveryoldregressionfamilyfailsagainstfixedvulnerableoldObserver87bb/ea30; currentb09passesrawcanonicalcount/location/oldgeneralEACCES/fullpair/repackednegativeassertions, sooldb09negativeproofno longerrestsonthebrokenfixtureprecondition. Priorfailedqualifiersremainfailed/consumed; diagnosticcollectiondidnotcountGREEN.
+
+Root independentlyconsumedONLYassignedartifact14128858806 fromliteralcurrentverifyline at2026-11-14T19:45:25.7941416Z. Qualifyuploaderprimarylogs: ID14128858806,size8542,uploadSHA90fafc25f3c4fb605ebe0715e4d055b95a65390b7568ec081ede8a3f9ed5e56c; currentrunartifactmetadataexactname/context/digest/size/expiredfalse corroborated. RawZIP8542B/SHA90fafc25f3c4fb605ebe0715e4d055b95a65390b7568ec081ede8a3f9ed5e56c; RootownboundedZIPreaderverifiedEOF/entrynames/ranges/method/caps/CRCknownvector/fatalUTF8/canonicalJSON. result.json7734B/SHA2f0fa51907acf486ebb7c163796e7f4742c7d112b79889f9c8f5552ad4c63e5a/CRCd74f4c30; manifest.json554B/SHA0821e8ccc55536df515b09ad1e7c49a77933f4c5f7a67fbcf8dc2a6fc8125ab7/CRCa9f699c1. Exactpurpose/role/context/pins/candidate/oldObserver/schema/counts/IDinventories/10integration/8receiver/manifesthash/all7false independentlyvalidated. No rawNativepayload/checkpoint/logsdownload.
+
+Rootacceptedreceipt:
+```json
+{
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "repositoryId": "1347578006",
+    "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+    "source": "1a6ead04c8745ea59d885b513ab19efb381ccf17",
+    "tree": "f6ab9d614a02c5c214a57986f9f931718d636ca6",
+    "workflowBlob": "75940a26dbd6b241f0862fd013e81736c3441f60",
+    "run": "43633743809",
+    "attempt": 1,
+    "node": "22.23.4"
+  },
+  "resultBytes": 7734,
+  "resultSha256": "2f0fa51907acf486ebb7c163796e7f4742c7d112b79889f9c8f5552ad4c63e5a",
+  "manifestBytes": 554,
+  "manifestSha256": "0821e8ccc55536df515b09ad1e7c49a77933f4c5f7a67fbcf8dc2a6fc8125ab7",
+  "tests": {
+    "oldFourRed": {
+      "exit": 1,
+      "tests": 4,
+      "pass": 0,
+      "fail": 4,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "allUnknown": {
+      "exit": 1,
+      "tests": 32,
+      "pass": 13,
+      "fail": 19,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "readonly": {
+      "exit": 0,
+      "tests": 32,
+      "pass": 32,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "stage": {
+      "exit": 0,
+      "tests": 36,
+      "pass": 36,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "greenFamilies": 86,
+  "oldFourRedFail": 4,
+  "negativeFailures": 19,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
+```
+
+NativeDATAfc02dd4105512f0e29716f4c72e031d0910b1692/tree15d48bbac771b63173d9e89828b53773a0199057/F74cf7e93ae0079bdbf9cab3f38c15e6ee179a8e10/367631B remainsDATA/all8false, neverexecutedforthesetelemetryfixes. D0c351/28993B; testdcd8/23473B. World/NativeR1/businesscommands/caps/clocks/keysunchanged. HistoricalR1pairwithcommandunknown/custodyabsentremainsvalidsamehashundernewRootreceiver; actualcauseunresolved. No86→business16/PCoffinference.
+
+Onlyafterbothterminal, originalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a restored at6dff087a0eeb43df6f026ab7f232c64ba6543a60/tree3cec6e408c8b9423de9b4d864c777470f3d5da4c; fulltreevsclosed685onlynewtestandSAME,3202leaves62WF, undeclaredexact. ThisactualappendpreservesENTIRE506921BSAME7bc3711075e8ed304bdae607e150584312c25b92/SHA10e3204447f19c28e07c9cce19a30b055f4223376ec350ca270b52d51a07453e. Sourcefinalhead/readback/hashwillberecordedindependently. NextONEscopedrereviewofI1–I4/tests/qualifier+Nativepinripples; nosecondbroadreview/fixwave. Mainunchanged/all7false/R1causeheldforclosure. No realCF/provider/runtime/OAuth/cron/Containers/subscriptions/permissions/newkeys/customer/Max/mail/browseractions/localSourceexecution.
+
+FinalclosedSourced42277a6963ee691ac176358e8396194f7dc32c9/tree91f33096426c965f2b0b3b61ae62949f815b81e1/SAME063b/512097B/SHA5be9582d057d23d7012c434c8af6dea72e93ecbc1d5056f3fd7824d81894a697; Rootreadback/fulltreevs87bbonlyD/newtest/SAME/head0/all5active0/mainexact. ONEscopedreviewpackage reviews/2026-11-14-readonly-boundary-final-scoped-rereview-package.md next. NoNativeR1rerun untilclosure.
