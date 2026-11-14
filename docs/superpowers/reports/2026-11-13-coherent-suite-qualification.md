@@ -4017,3 +4017,30 @@ The future wrapper verifies fixed D/P/test hashes and exact32-family anchors, se
 Only one validated closed AFW_READONLY_B09_DIAGNOSTIC/1 JSON line may be printed: current bound context, immutable pins/bounds, diagnostic stateobserved_failure|not_reproduced, a30-value phase enum, errorclassassertion|other, actual/expected only if integers0..65536 (otherwise null), and optional synthetic stdout stats. Stats contain only markerExactCount0..8, markerMentionCount0..8, maxLineBytes/rawBytes0..65536, oldGeneralCodeEACCES|unknown|other. Stats refer to the most recently completed synthetic fixture; phase identifies progress. Missing early stats are null. Marker matching/representation/general-projection differences can be observed without raw messages, stacks, TAP, headers or object/string error values. Wrapper requires one b09 TAP ID, one canonical child diagnostic, coherent exit/test counts, known enums/fields/caps and unchanged pins; failed validation exits silently. Valid collection may finish successfully while state remains observed_failure. Neither state is qualification, business cause or readiness.
 
 The ENTIRE prior496628B SAME prefix4c286ada4645908375a08870ed72f741db3bafe0/SHA2565d20155cbd31f945f0a9e7e76acfb76e7ff6112f4b37633b69ab5b00913cdd8e is preserved before this appendix. The Source proposal changes ONLY transientF7 and this SAME append; no report leaf or test/source change. Root owns independent gate, one-false-removal active derivative, current reread/CAS release, receipt inspection and exact originalF7 restoration. Same aggregate pre-review wave; no second broad review/fix wave. All seven nonclaims remain false; R1 cause remains held until this unit closes, with no actual R1 reread/rerun or business16/PC-off/provider claim. No references or execution were performed by this preparation.
+
+
+## 2026-11-14 — B09 diagnostic actual: old-general precondition fails (CONSUMED)
+
+ONE run43632996599/attempt1 atc6b189314a1e98f57193ebfe801d88635dae6975/treef1373166035d5f42e7a0afccc0ba83fd0790e828/F73fe17d18647dbfdf78cfd601892f18c7ca33b70d completedSUCCESS as diagnostic collection, NOTqualification. Sole diagnose132563511133 andallstepspositivelyterminalSUCCESS. Root readonlytheclosedAFW_READONLY_B09_DIAGNOSTIC/1 line dated2026-11-14T19:36:22.1548044Z; exactcanonicalkeys/context/pins/bounds/enums/caps/7false independentlyvalidated. No rawTAP/message/stack/headers/privateNative/R1 data copied.
+
+Actualdiagnostic:
+```json
+{
+  "state": "observed_failure",
+  "phase": "old_general",
+  "errorclass": "assertion",
+  "actual": null,
+  "expected": null,
+  "stats": {
+    "markerExactCount": 1,
+    "markerMentionCount": 2,
+    "maxLineBytes": 115,
+    "rawBytes": 1741,
+    "oldGeneralCode": "unknown"
+  }
+}
+```
+
+Thisestablishes marker_countandmarker_location passed, thenold_general asserted becauseoldprojectorreturnedunknown. ExactlyONEcanonicalmarkerline butTWOoverallmarkermentions; oldP intentionallyrequiresoneoverallmention, so thefixturedoesnotyetproveoldcollectorEACCES vulnerability. No inferenceaboutwhichrawsecondaryfieldcontainssecondmention; inspectversionedprimaryNode codebeforeproposingminimalfixture-onlycorrection. Retainoldprojector/allrawcount/location/fullpairassertions; no expectedunknown/countfit/projectorweakening. No businessR1cause/qualification86/Nativecase claim. EarlierGenericErrorwrapperdefect remainsvalidbutwasnotthelastfailure.
+
+Onlyaftersinglejobandrunterminal, originalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc restored at348cdc3ee9545b4db723e49f09626b25b4b4ecb9/treeca60fe234efa9c4b62d381a08967801b5283a707; Rootfulltreevsd896 onlySAME22a4append,3202leaves62WF, D0c351/testef385unchanged. ThisappendpreservesENTIRE500481BSAME22a4ad5c94f7670848c1146d4d68ca2c3a6fe5d4/SHA0c03ed0a194d870f6e6bdb4e84f7f968226f1b427701ef5782936592b6e0782c. Consumeddiagnosticnotreplayed. All7nonclaimsfalse; Sourcebusiness/runtime/provider/OAuth/permissions/keysunchanged. Samefirstaggregatefixwave; nextfixturecause-specificprep only, noqualificationrununtilRootgate.
