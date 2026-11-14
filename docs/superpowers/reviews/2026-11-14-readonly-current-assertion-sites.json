@@ -1,0 +1,110 @@
+{
+  "World": [
+    {
+      "line": 1150,
+      "text": "for(const name of ['sendCalls','sdkCalls']){const c=value[name];assert.equal(c.invoke,1,'actual single '+name+' invocation');assert.equal(c.sync_throw,0);assert.equal(c.fulfilled+c.rejected,1);}"
+    },
+    {
+      "line": 1151,
+      "text": "assert.equal(value.sendCalls.fulfilled,1,'original SEND ACK settled before SDK');assert.equal(value.sendCalls.sendHashes.length,1);"
+    },
+    {
+      "line": 1152,
+      "text": "const sendRows=rows.filter(([key])=>key.startsWith('afw.finite-owner-cleanup.v1:')&&key.endsWith(':sdk_revoke:send'));assert.equal(sendRows.length,1);"
+    },
+    {
+      "line": 1153,
+      "text": "assert.equal(JSON.parse(sendRows[0][1]).recordHash,value.sendCalls.sendHashes[0]);if(negative)assert.equal(value.sdkCalls.rejected,1,'actual SDK rejection for negative boundary');"
+    },
+    {
+      "line": 1158,
+      "text": "for(;;){const value=await read();if(predicate(value))return value;assert(Date.now()<deadline,'SYN fixed budget observation deadline');await fixedBudgetPause(20);}"
+    },
+    {
+      "line": 1161,
+      "text": "assert.equal(process.env.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(process.env.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(process.env.GITHUB_RUN_ATTEMPT,'1');"
+    },
+    {
+      "line": 1168,
+      "text": "assert.equal(process.env.AFW_BUDGET_GROUP,'readonly');assert(['R1','R2','R3'].includes(caseName));"
+    },
+    {
+      "line": 1174,
+      "text": "const prepared=await prepareOwnerReference(f);rootBefore=await plain(f.stub.firstConnectionAvailability());assert.equal(rootBefore.available,true);"
+    },
+    {
+      "line": 1176,
+      "text": "if(caseName==='R3'){const held=await fixedBudgetWait(()=>plain(f.stub.finiteBudgetSignals()),s=>s.heldNativeSettled===2,Date.now()+30000);assert.equal(held.queueObserverInvalid,false);assert(fixedQueueCausality(held),'actual causal populated readonly queue');}"
+    },
+    {
+      "line": 1180,
+      "text": "rootDuring=await plain(f.stub.firstConnectionAvailability());assert.equal(rootDuring.available,false);assert.equal(rootDuring.live,true);"
+    },
+    {
+      "line": 1181,
+      "text": "beforeRelease=await plain(f.stub.finiteBudgetSignals());assert.equal(beforeRelease.nativeUnsettled,0);assert.equal(beforeRelease.outwardPending,2);"
+    },
+    {
+      "line": 1188,
+      "text": "assert.equal(sdkRoot.I0,plan.I0);assert.equal(sdkRoot.C0,plan.C0);assert.equal(sdkRoot.C1,plan.C1);assert.equal(sdkReference!==null,caseName==='R1');"
+    },
+    {
+      "line": 1190,
+      "text": "const actual=mounted.workers.find(value=>value.name===worker);assert(actual);assert.equal(hash(actual.script),f.firstConnectionBuild[role].sha256);"
+    }
+  ],
+  "Native": [
+    {
+      "line": 106,
+      "text": "assert.equal(result.caseName,name);assert.equal(f.completeWrites,1);assert.equal(f.completeNormal,1);"
+    },
+    {
+      "line": 107,
+      "text": "assert.equal(f.input.entries,name==='R2'?201:200);"
+    },
+    {
+      "line": 108,
+      "text": "assert.equal(f.input.correlations,1);assert.equal(f.input.expirationPreserved,true);"
+    },
+    {
+      "line": 109,
+      "text": "assert.equal(f.foreignUnchanged,true);assert(f.lists<=2&&f.gets<=200&&f.scopePeak<=2);"
+    },
+    {
+      "line": 110,
+      "text": "assert.equal(f.sdkReplay,0);assert.equal(f.nativeUnsettled,0);assert.equal(f.outwardPending,0);"
+    },
+    {
+      "line": 111,
+      "text": "if(name==='R1'){assert.equal(f.lists,2);assert.equal(f.gets,200);assert.equal(f.scopePeak,2);assert.equal(f.responseStatus,302);assert.equal(f.referenceRows,1);assert.equal(f.referenceBefore302,true);}"
+    },
+    {
+      "line": 112,
+      "text": "else{assert.notEqual(f.responseStatus,302);assert.equal(f.referenceRows,0);assert.equal(f.thirdListEntered,false);}"
+    },
+    {
+      "line": 113,
+      "text": "if(name==='R2'){assert.equal(f.boundaryProof.exactPrecedingPages,2);assert.equal(f.boundaryProof.counter,2);}"
+    },
+    {
+      "line": 115,
+      "text": "assert.equal(f.holdLabel,'holdpostnativeACK');assert.equal(f.heldNativeSettled,2);assert(f.queuedAtHold>0);assert.equal(f.deadlineProof.queueCausal,true);assert.equal(f.deadlineProof.denialAfterDeadline,true);"
+    },
+    {
+      "line": 116,
+      "text": "assert.equal(f.rootBefore.available,true);assert.equal(f.rootDuring.available,false);assert.equal(f.rootDuring.live,true);assert.equal(f.rootAfter.available,true);"
+    },
+    {
+      "line": 117,
+      "text": "assert(f.originalChildElapsedMs>=4900&&f.originalChildElapsedMs<10000);"
+    },
+    {
+      "line": 118,
+      "text": "assert.equal(f.callsAfterRelease,0);assert.equal(f.lateReference,false);"
+    },
+    {
+      "line": 120,
+      "text": "assert.equal(result.operationalReadiness,false);assert.equal(result.completePackage,false);assert.equal(result.PCoff,false);"
+    }
+  ]
+}
