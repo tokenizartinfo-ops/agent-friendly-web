@@ -3266,3 +3266,70 @@ All seven nonclaims stay exactly:
 ```json
 {"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
 ```
+
+
+## 2026-11-14 — Task2 zero-key qualification SUCCESS; original F7 restored and Source closed
+
+Status: actual Task2 pure Node/source qualification and independent current SMALLSAFE verification succeeded. This establishes the declared observer/privacy/filesystem/parser/synthetic adapter controls only. Task2 combined spec/quality review remains a separate Root gate. Task3/Native, provider/runtime, business acceptance and PC-off remain HELD; all seven nonclaims remain false.
+
+### Exact one-use release and two terminal jobs
+
+Root inactive gate is preserved in Rootdocs1adad35eebd2339b6dd35c82182327f27a773d18; the exact active gate/ONE-USE RELEASE is preserved in Rootdocsfbfe3929142da695511eed8a60357fbbe4b18b2b and its ledger. Only the authorized two false&& qualifiers were removed from inactive4ccd96065037f6adb9cb5e890212f63dbe4928b1 to prepare activeb07d1b65d6e448eb353f79e31bffc3ccecdb1182; every Q/S/V/Z byte, source/candidate/program pin, schema,33+16+6 inventory and report stayed unchanged. Native candidate2c390b182f6889e79480e7b1618f41af8d1e0d22 remained unattached DATA throughout.
+
+After fresh exact Source/main/active0run/fiveactive0 and F7 readbacks, sole executor issued ONE no-force expected-head activation CAS03680f05dcf051d3b2d3d2bd9829c9ac17592d2a→b07d1b65d6e448eb353f79e31bffc3ccecdb1182, exact message AFW-STAGE-TASK2-ONEUSE-20261114. GitHub returned success:true and independent ref readback reconciled the ACK. Initial run inventory0 was propagation only; no second CAS/dispatch/rerun/overlay was attempted. Source remained frozen until BOTH declared jobs were positively terminal.
+
+Activated tree2f2241728455aa43774082fb0f36a3f88c295023; F7e3419cde630aeabb72f0d8d2e45a1f6f22f73750,54450B/SHA256ae6754ac0b0c4123e450d4a62975f8762010154e91babc29f36b638b8075e805. Unique run43606148496/attempt1, push, repo/headRepo1347578006, exact Source branch and .github/workflows/afw-finite-budget-qualification.yml, created/started2026-11-14T14:41:11Z, completed success with final run update14:41:51Z.
+
+| Job | Exact ID | Started UTC | Completed UTC | Conclusion |
+|---|---:|---|---|---|
+|qualify|132481098711|2026-11-14T14:41:14Z|2026-11-14T14:41:43Z|success|
+|verify|132481232642|2026-11-14T14:41:44Z|2026-11-14T14:41:50Z|success|
+
+The current jobs actually completed source-role assertions, exact checkout, controlled Node22.23.4, four-carrier hash materialization, fixed candidate DATA fetch, locked npm ci --ignore-scripts --no-audit --no-fund, Q qualification and current SMALLSAFE upload. V actually completed same-carrier extraction/hash, assigned metadata/raw ZIP/canonical pair/current provenance checks. These are cloud results, not local or inferred operational acceptance.
+
+### Actual RED/GREEN and integration outcome
+
+Current Q was exactly13680B/SHA2567288879518302a5626aec57337f623e567cae9e500af5a8ffd8d9ed762bbc72d, command node "$RUNNER_TEMP/afw-stage-qualify.mjs". It executed node --test --test-reporter=tap against the owned privacy-RED copy of the exact33-ID test file and the actual test/finite-budget-stage-observer.test.mjs. The RED stub reexported SAME verified D bytes and deliberately added the fixed private canary to projectLogText; the GREEN used the actual observer. Raw child TAP/assertions/errors/private text were captured only internally and were never emitted or copied here.
+
+| Current invocation/control family | Tests/checks | Pass | Fail | Exit / acceptance |
+|---|---:|---:|---:|---|
+| privacy RED |33|32|1|exit1, expected privacy deficit|
+| real D GREEN |33|33|0|exit0|
+| candidate/actual adapter integration |16|16|0|all fixed statuses passed|
+| Task2 receiver |6|6|0|all fixed statuses passed|
+
+Both RED/GREEN had cancelled0,skipped0,todo0. Exact33 focused IDs,16 integration IDs and6 receiver IDs are the complete fixed inventories in the preceding inactive proposal and current immutable carrier S. Root independently verified their exact inventories/statuses. GREEN33+integration16+receiver6=55 logical checks; this does not count the intentional RED failure as a failed real implementation. Task1 tests, previous keyscope cases and frozen generic ZIP control suite were not rerun.
+
+The real cloud results cover actual filesystem regular/link/size/tail/malformed/race handling, privacy projection and canonical schema, conservative stage/HTTP sequences, readonly aggregate outcome/count observation and ID-only assignment behavior. The production collector's GH_ARTIFACT_TOKEN rejection and real CustodyError custody_* header tests passed. Actual unchanged A.assignedPrivate export was invoked directly with synthetic fetch/ZIP/filesystem only: both eligible producer success cases, JSON-decode pending/HTTPnull, bounded403 metadata-validation observation, raw-download/raw-binding/ZIP/receipt/mkdir/write pending cases, original sentinel error preservation, other destination/job silence and nonthrowing observation sink passed. Temporary builtin write stub was restored. No real private archive, World/Native/SDK/AES or provider process was executed.
+
+Actual frozen A.validateKeyScopes and A.validateFixedCases accepted the exact367124B integrated candidate DATA; diagnostic key-reference negative control was rejected. The original decoded parser/forms region and frozen V/Z pins passed; eight-job DAG/timeouts, six exact Native command bodies and the separate eight-bootstrap diagnostic source pins were checked as DATA only. No Native command was invoked. These outcomes qualify the authored source under fixed test conditions; they do not prove arbitrary process compromise resistance or historical business failure cause.
+
+### Independent Root SMALLSAFE and assigned artifact binding
+
+Root independently completed SMALLSAFE verification at2026-11-14T14:43:44UTC, reading ONLY assigned artifact14118088928 and fixed verifier metadata. Executor read artifact METADATA ONLY and did not download any ZIP. No private/producer/Native/contracts log or archive was consumed.
+
+Unique current artifact name stage-task2-SMALLSAFE-b07d1b65d6e448eb353f79e31bffc3ccecdb1182-43606148496; expiredfalse; created2026-11-14T14:41:39Z; expires2026-11-21T14:41:38Z. Metadata workflow_run is43606148496/repository1347578006/headRepository1347578006/headBranchfeat/finite-native-cleanup-20261101/headSourceb07d1b65d6e448eb353f79e31bffc3ccecdb1182. Root independently matched the literal current uploader assignment, API metadata and raw ZIP digest triple; no historical/name fallback or borrowed output was used.
+
+| Assigned item | Exact bytes | SHA256 | CRC32 |
+|---|---:|---|---|
+| raw ZIP14118088928 |5494|63bc4be3d26ba55cd5f24eab96244694deeaf4af4aca55bcae50ee81ddab2f54|ZIP container|
+|result.json|4692|629798df5567bb1a99ab37da968685b6591ab78928eb4553165308a96ee6991e|332ac7c4|
+|manifest.json|548|cc27659c8de242ce21789700ccf177603516ad5a6dd910d1dedf700c44d7babc|53f12cee|
+
+Combined expanded pair5240B and raw5494B are within65536. Root's independent strict two-entry ZIP/ranges/EOF/CRC known-vector/fatalUTF8/canonical closed result/manifest checks passed. All nine current context fields, complete source pins, immutable candidate pin, four integrated program pins,33+16+6 inventories, manifest result byte/hash binding, seven false nonclaims and exact16-field fixed verify receipt passed. Artifact transport integrity is separate from historical custody authentication; receiptAuthenticated remains false.
+
+Qualified current context is exactly repository tokenizartinfo-ops/agent-friendly-web; repositoryId"1347578006"; ref refs/heads/feat/finite-native-cleanup-20261101; sourceb07d1b65d6e448eb353f79e31bffc3ccecdb1182; tree2f2241728455aa43774082fb0f36a3f88c295023; workflowBlobe3419cde630aeabb72f0d8d2e45a1f6f22f73750; run"43606148496"; attempt1; node"22.23.4". Qualified D0197111834354a1e911b977a765b161591d48b18/tests57dfbcfae29c8492acd1767693cc6fccdde45f7e and runtime/helper/World/candidate/A/C/V/Z/Q/S/V pins are exactly the preceding immutable proposal. The integrated candidate was never attached or executed.
+
+### Full restoration, report prefix and closure evidence
+
+After fresh exact active-source lease and two completed-success job readbacks, restoration commitbe55a74e7a940b754132e7337624cad3f947170e, parentb07d1b65d6e448eb353f79e31bffc3ccecdb1182, tree9924b772ca2493157ab72e2f20aaf15821732b99 restored only F7 to original blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc. A no-force expected-head restoration CAS returned success:true and exact branch readback reconciled it. The complete restored F7 was fetched, byte-equal126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a, with its original closed manual/no-push configuration.
+
+Full recursive baseline/restored tree responses were untruncated,3360→3362entries; all62workflow blobs/modes/types were exact to the baseline, with ZERO workflow or undeclared leaf changes. Exactly three deliberate paths remained different: new D01971118, new tests57dfbcfa and this SAME report. Existing runtime/helper/World and every other baseline leaf/mode/type remained byte-exact. Source was not rewritten while either job was running.
+
+The entire pre-append SAME report was fetched as blob7251670fc93353c591cfcf8ee7837b5f0f2d3d65,388105B/SHA256334036cdad55beaaf09200ede9f2a09d9ee1d468c3fa5dff5019d5564aa7a752 and confirmed byte-equal after restoration. This append preserves that ENTIRE388105B prefix, including the complete368869B earlier history and inactive Task2 proposal. No earlier result or authorization was overwritten.
+
+Pre-append fresh primary inventories proved consumed qualifierheadb07d exactlyONE completed success run43606148496/attempt1; restoredheadbe55 zero runs; candidate2c390 zero runs; main exact0c9c475b3ebaa970fc11d628b40e50a90cceb727; in_progress,pending,queued,requested,waiting each0. This final report-only commit is followed by exact Source/ref/tree/full report-prefix/F7/62workflow/consumed-head1/current-head0/candidate0/fiveactive0 readbacks. Any unexpected change would be reported before DONE, without overwriting another writer.
+
+Executor self-review checked authorization/CAS reconciliation and freeze, exact pin/schema/test inventories, actual cloud evidence versus nonclaims, fixed artifact assignment and independent Root verification, full original F7 restoration, complete baseline-tree preservation and append-only historical prefix. No additional unresolved concern was identified within this bounded Task2 source qualification. Conservative unavailability, unauthenticated location hints and process-compromise/historical-cause limitations remain explicit. Root owns the pending combined Task2 review. No Task3/Native, deployment, permission/key/OAuth, runtime, private data or PC-off authority follows from this result.
+
+All historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified remain false.
