@@ -1,0 +1,370 @@
+# Task1 inactive preparation report — R1 structured diagnostic
+
+Status: DONE for INACTIVE preparation only. Root owns independent review, release, one actual run, receipt, originalF7 restoration and final review. No test, self-control, preflight, Source import, npm install, build or Native execution occurred in this preparation.
+
+## Scope and authority
+
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web (1347578006); ENVIRONMENT future isolated GitHub Actions Ubuntu24.04/Node22.23.4; ORIGIN refs/heads/feat/finite-native-cleanup-20261101; RESOURCE_TYPE temporary source workflow and SYN processes; RESOURCE_ID .github/workflows/afw-finite-budget-qualification.yml; ALLOWED_ACTION here: read pinned data and create inert unattached GitDB objects only. ROLLBACK: exact originalF7 f7a71f1a0fa4f5ddf069ff411f008a098455e5cc,126209B,SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a; restore undeclared tuples if any before append.
+
+Spec d858b57543251628f257d1f69d513beb3bc84857; plan2c81dd74978841585e7fd46e4f19a33f38f73444; ledger00e012124f31833ff508f54b43dff9520b9346d1 read completely at Rootdocs89f4f3aa1d68d8e204f8a25a01c5e4ee83ecd17d. Applicable Source AGENTSb67942223e5633011573f2a2165489afd9ff3f67 respected. No subagents were spawned.
+
+## Immutable handoff
+
+- INACTIVE commit d894067e516bda76a2be75218ff13eecaf04bf9c, tree94cef43a346692402f1fb7981478717c94e05342, parentd42277a6963ee691ac176358e8396194f7dc32c9.
+- Carrier4183599e784574aabee244d680500dec5bef047d,44237B,SHA2566ead72bc173a3b54a757fc0241691ce1b1320f772bee73fb2a2f3dafcf78c045.
+- SAME0a4dfaee7f7200fc5cd1680b9ea524d24927677c,513967B,SHA256e5ed36599e83fd3c13d37d539fa5a713965489e1b92a02b38adec8a4e10b0258; full512097B prefix063bfcbf55f12aa985a1c554a16c0f6a15e21d7f/SHA2565be9582d057d23d7012c434c8af6dea72e93ecbc1d5056f3fd7824d81894a697 preserved,1870B compact proposal appendix.
+- Outer9f5455ca454ab518d11641ac1172d44683900a05,41189B,SHA2563dc6b02ec78d18d3019c6a56e38f468b0d57504d52bdfe9e30f51afb279859db.
+- Driver3ef70505e65c179dae68a9a1a504da591f840c49,8545B,SHA256fb168aed7ea6c508f7ca3d59b2bd125dfe5125f528a9d85ceb4bc4944198cf43.
+- Original-profile validator81fcd2ce7510d43da82796134475cf9b066eb052,9235B,SHA256927ff5d459056a245cccb199dd0bfe4a09d258adfbcf71102340b41d5782004f.
+- Schema122def88574a0712ddb669788b9d0a19a3eb2684,2164B,SHA256cfb031ea5f97cef935f4368dc87998810e94e037c9c50cbbbf16d31707abd908.
+
+All program blobs are standalone review data; no new Source leaf. Exact fulltree readback has3202 leaves, onlyF7/SAME changed. The remaining3200 tuples hash to9e71af5d23fca660569f5c4c90ca202152c7f22d1b3a39a5be8bc24426c92304. Original Native533daf/World1e188/oldpure1f8b/lock36a8/D0c351/testreadonlydcd8/P62965/runtime83db/custody4d05 remain exact.
+
+Ref reads at20:12UTC still Source d42277a and Main0c9c475b3ebaa970fc11d628b40e50a90cceb727. They are dated metadata, not a release lease. Root must refresh refs/Main/all active collections and current prefix before release. No ref was mutated by this worker, including Rootdocs.
+
+## Collection and gates
+
+Only one diagnose6min job exists; contentsread only; exactpush/ref/repository/attempt1/message AFW-R1-STRUCTURED-DIAGNOSTIC-ONEUSE-20261114; one literal false guard. Credential-free exact checkout. It pins its own program and full tracked Source before install, then verifies Source again after terminal collection. Existing locked npmci uses ignore-scripts/no-audit/no-fund and60s cap. Every child boundary uses ignored stdin/stdout/stderr; git stdout is privately bounded2MiB. There is no upload action, AFW key, AES, private artifact or real runtime/permission/customer action.
+
+Future order:
+1. Unknown projection numeric-assertion and real timeout inputs must fail their actual projection predicates, recording both negative IDs.
+2. Real numeric assertion, LF/canary non-echo, generic fallback, before-R1 file failure, timeout classification, exactselector and accessor/proxy zero-call controls.
+3. Original frozen eight pure contracts with no group/AFW key:8passed,0failed/cancelled/skipped/todo.
+4. Original readonly preflightBudgetCompilation in a separate suppressed child. It verifies the exact generated preflight-readonly.json matches the returned object and reuses original F7 closed expected-profile validation against fixed descriptors: complete role inventory, raw/package pins, selectors, readerSites and three fixed additionalSYN records. Same current source/run/attempt/readonly/v2chronology andI0Openedfalse/nativeExecutionProducedfalse required. Native receives that exact generatedfile, retaining World's original same-profile hook/provenance comparisons.
+5. Headroom gate, then exactly original Native file selection with anchored R1 regex, processisolation,concurrency1,execArgv[],watchfalse,forceExitfalse,abort150000; no timeout option; originalR1 timeout120000 untouched. Driver cap180000. R2/R3 must be absent/skipped; unexpected/duplicate cases or contradictory file failure invalidate collection.
+6. Final cumulative summary with fileundefined plus positive stream end, bounded rows and exact counts reconciliation. Native file failure beforeR1 remains file_failure/R1not_observed. Outer child timeout isaborted. No absence-as-pass.
+
+Node22.23.4 primary references fixed before future execution:
+- doc/api/test.md abcab012548a43a791a38b06e59dab4433fe362a: run options and structured fail/pass/summary contracts; process isolation produces file summaries plus final cumulative summary.
+- runner.js e08e638cf9bb6972bb13ec0eb756f0107945a00d,206–233: deserializesdetails.error before emit;85–110 fixes cancelled enums;380–460 distinguishes file failures.
+- test.js a86fcfcf14f35611b034f0f186919f363ea615e1: finite failureType constants and original timeout classification.
+- internal/errors.js de303089a87983415d4ead4ec2601dd57cab8c48: ERR_TEST_FAILURE wraps actualerror as cause; fixed codes.
+- lib/assert.js f2ce5e9c0752e865dbf3e483dc0bf72e41643404: assertion operator constants, includingstrictEqual/deepStrictEqual/==.
+- utils.js7e06fc09a6ff3f95449ce37497bd5eee2678bd09: skipped/todo/cancelled/failed/passed count precedence.
+
+Projection rejects proxies before descriptors and reads only own data. The sole bounded prototype walk is NativeError nameclass; every prototype is proxy-checked andname remains descriptor-only. No message/stack/headers/raw names/private-message hash/getters/coercion is inspected or emitted. actual/expected areboolean orinteger0..65536, otherwise null; all unfamiliar enum values areunknown. Raw stdout/stderr and TestsStream stdout/stderr/diagnostic payloads are never inspected by the projector. At most8192 events and16384B closed result are admitted. Unknown staysunknown even if collection succeeds.
+
+## Verification and limitations
+
+Completed: GitDB readbacks exact for all prepared blobs; fulltree declared-only comparison; full original SAME prefix hash; Source/Main dated metadata reads; data-only SHA256/Gitblob hashes; data-only syntax parsing of all three owned program bodies (imports removed solely for parser adaptation and import.meta replaced by an inert string, newvm.Script compiled an uncalled async wrapper). No program body was evaluated. Extracted final YAML heredoc equals pinned outer bytes exactly.
+
+A self-review caught one extra YAML heredoc newline in superseded inactive27e025d4d89797331f37c0b33398be80c480d0fe; it would have failed the outer self-pin before work. It was corrected in finald894067; superseded objects were never attached or executed. One oversized data-hash tool call was rejected by the tool's64KB automatic approval review; bounded20KB literal data calls replaced it. No Source execution resulted.
+
+UNEXECUTED: all negative/real controls,8pure,readonlypreflight,Native, install/build/lint and full engineering suite. This report claims no test pass and does not replace Root's independent gate. The single actual run may report R1failure orunknown; historical cause remains unproven. Root must positively follow terminal, validate only closed actual result, restore exact originalF7 and undeclared tuples, append actual SAME after current full prefix, and conduct the scoped review. No blind retry or World change is authorized here.
+
+All7nonclaimsfalse: historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified.
+
+## Closed schema
+
+```json
+{
+  "purpose": "afw.r1-structured-diagnostic.schema.v1",
+  "topKeys": [
+    "purpose",
+    "role",
+    "context",
+    "pins",
+    "controls",
+    "pure",
+    "preflight",
+    "selectedCase",
+    "state",
+    "blockedAt",
+    "native",
+    "flags"
+  ],
+  "errorKeys": [
+    "target",
+    "wrapperFailureType",
+    "causeCode",
+    "causeClass",
+    "operator",
+    "actual",
+    "expected"
+  ],
+  "states": [
+    "r1_pass",
+    "r1_fail",
+    "file_failure",
+    "aborted",
+    "unknown"
+  ],
+  "blockedAt": [
+    "none",
+    "scope",
+    "install",
+    "controls",
+    "pure",
+    "preflight",
+    "headroom",
+    "native",
+    "postflight"
+  ],
+  "caseIds": [
+    "R1",
+    "R2",
+    "R3",
+    "native_file"
+  ],
+  "results": [
+    "passed",
+    "failed",
+    "skipped",
+    "not_observed"
+  ],
+  "negativeIds": [
+    "numeric_assertion",
+    "timeout_classification"
+  ],
+  "controlIds": [
+    "numeric_assertion",
+    "lf_canary_non_echo",
+    "generic_fallback",
+    "pre_case_failure",
+    "timeout_classification",
+    "exact_selector",
+    "accessor_proxy_zero_calls"
+  ],
+  "failureTypes": [
+    "callbackAndPromisePresent",
+    "cancelledByParent",
+    "testAborted",
+    "parentAlreadyFinished",
+    "subtestsFailed",
+    "testCodeFailure",
+    "testTimeoutFailure",
+    "hookFailed",
+    "unknown"
+  ],
+  "causeCodes": [
+    "ERR_ASSERTION",
+    "ERR_TEST_FAILURE",
+    "ERR_MODULE_NOT_FOUND",
+    "ERR_INVALID_ARG_TYPE",
+    "ERR_INVALID_ARG_VALUE",
+    "ERR_SCRIPT_EXECUTION_TIMEOUT",
+    "ERR_UNKNOWN_FILE_EXTENSION",
+    "ERR_REQUIRE_ESM",
+    "unknown"
+  ],
+  "causeClasses": [
+    "Error",
+    "AssertionError",
+    "TypeError",
+    "SyntaxError",
+    "RangeError",
+    "unknown"
+  ],
+  "operators": [
+    "strictEqual",
+    "notStrictEqual",
+    "deepStrictEqual",
+    "notDeepStrictEqual",
+    "==",
+    "!=",
+    "===",
+    "!==",
+    "match",
+    "doesNotMatch",
+    "throws",
+    "rejects",
+    "fail",
+    "ifError",
+    "unknown"
+  ],
+  "flags": [
+    "historicalCauseProven",
+    "receiptAuthenticated",
+    "operationalReadiness",
+    "completePackage",
+    "PCoff",
+    "globalNativeDrainVerified",
+    "sdkNamespaceEmptyVerified"
+  ]
+}
+```
+
+## Complete INACTIVE carrier (includes owned programs once)
+
+```yaml
+name: AFW finite budget qualification
+run-name: AFW bounded original R1 structured diagnostic ${{ github.sha }}
+on:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
+    paths:
+      - .github/workflows/afw-finite-budget-qualification.yml
+permissions:
+  contents: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+# INACTIVE preparation. Root alone removes the single false guard after independent gates.
+jobs:
+  diagnose:
+    if: ${{ false && github.event_name == 'push' && github.event.head_commit.message == 'AFW-R1-STRUCTURED-DIAGNOSTIC-ONEUSE-20261114' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.4'
+      - name: Materialize the immutable owned receiver
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          cat >"$RUNNER_TEMP/afw-r1-structured-outer.mjs" <<'AFW_R1_OUTER'
+          import {spawnSync} from 'node:child_process';
+          import {readFileSync,writeFileSync,mkdirSync,lstatSync,existsSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import {join,resolve} from 'node:path';
+          import {fileURLToPath} from 'node:url';
+          const schema={"purpose":"afw.r1-structured-diagnostic.schema.v1","topKeys":["purpose","role","context","pins","controls","pure","preflight","selectedCase","state","blockedAt","native","flags"],"errorKeys":["target","wrapperFailureType","causeCode","causeClass","operator","actual","expected"],"states":["r1_pass","r1_fail","file_failure","aborted","unknown"],"blockedAt":["none","scope","install","controls","pure","preflight","headroom","native","postflight"],"caseIds":["R1","R2","R3","native_file"],"results":["passed","failed","skipped","not_observed"],"negativeIds":["numeric_assertion","timeout_classification"],"controlIds":["numeric_assertion","lf_canary_non_echo","generic_fallback","pre_case_failure","timeout_classification","exact_selector","accessor_proxy_zero_calls"],"failureTypes":["callbackAndPromisePresent","cancelledByParent","testAborted","parentAlreadyFinished","subtestsFailed","testCodeFailure","testTimeoutFailure","hookFailed","unknown"],"causeCodes":["ERR_ASSERTION","ERR_TEST_FAILURE","ERR_MODULE_NOT_FOUND","ERR_INVALID_ARG_TYPE","ERR_INVALID_ARG_VALUE","ERR_SCRIPT_EXECUTION_TIMEOUT","ERR_UNKNOWN_FILE_EXTENSION","ERR_REQUIRE_ESM","unknown"],"causeClasses":["Error","AssertionError","TypeError","SyntaxError","RangeError","unknown"],"operators":["strictEqual","notStrictEqual","deepStrictEqual","notDeepStrictEqual","==","!=","===","!==","match","doesNotMatch","throws","rejects","fail","ifError","unknown"],"flags":["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"]};
+          const core=[{"path":"package-lock.json","blob":"36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b","bytes":445991},{"path":"test/mcp-qa-finite-budget-native.test.mjs","blob":"533dafb5df5f8e57442c5b9029dc8dec6dded434","bytes":12749},{"path":"test/finite-budget-diagnostics.test.mjs","blob":"1f8b02d5b2dddb474c7db7daa04aa24e2dc948d8","bytes":63691},{"path":"test/fixtures/finite-budget-world.mjs","blob":"1e18873791e0520fff611e353232e38786c51941","bytes":243656},{"path":"test/fixtures/finite-budget-descriptors.json","blob":"be695028e4c12c3cb7d3b7bf2c5f2e7508f3db15","bytes":329786},{"path":"test/fixtures/finite-budget-diagnostics.mjs","blob":"3aba82b323837f3c14463875d472500d49c0c2e0","bytes":30716},{"path":"test/fixtures/finite-budget-stage-observer.mjs","blob":"0c35147c79e26298a7778937b2a69641eabcba18","bytes":28993},{"path":"test/finite-budget-readonly-observer.test.mjs","blob":"dcd8a8b31838e3b1baf34dfd8e7ccbbd26ba7fca","bytes":23473},{"path":"test/fixtures/finite-budget-failure-diagnostic.mjs","blob":"62965a9d5836e54563550fe29dff23abe9a62054","bytes":7871},{"path":"test/fixtures/finite-budget-failure-runtime.mjs","blob":"83db9cda42ae828998fbe1d3007071825dc31d0c","bytes":129},{"path":"test/fixtures/finite-checkpoint-custody.mjs","blob":"4d05b5ec0f7b074be88ef9733a47c984b0212351","bytes":21159}];
+          const programs={driver:"import {run} from 'node:test';\nimport {types} from 'node:util';\nimport {writeFileSync} from 'node:fs';\nimport {resolve} from 'node:path';\nconst [mode,fileArg,destination,projectionMode]=process.argv.slice(2),file=resolve(fileArg);\nconst FAILURE_TYPES=['callbackAndPromisePresent','cancelledByParent','testAborted','parentAlreadyFinished','subtestsFailed','testCodeFailure','testTimeoutFailure','hookFailed'];\nconst CANCELED=['cancelledByParent','testAborted','testTimeoutFailure'];\nconst CODES=['ERR_ASSERTION','ERR_TEST_FAILURE','ERR_MODULE_NOT_FOUND','ERR_INVALID_ARG_TYPE','ERR_INVALID_ARG_VALUE','ERR_SCRIPT_EXECUTION_TIMEOUT','ERR_UNKNOWN_FILE_EXTENSION','ERR_REQUIRE_ESM'];\nconst CLASSES=['Error','AssertionError','TypeError','SyntaxError','RangeError'];\nconst OPERATORS=['strictEqual','notStrictEqual','deepStrictEqual','notDeepStrictEqual','==','!=','===','!==','match','doesNotMatch','throws','rejects','fail','ifError'];\nconst blank=()=>({wrapperFailureType:'unknown',causeCode:'unknown',causeClass:'unknown',operator:'unknown',actual:null,expected:null});\nfunction own(value,key){if(value===null||(typeof value!=='object'&&typeof value!=='function')||types.isProxy(value))return undefined;try{const d=Object.getOwnPropertyDescriptor(value,key);return d&&Object.hasOwn(d,'value')?d.value:undefined;}catch{return undefined;}}\nconst member=(list,value)=>list.includes(value)?value:'unknown';\nconst numeric=value=>typeof value==='boolean'||Number.isSafeInteger(value)&&value>=0&&value<=65536?value:null;\nfunction nativeClass(error,code){\n if(code==='ERR_ASSERTION')return 'AssertionError';\n if(!error||typeof error!=='object'||types.isProxy(error)||!types.isNativeError(error))return 'unknown';\n let current=error;\n for(let n=0;n<4&&current;n++){\n  if(types.isProxy(current))return 'unknown';\n  const d=Object.getOwnPropertyDescriptor(current,'name');\n  if(d)return Object.hasOwn(d,'value')?member(CLASSES,d.value):'unknown';\n  current=Object.getPrototypeOf(current);\n }\n return 'unknown';\n}\nfunction project(error){\n const result=blank();if(projectionMode==='unknown')return result;\n if(!error||typeof error!=='object'||types.isProxy(error))return result;\n result.wrapperFailureType=member(FAILURE_TYPES,own(error,'failureType'));\n const cause=own(error,'cause');if(!cause||typeof cause!=='object'||types.isProxy(cause))return result;\n result.causeCode=member(CODES,own(cause,'code'));result.causeClass=nativeClass(cause,result.causeCode);\n result.operator=member(OPERATORS,own(cause,'operator'));result.actual=numeric(own(cause,'actual'));result.expected=numeric(own(cause,'expected'));\n return result;\n}\nfunction accessorControl(){\n let getters=0,traps=0;\n const malicious=new Error('unread');\n for(const key of ['name','code','operator','actual','expected','message','stack'])Object.defineProperty(malicious,key,{configurable:true,get(){getters++;throw 1;}});\n const causeProxy=new Proxy({},Object.fromEntries(['get','getPrototypeOf','ownKeys','getOwnPropertyDescriptor'].map(key=>[key,()=>{traps++;throw 1;}])));\n const wrapper={failureType:'testCodeFailure',cause:malicious};\n const a=project(wrapper),b=project({failureType:'testCodeFailure',cause:causeProxy}),c=project(new Proxy(wrapper,{getOwnPropertyDescriptor(){traps++;throw 1;}}));\n if(getters!==0||traps!==0||a.causeCode!=='unknown'||a.causeClass!=='unknown'||a.actual!==null||b.causeClass!=='unknown'||c.wrapperFailureType!=='unknown')throw 1;\n return {purpose:'afw.r1-accessor-control.v1',passed:true,getters:0,proxyTraps:0};\n}\nconst countsKeys=['cancelled','failed','passed','skipped','suites','tests','todo','topLevel'];\nconst pureNames=[\"Q1 projection redacts secret markers and ignores accessors\",\"Q2 one native entry and duplicate settlement retain consistent denominators\",\"Q3 fixed Root and phase survive a concurrent Root and late settlement\",\"Q4 logical denial and cancellation do not fabricate native settlement\",\"Q5 observing preserves actual promise identity, resolution, rejection and no authority\",\"Q6 retained record bounds preserve native identity, observed metrics and omission evidence\",\"Q7 bounded UTF8 summary hashes the exact complete JSON written\",\"Q8 opaque wire bytes and linked body invocations preserve interval and byte denominators\"];\nconst cases=['R1','R2','R3','native_file'];\nfunction selected(name){if(mode==='pure'){const i=pureNames.indexOf(name);return i>=0?'Q'+(i+1):name===file?'pure_file':null;}if(name===file||name===fileArg)return 'native_file';for(const id of cases.slice(0,3))if(name===id+' fixed original SDK readonly budget')return id;return null;}\nfunction summaryData(data){\n if(own(data,'file')!==undefined)return null;\n const source=own(data,'counts'),result={};\n for(const key of countsKeys){const value=own(source,key);if(!Number.isSafeInteger(value)||value<0||value>65536)throw 1;result[key]=value;}\n const success=own(data,'success');if(typeof success!=='boolean')throw 1;\n return {counts:result,success};\n}\nasync function collect(){\n const rows=[],errors=new Map();let summary=null,summarySeen=0,ended=false,invalid=false,eventCount=0,aborted=false;\n const budget=mode==='native'?150000:mode==='pure'?35000:4000;\n const signal=AbortSignal.timeout(budget);\n const options={files:[file],concurrency:1,isolation:'process',execArgv:[],watch:false,forceExit:false,signal};\n if(mode!=='pure')options.testNamePatterns=[/^R1 fixed original SDK readonly budget$/];\n const stream=run(options);\n try{\n  for await(const event of stream){\n   if(++eventCount>8192)throw 1;\n   const type=own(event,'type');\n   if(type==='test:summary'){\n    const value=summaryData(own(event,'data'));if(value!==null){summary=value;summarySeen++;}\n    continue;\n   }\n   if(type!=='test:pass'&&type!=='test:fail')continue;\n   const data=own(event,'data'),id=selected(own(data,'name'));\n   const details=own(data,'details');\n   if(id===null||own(data,'nesting')!==0||own(details,'type')==='suite'||own(data,'todo')!==undefined||rows.some(r=>r.case===id)){invalid=true;continue;}\n   const skip=own(data,'skip'),isSkip=skip!==undefined;\n   if(isSkip&&typeof skip!=='string'&&typeof skip!=='boolean'){invalid=true;continue;}\n   if(id==='R1'&&isSkip){invalid=true;continue;}\n   const result=isSkip?'skipped':type==='test:pass'?'passed':'failed';\n   const projected=result==='failed'?project(own(details,'error')):null;\n   const cancelled=result==='failed'&&CANCELED.includes(own(own(details,'error'),'failureType'));\n   rows.push({case:id,result,cancelled});\n   if(projected!==null)errors.set(id,projected);\n  }\n  ended=true;\n }catch{invalid=true;}\n aborted=signal.aborted||rows.some(r=>errors.get(r.case)?.wrapperFailureType==='testAborted');\n const expected=Object.fromEntries(countsKeys.map(key=>[key,0]));\n for(const row of rows){expected.tests++;expected.topLevel++;if(row.result==='skipped')expected.skipped++;else if(row.cancelled)expected.cancelled++;else if(row.result==='passed')expected.passed++;else expected.failed++;}\n if(summarySeen!==1||!summary||countsKeys.some(key=>summary.counts[key]!==expected[key])||summary.success!==(expected.failed===0&&expected.cancelled===0))invalid=true;\n if(!ended)invalid=true;\n if(mode==='pure'){\n  if(rows.length!==8||rows.some(r=>!/^Q[1-8]$/.test(r.case)||r.result!=='passed')||new Set(rows.map(r=>r.case)).size!==8)invalid=true;\n  return {purpose:'afw.r1-testsstream-child.v1',kind:'pure',valid:!invalid,ended,aborted,summary:invalid?null:summary,rows:rows.map(({case:id,result})=>({case:id,result})),state:invalid?'unknown':'pure_pass',error:null};\n }\n if(rows.some(r=>['R2','R3'].includes(r.case)&&r.result!=='skipped'))invalid=true;\n const r1=rows.find(r=>r.case==='R1'),nativeFile=rows.find(r=>r.case==='native_file');\n if(nativeFile&&r1)invalid=true;\n if(nativeFile&&nativeFile.result!=='failed')invalid=true;\n let state='unknown';\n if(aborted)state='aborted';\n else if(!invalid&&r1)state=r1.result==='passed'?'r1_pass':'r1_fail';\n else if(!invalid&&nativeFile)state='file_failure';\n else invalid=true;\n const target=r1?.result==='failed'?'R1':nativeFile?.result==='failed'?'native_file':null;\n return {purpose:'afw.r1-testsstream-child.v1',kind:'selected',valid:!invalid,ended,aborted,summary:invalid?null:summary,rows:cases.map(id=>({case:id,result:rows.find(r=>r.case===id)?.result??'not_observed'})),state,error:target?{target,...errors.get(target)}:null};\n}\ntry{\n const result=mode==='accessor'?accessorControl():await collect();\n const bytes=JSON.stringify(result);if(Buffer.byteLength(bytes)>16384)throw 1;\n writeFileSync(destination,bytes,{mode:0o600,flag:'wx'});\n}catch{process.exitCode=1;}\n",preflight:"import assert from 'node:assert/strict';\nimport {readFile,writeFile,lstat} from 'node:fs/promises';\nimport {createHash} from 'node:crypto';\nimport {pathToFileURL} from 'node:url';\nimport {resolve} from 'node:path';\nconst destination=process.argv[2];\ntry{\n assert.equal(process.version,'v22.23.4');assert.equal(process.env.AFW_BUDGET_GROUP,'readonly');assert.equal(process.env.AFW_SYN_CHECKPOINT_KEY,undefined);assert.equal(process.env.AFW_BUDGET_PREFLIGHT,undefined);\n const original=await import(pathToFileURL(resolve('test/fixtures/finite-budget-world.mjs')).href);\n const returned=await original.preflightBudgetCompilation();\n const sha=bytes=>createHash('sha256').update(bytes).digest('hex'),N=value=>assert(Number.isSafeInteger(value)&&value>=0&&value<=Number.MAX_SAFE_INTEGER),H=value=>assert(typeof value==='string'&&/^[a-f0-9]{64}$/.test(value)),B=value=>assert(typeof value==='boolean');\nfunction object(value,keys){assert(value&&typeof value==='object'&&!Array.isArray(value));assert.deepEqual(Object.keys(value).sort(),keys.slice().sort());}\nfunction same(value,expected){assert.deepEqual(value,expected);}\nfunction numbers(value,keys){object(value,keys);for(const item of Object.values(value))N(item);}\nfunction arr(value,max,visit){assert(Array.isArray(value)&&value.length<=max);value.forEach(visit);}\nfunction identity(value){same(value.source,process.env.GITHUB_SHA);same(value.run,process.env.GITHUB_RUN_ID);assert(value.attempt===1||value.attempt==='1');}\nfunction flags(value){for(const key of ['I0Opened','nativeExecutionProduced','operationalReadiness','completePackage','PCoff'])same(value[key],false);}\nfunction digest(bytes){return {bytes:bytes.length,sha256:sha(bytes)};}\nconst descriptorBytes=await readFile('test/fixtures/finite-budget-descriptors.json'),descriptorBlob=createHash('sha1').update('blob '+descriptorBytes.length+'\\0').update(descriptorBytes).digest('hex');same(descriptorBlob,'be695028e4c12c3cb7d3b7bf2c5f2e7508f3db15');const descriptors=JSON.parse(descriptorBytes);\nfunction counts(value){numbers(value,['nativeCalls','identityEdges','bodyEdges','facadeEdges','scopeEdges','guardEdges']);}\nconst countKeys=['childBlocks','work','wait','selectReadonly','selectReduction','queueReadonly','queueReduction','capReadonlyList','capReadonlyGet','capReductionList','capReductionDelete','send','sdk'];\nfunction additional(value,path){\n const adapter=path==='<stdin>';\n if(adapter){\n  object(value,['purpose','family','baselineBytes','baselineSha256','literalBytes','literalSha256','emittedBytes','emittedSha256','methods','operationInventory','nativeInputAndAckObservationsSeparate','businessAuthority','originalEntryBytes','originalEntrySha256']);\n  same(value.purpose,'afw.fixed-syn-prototype-adapter.v1');assert(['readonly','reduction'].includes(value.family));same(value.methods,['finiteBudgetReadonly','finiteBudgetReduction','finiteBudgetSignals','finiteBudgetRelease','finiteBudgetRestore']);\n  same(value.operationInventory,{'Reflect.apply(':23,'Object.defineProperty(':1,'Object.defineProperties(':1,'Promise.allSettled(':1,'new WeakMap(':3});same(value.nativeInputAndAckObservationsSeparate,true);same(value.originalEntryBytes,64800);same(value.originalEntrySha256,'89ae285b8f00fdf95eecfeee37673138f4c136c7704f245152051a3be2985257');N(value.literalBytes);H(value.literalSha256);\n }else{\n  assert(['lib/mcp-qa-finite-owner-cleanup.mjs','lib/mcp-qa-finite-initial-lease.mjs'].includes(path));const cleanup=path.includes('owner-cleanup');\n  object(value,['purpose','baselineBytes','baselineSha256','emittedBytes','emittedSha256','primaryBlocks','counts','queueKinds','fields','businessAuthority',...(cleanup?['sdkDeclarationProvenance']:[])]);\n  same(value.purpose,'afw.fixed-syn-passive-observations.v2');same(value.primaryBlocks,cleanup?11:1);numbers(value.counts,countKeys);\n  same(value.counts,cleanup?{childBlocks:1,work:1,wait:1,selectReadonly:1,selectReduction:1,queueReadonly:1,queueReduction:1,capReadonlyList:1,capReadonlyGet:1,capReductionList:1,capReductionDelete:1,send:1,sdk:1}:{childBlocks:1,work:1,wait:1,selectReadonly:0,selectReduction:0,queueReadonly:0,queueReduction:0,capReadonlyList:0,capReadonlyGet:0,capReductionList:0,capReductionDelete:0,send:0,sdk:0});\n  same(value.queueKinds,cleanup?[{family:1,statementKind:'variable',originalCheckAdjacent:true,originalReceiver:'alias',originalArgs:'q.args'},{family:2,statementKind:'return',originalCheckAdjacent:true,originalReceiver:'alias',originalArgs:'q.args'}]:[]);\n  same(value.fields,['opaque-alias','child-ordinal','family','deadline','status','counter','limit','queue-length','active','time','send-record-hash']);\n  if(cleanup){\n   const proof=value.sdkDeclarationProvenance;object(proof,['original','protectedModuleBlob','originalStatementSha256']);same(proof.protectedModuleBlob,'1a5a2583d266179cdd89f799c64199f29044fec5');same(proof.originalStatementSha256,sha('const actual=retain(api.revokeGrant(selector,i.subject));'));\n   object(proof.original,['sites','sameNameReceivers','receiver','method','args','adjacency']);same(proof.original,{sites:1,sameNameReceivers:['api','store'],receiver:'api',method:'revokeGrant',args:['selector','i.subject'],adjacency:['const-actual-retain-api','await-actual','check','bounded-facts']});\n  }\n }\n for(const key of ['baselineBytes','emittedBytes'])N(value[key]);for(const key of ['baselineSha256','emittedSha256'])H(value[key]);same(value.businessAuthority,false);\n if(adapter){same(value.baselineBytes,106772);same(value.baselineSha256,'f5458d1d7f94665c8b02915972c95614b3a3bd2125d6d6a89ef6bea737c999ec');}\n}\nfunction expectedInventory(role){\n assert(['M','QA'].includes(role));const expected=new Set([...descriptors.sourceDescriptors,...descriptors.packages,...descriptors.implementationSupplement.scopeInputPins].filter(row=>row.roles.includes(role)).map(row=>row.path));if(role==='QA')expected.add('<stdin>');return [...expected];\n}\nfunction verifyExpectedInventory(records,role){same(records.map(record=>record.path).sort(),expectedInventory(role).sort());}\nfunction preflight(value,group){\n object(value,['purpose','group','additionalSYN','source','run','attempt','inputs','I0Opened','nativeExecutionProduced','operationalReadiness','completePackage','PCoff','observerChronology']);identity(value);flags(value);same(value.purpose,'afw.finite-budget-preflight.syn.v1');same(value.group,group);same(value.observerChronology,'afw.finite-budget-chronology.syn.v2');object(value.inputs,['M','QA']);\n for(const role of ['M','QA']){\n  const expected=expectedInventory(role);\n  arr(value.inputs[role],512,record=>{\n   object(record,['role','path','rawBytes','rawSha256','preparedBytes','preparedSha256','emittedBytes','emittedSha256','counts','selectors','readerSites',...(record.additionalSYN?['additionalSYN']:[])]);\n   same(record.role,role);assert(expected.includes(record.path));for(const key of ['rawBytes','preparedBytes','emittedBytes'])N(record[key]);for(const key of ['rawSha256','preparedSha256','emittedSha256'])H(record[key]);counts(record.counts);\n   const source=descriptors.sourceDescriptors.find(row=>row.path===record.path),pkg=descriptors.packages.find(row=>row.path===record.path),pin=descriptors.implementationSupplement.scopeInputPins.find(row=>row.path===record.path);\n   if(source){same(record.rawBytes,source.rawBytes);same(record.rawSha256,source.rawSha256);same(record.selectors,source.selectors.map((row,selector)=>({selector,count:row.expectedCount})));}\n   else if(pkg){same(record.rawBytes,pkg.bytes);same(record.rawSha256,pkg.sha256);same(record.selectors,pkg.selectors);}\n   else if(pin){same(record.rawBytes,pin.rawBytes);same(record.rawSha256,pin.rawSha256);same(record.selectors,[]);}\n   else same(record.selectors,{reflect:descriptors.entry.reflectSelectors,members:descriptors.implementationSupplement.entryNativeMembers,extras:descriptors.implementationSupplement.entryAdditionalCounts});\n   arr(record.readerSites,256,site=>{object(site,['id','role','path','selector','occurrence','preparedLine','preparedColumn']);same(site.role,role);same(site.path,record.path);for(const key of ['id','occurrence','preparedLine','preparedColumn'])N(site[key]);assert(Number.isSafeInteger(site.selector)||site.selector==='readerFactory');});\n   if(record.additionalSYN){assert(role==='QA'&&group!=='positive');additional(record.additionalSYN,record.path);}\n  });\n  verifyExpectedInventory(value.inputs[role],role);\n }\n same(value.additionalSYN,value.inputs.QA.filter(row=>row.additionalSYN).map(row=>({path:row.path,...row.additionalSYN})));same(value.additionalSYN.length,group==='positive'?0:3);\n}\n\n const path='output/finite-budget/pure/preflight-readonly.json',st=await lstat(path);assert(st.isFile()&&st.nlink===1&&st.size>0&&st.size<=2097152);\n const value=JSON.parse(await readFile(path,'utf8'));same(value,returned);preflight(value,'readonly');\n same(value.inputs.QA.find(r=>r.path==='<stdin>').additionalSYN.family,'readonly');\n const result={purpose:'afw.r1-preflight-child.v1',passed:true,group:'readonly',chronology:'afw.finite-budget-chronology.syn.v2',roles:['M','QA'],I0Opened:false,nativeExecutionProduced:false,profileVerified:true};\n await writeFile(destination,JSON.stringify(result),{mode:0o600,flag:'wx'});\n}catch{process.exitCode=1;}\n"};
+          const fixtures={"numeric":"import test from 'node:test';import assert from 'node:assert/strict';process.stdout.write('AFW_R1_CANARY\\n# tests 999\\n');process.stderr.write('AFW_R1_CANARY\\n');test('R1 fixed original SDK readonly budget',()=>assert.equal(7,9,'AFW_R1_CANARY\\n# pass 999\\nnot ok 99'));\n","generic":"import test from 'node:test';test('R1 fixed original SDK readonly budget',()=>{throw new Error('AFW_R1_CANARY\\n# pass 999\\n');});\n","timeout":"import test from 'node:test';test('R1 fixed original SDK readonly budget',{timeout:30},async t=>{const handle=setInterval(()=>{},1000);t.after(()=>clearInterval(handle));await new Promise(()=>{});});\n","file":"throw new Error('AFW_R1_CANARY\\n# pass 999\\nnot ok 99');\n","selector":"import test from 'node:test';import {writeFileSync} from 'node:fs';for(const id of ['R1','R2','R3'])test(id+' fixed original SDK readonly budget',()=>{if(id!=='R1'){writeFileSync(new URL('./'+id+'.activated',import.meta.url),'bad');throw 1;}});\n"};
+          const e=process.env,started=Date.now(),deadline=started+310000;
+          const hash=b=>createHash('sha256').update(b).digest('hex'),blob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
+          const N=value=>Number.isSafeInteger(value)&&value>=0&&value<=65536;
+          const check=value=>{if(!value)throw 1;};
+          const same=(a,b)=>check(JSON.stringify(a)===JSON.stringify(b));
+          function keys(value,names){check(value!==null&&typeof value==='object'&&!Array.isArray(value));same(Object.keys(value).sort(),names.slice().sort());}
+          const countKeys=['cancelled','failed','passed','skipped','suites','tests','todo','topLevel'];
+          function counts(value){keys(value,['counts','success']);keys(value.counts,countKeys);check(Object.values(value.counts).every(N));check(typeof value.success==='boolean');check(value.counts.suites===0&&value.counts.todo===0);check(value.counts.tests===value.counts.passed+value.counts.failed+value.counts.cancelled+value.counts.skipped);check(value.counts.topLevel===value.counts.tests);check(value.success===(value.counts.failed===0&&value.counts.cancelled===0));}
+          function error(value){
+           if(value===null)return;
+           keys(value,schema.errorKeys);check(['R1','native_file'].includes(value.target));
+           for(const [key,enumKey] of [['wrapperFailureType','failureTypes'],['causeCode','causeCodes'],['causeClass','causeClasses'],['operator','operators']])check(schema[enumKey].includes(value[key]));
+           for(const key of ['actual','expected'])check(value[key]===null||typeof value[key]==='boolean'||N(value[key]));
+          }
+          function child(value,kind){
+           keys(value,['purpose','kind','valid','ended','aborted','summary','rows','state','error']);check(value.purpose==='afw.r1-testsstream-child.v1'&&value.kind===kind);
+           for(const key of ['valid','ended','aborted'])check(typeof value[key]==='boolean');
+           check(Array.isArray(value.rows));
+           if(value.summary!==null)counts(value.summary);
+           if(kind==='pure'){
+            check(value.error===null&&['pure_pass','unknown'].includes(value.state)&&value.rows.length<=8);
+            value.rows.forEach(row=>{keys(row,['case','result']);check(/^Q[1-8]$/.test(row.case)&&schema.results.includes(row.result));});
+            if(value.valid){check(value.ended&&!value.aborted&&value.state==='pure_pass'&&value.summary!==null);same(value.summary,{counts:{cancelled:0,failed:0,passed:8,skipped:0,suites:0,tests:8,todo:0,topLevel:8},success:true});same(value.rows.map(row=>row.case).sort(),['Q1','Q2','Q3','Q4','Q5','Q6','Q7','Q8']);check(value.rows.every(row=>row.result==='passed'));}
+            return value;
+           }
+           check(schema.states.includes(value.state));same(value.rows.map(row=>row.case),schema.caseIds);
+           value.rows.forEach(row=>{keys(row,['case','result']);check(schema.results.includes(row.result));});
+           error(value.error);
+           check(value.rows.slice(1,3).every(row=>['skipped','not_observed'].includes(row.result)));
+           if(value.error!==null)check(value.rows.find(row=>row.case===value.error.target).result==='failed');
+           if(value.valid){
+            check(value.ended&&value.summary!==null);
+            const observed=value.rows.filter(row=>row.result!=='not_observed'),c=value.summary.counts;
+            check(c.tests===observed.length&&c.passed===observed.filter(row=>row.result==='passed').length&&c.skipped===observed.filter(row=>row.result==='skipped').length&&c.failed+c.cancelled===observed.filter(row=>row.result==='failed').length);
+            const r1=value.rows[0],f=value.rows[3];
+            if(value.state==='r1_pass')check(r1.result==='passed'&&f.result==='not_observed'&&value.error===null&&!value.aborted);
+            else if(value.state==='r1_fail')check(r1.result==='failed'&&f.result==='not_observed'&&value.error?.target==='R1'&&!value.aborted);
+            else if(value.state==='file_failure')check(r1.result==='not_observed'&&f.result==='failed'&&value.error?.target==='native_file'&&!value.aborted);
+            else check(value.state==='aborted');
+           }else check(['unknown','aborted'].includes(value.state)&&value.summary===null);
+           return value;
+          }
+          function git(args){const r=spawnSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','ignore'],timeout:10000,maxBuffer:2097152});check(!r.error&&r.status===0&&!r.signal);return r.stdout;}
+          let currentTree=null,carrierBlob=null,sameBlob=null;
+          function snapshot(){
+           check(git(['rev-parse','HEAD']).trim()===e.GITHUB_SHA);const tree=git(['rev-parse','HEAD^{tree}']).trim();check(/^[a-f0-9]{40}$/.test(tree));
+           check(git(['status','--porcelain','--untracked-files=no'])==='');
+           const all=git(['ls-tree','-rz','HEAD']).split('\0').filter(Boolean).map(line=>{const split=line.indexOf('\t');check(split>0);const [mode,type,sha]=line.slice(0,split).split(' ');return {path:line.slice(split+1),mode,type,sha};});
+           const excluded=['.github/workflows/afw-finite-budget-qualification.yml','docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md'];
+           const fixed=all.filter(row=>!excluded.includes(row.path)).sort((a,b)=>a.path<b.path?-1:a.path>b.path?1:0);check(fixed.length===3200);check(hash(JSON.stringify(fixed))==='9e71af5d23fca660569f5c4c90ca202152c7f22d1b3a39a5be8bc24426c92304');
+           for(const pin of core){const bytes=readFileSync(pin.path);check(bytes.length===pin.bytes&&blob(bytes)===pin.blob);}
+           const report=readFileSync(excluded[1]);check(report.length>=512097&&hash(report.subarray(0,512097))==='5be9582d057d23d7012c434c8af6dea72e93ecbc1d5056f3fd7824d81894a697');
+           const workflow=readFileSync(excluded[0]);
+           return {tree,carrierBlob:blob(workflow),sameBlob:blob(report)};
+          }
+          const result={purpose:'afw.r1-structured-diagnostic.syn.v1',role:'bounded-zero-afw-key-original-R1',context:{repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,source:e.GITHUB_SHA,tree:null,run:e.GITHUB_RUN_ID,attempt:1,node:process.version,job:e.GITHUB_JOB,base:'d42277a6963ee691ac176358e8396194f7dc32c9',baseTree:'91f33096426c965f2b0b3b61ae62949f815b81e1'},pins:{sourceTuplesSha256:'9e71af5d23fca660569f5c4c90ca202152c7f22d1b3a39a5be8bc24426c92304',source:core,rollbackF7:'f7a71f1a0fa4f5ddf069ff411f008a098455e5cc',samePrefixBlob:'063bfcbf55f12aa985a1c554a16c0f6a15e21d7f',samePrefixBytes:512097,samePrefixSha256:'5be9582d057d23d7012c434c8af6dea72e93ecbc1d5056f3fd7824d81894a697',carrierBlob:null,sameBlob:null,programs:{outer:e.AFW_R1_PROGRAM_SHA256,driver:hash(programs.driver),preflight:hash(programs.preflight),schema:hash("{\n  \"purpose\": \"afw.r1-structured-diagnostic.schema.v1\",\n  \"topKeys\": [\n    \"purpose\",\n    \"role\",\n    \"context\",\n    \"pins\",\n    \"controls\",\n    \"pure\",\n    \"preflight\",\n    \"selectedCase\",\n    \"state\",\n    \"blockedAt\",\n    \"native\",\n    \"flags\"\n  ],\n  \"errorKeys\": [\n    \"target\",\n    \"wrapperFailureType\",\n    \"causeCode\",\n    \"causeClass\",\n    \"operator\",\n    \"actual\",\n    \"expected\"\n  ],\n  \"states\": [\n    \"r1_pass\",\n    \"r1_fail\",\n    \"file_failure\",\n    \"aborted\",\n    \"unknown\"\n  ],\n  \"blockedAt\": [\n    \"none\",\n    \"scope\",\n    \"install\",\n    \"controls\",\n    \"pure\",\n    \"preflight\",\n    \"headroom\",\n    \"native\",\n    \"postflight\"\n  ],\n  \"caseIds\": [\n    \"R1\",\n    \"R2\",\n    \"R3\",\n    \"native_file\"\n  ],\n  \"results\": [\n    \"passed\",\n    \"failed\",\n    \"skipped\",\n    \"not_observed\"\n  ],\n  \"negativeIds\": [\n    \"numeric_assertion\",\n    \"timeout_classification\"\n  ],\n  \"controlIds\": [\n    \"numeric_assertion\",\n    \"lf_canary_non_echo\",\n    \"generic_fallback\",\n    \"pre_case_failure\",\n    \"timeout_classification\",\n    \"exact_selector\",\n    \"accessor_proxy_zero_calls\"\n  ],\n  \"failureTypes\": [\n    \"callbackAndPromisePresent\",\n    \"cancelledByParent\",\n    \"testAborted\",\n    \"parentAlreadyFinished\",\n    \"subtestsFailed\",\n    \"testCodeFailure\",\n    \"testTimeoutFailure\",\n    \"hookFailed\",\n    \"unknown\"\n  ],\n  \"causeCodes\": [\n    \"ERR_ASSERTION\",\n    \"ERR_TEST_FAILURE\",\n    \"ERR_MODULE_NOT_FOUND\",\n    \"ERR_INVALID_ARG_TYPE\",\n    \"ERR_INVALID_ARG_VALUE\",\n    \"ERR_SCRIPT_EXECUTION_TIMEOUT\",\n    \"ERR_UNKNOWN_FILE_EXTENSION\",\n    \"ERR_REQUIRE_ESM\",\n    \"unknown\"\n  ],\n  \"causeClasses\": [\n    \"Error\",\n    \"AssertionError\",\n    \"TypeError\",\n    \"SyntaxError\",\n    \"RangeError\",\n    \"unknown\"\n  ],\n  \"operators\": [\n    \"strictEqual\",\n    \"notStrictEqual\",\n    \"deepStrictEqual\",\n    \"notDeepStrictEqual\",\n    \"==\",\n    \"!=\",\n    \"===\",\n    \"!==\",\n    \"match\",\n    \"doesNotMatch\",\n    \"throws\",\n    \"rejects\",\n    \"fail\",\n    \"ifError\",\n    \"unknown\"\n  ],\n  \"flags\": [\n    \"historicalCauseProven\",\n    \"receiptAuthenticated\",\n    \"operationalReadiness\",\n    \"completePackage\",\n    \"PCoff\",\n    \"globalNativeDrainVerified\",\n    \"sdkNamespaceEmptyVerified\"\n  ]\n}\n")}},controls:{negativeFailed:[],realPassed:[]},pure:{passed:false,summary:null},preflight:{passed:false,group:'readonly',chronology:'afw.finite-budget-chronology.syn.v2',roles:['M','QA'],I0Opened:false,nativeExecutionProduced:false,profileVerified:false},selectedCase:'R1',state:'unknown',blockedAt:'scope',native:null,flags:Object.fromEntries(schema.flags.map(key=>[key,false]))};
+          const root=join(e.RUNNER_TEMP??'', 'afw-r1-structured-private');
+          function write(name,bytes){writeFileSync(join(root,name),bytes,{mode:0o600,flag:'wx'});}
+          function load(name,limit=16384){const path=join(root,name),st=lstatSync(path);check(st.isFile()&&st.nlink===1&&st.size>0&&st.size<=limit);return JSON.parse(readFileSync(path,'utf8'));}
+          function env(extra={}){
+           const value={...e,...extra};
+           for(const key of ['NODE_OPTIONS','NODE_TEST_CONTEXT','NODE_V8_COVERAGE','AFW_BUDGET_GROUP','AFW_BUDGET_PREFLIGHT','AFW_BUDGET_DIAGNOSTIC_CANDIDATE','AFW_SYN_CHECKPOINT_KEY'])delete value[key];
+           return {...value,...extra};
+          }
+          function invoke(mode,file,projection='real',cap=8000,extra={}){
+           const name='result-'+mode+'-'+projection+'.json',destination=join(root,name);
+           const r=spawnSync(process.execPath,[join(root,'driver.mjs'),mode,file,destination,projection],{env:env(extra),stdio:['ignore','ignore','ignore'],timeout:cap,killSignal:'SIGTERM'});
+           if(r.error||r.signal){if(mode==='native'){result.state='aborted';return null;}throw 1;}
+           check(r.status===0);return child(load(name),mode==='pure'?'pure':'selected');
+          }
+          function numeric(value){check(value.valid&&value.state==='r1_fail');same(value.error,{target:'R1',wrapperFailureType:'testCodeFailure',causeCode:'ERR_ASSERTION',causeClass:'AssertionError',operator:'strictEqual',actual:7,expected:9});}
+          function timeout(value){check(value.valid&&value.state==='r1_fail'&&value.error?.wrapperFailureType==='testTimeoutFailure'&&value.summary.counts.cancelled===1);}
+          function negative(id,validate,value){let rejected=false;try{validate(value);}catch{rejected=true;}check(rejected);result.controls.negativeFailed.push(id);}
+          try{
+           check(e.GITHUB_REPOSITORY==='tokenizartinfo-ops/agent-friendly-web'&&e.GITHUB_REF==='refs/heads/feat/finite-native-cleanup-20261101'&&e.GITHUB_RUN_ATTEMPT==='1'&&e.GITHUB_JOB==='diagnose'&&/^[a-f0-9]{40}$/.test(e.GITHUB_SHA??'')&&/^[1-9][0-9]*$/.test(e.GITHUB_RUN_ID??'')&&process.version==='v22.23.4');
+           check(e.AFW_SYN_CHECKPOINT_KEY===undefined&&e.AFW_BUDGET_GROUP===undefined&&e.AFW_BUDGET_PREFLIGHT===undefined&&e.AFW_BUDGET_DIAGNOSTIC_CANDIDATE===undefined&&e.NODE_OPTIONS===undefined);
+           check(/^[a-f0-9]{64}$/.test(e.AFW_R1_PROGRAM_SHA256??'')&&hash(readFileSync(fileURLToPath(import.meta.url)))===e.AFW_R1_PROGRAM_SHA256);
+           const before=snapshot();currentTree=before.tree;carrierBlob=before.carrierBlob;sameBlob=before.sameBlob;result.context.tree=currentTree;result.pins.carrierBlob=carrierBlob;result.pins.sameBlob=sameBlob;
+           mkdirSync(root,{mode:0o700});for(const [name,source]of Object.entries(programs))write(name+'.mjs',source);for(const [name,source]of Object.entries(fixtures))write(name+'.mjs',source);
+           result.blockedAt='install';
+           const installed=spawnSync('npm',['ci','--ignore-scripts','--no-audit','--no-fund'],{env:env(),stdio:['ignore','ignore','ignore'],timeout:60000,killSignal:'SIGTERM'});check(!installed.error&&!installed.signal&&installed.status===0);
+           result.blockedAt='controls';
+           negative('numeric_assertion',numeric,invoke('numeric',join(root,'numeric.mjs'),'unknown'));
+           negative('timeout_classification',timeout,invoke('timeout',join(root,'timeout.mjs'),'unknown'));
+           const numbers=invoke('numeric',join(root,'numeric.mjs'));numeric(numbers);result.controls.realPassed.push('numeric_assertion');
+           check(!JSON.stringify(numbers).includes('AFW_R1_CANARY'));result.controls.realPassed.push('lf_canary_non_echo');
+           const generic=invoke('generic',join(root,'generic.mjs'));check(generic.valid&&generic.state==='r1_fail');same(generic.error,{target:'R1',wrapperFailureType:'testCodeFailure',causeCode:'unknown',causeClass:'Error',operator:'unknown',actual:null,expected:null});result.controls.realPassed.push('generic_fallback');
+           const file=invoke('file',join(root,'file.mjs'));check(file.valid&&file.state==='file_failure'&&file.rows[0].result==='not_observed');result.controls.realPassed.push('pre_case_failure');
+           timeout(invoke('timeout',join(root,'timeout.mjs')));result.controls.realPassed.push('timeout_classification');
+           const selector=invoke('selector',join(root,'selector.mjs'));check(selector.valid&&selector.state==='r1_pass'&&!existsSync(join(root,'R2.activated'))&&!existsSync(join(root,'R3.activated')));result.controls.realPassed.push('exact_selector');
+           const accessor=spawnSync(process.execPath,[join(root,'driver.mjs'),'accessor',join(root,'numeric.mjs'),join(root,'accessor.json'),'real'],{env:env(),stdio:['ignore','ignore','ignore'],timeout:8000,killSignal:'SIGTERM'});check(!accessor.error&&!accessor.signal&&accessor.status===0);
+           same(load('accessor.json'),{purpose:'afw.r1-accessor-control.v1',passed:true,getters:0,proxyTraps:0});result.controls.realPassed.push('accessor_proxy_zero_calls');
+           same(result.controls.negativeFailed,schema.negativeIds);same(result.controls.realPassed,schema.controlIds);
+           result.blockedAt='pure';
+           const pure=invoke('pure',resolve('test/finite-budget-diagnostics.test.mjs'),'real',45000);check(pure.valid);result.pure={passed:true,summary:pure.summary};
+           result.blockedAt='preflight';
+           const pre=spawnSync(process.execPath,[join(root,'preflight.mjs'),join(root,'preflight.json')],{env:env({AFW_BUDGET_GROUP:'readonly'}),stdio:['ignore','ignore','ignore'],timeout:45000,killSignal:'SIGTERM'});check(!pre.error&&!pre.signal&&pre.status===0);
+           const profile=load('preflight.json');same(profile,{purpose:'afw.r1-preflight-child.v1',passed:true,group:'readonly',chronology:'afw.finite-budget-chronology.syn.v2',roles:['M','QA'],I0Opened:false,nativeExecutionProduced:false,profileVerified:true});const {purpose,...verifiedProfile}=profile;result.preflight=verifiedProfile;
+           result.blockedAt='headroom';check(Date.now()+185000<=deadline);
+           result.blockedAt='native';
+           const native=invoke('native',resolve('test/mcp-qa-finite-budget-native.test.mjs'),'real',180000,{AFW_BUDGET_GROUP:'readonly',AFW_BUDGET_PREFLIGHT:'output/finite-budget/pure/preflight-readonly.json'});
+           if(native){result.native=native;result.state=native.state;}else check(result.state==='aborted');
+           result.blockedAt='postflight';same(snapshot(),before);result.blockedAt='none';
+          }catch{
+           if(result.blockedAt!=='native'||result.state!=='aborted')result.state='unknown';
+           try{const after=snapshot();if(currentTree!==null&&(after.tree!==currentTree||after.carrierBlob!==carrierBlob||after.sameBlob!==sameBlob)){result.blockedAt='postflight';result.state='unknown';}}catch{result.blockedAt='postflight';result.state='unknown';}
+          }
+          function validateClosed(){
+           keys(result,schema.topKeys);
+           keys(result.context,['repository','ref','source','tree','run','attempt','node','job','base','baseTree']);
+           check(result.context.repository==='tokenizartinfo-ops/agent-friendly-web'&&result.context.ref==='refs/heads/feat/finite-native-cleanup-20261101'&&/^[a-f0-9]{40}$/.test(result.context.source??'')&&/^[1-9][0-9]*$/.test(result.context.run??'')&&result.context.attempt===1&&result.context.node==='v22.23.4'&&result.context.job==='diagnose');
+           check(result.context.tree===null||/^[a-f0-9]{40}$/.test(result.context.tree));check(result.context.base==='d42277a6963ee691ac176358e8396194f7dc32c9'&&result.context.baseTree==='91f33096426c965f2b0b3b61ae62949f815b81e1');
+           keys(result.pins,['sourceTuplesSha256','source','rollbackF7','samePrefixBlob','samePrefixBytes','samePrefixSha256','carrierBlob','sameBlob','programs']);
+           same(result.pins.source,core);check(result.pins.sourceTuplesSha256==='9e71af5d23fca660569f5c4c90ca202152c7f22d1b3a39a5be8bc24426c92304'&&result.pins.rollbackF7==='f7a71f1a0fa4f5ddf069ff411f008a098455e5cc'&&result.pins.samePrefixBlob==='063bfcbf55f12aa985a1c554a16c0f6a15e21d7f'&&result.pins.samePrefixBytes===512097&&result.pins.samePrefixSha256==='5be9582d057d23d7012c434c8af6dea72e93ecbc1d5056f3fd7824d81894a697');
+           for(const key of ['carrierBlob','sameBlob'])check(result.pins[key]===null||/^[a-f0-9]{40}$/.test(result.pins[key]));
+           keys(result.pins.programs,['outer','driver','preflight','schema']);check(Object.values(result.pins.programs).every(value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value)));
+           keys(result.controls,['negativeFailed','realPassed']);keys(result.pure,['passed','summary']);check(typeof result.pure.passed==='boolean');
+           keys(result.preflight,['passed','group','chronology','roles','I0Opened','nativeExecutionProduced','profileVerified']);check(typeof result.preflight.passed==='boolean'&&typeof result.preflight.profileVerified==='boolean');same({...result.preflight,passed:false,profileVerified:false},{passed:false,group:'readonly',chronology:'afw.finite-budget-chronology.syn.v2',roles:['M','QA'],I0Opened:false,nativeExecutionProduced:false,profileVerified:false});
+           check(schema.states.includes(result.state)&&schema.blockedAt.includes(result.blockedAt));same(result.controls.negativeFailed,schema.negativeIds.slice(0,result.controls.negativeFailed.length));same(result.controls.realPassed,schema.controlIds.slice(0,result.controls.realPassed.length));
+           check(result.controls.negativeFailed.length<=2&&result.controls.realPassed.length<=7);same(result.flags,Object.fromEntries(schema.flags.map(key=>[key,false])));check(result.selectedCase==='R1');
+           if(result.native!==null)child(result.native,'selected');
+           if(result.pure.summary!==null)counts(result.pure.summary);
+           if(['r1_pass','r1_fail','file_failure'].includes(result.state)){check(result.blockedAt==='none'&&result.native?.valid&&result.native.state===result.state&&result.pure.passed&&result.preflight.passed&&result.preflight.profileVerified);same(result.controls.realPassed,schema.controlIds);same(result.controls.negativeFailed,schema.negativeIds);}
+           const raw=JSON.stringify(result);check(Buffer.byteLength(raw)<=16384&&!raw.includes('AFW_R1_CANARY'));
+           return raw;
+          }
+          try{process.stdout.write('AFW_R1_STRUCTURED_DIAGNOSTIC/1 '+validateClosed()+'\n');if(result.blockedAt!=='none'||result.state==='unknown'||result.state==='aborted')process.exitCode=1;}catch{process.exitCode=1;}
+          AFW_R1_OUTER
+      - name: Run controls, pure, original readonly preflight and one original R1
+        shell: bash
+        env:
+          AFW_R1_PROGRAM_SHA256: 3dc6b02ec78d18d3019c6a56e38f468b0d57504d52bdfe9e30f51afb279859db
+        run: |
+          set -euo pipefail
+          umask 077
+          node "$RUNNER_TEMP/afw-r1-structured-outer.mjs"
+```
