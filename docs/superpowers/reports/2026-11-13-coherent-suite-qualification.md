@@ -4059,3 +4059,107 @@ Native DATA candidatefc02dd4105512f0e29716f4c72e031d0910b1692/tree15d48bbac771b6
 All32IDs/19allUnknownIDs/4oldDREDIDs and planned86positive checks remain unchanged. Old4RED is separate from GREEN; no acceptance until actual old4+oracle19+new32+old36+integration10+receiver8 pass their exact contracts. Ubuntu24.04/Node22.23.4,4+3minute limits, locked npm scriptsOFF, fixed default GitHub token DATA-fetch/receiver scope and all seven false nonclaims remain. No actual Native/R1 rerun or business16/PC-off/provider/readiness claim is added.
 
 The ENTIRE latest502674B SAME prefix822e3d7dbd0536c888cd1aacd7d6c7d88e73e8cc/SHA256938e57aa7bf95cedd133f0aba12a756388684eb1d3f19c872ad498d0ccc869dd is preserved before this appendix. Root owns inactive gate, new single-use release, terminal evidence and exact originalF7 restoration, followed by one scoped rereview. Same aggregate pre-review fix wave; no second broad review/fix wave. Worker preparation moved no Source/main/Rootdocs reference and performed no Source/test execution.
+
+
+## 2026-11-14 — Aggregate readonly-boundary four-fix qualification ACCEPTED (scoped rereview pending)
+
+ONE fresh run43633743809/attempt1 atSource1a6ead04c8745ea59d885b513ab19efb381ccf17/treef6ab9d614a02c5c214a57986f9f931718d636ca6/F775940a26dbd6b241f0862fd013e81736c3441f60 completedSUCCESS. ExactmessageAFW-READONLY-B09-OPERATOR-FIX-ONEUSE-20261114. All declaredjobspositivelyterminalSUCCESS beforeSourcewrite:
+```json
+[
+  {
+    "id": 132565895848,
+    "name": "qualify",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-11-14T19:44:47Z",
+    "completedAt": "2026-11-14T19:45:17Z"
+  },
+  {
+    "id": 132566038608,
+    "name": "verify",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAt": "2026-11-14T19:45:19Z",
+    "completedAt": "2026-11-14T19:45:29Z"
+  }
+]
+```
+
+ActualzeroAFWkeyqualification: oldFourRed4/0pass/4fail (separateNOTGREEN); allUnknown32/13pass/19fail; currentreadonly32PASS; frozenoldstage36PASS; integration10PASS andreceiver8PASS, total86GREEN. cancelled/skipped/todo0 throughout. EveryoldregressionfamilyfailsagainstfixedvulnerableoldObserver87bb/ea30; currentb09passesrawcanonicalcount/location/oldgeneralEACCES/fullpair/repackednegativeassertions, sooldb09negativeproofno longerrestsonthebrokenfixtureprecondition. Priorfailedqualifiersremainfailed/consumed; diagnosticcollectiondidnotcountGREEN.
+
+Root independentlyconsumedONLYassignedartifact14128858806 fromliteralcurrentverifyline at2026-11-14T19:45:25.7941416Z. Qualifyuploaderprimarylogs: ID14128858806,size8542,uploadSHA90fafc25f3c4fb605ebe0715e4d055b95a65390b7568ec081ede8a3f9ed5e56c; currentrunartifactmetadataexactname/context/digest/size/expiredfalse corroborated. RawZIP8542B/SHA90fafc25f3c4fb605ebe0715e4d055b95a65390b7568ec081ede8a3f9ed5e56c; RootownboundedZIPreaderverifiedEOF/entrynames/ranges/method/caps/CRCknownvector/fatalUTF8/canonicalJSON. result.json7734B/SHA2f0fa51907acf486ebb7c163796e7f4742c7d112b79889f9c8f5552ad4c63e5a/CRCd74f4c30; manifest.json554B/SHA0821e8ccc55536df515b09ad1e7c49a77933f4c5f7a67fbcf8dc2a6fc8125ab7/CRCa9f699c1. Exactpurpose/role/context/pins/candidate/oldObserver/schema/counts/IDinventories/10integration/8receiver/manifesthash/all7false independentlyvalidated. No rawNativepayload/checkpoint/logsdownload.
+
+Rootacceptedreceipt:
+```json
+{
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "repositoryId": "1347578006",
+    "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+    "source": "1a6ead04c8745ea59d885b513ab19efb381ccf17",
+    "tree": "f6ab9d614a02c5c214a57986f9f931718d636ca6",
+    "workflowBlob": "75940a26dbd6b241f0862fd013e81736c3441f60",
+    "run": "43633743809",
+    "attempt": 1,
+    "node": "22.23.4"
+  },
+  "resultBytes": 7734,
+  "resultSha256": "2f0fa51907acf486ebb7c163796e7f4742c7d112b79889f9c8f5552ad4c63e5a",
+  "manifestBytes": 554,
+  "manifestSha256": "0821e8ccc55536df515b09ad1e7c49a77933f4c5f7a67fbcf8dc2a6fc8125ab7",
+  "tests": {
+    "oldFourRed": {
+      "exit": 1,
+      "tests": 4,
+      "pass": 0,
+      "fail": 4,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "allUnknown": {
+      "exit": 1,
+      "tests": 32,
+      "pass": 13,
+      "fail": 19,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "readonly": {
+      "exit": 0,
+      "tests": 32,
+      "pass": 32,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "stage": {
+      "exit": 0,
+      "tests": 36,
+      "pass": 36,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    }
+  },
+  "greenFamilies": 86,
+  "oldFourRedFail": 4,
+  "negativeFailures": 19,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
+```
+
+NativeDATAfc02dd4105512f0e29716f4c72e031d0910b1692/tree15d48bbac771b63173d9e89828b53773a0199057/F74cf7e93ae0079bdbf9cab3f38c15e6ee179a8e10/367631B remainsDATA/all8false, neverexecutedforthesetelemetryfixes. D0c351/28993B; testdcd8/23473B. World/NativeR1/businesscommands/caps/clocks/keysunchanged. HistoricalR1pairwithcommandunknown/custodyabsentremainsvalidsamehashundernewRootreceiver; actualcauseunresolved. No86→business16/PCoffinference.
+
+Onlyafterbothterminal, originalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc/126209B/SHA1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a restored at6dff087a0eeb43df6f026ab7f232c64ba6543a60/tree3cec6e408c8b9423de9b4d864c777470f3d5da4c; fulltreevsclosed685onlynewtestandSAME,3202leaves62WF, undeclaredexact. ThisactualappendpreservesENTIRE506921BSAME7bc3711075e8ed304bdae607e150584312c25b92/SHA10e3204447f19c28e07c9cce19a30b055f4223376ec350ca270b52d51a07453e. Sourcefinalhead/readback/hashwillberecordedindependently. NextONEscopedrereviewofI1–I4/tests/qualifier+Nativepinripples; nosecondbroadreview/fixwave. Mainunchanged/all7false/R1causeheldforclosure. No realCF/provider/runtime/OAuth/cron/Containers/subscriptions/permissions/newkeys/customer/Max/mail/browseractions/localSourceexecution.
