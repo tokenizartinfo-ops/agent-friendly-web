@@ -171,3 +171,128 @@ export function projectAssignments(text){
  }catch{return unavailable;}
 }
 export function assignmentLine(text){return 'AFW_STAGE_DIAGNOSTIC_ASSIGNMENTS '+JSON.stringify(projectAssignments(text));}
+
+// Readonly boundary v1. Representation caps are checked first; TAP interpretation
+// stops on the first literal failing result, before ANY of its error details.
+const READONLY_IDS=Object.freeze(['R1','R2','R3','native_file']);
+const NATIVE_PATH='test/mcp-qa-finite-budget-native.test.mjs';
+const RUNNER_ROOT='/home/runner/work/agent-friendly-web/agent-friendly-web/';
+const nativeNames=Object.freeze([NATIVE_PATH,RUNNER_ROOT+NATIVE_PATH,'file://'+RUNNER_ROOT+NATIVE_PATH]);
+const tapRows=(result='not_observed')=>READONLY_IDS.map(id=>({id,result,directive:'none'}));
+const tapUnknown=()=>({state:'unknown',cases:tapRows('unknown'),counts:null});
+const tapAbsent=()=>({state:'not_observed',cases:tapRows(),counts:null});
+const custodyUnknown=()=>({state:'unknown',guard:null});
+const custodyAbsent=()=>({state:'not_observed',guard:null});
+const GUARDS=Object.freeze({101:'regular_file_size_bounds',135:'inventory_files_or_bytes',150:'record_bytes',173:'header_bytes',177:'jsonl_bytes',179:'envelope_bytes',188:'envelope_input_bounds',215:'inspected_inventory',250:'expanded_jsonl_bytes',254:'inspected_record_bytes'});
+function tapId(name){for(const id of READONLY_IDS.slice(0,3))if(name===id+' fixed original SDK readonly budget')return id;return nativeNames.includes(name)?'native_file':null;}
+const duration=line=>/^ {2}duration_ms: [0-9]+(?:\.[0-9]+)?$/.test(line);
+export function projectReadonlyTap(text){
+ try{
+  const lines=linesOf(text);if(!lines.length)return tapAbsent();
+  same(lines[0],'TAP version 13');const cases=tapRows(),seen=new Set();let announced=null,details=false,next=1,plan=null,summary=null;
+  for(let i=1;i<lines.length;i++){
+   const line=lines[i];
+   if(line==='  ---'){
+    assert(details);assert(duration(lines[++i]));same(lines[++i],"  type: 'test'");same(lines[++i],'  ...');details=false;continue;
+   }
+   if(line.startsWith('# Subtest: ')){assert(plan===null&&!announced&&!details);const id=tapId(line.slice(11));assert(id&&!seen.has(id));announced=id;details=false;continue;}
+   const row=/^(ok|not ok) ([1-4]) - (.*?)(?: # (SKIP|TODO)(?: .*)?)?$/.exec(line);
+   if(row){
+    assert(plan===null&&!details);const id=tapId(row[3]),ordinal=Number(row[2]),directive=row[4]?.toLowerCase()??'none';
+    assert(id&&!seen.has(id)&&(announced===null||announced===id));
+    const lateFile=id==='native_file'&&cases.slice(0,3).every(r=>r.result==='ok')&&seen.size===3&&row[1]==='not ok';
+    assert(ordinal===next||lateFile&&ordinal===1);
+    if(id==='native_file')assert(seen.size===0||lateFile);else same(id,'R'+next);
+    cases[READONLY_IDS.indexOf(id)]={id,result:row[1]==='ok'?'ok':'not_ok',directive};seen.add(id);next++;announced=null;
+    if(row[1]==='not ok')return {state:'first_failure',cases:cases.map(r=>seen.has(r.id)?r:{...r,result:'unknown'}),counts:null};
+    details=true;continue;
+   }
+   const p=/^1\.\.([0-4])$/.exec(line);
+   if(p){assert(plan===null&&!announced&&!details);plan=Number(p[1]);same(plan,seen.size);details=false;continue;}
+   if(line.startsWith('# tests ')){
+    assert(plan!==null&&summary===null);summary={};
+    for(const key of ['tests','suites','pass','fail','cancelled','skipped','todo']){
+     const m=new RegExp('^# '+key+' ([0-4])$').exec(lines[i++]);assert(m);summary[key]=Number(m[1]);
+    }
+    assert(/^# duration_ms [0-9]+(?:\.[0-9]+)?$/.test(lines[i]));
+    same(summary.tests,seen.size);same(summary.suites,0);same(summary.fail,0);same(summary.cancelled,0);
+    same(summary.skipped,cases.filter(r=>r.directive==='skip').length);same(summary.todo,cases.filter(r=>r.directive==='todo').length);same(summary.pass,seen.size-summary.skipped-summary.todo);
+    continue;
+   }
+   assert(!details&&line.startsWith('# ')&&!/^# (?:tests|suites|pass|fail|cancelled|skipped|todo|duration_ms)(?: |:)/.test(line)&&plan===null);
+  }
+  assert(plan!==null&&summary!==null&&!announced);if(seen.has('native_file'))same(seen.size,1);
+  const {tests,pass,fail,cancelled,skipped,todo}=summary;
+  return {state:'complete',cases,counts:{tests,pass,fail,cancelled,skipped,todo}};
+ }catch{return tapUnknown();}
+}
+export function projectCustodyLimit(text,P){
+ try{
+  const lines=linesOf(text);if(!lines.length)return custodyAbsent();
+  const headers=lines.map((line,i)=>({i,line,match:/^(Error|AssertionError|CustodyError)(?: \[([^\]\r\n]*)\])?: (.*)$/.exec(line)})).filter(v=>v.match);
+  const projected=projectLogText(text,P).failure;
+  const mentioned=lines.some(line=>line.includes('custody_limit'));
+  if(projected.code!=='custody_limit')return mentioned?custodyUnknown():custodyAbsent();
+  if(headers.length!==1)return custodyUnknown();
+  const header=headers[0],claims=[header.match[2],header.match[3]].filter(Boolean);
+  if(!claims.includes('custody_limit')||claims.some(v=>v!=='custody_limit'))return custodyUnknown();
+  const approved=['test/fixtures/finite-checkpoint-custody.mjs',RUNNER_ROOT+'test/fixtures/finite-checkpoint-custody.mjs','file://'+RUNNER_ROOT+'test/fixtures/finite-checkpoint-custody.mjs'];
+  // Validate the fixed throw chain and stop as soon as its first real guard
+  // is known. Node/internal/external caller frames below it are not interpreted.
+  let phase=0,constructorSeen=false;
+  for(let n=header.i+1;n<lines.length&&/^ {4}at /.test(lines[n]);n++){
+   const match=/^ {4}at (?:async )?(?:new )?(?:(?:[A-Za-z0-9_$.[\]<>]+) \(([^()\s]+):([1-9][0-9]{0,5}):([1-9][0-9]{0,3})\)|([^()\s]+):([1-9][0-9]{0,5}):([1-9][0-9]{0,3}))$/.exec(lines[n]);
+   if(!match)return custodyUnknown();const path=match[1]??match[4],number=Number(match[2]??match[5]);if(!approved.includes(path))return custodyUnknown();
+   if(phase===0){if(number===22&&!constructorSeen){constructorSeen=true;continue;}if(number!==20)return custodyUnknown();phase=1;continue;}
+   if(phase===1&&number===24){phase=2;continue;}
+   const guard=GUARDS[number];if(!guard)return custodyUnknown();return {state:'observed',guard};
+  }
+  return custodyUnknown();
+ }catch{return custodyUnknown();}
+}
+// Explicit synthetic root/IO boundary. Each fixed log is opened ONCE, then the
+// same captured text supplies both old and new public observations.
+export async function collectOwnedReadonlyLogRoot(root,P,io=fs){
+ let safe=true;try{await controlledRoot(root,io);}catch{safe=false;}
+ const reads=[],logs=[],observations=[];
+ for(const [log,name]of FILES){
+  const read=safe?await readOwned(root,name,io):{availability:'unsafe'},v=read.availability==='available'?projectLogText(read.text,P):{failure:unknown(),stage:unknownStage(),http:null};
+  reads.push(read);logs.push({log,availability:read.availability,code:v.failure.code,site:v.failure.site});observations.push(v);
+ }
+ const project=(read,fn,absent,uncertain)=>read.availability==='missing'?absent():read.availability==='available'?fn(read.text):uncertain();
+ const metadata=observations[2],count=logs[3];
+ return {logs,stage:logs[2].availability==='available'?metadata.stage:unknownStage(),http:logs[2].availability==='available'?metadata.http:null,countCheck:count.availability==='missing'||count.availability==='available'&&count.code==='unknown'&&observations[3].stage.state==='not_observed'?'not_observed':count.availability==='available'&&count.code==='assertion'?'coded_assertion':'unknown',tap:project(reads[0],projectReadonlyTap,tapAbsent,tapUnknown),custodyLimit:project(reads[1],s=>projectCustodyLimit(s,P),custodyAbsent,custodyUnknown)};
+}
+function validateTap(v){
+ fields(v,['state','cases','counts']);assert(['not_observed','unknown','complete','first_failure'].includes(v.state));same(v.cases.length,4);
+ for(const [n,row]of v.cases.entries()){fields(row,['id','result','directive']);same(row.id,READONLY_IDS[n]);assert(['ok','not_ok','not_observed','unknown'].includes(row.result));assert(['none','skip','todo'].includes(row.directive));if(['unknown','not_observed'].includes(row.result))same(row.directive,'none');}
+ if(v.state==='not_observed'){same(v,tapAbsent());return;}if(v.state==='unknown'){same(v,tapUnknown());return;}
+ if(v.state==='first_failure'){
+  same(v.counts,null);const failed=v.cases.findIndex(r=>r.result==='not_ok');assert(failed>=0&&v.cases.filter(r=>r.result==='not_ok').length===1);
+  if(failed===3)assert(v.cases.slice(0,3).every(r=>r.result==='ok')||v.cases.slice(0,3).every(r=>r.result==='unknown'));
+  else assert(v.cases.slice(0,failed).every(r=>r.result==='ok')&&v.cases.slice(failed+1).every(r=>r.result==='unknown'));
+  return;
+ }
+ fields(v.counts,['tests','pass','fail','cancelled','skipped','todo']);for(const n of Object.values(v.counts))assert(Number.isInteger(n)&&n>=0&&n<=4);
+ assert(v.cases.every(r=>r.result==='ok'||r.result==='not_observed'));const seen=v.cases.filter(r=>r.result==='ok');
+ if(v.cases[3].result==='ok')same(seen.length,1);else{let gap=false;for(const r of v.cases.slice(0,3)){if(r.result==='not_observed')gap=true;else assert(!gap);}}
+ same(v.counts,{tests:seen.length,pass:seen.filter(r=>r.directive==='none').length,fail:0,cancelled:0,skipped:seen.filter(r=>r.directive==='skip').length,todo:seen.filter(r=>r.directive==='todo').length});
+}
+function validateCustody(v){fields(v,['state','guard']);assert(['not_observed','unknown','observed'].includes(v.state));if(v.state==='observed')assert(Object.values(GUARDS).includes(v.guard));else same(v.guard,null);}
+export function makeReadonlyPair({context,job,rawOutcome,observation}){
+ validateContext(context);same(job,'readonly');assert(OUTCOMES.includes(rawOutcome));
+ const value={purpose:'afw.readonly-boundary-observations.syn.v1',context,job,rawOutcome,logs:observation.logs,stage:observation.stage,http:observation.http,countCheck:observation.countCheck,tap:observation.tap,custodyLimit:observation.custodyLimit,nonclaims:NONCLAIMS};
+ const bytes=canonical(value),manifest=canonical({purpose:'afw.readonly-boundary-observations.manifest.syn.v1',context,job,files:[{path:'result.json',bytes:bytes.length,sha256:sha(bytes)}]});assert(bytes.length+manifest.length<=16384,'stage_evidence_rejected');return new Map([['result.json',bytes],['manifest.json',manifest]]);
+}
+export async function collectFixedReadonlyPair({context,job,rawOutcome}){
+ const e=process.env;same(process.versions.node,'22.23.4');same(e.GITHUB_JOB,'readonly');same(job,'readonly');assert(e.NODE_OPTIONS===undefined&&e.AFW_SYN_CHECKPOINT_KEY===undefined&&e.GH_ARTIFACT_TOKEN===undefined,'stage_evidence_rejected');assert(typeof e.RUNNER_TEMP==='string'&&isAbsolute(e.RUNNER_TEMP),'stage_evidence_rejected');
+ const P=await projector(),pair=makeReadonlyPair({context,job,rawOutcome,observation:await collectOwnedReadonlyLogRoot(join(e.RUNNER_TEMP,'afw-native-private','logs'),P)});validateFixedReadonlyPairWithProjector(pair,context,job,P);return pair;
+}
+export async function validateFixedReadonlyPair(files,context,job){return validateFixedReadonlyPairWithProjector(files,context,job,await projector());}
+export function validateFixedReadonlyPairWithProjector(files,context,job,P){
+ validateContext(context);same(job,'readonly');assert(files instanceof Map);same([...files.keys()],['result.json','manifest.json']);assert([...files.values()].every(Buffer.isBuffer));assert([...files.values()].reduce((n,b)=>n+b.length,0)<=16384);
+ const read=b=>{const text=new TextDecoder('utf-8',{fatal:true}).decode(b),v=JSON.parse(text);assert(canonical(v).equals(b));return v;};
+ const value=read(files.get('result.json')),manifest=read(files.get('manifest.json'));fields(value,['purpose','context','job','rawOutcome','logs','stage','http','countCheck','tap','custodyLimit','nonclaims']);same(value.purpose,'afw.readonly-boundary-observations.syn.v1');
+ const old={purpose:'afw.sanitized-stage-observations.syn.v1',context:value.context,job:value.job,rawOutcome:value.rawOutcome,logs:value.logs,stage:value.stage,http:value.http,countCheck:value.countCheck,nonclaims:value.nonclaims};validateValue(old,context,job,P);validateTap(value.tap);validateCustody(value.custodyLimit);for(const [index,key,absent,uncertain]of [[0,'tap',tapAbsent,tapUnknown],[1,'custodyLimit',custodyAbsent,custodyUnknown]]){if(value.logs[index].availability==='missing')same(value[key],absent());else if(value.logs[index].availability!=='available')same(value[key],uncertain());}
+ fields(manifest,['purpose','context','job','files']);same(manifest.purpose,'afw.readonly-boundary-observations.manifest.syn.v1');same(manifest.context,context);same(manifest.job,job);same(manifest.files,[{path:'result.json',bytes:files.get('result.json').length,sha256:sha(files.get('result.json'))}]);return value;
+}
