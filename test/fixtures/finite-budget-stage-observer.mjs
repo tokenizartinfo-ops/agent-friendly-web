@@ -198,7 +198,7 @@ export function projectReadonlyTap(text){
    if(line.startsWith('# Subtest: ')){assert(plan===null&&!announced&&!details);const id=tapId(line.slice(11));assert(id&&!seen.has(id));announced=id;details=false;continue;}
    const row=/^(ok|not ok) ([1-4]) - (.*?)(?: # (SKIP|TODO)(?: .*)?)?$/.exec(line);
    if(row){
-    assert(plan===null&&!details);const id=tapId(row[3]),ordinal=Number(row[2]),directive=row[4]?.toLowerCase()??'none';
+    assert(plan===null&&!details&&!seen.has('native_file'));const id=tapId(row[3]),ordinal=Number(row[2]),directive=row[4]?.toLowerCase()??'none';
     assert(id&&!seen.has(id)&&(announced===null||announced===id));
     const lateFile=id==='native_file'&&cases.slice(0,3).every(r=>r.result==='ok')&&seen.size===3&&row[1]==='not ok';
     assert(ordinal===next||lateFile&&ordinal===1);
@@ -251,12 +251,13 @@ export function projectCustodyLimit(text,P){
  }catch{return custodyUnknown();}
 }
 // Explicit synthetic root/IO boundary. Each fixed log is opened ONCE, then the
-// same captured text supplies both old and new public observations.
+// same captured text supplies the public observations. Command TAP is only
+// interpreted by the pure prefix projector, never the general log projector.
 export async function collectOwnedReadonlyLogRoot(root,P,io=fs){
  let safe=true;try{await controlledRoot(root,io);}catch{safe=false;}
  const reads=[],logs=[],observations=[];
  for(const [log,name]of FILES){
-  const read=safe?await readOwned(root,name,io):{availability:'unsafe'},v=read.availability==='available'?projectLogText(read.text,P):{failure:unknown(),stage:unknownStage(),http:null};
+  const read=safe?await readOwned(root,name,io):{availability:'unsafe'},v=read.availability==='available'&&log!=='command'?projectLogText(read.text,P):{failure:unknown(),stage:unknownStage(),http:null};
   reads.push(read);logs.push({log,availability:read.availability,code:v.failure.code,site:v.failure.site});observations.push(v);
  }
  const project=(read,fn,absent,uncertain)=>read.availability==='missing'?absent():read.availability==='available'?fn(read.text):uncertain();
@@ -290,9 +291,9 @@ export async function collectFixedReadonlyPair({context,job,rawOutcome}){
 }
 export async function validateFixedReadonlyPair(files,context,job){return validateFixedReadonlyPairWithProjector(files,context,job,await projector());}
 export function validateFixedReadonlyPairWithProjector(files,context,job,P){
- validateContext(context);same(job,'readonly');assert(files instanceof Map);same([...files.keys()],['result.json','manifest.json']);assert([...files.values()].every(Buffer.isBuffer));assert([...files.values()].reduce((n,b)=>n+b.length,0)<=16384);
+ validateContext(context);same(job,'readonly');assert(files instanceof Map&&files.size===2&&files.has('result.json')&&files.has('manifest.json'));assert([...files.values()].every(Buffer.isBuffer));assert([...files.values()].reduce((n,b)=>n+b.length,0)<=16384);
  const read=b=>{const text=new TextDecoder('utf-8',{fatal:true}).decode(b),v=JSON.parse(text);assert(canonical(v).equals(b));return v;};
  const value=read(files.get('result.json')),manifest=read(files.get('manifest.json'));fields(value,['purpose','context','job','rawOutcome','logs','stage','http','countCheck','tap','custodyLimit','nonclaims']);same(value.purpose,'afw.readonly-boundary-observations.syn.v1');
- const old={purpose:'afw.sanitized-stage-observations.syn.v1',context:value.context,job:value.job,rawOutcome:value.rawOutcome,logs:value.logs,stage:value.stage,http:value.http,countCheck:value.countCheck,nonclaims:value.nonclaims};validateValue(old,context,job,P);validateTap(value.tap);validateCustody(value.custodyLimit);for(const [index,key,absent,uncertain]of [[0,'tap',tapAbsent,tapUnknown],[1,'custodyLimit',custodyAbsent,custodyUnknown]]){if(value.logs[index].availability==='missing')same(value[key],absent());else if(value.logs[index].availability!=='available')same(value[key],uncertain());}
+ const old={purpose:'afw.sanitized-stage-observations.syn.v1',context:value.context,job:value.job,rawOutcome:value.rawOutcome,logs:value.logs,stage:value.stage,http:value.http,countCheck:value.countCheck,nonclaims:value.nonclaims};validateValue(old,context,job,P);same({code:value.logs[0].code,site:value.logs[0].site},unknown());validateTap(value.tap);validateCustody(value.custodyLimit);if(value.custodyLimit.state==='observed'){same(value.logs[1].availability,'available');same(value.logs[1].code,'custody_limit');}if(value.logs[1].code==='custody_limit')assert(value.custodyLimit.state!=='not_observed');for(const [index,key,absent,uncertain]of [[0,'tap',tapAbsent,tapUnknown],[1,'custodyLimit',custodyAbsent,custodyUnknown]]){if(value.logs[index].availability==='missing')same(value[key],absent());else if(value.logs[index].availability!=='available')same(value[key],uncertain());}
  fields(manifest,['purpose','context','job','files']);same(manifest.purpose,'afw.readonly-boundary-observations.manifest.syn.v1');same(manifest.context,context);same(manifest.job,job);same(manifest.files,[{path:'result.json',bytes:files.get('result.json').length,sha256:sha(files.get('result.json'))}]);return value;
 }
