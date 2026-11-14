@@ -3435,3 +3435,283 @@ All seven flags remain exactly:
 ```json
 {"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
 ```
+
+
+## 2026-11-14 — Task3 original whole SYN attempt FAILED / CONSUMED; exact Source restoration
+
+Status: the ONE released materially instrumented original full SYN attempt completed as an observed FAILED trial. Business Q8+Native8=16 was NOT accepted. Three current assigned tiny diagnostic pairs passed Root's independent strict transport/schema/provenance verification; SuiteSAFE was unavailable and no full-suite package was accepted. This is source/synthetic observation only, not real AFW operational or PC-off evidence. No further fix, overlay, rerun or trial is authorized by this result.
+
+### Exact gate, one-use activation, provenance and freeze
+
+Root INACTIVE gate PASS is preserved in Rootdocs20f870513323543d94689d7c2ab66291c7388586/ledger. The independent exact active gate and ONE-USE SYN RELEASE are preserved in Rootdocs6cd215bc3b2b117a42372497effc0b94df8ddd89/ledger. Sole executor was released to perform expected77cff1a07df0d2b41145137dd1cdd1b5627463b6 -> ONLYc44db8cf2d08bdbb15287026e3ca93c3155ae5f1, with exact commit message AFW-STAGE-TASK3-NATIVE-ONEUSE-20261114.
+
+Inactive16d7c94e641a039fe5bf4c66b8bf00bbaa1cfeda/treeb5924f655522da74c046dad98a44fa60edcd03c2, parent77cff, contains the preceding full proposal. Activec44db8cf2d08bdbb15287026e3ca93c3155ae5f1, parent16d7c94e, tree049314b0962089400424dc25e80a488320eee893, differs ONLY by removing the8false&& job-guard prefixes. Exact active F7 is blob9614b64c67a293118fb5983868699abac5fd16bd,367316B/SHA256641482474579a238652f384b013dbc5bb216b170d4144737fad4dda1063bc4c0. Eight explicit shell NODE_OPTIONS absence guards remain immediately before the existing suite_bootstrap Node commands. The four original A/C/V/Z programs, World/runtime/helper/D/Dtests and five source pins, six Native blocks,26crypto slots across six original jobs/environments, eight-job DAG/timeouts, clocks/caps/delays/concurrency/cancellation and every other text byte remain as in the preceding proposal. No source, credential or custody correction was made during the attempt.
+
+Fresh activation preflight at15:07:09UTC verified Source77cff, main0c9c475b3ebaa970fc11d628b40e50a90cceb727, exact activehead0runs and all five Source active-state inventories0. Executor issued exactly ONE no-force activation CAS with expected77cff to c44db8cf. It returned success:true, and an independent ref readback reconciled the ACK to exactlyc44db8cf. No second activation/CAS/dispatch/rerun/old intent or overlay was attempted. Source stayed frozen through all eight declared terminal jobs; absent jobs were treated as unknown until their explicit records appeared.
+
+Unique current run43608448872/attempt1, workflow410564082, path .github/workflows/afw-finite-budget-qualification.yml, eventpush, exact Source branch feat/finite-native-cleanup-20261101, repositoryId/headRepositoryId1347578006, headc44db8cf. Run created/started2026-11-14T15:07:23Z. Last declared job completed2026-11-14T15:24:22Z; final run metadata is completed/failure with updated_at2026-11-14T15:24:23Z, observed completed in the15:24:34UTC read. GitHub does not expose a separate run completed_at here; updated_at is recorded as metadata, not silently substituted for such a field.
+
+Current nine-field diagnostic context verified by Root is repository tokenizartinfo-ops/agent-friendly-web; repositoryId"1347578006"; ref refs/heads/feat/finite-native-cleanup-20261101; sourcec44db8cf2d08bdbb15287026e3ca93c3155ae5f1; tree049314b0962089400424dc25e80a488320eee893; workflowBlob9614b64c67a293118fb5983868699abac5fd16bd; run"43608448872"; attempt1; node"22.23.4".
+
+### All eight current terminal jobs and actual execution boundary
+
+|Declared job|Exact job ID|Started UTC|Completed UTC|API status/conclusion|
+|---|---:|---|---|---|
+|contracts|132488025732|2026-11-14T15:07:25Z|2026-11-14T15:08:11Z|completed/success|
+|positive_prepare|132488245845|2026-11-14T15:08:16Z|2026-11-14T15:22:09Z|completed/success|
+|positive_consume|132492136639|2026-11-14T15:22:14Z|2026-11-14T15:24:03Z|completed/success|
+|reduction_prepare|132488245736|2026-11-14T15:08:16Z|2026-11-14T15:22:00Z|completed/success|
+|reduction_consume_a|132492091570|2026-11-14T15:22:05Z|2026-11-14T15:24:10Z|completed/success|
+|readonly|132488245757|2026-11-14T15:08:15Z|2026-11-14T15:11:24Z|completed/failure|
+|reduction_consume_b|132492093014|2026-11-14T15:22:01Z|2026-11-14T15:22:00Z|completed/skipped|
+|verify|132492710716|2026-11-14T15:24:13Z|2026-11-14T15:24:22Z|completed/failure|
+
+For reduction_consume_b, GitHub returned started15:22:01Z and completed15:22:00Z in the skipped record. Both literal metadata values are retained; no clock compensation, duration inference or rewritten timestamp is applied. Every declared job is explicitly completed; reduction_consume_b is skipped, not a missing/assumed terminal job.
+
+Contracts metadata shows decoded key-scope validation, fixed syntax/lint/inactive-module/eight-contract step, fixed preparation controls, three-profile preflight and retained same-ID inventory all completed/success in this exact workflow. This is metadata evidence, not an independently exposed test-count record. The actual frozen parser accepted this final Source carrier in the current contracts step. No separate Task1/Task2/old32keyscope/14Z requalification run was executed. Frozen V and its inherent14ZIP+2receiver code remained intact in this original trial; no assertion about those checks passing follows merely from their presence or the failed V step.
+
+Five declared Native step blocks executed; reduction_consume_b's sixth block did not run because that job was explicitly skipped. REST gives completed/success for the readonly Execute fixed readonly once step, but this step uses continue-on-error and Root's qualified diagnostic reports rawOutcome FAILURE. Therefore REST success is not evidence of a successful raw readonly command. No Q8/Native8 per-test inventory, missing count or suite total is manufactured from job/step metadata. The frozen whole acceptance failed, and business16 remains NOT accepted.
+
+Readonly failed its Generic custody seal step and its original Preserve actual command and custody outcome assertion. Its original encrypted upload, metadata/open/semantic steps were skipped. The diagnostic pair publication and upload still completed/success before the original truth guard, as designed. The five successful job conclusions and the two successful producer diagnostics do not substitute for seven successful upstream jobs or for final SuiteSAFE acceptance.
+
+Current producer Native blocks ran about13minutes according to their step metadata. Source inspection by Root found the frozen produceCheckpoint default deferWait=false and waitUntil(C0-120000), which explains the planned wait structure; a long producer step is not evidence of a Cloudflare incident. This trial did not access real CF/provider runtime. No historical cause is inferred.
+
+### Root independent current tiny diagnostic evidence
+
+At2026-11-14T15:26:49UTC Root independently consumed ONLY the THREE literal assignments from this current final verify metadata. Root checked exact current API metadata/name/job/9-field context, uploader/API/raw digest binding, strict two-entry ZIP/ranges/EOF/CRC/fatalUTF8, canonical closed pair/schema, allowed pins/vocabulary, manifest binding and16KiB bound. All three passed those checks. Executor read artifact METADATA ONLY and did not download a diagnostic/private ZIP or any job log. Root read only permitted final verify metadata plus these assigned tiny pairs; no private/Native/contracts/producer log or archive was consumed by this evidence path.
+
+|Literal assigned diagnostic job|Artifact ID|Raw ZIP bytes|Raw ZIP SHA256|Metadata created UTC|Metadata expires UTC|
+|---|---:|---:|---|---|---|
+|positive_prepare|14119776284|1217|c3dddc0ebeb48fbd897f683b2b205d6b25588df66bd72c8afc26c8f974dda3a9|2026-11-14T15:22:06Z|2026-11-21T15:22:06Z|
+|reduction_prepare|14119682967|1219|4b1287d69ed7c17be542b560e7eb1fd4ead948492a9b378d8a0c9ab8e5c421cb|2026-11-14T15:21:57Z|2026-11-21T15:21:57Z|
+|readonly|14119507842|1211|95eada759d9157a8739049b8371624808fae8c6fd0646e5ca007d7a65672ff30|2026-11-14T15:11:21Z|2026-11-21T15:11:20Z|
+
+All three API expired=false and metadata workflow_run bound run43608448872/repository1347578006/headRepository1347578006/branchfeat/finite-native-cleanup-20261101/headc44db8cf. Exact names are afw-stage-<literal job>-safe-c44db8cf2d08bdbb15287026e3ca93c3155ae5f1-43608448872. They were consumed because of explicit current assignments, never selected by name/history fallback. Full inner result/manifest byte/hash/CRC details and exact canonical result records are preserved in [Root's immutable independent receipt](https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/e8e0f8d82c3ab607b12310531e429cd59b8fda1b/docs/superpowers/progress/2026-11-14-sanitized-stage-task3-observations.es.md), Rootdocse8e0f8d82c3ab607b12310531e429cd59b8fda1b. The lowercase code is exactly custody_limit; no uppercase enum is introduced. Executor does not reconstruct unexposed inner fields.
+
+Root's sanitized accepted content is exactly bounded as follows:
+- positive_prepare: rawOutcome success; stage complete at write_files; HTTP200. Command/seal/metadata logs available with unknown codes; count log missing. Missing counts are not treated as observed.
+- reduction_prepare: rawOutcome success; stage complete at write_files; HTTP200. Command/seal/metadata logs available with unknown codes; count log missing. The successful stage chain is a location observation, not whole-suite acceptance.
+- readonly: rawOutcome FAILURE; command log available/codeunknown/siteunknown. Seal log available/codecustody_limit/sitecustody_20. Metadata and count logs MISSING; stageunknown/HTTPnull/countChecknot_observed. No exact limit kind, key/credential fault or historical cause is established. This does not distinguish a Node test failure from the aggregate raw command failure, and does not explain any earlier consumed run.
+
+No missing marker, field or output was filled from another job/run. No exception message, file path, private record, secret or unapproved metadata was projected into the diagnostic report. Stage/HTTP/site remain unauthenticated location hints. Strict transport/provenance verification does not make receiptAuthenticated or historicalCauseProven true.
+
+### Exact unavailable SuiteSAFE and business nonacceptance
+
+Root received the current literal SuiteREADBACK with artifactIdnull, digestnull, statusunavailable, reasonpublication_unavailable, proofabsent, upstreamnot_all_seven_success and acceptedfalse. No SuiteSAFE download occurred and no artifact name/history fallback or private artifact substitution was attempted. Current artifact metadata listed eight artifacts, but existence/names do not assign a SuiteSAFE. Partial diagnostic success does not create the absent accepted package.
+
+Business Q8+Native8=16 is NOT accepted. Per-test actual counts remain unavailable where not exposed by allowed current proof. Frozen V rejected the incomplete upstream set; this is not a passing receiver or full-suite result. No real notice/review/withdrawal/autoclose/autonomous host/PC-off claim, owner power-off request, key-scope expansion, deployment or follow-up trial follows.
+
+### Exact restoration, complete prefix and final closure
+
+After ALL8declared jobs were explicitly completed, fresh Source lease read exactlyc44db8cf and main remained0c9c475b. Restoration commite4aaf3da8b589f0908f542aa0d434b4b53f18c3a, parentc44db8cf, treecc718f2c6dd97fbf71bf1e8f0ac500d0f61621ee, restored original F7 blobf7a71f1a0fa4f5ddf069ff411f008a098455e5cc. A single no-force expected-active restoration CAS returned success:true and independent ref readback reconciled exacte4aaf3da. Full original F7 was fetched and byte-equal126209B/SHA2561e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a, with its original closed manual/no-push configuration.
+
+Complete baseline/restored recursive trees are both untruncated3362entries/3201leaves. Every baseline leaf/mode/type is exact except this SAME report; all62workflow blobs/modes/types, including F7, are exact originals. No new/deleted Source leaf or undeclared change survives. Existing World/runtime/helper/D/Dtests and every other baseline artifact were not altered. Rootdocs was not written by executor.
+
+The ENTIRE active-proposal report prefix was fetched before restoration and after restoration as blob5f96b5c8797a46e8ab406ba9ee64e021143686f8,414375B/SHA25645646ee370398fadb7824ee3ee8a1177c4f1fa61e6ac168ad3197b5f93b111ae. Both complete texts are byte-equal. This outcome appendix is added after that ENTIRE414375B prefix, including all398970B prior history and the full inactive proposal. No earlier actuals, authorization or concern was rewritten.
+
+Fresh pre-append readbacks at2026-11-14T15:29:46UTC verified restored Sourcee4aaf3da; main exact0c9c475b3ebaa970fc11d628b40e50a90cceb727; consumedc44db8cf exactlyONE completed/failure run43608448872/attempt1; restoredheade4aaf3da0runs; in_progress,pending,queued,requested,waiting each0. Final report-only commit will be followed by exact ref/tree/full-prefix/F7/all62WF/currenthead0runs/consumedhead1attempt1/fiveactive0 readbacks. Its own content-addressed identity is reported by the final tool receipt and Root closure record rather than a circular self-hash inside this appendix.
+
+Executor self-review checked exact authorization/one-use CAS and ACK reconciliation, Source freeze until all8terminal, immutable programs/pins/commands/clocks and current observation versus missing proof, raw readonly outcome versus continue-on-error REST presentation, Root-only assigned tiny artifact access, all3201baselineleaves/62WF restoration and full414375B append prefix. No additional Source fix was attempted. Remaining limits are explicit: failed whole suite; unavailable SuiteSAFE and count observations; no exact custody-limit kind or Node-test/aggregate distinction; no historical cause, authenticated receipt, physical global drain, SDK namespace emptiness, operational readiness or PC-off proof. Root owns combined Task3 review and subsequent whole-plan final review.
+
+All seven flags remain exactly:
+
+```json
+{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}
+```
+
+### Complete current API step metadata (no logs)
+
+These are only REST step status/conclusion/timestamp records from current run43608448872/attempt1. They are retained verbatim as metadata and do not override the qualified raw readonly FAILURE or unavailable count/SuiteSAFE proof.
+
+
+#### contracts — current API step metadata
+
+|Step|Exact name|Status/conclusion|Started UTC|Completed UTC|
+|---:|---|---|---|---|
+|1|Set up job|completed/success|2026-11-14T15:07:26Z|2026-11-14T15:07:29Z|
+|2|Require the fixed AFW source and first attempt|completed/success|2026-11-14T15:07:29Z|2026-11-14T15:07:29Z|
+|3|Checkout this exact revision|completed/success|2026-11-14T15:07:29Z|2026-11-14T15:07:34Z|
+|4|Use Node 22|completed/success|2026-11-14T15:07:34Z|2026-11-14T15:07:38Z|
+|5|Preserve the four immutable Source helper bodies|completed/success|2026-11-14T15:07:38Z|2026-11-14T15:07:38Z|
+|6|Materialize current Source-bound suite programs before import|completed/success|2026-11-14T15:07:38Z|2026-11-14T15:07:38Z|
+|7|Install the locked fixture dependencies|completed/success|2026-11-14T15:07:38Z|2026-11-14T15:07:50Z|
+|8|Validate decoded key scope before any orchestration|completed/success|2026-11-14T15:07:50Z|2026-11-14T15:07:50Z|
+|9|Check fixed fixture syntax, lint, inactive module and eight contracts|completed/success|2026-11-14T15:07:50Z|2026-11-14T15:07:57Z|
+|10|Execute all fixed preparation controls once without I0|completed/success|2026-11-14T15:07:57Z|2026-11-14T15:08:01Z|
+|11|Strict three-profile preflight with safe failure DTO|completed/success|2026-11-14T15:08:01Z|2026-11-14T15:08:08Z|
+|12|Seal a closed pure evidence directory|completed/success|2026-11-14T15:08:08Z|2026-11-14T15:08:08Z|
+|13|Upload finite-budget-pure only|completed/success|2026-11-14T15:08:08Z|2026-11-14T15:08:09Z|
+|14|Download pure_receipt by exact ID attempt 1|completed/success|2026-11-14T15:08:09Z|2026-11-14T15:08:09Z|
+|15|Wait 2s before pure_receipt retrieval 2|completed/skipped|2026-11-14T15:08:09Z|2026-11-14T15:08:09Z|
+|16|Download pure_receipt by exact ID attempt 2|completed/skipped|2026-11-14T15:08:09Z|2026-11-14T15:08:09Z|
+|17|Wait 5s before pure_receipt retrieval 3|completed/skipped|2026-11-14T15:08:09Z|2026-11-14T15:08:09Z|
+|18|Download pure_receipt by exact ID attempt 3|completed/skipped|2026-11-14T15:08:09Z|2026-11-14T15:08:09Z|
+|19|Verify exact same-ID pure inventory|completed/success|2026-11-14T15:08:09Z|2026-11-14T15:08:09Z|
+|20|Print verified closed profile diagnostic|completed/success|2026-11-14T15:08:09Z|2026-11-14T15:08:09Z|
+|21|Require all covering profiles and retained readback|completed/success|2026-11-14T15:08:09Z|2026-11-14T15:08:09Z|
+|41|Post Use Node 22|completed/success|2026-11-14T15:08:09Z|2026-11-14T15:08:09Z|
+|42|Post Checkout this exact revision|completed/success|2026-11-14T15:08:09Z|2026-11-14T15:08:10Z|
+|43|Complete job|completed/success|2026-11-14T15:08:10Z|2026-11-14T15:08:10Z|
+
+
+#### positive_prepare — current API step metadata
+
+|Step|Exact name|Status/conclusion|Started UTC|Completed UTC|
+|---:|---|---|---|---|
+|1|Set up job|completed/success|2026-11-14T15:08:17Z|2026-11-14T15:08:18Z|
+|2|Require fixed scope before any native work|completed/success|2026-11-14T15:08:18Z|2026-11-14T15:08:18Z|
+|3|Run actions/checkout@v4|completed/success|2026-11-14T15:08:18Z|2026-11-14T15:08:20Z|
+|4|Run actions/setup-node@v4|completed/success|2026-11-14T15:08:20Z|2026-11-14T15:08:20Z|
+|5|Materialize current Source-bound suite programs before import|completed/success|2026-11-14T15:08:20Z|2026-11-14T15:08:20Z|
+|6|Install exact lock without custody key|completed/success|2026-11-14T15:08:20Z|2026-11-14T15:08:37Z|
+|7|Generic custody key-preflight|completed/success|2026-11-14T15:08:37Z|2026-11-14T15:08:37Z|
+|8|Download exact contracts artifact|completed/success|2026-11-14T15:08:37Z|2026-11-14T15:08:38Z|
+|9|Verify prior pure inventory and select fixed graph profile|completed/success|2026-11-14T15:08:38Z|2026-11-14T15:08:39Z|
+|10|Execute fixed positive_prepare once|completed/success|2026-11-14T15:08:39Z|2026-11-14T15:21:41Z|
+|11|Prepare complete private inventory and legacy manifest without key|completed/success|2026-11-14T15:21:41Z|2026-11-14T15:21:41Z|
+|12|Generic custody seal|completed/success|2026-11-14T15:21:41Z|2026-11-14T15:21:53Z|
+|13|Upload encrypted envelope and closed receipts only|completed/success|2026-11-14T15:21:53Z|2026-11-14T15:21:55Z|
+|14|Validate own assigned metadata and raw ZIP3 without key|completed/success|2026-11-14T15:21:55Z|2026-11-14T15:21:57Z|
+|15|Generic custody own open|completed/success|2026-11-14T15:21:57Z|2026-11-14T15:22:05Z|
+|16|Validate own original manifest and World semantics without key|completed/success|2026-11-14T15:22:05Z|2026-11-14T15:22:06Z|
+|17|Publish bounded stage observations before original truth assertions|completed/success|2026-11-14T15:22:06Z|2026-11-14T15:22:06Z|
+|18|Upload fixed positive_prepare diagnostic pair only|completed/success|2026-11-14T15:22:06Z|2026-11-14T15:22:07Z|
+|19|Preserve actual command and custody outcome|completed/success|2026-11-14T15:22:07Z|2026-11-14T15:22:07Z|
+|37|Post Run actions/setup-node@v4|completed/success|2026-11-14T15:22:07Z|2026-11-14T15:22:07Z|
+|38|Post Run actions/checkout@v4|completed/success|2026-11-14T15:22:07Z|2026-11-14T15:22:07Z|
+|39|Complete job|completed/success|2026-11-14T15:22:07Z|2026-11-14T15:22:07Z|
+
+
+#### positive_consume — current API step metadata
+
+|Step|Exact name|Status/conclusion|Started UTC|Completed UTC|
+|---:|---|---|---|---|
+|1|Set up job|completed/success|2026-11-14T15:22:14Z|2026-11-14T15:22:15Z|
+|2|Require fixed scope before any native work|completed/success|2026-11-14T15:22:15Z|2026-11-14T15:22:15Z|
+|3|Run actions/checkout@v4|completed/success|2026-11-14T15:22:15Z|2026-11-14T15:22:17Z|
+|4|Run actions/setup-node@v4|completed/success|2026-11-14T15:22:17Z|2026-11-14T15:22:18Z|
+|5|Materialize current Source-bound suite programs before import|completed/success|2026-11-14T15:22:18Z|2026-11-14T15:22:18Z|
+|6|Install exact lock without custody key|completed/success|2026-11-14T15:22:18Z|2026-11-14T15:22:28Z|
+|7|Generic custody key-preflight|completed/success|2026-11-14T15:22:28Z|2026-11-14T15:22:28Z|
+|8|Download exact contracts artifact|completed/success|2026-11-14T15:22:28Z|2026-11-14T15:22:29Z|
+|9|Verify prior pure inventory and select fixed graph profile|completed/success|2026-11-14T15:22:29Z|2026-11-14T15:22:30Z|
+|10|Validate assigned producer metadata and raw ZIP3 without key|completed/success|2026-11-14T15:22:30Z|2026-11-14T15:22:32Z|
+|11|Generic custody producer open|completed/success|2026-11-14T15:22:32Z|2026-11-14T15:22:35Z|
+|12|Validate original producer World semantics without key|completed/success|2026-11-14T15:22:35Z|2026-11-14T15:22:36Z|
+|13|Execute fixed positive_consume once|completed/success|2026-11-14T15:22:36Z|2026-11-14T15:23:47Z|
+|14|Prepare complete private inventory and legacy manifest without key|completed/success|2026-11-14T15:23:47Z|2026-11-14T15:23:49Z|
+|15|Generic custody seal|completed/success|2026-11-14T15:23:49Z|2026-11-14T15:23:54Z|
+|16|Upload encrypted envelope and closed receipts only|completed/success|2026-11-14T15:23:54Z|2026-11-14T15:23:55Z|
+|17|Validate own assigned metadata and raw ZIP3 without key|completed/success|2026-11-14T15:23:55Z|2026-11-14T15:23:57Z|
+|18|Generic custody own open|completed/success|2026-11-14T15:23:57Z|2026-11-14T15:24:00Z|
+|19|Validate own original manifest and World semantics without key|completed/success|2026-11-14T15:24:00Z|2026-11-14T15:24:00Z|
+|20|Preserve actual command and custody outcome|completed/success|2026-11-14T15:24:00Z|2026-11-14T15:24:00Z|
+|39|Post Run actions/setup-node@v4|completed/success|2026-11-14T15:24:00Z|2026-11-14T15:24:01Z|
+|40|Post Run actions/checkout@v4|completed/success|2026-11-14T15:24:01Z|2026-11-14T15:24:01Z|
+|41|Complete job|completed/success|2026-11-14T15:24:01Z|2026-11-14T15:24:01Z|
+
+
+#### reduction_prepare — current API step metadata
+
+|Step|Exact name|Status/conclusion|Started UTC|Completed UTC|
+|---:|---|---|---|---|
+|1|Set up job|completed/success|2026-11-14T15:08:16Z|2026-11-14T15:08:17Z|
+|2|Require fixed scope before any native work|completed/success|2026-11-14T15:08:17Z|2026-11-14T15:08:17Z|
+|3|Run actions/checkout@v4|completed/success|2026-11-14T15:08:17Z|2026-11-14T15:08:19Z|
+|4|Run actions/setup-node@v4|completed/success|2026-11-14T15:08:19Z|2026-11-14T15:08:20Z|
+|5|Materialize current Source-bound suite programs before import|completed/success|2026-11-14T15:08:20Z|2026-11-14T15:08:20Z|
+|6|Install exact lock without custody key|completed/success|2026-11-14T15:08:20Z|2026-11-14T15:08:34Z|
+|7|Generic custody key-preflight|completed/success|2026-11-14T15:08:34Z|2026-11-14T15:08:34Z|
+|8|Download exact contracts artifact|completed/success|2026-11-14T15:08:34Z|2026-11-14T15:08:35Z|
+|9|Verify prior pure inventory and select fixed graph profile|completed/success|2026-11-14T15:08:35Z|2026-11-14T15:08:35Z|
+|10|Execute fixed reduction_prepare once|completed/success|2026-11-14T15:08:35Z|2026-11-14T15:21:37Z|
+|11|Prepare complete private inventory and legacy manifest without key|completed/success|2026-11-14T15:21:37Z|2026-11-14T15:21:38Z|
+|12|Generic custody seal|completed/success|2026-11-14T15:21:38Z|2026-11-14T15:21:47Z|
+|13|Upload encrypted envelope and closed receipts only|completed/success|2026-11-14T15:21:47Z|2026-11-14T15:21:49Z|
+|14|Validate own assigned metadata and raw ZIP3 without key|completed/success|2026-11-14T15:21:49Z|2026-11-14T15:21:50Z|
+|15|Generic custody own open|completed/success|2026-11-14T15:21:50Z|2026-11-14T15:21:56Z|
+|16|Validate own original manifest and World semantics without key|completed/success|2026-11-14T15:21:56Z|2026-11-14T15:21:57Z|
+|17|Publish bounded stage observations before original truth assertions|completed/success|2026-11-14T15:21:57Z|2026-11-14T15:21:57Z|
+|18|Upload fixed reduction_prepare diagnostic pair only|completed/success|2026-11-14T15:21:57Z|2026-11-14T15:21:58Z|
+|19|Preserve actual command and custody outcome|completed/success|2026-11-14T15:21:58Z|2026-11-14T15:21:58Z|
+|37|Post Run actions/setup-node@v4|completed/success|2026-11-14T15:21:58Z|2026-11-14T15:21:58Z|
+|38|Post Run actions/checkout@v4|completed/success|2026-11-14T15:21:58Z|2026-11-14T15:21:58Z|
+|39|Complete job|completed/success|2026-11-14T15:21:58Z|2026-11-14T15:21:58Z|
+
+
+#### reduction_consume_a — current API step metadata
+
+|Step|Exact name|Status/conclusion|Started UTC|Completed UTC|
+|---:|---|---|---|---|
+|1|Set up job|completed/success|2026-11-14T15:22:05Z|2026-11-14T15:22:08Z|
+|2|Require fixed scope before any native work|completed/success|2026-11-14T15:22:08Z|2026-11-14T15:22:08Z|
+|3|Run actions/checkout@v4|completed/success|2026-11-14T15:22:08Z|2026-11-14T15:22:13Z|
+|4|Run actions/setup-node@v4|completed/success|2026-11-14T15:22:13Z|2026-11-14T15:22:16Z|
+|5|Materialize current Source-bound suite programs before import|completed/success|2026-11-14T15:22:16Z|2026-11-14T15:22:16Z|
+|6|Install exact lock without custody key|completed/success|2026-11-14T15:22:16Z|2026-11-14T15:22:28Z|
+|7|Generic custody key-preflight|completed/success|2026-11-14T15:22:28Z|2026-11-14T15:22:28Z|
+|8|Download exact contracts artifact|completed/success|2026-11-14T15:22:28Z|2026-11-14T15:22:29Z|
+|9|Verify prior pure inventory and select fixed graph profile|completed/success|2026-11-14T15:22:29Z|2026-11-14T15:22:30Z|
+|10|Validate assigned producer metadata and raw ZIP3 without key|completed/success|2026-11-14T15:22:30Z|2026-11-14T15:22:31Z|
+|11|Generic custody producer open|completed/success|2026-11-14T15:22:31Z|2026-11-14T15:22:37Z|
+|12|Validate original producer World semantics without key|completed/success|2026-11-14T15:22:37Z|2026-11-14T15:22:37Z|
+|13|Execute fixed reduction_consume_a once|completed/success|2026-11-14T15:22:37Z|2026-11-14T15:23:46Z|
+|14|Prepare complete private inventory and legacy manifest without key|completed/success|2026-11-14T15:23:46Z|2026-11-14T15:23:47Z|
+|15|Generic custody seal|completed/success|2026-11-14T15:23:47Z|2026-11-14T15:23:57Z|
+|16|Upload encrypted envelope and closed receipts only|completed/success|2026-11-14T15:23:57Z|2026-11-14T15:23:59Z|
+|17|Validate own assigned metadata and raw ZIP3 without key|completed/success|2026-11-14T15:23:59Z|2026-11-14T15:24:00Z|
+|18|Generic custody own open|completed/success|2026-11-14T15:24:00Z|2026-11-14T15:24:08Z|
+|19|Validate own original manifest and World semantics without key|completed/success|2026-11-14T15:24:08Z|2026-11-14T15:24:08Z|
+|20|Preserve actual command and custody outcome|completed/success|2026-11-14T15:24:08Z|2026-11-14T15:24:08Z|
+|39|Post Run actions/setup-node@v4|completed/success|2026-11-14T15:24:08Z|2026-11-14T15:24:08Z|
+|40|Post Run actions/checkout@v4|completed/success|2026-11-14T15:24:08Z|2026-11-14T15:24:08Z|
+|41|Complete job|completed/success|2026-11-14T15:24:08Z|2026-11-14T15:24:08Z|
+
+
+#### readonly — current API step metadata
+
+|Step|Exact name|Status/conclusion|Started UTC|Completed UTC|
+|---:|---|---|---|---|
+|1|Set up job|completed/success|2026-11-14T15:08:16Z|2026-11-14T15:08:17Z|
+|2|Require fixed scope before any native work|completed/success|2026-11-14T15:08:17Z|2026-11-14T15:08:17Z|
+|3|Run actions/checkout@v4|completed/success|2026-11-14T15:08:17Z|2026-11-14T15:08:19Z|
+|4|Run actions/setup-node@v4|completed/success|2026-11-14T15:08:19Z|2026-11-14T15:08:20Z|
+|5|Materialize current Source-bound suite programs before import|completed/success|2026-11-14T15:08:20Z|2026-11-14T15:08:20Z|
+|6|Install exact lock without custody key|completed/success|2026-11-14T15:08:20Z|2026-11-14T15:08:32Z|
+|7|Generic custody key-preflight|completed/success|2026-11-14T15:08:32Z|2026-11-14T15:08:32Z|
+|8|Download exact contracts artifact|completed/success|2026-11-14T15:08:32Z|2026-11-14T15:08:33Z|
+|9|Verify prior pure inventory and select fixed graph profile|completed/success|2026-11-14T15:08:33Z|2026-11-14T15:08:34Z|
+|10|Execute fixed readonly once|completed/success|2026-11-14T15:08:34Z|2026-11-14T15:11:16Z|
+|11|Prepare complete private inventory and legacy manifest without key|completed/success|2026-11-14T15:11:16Z|2026-11-14T15:11:20Z|
+|12|Generic custody seal|completed/failure|2026-11-14T15:11:20Z|2026-11-14T15:11:20Z|
+|13|Upload encrypted envelope and closed receipts only|completed/skipped|2026-11-14T15:11:20Z|2026-11-14T15:11:20Z|
+|14|Validate own assigned metadata and raw ZIP3 without key|completed/skipped|2026-11-14T15:11:20Z|2026-11-14T15:11:20Z|
+|15|Generic custody own open|completed/skipped|2026-11-14T15:11:20Z|2026-11-14T15:11:20Z|
+|16|Validate own original manifest and World semantics without key|completed/skipped|2026-11-14T15:11:20Z|2026-11-14T15:11:20Z|
+|17|Publish bounded stage observations before original truth assertions|completed/success|2026-11-14T15:11:20Z|2026-11-14T15:11:20Z|
+|18|Upload fixed readonly diagnostic pair only|completed/success|2026-11-14T15:11:20Z|2026-11-14T15:11:21Z|
+|19|Preserve actual command and custody outcome|completed/failure|2026-11-14T15:11:21Z|2026-11-14T15:11:21Z|
+|37|Post Run actions/setup-node@v4|completed/skipped|2026-11-14T15:11:21Z|2026-11-14T15:11:21Z|
+|38|Post Run actions/checkout@v4|completed/success|2026-11-14T15:11:21Z|2026-11-14T15:11:21Z|
+|39|Complete job|completed/success|2026-11-14T15:11:21Z|2026-11-14T15:11:21Z|
+
+
+#### reduction_consume_b — current API step metadata
+
+GitHub returned an empty steps array for this explicitly completed/skipped job.
+
+
+#### verify — current API step metadata
+
+|Step|Exact name|Status/conclusion|Started UTC|Completed UTC|
+|---:|---|---|---|---|
+|1|Set up job|completed/success|2026-11-14T15:24:13Z|2026-11-14T15:24:14Z|
+|2|Run actions/checkout@v4|completed/success|2026-11-14T15:24:14Z|2026-11-14T15:24:16Z|
+|3|Run actions/setup-node@v4|completed/success|2026-11-14T15:24:16Z|2026-11-14T15:24:17Z|
+|4|Materialize current Source-bound suite programs before import|completed/success|2026-11-14T15:24:17Z|2026-11-14T15:24:18Z|
+|5|Verify all seven current direct outputs and the current SAFE pair|completed/failure|2026-11-14T15:24:18Z|2026-11-14T15:24:19Z|
+|6|Project only the three declared diagnostic assignments|completed/success|2026-11-14T15:24:19Z|2026-11-14T15:24:19Z|
+|11|Post Run actions/setup-node@v4|completed/skipped|2026-11-14T15:24:19Z|2026-11-14T15:24:19Z|
+|12|Post Run actions/checkout@v4|completed/success|2026-11-14T15:24:19Z|2026-11-14T15:24:20Z|
+|13|Complete job|completed/success|2026-11-14T15:24:20Z|2026-11-14T15:24:20Z|
+
