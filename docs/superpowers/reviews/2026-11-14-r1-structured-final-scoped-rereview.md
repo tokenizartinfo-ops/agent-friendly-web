@@ -1,0 +1,8 @@
+# R1 aggregate final-fix scoped re-review — clean
+FreshSol/xhigh; ONEscopedrereview, notsecondwholeunitreview. SourceDATAonly/no execution/ref/testrerun/subagents. Exactpackageblobf7b6249a0a4cd3ba02b02023fd14e7222763a821 verified.
+
+I1 ADDRESSED — candidate42338B.mjs85–93 admits schema-validendedunabortedr1_fail/R1only/exactnumeric-or-timeoutcounts/fullunknown-nullprojection before catchingpositivevalidatorreject; invalidadmissioncannotappendID. Qualifier72465B.mjs77–86 invalidvariants/predicateacceptance and96–99twoactualNodeunknownDTOs.
+M1 ADDRESSED — candidate94–97prestartEAGAIN/ENOMEM/otherunsignalled→unknown/native, timeout/signal→aborted/native;79propagates,127–131retainsblockedAtnative/checksrestoration. Qualifier88–93sevenoutcomes.
+NewbreakageNONE C0/I0/M0. Normalprocess/nativepostflightunchanged; qualifier17–20/74extractsexactmarkedhelpers,driverbyteexact. Candidate42338/driver8545/validation3691/decisions1466bytepinsmatched. ActualRootsupplied43640385899/1:29oldRED,37GREEN,7real,twoadmitted,all7false; historicalR1causeunknown/fullcorrecteddiagnosticunexecuted/actualisolatedoriginalR1PASSretained. OutscopeNONE. Allfindingsaddressed/open0.
+
+Root accepts scopedverdict; byte/readback/actualclosedreceipt independentlyRootproved. Unit complete (diagnosticunitONLY): noMainmerge/NativeR1rerun/product/PCoff claim. Source759f8870 closed/originalF7, fulltreeonlySAME526253B. Nextconditionaloriginalcoherent16verificationnowreleased forpreparationafterfreshmetadata.
