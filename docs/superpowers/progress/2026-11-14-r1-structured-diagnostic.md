@@ -48,3 +48,7 @@ Onlyafterjob/runterminal, originalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc res
 No Source/core files changed in this unit: final1a34 vsbased422 has ONLY SAME append; F7originalrestored,3200othercodetuplesexact,3202leaves62workflows. Main0c9/fiveactive0/finalhead0runs checked. FinalSAMEc2faec1476cf9d0af196adc25ec3829d15db90d0/520015B/SHA50878d0de340b0163ed13bc976867c626ed86f77114247debfa35de843dcfb58 preservesallpriorprefixes.
 
 Task1 actualcollection/restoration complete; ONEfreshsingle-task wholeunitreview next. Source1a34 closed, no Native/World/P/core edits. Nextcoherentsuitegate requires Rootdecision/freshpurpose/release, no blindrerun. All7false.
+
+
+## Whole-unit review C0/I1/M1; Root rulings — 2026-11-14
+FreshAstra reviewedcompleteunit, corroboratedoriginalNative/currentrun/finalSource. R1isolatedPASS/7real/8pure/profile/restorationvalid. I1negativehelpercountsANYpositivevalidatorrejectionwithoutprovingvalidallunknownstimulus; downgradepriorstrongerclaimto2predicate rejections, notallunknown-causeproven. M1spawnEAGAIN/ENOMEMmisclassifiedaborted; keepunknown/nativeunlessactualtimeout/signal. RootacceptsbothinONEaggregatefixwave+ONEscopedrereview, nosecondbroadreview. Brief briefs/2026-11-14-r1-structured-final-fix.md. QualificationCONTROLSONLY/zeroAFWkey/no npm/World/SDK/Native/AES; preserveactualR1PASS,noNativeR1rerunforthesefixes. FullcoherentsuiteHELDuntilclosure, all7false/historicalR1causeunknown. Current1a34closed/Main0c9/F7original. Ordinaryownerapprovalnotneeded.
