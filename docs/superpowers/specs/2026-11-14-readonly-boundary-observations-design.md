@@ -1,50 +1,79 @@
 # AFW: observaciones cerradas de readonly — diseño
-Fecha: 2026-11-14. Estado: BORRADOR para comprobación técnica; sin autorización de ejecución.
-Proyecto: AFW, tokenizartinfo-ops/agent-friendly-web. Fuente cerrada410b37018b184f632f661cab05e44887fb6eaf57; main0c9c475b3ebaa970fc11d628b40e50a90cceb727 intacto. No Tokenizart/FCO/Hermes, datos de Max ni runtime productivo.
+Fecha: 2026-11-14. Estado: aceptado por Root bajo la instrucción del owner de ejecución autónoma; NO es autorización para adjuntar Source o ejecutar un ensayo.
+Proyecto AFW, repositorio tokenizartinfo-ops/agent-friendly-web(1347578006). Source cerrado410b37018b184f632f661cab05e44887fb6eaf57. main0c9c475b3ebaa970fc11d628b40e50a90cceb727 permanece intacto. Separado de Tokenizart/FCO/Hermes, producción y Max.
 
-## Resultado que buscamos
-Identificar qué resultado TAP de R1/R2/R3, o fallo del archivo antes/después de los casos, aparece en una ejecución nueva acotada; localizar el guard público que acompaña a custody_limit. No corregir aún el comportamiento de negocio, aumentar límites ni repetir idénticamente los ocho jobs activos.
-La prueba43608448872/1 solo observó fracaso del paso compuesto readonly y custody_limit/custody_20. Las correcciones diagnósticas posteriores ya pasaron94familias en43615497152/1 y revisión acotada limpia. Eso no acredita16casos de negocio ni causa histórica.
+## Resultado
+Obtener el primer resultado TAP fallido identificable de R1/R2/R3 o del archivo Native, y el guard público relacionado con custody_limit, en UNA prueba nueva enfocada. No corregir aún negocio, ampliar límites ni repetir los ocho jobs activos.
+43608448872/1 solo observó fracaso readonly compuesto y custody_limit/custody_20. 43615497152/1 cualificó las correcciones diagnósticas con94familias y revisión limpia; no aceptó16casos de negocio.
 
-## Enfoques considerados
-1. Extender el observador existente con proyecciones finitas de TAP/guard de custodia y probar solo contracts+readonly+verify dentro del grafo original de ocho jobs, manteniendo cinco deshabilitados. Recomendado por Root: conserva comandos y controles; evita dos preparadores con esperas deliberadas≈13min.
-2. Instalar un reporter Node personalizado o cambiar el comando Native: añade una frontera nueva y cambia el comando protegido; descartado para este diagnóstico.
-3. Otro ensayo completo sin señales nuevas, o leer logs/archivos privados desde Root: descartados por costo/información y alcance.
-La elección de1 es una decisión de Root bajo la instrucción del owner de avanzar sin preguntas rutinarias; no se presenta como una elección explícita del owner sobre este contrato.
+## Enfoques y decisión
+1. Proyección mínima del PREFIJO TAP hasta el primer not_ok, más guard de custodia separado; reutilizar D y activar solo contracts/readonly/verify del grafo original. Root elige esta opción: evita interpretar detalles privados y los dos preparadores con≈13min de espera.
+2. Parsear todos los detalles YAML de TAP: rechazado. Node22.23.4 interpola claves enumerables sin escapar; una clave con LF puede simular otro campo o resultado. La indentación no basta para atribuir stack/code.
+3. Reporter Node adicional o cambio del comando Native: descartado por ahora por mayor frontera/alteración de comandos. Leer logs privados en Root u otro ensayo completo idéntico tampoco procede.
+Costo de la decisión1: después del primer fallo no conoceremos los resultados posteriores ni el resumen TAP, y no atribuiremos código/sitio desde TAP. Esa menor precisión es explícita; no se convierte en una afirmación de éxito o ausencia de otros errores.
 
-## Evidencia de formato
-Node22.23.4 oficial: https://github.com/nodejs/node/blob/v22.23.4/lib/internal/test_runner/reporter/tap.js .
-reportTest64–79 escribe resultados y escapa nombres; reportDetails81–95 agrupa detalles; jsToYaml120–254 separa error/code/name/stack y quita el prefijo at de los frames del campo stack. No usar parser YAML genérico ni buscar frames dentro de error/actual/expected. Probar con TAP REAL generado por Node de esa versión en el calificador, sin Source/SDK/World/Native/AES.
+## Fuentes y builder check
+Node exacto22.23.4:
+- https://github.com/nodejs/node/blob/v22.23.4/lib/internal/test_runner/reporter/tap.js
+- https://github.com/nodejs/node/blob/v22.23.4/lib/internal/test_runner/runner.js
+- https://github.com/nodejs/node/blob/v22.23.4/lib/internal/test_runner/test.js
+Builder /root/readonly_boundary_builder_check identificó dos puntos materiales, ambos resueltos por Root: ordinal repetido del FileTest tardío y claves multilínea de colecciones. El builder confirmó que la asignación readonly puede sobrevivir al fallo esperado de V. Informe en docs/superpowers/reviews/2026-11-14-readonly-boundary-builder-check.md. Ningún código o ensayo nuevo se ejecutó.
 
-## Piezas mínimas / interfaces propuestas
-- Ampliar test/fixtures/finite-budget-stage-observer.mjs; reutilizar su lector fijo y validado con O_NONBLOCK. Mantener intacto el contrato actual collectFixedStagePair y sus tres pares.
-- Añadir test/finite-budget-readonly-observer.test.mjs con pruebas nuevas. No modificar Native test, World, custody, lock, P/runtime ni sus catálogos de códigos/sitios.
-- Función pura projectReadonlyTap(text,P): entrada string acotada; devuelve SOLO estado de registro, cuatro filas fijas R1/R2/R3/native_file y resumen numérico opcional. Nombres reales de R1/2/3 exactos: R1 fixed original SDK readonly budget, R2 fixed original SDK readonly budget, R3 fixed original SDK readonly budget. native_file admite exclusivamente el archivo público test/mcp-qa-finite-budget-native.test.mjs, sus formas absolutas aprobadas o fileURL del runner del repositorio; nunca entrega el path.
-- Cada fila: id fijo, tapStatus fijo(ok,not_ok,skip,todo,absent,unknown), code del catálogo14 existente o unknown, site del catálogo existente o unknown. IDs y vocabularios cerrados; ningún mensaje, valor actual/esperado, nombre libre, stack o número de línea libre.
-- Resumen opcional: tests/pass/fail/cancelled/skipped/todo, cada uno entero0..4, tomado de una única línea exacta por campo y plan coherente. Máximo4 permite los tres casos y un fallo del archivo por error tardío; no deducir aceptación de negocio por ese resumen. Sintaxis ambigua, resultados repetidos, números de test/plan inconsistentes, bloque incompleto, código conflictivo o cabecera desconocida → observación unknown, sin rescatar fragmentos convenientes.
-- Los resultados se asocian a sus bloques de detalles. Leer únicamente campos code/name/stack en la indentación propia del bloque. No interpretar contenido de error/actual/expected ni sus bloques anidados, aunque parezcan un segundo stack. El código explícito solo puede normalizarse a los14valores existentes. ERR_TEST_FAILURE u otros no registrados no se copian como texto libre. Las salidas de consola comentadas son ruido, no resultados.
-- Función pura projectCustodyLimit(text): observa únicamente código cerrado custody_limit y frames de la fuente pública de custodia fijada. Estado not_observed/observed/unknown y guard de enum fijo o null. El guard genérico fail20 no identifica un límite.
-- Tabla inicial de guards, a verificar por builder contra blob4d05b5ec0f7b074be88ef9733a47c984b0212351:
-101 regular_file_size_bounds;135 inventory_files_or_bytes;150 record_bytes;173 header_bytes;177 jsonl_bytes;179 envelope_bytes;188 envelope_input_bounds;215 inspected_inventory;250 expanded_jsonl_bytes;254 inspected_record_bytes.
-Elegir el primer guard real de la pila después de fail/requireValue, sin publicar coordenadas. Si la misma condición contiene varias causas, conservar la categoría conjunta; nunca afirmar cuál subcondición falló. Si un caller público inequívoco distingue un límite de lectura, builder puede proponer un enum adicional pequeño; no inferirlo del nombre de archivo privado.
-- collectFixedReadonlyPair({context,job,rawOutcome}): reutiliza SOLO los cuatro logs fijos actuales dentro del runner. Entrada job debe ser readonly. Pareja canónica result.json/manifest.json de hasta16384B combinados, contexto9 actual y siete nonclaimsfalse, propósito NUEVO para no confundirse con el esquema viejo. Reutilizar las observaciones generales existentes y añadir tap/custodyLimit bajo claves nuevas cerradas; fijar el esquema exacto en el plan después del builder. Ningún override de raíz/CLI/env en producción. El lector de prueba puede usar raíz/IO propios como el contrato actual.
+## Cambios mínimos e interfaces
+Modificar test/fixtures/finite-budget-stage-observer.mjs; añadir test/finite-budget-readonly-observer.test.mjs. Reutilizar lector fijo seguro y evitar lecturas inconsistentes del mismo log dentro de una observación. El contrato existente collectFixedStagePair y las36pruebas actuales de D se preservan. No modificar P/runtime/World/custody/Native tests/lock ni sus catálogos.
 
-## Aislamiento y autoridad
-Calificador cero AFWkeys: Node22.23.4/GitHub únicamente, sin permisos/secretos nuevos, sin imports o invocaciones World/SDK/Native/AES. La generación de TAP usa tests sintéticos independientes y canarios propios, nunca datos de cliente.
-Mantener caps log1MiB/read64KiB/line1024B/4096líneas, seguridad de padres/FD/identidades y pareja16KiB. No red en el colector. Ausencia NODE_OPTIONS,AFW_SYN_CHECKPOINT_KEY,GH_ARTIFACT_TOKEN en el observador.
-Una calificación nueva puede cubrir las36pruebas vigentes de D más las nuevas; no repetir las45deP ni los RED históricos si P/runtime no cambian. Añadir controles negativos significativos para los comportamientos nuevos y recepción/identidad/manifest, sin sumar pruebas que solo repliquen la implementación.
-Después de calificación y revisión, una única ejecución enfocada usa los comandos Native/crypto ya existentes de contracts/readonly; mantiene los ocho jobs/needs/timeouts declarados y cinco guardsfalse. El nuevo colector se invoca SOLO en el summary_pair de readonly. Las otras publicaciones diagnósticas y seis flags COE quedan iguales. A/C/V/Z permanecen sin cambios de comportamiento; solo D/pins/selector diagnóstico y reloj/mensaje nuevo del ensayo.
-Punto a comprobar por builder: el verify original exige todos los jobs, por lo que el ensayo enfocado puede terminar con Suite no disponible/verifyfailure al faltar las cinco ramas. Eso NO es aceptación de16ni un defecto a ocultar. Debe conservar la proyección final de asignación readonly incluso en ese caso. No cambiar V para fabricar un éxito. Si esa estructura impide de verdad observar la pareja, proponer la alternativa mínima antes de implementar.
-Los26slots de clave/seis entornos declarados no cambian. Esta ejecución usa solo los slots ya declarados de los jobs que efectivamente se activen; no crear/renovar/copiar claves. No son tokens de Cloudflare. Fuente sigue aislada; no cambios en main, runtime, OAuth, cron, Containers, suscripciones o correo.
+### projectReadonlyTap(text)
+Función pura sin filesystem/red. Entrada string: máximo65536UTF8bytes,4096líneas,1024UTF8bytes/línea; LF, sin CR, y fin de línea completo. Cualquier representación no admitida → resultado unknown, sin coerción.
+Retorno EXACTO {state,cases,counts}.
+state: not_observed|unknown|complete|first_failure.
+cases: SIEMPRE cuatro filas en orden R1,R2,R3,native_file. Cada fila EXACTA {id,result,directive}.
+result: ok|not_ok|not_observed|unknown.
+directive: none|skip|todo.
+counts: null o {tests,pass,fail,cancelled,skipped,todo}, enteros0..4.
+No nombres libres, mensajes, códigos/sitios de error, path, stack, actual/expected, coordenadas ni duraciones.
 
-## Pruebas necesarias
-TAP real normal, fallo de cada caso, error de módulo antes de registrar casos y error de archivo después de ellos; codificación de nombres/códigos y ruido comentado; mensajes multilínea, actual/expected anidados y frames falsos dentro de campos que deben ignorarse; truncamiento, duplicados, conflictos y límites. Cada guard de custodia, guard genérico solo, callers ambiguos, código incompatible y path privado deben producir la categoría prevista o unknown sin copiar canarios.
-Comprobar mismo esquema, contexto actual, identidad uploader/metadata/raw/ZIP/CRC/manifest y rechazo de pares viejos. Root consume solo la pareja literal actual asignada. Nunca descargar Native/contracts/producer logs, archivos privados o modelos en Root.
-Todo Source ejecutable se prueba en GitHub. Preparación GitDB inactiva → Root gate exacto → propuesta activa no adjunta → nueva verificación → autorización de un único CAS/ejecución → todos los ocho jobs positivamente terminales → restauración exactaF7/todos los leaves no declarados → append de SAMEreport preservando455837B y todo prefijo previo → Root readback. Sin reruns ni overlay sobre un ensayo en curso.
+Reconocer exclusivamente los nombres:
+R1 fixed original SDK readonly budget
+R2 fixed original SDK readonly budget
+R3 fixed original SDK readonly budget
+native_file corresponde solo al archivo público test/mcp-qa-finite-budget-native.test.mjs en sus formas relativas/absolutas aprobadas del runner de este repositorio; nunca se devuelve el path.
+Exigir encabezadoTAPversión13 y resultados top-level ordenados, sin duplicar IDs. Solo comentarios/ruido TAP previsto y los bloques de detalles SIN ERROR de resultados ok precedentes pueden recorrerse; esos bloques tienen campos de formato Node comprobados, no un YAML arbitrario. Cualquier estructura inesperada ANTES del primer fallo → unknown, sin rescatar un prefijo ambiguo.
+En la primera línea literal top-level not_ok válida, asignar esa fila y detener TODO análisis ANTES de sus detalles. state=first_failure; counts=null; las filas posteriores/no vistas quedan unknown. No buscar cierre de bloque, code/name/stack, resumen o nuevos resultados en el sufijo: se ignora entero. De este modo claves privadas LF no pueden inventar atribuciones posteriores.
+Un stream completo sin not_ok puede terminar complete con plan/resumen únicos, coherentes con las filas observadas. Cero casos válido es complete con filas not_observed, no éxito del contrato de negocio que exige3.
+Ausencia de native_file significa no observado, NUNCA excluye un error tardío: Node puede suprimir la fila cuando ya falló un caso.
+Excepción cerrada de numeración: después de R1/R2/R3 literalok, un único native_file not_ok puede reutilizar ordinal1. Node22.23.4 reserva1 al FileTest y renumera sus hijos; probar con fixture REAL que produzca1,2,3,1 y plan1..4. No habilitar duplicados genéricos. En la proyección detenerse en ese not_ok; el plan4 se comprueba en el fixture de calificación, no en un sufijo inseguro.
 
-## Criterio de cierre
-Una pareja fechada distingue resultados de los tres casos o fallo de archivo y, cuando está disponible, un guard/categoría de custodia; lo desconocido queda explícito. El resultado orienta una hipótesis específica y una prueba de causa antes de cambiar lógica o límites.
-No acredita causa histórica, recibo autenticado, completePackage, operationalReadiness, PCoff, drenaje global ni namespace vacío. Las siete banderas siguenfalse. Después del diagnóstico aún faltan reparar/probar el fallo concreto, aceptar el recorrido completo y verificar aviso útil/revisión/retirada/autocierre desde la nube antes de pedir apagar.
+### projectCustodyLimit(text,P)
+Función pura; mismos límites de texto. Usar solo cabecera/código cerrado y pila de la fuente pública fijada4d05b5ec0f7b074be88ef9733a47c984b0212351, con los controles de conflicto existentes. Retorno EXACTO {state,guard}.
+state: not_observed|unknown|observed; guard:null o uno de:
+regular_file_size_bounds(101),inventory_files_or_bytes(135),record_bytes(150),header_bytes(173),jsonl_bytes(177),envelope_bytes(179),envelope_input_bounds(188),inspected_inventory(215),expanded_jsonl_bytes(250),inspected_record_bytes(254).
+Los números son criterios INTERNOS de la tabla del Source público, nunca valores copiados al resultado. Verificar tabla contra Source antes de implementar. Elegir el primer guard real posterior a fail/requireValue. fail20 solo → unknown/null. Código incompatible, pila ambigua o paths no admitidos → unknown/null. Sin código custody_limit observado → not_observed/null.
+Una condición conjunta conserva nombre conjunto: no deducir cuál subcondición falló. Guard genérico de lectura no identifica por sí solo el max ni el archivo; no prometer precisión inexistente. No ampliar la tabla sin resolución Root y calificación.
 
-## Comprobación de builder solicitada
-Solo lectura: verificar factibilidad de reutilizar el lector/pareja sin romper el esquema anterior; formato TAP real y los diez guards; máscara de tres jobs con V intacto; conservar Aforms/comandos/slots; proponer el esquema exacto más pequeño y resolver detalles de parser. No escribir código, crear objetos Source, activar pruebas ni ampliar alcance.
+### collectFixedReadonlyPair({context,job,rawOutcome})
+Producción: job readonly exclusivamente, contexto9 vigente, rawOutcome del paso COMPUESTO original. Leer SOLO los cuatro logs fijos actuales del runner, sin override de root/CLI/env. Reutilizar readOwned seguro y observaciones generales, evitando que código nuevo invoque getters o Source de un log.
+result EXACTO:
+{purpose,context,job,rawOutcome,logs,stage,http,countCheck,tap,custodyLimit,nonclaims}.
+purpose=afw.readonly-boundary-observations.syn.v1.
+logs/stage/http/countCheck conservan esquema y enums anteriores. tap/custodyLimit como arriba. Siete nonclaimsfalse.
+manifest EXACTO {purpose,context,job,files}; purpose=afw.readonly-boundary-observations.manifest.syn.v1; files=[{path:result.json,bytes:actual,sha256:actual}].
+Pareja canónica JSON+LF de máximo16384B combinados; sin campos/archivos adicionales. Es un propósito diferente del esquema antiguo.
+Missinglog→proyecciónnot_observed; cualquier disponibilidad distinta de available/missing→unknown; available→proyección pura. No convertir la ausencia de datos en un pase.
+El nuevo validator recibe expectedcontext/job y verifica enums/esquema/manifest/purpose; el validator viejo no debe aceptar el propósito nuevo ni viceversa. No aumentar autoridad de caller; el lector de pruebas conserva solo su frontera sintética de root/IO explícito.
+
+## Aislamiento
+Cloud-first: Source como datos GitDB; pruebas SOLOGitHub Node22.23.4. Cero AFWkeys en el calificador/observador; ausencia NODE_OPTIONS,AFW_SYN_CHECKPOINT_KEY,GH_ARTIFACT_TOKEN. Token estándar de GitHub solo en las lecturas fijas necesarias del candidato/artefacto, nunca en los tests o colector.
+Caps actuales: archivo1MiB/read64KiB/línea1024B/4096líneas/pareja16KiB. Mantener padres/realpath/no-symlink/nlink/identidades/O_NONBLOCK/fstatantesderead. Colector sin red/World/SDK/Native/AES.
+No cambios en main/runtime/CF/OAuth/cron/Containers/suscripciones/correo/permisos/secretos/clientes. No crear ni renovar claves.
+Calificación nueva:36pruebas actuales de D + nuevas pruebas de TAP real/guard/pareja/privacidad + controles reales de A/parser/wrapper/receiver. No repetir45deP, REDhistóricos ni14ZIP aparte de lo inherente al receptor congelado.
+
+## Prueba enfocada, después de calificación y revisión
+Base NativeDATA32ca318743b26a8a6d54ef743c9f101609525491. Ocho jobs/needs/timeouts/26slotscrypto/seis entornos declarados idénticos. Solo contracts/readonly/verify activos; otros cinco con guardfalse. Comandos Native, relojes, caps, V y Z no cambian. A/C solo ripples de pins imprescindibles (si los hay); parser/forms congelados. Cambiar únicamente el método de publicación readonly a collectFixedReadonlyPair y los pins D/mensaje/guard exactos necesarios.
+El verify original exige siete ramas exitosas y puede fallar por las cinco deshabilitadas; Suite no disponible NO es un pase16. Mantener V, verdad original y proyección final de asignaciones con always. Root acepta SOLO la pareja readonly literal actual; no Suite/pareja vieja/fallback por nombre/historia. Los slots ejecutados serán los ya existentes de los jobs efectivamente activos; no nuevas capacidades.
+Preparar objetos inactivos y revisión/gates exactos. Ningún Source attach/run desde este documento. Un nuevo CAS con propósito/revisión exactos requiere liberación Root separada, después de cualificación y revisión. Congelar Source hasta ocho jobs positivamente terminales (incluidosskipped), luego restauración exactaF7/leaves no declarados y appendSAMEreport preservando455837B y todos sus prefijos anteriores. Sin rerun ni overlays.
+
+## Pruebas y cierre
+Generar TAP REAL de22.23.4 sin World/SDK/Native/AES: normal3ok; primer fallo en cada R; error del archivo antes de registrar casos; todosok+fallo de archivo tardío con ordinal1repetido; fallo de caso+actividad tardía donde el FileTest puede suprimirse. La fila no observada no prueba ausencia.
+Propiedad enumerable con LF que simule code/stack y resultados posteriores dentro de error/actual/expected: primer resultado fallido observado permanece y el sufijo no se analiza ni se copia. Mensajes privados/canarios nunca aparecen en la pareja. Antes del primer fallo, duplicados/orden imposible/bloque malformado/plan inconsistente/truncamiento/límites→unknown.
+Cada guard de custodia y códigos incompatibles/frames privados/conflictos/genérico20. Pareja/contexto/manifest/canonicalidad/enums/vocabulario/mezcla de propósitos y límites. Un stubtodoUnknown debe fallar positivos significativos nuevos; no simular aceptación por un stub que no observa nada.
+Cierre: una pareja fechada indica primer caso/archivo fallido ounknown y guard/categoría si disponible. Con esos datos formular una hipótesis específica y prueba de causa antes de cambiar negocio/caps. No garantiza causa histórica, recibo autenticado, completePackage, operationalReadiness,PCoff,drenajeglobal o namespacevacío; siete banderasfalse. Aún habrá que resolver el fallo observado, aceptar el recorrido completo y probar aviso/revisión/retirada/autocierre cloud antes de apagar.
