@@ -1,0 +1,353 @@
+{
+  "purpose": "afw.current-frontiers.final-fix.scoped-review.v1",
+  "instruction": "EXACTLY ONE scoped re-review of aggregate I1-I5/M1 fixwave; verdict each addressed or not, new breakage in fixdiff only. No second whole-unit review. No changes/runs/Source execution.",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "beforeReview": "27a3f544f73661b579ed8dc5b994fff4ae8c9f77",
+  "briefRootdocs": "14640276b440dde0389ca4657f95f44d4b9bb802",
+  "brief": "docs/superpowers/briefs/2026-11-14-current-failed-frontiers-final-fix.md",
+  "baseClosed": "1e4026ceb0c43efe1ccd815a874e10375646753b",
+  "inactive": {
+    "commit": "053288df8e3465269539f800bfc9f4eaf2d800bd",
+    "tree": "2737feaacf09343d911fe419dea24e61993df03c",
+    "f7": "728433f15fb532e50d34ea9e93f6ad9519647204",
+    "same": "0a394831ef4f004c466df137e9165de3ff0d6747",
+    "parent": "1e4026ceb0c43efe1ccd815a874e10375646753b"
+  },
+  "active": {
+    "commit": "e98c810105288d50d9bd2b17fa1ce858078b86b5",
+    "tree": "a2a60bd376983b6c62f9c62f921e540893a16e06",
+    "f7": "a1d800aaf45a044fe77f44dc28ff49d0002f812e",
+    "same": "0a394831ef4f004c466df137e9165de3ff0d6747",
+    "attached": true
+  },
+  "closed": {
+    "commit": "327e9b7ec2182588dfb02e58b238787abb37a017",
+    "tree": "1e8af62f8622e444179fea1cafbaf4a2a08ddf30",
+    "same": "057c93ba0e250c8df77d658bb41f4dfb1b4455de",
+    "f7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "parent": "e98c810105288d50d9bd2b17fa1ce858078b86b5"
+  },
+  "fixReport": "a38c558ed3d4730fd84575502911662311b6b4ab",
+  "programDiff": "ae21fca48026664ec6997734fe8b5551dfcb92dc",
+  "actual": {
+    "run": 43654648845,
+    "attempt": 1,
+    "job": 132630407652,
+    "at": "2026-11-14T23:43:32.7304560Z",
+    "RootAccepted": true,
+    "wire": {
+      "purpose": "afw.frontiers-final-fix.control-qualification.v1",
+      "sourceBase": "1e4026ceb0c43efe1ccd815a874e10375646753b",
+      "source": "e98c810105288d50d9bd2b17fa1ce858078b86b5",
+      "sourceTree": "a2a60bd376983b6c62f9c62f921e540893a16e06",
+      "run": "43654648845",
+      "attempt": 1,
+      "job": "controls",
+      "node": "22.23.4",
+      "stage": "complete",
+      "before": {
+        "purpose": "afw.frontiers-final-fix.tests.v1",
+        "valid": true,
+        "ended": true,
+        "rows": [
+          {
+            "id": "I1_scoped_exit_observation",
+            "result": "failed"
+          },
+          {
+            "id": "I1_zero_exit_primary_rejected",
+            "result": "failed"
+          },
+          {
+            "id": "I2_complete_files_null",
+            "result": "failed"
+          },
+          {
+            "id": "I2_complete_bytes_null",
+            "result": "failed"
+          },
+          {
+            "id": "I2_limit_files_null",
+            "result": "failed"
+          },
+          {
+            "id": "I2_limit_bytes_null",
+            "result": "failed"
+          },
+          {
+            "id": "I2_unknown_inventory_not_complete",
+            "result": "failed"
+          },
+          {
+            "id": "I2_sender_unknown_coverage",
+            "result": "failed"
+          },
+          {
+            "id": "I3_real_guard_first_limit",
+            "result": "passed"
+          },
+          {
+            "id": "I4_short_child_confirmed",
+            "result": "passed"
+          },
+          {
+            "id": "I4_preopen_EISDIR_no_start",
+            "result": "failed"
+          },
+          {
+            "id": "I4_sync_spawn_failure_no_start",
+            "result": "failed"
+          },
+          {
+            "id": "I4_failed_spawn_event_no_start",
+            "result": "failed"
+          },
+          {
+            "id": "I4_after_spawn_interruption",
+            "result": "failed"
+          },
+          {
+            "id": "I5_trusted_attempt2_rejected",
+            "result": "failed"
+          },
+          {
+            "id": "M1_real_unknown_hints_null",
+            "result": "failed"
+          },
+          {
+            "id": "M1_receiver_prefixFiles_rejected",
+            "result": "failed"
+          },
+          {
+            "id": "M1_receiver_prefixBytes_rejected",
+            "result": "failed"
+          },
+          {
+            "id": "M1_receiver_attemptedOrdinal_rejected",
+            "result": "failed"
+          },
+          {
+            "id": "M1_receiver_nextBytes_rejected",
+            "result": "failed"
+          },
+          {
+            "id": "M1_receiver_clipping_rejected",
+            "result": "failed"
+          },
+          {
+            "id": "historical_readonly_numeric_accepted",
+            "result": "passed"
+          },
+          {
+            "id": "first_limit_known_prefix_accepted",
+            "result": "passed"
+          }
+        ],
+        "summary": {
+          "counts": {
+            "cancelled": 0,
+            "failed": 19,
+            "passed": 4,
+            "skipped": 0,
+            "suites": 0,
+            "tests": 23,
+            "todo": 0,
+            "topLevel": 23
+          },
+          "success": false
+        }
+      },
+      "fixed": {
+        "purpose": "afw.frontiers-final-fix.tests.v1",
+        "valid": true,
+        "ended": true,
+        "rows": [
+          {
+            "id": "I1_scoped_exit_observation",
+            "result": "passed"
+          },
+          {
+            "id": "I1_zero_exit_primary_rejected",
+            "result": "passed"
+          },
+          {
+            "id": "I2_complete_files_null",
+            "result": "passed"
+          },
+          {
+            "id": "I2_complete_bytes_null",
+            "result": "passed"
+          },
+          {
+            "id": "I2_limit_files_null",
+            "result": "passed"
+          },
+          {
+            "id": "I2_limit_bytes_null",
+            "result": "passed"
+          },
+          {
+            "id": "I2_unknown_inventory_not_complete",
+            "result": "passed"
+          },
+          {
+            "id": "I2_sender_unknown_coverage",
+            "result": "passed"
+          },
+          {
+            "id": "I3_real_guard_first_limit",
+            "result": "passed"
+          },
+          {
+            "id": "I4_short_child_confirmed",
+            "result": "passed"
+          },
+          {
+            "id": "I4_preopen_EISDIR_no_start",
+            "result": "passed"
+          },
+          {
+            "id": "I4_sync_spawn_failure_no_start",
+            "result": "passed"
+          },
+          {
+            "id": "I4_failed_spawn_event_no_start",
+            "result": "passed"
+          },
+          {
+            "id": "I4_after_spawn_interruption",
+            "result": "passed"
+          },
+          {
+            "id": "I5_trusted_attempt2_rejected",
+            "result": "passed"
+          },
+          {
+            "id": "M1_real_unknown_hints_null",
+            "result": "passed"
+          },
+          {
+            "id": "M1_receiver_prefixFiles_rejected",
+            "result": "passed"
+          },
+          {
+            "id": "M1_receiver_prefixBytes_rejected",
+            "result": "passed"
+          },
+          {
+            "id": "M1_receiver_attemptedOrdinal_rejected",
+            "result": "passed"
+          },
+          {
+            "id": "M1_receiver_nextBytes_rejected",
+            "result": "passed"
+          },
+          {
+            "id": "M1_receiver_clipping_rejected",
+            "result": "passed"
+          },
+          {
+            "id": "historical_readonly_numeric_accepted",
+            "result": "passed"
+          },
+          {
+            "id": "first_limit_known_prefix_accepted",
+            "result": "passed"
+          }
+        ],
+        "summary": {
+          "counts": {
+            "cancelled": 0,
+            "failed": 0,
+            "passed": 23,
+            "skipped": 0,
+            "suites": 0,
+            "tests": 23,
+            "todo": 0,
+            "topLevel": 23
+          },
+          "success": true
+        }
+      },
+      "mutations": [
+        {
+          "kind": "observer_disconnected",
+          "metadataOnlyExit": 0,
+          "actualTraversalExit": 1,
+          "assertionFailureObserved": true,
+          "realTraversalReached": true
+        },
+        {
+          "kind": "conversion_disabled",
+          "metadataOnlyExit": 0,
+          "actualTraversalExit": 1,
+          "assertionFailureObserved": true,
+          "realTraversalReached": true
+        }
+      ],
+      "coverage": {
+        "scopedExitOnly": true,
+        "contradictoryPrimaryRejected": true,
+        "numericPrefixCounterexamplesRejected": true,
+        "unknownCoverageHeld": true,
+        "realSparseGuard": {
+          "logicalBytes": 536870913,
+          "physicalBlocksSupported": true,
+          "allocatedBlocks": 0,
+          "physicalTinyChecked": true,
+          "materialBytesRead": false,
+          "guardProducedFirstLimit": true,
+          "firstLimit": "bytes",
+          "prefixFiles": 0,
+          "prefixBytes": 0,
+          "attemptedOrdinal": 1,
+          "nextBytes": 536870913,
+          "nextBytesClipped": false,
+          "firstLimitRegion": "root"
+        },
+        "prelaunchFailuresNotStarted": true,
+        "actualFailedSpawnObserved": true,
+        "spawnPartialThenCloseObserved": true,
+        "trustedAttempt2Rejected": true,
+        "unknownHintsNullWithObservedPrivateOrder": true,
+        "receiverUnknownHintCounterexamplesRejected": true,
+        "historicalReadonlyPreserved": true,
+        "bothProductionMutationsKilled": true
+      },
+      "noNativeInvoked": true,
+      "noSDKImported": true,
+      "programProof": {
+        "verified": true,
+        "count": 33,
+        "setSha256": "716cdeb6886a41584ee161eaca5f86246ff11ce6e1b448770d7c8eb2895a1ede",
+        "payloadExpandedSha256": "16000dc2df60a458d96bf122fa9472064d3ca82964f8ea441700c94e7f913f62",
+        "coreGitVerified": true,
+        "prefixVerified": true
+      },
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  },
+  "closure": {
+    "oneJobTerminalBeforeCAS": true,
+    "originalF7Restored": true,
+    "preservedFullPrefixBytes": 847932,
+    "Core3200Unchanged": true,
+    "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "fiveActiveStates0": true,
+    "closedHead0": true,
+    "consumedExactlyOneAttempt1": true
+  },
+  "limitations": [
+    "No Native/SDK/World/pure/profile/Live/CF execution byqualifier, no keys/privateartifacts.",
+    "Corrected futureNativeDATA remainsunexecuted, noNativebusinesspass.",
+    "Historical43649183563 actualrecordsunchanged; oldbusinessbitdeprecated; oldcause/oldcustodylimitnotexplained.",
+    "Nextsource-siteunit isdraft/read-onlypreflight only."
+  ],
+  "reportContract": "Read targeted public pinned blobs / inflatedpayload DATA only, no Source import/eval/syntax/tests/build locally or cloud. Do not modify refs/Rootdocs, run anything, touch CF/keys/artifacts/browser/mail; no subagents. May create one unattached detailed reportblob; return counts and per-finding verdict compactly."
+}
