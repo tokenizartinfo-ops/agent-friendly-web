@@ -4704,3 +4704,244 @@ H4sIAAAAAAACCuy9C1fjONIw/FcC3x4cP5i0nXvCuDk0nZ5hpxtYoHd2X2A5si2Dh8TO2g6XJ+S/f6dK
 <!-- AFW-CURRENT-FAILED-FRONTIERS-PAYLOAD-V2:END -->
 
 </details>
+
+
+## Current failed-frontiers bounded diagnostic ACTUAL closure — 2026-11-14
+
+Run43649183563/1, Sourcef56e4f18b8ae77ea3e3a4cb29b230a022e9ff1ca/treee3ad9031bd3de0ed69f06a2e48d63dbae8785301. Exactly two job guards released once after Root corrected gate; both jobs TERMINAL success. That conclusion means diagnostic collection completed, not all Native business cases passed. No rerun/AFW key/private artifact/Cloudflare/live/owner action. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 remains unchanged. Existing Core3200 tuples retained. Exact proposal679956B prefix preserved; currentF7 restored to originalf7a71f1a0fa4f5ddf069ff411f008a098455e5cc, outside the consumed one-use diagnostic context.
+
+Positive job132613611303: actual10controls/8pure/currentprofile passed; original pre-I0 headroom24145ms; original CLI prepare-positive ended exit0/signalnone. Explicit ephemeral catch-only World overlay installed/verified then original restored/verified. No primary error observed; old positive failure cause NOT proven, no fullpositiveconsumer/recovery/auth/readiness claim.
+
+Readonly job132613611085: actual10controls/8pure/currentprofile passed; original Node CLI dual supported reporter and private TAP preserved; all3cases failed (R1strictEqual false→true;R2strictEqual0→1;R3==false→true), all ERR_ASSERTION, real testCodeFailure wrapper, cumulative3tests0pass3fail0cancel0skip0todo, firstR1. Original World before/after verified with NO overlay. This differs from the previous coherent attempt whereR1/R2passed andR3failed; cause of difference remains UNKNOWN.
+
+New-run keyless inventory completed:128files/299327164B, under4096/536870912 caps; firstLimitnone/regionnone/hashFilesfalse/openedFileStabilityProvedfalse. New representation only: this does NOT explain historical counts or prove old custody-limit repaired. No cap widening or business changes. Root independently validated closed canonical wire <=16KiB against Source/tree/run/attempt/job, all3rows/cumulativecounts/provenance/guard math/nonclaims. Full closed records follow; no privatepaths, stack, rawmessage, key or privatebytes.
+
+```json
+{
+  "positive": {
+    "at": "2026-11-14T22:52:24.3808550Z",
+    "record": {
+      "purpose": "afw.current-failed-frontiers.safe.v1",
+      "sourceBase": "c8b913225716b9c8be06b649f7f275265f99a71e",
+      "source": "f56e4f18b8ae77ea3e3a4cb29b230a022e9ff1ca",
+      "sourceTree": "e3ad9031bd3de0ed69f06a2e48d63dbae8785301",
+      "run": "43649183563",
+      "attempt": 1,
+      "job": "positive_prepare",
+      "node": "22.23.4",
+      "stage": "complete",
+      "controls": {
+        "passed": true,
+        "count": 10,
+        "expected": 10
+      },
+      "pure": {
+        "passed": true,
+        "cases": 8,
+        "expected": 8
+      },
+      "profile": {
+        "passed": true,
+        "group": "positive"
+      },
+      "headroom": {
+        "checked": true,
+        "elapsedMs": 24145,
+        "admitted": true
+      },
+      "native": {
+        "started": true,
+        "ended": true,
+        "exitCode": 0,
+        "signal": "none",
+        "instrumentedWorld": true
+      },
+      "positive": null,
+      "readonly": null,
+      "inventory": null,
+      "provenance": {
+        "coreVerified": true,
+        "worldBeforeVerified": true,
+        "overlayInstalled": true,
+        "overlayVerified": true,
+        "worldRestored": true,
+        "worldAfterVerified": true,
+        "originalWorldBlob": "1e18873791e0520fff611e353232e38786c51941",
+        "overlaySha256": "dc3dde82b2e89cf1f6d1b3127c01ed86f108ceafbd80f51edb9f33d9e2e018dd"
+      },
+      "representation": {
+        "newRunOnly": true,
+        "originalWorkflowResident": true,
+        "originalTAPRedirection": false,
+        "diagnosticsOutsideInventory": true,
+        "custodyKeyLogAbsent": true,
+        "priorArtifactBindingLogAbsent": true,
+        "currentPureProfileGenerated": true,
+        "historicalByteEquivalence": false
+      },
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  },
+  "readonly": {
+    "at": "2026-11-14T22:43:57.3039920Z",
+    "record": {
+      "purpose": "afw.current-failed-frontiers.safe.v1",
+      "sourceBase": "c8b913225716b9c8be06b649f7f275265f99a71e",
+      "source": "f56e4f18b8ae77ea3e3a4cb29b230a022e9ff1ca",
+      "sourceTree": "e3ad9031bd3de0ed69f06a2e48d63dbae8785301",
+      "run": "43649183563",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "stage": "complete",
+      "controls": {
+        "passed": true,
+        "count": 10,
+        "expected": 10
+      },
+      "pure": {
+        "passed": true,
+        "cases": 8,
+        "expected": 8
+      },
+      "profile": {
+        "passed": true,
+        "group": "readonly"
+      },
+      "headroom": {
+        "checked": false,
+        "elapsedMs": null,
+        "admitted": false
+      },
+      "native": {
+        "started": true,
+        "ended": true,
+        "exitCode": 1,
+        "signal": "none",
+        "instrumentedWorld": false
+      },
+      "positive": null,
+      "readonly": {
+        "purpose": "afw.current-frontiers.readonly-stream.v1",
+        "state": "case_failure",
+        "valid": true,
+        "ended": true,
+        "summary": {
+          "counts": {
+            "cancelled": 0,
+            "failed": 3,
+            "passed": 0,
+            "skipped": 0,
+            "suites": 0,
+            "tests": 3,
+            "todo": 0,
+            "topLevel": 3
+          },
+          "success": false
+        },
+        "rows": [
+          {
+            "case": "R1",
+            "result": "failed",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "strictEqual",
+              "actual": false,
+              "expected": true
+            }
+          },
+          {
+            "case": "R2",
+            "result": "failed",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "strictEqual",
+              "actual": 0,
+              "expected": 1
+            }
+          },
+          {
+            "case": "R3",
+            "result": "failed",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "==",
+              "actual": false,
+              "expected": true
+            }
+          }
+        ],
+        "firstFailure": {
+          "target": "R1",
+          "error": {
+            "wrapperFailureType": "testCodeFailure",
+            "causeCode": "ERR_ASSERTION",
+            "causeClass": "AssertionError",
+            "operator": "strictEqual",
+            "actual": false,
+            "expected": true
+          }
+        },
+        "precase": null
+      },
+      "inventory": {
+        "state": "complete",
+        "prefixFiles": 128,
+        "prefixBytes": 299327164,
+        "attemptedOrdinal": null,
+        "nextBytes": null,
+        "nextBytesClipped": false,
+        "filesCap": 4096,
+        "bytesCap": 536870912,
+        "firstLimit": "none",
+        "firstLimitRegion": "none",
+        "complete": true,
+        "hashFiles": false,
+        "newRunOnly": true,
+        "openedFileStabilityProved": false
+      },
+      "provenance": {
+        "coreVerified": true,
+        "worldBeforeVerified": true,
+        "overlayInstalled": false,
+        "overlayVerified": false,
+        "worldRestored": false,
+        "worldAfterVerified": true,
+        "originalWorldBlob": "1e18873791e0520fff611e353232e38786c51941",
+        "overlaySha256": "dc3dde82b2e89cf1f6d1b3127c01ed86f108ceafbd80f51edb9f33d9e2e018dd"
+      },
+      "representation": {
+        "newRunOnly": true,
+        "originalWorkflowResident": true,
+        "originalTAPRedirection": true,
+        "diagnosticsOutsideInventory": true,
+        "custodyKeyLogAbsent": true,
+        "priorArtifactBindingLogAbsent": true,
+        "currentPureProfileGenerated": true,
+        "historicalByteEquivalence": false
+      },
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  }
+}
+```
+
+Seven false nonclaims remain: historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified. Diagnostic attempt consumed; do not replay. Next: one fresh whole-unit review of this bounded collection/closure, then a cause-specific source investigation using the new facts. The coherent16 suite remains failed; actual cloud subscription/useful receipt/native withdrawal/one-PC-off occurrence are not accredited.
