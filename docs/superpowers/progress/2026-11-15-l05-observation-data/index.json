@@ -1,0 +1,247 @@
+{
+  "purpose": "afw.l05.inactive-preparation-index.v1",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authorization": "Root preparation only; no refs, Source occurrence, qualification or Native",
+  "contract": "6bcea7ff70b0046712415e3cee7955d552cd95b1",
+  "ruling": "1eb7ddbb3bb9e04f97576508a033b95e5743b8c1",
+  "rootReceiver": "dc5e94492620bb65ad8683180af19c8d5240a2fd",
+  "rootReceiverContract": "8a0c9bbd9fdac2f6b3c026aa8ea0ed2712f30d2a",
+  "refsRead": {
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "source": "f8d5503929927b5bab52e35abeb04e7243f7cddc"
+  },
+  "sourceContext": {
+    "parent": "f8d5503929927b5bab52e35abeb04e7243f7cddc",
+    "tree": "c89cb8f6421e73dcba89f490a17efd051b2e290c"
+  },
+  "reused": {
+    "origin": "bfa80fac58ecb60bb3c9bcd458da6f393b301f70",
+    "originTree": "d17f87ef49892e6a4c0ec50dd2436b0697b9f45f",
+    "descriptor": "8196e3948ccb053c5de9dd958c21b4002bb76820",
+    "normalRaw": {
+      "bytes": 487208,
+      "sha256": "087bba2182c131579e233f6c29daf1ee85e2aae41e77b66d6f93cc44cb5000c5",
+      "blob": "f9c8261c54f761b5c33ddc370dbe7b308648033b",
+      "compressed": {
+        "bytes": 120211,
+        "sha256": "7e9aace1b1a3930a1a5234a2fdee5af68ebec77cc5b9818a6d342328047bf0e5",
+        "blob": "b3dfc078047bee03b5b42140783ee1dcf2409fd8"
+      },
+      "base64Characters": 160284
+    },
+    "normalBase64": {
+      "bytes": 160284,
+      "sha256": "a0918aa0f77e8d88f498a05c879e9c60db1b5a5ec5929533741785a1a33e0b3d",
+      "blob": "8e800f077e5bd620737e18faf3ac3465b15497cf"
+    },
+    "sourceManifest": "e2cf2c489ce3c25a1889ae06372a722ef62908f0",
+    "sourceManifestEntries": 39,
+    "all39Matched": true,
+    "normalHelpers": 33,
+    "frozen18": {
+      "bytes": 95518,
+      "sha256": "cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91",
+      "blob": "b88ebef9a2aa979772d20bfb778cbfe463dc3011"
+    },
+    "frozenSet": "71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af",
+    "core": {
+      "count": 3201,
+      "bytes": 324448,
+      "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+    },
+    "matrix": {
+      "blob": "5b829c768ed3d7af03d5eb3f1870599d39bfd083",
+      "bytes": 24054,
+      "sha256": "0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e",
+      "kind": "literal_piece",
+      "cap": 32768
+    }
+  },
+  "candidate": {
+    "commit": "fb994b800e6dc736b3b06f80ed5426f99dd21f93",
+    "tree": "275488ed0cd38aff6cf7e8456606ffeb8c1ab2ad",
+    "files": [
+      ".github/workflows/afw-finite-budget-qualification.yml",
+      "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md"
+    ],
+    "disabledGuard": "${{ false }}",
+    "F7": {
+      "bytes": 41367,
+      "sha256": "a8c3f7998eabc0750758d0c58cf4c3a7da2027bf5d1b1116ce542f0c43ab48f3",
+      "blob": "b24b8788b91cfaac95becf06664fe57b51ae9d49"
+    },
+    "SAME": {
+      "bytes": 2452486,
+      "sha256": "595d4c8351364a0eabe0e190bbdf329ae3114e0155a7e4db351c443ce81b475f",
+      "blob": "fd787f858e6ffeacaf2f419246f04a469bca3a3c"
+    },
+    "activeF7DataOnly": {
+      "bytes": 41623,
+      "sha256": "7a708dfd00248553a67f191a185bbc8d74244dc6667def5ff7f915517b1924c2",
+      "blob": "b3b00b491c7b327ebaa81bf9fceed2f67499bcfe"
+    },
+    "activationCommitMessage": "AFW-L05-OBSERVATION-ONEUSE-20261115"
+  },
+  "history": {
+    "prefix": {
+      "bytes": 2432862,
+      "sha256": "932c633d4aae682bafe818c9f5f0bc87a18415cb668384ab3b365ff19ff2d8bc",
+      "blob": "938072b22e19e5057d896b67ead5bd8d2c663d98"
+    },
+    "suffix": {
+      "bytes": 19624,
+      "sha256": "b3176d5854d497c09d2f66db96675a75b3e7e49d7197e562e1afe1c147e3ab1b",
+      "blob": "77253fb50deae794b049fa5483726f24f03a973a"
+    },
+    "fullPrefixEqual": true,
+    "exactRemainder": 147514,
+    "sameCap": 2600000
+  },
+  "rollback": {
+    "F7": {
+      "bytes": 126209,
+      "sha256": "1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a",
+      "blob": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc"
+    },
+    "closedSource": "f8d5503929927b5bab52e35abeb04e7243f7cddc",
+    "historyRetainingTemplateTree": "c19b3368c6d8b2653058f8a57b0086969e4f157d",
+    "twoFileInverseTree": "c89cb8f6421e73dcba89f490a17efd051b2e290c",
+    "rule": "Retain all subsequent authorized history/actual receipt on reclose; template is only for reviewed candidate suffix."
+  },
+  "derivation": {
+    "helpers": {
+      "controls.mjs": {
+        "bytes": 31570,
+        "sha256": "bb73d97698cf5ad466adc6c7239371cc4db46bd3be9cba61e1a6f8757d5b6e40",
+        "blob": "52a6a5a8045683e557fc5d3be385beed245a5104"
+      },
+      "controls-boundary.py": {
+        "bytes": 12927,
+        "sha256": "242a74fdf248467b0250258a66a0db3b267fabad7406a1a714f6b52730f9a975",
+        "blob": "cf065993546b1258b79de8a3ac4bce72056fdaea"
+      },
+      "lifetime-controls.py": {
+        "bytes": 21174,
+        "sha256": "15984e2455c0b2e70f0b4453c570ac233c9daaa00411cd94e07b0d63b5070415",
+        "blob": "6f42cda2bfc879a42de9ab19ec5475c7ffd92b86"
+      }
+    },
+    "helperDiff": {
+      "bytes": 14297,
+      "sha256": "99fac3412ef9ba16a877995b0c4bf426ceb3331fb7121951e1f50fe774efee75",
+      "blob": "23e4f7659f61cea9b981acdc8dc3864397b418a0"
+    },
+    "factoredTextDiff": {
+      "bytes": 21217,
+      "sha256": "267e6f0ef55a45a75f2e5b94b3145a42b3e0c505a7abab1ce73c8a688d621b38",
+      "blob": "f9e5c5cc51d86ace7d4bee122ef5cc8f15f5a20b"
+    },
+    "bootstrapPrelude": {
+      "bytes": 16230,
+      "sha256": "6f9a4ed2d99e59071365fd86d4f6e1319cc85a3d7f2f98662d40c20550252321",
+      "blob": "36c60b39c6f423f456e2513ca9109ec2c43ab436"
+    },
+    "bootstrapProgram": {
+      "bytes": 46272,
+      "sha256": "5b3c089772d7cb8eade3f849ad177b5ff01146a5d8d4c15298542b3d90b761f1",
+      "blob": "4efe53b986ee941aadbb0e857d4a1e3dc12a3424"
+    },
+    "bootstrapEntry": {
+      "bytes": 32498,
+      "sha256": "417f66f2aef365db99601b2ea29af3852e2169bdfcf7c92db2631262eb3a5305",
+      "blob": "cc0d523e6b4c66c99541140e5cb5501ef7c8220d"
+    },
+    "caseNormalKernel": {
+      "bytes": 16520,
+      "sha256": "ee3753be76f915339c66fe97d7e58b839f9a6c4a9d43cbb27702a2f664f0d0d7",
+      "blob": "ea9c44ad17ec6f4ce07a9c5d3ff82855834ee445"
+    },
+    "caseKernel": {
+      "bytes": 17891,
+      "sha256": "15b62cc39b64184fd04d4a462cf32dff052218e52e0fb2d20470557aef9569fe",
+      "blob": "d7d1b8bb6eb7a0cd182c7a2e60f5b788e7862eb1"
+    },
+    "caseRepinBuiltinProjection": {
+      "delivery-entry.sh": {
+        "bytes": 24745,
+        "sha256": "088118e5aa0d84155c6ad7c3fe35547e0f66cc2196e30715acfbde7d91cbde17",
+        "blob": "b92a2469c54da17645150b39360d6534d8be649f"
+      },
+      "controls-entry.sh": {
+        "bytes": 24790,
+        "sha256": "a650fb798ce8d7c607f680ae86d21f2facf34c94d71a4004e7cd760ac3b4979d",
+        "blob": "f6a76fe4f02b41c06d97cec1db2bf877fb53b7ba"
+      },
+      "missing-cwd-entry.sh": {
+        "bytes": 24862,
+        "sha256": "f481958a9514cd9e16de8fec9e203f2aef55bcc280692936c226381734b66c6c",
+        "blob": "bb0247a26e533b478321cdb0493936211a67f270"
+      }
+    },
+    "entryModuleGzip": {
+      "bytes": 15886,
+      "sha256": "55935a0089f901b94981c8e66debce01effba6aec2258a3c61b85ba03340c8ef",
+      "base64Characters": 21184
+    },
+    "caps": {
+      "same": 2600000,
+      "raw": 524288,
+      "gzip": 131072,
+      "base64": 174764,
+      "helper": 32768,
+      "bootstrap": 65536,
+      "workflow": 73728,
+      "report": 24576,
+      "delivery": 8192,
+      "stderr": 4096,
+      "sample": 4096,
+      "site": 16384,
+      "context": 2048,
+      "normalCaseMaxBuffer": 32768
+    }
+  },
+  "diffFormat": {
+    "unit": "ASCII byte offset in original preimage (also JS UTF-16 code unit and Unicode scalar for these verified ASCII operands)",
+    "helperRecipe": "JSON array of three [literalName, orderedEdits] pairs. Each edit [offset,oldText,newText]. Apply forward descending offset and reverse ascending at the same offsets after earlier restoration. Check each exact slice and whole pre/post pins.",
+    "factoredTextDiff": "Each named section contains before,after pins and same ordered reversible edits. boot is full plaintext. entryTemplate replaces the sole _r3_module= line by _r3_module=@@PIN@@; restore fixed gzip pin of the actual module (old pin from matching original entry). workflowTemplate and oneUseGuard replace the exact full entry (trailing LF trimmed, each remaining line indented ten spaces) by ten spaces + @@ENTRY@@. Use exact matching normal/derived entry for expansion. caseKernel transforms the already normal-race-injected kernel, whose original three inserts precede observation inserts. projectionPrelude is the verified prefix of full projectionBoot. Source rollback F7 is an absolute pinned Git blob replacement. SAME reverses the exact append only in the DATA proof.",
+    "allForwardReverse": true
+  },
+  "checks": {
+    "sourceExecuted": false,
+    "sourceRefMutated": false,
+    "runStarted": false,
+    "githubBlobReadback": true,
+    "candidatePathShaReadback": true,
+    "largeSameViaDirectBlob": true,
+    "onlyF7AndSAME": true,
+    "caseRepinActualLinuxPending": true,
+    "syntaxOrBehaviorExecuted": false,
+    "rootReleaseRequired": true,
+    "qualificationHeld": true,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    },
+    "directOrdinals": {
+      "bindFirst": "original creator PID and shim PPID composition",
+      "bindSecond": "original post-held live shim PPID",
+      "held": "original complete helper bytes restored, no observed false predicate or ordinal inferred from its exceptions",
+      "send": "original helper untouched",
+      "markerFirst": "successful original lstat before the deliberate rejection for present marker",
+      "markerSecond": "the original errno==ENOENT check"
+    },
+    "publicKeyCount": 25,
+    "publicKeyAuthority": "8a0c9bbd9fdac2f6b3c026aa8ea0ed2712f30d2a",
+    "timing": "Same deadlines and samples. Scheduling, assignments, pipe allocation and a diagnostic write/wakeup may change this occurrence. Invalid, partial or missing notes cannot prove a kernel classification."
+  },
+  "supersedesPreparation": {
+    "index": "8d13fc8b2d15f110194da678f8161ecbb84bd7af",
+    "commit": "1808227c449491a4efba3541fe47a2c30c57bb81",
+    "reason": "Root ordinal preflight. Superseded immutable preparation remained unreferenced, unexecuted and ineligible for release."
+  }
+}

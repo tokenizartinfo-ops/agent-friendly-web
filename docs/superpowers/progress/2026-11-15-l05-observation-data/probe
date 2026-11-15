@@ -1,0 +1,232 @@
+# Own synthetic transport probes only. No PID/path/error is emitted in the result.
+import os,sys,json,time,stat,signal,selectors,subprocess,errno,select,fcntl
+case=sys.argv[2] if len(sys.argv)==3 else ''
+result='unknown';child=None;selector=None;pidfds={};verified=set();readies={};out=bytearray();err=bytearray();probe=bytearray();started=time.monotonic();deadline=started+4.5;cleanup_end=started+4.8
+fallback=json.loads("{\"purpose\":\"afw.r3-delivery.unavailable.v1\",\"reason\":\"outer_startup_unavailable\",\"source\":\"unknown\",\"sourceTree\":\"unknown\",\"run\":\"unknown\",\"attempt\":\"unknown\",\"job\":\"unknown\",\"node\":\"unknown\",\"controls\":\"unknown\",\"availability\":\"unavailable\",\"sourceQualified\":false,\"collectionComplete\":\"unknown\",\"sampleObserved\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}")
+def need(v):
+ if not v:raise ValueError()
+# Observation cursor belongs only to this one case and never supplies an oracle input.
+U='unknown'
+obs={k:U for k in ['probeCleanup','firstSite','checkAtSite','eventAtCheck','stopClass','creatorSeen','shimSeen','wakeSeen','deadSeen','shimTerminalBeforeCleanup','kernelSite','kernelClass','markerAtOracle','markerAtCleanup','streams']}
+position=(U,U,U);reason=U;note=None;note_bad=False;probe_total=0;note_tail=bytearray();cleanup_ok=True
+def point(site,ordinal='first',event=U):
+ global position,reason
+ position=(site,ordinal,event);reason=U
+def original_check(v):
+ global reason
+ if not v:reason='check_rejected'
+ need(v)
+def observed_terminal(v):
+ obs['shimTerminalBeforeCleanup']='yes' if v else 'no';return v
+def within(v):
+ global reason
+ if not v:reason='wait_expired'
+ need(v)
+def at_stop(e):
+ if position[0]!=U and reason in ['check_rejected','wait_expired']:
+  obs['firstSite'],obs['checkAtSite'],obs['eventAtCheck']=position
+  obs['stopClass']=reason if reason!=U else 'os_error' if isinstance(e,OSError) else 'other'
+def private_note(line):
+ global note,note_bad
+ try:
+  v=json.loads(line[1:])
+  if note is not None or len(line)+1>256 or json.dumps(v,separators=(',',':')).encode()!=line[1:] or type(v) is not list or len(v)!=5:raise ValueError()
+  site,cls,pid,ppid,start=v
+  if site not in ['arm_set_verify','fd4_type_owner','fd4_read_mode','fd4_link_form','fd4_pid_tid','creator_ppid','stat_open','stat_read_close','stat_text','same_creator','arm_return'] or cls not in ['check_rejected','os_error','arm_return'] or (cls=='arm_return')!=(site=='arm_return'):raise ValueError()
+  if type(pid) is not int or type(ppid) is not int or type(start) is not str:raise ValueError()
+  wake=readies['EOF_WOKE'];shim=readies['shim'];creator=readies['creator']
+  if list(readies)!=['creator','shim','EOF_WOKE'] or (pid,ppid,start)!=(wake['pid'],wake['ppid'],wake['start']) or (pid,start)!=(shim['pid'],shim['start']) or ppid==creator['pid'] or pid not in verified:raise ValueError()
+  note=(site,cls)
+ except BaseException:note_bad=True
+def save_summary():
+ try:
+  if not note_bad and note is not None and 'CreatorDead' not in readies:obs['kernelSite'],obs['kernelClass']=note
+  if note_bad or probe_total>4096:obs['kernelSite']=obs['kernelClass']=U
+  if probe_total>4096:return
+  data=(json.dumps(obs,separators=(',',':'))+'\n').encode('ascii')
+  s=os.fstat(10);fl=fcntl.fcntl(10,fcntl.F_GETFL)
+  if len(data)<=1024 and stat.S_ISFIFO(s.st_mode) and fl&os.O_ACCMODE==os.O_WRONLY and fl&os.O_NONBLOCK:os.write(10,data)
+ except BaseException:pass
+def file(name):
+ return '/proc/self/fd/6/'+name
+def rewrite(name,old,new):
+ path=file(name);text=open(path).read();need(text.count(old)==1);open(path,'w').write(text.replace(old,new))
+def info(pid):
+ raw=open('/proc/'+str(pid)+'/stat').read();at=raw.rfind(')');need(at>0 and raw[:raw.index('(')].strip()==str(pid));parts=raw[at+2:].split();need(len(parts)>=20)
+ return {'pid':pid,'ppid':int(parts[1]),'state':parts[0],'start':parts[19]}
+def held(pid,start=None):
+ before=info(pid)
+ if start is not None:need(before['start']==start)
+ fd=os.pidfd_open(pid,0);after=info(pid)
+ need(before['start']==after['start'])
+ pidfds[pid]=fd;return after
+def send(pid,sig):
+ need(pid in verified and pid in pidfds);signal.pidfd_send_signal(pidfds[pid],sig,None,0)
+def terminated(pid):
+ need(pid in pidfds);poller=select.poll();poller.register(pidfds[pid],select.POLLIN);return bool(poller.poll(0))
+def pump(duration=0.02):
+ global probe,probe_total,note_tail,note_bad
+ within(time.monotonic()<deadline)
+ for key,_ in selector.select(min(duration,max(0,deadline-time.monotonic()))):
+  target=out if key.data=='out' else err if key.data=='err' else probe;cap=8192 if key.data=='out' else 4096
+  part=os.read(key.fileobj,min(cap+1-len(target),4097-probe_total) if key.data=='probe' else cap+1-len(target));need(len(target)+len(part)<=cap)
+  if key.data=='probe' and probe_total+len(part)>4096:raise OverflowError()
+  if not part:
+   if key.data=='probe' and note_tail:note_bad=True;note_tail.clear()
+   selector.unregister(key.fileobj);continue
+  if target is probe:
+   probe_total+=len(part)
+   if note_tail:target.extend(note_tail);note_tail.clear()
+  target.extend(part)
+ while b'\n' in probe:
+  line,tail=probe.split(b'\n',1);probe=bytearray(tail)
+  if line.startswith(b'~'):private_note(line);continue
+  v=json.loads(line)
+  need(json.dumps(v,separators=(',',':')).encode()==line and list(v)==['kind','pid','ppid','start'] and v['kind'] in ['parent','emitter','creator','shim','EOF_WOKE','CreatorDead'] and type(v['pid']) is int and v['pid']>1 and type(v['ppid']) is int and v['ppid']>=(1 if v['kind'] in ['EOF_WOKE','CreatorDead'] else 2) and type(v['start']) is str and v['start'].isdigit())
+  need(v['kind'] not in readies);readies[v['kind']]=v
+ if probe.startswith(b'~'):note_tail=probe;probe=bytearray()
+def wait_for(predicate):
+ while not predicate():pump()
+def open_self_creator():
+ f=os.open('/proc/thread-self',os.O_RDONLY|os.O_DIRECTORY);os.dup2(f,4,inheritable=True)
+ if f!=4:os.close(f)
+def repin_entries():
+ import gzip,base64,hashlib
+ def pin(data):
+  zipped=gzip.compress(data,compresslevel=9,mtime=0)
+  return {'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'zipBytes':len(zipped),'zipSha256':hashlib.sha256(zipped).hexdigest(),'data':base64.b64encode(zipped).decode(),'cap':32768}
+ kernel=open(file('lifetime.py'),'rb').read()
+ for entry,module in [('delivery-entry.sh','delivery-outer.mjs'),('controls-entry.sh','controls-outer.mjs'),('missing-cwd-entry.sh','delivery-outer.mjs')]:
+  path=file(entry);text=open(path).read()
+  for key,data in [('_r3_kernel',kernel),('_r3_module',open(file(module),'rb').read())]:
+   lines=[x for x in text.split('\n') if x.startswith(key+'=')];need(len(lines)==1)
+   text=text.replace(lines[0],key+'='+json.dumps(pin(data),separators=(',',':')))
+  open(path,'w').write(text)
+def literal_probe_fd():
+ text=open(file('delivery-entry.sh')).read();begin="<<'AFW_R3_LITERAL_PY'\n";end='\nAFW_R3_LITERAL_PY\n';need(text.count(begin)==text.count(end)==1);data=(text.split(begin)[1].split(end)[0]+'\n').encode()
+ f=os.memfd_create('afw-r3-own-fixture-entry',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+ try:
+  at=0
+  while at<len(data):
+   n=os.write(f,memoryview(data)[at:]);need(n>0);at+=n
+  os.fchmod(f,0o400);os.lseek(f,0,os.SEEK_SET);seals=fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL;fcntl.fcntl(f,fcntl.F_ADD_SEALS,seals);need(fcntl.fcntl(f,fcntl.F_GET_SEALS)&seals==seals);return f
+ except BaseException:os.close(f);raise
+def launch(role):
+ global child,selector
+ open_self_creator();r,w=os.pipe();os.dup2(w,7,inheritable=True)
+ if w!=7:os.close(w)
+ repin_entries();program=literal_probe_fd()
+ try:child=subprocess.Popen(['/usr/bin/python3','-I','-S','/proc/self/fd/'+str(program),role],stdin=subprocess.PIPE if role=='node-race-creator' else subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=dict(os.environ),pass_fds=(3,4,6,7,program))
+ finally:os.close(program)
+ os.close(7);held(child.pid);verified.add(child.pid)
+ selector=selectors.DefaultSelector();selector.register(child.stdout.fileno(),selectors.EVENT_READ,'out');selector.register(child.stderr.fileno(),selectors.EVENT_READ,'err');selector.register(r,selectors.EVENT_READ,'probe')
+ return r
+try:
+ point('fixture','first');original_check(stat.S_ISDIR(os.fstat(7).st_mode) and (os.fstat(7).st_dev,os.fstat(7).st_ino)==(os.fstat(6).st_dev,os.fstat(6).st_ino))
+ point('fixture','second');original_check(case in ['timeout','python','outer','bash','race'] and hasattr(os,'pidfd_open') and hasattr(signal,'pidfd_send_signal'))
+ # Reserve/source fd7 is installed by the owning test controller; no production observer API.
+ position=(U,U,U)
+ text=open(file('lifetime.py')).read();open(file('lifetime.py'),'w').write(text.replace('os.set_inheritable(n,True)','os.set_inheritable(n,True);os.set_inheritable(7,True)'))
+ if case=='race':
+  hook="# AFW_LIFE_BEFORE_ARM"
+  injected="if sys.argv[1]=='node-witness':\n  _fixture_event('shim');need(stat.S_ISFIFO(os.fstat(0).st_mode));need(os.read(0,1)==b'');_fixture_event('EOF_WOKE')"
+  rewrite('lifetime.py',hook,injected)
+  rewrite('lifetime.py','class CreatorDead(ValueError):pass',"def _fixture_event(kind):\n import json\n raw=open('/proc/self/stat').read();parts=raw[raw.rfind(')')+2:].split();os.write(7,(json.dumps({'kind':kind,'pid':os.getpid(),'ppid':os.getppid(),'start':parts[19]},separators=(',',':'))+'\\n').encode())\nclass CreatorDead(ValueError):pass")
+  rewrite('lifetime.py',"except BaseException:\n role=sys.argv[1] if len(sys.argv)==2 else ''","except CreatorDead:\n _fixture_event('CreatorDead');raise SystemExit(1)\nexcept BaseException:\n role=sys.argv[1] if len(sys.argv)==2 else ''")
+  open(file('witness.mjs'),'w').write("import{writeFileSync}from'node:fs';writeFileSync('/proc/self/fd/6/delegation.marker','unexpected',{flag:'wx'});\n")
+  rewrite('lifetime.py',"def _fixture_event(kind):\n import json\n raw=open('/proc/self/stat').read();parts=raw[raw.rfind(')')+2:].split();os.write(7,(json.dumps({'kind':kind,'pid':os.getpid(),'ppid':os.getppid(),'start':parts[19]},separators=(',',':'))+'\\n').encode())\nclass CreatorDead(ValueError):pass","_obs_wake=None\n_obs_site='unknown'\n_obs_reject=False\n_obs_sent=False\ndef _obs_mark(site):\n global _obs_site,_obs_reject\n _obs_site=site;_obs_reject=False\ndef _obs_check(v):\n global _obs_reject\n if not v:_obs_reject=True\n need(v)\ndef _obs_note(exc=None):\n global _obs_sent\n try:\n  if _obs_sent or _obs_wake is None or _obs_site=='unknown':return\n  cls='arm_return' if exc is None and _obs_site=='arm_return' else 'check_rejected' if _obs_reject else 'os_error' if isinstance(exc,OSError) else None\n  if cls is None:return\n  import json\n  data=('~'+json.dumps([_obs_site,cls,*_obs_wake],separators=(',',':'))+'\\n').encode()\n  if len(data)<=256:\n   _obs_sent=True;old=fcntl.fcntl(7,fcntl.F_GETFL)\n   try:\n    fcntl.fcntl(7,fcntl.F_SETFL,old|os.O_NONBLOCK);os.write(7,data)\n   finally:fcntl.fcntl(7,fcntl.F_SETFL,old)\n except BaseException:pass\ndef _fixture_event(kind):\n global _obs_wake\n import json\n raw=open('/proc/self/stat').read();parts=raw[raw.rfind(')')+2:].split();v={'kind':kind,'pid':os.getpid(),'ppid':os.getppid(),'start':parts[19]};os.write(7,(json.dumps(v,separators=(',',':'))+'\\n').encode())\n if kind=='EOF_WOKE':_obs_wake=(v['pid'],v['ppid'],v['start'])\nclass CreatorDead(ValueError):pass")
+  rewrite('lifetime.py'," need(stat.S_ISDIR(os.fstat(4).st_mode) and os.fstat(4).st_uid==os.getuid())"," _obs_mark('fd4_type_owner')\n _obs_check(stat.S_ISDIR(os.fstat(4).st_mode) and os.fstat(4).st_uid==os.getuid())")
+  rewrite('lifetime.py'," need(fcntl.fcntl(4,fcntl.F_GETFL)&os.O_ACCMODE==os.O_RDONLY)"," _obs_mark('fd4_read_mode')\n _obs_check(fcntl.fcntl(4,fcntl.F_GETFL)&os.O_ACCMODE==os.O_RDONLY)")
+  rewrite('lifetime.py'," link=os.readlink('/proc/self/fd/4');match=re.fullmatch(r'/proc/([1-9][0-9]*)/task/([1-9][0-9]*)',link);need(match is not None)"," _obs_mark('fd4_link_form')\n link=os.readlink('/proc/self/fd/4');match=re.fullmatch(r'/proc/([1-9][0-9]*)/task/([1-9][0-9]*)',link);_obs_check(match is not None)")
+  rewrite('lifetime.py'," pid,tid=map(int,match.groups());need(pid==tid)"," _obs_mark('fd4_pid_tid')\n pid,tid=map(int,match.groups());_obs_check(pid==tid)")
+  rewrite('lifetime.py'," if pid!=os.getppid():raise CreatorDead()"," _obs_mark('creator_ppid')\n if pid!=os.getppid():raise CreatorDead()")
+  rewrite('lifetime.py'," f=os.open('stat',os.O_RDONLY|os.O_NOFOLLOW,dir_fd=4)"," _obs_mark('stat_open')\n f=os.open('stat',os.O_RDONLY|os.O_NOFOLLOW,dir_fd=4)")
+  rewrite('lifetime.py'," try:raw=os.read(f,4097);need(len(raw)<=4096)"," _obs_mark('stat_read_close')\n try:raw=os.read(f,4097);_obs_check(len(raw)<=4096)")
+  rewrite('lifetime.py'," text=raw.decode('ascii');at=text.rfind(')');need(at>0 and text[:text.index('(')].strip()==str(pid));parts=text[at+2:].split();need(len(parts)>=20 and parts[0] not in ['Z','X'] and parts[19].isdigit())"," _obs_mark('stat_text')\n text=raw.decode('ascii');at=text.rfind(')');_obs_check(at>0 and text[:text.index('(')].strip()==str(pid));parts=text[at+2:].split();_obs_check(len(parts)>=20 and parts[0] not in ['Z','X'] and parts[19].isdigit())")
+  rewrite('lifetime.py'," need(libc.prctl(1,signal.SIGKILL,0,0,0)==0 and death_get()==signal.SIGKILL)"," _obs_mark('arm_set_verify')\n _obs_check(libc.prctl(1,signal.SIGKILL,0,0,0)==0 and death_get()==signal.SIGKILL)")
+  rewrite('lifetime.py'," need(creator()==before)"," _obs_before=creator()\n _obs_mark('same_creator');_obs_check(_obs_before==before)\n if _obs_wake is not None:_obs_mark('arm_return');_obs_note()")
+  rewrite('lifetime.py',"except BaseException:\n role=sys.argv[1] if len(sys.argv)==2 else ''","except BaseException as _obs_exc:\n _obs_note(_obs_exc)\n role=sys.argv[1] if len(sys.argv)==2 else ''")
+  point('launch');r=launch('node-race-creator');point('ready');wait_for(lambda:'creator' in readies and 'shim' in readies)
+  creator=readies['creator'];shim=readies['shim'];obs['creatorSeen']=obs['shimSeen']='yes';point('bind');original_check(creator['pid']==child.pid and shim['ppid']==child.pid);point('bind',U);held(shim['pid'],shim['start']);point('bind','second');original_check(info(shim['pid'])['ppid']==child.pid);verified.add(shim['pid']);point('pre_sleep');wait_for(lambda:info(shim['pid'])['state']=='S');sleeping=time.monotonic()
+  point('pre_interval')
+  while time.monotonic()-sleeping<0.02:pump(0.005);original_check(info(shim['pid'])['state']=='S')
+  point('kill');send(child.pid,signal.SIGKILL);point('creator_terminal');wait_for(lambda:child.poll() is not None and terminated(child.pid))
+  point('live_check');original_check(not terminated(shim['pid']) and info(shim['pid'])['start']==shim['start'] and info(shim['pid'])['state']=='S');alive=time.monotonic()
+  point('live_interval')
+  while time.monotonic()-alive<0.02:pump(0.005);original_check(not terminated(shim['pid']) and info(shim['pid'])['start']==shim['start'] and info(shim['pid'])['state']=='S')
+  point('early_event');original_check('EOF_WOKE' not in readies and 'CreatorDead' not in readies);point('writer_close');child.stdin.close()
+  point('wake_dead_wait');wait_for(lambda:'EOF_WOKE' in readies and 'CreatorDead' in readies)
+  point('order');original_check(list(readies)==['creator','shim','EOF_WOKE','CreatorDead'])
+  for kind in ['EOF_WOKE','CreatorDead']:
+   point('event_identity','first','wake' if kind=='EOF_WOKE' else 'dead');original_check(readies[kind]['pid']==shim['pid'] and readies[kind]['start']==shim['start'] and readies[kind]['ppid']!=creator['pid'])
+  obs['kernelSite']='creator_ppid';obs['kernelClass']='creator_dead'
+  point('shim_terminal');wait_for(lambda:observed_terminal(terminated(shim['pid'])))
+  point('marker')
+  try:os.lstat(file('delegation.marker'));obs['markerAtOracle']='present';reason='check_rejected';raise ValueError()
+  except OSError as error:point('marker','second');original_check(error.errno==errno.ENOENT);obs['markerAtOracle']='absent'
+  point('drain');wait_for(lambda:not selector.get_map());point('streams');empty=len(out)==0 and len(err)==0 and len(probe)==0;obs['streams']='empty' if empty else 'nonempty';original_check(empty);result='passed';position=(U,U,U)
+ else:
+  # Instrument ONLY a case-owned copy; actual parent/entry and syscall code remain load-bearing.
+  rewrite('delivery-outer.mjs',"stdio:['pipe','pipe','pipe',image,creatorHandle,5,helperHandle]","stdio:['pipe','pipe','pipe',image,creatorHandle,5,helperHandle,7]")
+  rewrite('boundary.py',"pass_fds=(3,4,6),preexec_fn=pre","pass_fds=(3,4,6,7),preexec_fn=pre")
+  ready="   raw=open('/proc/self/stat').read();parts=raw[raw.rfind(')')+2:].split();os.write(7,(json.dumps({'kind':'parent','pid':os.getpid(),'ppid':os.getppid(),'start':parts[19]},separators=(',',':'))+'\\n').encode())\n"
+  rewrite('boundary.py',"   pre=r3_prepare_node_child()\n","   pre=r3_prepare_node_child()\n"+ready)
+  emitter="import{readFileSync,writeSync}from'node:fs';const raw=readFileSync('/proc/self/stat','ascii'),parts=raw.slice(raw.lastIndexOf(')')+2).split(' ');writeSync(7,JSON.stringify({kind:'emitter',pid:process.pid,ppid:process.ppid,start:parts[19]})+'\\n');Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0);\n"
+  open(file('emitter.mjs'),'w').write(emitter)
+  r=launch('case-delivery');wait_for(lambda:'parent' in readies and 'emitter' in readies)
+  parent=readies['parent'];emitter=readies['emitter'];need(emitter['ppid']==parent['pid']);pi=info(parent['pid']);ei=info(emitter['pid']);oi=info(parent['ppid']);need(pi['start']==parent['start'] and ei['start']==emitter['start'] and pi['ppid']==oi['pid'] and ei['ppid']==pi['pid'] and oi['ppid']==child.pid)
+  held(parent['pid'],parent['start']);held(emitter['pid'],emitter['start']);outer=held(oi['pid'],oi['start']);verified.update([parent['pid'],emitter['pid'],outer['pid']])
+  wait_for(lambda:info(emitter['pid'])['state']=='S');sleeping=time.monotonic()
+  while time.monotonic()-sleeping<0.02:pump(0.005);need(info(emitter['pid'])['state']=='S')
+  if case=='python':send(parent['pid'],signal.SIGKILL)
+  elif case=='outer':send(outer['pid'],signal.SIGKILL)
+  elif case=='bash':send(child.pid,signal.SIGKILL)
+  wait_for(lambda:child.poll() is not None)
+  for pid in [emitter['pid'],parent['pid'],outer['pid']]:wait_for(lambda p=pid:terminated(p))
+  wait_for(lambda:not selector.get_map());need(len(err)==0 and len(probe)==0)
+  if case=='timeout':need(time.monotonic()-sleeping>=3.0)
+  if case=='bash':need(out==b'' and child.returncode==-signal.SIGKILL)
+  elif case=='outer':need(out==b'' and child.returncode==1)
+  else:
+   reason='parent_unavailable';record={**fallback,'reason':reason};expected=('AFW_R3_DELIVERY_UNAVAILABLE/1 '+json.dumps(record,separators=(',',':'))+'\n').encode()
+   need(out==expected and child.returncode==1)
+  result='passed'
+except ValueError as e:at_stop(e);result='failed'
+except BaseException as e:at_stop(e);result='unknown'
+finally:
+ if position[0] in ['ready','bind','pre_sleep','pre_interval','kill','creator_terminal','live_check','live_interval','early_event','writer_close','wake_dead_wait','order','event_identity','shim_terminal','marker','drain','streams'] or result=='passed':
+  for k,field in [('creator','creatorSeen'),('shim','shimSeen'),('EOF_WOKE','wakeSeen'),('CreatorDead','deadSeen')]:obs[field]='yes' if k in readies else 'no'
+ if child is not None and child.stdin is not None:
+  try:child.stdin.close()
+  except BaseException:result='unknown';cleanup_ok=False
+ # Cleanup uses ONLY pidfds proven to belong to this created lineage, never caller PIDs.
+ for pid in list(verified):
+  try:signal.pidfd_send_signal(pidfds[pid],signal.SIGKILL,None,0)
+  except OSError as error:
+   if error.errno!=errno.ESRCH:result='unknown';cleanup_ok=False
+  except BaseException:result='unknown';cleanup_ok=False
+ try:
+  while time.monotonic()<cleanup_end and any(not terminated(pid) for pid in verified):time.sleep(0.005)
+  if any(not terminated(pid) for pid in verified):result='unknown';cleanup_ok=False
+ except BaseException:result='unknown';cleanup_ok=False
+ if child is not None:
+  try:child.wait(timeout=max(0.001,cleanup_end-time.monotonic()))
+  except BaseException:result='unknown';cleanup_ok=False
+ if selector is not None:
+  for key in list(selector.get_map().values()):
+   try:os.close(key.fileobj)
+   except BaseException:cleanup_ok=False
+  selector.close()
+ for fd in pidfds.values():
+  try:os.close(fd)
+  except BaseException:cleanup_ok=False
+ if case=='race':
+  if child is not None and cleanup_ok and 'shim' in readies and readies['shim']['pid'] in verified and time.monotonic()<cleanup_end:
+   try:os.lstat(file('delegation.marker'));obs['markerAtCleanup']='present'
+   except OSError as e:
+    if e.errno==errno.ENOENT:obs['markerAtCleanup']='absent'
+   except BaseException:pass
+  obs['probeCleanup']='passed' if cleanup_ok and child is not None else U
+  save_summary()
+ print(json.dumps({'purpose':'afw.r3-lifetime.control.v1','case':case,'result':result},separators=(',',':')))
+ raise SystemExit(0 if result=='passed' else 1)
