@@ -151,321 +151,140 @@ Changedartifactpins:
 }
 
 
+
+Diff method: complete multi-hunk LCS line diff with eight context lines; artifact pins/framing authoritative. Unchanged input bodies omitted from hunks, exact packaged-byte forward/reverse splices separately pinned.
+
 ## lab-serial-v2.mjs
 
 ```diff
 --- a/lab-serial-v2.mjs
 +++ b/lab-serial-v2.mjs
-@@ -1,318 +1,320 @@
+@@ -1,10 +1,10 @@
  // Round1 controls-only: no production main/Native/readonly CLI imports or calls.
 -import {readFileSync,writeFileSync,mkdirSync,mkdtempSync,chmodSync,unlinkSync,renameSync,symlinkSync,linkSync,rmSync,realpathSync,openSync,closeSync,statSync,fstatSync,lstatSync,readdirSync,constants} from 'node:fs';
--import {join,dirname,resolve} from 'node:path';
--import {spawnSync} from 'node:child_process';
--import {createHash} from 'node:crypto';
--import {performance} from 'node:perf_hooks';
--import {gzipSync} from 'node:zlib';
--function entryPin(bytes){const zipped=gzipSync(bytes,{level:9,mtime:0}),hash=b=>createHash('sha256').update(b).digest('hex');return{bytes:bytes.length,sha256:hash(bytes),zipBytes:zipped.length,zipSha256:hash(zipped),data:zipped.toString('base64'),cap:32768};}
--const pristinePins={'lifetime.py':undefined,'delivery-outer.mjs':undefined,'controls-outer.mjs':undefined};
--function selectPin(name,bytes){
-- if(bytes.equals(pristine[name])){return pristinePins[name]??=JSON.stringify(entryPin(bytes));}
-- return JSON.stringify(entryPin(bytes));
--}
--function retargetEntries(t){
-- const kernel=readFileSync(join(t.own,'lifetime.py'));
-- let kernelPin,deliveryBytes,deliveryPin;
-- for(const [entry,module]of[['delivery-entry.sh','delivery-outer.mjs'],['controls-entry.sh','controls-outer.mjs'],['missing-cwd-entry.sh','delivery-outer.mjs']]){
--  let text=pristine[entry].toString('utf8');
--  for(const[key,name,bytes]of[['_r3_kernel','lifetime.py',kernel],['_r3_module',module,readFileSync(join(t.own,module))]]){
--   const lines=text.split('\n').filter(x=>x.startsWith(key+'='));if(lines.length!==1)throw 1;
--   const serialized=key==='_r3_kernel'?(kernelPin??=selectPin(name,bytes)):
--    module==='delivery-outer.mjs'&&deliveryBytes!==undefined&&bytes.equals(deliveryBytes)?deliveryPin:selectPin(name,bytes);
--   if(key==='_r3_module'&&module==='delivery-outer.mjs'){deliveryBytes=bytes;deliveryPin=serialized;}
--   text=text.replace(lines[0],key+'='+serialized);
--  }
--  writeFileSync(join(t.own,entry),text,{mode:0o600});
-- }
--}
--
++import {readFileSync,writeFileSync,writeSync,mkdirSync,mkdtempSync,chmodSync,unlinkSync,renameSync,symlinkSync,linkSync,rmSync,realpathSync,openSync,closeSync,statSync,fstatSync,lstatSync,readdirSync,constants} from 'node:fs';
+ import {join,dirname,resolve} from 'node:path';
+ import {spawnSync} from 'node:child_process';
+ import {createHash} from 'node:crypto';
+ import {performance} from 'node:perf_hooks';
+ import {gzipSync} from 'node:zlib';
+ function entryPin(bytes){const zipped=gzipSync(bytes,{level:9,mtime:0}),hash=b=>createHash('sha256').update(b).digest('hex');return{bytes:bytes.length,sha256:hash(bytes),zipBytes:zipped.length,zipSha256:hash(zipped),data:zipped.toString('base64'),cap:32768};}
+ const pristinePins={'lifetime.py':undefined,'delivery-outer.mjs':undefined,'controls-outer.mjs':undefined};
+ function selectPin(name,bytes){
+@@ -22,28 +22,31 @@
+     module==='delivery-outer.mjs'&&deliveryBytes!==undefined&&bytes.equals(deliveryBytes)?deliveryPin:selectPin(name,bytes);
+    if(key==='_r3_module'&&module==='delivery-outer.mjs'){deliveryBytes=bytes;deliveryPin=serialized;}
+    text=text.replace(lines[0],key+'='+serialized);
+   }
+   writeFileSync(join(t.own,entry),text,{mode:0o600});
+  }
+ }
+ 
 -import {jsonFixed} from './io.mjs';
 -import {accepts} from './oracle.mjs';
 -const controlDeadline=performance.now()+90000;
--const admitCase=()=>performance.now()+20000<=controlDeadline;
--const e=process.env,home=join(e.RUNNER_TEMP,'afw-r3-delivery'),c=jsonFixed(e.RUNNER_TEMP,['afw-r3-delivery','context.json'],2048);
--const matrix=JSON.parse(readFileSync(join(home,'matrix.json'),'utf8')),fixtures=JSON.parse(readFileSync(join(home,'fixtures.json'),'utf8'));
--const clone=x=>JSON.parse(JSON.stringify(x)),canary=matrix.privateCanary,names=["io.mjs","emitter.mjs","source-provenance.mjs","raw-sample.mjs","site-schema.json","site-map.json","envelope-schema.json","boundary.py","delivery-schema.json","unavailable-schema.json","controls-schema.json","matrix.json","shape.mjs","control-proof.mjs","site-receiver.mjs","normalized-sample.mjs","witness.mjs","fixtures.json","controls.mjs","examples.json","controls-boundary.py","controls-unavailable-example.json","outer.mjs","delivery-entry.sh","controls-entry.sh","oracle.mjs","lifetime.py","delivery-outer.mjs","controls-outer.mjs","missing-cwd-entry.sh","race-creator.mjs","lifetime-controls.py","authority-anchor.json"],fb={"purpose":"afw.r3-delivery.unavailable.v1","reason":"outer_startup_unavailable","source":"unknown","sourceTree":"unknown","run":"unknown","attempt":"unknown","job":"unknown","node":"unknown","controls":"unknown","availability":"unavailable","sourceQualified":false,"collectionComplete":"unknown","sampleObserved":"unknown","nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}};
--const controlsFallback=JSON.parse(pristineUnavailable());
--function pristineUnavailable(){return readFileSync(join(home,'controls-unavailable-example.json'),'utf8');}
--const ctx={source:c.source,sourceTree:c.sourceTree,run:c.run,attempt:1,job:'readonly',node:'22.23.4'};
--const count=matrix.ordered.length;
++import {jsonFixed} from 'file:///proc/self/fd/6/io.mjs';
++import {accepts} from 'file:///proc/self/fd/6/oracle.mjs';
++const controlDeadline=performance.now()+240000,controlStart=controlDeadline-240000;
+ const admitCase=()=>performance.now()+20000<=controlDeadline;
+ const e=process.env,home=join(e.RUNNER_TEMP,'afw-r3-delivery'),c=jsonFixed(e.RUNNER_TEMP,['afw-r3-delivery','context.json'],2048);
+ const matrix=JSON.parse(readFileSync(join(home,'matrix.json'),'utf8')),fixtures=JSON.parse(readFileSync(join(home,'fixtures.json'),'utf8'));
+ const clone=x=>JSON.parse(JSON.stringify(x)),canary=matrix.privateCanary,names=["io.mjs","emitter.mjs","source-provenance.mjs","raw-sample.mjs","site-schema.json","site-map.json","envelope-schema.json","boundary.py","delivery-schema.json","unavailable-schema.json","controls-schema.json","matrix.json","shape.mjs","control-proof.mjs","site-receiver.mjs","normalized-sample.mjs","witness.mjs","fixtures.json","controls.mjs","examples.json","controls-boundary.py","controls-unavailable-example.json","outer.mjs","delivery-entry.sh","controls-entry.sh","oracle.mjs","lifetime.py","delivery-outer.mjs","controls-outer.mjs","missing-cwd-entry.sh","race-creator.mjs","lifetime-controls.py","authority-anchor.json"],fb={"purpose":"afw.r3-delivery.unavailable.v1","reason":"outer_startup_unavailable","source":"unknown","sourceTree":"unknown","run":"unknown","attempt":"unknown","job":"unknown","node":"unknown","controls":"unknown","availability":"unavailable","sourceQualified":false,"collectionComplete":"unknown","sampleObserved":"unknown","nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}};
+ const controlsFallback=JSON.parse(pristineUnavailable());
+ function pristineUnavailable(){return readFileSync(join(home,'controls-unavailable-example.json'),'utf8');}
+ const ctx={source:c.source,sourceTree:c.sourceTree,run:c.run,attempt:1,job:'readonly',node:'22.23.4'};
+ const count=matrix.ordered.length;
 -const report={purpose:'afw.r3-delivery.controls.v1',...ctx,matrixSha256:'0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e',allPassed:false,expected:count,passed:0,failed:0,unknown:count,results:matrix.ordered.map(x=>({id:x.id,result:'unknown'})),mutants:matrix.mutants.map(x=>({id:x.id,expectedFailedIds:x.expectedFailedIds,actualFailedIds:[],result:'unknown'})),nativeBusinessCases:0,nonclaims:clone(fixtures.controlsReport.nonclaims),cleanup:{complete:false,failedInstances:[],unknownInstances:[]}};
--const pristine=Object.freeze(Object.fromEntries(names.map(name=>[name,readFileSync(join(home,name))])));
--const launcherEntry=pristine['delivery-entry.sh'].toString('utf8'),launcherBegin="<<'AFW_R3_LITERAL_PY'\n",launcherEnd='\nAFW_R3_LITERAL_PY\n';
--if(launcherEntry.split(launcherBegin).length!==2||launcherEntry.split(launcherEnd).length!==2)throw 1;
--const pristineLauncher=launcherEntry.split(launcherBegin)[1].split(launcherEnd)[0]+'\n';
--let sandbox;const live=new Map(),external=new Map();
--const put=(p,s)=>writeFileSync(p,s,{mode:0o600,flag:'wx'});
--function build(instance){
-- if(!sandbox){sandbox=mkdtempSync(join(e.RUNNER_TEMP,'afw-r3-delivery-controls-r1-'));chmodSync(sandbox,0o700);}
-- const base=mkdtempSync(join(sandbox,'case-'));live.set(instance,base);
-- const cwd=join(base,'work'),temp=join(base,'temp'),own=join(temp,'afw-r3-delivery'),siteRoot=join(temp,'afw-site');
-- mkdirSync(cwd,{mode:0o700});mkdirSync(own,{recursive:true,mode:0o700});mkdirSync(siteRoot,{mode:0o700});
-- for(const name of names)put(join(own,name),pristine[name]);
-- const binding={purpose:'afw.r3-delivery.binding.v1',...ctx};put(join(own,'context.json'),JSON.stringify(binding));
-- const proof=clone(fixtures.controlsReport);Object.assign(proof,ctx);put(join(own,'controls-report.json'),JSON.stringify(proof));
-- const sample=clone(fixtures.sample);Object.assign(sample,{source:ctx.source,run:ctx.run});sample.sample.inputSeeded=true;sample.sample.seedEntries=201;sample.sample.lists=1;sample.sample.gets=0;sample.sample.nativeInvoked=1;
-- const site=clone(fixtures.site);Object.assign(site,{source:ctx.source,sourceTree:ctx.sourceTree,run:ctx.run});
-- const sampleDir=join(cwd,'output','finite-budget','readonly','R3');mkdirSync(sampleDir,{recursive:true,mode:0o700});
-- const file=join(sampleDir,'r3-existing-sample.json'),siteFile=join(siteRoot,'public-result.json');
-- return{base,cwd,temp,own,file,siteFile,sample,site,binding,instance,env:{PATH:e.PATH,HOME:e.HOME,CI:'true',LANG:'C.UTF-8',TZ:'UTC',RUNNER_TEMP:temp,GITHUB_REPOSITORY:'tokenizartinfo-ops/agent-friendly-web',GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/feat/finite-native-cleanup-20261101',GITHUB_SHA:ctx.source,GITHUB_RUN_ID:ctx.run,GITHUB_RUN_ATTEMPT:'1',GITHUB_JOB:'readonly'}};
--}
--function runRole(t,role,{timeout=5000,full,buffer=32768}={}){
-- let creator,helper;
-- try{
--  creator=openSync('/proc/thread-self',constants.O_RDONLY|constants.O_DIRECTORY);helper=openSync(t.own,constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW);
++const report={matrixSha256:'0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e',cleanup:{failedInstances:[],unknownInstances:[]}};
++let custodyUnknown=false,ordinal=0,lastAdmissionMs=null,halt=null;
++const trace=s=>{const b=Buffer.from(s+'\n','ascii');if(writeSync(1,b)!==b.length)throw 1;};
++trace('H '+JSON.stringify({purpose:'afw.q1.serial-source-lab.trace.v2',...ctx,matrixSha256:report.matrixSha256,policySha256:'91277fb4b570ce9f18d49e8c16fe6d48b556b8bb89781de81bcde97cae8b31ac'}));
+ const pristine=Object.freeze(Object.fromEntries(names.map(name=>[name,readFileSync(join(home,name))])));
+ const launcherEntry=pristine['delivery-entry.sh'].toString('utf8'),launcherBegin="<<'AFW_R3_LITERAL_PY'\n",launcherEnd='\nAFW_R3_LITERAL_PY\n';
+ if(launcherEntry.split(launcherBegin).length!==2||launcherEntry.split(launcherEnd).length!==2)throw 1;
+ const pristineLauncher=launcherEntry.split(launcherBegin)[1].split(launcherEnd)[0]+'\n';
+ let sandbox;const live=new Map(),external=new Map();
+ const put=(p,s)=>writeFileSync(p,s,{mode:0o600,flag:'wx'});
+ function build(instance){
+  if(!sandbox){sandbox=mkdtempSync(join(e.RUNNER_TEMP,'afw-r3-delivery-controls-r1-'));chmodSync(sandbox,0o700);}
+@@ -58,17 +61,18 @@
+  const sampleDir=join(cwd,'output','finite-budget','readonly','R3');mkdirSync(sampleDir,{recursive:true,mode:0o700});
+  const file=join(sampleDir,'r3-existing-sample.json'),siteFile=join(siteRoot,'public-result.json');
+  return{base,cwd,temp,own,file,siteFile,sample,site,binding,instance,env:{PATH:e.PATH,HOME:e.HOME,CI:'true',LANG:'C.UTF-8',TZ:'UTC',RUNNER_TEMP:temp,GITHUB_REPOSITORY:'tokenizartinfo-ops/agent-friendly-web',GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/feat/finite-native-cleanup-20261101',GITHUB_SHA:ctx.source,GITHUB_RUN_ID:ctx.run,GITHUB_RUN_ATTEMPT:'1',GITHUB_JOB:'readonly'}};
+ }
+ function runRole(t,role,{timeout=5000,full,buffer=32768}={}){
+  let creator,helper;
+  try{
+   creator=openSync('/proc/thread-self',constants.O_RDONLY|constants.O_DIRECTORY);helper=openSync(t.own,constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW);
 -  return spawnSync('/usr/bin/python3',['-I','-S','-',role],{input:pristineLauncher,cwd:t.cwd,env:t.env,stdio:['pipe',full===undefined?'pipe':full,'pipe',3,creator,'ignore',helper,helper],encoding:'utf8',timeout,killSignal:'SIGKILL',maxBuffer:buffer});
-- }finally{if(creator!==undefined)closeSync(creator);if(helper!==undefined)closeSync(helper);}
--}
--function change(t,scenario){
-- let raw=null,omitSample=false,omitSite=false,after=()=>{},spools=[];
-- const rewrite=(name,content)=>writeFileSync(join(t.own,name),content,{mode:0o600});
-- if(scenario==='observed-unknown'||scenario==='not-observed'){t.sample=clone(fixtures.sample);t.sample.source=ctx.source;t.sample.run=ctx.run;if(scenario==='not-observed')t.sample.sampleState='not_observed';}
-- if(scenario==='partial-full-provenance'){t.site.stage='unknown';t.site.collectionComplete=false;t.site.readonly.valid=false;t.site.readonly.state='unknown';t.site.readonly.summary=null;}
-- if(scenario==='sample-missing')omitSample=true;
-- if(scenario==='sample-private-field')t.sample.private=canary;
-- if(scenario==='sample-source')t.sample.source='3333333333333333333333333333333333333333';
-- if(scenario==='sample-run')t.sample.run='99999';
-- if(scenario==='sample-attempt')t.sample.attempt=2;
-- if(scenario==='sample-case')t.sample.case='R2';
-- if(scenario==='sample-counter-bound')t.sample.sample.nativeInvoked=203;
-- if(scenario==='source-missing')omitSite=true;
-- if(scenario==='source-private-field')t.site.private=canary;
-- if(scenario==='source-context')t.site.run='99999';
-- if(scenario==='source-tree')t.site.sourceTree='3333333333333333333333333333333333333333';
-- if(scenario==='source-node')t.site.node='22.0.0';
-- if(scenario==='source-partial-no-after'){t.site.stage='unknown';t.site.collectionComplete=false;t.site.readonly=null;t.site.usableLocationCount=0;t.site.sourceProof.worldAfterVerified=false;}
-- for(const k of ['mapVerified','worldBeforeVerified','nativeBeforeVerified','worldAfterVerified','nativeAfterVerified','originalBodiesUnchanged'])if(scenario==='source-'+k)t.site.sourceProof[k]=false;
-- const prog={'verified':'verified','count':'count','set':'setSha256','expanded':'payloadExpandedSha256','core':'coreGitVerified','prefix':'prefixVerified'};
-- for(const [suffix,key]of Object.entries(prog))if(scenario==='source-program-'+suffix)t.site.programProof[key]=key==='count'?17:['setSha256','payloadExpandedSha256'].includes(key)?'0'.repeat(64):false;
-- if(scenario==='source-controls-passed')t.site.controls.passed=false;
-- if(scenario==='source-controls-count')t.site.controls.count=5;
-- if(scenario==='source-controls-shape')t.site.controls.usableShape=false;
-- if(scenario==='source-pure')t.site.pure.passed=false;
-- if(scenario==='source-profile')t.site.profile.passed=false;
-- if(scenario==='source-cli-not-started'){t.site.businessCommand={started:false,ended:false,exitCode:null,signal:'none'};t.site.readonly=null;t.site.stage='hold';t.site.collectionComplete=false;t.site.usableLocationCount=0;}
-- if(scenario==='source-cli-not-ended'){t.site.businessCommand.ended=false;t.site.businessCommand.exitCode=null;t.site.businessCommand.signal='unknown';t.site.stage='unknown';t.site.collectionComplete=false;t.site.readonly=null;t.site.usableLocationCount=0;}
-- raw=JSON.stringify(t.sample)+'\n';
-- if(scenario==='sample-missing-lf')raw=raw.slice(0,-1);
-- if(scenario==='sample-extra-lf')raw+='\n';
-- if(scenario==='sample-noncanonical')raw=raw.replace('{"purpose"', '{ "purpose"');
-- if(scenario==='sample-overcap')raw=' '.repeat(4097);
-- if(scenario==='sample-duplicate-keys')raw=raw.replace('{"purpose"', '{"attempt":1,"purpose"');
-- if(scenario==='sample-invalid-utf8')raw=Buffer.from([0xff,10]);
-- if(scenario==='sample-bom')raw=Buffer.concat([Buffer.from([0xef,0xbb,0xbf]),Buffer.from(raw)]);
-- if(scenario==='source-bom')t.siteBOM=true;
-- if(!omitSample)put(t.file,raw);
-- if(!omitSite)put(t.siteFile,(t.siteBOM?'\uFEFF':'')+JSON.stringify(t.site));
-- if(scenario==='sample-symlink'){renameSync(t.file,t.file+'.target');symlinkSync(t.file+'.target',t.file);}
-- if(scenario==='sample-hardlink')linkSync(t.file,t.file+'.link');
-- if(scenario==='sample-fifo'){unlinkSync(t.file);const r=runRole(t,'make-fifo',{timeout:3000});if(r.error||r.status!==0)throw 1;}
-- if(scenario==='sample-mode')chmodSync(t.file,0);
-- if(scenario==='sample-parent-symlink'){renameSync(dirname(t.file),dirname(t.file)+'-real');symlinkSync(dirname(t.file)+'-real',dirname(t.file));}
-- if(scenario==='binding-missing')unlinkSync(join(t.own,'context.json'));
-- if(scenario==='binding-unknown-context')t.env.GITHUB_SHA='unknown';
-- if(scenario==='source-mode')chmodSync(t.siteFile,0o644);
-- if(scenario==='source-symlink'){renameSync(t.siteFile,t.siteFile+'.target');symlinkSync(t.siteFile+'.target',t.siteFile);}
-- if(scenario==='stale-marker-public-private-spools'||scenario==='uncreatable-spools'){
--  const spool=join(t.temp,'afw-r3-observer');mkdirSync(spool,{mode:0o700});
--  const text='AFW_R3_EXISTING_SAMPLE/1 '+JSON.stringify({...t.sample,private:canary})+'\n';
--  for(const name of ['collection-public.log','collection-private.log']){const p=join(spool,name);put(p,text);spools.push({path:p,bytes:Buffer.from(text)});}
--  if(scenario==='uncreatable-spools'){chmodSync(spool,0o500);const denied=join(t.base,'denied');mkdirSync(denied,{mode:0o000});t.env.TMPDIR=denied;}
-- }
-- if(scenario==='node-startup-failure')rewrite('emitter.mjs','this is invalid '+canary);
-- if(scenario==='node-import-failure')rewrite('emitter.mjs',"import './missing-private-canary-module.mjs';\n");
-- if(scenario==='child-private-stdout'){
--  const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:true,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims),private:canary};
--  const envelope={purpose:'afw.r3-delivery.envelope.v1',sample:t.sample,delivery:d};
--  rewrite('emitter.mjs','process.stdout.write('+JSON.stringify(JSON.stringify(envelope)+'\n')+');');
-- }
-- if(scenario==='child-two-lines')rewrite('emitter.mjs',"process.stdout.write('{}\\n{}\\n');");
-- if(scenario==='child-oversize-stdout')rewrite('emitter.mjs','process.stdout.write('+JSON.stringify(canary)+'.repeat(2048));');
-- if(scenario==='child-oversize-stderr')rewrite('emitter.mjs','process.stderr.write('+JSON.stringify(canary)+'.repeat(2048));');
-- if(scenario==='child-truncated')rewrite('emitter.mjs',"process.stdout.write('{\"purpose\":');");
-- if(scenario==='child-status-failure-stale-marker')rewrite('emitter.mjs','process.stdout.write('+JSON.stringify('AFW_R3_EXISTING_SAMPLE/1 '+canary+'\n')+');process.exitCode=1;');
-- if(scenario==='parent-import-failure')rewrite('boundary.py','import missing_private_canary_import\n');
-- if(scenario==='interpreter-failure')rewrite('delivery-outer.mjs',readFileSync(join(t.own,'delivery-outer.mjs'),'utf8').replace("r3Spawn('/usr/bin/python3'","r3Spawn('/unavailable/private-canary-python'"));
--
-- if(scenario.startsWith('proof-')){
--  const path=join(t.own,'controls-report.json');if(scenario==='proof-missing')unlinkSync(path);
--  else{const r=JSON.parse(readFileSync(path,'utf8'));if(scenario==='proof-false'){r.allPassed=false;r.passed=count-1;r.failed=1;r.unknown=0;r.results=matrix.ordered.map((x,i)=>({id:x.id,result:i===0?'failed':'passed'}));}if(scenario==='proof-context')r.source='3'.repeat(40);if(scenario==='proof-matrixhash')r.matrixSha256='0'.repeat(64);if(scenario==='proof-orderedID')[r.results[0],r.results[1]]=[r.results[1],r.results[0]];writeFileSync(path,JSON.stringify(r),{mode:0o600});}
-- }
-- if(scenario==='binding-bom'){const path=join(t.own,'context.json');writeFileSync(path,Buffer.concat([Buffer.from([0xef,0xbb,0xbf]),readFileSync(path)]),{mode:0o600});}
-- if(['joint-context-executable-substitution','post-admission-context-substitution','current-image-retained'].includes(scenario)){
--  const fake=join(t.own,'substitution.sh'),marker=join(t.own,'substitution-executed.marker'),quote=x=>"'"+x.replaceAll("'","'\"'\"'")+"'";
--  t.executionMarker=marker;const script="#!/bin/sh\nprintf '%s\\n' "+quote(canary)+" > "+quote(marker)+"\nprintf '%s\\n' "+quote(canary)+"\n";put(fake,script);chmodSync(fake,0o700);
--  const ns=statSync(fake,{bigint:true}),bad={...t.binding,nodeExec:fake,nodeIdentity:{dev:String(ns.dev),ino:String(ns.ino),size:String(ns.size),mtimeNs:String(ns.mtimeNs)}};
--  if(scenario==='joint-context-executable-substitution')writeFileSync(join(t.own,'context.json'),JSON.stringify(bad),{mode:0o600});
--  if(scenario==='post-admission-context-substitution')rewrite('delivery-outer.mjs',readFileSync(join(t.own,'delivery-outer.mjs'),'utf8').replace('// AFW_POST_ADMISSION_CONTROL_HOOK',"r3fs.writeFileSync(base+'/afw-r3-delivery/context.json',"+JSON.stringify(JSON.stringify(bad))+",{mode:0o600});r3fs.renameSync(base+'/afw-r3-delivery/substitution.sh',base+'/afw-r3-delivery/replaced.sh');r3fs.writeFileSync(base+'/afw-r3-delivery/substitution.sh',"+JSON.stringify(script)+",{mode:0o700});"));
--  if(scenario==='current-image-retained')rewrite('delivery-outer.mjs',readFileSync(join(t.own,'delivery-outer.mjs'),'utf8').replace('// AFW_POST_ADMISSION_CONTROL_HOOK',"r3fs.renameSync(base+'/afw-r3-delivery/substitution.sh',base+'/afw-r3-delivery/replaced.sh');r3fs.writeFileSync(base+'/afw-r3-delivery/substitution.sh',"+JSON.stringify(script)+",{mode:0o700});"));
-- }
-- if(scenario==='parent-helper-missing')unlinkSync(join(t.own,'boundary.py'));
-- if(scenario==='unset-runner-temp')delete t.env.RUNNER_TEMP;
-- if(scenario==='outer-node-startup-failure'){const text=readFileSync(join(t.own,'lifetime.py'),'utf8'),from='os.execve(3,args,dict(os.environ))';if(text.split(from).length!==2)throw 1;rewrite('lifetime.py',text.replace(from,'os.execve(-1,args,dict(os.environ))'));}
-- if(scenario==='child-impossible-not-observed'){
--  const sample=clone(t.sample);sample.sampleState='not_observed';sample.sample.inputSeeded=true;sample.sample.seedEntries=201;
--  const delivery={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:false,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims)};
--  rewrite('emitter.mjs','process.stdout.write('+JSON.stringify(JSON.stringify({purpose:'afw.r3-delivery.envelope.v1',sample,delivery})+'\n')+');');
-- }
-- if(scenario==='delivered-failed-controls-report'||scenario==='prestart-controls-module'){
--  const r=clone(fixtures.controlsReport);Object.assign(r,ctx);r.allPassed=false;r.mutants[2].actualFailedIds=['A01','B05'];r.mutants[2].result='failed';t.failedReport=r;
--  rewrite('controls.mjs','process.stdout.write('+JSON.stringify(JSON.stringify(r)+'\n')+');process.exitCode=23;');
-- }
-- if(scenario==='harness-total-budget-expired'){
--  const path=join(t.own,'controls.mjs'),text=readFileSync(path,'utf8'),from='\nconst controlDeadline=performance.now()+90000;\n',to='\nconst controlDeadline=performance.now()-1;\n';
--  if(text.split(from).length!==2)throw 1;writeFileSync(path,text.replace(from,to),{mode:0o600});unlinkSync(join(t.own,'controls-report.json'));
--  const r=clone(fixtures.controlsReport);Object.assign(r,ctx);r.allPassed=false;r.passed=0;r.failed=0;r.unknown=matrix.ordered.length;r.results=matrix.ordered.map(x=>({id:x.id,result:'unknown'}));r.mutants=matrix.mutants.map(x=>({id:x.id,expectedFailedIds:x.expectedFailedIds,actualFailedIds:[],result:'unknown'}));t.failedReport=r;
-- }
-- if(scenario==='delivery-authority-rewrite'){
--  t.site.programProof.count=17;writeFileSync(t.siteFile,JSON.stringify(t.site),{mode:0o600});
--  const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'unavailable',sourceQualified:false,collectionComplete:'unknown',sampleObserved:'unknown',reason:'source_invalid',nonclaims:clone(fixtures.controlsReport.nonclaims),private:canary};
--  const program="import json\np='/proc/self/fd/6/delivery-schema.json'\ns=json.load(open(p));s['required'].append('private');s['properties']['private']={'enum':["+JSON.stringify(canary)+"]}\nopen(p,'w').write(json.dumps(s,separators=(',',':')))\nprint("+JSON.stringify('AFW_R3_DELIVERY/1 '+JSON.stringify(d))+")\nraise SystemExit(23)\n";
--  rewrite('boundary.py',program);
-- }
-- if(scenario==='report-matrix-authority-rewrite'){
--  const r=clone(fixtures.controlsReport);Object.assign(r,ctx);[r.results[0],r.results[1]]=[r.results[1],r.results[0]];r.private=canary;
--  const program="import json\np='/proc/self/fd/6/controls-schema.json'\ns=json.load(open(p));s['required'].append('private');s['properties']['private']={'enum':["+JSON.stringify(canary)+"]};open(p,'w').write(json.dumps(s,separators=(',',':')))\np='/proc/self/fd/6/matrix.json'\nm=json.load(open(p));m['ordered'][0],m['ordered'][1]=m['ordered'][1],m['ordered'][0];open(p,'w').write(json.dumps(m,separators=(',',':')))\nprint("+JSON.stringify('AFW_R3_DELIVERY_CONTROLS/1 '+JSON.stringify(r))+")\n";
--  rewrite('controls-boundary.py',program);
-- }
-- if(scenario==='fresh-source-proof-rewrite'){
--  const fresh=clone(t.site);t.site.programProof.count=17;writeFileSync(t.siteFile,JSON.stringify(t.site),{mode:0o600});
--  const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:true,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims)};
--  const wire='AFW_R3_EXISTING_SAMPLE/1 '+JSON.stringify(t.sample)+'\nAFW_R3_DELIVERY/1 '+JSON.stringify(d)+'\n';
--  const program="import os\np=os.environ['RUNNER_TEMP']+'/afw-site/public-result.json'\nopen(p,'w').write("+JSON.stringify(JSON.stringify(fresh))+")\nprint("+JSON.stringify(wire)+",end='')\n";
--  rewrite('boundary.py',program);
-- }
-- if(scenario==='all-authority-files-replaced'){
--  const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:true,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims)};
--  const wire='AFW_R3_EXISTING_SAMPLE/1 '+JSON.stringify(t.sample)+'\nAFW_R3_DELIVERY/1 '+JSON.stringify(d)+'\n';
--  const assets=['site-schema.json','site-map.json','envelope-schema.json','delivery-schema.json','unavailable-schema.json','controls-schema.json','matrix.json','fixtures.json','examples.json','controls-unavailable-example.json'];
--  const program="for name in "+JSON.stringify(assets)+":\n open('/proc/self/fd/6/'+name,'w').write('{}')\nprint("+JSON.stringify(wire)+",end='')\n";
--  rewrite('boundary.py',program);
-- }
-- if(scenario==='binding-array-tree'){
--  const path=join(t.own,'context.json'),bad={...t.binding,sourceTree:[ctx.sourceTree]};writeFileSync(path,JSON.stringify(bad),{mode:0o600});t.executionMarker=join(t.own,'delegation.marker');
--  rewrite('boundary.py',"with open('/proc/self/fd/6/delegation.marker','x') as out:out.write('unexpected')\nraise SystemExit(1)\n");
-- }
-- if(scenario==='pinned-site-schema-lf'){
--  const raw=readFileSync(join(t.own,'site-schema.json'));if(raw.at(-1)!==10||raw.at(-2)===10||Buffer.from(JSON.stringify(JSON.parse(raw))+'\n').compare(raw)!==0)throw 1;
-- }
-- if(scenario==='external-hardlink-cleanup'){
--  const outside=join(sandbox,'external-'+String(external.size)),bytes=Buffer.from('AFW_OWN_EXTERNAL_INODE');
--  const fd=openSync(outside,constants.O_WRONLY|constants.O_CREAT|constants.O_EXCL|constants.O_NOFOLLOW,0o600);external.set(t.instance,{path:outside,fd,bytes,proof:null});
--  writeFileSync(fd,bytes);chmodSync(outside,0o440);linkSync(outside,join(t.cwd,'outside-inode-link'));const st=fstatSync(fd);external.get(t.instance).proof={mode:st.mode,dev:st.dev,ino:st.ino};
-- }
-- if(scenario.startsWith('prestart-')){
--  const shim=scenario.endsWith('-shim'),controls=scenario.includes('-controls-'),name=shim?'lifetime.py':controls?'controls-outer.mjs':'delivery-outer.mjs';
--  t.executionMarker=join(t.own,'prestart-executed.marker');
--  rewrite(name,shim?"import os\nwith open("+JSON.stringify(t.executionMarker)+",'x') as f:f.write('unexpected')\nos.write(1,"+JSON.stringify(canary+'\n')+".encode())\n":'import{writeFileSync}from"node:fs";writeFileSync('+JSON.stringify(t.executionMarker)+',"unexpected",{flag:"wx"});process.stdout.write('+JSON.stringify(canary+'\n')+');\n');
-- }else retargetEntries(t);
-- return {after,spools};
--}
--function cleanupOwn(instance){
-- const base=live.get(instance);if(base===undefined)return;
-- const cleanupDeadline=Math.min(controlDeadline,performance.now()+2000);
-- try{
--  if(performance.now()>cleanupDeadline)throw 'CLEANUP_UNKNOWN';
--  if(!sandbox||realpathSync(sandbox)!==sandbox||resolve(base)!==base||dirname(base)!==sandbox||!/^case-[a-zA-Z0-9]+$/.test(base.slice(sandbox.length+1))||realpathSync(base)!==base)throw 1;
--  let visited=0;
--  function walk(path){
--   if(performance.now()>cleanupDeadline)throw 'CLEANUP_UNKNOWN';
--   if(++visited>256)throw 1;
--   const s=lstatSync(path);if(s.isSymbolicLink())return;if(s.uid!==process.getuid())throw 1;
--   if(s.isDirectory()){
--    // Linux O_PATH obtains the SAME directory object even at mode000; never chmod a regular inode.
--    const fd=openSync(path,0x200000|constants.O_DIRECTORY|constants.O_NOFOLLOW);
--    try{
--     const ds=fstatSync(fd);if(!ds.isDirectory()||ds.uid!==process.getuid()||ds.dev!==s.dev||ds.ino!==s.ino)throw 1;
--     chmodSync('/proc/self/fd/'+fd,0o700);
--     const changed=fstatSync(fd);if(!changed.isDirectory()||changed.uid!==ds.uid||changed.dev!==ds.dev||changed.ino!==ds.ino||(changed.mode&0o777)!==0o700)throw 1;
--     for(const name of readdirSync('/proc/self/fd/'+fd)){if(name==='.'||name==='..'||name.includes('/'))throw 1;walk('/proc/self/fd/'+fd+'/'+name);}
--    }finally{closeSync(fd);}
--   }
--  }
--  walk(base);if(performance.now()>cleanupDeadline)throw 'CLEANUP_UNKNOWN';rmSync(base,{recursive:true,force:false});live.delete(instance);
-- }catch(e){if(e==='CLEANUP_UNKNOWN')report.cleanup.unknownInstances.push(instance);else report.cleanup.failedInstances.push(instance);}
--}
--function counterexample(t,row){
-- const marker=(name,value)=>name+' '+JSON.stringify(value)+'\n',u=clone(fixtures.sample);u.source=ctx.source;u.run=ctx.run;
-- const expected={kind:'pair',reason:'none',sourceQualified:true,collectionComplete:true,sampleObserved:false,status:0},none=clone(u);none.sampleState='not_observed';
-- const known=clone(t.sample);
-- const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:false,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims)};
-- const pair=(s,x)=>marker('AFW_R3_EXISTING_SAMPLE/1',s)+marker('AFW_R3_DELIVERY/1',x);
-- let wrong,wanted=none;
-- if(row.id==='O01'){wrong=pair(u,{...d,sampleObserved:true});}
-- if(row.id==='O02'){wanted=known;expected.sampleObserved=true;wrong=pair(u,{...d,sampleObserved:true});}
-- if(row.id==='O03')wrong=pair(none,{...d,extra:'public'});
-- if(row.id==='O04')wrong=pair(none,d)+'\n';
-- if(row.id==='O05'){expected.kind='delivery';expected.reason='sample_missing';expected.sampleObserved='unknown';wrong=marker('AFW_R3_DELIVERY_UNAVAILABLE/1',{...fb,reason:'parent_unavailable'});}
-- return accepts(wrong,expected.kind==='pair'?0:1,{...expected,status:expected.kind==='pair'?0:1},ctx,wanted,null,fb,controlsFallback)?'failed':'passed';
--}
--function executeOne(row,mutant,instance){
-- const t=build(instance);let staged;
-- const rewrite=(name,transform)=>{const path=join(t.own,name),text=readFileSync(path,'utf8'),next=transform(text);if(next===text)throw 1;writeFileSync(path,next,{mode:0o600});};
-- if(mutant==='M_RAW')writeFileSync(join(t.own,'raw-sample.mjs'),readFileSync(join(t.own,'normalized-sample.mjs')),{mode:0o600});
-- if(mutant==='M_PROVENANCE'){
--  const needle="need(['mapVerified','worldBeforeVerified','nativeBeforeVerified','worldAfterVerified','nativeAfterVerified','originalBodiesUnchanged'].every(k=>s[k]===true),'all-source-proofs');";
--  rewrite('source-provenance.mjs',x=>x.replace(needle,'/* mutant omitted strong after proof */'));rewrite('delivery-outer.mjs',x=>x.replace(needle,'/* mutant omitted strong after proof */'));
-- }
-- if(mutant==='M_OUTPUT'){
--  rewrite('boundary.py',x=>x.replace(' shape(envelope,schema)',' # mutant omitted closed output schema'));
--  rewrite('delivery-outer.mjs',x=>x.replace("shape(d,authority['delivery-schema.json']);","/* mutant omitted final delivery schema */"));
-- }
-- if(mutant==='M_ASSOC')rewrite('delivery-outer.mjs',x=>x.replace('admitSample(JSON.stringify(s),{...ctx,sourceQualified:true});','/* mutant omitted normalized semantic associations */'));
-- retargetEntries(t);
-- staged=change(t,row.scenario);
-- if(row.expected.kind==='lifetime'){
--  const measured=runRole(t,'life-'+row.expected.case,{timeout:5000,buffer:8192});
--  if(measured.error)return 'unknown';
++  const measured=spawnSync('/usr/bin/python3',['-I','-S','-',role],{input:pristineLauncher,cwd:t.cwd,env:t.env,stdio:['pipe',full===undefined?'pipe':full,'pipe',3,creator,'ignore',helper,helper],encoding:'utf8',timeout,killSignal:'SIGKILL',maxBuffer:buffer});
++  if(measured.error||measured.signal||measured.status===null)custodyUnknown=true;return measured;
+  }finally{if(creator!==undefined)closeSync(creator);if(helper!==undefined)closeSync(helper);}
+ }
+ function change(t,scenario){
+  let raw=null,omitSample=false,omitSite=false,after=()=>{},spools=[];
+  const rewrite=(name,content)=>writeFileSync(join(t.own,name),content,{mode:0o600});
+  if(scenario==='observed-unknown'||scenario==='not-observed'){t.sample=clone(fixtures.sample);t.sample.source=ctx.source;t.sample.run=ctx.run;if(scenario==='not-observed')t.sample.sampleState='not_observed';}
+  if(scenario==='partial-full-provenance'){t.site.stage='unknown';t.site.collectionComplete=false;t.site.readonly.valid=false;t.site.readonly.state='unknown';t.site.readonly.summary=null;}
+  if(scenario==='sample-missing')omitSample=true;
+@@ -261,17 +265,17 @@
+   rewrite('delivery-outer.mjs',x=>x.replace("shape(d,authority['delivery-schema.json']);","/* mutant omitted final delivery schema */"));
+  }
+  if(mutant==='M_ASSOC')rewrite('delivery-outer.mjs',x=>x.replace('admitSample(JSON.stringify(s),{...ctx,sourceQualified:true});','/* mutant omitted normalized semantic associations */'));
+  retargetEntries(t);
+  staged=change(t,row.scenario);
+  if(row.expected.kind==='lifetime'){
+   const measured=runRole(t,'life-'+row.expected.case,{timeout:5000,buffer:8192});
+   if(measured.error)return 'unknown';
 -  try{const v=JSON.parse(measured.stdout);if(measured.stderr!==''||measured.stdout!==JSON.stringify(v)+'\n'||JSON.stringify(Object.keys(v))!==JSON.stringify(['purpose','case','result'])||v.purpose!=='afw.r3-lifetime.control.v1'||v.case!==row.expected.case||!['passed','failed','unknown'].includes(v.result)||measured.status!==(v.result==='passed'?0:1))return 'failed';return v.result;}catch{return 'unknown';}
-- }
-- if(row.expected.kind==='oracle-reject')return counterexample(t,row);
-- if(row.expected.kind.startsWith('witness-')){
--  if(row.expected.kind==='witness-clean')unlinkSync(t.file);
--  const r=runRole(t,'node-witness',{timeout:3000,buffer:8192});
--  return !r.error&&r.status===row.expected.status&&r.stdout===''&&r.stderr===''?'passed':r.error?'unknown':'failed';
-- }
-- const role=row.scenario==='cwd-failure'?'case-missing-cwd':['controls-failed','controls-exhausted'].includes(row.expected.kind)||row.expected.entry==='controls'?'case-controls':'case-delivery';
-- if(row.scenario==='cwd-failure'){const gone=join(t.base,'gone');mkdirSync(gone,{mode:0o700});if(readdirSync(gone).length!==0)throw 1;t.cwd=gone;}
-- const r=runRole(t,role);
-- if(r.error)return 'unknown';
-- let ok=r.stderr===''&&accepts(r.stdout,r.status,row.expected,ctx,t.sample,t.failedReport,fb,controlsFallback);
-- if(row.expected.kind==='fallback'&&row.expected.entry==='controls')ok=ok&&!accepts('AFW_R3_DELIVERY_UNAVAILABLE/1 '+JSON.stringify({...fb,reason:row.expected.reason})+'\n',r.status,row.expected,ctx,t.sample,t.failedReport,fb,controlsFallback);
-- if(row.scenario==='harness-total-budget-expired')ok=ok&&readdirSync(t.temp).every(name=>!name.startsWith('afw-r3-delivery-controls-r1-'));
-- if(row.scenario==='uncreatable-spools'){
--  let full;try{full=openSync('/dev/full','w');const denied=runRole(t,role,{full,buffer:8192});ok=ok&&!denied.error&&denied.status!==0&&denied.stderr.length===0;}finally{if(full!==undefined)closeSync(full);}
-- }
-- if(t.executionMarker){try{lstatSync(t.executionMarker);ok=false;}catch(error){if(error?.code!=='ENOENT')throw error;}}
-- for(const spool of staged.spools)ok=ok&&readFileSync(spool.path).equals(spool.bytes);
-- return ok?'passed':'failed';
--}
--function execute(row,mutant=null){
++  try{const v=JSON.parse(measured.stdout);if(measured.stderr!==''||measured.stdout!==JSON.stringify(v)+'\n'||JSON.stringify(Object.keys(v))!==JSON.stringify(['purpose','case','result'])||v.purpose!=='afw.r3-lifetime.control.v1'||v.case!==row.expected.case||!['passed','failed','unknown'].includes(v.result)||measured.status!==(v.result==='passed'?0:1))return 'failed';if(v.result==='unknown')custodyUnknown=true;return v.result;}catch{custodyUnknown=true;return 'unknown';}
+  }
+  if(row.expected.kind==='oracle-reject')return counterexample(t,row);
+  if(row.expected.kind.startsWith('witness-')){
+   if(row.expected.kind==='witness-clean')unlinkSync(t.file);
+   const r=runRole(t,'node-witness',{timeout:3000,buffer:8192});
+   return !r.error&&r.status===row.expected.status&&r.stdout===''&&r.stderr===''?'passed':r.error?'unknown':'failed';
+  }
+  const role=row.scenario==='cwd-failure'?'case-missing-cwd':['controls-failed','controls-exhausted'].includes(row.expected.kind)||row.expected.entry==='controls'?'case-controls':'case-delivery';
+@@ -284,35 +288,33 @@
+  if(row.scenario==='uncreatable-spools'){
+   let full;try{full=openSync('/dev/full','w');const denied=runRole(t,role,{full,buffer:8192});ok=ok&&!denied.error&&denied.status!==0&&denied.stderr.length===0;}finally{if(full!==undefined)closeSync(full);}
+  }
+  if(t.executionMarker){try{lstatSync(t.executionMarker);ok=false;}catch(error){if(error?.code!=='ENOENT')throw error;}}
+  for(const spool of staged.spools)ok=ok&&readFileSync(spool.path).equals(spool.bytes);
+  return ok?'passed':'failed';
+ }
+ function execute(row,mutant=null){
 - const instance=(mutant??'baseline')+':'+row.id;
 - let outcome='unknown';try{outcome=executeOne(row,mutant,instance);}catch{}finally{
 -  cleanupOwn(instance);const proof=external.get(instance);
 -  if(proof){try{if(report.cleanup.unknownInstances.includes(instance))throw 'CLEANUP_UNKNOWN';const own=fstatSync(proof.fd),st=lstatSync(proof.path);if(!st.isFile()||st.uid!==process.getuid()||st.nlink!==1||own.dev!==st.dev||own.ino!==st.ino||(proof.proof&&(st.mode!==proof.proof.mode||st.dev!==proof.proof.dev||st.ino!==proof.proof.ino||!readFileSync(proof.path).equals(proof.bytes))))throw 1;unlinkSync(proof.path);external.delete(instance);}catch(error){if(error!=='CLEANUP_UNKNOWN'&&!report.cleanup.failedInstances.includes(instance))report.cleanup.failedInstances.push(instance);}finally{try{closeSync(proof.fd);}catch{if(!report.cleanup.unknownInstances.includes(instance)&&!report.cleanup.failedInstances.includes(instance))report.cleanup.failedInstances.push(instance);}}}
-- }
-- return outcome;
--}
--try{
-- const image=fstatSync(3),current=statSync('/proc/self/exe');
-- if(process.versions.node!=='22.23.4'||c.source!==e.GITHUB_SHA||c.run!==e.GITHUB_RUN_ID||image.dev!==current.dev||image.ino!==current.ino)throw 1;
-- if(createHash('sha256').update(readFileSync(join(home,'matrix.json'))).digest('hex')!==report.matrixSha256)throw 1;
++ if(custodyUnknown){halt='custody';return;}if(!admitCase()){halt='inner';return;}
++ lastAdmissionMs=Math.ceil(performance.now()-controlStart);const active=ordinal++;trace('E'+String(active).padStart(3,'0'));
++ const instance=(mutant??'baseline')+':'+row.id;let caught=0;
++ let outcome='unknown';try{outcome=executeOne(row,mutant,instance);}catch{caught=1;}finally{
++  if(custodyUnknown)report.cleanup.unknownInstances.push(instance);else cleanupOwn(instance);const proof=external.get(instance);
++  if(proof&&!custodyUnknown){try{if(report.cleanup.unknownInstances.includes(instance))throw 'CLEANUP_UNKNOWN';const own=fstatSync(proof.fd),st=lstatSync(proof.path);if(!st.isFile()||st.uid!==process.getuid()||st.nlink!==1||own.dev!==st.dev||own.ino!==st.ino||(proof.proof&&(st.mode!==proof.proof.mode||st.dev!==proof.proof.dev||st.ino!==proof.proof.ino||!readFileSync(proof.path).equals(proof.bytes))))throw 1;unlinkSync(proof.path);external.delete(instance);}catch(error){if(error!=='CLEANUP_UNKNOWN'&&!report.cleanup.failedInstances.includes(instance))report.cleanup.failedInstances.push(instance);}finally{try{closeSync(proof.fd);}catch{if(!report.cleanup.unknownInstances.includes(instance)&&!report.cleanup.failedInstances.includes(instance))report.cleanup.failedInstances.push(instance);}}}
+  }
++ const cl=report.cleanup.unknownInstances.includes(instance)?'U':report.cleanup.failedInstances.includes(instance)?'F':'C';
++ trace('R'+String(active).padStart(3,'0')+({passed:'P',failed:'F',unknown:'U'}[outcome]??'U')+cl+caught);
++ if(custodyUnknown||cl==='U')halt='custody';else if(caught)halt='exception';else if(performance.now()>controlDeadline)halt='late';
+  return outcome;
+ }
+ try{
+  const image=fstatSync(3),current=statSync('/proc/self/exe');
+  if(process.versions.node!=='22.23.4'||c.source!==e.GITHUB_SHA||c.run!==e.GITHUB_RUN_ID||image.dev!==current.dev||image.ino!==current.ino)throw 1;
+  if(createHash('sha256').update(readFileSync(join(home,'matrix.json'))).digest('hex')!==report.matrixSha256)throw 1;
 - for(let i=0;i<matrix.ordered.length;i++){if(!admitCase())break;report.results[i].result=execute(matrix.ordered[i]);}
 - for(let i=0;i<matrix.mutants.length;i++){
 -  if(!admitCase())break;
 -  const m=matrix.mutants[i],failed=[];let unknown=false;
 -  for(const row of matrix.ordered){if(!admitCase()){unknown=true;break;}const r=execute(row,m.id);if(r==='failed')failed.push(row.id);else if(r==='unknown')unknown=true;}
 -  report.mutants[i].actualFailedIds=failed;report.mutants[i].result=unknown?'unknown':JSON.stringify(failed)===JSON.stringify(m.expectedFailedIds)?'passed':'failed';
-- }
++ for(let group=0;group<5&&!halt;group++){
++  if(group&&!admitCase()){halt='outer';break;}
++  for(const row of matrix.ordered){execute(row,group?matrix.mutants[group-1].id:null);if(halt)break;}
+  }
 -}catch{}finally{
 - report.cleanup.complete=true;
 - report.passed=report.results.filter(x=>x.result==='passed').length;report.failed=report.results.filter(x=>x.result==='failed').length;report.unknown=report.results.filter(x=>x.result==='unknown').length;
@@ -474,320 +293,6 @@ Changedartifactpins:
 - try{put(join(home,'controls-report.json'),text);process.stdout.write(text+'\n');}catch{process.exitCode=1;}
 - if(!report.allPassed)process.exitCode=23;
 -}
-+import {readFileSync,writeFileSync,writeSync,mkdirSync,mkdtempSync,chmodSync,unlinkSync,renameSync,symlinkSync,linkSync,rmSync,realpathSync,openSync,closeSync,statSync,fstatSync,lstatSync,readdirSync,constants} from 'node:fs';
-+import {join,dirname,resolve} from 'node:path';
-+import {spawnSync} from 'node:child_process';
-+import {createHash} from 'node:crypto';
-+import {performance} from 'node:perf_hooks';
-+import {gzipSync} from 'node:zlib';
-+function entryPin(bytes){const zipped=gzipSync(bytes,{level:9,mtime:0}),hash=b=>createHash('sha256').update(b).digest('hex');return{bytes:bytes.length,sha256:hash(bytes),zipBytes:zipped.length,zipSha256:hash(zipped),data:zipped.toString('base64'),cap:32768};}
-+const pristinePins={'lifetime.py':undefined,'delivery-outer.mjs':undefined,'controls-outer.mjs':undefined};
-+function selectPin(name,bytes){
-+ if(bytes.equals(pristine[name])){return pristinePins[name]??=JSON.stringify(entryPin(bytes));}
-+ return JSON.stringify(entryPin(bytes));
-+}
-+function retargetEntries(t){
-+ const kernel=readFileSync(join(t.own,'lifetime.py'));
-+ let kernelPin,deliveryBytes,deliveryPin;
-+ for(const [entry,module]of[['delivery-entry.sh','delivery-outer.mjs'],['controls-entry.sh','controls-outer.mjs'],['missing-cwd-entry.sh','delivery-outer.mjs']]){
-+  let text=pristine[entry].toString('utf8');
-+  for(const[key,name,bytes]of[['_r3_kernel','lifetime.py',kernel],['_r3_module',module,readFileSync(join(t.own,module))]]){
-+   const lines=text.split('\n').filter(x=>x.startsWith(key+'='));if(lines.length!==1)throw 1;
-+   const serialized=key==='_r3_kernel'?(kernelPin??=selectPin(name,bytes)):
-+    module==='delivery-outer.mjs'&&deliveryBytes!==undefined&&bytes.equals(deliveryBytes)?deliveryPin:selectPin(name,bytes);
-+   if(key==='_r3_module'&&module==='delivery-outer.mjs'){deliveryBytes=bytes;deliveryPin=serialized;}
-+   text=text.replace(lines[0],key+'='+serialized);
-+  }
-+  writeFileSync(join(t.own,entry),text,{mode:0o600});
-+ }
-+}
-+
-+import {jsonFixed} from 'file:///proc/self/fd/6/io.mjs';
-+import {accepts} from 'file:///proc/self/fd/6/oracle.mjs';
-+const controlDeadline=performance.now()+240000,controlStart=controlDeadline-240000;
-+const admitCase=()=>performance.now()+20000<=controlDeadline;
-+const e=process.env,home=join(e.RUNNER_TEMP,'afw-r3-delivery'),c=jsonFixed(e.RUNNER_TEMP,['afw-r3-delivery','context.json'],2048);
-+const matrix=JSON.parse(readFileSync(join(home,'matrix.json'),'utf8')),fixtures=JSON.parse(readFileSync(join(home,'fixtures.json'),'utf8'));
-+const clone=x=>JSON.parse(JSON.stringify(x)),canary=matrix.privateCanary,names=["io.mjs","emitter.mjs","source-provenance.mjs","raw-sample.mjs","site-schema.json","site-map.json","envelope-schema.json","boundary.py","delivery-schema.json","unavailable-schema.json","controls-schema.json","matrix.json","shape.mjs","control-proof.mjs","site-receiver.mjs","normalized-sample.mjs","witness.mjs","fixtures.json","controls.mjs","examples.json","controls-boundary.py","controls-unavailable-example.json","outer.mjs","delivery-entry.sh","controls-entry.sh","oracle.mjs","lifetime.py","delivery-outer.mjs","controls-outer.mjs","missing-cwd-entry.sh","race-creator.mjs","lifetime-controls.py","authority-anchor.json"],fb={"purpose":"afw.r3-delivery.unavailable.v1","reason":"outer_startup_unavailable","source":"unknown","sourceTree":"unknown","run":"unknown","attempt":"unknown","job":"unknown","node":"unknown","controls":"unknown","availability":"unavailable","sourceQualified":false,"collectionComplete":"unknown","sampleObserved":"unknown","nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}};
-+const controlsFallback=JSON.parse(pristineUnavailable());
-+function pristineUnavailable(){return readFileSync(join(home,'controls-unavailable-example.json'),'utf8');}
-+const ctx={source:c.source,sourceTree:c.sourceTree,run:c.run,attempt:1,job:'readonly',node:'22.23.4'};
-+const count=matrix.ordered.length;
-+const report={matrixSha256:'0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e',cleanup:{failedInstances:[],unknownInstances:[]}};
-+let custodyUnknown=false,ordinal=0,lastAdmissionMs=null,halt=null;
-+const trace=s=>{const b=Buffer.from(s+'\n','ascii');if(writeSync(1,b)!==b.length)throw 1;};
-+trace('H '+JSON.stringify({purpose:'afw.q1.serial-source-lab.trace.v2',...ctx,matrixSha256:report.matrixSha256,policySha256:'91277fb4b570ce9f18d49e8c16fe6d48b556b8bb89781de81bcde97cae8b31ac'}));
-+const pristine=Object.freeze(Object.fromEntries(names.map(name=>[name,readFileSync(join(home,name))])));
-+const launcherEntry=pristine['delivery-entry.sh'].toString('utf8'),launcherBegin="<<'AFW_R3_LITERAL_PY'\n",launcherEnd='\nAFW_R3_LITERAL_PY\n';
-+if(launcherEntry.split(launcherBegin).length!==2||launcherEntry.split(launcherEnd).length!==2)throw 1;
-+const pristineLauncher=launcherEntry.split(launcherBegin)[1].split(launcherEnd)[0]+'\n';
-+let sandbox;const live=new Map(),external=new Map();
-+const put=(p,s)=>writeFileSync(p,s,{mode:0o600,flag:'wx'});
-+function build(instance){
-+ if(!sandbox){sandbox=mkdtempSync(join(e.RUNNER_TEMP,'afw-r3-delivery-controls-r1-'));chmodSync(sandbox,0o700);}
-+ const base=mkdtempSync(join(sandbox,'case-'));live.set(instance,base);
-+ const cwd=join(base,'work'),temp=join(base,'temp'),own=join(temp,'afw-r3-delivery'),siteRoot=join(temp,'afw-site');
-+ mkdirSync(cwd,{mode:0o700});mkdirSync(own,{recursive:true,mode:0o700});mkdirSync(siteRoot,{mode:0o700});
-+ for(const name of names)put(join(own,name),pristine[name]);
-+ const binding={purpose:'afw.r3-delivery.binding.v1',...ctx};put(join(own,'context.json'),JSON.stringify(binding));
-+ const proof=clone(fixtures.controlsReport);Object.assign(proof,ctx);put(join(own,'controls-report.json'),JSON.stringify(proof));
-+ const sample=clone(fixtures.sample);Object.assign(sample,{source:ctx.source,run:ctx.run});sample.sample.inputSeeded=true;sample.sample.seedEntries=201;sample.sample.lists=1;sample.sample.gets=0;sample.sample.nativeInvoked=1;
-+ const site=clone(fixtures.site);Object.assign(site,{source:ctx.source,sourceTree:ctx.sourceTree,run:ctx.run});
-+ const sampleDir=join(cwd,'output','finite-budget','readonly','R3');mkdirSync(sampleDir,{recursive:true,mode:0o700});
-+ const file=join(sampleDir,'r3-existing-sample.json'),siteFile=join(siteRoot,'public-result.json');
-+ return{base,cwd,temp,own,file,siteFile,sample,site,binding,instance,env:{PATH:e.PATH,HOME:e.HOME,CI:'true',LANG:'C.UTF-8',TZ:'UTC',RUNNER_TEMP:temp,GITHUB_REPOSITORY:'tokenizartinfo-ops/agent-friendly-web',GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/feat/finite-native-cleanup-20261101',GITHUB_SHA:ctx.source,GITHUB_RUN_ID:ctx.run,GITHUB_RUN_ATTEMPT:'1',GITHUB_JOB:'readonly'}};
-+}
-+function runRole(t,role,{timeout=5000,full,buffer=32768}={}){
-+ let creator,helper;
-+ try{
-+  creator=openSync('/proc/thread-self',constants.O_RDONLY|constants.O_DIRECTORY);helper=openSync(t.own,constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW);
-+  const measured=spawnSync('/usr/bin/python3',['-I','-S','-',role],{input:pristineLauncher,cwd:t.cwd,env:t.env,stdio:['pipe',full===undefined?'pipe':full,'pipe',3,creator,'ignore',helper,helper],encoding:'utf8',timeout,killSignal:'SIGKILL',maxBuffer:buffer});
-+  if(measured.error||measured.signal||measured.status===null)custodyUnknown=true;return measured;
-+ }finally{if(creator!==undefined)closeSync(creator);if(helper!==undefined)closeSync(helper);}
-+}
-+function change(t,scenario){
-+ let raw=null,omitSample=false,omitSite=false,after=()=>{},spools=[];
-+ const rewrite=(name,content)=>writeFileSync(join(t.own,name),content,{mode:0o600});
-+ if(scenario==='observed-unknown'||scenario==='not-observed'){t.sample=clone(fixtures.sample);t.sample.source=ctx.source;t.sample.run=ctx.run;if(scenario==='not-observed')t.sample.sampleState='not_observed';}
-+ if(scenario==='partial-full-provenance'){t.site.stage='unknown';t.site.collectionComplete=false;t.site.readonly.valid=false;t.site.readonly.state='unknown';t.site.readonly.summary=null;}
-+ if(scenario==='sample-missing')omitSample=true;
-+ if(scenario==='sample-private-field')t.sample.private=canary;
-+ if(scenario==='sample-source')t.sample.source='3333333333333333333333333333333333333333';
-+ if(scenario==='sample-run')t.sample.run='99999';
-+ if(scenario==='sample-attempt')t.sample.attempt=2;
-+ if(scenario==='sample-case')t.sample.case='R2';
-+ if(scenario==='sample-counter-bound')t.sample.sample.nativeInvoked=203;
-+ if(scenario==='source-missing')omitSite=true;
-+ if(scenario==='source-private-field')t.site.private=canary;
-+ if(scenario==='source-context')t.site.run='99999';
-+ if(scenario==='source-tree')t.site.sourceTree='3333333333333333333333333333333333333333';
-+ if(scenario==='source-node')t.site.node='22.0.0';
-+ if(scenario==='source-partial-no-after'){t.site.stage='unknown';t.site.collectionComplete=false;t.site.readonly=null;t.site.usableLocationCount=0;t.site.sourceProof.worldAfterVerified=false;}
-+ for(const k of ['mapVerified','worldBeforeVerified','nativeBeforeVerified','worldAfterVerified','nativeAfterVerified','originalBodiesUnchanged'])if(scenario==='source-'+k)t.site.sourceProof[k]=false;
-+ const prog={'verified':'verified','count':'count','set':'setSha256','expanded':'payloadExpandedSha256','core':'coreGitVerified','prefix':'prefixVerified'};
-+ for(const [suffix,key]of Object.entries(prog))if(scenario==='source-program-'+suffix)t.site.programProof[key]=key==='count'?17:['setSha256','payloadExpandedSha256'].includes(key)?'0'.repeat(64):false;
-+ if(scenario==='source-controls-passed')t.site.controls.passed=false;
-+ if(scenario==='source-controls-count')t.site.controls.count=5;
-+ if(scenario==='source-controls-shape')t.site.controls.usableShape=false;
-+ if(scenario==='source-pure')t.site.pure.passed=false;
-+ if(scenario==='source-profile')t.site.profile.passed=false;
-+ if(scenario==='source-cli-not-started'){t.site.businessCommand={started:false,ended:false,exitCode:null,signal:'none'};t.site.readonly=null;t.site.stage='hold';t.site.collectionComplete=false;t.site.usableLocationCount=0;}
-+ if(scenario==='source-cli-not-ended'){t.site.businessCommand.ended=false;t.site.businessCommand.exitCode=null;t.site.businessCommand.signal='unknown';t.site.stage='unknown';t.site.collectionComplete=false;t.site.readonly=null;t.site.usableLocationCount=0;}
-+ raw=JSON.stringify(t.sample)+'\n';
-+ if(scenario==='sample-missing-lf')raw=raw.slice(0,-1);
-+ if(scenario==='sample-extra-lf')raw+='\n';
-+ if(scenario==='sample-noncanonical')raw=raw.replace('{"purpose"', '{ "purpose"');
-+ if(scenario==='sample-overcap')raw=' '.repeat(4097);
-+ if(scenario==='sample-duplicate-keys')raw=raw.replace('{"purpose"', '{"attempt":1,"purpose"');
-+ if(scenario==='sample-invalid-utf8')raw=Buffer.from([0xff,10]);
-+ if(scenario==='sample-bom')raw=Buffer.concat([Buffer.from([0xef,0xbb,0xbf]),Buffer.from(raw)]);
-+ if(scenario==='source-bom')t.siteBOM=true;
-+ if(!omitSample)put(t.file,raw);
-+ if(!omitSite)put(t.siteFile,(t.siteBOM?'\uFEFF':'')+JSON.stringify(t.site));
-+ if(scenario==='sample-symlink'){renameSync(t.file,t.file+'.target');symlinkSync(t.file+'.target',t.file);}
-+ if(scenario==='sample-hardlink')linkSync(t.file,t.file+'.link');
-+ if(scenario==='sample-fifo'){unlinkSync(t.file);const r=runRole(t,'make-fifo',{timeout:3000});if(r.error||r.status!==0)throw 1;}
-+ if(scenario==='sample-mode')chmodSync(t.file,0);
-+ if(scenario==='sample-parent-symlink'){renameSync(dirname(t.file),dirname(t.file)+'-real');symlinkSync(dirname(t.file)+'-real',dirname(t.file));}
-+ if(scenario==='binding-missing')unlinkSync(join(t.own,'context.json'));
-+ if(scenario==='binding-unknown-context')t.env.GITHUB_SHA='unknown';
-+ if(scenario==='source-mode')chmodSync(t.siteFile,0o644);
-+ if(scenario==='source-symlink'){renameSync(t.siteFile,t.siteFile+'.target');symlinkSync(t.siteFile+'.target',t.siteFile);}
-+ if(scenario==='stale-marker-public-private-spools'||scenario==='uncreatable-spools'){
-+  const spool=join(t.temp,'afw-r3-observer');mkdirSync(spool,{mode:0o700});
-+  const text='AFW_R3_EXISTING_SAMPLE/1 '+JSON.stringify({...t.sample,private:canary})+'\n';
-+  for(const name of ['collection-public.log','collection-private.log']){const p=join(spool,name);put(p,text);spools.push({path:p,bytes:Buffer.from(text)});}
-+  if(scenario==='uncreatable-spools'){chmodSync(spool,0o500);const denied=join(t.base,'denied');mkdirSync(denied,{mode:0o000});t.env.TMPDIR=denied;}
-+ }
-+ if(scenario==='node-startup-failure')rewrite('emitter.mjs','this is invalid '+canary);
-+ if(scenario==='node-import-failure')rewrite('emitter.mjs',"import './missing-private-canary-module.mjs';\n");
-+ if(scenario==='child-private-stdout'){
-+  const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:true,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims),private:canary};
-+  const envelope={purpose:'afw.r3-delivery.envelope.v1',sample:t.sample,delivery:d};
-+  rewrite('emitter.mjs','process.stdout.write('+JSON.stringify(JSON.stringify(envelope)+'\n')+');');
-+ }
-+ if(scenario==='child-two-lines')rewrite('emitter.mjs',"process.stdout.write('{}\\n{}\\n');");
-+ if(scenario==='child-oversize-stdout')rewrite('emitter.mjs','process.stdout.write('+JSON.stringify(canary)+'.repeat(2048));');
-+ if(scenario==='child-oversize-stderr')rewrite('emitter.mjs','process.stderr.write('+JSON.stringify(canary)+'.repeat(2048));');
-+ if(scenario==='child-truncated')rewrite('emitter.mjs',"process.stdout.write('{\"purpose\":');");
-+ if(scenario==='child-status-failure-stale-marker')rewrite('emitter.mjs','process.stdout.write('+JSON.stringify('AFW_R3_EXISTING_SAMPLE/1 '+canary+'\n')+');process.exitCode=1;');
-+ if(scenario==='parent-import-failure')rewrite('boundary.py','import missing_private_canary_import\n');
-+ if(scenario==='interpreter-failure')rewrite('delivery-outer.mjs',readFileSync(join(t.own,'delivery-outer.mjs'),'utf8').replace("r3Spawn('/usr/bin/python3'","r3Spawn('/unavailable/private-canary-python'"));
-+
-+ if(scenario.startsWith('proof-')){
-+  const path=join(t.own,'controls-report.json');if(scenario==='proof-missing')unlinkSync(path);
-+  else{const r=JSON.parse(readFileSync(path,'utf8'));if(scenario==='proof-false'){r.allPassed=false;r.passed=count-1;r.failed=1;r.unknown=0;r.results=matrix.ordered.map((x,i)=>({id:x.id,result:i===0?'failed':'passed'}));}if(scenario==='proof-context')r.source='3'.repeat(40);if(scenario==='proof-matrixhash')r.matrixSha256='0'.repeat(64);if(scenario==='proof-orderedID')[r.results[0],r.results[1]]=[r.results[1],r.results[0]];writeFileSync(path,JSON.stringify(r),{mode:0o600});}
-+ }
-+ if(scenario==='binding-bom'){const path=join(t.own,'context.json');writeFileSync(path,Buffer.concat([Buffer.from([0xef,0xbb,0xbf]),readFileSync(path)]),{mode:0o600});}
-+ if(['joint-context-executable-substitution','post-admission-context-substitution','current-image-retained'].includes(scenario)){
-+  const fake=join(t.own,'substitution.sh'),marker=join(t.own,'substitution-executed.marker'),quote=x=>"'"+x.replaceAll("'","'\"'\"'")+"'";
-+  t.executionMarker=marker;const script="#!/bin/sh\nprintf '%s\\n' "+quote(canary)+" > "+quote(marker)+"\nprintf '%s\\n' "+quote(canary)+"\n";put(fake,script);chmodSync(fake,0o700);
-+  const ns=statSync(fake,{bigint:true}),bad={...t.binding,nodeExec:fake,nodeIdentity:{dev:String(ns.dev),ino:String(ns.ino),size:String(ns.size),mtimeNs:String(ns.mtimeNs)}};
-+  if(scenario==='joint-context-executable-substitution')writeFileSync(join(t.own,'context.json'),JSON.stringify(bad),{mode:0o600});
-+  if(scenario==='post-admission-context-substitution')rewrite('delivery-outer.mjs',readFileSync(join(t.own,'delivery-outer.mjs'),'utf8').replace('// AFW_POST_ADMISSION_CONTROL_HOOK',"r3fs.writeFileSync(base+'/afw-r3-delivery/context.json',"+JSON.stringify(JSON.stringify(bad))+",{mode:0o600});r3fs.renameSync(base+'/afw-r3-delivery/substitution.sh',base+'/afw-r3-delivery/replaced.sh');r3fs.writeFileSync(base+'/afw-r3-delivery/substitution.sh',"+JSON.stringify(script)+",{mode:0o700});"));
-+  if(scenario==='current-image-retained')rewrite('delivery-outer.mjs',readFileSync(join(t.own,'delivery-outer.mjs'),'utf8').replace('// AFW_POST_ADMISSION_CONTROL_HOOK',"r3fs.renameSync(base+'/afw-r3-delivery/substitution.sh',base+'/afw-r3-delivery/replaced.sh');r3fs.writeFileSync(base+'/afw-r3-delivery/substitution.sh',"+JSON.stringify(script)+",{mode:0o700});"));
-+ }
-+ if(scenario==='parent-helper-missing')unlinkSync(join(t.own,'boundary.py'));
-+ if(scenario==='unset-runner-temp')delete t.env.RUNNER_TEMP;
-+ if(scenario==='outer-node-startup-failure'){const text=readFileSync(join(t.own,'lifetime.py'),'utf8'),from='os.execve(3,args,dict(os.environ))';if(text.split(from).length!==2)throw 1;rewrite('lifetime.py',text.replace(from,'os.execve(-1,args,dict(os.environ))'));}
-+ if(scenario==='child-impossible-not-observed'){
-+  const sample=clone(t.sample);sample.sampleState='not_observed';sample.sample.inputSeeded=true;sample.sample.seedEntries=201;
-+  const delivery={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:false,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims)};
-+  rewrite('emitter.mjs','process.stdout.write('+JSON.stringify(JSON.stringify({purpose:'afw.r3-delivery.envelope.v1',sample,delivery})+'\n')+');');
-+ }
-+ if(scenario==='delivered-failed-controls-report'||scenario==='prestart-controls-module'){
-+  const r=clone(fixtures.controlsReport);Object.assign(r,ctx);r.allPassed=false;r.mutants[2].actualFailedIds=['A01','B05'];r.mutants[2].result='failed';t.failedReport=r;
-+  rewrite('controls.mjs','process.stdout.write('+JSON.stringify(JSON.stringify(r)+'\n')+');process.exitCode=23;');
-+ }
-+ if(scenario==='harness-total-budget-expired'){
-+  const path=join(t.own,'controls.mjs'),text=readFileSync(path,'utf8'),from='\nconst controlDeadline=performance.now()+90000;\n',to='\nconst controlDeadline=performance.now()-1;\n';
-+  if(text.split(from).length!==2)throw 1;writeFileSync(path,text.replace(from,to),{mode:0o600});unlinkSync(join(t.own,'controls-report.json'));
-+  const r=clone(fixtures.controlsReport);Object.assign(r,ctx);r.allPassed=false;r.passed=0;r.failed=0;r.unknown=matrix.ordered.length;r.results=matrix.ordered.map(x=>({id:x.id,result:'unknown'}));r.mutants=matrix.mutants.map(x=>({id:x.id,expectedFailedIds:x.expectedFailedIds,actualFailedIds:[],result:'unknown'}));t.failedReport=r;
-+ }
-+ if(scenario==='delivery-authority-rewrite'){
-+  t.site.programProof.count=17;writeFileSync(t.siteFile,JSON.stringify(t.site),{mode:0o600});
-+  const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'unavailable',sourceQualified:false,collectionComplete:'unknown',sampleObserved:'unknown',reason:'source_invalid',nonclaims:clone(fixtures.controlsReport.nonclaims),private:canary};
-+  const program="import json\np='/proc/self/fd/6/delivery-schema.json'\ns=json.load(open(p));s['required'].append('private');s['properties']['private']={'enum':["+JSON.stringify(canary)+"]}\nopen(p,'w').write(json.dumps(s,separators=(',',':')))\nprint("+JSON.stringify('AFW_R3_DELIVERY/1 '+JSON.stringify(d))+")\nraise SystemExit(23)\n";
-+  rewrite('boundary.py',program);
-+ }
-+ if(scenario==='report-matrix-authority-rewrite'){
-+  const r=clone(fixtures.controlsReport);Object.assign(r,ctx);[r.results[0],r.results[1]]=[r.results[1],r.results[0]];r.private=canary;
-+  const program="import json\np='/proc/self/fd/6/controls-schema.json'\ns=json.load(open(p));s['required'].append('private');s['properties']['private']={'enum':["+JSON.stringify(canary)+"]};open(p,'w').write(json.dumps(s,separators=(',',':')))\np='/proc/self/fd/6/matrix.json'\nm=json.load(open(p));m['ordered'][0],m['ordered'][1]=m['ordered'][1],m['ordered'][0];open(p,'w').write(json.dumps(m,separators=(',',':')))\nprint("+JSON.stringify('AFW_R3_DELIVERY_CONTROLS/1 '+JSON.stringify(r))+")\n";
-+  rewrite('controls-boundary.py',program);
-+ }
-+ if(scenario==='fresh-source-proof-rewrite'){
-+  const fresh=clone(t.site);t.site.programProof.count=17;writeFileSync(t.siteFile,JSON.stringify(t.site),{mode:0o600});
-+  const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:true,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims)};
-+  const wire='AFW_R3_EXISTING_SAMPLE/1 '+JSON.stringify(t.sample)+'\nAFW_R3_DELIVERY/1 '+JSON.stringify(d)+'\n';
-+  const program="import os\np=os.environ['RUNNER_TEMP']+'/afw-site/public-result.json'\nopen(p,'w').write("+JSON.stringify(JSON.stringify(fresh))+")\nprint("+JSON.stringify(wire)+",end='')\n";
-+  rewrite('boundary.py',program);
-+ }
-+ if(scenario==='all-authority-files-replaced'){
-+  const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:true,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims)};
-+  const wire='AFW_R3_EXISTING_SAMPLE/1 '+JSON.stringify(t.sample)+'\nAFW_R3_DELIVERY/1 '+JSON.stringify(d)+'\n';
-+  const assets=['site-schema.json','site-map.json','envelope-schema.json','delivery-schema.json','unavailable-schema.json','controls-schema.json','matrix.json','fixtures.json','examples.json','controls-unavailable-example.json'];
-+  const program="for name in "+JSON.stringify(assets)+":\n open('/proc/self/fd/6/'+name,'w').write('{}')\nprint("+JSON.stringify(wire)+",end='')\n";
-+  rewrite('boundary.py',program);
-+ }
-+ if(scenario==='binding-array-tree'){
-+  const path=join(t.own,'context.json'),bad={...t.binding,sourceTree:[ctx.sourceTree]};writeFileSync(path,JSON.stringify(bad),{mode:0o600});t.executionMarker=join(t.own,'delegation.marker');
-+  rewrite('boundary.py',"with open('/proc/self/fd/6/delegation.marker','x') as out:out.write('unexpected')\nraise SystemExit(1)\n");
-+ }
-+ if(scenario==='pinned-site-schema-lf'){
-+  const raw=readFileSync(join(t.own,'site-schema.json'));if(raw.at(-1)!==10||raw.at(-2)===10||Buffer.from(JSON.stringify(JSON.parse(raw))+'\n').compare(raw)!==0)throw 1;
-+ }
-+ if(scenario==='external-hardlink-cleanup'){
-+  const outside=join(sandbox,'external-'+String(external.size)),bytes=Buffer.from('AFW_OWN_EXTERNAL_INODE');
-+  const fd=openSync(outside,constants.O_WRONLY|constants.O_CREAT|constants.O_EXCL|constants.O_NOFOLLOW,0o600);external.set(t.instance,{path:outside,fd,bytes,proof:null});
-+  writeFileSync(fd,bytes);chmodSync(outside,0o440);linkSync(outside,join(t.cwd,'outside-inode-link'));const st=fstatSync(fd);external.get(t.instance).proof={mode:st.mode,dev:st.dev,ino:st.ino};
-+ }
-+ if(scenario.startsWith('prestart-')){
-+  const shim=scenario.endsWith('-shim'),controls=scenario.includes('-controls-'),name=shim?'lifetime.py':controls?'controls-outer.mjs':'delivery-outer.mjs';
-+  t.executionMarker=join(t.own,'prestart-executed.marker');
-+  rewrite(name,shim?"import os\nwith open("+JSON.stringify(t.executionMarker)+",'x') as f:f.write('unexpected')\nos.write(1,"+JSON.stringify(canary+'\n')+".encode())\n":'import{writeFileSync}from"node:fs";writeFileSync('+JSON.stringify(t.executionMarker)+',"unexpected",{flag:"wx"});process.stdout.write('+JSON.stringify(canary+'\n')+');\n');
-+ }else retargetEntries(t);
-+ return {after,spools};
-+}
-+function cleanupOwn(instance){
-+ const base=live.get(instance);if(base===undefined)return;
-+ const cleanupDeadline=Math.min(controlDeadline,performance.now()+2000);
-+ try{
-+  if(performance.now()>cleanupDeadline)throw 'CLEANUP_UNKNOWN';
-+  if(!sandbox||realpathSync(sandbox)!==sandbox||resolve(base)!==base||dirname(base)!==sandbox||!/^case-[a-zA-Z0-9]+$/.test(base.slice(sandbox.length+1))||realpathSync(base)!==base)throw 1;
-+  let visited=0;
-+  function walk(path){
-+   if(performance.now()>cleanupDeadline)throw 'CLEANUP_UNKNOWN';
-+   if(++visited>256)throw 1;
-+   const s=lstatSync(path);if(s.isSymbolicLink())return;if(s.uid!==process.getuid())throw 1;
-+   if(s.isDirectory()){
-+    // Linux O_PATH obtains the SAME directory object even at mode000; never chmod a regular inode.
-+    const fd=openSync(path,0x200000|constants.O_DIRECTORY|constants.O_NOFOLLOW);
-+    try{
-+     const ds=fstatSync(fd);if(!ds.isDirectory()||ds.uid!==process.getuid()||ds.dev!==s.dev||ds.ino!==s.ino)throw 1;
-+     chmodSync('/proc/self/fd/'+fd,0o700);
-+     const changed=fstatSync(fd);if(!changed.isDirectory()||changed.uid!==ds.uid||changed.dev!==ds.dev||changed.ino!==ds.ino||(changed.mode&0o777)!==0o700)throw 1;
-+     for(const name of readdirSync('/proc/self/fd/'+fd)){if(name==='.'||name==='..'||name.includes('/'))throw 1;walk('/proc/self/fd/'+fd+'/'+name);}
-+    }finally{closeSync(fd);}
-+   }
-+  }
-+  walk(base);if(performance.now()>cleanupDeadline)throw 'CLEANUP_UNKNOWN';rmSync(base,{recursive:true,force:false});live.delete(instance);
-+ }catch(e){if(e==='CLEANUP_UNKNOWN')report.cleanup.unknownInstances.push(instance);else report.cleanup.failedInstances.push(instance);}
-+}
-+function counterexample(t,row){
-+ const marker=(name,value)=>name+' '+JSON.stringify(value)+'\n',u=clone(fixtures.sample);u.source=ctx.source;u.run=ctx.run;
-+ const expected={kind:'pair',reason:'none',sourceQualified:true,collectionComplete:true,sampleObserved:false,status:0},none=clone(u);none.sampleState='not_observed';
-+ const known=clone(t.sample);
-+ const d={purpose:'afw.r3-delivery.result.v1',...ctx,controls:'passed',availability:'available',sourceQualified:true,collectionComplete:true,sampleObserved:false,reason:'none',nonclaims:clone(fixtures.controlsReport.nonclaims)};
-+ const pair=(s,x)=>marker('AFW_R3_EXISTING_SAMPLE/1',s)+marker('AFW_R3_DELIVERY/1',x);
-+ let wrong,wanted=none;
-+ if(row.id==='O01'){wrong=pair(u,{...d,sampleObserved:true});}
-+ if(row.id==='O02'){wanted=known;expected.sampleObserved=true;wrong=pair(u,{...d,sampleObserved:true});}
-+ if(row.id==='O03')wrong=pair(none,{...d,extra:'public'});
-+ if(row.id==='O04')wrong=pair(none,d)+'\n';
-+ if(row.id==='O05'){expected.kind='delivery';expected.reason='sample_missing';expected.sampleObserved='unknown';wrong=marker('AFW_R3_DELIVERY_UNAVAILABLE/1',{...fb,reason:'parent_unavailable'});}
-+ return accepts(wrong,expected.kind==='pair'?0:1,{...expected,status:expected.kind==='pair'?0:1},ctx,wanted,null,fb,controlsFallback)?'failed':'passed';
-+}
-+function executeOne(row,mutant,instance){
-+ const t=build(instance);let staged;
-+ const rewrite=(name,transform)=>{const path=join(t.own,name),text=readFileSync(path,'utf8'),next=transform(text);if(next===text)throw 1;writeFileSync(path,next,{mode:0o600});};
-+ if(mutant==='M_RAW')writeFileSync(join(t.own,'raw-sample.mjs'),readFileSync(join(t.own,'normalized-sample.mjs')),{mode:0o600});
-+ if(mutant==='M_PROVENANCE'){
-+  const needle="need(['mapVerified','worldBeforeVerified','nativeBeforeVerified','worldAfterVerified','nativeAfterVerified','originalBodiesUnchanged'].every(k=>s[k]===true),'all-source-proofs');";
-+  rewrite('source-provenance.mjs',x=>x.replace(needle,'/* mutant omitted strong after proof */'));rewrite('delivery-outer.mjs',x=>x.replace(needle,'/* mutant omitted strong after proof */'));
-+ }
-+ if(mutant==='M_OUTPUT'){
-+  rewrite('boundary.py',x=>x.replace(' shape(envelope,schema)',' # mutant omitted closed output schema'));
-+  rewrite('delivery-outer.mjs',x=>x.replace("shape(d,authority['delivery-schema.json']);","/* mutant omitted final delivery schema */"));
-+ }
-+ if(mutant==='M_ASSOC')rewrite('delivery-outer.mjs',x=>x.replace('admitSample(JSON.stringify(s),{...ctx,sourceQualified:true});','/* mutant omitted normalized semantic associations */'));
-+ retargetEntries(t);
-+ staged=change(t,row.scenario);
-+ if(row.expected.kind==='lifetime'){
-+  const measured=runRole(t,'life-'+row.expected.case,{timeout:5000,buffer:8192});
-+  if(measured.error)return 'unknown';
-+  try{const v=JSON.parse(measured.stdout);if(measured.stderr!==''||measured.stdout!==JSON.stringify(v)+'\n'||JSON.stringify(Object.keys(v))!==JSON.stringify(['purpose','case','result'])||v.purpose!=='afw.r3-lifetime.control.v1'||v.case!==row.expected.case||!['passed','failed','unknown'].includes(v.result)||measured.status!==(v.result==='passed'?0:1))return 'failed';if(v.result==='unknown')custodyUnknown=true;return v.result;}catch{custodyUnknown=true;return 'unknown';}
-+ }
-+ if(row.expected.kind==='oracle-reject')return counterexample(t,row);
-+ if(row.expected.kind.startsWith('witness-')){
-+  if(row.expected.kind==='witness-clean')unlinkSync(t.file);
-+  const r=runRole(t,'node-witness',{timeout:3000,buffer:8192});
-+  return !r.error&&r.status===row.expected.status&&r.stdout===''&&r.stderr===''?'passed':r.error?'unknown':'failed';
-+ }
-+ const role=row.scenario==='cwd-failure'?'case-missing-cwd':['controls-failed','controls-exhausted'].includes(row.expected.kind)||row.expected.entry==='controls'?'case-controls':'case-delivery';
-+ if(row.scenario==='cwd-failure'){const gone=join(t.base,'gone');mkdirSync(gone,{mode:0o700});if(readdirSync(gone).length!==0)throw 1;t.cwd=gone;}
-+ const r=runRole(t,role);
-+ if(r.error)return 'unknown';
-+ let ok=r.stderr===''&&accepts(r.stdout,r.status,row.expected,ctx,t.sample,t.failedReport,fb,controlsFallback);
-+ if(row.expected.kind==='fallback'&&row.expected.entry==='controls')ok=ok&&!accepts('AFW_R3_DELIVERY_UNAVAILABLE/1 '+JSON.stringify({...fb,reason:row.expected.reason})+'\n',r.status,row.expected,ctx,t.sample,t.failedReport,fb,controlsFallback);
-+ if(row.scenario==='harness-total-budget-expired')ok=ok&&readdirSync(t.temp).every(name=>!name.startsWith('afw-r3-delivery-controls-r1-'));
-+ if(row.scenario==='uncreatable-spools'){
-+  let full;try{full=openSync('/dev/full','w');const denied=runRole(t,role,{full,buffer:8192});ok=ok&&!denied.error&&denied.status!==0&&denied.stderr.length===0;}finally{if(full!==undefined)closeSync(full);}
-+ }
-+ if(t.executionMarker){try{lstatSync(t.executionMarker);ok=false;}catch(error){if(error?.code!=='ENOENT')throw error;}}
-+ for(const spool of staged.spools)ok=ok&&readFileSync(spool.path).equals(spool.bytes);
-+ return ok?'passed':'failed';
-+}
-+function execute(row,mutant=null){
-+ if(custodyUnknown){halt='custody';return;}if(!admitCase()){halt='inner';return;}
-+ lastAdmissionMs=Math.ceil(performance.now()-controlStart);const active=ordinal++;trace('E'+String(active).padStart(3,'0'));
-+ const instance=(mutant??'baseline')+':'+row.id;let caught=0;
-+ let outcome='unknown';try{outcome=executeOne(row,mutant,instance);}catch{caught=1;}finally{
-+  if(custodyUnknown)report.cleanup.unknownInstances.push(instance);else cleanupOwn(instance);const proof=external.get(instance);
-+  if(proof&&!custodyUnknown){try{if(report.cleanup.unknownInstances.includes(instance))throw 'CLEANUP_UNKNOWN';const own=fstatSync(proof.fd),st=lstatSync(proof.path);if(!st.isFile()||st.uid!==process.getuid()||st.nlink!==1||own.dev!==st.dev||own.ino!==st.ino||(proof.proof&&(st.mode!==proof.proof.mode||st.dev!==proof.proof.dev||st.ino!==proof.proof.ino||!readFileSync(proof.path).equals(proof.bytes))))throw 1;unlinkSync(proof.path);external.delete(instance);}catch(error){if(error!=='CLEANUP_UNKNOWN'&&!report.cleanup.failedInstances.includes(instance))report.cleanup.failedInstances.push(instance);}finally{try{closeSync(proof.fd);}catch{if(!report.cleanup.unknownInstances.includes(instance)&&!report.cleanup.failedInstances.includes(instance))report.cleanup.failedInstances.push(instance);}}}
-+ }
-+ const cl=report.cleanup.unknownInstances.includes(instance)?'U':report.cleanup.failedInstances.includes(instance)?'F':'C';
-+ trace('R'+String(active).padStart(3,'0')+({passed:'P',failed:'F',unknown:'U'}[outcome]??'U')+cl+caught);
-+ if(custodyUnknown||cl==='U')halt='custody';else if(caught)halt='exception';else if(performance.now()>controlDeadline)halt='late';
-+ return outcome;
-+}
-+try{
-+ const image=fstatSync(3),current=statSync('/proc/self/exe');
-+ if(process.versions.node!=='22.23.4'||c.source!==e.GITHUB_SHA||c.run!==e.GITHUB_RUN_ID||image.dev!==current.dev||image.ino!==current.ino)throw 1;
-+ if(createHash('sha256').update(readFileSync(join(home,'matrix.json'))).digest('hex')!==report.matrixSha256)throw 1;
-+ for(let group=0;group<5&&!halt;group++){
-+  if(group&&!admitCase()){halt='outer';break;}
-+  for(const row of matrix.ordered){execute(row,group?matrix.mutants[group-1].id:null);if(halt)break;}
-+ }
 +}catch{halt='exception';}
 +if(!halt)halt=performance.now()<=controlDeadline&&ordinal===520?'complete':'late';
 +trace('T '+JSON.stringify({kind:halt,next:ordinal,lastAdmissionMs,terminalMs:Math.ceil(performance.now()-controlStart)}));
@@ -800,83 +305,81 @@ Changedartifactpins:
 ```diff
 --- a/lab-parent-v2.py
 +++ b/lab-parent-v2.py
-@@ -1,106 +1,132 @@
+@@ -1,11 +1,11 @@
  # Fixed pure transport. No caller command, callback or output pathname.
  try:
 - import os,sys,json,re,selectors,subprocess,time,stat,signal
-- def need(ok):
--  if not ok: raise ValueError()
-- def closed(raw,cap):
--  need(len(raw)<=cap and re.fullmatch(rb'[\x20-\x7e]*\n',raw) is not None and not raw.endswith(b'\n\n'))
--  v=json.loads(raw)
--  need((json.dumps(v,separators=(',',':'),ensure_ascii=True)+'\n').encode()==raw)
--  return v
-- def shape(v,s):
--  if 'anyOf' in s:
--   count=0
--   for one in s['anyOf']:
--    try: shape(v,one); count+=1
--    except Exception: pass
--   need(count==1); return
--  if 'enum' in s:
--   need(any(type(v) is type(x) and v==x for x in s['enum'])); return
--  t=s['type']
--  if t=='null': need(v is None)
--  elif t=='integer': need(type(v) is int and s['minimum']<=v<=s['maximum'])
--  elif t=='string': need(type(v) is str and re.fullmatch(s['pattern'],v) is not None)
--  elif t=='object':
--   need(type(v) is dict and set(v)==set(s['required']) and s['additionalProperties'] is False)
--   for k in s['required']: shape(v[k],s['properties'][k])
--  elif t=='array':
--   need(type(v) is list and s['minItems']<=len(v)<=s['maxItems'])
--   for x in v: shape(x,s['items'])
--  else: raise ValueError()
-- def binding():
--  base=os.environ['RUNNER_TEMP']; need(type(base) is str and len(base)<=4096 and base.startswith('/') and '\x00' not in base and os.path.realpath(base)==base)
--  fds=[]
--  try:
--   d=os.open(base,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW);fds.append(d);s=os.fstat(d)
--   need(stat.S_ISDIR(s.st_mode) and s.st_uid==os.getuid() and not s.st_mode&0o022)
--   d=os.open('afw-r3-delivery',os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=d);fds.append(d);s=os.fstat(d)
--   need(stat.S_ISDIR(s.st_mode) and s.st_uid==os.getuid() and not s.st_mode&0o077)
--   f=os.open('context.json',os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=d);fds.append(f);s=os.fstat(f)
--   need(stat.S_ISREG(s.st_mode) and s.st_uid==os.getuid() and s.st_nlink==1 and not s.st_mode&0o077 and s.st_size<=2048)
--   b=os.read(f,2049);need(len(b)==s.st_size and len(b)<=2048 and re.fullmatch(rb'[\x20-\x7e]*',b) is not None);after=os.fstat(f)
--   need((s.st_dev,s.st_ino,s.st_size,s.st_mtime_ns,s.st_ctime_ns)==(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns))
--   c=json.loads(b);need(json.dumps(c,separators=(',',':')).encode()==b)
--   need(list(c)==['purpose','source','sourceTree','run','attempt','job','node'])
--   need(all(type(c[k]) is str for k in ['purpose','source','sourceTree','run','job','node']))
--   need(c['purpose']=='afw.r3-delivery.binding.v1' and c['node']=='22.23.4' and c['job']=='readonly' and type(c['attempt']) is int and c['attempt']==1)
--   need(re.fullmatch(r'[a-f0-9]{40}',c['source']) is not None and re.fullmatch(r'[a-f0-9]{40}',c['sourceTree']) is not None and re.fullmatch(r'[1-9][0-9]{0,19}',c['run']) is not None)
--   image=os.fstat(3);need(stat.S_ISREG(image.st_mode))
--   for k,v in [('GITHUB_SHA',c['source']),('GITHUB_RUN_ID',c['run']),('GITHUB_RUN_ATTEMPT','1'),('GITHUB_JOB','readonly'),('GITHUB_REPOSITORY','tokenizartinfo-ops/agent-friendly-web'),('GITHUB_REPOSITORY_ID','1347578006'),('GITHUB_REF','refs/heads/feat/finite-native-cleanup-20261101')]:need(os.environ.get(k)==v)
--   return c,base
--  finally:
--   for f in reversed(fds):os.close(f)
-- def capture(base):
++ import os,sys,json,re,selectors,subprocess,time,stat,signal,hashlib,fcntl
+  def need(ok):
+   if not ok: raise ValueError()
+  def closed(raw,cap):
+   need(len(raw)<=cap and re.fullmatch(rb'[\x20-\x7e]*\n',raw) is not None and not raw.endswith(b'\n\n'))
+   v=json.loads(raw)
+   need((json.dumps(v,separators=(',',':'),ensure_ascii=True)+'\n').encode()==raw)
+   return v
+  def shape(v,s):
+@@ -45,62 +45,88 @@
+    need(all(type(c[k]) is str for k in ['purpose','source','sourceTree','run','job','node']))
+    need(c['purpose']=='afw.r3-delivery.binding.v1' and c['node']=='22.23.4' and c['job']=='readonly' and type(c['attempt']) is int and c['attempt']==1)
+    need(re.fullmatch(r'[a-f0-9]{40}',c['source']) is not None and re.fullmatch(r'[a-f0-9]{40}',c['sourceTree']) is not None and re.fullmatch(r'[1-9][0-9]{0,19}',c['run']) is not None)
+    image=os.fstat(3);need(stat.S_ISREG(image.st_mode))
+    for k,v in [('GITHUB_SHA',c['source']),('GITHUB_RUN_ID',c['run']),('GITHUB_RUN_ATTEMPT','1'),('GITHUB_JOB','readonly'),('GITHUB_REPOSITORY','tokenizartinfo-ops/agent-friendly-web'),('GITHUB_REPOSITORY_ID','1347578006'),('GITHUB_REF','refs/heads/feat/finite-native-cleanup-20261101')]:need(os.environ.get(k)==v)
+    return c,base
+   finally:
+    for f in reversed(fds):os.close(f)
++ policy=json.loads("{\"purpose\":\"afw.q1.serial-source-lab.policy.v2\",\"scope\":\"top-laboratory-only\",\"unit\":\"ms\",\"horizon\":240000,\"reserve\":20000,\"parent\":250000,\"outer\":260000,\"step\":300000,\"job\":420000,\"normal\":{\"horizon\":90000,\"reserve\":20000,\"parent\":100000,\"outer\":110000,\"ceiling\":120000,\"delivery\":[3500,4000,5000],\"case\":5000,\"cleanup\":2000,\"probe\":[4500,4800],\"alive\":20},\"groups\":[\"baseline\",\"M_RAW\",\"M_PROVENANCE\",\"M_OUTPUT\",\"M_ASSOC\"],\"width\":104,\"instances\":520,\"marker\":\"AFW_Q1_SERIAL_LAB/2\",\"unavailable\":\"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2\"}")
++ policyHash="91277fb4b570ce9f18d49e8c16fe6d48b556b8bb89781de81bcde97cae8b31ac"
++ matrixHash="0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e"
++ driver=json.loads("{\"blob\":\"48822f1654ad9dc3ec40990fe1d0474956f33678\",\"bytes\":32574,\"sha256\":\"d773dbda3d55624dbfc2cfe68b705015efc20bc4601c8e0d585583a3e9db8182\"}")
++ normal=json.loads("{\"io.mjs\":{\"bytes\":1815,\"sha256\":\"b7d4ee0b8786c52a26857a8e203a710017b40dc8f5636a1d387638b9ec78eb47\",\"blob\":\"8bb9a8ab8ddf81689ee890252579c1fd41dfdf52\"},\"emitter.mjs\":{\"bytes\":3511,\"sha256\":\"02f80480dbc8bc8700d0ecf3a57e65f855954ca64b379d29eefdb75c6d7db760\",\"blob\":\"f9eee51fbdb89d0e130f8137d6a48ae787904f66\"},\"source-provenance.mjs\":{\"bytes\":6690,\"sha256\":\"b4d0872044216a275458d14b838ecf57628780092767ea88910dce18585408ce\",\"blob\":\"fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d\"},\"raw-sample.mjs\":{\"bytes\":4289,\"sha256\":\"1b594a7768a69cba5db1f41e83eb2a941f6451c82584490fdb77ba1fea85e9fc\",\"blob\":\"8cdabb2324ae97b04fa17350846e24d666cd3536\"},\"site-schema.json\":{\"bytes\":12651,\"sha256\":\"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd\",\"blob\":\"4871edc102386fe6db65c773e51c21ecb94897e3\"},\"site-map.json\":{\"bytes\":6630,\"sha256\":\"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe\",\"blob\":\"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f\"},\"envelope-schema.json\":{\"bytes\":5616,\"sha256\":\"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5\",\"blob\":\"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f\"},\"boundary.py\":{\"bytes\":12562,\"sha256\":\"27274120076048fd6f63b122b5534d8d06e97a2d4cf36461c1f710c605accdf4\",\"blob\":\"554a2b2d2a8e3f365533f0df3006bcce1e409698\"},\"delivery-schema.json\":{\"bytes\":1380,\"sha256\":\"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60\",\"blob\":\"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8\"},\"unavailable-schema.json\":{\"bytes\":1315,\"sha256\":\"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9\",\"blob\":\"4a310ddcef7b1b7bf0755bf56b760486254cf8c6\"},\"controls-schema.json\":{\"bytes\":4681,\"sha256\":\"2d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83\",\"blob\":\"8586d4387a5fcd95b18d7c966cf841432330a789\"},\"matrix.json\":{\"bytes\":24054,\"sha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"blob\":\"5b829c768ed3d7af03d5eb3f1870599d39bfd083\"},\"shape.mjs\":{\"bytes\":843,\"sha256\":\"82224496e7db35a1daf7168591cb2123edbb3242331a314680f13d05b3bfef5e\",\"blob\":\"df49410ebf42b4fbc9a8c032f81a0edc8fb95d0b\"},\"control-proof.mjs\":{\"bytes\":2206,\"sha256\":\"a7318fd9452f0254fdb9ae1261040ab944ce2d56c443004579c51e55c2c63c71\",\"blob\":\"ab38574f5fe697fd9f0d48f9ade065749f4a0c14\"},\"site-receiver.mjs\":{\"bytes\":5460,\"sha256\":\"0d346b88c9594c45ef207f9fa4b57c984d13a3e64943904f880e2e2b96377ad2\",\"blob\":\"c2cf804b6d427b5fc40da2b7d1375785a0a2f459\"},\"normalized-sample.mjs\":{\"bytes\":3987,\"sha256\":\"2bee6afaa30f01f1f497512d595f24f3a0c92269e3b4ed7e2d2e349ae5b4419f\",\"blob\":\"f7c2fefcc9df568a8453d876072a23a790b94fcd\"},\"witness.mjs\":{\"bytes\":1044,\"sha256\":\"336df41b1994c8a315e4f56d976ddd0c9922397c702a02869ac8d44f42a8629a\",\"blob\":\"b207c0c9ea759a9a146783b8818276444bef155b\"},\"fixtures.json\":{\"bytes\":7988,\"sha256\":\"06b7dc9e63c178b6b823db1ee56049ce4d1406861df240ca2fbc119d2df45bc9\",\"blob\":\"f29e76fd04627ebe5d1100007808610ebc240571\"},\"controls.mjs\":{\"bytes\":31799,\"sha256\":\"060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df\",\"blob\":\"b9b58c4a22f04b177f92dcbf8841cfc77f648c86\"},\"examples.json\":{\"bytes\":22739,\"sha256\":\"4f8da5a563bb0498cc506d693421853777ba7efb67d42da44b1889e5fef7b945\",\"blob\":\"6f28d4f4479fb093aec3188d21b1796fd7c3fff2\"},\"controls-boundary.py\":{\"bytes\":12908,\"sha256\":\"6e3dcd0c4f262a509b75499674375eaa3d91b9e83789f03689862f51734fc3d7\",\"blob\":\"b6c39695cdca9963d083842b114b7e4fb59e6392\"},\"controls-unavailable-example.json\":{\"bytes\":568,\"sha256\":\"7544b33859efe6ba2f6f1789e709f89f5f94f08352dd4fe4b14d700b19b22644\",\"blob\":\"beedc03c8066cef6e6a24914d5334f99183d014b\"},\"outer.mjs\":{\"bytes\":25947,\"sha256\":\"62f2faa1bff1a2aa2438e8c1794361910e44a6db9c632daa28185adc647bf515\",\"blob\":\"c74d74879d6935c47d50b1233dad4027e6704365\"},\"delivery-entry.sh\":{\"bytes\":24013,\"sha256\":\"63b7e32a4291e5a1b2fc3753a5ae89758dcf0913f6f2bf2d558bc3a0dd9f2961\",\"blob\":\"2477c393fbc7d9883894ef7299b4f749cc3857ab\"},\"controls-entry.sh\":{\"bytes\":24058,\"sha256\":\"e874d2de7710156e11726c7bd01626faa5351f94514cf0c42878e679981ad899\",\"blob\":\"f0825d011a5e7942194a157a327ef7c42548180c\"},\"oracle.mjs\":{\"bytes\":1877,\"sha256\":\"37c8724ced0eaa42bd54aa01aef1af7c3a7107ff3e78243e1f3d04da841fa4d1\",\"blob\":\"652201ebe699664b97a5bc3d7c815a02dd889805\"},\"lifetime.py\":{\"bytes\":16073,\"sha256\":\"f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791\",\"blob\":\"765573c5eeaf83add464e94a8240dcd7a90786d0\"},\"delivery-outer.mjs\":{\"bytes\":25986,\"sha256\":\"d32eaeb8d09e1d50dd14195fecec7606d457004ea6f61084900b94547cc6899f\",\"blob\":\"aac76e8c15a01cbb308ba63ad7dec19e2d5ebb76\"},\"controls-outer.mjs\":{\"bytes\":25986,\"sha256\":\"ada3cc7cf36a742d71c6ed12a7b5d15b91d56c4353aad02318a871ec370e4c35\",\"blob\":\"e62dd9c4760da521b84f23b1c87855070767aac0\"},\"missing-cwd-entry.sh\":{\"bytes\":24130,\"sha256\":\"e625cd8b88726576b278099856bd6b3126c02da4f31c387ba49ced923a5fa9fc\",\"blob\":\"3666fdd52620bd2a30bfa3e100897b2fab1610c1\"},\"race-creator.mjs\":{\"bytes\":777,\"sha256\":\"2657c30db6cff046599ff3d9cd2cdf7c3c312252b9636741627871d090372575\",\"blob\":\"a6d47254adbf330a09b879a3a9b20ae4de476e73\"},\"lifetime-controls.py\":{\"bytes\":12219,\"sha256\":\"d67b5c8c8e127c359f8d2b5d7da30da809b8d91bfb77759df4bbf9ecaaf53c59\",\"blob\":\"21b0b82242a76efd94d34fe1f722e04fda6cd489\"},\"authority-anchor.json\":{\"bytes\":1964,\"sha256\":\"e08d9864b16a1534b71344b817a6d3a78697d8d51af8ea798229a5f16d4b6407\",\"blob\":\"1bed486f15a8743ef7c68470772835aaf4946a40\"}}")
++ normalPin=json.loads("{\"blob\":\"4f6d2738a0d116aaf8114fc4b5640110f6bafb03\",\"bytes\":5293,\"sha256\":\"ff0a90104e63a5d39924c562c8aecb74afa3518e556bd554fb85b51ed4a846a9\"}")
++ schema=json.loads("{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"purpose\",\"scope\",\"source\",\"sourceTree\",\"run\",\"attempt\",\"job\",\"node\",\"matrixSha256\",\"policySha256\",\"normalManifest\",\"driver\",\"groups\",\"terminal\",\"lastAdmissionMs\",\"terminalMs\",\"v1\",\"nativeBusinessCases\",\"nonclaims\",\"qualified\"],\"properties\":{\"purpose\":{\"enum\":[\"afw.q1.serial-source-lab.v2\"]},\"scope\":{\"enum\":[{\"purpose\":\"afw.q1.serial-source-lab.policy.v2\",\"scope\":\"top-laboratory-only\",\"unit\":\"ms\",\"horizon\":240000,\"reserve\":20000,\"parent\":250000,\"outer\":260000,\"step\":300000,\"job\":420000,\"normal\":{\"horizon\":90000,\"reserve\":20000,\"parent\":100000,\"outer\":110000,\"ceiling\":120000,\"delivery\":[3500,4000,5000],\"case\":5000,\"cleanup\":2000,\"probe\":[4500,4800],\"alive\":20},\"groups\":[\"baseline\",\"M_RAW\",\"M_PROVENANCE\",\"M_OUTPUT\",\"M_ASSOC\"],\"width\":104,\"instances\":520,\"marker\":\"AFW_Q1_SERIAL_LAB/2\",\"unavailable\":\"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2\"}]},\"source\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"sourceTree\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"run\":{\"type\":\"string\",\"pattern\":\"^[1-9][0-9]{0,19}$\"},\"attempt\":{\"enum\":[1]},\"job\":{\"enum\":[\"readonly\"]},\"node\":{\"enum\":[\"22.23.4\"]},\"matrixSha256\":{\"enum\":[\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\"]},\"policySha256\":{\"enum\":[\"91277fb4b570ce9f18d49e8c16fe6d48b556b8bb89781de81bcde97cae8b31ac\"]},\"normalManifest\":{\"enum\":[{\"blob\":\"4f6d2738a0d116aaf8114fc4b5640110f6bafb03\",\"bytes\":5293,\"sha256\":\"ff0a90104e63a5d39924c562c8aecb74afa3518e556bd554fb85b51ed4a846a9\"}]},\"driver\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"blob\",\"bytes\",\"sha256\"],\"properties\":{\"blob\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"bytes\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":32768},\"sha256\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{64}$\"}}},\"groups\":{\"type\":\"array\",\"minItems\":5,\"maxItems\":5,\"items\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"id\",\"entry\",\"outcome\",\"cleanup\",\"entered\",\"returned\",\"passed\",\"failed\",\"unknown\",\"unentered\"],\"properties\":{\"id\":{\"enum\":[\"baseline\",\"M_RAW\",\"M_PROVENANCE\",\"M_OUTPUT\",\"M_ASSOC\"]},\"entry\":{\"type\":\"string\",\"pattern\":\"^[01]{104}$\"},\"outcome\":{\"type\":\"string\",\"pattern\":\"^[NPFUX]{104}$\"},\"cleanup\":{\"type\":\"string\",\"pattern\":\"^[NCFU]{104}$\"},\"entered\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"returned\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"passed\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"failed\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"unknown\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"unentered\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104}}}},\"terminal\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"kind\",\"next\"],\"properties\":{\"kind\":{\"enum\":[\"complete\",\"inner\",\"outer\",\"exception\",\"late\",\"custody\",\"abrupt\"]},\"next\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":0,\"maximum\":520},{\"enum\":[\"unknown\"]}]}}},\"lastAdmissionMs\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":0,\"maximum\":300000},{\"enum\":[null,\"unknown\"]}]},\"terminalMs\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":0,\"maximum\":300000},{\"enum\":[\"unknown\"]}]},\"v1\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"purpose\",\"source\",\"sourceTree\",\"run\",\"attempt\",\"job\",\"node\",\"matrixSha256\",\"allPassed\",\"expected\",\"passed\",\"failed\",\"unknown\",\"results\",\"mutants\",\"nativeBusinessCases\",\"nonclaims\",\"cleanup\"],\"properties\":{\"purpose\":{\"enum\":[\"afw.r3-delivery.controls.v1\"]},\"source\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"sourceTree\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"run\":{\"type\":\"string\",\"pattern\":\"^[1-9][0-9]{0,19}$\"},\"attempt\":{\"enum\":[1]},\"job\":{\"enum\":[\"readonly\"]},\"node\":{\"enum\":[\"22.23.4\"]},\"matrixSha256\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{64}$\"},\"allPassed\":{\"enum\":[true,false]},\"expected\":{\"type\":\"integer\",\"minimum\":104,\"maximum\":104},\"passed\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"failed\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"unknown\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"results\":{\"type\":\"array\",\"minItems\":104,\"maxItems\":104,\"items\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"id\",\"result\"],\"properties\":{\"id\":{\"enum\":[\"A01\",\"A02\",\"A03\",\"A04\",\"D01\",\"D02\",\"D03\",\"D04\",\"D05\",\"D06\",\"D07\",\"D08\",\"D09\",\"D10\",\"D11\",\"D12\",\"D13\",\"P01\",\"P02\",\"P03\",\"P04\",\"P05\",\"P06\",\"P07\",\"P08\",\"P09\",\"P10\",\"P11\",\"P12\",\"P13\",\"P14\",\"P15\",\"P16\",\"P17\",\"P18\",\"P19\",\"P20\",\"P21\",\"P22\",\"P23\",\"P24\",\"P25\",\"F01\",\"F02\",\"F03\",\"F04\",\"F05\",\"F06\",\"F07\",\"F08\",\"F09\",\"B01\",\"B02\",\"B03\",\"B04\",\"B05\",\"B06\",\"B07\",\"B08\",\"B09\",\"B10\",\"B11\",\"B12\",\"B13\",\"W01\",\"W02\",\"C01\",\"C02\",\"C03\",\"C04\",\"C05\",\"D14\",\"P26\",\"F10\",\"E01\",\"E02\",\"E03\",\"E04\",\"E05\",\"E06\",\"O01\",\"O02\",\"O03\",\"O04\",\"O05\",\"S01\",\"E07\",\"T01\",\"F11\",\"A05\",\"U01\",\"U02\",\"U03\",\"U04\",\"H01\",\"L01\",\"L02\",\"L03\",\"L04\",\"L05\",\"E08\",\"E09\",\"E10\",\"E11\"]},\"result\":{\"enum\":[\"passed\",\"failed\",\"unknown\"]}}}},\"mutants\":{\"type\":\"array\",\"minItems\":4,\"maxItems\":4,\"items\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"id\",\"expectedFailedIds\",\"actualFailedIds\",\"result\"],\"properties\":{\"id\":{\"enum\":[\"M_RAW\",\"M_PROVENANCE\",\"M_OUTPUT\",\"M_ASSOC\"]},\"expectedFailedIds\":{\"type\":\"array\",\"minItems\":1,\"maxItems\":2,\"items\":{\"enum\":[\"D02\",\"P06\",\"B05\",\"U01\",\"S01\"]}},\"actualFailedIds\":{\"type\":\"array\",\"minItems\":0,\"maxItems\":104,\"items\":{\"enum\":[\"A01\",\"A02\",\"A03\",\"A04\",\"D01\",\"D02\",\"D03\",\"D04\",\"D05\",\"D06\",\"D07\",\"D08\",\"D09\",\"D10\",\"D11\",\"D12\",\"D13\",\"P01\",\"P02\",\"P03\",\"P04\",\"P05\",\"P06\",\"P07\",\"P08\",\"P09\",\"P10\",\"P11\",\"P12\",\"P13\",\"P14\",\"P15\",\"P16\",\"P17\",\"P18\",\"P19\",\"P20\",\"P21\",\"P22\",\"P23\",\"P24\",\"P25\",\"F01\",\"F02\",\"F03\",\"F04\",\"F05\",\"F06\",\"F07\",\"F08\",\"F09\",\"B01\",\"B02\",\"B03\",\"B04\",\"B05\",\"B06\",\"B07\",\"B08\",\"B09\",\"B10\",\"B11\",\"B12\",\"B13\",\"W01\",\"W02\",\"C01\",\"C02\",\"C03\",\"C04\",\"C05\",\"D14\",\"P26\",\"F10\",\"E01\",\"E02\",\"E03\",\"E04\",\"E05\",\"E06\",\"O01\",\"O02\",\"O03\",\"O04\",\"O05\",\"S01\",\"E07\",\"T01\",\"F11\",\"A05\",\"U01\",\"U02\",\"U03\",\"U04\",\"H01\",\"L01\",\"L02\",\"L03\",\"L04\",\"L05\",\"E08\",\"E09\",\"E10\",\"E11\"]}},\"result\":{\"enum\":[\"passed\",\"failed\",\"unknown\"]}}}},\"nativeBusinessCases\":{\"enum\":[0]},\"nonclaims\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"historicalCauseProven\",\"receiptAuthenticated\",\"operationalReadiness\",\"completePackage\",\"PCoff\",\"globalNativeDrainVerified\",\"sdkNamespaceEmptyVerified\"],\"properties\":{\"historicalCauseProven\":{\"enum\":[false]},\"receiptAuthenticated\":{\"enum\":[false]},\"operationalReadiness\":{\"enum\":[false]},\"completePackage\":{\"enum\":[false]},\"PCoff\":{\"enum\":[false]},\"globalNativeDrainVerified\":{\"enum\":[false]},\"sdkNamespaceEmptyVerified\":{\"enum\":[false]}}},\"cleanup\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"complete\",\"failedInstances\",\"unknownInstances\"],\"properties\":{\"complete\":{\"enum\":[true,false]},\"failedInstances\":{\"type\":\"array\",\"minItems\":0,\"maxItems\":520,\"items\":{\"type\":\"string\",\"pattern\":\"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$\"}},\"unknownInstances\":{\"type\":\"array\",\"minItems\":0,\"maxItems\":520,\"items\":{\"type\":\"string\",\"pattern\":\"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$\"}}}}}},\"nativeBusinessCases\":{\"enum\":[0]},\"nonclaims\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"historicalCauseProven\",\"receiptAuthenticated\",\"operationalReadiness\",\"completePackage\",\"PCoff\",\"globalNativeDrainVerified\",\"sdkNamespaceEmptyVerified\"],\"properties\":{\"historicalCauseProven\":{\"enum\":[false]},\"receiptAuthenticated\":{\"enum\":[false]},\"operationalReadiness\":{\"enum\":[false]},\"completePackage\":{\"enum\":[false]},\"PCoff\":{\"enum\":[false]},\"globalNativeDrainVerified\":{\"enum\":[false]},\"sdkNamespaceEmptyVerified\":{\"enum\":[false]}}},\"qualified\":{\"enum\":[true,false]}}}")
++ ids=json.loads("[\"A01\",\"A02\",\"A03\",\"A04\",\"D01\",\"D02\",\"D03\",\"D04\",\"D05\",\"D06\",\"D07\",\"D08\",\"D09\",\"D10\",\"D11\",\"D12\",\"D13\",\"P01\",\"P02\",\"P03\",\"P04\",\"P05\",\"P06\",\"P07\",\"P08\",\"P09\",\"P10\",\"P11\",\"P12\",\"P13\",\"P14\",\"P15\",\"P16\",\"P17\",\"P18\",\"P19\",\"P20\",\"P21\",\"P22\",\"P23\",\"P24\",\"P25\",\"F01\",\"F02\",\"F03\",\"F04\",\"F05\",\"F06\",\"F07\",\"F08\",\"F09\",\"B01\",\"B02\",\"B03\",\"B04\",\"B05\",\"B06\",\"B07\",\"B08\",\"B09\",\"B10\",\"B11\",\"B12\",\"B13\",\"W01\",\"W02\",\"C01\",\"C02\",\"C03\",\"C04\",\"C05\",\"D14\",\"P26\",\"F10\",\"E01\",\"E02\",\"E03\",\"E04\",\"E05\",\"E06\",\"O01\",\"O02\",\"O03\",\"O04\",\"O05\",\"S01\",\"E07\",\"T01\",\"F11\",\"A05\",\"U01\",\"U02\",\"U03\",\"U04\",\"H01\",\"L01\",\"L02\",\"L03\",\"L04\",\"L05\",\"E08\",\"E09\",\"E10\",\"E11\"]")
++ mutantDefs=json.loads("[{\"id\":\"M_RAW\",\"change\":\"omit strict raw framing in inner raw receiver; outer normalized receiver retains sample semantics\",\"expectedFailedIds\":[\"D02\"]},{\"id\":\"M_PROVENANCE\",\"change\":\"omit full before-after guard in BOTH inner and final literal outer strong Source receivers\",\"expectedFailedIds\":[\"P06\"]},{\"id\":\"M_OUTPUT\",\"change\":\"omit delivery envelope/record closed-schema guard in BOTH Python parent and final literal Node outer; held authority and semantic rules remain\",\"expectedFailedIds\":[\"B05\",\"U01\"]},{\"id\":\"M_ASSOC\",\"change\":\"omit normalized sample semantic receiver only in final literal Node outer; inner emitter fixture sends impossible not_observed\",\"expectedFailedIds\":[\"S01\"]}]")
++ nonclaims={k:False for k in ["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"]}
++ def fixed(name,pin):
++  fd=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=6)
++  try:
++   s=os.fstat(fd);need(stat.S_ISREG(s.st_mode) and s.st_uid==os.getuid() and s.st_nlink==1 and not s.st_mode&0o077 and s.st_size==pin['bytes'])
++   b=os.read(fd,32769);a=os.fstat(fd);need(len(b)==s.st_size and (s.st_dev,s.st_ino,s.st_size,s.st_mtime_ns,s.st_ctime_ns)==(a.st_dev,a.st_ino,a.st_size,a.st_mtime_ns,a.st_ctime_ns))
++   need(hashlib.sha256(b).hexdigest()==pin['sha256'] and hashlib.sha1(('blob '+str(len(b))+'\0').encode()+b).hexdigest()==pin['blob']);return b
++  finally:os.close(fd)
+  def capture(base):
 -  # Independent delivery cap. It never encloses or invokes Native.
--  allowed=['PATH','HOME','RUNNER_TEMP','CI','LANG','TZ','GITHUB_REPOSITORY','GITHUB_REPOSITORY_ID','GITHUB_REF','GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB','GITHUB_WORKFLOW_REF']
+   allowed=['PATH','HOME','RUNNER_TEMP','CI','LANG','TZ','GITHUB_REPOSITORY','GITHUB_REPOSITORY_ID','GITHUB_REF','GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB','GITHUB_WORKFLOW_REF']
 -  env={k:os.environ[k] for k in allowed if k in os.environ}
 -  p=None;sel=None
--  try:
++  env={k:os.environ[k] for k in allowed if k in os.environ};p=None;sel=None;fd=None;sealed=None
+   try:
 -   pre=r3_prepare_node_child()
 -   p=subprocess.Popen(['/proc/self/fd/3','--disable-warning=ExperimentalWarning','/proc/self/fd/6/controls.mjs'],stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env,close_fds=True,pass_fds=(3,4,6),preexec_fn=pre)
 -   sel=selectors.DefaultSelector();sel.register(p.stdout,selectors.EVENT_READ,'out');sel.register(p.stderr,selectors.EVENT_READ,'err')
 -   out=bytearray();err=bytearray();deadline=time.monotonic()+100
--   while sel.get_map():
--    remaining=deadline-time.monotonic();need(remaining>0)
--    for key,_ in sel.select(min(remaining,0.1)):
++   for name,pin in normal.items():fixed(name,pin)
++   raw=fixed('lab-serial-v2.mjs',driver);fd=os.memfd_create('afw-q1-v2-driver',os.MFD_ALLOW_SEALING|os.MFD_CLOEXEC);need(os.write(fd,raw)==len(raw));os.lseek(fd,0,0)
++   fcntl.fcntl(fd,fcntl.F_ADD_SEALS,fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL);sealed=os.open('/proc/self/fd/'+str(fd),os.O_RDONLY|os.O_CLOEXEC)
++   deadline=time.monotonic()+250;pre=r3_prepare_node_child()
++   p=subprocess.Popen(['/proc/self/fd/3','--disable-warning=ExperimentalWarning','--input-type=module','-'],stdin=sealed,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env,close_fds=True,pass_fds=(3,4,6),preexec_fn=pre)
++   sel=selectors.DefaultSelector();sel.register(p.stdout,selectors.EVENT_READ,'out');sel.register(p.stderr,selectors.EVENT_READ,'err');out=bytearray();err=bytearray()
+    while sel.get_map():
+     remaining=deadline-time.monotonic();need(remaining>0)
+     for key,_ in sel.select(min(remaining,0.1)):
 -     buf=out if key.data=='out' else err;limit=24576 if key.data=='out' else 4096
 -     part=os.read(key.fileobj.fileno(),limit+1-len(buf))
 -     if not part: sel.unregister(key.fileobj);continue
--     buf.extend(part);need(len(buf)<=limit)
++     buf=out if key.data=='out' else err;limit=24576 if key.data=='out' else 4096;part=os.read(key.fileobj.fileno(),limit+1-len(buf))
++     if not part:sel.unregister(key.fileobj);continue
+      buf.extend(part);need(len(buf)<=limit)
 -   need(p.wait(timeout=max(0.001,deadline-time.monotonic())) in [0,23] and len(err)==0)
--   return bytes(out),p.returncode
--  finally:
++   need(time.monotonic()<deadline);need(p.wait(timeout=max(0.001,deadline-time.monotonic())) in [0,23] and len(err)==0 and time.monotonic()<deadline)
+    return bytes(out),p.returncode
+   finally:
 -   if sel is not None: sel.close()
--   if p is not None:
++   if sel is not None:sel.close()
+    if p is not None:
 -    if p.poll() is None: p.kill()
--    p.wait()
++    if p.poll() is None:p.kill()
+     p.wait()
 -    if p.stdout: p.stdout.close()
 -    if p.stderr: p.stderr.close()
 - c,base=binding();raw,childStatus=capture(base);r=closed(raw,24576)
@@ -906,96 +409,6 @@ Changedartifactpins:
 - raise
 -except BaseException:
 - raise SystemExit(1)
-+ import os,sys,json,re,selectors,subprocess,time,stat,signal,hashlib,fcntl
-+ def need(ok):
-+  if not ok: raise ValueError()
-+ def closed(raw,cap):
-+  need(len(raw)<=cap and re.fullmatch(rb'[\x20-\x7e]*\n',raw) is not None and not raw.endswith(b'\n\n'))
-+  v=json.loads(raw)
-+  need((json.dumps(v,separators=(',',':'),ensure_ascii=True)+'\n').encode()==raw)
-+  return v
-+ def shape(v,s):
-+  if 'anyOf' in s:
-+   count=0
-+   for one in s['anyOf']:
-+    try: shape(v,one); count+=1
-+    except Exception: pass
-+   need(count==1); return
-+  if 'enum' in s:
-+   need(any(type(v) is type(x) and v==x for x in s['enum'])); return
-+  t=s['type']
-+  if t=='null': need(v is None)
-+  elif t=='integer': need(type(v) is int and s['minimum']<=v<=s['maximum'])
-+  elif t=='string': need(type(v) is str and re.fullmatch(s['pattern'],v) is not None)
-+  elif t=='object':
-+   need(type(v) is dict and set(v)==set(s['required']) and s['additionalProperties'] is False)
-+   for k in s['required']: shape(v[k],s['properties'][k])
-+  elif t=='array':
-+   need(type(v) is list and s['minItems']<=len(v)<=s['maxItems'])
-+   for x in v: shape(x,s['items'])
-+  else: raise ValueError()
-+ def binding():
-+  base=os.environ['RUNNER_TEMP']; need(type(base) is str and len(base)<=4096 and base.startswith('/') and '\x00' not in base and os.path.realpath(base)==base)
-+  fds=[]
-+  try:
-+   d=os.open(base,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW);fds.append(d);s=os.fstat(d)
-+   need(stat.S_ISDIR(s.st_mode) and s.st_uid==os.getuid() and not s.st_mode&0o022)
-+   d=os.open('afw-r3-delivery',os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=d);fds.append(d);s=os.fstat(d)
-+   need(stat.S_ISDIR(s.st_mode) and s.st_uid==os.getuid() and not s.st_mode&0o077)
-+   f=os.open('context.json',os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=d);fds.append(f);s=os.fstat(f)
-+   need(stat.S_ISREG(s.st_mode) and s.st_uid==os.getuid() and s.st_nlink==1 and not s.st_mode&0o077 and s.st_size<=2048)
-+   b=os.read(f,2049);need(len(b)==s.st_size and len(b)<=2048 and re.fullmatch(rb'[\x20-\x7e]*',b) is not None);after=os.fstat(f)
-+   need((s.st_dev,s.st_ino,s.st_size,s.st_mtime_ns,s.st_ctime_ns)==(after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns))
-+   c=json.loads(b);need(json.dumps(c,separators=(',',':')).encode()==b)
-+   need(list(c)==['purpose','source','sourceTree','run','attempt','job','node'])
-+   need(all(type(c[k]) is str for k in ['purpose','source','sourceTree','run','job','node']))
-+   need(c['purpose']=='afw.r3-delivery.binding.v1' and c['node']=='22.23.4' and c['job']=='readonly' and type(c['attempt']) is int and c['attempt']==1)
-+   need(re.fullmatch(r'[a-f0-9]{40}',c['source']) is not None and re.fullmatch(r'[a-f0-9]{40}',c['sourceTree']) is not None and re.fullmatch(r'[1-9][0-9]{0,19}',c['run']) is not None)
-+   image=os.fstat(3);need(stat.S_ISREG(image.st_mode))
-+   for k,v in [('GITHUB_SHA',c['source']),('GITHUB_RUN_ID',c['run']),('GITHUB_RUN_ATTEMPT','1'),('GITHUB_JOB','readonly'),('GITHUB_REPOSITORY','tokenizartinfo-ops/agent-friendly-web'),('GITHUB_REPOSITORY_ID','1347578006'),('GITHUB_REF','refs/heads/feat/finite-native-cleanup-20261101')]:need(os.environ.get(k)==v)
-+   return c,base
-+  finally:
-+   for f in reversed(fds):os.close(f)
-+ policy=json.loads("{\"purpose\":\"afw.q1.serial-source-lab.policy.v2\",\"scope\":\"top-laboratory-only\",\"unit\":\"ms\",\"horizon\":240000,\"reserve\":20000,\"parent\":250000,\"outer\":260000,\"step\":300000,\"job\":420000,\"normal\":{\"horizon\":90000,\"reserve\":20000,\"parent\":100000,\"outer\":110000,\"ceiling\":120000,\"delivery\":[3500,4000,5000],\"case\":5000,\"cleanup\":2000,\"probe\":[4500,4800],\"alive\":20},\"groups\":[\"baseline\",\"M_RAW\",\"M_PROVENANCE\",\"M_OUTPUT\",\"M_ASSOC\"],\"width\":104,\"instances\":520,\"marker\":\"AFW_Q1_SERIAL_LAB/2\",\"unavailable\":\"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2\"}")
-+ policyHash="91277fb4b570ce9f18d49e8c16fe6d48b556b8bb89781de81bcde97cae8b31ac"
-+ matrixHash="0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e"
-+ driver=json.loads("{\"blob\":\"48822f1654ad9dc3ec40990fe1d0474956f33678\",\"bytes\":32574,\"sha256\":\"d773dbda3d55624dbfc2cfe68b705015efc20bc4601c8e0d585583a3e9db8182\"}")
-+ normal=json.loads("{\"io.mjs\":{\"bytes\":1815,\"sha256\":\"b7d4ee0b8786c52a26857a8e203a710017b40dc8f5636a1d387638b9ec78eb47\",\"blob\":\"8bb9a8ab8ddf81689ee890252579c1fd41dfdf52\"},\"emitter.mjs\":{\"bytes\":3511,\"sha256\":\"02f80480dbc8bc8700d0ecf3a57e65f855954ca64b379d29eefdb75c6d7db760\",\"blob\":\"f9eee51fbdb89d0e130f8137d6a48ae787904f66\"},\"source-provenance.mjs\":{\"bytes\":6690,\"sha256\":\"b4d0872044216a275458d14b838ecf57628780092767ea88910dce18585408ce\",\"blob\":\"fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d\"},\"raw-sample.mjs\":{\"bytes\":4289,\"sha256\":\"1b594a7768a69cba5db1f41e83eb2a941f6451c82584490fdb77ba1fea85e9fc\",\"blob\":\"8cdabb2324ae97b04fa17350846e24d666cd3536\"},\"site-schema.json\":{\"bytes\":12651,\"sha256\":\"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd\",\"blob\":\"4871edc102386fe6db65c773e51c21ecb94897e3\"},\"site-map.json\":{\"bytes\":6630,\"sha256\":\"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe\",\"blob\":\"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f\"},\"envelope-schema.json\":{\"bytes\":5616,\"sha256\":\"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5\",\"blob\":\"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f\"},\"boundary.py\":{\"bytes\":12562,\"sha256\":\"27274120076048fd6f63b122b5534d8d06e97a2d4cf36461c1f710c605accdf4\",\"blob\":\"554a2b2d2a8e3f365533f0df3006bcce1e409698\"},\"delivery-schema.json\":{\"bytes\":1380,\"sha256\":\"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60\",\"blob\":\"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8\"},\"unavailable-schema.json\":{\"bytes\":1315,\"sha256\":\"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9\",\"blob\":\"4a310ddcef7b1b7bf0755bf56b760486254cf8c6\"},\"controls-schema.json\":{\"bytes\":4681,\"sha256\":\"2d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83\",\"blob\":\"8586d4387a5fcd95b18d7c966cf841432330a789\"},\"matrix.json\":{\"bytes\":24054,\"sha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"blob\":\"5b829c768ed3d7af03d5eb3f1870599d39bfd083\"},\"shape.mjs\":{\"bytes\":843,\"sha256\":\"82224496e7db35a1daf7168591cb2123edbb3242331a314680f13d05b3bfef5e\",\"blob\":\"df49410ebf42b4fbc9a8c032f81a0edc8fb95d0b\"},\"control-proof.mjs\":{\"bytes\":2206,\"sha256\":\"a7318fd9452f0254fdb9ae1261040ab944ce2d56c443004579c51e55c2c63c71\",\"blob\":\"ab38574f5fe697fd9f0d48f9ade065749f4a0c14\"},\"site-receiver.mjs\":{\"bytes\":5460,\"sha256\":\"0d346b88c9594c45ef207f9fa4b57c984d13a3e64943904f880e2e2b96377ad2\",\"blob\":\"c2cf804b6d427b5fc40da2b7d1375785a0a2f459\"},\"normalized-sample.mjs\":{\"bytes\":3987,\"sha256\":\"2bee6afaa30f01f1f497512d595f24f3a0c92269e3b4ed7e2d2e349ae5b4419f\",\"blob\":\"f7c2fefcc9df568a8453d876072a23a790b94fcd\"},\"witness.mjs\":{\"bytes\":1044,\"sha256\":\"336df41b1994c8a315e4f56d976ddd0c9922397c702a02869ac8d44f42a8629a\",\"blob\":\"b207c0c9ea759a9a146783b8818276444bef155b\"},\"fixtures.json\":{\"bytes\":7988,\"sha256\":\"06b7dc9e63c178b6b823db1ee56049ce4d1406861df240ca2fbc119d2df45bc9\",\"blob\":\"f29e76fd04627ebe5d1100007808610ebc240571\"},\"controls.mjs\":{\"bytes\":31799,\"sha256\":\"060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df\",\"blob\":\"b9b58c4a22f04b177f92dcbf8841cfc77f648c86\"},\"examples.json\":{\"bytes\":22739,\"sha256\":\"4f8da5a563bb0498cc506d693421853777ba7efb67d42da44b1889e5fef7b945\",\"blob\":\"6f28d4f4479fb093aec3188d21b1796fd7c3fff2\"},\"controls-boundary.py\":{\"bytes\":12908,\"sha256\":\"6e3dcd0c4f262a509b75499674375eaa3d91b9e83789f03689862f51734fc3d7\",\"blob\":\"b6c39695cdca9963d083842b114b7e4fb59e6392\"},\"controls-unavailable-example.json\":{\"bytes\":568,\"sha256\":\"7544b33859efe6ba2f6f1789e709f89f5f94f08352dd4fe4b14d700b19b22644\",\"blob\":\"beedc03c8066cef6e6a24914d5334f99183d014b\"},\"outer.mjs\":{\"bytes\":25947,\"sha256\":\"62f2faa1bff1a2aa2438e8c1794361910e44a6db9c632daa28185adc647bf515\",\"blob\":\"c74d74879d6935c47d50b1233dad4027e6704365\"},\"delivery-entry.sh\":{\"bytes\":24013,\"sha256\":\"63b7e32a4291e5a1b2fc3753a5ae89758dcf0913f6f2bf2d558bc3a0dd9f2961\",\"blob\":\"2477c393fbc7d9883894ef7299b4f749cc3857ab\"},\"controls-entry.sh\":{\"bytes\":24058,\"sha256\":\"e874d2de7710156e11726c7bd01626faa5351f94514cf0c42878e679981ad899\",\"blob\":\"f0825d011a5e7942194a157a327ef7c42548180c\"},\"oracle.mjs\":{\"bytes\":1877,\"sha256\":\"37c8724ced0eaa42bd54aa01aef1af7c3a7107ff3e78243e1f3d04da841fa4d1\",\"blob\":\"652201ebe699664b97a5bc3d7c815a02dd889805\"},\"lifetime.py\":{\"bytes\":16073,\"sha256\":\"f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791\",\"blob\":\"765573c5eeaf83add464e94a8240dcd7a90786d0\"},\"delivery-outer.mjs\":{\"bytes\":25986,\"sha256\":\"d32eaeb8d09e1d50dd14195fecec7606d457004ea6f61084900b94547cc6899f\",\"blob\":\"aac76e8c15a01cbb308ba63ad7dec19e2d5ebb76\"},\"controls-outer.mjs\":{\"bytes\":25986,\"sha256\":\"ada3cc7cf36a742d71c6ed12a7b5d15b91d56c4353aad02318a871ec370e4c35\",\"blob\":\"e62dd9c4760da521b84f23b1c87855070767aac0\"},\"missing-cwd-entry.sh\":{\"bytes\":24130,\"sha256\":\"e625cd8b88726576b278099856bd6b3126c02da4f31c387ba49ced923a5fa9fc\",\"blob\":\"3666fdd52620bd2a30bfa3e100897b2fab1610c1\"},\"race-creator.mjs\":{\"bytes\":777,\"sha256\":\"2657c30db6cff046599ff3d9cd2cdf7c3c312252b9636741627871d090372575\",\"blob\":\"a6d47254adbf330a09b879a3a9b20ae4de476e73\"},\"lifetime-controls.py\":{\"bytes\":12219,\"sha256\":\"d67b5c8c8e127c359f8d2b5d7da30da809b8d91bfb77759df4bbf9ecaaf53c59\",\"blob\":\"21b0b82242a76efd94d34fe1f722e04fda6cd489\"},\"authority-anchor.json\":{\"bytes\":1964,\"sha256\":\"e08d9864b16a1534b71344b817a6d3a78697d8d51af8ea798229a5f16d4b6407\",\"blob\":\"1bed486f15a8743ef7c68470772835aaf4946a40\"}}")
-+ normalPin=json.loads("{\"blob\":\"4f6d2738a0d116aaf8114fc4b5640110f6bafb03\",\"bytes\":5293,\"sha256\":\"ff0a90104e63a5d39924c562c8aecb74afa3518e556bd554fb85b51ed4a846a9\"}")
-+ schema=json.loads("{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"purpose\",\"scope\",\"source\",\"sourceTree\",\"run\",\"attempt\",\"job\",\"node\",\"matrixSha256\",\"policySha256\",\"normalManifest\",\"driver\",\"groups\",\"terminal\",\"lastAdmissionMs\",\"terminalMs\",\"v1\",\"nativeBusinessCases\",\"nonclaims\",\"qualified\"],\"properties\":{\"purpose\":{\"enum\":[\"afw.q1.serial-source-lab.v2\"]},\"scope\":{\"enum\":[{\"purpose\":\"afw.q1.serial-source-lab.policy.v2\",\"scope\":\"top-laboratory-only\",\"unit\":\"ms\",\"horizon\":240000,\"reserve\":20000,\"parent\":250000,\"outer\":260000,\"step\":300000,\"job\":420000,\"normal\":{\"horizon\":90000,\"reserve\":20000,\"parent\":100000,\"outer\":110000,\"ceiling\":120000,\"delivery\":[3500,4000,5000],\"case\":5000,\"cleanup\":2000,\"probe\":[4500,4800],\"alive\":20},\"groups\":[\"baseline\",\"M_RAW\",\"M_PROVENANCE\",\"M_OUTPUT\",\"M_ASSOC\"],\"width\":104,\"instances\":520,\"marker\":\"AFW_Q1_SERIAL_LAB/2\",\"unavailable\":\"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2\"}]},\"source\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"sourceTree\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"run\":{\"type\":\"string\",\"pattern\":\"^[1-9][0-9]{0,19}$\"},\"attempt\":{\"enum\":[1]},\"job\":{\"enum\":[\"readonly\"]},\"node\":{\"enum\":[\"22.23.4\"]},\"matrixSha256\":{\"enum\":[\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\"]},\"policySha256\":{\"enum\":[\"91277fb4b570ce9f18d49e8c16fe6d48b556b8bb89781de81bcde97cae8b31ac\"]},\"normalManifest\":{\"enum\":[{\"blob\":\"4f6d2738a0d116aaf8114fc4b5640110f6bafb03\",\"bytes\":5293,\"sha256\":\"ff0a90104e63a5d39924c562c8aecb74afa3518e556bd554fb85b51ed4a846a9\"}]},\"driver\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"blob\",\"bytes\",\"sha256\"],\"properties\":{\"blob\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"bytes\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":32768},\"sha256\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{64}$\"}}},\"groups\":{\"type\":\"array\",\"minItems\":5,\"maxItems\":5,\"items\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"id\",\"entry\",\"outcome\",\"cleanup\",\"entered\",\"returned\",\"passed\",\"failed\",\"unknown\",\"unentered\"],\"properties\":{\"id\":{\"enum\":[\"baseline\",\"M_RAW\",\"M_PROVENANCE\",\"M_OUTPUT\",\"M_ASSOC\"]},\"entry\":{\"type\":\"string\",\"pattern\":\"^[01]{104}$\"},\"outcome\":{\"type\":\"string\",\"pattern\":\"^[NPFUX]{104}$\"},\"cleanup\":{\"type\":\"string\",\"pattern\":\"^[NCFU]{104}$\"},\"entered\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"returned\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"passed\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"failed\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"unknown\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"unentered\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104}}}},\"terminal\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"kind\",\"next\"],\"properties\":{\"kind\":{\"enum\":[\"complete\",\"inner\",\"outer\",\"exception\",\"late\",\"custody\",\"abrupt\"]},\"next\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":0,\"maximum\":520},{\"enum\":[\"unknown\"]}]}}},\"lastAdmissionMs\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":0,\"maximum\":300000},{\"enum\":[null,\"unknown\"]}]},\"terminalMs\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":0,\"maximum\":300000},{\"enum\":[\"unknown\"]}]},\"v1\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"purpose\",\"source\",\"sourceTree\",\"run\",\"attempt\",\"job\",\"node\",\"matrixSha256\",\"allPassed\",\"expected\",\"passed\",\"failed\",\"unknown\",\"results\",\"mutants\",\"nativeBusinessCases\",\"nonclaims\",\"cleanup\"],\"properties\":{\"purpose\":{\"enum\":[\"afw.r3-delivery.controls.v1\"]},\"source\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"sourceTree\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{40}$\"},\"run\":{\"type\":\"string\",\"pattern\":\"^[1-9][0-9]{0,19}$\"},\"attempt\":{\"enum\":[1]},\"job\":{\"enum\":[\"readonly\"]},\"node\":{\"enum\":[\"22.23.4\"]},\"matrixSha256\":{\"type\":\"string\",\"pattern\":\"^[a-f0-9]{64}$\"},\"allPassed\":{\"enum\":[true,false]},\"expected\":{\"type\":\"integer\",\"minimum\":104,\"maximum\":104},\"passed\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"failed\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"unknown\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":104},\"results\":{\"type\":\"array\",\"minItems\":104,\"maxItems\":104,\"items\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"id\",\"result\"],\"properties\":{\"id\":{\"enum\":[\"A01\",\"A02\",\"A03\",\"A04\",\"D01\",\"D02\",\"D03\",\"D04\",\"D05\",\"D06\",\"D07\",\"D08\",\"D09\",\"D10\",\"D11\",\"D12\",\"D13\",\"P01\",\"P02\",\"P03\",\"P04\",\"P05\",\"P06\",\"P07\",\"P08\",\"P09\",\"P10\",\"P11\",\"P12\",\"P13\",\"P14\",\"P15\",\"P16\",\"P17\",\"P18\",\"P19\",\"P20\",\"P21\",\"P22\",\"P23\",\"P24\",\"P25\",\"F01\",\"F02\",\"F03\",\"F04\",\"F05\",\"F06\",\"F07\",\"F08\",\"F09\",\"B01\",\"B02\",\"B03\",\"B04\",\"B05\",\"B06\",\"B07\",\"B08\",\"B09\",\"B10\",\"B11\",\"B12\",\"B13\",\"W01\",\"W02\",\"C01\",\"C02\",\"C03\",\"C04\",\"C05\",\"D14\",\"P26\",\"F10\",\"E01\",\"E02\",\"E03\",\"E04\",\"E05\",\"E06\",\"O01\",\"O02\",\"O03\",\"O04\",\"O05\",\"S01\",\"E07\",\"T01\",\"F11\",\"A05\",\"U01\",\"U02\",\"U03\",\"U04\",\"H01\",\"L01\",\"L02\",\"L03\",\"L04\",\"L05\",\"E08\",\"E09\",\"E10\",\"E11\"]},\"result\":{\"enum\":[\"passed\",\"failed\",\"unknown\"]}}}},\"mutants\":{\"type\":\"array\",\"minItems\":4,\"maxItems\":4,\"items\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"id\",\"expectedFailedIds\",\"actualFailedIds\",\"result\"],\"properties\":{\"id\":{\"enum\":[\"M_RAW\",\"M_PROVENANCE\",\"M_OUTPUT\",\"M_ASSOC\"]},\"expectedFailedIds\":{\"type\":\"array\",\"minItems\":1,\"maxItems\":2,\"items\":{\"enum\":[\"D02\",\"P06\",\"B05\",\"U01\",\"S01\"]}},\"actualFailedIds\":{\"type\":\"array\",\"minItems\":0,\"maxItems\":104,\"items\":{\"enum\":[\"A01\",\"A02\",\"A03\",\"A04\",\"D01\",\"D02\",\"D03\",\"D04\",\"D05\",\"D06\",\"D07\",\"D08\",\"D09\",\"D10\",\"D11\",\"D12\",\"D13\",\"P01\",\"P02\",\"P03\",\"P04\",\"P05\",\"P06\",\"P07\",\"P08\",\"P09\",\"P10\",\"P11\",\"P12\",\"P13\",\"P14\",\"P15\",\"P16\",\"P17\",\"P18\",\"P19\",\"P20\",\"P21\",\"P22\",\"P23\",\"P24\",\"P25\",\"F01\",\"F02\",\"F03\",\"F04\",\"F05\",\"F06\",\"F07\",\"F08\",\"F09\",\"B01\",\"B02\",\"B03\",\"B04\",\"B05\",\"B06\",\"B07\",\"B08\",\"B09\",\"B10\",\"B11\",\"B12\",\"B13\",\"W01\",\"W02\",\"C01\",\"C02\",\"C03\",\"C04\",\"C05\",\"D14\",\"P26\",\"F10\",\"E01\",\"E02\",\"E03\",\"E04\",\"E05\",\"E06\",\"O01\",\"O02\",\"O03\",\"O04\",\"O05\",\"S01\",\"E07\",\"T01\",\"F11\",\"A05\",\"U01\",\"U02\",\"U03\",\"U04\",\"H01\",\"L01\",\"L02\",\"L03\",\"L04\",\"L05\",\"E08\",\"E09\",\"E10\",\"E11\"]}},\"result\":{\"enum\":[\"passed\",\"failed\",\"unknown\"]}}}},\"nativeBusinessCases\":{\"enum\":[0]},\"nonclaims\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"historicalCauseProven\",\"receiptAuthenticated\",\"operationalReadiness\",\"completePackage\",\"PCoff\",\"globalNativeDrainVerified\",\"sdkNamespaceEmptyVerified\"],\"properties\":{\"historicalCauseProven\":{\"enum\":[false]},\"receiptAuthenticated\":{\"enum\":[false]},\"operationalReadiness\":{\"enum\":[false]},\"completePackage\":{\"enum\":[false]},\"PCoff\":{\"enum\":[false]},\"globalNativeDrainVerified\":{\"enum\":[false]},\"sdkNamespaceEmptyVerified\":{\"enum\":[false]}}},\"cleanup\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"complete\",\"failedInstances\",\"unknownInstances\"],\"properties\":{\"complete\":{\"enum\":[true,false]},\"failedInstances\":{\"type\":\"array\",\"minItems\":0,\"maxItems\":520,\"items\":{\"type\":\"string\",\"pattern\":\"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$\"}},\"unknownInstances\":{\"type\":\"array\",\"minItems\":0,\"maxItems\":520,\"items\":{\"type\":\"string\",\"pattern\":\"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$\"}}}}}},\"nativeBusinessCases\":{\"enum\":[0]},\"nonclaims\":{\"type\":\"object\",\"additionalProperties\":false,\"required\":[\"historicalCauseProven\",\"receiptAuthenticated\",\"operationalReadiness\",\"completePackage\",\"PCoff\",\"globalNativeDrainVerified\",\"sdkNamespaceEmptyVerified\"],\"properties\":{\"historicalCauseProven\":{\"enum\":[false]},\"receiptAuthenticated\":{\"enum\":[false]},\"operationalReadiness\":{\"enum\":[false]},\"completePackage\":{\"enum\":[false]},\"PCoff\":{\"enum\":[false]},\"globalNativeDrainVerified\":{\"enum\":[false]},\"sdkNamespaceEmptyVerified\":{\"enum\":[false]}}},\"qualified\":{\"enum\":[true,false]}}}")
-+ ids=json.loads("[\"A01\",\"A02\",\"A03\",\"A04\",\"D01\",\"D02\",\"D03\",\"D04\",\"D05\",\"D06\",\"D07\",\"D08\",\"D09\",\"D10\",\"D11\",\"D12\",\"D13\",\"P01\",\"P02\",\"P03\",\"P04\",\"P05\",\"P06\",\"P07\",\"P08\",\"P09\",\"P10\",\"P11\",\"P12\",\"P13\",\"P14\",\"P15\",\"P16\",\"P17\",\"P18\",\"P19\",\"P20\",\"P21\",\"P22\",\"P23\",\"P24\",\"P25\",\"F01\",\"F02\",\"F03\",\"F04\",\"F05\",\"F06\",\"F07\",\"F08\",\"F09\",\"B01\",\"B02\",\"B03\",\"B04\",\"B05\",\"B06\",\"B07\",\"B08\",\"B09\",\"B10\",\"B11\",\"B12\",\"B13\",\"W01\",\"W02\",\"C01\",\"C02\",\"C03\",\"C04\",\"C05\",\"D14\",\"P26\",\"F10\",\"E01\",\"E02\",\"E03\",\"E04\",\"E05\",\"E06\",\"O01\",\"O02\",\"O03\",\"O04\",\"O05\",\"S01\",\"E07\",\"T01\",\"F11\",\"A05\",\"U01\",\"U02\",\"U03\",\"U04\",\"H01\",\"L01\",\"L02\",\"L03\",\"L04\",\"L05\",\"E08\",\"E09\",\"E10\",\"E11\"]")
-+ mutantDefs=json.loads("[{\"id\":\"M_RAW\",\"change\":\"omit strict raw framing in inner raw receiver; outer normalized receiver retains sample semantics\",\"expectedFailedIds\":[\"D02\"]},{\"id\":\"M_PROVENANCE\",\"change\":\"omit full before-after guard in BOTH inner and final literal outer strong Source receivers\",\"expectedFailedIds\":[\"P06\"]},{\"id\":\"M_OUTPUT\",\"change\":\"omit delivery envelope/record closed-schema guard in BOTH Python parent and final literal Node outer; held authority and semantic rules remain\",\"expectedFailedIds\":[\"B05\",\"U01\"]},{\"id\":\"M_ASSOC\",\"change\":\"omit normalized sample semantic receiver only in final literal Node outer; inner emitter fixture sends impossible not_observed\",\"expectedFailedIds\":[\"S01\"]}]")
-+ nonclaims={k:False for k in ["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"]}
-+ def fixed(name,pin):
-+  fd=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=6)
-+  try:
-+   s=os.fstat(fd);need(stat.S_ISREG(s.st_mode) and s.st_uid==os.getuid() and s.st_nlink==1 and not s.st_mode&0o077 and s.st_size==pin['bytes'])
-+   b=os.read(fd,32769);a=os.fstat(fd);need(len(b)==s.st_size and (s.st_dev,s.st_ino,s.st_size,s.st_mtime_ns,s.st_ctime_ns)==(a.st_dev,a.st_ino,a.st_size,a.st_mtime_ns,a.st_ctime_ns))
-+   need(hashlib.sha256(b).hexdigest()==pin['sha256'] and hashlib.sha1(('blob '+str(len(b))+'\0').encode()+b).hexdigest()==pin['blob']);return b
-+  finally:os.close(fd)
-+ def capture(base):
-+  allowed=['PATH','HOME','RUNNER_TEMP','CI','LANG','TZ','GITHUB_REPOSITORY','GITHUB_REPOSITORY_ID','GITHUB_REF','GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB','GITHUB_WORKFLOW_REF']
-+  env={k:os.environ[k] for k in allowed if k in os.environ};p=None;sel=None;fd=None;sealed=None
-+  try:
-+   for name,pin in normal.items():fixed(name,pin)
-+   raw=fixed('lab-serial-v2.mjs',driver);fd=os.memfd_create('afw-q1-v2-driver',os.MFD_ALLOW_SEALING|os.MFD_CLOEXEC);need(os.write(fd,raw)==len(raw));os.lseek(fd,0,0)
-+   fcntl.fcntl(fd,fcntl.F_ADD_SEALS,fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL);sealed=os.open('/proc/self/fd/'+str(fd),os.O_RDONLY|os.O_CLOEXEC)
-+   deadline=time.monotonic()+250;pre=r3_prepare_node_child()
-+   p=subprocess.Popen(['/proc/self/fd/3','--disable-warning=ExperimentalWarning','--input-type=module','-'],stdin=sealed,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env,close_fds=True,pass_fds=(3,4,6),preexec_fn=pre)
-+   sel=selectors.DefaultSelector();sel.register(p.stdout,selectors.EVENT_READ,'out');sel.register(p.stderr,selectors.EVENT_READ,'err');out=bytearray();err=bytearray()
-+   while sel.get_map():
-+    remaining=deadline-time.monotonic();need(remaining>0)
-+    for key,_ in sel.select(min(remaining,0.1)):
-+     buf=out if key.data=='out' else err;limit=24576 if key.data=='out' else 4096;part=os.read(key.fileobj.fileno(),limit+1-len(buf))
-+     if not part:sel.unregister(key.fileobj);continue
-+     buf.extend(part);need(len(buf)<=limit)
-+   need(time.monotonic()<deadline);need(p.wait(timeout=max(0.001,deadline-time.monotonic())) in [0,23] and len(err)==0 and time.monotonic()<deadline)
-+   return bytes(out),p.returncode
-+  finally:
-+   if sel is not None:sel.close()
-+   if p is not None:
-+    if p.poll() is None:p.kill()
-+    p.wait()
 +    if p.stdout:p.stdout.close()
 +    if p.stderr:p.stderr.close()
 +   for one in [sealed,fd]:
@@ -1043,118 +456,57 @@ Changedartifactpins:
 ```diff
 --- a/bootstrap-prelude.mjs
 +++ b/bootstrap-prelude.mjs
-@@ -1,62 +1,82 @@
+@@ -1,14 +1,14 @@
  import assert from 'node:assert/strict';
  import * as fs from 'node:fs';
  import {createHash} from 'node:crypto';
  import {gunzipSync} from 'node:zlib';
  import {execFileSync} from 'node:child_process';
 -let r3BootstrapAdmitted=false;
--try{
-- const e=process.env,sha=b=>createHash('sha256').update(b).digest('hex'),blob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
-- const git=(...args)=>execFileSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
-- const same='docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md',f7='.github/workflows/afw-finite-budget-qualification.yml';
-- const image=fs.fstatSync(3),current=fs.statSync('/proc/self/exe');assert(image.isFile()&&image.uid===process.getuid()&&image.nlink===1&&(image.mode&0o7777)===0o500&&image.dev===current.dev&&image.ino===current.ino&&image.size===current.size);
-- assert.equal(process.versions.node,'22.23.4');assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REPOSITORY_ID,'1347578006');assert.equal(e.GITHUB_JOB,'readonly');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_EVENT_NAME,'push');assert.equal(e.GITHUB_WORKFLOW_REF,'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101');
-- for(const k of ['NODE_OPTIONS','NODE_PATH','AFW_SYN_CHECKPOINT_KEY','AFW_BUDGET_DIAGNOSTIC_CANDIDATE'])assert.equal(e[k],undefined);
-- assert.equal(typeof e.GITHUB_SHA,'string');assert.equal(typeof e.GITHUB_RUN_ID,'string');assert.match(e.GITHUB_SHA,/^[a-f0-9]{40}$/);assert.match(e.GITHUB_RUN_ID,/^[1-9][0-9]{0,19}$/);assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);assert.equal(git('rev-parse','--show-toplevel'),fs.realpathSync('.'));assert.equal(process.cwd(),fs.realpathSync('.'));
-- const sourceTree=git('rev-parse','HEAD^{tree}');assert.match(sourceTree,/^[a-f0-9]{40}$/);
-- const tree=execFileSync('git',['ls-tree','-rz','--full-tree','HEAD'],{stdio:['ignore','pipe','pipe']});
-- const rows=tree.toString('utf8').split('\0').filter(Boolean).map(x=>{const at=x.indexOf('\t');assert(at>0);return{tuple:x.slice(0,at),path:x.slice(at+1)};}).filter(x=>![same,f7].includes(x.path)).sort((a,b)=>Buffer.compare(Buffer.from(a.path),Buffer.from(b.path)));
-- const core=Buffer.from(rows.map(x=>x.tuple+'\t'+x.path+'\0').join(''));assert.equal(rows.length,3201);assert.equal(core.length,324448);assert.equal(sha(core),'aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703');execFileSync('git',['diff','--exit-code','HEAD','--'],{stdio:['ignore','pipe','pipe']});
-- const st=fs.lstatSync(same);assert(st.isFile()&&!st.isSymbolicLink()&&st.size<=2600000);const bytes=fs.readFileSync(same);assert.equal(blob(bytes),git('rev-parse','HEAD:'+same));
-- const prefix=bytes.subarray(0,2260109);assert.equal(prefix.length,2260109);assert.equal(sha(prefix),'9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421');assert.equal(blob(prefix),'71fabddb7fcee9f436ce3ea95785c3a2ee5afe70');
-- const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(bytes),begin='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:BEGIN -->',end='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:END -->';assert.equal(text.split(begin).length,2);assert.equal(text.split(end).length,2);const first=text.indexOf(begin),last=text.indexOf(end);assert(last>first&&Buffer.byteLength(text.slice(0,first))>=prefix.length);
-- const section=text.slice(first+begin.length,last);assert.match(section,/^\n[A-Za-z0-9+/=\n]+\n$/);const b64=section.replaceAll('\n',''),pins={"bytes":487208,"sha256":"087bba2182c131579e233f6c29daf1ee85e2aae41e77b66d6f93cc44cb5000c5","blob":"f9c8261c54f761b5c33ddc370dbe7b308648033b","compressed":{"bytes":120211,"sha256":"7e9aace1b1a3930a1a5234a2fdee5af68ebec77cc5b9818a6d342328047bf0e5","blob":"b3dfc078047bee03b5b42140783ee1dcf2409fd8"},"base64Characters":160284};assert.equal(b64.length,pins.base64Characters);assert(b64.length<=174764);const zip=Buffer.from(b64,'base64');assert.equal(zip.toString('base64'),b64);assert.equal(zip.length,pins.compressed.bytes);assert(zip.length<=131072);assert.equal(sha(zip),pins.compressed.sha256);assert.equal(blob(zip),pins.compressed.blob);
-- const raw=gunzipSync(zip,{maxOutputLength:524288});assert.equal(raw.length,pins.bytes);assert.equal(sha(raw),pins.sha256);assert.equal(blob(raw),pins.blob);const wire=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(raw),payload=JSON.parse(wire);assert.equal(JSON.stringify(payload),wire);
-- // Closed captured-original-creator continuity derivation; no caller patch/path/code.
-- const ccPrefix=bytes.subarray(0,2471214);assert.equal(ccPrefix.length,2471214);assert.equal(sha(ccPrefix),'1ba61ebb62514c1bb2e5b7b6058dd5abad09ddc1d059483987262032e154928a');assert.equal(blob(ccPrefix),'2fcd79c7d0a2475f176dc03360df5980a58c3120');
-- const ccSuffix=bytes.subarray(2471214,2481826);assert.equal(ccSuffix.length,10612);assert.equal(sha(ccSuffix),'cdfe4a0b495be82b9d2746a12f09a3cb24c100f940bb6cdbecaa0585f8a7fac5');
-- const ccBegin='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:BEGIN -->',ccEnd='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:END -->';assert.equal(text.split(ccBegin).length,2);assert.equal(text.split(ccEnd).length,2);const ccFirst=text.indexOf(ccBegin),ccLast=text.indexOf(ccEnd);assert(ccLast>ccFirst&&Buffer.byteLength(text.slice(0,ccFirst))>=2471214);const ccOverlayText=text.slice(ccFirst+ccBegin.length,ccLast);assert.equal(sha(Buffer.from(ccOverlayText)),'a7e62d0ce31a094090c6b1524f34cc55b776a4938010a5ec1c310ca4ac6b712f');
-- const ccOldKernel=payload.helpers['lifetime.py'];assert.equal(sha(Buffer.from(ccOldKernel)),'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');assert.equal(ccOldKernel.split(" # AFW_LIFE_BEFORE_ARM\n").length,2);payload.helpers['lifetime.py']=ccOldKernel.replace(" # AFW_LIFE_BEFORE_ARM\n"," # AFW_LIFE_BEFORE_ARM\n if os.getppid()!=before[0]:raise CreatorDead()\n");
-- const ccKernelPin=JSON.parse(ccOverlayText).kernelSnapshot;assert.deepEqual(Object.keys(ccKernelPin),['bytes','sha256','zipBytes','zipSha256','data','cap']);assert.equal(ccKernelPin.bytes,16073);assert.equal(ccKernelPin.cap,32768);assert.equal(ccKernelPin.sha256,'f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791');assert.equal(ccKernelPin.zipBytes,5078);assert.equal(ccKernelPin.zipSha256,'f0ef8e96c2f15251fbdbcb0abe801cbb981f5c97663233a0cae0520b261f29ed');assert.equal(sha(Buffer.from(ccKernelPin.data)),'1ba509cdcd9ecda3ae60b3db8f5876e1ddf17f5f9692bff77f113cef3e6356ef');const ccKernelZip=Buffer.from(ccKernelPin.data,'base64');assert.equal(ccKernelZip.toString('base64'),ccKernelPin.data);assert.equal(ccKernelZip.length,ccKernelPin.zipBytes);assert.equal(sha(ccKernelZip),ccKernelPin.zipSha256);assert.equal(gunzipSync(ccKernelZip,{maxOutputLength:32768}).toString('utf8'),payload.helpers['lifetime.py']);
-- for(const name of ['delivery-entry.sh','controls-entry.sh','missing-cwd-entry.sh']){const prior=payload.helpers[name],lines=prior.split('\n').filter(line=>line.startsWith('_r3_kernel='));assert.equal(lines.length,1);const oldPin=JSON.parse(lines[0].slice('_r3_kernel='.length));assert.equal(oldPin.bytes,16025);assert.equal(oldPin.sha256,'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');payload.helpers[name]=prior.replace(lines[0],'_r3_kernel='+JSON.stringify(ccKernelPin));}
-- const ccResult=Buffer.from(JSON.stringify(payload));assert.equal(ccResult.length,487293);assert.equal(sha(ccResult),'dda3f25ef82cdf4e65814360b52aafa9ddf3ec2e57d1fa2f92e46466acfcd25b');assert.equal(blob(ccResult),'f23fcfebf3c72632327cf24babf2ff7ace22dae6');
--  const serialPrefix=bytes.subarray(0,2514447);
--  assert.equal(serialPrefix.length,2514447);assert.equal(sha(serialPrefix),'ae7a7ed3d0cbd38149bfd284eaeb458fc696bede38976f509a801c40ced1b770');assert.equal(blob(serialPrefix),'af9eee4beb70ea89fef675cfc5bb99ec10811fc4');
--  const serialAppend=bytes.subarray(2514447,2538602);assert.equal(serialAppend.length,24155);assert.equal(sha(serialAppend),'48e15b75dfdd3221681f262de02a462cf0edf43b6010264310cfa7180858438f');
--  const serialBegin='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:BEGIN -->',serialEnd='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:END -->';assert.equal(text.split(serialBegin).length,2);assert.equal(text.split(serialEnd).length,2);
--  const serialText=text.slice(text.indexOf(serialBegin)+serialBegin.length,text.indexOf(serialEnd));
--  assert.equal(sha(Buffer.from(serialText)),'07567d1647505cbf671675f87b874b6afc0b18b5a9cbaa445496b1a9e69df20b');
--  const serial=JSON.parse(serialText);assert.equal('\n'+JSON.stringify(serial)+'\n',serialText);
--  assert.deepEqual(Object.keys(serial),['purpose','closedParent','closedTree','origin','baselinePrefix','normalHistory','overlay','unit','unitSchema','oneUseMessage','nonclaims']);
--  assert.equal(serial.purpose,'afw.serial-entry-pin.append.v1');assert.equal(serial.closedParent,'3f23a9805a60d285a6272138765078e7da80e5eb');assert.equal(serial.closedTree,'a8c002728663bdcf67a6bc59d5c5f1232cb6384c');
--  const serialOverlay=serial.overlay;assert.deepEqual(Object.keys(serialOverlay),['purpose','normalRaw','normalControls','candidateControls','span','candidateRaw','nonclaims']);assert.equal(serialOverlay.purpose,'afw.serial-entry-pin.overlay.v1');
--  assert.deepEqual(Object.keys(serialOverlay.span),['from','to']);
--  const serialOld=payload.helpers['controls.mjs'];assert.equal(sha(Buffer.from(serialOld)),'060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df');assert.equal(serialOld.split(serialOverlay.span.from).length,2);
--  payload.helpers['controls.mjs']=serialOld.replace(serialOverlay.span.from,serialOverlay.span.to);
--  const serialControls=Buffer.from(payload.helpers['controls.mjs']);assert.equal(serialControls.length,32428);assert.equal(sha(serialControls),'3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35');assert.equal(blob(serialControls),'17e101dd8720312111b7dffb37f7edb8da41a0fd');
--  const serialResult=Buffer.from(JSON.stringify(payload));assert.equal(serialResult.length,487931);assert.equal(sha(serialResult),'f5fe1b3ecc0054ba1ce626c9140fc5899f4b35d0e8544181eb2606771b7220f8');assert.equal(blob(serialResult),'2716e7224ddee98690f457d0c48e6d096bd17024');
--
-- // Original raw origin, production18, remaining32 helpers and public wire remain pinned.
-- assert.deepEqual(Object.keys(payload),['purpose','sourceParent','sourceParentTree','core','prefix','production','helpers']);assert.equal(payload.purpose,'afw.r3-delivery.successor-round5-data.v1');assert.equal(payload.sourceParent,'bfa80fac58ecb60bb3c9bcd458da6f393b301f70');assert.equal(payload.sourceParentTree,'d17f87ef49892e6a4c0ec50dd2436b0697b9f45f');assert.deepEqual(payload.core,{"count":3201,"bytes":324448,"sha256":"aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"});assert.deepEqual(payload.prefix,{"blob":"71fabddb7fcee9f436ce3ea95785c3a2ee5afe70","bytes":2260109,"sha256":"9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421"});
-- const prod=payload.production;assert.deepEqual(Object.keys(prod),['blob','bytes','sha256','count','setSha256','data']);assert.equal(prod.count,18);assert.equal(prod.blob,'b88ebef9a2aa979772d20bfb778cbfe463dc3011');assert.equal(prod.bytes,95518);assert.equal(prod.sha256,'cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91');assert.equal(prod.setSha256,'71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af');
-- const frozen=Buffer.from(prod.data);assert.equal(frozen.length,prod.bytes);assert.equal(sha(frozen),prod.sha256);assert.equal(blob(frozen),prod.blob);const original=JSON.parse(prod.data);assert.equal(JSON.stringify(original)+'\n',prod.data);assert.equal(original.productionCount,18);assert.equal(Object.keys(original.programs).length,18);
-- const originalPins={};for(const[name,p]of Object.entries(original.programs)){const b=Buffer.from(p.content);assert.deepEqual(Object.keys(p),['bytes','sha256','blob','content']);assert.equal(b.length,p.bytes);assert.equal(sha(b),p.sha256);assert.equal(blob(b),p.blob);originalPins[name]={bytes:p.bytes,sha256:p.sha256,blob:p.blob};}assert.equal(sha(Buffer.from(JSON.stringify(originalPins)+'\n')),prod.setSha256);
-- // Frozen18 remain DATA. No production main/original readonly CLI/Native import, materialization or call.
-- const expected={"io.mjs":{"bytes":1815,"sha256":"b7d4ee0b8786c52a26857a8e203a710017b40dc8f5636a1d387638b9ec78eb47","blob":"8bb9a8ab8ddf81689ee890252579c1fd41dfdf52"},"emitter.mjs":{"bytes":3511,"sha256":"02f80480dbc8bc8700d0ecf3a57e65f855954ca64b379d29eefdb75c6d7db760","blob":"f9eee51fbdb89d0e130f8137d6a48ae787904f66"},"source-provenance.mjs":{"bytes":6690,"sha256":"b4d0872044216a275458d14b838ecf57628780092767ea88910dce18585408ce","blob":"fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d"},"raw-sample.mjs":{"bytes":4289,"sha256":"1b594a7768a69cba5db1f41e83eb2a941f6451c82584490fdb77ba1fea85e9fc","blob":"8cdabb2324ae97b04fa17350846e24d666cd3536"},"site-schema.json":{"bytes":12651,"sha256":"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd","blob":"4871edc102386fe6db65c773e51c21ecb94897e3"},"site-map.json":{"bytes":6630,"sha256":"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","blob":"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f"},"envelope-schema.json":{"bytes":5616,"sha256":"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5","blob":"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f"},"boundary.py":{"bytes":12562,"sha256":"27274120076048fd6f63b122b5534d8d06e97a2d4cf36461c1f710c605accdf4","blob":"554a2b2d2a8e3f365533f0df3006bcce1e409698"},"delivery-schema.json":{"bytes":1380,"sha256":"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60","blob":"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8"},"unavailable-schema.json":{"bytes":1315,"sha256":"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9","blob":"4a310ddcef7b1b7bf0755bf56b760486254cf8c6"},"controls-schema.json":{"bytes":4681,"sha256":"2d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83","blob":"8586d4387a5fcd95b18d7c966cf841432330a789"},"matrix.json":{"bytes":24054,"sha256":"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e","blob":"5b829c768ed3d7af03d5eb3f1870599d39bfd083"},"shape.mjs":{"bytes":843,"sha256":"82224496e7db35a1daf7168591cb2123edbb3242331a314680f13d05b3bfef5e","blob":"df49410ebf42b4fbc9a8c032f81a0edc8fb95d0b"},"control-proof.mjs":{"bytes":2206,"sha256":"a7318fd9452f0254fdb9ae1261040ab944ce2d56c443004579c51e55c2c63c71","blob":"ab38574f5fe697fd9f0d48f9ade065749f4a0c14"},"site-receiver.mjs":{"bytes":5460,"sha256":"0d346b88c9594c45ef207f9fa4b57c984d13a3e64943904f880e2e2b96377ad2","blob":"c2cf804b6d427b5fc40da2b7d1375785a0a2f459"},"normalized-sample.mjs":{"bytes":3987,"sha256":"2bee6afaa30f01f1f497512d595f24f3a0c92269e3b4ed7e2d2e349ae5b4419f","blob":"f7c2fefcc9df568a8453d876072a23a790b94fcd"},"witness.mjs":{"bytes":1044,"sha256":"336df41b1994c8a315e4f56d976ddd0c9922397c702a02869ac8d44f42a8629a","blob":"b207c0c9ea759a9a146783b8818276444bef155b"},"fixtures.json":{"bytes":7988,"sha256":"06b7dc9e63c178b6b823db1ee56049ce4d1406861df240ca2fbc119d2df45bc9","blob":"f29e76fd04627ebe5d1100007808610ebc240571"},"controls.mjs":{"bytes":32428,"sha256":"3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35","blob":"17e101dd8720312111b7dffb37f7edb8da41a0fd"},"examples.json":{"bytes":22739,"sha256":"4f8da5a563bb0498cc506d693421853777ba7efb67d42da44b1889e5fef7b945","blob":"6f28d4f4479fb093aec3188d21b1796fd7c3fff2"},"controls-boundary.py":{"bytes":12908,"sha256":"6e3dcd0c4f262a509b75499674375eaa3d91b9e83789f03689862f51734fc3d7","blob":"b6c39695cdca9963d083842b114b7e4fb59e6392"},"controls-unavailable-example.json":{"bytes":568,"sha256":"7544b33859efe6ba2f6f1789e709f89f5f94f08352dd4fe4b14d700b19b22644","blob":"beedc03c8066cef6e6a24914d5334f99183d014b"},"outer.mjs":{"bytes":25947,"sha256":"62f2faa1bff1a2aa2438e8c1794361910e44a6db9c632daa28185adc647bf515","blob":"c74d74879d6935c47d50b1233dad4027e6704365"},"delivery-entry.sh":{"bytes":24013,"sha256":"63b7e32a4291e5a1b2fc3753a5ae89758dcf0913f6f2bf2d558bc3a0dd9f2961","blob":"2477c393fbc7d9883894ef7299b4f749cc3857ab"},"controls-entry.sh":{"bytes":24058,"sha256":"e874d2de7710156e11726c7bd01626faa5351f94514cf0c42878e679981ad899","blob":"f0825d011a5e7942194a157a327ef7c42548180c"},"oracle.mjs":{"bytes":1877,"sha256":"37c8724ced0eaa42bd54aa01aef1af7c3a7107ff3e78243e1f3d04da841fa4d1","blob":"652201ebe699664b97a5bc3d7c815a02dd889805"},"lifetime.py":{"bytes":16073,"sha256":"f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791","blob":"765573c5eeaf83add464e94a8240dcd7a90786d0"},"delivery-outer.mjs":{"bytes":25986,"sha256":"d32eaeb8d09e1d50dd14195fecec7606d457004ea6f61084900b94547cc6899f","blob":"aac76e8c15a01cbb308ba63ad7dec19e2d5ebb76"},"controls-outer.mjs":{"bytes":25986,"sha256":"ada3cc7cf36a742d71c6ed12a7b5d15b91d56c4353aad02318a871ec370e4c35","blob":"e62dd9c4760da521b84f23b1c87855070767aac0"},"missing-cwd-entry.sh":{"bytes":24130,"sha256":"e625cd8b88726576b278099856bd6b3126c02da4f31c387ba49ced923a5fa9fc","blob":"3666fdd52620bd2a30bfa3e100897b2fab1610c1"},"race-creator.mjs":{"bytes":777,"sha256":"2657c30db6cff046599ff3d9cd2cdf7c3c312252b9636741627871d090372575","blob":"a6d47254adbf330a09b879a3a9b20ae4de476e73"},"lifetime-controls.py":{"bytes":12219,"sha256":"d67b5c8c8e127c359f8d2b5d7da30da809b8d91bfb77759df4bbf9ecaaf53c59","blob":"21b0b82242a76efd94d34fe1f722e04fda6cd489"},"authority-anchor.json":{"bytes":1964,"sha256":"e08d9864b16a1534b71344b817a6d3a78697d8d51af8ea798229a5f16d4b6407","blob":"1bed486f15a8743ef7c68470772835aaf4946a40"}},names=Object.keys(expected);assert.equal(names.length,33);assert.deepEqual(Object.keys(payload.helpers),names);
-- for(const name of names){assert.match(name,/^[a-z0-9][a-z0-9.-]{0,63}$/);const content=payload.helpers[name];assert.equal(typeof content,'string');const b=Buffer.from(content),pin=expected[name];assert(b.length<=32768);assert.equal(b.length,pin.bytes);assert.equal(sha(b),pin.sha256);assert.equal(blob(b),pin.blob);}
-- assert.equal(sha(Buffer.from(payload.helpers['matrix.json'])),expected['matrix.json'].sha256);assert.equal(expected['matrix.json'].blob,'5b829c768ed3d7af03d5eb3f1870599d39bfd083');
-- assert.equal(fs.realpathSync(e.RUNNER_TEMP),e.RUNNER_TEMP);const temp=fs.lstatSync(e.RUNNER_TEMP);assert(temp.isDirectory()&&temp.uid===process.getuid()&&!(temp.mode&0o022));
-- const root=e.RUNNER_TEMP+'/afw-r3-delivery';fs.mkdirSync(root,{mode:0o700});for(const name of names)fs.writeFileSync(root+'/'+name,payload.helpers[name],{mode:0o600,flag:'wx'});
-- for(const name of names){const b=fs.readFileSync(root+'/'+name);assert.equal(b.length,expected[name].bytes);assert.equal(sha(b),expected[name].sha256);assert.equal(blob(b),expected[name].blob);}
 +let r3BootstrapAdmitted=false,r3LabParent;
-+try{
-+ const e=process.env,sha=b=>createHash('sha256').update(b).digest('hex'),blob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
-+ const git=(...args)=>execFileSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
-+ const same='docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md',f7='.github/workflows/afw-finite-budget-qualification.yml';
-+ const image=fs.fstatSync(3),current=fs.statSync('/proc/self/exe');assert(image.isFile()&&image.uid===process.getuid()&&image.nlink===1&&(image.mode&0o7777)===0o500&&image.dev===current.dev&&image.ino===current.ino&&image.size===current.size);
-+ assert.equal(process.versions.node,'22.23.4');assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REPOSITORY_ID,'1347578006');assert.equal(e.GITHUB_JOB,'readonly');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_EVENT_NAME,'push');assert.equal(e.GITHUB_WORKFLOW_REF,'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101');
-+ for(const k of ['NODE_OPTIONS','NODE_PATH','AFW_SYN_CHECKPOINT_KEY','AFW_BUDGET_DIAGNOSTIC_CANDIDATE'])assert.equal(e[k],undefined);
-+ assert.equal(typeof e.GITHUB_SHA,'string');assert.equal(typeof e.GITHUB_RUN_ID,'string');assert.match(e.GITHUB_SHA,/^[a-f0-9]{40}$/);assert.match(e.GITHUB_RUN_ID,/^[1-9][0-9]{0,19}$/);assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);assert.equal(git('rev-parse','--show-toplevel'),fs.realpathSync('.'));assert.equal(process.cwd(),fs.realpathSync('.'));
-+ const sourceTree=git('rev-parse','HEAD^{tree}');assert.match(sourceTree,/^[a-f0-9]{40}$/);
-+ const tree=execFileSync('git',['ls-tree','-rz','--full-tree','HEAD'],{stdio:['ignore','pipe','pipe']});
-+ const rows=tree.toString('utf8').split('\0').filter(Boolean).map(x=>{const at=x.indexOf('\t');assert(at>0);return{tuple:x.slice(0,at),path:x.slice(at+1)};}).filter(x=>![same,f7].includes(x.path)).sort((a,b)=>Buffer.compare(Buffer.from(a.path),Buffer.from(b.path)));
-+ const core=Buffer.from(rows.map(x=>x.tuple+'\t'+x.path+'\0').join(''));assert.equal(rows.length,3201);assert.equal(core.length,324448);assert.equal(sha(core),'aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703');execFileSync('git',['diff','--exit-code','HEAD','--'],{stdio:['ignore','pipe','pipe']});
-+ const st=fs.lstatSync(same);assert(st.isFile()&&!st.isSymbolicLink()&&st.size<=2600000);const bytes=fs.readFileSync(same);assert.equal(blob(bytes),git('rev-parse','HEAD:'+same));
-+ const prefix=bytes.subarray(0,2260109);assert.equal(prefix.length,2260109);assert.equal(sha(prefix),'9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421');assert.equal(blob(prefix),'71fabddb7fcee9f436ce3ea95785c3a2ee5afe70');
-+ const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(bytes),begin='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:BEGIN -->',end='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:END -->';assert.equal(text.split(begin).length,2);assert.equal(text.split(end).length,2);const first=text.indexOf(begin),last=text.indexOf(end);assert(last>first&&Buffer.byteLength(text.slice(0,first))>=prefix.length);
-+ const section=text.slice(first+begin.length,last);assert.match(section,/^\n[A-Za-z0-9+/=\n]+\n$/);const b64=section.replaceAll('\n',''),pins={"bytes":487208,"sha256":"087bba2182c131579e233f6c29daf1ee85e2aae41e77b66d6f93cc44cb5000c5","blob":"f9c8261c54f761b5c33ddc370dbe7b308648033b","compressed":{"bytes":120211,"sha256":"7e9aace1b1a3930a1a5234a2fdee5af68ebec77cc5b9818a6d342328047bf0e5","blob":"b3dfc078047bee03b5b42140783ee1dcf2409fd8"},"base64Characters":160284};assert.equal(b64.length,pins.base64Characters);assert(b64.length<=174764);const zip=Buffer.from(b64,'base64');assert.equal(zip.toString('base64'),b64);assert.equal(zip.length,pins.compressed.bytes);assert(zip.length<=131072);assert.equal(sha(zip),pins.compressed.sha256);assert.equal(blob(zip),pins.compressed.blob);
-+ const raw=gunzipSync(zip,{maxOutputLength:524288});assert.equal(raw.length,pins.bytes);assert.equal(sha(raw),pins.sha256);assert.equal(blob(raw),pins.blob);const wire=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(raw),payload=JSON.parse(wire);assert.equal(JSON.stringify(payload),wire);
-+ // Closed captured-original-creator continuity derivation; no caller patch/path/code.
-+ const ccPrefix=bytes.subarray(0,2471214);assert.equal(ccPrefix.length,2471214);assert.equal(sha(ccPrefix),'1ba61ebb62514c1bb2e5b7b6058dd5abad09ddc1d059483987262032e154928a');assert.equal(blob(ccPrefix),'2fcd79c7d0a2475f176dc03360df5980a58c3120');
-+ const ccSuffix=bytes.subarray(2471214,2481826);assert.equal(ccSuffix.length,10612);assert.equal(sha(ccSuffix),'cdfe4a0b495be82b9d2746a12f09a3cb24c100f940bb6cdbecaa0585f8a7fac5');
-+ const ccBegin='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:BEGIN -->',ccEnd='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:END -->';assert.equal(text.split(ccBegin).length,2);assert.equal(text.split(ccEnd).length,2);const ccFirst=text.indexOf(ccBegin),ccLast=text.indexOf(ccEnd);assert(ccLast>ccFirst&&Buffer.byteLength(text.slice(0,ccFirst))>=2471214);const ccOverlayText=text.slice(ccFirst+ccBegin.length,ccLast);assert.equal(sha(Buffer.from(ccOverlayText)),'a7e62d0ce31a094090c6b1524f34cc55b776a4938010a5ec1c310ca4ac6b712f');
-+ const ccOldKernel=payload.helpers['lifetime.py'];assert.equal(sha(Buffer.from(ccOldKernel)),'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');assert.equal(ccOldKernel.split(" # AFW_LIFE_BEFORE_ARM\n").length,2);payload.helpers['lifetime.py']=ccOldKernel.replace(" # AFW_LIFE_BEFORE_ARM\n"," # AFW_LIFE_BEFORE_ARM\n if os.getppid()!=before[0]:raise CreatorDead()\n");
-+ const ccKernelPin=JSON.parse(ccOverlayText).kernelSnapshot;assert.deepEqual(Object.keys(ccKernelPin),['bytes','sha256','zipBytes','zipSha256','data','cap']);assert.equal(ccKernelPin.bytes,16073);assert.equal(ccKernelPin.cap,32768);assert.equal(ccKernelPin.sha256,'f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791');assert.equal(ccKernelPin.zipBytes,5078);assert.equal(ccKernelPin.zipSha256,'f0ef8e96c2f15251fbdbcb0abe801cbb981f5c97663233a0cae0520b261f29ed');assert.equal(sha(Buffer.from(ccKernelPin.data)),'1ba509cdcd9ecda3ae60b3db8f5876e1ddf17f5f9692bff77f113cef3e6356ef');const ccKernelZip=Buffer.from(ccKernelPin.data,'base64');assert.equal(ccKernelZip.toString('base64'),ccKernelPin.data);assert.equal(ccKernelZip.length,ccKernelPin.zipBytes);assert.equal(sha(ccKernelZip),ccKernelPin.zipSha256);assert.equal(gunzipSync(ccKernelZip,{maxOutputLength:32768}).toString('utf8'),payload.helpers['lifetime.py']);
-+ for(const name of ['delivery-entry.sh','controls-entry.sh','missing-cwd-entry.sh']){const prior=payload.helpers[name],lines=prior.split('\n').filter(line=>line.startsWith('_r3_kernel='));assert.equal(lines.length,1);const oldPin=JSON.parse(lines[0].slice('_r3_kernel='.length));assert.equal(oldPin.bytes,16025);assert.equal(oldPin.sha256,'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');payload.helpers[name]=prior.replace(lines[0],'_r3_kernel='+JSON.stringify(ccKernelPin));}
-+ const ccResult=Buffer.from(JSON.stringify(payload));assert.equal(ccResult.length,487293);assert.equal(sha(ccResult),'dda3f25ef82cdf4e65814360b52aafa9ddf3ec2e57d1fa2f92e46466acfcd25b');assert.equal(blob(ccResult),'f23fcfebf3c72632327cf24babf2ff7ace22dae6');
+ try{
+  const e=process.env,sha=b=>createHash('sha256').update(b).digest('hex'),blob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
+  const git=(...args)=>execFileSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+  const same='docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md',f7='.github/workflows/afw-finite-budget-qualification.yml';
+  const image=fs.fstatSync(3),current=fs.statSync('/proc/self/exe');assert(image.isFile()&&image.uid===process.getuid()&&image.nlink===1&&(image.mode&0o7777)===0o500&&image.dev===current.dev&&image.ino===current.ino&&image.size===current.size);
+  assert.equal(process.versions.node,'22.23.4');assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REPOSITORY_ID,'1347578006');assert.equal(e.GITHUB_JOB,'readonly');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_EVENT_NAME,'push');assert.equal(e.GITHUB_WORKFLOW_REF,'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101');
+  for(const k of ['NODE_OPTIONS','NODE_PATH','AFW_SYN_CHECKPOINT_KEY','AFW_BUDGET_DIAGNOSTIC_CANDIDATE'])assert.equal(e[k],undefined);
+  assert.equal(typeof e.GITHUB_SHA,'string');assert.equal(typeof e.GITHUB_RUN_ID,'string');assert.match(e.GITHUB_SHA,/^[a-f0-9]{40}$/);assert.match(e.GITHUB_RUN_ID,/^[1-9][0-9]{0,19}$/);assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);assert.equal(git('rev-parse','--show-toplevel'),fs.realpathSync('.'));assert.equal(process.cwd(),fs.realpathSync('.'));
+@@ -24,39 +24,59 @@
+  // Closed captured-original-creator continuity derivation; no caller patch/path/code.
+  const ccPrefix=bytes.subarray(0,2471214);assert.equal(ccPrefix.length,2471214);assert.equal(sha(ccPrefix),'1ba61ebb62514c1bb2e5b7b6058dd5abad09ddc1d059483987262032e154928a');assert.equal(blob(ccPrefix),'2fcd79c7d0a2475f176dc03360df5980a58c3120');
+  const ccSuffix=bytes.subarray(2471214,2481826);assert.equal(ccSuffix.length,10612);assert.equal(sha(ccSuffix),'cdfe4a0b495be82b9d2746a12f09a3cb24c100f940bb6cdbecaa0585f8a7fac5');
+  const ccBegin='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:BEGIN -->',ccEnd='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:END -->';assert.equal(text.split(ccBegin).length,2);assert.equal(text.split(ccEnd).length,2);const ccFirst=text.indexOf(ccBegin),ccLast=text.indexOf(ccEnd);assert(ccLast>ccFirst&&Buffer.byteLength(text.slice(0,ccFirst))>=2471214);const ccOverlayText=text.slice(ccFirst+ccBegin.length,ccLast);assert.equal(sha(Buffer.from(ccOverlayText)),'a7e62d0ce31a094090c6b1524f34cc55b776a4938010a5ec1c310ca4ac6b712f');
+  const ccOldKernel=payload.helpers['lifetime.py'];assert.equal(sha(Buffer.from(ccOldKernel)),'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');assert.equal(ccOldKernel.split(" # AFW_LIFE_BEFORE_ARM\n").length,2);payload.helpers['lifetime.py']=ccOldKernel.replace(" # AFW_LIFE_BEFORE_ARM\n"," # AFW_LIFE_BEFORE_ARM\n if os.getppid()!=before[0]:raise CreatorDead()\n");
+  const ccKernelPin=JSON.parse(ccOverlayText).kernelSnapshot;assert.deepEqual(Object.keys(ccKernelPin),['bytes','sha256','zipBytes','zipSha256','data','cap']);assert.equal(ccKernelPin.bytes,16073);assert.equal(ccKernelPin.cap,32768);assert.equal(ccKernelPin.sha256,'f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791');assert.equal(ccKernelPin.zipBytes,5078);assert.equal(ccKernelPin.zipSha256,'f0ef8e96c2f15251fbdbcb0abe801cbb981f5c97663233a0cae0520b261f29ed');assert.equal(sha(Buffer.from(ccKernelPin.data)),'1ba509cdcd9ecda3ae60b3db8f5876e1ddf17f5f9692bff77f113cef3e6356ef');const ccKernelZip=Buffer.from(ccKernelPin.data,'base64');assert.equal(ccKernelZip.toString('base64'),ccKernelPin.data);assert.equal(ccKernelZip.length,ccKernelPin.zipBytes);assert.equal(sha(ccKernelZip),ccKernelPin.zipSha256);assert.equal(gunzipSync(ccKernelZip,{maxOutputLength:32768}).toString('utf8'),payload.helpers['lifetime.py']);
+  for(const name of ['delivery-entry.sh','controls-entry.sh','missing-cwd-entry.sh']){const prior=payload.helpers[name],lines=prior.split('\n').filter(line=>line.startsWith('_r3_kernel='));assert.equal(lines.length,1);const oldPin=JSON.parse(lines[0].slice('_r3_kernel='.length));assert.equal(oldPin.bytes,16025);assert.equal(oldPin.sha256,'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');payload.helpers[name]=prior.replace(lines[0],'_r3_kernel='+JSON.stringify(ccKernelPin));}
+  const ccResult=Buffer.from(JSON.stringify(payload));assert.equal(ccResult.length,487293);assert.equal(sha(ccResult),'dda3f25ef82cdf4e65814360b52aafa9ddf3ec2e57d1fa2f92e46466acfcd25b');assert.equal(blob(ccResult),'f23fcfebf3c72632327cf24babf2ff7ace22dae6');
 + const ccNormalControls=payload.helpers['controls.mjs'];
-+  const serialPrefix=bytes.subarray(0,2514447);
-+  assert.equal(serialPrefix.length,2514447);assert.equal(sha(serialPrefix),'ae7a7ed3d0cbd38149bfd284eaeb458fc696bede38976f509a801c40ced1b770');assert.equal(blob(serialPrefix),'af9eee4beb70ea89fef675cfc5bb99ec10811fc4');
-+  const serialAppend=bytes.subarray(2514447,2538602);assert.equal(serialAppend.length,24155);assert.equal(sha(serialAppend),'48e15b75dfdd3221681f262de02a462cf0edf43b6010264310cfa7180858438f');
-+  const serialBegin='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:BEGIN -->',serialEnd='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:END -->';assert.equal(text.split(serialBegin).length,2);assert.equal(text.split(serialEnd).length,2);
-+  const serialText=text.slice(text.indexOf(serialBegin)+serialBegin.length,text.indexOf(serialEnd));
-+  assert.equal(sha(Buffer.from(serialText)),'07567d1647505cbf671675f87b874b6afc0b18b5a9cbaa445496b1a9e69df20b');
-+  const serial=JSON.parse(serialText);assert.equal('\n'+JSON.stringify(serial)+'\n',serialText);
-+  assert.deepEqual(Object.keys(serial),['purpose','closedParent','closedTree','origin','baselinePrefix','normalHistory','overlay','unit','unitSchema','oneUseMessage','nonclaims']);
-+  assert.equal(serial.purpose,'afw.serial-entry-pin.append.v1');assert.equal(serial.closedParent,'3f23a9805a60d285a6272138765078e7da80e5eb');assert.equal(serial.closedTree,'a8c002728663bdcf67a6bc59d5c5f1232cb6384c');
-+  const serialOverlay=serial.overlay;assert.deepEqual(Object.keys(serialOverlay),['purpose','normalRaw','normalControls','candidateControls','span','candidateRaw','nonclaims']);assert.equal(serialOverlay.purpose,'afw.serial-entry-pin.overlay.v1');
-+  assert.deepEqual(Object.keys(serialOverlay.span),['from','to']);
-+  const serialOld=payload.helpers['controls.mjs'];assert.equal(sha(Buffer.from(serialOld)),'060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df');assert.equal(serialOld.split(serialOverlay.span.from).length,2);
-+  payload.helpers['controls.mjs']=serialOld.replace(serialOverlay.span.from,serialOverlay.span.to);
-+  const serialControls=Buffer.from(payload.helpers['controls.mjs']);assert.equal(serialControls.length,32428);assert.equal(sha(serialControls),'3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35');assert.equal(blob(serialControls),'17e101dd8720312111b7dffb37f7edb8da41a0fd');
-+  const serialResult=Buffer.from(JSON.stringify(payload));assert.equal(serialResult.length,487931);assert.equal(sha(serialResult),'f5fe1b3ecc0054ba1ce626c9140fc5899f4b35d0e8544181eb2606771b7220f8');assert.equal(blob(serialResult),'2716e7224ddee98690f457d0c48e6d096bd17024');
-+
+   const serialPrefix=bytes.subarray(0,2514447);
+   assert.equal(serialPrefix.length,2514447);assert.equal(sha(serialPrefix),'ae7a7ed3d0cbd38149bfd284eaeb458fc696bede38976f509a801c40ced1b770');assert.equal(blob(serialPrefix),'af9eee4beb70ea89fef675cfc5bb99ec10811fc4');
+   const serialAppend=bytes.subarray(2514447,2538602);assert.equal(serialAppend.length,24155);assert.equal(sha(serialAppend),'48e15b75dfdd3221681f262de02a462cf0edf43b6010264310cfa7180858438f');
+   const serialBegin='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:BEGIN -->',serialEnd='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:END -->';assert.equal(text.split(serialBegin).length,2);assert.equal(text.split(serialEnd).length,2);
+   const serialText=text.slice(text.indexOf(serialBegin)+serialBegin.length,text.indexOf(serialEnd));
+   assert.equal(sha(Buffer.from(serialText)),'07567d1647505cbf671675f87b874b6afc0b18b5a9cbaa445496b1a9e69df20b');
+   const serial=JSON.parse(serialText);assert.equal('\n'+JSON.stringify(serial)+'\n',serialText);
+   assert.deepEqual(Object.keys(serial),['purpose','closedParent','closedTree','origin','baselinePrefix','normalHistory','overlay','unit','unitSchema','oneUseMessage','nonclaims']);
+   assert.equal(serial.purpose,'afw.serial-entry-pin.append.v1');assert.equal(serial.closedParent,'3f23a9805a60d285a6272138765078e7da80e5eb');assert.equal(serial.closedTree,'a8c002728663bdcf67a6bc59d5c5f1232cb6384c');
+   const serialOverlay=serial.overlay;assert.deepEqual(Object.keys(serialOverlay),['purpose','normalRaw','normalControls','candidateControls','span','candidateRaw','nonclaims']);assert.equal(serialOverlay.purpose,'afw.serial-entry-pin.overlay.v1');
+   assert.deepEqual(Object.keys(serialOverlay.span),['from','to']);
+   const serialOld=payload.helpers['controls.mjs'];assert.equal(sha(Buffer.from(serialOld)),'060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df');assert.equal(serialOld.split(serialOverlay.span.from).length,2);
+   payload.helpers['controls.mjs']=serialOld.replace(serialOverlay.span.from,serialOverlay.span.to);
+   const serialControls=Buffer.from(payload.helpers['controls.mjs']);assert.equal(serialControls.length,32428);assert.equal(sha(serialControls),'3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35');assert.equal(blob(serialControls),'17e101dd8720312111b7dffb37f7edb8da41a0fd');
+   const serialResult=Buffer.from(JSON.stringify(payload));assert.equal(serialResult.length,487931);assert.equal(sha(serialResult),'f5fe1b3ecc0054ba1ce626c9140fc5899f4b35d0e8544181eb2606771b7220f8');assert.equal(blob(serialResult),'2716e7224ddee98690f457d0c48e6d096bd17024');
+ 
 +
 + const v2Prefix=bytes.subarray(0,2569436);assert.equal(v2Prefix.length,2569436);assert.equal(sha(v2Prefix),'7e93b5ab25e76421334183ae3681044a574f6c6e603790c9aa85d3a737a67c77');assert.equal(blob(v2Prefix),'192f884c8df658b7e22dd4f67207fd376a4b216f');
 + const v2Begin='<!-- AFW-Q1-SERIAL-LAB-V2-DELTA:BEGIN -->',v2End='<!-- AFW-Q1-SERIAL-LAB-V2-DELTA:END -->';assert.equal(text.split(v2Begin).length,2);assert.equal(text.split(v2End).length,2);const v2Tail=bytes.subarray(2569436);assert(v2Tail.length<=20000);const v2Framed=v2Tail.toString('utf8');assert(v2Framed.startsWith('\n'+v2Begin+'\n')&&v2Framed.endsWith('\n'+v2End+'\n'));const v2B64=v2Framed.slice(v2Begin.length+2,-v2End.length-2);assert(/^[A-Za-z0-9+/=]+$/.test(v2B64));const v2Zip=Buffer.from(v2B64,'base64');assert.equal(v2Zip.toString('base64'),v2B64);assert(120379+v2Zip.length<=131072&&160508+v2B64.length<=174764);const v2Raw=gunzipSync(v2Zip,{maxOutputLength:36357});assert(487931+v2Raw.length<=524288);assert.equal(sha(v2Raw),'00b5825623d5b01bd12a3d6d816b0936e1be83aec5a741050cbe72aa55839aa5');const v2=JSON.parse(v2Raw);assert.equal(JSON.stringify(v2),v2Raw.toString('utf8'));assert.equal(v2.purpose,'afw.q1.serial-source-lab.recipe.v2');
 +
-+ // Original raw origin, production18, remaining32 helpers and public wire remain pinned.
-+ assert.deepEqual(Object.keys(payload),['purpose','sourceParent','sourceParentTree','core','prefix','production','helpers']);assert.equal(payload.purpose,'afw.r3-delivery.successor-round5-data.v1');assert.equal(payload.sourceParent,'bfa80fac58ecb60bb3c9bcd458da6f393b301f70');assert.equal(payload.sourceParentTree,'d17f87ef49892e6a4c0ec50dd2436b0697b9f45f');assert.deepEqual(payload.core,{"count":3201,"bytes":324448,"sha256":"aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"});assert.deepEqual(payload.prefix,{"blob":"71fabddb7fcee9f436ce3ea95785c3a2ee5afe70","bytes":2260109,"sha256":"9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421"});
-+ const prod=payload.production;assert.deepEqual(Object.keys(prod),['blob','bytes','sha256','count','setSha256','data']);assert.equal(prod.count,18);assert.equal(prod.blob,'b88ebef9a2aa979772d20bfb778cbfe463dc3011');assert.equal(prod.bytes,95518);assert.equal(prod.sha256,'cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91');assert.equal(prod.setSha256,'71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af');
-+ const frozen=Buffer.from(prod.data);assert.equal(frozen.length,prod.bytes);assert.equal(sha(frozen),prod.sha256);assert.equal(blob(frozen),prod.blob);const original=JSON.parse(prod.data);assert.equal(JSON.stringify(original)+'\n',prod.data);assert.equal(original.productionCount,18);assert.equal(Object.keys(original.programs).length,18);
-+ const originalPins={};for(const[name,p]of Object.entries(original.programs)){const b=Buffer.from(p.content);assert.deepEqual(Object.keys(p),['bytes','sha256','blob','content']);assert.equal(b.length,p.bytes);assert.equal(sha(b),p.sha256);assert.equal(blob(b),p.blob);originalPins[name]={bytes:p.bytes,sha256:p.sha256,blob:p.blob};}assert.equal(sha(Buffer.from(JSON.stringify(originalPins)+'\n')),prod.setSha256);
+  // Original raw origin, production18, remaining32 helpers and public wire remain pinned.
+  assert.deepEqual(Object.keys(payload),['purpose','sourceParent','sourceParentTree','core','prefix','production','helpers']);assert.equal(payload.purpose,'afw.r3-delivery.successor-round5-data.v1');assert.equal(payload.sourceParent,'bfa80fac58ecb60bb3c9bcd458da6f393b301f70');assert.equal(payload.sourceParentTree,'d17f87ef49892e6a4c0ec50dd2436b0697b9f45f');assert.deepEqual(payload.core,{"count":3201,"bytes":324448,"sha256":"aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"});assert.deepEqual(payload.prefix,{"blob":"71fabddb7fcee9f436ce3ea95785c3a2ee5afe70","bytes":2260109,"sha256":"9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421"});
+  const prod=payload.production;assert.deepEqual(Object.keys(prod),['blob','bytes','sha256','count','setSha256','data']);assert.equal(prod.count,18);assert.equal(prod.blob,'b88ebef9a2aa979772d20bfb778cbfe463dc3011');assert.equal(prod.bytes,95518);assert.equal(prod.sha256,'cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91');assert.equal(prod.setSha256,'71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af');
+  const frozen=Buffer.from(prod.data);assert.equal(frozen.length,prod.bytes);assert.equal(sha(frozen),prod.sha256);assert.equal(blob(frozen),prod.blob);const original=JSON.parse(prod.data);assert.equal(JSON.stringify(original)+'\n',prod.data);assert.equal(original.productionCount,18);assert.equal(Object.keys(original.programs).length,18);
+  const originalPins={};for(const[name,p]of Object.entries(original.programs)){const b=Buffer.from(p.content);assert.deepEqual(Object.keys(p),['bytes','sha256','blob','content']);assert.equal(b.length,p.bytes);assert.equal(sha(b),p.sha256);assert.equal(blob(b),p.blob);originalPins[name]={bytes:p.bytes,sha256:p.sha256,blob:p.blob};}assert.equal(sha(Buffer.from(JSON.stringify(originalPins)+'\n')),prod.setSha256);
 +function v2Assemble(payload,expected,v2){
 + const check=(s,p)=>{const b=Buffer.from(s);assert.equal(b.length,p.bytes);assert.equal(sha(b),p.sha256);assert.equal(blob(b),p.blob);return b;};
 + const patch=(s,spans)=>{for(const {from,to} of spans){assert.equal(s.split(from).length,2);s=s.replace(from,to);}return s;};
@@ -1165,17 +517,17 @@ Changedartifactpins:
 + const old=payload.helpers['controls-boundary.py'],at=old.indexOf(' def capture(base):');assert(at>0);const prefix=old.slice(0,at).replace('import os,sys,json,re,selectors,subprocess,time,stat,signal','import os,sys,json,re,selectors,subprocess,time,stat,signal,hashlib,fcntl'),parent=prefix+constant+v2.parentCapture+v2.parentReduce+v2.parentEnd;check(parent,v2.pins.parent);return {driver,parent,schemaText,policyText};
 +}
 +
-+ // Frozen18 remain DATA. No production main/original readonly CLI/Native import, materialization or call.
-+ const expected={"io.mjs":{"bytes":1815,"sha256":"b7d4ee0b8786c52a26857a8e203a710017b40dc8f5636a1d387638b9ec78eb47","blob":"8bb9a8ab8ddf81689ee890252579c1fd41dfdf52"},"emitter.mjs":{"bytes":3511,"sha256":"02f80480dbc8bc8700d0ecf3a57e65f855954ca64b379d29eefdb75c6d7db760","blob":"f9eee51fbdb89d0e130f8137d6a48ae787904f66"},"source-provenance.mjs":{"bytes":6690,"sha256":"b4d0872044216a275458d14b838ecf57628780092767ea88910dce18585408ce","blob":"fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d"},"raw-sample.mjs":{"bytes":4289,"sha256":"1b594a7768a69cba5db1f41e83eb2a941f6451c82584490fdb77ba1fea85e9fc","blob":"8cdabb2324ae97b04fa17350846e24d666cd3536"},"site-schema.json":{"bytes":12651,"sha256":"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd","blob":"4871edc102386fe6db65c773e51c21ecb94897e3"},"site-map.json":{"bytes":6630,"sha256":"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","blob":"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f"},"envelope-schema.json":{"bytes":5616,"sha256":"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5","blob":"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f"},"boundary.py":{"bytes":12562,"sha256":"27274120076048fd6f63b122b5534d8d06e97a2d4cf36461c1f710c605accdf4","blob":"554a2b2d2a8e3f365533f0df3006bcce1e409698"},"delivery-schema.json":{"bytes":1380,"sha256":"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60","blob":"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8"},"unavailable-schema.json":{"bytes":1315,"sha256":"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9","blob":"4a310ddcef7b1b7bf0755bf56b760486254cf8c6"},"controls-schema.json":{"bytes":4681,"sha256":"2d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83","blob":"8586d4387a5fcd95b18d7c966cf841432330a789"},"matrix.json":{"bytes":24054,"sha256":"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e","blob":"5b829c768ed3d7af03d5eb3f1870599d39bfd083"},"shape.mjs":{"bytes":843,"sha256":"82224496e7db35a1daf7168591cb2123edbb3242331a314680f13d05b3bfef5e","blob":"df49410ebf42b4fbc9a8c032f81a0edc8fb95d0b"},"control-proof.mjs":{"bytes":2206,"sha256":"a7318fd9452f0254fdb9ae1261040ab944ce2d56c443004579c51e55c2c63c71","blob":"ab38574f5fe697fd9f0d48f9ade065749f4a0c14"},"site-receiver.mjs":{"bytes":5460,"sha256":"0d346b88c9594c45ef207f9fa4b57c984d13a3e64943904f880e2e2b96377ad2","blob":"c2cf804b6d427b5fc40da2b7d1375785a0a2f459"},"normalized-sample.mjs":{"bytes":3987,"sha256":"2bee6afaa30f01f1f497512d595f24f3a0c92269e3b4ed7e2d2e349ae5b4419f","blob":"f7c2fefcc9df568a8453d876072a23a790b94fcd"},"witness.mjs":{"bytes":1044,"sha256":"336df41b1994c8a315e4f56d976ddd0c9922397c702a02869ac8d44f42a8629a","blob":"b207c0c9ea759a9a146783b8818276444bef155b"},"fixtures.json":{"bytes":7988,"sha256":"06b7dc9e63c178b6b823db1ee56049ce4d1406861df240ca2fbc119d2df45bc9","blob":"f29e76fd04627ebe5d1100007808610ebc240571"},"controls.mjs":{"bytes":32428,"sha256":"3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35","blob":"17e101dd8720312111b7dffb37f7edb8da41a0fd"},"examples.json":{"bytes":22739,"sha256":"4f8da5a563bb0498cc506d693421853777ba7efb67d42da44b1889e5fef7b945","blob":"6f28d4f4479fb093aec3188d21b1796fd7c3fff2"},"controls-boundary.py":{"bytes":12908,"sha256":"6e3dcd0c4f262a509b75499674375eaa3d91b9e83789f03689862f51734fc3d7","blob":"b6c39695cdca9963d083842b114b7e4fb59e6392"},"controls-unavailable-example.json":{"bytes":568,"sha256":"7544b33859efe6ba2f6f1789e709f89f5f94f08352dd4fe4b14d700b19b22644","blob":"beedc03c8066cef6e6a24914d5334f99183d014b"},"outer.mjs":{"bytes":25947,"sha256":"62f2faa1bff1a2aa2438e8c1794361910e44a6db9c632daa28185adc647bf515","blob":"c74d74879d6935c47d50b1233dad4027e6704365"},"delivery-entry.sh":{"bytes":24013,"sha256":"63b7e32a4291e5a1b2fc3753a5ae89758dcf0913f6f2bf2d558bc3a0dd9f2961","blob":"2477c393fbc7d9883894ef7299b4f749cc3857ab"},"controls-entry.sh":{"bytes":24058,"sha256":"e874d2de7710156e11726c7bd01626faa5351f94514cf0c42878e679981ad899","blob":"f0825d011a5e7942194a157a327ef7c42548180c"},"oracle.mjs":{"bytes":1877,"sha256":"37c8724ced0eaa42bd54aa01aef1af7c3a7107ff3e78243e1f3d04da841fa4d1","blob":"652201ebe699664b97a5bc3d7c815a02dd889805"},"lifetime.py":{"bytes":16073,"sha256":"f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791","blob":"765573c5eeaf83add464e94a8240dcd7a90786d0"},"delivery-outer.mjs":{"bytes":25986,"sha256":"d32eaeb8d09e1d50dd14195fecec7606d457004ea6f61084900b94547cc6899f","blob":"aac76e8c15a01cbb308ba63ad7dec19e2d5ebb76"},"controls-outer.mjs":{"bytes":25986,"sha256":"ada3cc7cf36a742d71c6ed12a7b5d15b91d56c4353aad02318a871ec370e4c35","blob":"e62dd9c4760da521b84f23b1c87855070767aac0"},"missing-cwd-entry.sh":{"bytes":24130,"sha256":"e625cd8b88726576b278099856bd6b3126c02da4f31c387ba49ced923a5fa9fc","blob":"3666fdd52620bd2a30bfa3e100897b2fab1610c1"},"race-creator.mjs":{"bytes":777,"sha256":"2657c30db6cff046599ff3d9cd2cdf7c3c312252b9636741627871d090372575","blob":"a6d47254adbf330a09b879a3a9b20ae4de476e73"},"lifetime-controls.py":{"bytes":12219,"sha256":"d67b5c8c8e127c359f8d2b5d7da30da809b8d91bfb77759df4bbf9ecaaf53c59","blob":"21b0b82242a76efd94d34fe1f722e04fda6cd489"},"authority-anchor.json":{"bytes":1964,"sha256":"e08d9864b16a1534b71344b817a6d3a78697d8d51af8ea798229a5f16d4b6407","blob":"1bed486f15a8743ef7c68470772835aaf4946a40"}},names=Object.keys(expected);assert.equal(names.length,33);assert.deepEqual(Object.keys(payload.helpers),names);
+  // Frozen18 remain DATA. No production main/original readonly CLI/Native import, materialization or call.
+  const expected={"io.mjs":{"bytes":1815,"sha256":"b7d4ee0b8786c52a26857a8e203a710017b40dc8f5636a1d387638b9ec78eb47","blob":"8bb9a8ab8ddf81689ee890252579c1fd41dfdf52"},"emitter.mjs":{"bytes":3511,"sha256":"02f80480dbc8bc8700d0ecf3a57e65f855954ca64b379d29eefdb75c6d7db760","blob":"f9eee51fbdb89d0e130f8137d6a48ae787904f66"},"source-provenance.mjs":{"bytes":6690,"sha256":"b4d0872044216a275458d14b838ecf57628780092767ea88910dce18585408ce","blob":"fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d"},"raw-sample.mjs":{"bytes":4289,"sha256":"1b594a7768a69cba5db1f41e83eb2a941f6451c82584490fdb77ba1fea85e9fc","blob":"8cdabb2324ae97b04fa17350846e24d666cd3536"},"site-schema.json":{"bytes":12651,"sha256":"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd","blob":"4871edc102386fe6db65c773e51c21ecb94897e3"},"site-map.json":{"bytes":6630,"sha256":"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","blob":"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f"},"envelope-schema.json":{"bytes":5616,"sha256":"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5","blob":"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f"},"boundary.py":{"bytes":12562,"sha256":"27274120076048fd6f63b122b5534d8d06e97a2d4cf36461c1f710c605accdf4","blob":"554a2b2d2a8e3f365533f0df3006bcce1e409698"},"delivery-schema.json":{"bytes":1380,"sha256":"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60","blob":"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8"},"unavailable-schema.json":{"bytes":1315,"sha256":"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9","blob":"4a310ddcef7b1b7bf0755bf56b760486254cf8c6"},"controls-schema.json":{"bytes":4681,"sha256":"2d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83","blob":"8586d4387a5fcd95b18d7c966cf841432330a789"},"matrix.json":{"bytes":24054,"sha256":"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e","blob":"5b829c768ed3d7af03d5eb3f1870599d39bfd083"},"shape.mjs":{"bytes":843,"sha256":"82224496e7db35a1daf7168591cb2123edbb3242331a314680f13d05b3bfef5e","blob":"df49410ebf42b4fbc9a8c032f81a0edc8fb95d0b"},"control-proof.mjs":{"bytes":2206,"sha256":"a7318fd9452f0254fdb9ae1261040ab944ce2d56c443004579c51e55c2c63c71","blob":"ab38574f5fe697fd9f0d48f9ade065749f4a0c14"},"site-receiver.mjs":{"bytes":5460,"sha256":"0d346b88c9594c45ef207f9fa4b57c984d13a3e64943904f880e2e2b96377ad2","blob":"c2cf804b6d427b5fc40da2b7d1375785a0a2f459"},"normalized-sample.mjs":{"bytes":3987,"sha256":"2bee6afaa30f01f1f497512d595f24f3a0c92269e3b4ed7e2d2e349ae5b4419f","blob":"f7c2fefcc9df568a8453d876072a23a790b94fcd"},"witness.mjs":{"bytes":1044,"sha256":"336df41b1994c8a315e4f56d976ddd0c9922397c702a02869ac8d44f42a8629a","blob":"b207c0c9ea759a9a146783b8818276444bef155b"},"fixtures.json":{"bytes":7988,"sha256":"06b7dc9e63c178b6b823db1ee56049ce4d1406861df240ca2fbc119d2df45bc9","blob":"f29e76fd04627ebe5d1100007808610ebc240571"},"controls.mjs":{"bytes":32428,"sha256":"3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35","blob":"17e101dd8720312111b7dffb37f7edb8da41a0fd"},"examples.json":{"bytes":22739,"sha256":"4f8da5a563bb0498cc506d693421853777ba7efb67d42da44b1889e5fef7b945","blob":"6f28d4f4479fb093aec3188d21b1796fd7c3fff2"},"controls-boundary.py":{"bytes":12908,"sha256":"6e3dcd0c4f262a509b75499674375eaa3d91b9e83789f03689862f51734fc3d7","blob":"b6c39695cdca9963d083842b114b7e4fb59e6392"},"controls-unavailable-example.json":{"bytes":568,"sha256":"7544b33859efe6ba2f6f1789e709f89f5f94f08352dd4fe4b14d700b19b22644","blob":"beedc03c8066cef6e6a24914d5334f99183d014b"},"outer.mjs":{"bytes":25947,"sha256":"62f2faa1bff1a2aa2438e8c1794361910e44a6db9c632daa28185adc647bf515","blob":"c74d74879d6935c47d50b1233dad4027e6704365"},"delivery-entry.sh":{"bytes":24013,"sha256":"63b7e32a4291e5a1b2fc3753a5ae89758dcf0913f6f2bf2d558bc3a0dd9f2961","blob":"2477c393fbc7d9883894ef7299b4f749cc3857ab"},"controls-entry.sh":{"bytes":24058,"sha256":"e874d2de7710156e11726c7bd01626faa5351f94514cf0c42878e679981ad899","blob":"f0825d011a5e7942194a157a327ef7c42548180c"},"oracle.mjs":{"bytes":1877,"sha256":"37c8724ced0eaa42bd54aa01aef1af7c3a7107ff3e78243e1f3d04da841fa4d1","blob":"652201ebe699664b97a5bc3d7c815a02dd889805"},"lifetime.py":{"bytes":16073,"sha256":"f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791","blob":"765573c5eeaf83add464e94a8240dcd7a90786d0"},"delivery-outer.mjs":{"bytes":25986,"sha256":"d32eaeb8d09e1d50dd14195fecec7606d457004ea6f61084900b94547cc6899f","blob":"aac76e8c15a01cbb308ba63ad7dec19e2d5ebb76"},"controls-outer.mjs":{"bytes":25986,"sha256":"ada3cc7cf36a742d71c6ed12a7b5d15b91d56c4353aad02318a871ec370e4c35","blob":"e62dd9c4760da521b84f23b1c87855070767aac0"},"missing-cwd-entry.sh":{"bytes":24130,"sha256":"e625cd8b88726576b278099856bd6b3126c02da4f31c387ba49ced923a5fa9fc","blob":"3666fdd52620bd2a30bfa3e100897b2fab1610c1"},"race-creator.mjs":{"bytes":777,"sha256":"2657c30db6cff046599ff3d9cd2cdf7c3c312252b9636741627871d090372575","blob":"a6d47254adbf330a09b879a3a9b20ae4de476e73"},"lifetime-controls.py":{"bytes":12219,"sha256":"d67b5c8c8e127c359f8d2b5d7da30da809b8d91bfb77759df4bbf9ecaaf53c59","blob":"21b0b82242a76efd94d34fe1f722e04fda6cd489"},"authority-anchor.json":{"bytes":1964,"sha256":"e08d9864b16a1534b71344b817a6d3a78697d8d51af8ea798229a5f16d4b6407","blob":"1bed486f15a8743ef7c68470772835aaf4946a40"}},names=Object.keys(expected);assert.equal(names.length,33);assert.deepEqual(Object.keys(payload.helpers),names);
 +
 + const v2Derived=v2Assemble(payload,{...expected,'controls.mjs':{"bytes":31799,"sha256":"060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df","blob":"b9b58c4a22f04b177f92dcbf8841cfc77f648c86"}},v2);r3LabParent=Buffer.from(v2Derived.parent);
 + payload.helpers['controls.mjs']=ccNormalControls;
 + expected['controls.mjs']={"bytes":31799,"sha256":"060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df","blob":"b9b58c4a22f04b177f92dcbf8841cfc77f648c86"};
-+ for(const name of names){assert.match(name,/^[a-z0-9][a-z0-9.-]{0,63}$/);const content=payload.helpers[name];assert.equal(typeof content,'string');const b=Buffer.from(content),pin=expected[name];assert(b.length<=32768);assert.equal(b.length,pin.bytes);assert.equal(sha(b),pin.sha256);assert.equal(blob(b),pin.blob);}
-+ assert.equal(sha(Buffer.from(payload.helpers['matrix.json'])),expected['matrix.json'].sha256);assert.equal(expected['matrix.json'].blob,'5b829c768ed3d7af03d5eb3f1870599d39bfd083');
-+ assert.equal(fs.realpathSync(e.RUNNER_TEMP),e.RUNNER_TEMP);const temp=fs.lstatSync(e.RUNNER_TEMP);assert(temp.isDirectory()&&temp.uid===process.getuid()&&!(temp.mode&0o022));
-+ const root=e.RUNNER_TEMP+'/afw-r3-delivery';fs.mkdirSync(root,{mode:0o700});for(const name of names)fs.writeFileSync(root+'/'+name,payload.helpers[name],{mode:0o600,flag:'wx'});
-+ for(const name of names){const b=fs.readFileSync(root+'/'+name);assert.equal(b.length,expected[name].bytes);assert.equal(sha(b),expected[name].sha256);assert.equal(blob(b),expected[name].blob);}
+  for(const name of names){assert.match(name,/^[a-z0-9][a-z0-9.-]{0,63}$/);const content=payload.helpers[name];assert.equal(typeof content,'string');const b=Buffer.from(content),pin=expected[name];assert(b.length<=32768);assert.equal(b.length,pin.bytes);assert.equal(sha(b),pin.sha256);assert.equal(blob(b),pin.blob);}
+  assert.equal(sha(Buffer.from(payload.helpers['matrix.json'])),expected['matrix.json'].sha256);assert.equal(expected['matrix.json'].blob,'5b829c768ed3d7af03d5eb3f1870599d39bfd083');
+  assert.equal(fs.realpathSync(e.RUNNER_TEMP),e.RUNNER_TEMP);const temp=fs.lstatSync(e.RUNNER_TEMP);assert(temp.isDirectory()&&temp.uid===process.getuid()&&!(temp.mode&0o022));
+  const root=e.RUNNER_TEMP+'/afw-r3-delivery';fs.mkdirSync(root,{mode:0o700});for(const name of names)fs.writeFileSync(root+'/'+name,payload.helpers[name],{mode:0o600,flag:'wx'});
+  for(const name of names){const b=fs.readFileSync(root+'/'+name);assert.equal(b.length,expected[name].bytes);assert.equal(sha(b),expected[name].sha256);assert.equal(blob(b),expected[name].blob);}
 + fs.writeFileSync(root+'/lab-serial-v2.mjs',v2Derived.driver,{mode:0o600,flag:'wx'});const v2Written=fs.readFileSync(root+'/lab-serial-v2.mjs');assert.equal(v2Written.length,v2.pins.driver.bytes);assert.equal(sha(v2Written),v2.pins.driver.sha256);assert.equal(blob(v2Written),v2.pins.driver.blob);
   const context={purpose:'afw.r3-delivery.binding.v1',source:e.GITHUB_SHA,sourceTree,run:e.GITHUB_RUN_ID,attempt:1,job:'readonly',node:process.versions.node};fs.writeFileSync(root+'/context.json',JSON.stringify(context),{mode:0o600,flag:'wx'});r3BootstrapAdmitted=true;
  }catch{}
@@ -1190,10 +542,10 @@ Changedartifactpins:
 @@ -1,196 +1,76 @@
  
 -// Trusted outer: builtins only until the closed output boundary.
--import * as r3fs from 'node:fs';
--import {TextDecoder as R3Decoder} from 'node:util';
--import {spawn as r3Spawn} from 'node:child_process';
--import {createHash as r3Hash} from 'node:crypto';
+ import * as r3fs from 'node:fs';
+ import {TextDecoder as R3Decoder} from 'node:util';
+ import {spawn as r3Spawn} from 'node:child_process';
+ import {createHash as r3Hash} from 'node:crypto';
 -const r3FallbackDelivery={"purpose":"afw.r3-delivery.unavailable.v1","reason":"outer_startup_unavailable","source":"unknown","sourceTree":"unknown","run":"unknown","attempt":"unknown","job":"unknown","node":"unknown","controls":"unknown","availability":"unavailable","sourceQualified":false,"collectionComplete":"unknown","sampleObserved":"unknown","nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}},r3FallbackControls={"purpose":"afw.r3-delivery.controls-unavailable.v1","reason":"outer_startup_unavailable","source":"unknown","sourceTree":"unknown","run":"unknown","attempt":"unknown","job":"unknown","node":"unknown","allPassed":"unknown","expected":104,"passed":"unknown","failed":"unknown","unknown":"unknown","results":"unknown","mutants":"unknown","nativeBusinessCases":0,"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}};
 -async function runDelivery(){return await r3Outer('delivery');}
 -async function runControls(){return await r3Outer('controls');}
@@ -1201,43 +553,48 @@ Changedartifactpins:
 - let stage='binding_unavailable',image,creatorHandle,helperHandle,publishing=false;
 - const emit=(record,marker)=>{const b=Buffer.from(marker+' '+JSON.stringify(record)+'\n');publishing=true;if(r3fs.writeSync(1,b)!==b.length)throw 1;};
 - const fallback=reason=>{emit({...(kind==='controls'?r3FallbackControls:r3FallbackDelivery),reason},kind==='controls'?'AFW_R3_DELIVERY_CONTROLS_UNAVAILABLE/1':'AFW_R3_DELIVERY_UNAVAILABLE/1');return 23;};
-- try{
++async function runControls(){
++ let image,creatorHandle,helperHandle,publishing=false;
++ const emit=(r,marker)=>{const b=Buffer.from(marker+' '+JSON.stringify(r)+'\n');publishing=true;if(b.length>24576||r3fs.writeSync(1,b)!==b.length)throw 1;};
+  try{
 -  const {openSync,fstatSync,readSync,closeSync,constants}=r3fs,TextDecoder=R3Decoder;
 -  const invalid=()=>{const e=new Error();e.code='AFW_INVALID';return e;};
 -const uid=process.getuid(),dirFlags=constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW;
--function checked(fd,directory){const s=fstatSync(fd);if((directory?!s.isDirectory():!s.isFile())||s.uid!==uid||(s.mode&0o022)!==0||(!directory&&(s.nlink!==1||(s.mode&0o077)!==0)))throw invalid();return s;}
--function readFixed(base,parts,max){
-- let fd,leaf;
-- try{fd=openSync(base,dirFlags);checked(fd,true);for(const part of parts.slice(0,-1)){if(!/^[a-zA-Z0-9.-]+$/.test(part))throw invalid();const next=openSync('/proc/self/fd/'+fd+'/'+part,dirFlags);try{checked(next,true);}catch(e){closeSync(next);throw e;}closeSync(fd);fd=next;}
-- leaf=openSync('/proc/self/fd/'+fd+'/'+parts.at(-1),constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);const before=checked(leaf,false);if(before.size>max)throw invalid();
-- const out=Buffer.alloc(max+1);let offset=0;while(offset<out.length){const n=readSync(leaf,out,offset,out.length-offset,null);if(n===0)break;offset+=n;}const after=checked(leaf,false);
-- if(offset>max||offset!==before.size||before.dev!==after.dev||before.ino!==after.ino||before.size!==after.size||before.mtimeMs!==after.mtimeMs||before.ctimeMs!==after.ctimeMs)throw invalid();
-- // ignoreBOM:true PRESERVES U+FEFF; ASCII/canonical receivers must reject it.
-- try{return new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(out.subarray(0,offset));}catch{throw invalid();}
-- }finally{if(leaf!==undefined)closeSync(leaf);if(fd!==undefined)closeSync(fd);}
--}
--function jsonFixed(base,parts,max){const raw=readFixed(base,parts,max),v=JSON.parse(raw);if(JSON.stringify(v)!==raw)throw invalid();return v;}
--
--  function shape(v,s){
-- const need=x=>{if(!x)throw 1;};
-- if(s.anyOf){let count=0;for(const one of s.anyOf)try{shape(v,one);count++;}catch{}need(count===1);return;}
++ const {openSync,fstatSync,readSync,closeSync,constants}=r3fs,TextDecoder=R3Decoder,uid=process.getuid(),dirFlags=constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW,invalid=()=>Error();
+ function checked(fd,directory){const s=fstatSync(fd);if((directory?!s.isDirectory():!s.isFile())||s.uid!==uid||(s.mode&0o022)!==0||(!directory&&(s.nlink!==1||(s.mode&0o077)!==0)))throw invalid();return s;}
+ function readFixed(base,parts,max){
+  let fd,leaf;
+  try{fd=openSync(base,dirFlags);checked(fd,true);for(const part of parts.slice(0,-1)){if(!/^[a-zA-Z0-9.-]+$/.test(part))throw invalid();const next=openSync('/proc/self/fd/'+fd+'/'+part,dirFlags);try{checked(next,true);}catch(e){closeSync(next);throw e;}closeSync(fd);fd=next;}
+  leaf=openSync('/proc/self/fd/'+fd+'/'+parts.at(-1),constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);const before=checked(leaf,false);if(before.size>max)throw invalid();
+  const out=Buffer.alloc(max+1);let offset=0;while(offset<out.length){const n=readSync(leaf,out,offset,out.length-offset,null);if(n===0)break;offset+=n;}const after=checked(leaf,false);
+  if(offset>max||offset!==before.size||before.dev!==after.dev||before.ino!==after.ino||before.size!==after.size||before.mtimeMs!==after.mtimeMs||before.ctimeMs!==after.ctimeMs)throw invalid();
+  // ignoreBOM:true PRESERVES U+FEFF; ASCII/canonical receivers must reject it.
+  try{return new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(out.subarray(0,offset));}catch{throw invalid();}
+  }finally{if(leaf!==undefined)closeSync(leaf);if(fd!==undefined)closeSync(fd);}
+ }
+ function jsonFixed(base,parts,max){const raw=readFixed(base,parts,max),v=JSON.parse(raw);if(JSON.stringify(v)!==raw)throw invalid();return v;}
+ 
+   function shape(v,s){
+  const need=x=>{if(!x)throw 1;};
+  if(s.anyOf){let count=0;for(const one of s.anyOf)try{shape(v,one);count++;}catch{}need(count===1);return;}
 - if(s.enum){need(s.enum.some(x=>Object.is(x,v)));return;}
-- if(s.type==='null'){need(v===null);return;}
-- if(s.type==='integer'){need(Number.isSafeInteger(v)&&v>=s.minimum&&v<=s.maximum);return;}
-- if(s.type==='string'){need(typeof v==='string'&&new RegExp(s.pattern).test(v));return;}
-- if(s.type==='array'){need(Array.isArray(v)&&v.length>=s.minItems&&v.length<=s.maxItems);for(const x of v)shape(x,s.items);return;}
-- if(s.type==='object'){need(v&&typeof v==='object'&&!Array.isArray(v)&&s.additionalProperties===false&&JSON.stringify(Object.keys(v).sort())===JSON.stringify(s.required.slice().sort()));for(const k of s.required)shape(v[k],s.properties[k]);return;}throw 1;
--}
--
--  const need=x=>{if(!x)throw 1;},eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
--  const base=process.env.RUNNER_TEMP,e=process.env;
--  need(process.versions.node==='22.23.4'&&typeof base==='string'&&base.startsWith('/')&&base.length<=4096&&!base.includes('\0')&&r3fs.realpathSync(base)===base);
--  const own=openSync(base+'/afw-r3-delivery',constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW);try{const s=fstatSync(own);need(s.isDirectory()&&s.uid===process.getuid()&&!(s.mode&0o077));}finally{closeSync(own);}
--  const boundImage=fstatSync(3),runningImage=r3fs.statSync('/proc/self/exe');need(boundImage.isFile()&&boundImage.dev===runningImage.dev&&boundImage.ino===runningImage.ino&&boundImage.size===runningImage.size);
--  const c=jsonFixed(base,['afw-r3-delivery','context.json'],2048);
--  need(['purpose','source','sourceTree','run','job','node'].every(k=>typeof c[k]==='string')&&eq(Object.keys(c),['purpose','source','sourceTree','run','attempt','job','node'])&&c.purpose==='afw.r3-delivery.binding.v1'&&c.node==='22.23.4'&&c.attempt===1&&c.job==='readonly'&&/^[a-f0-9]{40}$/.test(c.source)&&/^[a-f0-9]{40}$/.test(c.sourceTree)&&/^[1-9][0-9]{0,19}$/.test(c.run));
--  for(const[k,v]of Object.entries({GITHUB_SHA:c.source,GITHUB_RUN_ID:c.run,GITHUB_RUN_ATTEMPT:'1',GITHUB_JOB:'readonly',GITHUB_REPOSITORY:'tokenizartinfo-ops/agent-friendly-web',GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/feat/finite-native-cleanup-20261101'}))need(e[k]===v);
--  const ctx={source:c.source,tree:c.sourceTree,run:c.run,attempt:1,job:'readonly'};
++ if(s.enum){need(s.enum.some(x=>JSON.stringify(x)===JSON.stringify(v)));return;}
+  if(s.type==='null'){need(v===null);return;}
+  if(s.type==='integer'){need(Number.isSafeInteger(v)&&v>=s.minimum&&v<=s.maximum);return;}
+  if(s.type==='string'){need(typeof v==='string'&&new RegExp(s.pattern).test(v));return;}
+  if(s.type==='array'){need(Array.isArray(v)&&v.length>=s.minItems&&v.length<=s.maxItems);for(const x of v)shape(x,s.items);return;}
+  if(s.type==='object'){need(v&&typeof v==='object'&&!Array.isArray(v)&&s.additionalProperties===false&&JSON.stringify(Object.keys(v).sort())===JSON.stringify(s.required.slice().sort()));for(const k of s.required)shape(v[k],s.properties[k]);return;}throw 1;
+ }
+ 
+   const need=x=>{if(!x)throw 1;},eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+   const base=process.env.RUNNER_TEMP,e=process.env;
+   need(process.versions.node==='22.23.4'&&typeof base==='string'&&base.startsWith('/')&&base.length<=4096&&!base.includes('\0')&&r3fs.realpathSync(base)===base);
+   const own=openSync(base+'/afw-r3-delivery',constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW);try{const s=fstatSync(own);need(s.isDirectory()&&s.uid===process.getuid()&&!(s.mode&0o077));}finally{closeSync(own);}
+   const boundImage=fstatSync(3),runningImage=r3fs.statSync('/proc/self/exe');need(boundImage.isFile()&&boundImage.dev===runningImage.dev&&boundImage.ino===runningImage.ino&&boundImage.size===runningImage.size);
+   const c=jsonFixed(base,['afw-r3-delivery','context.json'],2048);
+   need(['purpose','source','sourceTree','run','job','node'].every(k=>typeof c[k]==='string')&&eq(Object.keys(c),['purpose','source','sourceTree','run','attempt','job','node'])&&c.purpose==='afw.r3-delivery.binding.v1'&&c.node==='22.23.4'&&c.attempt===1&&c.job==='readonly'&&/^[a-f0-9]{40}$/.test(c.source)&&/^[a-f0-9]{40}$/.test(c.sourceTree)&&/^[1-9][0-9]{0,19}$/.test(c.run));
+   for(const[k,v]of Object.entries({GITHUB_SHA:c.source,GITHUB_RUN_ID:c.run,GITHUB_RUN_ATTEMPT:'1',GITHUB_JOB:'readonly',GITHUB_REPOSITORY:'tokenizartinfo-ops/agent-friendly-web',GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/feat/finite-native-cleanup-20261101'}))need(e[k]===v);
+   const ctx={source:c.source,tree:c.sourceTree,run:c.run,attempt:1,job:'readonly'};
 -  // Immutable Source-code authority; NOT a child-readable authority-file load.
 -  const R3_AUTHORITY_ANCHOR={"site-schema.json":{"bytes":12651,"sha256":"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd","blob":"4871edc102386fe6db65c773e51c21ecb94897e3","framing":"canonical-json+lf"},"site-map.json":{"bytes":6630,"sha256":"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","blob":"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f","framing":"canonical-json"},"envelope-schema.json":{"bytes":5616,"sha256":"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5","blob":"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f","framing":"canonical-json"},"delivery-schema.json":{"bytes":1380,"sha256":"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60","blob":"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8","framing":"canonical-json"},"unavailable-schema.json":{"bytes":1315,"sha256":"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9","blob":"4a310ddcef7b1b7bf0755bf56b760486254cf8c6","framing":"canonical-json"},"controls-schema.json":{"bytes":4681,"sha256":"2d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83","blob":"8586d4387a5fcd95b18d7c966cf841432330a789","framing":"canonical-json"},"matrix.json":{"bytes":24054,"sha256":"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e","blob":"5b829c768ed3d7af03d5eb3f1870599d39bfd083","framing":"canonical-json"},"fixtures.json":{"bytes":7988,"sha256":"06b7dc9e63c178b6b823db1ee56049ce4d1406861df240ca2fbc119d2df45bc9","blob":"f29e76fd04627ebe5d1100007808610ebc240571","framing":"canonical-json"},"examples.json":{"bytes":22739,"sha256":"4f8da5a563bb0498cc506d693421853777ba7efb67d42da44b1889e5fef7b945","blob":"6f28d4f4479fb093aec3188d21b1796fd7c3fff2","framing":"canonical-json"},"controls-unavailable-example.json":{"bytes":568,"sha256":"7544b33859efe6ba2f6f1789e709f89f5f94f08352dd4fe4b14d700b19b22644","blob":"beedc03c8066cef6e6a24914d5334f99183d014b","framing":"canonical-json"}};
 -  const freeze=v=>{if(v&&typeof v==='object'){for(const x of Object.values(v))freeze(x);Object.freeze(v);}return v;},authority={};
@@ -1331,10 +688,21 @@ Changedartifactpins:
 - if(s.inputSeeded===true)need(Number.isSafeInteger(s.seedEntries)&&s.seedEntries>=0&&s.seedEntries<=201,"seedmarker");
 - if(r.sampleState==="not_observed"){for(const k of ks.filter(x=>x!=="phase"))need(s[k]===u,"absence");for(const v of Object.values(s.phase))need(v===u,"phaseabsence");}
 - return {record:r,sourceQualified:true,sampleObserved:r.sampleState==="observed",historicalCauseProven:false,operationalReadiness:false,PCoff:false};
--}
++const policy={"purpose":"afw.q1.serial-source-lab.policy.v2","scope":"top-laboratory-only","unit":"ms","horizon":240000,"reserve":20000,"parent":250000,"outer":260000,"step":300000,"job":420000,"normal":{"horizon":90000,"reserve":20000,"parent":100000,"outer":110000,"ceiling":120000,"delivery":[3500,4000,5000],"case":5000,"cleanup":2000,"probe":[4500,4800],"alive":20},"groups":["baseline","M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"],"width":104,"instances":520,"marker":"AFW_Q1_SERIAL_LAB/2","unavailable":"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2"},schema={"type":"object","additionalProperties":false,"required":["purpose","scope","source","sourceTree","run","attempt","job","node","matrixSha256","policySha256","normalManifest","driver","groups","terminal","lastAdmissionMs","terminalMs","v1","nativeBusinessCases","nonclaims","qualified"],"properties":{"purpose":{"enum":["afw.q1.serial-source-lab.v2"]},"scope":{"enum":[{"purpose":"afw.q1.serial-source-lab.policy.v2","scope":"top-laboratory-only","unit":"ms","horizon":240000,"reserve":20000,"parent":250000,"outer":260000,"step":300000,"job":420000,"normal":{"horizon":90000,"reserve":20000,"parent":100000,"outer":110000,"ceiling":120000,"delivery":[3500,4000,5000],"case":5000,"cleanup":2000,"probe":[4500,4800],"alive":20},"groups":["baseline","M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"],"width":104,"instances":520,"marker":"AFW_Q1_SERIAL_LAB/2","unavailable":"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2"}]},"source":{"type":"string","pattern":"^[a-f0-9]{40}$"},"sourceTree":{"type":"string","pattern":"^[a-f0-9]{40}$"},"run":{"type":"string","pattern":"^[1-9][0-9]{0,19}$"},"attempt":{"enum":[1]},"job":{"enum":["readonly"]},"node":{"enum":["22.23.4"]},"matrixSha256":{"enum":["0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e"]},"policySha256":{"enum":["91277fb4b570ce9f18d49e8c16fe6d48b556b8bb89781de81bcde97cae8b31ac"]},"normalManifest":{"enum":[{"blob":"4f6d2738a0d116aaf8114fc4b5640110f6bafb03","bytes":5293,"sha256":"ff0a90104e63a5d39924c562c8aecb74afa3518e556bd554fb85b51ed4a846a9"}]},"driver":{"type":"object","additionalProperties":false,"required":["blob","bytes","sha256"],"properties":{"blob":{"type":"string","pattern":"^[a-f0-9]{40}$"},"bytes":{"type":"integer","minimum":1,"maximum":32768},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}}},"groups":{"type":"array","minItems":5,"maxItems":5,"items":{"type":"object","additionalProperties":false,"required":["id","entry","outcome","cleanup","entered","returned","passed","failed","unknown","unentered"],"properties":{"id":{"enum":["baseline","M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"]},"entry":{"type":"string","pattern":"^[01]{104}$"},"outcome":{"type":"string","pattern":"^[NPFUX]{104}$"},"cleanup":{"type":"string","pattern":"^[NCFU]{104}$"},"entered":{"type":"integer","minimum":0,"maximum":104},"returned":{"type":"integer","minimum":0,"maximum":104},"passed":{"type":"integer","minimum":0,"maximum":104},"failed":{"type":"integer","minimum":0,"maximum":104},"unknown":{"type":"integer","minimum":0,"maximum":104},"unentered":{"type":"integer","minimum":0,"maximum":104}}}},"terminal":{"type":"object","additionalProperties":false,"required":["kind","next"],"properties":{"kind":{"enum":["complete","inner","outer","exception","late","custody","abrupt"]},"next":{"anyOf":[{"type":"integer","minimum":0,"maximum":520},{"enum":["unknown"]}]}}},"lastAdmissionMs":{"anyOf":[{"type":"integer","minimum":0,"maximum":300000},{"enum":[null,"unknown"]}]},"terminalMs":{"anyOf":[{"type":"integer","minimum":0,"maximum":300000},{"enum":["unknown"]}]},"v1":{"type":"object","additionalProperties":false,"required":["purpose","source","sourceTree","run","attempt","job","node","matrixSha256","allPassed","expected","passed","failed","unknown","results","mutants","nativeBusinessCases","nonclaims","cleanup"],"properties":{"purpose":{"enum":["afw.r3-delivery.controls.v1"]},"source":{"type":"string","pattern":"^[a-f0-9]{40}$"},"sourceTree":{"type":"string","pattern":"^[a-f0-9]{40}$"},"run":{"type":"string","pattern":"^[1-9][0-9]{0,19}$"},"attempt":{"enum":[1]},"job":{"enum":["readonly"]},"node":{"enum":["22.23.4"]},"matrixSha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"allPassed":{"enum":[true,false]},"expected":{"type":"integer","minimum":104,"maximum":104},"passed":{"type":"integer","minimum":0,"maximum":104},"failed":{"type":"integer","minimum":0,"maximum":104},"unknown":{"type":"integer","minimum":0,"maximum":104},"results":{"type":"array","minItems":104,"maxItems":104,"items":{"type":"object","additionalProperties":false,"required":["id","result"],"properties":{"id":{"enum":["A01","A02","A03","A04","D01","D02","D03","D04","D05","D06","D07","D08","D09","D10","D11","D12","D13","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13","P14","P15","P16","P17","P18","P19","P20","P21","P22","P23","P24","P25","F01","F02","F03","F04","F05","F06","F07","F08","F09","B01","B02","B03","B04","B05","B06","B07","B08","B09","B10","B11","B12","B13","W01","W02","C01","C02","C03","C04","C05","D14","P26","F10","E01","E02","E03","E04","E05","E06","O01","O02","O03","O04","O05","S01","E07","T01","F11","A05","U01","U02","U03","U04","H01","L01","L02","L03","L04","L05","E08","E09","E10","E11"]},"result":{"enum":["passed","failed","unknown"]}}}},"mutants":{"type":"array","minItems":4,"maxItems":4,"items":{"type":"object","additionalProperties":false,"required":["id","expectedFailedIds","actualFailedIds","result"],"properties":{"id":{"enum":["M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"]},"expectedFailedIds":{"type":"array","minItems":1,"maxItems":2,"items":{"enum":["D02","P06","B05","U01","S01"]}},"actualFailedIds":{"type":"array","minItems":0,"maxItems":104,"items":{"enum":["A01","A02","A03","A04","D01","D02","D03","D04","D05","D06","D07","D08","D09","D10","D11","D12","D13","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13","P14","P15","P16","P17","P18","P19","P20","P21","P22","P23","P24","P25","F01","F02","F03","F04","F05","F06","F07","F08","F09","B01","B02","B03","B04","B05","B06","B07","B08","B09","B10","B11","B12","B13","W01","W02","C01","C02","C03","C04","C05","D14","P26","F10","E01","E02","E03","E04","E05","E06","O01","O02","O03","O04","O05","S01","E07","T01","F11","A05","U01","U02","U03","U04","H01","L01","L02","L03","L04","L05","E08","E09","E10","E11"]}},"result":{"enum":["passed","failed","unknown"]}}}},"nativeBusinessCases":{"enum":[0]},"nonclaims":{"type":"object","additionalProperties":false,"required":["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"],"properties":{"historicalCauseProven":{"enum":[false]},"receiptAuthenticated":{"enum":[false]},"operationalReadiness":{"enum":[false]},"completePackage":{"enum":[false]},"PCoff":{"enum":[false]},"globalNativeDrainVerified":{"enum":[false]},"sdkNamespaceEmptyVerified":{"enum":[false]}}},"cleanup":{"type":"object","additionalProperties":false,"required":["complete","failedInstances","unknownInstances"],"properties":{"complete":{"enum":[true,false]},"failedInstances":{"type":"array","minItems":0,"maxItems":520,"items":{"type":"string","pattern":"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$"}},"unknownInstances":{"type":"array","minItems":0,"maxItems":520,"items":{"type":"string","pattern":"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$"}}}}}},"nativeBusinessCases":{"enum":[0]},"nonclaims":{"type":"object","additionalProperties":false,"required":["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"],"properties":{"historicalCauseProven":{"enum":[false]},"receiptAuthenticated":{"enum":[false]},"operationalReadiness":{"enum":[false]},"completePackage":{"enum":[false]},"PCoff":{"enum":[false]},"globalNativeDrainVerified":{"enum":[false]},"sdkNamespaceEmptyVerified":{"enum":[false]}}},"qualified":{"enum":[true,false]}}},driver={"blob":"48822f1654ad9dc3ec40990fe1d0474956f33678","bytes":32574,"sha256":"d773dbda3d55624dbfc2cfe68b705015efc20bc4601c8e0d585583a3e9db8182"},ids=["A01","A02","A03","A04","D01","D02","D03","D04","D05","D06","D07","D08","D09","D10","D11","D12","D13","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13","P14","P15","P16","P17","P18","P19","P20","P21","P22","P23","P24","P25","F01","F02","F03","F04","F05","F06","F07","F08","F09","B01","B02","B03","B04","B05","B06","B07","B08","B09","B10","B11","B12","B13","W01","W02","C01","C02","C03","C04","C05","D14","P26","F10","E01","E02","E03","E04","E05","E06","O01","O02","O03","O04","O05","S01","E07","T01","F11","A05","U01","U02","U03","U04","H01","L01","L02","L03","L04","L05","E08","E09","E10","E11"],mutantDefs=[{"id":"M_RAW","change":"omit strict raw framing in inner raw receiver; outer normalized receiver retains sample semantics","expectedFailedIds":["D02"]},{"id":"M_PROVENANCE","change":"omit full before-after guard in BOTH inner and final literal outer strong Source receivers","expectedFailedIds":["P06"]},{"id":"M_OUTPUT","change":"omit delivery envelope/record closed-schema guard in BOTH Python parent and final literal Node outer; held authority and semantic rules remain","expectedFailedIds":["B05","U01"]},{"id":"M_ASSOC","change":"omit normalized sample semantic receiver only in final literal Node outer; inner emitter fixture sends impossible not_observed","expectedFailedIds":["S01"]}],nonclaims={"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false},matrixHash="0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e";
++function validate(r,c){
++ shape(r,schema);need(eq(Object.keys(r),schema.required));for(const k of ['source','sourceTree','run','attempt','job','node'])need(r[k]===c[k]);need(eq(r.driver,driver));
++ const entries=r.groups.map(x=>x.entry).join(''),outcomes=r.groups.map(x=>x.outcome).join(''),cleanups=r.groups.map(x=>x.cleanup).join('');need(/^1*0*$/.test(entries));let open=0;
++ for(let i=0;i<520;i++){if(entries[i]==='0')need(outcomes[i]==='N'&&cleanups[i]==='N');else{need('PFUX'.includes(outcomes[i])&&'CFU'.includes(cleanups[i]));if(outcomes[i]==='X'){open++;need(cleanups[i]==='U'&&entries.slice(i+1).indexOf('1')===-1);}}}need(open<=1);
++ for(let j=0;j<5;j++){const g=r.groups[j],v=g.outcome;need(eq(Object.keys(g),schema.properties.groups.items.required)&&g.id===policy.groups[j]);const count=(s,k)=>s.split(k).length-1;need(g.entered===count(g.entry,'1')&&g.returned===[...'PFU'].reduce((a,k)=>a+count(v,k),0)&&g.passed===count(v,'P')&&g.failed===count(v,'F')&&g.unknown===count(v,'U')+count(v,'X')&&g.unentered===count(v,'N'));}
++ const n=entries.indexOf('0')<0?520:entries.indexOf('0'),t=r.terminal;need(eq(Object.keys(t),['kind','next']));
++ if(t.kind==='abrupt')need(t.next==='unknown'&&r.lastAdmissionMs==='unknown'&&r.terminalMs==='unknown');else{need(open===0&&t.next===n&&Number.isSafeInteger(r.terminalMs));need(n===0?r.lastAdmissionMs===null:Number.isSafeInteger(r.lastAdmissionMs)&&r.lastAdmissionMs<=r.terminalMs);need(t.kind!=='complete'||n===520&&r.terminalMs<=240000);need(t.kind!=='inner'||n<520);need(t.kind!=='outer'||[104,208,312,416].includes(n));need(!cleanups.includes('U')||t.kind==='custody');}
++ const results=ids.map((id,i)=>({id,result:({P:'passed',F:'failed'})[outcomes[i]]??'unknown'})),mutants=mutantDefs.map((m,j)=>{const v=r.groups[j+1].outcome,failed=ids.filter((id,i)=>v[i]==='F');return{id:m.id,expectedFailedIds:m.expectedFailedIds,actualFailedIds:failed,result:/[NUX]/.test(v)?'unknown':eq(failed,m.expectedFailedIds)?'passed':'failed'};}),instances=policy.groups.flatMap(g=>ids.map(id=>g+':'+id)),cleanup={complete:open===0&&!cleanups.includes('U'),failedInstances:instances.filter((x,i)=>cleanups[i]==='F'),unknownInstances:instances.filter((x,i)=>cleanups[i]==='U')};
++ const v1={purpose:'afw.r3-delivery.controls.v1',...Object.fromEntries(['source','sourceTree','run','attempt','job','node'].map(k=>[k,c[k]])),matrixSha256:matrixHash,allPassed:false,expected:104,passed:r.groups[0].passed,failed:r.groups[0].failed,unknown:104-r.groups[0].passed-r.groups[0].failed,results,mutants,nativeBusinessCases:0,nonclaims,cleanup};v1.allPassed=v1.passed===104&&mutants.every(m=>m.result==='passed')&&cleanup.complete&&!cleanup.failedInstances.length&&!cleanup.unknownInstances.length;need(eq(r.v1,v1));
++ const qualified=v1.allPassed&&r.groups.every(g=>g.entered===104&&g.returned===104&&g.cleanup==='C'.repeat(104))&&t.kind==='complete'&&Number.isSafeInteger(r.lastAdmissionMs)&&r.lastAdmissionMs<=220000&&r.terminalMs<=240000;need(r.qualified===qualified);return qualified;
+ }
 -;
 -;
--
+ 
 -  let controlsBefore=false,sourceBefore=null;
 -  if(kind==='delivery'){
 -   try{controlsBefore=report(jsonFixed(base,['afw-r3-delivery','controls-report.json'],24576));}catch{}
@@ -1379,65 +747,6 @@ Changedartifactpins:
 -  else need(['source_missing','source_invalid','io_unavailable'].includes(d.reason)&&d.collectionComplete==='unknown');
 -  emit(d,'AFW_R3_DELIVERY/1');return 23;
 - }catch{if(publishing)return 23;return fallback(stage);}finally{for(const fd of[image,creatorHandle,helperHandle])if(fd!==undefined)try{r3fs.closeSync(fd);}catch{}}
--}
--
--if(r3BootstrapAdmitted)process.exitCode=await runControls();
--else{const b=Buffer.from('AFW_R3_DELIVERY_CONTROLS_UNAVAILABLE/1 '+JSON.stringify({...r3FallbackControls,reason:'setup_unavailable'})+'\n');try{r3fs.writeSync(1,b);}catch{}process.exitCode=23;}
-+import * as r3fs from 'node:fs';
-+import {TextDecoder as R3Decoder} from 'node:util';
-+import {spawn as r3Spawn} from 'node:child_process';
-+import {createHash as r3Hash} from 'node:crypto';
-+async function runControls(){
-+ let image,creatorHandle,helperHandle,publishing=false;
-+ const emit=(r,marker)=>{const b=Buffer.from(marker+' '+JSON.stringify(r)+'\n');publishing=true;if(b.length>24576||r3fs.writeSync(1,b)!==b.length)throw 1;};
-+ try{
-+ const {openSync,fstatSync,readSync,closeSync,constants}=r3fs,TextDecoder=R3Decoder,uid=process.getuid(),dirFlags=constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW,invalid=()=>Error();
-+function checked(fd,directory){const s=fstatSync(fd);if((directory?!s.isDirectory():!s.isFile())||s.uid!==uid||(s.mode&0o022)!==0||(!directory&&(s.nlink!==1||(s.mode&0o077)!==0)))throw invalid();return s;}
-+function readFixed(base,parts,max){
-+ let fd,leaf;
-+ try{fd=openSync(base,dirFlags);checked(fd,true);for(const part of parts.slice(0,-1)){if(!/^[a-zA-Z0-9.-]+$/.test(part))throw invalid();const next=openSync('/proc/self/fd/'+fd+'/'+part,dirFlags);try{checked(next,true);}catch(e){closeSync(next);throw e;}closeSync(fd);fd=next;}
-+ leaf=openSync('/proc/self/fd/'+fd+'/'+parts.at(-1),constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);const before=checked(leaf,false);if(before.size>max)throw invalid();
-+ const out=Buffer.alloc(max+1);let offset=0;while(offset<out.length){const n=readSync(leaf,out,offset,out.length-offset,null);if(n===0)break;offset+=n;}const after=checked(leaf,false);
-+ if(offset>max||offset!==before.size||before.dev!==after.dev||before.ino!==after.ino||before.size!==after.size||before.mtimeMs!==after.mtimeMs||before.ctimeMs!==after.ctimeMs)throw invalid();
-+ // ignoreBOM:true PRESERVES U+FEFF; ASCII/canonical receivers must reject it.
-+ try{return new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(out.subarray(0,offset));}catch{throw invalid();}
-+ }finally{if(leaf!==undefined)closeSync(leaf);if(fd!==undefined)closeSync(fd);}
-+}
-+function jsonFixed(base,parts,max){const raw=readFixed(base,parts,max),v=JSON.parse(raw);if(JSON.stringify(v)!==raw)throw invalid();return v;}
-+
-+  function shape(v,s){
-+ const need=x=>{if(!x)throw 1;};
-+ if(s.anyOf){let count=0;for(const one of s.anyOf)try{shape(v,one);count++;}catch{}need(count===1);return;}
-+ if(s.enum){need(s.enum.some(x=>JSON.stringify(x)===JSON.stringify(v)));return;}
-+ if(s.type==='null'){need(v===null);return;}
-+ if(s.type==='integer'){need(Number.isSafeInteger(v)&&v>=s.minimum&&v<=s.maximum);return;}
-+ if(s.type==='string'){need(typeof v==='string'&&new RegExp(s.pattern).test(v));return;}
-+ if(s.type==='array'){need(Array.isArray(v)&&v.length>=s.minItems&&v.length<=s.maxItems);for(const x of v)shape(x,s.items);return;}
-+ if(s.type==='object'){need(v&&typeof v==='object'&&!Array.isArray(v)&&s.additionalProperties===false&&JSON.stringify(Object.keys(v).sort())===JSON.stringify(s.required.slice().sort()));for(const k of s.required)shape(v[k],s.properties[k]);return;}throw 1;
-+}
-+
-+  const need=x=>{if(!x)throw 1;},eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
-+  const base=process.env.RUNNER_TEMP,e=process.env;
-+  need(process.versions.node==='22.23.4'&&typeof base==='string'&&base.startsWith('/')&&base.length<=4096&&!base.includes('\0')&&r3fs.realpathSync(base)===base);
-+  const own=openSync(base+'/afw-r3-delivery',constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW);try{const s=fstatSync(own);need(s.isDirectory()&&s.uid===process.getuid()&&!(s.mode&0o077));}finally{closeSync(own);}
-+  const boundImage=fstatSync(3),runningImage=r3fs.statSync('/proc/self/exe');need(boundImage.isFile()&&boundImage.dev===runningImage.dev&&boundImage.ino===runningImage.ino&&boundImage.size===runningImage.size);
-+  const c=jsonFixed(base,['afw-r3-delivery','context.json'],2048);
-+  need(['purpose','source','sourceTree','run','job','node'].every(k=>typeof c[k]==='string')&&eq(Object.keys(c),['purpose','source','sourceTree','run','attempt','job','node'])&&c.purpose==='afw.r3-delivery.binding.v1'&&c.node==='22.23.4'&&c.attempt===1&&c.job==='readonly'&&/^[a-f0-9]{40}$/.test(c.source)&&/^[a-f0-9]{40}$/.test(c.sourceTree)&&/^[1-9][0-9]{0,19}$/.test(c.run));
-+  for(const[k,v]of Object.entries({GITHUB_SHA:c.source,GITHUB_RUN_ID:c.run,GITHUB_RUN_ATTEMPT:'1',GITHUB_JOB:'readonly',GITHUB_REPOSITORY:'tokenizartinfo-ops/agent-friendly-web',GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/feat/finite-native-cleanup-20261101'}))need(e[k]===v);
-+  const ctx={source:c.source,tree:c.sourceTree,run:c.run,attempt:1,job:'readonly'};
-+const policy={"purpose":"afw.q1.serial-source-lab.policy.v2","scope":"top-laboratory-only","unit":"ms","horizon":240000,"reserve":20000,"parent":250000,"outer":260000,"step":300000,"job":420000,"normal":{"horizon":90000,"reserve":20000,"parent":100000,"outer":110000,"ceiling":120000,"delivery":[3500,4000,5000],"case":5000,"cleanup":2000,"probe":[4500,4800],"alive":20},"groups":["baseline","M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"],"width":104,"instances":520,"marker":"AFW_Q1_SERIAL_LAB/2","unavailable":"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2"},schema={"type":"object","additionalProperties":false,"required":["purpose","scope","source","sourceTree","run","attempt","job","node","matrixSha256","policySha256","normalManifest","driver","groups","terminal","lastAdmissionMs","terminalMs","v1","nativeBusinessCases","nonclaims","qualified"],"properties":{"purpose":{"enum":["afw.q1.serial-source-lab.v2"]},"scope":{"enum":[{"purpose":"afw.q1.serial-source-lab.policy.v2","scope":"top-laboratory-only","unit":"ms","horizon":240000,"reserve":20000,"parent":250000,"outer":260000,"step":300000,"job":420000,"normal":{"horizon":90000,"reserve":20000,"parent":100000,"outer":110000,"ceiling":120000,"delivery":[3500,4000,5000],"case":5000,"cleanup":2000,"probe":[4500,4800],"alive":20},"groups":["baseline","M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"],"width":104,"instances":520,"marker":"AFW_Q1_SERIAL_LAB/2","unavailable":"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2"}]},"source":{"type":"string","pattern":"^[a-f0-9]{40}$"},"sourceTree":{"type":"string","pattern":"^[a-f0-9]{40}$"},"run":{"type":"string","pattern":"^[1-9][0-9]{0,19}$"},"attempt":{"enum":[1]},"job":{"enum":["readonly"]},"node":{"enum":["22.23.4"]},"matrixSha256":{"enum":["0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e"]},"policySha256":{"enum":["91277fb4b570ce9f18d49e8c16fe6d48b556b8bb89781de81bcde97cae8b31ac"]},"normalManifest":{"enum":[{"blob":"4f6d2738a0d116aaf8114fc4b5640110f6bafb03","bytes":5293,"sha256":"ff0a90104e63a5d39924c562c8aecb74afa3518e556bd554fb85b51ed4a846a9"}]},"driver":{"type":"object","additionalProperties":false,"required":["blob","bytes","sha256"],"properties":{"blob":{"type":"string","pattern":"^[a-f0-9]{40}$"},"bytes":{"type":"integer","minimum":1,"maximum":32768},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}}},"groups":{"type":"array","minItems":5,"maxItems":5,"items":{"type":"object","additionalProperties":false,"required":["id","entry","outcome","cleanup","entered","returned","passed","failed","unknown","unentered"],"properties":{"id":{"enum":["baseline","M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"]},"entry":{"type":"string","pattern":"^[01]{104}$"},"outcome":{"type":"string","pattern":"^[NPFUX]{104}$"},"cleanup":{"type":"string","pattern":"^[NCFU]{104}$"},"entered":{"type":"integer","minimum":0,"maximum":104},"returned":{"type":"integer","minimum":0,"maximum":104},"passed":{"type":"integer","minimum":0,"maximum":104},"failed":{"type":"integer","minimum":0,"maximum":104},"unknown":{"type":"integer","minimum":0,"maximum":104},"unentered":{"type":"integer","minimum":0,"maximum":104}}}},"terminal":{"type":"object","additionalProperties":false,"required":["kind","next"],"properties":{"kind":{"enum":["complete","inner","outer","exception","late","custody","abrupt"]},"next":{"anyOf":[{"type":"integer","minimum":0,"maximum":520},{"enum":["unknown"]}]}}},"lastAdmissionMs":{"anyOf":[{"type":"integer","minimum":0,"maximum":300000},{"enum":[null,"unknown"]}]},"terminalMs":{"anyOf":[{"type":"integer","minimum":0,"maximum":300000},{"enum":["unknown"]}]},"v1":{"type":"object","additionalProperties":false,"required":["purpose","source","sourceTree","run","attempt","job","node","matrixSha256","allPassed","expected","passed","failed","unknown","results","mutants","nativeBusinessCases","nonclaims","cleanup"],"properties":{"purpose":{"enum":["afw.r3-delivery.controls.v1"]},"source":{"type":"string","pattern":"^[a-f0-9]{40}$"},"sourceTree":{"type":"string","pattern":"^[a-f0-9]{40}$"},"run":{"type":"string","pattern":"^[1-9][0-9]{0,19}$"},"attempt":{"enum":[1]},"job":{"enum":["readonly"]},"node":{"enum":["22.23.4"]},"matrixSha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"allPassed":{"enum":[true,false]},"expected":{"type":"integer","minimum":104,"maximum":104},"passed":{"type":"integer","minimum":0,"maximum":104},"failed":{"type":"integer","minimum":0,"maximum":104},"unknown":{"type":"integer","minimum":0,"maximum":104},"results":{"type":"array","minItems":104,"maxItems":104,"items":{"type":"object","additionalProperties":false,"required":["id","result"],"properties":{"id":{"enum":["A01","A02","A03","A04","D01","D02","D03","D04","D05","D06","D07","D08","D09","D10","D11","D12","D13","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13","P14","P15","P16","P17","P18","P19","P20","P21","P22","P23","P24","P25","F01","F02","F03","F04","F05","F06","F07","F08","F09","B01","B02","B03","B04","B05","B06","B07","B08","B09","B10","B11","B12","B13","W01","W02","C01","C02","C03","C04","C05","D14","P26","F10","E01","E02","E03","E04","E05","E06","O01","O02","O03","O04","O05","S01","E07","T01","F11","A05","U01","U02","U03","U04","H01","L01","L02","L03","L04","L05","E08","E09","E10","E11"]},"result":{"enum":["passed","failed","unknown"]}}}},"mutants":{"type":"array","minItems":4,"maxItems":4,"items":{"type":"object","additionalProperties":false,"required":["id","expectedFailedIds","actualFailedIds","result"],"properties":{"id":{"enum":["M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"]},"expectedFailedIds":{"type":"array","minItems":1,"maxItems":2,"items":{"enum":["D02","P06","B05","U01","S01"]}},"actualFailedIds":{"type":"array","minItems":0,"maxItems":104,"items":{"enum":["A01","A02","A03","A04","D01","D02","D03","D04","D05","D06","D07","D08","D09","D10","D11","D12","D13","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13","P14","P15","P16","P17","P18","P19","P20","P21","P22","P23","P24","P25","F01","F02","F03","F04","F05","F06","F07","F08","F09","B01","B02","B03","B04","B05","B06","B07","B08","B09","B10","B11","B12","B13","W01","W02","C01","C02","C03","C04","C05","D14","P26","F10","E01","E02","E03","E04","E05","E06","O01","O02","O03","O04","O05","S01","E07","T01","F11","A05","U01","U02","U03","U04","H01","L01","L02","L03","L04","L05","E08","E09","E10","E11"]}},"result":{"enum":["passed","failed","unknown"]}}}},"nativeBusinessCases":{"enum":[0]},"nonclaims":{"type":"object","additionalProperties":false,"required":["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"],"properties":{"historicalCauseProven":{"enum":[false]},"receiptAuthenticated":{"enum":[false]},"operationalReadiness":{"enum":[false]},"completePackage":{"enum":[false]},"PCoff":{"enum":[false]},"globalNativeDrainVerified":{"enum":[false]},"sdkNamespaceEmptyVerified":{"enum":[false]}}},"cleanup":{"type":"object","additionalProperties":false,"required":["complete","failedInstances","unknownInstances"],"properties":{"complete":{"enum":[true,false]},"failedInstances":{"type":"array","minItems":0,"maxItems":520,"items":{"type":"string","pattern":"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$"}},"unknownInstances":{"type":"array","minItems":0,"maxItems":520,"items":{"type":"string","pattern":"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$"}}}}}},"nativeBusinessCases":{"enum":[0]},"nonclaims":{"type":"object","additionalProperties":false,"required":["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"],"properties":{"historicalCauseProven":{"enum":[false]},"receiptAuthenticated":{"enum":[false]},"operationalReadiness":{"enum":[false]},"completePackage":{"enum":[false]},"PCoff":{"enum":[false]},"globalNativeDrainVerified":{"enum":[false]},"sdkNamespaceEmptyVerified":{"enum":[false]}}},"qualified":{"enum":[true,false]}}},driver={"blob":"48822f1654ad9dc3ec40990fe1d0474956f33678","bytes":32574,"sha256":"d773dbda3d55624dbfc2cfe68b705015efc20bc4601c8e0d585583a3e9db8182"},ids=["A01","A02","A03","A04","D01","D02","D03","D04","D05","D06","D07","D08","D09","D10","D11","D12","D13","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13","P14","P15","P16","P17","P18","P19","P20","P21","P22","P23","P24","P25","F01","F02","F03","F04","F05","F06","F07","F08","F09","B01","B02","B03","B04","B05","B06","B07","B08","B09","B10","B11","B12","B13","W01","W02","C01","C02","C03","C04","C05","D14","P26","F10","E01","E02","E03","E04","E05","E06","O01","O02","O03","O04","O05","S01","E07","T01","F11","A05","U01","U02","U03","U04","H01","L01","L02","L03","L04","L05","E08","E09","E10","E11"],mutantDefs=[{"id":"M_RAW","change":"omit strict raw framing in inner raw receiver; outer normalized receiver retains sample semantics","expectedFailedIds":["D02"]},{"id":"M_PROVENANCE","change":"omit full before-after guard in BOTH inner and final literal outer strong Source receivers","expectedFailedIds":["P06"]},{"id":"M_OUTPUT","change":"omit delivery envelope/record closed-schema guard in BOTH Python parent and final literal Node outer; held authority and semantic rules remain","expectedFailedIds":["B05","U01"]},{"id":"M_ASSOC","change":"omit normalized sample semantic receiver only in final literal Node outer; inner emitter fixture sends impossible not_observed","expectedFailedIds":["S01"]}],nonclaims={"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false},matrixHash="0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e";
-+function validate(r,c){
-+ shape(r,schema);need(eq(Object.keys(r),schema.required));for(const k of ['source','sourceTree','run','attempt','job','node'])need(r[k]===c[k]);need(eq(r.driver,driver));
-+ const entries=r.groups.map(x=>x.entry).join(''),outcomes=r.groups.map(x=>x.outcome).join(''),cleanups=r.groups.map(x=>x.cleanup).join('');need(/^1*0*$/.test(entries));let open=0;
-+ for(let i=0;i<520;i++){if(entries[i]==='0')need(outcomes[i]==='N'&&cleanups[i]==='N');else{need('PFUX'.includes(outcomes[i])&&'CFU'.includes(cleanups[i]));if(outcomes[i]==='X'){open++;need(cleanups[i]==='U'&&entries.slice(i+1).indexOf('1')===-1);}}}need(open<=1);
-+ for(let j=0;j<5;j++){const g=r.groups[j],v=g.outcome;need(eq(Object.keys(g),schema.properties.groups.items.required)&&g.id===policy.groups[j]);const count=(s,k)=>s.split(k).length-1;need(g.entered===count(g.entry,'1')&&g.returned===[...'PFU'].reduce((a,k)=>a+count(v,k),0)&&g.passed===count(v,'P')&&g.failed===count(v,'F')&&g.unknown===count(v,'U')+count(v,'X')&&g.unentered===count(v,'N'));}
-+ const n=entries.indexOf('0')<0?520:entries.indexOf('0'),t=r.terminal;need(eq(Object.keys(t),['kind','next']));
-+ if(t.kind==='abrupt')need(t.next==='unknown'&&r.lastAdmissionMs==='unknown'&&r.terminalMs==='unknown');else{need(open===0&&t.next===n&&Number.isSafeInteger(r.terminalMs));need(n===0?r.lastAdmissionMs===null:Number.isSafeInteger(r.lastAdmissionMs)&&r.lastAdmissionMs<=r.terminalMs);need(t.kind!=='complete'||n===520&&r.terminalMs<=240000);need(t.kind!=='inner'||n<520);need(t.kind!=='outer'||[104,208,312,416].includes(n));need(!cleanups.includes('U')||t.kind==='custody');}
-+ const results=ids.map((id,i)=>({id,result:({P:'passed',F:'failed'})[outcomes[i]]??'unknown'})),mutants=mutantDefs.map((m,j)=>{const v=r.groups[j+1].outcome,failed=ids.filter((id,i)=>v[i]==='F');return{id:m.id,expectedFailedIds:m.expectedFailedIds,actualFailedIds:failed,result:/[NUX]/.test(v)?'unknown':eq(failed,m.expectedFailedIds)?'passed':'failed'};}),instances=policy.groups.flatMap(g=>ids.map(id=>g+':'+id)),cleanup={complete:open===0&&!cleanups.includes('U'),failedInstances:instances.filter((x,i)=>cleanups[i]==='F'),unknownInstances:instances.filter((x,i)=>cleanups[i]==='U')};
-+ const v1={purpose:'afw.r3-delivery.controls.v1',...Object.fromEntries(['source','sourceTree','run','attempt','job','node'].map(k=>[k,c[k]])),matrixSha256:matrixHash,allPassed:false,expected:104,passed:r.groups[0].passed,failed:r.groups[0].failed,unknown:104-r.groups[0].passed-r.groups[0].failed,results,mutants,nativeBusinessCases:0,nonclaims,cleanup};v1.allPassed=v1.passed===104&&mutants.every(m=>m.result==='passed')&&cleanup.complete&&!cleanup.failedInstances.length&&!cleanup.unknownInstances.length;need(eq(r.v1,v1));
-+ const qualified=v1.allPassed&&r.groups.every(g=>g.entered===104&&g.returned===104&&g.cleanup==='C'.repeat(104))&&t.kind==='complete'&&Number.isSafeInteger(r.lastAdmissionMs)&&r.lastAdmissionMs<=220000&&r.terminalMs<=240000;need(r.qualified===qualified);return qualified;
-+}
-+
 + need(r3BootstrapAdmitted);const parentSnapshot=r3LabParent;need(parentSnapshot.length===28990&&r3Hash('sha256').update(parentSnapshot).digest('hex')==='ce481a93c9c673a79b81ee808e45246c67678809a6735ea4f46f6479ac1b607a');
 + image=openSync('/proc/self/exe',constants.O_RDONLY);const actual=fstatSync(image),running=r3fs.statSync('/proc/self/exe');need(actual.isFile()&&actual.dev===running.dev&&actual.ino===running.ino&&actual.size===running.size);
 + creatorHandle=openSync('/proc/thread-self',constants.O_RDONLY|constants.O_DIRECTORY);helperHandle=openSync(base+'/afw-r3-delivery',constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW);
@@ -1455,7 +764,10 @@ Changedartifactpins:
 + need(!captured.failed&&captured.err.length===0&&captured.signal==='none'&&[0,23].includes(captured.code));
 + const wire=new R3Decoder('utf-8',{fatal:true,ignoreBOM:true}).decode(captured.out),marker='AFW_Q1_SERIAL_LAB/2 ';need(/^[\x20-\x7e]*\n$/.test(wire)&&wire.startsWith(marker));const text=wire.slice(marker.length,-1),r=JSON.parse(text);need(JSON.stringify(r)===text);const qualified=validate(r,c);need(captured.code===(qualified?0:23));emit(r,'AFW_Q1_SERIAL_LAB/2');return qualified?0:23;
 + }catch{if(!publishing)try{emit({"purpose":"afw.q1.serial-source-lab.unavailable.v2","reason":"unavailable","qualified":false,"nativeBusinessCases":0,"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}},'AFW_Q1_SERIAL_LAB_UNAVAILABLE/2');}catch{}return 23;}finally{for(const fd of [image,creatorHandle,helperHandle])if(fd!==undefined)try{r3fs.closeSync(fd);}catch{}}
-+}
+ }
+-
+-if(r3BootstrapAdmitted)process.exitCode=await runControls();
+-else{const b=Buffer.from('AFW_R3_DELIVERY_CONTROLS_UNAVAILABLE/1 '+JSON.stringify({...r3FallbackControls,reason:'setup_unavailable'})+'\n');try{r3fs.writeSync(1,b);}catch{}process.exitCode=23;}
 +process.exitCode=await runControls();
  
 ```
@@ -1466,8 +778,6 @@ Changedartifactpins:
 --- a/preflight-loader-v2.mjs
 +++ b/preflight-loader-v2.mjs
 @@ -1,1 +1,18 @@
-
-
 +import assert from 'node:assert/strict';
 +import * as fs from 'node:fs';
 +import {createHash} from 'node:crypto';
@@ -1494,8 +804,6 @@ Changedartifactpins:
 --- a/preflight-v2.mjs
 +++ b/preflight-v2.mjs
 @@ -1,1 +1,31 @@
-
-
 +const tests={},passed=k=>{tests[k]='passed';};
 +assert.equal(Object.keys(payload.helpers).length,33);assert.equal(blob(Buffer.from(JSON.stringify(expected))),v2.pins.normal.blob);
 +for(const [name,content] of Object.entries(payload.helpers)){const b=Buffer.from(content);assert.equal(b.length,expected[name].bytes);assert.equal(sha(b),expected[name].sha256);assert.equal(blob(b),expected[name].blob);}
@@ -1521,12 +829,12 @@ Changedartifactpins:
 +// Regression from actual second-consumer retirement and actual finally cleanup decision.
 +const custodySource=v2.preflight,resetNeedle='terminal=false;'+'const bad=spawnSync',checkNeedle='assert(!bad.error&&!bad.signal&&bad.status!==null);'+'terminal=true;',cleanupNeedle='if(terminal)'+'fs.rmSync(root,{recursive:true});';assert.equal(custodySource.split(resetNeedle).length,2);assert.equal(custodySource.split(checkNeedle).length,2);assert.equal(custodySource.split(cleanupNeedle).length,2);const retirement=custodySource.slice(custodySource.indexOf(checkNeedle),custodySource.indexOf(checkNeedle)+checkNeedle.length),cleanupDecision=custodySource.slice(custodySource.indexOf(cleanupNeedle),custodySource.indexOf(cleanupNeedle)+cleanupNeedle.length);
 +for(const bad of [{error:true,signal:null,status:null},{error:null,signal:'SIGKILL',status:null},{error:null,signal:null,status:null},{error:null,signal:null,status:1}]){let removes=0;const state={terminal:true,bad,assert,root:'synthetic-fixture-root',fs:{rmSync:()=>{removes++;}}};vm.runInNewContext('terminal=false;try{'+retirement+'}catch{}finally{'+cleanupDecision+'}',state,{timeout:1000});assert.equal(removes,bad.status===1?1:0);}
-+
+ 
 +const shell="if node --input-type=module 2>/dev/null; then :; else printf '%s\\n' 'AFW_Q1_SERIAL_LAB_PREFLIGHT_FAILED' >&2; exit 1; fi";
 +for(const input of ['this is invalid','process.stderr.write("x".repeat(8192));process.exit(1);','throw 1;']){const r=spawnSync('/usr/bin/bash',['--noprofile','--norc','-c',shell],{input,encoding:'utf8',timeout:3000,maxBuffer:32768});assert(!r.error&&r.status!==0&&r.stdout===''&&r.stderr==='AFW_Q1_SERIAL_LAB_PREFLIGHT_FAILED\n');}const good=spawnSync('/usr/bin/bash',['--noprofile','--norc','-c',shell],{input:"process.stdout.write('ok\\n');",encoding:'utf8',timeout:3000,maxBuffer:32768});assert.equal(good.status,0);assert.equal(good.stdout,'ok\n');assert.equal(good.stderr,'');passed('fixedstderr/malformedstdout');
 +const ordered=Object.fromEntries(v2.testNames.map(k=>[k,tests[k]]));assert(Object.values(ordered).every(x=>x==='passed'));
 +const record={purpose:'afw.q1.serial-source-lab.preflight.v2',source:e.GITHUB_SHA,sourceTree,run:e.GITHUB_RUN_ID,attempt:1,job:'readonly',node:process.versions.node,policySha256:v2.pins.policy.sha256,schemaSha256:v2.pins.schema.sha256,driverSha256:v2.pins.driver.sha256,tests:ordered,fixtureOnly:true,nativeBusinessCases:0,nonclaims:v2.policyNonclaims};const frame='AFW_Q1_SERIAL_LAB_PREFLIGHT/2 '+JSON.stringify(record)+'\n';assert(Buffer.byteLength(frame)<=24576);process.stdout.write(frame);
- 
++
 ```
 
 ## lab-schema-v2.json
@@ -1535,10 +843,8 @@ Changedartifactpins:
 --- a/lab-schema-v2.json
 +++ b/lab-schema-v2.json
 @@ -1,1 +1,1 @@
-
 -
 +{"type":"object","additionalProperties":false,"required":["purpose","scope","source","sourceTree","run","attempt","job","node","matrixSha256","policySha256","normalManifest","driver","groups","terminal","lastAdmissionMs","terminalMs","v1","nativeBusinessCases","nonclaims","qualified"],"properties":{"purpose":{"enum":["afw.q1.serial-source-lab.v2"]},"scope":{"enum":[{"purpose":"afw.q1.serial-source-lab.policy.v2","scope":"top-laboratory-only","unit":"ms","horizon":240000,"reserve":20000,"parent":250000,"outer":260000,"step":300000,"job":420000,"normal":{"horizon":90000,"reserve":20000,"parent":100000,"outer":110000,"ceiling":120000,"delivery":[3500,4000,5000],"case":5000,"cleanup":2000,"probe":[4500,4800],"alive":20},"groups":["baseline","M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"],"width":104,"instances":520,"marker":"AFW_Q1_SERIAL_LAB/2","unavailable":"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2"}]},"source":{"type":"string","pattern":"^[a-f0-9]{40}$"},"sourceTree":{"type":"string","pattern":"^[a-f0-9]{40}$"},"run":{"type":"string","pattern":"^[1-9][0-9]{0,19}$"},"attempt":{"enum":[1]},"job":{"enum":["readonly"]},"node":{"enum":["22.23.4"]},"matrixSha256":{"enum":["0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e"]},"policySha256":{"enum":["91277fb4b570ce9f18d49e8c16fe6d48b556b8bb89781de81bcde97cae8b31ac"]},"normalManifest":{"enum":[{"blob":"4f6d2738a0d116aaf8114fc4b5640110f6bafb03","bytes":5293,"sha256":"ff0a90104e63a5d39924c562c8aecb74afa3518e556bd554fb85b51ed4a846a9"}]},"driver":{"type":"object","additionalProperties":false,"required":["blob","bytes","sha256"],"properties":{"blob":{"type":"string","pattern":"^[a-f0-9]{40}$"},"bytes":{"type":"integer","minimum":1,"maximum":32768},"sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"}}},"groups":{"type":"array","minItems":5,"maxItems":5,"items":{"type":"object","additionalProperties":false,"required":["id","entry","outcome","cleanup","entered","returned","passed","failed","unknown","unentered"],"properties":{"id":{"enum":["baseline","M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"]},"entry":{"type":"string","pattern":"^[01]{104}$"},"outcome":{"type":"string","pattern":"^[NPFUX]{104}$"},"cleanup":{"type":"string","pattern":"^[NCFU]{104}$"},"entered":{"type":"integer","minimum":0,"maximum":104},"returned":{"type":"integer","minimum":0,"maximum":104},"passed":{"type":"integer","minimum":0,"maximum":104},"failed":{"type":"integer","minimum":0,"maximum":104},"unknown":{"type":"integer","minimum":0,"maximum":104},"unentered":{"type":"integer","minimum":0,"maximum":104}}}},"terminal":{"type":"object","additionalProperties":false,"required":["kind","next"],"properties":{"kind":{"enum":["complete","inner","outer","exception","late","custody","abrupt"]},"next":{"anyOf":[{"type":"integer","minimum":0,"maximum":520},{"enum":["unknown"]}]}}},"lastAdmissionMs":{"anyOf":[{"type":"integer","minimum":0,"maximum":300000},{"enum":[null,"unknown"]}]},"terminalMs":{"anyOf":[{"type":"integer","minimum":0,"maximum":300000},{"enum":["unknown"]}]},"v1":{"type":"object","additionalProperties":false,"required":["purpose","source","sourceTree","run","attempt","job","node","matrixSha256","allPassed","expected","passed","failed","unknown","results","mutants","nativeBusinessCases","nonclaims","cleanup"],"properties":{"purpose":{"enum":["afw.r3-delivery.controls.v1"]},"source":{"type":"string","pattern":"^[a-f0-9]{40}$"},"sourceTree":{"type":"string","pattern":"^[a-f0-9]{40}$"},"run":{"type":"string","pattern":"^[1-9][0-9]{0,19}$"},"attempt":{"enum":[1]},"job":{"enum":["readonly"]},"node":{"enum":["22.23.4"]},"matrixSha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"allPassed":{"enum":[true,false]},"expected":{"type":"integer","minimum":104,"maximum":104},"passed":{"type":"integer","minimum":0,"maximum":104},"failed":{"type":"integer","minimum":0,"maximum":104},"unknown":{"type":"integer","minimum":0,"maximum":104},"results":{"type":"array","minItems":104,"maxItems":104,"items":{"type":"object","additionalProperties":false,"required":["id","result"],"properties":{"id":{"enum":["A01","A02","A03","A04","D01","D02","D03","D04","D05","D06","D07","D08","D09","D10","D11","D12","D13","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13","P14","P15","P16","P17","P18","P19","P20","P21","P22","P23","P24","P25","F01","F02","F03","F04","F05","F06","F07","F08","F09","B01","B02","B03","B04","B05","B06","B07","B08","B09","B10","B11","B12","B13","W01","W02","C01","C02","C03","C04","C05","D14","P26","F10","E01","E02","E03","E04","E05","E06","O01","O02","O03","O04","O05","S01","E07","T01","F11","A05","U01","U02","U03","U04","H01","L01","L02","L03","L04","L05","E08","E09","E10","E11"]},"result":{"enum":["passed","failed","unknown"]}}}},"mutants":{"type":"array","minItems":4,"maxItems":4,"items":{"type":"object","additionalProperties":false,"required":["id","expectedFailedIds","actualFailedIds","result"],"properties":{"id":{"enum":["M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"]},"expectedFailedIds":{"type":"array","minItems":1,"maxItems":2,"items":{"enum":["D02","P06","B05","U01","S01"]}},"actualFailedIds":{"type":"array","minItems":0,"maxItems":104,"items":{"enum":["A01","A02","A03","A04","D01","D02","D03","D04","D05","D06","D07","D08","D09","D10","D11","D12","D13","P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12","P13","P14","P15","P16","P17","P18","P19","P20","P21","P22","P23","P24","P25","F01","F02","F03","F04","F05","F06","F07","F08","F09","B01","B02","B03","B04","B05","B06","B07","B08","B09","B10","B11","B12","B13","W01","W02","C01","C02","C03","C04","C05","D14","P26","F10","E01","E02","E03","E04","E05","E06","O01","O02","O03","O04","O05","S01","E07","T01","F11","A05","U01","U02","U03","U04","H01","L01","L02","L03","L04","L05","E08","E09","E10","E11"]}},"result":{"enum":["passed","failed","unknown"]}}}},"nativeBusinessCases":{"enum":[0]},"nonclaims":{"type":"object","additionalProperties":false,"required":["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"],"properties":{"historicalCauseProven":{"enum":[false]},"receiptAuthenticated":{"enum":[false]},"operationalReadiness":{"enum":[false]},"completePackage":{"enum":[false]},"PCoff":{"enum":[false]},"globalNativeDrainVerified":{"enum":[false]},"sdkNamespaceEmptyVerified":{"enum":[false]}}},"cleanup":{"type":"object","additionalProperties":false,"required":["complete","failedInstances","unknownInstances"],"properties":{"complete":{"enum":[true,false]},"failedInstances":{"type":"array","minItems":0,"maxItems":520,"items":{"type":"string","pattern":"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$"}},"unknownInstances":{"type":"array","minItems":0,"maxItems":520,"items":{"type":"string","pattern":"^(baseline|M_RAW|M_PROVENANCE|M_OUTPUT|M_ASSOC):(A01|A02|A03|A04|D01|D02|D03|D04|D05|D06|D07|D08|D09|D10|D11|D12|D13|P01|P02|P03|P04|P05|P06|P07|P08|P09|P10|P11|P12|P13|P14|P15|P16|P17|P18|P19|P20|P21|P22|P23|P24|P25|F01|F02|F03|F04|F05|F06|F07|F08|F09|B01|B02|B03|B04|B05|B06|B07|B08|B09|B10|B11|B12|B13|W01|W02|C01|C02|C03|C04|C05|D14|P26|F10|E01|E02|E03|E04|E05|E06|O01|O02|O03|O04|O05|S01|E07|T01|F11|A05|U01|U02|U03|U04|H01|L01|L02|L03|L04|L05|E08|E09|E10|E11)$"}}}}}},"nativeBusinessCases":{"enum":[0]},"nonclaims":{"type":"object","additionalProperties":false,"required":["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"],"properties":{"historicalCauseProven":{"enum":[false]},"receiptAuthenticated":{"enum":[false]},"operationalReadiness":{"enum":[false]},"completePackage":{"enum":[false]},"PCoff":{"enum":[false]},"globalNativeDrainVerified":{"enum":[false]},"sdkNamespaceEmptyVerified":{"enum":[false]}}},"qualified":{"enum":[true,false]}}}
-
 ```
 
 ## lab-policy-v2.json
@@ -1547,10 +853,8 @@ Changedartifactpins:
 --- a/lab-policy-v2.json
 +++ b/lab-policy-v2.json
 @@ -1,1 +1,1 @@
-
 -
 +{"purpose":"afw.q1.serial-source-lab.policy.v2","scope":"top-laboratory-only","unit":"ms","horizon":240000,"reserve":20000,"parent":250000,"outer":260000,"step":300000,"job":420000,"normal":{"horizon":90000,"reserve":20000,"parent":100000,"outer":110000,"ceiling":120000,"delivery":[3500,4000,5000],"case":5000,"cleanup":2000,"probe":[4500,4800],"alive":20},"groups":["baseline","M_RAW","M_PROVENANCE","M_OUTPUT","M_ASSOC"],"width":104,"instances":520,"marker":"AFW_Q1_SERIAL_LAB/2","unavailable":"AFW_Q1_SERIAL_LAB_UNAVAILABLE/2"}
-
 ```
 
 ## Root-api-own.mjs
@@ -1559,7 +863,6 @@ Changedartifactpins:
 --- a/Root-api-own.mjs
 +++ b/Root-api-own.mjs
 @@ -1,1 +1,26 @@
-
 -
 +function(context,api,expected){
 + const need=(v,m)=>{if(!v)throw Error("Root serial-v2 API: "+m);};
@@ -1587,7 +890,6 @@ Changedartifactpins:
 + need(frame?.marker==="AFW_Q1_SERIAL_LAB/2"&&frame.count===1&&frame.unavailableCount===0&&frame.legacySuccessCount===0&&frame.stepName===full.name&&frame.stepNumber===full.number&&frame.mappedByRunHeader===true,"frame_binding");
 + return {apiJoined:true,source:expected.source,tree:expected.tree,run:expected.run,jobId:expected.jobId,step:full.number,NativeReleased:false,operationalReadiness:false};
 +}
-
 ```
 
 ## Root-record-own.mjs
@@ -1596,7 +898,6 @@ Changedartifactpins:
 --- a/Root-record-own.mjs
 +++ b/Root-record-own.mjs
 @@ -1,1 +1,64 @@
-
 -
 +function(wire,ctx,approved){
 + const need=(v,m)=>{if(!v)throw Error("Root serial-v2 record: "+m);},same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
@@ -1662,7 +963,6 @@ Changedartifactpins:
 + need(r.qualified===recordQualified,"qualified_truth");
 + return {accepted:true,recordQualified,record:r,counts:{entered,returned,passed,failed,unknown},reason:recordQualified?"record_complete_at_versioned_horizon":"record_not_qualified",NativeReleased:false,operationalReadiness:false};
 +}
-
 ```
 
 ## Root-preflight-own.mjs
@@ -1671,7 +971,6 @@ Changedartifactpins:
 --- a/Root-preflight-own.mjs
 +++ b/Root-preflight-own.mjs
 @@ -1,1 +1,15 @@
-
 -
 +function(wire,ctx,approved){
 + const need=(v,m)=>{if(!v)throw Error("Root serial-v2 preflight: "+m);},same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
@@ -1688,7 +987,6 @@ Changedartifactpins:
 + need(r.fixtureOnly===true&&r.nativeBusinessCases===0&&r.nonclaims!==null&&typeof r.nonclaims==="object"&&same(Object.keys(r.nonclaims),flags)&&Object.values(r.nonclaims).every(x=>x===false),"nonclaims");
 + return{accepted:true,fixtureOnly:true,record:r,NativeReleased:false,operationalReadiness:false};
 +}
-
 ```
 
 ## Root-conjunction-own.mjs
@@ -1697,7 +995,6 @@ Changedartifactpins:
 --- a/Root-conjunction-own.mjs
 +++ b/Root-conjunction-own.mjs
 @@ -1,1 +1,15 @@
-
 -
 +function(data,apiJoin,pref,others,mapping,closure,approvedSAME){
 + const need=(v,m)=>{if(!v)throw Error("Root serial-v2 conjunction: "+m);};
@@ -1714,7 +1011,6 @@ Changedartifactpins:
 + need(closure.coreSha256==="aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"&&closure.main==="0c9c475b3ebaa970fc11d628b40e50a90cceb727"&&closure.activeQueueCount===0&&closure.closedHeadRunCount===0&&closure.SourcePendingNull===true&&closure.fullReadback===true,"closure_readback");
 + return {evidenceEligible:true,labRecordQualified:true,reason:"versioned_lab_evidence_ready_for_review",Source:apiJoin.source,run:apiJoin.run,jobId:apiJoin.jobId,closedSource:closure.closedSource,I3Closed:false,C2Released:false,NativeReleased:false,operationalReadiness:false};
 +}
-
 ```
 
 ## Literal bootstrap entry and workflow packaging
