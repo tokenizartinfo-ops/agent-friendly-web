@@ -1,0 +1,286 @@
+{
+  "purpose": "afw.root.ma1.receiver-tests.v1",
+  "at": "2026-11-15 17:46:58 UTC",
+  "summary": {
+    "positiveContextual": 7,
+    "positiveNeutral": 1,
+    "grammarNegative": 24,
+    "joinNegative": 28,
+    "allPassed": true,
+    "SourceExecuted": false,
+    "actualMA1Run": false
+  },
+  "positives": [
+    {
+      "name": "full_with_returned_unknown",
+      "eligible": true
+    },
+    {
+      "name": "inner_stop_then_outer_stop",
+      "eligible": true
+    },
+    {
+      "name": "unknown_then_exception",
+      "eligible": true
+    },
+    {
+      "name": "baseline_zero_row_stop",
+      "eligible": true
+    },
+    {
+      "name": "before_any_loop",
+      "eligible": true
+    },
+    {
+      "name": "exception_at_outer_predicate",
+      "eligible": true
+    },
+    {
+      "name": "exception_after_last_iteration_before_publication",
+      "eligible": true
+    }
+  ],
+  "grammarNegatives": [
+    {
+      "name": "unknown_exceeds_attempts",
+      "rejected": true
+    },
+    {
+      "name": "false_complete_with_104_and_no_exception",
+      "rejected": true
+    },
+    {
+      "name": "partial_complete",
+      "rejected": true
+    },
+    {
+      "name": "single_last_reason_loses_prior_data",
+      "rejected": true
+    },
+    {
+      "name": "untouched_as_admission_stop",
+      "rejected": true
+    },
+    {
+      "name": "wrong_phase_order",
+      "rejected": true
+    },
+    {
+      "name": "invented_later_phase_after_broken_outer_loop",
+      "rejected": true
+    },
+    {
+      "name": "admitted_after_monotone_inner_stop",
+      "rejected": true
+    },
+    {
+      "name": "exception_followed_by_activity",
+      "rejected": true
+    },
+    {
+      "name": "all_untouched_without_preflight_exception",
+      "rejected": true
+    },
+    {
+      "name": "partial_binding",
+      "rejected": true
+    },
+    {
+      "name": "unpaired_changed_tree",
+      "rejected": true
+    },
+    {
+      "name": "unknown_extra_field",
+      "rejected": true
+    },
+    {
+      "name": "true_nonclaim",
+      "rejected": true
+    },
+    {
+      "name": "boolean_as_count",
+      "rejected": true
+    },
+    {
+      "name": "phase_gate_only_with_zero_attempts",
+      "rejected": true
+    },
+    {
+      "name": "baseline_outer_gate_never_exists",
+      "rejected": true
+    },
+    {
+      "name": "mixed_neutral_measures",
+      "rejected": true
+    },
+    {
+      "name": "duplicate_key",
+      "rejected": true
+    },
+    {
+      "name": "repeated_frames",
+      "rejected": true
+    },
+    {
+      "name": "noncanonical_or_torn",
+      "rejected": true
+    },
+    {
+      "name": "leading_space",
+      "rejected": true
+    },
+    {
+      "name": "no_lf",
+      "rejected": true
+    },
+    {
+      "name": "overlimit",
+      "rejected": true
+    }
+  ],
+  "joinNegatives": [
+    {
+      "name": "external_job_id",
+      "rejected": true,
+      "error": "Error: Root MA1: job metadata"
+    },
+    {
+      "name": "run_source_mismatch",
+      "rejected": true,
+      "error": "Error: Root MA1: run metadata"
+    },
+    {
+      "name": "source_tree_mismatch",
+      "rejected": true,
+      "error": "Error: Root MA1: Source tree metadata"
+    },
+    {
+      "name": "run_attempt",
+      "rejected": true,
+      "error": "Error: Root MA1: run metadata"
+    },
+    {
+      "name": "wrong_workflow",
+      "rejected": true,
+      "error": "Error: Root MA1: run metadata"
+    },
+    {
+      "name": "wrong_API_repo",
+      "rejected": true,
+      "error": "Error: Root MA1: API repository/ref"
+    },
+    {
+      "name": "wrong_API_branch",
+      "rejected": true,
+      "error": "Error: Root MA1: API repository/ref"
+    },
+    {
+      "name": "run_nonterminal",
+      "rejected": true,
+      "error": "Error: Root MA1: run metadata"
+    },
+    {
+      "name": "two_jobs",
+      "rejected": true,
+      "error": "Error: Root MA1: job metadata"
+    },
+    {
+      "name": "job_nonterminal",
+      "rejected": true,
+      "error": "Error: Root MA1: job metadata"
+    },
+    {
+      "name": "reader_step_missing",
+      "rejected": true,
+      "error": "Error: Root MA1: unique steps"
+    },
+    {
+      "name": "reader_not_success",
+      "rejected": true,
+      "error": "Error: Root MA1: step binding"
+    },
+    {
+      "name": "reader_precedes_original",
+      "rejected": true,
+      "error": "Error: Root MA1: step binding"
+    },
+    {
+      "name": "two_reader_steps",
+      "rejected": true,
+      "error": "Error: Root MA1: unique steps"
+    },
+    {
+      "name": "wrong_step_provenance",
+      "rejected": true,
+      "error": "Error: Root MA1: actual step frames"
+    },
+    {
+      "name": "duplicate_reader_frames",
+      "rejected": true,
+      "error": "Error: Root MA1: actual step frames"
+    },
+    {
+      "name": "missing_original_frame",
+      "rejected": true,
+      "error": "Error: Root MA1: actual step frames"
+    },
+    {
+      "name": "different_original_frame",
+      "rejected": true,
+      "error": "Error: Root MA1: actual original frame equals accepted record"
+    },
+    {
+      "name": "original_unaccepted",
+      "rejected": true,
+      "error": "Error: Root MA1: original contextual"
+    },
+    {
+      "name": "original_context",
+      "rejected": true,
+      "error": "Error: Root MA1: original contextual"
+    },
+    {
+      "name": "contradictory_success",
+      "rejected": true,
+      "error": "Error: Root MA1: conclusion consistency"
+    },
+    {
+      "name": "matrix_ID",
+      "rejected": true,
+      "error": "Error: Root MA1: pinned matrix identities"
+    },
+    {
+      "name": "matrix_killset",
+      "rejected": true,
+      "error": "Error: Root MA1: pinned matrix identities"
+    },
+    {
+      "name": "fake_mutant_pass_despite_unknown",
+      "rejected": true,
+      "error": "Error: Root MA1: mutant normal join"
+    },
+    {
+      "name": "unentered_mutant_failures",
+      "rejected": true,
+      "error": "Error: Root MA1: mutant failed prefix"
+    },
+    {
+      "name": "unattempted_baseline_pass",
+      "rejected": true,
+      "error": "Error: Root MA1: baseline unattempted unknown"
+    },
+    {
+      "name": "cleanup_unattempted_instance",
+      "rejected": true,
+      "error": "Error: Root MA1: cleanup attempted only"
+    },
+    {
+      "name": "partial_baseline_unknown_count",
+      "rejected": true,
+      "error": "Error: Root MA1: actual original frame equals accepted record"
+    }
+  ],
+  "unitScope": "First-party OWN receiver only, strict data/metadata plus synthetic original records accepted through existing Root387. No Source execution or actual MA1 run; Source reader/file adversarial checks remain pending implementation and cloud verification.",
+  "examples": "555a29d9ff1432fe41820d045595476639d58a2c",
+  "contract": "6fc657524517c9dd6ecfb74480d6492fd7bdb592"
+}
