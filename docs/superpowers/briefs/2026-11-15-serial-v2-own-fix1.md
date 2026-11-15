@@ -6,7 +6,7 @@ Read reviewd766b8d798d9760b7f29cd214b61d3ccae81ba13 I4observable andI5 VERBATIM;
 
 ## Current OWN code / interfaces
 - Root API join5a0ee27acf6a551f1baa77714bb8a06e8c3e52e5, logical progress/2026-11-15-serial-v2-api-own.mjs. function(context,api,expected). Exact checkout/setupactionpins, Sourcebranch, F7pushattempt1, one numericreadonlyjob, threepreflights+fullsteps successful.
-- Root recorded39a1da18c213ee92cc43e54ad4aa1ea179caae, progress/...record-own.mjs. function(wireJSON,ctx,approved) returns accepted/recordQualified/record/counts. ASCIIcanonicalJSON/insertionorder/policy/normal33/driverpins/vector+subordinatev1 exact. Preserveexistingpositive/negativefields; stricterI4transitionrules below.
+- Root record `ed39a1da18c213ee92cc43e54ad4aa1ea179caae`, progress/...record-own.mjs. function(wireJSON,ctx,approved) returns accepted/recordQualified/record/counts. ASCIIcanonicalJSON/insertionorder/policy/normal33/driverpins/vector+subordinatev1 exact. Preserveexistingpositive/negativefields; stricterI4transitionrules below.
 - Root preflight743410397d7251855fdfff7f5fbb45703cdfd270 unchanged unless requiredbycompatibility; function(wireJSON,ctx,approved).
 - Root conjunctionbc6574747f19cb64ced5d50eb9fce2db00358c8c, progress/...conjunction-own.mjs. function(data,apiJoin,pref,others,mapping,closure,approvedSAME). approvedSAME is ROOT-held verifiedcandidateGitblob, not Sourceprovided. Allbody/API/preflights/currentContext/closure mustconjoin; I3Closedfalse/evidenceeligibleonlyforreview.
 - Rootsyntheticfactory e6332f18a77a644a7823708b45516ba8ba7d45d5; recordnegativehelperd90c815802f8af9da3c618593daca10000af461d. These arefixtures, not actualproofs. Update fixturetimes/terminalstates whenoldfixturesweretemporallyimpossible.
@@ -40,3 +40,6 @@ NoSourceactualcoverageclaim fromallpassfixture; constructor tests remainfixtureO
 Create UTF8moduleblobs+exactindex/diffs/report in docs/superpowers/progress/2026-11-15-serial-v2-own-fix1-data/. Headersexportdefault may bewrappedOWNfunction butnopackageimport.
 Eachmodule<=24576B, report/index<=16384B, reversibleDATAspans<=262144B. ExactactualreadbackGitSHA/bytes/SHA256/framing. Report positive/negativecounts, functioninterfaces, syntheticcommands/output, SourceExecutedfalse, openconcerns. PreserveoldRootcodefilesasimmutable beforeversions.
 NoRootdocsrefmutation byyou. Return OWN_FIX_READY/index/report/changedmodules/one-linetests. Ifunclear askRootfirst; don'tauthornewSourceprotocolfields or assumeactualSourcegatealreadyfixed. RootindependentlyinspectsandrerunsOWNcontrols thenincludeschangesintheSAMEscopedround1rereview.
+
+
+Coordination b00bf6aed6eda513a94cb8e7b18813c6df7439bd explicitlypermitsdisjointcontrollerDATAduringSourceartifactpackaging; notsecondSourceimplementer. Exactbaseline ed39... leading ed clarified. NoSourceexecution.
