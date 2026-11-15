@@ -9,3 +9,7 @@ FIX1 consumido: run43775725913/1/job133001451556 terminal failure. Checkout/setu
 Pendiente: revisión acotada y siguiente corrección nominada si procede. No repetir sin evidencia nueva. Headroom SAME10137 bytes antes de2600000; reporte actual~23872 bytes antes de24576; no aumentar límites ni truncar historia por inferencia. Verificar presupuesto y rúbrica antes de otro candidato.
 
 I3 abierto,C2/Native retenidos; historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified siguen false. No acción del owner pendiente. PC-off NO listo.
+
+## Actualización fix2
+
+Review81429d5785775fa3c8adf85463ffd262c9040c6c:5 hallazgos corregidos estáticamente,3Important pendientes/R1 stdin de fixture>cap,R2 gramática parcialRoot,R3 negativos con status equivocado. Round2/5 enviado a los mismos dos actores de dominios independientes; Sourcebrief59bd6acd2619fee24aa9601484c051892502cb9a/OWNbrief8f16e417784e3ada1bc1632e20e2696b4bb0690b. Rulingcfad14bec181158458f12815316f4a4fbd768bb6 permite segmentos históricos inmutables y reciboSAME compacto con cuerpo completo preservado enRootdocs, sin elevar límites ni truncar. No candidato nuevo ni Source abierto. All7false.
