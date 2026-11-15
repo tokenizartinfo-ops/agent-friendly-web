@@ -1,0 +1,179 @@
+{
+  "purpose": "afw.ma1.contract-vectors.v1",
+  "syntheticOnly": true,
+  "expectedContext": {
+    "source": "1111111111111111111111111111111111111111",
+    "sourceTree": "2222222222222222222222222222222222222222",
+    "run": "900000001",
+    "attempt": 1,
+    "job": "readonly",
+    "node": "22.23.4"
+  },
+  "valid": [
+    {
+      "name": "full_with_returned_unknown",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",104,1,false,true],[\"M_OUTPUT\",\"entered\",104,0,false,true],[\"M_ASSOC\",\"entered\",104,0,false,true]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "inner_stop_then_outer_stop",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,2,true,false],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "unknown_then_exception",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"M_RAW\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",12,2,false,false],[\"M_PROVENANCE\",\"untouched\",0,0,false,false],[\"M_OUTPUT\",\"untouched\",0,0,false,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "baseline_zero_row_stop",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",0,0,true,false],[\"M_RAW\",\"gate\",0,0,true,false],[\"M_PROVENANCE\",\"untouched\",0,0,false,false],[\"M_OUTPUT\",\"untouched\",0,0,false,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "before_any_loop",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"preflight\",\"phases\":[[\"baseline\",\"untouched\",0,0,false,false],[\"M_RAW\",\"untouched\",0,0,false,false],[\"M_PROVENANCE\",\"untouched\",0,0,false,false],[\"M_OUTPUT\",\"untouched\",0,0,false,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "exception_at_outer_predicate",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"M_RAW\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"gate\",0,0,false,false],[\"M_PROVENANCE\",\"untouched\",0,0,false,false],[\"M_OUTPUT\",\"untouched\",0,0,false,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "exception_after_last_iteration_before_publication",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"M_PROVENANCE\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",104,0,false,true],[\"M_OUTPUT\",\"untouched\",0,0,false,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "neutral",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"unknown\",\"sourceTree\":\"unknown\",\"run\":\"unknown\",\"attempt\":\"unknown\",\"job\":\"unknown\",\"node\":\"unknown\",\"matrixSha256\":\"unknown\",\"exceptionAt\":\"unknown\",\"phases\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    }
+  ],
+  "invalid": [
+    {
+      "name": "unknown_exceeds_attempts",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,68,true,false],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "false_complete_with_104_and_no_exception",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",104,1,false,true],[\"M_OUTPUT\",\"entered\",104,0,false,true],[\"M_ASSOC\",\"entered\",104,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "partial_complete",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,2,true,true],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "single_last_reason_loses_prior_data",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",12,2,false,false],[\"M_PROVENANCE\",\"untouched\",0,0,false,false],[\"M_OUTPUT\",\"untouched\",0,0,false,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false},\"reason\":\"exception\"}\n"
+    },
+    {
+      "name": "untouched_as_admission_stop",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,2,true,false],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,true,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "wrong_phase_order",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"M_ASSOC\",\"untouched\",0,0,false,false],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_PROVENANCE\",\"entered\",67,2,true,false],[\"M_RAW\",\"entered\",104,0,false,true],[\"baseline\",\"entered\",104,0,false,true]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "invented_later_phase_after_broken_outer_loop",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,2,true,false],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_ASSOC\",\"entered\",104,0,false,true]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "admitted_after_monotone_inner_stop",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,2,true,false],[\"M_OUTPUT\",\"entered\",0,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "exception_followed_by_activity",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"M_RAW\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",12,2,false,false],[\"M_PROVENANCE\",\"gate\",0,0,true,false],[\"M_OUTPUT\",\"untouched\",0,0,false,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "all_untouched_without_preflight_exception",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"untouched\",0,0,false,false],[\"M_RAW\",\"untouched\",0,0,false,false],[\"M_PROVENANCE\",\"untouched\",0,0,false,false],[\"M_OUTPUT\",\"untouched\",0,0,false,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "partial_binding",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"unknown\",\"sourceTree\":\"unknown\",\"run\":\"unknown\",\"attempt\":\"unknown\",\"job\":\"readonly\",\"node\":\"unknown\",\"matrixSha256\":\"unknown\",\"exceptionAt\":\"unknown\",\"phases\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "unpaired_changed_tree",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"3333333333333333333333333333333333333333\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,2,true,false],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "unknown_extra_field",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,2,true,false],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false},\"privateDetail\":\"x\"}\n"
+    },
+    {
+      "name": "true_nonclaim",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,2,true,false],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":true,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "boolean_as_count",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",true,2,true,false],[\"M_OUTPUT\",\"gate\",0,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "phase_gate_only_with_zero_attempts",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",67,2,true,false],[\"M_OUTPUT\",\"gate\",1,0,true,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "baseline_outer_gate_never_exists",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"gate\",0,0,true,false],[\"M_RAW\",\"gate\",0,0,true,false],[\"M_PROVENANCE\",\"untouched\",0,0,false,false],[\"M_OUTPUT\",\"untouched\",0,0,false,false],[\"M_ASSOC\",\"untouched\",0,0,false,false]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "mixed_neutral_measures",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"unknown\",\"sourceTree\":\"unknown\",\"run\":\"unknown\",\"attempt\":\"unknown\",\"job\":\"unknown\",\"node\":\"unknown\",\"matrixSha256\":\"unknown\",\"exceptionAt\":\"none\",\"phases\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "duplicate_key",
+      "wire": "AFW_MA1_ADMISSION/1 {\"attempt\":1,\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",104,1,false,true],[\"M_OUTPUT\",\"entered\",104,0,false,true],[\"M_ASSOC\",\"entered\",104,0,false,true]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "repeated_frames",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",104,1,false,true],[\"M_OUTPUT\",\"entered\",104,0,false,true],[\"M_ASSOC\",\"entered\",104,0,false,true]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\nAFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",104,1,false,true],[\"M_OUTPUT\",\"entered\",104,0,false,true],[\"M_ASSOC\",\"entered\",104,0,false,true]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "noncanonical_or_torn",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",104,1,false,true],[\"M_OUTPUT\",\"entered\",104,0,false,true],[\"M_ASSOC\",\"entered\",104,0,false,true]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}\n"
+    },
+    {
+      "name": "leading_space",
+      "wire": " AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",104,1,false,true],[\"M_OUTPUT\",\"entered\",104,0,false,true],[\"M_ASSOC\",\"entered\",104,0,false,true]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "no_lf",
+      "wire": "AFW_MA1_ADMISSION/1 {\"purpose\":\"afw.ma1.admission.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000001\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"matrixSha256\":\"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e\",\"exceptionAt\":\"none\",\"phases\":[[\"baseline\",\"entered\",104,0,false,true],[\"M_RAW\",\"entered\",104,0,false,true],[\"M_PROVENANCE\",\"entered\",104,1,false,true],[\"M_OUTPUT\",\"entered\",104,0,false,true],[\"M_ASSOC\",\"entered\",104,0,false,true]],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}"
+    },
+    {
+      "name": "overlimit",
+      "wire": "AFW_MA1_ADMISSION/1 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"
+    }
+  ],
+  "invalidJoinsOrTransport": [
+    {
+      "name": "wrong_run_step_or_job",
+      "caseDescription": "same payload from other run, attempt, step or API job ID"
+    },
+    {
+      "name": "missing_original",
+      "caseDescription": "no unique accepted matching contextual CONTROLS/1 from original step, or unavailable fallback only"
+    },
+    {
+      "name": "baseline_suffix",
+      "caseDescription": "join inner_stop_then_outer_stop to any baseline differing from its claimed completed/unknown counts"
+    },
+    {
+      "name": "ids_outside_prefix",
+      "caseDescription": "inner_stop_then_outer_stop with any M_PROVENANCE actual failed ID in positions 68..104"
+    },
+    {
+      "name": "not_entered_public",
+      "caseDescription": "inner_stop_then_outer_stop with nonempty actualFailedIds or result passed in M_ASSOC"
+    },
+    {
+      "name": "duplicate_logs",
+      "caseDescription": "one contextual and one neutral frame in reader step"
+    },
+    {
+      "name": "unsafe_input",
+      "caseDescription": "summary missing, symlink, hardlink, nonregular, group-readable, replaced, overlong or changing"
+    },
+    {
+      "name": "report_cleanup_outside_prefix",
+      "caseDescription": "a cleanup instance refers to an unattempted row/phase"
+    }
+  ],
+  "note": "valid means admission-wire positive with stated synthetic context (neutral has no measured values); contextual acceptance additionally requires the exact same-job original report and verified attempt metadata described in the plan. unpaired_changed_tree is structurally valid but mismatches expectedContext."
+}
