@@ -1,0 +1,9 @@
+# AFW fix1 bounded fixture and early interface clarification
+
+2026-11-15. Source actor asked whether I1 can run one fixed Node fixture of ORIGINAL normalcontrols with only the actual uniqueT01 assignment expired, fd3/fd6/context bound, requirecanonicalunknownv1/status23 and no allocatedcase-root. Root confirmed withinreviewI1/I6 authorized preflight fixture scope. It is not one of actual520 and neverNative/businessruntime. Keepfixturessequential/existingimage/noaddedprivateNodecopy orfullruntimehelper/lineage, per-consumer terminal/capture beforecleanup, unchangedstep/job/casebounds. NoSourceexecutionauthority grantedtoactor.
+
+Early producer interface (DATA, unexecuted): driver029a666bf489836e153f1afaed239bec8f2209f1,32571B/SHA1895a85dcf98320909c0e7d2d61d24a81eea9a9ef675e80a0e376f29eafc3bc1; parentf5e5b47a00a36323508e41ca5fd53fc258f12071,29343B/SHA0da0a2af52677cb139bb7ce45283de129d472a03535567d7a9855edb1fa6cae3. Strictstateclarification8f6556a0400b5c147017a34e2815655e1dc511bb. These aren't yetcompletepackage/RootverifiedcurrentSourcecandidate. Publicfields/policy/schema/clocksunchangedperactor; tests/compatibility/wrapper/capsulepackagingpending.
+
+Independentcontrollerfixbrief ea392c52806af64411b5aad3eeab02e4574b7d1d preparedbutNOTdispatched: waitSourceDATAcompletionthenfreshOWNfixactor perSDDoneimplementeratatime. OldRootAPI5a0/recorded39/preflight743/conjunctionbc657 and84syntheticnegatives remainpre-fix versions withreviewI4/I5open; don'tcallthemfixedorSourceeligible. NewRootlogintegration must use actual oldmarkers AFW_SERIAL_LOADER_BOUNDARY_UNIT/1 and AFW_SERIAL_ENTRY_PIN_UNIT/1 (initialv2failedsteps were skipped,so0countremainscorrect despiteearlierRootextractorabbreviations). Noactualv2pref/fullframesfromconsumedrun.
+
+Source49ee/SAME3d7closed,allSourcependingnull. Source actor/root/serial_v2_implactivefix1; do notredispatchasnewtask. Sevennonclaimsfalse,I3labgateopen,C2/Nativeheld.
