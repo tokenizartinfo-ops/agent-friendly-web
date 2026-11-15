@@ -14339,3 +14339,11 @@ Thw7gecyN4/szLZZ6EYk9SIrsjO4YClhsU+93Boc/Dyloe/4mecRL7QCJ/Rzh7gWS73Qzt0oj6nt
 U+JY33ZM1BtAjG70jo76Q8t9m8RxFEVeFAVZmgZpEDnEZnbkeVmQeXZqxxbJbAohoaws9OIoCm3K
 bMe1bJvkA4oTpXZOwsiP8iDPopCFduDFtus5IQMYzTh1vMxxyNeHdnd3dHf3n/Ic15soGwYA
 <!-- AFW-R3-DELIVERY-SUCCESSOR-R2-DATA-V1:END -->
+
+## Root actual occurrence — R3 delivery round2 controls, 15nov2026
+
+The sole Source occurrence43697701677/1 completed FAILURE. Checkout and setup-node succeeded. Combined Source DATA/controls step failed; the only actual normalized record was controls-unavailable outer_startup_unavailable. All100 measurements and four mutant outcomes remain UNKNOWN; no100PASS or100FAIL. Zero original main/CLI/Native calls. This is a startup failure of this preparation unit; no specific exception or cause of original R3 world_1158_a1 is proven. Do not rerun/replay this consumed occurrence. Restore originalF7, retain this entire proposal/evidence, then scoped review.
+
+```json
+{"recordedUTC":"2026-11-15 09:10:38 UTC","run":43697701677,"attempt":1,"job":132761789616,"source":"81703533efc6ee8614665981d2eb7aef4d68f5a1","sourceTree":"d99c61e311307006df765fa7c1cf0b8a0f20189f","conclusion":"failure","checkout":"success","setupNode":"success","preparationAndControls":"failure","actualWire":"AFW_R3_DELIVERY_CONTROLS_UNAVAILABLE/1 {\"purpose\":\"afw.r3-delivery.controls-unavailable.v1\",\"reason\":\"outer_startup_unavailable\",\"source\":\"unknown\",\"sourceTree\":\"unknown\",\"run\":\"unknown\",\"attempt\":\"unknown\",\"job\":\"unknown\",\"node\":\"unknown\",\"allPassed\":\"unknown\",\"expected\":100,\"passed\":\"unknown\",\"failed\":\"unknown\",\"unknown\":\"unknown\",\"results\":\"unknown\",\"mutants\":\"unknown\",\"nativeBusinessCases\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}","acceptedByRoot":"91d9339be63ca5ff5a39fe69f01a54b4f38bb657","expectedControls":100,"measurements":"unknown","NativeBusinessCases":0,"originalCLIExecuted":false,"originalR3CauseProven":false,"consumed":true,"retryAllowed":false,"operationalReadiness":false}
+```
