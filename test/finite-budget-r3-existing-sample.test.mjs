@@ -15,7 +15,8 @@ async function owned(caseName,body,{pathKind='directory',afterClose}={}){
  const root=await mkdtemp(join(tmpdir(),'afw-r3-control-')),path=join(root,'owned'),old={};
  for(const [key,value]of Object.entries({GITHUB_SHA:expected.source,GITHUB_RUN_ID:expected.run,GITHUB_RUN_ATTEMPT:'1'})){old[key]=process.env[key];process.env[key]=value;}
  if(pathKind==='file')await writeFile(path,'blocked');
- try{return await C.withOwner(caseName,path,()=>body(C.frame(),path));}
+ let bodyThrew=false,bodyThrown;
+ try{const value=await C.withOwner(caseName,path,async()=>{try{return await body(C.frame(),path);}catch(error){bodyThrew=true;bodyThrown=error;throw error;}});if(bodyThrew)throw bodyThrown;return value;}
  finally{try{await afterClose?.(path);}finally{for(const [key,value]of Object.entries(old)){if(value===undefined)delete process.env[key];else process.env[key]=value;}await rm(root,{recursive:true,force:true});}}
 }
 const diagnosticPath=p=>join(p,'r3-existing-sample.json');
@@ -44,6 +45,7 @@ test('R3S02 actual original deadline and read rejection preserve the exact prima
 test('R3S03 capture is limited to the current owned R3 and source association',async()=>{
  for(const name of ['R1','R2','D4'])await owned(name,async(frame,path)=>{assert.equal(await C.wait(()=>Promise.resolve(sample()),()=>true,0) instanceof Object,true);assert.equal(frame.r3Sample,undefined);await C.close(frame,null);await assert.rejects(readFile(diagnosticPath(path)),{code:'ENOENT'});});
  await owned('R3',async(frame,path)=>{const wrong=sample();wrong.caseName='R2';await C.wait(()=>Promise.resolve(wrong),()=>true,0);assert.equal(frame.r3Sample.sample.heldNativeSettled,'unknown');await C.close(frame,null);assert.equal((await readDiagnostic(path)).sampleState,'observed');});
+ let postCloseAssertion;await assert.rejects(owned('R3',async frame=>{await C.close(frame,null);try{assert.fail('SYN_POST_CLOSE_SENTINEL');}catch(error){postCloseAssertion=error;throw error;}}),error=>error===postCloseAssertion&&error.code==='ERR_ASSERTION');
  for(const [key,value]of [['source','b'.repeat(40)],['run','999'],['attempt',2],['case','R1']])assert.throws(()=>C.encode({...C.blank(expected),[key]:value},expected));
 });
 test('R3S04 exact closed projection keeps all scalar bounds and rejects unsafe values',()=>{
