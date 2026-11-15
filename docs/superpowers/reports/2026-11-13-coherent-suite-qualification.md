@@ -5679,3 +5679,135 @@ PxK99hJNYwEA
 <!-- AFW-READONLY-SOURCE-SITE-PAYLOAD-V1:END -->
 
 </details>
+
+
+## Readonly source-site diagnostic ACTUAL closure — 2026-11-15UTC
+
+ONErun43658045169/1/job132640910465, Source862ba9d258d6ad467ada5ba8d987dc1ce1603b46/treef658211ef5187e75a94d5f5c20da824de2992645 TERMINAL. JobSUCCESS meansdiagnosticcollectioncomplete, NOTbusinessallpass. ActualC1-C6passed withusableNodeserializedshape/columns/anonymousasyncsuffix/fallbackunknown; exactcurrent8pure/currentreadonlyprofilepassed BEFOREsingleoriginalreadonlyCLI. OriginalWorld/Native/GitCorebeforeafterverified, nooverlay/body/clock/assertion/capchange. NoKeys/privateartifacts/CF/Owner/OAuth.
+
+ACTUALR1PASS,R2PASS,R3FAIL; commandexit1/signalnone, cumulative3tests2pass1fail0cancel0skip0todo/endvalid. FirstandonlyfailedcaseR3 ERR_ASSERTION/AssertionError/operator==/actualfalse/expectedtrue/sourceSiteworld_1158_a1. Exactpublicpinnedassertion is `assert(Date.now()<deadline,'SYN fixed budget observation deadline')` insidefixedBudgetWait. In R3 its calleratWorld1176 waitsforheldNativeSettled===2 withoriginalDate.now()+30000; thisnewrun identifies thatwaitdeadlineassertion, NOTunderlyingreasonwhyconditionwasnotobserved. No historycause, providerrepair orSourcebusinesspass inferred. All7false. DifferentolderrunR1/R2failuresandoldcustodylimit remainhistoricalunknowns; do notmanufactureexplanation.
+
+Rootindependentlyacceptedclosedcanonicalwire<=16KiB/source/tree/run/APIattempt1/role/programset/map83/rows+firstFailure/end/counts/nonclaims. Sourcefreezeuntilterminalrespected. RestoreoriginalF7f7a71, preserveENTIRE895217Bproposalprefix andappendactualrecord; Core3200/Main0c9 unchanged. Onefreshwholeunitreviewthen targetedcausalinvestigationofR3wait/observation, no blindNative/full16replay orlongerclock.
+
+```json
+{
+  "at": "2026-11-15T00:29:44.3027472Z",
+  "record": {
+    "purpose": "afw.readonly-source-site.safe.v1",
+    "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+    "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+    "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+    "run": "43658045169",
+    "attempt": 1,
+    "job": "readonly",
+    "node": "22.23.4",
+    "stage": "complete",
+    "programProof": {
+      "verified": true,
+      "count": 18,
+      "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+      "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+      "coreGitVerified": true,
+      "prefixVerified": true
+    },
+    "sourceProof": {
+      "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+      "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+      "mapVerified": true,
+      "worldBeforeVerified": true,
+      "nativeBeforeVerified": true,
+      "worldAfterVerified": true,
+      "nativeAfterVerified": true,
+      "originalBodiesUnchanged": true
+    },
+    "controls": {
+      "passed": true,
+      "count": 6,
+      "expected": 6,
+      "usableShape": true,
+      "usableColumns": true
+    },
+    "pure": {
+      "passed": true,
+      "cases": 8,
+      "expected": 8
+    },
+    "profile": {
+      "passed": true,
+      "group": "readonly"
+    },
+    "businessCommand": {
+      "started": true,
+      "ended": true,
+      "exitCode": 1,
+      "signal": "none"
+    },
+    "readonly": {
+      "purpose": "afw.readonly-source-site.stream.v2",
+      "state": "case_failure",
+      "valid": true,
+      "ended": true,
+      "summary": {
+        "counts": {
+          "cancelled": 0,
+          "failed": 1,
+          "passed": 2,
+          "skipped": 0,
+          "suites": 0,
+          "tests": 3,
+          "todo": 0,
+          "topLevel": 3
+        },
+        "success": false
+      },
+      "rows": [
+        {
+          "case": "R1",
+          "result": "passed",
+          "error": null
+        },
+        {
+          "case": "R2",
+          "result": "passed",
+          "error": null
+        },
+        {
+          "case": "R3",
+          "result": "failed",
+          "error": {
+            "wrapperFailureType": "testCodeFailure",
+            "causeCode": "ERR_ASSERTION",
+            "causeClass": "AssertionError",
+            "operator": "==",
+            "actual": false,
+            "expected": true,
+            "sourceSite": "world_1158_a1"
+          }
+        }
+      ],
+      "firstFailure": {
+        "target": "R3",
+        "error": {
+          "wrapperFailureType": "testCodeFailure",
+          "causeCode": "ERR_ASSERTION",
+          "causeClass": "AssertionError",
+          "operator": "==",
+          "actual": false,
+          "expected": true,
+          "sourceSite": "world_1158_a1"
+        }
+      },
+      "precase": null
+    },
+    "collectionComplete": true,
+    "usableLocationCount": 1,
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
+```
