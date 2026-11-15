@@ -12875,3 +12875,13 @@ kcSK4T29dHGrWylev9NVVojlm561cmVg+StXheKmKO6HT2x/ai/5XmNXrTsXba755ORkawsbffno
 RVciYsCSv5PCpXTZ9wl3Wy3EKlAHJCtYlztSqLopwZ9wp3m4mBjgzwRcIi/7j626LgF3svijYnJb
 Z4dbCGnAKYV/b9EHfDxDrj8//y/L1mHbq3UFAA==
 <!-- AFW-R3-DELIVERY-SUCCESSOR-R1-DATA-V1:END -->
+
+## Root — correction round1 Source controls occurrence consumed 15nov2026
+
+Activef04a3311bc2638d1da6b7b8887a0290c444fad4a/tree6319a5bd179caddfa6135694b37f2a27549a7d98; run43687521306/attempt1; readonly132730996547. Exact head/push/workflowpath and terminal sole job verified. Run failure: checkout/setup-node actions succeeded, combined Verify Source DATA/run controls step failed. One closed controls-unavailable record, reason setup_unavailable; both action outcome env values success. No normal report, no observed88 row/mutant outcomes. Expected88, measurements UNKNOWN, not zero and not88FAIL. Source cause not identified by this record. No Source originalmain/readonly CLI/Native was invoked.
+
+AFW_R3_DELIVERY_CONTROLS_UNAVAILABLE/1 {"purpose":"afw.r3-delivery.controls-unavailable.v1","reason":"setup_unavailable","source":"unknown","sourceTree":"unknown","run":"unknown","attempt":"unknown","job":"unknown","node":"unknown","allPassed":"unknown","expected":88,"passed":"unknown","failed":"unknown","unknown":"unknown","results":"unknown","mutants":"unknown","nativeBusinessCases":0,"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}}
+
+Root independently checked exact schema/canonical JSON. Private canary absent in actual log; that alone does not close I3. No retry/rerun/new Native release. Preserve all eight findings as requiring covering evidence and scoped review. Package47f89553/26helpers/Core/program18 were independently checked as DATA before release; those own checks do not substitute for successful Source bootstrap. M02 warning remains deferred. No CF/runtime/credentials/OAuth/owner/Max operations.
+
+Restore originalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc; retain ENTIRE1598022B proposed SAMEcea5d6f0bdcc429a436df863e6edcb146ce122a6 before this appendix. Fulltree/Core/Main/fiveactive0 readback follows closure. All7 nonclaimsfalse.
