@@ -1,6 +1,6 @@
 # AFW — checkpoint del 15 de noviembre de 2026
 
-## Source CERRADO, revisión acotada pendiente
+## Source CERRADO, corrección ronda 3 DATA en diseño
 
 Source `feat/finite-native-cleanup-20261101` cerrado en **dfed0449d2f401554f98e962d3cb7c8fcc95bd1c**, árbol **2321d0294c43a442160f151da9232abf357b146f**. F7 original **f7a71f1a0fa4f5ddf069ff411f008a098455e5cc** restaurado. SAME **1a0e30469a4c0c09399f28eaf4ca2d4c59070f79**,1.717.394B,SHA256def4eeed7aea141f278d4324d53bcddb874c41bf92fdf9081160bce8fb5b33af; conserva íntegra la propuesta6bc44eee/1.715.466B y el prefijo previo35abeda/1.600.042B.
 
@@ -12,9 +12,14 @@ Cierre verificado09:13:17UTC: árbol completo/Core, archivos completos/hashes, M
 
 Gate Root0ef0ffea. Paquete ejecutado9bf2e58b/400168B, manifiesto33helpers668c3704, F7activo8f8bc143. Matriz100baa7b277/SHA95a6d8e0, schemasfbffb615, ejemplosfbd7525c sin cambios. Root verificó todos los hashes/18/prefijo/Core/alcance/entradas antes de liberar. Informe completo append-only **275501ca854b2231586a0ed8047132c1831e9dd7** preservado en docs/superpowers/reviews/2026-11-15-r3-delivery-round2-implementer-report.md.
 
-Ronda2/5 requiere ahora revisión ACOTADA por `/root/r3_delivery_task_review`, sobre861c4d1f: I01 residual+N01–N06 y regresiones del fix. Diff lógico407k en docs/superpowers/reviews/2026-11-15-r3-round2-scoped-fix-package.json: base cerrado1fe/head cerradodfed, payloadR1vsR2 y F7activos ejecutados. No revisión amplia del carrier retirado. Implementador `/root/r3_delivery_successor_impl` entregó DATA y no escribe Source.
+Revisión acotada terminada **a02f98052bce6e0963b51d5b67379ba78de9c3c1**, preservada completa en docs/superpowers/reviews/2026-11-15-r3-delivery-round2-scoped-review.md. Los siete defectos anteriores están corregidos estáticamente. Nuevos C0/I3/M1: R2-I1 U02 compara el fallback de controles con el de entrega; R2-I2 entradas separadas ejecutan shim/módulo sustituible antes del guard; R2-I3 L05 puede aprobar con el shim muerto antesEOF. Menor M1: propiedad del fixture externo parcial. M02Actions se mantiene diferido; Git previo fuera de alcance del dictamen de transporte, sin conclusión global.
 
-Los fixes son estáticos; el fallo de arranque impide calificación conductual e I3 sigue abierto. N07 menor restaurado; M02pins mandatados diferido explícitamente, no causa demostrada. Rulings de esta ronda:481c62d0/823056e6/88f991c8/40bcd73b/25fb16b9. Caps finales raw400500/helper32768/SAME1800000/gzip98304/base64131072; harness90s/admisión20s, relojes y matriz100 intactos.
+Root acepta las tres incidencias y reanudó al mismo implementador **/root/r3_delivery_successor_impl** para **ronda3/5, SOLO DATA**. Brief **783ede8c2774792f0104744a48e2b2a903b2afc0**, docs/superpowers/briefs/2026-11-15-r3-delivery-correction-round3.md. Primero propuesta mínima de protección de entradas y observación Source-only de etapas de arranque; esperar ruling Root antes de construir esos cambios. No refs/runs/ejecución Source/Native. No arreglar arranque por intuición: alias actual mezcla cwd y shim/exec/Node temprano.
+
+Conservar los100 existentes y sus expectativas; declarar primero controles pre-start adicionales mínimos, schemas/ejemplos/oráculo y expectativas por4mutantes. Stage observation predeclarada debe conservar UN recibo público y solo enums fijos, sin rutas/PIDs/errores/env ni stderr crudo. Root fijará receptor independiente. L05 deberá observar shim vivo/bloqueado con creador terminal antesEOF y despertar/rechazo real después. Usar Source literal o bytes inmutables verificados antes de publicación; sin loader genérico, nuevo residente ni selección PATH anidada.
+
+Caps vigentes raw400500/helper32768/SAME1800000/gzip98304/base64131072; harness90s/admisión20s y demás tiempos intactos. Con el prefijo nuevo1717394B deben medirse excesos y pedir ruling antes de candidata, sin truncar historia/código. Siguiente candidata hija de dfed, exactamenteF7+SAME/Core/18/Main intactos. Informe append-only sobre275501ca, comandos/cobertura y resultados reales solo cuando Root ejecute una nueva propuesta con gate. Revisión siguiente ACOTADA por el mismo /root/r3_delivery_task_review. No nuevoreview amplio ni segundo asiento.
+
 
 ## Pendientes siguientes
 
