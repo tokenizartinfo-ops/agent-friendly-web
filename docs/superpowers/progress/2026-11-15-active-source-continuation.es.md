@@ -1,29 +1,51 @@
-# AFW — checkpoint actual 15nov2026
+# AFW — checkpoint del 15 de noviembre de 2026
 
-Source CERRADO1fe20347bd9c86d9343799a5994f9f3e3a4a339f/tree577b049be0d64a6d2f67e889debdff61d4af9ff7. F7 originalf7a71f1a0fa4f5ddf069ff411f008a098455e5cc restaurado. SAME35abeda77948f5ac8c0ddc1718739c7d56e01e08/1600042B/SHA2562d883e68dfaaa6db5901b9ece3aca84e350ca36b51050cbd8d2b4f4036b4762d. Core3201/324448B/aefb08c1,Main0c9c475b,production18b88ebef9 exactos. Root cotejó árbol completo/ambos archivos/crypto/cincoactivos0/cierreheadruns0. Pending SourceCASnull; no activo.
+Comprobación de contratos: 2026-11-15 08:14:58 UTC. Trabajo en GitDB y GitHub Actions. Gabriel no debe intervenir antes de las 08:30 de Argentina / 11:30 UTC.
 
-## Sucesor de entrega, ronda1 pendiente de revisión acotada
+## Estado de Source
 
-Primera corrida43682038783/1: controls-unavailable boundary_unavailable,71esperados/medicionesUNKNOWN/Native0; cerradae27fb843. Revisión05ccd586 produjo8Important/2Minor, aceptados. Carrier anterior collection.sh retirado por96d76488; I3 sigueOPEN, no reuso.
+Rama `feat/finite-native-cleanup-20261101` cerrada en `1fe20347bd9c86d9343799a5994f9f3e3a4a339f`, árbol `577b049be0d64a6d2f67e889debdff61d4af9ff7`. F7 original restaurado: `f7a71f1a0fa4f5ddf069ff411f008a098455e5cc`.
 
-Ronda1 DATAc17cfaf4 (reporte completo preservado en rama docs) incorporó8correcciones + Rootpreflightbudget90s/20s/T01 + C02falsecoherente. Matriz FINALf646d4007f4348da75b0b5a99059246606c4d685/SHA1b6f74a16aa37818fe51bdf3bdea2a1d3946a4198736ca3d630f4ba30b7f6039;88casos ycada4mutantes[D02]/[P06]/[B05]/[S01]. Schema580e6113,ejemploscf8ffb9d. Receptor externo Root38749c66 dinámico/cleanup y envelopefc579ca3 pre-execution; no Source evaluado local.
+SAME: `35abeda77948f5ac8c0ddc1718739c7d56e01e08`, 1.600.042 bytes, SHA256 `2d883e68dfaaa6db5901b9ece3aca84e350ca36b51050cbd8d2b4f4036b4762d`. Core conserva 3.201 archivos / 324.448 bytes canónicos / SHA256 `aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703`. Main `0c9c475b3ebaa970fc11d628b40e50a90cceb727` y los 18 programas de producción permanecen sin cambios.
 
-Paquete47f8955365ca73734f7b03537484d4c0af5bbd34/357803B;26helpers/231936B/setSHA8b686e89;gzip78240214/63412B;SAMEpropuesta cea5d6f0/1598022B preservaba entero prefijo1504398. Root verificó hashes/pins/manifest/igualdad literal outer en entradas y F7dedent/RootCore/18/2leafdiff. Gate ddde57d9 liberóSourcef04a3311/tree6319a5bd, F7activo28217b64, una sola corrida43687521306/1 readonly132730996547. Checkout/setup-node success,combinedverify+controlsFAIL. ÚNICO registro normalizado: controls-unavailable setup_unavailable;88esperados/medicionesUNKNOWN/Native0. No88PASS ni88FAIL, no originalmain/CLI. No rerun. Se restauró Source actual1fe20347 con todo1598022B+recibo.
+Root verificó cierre, árbol completo, archivos, hashes y cinco estados activos vacíos. Es evidencia fechada de Source; no confirma el estado actual de Cloudflare. No hay CAS pendiente ni ejecución Source activa.
 
-Root detectó luego bloqueo determinista en F7: un assert adicional exige hash viejo de matriz71(1ae00081) mientras manifiesto/paquete exactos exigen actual88(1b6f74a1). No pueden pasar ambos. Root omitió ese assert redundante en su cotejo inicial. Excepción exacta de Source no trazada, pero contradicción estática impide llegar a controles. No explica por sí sola el fallo original R3world_1158_a1 ni la primera corrida71. Aún sin parche posterior.
+## Sucesor de entrega: corrección ronda 2 de 5
 
-REVISIÓN ACOTADA TERMINADA861c4d1f54242d91ce755fd58da7861c31088540, preservada completa en rama docs. I02–I08 corregidos estáticamente; I01 sigueabierto por coerción array→sourceTree. N01–N06nuevosImportant:matrizstale,site-schemaLF,ordenmutanteantesfault,autoridadschema/matrixwritablepostchild,lifetimegrandchild,chmodhardlinkfueraCaso. Root acepta los7openImportant. N07Minor se restaura al tocarF7; M02pins mandatados diferido. Ronda1/5cerrada(7estáticosaddressed,7Importantopen), ningún88PASS.
+El carrier anterior `collection.sh` quedó retirado por resolución `96d76488f7e0269816545807ab9d12ee9eac88d7`; I3 continúa abierto. No reusar ese carrier.
 
-CORRECCIÓN RONDA2/5 DATA EN CURSO /root/r3_delivery_successor_impl. Brief exactoc9f18e08edbe65bd7f8901568ff3a33f657564c7; debe leer hallazgos861literal. Soleimplementer, sinrefs/runs/localSource. ParentSource1fe20347 yprefijo1600042 completos; no usarlos obsoletose27/1504398. SAMEcap1800000 autorizado;raw400000/helper32768/wireigual; exceso gzip/base64 necesita medición y rulingprevio. N05requiere propuesta mínima de lifetime/containment antesdecodificar; el90s fence no demuestra muerte de nietos con supervisor. N04debe anclar ycapturar authoritybytes ANTES delchild, también site-map;site-schema4871 escanonicalJSON+LF,otros9JSON metadata noLF. Matriz/schema/examples/expectativas nuevas primero, no debilitarcasos, todoGHA solo trasgateRoot.
+Primera ejecución del sucesor: `43682038783/1`, resultado `boundary_unavailable`; 71 casos sin medir, Native 0. Revisión inicial `05ccd586cd99bc31f70be80e97732ce02a13b949`: ocho hallazgos importantes, aceptados.
 
-Root agregó preflightpropio087099540c15caacecc5f629151502aa609ff6d2 que rechaza hashesmatrizretirados/literales divergentes. EnRAMrechazóF7f04real y5negativos/2positivospropios;noSource ejecutado. Obligatorio antespróximoreleasejuntoacrypto/Scope/18/prefijo/receptores. Rootreceptor38749c66 esdinámico, necesita nueva schema/matrixhashdeclaradas; envelopefc579ca3 siguefijo.
+La ronda 1 produjo paquete `47f8955365ca73734f7b03537484d4c0af5bbd34` y reporte completo `c17cfaf4d083f5b685ab7353942089b878dcf3de`, preservados. La única ejecución `43687521306/1`, job `132730996547`, terminó `setup_unavailable`: 88 casos sin medir, Native 0. No repetir ni reinterpretar como 88 fallos o éxitos. Se restauró Source y se conservó íntegra la propuesta más el recibo.
 
-Revisor /root/r3_delivery_task_review terminó yquedaidle hastaSCOPEfix2+evidencia/cierre. No nuevochair ni revisiónamplia delcarrier. No SourceCASpending,sourceActive=null,Source1feCLOSED. No ownerrequestsantes08:30Argentina.
+Root encontró una contradicción determinista en F7: un assert redundante exigía el hash de la matriz de 71 casos, incompatible con el paquete de 88. Root omitió ese assert en su primer cotejo. La excepción exacta no quedó trazada; esta contradicción no demuestra la causa del fallo original R3.
 
-## Pendientes y restricciones
+La revisión acotada `861c4d1f54242d91ce755fd58da7861c31088540` acredita siete correcciones estáticas y mantiene siete hallazgos importantes: I01 (tipo primitivo del binding), N01 (pin obsoleto), N02 (framing LF), N03 (orden mutación/fallo), N04 (autoridades inmutables), N05 (vida de descendientes), N06 (hardlinks). N07 menor se incorpora al tocar F7. La actualización de los pins mandatados de Actions queda explícitamente diferida; no es causa probada.
 
-I3OPEN/NativeHELD; aún falta calificar lector antes de una única CLI original con muestra existente. Último original43658045169 R1/R2PASS/R3deadlineworld_1158_a1,causa desconocida. C2factory acoplado/notices/publication/SEND/ACK/receipt/parentoriginal siguenpendientes; inventariocf77fa6f preparado sin Coreedit. Después recorrido completo/retirada/restauración y ensayoPCoff; no sólo esperaCloudflare.
+Implementador único: `/root/r3_delivery_successor_impl`, ronda 2 DATA, sin permiso de ejecutar Source ni modificar refs. Brief `c9f18e08edbe65bd7f8901568ff3a33f657564c7`. Parent obligatorio: cierre actual 1fe20347; preservar íntegro el prefijo de 1.600.042 bytes. SAME cap 1.800.000; raw 400.000; helper 32.768. Excesos de gzip/base64 requieren medición y decisión previa, nunca truncar.
 
-No Sourceeval/import/syntax/tests/build/deps/clones/archivos enPC: Source sóloGHA; Rootdata+hashesRAM/skillreads. No CF/runtime/credenciales/OAuth/OTP/Max este bloque. M02warningpinsNode20/forced24 diferido explícitamente, no causa demostrada. No pedir acciones aGabriel antes15nov08:30Argentina/11:30UTC. RelayChavo#176 metadata88/13nov15:24:50Z sin cambios, no mensajes.
+N05: diseño DATA autorizado por `481c62d060fe976f22b8e4abb182e1d0fc14c959`, precisión `823056e691d211a283209b0d991f99984c3c8cfa`. Señal de muerte por cada fork, identidad real del creador y ejecutables fijos; sin ampliar el presupuesto Native. Plazos: Python 3,5/100 s, supervisor Node 4/110 s, techos existentes 5/120 s, harness 90 s y admisión mínima 20 s. No constituye prueba de terminación ni drenaje físico global.
 
-7nonclaimsfalse:historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified.
+## Contratos de la nueva matriz, todavía sin ejecutar
+
+Matriz de 100 casos y cuatro mutantes: `baa7b277322832c41cd76c74b6d4350d226f645f`, SHA256 `95a6d8e04dae765e2a0957042c09a06ea3c5ce50bad4c48a627e8799e19976f2`. Conserva los 88 casos y añade doce sobre binding, framing, autoridades, hardlinks y pérdida de supervisores. Schema `fbffb6156e18d07b231bf06bfd4dd7ecf7382285`; ejemplos `fbd7525c44a4706275f2a30eb471f38f9d15da20`.
+
+Expectativas de los cuatro mutantes sobre los 100 casos: M_RAW [D02]; M_PROVENANCE [P06]; M_OUTPUT [B05,U01]; M_ASSOC [S01]. No son resultados observados.
+
+El receptor independiente Root `38749c663f4dd58fbb5f1a3c940a3820c4ff5100` acepta los cuatro informes de ejemplo y califica únicamente el completamente exitoso; rechaza doce negativos. Registro propio: `docs/superpowers/reviews/2026-11-15-r3-round2-own-report-contract-check.md`. Esto valida el receptor, no Source. Preflight propio de pins `087099540c15caacecc5f629151502aa609ff6d2` es obligatorio antes de liberar F7.
+
+Faltan paquete final, hashes, comparación de alcance/prefijo/18 programas y gate Root. Después: una sola ejecución nueva de controles en GitHub, cierre completo y revisión acotada por `/root/r3_delivery_task_review`. Native continúa retenido.
+
+## Secuencia pendiente
+
+1. Calificar entrega y resolver I3 antes de una única observación del R3 original, con los 18 programas y presupuestos originales.
+2. Completar C2: factory material acoplado, notices/publication, SEND/ACK/recibo y propagación del padre original. Inventario preparado `cf77fa6f48b409e7afeb57daff1a2743cf1f0887`, sin editar Core.
+3. Verificar recorrido real, retirada y restauración desde cloud; después preparar el ensayo con PC apagada.
+
+Último R3 original `43658045169/1`: R1/R2 pasaron; R3 venció en `world_1158_a1`. Su causa sigue desconocida. No es solo espera de Cloudflare.
+
+Sin operaciones de Cloudflare, credenciales, OAuth, OTP o Max en este bloque. Sin eval/import/tests/build/dependencias/archivos Source en el PC. Solo datos y funciones propias Root en RAM; Source se ejecuta en GitHub Actions.
+
+Los siete no-acreditados siguen false: historicalCauseProven, receiptAuthenticated, operationalReadiness, completePackage, PCoff, globalNativeDrainVerified, sdkNamespaceEmptyVerified. No pedir apagar el ordenador.
+
+Relay Chavo #176: 88 comentarios, sin cambios al comprobar; no se envió mensaje nuevo.
