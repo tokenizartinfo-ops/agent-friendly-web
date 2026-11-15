@@ -1,0 +1,3 @@
+# Root Gate1 receiver, before execution
+
+Independently authored Root receiver. One synthetic complete fixture accepted;21 context, provenance, coverage, outcome, mutant, bound and false-claim contradictions rejected. These checks execute only Root-owned validation code against synthetic DATA. Source not executed. Expected controls40 set2515cc9735329687d25e99e4402acd53ea696dd8bafcaf16650c27e480c7c11c; expanded12fea87880485cdaab88c89de36f372d2eaca7764fb172b718facfea05794b19; production18 set0e44d1c0ca11d08eb89a30976455b16cf5d372ac7c6d57fb50cc4e6db59a80f7. Actual Source/run/tree/attempt must come from later primary GitHub API context. No Native release or readiness follows from this receiver preparation.
