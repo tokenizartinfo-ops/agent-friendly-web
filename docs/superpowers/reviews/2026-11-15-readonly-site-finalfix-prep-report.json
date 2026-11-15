@@ -1,0 +1,1866 @@
+{
+  "status": "NEEDS_ROOT_GATE",
+  "purpose": "afw.readonly-site.contract-finalfix.inactive-report.v1",
+  "at": "2026-11-15 01:04:30 UTC",
+  "authority": {
+    "briefCommit": "3d28a5ddde7f37aa48cc7ecef794da97b5d786fc",
+    "briefPath": "docs/superpowers/briefs/2026-11-15-readonly-site-contract-finalfix.md",
+    "briefBlob": "d678c976ea3e0749887b00c0987f3774e83a46b9",
+    "wholeReviewBlob": "0a937f989b22115589a2164b7c169f26d21b1cf0",
+    "findings": "C0/I3/M2; ONE aggregate final-fix wave only",
+    "rootReceiverRaw": "518e5be786a43023a5bfc0007f1a97c1d363d001",
+    "rootReceiverCommit": "dafe5453f084eefa2df3b002e742a7151fbcdea5",
+    "rootVectorsBlob": "ee50ea1bf1de9f627cc0aa652cde7181bccb8854"
+  },
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "unattached public GitDB preparation only",
+    "ORIGIN": "GitHub",
+    "RESOURCE_TYPE": "F7 and append-only SAME plus unattached program/report objects",
+    "RESOURCE_ID": "52c900333f582a5429198135b2f3ed66f4d1b517",
+    "ALLOWED_ACTION": "prepare one direct child of CLOSED673948; no Source attachment or execution",
+    "ROLLBACK": "discard unattached candidate; Root later restores originalF7 only after any controls-only job is terminal and preserves the entire proposal prefix"
+  },
+  "candidate": {
+    "commit": "52c900333f582a5429198135b2f3ed66f4d1b517",
+    "parent": "6739481ada03d50e035edfd9c157c1646fad705d",
+    "tree": "f174c0c300be9c2d449141dddb9020e5fd0c6011",
+    "attached": false,
+    "workflow": {
+      "path": ".github/workflows/afw-finite-budget-qualification.yml",
+      "bytes": 18584,
+      "blob": "8ae3d2f5a6a0bc1ab41fbc219fb9633e6f434011",
+      "sha256": "20238eef47c24c633636c0b584c4a642c2f5a7cfcdc614dbedcc3ad6b67c8a7d",
+      "jobs": [
+        "controls"
+      ],
+      "falseJobGuards": 1,
+      "timeoutMinutes": 7,
+      "node": "22.23.4",
+      "runner": "ubuntu-24.04",
+      "runBodyBytes": [
+        521,
+        16001,
+        221,
+        227
+      ],
+      "futureExactMessage": "AFW-READONLY-SITE-CONTRACT-FINALFIX-ONEUSE-20261115",
+      "scope": "fixed repository/ref, push only, attempt1; NODE_OPTIONS/key/candidate absent before loader Node"
+    },
+    "same": {
+      "path": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+      "bytes": 996063,
+      "blob": "5ca23933db95596c4fdb87e73bbff55f2c5c3e79",
+      "sha256": "fbd82b9140a252f5e2daad21aa395e8d8110865ff92f6f90729a06102ea500b4",
+      "appendBytes": 95926,
+      "prefix": {
+        "bytes": 900137,
+        "blob": "2c9fee8d24567aba21ca58554f7187bceb16d3cb",
+        "sha256": "ea7ccf4fa17a2c44a837deeb115c003d0676058305c0d1b7f3dff659e86e1a96",
+        "entirePrefixExact": true
+      }
+    },
+    "rollbackWorkflow": {
+      "blob": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+      "bytes": 126209
+    },
+    "postQualificationAppendRule": "After terminal, preserve ENTIRE996063-byte candidate SAME prefix while appending actual controls-only result; never truncate historical or proposal bytes."
+  },
+  "preservation": {
+    "base": "6739481ada03d50e035edfd9c157c1646fad705d",
+    "baseTree": "0f210b844740cc52426cc3282e3d0f5a7300e01a",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "core": {
+      "count": 3200,
+      "rawBytes": 324348,
+      "rawSha256": "547d44f2938403fa92fc6f8de19ef0000728c7917983afc9cf415697e812f802",
+      "encoding": "git ls-tree -rz --full-tree HEAD; retain mode type sha<TAB>path, exclude only F7/SAME, ASCII path sort, concatenate tuple+TAB+path+NUL"
+    },
+    "fullTreeReadback": {
+      "tree": "f174c0c300be9c2d449141dddb9020e5fd0c6011",
+      "truncated": false,
+      "entries": 3363,
+      "leaves": 3202,
+      "changes": [
+        {
+          "path": ".github/workflows/afw-finite-budget-qualification.yml",
+          "old": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+          "new": "8ae3d2f5a6a0bc1ab41fbc219fb9633e6f434011",
+          "bytes": 18584
+        },
+        {
+          "path": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+          "old": "2c9fee8d24567aba21ca58554f7187bceb16d3cb",
+          "new": "5ca23933db95596c4fdb87e73bbff55f2c5c3e79",
+          "bytes": 996063
+        }
+      ],
+      "deleted": [],
+      "unchangedCore": 3200
+    },
+    "fullTextBlobReadbacks": [
+      {
+        "name": "before/afw-site/site-map.json",
+        "blob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/runtime.mjs",
+        "blob": "815c32f1020ff1f32799ed47a652ced314a903f7",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/closed.mjs",
+        "blob": "7d9e792fdcaac628f8c8724287904cba976772fd",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/qualified-driver.mjs",
+        "blob": "3ef70505e65c179dae68a9a1a504da591f840c49",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/preflight.mjs",
+        "blob": "1b3ad02d1cbf183ac82f79d7097b4fe506a2093b",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/site.mjs",
+        "blob": "b6cafcb75b4b158f7c36bbf336bf50b048699c4c",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/site-closed.mjs",
+        "blob": "effb33c3e63802b1c54760d45b5523378938eb39",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/tiny-helper.mjs",
+        "blob": "179a3b28169f343c0f4fecf2ec15bab639743025",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/tiny.test.mjs",
+        "blob": "c0ac0a2efda993d9d9b203197528fdb837c9395d",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/tiny-reporter.mjs",
+        "blob": "0d579212537dbde9579c6c9c9109151990db3efa",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/reporter.mjs",
+        "blob": "399034feaa2a99d38ef55fe7cfa1a2e87385a816",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/tiny-map.json",
+        "blob": "dda5dac6a1250d3166fc98d89fac901c610f5ceb",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/schema.json",
+        "blob": "afee53bae2103c48211bc0bb72fcef482a9a6ebc",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/contract.mjs",
+        "blob": "6f21b4f3931bb139f29bc3cd20c0edfc405dfb1b",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/controls.mjs",
+        "blob": "08fc3498299ca0653cbcd40ce9b0bc8ac4b5836b",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/pins.json",
+        "blob": "9e79d5f0b4423471c91eefbce1e20709a6267575",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/main.mjs",
+        "blob": "ef21e1e44780b15418244f1e750b190e5e3070f9",
+        "exact": true
+      },
+      {
+        "name": "before/afw-site/emit.mjs",
+        "blob": "42e7e3ab7e728fb1894abd6a1407af4a72f97e72",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/site-map.json",
+        "blob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/runtime.mjs",
+        "blob": "815c32f1020ff1f32799ed47a652ced314a903f7",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/closed.mjs",
+        "blob": "7d9e792fdcaac628f8c8724287904cba976772fd",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/qualified-driver.mjs",
+        "blob": "3ef70505e65c179dae68a9a1a504da591f840c49",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/preflight.mjs",
+        "blob": "1b3ad02d1cbf183ac82f79d7097b4fe506a2093b",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/site.mjs",
+        "blob": "b6cafcb75b4b158f7c36bbf336bf50b048699c4c",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/site-closed.mjs",
+        "blob": "effb33c3e63802b1c54760d45b5523378938eb39",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/tiny-helper.mjs",
+        "blob": "179a3b28169f343c0f4fecf2ec15bab639743025",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/tiny.test.mjs",
+        "blob": "c0ac0a2efda993d9d9b203197528fdb837c9395d",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/tiny-reporter.mjs",
+        "blob": "0d579212537dbde9579c6c9c9109151990db3efa",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/reporter.mjs",
+        "blob": "399034feaa2a99d38ef55fe7cfa1a2e87385a816",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/tiny-map.json",
+        "blob": "dda5dac6a1250d3166fc98d89fac901c610f5ceb",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/schema.json",
+        "blob": "afee53bae2103c48211bc0bb72fcef482a9a6ebc",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/contract.mjs",
+        "blob": "a4713c4eba8b449c955fac11273559d4acedfbbd",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/controls.mjs",
+        "blob": "16ff5fe98006147916d9f31a9106852ceec1ed18",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/pins.json",
+        "blob": "9e79d5f0b4423471c91eefbce1e20709a6267575",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/main.mjs",
+        "blob": "ca4fc0dcf6ffe8a14771e0f7661824d71a899685",
+        "exact": true
+      },
+      {
+        "name": "fixed/afw-site/emit.mjs",
+        "blob": "c11aab85f14993451be5cbc88eb2ff9f4a5c7e6a",
+        "exact": true
+      },
+      {
+        "name": "root-before.mjs",
+        "blob": "bf6e5c5663aee06c567288388a9495c5ac7356d7",
+        "exact": true
+      },
+      {
+        "name": "root-fixed.mjs",
+        "blob": "a6c45c42425669baa774a19aeef3cf7355f4d716",
+        "exact": true
+      },
+      {
+        "name": "root-vectors.json",
+        "blob": "ee50ea1bf1de9f627cc0aa652cde7181bccb8854",
+        "exact": true
+      },
+      {
+        "name": "matrix.json",
+        "blob": "5940b7ee0d6e0ddc9a4acf6e16063a7298574b67",
+        "exact": true
+      },
+      {
+        "name": "q-runtime.mjs",
+        "blob": "815c32f1020ff1f32799ed47a652ced314a903f7",
+        "exact": true
+      },
+      {
+        "name": "site-guard-mutant.mjs",
+        "blob": "0338703c63a6b1193d59e9babfbfc0a24fed2033",
+        "exact": true
+      },
+      {
+        "name": "regressions.test.mjs",
+        "blob": "f898b2739b1509fd1d7f44cdfd20dd2c91b84638",
+        "exact": true
+      },
+      {
+        "name": "regression-reporter.mjs",
+        "blob": "067392ad4435b610295b00e1394f63147de2bbf2",
+        "exact": true
+      },
+      {
+        "name": "helper-probe.mjs",
+        "blob": "2e29c7b5c40c4d01ba8fb89e9715886c4d4e3189",
+        "exact": true
+      },
+      {
+        "name": "bounds-probe.mjs",
+        "blob": "888b79950c84ba153c3c66cffffd3bde53152aea",
+        "exact": true
+      },
+      {
+        "name": "qualify.mjs",
+        "blob": "aa46a1c23f602c9ca61cf85a7865504609736450",
+        "exact": true
+      },
+      {
+        "name": "qualifier-emit.mjs",
+        "blob": "8c7d8ec911488c6a8f1b8df06c7d1ae03a122d22",
+        "exact": true
+      },
+      {
+        "name": "qualification-schema.json",
+        "blob": "c2381a6ff159a8c6e47d9f82fe2a34b3349a026a",
+        "exact": true
+      },
+      {
+        "name": "finalfixF7",
+        "blob": "8ae3d2f5a6a0bc1ab41fbc219fb9633e6f434011",
+        "exact": true
+      },
+      {
+        "name": "finalfixSame",
+        "blob": "5ca23933db95596c4fdb87e73bbff55f2c5c3e79",
+        "exact": true
+      },
+      {
+        "name": "finalfixLoader",
+        "blob": "67898d1d16b57d61410f1f59585f5423d5e0164d",
+        "exact": true
+      },
+      {
+        "name": "finalfixProdManifest",
+        "blob": "dc05f770fae4983b4087477f5090e48dee600fba",
+        "exact": true
+      },
+      {
+        "name": "finalfixControlManifest",
+        "blob": "6334bae4d7502077a0c5bdbaeb0bfba0c50ddd7d",
+        "exact": true
+      },
+      {
+        "name": "finalfixProdExpanded",
+        "blob": "f439040e7e35de8bb02f65f2bd970c04764e0a2e",
+        "exact": true
+      },
+      {
+        "name": "finalfixExpanded",
+        "blob": "f79a461d7e19b291911b610bec0ba757f936a7e5",
+        "exact": true
+      }
+    ],
+    "commitAndRefReadbacks": [
+      {
+        "name": "commit",
+        "sha": "52c900333f582a5429198135b2f3ed66f4d1b517",
+        "tree": "f174c0c300be9c2d449141dddb9020e5fd0c6011",
+        "parents": [
+          "6739481ada03d50e035edfd9c157c1646fad705d"
+        ]
+      },
+      {
+        "name": "main",
+        "ref": "refs/heads/main",
+        "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+      },
+      {
+        "name": "source",
+        "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+        "sha": "6739481ada03d50e035edfd9c157c1646fad705d"
+      }
+    ]
+  },
+  "historicalActual": {
+    "run": "43658045169",
+    "attempt": 1,
+    "job": "132640910465",
+    "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+    "tree": "f658211ef5187e75a94d5f5c20da824de2992645",
+    "valid": true,
+    "consumed": true,
+    "commandExit": 1,
+    "results": {
+      "R1": "passed",
+      "R2": "passed",
+      "R3": "failed"
+    },
+    "R3Site": "world_1158_a1",
+    "meaning": "Original fixedBudgetWait deadline assertion; underlying absent heldNativeSettled observation cause remains unknown. Actual record/pins/context and historical evidence remain byte-for-byte inside full preserved prefix.",
+    "nativeReplayAuthorized": false,
+    "privateArtifactRead": false
+  },
+  "production": {
+    "count": 18,
+    "programs": {
+      "site-map.json": {
+        "bytes": 6631,
+        "sha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+        "blob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0"
+      },
+      "runtime.mjs": {
+        "bytes": 3546,
+        "sha256": "7fde32c0df8b06ab3a01db30fb9e75fb7429cf6e4f95ed8152ed16bd7d0ab40a",
+        "blob": "815c32f1020ff1f32799ed47a652ced314a903f7"
+      },
+      "closed.mjs": {
+        "bytes": 5785,
+        "sha256": "cce547d7e23844003832498493e0d3b6d3bc352980408a66dd194949dab8e778",
+        "blob": "7d9e792fdcaac628f8c8724287904cba976772fd"
+      },
+      "qualified-driver.mjs": {
+        "bytes": 8545,
+        "sha256": "fb168aed7ea6c508f7ca3d59b2bd125dfe5125f528a9d85ceb4bc4944198cf43",
+        "blob": "3ef70505e65c179dae68a9a1a504da591f840c49"
+      },
+      "preflight.mjs": {
+        "bytes": 9307,
+        "sha256": "ef91d5f26567162d9a877657ffee92b4f997e4bd7a5d6511d9da77e0be1be37b",
+        "blob": "1b3ad02d1cbf183ac82f79d7097b4fe506a2093b"
+      },
+      "site.mjs": {
+        "bytes": 2893,
+        "sha256": "9e705115a5da27f7e8a5f48ccd33b456cb99d98a7173fbecb9906cda0d0eee7a",
+        "blob": "b6cafcb75b4b158f7c36bbf336bf50b048699c4c"
+      },
+      "site-closed.mjs": {
+        "bytes": 3146,
+        "sha256": "977a33043aba80faab0683e9a4dd33aba2d6ec3508dd14bcc7276ecaec2335d1",
+        "blob": "effb33c3e63802b1c54760d45b5523378938eb39"
+      },
+      "tiny-helper.mjs": {
+        "bytes": 782,
+        "sha256": "28de3c28c64518466d14685629e9ff1a422af744a939a5d7e2d8ff826dad565a",
+        "blob": "179a3b28169f343c0f4fecf2ec15bab639743025"
+      },
+      "tiny.test.mjs": {
+        "bytes": 360,
+        "sha256": "a1b35804648b1a4ec652d1f0e3ce0dfbfc2a7d78bcb24cd6986aae7ccfa52cf8",
+        "blob": "c0ac0a2efda993d9d9b203197528fdb837c9395d"
+      },
+      "tiny-reporter.mjs": {
+        "bytes": 2861,
+        "sha256": "9976aadc5884652cddf57f6b1c3cd072023614bd604680cce1c0ada03b40307f",
+        "blob": "0d579212537dbde9579c6c9c9109151990db3efa"
+      },
+      "reporter.mjs": {
+        "bytes": 679,
+        "sha256": "e32d8d83e5f1fefdcb9461f6d40c50c76441cbd19fc9dc0e708d2dcdf158ab97",
+        "blob": "399034feaa2a99d38ef55fe7cfa1a2e87385a816"
+      },
+      "tiny-map.json": {
+        "bytes": 652,
+        "sha256": "571dcb6e511c9d53d032d918daaa9659250a5f952987b1d7e2fc3ca8676223bb",
+        "blob": "dda5dac6a1250d3166fc98d89fac901c610f5ceb"
+      },
+      "schema.json": {
+        "bytes": 12651,
+        "sha256": "d850e3ad8216e3375cc31d920f39aa2a6a43fd63dbc6ab2ef68d3d09671ecb1e",
+        "blob": "afee53bae2103c48211bc0bb72fcef482a9a6ebc"
+      },
+      "contract.mjs": {
+        "bytes": 5798,
+        "sha256": "162f3ff4abb9e2c76e663f489409c744af9bc00725a1c387ccdd3528068d287e",
+        "blob": "a4713c4eba8b449c955fac11273559d4acedfbbd"
+      },
+      "controls.mjs": {
+        "bytes": 15270,
+        "sha256": "aceb25772a0dd5e78cd3562e81cc8e10e13b841ec298ef8dfb438b679a471af6",
+        "blob": "16ff5fe98006147916d9f31a9106852ceec1ed18"
+      },
+      "pins.json": {
+        "bytes": 549,
+        "sha256": "9536e8993238aa8be06c26d3fe259a57b0d2c25be7e2d56f4acb641362864265",
+        "blob": "9e79d5f0b4423471c91eefbce1e20709a6267575"
+      },
+      "main.mjs": {
+        "bytes": 7942,
+        "sha256": "3ff9b1aaf9e10f356f0a6e11414298e9215a5e371426ee7d823afd151c0dcca3",
+        "blob": "ca4fc0dcf6ffe8a14771e0f7661824d71a899685"
+      },
+      "emit.mjs": {
+        "bytes": 1005,
+        "sha256": "be7c56ea82f080e984f72b1932afb9ae6ea05c07894c374d93ca03ba3c685c02",
+        "blob": "c11aab85f14993451be5cbc88eb2ff9f4a5c7e6a"
+      }
+    },
+    "manifest": {
+      "blob": "dc05f770fae4983b4087477f5090e48dee600fba",
+      "bytes": 2811,
+      "sha256": "e4efb6f96edb03473948bebc62614a75139ec1ce906377ef26c1428a6fd542a4"
+    },
+    "expandedData": {
+      "blob": "f439040e7e35de8bb02f65f2bd970c04764e0a2e",
+      "bytes": 95515,
+      "sha256": "d5d194995bb0091fb6962d8d229bf114a581463c5fe42185c1a333b224cd0da7"
+    },
+    "unchanged14": [
+      "site-map.json",
+      "runtime.mjs",
+      "closed.mjs",
+      "qualified-driver.mjs",
+      "preflight.mjs",
+      "site.mjs",
+      "site-closed.mjs",
+      "tiny-helper.mjs",
+      "tiny.test.mjs",
+      "tiny-reporter.mjs",
+      "reporter.mjs",
+      "tiny-map.json",
+      "schema.json",
+      "pins.json"
+    ],
+    "changed4": [
+      {
+        "name": "contract.mjs",
+        "before": {
+          "bytes": 4564,
+          "sha256": "ab17ec9b41626d8f97b53ab0f32b2056b35ed56bbda4378d4085247a93ff4b92",
+          "blob": "6f21b4f3931bb139f29bc3cd20c0edfc405dfb1b"
+        },
+        "after": {
+          "bytes": 5798,
+          "sha256": "162f3ff4abb9e2c76e663f489409c744af9bc00725a1c387ccdd3528068d287e",
+          "blob": "a4713c4eba8b449c955fac11273559d4acedfbbd"
+        },
+        "lineChanges": [
+          {
+            "op": "add",
+            "beforeLine": 18,
+            "afterLine": 18,
+            "text": "  assert(q.ended&&q.summary&&q.state!=='unknown');for(const error of errors)assert(!['testTimeoutFailure','cancelledByParent','testAborted'].includes(error.wrapperFailureType));const file=q.state==='file_failure';"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 18,
+            "afterLine": 19,
+            "text": "  assert(q.ended&&q.summary&&q.state!=='unknown');const file=q.state==='file_failure';"
+          },
+          {
+            "op": "add",
+            "beforeLine": 28,
+            "afterLine": 28,
+            "text": "export function revokeLocations(r){"
+          },
+          {
+            "op": "add",
+            "beforeLine": 28,
+            "afterLine": 29,
+            "text": " const q=r.readonly;"
+          },
+          {
+            "op": "add",
+            "beforeLine": 28,
+            "afterLine": 30,
+            "text": " if(q){for(const error of [...q.rows.map(x=>x.error),q.precase?.error,q.firstFailure?.error].filter(Boolean))error.sourceSite='unknown';}"
+          },
+          {
+            "op": "add",
+            "beforeLine": 28,
+            "afterLine": 31,
+            "text": " for(const k of ['worldAfterVerified','nativeAfterVerified','originalBodiesUnchanged'])r.sourceProof[k]=false;"
+          },
+          {
+            "op": "add",
+            "beforeLine": 28,
+            "afterLine": 32,
+            "text": " r.usableLocationCount=0;r.collectionComplete=false;r.stage='unknown';return r;"
+          },
+          {
+            "op": "add",
+            "beforeLine": 28,
+            "afterLine": 33,
+            "text": "}"
+          },
+          {
+            "op": "add",
+            "beforeLine": 31,
+            "afterLine": 37,
+            "text": " const n=r.businessCommand,p=r.sourceProof,proof=r.programProof;"
+          },
+          {
+            "op": "add",
+            "beforeLine": 31,
+            "afterLine": 38,
+            "text": " if(proof.verified){assert(context&&context.programCount===18&&/^[a-f0-9]{64}$/.test(context.programSetSha256)&&/^[a-f0-9]{64}$/.test(context.payloadExpandedSha256));assert.equal(proof.count,18);assert.equal(proof.setSha256,context.programSetSha256);assert.equal(proof.payloadExpandedSha256,context.payloadExpandedSha256);}"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 31,
+            "afterLine": 39,
+            "text": " const n=r.businessCommand,p=r.sourceProof;"
+          },
+          {
+            "op": "add",
+            "beforeLine": 38,
+            "afterLine": 45,
+            "text": " if(['SIGTERM','SIGKILL','SIGINT'].includes(n.signal))assert(n.started===true&&n.ended===true);"
+          },
+          {
+            "op": "add",
+            "beforeLine": 38,
+            "afterLine": 46,
+            "text": " if(n.started===false)assert.equal(n.signal,'none');"
+          },
+          {
+            "op": "add",
+            "beforeLine": 38,
+            "afterLine": 47,
+            "text": " if(n.started===null)assert.equal(n.signal,'unknown');"
+          },
+          {
+            "op": "add",
+            "beforeLine": 41,
+            "afterLine": 51,
+            "text": " if(r.usableLocationCount>0)assert(p.mapVerified&&p.worldBeforeVerified&&p.nativeBeforeVerified&&p.worldAfterVerified&&p.nativeAfterVerified&&p.originalBodiesUnchanged);"
+          }
+        ]
+      },
+      {
+        "name": "controls.mjs",
+        "before": {
+          "bytes": 12243,
+          "sha256": "cd8c26838910668bc01abf9976412dbd8b263253e95b48094177c589f4f7e97e",
+          "blob": "08fc3498299ca0653cbcd40ce9b0bc8ac4b5836b"
+        },
+        "after": {
+          "bytes": 15270,
+          "sha256": "aceb25772a0dd5e78cd3562e81cc8e10e13b841ec298ef8dfb438b679a471af6",
+          "blob": "16ff5fe98006147916d9f31a9106852ceec1ed18"
+        },
+        "lineChanges": [
+          {
+            "op": "add",
+            "beforeLine": 9,
+            "afterLine": 9,
+            "text": "import {makeRecord,validateRecord,validateStream,admitPins,knownLocations,revokeLocations} from './contract.mjs';"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 9,
+            "afterLine": 10,
+            "text": "import {makeRecord,validateRecord,validateStream,admitPins,knownLocations} from './contract.mjs';"
+          },
+          {
+            "op": "add",
+            "beforeLine": 66,
+            "afterLine": 66,
+            "text": " const boundedFrame=length=>{const tail=' ('+path+':3:26)',label='F'.repeat(length-7-tail.length);return '    at '+label+tail;};const frame1024=boundedFrame(1024),frame1025=boundedFrame(1025);assert.equal(frame1024.length,1024);assert.equal(Buffer.byteLength(frame1024),1024);assert.equal(frame1025.length,1025);assert.equal(Buffer.byteLength(frame1025),1025);assert.equal(tiny(wrapped('probe',frame1024)),'tiny_bool');assert.equal(tiny(wrapped('probe',frame1025)),'unknown');"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 66,
+            "afterLine": 67,
+            "text": " assert.equal(tiny(wrapped('probe','    at '+path+':3:26'+'x'.repeat(1025))), 'unknown');"
+          },
+          {
+            "op": "add",
+            "beforeLine": 73,
+            "afterLine": 73,
+            "text": " const bound=json(join(root,'binding.json')),e={GITHUB_SHA:'a'.repeat(40),GITHUB_RUN_ID:'1'},binding={...bound,programCount:18},fixtureContext={source:e.GITHUB_SHA,tree:binding.sourceTree,run:'1',attempt:1,programCount:18,programSetSha256:bound.programSetSha256,payloadExpandedSha256:bound.payloadExpandedSha256};"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 73,
+            "afterLine": 74,
+            "text": " const e={GITHUB_SHA:'a'.repeat(40),GITHUB_RUN_ID:'1'},binding={sourceTree:'b'.repeat(40),programsVerified:true,programCount:20,programSetSha256:'c'.repeat(64),payloadExpandedSha256:'d'.repeat(64),coreGitVerified:true,prefixVerified:true};"
+          },
+          {
+            "op": "add",
+            "beforeLine": 75,
+            "afterLine": 75,
+            "text": " record.controls={passed:true,count:6,expected:6,usableShape:true,usableColumns:true};record.pure={passed:true,cases:8,expected:8};record.profile.passed=true;record.businessCommand={started:true,ended:true,exitCode:1,signal:'none'};record.readonly=q;record.collectionComplete=true;record.usableLocationCount=3;validateRecord(record,fixtureContext);"
+          },
+          {
+            "op": "add",
+            "beforeLine": 75,
+            "afterLine": 76,
+            "text": " for(const key of ['historicalCauseProven','receiptAuthenticated','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified']){const wrong=clone(record);wrong[key]=true;reject(()=>validateRecord(wrong,fixtureContext));}"
+          },
+          {
+            "op": "add",
+            "beforeLine": 75,
+            "afterLine": 77,
+            "text": " for(const change of [x=>{x.sourceProof.mapVerified=false;},x=>{x.sourceProof.worldBeforeVerified=false;},x=>{x.controls.usableColumns=false;},x=>{x.businessCommand.exitCode=0;},x=>{x.collectionComplete=false;},x=>{x.attempt=2;}]){const wrong=clone(record);change(wrong);reject(()=>validateRecord(wrong,fixtureContext));}"
+          },
+          {
+            "op": "add",
+            "beforeLine": 75,
+            "afterLine": 78,
+            "text": "  const afterFailed=clone(record),beforeCommand=clone(record.businessCommand),beforeSummary=clone(record.readonly.summary),beforeResults=record.readonly.rows.map(x=>x.result);revokeLocations(afterFailed);assert.deepEqual(afterFailed.businessCommand,beforeCommand);assert.deepEqual(afterFailed.readonly.summary,beforeSummary);assert.deepEqual(afterFailed.readonly.rows.map(x=>x.result),beforeResults);assert.equal(afterFailed.usableLocationCount,0);assert.equal(afterFailed.collectionComplete,false);assert.equal(afterFailed.stage,'unknown');assert(afterFailed.readonly.rows.filter(x=>x.error).every(x=>x.error.sourceSite==='unknown'));assert.equal(afterFailed.readonly.firstFailure.error.sourceSite,'unknown');for(const k of ['worldAfterVerified','nativeAfterVerified','originalBodiesUnchanged'])assert.equal(afterFailed.sourceProof[k],false);validateRecord(afterFailed,fixtureContext);"
+          },
+          {
+            "op": "add",
+            "beforeLine": 75,
+            "afterLine": 79,
+            "text": " const fileFailed=clone(record),fileError={...record.readonly.rows[0].error,sourceSite:'native_106_a1'};fileFailed.readonly={...record.readonly,state:'file_failure',rows:['R1','R2','R3'].map(id=>({case:id,result:'not_observed',error:null})),precase:{result:'failed',error:{...fileError}},firstFailure:{target:'native_file',error:{...fileError}},summary:{counts:{cancelled:0,failed:1,passed:0,skipped:0,suites:0,tests:1,todo:0,topLevel:1},success:false}};fileFailed.usableLocationCount=1;revokeLocations(fileFailed);assert.equal(fileFailed.readonly.precase.error.sourceSite,'unknown');assert.equal(fileFailed.readonly.firstFailure.error.sourceSite,'unknown');validateRecord(fileFailed,fixtureContext);"
+          },
+          {
+            "op": "add",
+            "beforeLine": 75,
+            "afterLine": 80,
+            "text": " for(const change of [x=>{x.programProof.count=20;},x=>{x.programProof.setSha256='0'.repeat(64);},x=>{x.programProof.payloadExpandedSha256='0'.repeat(64);},x=>{x.sourceProof.worldAfterVerified=false;x.stage='unknown';x.collectionComplete=false;}]){const wrong=clone(record);change(wrong);reject(()=>validateRecord(wrong,fixtureContext));}"
+          },
+          {
+            "op": "add",
+            "beforeLine": 75,
+            "afterLine": 81,
+            "text": " record.readonly=unknown;record.usableLocationCount=0;validateRecord(record,fixtureContext);"
+          },
+          {
+            "op": "add",
+            "beforeLine": 75,
+            "afterLine": 82,
+            "text": " const emitterBinding=json(join(root,'binding.json')),emitterContext={source:process.env.GITHUB_SHA,tree:emitterBinding.sourceTree,run:process.env.GITHUB_RUN_ID,attempt:1,programCount:18,programSetSha256:emitterBinding.programSetSha256,payloadExpandedSha256:emitterBinding.payloadExpandedSha256};"
+          },
+          {
+            "op": "add",
+            "beforeLine": 75,
+            "afterLine": 83,
+            "text": " for(const kind of ['absent','invalid','signal','count','set','expanded']){"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 75,
+            "afterLine": 84,
+            "text": " record.controls={passed:true,count:6,expected:6,usableShape:true,usableColumns:true};record.pure={passed:true,cases:8,expected:8};record.profile.passed=true;record.businessCommand={started:true,ended:true,exitCode:1,signal:'none'};record.readonly=q;record.collectionComplete=true;record.usableLocationCount=3;validateRecord(record,{source:e.GITHUB_SHA,tree:binding.sourceTree,run:'1',attempt:1});"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 76,
+            "afterLine": 84,
+            "text": " for(const key of ['historicalCauseProven','receiptAuthenticated','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified']){const wrong=clone(record);wrong[key]=true;reject(()=>validateRecord(wrong));}"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 77,
+            "afterLine": 84,
+            "text": " for(const change of [x=>{x.sourceProof.mapVerified=false;},x=>{x.sourceProof.worldBeforeVerified=false;},x=>{x.controls.usableColumns=false;},x=>{x.businessCommand.exitCode=0;},x=>{x.collectionComplete=false;},x=>{x.attempt=2;}]){const wrong=clone(record);change(wrong);reject(()=>validateRecord(wrong));}"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 78,
+            "afterLine": 84,
+            "text": " record.readonly=unknown;record.usableLocationCount=0;validateRecord(record);"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 79,
+            "afterLine": 84,
+            "text": " const emitterBinding=json(join(root,'binding.json')),emitterContext={source:process.env.GITHUB_SHA,tree:emitterBinding.sourceTree,run:process.env.GITHUB_RUN_ID,attempt:1};"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 80,
+            "afterLine": 84,
+            "text": " for(const kind of ['absent','invalid']){"
+          },
+          {
+            "op": "add",
+            "beforeLine": 84,
+            "afterLine": 87,
+            "text": "  if(!['absent','invalid'].includes(kind)){const invalid=makeRecord(emitterBinding,process.env);invalid.stage='hold';if(kind==='signal')invalid.businessCommand.signal='SIGTERM';if(kind==='count')invalid.programProof.count=20;if(kind==='set')invalid.programProof.setSha256='0'.repeat(64);if(kind==='expanded')invalid.programProof.payloadExpandedSha256='0'.repeat(64);writeFileSync(join(privateRoot,'public-result.json'),JSON.stringify(invalid),{mode:0o600,flag:'wx'});}"
+          }
+        ]
+      },
+      {
+        "name": "main.mjs",
+        "before": {
+          "bytes": 7757,
+          "sha256": "996c3410b6478270595ff6deb0b518f34f006321be02aa12bcab489506f9d0cb",
+          "blob": "ef21e1e44780b15418244f1e750b190e5e3070f9"
+        },
+        "after": {
+          "bytes": 7942,
+          "sha256": "3ff9b1aaf9e10f356f0a6e11414298e9215a5e371426ee7d823afd151c0dcca3",
+          "blob": "ca4fc0dcf6ffe8a14771e0f7661824d71a899685"
+        },
+        "lineChanges": [
+          {
+            "op": "add",
+            "beforeLine": 7,
+            "afterLine": 7,
+            "text": "import {makeRecord,validateRecord,validateStream,knownLocations,admitPins,revokeLocations} from './contract.mjs';"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 7,
+            "afterLine": 8,
+            "text": "import {makeRecord,validateRecord,validateStream,knownLocations,admitPins} from './contract.mjs';"
+          },
+          {
+            "op": "add",
+            "beforeLine": 10,
+            "afterLine": 10,
+            "text": "const context={source:e.GITHUB_SHA,tree:binding.sourceTree,run:e.GITHUB_RUN_ID,attempt:Number(e.GITHUB_RUN_ATTEMPT),programCount:18,programSetSha256:binding.programSetSha256,payloadExpandedSha256:binding.payloadExpandedSha256};"
+          },
+          {
+            "op": "add",
+            "beforeLine": 10,
+            "afterLine": 11,
+            "text": "let afterProofFailed=false;"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 10,
+            "afterLine": 12,
+            "text": "const context={source:e.GITHUB_SHA,tree:binding.sourceTree,run:e.GITHUB_RUN_ID,attempt:Number(e.GITHUB_RUN_ATTEMPT)};"
+          },
+          {
+            "op": "add",
+            "beforeLine": 43,
+            "afterLine": 44,
+            "text": " try{verify();result.sourceProof.worldAfterVerified=true;result.sourceProof.nativeAfterVerified=true;result.sourceProof.originalBodiesUnchanged=true;}catch{afterProofFailed=true;revokeLocations(result);throw 1;}result.stage='complete';result.collectionComplete=true;"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 43,
+            "afterLine": 45,
+            "text": " verify();result.sourceProof.worldAfterVerified=true;result.sourceProof.nativeAfterVerified=true;result.sourceProof.originalBodiesUnchanged=true;result.stage='complete';result.collectionComplete=true;"
+          },
+          {
+            "op": "add",
+            "beforeLine": 45,
+            "afterLine": 46,
+            "text": " try{verify();if(!afterProofFailed){result.sourceProof.worldAfterVerified=true;result.sourceProof.nativeAfterVerified=true;result.sourceProof.originalBodiesUnchanged=true;}}catch{afterProofFailed=true;revokeLocations(result);}"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 45,
+            "afterLine": 47,
+            "text": " try{verify();result.sourceProof.worldAfterVerified=true;result.sourceProof.nativeAfterVerified=true;result.sourceProof.originalBodiesUnchanged=true;}catch{result.stage='unknown';result.collectionComplete=false;result.sourceProof.originalBodiesUnchanged=false;}"
+          }
+        ]
+      },
+      {
+        "name": "emit.mjs",
+        "before": {
+          "bytes": 881,
+          "sha256": "51ac4cd3b8abf6301dae6650bac156d1e9ed48d1eecf11b87f1fa906668d9249",
+          "blob": "42e7e3ab7e728fb1894abd6a1407af4a72f97e72"
+        },
+        "after": {
+          "bytes": 1005,
+          "sha256": "be7c56ea82f080e984f72b1932afb9ae6ea05c07894c374d93ca03ba3c685c02",
+          "blob": "c11aab85f14993451be5cbc88eb2ff9f4a5c7e6a"
+        },
+        "lineChanges": [
+          {
+            "op": "add",
+            "beforeLine": 6,
+            "afterLine": 6,
+            "text": "const context={source:e.GITHUB_SHA,tree:binding?.sourceTree??null,run:e.GITHUB_RUN_ID,attempt:Number(e.GITHUB_RUN_ATTEMPT),programCount:18,programSetSha256:binding?.programSetSha256??null,payloadExpandedSha256:binding?.payloadExpandedSha256??null};"
+          },
+          {
+            "op": "remove",
+            "beforeLine": 6,
+            "afterLine": 7,
+            "text": "const context={source:e.GITHUB_SHA,tree:binding?.sourceTree??null,run:e.GITHUB_RUN_ID,attempt:Number(e.GITHUB_RUN_ATTEMPT)};"
+          }
+        ]
+      }
+    ],
+    "productionMemberHasOwnNewDigestLiteral": false,
+    "runtime": "815c32f1020ff1f32799ed47a652ced314a903f7",
+    "closedProjector": "7d9e792fdcaac628f8c8724287904cba976772fd",
+    "qualifiedDriver": "3ef70505e65c179dae68a9a1a504da591f840c49",
+    "schemaUnchanged": true,
+    "map83Unchanged": true,
+    "worldNativeBodiesUnchanged": true,
+    "mainAndPreflightNeverImportedByQualifier": true
+  },
+  "fixes": {
+    "I1": {
+      "actualHelper": "contract.mjs export revokeLocations, imported by main and controls",
+      "behavior": "Map every row/precase/firstFailure alias to unknown, count0, collectionfalse, stageunknown; clear worldAfterVerified/nativeAfterVerified/originalBodiesUnchanged. Preserve observed command, case results and summaries and truthful before checks. Main latches afterProofFailed, so a later successful verify cannot resurrect after proofs.",
+      "independentChecks": "Sender and exact Root receiver reject positive aliases/count without ALL6 map/Source before+after/original-body booleans, regardless stage.",
+      "proof": "All Root16 vectors exercised on both validators; real fixed helper called on mapped R3, mapped file-precase and unknown-result fixtures, validated by both sender and Root."
+    },
+    "I2": {
+      "behavior": "A valid terminal stream cannot contain testTimeoutFailure/cancelledByParent/testAborted in any failed row or precase; partial unknown streams retain conservative unknown status.",
+      "proof": "All3 wrappers in row and file-precase on both actual validators; summary/firstFailure/counts consistent so wrapper contradiction discriminates."
+    },
+    "I3": {
+      "behavior": "Concrete SIGTERM/SIGKILL/SIGINT implies startedtrue AND endedtrue. Definite no-launch signalnone. Unknown launch startednull/endedfalse/exitnull/signalunknown.",
+      "proof": "Root no-start signals plus pending/null contradiction and positive signal pairs on both validators; ACTUAL emit missing/invalid/signal branches and conservative fallback, not copied predicates."
+    },
+    "M1": {
+      "behavior": "Named-frame label padded to syntactically valid exactly1024 vs1025 ASCII units/bytes. Intended positive maps and negative is unknown.",
+      "mutation": {
+        "program": {
+          "bytes": 2875,
+          "sha256": "dcd11d6704fc67ae1c5f23d5c4555aaaca692a2617903f74b1a25c675f757168",
+          "blob": "0338703c63a6b1193d59e9babfbfc0a24fed2033"
+        },
+        "sourceProgram": {
+          "bytes": 2893,
+          "sha256": "9e705115a5da27f7e8a5f48ccd33b456cb99d98a7173fbecb9906cda0d0eee7a",
+          "blob": "b6cafcb75b4b158f7c36bbf336bf50b048699c4c"
+        },
+        "removedLiteral": "!bounded(s,1024)||",
+        "occurrences": 1,
+        "expectedFixed": {
+          "exit": 0,
+          "positive1024Mapped": true,
+          "negative1025Unknown": true
+        },
+        "expectedMutant": {
+          "exit": 1,
+          "positive1024Mapped": true,
+          "negative1025Unknown": false
+        },
+        "meaning": "Real production guard-removal mutant is killed specifically by the1025 assertion while1024 remains positive."
+      }
+    },
+    "M2": {
+      "behavior": "Production EXACT18. Sender main/emit supplies trusted expected count18/set/expanded from independently verified loader binding. No member hardcodes its own set/expanded hash; Root retains independent external fixed pins.",
+      "fixture": "C6 complete fixture takes bound18 and bound digests; fixture proof metadata is synthetic and never a Native/business observation.",
+      "proof": "Both validators on contradictory count/set/expanded; actual emit fallback on all3 proof contradictions; fixed production cardinality separately proved by loader, distinct from49 controls payload programs."
+    }
+  },
+  "rootReceiver": {
+    "rawBlob": "518e5be786a43023a5bfc0007f1a97c1d363d001",
+    "moduleWrapper": {
+      "bytes": 5459,
+      "sha256": "1256a329bb0afef7c498ad7e8f6e65b2a501347ad80d34c0da40ca8e29728322",
+      "blob": "a6c45c42425669baa774a19aeef3cf7355f4d716"
+    },
+    "bodyPreservedExactly": true,
+    "prefixOnly": "export default ",
+    "beforeRawBlob": "773c2092a20f9f8364eb0104b6b775eb4a3b3d7b",
+    "rootVectorBlob": "ee50ea1bf1de9f627cc0aa652cde7181bccb8854",
+    "historicalOriginalContext": {
+      "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+      "tree": "f658211ef5187e75a94d5f5c20da824de2992645",
+      "run": "43658045169",
+      "attempt": 1,
+      "job": "readonly"
+    },
+    "historicalOriginalExpected": {
+      "programSet": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+      "expanded": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a"
+    },
+    "noReceiverSemanticDrift": true
+  },
+  "qualification": {
+    "purpose": "afw.readonly-site.finalfix.qualification.v1",
+    "marker": "AFW_READONLY_SITE_FINALFIX/1 ",
+    "schema": {
+      "bytes": 9061,
+      "sha256": "ac5a01c2f13545fdbd7cc343365d047166aa5a31d9e32327501415a9f5c43f6e",
+      "blob": "c2381a6ff159a8c6e47d9f82fe2a34b3349a026a"
+    },
+    "controlPayloadProgramCount": 49,
+    "productionProgramCount": 18,
+    "programs": {
+      "before/afw-site/site-map.json": {
+        "bytes": 6631,
+        "sha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+        "blob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0"
+      },
+      "before/afw-site/runtime.mjs": {
+        "bytes": 3546,
+        "sha256": "7fde32c0df8b06ab3a01db30fb9e75fb7429cf6e4f95ed8152ed16bd7d0ab40a",
+        "blob": "815c32f1020ff1f32799ed47a652ced314a903f7"
+      },
+      "before/afw-site/closed.mjs": {
+        "bytes": 5785,
+        "sha256": "cce547d7e23844003832498493e0d3b6d3bc352980408a66dd194949dab8e778",
+        "blob": "7d9e792fdcaac628f8c8724287904cba976772fd"
+      },
+      "before/afw-site/qualified-driver.mjs": {
+        "bytes": 8545,
+        "sha256": "fb168aed7ea6c508f7ca3d59b2bd125dfe5125f528a9d85ceb4bc4944198cf43",
+        "blob": "3ef70505e65c179dae68a9a1a504da591f840c49"
+      },
+      "before/afw-site/preflight.mjs": {
+        "bytes": 9307,
+        "sha256": "ef91d5f26567162d9a877657ffee92b4f997e4bd7a5d6511d9da77e0be1be37b",
+        "blob": "1b3ad02d1cbf183ac82f79d7097b4fe506a2093b"
+      },
+      "before/afw-site/site.mjs": {
+        "bytes": 2893,
+        "sha256": "9e705115a5da27f7e8a5f48ccd33b456cb99d98a7173fbecb9906cda0d0eee7a",
+        "blob": "b6cafcb75b4b158f7c36bbf336bf50b048699c4c"
+      },
+      "before/afw-site/site-closed.mjs": {
+        "bytes": 3146,
+        "sha256": "977a33043aba80faab0683e9a4dd33aba2d6ec3508dd14bcc7276ecaec2335d1",
+        "blob": "effb33c3e63802b1c54760d45b5523378938eb39"
+      },
+      "before/afw-site/tiny-helper.mjs": {
+        "bytes": 782,
+        "sha256": "28de3c28c64518466d14685629e9ff1a422af744a939a5d7e2d8ff826dad565a",
+        "blob": "179a3b28169f343c0f4fecf2ec15bab639743025"
+      },
+      "before/afw-site/tiny.test.mjs": {
+        "bytes": 360,
+        "sha256": "a1b35804648b1a4ec652d1f0e3ce0dfbfc2a7d78bcb24cd6986aae7ccfa52cf8",
+        "blob": "c0ac0a2efda993d9d9b203197528fdb837c9395d"
+      },
+      "before/afw-site/tiny-reporter.mjs": {
+        "bytes": 2861,
+        "sha256": "9976aadc5884652cddf57f6b1c3cd072023614bd604680cce1c0ada03b40307f",
+        "blob": "0d579212537dbde9579c6c9c9109151990db3efa"
+      },
+      "before/afw-site/reporter.mjs": {
+        "bytes": 679,
+        "sha256": "e32d8d83e5f1fefdcb9461f6d40c50c76441cbd19fc9dc0e708d2dcdf158ab97",
+        "blob": "399034feaa2a99d38ef55fe7cfa1a2e87385a816"
+      },
+      "before/afw-site/tiny-map.json": {
+        "bytes": 652,
+        "sha256": "571dcb6e511c9d53d032d918daaa9659250a5f952987b1d7e2fc3ca8676223bb",
+        "blob": "dda5dac6a1250d3166fc98d89fac901c610f5ceb"
+      },
+      "before/afw-site/schema.json": {
+        "bytes": 12651,
+        "sha256": "d850e3ad8216e3375cc31d920f39aa2a6a43fd63dbc6ab2ef68d3d09671ecb1e",
+        "blob": "afee53bae2103c48211bc0bb72fcef482a9a6ebc"
+      },
+      "before/afw-site/contract.mjs": {
+        "bytes": 4564,
+        "sha256": "ab17ec9b41626d8f97b53ab0f32b2056b35ed56bbda4378d4085247a93ff4b92",
+        "blob": "6f21b4f3931bb139f29bc3cd20c0edfc405dfb1b"
+      },
+      "before/afw-site/controls.mjs": {
+        "bytes": 12243,
+        "sha256": "cd8c26838910668bc01abf9976412dbd8b263253e95b48094177c589f4f7e97e",
+        "blob": "08fc3498299ca0653cbcd40ce9b0bc8ac4b5836b"
+      },
+      "before/afw-site/pins.json": {
+        "bytes": 549,
+        "sha256": "9536e8993238aa8be06c26d3fe259a57b0d2c25be7e2d56f4acb641362864265",
+        "blob": "9e79d5f0b4423471c91eefbce1e20709a6267575"
+      },
+      "before/afw-site/main.mjs": {
+        "bytes": 7757,
+        "sha256": "996c3410b6478270595ff6deb0b518f34f006321be02aa12bcab489506f9d0cb",
+        "blob": "ef21e1e44780b15418244f1e750b190e5e3070f9"
+      },
+      "before/afw-site/emit.mjs": {
+        "bytes": 881,
+        "sha256": "51ac4cd3b8abf6301dae6650bac156d1e9ed48d1eecf11b87f1fa906668d9249",
+        "blob": "42e7e3ab7e728fb1894abd6a1407af4a72f97e72"
+      },
+      "fixed/afw-site/site-map.json": {
+        "bytes": 6631,
+        "sha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+        "blob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0"
+      },
+      "fixed/afw-site/runtime.mjs": {
+        "bytes": 3546,
+        "sha256": "7fde32c0df8b06ab3a01db30fb9e75fb7429cf6e4f95ed8152ed16bd7d0ab40a",
+        "blob": "815c32f1020ff1f32799ed47a652ced314a903f7"
+      },
+      "fixed/afw-site/closed.mjs": {
+        "bytes": 5785,
+        "sha256": "cce547d7e23844003832498493e0d3b6d3bc352980408a66dd194949dab8e778",
+        "blob": "7d9e792fdcaac628f8c8724287904cba976772fd"
+      },
+      "fixed/afw-site/qualified-driver.mjs": {
+        "bytes": 8545,
+        "sha256": "fb168aed7ea6c508f7ca3d59b2bd125dfe5125f528a9d85ceb4bc4944198cf43",
+        "blob": "3ef70505e65c179dae68a9a1a504da591f840c49"
+      },
+      "fixed/afw-site/preflight.mjs": {
+        "bytes": 9307,
+        "sha256": "ef91d5f26567162d9a877657ffee92b4f997e4bd7a5d6511d9da77e0be1be37b",
+        "blob": "1b3ad02d1cbf183ac82f79d7097b4fe506a2093b"
+      },
+      "fixed/afw-site/site.mjs": {
+        "bytes": 2893,
+        "sha256": "9e705115a5da27f7e8a5f48ccd33b456cb99d98a7173fbecb9906cda0d0eee7a",
+        "blob": "b6cafcb75b4b158f7c36bbf336bf50b048699c4c"
+      },
+      "fixed/afw-site/site-closed.mjs": {
+        "bytes": 3146,
+        "sha256": "977a33043aba80faab0683e9a4dd33aba2d6ec3508dd14bcc7276ecaec2335d1",
+        "blob": "effb33c3e63802b1c54760d45b5523378938eb39"
+      },
+      "fixed/afw-site/tiny-helper.mjs": {
+        "bytes": 782,
+        "sha256": "28de3c28c64518466d14685629e9ff1a422af744a939a5d7e2d8ff826dad565a",
+        "blob": "179a3b28169f343c0f4fecf2ec15bab639743025"
+      },
+      "fixed/afw-site/tiny.test.mjs": {
+        "bytes": 360,
+        "sha256": "a1b35804648b1a4ec652d1f0e3ce0dfbfc2a7d78bcb24cd6986aae7ccfa52cf8",
+        "blob": "c0ac0a2efda993d9d9b203197528fdb837c9395d"
+      },
+      "fixed/afw-site/tiny-reporter.mjs": {
+        "bytes": 2861,
+        "sha256": "9976aadc5884652cddf57f6b1c3cd072023614bd604680cce1c0ada03b40307f",
+        "blob": "0d579212537dbde9579c6c9c9109151990db3efa"
+      },
+      "fixed/afw-site/reporter.mjs": {
+        "bytes": 679,
+        "sha256": "e32d8d83e5f1fefdcb9461f6d40c50c76441cbd19fc9dc0e708d2dcdf158ab97",
+        "blob": "399034feaa2a99d38ef55fe7cfa1a2e87385a816"
+      },
+      "fixed/afw-site/tiny-map.json": {
+        "bytes": 652,
+        "sha256": "571dcb6e511c9d53d032d918daaa9659250a5f952987b1d7e2fc3ca8676223bb",
+        "blob": "dda5dac6a1250d3166fc98d89fac901c610f5ceb"
+      },
+      "fixed/afw-site/schema.json": {
+        "bytes": 12651,
+        "sha256": "d850e3ad8216e3375cc31d920f39aa2a6a43fd63dbc6ab2ef68d3d09671ecb1e",
+        "blob": "afee53bae2103c48211bc0bb72fcef482a9a6ebc"
+      },
+      "fixed/afw-site/contract.mjs": {
+        "bytes": 5798,
+        "sha256": "162f3ff4abb9e2c76e663f489409c744af9bc00725a1c387ccdd3528068d287e",
+        "blob": "a4713c4eba8b449c955fac11273559d4acedfbbd"
+      },
+      "fixed/afw-site/controls.mjs": {
+        "bytes": 15270,
+        "sha256": "aceb25772a0dd5e78cd3562e81cc8e10e13b841ec298ef8dfb438b679a471af6",
+        "blob": "16ff5fe98006147916d9f31a9106852ceec1ed18"
+      },
+      "fixed/afw-site/pins.json": {
+        "bytes": 549,
+        "sha256": "9536e8993238aa8be06c26d3fe259a57b0d2c25be7e2d56f4acb641362864265",
+        "blob": "9e79d5f0b4423471c91eefbce1e20709a6267575"
+      },
+      "fixed/afw-site/main.mjs": {
+        "bytes": 7942,
+        "sha256": "3ff9b1aaf9e10f356f0a6e11414298e9215a5e371426ee7d823afd151c0dcca3",
+        "blob": "ca4fc0dcf6ffe8a14771e0f7661824d71a899685"
+      },
+      "fixed/afw-site/emit.mjs": {
+        "bytes": 1005,
+        "sha256": "be7c56ea82f080e984f72b1932afb9ae6ea05c07894c374d93ca03ba3c685c02",
+        "blob": "c11aab85f14993451be5cbc88eb2ff9f4a5c7e6a"
+      },
+      "root-before.mjs": {
+        "bytes": 4843,
+        "sha256": "2789775bd50aaf59ebaa6741ab0c378b2876766c4c23f9e15dbccf8d9ca7499d",
+        "blob": "bf6e5c5663aee06c567288388a9495c5ac7356d7"
+      },
+      "root-fixed.mjs": {
+        "bytes": 5459,
+        "sha256": "1256a329bb0afef7c498ad7e8f6e65b2a501347ad80d34c0da40ca8e29728322",
+        "blob": "a6c45c42425669baa774a19aeef3cf7355f4d716"
+      },
+      "root-vectors.json": {
+        "bytes": 58251,
+        "sha256": "b421a467ac5ed82b6b0152ce746f3a8295d01398fb46203db61f71020ea4babb",
+        "blob": "ee50ea1bf1de9f627cc0aa652cde7181bccb8854"
+      },
+      "matrix.json": {
+        "bytes": 7885,
+        "sha256": "cba3229e9cc27edfe029dc36e80ffaff69dc99dd0576821ae5b6c878b9759c91",
+        "blob": "5940b7ee0d6e0ddc9a4acf6e16063a7298574b67"
+      },
+      "q-runtime.mjs": {
+        "bytes": 3546,
+        "sha256": "7fde32c0df8b06ab3a01db30fb9e75fb7429cf6e4f95ed8152ed16bd7d0ab40a",
+        "blob": "815c32f1020ff1f32799ed47a652ced314a903f7"
+      },
+      "site-guard-mutant.mjs": {
+        "bytes": 2875,
+        "sha256": "dcd11d6704fc67ae1c5f23d5c4555aaaca692a2617903f74b1a25c675f757168",
+        "blob": "0338703c63a6b1193d59e9babfbfc0a24fed2033"
+      },
+      "regressions.test.mjs": {
+        "bytes": 5032,
+        "sha256": "e55d148b79655b01e6b5513377e81c1c5bed82e1eeac08853870ed5c9f7680e8",
+        "blob": "f898b2739b1509fd1d7f44cdfd20dd2c91b84638"
+      },
+      "regression-reporter.mjs": {
+        "bytes": 1808,
+        "sha256": "cf3f737973a4403cfdf57c0ef10acf2fe1c8ee2a8e8950e12423799496dded29",
+        "blob": "067392ad4435b610295b00e1394f63147de2bbf2"
+      },
+      "helper-probe.mjs": {
+        "bytes": 2381,
+        "sha256": "095fead079edbe74a1e86cf66191f344876ac33acf28ce03f6c26e0eb58ed119",
+        "blob": "2e29c7b5c40c4d01ba8fb89e9715886c4d4e3189"
+      },
+      "bounds-probe.mjs": {
+        "bytes": 1022,
+        "sha256": "29a22dc3e9b2700a007af5a1e0bed039126fe98087678ed054800bee29484b6a",
+        "blob": "888b79950c84ba153c3c66cffffd3bde53152aea"
+      },
+      "qualify.mjs": {
+        "bytes": 6012,
+        "sha256": "f7f3b28df16f44c6a12c6c738ed172e3af28c49bff9cae479e7750401f6375fb",
+        "blob": "aa46a1c23f602c9ca61cf85a7865504609736450"
+      },
+      "qualifier-emit.mjs": {
+        "bytes": 519,
+        "sha256": "39622d994aa5745763629c0b3dae398ff9b25d4cdd0fd515d83aa2563442d8a0",
+        "blob": "8c7d8ec911488c6a8f1b8df06c7d1ae03a122d22"
+      },
+      "qualification-schema.json": {
+        "bytes": 9061,
+        "sha256": "ac5a01c2f13545fdbd7cc343365d047166aa5a31d9e32327501415a9f5c43f6e",
+        "blob": "c2381a6ff159a8c6e47d9f82fe2a34b3349a026a"
+      }
+    },
+    "manifest": {
+      "blob": "6334bae4d7502077a0c5bdbaeb0bfba0c50ddd7d",
+      "bytes": 8269,
+      "sha256": "b8c6a54eaf85224115423d93a938642825c95b498da70f6b73f237d98f6ccc56"
+    },
+    "payload": {
+      "programCount": 49,
+      "programSetSha256": "b8c6a54eaf85224115423d93a938642825c95b498da70f6b73f237d98f6ccc56",
+      "expanded": {
+        "bytes": 313559,
+        "sha256": "ab11a3e0a319573bfd2b752b4eeb3398270650fc2b00473843044e089cedf770",
+        "blob": "f79a461d7e19b291911b610bec0ba757f936a7e5"
+      },
+      "compressed": {
+        "bytes": 59999,
+        "sha256": "d4edaff273ed4035d8f0cf54f8723d4805e838dc42a44bfc0f5a11d322bc6a4f",
+        "blob": "f1513fa10f65eff30b00bcae01268ecf2899ff30"
+      },
+      "base64Characters": 80000
+    },
+    "loader": {
+      "blob": "67898d1d16b57d61410f1f59585f5423d5e0164d",
+      "bytes": 15571,
+      "sha256": "2b69a881e291d0ac4ecee4e8f078ef32548eb35387813723e2a0e5e65c33d355"
+    },
+    "bounds": {
+      "workflowMax": 500000,
+      "eachRunStrictlyBelow": 21000,
+      "perProgramMax": 65536,
+      "compressedMax": 80000,
+      "expandedMax": 400000,
+      "base64Max": 110000,
+      "wireMax": 16384,
+      "jobMinutes": 7
+    },
+    "canonicalJSONAndGzipRoundTrip": true,
+    "all49ProgramDataHashesExact": true,
+    "expectedBeforeExecution": {
+      "purpose": "afw.readonly-site.finalfix.matrix.v1",
+      "cases": [
+        {
+          "id": "sender_I1-mapVerified",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I1-mapVerified",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I1-worldBeforeVerified",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I1-worldBeforeVerified",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I1-nativeBeforeVerified",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I1-nativeBeforeVerified",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I1-worldAfterVerified",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I1-worldAfterVerified",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I1-nativeAfterVerified",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I1-nativeAfterVerified",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I1-originalBodiesUnchanged",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I1-originalBodiesUnchanged",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I2-testTimeoutFailure-row",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I2-testTimeoutFailure-row",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I2-testTimeoutFailure-precase",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I2-testTimeoutFailure-precase",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I2-cancelledByParent-row",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I2-cancelledByParent-row",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I2-cancelledByParent-precase",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I2-cancelledByParent-precase",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I2-testAborted-row",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I2-testAborted-row",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I2-testAborted-precase",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I2-testAborted-precase",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3-nostart-SIGTERM",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I3-nostart-SIGTERM",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3-nostart-SIGKILL",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I3-nostart-SIGKILL",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3-nostart-SIGINT",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I3-nostart-SIGINT",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3-nostart-unknown",
+          "kind": "root_vector",
+          "side": "sender",
+          "vector": "I3-nostart-unknown",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I1-mapVerified",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I1-mapVerified",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I1-worldBeforeVerified",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I1-worldBeforeVerified",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I1-nativeBeforeVerified",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I1-nativeBeforeVerified",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I1-worldAfterVerified",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I1-worldAfterVerified",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I1-nativeAfterVerified",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I1-nativeAfterVerified",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I1-originalBodiesUnchanged",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I1-originalBodiesUnchanged",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I2-testTimeoutFailure-row",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I2-testTimeoutFailure-row",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I2-testTimeoutFailure-precase",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I2-testTimeoutFailure-precase",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I2-cancelledByParent-row",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I2-cancelledByParent-row",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I2-cancelledByParent-precase",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I2-cancelledByParent-precase",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I2-testAborted-row",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I2-testAborted-row",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I2-testAborted-precase",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I2-testAborted-precase",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3-nostart-SIGTERM",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I3-nostart-SIGTERM",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3-nostart-SIGKILL",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I3-nostart-SIGKILL",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3-nostart-SIGINT",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I3-nostart-SIGINT",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3-nostart-unknown",
+          "kind": "root_vector",
+          "side": "root",
+          "vector": "I3-nostart-unknown",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_M2_count",
+          "kind": "programproof",
+          "side": "sender",
+          "field": "count",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_M2_set",
+          "kind": "programproof",
+          "side": "sender",
+          "field": "set",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_M2_expanded",
+          "kind": "programproof",
+          "side": "sender",
+          "field": "expanded",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_M2_count",
+          "kind": "programproof",
+          "side": "root",
+          "field": "count",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_M2_set",
+          "kind": "programproof",
+          "side": "root",
+          "field": "set",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_M2_expanded",
+          "kind": "programproof",
+          "side": "root",
+          "field": "expanded",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3_pending",
+          "kind": "signal_pair",
+          "side": "sender",
+          "state": "pending",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3_unknown",
+          "kind": "signal_pair",
+          "side": "sender",
+          "state": "unknown",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3_unknown_none",
+          "kind": "signal_pair",
+          "side": "sender",
+          "state": "unknown_none",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3_pending",
+          "kind": "signal_pair",
+          "side": "root",
+          "state": "pending",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3_unknown",
+          "kind": "signal_pair",
+          "side": "root",
+          "state": "unknown",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3_unknown_none",
+          "kind": "signal_pair",
+          "side": "root",
+          "state": "unknown_none",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "actual_emit_signal",
+          "kind": "emit",
+          "scenario": "signal",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "actual_emit_count",
+          "kind": "emit",
+          "scenario": "count",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "actual_emit_set",
+          "kind": "emit",
+          "scenario": "set",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "actual_emit_expanded",
+          "kind": "emit",
+          "scenario": "expanded",
+          "before": "failed",
+          "fixed": "passed"
+        },
+        {
+          "id": "actual_emit_absent",
+          "kind": "emit",
+          "scenario": "absent",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "actual_emit_invalid",
+          "kind": "emit",
+          "scenario": "invalid",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "actual_emit_valid",
+          "kind": "emit",
+          "scenario": "valid",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_historical_actual_accepted",
+          "kind": "historical",
+          "side": "sender",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_historical_actual_accepted",
+          "kind": "historical",
+          "side": "root",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3_positive_closed",
+          "kind": "signal_positive",
+          "side": "sender",
+          "state": "closed",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3_positive_hold",
+          "kind": "signal_positive",
+          "side": "sender",
+          "state": "hold",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "sender_I3_positive_unknown",
+          "kind": "signal_positive",
+          "side": "sender",
+          "state": "unknown",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3_positive_closed",
+          "kind": "signal_positive",
+          "side": "root",
+          "state": "closed",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3_positive_hold",
+          "kind": "signal_positive",
+          "side": "root",
+          "state": "hold",
+          "before": "passed",
+          "fixed": "passed"
+        },
+        {
+          "id": "root_I3_positive_unknown",
+          "kind": "signal_positive",
+          "side": "root",
+          "state": "unknown",
+          "before": "passed",
+          "fixed": "passed"
+        }
+      ],
+      "expected": {
+        "before": {
+          "tests": 59,
+          "passed": 20,
+          "failed": 39
+        },
+        "fixed": {
+          "tests": 59,
+          "passed": 59,
+          "failed": 0
+        }
+      },
+      "additional": {
+        "productionC1C6": 6,
+        "helperCases": 3,
+        "boundsFixedPositive": true,
+        "boundsFixedNegative": true,
+        "guardRemovalMutantKilled": true
+      }
+    },
+    "additionalExpected": {
+      "actualC1C6": {
+        "passed": true,
+        "groups": 6,
+        "realTinyIntentionalFailures": 6
+      },
+      "sharedHelper": {
+        "passed": true,
+        "cases": 3,
+        "aliasesCleared": true,
+        "outcomesPreserved": true,
+        "afterFlagsCleared": true
+      },
+      "fixedBoundary": {
+        "positive1024Mapped": true,
+        "negative1025Unknown": true
+      },
+      "mutant": {
+        "exit": 1,
+        "positive1024Mapped": true,
+        "negative1025Unknown": false,
+        "killed": true
+      },
+      "historicalActualAccepted": true
+    },
+    "allExecutionResultsCurrentlyUnknown": true,
+    "fixtureScope": "Bindings with count18 and trusted digests are generated from verified outer loader metadata for isolated fixture subprocesses. Their synthetic started/terminal fields do not claim a Native invocation.",
+    "callInventory": [
+      "Node loader: JSON/hash/gzip/Git/working-file checks, materialization and readback only",
+      "Node qualify: before/fixed private validator regression suite; actual emitter subprocesses",
+      "Fixed private production C1-C6 controls: Node tiny tests/private dual reporters and qualified accessor mode only",
+      "Actual fixed shared-helper probe through sender and exact Root receiver",
+      "Actual fixed sourceSite helper boundary probe and one guard-removal mutant probe",
+      "One finite closed controls-only emitter"
+    ],
+    "neverInvoked": [
+      "npm",
+      "pure checks",
+      "profile generation",
+      "Native/World",
+      "SDK",
+      "Miniflare",
+      "business tests",
+      "positive/full16/LiveEntry",
+      "Cloudflare",
+      "keys or private artifacts"
+    ],
+    "noTimerOrDeadlineAdded": true,
+    "independentRootQualificationReceiver": "266ba951b4e77321fbcb89756e7aad183faf1447",
+    "rootPreRunGate": {
+      "basis": "Root message before any execution",
+      "status": "No findings so far; final report/readback pending",
+      "dataRecomputed": "candidate/fulltree/F7/loader/4productiondiffs/SAME996063+900137prefix/gzip59999/expanded313559/all49pins/production18before+fixed/exactRootbody518",
+      "receiverCheck": "Root own synthetic complete accepted and18 contradictions rejected; not a Source execution or qualification result"
+    }
+  },
+  "selfReview": {
+    "preparationOnly": "All Source code treated as DATA. No imports/eval/syntax/tests/dependencies/build/Source execution on PC or cloud. Only installed Node builtin crypto/zlib for RAM data calculations and GitHub GitDB reads/unattached writes.",
+    "checks": [
+      "one aggregate candidate direct-child673948, full900137prefix and3200Core exact",
+      "Source/Main refs unchanged and candidate unattached; exact Root receiver body preserved",
+      "exact production18 distinct control49; all49 text blobs plus F7/SAME/manifests/loader/payload read back",
+      "program diffs exactly4 and numeric projector/map/schema/World/Native/runtime unchanged",
+      "actual helper used by main+controls, clears3after flags and aliases with no late restoration",
+      "old/fixed validator vectors discriminate13oldaccepted Root negatives and preserve3oldrejected gates; both wrappers/firstFailure/counts consistent",
+      "actual emitter branches execute under private subroots with independently generated bindings",
+      "valid1024/1025 grammar and production guard-removal mutant, positive retained",
+      "trusted18/set/expanded context from binding; no selfhash cycle",
+      "controls-only call graph: no install/pure/profile/Native/SDK/World/business invocation",
+      "false guard, exact message/ref/repo/attempt1, Node22.23.4/Ubuntu24.04/job7min; runs<21000, closed output<=16KiB"
+    ],
+    "limits": [
+      "No qualification has run. BEFORE39FAIL/20PASS and FIXED59PASS are precisely expected, not observed.",
+      "Corrected production main/preflight are unexecuted DATA in this controls-only unit; no future Native release is included.",
+      "The consumed R3 deadline location remains valid; its underlying business cause is not repaired or explained."
+    ]
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "closure": [
+    "Root independent inactive DATA gate: source/tree/fullprefix/manifests/digests/Rootreceiver/matrix, fresh leases/head0/fiveactive0",
+    "Root alone may release ONE controls-only exact-message push/attempt1; no Native authority",
+    "Observe terminal and independently validate one bounded controls record against actual source/tree/run/job/expected counts/program digests/production18/Rootreceiver/mutant facts/flags",
+    "Only after terminal restore original F7f7a71, append actual while retaining ENTIRE996063-byte proposal prefix, read full tree/prefix/Core/Main back",
+    "One scoped final-fix review, no new whole-unit loop; no Native/business replay"
+  ],
+  "performed": {
+    "sourceReadAsData": true,
+    "ramHashJSONCompression": true,
+    "unattachedGitObjectsWritten": true,
+    "sourceExecuted": false,
+    "syntaxChecks": false,
+    "tests": false,
+    "dependencyInstall": false,
+    "builds": false,
+    "refsWritten": false,
+    "workflowDispatch": false,
+    "privateArtifactsRead": false,
+    "keysRead": false,
+    "cloudflareActions": false,
+    "localSourceFiles": false
+  }
+}
