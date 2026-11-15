@@ -1,0 +1,66 @@
+{
+  "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+  "ctx": {
+    "source": "1111111111111111111111111111111111111111",
+    "sourceTree": "2222222222222222222222222222222222222222",
+    "run": "900000003",
+    "attempt": 1,
+    "job": "readonly",
+    "node": "22.23.4",
+    "jobId": 900001
+  },
+  "evidence": {
+    "run": {
+      "id": 900000003,
+      "head_sha": "1111111111111111111111111111111111111111",
+      "run_attempt": 1,
+      "event": "push",
+      "path": ".github/workflows/afw-finite-budget-qualification.yml",
+      "head_branch": "feat/finite-native-cleanup-20261101",
+      "status": "completed",
+      "conclusion": "success",
+      "repository": {
+        "id": 1347578006,
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      }
+    },
+    "commit": {
+      "sha": "1111111111111111111111111111111111111111",
+      "tree": {
+        "sha": "2222222222222222222222222222222222222222"
+      },
+      "message": "AFW-MA1-READER-OWNER-UNIT-ONEUSE-20261115"
+    },
+    "jobs": [
+      {
+        "id": 900001,
+        "run_id": 900000003,
+        "name": "readonly",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "number": 4,
+            "name": "Check fixed MA1 reader controls",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "number": 5,
+            "name": "Check stable MA1 leaf owner control",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "existingFrames": [
+      "MA1_READER_CONTROLS/1 passed=40\n"
+    ],
+    "existingFrameStepNumber": 4,
+    "targetedFrames": [
+      "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    ],
+    "targetedFrameStepNumber": 5
+  }
+}

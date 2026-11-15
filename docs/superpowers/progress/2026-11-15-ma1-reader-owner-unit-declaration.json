@@ -1,0 +1,63 @@
+{
+  "purpose": "afw.ma1.reader-owner-unit.declaration.v1",
+  "status": "PLANNED contract only; actual GitHub tests PENDING Root OWN receiver",
+  "brief": "a8948f93e03abeb7f4be2a118c0b640dbb178860",
+  "originalSource": {
+    "commit": "558bb4d6ea6723a911e59ce99ca1b5ed8f8c1ac2",
+    "tree": "3af15824bce789cd16994c751c7001dae4002702",
+    "state": "CLOSED"
+  },
+  "unchanged": {
+    "reader": {
+      "blob": "797cf2fe3a486d5e52fcc5bdeb09f41b5fc238fd",
+      "bytes": 6618,
+      "sha256": "30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165"
+    },
+    "existing40": {
+      "blob": "3482dd347bb95abfdf681485505197cce1a6f978",
+      "bytes": 13993,
+      "sha256": "8fe3ee13bb3ff4b782e1118c99e43ff5cf8d138f4fe930f2c57f76be02d2ae97"
+    },
+    "driver": "6a35f482807f3aa16d6fd5b2274adc70bd023038",
+    "normalRaw": "3645fe39cf4b9f6f725669f9384ba0c73086c227",
+    "normalControls": "4ae3dd79c6796915877741d83db8f388f333d841",
+    "kernel": "765573c5eeaf83add464e94a8240dcd7a90786d0",
+    "wholeSame": {
+      "blob": "1953b4b731832ae84c09dc6a5e50f15272046ff6",
+      "bytes": 2509354,
+      "sha256": "f543226e200d3ec9f38ee006c731cb36d2ee291e97db7705ee984b3926c284f0"
+    }
+  },
+  "unitMutant": {
+    "application": "in-memory unit-only declaration, NOT a production Source proposal",
+    "fixedUniqueDeletion": " and s.st_uid==os.getuid()",
+    "occurrences": 1,
+    "deletedBytes": 26,
+    "resultBytes": 6592,
+    "resultSha256": "ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d",
+    "allOtherReaderBytesExact": true,
+    "onlyTarget": "leaf() initial stat/owner need predicate"
+  },
+  "workflowPlan": {
+    "oldStep": "Check fixed MA1 reader controls",
+    "targetedStep": "Check stable MA1 leaf owner control",
+    "job": "readonly",
+    "node": "22.23.4",
+    "jobMinutes": 7,
+    "targetedStepMinutes": 1,
+    "oneUse": "AFW-MA1-READER-OWNER-UNIT-ONEUSE-20261115",
+    "section": "AFW-MA1-READER-OWNER-UNIT-DATA-V1",
+    "normal104Allowed": false,
+    "normalObserverReaderAllowed": false,
+    "sourceCandidateAllowedNow": false
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

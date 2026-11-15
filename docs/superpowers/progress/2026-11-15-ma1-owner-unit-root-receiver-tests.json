@@ -1,0 +1,165 @@
+{
+  "positiveGrammar": [
+    {
+      "name": "complete_causal_coverage",
+      "accepted": true,
+      "unitPassed": false
+    },
+    {
+      "name": "neutral_harness_unavailable",
+      "accepted": true,
+      "unitPassed": false
+    }
+  ],
+  "positiveJoint": true,
+  "grammarNegative": [
+    {
+      "name": "wrong_mutant_hash",
+      "rejected": true
+    },
+    {
+      "name": "wrong_original_hash",
+      "rejected": true
+    },
+    {
+      "name": "missing_native_positive",
+      "rejected": true
+    },
+    {
+      "name": "wrong_owner_not_rejected",
+      "rejected": true
+    },
+    {
+      "name": "mutant_other_exception_is_not_red",
+      "rejected": true
+    },
+    {
+      "name": "mutant_failure_without_exact_return",
+      "rejected": true
+    },
+    {
+      "name": "mutant_control_passed",
+      "rejected": true
+    },
+    {
+      "name": "identity_not_coherent",
+      "rejected": true
+    },
+    {
+      "name": "partial_context",
+      "rejected": true
+    },
+    {
+      "name": "boolean_attempt",
+      "rejected": true
+    },
+    {
+      "name": "leading_whitespace",
+      "rejected": true
+    },
+    {
+      "name": "duplicate_source",
+      "rejected": true
+    },
+    {
+      "name": "trailing_frame",
+      "rejected": true
+    },
+    {
+      "name": "noncanonical_space",
+      "rejected": true
+    },
+    {
+      "name": "extra_key",
+      "rejected": true
+    },
+    {
+      "name": "nonclaim_true",
+      "rejected": true
+    }
+  ],
+  "joinNegative": [
+    {
+      "name": "jobID",
+      "rejected": true
+    },
+    {
+      "name": "runfail",
+      "rejected": true
+    },
+    {
+      "name": "wrongSource",
+      "rejected": true
+    },
+    {
+      "name": "wrongTree",
+      "rejected": true
+    },
+    {
+      "name": "wrongOneUse",
+      "rejected": true
+    },
+    {
+      "name": "wrongRepo",
+      "rejected": true
+    },
+    {
+      "name": "wrongBranch",
+      "rejected": true
+    },
+    {
+      "name": "attempt2",
+      "rejected": true
+    },
+    {
+      "name": "wrongWorkflow",
+      "rejected": true
+    },
+    {
+      "name": "twoJobs",
+      "rejected": true
+    },
+    {
+      "name": "pendingJob",
+      "rejected": true
+    },
+    {
+      "name": "old40fail",
+      "rejected": true
+    },
+    {
+      "name": "targetFail",
+      "rejected": true
+    },
+    {
+      "name": "targetBefore40",
+      "rejected": true
+    },
+    {
+      "name": "targetMissing",
+      "rejected": true
+    },
+    {
+      "name": "duplicateTarget",
+      "rejected": true
+    },
+    {
+      "name": "full104Forbidden",
+      "rejected": true
+    },
+    {
+      "name": "old40FrameWrong",
+      "rejected": true
+    },
+    {
+      "name": "duplicateFrame",
+      "rejected": true
+    },
+    {
+      "name": "wrongStepProvenance",
+      "rejected": true
+    }
+  ],
+  "SourceExecuted": false,
+  "actualUnit": false
+}

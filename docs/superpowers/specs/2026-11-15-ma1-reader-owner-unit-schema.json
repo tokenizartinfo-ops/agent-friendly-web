@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "afw.ma1.reader-owner-unit.schema.v1",
+  "description": "Shape only; canonical bytes/order/framing/Root joins normative in contract. No coercion.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "source",
+        "sourceTree",
+        "run",
+        "attempt",
+        "job",
+        "node",
+        "readerSha256",
+        "mutantSha256",
+        "normalOwner",
+        "stableWrongOwner",
+        "deletedOwnerGuard",
+        "targetedMutantControl",
+        "identityContinuity",
+        "nonclaims"
+      ],
+      "properties": {
+        "purpose": {
+          "const": "afw.ma1.reader-owner-unit.v1"
+        },
+        "source": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "sourceTree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "run": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$"
+        },
+        "attempt": {
+          "type": "integer",
+          "const": 1
+        },
+        "job": {
+          "const": "readonly"
+        },
+        "node": {
+          "const": "22.23.4"
+        },
+        "readerSha256": {
+          "const": "30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165"
+        },
+        "mutantSha256": {
+          "const": "ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d"
+        },
+        "normalOwner": {
+          "const": "returned_fixture"
+        },
+        "stableWrongOwner": {
+          "const": "rejected"
+        },
+        "deletedOwnerGuard": {
+          "const": "returned_fixture"
+        },
+        "targetedMutantControl": {
+          "const": "failed"
+        },
+        "identityContinuity": {
+          "const": "coherent"
+        },
+        "nonclaims": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "historicalCauseProven",
+            "receiptAuthenticated",
+            "operationalReadiness",
+            "completePackage",
+            "PCoff",
+            "globalNativeDrainVerified",
+            "sdkNamespaceEmptyVerified"
+          ],
+          "properties": {
+            "historicalCauseProven": {
+              "const": false
+            },
+            "receiptAuthenticated": {
+              "const": false
+            },
+            "operationalReadiness": {
+              "const": false
+            },
+            "completePackage": {
+              "const": false
+            },
+            "PCoff": {
+              "const": false
+            },
+            "globalNativeDrainVerified": {
+              "const": false
+            },
+            "sdkNamespaceEmptyVerified": {
+              "const": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "source",
+        "sourceTree",
+        "run",
+        "attempt",
+        "job",
+        "node",
+        "readerSha256",
+        "mutantSha256",
+        "normalOwner",
+        "stableWrongOwner",
+        "deletedOwnerGuard",
+        "targetedMutantControl",
+        "identityContinuity",
+        "nonclaims"
+      ],
+      "properties": {
+        "purpose": {
+          "const": "afw.ma1.reader-owner-unit.v1"
+        },
+        "source": {
+          "const": "unknown"
+        },
+        "sourceTree": {
+          "const": "unknown"
+        },
+        "run": {
+          "const": "unknown"
+        },
+        "attempt": {
+          "const": "unknown"
+        },
+        "job": {
+          "const": "unknown"
+        },
+        "node": {
+          "const": "unknown"
+        },
+        "readerSha256": {
+          "const": "unknown"
+        },
+        "mutantSha256": {
+          "const": "unknown"
+        },
+        "normalOwner": {
+          "const": "unknown"
+        },
+        "stableWrongOwner": {
+          "const": "unknown"
+        },
+        "deletedOwnerGuard": {
+          "const": "unknown"
+        },
+        "targetedMutantControl": {
+          "const": "unknown"
+        },
+        "identityContinuity": {
+          "const": "unknown"
+        },
+        "nonclaims": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "historicalCauseProven",
+            "receiptAuthenticated",
+            "operationalReadiness",
+            "completePackage",
+            "PCoff",
+            "globalNativeDrainVerified",
+            "sdkNamespaceEmptyVerified"
+          ],
+          "properties": {
+            "historicalCauseProven": {
+              "const": false
+            },
+            "receiptAuthenticated": {
+              "const": false
+            },
+            "operationalReadiness": {
+              "const": false
+            },
+            "completePackage": {
+              "const": false
+            },
+            "PCoff": {
+              "const": false
+            },
+            "globalNativeDrainVerified": {
+              "const": false
+            },
+            "sdkNamespaceEmptyVerified": {
+              "const": false
+            }
+          }
+        }
+      }
+    }
+  ]
+}

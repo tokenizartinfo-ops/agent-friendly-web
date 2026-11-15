@@ -1,0 +1,132 @@
+{
+  "purpose": "afw.ma1.reader-owner-unit.examples.v1",
+  "valid": [
+    {
+      "name": "complete_causal_coverage",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "expected": "contextual grammar positive; coverage eligibility requires Root independent same-job join"
+    },
+    {
+      "name": "neutral_harness_unavailable",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"unknown\",\"sourceTree\":\"unknown\",\"run\":\"unknown\",\"attempt\":\"unknown\",\"job\":\"unknown\",\"node\":\"unknown\",\"readerSha256\":\"unknown\",\"mutantSha256\":\"unknown\",\"normalOwner\":\"unknown\",\"stableWrongOwner\":\"unknown\",\"deletedOwnerGuard\":\"unknown\",\"targetedMutantControl\":\"unknown\",\"identityContinuity\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "expected": "UNAVAILABLE, never RED or coverage"
+    }
+  ],
+  "invalidGrammar": [
+    {
+      "name": "wrong_mutant_hash",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "wrong_original_hash",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "missing_native_positive",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"unknown\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "wrong_owner_not_rejected",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"returned_fixture\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "mutant_other_exception_is_not_red",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"exception\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "mutant_failure_without_exact_return",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"unknown\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "mutant_control_passed",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"passed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "identity_not_coherent",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "partial_context",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"unknown\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "boolean_attempt",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":true,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "leading_whitespace",
+      "wire": " AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "duplicate_source",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"3333333333333333333333333333333333333333\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "trailing_frame",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\nAFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "noncanonical_space",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 { \"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    {
+      "name": "extra_key",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false},\"qualified\":true}\n"
+    },
+    {
+      "name": "nonclaim_true",
+      "wire": "AFW_MA1_READER_OWNER_UNIT/1 {\"purpose\":\"afw.ma1.reader-owner-unit.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"900000003\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"readerSha256\":\"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165\",\"mutantSha256\":\"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d\",\"normalOwner\":\"returned_fixture\",\"stableWrongOwner\":\"rejected\",\"deletedOwnerGuard\":\"returned_fixture\",\"targetedMutantControl\":\"failed\",\"identityContinuity\":\"coherent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":true,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    }
+  ],
+  "invalidJoinOrHarness": [
+    {
+      "name": "different_run_attempt_source_tree_job_or_step",
+      "reason": "Reject against independent Root API/context; no marker substring harvesting"
+    },
+    {
+      "name": "old40_missing_or_failed",
+      "reason": "No eligible positive without unique preceding success at exact old step"
+    },
+    {
+      "name": "newstep_not_success",
+      "reason": "Neutral/no measurement or failed targeted step is not coverage/RED"
+    },
+    {
+      "name": "unexpected_oserror_or_typeerror",
+      "reason": "Harness unavailability; no expected mutant rejection failure may be inferred"
+    },
+    {
+      "name": "unit_mutant_changes_another_byte",
+      "reason": "Root independent fixed-source diff must show deletion26B only"
+    },
+    {
+      "name": "production_reader_changed",
+      "reason": "Read-only leaf fix concerns tests; original production reader must stay6618B/hash exact"
+    },
+    {
+      "name": "existing40_changed",
+      "reason": "Keep exact13993B reader+driver artifact, no fix of deferred M1"
+    },
+    {
+      "name": "normal104_or_normal_reader_invoked",
+      "reason": "Outside this pure covering unit occurrence"
+    },
+    {
+      "name": "duplicate_unit_frames",
+      "reason": "No picking a winner; reject"
+    },
+    {
+      "name": "raw_fixture_or_exception_output",
+      "reason": "Outside closed transport; no acceptance from arbitrary output"
+    }
+  ],
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
