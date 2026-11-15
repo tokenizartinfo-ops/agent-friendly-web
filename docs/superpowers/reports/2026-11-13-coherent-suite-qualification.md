@@ -19960,3 +19960,82 @@ Stable wrong-owner coverage only; prior408/gate observation is not repeated. Pro
 <!-- AFW-MA1-READER-OWNER-UNIT-DATA-V1:BEGIN -->
 {"purpose":"afw.ma1.reader-owner-unit.inactive-data.v1","section":"AFW-MA1-READER-OWNER-UNIT-DATA-V1","brief":"a8948f93e03abeb7f4be2a118c0b640dbb178860","contract":"700d9e481735f0884d68e323f0f4fc8f2b90063f","declaration":"ece684e728c11dcc8cb1efe29d16d9eb8d6dfe35","RootReceiver":"ba6dbd14d5ca778661d00be7f408757855a3f71c","derivationCurrent":"558bb4d6ea6723a911e59ce99ca1b5ed8f8c1ac2","originalReader":{"bytes":6618,"sha256":"30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165","blob":"797cf2fe3a486d5e52fcc5bdeb09f41b5fc238fd"},"old40":{"bytes":13993,"sha256":"8fe3ee13bb3ff4b782e1118c99e43ff5cf8d138f4fe930f2c57f76be02d2ae97","blob":"3482dd347bb95abfdf681485505197cce1a6f978"},"targetedDriver":{"bytes":13346,"sha256":"db9e5c2aef71e969cb5fe2877b8eca530f8e2429ac86379b2135b2500c720a0b","blob":"df36ca28e3979dda9faeef572d086cd80bcf1fb4"},"targetedProgram":{"bytes":19964,"sha256":"b07c2e6f9fd24b6e307a496cf1e817f4a8f1947057102570ab9eb3859fcc61fe","blob":"3e544a0df352bb3ea5777104232db8d8a6cbbf0a"},"unitOnlyMutant":{"bytes":6592,"sha256":"ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d","blob":"bc607e4853f3b2ebd625af17b80e8b5561829c51"},"mutation":{"fixedDeletion":" and s.st_uid==os.getuid()","occurrences":1,"bytesDeleted":26,"allOtherSourceBytesExact":true},"state":{"application":"inactive immutable DATA proposal","actualGitHubTests":"PENDING Root","normal104Invoked":false,"normalObserverInvoked":false,"unitControlsPassed":false,"NativeReleased":false},"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}}
 <!-- AFW-MA1-READER-OWNER-UNIT-DATA-V1:END -->
+
+
+## Root actual MA1 owner-unit fix1 — consumed, covering evidence only
+
+Run43748948427/1/job132918389520 SUCCESS; existing40 andtargetedownerstepsSUCCESS. Rootba6dbd14 exactframe/APIjoin accepted causalunit:normalownerexactreturn, coherentwrongownerrejected,soleguarddeletionmutantreturnsfixture/SAMErejectcontrolfalse. ActualSourceonlyunit, nofull104/MA1observation/Native/runtime/PCoff. This fixes coverage, not I3qualification. Fullreceipt:
+```json
+{
+  "purpose": "afw.root.ma1.owner-unit.actual-receipt.v1",
+  "at": "2026-11-15 18:51:00 UTC",
+  "source": "022c5c66e94b6f7c4fc359aab74043a438bee4d0",
+  "sourceTree": "599dcaedfd1f63e8ec202b5ba9933652576d99d2",
+  "run": 43748948427,
+  "attempt": 1,
+  "job": 132918389520,
+  "jobName": "readonly",
+  "node": "22.23.4",
+  "runConclusion": "success",
+  "jobConclusion": "success",
+  "steps": [
+    {
+      "name": "Check fixed MA1 reader controls",
+      "number": 4,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Check stable MA1 leaf owner control",
+      "number": 5,
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "RootOwn": "ba6dbd14d5ca778661d00be7f408757855a3f71c",
+  "old40Actual": "MA1_READER_CONTROLS/1 passed=40",
+  "acceptance": {
+    "accepted": true,
+    "contextObserved": true,
+    "unitControlsPassed": true,
+    "qualified": false,
+    "NativeReleased": false,
+    "operationalReadiness": false,
+    "record": {
+      "purpose": "afw.ma1.reader-owner-unit.v1",
+      "source": "022c5c66e94b6f7c4fc359aab74043a438bee4d0",
+      "sourceTree": "599dcaedfd1f63e8ec202b5ba9933652576d99d2",
+      "run": "43748948427",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "readerSha256": "30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165",
+      "mutantSha256": "ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d",
+      "normalOwner": "returned_fixture",
+      "stableWrongOwner": "rejected",
+      "deletedOwnerGuard": "returned_fixture",
+      "targetedMutantControl": "failed",
+      "identityContinuity": "coherent",
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  },
+  "scope": "Actual fixedreaderleaf unit only. Native-owner exact-byte positive; original owner guard rejects coherent wrongUID; ONLY26B deletion mutant returns exactfixturebytes causing same rejectioncontrol false. No realchown/productionguardchange. HarnessnotRED; all run/job/stepsSUCCESS. No repeatednormal104/MA1observation/OriginalCLI/Native/runtime.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
+```
