@@ -1,18 +1,22 @@
 name: AFW finite budget qualification
-run-name: AFW R3 existing-sample finalfix controls HELD ${{ github.sha }}
+run-name: AFW R3 existing-sample finalfix controls ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
+    paths:
+      - .github/workflows/afw-finite-budget-qualification.yml
 permissions:
   contents: read
   actions: read
 concurrency:
   group: afw-finite-budget-qualification
   cancel-in-progress: false
-# PREPARATION ONLY. Every job remains literally false pending Root review.
-# PREPARATION ONLY: all seven job gates remain false until separate Root release.
+# ONE-USE Root-gated finalfix controls only; all six Native jobs remain false.
+# Source freezes until terminal; restore exact original F7 after independent readback.
 jobs:
   contracts:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'AFW-R3-EXISTING-SAMPLE-FINALFIX-CONTROLS-ONEUSE-20261115' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
@@ -23,6 +27,9 @@ jobs:
           test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
           test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
           test "$GITHUB_RUN_ATTEMPT" = 1
+          test "$GITHUB_REPOSITORY_ID" = 1347578006
+          test "$GITHUB_JOB" = contracts
+          test "$GITHUB_EVENT_NAME" = push
           test -z "${AFW_SYN_CHECKPOINT_KEY+x}"
           test -z "${AFW_BUDGET_GROUP+x}"
           test -z "${NODE_OPTIONS+x}"
@@ -51,13 +58,13 @@ jobs:
           import {gunzipSync} from 'node:zlib';
           import {execFileSync} from 'node:child_process';
           const e=process.env,hash=b=>createHash('sha256').update(b).digest('hex'),blob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex'),expected={"count":49,"setSha256":"f6b3ccd833d7fecac8581f9228356b64895e97b76acc1a790d62f0a9beb2da2c","expandedBytes":401340,"expandedSha256":"cff76bae7a6531606f5164b77aa553af8b7969b98666cb2884dd4d00b41dffc8","compressedBytes":75623,"compressedSha256":"4423eee87c5cb102cb01cece260c9118c1afde0f4c83a03218ee49b2eda38af3"};
-          assert.equal(process.versions.node,'22.23.4');assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_JOB,'contracts');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(e.AFW_SYN_CHECKPOINT_KEY,undefined);assert.equal(e.AFW_BUDGET_GROUP,undefined);
+          assert.equal(process.versions.node,'22.23.4');assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_JOB,'contracts');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(e.GITHUB_EVENT_NAME,'push');assert.equal(e.GITHUB_REPOSITORY_ID,'1347578006');assert.equal(e.GITHUB_WORKFLOW_REF,'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.AFW_SYN_CHECKPOINT_KEY,undefined);assert.equal(e.AFW_BUDGET_GROUP,undefined);
           const reportPath='docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md',report=readFileSync(reportPath),prefix=report.subarray(0,1107467);assert.equal(prefix.length,1107467);assert.equal(hash(prefix),'0e67869bc1fa00f2262c92b45ad1649e17b77fa72956dc2748e87c58de12c08b');
           const marker='AFW-R3-EXISTING-SAMPLE-FINALFIX-PAYLOAD-V1',text=report.toString('utf8'),begin='<!-- '+marker+':BEGIN -->',end='<!-- '+marker+':END -->';assert.equal(text.split(begin).length,2);assert.equal(text.split(end).length,2);
           const encoded=text.split(begin)[1].split(end)[0].replace(/\s/g,'');assert(/^[A-Za-z0-9+/]+={0,2}$/.test(encoded));const compressed=Buffer.from(encoded,'base64');assert.equal(compressed.toString('base64'),encoded);assert(compressed.length<=131072);assert.equal(hash(compressed),expected.compressedSha256);const raw=gunzipSync(compressed,{maxOutputLength:1048576});assert.equal(raw.length,expected.expandedBytes);assert.equal(hash(raw),expected.expandedSha256);const p=JSON.parse(raw.toString('utf8'));assert.equal(raw.toString('utf8'),JSON.stringify(p)+'\n');assert.equal(p.purpose,'afw.r3-existing-sample.finalfix.controls-payload.v1');assert.equal(p.sourceBase,'8b1e2f364608ebef7727ebcb51a47d171410ce8e');assert.equal(p.preparationParent,'cfa6c0edf1725767f57933b9155f8fbf01e0e78f');assert.equal(p.preparationParentTree,'918e2f141ce50c04f8ff7284133a74097be8f605');assert.equal(Object.keys(p.programs).length,expected.count);
           const pins={};for(const[name,record]of Object.entries(p.programs)){assert(/^(?:[a-z0-9-]+\/)*[a-z0-9.-]+\.(?:mjs|js|json)$/.test(name)&&!name.includes('..'));const b=Buffer.from(record.content);assert.equal(b.length,record.bytes);assert.equal(hash(b),record.sha256);assert.equal(blob(b),record.blob);pins[name]={bytes:record.bytes,sha256:record.sha256,blob:record.blob};}assert.equal(hash(JSON.stringify(pins)+'\n'),expected.setSha256);
           const production={};for(const[name,pin]of Object.entries(p.production.pins)){const record=p.programs['fixed/afw-site/'+name];assert.deepEqual({bytes:record.bytes,sha256:record.sha256,blob:record.blob},pin);production[name]=record;}assert.equal(Object.keys(production).length,18);assert.equal(hash(JSON.stringify(p.production.pins)+'\n'),p.production.programSetSha256);assert.equal(hash(JSON.stringify({...p.production.header,programs:production})+'\n'),p.production.expandedSha256);
-          const git=(...args)=>execFileSync('git',args,{encoding:'utf8'}).trim();assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);const sourceTree=git('rev-parse','HEAD^{tree}'),treeRaw=execFileSync('git',['ls-tree','-rz','--full-tree','HEAD']),rows=treeRaw.toString('utf8').split('\0').filter(Boolean).map(s=>{const i=s.indexOf('\t');return{tuple:s.slice(0,i),path:s.slice(i+1)};}).filter(x=>!['.github/workflows/afw-finite-budget-qualification.yml',reportPath].includes(x.path)).sort((a,b)=>Buffer.compare(Buffer.from(a.path),Buffer.from(b.path))),core=Buffer.from(rows.map(x=>x.tuple+'\t'+x.path+'\0').join(''));assert.equal(rows.length,p.core.count);assert.equal(core.length,p.core.bytes);assert.equal(hash(core),p.core.sha256);
+          const git=(...args)=>execFileSync('git',args,{encoding:'utf8'}).trim();assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);assert.equal(git('log','-1','--format=%B'),'AFW-R3-EXISTING-SAMPLE-FINALFIX-CONTROLS-ONEUSE-20261115');const sourceTree=git('rev-parse','HEAD^{tree}'),treeRaw=execFileSync('git',['ls-tree','-rz','--full-tree','HEAD']),rows=treeRaw.toString('utf8').split('\0').filter(Boolean).map(s=>{const i=s.indexOf('\t');return{tuple:s.slice(0,i),path:s.slice(i+1)};}).filter(x=>!['.github/workflows/afw-finite-budget-qualification.yml',reportPath].includes(x.path)).sort((a,b)=>Buffer.compare(Buffer.from(a.path),Buffer.from(b.path))),core=Buffer.from(rows.map(x=>x.tuple+'\t'+x.path+'\0').join(''));assert.equal(rows.length,p.core.count);assert.equal(core.length,p.core.bytes);assert.equal(hash(core),p.core.sha256);
           for(const[path,pin]of Object.entries(p.sourcePins)){const b=readFileSync(path);assert.equal(b.length,pin.bytes);assert.equal(hash(b),pin.sha256);assert.equal(blob(b),pin.blob);assert.equal(git('rev-parse','HEAD:'+path),pin.blob);}
           const proof=JSON.parse(p.programs['source-proof.json'].content),world=readFileSync('test/fixtures/finite-budget-world.mjs','utf8'),fixture=readFileSync('test/fixtures/finite-owner-cleanup.mjs','utf8');
           assert(world.endsWith(proof.worldAppend));let inverse=world.slice(0,-proof.worldAppend.length),lines=inverse.split('\n');for(const edit of proof.worldEdits){assert.equal(lines[edit.line-1],edit.after);lines[edit.line-1]=edit.before;}inverse=lines.join('\n');assert.equal(blob(Buffer.from(inverse)),proof.worldBefore.blob);assert.equal(hash(inverse),proof.worldBefore.sha256);
