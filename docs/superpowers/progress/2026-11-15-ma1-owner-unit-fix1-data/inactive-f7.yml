@@ -1,0 +1,557 @@
+name: AFW MA1 stable leaf owner unit
+run-name: AFW MA1 stable leaf owner unit ONEUSE ${{ github.sha }}
+on:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
+    paths:
+      - .github/workflows/afw-finite-budget-qualification.yml
+permissions:
+  contents: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+# Inactive DATA proposal: existing40 + targeted owner unit only.
+# No normal104, normal MA1 observer, Native or original CLI.
+jobs:
+  readonly:
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        id: checkout
+        with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        id: node
+        with:
+          node-version: '22.23.4'
+      - name: Check fixed MA1 reader controls
+        id: ma1_unit
+        if: always() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success'
+        timeout-minutes: 1
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          exec 2>/dev/null
+          /usr/bin/python3 -I -S - <<'AFW_MA1_READER_CONTROLS'
+          # MA1 fixed reader: no Source invocation, network, file writes or caller path.
+          import os,sys,stat,json,re
+          KEYS=['purpose','source','sourceTree','run','attempt','job','node','matrixSha256','exceptionAt','phases','nonclaims']
+          NK=['historicalCauseProven','receiptAuthenticated','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified']
+          IDS=['baseline','M_RAW','M_PROVENANCE','M_OUTPUT','M_ASSOC']
+          MH='0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e'
+          CK=['purpose','source','sourceTree','run','attempt','job','node']
+          NEUTRAL={'purpose':'afw.ma1.admission.v1',**dict.fromkeys(KEYS[1:-1],'unknown'),'nonclaims':dict.fromkeys(NK,False)}
+          def need(v):
+           if not v:raise ValueError()
+          def encoded(v):return json.dumps(v,separators=(',',':'),ensure_ascii=True).encode('ascii')
+          def pairs(xs):
+           d={}
+           for k,v in xs:
+            need(k not in d);d[k]=v
+           return d
+          def canonical(b):
+           need(type(b) is bytes and all(32<=x<=126 for x in b))
+           v=json.loads(b.decode('ascii'),object_pairs_hook=pairs,parse_constant=lambda _:need(False))
+           need(encoded(v)==b);return v
+          def identity(s):return(s.st_dev,s.st_ino,s.st_mode,s.st_uid,s.st_nlink,s.st_size,s.st_mtime_ns,s.st_ctime_ns)
+          def directory(s):return(s.st_dev,s.st_ino,s.st_mode,s.st_uid,s.st_nlink)
+          def leaf(d,name):
+           cap={'context.json':2048,'ma1-admission.json':1003}[name]
+           before=os.stat(name,dir_fd=d,follow_symlinks=False)
+           f=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=d)
+           try:
+            s=os.fstat(f);need(identity(before)==identity(s) and stat.S_ISREG(s.st_mode) and s.st_uid==os.getuid() and s.st_nlink==1 and stat.S_IMODE(s.st_mode)==0o600 and 0<s.st_size<=cap)
+            b=b''
+            while len(b)<=cap:
+             part=os.read(f,cap+1-len(b))
+             if not part:break
+             b+=part
+            need(len(b)==s.st_size and len(b)<=cap and os.read(f,1)==b'')
+            need(identity(s)==identity(os.fstat(f))==identity(os.stat(name,dir_fd=d,follow_symlinks=False)))
+            return b,identity(s)
+           finally:os.close(f)
+          def private_open():
+           path=os.environ.get('RUNNER_TEMP','')
+           need(path.startswith('/') and path!='/' and len(path)<=4096 and '//' not in path and not path.endswith('/'))
+           parts=path[1:].split('/');need(len(parts)<=32 and all(p not in ('','.','..') for p in parts))
+           fds=[];links=[]
+           try:
+            fds.append(os.open('/',os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW))
+            root=os.fstat(fds[0]);need(root.st_uid==0 and not(root.st_mode&0o022))
+            for i,name in enumerate(parts+['afw-r3-delivery']):
+             parent=fds[-1];before=os.stat(name,dir_fd=parent,follow_symlinks=False)
+             child=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=parent);fds.append(child)
+             s=os.fstat(child);need(directory(before)==directory(s) and stat.S_ISDIR(s.st_mode) and s.st_uid in (0,os.getuid()) and not(s.st_mode&0o022))
+             if i>=len(parts)-1:need(s.st_uid==os.getuid())
+             if i==len(parts):need(stat.S_IMODE(s.st_mode)==0o700)
+             links.append((parent,name,child,directory(s)))
+            return fds,links
+           except BaseException:
+            for f in reversed(fds):os.close(f)
+            raise
+          def recheck(links):
+           for parent,name,child,prior in links:need(directory(os.fstat(child))==prior==directory(os.stat(name,dir_fd=parent,follow_symlinks=False)))
+          def measured(r,c):
+           need(type(r) is dict and list(r)==KEYS and r['purpose']=='afw.ma1.admission.v1')
+           need(type(r['nonclaims']) is dict and list(r['nonclaims'])==NK and all(r['nonclaims'][k] is False for k in NK))
+           if all(r[k]=='unknown' for k in KEYS[1:-1]):return NEUTRAL
+           need(all(type(r[k]) is type(c[k]) and r[k]==c[k] for k in CK[1:]) and r['matrixSha256']==MH)
+           need(r['exceptionAt'] in ['none','preflight']+IDS and type(r['phases']) is list and len(r['phases'])==5)
+           stopped=r['exceptionAt']=='preflight';inner=False;saw=stopped
+           for i,t in enumerate(r['phases']):
+            need(type(t) is list and len(t)==6 and t[0]==IDS[i] and t[1] in ['untouched','gate','entered'])
+            ident,state,a,u,b,done=t
+            need(type(a) is int and type(u) is int and 0<=u<=a<=104 and type(b) is bool and type(done) is bool)
+            ex=r['exceptionAt']==ident
+            if stopped:need(t==[ident,'untouched',0,0,False,False]);continue
+            need(state!='untouched' and (i!=0 or state=='entered'))
+            if inner:need(state=='gate')
+            if state=='gate':
+             need(i>0 and a==u==0 and not done and ((b and not ex) or (not b and ex)))
+             stopped=True;inner=False
+            else:
+             need(not inner)
+             if done:need(a==104 and not b)
+             if b:need(a<104 and not done)
+             if not b and not done:need(ex)
+             if i==0 and ex:need(not b and not done)
+             inner=b and not ex;stopped=ex
+            if ex:saw=True
+           need((r['exceptionAt']=='none' and not saw) or (r['exceptionAt']!='none' and saw))
+           return {k:r[k] for k in KEYS}
+          def context(c):
+           need(type(c) is dict and list(c)==CK and c['purpose']=='afw.r3-delivery.binding.v1')
+           need(type(c['source']) is str and re.fullmatch('[a-f0-9]{40}',c['source']) and type(c['sourceTree']) is str and re.fullmatch('[a-f0-9]{40}',c['sourceTree']))
+           need(type(c['run']) is str and re.fullmatch('[1-9][0-9]{0,19}',c['run']) and type(c['attempt']) is int and c['attempt']==1 and c['job']=='readonly' and c['node']=='22.23.4')
+           e=os.environ
+           expected={'GITHUB_REPOSITORY':'tokenizartinfo-ops/agent-friendly-web','GITHUB_REPOSITORY_ID':'1347578006','GITHUB_JOB':'readonly','GITHUB_RUN_ATTEMPT':'1','GITHUB_REF':'refs/heads/feat/finite-native-cleanup-20261101','GITHUB_EVENT_NAME':'push','GITHUB_WORKFLOW_REF':'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101','AFW_CHECKOUT_OUTCOME':'success','AFW_NODE_OUTCOME':'success','AFW_MA1_UNIT_OUTCOME':'success'}
+           need(all(e.get(k)==v for k,v in expected.items()) and e.get('GITHUB_SHA')==c['source'] and e.get('GITHUB_WORKFLOW_SHA')==c['source'] and e.get('GITHUB_RUN_ID')==c['run'])
+           return c
+          def observe():
+           fds=[];links=[]
+           try:
+            fds,links=private_open();d=fds[-1]
+            cb,cs=leaf(d,'context.json');rb,rs=leaf(d,'ma1-admission.json')
+            c=context(canonical(cb));r=measured(canonical(rb),c);recheck(links)
+            # Names stay tied to opened identities through validation; no second file read.
+            need(identity(os.stat('context.json',dir_fd=d,follow_symlinks=False))==cs and identity(os.stat('ma1-admission.json',dir_fd=d,follow_symlinks=False))==rs);recheck(links)
+            return r
+           except BaseException:return NEUTRAL
+           finally:
+            for f in reversed(fds):
+             try:os.close(f)
+             except BaseException:pass
+          def frame(r):
+           b=b'AFW_MA1_ADMISSION/1 '+encoded(r)+b'\n';need(len(b)<=1024);return b
+          def main():
+           try:b=frame(observe())
+           except BaseException:
+            try:b=frame(NEUTRAL)
+            except BaseException:return 1
+           try:return 0 if os.write(1,b)==len(b) else 1
+           except BaseException:return 1
+          # Fixed synthetic cloud controls; uses the exact reader functions above.
+          # This driver alone creates/removes verified owned ephemeral fixtures.
+          def controls():
+           parent=None;root=None;prior=None;root_prior=None;passed=0;held=[]
+           original=dict(os.environ);sandbox=None
+           def check(v):
+            nonlocal passed
+            need(v);passed+=1
+           def refused(call):
+            try:call()
+            except BaseException:return True
+            return False
+           def remove_leaf(name):
+            p=root+'/'+name
+            try:s=os.lstat(p)
+            except FileNotFoundError:return
+            need(s.st_uid==os.getuid())
+            if stat.S_ISDIR(s.st_mode):os.rmdir(p)
+            else:os.unlink(p)
+           def reset(cb,rb):
+            for name,b in [('context.json',cb),('ma1-admission.json',rb)]:
+             remove_leaf(name)
+             if b is not None:
+              f=os.open(root+'/'+name,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+              try:need(os.write(f,b)==len(b))
+              finally:os.close(f)
+           try:
+            temp=original.get('RUNNER_TEMP','');need(temp.startswith('/') and temp!='/' and len(temp)<4096 and '//' not in temp and not temp.endswith('/'))
+            parts=temp[1:].split('/');need(len(parts)<=32 and all(p not in ('','.','..') for p in parts))
+            held.append(os.open('/',os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW))
+            for name in parts:
+             f=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=held[-1]);held.append(f);s=os.fstat(f)
+             need(s.st_uid in (0,os.getuid()) and not(s.st_mode&0o022))
+            need(os.fstat(held[-1]).st_uid==os.getuid())
+            parent=temp+'/afw-ma1-reader-controls'
+            os.mkdir('afw-ma1-reader-controls',0o700,dir_fd=held[-1]);prior=directory(os.lstat(parent))[:4];sandbox=parent+'/runner'
+            os.mkdir(sandbox,0o700);root=sandbox+'/afw-r3-delivery';os.mkdir(root,0o700);root_prior=directory(os.lstat(root))[:4]
+            e={'RUNNER_TEMP':sandbox,'GITHUB_REPOSITORY':'tokenizartinfo-ops/agent-friendly-web','GITHUB_REPOSITORY_ID':'1347578006','GITHUB_JOB':'readonly','GITHUB_RUN_ATTEMPT':'1','GITHUB_REF':'refs/heads/feat/finite-native-cleanup-20261101','GITHUB_EVENT_NAME':'push','GITHUB_WORKFLOW_REF':'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101','AFW_CHECKOUT_OUTCOME':'success','AFW_NODE_OUTCOME':'success','AFW_MA1_UNIT_OUTCOME':'success','GITHUB_SHA':'1'*40,'GITHUB_WORKFLOW_SHA':'1'*40,'GITHUB_RUN_ID':'900000001'}
+            os.environ.update(e)
+            c={'purpose':'afw.r3-delivery.binding.v1','source':'1'*40,'sourceTree':'2'*40,'run':'900000001','attempt':1,'job':'readonly','node':'22.23.4'}
+            r={'purpose':'afw.ma1.admission.v1',**{k:c[k] for k in CK[1:]},'matrixSha256':MH,'exceptionAt':'none','phases':[[k,'entered',104,0,False,True] for k in IDS],'nonclaims':dict.fromkeys(NK,False)}
+            cb=encoded(c);rb=encoded(r);reset(cb,rb);check(observe()==r);check(len(frame(observe()))<=1024)
+            reset(cb,encoded(NEUTRAL));check(observe()==NEUTRAL)
+            for bad in [None,b'{',rb+b' ',rb+b'\n',b'\xef\xbb\xbf'+rb,rb.replace(b'"purpose":',b'"purpose":"duplicate","purpose":',1),rb.replace(b'"attempt":1',b'"attempt":true'),rb.replace(b'"attempt":1',b'"attempt":1.0'),b'x'*1004,rb.replace(b'"source":"'+b'1'*40+b'"',b'"source":"'+b'3'*40+b'"'),rb.replace(b'"matrixSha256":"'+MH.encode()+b'"',b'"matrixSha256":"'+b'0'*64+b'"'),rb.replace(b'"none"',b'"private_error"'),rb.replace(b'104,0,false,true',b'103,0,false,true',1)]:
+             reset(cb,bad);check(observe()==NEUTRAL)
+            for bad in [None,b'{',cb+b' ',b'x'*2049,cb.replace(b'"attempt":1',b'"attempt":true'),cb.replace(b'"sourceTree":"'+b'2'*40+b'"',b'"sourceTree":"'+b'4'*40+b'"')]:
+             reset(bad,rb);check(observe()==NEUTRAL)
+            reset(cb,rb);os.chmod(root+'/ma1-admission.json',0o640);check(observe()==NEUTRAL)
+            reset(cb,rb);remove_leaf('ma1-admission.json');os.mkdir(root+'/ma1-admission.json',0o700);check(observe()==NEUTRAL)
+            reset(cb,rb);remove_leaf('ma1-admission.json');os.symlink('context.json',root+'/ma1-admission.json');check(observe()==NEUTRAL)
+            reset(cb,rb);os.link(root+'/ma1-admission.json',root+'/extra');check(observe()==NEUTRAL);os.unlink(root+'/extra')
+            reset(cb,rb);os.chmod(root,0o750);check(observe()==NEUTRAL);os.chmod(root,0o700)
+            reset(cb,rb);os.environ['GITHUB_RUN_ID']='900000002';check(observe()==NEUTRAL);os.environ['GITHUB_RUN_ID']=e['GITHUB_RUN_ID']
+            os.environ['RUNNER_TEMP']='relative';check(observe()==NEUTRAL);os.environ['RUNNER_TEMP']=sandbox
+            os.symlink('runner',parent+'/alias');os.environ['RUNNER_TEMP']=parent+'/alias';check(observe()==NEUTRAL);os.environ['RUNNER_TEMP']=sandbox;os.unlink(parent+'/alias')
+            # Identity/owner/read faults are syscall fault injection around actual leaf(),
+            # not a parser replica or a claim to have changed a real runner file owner.
+            saved_fstat=os.fstat;saved_read=os.read
+            d=os.open(root,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+            try:
+             class Owner:
+              def __init__(self,s):
+               for k in ['st_dev','st_ino','st_mode','st_uid','st_nlink','st_size','st_mtime_ns','st_ctime_ns']:setattr(self,k,getattr(s,k))
+               self.st_uid=os.getuid()+1
+             os.fstat=lambda fd:Owner(saved_fstat(fd))
+             check(refused(lambda:leaf(d,'context.json')));os.fstat=saved_fstat
+             calls=[0]
+             def torn(fd,n):
+              calls[0]+=1
+              if calls[0]==1:return saved_read(fd,1)
+              return b''
+             os.read=torn;check(refused(lambda:leaf(d,'context.json')));os.read=saved_read
+             def error(fd,n):raise OSError()
+             os.read=error;check(refused(lambda:leaf(d,'context.json')));os.read=saved_read
+             # A changed post-read identity is rejected by the same leaf() code.
+             calls=[0]
+             def changed(fd):
+              s=saved_fstat(fd);calls[0]+=1
+              if calls[0]>1:
+               x=Owner(s);x.st_uid=s.st_uid;x.st_size=s.st_size+1;return x
+              return s
+             os.fstat=changed;check(refused(lambda:leaf(d,'context.json')));os.fstat=saved_fstat
+            finally:os.fstat=saved_fstat;os.read=saved_read;os.close(d)
+            reset(cb,rb)
+            # Branch-shape coverage at 0/104, unknown+catch and unknown+break.
+            variants=[]
+            x=json.loads(rb);x['phases'][2][3]=1;variants.append(x)
+            x=json.loads(rb);x['exceptionAt']='preflight';x['phases']=[[k,'untouched',0,0,False,False] for k in IDS];variants.append(x)
+            x=json.loads(rb);x['exceptionAt']='baseline';x['phases']=[[IDS[0],'entered',1,1,False,False]]+[[k,'untouched',0,0,False,False] for k in IDS[1:]];variants.append(x)
+            x=json.loads(rb);x['phases']=[[IDS[0],'entered',0,0,True,False],[IDS[1],'gate',0,0,True,False]]+[[k,'untouched',0,0,False,False] for k in IDS[2:]];variants.append(x)
+            x=json.loads(rb);x['exceptionAt']='M_ASSOC';x['phases'][4][3]=1;variants.append(x)
+            x=json.loads(rb);x['exceptionAt']='M_OUTPUT';x['phases'][3]=[IDS[3],'entered',10,1,True,False];x['phases'][4]=[IDS[4],'untouched',0,0,False,False];variants.append(x)
+            for x in variants:
+             reset(cb,encoded(x));check(observe()==x)
+            need(passed==40)
+            return passed
+           finally:
+            os.environ.clear();os.environ.update(original)
+            if prior is not None:
+             need(directory(os.lstat(parent))[:4]==prior)
+             # Only fixed entries created by this driver; never recurse or scan.
+             if root_prior is not None:
+              need(directory(os.lstat(root))[:4]==root_prior)
+              for name in ['context.json','ma1-admission.json']:remove_leaf(name)
+              os.rmdir(root)
+             if sandbox is not None:os.rmdir(sandbox)
+             os.rmdir(parent)
+            for f in reversed(held):os.close(f)
+          try:
+           n=controls();os.write(1,('MA1_READER_CONTROLS/1 passed='+str(n)+'\n').encode('ascii'))
+          except BaseException:
+           try:os.write(1,b'MA1_READER_CONTROLS/1 unavailable\n')
+           except BaseException:pass
+           raise SystemExit(1)
+          AFW_MA1_READER_CONTROLS
+      - name: Check stable MA1 leaf owner control
+        if: always() && steps.ma1_unit.outcome == 'success'
+        timeout-minutes: 1
+        shell: bash
+        env:
+          AFW_CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          AFW_NODE_OUTCOME: ${{ steps.node.outcome }}
+          AFW_MA1_UNIT_OUTCOME: ${{ steps.ma1_unit.outcome }}
+        run: |
+          set -euo pipefail
+          umask 077
+          exec 2>/dev/null
+          /usr/bin/python3 -I -S - <<'AFW_MA1_STABLE_OWNER_CONTROL'
+          # MA1 fixed reader: no Source invocation, network, file writes or caller path.
+          import os,sys,stat,json,re
+          KEYS=['purpose','source','sourceTree','run','attempt','job','node','matrixSha256','exceptionAt','phases','nonclaims']
+          NK=['historicalCauseProven','receiptAuthenticated','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified']
+          IDS=['baseline','M_RAW','M_PROVENANCE','M_OUTPUT','M_ASSOC']
+          MH='0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e'
+          CK=['purpose','source','sourceTree','run','attempt','job','node']
+          NEUTRAL={'purpose':'afw.ma1.admission.v1',**dict.fromkeys(KEYS[1:-1],'unknown'),'nonclaims':dict.fromkeys(NK,False)}
+          def need(v):
+           if not v:raise ValueError()
+          def encoded(v):return json.dumps(v,separators=(',',':'),ensure_ascii=True).encode('ascii')
+          def pairs(xs):
+           d={}
+           for k,v in xs:
+            need(k not in d);d[k]=v
+           return d
+          def canonical(b):
+           need(type(b) is bytes and all(32<=x<=126 for x in b))
+           v=json.loads(b.decode('ascii'),object_pairs_hook=pairs,parse_constant=lambda _:need(False))
+           need(encoded(v)==b);return v
+          def identity(s):return(s.st_dev,s.st_ino,s.st_mode,s.st_uid,s.st_nlink,s.st_size,s.st_mtime_ns,s.st_ctime_ns)
+          def directory(s):return(s.st_dev,s.st_ino,s.st_mode,s.st_uid,s.st_nlink)
+          def leaf(d,name):
+           cap={'context.json':2048,'ma1-admission.json':1003}[name]
+           before=os.stat(name,dir_fd=d,follow_symlinks=False)
+           f=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=d)
+           try:
+            s=os.fstat(f);need(identity(before)==identity(s) and stat.S_ISREG(s.st_mode) and s.st_uid==os.getuid() and s.st_nlink==1 and stat.S_IMODE(s.st_mode)==0o600 and 0<s.st_size<=cap)
+            b=b''
+            while len(b)<=cap:
+             part=os.read(f,cap+1-len(b))
+             if not part:break
+             b+=part
+            need(len(b)==s.st_size and len(b)<=cap and os.read(f,1)==b'')
+            need(identity(s)==identity(os.fstat(f))==identity(os.stat(name,dir_fd=d,follow_symlinks=False)))
+            return b,identity(s)
+           finally:os.close(f)
+          def private_open():
+           path=os.environ.get('RUNNER_TEMP','')
+           need(path.startswith('/') and path!='/' and len(path)<=4096 and '//' not in path and not path.endswith('/'))
+           parts=path[1:].split('/');need(len(parts)<=32 and all(p not in ('','.','..') for p in parts))
+           fds=[];links=[]
+           try:
+            fds.append(os.open('/',os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW))
+            root=os.fstat(fds[0]);need(root.st_uid==0 and not(root.st_mode&0o022))
+            for i,name in enumerate(parts+['afw-r3-delivery']):
+             parent=fds[-1];before=os.stat(name,dir_fd=parent,follow_symlinks=False)
+             child=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=parent);fds.append(child)
+             s=os.fstat(child);need(directory(before)==directory(s) and stat.S_ISDIR(s.st_mode) and s.st_uid in (0,os.getuid()) and not(s.st_mode&0o022))
+             if i>=len(parts)-1:need(s.st_uid==os.getuid())
+             if i==len(parts):need(stat.S_IMODE(s.st_mode)==0o700)
+             links.append((parent,name,child,directory(s)))
+            return fds,links
+           except BaseException:
+            for f in reversed(fds):os.close(f)
+            raise
+          def recheck(links):
+           for parent,name,child,prior in links:need(directory(os.fstat(child))==prior==directory(os.stat(name,dir_fd=parent,follow_symlinks=False)))
+          def measured(r,c):
+           need(type(r) is dict and list(r)==KEYS and r['purpose']=='afw.ma1.admission.v1')
+           need(type(r['nonclaims']) is dict and list(r['nonclaims'])==NK and all(r['nonclaims'][k] is False for k in NK))
+           if all(r[k]=='unknown' for k in KEYS[1:-1]):return NEUTRAL
+           need(all(type(r[k]) is type(c[k]) and r[k]==c[k] for k in CK[1:]) and r['matrixSha256']==MH)
+           need(r['exceptionAt'] in ['none','preflight']+IDS and type(r['phases']) is list and len(r['phases'])==5)
+           stopped=r['exceptionAt']=='preflight';inner=False;saw=stopped
+           for i,t in enumerate(r['phases']):
+            need(type(t) is list and len(t)==6 and t[0]==IDS[i] and t[1] in ['untouched','gate','entered'])
+            ident,state,a,u,b,done=t
+            need(type(a) is int and type(u) is int and 0<=u<=a<=104 and type(b) is bool and type(done) is bool)
+            ex=r['exceptionAt']==ident
+            if stopped:need(t==[ident,'untouched',0,0,False,False]);continue
+            need(state!='untouched' and (i!=0 or state=='entered'))
+            if inner:need(state=='gate')
+            if state=='gate':
+             need(i>0 and a==u==0 and not done and ((b and not ex) or (not b and ex)))
+             stopped=True;inner=False
+            else:
+             need(not inner)
+             if done:need(a==104 and not b)
+             if b:need(a<104 and not done)
+             if not b and not done:need(ex)
+             if i==0 and ex:need(not b and not done)
+             inner=b and not ex;stopped=ex
+            if ex:saw=True
+           need((r['exceptionAt']=='none' and not saw) or (r['exceptionAt']!='none' and saw))
+           return {k:r[k] for k in KEYS}
+          def context(c):
+           need(type(c) is dict and list(c)==CK and c['purpose']=='afw.r3-delivery.binding.v1')
+           need(type(c['source']) is str and re.fullmatch('[a-f0-9]{40}',c['source']) and type(c['sourceTree']) is str and re.fullmatch('[a-f0-9]{40}',c['sourceTree']))
+           need(type(c['run']) is str and re.fullmatch('[1-9][0-9]{0,19}',c['run']) and type(c['attempt']) is int and c['attempt']==1 and c['job']=='readonly' and c['node']=='22.23.4')
+           e=os.environ
+           expected={'GITHUB_REPOSITORY':'tokenizartinfo-ops/agent-friendly-web','GITHUB_REPOSITORY_ID':'1347578006','GITHUB_JOB':'readonly','GITHUB_RUN_ATTEMPT':'1','GITHUB_REF':'refs/heads/feat/finite-native-cleanup-20261101','GITHUB_EVENT_NAME':'push','GITHUB_WORKFLOW_REF':'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101','AFW_CHECKOUT_OUTCOME':'success','AFW_NODE_OUTCOME':'success','AFW_MA1_UNIT_OUTCOME':'success'}
+           need(all(e.get(k)==v for k,v in expected.items()) and e.get('GITHUB_SHA')==c['source'] and e.get('GITHUB_WORKFLOW_SHA')==c['source'] and e.get('GITHUB_RUN_ID')==c['run'])
+           return c
+          def observe():
+           fds=[];links=[]
+           try:
+            fds,links=private_open();d=fds[-1]
+            cb,cs=leaf(d,'context.json');rb,rs=leaf(d,'ma1-admission.json')
+            c=context(canonical(cb));r=measured(canonical(rb),c);recheck(links)
+            # Names stay tied to opened identities through validation; no second file read.
+            need(identity(os.stat('context.json',dir_fd=d,follow_symlinks=False))==cs and identity(os.stat('ma1-admission.json',dir_fd=d,follow_symlinks=False))==rs);recheck(links)
+            return r
+           except BaseException:return NEUTRAL
+           finally:
+            for f in reversed(fds):
+             try:os.close(f)
+             except BaseException:pass
+          def frame(r):
+           b=b'AFW_MA1_ADMISSION/1 '+encoded(r)+b'\n';need(len(b)<=1024);return b
+          def main():
+           try:b=frame(observe())
+           except BaseException:
+            try:b=frame(NEUTRAL)
+            except BaseException:return 1
+           try:return 0 if os.write(1,b)==len(b) else 1
+           except BaseException:return 1
+          # Fixed MA1 stable-owner unit ONLY; normal reader definitions above remain byteexact.
+          import base64,zlib,hashlib,subprocess,select,time
+          OWNER_KEYS=['purpose','source','sourceTree','run','attempt','job','node','readerSha256','mutantSha256','normalOwner','stableWrongOwner','deletedOwnerGuard','targetedMutantControl','identityContinuity','nonclaims']
+          OWNER_NEUTRAL={'purpose':'afw.ma1.reader-owner-unit.v1',**dict.fromkeys(OWNER_KEYS[1:-1],'unknown'),'nonclaims':dict.fromkeys(NK,False)}
+          READER_HASH='30a0e0ce3c31b4d59b3371babd749282f8e8cad60f13493bab68c2b94bbe2165'
+          MUTANT_HASH='ab99a8fc2af7fc3521b8869183c39718ea72fba68c6b1b6ff7513bc5ec88541d'
+          FIXED_READER_ZIP='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'
+          def owner_metadata(kind):
+           args={'head':['/usr/bin/git','rev-parse','HEAD'],'tree':['/usr/bin/git','rev-parse','HEAD^{tree}'],'node':['node','--version']}[kind]
+           p=None
+           try:
+            p=subprocess.Popen(args,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,close_fds=True)
+            end=time.monotonic()+3;b=b''
+            while True:
+             left=end-time.monotonic();need(left>0)
+             ready,_,_=select.select([p.stdout],[],[],left);need(ready)
+             part=os.read(p.stdout.fileno(),65-len(b))
+             if not part:break
+             b+=part;need(len(b)<=64)
+            need(p.wait(timeout=max(0.001,end-time.monotonic()))==0)
+            return b.decode('ascii').strip()
+           finally:
+            if p is not None:
+             if p.poll() is None:
+              p.kill()
+              try:p.wait(timeout=3)
+              except BaseException:pass
+             if p.stdout is not None:p.stdout.close()
+          def owner_context():
+           e=os.environ
+           fixed={'GITHUB_REPOSITORY':'tokenizartinfo-ops/agent-friendly-web','GITHUB_REPOSITORY_ID':'1347578006','GITHUB_JOB':'readonly','GITHUB_RUN_ATTEMPT':'1','GITHUB_REF':'refs/heads/feat/finite-native-cleanup-20261101','GITHUB_EVENT_NAME':'push','GITHUB_WORKFLOW_REF':'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101','AFW_CHECKOUT_OUTCOME':'success','AFW_NODE_OUTCOME':'success','AFW_MA1_UNIT_OUTCOME':'success'}
+           need(all(e.get(k)==v for k,v in fixed.items()))
+           need(all(k not in e for k in ['NODE_OPTIONS','NODE_PATH','AFW_SYN_CHECKPOINT_KEY','AFW_BUDGET_DIAGNOSTIC_CANDIDATE']))
+           source=e.get('GITHUB_SHA','');run=e.get('GITHUB_RUN_ID','')
+           need(re.fullmatch('[a-f0-9]{40}',source) and re.fullmatch('[1-9][0-9]{0,19}',run) and e.get('GITHUB_WORKFLOW_SHA')==source)
+           need(os.path.isabs(os.getcwd()) and os.path.realpath(os.getcwd())==os.getcwd())
+           need(owner_metadata('head')==source and owner_metadata('node')=='v22.23.4')
+           tree=owner_metadata('tree');need(re.fullmatch('[a-f0-9]{40}',tree))
+           return {'source':source,'sourceTree':tree,'run':run,'attempt':1,'job':'readonly','node':'22.23.4'}
+          def owner_mutant():
+           compressed=base64.b64decode(FIXED_READER_ZIP,validate=True);need(len(compressed)<=4096)
+           dec=zlib.decompressobj(31);source=dec.decompress(compressed,6619)
+           need(len(source)==6618 and dec.eof and not dec.unused_data and not dec.unconsumed_tail and hashlib.sha256(source).hexdigest()==READER_HASH)
+           deletion=b' and s.st_uid==os.getuid()';need(source.count(deletion)==1)
+           changed=source.replace(deletion,b'',1)
+           need(len(changed)==6592 and hashlib.sha256(changed).hexdigest()==MUTANT_HASH)
+           scope={'__builtins__':__builtins__}
+           exec(compile(changed,'<fixed-ma1-owner-unit-mutant>','exec'),scope)
+           return scope['leaf']
+          def owner_causal_controls():
+           native_uid=os.getuid();native_stat=os.stat;native_fstat=os.fstat
+           held=[];parent_links=[];private_fd=None;file_fd=None;private_id=None;file_id=None
+           made_private=False;made_file=False;cleanup_ok=True
+           fixed_dir='afw-ma1-reader-owner-unit';fixed_leaf='context.json'
+           fixture=b'ma1-owner-fixture-v1'
+           try:
+            path=os.environ.get('RUNNER_TEMP','')
+            need(path.startswith('/') and path!='/' and len(path)<=4096 and '//' not in path and not path.endswith('/'))
+            parts=path[1:].split('/');need(len(parts)<=32 and all(x not in ('','.','..') for x in parts))
+            held.append(os.open('/',os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW))
+            root=native_fstat(held[0]);need(root.st_uid==0 and not(root.st_mode&0o022))
+            for name in parts:
+             parent=held[-1];before=native_stat(name,dir_fd=parent,follow_symlinks=False)
+             f=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=parent);held.append(f);s=native_fstat(f)
+             need(directory(before)==directory(s) and stat.S_ISDIR(s.st_mode) and s.st_uid in (0,native_uid) and not(s.st_mode&0o022))
+             parent_links.append((parent,name,f,directory(s)[:4]))
+            def check_parents():
+             for p,n,f,before in parent_links:need(directory(native_fstat(f))[:4]==before==directory(native_stat(n,dir_fd=p,follow_symlinks=False))[:4])
+            need(native_fstat(held[-1]).st_uid==native_uid);check_parents()
+            os.mkdir(fixed_dir,0o700,dir_fd=held[-1]);made_private=True
+            private_fd=os.open(fixed_dir,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=held[-1])
+            private=native_fstat(private_fd);private_id=(private.st_dev,private.st_ino)
+            named=native_stat(fixed_dir,dir_fd=held[-1],follow_symlinks=False)
+            need((named.st_dev,named.st_ino)==private_id and stat.S_ISDIR(private.st_mode) and private.st_uid==native_uid and stat.S_IMODE(private.st_mode)==0o700)
+            file_fd=os.open(fixed_leaf,os.O_RDWR|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600,dir_fd=private_fd);made_file=True
+            initial=native_fstat(file_fd);file_id=(initial.st_dev,initial.st_ino)
+            need(os.write(file_fd,fixture)==len(fixture))
+            base=native_fstat(file_fd);named=native_stat(fixed_leaf,dir_fd=private_fd,follow_symlinks=False)
+            need(identity(base)==identity(named) and stat.S_ISREG(base.st_mode) and base.st_uid==native_uid and base.st_nlink==1 and stat.S_IMODE(base.st_mode)==0o600 and base.st_size==len(fixture)<=64)
+            normal_bytes,normal_id=leaf(private_fd,fixed_leaf)
+            need(normal_bytes==fixture and normal_id==identity(base))
+            wrong_uid=native_uid+1;need(wrong_uid!=native_uid)
+            class WrongOwner:
+             def __init__(self,s):
+              for k in ['st_dev','st_ino','st_mode','st_uid','st_nlink','st_size','st_mtime_ns','st_ctime_ns']:setattr(self,k,getattr(s,k))
+              self.st_uid=wrong_uid
+            expected=list(identity(base));expected[3]=wrong_uid;expected=tuple(expected)
+            def run_with_coherent_owner(actual_leaf):
+             audit=[]
+             def changed(s):
+              need(identity(s)==identity(base))
+              value=WrongOwner(s);audit.append(identity(value));need(len(audit)<=8);return value
+             def fixed_stat(*args,**kwargs):
+              s=native_stat(*args,**kwargs)
+              if args==(fixed_leaf,) and kwargs=={'dir_fd':private_fd,'follow_symlinks':False} and (s.st_dev,s.st_ino)==file_id:return changed(s)
+              return s
+             def fixed_fstat(fd):
+              s=native_fstat(fd)
+              if (s.st_dev,s.st_ino)==file_id:return changed(s)
+              return s
+             need(os.stat is native_stat and os.fstat is native_fstat and os.getuid()==native_uid)
+             try:
+              os.stat=fixed_stat;os.fstat=fixed_fstat
+              try:value=actual_leaf(private_fd,fixed_leaf);kind='returned'
+              except ValueError:kind='rejected';value=None
+             finally:os.stat=native_stat;os.fstat=native_fstat
+             need(os.getuid()==native_uid and len(audit)==(2 if kind=='rejected' else 4) and all(x==expected for x in audit))
+             return kind,value
+            def rejection_control(kind,value):return kind=='rejected' and value is None
+            guarded_kind,guarded_value=run_with_coherent_owner(leaf)
+            need(rejection_control(guarded_kind,guarded_value))
+            mutant_leaf=owner_mutant()
+            mutant_kind,mutant_value=run_with_coherent_owner(mutant_leaf)
+            need(mutant_kind=='returned' and type(mutant_value) is tuple and len(mutant_value)==2 and mutant_value[0]==fixture and mutant_value[1]==expected)
+            # Same rejection-control predicate: expected rejection is FALSE on this mutant.
+            mutant_rejection_control=rejection_control(mutant_kind,mutant_value)
+            need(mutant_rejection_control is False)
+            return {'normalOwner':'returned_fixture','stableWrongOwner':'rejected','deletedOwnerGuard':'returned_fixture','targetedMutantControl':'failed','identityContinuity':'coherent'}
+           finally:
+            # Always restore real syscalls BEFORE cleanup, including assertion/harness failure.
+            os.stat=native_stat;os.fstat=native_fstat
+            try:
+             if parent_links:check_parents()
+             if made_file:
+              need(private_fd is not None and file_fd is not None and file_id is not None)
+              named=native_stat(fixed_leaf,dir_fd=private_fd,follow_symlinks=False);opened=native_fstat(file_fd)
+              need((named.st_dev,named.st_ino)==file_id==(opened.st_dev,opened.st_ino) and stat.S_ISREG(named.st_mode) and named.st_uid==native_uid and named.st_nlink==1 and stat.S_IMODE(named.st_mode)==0o600)
+              os.unlink(fixed_leaf,dir_fd=private_fd);need(native_fstat(file_fd).st_nlink==0)
+             if made_private:
+              need(private_fd is not None and private_id is not None and held)
+              named=native_stat(fixed_dir,dir_fd=held[-1],follow_symlinks=False);opened=native_fstat(private_fd)
+              need((named.st_dev,named.st_ino)==private_id==(opened.st_dev,opened.st_ino) and stat.S_ISDIR(named.st_mode) and named.st_uid==native_uid and stat.S_IMODE(named.st_mode)==0o700)
+              os.rmdir(fixed_dir,dir_fd=held[-1]);need(native_fstat(private_fd).st_nlink==0)
+            except BaseException:cleanup_ok=False
+            finally:
+             for f in [file_fd,private_fd]+list(reversed(held)):
+              if f is not None:
+               try:os.close(f)
+               except BaseException:cleanup_ok=False
+            need(cleanup_ok)
+          def owner_main():
+           status=1;r=OWNER_NEUTRAL
+           try:
+            c=owner_context();facts=owner_causal_controls()
+            r={'purpose':'afw.ma1.reader-owner-unit.v1',**c,'readerSha256':READER_HASH,'mutantSha256':MUTANT_HASH,**facts,'nonclaims':dict.fromkeys(NK,False)};status=0
+           except BaseException:pass
+           try:
+            need(list(r)==OWNER_KEYS);wire=b'AFW_MA1_READER_OWNER_UNIT/1 '+encoded(r)+b'\n';need(len(wire)<=2048)
+            if os.write(1,wire)!=len(wire):status=1
+           except BaseException:status=1
+           return status
+          raise SystemExit(owner_main())
+          AFW_MA1_STABLE_OWNER_CONTROL
