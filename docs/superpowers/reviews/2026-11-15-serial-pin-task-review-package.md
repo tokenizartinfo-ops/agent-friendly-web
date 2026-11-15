@@ -1,0 +1,558 @@
+# Q1S Task1 — scoped review package
+
+BaseclosedSource3f23a9805a60d285a6272138765078e7da80e5eb; implementation Sourceba064871e4a8e655a2a25aea3bd7219fdd286cd1/treea1596839f21c8c92837d8828b2644d5268c20571; currentcloseda128bde0a3b3cf354a3a8ba751a5b8ebcefec72b/tree4b6fb8d7f4072b1099b8f562a75e74ae78d9d2a1. Source-only task scoped to pin preparation + unit/packaging, noNative/runtime/main/Core change.
+
+Brief89c86307ba8c0d8602ef4a64e98f67e714c11128; specfc1c632908ad5b19cabbc1ca8638ba49a01c20f2; report9ba6a48b9813f7a5b4e686870f45f62984de8163; finalindexa989902d52e032a53675ff9a4e25ba44d3f4aa35. Report preparation claims precede actualfailure; actualRootreceipt6793fdbc389d95c475d0eea52f0c30d7965ec82f below is required current evidence.
+
+## Exact runtime evidence
+# Q1S actual failed preflight — Root receipt
+
+{"purpose":"afw.serial-pin.actual-root-receipt.v1","source":"ba064871e4a8e655a2a25aea3bd7219fdd286cd1","sourceTree":"a1596839f21c8c92837d8828b2644d5268c20571","run":43758071013,"attempt":1,"jobId":132946447644,"job":"readonly","reportedNode":"not_observed_in_success_frame","runConclusion":"failure","jobConclusion":"failure","steps":{"checkout":"success","setupNode":"success","unit":"failure","full104":"skipped"},"unitFrames":0,"controlsFrames":0,"controlsUnavailableFrames":0,"unitControlsPassed":false,"actualFull104Invoked":false,"actualFull520Invoked":false,"qualified":false,"logsFetchedOnce":true,"logCharacters":31153,"underlyingCause":"current unit loader rejected by Node parser: duplicate lexical declaration wire","originalCLIInvoked":0,"nativeBusinessCases":0,"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false},"observedCurrentFailure":{"kind":"SyntaxError","message":"Identifier 'wire' has already been declared","loaderBlob":"fc82133f1f7339c2dfa7ddbbe99066151235830e","unitSuccessFrame":false,"originalCaseStepSkipped":true}}
+
+The one-use occurrence is consumed. Node reported a duplicate lexical declaration in the preflight loader, before a unit success frame. The required full104 step was skipped, so no actual520 measurement exists. This current parser failure is not evidence about Cloudflare or any historical Native failure. Diagnose and review this scope only after Source closure; no rerun of the consumed Source.
+
+Rootclosedreadback: originalF7 restoredexact; ENTIRE proposedSAME+receiptf4da9e3c3d000ca0e64674f83e7c54ff9306d389/2540300B/SHA3ceabc9462376ccfd94b8a368e1e66b1f229e652a402d93cd87d81dfeb45a18f, Core/Mainunchanged,fivequeues0,closedheadruns0. Source unitneverproducedsuccessframe/full104stepSKIPPED. Logsconsumedonce, no re-fetch/re-run.
+
+## Binding global constraints (verbatim plan)
+## Global Constraints
+- PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web; ENVIRONMENT isolated GitHub Source DATA/Actions; ORIGIN https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web. Resource and allowed action are scoped per task; rollback is abandon preparation or restore original F7 plus preserve whole SAME and actual receipt.
+- SourceCLOSED3f23a9805a60d285a6272138765078e7da80e5eb/treea8c002728663bdcf67a6bc59d5c5f1232cb6384c. OriginalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc. Samepath docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md prefixaf9eee4beb70ea89fef675cfc5bb99ec10811fc4,2514447B,SHAae7a7ed3d0cbd38149bfd284eaeb458fc696bede38976f509a801c40ced1b770.
+- Source tree changes ONLY F7 and SAME; Core3201leaves/324448canonicalNULbytes/aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703,Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 and frozen18b88ebef9a2aa979772d20bfb778cbfe463dc3011 unchanged. Old Source/run consumed, no old measurement relabel.
+- Normal CC1 rawf23fcfebf3c72632327cf24babf2ff7ace22dae6 is the only base; rawcanonicalJSON noLF. Controls b9b58c4a22f04b177f92dcbf8841cfc77f648c86,31799B. Normal index1a40f535b1e9d25c327a3ca02c337f807f3db382 gives actual33helpers/6extras. MA1 observer is NOT the base.
+- Keep exact entryPin algorithm, property order and JSON strings; fresh read byte equality, not basename/length/mtime/object identity. Exactly3 lazy process-local pristine slots; no persistent/unbounded altered-input memo, no cached failures. Preserve both delivery reads even within-call, both retarget points and prestart skip.
+- Keep33helpers/39Source entries; only controls.mjs may change among33. Remaining32/kernel765573c5/CC1guard+fd5fix/matrix5b829c76/schema8586d438/proofab38574f/authority1bed486f/oracle652201eb unchanged. No minification/golfing, new helper, concurrency/await/IPC/subreaper/fd8, observer/schema/extra normal output frame.
+- Keep actual520ordered cases, exact matrix/oracle/killsets, nativeBusinessCases0, spawnSync/creator/FD/custody/seals/lifetime/probe/cleanup. Global90000/minimum20000 unchanged, exact T01 needle, all parent/outer/per-case budgets and production/trial windows unchanged. No runtime/provider/browser/OAuth/credentials/OriginalCLI/Native access.
+- Caps raw524288,gzip131072,base64174764,helper32768,bootstrap65536,workflow73728,report24576,SAME2600000,delivery8192,stderr4096,sample4096,site16384,context2048,maxBuffer32768. No cap increase; reject if readable3-slot implementation cannot fit and return before a changed variant.
+- Seven nonclaims alwaysfalse: historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified. Source closed does not assert current provider runtime.
+- No Source code execute/eval/import/VM/compile/tests/syntax/files/clones/deps locally. Builtin RAM string/DATA hash/gzip operations permitted. All Source tests only via a separate Root one-use GitHub gate. No actor branch/tree/ref/candidate/run mutations; immutable preparation blobs only.
+
+
+## Helper change, full changed-region diff with8linescontext
+```diff
+--- a/controls.mjs
++++ b/controls.mjs
+@@ -1,23 +1,32 @@
+ // Round1 controls-only: no production main/Native/readonly CLI imports or calls.
+ import {readFileSync,writeFileSync,mkdirSync,mkdtempSync,chmodSync,unlinkSync,renameSync,symlinkSync,linkSync,rmSync,realpathSync,openSync,closeSync,statSync,fstatSync,lstatSync,readdirSync,constants} from 'node:fs';
+ import {join,dirname,resolve} from 'node:path';
+ import {spawnSync} from 'node:child_process';
+ import {createHash} from 'node:crypto';
+ import {performance} from 'node:perf_hooks';
+ import {gzipSync} from 'node:zlib';
+ function entryPin(bytes){const zipped=gzipSync(bytes,{level:9,mtime:0}),hash=b=>createHash('sha256').update(b).digest('hex');return{bytes:bytes.length,sha256:hash(bytes),zipBytes:zipped.length,zipSha256:hash(zipped),data:zipped.toString('base64'),cap:32768};}
+-function retargetEntries(t){
+- const kernel=readFileSync(join(t.own,'lifetime.py'));
+- for(const [entry,module]of[['delivery-entry.sh','delivery-outer.mjs'],['controls-entry.sh','controls-outer.mjs'],['missing-cwd-entry.sh','delivery-outer.mjs']]){
+-  let text=pristine[entry].toString('utf8');
+-  for(const[key,bytes]of[['_r3_kernel',kernel],['_r3_module',readFileSync(join(t.own,module))]]){
+-   const lines=text.split('\n').filter(x=>x.startsWith(key+'='));if(lines.length!==1)throw 1;
+-   text=text.replace(lines[0],key+'='+JSON.stringify(entryPin(bytes)));
++const pristinePins={'lifetime.py':undefined,'delivery-outer.mjs':undefined,'controls-outer.mjs':undefined};
++function selectPin(name,bytes){
++ if(bytes.equals(pristine[name])){return pristinePins[name]??=JSON.stringify(entryPin(bytes));}
++ return JSON.stringify(entryPin(bytes));
++}
++function retargetEntries(t){
++ const kernel=readFileSync(join(t.own,'lifetime.py'));
++ let kernelPin,deliveryBytes,deliveryPin;
++ for(const [entry,module]of[['delivery-entry.sh','delivery-outer.mjs'],['controls-entry.sh','controls-outer.mjs'],['missing-cwd-entry.sh','delivery-outer.mjs']]){
++  let text=pristine[entry].toString('utf8');
++  for(const[key,name,bytes]of[['_r3_kernel','lifetime.py',kernel],['_r3_module',module,readFileSync(join(t.own,module))]]){
++   const lines=text.split('\n').filter(x=>x.startsWith(key+'='));if(lines.length!==1)throw 1;
++   const serialized=key==='_r3_kernel'?(kernelPin??=selectPin(name,bytes)):
++    module==='delivery-outer.mjs'&&deliveryBytes!==undefined&&bytes.equals(deliveryBytes)?deliveryPin:selectPin(name,bytes);
++   if(key==='_r3_module'&&module==='delivery-outer.mjs'){deliveryBytes=bytes;deliveryPin=serialized;}
++   text=text.replace(lines[0],key+'='+serialized);
+   }
+   writeFileSync(join(t.own,entry),text,{mode:0o600});
+  }
+ }
+ 
+ import {jsonFixed} from './io.mjs';
+ import {accepts} from './oracle.mjs';
+ const controlDeadline=performance.now()+90000;
+```
+
+## New unit file, complete added body (line1 is first comment)
+```javascript
+// AFW serial entry-pin unit v1. GitHub-only; no case process is started.
+// Inputs are fixed Source DATA decoded by the F7-owned loader.
+export function serialPinUnit({assert,createHash,gzipSync,posix,normal,candidate,source,sourceTree,run}) {
+ const digest=b=>createHash('sha256').update(b).digest('hex');
+ const old=normal.helpers['controls.mjs'],next=candidate.helpers['controls.mjs'];
+ assert.equal(digest(old),'060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df');
+ assert.equal(Object.keys(normal.helpers).length,33);
+ assert.deepEqual(Object.keys(normal),Object.keys(candidate));
+ const changed=Object.keys(normal.helpers).filter(k=>normal.helpers[k]!==candidate.helpers[k]);
+ assert.deepEqual(changed,['controls.mjs']);
+ const clone=x=>JSON.parse(JSON.stringify(x));
+ const once=(s,needle)=>{assert.equal(s.split(needle).length,2,needle);return s.indexOf(needle);};
+ const slice=(s,start,end)=>s.slice(once(s,start),once(s,end));
+ const pinStart='function entryPin(bytes){',retargetStart='function retargetEntries(t){';
+ // Both versions retain exact entryPin; candidate adds private selection between functions.
+ const pinBody=old.slice(once(old,pinStart),once(old,'\nfunction retargetEntries(t){'));
+ const nextPinBody=next.slice(once(next,pinStart),once(next,'\nconst pristinePins='));
+ assert.equal(nextPinBody,pinBody);
+ const oldRegion=slice(old,retargetStart,"\n\nimport {jsonFixed}");
+ const newRegion=slice(next,'const pristinePins=',"\n\nimport {jsonFixed}");
+ const before=old.slice(0,old.indexOf(retargetStart)),after=old.slice(old.indexOf("\n\nimport {jsonFixed}"));
+ assert.equal(next,before+newRegion+'\n'+after.slice(1));
+ const build=slice(old,'function build(instance){','\nfunction runRole(');
+ const change=slice(old,'function change(t,scenario){','\nfunction cleanupOwn(');
+ const prepare=slice(old,' const t=build(instance);let staged;',"\n if(row.expected.kind==='lifetime')");
+ assert.equal(slice(next,'function build(instance){','\nfunction runRole('),build);
+ assert.equal(slice(next,'function change(t,scenario){','\nfunction cleanupOwn('),change);
+ assert.equal(slice(next,' const t=build(instance);let staged;',"\n if(row.expected.kind==='lifetime')"),prepare);
+ const deadline='\nconst controlDeadline=performance.now()+90000;\n';
+ once(old,deadline);once(next,deadline);
+ assert.equal(old.slice(old.indexOf('function cleanupOwn(')),next.slice(next.indexOf('function cleanupOwn(')));
+ const matrix=JSON.parse(normal.helpers['matrix.json']),fixtures=JSON.parse(normal.helpers['fixtures.json']);
+ assert.equal(matrix.ordered.length,104);assert.equal(matrix.mutants.length,4);
+ assert.deepEqual(matrix.mutants.map(m=>m.id),['M_RAW','M_PROVENANCE','M_OUTPUT','M_ASSOC']);
+ const entries=['delivery-entry.sh','controls-entry.sh','missing-cwd-entry.sh'];
+ const names=Object.keys(normal.helpers),groups=[null,...matrix.mutants.map(m=>m.id)];
+ // Root ruling: unchanged change body; strict synthetic make-fifo dependency only.
+ // The actual role function is neither extracted nor evaluated.
+ const fifoFrom="const r=runRole(t,'make-fifo',{timeout:3000});if(r.error||r.status!==0)throw 1;";
+ once(change,fifoFrom);
+ const preparedChange=change; // Root ruling: unchanged Source body, synthetic dependency only.
+ const boundary=prepare+'\n return {t,staged};';
+ assert(!boundary.includes('runRole(')&&!boundary.includes('counterexample('));
+ // A tiny bounded filesystem models preparation operations, inode links and permission metadata.
+ // It has no node:fs dependency, host path access, process creation or oracle implementation.
+ function memoryFS() {
+  const files=new Map(),fds=new Map(),log=[];let serial=0,fdSerial=9,reads=0,hook=null;
+  const clean=p=>{assert.equal(typeof p,'string');const q=posix.normalize(p);assert(q==='/unit'||q.startsWith('/unit/'));return q;};
+  const locate=(p,follow=true)=>{let q=clean(p);for(let n=0;n<16;n++){const parts=q.split('/');let changed=false;for(let i=2;i<=parts.length;i++){const key=parts.slice(0,i).join('/'),item=files.get(key);if(item?.type==='symlink'&&(follow||i<parts.length)){q=posix.join(item.target,...parts.slice(i));changed=true;break;}}if(!changed)return q;}throw Error('symlink loop');};
+  const get=(p,follow=true)=>{const key=locate(p,follow),v=files.get(key);if(!v)throw Object.assign(Error('ENOENT'),{code:'ENOENT'});return v;};
+  const inode=(type,mode,bytes=Buffer.alloc(0))=>({id:++serial,type,mode,bytes:Buffer.from(bytes)});
+  const stats=p=>{const v=typeof p==='number'?fds.get(p):get(p);assert(v);return{dev:1,ino:v.id,size:v.bytes.length,mtimeNs:1000+nothing(v),mode:v.mode};};
+  const nothing=()=>0;
+  const api={
+   readFileSync(p,encoding){log.push(['read',p]);reads++;if(hook){const v=hook(p,reads,api);if(v!==undefined)return encoding?Buffer.from(v).toString(encoding):Buffer.from(v);}const v=get(p);assert.equal(v.type,'file');return encoding?v.bytes.toString(encoding):Buffer.from(v.bytes);},
+   writeFileSync(p,data,options={}){const b=Buffer.from(data);if(typeof p==='number'){const v=fds.get(p);assert(v);v.bytes=b;return;}const q=locate(p);log.push(['write',p]);let v=files.get(q);if(options.flag==='wx'&&v)throw Error('EEXIST');if(!v){v=inode('file',options.mode??0o666);files.set(q,v);}assert.equal(v.type,'file');v.bytes=b;},
+   mkdirSync(p,{recursive=false,mode=0o777}={}){const q=clean(p);if(recursive){const bits=q.split('/');for(let i=2;i<=bits.length;i++){const path=bits.slice(0,i).join('/');if(!files.has(path))files.set(path,inode('dir',mode));}}else{assert(!files.has(q));files.set(q,inode('dir',mode));}},
+   mkdtempSync(p){const q=clean(p)+String(++serial).padStart(6,'0');assert(!files.has(q));files.set(q,inode('dir',0o700));return q;},
+   chmodSync(p,mode){get(p).mode=mode;},
+   unlinkSync(p){assert(files.delete(locate(p,false)));},
+   renameSync(from,to){const a=locate(from,false),b=clean(to);assert(files.has(a));for(const[k,v]of [...files])if(k===a||k.startsWith(a+'/')){files.delete(k);files.set(b+k.slice(a.length),v);}},
+   symlinkSync(target,p){files.set(clean(p),{...inode('symlink',0o777),target:clean(target)});},
+   linkSync(a,b){assert(!files.has(clean(b)));files.set(clean(b),get(a));},
+   openSync(p,flags,mode){const q=clean(p);assert(!files.has(q));const v=inode('file',mode);files.set(q,v);const fd=++fdSerial;fds.set(fd,v);return fd;},
+   statSync:stats,fstatSync:stats,
+   makePreparationFIFO(p){assert(!files.has(clean(p)));files.set(clean(p),inode('fifo',0o600));},
+   reset(){files.clear();fds.clear();log.length=0;fdSerial=9;reads=0;hook=null;},
+   snapshot(){assert(files.size<=128);return [...files].sort(([a],[b])=>a.localeCompare(b)).map(([path,v])=>({path,type:v.type,mode:v.mode,ino:v.id,target:v.target??null,bytes:v.bytes.toString('base64')}));},
+   log,files,setHook(value){hook=value;},clearLog(){log.length=0;reads=0;},
+  };
+  return api;
+ }
+ const fsKeys=['readFileSync','writeFileSync','mkdirSync','mkdtempSync','chmodSync','unlinkSync','renameSync','symlinkSync','linkSync','openSync','statSync','fstatSync','makePreparationFIFO'];
+ function harness(text,variant=null) {
+  const fs=memoryFS(),pristine=Object.fromEntries(names.map(n=>[n,Buffer.from(n==='controls.mjs'?text:normal.helpers[n])]));
+  let calculations=0,calls=0;const checkpoints=[];
+  let region=text===old?oldRegion:newRegion;
+  const recipes={
+   M_LENGTH:["bytes.equals(pristine[name])","bytes.length===pristine[name].length"],
+   M_SECOND:["deliveryBytes!==undefined&&bytes.equals(deliveryBytes)","deliveryBytes!==undefined"],
+   M_RECOMPUTE:["const serialized=key==='_r3_kernel'?(kernelPin??=selectPin(name,bytes)):\n    module==='delivery-outer.mjs'&&deliveryBytes!==undefined&&bytes.equals(deliveryBytes)?deliveryPin:selectPin(name,bytes);","const serialized=JSON.stringify(entryPin(bytes));"],
+  };
+  if(variant){const[from,to]=recipes[variant];once(region,from);region=region.replace(from,to);}
+  // Sole Source evaluation point, reached only when the GitHub preflight invokes this export.
+  const sourceText=pinBody+'\n'+region+'\n'+build+'\n'+preparedChange+
+   '\nfunction prepareCase(row,mutant,instance){'+boundary+'\n}\nreturn {retargetEntries,prepareCase,build,change};';
+  const ctx={source:'1'.repeat(40),sourceTree:'2'.repeat(40),run:'12345',attempt:1,job:'readonly',node:'22.23.4'};
+  const env={RUNNER_TEMP:'/unit',PATH:'/synthetic/path',HOME:'/unit/home'};
+  const put=(p,s)=>fs.writeFileSync(p,s,{mode:0o600,flag:'wx'});
+  let retargetResult;
+  const factory=new Function(...fsKeys,'join','dirname','createHash','gzipSync','Buffer','pristine','e','ctx','fixtures','matrix','names','canary','count','clone','put','live','external','constants','observe','runRole', 
+   'let sandbox;\n'+sourceText.replaceAll('function retargetEntries(t){','function retargetEntriesActual(t){')+
+   '\nfunction retargetEntries(t){const start=observe.before(t);try{return retargetEntriesActual(t);}finally{observe.after(t,start);}}');
+  const preparationRole=(t,role,options)=>{assert.equal(role,'make-fifo');assert.deepEqual(options,{timeout:3000});assert.equal(t.file,posix.join(t.cwd,'output','finite-budget','readonly','R3','r3-existing-sample.json'));assert.equal(t.own,posix.join(t.temp,'afw-r3-delivery'));fs.makePreparationFIFO(t.file);return{error:undefined,status:0};};
+  assert.throws(()=>preparationRole({},'case-delivery',{timeout:3000}));
+  assert.throws(()=>preparationRole({},'make-fifo',{timeout:1}));
+  const observe={before(t){calls++;return fs.log.length;},after(t,start){const log=fs.log.slice(start).map(x=>[...x]);checkpoints.push({own:t.own,log,entries:entries.map(n=>{const item=fs.files.get(posix.join(t.own,n));return{bytes:item.bytes.toString('base64'),mode:item.mode};})});}};
+  retargetResult=factory(...fsKeys.map(k=>fs[k]),posix.join,posix.dirname,createHash,(b,o)=>{calculations++;return gzipSync(b,o);},Buffer,pristine,env,ctx,fixtures,matrix,names,matrix.privateCanary,matrix.ordered.length,clone,put,new Map(),new Map(),{O_WRONLY:1,O_CREAT:64,O_EXCL:128,O_NOFOLLOW:131072},observe,preparationRole);
+  return{...retargetResult,fs,pristine,checkpoints,get calculations(){return calculations;},get calls(){return calls;},reset(){fs.reset();checkpoints.length=0;},newCase(id='edge'){fs.reset();for(const name of names)fs.writeFileSync('/unit/own/'+name,pristine[name],{mode:0o600});return{own:'/unit/own',instance:id};}};
+ }
+ const left=harness(old),right=harness(next);
+ const snap=h=>h.fs.snapshot().map(x=>{if(x.path.endsWith('/controls.mjs')&&x.type==='file'){const text=Buffer.from(x.bytes,'base64').toString();x.bytes=Buffer.from(text.replace(newRegion,oldRegion)).toString('base64');}return x;});
+ function pins(checkpoint) {
+  for(const entry of checkpoint.entries) {
+   assert.equal(entry.mode,0o600);const text=Buffer.from(entry.bytes,'base64').toString('utf8');
+   for(const key of ['_r3_kernel','_r3_module']){
+    const lines=text.split('\n').filter(line=>line.startsWith(key+'='));assert.equal(lines.length,1);
+    const p=JSON.parse(lines[0].slice(key.length+1));assert.deepEqual(Object.keys(p),['bytes','sha256','zipBytes','zipSha256','data','cap']);
+    const zip=Buffer.from(p.data,'base64');assert.equal(zip.length,p.zipBytes);assert.equal(digest(zip),p.zipSha256);
+   }
+  }
+ }
+ let cases=0,rendered=0;const pathControls=[];
+ for(const mutant of groups)for(const row of matrix.ordered){
+  left.reset();right.reset();
+  const instance=(mutant??'baseline')+':'+row.id;
+  const a=left.prepareCase(row,mutant,instance),b=right.prepareCase(row,mutant,instance);
+  assert.equal(a.t.own,b.t.own);
+  assert.deepEqual(left.checkpoints,right.checkpoints,instance);
+  assert.equal(left.checkpoints.length,row.scenario.startsWith('prestart-')?1:2);
+  for(const point of left.checkpoints){pins(point);rendered+=3;}
+  // Includes all mutation-written files, markers, spools, modes and inode relationships.
+  assert.deepEqual(snap(left),snap(right),instance);
+  for(const point of right.checkpoints){
+   const own=point.own;
+   assert.deepEqual(point.log,[['read',own+'/lifetime.py'],['read',own+'/delivery-outer.mjs'],['write',own+'/delivery-entry.sh'],['read',own+'/controls-outer.mjs'],['write',own+'/controls-entry.sh'],['read',own+'/delivery-outer.mjs'],['write',own+'/missing-cwd-entry.sh']]);
+  }
+  if(['E02','E06'].includes(row.id)){
+   pathControls.push(b.t.own);
+   const body=b.t.own+'/delivery-outer.mjs',text=right.fs.readFileSync(body,'utf8');
+   assert(right.fs.files.has(b.t.own+'/substitution.sh'));assert(text.includes(b.t.executionMarker));
+   assert(text.includes("base+'/afw-r3-delivery/substitution.sh'"));assert(text.includes("base+'/afw-r3-delivery/replaced.sh'"));
+  }
+  if(row.id==='E05')assert(right.fs.readFileSync(b.t.own+'/lifetime.py','utf8').includes('os.execve(-1,args,dict(os.environ))'));
+  if(row.id==='T01'){const body=right.fs.readFileSync(b.t.own+'/controls.mjs','utf8');assert(!body.includes(deadline));once(body,'\nconst controlDeadline=performance.now()-1;\n');}
+  cases++;
+ }
+ assert.equal(pathControls.length,10);assert.equal(new Set(pathControls).size,10);
+ assert.equal(cases,520);assert.equal(left.calls,1020);assert.equal(right.calls,1020);assert.equal(rendered,3060);
+ assert.equal(left.calculations,6120);assert.equal(right.calculations,626);
+ // Byte equality edge suite; each side sees identical captured filesystem reads.
+ function byteEquivalent(a,b){try{assert.deepEqual(a,b);}catch(error){error.serialUnitByteEquivalence=true;throw error;}}
+ function edgePair(variant=null) {
+  const a=harness(old),b=harness(next,variant);
+  function compare(edit=()=>{},hook=null,expectError=false){
+   const ta=a.newCase(),tb=b.newCase();edit(a,ta);edit(b,tb);
+   a.fs.clearLog();b.fs.clearLog();
+   if(hook){a.fs.setHook(hook());b.fs.setHook(hook());}
+   let ae,be;try{a.retargetEntries(ta);}catch(e){ae=true;}try{b.retargetEntries(tb);}catch(e){be=true;}
+   assert.equal(Boolean(ae),expectError);assert.equal(Boolean(be),expectError);
+   byteEquivalent(a.checkpoints.at(-1),b.checkpoints.at(-1));
+  }
+  compare();
+  compare((h,t)=>{const p=t.own+'/delivery-outer.mjs',v=h.fs.readFileSync(p);v[0]^=1;h.fs.writeFileSync(p,v);}); // same length, unequal contents
+  // Same process slots survive changed input and reversion.
+  compare();compare((h,t)=>h.fs.writeFileSync(t.own+'/lifetime.py','altered kernel'));compare();
+  compare(()=>{},()=>{let seen=0;return p=>{if(p.endsWith('/delivery-outer.mjs')&&++seen===2)return Buffer.from('different second delivery read');};});
+  compare(()=>{},()=>p=>{if(p.endsWith('/controls-outer.mjs'))throw Error('unavailable read');},true);
+  compare(()=>{},()=>{let seen=0;return p=>{if(p.endsWith('/delivery-outer.mjs')&&++seen===2)throw Error('second delivery unavailable');};},true);
+  for(const name of entries)for(const key of ['_r3_kernel','_r3_module'])for(const duplicate of [false,true]){
+   // Private pristine entry literals are instrumented only in this isolated test harness.
+   const pa=a.pristine[name],pb=b.pristine[name];
+   const corrupt=buf=>{const text=buf.toString(),line=text.split('\n').find(s=>s.startsWith(key+'='));assert(line);return Buffer.from(text.replace(line,duplicate?line+'\n'+line:'# missing '+key));};
+   a.pristine[name]=corrupt(pa);b.pristine[name]=corrupt(pb);
+   compare(()=>{},null,true);a.pristine[name]=pa;b.pristine[name]=pb;
+  }
+  return true;
+ }
+ edgePair();
+ const killed={};
+ for(const id of ['M_LENGTH','M_SECOND']){let red=false;try{edgePair(id);}catch(error){if(!error.serialUnitByteEquivalence)throw error;red=true;}assert(red,id);killed[id]='killed';}
+ // Always-recompute must preserve all bytes on the complete corpus, but fail work count.
+ const slow=harness(next,'M_RECOMPUTE'),reference=harness(old);
+ for(const mutant of groups)for(const row of matrix.ordered){
+  slow.reset();reference.reset();const instance=(mutant??'baseline')+':'+row.id;
+  slow.prepareCase(row,mutant,instance);reference.prepareCase(row,mutant,instance);
+  assert.deepEqual(slow.checkpoints,reference.checkpoints);
+  assert.deepEqual(snap(slow),snap(reference));
+ }
+ assert.equal(slow.calculations,6120);assert.throws(()=>assert.equal(slow.calculations,626));killed.M_RECOMPUTE='killed';
+ // Exact source admission predicate under controlled expired time: no build or prepare call.
+ const admission=slice(old,'\nconst controlDeadline=performance.now()+90000;','\nconst e=process.env').slice(1);
+ assert.equal(admission,'const controlDeadline=performance.now()+90000;\nconst admitCase=()=>performance.now()+20000<=controlDeadline;');
+ let builds=0;const admitted=new Function('performance',admission.replace('performance.now()+90000','performance.now()-1')+'\nreturn admitCase();')({now:()=>1234});
+ if(admitted)builds++;assert.equal(builds,0);assert.equal(admitted,false);
+ const result={purpose:'afw.serial-entry-pin.unit.v1',source,sourceTree,run,attempt:1,job:'readonly',node:'22.23.4',normalSha256:digest(old),candidateSha256:digest(next),caseInputs:cases,retargetCalls:right.calls,renderedEntries:rendered,normalPinComputations:left.calculations,candidatePinComputations:right.calculations,byteEquivalence:true,readOrderPreserved:true,edgeControls:'passed',mutants:killed,nativeBusinessCases:0,nonclaims:{historicalCauseProven:false,receiptAuthenticated:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false}};
+ const wire='AFW_SERIAL_ENTRY_PIN_UNIT/1 '+JSON.stringify(result)+'\n';
+ assert(/^[\x00-\x7f]*$/.test(wire));assert(Buffer.byteLength(wire)<=2048);return wire;
+}
+```
+
+## New loader file, complete added body (line1 is first import)
+```javascript
+import assert from 'node:assert/strict';
+import * as fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {gzipSync,gunzipSync} from 'node:zlib';
+import {execFileSync} from 'node:child_process';
+import {posix} from 'node:path';
+try{
+const e=process.env,sha=b=>createHash('sha256').update(b).digest('hex'),blob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
+assert.equal(process.versions.node,'22.23.4');
+assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REPOSITORY_ID,'1347578006');assert.equal(e.GITHUB_EVENT_NAME,'push');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(e.GITHUB_JOB,'readonly');
+assert.equal(e.GITHUB_WORKFLOW_REF,'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101');
+for(const key of ['NODE_OPTIONS','NODE_PATH','AFW_SYN_CHECKPOINT_KEY','AFW_BUDGET_DIAGNOSTIC_CANDIDATE'])assert.equal(e[key],undefined);
+assert.match(e.GITHUB_SHA,/^[a-f0-9]{40}$/);assert.match(e.GITHUB_RUN_ID,/^[1-9][0-9]{0,19}$/);
+const git=(...args)=>execFileSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);assert.equal(git('rev-parse','--show-toplevel'),fs.realpathSync('.'));assert.equal(process.cwd(),fs.realpathSync('.'));
+assert.equal(git('log','-1','--format=%B'), 'AFW-SERIAL-PIN-QUALIFICATION-ONEUSE-20261115');
+const sourceTree=git('rev-parse','HEAD^{tree}');assert.match(sourceTree,/^[a-f0-9]{40}$/);
+const same='docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md',f7='.github/workflows/afw-finite-budget-qualification.yml';
+const tree=execFileSync('git',['ls-tree','-rz','--full-tree','HEAD'],{stdio:['ignore','pipe','pipe']});
+const rows=tree.toString('utf8').split('\0').filter(Boolean).map(x=>{const at=x.indexOf('\t');assert(at>0);return{tuple:x.slice(0,at),path:x.slice(at+1)};}).filter(x=>![same,f7].includes(x.path)).sort((a,b)=>Buffer.compare(Buffer.from(a.path),Buffer.from(b.path)));
+const core=Buffer.from(rows.map(x=>x.tuple+'\t'+x.path+'\0').join(''));assert.equal(rows.length,3201);assert.equal(core.length,324448);assert.equal(sha(core),'aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703');execFileSync('git',['diff','--exit-code','HEAD','--'],{stdio:['ignore','pipe','pipe']});
+const st=fs.lstatSync(same);assert(st.isFile()&&!st.isSymbolicLink()&&st.size<=2600000);const bytes=fs.readFileSync(same);assert.equal(blob(bytes),git('rev-parse','HEAD:'+same));
+ const prefix=bytes.subarray(0,2260109);assert.equal(prefix.length,2260109);assert.equal(sha(prefix),'9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421');assert.equal(blob(prefix),'71fabddb7fcee9f436ce3ea95785c3a2ee5afe70');
+ const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(bytes),begin='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:BEGIN -->',end='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:END -->';assert.equal(text.split(begin).length,2);assert.equal(text.split(end).length,2);const first=text.indexOf(begin),last=text.indexOf(end);assert(last>first&&Buffer.byteLength(text.slice(0,first))>=prefix.length);
+ const section=text.slice(first+begin.length,last);assert.match(section,/^\n[A-Za-z0-9+/=\n]+\n$/);const b64=section.replaceAll('\n',''),pins={"bytes":487208,"sha256":"087bba2182c131579e233f6c29daf1ee85e2aae41e77b66d6f93cc44cb5000c5","blob":"f9c8261c54f761b5c33ddc370dbe7b308648033b","compressed":{"bytes":120211,"sha256":"7e9aace1b1a3930a1a5234a2fdee5af68ebec77cc5b9818a6d342328047bf0e5","blob":"b3dfc078047bee03b5b42140783ee1dcf2409fd8"},"base64Characters":160284};assert.equal(b64.length,pins.base64Characters);assert(b64.length<=174764);const zip=Buffer.from(b64,'base64');assert.equal(zip.toString('base64'),b64);assert.equal(zip.length,pins.compressed.bytes);assert(zip.length<=131072);assert.equal(sha(zip),pins.compressed.sha256);assert.equal(blob(zip),pins.compressed.blob);
+ const raw=gunzipSync(zip,{maxOutputLength:524288});assert.equal(raw.length,pins.bytes);assert.equal(sha(raw),pins.sha256);assert.equal(blob(raw),pins.blob);const wire=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(raw),payload=JSON.parse(wire);assert.equal(JSON.stringify(payload),wire);
+ // Closed captured-original-creator continuity derivation; no caller patch/path/code.
+ const ccPrefix=bytes.subarray(0,2471214);assert.equal(ccPrefix.length,2471214);assert.equal(sha(ccPrefix),'1ba61ebb62514c1bb2e5b7b6058dd5abad09ddc1d059483987262032e154928a');assert.equal(blob(ccPrefix),'2fcd79c7d0a2475f176dc03360df5980a58c3120');
+ const ccSuffix=bytes.subarray(2471214,2481826);assert.equal(ccSuffix.length,10612);assert.equal(sha(ccSuffix),'cdfe4a0b495be82b9d2746a12f09a3cb24c100f940bb6cdbecaa0585f8a7fac5');
+ const ccBegin='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:BEGIN -->',ccEnd='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:END -->';assert.equal(text.split(ccBegin).length,2);assert.equal(text.split(ccEnd).length,2);const ccFirst=text.indexOf(ccBegin),ccLast=text.indexOf(ccEnd);assert(ccLast>ccFirst&&Buffer.byteLength(text.slice(0,ccFirst))>=2471214);const ccOverlayText=text.slice(ccFirst+ccBegin.length,ccLast);assert.equal(sha(Buffer.from(ccOverlayText)),'a7e62d0ce31a094090c6b1524f34cc55b776a4938010a5ec1c310ca4ac6b712f');
+ const ccOldKernel=payload.helpers['lifetime.py'];assert.equal(sha(Buffer.from(ccOldKernel)),'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');assert.equal(ccOldKernel.split(" # AFW_LIFE_BEFORE_ARM\n").length,2);payload.helpers['lifetime.py']=ccOldKernel.replace(" # AFW_LIFE_BEFORE_ARM\n"," # AFW_LIFE_BEFORE_ARM\n if os.getppid()!=before[0]:raise CreatorDead()\n");
+ const ccKernelPin=JSON.parse(ccOverlayText).kernelSnapshot;assert.deepEqual(Object.keys(ccKernelPin),['bytes','sha256','zipBytes','zipSha256','data','cap']);assert.equal(ccKernelPin.bytes,16073);assert.equal(ccKernelPin.cap,32768);assert.equal(ccKernelPin.sha256,'f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791');assert.equal(ccKernelPin.zipBytes,5078);assert.equal(ccKernelPin.zipSha256,'f0ef8e96c2f15251fbdbcb0abe801cbb981f5c97663233a0cae0520b261f29ed');assert.equal(sha(Buffer.from(ccKernelPin.data)),'1ba509cdcd9ecda3ae60b3db8f5876e1ddf17f5f9692bff77f113cef3e6356ef');const ccKernelZip=Buffer.from(ccKernelPin.data,'base64');assert.equal(ccKernelZip.toString('base64'),ccKernelPin.data);assert.equal(ccKernelZip.length,ccKernelPin.zipBytes);assert.equal(sha(ccKernelZip),ccKernelPin.zipSha256);assert.equal(gunzipSync(ccKernelZip,{maxOutputLength:32768}).toString('utf8'),payload.helpers['lifetime.py']);
+ for(const name of ['delivery-entry.sh','controls-entry.sh','missing-cwd-entry.sh']){const prior=payload.helpers[name],lines=prior.split('\n').filter(line=>line.startsWith('_r3_kernel='));assert.equal(lines.length,1);const oldPin=JSON.parse(lines[0].slice('_r3_kernel='.length));assert.equal(oldPin.bytes,16025);assert.equal(oldPin.sha256,'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');payload.helpers[name]=prior.replace(lines[0],'_r3_kernel='+JSON.stringify(ccKernelPin));}
+ const ccResult=Buffer.from(JSON.stringify(payload));assert.equal(ccResult.length,487293);assert.equal(sha(ccResult),'dda3f25ef82cdf4e65814360b52aafa9ddf3ec2e57d1fa2f92e46466acfcd25b');assert.equal(blob(ccResult),'f23fcfebf3c72632327cf24babf2ff7ace22dae6');
+const normal=JSON.parse(JSON.stringify(payload));
+  const serialPrefix=bytes.subarray(0,2514447);
+  assert.equal(serialPrefix.length,2514447);assert.equal(sha(serialPrefix),'ae7a7ed3d0cbd38149bfd284eaeb458fc696bede38976f509a801c40ced1b770');assert.equal(blob(serialPrefix),'af9eee4beb70ea89fef675cfc5bb99ec10811fc4');
+  const serialAppend=bytes.subarray(2514447,2538602);assert.equal(serialAppend.length,24155);assert.equal(sha(serialAppend),'48e15b75dfdd3221681f262de02a462cf0edf43b6010264310cfa7180858438f');
+  const serialBegin='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:BEGIN -->',serialEnd='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:END -->';assert.equal(text.split(serialBegin).length,2);assert.equal(text.split(serialEnd).length,2);
+  const serialText=text.slice(text.indexOf(serialBegin)+serialBegin.length,text.indexOf(serialEnd));
+  assert.equal(sha(Buffer.from(serialText)),'07567d1647505cbf671675f87b874b6afc0b18b5a9cbaa445496b1a9e69df20b');
+  const serial=JSON.parse(serialText);assert.equal('\n'+JSON.stringify(serial)+'\n',serialText);
+  assert.deepEqual(Object.keys(serial),['purpose','closedParent','closedTree','origin','baselinePrefix','normalHistory','overlay','unit','unitSchema','oneUseMessage','nonclaims']);
+  assert.equal(serial.purpose,'afw.serial-entry-pin.append.v1');assert.equal(serial.closedParent,'3f23a9805a60d285a6272138765078e7da80e5eb');assert.equal(serial.closedTree,'a8c002728663bdcf67a6bc59d5c5f1232cb6384c');
+  const serialOverlay=serial.overlay;assert.deepEqual(Object.keys(serialOverlay),['purpose','normalRaw','normalControls','candidateControls','span','candidateRaw','nonclaims']);assert.equal(serialOverlay.purpose,'afw.serial-entry-pin.overlay.v1');
+  assert.deepEqual(Object.keys(serialOverlay.span),['from','to']);
+  const serialOld=payload.helpers['controls.mjs'];assert.equal(sha(Buffer.from(serialOld)),'060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df');assert.equal(serialOld.split(serialOverlay.span.from).length,2);
+  payload.helpers['controls.mjs']=serialOld.replace(serialOverlay.span.from,serialOverlay.span.to);
+  const serialControls=Buffer.from(payload.helpers['controls.mjs']);assert.equal(serialControls.length,32428);assert.equal(sha(serialControls),'3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35');assert.equal(blob(serialControls),'17e101dd8720312111b7dffb37f7edb8da41a0fd');
+  const serialResult=Buffer.from(JSON.stringify(payload));assert.equal(serialResult.length,487931);assert.equal(sha(serialResult),'f5fe1b3ecc0054ba1ce626c9140fc5899f4b35d0e8544181eb2606771b7220f8');assert.equal(blob(serialResult),'2716e7224ddee98690f457d0c48e6d096bd17024');
+
+const candidate=payload;
+assert.deepEqual(Object.keys(serial.unit),['blob','bytes','sha256','kind','cap','code']);assert.equal(serial.unit.cap,32768);assert.equal(serial.unit.kind,'github-only-unit');
+assert.equal(Buffer.byteLength(serial.unit.code),17454);assert.equal(serial.unit.bytes,17454);assert.equal(sha(serial.unit.code),'1ad51c019123e57d6a663921337f91a6cdd667798f04bafd3e3230b78c181039');assert.equal(blob(Buffer.from(serial.unit.code)),'c8ab01ecb2e569fd8908c8edc22a630664c08ee7');assert(serial.unit.bytes<=32768);
+assert.deepEqual(Object.keys(serial.unitSchema),['blob','bytes','sha256','kind','cap','schema']);assert.equal(serial.unitSchema.cap,32768);
+const schemaText=JSON.stringify(serial.unitSchema.schema);assert.equal(Buffer.byteLength(schemaText),1927);assert.equal(sha(schemaText),'4ccead174e6782f89072083ca06c15966d6c4ce0ef4e13625f393964c433320e');assert.equal(blob(Buffer.from(schemaText)),'300a3d8739532f8fbb67bd97480ee0fd366f835e');
+const unit=await import('data:text/javascript;base64,'+Buffer.from(serial.unit.code).toString('base64'));
+assert.deepEqual(Object.keys(unit),['serialPinUnit']);
+const wire=unit.serialPinUnit({assert,createHash,gzipSync,posix,normal,candidate,source:e.GITHUB_SHA,sourceTree,run:e.GITHUB_RUN_ID});
+assert.equal(typeof wire,'string');assert(Buffer.byteLength(wire)<=2048);assert(/^[\x00-\x7f]*$/.test(wire));assert.equal(wire.split('\n').length,2);assert(wire.endsWith('\n'));
+const frame='AFW_SERIAL_ENTRY_PIN_UNIT/1 ';assert(wire.startsWith(frame));
+const data=JSON.parse(wire.slice(frame.length));assert.equal(frame+JSON.stringify(data)+'\n',wire);
+function validate(value,schema){
+ if(Object.hasOwn(schema,'const')){assert.deepEqual(value,schema.const);return;}
+ if(schema.type==='object'){assert(value&&typeof value==='object'&&!Array.isArray(value));assert.equal(schema.additionalProperties,false);assert.deepEqual(Object.keys(value),schema.required);assert.deepEqual(Object.keys(schema.properties),schema.required);for(const key of schema.required)validate(value[key],schema.properties[key]);return;}
+ assert.equal(schema.type,'string');assert.equal(typeof value,'string');assert(new RegExp(schema.pattern).test(value));
+}
+validate(data,serial.unitSchema.schema);
+assert.equal(data.source,e.GITHUB_SHA);assert.equal(data.sourceTree,sourceTree);assert.equal(data.run,e.GITHUB_RUN_ID);
+process.stdout.write(wire);
+
+}catch{process.stderr.write('AFW_SERIAL_ENTRY_PIN_UNIT_FAILED\n');process.exitCode=1;}
+```
+
+## Prelude, complete textual diff with context
+```diff
+--- a/bootstrap-prelude.mjs
++++ b/bootstrap-prelude.mjs
+@@ -18,29 +18,45 @@
+  const core=Buffer.from(rows.map(x=>x.tuple+'\t'+x.path+'\0').join(''));assert.equal(rows.length,3201);assert.equal(core.length,324448);assert.equal(sha(core),'aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703');execFileSync('git',['diff','--exit-code','HEAD','--'],{stdio:['ignore','pipe','pipe']});
+  const st=fs.lstatSync(same);assert(st.isFile()&&!st.isSymbolicLink()&&st.size<=2600000);const bytes=fs.readFileSync(same);assert.equal(blob(bytes),git('rev-parse','HEAD:'+same));
+  const prefix=bytes.subarray(0,2260109);assert.equal(prefix.length,2260109);assert.equal(sha(prefix),'9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421');assert.equal(blob(prefix),'71fabddb7fcee9f436ce3ea95785c3a2ee5afe70');
+  const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(bytes),begin='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:BEGIN -->',end='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:END -->';assert.equal(text.split(begin).length,2);assert.equal(text.split(end).length,2);const first=text.indexOf(begin),last=text.indexOf(end);assert(last>first&&Buffer.byteLength(text.slice(0,first))>=prefix.length);
+  const section=text.slice(first+begin.length,last);assert.match(section,/^\n[A-Za-z0-9+/=\n]+\n$/);const b64=section.replaceAll('\n',''),pins={"bytes":487208,"sha256":"087bba2182c131579e233f6c29daf1ee85e2aae41e77b66d6f93cc44cb5000c5","blob":"f9c8261c54f761b5c33ddc370dbe7b308648033b","compressed":{"bytes":120211,"sha256":"7e9aace1b1a3930a1a5234a2fdee5af68ebec77cc5b9818a6d342328047bf0e5","blob":"b3dfc078047bee03b5b42140783ee1dcf2409fd8"},"base64Characters":160284};assert.equal(b64.length,pins.base64Characters);assert(b64.length<=174764);const zip=Buffer.from(b64,'base64');assert.equal(zip.toString('base64'),b64);assert.equal(zip.length,pins.compressed.bytes);assert(zip.length<=131072);assert.equal(sha(zip),pins.compressed.sha256);assert.equal(blob(zip),pins.compressed.blob);
+  const raw=gunzipSync(zip,{maxOutputLength:524288});assert.equal(raw.length,pins.bytes);assert.equal(sha(raw),pins.sha256);assert.equal(blob(raw),pins.blob);const wire=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(raw),payload=JSON.parse(wire);assert.equal(JSON.stringify(payload),wire);
+  // Closed captured-original-creator continuity derivation; no caller patch/path/code.
+  const ccPrefix=bytes.subarray(0,2471214);assert.equal(ccPrefix.length,2471214);assert.equal(sha(ccPrefix),'1ba61ebb62514c1bb2e5b7b6058dd5abad09ddc1d059483987262032e154928a');assert.equal(blob(ccPrefix),'2fcd79c7d0a2475f176dc03360df5980a58c3120');
+- const ccSuffix=bytes.subarray(2471214);assert.equal(ccSuffix.length,10612);assert.equal(sha(ccSuffix),'cdfe4a0b495be82b9d2746a12f09a3cb24c100f940bb6cdbecaa0585f8a7fac5');
+- const ccBegin='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:BEGIN -->',ccEnd='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:END -->';assert.equal(text.split(ccBegin).length,2);assert.equal(text.split(ccEnd).length,2);const ccFirst=text.indexOf(ccBegin),ccLast=text.indexOf(ccEnd);assert(ccLast>ccFirst&&Buffer.byteLength(text.slice(0,ccFirst))>=2471214);const ccOverlayText=text.slice(ccFirst+ccBegin.length,ccLast);assert.equal(sha(Buffer.from(ccOverlayText)),'a7e62d0ce31a094090c6b1524f34cc55b776a4938010a5ec1c310ca4ac6b712f');
+- const ccOldKernel=payload.helpers['lifetime.py'];assert.equal(sha(Buffer.from(ccOldKernel)),'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');assert.equal(ccOldKernel.split(" # AFW_LIFE_BEFORE_ARM\n").length,2);payload.helpers['lifetime.py']=ccOldKernel.replace(" # AFW_LIFE_BEFORE_ARM\n"," # AFW_LIFE_BEFORE_ARM\n if os.getppid()!=before[0]:raise CreatorDead()\n");
+- const ccKernelPin=JSON.parse(ccOverlayText).kernelSnapshot;assert.deepEqual(Object.keys(ccKernelPin),['bytes','sha256','zipBytes','zipSha256','data','cap']);assert.equal(ccKernelPin.bytes,16073);assert.equal(ccKernelPin.cap,32768);assert.equal(ccKernelPin.sha256,'f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791');assert.equal(ccKernelPin.zipBytes,5078);assert.equal(ccKernelPin.zipSha256,'f0ef8e96c2f15251fbdbcb0abe801cbb981f5c97663233a0cae0520b261f29ed');assert.equal(sha(Buffer.from(ccKernelPin.data)),'1ba509cdcd9ecda3ae60b3db8f5876e1ddf17f5f9692bff77f113cef3e6356ef');const ccKernelZip=Buffer.from(ccKernelPin.data,'base64');assert.equal(ccKernelZip.toString('base64'),ccKernelPin.data);assert.equal(ccKernelZip.length,ccKernelPin.zipBytes);assert.equal(sha(ccKernelZip),ccKernelPin.zipSha256);assert.equal(gunzipSync(ccKernelZip,{maxOutputLength:32768}).toString('utf8'),payload.helpers['lifetime.py']);
+- for(const name of ['delivery-entry.sh','controls-entry.sh','missing-cwd-entry.sh']){const prior=payload.helpers[name],lines=prior.split('\n').filter(line=>line.startsWith('_r3_kernel='));assert.equal(lines.length,1);const oldPin=JSON.parse(lines[0].slice('_r3_kernel='.length));assert.equal(oldPin.bytes,16025);assert.equal(oldPin.sha256,'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');payload.helpers[name]=prior.replace(lines[0],'_r3_kernel='+JSON.stringify(ccKernelPin));}
+- const ccResult=Buffer.from(JSON.stringify(payload));assert.equal(ccResult.length,487293);assert.equal(sha(ccResult),'dda3f25ef82cdf4e65814360b52aafa9ddf3ec2e57d1fa2f92e46466acfcd25b');assert.equal(blob(ccResult),'f23fcfebf3c72632327cf24babf2ff7ace22dae6');
+- // Original raw origin, production18, remaining29 helpers and public wire remain pinned.
+- assert.deepEqual(Object.keys(payload),['purpose','sourceParent','sourceParentTree','core','prefix','production','helpers']);assert.equal(payload.purpose,'afw.r3-delivery.successor-round5-data.v1');assert.equal(payload.sourceParent,'bfa80fac58ecb60bb3c9bcd458da6f393b301f70');assert.equal(payload.sourceParentTree,'d17f87ef49892e6a4c0ec50dd2436b0697b9f45f');assert.deepEqual(payload.core,{"count":3201,"bytes":324448,"sha256":"aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"});assert.deepEqual(payload.prefix,{"blob":"71fabddb7fcee9f436ce3ea95785c3a2ee5afe70","bytes":2260109,"sha256":"9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421"});
+- const prod=payload.production;assert.deepEqual(Object.keys(prod),['blob','bytes','sha256','count','setSha256','data']);assert.equal(prod.count,18);assert.equal(prod.blob,'b88ebef9a2aa979772d20bfb778cbfe463dc3011');assert.equal(prod.bytes,95518);assert.equal(prod.sha256,'cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91');assert.equal(prod.setSha256,'71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af');
+- const frozen=Buffer.from(prod.data);assert.equal(frozen.length,prod.bytes);assert.equal(sha(frozen),prod.sha256);assert.equal(blob(frozen),prod.blob);const original=JSON.parse(prod.data);assert.equal(JSON.stringify(original)+'\n',prod.data);assert.equal(original.productionCount,18);assert.equal(Object.keys(original.programs).length,18);
+- const originalPins={};for(const[name,p]of Object.entries(original.programs)){const b=Buffer.from(p.content);assert.deepEqual(Object.keys(p),['bytes','sha256','blob','content']);assert.equal(b.length,p.bytes);assert.equal(sha(b),p.sha256);assert.equal(blob(b),p.blob);originalPins[name]={bytes:p.bytes,sha256:p.sha256,blob:p.blob};}assert.equal(sha(Buffer.from(JSON.stringify(originalPins)+'\n')),prod.setSha256);
+- // Frozen18 remain DATA. No production main/original readonly CLI/Native import, materialization or call.
+- const expected={"io.mjs":{"bytes":1815,"sha256":"b7d4ee0b8786c52a26857a8e203a710017b40dc8f5636a1d387638b9ec78eb47","blob":"8bb9a8ab8ddf81689ee890252579c1fd41dfdf52"},"emitter.mjs":{"bytes":3511,"sha256":"02f80480dbc8bc8700d0ecf3a57e65f855954ca64b379d29eefdb75c6d7db760","blob":"f9eee51fbdb89d0e130f8137d6a48ae787904f66"},"source-provenance.mjs":{"bytes":6690,"sha256":"b4d0872044216a275458d14b838ecf57628780092767ea88910dce18585408ce","blob":"fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d"},"raw-sample.mjs":{"bytes":4289,"sha256":"1b594a7768a69cba5db1f41e83eb2a941f6451c82584490fdb77ba1fea85e9fc","blob":"8cdabb2324ae97b04fa17350846e24d666cd3536"},"site-schema.json":{"bytes":12651,"sha256":"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd","blob":"4871edc102386fe6db65c773e51c21ecb94897e3"},"site-map.json":{"bytes":6630,"sha256":"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","blob":"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f"},"envelope-schema.json":{"bytes":5616,"sha256":"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5","blob":"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f"},"boundary.py":{"bytes":12562,"sha256":"27274120076048fd6f63b122b5534d8d06e97a2d4cf36461c1f710c605accdf4","blob":"554a2b2d2a8e3f365533f0df3006bcce1e409698"},"delivery-schema.json":{"bytes":1380,"sha256":"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60","blob":"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8"},"unavailable-schema.json":{"bytes":1315,"sha256":"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9","blob":"4a310ddcef7b1b7bf0755bf56b760486254cf8c6"},"controls-schema.json":{"bytes":4681,"sha256":"2d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83","blob":"8586d4387a5fcd95b18d7c966cf841432330a789"},"matrix.json":{"bytes":24054,"sha256":"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e","blob":"5b829c768ed3d7af03d5eb3f1870599d39bfd083"},"shape.mjs":{"bytes":843,"sha256":"82224496e7db35a1daf7168591cb2123edbb3242331a314680f13d05b3bfef5e","blob":"df49410ebf42b4fbc9a8c032f81a0edc8fb95d0b"},"control-proof.mjs":{"bytes":2206,"sha256":"a7318fd9452f0254fdb9ae1261040ab944ce2d56c443004579c51e55c2c63c71","blob":"ab38574f5fe697fd9f0d48f9ade065749f4a0c14"},"site-receiver.mjs":{"bytes":5460,"sha256":"0d346b88c9594c45ef207f9fa4b57c984d13a3e64943904f880e2e2b96377ad2","blob":"c2cf804b6d427b5fc40da2b7d1375785a0a2f459"},"normalized-sample.mjs":{"bytes":3987,"sha256":"2bee6afaa30f01f1f497512d595f24f3a0c92269e3b4ed7e2d2e349ae5b4419f","blob":"f7c2fefcc9df568a8453d876072a23a790b94fcd"},"witness.mjs":{"bytes":1044,"sha256":"336df41b1994c8a315e4f56d976ddd0c9922397c702a02869ac8d44f42a8629a","blob":"b207c0c9ea759a9a146783b8818276444bef155b"},"fixtures.json":{"bytes":7988,"sha256":"06b7dc9e63c178b6b823db1ee56049ce4d1406861df240ca2fbc119d2df45bc9","blob":"f29e76fd04627ebe5d1100007808610ebc240571"},"controls.mjs":{"bytes":31799,"sha256":"060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df","blob":"b9b58c4a22f04b177f92dcbf8841cfc77f648c86"},"examples.json":{"bytes":22739,"sha256":"4f8da5a563bb0498cc506d693421853777ba7efb67d42da44b1889e5fef7b945","blob":"6f28d4f4479fb093aec3188d21b1796fd7c3fff2"},"controls-boundary.py":{"bytes":12908,"sha256":"6e3dcd0c4f262a509b75499674375eaa3d91b9e83789f03689862f51734fc3d7","blob":"b6c39695cdca9963d083842b114b7e4fb59e6392"},"controls-unavailable-example.json":{"bytes":568,"sha256":"7544b33859efe6ba2f6f1789e709f89f5f94f08352dd4fe4b14d700b19b22644","blob":"beedc03c8066cef6e6a24914d5334f99183d014b"},"outer.mjs":{"bytes":25947,"sha256":"62f2faa1bff1a2aa2438e8c1794361910e44a6db9c632daa28185adc647bf515","blob":"c74d74879d6935c47d50b1233dad4027e6704365"},"delivery-entry.sh":{"bytes":24013,"sha256":"63b7e32a4291e5a1b2fc3753a5ae89758dcf0913f6f2bf2d558bc3a0dd9f2961","blob":"2477c393fbc7d9883894ef7299b4f749cc3857ab"},"controls-entry.sh":{"bytes":24058,"sha256":"e874d2de7710156e11726c7bd01626faa5351f94514cf0c42878e679981ad899","blob":"f0825d011a5e7942194a157a327ef7c42548180c"},"oracle.mjs":{"bytes":1877,"sha256":"37c8724ced0eaa42bd54aa01aef1af7c3a7107ff3e78243e1f3d04da841fa4d1","blob":"652201ebe699664b97a5bc3d7c815a02dd889805"},"lifetime.py":{"bytes":16073,"sha256":"f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791","blob":"765573c5eeaf83add464e94a8240dcd7a90786d0"},"delivery-outer.mjs":{"bytes":25986,"sha256":"d32eaeb8d09e1d50dd14195fecec7606d457004ea6f61084900b94547cc6899f","blob":"aac76e8c15a01cbb308ba63ad7dec19e2d5ebb76"},"controls-outer.mjs":{"bytes":25986,"sha256":"ada3cc7cf36a742d71c6ed12a7b5d15b91d56c4353aad02318a871ec370e4c35","blob":"e62dd9c4760da521b84f23b1c87855070767aac0"},"missing-cwd-entry.sh":{"bytes":24130,"sha256":"e625cd8b88726576b278099856bd6b3126c02da4f31c387ba49ced923a5fa9fc","blob":"3666fdd52620bd2a30bfa3e100897b2fab1610c1"},"race-creator.mjs":{"bytes":777,"sha256":"2657c30db6cff046599ff3d9cd2cdf7c3c312252b9636741627871d090372575","blob":"a6d47254adbf330a09b879a3a9b20ae4de476e73"},"lifetime-controls.py":{"bytes":12219,"sha256":"d67b5c8c8e127c359f8d2b5d7da30da809b8d91bfb77759df4bbf9ecaaf53c59","blob":"21b0b82242a76efd94d34fe1f722e04fda6cd489"},"authority-anchor.json":{"bytes":1964,"sha256":"e08d9864b16a1534b71344b817a6d3a78697d8d51af8ea798229a5f16d4b6407","blob":"1bed486f15a8743ef7c68470772835aaf4946a40"}},names=Object.keys(expected);assert.equal(names.length,33);assert.deepEqual(Object.keys(payload.helpers),names);
++ const ccSuffix=bytes.subarray(2471214,2481826);assert.equal(ccSuffix.length,10612);assert.equal(sha(ccSuffix),'cdfe4a0b495be82b9d2746a12f09a3cb24c100f940bb6cdbecaa0585f8a7fac5');
++ const ccBegin='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:BEGIN -->',ccEnd='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:END -->';assert.equal(text.split(ccBegin).length,2);assert.equal(text.split(ccEnd).length,2);const ccFirst=text.indexOf(ccBegin),ccLast=text.indexOf(ccEnd);assert(ccLast>ccFirst&&Buffer.byteLength(text.slice(0,ccFirst))>=2471214);const ccOverlayText=text.slice(ccFirst+ccBegin.length,ccLast);assert.equal(sha(Buffer.from(ccOverlayText)),'a7e62d0ce31a094090c6b1524f34cc55b776a4938010a5ec1c310ca4ac6b712f');
++ const ccOldKernel=payload.helpers['lifetime.py'];assert.equal(sha(Buffer.from(ccOldKernel)),'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');assert.equal(ccOldKernel.split(" # AFW_LIFE_BEFORE_ARM\n").length,2);payload.helpers['lifetime.py']=ccOldKernel.replace(" # AFW_LIFE_BEFORE_ARM\n"," # AFW_LIFE_BEFORE_ARM\n if os.getppid()!=before[0]:raise CreatorDead()\n");
++ const ccKernelPin=JSON.parse(ccOverlayText).kernelSnapshot;assert.deepEqual(Object.keys(ccKernelPin),['bytes','sha256','zipBytes','zipSha256','data','cap']);assert.equal(ccKernelPin.bytes,16073);assert.equal(ccKernelPin.cap,32768);assert.equal(ccKernelPin.sha256,'f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791');assert.equal(ccKernelPin.zipBytes,5078);assert.equal(ccKernelPin.zipSha256,'f0ef8e96c2f15251fbdbcb0abe801cbb981f5c97663233a0cae0520b261f29ed');assert.equal(sha(Buffer.from(ccKernelPin.data)),'1ba509cdcd9ecda3ae60b3db8f5876e1ddf17f5f9692bff77f113cef3e6356ef');const ccKernelZip=Buffer.from(ccKernelPin.data,'base64');assert.equal(ccKernelZip.toString('base64'),ccKernelPin.data);assert.equal(ccKernelZip.length,ccKernelPin.zipBytes);assert.equal(sha(ccKernelZip),ccKernelPin.zipSha256);assert.equal(gunzipSync(ccKernelZip,{maxOutputLength:32768}).toString('utf8'),payload.helpers['lifetime.py']);
++ for(const name of ['delivery-entry.sh','controls-entry.sh','missing-cwd-entry.sh']){const prior=payload.helpers[name],lines=prior.split('\n').filter(line=>line.startsWith('_r3_kernel='));assert.equal(lines.length,1);const oldPin=JSON.parse(lines[0].slice('_r3_kernel='.length));assert.equal(oldPin.bytes,16025);assert.equal(oldPin.sha256,'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');payload.helpers[name]=prior.replace(lines[0],'_r3_kernel='+JSON.stringify(ccKernelPin));}
++ const ccResult=Buffer.from(JSON.stringify(payload));assert.equal(ccResult.length,487293);assert.equal(sha(ccResult),'dda3f25ef82cdf4e65814360b52aafa9ddf3ec2e57d1fa2f92e46466acfcd25b');assert.equal(blob(ccResult),'f23fcfebf3c72632327cf24babf2ff7ace22dae6');
++  const serialPrefix=bytes.subarray(0,2514447);
++  assert.equal(serialPrefix.length,2514447);assert.equal(sha(serialPrefix),'ae7a7ed3d0cbd38149bfd284eaeb458fc696bede38976f509a801c40ced1b770');assert.equal(blob(serialPrefix),'af9eee4beb70ea89fef675cfc5bb99ec10811fc4');
++  const serialAppend=bytes.subarray(2514447,2538602);assert.equal(serialAppend.length,24155);assert.equal(sha(serialAppend),'48e15b75dfdd3221681f262de02a462cf0edf43b6010264310cfa7180858438f');
++  const serialBegin='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:BEGIN -->',serialEnd='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:END -->';assert.equal(text.split(serialBegin).length,2);assert.equal(text.split(serialEnd).length,2);
++  const serialText=text.slice(text.indexOf(serialBegin)+serialBegin.length,text.indexOf(serialEnd));
++  assert.equal(sha(Buffer.from(serialText)),'07567d1647505cbf671675f87b874b6afc0b18b5a9cbaa445496b1a9e69df20b');
++  const serial=JSON.parse(serialText);assert.equal('\n'+JSON.stringify(serial)+'\n',serialText);
++  assert.deepEqual(Object.keys(serial),['purpose','closedParent','closedTree','origin','baselinePrefix','normalHistory','overlay','unit','unitSchema','oneUseMessage','nonclaims']);
++  assert.equal(serial.purpose,'afw.serial-entry-pin.append.v1');assert.equal(serial.closedParent,'3f23a9805a60d285a6272138765078e7da80e5eb');assert.equal(serial.closedTree,'a8c002728663bdcf67a6bc59d5c5f1232cb6384c');
++  const serialOverlay=serial.overlay;assert.deepEqual(Object.keys(serialOverlay),['purpose','normalRaw','normalControls','candidateControls','span','candidateRaw','nonclaims']);assert.equal(serialOverlay.purpose,'afw.serial-entry-pin.overlay.v1');
++  assert.deepEqual(Object.keys(serialOverlay.span),['from','to']);
++  const serialOld=payload.helpers['controls.mjs'];assert.equal(sha(Buffer.from(serialOld)),'060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df');assert.equal(serialOld.split(serialOverlay.span.from).length,2);
++  payload.helpers['controls.mjs']=serialOld.replace(serialOverlay.span.from,serialOverlay.span.to);
++  const serialControls=Buffer.from(payload.helpers['controls.mjs']);assert.equal(serialControls.length,32428);assert.equal(sha(serialControls),'3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35');assert.equal(blob(serialControls),'17e101dd8720312111b7dffb37f7edb8da41a0fd');
++  const serialResult=Buffer.from(JSON.stringify(payload));assert.equal(serialResult.length,487931);assert.equal(sha(serialResult),'f5fe1b3ecc0054ba1ce626c9140fc5899f4b35d0e8544181eb2606771b7220f8');assert.equal(blob(serialResult),'2716e7224ddee98690f457d0c48e6d096bd17024');
++
++ // Original raw origin, production18, remaining32 helpers and public wire remain pinned.
++ assert.deepEqual(Object.keys(payload),['purpose','sourceParent','sourceParentTree','core','prefix','production','helpers']);assert.equal(payload.purpose,'afw.r3-delivery.successor-round5-data.v1');assert.equal(payload.sourceParent,'bfa80fac58ecb60bb3c9bcd458da6f393b301f70');assert.equal(payload.sourceParentTree,'d17f87ef49892e6a4c0ec50dd2436b0697b9f45f');assert.deepEqual(payload.core,{"count":3201,"bytes":324448,"sha256":"aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"});assert.deepEqual(payload.prefix,{"blob":"71fabddb7fcee9f436ce3ea95785c3a2ee5afe70","bytes":2260109,"sha256":"9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421"});
++ const prod=payload.production;assert.deepEqual(Object.keys(prod),['blob','bytes','sha256','count','setSha256','data']);assert.equal(prod.count,18);assert.equal(prod.blob,'b88ebef9a2aa979772d20bfb778cbfe463dc3011');assert.equal(prod.bytes,95518);assert.equal(prod.sha256,'cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91');assert.equal(prod.setSha256,'71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af');
++ const frozen=Buffer.from(prod.data);assert.equal(frozen.length,prod.bytes);assert.equal(sha(frozen),prod.sha256);assert.equal(blob(frozen),prod.blob);const original=JSON.parse(prod.data);assert.equal(JSON.stringify(original)+'\n',prod.data);assert.equal(original.productionCount,18);assert.equal(Object.keys(original.programs).length,18);
++ const originalPins={};for(const[name,p]of Object.entries(original.programs)){const b=Buffer.from(p.content);assert.deepEqual(Object.keys(p),['bytes','sha256','blob','content']);assert.equal(b.length,p.bytes);assert.equal(sha(b),p.sha256);assert.equal(blob(b),p.blob);originalPins[name]={bytes:p.bytes,sha256:p.sha256,blob:p.blob};}assert.equal(sha(Buffer.from(JSON.stringify(originalPins)+'\n')),prod.setSha256);
++ // Frozen18 remain DATA. No production main/original readonly CLI/Native import, materialization or call.
++ const expected={"io.mjs":{"bytes":1815,"sha256":"b7d4ee0b8786c52a26857a8e203a710017b40dc8f5636a1d387638b9ec78eb47","blob":"8bb9a8ab8ddf81689ee890252579c1fd41dfdf52"},"emitter.mjs":{"bytes":3511,"sha256":"02f80480dbc8bc8700d0ecf3a57e65f855954ca64b379d29eefdb75c6d7db760","blob":"f9eee51fbdb89d0e130f8137d6a48ae787904f66"},"source-provenance.mjs":{"bytes":6690,"sha256":"b4d0872044216a275458d14b838ecf57628780092767ea88910dce18585408ce","blob":"fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d"},"raw-sample.mjs":{"bytes":4289,"sha256":"1b594a7768a69cba5db1f41e83eb2a941f6451c82584490fdb77ba1fea85e9fc","blob":"8cdabb2324ae97b04fa17350846e24d666cd3536"},"site-schema.json":{"bytes":12651,"sha256":"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd","blob":"4871edc102386fe6db65c773e51c21ecb94897e3"},"site-map.json":{"bytes":6630,"sha256":"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","blob":"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f"},"envelope-schema.json":{"bytes":5616,"sha256":"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5","blob":"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f"},"boundary.py":{"bytes":12562,"sha256":"27274120076048fd6f63b122b5534d8d06e97a2d4cf36461c1f710c605accdf4","blob":"554a2b2d2a8e3f365533f0df3006bcce1e409698"},"delivery-schema.json":{"bytes":1380,"sha256":"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60","blob":"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8"},"unavailable-schema.json":{"bytes":1315,"sha256":"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9","blob":"4a310ddcef7b1b7bf0755bf56b760486254cf8c6"},"controls-schema.json":{"bytes":4681,"sha256":"2d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83","blob":"8586d4387a5fcd95b18d7c966cf841432330a789"},"matrix.json":{"bytes":24054,"sha256":"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e","blob":"5b829c768ed3d7af03d5eb3f1870599d39bfd083"},"shape.mjs":{"bytes":843,"sha256":"82224496e7db35a1daf7168591cb2123edbb3242331a314680f13d05b3bfef5e","blob":"df49410ebf42b4fbc9a8c032f81a0edc8fb95d0b"},"control-proof.mjs":{"bytes":2206,"sha256":"a7318fd9452f0254fdb9ae1261040ab944ce2d56c443004579c51e55c2c63c71","blob":"ab38574f5fe697fd9f0d48f9ade065749f4a0c14"},"site-receiver.mjs":{"bytes":5460,"sha256":"0d346b88c9594c45ef207f9fa4b57c984d13a3e64943904f880e2e2b96377ad2","blob":"c2cf804b6d427b5fc40da2b7d1375785a0a2f459"},"normalized-sample.mjs":{"bytes":3987,"sha256":"2bee6afaa30f01f1f497512d595f24f3a0c92269e3b4ed7e2d2e349ae5b4419f","blob":"f7c2fefcc9df568a8453d876072a23a790b94fcd"},"witness.mjs":{"bytes":1044,"sha256":"336df41b1994c8a315e4f56d976ddd0c9922397c702a02869ac8d44f42a8629a","blob":"b207c0c9ea759a9a146783b8818276444bef155b"},"fixtures.json":{"bytes":7988,"sha256":"06b7dc9e63c178b6b823db1ee56049ce4d1406861df240ca2fbc119d2df45bc9","blob":"f29e76fd04627ebe5d1100007808610ebc240571"},"controls.mjs":{"bytes":32428,"sha256":"3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35","blob":"17e101dd8720312111b7dffb37f7edb8da41a0fd"},"examples.json":{"bytes":22739,"sha256":"4f8da5a563bb0498cc506d693421853777ba7efb67d42da44b1889e5fef7b945","blob":"6f28d4f4479fb093aec3188d21b1796fd7c3fff2"},"controls-boundary.py":{"bytes":12908,"sha256":"6e3dcd0c4f262a509b75499674375eaa3d91b9e83789f03689862f51734fc3d7","blob":"b6c39695cdca9963d083842b114b7e4fb59e6392"},"controls-unavailable-example.json":{"bytes":568,"sha256":"7544b33859efe6ba2f6f1789e709f89f5f94f08352dd4fe4b14d700b19b22644","blob":"beedc03c8066cef6e6a24914d5334f99183d014b"},"outer.mjs":{"bytes":25947,"sha256":"62f2faa1bff1a2aa2438e8c1794361910e44a6db9c632daa28185adc647bf515","blob":"c74d74879d6935c47d50b1233dad4027e6704365"},"delivery-entry.sh":{"bytes":24013,"sha256":"63b7e32a4291e5a1b2fc3753a5ae89758dcf0913f6f2bf2d558bc3a0dd9f2961","blob":"2477c393fbc7d9883894ef7299b4f749cc3857ab"},"controls-entry.sh":{"bytes":24058,"sha256":"e874d2de7710156e11726c7bd01626faa5351f94514cf0c42878e679981ad899","blob":"f0825d011a5e7942194a157a327ef7c42548180c"},"oracle.mjs":{"bytes":1877,"sha256":"37c8724ced0eaa42bd54aa01aef1af7c3a7107ff3e78243e1f3d04da841fa4d1","blob":"652201ebe699664b97a5bc3d7c815a02dd889805"},"lifetime.py":{"bytes":16073,"sha256":"f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791","blob":"765573c5eeaf83add464e94a8240dcd7a90786d0"},"delivery-outer.mjs":{"bytes":25986,"sha256":"d32eaeb8d09e1d50dd14195fecec7606d457004ea6f61084900b94547cc6899f","blob":"aac76e8c15a01cbb308ba63ad7dec19e2d5ebb76"},"controls-outer.mjs":{"bytes":25986,"sha256":"ada3cc7cf36a742d71c6ed12a7b5d15b91d56c4353aad02318a871ec370e4c35","blob":"e62dd9c4760da521b84f23b1c87855070767aac0"},"missing-cwd-entry.sh":{"bytes":24130,"sha256":"e625cd8b88726576b278099856bd6b3126c02da4f31c387ba49ced923a5fa9fc","blob":"3666fdd52620bd2a30bfa3e100897b2fab1610c1"},"race-creator.mjs":{"bytes":777,"sha256":"2657c30db6cff046599ff3d9cd2cdf7c3c312252b9636741627871d090372575","blob":"a6d47254adbf330a09b879a3a9b20ae4de476e73"},"lifetime-controls.py":{"bytes":12219,"sha256":"d67b5c8c8e127c359f8d2b5d7da30da809b8d91bfb77759df4bbf9ecaaf53c59","blob":"21b0b82242a76efd94d34fe1f722e04fda6cd489"},"authority-anchor.json":{"bytes":1964,"sha256":"e08d9864b16a1534b71344b817a6d3a78697d8d51af8ea798229a5f16d4b6407","blob":"1bed486f15a8743ef7c68470772835aaf4946a40"}},names=Object.keys(expected);assert.equal(names.length,33);assert.deepEqual(Object.keys(payload.helpers),names);
+  for(const name of names){assert.match(name,/^[a-z0-9][a-z0-9.-]{0,63}$/);const content=payload.helpers[name];assert.equal(typeof content,'string');const b=Buffer.from(content),pin=expected[name];assert(b.length<=32768);assert.equal(b.length,pin.bytes);assert.equal(sha(b),pin.sha256);assert.equal(blob(b),pin.blob);}
+  assert.equal(sha(Buffer.from(payload.helpers['matrix.json'])),expected['matrix.json'].sha256);assert.equal(expected['matrix.json'].blob,'5b829c768ed3d7af03d5eb3f1870599d39bfd083');
+  assert.equal(fs.realpathSync(e.RUNNER_TEMP),e.RUNNER_TEMP);const temp=fs.lstatSync(e.RUNNER_TEMP);assert(temp.isDirectory()&&temp.uid===process.getuid()&&!(temp.mode&0o022));
+  const root=e.RUNNER_TEMP+'/afw-r3-delivery';fs.mkdirSync(root,{mode:0o700});for(const name of names)fs.writeFileSync(root+'/'+name,payload.helpers[name],{mode:0o600,flag:'wx'});
+  for(const name of names){const b=fs.readFileSync(root+'/'+name);assert.equal(b.length,expected[name].bytes);assert.equal(sha(b),expected[name].sha256);assert.equal(blob(b),expected[name].blob);}
+  const context={purpose:'afw.r3-delivery.binding.v1',source:e.GITHUB_SHA,sourceTree,run:e.GITHUB_RUN_ID,attempt:1,job:'readonly',node:process.versions.node};fs.writeFileSync(root+'/context.json',JSON.stringify(context),{mode:0o600,flag:'wx'});r3BootstrapAdmitted=true;
+ }catch{}
+ 
+```
+
+## Workflow unit/startup/job control change — complete first part through full104 run header
+```yaml
+name: AFW serial entry pin full104 controls
+run-name: AFW serial entry pin full104 controls ONEUSE ${{ github.sha }}
+on:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
+    paths:
+      - .github/workflows/afw-finite-budget-qualification.yml
+permissions:
+  contents: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+# Inactive DATA. Controls only; original readonly CLI/Native HELD.
+# R3 helpers materialized DATA; original18 remain DATA; I3 remains OPEN.
+# Action-runtime warning M02 deferred; exact mandated pins unchanged.
+jobs:
+  readonly:
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event_name == 'push' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event.head_commit.message == 'AFW-SERIAL-PIN-QUALIFICATION-ONEUSE-20261115' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        id: checkout
+        with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        id: node
+        with:
+          node-version: '22.23.4'
+      - name: Check serial entry pin reuse
+        id: serialPins
+        if: ${{ success() && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          if test -n "${NODE_OPTIONS+x}" || test -n "${NODE_PATH+x}" || test -n "${AFW_SYN_CHECKPOINT_KEY+x}" || test -n "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"; then
+            printf '%s\n' 'AFW_SERIAL_ENTRY_PIN_UNIT_FAILED' >&2
+            exit 1
+          fi
+          node --input-type=module <<'AFW_SERIAL_PIN_UNIT'
+          import assert from 'node:assert/strict';
+          import * as fs from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import {gzipSync,gunzipSync} from 'node:zlib';
+          import {execFileSync} from 'node:child_process';
+          import {posix} from 'node:path';
+          try{
+          const e=process.env,sha=b=>createHash('sha256').update(b).digest('hex'),blob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
+          assert.equal(process.versions.node,'22.23.4');
+          assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REPOSITORY_ID,'1347578006');assert.equal(e.GITHUB_EVENT_NAME,'push');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(e.GITHUB_JOB,'readonly');
+          assert.equal(e.GITHUB_WORKFLOW_REF,'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101');
+          for(const key of ['NODE_OPTIONS','NODE_PATH','AFW_SYN_CHECKPOINT_KEY','AFW_BUDGET_DIAGNOSTIC_CANDIDATE'])assert.equal(e[key],undefined);
+          assert.match(e.GITHUB_SHA,/^[a-f0-9]{40}$/);assert.match(e.GITHUB_RUN_ID,/^[1-9][0-9]{0,19}$/);
+          const git=(...args)=>execFileSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+          assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);assert.equal(git('rev-parse','--show-toplevel'),fs.realpathSync('.'));assert.equal(process.cwd(),fs.realpathSync('.'));
+          assert.equal(git('log','-1','--format=%B'), 'AFW-SERIAL-PIN-QUALIFICATION-ONEUSE-20261115');
+          const sourceTree=git('rev-parse','HEAD^{tree}');assert.match(sourceTree,/^[a-f0-9]{40}$/);
+          const same='docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md',f7='.github/workflows/afw-finite-budget-qualification.yml';
+          const tree=execFileSync('git',['ls-tree','-rz','--full-tree','HEAD'],{stdio:['ignore','pipe','pipe']});
+          const rows=tree.toString('utf8').split('\0').filter(Boolean).map(x=>{const at=x.indexOf('\t');assert(at>0);return{tuple:x.slice(0,at),path:x.slice(at+1)};}).filter(x=>![same,f7].includes(x.path)).sort((a,b)=>Buffer.compare(Buffer.from(a.path),Buffer.from(b.path)));
+          const core=Buffer.from(rows.map(x=>x.tuple+'\t'+x.path+'\0').join(''));assert.equal(rows.length,3201);assert.equal(core.length,324448);assert.equal(sha(core),'aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703');execFileSync('git',['diff','--exit-code','HEAD','--'],{stdio:['ignore','pipe','pipe']});
+          const st=fs.lstatSync(same);assert(st.isFile()&&!st.isSymbolicLink()&&st.size<=2600000);const bytes=fs.readFileSync(same);assert.equal(blob(bytes),git('rev-parse','HEAD:'+same));
+           const prefix=bytes.subarray(0,2260109);assert.equal(prefix.length,2260109);assert.equal(sha(prefix),'9b49c2699725fa9148202d046bc3f050d151313061eae17bfa67494559476421');assert.equal(blob(prefix),'71fabddb7fcee9f436ce3ea95785c3a2ee5afe70');
+           const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(bytes),begin='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:BEGIN -->',end='<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:END -->';assert.equal(text.split(begin).length,2);assert.equal(text.split(end).length,2);const first=text.indexOf(begin),last=text.indexOf(end);assert(last>first&&Buffer.byteLength(text.slice(0,first))>=prefix.length);
+           const section=text.slice(first+begin.length,last);assert.match(section,/^\n[A-Za-z0-9+/=\n]+\n$/);const b64=section.replaceAll('\n',''),pins={"bytes":487208,"sha256":"087bba2182c131579e233f6c29daf1ee85e2aae41e77b66d6f93cc44cb5000c5","blob":"f9c8261c54f761b5c33ddc370dbe7b308648033b","compressed":{"bytes":120211,"sha256":"7e9aace1b1a3930a1a5234a2fdee5af68ebec77cc5b9818a6d342328047bf0e5","blob":"b3dfc078047bee03b5b42140783ee1dcf2409fd8"},"base64Characters":160284};assert.equal(b64.length,pins.base64Characters);assert(b64.length<=174764);const zip=Buffer.from(b64,'base64');assert.equal(zip.toString('base64'),b64);assert.equal(zip.length,pins.compressed.bytes);assert(zip.length<=131072);assert.equal(sha(zip),pins.compressed.sha256);assert.equal(blob(zip),pins.compressed.blob);
+           const raw=gunzipSync(zip,{maxOutputLength:524288});assert.equal(raw.length,pins.bytes);assert.equal(sha(raw),pins.sha256);assert.equal(blob(raw),pins.blob);const wire=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(raw),payload=JSON.parse(wire);assert.equal(JSON.stringify(payload),wire);
+           // Closed captured-original-creator continuity derivation; no caller patch/path/code.
+           const ccPrefix=bytes.subarray(0,2471214);assert.equal(ccPrefix.length,2471214);assert.equal(sha(ccPrefix),'1ba61ebb62514c1bb2e5b7b6058dd5abad09ddc1d059483987262032e154928a');assert.equal(blob(ccPrefix),'2fcd79c7d0a2475f176dc03360df5980a58c3120');
+           const ccSuffix=bytes.subarray(2471214,2481826);assert.equal(ccSuffix.length,10612);assert.equal(sha(ccSuffix),'cdfe4a0b495be82b9d2746a12f09a3cb24c100f940bb6cdbecaa0585f8a7fac5');
+           const ccBegin='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:BEGIN -->',ccEnd='<!-- AFW-CREATOR-CONTINUITY-DATA-V1:END -->';assert.equal(text.split(ccBegin).length,2);assert.equal(text.split(ccEnd).length,2);const ccFirst=text.indexOf(ccBegin),ccLast=text.indexOf(ccEnd);assert(ccLast>ccFirst&&Buffer.byteLength(text.slice(0,ccFirst))>=2471214);const ccOverlayText=text.slice(ccFirst+ccBegin.length,ccLast);assert.equal(sha(Buffer.from(ccOverlayText)),'a7e62d0ce31a094090c6b1524f34cc55b776a4938010a5ec1c310ca4ac6b712f');
+           const ccOldKernel=payload.helpers['lifetime.py'];assert.equal(sha(Buffer.from(ccOldKernel)),'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');assert.equal(ccOldKernel.split(" # AFW_LIFE_BEFORE_ARM\n").length,2);payload.helpers['lifetime.py']=ccOldKernel.replace(" # AFW_LIFE_BEFORE_ARM\n"," # AFW_LIFE_BEFORE_ARM\n if os.getppid()!=before[0]:raise CreatorDead()\n");
+           const ccKernelPin=JSON.parse(ccOverlayText).kernelSnapshot;assert.deepEqual(Object.keys(ccKernelPin),['bytes','sha256','zipBytes','zipSha256','data','cap']);assert.equal(ccKernelPin.bytes,16073);assert.equal(ccKernelPin.cap,32768);assert.equal(ccKernelPin.sha256,'f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791');assert.equal(ccKernelPin.zipBytes,5078);assert.equal(ccKernelPin.zipSha256,'f0ef8e96c2f15251fbdbcb0abe801cbb981f5c97663233a0cae0520b261f29ed');assert.equal(sha(Buffer.from(ccKernelPin.data)),'1ba509cdcd9ecda3ae60b3db8f5876e1ddf17f5f9692bff77f113cef3e6356ef');const ccKernelZip=Buffer.from(ccKernelPin.data,'base64');assert.equal(ccKernelZip.toString('base64'),ccKernelPin.data);assert.equal(ccKernelZip.length,ccKernelPin.zipBytes);assert.equal(sha(ccKernelZip),ccKernelPin.zipSha256);assert.equal(gunzipSync(ccKernelZip,{maxOutputLength:32768}).toString('utf8'),payload.helpers['lifetime.py']);
+           for(const name of ['delivery-entry.sh','controls-entry.sh','missing-cwd-entry.sh']){const prior=payload.helpers[name],lines=prior.split('\n').filter(line=>line.startsWith('_r3_kernel='));assert.equal(lines.length,1);const oldPin=JSON.parse(lines[0].slice('_r3_kernel='.length));assert.equal(oldPin.bytes,16025);assert.equal(oldPin.sha256,'ae23b6e242cb41d3978b391c3bde1095ee7e0c0c717db98a598fe8fd9dcb2a27');payload.helpers[name]=prior.replace(lines[0],'_r3_kernel='+JSON.stringify(ccKernelPin));}
+           const ccResult=Buffer.from(JSON.stringify(payload));assert.equal(ccResult.length,487293);assert.equal(sha(ccResult),'dda3f25ef82cdf4e65814360b52aafa9ddf3ec2e57d1fa2f92e46466acfcd25b');assert.equal(blob(ccResult),'f23fcfebf3c72632327cf24babf2ff7ace22dae6');
+          const normal=JSON.parse(JSON.stringify(payload));
+            const serialPrefix=bytes.subarray(0,2514447);
+            assert.equal(serialPrefix.length,2514447);assert.equal(sha(serialPrefix),'ae7a7ed3d0cbd38149bfd284eaeb458fc696bede38976f509a801c40ced1b770');assert.equal(blob(serialPrefix),'af9eee4beb70ea89fef675cfc5bb99ec10811fc4');
+            const serialAppend=bytes.subarray(2514447,2538602);assert.equal(serialAppend.length,24155);assert.equal(sha(serialAppend),'48e15b75dfdd3221681f262de02a462cf0edf43b6010264310cfa7180858438f');
+            const serialBegin='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:BEGIN -->',serialEnd='<!-- AFW-SERIAL-ENTRY-PIN-DATA-V1:END -->';assert.equal(text.split(serialBegin).length,2);assert.equal(text.split(serialEnd).length,2);
+            const serialText=text.slice(text.indexOf(serialBegin)+serialBegin.length,text.indexOf(serialEnd));
+            assert.equal(sha(Buffer.from(serialText)),'07567d1647505cbf671675f87b874b6afc0b18b5a9cbaa445496b1a9e69df20b');
+            const serial=JSON.parse(serialText);assert.equal('\n'+JSON.stringify(serial)+'\n',serialText);
+            assert.deepEqual(Object.keys(serial),['purpose','closedParent','closedTree','origin','baselinePrefix','normalHistory','overlay','unit','unitSchema','oneUseMessage','nonclaims']);
+            assert.equal(serial.purpose,'afw.serial-entry-pin.append.v1');assert.equal(serial.closedParent,'3f23a9805a60d285a6272138765078e7da80e5eb');assert.equal(serial.closedTree,'a8c002728663bdcf67a6bc59d5c5f1232cb6384c');
+            const serialOverlay=serial.overlay;assert.deepEqual(Object.keys(serialOverlay),['purpose','normalRaw','normalControls','candidateControls','span','candidateRaw','nonclaims']);assert.equal(serialOverlay.purpose,'afw.serial-entry-pin.overlay.v1');
+            assert.deepEqual(Object.keys(serialOverlay.span),['from','to']);
+            const serialOld=payload.helpers['controls.mjs'];assert.equal(sha(Buffer.from(serialOld)),'060c5b493d3c832efb057e786ccb622adfef0c14233cf5e394b053485981e7df');assert.equal(serialOld.split(serialOverlay.span.from).length,2);
+            payload.helpers['controls.mjs']=serialOld.replace(serialOverlay.span.from,serialOverlay.span.to);
+            const serialControls=Buffer.from(payload.helpers['controls.mjs']);assert.equal(serialControls.length,32428);assert.equal(sha(serialControls),'3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35');assert.equal(blob(serialControls),'17e101dd8720312111b7dffb37f7edb8da41a0fd');
+            const serialResult=Buffer.from(JSON.stringify(payload));assert.equal(serialResult.length,487931);assert.equal(sha(serialResult),'f5fe1b3ecc0054ba1ce626c9140fc5899f4b35d0e8544181eb2606771b7220f8');assert.equal(blob(serialResult),'2716e7224ddee98690f457d0c48e6d096bd17024');
+          
+          const candidate=payload;
+          assert.deepEqual(Object.keys(serial.unit),['blob','bytes','sha256','kind','cap','code']);assert.equal(serial.unit.cap,32768);assert.equal(serial.unit.kind,'github-only-unit');
+          assert.equal(Buffer.byteLength(serial.unit.code),17454);assert.equal(serial.unit.bytes,17454);assert.equal(sha(serial.unit.code),'1ad51c019123e57d6a663921337f91a6cdd667798f04bafd3e3230b78c181039');assert.equal(blob(Buffer.from(serial.unit.code)),'c8ab01ecb2e569fd8908c8edc22a630664c08ee7');assert(serial.unit.bytes<=32768);
+          assert.deepEqual(Object.keys(serial.unitSchema),['blob','bytes','sha256','kind','cap','schema']);assert.equal(serial.unitSchema.cap,32768);
+          const schemaText=JSON.stringify(serial.unitSchema.schema);assert.equal(Buffer.byteLength(schemaText),1927);assert.equal(sha(schemaText),'4ccead174e6782f89072083ca06c15966d6c4ce0ef4e13625f393964c433320e');assert.equal(blob(Buffer.from(schemaText)),'300a3d8739532f8fbb67bd97480ee0fd366f835e');
+          const unit=await import('data:text/javascript;base64,'+Buffer.from(serial.unit.code).toString('base64'));
+          assert.deepEqual(Object.keys(unit),['serialPinUnit']);
+          const wire=unit.serialPinUnit({assert,createHash,gzipSync,posix,normal,candidate,source:e.GITHUB_SHA,sourceTree,run:e.GITHUB_RUN_ID});
+          assert.equal(typeof wire,'string');assert(Buffer.byteLength(wire)<=2048);assert(/^[\x00-\x7f]*$/.test(wire));assert.equal(wire.split('\n').length,2);assert(wire.endsWith('\n'));
+          const frame='AFW_SERIAL_ENTRY_PIN_UNIT/1 ';assert(wire.startsWith(frame));
+          const data=JSON.parse(wire.slice(frame.length));assert.equal(frame+JSON.stringify(data)+'\n',wire);
+          function validate(value,schema){
+           if(Object.hasOwn(schema,'const')){assert.deepEqual(value,schema.const);return;}
+           if(schema.type==='object'){assert(value&&typeof value==='object'&&!Array.isArray(value));assert.equal(schema.additionalProperties,false);assert.deepEqual(Object.keys(value),schema.required);assert.deepEqual(Object.keys(schema.properties),schema.required);for(const key of schema.required)validate(value[key],schema.properties[key]);return;}
+           assert.equal(schema.type,'string');assert.equal(typeof value,'string');assert(new RegExp(schema.pattern).test(value));
+          }
+          validate(data,serial.unitSchema.schema);
+          assert.equal(data.source,e.GITHUB_SHA);assert.equal(data.sourceTree,sourceTree);assert.equal(data.run,e.GITHUB_RUN_ID);
+          process.stdout.write(wire);
+          
+          }catch{process.stderr.write('AFW_SERIAL_ENTRY_PIN_UNIT_FAILED\n');process.exitCode=1;}
+          
+          AFW_SERIAL_PIN_UNIT
+      - name: Run declared full104 controls only
+        if: ${{ always() && steps.serialPins.conclusion == 'success' && steps.checkout.outcome == 'success' && steps.node.outcome == 'success' }}
+        shell: bash
+        env:
+          AFW_CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          AFW_NODE_OUTCOME: ${{ steps.node.outcome }}
+        run: |
+          set +e
+          umask 077
+          if test "${AFW_CHECKOUT_OUTCOME-}" != success || test "${AFW_NODE_OUTCOME-}" != success || test -n "${NODE_OPTIONS+x}" || test -n "${NODE_PATH+x}" || test -n "${AFW_SYN_CHECKPOINT_KEY+x}" || test -n "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"; then
+```
+Remaining F7 full104 shell/entry module/cleanup is normal controls path plus exactly declarednewbootstrapprogram snapshots. Complete forward/reverse byte-span diff artifacts are preserved inRootdocs and listed below; they contain all encodedlinebytes, not clippeddiffs. Bootstrap-program suffix afterprelude is independently byte-identical; bootstrap-entry nonpin body identical (pinned snapshots decodeexactkernel/program); imagecleanup unchanged. Source39 allnewUTF8/hash/byte/cap independentlychecked; other32helpers/oldentryPinbody/postpreparationcontrolsbody unchanged; allCore3201 leaves and frozen18 unchanged. Rootdoesnotgradequalitybytheseclaims; inspectthechange.
+
+## Actual full reversible diff index
+```json
+{"purpose":"afw.serial-entry-pin.reversible-diffs-index.v1","status":"forward/reverse STRING/DATA reconstruction checked; runtime PENDING","normalRaw":{"blob":"f23fcfebf3c72632327cf24babf2ff7ace22dae6","bytes":487293,"sha256":"dda3f25ef82cdf4e65814360b52aafa9ddf3ec2e57d1fa2f92e46466acfcd25b"},"candidateRaw":{"blob":"2716e7224ddee98690f457d0c48e6d096bd17024","bytes":487931,"sha256":"f5fe1b3ecc0054ba1ce626c9140fc5899f4b35d0e8544181eb2606771b7220f8"},"changedHelpers":["controls.mjs"],"extrasInspected":6,"extrasChanged":5,"unchangedExtra":"image-cleanup.py","diffs":{"controls.mjs.reversible.json":{"blob":"626194b3ee920b12619d7c30fe3cadf6444317c0","bytes":2795,"sha256":"33ba84427b36330221cdc48fa494a60699552fd21a7ffb686124ae43ca52f4db","kind":"reversible-data-diff","cap":262144},"bootstrap-prelude.mjs.reversible.json":{"blob":"48479c102f6c09f0f28484389dbd69857a733e3a","bytes":24791,"sha256":"765dc5ace1283487388a6f17de22a98e80251845c978ca90803be0f9fd8e0a5b","kind":"reversible-data-diff","cap":262144},"bootstrap-program.mjs.reversible.json":{"blob":"339775a141bc929c214d9ca4fdbfd2fc8888f20b","bytes":24791,"sha256":"c35571738c62fda6a4b7e3ffd05d6b3ad607c4ed0380cb7c36ad3e5f00bcc3a1","kind":"reversible-data-diff","cap":262144},"bootstrap-entry.py.reversible.json":{"blob":"5876fff76b80d60579cb4d5c8ef97d0d72e209d7","bytes":53997,"sha256":"4d353f1c57b7c6e5e34ea2ce4f9eee1bf75d0080dce1e9ff63e3d6b9cd57b995","kind":"reversible-data-diff","cap":262144},"inactive-f7.yml.reversible.json":{"blob":"17a95748fbc7789964b55d1c800c2d0709838d46","bytes":109248,"sha256":"330955683bd4ea235503ed9c792527547e4b35fd21b740dd013ba21d993887c2","kind":"reversible-data-diff","cap":262144},"active-f7.yml.reversible.json":{"blob":"48ed383889155dbbadd2a4a56ea55636c3f27191","bytes":109954,"sha256":"5d0042ae1f59c22bceec8384dc80cb2476c9e89bbca9fda2fd4289d97eeec9e9","kind":"reversible-data-diff","cap":262144},"original-f7-to-active.reversible.json":{"blob":"b643561d09f3f217e4cf2813233f53d9feadc71d","bytes":240524,"sha256":"a5ef67d338895bc3d0873d71ce92f0e521b7bb0265b1495176688f28c8c42007","kind":"reversible-data-diff","cap":262144}},"originalF7":{"blob":"f7a71f1a0fa4f5ddf069ff411f008a098455e5cc","bytes":126209,"sha256":"1e7af2274e24c40db704f26baaacdb7f7ed1884903852e8237a35552aaed282a"},"allowedSourceLeaves":[".github/workflows/afw-finite-budget-qualification.yml","docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md"],"same":{"prefix":{"blob":"af9eee4beb70ea89fef675cfc5bb99ec10811fc4","bytes":2514447,"sha256":"ae7a7ed3d0cbd38149bfd284eaeb458fc696bede38976f509a801c40ced1b770"},"append":{"blob":"f65e160eb076a759783adf5b919f5f2143b34eb9","bytes":24155,"sha256":"48e15b75dfdd3221681f262de02a462cf0edf43b6010264310cfa7180858438f"},"full":{"blob":"bde14899e9120a2cca73798ab8f32ad350409efb","bytes":2538602,"sha256":"fd6e66719f470e5acaddbe2eadc9e660d7823a9e70dfc2801727128a5c2a8569"},"offset":2514447,"rollback":"restore original F7; preserve full SAME and any later receipt; no truncation"},"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}}
+```
+
+## Exact source39 manifest
+```json
+{"io.mjs":{"blob":"8bb9a8ab8ddf81689ee890252579c1fd41dfdf52","bytes":1815,"sha256":"b7d4ee0b8786c52a26857a8e203a710017b40dc8f5636a1d387638b9ec78eb47","kind":"literal_piece","cap":32768},"emitter.mjs":{"blob":"f9eee51fbdb89d0e130f8137d6a48ae787904f66","bytes":3511,"sha256":"02f80480dbc8bc8700d0ecf3a57e65f855954ca64b379d29eefdb75c6d7db760","kind":"literal_piece","cap":32768},"source-provenance.mjs":{"blob":"fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d","bytes":6690,"sha256":"b4d0872044216a275458d14b838ecf57628780092767ea88910dce18585408ce","kind":"literal_piece","cap":32768},"raw-sample.mjs":{"blob":"8cdabb2324ae97b04fa17350846e24d666cd3536","bytes":4289,"sha256":"1b594a7768a69cba5db1f41e83eb2a941f6451c82584490fdb77ba1fea85e9fc","kind":"literal_piece","cap":32768},"site-schema.json":{"blob":"4871edc102386fe6db65c773e51c21ecb94897e3","bytes":12651,"sha256":"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd","kind":"literal_piece","cap":32768},"site-map.json":{"blob":"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f","bytes":6630,"sha256":"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","kind":"literal_piece","cap":32768},"envelope-schema.json":{"blob":"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f","bytes":5616,"sha256":"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5","kind":"literal_piece","cap":32768},"boundary.py":{"blob":"554a2b2d2a8e3f365533f0df3006bcce1e409698","bytes":12562,"sha256":"27274120076048fd6f63b122b5534d8d06e97a2d4cf36461c1f710c605accdf4","kind":"literal_piece","cap":32768},"delivery-schema.json":{"blob":"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8","bytes":1380,"sha256":"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60","kind":"literal_piece","cap":32768},"unavailable-schema.json":{"blob":"4a310ddcef7b1b7bf0755bf56b760486254cf8c6","bytes":1315,"sha256":"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9","kind":"literal_piece","cap":32768},"controls-schema.json":{"blob":"8586d4387a5fcd95b18d7c966cf841432330a789","bytes":4681,"sha256":"2d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83","kind":"literal_piece","cap":32768},"matrix.json":{"blob":"5b829c768ed3d7af03d5eb3f1870599d39bfd083","bytes":24054,"sha256":"0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e","kind":"literal_piece","cap":32768},"shape.mjs":{"blob":"df49410ebf42b4fbc9a8c032f81a0edc8fb95d0b","bytes":843,"sha256":"82224496e7db35a1daf7168591cb2123edbb3242331a314680f13d05b3bfef5e","kind":"literal_piece","cap":32768},"control-proof.mjs":{"blob":"ab38574f5fe697fd9f0d48f9ade065749f4a0c14","bytes":2206,"sha256":"a7318fd9452f0254fdb9ae1261040ab944ce2d56c443004579c51e55c2c63c71","kind":"literal_piece","cap":32768},"site-receiver.mjs":{"blob":"c2cf804b6d427b5fc40da2b7d1375785a0a2f459","bytes":5460,"sha256":"0d346b88c9594c45ef207f9fa4b57c984d13a3e64943904f880e2e2b96377ad2","kind":"literal_piece","cap":32768},"normalized-sample.mjs":{"blob":"f7c2fefcc9df568a8453d876072a23a790b94fcd","bytes":3987,"sha256":"2bee6afaa30f01f1f497512d595f24f3a0c92269e3b4ed7e2d2e349ae5b4419f","kind":"literal_piece","cap":32768},"witness.mjs":{"blob":"b207c0c9ea759a9a146783b8818276444bef155b","bytes":1044,"sha256":"336df41b1994c8a315e4f56d976ddd0c9922397c702a02869ac8d44f42a8629a","kind":"literal_piece","cap":32768},"fixtures.json":{"blob":"f29e76fd04627ebe5d1100007808610ebc240571","bytes":7988,"sha256":"06b7dc9e63c178b6b823db1ee56049ce4d1406861df240ca2fbc119d2df45bc9","kind":"literal_piece","cap":32768},"controls.mjs":{"blob":"17e101dd8720312111b7dffb37f7edb8da41a0fd","bytes":32428,"sha256":"3c8b4e694154f6162b70d63d7e1d3de7c417a675db4a2e87880f2d964eca8c35","kind":"literal_piece","cap":32768},"examples.json":{"blob":"6f28d4f4479fb093aec3188d21b1796fd7c3fff2","bytes":22739,"sha256":"4f8da5a563bb0498cc506d693421853777ba7efb67d42da44b1889e5fef7b945","kind":"literal_piece","cap":32768},"controls-boundary.py":{"blob":"b6c39695cdca9963d083842b114b7e4fb59e6392","bytes":12908,"sha256":"6e3dcd0c4f262a509b75499674375eaa3d91b9e83789f03689862f51734fc3d7","kind":"literal_piece","cap":32768},"controls-unavailable-example.json":{"blob":"beedc03c8066cef6e6a24914d5334f99183d014b","bytes":568,"sha256":"7544b33859efe6ba2f6f1789e709f89f5f94f08352dd4fe4b14d700b19b22644","kind":"literal_piece","cap":32768},"outer.mjs":{"blob":"c74d74879d6935c47d50b1233dad4027e6704365","bytes":25947,"sha256":"62f2faa1bff1a2aa2438e8c1794361910e44a6db9c632daa28185adc647bf515","kind":"literal_piece","cap":32768},"delivery-entry.sh":{"blob":"2477c393fbc7d9883894ef7299b4f749cc3857ab","bytes":24013,"sha256":"63b7e32a4291e5a1b2fc3753a5ae89758dcf0913f6f2bf2d558bc3a0dd9f2961","kind":"literal_piece","cap":32768},"controls-entry.sh":{"blob":"f0825d011a5e7942194a157a327ef7c42548180c","bytes":24058,"sha256":"e874d2de7710156e11726c7bd01626faa5351f94514cf0c42878e679981ad899","kind":"literal_piece","cap":32768},"oracle.mjs":{"blob":"652201ebe699664b97a5bc3d7c815a02dd889805","bytes":1877,"sha256":"37c8724ced0eaa42bd54aa01aef1af7c3a7107ff3e78243e1f3d04da841fa4d1","kind":"literal_piece","cap":32768},"lifetime.py":{"blob":"765573c5eeaf83add464e94a8240dcd7a90786d0","bytes":16073,"sha256":"f2b319e2a98a0959e421e80d7f94662476508f2ae6bc7cff2f9c6f8f0e17a791","kind":"literal_piece","cap":32768},"delivery-outer.mjs":{"blob":"aac76e8c15a01cbb308ba63ad7dec19e2d5ebb76","bytes":25986,"sha256":"d32eaeb8d09e1d50dd14195fecec7606d457004ea6f61084900b94547cc6899f","kind":"literal_piece","cap":32768},"controls-outer.mjs":{"blob":"e62dd9c4760da521b84f23b1c87855070767aac0","bytes":25986,"sha256":"ada3cc7cf36a742d71c6ed12a7b5d15b91d56c4353aad02318a871ec370e4c35","kind":"literal_piece","cap":32768},"missing-cwd-entry.sh":{"blob":"3666fdd52620bd2a30bfa3e100897b2fab1610c1","bytes":24130,"sha256":"e625cd8b88726576b278099856bd6b3126c02da4f31c387ba49ced923a5fa9fc","kind":"literal_piece","cap":32768},"race-creator.mjs":{"blob":"a6d47254adbf330a09b879a3a9b20ae4de476e73","bytes":777,"sha256":"2657c30db6cff046599ff3d9cd2cdf7c3c312252b9636741627871d090372575","kind":"literal_piece","cap":32768},"lifetime-controls.py":{"blob":"21b0b82242a76efd94d34fe1f722e04fda6cd489","bytes":12219,"sha256":"d67b5c8c8e127c359f8d2b5d7da30da809b8d91bfb77759df4bbf9ecaaf53c59","kind":"literal_piece","cap":32768},"authority-anchor.json":{"blob":"1bed486f15a8743ef7c68470772835aaf4946a40","bytes":1964,"sha256":"e08d9864b16a1534b71344b817a6d3a78697d8d51af8ea798229a5f16d4b6407","kind":"literal_piece","cap":32768},"bootstrap-prelude.mjs":{"blob":"1fd5f52f04efdacab9c102aae397cdfd526fac9a","bytes":19099,"sha256":"9eb82f0b5b4f8f3dcb90ed326f8d39f9eac5e19e9f8b118e2cebcffdd7eb72ba","kind":"literal_piece","cap":32768},"bootstrap-program.mjs":{"blob":"c998cc5fce7e37b05da7c5fe5eed63e30aa1370a","bytes":45303,"sha256":"fbdaa809d9bbfc788833e7cdf4b27c0870b4c15bde01ab82aeb18ad4dea2f03f","kind":"bootstrap_program","cap":65536},"bootstrap-entry.py":{"blob":"e99a297940aaa25aed7d83fdbd16742af4b6b804","bytes":31511,"sha256":"76c591c88ad530d45bf27ac192abff1bc08815e7da408957a1a35ee4f002d80a","kind":"literal_piece","cap":32768},"image-cleanup.py":{"blob":"8b21083aa516439b63a6e99c059d82de76e8a443","bytes":1828,"sha256":"41fba6da9182935e7580bcdeabc41c4f47d307fea8cfabfd1b4ff7427cc9bd50","kind":"literal_piece","cap":32768},"inactive-f7.yml":{"blob":"6d16e1bfcb7b0500773c1cd06e42ef3f19d93c96","bytes":53546,"sha256":"30a99b485e8302b64e15df9f8b6d57f6fdeb2e0fa4f5b6e35ad790e8a3562e28","kind":"workflow","cap":73728},"active-f7.yml":{"blob":"757f95ff72ead519a01e3ecaead2bd2925b35189","bytes":53811,"sha256":"568a45559b1fbf05ec294c0c8c4bf2c87a809b0c7330a7d4867428ee86918eba","kind":"workflow","cap":73728}}
+```
+
+## Prior recorded deferred items
+OldL05 diagnostics: directwriter_closeOSErrordetailunknown; verifiednonterminalcleanupmappedunknown; trailingpartialaggregatecan suppressindependentCreatorDeadclassification. OldMA1owner40unit cleanup leavesfixedentries/mode/FDclosefragility onfailingassert. They are prior findings, not previously fixed by this scope; report anew only if this change materially touches their behavior. This task has no prior scoped review/fixround; originaldelivery5/5closed is a separatetask, no implicitround6.
+
+## Review authority
+Read/checkthisTask1spec+quality, noSource/local/cloudexecution, nocandidate/ref/tree/run/PR/runtime/browser/provider/OAuth/credentials, nootheragents. Unattached immutable reviewreport create_blob permitted only for deliveringresult. SourceSTRING/hash/gunzip inspection permitted; noSourcecodeeval/import/compile/syntax/tests. No consuming logs again; actualreceipt suppliesterminal evidence. Scope expectedfilelines asnamedabove. Fresh report logical docs/superpowers/reviews/2026-11-15-serial-pin-task-review.md, give bothspec andqualityverdict, findingsCritical/Important/Minor withfile:line, concreteeffectandfocusedcoveringtest ifneeded; sevenclaimsfalse. Parentwillhandlefixloop. Neednohumanquestion.
