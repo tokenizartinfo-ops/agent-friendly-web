@@ -1,0 +1,9 @@
+# Ruling: round4 full dossier size only
+
+Project AFW; repository tokenizartinfo-ops/agent-friendly-web; Source branch feat/finite-native-cleanup-20261101 CLOSEDc1ca5d4ddc715727c3b6f73b6a5a7878fae49ceb/tree6853c5c3563e9a83f9243a4de09ea9dc99fe013e. No Source mutation/run authorized by this size ruling alone.
+
+Observed full closed prefix1919851B/SHA404aa6e7f4bf8bd708e245001b2d8d68f21b2ef6841e348857c7c01d6c1028da/blob2d3fb07f8620dfe5fb84389ef3b7742bcbf4d2b8. Last full packet mirror160160B; prior metadata/section framing8408B and actual receipt3191B. Repeating the same full packet shape for a correction without erasing history has a projected final size1919851+160160+8408+3191=2091610B, above the2000000B cap. This is a projection based on exact observed components, not measurement of an unbuilt successor.
+
+Ruling: for the next full104 correction only, raise the SAME dossier cap to2200000 bytes. Preserve the ENTIRE current prefix and history; no truncation/rewrite, no delta-loader redesign. Measure the final raw/mirror/SAME before any candidate and reject if outside typed caps. Update exactly this Source bootstrap size assertion and corresponding descriptor cap; no arbitrary broader parser relaxation. Cost if wrong: up to200000B additional document per this bounded limit, preserved only in authorized GitHub, and any final overage still blocks candidate rather than silently extending again.
+
+Unchanged raw524288/gzip131072/base64174764/helper32768/bootstrap_program65536/workflow73728/controlsreport24576; all process/Native/job/harness/admission/cleanup times unchanged. Matrix104 and all four exact mutant killsets unchanged. No change to public schemas, privileges, outputs, Native/original CLI, runtime, user permits or operational readiness. Final actual source qualification and same scoped reviewer remain required. Seven nonclaims false.
