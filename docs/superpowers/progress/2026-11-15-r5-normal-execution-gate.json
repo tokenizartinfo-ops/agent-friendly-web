@@ -1,0 +1,63 @@
+{
+  "purpose": "afw.root.r5-normal.one-use-preflight.v1",
+  "at": "2026-11-15 15:10:08 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHub Actions Source-only laboratory",
+  "origin": "Root independently checked DATA and fresh GitHub API",
+  "resourceType": "Source branch",
+  "resourceId": "feat/finite-native-cleanup-20261101",
+  "allowedAction": "One full104/four-mutant controls occurrence; no original CLI/Native/runtime",
+  "expectedClosed": "bfa80fac58ecb60bb3c9bcd458da6f393b301f70",
+  "prepared": "92d9e204eebc8331f1090e43c7fc715686e19b24",
+  "preparedTree": "ddcd7f5ff605be4b227433899b5940aa176a9b80",
+  "message": "AFW-R3-DELIVERY-R5-CONTROLS-ONEUSE-20261115",
+  "fixRound": 5,
+  "maxFixRounds": 5,
+  "packet": "8196e3948ccb053c5de9dd958c21b4002bb76820",
+  "fullSAME": {
+    "blob": "62bb176bd21e5c0b8968b32f63b04ac1c8b4ac3e",
+    "bytes": 2422008,
+    "sha256": "64697d79a4767b1558a4120ded247e31a1faf12478fa106361e47215ff2ad2f9",
+    "cap": 2600000
+  },
+  "Core": {
+    "count": 3201,
+    "bytes": 324448,
+    "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+  },
+  "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "proof": {
+    "packetHashes": true,
+    "typed39Sources": true,
+    "normalHelperDelta": "only three entries, each explicit fd5 inheritance plus readback after original dup2",
+    "normalBootstrap": true,
+    "reversibleDiffs": true,
+    "sourcePins": true,
+    "fullPrefixPreserved": true,
+    "consumerPreflight": {
+      "accepted": true,
+      "mismatches": [],
+      "expectedCount": 104,
+      "parentEmbeddedCount": 104,
+      "proofEmbeddedCount": 104,
+      "SourceExecuted": false,
+      "NativeReleased": false,
+      "operationalReadiness": false
+    },
+    "onlyF7AndSAME": true,
+    "preparedHeadRuns": 0,
+    "fiveActiveQueues": 0
+  },
+  "rollback": "After run and every job terminal: restore original F7 f7a71f1a0fa4f5ddf069ff411f008a098455e5cc, preserve entire current SAME plus Root actual receipt, leased CAS and full readback. Never rerun consumed occurrence.",
+  "gates": "Actual Root receiver387 plus joint run/job/step SUCCESS gatea1c and same scoped reviewer required before qualification; no Native release by wire alone.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
