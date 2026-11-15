@@ -14,7 +14,7 @@ concurrency:
 # INACTIVE DATA PREPARATION ONLY. Root owns the single future release and restoration.
 jobs:
   readonly:
-    if: ${{ false && github.event_name == 'push' && github.event.head_commit.message == 'AFW-READONLY-SOURCE-SITE-ONEUSE-20261114' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'AFW-READONLY-SOURCE-SITE-ONEUSE-20261114' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
