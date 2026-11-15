@@ -141,3 +141,10 @@ Root cotejó RAW79c95223/gzipcc3adb44/mirror263bdebb,39fuentes/caps/manifests,33
 ### Ocurrencia full104 real en curso — 15 noviembre13:23UTC
 
 Gatebbde7522c0ce5142264a023327f19d01d8650a04 preservadoRootdocs c5de9222. RefSource2e458c71e20928e37b0f98b7d883f62a6134f873/treedaf8ab4cb897b9e09b8aed0da18fb1dedcaf6005 activada porCAS92cftraslecturasSource/Main/cincoactivos0/preparedruns0. Única ocurrencia43718744873/attempt1/push/F7; job132825874560 readonly. Checkout ysetupNode completadosSUCCESS, paso Run declared full104 controls only enejecución. Source CONGELADA hasta run+todosjobs terminales; no CASpendiente. No logsleídos todavía. Debeconservarwireactual sininventar estados, validar38749c/91d9339b ygateconjuntoa1c901bd, restaurarF7original+SAMEíntegro+recibo yverificarMain/Core/5activos0/closedheadruns0. No repetirestaocurrencia. I3/Native/C2/operationalReadiness/PCoff siguenfalse.
+
+
+### Full104 round3 cerrado — 2026-11-15 13:26:40 UTC
+
+Ocurrencia43718744873/1/job132825874560 completadafailure; checkout/setupsuccess, controlsstepfailure. UnúnicowireCONTROLS_UNAVAILABLE parent_unavailable, validadoOwn91d9339b comoaceptadoSINcalificar;104controles/fourmutants sinmediciónválida,0CLI/Native. Causeunknown; gateconjuntoa1c901bd rechaza controls_not_qualified. NoNode0, noautorizacióncleanupimagen posterior; noclaimdrenaje/limpiezaVM. Ocurrenciaconsumida, nunca rerun.
+
+Source restaurada y comprobada c1ca5d4ddc715727c3b6f73b6a5a7878fae49ceb/tree6853c5c3563e9a83f9243a4de09ea9dc99fe013e; F7originalf7a71f1, SAME2d3fb07f8620dfe5fb84389ef3b7742bcbf4d2b8/1919851B/SHA404aa6e7f4bf8bd708e245001b2d8d68f21b2ef6841e348857c7c01d6c1028da, prefijo+propuesta+recibo íntegros. Árbolfull3364/3203leaves,Core3201byteexacto/Main0c9c/F7restaurado/5active0/closedheadruns0. CASpendingninguno. Pendiente MISMOreviewer r3_delivery_task_review, alcance ronda3I1/I2/I3/M1 y causacorroborable sihay; sinnuevarevisiónamplia. Sourceactualcapturasunavailable noacreditacorrecciónconductual; noI3/Native/C2/PCoff. RootpuedecontinuardiagnósticoSource sinpedirowner, nunca atribuirparentfallo aCloudflare/credenciales porinferir.
