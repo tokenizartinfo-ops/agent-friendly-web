@@ -184,3 +184,12 @@ Seven claims remain false: historicalCauseProven, receiptAuthenticated, operatio
   }
 }
 ```
+
+
+## Root actual cloud covering tests and admission observation
+
+Actual command is pinned F7 one-usee10fc5bb98f39d569def2e24355a44b5d3e9bf8e/tree4e80d7f1bde215c40d9e1fc154fa77a62aa62903; run43745210412/attempt1/job132906890534 Node22.23.4. Step4 Check fixed MA1 reader controlsSUCCESS and exactlyMA1_READER_CONTROLS/1 passed=40; actual readerfunctions/files tested inGitHub. Step5 originalfull104FAILURE; step6 fixedreaderSUCCESS. Entire run/jobFAILURE preserved. Logs fetchedONCE, oneactualoriginalframe Root387accepted, oneactualMA1frame Rootc417joint accepted using APIcommitTree/run/job/orderedsteps/uniqueexactframes and original record.
+
+Measured phases: baseline entered104/returnedunknown0/noadmissionbreak/naturalcomplete; M_RAW104/0/nobreak/complete/PASS exactD02; M_PROVENANCE104/0/nobreak/complete/PASS exactP06; M_OUTPUT96/0/directinneradmissionbreak/incomplete, actualfail[B05,U01], publicresultunknown; M_ASSOC outergate/directadmissionrefusal/0attempts. exceptionAtnone. Actual408executeentries,0returnedunknown. Direct admission stops explain missingcoverage inTHISoccurrence; not cause of oldruns, no omission/520attemptclaim. No complete4mutantqualification/Native/runtime/PCoff. Fullimmutableactualreceipt c0a582f6c8e5d786c90cf0297e45dfb0bf21d7e6 atRootdocsprogress/2026-11-15-ma1-actual-admission-receipt.json.
+
+Root restored originalF7+ENTIRE2495504candidateSAME+fullreceipt to Source558bb4d6ea6723a911e59ce99ca1b5ed8f8c1ac2/tree3af15824bce789cd16994c751c7001dae4002702. FullSAME1953b4b731832ae84c09dc6a5e50f15272046ff6/2509354B/SHA256f543226e200d3ec9f38ee006c731cb36d2ee291e97db7705ee984b3926c284f0, wholebyte readback. Fulltree/Core/Main/F7/fivequeues0/closedheadruns0verified. SourceCLOSED; not proof of provider currentruntime or globalnative drain. ScopedtaskreviewPENDING; no furtherSource/retryautomatically.
