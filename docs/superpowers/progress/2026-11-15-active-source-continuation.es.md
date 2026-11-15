@@ -34,7 +34,9 @@ Expectativas de los cuatro mutantes sobre los 100 casos: M_RAW [D02]; M_PROVENAN
 
 El receptor independiente Root `38749c663f4dd58fbb5f1a3c940a3820c4ff5100` acepta los cuatro informes de ejemplo y califica únicamente el completamente exitoso; rechaza doce negativos. Registro propio: `docs/superpowers/reviews/2026-11-15-r3-round2-own-report-contract-check.md`. Esto valida el receptor, no Source. Preflight propio de pins `087099540c15caacecc5f629151502aa609ff6d2` es obligatorio antes de liberar F7.
 
-Faltan paquete final, hashes, comparación de alcance/prefijo/18 programas y gate Root. Después: una sola ejecución nueva de controles en GitHub, cierre completo y revisión acotada por `/root/r3_delivery_task_review`. Native continúa retenido.
+El paquete provisional ab2f1050 conserva los 18 programas y supera el cotejo de hashes, pero Root retuvo el gate: la integración nueva reseleccionaba node/PATH en entradas anidadas en lugar de conservar fd3. El implementador confirmó y está separando roles Source cerrados inicial/anidado con las mismas primitivas. Candidata3b4d9, SAME2ff9747 y F7e5f5186 son provisionales, sin refs ni runs. Deben sustituirse coherentemente antes del gate. Resoluciones adicionales: transporte88f991c8 (gzip98.304/base64131.072), arranque40bcd73b (misma relación real en F7 y harness). Raw400.000, SAME1.800.000, cobertura100 y relojes no cambian.
+
+Faltan paquete final corregido, cotejo completo y gate Root. Después: una sola ejecución nueva de controles en GitHub, cierre completo y revisión acotada por `/root/r3_delivery_task_review`. Native continúa retenido.
 
 ## Secuencia pendiente
 
