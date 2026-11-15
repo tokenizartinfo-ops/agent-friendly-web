@@ -1418,7 +1418,7 @@ async function runFixedFacetControls(group){
 
 
 async function fixedOriginalFixtureCleanup(){
- const source=await readFile('test/fixtures/finite-owner-cleanup.mjs','utf8'),blob=createHash('sha1').update('blob '+Buffer.byteLength(source)+'\0'+source).digest('hex');assert.equal(blob,'2cfd90a5bebaeba38f876d6512ca09b2ad8f557f','fixed current Node cleanup fixture blob');
+ const source=await readFile('test/fixtures/finite-owner-cleanup.mjs','utf8'),blob=createHash('sha1').update('blob '+Buffer.byteLength(source)+'\0'+source).digest('hex');assert.equal(blob,'2d19cd616e342197051974abb472830dd3939261','fixed current Node cleanup fixture blob');
  const ast=sourceAST(source,'fixed-original-owner-cleanup-callback'),owners=ast.statements.filter(node=>ts.isFunctionDeclaration(node)&&node.name?.text==='ownerReferenceFixture');assert.equal(owners.length,1);
  const matches=[];const walk=node=>{if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.expression.getText(ast)==='t'&&node.expression.name.text==='after')matches.push(node);ts.forEachChild(node,walk);};walk(owners[0]);assert.equal(matches.length,1,'unique actual ownerReferenceFixture cleanup callback');
  const call=matches[0];assert.equal(call.arguments.length,1);const arrow=call.arguments[0];assert(ts.isArrowFunction(arrow)&&arrow.parameters.length===0&&arrow.modifiers?.some(m=>m.kind===ts.SyntaxKind.AsyncKeyword));
@@ -2129,9 +2129,9 @@ function fixedR3Project(raw){
    const abort=fixedR3Own(child,'abortAt');result.childAbortSeen=abort===null?false:typeof abort==='number'&&Number.isFinite(abort)&&abort>=0?true:fixedR3Unknown;
    for(const key of ['parentAliveAtAbort','workPendingAtAbort','sameWorkWaitError'])result[key]=fixedR3Member(fixedR3Own(child,key),[true,false]);
   }
-  const queues=fixedR3Own(raw,'queueEvents'),queueCount=fixedR3Array(queues,512,true);result.queueCount=queueCount===null?fixedR3Unknown:queueCount;
-  if(queueCount>0){
-   const last=fixedR3Own(queues,String(queueCount-1));result.lastQueueFamily=fixedR3Member(fixedR3Own(last,'family'),[1,2]);result.lastQueueChild=fixedR3Number(fixedR3Own(last,'childOrdinal'),65535,1);result.lastQueueActive=fixedR3Member(fixedR3Own(last,'active'),[1,2]);result.lastQueueQueued=fixedR3Number(fixedR3Own(last,'queued'),200);result.lastQueueMethod=fixedR3Member(fixedR3Own(last,'method'),['get','list','delete']);
+  const queues=fixedR3Own(raw,'queueEvents'),queueCount=fixedR3Array(queues,512);result.queueCount=queueCount===null?fixedR3Unknown:queueCount;
+  const last=queueCount>0?fixedR3Own(queues,String(queueCount-1)):undefined;if(fixedR3Plain(last)){
+   result.lastQueueFamily=fixedR3Member(fixedR3Own(last,'family'),[1,2]);result.lastQueueChild=fixedR3Number(fixedR3Own(last,'childOrdinal'),65535,1);result.lastQueueActive=fixedR3Member(fixedR3Own(last,'active'),[1,2]);result.lastQueueQueued=fixedR3Number(fixedR3Own(last,'queued'),200);result.lastQueueMethod=fixedR3Member(fixedR3Own(last,'method'),['get','list','delete']);
   }
   const heldCount=fixedR3Array(fixedR3Own(raw,'heldOperations'),202);result.heldOperationCount=heldCount===null?fixedR3Unknown:heldCount>2?'multiple':heldCount;
   const phase=fixedR3Own(raw,'phase');if(fixedR3Plain(phase)){
