@@ -14587,3 +14587,58 @@ Caps/actuals: workflow73728/72208active/71951inactive; bootstrap_program65536/39
 Historical R2 raw9bf2e58b836d7fe75c59adafb7e420e2f42113b1 and production18b88ebef9a2aa979772d20bfb778cbfe463dc3011 remain byteexact in the unique pre-existing R2 archive; no duplicate archive added. Core3201/324448B/SHA256aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703 and Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 are preserved. Candidate must be direct child e830 with exactly F7+SAME. Inactive F7 only is attached; separate active F7 is ONEUSE message AFW-R3-PRIVATE-IMAGE-ONEUSE-20261115, repository/ref/attempt/message gated. Node22.23.4/Ubuntu24.04/jobreadonly/7min/actions pins unchanged; M02 deferred.
 
 No Source execution/import/syntax/test, refs, runs, Native, CLI, runtime or credentials performed by implementer. Root independent gate, actual output preservation, complete restoration and scoped review remain required. This record does not close any finding.
+
+
+## ROOT actual PRIVATE IMAGE correction — 2026-11-15
+
+```json
+{
+  "purpose": "afw.r3.private-image.actual-receipt.v1",
+  "observedUTC": "2026-11-15 12:22:37 UTC",
+  "source": "f3668f68a5938ea34bd50891e4ec338493b6649a",
+  "tree": "a86e062bb84ffb834293757a63b191c004a057ea",
+  "run": 43713359779,
+  "attempt": 1,
+  "job": 132809545743,
+  "step": "Observe trusted initial bootstrap only",
+  "stepOutcome": "success",
+  "runConclusion": "success",
+  "marker": "AFW_R3_DELIVERY_PRIVATE_IMAGE_DIAGNOSTIC/1 {\"purpose\":\"afw.r3-delivery.private-image-diagnostic.v1\",\"scope\":\"source_initial_only\",\"result\":\"bootstrap_admitted\",\"lastObserved\":\"bootstrap_admitted\",\"controlsInvoked\":0,\"originalCLIInvoked\":0,\"nativeBusinessCases\":0,\"qualification\":false,\"privateImageCleanup\":true,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}",
+  "ownAcceptance": {
+    "accepted": true,
+    "bootstrapAdmitted": true,
+    "record": {
+      "purpose": "afw.r3-delivery.private-image-diagnostic.v1",
+      "scope": "source_initial_only",
+      "result": "bootstrap_admitted",
+      "lastObserved": "bootstrap_admitted",
+      "controlsInvoked": 0,
+      "originalCLIInvoked": 0,
+      "nativeBusinessCases": 0,
+      "qualification": false,
+      "privateImageCleanup": true,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "qualified": false,
+    "NativeReleased": false,
+    "operationalReadiness": false
+  },
+  "bootstrapAdmitted": true,
+  "privateImageCleanup": true,
+  "controlsInvoked": 0,
+  "originalCLIInvoked": 0,
+  "nativeBusinessCases": 0,
+  "qualified": false,
+  "interpretation": "This single current Source/run completed the strict private-copy Node bootstrap and exact owned image cleanup. It does not qualify full104, release originalCLI/Native, establish historical cause or official Node authenticity, prove global drain, or demonstrate AFW cloud delivery/PC-off."
+}
+```
+
+This successful initial-only occurrence is consumed and must not be rerun. Restore original F7 and preserve the entire proposal and factual receipt. Rebase the still-pending full104 correction against the new closed Source only through a separate Root gate and review. All seven no-claims remain false; controls/CLI/Native were not invoked.
