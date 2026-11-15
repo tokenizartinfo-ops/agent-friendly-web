@@ -1,0 +1,10 @@
+{
+  "syntheticAccepted": [
+    "not_observed_all_unknown",
+    "observed_bounded_sample"
+  ],
+  "negativeRejected": 19,
+  "SourceExecuted": false,
+  "allFixturesSynthetic": true,
+  "maxObservedFixtureBytes": 1120
+}
