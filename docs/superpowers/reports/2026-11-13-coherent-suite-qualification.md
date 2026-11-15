@@ -11720,3 +11720,13 @@ jB5GhGq2ZIYvM36yjTSLksXMMH/MoRGM2rYshYa8JTRr47+NbMPRU4t3ajFUi8UUmGoxW8Oqlk+x
 EMBqMZ+H2Fk/Z/7/A1cyudb3uE6H+eSi2CV4X2Vq1pBxlG4Zy+lRoR8V+gEVemu1+gcodiC/8bcD
 AA==
 <!-- AFW-R3-DELIVERY-SUCCESSOR-DATA-V1:END -->
+
+## Root — delivery successor controls occurrence 2026-11-15 (consumed; unavailable)
+
+PROJECT AFW; Source GitHub Actions only; no production main or original readonly CLI imported/invoked. Active Source d19d2b1bf787055e6930905d73254c5185c087e7/tree90e09710d74baff9a73c9422fb48f5822d685f64; F7cd12deb506022268ebfb7b377d0d40334db5ce10; payload61413acd51dc9f51457d1d6e8acdf4f518061c70. Run43682038783/attempt1, jobreadonly132714543130, push/exact Source/path verified. Run and sole job completed failure; scope/checkout/setup-node/loader checks passed; controls boundary step failed. Root received one closed AFW_R3_DELIVERY_CONTROLS_UNAVAILABLE/1 record and independently checked its exact schema/canonical JSON. No normal controls report was published. Observed expected71; actual passed/failed/unknown/result rows/mutants remain unknown, not zero. Native business cases0. Private canary absent from this job log; absence alone does not close I3.
+
+AFW_R3_DELIVERY_CONTROLS_UNAVAILABLE/1 {"purpose":"afw.r3-delivery.controls-unavailable.v1","reason":"boundary_unavailable","source":"unknown","sourceTree":"unknown","run":"unknown","attempt":"unknown","job":"unknown","node":"unknown","allPassed":"unknown","expected":71,"passed":"unknown","failed":"unknown","unknown":"unknown","results":"unknown","mutants":"unknown","nativeBusinessCases":0,"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}}
+
+No rerun, retry, original CLI, real Source sample or Native occurrence is authorized by this result. I3 remains OPEN and retired collection.sh stays HELD. Next diagnostic is bounded DATA inspection of bootstrap/controls-boundary failure, followed by independent review; preserve this failed occurrence. GitHub emitted an action-runtime Node20 deprecation warning for the pinned checkout/setup-node actions (forced Node24); this is distinct from the checked Source Node22.23.4 and not established as the failure's cause.
+
+Root closure restores original F7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc and retains all1501929B of this candidate's SAME before this appendix. Core3201/324448B/SHA256aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703 and Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 must remain exact. Full readback/active-zero checks follow closure; no current runtime/provider health inference.
