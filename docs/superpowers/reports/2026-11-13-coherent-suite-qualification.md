@@ -20086,3 +20086,89 @@ H4sIAAAAAAACCu19a3PjtrLgX9Go7hmQRxBN6mWZGs6U47EzvpnYXj+SnJW0LpAELY4pUiEpP65H/32r
 <!-- AFW-Q1-SERIAL-LAB-V2-FIX1:BEGIN -->
 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
 <!-- AFW-Q1-SERIAL-LAB-V2-FIX1:END -->
+
+<!-- AFW-Q1-SERIAL-LAB-V2-FIX1-ACTUAL:BEGIN -->
+# Serial v2 fix1 actual Root receipt
+
+{
+  "purpose": "afw.serial-v2.fix1.actual-root-receipt.v1",
+  "utc": "2026-11-15 23:38:03 UTC",
+  "Source": "661ba7a1fd728efe3d269d776cb91cbfa2c8c994",
+  "tree": "76de68a502f046edfc2d8cb655a30aff97dc3bd7",
+  "parent": "49ee71ead8d52cb5d474d820d57828115f912923",
+  "gate": "dba3963088b64c26904e21826a0208399894c164",
+  "sourceIndex": "64ceddb8ed96d47daf912abbeecf52c7fa4f1bd0",
+  "ownIndex": "06211e8bf5c37d3eca5015ab5c56c3f32adb0310",
+  "run": 43775725913,
+  "attempt": 1,
+  "jobId": 133001451556,
+  "API": {
+    "runStatus": "completed",
+    "runConclusion": "failure",
+    "totalJobs": 1,
+    "jobStatus": "completed",
+    "jobConclusion": "failure",
+    "steps": [
+      {
+        "number": 2,
+        "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "conclusion": "success"
+      },
+      {
+        "number": 3,
+        "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "conclusion": "success"
+      },
+      {
+        "number": 4,
+        "name": "Check serial v2 isolation and trace controls",
+        "conclusion": "failure"
+      },
+      {
+        "number": 5,
+        "name": "Check serial loader boundary controls",
+        "conclusion": "skipped"
+      },
+      {
+        "number": 6,
+        "name": "Check serial entry pin reuse",
+        "conclusion": "skipped"
+      },
+      {
+        "number": 7,
+        "name": "Run declared full104 controls only",
+        "conclusion": "skipped"
+      }
+    ]
+  },
+  "logsFetchedOnce": true,
+  "publicFrameCounts": {
+    "preflight": 0,
+    "boundary": 0,
+    "unit": 0,
+    "full": 0,
+    "unavailable": 0
+  },
+  "observed": "AFW_Q1_SERIAL_LAB_PREFLIGHT_FAILED then exit1; later boundary/unit/full steps skipped",
+  "cause": "UNKNOWN; no assertion/stage inferred from fixed diagnostic",
+  "actualFull520Invoked": false,
+  "actualFull520ProcessCaseMeasurements": 0,
+  "preflightFixtureProgress": "UNKNOWN",
+  "rootAPIRejection": "Root serial-v2 API: run_status",
+  "labQualified": false,
+  "I3Closed": false,
+  "C2Released": false,
+  "NativeReleased": false,
+  "rollback": "Restore original F7 as child of this exact candidate, preserve complete proposed SAME plus this receipt; full independent readback pending",
+  "providerRuntimeRead": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
+<!-- AFW-Q1-SERIAL-LAB-V2-FIX1-ACTUAL:END -->
