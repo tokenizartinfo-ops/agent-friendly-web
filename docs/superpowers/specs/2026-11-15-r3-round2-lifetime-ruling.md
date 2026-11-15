@@ -1,0 +1,16 @@
+# Ruling — round2 N05 fixed Linux transport lineage
+15nov2026; DATA design authorization only, not code correctness or process-drain evidence. Source closed1fe20347; no ref/run released.
+
+Ruling: approve implementer's proposed fixed Linux parent-death lineage for DATA implementation: trusted Node outer -> Python parent -> fixed current-image Node emitter/controls; controls' fixed Bash-entry and entry's fixed Node launch pass through a Python stdlib shim that arms the relationship and exec-replaces itself. No extra resident service/compiler/dependency and no caller command/PID/group selector. Current Node image remains fixedfd3; creator identity uses a READONLY kernel directory handlefd4; fixed helper directoryfd6 anchors script paths. Every controlled FORK edge must be armed; EXEC preserves a relationship rather than creating a new parent.
+
+Required details before gate:
+- fd4 identifies the ACTUAL creating main thread at each fork, not a reused grandparent or a caller number. Require TID=TGID and PPID/live-kernel-object checks before/after arming. The already-dead-parent race must failclosed. For an exec replacement the parent remains unchanged; do not wrongly refresh it as a new fork.
+- Only fixed roles/scripts; descriptors and checked executable object survive to exec. Reject set-id/capability executables against the SAME opened object before exec. No generic path/mode authority. Preserve final public validator and all pre-child immutable authority pins.
+- Each fixed Python preexec/setup checks prctl success and intended relationship; no assumption that one prctl recursively protects descendants. Linux clears it on fork and special exec/credential transitions. [Linux primary API](https://man7.org/linux/man-pages/man2/PR_SET_PDEATHSIG.2const.html)
+- Keep shell/early-entry failure closed, status23 preserved, SOURCEscope/presence-only checks. Bash must provide/retain the correct creator handle according to whether its next launch forks or execs; preserve actual fallback behavior.
+- Distinct bounds within existing outerdelivery5s/control120s; proposed3.5/4/5 and100/110/120 need explicit timer ownership. A JS timer in a blocked emitter is not a hard lifetime mechanism. Kernel relationship plus surviving parent/OS bound must be shown; never claim global/physical drain from design.
+- Actual own blocked-emitter/parent/supervisor-loss controls must observe private readiness and termination without public PID/path/errors, no unrelated process scan/kill. Existing90s harness/20s admission fence remains separately useful; measured capacity and exact predeclared expectations precede release.
+
+Why: immutable kernel lineage and per-edge termination address the separately-sessioned descendant gap without returning to a generic process/group API. Cost if wrong: an unarmed fork/exec race could still leave transport work alive or kill the wrong relationship; new tests and independent scoped review remain required. If this cannot be implemented minimally within its declared guarantees, return the concrete conflict before adding more layers.
+
+This does not approve another Source occurrence, a Native run, runtime/credential changes, current provider health or PCoff. I01+N01–N06 remain open until corrected/evidenced/reviewed;7nonclaimsfalse.
