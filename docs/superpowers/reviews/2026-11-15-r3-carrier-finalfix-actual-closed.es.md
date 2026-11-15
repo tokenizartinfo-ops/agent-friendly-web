@@ -1,0 +1,15 @@
+# R3 carrier: finalfix real y cierre — 15nov2026
+
+[Run43678581646/1](https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43678581646), contracts132704044656, PASS. Source activo5b8435a598a380d424e7bac3a554fc80b4f0875a/árbol3fecd5015160499866c681bc55529da11a07ef55. Una ejecución nueva de correcciones, no rerun43675467138; siete jobs original_contracts/Native omitidos, ocho terminales.
+
+37 casos nuevos PASS; cinco mutantes muertos exactamente: semantic_guard S03–S08; case_count_join J05/J06; progress_join J07–J09; enumerable_guard E01/E03/E04; stderr_boundary B02/B03/B05–B08. callbacks0. Legacy3positivos/73negativos conservados. Cuatro registros primarios recibidos una vez y aceptados por receptores Root independientes: coveringf527d688 (3positivos/25negativos propios previos), prequal a7f34096, main3d4b5803 y observer70dbf2f8. Completos antes12PASS/4FAIL01,02,03,09; fixed16PASS;11mutantes anteriores exactos;current59/C1–C6/helper3/bounds/receptores/pure8/inactive/profile y F1–F8PASS. El wire de observación y los49/production18 no cambiaron.
+
+Una ola conforme specfbff582f y review6dc290b6 C0/I3/M3: semántica de main/prefix; relación de caseCount/progress exacta; fallback con contexto de bootstrap y stderr privado acotado; lectura fd realmente max+1; serialización cerrada sin hooks; acciones del job nuevo fijadas a commits. El EEXIST del harness se detectó y corrigió en DATA antes de cualquier ejecución; candidatos/payloads provisionales supersedidos nunca fueron publicados por ref.
+
+Cierre verificado: Source8c065ff3a78c39c17a906990beec640e7c83b1a4/árbol3c3b3ba7edeff2ea8d695f380b2ccef3f3c24be5. F7originalf7a71f1a0fa4f5ddf069ff411f008a098455e5cc. SAME9c3407fd3da75a9acbbb8b73ddc03c5e9148474a/1429126B/SHA256a24175f3e29fcd0d9eb0a73edbcc45098fdf204b6eca2631be6a84cb20def476, entero prefijo1413201B/SHAa2defd599b68c6ece0f0f2f1ecee2210261eaeb6c20b56edf4e82d104aa91cf9 preservado. Lecturas de archivos exactas; árbol3364/3203hojas; Core3201/324448B/aefb08c1 y todas otras hojas modo/tipo/SHA conservadas. Main0c9c475b3ebaa970fc11d628b40e50a90cceb727; cinco estados activos0; ningún run por cierre; sin mutación pendiente.
+
+Revisión acotada SAME reviewer pendiente: paquete75b35f25fdff854576b1ce64c362cef88989f3c0 tiene seis hallazgos y diff de corrección,16programas, evidencia real y cierre. No segunda revisión amplia ni replay. Gate2/source readonly original todavía no liberado. Receptores propios futuros de procedencia y LF preparados en ac87bac5; draft5f66a859 sigue condicionado a aceptación de esta revisión y gate nuevo.
+
+C2: se acotó además el punto nativo faltante (89a0814e): worker/mcp-own.#finite y nueve RPC no crean/transportan un parent que cubra la carga de factory. Factory/material/notices/publication, vínculo de expiración original y parent por invocación permanecen pendientes. No modificar Core en paralelo a la observación R3 vinculada a aefb08c1.
+
+No owner action antes15nov08:30Argentina/11:30UTC. Trabajo Source cloud/GitDB/Actions y validadores propios en RAM; no Source local, CF/runtime/keys/OAuth/OTP/Max/Chrome. Siete nonclaimsfalse; no afirmar PCoff listo.
