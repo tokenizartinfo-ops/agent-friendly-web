@@ -1,18 +1,22 @@
 name: AFW finite budget qualification
-run-name: AFW R3 carrier aggregate finalfix HELD ${{ github.sha }}
+run-name: AFW R3 carrier aggregate finalfix CONTROLS ONLY ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
+    paths:
+      - .github/workflows/afw-finite-budget-qualification.yml
 permissions:
   contents: read
   actions: read
 concurrency:
   group: afw-finite-budget-qualification
   cancel-in-progress: false
-# PREPARATION ONLY. Every job remains literally false pending Root review.
-# PREPARATION ONLY: all eight job gates remain false until separate Root release.
+# ONE ROOT-GATED SOURCE-ONLY RELEASE. Only diagnostic contracts may execute.
+# ONE ROOT-GATED SOURCE-ONLY RELEASE: original_contracts and all six Native tails remain false.
 jobs:
   contracts:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
+    if: ${{ github.event_name == 'push' && github.event.head_commit.message == 'AFW R3 carrier aggregate finalfix controls 2026-11-15 ONE 451ab647 v1' && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
     steps:
@@ -51,6 +55,7 @@ jobs:
           import {gunzipSync} from 'node:zlib';
           import {execFileSync} from 'node:child_process';
           const e=process.env,hash=b=>createHash('sha256').update(b).digest('hex'),blob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex'),expected={"count":49,"setSha256":"c070d77b7eb85c2a05b0b30195e90b8811b9665bb5dafeda5f7aa5297c85c14d","expandedBytes":401340,"expandedSha256":"5c142499fd263235d8f4b308fb5005d43a301cd08d2eea65188ffb466b380632","compressedBytes":75614,"compressedSha256":"1398e709094357e1c2e359d6d877a88861dfc906c29436ba438dfe1b606d55ab"};
+          assert.equal(e.GITHUB_REPOSITORY_ID,'1347578006');assert.equal(e.GITHUB_EVENT_NAME,'push');assert.equal(e.GITHUB_WORKFLOW_REF,'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101');assert.equal(execFileSync('git',['log','-1','--format=%B'],{encoding:'utf8'}).trim(),"AFW R3 carrier aggregate finalfix controls 2026-11-15 ONE 451ab647 v1");
           assert.equal(process.versions.node,'22.23.4');assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_JOB,'contracts');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(e.AFW_SYN_CHECKPOINT_KEY,undefined);assert.equal(e.AFW_BUDGET_GROUP,undefined);
           const reportPath='docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md',report=readFileSync(reportPath),prefix=report.subarray(0,1225279);assert.equal(prefix.length,1225279);assert.equal(hash(prefix),'331fcc899dd2fcec3e29765c53a620113bcf88a5877392fd7eac37a1255bc0f9');
           const currentPrefix=report.subarray(0,1374133);assert.equal(currentPrefix.length,1374133);assert.equal(hash(currentPrefix),'c7ab7bffbf8911344d30b3440f1b2834c692c190892d0f41d3454b92c0c93fb0');
