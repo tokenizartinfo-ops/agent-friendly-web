@@ -1,0 +1,82 @@
+{
+  "purpose": "afw.r3.node-execpath.static-inventory.v1",
+  "sourceBundle": "9bf2e58b836d7fe75c59adafb7e420e2f42113b1",
+  "frozen18": "b88ebef9a2aa979772d20bfb778cbfe463dc3011",
+  "scope": "DATA string search only; no Source execution",
+  "matches": [
+    {
+      "group": "helpers33",
+      "name": "emitter.mjs",
+      "hits": [
+        {
+          "line": 16,
+          "text": " const image=fstatSync(3),current=statSync('/proc/self/exe');if(image.dev!==current.dev||image.ino!==current.ino||image.size!==current.size)throw 1;"
+        }
+      ]
+    },
+    {
+      "group": "helpers33",
+      "name": "controls.mjs",
+      "hits": [
+        {
+          "line": 264,
+          "text": " const image=fstatSync(3),current=statSync('/proc/self/exe');"
+        }
+      ]
+    },
+    {
+      "group": "helpers33",
+      "name": "outer.mjs",
+      "hits": [
+        {
+          "line": 45,
+          "text": "  const boundImage=fstatSync(3),runningImage=r3fs.statSync('/proc/self/exe');need(boundImage.isFile()&&boundImage.dev===runningImage.dev&&boundImage.ino===runningImage.ino&&boundImage.size===runningImage.size);"
+        },
+        {
+          "line": 153,
+          "text": "  image=openSync('/proc/self/exe',constants.O_RDONLY);const actual=fstatSync(image),current=r3fs.statSync('/proc/self/exe');need(actual.isFile()&&actual.dev===current.dev&&actual.ino===current.ino&&actual.size===current.size);"
+        }
+      ]
+    },
+    {
+      "group": "helpers33",
+      "name": "delivery-outer.mjs",
+      "hits": [
+        {
+          "line": 45,
+          "text": "  const boundImage=fstatSync(3),runningImage=r3fs.statSync('/proc/self/exe');need(boundImage.isFile()&&boundImage.dev===runningImage.dev&&boundImage.ino===runningImage.ino&&boundImage.size===runningImage.size);"
+        },
+        {
+          "line": 153,
+          "text": "  image=openSync('/proc/self/exe',constants.O_RDONLY);const actual=fstatSync(image),current=r3fs.statSync('/proc/self/exe');need(actual.isFile()&&actual.dev===current.dev&&actual.ino===current.ino&&actual.size===current.size);"
+        }
+      ]
+    },
+    {
+      "group": "helpers33",
+      "name": "controls-outer.mjs",
+      "hits": [
+        {
+          "line": 45,
+          "text": "  const boundImage=fstatSync(3),runningImage=r3fs.statSync('/proc/self/exe');need(boundImage.isFile()&&boundImage.dev===runningImage.dev&&boundImage.ino===runningImage.ino&&boundImage.size===runningImage.size);"
+        },
+        {
+          "line": 153,
+          "text": "  image=openSync('/proc/self/exe',constants.O_RDONLY);const actual=fstatSync(image),current=r3fs.statSync('/proc/self/exe');need(actual.isFile()&&actual.dev===current.dev&&actual.ino===current.ino&&actual.size===current.size);"
+        }
+      ]
+    },
+    {
+      "group": "frozen18",
+      "name": "runtime.mjs",
+      "hits": [
+        {
+          "line": 20,
+          "text": "   try{child=spawn(process.execPath,args,{env:childEnv(extra),stdio:['ignore',fd,fd],...(cwd===undefined?{}:{cwd})});}"
+        }
+      ]
+    }
+  ],
+  "conclusion": "frozen runtime.mjs spawns process.execPath; any eventual Node image correction must preserve a usable path and image lifetime. No implementation or cause beyond current writebits guard is established.",
+  "NativeReleased": false
+}
