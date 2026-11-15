@@ -161,3 +161,8 @@ Next: one fresh whole-unit review of the diagnostic, then source-based causal in
 ## Whole-unit review disposition
 
 Report0a937f989b22115589a2164b7c169f26d21b1cf0: C0/I3/M2. Root accepts all five findings. The actual R3 wire and terminal Source closure stand. One aggregate final-fix wave is authorized for inactive preparation, then one Root-gated controls-only qualification and one scoped review. No Native replay; underlying R3 causal inspection proceeds separately. Detailed brief: briefs/2026-11-15-readonly-site-contract-finalfix.md. All seven nonclaims remain false.
+
+
+## Controls-only final-fix released once
+
+Root gate e1ab4f60709187d7bcff23653d5f3e3b1637a309 /808afdf4e5a45b78f0dbc12b2a11561f256ed27a cleared the exact inactive52c900 candidate. Active1874acaebe746104f299eb6c5b08178222d49626/tree14b1b8dafed8a51e97e6e0a0709efd4d94f8c760/F7aa6e9c76abe19cbcac8b3f61bc3be1d697511064 differs only by one false-mask removal, direct parent673948. Root verified fulltree/F7, fresh Source/Main, exacthead0 and five active states0, then one CAS/readback. Run43661818015/1 is in progress. Source is frozen until terminal; no result is claimed yet. This executes builtin-only validators/emitter/helper/control regression work, not npm/pure/profile/Native/SDK/World/live work. Restore originalF7 after terminal and preserve the entire996063Bcandidate SAME prefix plus actual. Seven nonclaims remain false. No owner action.
