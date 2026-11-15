@@ -14558,3 +14558,32 @@ Checkout11d5960a326750d5838078e36cf38b85af677262/setupnode49933ea5288caeca8642d1
 ```
 
 This occurrence is consumed and must not be rerun. Restore original F7, preserve the full proposal and this factual receipt, then prepare a narrowly scoped correction of the current image-admission problem without weakening the protection. No full104/Gate2/Native/readiness/PC-off released. All seven no-claims remain false.
+
+## R3 round3 — private Node image initial-only DATA, 2026-11-15
+
+Root ruling f00883930262e0fb98f8fe965024711255d3c3f7 and typed workflow-cap ruling c571d887fe12495ffb22f65e941fdba5f85c5eca. This is inactive preparation, not execution or qualification. I3 remains OPEN; full104, original readonly CLI and Native are HELD.
+
+Observed prior IMAGE occurrence43709558348/1 (job132797940020) yielded only image_writebits_rejected. Its guard rejected bits022. Later input guards were not measured; no historical originalWorld/oldunknown cause follows. Source was restored to e8304fcee5af3481f3ec49c705f4c3a85de8fd98/treea5779b56ad3a99947fc264321e8c918e48620acc with original F7. This proposal preserves the entire current SAME prefix8956774cbeb7bf910891aaf8dad7955094ea0148/1739498B/SHA2569b10e0bd91cde4a55944d9a49a472847157414f3eaea8824e4842bf3565e7f67.
+
+Private image: one setup-node PATH selection opens the input once. All input guards remain except022, permitted only to COPY, never execute. A fresh exclusive own leaf node0600 in own0700 root is streamed from that FD, converted0500, acquired RO before final hash, and all writers closed before exec. A(copy)=B(targetRO)=C(second read of the same sourceFD), exact size/EOF and source pre/post(dev,ino,size,uid,gid,mode,nlink,mtime_ns,ctime_ns) are required. Final target applies ALL strict executable guards including no022/no-setid/no-caps plus same-own-inode/nlink1/RO binding. No original mutation, attributes copied, official Node authenticity claim, nested PATH reselection, generic command or resident.
+
+Binary cap268435456B; chunks≤1048576B; cooperative monotonic15s checked around copy I/O/chunks, not a hard D-state bound and not a Native clock change. FD9 holds only this initial own root, separate from fd3image/fd4creator/fd8fixture/fd10reader/fd11writer. Existing final formatter validates/cleans only its exact own partial0600 or complete0500 leaf and empty root AFTER Node wait/close11 and BEFORE the single receipt. privateImageCleanup=false when verification is unavailable; admitted requires cleanuptrue. No global drain follows. Future consumer lifetime and immutable module/helper memfd work8ad93567 remain separate HELD full104 work.
+
+Contract784ac3254f9e6f108fdb749d5c9c2e6b1f3a65e6; schema09f37ce8aa76e2154be931383fe498a85cbc7488; examplesc885df5fecdee763558ac5bb16675e02da57cfea. Marker AFW_R3_DELIVERY_PRIVATE_IMAGE_DIAGNOSTIC/1, ten ordered normal stages or exact firstfive+one of41 terminal enums. Root external receivers83f577160070a2f7c6e288182b00a83baeda23fe/4dbdfea106f46a41a79787b38be052873080b1b8. Wire2048/trace256, controlsInvoked0/originalCLIInvoked0/nativeBusinessCases0/qualificationfalse/all7nonclaimsfalse. Receipt is observation, not historical cause or authenticated authority.
+
+Raw 20605f88fcb917a5f8964cf666cda5d8a9987b3c/258406B/SHA256363d1287475f8eda50a8df465ae17d2cc86ae07ed0443d59654605b5975d4910; gzip aaf24880acd07db75e7050db541802b65029640c/73098B/SHA256d89c608020298bd20d4674a3eee16ad0518fd97d39fbb47f27a47c9c4af2e351; exact base64 mirror b2114456d4903c655f04cdb6acbd70eb1d042de3/97464ASCIIchars. Manifest7 8e3057b6fac23960618f5479f77101f0e00512d9; reversible inert-text patch 96a572583f1f052fcfde1299dce10b8174c78a77. UTF8-only connector read back all7sources+raw+manifest+patch+mirror exactly; binary gzip itself is not UTF8-readable by that connector. Decoding the independently read mirror reproduced its Git blobSHA and gunzip reproduced exact raw in RAM, without Source execution.
+
+Sources:
+- initial-shim.py: f54b573a0dc8f65945cb929bd19bdfbcb142dc93/15152B/SHA25630ef0fb4574b8cb874122f64781f82cb4a736d8c68b7d259d689e505ac82f1ea (literal_piece).
+- initial-node-prelude.mjs: c823d304ba4be30bfcc94fd5c34af9fbfe97d690/14108B/SHA2561e0f68e33d2deac420080b2b5a3782936d59ef7cdbe738cb2bde0fdaf88e96d5 (literal_piece).
+- initial-node-common.mjs: 8a74fe67af2c1a870b9964f0f5c17c2514986e36/25794B/SHA2561c8094cb913f8ae06d553b1b29d54bf89ad654524d6afab3f647791057c934aa (literal_piece).
+- initial-node.mjs: f15877b910fbe0df06292bb8ad20560f9cfd764c/39903B/SHA256fe2552a17b0299574e2e67b083cc74856597f4fa1daabd37e18715220ed0a1fb (bootstrap_program).
+- trace-formatter.py: fa2ae6babb60a1c3bbe8d988f8a533c86921a42f/5151B/SHA2563da53ace2cf8e5495c6b4e66cbf543040b6cdc6e4d122218b5bc56e1f6d80e9c (literal_piece).
+- inactive-f7.yml: bc6b22c87fa26204cc6f7deb62cc7dc10000384a/71951B/SHA256549e2f6e10210ecfd1dbdd27b3e1462da4887a544065cebe9a7a231252f686e5 (workflow).
+- active-f7.yml: 88c849b56fb661214b1267b15ac4fcb757127167/72208B/SHA256a0a1bc1242f3f84b087a989dfa8e5fee415f361b98b5e9b18edd393e17dc95d4 (workflow).
+
+Caps/actuals: workflow73728/72208active/71951inactive; bootstrap_program65536/39903; literal_piece32768/max25794; raw400500/258406; gzip98304/73098; base64131072/97464; SAME1800000 (full prefix plus this append). Common outer8a74fe67af2c1a870b9964f0f5c17c2514986e36 remains literal25794B in full parsed module39903=14108+LF+25794. Only prelude prefix rebased; terminal runControls is absent, common definitions retained and uncalled.
+
+Historical R2 raw9bf2e58b836d7fe75c59adafb7e420e2f42113b1 and production18b88ebef9a2aa979772d20bfb778cbfe463dc3011 remain byteexact in the unique pre-existing R2 archive; no duplicate archive added. Core3201/324448B/SHA256aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703 and Main0c9c475b3ebaa970fc11d628b40e50a90cceb727 are preserved. Candidate must be direct child e830 with exactly F7+SAME. Inactive F7 only is attached; separate active F7 is ONEUSE message AFW-R3-PRIVATE-IMAGE-ONEUSE-20261115, repository/ref/attempt/message gated. Node22.23.4/Ubuntu24.04/jobreadonly/7min/actions pins unchanged; M02 deferred.
+
+No Source execution/import/syntax/test, refs, runs, Native, CLI, runtime or credentials performed by implementer. Root independent gate, actual output preservation, complete restoration and scoped review remain required. This record does not close any finding.
