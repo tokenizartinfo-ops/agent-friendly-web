@@ -1,1595 +1,463 @@
-name: AFW finite budget qualification
-run-name: AFW fixed native qualification HELD ${{ github.sha }}
+name: AFW R3 initial-only startup diagnostic
+run-name: AFW R3 initial-only startup diagnostic ONEUSE ${{ github.sha }}
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
+    paths:
+      - .github/workflows/afw-finite-budget-qualification.yml
 permissions:
   contents: read
-  actions: read
 concurrency:
   group: afw-finite-budget-qualification
   cancel-in-progress: false
-# PREPARATION ONLY. Every job remains literally false pending Root review.
-# PREPARATION ONLY: all seven job gates remain false until separate Root release.
+# Inactive DATA. Initial-only; STOP before controls/captured helpers/CLI/Native.
+# R2 archive is verified/materialized DATA only; I3 remains OPEN.
+# Action-runtime warning M02 deferred; exact mandated pins unchanged.
 jobs:
-  contracts:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
-    runs-on: ubuntu-24.04
-    timeout-minutes: 2
-    env:
-      AFW_BUDGET_GROUP: positive
-    outputs:
-      artifact-id: ${{ steps.upload.outputs.artifact-id }}
-    steps:
-      - name: Require the fixed AFW source and first attempt
-        id: scope
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
-          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
-          test "$GITHUB_RUN_ATTEMPT" = 1
-          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
-          printf 'AFW_PURE_STARTED_MS=%s\n' "$(date +%s%3N)" >>"$GITHUB_ENV"
-          mkdir -m 700 "$RUNNER_TEMP/afw-pure-private"
-      - name: Checkout this exact revision
-        uses: actions/checkout@v4
-        with:
-          repository: tokenizartinfo-ops/agent-friendly-web
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
-      - name: Use Node 22
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.23.4'
-      - name: Install the locked fixture dependencies
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-locked-install.log" 2>&1 || { echo locked_install_failed; exit 1; }
-      - name: Check fixed fixture syntax, lint, inactive module and eight contracts
-        id: pure_test
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test -z "${AFW_SYN_CHECKPOINT_KEY+x}"
-          test "$(node -v)" = v22.23.4
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          files=(test/fixtures/finite-budget-world.mjs test/fixtures/finite-owner-cleanup.mjs test/mcp-qa-finite-budget-native.test.mjs test/fixtures/finite-initial-entry-world.mjs test/fixtures/finite-owner-cleanup-persistence.mjs)
-          for file in "${files[@]}"; do node --check "$file" >>"$RUNNER_TEMP/afw-pure-private/syntax.log" 2>&1 || { echo syntax_failed; exit 1; }; done
-          npx --no-install eslint "${files[@]}" >"$RUNNER_TEMP/afw-pure-private/lint.log" 2>&1 || { echo lint_failed; exit 1; }
-          test ! -e output/finite-budget
-          env -u AFW_BUDGET_GROUP node --test --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs >"$RUNNER_TEMP/afw-pure-private/inactive.tap" 2>&1 || { echo inactive_load_failed; exit 1; }
-          test ! -e output/finite-budget && test ! -e output/t2-native-graphs
-          if AFW_BUDGET_GROUP=invalid-fixed-group node --test --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs >"$RUNNER_TEMP/afw-pure-private/invalid.tap" 2>&1; then echo invalid_group_accepted; exit 1; fi
-          test ! -e output/finite-budget && test ! -e output/t2-native-graphs
-          mkdir -p output/finite-budget/pure
-          node --test --test-reporter=tap test/finite-budget-diagnostics.test.mjs >"$RUNNER_TEMP/afw-pure-private/tests.tap" 2>&1 || { echo pure_contract_failed; exit 1; }
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';import {readFileSync,writeFileSync} from 'node:fs';import {join} from 'node:path';
-          const root=join(process.env.RUNNER_TEMP,'afw-pure-private'),dest='output/finite-budget/pure';
-          function counts(file,expected){const text=readFileSync(join(root,file),'utf8'),actual={};for(const [name,value]of Object.entries(expected)){const matches=[...text.matchAll(new RegExp('^# '+name+' (\\d+)$','gm'))];assert.equal(matches.length,1);actual[name]=Number(matches[0][1]);assert.equal(actual[name],value);}return actual;}
-          const business=counts('tests.tap',{tests:8,pass:8,fail:0,cancelled:0,skipped:0,todo:0});
-          const inactive=counts('inactive.tap',{tests:1,pass:1,fail:0,cancelled:0,skipped:0,todo:0});
-          assert(readFileSync(join(root,'invalid.tap'),'utf8').includes('SYN budget group unsupported before I0'));
-          writeFileSync(join(dest,'q-counts.json'),JSON.stringify(business));
-          writeFileSync(join(dest,'inactive.json'),JSON.stringify({fileWrapper:inactive,businessCases:0,I0Opened:false,invalidGroupRejected:true}));
-          console.log('AFW_PURE '+JSON.stringify(business));console.log('inactive_file_wrapper_verified 1 business_cases 0 invalid_group_rejected');
-          NODE
-      - name: Execute all fixed preparation controls once without I0
-        id: controls
-        if: steps.pure_test.outcome == 'success'
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          result=0
-          AFW_BUDGET_CONTROL_PHASE=green env -u AFW_BUDGET_GROUP node --experimental-vm-modules test/fixtures/finite-budget-world.mjs verify-native-preparation-round1 >"$RUNNER_TEMP/afw-pure-private/controls.log" 2>&1 || result=$?
-          printf 'exit=%s\n' "$result" >>"$GITHUB_OUTPUT"
-          test "$result" = 0
-      - name: Strict three-profile preflight with safe failure DTO
-        id: preflight
-        if: always() && !cancelled() && steps.pure_test.outcome == 'success'
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-pure-private/preflight.log" 2>&1
-          import {createHash} from 'node:crypto';import {writeFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';
-          const hash=value=>createHash('sha256').update(value).digest('hex'),root='output/finite-budget/pure';
-          const labels=["exact family native statement kind","D original return retain native unchanged","RO original native declaration unchanged","exact two queue statement kinds","original initial child block provenance","native continuation original guard adjacency","SDK declaration structural identity","eleven cleanup primary blocks plus work/wait subcounts",'single structural actual SDK settlement sequence','two distinct original revokeGrant receivers','SDK actual standalone await adjacency','SDK original check adjacency','SDK bounded metrics same-block adjacency','same existing named DO class','no SYN method collision','closed fixed adapter operation inventory','exact original emitted prefix','exact two original enqueue notifications after pinned baseline transform','single passive actual SDK settlement site','original SDK call and retain unchanged','composed QA entry bytes','composed QA entry pin','exact composed entry native member selectors','exact composed entry SQL/body selectors','complete role reader catalog before I0','closed prepared role input map','scope input raw pin','raw SHA256 pin','raw byte pin','exact prepared AST count','exact installed package selector','installed package byte pin','installed package hash pin','native prepared role hooks match exact prior pure preflight before I0','exact fixed SYN additional-emission provenance before I0'];
-          function data(value,key){try{for(let n=0;value&&n<4;n++,value=Object.getPrototypeOf(value)){const descriptor=Object.getOwnPropertyDescriptor(value,key);if(descriptor)return Object.hasOwn(descriptor,'value')?descriptor.value:undefined;}}catch{}return undefined;}
-          function safe(value){if(typeof value==='number'&&Number.isFinite(value)||typeof value==='boolean'||value===null)return value;if(typeof value==='string')return {type:'string',bytes:Buffer.byteLength(value),sha256:hash(value)};return {type:typeof value};}
-          const profiles=[];const availableMs=120000-(Date.now()-Number(process.env.AFW_PURE_STARTED_MS));if(!Number.isFinite(availableMs)||availableMs<45000)throw Error('finite_pure_profile_headroom');
-          for(const profile of ['positive','readonly','reduction_a']){
-            process.env.AFW_BUDGET_GROUP=profile;let stage='import';
-            try{const mod=await import('./test/fixtures/finite-budget-world.mjs');stage='preflight';const result=await mod.preflightBudgetCompilation();profiles.push({profile,stage:'complete',passed:true,I0Opened:result.I0Opened,nativeExecutionProduced:result.nativeExecutionProduced,additionalSYNCount:result.additionalSYN.length,additionalSYN:result.additionalSYN.map(x=>({path:x.path,family:x.family??null,sites:x.sites??null,sdkSettlementSites:x.sdkSettlementSites??null,baselineBytes:x.baselineBytes,baselineSha256:x.baselineSha256,literalBytes:x.literalBytes??null,literalSha256:x.literalSha256??null,emittedBytes:x.emittedBytes,emittedSha256:x.emittedSha256}))});}
-            catch(error){const message=data(error,'message'),name=data(error,'name'),code=data(error,'code'),operator=data(error,'operator');profiles.push({profile,stage,passed:false,error:{name:['Error','AssertionError','TypeError','SyntaxError','RangeError'].includes(name)?name:'other',code:['ERR_ASSERTION','ERR_MODULE_NOT_FOUND','ERR_INVALID_ARG_TYPE','ERR_UNKNOWN_FILE_EXTENSION','ERR_REQUIRE_ESM'].includes(code)?code:code===undefined?'absent':'other',operator:['strictEqual','deepStrictEqual','==','===','match','ok'].includes(operator)?operator:operator===undefined?'absent':'other',actual:safe(data(error,'actual')),expected:safe(data(error,'expected')),message:typeof message==='string'?{bytes:Buffer.byteLength(message),sha256:hash(message),publicLabel:labels.find(label=>message.includes(label))??'unmatched'}:{type:typeof message}}});}
-          }
-          const result={purpose:'afw.fixed-budget-pure-diagnostic.syn.v1',source:process.env.GITHUB_SHA,tree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),run:process.env.GITHUB_RUN_ID,attempt:1,profiles,allPassed:profiles.every(x=>x.passed),I0Opened:false,nativeExecutionProduced:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-          const bytes=Buffer.from(JSON.stringify(result,null,2));if(bytes.length>65536)throw Error('safe_diagnostic_limit');
-          await writeFile(root+'/diagnostics.json',bytes);
-          await writeFile(root+'/diagnostic-manifest.json',JSON.stringify({purpose:'afw.fixed-budget-pure-diagnostic-manifest.syn.v1',source:result.source,run:result.run,attempt:1,files:[{path:'diagnostics.json',bytes:bytes.length,sha256:hash(bytes)}]}));
-          await writeFile(process.env.GITHUB_OUTPUT,'all-passed='+result.allPassed+'\n',{flag:'a'});
-          NODE
-      - name: Seal a closed pure evidence directory
-        id: pure_seal
-        if: always() && !cancelled() && steps.scope.outcome == 'success'
-        env:
-          PURE_COMPLETE: ${{ steps.pure_test.outcome == 'success' && steps.controls.outcome == 'success' && steps.preflight.outputs.all-passed == 'true' }}
-          PURE_TEST_OUTCOME: ${{ steps.pure_test.outcome }}
-          CONTROLS_OUTCOME: ${{ steps.controls.outcome }}
-          PREFLIGHT_OUTCOME: ${{ steps.preflight.outcome }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';
-          import {readFile,writeFile,mkdir,readdir,lstat} from 'node:fs/promises';
-          import {createHash} from 'node:crypto';
-          import {join} from 'node:path';
-          // AFW_CLOSED_PURE_SEALER_V2: standard Node only, also executed by fixed sandbox controls.
-          const sha=bytes=>createHash('sha256').update(bytes).digest('hex'),N=value=>assert(Number.isSafeInteger(value)&&value>=0&&value<=Number.MAX_SAFE_INTEGER),H=value=>assert(typeof value==='string'&&/^[a-f0-9]{64}$/.test(value)),B=value=>assert(typeof value==='boolean');
-          function object(value,keys){assert(value&&typeof value==='object'&&!Array.isArray(value));assert.deepEqual(Object.keys(value).sort(),keys.slice().sort());}
-          function same(value,expected){assert.deepEqual(value,expected);}
-          function numbers(value,keys){object(value,keys);for(const item of Object.values(value))N(item);}
-          function arr(value,max,visit){assert(Array.isArray(value)&&value.length<=max);value.forEach(visit);}
-          function identity(value){same(value.source,process.env.GITHUB_SHA);same(value.run,process.env.GITHUB_RUN_ID);assert(value.attempt===1||value.attempt==='1');}
-          function flags(value){for(const key of ['I0Opened','nativeExecutionProduced','operationalReadiness','completePackage','PCoff'])same(value[key],false);}
-          function digest(bytes){return {bytes:bytes.length,sha256:sha(bytes)};}
-          const descriptorBytes=await readFile('test/fixtures/finite-budget-descriptors.json'),descriptorBlob=createHash('sha1').update('blob '+descriptorBytes.length+'\0').update(descriptorBytes).digest('hex');same(descriptorBlob,'be695028e4c12c3cb7d3b7bf2c5f2e7508f3db15');const descriptors=JSON.parse(descriptorBytes);
-          function counts(value){numbers(value,['nativeCalls','identityEdges','bodyEdges','facadeEdges','scopeEdges','guardEdges']);}
-          const countKeys=['childBlocks','work','wait','selectReadonly','selectReduction','queueReadonly','queueReduction','capReadonlyList','capReadonlyGet','capReductionList','capReductionDelete','send','sdk'];
-          function additional(value,path){
-           const adapter=path==='<stdin>';
-           if(adapter){
-            object(value,['purpose','family','baselineBytes','baselineSha256','literalBytes','literalSha256','emittedBytes','emittedSha256','methods','operationInventory','nativeInputAndAckObservationsSeparate','businessAuthority','originalEntryBytes','originalEntrySha256']);
-            same(value.purpose,'afw.fixed-syn-prototype-adapter.v1');assert(['readonly','reduction'].includes(value.family));same(value.methods,['finiteBudgetReadonly','finiteBudgetReduction','finiteBudgetSignals','finiteBudgetRelease','finiteBudgetRestore']);
-            same(value.operationInventory,{'Reflect.apply(':23,'Object.defineProperty(':1,'Object.defineProperties(':1,'Promise.allSettled(':1,'new WeakMap(':3});same(value.nativeInputAndAckObservationsSeparate,true);same(value.originalEntryBytes,64800);same(value.originalEntrySha256,'89ae285b8f00fdf95eecfeee37673138f4c136c7704f245152051a3be2985257');N(value.literalBytes);H(value.literalSha256);
-           }else{
-            assert(['lib/mcp-qa-finite-owner-cleanup.mjs','lib/mcp-qa-finite-initial-lease.mjs'].includes(path));const cleanup=path.includes('owner-cleanup');
-            object(value,['purpose','baselineBytes','baselineSha256','emittedBytes','emittedSha256','primaryBlocks','counts','queueKinds','fields','businessAuthority',...(cleanup?['sdkDeclarationProvenance']:[])]);
-            same(value.purpose,'afw.fixed-syn-passive-observations.v2');same(value.primaryBlocks,cleanup?11:1);numbers(value.counts,countKeys);
-            same(value.counts,cleanup?{childBlocks:1,work:1,wait:1,selectReadonly:1,selectReduction:1,queueReadonly:1,queueReduction:1,capReadonlyList:1,capReadonlyGet:1,capReductionList:1,capReductionDelete:1,send:1,sdk:1}:{childBlocks:1,work:1,wait:1,selectReadonly:0,selectReduction:0,queueReadonly:0,queueReduction:0,capReadonlyList:0,capReadonlyGet:0,capReductionList:0,capReductionDelete:0,send:0,sdk:0});
-            same(value.queueKinds,cleanup?[{family:1,statementKind:'variable',originalCheckAdjacent:true,originalReceiver:'alias',originalArgs:'q.args'},{family:2,statementKind:'return',originalCheckAdjacent:true,originalReceiver:'alias',originalArgs:'q.args'}]:[]);
-            same(value.fields,['opaque-alias','child-ordinal','family','deadline','status','counter','limit','queue-length','active','time','send-record-hash']);
-            if(cleanup){
-             const proof=value.sdkDeclarationProvenance;object(proof,['original','protectedModuleBlob','originalStatementSha256']);same(proof.protectedModuleBlob,'1a5a2583d266179cdd89f799c64199f29044fec5');same(proof.originalStatementSha256,sha('const actual=retain(api.revokeGrant(selector,i.subject));'));
-             object(proof.original,['sites','sameNameReceivers','receiver','method','args','adjacency']);same(proof.original,{sites:1,sameNameReceivers:['api','store'],receiver:'api',method:'revokeGrant',args:['selector','i.subject'],adjacency:['const-actual-retain-api','await-actual','check','bounded-facts']});
-            }
-           }
-           for(const key of ['baselineBytes','emittedBytes'])N(value[key]);for(const key of ['baselineSha256','emittedSha256'])H(value[key]);same(value.businessAuthority,false);
-           if(adapter){same(value.baselineBytes,106772);same(value.baselineSha256,'f5458d1d7f94665c8b02915972c95614b3a3bd2125d6d6a89ef6bea737c999ec');}
-          }
-          function expectedInventory(role){
-           assert(['M','QA'].includes(role));const expected=new Set([...descriptors.sourceDescriptors,...descriptors.packages,...descriptors.implementationSupplement.scopeInputPins].filter(row=>row.roles.includes(role)).map(row=>row.path));if(role==='QA')expected.add('<stdin>');return [...expected];
-          }
-          function verifyExpectedInventory(records,role){same(records.map(record=>record.path).sort(),expectedInventory(role).sort());}
-          function preflight(value,group){
-           object(value,['purpose','group','additionalSYN','source','run','attempt','inputs','I0Opened','nativeExecutionProduced','operationalReadiness','completePackage','PCoff','observerChronology']);identity(value);flags(value);same(value.purpose,'afw.finite-budget-preflight.syn.v1');same(value.group,group);same(value.observerChronology,'afw.finite-budget-chronology.syn.v2');object(value.inputs,['M','QA']);
-           for(const role of ['M','QA']){
-            const expected=expectedInventory(role);
-            arr(value.inputs[role],512,record=>{
-             object(record,['role','path','rawBytes','rawSha256','preparedBytes','preparedSha256','emittedBytes','emittedSha256','counts','selectors','readerSites',...(record.additionalSYN?['additionalSYN']:[])]);
-             same(record.role,role);assert(expected.includes(record.path));for(const key of ['rawBytes','preparedBytes','emittedBytes'])N(record[key]);for(const key of ['rawSha256','preparedSha256','emittedSha256'])H(record[key]);counts(record.counts);
-             const source=descriptors.sourceDescriptors.find(row=>row.path===record.path),pkg=descriptors.packages.find(row=>row.path===record.path),pin=descriptors.implementationSupplement.scopeInputPins.find(row=>row.path===record.path);
-             if(source){same(record.rawBytes,source.rawBytes);same(record.rawSha256,source.rawSha256);same(record.selectors,source.selectors.map((row,selector)=>({selector,count:row.expectedCount})));}
-             else if(pkg){same(record.rawBytes,pkg.bytes);same(record.rawSha256,pkg.sha256);same(record.selectors,pkg.selectors);}
-             else if(pin){same(record.rawBytes,pin.rawBytes);same(record.rawSha256,pin.rawSha256);same(record.selectors,[]);}
-             else same(record.selectors,{reflect:descriptors.entry.reflectSelectors,members:descriptors.implementationSupplement.entryNativeMembers,extras:descriptors.implementationSupplement.entryAdditionalCounts});
-             arr(record.readerSites,256,site=>{object(site,['id','role','path','selector','occurrence','preparedLine','preparedColumn']);same(site.role,role);same(site.path,record.path);for(const key of ['id','occurrence','preparedLine','preparedColumn'])N(site[key]);assert(Number.isSafeInteger(site.selector)||site.selector==='readerFactory');});
-             if(record.additionalSYN){assert(role==='QA'&&group!=='positive');additional(record.additionalSYN,record.path);}
-            });
-            verifyExpectedInventory(value.inputs[role],role);
-           }
-           same(value.additionalSYN,value.inputs.QA.filter(row=>row.additionalSYN).map(row=>({path:row.path,...row.additionalSYN})));same(value.additionalSYN.length,group==='positive'?0:3);
-          }
-          function qcounts(value,expected){object(value,['tests','pass','fail','cancelled','skipped','todo']);numbers(value,Object.keys(value));if(expected!==null)same(value,{tests:expected,pass:expected,fail:0,cancelled:0,skipped:0,todo:0});}
-          function errorDTO(value){
-           if(value===null)return;
-           object(value,['name','nativeError','code','operator','actual','expected','message']);assert(['Error','AssertionError','TypeError','SyntaxError','RangeError','other'].includes(value.name));B(value.nativeError);assert(['ERR_ASSERTION','ERR_MODULE_NOT_FOUND','ERR_INVALID_ARG_TYPE','ERR_SCRIPT_EXECUTION_TIMEOUT','ERR_UNKNOWN_FILE_EXTENSION','ERR_REQUIRE_ESM','absent','other'].includes(value.code));assert(['==','===','strictEqual','deepStrictEqual','match','ok','throws','rejects','absent','other'].includes(value.operator));
-           for(const key of ['actual','expected']){const data=value[key];if(data===null||typeof data==='boolean'||typeof data==='number'){assert(data===null||typeof data!=='number'||Number.isFinite(data));continue;}assert(data&&typeof data==='object');assert(['undefined','object','function','symbol','bigint','string','sha256','fixed_counts'].includes(data.type));if(data.type==='string'){object(data,['type','bytes','sha256']);N(data.bytes);H(data.sha256);}else if(data.type==='sha256'){object(data,['type','value']);H(data.value);}else if(data.type==='fixed_counts'){object(data,['type','counts']);numbers(data.counts,countKeys);}else object(data,['type']);}
-           const message=value.message;if(Object.hasOwn(message,'sha256')){object(message,['bytes','sha256','publicLabel']);N(message.bytes);H(message.sha256);assert(typeof message.publicLabel==='string'&&message.publicLabel.length<256);}else{object(message,['type']);assert(['undefined','string','object'].includes(message.type));}
-          }
-          function safeError(value){errorDTO(value);if(value===null)return null;const result={...value,message:{...value.message}};if(Object.hasOwn(result.message,'publicLabel')){result.message.publicLabelSha256=sha(result.message.publicLabel);delete result.message.publicLabel;}return result;}
-          async function sealClosedPure(){
-           const dest=join(process.env.RUNNER_TEMP,'afw-pure-public');await mkdir(dest,{mode:0o700});same(await readdir(dest),[]);const files=[],observations=[],validationFailures=[];
-           const put=async(name,value)=>{const bytes=Buffer.from(JSON.stringify(value,null,2));assert(bytes.length<=2097152);await writeFile(join(dest,name),bytes);files.push({path:name,...digest(bytes)});};
-           const read=async path=>{const st=await lstat(path);assert(st.isFile()&&st.nlink===1&&st.size<=2097152);const bytes=await readFile(path);same(bytes.length,st.size);return bytes;};
-           const checked=async(name,validate)=>{let bytes;try{bytes=await read('output/finite-budget/pure/'+name);}catch(error){if(error.code==='ENOENT')return null;throw error;}try{const value=JSON.parse(bytes);validate(value);return value;}catch(error){validationFailures.push({file:name,input:digest(bytes),error:{name:['SyntaxError','AssertionError'].includes(error.name)?error.name:'other'}});return null;}};
-           // Raw materials are measured only. Neither names nor bytes are copied into public files.
-           for(const name of ['syntax.log','lint.log','tests.tap','inactive.tap','invalid.tap','controls.log','preflight.log']){
-            try{const bytes=await read(join(process.env.RUNNER_TEMP,'afw-pure-private',name));observations.push({file:name,...digest(bytes)});}catch(error){if(error.code!=='ENOENT')throw error;}
-           }
-           const q=await checked('q-counts.json',value=>qcounts(value,8));if(q)await put('q-counts.json',q);
-           const inactive=await checked('inactive.json',value=>{object(value,['fileWrapper','businessCases','I0Opened','invalidGroupRejected']);qcounts(value.fileWrapper,1);same(value.businessCases,0);same(value.I0Opened,false);same(value.invalidGroupRejected,true);});if(inactive)await put('inactive.json',inactive);
-           const control=await checked('controls.json',value=>{
-            object(value,['purpose','source','run','attempt','groups','passed','I0Opened','nativeExecutionProduced','businessCases']);identity(value);same(value.purpose,'afw.closed-pure-controls.syn.v2');same(value.I0Opened,false);same(value.nativeExecutionProduced,false);same(value.businessCases,0);B(value.passed);
-            arr(value.groups,8,group=>{object(group,['group','passed','caseCount','evidence','error']);assert(['F1','F2','F3','F4','F5','F6','F7','F8'].includes(group.group));B(group.passed);N(group.caseCount);object(group.evidence,['bytes','sha256']);N(group.evidence.bytes);H(group.evidence.sha256);errorDTO(group.error);});
-            same(new Set(value.groups.map(group=>group.group)).size,value.groups.length);same(value.passed,value.groups.length===8&&value.groups.every(group=>group.passed));
-           });if(control)await put('controls.json',{...control,groups:control.groups.map(group=>({...group,error:safeError(group.error)}))});
-           const failureDiagnostics=await checked('diagnostics.json',value=>{
-            object(value,['purpose','source','tree','run','attempt','profiles','allPassed','I0Opened','nativeExecutionProduced','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified']);identity(value);flags(value);same(value.purpose,'afw.fixed-budget-pure-diagnostic.syn.v1');assert(/^[a-f0-9]{40}$/.test(value.tree));same(value.globalNativeDrainVerified,false);same(value.sdkNamespaceEmptyVerified,false);B(value.allPassed);
-            arr(value.profiles,3,profile=>{
-             assert(['positive','readonly','reduction_a'].includes(profile.profile));B(profile.passed);
-             if(profile.passed){object(profile,['profile','stage','passed','I0Opened','nativeExecutionProduced','additionalSYNCount','additionalSYN']);same(profile.stage,'complete');same(profile.I0Opened,false);same(profile.nativeExecutionProduced,false);N(profile.additionalSYNCount);arr(profile.additionalSYN,3,row=>{object(row,['path','family','sites','sdkSettlementSites','baselineBytes','baselineSha256','literalBytes','literalSha256','emittedBytes','emittedSha256']);assert(['<stdin>','lib/mcp-qa-finite-owner-cleanup.mjs','lib/mcp-qa-finite-initial-lease.mjs'].includes(row.path));assert([null,'readonly','reduction'].includes(row.family));for(const key of ['sites','sdkSettlementSites','literalBytes'])assert(row[key]===null||Number.isSafeInteger(row[key])&&row[key]>=0);for(const key of ['baselineBytes','emittedBytes'])N(row[key]);for(const key of ['baselineSha256','emittedSha256'])H(row[key]);if(row.literalSha256!==null)H(row.literalSha256);});}
-             else{object(profile,['profile','stage','passed','error']);assert(['import','preflight'].includes(profile.stage));const error=profile.error;object(error,['name','code','operator','actual','expected','message']);errorDTO({...error,nativeError:false});}
-            });same(new Set(value.profiles.map(profile=>profile.profile)).size,value.profiles.length);same(value.allPassed,value.profiles.length===3&&value.profiles.every(profile=>profile.passed));
-           });
-           const profiles=[];for(const group of ['positive','readonly','reduction_a']){
-            const name='preflight-'+group+'.json',value=await checked(name,value=>preflight(value,group));
-            if(value){await put(name,value);if(group==='positive')await put('preflight.json',value);profiles.push({profile:group,stage:'complete',passed:true,I0Opened:false,nativeExecutionProduced:false,additionalSYNCount:value.additionalSYN.length});}
-            else{const failed=failureDiagnostics?.profiles.find(profile=>profile.profile===group&&!profile.passed);profiles.push({profile:group,stage:failed?.stage??'missing_or_invalid',passed:false,I0Opened:false,nativeExecutionProduced:false,additionalSYNCount:null,error:failed?safeError({...failed.error,nativeError:false}):null});}
-           }
-           const complete=process.env.PURE_COMPLETE==='true'&&q!==null&&inactive!==null&&control?.passed===true&&profiles.every(profile=>profile.passed)&&validationFailures.length===0;
-           const outcomes=Object.fromEntries(['PURE_TEST_OUTCOME','CONTROLS_OUTCOME','PREFLIGHT_OUTCOME'].map(key=>{const value=process.env[key]??'skipped';assert(['success','failure','cancelled','skipped'].includes(value));return [key,value];}));
-           const common={source:process.env.GITHUB_SHA,run:process.env.GITHUB_RUN_ID,attempt:process.env.GITHUB_RUN_ATTEMPT};
-           await put('diagnostics.json',{purpose:'afw.closed-pure-diagnostic.syn.v2',...common,profiles,allPassed:profiles.every(profile=>profile.passed),I0Opened:false,nativeExecutionProduced:false});
-           await put('status.json',{purpose:'afw.closed-pure-status.syn.v2',...common,status:complete?'pure_passed':'pure_failed',rawPureRetention:'runner_only_until_runner_cleanup',outcomes,rawObservations:observations,validationFailures,I0Opened:false,nativeExecutionProduced:false});
-           await put('budget-artifact.json',{purpose:'afw.finite-budget-artifact.syn.v1',...common,kind:'pure',files:files.slice().sort((a,b)=>a.path.localeCompare(b.path)),operationalReadiness:false,completePackage:false,PCoff:false});
-           return {complete,validationFailures:validationFailures.length,files:await readdir(dest)};
-          }
-          try{const result=await sealClosedPure();if(process.env.PURE_COMPLETE==='true'&&!result.complete)process.exitCode=1;}catch{console.log('closed_pure_evidence_not_preserved');process.exitCode=1;}
-          NODE
-      - name: Upload finite-budget-pure only
-        id: upload
-        if: always() && !cancelled() && steps.pure_seal.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: finite-budget-fixed-preparation-${{ github.sha }}
-          path: ${{ runner.temp }}/afw-pure-public/
-          if-no-files-found: error
-          retention-days: 7
-      - name: Download pure_receipt by exact ID attempt 1
-        id: pure_receipt_1
-        if: always() && !cancelled() && steps.upload.outcome == 'success' && steps.upload.outputs.artifact-id != ''
-        continue-on-error: true
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-pure-receipt
-          merge-multiple: true
-      - name: Wait 2s before pure_receipt retrieval 2
-        id: pure_receipt_wait2
-        if: always() && !cancelled() && steps.pure_receipt_1.outcome == 'failure'
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          sleep 2
-      - name: Download pure_receipt by exact ID attempt 2
-        id: pure_receipt_2
-        if: always() && !cancelled() && steps.pure_receipt_wait2.outcome == 'success' && steps.pure_receipt_1.outcome == 'failure'
-        continue-on-error: true
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-pure-receipt
-          merge-multiple: true
-      - name: Wait 5s before pure_receipt retrieval 3
-        id: pure_receipt_wait3
-        if: always() && !cancelled() && steps.pure_receipt_2.outcome == 'failure'
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          sleep 5
-      - name: Download pure_receipt by exact ID attempt 3
-        id: pure_receipt_3
-        if: always() && !cancelled() && steps.pure_receipt_wait3.outcome == 'success' && steps.pure_receipt_2.outcome == 'failure'
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-pure-receipt
-          merge-multiple: true
-      - name: Verify exact same-ID pure inventory
-        id: pure_verified
-        if: always() && !cancelled() && steps.upload.outcome == 'success'
-        env:
-          ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
-          DOWNLOADED: ${{ steps.pure_receipt_1.outcome == 'success' || steps.pure_receipt_2.outcome == 'success' || steps.pure_receipt_3.outcome == 'success' }}
-          READBACK: ${{ runner.temp }}/afw-pure-receipt
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test -n "$ARTIFACT_ID"
-          test "$DOWNLOADED" = true || { echo evidence_not_preserved; exit 1; }
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';import {readFile,readdir,lstat} from 'node:fs/promises';import {createHash} from 'node:crypto';import {join} from 'node:path';
-          const root=process.env.READBACK,bytes=await readFile(join(root,'budget-artifact.json')),manifest=JSON.parse(bytes),sha=bytes=>createHash('sha256').update(bytes).digest('hex');assert(/^[1-9][0-9]*$/.test(process.env.ARTIFACT_ID));assert.equal(manifest.source,process.env.GITHUB_SHA);assert.equal(manifest.run,process.env.GITHUB_RUN_ID);assert.equal(manifest.attempt,process.env.GITHUB_RUN_ATTEMPT);assert.equal(manifest.kind,'pure');assert.equal(manifest.purpose,'afw.finite-budget-artifact.syn.v1');for(const key of ['operationalReadiness','completePackage','PCoff'])assert.equal(manifest[key],false);
-          const files=[];for(const path of (await readdir(root)).sort()){assert(/^[a-z0-9_-]+\.json$/.test(path));const st=await lstat(join(root,path));assert(st.isFile()&&st.nlink===1);if(path!=='budget-artifact.json'){const value=await readFile(join(root,path));files.push({path,bytes:value.length,sha256:sha(value)});}}assert.deepEqual(files,manifest.files);
-          console.log('BUDGET SAME ID READBACK VERIFIED '+JSON.stringify({artifactId:process.env.ARTIFACT_ID,files:files.length+1,source:manifest.source,run:manifest.run,attempt:manifest.attempt,manifestBytes:bytes.length,manifestSha256:sha(bytes)}));
-          NODE
-          if ! cmp -s "$RUNNER_TEMP/afw-pure-public/budget-artifact.json" "$READBACK/budget-artifact.json"; then echo evidence_not_preserved; exit 1; fi
-          printf 'pure_verified artifact_id=%s\n' "$ARTIFACT_ID"
-      - name: Print verified closed profile diagnostic
-        if: always() && !cancelled() && steps.pure_verified.outcome == 'success'
-        shell: bash
-        run: |
-          node --input-type=module <<'NODE'
-          import {readFile} from 'node:fs/promises';for(const name of ['controls.json','diagnostics.json']){try{const raw=await readFile(process.env.RUNNER_TEMP+'/afw-pure-receipt/'+name,'utf8');if(Buffer.byteLength(raw)>65536)throw Error('safe_diagnostic_limit');console.log(name+' '+raw);}catch(error){if(error.code!=='ENOENT')throw error;}}
-          NODE
-      - name: Require all covering profiles and retained readback
-        if: always() && !cancelled()
-        shell: bash
-        run: |
-          test '${{ steps.pure_test.outcome }}' = success
-          test '${{ steps.controls.outcome }}' = success
-          test '${{ steps.preflight.outputs.all-passed }}' = true
-          test '${{ steps.pure_verified.outcome }}' = success
-          test '${{ steps.pure_seal.outcome }}' = success
-  positive_prepare:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
-    needs: [contracts]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    environment: afw-finite-syn-checkpoint
-    outputs:
-      artifact-id: ${{ steps.upload.outputs.artifact-id }}
-      artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
-      kind: ${{ steps.seal.outputs.kind }}
-    env:
-      AFW_BUDGET_GROUP: positive
-      AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
-      FIXED_ROLE: producer
-      FIXED_LANE: positive
-      FIXED_CASES: '["P1"]'
-    steps:
-      - name: Require fixed scope before any native work
-        id: scope
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
-          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
-          test "$GITHUB_RUN_ATTEMPT" = 1
-          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
-          printf 'AFW_JOB_STARTED_MS=%s\n' "$(date +%s%3N)" >>"$GITHUB_ENV"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/logs"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/programs"
-          
-      - uses: actions/checkout@v4
-        with:
-          repository: tokenizartinfo-ops/agent-friendly-web
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22.23.4'
-      - name: Install exact lock and verify existing custody key
-        id: custody
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$(node -v)" = v22.23.4
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-native-private/logs/install.log" 2>&1 || { echo locked_install_failed; exit 1; }
-          cp .github/workflows/afw-finite-budget-qualification.yml "$RUNNER_TEMP/afw-native-private/programs/workflow.yml"
-          node test/fixtures/finite-checkpoint-custody.mjs key-preflight checkpoint >"$RUNNER_TEMP/afw-native-private/logs/custody-key.log" 2>&1 || { echo custody_key_unavailable; exit 1; }
-          
-      - name: Download exact contracts artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ needs.contracts.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-prior-pure
-          merge-multiple: true
-      - name: Verify prior pure inventory and select fixed graph profile
-        id: pure_binding
-        env:
-          PURE_ID: ${{ needs.contracts.outputs.artifact-id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/pure-binding.log" 2>&1
-          import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';import {mkdir,copyFile,readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
-          const e=process.env,root=e.RUNNER_TEMP+'/afw-prior-pure';await verifyBudgetArtifact(root,'pure',e.PURE_ID);
-          const group=e.AFW_BUDGET_GROUP==='reduction_b'?'reduction_a':e.AFW_BUDGET_GROUP;
-          const preflight=JSON.parse(await readFile(root+'/preflight-'+group+'.json','utf8'));assert.equal(preflight.group,group);assert.equal(preflight.I0Opened,false);
-          await mkdir('output/finite-budget/prior-pure',{recursive:true});await copyFile(root+'/preflight-'+group+'.json','output/finite-budget/prior-pure/preflight.json');
-          NODE
-          printf 'AFW_BUDGET_PREFLIGHT=output/finite-budget/prior-pure/preflight.json\n' >>"$GITHUB_ENV"
-          
-      - name: Execute fixed positive_prepare once
-        id: native
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node test/fixtures/finite-budget-world.mjs prepare-positive output/finite-budget/checkpoint >"$RUNNER_TEMP/afw-native-private/logs/command-output.log" 2>&1
-          
-      - name: Encrypt complete private evidence on success or failure
-        id: seal
-        if: always() && !cancelled() && steps.custody.outcome == 'success'
-        env:
-          COMMAND_OK: ${{ steps.native.outcome == 'success' }}
-          SUCCESS_KIND: checkpoint
-          FAILURE_KIND: producer-failure
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/seal.log" 2>&1
-          import assert from 'node:assert/strict';import {mkdir,cp,writeFile,readFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';
-          import {sealDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          const e=process.env,ok=e.COMMAND_OK==='true',kind=ok?e.SUCCESS_KIND:e.FAILURE_KIND,root=e.RUNNER_TEMP+'/afw-native-private';
-          try{await cp('output',root+'/output',{recursive:true,errorOnExist:true,force:false});}catch(error){if(error.code!=='ENOENT')throw error;}
-          const manifest={purpose:'afw.fixed-budget-job.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,source:e.GITHUB_SHA,sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),run:e.GITHUB_RUN_ID,attempt:1,job:e.GITHUB_JOB,role:e.FIXED_ROLE,kind,group:e.AFW_BUDGET_GROUP,lane:e.FIXED_LANE,cases:JSON.parse(e.FIXED_CASES),commandSucceeded:ok,jobStarted:Number(e.AFW_JOB_STARTED_MS),sealedAt:Date.now(),operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-          await writeFile(root+'/job-manifest.json',JSON.stringify(manifest,null,2));
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind};
-          const receipt=await sealDirectory({sourceDir:root,stagingDir:e.RUNNER_TEMP+'/afw-native-public',context});
-          await writeFile(e.GITHUB_OUTPUT,'kind='+kind+'\nenvelope-sha256='+receipt.envelopeSha256+'\n',{flag:'a'});
-          NODE
-          
-      - name: Upload encrypted envelope and closed receipts only
-        id: upload
-        if: always() && !cancelled() && steps.seal.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: finite-budget-positive_prepare-${{ github.sha }}-${{ github.run_id }}
-          path: ${{ runner.temp }}/afw-native-public/
-          retention-days: 7
-          if-no-files-found: error
-      - name: Download own exact assigned artifact ID
-        id: own_download
-        if: always() && !cancelled() && steps.upload.outcome == 'success'
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-native-readback
-          merge-multiple: true
-      - name: Authenticate own same-ID inner inventory readback
-        id: own_verified
-        if: always() && !cancelled() && steps.own_download.outcome == 'success'
-        env:
-          OWN_ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
-          OWN_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
-          OWN_KIND: ${{ steps.seal.outputs.kind }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/readback.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env;assert.match(e.OWN_ARTIFACT_ID,/^[1-9][0-9]*$/);assert.match(e.OWN_DIGEST,/^[a-f0-9]{64}$/);
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:e.OWN_KIND};
-          await openDirectory({stagingDir:e.RUNNER_TEMP+'/afw-native-readback',destinationDir:e.RUNNER_TEMP+'/afw-native-reopened',context});
-          const original=await readFile(e.RUNNER_TEMP+'/afw-native-private/job-manifest.json'),restored=await readFile(e.RUNNER_TEMP+'/afw-native-reopened/job-manifest.json');assert(original.equals(restored));
-          NODE
-          printf 'native_same_id_verified artifact_id=%s kind=%s\n' "$OWN_ARTIFACT_ID" "$OWN_KIND"
-          
-      - name: Preserve actual command and custody outcome
-        id: actual_outcome
-        if: always() && !cancelled()
-        shell: bash
-        run: |
-          set -euo pipefail
-          test '${{ steps.native.outcome }}' = success
-          test '${{ steps.own_verified.outcome }}' = success
-  positive_consume:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
-    needs: [contracts, positive_prepare]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    environment: afw-finite-syn-checkpoint
-    outputs:
-      artifact-id: ${{ steps.upload.outputs.artifact-id }}
-      artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
-      kind: ${{ steps.seal.outputs.kind }}
-    env:
-      AFW_BUDGET_GROUP: positive
-      AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
-      FIXED_ROLE: consumer
-      FIXED_LANE: positive
-      FIXED_CASES: '["P1"]'
-    steps:
-      - name: Require fixed scope before any native work
-        id: scope
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
-          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
-          test "$GITHUB_RUN_ATTEMPT" = 1
-          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
-          printf 'AFW_JOB_STARTED_MS=%s\n' "$(date +%s%3N)" >>"$GITHUB_ENV"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/logs"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/programs"
-          
-      - uses: actions/checkout@v4
-        with:
-          repository: tokenizartinfo-ops/agent-friendly-web
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22.23.4'
-      - name: Install exact lock and verify existing custody key
-        id: custody
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$(node -v)" = v22.23.4
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-native-private/logs/install.log" 2>&1 || { echo locked_install_failed; exit 1; }
-          cp .github/workflows/afw-finite-budget-qualification.yml "$RUNNER_TEMP/afw-native-private/programs/workflow.yml"
-          node test/fixtures/finite-checkpoint-custody.mjs key-preflight checkpoint >"$RUNNER_TEMP/afw-native-private/logs/custody-key.log" 2>&1 || { echo custody_key_unavailable; exit 1; }
-          
-      - name: Download exact contracts artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ needs.contracts.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-prior-pure
-          merge-multiple: true
-      - name: Verify prior pure inventory and select fixed graph profile
-        id: pure_binding
-        env:
-          PURE_ID: ${{ needs.contracts.outputs.artifact-id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/pure-binding.log" 2>&1
-          import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';import {mkdir,copyFile,readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
-          const e=process.env,root=e.RUNNER_TEMP+'/afw-prior-pure';await verifyBudgetArtifact(root,'pure',e.PURE_ID);
-          const group=e.AFW_BUDGET_GROUP==='reduction_b'?'reduction_a':e.AFW_BUDGET_GROUP;
-          const preflight=JSON.parse(await readFile(root+'/preflight-'+group+'.json','utf8'));assert.equal(preflight.group,group);assert.equal(preflight.I0Opened,false);
-          await mkdir('output/finite-budget/prior-pure',{recursive:true});await copyFile(root+'/preflight-'+group+'.json','output/finite-budget/prior-pure/preflight.json');
-          NODE
-          printf 'AFW_BUDGET_PREFLIGHT=output/finite-budget/prior-pure/preflight.json\n' >>"$GITHUB_ENV"
-          
-      - name: Download assigned original producer artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ needs.positive_prepare.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-producer-envelope
-          merge-multiple: true
-      - name: Authenticate assigned producer before any cold mount
-        id: producer_binding
-        env:
-          PRODUCER_ID: ${{ needs.positive_prepare.outputs.artifact-id }}
-          PRODUCER_DIGEST: ${{ needs.positive_prepare.outputs.artifact-digest }}
-          PRODUCER_KIND: ${{ needs.positive_prepare.outputs.kind }}
-          EXPECTED_KIND: checkpoint
-          EXPECTED_GROUP: positive
-          EXPECTED_CASES: '["P1"]'
-          GH_ARTIFACT_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$PRODUCER_KIND" = "$EXPECTED_KIND"
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/input-binding.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';
-          import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env;assert.match(e.PRODUCER_ID,/^[1-9][0-9]*$/);assert.match(e.PRODUCER_DIGEST,/^[a-f0-9]{64}$/);
-          const r=await fetch('https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/'+e.PRODUCER_ID,{headers:{Authorization:'Bearer '+e.GH_ARTIFACT_TOKEN,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(10000)});
-          assert.equal(r.status,200);const m=await r.json();assert.equal(String(m.id),e.PRODUCER_ID);assert.equal(m.expired,false);assert.equal(m.digest,'sha256:'+e.PRODUCER_DIGEST);assert.equal(String(m.workflow_run.id),e.GITHUB_RUN_ID);assert.equal(m.workflow_run.head_sha,e.GITHUB_SHA);
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:e.EXPECTED_KIND};
-          await openDirectory({stagingDir:e.RUNNER_TEMP+'/afw-producer-envelope',destinationDir:e.RUNNER_TEMP+'/afw-producer-open',context});
-          const manifest=JSON.parse(await readFile(e.RUNNER_TEMP+'/afw-producer-open/job-manifest.json','utf8'));
-          const {execFileSync}=await import('node:child_process');validateFixedBudgetJobManifest(manifest,{job:e.EXPECTED_KIND==='checkpoint'?'positive_prepare':'reduction_prepare',sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),artifactId:e.PRODUCER_ID,digest:e.PRODUCER_DIGEST,context});
-          await writeFile(e.RUNNER_TEMP+'/afw-native-private/producer-binding.json',JSON.stringify({artifactId:e.PRODUCER_ID,digest:e.PRODUCER_DIGEST,kind:e.EXPECTED_KIND,expectedProducerGroup:e.EXPECTED_GROUP,verified:true}));
-          NODE
-          printf 'AFW_BUDGET_PRODUCER_ARTIFACT_ID=%s\n' "$PRODUCER_ID" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_DIGEST=%s\n' "$PRODUCER_DIGEST" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_KIND=%s\n' "$EXPECTED_KIND" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_GROUP=%s\n' "$EXPECTED_GROUP" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_READBACK=verified\n' >>"$GITHUB_ENV"
-          
-      - name: Execute fixed positive_consume once
-        id: native
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          AFW_BUDGET_CHECKPOINT="$RUNNER_TEMP/afw-producer-open/output/finite-budget/checkpoint" node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs >"$RUNNER_TEMP/afw-native-private/logs/command-output.log" 2>&1
-          AFW_EXPECTED_CASES=1 node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/tap-check.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';
-          const e=process.env,text=await readFile(e.RUNNER_TEMP+'/afw-native-private/logs/command-output.log','utf8'),counts={};
-          for(const [name,expected]of Object.entries({tests:Number(e.AFW_EXPECTED_CASES),pass:Number(e.AFW_EXPECTED_CASES),fail:0,cancelled:0,skipped:0,todo:0})){const hits=[...text.matchAll(new RegExp('^# '+name+' (\\d+)$','gm'))];assert.equal(hits.length,1);counts[name]=Number(hits[0][1]);assert.equal(counts[name],expected);}
-          await writeFile(e.RUNNER_TEMP+'/afw-native-private/business-counts.json',JSON.stringify(counts));
-          NODE
-          
-      - name: Encrypt complete private evidence on success or failure
-        id: seal
-        if: always() && !cancelled() && steps.custody.outcome == 'success'
-        env:
-          COMMAND_OK: ${{ steps.native.outcome == 'success' }}
-          SUCCESS_KIND: positive-result
-          FAILURE_KIND: consumer-failure
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/seal.log" 2>&1
-          import assert from 'node:assert/strict';import {mkdir,cp,writeFile,readFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';
-          import {sealDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          const e=process.env,ok=e.COMMAND_OK==='true',kind=ok?e.SUCCESS_KIND:e.FAILURE_KIND,root=e.RUNNER_TEMP+'/afw-native-private';
-          try{await cp('output',root+'/output',{recursive:true,errorOnExist:true,force:false});}catch(error){if(error.code!=='ENOENT')throw error;}
-          const manifest={purpose:'afw.fixed-budget-job.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,source:e.GITHUB_SHA,sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),run:e.GITHUB_RUN_ID,attempt:1,job:e.GITHUB_JOB,role:e.FIXED_ROLE,kind,group:e.AFW_BUDGET_GROUP,lane:e.FIXED_LANE,cases:JSON.parse(e.FIXED_CASES),commandSucceeded:ok,jobStarted:Number(e.AFW_JOB_STARTED_MS),sealedAt:Date.now(),operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-          await writeFile(root+'/job-manifest.json',JSON.stringify(manifest,null,2));
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind};
-          const receipt=await sealDirectory({sourceDir:root,stagingDir:e.RUNNER_TEMP+'/afw-native-public',context});
-          await writeFile(e.GITHUB_OUTPUT,'kind='+kind+'\nenvelope-sha256='+receipt.envelopeSha256+'\n',{flag:'a'});
-          NODE
-          
-      - name: Upload encrypted envelope and closed receipts only
-        id: upload
-        if: always() && !cancelled() && steps.seal.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: finite-budget-positive_consume-${{ github.sha }}-${{ github.run_id }}
-          path: ${{ runner.temp }}/afw-native-public/
-          retention-days: 7
-          if-no-files-found: error
-      - name: Download own exact assigned artifact ID
-        id: own_download
-        if: always() && !cancelled() && steps.upload.outcome == 'success'
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-native-readback
-          merge-multiple: true
-      - name: Authenticate own same-ID inner inventory readback
-        id: own_verified
-        if: always() && !cancelled() && steps.own_download.outcome == 'success'
-        env:
-          OWN_ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
-          OWN_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
-          OWN_KIND: ${{ steps.seal.outputs.kind }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/readback.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env;assert.match(e.OWN_ARTIFACT_ID,/^[1-9][0-9]*$/);assert.match(e.OWN_DIGEST,/^[a-f0-9]{64}$/);
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:e.OWN_KIND};
-          await openDirectory({stagingDir:e.RUNNER_TEMP+'/afw-native-readback',destinationDir:e.RUNNER_TEMP+'/afw-native-reopened',context});
-          const original=await readFile(e.RUNNER_TEMP+'/afw-native-private/job-manifest.json'),restored=await readFile(e.RUNNER_TEMP+'/afw-native-reopened/job-manifest.json');assert(original.equals(restored));
-          NODE
-          printf 'native_same_id_verified artifact_id=%s kind=%s\n' "$OWN_ARTIFACT_ID" "$OWN_KIND"
-          
-      - name: Preserve actual command and custody outcome
-        id: actual_outcome
-        if: always() && !cancelled()
-        shell: bash
-        run: |
-          set -euo pipefail
-          test '${{ steps.native.outcome }}' = success
-          test '${{ steps.own_verified.outcome }}' = success
-  reduction_prepare:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
-    needs: [contracts]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    environment: afw-finite-syn-checkpoint
-    outputs:
-      artifact-id: ${{ steps.upload.outputs.artifact-id }}
-      artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
-      kind: ${{ steps.seal.outputs.kind }}
-    env:
-      AFW_BUDGET_GROUP: reduction_a
-      AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
-      FIXED_ROLE: producer
-      FIXED_LANE: reduction
-      FIXED_CASES: '["D1","D2","D3","D4"]'
-    steps:
-      - name: Require fixed scope before any native work
-        id: scope
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
-          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
-          test "$GITHUB_RUN_ATTEMPT" = 1
-          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
-          printf 'AFW_JOB_STARTED_MS=%s\n' "$(date +%s%3N)" >>"$GITHUB_ENV"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/logs"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/programs"
-          
-      - uses: actions/checkout@v4
-        with:
-          repository: tokenizartinfo-ops/agent-friendly-web
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22.23.4'
-      - name: Install exact lock and verify existing custody key
-        id: custody
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$(node -v)" = v22.23.4
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-native-private/logs/install.log" 2>&1 || { echo locked_install_failed; exit 1; }
-          cp .github/workflows/afw-finite-budget-qualification.yml "$RUNNER_TEMP/afw-native-private/programs/workflow.yml"
-          node test/fixtures/finite-checkpoint-custody.mjs key-preflight checkpoint >"$RUNNER_TEMP/afw-native-private/logs/custody-key.log" 2>&1 || { echo custody_key_unavailable; exit 1; }
-          
-      - name: Download exact contracts artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ needs.contracts.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-prior-pure
-          merge-multiple: true
-      - name: Verify prior pure inventory and select fixed graph profile
-        id: pure_binding
-        env:
-          PURE_ID: ${{ needs.contracts.outputs.artifact-id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/pure-binding.log" 2>&1
-          import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';import {mkdir,copyFile,readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
-          const e=process.env,root=e.RUNNER_TEMP+'/afw-prior-pure';await verifyBudgetArtifact(root,'pure',e.PURE_ID);
-          const group=e.AFW_BUDGET_GROUP==='reduction_b'?'reduction_a':e.AFW_BUDGET_GROUP;
-          const preflight=JSON.parse(await readFile(root+'/preflight-'+group+'.json','utf8'));assert.equal(preflight.group,group);assert.equal(preflight.I0Opened,false);
-          await mkdir('output/finite-budget/prior-pure',{recursive:true});await copyFile(root+'/preflight-'+group+'.json','output/finite-budget/prior-pure/preflight.json');
-          NODE
-          printf 'AFW_BUDGET_PREFLIGHT=output/finite-budget/prior-pure/preflight.json\n' >>"$GITHUB_ENV"
-          
-      - name: Execute fixed reduction_prepare once
-        id: native
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node test/fixtures/finite-budget-world.mjs prepare-reduction output/finite-budget/checkpoint >"$RUNNER_TEMP/afw-native-private/logs/command-output.log" 2>&1
-          
-      - name: Encrypt complete private evidence on success or failure
-        id: seal
-        if: always() && !cancelled() && steps.custody.outcome == 'success'
-        env:
-          COMMAND_OK: ${{ steps.native.outcome == 'success' }}
-          SUCCESS_KIND: reduction-checkpoint
-          FAILURE_KIND: producer-failure
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/seal.log" 2>&1
-          import assert from 'node:assert/strict';import {mkdir,cp,writeFile,readFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';
-          import {sealDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          const e=process.env,ok=e.COMMAND_OK==='true',kind=ok?e.SUCCESS_KIND:e.FAILURE_KIND,root=e.RUNNER_TEMP+'/afw-native-private';
-          try{await cp('output',root+'/output',{recursive:true,errorOnExist:true,force:false});}catch(error){if(error.code!=='ENOENT')throw error;}
-          const manifest={purpose:'afw.fixed-budget-job.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,source:e.GITHUB_SHA,sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),run:e.GITHUB_RUN_ID,attempt:1,job:e.GITHUB_JOB,role:e.FIXED_ROLE,kind,group:e.AFW_BUDGET_GROUP,lane:e.FIXED_LANE,cases:JSON.parse(e.FIXED_CASES),commandSucceeded:ok,jobStarted:Number(e.AFW_JOB_STARTED_MS),sealedAt:Date.now(),operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-          await writeFile(root+'/job-manifest.json',JSON.stringify(manifest,null,2));
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind};
-          const receipt=await sealDirectory({sourceDir:root,stagingDir:e.RUNNER_TEMP+'/afw-native-public',context});
-          await writeFile(e.GITHUB_OUTPUT,'kind='+kind+'\nenvelope-sha256='+receipt.envelopeSha256+'\n',{flag:'a'});
-          NODE
-          
-      - name: Upload encrypted envelope and closed receipts only
-        id: upload
-        if: always() && !cancelled() && steps.seal.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: finite-budget-reduction_prepare-${{ github.sha }}-${{ github.run_id }}
-          path: ${{ runner.temp }}/afw-native-public/
-          retention-days: 7
-          if-no-files-found: error
-      - name: Download own exact assigned artifact ID
-        id: own_download
-        if: always() && !cancelled() && steps.upload.outcome == 'success'
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-native-readback
-          merge-multiple: true
-      - name: Authenticate own same-ID inner inventory readback
-        id: own_verified
-        if: always() && !cancelled() && steps.own_download.outcome == 'success'
-        env:
-          OWN_ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
-          OWN_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
-          OWN_KIND: ${{ steps.seal.outputs.kind }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/readback.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env;assert.match(e.OWN_ARTIFACT_ID,/^[1-9][0-9]*$/);assert.match(e.OWN_DIGEST,/^[a-f0-9]{64}$/);
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:e.OWN_KIND};
-          await openDirectory({stagingDir:e.RUNNER_TEMP+'/afw-native-readback',destinationDir:e.RUNNER_TEMP+'/afw-native-reopened',context});
-          const original=await readFile(e.RUNNER_TEMP+'/afw-native-private/job-manifest.json'),restored=await readFile(e.RUNNER_TEMP+'/afw-native-reopened/job-manifest.json');assert(original.equals(restored));
-          NODE
-          printf 'native_same_id_verified artifact_id=%s kind=%s\n' "$OWN_ARTIFACT_ID" "$OWN_KIND"
-          
-      - name: Preserve actual command and custody outcome
-        id: actual_outcome
-        if: always() && !cancelled()
-        shell: bash
-        run: |
-          set -euo pipefail
-          test '${{ steps.native.outcome }}' = success
-          test '${{ steps.own_verified.outcome }}' = success
-  reduction_consume_a:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
-    needs: [contracts, reduction_prepare]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    environment: afw-finite-syn-checkpoint
-    outputs:
-      artifact-id: ${{ steps.upload.outputs.artifact-id }}
-      artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
-      kind: ${{ steps.seal.outputs.kind }}
-    env:
-      AFW_BUDGET_GROUP: reduction_a
-      AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
-      FIXED_ROLE: consumer
-      FIXED_LANE: reduction_a
-      FIXED_CASES: '["D1","D2"]'
-    steps:
-      - name: Require fixed scope before any native work
-        id: scope
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
-          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
-          test "$GITHUB_RUN_ATTEMPT" = 1
-          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
-          printf 'AFW_JOB_STARTED_MS=%s\n' "$(date +%s%3N)" >>"$GITHUB_ENV"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/logs"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/programs"
-          
-      - uses: actions/checkout@v4
-        with:
-          repository: tokenizartinfo-ops/agent-friendly-web
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22.23.4'
-      - name: Install exact lock and verify existing custody key
-        id: custody
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$(node -v)" = v22.23.4
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-native-private/logs/install.log" 2>&1 || { echo locked_install_failed; exit 1; }
-          cp .github/workflows/afw-finite-budget-qualification.yml "$RUNNER_TEMP/afw-native-private/programs/workflow.yml"
-          node test/fixtures/finite-checkpoint-custody.mjs key-preflight checkpoint >"$RUNNER_TEMP/afw-native-private/logs/custody-key.log" 2>&1 || { echo custody_key_unavailable; exit 1; }
-          
-      - name: Download exact contracts artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ needs.contracts.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-prior-pure
-          merge-multiple: true
-      - name: Verify prior pure inventory and select fixed graph profile
-        id: pure_binding
-        env:
-          PURE_ID: ${{ needs.contracts.outputs.artifact-id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/pure-binding.log" 2>&1
-          import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';import {mkdir,copyFile,readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
-          const e=process.env,root=e.RUNNER_TEMP+'/afw-prior-pure';await verifyBudgetArtifact(root,'pure',e.PURE_ID);
-          const group=e.AFW_BUDGET_GROUP==='reduction_b'?'reduction_a':e.AFW_BUDGET_GROUP;
-          const preflight=JSON.parse(await readFile(root+'/preflight-'+group+'.json','utf8'));assert.equal(preflight.group,group);assert.equal(preflight.I0Opened,false);
-          await mkdir('output/finite-budget/prior-pure',{recursive:true});await copyFile(root+'/preflight-'+group+'.json','output/finite-budget/prior-pure/preflight.json');
-          NODE
-          printf 'AFW_BUDGET_PREFLIGHT=output/finite-budget/prior-pure/preflight.json\n' >>"$GITHUB_ENV"
-          
-      - name: Download assigned original producer artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ needs.reduction_prepare.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-producer-envelope
-          merge-multiple: true
-      - name: Authenticate assigned producer before any cold mount
-        id: producer_binding
-        env:
-          PRODUCER_ID: ${{ needs.reduction_prepare.outputs.artifact-id }}
-          PRODUCER_DIGEST: ${{ needs.reduction_prepare.outputs.artifact-digest }}
-          PRODUCER_KIND: ${{ needs.reduction_prepare.outputs.kind }}
-          EXPECTED_KIND: reduction-checkpoint
-          EXPECTED_GROUP: reduction_a
-          EXPECTED_CASES: '["D1","D2","D3","D4"]'
-          GH_ARTIFACT_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$PRODUCER_KIND" = "$EXPECTED_KIND"
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/input-binding.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';
-          import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env;assert.match(e.PRODUCER_ID,/^[1-9][0-9]*$/);assert.match(e.PRODUCER_DIGEST,/^[a-f0-9]{64}$/);
-          const r=await fetch('https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/'+e.PRODUCER_ID,{headers:{Authorization:'Bearer '+e.GH_ARTIFACT_TOKEN,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(10000)});
-          assert.equal(r.status,200);const m=await r.json();assert.equal(String(m.id),e.PRODUCER_ID);assert.equal(m.expired,false);assert.equal(m.digest,'sha256:'+e.PRODUCER_DIGEST);assert.equal(String(m.workflow_run.id),e.GITHUB_RUN_ID);assert.equal(m.workflow_run.head_sha,e.GITHUB_SHA);
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:e.EXPECTED_KIND};
-          await openDirectory({stagingDir:e.RUNNER_TEMP+'/afw-producer-envelope',destinationDir:e.RUNNER_TEMP+'/afw-producer-open',context});
-          const manifest=JSON.parse(await readFile(e.RUNNER_TEMP+'/afw-producer-open/job-manifest.json','utf8'));
-          const {execFileSync}=await import('node:child_process');validateFixedBudgetJobManifest(manifest,{job:e.EXPECTED_KIND==='checkpoint'?'positive_prepare':'reduction_prepare',sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),artifactId:e.PRODUCER_ID,digest:e.PRODUCER_DIGEST,context});
-          await writeFile(e.RUNNER_TEMP+'/afw-native-private/producer-binding.json',JSON.stringify({artifactId:e.PRODUCER_ID,digest:e.PRODUCER_DIGEST,kind:e.EXPECTED_KIND,expectedProducerGroup:e.EXPECTED_GROUP,verified:true}));
-          NODE
-          printf 'AFW_BUDGET_PRODUCER_ARTIFACT_ID=%s\n' "$PRODUCER_ID" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_DIGEST=%s\n' "$PRODUCER_DIGEST" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_KIND=%s\n' "$EXPECTED_KIND" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_GROUP=%s\n' "$EXPECTED_GROUP" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_READBACK=verified\n' >>"$GITHUB_ENV"
-          
-      - name: Execute fixed reduction_consume_a once
-        id: native
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          AFW_BUDGET_CHECKPOINT="$RUNNER_TEMP/afw-producer-open/output/finite-budget/checkpoint" node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs >"$RUNNER_TEMP/afw-native-private/logs/command-output.log" 2>&1
-          AFW_EXPECTED_CASES=2 node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/tap-check.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';
-          const e=process.env,text=await readFile(e.RUNNER_TEMP+'/afw-native-private/logs/command-output.log','utf8'),counts={};
-          for(const [name,expected]of Object.entries({tests:Number(e.AFW_EXPECTED_CASES),pass:Number(e.AFW_EXPECTED_CASES),fail:0,cancelled:0,skipped:0,todo:0})){const hits=[...text.matchAll(new RegExp('^# '+name+' (\\d+)$','gm'))];assert.equal(hits.length,1);counts[name]=Number(hits[0][1]);assert.equal(counts[name],expected);}
-          await writeFile(e.RUNNER_TEMP+'/afw-native-private/business-counts.json',JSON.stringify(counts));
-          NODE
-          
-      - name: Encrypt complete private evidence on success or failure
-        id: seal
-        if: always() && !cancelled() && steps.custody.outcome == 'success'
-        env:
-          COMMAND_OK: ${{ steps.native.outcome == 'success' }}
-          SUCCESS_KIND: reduction-result-a
-          FAILURE_KIND: consumer-failure
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/seal.log" 2>&1
-          import assert from 'node:assert/strict';import {mkdir,cp,writeFile,readFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';
-          import {sealDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          const e=process.env,ok=e.COMMAND_OK==='true',kind=ok?e.SUCCESS_KIND:e.FAILURE_KIND,root=e.RUNNER_TEMP+'/afw-native-private';
-          try{await cp('output',root+'/output',{recursive:true,errorOnExist:true,force:false});}catch(error){if(error.code!=='ENOENT')throw error;}
-          const manifest={purpose:'afw.fixed-budget-job.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,source:e.GITHUB_SHA,sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),run:e.GITHUB_RUN_ID,attempt:1,job:e.GITHUB_JOB,role:e.FIXED_ROLE,kind,group:e.AFW_BUDGET_GROUP,lane:e.FIXED_LANE,cases:JSON.parse(e.FIXED_CASES),commandSucceeded:ok,jobStarted:Number(e.AFW_JOB_STARTED_MS),sealedAt:Date.now(),operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-          await writeFile(root+'/job-manifest.json',JSON.stringify(manifest,null,2));
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind};
-          const receipt=await sealDirectory({sourceDir:root,stagingDir:e.RUNNER_TEMP+'/afw-native-public',context});
-          await writeFile(e.GITHUB_OUTPUT,'kind='+kind+'\nenvelope-sha256='+receipt.envelopeSha256+'\n',{flag:'a'});
-          NODE
-          
-      - name: Upload encrypted envelope and closed receipts only
-        id: upload
-        if: always() && !cancelled() && steps.seal.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: finite-budget-reduction_consume_a-${{ github.sha }}-${{ github.run_id }}
-          path: ${{ runner.temp }}/afw-native-public/
-          retention-days: 7
-          if-no-files-found: error
-      - name: Download own exact assigned artifact ID
-        id: own_download
-        if: always() && !cancelled() && steps.upload.outcome == 'success'
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-native-readback
-          merge-multiple: true
-      - name: Authenticate own same-ID inner inventory readback
-        id: own_verified
-        if: always() && !cancelled() && steps.own_download.outcome == 'success'
-        env:
-          OWN_ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
-          OWN_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
-          OWN_KIND: ${{ steps.seal.outputs.kind }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/readback.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env;assert.match(e.OWN_ARTIFACT_ID,/^[1-9][0-9]*$/);assert.match(e.OWN_DIGEST,/^[a-f0-9]{64}$/);
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:e.OWN_KIND};
-          await openDirectory({stagingDir:e.RUNNER_TEMP+'/afw-native-readback',destinationDir:e.RUNNER_TEMP+'/afw-native-reopened',context});
-          const original=await readFile(e.RUNNER_TEMP+'/afw-native-private/job-manifest.json'),restored=await readFile(e.RUNNER_TEMP+'/afw-native-reopened/job-manifest.json');assert(original.equals(restored));
-          NODE
-          printf 'native_same_id_verified artifact_id=%s kind=%s\n' "$OWN_ARTIFACT_ID" "$OWN_KIND"
-          
-      - name: Preserve actual command and custody outcome
-        id: actual_outcome
-        if: always() && !cancelled()
-        shell: bash
-        run: |
-          set -euo pipefail
-          test '${{ steps.native.outcome }}' = success
-          test '${{ steps.own_verified.outcome }}' = success
   readonly:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
-    needs: [contracts]
+    if: ${{ github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.event_name == 'push' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 && github.event.head_commit.message == 'AFW-R3-STARTUP-DIAGNOSTIC-R3-ONEUSE-20261115' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 7
-    environment: afw-finite-syn-checkpoint
-    outputs:
-      artifact-id: ${{ steps.upload.outputs.artifact-id }}
-      artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
-      kind: ${{ steps.seal.outputs.kind }}
-    env:
-      AFW_BUDGET_GROUP: readonly
-      AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
-      FIXED_ROLE: consumer
-      FIXED_LANE: readonly
-      FIXED_CASES: '["R1","R2","R3"]'
     steps:
-      - name: Require fixed scope before any native work
-        id: scope
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
-          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
-          test "$GITHUB_RUN_ATTEMPT" = 1
-          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
-          printf 'AFW_JOB_STARTED_MS=%s\n' "$(date +%s%3N)" >>"$GITHUB_ENV"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/logs"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/programs"
-          
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        id: checkout
         with:
           repository: tokenizartinfo-ops/agent-friendly-web
           ref: ${{ github.sha }}
           persist-credentials: false
           fetch-depth: 1
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        id: node
         with:
           node-version: '22.23.4'
-      - name: Install exact lock and verify existing custody key
-        id: custody
+      - name: Observe trusted initial bootstrap only
+        if: always()
         shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$(node -v)" = v22.23.4
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-native-private/logs/install.log" 2>&1 || { echo locked_install_failed; exit 1; }
-          cp .github/workflows/afw-finite-budget-qualification.yml "$RUNNER_TEMP/afw-native-private/programs/workflow.yml"
-          node test/fixtures/finite-checkpoint-custody.mjs key-preflight checkpoint >"$RUNNER_TEMP/afw-native-private/logs/custody-key.log" 2>&1 || { echo custody_key_unavailable; exit 1; }
-          
-      - name: Download exact contracts artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ needs.contracts.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-prior-pure
-          merge-multiple: true
-      - name: Verify prior pure inventory and select fixed graph profile
-        id: pure_binding
         env:
-          PURE_ID: ${{ needs.contracts.outputs.artifact-id }}
-        shell: bash
+          AFW_CHECKOUT_OUTCOME: ${{ steps.checkout.outcome }}
+          AFW_NODE_OUTCOME: ${{ steps.node.outcome }}
         run: |
-          set -euo pipefail
+          set +e
           umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/pure-binding.log" 2>&1
-          import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';import {mkdir,copyFile,readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
-          const e=process.env,root=e.RUNNER_TEMP+'/afw-prior-pure';await verifyBudgetArtifact(root,'pure',e.PURE_ID);
-          const group=e.AFW_BUDGET_GROUP==='reduction_b'?'reduction_a':e.AFW_BUDGET_GROUP;
-          const preflight=JSON.parse(await readFile(root+'/preflight-'+group+'.json','utf8'));assert.equal(preflight.group,group);assert.equal(preflight.I0Opened,false);
-          await mkdir('output/finite-budget/prior-pure',{recursive:true});await copyFile(root+'/preflight-'+group+'.json','output/finite-budget/prior-pure/preflight.json');
-          NODE
-          printf 'AFW_BUDGET_PREFLIGHT=output/finite-budget/prior-pure/preflight.json\n' >>"$GITHUB_ENV"
-          
-      - name: Execute fixed readonly once
-        id: native
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs >"$RUNNER_TEMP/afw-native-private/logs/command-output.log" 2>&1
-          AFW_EXPECTED_CASES=3 node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/tap-check.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';
-          const e=process.env,text=await readFile(e.RUNNER_TEMP+'/afw-native-private/logs/command-output.log','utf8'),counts={};
-          for(const [name,expected]of Object.entries({tests:Number(e.AFW_EXPECTED_CASES),pass:Number(e.AFW_EXPECTED_CASES),fail:0,cancelled:0,skipped:0,todo:0})){const hits=[...text.matchAll(new RegExp('^# '+name+' (\\d+)$','gm'))];assert.equal(hits.length,1);counts[name]=Number(hits[0][1]);assert.equal(counts[name],expected);}
-          await writeFile(e.RUNNER_TEMP+'/afw-native-private/business-counts.json',JSON.stringify(counts));
-          NODE
-          
-      - name: Encrypt complete private evidence on success or failure
-        id: seal
-        if: always() && !cancelled() && steps.custody.outcome == 'success'
-        env:
-          COMMAND_OK: ${{ steps.native.outcome == 'success' }}
-          SUCCESS_KIND: readonly-result
-          FAILURE_KIND: consumer-failure
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/seal.log" 2>&1
-          import assert from 'node:assert/strict';import {mkdir,cp,writeFile,readFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';
-          import {sealDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          const e=process.env,ok=e.COMMAND_OK==='true',kind=ok?e.SUCCESS_KIND:e.FAILURE_KIND,root=e.RUNNER_TEMP+'/afw-native-private';
-          try{await cp('output',root+'/output',{recursive:true,errorOnExist:true,force:false});}catch(error){if(error.code!=='ENOENT')throw error;}
-          const manifest={purpose:'afw.fixed-budget-job.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,source:e.GITHUB_SHA,sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),run:e.GITHUB_RUN_ID,attempt:1,job:e.GITHUB_JOB,role:e.FIXED_ROLE,kind,group:e.AFW_BUDGET_GROUP,lane:e.FIXED_LANE,cases:JSON.parse(e.FIXED_CASES),commandSucceeded:ok,jobStarted:Number(e.AFW_JOB_STARTED_MS),sealedAt:Date.now(),operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-          await writeFile(root+'/job-manifest.json',JSON.stringify(manifest,null,2));
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind};
-          const receipt=await sealDirectory({sourceDir:root,stagingDir:e.RUNNER_TEMP+'/afw-native-public',context});
-          await writeFile(e.GITHUB_OUTPUT,'kind='+kind+'\nenvelope-sha256='+receipt.envelopeSha256+'\n',{flag:'a'});
-          NODE
-          
-      - name: Upload encrypted envelope and closed receipts only
-        id: upload
-        if: always() && !cancelled() && steps.seal.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: finite-budget-readonly-${{ github.sha }}-${{ github.run_id }}
-          path: ${{ runner.temp }}/afw-native-public/
-          retention-days: 7
-          if-no-files-found: error
-      - name: Download own exact assigned artifact ID
-        id: own_download
-        if: always() && !cancelled() && steps.upload.outcome == 'success'
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-native-readback
-          merge-multiple: true
-      - name: Authenticate own same-ID inner inventory readback
-        id: own_verified
-        if: always() && !cancelled() && steps.own_download.outcome == 'success'
-        env:
-          OWN_ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
-          OWN_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
-          OWN_KIND: ${{ steps.seal.outputs.kind }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/readback.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env;assert.match(e.OWN_ARTIFACT_ID,/^[1-9][0-9]*$/);assert.match(e.OWN_DIGEST,/^[a-f0-9]{64}$/);
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:e.OWN_KIND};
-          await openDirectory({stagingDir:e.RUNNER_TEMP+'/afw-native-readback',destinationDir:e.RUNNER_TEMP+'/afw-native-reopened',context});
-          const original=await readFile(e.RUNNER_TEMP+'/afw-native-private/job-manifest.json'),restored=await readFile(e.RUNNER_TEMP+'/afw-native-reopened/job-manifest.json');assert(original.equals(restored));
-          NODE
-          printf 'native_same_id_verified artifact_id=%s kind=%s\n' "$OWN_ARTIFACT_ID" "$OWN_KIND"
-          
-      - name: Preserve actual command and custody outcome
-        id: actual_outcome
-        if: always() && !cancelled()
-        shell: bash
-        run: |
-          set -euo pipefail
-          test '${{ steps.native.outcome }}' = success
-          test '${{ steps.own_verified.outcome }}' = success
-  reduction_consume_b:
-    if: ${{ false && github.repository == 'tokenizartinfo-ops/agent-friendly-web' && github.ref == 'refs/heads/feat/finite-native-cleanup-20261101' && github.run_attempt == 1 }}
-    needs: [contracts, readonly, reduction_prepare]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    environment: afw-finite-syn-checkpoint
-    outputs:
-      artifact-id: ${{ steps.upload.outputs.artifact-id }}
-      artifact-digest: ${{ steps.upload.outputs.artifact-digest }}
-      kind: ${{ steps.seal.outputs.kind }}
-    env:
-      AFW_BUDGET_GROUP: reduction_b
-      AFW_SYN_CHECKPOINT_KEY: ${{ secrets.AFW_SYN_CHECKPOINT_KEY }}
-      FIXED_ROLE: consumer
-      FIXED_LANE: reduction_b
-      FIXED_CASES: '["D3","D4"]'
-    steps:
-      - name: Require fixed scope before any native work
-        id: scope
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$GITHUB_REPOSITORY" = tokenizartinfo-ops/agent-friendly-web
-          test "$GITHUB_REF" = refs/heads/feat/finite-native-cleanup-20261101
-          test "$GITHUB_RUN_ATTEMPT" = 1
-          test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"
-          printf 'AFW_JOB_STARTED_MS=%s\n' "$(date +%s%3N)" >>"$GITHUB_ENV"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/logs"
-          mkdir -m 700 "$RUNNER_TEMP/afw-native-private/programs"
-          
-      - uses: actions/checkout@v4
-        with:
-          repository: tokenizartinfo-ops/agent-friendly-web
-          ref: ${{ github.sha }}
-          persist-credentials: false
-          fetch-depth: 1
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22.23.4'
-      - name: Install exact lock and verify existing custody key
-        id: custody
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$(node -v)" = v22.23.4
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-          npm ci --ignore-scripts --no-audit --no-fund >"$RUNNER_TEMP/afw-native-private/logs/install.log" 2>&1 || { echo locked_install_failed; exit 1; }
-          cp .github/workflows/afw-finite-budget-qualification.yml "$RUNNER_TEMP/afw-native-private/programs/workflow.yml"
-          node test/fixtures/finite-checkpoint-custody.mjs key-preflight checkpoint >"$RUNNER_TEMP/afw-native-private/logs/custody-key.log" 2>&1 || { echo custody_key_unavailable; exit 1; }
-          
-      - name: Download exact contracts artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ needs.contracts.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-prior-pure
-          merge-multiple: true
-      - name: Verify prior pure inventory and select fixed graph profile
-        id: pure_binding
-        env:
-          PURE_ID: ${{ needs.contracts.outputs.artifact-id }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/pure-binding.log" 2>&1
-          import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';import {mkdir,copyFile,readFile} from 'node:fs/promises';import assert from 'node:assert/strict';
-          const e=process.env,root=e.RUNNER_TEMP+'/afw-prior-pure';await verifyBudgetArtifact(root,'pure',e.PURE_ID);
-          const group=e.AFW_BUDGET_GROUP==='reduction_b'?'reduction_a':e.AFW_BUDGET_GROUP;
-          const preflight=JSON.parse(await readFile(root+'/preflight-'+group+'.json','utf8'));assert.equal(preflight.group,group);assert.equal(preflight.I0Opened,false);
-          await mkdir('output/finite-budget/prior-pure',{recursive:true});await copyFile(root+'/preflight-'+group+'.json','output/finite-budget/prior-pure/preflight.json');
-          NODE
-          printf 'AFW_BUDGET_PREFLIGHT=output/finite-budget/prior-pure/preflight.json\n' >>"$GITHUB_ENV"
-          
-      - name: Download assigned original producer artifact
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ needs.reduction_prepare.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-producer-envelope
-          merge-multiple: true
-      - name: Authenticate assigned producer before any cold mount
-        id: producer_binding
-        env:
-          PRODUCER_ID: ${{ needs.reduction_prepare.outputs.artifact-id }}
-          PRODUCER_DIGEST: ${{ needs.reduction_prepare.outputs.artifact-digest }}
-          PRODUCER_KIND: ${{ needs.reduction_prepare.outputs.kind }}
-          EXPECTED_KIND: reduction-checkpoint
-          EXPECTED_GROUP: reduction_a
-          EXPECTED_CASES: '["D1","D2","D3","D4"]'
-          GH_ARTIFACT_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          test "$PRODUCER_KIND" = "$EXPECTED_KIND"
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/input-binding.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';
-          import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env;assert.match(e.PRODUCER_ID,/^[1-9][0-9]*$/);assert.match(e.PRODUCER_DIGEST,/^[a-f0-9]{64}$/);
-          const r=await fetch('https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/'+e.PRODUCER_ID,{headers:{Authorization:'Bearer '+e.GH_ARTIFACT_TOKEN,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(10000)});
-          assert.equal(r.status,200);const m=await r.json();assert.equal(String(m.id),e.PRODUCER_ID);assert.equal(m.expired,false);assert.equal(m.digest,'sha256:'+e.PRODUCER_DIGEST);assert.equal(String(m.workflow_run.id),e.GITHUB_RUN_ID);assert.equal(m.workflow_run.head_sha,e.GITHUB_SHA);
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:e.EXPECTED_KIND};
-          await openDirectory({stagingDir:e.RUNNER_TEMP+'/afw-producer-envelope',destinationDir:e.RUNNER_TEMP+'/afw-producer-open',context});
-          const manifest=JSON.parse(await readFile(e.RUNNER_TEMP+'/afw-producer-open/job-manifest.json','utf8'));
-          const {execFileSync}=await import('node:child_process');validateFixedBudgetJobManifest(manifest,{job:e.EXPECTED_KIND==='checkpoint'?'positive_prepare':'reduction_prepare',sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),artifactId:e.PRODUCER_ID,digest:e.PRODUCER_DIGEST,context});
-          await writeFile(e.RUNNER_TEMP+'/afw-native-private/producer-binding.json',JSON.stringify({artifactId:e.PRODUCER_ID,digest:e.PRODUCER_DIGEST,kind:e.EXPECTED_KIND,expectedProducerGroup:e.EXPECTED_GROUP,verified:true}));
-          NODE
-          printf 'AFW_BUDGET_PRODUCER_ARTIFACT_ID=%s\n' "$PRODUCER_ID" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_DIGEST=%s\n' "$PRODUCER_DIGEST" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_KIND=%s\n' "$EXPECTED_KIND" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_GROUP=%s\n' "$EXPECTED_GROUP" >>"$GITHUB_ENV"
-          printf 'AFW_BUDGET_PRODUCER_READBACK=verified\n' >>"$GITHUB_ENV"
-          
-      - name: Execute fixed reduction_consume_b once
-        id: native
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          AFW_BUDGET_CHECKPOINT="$RUNNER_TEMP/afw-producer-open/output/finite-budget/checkpoint" node --test --test-concurrency=1 --test-reporter=tap test/mcp-qa-finite-budget-native.test.mjs >"$RUNNER_TEMP/afw-native-private/logs/command-output.log" 2>&1
-          AFW_EXPECTED_CASES=2 node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/tap-check.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';
-          const e=process.env,text=await readFile(e.RUNNER_TEMP+'/afw-native-private/logs/command-output.log','utf8'),counts={};
-          for(const [name,expected]of Object.entries({tests:Number(e.AFW_EXPECTED_CASES),pass:Number(e.AFW_EXPECTED_CASES),fail:0,cancelled:0,skipped:0,todo:0})){const hits=[...text.matchAll(new RegExp('^# '+name+' (\\d+)$','gm'))];assert.equal(hits.length,1);counts[name]=Number(hits[0][1]);assert.equal(counts[name],expected);}
-          await writeFile(e.RUNNER_TEMP+'/afw-native-private/business-counts.json',JSON.stringify(counts));
-          NODE
-          
-      - name: Verify coherent original sixteen-case evidence before sealing
-        id: aggregate
-        if: steps.native.outcome == 'success'
-        env:
-          GH_ARTIFACT_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/aggregate.log" 2>&1
-          
+          if test "${AFW_CHECKOUT_OUTCOME-}" != success || test "${AFW_NODE_OUTCOME-}" != success || test -n "${NODE_OPTIONS+x}" || test -n "${NODE_PATH+x}" || test -n "${AFW_SYN_CHECKPOINT_KEY+x}" || test -n "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"; then
+            printf '%s\n' 'AFW_R3_DELIVERY_STARTUP_DIAGNOSTIC/1 {"purpose":"afw.r3-delivery.startup-diagnostic.v1","scope":"source_initial_only","result":"unavailable","lastObserved":"setup_rejected","controlsInvoked":0,"originalCLIInvoked":0,"nativeBusinessCases":0,"qualification":false,"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}}' 2>/dev/null; exit 1
+          fi
+          if ! { test -d "${PWD-}" && pwd -P >/dev/null; } 2>/dev/null; then
+            printf '%s\n' 'AFW_R3_DELIVERY_STARTUP_DIAGNOSTIC/1 {"purpose":"afw.r3-delivery.startup-diagnostic.v1","scope":"source_initial_only","result":"unavailable","lastObserved":"cwd_rejected","controlsInvoked":0,"originalCLIInvoked":0,"nativeBusinessCases":0,"qualification":false,"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}}' 2>/dev/null; exit 1
+          fi
+          r3_trace_ready=0
+          r3_trace_file=
+          if test -n "${RUNNER_TEMP-}" && test -d "${RUNNER_TEMP-}"; then
+            r3_trace_file=$(/usr/bin/mktemp -- "${RUNNER_TEMP%/}/afw-r3-startup.XXXXXXXX" 2>/dev/null)
+            case "$r3_trace_file" in
+              "${RUNNER_TEMP%/}"/afw-r3-startup.????????)
+                if { exec 10<"$r3_trace_file" 11>>"$r3_trace_file"; } 2>/dev/null; then
+                  if /usr/bin/rm -- "$r3_trace_file" 2>/dev/null; then r3_trace_ready=1; fi
+                fi
+                if test "$r3_trace_ready" != 1; then { exec 10<&- 11>&-; /usr/bin/rm -- "$r3_trace_file"; } 2>/dev/null; fi
+                ;;
+            esac
+          fi
+          unset r3_trace_file
+          if test "$r3_trace_ready" = 1; then { printf '%s\n' cwd_checked >&11; } 2>/dev/null; fi
+          {
+          exec 4</proc/thread-self
+          /usr/bin/python3 -I -S /proc/self/fd/5 bootstrap-initial 5<<'AFW_R3_DIAG_SHIM' <<'AFW_R3_DIAG_NODE' >/dev/null
+          # Source-literal initial-only observation; logging failure never changes bootstrap admission.
+          import os,stat,fcntl
+          def _r3diag(event):
+           try:
+            if event not in ["cwd_checked","python_entered","imports_ready","creator_checked","pdeath_checked","image_checked","exec_handoff","node_entered","binding_checked","bootstrap_admitted"]:return
+            a=os.fstat(10);b=os.fstat(11)
+            if not(stat.S_ISREG(a.st_mode) and stat.S_ISREG(b.st_mode) and a.st_uid==b.st_uid==os.getuid() and a.st_nlink==b.st_nlink==0 and a.st_mode&0o777==b.st_mode&0o777==0o600 and (a.st_dev,a.st_ino)==(b.st_dev,b.st_ino) and a.st_size==b.st_size<=256):return
+            if fcntl.fcntl(10,fcntl.F_GETFL)&os.O_ACCMODE!=os.O_RDONLY or fcntl.fcntl(11,fcntl.F_GETFL)&os.O_ACCMODE!=os.O_WRONLY or not fcntl.fcntl(11,fcntl.F_GETFL)&os.O_APPEND:return
+            raw=(event+'\n').encode('ascii')
+            if b.st_size+len(raw)<=256:os.write(11,raw)
+           except BaseException:pass
+          _r3diag('python_entered')
+          # Fixed Linux transport lineage. Roles and targets are Source literals, never caller paths/PIDs.
+          import os,sys,stat,re,signal,ctypes,errno,fcntl,runpy,shutil
+          _r3diag('imports_ready')
+          def need(v):
+           if not v:raise ValueError()
+          libc=ctypes.CDLL(None,use_errno=True)
+          libc.prctl.argtypes=[ctypes.c_int,ctypes.c_ulong,ctypes.c_ulong,ctypes.c_ulong,ctypes.c_ulong];libc.prctl.restype=ctypes.c_int
+          def death_get():
+           value=ctypes.c_int(0);need(libc.prctl(2,ctypes.addressof(value),0,0,0)==0);return value.value
+          def creator():
+           need(stat.S_ISDIR(os.fstat(4).st_mode) and os.fstat(4).st_uid==os.getuid())
+           need(fcntl.fcntl(4,fcntl.F_GETFL)&os.O_ACCMODE==os.O_RDONLY)
+           link=os.readlink('/proc/self/fd/4');match=re.fullmatch(r'/proc/([1-9][0-9]*)/task/([1-9][0-9]*)',link);need(match is not None)
+           pid,tid=map(int,match.groups());need(pid==tid and pid==os.getppid())
+           f=os.open('stat',os.O_RDONLY|os.O_NOFOLLOW,dir_fd=4)
+           try:raw=os.read(f,4097);need(len(raw)<=4096)
+           finally:os.close(f)
+           text=raw.decode('ascii');at=text.rfind(')');need(at>0 and text[:text.index('(')].strip()==str(pid));parts=text[at+2:].split();need(len(parts)>=20 and parts[0] not in ['Z','X'] and parts[19].isdigit())
+           return pid,parts[19]
+          def main_thread():
+           link=os.readlink('/proc/thread-self');m=re.fullmatch(r'(?:/proc/)?([1-9][0-9]*)/task/([1-9][0-9]*)',link);need(m is not None and int(m[1])==int(m[2])==os.getpid())
+          def arm():
+           main_thread();before=creator()
+           _r3diag('creator_checked')
+           # AFW_LIFE_BEFORE_ARM
+           need(libc.prctl(1,signal.SIGKILL,0,0,0)==0 and death_get()==signal.SIGKILL)
+           need(creator()==before)
+           _r3diag('pdeath_checked')
+           return before
+          def helper_fd(name):
+           need(name in ['boundary.py','controls-boundary.py','delivery-entry.sh','controls-entry.sh','missing-cwd-entry.sh','delivery-outer.mjs','controls-outer.mjs','witness.mjs','lifetime-controls.py','race-creator.mjs'])
+           d=os.fstat(6);need(stat.S_ISDIR(d.st_mode) and d.st_uid==os.getuid() and not d.st_mode&0o077)
+           f=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=6);s=os.fstat(f)
+           try:need(stat.S_ISREG(s.st_mode) and s.st_uid==os.getuid() and s.st_nlink==1 and not s.st_mode&0o077 and s.st_size<=32768)
+           except BaseException:os.close(f);raise
+           return f
+          def executable(fd):
+           s=os.fstat(fd);need(stat.S_ISREG(s.st_mode) and not s.st_mode&(stat.S_ISUID|stat.S_ISGID) and s.st_mode&0o111 and s.st_uid in [0,os.getuid()] and not s.st_mode&0o022)
+           try:cap=os.getxattr(fd,'security.capability');need(cap==b'')
+           except OSError as error:need(error.errno==errno.ENODATA)
+           need(os.geteuid()==os.getuid() and os.getegid()==os.getgid())
+          def prepare_node_child():
+           # This is a NEW fork; refresh fd4 to THIS actual creating main thread.
+           main_thread();own=os.open('/proc/thread-self',os.O_RDONLY|os.O_DIRECTORY);os.dup2(own,4,inheritable=True)
+           if own!=4:os.close(own)
+           expected=os.getpid();executable(3)
+           def before_exec():
+            try:
+             need(os.getppid()==expected);arm();executable(3);need(os.getppid()==expected and death_get()==signal.SIGKILL)
+            except BaseException:os._exit(125)
+           return before_exec
+          def exec_node(name,case=None,initial=False):
+           # EXEC replacement keeps the same creator and relationship. Do NOT refresh fd4.
+           if name is None and initial:
+            # One initial Source-literal node selection from successful setup-node PATH; custody is the opened object.
+            path=shutil.which('node');need(type(path) is str and os.path.isabs(path) and len(path)<=4096)
+            image=os.open(os.path.realpath(path),os.O_RDONLY|os.O_NOFOLLOW);executable(image);os.dup2(image,3,inheritable=True)
+            if image!=3:os.close(image)
+            _r3diag('image_checked')
+           else:
+            executable(3)
+            if name is not None:
+             f=helper_fd(name);os.dup2(f,0,inheritable=True)
+             if f!=0:os.close(f)
+           for n in ([3,4] if name is None else [3,4,6]):os.set_inheritable(n,True)
+           need(death_get()==signal.SIGKILL and os.execve in os.supports_fd)
+           args=['node','--disable-warning=ExperimentalWarning','--input-type=module','-']
+           if case is not None:need(case in ['timeout','python','outer','bash','race']);args.append(case)
+           _r3diag('exec_handoff')
+           os.execve(3,args,dict(os.environ))
+          def exec_bash(name):
+           f=helper_fd(name);os.set_inheritable(f,True)
+           bash=os.open('/usr/bin/bash',os.O_RDONLY);executable(bash)
+           for n in [3,4,6]:os.set_inheritable(n,True)
+           need(death_get()==signal.SIGKILL and os.execve in os.supports_fd)
+           os.execve(bash,['bash','/proc/self/fd/'+str(f)],dict(os.environ))
+          def remove_empty_cwd():
+           own=os.path.realpath('/proc/self/fd/6');base=os.path.dirname(os.path.dirname(own));cwd=os.getcwd()
+           need(cwd==base+'/gone' and os.path.realpath(cwd)==cwd and not os.listdir('.'))
+           s=os.stat('.');need(s.st_uid==os.getuid() and stat.S_ISDIR(s.st_mode));os.rmdir(cwd)
+           try:os.lstat(cwd);raise ValueError()
+           except OSError as error:need(error.errno==errno.ENOENT)
+          def make_fifo():
+           own=os.path.realpath('/proc/self/fd/6');base=os.path.dirname(os.path.dirname(own));need(os.getcwd()==base+'/work')
+           path='output/finite-budget/readonly/R3/r3-existing-sample.json'
+           need(os.path.realpath(os.path.dirname(path)).startswith(base+'/work/'));os.mkfifo(path,0o600)
+          def main():
+           need(len(sys.argv)==2 and type(sys.argv[1]) is str);role=sys.argv[1]
+           need(role in ['bootstrap-initial','bootstrap-stdin','parent-delivery','parent-controls','case-delivery','case-controls','case-missing-cwd','node-delivery','node-controls','node-witness','remove-empty-cwd','make-fifo','node-race-creator','life-timeout','life-python','life-outer','life-bash','life-race'])
+           arm()
+           if role in ['parent-delivery','parent-controls','life-timeout','life-python','life-outer','life-bash','life-race']:
+            name=('boundary.py' if role=='parent-delivery' else 'controls-boundary.py') if role.startswith('parent-') else 'lifetime-controls.py';f=helper_fd(name)
+            if role.startswith('life-'):sys.argv=['lifetime-controls.py','-',role[5:]]
+            try:runpy.run_path('/proc/self/fd/'+str(f),init_globals={'r3_prepare_node_child':prepare_node_child},run_name='__main__')
+            finally:os.close(f)
+           elif role in ['bootstrap-initial','bootstrap-stdin']:exec_node(None,initial=role=='bootstrap-initial')
+           elif role=='case-delivery':exec_bash('delivery-entry.sh')
+           elif role=='case-controls':exec_bash('controls-entry.sh')
+           elif role=='case-missing-cwd':exec_bash('missing-cwd-entry.sh')
+           elif role=='node-delivery':exec_node('delivery-outer.mjs')
+           elif role=='node-controls':exec_node('controls-outer.mjs')
+           elif role=='node-witness':exec_node('witness.mjs')
+           elif role=='node-race-creator':
+            need(stat.S_ISFIFO(os.fstat(0).st_mode) and fcntl.fcntl(0,fcntl.F_GETFL)&os.O_ACCMODE==os.O_RDONLY);os.dup2(0,8,inheritable=True);exec_node('race-creator.mjs')
+           elif role=='remove-empty-cwd':remove_empty_cwd()
+           elif role=='make-fifo':make_fifo()
+          try:main()
+          except SystemExit as result:raise SystemExit(result.code if type(result.code) is int and 0<=result.code<=255 else 1)
+          except BaseException:raise SystemExit(1)
+          AFW_R3_DIAG_SHIM
           import assert from 'node:assert/strict';
-          import {mkdir,readFile,writeFile,readdir} from 'node:fs/promises';
-          import {execFileSync} from 'node:child_process';
+          import {readFileSync,writeFileSync,writeSync,mkdirSync,lstatSync,realpathSync,statSync,fstatSync} from 'node:fs';
+          import {join} from 'node:path';
           import {createHash} from 'node:crypto';
-          import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          import {verifyBudgetArtifact} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env,sha=value=>createHash('sha256').update(value).digest('hex'),repo='tokenizartinfo-ops/agent-friendly-web',root=e.RUNNER_TEMP+'/afw-qualification-peer-proof';
-          const fixed=[{job:'positive_prepare',kind:'checkpoint',role:'producer',group:'positive',cases:['P1']},{job:'positive_consume',kind:'positive-result',role:'consumer',group:'positive',cases:['P1']},{job:'reduction_prepare',kind:'reduction-checkpoint',role:'producer',group:'reduction_a',cases:['D1','D2','D3','D4']},{job:'reduction_consume_a',kind:'reduction-result-a',role:'consumer',group:'reduction_a',cases:['D1','D2']},{job:'readonly',kind:'readonly-result',role:'consumer',group:'readonly',cases:['R1','R2','R3']}];
-          let pollTimeoutMs=10000,pollQueryAttempts=0,pollPhase='source_ref',lastPollFacts=null;
-          const requests=[],pollPath=e.RUNNER_TEMP+'/afw-native-private/postnative-polls.json',pollDeadline=Number(e.AFW_JOB_STARTED_MS)+780000;
-          const persistPoll=async facts=>{if(facts)lastPollFacts=facts;await writeFile(pollPath,JSON.stringify({...lastPollFacts,attemptedPeerQueries:pollQueryAttempts,completedPeerQueries:lastPollFacts?.queries?.length??0,actualMetadataRequests:requests.filter(record=>record.enteredFetch).length,metadataRequests:requests,observedAt:Date.now()},null,2));};
-          const request=async path=>{
-           assert(path.startsWith('/actions/')||path==='/git/ref/heads/feat/finite-native-cleanup-20261101');
-           assert(requests.length<256,'finite postnative request records');
-           const remaining=pollDeadline-Date.now(),timeoutMs=Math.min(pollTimeoutMs,remaining);assert(timeoutMs>0,'postnative request sealing headroom');
-           const record={ordinal:requests.length+1,phase:pollPhase,query:pollQueryAttempts,startedAt:Date.now(),remainingAtEntry:remaining,timeoutMs,enteredFetch:false,outcome:'prepared',status:null,finishedAt:null};requests.push(record);await persistPoll();
-           let primary=null;
-           try{record.enteredFetch=true;record.outcome='in_progress';const r=await fetch('https://api.github.com/repos/'+repo+path,{headers:{Authorization:'Bearer '+e.GH_ARTIFACT_TOKEN,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(timeoutMs)});record.status=r.status;assert.equal(r.status,200);const value=await r.json();record.outcome='fulfilled';return value;}
-           catch(error){primary=error;record.outcome='rejected';throw error;}
-           finally{record.finishedAt=Date.now();record.remainingAfter=pollDeadline-record.finishedAt;try{await persistPoll();}catch(error){if(!primary)throw error;}}
-          };
-          const sameRef=await request('/git/ref/heads/feat/finite-native-cleanup-20261101');assert.equal(sameRef.object.sha,e.GITHUB_SHA,'qualification Source stayed frozen');
-          await mkdir(root,{mode:0o700});let inventory,jobInventory;
-          await collectFixedBudgetPeers({startedAt:Number(e.AFW_JOB_STARTED_MS),read:async timeoutMs=>{
-           pollQueryAttempts++;pollPhase='peer_poll';pollTimeoutMs=timeoutMs;await persistPoll();inventory=await request('/actions/runs/'+e.GITHUB_RUN_ID+'/artifacts?per_page=100');assert(inventory.total_count<=100);
-           const expected=['finite-budget-fixed-preparation-'+e.GITHUB_SHA,...fixed.map(x=>'finite-budget-'+x.job+'-'+e.GITHUB_SHA+'-'+e.GITHUB_RUN_ID)];
-           jobInventory=await request('/actions/runs/'+e.GITHUB_RUN_ID+'/jobs?per_page=100');assert.equal(jobInventory.total_count,7);
-           const terminalPeers=jobInventory.jobs.filter(job=>job.name!=='reduction_consume_b'&&job.status==='completed'&&job.conclusion==='success').length;
-           return {ready:expected.every(name=>inventory.artifacts.filter(a=>a.name===name).length===1)&&terminalPeers===6,artifactCount:inventory.total_count,terminalPeers};
-          },sleep:ms=>new Promise(resolve=>setTimeout(resolve,ms)),persist:persistPoll});
-          pollPhase='peer_identity';
-          const opened=new Map(),receipts=[];
-          async function download(name,kind){
-           const matches=inventory.artifacts.filter(a=>a.name===name);assert.equal(matches.length,1);
-           const artifact=matches[0];assert.equal(artifact.expired,false);assert.match(artifact.digest,/^sha256:[a-f0-9]{64}$/);assert(artifact.size_in_bytes<=134283264);assert.equal(String(artifact.workflow_run.id),e.GITHUB_RUN_ID);assert.equal(artifact.workflow_run.head_sha,e.GITHUB_SHA);
-           const metadata=await request('/actions/artifacts/'+artifact.id);assert.equal(metadata.digest,artifact.digest);assert.equal(metadata.name,name);
-           const response=await fetch('https://api.github.com/repos/'+repo+'/actions/artifacts/'+artifact.id+'/zip',{headers:{Authorization:'Bearer '+e.GH_ARTIFACT_TOKEN,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(20000)});assert.equal(response.status,200);
-           const reader=response.body.getReader(),chunks=[];let received=0;
-           for(;;){const part=await reader.read();if(part.done)break;received+=part.value.length;if(received>134283264){await reader.cancel();throw Error('bounded peer artifact exceeded');}chunks.push(Buffer.from(part.value));}
-           const bytes=Buffer.concat(chunks);assert.equal(bytes.length,artifact.size_in_bytes);assert.equal('sha256:'+sha(bytes),artifact.digest);
-           assert(Number.isSafeInteger(artifact.id)&&artifact.id>0);const zip=root+'/'+artifact.id+'.zip',directory=root+'/'+artifact.id,output=root+'/'+artifact.id+'-opened';await writeFile(zip,bytes);
-           const paths=execFileSync('unzip',['-Z1',zip],{encoding:'utf8'}).trim().split('\n');assert(paths.every(path=>/^[A-Za-z0-9_.-]+$/.test(path)));assert.equal(new Set(paths).size,paths.length);
-           if(kind!=='pure')assert.deepEqual([...paths].sort(),['envelope.bin','manifest.json','receipt.json']);
-           const listing=execFileSync('unzip',['-l',zip],{encoding:'utf8'}).trim().split('\n').at(-1),totals=/^\s*(\d+)\s+(\d+)\s+files?\s*$/.exec(listing);assert(totals&&Number(totals[1])<=134283264&&Number(totals[2])===paths.length,'bounded exact zip inventory before extraction');
-           await mkdir(directory,{mode:0o700});execFileSync('unzip',['-q',zip,'-d',directory]);
-           if(kind==='pure')await verifyBudgetArtifact(directory,'pure',String(artifact.id));
-           else await openDirectory({stagingDir:directory,destinationDir:output,context:{purpose:'afw.finite-checkpoint-custody.syn.v1',repository:repo,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind}});
-           receipts.push({artifactId:String(artifact.id),digest:artifact.digest,name,kind});return {directory:kind==='pure'?directory:output,artifact};
+          import {gunzipSync} from 'node:zlib';
+          import {execFileSync} from 'node:child_process';
+          function r3diag(event){
+           try{
+            if(!["cwd_checked","python_entered","imports_ready","creator_checked","pdeath_checked","image_checked","exec_handoff","node_entered","binding_checked","bootstrap_admitted"].includes(event))return;
+            const a=fstatSync(10),b=fstatSync(11),uid=process.getuid();
+            if(!a.isFile()||!b.isFile()||a.uid!==uid||b.uid!==uid||a.nlink!==0||b.nlink!==0||(a.mode&0o777)!==0o600||(b.mode&0o777)!==0o600||a.dev!==b.dev||a.ino!==b.ino||a.size!==b.size||b.size>256)return;
+            const bytes=Buffer.from(event+'\n','ascii');if(b.size+bytes.length<=256)writeSync(11,bytes);
+           }catch{}
           }
-          const pure=await download('finite-budget-fixed-preparation-'+e.GITHUB_SHA,'pure');
-          const counts=async file=>{const value=JSON.parse(await readFile(file,'utf8'));assert.equal(value.fail,0);assert.equal(value.cancelled,0);assert.equal(value.skipped,0);assert.equal(value.todo,0);assert.equal(value.tests,value.pass);return value;};
-          const pureCounts=JSON.parse(await readFile(pure.directory+'/q-counts.json','utf8'));assert.deepEqual(pureCounts,{tests:8,pass:8,fail:0,cancelled:0,skipped:0,todo:0});
-          const pureDiagnostic=JSON.parse(await readFile(pure.directory+'/diagnostics.json','utf8'));assert.equal(pureDiagnostic.allPassed,true);assert(pureDiagnostic.profiles.every(profile=>profile.I0Opened===false&&profile.nativeExecutionProduced===false));assert.equal(pureDiagnostic.profiles.find(p=>p.profile==='positive').additionalSYNCount,0);
-          for(const cfg of fixed){
-           const proof=await download('finite-budget-'+cfg.job+'-'+e.GITHUB_SHA+'-'+e.GITHUB_RUN_ID,cfg.kind),manifest=JSON.parse(await readFile(proof.directory+'/job-manifest.json','utf8'));
-           validateFixedBudgetJobManifest(manifest,{job:cfg.job,sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),artifactId:String(proof.artifact.id),digest:proof.artifact.digest.slice(7),context:{purpose:'afw.finite-checkpoint-custody.syn.v1',repository:repo,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:cfg.kind}});
-           opened.set(cfg.job,{...proof,manifest});
-          }
-          const positive=opened.get('positive_consume'),readonly=opened.get('readonly'),a=opened.get('reduction_consume_a'),producer=opened.get('reduction_prepare');
-          assert.equal((await counts(positive.directory+'/business-counts.json')).pass,1);assert.equal((await counts(readonly.directory+'/business-counts.json')).pass,3);assert.equal((await counts(a.directory+'/business-counts.json')).pass,2);assert.equal((await counts(e.RUNNER_TEMP+'/afw-native-private/business-counts.json')).pass,2);
-          const reductionCheckpoint=JSON.parse(await readFile(producer.directory+'/output/finite-budget/checkpoint/native/checkpoint.json','utf8')),positiveCheckpoint=JSON.parse(await readFile(opened.get('positive_prepare').directory+'/output/finite-budget/checkpoint/checkpoint.json','utf8'));
-          const readResult=async(directory,group,name)=>JSON.parse(await readFile(directory+'/output/finite-budget/'+group+'/'+name+'/full-result.json','utf8'));
-          const aResults=await Promise.all(['D1','D2'].map(name=>readResult(a.directory,'reduction',name))),bResults=await Promise.all(['D3','D4'].map(name=>readResult('.', 'reduction',name)));
-          const allD=[...aResults,...bResults];
-          for(const value of allD){
-           assert.equal(value.plan.I0,reductionCheckpoint.plan.I0);assert.equal(value.plan.C0,reductionCheckpoint.plan.C0);assert.equal(value.plan.C1,reductionCheckpoint.plan.C1);
-           assert(value.recovery.pairReady<=value.plan.C0-30000);assert.equal(value.recovery.pairSize,2);assert.equal(value.recovery.restart,false);
-           assert.equal(value.producer.artifactId,String(producer.artifact.id));assert.equal(value.producer.digest,producer.artifact.digest.slice(7));
-           assert.equal(value.producer.manifestSha256,sha(await readFile(producer.directory+'/output/finite-budget/checkpoint/native/manifest.json')));
-          }
-          const aStart=Math.min(...aResults.map(x=>x.recovery.pairEntered)),aEnd=Math.max(...aResults.map(x=>x.recovery.consumerFinished)),bStart=Math.min(...bResults.map(x=>x.recovery.pairEntered)),bEnd=Math.max(...bResults.map(x=>x.recovery.consumerFinished));
-          assert(Math.max(aStart,bStart)<Math.min(aEnd,bEnd),'actual consumer replica intervals overlap');
-          const rResults=await Promise.all(['R1','R2','R3'].map(name=>readResult(readonly.directory,'readonly',name)));
-          function checkpointLineage(data,kind){const rootRow=data.facts.rows.find(([key])=>key.startsWith('afw.finite-owner-issuer-provenance.v1:')&&key.endsWith(':root'));assert(rootRow);const sdk=JSON.parse(rootRow[1]);assert.equal(sdk.I0,data.plan.I0);assert.equal(sdk.C0,data.plan.C0);assert.equal(sdk.C1,data.plan.C1);return {kind,I0:sdk.I0,C0:sdk.C0,C1:sdk.C1,sdkRootHash:sdk.recordHash,graphs:[{role:'M',sha256:data.build.M.sha256},{role:'QA',sha256:data.build.QA.sha256}]};}
-          const lineages=[checkpointLineage(positiveCheckpoint,'positive'),checkpointLineage(reductionCheckpoint,'reduction'),...rResults.map(result=>{assert(result.lineage);return {...result.lineage,kind:result.caseName};})];
-          assert.equal(lineages.length,5);assert.deepEqual(lineages.map(x=>x.kind),['positive','reduction','R1','R2','R3']);assert.equal(lineages.flatMap(x=>x.graphs).length,10);
-          const positiveOwnership=JSON.parse(await readFile(opened.get('positive_prepare').directory+'/output/finite-budget/owned/positive_producer/ownership.json','utf8')),reductionOwnership=JSON.parse(await readFile(producer.directory+'/output/finite-budget/owned/reduction_producer/ownership.json','utf8'));
-          const occurrenceOwners=[positiveOwnership,reductionOwnership,...rResults.map(v=>v.ownership)];assert.equal(occurrenceOwners.length,5);
-          const occurrenceProof=occurrenceOwners.map((value,index)=>{assert.equal(value.complete,true);assert.equal(value.records.length,1);const record=value.records[0];assert.equal(record.kind,'initial');assert(record.events.includes('miniflare-attached'));assert(record.events.includes('fixture-attached'));assert.equal(record.graphs.length,2);assert.deepEqual(record.graphs.map(g=>g.role).sort(),['M','QA']);for(const graph of record.graphs){assert.equal(graph.mounted,true);assert.equal(graph.sha256,lineages[index].graphs.find(g=>g.role===graph.role).sha256);}return {occurrence:index+1,caseName:value.caseName,allocationOrdinal:record.ordinal,graphs:record.graphs};});assert.equal(occurrenceProof.flatMap(v=>v.graphs).length,10);
+          r3diag('node_entered');
+          try{
+           const e=process.env,sha=b=>createHash('sha256').update(b).digest('hex'),blob=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex'),canonical=JSON.stringify;
+           const git=(...args)=>execFileSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+           const boundImage=fstatSync(3),runningImage=statSync('/proc/self/exe');assert(boundImage.isFile()&&boundImage.dev===runningImage.dev&&boundImage.ino===runningImage.ino&&boundImage.size===runningImage.size);
+           assert.equal(process.versions.node,'22.23.4');assert.equal(e.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(e.GITHUB_REPOSITORY_ID,'1347578006');assert.equal(e.GITHUB_JOB,'readonly');assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.equal(e.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(e.GITHUB_EVENT_NAME,'push');assert.equal(e.NODE_OPTIONS,undefined);assert.equal(e.NODE_PATH,undefined);assert.equal(e.AFW_SYN_CHECKPOINT_KEY,undefined);assert.equal(e.AFW_BUDGET_DIAGNOSTIC_CANDIDATE,undefined);assert.equal(e.GITHUB_WORKFLOW_REF,'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101');
+           assert.equal(typeof e.GITHUB_SHA,'string');assert.equal(typeof e.GITHUB_RUN_ID,'string');assert.match(e.GITHUB_SHA,/^[a-f0-9]{40}$/);assert.match(e.GITHUB_RUN_ID,/^[1-9][0-9]{0,19}$/);assert.equal(git('rev-parse','HEAD'),e.GITHUB_SHA);assert.equal(git('rev-parse','--show-toplevel'),realpathSync('.'));assert.equal(process.cwd(),realpathSync('.'));
+           const sourceTree=git('rev-parse','HEAD^{tree}');assert.match(sourceTree,/^[a-f0-9]{40}$/);r3diag('binding_checked');
+           const f7='.github/workflows/afw-finite-budget-qualification.yml',same='docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md';
+           const rawTree=execFileSync('git',['ls-tree','-rz','--full-tree','HEAD'],{stdio:['ignore','pipe','pipe']});
+           const rows=rawTree.toString('utf8').split('\0').filter(Boolean).map(x=>{const n=x.indexOf('\t');assert(n>0);return{tuple:x.slice(0,n),path:x.slice(n+1)};}).filter(x=>![f7,same].includes(x.path)).sort((a,b)=>Buffer.compare(Buffer.from(a.path),Buffer.from(b.path)));
+           const core=Buffer.from(rows.map(x=>x.tuple+'\t'+x.path+'\0').join(''));assert.equal(rows.length,3201);assert.equal(core.length,324448);assert.equal(sha(core),'aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703');
+           execFileSync('git',['diff','--exit-code','HEAD','--'],{stdio:['ignore','pipe','pipe']});
+           const st=lstatSync(same);assert(st.isFile()&&!st.isSymbolicLink()&&st.size<=1800000);const bytes=readFileSync(same);assert.equal(blob(bytes),git('rev-parse','HEAD:'+same));
+           const prefix=bytes.subarray(0,1717394);assert.equal(prefix.length,1717394);assert.equal(sha(prefix),'def4eeed7aea141f278d4324d53bcddb874c41bf92fdf9081160bce8fb5b33af');assert.equal(blob(prefix),'1a0e30469a4c0c09399f28eaf4ca2d4c59070f79');
+           const text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(prefix),begin='<!-- AFW-R3-DELIVERY-SUCCESSOR-R2-DATA-V1:BEGIN -->',end='<!-- AFW-R3-DELIVERY-SUCCESSOR-R2-DATA-V1:END -->';assert.equal(text.split(begin).length,2);assert.equal(text.split(end).length,2);const start=text.indexOf(begin),finish=text.indexOf(end);assert(finish>start&&Buffer.byteLength(text.slice(0,finish+end.length))<=prefix.length);
+           const section=text.slice(start+begin.length,finish);assert.match(section,/^\n[A-Za-z0-9+/=\n]+\n$/);const b64=section.replaceAll('\n',''),payloadPins={"bytes":400168,"sha256":"322ef87839eb99970145ee65972e16e8fc3963ec04d68c5efbf5a6fcb9988eaf","blob":"9bf2e58b836d7fe75c59adafb7e420e2f42113b1","compressed":{"bytes":81621,"sha256":"cc0067415a5118ef90569801db1dc874ef5498d7bd72eae9047fd074503a5a63","blob":"cebe1dcf3c4dd001002bea6e81a13cde971e7fb7"},"base64Characters":108828};assert.equal(b64.length,payloadPins.base64Characters);assert(b64.length<=131072);const zipped=Buffer.from(b64,'base64');assert.equal(zipped.toString('base64'),b64);assert.equal(zipped.length,payloadPins.compressed.bytes);assert(zipped.length<=98304);assert.equal(sha(zipped),payloadPins.compressed.sha256);assert.equal(blob(zipped),payloadPins.compressed.blob);
+           const expanded=gunzipSync(zipped,{maxOutputLength:400500});assert.equal(expanded.length,payloadPins.bytes);assert.equal(sha(expanded),payloadPins.sha256);assert.equal(blob(expanded),payloadPins.blob);
+           const raw=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(expanded),payload=JSON.parse(raw);assert.equal(canonical(payload),raw);assert.deepEqual(Object.keys(payload),['purpose','sourceParent','sourceParentTree','core','prefix','production','helpers']);assert.equal(payload.purpose,'afw.r3-delivery.successor-round2-data.v1');assert.equal(payload.sourceParent,'1fe20347bd9c86d9343799a5994f9f3e3a4a339f');assert.equal(payload.sourceParentTree,'577b049be0d64a6d2f67e889debdff61d4af9ff7');assert.deepEqual(payload.core,{"count":3201,"bytes":324448,"sha256":"aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"});assert.deepEqual(payload.prefix,{"blob":"35abeda77948f5ac8c0ddc1718739c7d56e01e08","bytes":1600042,"sha256":"2d883e68dfaaa6db5901b9ece3aca84e350ca36b51050cbd8d2b4f4036b4762d"});
+           const prod=payload.production;assert.deepEqual(Object.keys(prod),['blob','bytes','sha256','count','setSha256','data']);assert.equal(prod.count,18);assert.equal(prod.blob,'b88ebef9a2aa979772d20bfb778cbfe463dc3011');assert.equal(prod.bytes,95518);assert.equal(prod.sha256,'cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91');assert.equal(prod.setSha256,'71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af');
+           const frozen=Buffer.from(prod.data);assert.equal(frozen.length,prod.bytes);assert.equal(sha(frozen),prod.sha256);assert.equal(blob(frozen),prod.blob);const original=JSON.parse(prod.data);assert.equal(JSON.stringify(original)+'\n',prod.data);assert.equal(original.productionCount,18);assert.equal(Object.keys(original.programs).length,18);
+           const originalPins={};for(const[name,p]of Object.entries(original.programs)){const b=Buffer.from(p.content);assert.deepEqual(Object.keys(p),['bytes','sha256','blob','content']);assert.equal(b.length,p.bytes);assert.equal(sha(b),p.sha256);assert.equal(blob(b),p.blob);originalPins[name]={bytes:p.bytes,sha256:p.sha256,blob:p.blob};}assert.equal(sha(Buffer.from(canonical(originalPins)+'\n')),prod.setSha256);
+           // Original18 verified DATA only. No production main/CLI materialized or invoked.
+           const expected={"io.mjs":{"bytes":1815,"sha256":"b7d4ee0b8786c52a26857a8e203a710017b40dc8f5636a1d387638b9ec78eb47","blob":"8bb9a8ab8ddf81689ee890252579c1fd41dfdf52"},"emitter.mjs":{"bytes":3511,"sha256":"02f80480dbc8bc8700d0ecf3a57e65f855954ca64b379d29eefdb75c6d7db760","blob":"f9eee51fbdb89d0e130f8137d6a48ae787904f66"},"source-provenance.mjs":{"bytes":6690,"sha256":"b4d0872044216a275458d14b838ecf57628780092767ea88910dce18585408ce","blob":"fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d"},"raw-sample.mjs":{"bytes":4289,"sha256":"1b594a7768a69cba5db1f41e83eb2a941f6451c82584490fdb77ba1fea85e9fc","blob":"8cdabb2324ae97b04fa17350846e24d666cd3536"},"site-schema.json":{"bytes":12651,"sha256":"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd","blob":"4871edc102386fe6db65c773e51c21ecb94897e3"},"site-map.json":{"bytes":6630,"sha256":"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","blob":"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f"},"envelope-schema.json":{"bytes":5616,"sha256":"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5","blob":"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f"},"boundary.py":{"bytes":12562,"sha256":"27274120076048fd6f63b122b5534d8d06e97a2d4cf36461c1f710c605accdf4","blob":"554a2b2d2a8e3f365533f0df3006bcce1e409698"},"delivery-schema.json":{"bytes":1380,"sha256":"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60","blob":"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8"},"unavailable-schema.json":{"bytes":1315,"sha256":"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9","blob":"4a310ddcef7b1b7bf0755bf56b760486254cf8c6"},"controls-schema.json":{"bytes":4601,"sha256":"8827165f3446a15740c5b88f9c88fe421ab1a9dc8aaba4cb9256f9f1223e19a1","blob":"caa131fd19bbbc155945ef0bc34a671ed3c61fa3"},"matrix.json":{"bytes":22682,"sha256":"95a6d8e04dae765e2a0957042c09a06ea3c5ce50bad4c48a627e8799e19976f2","blob":"baa7b277322832c41cd76c74b6d4350d226f645f"},"shape.mjs":{"bytes":843,"sha256":"82224496e7db35a1daf7168591cb2123edbb3242331a314680f13d05b3bfef5e","blob":"df49410ebf42b4fbc9a8c032f81a0edc8fb95d0b"},"control-proof.mjs":{"bytes":2182,"sha256":"dcdd13529ff973d660423ec77d1d63054dc582f3e8edf21c3f1672e92654d9d0","blob":"c39a50b3d5622a4b398cca0bbe2970da02c97269"},"site-receiver.mjs":{"bytes":5460,"sha256":"0d346b88c9594c45ef207f9fa4b57c984d13a3e64943904f880e2e2b96377ad2","blob":"c2cf804b6d427b5fc40da2b7d1375785a0a2f459"},"normalized-sample.mjs":{"bytes":3987,"sha256":"2bee6afaa30f01f1f497512d595f24f3a0c92269e3b4ed7e2d2e349ae5b4419f","blob":"f7c2fefcc9df568a8453d876072a23a790b94fcd"},"witness.mjs":{"bytes":1044,"sha256":"336df41b1994c8a315e4f56d976ddd0c9922397c702a02869ac8d44f42a8629a","blob":"b207c0c9ea759a9a146783b8818276444bef155b"},"fixtures.json":{"bytes":7864,"sha256":"973df286e2c073b2e3d55c6a0d60c410ca9786672f8737da300ec16add2753f2","blob":"bbdaf529bd63bbd39801bf88d47921cd55f796bc"},"controls.mjs":{"bytes":28887,"sha256":"6cccd9748ce452874fe22c900cbb4f84921cbe17ea63ddba41053a46888ee0c7","blob":"e04e8cbc2107bb05ac9a92ae7a19b90bbd6c5b67"},"examples.json":{"bytes":21640,"sha256":"efc3aadeed12bbc2ad894e02992643e3f81c11e738ab48081c2d8bdae95d4f00","blob":"fbd7525c44a4706275f2a30eb471f38f9d15da20"},"controls-boundary.py":{"bytes":12788,"sha256":"0ff0f9176664fd22c9475d241893b5880c20714af5fc094ae72788f52dff2eee","blob":"ac1428931c140ae72672f356cfd87a75e63c71a4"},"controls-unavailable-example.json":{"bytes":568,"sha256":"f51a998884886cbb6b682a1e1844c6c41b190ac1df6860c7498871de123011af","blob":"58b1fa7858f6fc87e7164913427edefa9b24c22a"},"outer.mjs":{"bytes":25794,"sha256":"1c8094cb913f8ae06d553b1b29d54bf89ad654524d6afab3f647791057c934aa","blob":"8a74fe67af2c1a870b9964f0f5c17c2514986e36"},"delivery-entry.sh":{"bytes":1508,"sha256":"d3b047ab0c3bbf12ba78a24547bc8e23bed8879d7c6222ee8b865f1ab746aaf6","blob":"5281f9a1d0cb6bd4b2631d8e0fc7ebc620397a68"},"controls-entry.sh":{"bytes":1598,"sha256":"bafa8e09e014da653d714c2cd84dfc057967ecab16a275fdb7a21481dc5c48e2","blob":"6e3587c2f0b0cca86b1c37d293de724a0b2e72e3"},"oracle.mjs":{"bytes":1725,"sha256":"f84f6460d8acd33b18c6c4acd7dda4821d5b151ab1bce30966746bdbbe629802","blob":"0acca4751b2bf239c141a414e503ab457aad72f2"},"lifetime.py":{"bytes":6725,"sha256":"5bc4df05dccb6fe6818ece54449b59c275cd2cd44612ecb63299d49d1d309d77","blob":"857f48babb866894b26ec04d642f9ee4ebe00220"},"delivery-outer.mjs":{"bytes":25833,"sha256":"3d7509519f066b1cef03beebca5690b9535489a16a2e26388cda15090f187ff6","blob":"48f293438af9541a4d6f1a086ab2b7a8cbbc5dbc"},"controls-outer.mjs":{"bytes":25833,"sha256":"ba81501e3cf8c32eb3c0ed10c89b297a99a1d27f68313c1390c3add409daf7ad","blob":"8ca0675d7188f8ecafca5100a76a3e664014aea9"},"missing-cwd-entry.sh":{"bytes":1717,"sha256":"ab5f459a4b11cdab1609427eafc1ef61ad8efe5f00bf509af0761788cafc2cdd","blob":"a7d74f95361e24266dbe40d2c8152ed9e8c5c8b6"},"race-creator.mjs":{"bytes":796,"sha256":"230646e18f8415fe169db7d00fdc4bb5dc121c139b0eea683703a1f0913c03e7","blob":"c07676beecea5a39c6546fe951bfcbd72369975d"},"lifetime-controls.py":{"bytes":9423,"sha256":"f1d825e74ac5f0e9ba4269cd666edc9d033b5054ca7d1dd97fe987c6265dfd01","blob":"989290de8e8339f3513af6b9f58c6780e46b9129"},"authority-anchor.json":{"bytes":1964,"sha256":"8192c65300f41a0aecfe9da931ca9b7a0d70e02155c0a982bb4756322de2d152","blob":"b24230e7fbaa660998aff46fce945f742711d86d"}},names=Object.keys(expected);assert.equal(names.length,33);assert.deepEqual(Object.keys(payload.helpers),names);
+           for(const name of names){assert.match(name,/^[a-z0-9][a-z0-9.-]{0,63}$/);const content=payload.helpers[name];assert.equal(typeof content,'string');const b=Buffer.from(content),pin=expected[name];assert(b.length<=32768);assert.equal(b.length,pin.bytes);assert.equal(sha(b),pin.sha256);assert.equal(blob(b),pin.blob);}
+           assert.equal(sha(Buffer.from(payload.helpers['matrix.json'])),expected['matrix.json'].sha256);
+           assert.equal(realpathSync(e.RUNNER_TEMP),e.RUNNER_TEMP);const tempStat=lstatSync(e.RUNNER_TEMP);assert(tempStat.isDirectory()&&tempStat.uid===process.getuid()&&(tempStat.mode&0o022)===0);
+           const root=join(e.RUNNER_TEMP,'afw-r3-delivery');mkdirSync(root,{mode:0o700});for(const name of names)writeFileSync(join(root,name),payload.helpers[name],{mode:0o600,flag:'wx'});
+           for(const name of names){const b=readFileSync(join(root,name));assert.equal(b.length,expected[name].bytes);assert.equal(sha(b),expected[name].sha256);assert.equal(blob(b),expected[name].blob);}
+           const binding={purpose:'afw.r3-delivery.binding.v1',source:e.GITHUB_SHA,sourceTree,run:e.GITHUB_RUN_ID,attempt:1,job:'readonly',node:process.versions.node};
+           writeFileSync(join(root,'context.json'),canonical(binding),{mode:0o600,flag:'wx'});r3diag('bootstrap_admitted');
+          }catch{process.exitCode=1;}
 
-          for(const l of lineages){assert.equal(l.C0,l.I0+900000);assert.equal(l.C1,l.C0+180000);assert.deepEqual(l.graphs.map(g=>g.role).sort(),['M','QA']);for(const graph of l.graphs)assert.match(graph.sha256,/^[a-f0-9]{64}$/);}
-          const jobs=jobInventory;assert.equal(jobs.total_count,7);assert(jobs.jobs.filter(job=>job.name!=='reduction_consume_b').every(job=>job.status==='completed'&&job.conclusion==='success'));
-          const intervals=jobs.jobs.filter(job=>job.name!=='contracts').flatMap(job=>[{at:Date.parse(job.started_at),delta:1},{at:job.completed_at?Date.parse(job.completed_at):Date.now(),delta:-1}]).sort((a,b)=>a.at-b.at||a.delta-b.delta);let nativeJobs=0,observedNativeJobPeak=0;for(const event of intervals){assert(Number.isSafeInteger(event.at));nativeJobs+=event.delta;observedNativeJobPeak=Math.max(observedNativeJobPeak,nativeJobs);}assert(observedNativeJobPeak<=3);
-          const summary={purpose:'afw.fixed-budget-coherent-private-proof.syn.v1',source:e.GITHUB_SHA,run:e.GITHUB_RUN_ID,attempt:1,businessCounts:{tests:16,pass:16,fail:0,cancelled:0,skipped:0,todo:0},Q:8,R:3,D:4,P:1,lineages,occurrenceProof,consumerOverlap:{aStart,aEnd,bStart,bEnd,allFourReady:Math.max(...allD.map(x=>x.recovery.pairReady)),C0:reductionCheckpoint.plan.C0},receipts,jobs:jobs.jobs.map(job=>({id:job.id,name:job.name,status:job.status,conclusion:job.conclusion,startedAt:job.started_at,completedAt:job.completed_at})),observedNativeJobPeak,nativeJobBound:3,miniflarePerJobBound:2,globalMiniflareBound:6,requiresRootAllTerminalReadback:true,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-          await writeFile(e.RUNNER_TEMP+'/afw-native-private/coherent-proof.json',JSON.stringify(summary,null,2));
-          await mkdir(e.RUNNER_TEMP+'/afw-qualification-safe',{mode:0o700});
-          await writeFile(e.RUNNER_TEMP+'/afw-qualification-safe/summary.json',JSON.stringify({purpose:'afw.fixed-budget-coherent-summary.syn.v1',source:e.GITHUB_SHA,run:e.GITHUB_RUN_ID,counts:summary.businessCounts,lineages:5,graphs:10,jobs:7,privateProofSha256:sha(Buffer.from(JSON.stringify(summary,null,2))),requiresRootAllTerminalReadback:true,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false},null,2));
-          
-          NODE
-      - name: Encrypt complete private evidence on success or failure
-        id: seal
-        if: always() && !cancelled() && steps.custody.outcome == 'success'
-        env:
-          COMMAND_OK: ${{ steps.native.outcome == 'success' && steps.aggregate.outcome == 'success' }}
-          SUCCESS_KIND: reduction-result-b
-          FAILURE_KIND: consumer-failure
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/logs/seal.log" 2>&1
-          import assert from 'node:assert/strict';import {mkdir,cp,writeFile,readFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';
-          import {sealDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          const e=process.env,ok=e.COMMAND_OK==='true',kind=ok?e.SUCCESS_KIND:e.FAILURE_KIND,root=e.RUNNER_TEMP+'/afw-native-private';
-          try{await cp('output',root+'/output',{recursive:true,errorOnExist:true,force:false});}catch(error){if(error.code!=='ENOENT')throw error;}
-          const manifest={purpose:'afw.fixed-budget-job.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,source:e.GITHUB_SHA,sourceTree:execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim(),run:e.GITHUB_RUN_ID,attempt:1,job:e.GITHUB_JOB,role:e.FIXED_ROLE,kind,group:e.AFW_BUDGET_GROUP,lane:e.FIXED_LANE,cases:JSON.parse(e.FIXED_CASES),commandSucceeded:ok,jobStarted:Number(e.AFW_JOB_STARTED_MS),sealedAt:Date.now(),operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false};
-          await writeFile(root+'/job-manifest.json',JSON.stringify(manifest,null,2));
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind};
-          const receipt=await sealDirectory({sourceDir:root,stagingDir:e.RUNNER_TEMP+'/afw-native-public',context});
-          await writeFile(e.GITHUB_OUTPUT,'kind='+kind+'\nenvelope-sha256='+receipt.envelopeSha256+'\n',{flag:'a'});
-          NODE
-          
-      - name: Upload encrypted envelope and closed receipts only
-        id: upload
-        if: always() && !cancelled() && steps.seal.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: finite-budget-reduction_consume_b-${{ github.sha }}-${{ github.run_id }}
-          path: ${{ runner.temp }}/afw-native-public/
-          retention-days: 7
-          if-no-files-found: error
-      - name: Download own exact assigned artifact ID
-        id: own_download
-        if: always() && !cancelled() && steps.upload.outcome == 'success'
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-native-readback
-          merge-multiple: true
-      - name: Authenticate own same-ID inner inventory readback
-        id: own_verified
-        if: always() && !cancelled() && steps.own_download.outcome == 'success'
-        env:
-          OWN_ARTIFACT_ID: ${{ steps.upload.outputs.artifact-id }}
-          OWN_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
-          OWN_KIND: ${{ steps.seal.outputs.kind }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          umask 077
-          node --input-type=module <<'NODE' >"$RUNNER_TEMP/afw-native-private/readback.log" 2>&1
-          import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {openDirectory} from './test/fixtures/finite-checkpoint-custody.mjs';
-          import {validateFixedBudgetJobManifest,collectFixedBudgetPeers} from './test/fixtures/finite-budget-world.mjs';
-          const e=process.env;assert.match(e.OWN_ARTIFACT_ID,/^[1-9][0-9]*$/);assert.match(e.OWN_DIGEST,/^[a-f0-9]{64}$/);
-          const context={purpose:'afw.finite-checkpoint-custody.syn.v1',repository:e.GITHUB_REPOSITORY,ref:e.GITHUB_REF,sourceSha:e.GITHUB_SHA,runId:e.GITHUB_RUN_ID,runAttempt:1,kind:e.OWN_KIND};
-          await openDirectory({stagingDir:e.RUNNER_TEMP+'/afw-native-readback',destinationDir:e.RUNNER_TEMP+'/afw-native-reopened',context});
-          const original=await readFile(e.RUNNER_TEMP+'/afw-native-private/job-manifest.json'),restored=await readFile(e.RUNNER_TEMP+'/afw-native-reopened/job-manifest.json');assert(original.equals(restored));
-          NODE
-          printf 'native_same_id_verified artifact_id=%s kind=%s\n' "$OWN_ARTIFACT_ID" "$OWN_KIND"
-          
-      - name: Preserve actual command and custody outcome
-        id: actual_outcome
-        if: always() && !cancelled()
-        shell: bash
-        run: |
-          set -euo pipefail
-          test '${{ steps.native.outcome }}' = success
-          test '${{ steps.aggregate.outcome }}' = success
-          test '${{ steps.own_verified.outcome }}' = success
-      - name: Bind closed summary to own verified native artifact
-        if: steps.aggregate.outcome == 'success' && steps.own_verified.outcome == 'success'
-        env:
-          NATIVE_ID: ${{ steps.upload.outputs.artifact-id }}
-          NATIVE_DIGEST: ${{ steps.upload.outputs.artifact-digest }}
-        shell: bash
-        run: |
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';import {readFile,writeFile} from 'node:fs/promises';import {createHash} from 'node:crypto';
-          const e=process.env,root=e.RUNNER_TEMP+'/afw-qualification-safe',summary=JSON.parse(await readFile(root+'/summary.json','utf8'));assert.match(e.NATIVE_ID,/^[1-9][0-9]*$/);assert.match(e.NATIVE_DIGEST,/^[a-f0-9]{64}$/);
-          summary.consumerBArtifactId=e.NATIVE_ID;summary.consumerBArtifactDigest=e.NATIVE_DIGEST;summary.consumerBSameIdReadback=true;
-          const bytes=Buffer.from(JSON.stringify(summary,null,2));await writeFile(root+'/summary.json',bytes);await writeFile(root+'/manifest.json',JSON.stringify({source:e.GITHUB_SHA,run:e.GITHUB_RUN_ID,attempt:1,files:[{path:'summary.json',bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}]}));
-          NODE
-      - name: Upload closed coherent counts and private-proof hash
-        id: summary_upload
-        if: steps.aggregate.outcome == 'success' && steps.own_verified.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: finite-budget-coherent-summary-${{ github.sha }}-${{ github.run_id }}
-          path: ${{ runner.temp }}/afw-qualification-safe/
-          retention-days: 7
-          if-no-files-found: error
-      - name: Download closed summary by its assigned ID
-        id: summary_download
-        if: steps.summary_upload.outcome == 'success'
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: ${{ github.run_id }}
-          artifact-ids: ${{ steps.summary_upload.outputs.artifact-id }}
-          path: ${{ runner.temp }}/afw-qualification-summary-readback
-          merge-multiple: true
-      - name: Verify closed summary exact-ID inventory
-        if: steps.summary_download.outcome == 'success'
-        env:
-          SUMMARY_ID: ${{ steps.summary_upload.outputs.artifact-id }}
-        shell: bash
-        run: |
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict';import {readFile,readdir} from 'node:fs/promises';import {createHash} from 'node:crypto';
-          const e=process.env,root=e.RUNNER_TEMP+'/afw-qualification-summary-readback';assert.match(e.SUMMARY_ID,/^[1-9][0-9]*$/);assert.deepEqual((await readdir(root)).sort(),['manifest.json','summary.json']);
-          const bytes=await readFile(root+'/summary.json'),manifest=JSON.parse(await readFile(root+'/manifest.json','utf8'));assert.equal(manifest.source,e.GITHUB_SHA);assert.equal(manifest.run,e.GITHUB_RUN_ID);assert.equal(manifest.attempt,1);assert.deepEqual(manifest.files,[{path:'summary.json',bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')}]);
-          for(const path of ['manifest.json','summary.json'])assert((await readFile(root+'/'+path)).equals(await readFile(e.RUNNER_TEMP+'/afw-qualification-safe/'+path)));
-          const summary=JSON.parse(bytes);assert.equal(summary.counts.pass,16);assert.equal(summary.requiresRootAllTerminalReadback,true);assert.equal(summary.operationalReadiness,false);console.log('CLOSED_SUMMARY_SAME_ID_VERIFIED '+e.SUMMARY_ID);
-          NODE
+          // Trusted outer: builtins only until the closed output boundary.
+          import * as r3fs from 'node:fs';
+          import {TextDecoder as R3Decoder} from 'node:util';
+          import {spawn as r3Spawn} from 'node:child_process';
+          import {createHash as r3Hash} from 'node:crypto';
+          const r3FallbackDelivery={"purpose":"afw.r3-delivery.unavailable.v1","reason":"outer_startup_unavailable","source":"unknown","sourceTree":"unknown","run":"unknown","attempt":"unknown","job":"unknown","node":"unknown","controls":"unknown","availability":"unavailable","sourceQualified":false,"collectionComplete":"unknown","sampleObserved":"unknown","nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}},r3FallbackControls={"purpose":"afw.r3-delivery.controls-unavailable.v1","reason":"outer_startup_unavailable","source":"unknown","sourceTree":"unknown","run":"unknown","attempt":"unknown","job":"unknown","node":"unknown","allPassed":"unknown","expected":100,"passed":"unknown","failed":"unknown","unknown":"unknown","results":"unknown","mutants":"unknown","nativeBusinessCases":0,"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}};
+          async function runDelivery(){return await r3Outer('delivery');}
+          async function runControls(){return await r3Outer('controls');}
+          async function r3Outer(kind){
+           let stage='binding_unavailable',image,creatorHandle,helperHandle;
+           const emit=(record,marker)=>{const b=Buffer.from(marker+' '+JSON.stringify(record)+'\n');if(r3fs.writeSync(1,b)!==b.length)throw 1;};
+           const fallback=reason=>{emit({...(kind==='controls'?r3FallbackControls:r3FallbackDelivery),reason},kind==='controls'?'AFW_R3_DELIVERY_CONTROLS_UNAVAILABLE/1':'AFW_R3_DELIVERY_UNAVAILABLE/1');return 23;};
+           try{
+            const {openSync,fstatSync,readSync,closeSync,constants}=r3fs,TextDecoder=R3Decoder;
+            const invalid=()=>{const e=new Error();e.code='AFW_INVALID';return e;};
+          const uid=process.getuid(),dirFlags=constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW;
+          function checked(fd,directory){const s=fstatSync(fd);if((directory?!s.isDirectory():!s.isFile())||s.uid!==uid||(s.mode&0o022)!==0||(!directory&&(s.nlink!==1||(s.mode&0o077)!==0)))throw invalid();return s;}
+          function readFixed(base,parts,max){
+           let fd,leaf;
+           try{fd=openSync(base,dirFlags);checked(fd,true);for(const part of parts.slice(0,-1)){if(!/^[a-zA-Z0-9.-]+$/.test(part))throw invalid();const next=openSync('/proc/self/fd/'+fd+'/'+part,dirFlags);try{checked(next,true);}catch(e){closeSync(next);throw e;}closeSync(fd);fd=next;}
+           leaf=openSync('/proc/self/fd/'+fd+'/'+parts.at(-1),constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);const before=checked(leaf,false);if(before.size>max)throw invalid();
+           const out=Buffer.alloc(max+1);let offset=0;while(offset<out.length){const n=readSync(leaf,out,offset,out.length-offset,null);if(n===0)break;offset+=n;}const after=checked(leaf,false);
+           if(offset>max||offset!==before.size||before.dev!==after.dev||before.ino!==after.ino||before.size!==after.size||before.mtimeMs!==after.mtimeMs||before.ctimeMs!==after.ctimeMs)throw invalid();
+           // ignoreBOM:true PRESERVES U+FEFF; ASCII/canonical receivers must reject it.
+           try{return new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(out.subarray(0,offset));}catch{throw invalid();}
+           }finally{if(leaf!==undefined)closeSync(leaf);if(fd!==undefined)closeSync(fd);}
+          }
+          function jsonFixed(base,parts,max){const raw=readFixed(base,parts,max),v=JSON.parse(raw);if(JSON.stringify(v)!==raw)throw invalid();return v;}
+
+            function shape(v,s){
+           const need=x=>{if(!x)throw 1;};
+           if(s.anyOf){let count=0;for(const one of s.anyOf)try{shape(v,one);count++;}catch{}need(count===1);return;}
+           if(s.enum){need(s.enum.some(x=>Object.is(x,v)));return;}
+           if(s.type==='null'){need(v===null);return;}
+           if(s.type==='integer'){need(Number.isSafeInteger(v)&&v>=s.minimum&&v<=s.maximum);return;}
+           if(s.type==='string'){need(typeof v==='string'&&new RegExp(s.pattern).test(v));return;}
+           if(s.type==='array'){need(Array.isArray(v)&&v.length>=s.minItems&&v.length<=s.maxItems);for(const x of v)shape(x,s.items);return;}
+           if(s.type==='object'){need(v&&typeof v==='object'&&!Array.isArray(v)&&s.additionalProperties===false&&JSON.stringify(Object.keys(v).sort())===JSON.stringify(s.required.slice().sort()));for(const k of s.required)shape(v[k],s.properties[k]);return;}throw 1;
+          }
+
+            const need=x=>{if(!x)throw 1;},eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+            const base=process.env.RUNNER_TEMP,e=process.env;
+            need(process.versions.node==='22.23.4'&&typeof base==='string'&&base.startsWith('/')&&base.length<=4096&&!base.includes('\0')&&r3fs.realpathSync(base)===base);
+            const own=openSync(base+'/afw-r3-delivery',constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW);try{const s=fstatSync(own);need(s.isDirectory()&&s.uid===process.getuid()&&!(s.mode&0o077));}finally{closeSync(own);}
+            const boundImage=fstatSync(3),runningImage=r3fs.statSync('/proc/self/exe');need(boundImage.isFile()&&boundImage.dev===runningImage.dev&&boundImage.ino===runningImage.ino&&boundImage.size===runningImage.size);
+            const c=jsonFixed(base,['afw-r3-delivery','context.json'],2048);
+            need(['purpose','source','sourceTree','run','job','node'].every(k=>typeof c[k]==='string')&&eq(Object.keys(c),['purpose','source','sourceTree','run','attempt','job','node'])&&c.purpose==='afw.r3-delivery.binding.v1'&&c.node==='22.23.4'&&c.attempt===1&&c.job==='readonly'&&/^[a-f0-9]{40}$/.test(c.source)&&/^[a-f0-9]{40}$/.test(c.sourceTree)&&/^[1-9][0-9]{0,19}$/.test(c.run));
+            for(const[k,v]of Object.entries({GITHUB_SHA:c.source,GITHUB_RUN_ID:c.run,GITHUB_RUN_ATTEMPT:'1',GITHUB_JOB:'readonly',GITHUB_REPOSITORY:'tokenizartinfo-ops/agent-friendly-web',GITHUB_REPOSITORY_ID:'1347578006',GITHUB_REF:'refs/heads/feat/finite-native-cleanup-20261101'}))need(e[k]===v);
+            const ctx={source:c.source,tree:c.sourceTree,run:c.run,attempt:1,job:'readonly'};
+            // Immutable Source-code authority; NOT a child-readable authority-file load.
+            const R3_AUTHORITY_ANCHOR={"site-schema.json":{"bytes":12651,"sha256":"5b55423937bbe38a18f1bbb8196d8cd85336d81187810b8c5b5abe8a593c37fd","blob":"4871edc102386fe6db65c773e51c21ecb94897e3","framing":"canonical-json+lf"},"site-map.json":{"bytes":6630,"sha256":"1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","blob":"57c5a96710f0a2d97656b400882d8b4b4a1a7e2f","framing":"canonical-json"},"envelope-schema.json":{"bytes":5616,"sha256":"49c2a27cf977f0c9247fb8f20539fb29a9ca002294d86eeb0d9db8f876e090e5","blob":"90831bbc3035d944c4ae8f96d2cfa6b24362eb9f","framing":"canonical-json"},"delivery-schema.json":{"bytes":1380,"sha256":"d8332c8bf26c4224bd2a5da321dc50a28a2d6391b294bc262a438c2638fa2f60","blob":"ae706e0e659d0ee7647bbec8e6b3d9ebbcac3df8","framing":"canonical-json"},"unavailable-schema.json":{"bytes":1315,"sha256":"10d6dee3228f75a1ea09ebfa365287a460ec06537c8c0a3e3bb11702605806f9","blob":"4a310ddcef7b1b7bf0755bf56b760486254cf8c6","framing":"canonical-json"},"controls-schema.json":{"bytes":4601,"sha256":"8827165f3446a15740c5b88f9c88fe421ab1a9dc8aaba4cb9256f9f1223e19a1","blob":"caa131fd19bbbc155945ef0bc34a671ed3c61fa3","framing":"canonical-json"},"matrix.json":{"bytes":22682,"sha256":"95a6d8e04dae765e2a0957042c09a06ea3c5ce50bad4c48a627e8799e19976f2","blob":"baa7b277322832c41cd76c74b6d4350d226f645f","framing":"canonical-json"},"fixtures.json":{"bytes":7864,"sha256":"973df286e2c073b2e3d55c6a0d60c410ca9786672f8737da300ec16add2753f2","blob":"bbdaf529bd63bbd39801bf88d47921cd55f796bc","framing":"canonical-json"},"examples.json":{"bytes":21640,"sha256":"efc3aadeed12bbc2ad894e02992643e3f81c11e738ab48081c2d8bdae95d4f00","blob":"fbd7525c44a4706275f2a30eb471f38f9d15da20","framing":"canonical-json"},"controls-unavailable-example.json":{"bytes":568,"sha256":"f51a998884886cbb6b682a1e1844c6c41b190ac1df6860c7498871de123011af","blob":"58b1fa7858f6fc87e7164913427edefa9b24c22a","framing":"canonical-json"}};
+            const freeze=v=>{if(v&&typeof v==='object'){for(const x of Object.values(v))freeze(x);Object.freeze(v);}return v;},authority={};
+            for(const[name,pin]of Object.entries(R3_AUTHORITY_ANCHOR)){
+             const raw=readFixed(base,['afw-r3-delivery',name],pin.bytes),bytes=Buffer.from(raw);
+             need(bytes.length===pin.bytes&&r3Hash('sha256').update(bytes).digest('hex')===pin.sha256&&r3Hash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex')===pin.blob);
+             const parsed=JSON.parse(raw),framed=JSON.stringify(parsed)+(pin.framing==='canonical-json+lf'?'\n':'');need(raw===framed);authority[name]=freeze(parsed);
+            }freeze(authority);
+            const checkContext=r=>{for(const k of ['source','sourceTree','run','attempt','job','node'])need(r[k]===c[k]);};
+            const matrix=authority['matrix.json'],reportSchema=authority['controls-schema.json'],ids=matrix.ordered.map(x=>x.id),mutants=matrix.mutants;
+            function report(r){
+             shape(r,reportSchema);checkContext(r);need(r.matrixSha256===R3_AUTHORITY_ANCHOR['matrix.json'].sha256&&r.expected===ids.length&&r.nativeBusinessCases===0&&eq(r.results.map(x=>x.id),ids)&&eq(r.mutants.map(x=>x.id),mutants.map(x=>x.id)));
+             for(const name of ['passed','failed','unknown'])need(r[name]===r.results.filter(x=>x.result===name).length);
+             for(let i=0;i<mutants.length;i++){const x=r.mutants[i],wanted=mutants[i];need(eq(x.expectedFailedIds,wanted.expectedFailedIds));need(eq(x.actualFailedIds,ids.filter(id=>x.actualFailedIds.includes(id)))&&new Set(x.actualFailedIds).size===x.actualFailedIds.length);if(x.result==='passed')need(eq(x.actualFailedIds,wanted.expectedFailedIds));if(x.result==='failed')need(!eq(x.actualFailedIds,wanted.expectedFailedIds));}
+             const order=['baseline',...mutants.map(x=>x.id)].flatMap(group=>ids.map(id=>group+':'+id)),cl=r.cleanup;
+             for(const k of ['failedInstances','unknownInstances'])need(eq(cl[k],order.filter(id=>cl[k].includes(id)))&&new Set(cl[k]).size===cl[k].length);need(!cl.failedInstances.some(id=>cl.unknownInstances.includes(id)));
+             const passed=r.passed===ids.length&&r.failed===0&&r.unknown===0&&r.mutants.every(x=>x.result==='passed')&&cl.complete===true&&cl.failedInstances.length===0&&cl.unknownInstances.length===0;
+             need(r.allPassed===passed);return passed;
+            }
+            const admitSource=function(wire,ctx,schema,expected,aliases){
+           const admitted=(function(wire,ctx,schema,expected,aliases){
+           const need=(x,m)=>{if(!x)throw Error("site:"+m);},eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+           function shape(v,s){if(s.anyOf){need(s.anyOf.filter(t=>{try{shape(v,t);return true;}catch{return false;}}).length===1,"union");return;}if(s.enum){need(s.enum.some(x=>Object.is(v,x)),"enum");return;}switch(s.type){case"null":need(v===null,"null");break;case"boolean":need(typeof v==="boolean","boolean");break;case"integer":need(Number.isSafeInteger(v)&&v>=s.minimum&&v<=s.maximum,"integer");break;case"string":need(typeof v==="string"&&new RegExp(s.pattern).test(v),"string");break;case"array":need(Array.isArray(v)&&v.length>=s.minItems&&v.length<=s.maxItems,"array");v.forEach(x=>shape(x,s.items));break;case"object":need(v&&typeof v==="object"&&!Array.isArray(v)&&s.additionalProperties===false&&eq(Object.keys(v).sort(),s.required.slice().sort()),"keys");s.required.forEach(k=>shape(v[k],s.properties[k]));break;default:throw Error("schema");}}
+           need(typeof wire==="string"&&wire.length<=16384&&/^[\x20-\x7E]*$/.test(wire),"wire");const r=JSON.parse(wire);need(JSON.stringify(r)===wire,"canonical");shape(r,schema);
+           need(ctx.attempt===1&&r.attempt===ctx.attempt&&ctx.job==="readonly"&&r.job===ctx.job&&r.source===ctx.source&&r.run===String(ctx.run),"context");
+           need(r.sourceTree===null||r.sourceTree===ctx.tree,"tree");
+           for(const k of["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"])need(r[k]===false,k);
+           const n=r.businessCommand,p=r.sourceProof,proof=r.programProof;
+           need(p.mapBlob==="57c5a96710f0a2d97656b400882d8b4b4a1a7e2f"&&p.mapSha256==="1be6536669654bcc8c181ed7057b189352bef9b0587eb75f4124500477e4f2fe","map");
+           if(r.controls.passed)need(r.controls.count===6&&r.controls.expected===6&&r.controls.usableShape&&r.controls.usableColumns,"controls");
+           if(r.pure.passed)need(r.controls.passed&&r.pure.cases===8&&r.pure.expected===8,"pure");
+           if(r.profile.passed)need(r.pure.passed&&r.profile.group==="readonly","profile");
+           if(n.started===true){need(r.node==="22.23.4"&&r.sourceTree===ctx.tree&&proof.verified&&proof.count===18&&proof.setSha256===expected.programSet&&proof.payloadExpandedSha256===expected.expanded&&proof.coreGitVerified&&proof.prefixVerified,"programproof");need(p.mapVerified&&p.worldBeforeVerified&&p.nativeBeforeVerified&&r.controls.passed&&r.pure.passed&&r.profile.passed,"nativegates");}
+           else need(n.ended===false&&n.exitCode===null&&r.readonly===null,"notobserved");
+           if(n.ended)need(n.started===true,"ended");
+           if(["SIGTERM","SIGKILL","SIGINT"].includes(n.signal))need(n.started===true&&n.ended===true,"signalclosed");
+           if(n.started===false)need(n.signal==="none","nostartsignal");
+           if(n.started===null)need(n.signal==="unknown","unknownstartsignal");
+           if(n.exitCode!==null)need(n.ended&&n.signal==="none","exit");
+           const q=r.readonly;let known=0;
+           if(q){
+            need(eq(q.rows.map(x=>x.case),["R1","R2","R3"]),"rows");
+            for(const row of q.rows)need((row.result==="failed")===(row.error!==null),"rowerror");
+            for(const error of[...q.rows.map(x=>x.error),q.precase?.error].filter(Boolean)){need(error.sourceSite==="unknown"||aliases.includes(error.sourceSite),"alias");if(error.causeCode!=="ERR_ASSERTION")need(error.sourceSite==="unknown","nonassert");if(error.sourceSite!=="unknown")known++;}
+            const first=q.precase?{target:"native_file",error:q.precase.error}:q.rows.filter(x=>x.result==="failed").map(x=>({target:x.case,error:x.error}))[0]??null;
+            need(eq(q.firstFailure,first),"first");
+            if(q.valid){
+             need(q.ended&&n.ended&&n.signal==="none"&&q.summary!==null&&q.state!=="unknown","validend");
+             for(const error of [...q.rows.map(x=>x.error),q.precase?.error].filter(Boolean))need(!["testTimeoutFailure","cancelledByParent","testAborted"].includes(error.wrapperFailureType),"cancelledcoverage");
+             const file=q.state==="file_failure";if(file)need(q.precase?.result==="failed"&&q.rows.every(x=>x.result==="not_observed"),"file");else need(q.precase===null&&q.rows.every(x=>["passed","failed"].includes(x.result)),"cases");
+             const pass=file?0:q.rows.filter(x=>x.result==="passed").length,fail=file?1:3-pass,counts={cancelled:0,failed:fail,passed:pass,skipped:0,suites:0,tests:file?1:3,todo:0,topLevel:file?1:3};
+             for(const[k,v]of Object.entries(counts))need(q.summary.counts[k]===v,"counts"+k);
+             need(q.summary.success===(fail===0)&&q.state===(file?"file_failure":fail?"case_failure":"all_pass")&&(n.exitCode===0)===(fail===0),"result");
+            }else need(q.state==="unknown"&&q.summary===null,"unknownstream");
+           }
+           if(known>0)need(p.mapVerified&&p.worldBeforeVerified&&p.nativeBeforeVerified&&p.worldAfterVerified&&p.nativeAfterVerified&&p.originalBodiesUnchanged,"usableprovenance");
+           need(r.usableLocationCount===known,"locationcount");need(r.collectionComplete===(r.stage==="complete"),"coverage");
+           if(r.stage==="complete")need(n.started===true&&n.ended&&n.signal==="none"&&Number.isSafeInteger(n.exitCode)&&q?.valid&&p.mapVerified&&p.worldBeforeVerified&&p.nativeBeforeVerified&&p.worldAfterVerified&&p.nativeAfterVerified&&p.originalBodiesUnchanged,"complete");
+           if(r.stage==="hold")need(n.started===false,"hold");
+           return{record:r,diagnosticCollectionComplete:r.collectionComplete,usableLocationCount:known,commandExitedZero:n.ended&&n.exitCode===0&&n.signal==="none",historicalCauseProven:false,operationalReadiness:false,PCoff:false};
+          })(wire,ctx,schema,expected,aliases),r=admitted.record;
+           const need=(x,m)=>{if(!x)throw Error('Root readonly provenance: '+m);};
+           need(r.sourceTree===ctx.tree&&r.node==='22.23.4'&&['complete','unknown'].includes(r.stage),'context-stage');
+           const p=r.programProof,s=r.sourceProof,n=r.businessCommand;
+           need(p.verified===true&&p.count===18&&p.setSha256===expected.programSet&&p.payloadExpandedSha256===expected.expanded&&p.coreGitVerified===true&&p.prefixVerified===true,'all-program-proofs');
+           need(['mapVerified','worldBeforeVerified','nativeBeforeVerified','worldAfterVerified','nativeAfterVerified','originalBodiesUnchanged'].every(k=>s[k]===true),'all-source-proofs');
+           need(r.controls.passed===true&&r.controls.count===6&&r.controls.expected===6&&r.controls.usableShape===true&&r.controls.usableColumns===true,'controls');
+           need(r.pure.passed===true&&r.pure.cases===8&&r.pure.expected===8&&r.profile.passed===true&&r.profile.group==='readonly','pure-profile');
+           need(n.started===true&&n.ended===true&&['none','SIGTERM','SIGKILL','SIGINT'].includes(n.signal),'original-command-terminal');
+           return {...admitted,sourceQualifiedForSample:true,NativePassClaimed:false};
+          }
+          ,admitSample=function(wire,ctx){
+           const need=(v,m)=>{if(!v)throw Error("r3sample:"+m);},eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+           const keys=(v,ks)=>need(v&&typeof v==="object"&&!Array.isArray(v)&&eq(Object.keys(v).sort(),ks.slice().sort()),"keys");
+           const one=(v,vs)=>vs.some(x=>Object.is(x,v)),u="unknown",count=(v,max,min=0)=>v===u||Number.isSafeInteger(v)&&v>=min&&v<=max;
+           need(typeof wire==="string"&&wire.length<=4096&&/^[\x20-\x7E\n]*$/.test(wire),"wire");
+           const r=JSON.parse(wire);need(wire===JSON.stringify(r)||wire===JSON.stringify(r)+"\n","canonical");
+           keys(r,["purpose","source","run","attempt","case","sampleState","sample","nonclaims"]);
+           need(r.purpose==="afw.r3-existing-sample.syn.v1"&&r.case==="R3"&&ctx.attempt===1&&r.attempt===1&&r.source===ctx.source&&r.run===String(ctx.run)&&/^[a-f0-9]{40}$/.test(r.source)&&/^[1-9][0-9]{0,19}$/.test(r.run),"context");
+           need(ctx.sourceQualified===true,"sourceproof");need(one(r.sampleState,["observed","not_observed"]),"state");
+           const fs=["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"];keys(r.nonclaims,fs);fs.forEach(k=>need(r.nonclaims[k]===false,k));
+           const s=r.sample,bs=["observerInvalid","queueObserverInvalid","sdkObserverInvalid","childAbortSeen","parentAliveAtAbort","workPendingAtAbort","sameWorkWaitError"],ks=["inputSeeded","seedEntries","lists","gets","nativeInvoked","nativeSettled","nativeRejected","nativeUnsettled","outwardPending","heldNativeSettled",...bs,"selectedChildCount","selectedChildOrdinal","selectedChildFamily","childWorkStatus","childWaitStatus","queueCount","lastQueueFamily","lastQueueChild","lastQueueActive","lastQueueQueued","lastQueueMethod","heldOperationCount","phase"];keys(s,ks);
+           need(one(s.inputSeeded,[true,false,u]),"seed");need(count(s.seedEntries,201),"entries");bs.forEach(k=>need(one(s[k],[true,false,u]),k));
+           for(const[k,max,min]of[["lists",2,0],["gets",200,0],["nativeInvoked",202,0],["nativeSettled",202,0],["nativeRejected",202,0],["nativeUnsettled",2,0],["outwardPending",2,0],["heldNativeSettled",2,0],["selectedChildOrdinal",65535,1],["queueCount",512,0],["lastQueueChild",65535,1],["lastQueueQueued",200,0]])need(count(s[k],max,min),k);
+           need(one(s.selectedChildCount,[0,1,"multiple",u]),"children");need(one(s.selectedChildFamily,[1,2,u]),"family");for(const k of ["childWorkStatus","childWaitStatus"])need(one(s[k],["unregistered","pending","fulfilled","rejected",u]),k);
+           for(const k of ["lastQueueFamily","lastQueueActive"])need(one(s[k],[1,2,u]),k);need(one(s.lastQueueMethod,["get","list","delete",u]),"method");need(one(s.heldOperationCount,[0,1,2,"multiple",u]),"held");
+           keys(s.phase,["completeWrites","completeNormal","lookupStage","authorizePostFinally"]);for(const k of["completeWrites","completeNormal"])need(one(s.phase[k],[0,1,"multiple",u]),k);need(one(s.phase.lookupStage,["not_seen","entered","exited",u]),"lookup");need(one(s.phase.authorizePostFinally,["not_seen","one","multiple",u]),"postfinally");
+           if(s.selectedChildCount!==1)for(const k of ["selectedChildOrdinal","selectedChildFamily","childWorkStatus","childWaitStatus","childAbortSeen","parentAliveAtAbort","workPendingAtAbort","sameWorkWaitError"])need(s[k]===u,"childassociation");
+           if(s.queueCount===0||s.queueCount===u)for(const k of ["lastQueueFamily","lastQueueChild","lastQueueActive","lastQueueQueued","lastQueueMethod"])need(s[k]===u,"queueassociation");
+           if(s.inputSeeded!==true)need(s.seedEntries===u,"seedassociation");
+           if(s.inputSeeded===true)need(Number.isSafeInteger(s.seedEntries)&&s.seedEntries>=0&&s.seedEntries<=201,"seedmarker");
+           if(r.sampleState==="not_observed"){for(const k of ks.filter(x=>x!=="phase"))need(s[k]===u,"absence");for(const v of Object.values(s.phase))need(v===u,"phaseabsence");}
+           return {record:r,sourceQualified:true,sampleObserved:r.sampleState==="observed",historicalCauseProven:false,operationalReadiness:false,PCoff:false};
+          }
+          ;
+          ;
+
+            let controlsBefore=false,sourceBefore=null;
+            if(kind==='delivery'){
+             try{controlsBefore=report(jsonFixed(base,['afw-r3-delivery','controls-report.json'],24576));}catch{}
+             try{sourceBefore=admitSource(readFixed(base,['afw-site','public-result.json'],16384),ctx,authority['site-schema.json'],{programSet:'71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af',expanded:'cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91'},authority['site-map.json'].spans.map(x=>x.alias));}catch{}
+            }
+            // CURRENT kernel image, independent of all child-readable context/path data.
+            image=openSync('/proc/self/exe',constants.O_RDONLY);const actual=fstatSync(image),current=r3fs.statSync('/proc/self/exe');need(actual.isFile()&&actual.dev===current.dev&&actual.ino===current.ino&&actual.size===current.size);
+            // AFW_POST_ADMISSION_CONTROL_HOOK
+            stage='helper_unavailable';readFixed(base,['afw-r3-delivery',kind==='controls'?'controls-boundary.py':'boundary.py'],32768);readFixed(base,['afw-r3-delivery','lifetime.py'],32768);
+            creatorHandle=openSync('/proc/thread-self',constants.O_RDONLY|constants.O_DIRECTORY);helperHandle=openSync(base+'/afw-r3-delivery',constants.O_RDONLY|constants.O_DIRECTORY|constants.O_NOFOLLOW);
+            const env={};for(const k of ['PATH','HOME','RUNNER_TEMP','CI','LANG','TZ','GITHUB_REPOSITORY','GITHUB_REPOSITORY_ID','GITHUB_REF','GITHUB_SHA','GITHUB_RUN_ID','GITHUB_RUN_ATTEMPT','GITHUB_JOB','GITHUB_WORKFLOW_REF'])if(e[k]!==undefined)env[k]=e[k];
+            stage='parent_unavailable';
+            const captured=await new Promise(resolve=>{
+             let child,done=false,overflow=false,out=Buffer.alloc(0),err=Buffer.alloc(0),timer;
+             const finish=(code=null,signal='unknown')=>{if(done)return;done=true;clearTimeout(timer);resolve({code,signal,out,err,overflow});};
+             const stop=()=>{try{child?.kill('SIGKILL');}catch{}};
+             try{child=r3Spawn('/usr/bin/python3',['-I','-S','/proc/self/fd/6/lifetime.py',kind==='controls'?'parent-controls':'parent-delivery'],{env,stdio:['ignore','pipe','pipe',image,creatorHandle,'ignore',helperHandle]});}catch{finish();return;}
+             const retain=(which,chunk,cap)=>{const prior=which==='out'?out:err,kept=Buffer.concat([prior,chunk.subarray(0,cap+1-prior.length)]);if(which==='out')out=kept;else err=kept;if(prior.length+chunk.length>cap){overflow=true;stop();}};
+             child.stdout.on('data',b=>retain('out',b,kind==='controls'?24576:8192));child.stderr.on('data',b=>retain('err',b,4096));child.on('error',()=>{stop();finish();});child.on('close',(code,signal)=>finish(code,signal??'none'));
+             timer=setTimeout(()=>{overflow=true;stop();},kind==='controls'?110000:4000);
+            });
+            need(!captured.overflow&&captured.err.length===0&&captured.signal==='none'&&[0,23].includes(captured.code));
+            stage='record_invalid';
+            const raw=new R3Decoder('utf-8',{fatal:true,ignoreBOM:true}).decode(captured.out);need(/^[\x20-\x7e\n]*$/.test(raw));
+            const lines=raw.split('\n');need(lines.pop()===''&&lines.every(x=>x.length>0));
+            const parse=(line,marker)=>{need(line.startsWith(marker+' '));const text=line.slice(marker.length+1),v=JSON.parse(text);need(JSON.stringify(v)===text);return v;};
+            if(kind==='controls'){
+             need(lines.length===1);const r=parse(lines[0],'AFW_R3_DELIVERY_CONTROLS/1'),passed=report(r);need(captured.code===(passed?0:23));emit(r,'AFW_R3_DELIVERY_CONTROLS/1');return passed?0:23;
+            }
+            need(controlsBefore);
+            const d=parse(lines.at(-1),'AFW_R3_DELIVERY/1');shape(d,authority['delivery-schema.json']);checkContext(d);
+            if(d.sourceQualified)need(sourceBefore?.sourceQualifiedForSample===true&&d.collectionComplete===sourceBefore.diagnosticCollectionComplete);
+            if(d.availability==='available'){
+             need(lines.length===2&&captured.code===0&&d.sourceQualified===true&&d.reason==='none');const s=parse(lines[0],'AFW_R3_EXISTING_SAMPLE/1');shape(s,authority['envelope-schema.json'].properties.sample.anyOf[0]);
+             // Final independent normalized association/absence authority, BEFORE any write.
+             admitSample(JSON.stringify(s),{...ctx,sourceQualified:true});
+             need(d.sampleObserved===(s.sampleState==='observed'));const b=Buffer.from(raw);need(r3fs.writeSync(1,b)===b.length);return 0;
+            }
+            need(lines.length===1&&captured.code===23&&d.sampleObserved==='unknown'&&d.reason!=='none');
+            if(d.sourceQualified)need(['sample_missing','sample_invalid','io_unavailable'].includes(d.reason)&&typeof d.collectionComplete==='boolean');
+            else need(['source_missing','source_invalid','io_unavailable'].includes(d.reason)&&d.collectionComplete==='unknown');
+            emit(d,'AFW_R3_DELIVERY/1');return 23;
+           }catch{return fallback(stage);}finally{for(const fd of[image,creatorHandle,helperHandle])if(fd!==undefined)try{r3fs.closeSync(fd);}catch{}}
+          }
+          AFW_R3_DIAG_NODE
+          } 2>/dev/null
+          r3_bootstrap_status=$?
+          { exec 11>&-; } 2>/dev/null
+          {
+          /usr/bin/python3 -I -S - "$r3_bootstrap_status" <<'AFW_R3_DIAG_FORMATTER'
+          # Fixed Source-literal initial-only trace receiver and single final formatter.
+          import os,sys,stat,fcntl,json
+          record={"purpose":"afw.r3-delivery.startup-diagnostic.v1","scope":"source_initial_only","result":"unavailable","lastObserved":"unknown","controlsInvoked":0,"originalCLIInvoked":0,"nativeBusinessCases":0,"qualification":False,"nonclaims":{"historicalCauseProven":False,"receiptAuthenticated":False,"operationalReadiness":False,"completePackage":False,"PCoff":False,"globalNativeDrainVerified":False,"sdkNamespaceEmptyVerified":False}}
+          stages=["cwd_checked","python_entered","imports_ready","creator_checked","pdeath_checked","image_checked","exec_handoff","node_entered","binding_checked","bootstrap_admitted"]
+          valid=False
+          try:
+           if len(sys.argv)!=2 or not sys.argv[1].isdigit() or not 0<=int(sys.argv[1])<=255:raise ValueError()
+           status=int(sys.argv[1]);before=os.fstat(10)
+           if not(stat.S_ISREG(before.st_mode) and before.st_uid==os.getuid() and before.st_nlink==0 and before.st_mode&0o777==0o600 and before.st_size<=256 and fcntl.fcntl(10,fcntl.F_GETFL)&os.O_ACCMODE==os.O_RDONLY and os.lseek(10,0,os.SEEK_CUR)==0):raise ValueError()
+           raw=os.read(10,257);after=os.fstat(10)
+           if (before.st_dev,before.st_ino,before.st_mode,before.st_uid,before.st_nlink,before.st_size,before.st_mtime_ns,before.st_ctime_ns)!=(after.st_dev,after.st_ino,after.st_mode,after.st_uid,after.st_nlink,after.st_size,after.st_mtime_ns,after.st_ctime_ns):raise ValueError()
+           if len(raw)!=before.st_size or not 0<len(raw)<=256 or not raw.endswith(b'\n') or any(x<32 or x>126 for x in raw if x!=10):raise ValueError()
+           values=raw.decode('ascii').split('\n')[:-1]
+           if not values or values!=stages[:len(values)]:raise ValueError()
+           record['lastObserved']=values[-1];valid=True
+           if status==0 and values==stages:record['result']='bootstrap_admitted'
+          except BaseException:pass
+          wire=("AFW_R3_DELIVERY_STARTUP_DIAGNOSTIC/1 "+json.dumps(record,separators=(',',':'),ensure_ascii=True)+'\n').encode('ascii')
+          if len(wire)>2048:raise SystemExit(1)
+          try:
+           if os.write(1,wire)!=len(wire):raise SystemExit(1)
+          except BaseException:raise SystemExit(1)
+          raise SystemExit(0 if valid and record['result']=='bootstrap_admitted' else 23)
+          AFW_R3_DIAG_FORMATTER
+          } 2>/dev/null
+          r3_formatter_status=$?
+          { exec 10<&-; } 2>/dev/null
+          case "$r3_formatter_status" in
+            0) exit 0 ;;
+            23) exit 1 ;;
+            *) printf '%s\n' 'AFW_R3_DELIVERY_STARTUP_DIAGNOSTIC/1 {"purpose":"afw.r3-delivery.startup-diagnostic.v1","scope":"source_initial_only","result":"unavailable","lastObserved":"unknown","controlsInvoked":0,"originalCLIInvoked":0,"nativeBusinessCases":0,"qualification":false,"nonclaims":{"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false}}' 2>/dev/null; exit 1 ;;
+          esac 2>/dev/null
