@@ -47,3 +47,73 @@ Only GitDB reads/creates and RAM DATA parse/hash/gzip/base64 operations occurred
 Remote final readback: direct parent/tree exact; full inactive F7/active F7/SAME equal proposal; Source ref still8c065ff3a78c39c17a906990beec640e7c83b1a4; main still0c9c475b3ebaa970fc11d628b40e50a90cceb727. Earlier inactive48a97874 and its blobs were superseded while unattached, without execution. No claim that any control passed.
 
 Root next: pre-execution independent gate, one controls-only Source qualification, originalF7 restoration/full-prefix preservation/terminal readback, then independent task review specifically of successor/I3. Native Gate2 remains held; only a later separate explicit release may invoke the original readonly CLI once. Carrier collection.sh stays retired and I3 OPEN until those gates accept evidence.
+
+
+
+# Correction round1/5 — successor task DATA preparation supplement
+
+This APPENDS to report5085fa6283546b9338a45fa80e34e3d92e680fec verbatim; the earlier preparation and pins remain historical. Requirements cfc0690c5a06211dc750aca5aa00eed4219a8f24 and review05ccd586cd99bc31f70be80e97732ce02a13b949 were read first, all eight Important findings verbatim. Root accepted all eight for one aggregate correction. Fix-loop instructions were read. Status: DONE_WITH_CONCERNS, DATA prepared; no finding/I3 is claimed corrected or passing before covering controls and scoped review.
+
+Actual43682038783/1 is consumed. Its loader succeeded and only fixed CLOSED unavailable was received; all normal controls/mutant measurements remain unknown and its startup cause UNKNOWN. No current code defect is attributed as that historical cause. No rerun/ref/run/Native by this implementer.
+
+## Final review pins and preservation
+
+Inactive **86e5dadaf66b7517282a35d17620f54c37c20991**, sole direct parent **e27fb843542eaf8868724b9d2f89c9ed348bb01e**, full tree **924dafff255a274d2fea58c51b41ee2f6381fbee**. GitDB commit+untruncated recursive-tree readback:3203 blob leaves before/after, zero missing, EXACTLY TWO differences:
+- F7 **e422e9e19b7904627d2b6eb53edaef6fa4ed98f0**,41073B/SHA256abb6f6f6903ac9622e2b971701a6c617f4d5b7daeb70bec00b1e5b233b21e0fc; readonly if false.
+- SAME **cea5d6f0bdcc429a436df863e6edcb146ce122a6**,1598022B/SHA256365b4427d8cdcc6c08e554293e39340ae3004d034eba9e0740506e84fae91057.
+
+Separate CONTROLS-ONLY activeF7 DATA **28217b649109a867ab5d3909ad727c8fca096ed0**,41346B/SHA2567f387a205d85930d7c7659bfea0b37bcaa93c9d4894007e310caf43800be94fd. One-use message **AFW-R3-DELIVERY-R1-CONTROLS-ONEUSE-20261115**. No Native-active F7 is delivered. No ref points to this candidate or active blob by this implementer.
+
+Entire closed SAME prefix **01f0d4761e1462e5d944446ec24a4cbc6c904a70**/1504398B/SHA256a445910eb27d5dd867da9d84a32a8a4fa3c0301dd347488c650eafc3a5e4e1d1 is preserved, not obsolete1429126. Full new SAME readback equals proposal and starts with the ENTIRE prefix. Every non-F7/SAME leaf equals closed base and original fixed Core3201/324448B/SHA256aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703.
+
+Complete frozen18 raw DATA remains b88ebef9a2aa979772d20bfb778cbfe463dc3011/95518B/SHA256cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91/set71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af, every byte/cardinality/final LF unchanged. All business/tests/World/fixture/SDK/lock/Native profile unchanged.
+
+Payload **47f8955365ca73734f7b03537484d4c0af5bbd34**/357803B/SHA2563005db04124062128a033338c5939fab98b1328e3f0da1264ff6802a5b536b3a.
+Gzip **7824021483cf8f0ef2143de40178b2d19bf57085**/63412B/SHA256884e787a3f50d8c09ad156a142140a45bbb740138c199b31d7aaf3a3615d1b23;84552 base64 characters.
+Separate26-helper manifest **86f33387a1c9481e0e36e52ad5571403cd78973c**;231936B total,max24129B; canonical-LF hash8b686e89b8578c77ee599dab5eca901c7eab7ee7622aa9345ce65f814478f68c. Manifest lists every helper byte/hash/blob independently of frozen18.
+
+Final contracts DATA-FIRST: matrix **f646d4007f4348da75b0b5a99059246606c4d685**/SHA256**1b6f74a16aa37818fe51bdf3bdea2a1d3946a4198736ca3d630f4ba30b7f6039**, schema **580e6113d0140e2afb440bfff02967571e438b46**, examples **cf8ffb9da900410bc714ec999098296e4e843d03**. Original71 ordered cases preserved; new BOM3/kernel-outer6/oracle5/semantic1/failed-report1/budget1 =88. Every mutant runs ALL88 unless the total harness budget refuses further admission; any remainder stays UNKNOWN. Exact expected failures remain M_RAW[D02], M_PROVENANCE[P06], M_OUTPUT[B05], M_ASSOC[S01]. No mutant conditions on a case ID/fixture to manufacture failure.
+
+## Prepared responses to the accepted findings
+
+I01: one trusted builtin-only Node outer supplies the final admission/output boundary; exact same common source bytes are in F7 and both harness entry bodies. The context has ONLY purpose/source/sourceTree/run/attempt/job/node; current-image authority is outside it. Source/own-root/context file predicates match the Python startup contract; old binary-path/alphabet/owner selection predicates are eliminated with path authority. First failing layer is represented only by an existing reason field's predeclared closed aliases: outer_startup_unavailable,setup_unavailable,binding_unavailable,helper_unavailable,parent_unavailable,record_invalid. Unknown context stays unknown; no raw predicate/path/error or historical-cause inference.
+
+I02: B13 creates a separate empty cwd, verifies readdir0, requires successful rmdir, verifies absence, then exercises unchanged production entry bytes. Silent physical-cwd/PWD precheck deliberately closes that real condition. No ignored ENOTEMPTY or test against the populated work/output folder.
+
+I03: UTF8 decoder uses fatal:true,ignoreBOM:true to PRESERVE BOM; byte/ASCII/canonical receivers reject it. Named otherwise-valid sample/site/context BOM cases D14/P26/F10 are explicit. Python context framing checks raw ASCII bytes before JSON decoding; no BOM normalization grants admission.
+
+I04: oracle.mjs imports no formatter/receiver. It compares the ENTIRE canonical wire, exact LF/keys/context/status/sample/observed/provenance/reason to independently staged per-row expectations. No filter(Boolean), broad prefix acceptance, dropped known values or generic fallback allowed for a Source-qualified missing/invalid sample. O01–O05 counterexamples prove those oracle obligations. C02 now uses count-1 passed,exactly1failed,0unknown and corresponding first-failed/rest-passed rows, so it isolates a coherent FALSE report rather than also corrupting count88.
+
+I05: readFixed preserves actual OS error identity; only ENOENT becomes missing. Known invalid framing/oversize/type/link/UTF8 become invalid, and denied/unclassified I/O uses io_unavailable according to known provenance. Rows declare exact reasons and known/unknown Source/sample observations; absence never fabricates zero/not_observed.
+
+I06: trusted CURRENT verified22.23.4 Node opens fixed /proc/self/exe and retains that object until children complete. Node passes it as fd3 to fixed Python; Python executes only fixed /proc/self/fd/3 with pass_fds=(3,); Node children compare fd3 to their current kernel image. No nodeExec/nodeIdentity path selection in binding, no copied binary, no system-Node path assumption, no caller command/path/env capability. E01 joint substitution,E02 post-admission replacement,E06 retained current-image flow include private own execution sentinels: even closed public output cannot mask execution of a substituted script. No system binary path is mutated by tests.
+
+I07: literal F7 shell is outside Node/setup/Python/helpers, uses safe missing-env expansions and an always final step gated by actual checkout/setup outcomes. It emits a fixed closed unknown record for pre-Node/setup failure. Node outer privately captures the fixed Python layer, including helper/interpreter/startup stdout/stderr, before validation. A delivered normal unsuccessful status23 is preserved as ONE normal record/nonzero, with no appended fallback (E07). Both public write failures and shell diagnostics remain suppressed. There are no production spool reads/creates or paths republished after capture failure.
+
+I08: FINAL Node outer invokes the independent pinned normalized association/absence receiver before any sample marker. It additionally verifies actual full Source provenance and actual controls report. S01 impossible not_observed+seeded201 cannot pass the final parent. The M_ASSOC mutant removes only this logical association rule; no extra Native read/callback/timer is added.
+
+M01: case-owned teardown is bounded by2s/256 entries, verifies exact generated own base, restores only own fixture modes and never follows symlinks into another scope. It runs after output/spool/sentinel comparisons. Measurements/counters stay intact if cleanup fails; ordered unique/disjoint failedInstances/unknownInstances remain factual. cleanup.complete means all created attempts classified, NOT success; qualification additionally requires both lists empty.
+
+Pre-gate orphan fence: controls harness itself uses monotonic90s total. It admits EVERY baseline/mutant/case only with≥20s left; worst B02 pair16s + cleanup2s + report2s, plus30s before parents120s. Refused work creates no fixture/process; rows/mutants remain UNKNOWN and observed failed subsets are retained. Sandbox creation is lazy after admission. T01 exercises the SAME copied harness with only its unique initial deadline expired, expecting one normal unqualified UNKNOWN88/all-mutantsUNKNOWN report, zero case attempts/sandboxes, no fictitious cleanup. There is no env/callback clock selector or change to Native clocks/budgets. This is declared source logic, not an observed operational lifetime guarantee.
+
+M02 remains separately deferred per Root ruling: mandated checkout11d5960a326750d5838078e36cf38b85af677262/setupnode49933ea5288caeca8642d1e84afbd3f7d6820020 action-runtime Node20/forced24 warning is distinct from controls Node22.23.4 and is not a known startup cause. Pins unchanged.
+
+## Scope, caps, covering command and unexecuted gate
+
+PROJECT AFW / REPOSITORY tokenizartinfo-ops/agent-friendly-web / ENVIRONMENT unattached GitDB DATA/OFF / ORIGIN pinned closed e27 / RESOURCE_TYPE new blobs-tree-unattached commit / ALLOWED_ACTION DATA creation and bounded readback. No ref/run/runtime/owner/CF/OAuth/secret actions. Rollback: no shared ref mutated; all prior evidence/prefix remains.
+
+Root-approved fixed caps: raw400000 (actual357803,margin42197); SAME1650000 (actual1598022,margin51978); gzip65536 (actual63412,margin2124); base6487400 (actual84552,margin2848); helper32768 (max24129,margin8639). Wire caps remain sample4096/site16384/delivery8192/stderr4096/report24576; delivery5s and controls120s unchanged. The added90s harness/20s admission/2s cleanup is pure control transport machinery, never Native timing.
+
+One readonly job,Ubuntu24.04,7min,Node22.23.4,contents-read. F7 verifies Git HEAD/tree/whole prefix/Core/all frozen18/helper bytes, materializes ONLY the26 helpers and seven-field context, then literally calls runControls(). That outer opens the CURRENT image and launches fixed controls-boundary.py -> current-image Node controls.mjs. Only own synthetic roots/cwd/env and fixed OS /dev/full are used. The original production main/original readonly CLI are NEVER materialized/imported/called. No full49/16/business/Native suites; no Native-active F7.
+
+Covering execution is deliberately NOT RUN here. Root alone may gate/run the changed controls-only Source occurrence, preserve normal failed/unknown measurements, restore originalF7/full SAME, verify terminal/five-active0/Core/Main and request scoped re-review against ALL8. No claim corrected/passing from this DATA. I3 remains OPEN, retired carrier HELD, Native HELD.
+
+## Readback and report lineage
+
+GitDB remote commit/tree/inactiveF7/activeF7/fullSAME/rawpayload readbacks equal proposal; full tree only two leaves differ. Gzip bytes are recoverable EXACTLY from the full remote SAME base64 section and match the created Git blob/pins; direct binary-content GET was not supported by the UTF8-only tool, so no separate binary GET readback is claimed. Core identity follows complete3201 leaf equality plus prior canonical NUL hash; frozen raw18 verified as DATA.
+
+Final readback Source ref **e27fb843542eaf8868724b9d2f89c9ed348bb01e**, Main **0c9c475b3ebaa970fc11d628b40e50a90cceb727**. No refs/runs were moved/created by this implementer. Earlier round-preparation09bbe/041ca/44301761 and other interim blobs remain unattached and superseded; no occurrence used them.
+
+Root external controls receiver38749c663f4dd58fbb5f1a3c940a3820c4ff5100 and envelopefc579ca30a7a2a6388a34740c8f4edaa2a73cb73 are outside helper authority. Root owns the pre-execution independent receiver/matrix gate and authorized full report/review/package preservation; Markdown SHAs alone do not make unattached Git blobs reachable.
+
+No Source execution/import/eval/syntax checks/tests/deps/build/files/clones on Gabriel's PC: only GitDB and RAM DATA parse/hash/gzip/base64. Skill instruction files were read locally; no Source program/files were executed or written locally. Final status remains DATA_READY_WITH_CONCERNS, eight findings awaiting covering evidence/scoped review and M02 visibly deferred.
