@@ -172,3 +172,10 @@ Preparedactive255e6558c2142ff13dec6883ddda05aa8e657169/treed520f467abc283b94d86e
 ### Round4 full104 Source active — 15nov13:59UTC
 
 FreshleaseSourcec1ca/Main0c9c/fiveactive0/preparedruns0 pasó. RootCAS Source255e6558c2142ff13dec6883ddda05aa8e657169/treed520f467abc283b94d86eb99a1b20025ad4060f7, gate6cb4bfd8602fbf30d6815788e545a105c0afafa8. Unique run43721898434/attempt1/push/F7 inprogress. SourceFROZEN, noCASpending. No logsfetched, noqualificationyet. Waitterminal/alljobs, fetchlogsonce, ownreceiver+jointjobgate, restoreF7original+completeSAME+receipt. SourceR3prefix2d3 and R4proposalbcda preservedRootdocs8758a60b/49realobjects; report899achainprefixexact. NoNativeCLI/runtime/owneraction. Same reviewer afteractualcoveringtests andclosure. No rerunconsumedprioroccurrences.
+
+
+### Round4 actual complete report, failed qualification, Source closed
+
+Run43721898434/1/job132835519197 completedfailure, Source255e6558. ExactlyoneCONTROLS/1acceptedbyOWN38749c inactualcontext.104baseline5passedO01-O05/93failed/6unknownF03,L01-L05; fourmutantsunknowneach93actualfailedIDs, nofalsereportedkillsets. Ownfixturecleanupcomplete true/failed[]/unknown[], notimage/native/globalcleanup. Jointgatea1c901bd controls_not_qualified. Underlyingcommoncase-launchcauseUNKNOWN; do not assumeall520attempted, environment/credentials/CFissue. OcurrenceCONSUMED,noRERUN.
+
+Sourceclosed67e9c4ada4dfa0ea700bf57fc3a93e9918cc298f/tree3c9b18dac67729732f323b9d5e8d98bbc40c9eda; originalF7f7a71f1, fullSAMEcbc8557da0a4d207b713f3acf9cf84b9654adf86/2096325B/SHAb9f62679759b07a5f4243b49ff1c1ec052a40bf462a953f7ac40763d56d03cf4, Core3201/Main0c9c/fiveactive0/closedheadruns0 verified14:03:17UTC. CASpendingnone. Re-review same r3_delivery_task_review round4 againstthreefindings/only5helper+5bootstrapdeltas, actualtestgraph+wire+counts appendedtosame implementerreport899aprefix. NoI3/Native/C2/PCoff readiness. Next diagnosis must isolate commoncase-launchpath withboundedopaqueevidence beforeanyfix; no blindfull104repeat. Owneractionnone.
