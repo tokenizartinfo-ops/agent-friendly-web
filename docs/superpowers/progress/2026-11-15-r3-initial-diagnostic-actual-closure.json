@@ -1,0 +1,62 @@
+{
+  "purpose": "afw.r3.initial-only.actual-receipt.v1",
+  "observedUTC": "2026-11-15 10:45:13 UTC",
+  "source": "45bd4941ddda6959d9d2a00c9e88d02f1c2ddcb9",
+  "tree": "119038aca05c47eda7200e9aa6f07dee6b16f1dc",
+  "run": 43705239006,
+  "attempt": 1,
+  "job": 132784787149,
+  "path": ".github/workflows/afw-finite-budget-qualification.yml",
+  "event": "push",
+  "conclusion": "failure",
+  "stepOutcome": "failure",
+  "marker": "AFW_R3_DELIVERY_STARTUP_DIAGNOSTIC/1 {\"purpose\":\"afw.r3-delivery.startup-diagnostic.v1\",\"scope\":\"source_initial_only\",\"result\":\"unavailable\",\"lastObserved\":\"unknown\",\"controlsInvoked\":0,\"originalCLIInvoked\":0,\"nativeBusinessCases\":0,\"qualification\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}",
+  "ownAcceptance": {
+    "accepted": true,
+    "bootstrapAdmitted": false,
+    "record": {
+      "purpose": "afw.r3-delivery.startup-diagnostic.v1",
+      "scope": "source_initial_only",
+      "result": "unavailable",
+      "lastObserved": "unknown",
+      "controlsInvoked": 0,
+      "originalCLIInvoked": 0,
+      "nativeBusinessCases": 0,
+      "qualification": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "qualified": false,
+    "NativeReleased": false,
+    "operationalReadiness": false
+  },
+  "controlsMeasured": 0,
+  "originalCLIInvoked": 0,
+  "nativeBusinessCases": 0,
+  "interpretation": "The isolated initial bootstrap diagnostic returned unavailable/unknown. No stage or underlying cause was established. No controls were invoked. The Source is to be restored to original F7 after this terminal run; no repeat or Native release.",
+  "closedSource": "4e278875259211809ac82b0d1978b4e9bf1764ed",
+  "closedTree": "b5cb56145c5f45277eaa6497123ef5f497a13ced",
+  "originalF7Restored": true,
+  "fullSAMEPreserved": true,
+  "same": {
+    "blob": "4e7295f5708407c1cc7ab2074ff3c95a6977b337",
+    "bytes": 1725347,
+    "sha256": "624c039ec20f3f833516733d664404f5a39eea55fbd0af25a24293a0a52ea29e"
+  },
+  "coreEqual": true,
+  "core": {
+    "leaves": 3201,
+    "rawBytes": 324448,
+    "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+  },
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "fiveActiveZero": true,
+  "closedHeadRunsZero": true
+}

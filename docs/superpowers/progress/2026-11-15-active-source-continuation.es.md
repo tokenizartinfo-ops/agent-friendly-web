@@ -54,3 +54,14 @@ Core3201/324448B/SHAaefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef084
 Sin Source eval/import/syntax/tests/archivos/deps/build/clones enPC. Solo GitHub Actions ejecutó Source. Sin runtime Cloudflare, credenciales, OAuth, OTP o Max en este bloque. historicalCauseProven,receiptAuthenticated,operationalReadiness,completePackage,PCoff,globalNativeDrainVerified,sdkNamespaceEmptyVerified siguenfalse. No pedir apagar.
 
 Gabriel no debe intervenir antes15nov08:30Argentina/11:30UTC. Relay Chavo#176:88comentarios sin novedad al comprobar; no guardia cloud permanente acreditada.
+
+
+## Estado vigente — cierre del diagnóstico inicial, 15 nov 2026
+
+El preflight retenido anterior fue sustituido por el paquete FINAL50db752ab8f07195471519b1641358d340932be7, manifiestoe781d2047381c1a80e5c2bbbb1b5fbf2cc6ee2b8, F7activodb7b88bcf3164462821fcfc21bbf2ee70705c2ce y gateRootd31e9ea127c641a8ccbceab2767cac6f48dc7540. Incluye el módulo Node completo39903B y commonouter R2 exacto8a74fe67; no invoca controles/helperscapturados/CLI/Native.
+
+Única ejecución inicial43705239006/1, job132784787149, Source45bd4941ddda6959d9d2a00c9e88d02f1c2ddcb9. Checkout/setup-node success; paso de diagnóstico failure. Una sola salida válida para receptor independientea2da: result=unavailable,lastObserved=unknown,controlsInvoked=0,originalCLIInvoked=0,nativeBusinessCases=0,qualification=false y siete no-acreditadosfalse. **No se identificó etapa ni causa.** No se interpretan estos resultados como fallo de Cloudflare ni100/104controlesmedidos. La ocurrencia está consumida y no se repite.
+
+**Source CERRADO4e278875259211809ac82b0d1978b4e9bf1764ed**, treeb5cb56145c5f45277eaa6497123ef5f497a13ced. F7originalf7a71f1a0fa4f5ddf069ff411f008a098455e5cc restaurado. SAMEcompleto4e7295f5708407c1cc7ab2074ff3c95a6977b337,1725347B,SHA256624c039ec20f3f833516733d664404f5a39eea55fbd0af25a24293a0a52ea29e preserva propuesta1723002B y recibo real. Fulltree3364/hojas3203, Core3201 exacto324448B/aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703, main0c9c475b3ebaa970fc11d628b40e50a90cceb727, cinco estados activos0 y ejecuciones del headcerrado0 verificados después del cierre. CASSource pendiente ninguno.
+
+Siguiente bloque: MISMO implementador/round3 revisa **estáticamente** por qué la instrumentación puede producir unknown, especialmente formatter/fd10/11/identidad/posición/herencia y ramas Bash. No reconstruir ni ejecutar otra propuesta por intuición. No full104 antes de observabilidad inicial útil y gate nuevo; rebasear posteriormente contra este cierre y prefijo1725347. Hallazgos R2-I1/I2/I3 pendientes; M1 arreglable al tocar controls, M2deferido. Sin asiento/review amplio nuevo. No acción del owner antes11:30UTC/08:30Argentina.
