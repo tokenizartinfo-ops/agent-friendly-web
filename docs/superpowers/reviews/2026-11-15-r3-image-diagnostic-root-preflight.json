@@ -1,0 +1,101 @@
+{
+  "crypto": {
+    "raw": {
+      "bytes": 224738,
+      "sha256": "61d5d8d7c90fb119b661ce88fcd9ed690eca23de8712c3d3fae9f819d64eab2b",
+      "gitBlob": "0d1b1f6dd2056b81f1a0db84160b0018ea6cb7cf"
+    },
+    "gzip": {
+      "bytes": 65994,
+      "sha256": "9d6f9a8ce9eef837edef7176113588cd6aa15f3da422ecf521d1acfb1de5addf",
+      "gitBlob": "776499c387ea558d65cb8e46beab1f65a3505114"
+    },
+    "mirror": {
+      "bytes": 87992,
+      "sha256": "8ef89670058550f514f9eb1bea8a758968f4f420a6a29af92c291827f0daa33f",
+      "gitBlob": "6acdddeae5fe4c74f6df4170d3a765e811d40283"
+    },
+    "manifest": {
+      "bytes": 1294,
+      "sha256": "dd34d1e846e3661481aa770996d6a641438092ecf02b16cb5daaa0c736989efb",
+      "gitBlob": "4e70c0d47669f2e1dd7fe0800a922d40bcdb0921"
+    },
+    "same": {
+      "bytes": 1736895,
+      "sha256": "cc9eb9fdc2c34506f4dab074234e9f6668b728f315af9d2c92a9c3540c478fe7",
+      "gitBlob": "4a50240eb164e5a6c325b2d87bb2da0faa5f8b80"
+    },
+    "prefix": {
+      "bytes": 1732377,
+      "sha256": "4cea7998bb7001f88e428c673a69a72e39bf5c26326e1742d892c8da5258d0f0",
+      "gitBlob": "159c609876d5c5ff98dd90f40949e470d64ad6a4"
+    },
+    "sources": {
+      "initial-shim.py": {
+        "bytes": 9063,
+        "sha256": "0016db3c4486e9a88e0899d5eb0cc64a03264a84ded9a70bded383d150a5e741",
+        "gitBlob": "ef1e4b6802b5e55e8f6bcd7f48e50421f0936df7"
+      },
+      "initial-node-prelude.mjs": {
+        "bytes": 14108,
+        "sha256": "911a5d48b855c9ad5cac04d805b12ae0dcd92c79de86f6e7fd9bb3468706aefe",
+        "gitBlob": "7dfa1141f1651db79928e9ce8fa072a7d00d4d54"
+      },
+      "initial-node-common.mjs": {
+        "bytes": 25794,
+        "sha256": "1c8094cb913f8ae06d553b1b29d54bf89ad654524d6afab3f647791057c934aa",
+        "gitBlob": "8a74fe67af2c1a870b9964f0f5c17c2514986e36"
+      },
+      "initial-node.mjs": {
+        "bytes": 39903,
+        "sha256": "5a18ce37113d4c49b98ff7bb2be5eeff20e7fbd53f743bff586a36ca935f7edd",
+        "gitBlob": "d2e39059d6c02a50a8be5e1f40baacb098b6ad9e"
+      },
+      "trace-formatter.py": {
+        "bytes": 2674,
+        "sha256": "7c21d06b79595c63111a89d1dd7296515844a8b067dcd101b7a35d87befee47d",
+        "gitBlob": "83f5b98f925f660b87f185140194c84bd1bf4847"
+      },
+      "inactive-f7.yml": {
+        "bytes": 61034,
+        "sha256": "2a43944121da3e23658e1be4ba0e9fc20cb1d85544d2e4d4e1db78e32206001d",
+        "gitBlob": "c35b975419977fc0625883d3741eb6a59e9ce243"
+      },
+      "active-f7.yml": {
+        "bytes": 61296,
+        "sha256": "57bd655920d1b21f9c40ef23d4742f5bd3cf92a35ee15757252381cf5aba4e57",
+        "gitBlob": "f05ebe9d6dec2f55b52a3a4f3708e66e9ab79b76"
+      }
+    },
+    "canonical": true,
+    "mirrorRecovered": true,
+    "fullParseSurface": true
+  },
+  "delta": {
+    "wholeF7Exact": true,
+    "shimInverse": true,
+    "formatterInverse": true,
+    "immutableCommon": true,
+    "preludeRebaseOnly": true,
+    "rootContractVocabulary": true,
+    "BashFallbacksOwnAccepted": true,
+    "SourceWorkInvoked": false,
+    "noRelaxationStaticReviewed": true,
+    "xattrSingleTerminalElse": true,
+    "queryOrderShortcircuitPreserved": true,
+    "typedCaps": true
+  },
+  "ownTests": {
+    "wirePos": 30,
+    "wireNeg": 17,
+    "tracePos": 26,
+    "traceNeg": 152,
+    "initialRootPreflightCorrection": "trace alphabet explicitly allows digit2 in the predeclared image_dup2_failed name",
+    "SourceExecuted": false,
+    "NativeReleased": false,
+    "preImplementationPrecision": "image_caps_nonempty means only observed nonempty xattr bytes, not valid/applied privileges",
+    "retiredCapsPresentRejectedInBothReceivers": true
+  },
+  "SourceExecuted": false,
+  "NativeReleased": false
+}
