@@ -14437,3 +14437,55 @@ Contracts/schema/examples a4ff0bf3a8c771a3bb28dc661261a2033fc7d8d3/aa82dbe4e99db
 Sourcebundle9cac19aa13586f21a954772f709c1e74b46a5eec/217610B/SHA25670c3cdd57b6d61b8707618dc8c23e80a41b337758ee4b887a70cbe276a68c7d9; gzip80de422f038bae9ac64f501afaa266923b1e336a/64488B/SHA256fe7372b34941f7341fcf16a92df1298947f502d04155b37b7588babd3f5131c2; base6485984chars/mirrora86e0cbeae935893bb275149db9eea7b67622ac0; manifest77607e7f98a9a7588fa222e6e35f8ee41bb442c43/1294B/SHA256bff56e2fb12fff494a4bac163c3a8b710a1f411b65dadaab2a114be80092d9b1. Literalpieces≤32768; typed bootstrap_program39903/F7max59230≤65536. raw400500/gzip98304/base64131072/helper32768/SAME1800000/wire2048/trace256/time budgets unchanged, no truncation.
 
 InactiveF761ebcb21b34de54b76eae7aa7515a831d5c86ba0; separate INITIAL-ONLY activeF70cf9f41b3d86d6f1dfcb8985420da13acc7d1d4b; explicit repository/event/branch/attempt/message gate. Checkout11d5960a326750d5838078e36cf38b85af677262/setupnode49933ea5288caeca8642d1e84afbd3f7d6820020/Node22.23.4/Ubuntu24.04/readonly/7min unchanged; M02 deferred. Root alone may gate ONE changed occurrence and close/restore completely. Unknown again requires evidence/decision, no automatic retry; admitted bootstrap requires closure/new-base full104 gate, never Native release. Source/refs/runs/runtime/credentials unchanged by implementer; GitDB/RAM DATA only, no Source tests/import/eval/syntax/files/deps/clones/build. I3/Native HELD.
+
+
+## ROOT actual TRACEFD initial-only diagnostic — 2026-11-15
+
+```json
+{
+  "purpose": "afw.r3.initial-tracefd.actual-receipt.v1",
+  "observedUTC": "2026-11-15 11:08:55 UTC",
+  "source": "34effd2150e7bcacb5d2a11dea570f246cf25106",
+  "tree": "895f6a6aa1a3d1a7e73e26155b13bf9966632c7d",
+  "run": 43707391349,
+  "attempt": 1,
+  "job": 132791308704,
+  "step": "Observe trusted initial bootstrap only",
+  "stepOutcome": "failure",
+  "runConclusion": "failure",
+  "marker": "AFW_R3_DELIVERY_STARTUP_DIAGNOSTIC/1 {\"purpose\":\"afw.r3-delivery.startup-diagnostic.v1\",\"scope\":\"source_initial_only\",\"result\":\"unavailable\",\"lastObserved\":\"pdeath_checked\",\"controlsInvoked\":0,\"originalCLIInvoked\":0,\"nativeBusinessCases\":0,\"qualification\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}",
+  "ownAcceptance": {
+    "accepted": true,
+    "bootstrapAdmitted": false,
+    "record": {
+      "purpose": "afw.r3-delivery.startup-diagnostic.v1",
+      "scope": "source_initial_only",
+      "result": "unavailable",
+      "lastObserved": "pdeath_checked",
+      "controlsInvoked": 0,
+      "originalCLIInvoked": 0,
+      "nativeBusinessCases": 0,
+      "qualification": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "qualified": false,
+    "NativeReleased": false,
+    "operationalReadiness": false
+  },
+  "controlsInvoked": 0,
+  "originalCLIInvoked": 0,
+  "nativeBusinessCases": 0,
+  "qualified": false,
+  "interpretation": "The changed observation produced a valid ordered prefix through pdeath_checked. The next image_checked event was not observed. This narrows static investigation toward initial Node-image selection/open/check/dup2; lastObserved is not failedStage or proof of precise cause. The old unknown is not retrospectively attributed to the descriptor collision. No controls or business cases invoked."
+}
+```
+
+This occurrence is consumed; do not rerun. Preserve full proposal, restore original F7, and investigate the next bounded Source stage from this dated evidence. No full104/Gate2/Native/readiness/PC-off is released. All seven no-claims remain false.
