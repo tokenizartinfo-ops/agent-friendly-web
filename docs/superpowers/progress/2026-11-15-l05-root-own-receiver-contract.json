@@ -1,0 +1,52 @@
+{
+  "purpose": "afw.root.l05-observation.receiver-contract.v1",
+  "marker": "AFW_L05_OBSERVATION/1 ",
+  "wire": "canonical ASCII JSON + single LF",
+  "maxBytes": 2048,
+  "orderedKeys": [
+    "purpose",
+    "source",
+    "sourceTree",
+    "run",
+    "attempt",
+    "job",
+    "node",
+    "originalResult",
+    "probeCleanup",
+    "caseCleanup",
+    "firstSite",
+    "checkAtSite",
+    "eventAtCheck",
+    "stopClass",
+    "creatorSeen",
+    "shimSeen",
+    "wakeSeen",
+    "deadSeen",
+    "shimTerminalBeforeCleanup",
+    "kernelSite",
+    "kernelClass",
+    "markerAtOracle",
+    "markerAtCleanup",
+    "streams",
+    "nonclaims"
+  ],
+  "context": "six Source fields all actual bound to external Root context and GitHub numeric jobID, or all unknown with all measurements unknown",
+  "nonclaims": [
+    "historicalCauseProven",
+    "receiptAuthenticated",
+    "operationalReadiness",
+    "completePackage",
+    "PCoff",
+    "globalNativeDrainVerified",
+    "sdkNamespaceEmptyVerified"
+  ],
+  "result": "diagnostic only, qualified false, NativeReleased false, operationalReadiness false",
+  "RootTests": {
+    "positive": 8,
+    "negative": 89,
+    "SourceExecuted": false,
+    "NativeReleased": false
+  },
+  "normalPositiveMaximumBytes": 852,
+  "notes": "Known original passed probe may retain unknown diagnostic observations. It cannot coexist with observed incompatible failure facts. Case cleanup is independent. No diagnostic result qualifies the original task."
+}

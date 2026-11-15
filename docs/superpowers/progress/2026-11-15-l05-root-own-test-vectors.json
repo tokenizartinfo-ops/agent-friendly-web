@@ -1,0 +1,1459 @@
+{
+  "purpose": "afw.root.l05-observation.own-test-vectors.v1",
+  "context": {
+    "source": "1111111111111111111111111111111111111111",
+    "sourceTree": "2222222222222222222222222222222222222222",
+    "run": "123456",
+    "attempt": 1,
+    "job": "readonly",
+    "node": "22.23.4",
+    "jobId": 567890
+  },
+  "positiveRecords": [
+    {
+      "purpose": "afw.l05.observation.v1",
+      "source": "unknown",
+      "sourceTree": "unknown",
+      "run": "unknown",
+      "attempt": "unknown",
+      "job": "unknown",
+      "node": "unknown",
+      "originalResult": "unknown",
+      "probeCleanup": "unknown",
+      "caseCleanup": "unknown",
+      "firstSite": "unknown",
+      "checkAtSite": "unknown",
+      "eventAtCheck": "unknown",
+      "stopClass": "unknown",
+      "creatorSeen": "unknown",
+      "shimSeen": "unknown",
+      "wakeSeen": "unknown",
+      "deadSeen": "unknown",
+      "shimTerminalBeforeCleanup": "unknown",
+      "kernelSite": "unknown",
+      "kernelClass": "unknown",
+      "markerAtOracle": "unknown",
+      "markerAtCleanup": "unknown",
+      "streams": "unknown",
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "purpose": "afw.l05.observation.v1",
+      "source": "1111111111111111111111111111111111111111",
+      "sourceTree": "2222222222222222222222222222222222222222",
+      "run": "123456",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "originalResult": "unknown",
+      "probeCleanup": "unknown",
+      "caseCleanup": "unknown",
+      "firstSite": "unknown",
+      "checkAtSite": "unknown",
+      "eventAtCheck": "unknown",
+      "stopClass": "unknown",
+      "creatorSeen": "unknown",
+      "shimSeen": "unknown",
+      "wakeSeen": "unknown",
+      "deadSeen": "unknown",
+      "shimTerminalBeforeCleanup": "unknown",
+      "kernelSite": "unknown",
+      "kernelClass": "unknown",
+      "markerAtOracle": "unknown",
+      "markerAtCleanup": "unknown",
+      "streams": "unknown",
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "purpose": "afw.l05.observation.v1",
+      "source": "1111111111111111111111111111111111111111",
+      "sourceTree": "2222222222222222222222222222222222222222",
+      "run": "123456",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "originalResult": "failed",
+      "probeCleanup": "passed",
+      "caseCleanup": "passed",
+      "firstSite": "bind",
+      "checkAtSite": "first",
+      "eventAtCheck": "unknown",
+      "stopClass": "check_rejected",
+      "creatorSeen": "yes",
+      "shimSeen": "yes",
+      "wakeSeen": "unknown",
+      "deadSeen": "unknown",
+      "shimTerminalBeforeCleanup": "unknown",
+      "kernelSite": "unknown",
+      "kernelClass": "unknown",
+      "markerAtOracle": "unknown",
+      "markerAtCleanup": "absent",
+      "streams": "unknown",
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "purpose": "afw.l05.observation.v1",
+      "source": "1111111111111111111111111111111111111111",
+      "sourceTree": "2222222222222222222222222222222222222222",
+      "run": "123456",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "originalResult": "failed",
+      "probeCleanup": "passed",
+      "caseCleanup": "passed",
+      "firstSite": "wake_dead_wait",
+      "checkAtSite": "unknown",
+      "eventAtCheck": "unknown",
+      "stopClass": "wait_expired",
+      "creatorSeen": "yes",
+      "shimSeen": "yes",
+      "wakeSeen": "yes",
+      "deadSeen": "no",
+      "shimTerminalBeforeCleanup": "yes",
+      "kernelSite": "fd4_link_form",
+      "kernelClass": "check_rejected",
+      "markerAtOracle": "unknown",
+      "markerAtCleanup": "absent",
+      "streams": "empty",
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "purpose": "afw.l05.observation.v1",
+      "source": "1111111111111111111111111111111111111111",
+      "sourceTree": "2222222222222222222222222222222222222222",
+      "run": "123456",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "originalResult": "passed",
+      "probeCleanup": "passed",
+      "caseCleanup": "passed",
+      "firstSite": "none",
+      "checkAtSite": "unknown",
+      "eventAtCheck": "unknown",
+      "stopClass": "none",
+      "creatorSeen": "yes",
+      "shimSeen": "yes",
+      "wakeSeen": "yes",
+      "deadSeen": "yes",
+      "shimTerminalBeforeCleanup": "yes",
+      "kernelSite": "creator_ppid",
+      "kernelClass": "creator_dead",
+      "markerAtOracle": "absent",
+      "markerAtCleanup": "absent",
+      "streams": "empty",
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "purpose": "afw.l05.observation.v1",
+      "source": "1111111111111111111111111111111111111111",
+      "sourceTree": "2222222222222222222222222222222222222222",
+      "run": "123456",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "originalResult": "passed",
+      "probeCleanup": "passed",
+      "caseCleanup": "failed",
+      "firstSite": "case_cleanup",
+      "checkAtSite": "unknown",
+      "eventAtCheck": "unknown",
+      "stopClass": "os_error",
+      "creatorSeen": "yes",
+      "shimSeen": "yes",
+      "wakeSeen": "yes",
+      "deadSeen": "yes",
+      "shimTerminalBeforeCleanup": "yes",
+      "kernelSite": "creator_ppid",
+      "kernelClass": "creator_dead",
+      "markerAtOracle": "absent",
+      "markerAtCleanup": "absent",
+      "streams": "empty",
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "purpose": "afw.l05.observation.v1",
+      "source": "1111111111111111111111111111111111111111",
+      "sourceTree": "2222222222222222222222222222222222222222",
+      "run": "123456",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "originalResult": "passed",
+      "probeCleanup": "unknown",
+      "caseCleanup": "unknown",
+      "firstSite": "unknown",
+      "checkAtSite": "unknown",
+      "eventAtCheck": "unknown",
+      "stopClass": "unknown",
+      "creatorSeen": "unknown",
+      "shimSeen": "unknown",
+      "wakeSeen": "unknown",
+      "deadSeen": "unknown",
+      "shimTerminalBeforeCleanup": "unknown",
+      "kernelSite": "unknown",
+      "kernelClass": "unknown",
+      "markerAtOracle": "unknown",
+      "markerAtCleanup": "unknown",
+      "streams": "unknown",
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "purpose": "afw.l05.observation.v1",
+      "source": "1111111111111111111111111111111111111111",
+      "sourceTree": "2222222222222222222222222222222222222222",
+      "run": "123456",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "originalResult": "failed",
+      "probeCleanup": "passed",
+      "caseCleanup": "passed",
+      "firstSite": "marker",
+      "checkAtSite": "first",
+      "eventAtCheck": "unknown",
+      "stopClass": "check_rejected",
+      "creatorSeen": "yes",
+      "shimSeen": "yes",
+      "wakeSeen": "yes",
+      "deadSeen": "no",
+      "shimTerminalBeforeCleanup": "yes",
+      "kernelSite": "arm_return",
+      "kernelClass": "arm_return",
+      "markerAtOracle": "present",
+      "markerAtCleanup": "present",
+      "streams": "empty",
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  ],
+  "negativeCases": [
+    {
+      "name": "missing purpose",
+      "wire": "AFW_L05_OBSERVATION/1 {\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing source",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing sourceTree",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing run",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing attempt",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing job",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing node",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing originalResult",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing probeCleanup",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing caseCleanup",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing firstSite",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing checkAtSite",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing eventAtCheck",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing stopClass",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing creatorSeen",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing shimSeen",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing wakeSeen",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing deadSeen",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing shimTerminalBeforeCleanup",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing kernelSite",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing kernelClass",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing markerAtOracle",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing markerAtCleanup",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing streams",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "missing nonclaims",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\"}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "claim historicalCauseProven",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":true,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "claim receiptAuthenticated",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":true,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "claim operationalReadiness",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":true,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "claim completePackage",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":true,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "claim PCoff",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":true,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "claim globalNativeDrainVerified",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":true,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "claim sdkNamespaceEmptyVerified",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":true}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid purpose",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"other\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid source",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"3333333333333333333333333333333333333333\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid sourceTree",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"3333333333333333333333333333333333333333\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid run",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"999\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid attempt",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":2,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid job",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"other\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid node",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.5\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid originalResult",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":true,\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid probeCleanup",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"clean\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid caseCleanup",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"clean\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid firstSite",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"arbitrary\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid checkAtSite",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":1,\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid eventAtCheck",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"other\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid stopClass",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"ValueError\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid creatorSeen",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":true,\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid shimSeen",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":true,\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid wakeSeen",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":true,\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid deadSeen",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":false,\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid shimTerminalBeforeCleanup",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":false,\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid kernelSite",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"/secret\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid kernelClass",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"ValueError\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid markerAtOracle",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":false,\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid markerAtCleanup",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":false,\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "invalid streams",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "extra",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false},\"qualified\":true}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "unknown claim",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false,\"other\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "reorder",
+      "wire": "AFW_L05_OBSERVATION/1 {\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false},\"streams\":\"empty\",\"markerAtCleanup\":\"absent\",\"markerAtOracle\":\"unknown\",\"kernelClass\":\"check_rejected\",\"kernelSite\":\"fd4_link_form\",\"shimTerminalBeforeCleanup\":\"yes\",\"deadSeen\":\"no\",\"wakeSeen\":\"yes\",\"shimSeen\":\"yes\",\"creatorSeen\":\"yes\",\"stopClass\":\"wait_expired\",\"eventAtCheck\":\"unknown\",\"checkAtSite\":\"unknown\",\"firstSite\":\"wake_dead_wait\",\"caseCleanup\":\"passed\",\"probeCleanup\":\"passed\",\"originalResult\":\"failed\",\"node\":\"22.23.4\",\"job\":\"readonly\",\"attempt\":1,\"run\":\"123456\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"source\":\"1111111111111111111111111111111111111111\",\"purpose\":\"afw.l05.observation.v1\"}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "duplicate",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "extra LF",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "CRLF",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\r\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "BOM",
+      "wire": "﻿AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "leading whitespace",
+      "wire": " AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "bad marker",
+      "wire": "OTHER/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "unicode",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.é.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "escaped canonical",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.\\u006c05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "oversize",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "mixed neutral",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"unknown\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "neutral with measure",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"unknown\",\"sourceTree\":\"unknown\",\"run\":\"unknown\",\"attempt\":\"unknown\",\"job\":\"unknown\",\"node\":\"unknown\",\"originalResult\":\"failed\",\"probeCleanup\":\"unknown\",\"caseCleanup\":\"unknown\",\"firstSite\":\"unknown\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"unknown\",\"creatorSeen\":\"unknown\",\"shimSeen\":\"unknown\",\"wakeSeen\":\"unknown\",\"deadSeen\":\"unknown\",\"shimTerminalBeforeCleanup\":\"unknown\",\"kernelSite\":\"unknown\",\"kernelClass\":\"unknown\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"unknown\",\"streams\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "job id absent",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4"
+      }
+    },
+    {
+      "name": "job id invalid",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 0
+      }
+    },
+    {
+      "name": "false-check no site",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"unknown\",\"checkAtSite\":\"first\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"check_rejected\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"unknown\",\"deadSeen\":\"unknown\",\"shimTerminalBeforeCleanup\":\"unknown\",\"kernelSite\":\"unknown\",\"kernelClass\":\"unknown\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "false-check no ordinal",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"bind\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"check_rejected\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"unknown\",\"deadSeen\":\"unknown\",\"shimTerminalBeforeCleanup\":\"unknown\",\"kernelSite\":\"unknown\",\"kernelClass\":\"unknown\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "none incomplete",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"unknown\",\"firstSite\":\"none\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"none\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"creator_ppid\",\"kernelClass\":\"creator_dead\",\"markerAtOracle\":\"absent\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "none with error",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"none\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"os_error\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"creator_ppid\",\"kernelClass\":\"creator_dead\",\"markerAtOracle\":\"absent\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "none-class wrong site",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"marker\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"none\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"creator_ppid\",\"kernelClass\":\"creator_dead\",\"markerAtOracle\":\"absent\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "event cursor wrong site",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"dead\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "dead without wake",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"none\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"none\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"no\",\"deadSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"creator_ppid\",\"kernelClass\":\"creator_dead\",\"markerAtOracle\":\"absent\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "wake without shim",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"no\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"check_rejected\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "CreatorDead wrong site",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"none\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"none\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"stat_open\",\"kernelClass\":\"creator_dead\",\"markerAtOracle\":\"absent\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "CreatorDead absent event",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"creator_ppid\",\"kernelClass\":\"creator_dead\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "return wrong site",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"marker\",\"checkAtSite\":\"first\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"check_rejected\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"stat_open\",\"kernelClass\":\"arm_return\",\"markerAtOracle\":\"present\",\"markerAtCleanup\":\"present\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "return with death",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"none\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"none\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"arm_return\",\"kernelClass\":\"arm_return\",\"markerAtOracle\":\"absent\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "unknown kernel at known site",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"failed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"wake_dead_wait\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"wait_expired\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"no\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"fd4_link_form\",\"kernelClass\":\"unknown\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "pass marker present",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"none\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"none\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"creator_ppid\",\"kernelClass\":\"creator_dead\",\"markerAtOracle\":\"present\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "pass streams nonempty",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"none\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"none\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"creator_ppid\",\"kernelClass\":\"creator_dead\",\"markerAtOracle\":\"absent\",\"markerAtCleanup\":\"absent\",\"streams\":\"nonempty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "pass probe failed",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"failed\",\"caseCleanup\":\"passed\",\"firstSite\":\"none\",\"checkAtSite\":\"unknown\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"none\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"yes\",\"deadSeen\":\"yes\",\"shimTerminalBeforeCleanup\":\"yes\",\"kernelSite\":\"creator_ppid\",\"kernelClass\":\"creator_dead\",\"markerAtOracle\":\"absent\",\"markerAtCleanup\":\"absent\",\"streams\":\"empty\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    },
+    {
+      "name": "pass false check",
+      "wire": "AFW_L05_OBSERVATION/1 {\"purpose\":\"afw.l05.observation.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalResult\":\"passed\",\"probeCleanup\":\"passed\",\"caseCleanup\":\"passed\",\"firstSite\":\"bind\",\"checkAtSite\":\"first\",\"eventAtCheck\":\"unknown\",\"stopClass\":\"check_rejected\",\"creatorSeen\":\"yes\",\"shimSeen\":\"yes\",\"wakeSeen\":\"unknown\",\"deadSeen\":\"unknown\",\"shimTerminalBeforeCleanup\":\"unknown\",\"kernelSite\":\"unknown\",\"kernelClass\":\"unknown\",\"markerAtOracle\":\"unknown\",\"markerAtCleanup\":\"absent\",\"streams\":\"unknown\",\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "context": {
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "jobId": 567890
+      }
+    }
+  ],
+  "results": {
+    "positive": 8,
+    "negative": 89,
+    "SourceExecuted": false,
+    "NativeReleased": false
+  },
+  "SourceExecuted": false
+}
