@@ -1,0 +1,96 @@
+{
+  "purpose": "afw.serial-v2.task1.fix1.scoped-review-package.v1",
+  "task": 1,
+  "round": 1,
+  "reviewer": "/root/serial_v2_task_review",
+  "scope": "C1+I1-I7 in review d766; verify their fixes plus breakage introduced by exact fix1 diff only. No reopened settled Source concerns or new design loop. Existing M1 remains deferred.",
+  "requirements": {
+    "design": "f53f6c0016b3730458e969e07944075c80370f2a",
+    "rootScope": "41fbed6833dd8cbc0181153bf98439751aa37200",
+    "plan": "0244ace61c57f0846773929b15a4c172a78a26dd",
+    "brief": "83b4b52c11382002efb9db4c17500512eb86f10c",
+    "ruling": "55faf4451fe3ba50a7f07a66ef8d2a6be8db614e",
+    "strictState": "8f6556a0400b5c147017a34e2815655e1dc511bb",
+    "parallelDomains": "b00bf6aed6eda513a94cb8e7b18813c6df7439bd",
+    "originalReview": "d766b8d798d9760b7f29cd214b61d3ccae81ba13",
+    "beforePackage": "4eb404f05eb0b7f73ef8f943a4bccc7500015ac5"
+  },
+  "after": {
+    "sourceIndex": "64ceddb8ed96d47daf912abbeecf52c7fa4f1bd0",
+    "sourceExactDiff": "2b825fdbd2f0aa185bbac0ef2abdcbddd788c668",
+    "sourceReversibleSpans": "9f27be33d84daf678c522950db7b33e26f884dc1",
+    "ownIndex": "06211e8bf5c37d3eca5015ab5c56c3f32adb0310",
+    "ownExactDiff": "3d1a2127d6ce374b1c4123f49d0db07aaee5baa2",
+    "ownReport": "63e93eeb09259a91af1f3da066e9a204de1ecd2d",
+    "sourceActualReport": "308f2eaf42b5a40391cdc623eb59aa2ac91b1fea"
+  },
+  "actual": {
+    "candidate": {
+      "commit": "661ba7a1fd728efe3d269d776cb91cbfa2c8c994",
+      "activeTree": "76de68a502f046edfc2d8cb655a30aff97dc3bd7",
+      "inactiveTree": "51002a17d05ccd10ad34eff5ed5871df7ef94580",
+      "parent": "49ee71ead8d52cb5d474d820d57828115f912923",
+      "F7": "f712eebd51e63bd94201126f68bf00023b38f4e0",
+      "SAME": "bb094bbf4516a29d900fda60d386131fbdd89cab",
+      "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-FIX1-ONEUSE-20261115",
+      "SourceReleased": false
+    },
+    "run": 43775725913,
+    "attempt": 1,
+    "job": 133001451556,
+    "conclusion": "failure",
+    "preflight": "failure",
+    "boundary": "skipped",
+    "unit": "skipped",
+    "full": "skipped",
+    "allCanonicalFrames": 0,
+    "full520Measured": 0,
+    "cause": "UNKNOWN",
+    "logsConsumed": true,
+    "receipt": "962a41671fc77af6d5b80f1c587bf5efae769335",
+    "closure": {
+      "utc": "2026-11-15 23:39:04 UTC",
+      "Source": "e57d6f2b862deccfbb90d8e042a576c68d0ccb3c",
+      "tree": "25bd612aae140da2247fec49565c408bd3815b02",
+      "parent": "661ba7a1fd728efe3d269d776cb91cbfa2c8c994",
+      "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+      "SAME": {
+        "blob": "dbf9a72fd11306f368e0571204493d663df04d35",
+        "bytes": 2589863,
+        "sha256": "2b6a5e9287b7391ed6a2a347c8cf872047e95dcd5ee73192ded969d8a7d749a5"
+      },
+      "fullBodiesReadback": true,
+      "CoreInheritedExactLeaves": 3201,
+      "Core": {
+        "leaves": 3201,
+        "bytes": 324448,
+        "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+      },
+      "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "queues": 0,
+      "closedHeadRuns": 0,
+      "SourcePendingCleared": true,
+      "providerRuntimeRead": false
+    }
+  },
+  "rootIndependentChecks": {
+    "hashes": 47,
+    "reversibles": 9,
+    "data": 41,
+    "ownPositives": 21,
+    "ownNegatives": 108,
+    "legacy": 36,
+    "formerlyAccepted": 47
+  },
+  "prohibitions": "No Source execution/import/eval/compile/syntax/tests locally. No refs/runs/providers/browser/mail/credentials. Immutable review DATA only. No refetch consumed logs. If static defect found cite exact bytes; failure alone does not identify a stage.",
+  "requiredOutput": "Preserve full prior review as history or append scoped round1 report. Separate Spec and quality verdict; disposition of C1,I1-I7; new-fix-diff findings only; Critical/Important/Minor and exact reproducible references. Create/readback immutable review blob. No implementation.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
