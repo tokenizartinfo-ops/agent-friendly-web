@@ -156,3 +156,8 @@ Next: one fresh whole-unit review of the diagnostic, then source-based causal in
   "sdkNamespaceEmptyVerified": false
 }
 ```
+
+
+## Whole-unit review disposition
+
+Report0a937f989b22115589a2164b7c169f26d21b1cf0: C0/I3/M2. Root accepts all five findings. The actual R3 wire and terminal Source closure stand. One aggregate final-fix wave is authorized for inactive preparation, then one Root-gated controls-only qualification and one scoped review. No Native replay; underlying R3 causal inspection proceeds separately. Detailed brief: briefs/2026-11-15-readonly-site-contract-finalfix.md. All seven nonclaims remain false.
