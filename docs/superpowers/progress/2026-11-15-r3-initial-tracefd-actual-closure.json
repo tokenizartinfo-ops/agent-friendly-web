@@ -1,0 +1,58 @@
+{
+  "purpose": "afw.r3.initial-tracefd.actual-receipt.v1",
+  "observedUTC": "2026-11-15 11:08:55 UTC",
+  "source": "34effd2150e7bcacb5d2a11dea570f246cf25106",
+  "tree": "895f6a6aa1a3d1a7e73e26155b13bf9966632c7d",
+  "run": 43707391349,
+  "attempt": 1,
+  "job": 132791308704,
+  "step": "Observe trusted initial bootstrap only",
+  "stepOutcome": "failure",
+  "runConclusion": "failure",
+  "marker": "AFW_R3_DELIVERY_STARTUP_DIAGNOSTIC/1 {\"purpose\":\"afw.r3-delivery.startup-diagnostic.v1\",\"scope\":\"source_initial_only\",\"result\":\"unavailable\",\"lastObserved\":\"pdeath_checked\",\"controlsInvoked\":0,\"originalCLIInvoked\":0,\"nativeBusinessCases\":0,\"qualification\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}",
+  "ownAcceptance": {
+    "accepted": true,
+    "bootstrapAdmitted": false,
+    "record": {
+      "purpose": "afw.r3-delivery.startup-diagnostic.v1",
+      "scope": "source_initial_only",
+      "result": "unavailable",
+      "lastObserved": "pdeath_checked",
+      "controlsInvoked": 0,
+      "originalCLIInvoked": 0,
+      "nativeBusinessCases": 0,
+      "qualification": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "qualified": false,
+    "NativeReleased": false,
+    "operationalReadiness": false
+  },
+  "controlsInvoked": 0,
+  "originalCLIInvoked": 0,
+  "nativeBusinessCases": 0,
+  "qualified": false,
+  "interpretation": "The changed observation produced a valid ordered prefix through pdeath_checked. The next image_checked event was not observed. This narrows static investigation toward initial Node-image selection/open/check/dup2; lastObserved is not failedStage or proof of precise cause. The old unknown is not retrospectively attributed to the descriptor collision. No controls or business cases invoked.",
+  "closedSource": "e73f28de6a5371f349fd873a17cdcf98045e96bf",
+  "closedTree": "e72b24069a8d56724bbf1ec725a0f8236792afa2",
+  "same": {
+    "bytes": 1732377,
+    "sha256": "4cea7998bb7001f88e428c673a69a72e39bf5c26326e1742d892c8da5258d0f0",
+    "gitBlob": "159c609876d5c5ff98dd90f40949e470d64ad6a4"
+  },
+  "originalF7Restored": true,
+  "fullSAMEPreserved": true,
+  "fullTree": true,
+  "CoreExact": true,
+  "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "fiveActiveZero": true,
+  "closedHeadRunsZero": true
+}
