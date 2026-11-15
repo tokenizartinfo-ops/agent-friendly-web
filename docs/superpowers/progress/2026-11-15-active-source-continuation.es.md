@@ -33,6 +33,14 @@ Falta candidata/F7s/SAMEappend/readbacks y gateRoot; no hay Source nuevo autoriz
 
 Full104 futuro DATA declarado, NOinvocado por diagnóstico: matrix5b829c768ed3d7af03d5eb3f1870599d39bfd083/SHA0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e; schemas5462c75c; ejemplos6f28d4f4. Root verificó100ordered idénticos, expectativas4mutantes iguales, cuatro ejemplos con receptor38749c: solo fullypassed califica sintéticamente. Descripciones de mutantes se retargetean a literal, no cambian expectativas. Eso no acredita controles reales.
 
+### Preflight actual del diagnóstico
+
+Borrador303f7b88/candidata0bc84c43/F7activo5b116322 y commit preparado Rootb0985ba0 NO fueron publicados ni ejecutados. Root verificó sus hashes/alcance/prefix, pero retuvo gate por omisión de las definiciones commonouter del módulo Node original. Aunque no se invoquen, su parseo era parte del arranque fallido y quitarlas puede ocultar una causa posible.
+
+Ruling **aff71a6de68837126375610ae6e8637d6f791649**: retener el commonouterR2 literal25794B/8a74fe67 sin invocarlo, junto al prelude instrumentado14108B. Módulo completo39903B. HelpersR2 siguen32768; programa bootstrap/F7 son tipos distintos con límite específico65536 (F7medido58679), o piezasSource≤32768. Los demás caps no cambian. Actor está regenerando paquete/F7s/SAMErefs/candidata/reporte coherentes. No afirmarSyntaxError ni causa: se preserva superficie para observarla.
+
+Source continúa cerrado dfed, sin SourceCAS pendiente/activo y sin ejecución nueva. Esperar entrega DATA ajustada, repetir cotejos afectados y fijar gate Root antes de una sola ocurrencia initial-only.
+
 ## Pendientes siguientes
 
 No hay autorización automática de otra ocurrencia de esta misma versión. A partir de revisión/evidencia se preparará una corrección o diagnóstico concreto cambiado, con gate nuevo y rollback, sin reinterpretar UNKNOWN.
