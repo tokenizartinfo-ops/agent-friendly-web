@@ -1,0 +1,1270 @@
+{
+  "vectors": {
+    "context": {
+      "source": "1111111111111111111111111111111111111111",
+      "sourceTree": "2222222222222222222222222222222222222222",
+      "run": "123456",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "jobId": 567890
+    },
+    "positive": [
+      {
+        "purpose": "afw.l05-taint-controls.v1",
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "ids": [
+          "valid_note",
+          "valid_wait",
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "partial_eof",
+          "duplicate_note",
+          "malformed_note",
+          "ordinary_ready",
+          "summary_sink",
+          "undemuxed_partial"
+        ],
+        "originalExpectedFailureIds": [
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "ordinary_ready",
+          "undemuxed_partial"
+        ],
+        "originalResults": [
+          "passed",
+          "passed",
+          "failed",
+          "failed",
+          "failed",
+          "passed",
+          "passed",
+          "passed",
+          "failed",
+          "passed",
+          "failed"
+        ],
+        "fixedResults": [
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed"
+        ],
+        "controlsPassed": true,
+        "originalL05Occurrences": 0,
+        "originalCLI": 0,
+        "native": 0,
+        "nonclaims": {
+          "historicalCauseProven": false,
+          "receiptAuthenticated": false,
+          "operationalReadiness": false,
+          "completePackage": false,
+          "PCoff": false,
+          "globalNativeDrainVerified": false,
+          "sdkNamespaceEmptyVerified": false
+        }
+      },
+      {
+        "purpose": "afw.l05-taint-controls.v1",
+        "source": "unknown",
+        "sourceTree": "unknown",
+        "run": "unknown",
+        "attempt": "unknown",
+        "job": "unknown",
+        "node": "unknown",
+        "ids": [
+          "valid_note",
+          "valid_wait",
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "partial_eof",
+          "duplicate_note",
+          "malformed_note",
+          "ordinary_ready",
+          "summary_sink",
+          "undemuxed_partial"
+        ],
+        "originalExpectedFailureIds": [
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "ordinary_ready",
+          "undemuxed_partial"
+        ],
+        "originalResults": [
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "fixedResults": [
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "controlsPassed": false,
+        "originalL05Occurrences": 0,
+        "originalCLI": 0,
+        "native": 0,
+        "nonclaims": {
+          "historicalCauseProven": false,
+          "receiptAuthenticated": false,
+          "operationalReadiness": false,
+          "completePackage": false,
+          "PCoff": false,
+          "globalNativeDrainVerified": false,
+          "sdkNamespaceEmptyVerified": false
+        }
+      },
+      {
+        "purpose": "afw.l05-taint-controls.v1",
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "ids": [
+          "valid_note",
+          "valid_wait",
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "partial_eof",
+          "duplicate_note",
+          "malformed_note",
+          "ordinary_ready",
+          "summary_sink",
+          "undemuxed_partial"
+        ],
+        "originalExpectedFailureIds": [
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "ordinary_ready",
+          "undemuxed_partial"
+        ],
+        "originalResults": [
+          "passed",
+          "passed",
+          "failed",
+          "failed",
+          "failed",
+          "passed",
+          "passed",
+          "passed",
+          "failed",
+          "passed",
+          "failed"
+        ],
+        "fixedResults": [
+          "failed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed"
+        ],
+        "controlsPassed": false,
+        "originalL05Occurrences": 0,
+        "originalCLI": 0,
+        "native": 0,
+        "nonclaims": {
+          "historicalCauseProven": false,
+          "receiptAuthenticated": false,
+          "operationalReadiness": false,
+          "completePackage": false,
+          "PCoff": false,
+          "globalNativeDrainVerified": false,
+          "sdkNamespaceEmptyVerified": false
+        }
+      },
+      {
+        "purpose": "afw.l05-taint-controls.v1",
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "ids": [
+          "valid_note",
+          "valid_wait",
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "partial_eof",
+          "duplicate_note",
+          "malformed_note",
+          "ordinary_ready",
+          "summary_sink",
+          "undemuxed_partial"
+        ],
+        "originalExpectedFailureIds": [
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "ordinary_ready",
+          "undemuxed_partial"
+        ],
+        "originalResults": [
+          "passed",
+          "passed",
+          "failed",
+          "failed",
+          "failed",
+          "passed",
+          "passed",
+          "passed",
+          "failed",
+          "passed",
+          "failed"
+        ],
+        "fixedResults": [
+          "passed",
+          "passed",
+          "passed",
+          "unknown",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed"
+        ],
+        "controlsPassed": false,
+        "originalL05Occurrences": 0,
+        "originalCLI": 0,
+        "native": 0,
+        "nonclaims": {
+          "historicalCauseProven": false,
+          "receiptAuthenticated": false,
+          "operationalReadiness": false,
+          "completePackage": false,
+          "PCoff": false,
+          "globalNativeDrainVerified": false,
+          "sdkNamespaceEmptyVerified": false
+        }
+      },
+      {
+        "purpose": "afw.l05-taint-controls.v1",
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "ids": [
+          "valid_note",
+          "valid_wait",
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "partial_eof",
+          "duplicate_note",
+          "malformed_note",
+          "ordinary_ready",
+          "summary_sink",
+          "undemuxed_partial"
+        ],
+        "originalExpectedFailureIds": [
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "ordinary_ready",
+          "undemuxed_partial"
+        ],
+        "originalResults": [
+          "passed",
+          "passed",
+          "passed",
+          "failed",
+          "failed",
+          "passed",
+          "passed",
+          "passed",
+          "failed",
+          "passed",
+          "failed"
+        ],
+        "fixedResults": [
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed"
+        ],
+        "controlsPassed": false,
+        "originalL05Occurrences": 0,
+        "originalCLI": 0,
+        "native": 0,
+        "nonclaims": {
+          "historicalCauseProven": false,
+          "receiptAuthenticated": false,
+          "operationalReadiness": false,
+          "completePackage": false,
+          "PCoff": false,
+          "globalNativeDrainVerified": false,
+          "sdkNamespaceEmptyVerified": false
+        }
+      },
+      {
+        "purpose": "afw.l05-taint-controls.v1",
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "ids": [
+          "valid_note",
+          "valid_wait",
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "partial_eof",
+          "duplicate_note",
+          "malformed_note",
+          "ordinary_ready",
+          "summary_sink",
+          "undemuxed_partial"
+        ],
+        "originalExpectedFailureIds": [
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "ordinary_ready",
+          "undemuxed_partial"
+        ],
+        "originalResults": [
+          "unknown",
+          "passed",
+          "failed",
+          "failed",
+          "failed",
+          "passed",
+          "passed",
+          "passed",
+          "failed",
+          "passed",
+          "failed"
+        ],
+        "fixedResults": [
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed"
+        ],
+        "controlsPassed": false,
+        "originalL05Occurrences": 0,
+        "originalCLI": 0,
+        "native": 0,
+        "nonclaims": {
+          "historicalCauseProven": false,
+          "receiptAuthenticated": false,
+          "operationalReadiness": false,
+          "completePackage": false,
+          "PCoff": false,
+          "globalNativeDrainVerified": false,
+          "sdkNamespaceEmptyVerified": false
+        }
+      },
+      {
+        "purpose": "afw.l05-taint-controls.v1",
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "ids": [
+          "valid_note",
+          "valid_wait",
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "partial_eof",
+          "duplicate_note",
+          "malformed_note",
+          "ordinary_ready",
+          "summary_sink",
+          "undemuxed_partial"
+        ],
+        "originalExpectedFailureIds": [
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "ordinary_ready",
+          "undemuxed_partial"
+        ],
+        "originalResults": [
+          "failed",
+          "passed",
+          "failed",
+          "failed",
+          "failed",
+          "passed",
+          "passed",
+          "passed",
+          "failed",
+          "passed",
+          "failed"
+        ],
+        "fixedResults": [
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed",
+          "passed"
+        ],
+        "controlsPassed": false,
+        "originalL05Occurrences": 0,
+        "originalCLI": 0,
+        "native": 0,
+        "nonclaims": {
+          "historicalCauseProven": false,
+          "receiptAuthenticated": false,
+          "operationalReadiness": false,
+          "completePackage": false,
+          "PCoff": false,
+          "globalNativeDrainVerified": false,
+          "sdkNamespaceEmptyVerified": false
+        }
+      },
+      {
+        "purpose": "afw.l05-taint-controls.v1",
+        "source": "1111111111111111111111111111111111111111",
+        "sourceTree": "2222222222222222222222222222222222222222",
+        "run": "123456",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "ids": [
+          "valid_note",
+          "valid_wait",
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "partial_eof",
+          "duplicate_note",
+          "malformed_note",
+          "ordinary_ready",
+          "summary_sink",
+          "undemuxed_partial"
+        ],
+        "originalExpectedFailureIds": [
+          "buffer_limit",
+          "cumulative_limit",
+          "partial_abort",
+          "ordinary_ready",
+          "undemuxed_partial"
+        ],
+        "originalResults": [
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "fixedResults": [
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "controlsPassed": false,
+        "originalL05Occurrences": 0,
+        "originalCLI": 0,
+        "native": 0,
+        "nonclaims": {
+          "historicalCauseProven": false,
+          "receiptAuthenticated": false,
+          "operationalReadiness": false,
+          "completePackage": false,
+          "PCoff": false,
+          "globalNativeDrainVerified": false,
+          "sdkNamespaceEmptyVerified": false
+        }
+      }
+    ],
+    "negative": [
+      {
+        "name": "missing purpose",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing source",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing sourceTree",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing run",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing attempt",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing job",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing node",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing ids",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing originalExpectedFailureIds",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing originalResults",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing fixedResults",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing controlsPassed",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing originalL05Occurrences",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing originalCLI",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing native",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "missing nonclaims",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "claim historicalCauseProven",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":true,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "claim receiptAuthenticated",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":true,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "claim operationalReadiness",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":true,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "claim completePackage",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":true,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "claim PCoff",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":true,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "claim globalNativeDrainVerified",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":true,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "claim sdkNamespaceEmptyVerified",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":true}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid purpose",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"other\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid source",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"3333333333333333333333333333333333333333\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid sourceTree",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"3333333333333333333333333333333333333333\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid run",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"888\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid attempt",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":2,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid job",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"other\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid node",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.0.0\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid ids",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"undemuxed_partial\",\"summary_sink\",\"ordinary_ready\",\"malformed_note\",\"duplicate_note\",\"partial_eof\",\"partial_abort\",\"cumulative_limit\",\"buffer_limit\",\"valid_wait\",\"valid_note\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid originalExpectedFailureIds",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"undemuxed_partial\",\"ordinary_ready\",\"partial_abort\",\"cumulative_limit\",\"buffer_limit\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid originalResults",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid fixedResults",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid controlsPassed",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":1,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid originalL05Occurrences",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":1,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid originalCLI",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":1,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid native",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":1,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "invalid native",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "false result",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":false,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "true without red",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "true with fixed unknown",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"unknown\",\"unknown\",\"unknown\",\"unknown\",\"unknown\",\"unknown\",\"unknown\",\"unknown\",\"unknown\",\"unknown\",\"unknown\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "extra key",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false},\"qualified\":true}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "extra claim",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false,\"extra\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "mixed context",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"unknown\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "ctx no jobID",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 0
+        }
+      },
+      {
+        "name": "double LF",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "CRLF",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\r\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "BOM",
+        "wire": "﻿AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "leading",
+        "wire": " AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "duplicate",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "oversize",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "unicode",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"purpose\":\"afw.l05-taint-controls.v1\",\"source\":\"1111111111111111111111111111111111111111\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"run\":\"123456\",\"attempt\":1,\"job\":\"readonly\",\"node\":\"22.23.4\",\"ids\":[\"valid_é\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"controlsPassed\":true,\"originalL05Occurrences\":0,\"originalCLI\":0,\"native\":0,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      },
+      {
+        "name": "reorder",
+        "wire": "AFW_L05_TAINT_CONTROLS/1 {\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false},\"native\":0,\"originalCLI\":0,\"originalL05Occurrences\":0,\"controlsPassed\":true,\"fixedResults\":[\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\",\"passed\"],\"originalResults\":[\"passed\",\"passed\",\"failed\",\"failed\",\"failed\",\"passed\",\"passed\",\"passed\",\"failed\",\"passed\",\"failed\"],\"originalExpectedFailureIds\":[\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"ordinary_ready\",\"undemuxed_partial\"],\"ids\":[\"valid_note\",\"valid_wait\",\"buffer_limit\",\"cumulative_limit\",\"partial_abort\",\"partial_eof\",\"duplicate_note\",\"malformed_note\",\"ordinary_ready\",\"summary_sink\",\"undemuxed_partial\"],\"node\":\"22.23.4\",\"job\":\"readonly\",\"attempt\":1,\"run\":\"123456\",\"sourceTree\":\"2222222222222222222222222222222222222222\",\"source\":\"1111111111111111111111111111111111111111\",\"purpose\":\"afw.l05-taint-controls.v1\"}\n",
+        "context": {
+          "source": "1111111111111111111111111111111111111111",
+          "sourceTree": "2222222222222222222222222222222222222222",
+          "run": "123456",
+          "attempt": 1,
+          "job": "readonly",
+          "node": "22.23.4",
+          "jobId": 567890
+        }
+      }
+    ]
+  },
+  "results": {
+    "positive": 8,
+    "negative": 54,
+    "oldGrammarRejectsNewExpectedRED": true,
+    "SourceExecuted": false,
+    "NativeReleased": false
+  }
+}
