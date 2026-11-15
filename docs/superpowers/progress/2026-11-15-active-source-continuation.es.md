@@ -1,10 +1,10 @@
-# AFW current continuation
+# AFW active continuation
 
 {
   "state": {
     "project": "AFW",
     "repository": "tokenizartinfo-ops/agent-friendly-web",
-    "phase": "versioned-qualification-design-pending",
+    "phase": "serial-v2-data-implementation",
     "SourceBranch": "feat/finite-native-cleanup-20261101",
     "sourceClosed": "dace0ec995e1f89599d3c1faf72b018db82e67a1",
     "sourceTree": "0ee8006a9b7f6461c4bd3d51e5c99ac8dcf4d3ec",
@@ -80,7 +80,15 @@
     "completePackage": false,
     "PCoff": false,
     "globalNativeDrainVerified": false,
-    "sdkNamespaceEmptyVerified": false
+    "sdkNamespaceEmptyVerified": false,
+    "serialV2": {
+      "actor": "/root/serial_v2_impl",
+      "plan": "0244ace61c57f0846773929b15a4c172a78a26dd",
+      "brief": "b73fa72c7f4b98ea4a5dad672a4c99011551bebf",
+      "SourceReleased": false,
+      "protocol": "e5e6770187ea336d6e71940674e19254d8b844d0",
+      "testsPending": true
+    }
   },
   "work": {
     "phase": "Task1-DATA-implementation",
@@ -120,8 +128,8 @@
       "SourceExecuted": false
     }
   },
-  "RootdocsBefore": "cc83fce2466620c54209badf208017543c2b70a9",
+  "RootdocsBefore": "d2dda48509df1c40de650327d043700113dad56d",
   "SourcePending": null
 }
 
-Onlyserial-v2Task1 immutableDATAimplementationactive/root/serial_v2_impl. NoSourcecandidate/run yet. Do notredispatchcompletedserialpinTask1orconsumedruns. Protocol/schema/policy earlyimmutablebytescryptographicallycheckedRoot; Sourceartifacts/preflightimplementation/caps/rawSourcecode testsstillpending. RootOWNcontrollerparsers only passedsyntheticfixtures; neveractualAFW. Rootledger docs/superpowers/progress/2026-11-15-serial-v2-ledger.md. PriororiginalunitMinorM1deferred. Allsevennonclaimsfalse,C2/Nativeheld. Noownerruntimeactionneeded.
+Readcurrentserial-v2ledger; actor/root/serial_v2_impl active immutableTask1DATA, notanotherimplementationdispatch. NoSourcecandidate/run. RootOWNparsersyntheticcontrols notAFWmeasurements. KeepSourceclosedDace, oldconsumedrunsnotrerun. Sevennonclaimsfalse. Noowneractionneeded.
