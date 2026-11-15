@@ -16,3 +16,5 @@ Identity: AFW Q1S serial preparation, Rootdocs cloud workspace instead of local 
 Ruling: preserve all old serial proofscope/clocks; test unit required named preflightstep adds no normalreport frame. Costifwrong: candidate remains unavailable, no Native/runtime release.
 Root selection067d58d3; specfc1c6329; builderce3ee154 no material questions. Plan2e18219a selfreview:all five focusrows mapped toTask1 tests,Task2 strictreadback,Task3review; no undefined externalruntimeinterface.
 Task1: ready for fresh implementer, DATAonly. Task2: HELD until immutabledata/preflights. Task3: HELD untilactualclosure. I3 OPEN,C2/NativeHELD,sevenclaimsfalse.
+
+Root static preparation15Nov: actualcontrols17e101dd fetched aftercreation; candidate32428chars/normal31799,629delta,postpreparation/oldentryPinalgorithm/other32rawhelpers andclocksunchanged by OWN43d30658 on labelled reconstructedDATA. This is preliminaryscope, finalactualrawartifact equality/crypto/39pins/unitloader/caps/closure stillpending. Firstunitacb5db5e had0-counttwo-spaceanchors; corrected duringinitialselfreview beforeanySourceexecution, final9dceaaa2. NoactualSource tests; noSourcecandidate.
