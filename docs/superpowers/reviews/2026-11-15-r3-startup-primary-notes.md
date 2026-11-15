@@ -1,0 +1,9 @@
+# AFW — referencias primarias para el diagnóstico de arranque
+
+Consulta Root de15nov2026, posterior al cierre dfed0449. No prueba de Source ni de runtime, sin código bajo revisión ejecutado enPC. El único resultado real sigue siendo outer_startup_unavailable/100sinmedir.
+
+- La [documentación Node22.21](https://nodejs.org/download/release/v22.21.0/docs/api/cli.html#--disable-warningcode-or-type) documenta la opción --disable-warning y el tipo ExperimentalWarning; no corresponde atribuir la indisponibilidad a una supuesta inexistencia general de esa opción. El enlace de latest-v22 no abrió mediante el navegador de investigación; eso no prueba un problema del ejecutable ni de22.23.4.
+- [Linux man-pages, proc task/thread-self](https://man7.org/linux/man-pages/man5/proc_thread-self.5.html) describe el directorio del hilo que accede. El [código primario del kernel](https://raw.githubusercontent.com/torvalds/linux/master/fs/proc/thread_self.c) construye el enlace con los identificadores de grupo/hilo del namespace. Se leyó semántica, no se copió ni ejecutó código GPL. No acredita los descriptores reales de este job.
+- [Python3.12 os.supports_fd](https://docs.python.org/3.12/library/os.html#os.supports_fd) es una capacidad de la plataforma local, no una garantía derivada del nombre de versión. [os.getxattr](https://docs.python.org/3.12/library/os.html#os.getxattr) admite descriptor cuando la plataforma lo soporta. No se leyó una versión o capacidad exacta del Python instalado en el job.
+
+El fallback genérico no identifica la excepción, propiedad o etapa que falló. No atribuir a claves, proveedor, warning de Actions ni al R3 original. Las comprobaciones del entorno y del entry deberán ser específicas y saneadas si, tras la revisión, se prepara una nueva propuesta Source; nunca mediante replay de43697701677.
