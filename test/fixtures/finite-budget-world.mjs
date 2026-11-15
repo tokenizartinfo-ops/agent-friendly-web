@@ -873,7 +873,7 @@ function registerFixedOwnedCleanup(fn){const frame=fixedBudgetOwners.getStore();
 async function closeFixedOwnedFrame(frame,primary){
  if(frame.closed)return frame.closed;
  frame.closed=fixedBudgetOwners.run(frame,async()=>{
-  primary=frame.operationPrimary??primary??frame.cleanupPrimary??null;
+  primary=frame.operationPrimary??primary??frame.cleanupPrimary??null;if(frame.caseName==='R3')try{await fixedR3Preserve(frame);}catch(error){frame.failures.push({phase:'r3_sample_preservation',error});}
   // SYN RPCs belong only to fixed R/D adapters before owned disposal begins.
   await Promise.allSettled(frame.records.map(async record=>{
    for(const phase of ['release','restore']){
@@ -904,7 +904,7 @@ async function closeFixedOwnedFrame(frame,primary){
 }
 async function withFixedBudgetOwner(caseName,root,operation,{recovery=false}={}){
  assert(['R1','R2','R3','D1','D2','D3','D4','P1','positive_producer','reduction_producer'].includes(caseName));
- const frame={caseName,root,records:[],callbacks:[],failures:[],closed:null};let value,primary=null;
+ const frame={caseName,root,records:[],callbacks:[],failures:[],closed:null};if(caseName==='R3'){const context=fixedR3Context();frame.r3Sample=context?fixedR3Blank(context):null;}let value,primary=null;
  return fixedBudgetOwners.run(frame,async()=>{
   if(recovery){assertFixedBudgetAllocationSafe();const r=createFixedOwnedRecord(frame,'recovery');r.attachPersist(join('output','r2-native-'+(caseName==='P1'?'finite-budget-positive':'budget-'+caseName),'state'));}
   try{value=await operation();}catch(error){primary=noteFixedOwnedUnwind(frame,error);}
@@ -1155,7 +1155,7 @@ function fixedSendSdkProof(value,rows,{negative=false}={}){
 }
 
 async function fixedBudgetWait(read,predicate,deadline){
- for(;;){const value=await read();if(predicate(value))return value;assert(Date.now()<deadline,'SYN fixed budget observation deadline');await fixedBudgetPause(20);}
+ for(;;){const value=await read();fixedR3Capture(value);if(predicate(value))return value;assert(Date.now()<deadline,'SYN fixed budget observation deadline');await fixedBudgetPause(20);}
 }
 function fixedBudgetEnvelope(role,kind,cases,extra={}){
  assert.equal(process.env.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');assert.equal(process.env.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101');assert.equal(process.env.GITHUB_RUN_ATTEMPT,'1');
@@ -1418,7 +1418,7 @@ async function runFixedFacetControls(group){
 
 
 async function fixedOriginalFixtureCleanup(){
- const source=await readFile('test/fixtures/finite-owner-cleanup.mjs','utf8'),blob=createHash('sha1').update('blob '+Buffer.byteLength(source)+'\0'+source).digest('hex');assert.equal(blob,'2f5dad6c306fac1be2f11845bef640bb204ad572','fixed current Node cleanup fixture blob');
+ const source=await readFile('test/fixtures/finite-owner-cleanup.mjs','utf8'),blob=createHash('sha1').update('blob '+Buffer.byteLength(source)+'\0'+source).digest('hex');assert.equal(blob,'2cfd90a5bebaeba38f876d6512ca09b2ad8f557f','fixed current Node cleanup fixture blob');
  const ast=sourceAST(source,'fixed-original-owner-cleanup-callback'),owners=ast.statements.filter(node=>ts.isFunctionDeclaration(node)&&node.name?.text==='ownerReferenceFixture');assert.equal(owners.length,1);
  const matches=[];const walk=node=>{if(ts.isCallExpression(node)&&ts.isPropertyAccessExpression(node.expression)&&node.expression.expression.getText(ast)==='t'&&node.expression.name.text==='after')matches.push(node);ts.forEachChild(node,walk);};walk(owners[0]);assert.equal(matches.length,1,'unique actual ownerReferenceFixture cleanup callback');
  const call=matches[0];assert.equal(call.arguments.length,1);const arrow=call.arguments[0];assert(ts.isArrowFunction(arrow)&&arrow.parameters.length===0&&arrow.modifiers?.some(m=>m.kind===ts.SyntaxKind.AsyncKeyword));
@@ -2096,3 +2096,76 @@ export async function runPostAckR2Diagnostic(){
  });
  finishPostAckOriginal(diagnostic);
 }
+
+/** Node-test-only R3 projection. This never crosses into a Worker or request API. */
+const fixedR3Unknown='unknown',fixedR3PhaseKeys=['completeWrites','completeNormal','lookupStage','authorizePostFinally'];
+const fixedR3Bounds={seedEntries:201,lists:2,gets:200,nativeInvoked:202,nativeSettled:202,nativeRejected:202,nativeUnsettled:2,outwardPending:2,heldNativeSettled:2,selectedChildOrdinal:65535,queueCount:512,lastQueueChild:65535,lastQueueQueued:200};
+const fixedR3Enums={inputSeeded:[true,false],observerInvalid:[true,false],queueObserverInvalid:[true,false],sdkObserverInvalid:[true,false],selectedChildCount:[0,1,'multiple'],selectedChildFamily:[1,2],childWorkStatus:['unregistered','pending','fulfilled','rejected'],childWaitStatus:['unregistered','pending','fulfilled','rejected'],childAbortSeen:[true,false],parentAliveAtAbort:[true,false],workPendingAtAbort:[true,false],sameWorkWaitError:[true,false],lastQueueFamily:[1,2],lastQueueActive:[1,2],lastQueueMethod:['get','list','delete'],heldOperationCount:[0,1,2,'multiple']};
+const fixedR3Nonclaims=['historicalCauseProven','receiptAuthenticated','operationalReadiness','completePackage','PCoff','globalNativeDrainVerified','sdkNamespaceEmptyVerified'];
+function fixedR3Own(value,key){if(value===null||typeof value!=='object'||fixedNodeTypes.isProxy(value))return undefined;try{const d=Object.getOwnPropertyDescriptor(value,key);return d&&Object.hasOwn(d,'value')?d.value:undefined;}catch{return undefined;}}
+function fixedR3Plain(value){if(value===null||typeof value!=='object'||fixedNodeTypes.isProxy(value))return false;try{const p=Object.getPrototypeOf(value);return p===Object.prototype||p===null;}catch{return false;}}
+function fixedR3Array(value,max,entries=false){
+ if(value===null||typeof value!=='object'||fixedNodeTypes.isProxy(value)||!Array.isArray(value))return null;
+ const n=fixedR3Own(value,'length');if(!Number.isSafeInteger(n)||n<0||n>max)return null;
+ if(entries)for(let i=0;i<n;i++)if(!fixedR3Plain(fixedR3Own(value,String(i))))return null;
+ return n;
+}
+const fixedR3Number=(value,max,min=0)=>Number.isSafeInteger(value)&&value>=min&&value<=max?value:fixedR3Unknown;
+const fixedR3Member=(value,list)=>list.includes(value)?value:fixedR3Unknown;
+function fixedR3EmptySample(){return {...Object.fromEntries([...Object.keys(fixedR3Bounds),...Object.keys(fixedR3Enums)].map(k=>[k,fixedR3Unknown])),phase:Object.fromEntries(fixedR3PhaseKeys.map(k=>[k,fixedR3Unknown]))};}
+function fixedR3Project(raw){
+ const result=fixedR3EmptySample();
+ try{
+  if(!fixedR3Plain(raw)||fixedR3Own(raw,'caseName')!=='R3')return result;
+  const input=fixedR3Own(raw,'input');
+  const entries=fixedR3Plain(input)?fixedR3Number(fixedR3Own(input,'entries'),201):fixedR3Unknown;
+  result.inputSeeded=input===null?false:entries!==fixedR3Unknown?true:fixedR3Unknown;if(result.inputSeeded===true)result.seedEntries=entries;
+  for(const key of ['lists','gets','nativeInvoked','nativeSettled','nativeRejected','nativeUnsettled','outwardPending','heldNativeSettled'])result[key]=fixedR3Number(fixedR3Own(raw,key),fixedR3Bounds[key]);
+  for(const key of ['observerInvalid','queueObserverInvalid','sdkObserverInvalid'])result[key]=fixedR3Member(fixedR3Own(raw,key),[true,false]);
+  const children=fixedR3Own(raw,'children'),childCount=fixedR3Array(children,8,true);result.selectedChildCount=childCount===null?fixedR3Unknown:childCount>1?'multiple':childCount;
+  if(childCount===1){
+   const child=fixedR3Own(children,'0');result.selectedChildOrdinal=fixedR3Number(fixedR3Own(child,'childOrdinal'),65535,1);result.selectedChildFamily=fixedR3Member(fixedR3Own(child,'family'),[1,2]);
+   result.childWorkStatus=fixedR3Member(fixedR3Own(child,'workStatus'),fixedR3Enums.childWorkStatus);result.childWaitStatus=fixedR3Member(fixedR3Own(child,'waitStatus'),fixedR3Enums.childWaitStatus);
+   const abort=fixedR3Own(child,'abortAt');result.childAbortSeen=abort===null?false:typeof abort==='number'&&Number.isFinite(abort)&&abort>=0?true:fixedR3Unknown;
+   for(const key of ['parentAliveAtAbort','workPendingAtAbort','sameWorkWaitError'])result[key]=fixedR3Member(fixedR3Own(child,key),[true,false]);
+  }
+  const queues=fixedR3Own(raw,'queueEvents'),queueCount=fixedR3Array(queues,512,true);result.queueCount=queueCount===null?fixedR3Unknown:queueCount;
+  if(queueCount>0){
+   const last=fixedR3Own(queues,String(queueCount-1));result.lastQueueFamily=fixedR3Member(fixedR3Own(last,'family'),[1,2]);result.lastQueueChild=fixedR3Number(fixedR3Own(last,'childOrdinal'),65535,1);result.lastQueueActive=fixedR3Member(fixedR3Own(last,'active'),[1,2]);result.lastQueueQueued=fixedR3Number(fixedR3Own(last,'queued'),200);result.lastQueueMethod=fixedR3Member(fixedR3Own(last,'method'),['get','list','delete']);
+  }
+  const heldCount=fixedR3Array(fixedR3Own(raw,'heldOperations'),202);result.heldOperationCount=heldCount===null?fixedR3Unknown:heldCount>2?'multiple':heldCount;
+  const phase=fixedR3Own(raw,'phase');if(fixedR3Plain(phase)){
+   for(const key of ['completeWrites','completeNormal'])result.phase[key]=fixedR3Member(fixedR3Own(phase,key),[0,1,'multiple']);
+   result.phase.lookupStage=fixedR3Member(fixedR3Own(phase,'lookupStage'),['not_seen','entered','exited']);
+   result.phase.authorizePostFinally=fixedR3Member(fixedR3Own(phase,'authorizePostFinally'),['not_seen','one','multiple']);
+  }
+ }catch{return fixedR3EmptySample();}
+ return result;
+}
+function fixedR3Context(){const source=process.env.GITHUB_SHA,run=process.env.GITHUB_RUN_ID,attempt=process.env.GITHUB_RUN_ATTEMPT;if(typeof source!=='string'||!/^[a-f0-9]{40}$/.test(source)||typeof run!=='string'||!/^[1-9][0-9]{0,19}$/.test(run)||attempt!=='1')return null;return {source,run,attempt:1,case:'R3'};}
+function fixedR3Blank(context){return {purpose:'afw.r3-existing-sample.syn.v1',source:context.source,run:context.run,attempt:context.attempt,case:context.case,sampleState:'not_observed',sample:fixedR3EmptySample(),nonclaims:Object.fromEntries(fixedR3Nonclaims.map(k=>[k,false]))};}
+function fixedR3Keys(value,keys){if(!fixedR3Plain(value))throw Error('SYN R3 diagnostic shape');const own=Object.getOwnPropertyDescriptors(value);if(Reflect.ownKeys(own).length!==keys.length||keys.some(k=>!Object.hasOwn(own,k)||!Object.hasOwn(own[k],'value')))throw Error('SYN R3 diagnostic keys');}
+function fixedR3Encode(value,context){
+ fixedR3Keys(context,['source','run','attempt','case']);
+ if(typeof context.source!=='string'||typeof context.run!=='string'||!/^[a-f0-9]{40}$/.test(context.source)||!/^[1-9][0-9]{0,19}$/.test(context.run)||context.attempt!==1||context.case!=='R3')throw Error('SYN R3 diagnostic association');
+ fixedR3Keys(value,['purpose','source','run','attempt','case','sampleState','sample','nonclaims']);
+ if(value.purpose!=='afw.r3-existing-sample.syn.v1'||['source','run','attempt','case'].some(k=>value[k]!==context[k])||!['observed','not_observed'].includes(value.sampleState))throw Error('SYN R3 diagnostic association');
+ const sample=value.sample;fixedR3Keys(sample,[...Object.keys(fixedR3Bounds),...Object.keys(fixedR3Enums),'phase']);fixedR3Keys(sample.phase,fixedR3PhaseKeys);fixedR3Keys(value.nonclaims,fixedR3Nonclaims);
+ for(const key of fixedR3Nonclaims)if(value.nonclaims[key]!==false)throw Error('SYN R3 diagnostic nonclaim');
+ for(const [key,max]of Object.entries(fixedR3Bounds))if(sample[key]!==fixedR3Unknown&&fixedR3Number(sample[key],max,['selectedChildOrdinal','lastQueueChild'].includes(key)?1:0)===fixedR3Unknown)throw Error('SYN R3 diagnostic bound');
+ for(const [key,list]of Object.entries(fixedR3Enums))if(sample[key]!==fixedR3Unknown&&!list.includes(sample[key]))throw Error('SYN R3 diagnostic category');
+ for(const [key,list]of Object.entries({completeWrites:[0,1,'multiple'],completeNormal:[0,1,'multiple'],lookupStage:['not_seen','entered','exited'],authorizePostFinally:['not_seen','one','multiple']}))if(sample.phase[key]!==fixedR3Unknown&&!list.includes(sample.phase[key]))throw Error('SYN R3 phase category');
+ if(sample.inputSeeded!==true&&sample.seedEntries!==fixedR3Unknown)throw Error('SYN R3 seed association');if(sample.inputSeeded===true&&sample.seedEntries===fixedR3Unknown)throw Error('SYN R3 seed marker');
+ if(sample.selectedChildCount!==1&&['selectedChildOrdinal','selectedChildFamily','childWorkStatus','childWaitStatus','childAbortSeen','parentAliveAtAbort','workPendingAtAbort','sameWorkWaitError'].some(k=>sample[k]!==fixedR3Unknown))throw Error('SYN R3 child association');
+ if((sample.queueCount===0||sample.queueCount===fixedR3Unknown)&&['lastQueueFamily','lastQueueChild','lastQueueActive','lastQueueQueued','lastQueueMethod'].some(k=>sample[k]!==fixedR3Unknown))throw Error('SYN R3 queue association');
+ if(value.sampleState==='not_observed'&&(Object.entries(sample).some(([k,v])=>k!=='phase'&&v!==fixedR3Unknown)||Object.values(sample.phase).some(v=>v!==fixedR3Unknown)))throw Error('SYN R3 absence');
+ const text=JSON.stringify(value)+'\n';if(Buffer.byteLength(text)>4096)throw Error('SYN R3 diagnostic cap');return text;
+}
+function fixedR3Capture(raw){
+ try{const frame=fixedBudgetOwners.getStore();if(frame?.caseName!=='R3'||!frame.r3Sample)return;const context=fixedR3Context();if(!context||['source','run','attempt','case'].some(k=>frame.r3Sample[k]!==context[k]))return;frame.r3Sample={...fixedR3Blank(context),sampleState:'observed',sample:fixedR3Project(raw)};}catch{}
+}
+async function fixedR3Preserve(frame){
+ const context=fixedR3Context();if(!context||!frame.r3Sample)throw Error('SYN R3 diagnostic context unavailable');
+ const text=fixedR3Encode(frame.r3Sample,context);await mkdir(frame.root,{recursive:true});await writeFile(join(frame.root,'r3-existing-sample.json'),text,{flag:'wx',mode:0o600});
+}
+export const fixedR3SampleControls=Object.freeze({wait:fixedBudgetWait,withOwner:withFixedBudgetOwner,close:closeFixedOwnedFrame,frame:()=>fixedBudgetOwners.getStore(),errorFacts:error=>fixedBudgetOwnerErrors.get(error),project:fixedR3Project,blank:fixedR3Blank,encode:fixedR3Encode});
