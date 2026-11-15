@@ -15,3 +15,6 @@ Estos son motivos estáticos de corrección, sin resultados PASS observados. El 
 
 
 Inspección posterior del paquete provisional ab2f1050: el nuevo exec_node(None) vuelve a seleccionar node/PATH también en la entrada anidada del harness. Esto contradice la selección inicial única y la conservación de fd3 ejercitada por current-image-retained/path-substitution. Root retuvo el gate y pidió separar un rol inicial F7 del stdin anidado que debe reutilizar fd3, compartiendo las mismas primitivas. Sin ejecutar Source; todos los hashes/candidatas de esa versión siguen provisionales hasta un paquete coherente corregido.
+
+
+Cierre DATA final: reporte275501ca, candidata6577d0d5, payload9bf2e58b. Roles inicial/anidado separados; pausa L05 privada sustituida por pipe/EOF conforme25fb16b9. Root volvió a verificar el paquete coherente completo antes de gate, sin Source local.
