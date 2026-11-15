@@ -1,10 +1,12 @@
 {
+  "rawBlob": "c37aff82aefac165f4acef819aaedde13bc40939",
   "syntheticAccepted": [
     "not_observed_all_unknown",
-    "observed_bounded_sample"
+    "observed_seed_marker",
+    "observed_bounded_child_queue"
   ],
-  "negativeRejected": 19,
+  "negativeRejected": 20,
   "SourceExecuted": false,
   "allFixturesSynthetic": true,
-  "maxObservedFixtureBytes": 1120
+  "maxFixtureBytes": 1219
 }
