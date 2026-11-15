@@ -752,3 +752,8 @@ One scoped final-fix review remains. The R3 business failure is unchanged and it
   "sdkNamespaceEmptyVerified": false
 }
 ```
+
+
+## Unit closed — scoped disposition accepted
+
+Scoped reviewf48c01743562f0a5745fc7a9344d9be9a0253ccd: C0/I0/M0 remaining, allI1–I3/M1–M2 addressed, no load-bearing residual from this wave. Root accepts the disposition. This diagnostic unit is COMPLETE: one Native diagnostic consumed, one whole review, one aggregate controls-only fix wave/run, one scoped review; Source8b1e2f closed/originalF7/full1010233B SAME preserved/Core3200/Main intact. The AFW goal is NOT complete. R3 cause, coherent16, C2package/custody and eventual live PC-off remain pending. The next bounded R3 existing-sample Source design may now proceed through its own plan/preparation/gate. No owner action.
