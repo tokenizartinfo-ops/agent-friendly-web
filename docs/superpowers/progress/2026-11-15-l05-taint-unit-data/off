@@ -1,0 +1,181 @@
+name: AFW L05 attributed-note parser controls
+run-name: AFW L05 attributed-note parser controls ONEUSE ${{ github.sha }}
+on:
+  push:
+    branches:
+      - feat/finite-native-cleanup-20261101
+    paths:
+      - .github/workflows/afw-finite-budget-qualification.yml
+permissions:
+  contents: read
+concurrency:
+  group: afw-finite-budget-qualification
+  cancel-in-progress: false
+# Inactive parser-only unit controls. No lifetime probe invocation.
+# Previous observation is consumed. Original qualification remains open.
+# Action-runtime warning M02 deferred; exact mandated pins unchanged.
+jobs:
+  readonly:
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        id: checkout
+        with:
+          repository: tokenizartinfo-ops/agent-friendly-web
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        id: node
+        with:
+          node-version: '22.23.4'
+      - name: Check bounded private-note parser controls
+        if: always()
+        shell: bash
+        env:
+          AFW_TAINT_CHECKOUT: ${{ steps.checkout.outcome }}
+          AFW_TAINT_SETUP: ${{ steps.node.outcome }}
+        run: |
+          set +e
+          set -o pipefail
+          exec 2>/dev/null
+          umask 077
+          unset AFW_TAINT_NODE AFW_TAINT_HEAD AFW_TAINT_TREE AFW_TAINT_TOP AFW_TAINT_CLEAN
+          if test "${AFW_TAINT_CHECKOUT-}" = success && test "${AFW_TAINT_SETUP-}" = success && test -z "${NODE_OPTIONS+x}" && test -z "${NODE_PATH+x}" && test -z "${AFW_SYN_CHECKPOINT_KEY+x}" && test -z "${AFW_BUDGET_DIAGNOSTIC_CANDIDATE+x}"; then
+            AFW_TAINT_NODE=$(node -p "process.versions.node") && AFW_TAINT_HEAD=$(git rev-parse HEAD) && AFW_TAINT_TREE=$(git rev-parse 'HEAD^{tree}') && AFW_TAINT_TOP=$(git rev-parse --show-toplevel) && git diff --no-ext-diff --exit-code HEAD -- >/dev/null && AFW_TAINT_CLEAN=yes
+          fi
+          export AFW_TAINT_NODE AFW_TAINT_HEAD AFW_TAINT_TREE AFW_TAINT_TOP AFW_TAINT_CLEAN
+          git ls-tree -rz --full-tree HEAD | /usr/bin/python3 -I -S /proc/self/fd/3 3<<'AFW_L05_TAINT_UNIT'
+          import ast,base64,hashlib,json,os,re,stat,sys,zlib
+          from types import SimpleNamespace
+          
+          IDS = ["valid_note","valid_wait","buffer_limit","cumulative_limit","partial_abort","partial_eof","duplicate_note","malformed_note","ordinary_ready","summary_sink","undemuxed_partial"]
+          RED = ["buffer_limit","cumulative_limit","partial_abort","ordinary_ready","undemuxed_partial"]
+          FLAGS = ["historicalCauseProven","receiptAuthenticated","operationalReadiness","completePackage","PCoff","globalNativeDrainVerified","sdkNamespaceEmptyVerified"]
+          F7 = '.github/workflows/afw-finite-budget-qualification.yml'
+          SAME = 'docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md'
+          UNKNOWN = ['unknown'] * len(IDS)
+          
+          def require(v):
+              if not v:
+                  raise ValueError()
+          
+          def pin(data,size,digest,blob):
+              require(len(data)==size and hashlib.sha256(data).hexdigest()==digest and gitblob(data)==blob)
+          
+          def gitblob(data):
+              return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+          
+          def canon(v):
+              return json.dumps(v,separators=(',',':'),ensure_ascii=True)
+          
+          def checked_body(path,maximum):
+              st=os.lstat(path)
+              require(stat.S_ISREG(st.st_mode) and 0<st.st_size<=maximum and os.path.realpath(path)==os.path.join(os.getcwd(),path))
+              with open(path,'rb') as f:
+                  data=f.read(maximum+1)
+              require(len(data)==st.st_size)
+              return data
+          
+          def exact_edits(source,edits):
+              require(type(source) is str and source.isascii() and type(edits) is list)
+              out=[];at=0
+              for edit in edits:
+                  require(type(edit) is list and len(edit)==3)
+                  pos,old,new=edit
+                  require(type(pos) is int and at<=pos<=len(source) and type(old) is str and type(new) is str and old.isascii() and new.isascii() and source[pos:pos+len(old)]==old)
+                  out.extend((source[at:pos],new));at=pos+len(old)
+              return ''.join(out)+source[at:]
+          
+          def context_and_bytes():
+              e=os.environ
+              exact={'GITHUB_REPOSITORY':'tokenizartinfo-ops/agent-friendly-web','GITHUB_REPOSITORY_ID':'1347578006','GITHUB_EVENT_NAME':'push','GITHUB_REF':'refs/heads/feat/finite-native-cleanup-20261101','GITHUB_JOB':'readonly','GITHUB_RUN_ATTEMPT':'1','GITHUB_WORKFLOW_REF':'tokenizartinfo-ops/agent-friendly-web/.github/workflows/afw-finite-budget-qualification.yml@refs/heads/feat/finite-native-cleanup-20261101','AFW_TAINT_CHECKOUT':'success','AFW_TAINT_SETUP':'success','AFW_TAINT_NODE':'22.23.4','AFW_TAINT_CLEAN':'yes'}
+              require(all(e.get(k)==v for k,v in exact.items()))
+              require(all(k not in e for k in ('NODE_OPTIONS','NODE_PATH','AFW_SYN_CHECKPOINT_KEY','AFW_BUDGET_DIAGNOSTIC_CANDIDATE')))
+              head=e.get('GITHUB_SHA','');tree=e.get('AFW_TAINT_TREE','');run=e.get('GITHUB_RUN_ID','')
+              require(re.fullmatch('[a-f0-9]{40}',head) and re.fullmatch('[a-f0-9]{40}',tree) and re.fullmatch('[1-9][0-9]{0,19}',run))
+              require(head==e.get('AFW_TAINT_HEAD') and os.getcwd()==e.get('AFW_TAINT_TOP')==os.path.realpath('.'))
+              tree_bytes=sys.stdin.buffer.read(400001)
+              require(0<len(tree_bytes)<=400000 and tree_bytes.endswith(b'\0'))
+              core=[];special={}
+              for row in tree_bytes[:-1].split(b'\0'):
+                  meta,path=row.split(b'\t',1)
+                  if path in (F7.encode(),SAME.encode()):
+                      require(path not in special and re.fullmatch(b'100644 blob [0-9a-f]{40}',meta))
+                      special[path]=meta.split(b' ')[-1].decode('ascii')
+                  else:
+                      core.append((path,row))
+              data=b''.join(row+b'\0' for _,row in sorted(core))
+              require(len(core)==3201 and len(data)==324448 and hashlib.sha256(data).hexdigest()=='aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703')
+              require(special[F7.encode()]==gitblob(checked_body(F7,73728)))
+              source=checked_body(SAME,2600000)
+              require(special[SAME.encode()]==gitblob(source))
+              pin(source,2467916,'cbc9d2a42f6cabdfed4432504a968b8756248738bc5f3023b0c53b555a35b4cc','12a8604eef08d6ee57b39a6398c3449e4cab8744')
+              return dict(source=head,sourceTree=tree,run=run,attempt=1,job='readonly',node='22.23.4'),source
+          
+          def programs(history):
+              prefix=history[:2455649];suffix=history[2455649:]
+              pin(prefix,2455649,'5f42bf2d4a184dc02e400bcaf4d6043511fd238f1587b00b563af9670701f455','3fdaf43231f5621911e14569240418b5e661abf9');pin(suffix,12267,'bddea5f02021b8099046de99c6cf0d527554c6280fc38111c656bf5a5bad52c8','9134eccf2f7f7d1f646aa0b912e9a46ce1baa0ff')
+              tag=b'\nAFW-L05-TAINT-UNIT-DATA/1\n'
+              require(suffix.startswith(tag) and suffix.endswith(b'\n'))
+              overlay=json.loads(suffix[len(tag):-1]);require(canon(overlay).encode()==suffix[len(tag):-1])
+              require(overlay['sourceParent']=='ae42370ab5f2973e03a572616c62cf004cce874d' and overlay['sourceParentTree']=='b075e6eab277bd204c3884f490591cfa58637a71' and overlay['rootReceiver']=='4327c13cff9eb0204a71f46e7c5fed6852985655')
+              begin=b'<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:BEGIN -->'
+              end=b'<!-- AFW-R3-DELIVERY-SUCCESSOR-R5-DATA-V1:END -->'
+              require(prefix.count(begin)==prefix.count(end)==1)
+              section=prefix.split(begin,1)[1].split(end,1)[0]
+              require(re.fullmatch(rb'\n[A-Za-z0-9+/=\n]+\n',section))
+              b64=section.replace(b'\n',b'');require(len(b64)==160284)
+              packed=base64.b64decode(b64,validate=True);require(base64.b64encode(packed)==b64)
+              pin(packed,120211,'7e9aace1b1a3930a1a5234a2fdee5af68ebec77cc5b9818a6d342328047bf0e5','b3dfc078047bee03b5b42140783ee1dcf2409fd8')
+              dec=zlib.decompressobj(31);raw=dec.decompress(packed,524289)
+              require(dec.eof and not dec.unused_data and not dec.unconsumed_tail)
+              pin(raw,487208,'087bba2182c131579e233f6c29daf1ee85e2aae41e77b66d6f93cc44cb5000c5','f9c8261c54f761b5c33ddc370dbe7b308648033b')
+              obj=json.loads(raw)
+              require(obj['sourceParent']=='bfa80fac58ecb60bb3c9bcd458da6f393b301f70' and obj['sourceParentTree']=='d17f87ef49892e6a4c0ec50dd2436b0697b9f45f' and len(obj['helpers'])==33)
+              prod=obj['production'];pin(prod['data'].encode(),95518,'cfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91','b88ebef9a2aa979772d20bfb778cbfe463dc3011')
+              require(prod['count']==18 and prod['setSha256']=='71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af')
+              old=prefix[2432862:2452486]
+              pin(old,19624,'b3176d5854d497c09d2f66db96675a75b3e7e49d7197e562e1afe1c147e3ab1b','77253fb50deae794b049fa5483726f24f03a973a')
+              tag=b'\nAFW-L05-OBSERVATION-DATA/1\n';require(old.startswith(tag) and old.endswith(b'\n'))
+              frame=json.loads(old[len(tag):-1]);require(frame['snapshot']==overlay['normalRaw'] and frame['contextParent']==overlay['observationDerivationParent'])
+              recipe=base64.b64decode(frame['recipe'],validate=True);require(base64.b64encode(recipe).decode()==frame['recipe'])
+              pin(recipe,14297,'99fac3412ef9ba16a877995b0c4bf426ceb3331fb7121951e1f50fe774efee75','23e4f7659f61cea9b981acdc8dc3864397b418a0')
+              units=json.loads(recipe);require([p[0] for p in units]==['controls.mjs','controls-boundary.py','lifetime-controls.py'])
+              normal=obj['helpers']['lifetime-controls.py'];pin(normal.encode(),12219,'d67b5c8c8e127c359f8d2b5d7da30da809b8d91bfb77759df4bbf9ecaaf53c59','21b0b82242a76efd94d34fe1f722e04fda6cd489')
+              baseline=exact_edits(normal,units[2][1]);pin(baseline.encode(),21174,'15984e2455c0b2e70f0b4453c570ac233c9daaa00411cd94e07b0d63b5070415','6f42cda2bfc879a42de9ab19ec5475c7ffd92b86')
+              changes=overlay['edits'];pin(canon(changes).encode(),1698,'625e0a3b623ed0ad303901a2ab95c804281a8dba3243a03c07173a55128ad919','9cbbef9ebff06177675ed7a95d2b0d8bf2221dbe')
+              fixed=exact_edits(baseline,changes);pin(fixed.encode(),21346,'1386f5aa17f3480a8710d289298881bb07f6d2ad2d1f13cf2a9c601def6afeac','11ac20eb27961a323452c30a6cf6376b22ce506b')
+              driver=overlay['driver'];pin(driver.encode(),9550,'3628b1603bbb707e7349fc51466709f54b5a70cc549ed242251512bce2b71adc','1ae61138c13b2753266c49f6c0bc8fcedd79c464')
+              return baseline,fixed,driver
+          
+          def measure(baseline,fixed,driver):
+              # Only this pinned unit function is loaded. Its own six-function probe allowlist never evaluates a probe module.
+              tree=ast.parse(driver,filename='<pinned-unit-driver>',mode='exec')
+              require(len(tree.body)==1 and type(tree.body[0]) is ast.FunctionDef and tree.body[0].name=='run_units' and not tree.body[0].decorator_list)
+              ns={'ast':ast,'json':json,'stat':stat,'SimpleNamespace':SimpleNamespace,'IDS':IDS}
+              exec(compile(ast.Module(body=tree.body,type_ignores=[]),'<pinned-unit-driver>','exec',dont_inherit=True),ns)
+              original,current=ns['run_units'](baseline,fixed)
+              require(all(type(rows) is list and len(rows)==len(IDS) and all(type(s) is str and s in ('passed','failed','unknown') for s in rows) for rows in (original,current)))
+              return original,current
+          
+          record=dict(purpose='afw.l05-taint-controls.v1',source='unknown',sourceTree='unknown',run='unknown',attempt='unknown',job='unknown',node='unknown',ids=IDS,originalExpectedFailureIds=RED,originalResults=UNKNOWN.copy(),fixedResults=UNKNOWN.copy(),controlsPassed=False,originalL05Occurrences=0,originalCLI=0,native=0,nonclaims=dict.fromkeys(FLAGS,False))
+          try:
+              context,history=context_and_bytes()
+              baseline,fixed,driver=programs(history)
+              record.update(context)
+              orig,corrected=measure(baseline,fixed,driver)
+              record['originalResults']=orig;record['fixedResults']=corrected
+              record['controlsPassed']=(orig==['failed' if k in RED else 'passed' for k in IDS] and corrected==['passed']*len(IDS))
+          except BaseException:
+              pass
+          wire=('AFW_L05_TAINT_CONTROLS/1 '+canon(record)+'\n').encode('ascii')
+          try:
+              require(len(wire)<=4096 and os.write(1,wire)==len(wire))
+          except BaseException:
+              raise SystemExit(1)
+          raise SystemExit(0 if record['controlsPassed'] else 1)
+          AFW_L05_TAINT_UNIT
+          exit $?

@@ -1,0 +1,193 @@
+def run_units(baseline, fixed):
+    """Exercise only the six selected parser/summary definitions with in-memory I/O."""
+    names = ('need', 'within', 'private_note', 'save_summary', 'pump', 'wait_for')
+    valid_pair = ('fd4_type_owner', 'check_rejected')
+    unknown_pair = ('unknown', 'unknown')
+    fields = ('probeCleanup','firstSite','checkAtSite','eventAtCheck','stopClass','creatorSeen','shimSeen','wakeSeen','deadSeen','shimTerminalBeforeCleanup','kernelSite','kernelClass','markerAtOracle','markerAtCleanup','streams')
+    builtins = dict(len=len, list=list, type=type, int=int, str=str, bool=bool, min=min, max=max, bytearray=bytearray,
+                    ValueError=ValueError, OverflowError=OverflowError, BaseException=BaseException)
+    def require(value):
+        if not value:
+            raise RuntimeError()
+    def canonical(value):
+        return (json.dumps(value, separators=(',', ':')) + '\n').encode('ascii')
+    def definitions(source):
+        module = ast.parse(source, filename='<pinned-probe>', mode='exec')
+        owned = [fn for fn in module.body if type(fn) is ast.FunctionDef and fn.name in names]
+        require(tuple(fn.name for fn in owned) == names and all(not fn.decorator_list for fn in owned))
+        return compile(ast.Module(body=owned, type_ignores=[]), '<pinned-functions>', 'exec', dont_inherit=True)
+    def event(kind):
+        p, parent, start = {'creator':(21,20,'3'), 'shim':(22,21,'4'), 'EOF_WOKE':(22,1,'4')}[kind]
+        return dict(kind=kind,pid=p,ppid=parent,start=start)
+    ready = [event(k) for k in ('creator','shim','EOF_WOKE')]
+    normal_bytes = b''.join(canonical(e) for e in ready)
+    note = b'~'+canonical([*valid_pair,22,1,'4'])
+    class MemoryIO:
+        O_ACCMODE = 3
+        O_WRONLY = 1
+        O_NONBLOCK = 2048
+        F_GETFL = 3
+        def __init__(self):
+            self.inputs = {}
+            self.written = []
+            self.unregistered = []
+            self.enabled = True
+            self.now = 0
+        def select(self, timeout):
+            require(0 <= timeout <= .02)
+            return [(SimpleNamespace(data=k,fileobj=k),None) for k in self.inputs]
+        def read(self, key, maximum):
+            require(key in self.inputs and 0 < maximum <= 8193)
+            chunk = self.inputs.pop(key)
+            part = chunk[:maximum]
+            if len(chunk) > maximum:
+                self.inputs[key] = chunk[maximum:]
+            return part
+        def unregister(self, key):
+            self.unregistered.append(key)
+        def monotonic(self):
+            return self.now
+        def fstat(self, fd):
+            require(fd == 10)
+            return SimpleNamespace(st_mode=stat.S_IFIFO)
+        def fcntl(self, fd, cmd):
+            require((fd, cmd) == (10, self.F_GETFL))
+            return self.O_WRONLY | (self.O_NONBLOCK if self.enabled else 0)
+        def write(self, fd, data):
+            require(fd == 10 and self.enabled and type(data) is bytes and 0 < len(data) <= 1024)
+            self.written.append(data)
+            return len(data)
+    def run_one(code, test, ordinary_case=None):
+        io = MemoryIO()
+        g = dict(__builtins__=builtins, json=json, stat=stat, os=io, fcntl=io, time=io, selector=io,
+                 U='unknown', deadline=1, note=None, note_bad=False, note_tail=bytearray(), probe_total=0,
+                 readies={}, verified={22}, obs=dict.fromkeys(fields,'unknown'), out=bytearray(), err=bytearray(), probe=bytearray())
+        exec(code, g)
+        def pump(frames):
+            require(not io.inputs)
+            io.inputs = dict(frames)
+            g['pump']()
+            require(not io.inputs)
+        def raises(cls, fn):
+            try:
+                fn()
+            except BaseException as err:
+                require(type(err) is cls)
+                return
+            raise RuntimeError()
+        def sample():
+            before = len(io.written)
+            g['save_summary']()
+            require(len(io.written) == before + 1)
+            raw = io.written[-1]
+            data = json.loads(raw)
+            require(canonical(data) == raw and tuple(data) == fields)
+            pair = (data['kernelSite'],data['kernelClass'])
+            require(pair in (valid_pair,unknown_pair))
+            return pair
+        def full_valid():
+            pump([('probe', normal_bytes + note)])
+            require(list(g['readies'].values()) == ready and g['note'] == valid_pair and not g['note_bad'])
+            require(not g['probe'] and not g['note_tail'])
+        def ordinary_timeout():
+            io.now = 2
+            raises(ValueError, lambda: g['wait_for'](lambda: 'CreatorDead' in g['readies']))
+            require(g['reason'] == 'wait_expired')
+        if test == 'ordinary_ready':
+            if ordinary_case is None:
+                pump([('probe',normal_bytes)])
+                require(list(g['readies'].values()) == ready and g['note'] is None)
+                raises(ValueError, lambda: pump([('probe',canonical(ready[-1]))]))
+                require(list(g['readies'].values()) == ready and sample() == unknown_pair)
+                # New independent mock environment for every corruption path.
+                outcomes = [run_one(code, test, case) for case in
+                            ('invalid_json','bad_shape','duplicate','pending_abort','pending_eof')]
+                return all(outcomes)
+            full_valid()
+            if ordinary_case == 'invalid_json':
+                raises(json.JSONDecodeError, lambda: pump([('probe',b'{]\n')]))
+            elif ordinary_case == 'bad_shape':
+                raises(ValueError, lambda: pump([('probe',b'{}\n')]))
+            elif ordinary_case == 'duplicate':
+                raises(ValueError, lambda: pump([('probe',canonical(ready[-1]))]))
+            else:
+                require(ordinary_case in ('pending_abort','pending_eof'))
+                pump([('probe',b'{"kind":')])
+                require(g['probe'] == b'{"kind":' and not g['note_tail'])
+                if ordinary_case == 'pending_eof':
+                    pump([('probe',b'')])
+                    require(io.unregistered == ['probe'])
+                else:
+                    ordinary_timeout()
+                    require(not io.unregistered)
+            require(list(g['readies'].values()) == ready)
+            return sample() == unknown_pair
+        if test == 'buffer_limit':
+            # Directly preload the bound cache using the actual private_note function.
+            # Isolate the immediate buffer guard, independently of prior pump accounting.
+            g['readies'] = {e['kind']:e.copy() for e in ready}
+            g['private_note'](bytearray(note[:-1]))
+            require(g['note'] == valid_pair and g['probe_total'] == 0 and not g['probe'])
+            raises(ValueError, lambda: pump([('probe', b'x'*4097)]))
+            require(not g['probe'] and g['probe_total'] == 0)
+            return sample() == unknown_pair
+        full_valid()
+        if test == 'valid_note':
+            return sample() == valid_pair
+        if test == 'valid_wait':
+            ordinary_timeout()
+            return sample() == valid_pair
+        if test == 'cumulative_limit':
+            pump([('probe', b'x'*(4096-g['probe_total']))])
+            require(g['probe_total'] == 4096 and len(g['probe']) < 4096)
+            raises(OverflowError, lambda: pump([('probe', b'x')]))
+            return sample() == unknown_pair
+        if test in ('partial_abort','partial_eof'):
+            pump([('probe', b'~[')])
+            require(g['note_tail'] == b'~[' and not g['probe'])
+            if test == 'partial_eof':
+                pump([('probe', b'')])
+                require(io.unregistered == ['probe'] and not g['note_tail'])
+            else:
+                ordinary_timeout()
+                require(not io.unregistered)
+            return sample() == unknown_pair
+        if test in ('duplicate_note','malformed_note'):
+            pump([('probe', note if test == 'duplicate_note' else b'~]\n')])
+            require(g['note_bad'] and list(g['readies'].values()) == ready)
+            return sample() == unknown_pair
+        if test == 'summary_sink':
+            io.enabled = False
+            g['save_summary']()
+            require(not io.written)
+            io.enabled = True
+            return sample() == valid_pair
+        if test == 'undemuxed_partial':
+            # Another ready channel rejects inside the same select cycle, before demux.
+            # Exercise a private prefix both at byte zero and following an ordinary line.
+            for prefix in (b'',canonical(ready[-1])):
+                g['probe'] = bytearray()
+                g['err'] = bytearray()
+                raises(ValueError, lambda: pump([('probe',prefix+b'~['),('err',b'x'*4097)]))
+                require(g['probe'] == prefix+b'~[' and not g['note_tail'] and not io.inputs)
+                if sample() != unknown_pair:
+                    return False
+            return True
+        raise RuntimeError()
+    result = []
+    for source in (baseline, fixed):
+        try:
+            code = definitions(source)
+        except BaseException:
+            result.append(['unknown']*len(IDS))
+            continue
+        states = []
+        for test in IDS:
+            try:
+                outcome = run_one(code, test)
+                require(type(outcome) is bool)
+                states.append('passed' if outcome else 'failed')
+            except BaseException:
+                states.append('unknown')
+        result.append(states)
+    return result

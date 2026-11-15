@@ -1,0 +1,244 @@
+{
+  "purpose": "afw.l05-taint-controls.inactive-index.v1",
+  "scope": "Diagnostic task fix round 1/5, Important I1 only. Pure CI controls pending Root. Original delivery cap 5/5 remains closed.",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "brief": "501d2cf1e8ac34fecda415b8d000132100287640",
+  "review": "849c4386be2000a30a359cdd09d50adad05f6d27",
+  "existingActualReceipt": "918bbf919c05327a662f252c8739f9104c661642",
+  "rootOwnReceiver": "4327c13cff9eb0204a71f46e7c5fed6852985655",
+  "rootOwnVectors": "298e03b3170d8db136197a0f2a88ccb6d84d8cf8",
+  "schemaExamples": "0ed785cd7c8b12037c2b07214931d7e95b7682d0",
+  "source": {
+    "parent": "ae42370ab5f2973e03a572616c62cf004cce874d",
+    "base": "b075e6eab277bd204c3884f490591cfa58637a71",
+    "commit": "ee842c458bd1d8a071c9e12308fe1e3d2db73764",
+    "tree": "e02d7b2d9fe0c0fbb3b38e4f59efefb78c228235",
+    "rollback": "636a68fe930026875d75b339a57f849f0703a290",
+    "inverse": "b075e6eab277bd204c3884f490591cfa58637a71",
+    "files": [
+      {
+        "filename": ".github/workflows/afw-finite-budget-qualification.yml",
+        "status": "modified",
+        "additions": 163,
+        "deletions": 1577,
+        "changes": 1740,
+        "previous_filename": null
+      },
+      {
+        "filename": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+        "status": "modified",
+        "additions": 3,
+        "deletions": 0,
+        "changes": 3,
+        "previous_filename": null
+      }
+    ],
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "source": "ae42370ab5f2973e03a572616c62cf004cce874d",
+    "oldF7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc"
+  },
+  "normalOrigin": {
+    "source": "bfa80fac58ecb60bb3c9bcd458da6f393b301f70",
+    "tree": "d17f87ef49892e6a4c0ec50dd2436b0697b9f45f",
+    "packet": "f9c8261c54f761b5c33ddc370dbe7b308648033b"
+  },
+  "priorObservationDerivation": {
+    "source": "f8d5503929927b5bab52e35abeb04e7243f7cddc",
+    "tree": "c89cb8f6421e73dcba89f490a17efd051b2e290c",
+    "recipe": "23e4f7659f61cea9b981acdc8dc3864397b418a0",
+    "baselineProbe": {
+      "bytes": 21174,
+      "sha256": "15984e2455c0b2e70f0b4453c570ac233c9daaa00411cd94e07b0d63b5070415",
+      "blob": "6f42cda2bfc879a42de9ab19ec5475c7ffd92b86"
+    }
+  },
+  "historicalOutcome": {
+    "run": "43734061933",
+    "attempt": 1,
+    "jobId": 132872647899,
+    "consumed": true,
+    "originalL05": "failed",
+    "observation": "wake_dead_wait / first / wait_expired, bound note fd4_type_owner / check_rejected only at that occurrence",
+    "causeOfEarlierFailures": "unknown",
+    "I3": "held"
+  },
+  "assets": {
+    "driver": {
+      "bytes": 9550,
+      "sha256": "3628b1603bbb707e7349fc51466709f54b5a70cc549ed242251512bce2b71adc",
+      "blob": "1ae61138c13b2753266c49f6c0bc8fcedd79c464"
+    },
+    "fixed": {
+      "bytes": 21346,
+      "sha256": "1386f5aa17f3480a8710d289298881bb07f6d2ad2d1f13cf2a9c601def6afeac",
+      "blob": "11ac20eb27961a323452c30a6cf6376b22ce506b"
+    },
+    "edits": {
+      "bytes": 1698,
+      "sha256": "625e0a3b623ed0ad303901a2ab95c804281a8dba3243a03c07173a55128ad919",
+      "blob": "9cbbef9ebff06177675ed7a95d2b0d8bf2221dbe"
+    },
+    "off": {
+      "bytes": 13187,
+      "sha256": "796f37c7ee72e9e7fd11b70be4c0e5cf4055ef975369db77ca4f373ae8f45c6b",
+      "blob": "b6d36579fb53309af07e836bbace13e5069e956d"
+    },
+    "on": {
+      "bytes": 13442,
+      "sha256": "43e1e7babbb64c2342ddc643d615e02bdc5e7b3936f0e1d0af062f67cbd1f0e1",
+      "blob": "2417454c9b0a64012e175e9c903b469af4db8fef"
+    },
+    "bootstrap": {
+      "bytes": 9600,
+      "sha256": "e8bb211d5ab99b797e739d879943ca98a2000a5525f72b80bb1fc81472c88919",
+      "blob": "8f6ddac70bf42a3478ecff39175b44e3893b88f2"
+    },
+    "suffix": {
+      "bytes": 12267,
+      "sha256": "bddea5f02021b8099046de99c6cf0d527554c6280fc38111c656bf5a5bad52c8",
+      "blob": "9134eccf2f7f7d1f646aa0b912e9a46ce1baa0ff"
+    },
+    "same": {
+      "bytes": 2467916,
+      "sha256": "cbc9d2a42f6cabdfed4432504a968b8756248738bc5f3023b0c53b555a35b4cc",
+      "blob": "12a8604eef08d6ee57b39a6398c3449e4cab8744"
+    }
+  },
+  "derivationFromFullCarrier": {
+    "prefix": {
+      "bytes": 2455649,
+      "sha256": "5f42bf2d4a184dc02e400bcaf4d6043511fd238f1587b00b563af9670701f455",
+      "blob": "3fdaf43231f5621911e14569240418b5e661abf9"
+    },
+    "normal": {
+      "bytes": 487208,
+      "sha256": "087bba2182c131579e233f6c29daf1ee85e2aae41e77b66d6f93cc44cb5000c5",
+      "blob": "f9c8261c54f761b5c33ddc370dbe7b308648033b"
+    },
+    "historyRecipe": {
+      "bytes": 14297,
+      "sha256": "99fac3412ef9ba16a877995b0c4bf426ceb3331fb7121951e1f50fe774efee75",
+      "blob": "23e4f7659f61cea9b981acdc8dc3864397b418a0"
+    },
+    "baseline": {
+      "bytes": 21174,
+      "sha256": "15984e2455c0b2e70f0b4453c570ac233c9daaa00411cd94e07b0d63b5070415",
+      "blob": "6f42cda2bfc879a42de9ab19ec5475c7ffd92b86"
+    },
+    "fixed": {
+      "bytes": 21346,
+      "sha256": "1386f5aa17f3480a8710d289298881bb07f6d2ad2d1f13cf2a9c601def6afeac",
+      "blob": "11ac20eb27961a323452c30a6cf6376b22ce506b"
+    },
+    "driver": {
+      "bytes": 9550,
+      "sha256": "3628b1603bbb707e7349fc51466709f54b5a70cc549ed242251512bce2b71adc",
+      "blob": "1ae61138c13b2753266c49f6c0bc8fcedd79c464"
+    },
+    "append": {
+      "bytes": 12267,
+      "sha256": "bddea5f02021b8099046de99c6cf0d527554c6280fc38111c656bf5a5bad52c8",
+      "blob": "9134eccf2f7f7d1f646aa0b912e9a46ce1baa0ff"
+    },
+    "same": {
+      "bytes": 2467916,
+      "sha256": "cbc9d2a42f6cabdfed4432504a968b8756248738bc5f3023b0c53b555a35b4cc",
+      "blob": "12a8604eef08d6ee57b39a6398c3449e4cab8744"
+    }
+  },
+  "priorPrefix": {
+    "bytes": 2455649,
+    "sha256": "5f42bf2d4a184dc02e400bcaf4d6043511fd238f1587b00b563af9670701f455",
+    "blob": "3fdaf43231f5621911e14569240418b5e661abf9"
+  },
+  "actualComponentCaps": {
+    "same": 2600000,
+    "remaining": 132084,
+    "workflow": 73728,
+    "sourceHelper": 32768,
+    "driverWithinExisting32768": true,
+    "raw": 524288,
+    "gzip": 131072,
+    "base64": 174764,
+    "fd7": 4096,
+    "note": 256,
+    "summary": 1024,
+    "publicUnitRecord": 4096,
+    "actionJobMinutes": 7,
+    "allCapsUnchanged": true
+  },
+  "edits": {
+    "format": "Three ordered [preimage ASCII offset, original literal, replacement literal] entries, at original save_summary, pump read guards and ordinary line parser sites. Forward descending offsets, inverse ascending. All exact operands and complete post-/preimages checked.",
+    "gate": "Record taint before the same per-buffer ValueError or cumulative OverflowError. For ordinary complete fd7 lines, any original parse/schema/duplicate exception taints and is re-raised without alteration. Any undemultiplexed probe bytes or retained partial note invalidates cached attribution at finalization. A normal wait expiry after a complete bound note and no pending bytes preserves attribution."
+  },
+  "tests": {
+    "ids": [
+      "valid_note",
+      "valid_wait",
+      "buffer_limit",
+      "cumulative_limit",
+      "partial_abort",
+      "partial_eof",
+      "duplicate_note",
+      "malformed_note",
+      "ordinary_ready",
+      "summary_sink",
+      "undemuxed_partial"
+    ],
+    "originalExpectedFailureIds": [
+      "buffer_limit",
+      "cumulative_limit",
+      "partial_abort",
+      "ordinary_ready",
+      "undemuxed_partial"
+    ],
+    "functions": [
+      "need",
+      "within",
+      "private_note",
+      "save_summary",
+      "pump",
+      "wait_for"
+    ],
+    "sourceRunLocally": false,
+    "ranSourceUnit": false,
+    "reranL05": false,
+    "runner": "Only future Root-gated GitHub Actions may parse/compile/execute the pinned single-function driver and six exact AST function definitions per source. No top-level probe, real FD/process/signal, Native, original CLI or external service in unit code.",
+    "adversarialState": "buffer_limit explicitly injects synthetic bound readies and calls the real private_note to seed the cache before independent immediate-buffer boundary test. It does not claim prior producer reachability. cumulative_limit uses the real ready/note parser and exact fd7 accounting. Mock reads return at most the request and retain surplus. Undemuxed partial covers byte-zero and after a normal line; public stderr overflow aborts before the fd7 demultiplexer finishes.",
+    "errorPolicy": "Only measured outcomes produce expected original REDs. In all five required baseline RED cases, acceptance of a stale site/class is observed by the captured real summary. Unexpected exception class, capture/parse/compile failure, setup or harness error stays unknown and prevents control success.",
+    "measurement": "PENDING",
+    "ordinaryReady": "Ordinary three-frame order and duplicate rejection without note, then five independent bound-note test states for malformed JSON (exact JSONDecodeError), bad schema/duplicate (exact ValueError), and an ordinary incomplete fragment with abort or EOF. No verdict from an exception alone."
+  },
+  "activation": {
+    "message": "AFW-L05-TAINT-UNIT-ONEUSE-20261115",
+    "branch": "feat/finite-native-cleanup-20261101",
+    "job": "readonly",
+    "attempt": 1,
+    "onlyActiveGuardDiff": true,
+    "commitUnreferenced": true,
+    "refsChanged": false,
+    "sourceWorkflowRun": false,
+    "rollbackRule": "Original F7 plus complete new SAME and any later legitimate receipt. The inverse tree is a DATA equality proof, not a direction to discard history."
+  },
+  "deferred": [
+    "M1 direct writer-close OSError loses detail",
+    "M2 observed cleanup nonterminal maps unknown"
+  ],
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "ruling": "62028dc55981f1e19298af7898221df5d63f9854",
+  "supersededUnexecuted": {
+    "commit": "5c13814ec4be2c92c17d42a8fdc220488052f109",
+    "index": "01bb465492aed924a98b3782dee4043cf5e14484",
+    "own": "8e42a1b661721a6b5bbe687cbf97c1f68a946cee",
+    "schema": "8c910cd9cb7bc43d49c04eb25c57e06f4f32bcc8",
+    "reason": "Taint ruling v2 includes the ordinary_ready original RED. Prior four-RED preparation is ineligible and never ran."
+  }
+}
