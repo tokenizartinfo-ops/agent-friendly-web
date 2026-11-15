@@ -1,0 +1,25 @@
+{
+  "close": {
+    "commit": "e57d6f2b862deccfbb90d8e042a576c68d0ccb3c",
+    "tree": "25bd612aae140da2247fec49565c408bd3815b02",
+    "parent": "661ba7a1fd728efe3d269d776cb91cbfa2c8c994",
+    "SAME": "dbf9a72fd11306f368e0571204493d663df04d35",
+    "originalF7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "receipt": "962a41671fc77af6d5b80f1c587bf5efae769335"
+  },
+  "run": 43775725913,
+  "jobId": 133001451556,
+  "terminal": true,
+  "qualified": false,
+  "logsConsumed": true,
+  "SourceStillActive": "661ba7a1fd728efe3d269d776cb91cbfa2c8c994",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
