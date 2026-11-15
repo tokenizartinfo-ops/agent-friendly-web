@@ -1,0 +1,15 @@
+# Gate2: receptores independientes preparados, aún sin liberación
+
+15nov2026. Preparación Root en RAM y GitDB; solo código propio de validación y datos sintéticos. Ningún Source importado/evaluado/ejecutado localmente, ninguna ocurrencia readonly nueva, ningún cambio Core/F7 ni permiso de runtime. Bloque carrier finalfix sigue pendiente de ejecución y revisión acotada por6dc290b6/fbff582f.
+
+Receptor de sitio propio normalizado c2cf804b6d427b5fc40da2b7d1375785a0a2f459: mismo contrato que la versión fija ya incluida en49, producido por enmiendas explícitas al receptor Root original (pin de mapa, estados de señales, cancelación de cobertura y procedencia de ubicación). Igualdad byteexact al módulo congelado verificada como DATA. Control sintético1aceptado/16contradicciones rechazadas, no repetición de una ejecución histórica. El fixture usa valores de contexto/hashes para probar forma y relaciones; no acredita observación real en esos Source.
+
+Comprobación adicional propia de procedencia fc6b339e54bf0fe91ad73f9b744ab7d46df35b0d: valida primero todo el sitio con el receptor anterior, y después exige contexto Source/tree/run/attempt/job exacto, Node22.23.4,18programas/hash/Core/prefijo verificados, seis proofs Source antes/después verdaderos, C1–C6 completos, pure8 y perfilreadonly, CLIoriginal iniciado y terminado con estado de señal conocido. Dos positivos sintéticos (colección completa y parcial con procedencia completa),23negativos. Esta propiedad no convierte colección parcial en éxito ni produce aliases/capacidades nuevas.
+
+Receptor propio de bytes/framing8cdabb2324ae97b04fa17350846e24d666cd3536: requiere rawASCII<=4096, JSONcanónico y exactamente UN LF final antes de llamar al receptor de sample original. Dos positivos/not_observed y observedunknown;17negativos cubren ausencia/noString, LFfaltante/excedente, whitespace/duplicación, cap, contexto, campo privado, cota, estado y flag inválidos, fuente no calificada. Sigue siendo una función pura sobre strings de prueba, no una lectura del sidecar real.
+
+Receptor original sample Rootc37aff82aefac165f4acef819aaedde13bc40939 conserva semántica: acepta wire normalizado opcionalLF. La nueva capa RAW aplica el requisito estricto antes de normalizar; equivalencia del código Root guardado con root-r3.mjs del49 congelado confirmada como DATA. El parámetro sourceQualified solo lo suministrará Root tras aceptación de procedencia real; un DTO/sample válido no lo produce por sí solo.
+
+Para el futuro paquete Gate2: mantener18congelados/set71b4454f4cd90f716852bbdbb44f686d7f46191e8d93f890c465a7cb5f29d9af/expandedcfcb0dc7992d27246dc785ef2991104f6715e61c9aa49cfddc0317b219e6ac91, Coreaefb08c1 y mapa57c5a967/SHA1be65366. Verificar aparte manifest/bytes/hash de cualquier deliveryhelper nuevo y SourceF7/SAMEactuales. Este documento no sustituye controles del emisor real y lector de archivo ni habilita una ocurrencia. Draft5f66a859 continúa condicionado a finalfix+revisión carrier y Root gate explícito.
+
+No owner action. Siete nonclaimsfalse, Native/Gate2 no liberados.
