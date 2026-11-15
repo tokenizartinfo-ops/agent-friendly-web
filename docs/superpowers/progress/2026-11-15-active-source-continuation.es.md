@@ -4,7 +4,7 @@
   "state": {
     "project": "AFW",
     "repository": "tokenizartinfo-ops/agent-friendly-web",
-    "phase": "serial-v2-initial-DATA-refinement",
+    "phase": "serial-v2-preCAS-prepared",
     "SourceBranch": "feat/finite-native-cleanup-20261101",
     "sourceClosed": "dace0ec995e1f89599d3c1faf72b018db82e67a1",
     "sourceTree": "0ee8006a9b7f6461c4bd3d51e5c99ac8dcf4d3ec",
@@ -88,12 +88,22 @@
       "SourceReleased": false,
       "protocol": "e5e6770187ea336d6e71940674e19254d8b844d0",
       "testsPending": true,
-      "index": "51bdbc6714aa43f5c85024500ea38dd41d56a2b3",
-      "refinementPending": true
+      "index": "e41f042ba2495cd8b86d59842a3c41d4390d8a53",
+      "refinementPending": false,
+      "prepared": {
+        "commit": "f6e400f5af7fea2d35506cd7542b5e718660f8d9",
+        "activeTree": "1631f122f28701dc775be6d38671f0d5b6cc5f35",
+        "inactiveTree": "bde1e4d88dcd6e3864ad6a665f7c12cac863bb1e",
+        "parent": "dace0ec995e1f89599d3c1faf72b018db82e67a1",
+        "F7": "7bdc774db2f25126ff8f98f26674b4481126b674",
+        "SAME": "ba48a984ad74faec404852eb14a7b3a7ec9338f4",
+        "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-ONEUSE-20261115",
+        "SourceReleased": false
+      }
     }
   },
   "work": {
-    "phase": "Task1-initial-DATA-refinement",
+    "phase": "Root-DATA-gated",
     "architect": "/root/finite_qualification_design",
     "selectionInPrinciple": "Source-only serial top240s/parent250s/outer260s/step5m/job7m; all33CC1 nested helpers unchanged",
     "pending": [
@@ -129,19 +139,27 @@
       "preflightNegative": 14,
       "SourceExecuted": false
     },
-    "SourceEligibility": false,
-    "initialIndex": "51bdbc6714aa43f5c85024500ea38dd41d56a2b3"
+    "SourceEligibility": true,
+    "initialIndex": "51bdbc6714aa43f5c85024500ea38dd41d56a2b3",
+    "index": "e41f042ba2495cd8b86d59842a3c41d4390d8a53",
+    "report": "ef3b7451ed5a999c341609d7ebadd75b8b621009",
+    "proposedSAME": "ba48a984ad74faec404852eb14a7b3a7ec9338f4",
+    "activeF7": "7bdc774db2f25126ff8f98f26674b4481126b674",
+    "SourceReleased": false,
+    "rootConjunctionOwn": "bc6574747f19cb64ced5d50eb9fce2db00358c8c"
+  },
+  "prepared": {
+    "commit": "f6e400f5af7fea2d35506cd7542b5e718660f8d9",
+    "activeTree": "1631f122f28701dc775be6d38671f0d5b6cc5f35",
+    "inactiveTree": "bde1e4d88dcd6e3864ad6a665f7c12cac863bb1e",
+    "parent": "dace0ec995e1f89599d3c1faf72b018db82e67a1",
+    "F7": "7bdc774db2f25126ff8f98f26674b4481126b674",
+    "SAME": "ba48a984ad74faec404852eb14a7b3a7ec9338f4",
+    "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-ONEUSE-20261115",
+    "SourceReleased": false
   },
   "SourcePending": null,
-  "RootdocsBefore": "0b0bdc0fb2185bfa0d69df3c6e0e76d125ba5b6f",
-  "refinement": {
-    "kind": "introduced-preflight-last-consumer-custody",
-    "SourceCandidateCreated": false,
-    "SourceExecuted": false,
-    "oldIndex": "51bdbc6714aa43f5c85024500ea38dd41d56a2b3",
-    "actor": "/root/serial_v2_impl",
-    "detail": "second wrong-image spawn uncertainty can reach recursive fixture cleanup under stale first-spawn terminal=true; per-consumer reset/terminal check and focused regression required"
-  }
+  "RootdocsBefore": "a6c4c6bf2184040a3793c7a54dde13b9cc09f362"
 }
 
-Sameactor/root/serial_v2_impl activeinitialDATArefinement; do notstartSourceorredispatchimplementation. InitialartifactsgoodbytechecksbutnotSourceeligiblebecausepreflightcustodyflagissue. NoactualSourceexecutedthisv2version. OldSource90runsconsumed; do notrepeat. Allsevennonclaimsfalse,C2/Nativeheld.
+NextRootstep exactSourceCASparentDace->f6e400f5 onlyaftergatepersistedandSourceleaseconfirmed. IfSourcependingnon-null reconcileactualrefbeforeanyretry. Expectedonepushattempt1/read-onlyjob, notNative. Logsnotyetfetched. Afterterminal fetchonce,applyOWNandcloseSourcepreservingwholeSAME+receipt. RootoriginalF7andfullprefixrecoverable. All7claimsfalse;Source/runtime distinctionmandatory.
