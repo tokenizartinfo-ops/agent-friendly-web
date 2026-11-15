@@ -1,0 +1,1923 @@
+{
+  "context": {
+    "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+    "tree": "f658211ef5187e75a94d5f5c20da824de2992645",
+    "run": "43658045169",
+    "attempt": 1,
+    "job": "readonly"
+  },
+  "expected": {
+    "programSet": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+    "expanded": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a"
+  },
+  "actual": {
+    "purpose": "afw.readonly-source-site.safe.v1",
+    "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+    "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+    "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+    "run": "43658045169",
+    "attempt": 1,
+    "job": "readonly",
+    "node": "22.23.4",
+    "stage": "complete",
+    "programProof": {
+      "verified": true,
+      "count": 18,
+      "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+      "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+      "coreGitVerified": true,
+      "prefixVerified": true
+    },
+    "sourceProof": {
+      "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+      "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+      "mapVerified": true,
+      "worldBeforeVerified": true,
+      "nativeBeforeVerified": true,
+      "worldAfterVerified": true,
+      "nativeAfterVerified": true,
+      "originalBodiesUnchanged": true
+    },
+    "controls": {
+      "passed": true,
+      "count": 6,
+      "expected": 6,
+      "usableShape": true,
+      "usableColumns": true
+    },
+    "pure": {
+      "passed": true,
+      "cases": 8,
+      "expected": 8
+    },
+    "profile": {
+      "passed": true,
+      "group": "readonly"
+    },
+    "businessCommand": {
+      "started": true,
+      "ended": true,
+      "exitCode": 1,
+      "signal": "none"
+    },
+    "readonly": {
+      "purpose": "afw.readonly-source-site.stream.v2",
+      "state": "case_failure",
+      "valid": true,
+      "ended": true,
+      "summary": {
+        "counts": {
+          "cancelled": 0,
+          "failed": 1,
+          "passed": 2,
+          "skipped": 0,
+          "suites": 0,
+          "tests": 3,
+          "todo": 0,
+          "topLevel": 3
+        },
+        "success": false
+      },
+      "rows": [
+        {
+          "case": "R1",
+          "result": "passed",
+          "error": null
+        },
+        {
+          "case": "R2",
+          "result": "passed",
+          "error": null
+        },
+        {
+          "case": "R3",
+          "result": "failed",
+          "error": {
+            "wrapperFailureType": "testCodeFailure",
+            "causeCode": "ERR_ASSERTION",
+            "causeClass": "AssertionError",
+            "operator": "==",
+            "actual": false,
+            "expected": true,
+            "sourceSite": "world_1158_a1"
+          }
+        }
+      ],
+      "firstFailure": {
+        "target": "R3",
+        "error": {
+          "wrapperFailureType": "testCodeFailure",
+          "causeCode": "ERR_ASSERTION",
+          "causeClass": "AssertionError",
+          "operator": "==",
+          "actual": false,
+          "expected": true,
+          "sourceSite": "world_1158_a1"
+        }
+      },
+      "precase": null
+    },
+    "collectionComplete": true,
+    "usableLocationCount": 1,
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "vectors": [
+    {
+      "id": "I1-mapVerified",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "unknown",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": false,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 2,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testCodeFailure",
+                "causeCode": "ERR_ASSERTION",
+                "causeClass": "AssertionError",
+                "operator": "==",
+                "actual": false,
+                "expected": true,
+                "sourceSite": "world_1158_a1"
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R3",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "==",
+              "actual": false,
+              "expected": true,
+              "sourceSite": "world_1158_a1"
+            }
+          },
+          "precase": null
+        },
+        "collectionComplete": false,
+        "usableLocationCount": 1,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I1-worldBeforeVerified",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "unknown",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": false,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 2,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testCodeFailure",
+                "causeCode": "ERR_ASSERTION",
+                "causeClass": "AssertionError",
+                "operator": "==",
+                "actual": false,
+                "expected": true,
+                "sourceSite": "world_1158_a1"
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R3",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "==",
+              "actual": false,
+              "expected": true,
+              "sourceSite": "world_1158_a1"
+            }
+          },
+          "precase": null
+        },
+        "collectionComplete": false,
+        "usableLocationCount": 1,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I1-nativeBeforeVerified",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "unknown",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": false,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 2,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testCodeFailure",
+                "causeCode": "ERR_ASSERTION",
+                "causeClass": "AssertionError",
+                "operator": "==",
+                "actual": false,
+                "expected": true,
+                "sourceSite": "world_1158_a1"
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R3",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "==",
+              "actual": false,
+              "expected": true,
+              "sourceSite": "world_1158_a1"
+            }
+          },
+          "precase": null
+        },
+        "collectionComplete": false,
+        "usableLocationCount": 1,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I1-worldAfterVerified",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "unknown",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": false,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 2,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testCodeFailure",
+                "causeCode": "ERR_ASSERTION",
+                "causeClass": "AssertionError",
+                "operator": "==",
+                "actual": false,
+                "expected": true,
+                "sourceSite": "world_1158_a1"
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R3",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "==",
+              "actual": false,
+              "expected": true,
+              "sourceSite": "world_1158_a1"
+            }
+          },
+          "precase": null
+        },
+        "collectionComplete": false,
+        "usableLocationCount": 1,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I1-nativeAfterVerified",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "unknown",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": false,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 2,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testCodeFailure",
+                "causeCode": "ERR_ASSERTION",
+                "causeClass": "AssertionError",
+                "operator": "==",
+                "actual": false,
+                "expected": true,
+                "sourceSite": "world_1158_a1"
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R3",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "==",
+              "actual": false,
+              "expected": true,
+              "sourceSite": "world_1158_a1"
+            }
+          },
+          "precase": null
+        },
+        "collectionComplete": false,
+        "usableLocationCount": 1,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I1-originalBodiesUnchanged",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "unknown",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": false
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 2,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testCodeFailure",
+                "causeCode": "ERR_ASSERTION",
+                "causeClass": "AssertionError",
+                "operator": "==",
+                "actual": false,
+                "expected": true,
+                "sourceSite": "world_1158_a1"
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R3",
+            "error": {
+              "wrapperFailureType": "testCodeFailure",
+              "causeCode": "ERR_ASSERTION",
+              "causeClass": "AssertionError",
+              "operator": "==",
+              "actual": false,
+              "expected": true,
+              "sourceSite": "world_1158_a1"
+            }
+          },
+          "precase": null
+        },
+        "collectionComplete": false,
+        "usableLocationCount": 1,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I2-testTimeoutFailure-row",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "complete",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 2,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testTimeoutFailure",
+                "causeCode": "unknown",
+                "causeClass": "unknown",
+                "operator": "unknown",
+                "actual": null,
+                "expected": null,
+                "sourceSite": "unknown"
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R3",
+            "error": {
+              "wrapperFailureType": "testTimeoutFailure",
+              "causeCode": "unknown",
+              "causeClass": "unknown",
+              "operator": "unknown",
+              "actual": null,
+              "expected": null,
+              "sourceSite": "unknown"
+            }
+          },
+          "precase": null
+        },
+        "collectionComplete": true,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I2-testTimeoutFailure-precase",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "complete",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "file_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 1,
+              "todo": 0,
+              "topLevel": 1
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "not_observed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "not_observed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "not_observed",
+              "error": null
+            }
+          ],
+          "firstFailure": {
+            "target": "native_file",
+            "error": {
+              "wrapperFailureType": "testTimeoutFailure",
+              "causeCode": "unknown",
+              "causeClass": "unknown",
+              "operator": "unknown",
+              "actual": null,
+              "expected": null,
+              "sourceSite": "unknown"
+            }
+          },
+          "precase": {
+            "result": "failed",
+            "error": {
+              "wrapperFailureType": "testTimeoutFailure",
+              "causeCode": "unknown",
+              "causeClass": "unknown",
+              "operator": "unknown",
+              "actual": null,
+              "expected": null,
+              "sourceSite": "unknown"
+            }
+          }
+        },
+        "collectionComplete": true,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I2-cancelledByParent-row",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "complete",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 2,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "cancelledByParent",
+                "causeCode": "unknown",
+                "causeClass": "unknown",
+                "operator": "unknown",
+                "actual": null,
+                "expected": null,
+                "sourceSite": "unknown"
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R3",
+            "error": {
+              "wrapperFailureType": "cancelledByParent",
+              "causeCode": "unknown",
+              "causeClass": "unknown",
+              "operator": "unknown",
+              "actual": null,
+              "expected": null,
+              "sourceSite": "unknown"
+            }
+          },
+          "precase": null
+        },
+        "collectionComplete": true,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I2-cancelledByParent-precase",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "complete",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "file_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 1,
+              "todo": 0,
+              "topLevel": 1
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "not_observed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "not_observed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "not_observed",
+              "error": null
+            }
+          ],
+          "firstFailure": {
+            "target": "native_file",
+            "error": {
+              "wrapperFailureType": "cancelledByParent",
+              "causeCode": "unknown",
+              "causeClass": "unknown",
+              "operator": "unknown",
+              "actual": null,
+              "expected": null,
+              "sourceSite": "unknown"
+            }
+          },
+          "precase": {
+            "result": "failed",
+            "error": {
+              "wrapperFailureType": "cancelledByParent",
+              "causeCode": "unknown",
+              "causeClass": "unknown",
+              "operator": "unknown",
+              "actual": null,
+              "expected": null,
+              "sourceSite": "unknown"
+            }
+          }
+        },
+        "collectionComplete": true,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I2-testAborted-row",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "complete",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "case_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 2,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 3,
+              "todo": 0,
+              "topLevel": 3
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "passed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "failed",
+              "error": {
+                "wrapperFailureType": "testAborted",
+                "causeCode": "unknown",
+                "causeClass": "unknown",
+                "operator": "unknown",
+                "actual": null,
+                "expected": null,
+                "sourceSite": "unknown"
+              }
+            }
+          ],
+          "firstFailure": {
+            "target": "R3",
+            "error": {
+              "wrapperFailureType": "testAborted",
+              "causeCode": "unknown",
+              "causeClass": "unknown",
+              "operator": "unknown",
+              "actual": null,
+              "expected": null,
+              "sourceSite": "unknown"
+            }
+          },
+          "precase": null
+        },
+        "collectionComplete": true,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I2-testAborted-precase",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "complete",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": true,
+          "ended": true,
+          "exitCode": 1,
+          "signal": "none"
+        },
+        "readonly": {
+          "purpose": "afw.readonly-source-site.stream.v2",
+          "state": "file_failure",
+          "valid": true,
+          "ended": true,
+          "summary": {
+            "counts": {
+              "cancelled": 0,
+              "failed": 1,
+              "passed": 0,
+              "skipped": 0,
+              "suites": 0,
+              "tests": 1,
+              "todo": 0,
+              "topLevel": 1
+            },
+            "success": false
+          },
+          "rows": [
+            {
+              "case": "R1",
+              "result": "not_observed",
+              "error": null
+            },
+            {
+              "case": "R2",
+              "result": "not_observed",
+              "error": null
+            },
+            {
+              "case": "R3",
+              "result": "not_observed",
+              "error": null
+            }
+          ],
+          "firstFailure": {
+            "target": "native_file",
+            "error": {
+              "wrapperFailureType": "testAborted",
+              "causeCode": "unknown",
+              "causeClass": "unknown",
+              "operator": "unknown",
+              "actual": null,
+              "expected": null,
+              "sourceSite": "unknown"
+            }
+          },
+          "precase": {
+            "result": "failed",
+            "error": {
+              "wrapperFailureType": "testAborted",
+              "causeCode": "unknown",
+              "causeClass": "unknown",
+              "operator": "unknown",
+              "actual": null,
+              "expected": null,
+              "sourceSite": "unknown"
+            }
+          }
+        },
+        "collectionComplete": true,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I3-nostart-SIGTERM",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "hold",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": false,
+          "ended": false,
+          "exitCode": null,
+          "signal": "SIGTERM"
+        },
+        "readonly": null,
+        "collectionComplete": false,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I3-nostart-SIGKILL",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "hold",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": false,
+          "ended": false,
+          "exitCode": null,
+          "signal": "SIGKILL"
+        },
+        "readonly": null,
+        "collectionComplete": false,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I3-nostart-SIGINT",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "hold",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": false,
+          "ended": false,
+          "exitCode": null,
+          "signal": "SIGINT"
+        },
+        "readonly": null,
+        "collectionComplete": false,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    {
+      "id": "I3-nostart-unknown",
+      "record": {
+        "purpose": "afw.readonly-source-site.safe.v1",
+        "sourceBase": "327e9b7ec2182588dfb02e58b238787abb37a017",
+        "source": "862ba9d258d6ad467ada5ba8d987dc1ce1603b46",
+        "sourceTree": "f658211ef5187e75a94d5f5c20da824de2992645",
+        "run": "43658045169",
+        "attempt": 1,
+        "job": "readonly",
+        "node": "22.23.4",
+        "stage": "hold",
+        "programProof": {
+          "verified": true,
+          "count": 18,
+          "setSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+          "payloadExpandedSha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+          "coreGitVerified": true,
+          "prefixVerified": true
+        },
+        "sourceProof": {
+          "mapBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "mapSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+          "mapVerified": true,
+          "worldBeforeVerified": true,
+          "nativeBeforeVerified": true,
+          "worldAfterVerified": true,
+          "nativeAfterVerified": true,
+          "originalBodiesUnchanged": true
+        },
+        "controls": {
+          "passed": true,
+          "count": 6,
+          "expected": 6,
+          "usableShape": true,
+          "usableColumns": true
+        },
+        "pure": {
+          "passed": true,
+          "cases": 8,
+          "expected": 8
+        },
+        "profile": {
+          "passed": true,
+          "group": "readonly"
+        },
+        "businessCommand": {
+          "started": false,
+          "ended": false,
+          "exitCode": null,
+          "signal": "unknown"
+        },
+        "readonly": null,
+        "collectionComplete": false,
+        "usableLocationCount": 0,
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  ],
+  "ownRootCheck": {
+    "actualAccepted": true,
+    "results": [
+      {
+        "id": "I1-mapVerified",
+        "beforeAccepted": false,
+        "fixedRejected": true
+      },
+      {
+        "id": "I1-worldBeforeVerified",
+        "beforeAccepted": false,
+        "fixedRejected": true
+      },
+      {
+        "id": "I1-nativeBeforeVerified",
+        "beforeAccepted": false,
+        "fixedRejected": true
+      },
+      {
+        "id": "I1-worldAfterVerified",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I1-nativeAfterVerified",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I1-originalBodiesUnchanged",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I2-testTimeoutFailure-row",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I2-testTimeoutFailure-precase",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I2-cancelledByParent-row",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I2-cancelledByParent-precase",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I2-testAborted-row",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I2-testAborted-precase",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I3-nostart-SIGTERM",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I3-nostart-SIGKILL",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I3-nostart-SIGINT",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      },
+      {
+        "id": "I3-nostart-unknown",
+        "beforeAccepted": true,
+        "fixedRejected": true
+      }
+    ],
+    "executed": "own Root receiver only; Source code not executed"
+  }
+}
