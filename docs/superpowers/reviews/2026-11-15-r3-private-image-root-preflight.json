@@ -1,0 +1,122 @@
+{
+  "crypto": {
+    "raw": {
+      "bytes": 258406,
+      "sha256": "363d1287475f8eda50a8df465ae17d2cc86ae07ed0443d59654605b5975d4910",
+      "gitBlob": "20605f88fcb917a5f8964cf666cda5d8a9987b3c"
+    },
+    "gzip": {
+      "bytes": 73098,
+      "sha256": "d89c608020298bd20d4674a3eee16ad0518fd97d39fbb47f27a47c9c4af2e351",
+      "gitBlob": "aaf24880acd07db75e7050db541802b65029640c"
+    },
+    "mirror": {
+      "bytes": 97464,
+      "sha256": "fab33aa9169e37c7779e0b33b3ec0598b28487e87bc3c8563a59fd7efe351a5b",
+      "gitBlob": "b2114456d4903c655f04cdb6acbd70eb1d042de3"
+    },
+    "manifest": {
+      "bytes": 1294,
+      "sha256": "0c071e433c89dc74b52acde695c1aae15f0790b75672076c31b16f5631ee8c31",
+      "gitBlob": "8e3057b6fac23960618f5479f77101f0e00512d9"
+    },
+    "manifestFraming": "canonical JSON without LF; typed seven-source DATA manifest",
+    "same": {
+      "bytes": 1745426,
+      "sha256": "b028e0e85ae0fe3b1c25520a87662f751e91874926005dd57eca4085b78d50b5",
+      "gitBlob": "8b8d09f182e2566d06982536b9033682b7df0fbf"
+    },
+    "prefix": {
+      "bytes": 1739498,
+      "sha256": "9b10e0bd91cde4a55944d9a49a472847157414f3eaea8824e4842bf3565e7f67",
+      "gitBlob": "8956774cbeb7bf910891aaf8dad7955094ea0148"
+    },
+    "sources": {
+      "initial-shim.py": {
+        "bytes": 15152,
+        "sha256": "30ef0fb4574b8cb874122f64781f82cb4a736d8c68b7d259d689e505ac82f1ea",
+        "gitBlob": "f54b573a0dc8f65945cb929bd19bdfbcb142dc93"
+      },
+      "initial-node-prelude.mjs": {
+        "bytes": 14108,
+        "sha256": "1e0f68e33d2deac420080b2b5a3782936d59ef7cdbe738cb2bde0fdaf88e96d5",
+        "gitBlob": "c823d304ba4be30bfcc94fd5c34af9fbfe97d690"
+      },
+      "initial-node-common.mjs": {
+        "bytes": 25794,
+        "sha256": "1c8094cb913f8ae06d553b1b29d54bf89ad654524d6afab3f647791057c934aa",
+        "gitBlob": "8a74fe67af2c1a870b9964f0f5c17c2514986e36"
+      },
+      "initial-node.mjs": {
+        "bytes": 39903,
+        "sha256": "fe2552a17b0299574e2e67b083cc74856597f4fa1daabd37e18715220ed0a1fb",
+        "gitBlob": "f15877b910fbe0df06292bb8ad20560f9cfd764c"
+      },
+      "trace-formatter.py": {
+        "bytes": 5151,
+        "sha256": "3da53ace2cf8e5495c6b4e66cbf543040b6cdc6e4d122218b5bc56e1f6d80e9c",
+        "gitBlob": "fa2ae6babb60a1c3bbe8d988f8a533c86921a42f"
+      },
+      "inactive-f7.yml": {
+        "bytes": 71951,
+        "sha256": "549e2f6e10210ecfd1dbdd27b3e1462da4887a544065cebe9a7a231252f686e5",
+        "gitBlob": "bc6b22c87fa26204cc6f7deb62cc7dc10000384a"
+      },
+      "active-f7.yml": {
+        "bytes": 72208,
+        "sha256": "a0a1bc1242f3f84b087a989dfa8e5fee415f361b98b5e9b18edd393e17dc95d4",
+        "gitBlob": "88c849b56fb661214b1267b15ac4fcb757127167"
+      }
+    },
+    "canonical": true,
+    "mirrorRecovered": true,
+    "fullParseSurface": true
+  },
+  "delta": {
+    "embeddedLiteralsExact": true,
+    "patchWholeSourceBeforeAfter": true,
+    "immutableCommon": true,
+    "preludeRebaseOnly": true,
+    "rootVocabulary": true,
+    "BashFallbacksOwnAccepted": true,
+    "cleanupBeforeOneWire": true,
+    "privateRootFD9": true,
+    "inputOnlyReadableCopy": true,
+    "strictFinalTarget": true,
+    "originalToolcacheUnmodified": true,
+    "tripleHashAndStableMetadata": true,
+    "cooperativeCopyBounds": true,
+    "noSourceWorkInvoked": true,
+    "workflowTyped73728": true,
+    "preflightCorrection": "Seven-source manifest intentionally uses canonical typed JSON without LF; historical R2 archive framing unchanged. Initial inherited LF assumption corrected before gate."
+  },
+  "ownTests": {
+    "wirePos": 111,
+    "wireNeg": 20,
+    "tracePos": 51,
+    "traceNeg": 377,
+    "terminalCount": 41,
+    "SourceExecuted": false,
+    "NativeReleased": false,
+    "additionalNegativeTests": 2,
+    "admittedWithCleanupFalseAndSuccessRejected": true,
+    "missingCleanupRejected": true
+  },
+  "candidate": "151c7800b262fb6ee96a6c237d35c6aae042ee3c",
+  "tree": "bca37f6789315991a5b98b35f894827c147bd3db",
+  "CoreExact": true,
+  "changed": [
+    {
+      "path": ".github/workflows/afw-finite-budget-qualification.yml",
+      "sha": "bc6b22c87fa26204cc6f7deb62cc7dc10000384a",
+      "mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+      "sha": "8b8d09f182e2566d06982536b9033682b7df0fbf",
+      "mode": "100644"
+    }
+  ],
+  "SourceExecuted": false,
+  "NativeReleased": false
+}
