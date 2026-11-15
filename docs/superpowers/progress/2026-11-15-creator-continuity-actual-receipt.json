@@ -1,0 +1,523 @@
+{
+  "purpose": "afw.root.creator-continuity.actual-receipt.v1",
+  "at": "2026-11-15 17:24:42 UTC",
+  "source": "05d1a53692dc2b553620ff6267cef59cf36cf85c",
+  "sourceTree": "b5a87f3b345a40df39282be4fe3705fd89d1c3ee",
+  "run": 43740674443,
+  "attempt": 1,
+  "job": 132892914334,
+  "jobName": "readonly",
+  "step": "Run declared full104 controls only",
+  "node": "22.23.4",
+  "SourceRunConclusion": "failure",
+  "SourceJobConclusion": "failure",
+  "RootReceiver": "38749c663f4dd58fbb5f1a3c940a3820c4ff5100",
+  "accepted": true,
+  "controlsQualified": false,
+  "record": {
+    "purpose": "afw.r3-delivery.controls.v1",
+    "source": "05d1a53692dc2b553620ff6267cef59cf36cf85c",
+    "sourceTree": "b5a87f3b345a40df39282be4fe3705fd89d1c3ee",
+    "run": "43740674443",
+    "attempt": 1,
+    "job": "readonly",
+    "node": "22.23.4",
+    "matrixSha256": "0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e",
+    "allPassed": false,
+    "expected": 104,
+    "passed": 104,
+    "failed": 0,
+    "unknown": 0,
+    "results": [
+      {
+        "id": "A01",
+        "result": "passed"
+      },
+      {
+        "id": "A02",
+        "result": "passed"
+      },
+      {
+        "id": "A03",
+        "result": "passed"
+      },
+      {
+        "id": "A04",
+        "result": "passed"
+      },
+      {
+        "id": "D01",
+        "result": "passed"
+      },
+      {
+        "id": "D02",
+        "result": "passed"
+      },
+      {
+        "id": "D03",
+        "result": "passed"
+      },
+      {
+        "id": "D04",
+        "result": "passed"
+      },
+      {
+        "id": "D05",
+        "result": "passed"
+      },
+      {
+        "id": "D06",
+        "result": "passed"
+      },
+      {
+        "id": "D07",
+        "result": "passed"
+      },
+      {
+        "id": "D08",
+        "result": "passed"
+      },
+      {
+        "id": "D09",
+        "result": "passed"
+      },
+      {
+        "id": "D10",
+        "result": "passed"
+      },
+      {
+        "id": "D11",
+        "result": "passed"
+      },
+      {
+        "id": "D12",
+        "result": "passed"
+      },
+      {
+        "id": "D13",
+        "result": "passed"
+      },
+      {
+        "id": "P01",
+        "result": "passed"
+      },
+      {
+        "id": "P02",
+        "result": "passed"
+      },
+      {
+        "id": "P03",
+        "result": "passed"
+      },
+      {
+        "id": "P04",
+        "result": "passed"
+      },
+      {
+        "id": "P05",
+        "result": "passed"
+      },
+      {
+        "id": "P06",
+        "result": "passed"
+      },
+      {
+        "id": "P07",
+        "result": "passed"
+      },
+      {
+        "id": "P08",
+        "result": "passed"
+      },
+      {
+        "id": "P09",
+        "result": "passed"
+      },
+      {
+        "id": "P10",
+        "result": "passed"
+      },
+      {
+        "id": "P11",
+        "result": "passed"
+      },
+      {
+        "id": "P12",
+        "result": "passed"
+      },
+      {
+        "id": "P13",
+        "result": "passed"
+      },
+      {
+        "id": "P14",
+        "result": "passed"
+      },
+      {
+        "id": "P15",
+        "result": "passed"
+      },
+      {
+        "id": "P16",
+        "result": "passed"
+      },
+      {
+        "id": "P17",
+        "result": "passed"
+      },
+      {
+        "id": "P18",
+        "result": "passed"
+      },
+      {
+        "id": "P19",
+        "result": "passed"
+      },
+      {
+        "id": "P20",
+        "result": "passed"
+      },
+      {
+        "id": "P21",
+        "result": "passed"
+      },
+      {
+        "id": "P22",
+        "result": "passed"
+      },
+      {
+        "id": "P23",
+        "result": "passed"
+      },
+      {
+        "id": "P24",
+        "result": "passed"
+      },
+      {
+        "id": "P25",
+        "result": "passed"
+      },
+      {
+        "id": "F01",
+        "result": "passed"
+      },
+      {
+        "id": "F02",
+        "result": "passed"
+      },
+      {
+        "id": "F03",
+        "result": "passed"
+      },
+      {
+        "id": "F04",
+        "result": "passed"
+      },
+      {
+        "id": "F05",
+        "result": "passed"
+      },
+      {
+        "id": "F06",
+        "result": "passed"
+      },
+      {
+        "id": "F07",
+        "result": "passed"
+      },
+      {
+        "id": "F08",
+        "result": "passed"
+      },
+      {
+        "id": "F09",
+        "result": "passed"
+      },
+      {
+        "id": "B01",
+        "result": "passed"
+      },
+      {
+        "id": "B02",
+        "result": "passed"
+      },
+      {
+        "id": "B03",
+        "result": "passed"
+      },
+      {
+        "id": "B04",
+        "result": "passed"
+      },
+      {
+        "id": "B05",
+        "result": "passed"
+      },
+      {
+        "id": "B06",
+        "result": "passed"
+      },
+      {
+        "id": "B07",
+        "result": "passed"
+      },
+      {
+        "id": "B08",
+        "result": "passed"
+      },
+      {
+        "id": "B09",
+        "result": "passed"
+      },
+      {
+        "id": "B10",
+        "result": "passed"
+      },
+      {
+        "id": "B11",
+        "result": "passed"
+      },
+      {
+        "id": "B12",
+        "result": "passed"
+      },
+      {
+        "id": "B13",
+        "result": "passed"
+      },
+      {
+        "id": "W01",
+        "result": "passed"
+      },
+      {
+        "id": "W02",
+        "result": "passed"
+      },
+      {
+        "id": "C01",
+        "result": "passed"
+      },
+      {
+        "id": "C02",
+        "result": "passed"
+      },
+      {
+        "id": "C03",
+        "result": "passed"
+      },
+      {
+        "id": "C04",
+        "result": "passed"
+      },
+      {
+        "id": "C05",
+        "result": "passed"
+      },
+      {
+        "id": "D14",
+        "result": "passed"
+      },
+      {
+        "id": "P26",
+        "result": "passed"
+      },
+      {
+        "id": "F10",
+        "result": "passed"
+      },
+      {
+        "id": "E01",
+        "result": "passed"
+      },
+      {
+        "id": "E02",
+        "result": "passed"
+      },
+      {
+        "id": "E03",
+        "result": "passed"
+      },
+      {
+        "id": "E04",
+        "result": "passed"
+      },
+      {
+        "id": "E05",
+        "result": "passed"
+      },
+      {
+        "id": "E06",
+        "result": "passed"
+      },
+      {
+        "id": "O01",
+        "result": "passed"
+      },
+      {
+        "id": "O02",
+        "result": "passed"
+      },
+      {
+        "id": "O03",
+        "result": "passed"
+      },
+      {
+        "id": "O04",
+        "result": "passed"
+      },
+      {
+        "id": "O05",
+        "result": "passed"
+      },
+      {
+        "id": "S01",
+        "result": "passed"
+      },
+      {
+        "id": "E07",
+        "result": "passed"
+      },
+      {
+        "id": "T01",
+        "result": "passed"
+      },
+      {
+        "id": "F11",
+        "result": "passed"
+      },
+      {
+        "id": "A05",
+        "result": "passed"
+      },
+      {
+        "id": "U01",
+        "result": "passed"
+      },
+      {
+        "id": "U02",
+        "result": "passed"
+      },
+      {
+        "id": "U03",
+        "result": "passed"
+      },
+      {
+        "id": "U04",
+        "result": "passed"
+      },
+      {
+        "id": "H01",
+        "result": "passed"
+      },
+      {
+        "id": "L01",
+        "result": "passed"
+      },
+      {
+        "id": "L02",
+        "result": "passed"
+      },
+      {
+        "id": "L03",
+        "result": "passed"
+      },
+      {
+        "id": "L04",
+        "result": "passed"
+      },
+      {
+        "id": "L05",
+        "result": "passed"
+      },
+      {
+        "id": "E08",
+        "result": "passed"
+      },
+      {
+        "id": "E09",
+        "result": "passed"
+      },
+      {
+        "id": "E10",
+        "result": "passed"
+      },
+      {
+        "id": "E11",
+        "result": "passed"
+      }
+    ],
+    "mutants": [
+      {
+        "id": "M_RAW",
+        "expectedFailedIds": [
+          "D02"
+        ],
+        "actualFailedIds": [
+          "D02"
+        ],
+        "result": "passed"
+      },
+      {
+        "id": "M_PROVENANCE",
+        "expectedFailedIds": [
+          "P06"
+        ],
+        "actualFailedIds": [
+          "P06"
+        ],
+        "result": "unknown"
+      },
+      {
+        "id": "M_OUTPUT",
+        "expectedFailedIds": [
+          "B05",
+          "U01"
+        ],
+        "actualFailedIds": [],
+        "result": "unknown"
+      },
+      {
+        "id": "M_ASSOC",
+        "expectedFailedIds": [
+          "S01"
+        ],
+        "actualFailedIds": [],
+        "result": "unknown"
+      }
+    ],
+    "nativeBusinessCases": 0,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    },
+    "cleanup": {
+      "complete": true,
+      "failedInstances": [],
+      "unknownInstances": []
+    }
+  },
+  "joint": {
+    "accepted": true,
+    "controlsQualified": false,
+    "jobQualified": false,
+    "reviewEvidenceEligible": false,
+    "reason": "controls_not_qualified",
+    "NativeReleased": false,
+    "operationalReadiness": false
+  },
+  "interpretation": "Actual baseline104passed/0failed/0unknown including L05; M_RAW passed exactD02; M_PROVENANCE unknown with actualFailedP06; M_OUTPUT/M_ASSOC unknown. Actual wire does not identify their underlying cause/per-case attempt coverage, so no budget/provider/credential inference. Whole qualification remains HELD. No automaticrerun, timer widening, skip, unknown substitution, Native or originalCLI. Kernel behavior new observation scoped only to this Source/run.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
