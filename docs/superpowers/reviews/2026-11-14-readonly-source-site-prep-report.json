@@ -1,0 +1,1421 @@
+{
+  "status": "NEEDS_ROOT_GATE",
+  "purpose": "afw.readonly-source-site.inactive-preparation-report.v1",
+  "at": "2026-11-15 00:20:06 UTC",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "REPOSITORY_ID": "1347578006",
+    "ENVIRONMENT": "public Source unattached GitDB preparation only",
+    "ORIGIN": "GitHub connector / in-RAM public DATA parsing and hashing",
+    "RESOURCE_TYPE": "unattached Git blobs/tree/direct-child commit",
+    "RESOURCE_ID": "5582dbfcc11195154916585d53f5004ed590af44",
+    "ALLOWED_ACTION": "prepare F7 plus append-only SAME, preserve all Core tuples; no refs, controls, Source execution or activation"
+  },
+  "authority": {
+    "briefCommit": "03250bfd410e15ebdb71df2f5bcc3dca7a7c0403",
+    "briefPath": "docs/superpowers/briefs/2026-11-14-readonly-source-site-diagnostic.md",
+    "briefBlob": "8260824262b0ebccfcbf98e38ea856dcebef9aa7",
+    "specPath": "docs/superpowers/specs/2026-11-14-readonly-source-site-diagnostic-design.md",
+    "specBlob": "53bafd6f4a642b5a774c878cab3e02f917ecb3b0",
+    "preflightBlob": "632769237cff1ae7b35a9b6b28b6e528907a85db",
+    "nodePrimaryCommit": "27f213124280b4db4cd1e3dd42f6f8afd01ceff7",
+    "priorDependency": {
+      "status": "accepted by Root; not an activation of this unit",
+      "basis": "Root message during preparation",
+      "scopedReviewBlob": "2e18f024e2a7f40fece0225e4ba06aec8c077893",
+      "rootDocsClosure": "c086b11013ce70082bfdf5118449bfe97911485f",
+      "findings": "C0/I0/M0; I1-I5/M1 addressed; actual23GREEN/19beforeRED/two production mutants killed"
+    },
+    "focusedRootRuling": "Add genuine anonymous async await-chain control and narrowly admit exact bare-async syntax only behind actual C2 usability proof. No Source imports for tiny fixtures, no tests now, no extra Native.",
+    "firstScopeRootRuling": "Preserve original first-scope NODE_OPTIONS/key/candidate absence checks before loader Node, and one AFW_JOB_STARTED_MS export before all setup with no reset. Programs/map/payload/loader unchanged; no business clock/timer change.",
+    "truthfulFallbackRootRuling": "Before any execution, correct emitter missing/corrupt/invalid-result fallback to started:null, ended:false, exitCode:null, signal:unknown. Main actual prelaunch started:false remains. Add actual-emit absent+invalid private-subroot ordinary-Node C6 controls; groups remain6. No tests now/no extraNative."
+  },
+  "candidate": {
+    "commit": "5582dbfcc11195154916585d53f5004ed590af44",
+    "parent": "327e9b7ec2182588dfb02e58b238787abb37a017",
+    "tree": "f71d6b8a08a1d0cdd22c0577f9818a21e0dffed2",
+    "attachedToRef": false,
+    "workflow": {
+      "path": ".github/workflows/afw-finite-budget-qualification.yml",
+      "bytes": 12909,
+      "blob": "ac79372ab48bcf6d02c23543c1c980efdafd830f",
+      "sha256": "94f217a1bf0b851d848cd087fab5751651e92a2b9f34285f5c3b0bd5decfdef7",
+      "jobs": [
+        "readonly"
+      ],
+      "falseJobGuards": 1,
+      "runBodyBytes": [
+        597,
+        10316,
+        194,
+        191
+      ],
+      "jobCeilingMinutes": 7,
+      "node": "22.23.4",
+      "runner": "ubuntu-24.04",
+      "trigger": "fixed Source push only, attempt1",
+      "futureExactMessage": "AFW-READONLY-SOURCE-SITE-ONEUSE-20261114",
+      "firstScopeBaselinePreserved": {
+        "NODE_OPTIONS_absent": true,
+        "key_absent": true,
+        "candidate_absent": true,
+        "AFW_JOB_STARTED_MS_exportCount": 1,
+        "exportBeforeAllSetup": true,
+        "clockReset": false
+      }
+    },
+    "same": {
+      "path": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+      "bytes": 895217,
+      "blob": "c073ada73c9cdfe2ef7b9f5a3741e8b826865271",
+      "sha256": "b3fb0c78781c27e35b74af1fd4ac9100ec2fba15ae5cd919487f51b03307be3d",
+      "oldPrefix": {
+        "bytes": 857320,
+        "blob": "057c93ba0e250c8df77d658bb41f4dfb1b4455de",
+        "sha256": "c45eea01d67a398b04bfbf177d144c4c9f93e9928b88ce2e8c1dcb0c49207d6f",
+        "entirePrefixExact": true
+      },
+      "appendBytes": 37897
+    },
+    "rollback": {
+      "originalWorkflowBlob": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+      "originalWorkflowBytes": 126209,
+      "rule": "Root restores original F7 only after terminal, appends actual safe outcome while preserving ENTIRE895217-byte candidate SAME prefix, and independently reads back source/tree/Core/Main. Never truncate proposal/history."
+    }
+  },
+  "preservation": {
+    "baseTree": "1e8af62f8622e444179fea1cafbaf4a2a08ddf30",
+    "base": "327e9b7ec2182588dfb02e58b238787abb37a017",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "fullRecursiveTree": {
+      "tree": "f71d6b8a08a1d0cdd22c0577f9818a21e0dffed2",
+      "truncated": false,
+      "entries": 3363,
+      "leaves": 3202,
+      "changes": [
+        {
+          "path": ".github/workflows/afw-finite-budget-qualification.yml",
+          "old": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+          "new": "ac79372ab48bcf6d02c23543c1c980efdafd830f",
+          "bytes": 12909
+        },
+        {
+          "path": "docs/superpowers/reports/2026-11-13-coherent-suite-qualification.md",
+          "old": "057c93ba0e250c8df77d658bb41f4dfb1b4455de",
+          "new": "c073ada73c9cdfe2ef7b9f5a3741e8b826865271",
+          "bytes": 895217
+        }
+      ],
+      "deleted": [],
+      "unchangedCore": 3200
+    },
+    "core": {
+      "exactUnchangedLeaves": 3200,
+      "rawBytes": 324348,
+      "rawSha256": "547d44f2938403fa92fc6f8de19ef0000728c7917983afc9cf415697e812f802",
+      "rawEncoding": "git ls-tree -rz --full-tree HEAD; retain mode type sha<TAB>path, exclude only F7/SAME, ASCII path sort, concatenate original tuple+TAB+path+NUL",
+      "rootJsonCoreMetadataSha256": "9e71af5d23fca660569f5c4c90ca202152c7f22d1b3a39a5be8bc24426c92304",
+      "rootJsonHashRecomputed": false
+    },
+    "fullReadback": {
+      "exactProgramAndF7SameBlobs": [
+        {
+          "name": "site.mjs",
+          "blob": "b6cafcb75b4b158f7c36bbf336bf50b048699c4c",
+          "exact": true
+        },
+        {
+          "name": "site-closed.mjs",
+          "blob": "effb33c3e63802b1c54760d45b5523378938eb39",
+          "exact": true
+        },
+        {
+          "name": "schema.json",
+          "blob": "afee53bae2103c48211bc0bb72fcef482a9a6ebc",
+          "exact": true
+        },
+        {
+          "name": "contract.mjs",
+          "blob": "6f21b4f3931bb139f29bc3cd20c0edfc405dfb1b",
+          "exact": true
+        },
+        {
+          "name": "controls.mjs",
+          "blob": "08fc3498299ca0653cbcd40ce9b0bc8ac4b5836b",
+          "exact": true
+        },
+        {
+          "name": "main.mjs",
+          "blob": "ef21e1e44780b15418244f1e750b190e5e3070f9",
+          "exact": true
+        },
+        {
+          "name": "reporter.mjs",
+          "blob": "399034feaa2a99d38ef55fe7cfa1a2e87385a816",
+          "exact": true
+        },
+        {
+          "name": "emit.mjs",
+          "blob": "42e7e3ab7e728fb1894abd6a1407af4a72f97e72",
+          "exact": true
+        },
+        {
+          "name": "site-map.json",
+          "blob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+          "exact": true
+        },
+        {
+          "name": "runtime.mjs",
+          "blob": "815c32f1020ff1f32799ed47a652ced314a903f7",
+          "exact": true
+        },
+        {
+          "name": "closed.mjs",
+          "blob": "7d9e792fdcaac628f8c8724287904cba976772fd",
+          "exact": true
+        },
+        {
+          "name": "qualified-driver.mjs",
+          "blob": "3ef70505e65c179dae68a9a1a504da591f840c49",
+          "exact": true
+        },
+        {
+          "name": "preflight.mjs",
+          "blob": "1b3ad02d1cbf183ac82f79d7097b4fe506a2093b",
+          "exact": true
+        },
+        {
+          "name": "tiny-helper.mjs",
+          "blob": "179a3b28169f343c0f4fecf2ec15bab639743025",
+          "exact": true
+        },
+        {
+          "name": "tiny.test.mjs",
+          "blob": "c0ac0a2efda993d9d9b203197528fdb837c9395d",
+          "exact": true
+        },
+        {
+          "name": "tiny-reporter.mjs",
+          "blob": "0d579212537dbde9579c6c9c9109151990db3efa",
+          "exact": true
+        },
+        {
+          "name": "tiny-map.json",
+          "blob": "dda5dac6a1250d3166fc98d89fac901c610f5ceb",
+          "exact": true
+        },
+        {
+          "name": "pins.json",
+          "blob": "9e79d5f0b4423471c91eefbce1e20709a6267575",
+          "exact": true
+        },
+        {
+          "name": "F7",
+          "blob": "ac79372ab48bcf6d02c23543c1c980efdafd830f",
+          "exact": true
+        },
+        {
+          "name": "SAME",
+          "blob": "c073ada73c9cdfe2ef7b9f5a3741e8b826865271",
+          "exact": true
+        }
+      ],
+      "commitAndRefReadbacks": [
+        {
+          "name": "commit",
+          "sha": "5582dbfcc11195154916585d53f5004ed590af44",
+          "tree": "f71d6b8a08a1d0cdd22c0577f9818a21e0dffed2",
+          "parents": [
+            "327e9b7ec2182588dfb02e58b238787abb37a017"
+          ]
+        },
+        {
+          "name": "main",
+          "ref": "refs/heads/main",
+          "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+        },
+        {
+          "name": "source",
+          "ref": "refs/heads/feat/finite-native-cleanup-20261101",
+          "sha": "327e9b7ec2182588dfb02e58b238787abb37a017"
+        }
+      ],
+      "commitOneParentConfirmed": true,
+      "all20FullContentsEqualPreparedData": true
+    },
+    "publicSourcePins": {
+      "world": {
+        "path": "test/fixtures/finite-budget-world.mjs",
+        "blob": "1e18873791e0520fff611e353232e38786c51941",
+        "bytes": 243656,
+        "sha256": "125bfb65ebf5a87fb1301750ffeae4fe52f24dd6049828cf8c8557b94d886855"
+      },
+      "native": {
+        "path": "test/mcp-qa-finite-budget-native.test.mjs",
+        "blob": "533dafb5df5f8e57442c5b9029dc8dec6dded434",
+        "bytes": 12749,
+        "sha256": "7194f50e3974076da519b1b99103d28537cc2d33813e8bf6eae83cf014d24948"
+      }
+    },
+    "all83ExpressionsMatchPinnedPublicBytes": true
+  },
+  "payload": {
+    "markerBegin": "<!-- AFW-READONLY-SOURCE-SITE-PAYLOAD-V1:BEGIN -->",
+    "markerEnd": "<!-- AFW-READONLY-SOURCE-SITE-PAYLOAD-V1:END -->",
+    "expanded": {
+      "bytes": 90957,
+      "sha256": "4abe79ed7522b88d90337fbb9528fdd7a94f1660539bf70ad9fdb1009aaa611a",
+      "blob": "7496f640707af500054d13ac75c7c906a73b8fdd"
+    },
+    "compressed": {
+      "bytes": 22284,
+      "sha256": "f7bed5593d557b47691a10c32a34c742326ea73e6ec7e263220c1f5c29ed0dfd",
+      "blob": "66c7b07042eebb92dfdeb24b17004816e6196784"
+    },
+    "base64Characters": 29712,
+    "programCount": 18,
+    "programSetSha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+    "programManifest": {
+      "blob": "ff79a5825ceb1a90d585fc0f60a5c906b7d98bba",
+      "bytes": 2810,
+      "sha256": "174a5a8731fb99de1a1e5525b13dea012097fc243d128f171d9cae9c4f370551",
+      "encoding": "JSON.stringify(programPins)+LF, in listed insertion order"
+    },
+    "loader": {
+      "blob": "fbb1b3525d80ddb3f62c24d4dbe3aff9afc941f2",
+      "bytes": 9838,
+      "sha256": "8a1c41a710a469add2182e709b5b2ca503400e699de8cdb691c9a4f047d3721e"
+    },
+    "bounds": {
+      "workflowMax": 500000,
+      "runBodyMax": 21000,
+      "perProgramMax": 21000,
+      "compressedMax": 30000,
+      "expandedMax": 100000,
+      "base64Max": 40000,
+      "wireMax": 16384
+    },
+    "canonicalExpandedJSON": true,
+    "gzipBase64RoundTrip": true,
+    "materializedReadbackRequired": true,
+    "gitAndWorkingCopyBeforeAndAfterRequired": true,
+    "all18ProgramDataHashesVerifiedDuringPreparation": true,
+    "futureLoaderVerifiesAll18BeforeMaterialization": true
+  },
+  "programs": {
+    "site-map.json": {
+      "bytes": 6631,
+      "sha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+      "blob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0"
+    },
+    "runtime.mjs": {
+      "bytes": 3546,
+      "sha256": "7fde32c0df8b06ab3a01db30fb9e75fb7429cf6e4f95ed8152ed16bd7d0ab40a",
+      "blob": "815c32f1020ff1f32799ed47a652ced314a903f7"
+    },
+    "closed.mjs": {
+      "bytes": 5785,
+      "sha256": "cce547d7e23844003832498493e0d3b6d3bc352980408a66dd194949dab8e778",
+      "blob": "7d9e792fdcaac628f8c8724287904cba976772fd"
+    },
+    "qualified-driver.mjs": {
+      "bytes": 8545,
+      "sha256": "fb168aed7ea6c508f7ca3d59b2bd125dfe5125f528a9d85ceb4bc4944198cf43",
+      "blob": "3ef70505e65c179dae68a9a1a504da591f840c49"
+    },
+    "preflight.mjs": {
+      "bytes": 9307,
+      "sha256": "ef91d5f26567162d9a877657ffee92b4f997e4bd7a5d6511d9da77e0be1be37b",
+      "blob": "1b3ad02d1cbf183ac82f79d7097b4fe506a2093b"
+    },
+    "site.mjs": {
+      "bytes": 2893,
+      "sha256": "9e705115a5da27f7e8a5f48ccd33b456cb99d98a7173fbecb9906cda0d0eee7a",
+      "blob": "b6cafcb75b4b158f7c36bbf336bf50b048699c4c"
+    },
+    "site-closed.mjs": {
+      "bytes": 3146,
+      "sha256": "977a33043aba80faab0683e9a4dd33aba2d6ec3508dd14bcc7276ecaec2335d1",
+      "blob": "effb33c3e63802b1c54760d45b5523378938eb39"
+    },
+    "tiny-helper.mjs": {
+      "bytes": 782,
+      "sha256": "28de3c28c64518466d14685629e9ff1a422af744a939a5d7e2d8ff826dad565a",
+      "blob": "179a3b28169f343c0f4fecf2ec15bab639743025"
+    },
+    "tiny.test.mjs": {
+      "bytes": 360,
+      "sha256": "a1b35804648b1a4ec652d1f0e3ce0dfbfc2a7d78bcb24cd6986aae7ccfa52cf8",
+      "blob": "c0ac0a2efda993d9d9b203197528fdb837c9395d"
+    },
+    "tiny-reporter.mjs": {
+      "bytes": 2861,
+      "sha256": "9976aadc5884652cddf57f6b1c3cd072023614bd604680cce1c0ada03b40307f",
+      "blob": "0d579212537dbde9579c6c9c9109151990db3efa"
+    },
+    "reporter.mjs": {
+      "bytes": 679,
+      "sha256": "e32d8d83e5f1fefdcb9461f6d40c50c76441cbd19fc9dc0e708d2dcdf158ab97",
+      "blob": "399034feaa2a99d38ef55fe7cfa1a2e87385a816"
+    },
+    "tiny-map.json": {
+      "bytes": 652,
+      "sha256": "571dcb6e511c9d53d032d918daaa9659250a5f952987b1d7e2fc3ca8676223bb",
+      "blob": "dda5dac6a1250d3166fc98d89fac901c610f5ceb"
+    },
+    "schema.json": {
+      "bytes": 12651,
+      "sha256": "d850e3ad8216e3375cc31d920f39aa2a6a43fd63dbc6ab2ef68d3d09671ecb1e",
+      "blob": "afee53bae2103c48211bc0bb72fcef482a9a6ebc"
+    },
+    "contract.mjs": {
+      "bytes": 4564,
+      "sha256": "ab17ec9b41626d8f97b53ab0f32b2056b35ed56bbda4378d4085247a93ff4b92",
+      "blob": "6f21b4f3931bb139f29bc3cd20c0edfc405dfb1b"
+    },
+    "controls.mjs": {
+      "bytes": 12243,
+      "sha256": "cd8c26838910668bc01abf9976412dbd8b263253e95b48094177c589f4f7e97e",
+      "blob": "08fc3498299ca0653cbcd40ce9b0bc8ac4b5836b"
+    },
+    "pins.json": {
+      "bytes": 549,
+      "sha256": "9536e8993238aa8be06c26d3fe259a57b0d2c25be7e2d56f4acb641362864265",
+      "blob": "9e79d5f0b4423471c91eefbce1e20709a6267575"
+    },
+    "main.mjs": {
+      "bytes": 7757,
+      "sha256": "996c3410b6478270595ff6deb0b518f34f006321be02aa12bcab489506f9d0cb",
+      "blob": "ef21e1e44780b15418244f1e750b190e5e3070f9"
+    },
+    "emit.mjs": {
+      "bytes": 881,
+      "sha256": "51ac4cd3b8abf6301dae6650bac156d1e9ed48d1eecf11b87f1fa906668d9249",
+      "blob": "42e7e3ab7e728fb1894abd6a1407af4a72f97e72"
+    }
+  },
+  "map": {
+    "productionBlob": "bcc38e8aeeffa82329701bf382e9868a34cf8ec0",
+    "productionBytes": 6631,
+    "productionSha256": "1f1024c4feb46f242b1d3ab7d87c5a8d696cccdb51547f5336f5bae90217deaf",
+    "spanCount": 83,
+    "diffFromBindingAppendix": "none; exact original disjoint inclusive line AND column spans; no line-only fallback",
+    "expressionPositions": [
+      {
+        "alias": "world_1138_a1",
+        "file": "world",
+        "line": 1138,
+        "start": 56,
+        "end": 158,
+        "expression": "assert.equal(result.classification,'confirmed_deadline','same selected child causal deadline required')"
+      },
+      {
+        "alias": "world_1139_a1",
+        "file": "world",
+        "line": 1139,
+        "start": 2,
+        "end": 38,
+        "expression": "assert.equal(before.outwardPending,2)"
+      },
+      {
+        "alias": "world_1139_a2",
+        "file": "world",
+        "line": 1139,
+        "start": 40,
+        "end": 79,
+        "expression": "assert.equal(before.heldNativeSettled,2)"
+      },
+      {
+        "alias": "world_1139_a3",
+        "file": "world",
+        "line": 1139,
+        "start": 81,
+        "end": 172,
+        "expression": "assert(fixedQueueCausality(before),'two actual held operations bound to same current queue')"
+      },
+      {
+        "alias": "world_1140_a1",
+        "file": "world",
+        "line": 1140,
+        "start": 2,
+        "end": 76,
+        "expression": "assert(after.released&&after.outwardPending===0&&after.nativeUnsettled===0)"
+      },
+      {
+        "alias": "world_1145_a1",
+        "file": "world",
+        "line": 1145,
+        "start": 2,
+        "end": 42,
+        "expression": "assert.equal(value.observerInvalid,false)"
+      },
+      {
+        "alias": "world_1145_a2",
+        "file": "world",
+        "line": 1145,
+        "start": 44,
+        "end": 108,
+        "expression": "assert.equal(events.length,1,'one actual reached final list cap')"
+      },
+      {
+        "alias": "world_1145_a3",
+        "file": "world",
+        "line": 1145,
+        "start": 128,
+        "end": 156,
+        "expression": "assert.equal(e.family,family)"
+      },
+      {
+        "alias": "world_1145_a4",
+        "file": "world",
+        "line": 1145,
+        "start": 158,
+        "end": 181,
+        "expression": "assert(e.childOrdinal>0)"
+      },
+      {
+        "alias": "world_1145_a5",
+        "file": "world",
+        "line": 1145,
+        "start": 183,
+        "end": 209,
+        "expression": "assert.equal(childs.size,1)"
+      },
+      {
+        "alias": "world_1145_a6",
+        "file": "world",
+        "line": 1145,
+        "start": 211,
+        "end": 244,
+        "expression": "assert.equal(e.kind,'cap_'+method)"
+      },
+      {
+        "alias": "world_1145_a7",
+        "file": "world",
+        "line": 1145,
+        "start": 246,
+        "end": 270,
+        "expression": "assert.equal(e.counter,2)"
+      },
+      {
+        "alias": "world_1145_a8",
+        "file": "world",
+        "line": 1145,
+        "start": 272,
+        "end": 294,
+        "expression": "assert.equal(e.limit,2)"
+      },
+      {
+        "alias": "world_1145_a9",
+        "file": "world",
+        "line": 1145,
+        "start": 296,
+        "end": 322,
+        "expression": "assert.equal(value.lists,2)"
+      },
+      {
+        "alias": "world_1145_a10",
+        "file": "world",
+        "line": 1145,
+        "start": 324,
+        "end": 365,
+        "expression": "assert.equal(value.thirdListEntered,false)"
+      },
+      {
+        "alias": "world_1146_a1",
+        "file": "world",
+        "line": 1146,
+        "start": 16,
+        "end": 43,
+        "expression": "assert.equal(value.gets,200)"
+      },
+      {
+        "alias": "world_1146_a2",
+        "file": "world",
+        "line": 1146,
+        "start": 50,
+        "end": 75,
+        "expression": "assert.equal(value.gets,1)"
+      },
+      {
+        "alias": "world_1146_a3",
+        "file": "world",
+        "line": 1146,
+        "start": 77,
+        "end": 107,
+        "expression": "assert.equal(value.deletes,200)"
+      },
+      {
+        "alias": "world_1146_a4",
+        "file": "world",
+        "line": 1146,
+        "start": 109,
+        "end": 152,
+        "expression": "assert.equal(value.grantDeleteEntered,false)"
+      },
+      {
+        "alias": "world_1150_a1",
+        "file": "world",
+        "line": 1150,
+        "start": 66,
+        "end": 125,
+        "expression": "assert.equal(c.invoke,1,'actual single '+name+' invocation')"
+      },
+      {
+        "alias": "world_1150_a2",
+        "file": "world",
+        "line": 1150,
+        "start": 127,
+        "end": 154,
+        "expression": "assert.equal(c.sync_throw,0)"
+      },
+      {
+        "alias": "world_1150_a3",
+        "file": "world",
+        "line": 1150,
+        "start": 156,
+        "end": 193,
+        "expression": "assert.equal(c.fulfilled+c.rejected,1)"
+      },
+      {
+        "alias": "world_1151_a1",
+        "file": "world",
+        "line": 1151,
+        "start": 2,
+        "end": 81,
+        "expression": "assert.equal(value.sendCalls.fulfilled,1,'original SEND ACK settled before SDK')"
+      },
+      {
+        "alias": "world_1151_a2",
+        "file": "world",
+        "line": 1151,
+        "start": 83,
+        "end": 131,
+        "expression": "assert.equal(value.sendCalls.sendHashes.length,1)"
+      },
+      {
+        "alias": "world_1152_a1",
+        "file": "world",
+        "line": 1152,
+        "start": 120,
+        "end": 150,
+        "expression": "assert.equal(sendRows.length,1)"
+      },
+      {
+        "alias": "world_1153_a1",
+        "file": "world",
+        "line": 1153,
+        "start": 2,
+        "end": 82,
+        "expression": "assert.equal(JSON.parse(sendRows[0][1]).recordHash,value.sendCalls.sendHashes[0])"
+      },
+      {
+        "alias": "world_1153_a2",
+        "file": "world",
+        "line": 1153,
+        "start": 96,
+        "end": 179,
+        "expression": "assert.equal(value.sdkCalls.rejected,1,'actual SDK rejection for negative boundary')"
+      },
+      {
+        "alias": "world_1158_a1",
+        "file": "world",
+        "line": 1158,
+        "start": 68,
+        "end": 134,
+        "expression": "assert(Date.now()<deadline,'SYN fixed budget observation deadline')"
+      },
+      {
+        "alias": "world_1161_a1",
+        "file": "world",
+        "line": 1161,
+        "start": 2,
+        "end": 84,
+        "expression": "assert.equal(process.env.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web')"
+      },
+      {
+        "alias": "world_1161_a2",
+        "file": "world",
+        "line": 1161,
+        "start": 86,
+        "end": 170,
+        "expression": "assert.equal(process.env.GITHUB_REF,'refs/heads/feat/finite-native-cleanup-20261101')"
+      },
+      {
+        "alias": "world_1161_a3",
+        "file": "world",
+        "line": 1161,
+        "start": 172,
+        "end": 219,
+        "expression": "assert.equal(process.env.GITHUB_RUN_ATTEMPT,'1')"
+      },
+      {
+        "alias": "world_1168_a1",
+        "file": "world",
+        "line": 1168,
+        "start": 2,
+        "end": 54,
+        "expression": "assert.equal(process.env.AFW_BUDGET_GROUP,'readonly')"
+      },
+      {
+        "alias": "world_1168_a2",
+        "file": "world",
+        "line": 1168,
+        "start": 56,
+        "end": 98,
+        "expression": "assert(['R1','R2','R3'].includes(caseName))"
+      },
+      {
+        "alias": "world_1174_a1",
+        "file": "world",
+        "line": 1174,
+        "start": 110,
+        "end": 148,
+        "expression": "assert.equal(rootBefore.available,true)"
+      },
+      {
+        "alias": "world_1176_a1",
+        "file": "world",
+        "line": 1176,
+        "start": 141,
+        "end": 185,
+        "expression": "assert.equal(held.queueObserverInvalid,false)"
+      },
+      {
+        "alias": "world_1176_a2",
+        "file": "world",
+        "line": 1176,
+        "start": 187,
+        "end": 260,
+        "expression": "assert(fixedQueueCausality(held),'actual causal populated readonly queue')"
+      },
+      {
+        "alias": "world_1180_a1",
+        "file": "world",
+        "line": 1180,
+        "start": 65,
+        "end": 104,
+        "expression": "assert.equal(rootDuring.available,false)"
+      },
+      {
+        "alias": "world_1180_a2",
+        "file": "world",
+        "line": 1180,
+        "start": 106,
+        "end": 139,
+        "expression": "assert.equal(rootDuring.live,true)"
+      },
+      {
+        "alias": "world_1181_a1",
+        "file": "world",
+        "line": 1181,
+        "start": 60,
+        "end": 104,
+        "expression": "assert.equal(beforeRelease.nativeUnsettled,0)"
+      },
+      {
+        "alias": "world_1181_a2",
+        "file": "world",
+        "line": 1181,
+        "start": 106,
+        "end": 149,
+        "expression": "assert.equal(beforeRelease.outwardPending,2)"
+      },
+      {
+        "alias": "world_1188_a1",
+        "file": "world",
+        "line": 1188,
+        "start": 3,
+        "end": 34,
+        "expression": "assert.equal(sdkRoot.I0,plan.I0)"
+      },
+      {
+        "alias": "world_1188_a2",
+        "file": "world",
+        "line": 1188,
+        "start": 36,
+        "end": 67,
+        "expression": "assert.equal(sdkRoot.C0,plan.C0)"
+      },
+      {
+        "alias": "world_1188_a3",
+        "file": "world",
+        "line": 1188,
+        "start": 69,
+        "end": 100,
+        "expression": "assert.equal(sdkRoot.C1,plan.C1)"
+      },
+      {
+        "alias": "world_1188_a4",
+        "file": "world",
+        "line": 1188,
+        "start": 102,
+        "end": 150,
+        "expression": "assert.equal(sdkReference!==null,caseName==='R1')"
+      },
+      {
+        "alias": "world_1190_a1",
+        "file": "world",
+        "line": 1190,
+        "start": 66,
+        "end": 79,
+        "expression": "assert(actual)"
+      },
+      {
+        "alias": "world_1190_a2",
+        "file": "world",
+        "line": 1190,
+        "start": 81,
+        "end": 149,
+        "expression": "assert.equal(hash(actual.script),f.firstConnectionBuild[role].sha256)"
+      },
+      {
+        "alias": "native_106_a1",
+        "file": "native",
+        "line": 106,
+        "start": 3,
+        "end": 36,
+        "expression": "assert.equal(result.caseName,name)"
+      },
+      {
+        "alias": "native_106_a2",
+        "file": "native",
+        "line": 106,
+        "start": 38,
+        "end": 69,
+        "expression": "assert.equal(f.completeWrites,1)"
+      },
+      {
+        "alias": "native_106_a3",
+        "file": "native",
+        "line": 106,
+        "start": 71,
+        "end": 102,
+        "expression": "assert.equal(f.completeNormal,1)"
+      },
+      {
+        "alias": "native_107_a1",
+        "file": "native",
+        "line": 107,
+        "start": 3,
+        "end": 51,
+        "expression": "assert.equal(f.input.entries,name==='R2'?201:200)"
+      },
+      {
+        "alias": "native_108_a1",
+        "file": "native",
+        "line": 108,
+        "start": 3,
+        "end": 38,
+        "expression": "assert.equal(f.input.correlations,1)"
+      },
+      {
+        "alias": "native_108_a2",
+        "file": "native",
+        "line": 108,
+        "start": 40,
+        "end": 85,
+        "expression": "assert.equal(f.input.expirationPreserved,true)"
+      },
+      {
+        "alias": "native_109_a1",
+        "file": "native",
+        "line": 109,
+        "start": 3,
+        "end": 39,
+        "expression": "assert.equal(f.foreignUnchanged,true)"
+      },
+      {
+        "alias": "native_109_a2",
+        "file": "native",
+        "line": 109,
+        "start": 41,
+        "end": 87,
+        "expression": "assert(f.lists<=2&&f.gets<=200&&f.scopePeak<=2)"
+      },
+      {
+        "alias": "native_110_a1",
+        "file": "native",
+        "line": 110,
+        "start": 3,
+        "end": 29,
+        "expression": "assert.equal(f.sdkReplay,0)"
+      },
+      {
+        "alias": "native_110_a2",
+        "file": "native",
+        "line": 110,
+        "start": 31,
+        "end": 63,
+        "expression": "assert.equal(f.nativeUnsettled,0)"
+      },
+      {
+        "alias": "native_110_a3",
+        "file": "native",
+        "line": 110,
+        "start": 65,
+        "end": 96,
+        "expression": "assert.equal(f.outwardPending,0)"
+      },
+      {
+        "alias": "native_111_a1",
+        "file": "native",
+        "line": 111,
+        "start": 19,
+        "end": 41,
+        "expression": "assert.equal(f.lists,2)"
+      },
+      {
+        "alias": "native_111_a2",
+        "file": "native",
+        "line": 111,
+        "start": 43,
+        "end": 66,
+        "expression": "assert.equal(f.gets,200)"
+      },
+      {
+        "alias": "native_111_a3",
+        "file": "native",
+        "line": 111,
+        "start": 68,
+        "end": 94,
+        "expression": "assert.equal(f.scopePeak,2)"
+      },
+      {
+        "alias": "native_111_a4",
+        "file": "native",
+        "line": 111,
+        "start": 96,
+        "end": 129,
+        "expression": "assert.equal(f.responseStatus,302)"
+      },
+      {
+        "alias": "native_111_a5",
+        "file": "native",
+        "line": 111,
+        "start": 131,
+        "end": 161,
+        "expression": "assert.equal(f.referenceRows,1)"
+      },
+      {
+        "alias": "native_111_a6",
+        "file": "native",
+        "line": 111,
+        "start": 163,
+        "end": 201,
+        "expression": "assert.equal(f.referenceBefore302,true)"
+      },
+      {
+        "alias": "native_112_a1",
+        "file": "native",
+        "line": 112,
+        "start": 8,
+        "end": 44,
+        "expression": "assert.notEqual(f.responseStatus,302)"
+      },
+      {
+        "alias": "native_112_a2",
+        "file": "native",
+        "line": 112,
+        "start": 46,
+        "end": 76,
+        "expression": "assert.equal(f.referenceRows,0)"
+      },
+      {
+        "alias": "native_112_a3",
+        "file": "native",
+        "line": 112,
+        "start": 78,
+        "end": 115,
+        "expression": "assert.equal(f.thirdListEntered,false)"
+      },
+      {
+        "alias": "native_113_a1",
+        "file": "native",
+        "line": 113,
+        "start": 19,
+        "end": 69,
+        "expression": "assert.equal(f.boundaryProof.exactPrecedingPages,2)"
+      },
+      {
+        "alias": "native_113_a2",
+        "file": "native",
+        "line": 113,
+        "start": 71,
+        "end": 109,
+        "expression": "assert.equal(f.boundaryProof.counter,2)"
+      },
+      {
+        "alias": "native_115_a1",
+        "file": "native",
+        "line": 115,
+        "start": 4,
+        "end": 48,
+        "expression": "assert.equal(f.holdLabel,'holdpostnativeACK')"
+      },
+      {
+        "alias": "native_115_a2",
+        "file": "native",
+        "line": 115,
+        "start": 50,
+        "end": 84,
+        "expression": "assert.equal(f.heldNativeSettled,2)"
+      },
+      {
+        "alias": "native_115_a3",
+        "file": "native",
+        "line": 115,
+        "start": 86,
+        "end": 109,
+        "expression": "assert(f.queuedAtHold>0)"
+      },
+      {
+        "alias": "native_115_a4",
+        "file": "native",
+        "line": 115,
+        "start": 111,
+        "end": 156,
+        "expression": "assert.equal(f.deadlineProof.queueCausal,true)"
+      },
+      {
+        "alias": "native_115_a5",
+        "file": "native",
+        "line": 115,
+        "start": 158,
+        "end": 211,
+        "expression": "assert.equal(f.deadlineProof.denialAfterDeadline,true)"
+      },
+      {
+        "alias": "native_116_a1",
+        "file": "native",
+        "line": 116,
+        "start": 4,
+        "end": 44,
+        "expression": "assert.equal(f.rootBefore.available,true)"
+      },
+      {
+        "alias": "native_116_a2",
+        "file": "native",
+        "line": 116,
+        "start": 46,
+        "end": 87,
+        "expression": "assert.equal(f.rootDuring.available,false)"
+      },
+      {
+        "alias": "native_116_a3",
+        "file": "native",
+        "line": 116,
+        "start": 89,
+        "end": 124,
+        "expression": "assert.equal(f.rootDuring.live,true)"
+      },
+      {
+        "alias": "native_116_a4",
+        "file": "native",
+        "line": 116,
+        "start": 126,
+        "end": 165,
+        "expression": "assert.equal(f.rootAfter.available,true)"
+      },
+      {
+        "alias": "native_117_a1",
+        "file": "native",
+        "line": 117,
+        "start": 4,
+        "end": 73,
+        "expression": "assert(f.originalChildElapsedMs>=4900&&f.originalChildElapsedMs<10000)"
+      },
+      {
+        "alias": "native_118_a1",
+        "file": "native",
+        "line": 118,
+        "start": 4,
+        "end": 38,
+        "expression": "assert.equal(f.callsAfterRelease,0)"
+      },
+      {
+        "alias": "native_118_a2",
+        "file": "native",
+        "line": 118,
+        "start": 40,
+        "end": 74,
+        "expression": "assert.equal(f.lateReference,false)"
+      },
+      {
+        "alias": "native_120_a1",
+        "file": "native",
+        "line": 120,
+        "start": 3,
+        "end": 49,
+        "expression": "assert.equal(result.operationalReadiness,false)"
+      },
+      {
+        "alias": "native_120_a2",
+        "file": "native",
+        "line": 120,
+        "start": 51,
+        "end": 92,
+        "expression": "assert.equal(result.completePackage,false)"
+      },
+      {
+        "alias": "native_120_a3",
+        "file": "native",
+        "line": 120,
+        "start": 94,
+        "end": 125,
+        "expression": "assert.equal(result.PCoff,false)"
+      }
+    ],
+    "tinyMap": {
+      "pin": {
+        "bytes": 652,
+        "sha256": "571dcb6e511c9d53d032d918daaa9659250a5f952987b1d7e2fc3ca8676223bb",
+        "blob": "dda5dac6a1250d3166fc98d89fac901c610f5ceb"
+      },
+      "spans": [
+        {
+          "alias": "tiny_bool",
+          "file": "tiny",
+          "line": 3,
+          "start": 26,
+          "end": 49
+        },
+        {
+          "alias": "tiny_number",
+          "file": "tiny",
+          "line": 3,
+          "start": 51,
+          "end": 75
+        },
+        {
+          "alias": "tiny_call",
+          "file": "tiny",
+          "line": 3,
+          "start": 77,
+          "end": 89
+        },
+        {
+          "alias": "tiny_async",
+          "file": "tiny",
+          "line": 4,
+          "start": 37,
+          "end": 60
+        },
+        {
+          "alias": "tiny_injected",
+          "file": "tiny",
+          "line": 6,
+          "start": 28,
+          "end": 145
+        },
+        {
+          "alias": "tiny_anonymous_async",
+          "file": "tiny",
+          "line": 9,
+          "start": 64,
+          "end": 87
+        }
+      ],
+      "productionEnumIncludesTiny": false
+    },
+    "labelMeaning": "Untrusted finite mapped public assertion expression in this newly run pinned file, never authenticated cause or business pass.",
+    "unmappedLowerFixtures": "unknown; no forward search, no source-map/line-offset guessing"
+  },
+  "newDTO": {
+    "marker": "AFW_READONLY_SOURCE_SITE/1 ",
+    "purpose": "afw.readonly-source-site.safe.v1",
+    "streamPurpose": "afw.readonly-source-site.stream.v2",
+    "schemaPin": {
+      "bytes": 12651,
+      "sha256": "d850e3ad8216e3375cc31d920f39aa2a6a43fd63dbc6ab2ef68d3d09671ecb1e",
+      "blob": "afee53bae2103c48211bc0bb72fcef482a9a6ebc"
+    },
+    "rootReceiverRequired": "Root-owned independent new-purpose receiver, bind actual source/tree/run/attempt1/job readonly/map/program set/payload and source proof, all rows/end/counts and seven false flags. Old inventory receiver must not be mislabeled as a site-only receiver.",
+    "expectedTopLevelKeys": [
+      "purpose",
+      "sourceBase",
+      "source",
+      "sourceTree",
+      "run",
+      "attempt",
+      "job",
+      "node",
+      "stage",
+      "programProof",
+      "sourceProof",
+      "controls",
+      "pure",
+      "profile",
+      "businessCommand",
+      "readonly",
+      "collectionComplete",
+      "usableLocationCount",
+      "historicalCauseProven",
+      "receiptAuthenticated",
+      "operationalReadiness",
+      "completePackage",
+      "PCoff",
+      "globalNativeDrainVerified",
+      "sdkNamespaceEmptyVerified"
+    ],
+    "errorKeys": [
+      "wrapperFailureType",
+      "causeCode",
+      "causeClass",
+      "operator",
+      "actual",
+      "expected",
+      "sourceSite"
+    ],
+    "sourceSiteEnum": [
+      "unknown",
+      "world_1138_a1",
+      "world_1139_a1",
+      "world_1139_a2",
+      "world_1139_a3",
+      "world_1140_a1",
+      "world_1145_a1",
+      "world_1145_a2",
+      "world_1145_a3",
+      "world_1145_a4",
+      "world_1145_a5",
+      "world_1145_a6",
+      "world_1145_a7",
+      "world_1145_a8",
+      "world_1145_a9",
+      "world_1145_a10",
+      "world_1146_a1",
+      "world_1146_a2",
+      "world_1146_a3",
+      "world_1146_a4",
+      "world_1150_a1",
+      "world_1150_a2",
+      "world_1150_a3",
+      "world_1151_a1",
+      "world_1151_a2",
+      "world_1152_a1",
+      "world_1153_a1",
+      "world_1153_a2",
+      "world_1158_a1",
+      "world_1161_a1",
+      "world_1161_a2",
+      "world_1161_a3",
+      "world_1168_a1",
+      "world_1168_a2",
+      "world_1174_a1",
+      "world_1176_a1",
+      "world_1176_a2",
+      "world_1180_a1",
+      "world_1180_a2",
+      "world_1181_a1",
+      "world_1181_a2",
+      "world_1188_a1",
+      "world_1188_a2",
+      "world_1188_a3",
+      "world_1188_a4",
+      "world_1190_a1",
+      "world_1190_a2",
+      "native_106_a1",
+      "native_106_a2",
+      "native_106_a3",
+      "native_107_a1",
+      "native_108_a1",
+      "native_108_a2",
+      "native_109_a1",
+      "native_109_a2",
+      "native_110_a1",
+      "native_110_a2",
+      "native_110_a3",
+      "native_111_a1",
+      "native_111_a2",
+      "native_111_a3",
+      "native_111_a4",
+      "native_111_a5",
+      "native_111_a6",
+      "native_112_a1",
+      "native_112_a2",
+      "native_112_a3",
+      "native_113_a1",
+      "native_113_a2",
+      "native_115_a1",
+      "native_115_a2",
+      "native_115_a3",
+      "native_115_a4",
+      "native_115_a5",
+      "native_116_a1",
+      "native_116_a2",
+      "native_116_a3",
+      "native_116_a4",
+      "native_117_a1",
+      "native_118_a1",
+      "native_118_a2",
+      "native_120_a1",
+      "native_120_a2",
+      "native_120_a3"
+    ],
+    "rawFieldsPermitted": false,
+    "coordinatesPermitted": false,
+    "privateHashesPermitted": false,
+    "collectionMeaning": "collectionComplete exactly stage complete; valid all3 terminal or valid precase-file failure plus unique consistent global summary/end. usableLocationCount counts known failure aliases only. Command exit0 is scoped command-exited-zero observation only; no business pass flag.",
+    "firstFailure": "Every per-row error and firstFailure.error carry equal full annotation, including sourceSite. Unknown never upgrades a failed case.",
+    "inventoryFields": "absent by new schema; no old complete-coverage or residency claim",
+    "expectedWire": "One closed JSON record only, <=16384 UTF8 bytes, prefix AFW_READONLY_SOURCE_SITE/1. No actual runtime record exists in preparation.",
+    "unknownFallback": {
+      "businessCommand": {
+        "started": null,
+        "ended": false,
+        "exitCode": null,
+        "signal": "unknown"
+      },
+      "stage": "unknown",
+      "collectionComplete": false,
+      "readonly": null,
+      "usableLocationCount": 0,
+      "sevenNonclaims": false,
+      "noNoNativeClaim": true,
+      "reason": "Absence or invalidity of the public result cannot establish whether Native was already spawned. These are expected fallback fields, not an observed run."
+    }
+  },
+  "controls": [
+    {
+      "id": "C1",
+      "implementation": "Six real isolated tiny node:test failures, supported original CLI dual reporters, require own-DATA cause.message/stack/code and all expected finite tiny sites; no native brand prerequisite.",
+      "expected": "actual child exit1, terminal true; global6failed/0pass/0skip/0cancel/0todo/0suites; usableShape true before Native",
+      "executed": false
+    },
+    {
+      "id": "C2",
+      "implementation": "Three distinct method/callable assertions on one ASCII line, first/middle/last failure; named async helper/caller; genuine AsyncLocalStorage.run({},async()=>{await chainOperation()}) with assertion after an await. Require helper FIRST alias and bounded verified-header actual bareAsyncSuffix true. Literal single-space bare-async syntax only.",
+      "expected": "all6 tiny sites exactly matched, usableColumns true, bareAsyncSuffix true; otherwise HOLD before install/pure/profile/Native",
+      "executed": false
+    },
+    {
+      "id": "C3",
+      "implementation": "Unknown external or Node FIRST frame followed by known caller remains unknown; relative/basename/prefix impostor, dot/encoded/alternate-origin/query/hash/separators, off-by-line/gap-column, leading zeros, malformed/double-location. Genuine exact absolute and canonical file URL positive only.",
+      "expected": "unknown for every negative; never forward fallback",
+      "executed": false
+    },
+    {
+      "id": "C4",
+      "implementation": "Run unchanged qualified-driver accessor control (no tests/Source imports), direct getters/inherited/Proxy/revokedProxy wrapper+cause checks and original numeric boolean OR integer0..65536 predicate counterexamples. A wrapper failureType accessor is ignored without getter calls and does not become a site admission requirement.",
+      "expected": "zero our getters/traps; unchanged qualified closed projector outputs; no narrow helper native Error-brand requirement",
+      "executed": false
+    },
+    {
+      "id": "C5",
+      "implementation": "Actual tiny fake-at multiline message plus artificial exact header injection; bounded own DATA message solely delimit header. Missing/mismatch/empty unsupported message/unavailable stack/missing separator/CR/NUL/malformed suffix unknown. Exact65536-byte stack boundary and +1, UTF8 byte overflow, 64/65 frames, frame +1; canary non-echo.",
+      "expected": "verified actual suffix FIRST alias only; no message/stack/path/function/canary emitted by projector; original private TAP retained; no claim over earlier Node serializer getters",
+      "executed": false
+    },
+    {
+      "id": "C6",
+      "implementation": "Wrong map/World/Native pins reject admission; strict production enum excludes tiny aliases/extra raw path/coordinates; errors/firstFailure equality, unique complete summary/end/no skips/TODO via unchanged collector logic, unknown failed rows remain failed, all seven flags false, contradictory zero command exit rejected. In two private RUNNER_TEMP subroots, invoke the actual emit.mjs with absent result and a schema-invalid result explicitly containing prior started:true/terminal SIGTERM. Parse its one closed JSON line through validateRecord and require unknown launch state, collectionComplete:false, readonly:null, usableLocationCount0 and all7false, with no noNativeInvoked claim. The old false fallback would fail these actual-branch assertions.",
+      "expected": "only closed site DTO admitted, stage complete requires provenance+all gates+valid original stream; Root supplies independent receiver gate Missing/invalid-result emitter output must retain started:null and signal:unknown; these controls are prepared but unexecuted.",
+      "executed": false
+    }
+  ],
+  "futureSequence": [
+    "Root independently accepts this inactive DATA and independent new-purpose receiver plus current prior-unit closure",
+    "Root obtains fresh Source/Main/ref/run leases; exact one-use push activation at attempt1",
+    "Loader verifies all public Source/payload/program/map/F7/SAME bytes and full Core Git plus clean tracked working copy BEFORE materializing private programs",
+    "C1-C6 actual tiny controls FIRST using Node builtins/private reviewed modules only; if own DATA shape, helper FIRST site or bare-async/column proof fails: HOLD before Native",
+    "Only after all6 pass: exact npm ci --ignore-scripts --no-audit --no-fund; current qualified8pure; original readonly profile generation",
+    "Verify both immutable World/Native working bytes/Git map pins again; execute original readonly CLI exactly once with dual reporters/concurrency1/private command-output.log/all3 original120000ms cases and jobcap7min",
+    "Read only finite closed stream; verify World/Native/Core/F7/SAME working/Git after; emit one <=16KiB finite DTO, no inventory/seal/upload",
+    "Root observes terminal and independently validates safe wire/source/tree/run/attempt/job/hash/map/rows/end/flags; restore original F7 and append actual full-prefix outcome; one fresh unit review"
+  ],
+  "settledParsingContractVerbatim": "\nThis is a new narrow exception to the existing closed projector's no-stack-reading promise. Keep qualified-driver numeric/class/code/operator behavior unchanged. Add one independently bounded finite field, sourceSite, in a new-unit schema/receiver version. Do not modify the qualified source module or Native/World bodies.\n\n1. Access wrapper, cause, message and stack only through own-property DATA descriptors using the qualified non-Proxy guard. Reject a Proxy, accessor, missing DATA value, wrong type, reflection failure or unexpected shape to sourceSite=unknown. Never call a supplied reader, getter, toString, inspect hook, coercion or prepareStackTrace. Do not traverse cause chains to hunt for a better stack.\n2. The new helper operates only for an own-DATA ERR_ASSERTION cause. No native-error brand check is necessary or permitted as an admission prerequisite. Brand absence does not make the hint authenticated.\n3. Root expressly permits **bounded in-RAM own-DATA message only to delimit the exact cached AssertionError stack header**. Require stack to begin with the exact Node22 header formed from the fixed AssertionError/code prefix and the complete own message; support only the exact empty-message form if a real control proves it. Strip that full header, then parse its remaining frame suffix. No semantic-message classification. Missing/accessor/header mismatch or ambiguity yields unknown. This prevents a newline plus fake at-frame inside message from becoming the throw frame. No raw message/stack/hash/function/path is emitted or logged.\n4. Proposed conservative bounds: each raw input string at most 65536 UTF16 units **and** 65536 UTF8 bytes; at most64 suffix frames; each frame at most1024 UTF16 units/UTF8 bytes. Reject CR, NUL, overflow, overlong/malformed/incomplete suffix, missing separator, ambiguous frame syntax and extra non-frame suffix. Check primitive type/length before byte counting. Inputs remain private Runner RAM.\n5. **Select the first frame after the verified header; do not search forward for a known source.** Settled skiplist is empty. For standard asserts the constructor evidence predicts caller-first capture; tiny controls must prove this. An unrecognized Node frame, unknown helper/dependency/compiled frame, malformed first frame, or missing map entry produces unknown. In particular an unknown lower fixture followed by a known World await/caller must stay unknown. Do not report the known caller as the assertion.\n6. Frame parsing admits only one unambiguous location per frame, with positive canonical decimal line/column. Handle the exact plain and named/async forms established by the controls; no arbitrary suffix search through text. Names are syntactic input only and never returned. A malformed or double-location first frame is unknown.\n7. **Paths must equal exact trusted Runner-generated names**, not merely end in a public basename/suffix. Root verifies repository/ref/current Source and trusted cwd before tests. Build the two approved absolute paths and their canonical file URLs from that verified cwd; compare input spelling exactly. No arbitrary path.normalize, URL decoding, dot-segment collapse or free-origin acceptance. Reject prefix impostors, ../, percent-encoded paths, alternate origins, separators, query/hash and basename matches. Relative spellings may be admitted only if the exact original CLI control actually produces and proves them; safest initial allowlist is absolute path plus canonical file URL only.\n8. Bind each mapped file to its immutable blob, bytes and SHA256, and bind the static map itself. Before Native, verify working-copy bytes match the original and Source Git pins match. No World/Native rewrite/instrumentation or lineoffset/source-map guessing.\n9. Map the exact parsed line **and column** to a unique disjoint assertion-call span in the appendix. The real tiny same-line control must demonstrate that Node22's observed columns fall within the intended expression spans for both method assertions and callable assert. Do not assume the runtime column equals the token's first character. Unmapped columns, gap columns, multiple candidates, overlapping spans, unexpected line or changed byte pins yield unknown. Never choose the nearest assertion.\n10. Output only an enum such as world_1188_a4, native_111_a6 or unknown. Coordinates/path/function/raw header are not separate outputs. Alias meaning is the mapped assertion expression in this pinned file, **not an authenticated root cause**. Preserve all seven nonclaims false. Retain per-row failure/error relationships, firstFailure equality and cumulative summary checks. Unknown location never upgrades a failed case to pass.\n11. Unknown in a genuinely different/unmapped Native failure is an honest result. If the **tiny real serialized-assertion controls cannot establish a usable own DATA representation and unambiguous column mapping**, hold before Native: another Native run would have no demonstrated ability to answer the new question. Do not force materialization or widen the parser.\n\nCost if this design is wrong: a false assertion-site label or additional private DATA handling. Controls must exercise fake-at message injection, unmapped-first-frame rejection, exact paths/columns and canary non-echo. The label stays explicitly untrusted and never authorizes a business fix by itself.\n\n",
+  "selfReview": {
+    "preparationVerification": "RAM string/JSON/hash/compression/GitDB complete-content/tree readback only; no Source parse-as-code/import/eval/syntax/test/build/npm was executed.",
+    "checked": [
+      "exact83 map expressions/ASCII/no overlaps/no new production alias",
+      "same entire857320-byte prefix exact and all3200 other leaves exact",
+      "one FALSE jobguard, fixed repo/ref/push/message/attempt1, Node22.23.4/Ubuntu24.04/job7min",
+      "all4run bodies<=10316B;F7=12909B;all18programs<=12651B;payload bounded/canonical/pinned",
+      "corrected runtime815c32 unchanged; qualifieddriver3ef705 and closed7d9e792 unchanged",
+      "new finite field only; no code/class/operator/numeric predicate change",
+      "firstframe only; exactheader strips full own message; empty skiplist; no brand/getters/traps/coercion/forward scan",
+      "genuine anonymous async topology demanded by C2; parser supports exact bare form without offset/body changes",
+      "original readonly CLI dual TAP+finite reporter, env group/preflight/file, all3 original cases120000 unchanged",
+      "one Native launch site only; no retry, positive/full16/liveEntry, new deadline/clock/AbortSignal, Worldoverlay, SDK/body mutation",
+      "no keys, environment/secrets context, private artifact reads/uploads, inventory, seal, Cloudflare/mail/browser/OAuth or Rootdocs ref changes",
+      "original first-scope shell absence checks restored; exactly one original AFW_JOB_STARTED_MS export before all setup, no reset; runtime815c32 carries it unchanged",
+      "truthful emitter fallback only: started:null/signal:unknown; main actual-prelaunch false untouched; C6 actual-branch absent/invalid controls prepared; other16 program bodies exactly retained"
+    ],
+    "unknowns": [
+      "No control or Source execution has occurred; exact Node reporter usability and observed columns remain unknown until the future actual C1/C2 gate.",
+      "The genuine anonymous async control might not expose the required bare suffix on the real binary. If so, HOLD before Native rather than force a getter or widen parsing.",
+      "A different valid suffix form, empty-message header or genuinely unmapped lower fixture may yield unknown. This is an honest bounded diagnostic result, not permission for another Native run.",
+      "A finite sourceSite label does not authenticate the Error, establish historical cause, repair business behavior, prove global Native drain, operational readiness or PC-off."
+    ]
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "performed": {
+    "githubPublicDataReads": true,
+    "inMemoryDataHashParsingCompression": true,
+    "unattachedGitObjectsWritten": true,
+    "localSourceFiles": false,
+    "sourceExecuted": false,
+    "sourceSyntaxChecked": false,
+    "controlsExecuted": false,
+    "dependenciesInstalled": false,
+    "buildsExecuted": false,
+    "workflowsDispatched": false,
+    "refsWritten": false,
+    "privateArtifactsAccessed": false,
+    "keysAccessed": false,
+    "cloudflareActions": false,
+    "rootdocsRefsWritten": false
+  },
+  "closure": "NEEDS_ROOT_GATE. Implementer performs no activation. Root owns independent receiver, fresh leases, one possible future Native, terminal, restoration/readback and review.",
+  "preReleaseFallbackCorrection": {
+    "reason": "Truthful unknown launch state under missing/invalid result, coupled to actual emitter branch",
+    "supersededUnattachedCandidate": "457f74367fab8cae4db808da1beb3e0d868b0321",
+    "changedPrograms": [
+      {
+        "name": "emit.mjs",
+        "before": {
+          "bytes": 800,
+          "sha256": "cf5780ad3eb931d3b047e82a559f0afe9954c3c577dd3579cff993ffad50a0c8",
+          "blob": "7ccce2c51cb3911d02af840c15c1a57d139fa14e"
+        },
+        "after": {
+          "bytes": 881,
+          "sha256": "51ac4cd3b8abf6301dae6650bac156d1e9ed48d1eecf11b87f1fa906668d9249",
+          "blob": "42e7e3ab7e728fb1894abd6a1407af4a72f97e72"
+        }
+      },
+      {
+        "name": "controls.mjs",
+        "before": {
+          "bytes": 10347,
+          "sha256": "a05bab4e72cb8ff5a77232946054a182601238785ad8eac33066d46ef0cae735",
+          "blob": "39b87f12ca2ac67a6a20be527a72fe5950bd189e"
+        },
+        "after": {
+          "bytes": 12243,
+          "sha256": "cd8c26838910668bc01abf9976412dbd8b263253e95b48094177c589f4f7e97e",
+          "blob": "08fc3498299ca0653cbcd40ce9b0bc8ac4b5836b"
+        }
+      }
+    ],
+    "other16ProgramsExact": true,
+    "unchangedMainBlob": "ef21e1e44780b15418244f1e750b190e5e3070f9",
+    "productionMapUnchanged": true,
+    "controlGroups": 6,
+    "actualEmitterSubcases": [
+      "absent",
+      "invalid"
+    ],
+    "executed": false
+  }
+}
