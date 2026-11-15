@@ -538,6 +538,12 @@
           "conclusion": "failure",
           "steps": [
             {
+              "number": 3,
+              "name": "Check fixed MA1 reader controls",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
               "number": 4,
               "name": "Run declared full104 controls only",
               "status": "completed",
@@ -1099,6 +1105,12 @@
           "conclusion": "failure",
           "steps": [
             {
+              "number": 3,
+              "name": "Check fixed MA1 reader controls",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
               "number": 4,
               "name": "Run declared full104 controls only",
               "status": "completed",
@@ -1655,6 +1667,12 @@
           "status": "completed",
           "conclusion": "failure",
           "steps": [
+            {
+              "number": 3,
+              "name": "Check fixed MA1 reader controls",
+              "status": "completed",
+              "conclusion": "success"
+            },
             {
               "number": 4,
               "name": "Run declared full104 controls only",
@@ -2213,6 +2231,12 @@
           "conclusion": "failure",
           "steps": [
             {
+              "number": 3,
+              "name": "Check fixed MA1 reader controls",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
               "number": 4,
               "name": "Run declared full104 controls only",
               "status": "completed",
@@ -2770,6 +2794,12 @@
           "conclusion": "failure",
           "steps": [
             {
+              "number": 3,
+              "name": "Check fixed MA1 reader controls",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
               "number": 4,
               "name": "Run declared full104 controls only",
               "status": "completed",
@@ -3326,6 +3356,12 @@
           "status": "completed",
           "conclusion": "failure",
           "steps": [
+            {
+              "number": 3,
+              "name": "Check fixed MA1 reader controls",
+              "status": "completed",
+              "conclusion": "success"
+            },
             {
               "number": 4,
               "name": "Run declared full104 controls only",
@@ -3887,6 +3923,12 @@
           "status": "completed",
           "conclusion": "failure",
           "steps": [
+            {
+              "number": 3,
+              "name": "Check fixed MA1 reader controls",
+              "status": "completed",
+              "conclusion": "success"
+            },
             {
               "number": 4,
               "name": "Run declared full104 controls only",

@@ -1,0 +1,27 @@
+{
+  "positive": 7,
+  "negative": [
+    {
+      "name": "unit_missing",
+      "rejected": true
+    },
+    {
+      "name": "unit_failure",
+      "rejected": true
+    },
+    {
+      "name": "unit_skipped",
+      "rejected": true
+    },
+    {
+      "name": "unit_after_original",
+      "rejected": true
+    },
+    {
+      "name": "unit_duplicate",
+      "rejected": true
+    }
+  ],
+  "prior52Negatives": "previously executed, unchanged predicates; new condition is strict conjunction",
+  "actualSource": false
+}
