@@ -1,15 +1,15 @@
-# AFW active continuation
+# AFW active close checkpoint
 
 {
   "state": {
     "project": "AFW",
     "repository": "tokenizartinfo-ops/agent-friendly-web",
-    "phase": "serial-v2-preCAS-prepared",
+    "phase": "serial-v2-close-prepared-after-preflight-failure",
     "SourceBranch": "feat/finite-native-cleanup-20261101",
     "sourceClosed": "dace0ec995e1f89599d3c1faf72b018db82e67a1",
     "sourceTree": "0ee8006a9b7f6461c4bd3d51e5c99ac8dcf4d3ec",
-    "sourceActive": null,
-    "sourceFrozen": false,
+    "sourceActive": "f6e400f5af7fea2d35506cd7542b5e718660f8d9",
+    "sourceFrozen": true,
     "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
     "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
     "SAME": {
@@ -85,7 +85,7 @@
       "actor": "/root/serial_v2_impl",
       "plan": "0244ace61c57f0846773929b15a4c172a78a26dd",
       "brief": "b73fa72c7f4b98ea4a5dad672a4c99011551bebf",
-      "SourceReleased": false,
+      "SourceReleased": true,
       "protocol": "e5e6770187ea336d6e71940674e19254d8b844d0",
       "testsPending": true,
       "index": "e41f042ba2495cd8b86d59842a3c41d4390d8a53",
@@ -99,67 +99,35 @@
         "SAME": "ba48a984ad74faec404852eb14a7b3a7ec9338f4",
         "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-ONEUSE-20261115",
         "SourceReleased": false
+      },
+      "actualPending": true,
+      "gate": "82a075136949b689e577e46de8c91760d03b62ec",
+      "run": 43769046439,
+      "jobId": 132980579610,
+      "logsFetched": true,
+      "full520Invoked": false,
+      "closePrepared": {
+        "commit": "49ee71ead8d52cb5d474d820d57828115f912923",
+        "tree": "98c2121f98962d4a4c7d24b2d313f42aca014172",
+        "parent": "f6e400f5af7fea2d35506cd7542b5e718660f8d9",
+        "SAME": "3d7e28e25040ebc09fcf217801d3a2e7b6920e72",
+        "originalF7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+        "receipt": "80158ec70685926975d3e301b218bf3ad3dd03fc"
       }
-    }
-  },
-  "work": {
-    "phase": "Root-DATA-gated",
-    "architect": "/root/finite_qualification_design",
-    "selectionInPrinciple": "Source-only serial top240s/parent250s/outer260s/step5m/job7m; all33CC1 nested helpers unchanged",
-    "pending": [
-      "DATA implementation and Root validation",
-      "one fresh GitHub occurrence and closure",
-      "scoped task review and strict proof disposition"
-    ],
-    "Source": "dace0ec995e1f89599d3c1faf72b018db82e67a1",
-    "SourceActive": null,
-    "legacy90Qualified": false,
-    "I3Open": true,
-    "NativeReleased": false,
-    "operationalReadiness": false,
-    "PCoff": false,
-    "actor": "/root/serial_v2_impl",
-    "spec": "f53f6c0016b3730458e969e07944075c80370f2a",
-    "plan": "0244ace61c57f0846773929b15a4c172a78a26dd",
-    "brief": "b73fa72c7f4b98ea4a5dad672a4c99011551bebf",
-    "builder": "d61d806e10b293923ac19d8c0d8b92be9f315422",
-    "rootApiOwn": "5a0ee27acf6a551f1baa77714bb8a06e8c3e52e5",
-    "rootRecordOwn": "ed39a1da18c213ee92cc43e54ad4aa1ea179caae",
-    "rootPreflightOwn": "743410397d7251855fdfff7f5fbb45703cdfd270",
-    "protocol": "e5e6770187ea336d6e71940674e19254d8b844d0",
-    "schema": "1b19b372c78bdcc6dd0c345a365b4dc37e50840c",
-    "preflightSchema": "44c5a44ad8d5936b48fa6b89ede5a2d420a39547",
-    "rootParserControls": {
-      "apiPositive": 1,
-      "apiNegative": 22,
-      "recordPositive": 1,
-      "partialUnqualified": 7,
-      "recordNegative": 36,
-      "preflightPositive": 1,
-      "preflightNegative": 14,
-      "SourceExecuted": false
     },
-    "SourceEligibility": true,
-    "initialIndex": "51bdbc6714aa43f5c85024500ea38dd41d56a2b3",
-    "index": "e41f042ba2495cd8b86d59842a3c41d4390d8a53",
-    "report": "ef3b7451ed5a999c341609d7ebadd75b8b621009",
-    "proposedSAME": "ba48a984ad74faec404852eb14a7b3a7ec9338f4",
-    "activeF7": "7bdc774db2f25126ff8f98f26674b4481126b674",
-    "SourceReleased": false,
-    "rootConjunctionOwn": "bc6574747f19cb64ced5d50eb9fce2db00358c8c"
+    "sourceActiveTree": "1631f122f28701dc775be6d38671f0d5b6cc5f35"
   },
-  "prepared": {
-    "commit": "f6e400f5af7fea2d35506cd7542b5e718660f8d9",
-    "activeTree": "1631f122f28701dc775be6d38671f0d5b6cc5f35",
-    "inactiveTree": "bde1e4d88dcd6e3864ad6a665f7c12cac863bb1e",
-    "parent": "dace0ec995e1f89599d3c1faf72b018db82e67a1",
-    "F7": "7bdc774db2f25126ff8f98f26674b4481126b674",
-    "SAME": "ba48a984ad74faec404852eb14a7b3a7ec9338f4",
-    "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-ONEUSE-20261115",
-    "SourceReleased": false
+  "preparedClose": {
+    "commit": "49ee71ead8d52cb5d474d820d57828115f912923",
+    "tree": "98c2121f98962d4a4c7d24b2d313f42aca014172",
+    "parent": "f6e400f5af7fea2d35506cd7542b5e718660f8d9",
+    "SAME": "3d7e28e25040ebc09fcf217801d3a2e7b6920e72",
+    "originalF7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "receipt": "80158ec70685926975d3e301b218bf3ad3dd03fc"
   },
+  "logsFetched": true,
   "SourcePending": null,
-  "RootdocsBefore": "a6c4c6bf2184040a3793c7a54dde13b9cc09f362"
+  "RootdocsBefore": "9b19028c50de934a7c6db37570949b7072dc540b"
 }
 
-NextRootstep exactSourceCASparentDace->f6e400f5 onlyaftergatepersistedandSourceleaseconfirmed. IfSourcependingnon-null reconcileactualrefbeforeanyretry. Expectedonepushattempt1/read-onlyjob, notNative. Logsnotyetfetched. Afterterminal fetchonce,applyOWNandcloseSourcepreservingwholeSAME+receipt. RootoriginalF7andfullprefixrecoverable. All7claimsfalse;Source/runtime distinctionmandatory.
+PriorityRootclose Sourcef6e400f5->49ee71ead8d52cb5d474d820d57828115f912923 afterfreshlease/run/jobs/queueschecks. Logs43769046439/job132980579610 consumedonce; noSourcefullexecutionprefail/steps5–7skipped. Keepactualcauseunknownpendingstaticreview. Do notretryv2run; SourceoriginalF7andallSAME+receiptready. C2/Nativeheld,7claimsfalse.
