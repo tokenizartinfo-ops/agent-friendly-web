@@ -1,4 +1,4 @@
-# AFW active continuation
+# AFW active fix1 continuation
 
 {
   "state": {
@@ -208,10 +208,26 @@
     "review": "d766b8d798d9760b7f29cd214b61d3ccae81ba13",
     "fixBrief": "83b4b52c11382002efb9db4c17500512eb86f10c",
     "fixRuling": "55faf4451fe3ba50a7f07a66ef8d2a6be8db614e",
-    "ownFixDelegationPending": true
+    "ownFixDelegationPending": true,
+    "ownFixBriefPrepared": "ea392c52806af64411b5aad3eeab02e4574b7d1d",
+    "ownFixNotDispatched": true,
+    "fixEarly": {
+      "driver": {
+        "blob": "029a666bf489836e153f1afaed239bec8f2209f1",
+        "bytes": 32571,
+        "sha256": "1895a85dcf98320909c0e7d2d61d24a81eea9a9ef675e80a0e376f29eafc3bc1"
+      },
+      "parent": {
+        "blob": "f5e5b47a00a36323508e41ca5fd53fc258f12071",
+        "bytes": 29343,
+        "sha256": "0da0a2af52677cb139bb7ce45283de129d472a03535567d7a9855edb1fa6cae3"
+      },
+      "method": "actualblobreadback+Rootbuiltinbyte/GitSHA/SHA256, STRING/DATA static only",
+      "SourceExecuted": false
+    }
   },
   "SourcePending": null,
-  "RootdocsBefore": "2ca4feeb27a58d767b4da37cab5356a4c1b40a54"
+  "RootdocsBefore": "2492b9edfc407a97b8f2fc776bbf16e1a13446a7"
 }
 
-SameSourceactor/root/serial_v2_impl RUNNING Task1fixround1/5 immutableDATA. Do notstartanotherSourceimplementer,resetloop,openSourceorrefetchconsumedlogs. Readfixbrief83b4b52c/ruling55faf445/reviewd766b8d7. AfterSourceDATA,delegateindependentRootOWN I4/I5fix (notyetspawned),doRootDATAgates+Owncontrols thenonlyRootfutureoneuseGitHubandclosure; scopedrereviewsamereviewer/root/serial_v2_task_review. Fulloldactualreport2368b1e2 mustprefixcurrentactorfixreport. Source49eeclosed/wholeSAME3d7 preserved; all7claimsfalse,C2/Nativeheld. Noownerinterventioncurrentlyneeded.
+/root/serial_v2_impl RUNNING sameTask1 fix1/5 DATA; Source49eeclosed/SAME3d7 fullypreserved, actual43769046439/job132980579610logsconsumedonce. RootconfirmedoneboundedNodeT01fixtureallowedinthepreflight,notfullruntimeor520count; note e4459cd7. Earlyproducerstrictstate8f6556/pinsinworkRootbytecheckedunexecuted. Actorcapcheckpoint(newpackagenotyetcomplete): fixappend2794/SAME2587149/reserve12851,recipe23465/7658/10212,F772805<=73728; allactorpreliminaryDATAclaims,Rootmustvalidatefinalpackage. NextafterSourceDATAready: dispatchfreshindependentRootOWNfixactor usingbrief ea392c52806af64411b5aad3eeab02e4574b7d1d, I4observable/I5 only; notyetdispatched. No concurrentSourceimplementers, noSourceopening/Native/C2/localSourceexecution.
