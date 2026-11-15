@@ -33,3 +33,6 @@ Siete nonclaims siemprefalse: historicalCauseProven,receiptAuthenticated,operati
 Rootdocs última ref authoritative por API; sólo Root CAS. Si toolresponse incierta, conciliar docs_pending y ref antes de repetir. Sourcecurrentfunciones OWN84/387/a1c preservadas en anteriores docs. Fuente DATA nunca eval/import/compile en PC.
 RelayChavo único privado tokenizart-platform-operations#176 CHAVO-RELAY/1; último15nov16:35UTC sin nuevoAFW, no mensajes de cortesía/otrosproyectos. No automatización nueva/monitores duplicados/cuentas/OTP ni mensajes externos.
 Owner no requiere intervenir ahora; no pedir apagar ni dar fecha sin evidencia.
+
+## EN CURSO — autoritativo sobre el punto seguro anterior
+Root Source ACTIVO05d1a53692dc2b553620ff6267cef59cf36cf85c/treeb5a87f3b345a40df39282be4fe3705fd89d1c3ee; Source FROZEN. Run43740674443/1 en progreso17:21:50UTC; no logs aún. Gate9fb22f098d15dcd4184275c6b627b935fbaabb9e, index1a40f535b1e9d25c327a3ca02c337f807f3db382 y61artefactos enRootdocs0160f599. Inactivecandidatae2df2bee sóloDATA; SAMEf8bfa4f9/2481826B íntegro listo para cierre. No tocarref hasta run+ALLjobsterminal. LogsUNAvez, Root387+jointa1c, guardarresultadoverdadero y restaurarF7original+SAMEcompleto+recibo por CAS; readbackfulltree/Core/Main/fullSAME/colas0/headruns0. Los campos del punto seguro anterior son baseline de rollback, no HEAD actual.
