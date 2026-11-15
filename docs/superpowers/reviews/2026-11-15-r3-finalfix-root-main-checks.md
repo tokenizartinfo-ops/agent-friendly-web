@@ -1,0 +1,3 @@
+# Independent Root finalfix main receiver, before execution
+
+Derived only from Root-authored11294860 with exact prerequisite summary requirement added. Source not executed. Synthetic fixed16/before12-4/elevenmutants/current59/gates accepted,18 contradictions rejected. Tests used provisional external hash inputs; actual external expected49/production18 pins must be replaced ONLY after independent byte/payload/Core verification before Source release. Actual context comes from GitHub API. Prerequisite marker must independently pass a7f34096; both actual markers require same Source/tree/run/attempt/job. No Native authorization follows.
