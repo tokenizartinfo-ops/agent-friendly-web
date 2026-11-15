@@ -1,0 +1,17 @@
+{
+  "purpose": "afw.root.l05.observation.inflight.v1",
+  "at": "2026-11-15 16:11:54 UTC",
+  "Source": "88e0249a8a9b5d7fdaed597bf57fad8cfb85ae9c",
+  "tree": "24f13601635b57f9e1037139fc1d4c6d370bbf18",
+  "run": 43734061933,
+  "attempt": 1,
+  "workflow": ".github/workflows/afw-finite-budget-qualification.yml",
+  "state": "Source frozen until run and all jobs terminal. Discover exact one readonly job, fetch log ONCE after terminal. No retry/second occurrence.",
+  "gate": "ea08518cc8ff36737a30b1c9426f42c0a8352d8c",
+  "receiver": "dc5e94492620bb65ad8683180af19c8d5240a2fd",
+  "knownContext": "Use actual source/tree/run/string attempt1/jobreadonly/node22.23.4 plus numeric jobID from API externally. MarkerAFW_L05_OBSERVATION/1 with exactLF. qualified alwaysfalse.",
+  "restore": "OriginalF7f7a71f1a0fa4f5ddf069ff411f008a098455e5cc + completecandidateSAMEfd787f858e6ffeacaf2f419246f04a469bca3a3c2452486B+Rootactualreceipt. Never oldprefix alone. LeaseSource88, terminal+alljobs+fivequeues0 first;fulltree/Main/Core/fullSAME/F7/closedheadruns0readback.",
+  "NativeReleased": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
