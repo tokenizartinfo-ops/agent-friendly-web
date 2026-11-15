@@ -14506,3 +14506,55 @@ TRACEFDfix retainedliteral(stderrpermanent BEFORE simpleexec10RO/11append); unli
 Raw0d1b1f6dd2056b81f1a0db84160b0018ea6cb7cf/224738B/SHA25661d5d8d7c90fb119b661ce88fcd9ed690eca23de8712c3d3fae9f819d64eab2b; gzip776499c387ea558d65cb8e46beab1f65a3505114/65994B/SHA2569d6f9a8ce9eef837edef7176113588cd6aa15f3da422ecf521d1acfb1de5addf; base6487992/mirror6acdddeae5fe4c74f6df4170d3a765e811d40283; typed7manifest4e70c0d47669f2e1dd7fe0800a922d40bcdb0921/1294B/SHA256dd34d1e846e3661481aa770996d6a641438092ecf02b16cb5daaa0c736989efb. F7inactivec35b975419977fc0625883d3741eb6a59e9ce243; separateINITIAL-ONLYactivef05ebe9d6dec2f55b52a3a4f3708e66e9ab79b76; messageAFW-R3-IMAGE-DIAGNOSTIC-ONEUSE-20261115. Caps raw400500/gzip98304/B64131072/helper32768/programF765536/SAME1800000/wire2048/trace256/time intact; actualmaxworkflow61296. No truncation.
 
 Checkout11d5960a326750d5838078e36cf38b85af677262/setupnode49933ea5288caeca8642d1e84afbd3f7d6820020/Node22.23.4/Ubuntu24.04/readonly/7min/contentsread unchanged; M02deferred. Root alone may freshgate ONE distinct occurrence, preserve output andclose/restore before further work. Noautomaticretry, nofull104/Native from thisdiagnostic. No Sourcecode execution/import/eval/syntax/tests/files/deps/clones/build, refs/runs/runtime/credentials byimplementer; GitDB/RAMDATAonly. I3/Native/readiness remainHELD.
+
+
+## ROOT actual IMAGE guard diagnostic — 2026-11-15
+
+```json
+{
+  "purpose": "afw.r3.initial-image.actual-receipt.v1",
+  "observedUTC": "2026-11-15 11:38:43 UTC",
+  "source": "79886ba17c5fb9a561efb60f29a062166ee13a60",
+  "tree": "3b012f1ddb7f6fabe947dfa6afbc7d5a2967e753",
+  "run": 43709558348,
+  "attempt": 1,
+  "job": 132797940020,
+  "step": "Observe trusted initial bootstrap only",
+  "stepOutcome": "failure",
+  "runConclusion": "failure",
+  "marker": "AFW_R3_DELIVERY_IMAGE_DIAGNOSTIC/1 {\"purpose\":\"afw.r3-delivery.image-diagnostic.v1\",\"scope\":\"source_initial_only\",\"result\":\"unavailable\",\"lastObserved\":\"image_writebits_rejected\",\"controlsInvoked\":0,\"originalCLIInvoked\":0,\"nativeBusinessCases\":0,\"qualification\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}",
+  "ownAcceptance": {
+    "accepted": true,
+    "bootstrapAdmitted": false,
+    "record": {
+      "purpose": "afw.r3-delivery.image-diagnostic.v1",
+      "scope": "source_initial_only",
+      "result": "unavailable",
+      "lastObserved": "image_writebits_rejected",
+      "controlsInvoked": 0,
+      "originalCLIInvoked": 0,
+      "nativeBusinessCases": 0,
+      "qualification": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "qualified": false,
+    "NativeReleased": false,
+    "operationalReadiness": false
+  },
+  "controlsInvoked": 0,
+  "originalCLIInvoked": 0,
+  "nativeBusinessCases": 0,
+  "qualified": false,
+  "interpretation": "This attempt observed the current image_writebits_rejected guard: the opened Node image fstat mode failed the existing no-group/other-write predicate. Exact mode/UID/path was not published. Xattr/credential/exec checks were not reached in this guard path. This is current-attempt evidence, not retrospective proof of the older unknown or original world_1158_a1 failure. No guard was relaxed."
+}
+```
+
+This occurrence is consumed and must not be rerun. Restore original F7, preserve the full proposal and this factual receipt, then prepare a narrowly scoped correction of the current image-admission problem without weakening the protection. No full104/Gate2/Native/readiness/PC-off released. All seven no-claims remain false.
