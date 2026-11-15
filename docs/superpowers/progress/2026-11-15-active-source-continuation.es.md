@@ -21,6 +21,18 @@ Conservar los100 existentes y sus expectativas; declarar primero controles pre-s
 Caps vigentes raw400500/helper32768/SAME1800000/gzip98304/base64131072; harness90s/admisión20s y demás tiempos intactos. Con el prefijo nuevo1717394B deben medirse excesos y pedir ruling antes de candidata, sin truncar historia/código. Siguiente candidata hija de dfed, exactamenteF7+SAME/Core/18/Main intactos. Informe append-only sobre275501ca, comandos/cobertura y resultados reales solo cuando Root ejecute una nueva propuesta con gate. Revisión siguiente ACOTADA por el mismo /root/r3_delivery_task_review. No nuevoreview amplio ni segundo asiento.
 
 
+### Decisión vigente: diagnóstico inicial primero
+
+Ruling de diseño8ad93567, precisión initial-onlyeefed353 y contrato/mecanismoa546babce3af7e541316cfb8d4f26bc0153e48ec ya aprobados DATA. Implementador está construyendo únicamente una propuesta de diagnóstico que termina ANTES de runControls/helpercapturado/CLI/Native. No coproc/relay ni handoff/residente nuevo. Registro propio regular unlinked con readerFD10/writerFD11 separados, cap256, solo eventos Source confiados, formatter final una salida; solo es autoridad porque no se invoca ningún capturado en este bloque. Nunca usarlo como autoridad durante fullcontrols.
+
+Contratoa4ff0bf3a8c771a3bb28dc661261a2033fc7d8d3, schemaaa82dbe4e99dbba23754a745c8d5d25c9be8d375, ejemplos86a93b68afbbf31f5a32f3f8666ec05744952c50 alcanzables en Rootdocs. Marker AFW_R3_DELIVERY_STARTUP_DIAGNOSTIC/1; scope source_initial_only; resultbootstrap_admitted|unavailable; lastObserved no es causa. Invocados controles/CLI/Native0; qualification y siete no-acreditadosfalse; wire2048. Bootstrap admitido exige status0+traza válida terminada bootstrap_admitted. Receptor independientea2da3cb46ee5b3a67c728ca109c6bbe978e28016, traza08f0acb71a17947e985eb36f12ebcfc25d14b8e1, propios7+/20- y10+/11-, sin Source. Código completo preservado en docs/superpowers/reviews/2026-11-15-r3-startup-own-receivers.md.
+
+El diagnóstico reutiliza el artefacto R2histórico9bf2 contenido DENTRO del prefijo actual1717394, validando primero el prefijo entero y el bloque único/hash/18/33. No duplicar archivo base64, no exigir que esté después del prefijo, no confundir su parenthistórico1fe con el actualdfed. Nueva candidata hija directa de dfed comprobada por gate GitDB externo; mantener binding/tree HEADactual y no agregar assertParent interno ni fetch extra.
+
+Falta candidata/F7s/SAMEappend/readbacks y gateRoot; no hay Source nuevo autorizado. Tras el diagnóstico se cerrará/restaurará/preservará todo. Solo si bootstrap resulta admitido se rebasea contra ese cierre la corrección full104 y se prepara gate separado; si falla, decidir corrección causal a partir de esa evidencia, sin replay ni saltar a fullcontrols.
+
+Full104 futuro DATA declarado, NOinvocado por diagnóstico: matrix5b829c768ed3d7af03d5eb3f1870599d39bfd083/SHA0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e; schemas5462c75c; ejemplos6f28d4f4. Root verificó100ordered idénticos, expectativas4mutantes iguales, cuatro ejemplos con receptor38749c: solo fullypassed califica sintéticamente. Descripciones de mutantes se retargetean a literal, no cambian expectativas. Eso no acredita controles reales.
+
 ## Pendientes siguientes
 
 No hay autorización automática de otra ocurrencia de esta misma versión. A partir de revisión/evidencia se preparará una corrección o diagnóstico concreto cambiado, con gate nuevo y rollback, sin reinterpretar UNKNOWN.
