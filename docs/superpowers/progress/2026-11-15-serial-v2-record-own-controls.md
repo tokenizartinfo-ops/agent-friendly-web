@@ -1,10 +1,10 @@
-# Root serial v2 synthetic parser controls
+# Root record/preflight controls
 
 {
   "record": {
     "fixtureOnly": true,
     "positiveFull": 1,
-    "positiveUnqualifiedPartial": 6,
+    "positiveUnqualifiedPartial": 7,
     "negativeRejected": 36,
     "negativeNames": [
       "extra",
@@ -45,7 +45,8 @@
       "matched-kill-set-with-missing-nonkill"
     ],
     "SourceExecuted": false,
-    "actualQualification": false
+    "actualQualification": false,
+    "ruling": "exceptionnextactualprefix allows trustworthyzero-entrytop-initializationfailure; actualcaseexceptionsneednotbeonlypossibleexception"
   },
   "preflight": {
     "fixtureOnly": true,
@@ -57,4 +58,4 @@
   }
 }
 
-Completebodypositive is a syntheticparserfixture; context/driverblob are synthetic; no actualSourceexecuted orqualification. Subordinatev1fixture passed387schema asDATA only, notlegacy90evidence. Actualapproveddriverpin/Code/preflight/API/closure stillrequired. Sevennonclaimsfalse.
+Protocol e5e67701 permits exception next0 after trustworthyheader/current-imageor-matrixcheckfailure, with noE,lastAdmissionnull. Actorconfirmedparentacceptsdiagnosticemptyexception; Rootreaderadjustedaccordingly. Existing36negative controls unaffected (none reliedonexception requiringlastU); noSourcechange/execution. Fullpositiveisintentionalgrammarfixture, notactual520. Sevennonclaimsfalse.

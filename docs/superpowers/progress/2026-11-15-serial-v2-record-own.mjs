@@ -1,4 +1,4 @@
-// Independent Root record semantics only; actual API/preflights/closure required separately.
+// Independent Root record semantics; API/preflights/closure remain mandatory.
 export default function(wire,ctx,approved){
  const need=(v,m)=>{if(!v)throw Error("Root serial-v2 record: "+m);},same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
  function check(value,s){
@@ -43,7 +43,6 @@ export default function(wire,ctx,approved){
   need(terminal.next===entered,"terminal_prefix");
   if(terminal.kind==="inner")need(entered<520&&!open,"terminal_inner");
   if(terminal.kind==="outer")need([104,208,312,416].includes(entered)&&!open,"terminal_outer");
-  if(terminal.kind==="exception")need(entered>0&&!open&&r.groups[Math.floor((entered-1)/104)].outcome[(entered-1)%104]==="U","terminal_exception");
   if(terminal.kind==="custody")need(entered>0&&r.groups[Math.floor((entered-1)/104)].cleanup[(entered-1)%104]==="U","terminal_custody");
  }
  if(terminal.kind!=="abrupt"){
