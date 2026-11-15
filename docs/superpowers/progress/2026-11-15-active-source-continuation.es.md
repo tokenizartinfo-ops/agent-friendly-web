@@ -4,7 +4,7 @@
   "state": {
     "project": "AFW",
     "repository": "tokenizartinfo-ops/agent-friendly-web",
-    "phase": "serial-v2-fix1-DATA",
+    "phase": "serial-v2-fix1-independent-domains",
     "SourceBranch": "feat/finite-native-cleanup-20261101",
     "sourceClosed": "49ee71ead8d52cb5d474d820d57828115f912923",
     "sourceTree": "98c2121f98962d4a4c7d24b2d313f42aca014172",
@@ -128,7 +128,9 @@
         "minor": 0
       },
       "fixBrief": "83b4b52c11382002efb9db4c17500512eb86f10c",
-      "fixActor": "/root/serial_v2_impl"
+      "fixActor": "/root/serial_v2_impl",
+      "ownFixActor": "/root/serial_v2_own_fix1",
+      "ownFixPending": true
     },
     "sourceActiveTree": null
   },
@@ -210,7 +212,7 @@
     "fixRuling": "55faf4451fe3ba50a7f07a66ef8d2a6be8db614e",
     "ownFixDelegationPending": true,
     "ownFixBriefPrepared": "ea392c52806af64411b5aad3eeab02e4574b7d1d",
-    "ownFixNotDispatched": true,
+    "ownFixNotDispatched": false,
     "fixEarly": {
       "driver": {
         "blob": "029a666bf489836e153f1afaed239bec8f2209f1",
@@ -224,10 +226,16 @@
       },
       "method": "actualblobreadback+Rootbuiltinbyte/GitSHA/SHA256, STRING/DATA static only",
       "SourceExecuted": false
-    }
+    },
+    "ownFixDispatched": true,
+    "ownFixActor": "/root/serial_v2_own_fix1",
+    "parallelRuling": "b00bf6aed6eda513a94cb8e7b18813c6df7439bd",
+    "ownFixBrief": "13e685749db4f6fb8681ffd3a3151ad36f3ad132",
+    "ownFixMappingContract": "closedlogOrigin+4frames/authenticatedrequiredStepMap",
+    "ownFixBriefCurrent": "13e685749db4f6fb8681ffd3a3151ad36f3ad132"
   },
   "SourcePending": null,
-  "RootdocsBefore": "2492b9edfc407a97b8f2fc776bbf16e1a13446a7"
+  "RootdocsBefore": "940f9f1a8ed3af7d2c4a9c7eba52ce4e70807da4"
 }
 
-/root/serial_v2_impl RUNNING sameTask1 fix1/5 DATA; Source49eeclosed/SAME3d7 fullypreserved, actual43769046439/job132980579610logsconsumedonce. RootconfirmedoneboundedNodeT01fixtureallowedinthepreflight,notfullruntimeor520count; note e4459cd7. Earlyproducerstrictstate8f6556/pinsinworkRootbytecheckedunexecuted. Actorcapcheckpoint(newpackagenotyetcomplete): fixappend2794/SAME2587149/reserve12851,recipe23465/7658/10212,F772805<=73728; allactorpreliminaryDATAclaims,Rootmustvalidatefinalpackage. NextafterSourceDATAready: dispatchfreshindependentRootOWNfixactor usingbrief ea392c52806af64411b5aad3eeab02e4574b7d1d, I4observable/I5 only; notyetdispatched. No concurrentSourceimplementers, noSourceopening/Native/C2/localSourceexecution.
+TWO disjointworkersRUNNING:/root/serial_v2_impl SourceDATA (soleSourceimplementer) and/root/serial_v2_own_fix1 independentRootcontroller. Coordinationrulingb00bf6 allowsno-sharedstateparallel; do notspawnduplicates. SourceTask1fix1/5,reviewd766/findingsC1I1–I7assignedbybrief83b4/ruling55faf/strict8f6556. RootOWN brief13e685 (corrected ed39 baseline),mappingagreementinfix1-integration-contract. Sourceoldclosed49ee/SAME3d7 fullverified;allSourcependingnull/currentruntimeunknown. NoSourcefix1candidate orrunyet; consumedrun43769046439/job132980579610logsonce,do notretry/refetch. WaitBOTHartifactindexes/reports,Rootindependentcheck/OWNcontrols thenonlyRootnewoneuseSourceandclosure/SAMEscopedreviewer. NoNeedOwnercurrently;7claimsfalse.
