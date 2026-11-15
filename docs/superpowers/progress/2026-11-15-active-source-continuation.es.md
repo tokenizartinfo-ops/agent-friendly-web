@@ -4,7 +4,7 @@
   "state": {
     "project": "AFW",
     "repository": "tokenizartinfo-ops/agent-friendly-web",
-    "phase": "serial-v2-data-implementation",
+    "phase": "serial-v2-initial-DATA-refinement",
     "SourceBranch": "feat/finite-native-cleanup-20261101",
     "sourceClosed": "dace0ec995e1f89599d3c1faf72b018db82e67a1",
     "sourceTree": "0ee8006a9b7f6461c4bd3d51e5c99ac8dcf4d3ec",
@@ -87,11 +87,13 @@
       "brief": "b73fa72c7f4b98ea4a5dad672a4c99011551bebf",
       "SourceReleased": false,
       "protocol": "e5e6770187ea336d6e71940674e19254d8b844d0",
-      "testsPending": true
+      "testsPending": true,
+      "index": "51bdbc6714aa43f5c85024500ea38dd41d56a2b3",
+      "refinementPending": true
     }
   },
   "work": {
-    "phase": "Task1-DATA-implementation",
+    "phase": "Task1-initial-DATA-refinement",
     "architect": "/root/finite_qualification_design",
     "selectionInPrinciple": "Source-only serial top240s/parent250s/outer260s/step5m/job7m; all33CC1 nested helpers unchanged",
     "pending": [
@@ -112,7 +114,7 @@
     "brief": "b73fa72c7f4b98ea4a5dad672a4c99011551bebf",
     "builder": "d61d806e10b293923ac19d8c0d8b92be9f315422",
     "rootApiOwn": "5a0ee27acf6a551f1baa77714bb8a06e8c3e52e5",
-    "rootRecordOwn": "97dcff4a4c009116c93b6049b112b116270f5480",
+    "rootRecordOwn": "ed39a1da18c213ee92cc43e54ad4aa1ea179caae",
     "rootPreflightOwn": "743410397d7251855fdfff7f5fbb45703cdfd270",
     "protocol": "e5e6770187ea336d6e71940674e19254d8b844d0",
     "schema": "1b19b372c78bdcc6dd0c345a365b4dc37e50840c",
@@ -121,15 +123,25 @@
       "apiPositive": 1,
       "apiNegative": 22,
       "recordPositive": 1,
-      "partialUnqualified": 6,
+      "partialUnqualified": 7,
       "recordNegative": 36,
       "preflightPositive": 1,
       "preflightNegative": 14,
       "SourceExecuted": false
-    }
+    },
+    "SourceEligibility": false,
+    "initialIndex": "51bdbc6714aa43f5c85024500ea38dd41d56a2b3"
   },
-  "RootdocsBefore": "d2dda48509df1c40de650327d043700113dad56d",
-  "SourcePending": null
+  "SourcePending": null,
+  "RootdocsBefore": "0b0bdc0fb2185bfa0d69df3c6e0e76d125ba5b6f",
+  "refinement": {
+    "kind": "introduced-preflight-last-consumer-custody",
+    "SourceCandidateCreated": false,
+    "SourceExecuted": false,
+    "oldIndex": "51bdbc6714aa43f5c85024500ea38dd41d56a2b3",
+    "actor": "/root/serial_v2_impl",
+    "detail": "second wrong-image spawn uncertainty can reach recursive fixture cleanup under stale first-spawn terminal=true; per-consumer reset/terminal check and focused regression required"
+  }
 }
 
-Readcurrentserial-v2ledger; actor/root/serial_v2_impl active immutableTask1DATA, notanotherimplementationdispatch. NoSourcecandidate/run. RootOWNparsersyntheticcontrols notAFWmeasurements. KeepSourceclosedDace, oldconsumedrunsnotrerun. Sevennonclaimsfalse. Noowneractionneeded.
+Sameactor/root/serial_v2_impl activeinitialDATArefinement; do notstartSourceorredispatchimplementation. InitialartifactsgoodbytechecksbutnotSourceeligiblebecausepreflightcustodyflagissue. NoactualSourceexecutedthisv2version. OldSource90runsconsumed; do notrepeat. Allsevennonclaimsfalse,C2/Nativeheld.
