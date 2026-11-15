@@ -9,3 +9,5 @@ Ruling: adopt captured-original-creator continuity structural predecessor under 
 | CC1 / C2 | Python Source kernel vs future runtime native perinvocation parent await. | Separate; C2 remains held/noCore edits. |
 | CC1 / storage | 2471214B immutableprefix plus nominaldelta <=2600000. | Reuse fixed normalR5 carrier; no duplicate160KB/cap increase. |
 Task CC1: ready for fresh implementer; base74e3300c, no Source mutation pending.
+
+Ruling: brief schema reference5462c75c denotes historical bundle, not literal helper. Verified current normalR5 controls-schema.json8586d438/4681B/SHA2562d0a4c404abfb107e44ab369f2998b1bbbbba2734cbf993acf8c8f2c0fe47d83; preserve literal exactly, no Source/schema mutation. Actor notified before preparation.
