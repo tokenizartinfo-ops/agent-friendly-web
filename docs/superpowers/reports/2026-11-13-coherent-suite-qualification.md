@@ -6712,3 +6712,583 @@ VsI+Sok1nMake5twcIZm4M/NFHI1f4ZSPnzKmjb3kdgAG+xzlrjP9ZbSRnuaU4jXYz4dDS39bHLV7hFc
 <!-- AFW-READONLY-SITE-CONTRACT-FINALFIX-PAYLOAD-V1:END -->
 
 </details>
+
+
+## Readonly site contract final-fix ACTUAL — 2026-11-15 UTC
+
+One controls-only run43661818015/1/job132652590490, Source1874acaebe746104f299eb6c5b08178222d49626/tree14b1b8dafed8a51e97e6e0a0709efd4d94f8c760, terminalSUCCESS. Root independently accepted the sole bounded wire at 2026-11-15T01:10:50.9705690Z using receiver266ba951b4e77321fbcb89756e7aad183faf1447 and exact API context/control49/production18 pins/matrix. BEFORE actual59tests39FAIL/20PASS; FIXED actual59PASS/0FAIL; both complete, zero cancellation/skips/todo. Actual fixed C1–C6 six groups passed with usable shape+columns; shared production revokeLocations helper3cases passed (row/precase/unknown, original outcomes preserved); fixed1024frame mapped,1025unknown; real production guard-removal mutant killed while1024positive stayed mapped. Historical actual R3 wire accepted by both validators under its original context. All seven nonclaims false.
+
+No npm/pure/profile/Native/SDK/Miniflare/World/business/live/CF/privateartifact/key/OAuth/owner operation occurred. This qualifies the aggregate diagnostic contract fixes, NOT the R3 business cause or PC-off. The prior actualR1/R2PASS/R3waitFAIL remains unchanged and consumed. This append is paired with originalF7f7a71 restoration only after terminal, preserving the ENTIRE996063-byte proposal prefix and Core3200. Root records the resulting Source commit and independent full readback in Rootdocs. One scoped final-fix review remains; no new whole-unit loop or Native replay is authorized.
+
+```json
+{
+  "purpose": "afw.readonly-site.finalfix.qualification.v1",
+  "sourceBase": "6739481ada03d50e035edfd9c157c1646fad705d",
+  "source": "1874acaebe746104f299eb6c5b08178222d49626",
+  "sourceTree": "14b1b8dafed8a51e97e6e0a0709efd4d94f8c760",
+  "run": "43661818015",
+  "attempt": 1,
+  "job": "controls",
+  "node": "22.23.4",
+  "stage": "complete",
+  "before": {
+    "purpose": "afw.readonly-site.finalfix.regressions.v1",
+    "valid": true,
+    "ended": true,
+    "rows": [
+      {
+        "id": "sender_I1-mapVerified",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I1-worldBeforeVerified",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I1-nativeBeforeVerified",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I1-worldAfterVerified",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I1-nativeAfterVerified",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I1-originalBodiesUnchanged",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I2-testTimeoutFailure-row",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I2-testTimeoutFailure-precase",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I2-cancelledByParent-row",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I2-cancelledByParent-precase",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I2-testAborted-row",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I2-testAborted-precase",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I3-nostart-SIGTERM",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I3-nostart-SIGKILL",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I3-nostart-SIGINT",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I3-nostart-unknown",
+        "result": "failed"
+      },
+      {
+        "id": "root_I1-mapVerified",
+        "result": "passed"
+      },
+      {
+        "id": "root_I1-worldBeforeVerified",
+        "result": "passed"
+      },
+      {
+        "id": "root_I1-nativeBeforeVerified",
+        "result": "passed"
+      },
+      {
+        "id": "root_I1-worldAfterVerified",
+        "result": "failed"
+      },
+      {
+        "id": "root_I1-nativeAfterVerified",
+        "result": "failed"
+      },
+      {
+        "id": "root_I1-originalBodiesUnchanged",
+        "result": "failed"
+      },
+      {
+        "id": "root_I2-testTimeoutFailure-row",
+        "result": "failed"
+      },
+      {
+        "id": "root_I2-testTimeoutFailure-precase",
+        "result": "failed"
+      },
+      {
+        "id": "root_I2-cancelledByParent-row",
+        "result": "failed"
+      },
+      {
+        "id": "root_I2-cancelledByParent-precase",
+        "result": "failed"
+      },
+      {
+        "id": "root_I2-testAborted-row",
+        "result": "failed"
+      },
+      {
+        "id": "root_I2-testAborted-precase",
+        "result": "failed"
+      },
+      {
+        "id": "root_I3-nostart-SIGTERM",
+        "result": "failed"
+      },
+      {
+        "id": "root_I3-nostart-SIGKILL",
+        "result": "failed"
+      },
+      {
+        "id": "root_I3-nostart-SIGINT",
+        "result": "failed"
+      },
+      {
+        "id": "root_I3-nostart-unknown",
+        "result": "failed"
+      },
+      {
+        "id": "sender_M2_count",
+        "result": "failed"
+      },
+      {
+        "id": "sender_M2_set",
+        "result": "failed"
+      },
+      {
+        "id": "sender_M2_expanded",
+        "result": "failed"
+      },
+      {
+        "id": "root_M2_count",
+        "result": "passed"
+      },
+      {
+        "id": "root_M2_set",
+        "result": "passed"
+      },
+      {
+        "id": "root_M2_expanded",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_pending",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I3_unknown",
+        "result": "failed"
+      },
+      {
+        "id": "sender_I3_unknown_none",
+        "result": "failed"
+      },
+      {
+        "id": "root_I3_pending",
+        "result": "failed"
+      },
+      {
+        "id": "root_I3_unknown",
+        "result": "failed"
+      },
+      {
+        "id": "root_I3_unknown_none",
+        "result": "failed"
+      },
+      {
+        "id": "actual_emit_signal",
+        "result": "failed"
+      },
+      {
+        "id": "actual_emit_count",
+        "result": "failed"
+      },
+      {
+        "id": "actual_emit_set",
+        "result": "failed"
+      },
+      {
+        "id": "actual_emit_expanded",
+        "result": "failed"
+      },
+      {
+        "id": "actual_emit_absent",
+        "result": "passed"
+      },
+      {
+        "id": "actual_emit_invalid",
+        "result": "passed"
+      },
+      {
+        "id": "actual_emit_valid",
+        "result": "passed"
+      },
+      {
+        "id": "sender_historical_actual_accepted",
+        "result": "passed"
+      },
+      {
+        "id": "root_historical_actual_accepted",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_positive_closed",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_positive_hold",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_positive_unknown",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3_positive_closed",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3_positive_hold",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3_positive_unknown",
+        "result": "passed"
+      }
+    ],
+    "summary": {
+      "counts": {
+        "cancelled": 0,
+        "failed": 39,
+        "passed": 20,
+        "skipped": 0,
+        "suites": 0,
+        "tests": 59,
+        "todo": 0,
+        "topLevel": 59
+      },
+      "success": false
+    }
+  },
+  "fixed": {
+    "purpose": "afw.readonly-site.finalfix.regressions.v1",
+    "valid": true,
+    "ended": true,
+    "rows": [
+      {
+        "id": "sender_I1-mapVerified",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I1-worldBeforeVerified",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I1-nativeBeforeVerified",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I1-worldAfterVerified",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I1-nativeAfterVerified",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I1-originalBodiesUnchanged",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I2-testTimeoutFailure-row",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I2-testTimeoutFailure-precase",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I2-cancelledByParent-row",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I2-cancelledByParent-precase",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I2-testAborted-row",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I2-testAborted-precase",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3-nostart-SIGTERM",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3-nostart-SIGKILL",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3-nostart-SIGINT",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3-nostart-unknown",
+        "result": "passed"
+      },
+      {
+        "id": "root_I1-mapVerified",
+        "result": "passed"
+      },
+      {
+        "id": "root_I1-worldBeforeVerified",
+        "result": "passed"
+      },
+      {
+        "id": "root_I1-nativeBeforeVerified",
+        "result": "passed"
+      },
+      {
+        "id": "root_I1-worldAfterVerified",
+        "result": "passed"
+      },
+      {
+        "id": "root_I1-nativeAfterVerified",
+        "result": "passed"
+      },
+      {
+        "id": "root_I1-originalBodiesUnchanged",
+        "result": "passed"
+      },
+      {
+        "id": "root_I2-testTimeoutFailure-row",
+        "result": "passed"
+      },
+      {
+        "id": "root_I2-testTimeoutFailure-precase",
+        "result": "passed"
+      },
+      {
+        "id": "root_I2-cancelledByParent-row",
+        "result": "passed"
+      },
+      {
+        "id": "root_I2-cancelledByParent-precase",
+        "result": "passed"
+      },
+      {
+        "id": "root_I2-testAborted-row",
+        "result": "passed"
+      },
+      {
+        "id": "root_I2-testAborted-precase",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3-nostart-SIGTERM",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3-nostart-SIGKILL",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3-nostart-SIGINT",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3-nostart-unknown",
+        "result": "passed"
+      },
+      {
+        "id": "sender_M2_count",
+        "result": "passed"
+      },
+      {
+        "id": "sender_M2_set",
+        "result": "passed"
+      },
+      {
+        "id": "sender_M2_expanded",
+        "result": "passed"
+      },
+      {
+        "id": "root_M2_count",
+        "result": "passed"
+      },
+      {
+        "id": "root_M2_set",
+        "result": "passed"
+      },
+      {
+        "id": "root_M2_expanded",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_pending",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_unknown",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_unknown_none",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3_pending",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3_unknown",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3_unknown_none",
+        "result": "passed"
+      },
+      {
+        "id": "actual_emit_signal",
+        "result": "passed"
+      },
+      {
+        "id": "actual_emit_count",
+        "result": "passed"
+      },
+      {
+        "id": "actual_emit_set",
+        "result": "passed"
+      },
+      {
+        "id": "actual_emit_expanded",
+        "result": "passed"
+      },
+      {
+        "id": "actual_emit_absent",
+        "result": "passed"
+      },
+      {
+        "id": "actual_emit_invalid",
+        "result": "passed"
+      },
+      {
+        "id": "actual_emit_valid",
+        "result": "passed"
+      },
+      {
+        "id": "sender_historical_actual_accepted",
+        "result": "passed"
+      },
+      {
+        "id": "root_historical_actual_accepted",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_positive_closed",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_positive_hold",
+        "result": "passed"
+      },
+      {
+        "id": "sender_I3_positive_unknown",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3_positive_closed",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3_positive_hold",
+        "result": "passed"
+      },
+      {
+        "id": "root_I3_positive_unknown",
+        "result": "passed"
+      }
+    ],
+    "summary": {
+      "counts": {
+        "cancelled": 0,
+        "failed": 0,
+        "passed": 59,
+        "skipped": 0,
+        "suites": 0,
+        "tests": 59,
+        "todo": 0,
+        "topLevel": 59
+      },
+      "success": true
+    }
+  },
+  "tiny": {
+    "passed": true,
+    "count": 6,
+    "expected": 6,
+    "usableShape": true,
+    "usableColumns": true
+  },
+  "helper": {
+    "passed": true,
+    "cases": 3,
+    "aliasesCleared": true,
+    "outcomesPreserved": true,
+    "afterFlagsCleared": true
+  },
+  "bounds": {
+    "fixed": {
+      "positive1024Mapped": true,
+      "negative1025Unknown": true
+    },
+    "mutant": {
+      "positive1024Mapped": true,
+      "negative1025Unknown": false
+    },
+    "mutantKilled": true
+  },
+  "historicalActualAccepted": true,
+  "noNativeInvoked": true,
+  "noSDKImported": true,
+  "proof": {
+    "verified": true,
+    "programCount": 49,
+    "programSetSha256": "b8c6a54eaf85224115423d93a938642825c95b498da70f6b73f237d98f6ccc56",
+    "payloadExpandedSha256": "ab11a3e0a319573bfd2b752b4eeb3398270650fc2b00473843044e089cedf770",
+    "productionCount": 18,
+    "productionProgramSetSha256": "e4efb6f96edb03473948bebc62614a75139ec1ce906377ef26c1428a6fd542a4",
+    "productionExpandedSha256": "d5d194995bb0091fb6962d8d229bf114a581463c5fe42185c1a333b224cd0da7",
+    "coreGitVerified": true,
+    "prefixVerified": true,
+    "rootReceiverBlob": "518e5be786a43023a5bfc0007f1a97c1d363d001"
+  },
+  "historicalCauseProven": false,
+  "receiptAuthenticated": false,
+  "operationalReadiness": false,
+  "completePackage": false,
+  "PCoff": false,
+  "globalNativeDrainVerified": false,
+  "sdkNamespaceEmptyVerified": false
+}
+```
