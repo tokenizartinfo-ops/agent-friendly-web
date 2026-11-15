@@ -14368,3 +14368,55 @@ Root independent diagnostic receivera2da3cb46ee5b3a67c728ca109c6bbe978e28016 and
 Actual prior43697701677/1 had ONLY outer_startup_unavailable/100unmeasured/4UNKNOWN/Native0; precise cause unknown, receipt5c634bffe6a4d15963b4f214c39554e4ebd55336. No positive Source qualification. Future104 DATA declarations5b829c768ed3d7af03d5eb3f1870599d39bfd083/schema5462c75ce5d2f1ff0fe1cdd4620791600bb9c9d1/examples6f28d4f4479fb093aec3188d21b1796fd7c3fff2 are NOT invoked by this block. No implementer Source execution/import/eval/syntax/tests/files/deps/clones/build/refs/runs/runtime/credentials. GitDB/RAM DATA only.
 
 Supersedes unexecuted provisional package303f7b88/candidate0bc84c43/active5b116322/preparedRootb0985ba0. Source remains CLOSEDdfed; no refs/runs. Parse-surface restoration is diagnostic preparation, not evidence of the failure's cause.
+
+
+## ROOT actual INITIAL-ONLY diagnostic — 2026-11-15
+
+```json
+{
+  "purpose": "afw.r3.initial-only.actual-receipt.v1",
+  "observedUTC": "2026-11-15 10:45:13 UTC",
+  "source": "45bd4941ddda6959d9d2a00c9e88d02f1c2ddcb9",
+  "tree": "119038aca05c47eda7200e9aa6f07dee6b16f1dc",
+  "run": 43705239006,
+  "attempt": 1,
+  "job": 132784787149,
+  "path": ".github/workflows/afw-finite-budget-qualification.yml",
+  "event": "push",
+  "conclusion": "failure",
+  "stepOutcome": "failure",
+  "marker": "AFW_R3_DELIVERY_STARTUP_DIAGNOSTIC/1 {\"purpose\":\"afw.r3-delivery.startup-diagnostic.v1\",\"scope\":\"source_initial_only\",\"result\":\"unavailable\",\"lastObserved\":\"unknown\",\"controlsInvoked\":0,\"originalCLIInvoked\":0,\"nativeBusinessCases\":0,\"qualification\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}",
+  "ownAcceptance": {
+    "accepted": true,
+    "bootstrapAdmitted": false,
+    "record": {
+      "purpose": "afw.r3-delivery.startup-diagnostic.v1",
+      "scope": "source_initial_only",
+      "result": "unavailable",
+      "lastObserved": "unknown",
+      "controlsInvoked": 0,
+      "originalCLIInvoked": 0,
+      "nativeBusinessCases": 0,
+      "qualification": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "qualified": false,
+    "NativeReleased": false,
+    "operationalReadiness": false
+  },
+  "controlsMeasured": 0,
+  "originalCLIInvoked": 0,
+  "nativeBusinessCases": 0,
+  "interpretation": "The isolated initial bootstrap diagnostic returned unavailable/unknown. No stage or underlying cause was established. No controls were invoked. The Source is to be restored to original F7 after this terminal run; no repeat or Native release."
+}
+```
+
+All seven no-claims remain false. This diagnostic is consumed and must not be rerun. The current Source closure preserves the entire proposal and this factual receipt; it does not qualify the full 104-control correction or AFW PC-off.
