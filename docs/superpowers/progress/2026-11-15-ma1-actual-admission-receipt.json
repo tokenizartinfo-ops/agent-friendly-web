@@ -1,0 +1,632 @@
+{
+  "purpose": "afw.root.ma1.actual-admission-receipt.v1",
+  "at": "2026-11-15 18:14:29 UTC",
+  "source": "e10fc5bb98f39d569def2e24355a44b5d3e9bf8e",
+  "sourceTree": "4e80d7f1bde215c40d9e1fc154fa77a62aa62903",
+  "run": 43745210412,
+  "attempt": 1,
+  "job": 132906890534,
+  "jobName": "readonly",
+  "node": "22.23.4",
+  "runConclusion": "failure",
+  "jobConclusion": "failure",
+  "steps": [
+    {
+      "name": "Check fixed MA1 reader controls",
+      "number": 4,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run declared full104 controls only",
+      "number": 5,
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "name": "Read fixed MA1 admission observation",
+      "number": 6,
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "readerUnitActual": {
+    "uniqueFrame": "MA1_READER_CONTROLS/1 passed=40",
+    "assertions": 40,
+    "passed": true
+  },
+  "originalReceiver": "38749c663f4dd58fbb5f1a3c940a3820c4ff5100",
+  "original": {
+    "record": {
+      "purpose": "afw.r3-delivery.controls.v1",
+      "source": "e10fc5bb98f39d569def2e24355a44b5d3e9bf8e",
+      "sourceTree": "4e80d7f1bde215c40d9e1fc154fa77a62aa62903",
+      "run": "43745210412",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "matrixSha256": "0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e",
+      "allPassed": false,
+      "expected": 104,
+      "passed": 104,
+      "failed": 0,
+      "unknown": 0,
+      "results": [
+        {
+          "id": "A01",
+          "result": "passed"
+        },
+        {
+          "id": "A02",
+          "result": "passed"
+        },
+        {
+          "id": "A03",
+          "result": "passed"
+        },
+        {
+          "id": "A04",
+          "result": "passed"
+        },
+        {
+          "id": "D01",
+          "result": "passed"
+        },
+        {
+          "id": "D02",
+          "result": "passed"
+        },
+        {
+          "id": "D03",
+          "result": "passed"
+        },
+        {
+          "id": "D04",
+          "result": "passed"
+        },
+        {
+          "id": "D05",
+          "result": "passed"
+        },
+        {
+          "id": "D06",
+          "result": "passed"
+        },
+        {
+          "id": "D07",
+          "result": "passed"
+        },
+        {
+          "id": "D08",
+          "result": "passed"
+        },
+        {
+          "id": "D09",
+          "result": "passed"
+        },
+        {
+          "id": "D10",
+          "result": "passed"
+        },
+        {
+          "id": "D11",
+          "result": "passed"
+        },
+        {
+          "id": "D12",
+          "result": "passed"
+        },
+        {
+          "id": "D13",
+          "result": "passed"
+        },
+        {
+          "id": "P01",
+          "result": "passed"
+        },
+        {
+          "id": "P02",
+          "result": "passed"
+        },
+        {
+          "id": "P03",
+          "result": "passed"
+        },
+        {
+          "id": "P04",
+          "result": "passed"
+        },
+        {
+          "id": "P05",
+          "result": "passed"
+        },
+        {
+          "id": "P06",
+          "result": "passed"
+        },
+        {
+          "id": "P07",
+          "result": "passed"
+        },
+        {
+          "id": "P08",
+          "result": "passed"
+        },
+        {
+          "id": "P09",
+          "result": "passed"
+        },
+        {
+          "id": "P10",
+          "result": "passed"
+        },
+        {
+          "id": "P11",
+          "result": "passed"
+        },
+        {
+          "id": "P12",
+          "result": "passed"
+        },
+        {
+          "id": "P13",
+          "result": "passed"
+        },
+        {
+          "id": "P14",
+          "result": "passed"
+        },
+        {
+          "id": "P15",
+          "result": "passed"
+        },
+        {
+          "id": "P16",
+          "result": "passed"
+        },
+        {
+          "id": "P17",
+          "result": "passed"
+        },
+        {
+          "id": "P18",
+          "result": "passed"
+        },
+        {
+          "id": "P19",
+          "result": "passed"
+        },
+        {
+          "id": "P20",
+          "result": "passed"
+        },
+        {
+          "id": "P21",
+          "result": "passed"
+        },
+        {
+          "id": "P22",
+          "result": "passed"
+        },
+        {
+          "id": "P23",
+          "result": "passed"
+        },
+        {
+          "id": "P24",
+          "result": "passed"
+        },
+        {
+          "id": "P25",
+          "result": "passed"
+        },
+        {
+          "id": "F01",
+          "result": "passed"
+        },
+        {
+          "id": "F02",
+          "result": "passed"
+        },
+        {
+          "id": "F03",
+          "result": "passed"
+        },
+        {
+          "id": "F04",
+          "result": "passed"
+        },
+        {
+          "id": "F05",
+          "result": "passed"
+        },
+        {
+          "id": "F06",
+          "result": "passed"
+        },
+        {
+          "id": "F07",
+          "result": "passed"
+        },
+        {
+          "id": "F08",
+          "result": "passed"
+        },
+        {
+          "id": "F09",
+          "result": "passed"
+        },
+        {
+          "id": "B01",
+          "result": "passed"
+        },
+        {
+          "id": "B02",
+          "result": "passed"
+        },
+        {
+          "id": "B03",
+          "result": "passed"
+        },
+        {
+          "id": "B04",
+          "result": "passed"
+        },
+        {
+          "id": "B05",
+          "result": "passed"
+        },
+        {
+          "id": "B06",
+          "result": "passed"
+        },
+        {
+          "id": "B07",
+          "result": "passed"
+        },
+        {
+          "id": "B08",
+          "result": "passed"
+        },
+        {
+          "id": "B09",
+          "result": "passed"
+        },
+        {
+          "id": "B10",
+          "result": "passed"
+        },
+        {
+          "id": "B11",
+          "result": "passed"
+        },
+        {
+          "id": "B12",
+          "result": "passed"
+        },
+        {
+          "id": "B13",
+          "result": "passed"
+        },
+        {
+          "id": "W01",
+          "result": "passed"
+        },
+        {
+          "id": "W02",
+          "result": "passed"
+        },
+        {
+          "id": "C01",
+          "result": "passed"
+        },
+        {
+          "id": "C02",
+          "result": "passed"
+        },
+        {
+          "id": "C03",
+          "result": "passed"
+        },
+        {
+          "id": "C04",
+          "result": "passed"
+        },
+        {
+          "id": "C05",
+          "result": "passed"
+        },
+        {
+          "id": "D14",
+          "result": "passed"
+        },
+        {
+          "id": "P26",
+          "result": "passed"
+        },
+        {
+          "id": "F10",
+          "result": "passed"
+        },
+        {
+          "id": "E01",
+          "result": "passed"
+        },
+        {
+          "id": "E02",
+          "result": "passed"
+        },
+        {
+          "id": "E03",
+          "result": "passed"
+        },
+        {
+          "id": "E04",
+          "result": "passed"
+        },
+        {
+          "id": "E05",
+          "result": "passed"
+        },
+        {
+          "id": "E06",
+          "result": "passed"
+        },
+        {
+          "id": "O01",
+          "result": "passed"
+        },
+        {
+          "id": "O02",
+          "result": "passed"
+        },
+        {
+          "id": "O03",
+          "result": "passed"
+        },
+        {
+          "id": "O04",
+          "result": "passed"
+        },
+        {
+          "id": "O05",
+          "result": "passed"
+        },
+        {
+          "id": "S01",
+          "result": "passed"
+        },
+        {
+          "id": "E07",
+          "result": "passed"
+        },
+        {
+          "id": "T01",
+          "result": "passed"
+        },
+        {
+          "id": "F11",
+          "result": "passed"
+        },
+        {
+          "id": "A05",
+          "result": "passed"
+        },
+        {
+          "id": "U01",
+          "result": "passed"
+        },
+        {
+          "id": "U02",
+          "result": "passed"
+        },
+        {
+          "id": "U03",
+          "result": "passed"
+        },
+        {
+          "id": "U04",
+          "result": "passed"
+        },
+        {
+          "id": "H01",
+          "result": "passed"
+        },
+        {
+          "id": "L01",
+          "result": "passed"
+        },
+        {
+          "id": "L02",
+          "result": "passed"
+        },
+        {
+          "id": "L03",
+          "result": "passed"
+        },
+        {
+          "id": "L04",
+          "result": "passed"
+        },
+        {
+          "id": "L05",
+          "result": "passed"
+        },
+        {
+          "id": "E08",
+          "result": "passed"
+        },
+        {
+          "id": "E09",
+          "result": "passed"
+        },
+        {
+          "id": "E10",
+          "result": "passed"
+        },
+        {
+          "id": "E11",
+          "result": "passed"
+        }
+      ],
+      "mutants": [
+        {
+          "id": "M_RAW",
+          "expectedFailedIds": [
+            "D02"
+          ],
+          "actualFailedIds": [
+            "D02"
+          ],
+          "result": "passed"
+        },
+        {
+          "id": "M_PROVENANCE",
+          "expectedFailedIds": [
+            "P06"
+          ],
+          "actualFailedIds": [
+            "P06"
+          ],
+          "result": "passed"
+        },
+        {
+          "id": "M_OUTPUT",
+          "expectedFailedIds": [
+            "B05",
+            "U01"
+          ],
+          "actualFailedIds": [
+            "B05",
+            "U01"
+          ],
+          "result": "unknown"
+        },
+        {
+          "id": "M_ASSOC",
+          "expectedFailedIds": [
+            "S01"
+          ],
+          "actualFailedIds": [],
+          "result": "unknown"
+        }
+      ],
+      "nativeBusinessCases": 0,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      },
+      "cleanup": {
+        "complete": true,
+        "failedInstances": [],
+        "unknownInstances": []
+      }
+    },
+    "accepted": true,
+    "qualified": false,
+    "NativeReleased": false
+  },
+  "RootMA1Receiver": "c4175aba90ff0dbe7093847378912dbf33cb3e8c",
+  "MA1": {
+    "accepted": true,
+    "available": true,
+    "measurementEligible": true,
+    "qualified": false,
+    "NativeReleased": false,
+    "operationalReadiness": false,
+    "record": {
+      "purpose": "afw.ma1.admission.v1",
+      "source": "e10fc5bb98f39d569def2e24355a44b5d3e9bf8e",
+      "sourceTree": "4e80d7f1bde215c40d9e1fc154fa77a62aa62903",
+      "run": "43745210412",
+      "attempt": 1,
+      "job": "readonly",
+      "node": "22.23.4",
+      "matrixSha256": "0ba8de6a133574e19678004b0f1c7e8c6a4121b3e02086e4f36454a7ed01dd6e",
+      "exceptionAt": "none",
+      "phases": [
+        [
+          "baseline",
+          "entered",
+          104,
+          0,
+          false,
+          true
+        ],
+        [
+          "M_RAW",
+          "entered",
+          104,
+          0,
+          false,
+          true
+        ],
+        [
+          "M_PROVENANCE",
+          "entered",
+          104,
+          0,
+          false,
+          true
+        ],
+        [
+          "M_OUTPUT",
+          "entered",
+          96,
+          0,
+          true,
+          false
+        ],
+        [
+          "M_ASSOC",
+          "gate",
+          0,
+          0,
+          true,
+          false
+        ]
+      ],
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "observedAdmissionPhases": [
+      "M_OUTPUT",
+      "M_ASSOC"
+    ]
+  },
+  "interpretation": {
+    "scope": "Only actual Source e10fc5bb/run43745210412/1",
+    "actualAttemptCalls": 408,
+    "actualReturnedUnknown": 0,
+    "outerException": "none",
+    "baseline104": "passed",
+    "M_RAW104": "passed exactD02",
+    "M_PROVENANCE104": "passed exactP06",
+    "M_OUTPUT": "96 attempted,0 returnedunknown,direct row-admission break; original failed[B05,U01] but resultunknown because incomplete",
+    "M_ASSOC": "direct outer-admission refusal,0attempts",
+    "reasonForMissingCoverageThisOccurrence": "Direct observed normal finite admission closures; no returnedunknown or outerexception observed in attempted408calls",
+    "doesNotProve": "Cause of prior runs, complete four-mutant qualification, native/runtime or PCoff"
+  },
+  "SourceControlClocks": "Unchanged90s total/20s minimum admission, fixed104order/fourkillsets/case/cleanup/parent/outer clocks; no widening or source business call.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
