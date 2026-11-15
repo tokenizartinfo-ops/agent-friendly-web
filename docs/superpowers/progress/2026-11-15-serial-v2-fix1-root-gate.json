@@ -1,0 +1,63 @@
+{
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Source-only GitHub Actions laboratory",
+  "resourceType": "branch ref and one push-triggered readonly job",
+  "resourceId": "refs/heads/feat/finite-native-cleanup-20261101",
+  "allowedAction": "One CAS from closed parent to exact prepared candidate; one run attempt1; terminal logs once; restore original F7 preserving entire SAME and actual receipt",
+  "utc": "2026-11-15 23:36:00 UTC",
+  "prepared": {
+    "commit": "661ba7a1fd728efe3d269d776cb91cbfa2c8c994",
+    "activeTree": "76de68a502f046edfc2d8cb655a30aff97dc3bd7",
+    "inactiveTree": "51002a17d05ccd10ad34eff5ed5871df7ef94580",
+    "parent": "49ee71ead8d52cb5d474d820d57828115f912923",
+    "F7": "f712eebd51e63bd94201126f68bf00023b38f4e0",
+    "SAME": "bb094bbf4516a29d900fda60d386131fbdd89cab",
+    "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-FIX1-ONEUSE-20261115",
+    "SourceReleased": false
+  },
+  "sourceIndex": "64ceddb8ed96d47daf912abbeecf52c7fa4f1bd0",
+  "ownIndex": "06211e8bf5c37d3eca5015ab5c56c3f32adb0310",
+  "rootDataChecks": 41,
+  "rootHashChecks": 47,
+  "rootSpanChecks": 9,
+  "ownRerun": {
+    "positive": 21,
+    "negative": 108,
+    "legacy": 36,
+    "previouslyAcceptedRegressions": 47,
+    "SourceExecuted": false
+  },
+  "preservedWholeSAME": {
+    "blob": "3d7e28e25040ebc09fcf217801d3a2e7b6920e72",
+    "bytes": 2584355,
+    "sha256": "15034ae33de423cb18b8cd345b63b7467882c12ccb02cd9a9790c076c65ead51"
+  },
+  "Core": {
+    "leaves": 3201,
+    "bytes": 324448,
+    "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+  },
+  "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "queues": 0,
+  "headRuns": 0,
+  "onlyF7SAME": true,
+  "rollback": {
+    "parentMustEqual": "661ba7a1fd728efe3d269d776cb91cbfa2c8c994",
+    "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "SAME": "Preserve all candidate2587205 bytes plus sanitized actual receipt; do not reverse append or overwrite concurrent legitimate changes",
+    "reserveBytes": 12795,
+    "closeReadback": "full Source/commit/tree/F7/full SAME/Core/Main/all five queues/closed-head runs"
+  },
+  "consumedOldRun": 43769046439,
+  "claims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
