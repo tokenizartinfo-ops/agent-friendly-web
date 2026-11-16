@@ -1,0 +1,225 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-fix1-packet.v1",
+  "round": 2,
+  "maxRounds": 5,
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "authority": {
+    "brief": "605b379293ce78993ed509da0d3a840e48401c35",
+    "actualPrimary": "2c556a2e8083ce2d83a49029991724d73e817187",
+    "actualProof": "e995fb6ddf8517772c8a034e7d846645c098573d",
+    "closeProof": "aa866428ee2b5a65a9202121712d507740a7f335"
+  },
+  "beforePacket": "90b6023a7879d53c5d522ca944e442f32c315911",
+  "index": {
+    "bytes": 21737,
+    "sha256": "eca133b7b86335d1bbff5709b976243a4dacec70fe2c7a952b2d492e193596ef",
+    "gitBlob": "cd41daeb48bdd5d0e6f5c452618e5ba546f39dc1",
+    "blob": "cd41daeb48bdd5d0e6f5c452618e5ba546f39dc1",
+    "fullReadback": true
+  },
+  "report": {
+    "bytes": 21947,
+    "sha256": "288d6b55fa3297e760d9ffc5b9e0118ebc800b76e69c7ddb597c44f3f144da07",
+    "gitBlob": "e125a5219f2d313af2c652198d7d9ac0114de670",
+    "blob": "e125a5219f2d313af2c652198d7d9ac0114de670",
+    "fullReadback": true
+  },
+  "selection": {
+    "bytes": 5515,
+    "sha256": "ed066d03e8e460d9e17cffd8b720a8e98e447a06113e19bc0f4c4b42ef731a37",
+    "gitBlob": "39f7f673b61f7aa372487774c0f6760561b61e22",
+    "blob": "39f7f673b61f7aa372487774c0f6760561b61e22",
+    "fullReadback": true
+  },
+  "reversibles": {
+    "bytes": 2604,
+    "sha256": "f25fb08c4e1872e3956ab05ab03da913730ffa6da3be8caef9977752cd5e8902",
+    "gitBlob": "427d26721ed70d66e51d0f484c40a6d27ea84610",
+    "blob": "427d26721ed70d66e51d0f484c40a6d27ea84610",
+    "fullReadback": true
+  },
+  "fullDiff": {
+    "bytes": 161476,
+    "sha256": "5bf04a91c798bec06946f8e9d3c8bc311984be805a3d0b1456aee408d3089729",
+    "gitBlob": "0e66bd53899b86d06df1075b84e4f9f2d0d42285",
+    "blob": "0e66bd53899b86d06df1075b84e4f9f2d0d42285",
+    "fullReadback": true
+  },
+  "testFirst": {
+    "bytes": 8830,
+    "sha256": "af6a04728a9ebc12908fa52d275e0d290e3efcdac82dcd8f602aa38d1009b41a",
+    "gitBlob": "905dddca73b4a423bac3d6bf036ef0ca214605c4",
+    "blob": "905dddca73b4a423bac3d6bf036ef0ca214605c4",
+    "fullReadback": true
+  },
+  "contractSupplement": {
+    "bytes": 4848,
+    "sha256": "b0cf936da09b2121d480b7f82460464fc29715ae3e76956334e800867addbaae",
+    "gitBlob": "e02737a1626d3487f5a32e19e6ef6a7d04c8866e",
+    "blob": "e02737a1626d3487f5a32e19e6ef6a7d04c8866e",
+    "fullReadback": true
+  },
+  "runner": {
+    "bytes": 20508,
+    "sha256": "72599d7c73db377503bb9802959e2070a83b5953e2107cc4aeae4a770ce0835a",
+    "gitBlob": "33d3d6eca9af1246d5550b749f7ab5836f6a7676",
+    "blob": "33d3d6eca9af1246d5550b749f7ab5836f6a7676",
+    "fullReadback": true
+  },
+  "workflow": {
+    "bytes": 1431,
+    "sha256": "aee07235637027733c16b3d80b0a17463338b49b8aa5e8f8ab71eb7ddf4378aa",
+    "gitBlob": "2664445e927311ec503e2d02c98121bf41ce01c4",
+    "blob": "2664445e927311ec503e2d02c98121bf41ce01c4",
+    "fullReadback": true
+  },
+  "proofSchema": {
+    "bytes": 11008,
+    "sha256": "48d4cfc9d195005399028c621fe379b98d552fb52c941bec3a1f2d8e6089de4d",
+    "gitBlob": "cbf3e3b7487f33465f376231f4214880fb1a296c",
+    "blob": "cbf3e3b7487f33465f376231f4214880fb1a296c",
+    "fullReadback": true
+  },
+  "changedExecutableBodies": {
+    "transform": {
+      "before": {
+        "bytes": 12054,
+        "sha256": "32746f6f4b98bf5310aadf359b871aee271727187d8c23fb56a967a9d7f8c646",
+        "gitBlob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+        "blob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+        "fullReadback": true
+      },
+      "after": {
+        "bytes": 12498,
+        "sha256": "6eadf1ace39751e61a196c7180205b021aa5f703cbc6d1a8d26e6fa4959d9cfc",
+        "gitBlob": "3652e73d858a0958aaf50f34781043d6c910717f",
+        "blob": "3652e73d858a0958aaf50f34781043d6c910717f",
+        "fullReadback": true
+      }
+    },
+    "units": {
+      "before": {
+        "bytes": 21112,
+        "sha256": "674b96445e4d754a835453f71ad98d5da6a84425012d4108fb2a63a1d9a9337c",
+        "gitBlob": "dc0eb43c2ed663611f05a62ebf63daea1683b01d",
+        "blob": "dc0eb43c2ed663611f05a62ebf63daea1683b01d",
+        "fullReadback": true
+      },
+      "after": {
+        "bytes": 21884,
+        "sha256": "72b202db49738c95ffa07af7d6d8d3d58ded0b4850e1a346c5e2d95cff0f48db",
+        "gitBlob": "f8fc10631071207af883c34d25eff4f472862d61",
+        "blob": "f8fc10631071207af883c34d25eff4f472862d61",
+        "fullReadback": true
+      }
+    },
+    "runner": {
+      "before": {
+        "bytes": 16945,
+        "sha256": "47cacdf0ffe0eb4f5e57193be6d571a76eb544b6c4cd533e52eeda9ba3acb26c",
+        "gitBlob": "9926bf9d816f724a67298954e8425f25f589fedd",
+        "blob": "9926bf9d816f724a67298954e8425f25f589fedd",
+        "fullReadback": true
+      },
+      "after": {
+        "bytes": 20508,
+        "sha256": "72599d7c73db377503bb9802959e2070a83b5953e2107cc4aeae4a770ce0835a",
+        "gitBlob": "33d3d6eca9af1246d5550b749f7ab5836f6a7676",
+        "blob": "33d3d6eca9af1246d5550b749f7ab5836f6a7676",
+        "fullReadback": true
+      }
+    }
+  },
+  "frozen": {
+    "ledger": {
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "gitBlob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "fullReadback": true
+    },
+    "reader": {
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "gitBlob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "fullReadback": true
+    },
+    "normal13Index": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "normal13IndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "historicalSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix1",
+    "message": "AFW-C2-N3-CONTROLS-FIX1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls-fix1.yml",
+    "job": "c2-notices-n3-controls-fix1",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix1/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix1/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "proposedLab": {
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "originalModesAndBlobs": 3203,
+    "additions": 29,
+    "inputHashes": 23,
+    "offTreeReview": "Index/packet/fullDiff remain immutable review DATA, not extra lab paths. Root may preserve independently. Source writer creates no tree/ref/commit/run."
+  },
+  "fixSummary": "Five exact text contradictions repaired without widening matching: approved PH handler1 vs global4, activation5spaces, outer callback3spaces, both T2 prep3spaces. All4 original clocks and3 later handlers retained; raw/prepared reversibles asserted. Safe controlledSETUP enum diagnostics only; no raw thrown values/messages/stacks/getters,256B/1case/41total. Same41 IDs/proof shape/caps; no business execution.",
+  "actualBefore": {
+    "native": {
+      "tests": 41,
+      "pass": 6,
+      "fail": 35,
+      "skip": 0,
+      "todo": 0,
+      "cancel": 0
+    },
+    "core": {
+      "accepted": 6,
+      "rejected": 21,
+      "probeChecks": 3,
+      "roundtrips": 6,
+      "witnessRejected": 2,
+      "slotChecks": 5,
+      "guardAccepted": 3,
+      "guardRejected": 7,
+      "guardTransitions": 6,
+      "invarianceChecks": 10,
+      "guardRecordRejected": 12
+    },
+    "causal": {
+      "accepted": 31,
+      "rejected": 32
+    },
+    "reducer": null,
+    "diagnosticToolingExecuted": true,
+    "sourceBusinessExecuted": false,
+    "firstNativeError": "unknown"
+  },
+  "afterExpected": {
+    "native41": "41PASS/0fail/skip/todo/cancel/extra/missing; exact ordered IDs",
+    "reducer": "31→24/late34→24 with exact pairp/firstscopeerror/focus preserved, actual original callbacks required",
+    "status": "PENDING_ROOT_CLOUD. Not asserted PASS by this DATA proposal."
+  },
+  "fullReadback": "Every new pin here and all29 admitted path bodies read back in full; SHA256/Gitblob/bytes verified with builtin RAM metadata only. FullDiff split/join convention retains EOF LF. Old artifacts/corpus/preimages preserved.",
+  "pending": [
+    "Root fresh absence/exacttree/Workflow/gate admission and ONE cloud tooling occurrence; no author run.",
+    "Root API/head/tree/runAttempt/job/TAP41/proof/input23/artifact canonical/CRC/digest join, then scoped Source spec+quality review/fixloop.",
+    "C remains STOPPED/inactive; no business run or Task2. C manifest must be rebound to accepted final bodies after tooling/review."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
