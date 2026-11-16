@@ -1,0 +1,110 @@
+{
+  "schema": "AFW-C2-N3-OWN527-NATIVE-PRIMARY/1",
+  "atUTC": "2026-11-16 17:33:18 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "index": "1498bbba58b4d36e2c3a2c19d6dc9e9a95a8a085",
+  "gate": "8723d1f85cbb575c680a6d2df8aa28adc0b3eacb",
+  "branch": "lab/afw-c2-own-receiver-20261116-notices-n3-models-fix2",
+  "head": "65b643bfa8e5394f3a239ce1b68f24631d5bb10b",
+  "tree": "81a6b80d9001c554f2b774386d28c95bc54040da",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "workflow": ".github/workflows/afw-c2-notices-n3-own-models-fix2.yml",
+  "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n3/models-fix2/run-controls.mjs",
+  "run": {
+    "id": 43919176500,
+    "attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "event": "push",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43919176500"
+  },
+  "job": {
+    "id": 133481488055,
+    "name": "c2-notices-n3-own-models-fix2",
+    "conclusion": "success",
+    "step4": {
+      "name": "Run native OWN fix2 model controls",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4,
+      "started_at": "2026-11-16T17:31:22Z",
+      "completed_at": "2026-11-16T17:31:23Z"
+    }
+  },
+  "native": {
+    "tests": 527,
+    "pass": 527,
+    "fail": 0,
+    "cancel": 0,
+    "skip": 0,
+    "todo": 0,
+    "extra": 0,
+    "missing": 0,
+    "duplicates": 0,
+    "idsHash": "7ebfe81081f2acedc229960be97f00eb1747746a02a857d3a318248d06cabedd",
+    "orderedIdsRootMatched": true
+  },
+  "bindings": {
+    "runnerHash": "872c128a80d88e5d67ee2c5a9d3bd55190114e9ac817f67f918248430611be6a",
+    "workflowHash": "fc429739c627ef983320425c8b2d67d45c70b282732557eb2233dea80e76ce2b",
+    "inputIndexHash": "24e93ca1718b85ebbf92d88a6e9e62125bffe8d25b3f42e46eeeb64712e87f6e",
+    "closureHash": "a5741cec40183f42fbd2269d3f486d53c91b20337962a3f3ad258c61edc72bc0",
+    "selectionHash": "b0f887c8c2e7f57a8efee9f9dd6724b4fd250cd42243c7f2e4da51a942c94eb7",
+    "proofSchemaHash": "8d2c134998ea4d797634e671db0cf3740e38655b249b6abe0d67067dff6a59f8"
+  },
+  "artifact": {
+    "id": 14253830637,
+    "name": "afw-c2-notices-n3-own-models-fix2-proof",
+    "archive": {
+      "bytes": 1577,
+      "sha256": "75413dd51f21233e1a0e4e68fd2c7e8e205c0e55d913c0616550c8362479b4b0",
+      "blob": "5f37360446719a4ea24340b72f864abc3715100d"
+    },
+    "payload": {
+      "bytes": 2434,
+      "sha256": "0e17c1761ca7edb91e93d5335ee0c4c5e0c27e9e19b53ccfe00c7eb686ee36b3",
+      "blob": "4961a4e8e94a5761fb2ced8fa3c0b6b7f634f5e3"
+    },
+    "completeDeflate": true,
+    "payloadSame": true,
+    "canonical": true,
+    "schema": true,
+    "logPayloadEqual": true,
+    "crcVerified": true
+  },
+  "models": {
+    "kind": "OWN_FICTITIOUS_INPUTS_AND_SOURCE_LITERAL_DATA_ONLY",
+    "inputFiles": 20,
+    "ownModules": 4,
+    "controlCount": 517,
+    "idsHash": "d490d6ce80ba0364adc3edf75c9188b510b1a0766dd7bff553f9dcb2534ca267"
+  },
+  "producerData": {
+    "staticBytesVerified": true,
+    "controlCount": 10,
+    "passed": 10,
+    "failed": 0,
+    "bodyCount": 21,
+    "manifestHash": "44a2527e1a54cb79a6feec9a04a996ad1b288a35117763e2037c7e8d64cf18f8",
+    "rawManifestHash": "27f9b289888ba4155fcaca9739f0b074aeda7e781c7796a1e8e83501fcf79a5e",
+    "bindingsHash": "7ccf7c0c61f16d98e1033cf52f127b1181173015b95d7270a3be3ccd30199822",
+    "idsHash": "81c9065544e14dbc45a3cdea148c663acd1d62046ba8584373d6c8f63d7538f3",
+    "sourceExpectedContext": null
+  },
+  "ownModelsExecuted": true,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "reviewPending": true,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
