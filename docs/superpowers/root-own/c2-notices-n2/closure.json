@@ -1,0 +1,18 @@
+{
+  "schema": "afw.c2-notices-n2.own-closure.v1",
+  "testedHead": "0ccd54c6fd234c681f2967a538f7d0230fdea472",
+  "testedTree": "6aa775d08aaba921b0970400f591f8c9871bea10",
+  "runId": 43868775637,
+  "jobId": 133304082546,
+  "nativePrimary": "0e6ee8ed3fb9e1305eecfa74048009c7ddebf984",
+  "tests": 340,
+  "failed": 0,
+  "removeOnly": ".github/workflows/afw-c2-notices-n2-own.yml",
+  "preserveOriginals": 3203,
+  "preserveOwnData": true,
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
