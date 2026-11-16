@@ -1,0 +1,189 @@
+{
+  "schema": "afw.c2-task1-fix1-source-actual-failure.v1",
+  "checkedAt": "2026-11-16 04:17:45 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261116-t1-fix1",
+  "head": "6cf7715d3eee62d6eb4b37d8ef89b68aa7f29225",
+  "tree": "0363a9476c14c37960b1dc7e8cd69c6cf134a543",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "gate": "155eb12a6a0f3b6746b611e69bd3a1589b750ea1",
+  "sourceIndex": "e20ae5a991a291004c3a8dde098031865c1e4c13",
+  "runner": "8d2e34b03aa8f6ada906fddd65c8b3cb32054e67",
+  "run": {
+    "id": 43802367592,
+    "attempt": 1,
+    "event": "push",
+    "path": ".github/workflows/afw-c2-source-lab.yml",
+    "status": "completed",
+    "conclusion": "failure"
+  },
+  "job": {
+    "id": 133085365498,
+    "name": "c2-source-lab",
+    "status": "completed",
+    "conclusion": "failure",
+    "steps": [
+      {
+        "number": 1,
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T04:09:43Z",
+        "completedAt": "2026-11-16T04:09:46Z"
+      },
+      {
+        "number": 2,
+        "name": "Read the exact one-use lab head",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T04:09:46Z",
+        "completedAt": "2026-11-16T04:09:52Z"
+      },
+      {
+        "number": 3,
+        "name": "Use the fixed Node runtime",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T04:09:52Z",
+        "completedAt": "2026-11-16T04:09:56Z"
+      },
+      {
+        "number": 4,
+        "name": "Install only the existing locked dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T04:09:56Z",
+        "completedAt": "2026-11-16T04:10:09Z"
+      },
+      {
+        "number": 5,
+        "name": "Qualify isolated compiled Source data",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-11-16T04:10:09Z",
+        "completedAt": "2026-11-16T04:13:09Z"
+      },
+      {
+        "number": 6,
+        "name": "Preserve only the bounded sanitized Source receipt",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-11-16T04:13:09Z",
+        "completedAt": "2026-11-16T04:13:09Z"
+      },
+      {
+        "number": 11,
+        "name": "Post Use the fixed Node runtime",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-11-16T04:13:09Z",
+        "completedAt": "2026-11-16T04:13:09Z"
+      },
+      {
+        "number": 12,
+        "name": "Post Read the exact one-use lab head",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T04:13:09Z",
+        "completedAt": "2026-11-16T04:13:10Z"
+      },
+      {
+        "number": 13,
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T04:13:10Z",
+        "completedAt": "2026-11-16T04:13:10Z"
+      }
+    ]
+  },
+  "logsReadOnce": true,
+  "canonicalReceiptCount": 0,
+  "dependencyControl": [
+    {
+      "line": 145,
+      "result": {
+        "schema": "afw.c2-bootstrap-dependency-control.v1",
+        "observedExpectedAbsence": true,
+        "SourceCase": false,
+        "operationalReadiness": false,
+        "PCoff": false
+      }
+    }
+  ],
+  "diagnostics": [
+    {
+      "line": 146,
+      "result": {
+        "diagnostic": {
+          "phase": "baseline-red",
+          "frontier": "launch",
+          "code": "CAPTURE_INVALID",
+          "capture": {
+            "exitCode": 1,
+            "signal": "none",
+            "errorKind": "timeout",
+            "complete": false,
+            "stdout": {
+              "bytes": 38125,
+              "sha256": "4c227680c6c74ad6bff6292bb6eb7f8fadf419c05827da7a2d5f80c20897f419"
+            },
+            "stderr": {
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            "observed": {
+              "tapResults": 20,
+              "knownResults": 20,
+              "knownFrames": 4,
+              "firstKnownFailure": "C2T1_OAUTH",
+              "sourceFileFailure": false,
+              "dependencyOutcome": null,
+              "errorKinds": []
+            }
+          }
+        },
+        "SourceQualified": false,
+        "firstHistoricalCauseProven": false,
+        "operationalReadiness": false,
+        "PCoff": false
+      }
+    },
+    {
+      "line": 147,
+      "result": {
+        "diagnostic": {
+          "phase": "cleanup",
+          "frontier": "launch",
+          "code": "CAPTURE_INVALID",
+          "capture": null
+        },
+        "SourceQualified": false,
+        "firstHistoricalCauseProven": false,
+        "operationalReadiness": false,
+        "PCoff": false
+      }
+    }
+  ],
+  "findings": {
+    "exactMissingDependencyNegativePassed": true,
+    "baselineNativeSubprocessTimedOut": true,
+    "firstKnownFailure": "C2T1_OAUTH",
+    "knownTapResults": 20,
+    "knownFrames": 4,
+    "cleanupFailed": true,
+    "firstHistoricalCauseProven": false,
+    "productBodiesChanged": false,
+    "taskQualified": false
+  },
+  "limits": "Detailed actual error/case values unavailable. Timeout observation is not a physical-drain proof. Cleanup cause not captured. Do not replay/log-refetch or infer a Cloudflare/runtime fault.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
