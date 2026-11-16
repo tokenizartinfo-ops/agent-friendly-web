@@ -1,0 +1,234 @@
+{
+  "schema": "AFW-C2-FULL-C230-SOURCE-ACTUAL-INDEPENDENT-RESULT-REVIEW/1",
+  "date": "2026-11-16",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Revisión de blobs inmutables conservados; no nueva consulta a Actions/log/artifact",
+  "resourceType": "Informe Git blob inmutable",
+  "allowedAction": "Lectura de Primary/outcome/cierre y pines DATA; crear este informe+FULL readback",
+  "disposition": "INCOMPLETE",
+  "verdict": {
+    "interpretation": "CORRECTA y fail-closed para esta evidencia incompleta",
+    "newActionableSourceOrCaptureDefects": 0,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "operationalApproval": false,
+    "replayApproval": false
+  },
+  "inputs": {
+    "primary": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+    "outcome": "91b08d3ea77cd85264fc6f5ada1fd62693c56631",
+    "close": "e65c9b545c44c663f8e5ceb41794a5aab8e9e455",
+    "run": 43965725604,
+    "attempt": 1,
+    "job": 133644531547,
+    "testedHead": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+    "testedTree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+    "closedHead": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+    "closedTree": "dfbf2ebfa8ec108252a4f88f59a9a16fac26b26d",
+    "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "sourcePlan": "6696d06831328bb52d7245c48347bd8c412b566d",
+    "staticReview": "58788e1426dd81e927d765a98f14ea50e5e3f77f",
+    "runner": {
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+      "blob": "1193e74ec0b0d60fb5c63d3a0340578e884dfb71"
+    },
+    "parser": {
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/tap-protocol.mjs",
+      "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87"
+    }
+  },
+  "integrity": {
+    "evidenceFULL": [
+      {
+        "key": "actualSourcePrimary",
+        "bytes": 1234250,
+        "sha256": "5f7353cad07b4f7c8e78563db3dd76ff1e88cf17f372b139ccf71a2205e7ba7c",
+        "gitBlobSHA1": "68c68577dca6ed01980dd673ed9b2623096a71f9"
+      },
+      {
+        "key": "actualSourceOutcome",
+        "bytes": 9229,
+        "sha256": "ac9b7c59a0b86a9e9a013faaf9b91b92e41cb7a42f0a49be1db5cf0f6a5a5d00",
+        "gitBlobSHA1": "91b08d3ea77cd85264fc6f5ada1fd62693c56631"
+      },
+      {
+        "key": "actualSourceClose",
+        "bytes": 1229,
+        "sha256": "5e908bc2ba8d7aa31e25c270b965bb78893981031185ea6f35c6e78244b58881",
+        "gitBlobSHA1": "e65c9b545c44c663f8e5ceb41794a5aab8e9e455"
+      }
+    ],
+    "rawLog": {
+      "chars": 19740,
+      "bytesUTF8": 19742,
+      "sha256": "c45bb9caf563cce92de2009112a4ea905e4900caa76f7cf0658752e4de894472",
+      "note": "BOM inicial preservado. Se leyó únicamente el log guardado en Primary; no se volvió a obtener el log remoto."
+    },
+    "basis": "Blobs por conector GitHub, FULL bytes/SHA256/GitSHA1 recalculados en RAM sobre texto/JSON inertes. Tupla esperada aportada por Root e independiente del outcome. El JSON conservado no autentica criptográficamente por sí mismo una API; no se afirma una nueva captura remota."
+  },
+  "independentChecks": {
+    "joins": {
+      "apiIdentity": true,
+      "commitIdentity": true,
+      "tree25": true,
+      "treeBlobLeaves": 3228,
+      "rawCommandGroup": true,
+      "framesCount": 6,
+      "framesExactOrder": true,
+      "contexts": true,
+      "commandWindow": true,
+      "outcomeEquals": true,
+      "artifactAbsent": true,
+      "nonclaims": true,
+      "closureLinks": true
+    },
+    "partial": {
+      "synthetic": true,
+      "dependency": true,
+      "redShape": true,
+      "redCases": true,
+      "redTotals": true,
+      "redWitness": true,
+      "greenUnavailable": true,
+      "timeoutReport": true,
+      "partialCustody": true,
+      "noFullMarkers": true
+    },
+    "custodyContext": true,
+    "details": "API conservada: run+único job terminal failure, attempt1/push/repos/ref/WF/head y commit message/parent/tree coinciden. Raw recursive tree no truncado/unique paths:25edges exactos modo/blob/size y3228blob leaves. Un command-group exacto y6frames canónicos dentro de step5. Proyección extraída del log es idéntica al outcome separado y al embebido. No se ejecutó receptor full sobre evidencia incompleta.",
+    "frameBodyBytes": [
+      607,
+      134,
+      1617,
+      722,
+      831,
+      446
+    ],
+    "workflow": "Checkout/runtime/deps steps success; Qualify step5 failure. Upload step6 falla por archivo inexistente, coincidente con listing0 y gate del productor; no evidencia de fallo de transporte/almacenamiento de artefactos."
+  },
+  "retainedResult": {
+    "synthetic": "Una proyección3accepted/35rejected con hash de vectores/contexto correctos.",
+    "dependency": "Un control bootstrap absent-cwd EXPECTED_ENOENT/pass.",
+    "BASE": "Proyección RED3 válida: CONNECTION/pass/connection, OAUTH/pass/oauth, NOTICES/fail/notices; cada contador1/1/1, totales3/2pass/1expectedfail, exit1. Witness exacto de schema corregido: S07d4db10e línea6/acción36, S08de8a51e choose18, GET /connections/finite-prepare, before-form-parse-and-post, actual503/expected200. Se valida el contrato seguro, sin raw TAP privado independiente.",
+    "GREEN": "unqualified/CAPTURE_INVALID, exitCode:null, totals:null, cases:[], witness:null. Es ausencia de join admitido, no cero actividad ni veinte fallos.",
+    "diagnostic": {
+      "phase": "proposal-green",
+      "frontier": "parser",
+      "code": "CAPTURE_INVALID",
+      "capture": {
+        "exitCode": 1,
+        "signal": "none",
+        "errorKind": "timeout",
+        "stdout": {
+          "bytes": 24395,
+          "sha256": "db94fcb9537a88318ed15bb15c09bf217f566b1b5b7a1287020b9789a5fc2aa8"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    "custody": "El productor sellado informa4launches/4processes y parentNonRoot/preflightOwned+Removed/UIDGIDgroups+loopback/ownRootVerified/ownTempRemoved=true. Coincide con preflight+dependency+BASE+GREEN y la misma ocurrencia; no es6launches/6..24 de la cualificación completa ni un inventario global.",
+    "later": "Sin frame mutant-prefix, regressions ni final Source receipt; artifact listing total_count0/artifacts[], archive=null/finalReceipt=null. Según runner115, el GREEN unqualified detiene la secuencia antes de programar MUTANT/REG."
+  },
+  "timeoutAnalysis": {
+    "codeEvidence": [
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+        "lines": "22–28",
+        "meaning": "safeCapture clasifica result.error.code ETIMEDOUT como errorKind timeout; conserva por separado status→exitCode y result.signal→signal. signal none no convierte timeout en terminación normal ni prueba ausencia de señales en todo el sistema."
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+        "lines": "16,76–85,137–143",
+        "meaning": "runSource default limit180000; spawnSync timeout=max(1,min(limit,end-Date.now())), end=enter+330000. frontier=parser se establece siempre tras regresar runSource y antes de llamar observe."
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/tap-protocol.mjs",
+        "lines": "159–175,191–194",
+        "meaning": "Record arranca unavailable. La primera demand rechaza result.error con CAPTURE_INVALID antes de asignar record.exitCode o decodificar/parsear stdout. Con este timeout, null/[] son correctos; no es evidencia de un bug de parser ni de un caso TAP."
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+        "lines": "113–116,153–165",
+        "meaning": "Se emite modo unqualified, se detiene, conserva diagnóstico y ejecuta cleanup. Solo cuatro modos admitidos y custody completa permitirían archivo+recibo final; su ausencia aquí es intencional."
+      }
+    ],
+    "observedTimes": {
+      "commandGroup": "2026-11-16T22:00:46.6883210Z",
+      "sourceStepStart": "2026-11-16T22:00:46Z",
+      "sourceStepEnd": "2026-11-16T22:04:49Z",
+      "sourceStepElapsedMs": 243000,
+      "jobElapsedMs": 269000,
+      "synthetic": "2026-11-16T22:00:46.7630103Z",
+      "dependency": "2026-11-16T22:00:47.0352490Z",
+      "BASE": "2026-11-16T22:01:48.7964404Z",
+      "GREEN": "2026-11-16T22:04:48.9670630Z",
+      "diagnostic": "2026-11-16T22:04:48.9682889Z",
+      "custody": "2026-11-16T22:04:49.1749572Z",
+      "baseToGreenFrameMs": 180171,
+      "syntheticToCustodyMs": 242411
+    },
+    "effectiveLimit": "Se observa timeout de la captura del hijo GREEN, coherente con180s: BASEframe→GREENframe≈180.171s, incluido materialize/retorno/clasificación. El step Source dura243s y el job269s, ambos por debajo de330s total y420s job. Los registros y código sostienen el cap del hijo, no agotamiento del job7min o del total330s.",
+    "precision": "No hay timestamp exportado exacto de spawn GREEN ni valor runtime timeout; no convertir180.171s entre frames en cronometraje exacto de un caso. Tampoco hay evidencia de qué timer/caso120s se activó o no. La clasificación ETIMEDOUT proviene del productor sellado; no se inspeccionó el objeto result.error original.",
+    "causalLimits": "No identifica caso pendiente, primer fallo, última acción completada, IO concreto, teardown, workerd/Node o causa histórica503. Un SHA del stdout solo identifica bytes;24395B no permite reconstruir casos/resultados o comprobar su contenido."
+  },
+  "closure": {
+    "evidence": "e65c9b545c44c663f8e5ceb41794a5aab8e9e455",
+    "recorded": "Cierre probado por Root: padre/testedHead34ee2927, cerrado0893565/tree dfbf2ebf, solo WF retirado;3203originales+24source+2evidence=3229, Main/históricos/OWNclosed sin cambio,0runs en closehead.",
+    "scope": "Referencias y aritmética del recibo coinciden con Primary/outcome. No se repollaron refs, historia ni Actions, ni se reauditaron aquí todos3203 originales. Cleanup temp/CI closure no acredita drenaje global o runtime.",
+    "noReplay": true
+  },
+  "findings": [],
+  "pending": [
+    "GREEN no tiene join nativo admitido de casos/totales/witness. Falta ubicar su frontera interna concreta; el análisis read-only separado puede evaluar hipótesis, sin adjudicarla por frontierparser o hashes.",
+    "MUTANT20 y REG11 no tienen cobertura en esta ocurrencia. No pueden rellenarse con BASE, W1, controles sintéticos, static review o runs anteriores.",
+    "No existe conjunto4modos+8frames+custody6+artefacto real que admita la cualificación Source full. SourceQualified/Task1Pass continúan false; no promueve Task2.",
+    "La revisión estática58788 sigue válida para su alcance declarado; este resultado no la convierte en PASS nativo ni demuestra por sí solo un defecto de implementación. Cualquier nueva operación requeriría decisión separada de Root, no autorizada por este informe."
+  ],
+  "declinedToJudge": [
+    "Raw child TAP/3receiptDTOs ausentes: no se reconstruyen ni autentican desde digest.",
+    "Causa específica del timeout/503/Cloudflare o resultados de casos GREEN no exportados: desconocidos.",
+    "FCO/runtime/OwnerLive/consentimiento productivo/SDK retiro real/drain/namespaceEmpty/PCoff/Task2: fuera de evidencia."
+  ],
+  "performed": {
+    "SourceExecution": false,
+    "SourceImport": false,
+    "SourceEval": false,
+    "SourceParserExecution": false,
+    "SourceSyntax": false,
+    "SourceCompilation": false,
+    "SourceTests": false,
+    "SourceMutation": false,
+    "filesystem": false,
+    "dependencies": false,
+    "builds": false,
+    "refs": false,
+    "runs": false,
+    "ActionsRepoll": false,
+    "logsRepoll": false,
+    "artifactRepoll": false,
+    "artifactDownloads": false,
+    "Cloudflare": false,
+    "provider": false,
+    "userAction": false,
+    "implementationPatch": false,
+    "newTasksToOtherAgents": false
+  },
+  "rollback": "Omitir este informe inmutable; ninguna ref ni implementación fue alterada.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
