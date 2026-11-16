@@ -1,0 +1,225 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-fix2-test-first.v1",
+  "status": "TEXT_RED_ACTUAL_NATIVE_COVERING_PENDING",
+  "syntheticOnly": true,
+  "notSourceEvidence": true,
+  "before": {
+    "packet": {
+      "bytes": 9169,
+      "sha256": "0a52624fdd57d8f8a58df437ac1ae85da4caef653ab3e35360633870dda07d7a",
+      "gitBlob": "90b6023a7879d53c5d522ca944e442f32c315911",
+      "blob": "90b6023a7879d53c5d522ca944e442f32c315911",
+      "fullReadback": true
+    },
+    "transform": {
+      "bytes": 12054,
+      "sha256": "32746f6f4b98bf5310aadf359b871aee271727187d8c23fb56a967a9d7f8c646",
+      "gitBlob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+      "blob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+      "fullReadback": true
+    },
+    "units": {
+      "bytes": 21112,
+      "sha256": "674b96445e4d754a835453f71ad98d5da6a84425012d4108fb2a63a1d9a9337c",
+      "gitBlob": "dc0eb43c2ed663611f05a62ebf63daea1683b01d",
+      "blob": "dc0eb43c2ed663611f05a62ebf63daea1683b01d",
+      "fullReadback": true
+    },
+    "runner": {
+      "bytes": 16945,
+      "sha256": "47cacdf0ffe0eb4f5e57193be6d571a76eb544b6c4cd533e52eeda9ba3acb26c",
+      "gitBlob": "9926bf9d816f724a67298954e8425f25f589fedd",
+      "blob": "9926bf9d816f724a67298954e8425f25f589fedd",
+      "fullReadback": true
+    }
+  },
+  "actualRootSummary": {
+    "runId": "43901818639",
+    "runAttempt": 1,
+    "jobId": "133420132559",
+    "head": "eb9c875e7e465c69aece7026cd6434ff0e71e522",
+    "pass": 6,
+    "fail": 35,
+    "skip": 0,
+    "todo": 0,
+    "cancel": 0,
+    "reducer": null,
+    "evidence": "Root-supplied API/TAP/proof summary; durable primary pending. No logs/artifact refetch."
+  },
+  "cases": [
+    {
+      "id": "GLOBAL_CLOCK_SELECTOR_RED",
+      "file": {
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "fullReadback": true
+      },
+      "oldNeedle": "clock=createFiniteInitialLease(readFiniteOwnerRequestDeadline(originalLease),readFiniteOwnerRequestDeadline(originalLease),holders,fail);",
+      "oldMatches": 4,
+      "oldRequired": 1,
+      "textResult": "old exact guard rejects at4matches",
+      "newScope": {
+        "start": "export async function handlePrivateQaFiniteOwnerChoice(",
+        "end": "/** Fixed unmounted QA implementation.",
+        "startLine": 610,
+        "endLine": 812
+      },
+      "newMatches": 1,
+      "newRequired": 1
+    },
+    {
+      "id": "ACTIVATION_INDENT_RED",
+      "file": {
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "fullReadback": true
+      },
+      "oldNeedle": "await withChild(async(l,end)=>{\n      await recheckOwned();await engine.readPointer(baseline,l);",
+      "oldMatches": 0,
+      "newNeedle": "await withChild(async(l,end)=>{\n     await recheckOwned();await engine.readPointer(baseline,l);",
+      "newMatches": 2,
+      "newRequired": 1
+    },
+    {
+      "id": "OUTER_CALLBACK_END_INDENT_RED",
+      "file": {
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "fullReadback": true
+      },
+      "oldNeedle": "\n    const check=()=>",
+      "oldMatches": 0,
+      "newNeedle": "\n   const check=()=>",
+      "newMatches": 1,
+      "newRequired": 1
+    },
+    {
+      "id": "PREPARED_T2_START_INDENT_RED",
+      "file": {
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "fullReadback": true
+      },
+      "oldNeedle": "    const holder='holders();const at=Date.now()'",
+      "oldMatches": 0,
+      "newNeedle": "   const holder='holders();const at=Date.now()'",
+      "newMatches": 1,
+      "newRequired": 1
+    },
+    {
+      "id": "PREPARED_T2_END_INDENT_RED",
+      "file": {
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "fullReadback": true
+      },
+      "oldNeedle": "    sources.set('mcp-qa-finite-initial-lease.mjs',lease);",
+      "oldMatches": 0,
+      "newNeedle": "   sources.set('mcp-qa-finite-initial-lease.mjs',lease);",
+      "newMatches": 1,
+      "newRequired": 1
+    }
+  ],
+  "semanticControls": [
+    "Missing or duplicated exact handler delimiter must reject, never fall back to whole Source.",
+    "All4 original clock creation call texts remain; only selected handler gets original-root/outer diagnostic binding.",
+    "Original four-case business/Source13/QAguard/clock/promise/callback signatures remain unchanged.",
+    "Keep41native IDs and six originallyPASS controlgroups; no skip/todo/cancel/missing/fakepass.",
+    "No statement that global-clock selector was the first ACTUAL native error: earlier import/transform failures remain possible until observed."
+  ],
+  "diagnosticProposal": {
+    "marker": "AFW_C2_N3_TOOLING_DIAGNOSTIC ",
+    "fields": [
+      "schema",
+      "id",
+      "phase",
+      "code"
+    ],
+    "schema": "afw.c2-notices-n3.tooling-diagnostic.v1",
+    "phase": [
+      "fixture-read",
+      "ledger-import",
+      "lease-transform",
+      "lease-import",
+      "op-transform",
+      "root-import",
+      "phase-transform",
+      "root-setup",
+      "case-body",
+      "reversibles"
+    ],
+    "code": "CONTROL_INVALID",
+    "maxBytes": 256,
+    "maxPerCase": 1,
+    "rawForbidden": [
+      "message",
+      "stack",
+      "Error",
+      "thrownValue",
+      "path",
+      "clock",
+      "token",
+      "header"
+    ],
+    "maxTotal": 41,
+    "authority": "Root explicit message accepted marker/schema/id/phase/code,256UTF8B,line max1 percase41total; no proofshape/IDs change."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "diagnosticCases": [
+    {
+      "id": "DIAG_CANONICAL_MAX_KNOWN_FIELDS",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\"}\n",
+      "expected": true
+    },
+    {
+      "id": "DIAG_UNKNOWN_CASE",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_UNKNOWN\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\"}\n",
+      "expected": false
+    },
+    {
+      "id": "DIAG_UNKNOWN_PHASE",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"phase\":\"unknown\",\"code\":\"CONTROL_INVALID\"}\n",
+      "expected": false
+    },
+    {
+      "id": "DIAG_EXTRA_MESSAGE",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\",\"message\":\"SYNTHETIC_FORBIDDEN_FIELD\"}\n",
+      "expected": false
+    },
+    {
+      "id": "DIAG_NONCANONICAL_SPACING",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\n \"schema\": \"afw.c2-notices-n3.tooling-diagnostic.v1\",\n \"id\": \"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\n \"phase\": \"lease-transform\",\n \"code\": \"CONTROL_INVALID\"\n}\n",
+      "expected": false
+    },
+    {
+      "id": "DIAG_MISSING_LF",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\"}",
+      "expected": false
+    },
+    {
+      "id": "DIAG_OVER256",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\"}\n",
+      "expected": false
+    }
+  ]
+}

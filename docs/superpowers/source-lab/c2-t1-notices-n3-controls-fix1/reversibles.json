@@ -1,0 +1,46 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-fix1-reversibles.v1",
+  "round": 2,
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "beforePacket": "90b6023a7879d53c5d522ca944e442f32c315911",
+  "beforeIndex": "e232a70c0d78587546aa1e086d9b8a5352c40d52",
+  "fullDiff": {
+    "bytes": 161476,
+    "sha256": "5bf04a91c798bec06946f8e9d3c8bc311984be805a3d0b1456aee408d3089729",
+    "gitBlob": "0e66bd53899b86d06df1075b84e4f9f2d0d42285",
+    "blob": "0e66bd53899b86d06df1075b84e4f9f2d0d42285",
+    "fullReadback": true
+  },
+  "format": "Each complete old/new file array includes its final empty line; join LF reconstructs exact full bytes. No Source execution used for this DATA construction.",
+  "frozen": {
+    "ledger": {
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "gitBlob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "fullReadback": true
+    },
+    "reader": {
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "gitBlob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "fullReadback": true
+    },
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac"
+  },
+  "newNomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix1",
+    "message": "AFW-C2-N3-CONTROLS-FIX1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls-fix1.yml",
+    "job": "c2-notices-n3-controls-fix1",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix1/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix1/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "reversal": "Fresh lab fix1 tree derives only from BASE with original3203/modes plus29 named additions. Root verifies beforeabsence/exacthead/tree/hash/modes and may remove only new one-use WF at close, preserving DATA/receipts. Source writer has no refs/runs/close authority. For body comparison, fullDiff contains entire prior/new compiler/unit/runner/proofschema/WF bytes; old prefix/oldclosedbranch remain untouched.",
+  "business": "No product Source13 paths are written in Git. N3_PHASE transform only inserts diagnostic statements in the approved temporary QA compilation; all4 clocks remain, other3 handlers byte-identical; library/raw/prepared/stdin reverse tests remain actualRootnative pending.",
+  "SourceQualified": false,
+  "Task1Pass": false
+}

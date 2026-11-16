@@ -1,0 +1,93 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-fix1-contract.v1",
+  "round": 2,
+  "maxRounds": 5,
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "authority": {
+    "rootPrimary": "2c556a2e8083ce2d83a49029991724d73e817187",
+    "actualProof": "e995fb6ddf8517772c8a034e7d846645c098573d",
+    "closeProof": "aa866428ee2b5a65a9202121712d507740a7f335",
+    "oldPacket": "90b6023a7879d53c5d522ca944e442f32c315911",
+    "sourceSpec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "rootDiagnostics": "Root message accepts exact diagnostic schema/id41/phase/code,256UTF8B,max1percase/41total; no proof shape/IDs/caps widening.",
+    "brief": "605b379293ce78993ed509da0d3a840e48401c35"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix1",
+    "message": "AFW-C2-N3-CONTROLS-FIX1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls-fix1.yml",
+    "job": "c2-notices-n3-controls-fix1",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix1/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix1/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "scope": "Only Source N3.A QA transform exact bounds/anchors, unit extraction setup diagnostics, tooling runner/proofbinding/WF/docs metadata. Frozen ledger d9d3, reader83b62, all normal13/products/Nodebusinessworld/Task2 unchanged. C stopped/inactive.",
+  "fixes": [
+    "transformN3Phase applies handler-specific replacements ONLY inside unique PH handlePrivateQaFiniteOwnerChoice declaration through immediately following Fixed unmounted QA implementation boundary. The selected original clock text occurs1 there and4 globally; all4 original calls remain.",
+    "Activation callback target literal uses actual5space PH764 indent; no await/function/callback/guard/body removed.",
+    "Unit outer onAbort extraction ends before actual3space PH632 check line; no callback replacement.",
+    "REVERSIBLES selects original T2 lease preparation statements with actual3space S1084/89 indent; original statements unchanged.",
+    "Tests added to existing REVERSIBLES case: literal old/new counts, missing/duplicate function delimiters reject, full reversibles, diagnostic canonical/limits/unknownIDs/extra key/getter refusal."
+  ],
+  "diagnostic": {
+    "marker": "AFW_C2_N3_TOOLING_DIAGNOSTIC ",
+    "serialization": "JSON.stringify({schema,id,phase,code})+LF; exact field order schema/id/phase/code, no additional keys. Node22 TAP may add its standard '# ' prefix; effective frame remains bounded.",
+    "schema": "afw.c2-notices-n3.tooling-diagnostic.v1",
+    "id": "One of SAME41 native IDs",
+    "phase": [
+      "fixture-read",
+      "ledger-import",
+      "lease-transform",
+      "lease-import",
+      "op-transform",
+      "root-import",
+      "phase-transform",
+      "root-setup",
+      "case-body",
+      "reversibles"
+    ],
+    "code": "CONTROL_INVALID",
+    "maxBytes": 256,
+    "maxPerCase": 1,
+    "maxTotal": 41,
+    "setup": "Only original writer-created fixed SETUP Error entered in private WeakMap; phase uses own data enumerable descriptor whose value equals private brand. Unbranded thrown objects/proxies/primitive values are not inspected for properties and never resolve a phase. No getter/message/stack/value/path/clock/token/header.",
+    "other": "Non-setup failures use static case-body or reversibles based solely on the current fixed native caseID. No claim that absence of frame proves phase. Proof schema shape and IDs unchanged; no positive acceptance from diagnostic.",
+    "positiveAcceptance": "Root independently joins API/head/tree/attempt/job/native41/pass41/0fail-cancel-skip-todo and canonical artifact/proof. All tooling bodies returned is not independent proof."
+  },
+  "tests": {
+    "beforeVectors": {
+      "bytes": 8830,
+      "sha256": "af6a04728a9ebc12908fa52d275e0d290e3efcdac82dcd8f602aa38d1009b41a",
+      "gitBlob": "905dddca73b4a423bac3d6bf036ef0ca214605c4",
+      "blob": "905dddca73b4a423bac3d6bf036ef0ca214605c4",
+      "fullReadback": true
+    },
+    "actualBefore": {
+      "run": "43901818639",
+      "job": "133420132559",
+      "counts": {
+        "tests": 41,
+        "pass": 6,
+        "fail": 35,
+        "skip": 0,
+        "todo": 0,
+        "cancel": 0
+      },
+      "sourceBusinessExecuted": false,
+      "diagnosticToolingExecuted": true
+    },
+    "after": "PENDING_ROOT_CLOUD. Static contradictions are proven; first ACTUAL native error remains unknown."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
