@@ -1,0 +1,2068 @@
+{
+  "schema": "afw.own-full-c230.fixture-first-cases.v1",
+  "syntheticOnly": true,
+  "authority": [
+    "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+    "bca6278fc2f4889c6c01211a10832cec9871f1c9"
+  ],
+  "scope": "Literal deterministic edit plans over a shared complete fictional 2037 seed. Coherent materialization repairs receipt/log/ZIP/API digest before post-envelope input-level faults. No real historical outcome conversion.",
+  "fullInputCases": [
+    {
+      "id": "OWN_FULL_C230_GOOD_STORED",
+      "expect": "accept"
+    },
+    {
+      "id": "OWN_FULL_C230_GOOD_DEFLATE",
+      "expect": "accept",
+      "zip": {
+        "method": 8
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_GOOD_DD_SIGNED",
+      "expect": "accept",
+      "zip": {
+        "method": 8,
+        "dd": true
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_GOOD_DD_UNSIGNED",
+      "expect": "accept",
+      "zip": {
+        "method": 8,
+        "dd": true,
+        "ddSigned": false
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_GOOD_OTHER_MUTANT_FAIL",
+      "expect": "accept",
+      "framePatches": [
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "cases",
+            0,
+            "status"
+          ],
+          "fail"
+        ],
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "cases",
+            0,
+            "code"
+          ],
+          "TEST_FAILED"
+        ],
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "totals",
+            "pass"
+          ],
+          18
+        ],
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "totals",
+            "fail"
+          ],
+          2
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_GOOD_CUSTODY24",
+      "expect": "accept",
+      "framePatches": [
+        [
+          "set",
+          [
+            6,
+            "checkedProcesses"
+          ],
+          24
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_GOOD_ISOLATED_NONMONOTONE",
+      "expect": "accept",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "cases",
+            17,
+            "counters"
+          ],
+          {
+            "upload": 0,
+            "activation": 0,
+            "receipts": 0
+          }
+        ],
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "cases",
+            18,
+            "counters"
+          ],
+          {
+            "upload": 2,
+            "activation": 1,
+            "receipts": 0
+          }
+        ],
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "cases",
+            19,
+            "counters"
+          ],
+          {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 0
+          }
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_OLD_SOURCE_INDEX",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            0,
+            "context",
+            "proposalIndexHash"
+          ],
+          "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_OLD_S08_ADMISSION",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            8,
+            "sha256"
+          ],
+          "029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318"
+        ],
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            8,
+            "bytes"
+          ],
+          14244
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_OLD_S09_ADMISSION",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            9,
+            "sha256"
+          ],
+          "092a1d8dd44b99a16e522f09234a2b0f4bf62e6575ac99664be516fc7673920d"
+        ],
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            9,
+            "bytes"
+          ],
+          60636
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_SELECTION_0",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            2,
+            "observation",
+            "selectionHash"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_SELECTION_1",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "selectionHash"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_SELECTION_2",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "selectionHash"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_SELECTION_3",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            5,
+            "observation",
+            "selectionHash"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_SELECTION_RAW_FILE_HASH",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "selectionHash"
+          ],
+          "618e35bbeda39833ddf5c63ed16a41b44db85ab751edcb87ad5abb9ebcaae839"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_RED_OLD_WITNESS",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            2,
+            "observation",
+            "witness",
+            "fixtureBlob"
+          ],
+          "65933f3ebd753859a3b341f684b46d11f5c43a5a"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_RED_WRONG_ACTUAL",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            2,
+            "observation",
+            "witness",
+            "actual"
+          ],
+          200
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_RED_NO_WITNESS",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            2,
+            "observation",
+            "witness"
+          ],
+          null
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_GREEN_WITNESS",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "witness"
+          ],
+          {
+            "fake": true
+          }
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_GREEN_FAILURE",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "cases",
+            10,
+            "status"
+          ],
+          "fail"
+        ],
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "cases",
+            10,
+            "code"
+          ],
+          "TEST_FAILED"
+        ],
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "totals",
+            "pass"
+          ],
+          19
+        ],
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "totals",
+            "fail"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_MUTANT_NO_KILL",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "cases",
+            10,
+            "status"
+          ],
+          "pass"
+        ],
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "cases",
+            10,
+            "code"
+          ],
+          "OK"
+        ],
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "totals",
+            "pass"
+          ],
+          20
+        ],
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "totals",
+            "fail"
+          ],
+          0
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_GREEN_MISSING_CASE",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "splice",
+          [
+            3,
+            "observation",
+            "cases"
+          ],
+          [
+            19,
+            1
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_GREEN_DUPLICATE_ID",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "cases",
+            1,
+            "id"
+          ],
+          "C2T1_CONNECTION"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_GREEN_WRONG_PHASE",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "cases",
+            0,
+            "phase"
+          ],
+          "negative"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_GREEN_COUNTER_ALIAS",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "cases",
+            0,
+            "counters"
+          ],
+          {
+            "upload,activation": 1,
+            "receipts": 1
+          }
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_GREEN_EARLY_COUNTER2",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "cases",
+            2,
+            "counters"
+          ],
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 2
+          }
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ISOLATED_HIERARCHY",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            4,
+            "observation",
+            "cases",
+            19,
+            "counters"
+          ],
+          {
+            "upload": 0,
+            "activation": 0,
+            "receipts": 1
+          }
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TOTAL_WRONG",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            3,
+            "observation",
+            "totals",
+            "pass"
+          ],
+          19
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_REG_MISSING",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "splice",
+          [
+            5,
+            "observation",
+            "cases"
+          ],
+          [
+            10,
+            1
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_REG_DUPLICATE",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            5,
+            "observation",
+            "cases",
+            1,
+            "id"
+          ],
+          "C2T1_REG_01"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_CUSTODY3",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            6,
+            "checkedLaunches"
+          ],
+          3
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_CUSTODY5",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            6,
+            "checkedProcesses"
+          ],
+          5
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_CUSTODY25",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            6,
+            "checkedProcesses"
+          ],
+          25
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_CLEANUP_FALSE",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            6,
+            "ownTempRemoved"
+          ],
+          false
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_SOURCE_NONCLAIM_TRUE",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "nonclaims",
+            "PCoff"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMISSION_REORDERED_KEYS",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "reverseKeys",
+          [
+            7,
+            "admitted",
+            0
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_EMBEDDED_OBSERVATION_MISMATCH",
+      "expect": "reject",
+      "sync": false,
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "observations",
+            1,
+            "cases",
+            19,
+            "counters",
+            "upload"
+          ],
+          2
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_WIRE_MISSING",
+      "expect": "reject",
+      "wire": "missing"
+    },
+    {
+      "id": "OWN_FULL_C230_WIRE_DUPLICATE",
+      "expect": "reject",
+      "wire": "duplicate"
+    },
+    {
+      "id": "OWN_FULL_C230_WIRE_REORDER",
+      "expect": "reject",
+      "wire": "reorder"
+    },
+    {
+      "id": "OWN_FULL_C230_WIRE_NONCANONICAL",
+      "expect": "reject",
+      "wire": "noncanonical"
+    },
+    {
+      "id": "OWN_FULL_C230_WIRE_DUPLICATEKEY",
+      "expect": "reject",
+      "wire": "duplicateKey"
+    },
+    {
+      "id": "OWN_FULL_C230_WIRE_DOUBLEPHYSICAL",
+      "expect": "reject",
+      "wire": "doublePhysical"
+    },
+    {
+      "id": "OWN_FULL_C230_WIRE_DIAGNOSTIC",
+      "expect": "reject",
+      "wire": "diagnostic"
+    },
+    {
+      "id": "OWN_FULL_C230_WIRE_BODYCAP",
+      "expect": "reject",
+      "wire": "bodyCap"
+    },
+    {
+      "id": "OWN_FULL_C230_LOG_WRONGCOMMAND",
+      "expect": "reject",
+      "log": "wrongCommand"
+    },
+    {
+      "id": "OWN_FULL_C230_LOG_UNWRAPPED",
+      "expect": "reject",
+      "log": "unwrapped"
+    },
+    {
+      "id": "OWN_FULL_C230_LOG_OUTSIDE",
+      "expect": "reject",
+      "log": "outside"
+    },
+    {
+      "id": "OWN_FULL_C230_LOG_NAN",
+      "expect": "reject",
+      "log": "nan"
+    },
+    {
+      "id": "OWN_FULL_C230_LOG_BADCALENDAR",
+      "expect": "reject",
+      "log": "badCalendar"
+    },
+    {
+      "id": "OWN_FULL_C230_LOG_HIDDEN",
+      "expect": "reject",
+      "log": "hidden"
+    },
+    {
+      "id": "OWN_FULL_C230_LOG_SECONDCOMMAND",
+      "expect": "reject",
+      "log": "secondCommand"
+    },
+    {
+      "id": "OWN_FULL_C230_LOG_NOFINALLF",
+      "expect": "reject",
+      "log": "noFinalLF"
+    },
+    {
+      "id": "OWN_FULL_C230_PAYLOAD_SPACE",
+      "expect": "reject",
+      "payload": "space"
+    },
+    {
+      "id": "OWN_FULL_C230_PAYLOAD_DIFFERENT",
+      "expect": "reject",
+      "payload": "different"
+    },
+    {
+      "id": "OWN_FULL_C230_RUN_ID",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "run",
+            "id"
+          ],
+          990230009
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_RUN_ATTEMPT",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "run",
+            "run_attempt"
+          ],
+          2
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_RUN_EVENT",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "run",
+            "event"
+          ],
+          "workflow_dispatch"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_RUN_BRANCH",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "run",
+            "head_branch"
+          ],
+          "lab/other"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_RUN_REPO",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "run",
+            "repository",
+            "full_name"
+          ],
+          "other/repo"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_RUN_TIME_NAN",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "run",
+            "created_at"
+          ],
+          "bad"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_RUN_CALENDAR",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "run",
+            "created_at"
+          ],
+          "2037-02-30T03:03:59.000Z"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_JOB_ID",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "jobs",
+            "jobs",
+            0,
+            "id"
+          ],
+          990230009
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_JOB_TIME",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "jobs",
+            "jobs",
+            0,
+            "completed_at"
+          ],
+          "2037-01-02T03:03:58.000Z"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_COMMAND_TIME_NAN",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "jobs",
+            "jobs",
+            0,
+            "steps",
+            3,
+            "started_at"
+          ],
+          "bad"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_SKIP_STEP",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "jobs",
+            "jobs",
+            0,
+            "steps",
+            3,
+            "conclusion"
+          ],
+          "skipped"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_STEP_ALIAS",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "jobs",
+            "jobs",
+            0,
+            "steps",
+            3,
+            "name"
+          ],
+          "Qualify isolated Source data"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_COMMIT_TREE",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "commit",
+            "tree",
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_COMMIT_PARENT",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "commit",
+            "parents",
+            0,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_COMMIT_MESSAGE",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "commit",
+            "message"
+          ],
+          "other"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TRANSPORT_JOB",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "transport",
+            "jobId"
+          ],
+          990230009
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ARTIFACT_DIGEST",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "artifact",
+            "listing",
+            "artifacts",
+            0,
+            "digest"
+          ],
+          "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ARTIFACT_SIZE",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "artifact",
+            "listing",
+            "artifacts",
+            0,
+            "size_in_bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ARTIFACT_COUNT",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "artifact",
+            "listing",
+            "total_count"
+          ],
+          2
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ARTIFACT_EXPIRED",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "artifact",
+            "listing",
+            "artifacts",
+            0,
+            "expired"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ARTIFACT_W1",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "artifact",
+            "listing",
+            "artifacts",
+            0,
+            "name"
+          ],
+          "afw-c2-notices-n3-firstlimit-w1"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_SHA",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_TRUNCATED",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "truncated"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_MISSING",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "splice",
+          [
+            "tree",
+            "tree"
+          ],
+          [
+            24,
+            1
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_DUPLICATE",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            1,
+            "path"
+          ],
+          "docs/superpowers/source-lab/c2-t1/source-index.json"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_OLD_S08",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            9,
+            "sha"
+          ],
+          "65933f3ebd753859a3b341f684b46d11f5c43a5a"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_00",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            0,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_01",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            1,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_02",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            2,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_03",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            3,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_04",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            4,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_05",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            5,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_06",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            6,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_07",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            7,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_08",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            8,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_09",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            9,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_10",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            10,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_11",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            11,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_12",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            12,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_13",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            13,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_14",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            14,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_15",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            15,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_16",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            16,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_17",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            17,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_18",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            18,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_19",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            19,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_20",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            20,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_21",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            21,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_22",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            22,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_23",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            23,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_EDGE_24",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            24,
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_MODE",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            0,
+            "mode"
+          ],
+          "100755"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_TYPE",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            0,
+            "type"
+          ],
+          "tree"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE_SIZE",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "tree",
+            "tree",
+            0,
+            "size"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_00",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            0,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_01",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            1,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_02",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            2,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_03",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            3,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_04",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            4,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_05",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            5,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_06",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            6,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_07",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            7,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_08",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            8,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_09",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            9,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_10",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            10,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_11",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            11,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ADMITTED_ROW_12",
+      "expect": "reject",
+      "framePatches": [
+        [
+          "set",
+          [
+            7,
+            "admitted",
+            12,
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_TAIL",
+      "expect": "reject",
+      "zip": {
+        "method": 8,
+        "tail": true
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_BAD_CRC",
+      "expect": "reject",
+      "zip": {
+        "corrupt": "crc"
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_BAD_DESCRIPTOR",
+      "expect": "reject",
+      "zip": {
+        "method": 8,
+        "dd": true,
+        "corrupt": "descriptor"
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_LOCAL_NAME",
+      "expect": "reject",
+      "zip": {
+        "corrupt": "localName"
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_PATH",
+      "expect": "reject",
+      "zip": {
+        "name": "../c2-source-lab-fixture-fix1-receipt.json"
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_BOUNDS",
+      "expect": "reject",
+      "zip": {
+        "corrupt": "bounds"
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_EXTRA_ENTRIES",
+      "expect": "reject",
+      "zip": {
+        "corrupt": "extraEntries"
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_TRAILING",
+      "expect": "reject",
+      "zip": {
+        "corrupt": "trailing"
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_TRUNCATE",
+      "expect": "reject",
+      "zip": {
+        "corrupt": "truncate"
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_ENCRYPTED",
+      "expect": "reject",
+      "zip": {
+        "corrupt": "flags"
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_OLD_EXPECTED_JOB",
+      "expect": "reject",
+      "expectedPatches": [
+        [
+          "set",
+          [
+            "job"
+          ],
+          "c2-source-lab-v2-fix1"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_W1_EXPECTED_JOB",
+      "expect": "reject",
+      "expectedPatches": [
+        [
+          "set",
+          [
+            "job"
+          ],
+          "c2-notices-n3-firstlimit-w1"
+        ]
+      ]
+    },
+    {
+      "id": "OWN_FULL_C230_TREE8192_VALID",
+      "expect": "accept",
+      "treeCount": 8192
+    },
+    {
+      "id": "OWN_FULL_C230_TREE8193_REJECT",
+      "expect": "reject",
+      "treeCount": 8193
+    },
+    {
+      "id": "OWN_FULL_C230_TREE4MIB_REJECT",
+      "expect": "reject",
+      "treePadding": 4194304
+    },
+    {
+      "id": "OWN_FULL_C230_LOG4MIB_REJECT",
+      "expect": "reject",
+      "logPadding": 4194304
+    },
+    {
+      "id": "OWN_FULL_C230_JOB_OVER7MIN",
+      "expect": "reject",
+      "inputPatches": [
+        [
+          "set",
+          [
+            "jobs",
+            "jobs",
+            0,
+            "completed_at"
+          ],
+          "2037-01-02T03:12:01.000Z"
+        ],
+        [
+          "set",
+          [
+            "run",
+            "updated_at"
+          ],
+          "2037-01-02T03:12:02.000Z"
+        ]
+      ]
+    }
+  ],
+  "zipUnitCases": [
+    {
+      "id": "OWN_FULL_C230_ZIP_MAX24577_STORED",
+      "expect": "accept",
+      "bytes": 24577,
+      "zip": {
+        "method": 0
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_MAX24577_DEFLATE",
+      "expect": "accept",
+      "bytes": 24577,
+      "zip": {
+        "method": 8
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_MAX24577_DD",
+      "expect": "accept",
+      "bytes": 24577,
+      "zip": {
+        "method": 8,
+        "dd": true
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_OVER24578",
+      "expect": "reject",
+      "bytes": 24578,
+      "zip": {
+        "method": 0
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_UNIT_FULL_CONSUMPTION",
+      "expect": "reject",
+      "bytes": 100,
+      "zip": {
+        "method": 8,
+        "tail": true
+      }
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_OVER1MIB",
+      "expect": "reject",
+      "archiveBytes": 1048577
+    }
+  ],
+  "priorCasePlans": "a024b9a073d76439d8798a65e74093f87fc845b8",
+  "addendum": "One extra literal checks preserved7min actual job bound. Initial new reader wrongly accepted longer job; sealed before narrow guard. Native count370, not executed."
+}

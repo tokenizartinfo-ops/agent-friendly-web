@@ -1,0 +1,48 @@
+{
+  "schema": "afw.own-full-c230.zip-fix1.native-selection.v1",
+  "authority": "fc6287a46a8acefbb5ba9892214e351d52423e7f",
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3-zip-fix1",
+    "message": "AFW-C2-FULL-TASK1-C230-OWN-V3-ZIP-FIX1-ONEUSE-20261116",
+    "job": "c2-full-task1-c230-own-v3-zip-fix1",
+    "workflow": ".github/workflows/afw-c2-full-task1-c230-own-v3-zip-fix1.yml",
+    "prefix": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/run-controls.mjs",
+    "artifact": "afw-c2-full-task1-c230-own-v3-zip-fix1-proof",
+    "artifactPath": "output/c2-full-task1-c230-own-v3-zip-fix1-proof.json",
+    "fileName": "c2-full-task1-c230-own-v3-zip-fix1-proof.json",
+    "node": "22.23.4",
+    "runner": "ubuntu-24.04",
+    "jobTimeoutMinutes": 3,
+    "testTimeoutMs": 10000,
+    "contents": "read",
+    "attempt": 1,
+    "retentionDays": 7,
+    "activationReleased": false
+  },
+  "expected": 419,
+  "groups": {
+    "original370": 370,
+    "newZip49": 49,
+    "positives13": 13,
+    "negatives36": 36
+  },
+  "idsHash": "27801c804733daa829c629af6acf41fdcfa44f441f42b05a995581b0a5fdeb8d",
+  "originalPrefixHash": "5737f76ef490aa43eff78c4ec146c398c15ce3bff6da684906324a301702fa24",
+  "expectedIdsFile": "expected-ids.json",
+  "originalIdsFile": "baseline370-expected-ids.json",
+  "sourceExpectedContext": null,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

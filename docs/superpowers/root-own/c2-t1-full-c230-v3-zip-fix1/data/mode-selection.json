@@ -1,0 +1,231 @@
+{
+  "schema": "afw.c2-source-selection.v2",
+  "modes": [
+    {
+      "mode": "baseline-red",
+      "node": "v22.23.4",
+      "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "fileBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "fixture": "test/fixtures/finite-coupled-native.mjs",
+      "fixtureBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "pattern": "^(C2T1_CONNECTION|C2T1_OAUTH|C2T1_NOTICES)$",
+      "selected": [
+        {
+          "id": "C2T1_CONNECTION",
+          "phase": "connection"
+        },
+        {
+          "id": "C2T1_OAUTH",
+          "phase": "oauth"
+        },
+        {
+          "id": "C2T1_NOTICES",
+          "phase": "notices"
+        }
+      ],
+      "excluded": [
+        "C2T1_HANDLE",
+        "C2T1_PROJECTREF",
+        "C2T1_SUBJECT",
+        "C2T1_PHASE_RENAME",
+        "C2T1_SOURCE_BYTES",
+        "C2T1_APPROVAL",
+        "C2T1_PREDECESSOR",
+        "C2T1_GRANT_REVOKED",
+        "C2T1_EXTRA_KEY",
+        "C2T1_MONITOR_COOKIE",
+        "C2T1_MONITOR",
+        "C2T1_SCOPE_MISSING",
+        "C2T1_FINITE",
+        "C2T1_SELECTION",
+        "C2T1_LOST_ACK_DUPLICATE",
+        "C2T1_UNRESOLVED_WRITER",
+        "C2T1_OWN_PROMISE"
+      ]
+    },
+    {
+      "mode": "proposal-green",
+      "node": "v22.23.4",
+      "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "fileBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "fixture": "test/fixtures/finite-coupled-native.mjs",
+      "fixtureBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "pattern": null,
+      "selected": [
+        {
+          "id": "C2T1_CONNECTION",
+          "phase": "connection"
+        },
+        {
+          "id": "C2T1_OAUTH",
+          "phase": "oauth"
+        },
+        {
+          "id": "C2T1_HANDLE",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_PROJECTREF",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_SUBJECT",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_PHASE_RENAME",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_SOURCE_BYTES",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_APPROVAL",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_PREDECESSOR",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_GRANT_REVOKED",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_EXTRA_KEY",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_NOTICES",
+          "phase": "notices"
+        },
+        {
+          "id": "C2T1_MONITOR_COOKIE",
+          "phase": "monitor"
+        },
+        {
+          "id": "C2T1_MONITOR",
+          "phase": "monitor"
+        },
+        {
+          "id": "C2T1_SCOPE_MISSING",
+          "phase": "scope"
+        },
+        {
+          "id": "C2T1_FINITE",
+          "phase": "finite"
+        },
+        {
+          "id": "C2T1_SELECTION",
+          "phase": "selection"
+        },
+        {
+          "id": "C2T1_LOST_ACK_DUPLICATE",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_UNRESOLVED_WRITER",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_OWN_PROMISE",
+          "phase": "negative"
+        }
+      ],
+      "excluded": []
+    },
+    {
+      "mode": "mutant-prefix",
+      "node": "v22.23.4",
+      "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "fileBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "fixture": "test/fixtures/finite-coupled-native.mjs",
+      "fixtureBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "pattern": null,
+      "selected": [
+        {
+          "id": "C2T1_CONNECTION",
+          "phase": "connection"
+        },
+        {
+          "id": "C2T1_OAUTH",
+          "phase": "oauth"
+        },
+        {
+          "id": "C2T1_HANDLE",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_PROJECTREF",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_SUBJECT",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_PHASE_RENAME",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_SOURCE_BYTES",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_APPROVAL",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_PREDECESSOR",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_GRANT_REVOKED",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_EXTRA_KEY",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_NOTICES",
+          "phase": "notices"
+        },
+        {
+          "id": "C2T1_MONITOR_COOKIE",
+          "phase": "monitor"
+        },
+        {
+          "id": "C2T1_MONITOR",
+          "phase": "monitor"
+        },
+        {
+          "id": "C2T1_SCOPE_MISSING",
+          "phase": "scope"
+        },
+        {
+          "id": "C2T1_FINITE",
+          "phase": "finite"
+        },
+        {
+          "id": "C2T1_SELECTION",
+          "phase": "selection"
+        },
+        {
+          "id": "C2T1_LOST_ACK_DUPLICATE",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_UNRESOLVED_WRITER",
+          "phase": "negative"
+        },
+        {
+          "id": "C2T1_OWN_PROMISE",
+          "phase": "negative"
+        }
+      ],
+      "excluded": []
+    }
+  ]
+}

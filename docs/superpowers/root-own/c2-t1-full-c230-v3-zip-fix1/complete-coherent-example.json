@@ -1,0 +1,325 @@
+{
+  "syntheticOnly": true,
+  "expected": "accept",
+  "input": {
+    "run": {
+      "id": 990230001,
+      "run_attempt": 1,
+      "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "head_branch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+      "path": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      },
+      "head_repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      },
+      "created_at": "2037-01-02T03:03:59.000Z",
+      "run_started_at": "2037-01-02T03:04:00.000Z",
+      "updated_at": "2037-01-02T03:05:00.000Z"
+    },
+    "jobs": {
+      "total_count": 1,
+      "jobs": [
+        {
+          "id": 990230002,
+          "run_id": 990230001,
+          "run_attempt": 1,
+          "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "name": "c2-source-lab-fixture-fix1",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2037-01-02T03:04:00.000Z",
+          "completed_at": "2037-01-02T03:04:50.000Z",
+          "steps": [
+            {
+              "number": 2,
+              "name": "Read the exact one-use lab head",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:04:00.000Z",
+              "completed_at": "2037-01-02T03:04:05.000Z"
+            },
+            {
+              "number": 3,
+              "name": "Use the fixed Node runtime",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:04:05.000Z",
+              "completed_at": "2037-01-02T03:04:10.000Z"
+            },
+            {
+              "number": 4,
+              "name": "Install only the existing locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:04:10.000Z",
+              "completed_at": "2037-01-02T03:04:15.000Z"
+            },
+            {
+              "number": 5,
+              "name": "Qualify isolated compiled Source data",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:04:30.000Z",
+              "completed_at": "2037-01-02T03:04:40.000Z"
+            },
+            {
+              "number": 6,
+              "name": "Preserve only the bounded sanitized Source receipt",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:04:40.000Z",
+              "completed_at": "2037-01-02T03:04:45.000Z"
+            }
+          ]
+        }
+      ]
+    },
+    "commit": {
+      "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "tree": {
+        "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIXTURE-FIX1-ONEUSE-20261116",
+      "parents": [
+        {
+          "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        }
+      ]
+    },
+    "tree": {
+      "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "truncated": false,
+      "tree": [
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+          "size": 11467
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+          "size": 148547
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+          "size": 45576
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+          "size": 2497
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+          "size": 2810
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+          "size": 4153
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a177d50ff73f8fad1d60827ef904a204126796fb",
+          "size": 101380
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+          "size": 22501
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+          "size": 2785
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+          "size": 18667
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+          "size": 61073
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+          "size": 88519
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+          "size": 58727
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+          "size": 6030
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/regression-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+          "size": 3364
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+          "size": 1208
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+          "size": 417
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/mode-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+          "size": 5460
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/tap-protocol.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+          "size": 10291
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-vectors.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+          "size": 14802
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-controls.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "bc33365eaf302d2296a759202a822af4a443f143",
+          "size": 3313
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1193e74ec0b0d60fb5c63d3a0340578e884dfb71",
+          "size": 23205
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/protocol-contract.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+          "size": 15709
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/frame-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+          "size": 13983
+        },
+        {
+          "path": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+          "size": 1641
+        }
+      ]
+    },
+    "transport": {
+      "runId": 990230001,
+      "jobId": 990230002,
+      "rawLog": "2037-01-02T03:04:30.0000000Z ##[group]Run node docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs\n2037-01-02T03:04:30.0000000Z node docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs\n2037-01-02T03:04:30.0000000Z ##[endgroup]\n2037-01-02T03:04:31.0000000Z AFW_C2_SOURCE_SYNTHETIC_V2_FIX1 {\"schema\":\"afw.c2-source-synthetic.v2\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"990230001\",\"runAttempt\":1,\"job\":\"c2-source-lab-fixture-fix1\",\"node\":\"v22.23.4\"},\"vectorsHash\":\"c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402\",\"accepted\":3,\"rejected\":35}\n2037-01-02T03:04:32.0000000Z AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n2037-01-02T03:04:33.0000000Z AFW_C2_SOURCE_MODE_V2 {\"schema\":\"afw.c2-source-mode.v2\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"990230001\",\"runAttempt\":1,\"job\":\"c2-source-lab-fixture-fix1\",\"node\":\"v22.23.4\"},\"observation\":{\"mode\":\"baseline-red\",\"selectionHash\":\"24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":1,\"totals\":{\"plan\":3,\"tests\":3,\"suites\":0,\"pass\":2,\"fail\":1,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"fail\",\"phase\":\"notices\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"}],\"witness\":{\"caseId\":\"C2T1_NOTICES\",\"phase\":\"notices\",\"failureType\":\"testCodeFailure\",\"code\":\"ERR_ASSERTION\",\"operator\":\"strictEqual\",\"definitionFile\":\"S07\",\"definitionBlob\":\"d4db10ee8a091434835a9ac28e0d607a5e9efd21\",\"definitionLine\":6,\"actionLine\":36,\"fixtureFile\":\"S08\",\"fixtureBlob\":\"de8a51e5a6023342b1b3aeccadf66e90611d268f\",\"function\":\"choose\",\"line\":18,\"method\":\"GET\",\"route\":\"/connections/finite-prepare\",\"boundary\":\"before-form-parse-and-post\",\"actual\":503,\"expected\":200}}}\n2037-01-02T03:04:34.0000000Z AFW_C2_SOURCE_MODE_V2 {\"schema\":\"afw.c2-source-mode.v2\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"990230001\",\"runAttempt\":1,\"job\":\"c2-source-lab-fixture-fix1\",\"node\":\"v22.23.4\"},\"observation\":{\"mode\":\"proposal-green\",\"selectionHash\":\"0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":0,\"totals\":{\"plan\":20,\"tests\":20,\"suites\":0,\"pass\":20,\"fail\":0,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_UNRESOLVED_WRITER\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_OWN_PROMISE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"}],\"witness\":null}}\n2037-01-02T03:04:35.0000000Z AFW_C2_SOURCE_MODE_V2 {\"schema\":\"afw.c2-source-mode.v2\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"990230001\",\"runAttempt\":1,\"job\":\"c2-source-lab-fixture-fix1\",\"node\":\"v22.23.4\"},\"observation\":{\"mode\":\"mutant-prefix\",\"selectionHash\":\"46239e665ffe9154fbfb81725c81ac05c0228129f49db466b061397114f970a4\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":1,\"totals\":{\"plan\":20,\"tests\":20,\"suites\":0,\"pass\":19,\"fail\":1,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"fail\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_UNRESOLVED_WRITER\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_OWN_PROMISE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"}],\"witness\":null}}\n2037-01-02T03:04:36.0000000Z AFW_C2_SOURCE_MODE_V2 {\"schema\":\"afw.c2-source-mode.v2\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"990230001\",\"runAttempt\":1,\"job\":\"c2-source-lab-fixture-fix1\",\"node\":\"v22.23.4\"},\"observation\":{\"mode\":\"regressions\",\"selectionHash\":\"e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":0,\"totals\":{\"plan\":11,\"tests\":11,\"suites\":0,\"pass\":11,\"fail\":0,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_REG_01\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_02\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_03\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_04\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_05\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_06\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_07\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_08\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_09\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_10\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_11\",\"status\":\"pass\",\"code\":\"OK\"}],\"witness\":null}}\n2037-01-02T03:04:37.0000000Z AFW_C2_SOURCE_CUSTODY_V2 {\"schema\":\"afw.c2-source-custody.v2\",\"context\":{\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"runId\":\"990230001\",\"runAttempt\":1,\"job\":\"c2-source-lab-fixture-fix1\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":6,\"checkedProcesses\":6,\"uidGidGroupsLoopbackMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true}\n2037-01-02T03:04:38.0000000Z AFW_C2_SOURCE_RECEIPT_V2 {\"schema\":\"afw.c2-source-lab-receipt.v2\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"990230001\",\"runAttempt\":1,\"job\":\"c2-source-lab-fixture-fix1\",\"node\":\"v22.23.4\"},\"admitted\":[{\"path\":\"lib/mcp-qa-finite-owner-phase-context.mjs\",\"sha256\":\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"bytes\":148547},{\"path\":\"lib/mcp-qa-finite-owner-preparation.mjs\",\"sha256\":\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"bytes\":45576},{\"path\":\"lib/mcp-qa-finite-owner-native-receiver.mjs\",\"sha256\":\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"bytes\":2497},{\"path\":\"worker/mcp-own/finite.mjs\",\"sha256\":\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"bytes\":2810},{\"path\":\"lib/mcp-qa-finite-owner-cleanup-scope.mjs\",\"sha256\":\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"bytes\":4153},{\"path\":\"lib/mcp-qa-finite-owner-cleanup.mjs\",\"sha256\":\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"bytes\":101380},{\"path\":\"lib/mcp-qa-finite-initial-cleanup.mjs\",\"sha256\":\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"bytes\":22501},{\"path\":\"test/mcp-qa-finite-owner-three-stage-native.test.mjs\",\"sha256\":\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"bytes\":2785},{\"path\":\"test/fixtures/finite-coupled-native.mjs\",\"sha256\":\"ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e\",\"bytes\":18667},{\"path\":\"test/fixtures/finite-first-connection-publication.mjs\",\"sha256\":\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"bytes\":61073},{\"path\":\"test/fixtures/finite-initial-entry-world.mjs\",\"sha256\":\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"bytes\":88519},{\"path\":\"test/mcp-qa-finite-first-connection-publication-native.test.mjs\",\"sha256\":\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"bytes\":58727},{\"path\":\"lib/mcp-qa-finite-owner-notice-get-forward.mjs\",\"sha256\":\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\",\"bytes\":6030}],\"observations\":[{\"mode\":\"baseline-red\",\"selectionHash\":\"24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":1,\"totals\":{\"plan\":3,\"tests\":3,\"suites\":0,\"pass\":2,\"fail\":1,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"fail\",\"phase\":\"notices\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"}],\"witness\":{\"caseId\":\"C2T1_NOTICES\",\"phase\":\"notices\",\"failureType\":\"testCodeFailure\",\"code\":\"ERR_ASSERTION\",\"operator\":\"strictEqual\",\"definitionFile\":\"S07\",\"definitionBlob\":\"d4db10ee8a091434835a9ac28e0d607a5e9efd21\",\"definitionLine\":6,\"actionLine\":36,\"fixtureFile\":\"S08\",\"fixtureBlob\":\"de8a51e5a6023342b1b3aeccadf66e90611d268f\",\"function\":\"choose\",\"line\":18,\"method\":\"GET\",\"route\":\"/connections/finite-prepare\",\"boundary\":\"before-form-parse-and-post\",\"actual\":503,\"expected\":200}},{\"mode\":\"proposal-green\",\"selectionHash\":\"0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":0,\"totals\":{\"plan\":20,\"tests\":20,\"suites\":0,\"pass\":20,\"fail\":0,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_UNRESOLVED_WRITER\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_OWN_PROMISE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"}],\"witness\":null},{\"mode\":\"mutant-prefix\",\"selectionHash\":\"46239e665ffe9154fbfb81725c81ac05c0228129f49db466b061397114f970a4\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":1,\"totals\":{\"plan\":20,\"tests\":20,\"suites\":0,\"pass\":19,\"fail\":1,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"fail\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_UNRESOLVED_WRITER\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_OWN_PROMISE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"}],\"witness\":null},{\"mode\":\"regressions\",\"selectionHash\":\"e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":0,\"totals\":{\"plan\":11,\"tests\":11,\"suites\":0,\"pass\":11,\"fail\":0,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_REG_01\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_02\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_03\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_04\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_05\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_06\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_07\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_08\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_09\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_10\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_11\",\"status\":\"pass\",\"code\":\"OK\"}],\"witness\":null}],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    "artifact": {
+      "runId": 990230001,
+      "jobId": 990230002,
+      "listing": {
+        "total_count": 1,
+        "artifacts": [
+          {
+            "id": 990230003,
+            "name": "afw-c2-owner-stages-source-t1-fixture-fix1-receipt",
+            "expired": false,
+            "size_in_bytes": 10236,
+            "workflow_run": {
+              "id": 990230001,
+              "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "head_branch": "lab/afw-c2-source-20261116-t1-fixture-fix1"
+            },
+            "digest": "sha256:6f8141db0210a703a76f1b650eed1fe54c102878cf3d254eadad2de9d9ef034e"
+          }
+        ]
+      },
+      "artifactId": 990230003,
+      "fileName": "c2-source-lab-fixture-fix1-receipt.json",
+      "archiveBase64": "UEsDBBQAAAAAAAAAAACb12irTCcAAEwnAAAnAAAAYzItc291cmNlLWxhYi1maXh0dXJlLWZpeDEtcmVjZWlwdC5qc29ueyJzY2hlbWEiOiJhZncuYzItc291cmNlLWxhYi1yZWNlaXB0LnYyIiwiY29udGV4dCI6eyJyZXBvc2l0b3J5IjoidG9rZW5pemFydGluZm8tb3BzL2FnZW50LWZyaWVuZGx5LXdlYiIsImJhc2VsaW5lU291cmNlIjoiNjc5MWNlMWJhYjkzNzJlMjA2ZDNjN2I0MmIzZTEzOTRkYzZlMGM2OCIsImJhc2VsaW5lVHJlZSI6IjYyZTc4OTI2NjM1ZDZiNzRmMjg4ZDZjMGQ2OWUwZjI1MTYzMDY5ODkiLCJwcm9wb3NhbEluZGV4SGFzaCI6IjA2ODFjYWRjNzc0ZmNkZGY3YTAwOWU4NmUyNGIyMmZhODc5ODU3YWYxZTkwMGY2MTQzZDIzYzJkN2VhYTliZTciLCJoZWFkIjoiYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYSIsInRyZWUiOiJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiIiwicnVuSWQiOiI5OTAyMzAwMDEiLCJydW5BdHRlbXB0IjoxLCJqb2IiOiJjMi1zb3VyY2UtbGFiLWZpeHR1cmUtZml4MSIsIm5vZGUiOiJ2MjIuMjMuNCJ9LCJhZG1pdHRlZCI6W3sicGF0aCI6ImxpYi9tY3AtcWEtZmluaXRlLW93bmVyLXBoYXNlLWNvbnRleHQubWpzIiwic2hhMjU2IjoiMDJlZTk4ZGE5MjM5ZGQyODk0OGRiNjY0MTI3YzU3OWVmNjk5NDFlNWU5YzgxNTFiMTU2ODUyNzUwOTgxNTIxMCIsImJ5dGVzIjoxNDg1NDd9LHsicGF0aCI6ImxpYi9tY3AtcWEtZmluaXRlLW93bmVyLXByZXBhcmF0aW9uLm1qcyIsInNoYTI1NiI6ImZjMjI3YjU5YjNiNTgxNWVhZGZmYmQ1ODJmMDE4Y2JkM2U2NGNlYWE1OTZmMDdiYzIxYTIwMzFmN2NkMWQ2ZTkiLCJieXRlcyI6NDU1NzZ9LHsicGF0aCI6ImxpYi9tY3AtcWEtZmluaXRlLW93bmVyLW5hdGl2ZS1yZWNlaXZlci5tanMiLCJzaGEyNTYiOiI2NDQ5NzMyMjFkNWRiYzNlOWJkYjg3ODg4ODQwYzI4YzM3MGYzYjFlZDZkZmYyYzg5NTM0YzRkZTBlODY0MmY4IiwiYnl0ZXMiOjI0OTd9LHsicGF0aCI6Indvcmtlci9tY3Atb3duL2Zpbml0ZS5tanMiLCJzaGEyNTYiOiI3MDU5YjljY2MxOGZjY2Q0ZGE4ZGZmNDJlOWMwNGM0Yzc1NDdhZmVmOTk3Njg1MmNiZWZiZWVmNTE3NTUwNGY2IiwiYnl0ZXMiOjI4MTB9LHsicGF0aCI6ImxpYi9tY3AtcWEtZmluaXRlLW93bmVyLWNsZWFudXAtc2NvcGUubWpzIiwic2hhMjU2IjoiNTRlMjI2MWFhYzJiYmUzZDI0NDZkN2ZhNTkxMWYyYjkyMWI0ZDhkYzYxODk0M2FiZDVkMzRlM2YxMTI1Y2E0YiIsImJ5dGVzIjo0MTUzfSx7InBhdGgiOiJsaWIvbWNwLXFhLWZpbml0ZS1vd25lci1jbGVhbnVwLm1qcyIsInNoYTI1NiI6IjU5MTE2OThmZThkZTcyNDQxZDEyNTQxNGY4NzlkNzI1YTY3N2RiYzI2ZjNjMWE0MGNkY2QyOTk5YjZkNGI0MGIiLCJieXRlcyI6MTAxMzgwfSx7InBhdGgiOiJsaWIvbWNwLXFhLWZpbml0ZS1pbml0aWFsLWNsZWFudXAubWpzIiwic2hhMjU2IjoiZjA4YjkxNGExZTY2OGFkMzZiNDg0OGQwYjYxY2JlOGI0NGRmYjNlNTRiYzc0NzQ4MDU2NGE4YWFjYzU4N2RmNCIsImJ5dGVzIjoyMjUwMX0seyJwYXRoIjoidGVzdC9tY3AtcWEtZmluaXRlLW93bmVyLXRocmVlLXN0YWdlLW5hdGl2ZS50ZXN0Lm1qcyIsInNoYTI1NiI6IjY3OGZjM2M1MzhmMmZjMjllNzBjNDE0NzU3OTRmNThlNWQ2OTBhN2M3YWFlNjliMWI5N2FlOTMwOWE3MjhiNmIiLCJieXRlcyI6Mjc4NX0seyJwYXRoIjoidGVzdC9maXh0dXJlcy9maW5pdGUtY291cGxlZC1uYXRpdmUubWpzIiwic2hhMjU2IjoiYWM3NGJlMTA2ZWMzNmEwZGQwOTNjZmI1NDJiYTJlOGRkMjIyMGFlODljOGM0OTg3OWIyMGMxOTEwYmJjYjcxZSIsImJ5dGVzIjoxODY2N30seyJwYXRoIjoidGVzdC9maXh0dXJlcy9maW5pdGUtZmlyc3QtY29ubmVjdGlvbi1wdWJsaWNhdGlvbi5tanMiLCJzaGEyNTYiOiIyZGMzMzU3NjFhYzdmMTY4NTMyYWYzN2ZkNDEyOGQyZmM4YjE1YzliNWIzMDcyZjM3N2E5OTEzZTdiOTM4MjlkIiwiYnl0ZXMiOjYxMDczfSx7InBhdGgiOiJ0ZXN0L2ZpeHR1cmVzL2Zpbml0ZS1pbml0aWFsLWVudHJ5LXdvcmxkLm1qcyIsInNoYTI1NiI6Ijc5YTEzNWZiYzk4OTc0NjNiNTY2NjI0YTQ2NjI5NDYwODliOGI1ZmQyNWJhZWRhMzY4NjYzZmY2NWJlM2NkYzciLCJieXRlcyI6ODg1MTl9LHsicGF0aCI6InRlc3QvbWNwLXFhLWZpbml0ZS1maXJzdC1jb25uZWN0aW9uLXB1YmxpY2F0aW9uLW5hdGl2ZS50ZXN0Lm1qcyIsInNoYTI1NiI6ImQ5ODk1MDUyZWI1MGJmNzVjYTFhMTRkNzQzZmFjNWM1ZTRjOWI0Y2YyMmFlMGI2NDYwMjY4ZjA1ODc4ZjI2ZjciLCJieXRlcyI6NTg3Mjd9LHsicGF0aCI6ImxpYi9tY3AtcWEtZmluaXRlLW93bmVyLW5vdGljZS1nZXQtZm9yd2FyZC5tanMiLCJzaGEyNTYiOiIwZGI0NWEyOTAyODI4NGE4ODZiN2UyZjQ2YjRlZjBmODgzNGI5Y2ZlZmRlZWQyZmMwMjZhYTcyNjk0YTdjOGU4IiwiYnl0ZXMiOjYwMzB9XSwib2JzZXJ2YXRpb25zIjpbeyJtb2RlIjoiYmFzZWxpbmUtcmVkIiwic2VsZWN0aW9uSGFzaCI6IjI0YTI0Y2Y1ZGQ5MTFkNzY3NWYxMDA3Y2E0ZDRkZGQ1ODgxNzU3ODg1ZjM4NDlhYTYxZDg4YmM5MjNjNjI4ZmEiLCJ2ZXJkaWN0IjoicXVhbGlmaWVkIiwiY29kZSI6Ik9LIiwiZXhpdENvZGUiOjEsInRvdGFscyI6eyJwbGFuIjozLCJ0ZXN0cyI6Mywic3VpdGVzIjowLCJwYXNzIjoyLCJmYWlsIjoxLCJjYW5jZWxsZWQiOjAsInNraXBwZWQiOjAsInRvZG8iOjB9LCJjYXNlcyI6W3siaWQiOiJDMlQxX0NPTk5FQ1RJT04iLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJjb25uZWN0aW9uIiwiY291bnRlcnMiOnsidXBsb2FkIjoxLCJhY3RpdmF0aW9uIjoxLCJyZWNlaXB0cyI6MX0sImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX09BVVRIIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoib2F1dGgiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjEsImFjdGl2YXRpb24iOjEsInJlY2VpcHRzIjoxfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfTk9USUNFUyIsInN0YXR1cyI6ImZhaWwiLCJwaGFzZSI6Im5vdGljZXMiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjEsImFjdGl2YXRpb24iOjEsInJlY2VpcHRzIjoxfSwiY29kZSI6IlRFU1RfRkFJTEVEIn1dLCJ3aXRuZXNzIjp7ImNhc2VJZCI6IkMyVDFfTk9USUNFUyIsInBoYXNlIjoibm90aWNlcyIsImZhaWx1cmVUeXBlIjoidGVzdENvZGVGYWlsdXJlIiwiY29kZSI6IkVSUl9BU1NFUlRJT04iLCJvcGVyYXRvciI6InN0cmljdEVxdWFsIiwiZGVmaW5pdGlvbkZpbGUiOiJTMDciLCJkZWZpbml0aW9uQmxvYiI6ImQ0ZGIxMGVlOGEwOTE0MzQ4MzVhOWFjMjhlMGQ2MDdhNWU5ZWZkMjEiLCJkZWZpbml0aW9uTGluZSI6NiwiYWN0aW9uTGluZSI6MzYsImZpeHR1cmVGaWxlIjoiUzA4IiwiZml4dHVyZUJsb2IiOiJkZThhNTFlNWE2MDIzMzQyYjFiM2FlY2NhZGY2NmU5MDYxMWQyNjhmIiwiZnVuY3Rpb24iOiJjaG9vc2UiLCJsaW5lIjoxOCwibWV0aG9kIjoiR0VUIiwicm91dGUiOiIvY29ubmVjdGlvbnMvZmluaXRlLXByZXBhcmUiLCJib3VuZGFyeSI6ImJlZm9yZS1mb3JtLXBhcnNlLWFuZC1wb3N0IiwiYWN0dWFsIjo1MDMsImV4cGVjdGVkIjoyMDB9fSx7Im1vZGUiOiJwcm9wb3NhbC1ncmVlbiIsInNlbGVjdGlvbkhhc2giOiIwMjAxMDM1YWZhNTkyNWJkMjRiMjE4ZWQ2M2NiYmNmMGRiNWM2NjBlNTZhOWNjMTNkYjQwODM3NzhlMGYxYWY1IiwidmVyZGljdCI6InF1YWxpZmllZCIsImNvZGUiOiJPSyIsImV4aXRDb2RlIjowLCJ0b3RhbHMiOnsicGxhbiI6MjAsInRlc3RzIjoyMCwic3VpdGVzIjowLCJwYXNzIjoyMCwiZmFpbCI6MCwiY2FuY2VsbGVkIjowLCJza2lwcGVkIjowLCJ0b2RvIjowfSwiY2FzZXMiOlt7ImlkIjoiQzJUMV9DT05ORUNUSU9OIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoiY29ubmVjdGlvbiIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9PQVVUSCIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im9hdXRoIiwiY291bnRlcnMiOnsidXBsb2FkIjoxLCJhY3RpdmF0aW9uIjoxLCJyZWNlaXB0cyI6MX0sImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX0hBTkRMRSIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im5lZ2F0aXZlIiwiY291bnRlcnMiOnsidXBsb2FkIjoxLCJhY3RpdmF0aW9uIjoxLCJyZWNlaXB0cyI6MX0sImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX1BST0pFQ1RSRUYiLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9TVUJKRUNUIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibmVnYXRpdmUiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjEsImFjdGl2YXRpb24iOjEsInJlY2VpcHRzIjoxfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfUEhBU0VfUkVOQU1FIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibmVnYXRpdmUiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjEsImFjdGl2YXRpb24iOjEsInJlY2VpcHRzIjoxfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfU09VUkNFX0JZVEVTIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibmVnYXRpdmUiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjEsImFjdGl2YXRpb24iOjEsInJlY2VpcHRzIjoxfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfQVBQUk9WQUwiLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9QUkVERUNFU1NPUiIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im5lZ2F0aXZlIiwiY291bnRlcnMiOnsidXBsb2FkIjoxLCJhY3RpdmF0aW9uIjoxLCJyZWNlaXB0cyI6MX0sImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX0dSQU5UX1JFVk9LRUQiLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9FWFRSQV9LRVkiLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9OT1RJQ0VTIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibm90aWNlcyIsImNvdW50ZXJzIjp7InVwbG9hZCI6MiwiYWN0aXZhdGlvbiI6MiwicmVjZWlwdHMiOjJ9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9NT05JVE9SX0NPT0tJRSIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im1vbml0b3IiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjIsImFjdGl2YXRpb24iOjIsInJlY2VpcHRzIjoyfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfTU9OSVRPUiIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im1vbml0b3IiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjIsImFjdGl2YXRpb24iOjIsInJlY2VpcHRzIjoyfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfU0NPUEVfTUlTU0lORyIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6InNjb3BlIiwiY291bnRlcnMiOnsidXBsb2FkIjoyLCJhY3RpdmF0aW9uIjoyLCJyZWNlaXB0cyI6Mn0sImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX0ZJTklURSIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6ImZpbml0ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MywiYWN0aXZhdGlvbiI6MywicmVjZWlwdHMiOjN9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9TRUxFQ1RJT04iLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJzZWxlY3Rpb24iLCJjb3VudGVycyI6eyJ1cGxvYWQiOjMsImFjdGl2YXRpb24iOjMsInJlY2VpcHRzIjozfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfTE9TVF9BQ0tfRFVQTElDQVRFIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibmVnYXRpdmUiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjAsImFjdGl2YXRpb24iOjAsInJlY2VpcHRzIjowfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfVU5SRVNPTFZFRF9XUklURVIiLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MCwiYWN0aXZhdGlvbiI6MCwicmVjZWlwdHMiOjB9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9PV05fUFJPTUlTRSIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im5lZ2F0aXZlIiwiY291bnRlcnMiOnsidXBsb2FkIjowLCJhY3RpdmF0aW9uIjowLCJyZWNlaXB0cyI6MH0sImNvZGUiOiJPSyJ9XSwid2l0bmVzcyI6bnVsbH0seyJtb2RlIjoibXV0YW50LXByZWZpeCIsInNlbGVjdGlvbkhhc2giOiI0NjIzOWU2NjVmZmU5MTU0ZmJmYjgxNzI1YzgxYWMwNWMwMjI4MTI5ZjQ5ZGI0NjZiMDYxMzk3MTE0Zjk3MGE0IiwidmVyZGljdCI6InF1YWxpZmllZCIsImNvZGUiOiJPSyIsImV4aXRDb2RlIjoxLCJ0b3RhbHMiOnsicGxhbiI6MjAsInRlc3RzIjoyMCwic3VpdGVzIjowLCJwYXNzIjoxOSwiZmFpbCI6MSwiY2FuY2VsbGVkIjowLCJza2lwcGVkIjowLCJ0b2RvIjowfSwiY2FzZXMiOlt7ImlkIjoiQzJUMV9DT05ORUNUSU9OIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoiY29ubmVjdGlvbiIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9PQVVUSCIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im9hdXRoIiwiY291bnRlcnMiOnsidXBsb2FkIjoxLCJhY3RpdmF0aW9uIjoxLCJyZWNlaXB0cyI6MX0sImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX0hBTkRMRSIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im5lZ2F0aXZlIiwiY291bnRlcnMiOnsidXBsb2FkIjoxLCJhY3RpdmF0aW9uIjoxLCJyZWNlaXB0cyI6MX0sImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX1BST0pFQ1RSRUYiLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9TVUJKRUNUIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibmVnYXRpdmUiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjEsImFjdGl2YXRpb24iOjEsInJlY2VpcHRzIjoxfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfUEhBU0VfUkVOQU1FIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibmVnYXRpdmUiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjEsImFjdGl2YXRpb24iOjEsInJlY2VpcHRzIjoxfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfU09VUkNFX0JZVEVTIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibmVnYXRpdmUiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjEsImFjdGl2YXRpb24iOjEsInJlY2VpcHRzIjoxfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfQVBQUk9WQUwiLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9QUkVERUNFU1NPUiIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im5lZ2F0aXZlIiwiY291bnRlcnMiOnsidXBsb2FkIjoxLCJhY3RpdmF0aW9uIjoxLCJyZWNlaXB0cyI6MX0sImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX0dSQU5UX1JFVk9LRUQiLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9FWFRSQV9LRVkiLCJzdGF0dXMiOiJmYWlsIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MSwiYWN0aXZhdGlvbiI6MSwicmVjZWlwdHMiOjF9LCJjb2RlIjoiVEVTVF9GQUlMRUQifSx7ImlkIjoiQzJUMV9OT1RJQ0VTIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibm90aWNlcyIsImNvdW50ZXJzIjp7InVwbG9hZCI6MiwiYWN0aXZhdGlvbiI6MiwicmVjZWlwdHMiOjJ9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9NT05JVE9SX0NPT0tJRSIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im1vbml0b3IiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjIsImFjdGl2YXRpb24iOjIsInJlY2VpcHRzIjoyfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfTU9OSVRPUiIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im1vbml0b3IiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjIsImFjdGl2YXRpb24iOjIsInJlY2VpcHRzIjoyfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfU0NPUEVfTUlTU0lORyIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6InNjb3BlIiwiY291bnRlcnMiOnsidXBsb2FkIjoyLCJhY3RpdmF0aW9uIjoyLCJyZWNlaXB0cyI6Mn0sImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX0ZJTklURSIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6ImZpbml0ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MywiYWN0aXZhdGlvbiI6MywicmVjZWlwdHMiOjN9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9TRUxFQ1RJT04iLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJzZWxlY3Rpb24iLCJjb3VudGVycyI6eyJ1cGxvYWQiOjMsImFjdGl2YXRpb24iOjMsInJlY2VpcHRzIjozfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfTE9TVF9BQ0tfRFVQTElDQVRFIiwic3RhdHVzIjoicGFzcyIsInBoYXNlIjoibmVnYXRpdmUiLCJjb3VudGVycyI6eyJ1cGxvYWQiOjAsImFjdGl2YXRpb24iOjAsInJlY2VpcHRzIjowfSwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfVU5SRVNPTFZFRF9XUklURVIiLCJzdGF0dXMiOiJwYXNzIiwicGhhc2UiOiJuZWdhdGl2ZSIsImNvdW50ZXJzIjp7InVwbG9hZCI6MCwiYWN0aXZhdGlvbiI6MCwicmVjZWlwdHMiOjB9LCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9PV05fUFJPTUlTRSIsInN0YXR1cyI6InBhc3MiLCJwaGFzZSI6Im5lZ2F0aXZlIiwiY291bnRlcnMiOnsidXBsb2FkIjowLCJhY3RpdmF0aW9uIjowLCJyZWNlaXB0cyI6MH0sImNvZGUiOiJPSyJ9XSwid2l0bmVzcyI6bnVsbH0seyJtb2RlIjoicmVncmVzc2lvbnMiLCJzZWxlY3Rpb25IYXNoIjoiZTIxMDBiZDI4YmY0MTQzZWQ3NjhjZTVmMDQ0MWJhYTQyZjdiMTlhMTRmYzFjMjgyNDlmNjhkZmE5NjFhNjhkNiIsInZlcmRpY3QiOiJxdWFsaWZpZWQiLCJjb2RlIjoiT0siLCJleGl0Q29kZSI6MCwidG90YWxzIjp7InBsYW4iOjExLCJ0ZXN0cyI6MTEsInN1aXRlcyI6MCwicGFzcyI6MTEsImZhaWwiOjAsImNhbmNlbGxlZCI6MCwic2tpcHBlZCI6MCwidG9kbyI6MH0sImNhc2VzIjpbeyJpZCI6IkMyVDFfUkVHXzAxIiwic3RhdHVzIjoicGFzcyIsImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX1JFR18wMiIsInN0YXR1cyI6InBhc3MiLCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9SRUdfMDMiLCJzdGF0dXMiOiJwYXNzIiwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfUkVHXzA0Iiwic3RhdHVzIjoicGFzcyIsImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX1JFR18wNSIsInN0YXR1cyI6InBhc3MiLCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9SRUdfMDYiLCJzdGF0dXMiOiJwYXNzIiwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfUkVHXzA3Iiwic3RhdHVzIjoicGFzcyIsImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX1JFR18wOCIsInN0YXR1cyI6InBhc3MiLCJjb2RlIjoiT0sifSx7ImlkIjoiQzJUMV9SRUdfMDkiLCJzdGF0dXMiOiJwYXNzIiwiY29kZSI6Ik9LIn0seyJpZCI6IkMyVDFfUkVHXzEwIiwic3RhdHVzIjoicGFzcyIsImNvZGUiOiJPSyJ9LHsiaWQiOiJDMlQxX1JFR18xMSIsInN0YXR1cyI6InBhc3MiLCJjb2RlIjoiT0sifV0sIndpdG5lc3MiOm51bGx9XSwibm9uY2xhaW1zIjp7Imhpc3RvcmljYWxDYXVzZVByb3ZlbiI6ZmFsc2UsInJlY2VpcHRBdXRoZW50aWNhdGVkIjpmYWxzZSwib3BlcmF0aW9uYWxSZWFkaW5lc3MiOmZhbHNlLCJjb21wbGV0ZVBhY2thZ2UiOmZhbHNlLCJQQ29mZiI6ZmFsc2UsImdsb2JhbE5hdGl2ZURyYWluVmVyaWZpZWQiOmZhbHNlLCJzZGtOYW1lc3BhY2VFbXB0eVZlcmlmaWVkIjpmYWxzZX19ClBLAQIUABQAAAAAAAAAAACb12irTCcAAEwnAAAnAAAAAAAAAAAAAAAAAAAAAABjMi1zb3VyY2UtbGFiLWZpeHR1cmUtZml4MS1yZWNlaXB0Lmpzb25QSwUGAAAAAAEAAQBVAAAAkScAAAAA",
+      "payloadText": "{\"schema\":\"afw.c2-source-lab-receipt.v2\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"990230001\",\"runAttempt\":1,\"job\":\"c2-source-lab-fixture-fix1\",\"node\":\"v22.23.4\"},\"admitted\":[{\"path\":\"lib/mcp-qa-finite-owner-phase-context.mjs\",\"sha256\":\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"bytes\":148547},{\"path\":\"lib/mcp-qa-finite-owner-preparation.mjs\",\"sha256\":\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"bytes\":45576},{\"path\":\"lib/mcp-qa-finite-owner-native-receiver.mjs\",\"sha256\":\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"bytes\":2497},{\"path\":\"worker/mcp-own/finite.mjs\",\"sha256\":\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"bytes\":2810},{\"path\":\"lib/mcp-qa-finite-owner-cleanup-scope.mjs\",\"sha256\":\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"bytes\":4153},{\"path\":\"lib/mcp-qa-finite-owner-cleanup.mjs\",\"sha256\":\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"bytes\":101380},{\"path\":\"lib/mcp-qa-finite-initial-cleanup.mjs\",\"sha256\":\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"bytes\":22501},{\"path\":\"test/mcp-qa-finite-owner-three-stage-native.test.mjs\",\"sha256\":\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"bytes\":2785},{\"path\":\"test/fixtures/finite-coupled-native.mjs\",\"sha256\":\"ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e\",\"bytes\":18667},{\"path\":\"test/fixtures/finite-first-connection-publication.mjs\",\"sha256\":\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"bytes\":61073},{\"path\":\"test/fixtures/finite-initial-entry-world.mjs\",\"sha256\":\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"bytes\":88519},{\"path\":\"test/mcp-qa-finite-first-connection-publication-native.test.mjs\",\"sha256\":\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"bytes\":58727},{\"path\":\"lib/mcp-qa-finite-owner-notice-get-forward.mjs\",\"sha256\":\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\",\"bytes\":6030}],\"observations\":[{\"mode\":\"baseline-red\",\"selectionHash\":\"24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":1,\"totals\":{\"plan\":3,\"tests\":3,\"suites\":0,\"pass\":2,\"fail\":1,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"fail\",\"phase\":\"notices\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"}],\"witness\":{\"caseId\":\"C2T1_NOTICES\",\"phase\":\"notices\",\"failureType\":\"testCodeFailure\",\"code\":\"ERR_ASSERTION\",\"operator\":\"strictEqual\",\"definitionFile\":\"S07\",\"definitionBlob\":\"d4db10ee8a091434835a9ac28e0d607a5e9efd21\",\"definitionLine\":6,\"actionLine\":36,\"fixtureFile\":\"S08\",\"fixtureBlob\":\"de8a51e5a6023342b1b3aeccadf66e90611d268f\",\"function\":\"choose\",\"line\":18,\"method\":\"GET\",\"route\":\"/connections/finite-prepare\",\"boundary\":\"before-form-parse-and-post\",\"actual\":503,\"expected\":200}},{\"mode\":\"proposal-green\",\"selectionHash\":\"0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":0,\"totals\":{\"plan\":20,\"tests\":20,\"suites\":0,\"pass\":20,\"fail\":0,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_UNRESOLVED_WRITER\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_OWN_PROMISE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"}],\"witness\":null},{\"mode\":\"mutant-prefix\",\"selectionHash\":\"46239e665ffe9154fbfb81725c81ac05c0228129f49db466b061397114f970a4\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":1,\"totals\":{\"plan\":20,\"tests\":20,\"suites\":0,\"pass\":19,\"fail\":1,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"fail\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_UNRESOLVED_WRITER\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"},{\"id\":\"C2T1_OWN_PROMISE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":0,\"activation\":0,\"receipts\":0},\"code\":\"OK\"}],\"witness\":null},{\"mode\":\"regressions\",\"selectionHash\":\"e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6\",\"verdict\":\"qualified\",\"code\":\"OK\",\"exitCode\":0,\"totals\":{\"plan\":11,\"tests\":11,\"suites\":0,\"pass\":11,\"fail\":0,\"cancelled\":0,\"skipped\":0,\"todo\":0},\"cases\":[{\"id\":\"C2T1_REG_01\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_02\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_03\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_04\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_05\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_06\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_07\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_08\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_09\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_10\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_11\",\"status\":\"pass\",\"code\":\"OK\"}],\"witness\":null}],\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    }
+  },
+  "trustedExpected": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "branch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+    "workflowPath": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+    "oneUseMessage": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIXTURE-FIX1-ONEUSE-20261116",
+    "job": "c2-source-lab-fixture-fix1",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "runId": 990230001,
+    "jobId": 990230002,
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Install only the existing locked dependencies",
+      "Qualify isolated compiled Source data",
+      "Preserve only the bounded sanitized Source receipt"
+    ]
+  }
+}

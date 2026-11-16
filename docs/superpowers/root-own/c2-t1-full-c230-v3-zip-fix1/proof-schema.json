@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OWN full c230 ZIP fix1 native control proof",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "context",
+    "counts",
+    "idsHash",
+    "bindings",
+    "ownModelsExecuted",
+    "actualSourceExecution",
+    "finalSourceBinding",
+    "SourceQualified",
+    "Task1Pass",
+    "nonclaims"
+  ],
+  "properties": {
+    "schema": {
+      "const": "afw.own-full-c230.zip-fix1.native-proof.v1"
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "branch",
+        "head",
+        "tree",
+        "parent",
+        "runId",
+        "runAttempt",
+        "job",
+        "node"
+      ],
+      "properties": {
+        "repository": {
+          "const": "tokenizartinfo-ops/agent-friendly-web"
+        },
+        "branch": {
+          "const": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3-zip-fix1"
+        },
+        "head": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "parent": {
+          "const": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        },
+        "runId": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "runAttempt": {
+          "const": 1
+        },
+        "job": {
+          "const": "c2-full-task1-c230-own-v3-zip-fix1"
+        },
+        "node": {
+          "const": "v22.23.4"
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected",
+        "observed",
+        "passed",
+        "failed",
+        "cancelled",
+        "skipped",
+        "todo",
+        "missing",
+        "extra",
+        "duplicate"
+      ],
+      "properties": {
+        "expected": {
+          "const": 419
+        },
+        "observed": {
+          "const": 419
+        },
+        "passed": {
+          "const": 419
+        },
+        "failed": {
+          "const": 0
+        },
+        "cancelled": {
+          "const": 0
+        },
+        "skipped": {
+          "const": 0
+        },
+        "todo": {
+          "const": 0
+        },
+        "missing": {
+          "const": 0
+        },
+        "extra": {
+          "const": 0
+        },
+        "duplicate": {
+          "const": 0
+        }
+      }
+    },
+    "idsHash": {
+      "const": "27801c804733daa829c629af6acf41fdcfa44f441f42b05a995581b0a5fdeb8d"
+    },
+    "bindings": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "bytes",
+          "sha256",
+          "gitBlob"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4194304
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "gitBlob": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$"
+          }
+        }
+      }
+    },
+    "ownModelsExecuted": {
+      "const": true
+    },
+    "actualSourceExecution": {
+      "const": false
+    },
+    "finalSourceBinding": {
+      "const": false
+    },
+    "SourceQualified": {
+      "const": false
+    },
+    "Task1Pass": {
+      "const": false
+    },
+    "nonclaims": {
+      "const": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  }
+}
