@@ -1,0 +1,13 @@
+{
+  "scope": "Root-owned synthetic pure receiver only, no Source execution",
+  "results": [
+    {
+      "id": "ONE_KEY",
+      "oldRootReceiverAccepted": true
+    },
+    {
+      "id": "TWO_KEYS",
+      "oldRootReceiverAccepted": true
+    }
+  ]
+}
