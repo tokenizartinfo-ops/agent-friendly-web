@@ -1,6 +1,6 @@
 {
   "schema": "afw.c2-notices-n2.root-static-checkpoint.v1",
-  "atUTC": "2026-11-16T12:20:00Z",
+  "atUTC": "2026-11-16 12:27:09 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "environment": "immutable Git DATA / Root docs",
@@ -52,10 +52,10 @@
     "Full readback and builtin byte/SHA256/Gitblob verification for eight round1 bodies.",
     "S10 normal vs observer textual diff only original argument extraction + prepare/complete observations; no compiled input, guard, tag or transformation changed.",
     "F1 before-probe requires baseline; F2 any record after final rejected and late complete ignored; F3 own logger descriptor rejected before access/install without invoking getter/setter.",
-    "Contract/schema/runner counts and vectorsHash aligned."
+    "Contract/schema/runner counts and vectorsHash aligned.",
+    "Final Source packet/index/report/diff FULL-readback hashes verified; all14 new admission body hashes verified; normal13 metadata exactly unchanged; 3/4/5 hunks replay forward/reverse exact."
   ],
   "pending": [
-    "Source final packet, reverse diffs and report",
     "Independent OWN N2 implementation and native cloud covering",
     "OWN scoped spec/quality review",
     "Root Source admission/one-use execution/actual receipt/closure, only after preceding gates"
@@ -64,5 +64,23 @@
   "SourceQualified": false,
   "Task1Pass": false,
   "operationalReadiness": false,
-  "PCoff": false
+  "PCoff": false,
+  "finalPacket": "a30ecbb8d4990896082cad0104a8d6e91960e8f5",
+  "finalIndex": "cfddde5866ac2646d301c53cfa99d74437409d13",
+  "prepared": {
+    "head": "5f3a7bf3a5103d1a00d2bb15ac66ecaa9a68786f",
+    "tree": "0a40e17da150590d4e1a1506c2c3d0c236ea5c20",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n2",
+    "message": "AFW-C2-T1-NOTICES-N2-ONEUSE-20261116",
+    "originals": 3203,
+    "added": 31,
+    "leaves": 3234,
+    "treeVerified": true,
+    "commitVerified": true,
+    "SourceExecuted": false,
+    "refCreated": false,
+    "activated": false,
+    "packet": "a30ecbb8d4990896082cad0104a8d6e91960e8f5"
+  }
 }
