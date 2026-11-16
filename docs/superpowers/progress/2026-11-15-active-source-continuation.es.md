@@ -53,3 +53,6 @@ Siguiente trabajo ACTIVO: actor original confirmó por Source que adoptConnectio
 5. Gates OriginalCLI/Native y ensayo real: entrega útil, procesamiento/ACK, retirada, cierre y evidencia desde nube. Ningún diagnóstico ni CI los sustituye.
 
 Todos siguen false hasta su evidencia correspondiente: historicalCauseProven, receiptAuthenticated, operationalReadiness, completePackage, PCoff, globalNativeDrainVerified, sdkNamespaceEmptyVerified. No pedir apagar el ordenador ni dar fecha fiable de PC-off mientras estos gates no estén cerrados.
+
+
+Estado actual diagnostic2: gate Root 436ef5af284912551bfc83b0fbef3cf83ecfd44e; DTO9bcd616e8d50dbb5b6fac1de1907095914216b6b, contrato029a043847b227c332104f060af1419c4d2ee175, runneraa03cb3eceba513724cbe4f3b81263dc049a78b2. Rama nominada creada y activada una sola vez: head4c0f19096453e5c5d1757744f52d1b1c04d76548/árbol8f9ca7bd955dada334d70562cce9708b6f8e87f0, 3203 originales intactos +23 adiciones DATA/WF. Run43808831618/attempt1, job133105688907 completed; logs TODAVÍA NO consumidos. No repetir/reforzar ni crear otra ocurrencia: esperar terminal de este run/job, unir metadata, leer logs una vez y cerrar solo el nuevo WF. Las frases anteriores de propuesta sin ref quedaron históricas; este párrafo fija el estado activo.
