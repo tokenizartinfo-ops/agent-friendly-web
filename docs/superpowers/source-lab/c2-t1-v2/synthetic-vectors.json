@@ -1,0 +1,153 @@
+{
+  "schema": "afw.c2-source-parser-vectors.v2",
+  "target": "/synthetic/c2/baseline-red",
+  "good": "TAP version 13\n# C2SOURCE {\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_CONNECTION\nok 1 - C2T1_CONNECTION\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_OAUTH\nok 2 - C2T1_OAUTH\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_NOTICES\",\"status\":\"fail\",\"phase\":\"notices\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"}\n# Subtest: C2T1_NOTICES\nnot ok 3 - C2T1_NOTICES\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  location: '/synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:6:30'\n  failureType: 'testCodeFailure'\n  error: |-\n    synthetic assertion\n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 200\n  actual: 503\n  operator: 'strictEqual'\n  stack: |-\n    choose (file:///synthetic/c2/baseline-red/test/fixtures/finite-coupled-native.mjs:18:118)\n    process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    async Object.approve (file:///synthetic/c2/baseline-red/test/fixtures/finite-coupled-native.mjs:39:29)\n    async file:///synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:36:2\n    async TestContext.<anonymous> (file:///synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:9:6)\n    async Test.run (node:internal/test_runner/test:1030:9)\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 2\n# fail 1\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 9.125\n",
+  "exit": 1,
+  "rejectEdits": [
+    {
+      "id": "WRONG_STATUS",
+      "find": "not ok 3 -",
+      "replace": "ok 3 -"
+    },
+    {
+      "id": "WRONG_SITE",
+      "find": "test/fixtures/finite-coupled-native.mjs:18:118",
+      "replace": "test/fixtures/finite-coupled-native.mjs:19:118"
+    },
+    {
+      "id": "WRONG_HTTP",
+      "find": "  actual: 503",
+      "replace": "  actual: 403"
+    },
+    {
+      "id": "WRONG_EXPECTED",
+      "find": "  expected: 200",
+      "replace": "  expected: 201"
+    },
+    {
+      "id": "WRONG_PHASE",
+      "find": "\"phase\":\"notices\"",
+      "replace": "\"phase\":\"monitor\""
+    },
+    {
+      "id": "WRONG_CODE",
+      "find": "  code: 'ERR_ASSERTION'",
+      "replace": "  code: 'ENOENT'"
+    },
+    {
+      "id": "WRONG_ACTION",
+      "find": "test/mcp-qa-finite-owner-three-stage-native.test.mjs:36:2",
+      "replace": "test/mcp-qa-finite-owner-three-stage-native.test.mjs:26:2"
+    },
+    {
+      "id": "WRONG_METHOD",
+      "find": "choose (file:",
+      "replace": "post (file:"
+    },
+    {
+      "id": "WRONG_TARGET",
+      "find": "choose (file:///synthetic/c2/baseline-red",
+      "replace": "choose (file:///foreign"
+    },
+    {
+      "id": "DUPLICATE_FIELD",
+      "find": "  actual: 503",
+      "replace": "  actual: 404\n  actual: 503"
+    },
+    {
+      "id": "MISSING_WITNESS",
+      "find": "  actual: 503\n",
+      "replace": ""
+    },
+    {
+      "id": "WRONG_NAME",
+      "find": "ok 2 - C2T1_OAUTH",
+      "replace": "ok 2 - C2T1_UNKNOWN"
+    },
+    {
+      "id": "DUPLICATE_CASE",
+      "find": "ok 2 - C2T1_OAUTH",
+      "replace": "ok 2 - C2T1_CONNECTION"
+    },
+    {
+      "id": "MISSING_FRAME",
+      "find": "# C2SOURCE {\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n",
+      "replace": ""
+    },
+    {
+      "id": "MISSING_RESULT",
+      "find": "# C2SOURCE {\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_OAUTH\nok 2 - C2T1_OAUTH\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  ...\n",
+      "replace": ""
+    },
+    {
+      "id": "EXTRA_FILE",
+      "find": "1..3",
+      "replace": "not ok 4 - test/file.test.mjs\n1..3"
+    },
+    {
+      "id": "HOOK",
+      "find": "  failureType: 'testCodeFailure'",
+      "replace": "  failureType: 'hookFailed'"
+    },
+    {
+      "id": "EXTRA_HOOK",
+      "find": "1..3",
+      "replace": "# Error: Test hook \"after\" generated asynchronous activity after the test ended\n1..3"
+    },
+    {
+      "id": "BAD_PLAN",
+      "find": "1..3",
+      "replace": "1..4"
+    },
+    {
+      "id": "BAD_TOTALS",
+      "find": "# fail 1",
+      "replace": "# fail 0"
+    },
+    {
+      "id": "NO_DURATION",
+      "find": "# duration_ms 9.125\n",
+      "replace": ""
+    },
+    {
+      "id": "CANCELLED",
+      "find": "# cancelled 0",
+      "replace": "# cancelled 1"
+    },
+    {
+      "id": "SKIP",
+      "find": "ok 2 - C2T1_OAUTH\n",
+      "replace": "ok 2 - C2T1_OAUTH # SKIP\n"
+    },
+    {
+      "id": "TODO",
+      "find": "ok 2 - C2T1_OAUTH\n",
+      "replace": "ok 2 - C2T1_OAUTH # TODO\n"
+    },
+    {
+      "id": "BAD_COUNTERS",
+      "find": "\"upload\":1",
+      "replace": "\"upload\":0"
+    },
+    {
+      "id": "WRONG_DEFINITION",
+      "find": "test/mcp-qa-finite-owner-three-stage-native.test.mjs:6:30'",
+      "replace": "test/fixtures/finite-coupled-native.mjs:18:118'"
+    },
+    {
+      "id": "DECOY_WITNESS",
+      "find": "# C2SOURCE {\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_CONNECTION\nok 1 - C2T1_CONNECTION\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_OAUTH\nok 2 - C2T1_OAUTH\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_NOTICES\",\"status\":\"fail\",\"phase\":\"notices\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"}\n# Subtest: C2T1_NOTICES\nnot ok 3 - C2T1_NOTICES\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  location: '/synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:6:30'\n  failureType: 'testCodeFailure'\n  error: |-\n    synthetic assertion\n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 200\n  actual: 503\n  operator: 'strictEqual'\n  stack: |-\n    choose (file:///synthetic/c2/baseline-red/test/fixtures/finite-coupled-native.mjs:18:118)\n    process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    async Object.approve (file:///synthetic/c2/baseline-red/test/fixtures/finite-coupled-native.mjs:39:29)\n    async file:///synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:36:2\n    async TestContext.<anonymous> (file:///synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:9:6)\n    async Test.run (node:internal/test_runner/test:1030:9)\n  ...\n",
+      "replace": "# C2SOURCE {\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_CONNECTION\nok 1 - C2T1_CONNECTION\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  location: '/synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:6:30'\n  failureType: 'testCodeFailure'\n  error: |-\n    synthetic assertion\n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 200\n  actual: 503\n  operator: 'strictEqual'\n  stack: |-\n    choose (file:///synthetic/c2/baseline-red/test/fixtures/finite-coupled-native.mjs:18:118)\n    process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    async Object.approve (file:///synthetic/c2/baseline-red/test/fixtures/finite-coupled-native.mjs:39:29)\n    async file:///synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:36:2\n    async TestContext.<anonymous> (file:///synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:9:6)\n    async Test.run (node:internal/test_runner/test:1030:9)\n  ...\n# C2SOURCE {\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_OAUTH\nok 2 - C2T1_OAUTH\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_NOTICES\",\"status\":\"fail\",\"phase\":\"notices\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"}\n# Subtest: C2T1_NOTICES\nnot ok 3 - C2T1_NOTICES\n  ---\n  duration_ms: 1.25\n  type: 'test'\n  location: '/synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:6:30'\n  failureType: 'testCodeFailure'\n  error: |-\n    synthetic assertion\n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 200\n  actual: 502\n  operator: 'strictEqual'\n  stack: |-\n    choose (file:///synthetic/c2/baseline-red/test/fixtures/finite-coupled-native.mjs:18:118)\n    process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    async Object.approve (file:///synthetic/c2/baseline-red/test/fixtures/finite-coupled-native.mjs:39:29)\n    async file:///synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:36:2\n    async TestContext.<anonymous> (file:///synthetic/c2/baseline-red/test/mcp-qa-finite-owner-three-stage-native.test.mjs:9:6)\n    async Test.run (node:internal/test_runner/test:1030:9)\n  ...\n"
+    }
+  ],
+  "rejectStandalone": [
+    {
+      "id": "AGGREGATE_19",
+      "tap": "TAP version 13\n1..19\n# tests 19\n# pass 18\n# fail 1\n# duration_ms 1\n"
+    }
+  ],
+  "rejectAssembly": [
+    "ABSENT_MUTANT",
+    "ABSENT_REGRESSIONS"
+  ]
+}
