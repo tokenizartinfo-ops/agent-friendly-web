@@ -1,0 +1,42 @@
+{
+  "schema": "AFW-N3-C-ACTUAL-CLOSE/1",
+  "atUTC": "2026-11-16 17:51:19 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "testedHead": "07d7389f7aab1ef7c5e6a5311b6109bf2d9615b8",
+  "closedHead": "9e58ccb94c046e23ed83b3b60be86eaffb7e6480",
+  "closedTree": "b6ccfd808f7ad8f5872c510e93384d748f0ee100",
+  "workflowAbsent": true,
+  "closeHeadRuns": 0,
+  "originalsPreserved": 3203,
+  "leaves": 3244,
+  "primary": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+  "outcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+  "run": 43921222041,
+  "job": 133488709833,
+  "admittedDiagnostic": true,
+  "native": {
+    "pass": 3,
+    "fail": 1,
+    "failedCase": "N3_NOTICES"
+  },
+  "causal": {
+    "state": "unjoined",
+    "coverage": "unknown",
+    "reason": "CAP_PRIVATE"
+  },
+  "mainUnchanged": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "historicalUnchanged": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "actualSourceExecution": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
