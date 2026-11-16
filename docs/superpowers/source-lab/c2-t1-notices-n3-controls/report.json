@@ -1,0 +1,297 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-report.v1",
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "scope": "N3.A tooling-only immutable DATA proposal, prioritized before captureC by Root. No local Source/parser/observer execution/eval/import/compile/syntax/tests/dependencies/files. No refs/trees/commits/PR/runs created. Normal13/Main/historicalSource/fullqualifier/Task2 frozen.",
+  "authority": {
+    "brief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
+    "rootSeal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semantic": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "prefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0"
+  },
+  "method": {
+    "testFirst": "Fixed31positive/32negative corpus preserved. Dedicated reducer/axes/selection-constant/unfocused-routine vectors were immutable and FULLreadback before corresponding changes. These are text/finite DATA expectations, never actual RED/PASS. Source native covering below remains PENDING_ROOT_CLOUD.",
+    "reviewFinding": "Outer schema d8d19 contained exactly TWO stale N2 selectionHash const literals. c2891a1c test-first records literal contradiction;1c336fe changes only those two literals. All other schema bytes unchanged; old schema preserved. No N2 occurrence reinterpreted.",
+    "sourceBuiltinsOnlyHere": "Own RAM string/JSON and builtin SHA/Gitblob/finite ZIP metadata operations only. Source strings were never evaluated, imported, compiled or syntax checked locally.",
+    "sourceToolingLabel": "Future actual tooling proof diagnosticToolingExecuted:true/sourceBusinessExecuted:false. Full PH business/Miniflare/SDK/QA compilation/M remain unexecuted in this graph; native actual41 IDs/API/TAP/proof join required independently by Root."
+  },
+  "inputs": [
+    {
+      "file": "n3-qa-ledger.mjs",
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8"
+    },
+    {
+      "file": "n3-qa-compiler.mjs",
+      "bytes": 12054,
+      "sha256": "32746f6f4b98bf5310aadf359b871aee271727187d8c23fb56a967a9d7f8c646",
+      "blob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00"
+    },
+    {
+      "file": "n3-unit-controls.mjs",
+      "bytes": 21112,
+      "sha256": "674b96445e4d754a835453f71ad98d5da6a84425012d4108fb2a63a1d9a9337c",
+      "blob": "dc0eb43c2ed663611f05a62ebf63daea1683b01d"
+    },
+    {
+      "file": "n3-reader.mjs",
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626"
+    },
+    {
+      "file": "n3-trace-reader.mjs",
+      "bytes": 11567,
+      "sha256": "e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829",
+      "blob": "4878edb13dad6a9421c457cc850a370d75b84b1c"
+    },
+    {
+      "file": "n3-core-controls.mjs",
+      "bytes": 13179,
+      "sha256": "fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95",
+      "blob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542"
+    },
+    {
+      "file": "n3-trace-controls.mjs",
+      "bytes": 854,
+      "sha256": "ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758",
+      "blob": "adff3fbc4649f95389b03896ff82bc7ed538c516"
+    },
+    {
+      "file": "n3-logger.mjs",
+      "bytes": 8370,
+      "sha256": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+      "blob": "4eeaad011444e566f2e0cc99bd897e4a01848a77"
+    },
+    {
+      "file": "n3-slot.mjs",
+      "bytes": 2072,
+      "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "blob": "6507ca2410ac27606f4996e97a91736c5e14b615"
+    },
+    {
+      "file": "n3-vectors.json",
+      "bytes": 915177,
+      "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+      "blob": "ce6aa394580a0c26e5fe5c9006cafe06db109530"
+    },
+    {
+      "file": "n3-reducer-vectors.json",
+      "bytes": 43673,
+      "sha256": "acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9",
+      "blob": "8881c57552b88cd757579b6de120e1f4fca0304c"
+    },
+    {
+      "file": "schema.json",
+      "bytes": 29785,
+      "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+      "blob": "1c336fe190816b46223546971afcf34b2c216089"
+    },
+    {
+      "file": "normal-lease.txt",
+      "bytes": 2257,
+      "sha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e",
+      "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9"
+    },
+    {
+      "file": "normal-op.txt",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908"
+    },
+    {
+      "file": "normal-phase.txt",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5"
+    },
+    {
+      "file": "normal-publication.txt",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3"
+    },
+    {
+      "file": "normal-world.txt",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5"
+    },
+    {
+      "file": "observer-world.txt",
+      "bytes": 89873,
+      "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+      "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23"
+    },
+    {
+      "file": "contract.json",
+      "bytes": 19539,
+      "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+      "blob": "40e93f21d6564e2a0bbe9a4ace266d992a357718"
+    },
+    {
+      "file": "seams.json",
+      "bytes": 14141,
+      "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+      "blob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640"
+    },
+    {
+      "file": "n3-unfocused-routine-vectors.json",
+      "bytes": 1325,
+      "sha256": "6d2655b173310765608610e69b47d1b667bd27b83197678dded4dc66b53e660d",
+      "blob": "c26bdbaa9d94df8c1e3a3f281d631180023af020"
+    }
+  ],
+  "selection": {
+    "bytes": 4513,
+    "sha256": "8e842a170ab928e0968df0681302cfff9b0bb9d0e2410655f98e58f4dc8ca4b6",
+    "gitBlob": "762ca860a7fe4b76a5c9541ffc05518bdef28411",
+    "blob": "762ca860a7fe4b76a5c9541ffc05518bdef28411",
+    "fullReadback": true
+  },
+  "runner": {
+    "bytes": 16945,
+    "sha256": "47cacdf0ffe0eb4f5e57193be6d571a76eb544b6c4cd533e52eeda9ba3acb26c",
+    "gitBlob": "9926bf9d816f724a67298954e8425f25f589fedd",
+    "blob": "9926bf9d816f724a67298954e8425f25f589fedd",
+    "fullReadback": true
+  },
+  "proofSchema": {
+    "bytes": 10650,
+    "sha256": "ef35546a352032b34f890d0372b8aa20a95860a7b40f65a9408c6f579153b2d5",
+    "gitBlob": "dbd4b791765b88cacd73f3fc088039e9535bbef3",
+    "blob": "dbd4b791765b88cacd73f3fc088039e9535bbef3",
+    "fullReadback": true
+  },
+  "workflow": {
+    "bytes": 1401,
+    "sha256": "16f105f61abd5dc6ec7f66dcdd45dcd56bb72352898061f1f9e4dc3592705c90",
+    "gitBlob": "4d8e6bf0d44b90b3fc0347b6aad7bf2038f9be67",
+    "blob": "4d8e6bf0d44b90b3fc0347b6aad7bf2038f9be67",
+    "fullReadback": true
+  },
+  "reversibles": {
+    "bytes": 7825,
+    "sha256": "ce28aadc8807c42f82c3379284672c9681a8ef459cb954e4f326fca174483fba",
+    "gitBlob": "78d277e6a64cc7d2b782b98d1f2f0411e2019e35",
+    "blob": "78d277e6a64cc7d2b782b98d1f2f0411e2019e35",
+    "fullReadback": true
+  },
+  "unitScope": {
+    "original": "Actual original InitialLease functions and callbacks, OP requestLease root factory and exact PH parent onAbort source bodies, loaded from frozen preimages and N3 transforms as temporary RAM modules only in future cloud tests.",
+    "adapter": "Test-only note adapter counts actual DTO inputs before calling actual ledger factory. No production listener/timer/callback/reaction is replaced; Source callback control subclass forwards Promise.prototype.then, observes BOTH original same-handler retain reactions and their original delete booleans true/false. Other standard Promise reactions from original race/await are legitimate and not falsely counted as extra.",
+    "nonexecuted": "Full observeOwnerPhasePair business function is not run by tooling; selected call-returned-p binding is tested at the actual declared seam/private lookup with test-only controlled callable/DTO stimuli, not a business outcome. Actual emitted pairp/QA compiled input joins await C after gates.",
+    "prepared": "Pinned original S09 pure preparation functions and exact S10 T2 preparation statements execute only as string transforms in N3_REVERSIBLES. Raw original lease lifecycle+N3 hooks execute for callback units; compiled workerd T2 guard console paths do not execute in tooling.",
+    "axis": "Actual original child/wait/race/retain callbacks exercised with held continuation: logical throw may precede later target terminal, first scope error immutable, no timer/race winner claim.",
+    "reducer": "Actual root/InitialLease/parent-abort callbacks plus controlled unit target/logical stimuli must produce31recorded+cut→24 and late34→24. Input counts belong to unit adapter; not extra getter/RPC/authority reads. Assertions protect first scope error, selected focus and exact pair-returned promise retain/settlement; any projection omission remains prefixPROJECTION_GAP.",
+    "pressure": "Before eligibility actual pair lease anchors may bind and count toward128; no lifecycle replay. Noncanonical/unselected routine inputs are ignored outside declared focus without recording SourceSequence. All actual errors after root resolution remain considered for firstScopeError/focus and bounded identity bookkeeping. Dedicated unfocused-routine tests preserve gap rule for genuinely prebinding selected references."
+  },
+  "caps": {
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "proofBytes": 24576,
+    "snapshotEvents": 24,
+    "snapshotRecordBytes": 6144,
+    "journalBytes": 32768,
+    "outcomeBytes": 24576
+  },
+  "tests": {
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls/run-controls.mjs",
+    "ids": [
+      "N3_CORE_CONTROLS",
+      "N3_CAUSAL_LITERALS",
+      "N3_TIMEOUT_PREFIX_CONTROLS",
+      "N3_AXIS_LITERALS",
+      "N3_SCHEMA_SELECTION_CONSTS",
+      "N3_NOTE_SYNC_NO_RPC",
+      "N3_ORIGINAL_NULL",
+      "N3_ORIGINAL_UNDEFINED",
+      "N3_ORIGINAL_FALSE",
+      "N3_ORIGINAL_ZERO",
+      "N3_ORIGINAL_EMPTY_STRING",
+      "N3_ORIGINAL_OBJECT",
+      "N3_PROMISE_IDENTITY",
+      "N3_EXISTING_SETTLED_HANDLER",
+      "N3_ROOT_IDENTITY",
+      "N3_REALM_RESET",
+      "N3_CROSS_SCOPE_LEASE",
+      "N3_SHARED_PROMISE",
+      "N3_NULL_BOUND_REF",
+      "N3_PREBIND_GAP",
+      "N3_PAIR_FORK",
+      "N3_FIRST_TARGET_ONLY",
+      "N3_SCOPE_ERROR_A_CHILD_B",
+      "N3_REPEATED_CLOSE",
+      "N3_CUT_LATE_SETTLEMENT",
+      "N3_SINK_FAULT",
+      "N3_PRIVATE_CAP",
+      "N3_SNAPSHOT_CAP",
+      "N3_WORST_SIZE",
+      "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+      "N3_ABORT_NESTED_OBSERVER_ORDER",
+      "N3_BOUND_PAIR_COVERAGE",
+      "N3_PREPAIR_FAILURE_AND_UNBOUND",
+      "N3_ACTUAL_CHILD_ABORT_MATRIX",
+      "N3_ACTUAL_PARENT_ABORT_MATRIX",
+      "N3_NESTED_ABORT_ORDER",
+      "N3_UNREACHED_ACTIVATION",
+      "N3_ORIGINAL_RACE_AXES",
+      "N3_ORIGINAL_REDUCER_CALLBACKS",
+      "N3_REVERSIBLES",
+      "N3_MAX_ENVELOPE_SIZE"
+    ],
+    "expected": {
+      "cases": 41,
+      "pass": 41,
+      "fail": 0,
+      "cancel": 0,
+      "skip": 0,
+      "todo": 0,
+      "extra": 0,
+      "missing": 0
+    },
+    "actual": "PENDING_ROOT_CLOUD",
+    "outputRefs": [],
+    "proof": "Source own allToolingBodiesReturned is NOT acceptance; Root joins actual native41/TAP/noextra/noSKIP/TODO/cancel/failure + GitHub API/head/tree/run/job/attempt + exact proof/ZIP/digest.",
+    "errors": "Native work errors are replaced only at tooling-test outer boundary by fixed N3_TOOLING_CONTROL_INVALID; underlying messages/stacks/throw values never enter proof. Actual business source errors are not intercepted by this graph."
+  },
+  "candidate": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls",
+    "message": "AFW-C2-N3-CONTROLS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls.yml",
+    "job": "c2-notices-n3-controls",
+    "nativeCommand": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls/run-controls.mjs",
+    "authorization": "DATA only. Root alone may gate/materialize/push once/run/close; no execution or ref authority granted here."
+  },
+  "pending": [
+    "Root independent static gate and actual tooling41 native covering; append dated actual command/API/output only after Root supplies evidence.",
+    "Fresh Source scoped spec+quality review and fix loop if actual finding.",
+    "Independent OWN B1/B2 tooling/native/review gates remain separate.",
+    "CaptureC runner/WF and final16-field producerManifest/body bindings remain incomplete/INACTIVE; this tooling packet does NOT nominate business capture or qualify Source."
+  ],
+  "preservedIntermediatePins": [
+    "0666443fd1ee72cd69fa0df2fc9438dff23e1f9e",
+    "40a1d46b253ba160159f95a0448ea2d51cbdd6e7",
+    "a12015f585b7c88efc7604868a89a046b8cc6b33",
+    "886ef5489df900fa53a053b05f670f590aac4da4",
+    "f5ee11a2983f22a162b4602d49e0165e3abcf054",
+    "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+    "8546c47b505ed0f1ff0b9d4b29d45c9f137d4b29",
+    "def7123feb4aabb809509836014d63e7cf6b477a",
+    "a43ca8667d2a884bf3079a4072058cec39a919b8",
+    "27623553b80168a0e4fd9fb8411f7d0e087a270e"
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

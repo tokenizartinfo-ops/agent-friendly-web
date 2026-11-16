@@ -1,0 +1,116 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-reversibles.v1",
+  "status": "NATIVE_PENDING",
+  "sourceIndexFrozen": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "beforeFiles": [
+    {
+      "file": "normal-lease.txt",
+      "bytes": 2257,
+      "sha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e",
+      "gitBlob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+      "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+      "fullReadback": true
+    },
+    {
+      "file": "normal-op.txt",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "fullReadback": true
+    },
+    {
+      "file": "normal-phase.txt",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "fullReadback": true
+    },
+    {
+      "file": "normal-publication.txt",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "gitBlob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "fullReadback": true
+    },
+    {
+      "file": "normal-world.txt",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "fullReadback": true
+    }
+  ],
+  "newFiles": "Proposal requires all new tooling prefix files and ONE new WF absent at BASE. Root verifies exact original3203/modes and admitted additions before materialization. Reversal removes only nominated additions after exact tip/hash verification; Root alone performs refs/close.",
+  "qaCompiledSources": "No product lib files are changed in Git or mounted for tooling business. Native tests use actual original OP/InitialLease function source and exact PH onAbort callback bodies, with temporary in-RAM modules. createN3CompilerObservation later composes QA-only string transforms; every transform returns full before/after hashes, contents, and ordered literal {before,after,at?} edits. N3_REVERSIBLES reconstructs full original bytes by reverse edits for raw and original-prepared PH/LEASE, OP and stdin. No trim, implied LF or missing EOF.",
+  "nodeWorldOverlay": {
+    "before": {
+      "blob": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+      "bytes": 89281,
+      "sha256": "14adcbe7149ef9bf92f756a5edae0c13b8c19deda5a7286bbafd0cd53419c64d"
+    },
+    "after": {
+      "bytes": 89873,
+      "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+      "gitBlob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+      "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+      "fullReadback": true
+    },
+    "fullBefore": {
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "fullReadback": true
+    },
+    "procedure": "For full normalS10 reversal restore the complete frozen normal-world.txt bytes. observer-world.txt is a complete DATA after-image only, never imported in tooling; M compile lines are checked verbatim. It includes inherited N2 Node-option proof renamedN3 plus exact N3 QA compiler bridge additions.",
+    "afterLogicalSpans": [
+      {
+        "before": "",
+        "after": "import {createN3CompilerObservation} from './n3-qa-compiler.mjs';\n",
+        "at": "prefix"
+      },
+      {
+        "before": " const compileInputs=new Map();",
+        "after": " const compileInputs=new Map(),n3Compiler=createN3CompilerObservation();"
+      },
+      {
+        "before": " const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){",
+        "after": " if(firstConnection)entry=n3Compiler.entry(entry);\n const plugin={name:'explicit-SYN-external-data-not-whole-facts',setup(b){\n  if(firstConnection)b.onLoad({filter:/n3-qa-causal-ledger\\.mjs$/},async args=>({contents:n3Compiler.ledger(await readFile(args.path,'utf8')),loader:'js'}));\n  if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-preparation\\.mjs$/},async args=>({contents:n3Compiler.op(await readFile(args.path,'utf8')),loader:'js'}));"
+      },
+      {
+        "before": "  if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-phase-context\\.mjs$/},async args=>({contents:(ownerCleanup?instrumentFiniteOwnerCleanup:x=>x)(instrumentFirstConnection(await readFile(args.path,'utf8').then(text=>{if(coupledStages&&process.env.AFW_C2_T1_MUTANT==='prefix'){const needle=\"for(const k of inventory.keys())if(!['record','source','connection:approval','notices:approval','finite:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();\";assert.equal(text.split(needle).length,2,'SYN c2 single exact prefix mutant');return text.replace(needle,'');}return text;}),{mutation:firstConnectionMutation})),loader:'js'}));",
+        "after": "  if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-phase-context\\.mjs$/},async args=>({contents:n3Compiler.phase((ownerCleanup?instrumentFiniteOwnerCleanup:x=>x)(instrumentFirstConnection(await readFile(args.path,'utf8').then(text=>{if(coupledStages&&process.env.AFW_C2_T1_MUTANT==='prefix'){const needle=\"for(const k of inventory.keys())if(!['record','source','connection:approval','notices:approval','finite:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();\";assert.equal(text.split(needle).length,2,'SYN c2 single exact prefix mutant');return text.replace(needle,'');}return text;}),{mutation:firstConnectionMutation}))),loader:'js'}));"
+      },
+      {
+        "before": "contents:sources.get('mcp-qa-finite-initial-lease.mjs'),loader:'js'",
+        "after": "contents:n3Compiler.lease(sources.get('mcp-qa-finite-initial-lease.mjs')),loader:'js'"
+      },
+      {
+        "before": "  f.firstConnectionBuild={...budget?{budget:{M:firstCandidate.budget,QA:budget.records()}}:{},negativeMutation:firstConnectionMutation,wrongProfileHash:firstCandidate.wrongProfileHash,M:{sha256:sha(bytes),bytes:bytes.length,inputs:Object.keys(firstCandidate.metafile.inputs)},QA:{sha256:sha(built.outputFiles[0].contents),bytes:built.outputFiles[0].contents.length,inputs:Object.keys(built.metafile.inputs)},spyHash:firstCandidate.spyHash,residency:resident};",
+        "after": "  f.firstConnectionBuild={...budget?{budget:{M:firstCandidate.budget,QA:budget.records()}}:{},negativeMutation:firstConnectionMutation,wrongProfileHash:firstCandidate.wrongProfileHash,M:{sha256:sha(bytes),bytes:bytes.length,inputs:Object.keys(firstCandidate.metafile.inputs)},QA:{sha256:sha(built.outputFiles[0].contents),bytes:built.outputFiles[0].contents.length,inputs:Object.keys(built.metafile.inputs)},spyHash:firstCandidate.spyHash,residency:resident};\n  f.n3Compilation=n3Compiler.finish(bytes,built.outputFiles[0].contents);"
+      }
+    ]
+  },
+  "diagnosticModule": {
+    "ledger": {
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "gitBlob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "fullReadback": true
+    },
+    "transform": {
+      "bytes": 12054,
+      "sha256": "32746f6f4b98bf5310aadf359b871aee271727187d8c23fb56a967a9d7f8c646",
+      "gitBlob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+      "blob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+      "fullReadback": true
+    }
+  },
+  "SourceQualified": false,
+  "Task1Pass": false
+}

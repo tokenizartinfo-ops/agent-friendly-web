@@ -1,0 +1,383 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "afw.c2-notices-n3.tooling-proof-schema.v1",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "afw.c2-notices-n3.tooling-proof.v1"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "const": "tokenizartinfo-ops/agent-friendly-web"
+        },
+        "baselineSource": {
+          "const": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        },
+        "baselineTree": {
+          "const": "62e78926635d6b74f288d6c0d69e0f2516306989"
+        },
+        "head": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "runId": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "runAttempt": {
+          "const": 1
+        },
+        "job": {
+          "const": "c2-notices-n3-controls"
+        },
+        "node": {
+          "const": "v22.23.4"
+        }
+      },
+      "required": [
+        "repository",
+        "baselineSource",
+        "baselineTree",
+        "head",
+        "tree",
+        "runId",
+        "runAttempt",
+        "job",
+        "node"
+      ],
+      "additionalProperties": false
+    },
+    "inputHashes": {
+      "const": [
+        {
+          "file": "n3-qa-ledger.mjs",
+          "bytes": 16602,
+          "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1"
+        },
+        {
+          "file": "n3-qa-compiler.mjs",
+          "bytes": 12054,
+          "sha256": "32746f6f4b98bf5310aadf359b871aee271727187d8c23fb56a967a9d7f8c646"
+        },
+        {
+          "file": "n3-unit-controls.mjs",
+          "bytes": 21112,
+          "sha256": "674b96445e4d754a835453f71ad98d5da6a84425012d4108fb2a63a1d9a9337c"
+        },
+        {
+          "file": "n3-reader.mjs",
+          "bytes": 31798,
+          "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5"
+        },
+        {
+          "file": "n3-trace-reader.mjs",
+          "bytes": 11567,
+          "sha256": "e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829"
+        },
+        {
+          "file": "n3-core-controls.mjs",
+          "bytes": 13179,
+          "sha256": "fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95"
+        },
+        {
+          "file": "n3-trace-controls.mjs",
+          "bytes": 854,
+          "sha256": "ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758"
+        },
+        {
+          "file": "n3-logger.mjs",
+          "bytes": 8370,
+          "sha256": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3"
+        },
+        {
+          "file": "n3-slot.mjs",
+          "bytes": 2072,
+          "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a"
+        },
+        {
+          "file": "n3-vectors.json",
+          "bytes": 915177,
+          "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf"
+        },
+        {
+          "file": "n3-reducer-vectors.json",
+          "bytes": 43673,
+          "sha256": "acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9"
+        },
+        {
+          "file": "schema.json",
+          "bytes": 29785,
+          "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb"
+        },
+        {
+          "file": "normal-lease.txt",
+          "bytes": 2257,
+          "sha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e"
+        },
+        {
+          "file": "normal-op.txt",
+          "bytes": 45576,
+          "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+        },
+        {
+          "file": "normal-phase.txt",
+          "bytes": 148547,
+          "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+        },
+        {
+          "file": "normal-publication.txt",
+          "bytes": 61073,
+          "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+        },
+        {
+          "file": "normal-world.txt",
+          "bytes": 88519,
+          "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+        },
+        {
+          "file": "observer-world.txt",
+          "bytes": 89873,
+          "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9"
+        },
+        {
+          "file": "contract.json",
+          "bytes": 19539,
+          "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886"
+        },
+        {
+          "file": "seams.json",
+          "bytes": 14141,
+          "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5"
+        },
+        {
+          "file": "n3-unfocused-routine-vectors.json",
+          "bytes": 1325,
+          "sha256": "6d2655b173310765608610e69b47d1b667bd27b83197678dded4dc66b53e660d"
+        }
+      ]
+    },
+    "ids": {
+      "const": [
+        "N3_CORE_CONTROLS",
+        "N3_CAUSAL_LITERALS",
+        "N3_TIMEOUT_PREFIX_CONTROLS",
+        "N3_AXIS_LITERALS",
+        "N3_SCHEMA_SELECTION_CONSTS",
+        "N3_NOTE_SYNC_NO_RPC",
+        "N3_ORIGINAL_NULL",
+        "N3_ORIGINAL_UNDEFINED",
+        "N3_ORIGINAL_FALSE",
+        "N3_ORIGINAL_ZERO",
+        "N3_ORIGINAL_EMPTY_STRING",
+        "N3_ORIGINAL_OBJECT",
+        "N3_PROMISE_IDENTITY",
+        "N3_EXISTING_SETTLED_HANDLER",
+        "N3_ROOT_IDENTITY",
+        "N3_REALM_RESET",
+        "N3_CROSS_SCOPE_LEASE",
+        "N3_SHARED_PROMISE",
+        "N3_NULL_BOUND_REF",
+        "N3_PREBIND_GAP",
+        "N3_PAIR_FORK",
+        "N3_FIRST_TARGET_ONLY",
+        "N3_SCOPE_ERROR_A_CHILD_B",
+        "N3_REPEATED_CLOSE",
+        "N3_CUT_LATE_SETTLEMENT",
+        "N3_SINK_FAULT",
+        "N3_PRIVATE_CAP",
+        "N3_SNAPSHOT_CAP",
+        "N3_WORST_SIZE",
+        "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+        "N3_ABORT_NESTED_OBSERVER_ORDER",
+        "N3_BOUND_PAIR_COVERAGE",
+        "N3_PREPAIR_FAILURE_AND_UNBOUND",
+        "N3_ACTUAL_CHILD_ABORT_MATRIX",
+        "N3_ACTUAL_PARENT_ABORT_MATRIX",
+        "N3_NESTED_ABORT_ORDER",
+        "N3_UNREACHED_ACTIVATION",
+        "N3_ORIGINAL_RACE_AXES",
+        "N3_ORIGINAL_REDUCER_CALLBACKS",
+        "N3_REVERSIBLES",
+        "N3_MAX_ENVELOPE_SIZE"
+      ]
+    },
+    "results": {
+      "type": "array",
+      "minItems": 41,
+      "maxItems": 41,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "enum": [
+              "N3_CORE_CONTROLS",
+              "N3_CAUSAL_LITERALS",
+              "N3_TIMEOUT_PREFIX_CONTROLS",
+              "N3_AXIS_LITERALS",
+              "N3_SCHEMA_SELECTION_CONSTS",
+              "N3_NOTE_SYNC_NO_RPC",
+              "N3_ORIGINAL_NULL",
+              "N3_ORIGINAL_UNDEFINED",
+              "N3_ORIGINAL_FALSE",
+              "N3_ORIGINAL_ZERO",
+              "N3_ORIGINAL_EMPTY_STRING",
+              "N3_ORIGINAL_OBJECT",
+              "N3_PROMISE_IDENTITY",
+              "N3_EXISTING_SETTLED_HANDLER",
+              "N3_ROOT_IDENTITY",
+              "N3_REALM_RESET",
+              "N3_CROSS_SCOPE_LEASE",
+              "N3_SHARED_PROMISE",
+              "N3_NULL_BOUND_REF",
+              "N3_PREBIND_GAP",
+              "N3_PAIR_FORK",
+              "N3_FIRST_TARGET_ONLY",
+              "N3_SCOPE_ERROR_A_CHILD_B",
+              "N3_REPEATED_CLOSE",
+              "N3_CUT_LATE_SETTLEMENT",
+              "N3_SINK_FAULT",
+              "N3_PRIVATE_CAP",
+              "N3_SNAPSHOT_CAP",
+              "N3_WORST_SIZE",
+              "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+              "N3_ABORT_NESTED_OBSERVER_ORDER",
+              "N3_BOUND_PAIR_COVERAGE",
+              "N3_PREPAIR_FAILURE_AND_UNBOUND",
+              "N3_ACTUAL_CHILD_ABORT_MATRIX",
+              "N3_ACTUAL_PARENT_ABORT_MATRIX",
+              "N3_NESTED_ABORT_ORDER",
+              "N3_UNREACHED_ACTIVATION",
+              "N3_ORIGINAL_RACE_AXES",
+              "N3_ORIGINAL_REDUCER_CALLBACKS",
+              "N3_REVERSIBLES",
+              "N3_MAX_ENVELOPE_SIZE"
+            ]
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "fail",
+              "unobserved"
+            ]
+          },
+          "code": {
+            "enum": [
+              "OK",
+              "CONTROL_INVALID",
+              "UNOBSERVED"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "code"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "allToolingBodiesReturned": {
+      "type": "boolean"
+    },
+    "core": {
+      "anyOf": [
+        {
+          "const": {
+            "accepted": 6,
+            "rejected": 21,
+            "probeChecks": 3,
+            "roundtrips": 6,
+            "witnessRejected": 2,
+            "slotChecks": 5,
+            "guardAccepted": 3,
+            "guardRejected": 7,
+            "guardTransitions": 6,
+            "invarianceChecks": 10,
+            "guardRecordRejected": 12
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "causal": {
+      "anyOf": [
+        {
+          "const": {
+            "accepted": 31,
+            "rejected": 32
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reducer": {
+      "anyOf": [
+        {
+          "const": {
+            "rawIncludingCut": 31,
+            "projected": 24,
+            "lateRawIncludingCut": 34,
+            "lateProjected": 24,
+            "firstScopeErrorPreserved": true,
+            "focusPreserved": true,
+            "exactPairPromisePreserved": true,
+            "allBounds": true
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "diagnosticToolingExecuted": {
+      "const": true
+    },
+    "sourceBusinessExecuted": {
+      "const": false
+    },
+    "SourceQualified": {
+      "const": false
+    },
+    "Task1Pass": {
+      "const": false
+    },
+    "nonclaims": {
+      "const": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "context",
+    "inputHashes",
+    "ids",
+    "results",
+    "allToolingBodiesReturned",
+    "core",
+    "causal",
+    "reducer",
+    "diagnosticToolingExecuted",
+    "sourceBusinessExecuted",
+    "SourceQualified",
+    "Task1Pass",
+    "nonclaims"
+  ],
+  "additionalProperties": false
+}
