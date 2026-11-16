@@ -1,0 +1,105 @@
+{
+  "schema": "AFW-N3-W1-OWN-V2-ROOT-GATE/1",
+  "atUTC": "2026-11-16 19:45:12 UTC",
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "GitHub Actions OWN synthetic validator lab",
+  "ORIGIN": "lab/afw-c2-own-receiver-20261116-notices-n3-firstlimit-w1-v2",
+  "RESOURCE_TYPE": "one-use OWN validation workflow",
+  "RESOURCE_ID": "bbce1f93f03bf959ff96e1799a6703e68c64ca38",
+  "ALLOWED_ACTION": "One attempt1 of exact OWN280 native ESM controls, inspect actual API/TAP/artifact and close new workflow. No Source implementation/production/provider/credentials/OAuth/browser.",
+  "prepared": {
+    "head": "bbce1f93f03bf959ff96e1799a6703e68c64ca38",
+    "tree": "ff0dc22c04f6097543fd28f76dcbf7dd79680577",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-own-receiver-20261116-notices-n3-firstlimit-w1-v2",
+    "originals": 3203,
+    "added": 26,
+    "leaves": 3229,
+    "SourceExecuted": false,
+    "refCreated": false,
+    "runCreated": false
+  },
+  "index": "c295cee6968b7fd0c4f328ff91b22ed28dc12fde",
+  "hashVerification": {
+    "total": 26,
+    "fresh": 21,
+    "priorVerified": 5,
+    "allPassed": true
+  },
+  "fullBeforeAfter": {
+    "changes": 2,
+    "newOwnCode": 3,
+    "beforeAfterFullReadbackMatching": true,
+    "reversibleSplicesExact": true,
+    "allHistoricalDefaultsUnchanged": true
+  },
+  "nomination": {
+    "schema": "root-own.firstlimit-w1.v2-native-nomination.v1",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "branch": "lab/afw-c2-own-receiver-20261116-notices-n3-firstlimit-w1-v2",
+    "message": "AFW-C2-N3-FIRSTLIMIT-W1-OWN-V2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-own-v2.yml",
+    "job": "c2-notices-n3-firstlimit-w1-own-v2",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "node": "v22.23.4",
+    "runner": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/run-controls.mjs",
+    "proofFile": "firstlimit-w1-own-v2-proof.json",
+    "artifactName": "afw-c2-notices-n3-firstlimit-w1-own-v2-proof"
+  },
+  "expected": {
+    "tests": 280,
+    "pass": 280,
+    "fail": 0,
+    "cancel": 0,
+    "skip": 0,
+    "todo": 0,
+    "extra": 0,
+    "missing": 0,
+    "duplicate": 0,
+    "idsHash": "9cd977b1ba947fcf9fb1e057d67687e3c4ec0f047c082d0b2079bf452d7aad61"
+  },
+  "wire": {
+    "outer": "afw.c2-notices-n3.observation.v2",
+    "innerSnapshot": "afw.c2-notices-n3.qa-snapshot.v1",
+    "innerRecord": "afw.c2-notices-n3.causal-record.v1",
+    "selectionHashCanonical": "b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503",
+    "selectionRawFileHash": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+    "normal13Hash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "refinedReasons": [
+      "CAP_PRIVATE_ROOT16",
+      "CAP_PRIVATE_GAP_NEW128",
+      "CAP_PRIVATE_LEASE_NEW128",
+      "CAP_PRIVATE_OTHER"
+    ],
+    "canonicalRestriction": "Only unjoined/unknown eligible0or1; empty leases/promises/errors/events; targetunknown/firstErrornull/cutnull/focusnone. Exact summary reason/shape. Livev2 rejects genericCAP_PRIVATE and calibrationCAP_PRIVATE_LEGACY_SAME_GAP128.",
+    "conditionalHandling": "ngSchema legacy ignores if/then; new semantic guard explicitly enforces the snapshot conditional, and full independent journal replay derives and exactly compares canonical summary. No conditional node is treated as acceptance authority.",
+    "artifact": {
+      "name": "afw-c2-notices-n3-firstlimit-w1",
+      "path": "output/c2-notices-n3-firstlimit-w1.json",
+      "fileName": "c2-notices-n3-firstlimit-w1.json",
+      "expectedCount": 1,
+      "retentionDays": 7,
+      "payloadCapBytes": 24576
+    },
+    "payloadBudget": "Artifact canonicalJSON+LF <=24576UTF8B, including LF. ZIP length and bounded inflater maxOutputLength=24576; full deflate consumption, CRC/name/offset/digest remain strict."
+  },
+  "sourceTaskHeld": {
+    "SourceHead": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+    "SourceTree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
+    "SourceCaptureNotReleased": true
+  },
+  "rollback": "Remove only newly nominated workflow after terminal occurrence. Preserve all original3203 and unique evidence, verify ref/tree/zero closeheadruns. No rerun or Source capture inferred.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
