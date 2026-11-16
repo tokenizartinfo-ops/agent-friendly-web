@@ -1,0 +1,276 @@
+{
+  "schema": "afw.own-green20-frontier.report.v1",
+  "status": "READY_ROOT_STATIC_ADMISSION_NATIVE124_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": {
+    "round": 1,
+    "maxRounds": 5,
+    "family": "IndependentGREEN20frontierdiag1",
+    "authority": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+    "contract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "schema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "selection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "pathLayerSupplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd"
+  },
+  "result": "New independent OWN receiver and focused124models implemented against one accepted wire.124PASS0FAIL in bounded OWN RAM; actual nativeimportgraph/one-use124run/freshreview remain Root work. No Sourcehelper imported/evaluated/compiled/syntaxchecked/executed; no entire legacy225/370/419/W1 battery rerun.",
+  "entrypoint": {
+    "module": {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/reader.mjs",
+      "mode": "100644",
+      "blob": "f844dd8789012b95edaf0aec4db20edea885a4ca",
+      "bytes": 3285,
+      "sha256": "b77e7000a500a3cfba93f4d832dddef5f94516d65ee76bbb7b91598afe775935",
+      "gitBlob": "f844dd8789012b95edaf0aec4db20edea885a4ca",
+      "fullReadback": true
+    },
+    "signature": "g20Read(input,trusted,hash,inflate)",
+    "inputKeys": [
+      "run",
+      "jobs",
+      "commit",
+      "tree",
+      "transport",
+      "artifact"
+    ],
+    "trustedKeys": [
+      "expected",
+      "bodyEdges",
+      "bodyEdgesHash"
+    ],
+    "expectedKeys": [
+      "repository",
+      "branch",
+      "workflowPath",
+      "oneUseMessage",
+      "job",
+      "parent",
+      "head",
+      "tree",
+      "runId",
+      "jobId",
+      "requiredSteps"
+    ],
+    "RootAuthority": "Caller supplies actual independently established expectedcontext and full RootsealedSourcebodyEdges, never outcome. Final source-admission.json is Root metadata; newSource expectedcontext/head/run/job remain separate/null until Root observes them.",
+    "returns": "diagnosticCollectionAccepted, joinedcontext/job/actualcommandstep, matchedtreebodyedges, replaywitness/unknownReason/firstThrowSequence/nativeprefix,sourceReads/custody/capture,actual archive/payload bytehash facts; nativeQualification/SourceQualified/Task1Pass and allnonclaims false."
+  },
+  "implementation": [
+    [
+      "shape.mjs",
+      "Independentf799 orderedkeys/schema interpreter, strictcanonicalJSON and typedfiniteenum/null checks; no Source algorithm imported."
+    ],
+    [
+      "partial.mjs",
+      "OriginalOWN chronological action/count/independentAFTER FSM with explicit firstvalidatedthrow and UNKNOWNreason policy; exactsafe-row/prefix-byte/hash rules; finite nativeprojection prefix/N2. No actual RAW TAP parser."
+    ],
+    [
+      "transport.mjs",
+      "Reuses reviewedOWN419 realUTC/calendar/API/step-window and exactbyteZIP primitives; newRootfixednomination/pair/admission/treejoin. Strict complete deflate consumption, zero-or-equal DD fields,TLV/noZIP64/versionneededsubset preserved byte-for-byte modulo helpernames."
+    ],
+    [
+      "fixed.mjs",
+      "Deep-frozenacceptedprotocol/schema/normal13 and22knownCore SourceDATAedges plusRootfinalrunner/WF/adapterroles. NormativeJSON DATA only."
+    ],
+    [
+      "reader.mjs",
+      "Exacttwo custody/outcome markers, allcontext/custodypartition/measurement/status/shape/canonical joins,actualZIP/listing/digest/filename/payload/time bindings; FAULT/mixed/partial data never normaladmission."
+    ],
+    [
+      "controls.mjs/model-builder.mjs",
+      "Focused actual calls to newreceiver using full coherent fictionalRootAPI/tree/log/pair/actualZIP; builder construction outside rejectioncatch. No precomputed RAMresult consumed by nativeproof."
+    ]
+  ],
+  "relationalRules": {
+    "N1": "ActualrawAPI repo/push/head/parent/tree/message/ref/attempt1, unique job and fiveexactsuccesslogicalsteps. Resolve actual fourthcommandstep by name, never number. Strict finitecalendar/header+two markers within±1000ms, no aliases/smuggling/mixed/duplicateframe. Jobduration<=420000ms.",
+    "N2": "Any observednativePASS contradicts same-ID validatedaction/countthrow even if laterprefixUNKNOWN. Other-ID/AFTERthrow not samecase contradiction. NativeFAILwithreturns permitted; no PASS inferred from returns.",
+    "journal": "Validatedcontiguoussequence1..128,elapsed0..330000monotonic,exactselectedorder/action/count/AFTERintervals. Clean rawprefix byte/hash equal NDJSON; equal-lengthunknownalsohash-equal; torn/invalid tail strictlylarger. Recorderflag>invalidcomplete>torn>empty reasonpriority. Firstthrow earliestexportedthrowincludingAFTER; nullable details don't erase edge.",
+    "unknownFault": "Stableempty/torn/invalidrecord/recorderflag => exactUNKNOWN/suppressedopenCase/afterOpen sentinels, priorvalidrows+native independent. Unsafeidentity/unstable/custody/target/input/N2/publication conflict => receiverreject/FAULT, never collectionadmission.",
+    "missingWorld": "No fabricatedcount whenworldmissing; laternativeFAILs canexist withoutactionmarks duebefore-markassert. Honestprefix is retained without skip-to-next recovery or physicalpendingclaim.",
+    "native": "Only selected-ID orderedfiniteprojection with prefix/empty/torn/ambiguous. prefix20legal; emptyrequireszero. SourceactualRAW TAP remains absent and is not independently parsed/authenticated.",
+    "custody": "Exactly2launchesPF+GREEN, freshpartitioncounts>=1 and sum2..8,allRootbooleans true, exactembedded/separate equality. No full3/6launch borrowing or globaldrain inference.",
+    "targetGit": "13ordered before/after hashes compare26bTARGET measurements; rawGit checks inertDATA/bodyedges and knownBASE S08absence/S09cede30157864B, not proposedcanonicalS08/S09 Gitpaths. Entire3203 preservation remains separateRootstaticgate."
+  },
+  "bodyAdmission": {
+    "rootSeal": "1fe62f22a3067029c651e99320c94624998eb58b",
+    "sourceDataIndex": "2f25941491df234890036ae8cf0609e323207b67",
+    "bodyEdgesHash": "4c126eb50b1b59debb0db6cc3808ff31275a7267b4ef260d3fbbc699f2798496",
+    "edgeCount": 25,
+    "admissionFile": {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/source-admission.json",
+      "mode": "100644",
+      "blob": "417ace1ecd30a4b78e12d5f4e09f3e143045afec",
+      "bytes": 7975,
+      "sha256": "44bf10143c02085c79fd6a47432c6f922e12a3af7a291132502c1ea5d83c44dc",
+      "gitBlob": "417ace1ecd30a4b78e12d5f4e09f3e143045afec",
+      "fullReadback": true
+    },
+    "verifiedOwnRam": "g20Trusted accepted all25exact Rootsealededges and expectedhash;22knowncorepins are fixed byacceptedprotocol,3actualrunner/WF/adapterpins fromRootfinaldata. No actualSourcecode was read/executed by this binding.",
+    "sourceExpectedContext": null,
+    "modelDistinction": "Syntheticseed has25Root-likeedges with22knownactualmetadata and3explicitlyfictitiouscodepins. Modelsare not Sourceexecutions or finalactualcontext. ActualRoot25admission is a separate readonlyJSON precondition for native.",
+    "pendingPrototype": "body-admission-proposal.json retains earlierproposal/nullFinalfieldshistorically; source-admission.json417ace... is definitive, updated asDATAonly withoutchanging code/tests/IDs."
+  },
+  "fixtureFirst": {
+    "seal": {
+      "blob": "28a00cc5c296ca245389a5cccfdcd929864cb133",
+      "bytes": 3833,
+      "sha256": "056125498793bb9208468fa1353a8a592a09fde95780fe4bf92c7944b42be552",
+      "fullReadback": true
+    },
+    "ids": "696dde71d176989160f1471594a56618466ca0fc",
+    "plans": "123a3af4c204f470237a476172ff4d90b53c90b8",
+    "oldRed": "24183a96a762d7ff13085bf01b4414025ab7556d",
+    "red": "Actualf799 and979c readers rejected legitimate newfamily specimen before newcode. Directf799c2OwnReduce returnedno firstThrowSequence where literalrequires2. Historicalreaders are incompatible preimages, not retroactive failures.",
+    "counts": {
+      "total124": 124,
+      "positive26": 26,
+      "negative98": 98
+    },
+    "idsHash": "c96e7b9f0e680b2fe841b1ad0f0bf52d2f90c12237a03b821b60a028171b61d9",
+    "coherence": "Model literals/uniqueIDs/expectations sealedbeforeguards. Sharedfictional2037clocks/99051xxxIDs/repeatedletterheads,neveractualhistoricalreceiptconversion. Outcome/custody/log/rawZIP/size/digest regenerated before outerAPI faultpatches. Source intendedTAP samples not imported asruntime oracle.",
+    "coverage": "Knownaction/count/between/AFTERoverlap/complete/throw/normal; UNKNOWNempty/torn/invalid/recorderpriority; firstthrow/nullableerror/missingworld; N1/N2; target13hashneighbors/custody2partition/claims; API/tree/header/group/frames/canonical aliases; methods0/8/DDsign/zero-matching/TLV and ZIP CRC/name/path/count/tail/ZIP64/version/bounds."
+  },
+  "verification": {
+    "ramGreen": "dc2bf99af1001a99371acd260ee5a179c1eb27f0",
+    "passed": 124,
+    "failed": 0,
+    "all124Unique": true,
+    "actualRootFinalBodyEdgesOwnValidated": 25,
+    "zipIdenticalModuloNames": true,
+    "fullReadbacksAll": true,
+    "Utf8ByteCountsSHA256GitSHA1": true,
+    "ownRunnerSyntaxParsedNotExecuted": true,
+    "nativeExecuted": false,
+    "SourceExecuted": false,
+    "wholeHistoricalSuitesExecuted": false
+  },
+  "native": {
+    "nomination": {
+      "branch": "lab/afw-c2-own-receiver-20261116-green-frontier-diag1",
+      "message": "AFW-C2-OWN-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+      "workflow": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+      "job": "c2-own-green-frontier-diag1",
+      "prefix": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/",
+      "runner": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+      "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+      "artifact": {
+        "name": "afw-c2-own-green-frontier-diag1-proof",
+        "path": "output/c2-own-green-frontier-diag1-proof.json",
+        "fileName": "c2-own-green-frontier-diag1-proof.json",
+        "retentionDays": 7
+      },
+      "node": "22.23.4",
+      "runnerOS": "ubuntu-24.04",
+      "jobTimeoutMinutes": 3,
+      "testTimeoutMs": 10000,
+      "activationReleased": false
+    },
+    "graph": {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/native-graph.json",
+      "mode": "100644",
+      "blob": "713753c9e35bf9998cbd6dd0de7319da12e2cd47",
+      "bytes": 5972,
+      "sha256": "ada3a410e1f45ea0045570d757d8294d6bef928b0cba3b55f1617c0bab47a24c",
+      "gitBlob": "713753c9e35bf9998cbd6dd0de7319da12e2cd47",
+      "fullReadback": true
+    },
+    "runner": {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+      "mode": "100644",
+      "blob": "edb8dad084d56830912e5be7b262bea2d0a85777",
+      "bytes": 5140,
+      "sha256": "f68c8946de2a783acbea2ffef509758fc16c244c29fcb6d609e6a19e0ec8bf54",
+      "gitBlob": "edb8dad084d56830912e5be7b262bea2d0a85777",
+      "fullReadback": true
+    },
+    "workflow": {
+      "path": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+      "mode": "100644",
+      "blob": "5af850175365643566eaa0d94e2c65dacf7b4ff1",
+      "bytes": 1489,
+      "sha256": "e3dba15eebcb7d4dbbc203bd4865457e4658307dc7409d135b37f782dd3794ae",
+      "gitBlob": "5af850175365643566eaa0d94e2c65dacf7b4ff1",
+      "fullReadback": true
+    },
+    "proofSchema": {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/proof-schema.json",
+      "mode": "100644",
+      "blob": "10a1d7bffdef10da674d4a64ab45814ca2941084",
+      "bytes": 3764,
+      "sha256": "0b5558feecd920d993d88127eaf2d552d7c4103943acfc2a947adafa4d87507a",
+      "gitBlob": "10a1d7bffdef10da674d4a64ab45814ca2941084",
+      "fullReadback": true
+    },
+    "selection": {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/selection.json",
+      "mode": "100644",
+      "blob": "aae69921a1b3186973e973f2260835c6e938a24c",
+      "bytes": 1581,
+      "sha256": "5d4f688230b5dc48a6f4f456ebc2540d9b55e9cbc31b6e79bcab9c7f8d65fd92",
+      "gitBlob": "aae69921a1b3186973e973f2260835c6e938a24c",
+      "fullReadback": true
+    },
+    "expectedIds": "696dde71d176989160f1471594a56618466ca0fc",
+    "expectedCount": 124,
+    "nativePaths": 20,
+    "nativeBytes": 321500,
+    "proof": "ActualNode22.23.4/Ubuntu24.04/pushattempt1/job3min/case10s/contentsread/noinstall. Runner verifiesfixedgraph/selfbodybindings, actualOwnGitcontext, mandatoryRootfinalSourceadmissionstaticdata andactual124orderedtestexecutions. CompactproofJSON+LF<=24576 withIDsHash/counts/bodybindings; TAP comment marker AFW_C2_OWN_GREEN20_FRONTIER_DIAG1_PROOF. No RAMreport or Sourcehelper is used asnative outcome.",
+    "proofFlags": "ownModelsExecuted:true onlyifnativeactuallyexecutes; actualSourceExecution:false/finalSourceBinding:false/SourceQualified:false/Task1Pass:false/sevenfalse. SourcebodyDATAseal is staticadmission only, not privateTarget/RAW TAP authentication.",
+    "actualRun": null,
+    "actualJob": null
+  },
+  "limits": "Sourcebody24576+exactLF=>payload24577;custody1024/FAULT2048;realZIP1MiB/log4MiB/tree4MiB8192;sourcejournal32768/128/eventelapsed330000/stdout1MiB/stderr64KiB;sourcechild180/case120/total330/job7 and original30s/5sauthority unchanged. OWNproof24576includingLF is separate. No new clocks/budgets/businessrequests/physicalprobes.",
+  "reversibility": {
+    "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/reversible-diff.json",
+    "mode": "100644",
+    "blob": "129405a2f73bc0f35730a53b1864fc35fe14cdb3",
+    "bytes": 492217,
+    "sha256": "1145a59c0b1fb533b260ab63bc298c9e70c8159a1ec440848fe41c9c0d1b9161",
+    "gitBlob": "129405a2f73bc0f35730a53b1864fc35fe14cdb3",
+    "fullReadback": true
+  },
+  "recoverability": "Full24afterimages pluscompletef799/979cpreimages and stringforward/reversespans; allpaths additive undernewfamily+oneOWNWF. NoSource13/M/Core/c230/oldOWN/historicalreceipt/ref changed. Preserveunmounteddesigncheckpoints onrollback.",
+  "evidenceLimits": "ActualSourceRAW TAP/targetfilebytes/unexportedjournalSuffix not supplied; OWN independently verifies safeNativeprefix/N2 and reconstructedexportedevents plus fixedprovenance, not absentRAW data. Valid-lookingemittedtargetarrayscannotindependentlyauthenticatefilesystemmeasurement; knownproducer/RootSourceTOOLSreview/custody is required. No503cause/old439657case20/physicalpendingIO/clockfreeze/globaldrain/SDKwithdrawal/namespaceEmpty/PCoff/liveconsent/Task1qualification inferred.",
+  "performed": {
+    "immutableOwnBlobs": true,
+    "boundedOwnRam": true,
+    "SourceExecution": 0,
+    "SourceImports": 0,
+    "SourceCompilation": 0,
+    "SourceSyntax": 0,
+    "SourceTests": 0,
+    "SourceMutation": 0,
+    "oldOwnMutation": 0,
+    "filesystem": 0,
+    "dependencies": 0,
+    "refs": 0,
+    "runs": 0,
+    "provider": 0,
+    "browser": 0,
+    "secrets": 0,
+    "subagents": 0,
+    "ActionsRepoll": 0,
+    "logsRepoll": 0,
+    "artifactRepoll": 0
+  },
+  "pending": [
+    "RootstaticFULL/hash/path/triggeradmission",
+    "OneRootOWNnative124actualAPI/TAP/proof/ZIP/contextjoin+closure",
+    "FreshindependentSPEC+QUALITYreview",
+    "SourceTOOLS/nativeSourcefinalreviewandseparateRootuniqueGREEN20businesscapture. Sourceactualexpectedhead/tree/run/job remainunbound here."
+  ],
+  "rollback": "Root omits/removes only listednewpaths/WF initsisolatedbranch afterevidencepreservation; leave designcheckpoints/oldcode/receipts/original3203/main/history intact.",
+  "ActualSource": false,
+  "finalSourceBinding": false,
+  "nativeQualification": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

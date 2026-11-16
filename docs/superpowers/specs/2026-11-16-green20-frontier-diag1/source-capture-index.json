@@ -1,0 +1,324 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-SOURCE-CAPTURE-INDEX/1",
+  "status": "DATA_READY_ACTIVATION_HELD",
+  "authority": {
+    "ruling": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+    "design": "09745d7a850b19d8004b3214be9357b9e278bd7d",
+    "contract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "fixtureFirst": "70f228712cf9b7e6eef08e6d784316b174271106",
+    "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac"
+  },
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+    "message": "AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+    "job": "c2-green-frontier-diag1",
+    "prefix": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/",
+    "runner": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+    "driverSibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "artifact": {
+      "name": "afw-c2-t1-green-frontier-diag1",
+      "path": "output/c2-t1-green-frontier-diag1.json",
+      "fileName": "c2-t1-green-frontier-diag1.json",
+      "retentionDays": 7
+    },
+    "activationReleased": false
+  },
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "originalLeaves": 3203,
+  "mount": "16 inherited (index+13 inert body DATA+custody guard/preflight) plus9 new (8 design additions + single shared real collection-adapters.mjs authorized in 696fb); 3228 leaves on BASE. Exact additive paths only. No tools-controls or OWN workflow on this tree. No changes at canonical Git product paths. S07 remains exact on disk in target with separately pinned Sibling D07. Base bootstrap is DATA dependency only. Raw archive contents and legacy lock initial/SDK read admitted. No business frames from prior occurrence reused.",
+  "mountLeaves": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+      "bytes": 3956,
+      "sha256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+      "bytes": 21200,
+      "sha256": "a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e55a6387549a8447a5ad93356184645ae19e70de",
+      "bytes": 21378,
+      "sha256": "8891598c7c0ee416762ad65d139c7e9336cc33e4123e251211055e42c3265fe7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5c8123b9e66166a198add4a0593372cfef13a1db",
+      "bytes": 9911,
+      "sha256": "d608324a2270af11c0f371431079edb02bafa04a5bb0122150dd2203bd59c63c"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/diagnostic-driver.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/progress-recorder.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "dec4bb5585375423ca87d8d3baecb2edbe733b6f",
+      "bytes": 16837,
+      "sha256": "b8a84896a5daf7b8f0d102bd0ef45891e6983f57a52dfa702ec53f972e55111e"
+    },
+    {
+      "path": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b7d82b817f7473f7bbc4197843f08410b7789e15",
+      "bytes": 1581,
+      "sha256": "cd7786424754a43e756aa55428da604188ebc7ddd7adf6ea8c9dfb8815b590bd"
+    }
+  ],
+  "steps": [
+    "Read the exact one-use lab head",
+    "Use the fixed Node runtime",
+    "Install only the existing locked dependencies",
+    "Observe isolated proposal-green boundaries",
+    "Preserve the bounded green diagnostic"
+  ],
+  "wire": {
+    "markers": {
+      "custody": "AFW_C2_GREEN20_FRONTIER_DIAG1_CUSTODY",
+      "outcome": "AFW_C2_GREEN20_FRONTIER_DIAG1_OUTCOME",
+      "fault": "AFW_C2_GREEN20_FRONTIER_DIAG1_FAULT"
+    },
+    "selectionCanonical": "e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd",
+    "selectionRaw": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99",
+    "frames": 2,
+    "payloadMaxIncludingLF": 24577,
+    "outerBodyMax": 24576,
+    "attempt": 1,
+    "child": 180000,
+    "case": 120000,
+    "total": 330000,
+    "minutes": 7,
+    "targetProcessRange": [
+      2,
+      8
+    ],
+    "newLaunches": 2
+  },
+  "graph": {
+    "runner": {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "dec4bb5585375423ca87d8d3baecb2edbe733b6f",
+      "bytes": 16837,
+      "sha256": "b8a84896a5daf7b8f0d102bd0ef45891e6983f57a52dfa702ec53f972e55111e"
+    },
+    "parentImports": [
+      "node:crypto",
+      "node:child_process",
+      "node:fs/promises",
+      "node:path",
+      "node:url",
+      "./collection-adapters.mjs"
+    ],
+    "adapterImports": [
+      "node:crypto",
+      "node:fs",
+      "node:fs/promises",
+      "node:path",
+      "./read-progress.mjs"
+    ],
+    "children": [
+      "owned custody preflight 10000ms",
+      "node --experimental-vm-modules --test --test-reporter=tap --test-concurrency=1 test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs"
+    ],
+    "driver": {
+      "sibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "relativeImports": [
+        "node:test",
+        "node:assert/strict",
+        "./fixtures/finite-coupled-native.mjs",
+        "./finite-green-progress-recorder.mjs"
+      ],
+      "tail": {
+        "bytes": 1794,
+        "sha256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a",
+        "git": "9f2b7ef5a93a183bcceda74d950c991c41f4440e"
+      },
+      "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "original": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+    }
+  },
+  "hold": "Root must admit SourceTOOLS/OWN controls, actual artifacts and independent reviews before sole GREEN20 business diagnostic. No Source execution by author, no Worker changes or live resources. Close/rollback only by Root exact nominated ref, preserve all3203 and DATA+actual evidence, remove nominated WF and verify zero close-head runs.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
