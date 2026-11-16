@@ -1,0 +1,74 @@
+{
+  "schema": "AFW-N3-C-READONLY-DIAGNOSIS-BRIEF/1",
+  "atUTC": "2026-11-16 17:52:12 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": "Original Source author read-only diagnosis and separate independent evidence review of actual N3 C; no implementation or repeat capture",
+  "facts": {
+    "primary": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+    "outcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+    "close": "0638c9c5634c36b60835c12eb9153af4297d183e",
+    "gate": "aa7e24f487eca282d4b0ab78896ee555b6ce2be0",
+    "run": 43921222041,
+    "job": 133488709833,
+    "head": "07d7389f7aab1ef7c5e6a5311b6109bf2d9615b8",
+    "tree": "a6ab721daf9ceecb2f9cd47f1f8e14e8ddf1e034",
+    "closedHead": "9e58ccb94c046e23ed83b3b60be86eaffb7e6480",
+    "closedTree": "b6ccfd808f7ad8f5872c510e93384d748f0ee100",
+    "native": "3PASS/N3_NOTICESFAIL;4casescomplete;Sourcefilefailurefalse;AFTERreturned;childexit1,errorKindnone,stderr0B",
+    "ownAdmission": "Root executed independently reviewed OWNfcfe54/c5efe74 against full API/head/tree/jobs/5commandsteps/4frames/schema/replay/custody/manifest/compiledmetadata/ZIPCRC+digest+fullDeflate; diagnosticCaptureAcceptedtrue. No Source execution locally.",
+    "observation": "GET200 andPOST503 bodies settled; countersupload2/activation2/receipts2; afterprobe newFailures1/positioncomplete/consumedTickettrue/stageApprovaltrue/receiptCount2;2guards initial-parent-holders,interpretationunknown;host4prepared/4returned/allComparedtrue;causalstateunjoined/coverageunknown/reasonCAP_PRIVATE,events0/firstErrornull.",
+    "importantLimits": "Positioncomplete and approval/receipt counts are separate observations with no causaljoin. Do not assert which target/check passed/failed, trigger/timer/race cause, missing resource, physicaldrain or productreadiness. PublicCloudflare incident not involved in this isolated simulation proof. CAP_PRIVATE is recorder evidence, not proof of product resource failure."
+  },
+  "sourcePins": {
+    "packet": "4115c1f0d163a2f51a6bbe647d3610ef36311410",
+    "index": "26f167bc9a56184a614e37cbff2b1f03de90a83c",
+    "manifest": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "helper": "bff0415fbbf37c787439d4c526b1c77c8fdf2a65",
+    "driver": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+    "reader": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+    "originalNormal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac"
+  },
+  "questions": [
+    "Which exact code paths set CAP_PRIVATE? Identify concrete counters/conditions and file/line; distinguish whatactualoutcome establishes from whatcannotberecovered.",
+    "Can static actualhooks/originalcallback semantics establish a recorder defect that explains loss of selectedscope, or merely boundedunknown? Check preeligibility traffic,globalvsselectedscope,counters/metadata/notes, beforeProbe snapshot/cut sideeffects, repeatedretain/check/settlement notes, exact source transforms. Do not pick a cause without evidence.",
+    "What minimal next bounded work would recover the missing join while preserving caps/Source13/M/no-newbusinesscalls/no-Mbridge/no-newreactions/no-newclockread/retries? If intervention would be needed name exact proposed field or control and why; do not implement or inflate caps.",
+    "What does measured positioncomplete vspriorreceipt-recorded allow asfact/inference only? 503stillblocks Task1, no blanketclaim Sourcebug or Cloudflarecause."
+  ],
+  "authority": {
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "semantics": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "prefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0"
+  },
+  "allowed": [
+    "read immutable cited blobs asDATA/staticstrings",
+    "Source author may derive exactcounts/lineanchors bystring/JSONanalysis only",
+    "independentreview checks instrumentation/admission meaning against provided primary, no needlog/ZIP retrieval",
+    "create one detachedJSONreport fullreadback/hash"
+  ],
+  "forbidden": [
+    "Source eval/import/compile/syntax/tests locally",
+    "anycodepatch/changedprotocol/newthreshold or capincrease",
+    "newrefs/runs/retries",
+    "rawlog/ZIPrefetch (Root consumed once)",
+    "liveproviders/browser/mail/keys/OTP/Max",
+    "subagents"
+  ],
+  "output": "One immutableJSON report peractor, concise facts/unknowns/concrete defect ifproven/exactmissingjoin/minimalnextproposal+validation plan. No patches or newrun authorization.",
+  "actualSourceExecution": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
