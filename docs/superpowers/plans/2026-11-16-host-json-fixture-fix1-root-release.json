@@ -1,0 +1,78 @@
+{
+  "schema": "AFW-C2-ROOT-HOST-JSON-FIX1-IMPLEMENTATION-RELEASE/1",
+  "timestampUTC": "2026-11-16 23:53:51 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA and forthcoming separately gated GitHub Actions host-helper-only test",
+  "resourceType": "New Source fixture candidate and four-control native tool packet; no ref/run/runtime",
+  "allowedAction": "Author full candidate onlyS10, successor13index preserving other12, four-control fixture-first inputs+expectedoldRED/newGREEN, immutablebefore/after/reversible/scopegraph/nativeproposal. No native activation by author.",
+  "authority": "Owner authorizes autonomous AFW improvements/trials and cloud work; new bounded Root SDD implementation scope.",
+  "plan": "0a04e29e7a72c4ef853942fc6f7093416c9e9a71",
+  "resultReview": "e62f6352e8761a3a71d4e781950892291ba68a52",
+  "family": "HOST_JSON_FIX1",
+  "round": 1,
+  "maxRounds": 5,
+  "SourceChange": {
+    "oldSource13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "onlyCandidatePath": "test/fixtures/finite-initial-entry-world.mjs",
+    "oldS10Blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+    "allowedDelta": "In createInitialEntrySynOutbound.respond firstConnection path, serialize fresh once per invocation, use exactly those encoded UTF8 bytes for trace bytes/hash AND Response, preserve behavior/status/statusText/header semantics. Leave non-firstConnection path behavior. No memoization/caching/baseline reuse, Source13other12/M/QA/SDK/ordinarybridge unchanged.",
+    "frozenHistory": "Do not overwrite old source index, c230 qualifier, original3203 or closed occurrence. Successor Source index is separate candidate DATA, not Source qualification."
+  },
+  "fixtureFirst": {
+    "ids": [
+      "HOST_ENCODE_ONCE",
+      "HOST_WIRE_EQUAL",
+      "HOST_FRESH_PER_CALL",
+      "HOST_CLOSURE"
+    ],
+    "required": "Seal literal inputs and meaningful before/after expectations BEFORE patch. Test actual exported createInitialEntrySynOutbound with minimal own registry/certs callback, not copied replacement function. Old same static-object counting toJSON observed2/new1, identical actualbody/trace SHA. Unicode/escaping/representative bounded modulemetadata, genuine non200, completeheaders/status/statusText, normal firstConnection=false semantics, mutable sameURL and sameobject changed/restored visible, nonserializable supportederror no traceappend. Full actual target13 old/proposed sets differonlyS10."
+  },
+  "nativeScope": {
+    "released": false,
+    "proposalOnly": true,
+    "repositoryParent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+    "oneUseMessage": "AFW-C2-HOST-JSON-FIX1-TOOLS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-host-json-fix1-tools.yml",
+    "job": "c2-host-json-fix1-tools",
+    "Node": "22.23.4",
+    "runner": "ubuntu-24.04",
+    "jobMinutes": 3,
+    "testTimeoutMs": 10000,
+    "contents": "read",
+    "attempt": 1,
+    "npm": "Existing locked dependencies only; no install/source execution locally; cloud ignore-scripts/no-audit/no-fund policy consistent with BASE bootstrap.",
+    "newExplicitImportScope": "Future host helper tool may import locked S10 transitive modules in GitHub ONLY, statically enumerate pins/import graph; actual callback invoked only with synthetic own inputs. Never initialEntryHarness/Miniflare constructor/build/SDK/privateactor/providerfetch/network or full Source business modes. Source modules remain inert on author/Root local side.",
+    "physicalFS": "Future native only, owned bounded RUNNER_TEMP with realpath/dev/inode guard and cleanup; original workspace leaves read-only, materialized isolated old/new targets. No local FS/deps.",
+    "proof": "Unique canonical marker+exactJSONLF artifact ≤24576bytes, four exact native IDs with namedchecks, actual code/data hashes/old2-new1/byteequivalence/freshness, actual GitHubcontext and cleanup. Fixed bounds ZIP1MiB/log4MiB; no rawlargepayload/secrets."
+  },
+  "unchangedBudgets": {
+    "childMs": 180000,
+    "caseMs": 120000,
+    "totalMs": 330000,
+    "jobMinutes": 7,
+    "requestMs": 30000
+  },
+  "holds": [
+    "No Source business capture/full qualification repetition",
+    "No product M/QA/security predicate/source fresh checks removal",
+    "No source runtime/Cloudflare/OAuth/OTP/tokens/mail/Max action",
+    "Separate Root static/fullhash/trigger/native gate + fresh review required",
+    "Any later actual Source trial requires newSource13 binding admission and gate, no assumptions from host4"
+  ],
+  "claimLimits": "Double serialization is deterministic redundant work, not proven cause of current/historical NOTICES POST. Actual GREEN20numericstatus/effects remain unknown. Do not assert fix/timing/qualification or PC-off readiness from host-unit result.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
