@@ -1,0 +1,369 @@
+{
+  "schema": "afw.c2-next-get.first-failure-diagnosis.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "mode": "READ_ONLY_DIAGNOSIS",
+  "authority": {
+    "brief": "4d25b032ea837475c7cd56c2fd64fb78ea6f66ad",
+    "allowedAction": "Read bounded immutable DATA; create only this sane immutable diagnosis report and FULL readback; then IDLE. No Source or tooling proposal/body edits."
+  },
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "runId": "43839173063",
+    "attempt": 1,
+    "jobId": 133203235125,
+    "head": "21452cc07ef31724ebd228df53634a4b35fbe7e4",
+    "tree": "36e821976bbc2edebf901c88a82bf0d8c2e85537",
+    "closedHead": "157b4095294be1565492dbff3dc9c2a2d31b7993",
+    "closedTree": "3cf3ab5956193479deab76a61bb9af7cbd9388b9",
+    "rootReportedClosure": "WF removed/original3203 and Main/history unchanged/zero close-head runs. Not independently re-polled here."
+  },
+  "evidence": {
+    "primary": "8e82f4a08850817b9ddce597446814a49ed9c53b",
+    "exactSafeOutcome": "f4d51d456da8897545e278718b4d1179090ef3aa",
+    "payload": {
+      "bytes": 16828,
+      "sha256": "8714fc482a03143fdbfccfd6415fe02368a8bbc94bb767c617d0d47598b78ec0"
+    },
+    "journal": {
+      "records": 63,
+      "bytes": 12235,
+      "sha256": "27991652f4015a259ec8bd23906d6f8a4975631f5c7f18fabe45825d9412891b",
+      "stable": true
+    },
+    "rootReader": "9e972bfee039512f0827488cec4645332645e2b1",
+    "rootCoveringControls": 132,
+    "rootScopedReview": "d628ad078c8ca390270aa8b5cb818893235e9aa8",
+    "use": "Existing safe immutable primary/outcome only; no logs or artifact downloaded again."
+  },
+  "ruling": "The FIRST observed failure is notices POST status assertion S08:41:12, after a successful notices-form GET. Its exact status and inner cause remain unknown. Dependent monitor/GET were allowed to run after that failure, without saving the new form cookie or adopting notices configuration. Later ticket-put rejection is useful partial-write evidence, not a qualified finite-stage failure. No product fix is justified yet.",
+  "observed": [
+    {
+      "id": "capture",
+      "fact": "Native child exit1 normally/no signal/no parent timeout; capture-only job success. Helpers5accepted/30rejected/5roundtrips/5slotchecks, bootstrap actualENOENT and3custodylaunches/owncleanup verified by Root."
+    },
+    {
+      "id": "first3",
+      "fact": "NG_CONNECTION, NG_OAUTH, NG_PHASE nativePASS; each actual action and independent count returned. Phase case covers new raw phase mutation, real compiled denial/noSEND and exact restoration."
+    },
+    {
+      "id": "notices",
+      "fact": "Action59468→117423ms (57955ms), AssertionError ERR_ASSERTION at S08:41:12, count returned; no actual POST status number or inner error emitted."
+    },
+    {
+      "id": "monitor",
+      "fact": "Action117465→117536ms failed S08:96:69 at monitoring GET status assertion. No monitoring decision POST97 or after-event/history oracle100 onward executed."
+    },
+    {
+      "id": "laterGET",
+      "fact": "Single request117673→143995ms (26322ms), actual503/body read settled143997. Ticket count2→3, use count2→2; body/IDs/record action not published. No secondGET/retry."
+    },
+    {
+      "id": "trace",
+      "fact": "Worker first/last edges and snapshots show initial-timeline returned, OP60source reads/60timeline calls,58checks/28steps, then ticket-put enter25685→throw26394ms. No ticket-readback or finite-permission/history site row. Final timeline throw26393→op-source/op-check/op-step/ticket-put throws26394."
+    },
+    {
+      "id": "deadlines",
+      "fact": "Last timeline mark remaining3689ms; enclosing OP marks remaining3688ms/source-window ceiling margin755965ms. Marker timing is not child-deadline identity or exact predicate."
+    },
+    {
+      "id": "retention",
+      "fact": "Before/latest/after scope-local absent0; active13 observed during work; AFTER returned144152. No global/native namespace drain claim."
+    }
+  ],
+  "staticDeductions": [
+    {
+      "id": "GET-beforePOST",
+      "source": "S08 normalde8a and observer171f lines17–21,34–41",
+      "fact": "S08:39 awaited choose(). S08:18 asserted GET200 then19 extracted nonempty handle/projectRef/cookie. Reaching AssertionError at41 means those steps completed. post21 was called, returned a response and discard15 returned its status after body cancellation. The observed assertion implies status differs from200; exact number is unknown. 57955ms combines GET+POST and other work, not one request's clock."
+    },
+    {
+      "id": "notices-local-state-not-advanced",
+      "source": "same S08 lines41–59",
+      "fact": "assert.equal precedes f.choice=form on41. A thrown assertion prevents that assignment, receipt/result-backed checks43–57 and adoptConnectionConfiguration59. main.choice and mounted runtime remain at the preceding successful connection adoption. A failed POST might still have persisted facts or changed synthetic provider pointer; no receipt/publication state was captured for this first failure."
+    },
+    {
+      "id": "dependent-flow",
+      "source": "D07 20d194... lines8–19; S08 headers16/monitor96/nextGetDiagnostic117–124",
+      "fact": "Each native case is independently registered. run catches and rethrows its own action/count failure but has no prerequisite gate. Node proceeds to next tests. Both later methods use headers(f), hence previous f.choice cookie; no new notices-cookie assignment/remount occurred. Their failures cannot establish a valid post-notices phase."
+    },
+    {
+      "id": "poll-not-first-cause",
+      "source": "D07 line19; observerS08 line118; recorderc164 lines86–96; Worker86da lines4,8–10",
+      "fact": "Metadata arm/poll starts only in NG_NEXT_GET after notices and monitor have already failed. Worker armed=false initially; nextGetMark returns while unarmed. Concurrent nextGET polling therefore cannot have caused the earlier NG_NOTICES failure. Compile/import/disabled-mark overhead or other fixture differences are separate unproven hypotheses."
+    },
+    {
+      "id": "monitor-oracle-boundary",
+      "source": "normalS08 lines88–106, observer same lines",
+      "fact": "Pre-GET identity/history-before assertions88–95 completed before failure96. The current SQL delta/history AFTER oracle100 onward was not reached, so this occurrence does not cover the repaired monitor oracle end-to-end."
+    }
+  ],
+  "sourcePins": [
+    {
+      "id": "S00",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "originalBaseBefore": {
+        "blob": "7eb8f28760de60f143e487eeb6988705059a0a44",
+        "bytes": 126504
+      },
+      "currentNormal": {
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "gzipBytes": 32414
+      }
+    },
+    {
+      "id": "S01",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "originalBaseBefore": {
+        "blob": "152e730f83af7ef063b6b1db89f8b0a779c2b60e",
+        "bytes": 45255
+      },
+      "currentNormal": {
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+        "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "gzipBytes": 11301
+      }
+    },
+    {
+      "id": "S02",
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "originalBaseBefore": {
+        "blob": "e760b3579a38f1dbb73b177bb73b06d814eb881f",
+        "bytes": 2505
+      },
+      "currentNormal": {
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+        "gitBlob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "gzipBytes": 1110
+      }
+    },
+    {
+      "id": "S08",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "originalBaseBefore": null,
+      "currentNormal": {
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+        "gitBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "gzipBytes": 5413
+      }
+    },
+    {
+      "id": "S09",
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "originalBaseBefore": {
+        "blob": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+        "bytes": 57864
+      },
+      "currentNormal": {
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+        "gitBlob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "gzipBytes": 16768
+      }
+    },
+    {
+      "id": "S10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "originalBaseBefore": {
+        "blob": "a7b730dc9be336528f0971544099f79d05758b1a",
+        "bytes": 87501
+      },
+      "currentNormal": {
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "gzipBytes": 22824
+      }
+    },
+    {
+      "id": "S12",
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "originalBaseBefore": {
+        "blob": "ea910f0fcdeade5a794ddaa60898706924e72f80",
+        "bytes": 4750
+      },
+      "currentNormal": {
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+        "gitBlob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "gzipBytes": 2098
+      }
+    },
+    {
+      "id": "D07",
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "normal": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "temporaryObserver": "20d194d9b6b87eff6d1b68d08668e5183bc66195",
+      "lines": "8–19"
+    },
+    {
+      "id": "OBS08",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "F9": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+      "currentNormal": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "temporaryObserver": "171f57edcb8f957798459f5a5677f48ed8400489",
+      "lines": "17–22,34–69,75–106,117–124"
+    },
+    {
+      "id": "OBS10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "normal": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "temporaryObserver": "24707e47e042ee60b4e549c1a5a195ede7ca0019",
+      "lines": "99–111 observer assembly;176–180 adoption; normal174–178"
+    },
+    {
+      "id": "COMPILE",
+      "path": "next-get-compile.mjs",
+      "blob": "0b8f087711a24018ef869f093e80d0f235e45d4d",
+      "lines": "3 margins,5–9 exact wrapper,12–18 PH,21–30 OP"
+    },
+    {
+      "id": "TRACE",
+      "path": "worker-trace.txt",
+      "blob": "86daedb5b2bc8d100c37874ecd8e6c0ad5311fb8",
+      "lines": "4–10 arm/disabled marks,11–16 counters/first-edge retention"
+    },
+    {
+      "id": "RECORDER",
+      "path": "next-get-recorder.mjs",
+      "blob": "c1647140c7b20654ea80c212f3bc7032bc1f18ff",
+      "lines": "76–100 ticket snapshot/arm/poll/final"
+    },
+    {
+      "id": "SLOT",
+      "path": "next-get-slot.mjs",
+      "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+      "lines": "2–15 one physical pending RPC retained despite timeout"
+    },
+    {
+      "id": "LEASE",
+      "path": "lib/mcp-qa-finite-initial-lease.mjs",
+      "baseAndCurrent": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+      "lines": "3–19, especially7 check/11 wait/12–18 child",
+      "compiledExistingInstrumentation": "NormalS10 lines83–89 replaces same guard failure seams with private diagnostic logs, without changing predicates/deadlines."
+    },
+    {
+      "id": "STORE",
+      "path": "lib/mcp-qa-finite-preparation-store.mjs",
+      "baseAndCurrent": "122bc0e52870c71da7ae98ef73cd7762171d89ca",
+      "lines": "24–41 transaction,44–48 append,134 putTicket"
+    },
+    {
+      "id": "WORK",
+      "path": "lib/mcp-qa-finite-stage-work.mjs",
+      "baseAndCurrent": "068d35c2555c7dc711c487f6021ec572bd3af067",
+      "observation": "Existing scope-local WeakMap actual promise retention; compile helper33 appends read-only retention accessor."
+    }
+  ],
+  "laterTraceMap": [
+    {
+      "site": "request/initial",
+      "source": "PH610–652; receiver8505... lines16–26; OP75–83",
+      "chain": "Forwarded receiving local root clipped to original30s. PH637 initial pair→chooseOwnerStage638→version match639→readChoice641. OP continuePrivateQaFiniteOwnerChoice201–203 and choice205 process actual originalGET."
+    },
+    {
+      "site": "op-source/timeline",
+      "source": "OP134–156; PH641–650/587–589",
+      "chain": "readSource awaits OP child(parent, actual readChoice), which awaits readOwnerTimeline; that awaits observeOwnerPhasePair100. readChoice then enforces actual stable stage/identity/history against initial. The timeline marker catches only failures inside readOwnerTimeline, not later comparison644/649. Its observed throw therefore lies inside observeOwnerPhasePair or its retained lease/IO lifecycle; exact leaf unobserved."
+    },
+    {
+      "site": "facts/primary/SQL",
+      "source": "PH100–194,196–275,279–370,372–528",
+      "chain": "Captured holder identities + original lineage; fixed5s children for real storage reads/first-primary SQL/native metadata/credentials; first facts+primary; qualification; second primary+facts+qualification; pair equality524/current525. SQL includes issuer fence/consent/grant, current notice tickets/events. These are actual reads, not a caller DTO. Timing/noncurrent-holder/IO/predicate failures all propagate via timeline."
+    },
+    {
+      "site": "ticket-put",
+      "source": "OP176–178,209–233; compile29–30",
+      "chain": "GET constructs ticket224 then durable Ticket231. Wrapper ticket-put spans c.step(write) AND mutation status/hash validation, not just physical tx.put. c.step159 does pre-check→actual5s child(write)→post-check. Each check re-reads full source timeline156. Only after it all returns does explicit ticket-readback start178. Actual ticket-put throw + absent readback cannot distinguish precheck/write/postcheck/status-hash by itself."
+    },
+    {
+      "site": "durable storage",
+      "source": "STORE134→transaction24–41→append44–48; put await31",
+      "chain": "putTicket validates codec then transaction append under exact lease checks before/after tx.get/tx.put and final transaction ACK. Existing/recorded/uncertain observations possible; a persisted record can outlive a failed later check. Positive ticket delta is evidence of durable count change without successful form response, not proof of a particular key/action/ACK or completed admission. The observed delta plus fresh timeline throw is consistent with successful physical put followed by failing post-write source recheck; safe data does not expose transaction result or identify the leaf, so this is an inference."
+    },
+    {
+      "site": "rejection candidates",
+      "source": "PH484–500 and418–460/512–525",
+      "chain": "Inventory caps, unique ticket.action490, exact known-stage ticket link496, use/history/pointer/canonical-pair consistency are real rejection predicates. A second same-action ticket after a failed prerequisites path is one concrete hypothesis. Safe counts do not expose actions/relationships, so no specific predicate/action is established."
+    },
+    {
+      "site": "deadlines",
+      "source": "OP85–106 and PH130–150; LEASE7/11–18; compile3",
+      "chain": "OP children clip to min(parent deadline,wall+5000); nested initial lease also has5s children and fixed narrower ceilings. Trace remaining reads the supplied lease deadline minus current wall time, not every inner child timer. Positive3688ms is not proof of child expiration, nor proof all child holders/ceilings remained live. Last open timeline snapshot entered26172 with60entries/59returns and final same60entries/one throw26393 bounds that same last invocation to221ms under the recorded worker wall clock; it still does not expose its internal failing guard. Ticket-put's entire marked interval is709ms (25685→26394), not a5s wait from that entry. Positive margin on timeline's own supplied lease weakens simple expiration of that specific deadline; it does not establish another inner child/holder/predicate cause."
+    }
+  ],
+  "comparison": {
+    "priorPrimary": "2cd454e96b713d409425da8f42e48959d21cb8eb",
+    "priorOutcome": "3ec7cff5538ef23da2089e50b3890113699612b6",
+    "priorIndex": "f9f36a61875be344d38f19d77caf1a46c48e8f37",
+    "facts": "Prior normalF9 diagnostic had notices action return/nativePASS74545→103417ms (27872ms); connection27645ms/OAuth16347ms. Current connection37033ms/OAuth20770ms, notices57955ms. Prior phase case failed during mutator before deliberate malformed write; current phase writes/denies/restores andPASS. Prior full20-prefix graph also ran additional negative controls and no current nextGET compile/recorder variants. Prior monitor failed old global-count oracle, not current monitorGET.",
+    "meaning": "This is a proportionate working reference, not a controlled A/B comparison. Products PH/OP frozen across runs, but fixture8/9, graph, assembly/marks and cloud timing differ. Longer current durations support measuring request budgets, not a causal attribution to machine/phase repair/observer. NextGET polling specifically starts too late to explain firstNOTICES failure."
+  },
+  "unknown": [
+    "Actual notices POST HTTP number, its GET/POST individual durations, first inner error class/cause/position, stage admission/nativeSEND/ACK/receipt frontier.",
+    "Whether notices POST consumed ticket/recorded approval or any publication journal/pointer before rejection; current trace only begins later.",
+    "Exact ticket action/key, action uniqueness, known-stage linkage, canonical-pair difference or holder mismatch behind later timeline throw.",
+    "Whether any narrower inner child/ceiling guard failed versus an immediate factual predicate/native IO; final3688ms cannot identify it.",
+    "Updated monitor AFTER delta/history oracle and genuine finiteGET prerequisites remain untested in this occurrence; no inference from capture-only jobSUCCESS."
+  ],
+  "smallestNextObservation": {
+    "kind": "PROPOSAL ONLY; no code/helper/schema body or new branch/run nominated here",
+    "graph": "Fresh actual normal13 world→connection→SDKOAuth→corrected phase mutation/compiled denial/exactrestore→ONE notices-formGET→ONE noticesPOST only if the GET genuinely succeeds→close. Stop business work immediately on first prerequisite/action/count failure. No monitoring, second formGET, finitePOST, ScopeDrop, retries, other negatives, mutant or regressions.",
+    "registration": "One finite diagnostic flow or explicitly gated dependent driver, with exact selected scopes declared in a new Root-reviewed manifest. Do not emit later unexecuted scopes as PASS/SKIP/fakecase. Preserve original action thrown value via boolean, independent actual count, and close error as auxiliary. Existing normal20 driver unchanged.",
+    "minimalTelemetry": [
+      "At actual S08 choose18/19 and post21/approve41 boundaries capture operation enum notices-get/notices-post, entered/returned/threw, relative capped elapsed, actual numeric HTTP100..599|null and body/cancel settled boolean. Emit POST result immediately before assertion; retain original assertion/error unchanged.",
+      "At first failure, read existing fixture firstConnectionProbe (S09:351) at most once, privately bounded; sanitize only new/delta fixed connection-failure.position and generic failure/correlator enums plus allowed class/code and whitelisted source role+line/column. Existing S09 instrumentFirstConnection379–427 already records these inside private Worker memory. No raw frames/message/rows/business paths/IDs in stdout or artifact. If delta cannot be uniquely tied to noticesPOST, mark unknown, never borrow phase-negative error.",
+      "Capture first inner rejection origin before PH catch maps status: fixed origin enum holder/parent-clock/child-clock/source-predicate/native-io/unknown, actual operation enum and relative parent/child margins plus aborted/current booleans from ORIGINAL guards. Reuse existing immutable guard seams and exact thrown Error privately; no substituted callback/method/proxy or new permission. Existing lease console diagnostics are currently raw private child stdout and not a safe causal field; a new sanitized observer must bind exact current guard rather than infer from totalelapsed.",
+      "Read one bounded safe state summary after logical POST failure/physical settlement if available: notices ticket consumed, stageApproval present, upload/activation SEND/ACK/receipt counts/current-pointer-agrees-with-last-installed boolean, ticket action uniqueness boolean and current phase/stage enum or unknown. No raw SQL/IDs/history rewrites; no second businessrequest.",
+      "Predeclare strict canonical schema/context/SourceIndex+driver+selection/helper hashes and ordered witness journal, preserve actual safe prefix on timeout, independentRoot replay/API/artifact/custody joins. SourceQualified/Task1Pass/all7false unconditional."
+    ],
+    "discrimination": [
+      {
+        "question": "deadline vs factual predicate",
+        "observation": "First exact existing guard-origin enum and its actual child/parent margin at throw, plus inner whitelisted position; total action time alone cannot discriminate."
+      },
+      {
+        "question": "partial prior publication",
+        "observation": "Before any dependent work, first POST status+fixed frontier+safe journal presence/relationship counters after settlement; stop thereafter."
+      },
+      {
+        "question": "observer-induced change",
+        "observation": "Remove unrelated nextGET polling/trace arm from this narrow graph by not invoking nextGET at all; keep normal13 and same actual callbacks. Disabled marks/compile variants remain an unproven difference until Root chooses a controlled separately pinned assembly. Do not assert an A/B cause from a single new run."
+      },
+      {
+        "question": "later duplicate-ticket hypothesis",
+        "observation": "Safe ticket-action uniqueness/current-stage relation only if Root later authorizes a separate fresh prerequisite-complete GET; do not reproduce by retrying this closed partial world."
+      }
+    ],
+    "limits": "No raises:330000ms total/180000child/120000case/job7min/originalincoming30000/originalchild5000; Nodev22.23.4/SDK1.2.1/lockeddeps; previous bounded safe captures/custody/envallowlist/noegress/owncleanup retained. Root must separately authorize design and one occurrence; this report grants none."
+  },
+  "provenScope": "Actual first3 selected native cases and phase repair passed within this exact diagnostic context; helper controls/custody/capture valid. Actual first failure correctly retained independently of count/finally. Repaired monitor full oracle, complete20+mutant+reg11 and genuine finite graph still pending.",
+  "frozen": "NormalSource13/index26b and futureproducerc230140201a6e12d9a355b2cfe6343749f083e1d remain immutable/inactive. No Source/Task1 qualification or operational activation.",
+  "verification": "Read exact immutable brief/primary/safeoutcome and bounded Source/dependency data; RAM string/JSON analysis only. No Source eval/import/compile/syntax/exec/test/files/deps or edits, no rawlogs/artifact redownload/ref/run/runtime/browser/credentials/subagent. Only this diagnosis report is newly created.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
