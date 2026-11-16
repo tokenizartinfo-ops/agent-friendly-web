@@ -1,0 +1,133 @@
+{
+  "schema": "afw.root-own.notices-n2.early-accessor-vectors.v1",
+  "authority": "07a10773d721081de132baf9d4bb9b014466137e",
+  "reviewFromRoot": "dea133e44247938626de925ccb6fe44de3896583",
+  "scope": "PRIVATE synthetic descriptor models only; no actual Source option access, callback invocation or public N2 wire.",
+  "cases": [
+    {
+      "id": "ABSENT_LOGGER_ALLOWED",
+      "descriptor": {
+        "location": "absent",
+        "kind": "absent"
+      },
+      "expected": {
+        "admissible": true,
+        "getterCalls": 0,
+        "setterCalls": 0
+      }
+    },
+    {
+      "id": "DATA_UNDEFINED_ALLOWED",
+      "descriptor": {
+        "location": "own",
+        "kind": "data",
+        "value": "undefined",
+        "writable": true,
+        "configurable": true
+      },
+      "expected": {
+        "admissible": true,
+        "getterCalls": 0,
+        "setterCalls": 0
+      }
+    },
+    {
+      "id": "SAME_DIAGNOSTIC_HANDLER_ALLOWED",
+      "descriptor": {
+        "location": "own",
+        "kind": "data",
+        "value": "DIAGNOSTIC_LOGGER_A",
+        "writable": true,
+        "configurable": true
+      },
+      "expected": {
+        "admissible": true,
+        "getterCalls": 0,
+        "setterCalls": 0
+      }
+    },
+    {
+      "id": "OTHER_LOGGER_NOT_OVERWRITTEN",
+      "descriptor": {
+        "location": "own",
+        "kind": "data",
+        "value": "ORIGINAL_OTHER_LOGGER",
+        "writable": true,
+        "configurable": true
+      },
+      "expected": {
+        "admissible": false,
+        "getterCalls": 0,
+        "setterCalls": 0
+      }
+    },
+    {
+      "id": "GETTER_ONLY_REJECT_WITHOUT_READ",
+      "descriptor": {
+        "location": "own",
+        "kind": "accessor",
+        "getter": "OWN_GETTER_SIDE_EFFECT_SENTINEL",
+        "setter": null
+      },
+      "expected": {
+        "admissible": false,
+        "getterCalls": 0,
+        "setterCalls": 0
+      }
+    },
+    {
+      "id": "SETTER_ONLY_REJECT_WITHOUT_WRITE",
+      "descriptor": {
+        "location": "own",
+        "kind": "accessor",
+        "getter": null,
+        "setter": "OWN_SETTER_SIDE_EFFECT_SENTINEL"
+      },
+      "expected": {
+        "admissible": false,
+        "getterCalls": 0,
+        "setterCalls": 0
+      }
+    },
+    {
+      "id": "GETTER_SETTER_REJECT_NO_INVOKE",
+      "descriptor": {
+        "location": "own",
+        "kind": "accessor",
+        "getter": "OWN_GETTER_SIDE_EFFECT_SENTINEL",
+        "setter": "OWN_SETTER_SIDE_EFFECT_SENTINEL"
+      },
+      "expected": {
+        "admissible": false,
+        "getterCalls": 0,
+        "setterCalls": 0
+      }
+    },
+    {
+      "id": "INHERITED_ACCESSOR_REJECT_NO_INVOKE",
+      "descriptor": {
+        "location": "prototype",
+        "kind": "accessor",
+        "getter": "OWN_GETTER_SIDE_EFFECT_SENTINEL",
+        "setter": "OWN_SETTER_SIDE_EFFECT_SENTINEL"
+      },
+      "expected": {
+        "admissible": false,
+        "getterCalls": 0,
+        "setterCalls": 0
+      }
+    }
+  ],
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

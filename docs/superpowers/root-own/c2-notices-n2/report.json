@@ -1,0 +1,154 @@
+{
+  "schema": "afw.c2-notices-n2.own-report.v1",
+  "status": "OWN_DATA_READY_ROOT_NATIVE_AND_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "immutable Git DATA and pure OWN RAM synthetic functions",
+  "origin": "GitHub API",
+  "allowedAction": "immutable reads/create_blob/FULLreadbacks; OWN RAM code/JSON/hash only; no files or refs/runs/Source runtime",
+  "authority": {
+    "ownBrief": "69328545699fa03d58b30e00296d06045436ce3f",
+    "sourceBrief": "07a10773d721081de132baf9d4bb9b014466137e",
+    "readonlyDiagnosis": "bc756849f9c8a4ed4653a4cb1e5d20565f945e93",
+    "windowRuling": "72480f6b32a095186b17671cb6d18b583335f9a1",
+    "preAdmissionReview": "dea133e44247938626de925ccb6fe44de3896583"
+  },
+  "sourceAdmission": {
+    "packet": "a30ecbb8d4990896082cad0104a8d6e91960e8f5",
+    "packetSha256": "acda4367c042d1b6b436d3fb8e086184c23295aa8ecfcb2ecc3f54d6208eeb99",
+    "report": "4996da2322d0f54684f1521b27cf41d6f2562d4b",
+    "diff": "4f3688411ea8b3bac021812c48e62e8c38ba27c6",
+    "contract": "b1c2680f2ff1dbe7a8b861396e3851d69f885016",
+    "schema": "f006dc3a6bf8089fce11718aa2a05d97910d8145",
+    "selection": "590ee8bd7435db8bee9669077bcb4e657e187889",
+    "runner": "33e94efe8fb9f41e68719e7a5f21389dc692a8eb",
+    "workflow": "8bab03d11f18807d0e0af41a93c6ba0d155dfb21",
+    "fullReadAsDataOnly": true,
+    "toolingVsFinalPacketExact": true,
+    "normalizedProtocolHashes": {
+      "schema": "6758cd5b4cfb3b6a4f9c04c10f38d856eb3ef0ed2a8b5856059d3f796dba2d1f",
+      "admission": "abf54f3ee2ab159a7fb357eb6b98555558746dc12f0bd420443f5c317ce8d10c"
+    },
+    "preparedCandidateReportedByRoot": {
+      "head": "5f3a7bf3a5103d1a00d2bb15ac66ecaa9a68786f",
+      "tree": "0a40e17da150590d4e1a1506c2c3d0c236ea5c20",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "refCreated": false,
+      "runCreated": false
+    },
+    "actualExpectedRunAndJob": "Unknown until Root activation; expected actual head/tree/run/job must be caller-bound from exact Root-authorized occurrence; synthetic101/102/head1/tree2 never actual metadata"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-notices-n2",
+    "message": "AFW-C2-NOTICES-N2-OWN-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n2-own.yml",
+    "job": "c2-notices-n2-own",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n2/run-controls.mjs",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "node": "v22.23.4",
+    "noNpm": true
+  },
+  "independence": {
+    "reusedOwnPacket": "4c322267f9c092c596568f81cf56a872650b5949",
+    "reusedOwnReader": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+    "previousActualOwn189Primary": "10eb5188e0ecae2beccaf414e31a44ab1fc89239",
+    "previousReview": "bbfcf80ac81a9ce50443b75bb19c4da87db63965",
+    "reuse": "Reviewed OWN canonical/schema/API/log/calendar/ZIP/private-probe and exact native/custody fixed rules. New N2 identity, binding union, host/guard/hook FSM independently authored. New literal synthetic occurrence contexts; no conversion of historical N1 metadata.",
+    "sourceCodeInvoked": false,
+    "sourceTestsInvoked": false,
+    "subagentsSpawned": 0,
+    "filesCreated": 0,
+    "refsCreated": 0,
+    "runsCreated": 0
+  },
+  "testFirst": {
+    "privateVectors": "f3c37bfd3ef5154ba87bab2742e14c82d90c6134",
+    "optionsVectors": "e4c9fefc7c41b32e67df348f30f0939cc79d9b80",
+    "earlyIndex": "c3838ed048296e737c59a8d01beb1fa07431a4bf",
+    "accessorVectors": "8e19ecb628acec30d27aa244d6ec41cf605a5183",
+    "journalVectors": "e138a29395734cc0515c7ec2990944420aa9a908",
+    "sequence": "Literal private/options/accessor/journal DATA before receiver. Additional generic and coherent full-input DATA persisted before their acceptance checks. New feature has no historical OWN N2 receiver; no invented RED run or native result.",
+    "supersededDrafts": [
+      {
+        "blob": "9588437ba2db3ee997edcafa6c8ee1797786fa5e",
+        "reason": "Two literal generic DATA cases accidentally inherited origin id/accepted fields during construction; corrected before tests in9a4ce7..., no runtime or Source change."
+      }
+    ]
+  },
+  "verification": {
+    "execution": "Pure OWN RAM functions only; current core/read/control definitions checked together",
+    "groups": {
+      "journal": 65,
+      "generic": 33,
+      "privateModels": 74,
+      "deliveryErrorModels": 24,
+      "privateProbe": 12,
+      "fullInput": 104,
+      "coherent": 18,
+      "zipFormats": 10
+    },
+    "total": 340,
+    "uniqueIds": 340,
+    "failed": 0,
+    "actualNativeImportGraph": false,
+    "actualSourceCaptureAccepted": false,
+    "results": {
+      "path": "docs/superpowers/root-own/c2-notices-n2/control-results.json",
+      "blob": "7cc3d7103a9573c2c9d5fd90e94750fb0d2146ed",
+      "bytes": 35658,
+      "sha256": "1b6eb0ac091ca84b2ff8a47929bcea840e6ec40d2a71d00a0b5fdb48b8267706",
+      "fullReadback": true
+    },
+    "nativeRunner": "Imports only OWN reader/control modules, builtins and fixed-hash JSON; asserts all12 dependency hashes, exact groups/340 unique IDs and IDs equal expected receipt before test registration. Root must execute this native graph independently."
+  },
+  "coverage": [
+    "Canonical fatal UTF8/NDJSON ordered keys/duplicates/bounds/hashes/time; exact N2 case action/count/blocked/native status and cardinality, complete-vs-prefix including timeout and AFTER failure; original action/count error separately preserved.",
+    "HTTP action settlement cannot leave entered GET/POST; POST only after GET200/bodytrue, no business/HTTP after failed prerequisite, no end-HTTP outside action; honest open timeout prefix allowed.",
+    "Five host argument pairs on positive path; four after POST503/bodythrow; interrupted fifth/early call retained open; stage/order/pair/hash/settings/ref/callback/compiled roles checked within current call, legitimate call-to-call setting/script differences allowed.",
+    "Exact ruled arrival windows through response/body settlement and AFTER; baseline no-HTTP entered failure still mandatory, blocked no-baseline honest, final freezes every later record, callback true|null monotonic, excluded stable, max8/new counts/typed nulls/correlated null.",
+    "38 exact private message/reject models,28 symbolic public-argument models,8 getter/setter counters with no invocation,12 arrival/late/cascade/baseline/cap models,6 original-throw and6 callback safety models,12 independent private-probe controls.",
+    "Raw API run/jobs/commit exact caller context, calendar/time and exact four timestamped standard frames, FRONTIER/echo rejected; raw listing/id/name/head/size/digest plus bounded single-entry ZIP stored/deflate and12/16-byte descriptors, CRC/path/central bounds/encryption/entry/payload/base64 tampering.",
+    "18 literal coherent full-inputs recompute journal/projection claims/frame/artifact ZIP hashes:14 semantic negatives plus custody2/9/24/25 (9/24 accepted). Full receiver cases use final admitted schema and producer hashes."
+  ],
+  "proofBoundaries": [
+    "Own actual acceptance is independent replay of SAFE journal plus Source-emitted native/probe/host/hook projections, joined to exact raw actual context/capture and known pinned producer. Raw child TAP/private probe arrays/options are absent; not a fresh independent parse/authentication of them.",
+    "Private guard lexer/arrival/options/error callbacks are synthetic OWN models with obvious clocks/sentinels and symbolic reference labels. They do not authenticate actual Worker tag source, request association, first cause, receipt or real callback identity.",
+    "Public actual argument/script/settings/callback equality is a Source-emitted assertion of same original call; no hidden #sharedOpts/installed-state proof. Source report/diff DATA describes preserved original method/constructor/promise/await; OWN does not invoke Source or manufacture those observations.",
+    "callbackObserved true is arrival observation; absence null unknown. Late phase/cascade may arrive in a later Node window; correlated:null, interpretation/guardOrigin unknown. Parent-holders expiry/regression null because no current at/m.",
+    "Source format provenance report pins workerd/Miniflare exact tag+one ASCII space+JSON string; read as DATA, no runtime calibration or new request.",
+    "Original errors may be null/undefined/false/zero/empty string/object. Synthetic callback containment is model-only; capture flow separately preserves whitelisted original action/count errors without replacing them with diagnostic faults.",
+    "All source/operational/nonclaims stay false even with accepted diagnostic capture or passing synthetic/native OWN controls."
+  ],
+  "consumer": {
+    "function": "n2Read(input,schema,admission,sha256,inflateRawSync)",
+    "inputOrderedKeys": [
+      "run",
+      "jobs",
+      "commit",
+      "expected",
+      "transport",
+      "artifact"
+    ],
+    "fullData": "run/jobs/commit raw GitHubAPI; expected exact caller-bound actual occurrence; raw timestamped capture log; raw artifact listing+downloaded archive base64+exact outcomeLF payload",
+    "return": "diagnosticCaptureAccepted, exact context, observation/native/capture, archive+payload byte/digest receipt, all nonclaims false",
+    "schemaFileHash": "b3c5d9fd2e50cd55c6db61dc669d66400b167fb4c7c1a04b4b8d61d6542832c9",
+    "admissionFileHash": "ee8e9032f9689e835ca734e0dfbdd88b627986f9959f3afff0a7841940bfe8be"
+  },
+  "pending": [
+    "Root native OWN graph execution and preserving its exact cloud receipt",
+    "Independent spec/quality review",
+    "Only after those gates, any separately controlled Root Source activation and actual API/log/artifact consumption; no current Source runtime evidence"
+  ],
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
