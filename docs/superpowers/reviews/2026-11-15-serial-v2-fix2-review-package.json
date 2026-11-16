@@ -1,0 +1,103 @@
+{
+  "purpose": "afw.serial-v2.task1.fix2.scoped-review-package.v1",
+  "task": 1,
+  "round": 2,
+  "reviewer": "/root/serial_v2_task_review",
+  "scope": "ONLY R1/R2/R3 in review81429d5785775fa3c8adf85463ffd262c9040c6c and new breakage in exact fix2 diff; settled C1/I2/I3/I5/I7 and M1 deferred preserved. Actual mandatory preflight still red; do not infer first failing instruction.",
+  "requirements": {
+    "plan": "0244ace61c57f0846773929b15a4c172a78a26dd",
+    "SourceBrief": "59bd6acd2619fee24aa9601484c051892502cb9a",
+    "OwnBrief": "8f16e417784e3ada1bc1632e20e2696b4bb0690b",
+    "representation": "cfad14bec181158458f12815316f4a4fbd768bb6",
+    "exactReportPinErratum": "03b126c77903949f5c221435520a9f867dd212ed",
+    "strictState": "8f6556a0400b5c147017a34e2815655e1dc511bb",
+    "beforeReview": "81429d5785775fa3c8adf85463ffd262c9040c6c",
+    "beforeSourceIndex": "64ceddb8ed96d47daf912abbeecf52c7fa4f1bd0",
+    "beforeOwnIndex": "06211e8bf5c37d3eca5015ab5c56c3f32adb0310"
+  },
+  "after": {
+    "SourceIndex": "871ad100702810c6421f32f5d038139d42b0a36d",
+    "SourceExactDiff": "1bb93da8af560036045b4e82faaa2339b8aad827",
+    "SourceReversibleIndex": "de3bded0df23a698879d233884f394ece1ca30c3",
+    "OwnIndex": "6793b7c01ee70e4bc898b1b58f60c07f7c06c5ce",
+    "OwnExactDiff": "d96b5de5fec1e2342b5198cdff5cf025f4e79edc",
+    "OwnReport": "99da32ddb425f8c14fdd7d872a04ef2a9629d4bc",
+    "SourceActualReport": "5d0c208f19a7b63b5cd37727cc7c2e91960d6460"
+  },
+  "actual": {
+    "candidate": {
+      "commit": "ae216d6e24b2af0e44985cca0f408d42e5dc1e38",
+      "activeTree": "0450e5900e86b31667f79ee12d0bdef002abf4f7",
+      "inactiveTree": "2573a6aeddd8b53c6db752332fbfa616fd634876",
+      "parent": "e57d6f2b862deccfbb90d8e042a576c68d0ccb3c",
+      "F7": "76aed373f67b6b508964c630ee2e3be6005b7d81",
+      "SAME": "60827f4b15db58c8741d445cb2a854789f036cab",
+      "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-FIX2-ONEUSE-20261115",
+      "SourceReleased": false
+    },
+    "run": 43779366057,
+    "attempt": 1,
+    "job": 133012825499,
+    "conclusion": "failure",
+    "preflight": "failure",
+    "boundary": "skipped",
+    "unit": "skipped",
+    "full": "skipped",
+    "allCanonicalFrames": 0,
+    "full520Measures": 0,
+    "cause": "UNKNOWN",
+    "logsConsumed": true,
+    "receipt": "304961613ca7e0d42441db61b11dc133f6cf690d",
+    "closure": {
+      "utc": "2026-11-16 00:20:14 UTC",
+      "Source": "b26843c72dccc9bdcf9a9771e59faeff077c6461",
+      "tree": "c24a3bb487032ea8e21a715a28984c6d8cc64578",
+      "parent": "ae216d6e24b2af0e44985cca0f408d42e5dc1e38",
+      "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+      "SAME": {
+        "bytes": 2591892,
+        "sha256": "558090219d4beb2aad54538a23d496e941b2adad279b330e3c681cfe047e4c57",
+        "blob": "c00499fe9a769290bf25515ee588c4bd207760ee"
+      },
+      "fullBodiesReadback": true,
+      "CoreInheritedExactLeaves": 3201,
+      "Core": {
+        "leaves": 3201,
+        "bytes": 324448,
+        "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+      },
+      "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "queues": 0,
+      "closedHeadRuns": 0,
+      "SourcePendingNull": true,
+      "providerRuntimeRead": false
+    }
+  },
+  "RootChecks": {
+    "pins51": 51,
+    "data42": 42,
+    "reversibles": 12,
+    "ownPositive": 45,
+    "ownNegative": 124,
+    "ownPrior21_108Intact": true,
+    "twoOwnPredicateMutantsDetected": true,
+    "stdinMaximums": [
+      26802,
+      30140
+    ],
+    "F7Headroom": 8,
+    "SourceExecutedLocally": false
+  },
+  "reviewHistory": "Full prior review81429d/24309B remains durably preserved. New bounded fix2 review segment may bind full parent by Git/bytes/SHA rather than duplicate and overflow24576. This representation ruling applies to the SAME logical scoped review chain as well as implementer report chain; no history deletion or round reset.",
+  "prohibitions": "Immutable review DATA only; no Source eval/import/VM/compile/syntax/tests/files/refs/runs/providers. No refetch consumed logs.",
+  "requiredOutput": "Spec+quality verdict; R1/R2/R3 addressed/not with exact bytes; new-fix-diff breakage only; C/I/M counts. Create/readback immutable bounded segment report with full parent reference. Actual qualification remains unproved even if static fixes stand.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
