@@ -1,0 +1,36 @@
+{
+  "schema": "AFW-C2-FULL-C230-OWN-ZIP-FIX1-CLOSE-RECEIPT/1",
+  "project": "AFW",
+  "testedHead": "c72f73688dc82073b7e39eedd7ecf275d3c46a1b",
+  "testedTree": "fb43854720cecc527065fe739b2905735ce8f578",
+  "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3-zip-fix1",
+  "run": 43963999645,
+  "attempt": 1,
+  "job": 133638507952,
+  "result": {
+    "pass": 419,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "orderedIds": true,
+    "original370Prefix": true
+  },
+  "primary": "8595247053fe516c66addbd00008d593e4d72dff",
+  "proof": "98c4d4a232a3e603bc256bf6b2e96566f71bd4f4",
+  "action": "Remove only nominated executable workflow; preserve all other original/native bodies plus this receipt and primary.",
+  "noReplay": true,
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
