@@ -1,0 +1,343 @@
+{
+  "schema": "AFW-C2-N3-CONTROLS-FIX2-PRIMARY/1",
+  "atUTC": "2026-11-16 16:50:37 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix2",
+  "head": "91ac03eae0a3ee384d23886bd2f814de54c59bc3",
+  "tree": "d0d7b38bfd4f53950db6e3eee4e1e1ead62ab860",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "workflow": ".github/workflows/afw-c2-notices-n3-controls-fix2.yml",
+  "run": {
+    "id": 43911561091,
+    "attempt": 1,
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43911561091"
+  },
+  "job": {
+    "id": 133454520846,
+    "name": "c2-notices-n3-controls-fix2",
+    "conclusion": "success",
+    "step4": {
+      "name": "Execute tooling controls only",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4,
+      "started_at": "2026-11-16T16:48:39Z",
+      "completed_at": "2026-11-16T16:48:40Z"
+    }
+  },
+  "gate": "2c6df35062e0316334d5599df222aa2625f9272a",
+  "rootHashes": [
+    {
+      "role": "packet",
+      "bytes": 10496,
+      "sha256": "b645fa5ec537e9d561356d7f44b94cfda12e88fdc34a89d06f91471f51a6c4bd",
+      "blob": "e1f1b666726b2eb433d4d2d96f7266ca0c951308"
+    },
+    {
+      "role": "index",
+      "bytes": 22729,
+      "sha256": "a01c2565adb7677526c64d12b1fd8d85da9217aeef1f2fba3b7331a32a3455ab",
+      "blob": "906cfbea830100065eebdccb18d0810f8b207efb"
+    },
+    {
+      "role": "diff",
+      "bytes": 170446,
+      "sha256": "7fe7b5f08e6012a97453fb0a96c10dae1d127f1ed97b44a2b91ffd12717e827d",
+      "blob": "edd5dacc84244ab5cbe1d53182fc60bf8158e683"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-qa-ledger.mjs",
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/n3-qa-compiler.mjs",
+      "bytes": 12694,
+      "sha256": "624ef2a8507643936aa9564bb0f978b11e31572b49c5678a6e6c4706af9ea255",
+      "blob": "94e30c896056dc35b3bb75b072022644c68bfb74"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/n3-unit-controls.mjs",
+      "bytes": 21907,
+      "sha256": "8bf6a9f33a46c15f24e04b89fd6b6068b8197cb4eb9aea42c41ce7b0a1916076",
+      "blob": "e987e103122b3318638d7a5e57bd6e41df81cd8d"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-reader.mjs",
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-trace-reader.mjs",
+      "bytes": 11567,
+      "sha256": "e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829",
+      "blob": "4878edb13dad6a9421c457cc850a370d75b84b1c"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-core-controls.mjs",
+      "bytes": 13179,
+      "sha256": "fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95",
+      "blob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-trace-controls.mjs",
+      "bytes": 854,
+      "sha256": "ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758",
+      "blob": "adff3fbc4649f95389b03896ff82bc7ed538c516"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-logger.mjs",
+      "bytes": 8370,
+      "sha256": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+      "blob": "4eeaad011444e566f2e0cc99bd897e4a01848a77"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-slot.mjs",
+      "bytes": 2072,
+      "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "blob": "6507ca2410ac27606f4996e97a91736c5e14b615"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-vectors.json",
+      "bytes": 915177,
+      "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+      "blob": "ce6aa394580a0c26e5fe5c9006cafe06db109530"
+    },
+    {
+      "role": "reducerPlans",
+      "bytes": 43673,
+      "sha256": "acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9",
+      "blob": "8881c57552b88cd757579b6de120e1f4fca0304c"
+    },
+    {
+      "role": "schema",
+      "bytes": 29785,
+      "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+      "blob": "1c336fe190816b46223546971afcf34b2c216089"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-lease.txt",
+      "bytes": 2257,
+      "sha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e",
+      "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-op.txt",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-phase.txt",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-publication.txt",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-world.txt",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/observer-world.txt",
+      "bytes": 89873,
+      "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+      "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/contract.json",
+      "bytes": 19539,
+      "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+      "blob": "40e93f21d6564e2a0bbe9a4ace266d992a357718"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/seams.json",
+      "bytes": 14141,
+      "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+      "blob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-unfocused-routine-vectors.json",
+      "bytes": 1325,
+      "sha256": "6d2655b173310765608610e69b47d1b667bd27b83197678dded4dc66b53e660d",
+      "blob": "c26bdbaa9d94df8c1e3a3f281d631180023af020"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/fix2-vectors.json",
+      "bytes": 23700,
+      "sha256": "bfff8d3388ac157986677c79fa151582e9bd08929ccde54c1bf5f33175fad45b",
+      "blob": "7e4cae13603483c46e5e8ca7872290d00eb1de3a"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/tooling-fix2-contract.json",
+      "bytes": 4291,
+      "sha256": "db1ff3cc391800c0996b8e686c808534429dcfd0a1056e29f6306e70d498ec78",
+      "blob": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/ph-anchor-audit.json",
+      "bytes": 12743,
+      "sha256": "e04ac361d61f80f7b1476c2843818373526c25af5c240776935c14d13c02e5fa",
+      "blob": "9b858f9bd542dcb2b56ac52f85af951e87afe685"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/run-controls.mjs",
+      "bytes": 22558,
+      "sha256": "9e261284cf5aa1916e1d620b03272f0eaa20158d319acd0b5df21eb0dc37703e",
+      "blob": "d08312eb79e5283d21897e147c989a6d09888081"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/tooling-selection.json",
+      "bytes": 6005,
+      "sha256": "1d2f110ece9c46b0c0c3d45747275858c48123bbdcb172cd9d4429193b46411c",
+      "blob": "f5b7201b8fad54a7b0bbfb8b4ba221e370fef079"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/tooling-proof-schema.json",
+      "bytes": 11185,
+      "sha256": "3a656b1d47da3e146a8957d3d0c44f6c7bc1800e19c34f43184ccdff7cb2ab3e",
+      "blob": "23bed32784cb27a4d0b8981fad862b851456fffb"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/reversibles.json",
+      "bytes": 2371,
+      "sha256": "b9194c3cbf953caed904465f5b8be5956ccb242828090717d7f9e19d48f51e25",
+      "blob": "2a6d230d344db3c0245ab7670a7a2974007b764d"
+    },
+    {
+      "role": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/report.json",
+      "bytes": 18160,
+      "sha256": "a54637c6dfd3c79060e6e46c31018f7c7497953632cdf22bee1981134516a78a",
+      "blob": "e822a3d3c27d1e97d8eb8174a38b1d708e836a21"
+    },
+    {
+      "role": ".github/workflows/afw-c2-notices-n3-controls-fix2.yml",
+      "bytes": 1431,
+      "sha256": "1133f8ca4758922287555ca55930e98e182bd54dc9a1e3fa8083b73979292bb8",
+      "blob": "06a16595c5d801ddf17168140519002fb9aa2bc3"
+    }
+  ],
+  "inputHashCount": 24,
+  "native": {
+    "tests": 41,
+    "pass": 41,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "orderedIds": [
+      "N3_CORE_CONTROLS",
+      "N3_CAUSAL_LITERALS",
+      "N3_TIMEOUT_PREFIX_CONTROLS",
+      "N3_AXIS_LITERALS",
+      "N3_SCHEMA_SELECTION_CONSTS",
+      "N3_NOTE_SYNC_NO_RPC",
+      "N3_ORIGINAL_NULL",
+      "N3_ORIGINAL_UNDEFINED",
+      "N3_ORIGINAL_FALSE",
+      "N3_ORIGINAL_ZERO",
+      "N3_ORIGINAL_EMPTY_STRING",
+      "N3_ORIGINAL_OBJECT",
+      "N3_PROMISE_IDENTITY",
+      "N3_EXISTING_SETTLED_HANDLER",
+      "N3_ROOT_IDENTITY",
+      "N3_REALM_RESET",
+      "N3_CROSS_SCOPE_LEASE",
+      "N3_SHARED_PROMISE",
+      "N3_NULL_BOUND_REF",
+      "N3_PREBIND_GAP",
+      "N3_PAIR_FORK",
+      "N3_FIRST_TARGET_ONLY",
+      "N3_SCOPE_ERROR_A_CHILD_B",
+      "N3_REPEATED_CLOSE",
+      "N3_CUT_LATE_SETTLEMENT",
+      "N3_SINK_FAULT",
+      "N3_PRIVATE_CAP",
+      "N3_SNAPSHOT_CAP",
+      "N3_WORST_SIZE",
+      "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+      "N3_ABORT_NESTED_OBSERVER_ORDER",
+      "N3_BOUND_PAIR_COVERAGE",
+      "N3_PREPAIR_FAILURE_AND_UNBOUND",
+      "N3_ACTUAL_CHILD_ABORT_MATRIX",
+      "N3_ACTUAL_PARENT_ABORT_MATRIX",
+      "N3_NESTED_ABORT_ORDER",
+      "N3_UNREACHED_ACTIVATION",
+      "N3_ORIGINAL_RACE_AXES",
+      "N3_ORIGINAL_REDUCER_CALLBACKS",
+      "N3_REVERSIBLES",
+      "N3_MAX_ENVELOPE_SIZE"
+    ],
+    "diagnostics": 0
+  },
+  "artifact": {
+    "id": 14248856256,
+    "archiveBytes": 2943,
+    "archiveSHA256": "0ec991c01ee3f2f91230e5590c6392a718a3ac05c541f37828f8af2ac91556c0",
+    "file": "c2-notices-n3-tooling.json",
+    "payloadBytes": 7449,
+    "payloadSHA256": "a3bfe87e1ae197af92380b099993f2ed0965ddfc9bf034d8a2f91a28e8e40286",
+    "canonical": true,
+    "crcVerified": true,
+    "completeDeflate": {
+      "compressed": 2777,
+      "consumed": 2777,
+      "complete": true,
+      "payloadMatches": true
+    },
+    "logPayloadEqual": true
+  },
+  "reducer": {
+    "rawIncludingCut": 31,
+    "projected": 24,
+    "lateRawIncludingCut": 34,
+    "lateProjected": 24,
+    "firstScopeErrorPreserved": true,
+    "focusPreserved": true,
+    "exactPairPromisePreserved": true,
+    "allBounds": true
+  },
+  "causal": {
+    "accepted": 31,
+    "rejected": 32
+  },
+  "core": {
+    "accepted": 6,
+    "rejected": 21,
+    "probeChecks": 3,
+    "roundtrips": 6,
+    "witnessRejected": 2,
+    "slotChecks": 5,
+    "guardAccepted": 3,
+    "guardRejected": 7,
+    "guardTransitions": 6,
+    "invarianceChecks": 10,
+    "guardRecordRejected": 12
+  },
+  "actualToolingExecuted": true,
+  "sourceBusinessExecuted": false,
+  "reviewPending": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
