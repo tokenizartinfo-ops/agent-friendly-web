@@ -1,0 +1,227 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-ROOT-OWN-NATIVE124-GATE/1",
+  "timestampUTC": "2026-11-16 23:23:48 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHub Actions exact one-use OWN-only branch",
+  "resourceType": "One native verifier control run and evidence/closure",
+  "allowedAction": "Activate exact absent branch once after fresh zero prior-runs/ref checks; observe/preserve 124 native controls (26+/98−), close only nominated workflow and independently read back. No Source runtime/capture execution.",
+  "authority": {
+    "implementationRelease": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+    "design": "548ada038264c8b8e250e41047c4aa2e0b2593a5",
+    "sharedContract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "schema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "selection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "pathLayerSupplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+    "round": 1,
+    "maxRounds": 5
+  },
+  "index": "c91b094805387623df47426f7fe1af9f68251f56",
+  "fixtureFirst": "28a00cc5c296ca245389a5cccfdcd929864cb133",
+  "graph": "713753c9e35bf9998cbd6dd0de7319da12e2cd47",
+  "reversible": "129405a2f73bc0f35730a53b1864fc35fe14cdb3",
+  "RootFullHashes": {
+    "count": 26,
+    "allBytesSHA256Git": true,
+    "SourceExecuted": false
+  },
+  "RootRAM": {
+    "reversals": {
+      "preimages": 2,
+      "additiveReverse": 24,
+      "ZIP419RenameOnly": true
+    },
+    "ram": {
+      "expected": 124,
+      "observed": 124,
+      "passed": 124,
+      "failures": [],
+      "exactIDs": true,
+      "positive": 26,
+      "negative": 98
+    },
+    "actualBodyEdges": 25,
+    "SourceExecuted": false
+  },
+  "RootFinalSourceBodySeal": "1fe62f22a3067029c651e99320c94624998eb58b",
+  "prepared": {
+    "head": "54971367ce9b656f06beae6657a85e839b96442f",
+    "tree": "e2b482eb54d3777ddc7cbc6b5aadf3e9f28afe73",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-own-receiver-20261116-green-frontier-diag1",
+    "refCreated": false,
+    "runCreated": false,
+    "SourceExecuted": false
+  },
+  "preparedReadback": {
+    "original3203Unchanged": true,
+    "native20Exact": true,
+    "leaves": 3223
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-green-frontier-diag1",
+    "message": "AFW-C2-OWN-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+    "job": "c2-own-green-frontier-diag1",
+    "prefix": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/",
+    "runner": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "artifact": {
+      "name": "afw-c2-own-green-frontier-diag1-proof",
+      "path": "output/c2-own-green-frontier-diag1-proof.json",
+      "fileName": "c2-own-green-frontier-diag1-proof.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "runnerOS": "ubuntu-24.04",
+    "jobTimeoutMinutes": 3,
+    "testTimeoutMs": 10000,
+    "activationReleased": false
+  },
+  "native20": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/model-builder.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "20e2f7c16677be936b037953cbb8e4573755ba8f"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/fixture-seed.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1f7d93629d7f9f1789db894d860c1b44d88a04c1"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/fixture-first-cases.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "123a3af4c204f470237a476172ff4d90b53c90b8"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/expected-ids.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "696dde71d176989160f1471594a56618466ca0fc"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/complete-coherent-example.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a08f3d39e11761a7ff394eb65bb1728de8684524"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/fixed.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a8f434f9f486d3c01fa1229041ba4d5b2e0b0e7"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/shape.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/partial.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/transport.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "abab6d90b74c87428102d96f31d3e250f374e27a"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/reader.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f844dd8789012b95edaf0aec4db20edea885a4ca"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/controls.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a384f0832c3cebf66ecd929cef2c2e09708ca3da"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/source-admission.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "417ace1ecd30a4b78e12d5f4e09f3e143045afec"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/data/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e55a6387549a8447a5ad93356184645ae19e70de"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/data/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/data/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d"
+    },
+    {
+      "path": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5af850175365643566eaa0d94e2c65dacf7b4ff1"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/proof-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "10a1d7bffdef10da674d4a64ab45814ca2941084"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aae69921a1b3186973e973f2260835c6e938a24c"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/native-graph.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "713753c9e35bf9998cbd6dd0de7319da12e2cd47"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "edb8dad084d56830912e5be7b262bea2d0a85777"
+    }
+  ],
+  "triggerAuditReuse": {
+    "priorFull62Audit": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "all62ImmutableBlobsAndPathsMatch": true,
+    "sourceBranch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+    "originalPushFilters": "18 exactmain excluded; remaining closed-origin3paths unchanged in exact one-commit25-addition diff; no create/workflow_run/schedule in BASE",
+    "closedOrigin3PathsUnchanged": true,
+    "newWorkflow": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+    "newWorkflowGate": "Exactrepo/push/branch/attempt1/oneusemessage/contentsread",
+    "SourceTriggered": false
+  },
+  "closeRule": "Remove only nominated workflow and add primary+receipt. Preserve original3203,other19additions,main/history and every prior closed branch. Never rerun spent nomination.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
