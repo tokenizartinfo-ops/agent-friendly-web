@@ -1,0 +1,461 @@
+{
+  "schema": "afw.own-full-task1-consumer-inventory.v1",
+  "status": "READ_ONLY_PLAN_ONLY",
+  "date": "2026-11-16",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA; no Source execution",
+  "resourceType": "Git blobs",
+  "allowedAction": "Read immutable DATA and create/read back this bounded report only",
+  "rollback": "Omit additive report blobs; no ref or historical body was changed.",
+  "authority": {
+    "task": "Root read-only full Task1 consumer inventory after accepted W1 occurrence",
+    "originalPlan": "3434f31d432084d1b6153f85d3b8c64c8e043850",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "peerSourcePlan": "6696d06831328bb52d7245c48347bd8c412b566d"
+  },
+  "segment": "2/3 full protocol, Source seams and proof limits",
+  "targetFullProtocol": {
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "normal13Index": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "normal13IndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "normal13": [
+      {
+        "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "worker/mcp-own/finite.mjs",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "test/fixtures/finite-coupled-native.mjs",
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "test/fixtures/finite-first-connection-publication.mjs",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "test/fixtures/finite-initial-entry-world.mjs",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+        "metadataOrigin": "26b index; not all body re-fetched here"
+      }
+    ],
+    "inherited17": "Source index + 13 Source bodies + regression selection + custody guard + preflight; c230 enumerates exact immutable paths",
+    "tooling8": [
+      {
+        "role": "selection",
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/mode-selection.json",
+        "blob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+        "bytes": 5460,
+        "sha256": "618e35bbeda39833ddf5c63ed16a41b44db85ab751edcb87ad5abb9ebcaae839",
+        "metadataOrigin": "c230 packet"
+      },
+      {
+        "role": "parser",
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/tap-protocol.mjs",
+        "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+        "bytes": 10291,
+        "sha256": "3de67d5b30f7a0019b8f02118cf3727be7ae79d22ecfdc56bc7d39e60681dfd4",
+        "metadataOrigin": "c230 packet"
+      },
+      {
+        "role": "vectors",
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-vectors.json",
+        "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+        "bytes": 14802,
+        "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+        "metadataOrigin": "c230 packet"
+      },
+      {
+        "role": "selftest",
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-controls.mjs",
+        "blob": "bc33365eaf302d2296a759202a822af4a443f143",
+        "bytes": 3313,
+        "sha256": "2f49b434e3e51a4a3c225903b3a681e4f01ea3f62b58f337e6a26d0fdde8fcae",
+        "metadataOrigin": "c230 packet"
+      },
+      {
+        "role": "runner",
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+        "blob": "1193e74ec0b0d60fb5c63d3a0340578e884dfb71",
+        "bytes": 23205,
+        "sha256": "7a581800dc588ed081d05fa253f7adaac1f9c83e66398a6b4a6354994285cae8",
+        "metadataOrigin": "c230 packet"
+      },
+      {
+        "role": "contract",
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/protocol-contract.json",
+        "blob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+        "bytes": 15709,
+        "sha256": "2bd76e556a6dbf9d394fba70d64a216fd339697fcae2e885b3fd6141f4ecd6fb",
+        "metadataOrigin": "c230 packet"
+      },
+      {
+        "role": "schema",
+        "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/frame-schema.json",
+        "blob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+        "bytes": 13983,
+        "sha256": "9fc0205fbbbd4a0d61f4560291bd53caf58df083f88e4579eaa74ea02d15d61e",
+        "metadataOrigin": "c230 packet"
+      },
+      {
+        "role": "workflow",
+        "path": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+        "blob": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+        "bytes": 1641,
+        "sha256": "ea910cdfe2058d2ef9f49ee5d20973ae4e565182d0e916f2edb64fd374625fdb",
+        "metadataOrigin": "c230 packet"
+      }
+    ],
+    "mount": "Exactly 17 inherited DATA + 8 qualification paths over baseline; no N3/W1 observer tooling or extra workflows; product paths only materialized by authorized Root cloud runner under temporary directory.",
+    "nomination": {
+      "branch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+      "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIXTURE-FIX1-ONEUSE-20261116",
+      "workflow": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+      "job": "c2-source-lab-fixture-fix1",
+      "runner": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+      "command": "node docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+      "artifact": {
+        "name": "afw-c2-owner-stages-source-t1-fixture-fix1-receipt",
+        "path": "output/c2-source-lab-fixture-fix1-receipt.json",
+        "fileName": "c2-source-lab-fixture-fix1-receipt.json",
+        "count": 1,
+        "retentionDays": 7,
+        "receiptBodyBytes": 24576
+      },
+      "admission": "Pre-nominated only. Root must verify name/message/head never used, preserved prior leases and no prior corrected full occurrence; no reuse of exhausted/closed branch, placebo renaming or head fabricated from DATA. If already spent, HOLD for history reconciliation/material reason and separate nomination."
+    },
+    "nominationState": "Pre-nominated DATA, not permission to push. Root must reconcile whether the exact branch/message/head is unspent. Any spent/closed occurrence is immutable and requires a separately authorized nomination rather than receipt normalization.",
+    "sourceExpectedContext": null,
+    "frameSequence": [
+      "synthetic",
+      "dependency",
+      "baseline-red mode",
+      "proposal-green mode",
+      "mutant-prefix mode",
+      "regressions mode",
+      "custody",
+      "receipt"
+    ],
+    "frameKindsAndBodyCaps": [
+      [
+        "AFW_C2_SOURCE_SYNTHETIC_V2_FIX1",
+        "synthetic",
+        2048
+      ],
+      [
+        "AFW_C2_DEPENDENCY_CONTROL",
+        "dependency",
+        1024
+      ],
+      [
+        "AFW_C2_SOURCE_MODE_V2",
+        "modeFrame",
+        12288
+      ],
+      [
+        "AFW_C2_SOURCE_CUSTODY_V2",
+        "custody",
+        1024
+      ],
+      [
+        "AFW_C2_SOURCE_DIAGNOSTIC_V2",
+        "diagnostic",
+        2048
+      ],
+      [
+        "AFW_C2_SOURCE_RECEIPT_V2",
+        "receipt",
+        24576
+      ]
+    ],
+    "canonical": "Exact marker + one ASCII space + canonical JSON.stringify with schema insertion order + LF; physical-line count/order mandatory; reject duplicate/noncanonical text and all unexpected keys. Four embedded observations equal standalone observations byte-for-byte.",
+    "receiptFieldOrder": [
+      "schema",
+      "context",
+      "admitted",
+      "observations",
+      "nonclaims"
+    ],
+    "admissionRowFieldOrder": [
+      "path",
+      "sha256",
+      "bytes"
+    ],
+    "observationFieldOrder": [
+      "mode",
+      "selectionHash",
+      "verdict",
+      "code",
+      "exitCode",
+      "totals",
+      "cases",
+      "witness"
+    ],
+    "caseFieldOrder": [
+      "id",
+      "status",
+      "phase",
+      "counters",
+      "code"
+    ],
+    "modes": [
+      {
+        "mode": "baseline-red",
+        "selectionHash": "24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa",
+        "count": 3
+      },
+      {
+        "mode": "proposal-green",
+        "selectionHash": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5",
+        "count": 20
+      },
+      {
+        "mode": "mutant-prefix",
+        "selectionHash": "46239e665ffe9154fbfb81725c81ac05c0228129f49db466b061397114f970a4",
+        "count": 20
+      },
+      {
+        "mode": "regressions",
+        "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6",
+        "count": 11
+      }
+    ],
+    "caseMap": [
+      {
+        "id": "C2T1_CONNECTION",
+        "phase": "connection"
+      },
+      {
+        "id": "C2T1_OAUTH",
+        "phase": "oauth"
+      },
+      {
+        "id": "C2T1_HANDLE",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_PROJECTREF",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_SUBJECT",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_PHASE_RENAME",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_SOURCE_BYTES",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_APPROVAL",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_PREDECESSOR",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_GRANT_REVOKED",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_EXTRA_KEY",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_NOTICES",
+        "phase": "notices"
+      },
+      {
+        "id": "C2T1_MONITOR_COOKIE",
+        "phase": "monitor"
+      },
+      {
+        "id": "C2T1_MONITOR",
+        "phase": "monitor"
+      },
+      {
+        "id": "C2T1_SCOPE_MISSING",
+        "phase": "scope"
+      },
+      {
+        "id": "C2T1_FINITE",
+        "phase": "finite"
+      },
+      {
+        "id": "C2T1_SELECTION",
+        "phase": "selection"
+      },
+      {
+        "id": "C2T1_LOST_ACK_DUPLICATE",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_UNRESOLVED_WRITER",
+        "phase": "negative"
+      },
+      {
+        "id": "C2T1_OWN_PROMISE",
+        "phase": "negative"
+      }
+    ],
+    "modePolicies": {
+      "baseline": "Exactly CONNECTION PASS, OAUTH PASS, NOTICES FAIL; native exit1; all three upload/activation/receipt=1. The 17 unselected IDs have no inferred observation.",
+      "green": "Exactly all20 PASS/native exit0. Cases1..11 have counters1/1/1;12..15 2/2/2;16..17 3/3/3. Last three use isolated graphs; preserve bounded own observations rather than forcing main-chain3.",
+      "mutant": "Same20 IDs/order, exit1, named EXTRA_KEY native testCodeFailure while same-ID GREEN passes. Keep every other observed status; do not demand all remaining19 pass.",
+      "regressions": "Exactly C2T1_REG_01..11, native exit0/all PASS, names and selected test files from immutable ef1da manifest; this is a selected subset, not the whole test suite."
+    },
+    "redWitness": {
+      "caseId": "C2T1_NOTICES",
+      "phase": "notices",
+      "failureType": "testCodeFailure",
+      "code": "ERR_ASSERTION",
+      "operator": "strictEqual",
+      "definitionFile": "S07",
+      "definitionBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "definitionLine": 6,
+      "actionLine": 36,
+      "fixtureFile": "S08",
+      "fixtureBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "function": "choose",
+      "line": 18,
+      "method": "GET",
+      "route": "/connections/finite-prepare",
+      "boundary": "before-form-parse-and-post",
+      "actual": 503,
+      "expected": 200
+    },
+    "sourceControls": "Actual Source parser self-controls accepted3/rejected35 with vectors c630dc... in the same context. These are Source-emitted/native controls; OWN does not import their implementation.",
+    "custody": "Exactly six checked launches: preflight, absent-CWD dependency, BASE, GREEN, MUTANT, REG; fresh1..8 per launch, <=8 per target and 6..24 total; required UID/GID/groups/loopback/no-new-privs/ownership/preflight+root cleanup booleans true. Earlier 3-launch diagnostics cannot stand in for this.",
+    "limits": {
+      "totalMs": 330000,
+      "nativeChildMs": 180000,
+      "nativeCaseMs": 120000,
+      "ownedPreflightMs": 10000,
+      "jobMinutes": 7,
+      "stdoutBytes": 1048576,
+      "stderrBytes": 65536,
+      "archiveBytes": 33554432,
+      "receiptBytes": 24576,
+      "sdk": "1.2.1",
+      "liveLease": "Original incoming <=30000ms, per-leaf <=5000ms/phase ceilings, no fresh clocks/renewals, no retry after ambiguous ticket writes. Source runner 330000ms ALL modes versus 180000ms per child/120000 per native case and 7min job. These are hard ceilings, not evidence of enough time.",
+      "scope": "ArchiveBytes=32MiB is local git archive limit, not artifact wire. Apply existing separate receiver ZIP/log/payload caps; ZIP size/hash from actual bytes and listing. Preflight 10s. Synthetic controls 3 positives +35 negatives before native; real BOOTSTRAP_DEPENDENCY_ABSENT exact ENOENT rather than mocked missing workflow.",
+      "custody": "Exact six checked launches: preflight, absent-CWD dependency, BASE, GREEN, MUTANT, REG. Parent UID non-root and executable/pinned cwd/env; each child uses clean environment/unshare separate net (loopback only), correct UID/GID, cleared groups/no-new-privs; verify own private PID records after each. Fresh 1..8 per launch, <=8 per target, cross-target 6..24 processes. Verify preflight marker/probe ownership, removal and own temporary root removal at end with readback. No credential/remote provider/owner IO; npm-ci immutable lock/actions only."
+    },
+    "artifact": {
+      "name": "afw-c2-owner-stages-source-t1-fixture-fix1-receipt",
+      "path": "output/c2-source-lab-fixture-fix1-receipt.json",
+      "fileName": "c2-source-lab-fixture-fix1-receipt.json",
+      "count": 1,
+      "retentionDays": 7,
+      "receiptBodyBytes": 24576
+    },
+    "limitSeparation": "32MiB archive cap is the runner's local git archive, not the CI artifact ZIP cap. Preserve separate existing receiver log/ZIP caps. Receipt JSON body <=24576 excludes final LF under full protocol, so exact payload is body+LF; W1's inclusive24576 rule must not be transplanted blindly."
+  },
+  "evidenceBoundaries": {
+    "threeReceipts": "S08 approve lines34-59 compares distinct actual synthetic version/deployment IDs, predecessor links, SEND/ACK resource/deadline/send hashes/receipt hashes and counts. Third-stage selection lines117-122 requires six SENDs, three receipts, current closed config and unbound final head. Public receipt has only admitted13 rows and four observations; OWN joins this projection to actual native capture and pinned producer. It cannot freshly inspect absent private/raw receipt DTOs or invent them.",
+    "monitor": "S08 lines87-108 asserts notices policy/current grant identity, exactly one new SQL monitoring row, full original rows/grants preserved, requestId and NoticeLink SEND/ACK. S08 wrong-cookie denies before effects. This is synthetic native fixture evidence, not live authenticated consent.",
+    "finiteConsent": "S04 codec binds exact Spanish version1 text/hash, approve button, finite StageApproval, prepId/revision, issuer reservation/fence, sdkRoot/sdkGrant, GrantLink/NoticeLink, +240000/+420000 and approvedAt in append-only scoped record; canonical list/get/hash/readback checks. A future human SDK/fence consent remains required for a real trial; architecture/source approval cannot supply it.",
+    "drain": "S08 heldWriter128-140 proves one exact synthetic native fetch remains physically held after logical timeout, blocks new entry/effects, then releasing it yields no late ACK/activation/receipt or row mutation. ownPromise142-147 rejects preexisting ACK reseal despite codec roundtrip. Neither proves real SDK grant withdrawal, global physical drain, absence of all writers or empty namespace.",
+    "rawTap": "Raw child TAP is private/absent from the safe public receipt. Source pinned parser performs native TAP13 assertions. OWN independently validates safe canonical frames, semantic census/counters/witness, external capture/API/log/artifact/custody joins; it cannot claim an independent parse of absent raw TAP.",
+    "fullQualification": "A future admitted full Source result remains keyless compiled synthetic preparation qualification, not Task2/native trial/operator consent/provider runtime/completePackage."
+  },
+  "pending": [
+    "Root authorization of versioned OWN full reader implementation; none granted by this read-only block",
+    "Immutable new fixture-first controls, native OWN proof and independent review",
+    "Root reconciliation/verification of the c230 one-use nomination and exact25-path detached graph, workflows/triggers/keyless custody",
+    "Actual future Source head/tree/run/job/steps/log8frames/custody/raw artifact bytes and full-mode results; dynamic IDs remain null until observed"
+  ],
+  "coordination": "Technical read-only exchange only with existing Source planning writer /root/n3_admission_repair4_design; no owner questions, other chats or runtime actions.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

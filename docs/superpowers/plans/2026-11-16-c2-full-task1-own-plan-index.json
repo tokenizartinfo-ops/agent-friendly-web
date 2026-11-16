@@ -1,0 +1,87 @@
+{
+  "schema": "afw.own-full-task1-consumer-study-index.v1",
+  "status": "READ_ONLY_STUDY_COMPLETE_IMPLEMENTATION_NOT_STARTED",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "date": "2026-11-16",
+  "prefix": "docs/superpowers/root-own/c2-t1-full-consumer-inventory-20261116/",
+  "authority": {
+    "originalPlan": "3434f31d432084d1b6153f85d3b8c64c8e043850",
+    "frozenQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "sourcePlanningCompanion": "6696d06831328bb52d7245c48347bd8c412b566d"
+  },
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-consumer-inventory-20261116/inventory.json",
+      "mode": "100644",
+      "blob": "ae061d046333f146f5f34676ccb1df7e3774243d",
+      "bytes": 17360,
+      "sha256": "e592efec094af2bc3df454cc2905e4c03167b9189a790adac22c818c13c8b7c5",
+      "gitBlob": "ae061d046333f146f5f34676ccb1df7e3774243d",
+      "fullReadback": true,
+      "bodyUnchanged": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-consumer-inventory-20261116/protocol-scope.json",
+      "mode": "100644",
+      "blob": "aa64dc981d5b2cd18a124c2015e27a4c4e20f9b7",
+      "bytes": 21065,
+      "sha256": "5fccbfbfef6180fc2548680e1bc15343109d18034819eff8bfbf1f59a115922d",
+      "gitBlob": "aa64dc981d5b2cd18a124c2015e27a4c4e20f9b7",
+      "fullReadback": true,
+      "bodyUnchanged": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-consumer-inventory-20261116/minimal-plan.json",
+      "mode": "100644",
+      "blob": "e5f7b6402dd64c32198149077be5c084be2e4393",
+      "bytes": 15337,
+      "sha256": "627cd89448f0636a7c191a481082e4e85a727710763988bc8b49c8924b4b249a",
+      "gitBlob": "e5f7b6402dd64c32198149077be5c084be2e4393",
+      "fullReadback": true,
+      "bodyUnchanged": true
+    }
+  ],
+  "finding": "Full OWN225 receiver f799483 exists but binds pre-c230 Source13/selection/witness/identity and trusts supplied archive digest without raw ZIP bytes. Create a separately versioned OWN-only adaptation for exact c230 eight-frame/four-mode qualification; use modern strict API/ZIP algorithms without W1's four-case business schema.",
+  "minimalNextGate": "Root may authorize the bounded OWN full-reader/control implementation from minimal-plan.json. Preserve all Source13/M/Core/oldOWN; new coherent synthetic inputs and OWN-native review precede one Root-nominated full Source occurrence.",
+  "readVerification": {
+    "fullImmutableBodies": 20,
+    "totalBytes": 399931,
+    "allGitSha1Match": true,
+    "allNewSegmentsFullReadback": true,
+    "allSegmentsWithin24576Bytes": true,
+    "sourceCodeExecuted": false,
+    "ownCodeTestsExecuted": false,
+    "method": "Immutable full-body GitHub reads; UTF-8 byte counts, SHA256, Git blob SHA1; only OWN hash helper executed on strings. Metadata-referenced dependencies are marked separately."
+  },
+  "preservation": {
+    "source13Changes": 0,
+    "coreChanges": 0,
+    "MChanges": 0,
+    "oldOwnChanges": 0,
+    "implementationFilesCreated": 0,
+    "sourceTests": 0,
+    "ownTests": 0,
+    "refs": 0,
+    "runs": 0,
+    "localFiles": 0,
+    "dependencies": 0,
+    "newAgents": 0,
+    "rollback": "Omit additive report blobs. No live/tree/ref/historical mutation to reverse."
+  },
+  "actualFullCapturePending": true,
+  "sourceExpectedContext": null,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "handoff": "IDLE after report. No outstanding owner question; no implementation, Source activation or reset authorized by this study."
+}

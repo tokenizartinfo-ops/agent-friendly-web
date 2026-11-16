@@ -1,0 +1,244 @@
+{
+  "schema": "afw.own-full-task1-consumer-plan.v1",
+  "status": "READ_ONLY_PLAN_ONLY",
+  "date": "2026-11-16",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA; no Source execution",
+  "resourceType": "Git blobs",
+  "allowedAction": "Read immutable DATA and create/read back this bounded report only",
+  "rollback": "Omit additive report blobs; no ref or historical body was changed.",
+  "authority": {
+    "task": "Root read-only full Task1 consumer inventory after accepted W1 occurrence",
+    "originalPlan": "3434f31d432084d1b6153f85d3b8c64c8e043850",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "peerSourcePlan": "6696d06831328bb52d7245c48347bd8c412b566d"
+  },
+  "segment": "3/3 minimal future plan; no implementation authorization",
+  "decisionRequestedFromRoot": "Authorize only the bounded OWN full c230 receiver/fixtures/native-controls block below after reading both inventories. A later Source push is a distinct Root gate. No Source13/M/Core/oldOWN modification is proposed.",
+  "minimumChange": {
+    "newOwnVersion": "Add a separate OWN module/fixture/control/runner/schema/index namespace. Preserve f799483 and every historic specimen/result byte. Reuse its full-mode semantic algorithms with immutable c230 identity; do not silently genericize old defaults or normalize old receipts.",
+    "sourceChanges": "None. The complete target is frozen c230/26b with corrected S08 de8a51e and S09 3e1d4c2 plus its fixed eight qualification paths. Source writer only supplies read-only plan/admission; no new observer, parser mutation, timer, epoch, SDK feature or product fix.",
+    "identity": "Bind fixed qualifier branch/WF/job/command/one-use message, Source index 0681..., canonical four selections, admitted13 projection and RED de8a51e witness. Actual head/tree/run/job IDs come from independently trusted Root context, never the outcome. Root reconciles unspent nomination before execution.",
+    "wire": "The Source marker/schema/body/field order remains exactly ff353/f6b; no new Source receipt fields, private witness export or frame changes are needed.",
+    "proposedOwnEntrypoint": "c2OwnReadSourceFixtureFix1(input, trustedExpected, sha256, inflateRawSync) — planned name only, not implemented.",
+    "inputContract": {
+      "keys": [
+        "run",
+        "jobs",
+        "commit",
+        "transport",
+        "artifact"
+      ],
+      "runJobsCommit": "Raw actual GitHub API objects, not safe summary substitutes.",
+      "transportKeys": [
+        "runId",
+        "jobId",
+        "rawLog"
+      ],
+      "artifactKeys": [
+        "runId",
+        "jobId",
+        "listing",
+        "artifactId",
+        "fileName",
+        "archiveBase64",
+        "payloadText"
+      ],
+      "artifactMeaning": "archiveBase64 is canonical actual ZIP bytes; payloadText must equal sole decoded exact receipt JSON+LF and canonical receipt frame body+LF. A supplied archiveSha256 assertion alone is insufficient.",
+      "trustedExpectedKeys": [
+        "repository",
+        "branch",
+        "workflowPath",
+        "oneUseMessage",
+        "job",
+        "parent",
+        "head",
+        "tree",
+        "runId",
+        "jobId",
+        "requiredSteps"
+      ],
+      "trustedExpectedMeaning": "Exact c230 fixed nomination checked against immutable OWN admission; only actual occurrence IDs/head/tree are caller-bound from Root. No arbitrary caller-selected Source roster, schema, command, expected PASS or manifest authority.",
+      "fixedAdmission": "13 ordered path/sha256/bytes triples from f6b/26b, all25 immutable mounted path/blob/mode/hash edges and full contract/schema/selection/vector/custody/preflight/bootstrap pins separately sealed in OWN DATA."
+    },
+    "algorithmSteps": [
+      "Check trusted actual context against fixed admission and raw API commit tree/parent/message, push event attempt1, unique completed job, exact required steps and successful capture.",
+      "Validate finite real UTC dates and ordering across run/job/command step; require one exact command header/window. Recover only complete physical timestamped frame lines within that step; reject marker aliases, hidden/split/second-command or cross-step frames.",
+      "Parse exact canonical eight frames. Check context and all frame/schema/caps/order/selection/semantic invariants, exact13 admissions, exact4observations matching final embedded projections, synthetic3/35 and real ENOENT dependency control.",
+      "Check full20 GREEN and paired MUTANT semantics, RED native witness/counters/exit and REG11 exact selection; validate all integer counter hierarchies/monotonic main graph and separate isolated cases. Do not infer omitted modes or convert failures into PASS.",
+      "Require full six-launch custody6..24 and every ownership/isolation/cleanup fact. Any diagnostic, unavailable/partial/extra/missing mode or bad cleanup prevents full receipt admission while preserving honest partial evidence separately.",
+      "Decode actual bounded ZIP with strict canonical base64; one regular exact filename, bounds/central-local consistency/CRC, stored and deflate, bounded data descriptor, no duplicate/traversal/encryption/ZIP64/extra entries. Require full compressed member consumption using info.bytesWritten and exact canonical payload+LF. Join actual byte hash/size/payload to artifact API run/head/branch/digest.",
+      "Return narrowly named receiverChecksSatisfied and observed receipt/context only; do not mint live Task1Pass/SourceQualified/nonclaim authority."
+    ],
+    "caps": "Preserve full protocol body caps. Receipt body<=24576 plus exact LF; runner git archive32MiB is a different resource. Derive artifact ZIP/log caps from reviewed OWN/API contract, preserve existing1MiB ZIP/4MiB log where applicable; do not transplant W1 body-inclusive cap,4case schema or3launch custody."
+  },
+  "fixtureFirstPlan": {
+    "method": "Before new guards, persist literal new synthetic expected inputs/output facts and all deterministic IDs. Make valid full input by independently rebinding c230 roster/selections/witness/context and regenerating canonical frames, artifact, stored+deflated ZIP and API digest/size. Never edit an actual historical receipt. Every semantic mutant remains coherent at byte/hash/envelope/API level so rejection tests the intended guard.",
+    "preserve": "Run existing187+28+10 OWN historical controls unchanged against frozen historical OWN graph, preserve12aliases. Newly derived c230 fixtures carry new explicit synthetic provenance and new IDs. Historical old225/496/527/280 receipts are lineage only, not new coverage.",
+    "plannedFullInputCases": [
+      {
+        "id": "OWN_FULL_C230_GOOD",
+        "expect": "accept",
+        "facts": "All54selected observations across3+20+20+11, native exits1/0/1/0, named EXTRA_KEY killed,6custody launches, complete8frames+exactZIP."
+      },
+      {
+        "id": "OWN_FULL_C230_BAD_OLD_ADMISSION",
+        "expect": "reject",
+        "facts": "Coherent earlier b0af/65933/ec57 Source roster/index, rehashed final/log/ZIP/API; immutable new trusted admission remains c230."
+      },
+      {
+        "id": "OWN_FULL_C230_BAD_OLD_SELECTION",
+        "expect": "reject",
+        "facts": "Old mode selection hash in standalone+embedded observation with all receipt/ZIP/digest repairs."
+      },
+      {
+        "id": "OWN_FULL_C230_BAD_RED_WITNESS",
+        "expect": "reject",
+        "facts": "Old S08 fixture witness or wrong native GET/code/actual/expected, all enclosing canonical bytes repaired."
+      },
+      {
+        "id": "OWN_FULL_C230_BAD_GREEN20",
+        "expect": "reject",
+        "facts": "Missing/duplicate/out-of-order chosen ID or GREEN fail/counter mismatch made coherent across standalone+embedded modes."
+      },
+      {
+        "id": "OWN_FULL_C230_BAD_MUTANT",
+        "expect": "reject",
+        "facts": "EXTRA_KEY passes or wrong paired-kill identity despite exit1/full20; do not reject legitimate other observed mutant failures."
+      },
+      {
+        "id": "OWN_FULL_C230_BAD_CUSTODY",
+        "expect": "reject",
+        "facts": "3-launch/5-process or falsecleanup projection consistently repeated; no fullsixlaunch evidence."
+      },
+      {
+        "id": "OWN_FULL_C230_BAD_FRAME_JOIN",
+        "expect": "reject",
+        "facts": "8physicalframes but one standalone mode differs from final embedded projection, allartifact/API hashes coherent."
+      },
+      {
+        "id": "OWN_FULL_C230_BAD_API_OCCURRENCE",
+        "expect": "reject",
+        "facts": "Self-consistent foreignrun/head/job/branch/attempt/message/command in input versus fixed Root-trusted occurrence."
+      },
+      {
+        "id": "OWN_FULL_C230_BAD_ZIP_TAIL",
+        "expect": "reject",
+        "facts": "Valid deflate prefix plus deadbeef inside declared compressed member with rebuilt central/local sizes/digest; CRC/payload unchanged. Strict full consumption must reject."
+      },
+      {
+        "id": "OWN_FULL_C230_GOOD_DD",
+        "expect": "accept",
+        "facts": "Same legitimate receipt under bounded valid flags8+central lengths+CRC descriptor; local sizes may be0."
+      },
+      {
+        "id": "OWN_FULL_C230_GOOD_OTHER_MUTANT_FAIL",
+        "expect": "accept",
+        "facts": "EXTRA_KEY killed, another permitted observed mutant failure preserved honestly; no19PASS assumption."
+      }
+    ],
+    "additionalFocusedFamilies": [
+      "Canonical exact keys/order, duplicate keys, raw pretty-file hash mistaken for canonical selection, body/LF/cap boundaries and typed schema conditions.",
+      "Exact RED3/GREEN20/MUTANT20/REG11 IDs/status/exit/totals/counters, isolated last3 graph counters and regression subset; null unavailable is never zero.",
+      "Eight-frame sequence, all3/35 parser counts, exact ENOENT tuple and safe missing/partial/diagnostic outcomes reject fullqualification without rewriting evidence.",
+      "Strict actual API dates/step/run/job/tree/parent/attempt/trigger/command windows; same job name alone insufficient.",
+      "ZIP method0/method8/DD positives; CRC, bounds, path, duplicateentry, payload/hash/size/digest mismatch, truncation, trailingcompressed bytes and outputlimit negatives."
+    ],
+    "expectedNativeCount": "Not invented during read-only study. Seal exact old225 plus bounded newly materialized test IDs and any explicitly reused modern primitive IDs in the future packet before Root activation; no dynamic test census or post-run additions.",
+    "noSourceEvaluation": "OWN tests execute OWN modules and literal JSON/models only; Source parser/selftest/runner/fixture code is never imported or evaluated by OWN controls."
+  },
+  "gates": [
+    {
+      "gate": 1,
+      "owner": "Root",
+      "needed": "Authorize this narrow OWN implementation; confirm fixed immutable c230 admission and usable one-use nomination. Resolve any exact caps/step-name conflict before code; never relax schema for old metadata."
+    },
+    {
+      "gate": 2,
+      "owner": "OWN writer after authorization",
+      "needed": "Persist test-first literals, implement new OWN-only module, full reversible preimages/afterdiff, RAM RED→GREEN evidence and deterministic native graph/index/runner/WF/proof schema; preserve all old files/pins."
+    },
+    {
+      "gate": 3,
+      "owner": "Root",
+      "needed": "Static-admit exact native OWN graph and one-use workflow, run independent OWN-native controls, verify raw actual TAP/IDs/counts/API/ZIP/proof, close lab, obtain fresh SPEC+QUALITY review. Native OWN controls prove reader behavior, not Source execution."
+    },
+    {
+      "gate": 4,
+      "owner": "Root only",
+      "needed": "Verify baseline3203unchanged plus exact25added DATA edges and full currentSource13 hashes/modes; unique unspent nomination, inherited workflows/triggers, locked dependencies/keyless isolated custody/cleanup. Bind actual detached head/tree."
+    },
+    {
+      "gate": 5,
+      "owner": "Root only",
+      "needed": "Activate one full Source attempt1 only after prior gates. Join actual raw API/run/job/step8frames and exact artifact bytes through new independent reader. No automatic repeated head/epochs or reinterpretation of earlier W1."
+    },
+    {
+      "gate": 6,
+      "owner": "Root",
+      "needed": "Preserve full mode outcomes/partial failure and cleanup/closure independent of qualification. On expectedfullpositive4modes, publish narrowly scoped compiled Source qualification decision; keep Task2/live SDK/owner consent/globaldrain claims separate."
+    }
+  ],
+  "blockers": [
+    {
+      "id": "OWN_BINDING",
+      "state": "Concrete",
+      "detail": "Existing full reader rejects correct c230 identity/roster/witness and would validate only earlier nominated fixtures. New version/controls required."
+    },
+    {
+      "id": "ACTUAL_ZIP",
+      "state": "Concrete",
+      "detail": "Legacy full entrypoint lacks archive bytes and cannot authenticate supplied payload against actual ZIP/digest/CRC/full member. Modern OWN algorithm available but not integrated for c230."
+    },
+    {
+      "id": "OWN_ADMISSION",
+      "state": "Not executed",
+      "detail": "No newly implemented fullc230 graph/native proof/fresh review exists in this read-only block."
+    },
+    {
+      "id": "ROOT_NOMINATION",
+      "state": "Root reconciliation required",
+      "detail": "c230 is pre-nominated only. Root must verify unspent/recoverable isolated graph and safe triggers; no new real head/tree/run/job exists in this report."
+    },
+    {
+      "id": "ACTUAL_FULL_CAPTURE",
+      "state": "Pending future authorized occurrence",
+      "detail": "No current baselineRED3+GREEN20+MUTANT20+REG11 native full capture has been independently consumed here. W1 fourcase acceptance does not close it."
+    },
+    {
+      "id": "LIVE_SCOPE",
+      "state": "Outside full Source gate",
+      "detail": "Real future human CleanupScope consent, actual scoped SDK/fence revocation and writer terminal readbacks, Task2/runtime/canary/native trial and namespace proof cannot be obtained by extending a reader over absent evidence."
+    }
+  ],
+  "scopeDecision": "The full Source schema already has enough bounded projection for the defined keyless compiled qualification. Do not add raw private receipts, complete SDK namespace proofs or a new observer to fix a consumer metadata/envelope gap. Any demand for fresh independent raw TAP/receipt-object authentication is a different evidence contract requiring Root decision, not a hidden reader claim.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "performed": {
+    "implementation": false,
+    "sourceImports": false,
+    "sourceEval": false,
+    "sourceSyntaxChecks": false,
+    "sourceTests": false,
+    "ownTests": false,
+    "localFiles": false,
+    "dependencies": false,
+    "newAgents": false,
+    "refs": false,
+    "runs": false,
+    "providerAccess": false,
+    "secrets": false
+  }
+}

@@ -1,0 +1,427 @@
+{
+  "schema": "afw.own-full-task1-consumer-inventory.v1",
+  "status": "READ_ONLY_PLAN_ONLY",
+  "date": "2026-11-16",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA; no Source execution",
+  "resourceType": "Git blobs",
+  "allowedAction": "Read immutable DATA and create/read back this bounded report only",
+  "rollback": "Omit additive report blobs; no ref or historical body was changed.",
+  "authority": {
+    "task": "Root read-only full Task1 consumer inventory after accepted W1 occurrence",
+    "originalPlan": "3434f31d432084d1b6153f85d3b8c64c8e043850",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "peerSourcePlan": "6696d06831328bb52d7245c48347bd8c412b566d"
+  },
+  "segment": "1/3 inventory and reusable OWN interfaces",
+  "conclusion": "A full four-mode/20-case OWN receiver and 225 control lineage exist. They cannot qualify c230 unchanged: their Source13 projection, selection hashes, RED witness and one-use identity remain pinned to earlier v2-fix1. W1 supplies useful independent transport/API/strict-ZIP algorithms, not full Task1 coverage. Minimal next block is a separately versioned OWN reader, new coherent full-input fixtures, native OWN gate and review, then Root's single unspent nominated full Source occurrence.",
+  "readMethod": {
+    "fullReads": "The readAssets entries were fetched in full as immutable body strings and independently matched UTF-8 byte count, SHA256 and Git blob SHA1. Source JS was inspected as text only, never evaluated/imported/compiled/syntax-checked.",
+    "sourceBodies": "Only S04 scope codec and S08 corrected fixture were read in full in this inventory. The complete 13-row product roster and remaining tooling body hashes below are immutable metadata from 26b/c230; this report does not claim fresh full reads of every referenced body.",
+    "ownExecution": 0,
+    "sourceExecution": 0,
+    "newTests": 0,
+    "refsOrRuns": 0
+  },
+  "readAssets": [
+    {
+      "id": "ownIndex",
+      "blob": "682cdfd5421a0b2030487ead6f48a1381745ebb4",
+      "bytes": 6583,
+      "sha256": "0cb6e90506aa5d7308fcedd3f5ba365794b11cc9f90dbcedb6c56f4c51a17ee2",
+      "gitBlob": "682cdfd5421a0b2030487ead6f48a1381745ebb4",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "oldSourceV2Packet",
+      "blob": "f1d03b381242d0814e4632ceec990fa0fdd39820",
+      "bytes": 13220,
+      "sha256": "eeab7dd64b3761dc5569e464ad68bde812572c79a3fedca3b9c7a5b2a4dac304",
+      "gitBlob": "f1d03b381242d0814e4632ceec990fa0fdd39820",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "originalFullPlan",
+      "blob": "3434f31d432084d1b6153f85d3b8c64c8e043850",
+      "bytes": 24383,
+      "sha256": "80fc74607dab727a655dfd09e2b962c10bcf18ced961ba6af259ddf5777c9db9",
+      "gitBlob": "3434f31d432084d1b6153f85d3b8c64c8e043850",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "frozenQualifier",
+      "blob": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+      "bytes": 15224,
+      "sha256": "1359d5a505e65a3a04659a0cae70fd60023ce56ae989a0277438bf50790912ed",
+      "gitBlob": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "normal13",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "gitBlob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "fullOwnReader",
+      "blob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "bytes": 31155,
+      "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c",
+      "gitBlob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "fullOwnControls",
+      "blob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+      "bytes": 19486,
+      "sha256": "e69f12c2389616f1517dbd8f5472cda511c01b6fab2a42f6fe366afbe6a234c7",
+      "gitBlob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "ownReport",
+      "blob": "fcf9c7c35e8862c24d4008dd26630b0658446c38",
+      "bytes": 8566,
+      "sha256": "3fa2be2df94a8867697536eac78a3a79db584b3e2494c1f11c7202c42440fc2c",
+      "gitBlob": "fcf9c7c35e8862c24d4008dd26630b0658446c38",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "qualifierContract",
+      "blob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+      "bytes": 15709,
+      "sha256": "2bd76e556a6dbf9d394fba70d64a216fd339697fcae2e885b3fd6141f4ecd6fb",
+      "gitBlob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "qualifierSchema",
+      "blob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+      "bytes": 13983,
+      "sha256": "9fc0205fbbbd4a0d61f4560291bd53caf58df083f88e4579eaa74ea02d15d61e",
+      "gitBlob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "qualifierSelection",
+      "blob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+      "bytes": 5460,
+      "sha256": "618e35bbeda39833ddf5c63ed16a41b44db85ab751edcb87ad5abb9ebcaae839",
+      "gitBlob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "scopeCodecData",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+      "gitBlob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "sourceFixtureData",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+      "gitBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "regressionSelection",
+      "blob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+      "bytes": 3364,
+      "sha256": "8287deef6924d3f91db98078da7bca8bdb55e292f87f9fd814da794e513ba4cf",
+      "gitBlob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "parserVectorsData",
+      "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+      "bytes": 14802,
+      "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+      "gitBlob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "modernOwnW1Reader",
+      "blob": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+      "bytes": 59136,
+      "sha256": "a2bc00b500b92dc37f371e040717099a3af670994d3ad66d607530b75be1920e",
+      "gitBlob": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "w1Primary",
+      "blob": "6cfb0d0827ebe0cf8591d06d09e1ced0d7aedaaa",
+      "bytes": 79243,
+      "sha256": "aa86ac5d27fa2818315cf594af0dd5a0836c396758acba039767e52eae076247",
+      "gitBlob": "6cfb0d0827ebe0cf8591d06d09e1ced0d7aedaaa",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "w1OwnAdmission",
+      "blob": "2fdbd74df7127f13054cd6b72d76a349ebcb9db3",
+      "bytes": 7351,
+      "sha256": "ea3ab3e70f9c04e188b0b078dcbcfc1731eb0b5a25e9609121d1bf45c8044b3f",
+      "gitBlob": "2fdbd74df7127f13054cd6b72d76a349ebcb9db3",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "revisedSpec2",
+      "blob": "cd0296158941515eb6839faf7a8de5ea608f330c",
+      "bytes": 24558,
+      "sha256": "4f2051454b5e7923d168300245b5e9d6cce5420df72c60c499872d73cdbee885",
+      "gitBlob": "cd0296158941515eb6839faf7a8de5ea608f330c",
+      "fullBodyRead": true,
+      "gitMatches": true
+    },
+    {
+      "id": "peerSourcePlan",
+      "blob": "6696d06831328bb52d7245c48347bd8c412b566d",
+      "bytes": 23421,
+      "sha256": "112a81f270cdee48779020eb0edb0054009bc0b3534459090d095f0f55631d83",
+      "gitBlob": "6696d06831328bb52d7245c48347bd8c412b566d",
+      "fullBodyRead": true,
+      "gitMatches": true
+    }
+  ],
+  "existingOwn": {
+    "index": "682cdfd5421a0b2030487ead6f48a1381745ebb4",
+    "module": {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/own-receiver.mjs",
+      "blob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "bytes": 31155,
+      "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c",
+      "gitBlob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "fullReadback": true,
+      "before": null
+    },
+    "controls": {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/own-controls.mjs",
+      "blob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+      "bytes": 19486,
+      "sha256": "e69f12c2389616f1517dbd8f5472cda511c01b6fab2a42f6fe366afbe6a234c7",
+      "gitBlob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+      "fullReadback": true,
+      "before": null
+    },
+    "fixtures": [
+      {
+        "path": "docs/superpowers/root-own/c2-t1-v2-fix2/fix2-vectors.json",
+        "blob": "6e5929efbd58acd113bfdf5813fe2670a6cccca4",
+        "bytes": 107420,
+        "sha256": "5f7166dc286946ee89ee61c70ea4c614f392e006ccbd1998d4611f05b66a9eef",
+        "gitBlob": "6e5929efbd58acd113bfdf5813fe2670a6cccca4",
+        "fullReadback": true,
+        "before": null
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-v2-fix2/fixture-first.json",
+        "blob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+        "bytes": 34834,
+        "sha256": "e00942909c3eab5a0d8ee5fffe9c625d38e7566fdc648baf4eb6998dcc8612bf",
+        "gitBlob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+        "fullReadback": true,
+        "before": null
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-v2-fix2/diagnostic-schema.json",
+        "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+        "bytes": 9686,
+        "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+        "gitBlob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+        "fullReadback": true,
+        "before": null
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-v2-fix2/synthetic-fixtures.json",
+        "blob": "a3fb1952a1afaca469f841b6a110f625c7e97364",
+        "bytes": 45368,
+        "sha256": "15de1b2f5839221447c2a47647bbb7e9cced5930c527bd684fa4f3ddc63fee54",
+        "gitBlob": "a3fb1952a1afaca469f841b6a110f625c7e97364",
+        "fullReadback": true,
+        "before": null
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-v2-fix2/source-assembly-fixture.json",
+        "blob": "10a46188ae3be96657ab2ddcf83eb328c60b0a70",
+        "bytes": 39338,
+        "sha256": "9c38bb719dfe251849cc46f535fe1fed07c58d0d1a441f16f853647894d3ef00",
+        "gitBlob": "10a46188ae3be96657ab2ddcf83eb328c60b0a70",
+        "fullReadback": true,
+        "before": null
+      }
+    ],
+    "historicalControlCalls": [
+      "c2OwnControls(fixtureFirst,schema,sha256):187 passed,0 failed",
+      "c2OwnSourceAssemblyControls(first.fixtures,sha256):28 passed,0 failed",
+      "c2OwnFix2Controls(fix2Vectors,schema,sha256):10 passed,0 failed"
+    ],
+    "controlTotal": 225,
+    "oldAliasRejects": 12,
+    "evidenceLimit": "Index status is historical PENDING_ROOT_CLOUD_MODULE_GRAPH_AND_SCOPED_REVIEW. Its 225 results are the packet's recorded synthetic results. No new native run or present-day review acceptance of that old module is asserted here.",
+    "interfaces": [
+      {
+        "name": "c2V2CheckModeCases(mode,cases,exitCode)",
+        "lines": "1-24",
+        "role": "Independent exact ID/order/status/counter mode oracle"
+      },
+      {
+        "name": "c2V2ReadFrame(line,expected,admitted,checkCases)",
+        "lines": "25-70",
+        "role": "Canonical physical frame/context/admission/selection/witness/limits"
+      },
+      {
+        "name": "c2V2ReadBundle(lines,expected,admitted,readFrame,checkCases)",
+        "lines": "71-78",
+        "role": "Eight ordered frames and equality of four mode projections with embedded receipt observations"
+      },
+      {
+        "name": "c2RootApiJoin({run,jobs,commit,expected})",
+        "lines": "80-98",
+        "role": "Actual run/job/commit/parent/tree/one-use identity and required steps"
+      },
+      {
+        "name": "c2OwnSchema(value,node,document)",
+        "lines": "109-133",
+        "role": "Strict shape/ordered keys and schema conditionals; semantic invariants remain separate"
+      },
+      {
+        "name": "c2OwnReadSource(input,admitted,sha256)",
+        "lines": "260-288",
+        "role": "Full Source raw API/log/final artifact assembly; old identity only"
+      },
+      {
+        "name": "c2OwnReadGreen(input,schema,sha256)",
+        "lines": "204-257",
+        "role": "Four-frame diagnostic only; never substitute for full Source qualification"
+      }
+    ],
+    "inputKeys": [
+      "run",
+      "jobs",
+      "commit",
+      "expected",
+      "transport",
+      "artifact"
+    ],
+    "expectedKeys": [
+      "repository",
+      "branch",
+      "workflowPath",
+      "oneUseMessage",
+      "job",
+      "parent",
+      "head",
+      "tree",
+      "runId",
+      "jobId",
+      "requiredSteps"
+    ],
+    "legacyArtifactKeys": [
+      "runId",
+      "jobId",
+      "listing",
+      "artifactId",
+      "fileName",
+      "payloadText",
+      "archiveSha256"
+    ],
+    "legacyGap": "The archiveSha256 string is compared with API digest but actual archive bytes are absent. A raw-byte ZIP envelope/CRC/member/deflate-consumption gate must precede full admission in the new version.",
+    "staleBindings": [
+      {
+        "lines": "30-31,86,270,282",
+        "what": "b0af9e... Source index hash, old v2-fix1 branch/message/WF/job/command and artifact names"
+      },
+      {
+        "line": 264,
+        "what": "Old S08 65933f3ebd753859a3b341f684b46d11f5c43a5a/14244B/SHA029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318; old S09 ec57e55ea2d8f68c992af26bccca0c6e71a79f96/60636B/SHA092a1d8dd44b99a16e522f09234a2b0f4bf62e6575ac99664be516fc7673920d"
+      },
+      {
+        "line": 38,
+        "what": "Three old canonical mode hashes; regression hash is unchanged"
+      },
+      {
+        "line": 40,
+        "what": "RED S08 witness still names 65933 instead of de8a51e"
+      },
+      {
+        "lines": "284-286",
+        "what": "Only declared archive hash; no raw ZIP consumption"
+      }
+    ]
+  },
+  "modernOwnReusable": {
+    "reader": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+    "bytes": 59136,
+    "sha256": "a2bc00b500b92dc37f371e040717099a3af670994d3ad66d607530b75be1920e",
+    "exports": [
+      "w1Read(input,trusted,hash,inflate)",
+      "w1Replay(raw,binding,condition,native)",
+      "w1ApiJoin(input,expected,admission)",
+      "w1Crc32(bytes)",
+      "w1ZipPayload(base64,name,inflate)"
+    ],
+    "reuse": "Use separately versioned OWN-only extraction/adaptation of strict calendar/API/step log gates and ZIP normal/DD/local+central/CRC/exact path/single member/full deflate consumption checks. Preserve known producer admission separately from outcome data.",
+    "strictDeflate": "inflateRawSync(buffer,{maxOutputLength:boundedPayload,info:true}) contract returns {buffer,engine}; engine.bytesWritten must equal the complete declared compressed member length. Preserve preceding round2 fix, method0/method8 and flags8/data-descriptor compatibility.",
+    "doNotReuseAsFull": "Its N3 four IDs, causal/probe journal, five host-call M/QA metadata, four frames, three launches and W1 artifact names/caps are diagnostic-specific. No observer or causal graph is added to the unchanged full Source contract."
+  },
+  "actualW1Boundary": {
+    "primary": "6cfb0d0827ebe0cf8591d06d09e1ced0d7aedaaa",
+    "outcome": "325efbf73e0fe5ecea0713cf76df6b7d8cecd3b5",
+    "ownAdmission": "2fdbd74df7127f13054cd6b72d76a349ebcb9db3",
+    "scope": "Four N3 cases PASS, notices GET/POST200/body settled, AFTER returned, exit0; observed causal NO_ELIGIBLE/unknown and after-probe unavailable. Admitted diagnostic occurrence only, not baselineRED/GREEN20/MUTANT20/REG11 full Task1.",
+    "attribution": "M matches prior C while QA observer differs. No causal claim that a 503 bug was fixed.",
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "performed": {
+    "implementation": false,
+    "sourceImports": false,
+    "sourceEval": false,
+    "sourceSyntaxChecks": false,
+    "sourceTests": false,
+    "ownTests": false,
+    "localFiles": false,
+    "dependencies": false,
+    "newAgents": false,
+    "refs": false,
+    "runs": false,
+    "providerAccess": false,
+    "secrets": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
