@@ -1,0 +1,263 @@
+{
+  "schema": "afw.c2-source-reversible-manifest.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "sourceIndex": "e20ae5a991a291004c3a8dde098031865c1e4c13",
+  "rule": "All existing before blobs are complete full-file preimages in the same authorized repository, read in full before proposal. No original blob/history is overwritten. Current work only creates immutable blobs; rollback now is abandonment. Any later Core/candidate restoration belongs to Root and must compare exact after blob plus preserve legitimate later changes.",
+  "files": [
+    {
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "before": {
+        "blob": "7eb8f28760de60f143e487eeb6988705059a0a44",
+        "bytes": 126504
+      },
+      "after": {
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          126504
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/7eb8f28760de60f143e487eeb6988705059a0a44"
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "before": {
+        "blob": "152e730f83af7ef063b6b1db89f8b0a779c2b60e",
+        "bytes": 45255
+      },
+      "after": {
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          45255
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/152e730f83af7ef063b6b1db89f8b0a779c2b60e"
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "before": {
+        "blob": "e760b3579a38f1dbb73b177bb73b06d814eb881f",
+        "bytes": 2505
+      },
+      "after": {
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          2505
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/e760b3579a38f1dbb73b177bb73b06d814eb881f"
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "worker/mcp-own/finite.mjs",
+      "before": {
+        "blob": "15441b6c0c779f733db65a3b59a3a9e1738d19dc",
+        "bytes": 2758
+      },
+      "after": {
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          2758
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/15441b6c0c779f733db65a3b59a3a9e1738d19dc"
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "before": null,
+      "after": {
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      "reverse": {
+        "action": "Remove only this exact newly admitted body in a future isolated candidate; do not delete another revision.",
+        "newFile": true
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "before": {
+        "blob": "1a5a2583d266179cdd89f799c64199f29044fec5",
+        "bytes": 89322
+      },
+      "after": {
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          89322
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/1a5a2583d266179cdd89f799c64199f29044fec5"
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "before": {
+        "blob": "0a04ae3a4d74c2c7939b1654683054b1d5d751d4",
+        "bytes": 22438
+      },
+      "after": {
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          22438
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/0a04ae3a4d74c2c7939b1654683054b1d5d751d4"
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "before": null,
+      "after": {
+        "blob": "db7f97301bfac415da4c66463439c576adf0bbfb",
+        "bytes": 2462,
+        "sha256": "7f527179f32ab56c3a430c1180002af8d0e5d5fadd2608559f719c980d37cbb6"
+      },
+      "reverse": {
+        "action": "Remove only this exact newly admitted body in a future isolated candidate; do not delete another revision.",
+        "newFile": true
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "before": null,
+      "after": {
+        "blob": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+        "bytes": 14244,
+        "sha256": "029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318"
+      },
+      "reverse": {
+        "action": "Remove only this exact newly admitted body in a future isolated candidate; do not delete another revision.",
+        "newFile": true
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "before": {
+        "blob": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+        "bytes": 57864
+      },
+      "after": {
+        "blob": "ec57e55ea2d8f68c992af26bccca0c6e71a79f96",
+        "bytes": 60636,
+        "sha256": "092a1d8dd44b99a16e522f09234a2b0f4bf62e6575ac99664be516fc7673920d"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          57864
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/cede301c3e9cd95716ae2134f938dbb1d940e7a9"
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "before": {
+        "blob": "a7b730dc9be336528f0971544099f79d05758b1a",
+        "bytes": 87501
+      },
+      "after": {
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          87501
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/a7b730dc9be336528f0971544099f79d05758b1a"
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "before": {
+        "blob": "1298bb5b67749df0d7ee20c863b691562e6a81b9",
+        "bytes": 57221
+      },
+      "after": {
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          57221
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/1298bb5b67749df0d7ee20c863b691562e6a81b9"
+      },
+      "productInstalledByAuthor": false
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "before": {
+        "blob": "ea910f0fcdeade5a794ddaa60898706924e72f80",
+        "bytes": 4750
+      },
+      "after": {
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      },
+      "reverse": {
+        "action": "Restore complete before blob to same path only under exact after-blob lease in a future isolated candidate.",
+        "beforeByteInterval": [
+          0,
+          4750
+        ],
+        "beforeBody": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs/ea910f0fcdeade5a794ddaa60898706924e72f80"
+      },
+      "productInstalledByAuthor": false
+    }
+  ],
+  "fullReadback": true
+}

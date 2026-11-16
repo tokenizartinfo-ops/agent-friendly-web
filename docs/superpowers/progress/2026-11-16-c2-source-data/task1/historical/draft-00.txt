@@ -1,0 +1,115 @@
+{
+  "schema": "afw.c2-source-lab-receipt.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "fieldOrder": [
+    "schema",
+    "context",
+    "admitted",
+    "runs",
+    "nonclaims"
+  ],
+  "contextOrder": [
+    "repository",
+    "baselineSource",
+    "baselineTree",
+    "proposalIndexHash",
+    "head",
+    "tree",
+    "runId",
+    "runAttempt",
+    "job",
+    "node"
+  ],
+  "admittedOrder": [
+    "path",
+    "sha256",
+    "bytes"
+  ],
+  "runOrder": [
+    "mode",
+    "exitCode",
+    "qualified",
+    "cases"
+  ],
+  "caseOrder": [
+    "id",
+    "status",
+    "phase",
+    "counters",
+    "code"
+  ],
+  "phaseCodes": [
+    "connection",
+    "oauth",
+    "notices",
+    "monitor",
+    "scope",
+    "finite",
+    "selection",
+    "negative"
+  ],
+  "caseIds": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ],
+  "statuses": [
+    "pass",
+    "fail"
+  ],
+  "counters": [
+    "upload",
+    "activation",
+    "receipts"
+  ],
+  "caps": {
+    "receiptUtf8": 24576,
+    "caseCount": 20,
+    "stdoutUtf8": 1048576,
+    "stderrUtf8": 65536,
+    "perTestMs": 120000,
+    "jobMinutes": 7
+  },
+  "modes": [
+    "baseline-red",
+    "proposal-green",
+    "mutant-own-promise"
+  ],
+  "qualification": "baseline: actual connection+OAuth pass, C2T1_NOTICES fails after two original native SENDs; green all named cases pass without skip/todo/cancel; mutant C2T1_OWN_PROMISE fails, no unknown/missing cases; Root independently joins head/tree/run/attempt/job/API and admitted hashes.",
+  "neverEmit": [
+    "TAP",
+    "assertions",
+    "raw errors",
+    "headers",
+    "cookies",
+    "JWT",
+    "nonce",
+    "private fields"
+  ],
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "afw.c2-task1-root-own.v1",
+  "contract": "567c84adcda2355c7eeef39656d5a1f1101262ed",
+  "regressionManifest": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+  "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6",
+  "parts": [
+    {
+      "role": "record",
+      "sha": "ff288b865b72007ae7223c8f5e8266152a130db4"
+    },
+    {
+      "role": "controls",
+      "sha": "d549bb9f3a8a067aef4d19165321f1146a3a89aa"
+    },
+    {
+      "role": "fixture",
+      "sha": "239971d221ef1e0ce465d106174df1a00c502380"
+    },
+    {
+      "role": "result",
+      "sha": "ae4b0dc8fbe313e5c4e31e7496b9d68fd8d804c3"
+    }
+  ],
+  "api": "00976d454192ed680c00200b084e9c9c46c6f3cd",
+  "apiControls": "e1007f5be4c565f09a81af822d0776cbbcde719c",
+  "controls": {
+    "recordPositive": 1,
+    "recordNegative": 85,
+    "apiPositive": 1,
+    "apiNegative": 34
+  },
+  "status": "CONTROLLER_SYNTHETIC_PASS; actual Source gate/test pending",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

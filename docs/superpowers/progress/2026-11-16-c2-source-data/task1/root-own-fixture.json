@@ -1,0 +1,815 @@
+{
+  "fixture": {
+    "schema": "afw.c2-source-lab-receipt.v1",
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "proposalIndexHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "head": "1111111111111111111111111111111111111111",
+      "tree": "2222222222222222222222222222222222222222",
+      "runId": "100",
+      "runAttempt": 1,
+      "job": "c2-source-lab",
+      "node": "v22.23.4"
+    },
+    "admitted": [
+      {
+        "path": "lib/synthetic-control.mjs",
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "bytes": 123
+      }
+    ],
+    "runs": [
+      {
+        "mode": "baseline-red",
+        "exitCode": 1,
+        "qualified": false,
+        "cases": [
+          {
+            "id": "C2T1_CONNECTION",
+            "status": "pass",
+            "phase": "connection",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_OAUTH",
+            "status": "pass",
+            "phase": "oauth",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_HANDLE",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_PROJECTREF",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SUBJECT",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_PHASE_RENAME",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SOURCE_BYTES",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_APPROVAL",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_PREDECESSOR",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_GRANT_REVOKED",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_EXTRA_KEY",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_NOTICES",
+            "status": "fail",
+            "phase": "notices",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "TEST_FAILED"
+          },
+          {
+            "id": "C2T1_MONITOR_COOKIE",
+            "status": "pass",
+            "phase": "monitor",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_MONITOR",
+            "status": "pass",
+            "phase": "monitor",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SCOPE_MISSING",
+            "status": "pass",
+            "phase": "scope",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_FINITE",
+            "status": "pass",
+            "phase": "finite",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SELECTION",
+            "status": "pass",
+            "phase": "selection",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_LOST_ACK_DUPLICATE",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_UNRESOLVED_WRITER",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_OWN_PROMISE",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          }
+        ]
+      },
+      {
+        "mode": "proposal-green",
+        "exitCode": 0,
+        "qualified": true,
+        "cases": [
+          {
+            "id": "C2T1_CONNECTION",
+            "status": "pass",
+            "phase": "connection",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_OAUTH",
+            "status": "pass",
+            "phase": "oauth",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_HANDLE",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_PROJECTREF",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SUBJECT",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_PHASE_RENAME",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SOURCE_BYTES",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_APPROVAL",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_PREDECESSOR",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_GRANT_REVOKED",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_EXTRA_KEY",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_NOTICES",
+            "status": "pass",
+            "phase": "notices",
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_MONITOR_COOKIE",
+            "status": "pass",
+            "phase": "monitor",
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_MONITOR",
+            "status": "pass",
+            "phase": "monitor",
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SCOPE_MISSING",
+            "status": "pass",
+            "phase": "scope",
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_FINITE",
+            "status": "pass",
+            "phase": "finite",
+            "counters": {
+              "upload": 3,
+              "activation": 3,
+              "receipts": 3
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SELECTION",
+            "status": "pass",
+            "phase": "selection",
+            "counters": {
+              "upload": 3,
+              "activation": 3,
+              "receipts": 3
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_LOST_ACK_DUPLICATE",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_UNRESOLVED_WRITER",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_OWN_PROMISE",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          }
+        ]
+      },
+      {
+        "mode": "mutant-prefix",
+        "exitCode": 1,
+        "qualified": false,
+        "cases": [
+          {
+            "id": "C2T1_CONNECTION",
+            "status": "pass",
+            "phase": "connection",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_OAUTH",
+            "status": "pass",
+            "phase": "oauth",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_HANDLE",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_PROJECTREF",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SUBJECT",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_PHASE_RENAME",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SOURCE_BYTES",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_APPROVAL",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_PREDECESSOR",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_GRANT_REVOKED",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_EXTRA_KEY",
+            "status": "fail",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "TEST_FAILED"
+          },
+          {
+            "id": "C2T1_NOTICES",
+            "status": "pass",
+            "phase": "notices",
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_MONITOR_COOKIE",
+            "status": "pass",
+            "phase": "monitor",
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_MONITOR",
+            "status": "pass",
+            "phase": "monitor",
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SCOPE_MISSING",
+            "status": "pass",
+            "phase": "scope",
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_FINITE",
+            "status": "pass",
+            "phase": "finite",
+            "counters": {
+              "upload": 3,
+              "activation": 3,
+              "receipts": 3
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_SELECTION",
+            "status": "pass",
+            "phase": "selection",
+            "counters": {
+              "upload": 3,
+              "activation": 3,
+              "receipts": 3
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_LOST_ACK_DUPLICATE",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_UNRESOLVED_WRITER",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          },
+          {
+            "id": "C2T1_OWN_PROMISE",
+            "status": "pass",
+            "phase": "negative",
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            },
+            "code": "OK"
+          }
+        ]
+      }
+    ],
+    "regressions": {
+      "exitCode": 0,
+      "cases": [
+        {
+          "id": "C2T1_REG_01",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_02",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_03",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_04",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_05",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_06",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_07",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_08",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_09",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_10",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "C2T1_REG_11",
+          "status": "pass",
+          "code": "OK"
+        }
+      ],
+      "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6"
+    },
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  },
+  "expected": {
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "proposalIndexHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "head": "1111111111111111111111111111111111111111",
+      "tree": "2222222222222222222222222222222222222222",
+      "runId": "100",
+      "runAttempt": 1,
+      "job": "c2-source-lab",
+      "node": "v22.23.4"
+    },
+    "admitted": [
+      {
+        "path": "lib/synthetic-control.mjs",
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "bytes": 123
+      }
+    ],
+    "regressions": {
+      "ids": [
+        "C2T1_REG_01",
+        "C2T1_REG_02",
+        "C2T1_REG_03",
+        "C2T1_REG_04",
+        "C2T1_REG_05",
+        "C2T1_REG_06",
+        "C2T1_REG_07",
+        "C2T1_REG_08",
+        "C2T1_REG_09",
+        "C2T1_REG_10",
+        "C2T1_REG_11"
+      ],
+      "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6"
+    }
+  },
+  "frame": "AFW_C2_SOURCE_RECEIPT {\"schema\":\"afw.c2-source-lab-receipt.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"head\":\"1111111111111111111111111111111111111111\",\"tree\":\"2222222222222222222222222222222222222222\",\"runId\":\"100\",\"runAttempt\":1,\"job\":\"c2-source-lab\",\"node\":\"v22.23.4\"},\"admitted\":[{\"path\":\"lib/synthetic-control.mjs\",\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"bytes\":123}],\"runs\":[{\"mode\":\"baseline-red\",\"exitCode\":1,\"qualified\":false,\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"fail\",\"phase\":\"notices\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_UNRESOLVED_WRITER\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OWN_PROMISE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}]},{\"mode\":\"proposal-green\",\"exitCode\":0,\"qualified\":true,\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_UNRESOLVED_WRITER\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OWN_PROMISE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}]},{\"mode\":\"mutant-prefix\",\"exitCode\":1,\"qualified\":false,\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"fail\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":3,\"activation\":3,\"receipts\":3},\"code\":\"OK\"},{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_UNRESOLVED_WRITER\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"},{\"id\":\"C2T1_OWN_PROMISE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}]}],\"regressions\":{\"exitCode\":0,\"cases\":[{\"id\":\"C2T1_REG_01\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_02\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_03\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_04\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_05\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_06\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_07\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_08\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_09\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_10\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"C2T1_REG_11\",\"status\":\"pass\",\"code\":\"OK\"}],\"selectionHash\":\"e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6\"},\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+}

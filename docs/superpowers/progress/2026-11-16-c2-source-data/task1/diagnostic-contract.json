@@ -1,0 +1,22 @@
+{
+  "schema": "afw.c2-source-static-diagnostic-addendum.v1",
+  "contract": "567c84adcda2355c7eeef39656d5a1f1101262ed",
+  "runner": "8732cce3fb989eeafa7d30f895611a9f5c018654",
+  "channel": "stderr",
+  "frame": "AFW_C2_SOURCE_DIAGNOSTIC JSON.stringify({phase,code:\"CAPTURE_INVALID\"}) + LF",
+  "phases": [
+    "admission",
+    "materialize",
+    "baseline-red",
+    "proposal-green",
+    "mutant-prefix",
+    "regressions",
+    "cleanup"
+  ],
+  "maximumUtf8": 200,
+  "fields": [
+    "phase",
+    "code"
+  ],
+  "claims": "Any diagnostic/failed runner blocks qualification; no fallback receipt, no raw error/TAP/assertion/paths/body. No cloud execution from author."
+}

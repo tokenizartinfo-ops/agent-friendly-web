@@ -1,0 +1,252 @@
+{
+  "schema": "afw.c2-source-lab-receipt.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "fieldOrder": [
+    "schema",
+    "context",
+    "admitted",
+    "runs",
+    "nonclaims"
+  ],
+  "contextOrder": [
+    "repository",
+    "baselineSource",
+    "baselineTree",
+    "proposalIndexHash",
+    "head",
+    "tree",
+    "runId",
+    "runAttempt",
+    "job",
+    "node"
+  ],
+  "admittedOrder": [
+    "path",
+    "sha256",
+    "bytes"
+  ],
+  "runOrder": [
+    "mode",
+    "exitCode",
+    "qualified",
+    "cases"
+  ],
+  "caseOrder": [
+    "id",
+    "status",
+    "phase",
+    "counters",
+    "code"
+  ],
+  "phaseCodes": [
+    "connection",
+    "oauth",
+    "notices",
+    "monitor",
+    "scope",
+    "finite",
+    "selection",
+    "negative"
+  ],
+  "caseIds": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ],
+  "statuses": [
+    "pass",
+    "fail"
+  ],
+  "counters": [
+    "upload",
+    "activation",
+    "receipts"
+  ],
+  "caps": {
+    "receiptUtf8": 24576,
+    "caseCount": 20,
+    "stdoutUtf8": 1048576,
+    "stderrUtf8": 65536,
+    "perTestMs": 120000,
+    "jobMinutes": 7
+  },
+  "modes": [
+    "baseline-red",
+    "proposal-green",
+    "mutant-prefix"
+  ],
+  "qualification": "Every mode executes all20 case IDs in the same fixed order, with TAP-derived status joined to one canonical C2SOURCE frame per case (including failure finally). qualified means suite exit0 and all20pass; Root separately recognizes expected baseline/mutant failure. No skip/todo/cancel/unknown/missing/extra case qualifies.",
+  "neverEmit": [
+    "TAP",
+    "assertions",
+    "raw errors",
+    "headers",
+    "cookies",
+    "JWT",
+    "nonce",
+    "private fields"
+  ],
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "phases": [
+    {
+      "id": "C2T1_CONNECTION",
+      "phase": "connection"
+    },
+    {
+      "id": "C2T1_OAUTH",
+      "phase": "oauth"
+    },
+    {
+      "id": "C2T1_HANDLE",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_PROJECTREF",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_SUBJECT",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_PHASE_RENAME",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_SOURCE_BYTES",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_APPROVAL",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_PREDECESSOR",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_GRANT_REVOKED",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_EXTRA_KEY",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_NOTICES",
+      "phase": "notices"
+    },
+    {
+      "id": "C2T1_MONITOR_COOKIE",
+      "phase": "monitor"
+    },
+    {
+      "id": "C2T1_MONITOR",
+      "phase": "monitor"
+    },
+    {
+      "id": "C2T1_SCOPE_MISSING",
+      "phase": "scope"
+    },
+    {
+      "id": "C2T1_FINITE",
+      "phase": "finite"
+    },
+    {
+      "id": "C2T1_SELECTION",
+      "phase": "selection"
+    },
+    {
+      "id": "C2T1_LOST_ACK_DUPLICATE",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_UNRESOLVED_WRITER",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_OWN_PROMISE",
+      "phase": "negative"
+    }
+  ],
+  "modeAcceptance": {
+    "baseline-red": {
+      "qualified": false,
+      "exit": "nonzero",
+      "required": {
+        "C2T1_CONNECTION": "pass",
+        "C2T1_OAUTH": "pass",
+        "C2T1_NOTICES": "fail"
+      },
+      "noticesCounters": {
+        "upload": 1,
+        "activation": 1,
+        "receipts": 1
+      }
+    },
+    "proposal-green": {
+      "qualified": true,
+      "exit": 0,
+      "all20": "pass"
+    },
+    "mutant-prefix": {
+      "qualified": false,
+      "exit": "nonzero",
+      "required": {
+        "C2T1_EXTRA_KEY": "fail"
+      }
+    }
+  },
+  "counterSemantics": "Actual storage snapshot after each case; preparation counters excluding one bootstrap upload/activation. First17 cases use main graph; last3 use their own isolated compiled graph, counted from its own bootstrap. No inherited frame counters, no resets within a graph, no missing observation may stand in for a zero. Integers0..3.",
+  "frame": "Exactly C2SOURCE SPACE + JSON.stringify({id,status,phase,counters:{upload,activation,receipts},code}) + LF in insertion order. No other fields. Finally emits even failed assertion. Raw TAP only captured in RAM; never published.",
+  "codeEnum": [
+    "OK",
+    "TEST_FAILED"
+  ],
+  "captureFailure": "CAPTURE_INVALID is a runner error code, never a synthetic case. It makes qualified false and stops with no qualifying receipt; raw exceptions are suppressed.",
+  "contextTypes": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "proposalIndexHash": "lowercase SHA256 over exact UTF8 bytes of source-index.json; index does not contain its own hash or runner/workflow",
+    "head": "40 lowercase hex from GITHUB_SHA and local git HEAD",
+    "tree": "40 lowercase hex from local git HEAD^{tree}",
+    "runId": "decimal string from GITHUB_RUN_ID",
+    "runAttempt": "integer1 from GITHUB_RUN_ATTEMPT",
+    "job": "literal c2-source-lab from GITHUB_JOB",
+    "node": "literal v22.23.4 from process.version"
+  },
+  "labMountedPaths": {
+    "workflow": ".github/workflows/afw-c2-source-lab.yml",
+    "root": "docs/superpowers/source-lab/c2-t1",
+    "index": "docs/superpowers/source-lab/c2-t1/source-index.json",
+    "runner": "docs/superpowers/source-lab/c2-t1/run-c2-source-lab.mjs",
+    "bodies": "docs/superpowers/source-lab/c2-t1/body-NN.txt (fixed index entries)",
+    "productFilesInLabTree": false
+  }
+}
