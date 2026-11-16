@@ -1,0 +1,426 @@
+{
+  "schema": "AFW-N3-CAP-CENSUS-NATIVE-PRIMARY/1",
+  "atUTC": "2026-11-16 18:35:47 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "packet": "7e422153658322797ea05adba3b1a519b8ec728a",
+  "index": "eddf0e03c94817509f02a334a8e73844728538f1",
+  "gate": "7890a4fb55533f65f55da369926e2e5c25886a5f",
+  "branch": "lab/afw-c2-source-20261116-notices-n3-cap-census",
+  "head": "4b7170fb8146b7aa9208f0ae6661a54828955782",
+  "tree": "dc889308e50967d561478724c1479a7653cb0aeb",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "workflow": ".github/workflows/afw-c2-notices-n3-cap-census.yml",
+  "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+  "run": {
+    "id": 43929488119,
+    "attempt": 1,
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43929488119"
+  },
+  "job": {
+    "id": 133517776579,
+    "name": "c2-notices-n3-cap-census",
+    "conclusion": "success",
+    "step4": {
+      "name": "Reproduce frozen private admission boundaries",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4,
+      "started_at": "2026-11-16T18:30:22Z",
+      "completed_at": "2026-11-16T18:30:23Z"
+    }
+  },
+  "native": {
+    "tests": 47,
+    "pass": 47,
+    "fail": 0,
+    "cancel": 0,
+    "skip": 0,
+    "todo": 0,
+    "extra": 0,
+    "missing": 0,
+    "idsExact": true,
+    "old41Prefix": true
+  },
+  "inputs": 28,
+  "artifact": {
+    "id": 14256204480,
+    "archive": {
+      "bytes": 3921,
+      "sha256": "072df84c5798d845917844289a5d135955651df42549274ddf8416ebc8229a3a",
+      "blob": "3bf4f7daaa2d041b0585315541e849b2544709d3"
+    },
+    "payload": {
+      "bytes": 12657,
+      "sha256": "0eb44b743e076ed49b04a4d32ee15f3080fa07ebcc2bb03cb749812b4321746c",
+      "blob": "cda3acf85a765c4788bbc023b247da791a9f322a"
+    },
+    "canonical": true,
+    "schema": false,
+    "schemaValidation": {
+      "semanticallySamePropertyConstraints": true,
+      "contractOrderedSchema": true,
+      "logPayloadEqual": true,
+      "canonical": true,
+      "note": "Root's generic OWN validator also enforces JSON property enumeration order. Producer schema.properties lists census last while contract/required/actual puts census before flags. Validation view reorders properties to declared contract order only; every constraint and original pinned schema bytes unchanged."
+    },
+    "CRCAndCompleteDeflateChecked": true,
+    "logPayloadEqual": true
+  },
+  "census": [
+    {
+      "id": "N3_CENSUS_ROOT17",
+      "observation": {
+        "createdRefs": {
+          "roots": 17,
+          "clocks": 0,
+          "children": 0,
+          "workPromises": 0
+        },
+        "stimuli": {
+          "pairBindings": 0,
+          "unresolvedClocks": 0
+        },
+        "notes": {
+          "retained": 0,
+          "settlements": 0
+        },
+        "snapshots": [
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "NO_ELIGIBLE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          },
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "CAP_PRIVATE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          }
+        ],
+        "checks": [
+          {
+            "id": "DISTINCT_ROOTS",
+            "passed": true
+          },
+          {
+            "id": "LEGACY_ROOT17_REFUSED",
+            "passed": true
+          },
+          {
+            "id": "NO_ELIGIBILITY",
+            "passed": true
+          }
+        ],
+        "futureGapPromotionJoined": null,
+        "actualCensusOfBusiness": false,
+        "scopeAdmissionExecuted": false
+      }
+    },
+    {
+      "id": "N3_CENSUS_IDENTITY129",
+      "observation": {
+        "createdRefs": {
+          "roots": 1,
+          "clocks": 128,
+          "children": 0,
+          "workPromises": 0
+        },
+        "stimuli": {
+          "pairBindings": 64,
+          "unresolvedClocks": 64
+        },
+        "notes": {
+          "retained": 0,
+          "settlements": 0
+        },
+        "snapshots": [
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "NO_ELIGIBLE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          },
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "CAP_PRIVATE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          }
+        ],
+        "checks": [
+          {
+            "id": "DISTINCT_IDENTITY129",
+            "passed": true
+          },
+          {
+            "id": "SAME_ANCHOR_FOLDED",
+            "passed": true
+          },
+          {
+            "id": "LEGACY_NEW_IDENTITY_REFUSED",
+            "passed": true
+          }
+        ],
+        "futureGapPromotionJoined": null,
+        "actualCensusOfBusiness": false,
+        "scopeAdmissionExecuted": false
+      }
+    },
+    {
+      "id": "N3_CENSUS_GAP_PROMOTION_AT128",
+      "observation": {
+        "createdRefs": {
+          "roots": 1,
+          "clocks": 127,
+          "children": 0,
+          "workPromises": 0
+        },
+        "stimuli": {
+          "pairBindings": 63,
+          "unresolvedClocks": 64
+        },
+        "notes": {
+          "retained": 0,
+          "settlements": 0
+        },
+        "snapshots": [
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "NO_ELIGIBLE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          },
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "CAP_PRIVATE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          }
+        ],
+        "checks": [
+          {
+            "id": "SAME_REF_PROMOTION",
+            "passed": true
+          },
+          {
+            "id": "NET_NEW_IDENTITIES_ZERO",
+            "passed": true
+          },
+          {
+            "id": "LEGACY_PROMOTION_REFUSED",
+            "passed": true
+          },
+          {
+            "id": "FUTURE_DESIRED_ASSERTION_RED",
+            "passed": true
+          }
+        ],
+        "futureGapPromotionJoined": false,
+        "actualCensusOfBusiness": false,
+        "scopeAdmissionExecuted": false
+      }
+    },
+    {
+      "id": "N3_CENSUS_PROBE_BEFORE_ELIGIBLE",
+      "observation": {
+        "createdRefs": {
+          "roots": 17,
+          "clocks": 0,
+          "children": 0,
+          "workPromises": 0
+        },
+        "stimuli": {
+          "pairBindings": 0,
+          "unresolvedClocks": 0
+        },
+        "notes": {
+          "retained": 0,
+          "settlements": 0
+        },
+        "snapshots": [
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "NO_ELIGIBLE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          },
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "NO_ELIGIBLE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          },
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "CAP_PRIVATE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          }
+        ],
+        "checks": [
+          {
+            "id": "ZERO_ELIGIBLE_CUT_NULL",
+            "passed": true
+          },
+          {
+            "id": "SNAPSHOT_PREFIX_STABLE",
+            "passed": true
+          },
+          {
+            "id": "SNAPSHOT_DID_NOT_RESET",
+            "passed": true
+          }
+        ],
+        "futureGapPromotionJoined": null,
+        "actualCensusOfBusiness": false,
+        "scopeAdmissionExecuted": false
+      }
+    },
+    {
+      "id": "N3_CENSUS_FRESH_GET_POST_BOUNDS",
+      "observation": {
+        "createdRefs": {
+          "roots": 2,
+          "clocks": 8,
+          "children": 12,
+          "workPromises": 12
+        },
+        "stimuli": {
+          "pairBindings": 6,
+          "unresolvedClocks": 0
+        },
+        "notes": {
+          "retained": 24,
+          "settlements": 24
+        },
+        "snapshots": [
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "NO_ELIGIBLE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          }
+        ],
+        "checks": [
+          {
+            "id": "DECLARED_GRAPH_ONLY",
+            "passed": true
+          },
+          {
+            "id": "NO_PRIVATE_CAP",
+            "passed": true
+          },
+          {
+            "id": "NO_NATIVE_ELIGIBILITY",
+            "passed": true
+          },
+          {
+            "id": "ORIGINAL_CHILD_PROMISES",
+            "passed": true
+          }
+        ],
+        "futureGapPromotionJoined": null,
+        "actualCensusOfBusiness": false,
+        "scopeAdmissionExecuted": false
+      }
+    },
+    {
+      "id": "N3_CENSUS_REPEAT_AND_HONEST_CAP",
+      "observation": {
+        "createdRefs": {
+          "roots": 17,
+          "clocks": 1,
+          "children": 1,
+          "workPromises": 1
+        },
+        "stimuli": {
+          "pairBindings": 0,
+          "unresolvedClocks": 0
+        },
+        "notes": {
+          "retained": 2,
+          "settlements": 2
+        },
+        "snapshots": [
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "NO_ELIGIBLE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          },
+          {
+            "state": "unjoined",
+            "coverage": "unknown",
+            "reason": "CAP_PRIVATE",
+            "eligible": 0,
+            "events": 0,
+            "cut": null
+          }
+        ],
+        "checks": [
+          {
+            "id": "SAME_PROMISE_RETAINED_TWICE",
+            "passed": true
+          },
+          {
+            "id": "ORIGINAL_SETTLED_RETURNS_TRUE_FALSE",
+            "passed": true
+          },
+          {
+            "id": "HONEST_CAP_UNKNOWN",
+            "passed": true
+          },
+          {
+            "id": "NO_EVENT_OR_ERROR_ABSENCE_CLAIM",
+            "passed": true
+          }
+        ],
+        "futureGapPromotionJoined": null,
+        "actualCensusOfBusiness": false,
+        "scopeAdmissionExecuted": false
+      }
+    }
+  ],
+  "measured": "Legacy root17/newidentity129 caps reproduced; same-ref promotion at128 refused despite net0; zeroeligible snapshot noreset; fixed2rootDTOgraph fits withoutnativeeligibility; originalsettledbooleans true/false unchanged",
+  "limits": "Unchangedledger/compiler; not observerrepair, not actual-C census/whichcap attribution, no business capture or eligibility; futuredesiredpromotion staysRED",
+  "sourceBusinessExecuted": false,
+  "observerRepair": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
