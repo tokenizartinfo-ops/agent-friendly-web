@@ -1,0 +1,749 @@
+{
+  "schema": "afw.c2-notices-n3.own-models-fresh-review.v1",
+  "atUTC": "2026-11-16 16:41:48 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached immutable Git DATA review; OWN-only pure RAM confirmations",
+  "reviewer": "fresh independent senior SPEC and QUALITY review /root/n3_own_models_review",
+  "authority": {
+    "brief": "9861533531c0c57568d3f8c602101939dbee7f75",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "scopeOrder": "25b42fb2e1113488bc820596345cf0b0f7515bcb",
+    "rootRules": [
+      "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+      "8b791e3431faf44be717e534afc11cad73692bbe",
+      "d2831f0c1e3482550043413f60560d19be2eb4af",
+      "53b1c35d692fabcef1a1614e33edc8f794aa3cf0"
+    ]
+  },
+  "reviewedScope": {
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "testedHead": "83b8b48bfdb169d43b8917c4af3af2f12d68a671",
+    "testedTree": "9cdeb1103ab2a018f5ce83e7195d6f3dc9c883ca",
+    "nativeIndex": "ff70ff8b6ac5c6865053ebe73e01ecff9d55ee07",
+    "partialIndex": "9f3f4ec2af4615cd9cc297b70cf1cd0e18a67aa5",
+    "modules": [
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3/b2-partial/reader.mjs",
+        "blob": "d229289e9f9381dd285da02ce1b92ee21e483203",
+        "sha256": "7a96b4fccf629f982d2d5db6b6ec67e767285a3d5629c504cb9f547071a667d3"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3/b2-partial/trace-reader.mjs",
+        "blob": "ce12154ef2568bb993581820266917a91f65ea50",
+        "sha256": "9380c509b66eb5da042f04bc10a1aa749c92ba79335965d17c682095a0e30675"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3/b2-partial/trace-controls.mjs",
+        "blob": "569aecd99fd698bcb0e46b2d79935eb3a73f4450",
+        "sha256": "6b55f865673023fd3850b0caf4bc04b85ef315cc387331df2de13257e09f76a8"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3/b2-partial/controls.mjs",
+        "blob": "928c8f0df6a2b95c6bf50259b7de4fedeed121b7",
+        "sha256": "54cef3912002ae6abe6ba9a6e0801886210e8f835ea9104f2a19a0d1d6e85d65"
+      }
+    ],
+    "runner": {
+      "blob": "d9e05b3ba814f0064b7fa3e7a2ab41b5a678de3a",
+      "path": "docs/superpowers/root-own/c2-notices-n3/native-models/run-controls.mjs"
+    },
+    "workflow": {
+      "blob": "16ee37c17e0ba0161e389259dffdcf0249a85cf5",
+      "path": ".github/workflows/afw-c2-notices-n3-own-models.yml"
+    },
+    "reversibleBeforeimages": "e8c1a4a849a77ced7e06ee9103f9b3ee4d6f653d",
+    "sourceContractData": "a43ca8667d2a884bf3079a4072058cec39a919b8",
+    "sourceSeamsData": "27623553b80168a0e4fd9fb8411f7d0e087a270e",
+    "sourceMaterialTreatment": "DATA only; no Source implementation evaluated, imported, syntax-compiled, tested, built, installed, written or otherwise executed",
+    "grade": "Generic OWN receiver and actual model-native import graph; final real Source binding intentionally absent"
+  },
+  "verdicts": {
+    "SPEC": "FAIL",
+    "QUALITY": "FAIL",
+    "nativeCovering": "PASS 496/496 as previously observed by Root; preserved without promotion",
+    "findingCounts": {
+      "P1": 0,
+      "P2": 3,
+      "P3": 0
+    },
+    "readyToMerge": false,
+    "productReleaseReady": false
+  },
+  "actualNativeEvidence": {
+    "primary": "32632d659d5108e7064beda0124a8a0f7c0f80aa",
+    "proof": "5a85be5d6cc2af1f6c93aaefc89d2ce902ff14fb",
+    "runId": 43908195474,
+    "attempt": 1,
+    "jobId": 133442638511,
+    "runURL": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43908195474",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n3/native-models/run-controls.mjs",
+    "commandStep": {
+      "number": 4,
+      "startedAt": "2026-11-16T16:30:19Z",
+      "completedAt": "2026-11-16T16:30:20Z"
+    },
+    "output": {
+      "tests": 496,
+      "passed": 496,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "cancelled": 0,
+      "exactIdsOrder": true,
+      "idsHash": "fd681c0056bb1e2881d0b7ffb253632038700039ad941ea78feac3cef2d5a840"
+    },
+    "occurrenceBasis": "Read the preserved primary receipt joining actual API/head/tree/job/step, exact TAP IDs/order, proof/schema and archive CRC/digest/payload. Did not refetch raw logs/artifact or rerun native workflow.",
+    "methodAssessment": "Runner lines51-57 parses the17 mapped JSON DATA inputs, imports actual controls.mjs, calls n3B2AllControls(data,sha256,inflateRawSync), then compares496 returned unique IDs/order against fixed selection. Controls call n3Read/n3TraceReplay/n3CausalReplay; control-results.json is loaded only as pinned DATA, not pass authority. Source snapshots/reducer expectations remain DATA compatibility rather than actual Source seam execution.",
+    "closureSuppliedByRoot": {
+      "proof": "14c245f245d7f602b3bedf3520e0a8403fd4504b",
+      "closedHead": "549907f99ea2cd17be46ea79adc8303f78ea6142",
+      "closedTree": "46342448eb78a41df30d2300931c12f62f2c87c7",
+      "closeHeadRuns": 0,
+      "note": "Root reports independently verified closure/originals/modes/DATA/Main history. Review did not refetch closure API and remains pinned to tested head."
+    }
+  },
+  "strengths": [
+    "Separate caller-supplied trusted.expected/manifest/protocolHashes/ledgerBytes/policy are required. input.expected must equal that independent context; outcome bindings, controls and witness binding are checked against it. Generic fictitious trusted context is explicitly distinguished from real producer admission.",
+    "Canonical parsed framing, exact schema/key ordering, bounded UTF8 journal/record/outcome sizes, witness hashes, independent journal FSM, required HTTP body settlement, native/count/blocked consistency, false Source qualification and seven nonclaims are enforced.",
+    "Causal reducer preserves explicit unknown/prefix and independent logical-versus-target progress, scope-first error, fixed singular focus roles, fork parents, one selected pair-promise row and first-close/settlement references. It makes no public-ordinal authentication or physical-cause/drain claim.",
+    "Actual OWN module execution is evidenced by the native import graph, not stale RAM result rows. Supplemental findings below are absent from those496 existing cases and do not invalidate the recorded native occurrence.",
+    "Per-call results are newly produced; parsed log outcome data and causal-unavailable summaries do not borrow a mutable cross-call result object. Existing state-alias control checks the unavailable summary."
+  ],
+  "findings": [
+    {
+      "id": "OWN-N3-R1-P2-01",
+      "priority": 2,
+      "verdict": "SPEC and QUALITY defect",
+      "title": "Reject selected pair-promise retention before the selected pair invocation",
+      "location": {
+        "blob": "ce12154ef2568bb993581820266917a91f65ea50",
+        "path": "docs/superpowers/root-own/c2-notices-n3/b2-partial/trace-reader.mjs",
+        "startLine": 106,
+        "endLine": 110,
+        "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/83b8b48bfdb169d43b8917c4af3af2f12d68a671/docs/superpowers/root-own/c2-notices-n3/b2-partial/trace-reader.mjs#L106"
+      },
+      "relatedLines": [
+        97,
+        139,
+        150
+      ],
+      "trigger": "In FULL_MODEL_BASE, change promise ordinal2 (lease4 target-pair) retained sequence37 to25; change its retained event sequence37 to25; sort the same events by sequence. Leave target-enter23, pair-enter31, pair close59, p2 settlement67, target-return71, all aliases and firstError/cut unchanged.",
+      "consequence": "n3TraceReplay and the fully resealed n3Read both accept joined/complete/OK despite declaring retention of the selected call-returned p2 before that invocation enters. Lines106-110 check only promise/lease agreement, uniqueness and retained-before-settlement; they never require the represented pair-enter to have already occurred. Complete line150 checks closure/retention/settlement but still misses this impossible visible local order.",
+      "expected": "Reject this public causal contradiction. This asks only for consistency of the represented selected invocation order, not proof of hidden JS object identity or authentication of p2 versus internal run().",
+      "confirmation": {
+        "baseline": {
+          "case": "FULL_MODEL_BASE",
+          "modelBlob": "c36998642c62c93b43720ffe18c666f442a1253f",
+          "inputCanonicalSHA256": "c096eec3d79a482a5cddff6bbdc44d771af4f433390ffffe2cd2ea09ac55723a",
+          "accepted": true
+        },
+        "actual": {
+          "snapshot": {
+            "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+            "state": "joined",
+            "coverage": "complete",
+            "reason": "OK",
+            "eligible": 1,
+            "target": "returned",
+            "focus": {
+              "mode": "selected-first-target-focus",
+              "pairChild": 5,
+              "selection": "first-observed"
+            },
+            "leases": [
+              {
+                "ordinal": 1,
+                "role": "root",
+                "parent": null,
+                "firstClose": 107
+              },
+              {
+                "ordinal": 2,
+                "role": "outer",
+                "parent": 1,
+                "firstClose": 97
+              },
+              {
+                "ordinal": 3,
+                "role": "activation-child",
+                "parent": 2,
+                "firstClose": null
+              },
+              {
+                "ordinal": 4,
+                "role": "target-pair",
+                "parent": 1,
+                "firstClose": 59
+              },
+              {
+                "ordinal": 5,
+                "role": "pair-child",
+                "parent": 4,
+                "firstClose": null
+              }
+            ],
+            "promises": [
+              {
+                "ordinal": 1,
+                "lease": 3,
+                "retained": 17,
+                "settlement": 73
+              },
+              {
+                "ordinal": 2,
+                "lease": 4,
+                "retained": 25,
+                "settlement": 67
+              },
+              {
+                "ordinal": 3,
+                "lease": 5,
+                "retained": 41,
+                "settlement": 43
+              }
+            ],
+            "errors": [],
+            "events": [
+              {
+                "sequence": 11,
+                "kind": "scope-enter",
+                "site": "choice-admitted",
+                "lease": 1,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 17,
+                "kind": "retained",
+                "site": "initial-retain",
+                "lease": 3,
+                "promise": 1,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 23,
+                "kind": "target-enter",
+                "site": "postreceipt-check",
+                "lease": 3,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 25,
+                "kind": "retained",
+                "site": "initial-retain",
+                "lease": 4,
+                "promise": 2,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 31,
+                "kind": "pair-enter",
+                "site": "target-pair",
+                "lease": 4,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 41,
+                "kind": "retained",
+                "site": "initial-retain",
+                "lease": 5,
+                "promise": 3,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 43,
+                "kind": "settlement-observed",
+                "site": "initial-settled",
+                "lease": 5,
+                "promise": 3,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 47,
+                "kind": "child-finally",
+                "site": "initial-child-finally",
+                "lease": 5,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "finally"
+              },
+              {
+                "sequence": 53,
+                "kind": "close-call",
+                "site": "initial-close",
+                "lease": 4,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "unknown"
+              },
+              {
+                "sequence": 59,
+                "kind": "closed-transition",
+                "site": "initial-close",
+                "lease": 4,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "unknown"
+              },
+              {
+                "sequence": 61,
+                "kind": "abort-observed",
+                "site": "initial-stop",
+                "lease": 4,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "unknown"
+              },
+              {
+                "sequence": 67,
+                "kind": "settlement-observed",
+                "site": "initial-settled",
+                "lease": 4,
+                "promise": 2,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 71,
+                "kind": "target-return",
+                "site": "postreceipt-check",
+                "lease": 3,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 73,
+                "kind": "settlement-observed",
+                "site": "initial-settled",
+                "lease": 3,
+                "promise": 1,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 79,
+                "kind": "child-finally",
+                "site": "initial-child-finally",
+                "lease": 3,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "finally"
+              },
+              {
+                "sequence": 83,
+                "kind": "logical-return",
+                "site": "choice-return",
+                "lease": 2,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              },
+              {
+                "sequence": 89,
+                "kind": "close-call",
+                "site": "initial-close",
+                "lease": 2,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "unknown"
+              },
+              {
+                "sequence": 97,
+                "kind": "closed-transition",
+                "site": "initial-close",
+                "lease": 2,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "unknown"
+              },
+              {
+                "sequence": 101,
+                "kind": "abort-observed",
+                "site": "initial-stop",
+                "lease": 2,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "unknown"
+              },
+              {
+                "sequence": 103,
+                "kind": "close-call",
+                "site": "root-finish",
+                "lease": 1,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "explicit-finish"
+              },
+              {
+                "sequence": 107,
+                "kind": "closed-transition",
+                "site": "root-finish",
+                "lease": 1,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "explicit-finish"
+              },
+              {
+                "sequence": 109,
+                "kind": "abort-observed",
+                "site": "root-finish",
+                "lease": 1,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": "explicit-finish"
+              },
+              {
+                "sequence": 113,
+                "kind": "snapshot-cut",
+                "site": "snapshot",
+                "lease": 1,
+                "promise": null,
+                "error": {
+                  "present": false,
+                  "kind": "none",
+                  "errorOrdinal": null
+                },
+                "cause": null
+              }
+            ],
+            "firstError": null,
+            "cut": 113
+          },
+          "inputCanonicalSHA256": "6a4c6067b81fb2b1e9ded3ccefb0ecd92dd9dadf7003d6fcf85d1359f34af591",
+          "artifactArchiveSHA256": "7b20e32ca73c0cb2f52d32b793a571624bf3bb419f4726394024d7b619c8a64e",
+          "payloadSHA256": "404b6397c1b20d4cfbbf898f41d167e8e1cd63fa80acd20c94726a231e729a89",
+          "accepted": true,
+          "summary": {
+            "state": "joined",
+            "coverage": "complete",
+            "reason": "OK",
+            "target": "returned",
+            "firstError": null,
+            "focusChild": 5,
+            "events": 23,
+            "settlementsObserved": 3,
+            "interpretation": "unknown"
+          }
+        },
+        "fullEnvelopeCoherent": true
+      },
+      "remediationScope": "Original writer should add a literal/coherent full-input RED and enforce the known pair-invocation-before-p2-retention relation without coupling independent logical/target axes or requiring unknown private identity."
+    },
+    {
+      "id": "OWN-N3-R1-P2-02",
+      "priority": 2,
+      "verdict": "SPEC and QUALITY defect",
+      "title": "Compare exposed compilation metadata for every represented compiled host call",
+      "location": {
+        "blob": "d229289e9f9381dd285da02ce1b92ee21e483203",
+        "path": "docs/superpowers/root-own/c2-notices-n3/b2-partial/reader.mjs",
+        "startLine": 247,
+        "endLine": 248,
+        "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/83b8b48bfdb169d43b8917c4af3af2f12d68a671/docs/superpowers/root-own/c2-notices-n3/b2-partial/reader.mjs#L247"
+      },
+      "relatedLines": [
+        103,
+        105,
+        108,
+        109,
+        188
+      ],
+      "trigger": "From FULL_MODEL_BASE change both prepared and returned host-proof rows for call3 (mount) to M={bytes:30,sha256:'a' repeated64}, QA={bytes:34,sha256:'c' repeated64}. Leave call2 and outcome.compilation at original M29/QA33 and original hashes. Preserve matching beforeHash/argumentHash, booleans, call order and each prepared/returned pair. Recompute journal/witness/observation/log/artifact CRC/digest.",
+      "consequence": "n3Read accepts diagnosticCaptureAccepted:true and reports host={prepared:5,returned:5,openCall:null,allCompared:true} while call3's exposed M/QA descriptors disagree with the claimed current compilation. n3Compilation uses find(call===2 && prepared), so subsequent compiledMatch:true call descriptions are compared only against their own returned copy and never against the compilation description.",
+      "expected": "Reject an exposed current-host-call compilation disagreement. Comparing the exposed descriptors requires no reconstruction or authentication of hidden scripts/inputs and does not demand historical M equality.",
+      "confirmation": {
+        "call": 3,
+        "M": {
+          "bytes": 30,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 34,
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "inputCanonicalSHA256": "0af1f5f624c4171360ae0a32fcbcf78237f07bc703c2a1634f5e518ee54d17cf",
+        "artifactArchiveSHA256": "4c3b4d403758791f19159f0ebd0541ffc2a037dbb893ab8793eca5e6078991a1",
+        "payloadSHA256": "4e2b5d3bcb0f2fb8a4478b2edb4b427d0655511a3616ee6ce1e08fe8144692fd",
+        "accepted": true,
+        "host": {
+          "prepared": 5,
+          "returned": 5,
+          "openCall": null,
+          "allCompared": true
+        }
+      },
+      "remediationScope": "Original writer should cover later host-call disagreements and join every relevant exposed compiled-call M/QA descriptor with the appropriate current-build descriptor while preserving honest partial/timeout cases and the stated hidden-input proof limit."
+    },
+    {
+      "id": "OWN-N3-R1-P2-03",
+      "priority": 2,
+      "verdict": "SPEC and QUALITY defect",
+      "title": "Require full consumption of the ZIP deflate member",
+      "location": {
+        "blob": "d229289e9f9381dd285da02ce1b92ee21e483203",
+        "path": "docs/superpowers/root-own/c2-notices-n3/b2-partial/reader.mjs",
+        "startLine": 230,
+        "endLine": 231,
+        "url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/blob/83b8b48bfdb169d43b8917c4af3af2f12d68a671/docs/superpowers/root-own/c2-notices-n3/b2-partial/reader.mjs#L230"
+      },
+      "relatedLines": [
+        223,
+        226,
+        228,
+        229,
+        268,
+        269
+      ],
+      "trigger": "Use the FULL_MODEL_BASE uncompressed payload unchanged. Build a method8 ZIP with deflateRawSync(payload), then append hex deadbeef inside the declared compressed member. Adjust both local/central compressed sizes, central offset/EOCD, API listing archive size and sha256 digest; keep canonical payload, uncompressed size, path and CRC exact. A corresponding valid deflate ZIP with no suffix also decodes successfully.",
+      "consequence": "n3Read accepts the artifact. The supplied Node inflateRawSync consumes4055B from a declared4059B member and silently ignores deadbeef. Lines230-231 verify only returned payload length/CRC; payload equality and the newly coherent archive digest cannot detect bytes that the decoder did not consume. The ZIP parser therefore does not fail closed on this concrete deflate-member corruption.",
+      "expected": "Require the admitted inflater contract/strict validator to attest consumed compressed bytes, or an equivalent strict full-member check, and reject4055!=4059. Node inflateRawSync(...,{info:true}) exposed engine.bytesWritten=4055 in this confirmation. No assumption about provider-generated ZIPs is needed.",
+      "confirmation": {
+        "inputCanonicalSHA256": "399c68ece1211b2b9f340c581d0d4a8876ea9894319a7b4021aec834cccba9c6",
+        "archiveSHA256": "08a18944ccd38991a3528b7598813d83a1b7f24b6e21c27ae15f9eb4cbe2b635",
+        "compressedDeclared": 4059,
+        "compressedConsumed": 4055,
+        "suffixHex": "deadbeef",
+        "accepted": true,
+        "uncompressedPayloadSHA256": "6e185f48b4cfdd6199154e53d3a559ca65474f0221f8639bd0634b8f43e63247"
+      },
+      "remediationScope": "Original writer should add coherent valid-deflate and trailing/concatenated-data negatives and retain output-length/CRC/digest/path bounds. A buffer-only callback currently cannot convey the consumed-byte fact."
+    }
+  ],
+  "supplementalConfirmation": {
+    "scope": "Supplemental independent OWN-only pure-RAM confirmations, not native coverage or Source execution",
+    "method": "node_repl builtin node:vm.runInNewContext executed exact fetched OWN bodies in memory. Only ESM import/export declarations were removed to return lexical exports, and reader's n3CausalReplay was injected from the exact OWN trace body. Buffer/TextDecoder and builtin crypto/zlib were supplied. Four-module native execution remains the separate Root receipt; these three reproductions executed only exact reader+trace methods plus synthetic test packaging.",
+    "sourceHashes": {
+      "trace": "9380c509b66eb5da042f04bc10a1aa749c92ba79335965d17c682095a0e30675",
+      "reader": "7a96b4fccf629f982d2d5db6b6ec67e767285a3d5629c504cb9f547071a667d3"
+    },
+    "modelOrigin": {
+      "blob": "c36998642c62c93b43720ffe18c666f442a1253f",
+      "path": "docs/superpowers/root-own/c2-notices-n3/b2-partial/full-input-models.json",
+      "case": "FULL_MODEL_BASE",
+      "trustedModel": "Explicit fictitious OWN model; unchanged throughout all three cases"
+    },
+    "resealingRecipe": [
+      "Clone only the OWN model input and its canonical log outcome.",
+      "For causal/host mutations, regenerate canonical NDJSON witness; set witness.prefixBytes/prefixSha256 and journal.bytes/sha256; obtain observation from exact n3Replay using the unchanged separately trusted binding and native model.",
+      "Replace only the known outcome frame with canonical updated outcome; set artifact.payloadText=JSON.stringify(outcome)+LF.",
+      "For the equal-length causal/host cases, update the stored ZIP payload, local/central CRC and listing archive sha256; retain original name/sizes/offsets. CRC is computed by exact OWN n3Crc32.",
+      "For deflate suffix, use unchanged canonical base payload and CRC; set method8, full compressed length including suffix and matching offsets/size/digest.",
+      "Run exact n3Read(input, unchanged trustedModel, builtin sha256, builtin inflateRawSync). All three invalid cases returned diagnosticCaptureAccepted:true."
+    ],
+    "noSourceExecution": true,
+    "noSourceCompilation": true,
+    "noFilesOrDeps": true,
+    "noNativeRerun": true,
+    "noRawLogOrArtifactRefetch": true,
+    "earlierToolLimits": "An over64KB node_repl input and new Function were rejected before OWN execution; the permitted in-memory vm method then succeeded. No Source body was involved."
+  },
+  "consideredAndDeclinedToJudge": [
+    {
+      "behavior": "Final real Source producer manifest/body/index/runner/workflow pins and known-producer admission",
+      "reason": "Intentionally pending external Root gate. Fictitious trusted model context is not actual Source authority. This review neither supplies nor promotes finalSourceBinding."
+    },
+    {
+      "behavior": "Actual Source diagnostic helper/QA transforms, callbacks, reducers, original error identity and original promise retention effects",
+      "reason": "Source contracts/snapshots/seams were read as DATA only. Actual Source tooling and fresh Source review are separate gates; no Source code was executed or qualified."
+    },
+    {
+      "behavior": "Authentication that the one public pair row is actual call-returned p2 rather than internal run(), private object graph or cross-realm identity",
+      "reason": "Public ordinals cannot prove hidden identity. One-row shape/pair order is reviewable; real identity requires fixed producer plus actual original-seam controls. Finding01 asserts only a represented local causal contradiction."
+    },
+    {
+      "behavior": "Unreported relevant-event omission/focus selected secretly after pruning",
+      "reason": "A coherently omitted observation cannot be inferred from public wire alone. PREBIND/UNBOUND/PROJECTION_GAP and deterministic remaining graph are reviewable; actual producer reducer honesty remains an external seam gate."
+    },
+    {
+      "behavior": "Global/M bridge, initiating physical cause, timer trigger/expiry, exact race winner, actual pending promises, global native drain or SDK namespace emptiness",
+      "reason": "Outside available public observation and explicitly unknown/nonclaimed. Missing handlers or ancestor closure do not prove open/pending/drained."
+    },
+    {
+      "behavior": "Hidden current compiler input/script equality and prior-run M equality",
+      "reason": "No raw private inputs are available or required here. Finding02 is limited to inconsistent already exposed current-call descriptors; PH/OP/LEASE/STDIN actual input production remains fixed-producer evidence."
+    },
+    {
+      "behavior": "Source raw private native TAP/probe/guard arrays beyond exposed safe projections",
+      "reason": "Not reconstructed or authenticated from symbolic models. Receiver consistency checks apply to the provided safe DATA; actual Source occurrence remains separate."
+    },
+    {
+      "behavior": "Independent logical-versus-target/p2 progress, late target terminal after logical throw, unreached with activation work, legitimate repeated close/abort",
+      "reason": "These are intended valid behaviors under the Root rules. No finding requests their rejection, all ancestor closures, all nonpair settlements or conversion of logical failure to success."
+    },
+    {
+      "behavior": "Scope-first-error versus focused child, bounded prefix/capacity/canonical descriptor handling and input aliases",
+      "reason": "Inspected the code/native controls for declared bounded DTO semantics and found no additional actionable issue within this review. No exhaustive JavaScript hostile same-process Proxy/callback sandbox claim is made; trusted hash/inflate functions are caller capabilities."
+    },
+    {
+      "behavior": "Wrong expected authority/API branch/head/tree/attempt/job/step, Source flags, witness/frame/path/CRC/digest/payload",
+      "reason": "Reviewed existing rejection paths/native model coverage; no extra issue was established beyond the three concrete findings. Did not manufacture a new provider/runtime checklist."
+    },
+    {
+      "behavior": "Actual Source capture C, native Cloudflare/business behavior, product defect or repair",
+      "reason": "Not executed or authorized by this model-only review. A model pass or these failures do not establish a real-world Source occurrence or business result."
+    },
+    {
+      "behavior": "Task1/full package/merge/release/operational readiness/PC-off/end-to-end delivery-processing-ACK-withdrawal",
+      "reason": "Intentionally false/outside scope; later separate acceptance and authorization gates remain mandatory."
+    }
+  ],
+  "actions": {
+    "implementationsPatched": 0,
+    "filesWritten": 0,
+    "dependenciesInstalled": 0,
+    "refsChanged": 0,
+    "branchesCreated": 0,
+    "workflowsDispatched": 0,
+    "runsCreated": 0,
+    "sourceExecutions": 0,
+    "rawLogsRefetched": 0,
+    "artifactsRefetched": 0,
+    "commentsPublished": 0,
+    "otherChatsMessaged": 0,
+    "detachedReportBlobAllowed": 1
+  },
+  "recommendation": "Return the three concrete cases to the original OWN writer for minimal test-first corrections and proportional new actual OWN covering plus fresh scoped review. Root resolves severity/scope. Do not reuse496PASS as coverage of changed code or promote Source/Task1/product/PCoff.",
+  "ownModelsExecuted": true,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "beforeimageChecks": [
+    {
+      "path": "trace-reader.mjs",
+      "beforeBlob": "c6d67df47fa9c7b30c854133744e463bf5242330",
+      "afterMatchesReviewedBody": true,
+      "forwardExact": true,
+      "reverseExact": true
+    },
+    {
+      "path": "trace-controls.mjs",
+      "beforeBlob": "5a9f631e9e2a9be395d98224ee54f584e3b4017b",
+      "afterMatchesReviewedBody": true,
+      "forwardExact": true,
+      "reverseExact": true
+    },
+    {
+      "path": "reader.mjs",
+      "beforeBlob": null,
+      "afterMatchesReviewedBody": true,
+      "forwardExact": true,
+      "reverseExact": true
+    },
+    {
+      "path": "controls.mjs",
+      "beforeBlob": null,
+      "afterMatchesReviewedBody": true,
+      "forwardExact": true,
+      "reverseExact": true
+    }
+  ]
+}
