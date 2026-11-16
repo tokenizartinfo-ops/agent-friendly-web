@@ -1,0 +1,22 @@
+{
+  "schema": "AFW-ROOT-W1-TOOL-PROOF-SCHEMA-NOTE/1",
+  "strictOriginal": false,
+  "all19PropertyConstraints": true,
+  "allRequiredKeys": true,
+  "exactAdditionalPropertySet": true,
+  "topOrder": "Native canonical order differs from JSONSchema.properties and required array order. JSON Schema object/property declaration order has no instance-order semantics; ngSchema adds stronger order checking. No payload/schema bytes were edited.",
+  "dataOnlyView": true,
+  "scope": "This W1 tooling occurrence only; independent review must assess. No historical proof reclassification or business readiness.",
+  "inputs": {
+    "actualWireFields": [
+      "file",
+      "bytes",
+      "sha256"
+    ],
+    "count": 41,
+    "allMatchingIndexedGitBlobs": true,
+    "treeBindingsVerified": true
+  },
+  "SourceQualified": false,
+  "Task1Pass": false
+}

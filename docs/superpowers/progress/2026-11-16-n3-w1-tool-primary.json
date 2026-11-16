@@ -1,0 +1,469 @@
+{
+  "schema": "AFW-N3-W1-TOOL-PRIMARY/1",
+  "expected": {
+    "head": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+    "tree": "e0132848dff710d2e6038c6f68721f6338b4fdc1",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+    "originals": 3203,
+    "added": 47,
+    "leaves": 3250,
+    "sourceBusinessExecuted": false,
+    "refCreated": true,
+    "activated": true
+  },
+  "gate": "1e629210d1c9ae47b56a2309b3ee39b6b9d3bf5b",
+  "api": {
+    "run": {
+      "id": 43937983127,
+      "name": "AFW C2 notices N3 atomic admission and first-limit controls",
+      "node_id": "WFR_kwLOUFJols8AAAAKOuhqlw",
+      "head_branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+      "head_sha": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+      "path": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-tool.yml",
+      "display_title": "AFW-C2-N3-FIRSTLIMIT-W1-TOOL-ONEUSE-20261116",
+      "run_number": 1,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "workflow_id": 420506954,
+      "check_suite_id": 118947983304,
+      "check_suite_node_id": "CS_kwDOUFJols8AAAAbsdovyA",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127",
+      "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127",
+      "pull_requests": [],
+      "created_at": "2026-11-16T19:18:37Z",
+      "updated_at": "2026-11-16T19:19:11Z",
+      "actor": {
+        "login": "tokenizartinfo-ops",
+        "id": 290715446,
+        "node_id": "U_kgDOEVP3Ng",
+        "avatar_url": "https://avatars.githubusercontent.com/u/290715446?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/tokenizartinfo-ops",
+        "html_url": "https://github.com/tokenizartinfo-ops",
+        "followers_url": "https://api.github.com/users/tokenizartinfo-ops/followers",
+        "following_url": "https://api.github.com/users/tokenizartinfo-ops/following{/other_user}",
+        "gists_url": "https://api.github.com/users/tokenizartinfo-ops/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/tokenizartinfo-ops/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/tokenizartinfo-ops/subscriptions",
+        "organizations_url": "https://api.github.com/users/tokenizartinfo-ops/orgs",
+        "repos_url": "https://api.github.com/users/tokenizartinfo-ops/repos",
+        "events_url": "https://api.github.com/users/tokenizartinfo-ops/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/tokenizartinfo-ops/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [],
+      "run_started_at": "2026-11-16T19:18:37Z",
+      "triggering_actor": {
+        "login": "tokenizartinfo-ops",
+        "id": 290715446,
+        "node_id": "U_kgDOEVP3Ng",
+        "avatar_url": "https://avatars.githubusercontent.com/u/290715446?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/tokenizartinfo-ops",
+        "html_url": "https://github.com/tokenizartinfo-ops",
+        "followers_url": "https://api.github.com/users/tokenizartinfo-ops/followers",
+        "following_url": "https://api.github.com/users/tokenizartinfo-ops/following{/other_user}",
+        "gists_url": "https://api.github.com/users/tokenizartinfo-ops/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/tokenizartinfo-ops/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/tokenizartinfo-ops/subscriptions",
+        "organizations_url": "https://api.github.com/users/tokenizartinfo-ops/orgs",
+        "repos_url": "https://api.github.com/users/tokenizartinfo-ops/repos",
+        "events_url": "https://api.github.com/users/tokenizartinfo-ops/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/tokenizartinfo-ops/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127/jobs",
+      "logs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127/logs",
+      "check_suite_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/check-suites/118947983304",
+      "artifacts_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127/artifacts",
+      "cancel_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127/cancel",
+      "rerun_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/workflows/420506954",
+      "head_commit": {
+        "id": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+        "tree_id": "e0132848dff710d2e6038c6f68721f6338b4fdc1",
+        "message": "AFW-C2-N3-FIRSTLIMIT-W1-TOOL-ONEUSE-20261116",
+        "timestamp": "2026-11-16T19:17:53Z",
+        "author": {
+          "name": "tokenizart",
+          "email": "tokenizart.info@gmail.com"
+        },
+        "committer": {
+          "name": "tokenizart",
+          "email": "tokenizart.info@gmail.com"
+        }
+      },
+      "repository": {
+        "id": 1347578006,
+        "node_id": "R_kgDOUFJolg",
+        "name": "agent-friendly-web",
+        "full_name": "tokenizartinfo-ops/agent-friendly-web",
+        "private": false,
+        "owner": {
+          "login": "tokenizartinfo-ops",
+          "id": 290715446,
+          "node_id": "U_kgDOEVP3Ng",
+          "avatar_url": "https://avatars.githubusercontent.com/u/290715446?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/tokenizartinfo-ops",
+          "html_url": "https://github.com/tokenizartinfo-ops",
+          "followers_url": "https://api.github.com/users/tokenizartinfo-ops/followers",
+          "following_url": "https://api.github.com/users/tokenizartinfo-ops/following{/other_user}",
+          "gists_url": "https://api.github.com/users/tokenizartinfo-ops/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/tokenizartinfo-ops/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/tokenizartinfo-ops/subscriptions",
+          "organizations_url": "https://api.github.com/users/tokenizartinfo-ops/orgs",
+          "repos_url": "https://api.github.com/users/tokenizartinfo-ops/repos",
+          "events_url": "https://api.github.com/users/tokenizartinfo-ops/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/tokenizartinfo-ops/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+        "description": "Auditoria y mejora progresiva de sitios agent-friendly, creada por Gabriel Mucchiut",
+        "fork": false,
+        "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+        "forks_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/forks",
+        "keys_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/teams",
+        "hooks_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/hooks",
+        "issue_events_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/events",
+        "assignees_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/tags",
+        "blobs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/languages",
+        "stargazers_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/stargazers",
+        "contributors_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contributors",
+        "subscribers_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/subscribers",
+        "subscription_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/subscription",
+        "commits_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/merges",
+        "archive_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/downloads",
+        "issues_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/labels{/name}",
+        "releases_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/deployments"
+      },
+      "head_repository": {
+        "id": 1347578006,
+        "node_id": "R_kgDOUFJolg",
+        "name": "agent-friendly-web",
+        "full_name": "tokenizartinfo-ops/agent-friendly-web",
+        "private": false,
+        "owner": {
+          "login": "tokenizartinfo-ops",
+          "id": 290715446,
+          "node_id": "U_kgDOEVP3Ng",
+          "avatar_url": "https://avatars.githubusercontent.com/u/290715446?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/tokenizartinfo-ops",
+          "html_url": "https://github.com/tokenizartinfo-ops",
+          "followers_url": "https://api.github.com/users/tokenizartinfo-ops/followers",
+          "following_url": "https://api.github.com/users/tokenizartinfo-ops/following{/other_user}",
+          "gists_url": "https://api.github.com/users/tokenizartinfo-ops/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/tokenizartinfo-ops/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/tokenizartinfo-ops/subscriptions",
+          "organizations_url": "https://api.github.com/users/tokenizartinfo-ops/orgs",
+          "repos_url": "https://api.github.com/users/tokenizartinfo-ops/repos",
+          "events_url": "https://api.github.com/users/tokenizartinfo-ops/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/tokenizartinfo-ops/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+        "description": "Auditoria y mejora progresiva de sitios agent-friendly, creada por Gabriel Mucchiut",
+        "fork": false,
+        "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+        "forks_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/forks",
+        "keys_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/teams",
+        "hooks_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/hooks",
+        "issue_events_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/events",
+        "assignees_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/tags",
+        "blobs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/languages",
+        "stargazers_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/stargazers",
+        "contributors_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contributors",
+        "subscribers_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/subscribers",
+        "subscription_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/subscription",
+        "commits_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/merges",
+        "archive_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/downloads",
+        "issues_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/labels{/name}",
+        "releases_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/deployments"
+      }
+    },
+    "jobs": {
+      "total_count": 1,
+      "jobs": [
+        {
+          "id": 133547543582,
+          "run_id": 43937983127,
+          "workflow_name": "AFW C2 notices N3 atomic admission and first-limit controls",
+          "head_branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+          "run_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127",
+          "run_attempt": 1,
+          "node_id": "CR_kwDOUFJols8AAAAfGA3MHg",
+          "head_sha": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+          "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/jobs/133547543582",
+          "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127/job/133547543582",
+          "status": "completed",
+          "conclusion": "success",
+          "created_at": "2026-11-16T19:18:38Z",
+          "started_at": "2026-11-16T19:18:41Z",
+          "completed_at": "2026-11-16T19:19:10Z",
+          "name": "c2-notices-n3-firstlimit-w1-tool",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-16T19:18:42Z",
+              "completed_at": "2026-11-16T19:18:46Z"
+            },
+            {
+              "name": "Read the exact one-use tooling head",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-16T19:18:46Z",
+              "completed_at": "2026-11-16T19:18:55Z"
+            },
+            {
+              "name": "Use fixed Node",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-16T19:18:55Z",
+              "completed_at": "2026-11-16T19:19:04Z"
+            },
+            {
+              "name": "Verify three native RED assertions on the frozen ledger",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-16T19:19:04Z",
+              "completed_at": "2026-11-16T19:19:04Z"
+            },
+            {
+              "name": "Run 62 native candidate controls",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-16T19:19:04Z",
+              "completed_at": "2026-11-16T19:19:05Z"
+            },
+            {
+              "name": "Preserve sanitized tooling proof",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-16T19:19:05Z",
+              "completed_at": "2026-11-16T19:19:07Z"
+            },
+            {
+              "name": "Post Use fixed Node",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-16T19:19:07Z",
+              "completed_at": "2026-11-16T19:19:07Z"
+            },
+            {
+              "name": "Post Read the exact one-use tooling head",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-16T19:19:07Z",
+              "completed_at": "2026-11-16T19:19:07Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-16T19:19:07Z",
+              "completed_at": "2026-11-16T19:19:08Z"
+            }
+          ],
+          "check_run_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/check-runs/133547543582",
+          "labels": [
+            "ubuntu-24.04"
+          ],
+          "runner_id": 1000015192,
+          "runner_name": "GitHub Actions 1000015192",
+          "runner_group_id": 0,
+          "runner_group_name": "GitHub Actions"
+        }
+      ]
+    },
+    "commit": {
+      "sha": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+      "node_id": "C_kwDOUFJoltoAKDNkOTAwNjlmZmJiNDdkOTkxOWRmMzhmOWE1YjdmZTU3ODlkNjRmZDI",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+      "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+      "author": {
+        "name": "tokenizart",
+        "email": "tokenizart.info@gmail.com",
+        "date": "2026-11-16T19:17:53Z"
+      },
+      "committer": {
+        "name": "tokenizart",
+        "email": "tokenizart.info@gmail.com",
+        "date": "2026-11-16T19:17:53Z"
+      },
+      "tree": {
+        "sha": "e0132848dff710d2e6038c6f68721f6338b4fdc1",
+        "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/trees/e0132848dff710d2e6038c6f68721f6338b4fdc1"
+      },
+      "message": "AFW-C2-N3-FIRSTLIMIT-W1-TOOL-ONEUSE-20261116",
+      "parents": [
+        {
+          "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        }
+      ],
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "artifacts": {
+      "total_count": 1,
+      "artifacts": [
+        {
+          "id": 14260649002,
+          "node_id": "MDg6QXJ0aWZhY3QxNDI2MDY0OTAwMg==",
+          "name": "afw-c2-notices-n3-firstlimit-w1-tool",
+          "size_in_bytes": 5621,
+          "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/14260649002",
+          "archive_download_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/14260649002/zip",
+          "expired": false,
+          "digest": "sha256:a9492a2b3d799c58f85841aefc157d4438dce14704bef19e7de6d30917a5457e",
+          "created_at": "2026-11-16T19:19:07Z",
+          "updated_at": "2026-11-16T19:19:07Z",
+          "expires_at": "2026-11-23T19:19:06Z",
+          "workflow_run": {
+            "id": 43937983127,
+            "repository_id": 1347578006,
+            "head_repository_id": 1347578006,
+            "head_branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+            "head_sha": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2"
+          }
+        }
+      ]
+    }
+  },
+  "logs": "﻿2026-11-16T19:18:42.1854474Z Current runner version: '2.338.2'\n2026-11-16T19:18:42.1873651Z ##[group]Runner Image Provisioner\n2026-11-16T19:18:42.1874331Z Hosted Compute Agent\n2026-11-16T19:18:42.1874806Z Version: 20261103.629\n2026-11-16T19:18:42.1875281Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc\n2026-11-16T19:18:42.1875811Z Build Date: 2026-11-03T17:26:59Z\n2026-11-16T19:18:42.1876296Z Worker ID: {8e627672-0a0c-4053-97b1-4f7967a93781}\n2026-11-16T19:18:42.1876814Z Region: us-west-2\n2026-11-16T19:18:42.1877216Z Cloud: AWS\n2026-11-16T19:18:42.1877617Z ##[endgroup]\n2026-11-16T19:18:42.1878567Z ##[group]Operating System\n2026-11-16T19:18:42.1879009Z Ubuntu\n2026-11-16T19:18:42.1879398Z 24.04.5\n2026-11-16T19:18:42.1879815Z LTS\n2026-11-16T19:18:42.1880178Z ##[endgroup]\n2026-11-16T19:18:42.1880550Z ##[group]Runner Image\n2026-11-16T19:18:42.1880993Z Image: ubuntu-24.04\n2026-11-16T19:18:42.1881409Z Version: 20261111.127.1\n2026-11-16T19:18:42.1882486Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.127/images/ubuntu/Ubuntu2404-Readme.md\n2026-11-16T19:18:42.1883788Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.127\n2026-11-16T19:18:42.1884502Z ##[endgroup]\n2026-11-16T19:18:42.1885313Z ##[group]GITHUB_TOKEN Permissions\n2026-11-16T19:18:42.1887029Z Contents: read\n2026-11-16T19:18:42.1887427Z Metadata: read\n2026-11-16T19:18:42.1887858Z ##[endgroup]\n2026-11-16T19:18:42.1889378Z Secret source: Actions\n2026-11-16T19:18:42.1890016Z Cache mode: write\n2026-11-16T19:18:42.1890558Z Prepare workflow directory\n2026-11-16T19:18:42.2119168Z Prepare all required actions\n2026-11-16T19:18:42.2155581Z Getting action download info\n2026-11-16T19:18:42.5878042Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)\n2026-11-16T19:18:45.6572530Z Download action repository 'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)\n2026-11-16T19:18:45.9769454Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)\n2026-11-16T19:18:46.3432879Z Complete job name: c2-notices-n3-firstlimit-w1-tool\n2026-11-16T19:18:46.4066847Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262\n2026-11-16T19:18:46.4067841Z with:\n2026-11-16T19:18:46.4068131Z   persist-credentials: false\n2026-11-16T19:18:46.4068481Z   fetch-depth: 2\n2026-11-16T19:18:46.4068982Z   repository: tokenizartinfo-ops/agent-friendly-web\n2026-11-16T19:18:46.4071750Z   token: ***\n2026-11-16T19:18:46.4072049Z   ssh-strict: true\n2026-11-16T19:18:46.4072529Z   ssh-user: git\n2026-11-16T19:18:46.4072788Z   clean: true\n2026-11-16T19:18:46.4073203Z   sparse-checkout-cone-mode: true\n2026-11-16T19:18:46.4073526Z   fetch-tags: false\n2026-11-16T19:18:46.4073813Z   show-progress: true\n2026-11-16T19:18:46.4074174Z   lfs: false\n2026-11-16T19:18:46.4074421Z   submodules: false\n2026-11-16T19:18:46.4074742Z   set-safe-directory: true\n2026-11-16T19:18:46.4075066Z   allow-unsafe-pr-checkout: false\n2026-11-16T19:18:46.4075647Z ##[endgroup]\n2026-11-16T19:18:51.8317489Z Syncing repository: tokenizartinfo-ops/agent-friendly-web\n2026-11-16T19:18:51.8318854Z ##[group]Getting Git version info\n2026-11-16T19:18:51.8319308Z Working directory is '/home/runner/work/agent-friendly-web/agent-friendly-web'\n2026-11-16T19:18:51.8319973Z [command]/usr/bin/git version\n2026-11-16T19:18:52.5665798Z git version 2.56.1\n2026-11-16T19:18:52.5695869Z ##[endgroup]\n2026-11-16T19:18:52.5701397Z Temporarily overriding HOME='/home/runner/work/_temp/f79a900f-1cdd-42f1-b7a6-c638705f9e6c' before making global git config changes\n2026-11-16T19:18:52.5702633Z Adding repository directory to the temporary git global config as a safe directory\n2026-11-16T19:18:52.5703441Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/agent-friendly-web/agent-friendly-web\n2026-11-16T19:18:52.6288314Z Deleting the contents of '/home/runner/work/agent-friendly-web/agent-friendly-web'\n2026-11-16T19:18:52.6289790Z ##[group]Initializing the repository\n2026-11-16T19:18:52.6293460Z [command]/usr/bin/git init /home/runner/work/agent-friendly-web/agent-friendly-web\n2026-11-16T19:18:52.7982704Z hint: Using 'master' as the name for the initial branch. This default branch name\n2026-11-16T19:18:52.7983375Z hint: will change to \"main\" in Git 3.0. To configure the initial branch name\n2026-11-16T19:18:52.7983871Z hint: to use in all of your new repositories, which will suppress this warning,\n2026-11-16T19:18:52.7984260Z hint: call:\n2026-11-16T19:18:52.7984504Z hint:\n2026-11-16T19:18:52.7984874Z hint: \tgit config --global init.defaultBranch <name>\n2026-11-16T19:18:52.7985179Z hint:\n2026-11-16T19:18:52.7985478Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\n2026-11-16T19:18:52.7985903Z hint: 'development'. The just-created branch can be renamed via this command:\n2026-11-16T19:18:52.7986255Z hint:\n2026-11-16T19:18:52.7986517Z hint: \tgit branch -m <name>\n2026-11-16T19:18:52.7986759Z hint:\n2026-11-16T19:18:52.7987129Z hint: Disable this message with \"git config set advice.defaultBranchName false\"\n2026-11-16T19:18:52.7996834Z Initialized empty Git repository in /home/runner/work/agent-friendly-web/agent-friendly-web/.git/\n2026-11-16T19:18:52.8007305Z [command]/usr/bin/git remote add origin https://github.com/tokenizartinfo-ops/agent-friendly-web\n2026-11-16T19:18:52.8066895Z ##[endgroup]\n2026-11-16T19:18:52.8067415Z ##[group]Disabling automatic garbage collection\n2026-11-16T19:18:52.8070447Z [command]/usr/bin/git config --local gc.auto 0\n2026-11-16T19:18:52.8096849Z ##[endgroup]\n2026-11-16T19:18:52.8097320Z ##[group]Setting up auth\n2026-11-16T19:18:52.8104185Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2026-11-16T19:18:52.8136252Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2026-11-16T19:18:53.4715329Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2026-11-16T19:18:53.4754604Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2026-11-16T19:18:53.4902827Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:\n2026-11-16T19:18:53.4929016Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url\n2026-11-16T19:18:53.5080058Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***\n2026-11-16T19:18:53.5113669Z ##[endgroup]\n2026-11-16T19:18:53.5114281Z ##[group]Fetching the repository\n2026-11-16T19:18:53.5128398Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin +3d90069ffbb47d9919df38f9a5b7fe5789d64fd2:refs/remotes/origin/lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool\n2026-11-16T19:18:55.1150529Z From https://github.com/tokenizartinfo-ops/agent-friendly-web\n2026-11-16T19:18:55.1151257Z  * [new ref]         3d90069ffbb47d9919df38f9a5b7fe5789d64fd2 -> origin/lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool\n2026-11-16T19:18:55.1160111Z ##[endgroup]\n2026-11-16T19:18:55.1160665Z ##[group]Determining the checkout info\n2026-11-16T19:18:55.1161233Z ##[endgroup]\n2026-11-16T19:18:55.1161715Z [command]/usr/bin/git sparse-checkout disable\n2026-11-16T19:18:55.1233383Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig\n2026-11-16T19:18:55.1257663Z ##[group]Checking out the ref\n2026-11-16T19:18:55.1274399Z [command]/usr/bin/git checkout --progress --force -B lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool refs/remotes/origin/lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool\n2026-11-16T19:18:55.3072845Z Switched to a new branch 'lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool'\n2026-11-16T19:18:55.3079079Z branch 'lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool' set up to track 'origin/lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool'.\n2026-11-16T19:18:55.3086386Z ##[endgroup]\n2026-11-16T19:18:55.3125713Z [command]/usr/bin/git log -1 --format=%H\n2026-11-16T19:18:55.3148301Z 3d90069ffbb47d9919df38f9a5b7fe5789d64fd2\n2026-11-16T19:18:55.3156440Z ##[group]Removing auth\n2026-11-16T19:18:55.3160374Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2026-11-16T19:18:55.3185212Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2026-11-16T19:18:55.3339532Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2026-11-16T19:18:55.3360300Z http.https://github.com/.extraheader\n2026-11-16T19:18:55.3365669Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2026-11-16T19:18:55.3387648Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2026-11-16T19:18:55.3539103Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:\n2026-11-16T19:18:55.3562643Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url\n2026-11-16T19:18:55.3709754Z ##[endgroup]\n2026-11-16T19:18:55.3906106Z ##[group]Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020\n2026-11-16T19:18:55.3906463Z with:\n2026-11-16T19:18:55.3906686Z   node-version: 22.23.4\n2026-11-16T19:18:55.3906933Z   always-auth: false\n2026-11-16T19:18:55.3907189Z   check-latest: false\n2026-11-16T19:18:55.3909104Z   token: ***\n2026-11-16T19:18:55.3909317Z ##[endgroup]\n2026-11-16T19:18:55.5866604Z (node:2331) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.\n2026-11-16T19:18:55.5867637Z (Use `node --trace-deprecation ...` to show where the warning was created)\n2026-11-16T19:18:55.5874355Z Found in cache @ /opt/hostedtoolcache/node/22.23.4/x64\n2026-11-16T19:18:55.5879503Z ##[group]Environment details\n2026-11-16T19:19:04.3031511Z node: v22.23.4\n2026-11-16T19:19:04.3031893Z npm: 10.9.9\n2026-11-16T19:19:04.3032149Z yarn: 1.22.22\n2026-11-16T19:19:04.3033142Z ##[endgroup]\n2026-11-16T19:19:04.3142137Z ##[group]Run node docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-before.mjs\n2026-11-16T19:19:04.3143058Z \u001b[36;1mnode docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-before.mjs\u001b[0m\n2026-11-16T19:19:04.6755692Z shell: /usr/bin/bash -e {0}\n2026-11-16T19:19:04.6755994Z ##[endgroup]\n2026-11-16T19:19:04.9773094Z AFW_R4_BEFORE_NATIVE not ok 1 - BEFORE_R4_EXACT_RELEVANT\n2026-11-16T19:19:04.9773913Z AFW_R4_BEFORE_NATIVE not ok 2 - BEFORE_R4_OTHER_ERROR\n2026-11-16T19:19:04.9774476Z AFW_R4_BEFORE_NATIVE not ok 3 - BEFORE_R4_OTHER_CLEAN\n2026-11-16T19:19:04.9774965Z AFW_R4_BEFORE_NATIVE # tests 3\n2026-11-16T19:19:04.9775417Z AFW_R4_BEFORE_NATIVE # suites 0\n2026-11-16T19:19:04.9775834Z AFW_R4_BEFORE_NATIVE # pass 0\n2026-11-16T19:19:04.9776594Z AFW_R4_BEFORE_NATIVE # fail 3\n2026-11-16T19:19:04.9776965Z AFW_R4_BEFORE_NATIVE # cancelled 0\n2026-11-16T19:19:04.9777397Z AFW_R4_BEFORE_NATIVE # skipped 0\n2026-11-16T19:19:04.9777887Z AFW_R4_BEFORE_NATIVE # todo 0\n2026-11-16T19:19:04.9779272Z AFW_R4_BEFORE_TAP {\"schema\":\"afw.c2-notices-n3.r4-red-tap.v1\",\"exitCode\":1,\"tests\":3,\"pass\":0,\"fail\":3,\"cancelled\":0,\"skipped\":0,\"todo\":0,\"bytes\":2227,\"sha256\":\"548d0e6a07fb9d895912b4662ddd96905cba3fadad5c9a836f9e79f772ed0bed\",\"head\":\"3d90069ffbb47d9919df38f9a5b7fe5789d64fd2\",\"runId\":\"43937983127\"}\n2026-11-16T19:19:04.9831266Z ##[group]Run node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs\n2026-11-16T19:19:04.9832176Z \u001b[36;1mnode --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs\u001b[0m\n2026-11-16T19:19:04.9859035Z shell: /usr/bin/bash -e {0}\n2026-11-16T19:19:04.9859393Z ##[endgroup]\n2026-11-16T19:19:05.0221751Z TAP version 13\n2026-11-16T19:19:05.1146190Z # Subtest: N3_CORE_CONTROLS\n2026-11-16T19:19:05.1163610Z ok 1 - N3_CORE_CONTROLS\n2026-11-16T19:19:05.1166948Z   ---\n2026-11-16T19:19:05.1174833Z   duration_ms: 25.544003\n2026-11-16T19:19:05.1175424Z   type: 'test'\n2026-11-16T19:19:05.1176311Z   ...\n2026-11-16T19:19:05.1176735Z # Subtest: N3_CAUSAL_LITERALS\n2026-11-16T19:19:05.1177047Z ok 2 - N3_CAUSAL_LITERALS\n2026-11-16T19:19:05.1177279Z   ---\n2026-11-16T19:19:05.1177532Z   duration_ms: 3.022887\n2026-11-16T19:19:05.1177779Z   type: 'test'\n2026-11-16T19:19:05.1178191Z   ...\n2026-11-16T19:19:05.1178465Z # Subtest: N3_TIMEOUT_PREFIX_CONTROLS\n2026-11-16T19:19:05.1178805Z ok 3 - N3_TIMEOUT_PREFIX_CONTROLS\n2026-11-16T19:19:05.1179157Z   ---\n2026-11-16T19:19:05.1179383Z   duration_ms: 2.047133\n2026-11-16T19:19:05.1179655Z   type: 'test'\n2026-11-16T19:19:05.1179879Z   ...\n2026-11-16T19:19:05.1180143Z # Subtest: N3_AXIS_LITERALS\n2026-11-16T19:19:05.1180396Z ok 4 - N3_AXIS_LITERALS\n2026-11-16T19:19:05.1180626Z   ---\n2026-11-16T19:19:05.1180852Z   duration_ms: 0.833091\n2026-11-16T19:19:05.1181075Z   type: 'test'\n2026-11-16T19:19:05.1181284Z   ...\n2026-11-16T19:19:05.1181574Z # Subtest: N3_SCHEMA_SELECTION_CONSTS\n2026-11-16T19:19:05.1181873Z ok 5 - N3_SCHEMA_SELECTION_CONSTS\n2026-11-16T19:19:05.1182136Z   ---\n2026-11-16T19:19:05.1182534Z   duration_ms: 0.157357\n2026-11-16T19:19:05.1182773Z   type: 'test'\n2026-11-16T19:19:05.1182992Z   ...\n2026-11-16T19:19:05.1380616Z # Subtest: N3_NOTE_SYNC_NO_RPC\n2026-11-16T19:19:05.1381193Z ok 6 - N3_NOTE_SYNC_NO_RPC\n2026-11-16T19:19:05.1381758Z   ---\n2026-11-16T19:19:05.1384612Z   duration_ms: 23.791287\n2026-11-16T19:19:05.1385176Z   type: 'test'\n2026-11-16T19:19:05.1385480Z   ...\n2026-11-16T19:19:05.1527697Z # Subtest: N3_ORIGINAL_NULL\n2026-11-16T19:19:05.1528495Z ok 7 - N3_ORIGINAL_NULL\n2026-11-16T19:19:05.1529560Z   ---\n2026-11-16T19:19:05.1530117Z   duration_ms: 14.634835\n2026-11-16T19:19:05.1530497Z   type: 'test'\n2026-11-16T19:19:05.1530766Z   ...\n2026-11-16T19:19:05.1719862Z # Subtest: N3_ORIGINAL_UNDEFINED\n2026-11-16T19:19:05.1720176Z ok 8 - N3_ORIGINAL_UNDEFINED\n2026-11-16T19:19:05.1720530Z   ---\n2026-11-16T19:19:05.1720757Z   duration_ms: 18.928844\n2026-11-16T19:19:05.1721008Z   type: 'test'\n2026-11-16T19:19:05.1721280Z   ...\n2026-11-16T19:19:05.1864488Z # Subtest: N3_ORIGINAL_FALSE\n2026-11-16T19:19:05.1865208Z ok 9 - N3_ORIGINAL_FALSE\n2026-11-16T19:19:05.1865625Z   ---\n2026-11-16T19:19:05.1866115Z   duration_ms: 14.431399\n2026-11-16T19:19:05.1866466Z   type: 'test'\n2026-11-16T19:19:05.1866786Z   ...\n2026-11-16T19:19:05.1973492Z # Subtest: N3_ORIGINAL_ZERO\n2026-11-16T19:19:05.1974031Z ok 10 - N3_ORIGINAL_ZERO\n2026-11-16T19:19:05.1974493Z   ---\n2026-11-16T19:19:05.1975027Z   duration_ms: 11.01239\n2026-11-16T19:19:05.1975730Z   type: 'test'\n2026-11-16T19:19:05.1976142Z   ...\n2026-11-16T19:19:05.2093755Z # Subtest: N3_ORIGINAL_EMPTY_STRING\n2026-11-16T19:19:05.2094498Z ok 11 - N3_ORIGINAL_EMPTY_STRING\n2026-11-16T19:19:05.2094970Z   ---\n2026-11-16T19:19:05.2095358Z   duration_ms: 11.849254\n2026-11-16T19:19:05.2095671Z   type: 'test'\n2026-11-16T19:19:05.2095997Z   ...\n2026-11-16T19:19:05.2237565Z # Subtest: N3_ORIGINAL_OBJECT\n2026-11-16T19:19:05.2238193Z ok 12 - N3_ORIGINAL_OBJECT\n2026-11-16T19:19:05.2238866Z   ---\n2026-11-16T19:19:05.2239467Z   duration_ms: 14.329672\n2026-11-16T19:19:05.2239923Z   type: 'test'\n2026-11-16T19:19:05.2240345Z   ...\n2026-11-16T19:19:05.2390507Z # Subtest: N3_PROMISE_IDENTITY\n2026-11-16T19:19:05.2391117Z ok 13 - N3_PROMISE_IDENTITY\n2026-11-16T19:19:05.2391717Z   ---\n2026-11-16T19:19:05.2392726Z   duration_ms: 14.65926\n2026-11-16T19:19:05.2393161Z   type: 'test'\n2026-11-16T19:19:05.2393885Z   ...\n2026-11-16T19:19:05.2488888Z # Subtest: N3_EXISTING_SETTLED_HANDLER\n2026-11-16T19:19:05.2489738Z ok 14 - N3_EXISTING_SETTLED_HANDLER\n2026-11-16T19:19:05.2490190Z   ---\n2026-11-16T19:19:05.2490495Z   duration_ms: 10.369037\n2026-11-16T19:19:05.2490894Z   type: 'test'\n2026-11-16T19:19:05.2491152Z   ...\n2026-11-16T19:19:05.2584369Z # Subtest: N3_ROOT_IDENTITY\n2026-11-16T19:19:05.2584756Z ok 15 - N3_ROOT_IDENTITY\n2026-11-16T19:19:05.2585188Z   ---\n2026-11-16T19:19:05.2585513Z   duration_ms: 9.509585\n2026-11-16T19:19:05.2585835Z   type: 'test'\n2026-11-16T19:19:05.2586109Z   ...\n2026-11-16T19:19:05.2739840Z # Subtest: N3_REALM_RESET\n2026-11-16T19:19:05.2740494Z ok 16 - N3_REALM_RESET\n2026-11-16T19:19:05.2744917Z   ---\n2026-11-16T19:19:05.2745187Z   duration_ms: 15.667355\n2026-11-16T19:19:05.2745551Z   type: 'test'\n2026-11-16T19:19:05.2745789Z   ...\n2026-11-16T19:19:05.2825508Z # Subtest: N3_CROSS_SCOPE_LEASE\n2026-11-16T19:19:05.2826114Z ok 17 - N3_CROSS_SCOPE_LEASE\n2026-11-16T19:19:05.2826628Z   ---\n2026-11-16T19:19:05.2827151Z   duration_ms: 8.50605\n2026-11-16T19:19:05.2827523Z   type: 'test'\n2026-11-16T19:19:05.2827782Z   ...\n2026-11-16T19:19:05.2901381Z # Subtest: N3_SHARED_PROMISE\n2026-11-16T19:19:05.2901906Z ok 18 - N3_SHARED_PROMISE\n2026-11-16T19:19:05.2902625Z   ---\n2026-11-16T19:19:05.2902960Z   duration_ms: 7.481806\n2026-11-16T19:19:05.2903291Z   type: 'test'\n2026-11-16T19:19:05.2903518Z   ...\n2026-11-16T19:19:05.2982066Z # Subtest: N3_NULL_BOUND_REF\n2026-11-16T19:19:05.2982797Z ok 19 - N3_NULL_BOUND_REF\n2026-11-16T19:19:05.2983231Z   ---\n2026-11-16T19:19:05.2983552Z   duration_ms: 8.113291\n2026-11-16T19:19:05.2983893Z   type: 'test'\n2026-11-16T19:19:05.2984201Z   ...\n2026-11-16T19:19:05.3087579Z # Subtest: N3_PREBIND_GAP\n2026-11-16T19:19:05.3088307Z ok 20 - N3_PREBIND_GAP\n2026-11-16T19:19:05.3088609Z   ---\n2026-11-16T19:19:05.3088914Z   duration_ms: 10.408158\n2026-11-16T19:19:05.3089278Z   type: 'test'\n2026-11-16T19:19:05.3089518Z   ...\n2026-11-16T19:19:05.3193511Z # Subtest: N3_PAIR_FORK\n2026-11-16T19:19:05.3194270Z ok 21 - N3_PAIR_FORK\n2026-11-16T19:19:05.3194874Z   ---\n2026-11-16T19:19:05.3195344Z   duration_ms: 8.131714\n2026-11-16T19:19:05.3195787Z   type: 'test'\n2026-11-16T19:19:05.3196238Z   ...\n2026-11-16T19:19:05.3288178Z # Subtest: N3_FIRST_TARGET_ONLY\n2026-11-16T19:19:05.3288699Z ok 22 - N3_FIRST_TARGET_ONLY\n2026-11-16T19:19:05.3289119Z   ---\n2026-11-16T19:19:05.3289840Z   duration_ms: 11.8432\n2026-11-16T19:19:05.3290145Z   type: 'test'\n2026-11-16T19:19:05.3290498Z   ...\n2026-11-16T19:19:05.3386614Z # Subtest: N3_SCOPE_ERROR_A_CHILD_B\n2026-11-16T19:19:05.3387213Z ok 23 - N3_SCOPE_ERROR_A_CHILD_B\n2026-11-16T19:19:05.3387517Z   ---\n2026-11-16T19:19:05.3387813Z   duration_ms: 9.691306\n2026-11-16T19:19:05.3388223Z   type: 'test'\n2026-11-16T19:19:05.3388511Z   ...\n2026-11-16T19:19:05.3481570Z # Subtest: N3_REPEATED_CLOSE\n2026-11-16T19:19:05.3482060Z ok 24 - N3_REPEATED_CLOSE\n2026-11-16T19:19:05.3482562Z   ---\n2026-11-16T19:19:05.3482953Z   duration_ms: 9.421372\n2026-11-16T19:19:05.3483275Z   type: 'test'\n2026-11-16T19:19:05.3483540Z   ...\n2026-11-16T19:19:05.3585025Z # Subtest: N3_CUT_LATE_SETTLEMENT\n2026-11-16T19:19:05.3586896Z ok 25 - N3_CUT_LATE_SETTLEMENT\n2026-11-16T19:19:05.3587627Z   ---\n2026-11-16T19:19:05.3588010Z   duration_ms: 10.072852\n2026-11-16T19:19:05.3588491Z   type: 'test'\n2026-11-16T19:19:05.3588758Z   ...\n2026-11-16T19:19:05.3697977Z # Subtest: N3_SINK_FAULT\n2026-11-16T19:19:05.3698375Z ok 26 - N3_SINK_FAULT\n2026-11-16T19:19:05.3698689Z   ---\n2026-11-16T19:19:05.3699009Z   duration_ms: 11.35736\n2026-11-16T19:19:05.3699294Z   type: 'test'\n2026-11-16T19:19:05.3699523Z   ...\n2026-11-16T19:19:05.3810527Z # Subtest: N3_PRIVATE_CAP\n2026-11-16T19:19:05.3819424Z ok 27 - N3_PRIVATE_CAP\n2026-11-16T19:19:05.3819995Z   ---\n2026-11-16T19:19:05.3820546Z   duration_ms: 11.688098\n2026-11-16T19:19:05.3821057Z   type: 'test'\n2026-11-16T19:19:05.3821386Z   ...\n2026-11-16T19:19:05.3906115Z # Subtest: N3_SNAPSHOT_CAP\n2026-11-16T19:19:05.3906868Z ok 28 - N3_SNAPSHOT_CAP\n2026-11-16T19:19:05.3907112Z   ---\n2026-11-16T19:19:05.3907378Z   duration_ms: 9.28665\n2026-11-16T19:19:05.3907702Z   type: 'test'\n2026-11-16T19:19:05.3907950Z   ...\n2026-11-16T19:19:05.4023554Z # Subtest: N3_WORST_SIZE\n2026-11-16T19:19:05.4024424Z ok 29 - N3_WORST_SIZE\n2026-11-16T19:19:05.4024769Z   ---\n2026-11-16T19:19:05.4025023Z   duration_ms: 11.914694\n2026-11-16T19:19:05.4025287Z   type: 'test'\n2026-11-16T19:19:05.4025512Z   ...\n2026-11-16T19:19:05.4115840Z # Subtest: N3_REPEATED_RETAIN_FIRST_OBSERVATION\n2026-11-16T19:19:05.4116455Z ok 30 - N3_REPEATED_RETAIN_FIRST_OBSERVATION\n2026-11-16T19:19:05.4116808Z   ---\n2026-11-16T19:19:05.4117112Z   duration_ms: 9.081971\n2026-11-16T19:19:05.4117368Z   type: 'test'\n2026-11-16T19:19:05.4117595Z   ...\n2026-11-16T19:19:05.4223557Z # Subtest: N3_ABORT_NESTED_OBSERVER_ORDER\n2026-11-16T19:19:05.4223966Z ok 31 - N3_ABORT_NESTED_OBSERVER_ORDER\n2026-11-16T19:19:05.4224407Z   ---\n2026-11-16T19:19:05.4224765Z   duration_ms: 10.888954\n2026-11-16T19:19:05.4225091Z   type: 'test'\n2026-11-16T19:19:05.4225355Z   ...\n2026-11-16T19:19:05.4322982Z # Subtest: N3_BOUND_PAIR_COVERAGE\n2026-11-16T19:19:05.4323817Z ok 32 - N3_BOUND_PAIR_COVERAGE\n2026-11-16T19:19:05.4324333Z   ---\n2026-11-16T19:19:05.4324677Z   duration_ms: 9.490588\n2026-11-16T19:19:05.4324982Z   type: 'test'\n2026-11-16T19:19:05.4325232Z   ...\n2026-11-16T19:19:05.4412736Z # Subtest: N3_PREPAIR_FAILURE_AND_UNBOUND\n2026-11-16T19:19:05.4413543Z ok 33 - N3_PREPAIR_FAILURE_AND_UNBOUND\n2026-11-16T19:19:05.4414078Z   ---\n2026-11-16T19:19:05.4414562Z   duration_ms: 9.121888\n2026-11-16T19:19:05.4414902Z   type: 'test'\n2026-11-16T19:19:05.4415128Z   ...\n2026-11-16T19:19:05.4509021Z # Subtest: N3_ACTUAL_CHILD_ABORT_MATRIX\n2026-11-16T19:19:05.4509603Z ok 34 - N3_ACTUAL_CHILD_ABORT_MATRIX\n2026-11-16T19:19:05.4509980Z   ---\n2026-11-16T19:19:05.4510344Z   duration_ms: 9.60824\n2026-11-16T19:19:05.4510690Z   type: 'test'\n2026-11-16T19:19:05.4510988Z   ...\n2026-11-16T19:19:05.4668181Z # Subtest: N3_ACTUAL_PARENT_ABORT_MATRIX\n2026-11-16T19:19:05.4668602Z ok 35 - N3_ACTUAL_PARENT_ABORT_MATRIX\n2026-11-16T19:19:05.4668944Z   ---\n2026-11-16T19:19:05.4669183Z   duration_ms: 15.954425\n2026-11-16T19:19:05.4669473Z   type: 'test'\n2026-11-16T19:19:05.4669700Z   ...\n2026-11-16T19:19:05.4808672Z # Subtest: N3_NESTED_ABORT_ORDER\n2026-11-16T19:19:05.4809305Z ok 36 - N3_NESTED_ABORT_ORDER\n2026-11-16T19:19:05.4809653Z   ---\n2026-11-16T19:19:05.4809934Z   duration_ms: 13.716331\n2026-11-16T19:19:05.4810302Z   type: 'test'\n2026-11-16T19:19:05.4810572Z   ...\n2026-11-16T19:19:05.4905677Z # Subtest: N3_UNREACHED_ACTIVATION\n2026-11-16T19:19:05.4907394Z ok 37 - N3_UNREACHED_ACTIVATION\n2026-11-16T19:19:05.4907727Z   ---\n2026-11-16T19:19:05.4908083Z   duration_ms: 9.842749\n2026-11-16T19:19:05.4908329Z   type: 'test'\n2026-11-16T19:19:05.4908575Z   ...\n2026-11-16T19:19:05.5037870Z # Subtest: N3_ORIGINAL_RACE_AXES\n2026-11-16T19:19:05.5038480Z ok 38 - N3_ORIGINAL_RACE_AXES\n2026-11-16T19:19:05.5038812Z   ---\n2026-11-16T19:19:05.5039232Z   duration_ms: 13.052911\n2026-11-16T19:19:05.5039480Z   type: 'test'\n2026-11-16T19:19:05.5039689Z   ...\n2026-11-16T19:19:05.5197670Z # Subtest: N3_ORIGINAL_REDUCER_CALLBACKS\n2026-11-16T19:19:05.5198425Z ok 39 - N3_ORIGINAL_REDUCER_CALLBACKS\n2026-11-16T19:19:05.5199086Z   ---\n2026-11-16T19:19:05.5199365Z   duration_ms: 16.053471\n2026-11-16T19:19:05.5199607Z   type: 'test'\n2026-11-16T19:19:05.5199858Z   ...\n2026-11-16T19:19:05.5398685Z # Subtest: N3_REVERSIBLES\n2026-11-16T19:19:05.5399219Z ok 40 - N3_REVERSIBLES\n2026-11-16T19:19:05.5399533Z   ---\n2026-11-16T19:19:05.5399814Z   duration_ms: 17.845085\n2026-11-16T19:19:05.5400221Z   type: 'test'\n2026-11-16T19:19:05.5400511Z   ...\n2026-11-16T19:19:05.5400850Z # Subtest: N3_MAX_ENVELOPE_SIZE\n2026-11-16T19:19:05.5401266Z ok 41 - N3_MAX_ENVELOPE_SIZE\n2026-11-16T19:19:05.5401584Z   ---\n2026-11-16T19:19:05.5401896Z   duration_ms: 1.749706\n2026-11-16T19:19:05.5402220Z   type: 'test'\n2026-11-16T19:19:05.5402741Z   ...\n2026-11-16T19:19:05.5494565Z # Subtest: N3_CENSUS_ROOT17\n2026-11-16T19:19:05.5500719Z ok 42 - N3_CENSUS_ROOT17\n2026-11-16T19:19:05.5501125Z   ---\n2026-11-16T19:19:05.5501381Z   duration_ms: 10.008682\n2026-11-16T19:19:05.5501779Z   type: 'test'\n2026-11-16T19:19:05.5502004Z   ...\n2026-11-16T19:19:05.5625143Z # Subtest: N3_CENSUS_IDENTITY129\n2026-11-16T19:19:05.5625641Z ok 43 - N3_CENSUS_IDENTITY129\n2026-11-16T19:19:05.5625922Z   ---\n2026-11-16T19:19:05.5626221Z   duration_ms: 13.068173\n2026-11-16T19:19:05.5626471Z   type: 'test'\n2026-11-16T19:19:05.5626673Z   ...\n2026-11-16T19:19:05.5741146Z # Subtest: N3_CENSUS_GAP_PROMOTION_AT128\n2026-11-16T19:19:05.5741772Z ok 44 - N3_CENSUS_GAP_PROMOTION_AT128\n2026-11-16T19:19:05.5742537Z   ---\n2026-11-16T19:19:05.5742911Z   duration_ms: 11.590445\n2026-11-16T19:19:05.5743331Z   type: 'test'\n2026-11-16T19:19:05.5743627Z   ...\n2026-11-16T19:19:05.5831296Z # Subtest: N3_CENSUS_PROBE_BEFORE_ELIGIBLE\n2026-11-16T19:19:05.5832045Z ok 45 - N3_CENSUS_PROBE_BEFORE_ELIGIBLE\n2026-11-16T19:19:05.5832809Z   ---\n2026-11-16T19:19:05.5833291Z   duration_ms: 9.026527\n2026-11-16T19:19:05.5893289Z   type: 'test'\n2026-11-16T19:19:05.5917036Z   ...\n2026-11-16T19:19:05.6074856Z # Subtest: N3_CENSUS_FRESH_GET_POST_BOUNDS\n2026-11-16T19:19:05.6075694Z ok 46 - N3_CENSUS_FRESH_GET_POST_BOUNDS\n2026-11-16T19:19:05.6076290Z   ---\n2026-11-16T19:19:05.6076637Z   duration_ms: 24.203153\n2026-11-16T19:19:05.6077252Z   type: 'test'\n2026-11-16T19:19:05.6077485Z   ...\n2026-11-16T19:19:05.6193933Z # Subtest: N3_CENSUS_REPEAT_AND_HONEST_CAP\n2026-11-16T19:19:05.6194575Z ok 47 - N3_CENSUS_REPEAT_AND_HONEST_CAP\n2026-11-16T19:19:05.6194910Z   ---\n2026-11-16T19:19:05.6195239Z   duration_ms: 11.758559\n2026-11-16T19:19:05.6195569Z   type: 'test'\n2026-11-16T19:19:05.6195798Z   ...\n2026-11-16T19:19:05.6347892Z # Subtest: R4_EXACT_RELEVANT\n2026-11-16T19:19:05.6348395Z ok 48 - R4_EXACT_RELEVANT\n2026-11-16T19:19:05.6348821Z   ---\n2026-11-16T19:19:05.6349114Z   duration_ms: 14.978338\n2026-11-16T19:19:05.6349538Z   type: 'test'\n2026-11-16T19:19:05.6350405Z   ...\n2026-11-16T19:19:05.6472727Z # Subtest: R4_OTHER_ERROR\n2026-11-16T19:19:05.6473356Z ok 49 - R4_OTHER_ERROR\n2026-11-16T19:19:05.6473710Z   ---\n2026-11-16T19:19:05.6474069Z   duration_ms: 12.972534\n2026-11-16T19:19:05.6474408Z   type: 'test'\n2026-11-16T19:19:05.6474780Z   ...\n2026-11-16T19:19:05.6627670Z # Subtest: R4_OTHER_CLEAN\n2026-11-16T19:19:05.6628088Z ok 50 - R4_OTHER_CLEAN\n2026-11-16T19:19:05.6628553Z   ---\n2026-11-16T19:19:05.6628856Z   duration_ms: 14.39298\n2026-11-16T19:19:05.6629169Z   type: 'test'\n2026-11-16T19:19:05.6629473Z   ...\n2026-11-16T19:19:05.6916815Z # Subtest: R4_NO_BORROW_AND_STICKY\n2026-11-16T19:19:05.6917878Z ok 51 - R4_NO_BORROW_AND_STICKY\n2026-11-16T19:19:05.6918812Z   ---\n2026-11-16T19:19:05.6919206Z   duration_ms: 29.861809\n2026-11-16T19:19:05.6919987Z   type: 'test'\n2026-11-16T19:19:05.6920267Z   ...\n2026-11-16T19:19:05.7503729Z # Subtest: R4_VALIDATION\n2026-11-16T19:19:05.7504586Z ok 52 - R4_VALIDATION\n2026-11-16T19:19:05.7509393Z   ---\n2026-11-16T19:19:05.7509893Z   duration_ms: 55.801707\n2026-11-16T19:19:05.7510836Z   type: 'test'\n2026-11-16T19:19:05.7511227Z   ...\n2026-11-16T19:19:05.7606067Z # Subtest: R4_BELOW_AND_DEFAULT\n2026-11-16T19:19:05.7606749Z ok 53 - R4_BELOW_AND_DEFAULT\n2026-11-16T19:19:05.7607295Z   ---\n2026-11-16T19:19:05.7607671Z   duration_ms: 13.119479\n2026-11-16T19:19:05.7607916Z   type: 'test'\n2026-11-16T19:19:05.7608154Z   ...\n2026-11-16T19:19:05.7755792Z # Subtest: W1_ROOT16_FIRST_FAULT\n2026-11-16T19:19:05.7756295Z ok 54 - W1_ROOT16_FIRST_FAULT\n2026-11-16T19:19:05.7756761Z   ---\n2026-11-16T19:19:05.7757091Z   duration_ms: 14.945069\n2026-11-16T19:19:05.7757378Z   type: 'test'\n2026-11-16T19:19:05.7757689Z   ...\n2026-11-16T19:19:05.7874243Z # Subtest: W1_GAP_NEW128\n2026-11-16T19:19:05.7874933Z ok 55 - W1_GAP_NEW128\n2026-11-16T19:19:05.7875498Z   ---\n2026-11-16T19:19:05.7876417Z   duration_ms: 11.716982\n2026-11-16T19:19:05.7876813Z   type: 'test'\n2026-11-16T19:19:05.7877103Z   ...\n2026-11-16T19:19:05.7970319Z # Subtest: W1_LEASE_NEW128\n2026-11-16T19:19:05.7971999Z ok 56 - W1_LEASE_NEW128\n2026-11-16T19:19:05.7972525Z   ---\n2026-11-16T19:19:05.7972778Z   duration_ms: 9.697647\n2026-11-16T19:19:05.7973021Z   type: 'test'\n2026-11-16T19:19:05.7973505Z   ...\n2026-11-16T19:19:05.8231952Z # Subtest: W1_LEGACY_SAME_GAP_CALIBRATION\n2026-11-16T19:19:05.8232693Z ok 57 - W1_LEGACY_SAME_GAP_CALIBRATION\n2026-11-16T19:19:05.8233129Z   ---\n2026-11-16T19:19:05.8233369Z   duration_ms: 25.778715\n2026-11-16T19:19:05.8233670Z   type: 'test'\n2026-11-16T19:19:05.8233912Z   ...\n2026-11-16T19:19:05.8835315Z # Subtest: W1_OTHER_PRIVATE_CUT\n2026-11-16T19:19:05.8836053Z ok 58 - W1_OTHER_PRIVATE_CUT\n2026-11-16T19:19:05.8836578Z   ---\n2026-11-16T19:19:05.8837261Z   duration_ms: 60.271724\n2026-11-16T19:19:05.8838378Z   type: 'test'\n2026-11-16T19:19:05.8838755Z   ...\n2026-11-16T19:19:05.9017984Z # Subtest: W1_PRECEDENCE_AND_DEFAULT\n2026-11-16T19:19:05.9018876Z ok 59 - W1_PRECEDENCE_AND_DEFAULT\n2026-11-16T19:19:05.9019369Z   ---\n2026-11-16T19:19:05.9019731Z   duration_ms: 18.173627\n2026-11-16T19:19:05.9020057Z   type: 'test'\n2026-11-16T19:19:05.9020358Z   ...\n2026-11-16T19:19:05.9115321Z # Subtest: W1_EXISTING_PROBE_METHOD\n2026-11-16T19:19:05.9115764Z ok 60 - W1_EXISTING_PROBE_METHOD\n2026-11-16T19:19:05.9116222Z   ---\n2026-11-16T19:19:05.9116500Z   duration_ms: 10.046791\n2026-11-16T19:19:05.9116813Z   type: 'test'\n2026-11-16T19:19:05.9117140Z   ...\n2026-11-16T19:19:05.9132818Z # Subtest: W1_REPLAY_LITERAL_GRID\n2026-11-16T19:19:05.9133429Z ok 61 - W1_REPLAY_LITERAL_GRID\n2026-11-16T19:19:05.9133692Z   ---\n2026-11-16T19:19:05.9133909Z   duration_ms: 1.760043\n2026-11-16T19:19:05.9134234Z   type: 'test'\n2026-11-16T19:19:05.9134455Z   ...\n2026-11-16T19:19:05.9225994Z # Subtest: W1_COHERENT_PROFILE\n2026-11-16T19:19:05.9226462Z ok 62 - W1_COHERENT_PROFILE\n2026-11-16T19:19:05.9226746Z   ---\n2026-11-16T19:19:05.9227050Z   duration_ms: 9.131121\n2026-11-16T19:19:05.9227357Z   type: 'test'\n2026-11-16T19:19:05.9227631Z   ...\n2026-11-16T19:19:05.9312422Z # AFW_C2_N3_TOOLING_PROOF {\"schema\":\"afw.c2-notices-n3.r4-firstlimit-tool-proof.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"head\":\"3d90069ffbb47d9919df38f9a5b7fe5789d64fd2\",\"tree\":\"e0132848dff710d2e6038c6f68721f6338b4fdc1\",\"runId\":\"43937983127\",\"runAttempt\":1,\"job\":\"c2-notices-n3-firstlimit-w1-tool\",\"node\":\"v22.23.4\"},\"inputHashes\":[{\"file\":\"n3-qa-ledger.mjs\",\"bytes\":17134,\"sha256\":\"190523e50bf39c23190c895833d50ef40af069436b670f81fc5c6478e0bafe2b\"},{\"file\":\"n3-qa-compiler.mjs\",\"bytes\":12699,\"sha256\":\"d6b007ac9ad44b76a493f494d0b0c4a6a1180c18574a1f139e36c9a3abfa9dd2\"},{\"file\":\"n3-unit-controls.mjs\",\"bytes\":21907,\"sha256\":\"8bf6a9f33a46c15f24e04b89fd6b6068b8197cb4eb9aea42c41ce7b0a1916076\"},{\"file\":\"n3-reader.mjs\",\"bytes\":31798,\"sha256\":\"bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5\"},{\"file\":\"n3-trace-reader.mjs\",\"bytes\":11567,\"sha256\":\"e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829\"},{\"file\":\"n3-core-controls.mjs\",\"bytes\":13179,\"sha256\":\"fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95\"},{\"file\":\"n3-trace-controls.mjs\",\"bytes\":854,\"sha256\":\"ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758\"},{\"file\":\"n3-logger.mjs\",\"bytes\":8370,\"sha256\":\"e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3\"},{\"file\":\"n3-slot.mjs\",\"bytes\":2072,\"sha256\":\"d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a\"},{\"file\":\"n3-vectors.json\",\"bytes\":915177,\"sha256\":\"dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf\"},{\"file\":\"n3-reducer-vectors.json\",\"bytes\":43673,\"sha256\":\"acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9\"},{\"file\":\"schema.json\",\"bytes\":29785,\"sha256\":\"2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb\"},{\"file\":\"normal-lease.txt\",\"bytes\":2257,\"sha256\":\"a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e\"},{\"file\":\"normal-op.txt\",\"bytes\":45576,\"sha256\":\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\"},{\"file\":\"normal-phase.txt\",\"bytes\":148547,\"sha256\":\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\"},{\"file\":\"normal-publication.txt\",\"bytes\":61073,\"sha256\":\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\"},{\"file\":\"normal-world.txt\",\"bytes\":88519,\"sha256\":\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\"},{\"file\":\"observer-world.txt\",\"bytes\":89873,\"sha256\":\"7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9\"},{\"file\":\"contract.json\",\"bytes\":19539,\"sha256\":\"d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886\"},{\"file\":\"seams.json\",\"bytes\":14141,\"sha256\":\"d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5\"},{\"file\":\"n3-unfocused-routine-vectors.json\",\"bytes\":1325,\"sha256\":\"6d2655b173310765608610e69b47d1b667bd27b83197678dded4dc66b53e660d\"},{\"file\":\"fix2-vectors.json\",\"bytes\":23700,\"sha256\":\"bfff8d3388ac157986677c79fa151582e9bd08929ccde54c1bf5f33175fad45b\"},{\"file\":\"tooling-fix2-contract.json\",\"bytes\":4291,\"sha256\":\"db1ff3cc391800c0996b8e686c808534429dcfd0a1056e29f6306e70d498ec78\"},{\"file\":\"ph-anchor-audit.json\",\"bytes\":12743,\"sha256\":\"e04ac361d61f80f7b1476c2843818373526c25af5c240776935c14d13c02e5fa\"},{\"file\":\"n3-census-controls.mjs\",\"bytes\":10186,\"sha256\":\"4554f4fe3021de40946fd4ff9352a20b8b1a1dfa41dda2727005f6262264a393\"},{\"file\":\"census-vectors.json\",\"bytes\":11850,\"sha256\":\"979ac9aff672470252c7d79225025bac6462f88fc2c0ecd903c6ee8416237ba2\"},{\"file\":\"census-contract.json\",\"bytes\":9092,\"sha256\":\"ff2a82520fb1cd69aa7d29f1a19a1df2ba00cb685be0847f16877537e222aa55\"},{\"file\":\"census-selection.json\",\"bytes\":3809,\"sha256\":\"971776a9bdb14459d82eaceb649fe85565e3866d3be3fc9cccdeebcc7d8e8700\"},{\"file\":\"legacy-ledger.mjs\",\"bytes\":16602,\"sha256\":\"b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1\"},{\"file\":\"r4-vectors.json\",\"bytes\":8496,\"sha256\":\"6080058e4e855a4ba63efc49042a64b2731af2ac13c70b4b2d779874d06a781a\"},{\"file\":\"r4-controls.mjs\",\"bytes\":7350,\"sha256\":\"6c2697673561162669ac724afd427025270e8b0a1d437140a5ba9505100f9eaa\"},{\"file\":\"before-red.mjs\",\"bytes\":1171,\"sha256\":\"e123666909f47d95e03208890cb2adc808685d0b202e5b4089b001dba7029990\"},{\"file\":\"r4-selection.json\",\"bytes\":5189,\"sha256\":\"fbf76015ca498a2a73229b907c661ba0d6580da6ed1ac0ae73c9e846325297aa\"},{\"file\":\"w1-reader.mjs\",\"bytes\":33254,\"sha256\":\"56abe20c95ba5d324a2b72da096b0caaad6f2f8f0e4c3f198c7db64eb7fa5d57\"},{\"file\":\"w1-trace-reader.mjs\",\"bytes\":11825,\"sha256\":\"868723b34cfcc1b8247279f02f5a20ab774dc8cf813d1b02337fdf039194d009\"},{\"file\":\"w1-native-vectors.json\",\"bytes\":5368,\"sha256\":\"19fb57d62a60d00845d1c4885cbdfca477b413c2c1f2ef7dc7355ba1f34ce3a7\"},{\"file\":\"first-limit-vectors.json\",\"bytes\":17556,\"sha256\":\"be94a9381b937ab655e8a0bd652dc4d6bbe2f21b2449b23d49f609ad9a0efe26\"},{\"file\":\"w1-selection.json\",\"bytes\":2626,\"sha256\":\"91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07\"},{\"file\":\"calibration-ledger.mjs\",\"bytes\":17033,\"sha256\":\"a034da7e1dfaeb020105fa2820a7b3f05f5d2791f4de267e1fba5a087077d177\"},{\"file\":\"w1-controls.mjs\",\"bytes\":9600,\"sha256\":\"03f39f3b2df679417fd35878cb4ac4b314b1b87813cf184f4c1c57a2421877bc\"},{\"file\":\"w1-schema.json\",\"bytes\":30988,\"sha256\":\"3dd4d6e5757c789d284e75e5430774ed2d660a87339b8bfd77d628b3c22c6690\"}],\"ids\":[\"N3_CORE_CONTROLS\",\"N3_CAUSAL_LITERALS\",\"N3_TIMEOUT_PREFIX_CONTROLS\",\"N3_AXIS_LITERALS\",\"N3_SCHEMA_SELECTION_CONSTS\",\"N3_NOTE_SYNC_NO_RPC\",\"N3_ORIGINAL_NULL\",\"N3_ORIGINAL_UNDEFINED\",\"N3_ORIGINAL_FALSE\",\"N3_ORIGINAL_ZERO\",\"N3_ORIGINAL_EMPTY_STRING\",\"N3_ORIGINAL_OBJECT\",\"N3_PROMISE_IDENTITY\",\"N3_EXISTING_SETTLED_HANDLER\",\"N3_ROOT_IDENTITY\",\"N3_REALM_RESET\",\"N3_CROSS_SCOPE_LEASE\",\"N3_SHARED_PROMISE\",\"N3_NULL_BOUND_REF\",\"N3_PREBIND_GAP\",\"N3_PAIR_FORK\",\"N3_FIRST_TARGET_ONLY\",\"N3_SCOPE_ERROR_A_CHILD_B\",\"N3_REPEATED_CLOSE\",\"N3_CUT_LATE_SETTLEMENT\",\"N3_SINK_FAULT\",\"N3_PRIVATE_CAP\",\"N3_SNAPSHOT_CAP\",\"N3_WORST_SIZE\",\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"N3_ABORT_NESTED_OBSERVER_ORDER\",\"N3_BOUND_PAIR_COVERAGE\",\"N3_PREPAIR_FAILURE_AND_UNBOUND\",\"N3_ACTUAL_CHILD_ABORT_MATRIX\",\"N3_ACTUAL_PARENT_ABORT_MATRIX\",\"N3_NESTED_ABORT_ORDER\",\"N3_UNREACHED_ACTIVATION\",\"N3_ORIGINAL_RACE_AXES\",\"N3_ORIGINAL_REDUCER_CALLBACKS\",\"N3_REVERSIBLES\",\"N3_MAX_ENVELOPE_SIZE\",\"N3_CENSUS_ROOT17\",\"N3_CENSUS_IDENTITY129\",\"N3_CENSUS_GAP_PROMOTION_AT128\",\"N3_CENSUS_PROBE_BEFORE_ELIGIBLE\",\"N3_CENSUS_FRESH_GET_POST_BOUNDS\",\"N3_CENSUS_REPEAT_AND_HONEST_CAP\",\"R4_EXACT_RELEVANT\",\"R4_OTHER_ERROR\",\"R4_OTHER_CLEAN\",\"R4_NO_BORROW_AND_STICKY\",\"R4_VALIDATION\",\"R4_BELOW_AND_DEFAULT\",\"W1_ROOT16_FIRST_FAULT\",\"W1_GAP_NEW128\",\"W1_LEASE_NEW128\",\"W1_LEGACY_SAME_GAP_CALIBRATION\",\"W1_OTHER_PRIVATE_CUT\",\"W1_PRECEDENCE_AND_DEFAULT\",\"W1_EXISTING_PROBE_METHOD\",\"W1_REPLAY_LITERAL_GRID\",\"W1_COHERENT_PROFILE\"],\"results\":[{\"id\":\"N3_CORE_CONTROLS\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_CAUSAL_LITERALS\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_TIMEOUT_PREFIX_CONTROLS\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_AXIS_LITERALS\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_SCHEMA_SELECTION_CONSTS\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_NOTE_SYNC_NO_RPC\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ORIGINAL_NULL\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ORIGINAL_UNDEFINED\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ORIGINAL_FALSE\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ORIGINAL_ZERO\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ORIGINAL_EMPTY_STRING\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ORIGINAL_OBJECT\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_PROMISE_IDENTITY\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_EXISTING_SETTLED_HANDLER\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ROOT_IDENTITY\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_REALM_RESET\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_CROSS_SCOPE_LEASE\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_SHARED_PROMISE\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_NULL_BOUND_REF\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_PREBIND_GAP\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_PAIR_FORK\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_FIRST_TARGET_ONLY\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_SCOPE_ERROR_A_CHILD_B\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_REPEATED_CLOSE\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_CUT_LATE_SETTLEMENT\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_SINK_FAULT\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_PRIVATE_CAP\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_SNAPSHOT_CAP\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_WORST_SIZE\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ABORT_NESTED_OBSERVER_ORDER\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_BOUND_PAIR_COVERAGE\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_PREPAIR_FAILURE_AND_UNBOUND\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ACTUAL_CHILD_ABORT_MATRIX\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ACTUAL_PARENT_ABORT_MATRIX\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_NESTED_ABORT_ORDER\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_UNREACHED_ACTIVATION\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ORIGINAL_RACE_AXES\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_ORIGINAL_REDUCER_CALLBACKS\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_REVERSIBLES\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_MAX_ENVELOPE_SIZE\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_CENSUS_ROOT17\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_CENSUS_IDENTITY129\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_CENSUS_GAP_PROMOTION_AT128\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_CENSUS_PROBE_BEFORE_ELIGIBLE\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_CENSUS_FRESH_GET_POST_BOUNDS\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"N3_CENSUS_REPEAT_AND_HONEST_CAP\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"R4_EXACT_RELEVANT\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"R4_OTHER_ERROR\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"R4_OTHER_CLEAN\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"R4_NO_BORROW_AND_STICKY\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"R4_VALIDATION\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"R4_BELOW_AND_DEFAULT\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"W1_ROOT16_FIRST_FAULT\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"W1_GAP_NEW128\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"W1_LEASE_NEW128\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"W1_LEGACY_SAME_GAP_CALIBRATION\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"W1_OTHER_PRIVATE_CUT\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"W1_PRECEDENCE_AND_DEFAULT\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"W1_EXISTING_PROBE_METHOD\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"W1_REPLAY_LITERAL_GRID\",\"status\":\"pass\",\"code\":\"OK\"},{\"id\":\"W1_COHERENT_PROFILE\",\"status\":\"pass\",\"code\":\"OK\"}],\"allToolingBodiesReturned\":true,\"core\":{\"accepted\":6,\"rejected\":21,\"probeChecks\":3,\"roundtrips\":6,\"witnessRejected\":2,\"slotChecks\":5,\"guardAccepted\":3,\"guardRejected\":7,\"guardTransitions\":6,\"invarianceChecks\":10,\"guardRecordRejected\":12},\"causal\":{\"accepted\":31,\"rejected\":32},\"reducer\":{\"rawIncludingCut\":31,\"projected\":24,\"lateRawIncludingCut\":34,\"lateProjected\":24,\"firstScopeErrorPreserved\":true,\"focusPreserved\":true,\"exactPairPromisePreserved\":true,\"allBounds\":true},\"census\":[{\"id\":\"N3_CENSUS_ROOT17\",\"observation\":{\"createdRefs\":{\"roots\":17,\"clocks\":0,\"children\":0,\"workPromises\":0},\"stimuli\":{\"pairBindings\":0,\"unresolvedClocks\":0},\"notes\":{\"retained\":0,\"settlements\":0},\"snapshots\":[{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"NO_ELIGIBLE\",\"eligible\":0,\"events\":0,\"cut\":null},{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"CAP_PRIVATE\",\"eligible\":0,\"events\":0,\"cut\":null}],\"checks\":[{\"id\":\"DISTINCT_ROOTS\",\"passed\":true},{\"id\":\"LEGACY_ROOT17_REFUSED\",\"passed\":true},{\"id\":\"NO_ELIGIBILITY\",\"passed\":true}],\"futureGapPromotionJoined\":null,\"actualCensusOfBusiness\":false,\"scopeAdmissionExecuted\":false}},{\"id\":\"N3_CENSUS_IDENTITY129\",\"observation\":{\"createdRefs\":{\"roots\":1,\"clocks\":128,\"children\":0,\"workPromises\":0},\"stimuli\":{\"pairBindings\":64,\"unresolvedClocks\":64},\"notes\":{\"retained\":0,\"settlements\":0},\"snapshots\":[{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"NO_ELIGIBLE\",\"eligible\":0,\"events\":0,\"cut\":null},{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"CAP_PRIVATE\",\"eligible\":0,\"events\":0,\"cut\":null}],\"checks\":[{\"id\":\"DISTINCT_IDENTITY129\",\"passed\":true},{\"id\":\"SAME_ANCHOR_FOLDED\",\"passed\":true},{\"id\":\"LEGACY_NEW_IDENTITY_REFUSED\",\"passed\":true}],\"futureGapPromotionJoined\":null,\"actualCensusOfBusiness\":false,\"scopeAdmissionExecuted\":false}},{\"id\":\"N3_CENSUS_GAP_PROMOTION_AT128\",\"observation\":{\"createdRefs\":{\"roots\":1,\"clocks\":127,\"children\":0,\"workPromises\":0},\"stimuli\":{\"pairBindings\":63,\"unresolvedClocks\":64},\"notes\":{\"retained\":0,\"settlements\":0},\"snapshots\":[{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"NO_ELIGIBLE\",\"eligible\":0,\"events\":0,\"cut\":null},{\"state\":\"joined\",\"coverage\":\"prefix\",\"reason\":\"PREBIND_GAP\",\"eligible\":1,\"events\":1,\"cut\":1}],\"checks\":[{\"id\":\"SAME_REF_PROMOTION\",\"passed\":true},{\"id\":\"NET_NEW_IDENTITIES_ZERO\",\"passed\":true},{\"id\":\"CANDIDATE_PROMOTION_JOINED\",\"passed\":true},{\"id\":\"NO_NATIVE_ADMISSION\",\"passed\":true}],\"futureGapPromotionJoined\":true,\"actualCensusOfBusiness\":false,\"scopeAdmissionExecuted\":false}},{\"id\":\"N3_CENSUS_PROBE_BEFORE_ELIGIBLE\",\"observation\":{\"createdRefs\":{\"roots\":17,\"clocks\":0,\"children\":0,\"workPromises\":0},\"stimuli\":{\"pairBindings\":0,\"unresolvedClocks\":0},\"notes\":{\"retained\":0,\"settlements\":0},\"snapshots\":[{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"NO_ELIGIBLE\",\"eligible\":0,\"events\":0,\"cut\":null},{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"NO_ELIGIBLE\",\"eligible\":0,\"events\":0,\"cut\":null},{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"CAP_PRIVATE\",\"eligible\":0,\"events\":0,\"cut\":null}],\"checks\":[{\"id\":\"ZERO_ELIGIBLE_CUT_NULL\",\"passed\":true},{\"id\":\"SNAPSHOT_PREFIX_STABLE\",\"passed\":true},{\"id\":\"SNAPSHOT_DID_NOT_RESET\",\"passed\":true}],\"futureGapPromotionJoined\":null,\"actualCensusOfBusiness\":false,\"scopeAdmissionExecuted\":false}},{\"id\":\"N3_CENSUS_FRESH_GET_POST_BOUNDS\",\"observation\":{\"createdRefs\":{\"roots\":2,\"clocks\":8,\"children\":12,\"workPromises\":12},\"stimuli\":{\"pairBindings\":6,\"unresolvedClocks\":0},\"notes\":{\"retained\":24,\"settlements\":24},\"snapshots\":[{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"NO_ELIGIBLE\",\"eligible\":0,\"events\":0,\"cut\":null}],\"checks\":[{\"id\":\"DECLARED_GRAPH_ONLY\",\"passed\":true},{\"id\":\"NO_PRIVATE_CAP\",\"passed\":true},{\"id\":\"NO_NATIVE_ELIGIBILITY\",\"passed\":true},{\"id\":\"ORIGINAL_CHILD_PROMISES\",\"passed\":true}],\"futureGapPromotionJoined\":null,\"actualCensusOfBusiness\":false,\"scopeAdmissionExecuted\":false}},{\"id\":\"N3_CENSUS_REPEAT_AND_HONEST_CAP\",\"observation\":{\"createdRefs\":{\"roots\":17,\"clocks\":1,\"children\":1,\"workPromises\":1},\"stimuli\":{\"pairBindings\":0,\"unresolvedClocks\":0},\"notes\":{\"retained\":2,\"settlements\":2},\"snapshots\":[{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"NO_ELIGIBLE\",\"eligible\":0,\"events\":0,\"cut\":null},{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"CAP_PRIVATE\",\"eligible\":0,\"events\":0,\"cut\":null}],\"checks\":[{\"id\":\"SAME_PROMISE_RETAINED_TWICE\",\"passed\":true},{\"id\":\"ORIGINAL_SETTLED_RETURNS_TRUE_FALSE\",\"passed\":true},{\"id\":\"HONEST_CAP_UNKNOWN\",\"passed\":true},{\"id\":\"NO_EVENT_OR_ERROR_ABSENCE_CLAIM\",\"passed\":true}],\"futureGapPromotionJoined\":null,\"actualCensusOfBusiness\":false,\"scopeAdmissionExecuted\":false}}],\"beforeRed\":{\"schema\":\"afw.c2-notices-n3.r4-before-red.v1\",\"ledger\":\"d9d3a0af3b6f1e6738957f703e368f19852cdce8\",\"rows\":[{\"id\":\"BEFORE_R4_EXACT_RELEVANT\",\"code\":\"R4_EXACT_RELEVANT_EXPECTED_JOIN\",\"observed\":{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"CAP_PRIVATE\",\"eligible\":0,\"target\":\"unknown\",\"firstError\":null,\"events\":[],\"cut\":null},\"desired\":{\"state\":\"joined\",\"coverage\":\"prefix\",\"reason\":\"PREBIND_GAP\",\"eligible\":1,\"firstError\":null,\"events\":[\"scope-enter\",\"snapshot-cut\"],\"cut\":2}},{\"id\":\"BEFORE_R4_OTHER_ERROR\",\"code\":\"R4_OTHER_ERROR_EXPECTED_PREFIX\",\"observed\":{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"CAP_PRIVATE\",\"eligible\":1,\"target\":\"unknown\",\"firstError\":null,\"events\":[],\"cut\":null},\"desired\":{\"state\":\"joined\",\"coverage\":\"prefix\",\"reason\":\"PREBIND_GAP\",\"eligible\":1,\"firstError\":null,\"events\":[\"scope-enter\",\"snapshot-cut\"],\"cut\":2}},{\"id\":\"BEFORE_R4_OTHER_CLEAN\",\"code\":\"R4_OTHER_CLEAN_EXPECTED_COMPLETE\",\"observed\":{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"CAP_PRIVATE\",\"eligible\":1,\"target\":\"unknown\",\"firstError\":null,\"events\":[],\"cut\":null},\"desired\":{\"state\":\"joined\",\"coverage\":\"complete\",\"reason\":\"OK\",\"eligible\":1,\"firstError\":null,\"events\":[\"scope-enter\",\"snapshot-cut\"],\"cut\":2}}]},\"beforeTap\":{\"schema\":\"afw.c2-notices-n3.r4-red-tap.v1\",\"exitCode\":1,\"tests\":3,\"pass\":0,\"fail\":3,\"cancelled\":0,\"skipped\":0,\"todo\":0,\"bytes\":2227,\"sha256\":\"548d0e6a07fb9d895912b4662ddd96905cba3fadad5c9a836f9e79f772ed0bed\",\"head\":\"3d90069ffbb47d9919df38f9a5b7fe5789d64fd2\",\"runId\":\"43937983127\"},\"atomic\":[{\"id\":\"R4_EXACT_RELEVANT\",\"observed\":{\"state\":\"joined\",\"coverage\":\"prefix\",\"reason\":\"PREBIND_GAP\",\"eligible\":1,\"target\":\"unreached\",\"firstError\":null,\"events\":[\"scope-enter\",\"snapshot-cut\"],\"cut\":2},\"created\":{\"roots\":1,\"clocks\":127},\"cardinalityBefore\":128,\"syntheticScope\":true},{\"id\":\"R4_OTHER_ERROR\",\"observed\":{\"state\":\"joined\",\"coverage\":\"prefix\",\"reason\":\"PREBIND_GAP\",\"eligible\":1,\"target\":\"unreached\",\"firstError\":null,\"events\":[\"scope-enter\",\"snapshot-cut\"],\"cut\":2},\"created\":{\"roots\":1,\"clocks\":127},\"cardinalityBefore\":128,\"syntheticScope\":true},{\"id\":\"R4_OTHER_CLEAN\",\"observed\":{\"state\":\"joined\",\"coverage\":\"complete\",\"reason\":\"OK\",\"eligible\":1,\"target\":\"unreached\",\"firstError\":null,\"events\":[\"scope-enter\",\"snapshot-cut\"],\"cut\":2},\"created\":{\"roots\":1,\"clocks\":127},\"cardinalityBefore\":128,\"syntheticScope\":true},{\"id\":\"R4_NO_BORROW_AND_STICKY\",\"reasons\":[\"CAP_PRIVATE\",\"CAP_PRIVATE\",\"CAP_PRIVATE\"]},{\"id\":\"R4_VALIDATION\",\"reasons\":[\"UNBOUND\",\"UNBOUND\",\"UNBOUND\",\"UNBOUND\",\"AMBIGUOUS_BINDING\",\"AMBIGUOUS_BINDING\"]},{\"id\":\"R4_BELOW_AND_DEFAULT\",\"reasons\":[\"NO_ELIGIBLE\",\"NO_ELIGIBLE\",\"PREBIND_GAP\",\"PREBIND_GAP\",\"MULTIPLE_ELIGIBLE\"],\"firstError\":2,\"cuts\":[3,4]}],\"firstLimits\":[{\"id\":\"W1_ROOT16_FIRST_FAULT\",\"observed\":{\"first\":\"CAP_PRIVATE_ROOT16\",\"roots\":17,\"laterGapCannotReplace\":true}},{\"id\":\"W1_GAP_NEW128\",\"observed\":{\"first\":\"CAP_PRIVATE_GAP_NEW128\",\"clocks\":129}},{\"id\":\"W1_LEASE_NEW128\",\"observed\":{\"first\":\"CAP_PRIVATE_LEASE_NEW128\",\"roots\":1,\"clocks\":128}},{\"id\":\"W1_LEGACY_SAME_GAP_CALIBRATION\",\"observed\":{\"reasons\":[\"CAP_PRIVATE_LEGACY_SAME_GAP128\",\"PREBIND_GAP\"]}},{\"id\":\"W1_OTHER_PRIVATE_CUT\",\"observed\":{\"first\":\"CAP_PRIVATE_OTHER\",\"errorsSupplied\":65,\"lastCut\":4096,\"cutReason\":\"CAP_PRIVATE_OTHER\"}},{\"id\":\"W1_PRECEDENCE_AND_DEFAULT\",\"observed\":{\"noncap\":\"INVALID_EVENT\",\"multiple\":\"MULTIPLE_ELIGIBLE\",\"conflict\":\"AMBIGUOUS_BINDING\",\"cuts\":[2,3]}},{\"id\":\"W1_EXISTING_PROBE_METHOD\",\"observed\":{\"calls\":[\"list\",\"alarm\",\"probe\",\"list\",\"alarm\",\"probe\"],\"cuts\":[2,3]}},{\"id\":\"W1_REPLAY_LITERAL_GRID\",\"observed\":{\"accepted\":8,\"rejected\":14,\"maxEnvelope\":425}},{\"id\":\"W1_COHERENT_PROFILE\",\"observed\":{\"coherentRejected\":4,\"coherentAccepted\":2,\"scope\":\"Source journal and publication projection\"}}],\"diagnosticToolingExecuted\":true,\"sourceBusinessExecuted\":false,\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n2026-11-16T19:19:05.9400653Z 1..62\n2026-11-16T19:19:05.9401189Z # tests 62\n2026-11-16T19:19:05.9401504Z # suites 0\n2026-11-16T19:19:05.9401793Z # pass 62\n2026-11-16T19:19:05.9402112Z # fail 0\n2026-11-16T19:19:05.9402659Z # cancelled 0\n2026-11-16T19:19:05.9403029Z # skipped 0\n2026-11-16T19:19:05.9403321Z # todo 0\n2026-11-16T19:19:05.9403643Z # duration_ms 926.964039\n2026-11-16T19:19:05.9490805Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02\n2026-11-16T19:19:05.9491218Z with:\n2026-11-16T19:19:05.9491484Z   name: afw-c2-notices-n3-firstlimit-w1-tool\n2026-11-16T19:19:05.9491808Z   path: output/c2-notices-n3-firstlimit-w1-tool.json\n2026-11-16T19:19:05.9492120Z   if-no-files-found: error\n2026-11-16T19:19:05.9492686Z   retention-days: 7\n2026-11-16T19:19:05.9492949Z   compression-level: 6\n2026-11-16T19:19:05.9493174Z   overwrite: false\n2026-11-16T19:19:05.9493389Z   include-hidden-files: false\n2026-11-16T19:19:05.9493656Z ##[endgroup]\n2026-11-16T19:19:06.0758278Z (node:2428) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.\n2026-11-16T19:19:06.0759203Z (Use `node --trace-deprecation ...` to show where the warning was created)\n2026-11-16T19:19:06.0792128Z With the provided path, there will be 1 file uploaded\n2026-11-16T19:19:06.0795591Z Artifact name is valid!\n2026-11-16T19:19:06.0796373Z Root directory input is valid!\n2026-11-16T19:19:06.8499750Z Beginning upload of artifact content to blob storage\n2026-11-16T19:19:06.8638676Z (node:2428) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n2026-11-16T19:19:07.2031550Z Uploaded bytes 5621\n2026-11-16T19:19:07.2958377Z Finished uploading artifact content to blob storage!\n2026-11-16T19:19:07.2960193Z SHA256 digest of uploaded artifact zip is a9492a2b3d799c58f85841aefc157d4438dce14704bef19e7de6d30917a5457e\n2026-11-16T19:19:07.2960913Z Finalizing artifact upload\n2026-11-16T19:19:07.7321245Z Artifact afw-c2-notices-n3-firstlimit-w1-tool.zip successfully finalized. Artifact ID 14260649002\n2026-11-16T19:19:07.7322617Z Artifact afw-c2-notices-n3-firstlimit-w1-tool has been successfully uploaded! Final size is 5621 bytes. Artifact ID is 14260649002\n2026-11-16T19:19:07.7326808Z Artifact download URL: https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43937983127/artifacts/14260649002\n2026-11-16T19:19:07.7473374Z Post job cleanup.\n2026-11-16T19:19:07.8408947Z (node:2440) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.\n2026-11-16T19:19:07.8409690Z (Use `node --trace-deprecation ...` to show where the warning was created)\n2026-11-16T19:19:07.8520632Z Post job cleanup.\n2026-11-16T19:19:07.9173038Z [command]/usr/bin/git version\n2026-11-16T19:19:07.9202600Z git version 2.56.1\n2026-11-16T19:19:07.9227084Z Temporarily overriding HOME='/home/runner/work/_temp/dce6e6ad-aa41-41d4-90ca-50b558b94a44' before making global git config changes\n2026-11-16T19:19:07.9228477Z Adding repository directory to the temporary git global config as a safe directory\n2026-11-16T19:19:07.9229783Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/agent-friendly-web/agent-friendly-web\n2026-11-16T19:19:07.9257384Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2026-11-16T19:19:07.9280734Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2026-11-16T19:19:07.9453441Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2026-11-16T19:19:07.9478192Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2026-11-16T19:19:07.9649576Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:\n2026-11-16T19:19:07.9676299Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url\n2026-11-16T19:19:07.9967637Z Cleaning up orphan processes\n2026-11-16T19:19:08.0241859Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/\n",
+  "artifact": {
+    "zipBase64": "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",
+    "zip": {
+      "bytes": 5621,
+      "sha256": "a9492a2b3d799c58f85841aefc157d4438dce14704bef19e7de6d30917a5457e",
+      "blob": "09f09a655a03eaccf159c4ec8e3bd97144e5457f"
+    },
+    "payload": {
+      "bytes": 19161,
+      "sha256": "10d6b9514ae2b07c80e3994fd38b163bbbcdbec85dd306b73f45b48e1b768358",
+      "blob": "817b6a0e98c26aa3c21bbee0df00e7d3f358cd33"
+    },
+    "fileName": "c2-notices-n3-firstlimit-w1-tool.json"
+  },
+  "native": {
+    "beforeTests": 3,
+    "beforePass": 0,
+    "beforeFail": 3,
+    "afterTests": 62,
+    "afterPass": 62,
+    "afterFail": 0,
+    "cancel": 0,
+    "skip": 0,
+    "todo": 0
+  },
+  "admission": {
+    "status": "native actual results matched; independent review pending",
+    "schemaNote": {
+      "schema": "AFW-ROOT-W1-TOOL-PROOF-SCHEMA-NOTE/1",
+      "strictOriginal": false,
+      "all19PropertyConstraints": true,
+      "allRequiredKeys": true,
+      "exactAdditionalPropertySet": true,
+      "topOrder": "Native canonical order differs from JSONSchema.properties and required array order. JSON Schema object/property declaration order has no instance-order semantics; ngSchema adds stronger order checking. No payload/schema bytes were edited.",
+      "dataOnlyView": true,
+      "scope": "This W1 tooling occurrence only; independent review must assess. No historical proof reclassification or business readiness.",
+      "inputs": {
+        "actualWireFields": [
+          "file",
+          "bytes",
+          "sha256"
+        ],
+        "count": 41,
+        "allMatchingIndexedGitBlobs": true,
+        "treeBindingsVerified": true
+      },
+      "SourceQualified": false,
+      "Task1Pass": false
+    }
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false
+}
