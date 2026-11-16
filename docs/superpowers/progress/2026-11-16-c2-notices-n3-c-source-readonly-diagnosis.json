@@ -1,0 +1,415 @@
+{
+  "schema": "AFW-N3-C-READONLY-DIAGNOSIS/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": "Static diagnosis only; no implementation or new execution authorization",
+  "authority": {
+    "brief": "23acfcd37a7e2973a2576c3b6bfde1edac33ce62",
+    "semantics": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "boundedPrefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "independentAxes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0"
+  },
+  "evidence": {
+    "primary": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+    "safeOutcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+    "close": "0638c9c5634c36b60835c12eb9153af4297d183e",
+    "runId": "43921222041",
+    "attempt": 1,
+    "jobId": "133488709833",
+    "testedHead": "07d7389f7aab1ef7c5e6a5311b6109bf2d9615b8",
+    "closedHead": "9e58ccb94c046e23ed83b3b60be86eaffb7e6480",
+    "diagnosticCaptureAcceptedByRoot": true,
+    "source13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "sourcePacket": "4115c1f0d163a2f51a6bbe647d3610ef36311410",
+    "sourceIndex": "26f167bc9a56184a614e37cbff2b1f03de90a83c"
+  },
+  "sourcePins": {
+    "ledger": {
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "artifactPath": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-qa-ledger.mjs"
+    },
+    "compiler": {
+      "blob": "94e30c896056dc35b3bb75b072022644c68bfb74",
+      "sha256": "624ef2a8507643936aa9564bb0f978b11e31572b49c5678a6e6c4706af9ea255",
+      "artifactPath": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-qa-compiler.mjs"
+    },
+    "helper": {
+      "blob": "bff0415fbbf37c787439d4c526b1c77c8fdf2a65",
+      "artifactPath": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-helper.mjs"
+    },
+    "driver": {
+      "blob": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+      "artifactPath": "docs/superpowers/source-lab/c2-t1-notices-n3/observer-driver.txt",
+      "logicalOverlayPath": "test/mcp-qa-finite-owner-three-stage-native.test.mjs"
+    },
+    "coupled": {
+      "blob": "3c9081cb2a04759bbe58ef317ea9db4753ce4235",
+      "artifactPath": "docs/superpowers/source-lab/c2-t1-notices-n3/observer-coupled.txt",
+      "logicalOverlayPath": "test/fixtures/finite-coupled-native.mjs"
+    },
+    "world": {
+      "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+      "artifactPath": "docs/superpowers/source-lab/c2-t1-notices-n3/observer-world.txt",
+      "logicalOverlayPath": "test/fixtures/finite-initial-entry-world.mjs"
+    },
+    "PH": {
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "artifactPath": "docs/superpowers/source-lab/c2-t1/body-00.txt"
+    },
+    "OP": {
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "artifactPath": "docs/superpowers/source-lab/c2-t1/body-01.txt"
+    },
+    "LEASE": {
+      "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+      "path": "lib/mcp-qa-finite-initial-lease.mjs"
+    }
+  },
+  "ruling": {
+    "proven": "The QA recorder returned its canonical empty CAP_PRIVATE projection with eligible:0. Its global pre-eligibility admission pools can permanently prevent the first selected scope from becoming eligible. The actual exhausted pool is not observable in this capture.",
+    "concreteStaticDefects": [
+      "Private roots, admitted lease rows and counters are lifetime/global within one ledger instance, including never-eligible scopes. There is no removal/reset/retirement. Closed callbacks do not release those pools. Selected-focus reduction cannot recover capacity because the sticky fault is checked before selection.",
+      "addLease checks leaseCount+gapCount>=128 before consumeGap. At total128, promoting a pending gap for the SAME actual object to a lease is rejected although its accepted net identity occupancy would remain128. That pending reference remains unresolved. This is an admission-order defect, not proof it occurred in the actual run."
+    ],
+    "notEstablished": [
+      "Which of roots16 or leases-plus-gaps128 was first exhausted, or its exact value/time/first object.",
+      "Whether the exhaustion arose before the existing beforeProbe, during notices GET, or before the notices POST scope binding.",
+      "That either static defect caused the native POST503; the recorder does not control the business branch.",
+      "Which recheck, holder, scope, Error identity, abort, timer or race first caused the business failure.",
+      "That either guard's root was closed or aborted. The observed guard booleans are false, and correlation is null."
+    ]
+  },
+  "observed": {
+    "native": {
+      "pass": 3,
+      "fail": 1,
+      "failedCase": "N3_NOTICES",
+      "after": "returned"
+    },
+    "http": {
+      "get": {
+        "status": 200,
+        "bodySettled": true
+      },
+      "post": {
+        "status": 503,
+        "bodySettled": true
+      }
+    },
+    "failure": {
+      "journalSequence": 33,
+      "name": "AssertionError",
+      "code": "ERR_ASSERTION",
+      "site": {
+        "file": "D08",
+        "line": 48,
+        "column": 12
+      },
+      "meaning": "The actual Node assertion expected a successful POST; this is not the originating QA Error."
+    },
+    "afterProbe": {
+      "journalSequence": 34,
+      "newFailures": 1,
+      "position": "complete",
+      "consumedTicket": true,
+      "stageApproval": true,
+      "receiptCount": 2,
+      "correlated": null,
+      "guardOrigin": "unknown"
+    },
+    "counts": {
+      "journalSequence": 37,
+      "upload": 2,
+      "activation": 2,
+      "receipts": 2
+    },
+    "guards": {
+      "journalSequences": [
+        29,
+        30
+      ],
+      "tag": "initial-parent-holders",
+      "window": "notices-post",
+      "closed": false,
+      "aborted": false,
+      "alive": null,
+      "wallExpired": null,
+      "monoExpired": null,
+      "correlated": null
+    },
+    "causal": {
+      "journalSequence": 35,
+      "state": "unjoined",
+      "coverage": "unknown",
+      "reason": "CAP_PRIVATE",
+      "eligible": 0,
+      "events": 0,
+      "firstError": null,
+      "cut": null
+    },
+    "meaning": "Empty causal arrays/null firstError are unavailable evidence. They do not establish absence of lifecycle events, failures or retention."
+  },
+  "capPaths": [
+    {
+      "ledgerLines": [
+        14
+      ],
+      "budget": "roots",
+      "condition": "New actual explicit root when all.length>=16",
+      "persistentFault": true,
+      "reachableBeforeEligibility": true,
+      "actualCandidate": true
+    },
+    {
+      "ledgerLines": [
+        23,
+        26
+      ],
+      "budget": "leaseCount+gapCount",
+      "condition": "New unresolved leaseRef, otherwise promiseRef, when total>=128",
+      "persistentFault": true,
+      "reachableBeforeEligibility": true,
+      "actualCandidate": true
+    },
+    {
+      "ledgerLines": [
+        31,
+        34,
+        35
+      ],
+      "budget": "leaseCount+gapCount",
+      "condition": "New admitted lease when total>=128; same-object gap consumption happens only after the check",
+      "persistentFault": true,
+      "reachableBeforeEligibility": true,
+      "actualCandidate": true
+    },
+    {
+      "ledgerLines": [
+        64,
+        66,
+        71
+      ],
+      "budget": "promises",
+      "condition": "New canonical activation-child/target-pair/pair-child work promise when promiseCount>=64",
+      "persistentFault": true,
+      "reachableBeforeEligibilityViaReviewedHooks": false,
+      "actualCandidate": false
+    },
+    {
+      "ledgerLines": [
+        78,
+        87
+      ],
+      "budget": "scope sequence",
+      "condition": "An eligible observed event arrives with s.seq>=4095",
+      "persistentFault": true,
+      "reachableBeforeEligibility": false,
+      "actualCandidate": false
+    },
+    {
+      "ledgerLines": [
+        78,
+        97,
+        99
+      ],
+      "budget": "opaque errors",
+      "condition": "New eligible object/function Error identity when global errorCount>=64",
+      "persistentFault": true,
+      "reachableBeforeEligibility": false,
+      "actualCandidate": false
+    },
+    {
+      "ledgerLines": [
+        78,
+        111
+      ],
+      "budget": "stored events",
+      "condition": "An eligible event would be stored when global eventCount>=256",
+      "persistentFault": true,
+      "reachableBeforeEligibility": false,
+      "actualCandidate": false
+    },
+    {
+      "ledgerLines": [
+        37,
+        38,
+        78,
+        113
+      ],
+      "budget": "metadata bytes",
+      "condition": "After eligible event storage, JSON metadata for all scopes exceeds65536 UTF8 bytes",
+      "persistentFault": true,
+      "reachableBeforeEligibility": false,
+      "actualCandidate": false
+    },
+    {
+      "ledgerLines": [
+        128,
+        131,
+        134
+      ],
+      "budget": "snapshot sequence",
+      "condition": "Selected eligible scope has s.seq>=4096 before cut",
+      "persistentFault": false,
+      "reachableBeforeEligibility": false,
+      "actualCandidate": false
+    }
+  ],
+  "eligibleZeroProof": [
+    "all is append-only (ledger9/14); eligible is initialized false and only becomes true after scope root+outer admission (43); no code assigns it false or removes a scope.",
+    "snapshot reports selected=all.filter(eligible) (128); the actual selected count is0. Therefore no scope in this ledger instance previously became eligible.",
+    "observe returns before sequence/error/event/size accounting whenever ineligible (78). Those CAP_PRIVATE sites cannot explain this instance. snapshot also returns on no eligibility before its cut (131/134).",
+    "The actual hooks only bind activation-child inside stage==='notices' after successful consumeFiniteOwnerStageAdmission (compiler52/55; PH662 then763). target-pair requires eligible and the exact target call (ledger46/55), and pair-child requires target-pair (57). Consequently promise64 cannot be reached before eligibility through these reviewed hooks.",
+    "This leaves root admission16 or identity admission128 through addLease/gap as the supported recorder candidates, not an identified actual first counter.",
+    "A later failure at128 while the actual notices root AND outer were already successfully bound would not alone explain eligible0: the scope bind reuses those same objects at43. The relevant failed admission may precede that binding, or another binding deficit may coexist. The capture lacks the identities needed to choose."
+  ],
+  "realHookTrace": [
+    {
+      "source": "compiler",
+      "lines": [
+        34,
+        35,
+        36,
+        37
+      ],
+      "original": "OP59-83",
+      "trace": "Every original QA requestLease factory is observed after requestContexts.set. It allocates a private root even for connection/OAuth/GET/prerequisite traffic. finish emits events but does not remove recorder root/lease allocations."
+    },
+    {
+      "source": "compiler",
+      "lines": [
+        42,
+        43
+      ],
+      "original": "PH100-131",
+      "trace": "Every actual observeOwnerPhasePair clock is bound. Until the exact eligible target call matches, its role is other-pair. Such rows count in the128 pool even before eligibility; pair-enter events are ignored for other-pair. Each factual recheck creates a new actual pair clock; no count for this run is exposed."
+    },
+    {
+      "source": "compiler",
+      "lines": [
+        49,
+        50,
+        52
+      ],
+      "original": "PH630-662",
+      "trace": "The choice outer is bound at original clock creation before body/timeline/choice awaits. Only successful consumeFiniteOwnerStageAdmission followed by stage notices binds scope and sets eligible. Choosing a notices form or receiving GET200 is not eligibility."
+    },
+    {
+      "source": "compiler",
+      "lines": [
+        22,
+        25,
+        26,
+        27,
+        28
+      ],
+      "original": "LEASE9-19",
+      "trace": "Unknown parent-clock notes resolve by leaseRef/promiseRef only. Unresolved child-bind/retain/settlement/close notes can create one folded gap per anchoring parent reference, not necessarily one gap per child or promise. entityRef cannot resolve a root. Some original PH OAuth/notice clocks at832/1036/1151 have no added outer binding; their notes can remain unjoined."
+    },
+    {
+      "source": "ledger",
+      "lines": [
+        24,
+        25,
+        29,
+        35,
+        55,
+        57,
+        66,
+        78,
+        84,
+        91,
+        92
+      ],
+      "trace": "Do not multiply every original callback into a distinct allocation. Repeated gaps on the same ref fold; existing bound objects reuse rows; children of other-pair are ignored; unbound/noncanonical promises do not get promise rows; ineligible observations return immediately. Actual distinct-root/clock/gap counts remain unknown."
+    }
+  ],
+  "beforeAfterAndRepeats": {
+    "beforeProbe": "Driver invokes the same existing beforeProbe before notices work. Compiler65-69 appends snapshot after the original list/getAlarm awaits. Helper44-47 keeps only the core baseline, discarding its causal value. Thus the beforeProbe cannot reveal whether the sticky CAP_PRIVATE fault already existed. It neither clears pools nor arms a new recorder epoch.",
+    "cut": "With no eligible scope snapshot returns before incrementing sequence. Given append-only eligibility and actual eligible0, neither existing probe consumed a selected snapshot cut in this ledger instance. This excludes the cut as this CAP_PRIVATE cause.",
+    "repeatRetain": "Original LEASE17 retains actual, then wait(actual,l) at11 retains SAME promise again. Both original settled callbacks legitimately execute and return their own pendingWork.delete boolean. Compiler21 preserves that boolean and the original p.then(settled,settled). Ledger91/92 folds public first retain/settlement only after incrementing sequence87. That can pressure eligible sequence in another instance, but cannot explain eligible0 here.",
+    "repeatedChecks": "Every actual caught check may note the same Error identity; that is not a new Error row unless the identity is new. Ineligible check notes still return before sequence accounting when root resolves, or fold an unresolved gap by actual anchor."
+  },
+  "phaseLimits": {
+    "source": "PH780 and compiler56-57",
+    "mapping": "The local position literal complete is assigned between two successive recheckOwned awaits. N3 targets only the first post-receipt await; the second await remains original. The afterprobe position and receipt/counters are separate observations with correlated:null and no causal events.",
+    "permitted": "Report the observed complete position, receipt count2 and POST503 together as unjoined frontier evidence.",
+    "forbidden": "Do not turn that local position into an authenticated target-return, first-versus-second-check attribution, Error identity, root closure, deadline expiry, physical pending/drain, or Cloudflare/provider fault."
+  },
+  "minimalNextProposal": {
+    "authorization": "Recommendation only. Requires a new narrow Root ruling, test-first DATA, native tooling covering and review before any new business capture.",
+    "firstStep": "Tooling-only reproduce the lifetime pre-eligibility pool/admission failure with the reviewed original request/Lease callbacks and same caps. Do not retry unchanged C or run another world to discover a counter.",
+    "proposedRepairBoundary": "Consider a QA-ledger-only recording epoch starting at the ALREADY SCHEDULED beforeProbe, rather than accumulating all prerequisite lifetimes. This is diagnostic arming, never admission: actual notices scope still requires the same successful native consume+stage binding. No original13/M change, extra RPC/read/header/request, promise reaction, clock read, timer, callback replacement or business await.",
+    "requiredSafeguards": [
+      "Keep every cap unchanged:16 roots,128 lease-plus-gap identities,64 promises,64 errors,256 stored events,65536 metadata bytes,selected24 events/6144B.",
+      "Never erase or restart an eligible scope, assign old callbacks by time/ordinal, or make a missing pre-epoch binding complete. A late pre-epoch object can remain unjoined/gap; it cannot be retroinserted into complete evidence.",
+      "Do not pretend the same-instance beforeProbe was causally empty in the old actual; that value was discarded. The proposed fresh epoch would be an explicit new protocol behavior.",
+      "Repair/test gap-to-lease conversion using net occupancy at128, preserving actual object/root ambiguity semantics; do not simply raise the threshold.",
+      "Keep first scope Error identity independent of selected child, exact returned-pair promise, legitimate repeated retain callbacks and prefix/cap behavior.",
+      "Prove a bounded GET+POST callback graph fits AFTER arming. If it still cannot fit mandatory evidence, return honest cap/unknown and stop; no deliberately useless unchanged C retry."
+    ],
+    "optionalNarrowObservation": "If Root needs a discriminator before choosing repair, propose a separately sealed safe recorder-only capacity witness at the existing probes: firstBound enum roots|identities-gap|identities-lease; bounded counts roots0..16,leases0..128,gaps0..128 with sum<=128,eligible0..16, and first-site enum. Capture synchronously where the first recorder fault is set; no Source Error/message/stack/reference/clock. This would require explicit schema/contract binding. It cannot recover the already lost run or prove the business first cause.",
+    "whyNotOnlyProjection": "The selected reducer runs after sticky-fault rejection (ledger130 versus132-217). Its31→24/34→24 success cannot recover a private admission failure with no eligible root. Raising24/6144 or pruning the final empty projection would address a different budget."
+  },
+  "testFirstPlan": [
+    {
+      "id": "PRE_ELIGIBLE_ROOT17",
+      "literal": "16 distinct never-eligible roots followed by the intended notices root",
+      "oldTextOracle": "17th scopeForRoot sets CAP_PRIVATE; selected remains0",
+      "required": "After any admitted epoch change, cover exact original root factory callbacks; no eligibility inferred from arming."
+    },
+    {
+      "id": "PRE_ELIGIBLE_IDENTITY129",
+      "literal": "Within one known root, distinct other-pair clocks plus unresolved anchors reach total128 before intended root/outer admission",
+      "oldTextOracle": "next distinct identity fails; global sticky fault survives final projection",
+      "required": "Own literal counts then original factory/close/retain callbacks; distinguish roots, bound leases and folded gaps."
+    },
+    {
+      "id": "GAP_PROMOTION_AT128",
+      "literal": "At total128, one pending gap is bound as SAME actual lease, with unchanged net occupancy",
+      "oldTextOracle": "addLease34 rejects before consumeGap35; no successful promotion",
+      "required": "A future repair must preserve total128 and root/role checks; reject an actually new129th identity."
+    },
+    {
+      "id": "BEFORE_PROBE_BOUNDARY",
+      "literal": "Prerequisites returned, existing beforeProbe, fresh notices GET then POST; a late original prerequisite callback also arrives",
+      "required": "No extra probes; late callback cannot acquire selected root by phase/time, erase firstError or manufacture complete. Test early eligible scope refuses reset."
+    },
+    {
+      "id": "ORIGINAL_REPEAT_AND_AXES",
+      "literal": "retain(actual) plus wait(actual,l), both original settled callbacks; logical race end before retained target continuation",
+      "required": "Same promise/boolean returns/reaction count and independent logical/target axes. Keep existing41 controls and old positive/negative corpus; covering pending Root cloud."
+    },
+    {
+      "id": "HONEST_LIMITS",
+      "literal": "Actual admitted scope exceeds remaining private or selected caps",
+      "required": "No cap increase or fake join; bounded explicit unknown/prefix and no positive business qualification."
+    }
+  ],
+  "executionAccounting": {
+    "thisTurn": "Immutable blob reads and RAM string/JSON analysis only; one JSON report preservation. No Source/observer evaluation, import, compilation, syntax checks or tests. No local files, dependencies, refs, runs, runtime/provider access, log or artifact refetch.",
+    "referencedActual": {
+      "diagnosticToolingExecuted": true,
+      "sourceBusinessExecuted": true,
+      "runId": "43921222041",
+      "performedByRootCloud": true
+    },
+    "newTests": "PENDING_ROOT_SCOPE_AND_CLOUD; text oracles above are not native RED/PASS",
+    "reversibleState": "No Source13, producer, runner, workflow or ref changed. Old pins and actual evidence remain intact.",
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  }
+}
