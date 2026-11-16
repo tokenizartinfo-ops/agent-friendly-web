@@ -1,0 +1,16 @@
+{
+  "head": "f6620136a1b5c34deb16f4a3659dc54c72b9d0e9",
+  "tree": "f8c2c3613dc746e7f0984fef18cc3252035cdb8a",
+  "branch": "lab/afw-c2-source-20261116-n2-parser-fix2",
+  "testedHead": "95b123baf77c24be1aaaafd6a578e7949ab4eeb0",
+  "originals": 3203,
+  "leaves": 3214,
+  "workflowRemoved": true,
+  "MainAndHistoricalUnchanged": true,
+  "closeHeadRuns": 0,
+  "diagnosticToolingExecuted": true,
+  "sourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}
