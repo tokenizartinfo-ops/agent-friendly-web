@@ -1,0 +1,16 @@
+{
+  "schema": "afw.c2-notices-n3.builder-check.v1",
+  "PROJECT": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "spec": "798d4d4d1daaff6e6cddc0b4f5f78661bbaeece0",
+  "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+  "agent": "/root/n3_causal_builder_check",
+  "result": "nothing important left",
+  "questions": [],
+  "SourceExecuted": false,
+  "implementationStarted": false,
+  "ownerDecisionsNeeded": 0,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}
