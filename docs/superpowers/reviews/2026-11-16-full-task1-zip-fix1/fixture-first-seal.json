@@ -1,0 +1,76 @@
+{
+  "schema": "afw.own-full-c230.zip-fix1.fixture-seal.v1",
+  "status": "SEALED_BEFORE_CORRECTED_READER",
+  "authority": "fc6287a46a8acefbb5ba9892214e351d52423e7f",
+  "review": "5aabaa3f85133d126f24652b348c0c5bc3de08ab",
+  "baselineReader": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+  "baselineExample": "1c932dbcc1106b96d6fdb28c5f4e5fef21764d35",
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/zip-model-builder.mjs",
+      "mode": "100644",
+      "blob": "f257d2ce5320e1f3ace0f08edb2b6c67959dde3b",
+      "bytes": 2336,
+      "sha256": "323a6c183b076cdb028c22560cb62b48a8eef956d6cc2b9d920cc33e141e05cf",
+      "gitBlob": "f257d2ce5320e1f3ace0f08edb2b6c67959dde3b",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/zip-fixture-first.json",
+      "mode": "100644",
+      "blob": "c4deff93c37157d7cf39e36629fc19e76f832adb",
+      "bytes": 10266,
+      "sha256": "8d7e6a83729992f95a3c91d68c808781f49a2530d68075e0b844a61730c16041",
+      "gitBlob": "c4deff93c37157d7cf39e36629fc19e76f832adb",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/expected-ids.json",
+      "mode": "100644",
+      "blob": "aaf415f4ade63826b0fbee438575b6e2dcb5be5b",
+      "bytes": 13944,
+      "sha256": "b9540de5d0925df2c596283132948651de9eb5a24b081ce073108c4027028ba8",
+      "gitBlob": "aaf415f4ade63826b0fbee438575b6e2dcb5be5b",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/zip-red.json",
+      "mode": "100644",
+      "blob": "eb17d5d26ee62a19c48b63007be74d19147865e9",
+      "bytes": 22199,
+      "sha256": "ab3b18077015ee0c3f0cbb8f77e423457837d32c149c1ef45ecba1f5334567cb",
+      "gitBlob": "eb17d5d26ee62a19c48b63007be74d19147865e9",
+      "fullReadback": true
+    }
+  ],
+  "controls": {
+    "original370PrefixIdentical": true,
+    "added49": 49,
+    "positive13": 13,
+    "negative36": 36,
+    "total419": 419,
+    "idsHash": "27801c804733daa829c629af6acf41fdcfa44f441f42b05a995581b0a5fdeb8d"
+  },
+  "red": {
+    "positiveAccepted": 13,
+    "negativeFalseAccepted": 36,
+    "fullyCoherentArchiveDigestSize": true,
+    "logPayloadTrustUnchanged": true
+  },
+  "supersededPrettyRed": "fdb0f4e5576f98964413dd6311f5a632287ce9cf",
+  "supersededSeal": "12e742149f61e2a6db31b3979bee78320262f586",
+  "change": "RED data identical, compact JSON keeps bounded report below24576B; case plans/IDs unchanged.",
+  "historical370Native": "Historical coverage only; no49case coverage retroactively.",
+  "actualSourceExecution": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
