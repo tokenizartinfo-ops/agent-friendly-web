@@ -1,0 +1,94 @@
+{
+  "schema": "AFW-N3-CAP-CENSUS-INDEPENDENT-REVIEW/1",
+  "atUTC": "2026-11-16 18:42:04 UTC",
+  "reviewer": "/root/n3_tooling_fix2_review",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "brief": "5716b9b0e8a5556cbc7c3cee6ed918b83193e930",
+  "scope": "SPEC then QUALITY of frozen-observer tooling census47 only; no observer repair, actual-business census or capture authorization.",
+  "pins": {
+    "ruling": "7ed9f2f3a3d0b29690102000e8eb308a41d1ca63",
+    "packet": "7e422153658322797ea05adba3b1a519b8ec728a",
+    "index": "eddf0e03c94817509f02a334a8e73844728538f1",
+    "vectors": "00685a137f17834ff355cb2cae15285d8e9e2fd4",
+    "contract": "d255278df50c70f2b8f09b3b1ed217fa059e22dd",
+    "controls": "e372df1adb3073912d722c836215db705dd7b391",
+    "runner": "8215a69b7d2dfe46dbdcefc7dd963a3c08a86f0a",
+    "workflow": "02f5f487199e2f5273d2fb56c0185a6fb7dbdc96",
+    "diff": "b662485e62e28ad5233a3f896c5f224b62601bfe",
+    "reversibles": "c957e46eec62ec0dc3864a2f3bb180e71cb0dfbd",
+    "report": "6bd388642ad07c4cbcb0750fe923cd8447682ae0",
+    "proofSchema": "33ca2d867e04eb071aa7a0a5b4d3162e3686fce5",
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "primary": "f22df7c75028c01206266a3c4df26e7c31ef7864",
+    "proof": "cda3acf85a765c4788bbc023b247da791a9f322a",
+    "close": "f67891c12d4ddb662bb868701f2d04ebbe4e2b48"
+  },
+  "SPEC": {
+    "verdict": "PASS",
+    "basis": [
+      "Controls e372df lines16-64 import/execute unchanged ledger and transformed original Root/InitialLease callbacks in isolated tooling environments. Actual Root/clock refs and callback-supplied child/work promise refs are counted by Sets; DTO role binds remain stimuli, not native eligibility or private accepted-identity totals.",
+      "Lines66-90 construct128 distinct anchors as root1+bound pair63+unresolved64; repeated unresolved close notes fold the same anchor. New identity129 refusal and SAME-ref gap promotion refusal at net0 reproduce frozen legacy behavior. futureGapPromotionJoined:false is required and actually observed; desired future true remains RED.",
+      "Lines74-95 reproduce root17 and prove zeroeligible snapshot cut:null with no reset. Lines96-104 execute the specifically authorized2-root/8-clock/12-child/12-work-promise graph:24 retained and24 settlement notes, NO_ELIGIBLE and no cap. This is the declared graph only, not an actual-C upper bound, HTTP success or admission.",
+      "Lines106-114 preserve exact original promise identity, two existing settled callbacks and delete results true then false; original race/ambiguity/role controls remain in the41-case prefix.",
+      "Ledgerd9d3, compiler94e30 and old unit bodies retain their immutable pins. Seven full-LF before/after file arrays and independent static comparison confirm old41 runner job bodies exactly equal after removing only the six-control append."
+    ]
+  },
+  "QUALITY": {
+    "verdict": "PASS",
+    "basis": [
+      "Cleanup is registered before imports/factories (controls18-20), is wrapper-idempotent, and is performed before census comparisons (61-64). Input note retention is bounded4096 per test and overflow fails; no observer resource cap changes.",
+      "Runner136 publishes a census row only after its actual work and literal comparisons return. Runner142 emits null observation for absent rows, rather than precomputing success. Runner147-149 rethrows outer failures, with bounded canonical diagnostics from private WeakMap-branded setup errors.",
+      "Native evidence supplies47 exact ordered PASS IDs, the old41 prefix,28 input hashes and six observations matching pinned constants. Static DATA checks independently confirm actual IDs/rows and all six schema census constants, with no test execution in this review.",
+      "Workflow remains exact one-use push/attempt1, fixed Node22.23.4,3-minute job/10-second cases, read-only contents and sanitized artifact. No SDK/world/HTTP/business work is performed by this tooling graph."
+    ]
+  },
+  "findings": [],
+  "schemaVerificationNote": {
+    "originalWholeNgSchema": false,
+    "pinnedSchema": "33ca2d867e04eb071aa7a0a5b4d3162e3686fce5",
+    "fact": "schema.properties places census last; schema.required, contract.frame and actual canonical instance keys place census before diagnostic flags. Actual required/key order and exact top property sets match; all six census observations match pinned constants.",
+    "assessment": "The Root generic validator adds enumeration-order strictness to schema.properties. JSON Schema property-definition order does not constrain object-instance order. Reordering only that definition mapping to the declared contract order preserves every property constraint, required set and additionalProperties rule.",
+    "acceptedBoundary": "Root reports unchanged-property validations plus an equivalent ordered DATA validation view and canonical original payload. This supports this occurrence without treating the original whole ngSchema result as true. Pinned schema/producer bytes and source hashes remain unchanged; no silent hash rebind or rerun. No Source protocol defect is established by this top-level definition-order mismatch."
+  },
+  "nativeEvidence": {
+    "source": "Immutable Root primary/proof/close; logs and ZIP not refetched",
+    "run": 43929488119,
+    "attempt": 1,
+    "job": 133517776579,
+    "testedHead": "4b7170fb8146b7aa9208f0ae6661a54828955782",
+    "testedTree": "dc889308e50967d561478724c1479a7653cb0aeb",
+    "closedHead": "118d26b32a32d8fe9f71403fbda61c7e486321f1",
+    "native": "47/47 PASS;0 fail/cancel/skip/todo/extra/missing;old41 prefix preserved;28 input hashes",
+    "joins": "Root reports API/head/tree/command/TAP47/proof/input hashes/canonical payload/ZIPCRC+digest+completeDeflate/log-payload joins.",
+    "closure": "Workflow removed, zero close-head runs, Main/historical source unchanged."
+  },
+  "limits": [
+    "PASS means the frozen legacy observer and literal workload controls were faithfully characterized. It does not repair the known same-gap promotion refusal.",
+    "The actual-C CAP_PRIVATE branch and business503 cause remain unknown. Fixed fresh graph capacity does not establish actual-C traffic bounds, safe reset/epoch behavior or selected-scope eligibility.",
+    "Atomic observer fix4 and any capacity witness/public DTO/receiver changes need their separate Root gates. This review authorizes no implementation, new capture, retry, ref or run."
+  ],
+  "method": {
+    "immutableDATAStaticReview": true,
+    "sourceExecutedImportedEvaluatedCompiledOrSyntaxChecked": false,
+    "localFilesDependenciesBuilds": false,
+    "patches": false,
+    "logsZIPRefetched": false,
+    "newRefsRunsOrSubagents": false,
+    "liveResources": false
+  },
+  "observerRepair": false,
+  "sourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
