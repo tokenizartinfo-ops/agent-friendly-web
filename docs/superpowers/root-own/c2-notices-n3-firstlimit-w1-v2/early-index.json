@@ -1,0 +1,93 @@
+{
+  "schema": "root-own.firstlimit-w1.v2-early-index.v1",
+  "status": "EARLY_CAUSAL_FUNCTIONS_AND_LITERAL_GREEN_FULLINPUT_NATIVE_IN_PROGRESS",
+  "rootSeal": "18f7bc92ad395e87042666399e736aa4dffbe278",
+  "supplement": "fea7c4ec837887c87f33720d799fcfa76cdede3f",
+  "paths": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-vectors.json",
+      "blob": "a2457271d8fbc88fd3ecb0cf383ba61ba9f000c6",
+      "bytes": 21315,
+      "sha256": "4f5ffadc2fd12238fa552fe06a1674df74b9acf37f78a516853ddd170ff14286",
+      "gitBlob": "a2457271d8fbc88fd3ecb0cf383ba61ba9f000c6",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-red.json",
+      "blob": "d979ec3c1097fe2c61f89bae6cce018298719a89",
+      "bytes": 3383,
+      "sha256": "cc6f96497c174c0f689bc67042aea3801183c0b9c7c81d6dbe11c58e2ab6e2f6",
+      "gitBlob": "d979ec3c1097fe2c61f89bae6cce018298719a89",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/trace-reader.mjs",
+      "blob": "cc22a79695471862f36c692db7a31e283b4ee46d",
+      "bytes": 20880,
+      "sha256": "5c9ffa269a401b1708d0bc53d03996d14d0d111e74aa6aec0f5274cdfd4b6953",
+      "gitBlob": "cc22a79695471862f36c692db7a31e283b4ee46d",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/early-results.json",
+      "blob": "5232da087e572cdcf7d9961475897af33881f9a9",
+      "bytes": 5680,
+      "sha256": "d80c2541ee3f267f94f169de69decbd8106c661bfe8c2a921b58c898165bebcb",
+      "gitBlob": "5232da087e572cdcf7d9961475897af33881f9a9",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-controls.mjs",
+      "blob": "6dc836a11e28f143b32cb6323a4869947368083f",
+      "bytes": 431,
+      "sha256": "6f16b8e9cc9ef2e0e947946d97c35e437128cea74d5f7236d01c83b5ff8a83aa",
+      "gitBlob": "6dc836a11e28f143b32cb6323a4869947368083f",
+      "fullReadback": true
+    }
+  ],
+  "selfPath": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/early-index.json",
+  "exports": [
+    "w1TraceReplay(snapshot)",
+    "w1CausalReplay(recordObject|canonicalNDJSONstring|UTF8Buffer)",
+    "w1LiteralControls(data,replay)"
+  ],
+  "beforeOwnTrace": "c5efe74261a04e180476650c23a60feb268ca042",
+  "versionedProfile": "V2 live FIRSTLIMIT-W1; old/default v1 stays unchanged, including CAP_PRIVATE",
+  "conditionalSemantics": "Explicit independently checked canonical unjoined/unknown eligible0or1 empty arrays/nullerror-cut/focusnone for4 refined reasons. ngSchema if/then unsupported is never conditional authority; malformed summary will also be checked by full journal replay.",
+  "counts": {
+    "ownPositive": 8,
+    "ownNegative": 20,
+    "sourceMandatoryPositive": 8,
+    "sourceMandatoryNegative": 14,
+    "RAMTotal": 50,
+    "RAMFailed": 0,
+    "oldV1RedDeltas": 9
+  },
+  "coherentTransportPlans": 5,
+  "sourceTruthBoundary": "ROOT16→GAP_NEW128 coherent replacement throughout a producer-shaped input is structurally valid; code correctness/Source callback tests determine actual latched tag, never a historical/business503 cause.",
+  "pending": [
+    "Full input/API/command/4frame/schema/witness/host/custody/strictZIP v2 reader",
+    "Coherent full-input counterexamples and derived NEW fictitious regression fixtures",
+    "Full reversible module diff and final packet",
+    "One-use OWN native runner/WF/proof schema and Root native/review",
+    "Actual Source final manifest/producer/head/tree/run/job caller binding"
+  ],
+  "actualSourceExecution": false,
+  "ownNativeExecuted": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "refsCreated": 0,
+  "runsCreated": 0,
+  "filesCreated": 0,
+  "dependenciesInstalled": 0,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

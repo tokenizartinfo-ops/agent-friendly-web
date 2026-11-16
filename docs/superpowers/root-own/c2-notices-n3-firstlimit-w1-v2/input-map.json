@@ -1,0 +1,16 @@
+{
+  "schema": "root-own.firstlimit-w1.v2-input-map.v1",
+  "export": "w1AllControls(data,sha256,inflateRawSync)",
+  "data": {
+    "own": "literal-vectors.json",
+    "source": "source-mandatory-vectors.json",
+    "derived": "derived-own-regressions.json",
+    "full": "full-input-models.json",
+    "boundary": "boundary-data.json"
+  },
+  "expectedNativeCount": 280,
+  "idsHash": "9cd977b1ba947fcf9fb1e057d67687e3c4ec0f047c082d0b2079bf452d7aad61",
+  "syntheticOnly": true,
+  "actualHistoricalSourceNormalized": false,
+  "actualSourceExecution": false
+}

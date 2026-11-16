@@ -1,0 +1,272 @@
+{
+  "schema": "root-own.firstlimit-w1.v2-early-results.v1",
+  "execution": "Original OWN RAM only; exact versioned causal module, no Source implementation",
+  "own": {
+    "total": 28,
+    "failed": 0,
+    "checks": [
+      {
+        "id": "OWN_W1_CAP_PRIVATE_ROOT16_E0",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN_W1_CAP_PRIVATE_ROOT16_E1",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN_W1_CAP_PRIVATE_GAP_NEW128_E0",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN_W1_CAP_PRIVATE_GAP_NEW128_E1",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN_W1_CAP_PRIVATE_LEASE_NEW128_E0",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN_W1_CAP_PRIVATE_LEASE_NEW128_E1",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN_W1_CAP_PRIVATE_OTHER_E0",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN_W1_CAP_PRIVATE_OTHER_E1",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN_W1_LEGACY_SAME_GAP_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_GENERIC_CAP_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_UNKNOWN_CODE_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_ELIGIBLE2_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_AMBIGUOUS_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_JOINED_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_PREFIX_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_EVENT_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_FIRST_ERROR_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_CUT_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_RAW_EXTRA_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_TARGET_ENTERED_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_ELIGIBLE17_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_FOCUS_SELECTION_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_LEASE_ARRAY_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_PROMISE_ARRAY_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_ERROR_ARRAY_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_FOCUS_CHILD_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_INNER_VERSION2_REJECT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN_W1_FRACTIONAL_ELIGIBLE_REJECT",
+        "pass": true,
+        "accepted": false
+      }
+    ]
+  },
+  "mandatorySourceData": {
+    "total": 22,
+    "failed": 0,
+    "checks": [
+      {
+        "id": "CAP_PRIVATE_ROOT16_0",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "CAP_PRIVATE_ROOT16_1",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "CAP_PRIVATE_GAP_NEW128_0",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "CAP_PRIVATE_GAP_NEW128_1",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "CAP_PRIVATE_LEASE_NEW128_0",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "CAP_PRIVATE_LEASE_NEW128_1",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "CAP_PRIVATE_OTHER_0",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "CAP_PRIVATE_OTHER_1",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "LEGACY_CALIBRATION_EXCLUDED",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "UNREFINED_EXCLUDED",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "UNKNOWN_CODE",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "TWO_ELIGIBLE",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "AMBIGUOUS",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "JOINED",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "PREFIX",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "EVENT_PRESENT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "FIRST_ERROR",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "CUT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "RAW_EXTRA",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "CURRENT_TARGET",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "ELIGIBLE_OUTSIDE",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "BAD_FOCUS",
+        "pass": true,
+        "accepted": false
+      }
+    ]
+  },
+  "total": 50,
+  "failed": 0,
+  "fullInputAndNativePending": true,
+  "actualSourceExecution": false,
+  "SourceQualified": false,
+  "Task1Pass": false
+}

@@ -1,0 +1,789 @@
+{
+  "schema": "root-own.firstlimit-w1.v2-independent-literals.v1",
+  "syntheticOnly": true,
+  "rootSeal": "18f7bc92ad395e87042666399e736aa4dffbe278",
+  "positives": [
+    {
+      "id": "OWN_W1_CAP_PRIVATE_ROOT16_E0",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expected": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Public classification only; no authentication of private refuse site or business failure cause."
+    },
+    {
+      "id": "OWN_W1_CAP_PRIVATE_ROOT16_E1",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 1,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expected": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Public classification only; no authentication of private refuse site or business failure cause."
+    },
+    {
+      "id": "OWN_W1_CAP_PRIVATE_GAP_NEW128_E0",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_GAP_NEW128",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expected": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_GAP_NEW128",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Public classification only; no authentication of private refuse site or business failure cause."
+    },
+    {
+      "id": "OWN_W1_CAP_PRIVATE_GAP_NEW128_E1",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_GAP_NEW128",
+        "eligible": 1,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expected": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_GAP_NEW128",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Public classification only; no authentication of private refuse site or business failure cause."
+    },
+    {
+      "id": "OWN_W1_CAP_PRIVATE_LEASE_NEW128_E0",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEASE_NEW128",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expected": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEASE_NEW128",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Public classification only; no authentication of private refuse site or business failure cause."
+    },
+    {
+      "id": "OWN_W1_CAP_PRIVATE_LEASE_NEW128_E1",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEASE_NEW128",
+        "eligible": 1,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expected": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEASE_NEW128",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Public classification only; no authentication of private refuse site or business failure cause."
+    },
+    {
+      "id": "OWN_W1_CAP_PRIVATE_OTHER_E0",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_OTHER",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expected": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_OTHER",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Public classification only; no authentication of private refuse site or business failure cause."
+    },
+    {
+      "id": "OWN_W1_CAP_PRIVATE_OTHER_E1",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_OTHER",
+        "eligible": 1,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expected": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_OTHER",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Public classification only; no authentication of private refuse site or business failure cause."
+    }
+  ],
+  "negatives": [
+    {
+      "id": "OWN_W1_LEGACY_SAME_GAP_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEGACY_SAME_GAP128",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_GENERIC_CAP_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_UNKNOWN_CODE_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT17",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_ELIGIBLE2_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 2,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_AMBIGUOUS_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "ambiguous",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_JOINED_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "complete",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_PREFIX_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "prefix",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_EVENT_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_FIRST_ERROR_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": 1,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_CUT_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": 1
+      }
+    },
+    {
+      "id": "OWN_W1_RAW_EXTRA_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null,
+        "privateRef": "OWN_SYNTHETIC_PRIVACY_SENTINEL"
+      }
+    },
+    {
+      "id": "OWN_W1_TARGET_ENTERED_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "entered",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_ELIGIBLE17_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 17,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_FOCUS_SELECTION_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "first-observed"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_LEASE_ARRAY_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [
+          {
+            "ordinal": 1,
+            "role": "root",
+            "parent": null,
+            "firstClose": null
+          }
+        ],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_PROMISE_ARRAY_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [
+          {
+            "ordinal": 1,
+            "lease": 1,
+            "retained": null,
+            "settlement": null
+          }
+        ],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_ERROR_ARRAY_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [
+          {
+            "ordinal": 1,
+            "first": 1
+          }
+        ],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_FOCUS_CHILD_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": 1,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_INNER_VERSION2_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v2",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    },
+    {
+      "id": "OWN_W1_FRACTIONAL_ELIGIBLE_REJECT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0.5,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      }
+    }
+  ],
+  "coherentPlans": [
+    {
+      "id": "OWN_W1_SUMMARY_DISAGREES",
+      "expectedAccepted": false,
+      "recordReason": "CAP_PRIVATE_ROOT16",
+      "summaryReason": "CAP_PRIVATE_GAP_NEW128"
+    },
+    {
+      "id": "OWN_W1_OLD_SELECTION_ALL_LAYERS",
+      "expectedAccepted": false,
+      "selectionHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c"
+    },
+    {
+      "id": "OWN_W1_OLD_JOB_ALL_LAYERS",
+      "expectedAccepted": false,
+      "job": "c2-notices-n3"
+    },
+    {
+      "id": "OWN_W1_OLD_OUTER",
+      "expectedAccepted": false,
+      "schema": "afw.c2-notices-n3.observation.v1"
+    },
+    {
+      "id": "OWN_W1_COHERENT_ROOT_TO_GAP_SUBSTITUTION_IS_VALID",
+      "expectedAccepted": true,
+      "recordReason": "CAP_PRIVATE_GAP_NEW128",
+      "summaryReason": "CAP_PRIVATE_GAP_NEW128",
+      "meaning": "A complete coherent producer-shaped substitution is structurally valid; OWN cannot authenticate which Source site latched the code."
+    }
+  ],
+  "historicalActualInputsUsed": false,
+  "actualSourceExecution": false,
+  "SourceQualified": false,
+  "Task1Pass": false
+}

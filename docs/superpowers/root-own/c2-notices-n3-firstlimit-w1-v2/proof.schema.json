@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "root-own.firstlimit-w1.v2-native-proof.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "nomination",
+    "context",
+    "bindings",
+    "selection",
+    "results",
+    "profile",
+    "ownModelsExecuted",
+    "actualSourceExecution",
+    "finalSourceBinding",
+    "SourceQualified",
+    "Task1Pass",
+    "nonclaims"
+  ],
+  "properties": {
+    "schema": {
+      "const": "root-own.firstlimit-w1.v2-native-proof.v1"
+    },
+    "nomination": {
+      "const": "AFW-C2-N3-FIRSTLIMIT-W1-OWN-V2-ONEUSE-20261116"
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "branch",
+        "workflow",
+        "job",
+        "baselineSource",
+        "baselineTree",
+        "head",
+        "tree",
+        "runId",
+        "runAttempt",
+        "node",
+        "startedAt",
+        "completedAt"
+      ],
+      "properties": {
+        "repository": {
+          "const": "tokenizartinfo-ops/agent-friendly-web"
+        },
+        "branch": {
+          "const": "lab/afw-c2-own-receiver-20261116-notices-n3-firstlimit-w1-v2"
+        },
+        "workflow": {
+          "const": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-own-v2.yml"
+        },
+        "job": {
+          "const": "c2-notices-n3-firstlimit-w1-own-v2"
+        },
+        "baselineSource": {
+          "const": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        },
+        "baselineTree": {
+          "const": "62e78926635d6b74f288d6c0d69e0f2516306989"
+        },
+        "head": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "runId": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "runAttempt": {
+          "const": 1
+        },
+        "node": {
+          "const": "v22.23.4"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runnerHash",
+        "workflowHash",
+        "closureHash",
+        "selectionHash",
+        "proofSchemaHash",
+        "inputMapHash"
+      ],
+      "properties": {
+        "runnerHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "workflowHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "closureHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "selectionHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "proofSchemaHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "inputMapHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "idsHash"
+      ],
+      "properties": {
+        "count": {
+          "const": 280
+        },
+        "idsHash": {
+          "const": "9cd977b1ba947fcf9fb1e057d67687e3c4ec0f047c082d0b2079bf452d7aad61"
+        }
+      }
+    },
+    "results": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "passed",
+        "failed",
+        "skipped",
+        "todo",
+        "cancelled",
+        "extra",
+        "missing",
+        "duplicate",
+        "ordered"
+      ],
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 280
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 280
+        },
+        "skipped": {
+          "const": 0
+        },
+        "todo": {
+          "const": 0
+        },
+        "cancelled": {
+          "const": 0
+        },
+        "extra": {
+          "const": 0
+        },
+        "missing": {
+          "const": 0
+        },
+        "duplicate": {
+          "const": 0
+        },
+        "ordered": {
+          "const": true
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outer",
+        "innerSnapshot",
+        "innerRecord",
+        "selectionHash",
+        "ownLiterals",
+        "mandatorySourceData",
+        "ownSyntheticRegressions",
+        "fullInputs",
+        "boundaryControls",
+        "payloadCapIncludingLF",
+        "defaultV1Frozen",
+        "producerTruthAuthenticated"
+      ],
+      "properties": {
+        "outer": {
+          "const": "afw.c2-notices-n3.observation.v2"
+        },
+        "innerSnapshot": {
+          "const": "afw.c2-notices-n3.qa-snapshot.v1"
+        },
+        "innerRecord": {
+          "const": "afw.c2-notices-n3.causal-record.v1"
+        },
+        "selectionHash": {
+          "const": "b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503"
+        },
+        "ownLiterals": {
+          "const": 28
+        },
+        "mandatorySourceData": {
+          "const": 22
+        },
+        "ownSyntheticRegressions": {
+          "const": 155
+        },
+        "fullInputs": {
+          "const": 65
+        },
+        "boundaryControls": {
+          "const": 10
+        },
+        "payloadCapIncludingLF": {
+          "const": 24576
+        },
+        "defaultV1Frozen": {
+          "const": true
+        },
+        "producerTruthAuthenticated": {
+          "const": false
+        }
+      }
+    },
+    "ownModelsExecuted": {
+      "const": true
+    },
+    "actualSourceExecution": {
+      "const": false
+    },
+    "finalSourceBinding": {
+      "const": false
+    },
+    "SourceQualified": {
+      "const": false
+    },
+    "Task1Pass": {
+      "const": false
+    },
+    "nonclaims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "historicalCauseProven",
+        "receiptAuthenticated",
+        "operationalReadiness",
+        "completePackage",
+        "PCoff",
+        "globalNativeDrainVerified",
+        "sdkNamespaceEmptyVerified"
+      ],
+      "properties": {
+        "historicalCauseProven": {
+          "const": false
+        },
+        "receiptAuthenticated": {
+          "const": false
+        },
+        "operationalReadiness": {
+          "const": false
+        },
+        "completePackage": {
+          "const": false
+        },
+        "PCoff": {
+          "const": false
+        },
+        "globalNativeDrainVerified": {
+          "const": false
+        },
+        "sdkNamespaceEmptyVerified": {
+          "const": false
+        }
+      }
+    }
+  }
+}
