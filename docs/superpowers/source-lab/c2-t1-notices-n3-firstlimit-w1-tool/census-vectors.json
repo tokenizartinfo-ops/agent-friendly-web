@@ -1,0 +1,373 @@
+{
+  "schema": "afw.c2-notices-n3.r4-candidate-census-vectors.v1",
+  "authority": "9b4fb9eb4672847f6e5c8613c34f337569262ff1",
+  "status": "CANDIDATE_EXPECTED_NATIVE_PENDING",
+  "frozen": {
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "units": "e987e103122b3318638d7a5e57bd6e41df81cd8d"
+  },
+  "ids": [
+    "N3_CORE_CONTROLS",
+    "N3_CAUSAL_LITERALS",
+    "N3_TIMEOUT_PREFIX_CONTROLS",
+    "N3_AXIS_LITERALS",
+    "N3_SCHEMA_SELECTION_CONSTS",
+    "N3_NOTE_SYNC_NO_RPC",
+    "N3_ORIGINAL_NULL",
+    "N3_ORIGINAL_UNDEFINED",
+    "N3_ORIGINAL_FALSE",
+    "N3_ORIGINAL_ZERO",
+    "N3_ORIGINAL_EMPTY_STRING",
+    "N3_ORIGINAL_OBJECT",
+    "N3_PROMISE_IDENTITY",
+    "N3_EXISTING_SETTLED_HANDLER",
+    "N3_ROOT_IDENTITY",
+    "N3_REALM_RESET",
+    "N3_CROSS_SCOPE_LEASE",
+    "N3_SHARED_PROMISE",
+    "N3_NULL_BOUND_REF",
+    "N3_PREBIND_GAP",
+    "N3_PAIR_FORK",
+    "N3_FIRST_TARGET_ONLY",
+    "N3_SCOPE_ERROR_A_CHILD_B",
+    "N3_REPEATED_CLOSE",
+    "N3_CUT_LATE_SETTLEMENT",
+    "N3_SINK_FAULT",
+    "N3_PRIVATE_CAP",
+    "N3_SNAPSHOT_CAP",
+    "N3_WORST_SIZE",
+    "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+    "N3_ABORT_NESTED_OBSERVER_ORDER",
+    "N3_BOUND_PAIR_COVERAGE",
+    "N3_PREPAIR_FAILURE_AND_UNBOUND",
+    "N3_ACTUAL_CHILD_ABORT_MATRIX",
+    "N3_ACTUAL_PARENT_ABORT_MATRIX",
+    "N3_NESTED_ABORT_ORDER",
+    "N3_UNREACHED_ACTIVATION",
+    "N3_ORIGINAL_RACE_AXES",
+    "N3_ORIGINAL_REDUCER_CALLBACKS",
+    "N3_REVERSIBLES",
+    "N3_MAX_ENVELOPE_SIZE",
+    "N3_CENSUS_ROOT17",
+    "N3_CENSUS_IDENTITY129",
+    "N3_CENSUS_GAP_PROMOTION_AT128",
+    "N3_CENSUS_PROBE_BEFORE_ELIGIBLE",
+    "N3_CENSUS_FRESH_GET_POST_BOUNDS",
+    "N3_CENSUS_REPEAT_AND_HONEST_CAP"
+  ],
+  "limits": {
+    "roots": 16,
+    "leasePlusGap": 128,
+    "promises": 64,
+    "opaqueErrors": 64,
+    "storedEvents": 256,
+    "metadataBytes": 65536,
+    "selectedEvents": 24,
+    "recordBytes": 6144,
+    "caseMs": 10000,
+    "jobMinutes": 3,
+    "proofBytes": 24576,
+    "inputNotesPerCase": 4096
+  },
+  "countSemantics": "createdRefs are actual distinct objects returned by original root/clock/child/work callbacks in this finite tooling workload. pairBindings and unresolvedClocks are nominated DTO stimuli, not claimed private accepted counts. notes count actual retained/settlement hook invocations; callbacks never count as distinct identities. None is an inferred actual-C census.",
+  "cases": [
+    {
+      "id": "N3_CENSUS_ROOT17",
+      "breakCaught": "Ignoring the16-root limit or prematurely discarding root registrations would stop reproducing the legacy refusal.",
+      "topology": "17 original requestLease factories; no scope binding; same ledger. Snapshot after16 and17; finish every original root.",
+      "createdRefs": {
+        "roots": 17,
+        "clocks": 0,
+        "children": 0,
+        "workPromises": 0
+      },
+      "stimuli": {
+        "pairBindings": 0,
+        "unresolvedClocks": 0
+      },
+      "notes": {
+        "retained": 0,
+        "settlements": 0
+      },
+      "snapshots": [
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "NO_ELIGIBLE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        },
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "CAP_PRIVATE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        }
+      ],
+      "checks": [
+        "DISTINCT_ROOTS",
+        "LEGACY_ROOT17_REFUSED",
+        "NO_ELIGIBILITY"
+      ],
+      "futureGapPromotionJoined": null
+    },
+    {
+      "id": "N3_CENSUS_IDENTITY129",
+      "breakCaught": "Counting repeated callbacks as identities or changing combined admission128 would alter the literal boundary.",
+      "topology": "One original root +63 bound original other-pair factory clocks +64 distinct unbound original clocks=128 actual anchors; repeat each unbound close3times (same refs folded); bind one genuinely new64th pair clock=129. Close all clocks/root.",
+      "createdRefs": {
+        "roots": 1,
+        "clocks": 128,
+        "children": 0,
+        "workPromises": 0
+      },
+      "stimuli": {
+        "pairBindings": 64,
+        "unresolvedClocks": 64
+      },
+      "notes": {
+        "retained": 0,
+        "settlements": 0
+      },
+      "snapshots": [
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "NO_ELIGIBLE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        },
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "CAP_PRIVATE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        }
+      ],
+      "checks": [
+        "DISTINCT_IDENTITY129",
+        "SAME_ANCHOR_FOLDED",
+        "LEGACY_NEW_IDENTITY_REFUSED"
+      ],
+      "futureGapPromotionJoined": null
+    },
+    {
+      "id": "N3_CENSUS_GAP_PROMOTION_AT128",
+      "breakCaught": "Candidate rejects an exact pending gap at full occupancy or silently reports complete after missed relevant observations.",
+      "topology": "One original root +63 bound other-pair clocks +64 distinct unbound clocks=128 anchors. Promote first actual unbound clock as outer of SAME root, then attempt notices scope bind. No consumeFiniteOwnerStageAdmission or PH business executes; this is deliberate DTO input only.",
+      "createdRefs": {
+        "roots": 1,
+        "clocks": 127,
+        "children": 0,
+        "workPromises": 0
+      },
+      "stimuli": {
+        "pairBindings": 63,
+        "unresolvedClocks": 64
+      },
+      "notes": {
+        "retained": 0,
+        "settlements": 0
+      },
+      "snapshots": [
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "NO_ELIGIBLE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        },
+        {
+          "state": "joined",
+          "coverage": "prefix",
+          "reason": "PREBIND_GAP",
+          "eligible": 1,
+          "events": 1,
+          "cut": 1
+        }
+      ],
+      "checks": [
+        "SAME_REF_PROMOTION",
+        "NET_NEW_IDENTITIES_ZERO",
+        "CANDIDATE_PROMOTION_JOINED",
+        "NO_NATIVE_ADMISSION"
+      ],
+      "futureGapPromotionJoined": true,
+      "futureDesired": {
+        "assertion": "same-ref gap promotion permits a joined synthetic DTO scope without increasing occupancy128",
+        "desired": true,
+        "legacyExpected": false,
+        "status": "DESIRED_CANDIDATE_EXPECTED_GREEN_NOT_EXECUTED"
+      },
+      "retainedPrefixControls": [
+        "N3_CROSS_SCOPE_LEASE",
+        "N3_PAIR_FORK",
+        "N3_SHARED_PROMISE"
+      ]
+    },
+    {
+      "id": "N3_CENSUS_PROBE_BEFORE_ELIGIBLE",
+      "breakCaught": "Making zeroeligible snapshot reset pools or consume a cut would alter prefix stability or the later17th-root refusal.",
+      "topology": "16 original root objects, snapshot twice with no eligible scope; create17th original root and snapshot. No explicit reset/epoch exists.",
+      "createdRefs": {
+        "roots": 17,
+        "clocks": 0,
+        "children": 0,
+        "workPromises": 0
+      },
+      "stimuli": {
+        "pairBindings": 0,
+        "unresolvedClocks": 0
+      },
+      "notes": {
+        "retained": 0,
+        "settlements": 0
+      },
+      "snapshots": [
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "NO_ELIGIBLE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        },
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "NO_ELIGIBLE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        },
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "CAP_PRIVATE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        }
+      ],
+      "checks": [
+        "ZERO_ELIGIBLE_CUT_NULL",
+        "SNAPSHOT_PREFIX_STABLE",
+        "SNAPSHOT_DID_NOT_RESET"
+      ],
+      "futureGapPromotionJoined": null
+    },
+    {
+      "id": "N3_CENSUS_FRESH_GET_POST_BOUNDS",
+      "breakCaught": "Accidentally treating routine non-target children or duplicate notes as eligible resource allocations would exhaust or join this declared finite graph.",
+      "topology": "Two original roots labelled GET then POST only in test. Per root:1 bound outer,3 bound other-pair clocks,2 original child(work) calls per pair. Work returns12 actual promises total. Await each original child; close clocks/root. NO scope bind, admission, PH, business request or HTTP call.",
+      "createdRefs": {
+        "roots": 2,
+        "clocks": 8,
+        "children": 12,
+        "workPromises": 12
+      },
+      "stimuli": {
+        "pairBindings": 6,
+        "unresolvedClocks": 0
+      },
+      "notes": {
+        "retained": 24,
+        "settlements": 24
+      },
+      "snapshots": [
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "NO_ELIGIBLE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        }
+      ],
+      "checks": [
+        "DECLARED_GRAPH_ONLY",
+        "NO_PRIVATE_CAP",
+        "NO_NATIVE_ELIGIBILITY",
+        "ORIGINAL_CHILD_PROMISES"
+      ],
+      "futureGapPromotionJoined": null,
+      "scopeLimit": "This only establishes capacity for this finite declared DTO graph. It is NOT an exact census or upper bound for actual C, proof of HTTP success/eligibility, or authorization/safety proof for an epoch/reset."
+    },
+    {
+      "id": "N3_CENSUS_REPEAT_AND_HONEST_CAP",
+      "breakCaught": "Replacing original settled callbacks, changing true/false delete results, treating repeated retention as new identities, or hiding actual cap would break this characterization.",
+      "topology": "One original root +bound outer, one original child returning a Promise subclass that records SAME existing settled callbacks/results. No new observer reaction is installed. Then create16 more original roots to reach17; retain legacy cap/unknown. Existing prefix ORIGINAL_RACE_AXES supplies separate real logical/target race coverage.",
+      "createdRefs": {
+        "roots": 17,
+        "clocks": 1,
+        "children": 1,
+        "workPromises": 1
+      },
+      "stimuli": {
+        "pairBindings": 0,
+        "unresolvedClocks": 0
+      },
+      "notes": {
+        "retained": 2,
+        "settlements": 2
+      },
+      "snapshots": [
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "NO_ELIGIBLE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        },
+        {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "CAP_PRIVATE",
+          "eligible": 0,
+          "events": 0,
+          "cut": null
+        }
+      ],
+      "checks": [
+        "SAME_PROMISE_RETAINED_TWICE",
+        "ORIGINAL_SETTLED_RETURNS_TRUE_FALSE",
+        "HONEST_CAP_UNKNOWN",
+        "NO_EVENT_OR_ERROR_ABSENCE_CLAIM"
+      ],
+      "futureGapPromotionJoined": null,
+      "axesCoveredByPrefix": "N3_ORIGINAL_RACE_AXES"
+    }
+  ],
+  "expectedNative": {
+    "cases": 47,
+    "pass": 47,
+    "fail": 0,
+    "skip": 0,
+    "todo": 0,
+    "cancel": 0,
+    "extra": 0,
+    "missing": 0
+  },
+  "expectedMeaning": "The candidate six cases preserve all five unaffected census expectations and exercise a synthetic-scope DTO join only on exact net-zero promotion.",
+  "actualExecution": "PENDING_ROOT_CLOUD",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

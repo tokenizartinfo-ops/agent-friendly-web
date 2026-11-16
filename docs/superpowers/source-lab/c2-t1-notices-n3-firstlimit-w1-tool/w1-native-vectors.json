@@ -1,0 +1,200 @@
+{
+  "schema": "afw.c2-notices-n3.firstlimit-native-vectors.v1",
+  "rootSeal": "18f7bc92ad395e87042666399e736aa4dffbe278",
+  "supplement": "fea7c4ec837887c87f33720d799fcfa76cdede3f",
+  "sourceLiterals": "bd8bfae45c75ce498aab5a6bbb7258cdec185e0a",
+  "atomicTestFirst": "d21ab3437f7a8057ccc8c3bfa2c08c246464bad8",
+  "beforeNative": [
+    "BEFORE_R4_EXACT_RELEVANT",
+    "BEFORE_R4_OTHER_ERROR",
+    "BEFORE_R4_OTHER_CLEAN"
+  ],
+  "greenIds": [
+    "N3_CORE_CONTROLS",
+    "N3_CAUSAL_LITERALS",
+    "N3_TIMEOUT_PREFIX_CONTROLS",
+    "N3_AXIS_LITERALS",
+    "N3_SCHEMA_SELECTION_CONSTS",
+    "N3_NOTE_SYNC_NO_RPC",
+    "N3_ORIGINAL_NULL",
+    "N3_ORIGINAL_UNDEFINED",
+    "N3_ORIGINAL_FALSE",
+    "N3_ORIGINAL_ZERO",
+    "N3_ORIGINAL_EMPTY_STRING",
+    "N3_ORIGINAL_OBJECT",
+    "N3_PROMISE_IDENTITY",
+    "N3_EXISTING_SETTLED_HANDLER",
+    "N3_ROOT_IDENTITY",
+    "N3_REALM_RESET",
+    "N3_CROSS_SCOPE_LEASE",
+    "N3_SHARED_PROMISE",
+    "N3_NULL_BOUND_REF",
+    "N3_PREBIND_GAP",
+    "N3_PAIR_FORK",
+    "N3_FIRST_TARGET_ONLY",
+    "N3_SCOPE_ERROR_A_CHILD_B",
+    "N3_REPEATED_CLOSE",
+    "N3_CUT_LATE_SETTLEMENT",
+    "N3_SINK_FAULT",
+    "N3_PRIVATE_CAP",
+    "N3_SNAPSHOT_CAP",
+    "N3_WORST_SIZE",
+    "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+    "N3_ABORT_NESTED_OBSERVER_ORDER",
+    "N3_BOUND_PAIR_COVERAGE",
+    "N3_PREPAIR_FAILURE_AND_UNBOUND",
+    "N3_ACTUAL_CHILD_ABORT_MATRIX",
+    "N3_ACTUAL_PARENT_ABORT_MATRIX",
+    "N3_NESTED_ABORT_ORDER",
+    "N3_UNREACHED_ACTIVATION",
+    "N3_ORIGINAL_RACE_AXES",
+    "N3_ORIGINAL_REDUCER_CALLBACKS",
+    "N3_REVERSIBLES",
+    "N3_MAX_ENVELOPE_SIZE",
+    "N3_CENSUS_ROOT17",
+    "N3_CENSUS_IDENTITY129",
+    "N3_CENSUS_GAP_PROMOTION_AT128",
+    "N3_CENSUS_PROBE_BEFORE_ELIGIBLE",
+    "N3_CENSUS_FRESH_GET_POST_BOUNDS",
+    "N3_CENSUS_REPEAT_AND_HONEST_CAP",
+    "R4_EXACT_RELEVANT",
+    "R4_OTHER_ERROR",
+    "R4_OTHER_CLEAN",
+    "R4_NO_BORROW_AND_STICKY",
+    "R4_VALIDATION",
+    "R4_BELOW_AND_DEFAULT",
+    "W1_ROOT16_FIRST_FAULT",
+    "W1_GAP_NEW128",
+    "W1_LEASE_NEW128",
+    "W1_LEGACY_SAME_GAP_CALIBRATION",
+    "W1_OTHER_PRIVATE_CUT",
+    "W1_PRECEDENCE_AND_DEFAULT",
+    "W1_EXISTING_PROBE_METHOD",
+    "W1_REPLAY_LITERAL_GRID",
+    "W1_COHERENT_PROFILE"
+  ],
+  "expected": {
+    "beforeTests": 3,
+    "beforePass": 0,
+    "beforeFail": 3,
+    "greenTests": 62,
+    "greenPass": 62,
+    "greenFail": 0,
+    "cancel": 0,
+    "skip": 0,
+    "todo": 0
+  },
+  "cases": [
+    {
+      "id": "W1_ROOT16_FIRST_FAULT",
+      "checks": [
+        "ORIGINAL_17_ROOTS",
+        "ROOT16_SURVIVES_LATER_CAP",
+        "DEFAULT_CAP_PRIVATE",
+        "NO_SELECTED_SCOPE"
+      ]
+    },
+    {
+      "id": "W1_GAP_NEW128",
+      "checks": [
+        "ORIGINAL_129_UNRESOLVED_CLOCKS",
+        "GAP_NEW128",
+        "DEFAULT_CAP_PRIVATE"
+      ]
+    },
+    {
+      "id": "W1_LEASE_NEW128",
+      "checks": [
+        "ORIGINAL_128_BOUND_ANCHORS",
+        "NEW_129_REFUSED",
+        "LEASE_NEW128"
+      ]
+    },
+    {
+      "id": "W1_LEGACY_SAME_GAP_CALIBRATION",
+      "checks": [
+        "OLD_D9_TRANSFER_REJECTED",
+        "CALIBRATION_SAME_GAP",
+        "CANDIDATE_PROMOTION_PREFIX",
+        "LIVE_REJECTS_CALIBRATION_TAG"
+      ]
+    },
+    {
+      "id": "W1_OTHER_PRIVATE_CUT",
+      "checks": [
+        "ELIGIBLE_65_ERRORS",
+        "OTHER_PRIVATE",
+        "CUT4096_ALLOWED",
+        "NEXT_CUT_OTHER",
+        "DEFAULT_CAP_PRIVATE"
+      ]
+    },
+    {
+      "id": "W1_PRECEDENCE_AND_DEFAULT",
+      "checks": [
+        "EARLIER_NONCAP_PRESERVED",
+        "AMBIGUITY_FIRST",
+        "TWO_ELIGIBLE_FIRST",
+        "SUCCESSIVE_SINGLE_CUT",
+        "DEFAULT_API"
+      ]
+    },
+    {
+      "id": "W1_EXISTING_PROBE_METHOD",
+      "checks": [
+        "EXISTING_LIST_ALARM_PROBE",
+        "SOURCE_CALL_SITE_AFTER_ALARM",
+        "ONE_PROJECTION_PER_CALL",
+        "NO_DEFAULT_CALL",
+        "REVERSIBLE"
+      ]
+    },
+    {
+      "id": "W1_REPLAY_LITERAL_GRID",
+      "checks": [
+        "EIGHT_ACCEPT",
+        "FOURTEEN_REJECT",
+        "EMPTY_SUMMARY_EXACT",
+        "WORST_ENVELOPE_LIMIT",
+        "V1_DEFAULT_SEPARATE"
+      ]
+    },
+    {
+      "id": "W1_COHERENT_PROFILE",
+      "checks": [
+        "FOUR_COHERENT_REJECT",
+        "ALL_REASON_SUBSTITUTION_STRUCTURALLY_VALID",
+        "REAL_NDJSON_WITNESS",
+        "VERSION_SELECTION_JOB_AND_SUMMARY"
+      ]
+    }
+  ],
+  "limits": {
+    "roots": 16,
+    "leasePlusGap": 128,
+    "promises": 64,
+    "opaqueErrors": 64,
+    "storedEvents": 256,
+    "metadataBytes": 65536,
+    "selectedEvents": 24,
+    "recordBytes": 6144,
+    "caseMs": 10000,
+    "jobMinutes": 3,
+    "proofBytes": 24576,
+    "inputNotesPerCase": 4096
+  },
+  "phase": "Literal native controls before witness code. Positive, negative and transport mutations preserved in the Root-sealed W interface. Tooling simulates synthetic DTO admission only.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "originalTestFirst": "84812d0e63fd6f204f9d789bad0f0821950f2250",
+  "supplementOnly": "This metadata update binds the two artifact names and paths. The RED/GREEN IDs, workloads, checks and expected counts are the original pre-code literals."
+}
