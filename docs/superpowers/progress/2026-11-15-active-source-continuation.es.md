@@ -88,7 +88,15 @@ Evidencia completa saneada ef9ab21507a89650ce9c267f2d12ad8d852a3607 (docs/superp
 
 Proposal-green agotó180s: CAPTURE_INVALID, timeout, exit1/signalnone,17606B stdoutSHA2eedd76c89cfd3bbb1b68b5b628c91fbe56b45fdaa45db3892b793fb8f17bbcb, stderr0. No casos/totales completos aceptados ni caso culpable conocido. Mutant/regresiones no aceptados,0recibo/artefacto. Custodia4launches/4procesos/preflight/remocióntrue parcial; no6launches. No inferir Cloudflare/clave/caso/predicado causal.
 
-ACTIVO re-review metodológico /root/c2_baseline_protocol_review, brief dc16e2f63253bca1cefb7138b7fa4e076ae3e4ab. Examinar fix de contrato/parser y pruebas reales, ambos veredictos spec/calidad, y recomendar observación mínima para localizar ejecución green pendiente. No relajar20/20/11 ni ampliarcaps ni cambios de producto por conjetura. Autor v2 idle. Task1 SourceQualified/Task1Pass false, Task2 aún no despachado. Todos6labs cerrados. Root sigue bloque diagnóstico reversible dentro de autorización; owner no disponible antes08:30Argentina.
+Re-review metodológico terminado4407b6a936cf2320bd3581e416bcb3aeee4eb63b, spec/calidad REQUIRES CHANGES; hallazgos originales cobertura/testigo resueltos. Nuevos: exact-key join(',') acepta alias de trescontadores y parser aplica reglas más débiles que Root. BASE3 real permanece válido; ninguno prueba causa del timeout. Examinar fix de contrato/parser y pruebas reales, ambos veredictos spec/calidad, y recomendar observación mínima para localizar ejecución green pendiente. No relajar20/20/11 ni ampliarcaps ni cambios de producto por conjetura. Autor v2 idle. Task1 SourceQualified/Task1Pass false, Task2 aún no despachado. Todos6labs cerrados. Root sigue bloque diagnóstico reversible dentro de autorización; owner no disponible antes08:30Argentina.
+
+### ACTIVO protocolo fix1/5 + observador green
+
+Root aceptó dos hallazgos en ruling5e0aace992d3b64a755daaba5c898ef895f4e4ca; brief0ddd62ffa45b595b6790d789adcf2e8318c789c0. Autor /root/c2_source_v2_protocol_impl (Astra/high) resume: Source-side exactkeys por arrays/longitud, jerarquía de contadores en20 y niveles green1/2/3 enprimeros17, pruebas sintéticas negativas previas. No cambia13f9, clocks/caps ni reglas20/20/11. Receptor Root se corregirá por autor independiente después, sin implementaciones paralelas.
+
+Nuevo diagnóstico SOLOgreen20 íntegro: rama nominada lab/afw-c2-source-20261116-t1-green-diag1; WF .github/workflows/afw-c2-green-diag1.yml/jobc2-green-diag1; oneuseAFW-C2-SOURCE-T1-GREEN-DIAG1-ONEUSE-20261116. DATA pendiente, sin ref/run. Driver observador separado preservará work/awaits/orden/errores deS07, journal propio<=32768B/128records con entradas/salidas/throws action,counter,after+elapsed/seq y cursor/parcial honesto antes de cleanup incluso timeout. Sin rawTAP/privados/extraacciones. Mismoscaps330s/180s/120s/7min, custodia3launches preflight+ENOENT+green. NuncaSourcePASS por ese diagnóstico. ProtocoloSourcev2-fix1 futuroDATA separado, no próximoensayo.
+
+Round1/5 pendiente pruebas cloud y re-review:0 addressed verificados/2open. No ejecutar nueva cualificación ni cambiar producto por hipótesis. Root preserva cierre previo y seguirá con receptor independiente/gate/diagnóstico al recibirpaquetes.
 
 ## Orden restante
 
