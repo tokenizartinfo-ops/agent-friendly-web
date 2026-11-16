@@ -1,0 +1,31 @@
+{
+  "schema": "afw.c2-notices-n3.root-tooling-close-proof.v1",
+  "atUTC": "2026-11-16 16:03:31 UTC",
+  "head": "91007717f3c5a2db7a3e28e1f8493b8ec6ebce3e",
+  "tree": "265bce2f044f0ae58681d349a6ab7652ef16f5ec",
+  "testedHead": "eb9c875e7e465c69aece7026cd6434ff0e71e522",
+  "workflowRemoved": true,
+  "originals": 3203,
+  "leaves": 3231,
+  "primary": "2c556a2e8083ce2d83a49029991724d73e817187",
+  "closeReceipt": "0d1fab17270eb232beea367d347a286da8a33ac6",
+  "branch": "lab/afw-c2-source-20261116-notices-n3-controls",
+  "runId": 43901818639,
+  "jobId": 133420132559,
+  "native": {
+    "pass": 6,
+    "fail": 35,
+    "skip": 0,
+    "todo": 0,
+    "cancel": 0
+  },
+  "rawLogsConsumedOnce": true,
+  "artifactDownloadedOnce": true,
+  "closeHeadRuns": 0,
+  "mainAndHistoricalUnchanged": true,
+  "sourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "next": "Original writer scoped fix round2/5, literal/text diagnosis before change; no unchanged rerun or C."
+}
