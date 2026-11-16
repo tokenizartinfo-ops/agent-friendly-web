@@ -1,6 +1,6 @@
 {
   "schema": "afw.c2-notices-n2.root-static-checkpoint.v1",
-  "atUTC": "2026-11-16 17:38:18 UTC",
+  "atUTC": "2026-11-16 18:48:44 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "environment": "immutable Git DATA / Root docs",
@@ -185,7 +185,7 @@
     "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
     "builderCheck": "9741a68b848456032da812ecd0a29d71d8d2d5c4",
     "sourceBrief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
-    "status": "OWN527-native527PASS-review-SourceC-ready-inactive",
+    "status": "N3-admission-repair4-atomic-active-witness-interface-held",
     "rootBinding": "nullable only actual already-bound lease/promise, gaps unjoined",
     "focus": "selected-first-target-focus; scope-first-error independent",
     "earlySeal": "8a9d366868d4be5593866637417c356bf4783e1d",
@@ -271,7 +271,7 @@
       }
     },
     "finalSourceBinding": false,
-    "actualSourceExecution": false,
+    "actualSourceExecution": true,
     "SourceQualified": false,
     "Task1Pass": false,
     "sourceProducerDataActive": false,
@@ -308,7 +308,71 @@
     "sourceCCandidate": "07d7389f7aab1ef7c5e6a5311b6109bf2d9615b8",
     "sourceCManifest": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
     "sourceCManifestCanonicalHash": "44a2527e1a54cb79a6feec9a04a996ad1b288a35117763e2037c7e8d64cf18f8",
-    "sourceCActualPending": true,
-    "ownerActionNeeded": false
+    "sourceCActualPending": false,
+    "ownerActionNeeded": false,
+    "sourceCActual": {
+      "head": "07d7389f7aab1ef7c5e6a5311b6109bf2d9615b8",
+      "tree": "a6ab721daf9ceecb2f9cd47f1f8e14e8ddf1e034",
+      "branch": "lab/afw-c2-source-20261116-t1-notices-n3",
+      "gate": "aa7e24f487eca282d4b0ab78896ee555b6ce2be0",
+      "actualPending": false,
+      "attempt": 1,
+      "run": 43921222041,
+      "job": 133488709833,
+      "primary": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+      "outcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+      "closed": "9e58ccb94c046e23ed83b3b60be86eaffb7e6480",
+      "closeProof": "0638c9c5634c36b60835c12eb9153af4297d183e",
+      "admitted": true,
+      "native": {
+        "pass": 3,
+        "fail": 1
+      },
+      "causal": "unjoined/unknown/CAP_PRIVATE"
+    },
+    "sourceCClosed": true,
+    "sourceCOutcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+    "sourceCPrimary": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+    "sourceCReview": "3045f1e9396e725be555aaa95f2d08830f6ec37b",
+    "capCensus": {
+      "packet": "7e422153658322797ea05adba3b1a519b8ec728a",
+      "index": "eddf0e03c94817509f02a334a8e73844728538f1",
+      "gate": "7890a4fb55533f65f55da369926e2e5c25886a5f",
+      "head": "4b7170fb8146b7aa9208f0ae6661a54828955782",
+      "tree": "dc889308e50967d561478724c1479a7653cb0aeb",
+      "nativePending": false,
+      "ledgerUnchanged": true,
+      "run": 43929488119,
+      "job": 133517776579,
+      "pass": 47,
+      "fail": 0,
+      "primary": "f22df7c75028c01206266a3c4df26e7c31ef7864",
+      "proof": "cda3acf85a765c4788bbc023b247da791a9f322a",
+      "closed": "118d26b32a32d8fe9f71403fbda61c7e486321f1",
+      "close": "f67891c12d4ddb662bb868701f2d04ebbe4e2b48",
+      "review": "f5e61bf12e1db35aa29ce19652a760b3baaf9624",
+      "verdicts": {
+        "spec": "PASS",
+        "quality": "PASS"
+      }
+    },
+    "privateAdmission": {
+      "sourceDiagnosis": "dee8b1f943b0ef9e4cb16e6e78ea392090fca5ea",
+      "evidenceReview": "3045f1e9396e725be555aaa95f2d08830f6ec37b",
+      "design": "d9330e833c6fc7dd72cdfb51d0dee4427e515142",
+      "ruling": "a969930b2fea38173ac84b33aa85f9f6ef85e516",
+      "writer": "/root/n3_admission_repair4_design",
+      "model": "gpt-6-astra",
+      "effort": "ultra",
+      "round": 4,
+      "maxRounds": 5,
+      "atomicCandidateActive": true,
+      "witnessContractDraftActive": true,
+      "witnessCodeHeld": true,
+      "newBusinessCaptureAuthorized": false,
+      "actualCapUnknown": "roots16 versus identities128",
+      "noEpochReset": true
+    },
+    "ownerAwayUntilUTC": "2026-11-16T20:00:00Z"
   }
 }
