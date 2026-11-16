@@ -1,7 +1,7 @@
 {
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "phase": "N3-round4-atomic-and-W1-source-OWN-implementation-active",
+  "phase": "N3-round4-tool-native3RED62GREEN-closed-independent-review-and-OWN-W1-active",
   "SourceBranch": "feat/finite-native-cleanup-20261101",
   "sourceClosed": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
   "sourceTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
@@ -1168,12 +1168,61 @@
           "SourceExecuted": false,
           "artifactPathAdjustmentPending": true
         },
-        "ownW1Actor": "/root/c2_v2_own_receiver_fix1"
+        "ownW1Actor": "/root/c2_v2_own_receiver_fix1",
+        "toolNative": {
+          "packet": "1c732aaf9854b43860e76335ee40b5ec0ca42f64",
+          "index": "6145d2070af728964c5eb414de3a3b414c4d3646",
+          "gate": "1e629210d1c9ae47b56a2309b3ee39b6b9d3bf5b",
+          "head": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+          "tree": "e0132848dff710d2e6038c6f68721f6338b4fdc1",
+          "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+          "originals": 3203,
+          "added": 47,
+          "leaves": 3250,
+          "sourceBusinessExecuted": false,
+          "refCreated": true,
+          "activated": true,
+          "run": 43937983127,
+          "job": 133547543582,
+          "red": 3,
+          "greenPass": 62,
+          "greenFail": 0,
+          "primary": "cd8c53f779f4fb6f45c2d7218738892d2a54c87d",
+          "proof": "817b6a0e98c26aa3c21bbee0df00e7d3f358cd33",
+          "schemaNote": "4e40ff3cb23c996795fcc0508b24f84fa4763acb",
+          "closed": "0240f4bcf0794b0b1d952567c5aaa7737632fdca",
+          "close": "26e3361f5ea24fb57166351d362c27fdb2d7ac6d",
+          "reviewer": "/root/n3_w1_native_review",
+          "reviewPending": true,
+          "nativePending": false
+        },
+        "sourcePrepared": {
+          "head": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+          "tree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
+          "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+          "originals": 3203,
+          "added": 41,
+          "leaves": 3244,
+          "refCreated": false,
+          "runCreated": false,
+          "SourceExecuted": false,
+          "captureGateHeld": true
+        },
+        "ownW1": {
+          "actor": "/root/c2_v2_own_receiver_fix1",
+          "earlyIndex": "e503bca5e863d9d225b24bf85f0e3daed256d624",
+          "ownTrace": "cc22a79695471862f36c692db7a31e283b4ee46d",
+          "RootOwnRAM": 50,
+          "nativePending": true,
+          "fullInputPending": true
+        }
       }
     }
   },
   "resumePath": "docs/superpowers/progress/2026-11-16-active-n3-continuation.es.md",
-  "rootDocs": "1310a4daccd481ac9bc1fc372f42b319b7da0fd2",
+  "rootDocs": "f591a24a81f546ac2aee8baafd5de34441d87e4d",
   "ownerAvailability": {
     "awayUntil": "2026-11-16T20:00:00Z",
     "local": "17:00 Argentina",
