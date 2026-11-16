@@ -1,0 +1,134 @@
+{
+  "schema": "AFW-N3-OWN-FIX2-ROOT-PRELIMINARY-CHECK/1",
+  "atUTC": "2026-11-16 17:06:02 UTC",
+  "index": "42cf5a0928c4456c95a9a4a53cc5650337be06d7",
+  "round": 2,
+  "maxRounds": 5,
+  "old45MountedBodiesVerified": true,
+  "new17Hashes": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/causal-vectors.json",
+      "bytes": 29658,
+      "sha256": "2c72da673e8a950f2fea1cc29c092af679395650aade304f289ba64bb327899b",
+      "blob": "b04e7a3937a54ed2b61361a88b4cf2a5b3fa4466"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/full-models.json",
+      "bytes": 1085872,
+      "sha256": "b61ecf4a9dc621237141d2a7a9a90f9ece09073cebc2462f58969f9d970be6e8",
+      "blob": "d8463980ac0dffb67e6b5010951785732f3b3205"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/inflate-contract.json",
+      "bytes": 39893,
+      "sha256": "ebd5039e9f55d7e881805ce754cb81704f3a4a55892405a2d4a633d75b3f56c0",
+      "blob": "34eea3d475d29493d15d108c729146b635866cdb"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/red-results.json",
+      "bytes": 2874,
+      "sha256": "e79e9acef7671deb08700cf91e991ce69630161eac4e20e16deed6f6e6aea2c6",
+      "blob": "a49e114ca82296cf1932213a8fb89659890068de"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/trace-reader.mjs",
+      "bytes": 19219,
+      "sha256": "d70dd4311d59cfb25f556997bf661e33afc6419c2cdd7a46c25f2546e3412807",
+      "blob": "c5efe74261a04e180476650c23a60feb268ca042"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/reader.mjs",
+      "bytes": 57490,
+      "sha256": "6e86a6b215e962d5967f6f69c7420100ca395f3ae78313e0247ac52fa1c1c9c8",
+      "blob": "fcfe54a718f61835c35df5961bc5248431122b00"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/trace-controls.mjs",
+      "blob": "569aecd99fd698bcb0e46b2d79935eb3a73f4450",
+      "bytes": 8332,
+      "sha256": "6b55f865673023fd3850b0caf4bc04b85ef315cc387331df2de13257e09f76a8",
+      "gitBlob": "569aecd99fd698bcb0e46b2d79935eb3a73f4450",
+      "fullReadback": true,
+      "mode": "100644",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/controls.mjs",
+      "bytes": 4736,
+      "sha256": "1a8d7aefd29d08693f719a2088090af9f9aa13cc2b2a47b7073f6ff90f88c2b5",
+      "blob": "4f69dfa7a561656565e6b94038af6ded550efe83"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/control-results.json",
+      "bytes": 101619,
+      "sha256": "6e086c7bc4937b6165bbdccbef79fa4848b112c4e4bbb710599ec536663f405e",
+      "blob": "b715705bf4ca2dca2d368667150f7f81762fc369"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/control-input-map.json",
+      "bytes": 2181,
+      "sha256": "479fa39e41716c56454a72bb2c00df71df96658037fd7127a8599adf146c2c9b",
+      "blob": "cf49a31c401d795c4a632a53a26dc02823d6b1ba"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/selection.json",
+      "bytes": 31460,
+      "sha256": "5a8bf57f2cb105150cdd1e721a51e1273d6bb592c319bf9f305548f532bdbe90",
+      "blob": "e0f1e1a2f740fb9a4f2366e4638597ff85f92af5"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/proof.schema.json",
+      "bytes": 5895,
+      "sha256": "2ab87628312a3e0f18d31421eabde7bdc032f90338524f2c8ff63b67b68ee0ee",
+      "blob": "f217d5cf6b048cdee5ef517d8686b7124178ac1a"
+    },
+    {
+      "path": ".github/workflows/afw-c2-notices-n3-own-models-fix2.yml",
+      "bytes": 1269,
+      "sha256": "fc429739c627ef983320425c8b2d67d45c70b282732557eb2233dea80e76ce2b",
+      "blob": "123c81961caa1b58c773ea3e4e0fcfc5f745fc56"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/run-controls.mjs",
+      "bytes": 26674,
+      "sha256": "7b40fe9580ef5820125b5f0254f042832404dfe971688be3a44673b3687ff5a0",
+      "blob": "481c86d11ab8460d0acaedd4e20970ddc735f4c0"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/report.json",
+      "bytes": 31002,
+      "sha256": "5d148daa3c88e360d463e212037130660fc4981d817e3762dae3fe8a94ed6e31",
+      "blob": "4e4c1c9eed0a500bf6f7e1e893b5baa6478a436e"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/reversible-diff.json",
+      "bytes": 495091,
+      "sha256": "bc81d4276249aacc6e4eb7df46e923eb22a35c9ff4e2ebe86d1dcf530d0fe1e9",
+      "blob": "3507fbc4a5b9911d8b56434234e5657bb40b0fa0"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/index.json",
+      "bytes": 88915,
+      "sha256": "24e93ca1718b85ebbf92d88a6e9e62125bffe8d25b3f42e46eeeb64712e87f6e",
+      "blob": "42cf5a0928c4456c95a9a4a53cc5650337be06d7"
+    }
+  ],
+  "nineTextualBeforeAfterReversals": true,
+  "baselinePathsUnchanged": true,
+  "nativeNotStarted": true,
+  "reasonHeld": "Consolidate own repair native with final Source producer DATA assertions; this is not final Source execution or receipt",
+  "modelsRAMReported": 517,
+  "independentReviewPending": true,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
