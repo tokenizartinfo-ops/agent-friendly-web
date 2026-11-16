@@ -1,0 +1,148 @@
+{
+  "schema": "afw.c2-notices-n2.root-own-scoped-review.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authorityBrief": "ea8ad653b9f0f46106a359848556e22800a8a7a2",
+  "ownRoleBrief": "69328545699fa03d58b30e00296d06045436ce3f",
+  "scope": "Original N2 OWN receiver/FSM/protocol/API/ZIP and controls under the exact stated diagnostic boundary. Source N2 implementation and full original Source product/Task1 review are excluded.",
+  "pins": {
+    "index": "c3c2abe48c82545f982bd2fc741225987d89d048",
+    "reader": "e5418eaa79db9f348753fa8a15b8eb28050429b6",
+    "readerBytes": 41543,
+    "readerSha256": "cd8bea5115fe0f35c0cffd3f9a52017136911e7826b26b9b3ea9d91f38376a19",
+    "controls": "05e74a5d208cb13bcde22f9e6e9ea4209c343800",
+    "runner": "8de4b0e83c8fb14623c3aa117dc8e146577dccce",
+    "report": "30ecb1d258637ed0e1e00377476fb6b6a85a84ac",
+    "diff": "e31b549370bfe236a7536e100427155fdd59aae8",
+    "admission": "696672a4f43a6dec054eb3fb4a89c490dcf31f02",
+    "schema": "f006dc3a6bf8089fce11718aa2a05d97910d8145",
+    "sourceContractDATA": "b1c2680f2ff1dbe7a8b861396e3851d69f885016",
+    "sourcePacketDATAReference": "a30ecbb8d4990896082cad0104a8d6e91960e8f5",
+    "windowRuling": "72480f6b32a095186b17671cb6d18b583335f9a1",
+    "preAdmissionFindings": "dea133e44247938626de925ccb6fe44de3896583",
+    "coherentInputs": "75590701a7eb40a4e405327463a75c527294d202",
+    "nativePrimary": "0e6ee8ed3fb9e1305eecfa74048009c7ddebf984",
+    "closeProof": "292f2304aa3b406279dd741789cfb730834518b6"
+  },
+  "verdict": {
+    "SPEC": "PASS",
+    "QUALITY": "PASS",
+    "findingCount": 0,
+    "severityCounts": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 0,
+      "P3": 0
+    },
+    "findings": []
+  },
+  "method": "Bounded GitHub immutable DATA inspection. Read complete final OWN receiver/controls/runner and normative briefs/contract/schema/admission/rulings; inspected literal journal/generic/private/options/accessor/coherent vector data and native receipt. Embedded record union exactly equals pinned schema's witness record union. Independently matched final reader/controls/admission/schema/runner/coherent-body hashes. Reconstructed all four OWN lineage edits forward/reverse using supplied beforeimages; exact in both directions without printing full codeLineage. Independently checked all18 literal coherent inputs for canonical payload/frame equality, reconstructed witness bytes/hash and actual stored synthetic ZIP payload/size/archive digest equality. Matched all340 primary exact unique IDs to the results receipt. No reviewed module or Source code executed/imported/evaluated/compiled/syntax-checked; no files/dependencies/clones, refs/runs/runtime/browser/keys/mail/owner questions or subagents. Ordinary JSON/string/hash/ZIP-byte inspection only. No raw logs or actual artifacts refetched.",
+  "assessments": [
+    {
+      "area": "Canonical replay and inherited N1 corrections",
+      "file": "docs/superpowers/root-own/c2-notices-n2/reader.mjs",
+      "lines": "81-99,130-186",
+      "result": "PASS",
+      "reason": "New N2 identity and exact binding/schema unions preserve canonical bounded UTF8/NDJSON, ordered keys, contiguous sequence, monotonic capped time, four action/count/blocked stages and separately retained original action/count errors. Native status exactly matches work/blocked outcome; cardinality determines complete/prefix and complete journal requires complete native even under timeout. Started HTTP settles before action completion; POST requires GET200/bodytrue. AFTER failure remains auxiliary. Custody3launches/3..24 processes is retained in the full receiver."
+    },
+    {
+      "area": "Host argument proof chronology",
+      "file": "docs/superpowers/root-own/c2-notices-n2/reader.mjs",
+      "lines": "102-110,138-144",
+      "result": "PASS",
+      "reason": "Prepared/returned pairs enforce the fixed constructor/assembly/mount/connection-adopt/notices-adopt order and current-call pairing, hashes/flags/scripts. Constructor compiled roles are null; later roles must exist with compiledMatch:true. Successful connection requires four returned calls and positive NOTICES requires fifth return. Call5 requires settled POST200;503/body failure cannot fabricate it. A thrown constructor/method may honestly leave an open prepared call. No cross-call hash equality is incorrectly imposed across legitimate settings changes."
+    },
+    {
+      "area": "Guard arrival windows and nullable facts",
+      "file": "docs/superpowers/root-own/c2-notices-n2/reader.mjs",
+      "lines": "113-128,157-179",
+      "result": "PASS",
+      "reason": "Baseline after PHASE establishes unscoped. GET/POST windows persist through response/body pending and change only at terminal HTTP edges; AFTERenter resets unscoped. Prebaseline prerequisite arrivals cannot become public guards. Guard sequence/count cap and fixed tags/type-dependent nulls are checked. Parent-holders cannot acquire current-clock expiry/regression facts; correlated:null and interpretation:unknown remain fixed. Duplicate/cascade/late arrivals are observations rather than deduplicated cause proof."
+    },
+    {
+      "area": "Hook baseline/final and honest prefixes",
+      "file": "docs/superpowers/root-own/c2-notices-n2/reader.mjs",
+      "lines": "97-101,121-128,138-149,184-186",
+      "result": "PASS",
+      "reason": "Completed entered NOTICES requires baseline and ordered before/after probes. Explicitly blocked NOTICES may omit baseline with no guard/HTTP. Honest timeout may stop before baseline/final, while complete normal capture requires final after original AFTER settlement. Final hook freezes every later diagnostic record. New guard count equals safe records; callbackObserved is true|null without regression; excluded prebaseline count remains stable. Fault:true cannot become positive capture. Literal positive and coherent negative cases exercise these distinctions."
+    },
+    {
+      "area": "Private-message/options/accessor/error controls",
+      "file": "docs/superpowers/root-own/c2-notices-n2/reader.mjs",
+      "lines": "189-238; controls.mjs:10-40,96-127",
+      "result": "PASS within model-only scope",
+      "reason": "Exact tag plus canonical private JSON/type/finite-number/key/cap decoding outputs only narrow safe facts. Symbolically tagged option snapshots preserve order/undefined/-0/byte/function-reference distinctions; identity/await/call changes reject in models. Descriptor inspection checks accessors without invoking getter/setter, and callback/error containment models retain original thrown values. These are explicitly OWN synthetic models and provide no actual Source/Miniflare installation or hidden-state proof."
+    },
+    {
+      "area": "Full protocol/API/raw ZIP boundary",
+      "file": "docs/superpowers/root-own/c2-notices-n2/reader.mjs",
+      "lines": "241-302",
+      "result": "PASS",
+      "reason": "Explicit N2 nomination and caller-bound occurrence join actual run/job/commit/parent/tree/message/attempt/event, ordered successful steps and finite calendar times. Exact canonical standard frames, schema/admission hashes, bindings/controls/custody, witness reconstruction and replayed projections are checked. Stored/deflate one-entry ZIP joins name/local/central/descriptor/CRC/length/payload/archive digest to artifact listing and exact outcomeJSON+LF. FRONTIER/echo/duplicate/missing/schema/admission/identity/artifact tampering have concrete controls. No old N1 occurrence metadata is converted into N2."
+    },
+    {
+      "area": "Controls, native host and lineage quality",
+      "file": "docs/superpowers/root-own/c2-notices-n2/controls.mjs",
+      "lines": "1-151; run-controls.mjs",
+      "result": "PASS",
+      "reason": "Literal intended positives cover variable current-call settings, four-pair POST503/body throw, interrupted fifth/early calls, original dual failure, callback unknown, blocked no-baseline and honest timeouts. Negative/coherent controls target semantic contradictions with refreshed hashes/frame/ZIP, including inherited N1 findings. Native runner asserts fixed body hashes, exact groups and340unique IDs before registering bounded OWN node tests. No Source imports/dependencies. Four reversible lineage transforms preserve N1 history and make additive rollback concrete."
+    }
+  ],
+  "coveringEvidence": {
+    "runId": 43868775637,
+    "attempt": 1,
+    "jobId": 133304082546,
+    "head": "0ccd54c6fd234c681f2967a538f7d0230fdea472",
+    "tree": "6aa775d08aaba921b0970400f591f8c9871bea10",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n2/run-controls.mjs",
+    "step": 4,
+    "startedAt": "2026-11-16T12:41:10Z",
+    "completedAt": "2026-11-16T12:41:11Z",
+    "groups": {
+      "journal": 65,
+      "generic": 33,
+      "privateModels": 74,
+      "deliveryErrorModels": 24,
+      "privateProbe": 12,
+      "fullInput": 104,
+      "coherent": 18,
+      "zipFormats": 10
+    },
+    "nativePassed": 340,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "exactUniqueIDs": 340,
+    "verifiedDependencyHashes": 12,
+    "actualNativeOWNImportGraph": true,
+    "interpretation": "Credited from immutable actual native primary, with independently matched inspected body hashes and receipt IDs. The author's earlier RAM report remains a historical pre-native report. Reviewer did not rerun tests."
+  },
+  "limits": [
+    "Actual raw child TAP, private probe arrays and option objects are absent. Independent safe-journal replay and Source-emitted native/probe/guard/host/hook claims are joined to known producer/context; absent objects are not freshly parsed or authenticated.",
+    "Public current-argument/hash/flag/pair evidence does not establish hidden Miniflare #sharedOpts or private installed state. Source original method/promise/callback preservation requires its separate code/evidence review. OWN symbolic models cannot substitute for it.",
+    "callbackObserved:true proves an arrival observation only; null remains honest unknown. Node-arrival window does not authenticate request correlation, original phase/cascade origin, first cause or receipt. Guard interpretation and existing guardOrigin remain unknown.",
+    "Actual340nativePASS is OWN synthetic coverage only. No actual N2 Source occurrence was consumed, no Source run was created, and no Source/Task1 qualification or operational/PC-off approval is established."
+  ],
+  "closure": {
+    "head": "a9f53b65be850953085be78df9868f9bbec32c67",
+    "tree": "6308cdd0fc6d098e2b5024928dfc69fa65835cbf",
+    "proof": "292f2304aa3b406279dd741789cfb730834518b6",
+    "interpretation": "Supplied immutable close proof records originals preserved, OWN workflow removed, Main/history unchanged,0close-head runs and Source ref absent; reviewer performed no ref/run reads."
+  },
+  "reviewerExecutedSource": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "disposition": "Scoped OWN review complete; IDLE. Source activation remains Root's separate gate."
+}
