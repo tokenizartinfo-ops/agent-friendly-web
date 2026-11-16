@@ -1,0 +1,18 @@
+{
+  "schema": "afw.c2-notices-n3.producer-manifest.v1",
+  "normalSourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+  "selectionHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c",
+  "contractHash": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+  "schemaHash": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+  "seamsHash": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+  "vectorsHash": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+  "driverHash": "88137ed32bf1e657be72820529afde0ea1f1c791763e99cdded7da3d0d4f682d",
+  "coupledHash": "a85e1c33412e05095ce56dce7553165f36c0235809e20acd0df3180fd4917764",
+  "worldHash": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+  "helperHash": "69386a941f9f565bfffd9846f9b8ec504b2e1c446075b72c368a8d68aaf17eb6",
+  "readerHash": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+  "loggerHash": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+  "slotHash": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+  "ledgerHash": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+  "transformHash": "624ef2a8507643936aa9564bb0f978b11e31572b49c5678a6e6c4706af9ea255"
+}

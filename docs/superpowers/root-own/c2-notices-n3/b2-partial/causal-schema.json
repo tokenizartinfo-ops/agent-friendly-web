@@ -1,0 +1,554 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "afw.c2-notices-n3.causal-schema.v1",
+  "$ref": "#/$defs/causalRecord",
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "afw.c2-notices-n3.qa-snapshot.v1"
+        },
+        "state": {
+          "enum": [
+            "joined",
+            "unjoined",
+            "ambiguous"
+          ]
+        },
+        "coverage": {
+          "enum": [
+            "complete",
+            "prefix",
+            "unknown"
+          ]
+        },
+        "reason": {
+          "enum": [
+            "OK",
+            "NO_ELIGIBLE",
+            "MULTIPLE_ELIGIBLE",
+            "UNBOUND",
+            "AMBIGUOUS_BINDING",
+            "PREBIND_GAP",
+            "CAP_PRIVATE",
+            "CAP_SNAPSHOT",
+            "SINK_FAULT",
+            "INVALID_EVENT",
+            "PROJECTION_GAP",
+            "PROBE_UNAVAILABLE",
+            "OUTER_LIMIT",
+            "OPEN_AT_CUT"
+          ]
+        },
+        "eligible": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 16
+        },
+        "target": {
+          "enum": [
+            "unreached",
+            "entered",
+            "returned",
+            "threw",
+            "unknown"
+          ]
+        },
+        "focus": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "const": "selected-first-target-focus"
+            },
+            "pairChild": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 8
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "selection": {
+              "enum": [
+                "first-check-threw",
+                "first-observed",
+                "none"
+              ]
+            }
+          },
+          "required": [
+            "mode",
+            "pairChild",
+            "selection"
+          ],
+          "additionalProperties": false
+        },
+        "leases": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "properties": {
+              "ordinal": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 8
+              },
+              "role": {
+                "enum": [
+                  "root",
+                  "outer",
+                  "activation-child",
+                  "target-pair",
+                  "pair-child"
+                ]
+              },
+              "parent": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "firstClose": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "ordinal",
+              "role",
+              "parent",
+              "firstClose"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "promises": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "properties": {
+              "ordinal": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 4
+              },
+              "lease": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 8
+              },
+              "retained": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "settlement": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4096
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "ordinal",
+              "lease",
+              "retained",
+              "settlement"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "errors": {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "properties": {
+              "ordinal": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 4
+              },
+              "first": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 4096
+              }
+            },
+            "required": [
+              "ordinal",
+              "first"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "events": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "properties": {
+              "sequence": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 4096
+              },
+              "kind": {
+                "enum": [
+                  "scope-enter",
+                  "target-enter",
+                  "pair-enter",
+                  "check-threw",
+                  "target-return",
+                  "target-throw",
+                  "logical-return",
+                  "logical-throw",
+                  "abort-observed",
+                  "close-call",
+                  "closed-transition",
+                  "child-finally",
+                  "retained",
+                  "settlement-observed",
+                  "snapshot-cut"
+                ]
+              },
+              "site": {
+                "enum": [
+                  "choice-admitted",
+                  "postreceipt-check",
+                  "target-pair",
+                  "initial-holders",
+                  "initial-child",
+                  "initial-retain",
+                  "initial-settled",
+                  "initial-close",
+                  "initial-stop",
+                  "initial-child-finally",
+                  "root-abort",
+                  "root-finish",
+                  "pair-parent-abort",
+                  "pair-finally",
+                  "outer-parent-abort",
+                  "choice-catch",
+                  "choice-return",
+                  "snapshot"
+                ]
+              },
+              "lease": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "promise": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 4
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "error": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "present": {
+                        "const": false
+                      },
+                      "kind": {
+                        "const": "none"
+                      },
+                      "errorOrdinal": {
+                        "const": null
+                      }
+                    },
+                    "required": [
+                      "present",
+                      "kind",
+                      "errorOrdinal"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "present": {
+                        "const": true
+                      },
+                      "kind": {
+                        "const": "primitive"
+                      },
+                      "errorOrdinal": {
+                        "const": null
+                      }
+                    },
+                    "required": [
+                      "present",
+                      "kind",
+                      "errorOrdinal"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "present": {
+                        "const": true
+                      },
+                      "kind": {
+                        "const": "object"
+                      },
+                      "errorOrdinal": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 4
+                      }
+                    },
+                    "required": [
+                      "present",
+                      "kind",
+                      "errorOrdinal"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "cause": {
+                "enum": [
+                  null,
+                  "explicit-finish",
+                  "parent-abort",
+                  "finally",
+                  "unknown"
+                ]
+              }
+            },
+            "required": [
+              "sequence",
+              "kind",
+              "site",
+              "lease",
+              "promise",
+              "error",
+              "cause"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "firstError": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4096
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cut": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4096
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "state",
+        "coverage",
+        "reason",
+        "eligible",
+        "target",
+        "focus",
+        "leases",
+        "promises",
+        "errors",
+        "events",
+        "firstError",
+        "cut"
+      ],
+      "additionalProperties": false
+    },
+    "causalRecord": {
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "elapsedMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 180000
+        },
+        "kind": {
+          "const": "causal"
+        },
+        "schema": {
+          "const": "afw.c2-notices-n3.causal-record.v1"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        }
+      },
+      "required": [
+        "sequence",
+        "elapsedMs",
+        "kind",
+        "schema",
+        "snapshot"
+      ],
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "enum": [
+            "joined",
+            "unjoined",
+            "ambiguous"
+          ]
+        },
+        "coverage": {
+          "enum": [
+            "complete",
+            "prefix",
+            "unknown"
+          ]
+        },
+        "reason": {
+          "enum": [
+            "OK",
+            "NO_ELIGIBLE",
+            "MULTIPLE_ELIGIBLE",
+            "UNBOUND",
+            "AMBIGUOUS_BINDING",
+            "PREBIND_GAP",
+            "CAP_PRIVATE",
+            "CAP_SNAPSHOT",
+            "SINK_FAULT",
+            "INVALID_EVENT",
+            "PROJECTION_GAP",
+            "PROBE_UNAVAILABLE",
+            "OUTER_LIMIT",
+            "OPEN_AT_CUT"
+          ]
+        },
+        "target": {
+          "enum": [
+            "unreached",
+            "entered",
+            "returned",
+            "threw",
+            "unknown"
+          ]
+        },
+        "firstError": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4096
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "focusChild": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "events": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 24
+        },
+        "settlementsObserved": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "interpretation": {
+          "const": "unknown"
+        }
+      },
+      "required": [
+        "state",
+        "coverage",
+        "reason",
+        "target",
+        "firstError",
+        "focusChild",
+        "events",
+        "settlementsObserved",
+        "interpretation"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$comment": "Canonical order and source contract FSM required in addition to JSON shape. Record6144UTF8 bytes includes envelope+LF. One snapshot only; never crosssnapshot join."
+}

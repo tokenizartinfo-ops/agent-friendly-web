@@ -1,0 +1,31 @@
+{
+  "schema": "root-own.n3.fix2-control-input-map.v1",
+  "controlExport": "n3Fix2AllControls(data,sha256,inflateRawSync)",
+  "data": {
+    "own": "docs/superpowers/root-own/c2-notices-n3/b2-partial/trace-vectors.json",
+    "oldSealed": "docs/superpowers/root-own/c2-notices-n3/b2-partial/sealed-vectors-data.json",
+    "raw": "docs/superpowers/root-own/c2-notices-n3/b2-partial/raw-record-inputs.json",
+    "transport": "docs/superpowers/root-own/c2-notices-n3/b2-partial/synthetic-transport.json",
+    "ruling": "docs/superpowers/root-own/c2-notices-n3/b2-partial/ruling-vectors.json",
+    "rulingTransport": "docs/superpowers/root-own/c2-notices-n3/b2-partial/ruling-transport.json",
+    "abort": "docs/superpowers/root-own/c2-notices-n3/b2-partial/abort-vectors.json",
+    "axis": "docs/superpowers/root-own/c2-notices-n3/b2-partial/axes-vectors.json",
+    "pairCardinality": "docs/superpowers/root-own/c2-notices-n3/b2-partial/pair-cardinality-vectors.json",
+    "pairCardinalityFull": "docs/superpowers/root-own/c2-notices-n3/b2-partial/pair-cardinality-full.json",
+    "currentSource": "docs/superpowers/root-own/c2-notices-n3/b2-partial/source-current-snapshots-data.json",
+    "sourceAxes": "docs/superpowers/root-own/c2-notices-n3/b2-partial/source-axes-plans-data.json",
+    "reducer": "docs/superpowers/root-own/c2-notices-n3/b2-partial/source-reducer-plans-data.json",
+    "full": "docs/superpowers/root-own/c2-notices-n3/b2-partial/full-input-models.json",
+    "supplement": "docs/superpowers/root-own/c2-notices-n3/b2-partial/full-input-supplement.json",
+    "fullAxes": "docs/superpowers/root-own/c2-notices-n3/b2-partial/full-input-axes.json",
+    "blocked": "docs/superpowers/root-own/c2-notices-n3/b2-partial/full-input-blocked.json",
+    "fix2Causal": "docs/superpowers/root-own/c2-notices-n3/models-fix2/causal-vectors.json",
+    "fix2Full": "docs/superpowers/root-own/c2-notices-n3/models-fix2/full-models.json",
+    "fix2Inflate": "docs/superpowers/root-own/c2-notices-n3/models-fix2/inflate-contract.json"
+  },
+  "expectedCount": 517,
+  "retainedHistoricalIds": 496,
+  "syntheticOnly": true,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false
+}

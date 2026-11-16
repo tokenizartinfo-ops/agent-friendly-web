@@ -1,0 +1,125 @@
+{
+  "schema": "root-own.n3.fix2-red.v1",
+  "review": "23358908713964c29511dc44d3e554387619f7c7",
+  "beforeTrace": "ce12154ef2568bb993581820266917a91f65ea50",
+  "beforeReader": "d229289e9f9381dd285da02ce1b92ee21e483203",
+  "execution": "OWN RAM methods only; no Source or native rerun",
+  "trace": [
+    {
+      "id": "OWN/P2_RETAIN_AFTER_PAIR_ENTER",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/P2_RETAIN_BEFORE_PAIR_ENTER_COMPLETE",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "OWN/P2_RETAIN_BEFORE_PAIR_ENTER_PREFIX",
+      "pass": false,
+      "accepted": true
+    }
+  ],
+  "full": [
+    {
+      "id": "B2/FULL/P2_RETAIN_BEFORE_PAIR_ENTER_COMPLETE",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/FULL/P2_RETAIN_BEFORE_PAIR_ENTER_PREFIX",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/FULL/P2_RETAIN_AFTER_PAIR_ENTER",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/HOST_CALL_3_both_CURRENT_BUILD_MISMATCH",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/HOST_CALL_4_both_CURRENT_BUILD_MISMATCH",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/HOST_CALL_5_both_CURRENT_BUILD_MISMATCH",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/HOST_CALL_3_M_CURRENT_BUILD_MISMATCH",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/HOST_CALL_4_QA_CURRENT_BUILD_MISMATCH",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/HOST_OPEN_CALL3_CURRENT_BUILD_MISMATCH",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/HOST_OPEN_CALL3_CONSISTENT_TIMEOUT_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/HOST_ALL_CURRENT_DESCRIPTORS_WITH_DISTINCT_ARGUMENT_PROOFS",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/ZIP_VALID_DEFLATE_COMPLETE_MEMBER",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/ZIP_TRAILING_DEFLATE_DEADBEEF",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/ZIP_CONCATENATED_RAW_DEFLATE_MEMBERS",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/ZIP_DESCRIPTOR_WITH_TRAILING_DEFLATE_DEADBEEF",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/ZIP_VALID_DEFLATE_UNSIGNED_DESCRIPTOR",
+      "pass": true,
+      "accepted": true
+    }
+  ],
+  "inflate": [
+    {
+      "id": "FIX2_INFLATE/BUFFER_ONLY_RESULT_REJECTED",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "FIX2_INFLATE/BOUNDED_INFO_OPTIONS",
+      "pass": false,
+      "accepted": true
+    }
+  ],
+  "historicalNative": {
+    "run": 43908195474,
+    "passed": 496,
+    "coversChangedCode": false
+  },
+  "SourceExecuted": false,
+  "finalSourceBinding": false
+}

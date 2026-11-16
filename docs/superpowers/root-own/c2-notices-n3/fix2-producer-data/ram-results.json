@@ -1,0 +1,90 @@
+{
+  "schema": "root-own.n3.source-data-and-models-ram.v1",
+  "models": {
+    "total": 517,
+    "failed": 0,
+    "idsHash": "d490d6ce80ba0364adc3edf75c9188b510b1a0766dd7bff553f9dcb2534ca267"
+  },
+  "producerData": {
+    "total": 10,
+    "failed": 0,
+    "bodyCount": 21,
+    "manifestHash": "44a2527e1a54cb79a6feec9a04a996ad1b288a35117763e2037c7e8d64cf18f8",
+    "idsHash": "81c9065544e14dbc45a3cdea148c663acd1d62046ba8584373d6c8f63d7538f3"
+  },
+  "combined": {
+    "total": 527,
+    "uniqueIds": 527,
+    "failed": 0,
+    "idsHash": "7ebfe81081f2acedc229960be97f00eb1747746a02a857d3a318248d06cabedd"
+  },
+  "producerChecks": [
+    {
+      "id": "SOURCE_DATA/EXACT_ROOT_NOMINATED_STATIC_PRODUCER",
+      "pass": true,
+      "accepted": true,
+      "reason": null
+    },
+    {
+      "id": "SOURCE_DATA/CANONICAL_BYTES_CANNOT_REPLACE_PINNED_PRETTY_MANIFEST",
+      "pass": true,
+      "accepted": false,
+      "reason": "OWN_N3_SOURCE_DATA_REJECTED:BODY_HASH_manifest"
+    },
+    {
+      "id": "SOURCE_DATA/MANIFEST_KEY_ORDER",
+      "pass": true,
+      "accepted": false,
+      "reason": "OWN_N3_SOURCE_DATA_REJECTED:MANIFEST_ORDER"
+    },
+    {
+      "id": "SOURCE_DATA/MANIFEST_DRIVER_HASH",
+      "pass": true,
+      "accepted": false,
+      "reason": "OWN_N3_SOURCE_DATA_REJECTED:MANIFEST_CANONICAL"
+    },
+    {
+      "id": "SOURCE_DATA/HELPER_BODY_BYTES",
+      "pass": true,
+      "accepted": false,
+      "reason": "OWN_N3_SOURCE_DATA_REJECTED:MANIFEST_BODY_helper"
+    },
+    {
+      "id": "SOURCE_DATA/UNTRUSTED_BINDINGS_CANNOT_REBIND_BODY",
+      "pass": true,
+      "accepted": false,
+      "reason": "OWN_N3_SOURCE_DATA_REJECTED:MANIFEST_CANONICAL"
+    },
+    {
+      "id": "SOURCE_DATA/NOMINATION_BRANCH",
+      "pass": true,
+      "accepted": false,
+      "reason": "OWN_N3_SOURCE_DATA_REJECTED:SOURCE_NOMINATION"
+    },
+    {
+      "id": "SOURCE_DATA/SCHEMA_TOP_SELECTION",
+      "pass": true,
+      "accepted": false,
+      "reason": "OWN_N3_SOURCE_DATA_REJECTED:SCHEMA_TOP_SELECTION"
+    },
+    {
+      "id": "SOURCE_DATA/SCHEMA_JOURNAL_SELECTION",
+      "pass": true,
+      "accepted": false,
+      "reason": "OWN_N3_SOURCE_DATA_REJECTED:SCHEMA_JOURNAL_SELECTION"
+    },
+    {
+      "id": "SOURCE_DATA/MISSING_LEDGER_BODY",
+      "pass": true,
+      "accepted": false,
+      "reason": "OWN_N3_SOURCE_DATA_REJECTED:BODY_ROLE_SET"
+    }
+  ],
+  "actualNativeChangedGraph": false,
+  "ownModelsExecuted": false,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "sourceExpectedContext": null,
+  "SourceQualified": false,
+  "Task1Pass": false
+}

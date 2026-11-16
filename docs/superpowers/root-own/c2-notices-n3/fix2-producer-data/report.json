@@ -1,0 +1,347 @@
+{
+  "schema": "afw.c2-notices-n3.own-fix2-combined-report.v1",
+  "status": "OWN_FIX_LOOP_ROUND2_COMBINED527_DATA_READY_NATIVE_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA and pure OWN RAM; nominated model+static-DATA native graph not executed",
+  "origin": "GitHub API",
+  "allowedAction": "Original OWN writer retains3 fixes/frozen4modules+517models and adds10 independent JSON/hash assertions for exact Root-nominated producer DATA; no Source code evaluation/import/compile/syntax/tests, refs/runs/files/deps/runtime",
+  "nomination": {
+    "schema": "afw.c2-notices-n3.own-models-fix2-nomination.v1",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "branch": "lab/afw-c2-own-receiver-20261116-notices-n3-models-fix2",
+    "message": "AFW-C2-N3-OWN-MODELS-FIX2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-own-models-fix2.yml",
+    "job": "c2-notices-n3-own-models-fix2",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "node": "v22.23.4",
+    "runner": "docs/superpowers/root-own/c2-notices-n3/models-fix2/run-controls.mjs",
+    "proofFile": "n3-own-models-fix2-proof.json",
+    "artifactName": "afw-c2-notices-n3-own-models-fix2-proof"
+  },
+  "priorFix2Index": "42cf5a0928c4456c95a9a4a53cc5650337be06d7",
+  "priorFix2Report": "4e4c1c9eed0a500bf6f7e1e893b5baa6478a436e",
+  "priorFullFixDiff": "3507fbc4a5b9911d8b56434234e5657bb40b0fa0",
+  "threeFixesUnchanged": true,
+  "fourOwnModulesExact": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/trace-reader.mjs",
+      "blob": "c5efe74261a04e180476650c23a60feb268ca042",
+      "bytes": 19219,
+      "sha256": "d70dd4311d59cfb25f556997bf661e33afc6419c2cdd7a46c25f2546e3412807",
+      "gitBlob": "c5efe74261a04e180476650c23a60feb268ca042",
+      "fullReadback": true,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/reader.mjs",
+      "blob": "fcfe54a718f61835c35df5961bc5248431122b00",
+      "bytes": 57490,
+      "sha256": "6e86a6b215e962d5967f6f69c7420100ca395f3ae78313e0247ac52fa1c1c9c8",
+      "gitBlob": "fcfe54a718f61835c35df5961bc5248431122b00",
+      "fullReadback": true,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/trace-controls.mjs",
+      "blob": "569aecd99fd698bcb0e46b2d79935eb3a73f4450",
+      "bytes": 8332,
+      "sha256": "6b55f865673023fd3850b0caf4bc04b85ef315cc387331df2de13257e09f76a8",
+      "gitBlob": "569aecd99fd698bcb0e46b2d79935eb3a73f4450",
+      "fullReadback": true,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/controls.mjs",
+      "blob": "4f69dfa7a561656565e6b94038af6ded550efe83",
+      "bytes": 4736,
+      "sha256": "1a8d7aefd29d08693f719a2088090af9f9aa13cc2b2a47b7073f6ff90f88c2b5",
+      "gitBlob": "4f69dfa7a561656565e6b94038af6ded550efe83",
+      "fullReadback": true,
+      "mode": "100644"
+    }
+  ],
+  "models517": {
+    "count": 517,
+    "idsHash": "d490d6ce80ba0364adc3edf75c9188b510b1a0766dd7bff553f9dcb2534ca267",
+    "failed": 0,
+    "firstHistorical496OrderUnchanged": true,
+    "rawModelDataUnchanged": true,
+    "liveNativeCoverageOfChangedCode": false
+  },
+  "sourceStaticData": {
+    "authorityBindings": {
+      "blob": "b186f6e5f585ed3de71f7e4e69f42f8f0ee55618",
+      "bytes": 11476,
+      "sha256": "7ccf7c0c61f16d98e1033cf52f127b1181173015b95d7270a3be3ccd30199822"
+    },
+    "sourceManifest": {
+      "blob": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+      "rawBytes": 1334,
+      "rawSha256": "27f9b289888ba4155fcaca9739f0b074aeda7e781c7796a1e8e83501fcf79a5e",
+      "canonicalBytes": 1268,
+      "canonicalSha256": "44a2527e1a54cb79a6feec9a04a996ad1b288a35117763e2037c7e8d64cf18f8",
+      "canonicalRule": "UTF8 JSON.stringify exact16fields,noLF; raw pretty-file+LF hash is different"
+    },
+    "normalSourceIndex": {
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "entries": 13,
+      "sourceRepositoryPathNotInvented": true
+    },
+    "selection": {
+      "blob": "3db514b655917bd05917a90a53cb69667041fd36",
+      "canonicalHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c"
+    },
+    "opaqueContextArtifacts": [
+      {
+        "role": "sourceRunner",
+        "sourcePath": "docs/superpowers/source-lab/c2-t1-notices-n3/run-c2-notices-n3.mjs",
+        "blob": "e2fcee935e5544207486f2f55cbc4c9022b76c40",
+        "bytes": 33675,
+        "sha256": "f786a3555c53e94e59981e08e785ef67f16b0adf98bb4e1e2a661828d61b2882",
+        "gitBlob": "e2fcee935e5544207486f2f55cbc4c9022b76c40",
+        "path": "docs/superpowers/source-lab/c2-t1-notices-n3/run-c2-notices-n3.mjs",
+        "mode": "100644",
+        "dataPath": "docs/superpowers/root-own/c2-notices-n3/fix2-producer-data/source-sourceRunner.data",
+        "fullReadback": true,
+        "treatment": "Opaque Source DATA bytes only; not parsed/imported/compiled/executed"
+      },
+      {
+        "role": "sourceWorkflow",
+        "sourcePath": ".github/workflows/afw-c2-notices-n3.yml",
+        "blob": "259d587b8752b3bb89d1636891136c55cbfa108c",
+        "bytes": 1440,
+        "sha256": "d687e208c15e14dc9054636aedae3cdaf3bbebf302e5d84ca2f3f7feb6c1fc3c",
+        "gitBlob": "259d587b8752b3bb89d1636891136c55cbfa108c",
+        "path": ".github/workflows/afw-c2-notices-n3.yml",
+        "mode": "100644",
+        "dataPath": "docs/superpowers/root-own/c2-notices-n3/fix2-producer-data/source-sourceWorkflow.data",
+        "fullReadback": true,
+        "treatment": "Opaque Source DATA bytes only; not parsed/imported/compiled/executed"
+      }
+    ],
+    "primarySourceBodies": 19,
+    "contextArtifacts": 2,
+    "rawBodyAliases": 21,
+    "bindingsAlias": 1,
+    "totalSourceDataAliases": 22,
+    "rawDataBytes": 1254309,
+    "hashes": "All Source strings independently FULL-read/hash-verified bytes/SHA256/GitSHA. Every Source program/runner/WF is mounted only under a .data alias and never imported or syntax-compiled.",
+    "jsonParsing": "Only Source manifest/selection/schema/contract/normal-index/bindings metadata are JSON-parsed. Source helper/reader/logger/compiler/ledger/world/core-controls/trace programs are only Buffer/hash DATA.",
+    "publicWireUnchanged": true,
+    "rootDataVsModelBoundary": "The actual producer manifest/body hashes are never substituted into fictitious model contexts. A separate OWN verifier consumes actual Source bytes as DATA, while the original517 inputs and trusted model contexts stay exact.",
+    "sourceExpectedContext": null,
+    "finalSourceBinding": false
+  },
+  "producerAssertions": {
+    "count": 10,
+    "idsHash": "81c9065544e14dbc45a3cdea148c663acd1d62046ba8584373d6c8f63d7538f3",
+    "failed": 0,
+    "cases": [
+      {
+        "id": "SOURCE_DATA/EXACT_ROOT_NOMINATED_STATIC_PRODUCER",
+        "expectedAccepted": true
+      },
+      {
+        "id": "SOURCE_DATA/CANONICAL_BYTES_CANNOT_REPLACE_PINNED_PRETTY_MANIFEST",
+        "expectedAccepted": false
+      },
+      {
+        "id": "SOURCE_DATA/MANIFEST_KEY_ORDER",
+        "expectedAccepted": false
+      },
+      {
+        "id": "SOURCE_DATA/MANIFEST_DRIVER_HASH",
+        "expectedAccepted": false
+      },
+      {
+        "id": "SOURCE_DATA/HELPER_BODY_BYTES",
+        "expectedAccepted": false
+      },
+      {
+        "id": "SOURCE_DATA/UNTRUSTED_BINDINGS_CANNOT_REBIND_BODY",
+        "expectedAccepted": false
+      },
+      {
+        "id": "SOURCE_DATA/NOMINATION_BRANCH",
+        "expectedAccepted": false
+      },
+      {
+        "id": "SOURCE_DATA/SCHEMA_TOP_SELECTION",
+        "expectedAccepted": false
+      },
+      {
+        "id": "SOURCE_DATA/SCHEMA_JOURNAL_SELECTION",
+        "expectedAccepted": false
+      },
+      {
+        "id": "SOURCE_DATA/MISSING_LEDGER_BODY",
+        "expectedAccepted": false
+      }
+    ],
+    "meaning": "Exact body+canonical/rawmanifest/order/schema/nomination checks; negative mutations include coherent untrusted body+manifest+metadata rebinding while Root-authorized context remains fixed.",
+    "scope": "Static known-producer bytes only. No Source run/capture/API/receipt, private graph identity or actual compiler invocation is inferred.",
+    "vectorBlob": "ff37fb5e3326435b0a9ccf308c195c3b945dc2c7",
+    "sourceModule": "d3568aaf95cac92b06d8bbb5eab6a8de7a88ce50"
+  },
+  "combined": {
+    "total": 527,
+    "uniqueIds": 527,
+    "failed": 0,
+    "idsHash": "7ebfe81081f2acedc229960be97f00eb1747746a02a857d3a318248d06cabedd",
+    "order": "exact517 existing IDs then10 new SOURCE_DATA IDs",
+    "nativeResultsPrecomputed": false,
+    "resultBlob": "f52568e5116093af10e25067cdac61d33ebc22b7"
+  },
+  "nativeGraph": {
+    "runner": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/run-controls.mjs",
+      "mode": "100644",
+      "blob": "cbd827df84466bbaeab1008b0197fa8b72a3ae4e",
+      "bytes": 38355,
+      "sha256": "872c128a80d88e5d67ee2c5a9d3bd55190114e9ac817f67f918248430611be6a",
+      "gitBlob": "cbd827df84466bbaeab1008b0197fa8b72a3ae4e",
+      "fullReadback": true
+    },
+    "workflowUnchanged": "123c81961caa1b58c773ea3e4e0fcfc5f745fc56",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n3/models-fix2/run-controls.mjs",
+    "node": "v22.23.4",
+    "os": "ubuntu-24.04",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "event": "push",
+    "attempt": 1,
+    "contents": "read",
+    "checkoutDepth": 2,
+    "persistCredentials": false,
+    "artifactRetentionDays": 7,
+    "ownModules": 5,
+    "modelModules": 4,
+    "staticVerifierModules": 1,
+    "modelJsonInputs": 20,
+    "SourceImports": 0,
+    "npmSdkProviderRequests": 0,
+    "closureFiles": 89,
+    "closureHash": "a5741cec40183f42fbd2269d3f486d53c91b20337962a3f3ad258c61edc72bc0",
+    "runtimeFlow": "Verify exact nominated environment/Git parent/tree/message/modes and93 additions with3203 originals preserved. Hash89 files before importing OWN controls and static verifier. Execute517 model methods, separately verify Source DATA and execute10 assertions, require527 exact IDs/order, then emit527 actual TAP cases. Stored RAM result files are inert pinned DATA, never pass authority.",
+    "runtimeStaticKnownProducer": "n3AdmitKnownSource(input,expected,sha256,gitBlob), where expected is independently nominated admission-context.json, never outcome-supplied.",
+    "contextExpectation": "Root real Source head/tree/run/job absent: no placeholders created. Root independently verifies Source detached preparation before any later Source activation; actual n3Read expected remains caller-bound when those values exist."
+  },
+  "proofContract": {
+    "schema": "afw.c2-notices-n3.own-fix2-and-producer-data-proof.v1",
+    "marker": "AFW_C2_N3_OWN_MODELS_FIX2_PROOF",
+    "artifact": "afw-c2-notices-n3-own-models-fix2-proof",
+    "file": "n3-own-models-fix2-proof.json",
+    "maxUTF8IncludingLF": 24576,
+    "format": "One canonical proofJSON+LF and one marker+space+samecanonicalJSON+LF; native TAP may prefix stdout with '# ', unwrap only the exact transport.",
+    "expectedOwnModelLabels": {
+      "ownModelsExecuted": true,
+      "actualSourceExecution": false,
+      "finalSourceBinding": false,
+      "SourceQualified": false,
+      "Task1Pass": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "separateProofGroups": {
+      "models": 517,
+      "producerData": 10
+    },
+    "staticProducerDataFacts": "Proof stores runtime-computed manifest canonical/raw hashes,Rootbindings hash,21-body count,10 assertion counts/idsHash and sourceExpectedContext:null.",
+    "rootIndependentJoin": "Root must compare527 exact TAP IDs/order/pass and zero fail/skip/todo/cancel/extra/missing, actual OWN raw API/head/tree/run/attempt/job/step, runner/workflow/input-index/closure/selection/schema hashes and sole artifact ZIP bounds/path/CRC/digest/payload."
+  },
+  "overlay": {
+    "beforeIndex": "42cf5a0928c4456c95a9a4a53cc5650337be06d7",
+    "beforePaths": 62,
+    "changedExistingPaths": [
+      "docs/superpowers/root-own/c2-notices-n3/models-fix2/run-controls.mjs"
+    ],
+    "newPaths": 31,
+    "totalAdditions": 93,
+    "baseOriginals": 3203,
+    "expectedLeaves": 3296,
+    "prior45AllUnchanged": true,
+    "prior4Fix2ModulesUnchanged": true,
+    "WFfix2Unchanged": true,
+    "aliasNoSourceWorkflowActivation": true,
+    "before62FullImagesPreserved": true
+  },
+  "preparationChecks": {
+    "ram": {
+      "total": 527,
+      "uniqueIds": 527,
+      "failed": 0,
+      "idsHash": "7ebfe81081f2acedc229960be97f00eb1747746a02a857d3a318248d06cabedd"
+    },
+    "static": {
+      "models517Unchanged": true,
+      "fourModuleHashes": true,
+      "sourceAliasesNotImports": true,
+      "actualRuntimeResultsOnly": true,
+      "fixedTotals": true,
+      "knownNoSourceContext": true,
+      "proofCap": true,
+      "workflowUnchanged": true,
+      "closureExcludesSelf": true
+    },
+    "ownSyntaxOnly": {
+      "verifier": {
+        "ownSyntaxCompiled": true,
+        "executed": false,
+        "SourceCodeCompiled": false,
+        "SourceExecuted": false
+      },
+      "runner": {
+        "ownSyntaxCompiled": true,
+        "executed": false,
+        "SourceCodeCompiled": false,
+        "SourceExecuted": false
+      }
+    },
+    "nativeGraphExecuted": false,
+    "actualProofAuthored": false
+  },
+  "historicalNative496": {
+    "run": 43908195474,
+    "primary": "32632d659d5108e7064beda0124a8a0f7c0f80aa",
+    "proof": "5a85be5d6cc2af1f6c93aaefc89d2ce902ff14fb",
+    "coversChangedCode": false
+  },
+  "proofLimits": "Static immutable bytes/metadata validation is separate from actual Source execution and occurrence. It authenticates neither hidden private p2 identity/callback cause, unreported omission, private compiler inputs or source TAP nor physical pending/drain/PCoff/Task1. Source final index/reversibles and detached commit/tree remain Root admission context; no dynamic receipt values are guessed. The Source runner and workflow hashes are actual nominated DATA, not executed capabilities.",
+  "reversibility": "Prior62 beforeimages preserved. Replace only the nominated OWN runner and add31 DATA/OWN paths. Full before/after runner text and exact bidirectional delta are in reversible-diff.json. Removing new31 and restoring old481c runner recovers prior517 preparation. Old45 and4 fixed receiver/control bodies remain exact.",
+  "pending": [
+    "Root FULL readback/hash/overlay admission",
+    "Actual native527 covering and separate exact models517/producerDATA10 verification",
+    "Root preservation/closure and scoped fresh review of3 fixes + static admission layer",
+    "Root final Source index/reversible/detached C head/tree context before any activation; Source C execution remains separate authorization",
+    "Actual Source run/job/raw API/log/artifact only when occurrence exists"
+  ],
+  "ownModelsExecuted": false,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "sourceExpectedContext": null,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "refsCreated": 0,
+  "runsCreated": 0,
+  "filesCreated": 0,
+  "dependenciesInstalled": 0,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

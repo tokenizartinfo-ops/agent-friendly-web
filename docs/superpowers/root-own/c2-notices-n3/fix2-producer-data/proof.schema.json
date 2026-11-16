@@ -1,0 +1,328 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "afw.c2-notices-n3.own-fix2-and-producer-data-proof.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "nomination",
+    "context",
+    "bindings",
+    "selection",
+    "results",
+    "models",
+    "producerData",
+    "ownModelsExecuted",
+    "actualSourceExecution",
+    "finalSourceBinding",
+    "SourceQualified",
+    "Task1Pass",
+    "nonclaims"
+  ],
+  "properties": {
+    "schema": {
+      "const": "afw.c2-notices-n3.own-fix2-and-producer-data-proof.v1"
+    },
+    "nomination": {
+      "const": "AFW-C2-N3-OWN-MODELS-FIX2-ONEUSE-20261116"
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "branch",
+        "workflow",
+        "job",
+        "baselineSource",
+        "baselineTree",
+        "head",
+        "tree",
+        "runId",
+        "runAttempt",
+        "node",
+        "startedAt",
+        "completedAt"
+      ],
+      "properties": {
+        "repository": {
+          "const": "tokenizartinfo-ops/agent-friendly-web"
+        },
+        "branch": {
+          "const": "lab/afw-c2-own-receiver-20261116-notices-n3-models-fix2"
+        },
+        "workflow": {
+          "const": ".github/workflows/afw-c2-notices-n3-own-models-fix2.yml"
+        },
+        "job": {
+          "const": "c2-notices-n3-own-models-fix2"
+        },
+        "baselineSource": {
+          "const": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        },
+        "baselineTree": {
+          "const": "62e78926635d6b74f288d6c0d69e0f2516306989"
+        },
+        "head": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "runId": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "runAttempt": {
+          "const": 1
+        },
+        "node": {
+          "const": "v22.23.4"
+        },
+        "startedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runnerHash",
+        "workflowHash",
+        "inputIndexHash",
+        "closureHash",
+        "selectionHash",
+        "proofSchemaHash"
+      ],
+      "properties": {
+        "runnerHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "workflowHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "inputIndexHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "closureHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "selectionHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "proofSchemaHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "idsHash"
+      ],
+      "properties": {
+        "count": {
+          "const": 527
+        },
+        "idsHash": {
+          "const": "7ebfe81081f2acedc229960be97f00eb1747746a02a857d3a318248d06cabedd"
+        }
+      }
+    },
+    "results": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "passed",
+        "failed",
+        "skipped",
+        "todo",
+        "cancelled",
+        "missing",
+        "extra",
+        "duplicate",
+        "ordered"
+      ],
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 527
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 527
+        },
+        "skipped": {
+          "const": 0
+        },
+        "todo": {
+          "const": 0
+        },
+        "cancelled": {
+          "const": 0
+        },
+        "missing": {
+          "const": 0
+        },
+        "extra": {
+          "const": 0
+        },
+        "duplicate": {
+          "const": 0
+        },
+        "ordered": {
+          "const": true
+        }
+      }
+    },
+    "models": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "inputFiles",
+        "ownModules",
+        "controlCount",
+        "idsHash"
+      ],
+      "properties": {
+        "kind": {
+          "const": "OWN_FICTITIOUS_INPUTS_AND_SOURCE_LITERAL_DATA_ONLY"
+        },
+        "inputFiles": {
+          "const": 20
+        },
+        "ownModules": {
+          "const": 4
+        },
+        "controlCount": {
+          "const": 517
+        },
+        "idsHash": {
+          "const": "d490d6ce80ba0364adc3edf75c9188b510b1a0766dd7bff553f9dcb2534ca267"
+        }
+      }
+    },
+    "producerData": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "staticBytesVerified",
+        "controlCount",
+        "passed",
+        "failed",
+        "bodyCount",
+        "manifestHash",
+        "rawManifestHash",
+        "bindingsHash",
+        "idsHash",
+        "sourceExpectedContext"
+      ],
+      "properties": {
+        "staticBytesVerified": {
+          "const": true
+        },
+        "controlCount": {
+          "const": 10
+        },
+        "passed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "bodyCount": {
+          "const": 21
+        },
+        "manifestHash": {
+          "const": "44a2527e1a54cb79a6feec9a04a996ad1b288a35117763e2037c7e8d64cf18f8"
+        },
+        "rawManifestHash": {
+          "const": "27f9b289888ba4155fcaca9739f0b074aeda7e781c7796a1e8e83501fcf79a5e"
+        },
+        "bindingsHash": {
+          "const": "7ccf7c0c61f16d98e1033cf52f127b1181173015b95d7270a3be3ccd30199822"
+        },
+        "idsHash": {
+          "const": "81c9065544e14dbc45a3cdea148c663acd1d62046ba8584373d6c8f63d7538f3"
+        },
+        "sourceExpectedContext": {
+          "const": null
+        }
+      }
+    },
+    "ownModelsExecuted": {
+      "const": true
+    },
+    "actualSourceExecution": {
+      "const": false
+    },
+    "finalSourceBinding": {
+      "const": false
+    },
+    "SourceQualified": {
+      "const": false
+    },
+    "Task1Pass": {
+      "const": false
+    },
+    "nonclaims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "historicalCauseProven",
+        "receiptAuthenticated",
+        "operationalReadiness",
+        "completePackage",
+        "PCoff",
+        "globalNativeDrainVerified",
+        "sdkNamespaceEmptyVerified"
+      ],
+      "properties": {
+        "historicalCauseProven": {
+          "const": false
+        },
+        "receiptAuthenticated": {
+          "const": false
+        },
+        "operationalReadiness": {
+          "const": false
+        },
+        "completePackage": {
+          "const": false
+        },
+        "PCoff": {
+          "const": false
+        },
+        "globalNativeDrainVerified": {
+          "const": false
+        },
+        "sdkNamespaceEmptyVerified": {
+          "const": false
+        }
+      }
+    }
+  }
+}

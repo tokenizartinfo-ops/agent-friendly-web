@@ -1,0 +1,129 @@
+{
+  "schema": "root-own.n3.b2-partial-report.v1",
+  "status": "B2_DATA_READY_FINAL_PRODUCER_BINDING_AND_NATIVE_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA and pure OWN RAM",
+  "origin": "GitHub API",
+  "allowedAction": "Independent OWN code and synthetic DATA only; no Source evaluation/import/compile/tests, files/dependencies/refs/runs/workflow/runtime",
+  "authority": {
+    "brief": "189905a0383ff7852a86ac1d54351872cf29eb05",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "projectionRuling": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "independentAxes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
+    "correctedStructuralSubpacket": "def7123feb4aabb809509836014d63e7cf6b477a",
+    "oldStructuralSchemaPreserved": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+    "outerSchema": "1c336fe190816b46223546971afcf34b2c216089",
+    "causalSchema": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+    "selection": "3db514b655917bd05917a90a53cb69667041fd36",
+    "selectionHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c"
+  },
+  "changes": [
+    "Original causal FSM retains exact abort matrix and independent logical-versus-target progress axes. Logical throw can precede retained action target terminal; callback absence does not mean physically pending. Logical return cannot precede the target terminal.",
+    "At most one promise row may select target-pair workscope. Independent RED accepted both extra-unobserved and extra-observed pair rows. Narrow guard rejects them; coherent public renumbering to ordinal3 remains accepted. No uniqueness generalized to other workscope roles.",
+    "Independent N3 journal joins exact ordered bindings, action/count/HTTP/before-after probes, hook baseline/windows/guard/native/custody and one causal record after after-probe and before NOTICES count. Blocked NOTICES has no causal record. Missing causal under honest timeout uses a fresh per-call unknown summary.",
+    "Envelope and witness parser verifies exact schema, canonical JSON/UTF8/LF, record/journal/outcome caps, exact controls, producer manifest16-key hash, compilation five-input manifest and known ledger hash/bytes plus actual observed hostcall2 compiled M/QA descriptions.",
+    "API joins trusted expected repository/branch/workflow/one-use message/job/parent/head/tree/run/job/attempt and ordered command steps, dates, capture frames and raw artifact listing/digest/ZIP. ZIP supports stored/deflate, flags8 zero local lengths and signed/unsigned data descriptors with central lengths and CRC.",
+    "Old schema literal kept N3 selection authority; generic shape correctly failed two stale N2 constants. Original Source author supplied schema1c changing exactly those two constants, no fixture normalization."
+  ],
+  "interface": {
+    "n3TraceReplay(snapshot)": "Independent public causal snapshot replay; no Source code",
+    "n3CausalReplay(recordObject|canonicalNDJSONstring|UTF8Buffer)": "Exact schema/canonical UTF8+LF and6144B causal record, returns summary",
+    "n3Replay(rawJournal,binding,condition,native)": "Independent exact journal FSM, returns observation+causal",
+    "n3ApiJoin({run,jobs,commit},expected,policy)": "Checks actual raw API DATA against trusted caller context",
+    "n3Read(input,trusted,sha256,inflateRawSync)": "Full verification; input expected must equal separately supplied trusted.expected",
+    "trustedShape": [
+      "expected",
+      "manifest",
+      "protocolHashes",
+      "ledgerBytes",
+      "policy"
+    ],
+    "expectedKeys": [
+      "repository",
+      "branch",
+      "workflowPath",
+      "oneUseMessage",
+      "job",
+      "parent",
+      "head",
+      "tree",
+      "runId",
+      "jobId"
+    ],
+    "manifestKeys": [
+      "schema",
+      "normalSourceIndexHash",
+      "selectionHash",
+      "contractHash",
+      "schemaHash",
+      "seamsHash",
+      "vectorsHash",
+      "driverHash",
+      "coupledHash",
+      "worldHash",
+      "helperHash",
+      "readerHash",
+      "loggerHash",
+      "slotHash",
+      "ledgerHash",
+      "transformHash"
+    ],
+    "protocolHashesKeys": [
+      "contractHash",
+      "schemaHash",
+      "seamsHash"
+    ],
+    "policy": "requiredSteps ordered unique names and commandStep included; final actual step policy is caller-bound and pending Source workflow/runner pins",
+    "trustedAuthorityBoundary": "Root must supply this separate argument from independently known final producer/API admission. Never populate it from outcome or artifact. Model trusted contexts are explicitly fictitious, not actual admission.",
+    "controlExport": "n3B2AllControls(data,sha256,inflateRawSync); control-input-map.json gives exact DATA argument paths"
+  },
+  "tests": {
+    "total": 496,
+    "uniqueIds": 496,
+    "failed": 0,
+    "preservedB1": 332,
+    "execution": "Pure OWN RAM final causal/journal/envelope functions checked together. No native import graph invoked and no Source code compiled/imported/evaluated/tested.",
+    "testFirst": [
+      "axes-red.json: old B1 false rejects before axes correction",
+      "pair-cardinality-red.json: two OWN false accepts before one-row guard",
+      "full-input-red.json: generic shape false accepts coherent semantic forgeries before B2 guards",
+      "state-alias-red.json: shared missing-causal summary contamination before per-call clone",
+      "shape-red-old-schema.json: wrong Source schema constants preserved and reported before original author fix"
+    ],
+    "coherentCaptures": "42 full +8 supplement +17 axes +2 blocked +3 cardinality models; one cross-call state control. All use fresh coherent frame, witness, payload and ZIP hashes with fictitious API context.",
+    "sourceLiteralConsumption": "Current63+6axes+2reducer snapshots consumed solely as DATA. Earlier43 remain separately for B1 compatibility."
+  },
+  "proofLimits": [
+    "Public ordinals are local projection identifiers, not authenticated JS object identity or stable crosssnapshot/realm/M continuity. One pair promise row does not authenticate whether producer selected call-returned p2 versus private run(). Known producer and real seam controls must establish that.",
+    "Arrival/source sequence, callback retention/settlement observations and parent markers do not establish physical cause, timer/expiry, parent abort trigger, race winner, private-promise pending, drain or all ancestors closed. First error remains scope-wide even when focused child differs.",
+    "Projection gap honesty cannot be inferred from coherently omitted rows. Focus must be selected before pruning and preserve required first error/p2. Known fixed producer plus its real units establish reducer behavior; two expected Source reducer snapshots are only DATA compatibility.",
+    "Guard and native childTAP projections remain Source-emitted safe observations; absent raw private arrays, message stream, TAP or compiled inputs are not independently parsed or reconstructed. Compilation metadata joins exposed current-host-call descriptions and known ledger; it is not a hidden-input equality proof.",
+    "Fictitious models are clearly OWN synthetic and must never become receipts. Source-executed protocol flags inside these hypothetical records encode the schema's hypothetical occurrence; surrounding model and report state actual Source execution false."
+  ],
+  "pending": [
+    "Final Source producerManifest16 values/schema marker and all producer body/index/runner/workflow pins",
+    "Exact actual API expected context and command-step admission policy from Root",
+    "Final trusted binding and independent fullreadback of any new producer packet",
+    "Root native OWN module import graph/covering gate and scoped independent review",
+    "Any Source activation requires separate Root gate; no provisional runner or workflow authored"
+  ],
+  "reversion": "New namespace only; full beforeimages and bidirectional exact deltas in reversible-diff.json; old OWN and Source DATA unchanged.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "refsCreated": 0,
+  "runsCreated": 0,
+  "filesCreated": 0,
+  "dependenciesInstalled": 0,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
