@@ -1,0 +1,980 @@
+{
+  "schema": "afw.c2-notices-n3.r4-firstlimit-tool-index.v1",
+  "status": "FINAL_TOOLING_DATA_PENDING_ROOT_NATIVE",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "baseline": {
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "source": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "originalBlobModes": 3203
+  },
+  "authority": {
+    "ruling": "a969930b2fea38173ac84b33aa85f9f6ef85e516",
+    "rootSeal": "18f7bc92ad395e87042666399e736aa4dffbe278",
+    "supplement": "fea7c4ec837887c87f33720d799fcfa76cdede3f",
+    "priorNative47": "f22df7c75028c01206266a3c4df26e7c31ef7864",
+    "review": "f5e61bf12e1db35aa29ce19652a760b3baaf9624"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+    "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-tool.yml",
+    "job": "c2-notices-n3-firstlimit-w1-tool",
+    "message": "AFW-C2-N3-FIRSTLIMIT-W1-TOOL-ONEUSE-20261116",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs",
+    "caseMs": 10000,
+    "jobMinutes": 3,
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/",
+    "node": "22.23.4",
+    "attempt": 1,
+    "contents": "read",
+    "artifactDays": 7,
+    "artifact": {
+      "name": "afw-c2-notices-n3-firstlimit-w1-tool",
+      "path": "output/c2-notices-n3-firstlimit-w1-tool.json",
+      "fileName": "c2-notices-n3-firstlimit-w1-tool.json",
+      "expectedCount": 1,
+      "retentionDays": 7,
+      "payloadCapBytes": 24576
+    },
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs",
+    "beforeRunner": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-before.mjs",
+    "commandBefore": "node docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-before.mjs"
+  },
+  "expandedTreeRule": {
+    "originalLeaves": 3203,
+    "newLeaves": 47,
+    "totalLeaves": 3250,
+    "before": null,
+    "require": "All47 nominated leaves absent at BASE; expected directory/workflow returned404 at exact BASE. No other additions or mode/blob changes. Root independently verifies expanded tree, permissions, branch and job."
+  },
+  "entries": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-qa-ledger.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 17134,
+        "sha256": "190523e50bf39c23190c895833d50ef40af069436b670f81fc5c6478e0bafe2b",
+        "gitBlob": "68f1c25ee67fa63b7d83d64435923548040ca813",
+        "blob": "68f1c25ee67fa63b7d83d64435923548040ca813",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-qa-compiler.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 12699,
+        "sha256": "d6b007ac9ad44b76a493f494d0b0c4a6a1180c18574a1f139e36c9a3abfa9dd2",
+        "gitBlob": "6198cc0656ed66487e25abee67847190cf92d1b5",
+        "blob": "6198cc0656ed66487e25abee67847190cf92d1b5",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-unit-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 21907,
+        "sha256": "8bf6a9f33a46c15f24e04b89fd6b6068b8197cb4eb9aea42c41ce7b0a1916076",
+        "gitBlob": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+        "blob": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 31798,
+        "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+        "gitBlob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+        "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-trace-reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 11567,
+        "sha256": "e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829",
+        "gitBlob": "4878edb13dad6a9421c457cc850a370d75b84b1c",
+        "blob": "4878edb13dad6a9421c457cc850a370d75b84b1c",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-core-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 13179,
+        "sha256": "fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95",
+        "gitBlob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542",
+        "blob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-trace-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 854,
+        "sha256": "ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758",
+        "gitBlob": "adff3fbc4649f95389b03896ff82bc7ed538c516",
+        "blob": "adff3fbc4649f95389b03896ff82bc7ed538c516",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-logger.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 8370,
+        "sha256": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+        "gitBlob": "4eeaad011444e566f2e0cc99bd897e4a01848a77",
+        "blob": "4eeaad011444e566f2e0cc99bd897e4a01848a77",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-slot.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 2072,
+        "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+        "gitBlob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+        "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 915177,
+        "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+        "gitBlob": "ce6aa394580a0c26e5fe5c9006cafe06db109530",
+        "blob": "ce6aa394580a0c26e5fe5c9006cafe06db109530",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-reducer-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 43673,
+        "sha256": "acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9",
+        "gitBlob": "8881c57552b88cd757579b6de120e1f4fca0304c",
+        "blob": "8881c57552b88cd757579b6de120e1f4fca0304c",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/schema.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 29785,
+        "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+        "gitBlob": "1c336fe190816b46223546971afcf34b2c216089",
+        "blob": "1c336fe190816b46223546971afcf34b2c216089",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/normal-lease.txt",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 2257,
+        "sha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e",
+        "gitBlob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+        "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/normal-op.txt",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+        "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/normal-phase.txt",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/normal-publication.txt",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+        "gitBlob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/normal-world.txt",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/observer-world.txt",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 89873,
+        "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+        "gitBlob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+        "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/contract.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 19539,
+        "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+        "gitBlob": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+        "blob": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/seams.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 14141,
+        "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+        "gitBlob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+        "blob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-unfocused-routine-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 1325,
+        "sha256": "6d2655b173310765608610e69b47d1b667bd27b83197678dded4dc66b53e660d",
+        "gitBlob": "c26bdbaa9d94df8c1e3a3f281d631180023af020",
+        "blob": "c26bdbaa9d94df8c1e3a3f281d631180023af020",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/fix2-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 23700,
+        "sha256": "bfff8d3388ac157986677c79fa151582e9bd08929ccde54c1bf5f33175fad45b",
+        "gitBlob": "7e4cae13603483c46e5e8ca7872290d00eb1de3a",
+        "blob": "7e4cae13603483c46e5e8ca7872290d00eb1de3a",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/tooling-fix2-contract.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 4291,
+        "sha256": "db1ff3cc391800c0996b8e686c808534429dcfd0a1056e29f6306e70d498ec78",
+        "gitBlob": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95",
+        "blob": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/ph-anchor-audit.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 12743,
+        "sha256": "e04ac361d61f80f7b1476c2843818373526c25af5c240776935c14d13c02e5fa",
+        "gitBlob": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+        "blob": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/n3-census-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 10186,
+        "sha256": "4554f4fe3021de40946fd4ff9352a20b8b1a1dfa41dda2727005f6262264a393",
+        "gitBlob": "671579d000853ea8cbdf20d0a36d37264dd9cfc3",
+        "blob": "671579d000853ea8cbdf20d0a36d37264dd9cfc3",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/census-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 11850,
+        "sha256": "979ac9aff672470252c7d79225025bac6462f88fc2c0ecd903c6ee8416237ba2",
+        "gitBlob": "40938228fef16fb64f855cb3f3a2e41069222037",
+        "blob": "40938228fef16fb64f855cb3f3a2e41069222037",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/census-contract.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 9092,
+        "sha256": "ff2a82520fb1cd69aa7d29f1a19a1df2ba00cb685be0847f16877537e222aa55",
+        "gitBlob": "d255278df50c70f2b8f09b3b1ed217fa059e22dd",
+        "blob": "d255278df50c70f2b8f09b3b1ed217fa059e22dd",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/census-selection.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 3809,
+        "sha256": "971776a9bdb14459d82eaceb649fe85565e3866d3be3fc9cccdeebcc7d8e8700",
+        "gitBlob": "fb241bc06204e5d1401822ad92679ec20665391d",
+        "blob": "fb241bc06204e5d1401822ad92679ec20665391d",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/legacy-ledger.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 16602,
+        "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+        "gitBlob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+        "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/r4-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 8496,
+        "sha256": "6080058e4e855a4ba63efc49042a64b2731af2ac13c70b4b2d779874d06a781a",
+        "gitBlob": "d21ab3437f7a8057ccc8c3bfa2c08c246464bad8",
+        "blob": "d21ab3437f7a8057ccc8c3bfa2c08c246464bad8",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/r4-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 7350,
+        "sha256": "6c2697673561162669ac724afd427025270e8b0a1d437140a5ba9505100f9eaa",
+        "gitBlob": "5c37c0c7dfe1206241b8877571184a00fa799b62",
+        "blob": "5c37c0c7dfe1206241b8877571184a00fa799b62",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/before-red.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 1171,
+        "sha256": "e123666909f47d95e03208890cb2adc808685d0b202e5b4089b001dba7029990",
+        "gitBlob": "9746c641eef82bcfa57fd48bceec59267547ce19",
+        "blob": "9746c641eef82bcfa57fd48bceec59267547ce19",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/r4-selection.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 5189,
+        "sha256": "fbf76015ca498a2a73229b907c661ba0d6580da6ed1ac0ae73c9e846325297aa",
+        "gitBlob": "870f0847593656cbf38b2b22695b29fb86124e98",
+        "blob": "870f0847593656cbf38b2b22695b29fb86124e98",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/w1-reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 33254,
+        "sha256": "56abe20c95ba5d324a2b72da096b0caaad6f2f8f0e4c3f198c7db64eb7fa5d57",
+        "gitBlob": "9b75551431c10362dc92c87dd9af41e87b8fb67d",
+        "blob": "9b75551431c10362dc92c87dd9af41e87b8fb67d",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/w1-trace-reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 11825,
+        "sha256": "868723b34cfcc1b8247279f02f5a20ab774dc8cf813d1b02337fdf039194d009",
+        "gitBlob": "fbcf1427819146075f6b4736a5386bbdfc1f0fc2",
+        "blob": "fbcf1427819146075f6b4736a5386bbdfc1f0fc2",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/w1-native-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 5368,
+        "sha256": "19fb57d62a60d00845d1c4885cbdfca477b413c2c1f2ef7dc7355ba1f34ce3a7",
+        "gitBlob": "58b14b6af5dddc78693a1fd313d42834049af103",
+        "blob": "58b14b6af5dddc78693a1fd313d42834049af103",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/first-limit-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 17556,
+        "sha256": "be94a9381b937ab655e8a0bd652dc4d6bbe2f21b2449b23d49f609ad9a0efe26",
+        "gitBlob": "bd8bfae45c75ce498aab5a6bbb7258cdec185e0a",
+        "blob": "bd8bfae45c75ce498aab5a6bbb7258cdec185e0a",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/w1-selection.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 2626,
+        "sha256": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+        "gitBlob": "c1601719648fc4992fe520ef051b89852a6216f5",
+        "blob": "c1601719648fc4992fe520ef051b89852a6216f5",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/calibration-ledger.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 17033,
+        "sha256": "a034da7e1dfaeb020105fa2820a7b3f05f5d2791f4de267e1fba5a087077d177",
+        "gitBlob": "59ad15b7fd23697645bfa928c2c6127386e18422",
+        "blob": "59ad15b7fd23697645bfa928c2c6127386e18422",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/w1-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-code",
+      "after": {
+        "bytes": 9600,
+        "sha256": "03f39f3b2df679417fd35878cb4ac4b314b1b87813cf184f4c1c57a2421877bc",
+        "gitBlob": "f9276823815d48f0fbc16ffd22a8d9dd0b5dba80",
+        "blob": "f9276823815d48f0fbc16ffd22a8d9dd0b5dba80",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/w1-schema.json",
+      "mode": "100644",
+      "before": null,
+      "role": "inert-DATA",
+      "after": {
+        "bytes": 30988,
+        "sha256": "3dd4d6e5757c789d284e75e5430774ed2d660a87339b8bfd77d628b3c22c6690",
+        "gitBlob": "19378e2d858bfb1c60a6368fc614ebf1fad7c875",
+        "blob": "19378e2d858bfb1c60a6368fc614ebf1fad7c875",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-before.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "before-program",
+      "after": {
+        "bytes": 13447,
+        "sha256": "7b591826e2d6f780b2c5ab8ff807ee64f8049c42789e68639b7facbdf1f4fd96",
+        "gitBlob": "a24f33e50fef8b82cc9d81b8891735d7cf70dd4c",
+        "blob": "a24f33e50fef8b82cc9d81b8891735d7cf70dd4c",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "role": "tooling-runner",
+      "after": {
+        "bytes": 28977,
+        "sha256": "137c6daaaa92766d8cd5a21918c033179926bd124fe60b187a1bac60252b71b5",
+        "gitBlob": "d9a27ab6dd058595b6961610e33b99cc5b617db4",
+        "blob": "d9a27ab6dd058595b6961610e33b99cc5b617db4",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/tool-proof-schema.json",
+      "mode": "100644",
+      "before": null,
+      "role": "proof-schema-DATA",
+      "after": {
+        "bytes": 20743,
+        "sha256": "eb0235ceea63b70ac23b8ab4b1802a414aef17680ded063b9a59e03d584f6dbc",
+        "gitBlob": "7051988b191b33dbd99f2cd318def52587fd637b",
+        "blob": "7051988b191b33dbd99f2cd318def52587fd637b",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/report.json",
+      "mode": "100644",
+      "before": null,
+      "role": "report-DATA",
+      "after": {
+        "bytes": 9283,
+        "sha256": "3603c975a8279a9fcde4fdae4ba117525f5df8a9b5c0f413d7365a2afc1a96fd",
+        "gitBlob": "ff495362f43b48de1f486275e3ae4810a36e5202",
+        "blob": "ff495362f43b48de1f486275e3ae4810a36e5202",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/reversibles.json",
+      "mode": "100644",
+      "before": null,
+      "role": "reversible-DATA",
+      "after": {
+        "bytes": 6162,
+        "sha256": "e1e8ca702a54db76b22214fca757f670917d066d343e6e5ee1801c76f6b34561",
+        "gitBlob": "6b20607886f35f5f9bcebe4d39aded141b848dd1",
+        "blob": "6b20607886f35f5f9bcebe4d39aded141b848dd1",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-tool.yml",
+      "mode": "100644",
+      "before": null,
+      "role": "one-use-tooling-workflow-DATA",
+      "after": {
+        "bytes": 1668,
+        "sha256": "62db8a63d66298757da97dede78af40f9acff69af0bf8018b14d8436ef60542b",
+        "gitBlob": "d255277c85468d9a947d2dad55be90432d5e439c",
+        "blob": "d255277c85468d9a947d2dad55be90432d5e439c",
+        "fullReadback": true
+      }
+    }
+  ],
+  "inputHashes": [
+    {
+      "file": "n3-qa-ledger.mjs",
+      "bytes": 17134,
+      "sha256": "190523e50bf39c23190c895833d50ef40af069436b670f81fc5c6478e0bafe2b",
+      "blob": "68f1c25ee67fa63b7d83d64435923548040ca813"
+    },
+    {
+      "file": "n3-qa-compiler.mjs",
+      "bytes": 12699,
+      "sha256": "d6b007ac9ad44b76a493f494d0b0c4a6a1180c18574a1f139e36c9a3abfa9dd2",
+      "blob": "6198cc0656ed66487e25abee67847190cf92d1b5"
+    },
+    {
+      "file": "n3-unit-controls.mjs",
+      "bytes": 21907,
+      "sha256": "8bf6a9f33a46c15f24e04b89fd6b6068b8197cb4eb9aea42c41ce7b0a1916076",
+      "blob": "e987e103122b3318638d7a5e57bd6e41df81cd8d"
+    },
+    {
+      "file": "n3-reader.mjs",
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626"
+    },
+    {
+      "file": "n3-trace-reader.mjs",
+      "bytes": 11567,
+      "sha256": "e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829",
+      "blob": "4878edb13dad6a9421c457cc850a370d75b84b1c"
+    },
+    {
+      "file": "n3-core-controls.mjs",
+      "bytes": 13179,
+      "sha256": "fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95",
+      "blob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542"
+    },
+    {
+      "file": "n3-trace-controls.mjs",
+      "bytes": 854,
+      "sha256": "ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758",
+      "blob": "adff3fbc4649f95389b03896ff82bc7ed538c516"
+    },
+    {
+      "file": "n3-logger.mjs",
+      "bytes": 8370,
+      "sha256": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+      "blob": "4eeaad011444e566f2e0cc99bd897e4a01848a77"
+    },
+    {
+      "file": "n3-slot.mjs",
+      "bytes": 2072,
+      "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "blob": "6507ca2410ac27606f4996e97a91736c5e14b615"
+    },
+    {
+      "file": "n3-vectors.json",
+      "bytes": 915177,
+      "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+      "blob": "ce6aa394580a0c26e5fe5c9006cafe06db109530"
+    },
+    {
+      "file": "n3-reducer-vectors.json",
+      "bytes": 43673,
+      "sha256": "acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9",
+      "blob": "8881c57552b88cd757579b6de120e1f4fca0304c"
+    },
+    {
+      "file": "schema.json",
+      "bytes": 29785,
+      "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+      "blob": "1c336fe190816b46223546971afcf34b2c216089"
+    },
+    {
+      "file": "normal-lease.txt",
+      "bytes": 2257,
+      "sha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e",
+      "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9"
+    },
+    {
+      "file": "normal-op.txt",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908"
+    },
+    {
+      "file": "normal-phase.txt",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5"
+    },
+    {
+      "file": "normal-publication.txt",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3"
+    },
+    {
+      "file": "normal-world.txt",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5"
+    },
+    {
+      "file": "observer-world.txt",
+      "bytes": 89873,
+      "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+      "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23"
+    },
+    {
+      "file": "contract.json",
+      "bytes": 19539,
+      "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+      "blob": "40e93f21d6564e2a0bbe9a4ace266d992a357718"
+    },
+    {
+      "file": "seams.json",
+      "bytes": 14141,
+      "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+      "blob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640"
+    },
+    {
+      "file": "n3-unfocused-routine-vectors.json",
+      "bytes": 1325,
+      "sha256": "6d2655b173310765608610e69b47d1b667bd27b83197678dded4dc66b53e660d",
+      "blob": "c26bdbaa9d94df8c1e3a3f281d631180023af020"
+    },
+    {
+      "file": "fix2-vectors.json",
+      "bytes": 23700,
+      "sha256": "bfff8d3388ac157986677c79fa151582e9bd08929ccde54c1bf5f33175fad45b",
+      "blob": "7e4cae13603483c46e5e8ca7872290d00eb1de3a"
+    },
+    {
+      "file": "tooling-fix2-contract.json",
+      "bytes": 4291,
+      "sha256": "db1ff3cc391800c0996b8e686c808534429dcfd0a1056e29f6306e70d498ec78",
+      "blob": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95"
+    },
+    {
+      "file": "ph-anchor-audit.json",
+      "bytes": 12743,
+      "sha256": "e04ac361d61f80f7b1476c2843818373526c25af5c240776935c14d13c02e5fa",
+      "blob": "9b858f9bd542dcb2b56ac52f85af951e87afe685"
+    },
+    {
+      "file": "n3-census-controls.mjs",
+      "bytes": 10186,
+      "sha256": "4554f4fe3021de40946fd4ff9352a20b8b1a1dfa41dda2727005f6262264a393",
+      "blob": "671579d000853ea8cbdf20d0a36d37264dd9cfc3"
+    },
+    {
+      "file": "census-vectors.json",
+      "bytes": 11850,
+      "sha256": "979ac9aff672470252c7d79225025bac6462f88fc2c0ecd903c6ee8416237ba2",
+      "blob": "40938228fef16fb64f855cb3f3a2e41069222037"
+    },
+    {
+      "file": "census-contract.json",
+      "bytes": 9092,
+      "sha256": "ff2a82520fb1cd69aa7d29f1a19a1df2ba00cb685be0847f16877537e222aa55",
+      "blob": "d255278df50c70f2b8f09b3b1ed217fa059e22dd"
+    },
+    {
+      "file": "census-selection.json",
+      "bytes": 3809,
+      "sha256": "971776a9bdb14459d82eaceb649fe85565e3866d3be3fc9cccdeebcc7d8e8700",
+      "blob": "fb241bc06204e5d1401822ad92679ec20665391d"
+    },
+    {
+      "file": "legacy-ledger.mjs",
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8"
+    },
+    {
+      "file": "r4-vectors.json",
+      "bytes": 8496,
+      "sha256": "6080058e4e855a4ba63efc49042a64b2731af2ac13c70b4b2d779874d06a781a",
+      "blob": "d21ab3437f7a8057ccc8c3bfa2c08c246464bad8"
+    },
+    {
+      "file": "r4-controls.mjs",
+      "bytes": 7350,
+      "sha256": "6c2697673561162669ac724afd427025270e8b0a1d437140a5ba9505100f9eaa",
+      "blob": "5c37c0c7dfe1206241b8877571184a00fa799b62"
+    },
+    {
+      "file": "before-red.mjs",
+      "bytes": 1171,
+      "sha256": "e123666909f47d95e03208890cb2adc808685d0b202e5b4089b001dba7029990",
+      "blob": "9746c641eef82bcfa57fd48bceec59267547ce19"
+    },
+    {
+      "file": "r4-selection.json",
+      "bytes": 5189,
+      "sha256": "fbf76015ca498a2a73229b907c661ba0d6580da6ed1ac0ae73c9e846325297aa",
+      "blob": "870f0847593656cbf38b2b22695b29fb86124e98"
+    },
+    {
+      "file": "w1-reader.mjs",
+      "bytes": 33254,
+      "sha256": "56abe20c95ba5d324a2b72da096b0caaad6f2f8f0e4c3f198c7db64eb7fa5d57",
+      "blob": "9b75551431c10362dc92c87dd9af41e87b8fb67d"
+    },
+    {
+      "file": "w1-trace-reader.mjs",
+      "bytes": 11825,
+      "sha256": "868723b34cfcc1b8247279f02f5a20ab774dc8cf813d1b02337fdf039194d009",
+      "blob": "fbcf1427819146075f6b4736a5386bbdfc1f0fc2"
+    },
+    {
+      "file": "w1-native-vectors.json",
+      "bytes": 5368,
+      "sha256": "19fb57d62a60d00845d1c4885cbdfca477b413c2c1f2ef7dc7355ba1f34ce3a7",
+      "blob": "58b14b6af5dddc78693a1fd313d42834049af103"
+    },
+    {
+      "file": "first-limit-vectors.json",
+      "bytes": 17556,
+      "sha256": "be94a9381b937ab655e8a0bd652dc4d6bbe2f21b2449b23d49f609ad9a0efe26",
+      "blob": "bd8bfae45c75ce498aab5a6bbb7258cdec185e0a"
+    },
+    {
+      "file": "w1-selection.json",
+      "bytes": 2626,
+      "sha256": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+      "blob": "c1601719648fc4992fe520ef051b89852a6216f5"
+    },
+    {
+      "file": "calibration-ledger.mjs",
+      "bytes": 17033,
+      "sha256": "a034da7e1dfaeb020105fa2820a7b3f05f5d2791f4de267e1fba5a087077d177",
+      "blob": "59ad15b7fd23697645bfa928c2c6127386e18422"
+    },
+    {
+      "file": "w1-controls.mjs",
+      "bytes": 9600,
+      "sha256": "03f39f3b2df679417fd35878cb4ac4b314b1b87813cf184f4c1c57a2421877bc",
+      "blob": "f9276823815d48f0fbc16ffd22a8d9dd0b5dba80"
+    },
+    {
+      "file": "w1-schema.json",
+      "bytes": 30988,
+      "sha256": "3dd4d6e5757c789d284e75e5430774ed2d660a87339b8bfd77d628b3c22c6690",
+      "blob": "19378e2d858bfb1c60a6368fc614ebf1fad7c875"
+    }
+  ],
+  "selection": {
+    "bytes": 5189,
+    "sha256": "fbf76015ca498a2a73229b907c661ba0d6580da6ed1ac0ae73c9e846325297aa",
+    "gitBlob": "870f0847593656cbf38b2b22695b29fb86124e98",
+    "blob": "870f0847593656cbf38b2b22695b29fb86124e98",
+    "fullReadback": true
+  },
+  "proofSchema": {
+    "bytes": 20743,
+    "sha256": "eb0235ceea63b70ac23b8ab4b1802a414aef17680ded063b9a59e03d584f6dbc",
+    "gitBlob": "7051988b191b33dbd99f2cd318def52587fd637b",
+    "blob": "7051988b191b33dbd99f2cd318def52587fd637b",
+    "fullReadback": true
+  },
+  "fullDiff": {
+    "bytes": 424188,
+    "sha256": "adea1cc987e4c036fdc7c77e4639afffa34fc6d5ac9bf4f73fd051e3d8100e92",
+    "gitBlob": "51450ec47f19ae682f7d3d132f728c3757540f0a",
+    "blob": "51450ec47f19ae682f7d3d132f728c3757540f0a",
+    "fullReadback": true
+  },
+  "report": {
+    "bytes": 9283,
+    "sha256": "3603c975a8279a9fcde4fdae4ba117525f5df8a9b5c0f413d7365a2afc1a96fd",
+    "gitBlob": "ff495362f43b48de1f486275e3ae4810a36e5202",
+    "blob": "ff495362f43b48de1f486275e3ae4810a36e5202",
+    "fullReadback": true
+  },
+  "reversibles": {
+    "bytes": 6162,
+    "sha256": "e1e8ca702a54db76b22214fca757f670917d066d343e6e5ee1801c76f6b34561",
+    "gitBlob": "6b20607886f35f5f9bcebe4d39aded141b848dd1",
+    "blob": "6b20607886f35f5f9bcebe4d39aded141b848dd1",
+    "fullReadback": true
+  },
+  "counts": {
+    "nativeBeforeExpectedFail": 3,
+    "nativeAfterExpectedPass": 62,
+    "inputHashes": 41
+  },
+  "oldControls": {
+    "legacy47": "eddf0e03c94817509f02a334a8e73844728538f1",
+    "beforeFrozenLedger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "afterA": "b395ccb51359b04e84de430a99871f605312ef28",
+    "afterW": "68f1c25ee67fa63b7d83d64435923548040ca813",
+    "old41UnitBodies": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+    "jobsPrefix41TextIdentical": true,
+    "old31Positive32Negative": true
+  },
+  "sizing": {
+    "proofModelBytes": 19171,
+    "limit": 24576,
+    "refinedCausalEnvelopeMaxBytes": 425,
+    "selectedLimit": 6144
+  },
+  "readback": "All new bodies were fully read back and verified against raw UTF8 SHA256 and GitSHA1. Unchanged census fixtures use historical FULL readback and the actual native47 verified pinned hashes. New before and after admission programs independently hash all41 runtime inputs before imports.",
+  "sourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
