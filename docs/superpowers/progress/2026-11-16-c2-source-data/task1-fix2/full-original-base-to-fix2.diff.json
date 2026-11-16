@@ -1,0 +1,1771 @@
+{
+  "schema": "afw.c2-task1-full-source-diff.v1",
+  "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "sourceIndex": "f9f36a61875be344d38f19d77caf1a46c48e8f37",
+  "method": "complete line hunks plus exact full preimages; reverse application reconstructed every final body; no Source execution",
+  "files": [
+    {
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "7eb8f28760de60f143e487eeb6988705059a0a44",
+        "bytes": 126504
+      },
+      "after": {
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "gzipBytes": 32414
+      },
+      "hunks": [
+        {
+          "oldLine": 3,
+          "newLine": 3,
+          "old": [
+            "import {continuePrivateQaFiniteOwnerChoice,consumeFiniteOwnerStageAdmission} from './mcp-qa-finite-owner-preparation.mjs';"
+          ],
+          "new": [
+            "import {finiteOwnerCleanupScopeText,finiteOwnerCleanupScopeTextHash,sealFiniteOwnerCleanupScope,readFiniteOwnerCleanupScope,appendFiniteOwnerCleanupScope} from './mcp-qa-finite-owner-cleanup-scope.mjs';",
+            "import {qualifyFinitePrearmConfiguration} from './mcp-qa-finite-prearm-profile.mjs';",
+            "import {continuePrivateQaFiniteOwnerChoice,consumeFiniteOwnerStageAdmission,readPrivateQaFiniteOwnerPreparationFacts} from './mcp-qa-finite-owner-preparation.mjs';"
+          ]
+        },
+        {
+          "oldLine": 20,
+          "newLine": 22,
+          "old": [
+            "import {encodeFinitePreparationRecord as prepEncode} from './mcp-qa-finite-preparation-records.mjs';"
+          ],
+          "new": [
+            "import {decodeFinitePreparationRecord as prepDecode,encodeFinitePreparationRecord as prepEncode} from './mcp-qa-finite-preparation-records.mjs';"
+          ]
+        },
+        {
+          "oldLine": 59,
+          "newLine": 61,
+          "old": [],
+          "new": [
+            "const ownerStages=['connection','notices','finite'];",
+            "function ownerVersionConfiguration(raw,configKeys){",
+            " const wrappers=['id','number','startup_time_ms','annotations','urls','source','created_on','author_id','author_email','modules'];",
+            " fields(raw,[...configKeys,...wrappers.filter(k=>Object.hasOwn(raw,k)),...Object.hasOwn(raw,'cache_options')?['cache_options']:[]]);",
+            " const cfg=structuredClone(own(Object.fromEntries(configKeys.map(k=>[k,raw[k]]))));",
+            " fields(cfg.exports,['default','AfwNodeControl','AfwOwnEventNode']);",
+            " for(const [name,e]of Object.entries(cfg.exports)){",
+            "  const keys=name==='AfwOwnEventNode'?['type','storage','container']:['type'];",
+            "  fields(e,[...keys,...Object.hasOwn(e,'state')?['state']:[],...Object.hasOwn(e,'cache')?['cache']:[]]);",
+            "  if(Object.hasOwn(e,'state')){if(e.state!=='created')fail();delete e.state;}",
+            "  if(Object.hasOwn(e,'cache')){fields(e.cache,['enabled']);if(name==='AfwOwnEventNode'||e.cache.enabled!==false)fail();delete e.cache;}",
+            " }",
+            " if(Object.hasOwn(raw,'cache_options')){const keys=['enabled','cross_version_cache'].filter(k=>Object.hasOwn(raw.cache_options??{},k));if(!keys.length)fail();fields(raw.cache_options,keys);if(keys.some(k=>raw.cache_options[k]!==false))fail();}",
+            " return cfg;",
+            "}",
+            "function ownerStageConfiguration(stage,original,approval,pre,rows,capsule){",
+            " const configuration=structuredClone(original),text=(name,value)=>{const b=configuration.bindings.find(b=>b.name===name);if(!b)fail();b.text=value;};",
+            " if(stage==='connection'){text('AFW_DELEGATED_OAUTH_ENABLED','true');qualifyFiniteConnectionProfile({phase:'read_consent',metadata:configuration});}",
+            " else if(stage==='notices'){",
+            "  if(!rows?.grant||!rows.connection||!rows.consent||!pre)fail();",
+            "  const startAt=approval.approvedAt,expiresAt=Math.min(startAt+600000,Date.parse(rows.grant.expires_at),rows.connection.expiresAt,pre.expiresAt,pre.owner.accessExpiresAt,approval.expiresAt,capsule.C0,Date.parse(rows.consent.expires_at));",
+            "  if(startAt>=expiresAt)fail();",
+            "  text('AFW_DELEGATED_OAUTH_ENABLED','true');text('AFW_DOSSIER_MONITORING_OWNER_ENABLED','true');",
+            "  text('AFW_DOSSIER_MONITORING_OWNER_POLICY',JSON.stringify({grantId:rows.grant.id,projectId:rows.grant.project_id,clientId:rows.grant.client_id,startAt,expiresAt}));",
+            "  qualifyFiniteConnectionProfile({phase:'notice_consent',metadata:configuration});",
+            " }else if(stage==='finite')qualifyFinitePrearmConfiguration({metadata:configuration,originalConfiguration:original});else fail();",
+            " return configuration;",
+            "}"
+          ]
+        },
+        {
+          "oldLine": 144,
+          "newLine": 174,
+          "old": [
+            "    for(const prefix of ['afw.qa-finite-trial.v1:','source-selection:'+capsule.sourceRevision+':'])if((await rows(prefix,1)).size)fail();"
+          ],
+          "new": [
+            "    for(const prefix of ['afw.qa-finite-trial.v1:'])if((await rows(prefix,1)).size)fail();",
+            "    const selected=await child(l=>createFiniteOwnerPreparationStore({storage,now:Date.now}).readSelected({sourceRevision:capsule.sourceRevision},l));",
+            "    const selectionRows=await rows('source-selection:'+capsule.sourceRevision+':',3);",
+            "    if(!selected&&selectionRows.size||selected&&(selectionRows.size!==2||selected.binding!==null))fail();"
+          ]
+        },
+        {
+          "oldLine": 152,
+          "newLine": 185,
+          "old": [
+            "    const prefix='connection-preparation:'+capsule.preconnectionId+':',inventory=await rows(prefix,17),effects=await rows('afw.finite-policy-effect.v1:',33),enrollment=await rows('afw.finite-preparation-cleanup.v1:',3);",
+            "    if(inventory.size>16||effects.size>32||enrollment.size>2)fail();",
+            "    for(const k of inventory.keys())if(!['record','source','connection:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();"
+          ],
+          "new": [
+            "    const prefix='connection-preparation:'+capsule.preconnectionId+':',inventory=await rows(prefix,9),effects=await rows('afw.finite-policy-effect.v1:',17),enrollment=await rows('afw.finite-preparation-cleanup.v1:',3);",
+            "    if(inventory.size>8||effects.size>16||enrollment.size>2)fail();",
+            "    for(const k of inventory.keys())if(!['record','source','connection:approval','notices:approval','finite:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();"
+          ]
+        },
+        {
+          "oldLine": 159,
+          "newLine": 192,
+          "old": [
+            "    return {capsule,material,plan,a,inventory,effects,enrollment,issuer,sdk,notice,anchor:canonical({anchors:a,backupRaw,inventory:[...inventory],effects:[...effects],enrollment:[...enrollment],issuer,sdk:sdk.entries,notice})};"
+          ],
+          "new": [
+            "    const ownerFacts={tickets:[...await rows('owner-ticket:',7)],projects:[...await rows('owner-project-ref:',2)],approvals:[...await rows('connection-approval:',4)],preparations:[...await rows('preparation:',3)],selections:[...await rows('afw.finite-owner-selection.v1:',2)]};",
+            "    const cleanupScope=await child(l=>readFiniteOwnerCleanupScope({storage,preconnectionId:capsule.preconnectionId},l));",
+            "    return {capsule,material,plan,a,inventory,effects,enrollment,issuer,sdk,notice,ownerFacts,cleanupScope,selected,selectionRows,anchor:canonical({anchors:a,backupRaw,inventory:[...inventory],effects:[...effects],enrollment:[...enrollment],issuer,sdk:sdk.entries,notice,ownerFacts,cleanupScope,selected,selectionRows:[...selectionRows]})};"
+          ]
+        },
+        {
+          "oldLine": 213,
+          "newLine": 248,
+          "old": [
+            "     const expected=structuredClone(plan.configuration);expected.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';",
+            "     if(canonical(cfg)!==canonical(expected))fail();qualifyFiniteConnectionProfile({phase:'read_consent',metadata:cfg});"
+          ],
+          "new": [
+            "     const enabled=name=>cfg.bindings.find(b=>b.name===name)?.text;",
+            "     const phase=enabled('AFW_DELEGATED_OAUTH_ENABLED')==='true'?(enabled('AFW_DOSSIER_MONITORING_OWNER_ENABLED')==='true'?'notice_consent':'read_consent'):'closed_ui';",
+            "     qualifyFiniteConnectionProfile({phase,metadata:cfg});"
+          ]
+        },
+        {
+          "oldLine": 217,
+          "newLine": 253,
+          "old": [
+            "    return {project,pointer,currentConfiguration,configuration,initialBaseline:{versionId:capsule.activatedVersionId,deploymentId:capsule.activatedDeploymentId,moduleHash:sha(resident.bytes),configurationHash:finiteActivationConfigurationHash(plan.configuration),bindingsHash:finiteInitialCapsuleBindingsHash(configuration.bindings)}};"
+          ],
+          "new": [
+            "    const versionRows=await rows('afw.finite-policy-effect.v1:',17),versions={};",
+            "    for(const [key,raw]of versionRows){if(!key.endsWith(':ack'))continue;const ack=prepDecode('ConnectionAck',raw);",
+            "     const match=[...versionRows].find(([k,v])=>k.endsWith(':send')&&prepHash('ConnectionSend',prepDecode('ConnectionSend',v))===ack.sendHash&&prepDecode('ConnectionSend',v).effect==='upload');if(!match||ack.resourceId===pointer.versionId)continue;",
+            "     const value=finiteCfEnvelope((await request('/workers/workers/'+CANARY+'/versions/'+ack.resourceId+'?include=modules',4500000)).value);",
+            "     const cfgKeys=Object.keys(plan.configuration),wrappers=['id','number','startup_time_ms','annotations','urls','source','created_on','author_id','author_email','modules'];fields(value,[...cfgKeys,...wrappers.filter(k=>Object.hasOwn(value,k)),...Object.hasOwn(value,'cache_options')?['cache_options']:[]]);",
+            "     if(value.id!==ack.resourceId||!Array.isArray(value.urls)||value.urls.length||!Array.isArray(value.modules)||value.modules.length!==1)fail();",
+            "     const m=fields(value.modules[0],['name','content_type','content_base64']);if(m.name!=='index.mjs'||m.content_type!=='application/javascript+module'||m.content_base64!==Buffer.from(resident.bytes).toString('base64'))fail();",
+            "     versions[ack.resourceId]=ownerVersionConfiguration(value,cfgKeys);",
+            "    }",
+            "    versions[capsule.activatedVersionId]=configuration;versions[pointer.versionId]=currentConfiguration;",
+            "    return {versions,project,pointer,currentConfiguration,configuration,initialBaseline:{versionId:capsule.activatedVersionId,deploymentId:capsule.activatedDeploymentId,moduleHash:sha(resident.bytes),configurationHash:finiteActivationConfigurationHash(plan.configuration),bindingsHash:finiteInitialCapsuleBindingsHash(configuration.bindings)}};"
+          ]
+        },
+        {
+          "oldLine": 224,
+          "newLine": 270,
+          "old": [
+            "    const {qaMetadata}=joined[0].value,{project,pointer,currentConfiguration,configuration,initialBaseline}=joined[1].value;"
+          ],
+          "new": [
+            "    const {qaMetadata}=joined[0].value,{versions,project,pointer,currentConfiguration,configuration,initialBaseline}=joined[1].value;"
+          ]
+        },
+        {
+          "oldLine": 227,
+          "newLine": 273,
+          "old": [
+            "    return {project,pointer,currentConfiguration,qaSdkBindingFacts,initialBaseline};"
+          ],
+          "new": [
+            "    return {versions,project,pointer,currentConfiguration,qaSdkBindingFacts,initialBaseline};"
+          ]
+        },
+        {
+          "oldLine": 304,
+          "newLine": 350,
+          "old": [
+            "    const t=r.ticket,ceil=Math.min(r.accessExpiresAt,r.preconnectionExpiresAt,data.approval.expiresAt,issuerFacts.connection.expiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(grant.expires_at));",
+            "    if(canonical(r.identity)!==canonical(i)||r.issuerReservationHash!==f.issuer.reservation.recordHash||r.originalGrantAckHash!==ops.grant.ack.recordHash||r.grantLinkHash!==prepHash('GrantLink',issuerFacts.grantLink)||r.connectionHash!==prepHash('ConnectionRef',issuerFacts.connection)||canonical(r.expectedGrant)!==canonical(expectedGrant)||r.consumedAt!==issuerFacts.consent.consumed_at||r.preconnectionExpiresAt!==data.preconnection.expiresAt||r.accessExpiresAt>Math.min(data.preconnection.owner.accessExpiresAt,i.C0)||r.accessExpiresAt<=r.issuedAt||r.issuedAt>Date.now()||t.expiresAt>ceil||t.permissionExpiresAt>ceil||Date.now()>=t.permissionExpiresAt)fail();"
+          ],
+          "new": [
+            "    const stage=data.noticesStage;if(!stage?.receipt)fail();",
+            "    const policy=JSON.parse(ownerStageConfiguration('notices',plan.configuration,stage.approval,data.preconnection,issuerFacts,capsule).bindings.find(b=>b.name==='AFW_DOSSIER_MONITORING_OWNER_POLICY').text);",
+            "    const t=r.ticket,ceil=Math.min(policy.expiresAt,stage.approval.expiresAt,r.accessExpiresAt,r.preconnectionExpiresAt,data.approval.expiresAt,issuerFacts.connection.expiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(grant.expires_at));",
+            "    if(canonical(r.identity)!==canonical(i)||r.issuerReservationHash!==f.issuer.reservation.recordHash||r.originalGrantAckHash!==ops.grant.ack.recordHash||r.grantLinkHash!==prepHash('GrantLink',issuerFacts.grantLink)||r.connectionHash!==prepHash('ConnectionRef',issuerFacts.connection)||canonical(r.expectedGrant)!==canonical(expectedGrant)||r.consumedAt!==issuerFacts.consent.consumed_at||r.preconnectionExpiresAt!==data.preconnection.expiresAt||r.accessExpiresAt>Math.min(data.preconnection.owner.accessExpiresAt,i.C0)||r.accessExpiresAt<=r.issuedAt||r.issuedAt<policy.startAt||r.issuedAt>Date.now()||t.issuedAt<policy.startAt||t.expiresAt>ceil||t.permissionExpiresAt>ceil||Date.now()>=t.permissionExpiresAt)fail();"
+          ]
+        },
+        {
+          "oldLine": 360,
+          "newLine": 408,
+          "old": [
+            "    let receipt=null;",
+            "    if(f.effects.size){",
+            "     if(!enrollment||!ack||!data.preconnection||!data.stageApproval)fail();",
+            "     const identity={kind:'connection',preconnectionId:id,sourceRevision:source.sourceRevision,stage:'connection'},up=effectIdentity({...identity,effect:'upload'}),activationId=effectIdentity({...identity,effect:'activation'});",
+            "     const allowed=['writer-head',...['send','ack'].map(s=>up+':'+s),...['send','ack','receipt'].map(s=>activationId+':'+s)].map(s=>'afw.finite-policy-effect.v1:'+s);",
+            "",
+            "     if([...f.effects.keys()].some(k=>!allowed.includes(k)))fail();",
+            "     const upload=await child(l=>createFinitePolicyEffectJournal({storage,identity:{...identity,effect:'upload'},now:Date.now}).read(l)),activation=await child(l=>createFinitePolicyEffectJournal({storage,identity:{...identity,effect:'activation'},now:Date.now}).read(l));",
+            "     const contextHash=digest('afw.finite-connection-context.v1',{preconnection:data.preconnection,stageApproval:data.stageApproval,predecessors:[],grant:null,notice:null});",
+            "     const historical=(journal,effect)=>{",
+            "      if(!['absent','issued','acknowledged','installed'].includes(journal.state)||journal.receipt&&effect!=='activation')fail();",
+            "      if(!journal.send){if(journal.state!=='absent'||journal.ack||journal.receipt)fail();return;}",
+            "      const s=journal.send,a=journal.ack,pre=data.preconnection,approval=data.approval;",
+            "      if(s.preconnectionId!==id||s.sourceRevision!==source.sourceRevision||s.stage!=='connection'||s.effect!==effect||s.contextHash!==contextHash||s.baselineVersionId!==capsule.activatedVersionId||s.baselineDeploymentId!==capsule.activatedDeploymentId||s.issuedAt<Math.max(ack.acknowledgedAt,approval.approvedAt,data.ticketUse.consumedAt)||s.issuedAt>Date.now()||s.deadline>Math.min(pre.expiresAt,pre.owner.accessExpiresAt,approval.expiresAt,capsule.C0)||s.deadline-s.issuedAt>5000||a&&(a.sendHash!==prepHash('ConnectionSend',s)||a.acknowledgedAt<s.issuedAt||a.acknowledgedAt>=s.deadline||a.acknowledgedAt>Date.now()))fail();",
+            "     };",
+            "     historical(upload,'upload');historical(activation,'activation');",
+            "     if(!upload.send||upload.receipt||activation.send&&(!upload.ack||activation.send.issuedAt<upload.ack.acknowledgedAt)||activation.ack&&!activation.send)fail();",
+            "     const last=activation.send??upload.send,lastId=activation.send?activationId:up,expectedRows=1+(upload.send?1:0)+(upload.ack?1:0)+(activation.send?1:0)+(activation.ack?1:0)+(activation.receipt?1:0);",
+            "     if(f.effects.size!==expectedRows||f.effects.get('afw.finite-policy-effect.v1:writer-head')!==JSON.stringify({identityHash:lastId,sendHash:prepHash('ConnectionSend',last)}))fail();",
+            "     const expected=structuredClone(plan.configuration);expected.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';",
+            "     if(activation.ack){",
+            "      if(upload.ack.resourceId===capsule.activatedVersionId||activation.ack.resourceId===capsule.activatedDeploymentId||actual.pointer.versionId!==upload.ack.resourceId||actual.pointer.deploymentId!==activation.ack.resourceId||canonical(actual.currentConfiguration)!==canonical(expected))fail();",
+            "      qualifyFiniteConnectionProfile({phase:'read_consent',metadata:actual.currentConfiguration});",
+            "     }else if(actual.pointer.versionId!==capsule.activatedVersionId||actual.pointer.deploymentId!==capsule.activatedDeploymentId||canonical(actual.currentConfiguration)!==canonical(plan.configuration))fail();",
+            "     if(activation.receipt){",
+            "      receipt=qualifyFiniteOwnerInstalledStage({source,preconnection:data.preconnection,sourceSnapshot:data.sourceSnapshot,initialTicket:data.ticket,connection:null,stage:'connection',stageApproval:data.stageApproval,approval:data.approval,ticket:data.ticket,ticketUse:data.ticketUse,upload,activation,predecessors:[],grantLink:null,noticeLink:null,observedAt:Date.now()});",
+            "      if(receipt.moduleHash!==capsule.moduleHash||receipt.configurationHash!==finiteActivationConfigurationHash(actual.currentConfiguration))fail();",
+            "     }",
+            "    }else if(actual.pointer.versionId!==capsule.activatedVersionId||actual.pointer.deploymentId!==capsule.activatedDeploymentId||canonical(actual.currentConfiguration)!==canonical(plan.configuration))fail();",
+            "    if(f.sdk.root){const r=f.sdk.root;if(!receipt||!enrollment||!ack||r.preconnectionId!==id||r.capsuleHash!==capsule.capsuleHash||r.enrollmentHash!==enrollment.recordHash||r.originalConnectionReceiptHash!==receipt.receiptHash||r.sourceRevision!==capsule.sourceRevision||r.actorId!==actorId||r.qaVersionId!==qaVersionId||r.mVersionId!==receipt.versionId||r.I0!==capsule.I0||r.C0!==capsule.C0||r.C1!==capsule.C1||r.createdAt>Date.now())fail();for(const v of Object.values(f.sdk.operations))if(v.observed?.observedAt>Date.now())fail();}"
+          ],
+          "new": []
+        },
+        {
+          "oldLine": 392,
+          "newLine": 410,
+          "old": [
+            "    const issuerFacts=await issuerPrimary(f,data,enrollment,ack,receipt,getRecord);"
+          ],
+          "new": [
+            "    let receipt=null,issuerFacts=null;const receipts=[],stages=[],expectedKeys=[];",
+            "    let predecessor=source.initialBaseline,lastJournal=null,lastIdentity=null;",
+            "    for(let i=0;i<ownerStages.length;i++){",
+            "     const stage=ownerStages[i],sa=i===0?data.stageApproval:await getRecord('readStageApproval',{preconnectionId:id,stage},false);",
+            "     if(!sa){if(i&&f.inventory.has(prefix+stage+':approval'))fail();continue;}",
+            "     if(i&&receipts.length!==i)fail();",
+            "     const approval=i===0?data.approval:await getRecord('readConfigurationApproval',{approvalHash:sa.approvalHash});",
+            "     const ticket=i===0?data.ticket:await getRecord('readTicket',{ticketHash:sa.ticketHash}),use=i===0?data.ticketUse:await getRecord('readTicketUse',{ticketHash:sa.ticketHash});",
+            "     if(sa.preconnectionId!==id||sa.stage!==stage||sa.sourceRevision!==source.sourceRevision||ticket.action!==stage||ticket.preconnectionId!==id||ticket.projectRef!==data.ticket.projectRef||ticket.sourceRevision!==source.sourceRevision||ticket.subjectHash!==data.ticket.subjectHash||ticket.ticketHash!==sa.ticketHash||prepHash('ConfigurationApproval',approval)!==sa.approvalHash||approval.csrfReceiptHash!==use.recordHash||use.ticketHash!==ticket.ticketHash||approval.subjectHash!==data.ticket.subjectHash||approval.sourceRevision!==source.sourceRevision||approval.projectHash!==projectHash(source.project)||approval.clientId!==source.clientId||approval.approvedAt<ticket.createdAt||use.consumedAt<approval.approvedAt||use.consumedAt>Date.now()||approval.expiresAt>Math.min(ticket.expiresAt,data.preconnection.expiresAt,data.preconnection.owner.accessExpiresAt,capsule.C0)||Date.now()>=approval.expiresAt)fail();",
+            "     const decision=evidence('decision',{ticket,decision:'approve',projectHash:projectHash(source.project),goal:source.goal,clientId:source.clientId,approvedAt:approval.approvedAt,expiresAt:approval.expiresAt});if(use.recordHash!==decision)fail();",
+            "     clock.narrow(approval.expiresAt);",
+            "     if(i&&!issuerFacts)issuerFacts=await issuerPrimary(f,data,enrollment,ack,receipt,getRecord);",
+            "     const identity={kind:'connection',preconnectionId:id,sourceRevision:source.sourceRevision,stage};",
+            "     const identityFor=effect=>effectIdentity({...identity,effect});",
+            "     const journal=effect=>createFinitePolicyEffectJournal({storage,identity:{...identity,effect},now:Date.now});",
+            "     const upload=await child(l=>journal('upload').read(l)),activation=await child(l=>journal('activation').read(l));",
+            "     const contextHash=digest('afw.finite-connection-context.v1',{preconnection:data.preconnection,stageApproval:sa,predecessors:receipts,grant:i?issuerFacts.grantLink:null,notice:i===2?data.noticeLink:null});",
+            "     const record={stage,stageApproval:sa,approval,ticket,ticketUse:use,upload,activation,receipt:null};",
+            "     stages.push(record);",
+            "     if(upload.state==='absent'&&activation.state==='absent')continue;",
+            "     if(!enrollment||!ack||!upload.send||upload.receipt)fail();",
+            "     const history=(j,effect)=>{",
+            "      if(!['absent','issued','acknowledged','installed'].includes(j.state)||j.receipt&&effect!=='activation')fail();",
+            "      if(!j.send){if(j.ack||j.receipt||j.state!=='absent')fail();return;}",
+            "      const v=j.send,a=j.ack;",
+            "      if(v.preconnectionId!==id||v.sourceRevision!==source.sourceRevision||v.stage!==stage||v.effect!==effect||v.contextHash!==contextHash||v.baselineVersionId!==predecessor.versionId||v.baselineDeploymentId!==predecessor.deploymentId||v.issuedAt<Math.max(ack.acknowledgedAt,approval.approvedAt,use.consumedAt)||v.issuedAt>Date.now()||v.deadline>Math.min(data.preconnection.expiresAt,data.preconnection.owner.accessExpiresAt,approval.expiresAt,capsule.C0)||v.deadline-v.issuedAt>5000||a&&(a.sendHash!==prepHash('ConnectionSend',v)||a.acknowledgedAt<v.issuedAt||a.acknowledgedAt>=v.deadline||a.acknowledgedAt>Date.now()))fail();",
+            "      const p='afw.finite-policy-effect.v1:'+identityFor(effect)+':';",
+            "      expectedKeys.push(p+'send');if(a)expectedKeys.push(p+'ack');if(j.receipt)expectedKeys.push(p+'receipt');",
+            "      lastJournal=v;lastIdentity=identityFor(effect);",
+            "     };",
+            "     history(upload,'upload');history(activation,'activation');",
+            "     if(activation.send&&(!upload.ack||activation.send.issuedAt<upload.ack.acknowledgedAt)||activation.ack&&!activation.send)fail();",
+            "     const configuration=ownerStageConfiguration(stage,plan.configuration,approval,data.preconnection,issuerFacts,capsule);",
+            "     if(upload.ack){",
+            "      const seen=actual.versions[upload.ack.resourceId];if(!seen||canonical(seen)!==canonical(configuration)||[capsule.activatedVersionId,capsule.qaVersionId,...receipts.map(r=>r.versionId)].includes(upload.ack.resourceId))fail();",
+            "     }",
+            "     if(activation.ack&&[capsule.activatedDeploymentId,...receipts.map(r=>r.deploymentId)].includes(activation.ack.resourceId))fail();",
+            "     if(activation.receipt){",
+            "      const installed=qualifyFiniteOwnerInstalledStage({source,preconnection:data.preconnection,sourceSnapshot:data.sourceSnapshot,initialTicket:data.ticket,connection:i?issuerFacts.connection:null,stage,stageApproval:sa,approval,ticket,ticketUse:use,upload,activation,predecessors:receipts,grantLink:i?issuerFacts.grantLink:null,noticeLink:i===2?data.noticeLink:null,observedAt:Date.now()});",
+            "      if(installed.moduleHash!==capsule.moduleHash||installed.configurationHash!==finiteActivationConfigurationHash(configuration))fail();",
+            "      record.receipt=installed;receipts.push(installed);if(i===0)receipt=installed;predecessor=installed;",
+            "     }else if(i<2&&stages.length!==i+1)fail();",
+            "    }",
+            "    if(f.effects.size){",
+            "     if(!lastJournal)fail();expectedKeys.push('afw.finite-policy-effect.v1:writer-head');",
+            "     if(f.effects.size!==expectedKeys.length||[...f.effects.keys()].some(key=>!expectedKeys.includes(key))||f.effects.get('afw.finite-policy-effect.v1:writer-head')!==JSON.stringify({identityHash:lastIdentity,sendHash:prepHash('ConnectionSend',lastJournal)}))fail();",
+            "    }",
+            "    const last=stages.at(-1),currentAck=last?.activation.ack;",
+            "    const pointer=currentAck?{versionId:last.upload.ack.resourceId,deploymentId:currentAck.resourceId}:receipts.at(-1)??source.initialBaseline;",
+            "    const config=currentAck?ownerStageConfiguration(last.stage,plan.configuration,last.approval,data.preconnection,issuerFacts,capsule):receipts.length?actual.versions[receipts.at(-1).versionId]:plan.configuration;",
+            "    if(actual.pointer.versionId!==pointer.versionId||actual.pointer.deploymentId!==pointer.deploymentId||canonical(actual.currentConfiguration)!==canonical(config))fail();",
+            "    if(!issuerFacts)issuerFacts=await issuerPrimary(f,data,enrollment,ack,receipt,getRecord);",
+            "    const terminal=stages.find(v=>v.stage==='finite');",
+            "    if(f.cleanupScope){",
+            "     const c=f.cleanupScope,i=f.issuer.reservation,g=f.sdk.grant;",
+            "     if(!terminal||!issuerFacts.grantLink||!data.noticeLink||!i||!f.sdk.root||!g||c.prepId!==id||c.sourceRevision!==source.sourceRevision||c.stageApprovalHash!==prepHash('StageApproval',terminal.stageApproval)||c.approvedAt!==terminal.approval.approvedAt||c.issuerReservationHash!==i.recordHash||c.issuerFenceIdentityHash!==i.identity.identityHash||c.sdkRootHash!==f.sdk.root.recordHash||c.sdkGrantHash!==g.recordHash||c.grantLinkHash!==prepHash('GrantLink',issuerFacts.grantLink)||c.noticeLinkHash!==prepHash('NoticeLink',data.noticeLink))fail();",
+            "    }else if(terminal?.upload.send||terminal?.activation.send||f.selected)fail();",
+            "    if(f.selected){",
+            "     if(receipts.length!==3||!f.cleanupScope||f.selected.binding!==null||f.selected.preparation.prepId!==id||f.selected.preparation.sourceRevision!==source.sourceRevision||f.selected.selection.sequence!==1||f.selected.selection.previousSelectionHash!==null||f.selected.preparation.selectedAt<receipts[2].completedAt||f.selected.selection.preparationHash!==f.selected.preparation.preparationHash)fail();",
+            "     const witness=await child(l=>store.readSelectionPublication({sourceRevision:source.sourceRevision,selectionHash:f.selected.selection.selectionHash},l));",
+            "     if(!witness||witness.publishedAt<f.selected.selection.selectedAt||witness.publishedAt>=f.selected.preparation.commandBy||f.selectionRows.get('source-selection:'+source.sourceRevision+':head')!==f.selected.selection.selectionHash||!f.selectionRows.has('source-selection:'+source.sourceRevision+':publication:'+f.selected.selection.selectionHash))fail();",
+            "    }",
+            "    if(f.sdk.root){const r=f.sdk.root;if(!receipt||!enrollment||!ack||r.preconnectionId!==id||r.capsuleHash!==capsule.capsuleHash||r.enrollmentHash!==enrollment.recordHash||r.originalConnectionReceiptHash!==receipt.receiptHash||r.sourceRevision!==capsule.sourceRevision||r.actorId!==actorId||r.qaVersionId!==qaVersionId||r.mVersionId!==receipt.versionId||r.I0!==capsule.I0||r.C0!==capsule.C0||r.C1!==capsule.C1||r.createdAt>Date.now())fail();for(const v of Object.values(f.sdk.operations))if(v.observed?.observedAt>Date.now())fail();}",
+            ""
+          ]
+        },
+        {
+          "oldLine": 401,
+          "newLine": 482,
+          "old": [],
+          "new": [
+            "    data.noticesStage=stages.find(v=>v.stage==='notices')??null;",
+            "    const allTickets=[],uses=new Map(),owner=f.ownerFacts;",
+            "    if(owner.tickets.length>6||owner.projects.length>1||owner.approvals.length>3||owner.preparations.length>1||owner.selections.length>1)fail();",
+            "    for(const [key,raw]of owner.tickets){",
+            "     const use=key.endsWith(':use'),r=prepDecode(use?'TicketUse':'Ticket',raw);",
+            "     if(key!=='owner-ticket:'+r.ticketHash+(use?':use':''))fail();",
+            "     if(use){if(uses.has(r.ticketHash))fail();uses.set(r.ticketHash,r);}else allTickets.push(r);",
+            "    }",
+            "    if(new Set(allTickets.map(t=>t.action)).size!==allTickets.length)fail();",
+            "    const expectedMap=data.projectRef??(owner.projects.length?prepDecode('ProjectRef',owner.projects[0][1]):null);",
+            "    if(owner.projects.length&&(owner.projects[0][0]!=='owner-project-ref:'+expectedMap.projectRef||expectedMap.preconnectionId!==id||expectedMap.sourceRevision!==source.sourceRevision||expectedMap.projectId!==source.project.projectId||expectedMap.revision!==source.project.revision||expectedMap.subjectHash!==evidence('subject',{accessRealmHash:evidence('realm',{...source.access,origin:source.origin}),subject:p.subject})))fail();",
+            "    let pendingUsed=false;",
+            "    for(const ticket of allTickets){",
+            "     const n=ownerStages.indexOf(ticket.action),known=stages.find(s=>s.stage===ticket.action);",
+            "     if(n<0||n>receipts.length||ticket.preconnectionId!==id||ticket.sourceRevision!==source.sourceRevision||!expectedMap||ticket.projectRef!==expectedMap.projectRef||ticket.subjectHash!==expectedMap.subjectHash||ticket.expiresAt>expectedMap.expiresAt||ticket.createdAt<source.window.startedAt||ticket.createdAt>Date.now()||ticket.action==='connection'&&(ticket.ticketHash!==data.sourceSnapshot?.initialTicketHash||ticket.connectionRef!==null)||ticket.action!=='connection'&&ticket.connectionRef!==issuerFacts.connection?.connectionRef||known&&ticket.ticketHash!==known.ticket.ticketHash)fail();",
+            "     const use=uses.get(ticket.ticketHash);if(use&&(use.consumedAt<ticket.createdAt||use.consumedAt>=ticket.expiresAt||use.consumedAt>Date.now()))fail();",
+            "     if(use&&!known)pendingUsed=true;",
+            "    }",
+            "    for(const ticketHash of uses.keys())if(!allTickets.some(t=>t.ticketHash===ticketHash))fail();",
+            "    for(const [key,raw]of owner.approvals){",
+            "     const a=prepDecode('ConfigurationApproval',raw),approvalHash=prepHash('ConfigurationApproval',a);",
+            "     if(key!=='connection-approval:'+approvalHash||!allTickets.some(ticket=>{const use=uses.get(ticket.ticketHash);return use&&use.recordHash===a.csrfReceiptHash&&use.recordHash===evidence('decision',{ticket,decision:'approve',projectHash:projectHash(source.project),goal:source.goal,clientId:source.clientId,approvedAt:a.approvedAt,expiresAt:a.expiresAt});}))fail();",
+            "    }",
+            "    if(f.selected){",
+            "     if(owner.preparations.length!==1||owner.selections.length!==1||owner.preparations[0][0]!=='preparation:'+id+':record'||owner.preparations[0][1]!==prepEncode('OwnerPreparation',f.selected.preparation)||owner.selections[0][0]!=='afw.finite-owner-selection.v1:'+f.selected.selection.selectionHash||owner.selections[0][1]!==prepEncode('Selection',f.selected.selection))fail();",
+            "    }else if(owner.preparations.length||owner.selections.length)fail();"
+          ]
+        },
+        {
+          "oldLine": 403,
+          "newLine": 510,
+          "old": [
+            "    return {receipt,data,enrollment,ack,issuerFacts,noticeFacts};"
+          ],
+          "new": [
+            "    return {receipt:receipts.at(-1)??null,receipts,stages,pendingUsed,data,enrollment,ack,issuerFacts,noticeFacts};"
+          ]
+        },
+        {
+          "oldLine": 411,
+          "newLine": 518,
+          "old": [
+            "    installed:{receipt:q.receipt,enrollment:q.enrollment,ack:q.ack},"
+          ],
+          "new": [
+            "    installed:{receipt:q.receipt,receipts:q.receipts,stages:q.stages,enrollment:q.enrollment,ack:q.ack},",
+            "    ownerFacts:f.ownerFacts,pendingUsed:q.pendingUsed,cleanupScope:f.cleanupScope,selected:f.selected,"
+          ]
+        },
+        {
+          "oldLine": 453,
+          "newLine": 561,
+          "old": [
+            " const source=validateFiniteOwnerSource({...sourceBase,phase:'read_consent',currentPublication:{stage:'connection',versionId:r.versionId,deploymentId:r.deploymentId,receiptHash:r.receiptHash}});"
+          ],
+          "new": [
+            " if(installed.receipts.length!==2||r.stage!=='notices')fail();",
+            " const source=validateFiniteOwnerSource({...sourceBase,phase:'notice_consent',currentPublication:{stage:'notices',versionId:r.versionId,deploymentId:r.deploymentId,receiptHash:r.receiptHash}});"
+          ]
+        },
+        {
+          "oldLine": 467,
+          "newLine": 576,
+          "old": [
+            "  requireEmptyNotice(s);"
+          ],
+          "new": [
+            "  if(s.installed.stages.some(v=>v.upload.state!=='absent'&&!v.receipt||v.activation.state!=='absent'&&!v.receipt))fail();",
+            "  if(s.installed.receipts.length<2)requireEmptyNotice(s);"
+          ]
+        },
+        {
+          "oldLine": 473,
+          "newLine": 583,
+          "old": [
+            " const source=r?validateFiniteOwnerSource({...sourceBase,phase:'read_consent',currentPublication:{stage:'connection',versionId:r.versionId,deploymentId:r.deploymentId,receiptHash:r.receiptHash}}):sourceBase;",
+            " return Object.freeze({source,preconnectionId,capsuleHash});"
+          ],
+          "new": [
+            " const phase={connection:'read_consent',notices:'notice_consent',finite:'finite_prearm'}[r?.stage]??'closed_ui';",
+            " const source=r?validateFiniteOwnerSource({...sourceBase,phase,currentPublication:{stage:r.stage,versionId:r.versionId,deploymentId:r.deploymentId,receiptHash:r.receiptHash}}):sourceBase;",
+            " return Object.freeze({source,preconnectionId,capsuleHash});",
+            "}",
+            "async function readOwnerTimeline({ctx,env},lease,preconnectionId=null){",
+            " const pair=await observeOwnerPhasePair({ctx,env,parent:lease,...preconnectionId?{preconnectionId}:{}});",
+            " return pair;",
+            "}",
+            "function chooseOwnerStage(timeline){",
+            " const context=qualifySettledOwnerPair(timeline),s=timeline.second,n=s.installed.receipts.length;",
+            " if(s.selected||s.pendingUsed||n===3)fail();",
+            " if(n===0){if(s.installed.enrollment||s.records.sdk.length||s.records.issuer.reservation||s.preparation.preconnection||s.preparation.ticketUse)fail();return {stage:'connection',context};}",
+            " const issuer=s.records.issuer,rows=s.issuerRows;",
+            " if(!issuer.reservation||!rows.grant||!rows.authorization||!rows.grantLink||!rows.relation||!rows.connection||issuer.operations.grant.ack?.outcome!=='applied'||!s.records.sdk.some(([key])=>key.endsWith(':sdk_complete:observed')))fail();",
+            " if(n===1){requireEmptyNotice(s);return {stage:'notices',context};}",
+            " if(n===2&&s.preparation.noticeLink&&s.records.notice.operations.consent.ack?.outcome==='applied'&&s.noticeRows.events.length===1)return {stage:'finite',context};",
+            " fail();"
+          ]
+        },
+        {
+          "oldLine": 484,
+          "newLine": 609,
+          "old": [
+            "export async function handlePrivateQaFiniteOwnerConnection({request,env,ctx},originalLease){"
+          ],
+          "new": [
+            "export async function handlePrivateQaFiniteOwnerConnection(options,originalLease){return handlePrivateQaFiniteOwnerChoice(options,originalLease);}",
+            "export async function handlePrivateQaFiniteOwnerChoice({request,env,ctx},originalLease){"
+          ]
+        },
+        {
+          "oldLine": 512,
+          "newLine": 638,
+          "old": [
+            "   const clean=s=>{",
+            "    requireEmptyNotice(s);",
+            "    if(s.installed.receipt||s.installed.enrollment||s.installed.ack||s.records.effects.length||s.records.sdk.length||s.records.issuer.reservation||s.records.issuer.freeze||Object.values(s.records.issuer.operations).some(v=>v.send||v.ack)||s.preparation.preconnection||s.preparation.stageApproval||s.preparation.ticketUse)fail();",
+            "   };",
+            "   clean(initial.first);clean(initialState);",
+            "   if(headers.get('x-afw-finite-version')!==initialState.sourceBase.initialBaseline.versionId)fail();",
+            "   const id=initialState.preconnectionId;",
+            "   // This lexical reader returns exactly the three factual public keys. During",
+            "   // choice's own sequential writes it describes closed prefixes without granting",
+            "   // publication permission. Admission is minted only by choice's actual finish."
+          ],
+          "new": [
+            "   const {stage,context:initialContext}=chooseOwnerStage(initial);",
+            "   if(headers.get('x-afw-finite-version')!==initialContext.source.currentPublication.versionId)fail();",
+            "   const id=initialState.preconnectionId,stageIndex=ownerStages.indexOf(stage);"
+          ]
+        },
+        {
+          "oldLine": 523,
+          "newLine": 642,
+          "old": [
+            "    check();const pair=await wait(()=>observeOwnerPhasePair({ctx,env,parent,...requested?{preconnectionId:requested}:{}}));",
+            "    for(const s of [pair.first,pair.second]){",
+            "     requireEmptyNotice(s);",
+            "     if(s.preconnectionId!==id||s.capsuleHash!==initialState.capsuleHash||canonical(s.sourceBase)!==canonical(initialState.sourceBase)||s.records.effects.length||s.installed.enrollment||s.installed.receipt||s.records.sdk.length||s.records.issuer.reservation)fail();",
+            "    }",
+            "    return Object.freeze({source:pair.second.sourceBase,preconnectionId:id,capsuleHash:pair.second.capsuleHash});"
+          ],
+          "new": [
+            "    check();const pair=await wait(()=>readOwnerTimeline({ctx,env},parent,requested));",
+            "    for(const state of [pair.first,pair.second]){",
+            "     if(state.preconnectionId!==id||state.capsuleHash!==initialState.capsuleHash||canonical(state.sourceBase)!==canonical(initialState.sourceBase)||state.installed.receipts.length!==stageIndex||canonical(state.records.effects)!==canonical(initialState.records.effects)||canonical(state.records.sdk)!==canonical(initialState.records.sdk)||canonical(state.records.issuer)!==canonical(initialState.records.issuer)||state.cleanupScope||state.selected)fail();",
+            "     if(stageIndex<2)requireEmptyNotice(state);",
+            "     else if(canonical(state.records.notice)!==canonical(initialState.records.notice)||canonical(state.noticeRows)!==canonical(initialState.noticeRows))fail();",
+            "    }",
+            "    const source=stageIndex===0?pair.second.sourceBase:qualifySettledOwnerPair(pair).source;",
+            "    if(canonical(source)!==canonical(initialContext.source))fail();",
+            "    return Object.freeze({source,preconnectionId:id,capsuleHash:pair.second.capsuleHash});"
+          ]
+        },
+        {
+          "oldLine": 532,
+          "newLine": 654,
+          "old": [
+            "    if(choice.status!==200||choice.stage!=='connection'||!hex(choice.handle)||!hex(choice.projectRef)||choice.goal!==initialState.sourceBase.goal||!Number.isSafeInteger(choice.expiresAt)||choice.expiresAt<=Date.now())fail();",
+            "    const html='<h1>Preparar configuración de lectura</h1><p>La lectura y los avisos requieren decisiones separadas.</p><form method=\"post\" action=\"/connections/finite-prepare\"><input type=\"hidden\" name=\"handle\" value=\"'+choice.handle+'\"><input type=\"hidden\" name=\"projectRef\" value=\"'+choice.projectRef+'\"><button name=\"decision\" value=\"approve\">Preparar lectura</button></form>';"
+          ],
+          "new": [
+            "    if(choice.status!==200||choice.stage!==stage||!hex(choice.handle)||!hex(choice.projectRef)||choice.goal!==initialState.sourceBase.goal||!Number.isSafeInteger(choice.expiresAt)||choice.expiresAt<=Date.now())fail();",
+            "    const escape=value=>String(value).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));",
+            "    const title={connection:'Preparar configuración de lectura',notices:'Preparar configuración de avisos',finite:'Preparar único ensayo finito'}[stage];",
+            "    const detail=stage==='finite'?finiteOwnerCleanupScopeText:stage==='notices'?'Preparar avisos no concede el permiso: lo decidirás en un formulario separado.':'La lectura y los avisos requieren decisiones separadas.';",
+            "    const html='<h1>'+title+'</h1><p>'+escape(initialContext.source.project.projectId)+'</p><p>'+escape(choice.goal)+'</p><p>'+detail+'</p><form method=\"post\" action=\"/connections/finite-prepare\"><input type=\"hidden\" name=\"handle\" value=\"'+choice.handle+'\"><input type=\"hidden\" name=\"projectRef\" value=\"'+choice.projectRef+'\"><button name=\"decision\" value=\"approve\">'+(stage==='finite'?'Autorizar este único ensayo y su cierre':stage==='notices'?'Preparar avisos':'Preparar lectura')+'</button></form>';"
+          ]
+        },
+        {
+          "oldLine": 536,
+          "newLine": 661,
+          "old": [
+            "   if(choice.status!==202||choice.stage!=='connection'||choice.preconnectionId!==id)fail();",
+            "   admission=consumeFiniteOwnerStageAdmission({ctx,env,preconnectionId:id,stage:'connection'},originalLease);"
+          ],
+          "new": [
+            "   if(choice.status!==202||choice.stage!==stage||choice.preconnectionId!==id)fail();",
+            "   admission=consumeFiniteOwnerStageAdmission({ctx,env,preconnectionId:id,stage},originalLease);"
+          ]
+        },
+        {
+          "oldLine": 539,
+          "newLine": 664,
+          "old": [
+            "   return adoptFiniteOwnerRequestStageWork({ctx,env,admission,originalLease},async()=>{",
+            "    const approved=await wait(()=>observeOwnerPhasePair({ctx,env,parent:originalLease,preconnectionId:id})),expected=structuredClone(approved.second),prep=expected.preparation,capsule=expected.anchor.anchors.capsule,plan=expected.anchor.anchors.plan,resident=readPrivateQaFiniteCandidate();",
+            "    if(!prep.preconnection||!prep.stageApproval||!prep.ticketUse||prep.noticeLink||expected.records.effects.length||expected.installed.enrollment||expected.installed.receipt||prep.ticket.ticketHash!==sha(grammar.handle)||prep.ticket.projectRef!==grammar.projectRef||prepHash('StageApproval',prep.stageApproval)!==admission.stageApprovalHash||canonical(admission.ownerSource)!==canonical(expected.sourceBase))fail();"
+          ],
+          "new": [
+            "   return await publishApprovedStage({ctx,env},originalLease,admission,initial);",
+            "   async function publishApprovedStage(options,parent,stageAdmission,approvedTimeline){",
+            "    if(options.ctx!==ctx||options.env!==env||parent!==originalLease||stageAdmission!==admission||approvedTimeline!==initial)fail();",
+            "    return adoptFiniteOwnerRequestStageWork({ctx,env,admission,originalLease},async()=>{",
+            "    const approved=await wait(()=>readOwnerTimeline({ctx,env},originalLease,id)),expected=structuredClone(approved.second),stageFacts=expected.installed.stages.find(v=>v.stage===stage),prep={...expected.preparation,...stageFacts},capsule=expected.anchor.anchors.capsule,plan=expected.anchor.anchors.plan,resident=readPrivateQaFiniteCandidate();",
+            "    if(!stageFacts||expected.installed.receipts.length!==stageIndex||expected.selected||expected.cleanupScope||stageFacts.upload.state!=='absent'||stageFacts.activation.state!=='absent')fail();",
+            "    if(!prep.preconnection||!prep.stageApproval||!prep.ticketUse||stage==='connection'&&(prep.noticeLink||expected.records.effects.length||expected.installed.enrollment||expected.installed.receipt)||stage!=='connection'&&(!expected.installed.enrollment||!expected.installed.ack)||prep.ticket.ticketHash!==sha(grammar.handle)||prep.ticket.projectRef!==grammar.projectRef||prepHash('StageApproval',prep.stageApproval)!==admission.stageApprovalHash||canonical(admission.ownerSource)!==canonical(initialContext.source))fail();"
+          ]
+        },
+        {
+          "oldLine": 543,
+          "newLine": 672,
+          "old": [
+            "    const baseline={versionId:capsule.activatedVersionId,deploymentId:capsule.activatedDeploymentId,module:resident.module,configuration:plan.configuration};",
+            "    const configuration=structuredClone(plan.configuration);configuration.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';",
+            "    qualifyFiniteConnectionProfile({phase:'read_consent',metadata:configuration});"
+          ],
+          "new": [
+            "    if(stageIndex)clock.narrow(Math.min(Date.parse(expected.issuerRows.grant.expires_at),Date.parse(expected.issuerRows.consent.expires_at),expected.issuerRows.connection.expiresAt,...stageIndex===2?[expected.noticeRows.events[0]?.expires_at??0,expected.records.notice.reservation?.ticket.permissionExpiresAt??0]:[]));",
+            "    const prior=expected.installed.receipts.at(-1)??{versionId:capsule.activatedVersionId,deploymentId:capsule.activatedDeploymentId};",
+            "    const baseline={versionId:prior.versionId,deploymentId:prior.deploymentId,module:resident.module,configuration:expected.physical.currentConfiguration};",
+            "    const configuration=ownerStageConfiguration(stage,plan.configuration,prep.approval,prep.preconnection,expected.issuerRows,capsule);"
+          ]
+        },
+        {
+          "oldLine": 558,
+          "newLine": 688,
+          "old": [
+            "    const identity=effect=>({kind:'connection',preconnectionId:id,sourceRevision:capsule.sourceRevision,stage:'connection',effect});"
+          ],
+          "new": [
+            "    const identity=effect=>({kind:'connection',preconnectionId:id,sourceRevision:capsule.sourceRevision,stage,effect});"
+          ]
+        },
+        {
+          "oldLine": 560,
+          "newLine": 690,
+          "old": [
+            "    const contextHash=digest('afw.finite-connection-context.v1',{preconnection:prep.preconnection,stageApproval:prep.stageApproval,predecessors:[],grant:null,notice:null});"
+          ],
+          "new": [
+            "    const contextHash=digest('afw.finite-connection-context.v1',{preconnection:prep.preconnection,stageApproval:prep.stageApproval,predecessors:expected.installed.receipts,grant:stageIndex?expected.issuerRows.grantLink:null,notice:stageIndex===2?prep.noticeLink:null});"
+          ]
+        },
+        {
+          "oldLine": 566,
+          "newLine": 696,
+          "old": [
+            "     if(states.indexOf(position)>=states.indexOf('enrollment-recorded')&&(!writer||!enrollmentResult||enrollmentResult.enrollment!==ownEnrollment))fail();",
+            "     if(states.indexOf(position)>=states.indexOf('enrollment-ack-recorded')&&(!enrollmentAckResult||enrollmentAckResult.ack!==ownEnrollmentAck))fail();"
+          ],
+          "new": [
+            "     if(stage==='connection'&&states.indexOf(position)>=states.indexOf('enrollment-recorded')&&(!writer||!enrollmentResult||enrollmentResult.enrollment!==ownEnrollment))fail();",
+            "     if(stage==='connection'&&states.indexOf(position)>=states.indexOf('enrollment-ack-recorded')&&(!enrollmentAckResult||enrollmentAckResult.ack!==ownEnrollmentAck))fail();"
+          ]
+        },
+        {
+          "oldLine": 591,
+          "newLine": 721,
+          "old": [],
+          "new": [
+            "     const target=expected.installed.stages.find(v=>v.stage===stage),j=target[effect];",
+            "     if(kind==='ConnectionSend'){j.state='issued';j.send=structuredClone(record);}",
+            "     if(kind==='ConnectionAck'){j.state='acknowledged';j.ack=structuredClone(record);if(effect==='upload')expected.physical.versions[record.resourceId]=structuredClone(configuration);}",
+            "     if(kind==='ConnectionReceipt'){j.state='installed';j.receipt=structuredClone(record);target.receipt=structuredClone(record);expected.installed.receipts.push(structuredClone(record));}"
+          ]
+        },
+        {
+          "oldLine": 599,
+          "newLine": 733,
+          "old": [
+            "    await withChild(async(l,end)=>{"
+          ],
+          "new": [
+            "    if(stage==='connection')await withChild(async(l,end)=>{"
+          ]
+        },
+        {
+          "oldLine": 607,
+          "newLine": 741,
+          "old": [],
+          "new": [
+            "    if(stage==='finite'){",
+            "     const reservation=expected.records.issuer.reservation,rootRow=expected.records.sdk.find(([key])=>key.endsWith(':root')),grantRow=expected.records.sdk.find(([key])=>key.endsWith(':grant'));",
+            "     if(!reservation||!rootRow||!grantRow||!prep.noticeLink||!expected.issuerRows.grantLink)fail();",
+            "     const rootRecord=JSON.parse(rootRow[1]),grantRecord=JSON.parse(grantRow[1]);",
+            "     const scope=sealFiniteOwnerCleanupScope({purpose:'afw.finite-preparation-cleanup-scope.v1',textVersion:1,textHash:finiteOwnerCleanupScopeTextHash,approvedButton:grammar.decision??'approve',stageApprovalHash:admission.stageApprovalHash,prepId:id,sourceRevision:capsule.sourceRevision,issuerReservationHash:reservation.recordHash,issuerFenceIdentityHash:reservation.identity.identityHash,sdkRootHash:rootRecord.recordHash,sdkGrantHash:grantRecord.recordHash,grantLinkHash:prepHash('GrantLink',expected.issuerRows.grantLink),noticeLinkHash:prepHash('NoticeLink',prep.noticeLink),startAfterMs:240000,endAfterMs:420000,approvedAt:prep.approval.approvedAt});",
+            "     const scopePromise=retain(appendFiniteOwnerCleanupScope({storage,record:scope},clock.lease)),scopeResult=await wait(()=>scopePromise);",
+            "     if(scopeResult.result.status!=='recorded'||canonical(scopeResult.record)!==canonical(scope))fail();",
+            "     expected.cleanupScope=structuredClone(scope);expected.anchor.cleanupScope=structuredClone(scope);await recheckOwned();",
+            "    }"
+          ]
+        },
+        {
+          "oldLine": 608,
+          "newLine": 751,
+          "old": [
+            "    const sendFor=(effect,description,end)=>({purpose:'afw.finite-connection-send.v1',preconnectionId:id,sourceRevision:capsule.sourceRevision,stage:'connection',effect,contextHash,requestHash:digest('afw.finite-policy-request.v1',{method:description.method,path:description.path,body:description.body,baselineVersionId:baseline.versionId,baselineDeploymentId:baseline.deploymentId}),baselineVersionId:baseline.versionId,baselineDeploymentId:baseline.deploymentId,issuedAt:Date.now(),deadline:end});"
+          ],
+          "new": [
+            "    const sendFor=(effect,description,end)=>({purpose:'afw.finite-connection-send.v1',preconnectionId:id,sourceRevision:capsule.sourceRevision,stage,effect,contextHash,requestHash:digest('afw.finite-policy-request.v1',{method:description.method,path:description.path,body:description.body,baselineVersionId:baseline.versionId,baselineDeploymentId:baseline.deploymentId}),baselineVersionId:baseline.versionId,baselineDeploymentId:baseline.deploymentId,issuedAt:Date.now(),deadline:end});"
+          ]
+        },
+        {
+          "oldLine": 615,
+          "newLine": 758,
+          "old": [
+            "     if(actualUploadResult.id===baseline.versionId||actualUploadResult.id===rollback.versionId||actualUploadResult.id===capsule.qaVersionId)fail();"
+          ],
+          "new": [
+            "     if([baseline.versionId,rollback.versionId,capsule.qaVersionId,...expected.installed.receipts.map(r=>r.versionId)].includes(actualUploadResult.id))fail();"
+          ]
+        },
+        {
+          "oldLine": 634,
+          "newLine": 777,
+          "old": [
+            "     const raw={purpose:'afw.finite-connection-installed.v1',preconnectionId:id,sourceRevision:capsule.sourceRevision,stage:'connection',baselineVersionId:baseline.versionId,baselineDeploymentId:baseline.deploymentId,versionId:actualUploadResult.id,deploymentId:actualActivationResult.id,moduleHash:candidate.module.sha256,configurationHash:finiteActivationConfigurationHash(configuration),completedAt:Date.now()};"
+          ],
+          "new": [
+            "     const raw={purpose:'afw.finite-connection-installed.v1',preconnectionId:id,sourceRevision:capsule.sourceRevision,stage,baselineVersionId:baseline.versionId,baselineDeploymentId:baseline.deploymentId,versionId:actualUploadResult.id,deploymentId:actualActivationResult.id,moduleHash:candidate.module.sha256,configurationHash:finiteActivationConfigurationHash(configuration),completedAt:Date.now()};"
+          ]
+        },
+        {
+          "oldLine": 639,
+          "newLine": 782,
+          "old": [
+            "    check();return new Response('<h1>Configuración de lectura preparada</h1><p>La lectura y los avisos requieren decisiones separadas.</p>',{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});",
+            "   });"
+          ],
+          "new": [
+            "    if(stage==='finite'){",
+            "     if(!actualUploadPromise||!uploadSettled||!actualUploadResult||!actualActivationPromise||!activationSettled||!actualActivationResult||!ownReceipt||!receiptWrite||!receiptReadback||!expected.cleanupScope)fail();",
+            "     const readPreparationSource=async(parent,requested)=>{",
+            "      check();if(requested!==id)fail();const pair=await readOwnerTimeline({ctx,env},parent,id);",
+            "      if(canonical(pair.first)!==canonical(expected)||canonical(pair.second)!==canonical(expected)||pair.second.installed.receipts.length!==3||!pair.second.cleanupScope)fail();",
+            "      return qualifySettledOwnerPair(pair);",
+            "     };",
+            "     const facts=await wait(()=>readPrivateQaFiniteOwnerPreparationFacts({ctx,env,preconnectionId:id},originalLease,readPreparationSource));",
+            "     if(facts.stageApprovalHash!==admission.stageApprovalHash||facts.receipt.receiptHash!==ownReceipt.receiptHash)fail();",
+            "     const selectedAt=Date.now(),body={...facts.value,selectedAt},preparation={...body,preparationHash:prepHash('OwnerPreparation',body)};",
+            "     const selectionBody={purpose:'afw.finite-owner-selection.v1',sourceRevision:capsule.sourceRevision,sequence:1,previousSelectionHash:null,prepId:id,preparationHash:preparation.preparationHash,selectedAt},selection={...selectionBody,selectionHash:prepHash('Selection',selectionBody)};",
+            "     const store=createFiniteOwnerPreparationStore({storage,now:Date.now}),publicationPromise=retain(store.publishSelection({preparation,selection,expectedHeadHash:null},clock.lease));",
+            "     const result=await wait(()=>publicationPromise);",
+            "     if(result.status!=='recorded'||result.recordHash!==selection.selectionHash)fail();",
+            "     await sync();",
+            "     const selected=await wait(()=>store.readSelected({sourceRevision:capsule.sourceRevision},clock.lease)),witness=await wait(()=>store.readSelectionPublication({sourceRevision:capsule.sourceRevision,selectionHash:selection.selectionHash},clock.lease));",
+            "     if(!selected||selected.binding!==null||canonical(selected.preparation)!==canonical(preparation)||canonical(selected.selection)!==canonical(selection)||!witness||witness.publishedAt<selectedAt||witness.publishedAt>=preparation.commandBy)fail();",
+            "     expected.selected=structuredClone(selected);expected.anchor.selected=structuredClone(selected);",
+            "     expected.ownerFacts.preparations=[['preparation:'+id+':record',prepEncode('OwnerPreparation',preparation)]];expected.ownerFacts.selections=[['afw.finite-owner-selection.v1:'+selection.selectionHash,prepEncode('Selection',selection)]];expected.anchor.ownerFacts=structuredClone(expected.ownerFacts);",
+            "     expected.anchor.selectionRows=[['source-selection:'+capsule.sourceRevision+':head',selection.selectionHash],['source-selection:'+capsule.sourceRevision+':publication:'+selection.selectionHash,JSON.stringify({publishedAt:witness.publishedAt,selectionHash:selection.selectionHash})]];",
+            "     await recheckOwned();",
+            "    }",
+            "    check();return new Response('<h1>'+({connection:'Configuración de lectura preparada',notices:'Configuración de avisos preparada',finite:'Ensayo finito preparado'}[stage])+'</h1><p>La lectura y los avisos requieren decisiones separadas.</p>',{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});",
+            "   });",
+            "   }"
+          ]
+        },
+        {
+          "oldLine": 878,
+          "newLine": 1044,
+          "old": [
+            "   if(context.source.phase!=='read_consent'||received.mVersionId!==context.source.currentPublication.versionId||!baseline.second.noticeRows.schema)fail();",
+            "   const expected=structuredClone(baseline.second),source=context.source,id=context.preconnectionId;",
+            "   const capsule=expected.anchor.anchors.capsule,prep=expected.preparation;",
+            "   clock.narrow(Math.min(capsule.C0,prep.preconnection.expiresAt,prep.preconnection.owner.accessExpiresAt,prep.approval.expiresAt));",
+            "   const verified=await wait(verifyCloudflareAccessJwtWithExpiry({token:original.headers.get('Cf-Access-Jwt-Assertion'),teamDomain:source.access.teamDomain,audience:source.access.audience}));",
+            "   if(!verified.ok)fail();identity=verified.identity;clock.narrow(identity.expiresAt);",
+            "   const rawCookies=(original.headers.get('Cookie')??'').split(';').map(s=>s.trim()),cookie=rawCookies.filter(s=>s.startsWith('__Host-afw-finite-prepare='));",
+            "   if(cookie.length!==1||!/^__Host-afw-finite-prepare=[a-f0-9]{64}$/.test(cookie[0])||sha(cookie[0].slice('__Host-afw-finite-prepare='.length))!==prep.ticket.ticketHash)fail();",
+            "   const realm=evidence('realm',{...source.access,origin:source.origin}),subjectHash=evidence('subject',{accessRealmHash:realm,subject:identity.subject});",
+            "   qualifyFiniteOwnerApprovedTicket({source,identity,currentTicket:prep.ticket,ticket:prep.ticket,use:prep.ticketUse,pre:prep.preconnection,approval:prep.approval,snapshot:prep.sourceSnapshot,realm,subjectHash,observedAt:Date.now()});"
+          ],
+          "new": [
+            "   if(context.source.phase!=='notice_consent'||received.mVersionId!==context.source.currentPublication.versionId||!baseline.second.noticeRows.schema)fail();",
+            "   const expected=structuredClone(baseline.second),source=context.source,id=context.preconnectionId;",
+            "   const capsule=expected.anchor.anchors.capsule,prep=expected.preparation,noticesStage=expected.installed.stages.find(v=>v.stage==='notices');",
+            "   if(!noticesStage?.receipt||expected.installed.receipts.length!==2)fail();",
+            "   const policy=JSON.parse(expected.physical.currentConfiguration.bindings.find(b=>b.name==='AFW_DOSSIER_MONITORING_OWNER_POLICY').text);",
+            "   if(policy.startAt>Date.now()||Date.now()>=policy.expiresAt)fail();",
+            "   clock.narrow(Math.min(capsule.C0,prep.preconnection.expiresAt,prep.preconnection.owner.accessExpiresAt,prep.approval.expiresAt));",
+            "   const verified=await wait(verifyCloudflareAccessJwtWithExpiry({token:original.headers.get('Cf-Access-Jwt-Assertion'),teamDomain:source.access.teamDomain,audience:source.access.audience}));",
+            "   if(!verified.ok)fail();identity=verified.identity;clock.narrow(identity.expiresAt);",
+            "   const rawCookies=(original.headers.get('Cookie')??'').split(';').map(s=>s.trim()),cookie=rawCookies.filter(s=>s.startsWith('__Host-afw-finite-prepare='));",
+            "   if(cookie.length!==1||!/^__Host-afw-finite-prepare=[a-f0-9]{64}$/.test(cookie[0])||sha(cookie[0].slice('__Host-afw-finite-prepare='.length))!==noticesStage.ticket.ticketHash)fail();",
+            "   const realm=evidence('realm',{...source.access,origin:source.origin}),subjectHash=evidence('subject',{accessRealmHash:realm,subject:identity.subject});",
+            "   qualifyFiniteOwnerApprovedTicket({source,identity,currentTicket:noticesStage.ticket,ticket:prep.ticket,use:prep.ticketUse,pre:prep.preconnection,approval:prep.approval,snapshot:prep.sourceSnapshot,realm,subjectHash,observedAt:Date.now()});"
+          ]
+        },
+        {
+          "oldLine": 896,
+          "newLine": 1065,
+          "old": [
+            "   const permissionCeiling=Math.min(accessExpiresAt,preconnectionExpiresAt,prep.approval.expiresAt,rows.connection.expiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(rows.grant.expires_at));"
+          ],
+          "new": [
+            "   const permissionCeiling=Math.min(policy.expiresAt,noticesStage.approval.expiresAt,accessExpiresAt,preconnectionExpiresAt,prep.approval.expiresAt,rows.connection.expiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(rows.grant.expires_at));"
+          ]
+        },
+        {
+          "oldLine": 990,
+          "newLine": 1159,
+          "old": [
+            "   if(context.source.phase!=='read_consent'||received.mVersionId!==context.source.currentPublication.versionId||!baseline.second.noticeRows.schema)fail();",
+            "   const expected=structuredClone(baseline.second),source=context.source,id=context.preconnectionId;",
+            "   const capsule=expected.anchor.anchors.capsule,prep=expected.preparation;",
+            "   clock.narrow(Math.min(capsule.C0,prep.preconnection.expiresAt,prep.preconnection.owner.accessExpiresAt,prep.approval.expiresAt));",
+            "   const verified=await wait(verifyCloudflareAccessJwtWithExpiry({token:original.headers.get('Cf-Access-Jwt-Assertion'),teamDomain:source.access.teamDomain,audience:source.access.audience}));",
+            "   if(!verified.ok)fail();identity=verified.identity;clock.narrow(identity.expiresAt);",
+            "   const rawCookies=(original.headers.get('Cookie')??'').split(';').map(s=>s.trim()),cookie=rawCookies.filter(s=>s.startsWith('__Host-afw-finite-prepare='));",
+            "   if(cookie.length!==1||!/^__Host-afw-finite-prepare=[a-f0-9]{64}$/.test(cookie[0])||sha(cookie[0].slice('__Host-afw-finite-prepare='.length))!==prep.ticket.ticketHash)fail();",
+            "   const realm=evidence('realm',{...source.access,origin:source.origin}),subjectHash=evidence('subject',{accessRealmHash:realm,subject:identity.subject});",
+            "   qualifyFiniteOwnerApprovedTicket({source,identity,currentTicket:prep.ticket,ticket:prep.ticket,use:prep.ticketUse,pre:prep.preconnection,approval:prep.approval,snapshot:prep.sourceSnapshot,realm,subjectHash,observedAt:Date.now()});"
+          ],
+          "new": [
+            "   if(context.source.phase!=='notice_consent'||received.mVersionId!==context.source.currentPublication.versionId||!baseline.second.noticeRows.schema)fail();",
+            "   const expected=structuredClone(baseline.second),source=context.source,id=context.preconnectionId;",
+            "   const capsule=expected.anchor.anchors.capsule,prep=expected.preparation,noticesStage=expected.installed.stages.find(v=>v.stage==='notices');",
+            "   if(!noticesStage?.receipt||expected.installed.receipts.length!==2)fail();",
+            "   const policy=JSON.parse(expected.physical.currentConfiguration.bindings.find(b=>b.name==='AFW_DOSSIER_MONITORING_OWNER_POLICY').text);",
+            "   if(policy.startAt>Date.now()||Date.now()>=policy.expiresAt)fail();",
+            "   clock.narrow(Math.min(capsule.C0,prep.preconnection.expiresAt,prep.preconnection.owner.accessExpiresAt,prep.approval.expiresAt));",
+            "   const verified=await wait(verifyCloudflareAccessJwtWithExpiry({token:original.headers.get('Cf-Access-Jwt-Assertion'),teamDomain:source.access.teamDomain,audience:source.access.audience}));",
+            "   if(!verified.ok)fail();identity=verified.identity;clock.narrow(identity.expiresAt);",
+            "   const rawCookies=(original.headers.get('Cookie')??'').split(';').map(s=>s.trim()),cookie=rawCookies.filter(s=>s.startsWith('__Host-afw-finite-prepare='));",
+            "   if(cookie.length!==1||!/^__Host-afw-finite-prepare=[a-f0-9]{64}$/.test(cookie[0])||sha(cookie[0].slice('__Host-afw-finite-prepare='.length))!==noticesStage.ticket.ticketHash)fail();",
+            "   const realm=evidence('realm',{...source.access,origin:source.origin}),subjectHash=evidence('subject',{accessRealmHash:realm,subject:identity.subject});",
+            "   qualifyFiniteOwnerApprovedTicket({source,identity,currentTicket:noticesStage.ticket,ticket:prep.ticket,use:prep.ticketUse,pre:prep.preconnection,approval:prep.approval,snapshot:prep.sourceSnapshot,realm,subjectHash,observedAt:Date.now()});"
+          ]
+        },
+        {
+          "oldLine": 1012,
+          "newLine": 1184,
+          "old": [
+            "   const permissionCeiling=Math.min(accessExpiresAt,reservation.preconnectionExpiresAt,prep.approval.expiresAt,rows.connection.expiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(rows.grant.expires_at),ticket.permissionExpiresAt);"
+          ],
+          "new": [
+            "   const permissionCeiling=Math.min(policy.expiresAt,noticesStage.approval.expiresAt,accessExpiresAt,reservation.preconnectionExpiresAt,prep.approval.expiresAt,rows.connection.expiresAt,i.C0,Date.parse(i.consentExpiresAt),Date.parse(rows.grant.expires_at),ticket.permissionExpiresAt);"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "152e730f83af7ef063b6b1db89f8b0a779c2b60e",
+        "bytes": 45255
+      },
+      "after": {
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+        "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "gzipBytes": 11301
+      },
+      "hunks": [
+        {
+          "oldLine": 417,
+          "newLine": 417,
+          "old": [
+            "async function readPreparationFacts({ctx,env,preconnectionId},lease,setup=null){"
+          ],
+          "new": [
+            "// Fixed PH POST callsite only. No HTTP/RPC route accepts a factual callback.",
+            "export async function readPrivateQaFiniteOwnerPreparationFacts(options,lease,readOwnedContext){",
+            " if(typeof readOwnedContext!=='function')fail();return readPreparationFacts(options,lease,null,readOwnedContext);",
+            "}",
+            "async function readPreparationFacts({ctx,env,preconnectionId},lease,setup=null,ownedContext=null){"
+          ]
+        },
+        {
+          "oldLine": 419,
+          "newLine": 423,
+          "old": [
+            " let c=await resolve({ctx,env,preconnectionId},lease,ownedSource);"
+          ],
+          "new": [
+            " let c=await resolve({ctx,env,preconnectionId},lease,ownedSource,ownedContext);"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "e760b3579a38f1dbb73b177bb73b06d814eb881f",
+        "bytes": 2505
+      },
+      "after": {
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+        "gitBlob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "gzipBytes": 1110
+      },
+      "hunks": [
+        {
+          "oldLine": 1,
+          "newLine": 1,
+          "old": [
+            "import {handlePrivateQaFiniteOwnerConnection} from './mcp-qa-finite-owner-phase-context.mjs';"
+          ],
+          "new": [
+            "import {handlePrivateQaFiniteOwnerChoice} from './mcp-qa-finite-owner-phase-context.mjs';"
+          ]
+        },
+        {
+          "oldLine": 25,
+          "newLine": 25,
+          "old": [
+            "   return await handlePrivateQaFiniteOwnerConnection({request,env,ctx},parent.lease);"
+          ],
+          "new": [
+            "   return await handlePrivateQaFiniteOwnerChoice({request,env,ctx},parent.lease);"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "worker/mcp-own/finite.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "15441b6c0c779f733db65a3b59a3a9e1738d19dc",
+        "bytes": 2758
+      },
+      "after": {
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+        "gitBlob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "gzipBytes": 1061
+      },
+      "hunks": [
+        {
+          "oldLine": 37,
+          "newLine": 37,
+          "old": [
+            "   if(env?.AFW_DELEGATED_OAUTH_ENABLED!=='true')return finiteNativePending();"
+          ],
+          "new": [
+            "   if(env?.AFW_DELEGATED_OAUTH_ENABLED!=='true'||env?.AFW_DOSSIER_MONITORING_OWNER_ENABLED!=='true')return finiteNativePending();"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "newFile": true,
+      "before": null,
+      "after": {
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+        "gitBlob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "gzipBytes": 1592
+      },
+      "hunks": [
+        {
+          "oldLine": 1,
+          "newLine": 1,
+          "old": [],
+          "new": [
+            "import {createHash} from 'node:crypto';",
+            "import {initialFields as fields,initialCanonical as canonical,initialHash as digest,initialHex as hex} from './mcp-qa-finite-initial-material-records.mjs';",
+            "import {retainFiniteOwnerStagePromise as retain} from './mcp-qa-finite-stage-work.mjs';",
+            "export const finiteOwnerCleanupScopeText='Autorizo preparar este único ensayo y, entre cuatro y siete minutos después de su comando, cerrar la emisión para esta conexión, retirar sus permisos de lectura y avisos y revocar únicamente la concesión OAuth creada aquí. Si el ensayo no toma el relevo, se conserva el cierre original.';",
+            "export const finiteOwnerCleanupScopeTextHash=createHash('sha256').update(finiteOwnerCleanupScopeText,'utf8').digest('hex');",
+            "const purpose='afw.finite-preparation-cleanup-scope.v1',prefix=purpose+':';",
+            "const names=['purpose','textVersion','textHash','approvedButton','stageApprovalHash','prepId','sourceRevision','issuerReservationHash','issuerFenceIdentityHash','sdkRootHash','sdkGrantHash','grantLinkHash','noticeLinkHash','startAfterMs','endAfterMs','approvedAt'];",
+            "const fail=()=>{throw Error('Finite owner cleanup scope unavailable');};",
+            "const hash=body=>digest(purpose,body);",
+            "export function qualifyFiniteOwnerCleanupScope(value){",
+            " fields(value,[...names,'scopeHash']);const body=Object.fromEntries(names.map(k=>[k,value[k]]));",
+            " if(body.purpose!==purpose||body.textVersion!==1||body.textHash!==finiteOwnerCleanupScopeTextHash||body.approvedButton!=='approve'||body.startAfterMs!==240000||body.endAfterMs!==420000||!Number.isSafeInteger(body.approvedAt)||body.approvedAt<0||!/^[a-f0-9]{40}$/.test(body.sourceRevision)||names.filter(k=>k.endsWith('Hash')||k==='prepId').some(k=>!hex(body[k]))||hash(body)!==value.scopeHash)fail();",
+            " return Object.freeze({...body,scopeHash:value.scopeHash});",
+            "}",
+            "export function sealFiniteOwnerCleanupScope(body){",
+            " fields(body,names);return qualifyFiniteOwnerCleanupScope({...body,scopeHash:hash(body)});",
+            "}",
+            "export async function readFiniteOwnerCleanupScope({storage,preconnectionId},lease){",
+            " if(!hex(preconnectionId)||typeof storage?.get!=='function'||typeof storage?.list!=='function')fail();",
+            " const get=storage.get,list=storage.list,check=()=>{lease.assertCurrent();if(lease.signal.aborted||storage.get!==get||storage.list!==list)fail();};",
+            " check();const rows=await retain(Reflect.apply(list,storage,[{prefix,limit:2}]));check();",
+            " if(!(rows instanceof Map)||rows.size>1||[...rows.keys()].some(k=>k!==prefix+preconnectionId))fail();",
+            " const raw=await retain(Reflect.apply(get,storage,[prefix+preconnectionId]));check();",
+            " if(raw===undefined){if(rows.size)fail();return null;}",
+            " if(typeof raw!=='string'||Buffer.byteLength(raw,'utf8')>4096||rows.get(prefix+preconnectionId)!==raw)fail();",
+            " const value=qualifyFiniteOwnerCleanupScope(JSON.parse(raw));if(value.prepId!==preconnectionId||canonical(value)!==raw)fail();return value;",
+            "}",
+            "export async function appendFiniteOwnerCleanupScope({storage,record},lease){",
+            " const value=qualifyFiniteOwnerCleanupScope(record),transaction=storage?.transaction,sync=storage?.sync;",
+            " if(typeof transaction!=='function'||typeof sync!=='function')fail();",
+            " const check=()=>{lease.assertCurrent();if(lease.signal.aborted||storage.transaction!==transaction||storage.sync!==sync)fail();};",
+            " check();const raw=canonical(value),key=prefix+value.prepId;",
+            " const result=await retain(Reflect.apply(transaction,storage,[async tx=>{",
+            "  check();const get=tx?.get,put=tx?.put;if(typeof get!=='function'||typeof put!=='function')fail();",
+            "  const checkTx=()=>{check();if(tx.get!==get||tx.put!==put)fail();};",
+            "  checkTx();const old=await retain(Reflect.apply(get,tx,[key]));checkTx();",
+            "  if(old!==undefined)fail();",
+            "  checkTx();await retain(Reflect.apply(put,tx,[key,raw]));checkTx();return {status:'recorded',scopeHash:value.scopeHash};",
+            " }]));check();",
+            " if(result?.status!=='recorded'||result.scopeHash!==value.scopeHash)fail();",
+            " await retain(Reflect.apply(sync,storage,[]));check();",
+            " const observed=await readFiniteOwnerCleanupScope({storage,preconnectionId:value.prepId},lease);check();",
+            " if(!observed||canonical(observed)!==canonical(value))fail();return Object.freeze({result,record:observed});",
+            "}",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "1a5a2583d266179cdd89f799c64199f29044fec5",
+        "bytes": 89322
+      },
+      "after": {
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+        "gitBlob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "gzipBytes": 26076
+      },
+      "hunks": [
+        {
+          "oldLine": 11,
+          "newLine": 11,
+          "old": [
+            "import {hashFinitePreparationRecord as prepHash,encodeFinitePreparationRecord as prepEncode,hashFinitePolicyEffectIdentity as effectIdentity,hashFiniteOwnerEvidence as evidence,hashFiniteOwnerPreparationProject as projectHash,validateFiniteOwnerSource} from './mcp-qa-finite-preparation-records.mjs';"
+          ],
+          "new": [
+            "import {hashFinitePreparationRecord as prepHash,decodeFinitePreparationRecord as prepDecode,encodeFinitePreparationRecord as prepEncode,hashFinitePolicyEffectIdentity as effectIdentity,hashFiniteOwnerEvidence as evidence,hashFiniteOwnerPreparationProject as projectHash,validateFiniteOwnerSource} from './mcp-qa-finite-preparation-records.mjs';"
+          ]
+        },
+        {
+          "oldLine": 14,
+          "newLine": 14,
+          "old": [],
+          "new": [
+            "import {readFiniteOwnerCleanupScope} from './mcp-qa-finite-owner-cleanup-scope.mjs';",
+            "import {qualifyFinitePrearmConfiguration} from './mcp-qa-finite-prearm-profile.mjs';"
+          ]
+        },
+        {
+          "oldLine": 41,
+          "newLine": 43,
+          "old": [],
+          "new": [
+            "const ownerStages=['connection','notices','finite'];",
+            "function ownerVersionConfiguration(raw,configKeys){",
+            " const wrappers=['id','number','startup_time_ms','annotations','urls','source','created_on','author_id','author_email','modules'];",
+            " fields(raw,[...configKeys,...wrappers.filter(k=>Object.hasOwn(raw,k)),...Object.hasOwn(raw,'cache_options')?['cache_options']:[]]);",
+            " const cfg=structuredClone(own(Object.fromEntries(configKeys.map(k=>[k,raw[k]]))));",
+            " fields(cfg.exports,['default','AfwNodeControl','AfwOwnEventNode']);",
+            " for(const [name,e]of Object.entries(cfg.exports)){",
+            "  const keys=name==='AfwOwnEventNode'?['type','storage','container']:['type'];",
+            "  fields(e,[...keys,...Object.hasOwn(e,'state')?['state']:[],...Object.hasOwn(e,'cache')?['cache']:[]]);",
+            "  if(Object.hasOwn(e,'state')){if(e.state!=='created')fail();delete e.state;}",
+            "  if(Object.hasOwn(e,'cache')){fields(e.cache,['enabled']);if(name==='AfwOwnEventNode'||e.cache.enabled!==false)fail();delete e.cache;}",
+            " }",
+            " if(Object.hasOwn(raw,'cache_options')){const keys=['enabled','cross_version_cache'].filter(k=>Object.hasOwn(raw.cache_options??{},k));if(!keys.length)fail();fields(raw.cache_options,keys);if(keys.some(k=>raw.cache_options[k]!==false))fail();}",
+            " return cfg;",
+            "}",
+            "function ownerStageConfiguration(stage,original,approval,pre,rows,capsule){",
+            " const configuration=structuredClone(original),text=(name,value)=>{const b=configuration.bindings.find(b=>b.name===name);if(!b)fail();b.text=value;};",
+            " if(stage==='connection'){text('AFW_DELEGATED_OAUTH_ENABLED','true');qualifyFiniteConnectionProfile({phase:'read_consent',metadata:configuration});}",
+            " else if(stage==='notices'){",
+            "  if(!rows?.grant||!rows.connection||!rows.consent||!pre)fail();",
+            "  const startAt=approval.approvedAt,expiresAt=Math.min(startAt+600000,Date.parse(rows.grant.expires_at),rows.connection.expiresAt,pre.expiresAt,pre.owner.accessExpiresAt,approval.expiresAt,capsule.C0,Date.parse(rows.consent.expires_at));",
+            "  if(startAt>=expiresAt)fail();",
+            "  text('AFW_DELEGATED_OAUTH_ENABLED','true');text('AFW_DOSSIER_MONITORING_OWNER_ENABLED','true');",
+            "  text('AFW_DOSSIER_MONITORING_OWNER_POLICY',JSON.stringify({grantId:rows.grant.id,projectId:rows.grant.project_id,clientId:rows.grant.client_id,startAt,expiresAt}));",
+            "  qualifyFiniteConnectionProfile({phase:'notice_consent',metadata:configuration});",
+            " }else if(stage==='finite')qualifyFinitePrearmConfiguration({metadata:configuration,originalConfiguration:original});else fail();",
+            " return configuration;",
+            "}"
+          ]
+        },
+        {
+          "oldLine": 211,
+          "newLine": 241,
+          "old": [
+            "    for(const prefix of ['afw.qa-finite-trial.v1:','source-selection:'+capsule.sourceRevision+':'])if((await rows(prefix,1)).size)fail();"
+          ],
+          "new": [
+            "    for(const prefix of ['afw.qa-finite-trial.v1:'])if((await rows(prefix,1)).size)fail();",
+            "    const selected=await child(l=>createFiniteOwnerPreparationStore({storage,now:Date.now}).readSelected({sourceRevision:capsule.sourceRevision},l));",
+            "    const selectionRows=await rows('source-selection:'+capsule.sourceRevision+':',3);",
+            "    if(!selected&&selectionRows.size||selected&&(selectionRows.size!==2||selected.binding!==null))fail();"
+          ]
+        },
+        {
+          "oldLine": 219,
+          "newLine": 252,
+          "old": [
+            "    const prefix='connection-preparation:'+capsule.preconnectionId+':',inventory=await rows(prefix,17),effects=await rows('afw.finite-policy-effect.v1:',33),enrollment=await rows('afw.finite-preparation-cleanup.v1:',3);",
+            "    if(inventory.size>16||effects.size>32||enrollment.size>2)fail();",
+            "    for(const k of inventory.keys())if(!['record','source','connection:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();"
+          ],
+          "new": [
+            "    const prefix='connection-preparation:'+capsule.preconnectionId+':',inventory=await rows(prefix,9),effects=await rows('afw.finite-policy-effect.v1:',17),enrollment=await rows('afw.finite-preparation-cleanup.v1:',3);",
+            "    if(inventory.size>8||effects.size>16||enrollment.size>2)fail();",
+            "    for(const k of inventory.keys())if(!['record','source','connection:approval','notices:approval','finite:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();"
+          ]
+        },
+        {
+          "oldLine": 226,
+          "newLine": 259,
+          "old": [
+            "    return {capsule,material,plan,a,inventory,effects,enrollment,issuer,sdk,notice,anchor:canonical({anchors:a,backupRaw,inventory:[...inventory],effects:[...effects],enrollment:[...enrollment],issuer,sdk:sdk.entries,notice})};"
+          ],
+          "new": [
+            "    const ownerFacts={tickets:[...await rows('owner-ticket:',7)],projects:[...await rows('owner-project-ref:',2)],approvals:[...await rows('connection-approval:',4)],preparations:[...await rows('preparation:',3)],selections:[...await rows('afw.finite-owner-selection.v1:',2)]};",
+            "    const cleanupScope=await child(l=>readFiniteOwnerCleanupScope({storage,preconnectionId:capsule.preconnectionId},l));",
+            "    return {capsule,material,plan,a,inventory,effects,enrollment,issuer,sdk,notice,ownerFacts,cleanupScope,selected,selectionRows,anchor:canonical({anchors:a,backupRaw,inventory:[...inventory],effects:[...effects],enrollment:[...enrollment],issuer,sdk:sdk.entries,notice,ownerFacts,cleanupScope,selected,selectionRows:[...selectionRows]})};"
+          ]
+        },
+        {
+          "oldLine": 286,
+          "newLine": 321,
+          "old": [
+            "     const expected=structuredClone(plan.configuration);expected.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';",
+            "     if(canonical(cfg)!==canonical(expected))fail();qualifyFiniteConnectionProfile({phase:'read_consent',metadata:cfg});"
+          ],
+          "new": [
+            "     const enabled=name=>cfg.bindings.find(b=>b.name===name)?.text;",
+            "     const phase=enabled('AFW_DELEGATED_OAUTH_ENABLED')==='true'?(enabled('AFW_DOSSIER_MONITORING_OWNER_ENABLED')==='true'?'notice_consent':'read_consent'):'closed_ui';qualifyFiniteConnectionProfile({phase,metadata:cfg});"
+          ]
+        },
+        {
+          "oldLine": 290,
+          "newLine": 325,
+          "old": [
+            "    return {project,pointer,deployment,isRestored,currentConfiguration,configuration,initialBaseline:{versionId:capsule.activatedVersionId,deploymentId:capsule.activatedDeploymentId,moduleHash:sha(resident.bytes),configurationHash:finiteActivationConfigurationHash(plan.configuration),bindingsHash:finiteInitialCapsuleBindingsHash(configuration.bindings)}};"
+          ],
+          "new": [
+            "    const versionRows=await rows('afw.finite-policy-effect.v1:',17),versions={};",
+            "    for(const [key,raw]of versionRows){if(!key.endsWith(':ack'))continue;const ack=prepDecode('ConnectionAck',raw);",
+            "     const match=[...versionRows].find(([k,v])=>k.endsWith(':send')&&prepHash('ConnectionSend',prepDecode('ConnectionSend',v))===ack.sendHash&&prepDecode('ConnectionSend',v).effect==='upload');if(!match||ack.resourceId===pointer.versionId)continue;",
+            "     const value=finiteCfEnvelope((await request('/workers/workers/'+CANARY+'/versions/'+ack.resourceId+'?include=modules',4500000)).value);",
+            "     const cfgKeys=Object.keys(plan.configuration),wrappers=['id','number','startup_time_ms','annotations','urls','source','created_on','author_id','author_email','modules'];fields(value,[...cfgKeys,...wrappers.filter(k=>Object.hasOwn(value,k)),...Object.hasOwn(value,'cache_options')?['cache_options']:[]]);",
+            "     if(value.id!==ack.resourceId||!Array.isArray(value.urls)||value.urls.length||!Array.isArray(value.modules)||value.modules.length!==1)fail();",
+            "     const m=fields(value.modules[0],['name','content_type','content_base64']);if(m.name!=='index.mjs'||m.content_type!=='application/javascript+module'||m.content_base64!==Buffer.from(resident.bytes).toString('base64'))fail();",
+            "     versions[ack.resourceId]=ownerVersionConfiguration(value,cfgKeys);",
+            "    }",
+            "    versions[capsule.activatedVersionId]=configuration;versions[pointer.versionId]=currentConfiguration;",
+            "    return {versions,project,pointer,deployment,isRestored,currentConfiguration,configuration,initialBaseline:{versionId:capsule.activatedVersionId,deploymentId:capsule.activatedDeploymentId,moduleHash:sha(resident.bytes),configurationHash:finiteActivationConfigurationHash(plan.configuration),bindingsHash:finiteInitialCapsuleBindingsHash(configuration.bindings)}};"
+          ]
+        },
+        {
+          "oldLine": 297,
+          "newLine": 342,
+          "old": [
+            "    const {qaMetadata}=joined[0].value,{project,pointer,deployment,isRestored,currentConfiguration,configuration,initialBaseline}=joined[1].value;"
+          ],
+          "new": [
+            "    const {qaMetadata}=joined[0].value,{versions,project,pointer,deployment,isRestored,currentConfiguration,configuration,initialBaseline}=joined[1].value;"
+          ]
+        },
+        {
+          "oldLine": 300,
+          "newLine": 345,
+          "old": [
+            "    return {project,pointer,deployment,isRestored,currentConfiguration,qaSdkBindingFacts,initialBaseline};"
+          ],
+          "new": [
+            "    return {versions,project,pointer,deployment,isRestored,currentConfiguration,qaSdkBindingFacts,initialBaseline};"
+          ]
+        },
+        {
+          "oldLine": 438,
+          "newLine": 483,
+          "old": [
+            "    let receipt=null;",
+            "    if(f.effects.size){",
+            "     if(!enrollment||!ack||!data.preconnection||!data.stageApproval)fail();",
+            "     const identity={kind:'connection',preconnectionId:id,sourceRevision:source.sourceRevision,stage:'connection'},up=effectIdentity({...identity,effect:'upload'}),activationId=effectIdentity({...identity,effect:'activation'});",
+            "     const allowed=['writer-head',...['send','ack'].map(s=>up+':'+s),...['send','ack','receipt'].map(s=>activationId+':'+s)].map(s=>'afw.finite-policy-effect.v1:'+s);",
+            "",
+            "     if([...f.effects.keys()].some(k=>!allowed.includes(k)))fail();",
+            "     const upload=await child(l=>createFinitePolicyEffectJournal({storage,identity:{...identity,effect:'upload'},now:Date.now}).read(l)),activation=await child(l=>createFinitePolicyEffectJournal({storage,identity:{...identity,effect:'activation'},now:Date.now}).read(l));",
+            "     const contextHash=digest('afw.finite-connection-context.v1',{preconnection:data.preconnection,stageApproval:data.stageApproval,predecessors:[],grant:null,notice:null});",
+            "     const historical=(journal,effect)=>{",
+            "      if(!['absent','issued','acknowledged','installed'].includes(journal.state)||journal.receipt&&effect!=='activation')fail();",
+            "      if(!journal.send){if(journal.state!=='absent'||journal.ack||journal.receipt)fail();return;}",
+            "      const s=journal.send,a=journal.ack,pre=data.preconnection,approval=data.approval;",
+            "      if(s.preconnectionId!==id||s.sourceRevision!==source.sourceRevision||s.stage!=='connection'||s.effect!==effect||s.contextHash!==contextHash||s.baselineVersionId!==capsule.activatedVersionId||s.baselineDeploymentId!==capsule.activatedDeploymentId||s.issuedAt<Math.max(ack.acknowledgedAt,approval.approvedAt,data.ticketUse.consumedAt)||s.issuedAt>Date.now()||s.deadline>Math.min(pre.expiresAt,pre.owner.accessExpiresAt,approval.expiresAt,capsule.C0)||s.deadline-s.issuedAt>5000||a&&(a.sendHash!==prepHash('ConnectionSend',s)||a.acknowledgedAt<s.issuedAt||a.acknowledgedAt>=s.deadline||a.acknowledgedAt>Date.now()))fail();"
+          ],
+          "new": [
+            "    data.noticeLink=await getRecord('readLink',{kind:'notice',preconnectionId:id},false);",
+            "    if(data.noticeLink?(f.inventory.get(prefix+'notice')!==prepEncode('NoticeLink',data.noticeLink)):f.inventory.has(prefix+'notice'))fail();",
+            "    let receipt=null,issuerFacts=null;const receipts=[],stages=[],expectedKeys=[];",
+            "    let predecessor=source.initialBaseline,lastJournal=null,lastIdentity=null;",
+            "    for(let i=0;i<ownerStages.length;i++){",
+            "     const stage=ownerStages[i],sa=i===0?data.stageApproval:await getRecord('readStageApproval',{preconnectionId:id,stage},false);",
+            "     if(!sa){if(i&&f.inventory.has(prefix+stage+':approval'))fail();continue;}",
+            "     if(i&&receipts.length!==i)fail();",
+            "     const approval=i===0?data.approval:await getRecord('readConfigurationApproval',{approvalHash:sa.approvalHash});",
+            "     const ticket=i===0?data.ticket:await getRecord('readTicket',{ticketHash:sa.ticketHash}),use=i===0?data.ticketUse:await getRecord('readTicketUse',{ticketHash:sa.ticketHash});",
+            "     if(sa.preconnectionId!==id||sa.stage!==stage||sa.sourceRevision!==source.sourceRevision||ticket.action!==stage||ticket.preconnectionId!==id||ticket.projectRef!==data.ticket.projectRef||ticket.sourceRevision!==source.sourceRevision||ticket.subjectHash!==data.ticket.subjectHash||ticket.ticketHash!==sa.ticketHash||prepHash('ConfigurationApproval',approval)!==sa.approvalHash||approval.csrfReceiptHash!==use.recordHash||use.ticketHash!==ticket.ticketHash||approval.subjectHash!==data.ticket.subjectHash||approval.sourceRevision!==source.sourceRevision||approval.projectHash!==projectHash(source.project)||approval.clientId!==source.clientId||approval.approvedAt<ticket.createdAt||use.consumedAt<approval.approvedAt||use.consumedAt>Date.now()||approval.expiresAt>Math.min(ticket.expiresAt,data.preconnection.expiresAt,data.preconnection.owner.accessExpiresAt,capsule.C0))fail();",
+            "     const decision=evidence('decision',{ticket,decision:'approve',projectHash:projectHash(source.project),goal:source.goal,clientId:source.clientId,approvedAt:approval.approvedAt,expiresAt:approval.expiresAt});if(use.recordHash!==decision)fail();",
+            "     if(i&&!issuerFacts)issuerFacts=await issuerPrimary(f,data,enrollment,ack,receipt,getRecord);",
+            "     const identity={kind:'connection',preconnectionId:id,sourceRevision:source.sourceRevision,stage};",
+            "     const identityFor=effect=>effectIdentity({...identity,effect});",
+            "     const journal=effect=>createFinitePolicyEffectJournal({storage,identity:{...identity,effect},now:Date.now});",
+            "     const upload=await child(l=>journal('upload').read(l)),activation=await child(l=>journal('activation').read(l));",
+            "     const contextHash=digest('afw.finite-connection-context.v1',{preconnection:data.preconnection,stageApproval:sa,predecessors:receipts,grant:i?issuerFacts.grantLink:null,notice:i===2?data.noticeLink:null});",
+            "     const record={stage,stageApproval:sa,approval,ticket,ticketUse:use,upload,activation,receipt:null};",
+            "     stages.push(record);",
+            "     if(upload.state==='absent'&&activation.state==='absent')continue;",
+            "     if(!enrollment||!ack||!upload.send||upload.receipt)fail();",
+            "     const history=(j,effect)=>{",
+            "      if(!['absent','issued','acknowledged','installed'].includes(j.state)||j.receipt&&effect!=='activation')fail();",
+            "      if(!j.send){if(j.ack||j.receipt||j.state!=='absent')fail();return;}",
+            "      const v=j.send,a=j.ack;",
+            "      if(v.preconnectionId!==id||v.sourceRevision!==source.sourceRevision||v.stage!==stage||v.effect!==effect||v.contextHash!==contextHash||v.baselineVersionId!==predecessor.versionId||v.baselineDeploymentId!==predecessor.deploymentId||v.issuedAt<Math.max(ack.acknowledgedAt,approval.approvedAt,use.consumedAt)||v.issuedAt>Date.now()||v.deadline>Math.min(data.preconnection.expiresAt,data.preconnection.owner.accessExpiresAt,approval.expiresAt,capsule.C0)||v.deadline-v.issuedAt>5000||a&&(a.sendHash!==prepHash('ConnectionSend',v)||a.acknowledgedAt<v.issuedAt||a.acknowledgedAt>=v.deadline||a.acknowledgedAt>Date.now()))fail();",
+            "      const p='afw.finite-policy-effect.v1:'+identityFor(effect)+':';",
+            "      expectedKeys.push(p+'send');if(a)expectedKeys.push(p+'ack');if(j.receipt)expectedKeys.push(p+'receipt');",
+            "      lastJournal=v;lastIdentity=identityFor(effect);"
+          ]
+        },
+        {
+          "oldLine": 453,
+          "newLine": 514,
+          "old": [
+            "     historical(upload,'upload');historical(activation,'activation');",
+            "     if(!upload.send||upload.receipt||activation.send&&(!upload.ack||activation.send.issuedAt<upload.ack.acknowledgedAt)||activation.ack&&!activation.send)fail();",
+            "     const last=activation.send??upload.send,lastId=activation.send?activationId:up,expectedRows=1+(upload.send?1:0)+(upload.ack?1:0)+(activation.send?1:0)+(activation.ack?1:0)+(activation.receipt?1:0);",
+            "     if(f.effects.size!==expectedRows||f.effects.get('afw.finite-policy-effect.v1:writer-head')!==JSON.stringify({identityHash:lastId,sendHash:prepHash('ConnectionSend',last)}))fail();",
+            "     const expected=structuredClone(plan.configuration);expected.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';",
+            "     if(activation.ack){",
+            "      if(upload.ack.resourceId===capsule.activatedVersionId||activation.ack.resourceId===capsule.activatedDeploymentId||!actual.isRestored&&(actual.pointer.versionId!==upload.ack.resourceId||actual.pointer.deploymentId!==activation.ack.resourceId||canonical(actual.currentConfiguration)!==canonical(expected)))fail();",
+            "      if(!actual.isRestored)qualifyFiniteConnectionProfile({phase:'read_consent',metadata:actual.currentConfiguration});",
+            "      const activationBody={strategy:'percentage',versions:[{version_id:upload.ack.resourceId,percentage:100}]};",
+            "      if(activation.send.requestHash!==digest('afw.finite-policy-request.v1',{method:'POST',path:CF+'/workers/scripts/'+CANARY+'/deployments',body:activationBody,baselineVersionId:capsule.activatedVersionId,baselineDeploymentId:capsule.activatedDeploymentId})||!actual.isRestored&&Object.hasOwn(actual.deployment,'annotations'))fail();",
+            "     }else if(!actual.isRestored){",
+            "      const initial=actual.pointer.versionId===capsule.activatedVersionId&&actual.pointer.deploymentId===capsule.activatedDeploymentId&&canonical(actual.currentConfiguration)===canonical(plan.configuration);",
+            "      const target=activation.send&&upload.ack&&actual.pointer.versionId===upload.ack.resourceId&&canonical(actual.currentConfiguration)===canonical(expected)&&!Object.hasOwn(actual.deployment,'annotations')&&activation.send.requestHash===digest('afw.finite-policy-request.v1',{method:'POST',path:CF+'/workers/scripts/'+CANARY+'/deployments',body:{strategy:'percentage',versions:[{version_id:upload.ack.resourceId,percentage:100}]},baselineVersionId:capsule.activatedVersionId,baselineDeploymentId:capsule.activatedDeploymentId});",
+            "      if(!initial&&!target)fail(); // Target fact is not the missing activation ACK.",
+            "     }"
+          ],
+          "new": [
+            "     history(upload,'upload');history(activation,'activation');",
+            "     if(activation.send&&(!upload.ack||activation.send.issuedAt<upload.ack.acknowledgedAt)||activation.ack&&!activation.send)fail();",
+            "     const configuration=ownerStageConfiguration(stage,plan.configuration,approval,data.preconnection,issuerFacts,capsule);",
+            "     if(upload.ack){",
+            "      const seen=actual.versions[upload.ack.resourceId];if(!seen||canonical(seen)!==canonical(configuration)||[capsule.activatedVersionId,capsule.qaVersionId,...receipts.map(r=>r.versionId)].includes(upload.ack.resourceId))fail();",
+            "     }",
+            "     if(activation.ack&&[capsule.activatedDeploymentId,...receipts.map(r=>r.deploymentId)].includes(activation.ack.resourceId))fail();"
+          ]
+        },
+        {
+          "oldLine": 469,
+          "newLine": 522,
+          "old": [
+            "      receipt=qualifyFiniteOwnerInstalledStage({source,preconnection:data.preconnection,sourceSnapshot:data.sourceSnapshot,initialTicket:data.ticket,connection:null,stage:'connection',stageApproval:data.stageApproval,approval:data.approval,ticket:data.ticket,ticketUse:data.ticketUse,upload,activation,predecessors:[],grantLink:null,noticeLink:null,observedAt:activation.receipt.completedAt});",
+            "      if(receipt.moduleHash!==capsule.moduleHash||receipt.configurationHash!==finiteActivationConfigurationHash(expected))fail();",
+            "     }",
+            "    }else if(!actual.isRestored&&(actual.pointer.versionId!==capsule.activatedVersionId||actual.pointer.deploymentId!==capsule.activatedDeploymentId||canonical(actual.currentConfiguration)!==canonical(plan.configuration)))fail();"
+          ],
+          "new": [
+            "      const installed=qualifyFiniteOwnerInstalledStage({source,preconnection:data.preconnection,sourceSnapshot:data.sourceSnapshot,initialTicket:data.ticket,connection:i?issuerFacts.connection:null,stage,stageApproval:sa,approval,ticket,ticketUse:use,upload,activation,predecessors:receipts,grantLink:i?issuerFacts.grantLink:null,noticeLink:i===2?data.noticeLink:null,observedAt:activation.receipt.completedAt});",
+            "      if(installed.moduleHash!==capsule.moduleHash||installed.configurationHash!==finiteActivationConfigurationHash(configuration))fail();",
+            "      record.receipt=installed;receipts.push(installed);if(i===0)receipt=installed;predecessor=installed;",
+            "     }else if(i<2&&stages.length!==i+1)fail();",
+            "    }",
+            "    if(f.effects.size){",
+            "     if(!lastJournal)fail();expectedKeys.push('afw.finite-policy-effect.v1:writer-head');",
+            "     if(f.effects.size!==expectedKeys.length||[...f.effects.keys()].some(key=>!expectedKeys.includes(key))||f.effects.get('afw.finite-policy-effect.v1:writer-head')!==JSON.stringify({identityHash:lastIdentity,sendHash:prepHash('ConnectionSend',lastJournal)}))fail();",
+            "    }",
+            "    const last=stages.at(-1),currentAck=last?.activation.ack;",
+            "    const pointer=currentAck?{versionId:last.upload.ack.resourceId,deploymentId:currentAck.resourceId}:receipts.at(-1)??source.initialBaseline;",
+            "    const config=currentAck?ownerStageConfiguration(last.stage,plan.configuration,last.approval,data.preconnection,issuerFacts,capsule):receipts.length?actual.versions[receipts.at(-1).versionId]:plan.configuration;",
+            "    if(!actual.isRestored){",
+            "     const exact=actual.pointer.versionId===pointer.versionId&&actual.pointer.deploymentId===pointer.deploymentId&&canonical(actual.currentConfiguration)===canonical(config);",
+            "     const pending=last?.activation.send&&!last.activation.ack&&last.upload.ack;",
+            "     const expectedPending=pending?ownerStageConfiguration(last.stage,plan.configuration,last.approval,data.preconnection,issuerFacts,capsule):null;",
+            "     const nativeTarget=pending&&actual.pointer.versionId===last.upload.ack.resourceId&&canonical(actual.currentConfiguration)===canonical(expectedPending)&&!Object.hasOwn(actual.deployment,'annotations')&&last.activation.send.requestHash===digest('afw.finite-policy-request.v1',{method:'POST',path:CF+'/workers/scripts/'+CANARY+'/deployments',body:{strategy:'percentage',versions:[{version_id:last.upload.ack.resourceId,percentage:100}]},baselineVersionId:last.activation.send.baselineVersionId,baselineDeploymentId:last.activation.send.baselineDeploymentId});",
+            "     if(!exact&&!nativeTarget)fail();",
+            "    }",
+            "    if(!issuerFacts)issuerFacts=await issuerPrimary(f,data,enrollment,ack,receipt,getRecord);",
+            "    const terminal=stages.find(v=>v.stage==='finite');",
+            "    if(f.cleanupScope){",
+            "     const c=f.cleanupScope,i=f.issuer.reservation,g=f.sdk.grant;",
+            "     if(!terminal||!issuerFacts.grantLink||!data.noticeLink||!i||!f.sdk.root||!g||c.prepId!==id||c.sourceRevision!==source.sourceRevision||c.stageApprovalHash!==prepHash('StageApproval',terminal.stageApproval)||c.approvedAt!==terminal.approval.approvedAt||c.issuerReservationHash!==i.recordHash||c.issuerFenceIdentityHash!==i.identity.identityHash||c.sdkRootHash!==f.sdk.root.recordHash||c.sdkGrantHash!==g.recordHash||c.grantLinkHash!==prepHash('GrantLink',issuerFacts.grantLink)||c.noticeLinkHash!==prepHash('NoticeLink',data.noticeLink))fail();",
+            "    }else if(terminal?.upload.send||terminal?.activation.send||f.selected)fail();",
+            "    if(f.selected){",
+            "     if(receipts.length!==3||!f.cleanupScope||f.selected.binding!==null||f.selected.preparation.prepId!==id||f.selected.preparation.sourceRevision!==source.sourceRevision||f.selected.selection.sequence!==1||f.selected.selection.previousSelectionHash!==null||f.selected.preparation.selectedAt<receipts[2].completedAt||f.selected.selection.preparationHash!==f.selected.preparation.preparationHash)fail();",
+            "     const witness=await child(l=>store.readSelectionPublication({sourceRevision:source.sourceRevision,selectionHash:f.selected.selection.selectionHash},l));",
+            "     if(!witness||witness.publishedAt<f.selected.selection.selectedAt||witness.publishedAt>=f.selected.preparation.commandBy||f.selectionRows.get('source-selection:'+source.sourceRevision+':head')!==f.selected.selection.selectionHash||!f.selectionRows.has('source-selection:'+source.sourceRevision+':publication:'+f.selected.selection.selectionHash))fail();",
+            "    }"
+          ]
+        },
+        {
+          "oldLine": 474,
+          "newLine": 553,
+          "old": [
+            "    data.noticeLink=await getRecord('readLink',{kind:'notice',preconnectionId:id},false);",
+            "    if(data.noticeLink?(f.inventory.get(prefix+'notice')!==prepEncode('NoticeLink',data.noticeLink)):f.inventory.has(prefix+'notice'))fail();",
+            "    const issuerFacts=await issuerPrimary(f,data,enrollment,ack,receipt,getRecord);"
+          ],
+          "new": [
+            ""
+          ]
+        },
+        {
+          "oldLine": 485,
+          "newLine": 562,
+          "old": [],
+          "new": [
+            "    const allTickets=[],uses=new Map(),owner=f.ownerFacts;",
+            "    if(owner.tickets.length>6||owner.projects.length>1||owner.approvals.length>3||owner.preparations.length>1||owner.selections.length>1)fail();",
+            "    for(const [key,raw]of owner.tickets){",
+            "     const use=key.endsWith(':use'),r=prepDecode(use?'TicketUse':'Ticket',raw);",
+            "     if(key!=='owner-ticket:'+r.ticketHash+(use?':use':''))fail();",
+            "     if(use){if(uses.has(r.ticketHash))fail();uses.set(r.ticketHash,r);}else allTickets.push(r);",
+            "    }",
+            "    if(new Set(allTickets.map(t=>t.action)).size!==allTickets.length)fail();",
+            "    const expectedMap=data.projectRef??(owner.projects.length?prepDecode('ProjectRef',owner.projects[0][1]):null);",
+            "    if(owner.projects.length&&(owner.projects[0][0]!=='owner-project-ref:'+expectedMap.projectRef||expectedMap.preconnectionId!==id||expectedMap.sourceRevision!==source.sourceRevision||expectedMap.projectId!==source.project.projectId||expectedMap.revision!==source.project.revision||expectedMap.subjectHash!==evidence('subject',{accessRealmHash:evidence('realm',{...source.access,origin:source.origin}),subject:p.subject})))fail();",
+            "    let pendingUsed=false;",
+            "    for(const ticket of allTickets){",
+            "     const n=ownerStages.indexOf(ticket.action),known=stages.find(s=>s.stage===ticket.action);",
+            "     if(n<0||n>receipts.length||ticket.preconnectionId!==id||ticket.sourceRevision!==source.sourceRevision||!expectedMap||ticket.projectRef!==expectedMap.projectRef||ticket.subjectHash!==expectedMap.subjectHash||ticket.expiresAt>expectedMap.expiresAt||ticket.createdAt<source.window.startedAt||ticket.createdAt>Date.now()||ticket.action==='connection'&&(ticket.ticketHash!==data.sourceSnapshot?.initialTicketHash||ticket.connectionRef!==null)||ticket.action!=='connection'&&ticket.connectionRef!==issuerFacts.connection?.connectionRef||known&&ticket.ticketHash!==known.ticket.ticketHash)fail();",
+            "     const use=uses.get(ticket.ticketHash);if(use&&(use.consumedAt<ticket.createdAt||use.consumedAt>=ticket.expiresAt||use.consumedAt>Date.now()))fail();",
+            "     if(use&&!known)pendingUsed=true;",
+            "    }",
+            "    for(const ticketHash of uses.keys())if(!allTickets.some(t=>t.ticketHash===ticketHash))fail();",
+            "    for(const [key,raw]of owner.approvals){",
+            "     const a=prepDecode('ConfigurationApproval',raw),approvalHash=prepHash('ConfigurationApproval',a);",
+            "     if(key!=='connection-approval:'+approvalHash||!allTickets.some(ticket=>{const use=uses.get(ticket.ticketHash);return use&&use.recordHash===a.csrfReceiptHash&&use.recordHash===evidence('decision',{ticket,decision:'approve',projectHash:projectHash(source.project),goal:source.goal,clientId:source.clientId,approvedAt:a.approvedAt,expiresAt:a.expiresAt});}))fail();",
+            "    }",
+            "    if(f.selected){",
+            "     if(owner.preparations.length!==1||owner.selections.length!==1||owner.preparations[0][0]!=='preparation:'+id+':record'||owner.preparations[0][1]!==prepEncode('OwnerPreparation',f.selected.preparation)||owner.selections[0][0]!=='afw.finite-owner-selection.v1:'+f.selected.selection.selectionHash||owner.selections[0][1]!==prepEncode('Selection',f.selected.selection))fail();",
+            "    }else if(owner.preparations.length||owner.selections.length)fail();"
+          ]
+        },
+        {
+          "oldLine": 487,
+          "newLine": 589,
+          "old": [
+            "    return {receipt,data,enrollment,ack,issuerFacts,noticeFacts};"
+          ],
+          "new": [
+            "    return {receipt:receipts.at(-1)??null,receipts,stages,pendingUsed,data,enrollment,ack,issuerFacts,noticeFacts};"
+          ]
+        },
+        {
+          "oldLine": 496,
+          "newLine": 598,
+          "old": [
+            "    anchors:f.a,physical,preparation:q.data,installed:{receipt:q.receipt,enrollment:q.enrollment,ack:q.ack},"
+          ],
+          "new": [
+            "    anchors:f.a,physical,preparation:q.data,installed:{receipt:q.receipt,receipts:q.receipts,stages:q.stages,enrollment:q.enrollment,ack:q.ack},ownerFacts:f.ownerFacts,pendingUsed:q.pendingUsed,cleanupScope:f.cleanupScope,selected:f.selected,"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "0a04ae3a4d74c2c7939b1654683054b1d5d751d4",
+        "bytes": 22438
+      },
+      "after": {
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+        "gitBlob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "gzipBytes": 6767
+      },
+      "hunks": [
+        {
+          "oldLine": 46,
+          "newLine": 46,
+          "old": [
+            "  for(const prefix of ['afw.finite-policy-effect.v1:','afw.finite-preparation-issuer.v1:','afw.finite-owner-issuer-provenance.v1:','afw.finite-preparation-notice.v1:','afw.finite-owner-cleanup.v1:'])"
+          ],
+          "new": [
+            "  for(const prefix of ['afw.finite-policy-effect.v1:','afw.finite-preparation-issuer.v1:','afw.finite-owner-issuer-provenance.v1:','afw.finite-preparation-notice.v1:','afw.finite-owner-cleanup.v1:','afw.finite-preparation-cleanup-scope.v1:','source-selection:'])"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "newFile": true,
+      "before": null,
+      "after": {
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+        "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "gzipBytes": 1050
+      },
+      "hunks": [
+        {
+          "oldLine": 1,
+          "newLine": 1,
+          "old": [],
+          "new": [
+            "import test,{after} from 'node:test';",
+            "import assert from 'node:assert/strict';",
+            "import {createFiniteCoupledOwnerWorld} from './fixtures/finite-coupled-native.mjs';",
+            "let w;",
+            "after(async()=>{await w?.close();});",
+            "const fixed=(id,phase,work)=>test(id,{timeout:120000},async()=>{",
+            " assert(w||id==='C2T1_CONNECTION');",
+            " let actionThrew=false,counterThrew=false,actionError,counterError,counts;",
+            " try{await work();}catch(error){actionThrew=true;actionError=error;}",
+            " try{counts=w?await w.counts():null;}catch(error){counterThrew=true;counterError=error;}",
+            " // Missing counter facts cannot produce a Source frame or a qualifying receipt.",
+            " if(!counterThrew&&counts!==null&&counts!==undefined){",
+            "  const passed=!actionThrew;",
+            "  console.info('C2SOURCE '+JSON.stringify({id,status:passed?'pass':'fail',phase,counters:counts,code:passed?'OK':'TEST_FAILED'}));",
+            " }",
+            " // Preserve the exact original thrown value, including null or undefined.",
+            " if(actionThrew)throw actionError;",
+            " if(counterThrew)throw counterError;",
+            "});",
+            "fixed('C2T1_CONNECTION','connection',async()=>{",
+            " w=await createFiniteCoupledOwnerWorld();",
+            " await w.approve('connection');",
+            " assert.deepEqual(await w.counts(),{upload:1,activation:1,receipts:1});",
+            "});",
+            "fixed('C2T1_OAUTH','oauth',async()=>{await w.oauth();});",
+            "fixed('C2T1_HANDLE','negative',async()=>{await w.invalidForm('handle');});",
+            "fixed('C2T1_PROJECTREF','negative',async()=>{await w.invalidForm('projectRef');});",
+            "fixed('C2T1_SUBJECT','negative',async()=>{await w.invalidSubject();});",
+            "fixed('C2T1_PHASE_RENAME','negative',async()=>{await w.corruptThenDeny('phase');});",
+            "fixed('C2T1_SOURCE_BYTES','negative',async()=>{await w.corruptThenDeny('module');});",
+            "fixed('C2T1_APPROVAL','negative',async()=>{await w.corruptThenDeny('approval');});",
+            "fixed('C2T1_PREDECESSOR','negative',async()=>{await w.corruptThenDeny('predecessor');});",
+            "fixed('C2T1_GRANT_REVOKED','negative',async()=>{await w.corruptThenDeny('grant');});",
+            "fixed('C2T1_EXTRA_KEY','negative',async()=>{await w.corruptThenDeny('extra');});",
+            "fixed('C2T1_NOTICES','notices',async()=>{",
+            " await w.approve('notices');",
+            " assert.deepEqual(await w.counts(),{upload:2,activation:2,receipts:2});",
+            "});",
+            "fixed('C2T1_MONITOR_COOKIE','monitor',async()=>{await w.monitorWrongCookie();});",
+            "fixed('C2T1_MONITOR','monitor',async()=>{await w.monitor();});",
+            "fixed('C2T1_SCOPE_MISSING','scope',async()=>{await w.noScope();});",
+            "fixed('C2T1_FINITE','finite',async()=>{",
+            " await w.approve('finite');",
+            " assert.deepEqual(await w.counts(),{upload:3,activation:3,receipts:3});",
+            "});",
+            "fixed('C2T1_SELECTION','selection',async()=>{await w.selection();});",
+            "fixed('C2T1_LOST_ACK_DUPLICATE','negative',async()=>{await w.lostAckDuplicate();});",
+            "fixed('C2T1_UNRESOLVED_WRITER','negative',async()=>{await w.heldWriter();});",
+            "fixed('C2T1_OWN_PROMISE','negative',async()=>{await w.ownPromise();});",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "newFile": true,
+      "before": null,
+      "after": {
+        "blob": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+        "bytes": 14244,
+        "sha256": "029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318",
+        "gitBlob": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+        "gzipBytes": 4362
+      },
+      "hunks": [
+        {
+          "oldLine": 1,
+          "newLine": 1,
+          "old": [],
+          "new": [
+            "import assert from 'node:assert/strict';",
+            "import {createHash} from 'node:crypto';",
+            "import {initialEntryHarness} from './finite-initial-entry-world.mjs';",
+            "import {plain,approveFirstConnection,readFirstConnectionProbe} from './finite-first-connection-publication.mjs';",
+            "import {hashFinitePreparationRecord as hash,hashFinitePolicyEffectIdentity as identityHash} from '../../lib/mcp-qa-finite-preparation-records.mjs';",
+            "const O='https://delegated-canary.agentfriendlyweb.dev';",
+            "const records=rows=>rows.filter(([k])=>k.startsWith('afw.finite-policy-effect.v1:'));",
+            "async function open(){",
+            " const f=await initialEntryHarness('first-connection-publication',{coupledStages:true});",
+            " try{await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();await f.mountFirstConnection();",
+            "  f.selectionSource=(await plain(f.stub.capsuleFacts())).material.ownerSelection;f.token=await f.enrollmentToken(f.selectionSource);return f;",
+            " }catch(error){await close(f);throw error;}",
+            "}",
+            "async function close(f){if(!f)return;try{await f.stub.firstConnectionRestore();await f.stub.c2ScopeRestore();await f.stub.restoreMethods();}finally{await f.mf.dispose();await f.cleanup();}}",
+            "const discard=async r=>{const status=r.status;await r.body?.cancel();return status;};",
+            "const headers=(f,cookie=f.choice?.cookie)=>({'Cf-Access-Jwt-Assertion':f.token,...cookie?{Cookie:cookie}:{}});",
+            "async function choose(f){",
+            " const r=await f.call('/connections/finite-prepare',{headers:headers(f)}),status=r.status,text=await r.text();assert.equal(status,200);",
+            " const handle=/name=\"handle\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],projectRef=/name=\"projectRef\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],cookie=r.headers.get('set-cookie')?.split(';')[0];assert(handle&&projectRef&&cookie);return {handle,projectRef,cookie,text};",
+            "}",
+            "const post=(f,form,patch={})=>f.call('/connections/finite-prepare',{method:'POST',headers:{...headers(f,form.cookie),Origin:O,'Content-Type':'application/x-www-form-urlencoded',...patch.headers},body:patch.body??new URLSearchParams({handle:form.handle,projectRef:form.projectRef,decision:'approve'})});",
+            "async function count(f){const rows=await plain(f.stub.snapshot());return {upload:f.uploads.length-1,activation:f.activations.length-1,receipts:records(rows).filter(([k])=>k.endsWith(':receipt')).length};}",
+            "async function waitHeld(f){",
+            " const end=performance.now()+30000;for(;;){const s=await plain(f.stub.firstConnectionState());if(s.fetchHeld)return s;if(performance.now()>=end)throw Error('SYN c2 native hold missing');await new Promise(r=>setTimeout(r,10));}",
+            "}",
+            "async function settled(f){const end=performance.now()+30000;for(;;){if((await plain(f.stub.firstConnectionAvailability())).available)return;if(performance.now()>=end)throw Error('SYN c2 native settlement missing');await new Promise(r=>setTimeout(r,10));}}",
+            "export async function createFiniteCoupledOwnerWorld(){",
+            " const main=await open();let active=main,pendingForm=null,firstCookie=null,negative=null;",
+            " const isolate=async()=>{await close(negative);negative=await open();active=negative;return negative;};",
+            " const noFurther=async(f,before,response)=>{assert.notEqual(await discard(response),200);assert.deepEqual(await count(f),before);};",
+            " return {",
+            "  async close(){await close(negative);await close(main);},",
+            "  counts(){return count(active);},",
+            "  async approve(stage){",
+            "   active=main;const f=main;",
+            "   if(stage==='connection'){",
+            "    const response=await approveFirstConnection(f);assert.equal(await discard(response),200);firstCookie=f.choice.cookie;",
+            "   }else{",
+            "    const form=pendingForm??await choose(f);pendingForm=null;",
+            "    if(stage==='finite')assert(form.text.includes('revocar únicamente la concesión OAuth creada aquí.'));",
+            "    assert.equal(await discard(await post(f,form)),200);f.choice=form;",
+            "   }",
+            "   const rows=await plain(f.stub.snapshot()),receipts=records(rows).filter(([k])=>k.endsWith(':receipt')).map(([,raw])=>JSON.parse(raw));",
+            "   assert.equal(receipts.length,['connection','notices','finite'].indexOf(stage)+1);",
+            "   const ordered=['connection','notices','finite'].slice(0,receipts.length).map(s=>receipts.find(r=>r.stage===s));assert(ordered.every(Boolean));",
+            "   assert.equal(new Set(ordered.map(r=>r.versionId)).size,ordered.length);assert.equal(new Set(ordered.map(r=>r.deploymentId)).size,ordered.length);",
+            "   for(let i=0;i<ordered.length;i++){",
+            "    const r=ordered[i],previous=i?ordered[i-1]:null;",
+            "    if(previous){assert.equal(r.baselineVersionId,previous.versionId);assert.equal(r.baselineDeploymentId,previous.deploymentId);}",
+            "    for(const effect of ['upload','activation']){",
+            "     const key='afw.finite-policy-effect.v1:'+identityHash({kind:'connection',preconnectionId:r.preconnectionId,sourceRevision:r.sourceRevision,stage:r.stage,effect});",
+            "     const send=JSON.parse(rows.find(([k])=>k===key+':send')[1]),ack=JSON.parse(rows.find(([k])=>k===key+':ack')[1]);",
+            "     assert.equal(ack.sendHash,hash('ConnectionSend',send));assert.equal(ack.resourceId,effect==='upload'?r.versionId:r.deploymentId);assert(ack.acknowledgedAt<send.deadline);",
+            "    }",
+            "    assert.equal(hash('ConnectionReceipt',r),r.receiptHash);",
+            "   }",
+            "   assert.equal(f.uploads.length-1,ordered.length);assert.equal(f.activations.length-1,ordered.length);",
+            "   // Mount the actual provider-returned version/configuration, with unchanged actual compiled M bytes.",
+            "   await f.adoptConnectionConfiguration({upstream:true});",
+            "  },",
+            "  async oauth(){",
+            "   const f=main,current=await plain(f.stub.firstConnectionContext());assert.equal(current.source.phase,'read_consent');f.source=current.source;",
+            "   const kv=await f.mf.getKVNamespace('OAUTH_KV','canary-first-connection');",
+            "   await kv.put('client:'+f.source.clientId,JSON.stringify({clientId:f.source.clientId,redirectUris:['https://client.example/cb'],clientName:'SYN c2 native client',grantTypes:['authorization_code'],responseTypes:['code'],tokenEndpointAuthMethod:'none',authMethodExplicit:true,registrationDate:Math.floor(Date.now()/1000)}));",
+            "   const verifier='v'.repeat(64),challenge=createHash('sha256').update(verifier).digest('base64url'),r=await f.call('/authorize?'+new URLSearchParams({client_id:f.source.clientId,redirect_uri:'https://client.example/cb',response_type:'code',resource:f.source.resource,scope:'afw:project:read',state:'SYN-c2',code_challenge:challenge,code_challenge_method:'S256'}),{redirect:'manual',headers:headers(f)});",
+            "   assert.equal(r.status,200);const text=await r.text(),handle=/name=\"handle\" value=\"([^\"]+)\"/.exec(text)?.[1],cookie=r.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);",
+            "   const approved=await f.call('/authorize',{method:'POST',redirect:'manual',headers:{...headers(f,firstCookie+'; '+cookie),Origin:O,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle,decision:'approve',scope:'afw:project:read'})});",
+            "   assert.equal(approved.status,302);assert(new URL(approved.headers.get('Location')).searchParams.get('code'));await approved.body?.cancel();",
+            "   const rows=await plain(f.stub.snapshot());assert(rows.some(([k])=>k.endsWith(':sdk_complete:observed')));",
+            "  },",
+            "  async invalidForm(key){",
+            "   const f=main,form=pendingForm??await choose(f);pendingForm=form;const before=await count(f),body=new URLSearchParams({handle:form.handle,projectRef:form.projectRef,decision:'approve'});body.set(key,'f'.repeat(64));await noFurther(f,before,await post(f,form,{body}));",
+            "  },",
+            "  async invalidSubject(){const f=main,before=await count(f),token=await f.firstConnectionToken(f.source,{subject:'SYN-c2-foreign'});await noFurther(f,before,await f.call('/connections/finite-prepare',{headers:{...headers(f),'Cf-Access-Jwt-Assertion':token}}));},",
+            "  async corruptThenDeny(kind){",
+            "   const f=main,before=await count(f),snapshot=await plain(f.stub.c2Snapshot()),pointer=structuredClone(f.providerRegistry.pointer),versions=structuredClone(f.providerRegistry.versions);",
+            "   let grant;",
+            "   try{",
+            "    if(kind==='module'){const id=pointer.versions[0].version_id;f.providerRegistry.versions[id].modules[0].content_base64='AAAA';}",
+            "    else if(kind==='grant'){grant=await f.db.prepare('SELECT id,revoked_at FROM delegated_access_grants WHERE revoked_at=?').bind('').first();assert(grant);await f.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').bind(new Date().toISOString(),grant.id).run();}",
+            "    else await f.stub.c2Corrupt(kind);",
+            "    assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable','actual compiled factual predicate rejects changed source');",
+            "    await noFurther(f,before,await f.call('/connections/finite-prepare',{headers:headers(f)}));",
+            "   }finally{await f.stub.c2Restore(snapshot);f.providerRegistry.pointer=pointer;f.providerRegistry.versions=versions;if(grant)await f.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').bind(grant.revoked_at,grant.id).run();}",
+            "  },",
+            "  async monitorWrongCookie(){const f=main,before=await count(f);await noFurther(f,before,await f.call('/monitoring',{headers:headers(f,firstCookie)}));},",
+            "  async monitor(){",
+            "   const f=main,r=await f.call('/monitoring',{headers:headers(f)});assert.equal(r.status,200);const text=await r.text(),handle=/name=\"handle\" value=\"([^\"]+)\"/.exec(text)?.[1],cookie=r.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);",
+            "   const p=await f.call('/monitoring/grant',{method:'POST',headers:{...headers(f,f.choice.cookie+'; '+cookie),Origin:O,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle})});assert.equal(await discard(p),200);",
+            "   const rows=await plain(f.stub.snapshot());assert(rows.some(([key])=>/^connection-preparation:[a-f0-9]{64}:notice$/.test(key)));",
+            "   const events=await f.db.prepare('SELECT request_id,sequence FROM dossier_monitoring_consent_events WHERE action=?').bind('grant').all();assert.equal(events.results.length,1);",
+            "  },",
+            "  async noScope(){",
+            "   const f=main,form=await choose(f),snapshot=await plain(f.stub.c2Snapshot()),before=await count(f);assert(form.text.includes('revocar únicamente la concesión OAuth creada aquí.'));",
+            "   for(const kind of ['drop','holder']){",
+            "    try{await f.stub.c2ScopeDrop(kind);await noFurther(f,before,await post(f,form));const stats=await plain(f.stub.c2ScopeState());if(kind==='holder'){assert.equal(stats.drifted,true);assert.equal(stats.puts,0,'changed transaction holder is rejected before scope put');}else assert.equal(stats.puts,1);}",
+            "    finally{await f.stub.c2ScopeRestore();await f.stub.c2Restore(snapshot);}",
+            "   }pendingForm=form;",
+            "  },",
+            "  async selection(){",
+            "   const rows=await plain(main.stub.snapshot()),receipt=records(rows).map(([,v])=>JSON.parse(v)).find(v=>v.purpose==='afw.finite-connection-installed.v1'&&v.stage==='finite'),preparation=rows.map(([,v])=>{try{return JSON.parse(v);}catch{return null;}}).find(v=>v?.purpose==='afw.finite-owner-preparation.v1');",
+            "   assert(receipt&&preparation);assert(receipt.completedAt<=preparation.selectedAt);assert(rows.some(([key])=>key==='source-selection:'+preparation.sourceRevision+':head'));assert(!rows.some(([key])=>key==='preparation:'+preparation.prepId+':bound'));",
+            "   assert.equal(records(rows).filter(([k])=>k.endsWith(':send')).length,6);assert.equal(records(rows).filter(([k])=>k.endsWith(':receipt')).length,3);",
+            "   const closed=main.providerRegistry.versions['55555555-5555-4555-8555-555555555555'],final=main.providerRegistry.versions[receipt.versionId],a=structuredClone(closed),b=structuredClone(final);delete a.id;delete b.id;assert.deepEqual(a,b);",
+            "   const scope=rows.find(([key])=>key==='afw.finite-preparation-cleanup-scope.v1:'+preparation.prepId);assert(scope);const record=JSON.parse(scope[1]);assert.equal(record.startAfterMs,240000);assert.equal(record.endAfterMs,420000);assert.equal(record.approvedButton,'approve');",
+            "  },",
+            "  async lostAckDuplicate(){",
+            "   const f=await isolate();await f.stub.firstConnectionConfigure('upload-lost');const r=await approveFirstConnection(f);assert.notEqual(await discard(r),200);await settled(f);const before=await count(f),rows=await plain(f.stub.snapshot());assert.equal(before.upload,1);assert.equal(before.activation,0);",
+            "   const retry=await post(f,f.choice);await noFurther(f,before,retry);assert.deepEqual(await plain(f.stub.snapshot()),rows);",
+            "  },",
+            "  async heldWriter(){",
+            "   const f=await isolate();await f.stub.firstConnectionConfigure('upload-held');const pending=approveFirstConnection(f);await waitHeld(f);",
+            "   // The original child watchdog ends the logical request while the exact native fetch stays held.",
+            "   const response=await pending;assert.notEqual(await discard(response),200);",
+            "   const timedOut=await plain(f.stub.firstConnectionState());assert.equal(timedOut.fetchHeld,true);assert.equal(timedOut.fetchSettled,false);",
+            "   const available=await plain(f.stub.firstConnectionAvailability());assert.equal(available.live,true);assert.equal(available.available,false,'physical native work retains exclusion after logical timeout');",
+            "   assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');",
+            "   const before=await count(f),snapshot=await plain(f.stub.snapshot());assert.deepEqual(before,{upload:1,activation:0,receipts:0});",
+            "   await noFurther(f,before,await post(f,f.choice));assert.deepEqual(await plain(f.stub.snapshot()),snapshot);",
+            "   await f.stub.firstConnectionRelease('fetch');await settled(f);",
+            "   assert.equal((await plain(f.stub.firstConnectionState())).fetchSettled,true);",
+            "   assert.deepEqual(await count(f),before,'late actual settlement cannot ACK, activate or create a receipt');",
+            "   assert.deepEqual(await plain(f.stub.snapshot()),snapshot);",
+            "  },",
+            "  async ownPromise(){",
+            "   const f=await isolate();await f.stub.firstConnectionConfigure('upload-held');const pending=approveFirstConnection(f);await waitHeld(f);",
+            "   assert.deepEqual(await plain(f.stub.firstConnectionReseal('upload','ack-matched')),{codecRoundtrip:true,journalValid:true});",
+            "   await f.stub.firstConnectionRelease('fetch');assert.notEqual(await discard(await pending),200);await settled(f);",
+            "   const state=await plain(f.stub.firstConnectionProbe());assert(state.observation.some(v=>v.kind==='journal-mutation'&&v.recordKind==='ConnectionAck'&&v.status==='existing'));",
+            "   assert.equal(f.activations.length,1);assert.equal((await count(f)).receipts,0);",
+            "  }",
+            " };",
+            "}",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+        "bytes": 57864
+      },
+      "after": {
+        "blob": "ec57e55ea2d8f68c992af26bccca0c6e71a79f96",
+        "bytes": 60636,
+        "sha256": "092a1d8dd44b99a16e522f09234a2b0f4bf62e6575ac99664be516fc7673920d",
+        "gitBlob": "ec57e55ea2d8f68c992af26bccca0c6e71a79f96",
+        "gzipBytes": 16606
+      },
+      "hunks": [
+        {
+          "oldLine": 163,
+          "newLine": 163,
+          "old": [],
+          "new": [
+            "",
+            " async c2Snapshot(){return [...await this.ctx.storage.list()];}",
+            " async c2Restore(rows){const s=this.ctx.storage;for(const [key]of await s.list())if(!rows.some(([k])=>k===key))await s.delete(key);for(const [key,value]of rows)await s.put(key,value);await s.sync();return true;}",
+            " async c2Corrupt(kind){",
+            "  const s=this.ctx.storage,rows=[...await s.list()],pre=rows.find(([k])=>/^connection-preparation:[a-f0-9]{64}:record$/.test(k));if(!pre)throw Error('SYN c2 original record absent');",
+            "  const p=JSON.parse(pre[1]),base='connection-preparation:'+p.preconnectionId+':';",
+            "  if(kind==='extra'){await s.put(base+'unadmitted','{}');await s.sync();return;}",
+            "  if(kind==='phase'){const key=base+'source',v=JSON.parse(await s.get(key));v.source.phase='notice_consent';v.sourceHash=firstPrepHash('OwnerSourceSnapshot',v);await s.put(key,firstPrepEncode('OwnerSourceSnapshot',v));}",
+            "  if(kind==='approval'){const key=base+'connection:approval',v=JSON.parse(await s.get(key));v.approvalHash='f'.repeat(64);await s.put(key,firstPrepEncode('StageApproval',v));}",
+            "  if(kind==='predecessor'){const [key,raw]=rows.find(([k])=>k.startsWith('afw.finite-policy-effect.v1:')&&k.endsWith(':receipt'));const v=JSON.parse(raw);v.baselineDeploymentId='dddddddd-dddd-4ddd-8ddd-dddddddddddd';v.receiptHash=firstPrepHash('ConnectionReceipt',v);await s.put(key,firstPrepEncode('ConnectionReceipt',v));}",
+            "  await s.sync();",
+            " }",
+            " async c2ScopeDrop(kind='drop'){",
+            "  if(!['drop','holder'].includes(kind))throw Error('SYN scope control invalid');",
+            "  const s=this.ctx.storage,transaction=s.transaction,stats=this.c2ScopeStats={puts:0,drifted:false};this.c2RestoreScope=()=>{s.transaction=transaction;};",
+            "  s.transaction=fn=>Reflect.apply(transaction,s,[tx=>{",
+            "   const wrapped={get:tx.get.bind(tx),put:(key,value)=>{if(key.startsWith('afw.finite-preparation-cleanup-scope.v1:')){stats.puts++;if(kind==='drop')return Promise.resolve();}return tx.put(key,value);}};",
+            "   if(kind==='holder'){const get=wrapped.get;wrapped.get=async key=>{const value=await get(key);if(key.startsWith('afw.finite-preparation-cleanup-scope.v1:')){wrapped.put=(...args)=>tx.put(...args);stats.drifted=true;}return value;};}",
+            "   return fn(wrapped);",
+            "  }]);",
+            " }",
+            " async c2ScopeState(){return this.c2ScopeStats??null;}",
+            " async c2ScopeRestore(){this.c2RestoreScope?.();this.c2RestoreScope=null;}",
+            ""
+          ]
+        },
+        {
+          "oldLine": 385,
+          "newLine": 409,
+          "old": [],
+          "new": [
+            "  ...(source.includes('export async function handlePrivateQaFiniteOwnerChoice(')?[",
+            "  [\"v.preconnectionId!==id\",\"v.contextHash!==contextHash\",'connection-history'],",
+            "  [\"const seen=actual.versions\",\"receipts.map\",'publication-pointer'],",
+            "  [\"installed.moduleHash!==capsule.moduleHash\",\"installed.configurationHash!==finiteActivationConfigurationHash\",'receipt-physical-hash'],",
+            "  [\"f.effects.size!==expectedKeys.length\",\"writer-head\",'writer-head']",
+            "  ]:["
+          ]
+        },
+        {
+          "oldLine": 389,
+          "newLine": 419,
+          "old": [],
+          "new": [
+            "  ])"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "a7b730dc9be336528f0971544099f79d05758b1a",
+        "bytes": 87501
+      },
+      "after": {
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "gzipBytes": 22824
+      },
+      "hunks": [
+        {
+          "oldLine": 29,
+          "newLine": 29,
+          "old": [
+            "export async function initialEntryHarness(mode='normal',{negativeProfile=false,ownerCleanup=false,cleanupCheckpoint=false,budgetCompileOnly=false,budgetQualification=false}={}){"
+          ],
+          "new": [
+            "export async function initialEntryHarness(mode='normal',{negativeProfile=false,ownerCleanup=false,cleanupCheckpoint=false,budgetCompileOnly=false,budgetQualification=false,coupledStages=false}={}){"
+          ]
+        },
+        {
+          "oldLine": 107,
+          "newLine": 107,
+          "old": [
+            "  if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-phase-context\\.mjs$/},async args=>({contents:(ownerCleanup?instrumentFiniteOwnerCleanup:x=>x)(instrumentFirstConnection(await readFile(args.path,'utf8'),{mutation:firstConnectionMutation})),loader:'js'}));"
+          ],
+          "new": [
+            "  if(firstConnection)b.onLoad({filter:/mcp-qa-finite-owner-phase-context\\.mjs$/},async args=>({contents:(ownerCleanup?instrumentFiniteOwnerCleanup:x=>x)(instrumentFirstConnection(await readFile(args.path,'utf8').then(text=>{if(coupledStages&&process.env.AFW_C2_T1_MUTANT==='prefix'){const needle=\"for(const k of inventory.keys())if(!['record','source','connection:approval','notices:approval','finite:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();\";assert.equal(text.split(needle).length,2,'SYN c2 single exact prefix mutant');return text.replace(needle,'');}return text;}),{mutation:firstConnectionMutation})),loader:'js'}));"
+          ]
+        },
+        {
+          "oldLine": 145,
+          "newLine": 145,
+          "old": [
+            " let finalOptions={...base,script:built.outputFiles[0].text,outboundService:createInitialEntrySynOutbound({f,firstConnection,jwk,w,mode,created,approval,opPin,opMetadata,built,x,cleanupCheckpoint})};"
+          ],
+          "new": [
+            " let finalOptions={...base,script:built.outputFiles[0].text,outboundService:createInitialEntrySynOutbound({f,firstConnection,jwk,w,mode,created,approval,opPin,opMetadata,built,x,cleanupCheckpoint,coupledStages})};"
+          ]
+        },
+        {
+          "oldLine": 175,
+          "newLine": 175,
+          "old": [
+            "   assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);const pointer=f.providerRegistry.pointer,version=f.providerRegistry.versions[pointer.versions[0].version_id],closed=f.providerRegistry.versions['55555555-5555-4555-8555-555555555555'];",
+            "   assert.equal(version.id,pointer.versions[0].version_id);assert.equal(version.modules[0].content_base64,closed.modules[0].content_base64);const candidate=structuredClone(closed);candidate.id=version.id;candidate.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';assert.deepEqual(version,candidate);"
+          ],
+          "new": [
+            "   if(!coupledStages){assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);}else{assert(f.uploads.length>=2&&f.uploads.length<=4);assert.equal(f.activations.length,f.uploads.length);}const pointer=f.providerRegistry.pointer,version=f.providerRegistry.versions[pointer.versions[0].version_id],closed=f.providerRegistry.versions['55555555-5555-4555-8555-555555555555'];",
+            "   assert.equal(version.id,pointer.versions[0].version_id);assert.equal(version.modules[0].content_base64,closed.modules[0].content_base64);if(!coupledStages){const candidate=structuredClone(closed);candidate.id=version.id;candidate.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';assert.deepEqual(version,candidate);}else{assert.equal(version.modules[0].content_base64,closed.modules[0].content_base64);}"
+          ]
+        },
+        {
+          "oldLine": 209,
+          "newLine": 209,
+          "old": [
+            "export function createInitialEntrySynOutbound({f,firstConnection,jwk,w,mode,created,approval,opPin,opMetadata,built,x,cleanupCheckpoint=false}){"
+          ],
+          "new": [
+            "export function createInitialEntrySynOutbound({f,firstConnection,jwk,w,mode,created,approval,opPin,opMetadata,built,x,cleanupCheckpoint=false,coupledStages=false}){"
+          ]
+        },
+        {
+          "oldLine": 292,
+          "newLine": 292,
+          "old": [
+            "    f.activations.push({body,data});result={id:'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',...data};f.providerRegistry.pointer=structuredClone(result);"
+          ],
+          "new": [
+            "    f.activations.push({body,data});const c2Deployment=['bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb','cccccccc-cccc-4ccc-8ccc-cccccccccccc','dddddddd-dddd-4ddd-8ddd-dddddddddddd'][f.activations.length-2];result={id:coupledStages?c2Deployment:'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',...data};f.providerRegistry.pointer=structuredClone(result);"
+          ]
+        },
+        {
+          "oldLine": 312,
+          "newLine": 312,
+          "old": [
+            "    const body=await req.text(),data=JSON.parse(body);f.uploads.push({body,data});f.uploaded={...data,id:firstConnection&&f.uploads.length>1?'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa':'55555555-5555-4555-8555-555555555555',urls:[],containers:data.containers.map(c=>({...c,name:'agent-friendly-web-delegated-canary-afwowneventnode'})),bindings:data.bindings.map(b=>b.type==='inherit'?{name:b.name,type:'secret_text'}:b)};"
+          ],
+          "new": [
+            "    const body=await req.text(),data=JSON.parse(body);f.uploads.push({body,data});f.uploaded={...data,id:firstConnection&&f.uploads.length>1?(coupledStages?['aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','eeeeeeee-eeee-4eee-8eee-eeeeeeeeeeee','ffffffff-ffff-4fff-8fff-ffffffffffff'][f.uploads.length-2]:'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'):'55555555-5555-4555-8555-555555555555',urls:[],containers:data.containers.map(c=>({...c,name:'agent-friendly-web-delegated-canary-afwowneventnode'})),bindings:data.bindings.map(b=>b.type==='inherit'?{name:b.name,type:'secret_text'}:b)};"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "1298bb5b67749df0d7ee20c863b691562e6a81b9",
+        "bytes": 57221
+      },
+      "after": {
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+        "gitBlob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "gzipBytes": 14307
+      },
+      "hunks": [
+        {
+          "oldLine": 13,
+          "newLine": 13,
+          "old": [
+            " const f=await initialEntryHarness('first-connection-publication',options);"
+          ],
+          "new": [
+            " const f=await initialEntryHarness('first-connection-publication',{...options,coupledStages:true});"
+          ]
+        },
+        {
+          "oldLine": 38,
+          "newLine": 38,
+          "old": [
+            " assert(probe.native.calls.some(c=>c.url==='https://afw-private.invalid/_finite-owner/monitoring'),'OAuth=true reaches QA without ordinary monitoring flag');"
+          ],
+          "new": [
+            " assert(!probe.native.calls.some(c=>c.url==='https://afw-private.invalid/_finite-owner/monitoring'),'monitoring flag is required before QA forwarding');"
+          ]
+        },
+        {
+          "oldLine": 116,
+          "newLine": 116,
+          "old": [
+            " const f=await fixture(t),before=await readFirstConnectionProbe(f);assert.equal(f.firstConnectionBuild.negativeMutation,null,'positive principal is unmutated');assert.equal(f.firstConnectionBuild.M.sha256,'c49303bee6b3a97fa1e022bfb697bb2e94fd1e37bcdd925ae9d86c774537cc32','positive initial M stays exact D11');assert.equal(f.firstConnectionBuild.M.bytes,1988061);await f.stub.firstConnectionConfigure('normal');"
+          ],
+          "new": [
+            " const f=await fixture(t),before=await readFirstConnectionProbe(f);assert.equal(f.firstConnectionBuild.negativeMutation,null,'positive principal is unmutated');const actualResidentBytes=gunzipSync(Buffer.from(f.resident.content,'base64')),actualResidentHash=createHash('sha256').update(actualResidentBytes).digest('hex'),originalCapsule=JSON.parse(before.rows.find(([key])=>key.endsWith(':capsule'))[1]);",
+            " for(const metadata of [f.firstConnectionBuild.M,f.resident.module,{sha256:originalCapsule.moduleHash,bytes:JSON.parse(before.rows.find(([key])=>key==='afw.finite-initial-cleanup.v1:plan')[1]).moduleBytes}]){assert.equal(metadata.sha256,actualResidentHash);assert.equal(metadata.bytes,Buffer.byteLength(actualResidentBytes));}await f.stub.firstConnectionConfigure('normal');"
+          ]
+        },
+        {
+          "oldLine": 161,
+          "newLine": 162,
+          "old": [],
+          "new": [
+            " const earlyMonitoring=await f.call('/monitoring',{headers});assert.notEqual(earlyMonitoring.status,200);await earlyMonitoring.body?.cancel();",
+            " // Later permission requires the independently approved, genuinely published notices stage.",
+            " const noticeChoice=await f.call('/connections/finite-prepare',{headers});assert.equal(noticeChoice.status,200);const choiceHtml=await noticeChoice.text(),stageHandle=/name=\"handle\" value=\"([a-f0-9]{64})\"/.exec(choiceHtml)?.[1],stageProjectRef=/name=\"projectRef\" value=\"([a-f0-9]{64})\"/.exec(choiceHtml)?.[1],stageCookie=noticeChoice.headers.get('set-cookie')?.split(';')[0];assert(stageHandle&&stageProjectRef&&stageCookie);",
+            " const publishNotices=await f.call('/connections/finite-prepare',{method:'POST',headers:{...headers,Origin:O,'Content-Type':'application/x-www-form-urlencoded',Cookie:stageCookie},body:new URLSearchParams({handle:stageHandle,projectRef:stageProjectRef,decision:'approve'})});assert.equal(publishNotices.status,200);await publishNotices.body?.cancel();",
+            " f.choice.cookie=stageCookie;headers.Cookie=stageCookie;await f.adoptConnectionConfiguration({upstream:true});"
+          ]
+        },
+        {
+          "oldLine": 164,
+          "newLine": 170,
+          "old": [
+            " const unsupported=await f.call('/connections/finite-prepare',{headers});assert.notEqual(unsupported.status,200);await unsupported.body?.cancel();assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);"
+          ],
+          "new": [
+            " const nextFinite=await f.call('/connections/finite-prepare',{headers});assert.equal(nextFinite.status,200);await nextFinite.body?.cancel();assert.equal(f.uploads.length,3);assert.equal(f.activations.length,3);"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "newFile": false,
+      "before": {
+        "blob": "ea910f0fcdeade5a794ddaa60898706924e72f80",
+        "bytes": 4750
+      },
+      "after": {
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+        "gitBlob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "gzipBytes": 2098
+      },
+      "hunks": [
+        {
+          "oldLine": 16,
+          "newLine": 16,
+          "old": [],
+          "new": [
+            "  const oauth=env?.AFW_DELEGATED_OAUTH_ENABLED,monitor=env?.AFW_DOSSIER_MONITORING_OWNER_ENABLED,policyRaw=env?.AFW_DOSSIER_MONITORING_OWNER_POLICY;",
+            "  let policy;try{policy=JSON.parse(policyRaw);}catch{fail();}",
+            "  if(typeof policyRaw!=='string'||Buffer.byteLength(policyRaw,'utf8')>2048||oauth!=='true'||monitor!=='true'||!policy||Reflect.ownKeys(policy).length!==5||!['grantId','projectId','clientId','startAt','expiresAt'].every(k=>Object.hasOwn(policy,k))||JSON.stringify({grantId:policy.grantId,projectId:policy.projectId,clientId:policy.clientId,startAt:policy.startAt,expiresAt:policy.expiresAt})!==policyRaw||typeof policy.grantId!=='string'||!policy.grantId||policy.grantId.length>200||policy.projectId!==env.AFW_OAUTH_PILOT_PROJECT_ID||policy.clientId!==env.AFW_OAUTH_PILOT_CLIENT_ID||!Number.isSafeInteger(policy.startAt)||!Number.isSafeInteger(policy.expiresAt)||policy.startAt>Date.now()||Date.now()>=policy.expiresAt||policy.expiresAt-policy.startAt>600000)fail();"
+          ]
+        },
+        {
+          "oldLine": 19,
+          "newLine": 22,
+          "old": [
+            "  let failed=false;const check=()=>{if(failed)fail();originalLease.assertCurrent();if(request.headers!==originalHeaders||JSON.stringify([...originalHeaders])!==headerBytes||request.signal!==originalSignal||request.url!==originalUrl||request.method!==originalMethod||env.AFW_FINITE_TRIAL_CONTROL!==namespace||namespace.idFromName!==idFromName||namespace.get!==get||Reflect.apply(idFromName,namespace,[finiteNativeActor]).toString()!==actor||stub.fetch!==fetcher||env.AFW_FINITE_TRIAL_VERSION!==metadata||metadata.id!==version)fail();};"
+          ],
+          "new": [
+            "  let failed=false;const check=()=>{if(failed)fail();originalLease.assertCurrent();if(env.AFW_DELEGATED_OAUTH_ENABLED!==oauth||env.AFW_DOSSIER_MONITORING_OWNER_ENABLED!==monitor||env.AFW_DOSSIER_MONITORING_OWNER_POLICY!==policyRaw||policy.projectId!==env.AFW_OAUTH_PILOT_PROJECT_ID||policy.clientId!==env.AFW_OAUTH_PILOT_CLIENT_ID||Date.now()<policy.startAt||Date.now()>=policy.expiresAt||request.headers!==originalHeaders||JSON.stringify([...originalHeaders])!==headerBytes||request.signal!==originalSignal||request.url!==originalUrl||request.method!==originalMethod||env.AFW_FINITE_TRIAL_CONTROL!==namespace||namespace.idFromName!==idFromName||namespace.get!==get||Reflect.apply(idFromName,namespace,[finiteNativeActor]).toString()!==actor||stub.fetch!==fetcher||env.AFW_FINITE_TRIAL_VERSION!==metadata||metadata.id!==version)fail();};"
+          ]
+        }
+      ]
+    }
+  ]
+}
