@@ -1,0 +1,66 @@
+{
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Source-only GitHub laboratory",
+  "resourceType": "one Source CAS/push attempt1 readonly job",
+  "resourceId": "refs/heads/feat/finite-native-cleanup-20261101",
+  "allowedAction": "one diagnostic-enriched preflight, unchanged required full520; logs once and exact Source closure",
+  "utc": "2026-11-16 01:02:13 UTC",
+  "prepared": {
+    "commit": "ef41b65dd5402092a6de3977532a8fffcac59d81",
+    "activeTree": "ff3691c4bedcd855b66ba69485ce8f20d920e537",
+    "inactiveTree": "45850c8f684161854f6ec636149faa3e5f1e5bb3",
+    "parent": "b26843c72dccc9bdcf9a9771e59faeff077c6461",
+    "F7": "54aa12557867127bf85d5707845e400a19b662d5",
+    "SAME": "bb58ba7ebe5bcca0cd27e4a2ec0050f220460225",
+    "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-FIX3-ONEUSE-20261115",
+    "SourceReleased": false
+  },
+  "SourceIndex": "d138a0640a0bcdea8f0f6075a8975eb75c1b6e6b",
+  "OwnIndex": "6793b7c01ee70e4bc898b1b58f60c07f7c06c5ce",
+  "phaseContract": "b240b62b0c0bf0c0dd74e8621536a70a22272efc",
+  "phaseInterpretation": "reported last entered group only; not first assertion, historical cause, authentication or qualification",
+  "RootChecks": {
+    "pins39": 39,
+    "data72": 72,
+    "reversibles12": 12,
+    "layoutExactLFSpaceJoins": 34,
+    "Source42Exact": true,
+    "historyFull": true,
+    "Own45_124Unchanged": true,
+    "SourceLocalExecution": false
+  },
+  "F7Headroom": 102,
+  "SAMEReserve": 6678,
+  "Core": {
+    "leaves": 3201,
+    "bytes": 324448,
+    "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+  },
+  "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "queues": 0,
+  "candidateHeadRuns": 0,
+  "rollback": {
+    "parent": "ef41b65dd5402092a6de3977532a8fffcac59d81",
+    "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "preserveEntireCandidateSAME": true,
+    "fullActualReceiptBeforeClose": true,
+    "compactAppendMax": 1024,
+    "spareAfterCloseMin": 1024,
+    "fullReadback": "Source/commit/tree/F7/fullSAME/Core/Main/5queues/closedheadruns"
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "I3Open": true,
+  "C2Released": false,
+  "NativeReleased": false,
+  "providerRuntimeRead": false
+}
