@@ -1,6 +1,6 @@
 {
   "schema": "afw.c2-notices-n2.root-static-checkpoint.v1",
-  "atUTC": "2026-11-16 15:35:55 UTC",
+  "atUTC": "2026-11-16 16:53:55 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "environment": "immutable Git DATA / Root docs",
@@ -185,7 +185,7 @@
     "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
     "builderCheck": "9741a68b848456032da812ecd0a29d71d8d2d5c4",
     "sourceBrief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
-    "status": "N3.A Source producer and N3.B2 independent receiver DATA active; no N3 refs/runs",
+    "status": "N3.A actual41PASS closed, fresh review pending; OWN3P2 repair pending newnative",
     "rootBinding": "nullable only actual already-bound lease/promise, gaps unjoined",
     "focus": "selected-first-target-focus; scope-first-error independent",
     "earlySeal": "8a9d366868d4be5593866637417c356bf4783e1d",
@@ -215,8 +215,8 @@
     "activeResume": "docs/superpowers/progress/2026-11-16-active-n3-continuation.es.md",
     "fullProducerManifestPending": true,
     "currentOuterSchema": "1c336fe190816b46223546971afcf34b2c216089",
-    "currentContract": "a43ca8667d2a884bf3079a4072058cec39a919b8",
-    "currentSeams": "27623553b80168a0e4fd9fb8411f7d0e087a270e",
+    "currentContract": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+    "currentSeams": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
     "outerSelectionConstFixPending": false,
     "retiredOuterSchema": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
     "currentProtocolPath": "docs/superpowers/progress/2026-11-16-c2-notices-n3-current-protocol.json",
@@ -231,6 +231,48 @@
       ],
       "sourceExecuted": false,
       "cloudNative": false
-    }
+    },
+    "currentProtocol": "07b00734edcb0b2c92caca01f89fea6a614b861c",
+    "sourceToolingFix2": {
+      "packet": "e1f1b666726b2eb433d4d2d96f7266ca0c951308",
+      "index": "906cfbea830100065eebdccb18d0810f8b207efb",
+      "head": "91ac03eae0a3ee384d23886bd2f814de54c59bc3",
+      "tree": "d0d7b38bfd4f53950db6e3eee4e1e1ead62ab860",
+      "run": 43911561091,
+      "job": 133454520846,
+      "pass": 41,
+      "fail": 0,
+      "primary": "6d2ae3f2396c1ef71ebba0263a55001422373000",
+      "proof": "3a8781f6a2646a3a00c521fc7f25b6a35d314ac8",
+      "closed": "13ff68c37de9c4f3c71629cc39ed5521e3422447",
+      "closeProof": "e9bae275ebfcd092cc4014b281eead8c03d06a4a",
+      "reviewBrief": "cddf96d7d7275fe7cee2a1c6d602b63b14d8cb13",
+      "reviewPending": true
+    },
+    "ownModels": {
+      "index": "ff70ff8b6ac5c6865053ebe73e01ecff9d55ee07",
+      "run": 43908195474,
+      "job": 133442638511,
+      "pass": 496,
+      "fail": 0,
+      "primary": "32632d659d5108e7064beda0124a8a0f7c0f80aa",
+      "proof": "5a85be5d6cc2af1f6c93aaefc89d2ce902ff14fb",
+      "closed": "549907f99ea2cd17be46ea79adc8303f78ea6142",
+      "closeProof": "14c245f245d7f602b3bedf3520e0a8403fd4504b",
+      "review": {
+        "blob": "23358908713964c29511dc44d3e554387619f7c7",
+        "spec": "FAIL",
+        "quality": "FAIL",
+        "P2": 3
+      },
+      "fix2": {
+        "status": "RAM517 reported, newnativepacketpending",
+        "actor": "/root/c2_v2_own_receiver_fix1"
+      }
+    },
+    "finalSourceBinding": false,
+    "actualSourceExecution": false,
+    "SourceQualified": false,
+    "Task1Pass": false
   }
 }
