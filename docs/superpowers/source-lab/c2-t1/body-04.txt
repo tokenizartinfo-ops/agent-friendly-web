@@ -1,0 +1,44 @@
+import {createHash} from 'node:crypto';
+import {initialFields as fields,initialCanonical as canonical,initialHash as digest,initialHex as hex} from './mcp-qa-finite-initial-material-records.mjs';
+import {retainFiniteOwnerStagePromise as retain} from './mcp-qa-finite-stage-work.mjs';
+export const finiteOwnerCleanupScopeText='Autorizo preparar este único ensayo y, entre cuatro y siete minutos después de su comando, cerrar la emisión para esta conexión, retirar sus permisos de lectura y avisos y revocar únicamente la concesión OAuth creada aquí. Si el ensayo no toma el relevo, se conserva el cierre original.';
+export const finiteOwnerCleanupScopeTextHash=createHash('sha256').update(finiteOwnerCleanupScopeText,'utf8').digest('hex');
+const purpose='afw.finite-preparation-cleanup-scope.v1',prefix=purpose+':';
+const names=['purpose','textVersion','textHash','approvedButton','stageApprovalHash','prepId','sourceRevision','issuerReservationHash','issuerFenceIdentityHash','sdkRootHash','sdkGrantHash','grantLinkHash','noticeLinkHash','startAfterMs','endAfterMs','approvedAt'];
+const fail=()=>{throw Error('Finite owner cleanup scope unavailable');};
+const hash=body=>digest(purpose,body);
+export function qualifyFiniteOwnerCleanupScope(value){
+ fields(value,[...names,'scopeHash']);const body=Object.fromEntries(names.map(k=>[k,value[k]]));
+ if(body.purpose!==purpose||body.textVersion!==1||body.textHash!==finiteOwnerCleanupScopeTextHash||body.approvedButton!=='approve'||body.startAfterMs!==240000||body.endAfterMs!==420000||!Number.isSafeInteger(body.approvedAt)||body.approvedAt<0||!/^[a-f0-9]{40}$/.test(body.sourceRevision)||names.filter(k=>k.endsWith('Hash')||k==='prepId').some(k=>!hex(body[k]))||hash(body)!==value.scopeHash)fail();
+ return Object.freeze({...body,scopeHash:value.scopeHash});
+}
+export function sealFiniteOwnerCleanupScope(body){
+ fields(body,names);return qualifyFiniteOwnerCleanupScope({...body,scopeHash:hash(body)});
+}
+export async function readFiniteOwnerCleanupScope({storage,preconnectionId},lease){
+ if(!hex(preconnectionId)||typeof storage?.get!=='function'||typeof storage?.list!=='function')fail();
+ const get=storage.get,list=storage.list,check=()=>{lease.assertCurrent();if(lease.signal.aborted||storage.get!==get||storage.list!==list)fail();};
+ check();const rows=await retain(Reflect.apply(list,storage,[{prefix,limit:2}]));check();
+ if(!(rows instanceof Map)||rows.size>1||[...rows.keys()].some(k=>k!==prefix+preconnectionId))fail();
+ const raw=await retain(Reflect.apply(get,storage,[prefix+preconnectionId]));check();
+ if(raw===undefined){if(rows.size)fail();return null;}
+ if(typeof raw!=='string'||Buffer.byteLength(raw,'utf8')>4096||rows.get(prefix+preconnectionId)!==raw)fail();
+ const value=qualifyFiniteOwnerCleanupScope(JSON.parse(raw));if(value.prepId!==preconnectionId||canonical(value)!==raw)fail();return value;
+}
+export async function appendFiniteOwnerCleanupScope({storage,record},lease){
+ const value=qualifyFiniteOwnerCleanupScope(record),transaction=storage?.transaction,sync=storage?.sync;
+ if(typeof transaction!=='function'||typeof sync!=='function')fail();
+ const check=()=>{lease.assertCurrent();if(lease.signal.aborted||storage.transaction!==transaction||storage.sync!==sync)fail();};
+ check();const raw=canonical(value),key=prefix+value.prepId;
+ const result=await retain(Reflect.apply(transaction,storage,[async tx=>{
+  check();const get=tx?.get,put=tx?.put;if(typeof get!=='function'||typeof put!=='function')fail();
+  const checkTx=()=>{check();if(tx.get!==get||tx.put!==put)fail();};
+  checkTx();const old=await retain(Reflect.apply(get,tx,[key]));checkTx();
+  if(old!==undefined)fail();
+  checkTx();await retain(Reflect.apply(put,tx,[key,raw]));checkTx();return {status:'recorded',scopeHash:value.scopeHash};
+ }]));check();
+ if(result?.status!=='recorded'||result.scopeHash!==value.scopeHash)fail();
+ await retain(Reflect.apply(sync,storage,[]));check();
+ const observed=await readFiniteOwnerCleanupScope({storage,preconnectionId:value.prepId},lease);check();
+ if(!observed||canonical(observed)!==canonical(value))fail();return Object.freeze({result,record:observed});
+}
