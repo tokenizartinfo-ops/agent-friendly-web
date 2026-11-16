@@ -1,18 +1,37 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/9",
-  "timestampUTC": "2026-11-16 23:35:55 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/10",
+  "timestampUTC": "2026-11-16 23:43:41 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "phase": "GREEN20_FRONTIER_DIAG1_SINGLE_SOURCE_DIAGNOSTIC_RUNNING",
+  "phase": "GREEN20_FRONTIER_DIAG1_ACCEPTED_CLOSED_ACTUAL_RESULT_REVIEW_AND_DIAGNOSIS_PENDING",
+  "allCurrentOneUseRunsTerminalAndWorkflowsClosed": true,
   "fullSourceTask1": {
     "spent": true,
     "run": 43965725604,
-    "result": "INCOMPLETE_ETIMEDOUT_180S",
-    "SourceExecuted": true,
-    "closed": true,
+    "result": "INCOMPLETE_CHILD_ETIMEDOUT_180S",
     "primary": "68c68577dca6ed01980dd673ed9b2623096a71f9",
-    "review": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
     "closedHead": "089356513d1ccef9bdffa375d3a822c7c9fd01d3"
+  },
+  "tools": {
+    "run": 43977281603,
+    "tests": 6,
+    "checks": 31,
+    "primary": "5ecdf44b7bdea99ae1692a8eff9a5ca5b1939303",
+    "review": "6f1ce3574354652cd5fff0f66dc0f0ae26fb12f3",
+    "closeReadback": "9da853b6316233047eaac5c1aac6afd1aecbfc08",
+    "SPECPASS": true,
+    "QUALITYPASS": true
+  },
+  "own": {
+    "run": 43979001179,
+    "tests": 124,
+    "positive": 26,
+    "negative": 98,
+    "primary": "d974205b15b8492ac8a8a748b52c767631165bbd",
+    "review": "5434afae4f5a1cfc09209357ee5666ec28935118",
+    "closeReadback": "92d3b7873769d7b7b3e5beb0ac1960efe2046416",
+    "SPECPASS": true,
+    "QUALITYPASS": true
   },
   "green20": {
     "plan": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
@@ -66,10 +85,13 @@
       "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
       "index": "2f25941491df234890036ae8cf0609e323207b67",
       "refCreated": true,
-      "runCreated": null,
-      "SourceBusinessExecuted": null,
+      "runCreated": true,
+      "SourceBusinessExecuted": true,
       "gate": "SINGLE_SOURCE_DIAGNOSTIC_ACTIVATED",
-      "activatedAt": "2026-11-16 23:33:30 UTC"
+      "activatedAt": "2026-11-16 23:33:30 UTC",
+      "run": 43980317236,
+      "closed": true,
+      "closedHead": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
     },
     "RootTrustedBodyEdges": "1fe62f22a3067029c651e99320c94624998eb58b",
     "SourceToolsFinalReview": "6f1ce3574354652cd5fff0f66dc0f0ae26fb12f3",
@@ -91,53 +113,60 @@
     "OwnFinalReview": "5434afae4f5a1cfc09209357ee5666ec28935118",
     "SourceCaptureGate": "54b7d09ed5e87ff62689dc9fb28eed3436ea2e7a",
     "SourceRun": 43980317236,
-    "SourceJob": 133694794167
-  },
-  "activeCapture": {
-    "head": "6e41d44919d86f0bacc97edab022460449316987",
-    "tree": "fd5fa1eb66c0f1503af570c4a7be0233494016e7",
-    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
-    "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
-    "index": "2f25941491df234890036ae8cf0609e323207b67",
-    "refCreated": true,
-    "runCreated": true,
-    "SourceBusinessExecuted": null,
-    "gate": "SINGLE_SOURCE_DIAGNOSTIC_ACTIVATED",
-    "activatedAt": "2026-11-16 23:33:30 UTC",
+    "SourceJob": 133694794167,
+    "SourcePrimary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
+    "SourceOutcome": "f39f7e43c4010acbaca7a679d61dbe048da24688",
+    "OwnAdmission": "a9993d7411d0a943d2f247915d91ef17b0b38f09",
+    "SourceClosedHead": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+    "SourceCloseReadback": "071bccca74d1f1e0497b18bf3ee65ad532df7363",
+    "SourceResultReviewPending": true,
     "run": 43980317236,
     "job": 133694794167,
-    "observeStepStarted": "2026-11-16T23:34:00Z",
-    "captureExecutionEvidence": "Job observe step in progress; no terminal reporting/custody yet. Do not infer native result or successful cleanup from running state.",
-    "APIOnlyPolling": true,
-    "terminalLogConsumed": false,
-    "terminalArtifactConsumed": false
+    "status": "DIAGNOSTIC_REPORTING_SUCCESS_SOURCE_QUALIFICATION_INCOMPLETE",
+    "primary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
+    "outcome": "f39f7e43c4010acbaca7a679d61dbe048da24688",
+    "closeReadback": "071bccca74d1f1e0497b18bf3ee65ad532df7363",
+    "actual": {
+      "first11Pass": true,
+      "nativePrefix19": {
+        "pass": 14,
+        "fail": 5
+      },
+      "firstThrow": {
+        "sequence": 46,
+        "elapsedMs": 114318,
+        "id": "C2T1_NOTICES",
+        "operation": "action",
+        "edge": "throw",
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 41,
+            "column": 12
+          }
+        }
+      },
+      "openCase": {
+        "id": "C2T1_OWN_PROMISE",
+        "operation": "action",
+        "enteredElapsedMs": 176469
+      },
+      "afterOpen": false,
+      "capture": {
+        "errorKind": "timeout",
+        "childCapMs": 180000
+      },
+      "Source13BeforeAfterMatch": true,
+      "custodyLaunches": 2,
+      "custodyProbes": 2,
+      "cleanupClaimMatched": true
+    }
   },
-  "tools": {
-    "run": 43977281603,
-    "primary": "5ecdf44b7bdea99ae1692a8eff9a5ca5b1939303",
-    "proof": "466c6af28eba2581f1e487c947bcd76d11fb0afc",
-    "closure": "9da853b6316233047eaac5c1aac6afd1aecbfc08",
-    "review": "6f1ce3574354652cd5fff0f66dc0f0ae26fb12f3",
-    "tests": 6,
-    "checks": 31,
-    "closed": true,
-    "SPEC": "PASS",
-    "QUALITY": "PASS"
-  },
-  "own": {
-    "run": 43979001179,
-    "primary": "d974205b15b8492ac8a8a748b52c767631165bbd",
-    "proof": "98b9b2c9639b1e9ea66408e5d3a3a7fd06ef07d8",
-    "closure": "92d3b7873769d7b7b3e5beb0ac1960efe2046416",
-    "review": "5434afae4f5a1cfc09209357ee5666ec28935118",
-    "tests": 124,
-    "positive": 26,
-    "negative": 98,
-    "closed": true,
-    "SPEC": "PASS",
-    "QUALITY": "PASS"
-  },
-  "next": "Follow sole active Source run to terminal via metadata; one terminal log+artifact listing/download, Root independent g20Read with separately trusted actual APIcontext and exact25Rootbodyedges. Preserve all outcomes including fault/incomplete. Close only this workflow and readback. Fresh actual-result review, no Source13/caps/runtime changes and no fullTask1rerun by inference.",
+  "next": "Await fresh actual-result review c230_full_own_native_review and bounded diagnosis/design n3_admission_repair4_design. Both have primary/outcome/OWNadmission/closure. Diagnose earliest NOTICES POST non200 after~30s atS08:41, no numeric status captured. Keep last openCase separate; no claim it caused earlier failure. No code/native released for fixes, no Source13/budget/QA/M change yet.",
+  "doNotRepeat": "All three GREEN20 nominations and full source43965725604 spent and closed. No Source business rerun or cap increase by inference. No liveCloudflare/OAuth/OTP/tokens/mail/Max action.",
+  "RootDocs": "dded26005ad6b7291e8d99724546d1baaa7a72c8",
   "SourceQualified": false,
   "Task1Pass": false,
   "nonclaims": {
