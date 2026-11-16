@@ -1,25 +1,17 @@
 {
-  "schema": "AFW-FULL-TASK1-ACTIVE/4",
-  "atUTC": "2026-11-16 22:01:13 UTC",
-  "phase": "FULL_SOURCE_TASK1_ORIGINAL_BUDGET_NATIVE_ACTIVE",
-  "OwnZIPFix": {
+  "schema": "AFW-FULL-TASK1-ACTIVE/5",
+  "atUTC": "2026-11-16 22:10:16 UTC",
+  "phase": "FULL_SOURCE_TASK1_CLOSED_GREEN_CAPTURE_TIMEOUT_STATIC_DIAGNOSIS_NEXT",
+  "Own": {
     "index": "7e25d39b4586786828137e10942c9ef7c7cbf642",
     "reader": "979c4fd2caadd75b47b3416275248a23310e3722",
-    "native419": {
-      "run": 43963999645,
-      "job": 133638507952,
-      "primary": "8595247053fe516c66addbd00008d593e4d72dff",
-      "proof": "98c4d4a232a3e603bc256bf6b2e96566f71bd4f4",
-      "close": "0305cfe4250798c4d7d8538fa7f1ec6a7656d0c6"
-    },
+    "native419": "8595247053fe516c66addbd00008d593e4d72dff",
     "freshReview": "797613a34698a6c4a3ade7c4cc679b7af0ad0099",
     "SPEC": "PASS",
     "QUALITY": "PASS",
-    "F1": "ADDRESSED",
-    "F2": "ADDRESSED"
+    "closed": "49e8a74df5d6b61ebcdc7cbd4c12bc7affb21350"
   },
-  "SourceStaticReview": "58788e1426dd81e927d765a98f14ea50e5e3f77f",
-  "fullSource": {
+  "SourceFull": {
     "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
     "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
     "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
@@ -36,9 +28,29 @@
     "activated": true,
     "gate": "752c3d862a1fc5398770415fdd7235c4319f3591",
     "run": 43965725604,
-    "actualPending": true
+    "actualPending": false,
+    "job": 133644531547,
+    "result": "INCOMPLETE_GREEN_CAPTURE_TIMEOUT",
+    "primary": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+    "outcome": "91b08d3ea77cd85264fc6f5ada1fd62693c56631",
+    "closed": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+    "closeProof": "e65c9b545c44c663f8e5ceb41794a5aab8e9e455",
+    "SourceQualified": false,
+    "Task1Pass": false
   },
-  "next": "Wait run43965725604 terminal, consume unique joblog/artifact once, admit via approved OWN actualAPI/tree/log/bytes; preserve failure honestly and close by remove only WF plus readback. Never rerun/message/raise caps. Then independent result review.",
+  "SourceRefSpent": true,
+  "SourceCaptureReleased": false,
+  "activeReadOnlyWork": {
+    "resultReviewer": "/root/c230_full_own_native_review",
+    "diagnosticPlanner": "/root/n3_admission_repair4_design",
+    "scope": "Actual outcome review and frozen Source/harness static diagnosis only. No Source runs/code changes pending material reason/new Root gate."
+  },
+  "independentOwnPrefixCheck": {
+    "admittedFrames": 3,
+    "scope": "synthetic3+/35−, dependencyENOENT, BASE3 only",
+    "APIrejectedActualFailedRun": true
+  },
+  "next": "Finish read-only timeout diagnosis, identify smallest material next step. Never replay expired/spent fullSource; keep caps unchanged. No Task2 or live trial yet.",
   "ownerActionNeeded": false,
   "SourceQualified": false,
   "Task1Pass": false,
