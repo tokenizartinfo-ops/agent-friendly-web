@@ -1,0 +1,96 @@
+{
+  "schema": "AFW-N3-FIRST-LIMIT-ROOT-EARLY-SEAL/1",
+  "atUTC": "2026-11-16 18:57:09 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "ruling": "a969930b2fea38173ac84b33aa85f9f6ef85e516",
+  "design": "d9330e833c6fc7dd72cdfb51d0dee4427e515142",
+  "artifacts": [
+    {
+      "role": "contract",
+      "bytes": 8674,
+      "sha256": "e6505dd7eb116b724bc4633067afd28882e110fa8aa2271673dccc01a5aaa648",
+      "blob": "78451c59e98651df91bc641efaa1b9819e4dff2e"
+    },
+    {
+      "role": "selection",
+      "bytes": 2626,
+      "sha256": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+      "blob": "c1601719648fc4992fe520ef051b89852a6216f5"
+    },
+    {
+      "role": "schema",
+      "bytes": 30988,
+      "sha256": "3dd4d6e5757c789d284e75e5430774ed2d660a87339b8bfd77d628b3c22c6690",
+      "blob": "19378e2d858bfb1c60a6368fc614ebf1fad7c875"
+    },
+    {
+      "role": "vectors",
+      "bytes": 17556,
+      "sha256": "be94a9381b937ab655e8a0bd652dc4d6bbe2f21b2449b23d49f609ad9a0efe26",
+      "blob": "bd8bfae45c75ce498aab5a6bbb7258cdec185e0a"
+    }
+  ],
+  "selectionHashCanonical": "b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503",
+  "selectionFileHash": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+  "hashRule": "CanonicalUTF8JSON.stringify/noLF; filehashdistinct. Initialrawhash schema06d4/contract8b451 retiredunexecuted.",
+  "acceptance": {
+    "sourceWitnessCodeMayBegin": true,
+    "independentOwnDataConsumerMayBegin": true,
+    "producerFinalManifestPending": true,
+    "nativeGatesHeld": true,
+    "businessCaptureNotAuthorized": true,
+    "oldVersionsPreserved": true
+  },
+  "wire": {
+    "outer": "afw.c2-notices-n3.observation.v2",
+    "innerSnapshot": "afw.c2-notices-n3.qa-snapshot.v1",
+    "innerRecord": "afw.c2-notices-n3.causal-record.v1",
+    "refinedReasons": [
+      "CAP_PRIVATE_ROOT16",
+      "CAP_PRIVATE_GAP_NEW128",
+      "CAP_PRIVATE_LEASE_NEW128",
+      "CAP_PRIVATE_OTHER"
+    ],
+    "only": "canonical unjoined/unknown eligible0or1/emptyarrays/nullerror-cut/focusnone;exactsummaryreason; livev2 rejectsCAP_PRIVATE andlegacySameGap; separatedefault/v1 remains",
+    "nomination": {
+      "source": {
+        "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+        "message": "AFW-C2-N3-FIRSTLIMIT-W1-ONEUSE-20261116",
+        "job": "c2-notices-n3-firstlimit-w1",
+        "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1.yml",
+        "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/"
+      },
+      "tool": {
+        "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+        "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-tool.yml",
+        "job": "c2-notices-n3-firstlimit-w1-tool",
+        "message": "AFW-C2-N3-FIRSTLIMIT-W1-TOOL-ONEUSE-20261116",
+        "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs",
+        "caseMs": 10000,
+        "jobMinutes": 3
+      },
+      "refState": "Nominations only. No head/tree/run/job ID exists in this draft, and no branch or workflow is created. Root verifies absence before any one-use nomination."
+    },
+    "sourceCensus": "8positive14negative4coherent; original31/32 unaffecteddefault tests distinct"
+  },
+  "sourceConstraints": "AtomicA+W round4, noepoch/reset/capraise/timers/clock/headers/authorityreads/probes/RPC/reactions/callbackreplacement/MorSource13change. Same singleQA faultfield; firstfailuresticky; existing probeexpression aftergetAlarm only;oneprojection/cut;defaultsnapshot legacyCAP; ordinaryfactory note/snapshotinterfaceunchanged, same singletonwitnessmethod explicit. No new table/counter/refexport.",
+  "consumerConstraints": [
+    "Implement v2 separately/versioned; nevernormalizehistoricN3 outcome/profile to v2 ormanufacturecurrentmetadata.",
+    "Preserve strictgenericSourcev2 unknown-shape/coherentsummary/sourceorder/nomination/API/host-MQA/CRC/fullDeflate controls and allindependentaxes/identity/focus semantics.",
+    "Current ngSchema does not implement JSONSchema if/then. The new schema allOf hasconditional unknown-shape requirements: implement or independently enforce these conditions in semanticreplay, test all fourteennegativeandcoherentlyrebuilttransports, do not silently ignoreconditional nodes.",
+    "A coherentproducer-shaped substitution ROOT16->GAP_NEW128 throughout is structurallyvalidandcannotbeauthenticatedbyOWN; sourceactualcallbackcontrols establishwhichsamefutureprobe tag waslatched, no historicalfirstlimit/businesscause inference."
+  ],
+  "next": "Sourceauthor implementonlysealedW, deliver earlyactualparser/interface/functions+exactvectors forOWN, thenfinalproducerfields/rootgates. OWN independent implementation may use literalDATA only, neverSourcecodeexecute. No guessedmanifest/sourcehead/tree/run/job values.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
