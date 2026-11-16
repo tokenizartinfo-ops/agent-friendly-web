@@ -1,0 +1,223 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-packet.v1",
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "index": {
+    "bytes": 18321,
+    "sha256": "43e6980b27df8bc65769ab44f31c71c73003eff679b5bb3025fc529525672154",
+    "gitBlob": "e232a70c0d78587546aa1e086d9b8a5352c40d52",
+    "blob": "e232a70c0d78587546aa1e086d9b8a5352c40d52",
+    "fullReadback": true
+  },
+  "selection": {
+    "bytes": 4513,
+    "sha256": "8e842a170ab928e0968df0681302cfff9b0bb9d0e2410655f98e58f4dc8ca4b6",
+    "gitBlob": "762ca860a7fe4b76a5c9541ffc05518bdef28411",
+    "blob": "762ca860a7fe4b76a5c9541ffc05518bdef28411",
+    "fullReadback": true
+  },
+  "report": {
+    "bytes": 14086,
+    "sha256": "5d164a16ecc90c471afb192ae9dad6dfe485a257ab55e0fcd0899f0b97497239",
+    "gitBlob": "867959d5d01efbb404647294178427f5fb9d7615",
+    "blob": "867959d5d01efbb404647294178427f5fb9d7615",
+    "fullReadback": true
+  },
+  "reversibles": {
+    "bytes": 7825,
+    "sha256": "ce28aadc8807c42f82c3379284672c9681a8ef459cb954e4f326fca174483fba",
+    "gitBlob": "78d277e6a64cc7d2b782b98d1f2f0411e2019e35",
+    "blob": "78d277e6a64cc7d2b782b98d1f2f0411e2019e35",
+    "fullReadback": true
+  },
+  "runner": {
+    "bytes": 16945,
+    "sha256": "47cacdf0ffe0eb4f5e57193be6d571a76eb544b6c4cd533e52eeda9ba3acb26c",
+    "gitBlob": "9926bf9d816f724a67298954e8425f25f589fedd",
+    "blob": "9926bf9d816f724a67298954e8425f25f589fedd",
+    "fullReadback": true
+  },
+  "workflow": {
+    "bytes": 1401,
+    "sha256": "16f105f61abd5dc6ec7f66dcdd45dcd56bb72352898061f1f9e4dc3592705c90",
+    "gitBlob": "4d8e6bf0d44b90b3fc0347b6aad7bf2038f9be67",
+    "blob": "4d8e6bf0d44b90b3fc0347b6aad7bf2038f9be67",
+    "fullReadback": true
+  },
+  "proofSchema": {
+    "bytes": 10650,
+    "sha256": "ef35546a352032b34f890d0372b8aa20a95860a7b40f65a9408c6f579153b2d5",
+    "gitBlob": "dbd4b791765b88cacd73f3fc088039e9535bbef3",
+    "blob": "dbd4b791765b88cacd73f3fc088039e9535bbef3",
+    "fullReadback": true
+  },
+  "coreBodies": {
+    "ledger": {
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "gitBlob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "fullReadback": true
+    },
+    "transform": {
+      "bytes": 12054,
+      "sha256": "32746f6f4b98bf5310aadf359b871aee271727187d8c23fb56a967a9d7f8c646",
+      "gitBlob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+      "blob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+      "fullReadback": true
+    },
+    "units": {
+      "bytes": 21112,
+      "sha256": "674b96445e4d754a835453f71ad98d5da6a84425012d4108fb2a63a1d9a9337c",
+      "gitBlob": "dc0eb43c2ed663611f05a62ebf63daea1683b01d",
+      "blob": "dc0eb43c2ed663611f05a62ebf63daea1683b01d",
+      "fullReadback": true
+    },
+    "reader": {
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "gitBlob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "fullReadback": true
+    }
+  },
+  "protocol": {
+    "outerSchema": {
+      "bytes": 29785,
+      "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+      "gitBlob": "1c336fe190816b46223546971afcf34b2c216089",
+      "blob": "1c336fe190816b46223546971afcf34b2c216089",
+      "fullReadback": true
+    },
+    "contract": {
+      "bytes": 19539,
+      "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+      "gitBlob": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+      "blob": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+      "fullReadback": true
+    },
+    "seams": {
+      "bytes": 14141,
+      "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+      "gitBlob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+      "blob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+      "fullReadback": true
+    },
+    "selectionHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c",
+    "manifestKeyCount": 16,
+    "manifestValues": "PENDING_C_NOT_EVIDENCE",
+    "authorities": {
+      "brief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
+      "rootSeal": "8a9d366868d4be5593866637417c356bf4783e1d",
+      "semantic": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+      "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+      "prefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+      "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0"
+    }
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls",
+    "message": "AFW-C2-N3-CONTROLS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls.yml",
+    "job": "c2-notices-n3-controls",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "expectedNative": {
+    "cases": 41,
+    "pass": 41,
+    "fail": 0,
+    "skip": 0,
+    "todo": 0,
+    "cancel": 0,
+    "extra": 0,
+    "missing": 0
+  },
+  "proposedLabTree": {
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "expectedOriginalModesAndBlobs": 3203,
+    "additions": 27,
+    "indexLocation": "This index/packet are off-tree review DATA, not additional lab paths. Root may archive independently in Rootdocs. Exactly27 path/body/mode additions enumerated by index; no product source path changes."
+  },
+  "meaning": "Prepared executable tooling DATA only. Root alone independently reviews/gates/materializes ONE tooling occurrence. Actualnative41/API/TAP/proof/schema/artifact join precedes Source scoped review and captureC. No Source local execution, refs/runs, productfix, Task2 or runtime. C runner/manifest/body finalization separate and still inactive.",
+  "fullReadback": "All body/index/report/WF pins above and all27 admitted bodies verified by FULL immutable blob readback; all previous versions remain immutable. Source code is text, not locally executed.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "deferredInertSourceData": {
+    "status": "NOT_MOUNTED_NOT_CAPTURE_AUTHORITY",
+    "helper": {
+      "bytes": 5764,
+      "sha256": "69386a941f9f565bfffd9846f9b8ec504b2e1c446075b72c368a8d68aaf17eb6",
+      "gitBlob": "bff0415fbbf37c787439d4c526b1c77c8fdf2a65",
+      "blob": "bff0415fbbf37c787439d4c526b1c77c8fdf2a65",
+      "fullReadback": true
+    },
+    "driver": {
+      "bytes": 1812,
+      "sha256": "88137ed32bf1e657be72820529afde0ea1f1c791763e99cdded7da3d0d4f682d",
+      "gitBlob": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+      "blob": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+      "fullReadback": true
+    },
+    "coupled": {
+      "bytes": 19642,
+      "sha256": "a85e1c33412e05095ce56dce7553165f36c0235809e20acd0df3180fd4917764",
+      "gitBlob": "3c9081cb2a04759bbe58ef317ea9db4753ce4235",
+      "blob": "3c9081cb2a04759bbe58ef317ea9db4753ce4235",
+      "fullReadback": true
+    },
+    "world": {
+      "bytes": 89873,
+      "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+      "gitBlob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+      "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+      "fullReadback": true
+    },
+    "combinedVectors": {
+      "bytes": 915177,
+      "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+      "gitBlob": "ce6aa394580a0c26e5fe5c9006cafe06db109530",
+      "blob": "ce6aa394580a0c26e5fe5c9006cafe06db109530",
+      "fullReadback": true
+    },
+    "dedicatedAxes": {
+      "bytes": 56266,
+      "sha256": "ad07c91d6ddf16b41a15f013f80f278d451b09b27749c03a3bb766bc32bc032c",
+      "gitBlob": "acd36e4e8a512a71c0cfef2185443fd57f896de2",
+      "blob": "acd36e4e8a512a71c0cfef2185443fd57f896de2",
+      "fullReadback": true
+    },
+    "dedicatedReducer": {
+      "bytes": 43673,
+      "sha256": "acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9",
+      "gitBlob": "8881c57552b88cd757579b6de120e1f4fca0304c",
+      "blob": "8881c57552b88cd757579b6de120e1f4fca0304c",
+      "fullReadback": true
+    },
+    "selectionFix": {
+      "bytes": 2357,
+      "sha256": "5c63e45fa04b84665b53eb62c52a8f787138e6021d0e890bf37b32f72d76851a",
+      "gitBlob": "c2891a1cb538ebc11d684c29695dc8036bb81bae",
+      "blob": "c2891a1cb538ebc11d684c29695dc8036bb81bae",
+      "fullReadback": true
+    },
+    "unfocusedRoutine": {
+      "bytes": 1325,
+      "sha256": "6d2655b173310765608610e69b47d1b667bd27b83197678dded4dc66b53e660d",
+      "gitBlob": "c26bdbaa9d94df8c1e3a3f281d631180023af020",
+      "blob": "c26bdbaa9d94df8c1e3a3f281d631180023af020",
+      "fullReadback": true
+    },
+    "note": "Deferred C bodies are immutable drafts only; no final C runner/WF/producerManifest. Do not graft into a business run before Root's separate gate and actual tooling/spec-quality/OWN acceptance."
+  }
+}

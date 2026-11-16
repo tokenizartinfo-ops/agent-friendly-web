@@ -1,0 +1,456 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-index.v1",
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "frozen": {
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "normal13Index": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "normal13IndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "fullQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "originalBlobModesExpected": 3203
+  },
+  "authority": {
+    "brief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
+    "rootSeal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semantic": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "prefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls",
+    "message": "AFW-C2-N3-CONTROLS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls.yml",
+    "job": "c2-notices-n3-controls",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "entries": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-qa-ledger.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 16602,
+        "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+        "gitBlob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+        "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-qa-compiler.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 12054,
+        "sha256": "32746f6f4b98bf5310aadf359b871aee271727187d8c23fb56a967a9d7f8c646",
+        "gitBlob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+        "blob": "31001f1a35c435083c7bbfb9b99a4862e3c26e00",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-unit-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 21112,
+        "sha256": "674b96445e4d754a835453f71ad98d5da6a84425012d4108fb2a63a1d9a9337c",
+        "gitBlob": "dc0eb43c2ed663611f05a62ebf63daea1683b01d",
+        "blob": "dc0eb43c2ed663611f05a62ebf63daea1683b01d",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 31798,
+        "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+        "gitBlob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+        "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-trace-reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 11567,
+        "sha256": "e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829",
+        "gitBlob": "4878edb13dad6a9421c457cc850a370d75b84b1c",
+        "blob": "4878edb13dad6a9421c457cc850a370d75b84b1c",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-core-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 13179,
+        "sha256": "fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95",
+        "gitBlob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542",
+        "blob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-trace-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 854,
+        "sha256": "ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758",
+        "gitBlob": "adff3fbc4649f95389b03896ff82bc7ed538c516",
+        "blob": "adff3fbc4649f95389b03896ff82bc7ed538c516",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-logger.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 8370,
+        "sha256": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+        "gitBlob": "4eeaad011444e566f2e0cc99bd897e4a01848a77",
+        "blob": "4eeaad011444e566f2e0cc99bd897e4a01848a77",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-slot.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 2072,
+        "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+        "gitBlob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+        "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 915177,
+        "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+        "gitBlob": "ce6aa394580a0c26e5fe5c9006cafe06db109530",
+        "blob": "ce6aa394580a0c26e5fe5c9006cafe06db109530",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-reducer-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 43673,
+        "sha256": "acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9",
+        "gitBlob": "8881c57552b88cd757579b6de120e1f4fca0304c",
+        "blob": "8881c57552b88cd757579b6de120e1f4fca0304c",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/schema.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 29785,
+        "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+        "gitBlob": "1c336fe190816b46223546971afcf34b2c216089",
+        "blob": "1c336fe190816b46223546971afcf34b2c216089",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-lease.txt",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 2257,
+        "sha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e",
+        "gitBlob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+        "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-op.txt",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+        "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-phase.txt",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-publication.txt",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+        "gitBlob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/normal-world.txt",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/observer-world.txt",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 89873,
+        "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+        "gitBlob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+        "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/contract.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 19539,
+        "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+        "gitBlob": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+        "blob": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/seams.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 14141,
+        "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+        "gitBlob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+        "blob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/n3-unfocused-routine-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 1325,
+        "sha256": "6d2655b173310765608610e69b47d1b667bd27b83197678dded4dc66b53e660d",
+        "gitBlob": "c26bdbaa9d94df8c1e3a3f281d631180023af020",
+        "blob": "c26bdbaa9d94df8c1e3a3f281d631180023af020",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/run-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 16945,
+        "sha256": "47cacdf0ffe0eb4f5e57193be6d571a76eb544b6c4cd533e52eeda9ba3acb26c",
+        "gitBlob": "9926bf9d816f724a67298954e8425f25f589fedd",
+        "blob": "9926bf9d816f724a67298954e8425f25f589fedd",
+        "fullReadback": true
+      },
+      "role": "tooling-code"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/tooling-selection.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 4513,
+        "sha256": "8e842a170ab928e0968df0681302cfff9b0bb9d0e2410655f98e58f4dc8ca4b6",
+        "gitBlob": "762ca860a7fe4b76a5c9541ffc05518bdef28411",
+        "blob": "762ca860a7fe4b76a5c9541ffc05518bdef28411",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/tooling-proof-schema.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 10650,
+        "sha256": "ef35546a352032b34f890d0372b8aa20a95860a7b40f65a9408c6f579153b2d5",
+        "gitBlob": "dbd4b791765b88cacd73f3fc088039e9535bbef3",
+        "blob": "dbd4b791765b88cacd73f3fc088039e9535bbef3",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/reversibles.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 7825,
+        "sha256": "ce28aadc8807c42f82c3379284672c9681a8ef459cb954e4f326fca174483fba",
+        "gitBlob": "78d277e6a64cc7d2b782b98d1f2f0411e2019e35",
+        "blob": "78d277e6a64cc7d2b782b98d1f2f0411e2019e35",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-controls/report.json",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; independently Root-gated against BASE",
+      "after": {
+        "bytes": 14086,
+        "sha256": "5d164a16ecc90c471afb192ae9dad6dfe485a257ab55e0fcd0899f0b97497239",
+        "gitBlob": "867959d5d01efbb404647294178427f5fb9d7615",
+        "blob": "867959d5d01efbb404647294178427f5fb9d7615",
+        "fullReadback": true
+      },
+      "role": "inert-DATA"
+    },
+    {
+      "path": ".github/workflows/afw-c2-notices-n3-controls.yml",
+      "mode": "100644",
+      "before": null,
+      "beforeMeaning": "Expected absent; Root verifies existing workflows unchanged",
+      "after": {
+        "bytes": 1401,
+        "sha256": "16f105f61abd5dc6ec7f66dcdd45dcd56bb72352898061f1f9e4dc3592705c90",
+        "gitBlob": "4d8e6bf0d44b90b3fc0347b6aad7bf2038f9be67",
+        "blob": "4d8e6bf0d44b90b3fc0347b6aad7bf2038f9be67",
+        "fullReadback": true
+      },
+      "role": "one-use-tooling-workflow-DATA"
+    }
+  ],
+  "proposedTree": "BASE exact original3203 blobs/modes plus ONLY these27 additions. This index is immutable off-tree proposal DATA; no Git tree/candidate/head/ref/run exists from this author. Root gates exact expanded tree before any push.",
+  "proofContract": {
+    "artifact": "output/c2-notices-n3-tooling.json",
+    "schema": {
+      "bytes": 10650,
+      "sha256": "ef35546a352032b34f890d0372b8aa20a95860a7b40f65a9408c6f579153b2d5",
+      "gitBlob": "dbd4b791765b88cacd73f3fc088039e9535bbef3",
+      "blob": "dbd4b791765b88cacd73f3fc088039e9535bbef3",
+      "fullReadback": true
+    },
+    "marker": "AFW_C2_N3_TOOLING_PROOF ",
+    "serialization": "JSON.stringify(proof)+LF; Node22 TAP reporter may prefix stdout as '# '. Exact artifact payload contains no TAP. Root must join realAPI/head/tree/runAttempt1/job/native41 IDs in fixed order and allpass/no skip/todo/cancel/extra/missing. allToolingBodiesReturned is not independent acceptance.",
+    "diagnosticToolingExecuted": true,
+    "sourceBusinessExecuted": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "scope": "Tooling-only. No installation, Miniflare, businessworld/SDK/esbuild/QA or M execution, custody/business request, new runtime or Task2. C runner/manifest/capture remains blocked/incomplete.",
+  "report": {
+    "bytes": 14086,
+    "sha256": "5d164a16ecc90c471afb192ae9dad6dfe485a257ab55e0fcd0899f0b97497239",
+    "gitBlob": "867959d5d01efbb404647294178427f5fb9d7615",
+    "blob": "867959d5d01efbb404647294178427f5fb9d7615",
+    "fullReadback": true
+  },
+  "reversibles": {
+    "bytes": 7825,
+    "sha256": "ce28aadc8807c42f82c3379284672c9681a8ef459cb954e4f326fca174483fba",
+    "gitBlob": "78d277e6a64cc7d2b782b98d1f2f0411e2019e35",
+    "blob": "78d277e6a64cc7d2b782b98d1f2f0411e2019e35",
+    "fullReadback": true
+  },
+  "sourceLocalExecution": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
