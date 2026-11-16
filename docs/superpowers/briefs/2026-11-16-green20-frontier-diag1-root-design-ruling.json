@@ -1,0 +1,86 @@
+{
+  "schema": "AFW-GREEN20-FRONTIER-DIAG1-ROOT-DESIGN-RULING/1",
+  "date": "2026-11-16",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA first; Root-gated GitHub native later",
+  "resourceType": "One new bounded diagnostic family, not source qualification",
+  "allowedAction": "Source specialist prepares inventory/exact contract/schema/synthetic scope design; OWN specialist independently plans fixture-first reader/controls. No implementation until Root accepts shared contract; no refs/runs/Source execution by specialists.",
+  "basis": {
+    "plan": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
+    "actualIncomplete": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+    "resultReview": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
+    "closedSource": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+    "own419Review": "797613a34698a6c4a3ade7c4cc679b7af0ad0099"
+  },
+  "materialReason": "Original full qualification has timed-out GREEN child and no native per-case evidence retained, only stdout hash. Need distinguish action/count/AFTER/process exit; don't repeat whole qualification or guesscase20.",
+  "frozen": {
+    "Source13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "CoreM": "unchanged",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "priorBranches": "All consumed/closed, never reopen or rerun."
+  },
+  "decision": [
+    "Accept design direction of a6ec for ONE GREEN20 diagnostic, same20IDs/order, no Source13/product/QA/M/PH/OP instrumentation or Source fixes. Canonical13 paths must remain exact in Git and diagnostic target before/after.",
+    "Reuse9e29c5197207b03bdb4b10069089f37df289e88c sibling driver; registration tail byte-identical S07, recorder e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3 only exact D07 filename alias splice; no other behavior/wrapping/clock/timer changes without explicit Root resolution.",
+    "Propose complete exact contract/schema/frames and alias/blob allowlist BEFORE implementing Source or OWN code. Same supplied Root-approved wire constants must be shared by both; do not guess a field interface or build one side first then loosen OWN to match producer.",
+    "Two checked launches: owned preflight10s and single GREEN child; own observed2..8 processes, max8 per target, empty groups/nonroot/loopback/no-new-privs and checked ownership/dev/inode/nlink/0600/O_NOFOLLOW, stable journal/cleanup. No battery3/35, ENOENT, BASE/MUTANT/REG/W1 repeats in Source capture.",
+    "Limits remain child180s/case120s/total330s/job7min; original incoming30s/leaf5s authority, no new clocks/resets/late release. Stdout1MiB/stderr64KiB/gitArchive32MiB/journal32768B128records/JSONbody24576+LF/ZIP1MiB/log4MiB. Final output one canonical JSON+LF artifact7d; Root must approve exact payload-bound convention before code.",
+    "Diagnostic collector may succeed when child failed/timed out, ONLY if custody/integrity/reporting completed; make explicit diagnosticCollectionComplete vs nativeQualification. Two canonical markers custody+outcome, same body+LF artifact, infra faults separate diagnostic marker and no success. No full8frame/SourceQualified/Task1Pass claim.",
+    "OWN independent partial reducer must retain trusted chronological action/count/AFTER and native TAP prefix, first throw, N1 step-window and N2 contradiction fences. Unknown/torn/empty/fault/alias-incompatible evidence never becomes certainty/zero-work. Use actual ZIP bytes/CRC/full inflation/digest/listing and externalAPI/tree provenance primitives approvedOWN419, without importing producer helpers.",
+    "Root controls all unique nomination/head/ref/one-use native gates and closure. No budget increase, split/parallelsource/subsets or second diagnostic by default. Hypothetical fixture hygiene/release changes remain separate and HELD."
+  ],
+  "sourceNomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+    "message": "AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+    "job": "c2-green-frontier-diag1",
+    "prefix": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/",
+    "runner": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+    "driverSibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "artifact": {
+      "name": "afw-c2-t1-green-frontier-diag1",
+      "path": "output/c2-t1-green-frontier-diag1.json",
+      "fileName": "c2-t1-green-frontier-diag1.json",
+      "retentionDays": 7
+    },
+    "activationReleased": false
+  },
+  "ownNomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-green-frontier-diag1",
+    "message": "AFW-C2-OWN-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+    "job": "c2-own-green-frontier-diag1",
+    "prefix": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/",
+    "runner": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "artifact": {
+      "name": "afw-c2-own-green-frontier-diag1-proof",
+      "path": "output/c2-own-green-frontier-diag1-proof.json",
+      "fileName": "c2-own-green-frontier-diag1-proof.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "runnerOS": "ubuntu-24.04",
+    "jobTimeoutMinutes": 3,
+    "testTimeoutMs": 10000,
+    "activationReleased": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "rollback": "Omit new DATA at design stage; later only distinct additive prefix/WF with Root snapshot/close/readback. Never alter13 original, old qualifier, main/history/closed branches, live resources or actual user data."
+}
