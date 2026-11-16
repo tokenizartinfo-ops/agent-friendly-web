@@ -1,0 +1,774 @@
+{
+  "schema": "AFW-N3-W1-SOURCE-PRIMARY/1",
+  "expected": {
+    "head": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+    "tree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+    "originals": 3203,
+    "added": 41,
+    "leaves": 3244,
+    "refCreated": true,
+    "runCreated": false,
+    "SourceExecuted": false,
+    "captureGateHeld": false,
+    "activated": true
+  },
+  "gate": "376b06bd46a15530734b9fd0f19f5065ea9fc9c0",
+  "api": {
+    "run": {
+      "id": 43945121668,
+      "name": "AFW C2 notices N3 QA causal diagnostic",
+      "node_id": "WFR_kwLOUFJols8AAAAKO1VXhA",
+      "head_branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+      "head_sha": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+      "path": ".github/workflows/afw-c2-notices-n3-firstlimit-w1.yml",
+      "display_title": "AFW-C2-N3-FIRSTLIMIT-W1-ONEUSE-20261116",
+      "run_number": 1,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "workflow_id": 420545587,
+      "check_suite_id": 118967474583,
+      "check_suite_node_id": "CS_kwDOUFJols8AAAAbswOZlw",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668",
+      "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668",
+      "pull_requests": [],
+      "created_at": "2026-11-16T19:59:50Z",
+      "updated_at": "2026-11-16T20:01:30Z",
+      "actor": {
+        "login": "tokenizartinfo-ops",
+        "id": 290715446,
+        "node_id": "U_kgDOEVP3Ng",
+        "avatar_url": "https://avatars.githubusercontent.com/u/290715446?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/tokenizartinfo-ops",
+        "html_url": "https://github.com/tokenizartinfo-ops",
+        "followers_url": "https://api.github.com/users/tokenizartinfo-ops/followers",
+        "following_url": "https://api.github.com/users/tokenizartinfo-ops/following{/other_user}",
+        "gists_url": "https://api.github.com/users/tokenizartinfo-ops/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/tokenizartinfo-ops/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/tokenizartinfo-ops/subscriptions",
+        "organizations_url": "https://api.github.com/users/tokenizartinfo-ops/orgs",
+        "repos_url": "https://api.github.com/users/tokenizartinfo-ops/repos",
+        "events_url": "https://api.github.com/users/tokenizartinfo-ops/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/tokenizartinfo-ops/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [],
+      "run_started_at": "2026-11-16T19:59:50Z",
+      "triggering_actor": {
+        "login": "tokenizartinfo-ops",
+        "id": 290715446,
+        "node_id": "U_kgDOEVP3Ng",
+        "avatar_url": "https://avatars.githubusercontent.com/u/290715446?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/tokenizartinfo-ops",
+        "html_url": "https://github.com/tokenizartinfo-ops",
+        "followers_url": "https://api.github.com/users/tokenizartinfo-ops/followers",
+        "following_url": "https://api.github.com/users/tokenizartinfo-ops/following{/other_user}",
+        "gists_url": "https://api.github.com/users/tokenizartinfo-ops/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/tokenizartinfo-ops/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/tokenizartinfo-ops/subscriptions",
+        "organizations_url": "https://api.github.com/users/tokenizartinfo-ops/orgs",
+        "repos_url": "https://api.github.com/users/tokenizartinfo-ops/repos",
+        "events_url": "https://api.github.com/users/tokenizartinfo-ops/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/tokenizartinfo-ops/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668/jobs",
+      "logs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668/logs",
+      "check_suite_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/check-suites/118967474583",
+      "artifacts_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668/artifacts",
+      "cancel_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668/cancel",
+      "rerun_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/workflows/420545587",
+      "head_commit": {
+        "id": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+        "tree_id": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
+        "message": "AFW-C2-N3-FIRSTLIMIT-W1-ONEUSE-20261116",
+        "timestamp": "2026-11-16T19:25:41Z",
+        "author": {
+          "name": "tokenizart",
+          "email": "tokenizart.info@gmail.com"
+        },
+        "committer": {
+          "name": "tokenizart",
+          "email": "tokenizart.info@gmail.com"
+        }
+      },
+      "repository": {
+        "id": 1347578006,
+        "node_id": "R_kgDOUFJolg",
+        "name": "agent-friendly-web",
+        "full_name": "tokenizartinfo-ops/agent-friendly-web",
+        "private": false,
+        "owner": {
+          "login": "tokenizartinfo-ops",
+          "id": 290715446,
+          "node_id": "U_kgDOEVP3Ng",
+          "avatar_url": "https://avatars.githubusercontent.com/u/290715446?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/tokenizartinfo-ops",
+          "html_url": "https://github.com/tokenizartinfo-ops",
+          "followers_url": "https://api.github.com/users/tokenizartinfo-ops/followers",
+          "following_url": "https://api.github.com/users/tokenizartinfo-ops/following{/other_user}",
+          "gists_url": "https://api.github.com/users/tokenizartinfo-ops/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/tokenizartinfo-ops/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/tokenizartinfo-ops/subscriptions",
+          "organizations_url": "https://api.github.com/users/tokenizartinfo-ops/orgs",
+          "repos_url": "https://api.github.com/users/tokenizartinfo-ops/repos",
+          "events_url": "https://api.github.com/users/tokenizartinfo-ops/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/tokenizartinfo-ops/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+        "description": "Auditoria y mejora progresiva de sitios agent-friendly, creada por Gabriel Mucchiut",
+        "fork": false,
+        "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+        "forks_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/forks",
+        "keys_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/teams",
+        "hooks_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/hooks",
+        "issue_events_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/events",
+        "assignees_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/tags",
+        "blobs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/languages",
+        "stargazers_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/stargazers",
+        "contributors_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contributors",
+        "subscribers_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/subscribers",
+        "subscription_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/subscription",
+        "commits_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/merges",
+        "archive_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/downloads",
+        "issues_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/labels{/name}",
+        "releases_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/deployments"
+      },
+      "head_repository": {
+        "id": 1347578006,
+        "node_id": "R_kgDOUFJolg",
+        "name": "agent-friendly-web",
+        "full_name": "tokenizartinfo-ops/agent-friendly-web",
+        "private": false,
+        "owner": {
+          "login": "tokenizartinfo-ops",
+          "id": 290715446,
+          "node_id": "U_kgDOEVP3Ng",
+          "avatar_url": "https://avatars.githubusercontent.com/u/290715446?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/tokenizartinfo-ops",
+          "html_url": "https://github.com/tokenizartinfo-ops",
+          "followers_url": "https://api.github.com/users/tokenizartinfo-ops/followers",
+          "following_url": "https://api.github.com/users/tokenizartinfo-ops/following{/other_user}",
+          "gists_url": "https://api.github.com/users/tokenizartinfo-ops/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/tokenizartinfo-ops/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/tokenizartinfo-ops/subscriptions",
+          "organizations_url": "https://api.github.com/users/tokenizartinfo-ops/orgs",
+          "repos_url": "https://api.github.com/users/tokenizartinfo-ops/repos",
+          "events_url": "https://api.github.com/users/tokenizartinfo-ops/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/tokenizartinfo-ops/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+        "description": "Auditoria y mejora progresiva de sitios agent-friendly, creada por Gabriel Mucchiut",
+        "fork": false,
+        "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+        "forks_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/forks",
+        "keys_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/teams",
+        "hooks_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/hooks",
+        "issue_events_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/events",
+        "assignees_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/tags",
+        "blobs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/languages",
+        "stargazers_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/stargazers",
+        "contributors_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contributors",
+        "subscribers_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/subscribers",
+        "subscription_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/subscription",
+        "commits_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/merges",
+        "archive_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/downloads",
+        "issues_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/labels{/name}",
+        "releases_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/deployments"
+      }
+    },
+    "jobs": {
+      "total_count": 1,
+      "jobs": [
+        {
+          "id": 133572642517,
+          "run_id": 43945121668,
+          "workflow_name": "AFW C2 notices N3 QA causal diagnostic",
+          "head_branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+          "run_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668",
+          "run_attempt": 1,
+          "node_id": "CR_kwDOUFJols8AAAAfGYzG1Q",
+          "head_sha": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+          "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/jobs/133572642517",
+          "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668/job/133572642517",
+          "status": "completed",
+          "conclusion": "success",
+          "created_at": "2026-11-16T19:59:51Z",
+          "started_at": "2026-11-16T19:59:52Z",
+          "completed_at": "2026-11-16T20:01:29Z",
+          "name": "c2-notices-n3-firstlimit-w1",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-11-16T19:59:53Z",
+              "completed_at": "2026-11-16T19:59:54Z"
+            },
+            {
+              "name": "Read the exact one-use first-limit head",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-11-16T19:59:54Z",
+              "completed_at": "2026-11-16T19:59:55Z"
+            },
+            {
+              "name": "Use fixed Node",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-11-16T19:59:55Z",
+              "completed_at": "2026-11-16T19:59:56Z"
+            },
+            {
+              "name": "Install existing locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-11-16T19:59:56Z",
+              "completed_at": "2026-11-16T20:00:06Z"
+            },
+            {
+              "name": "Observe first notices QA first-limit scope",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-11-16T20:00:06Z",
+              "completed_at": "2026-11-16T20:01:26Z"
+            },
+            {
+              "name": "Preserve sanitized first-limit diagnostic",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-11-16T20:01:26Z",
+              "completed_at": "2026-11-16T20:01:27Z"
+            },
+            {
+              "name": "Post Use fixed Node",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-11-16T20:01:27Z",
+              "completed_at": "2026-11-16T20:01:27Z"
+            },
+            {
+              "name": "Post Read the exact one-use first-limit head",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-11-16T20:01:27Z",
+              "completed_at": "2026-11-16T20:01:27Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-11-16T20:01:27Z",
+              "completed_at": "2026-11-16T20:01:27Z"
+            }
+          ],
+          "check_run_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/check-runs/133572642517",
+          "labels": [
+            "ubuntu-24.04"
+          ],
+          "runner_id": 1000015197,
+          "runner_name": "GitHub Actions 1000015197",
+          "runner_group_id": 0,
+          "runner_group_name": "GitHub Actions"
+        }
+      ]
+    },
+    "commit": {
+      "sha": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+      "node_id": "C_kwDOUFJoltoAKGM0OTVkZmEyNWIzYmFiZWZjZTVjNDJhZGIxZTA5YzJkN2EzMWVlZDE",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+      "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+      "author": {
+        "name": "tokenizart",
+        "email": "tokenizart.info@gmail.com",
+        "date": "2026-11-16T19:25:41Z"
+      },
+      "committer": {
+        "name": "tokenizart",
+        "email": "tokenizart.info@gmail.com",
+        "date": "2026-11-16T19:25:41Z"
+      },
+      "tree": {
+        "sha": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
+        "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/trees/cff9ec5b453dd88d3e35da0b095fd397b45fca03"
+      },
+      "message": "AFW-C2-N3-FIRSTLIMIT-W1-ONEUSE-20261116",
+      "parents": [
+        {
+          "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        }
+      ],
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "artifacts": {
+      "total_count": 1,
+      "artifacts": [
+        {
+          "id": 14263598025,
+          "node_id": "MDg6QXJ0aWZhY3QxNDI2MzU5ODAyNQ==",
+          "name": "afw-c2-notices-n3-firstlimit-w1",
+          "size_in_bytes": 4000,
+          "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/14263598025",
+          "archive_download_url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/actions/artifacts/14263598025/zip",
+          "expired": false,
+          "digest": "sha256:3cc77d7a35a1b07cc94da7d9c702338732c60d31e01f84c160942ab16d807843",
+          "created_at": "2026-11-16T20:01:27Z",
+          "updated_at": "2026-11-16T20:01:27Z",
+          "expires_at": "2026-11-23T20:01:26Z",
+          "workflow_run": {
+            "id": 43945121668,
+            "repository_id": 1347578006,
+            "head_repository_id": 1347578006,
+            "head_branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+            "head_sha": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1"
+          }
+        }
+      ]
+    }
+  },
+  "trusted": {
+    "expected": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+      "workflowPath": ".github/workflows/afw-c2-notices-n3-firstlimit-w1.yml",
+      "oneUseMessage": "AFW-C2-N3-FIRSTLIMIT-W1-ONEUSE-20261116",
+      "job": "c2-notices-n3-firstlimit-w1",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "head": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+      "tree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
+      "runId": 43945121668,
+      "jobId": 133572642517
+    },
+    "manifest": {
+      "schema": "afw.c2-notices-n3.producer-manifest.v1",
+      "normalSourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "selectionHash": "b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503",
+      "contractHash": "e6505dd7eb116b724bc4633067afd28882e110fa8aa2271673dccc01a5aaa648",
+      "schemaHash": "3dd4d6e5757c789d284e75e5430774ed2d660a87339b8bfd77d628b3c22c6690",
+      "seamsHash": "45835c8f0e292c8c7cd1b9397da5d7c5834c4eec34e4147b07092355f9c0a514",
+      "vectorsHash": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+      "driverHash": "88137ed32bf1e657be72820529afde0ea1f1c791763e99cdded7da3d0d4f682d",
+      "coupledHash": "a85e1c33412e05095ce56dce7553165f36c0235809e20acd0df3180fd4917764",
+      "worldHash": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+      "helperHash": "69386a941f9f565bfffd9846f9b8ec504b2e1c446075b72c368a8d68aaf17eb6",
+      "readerHash": "56abe20c95ba5d324a2b72da096b0caaad6f2f8f0e4c3f198c7db64eb7fa5d57",
+      "loggerHash": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+      "slotHash": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "ledgerHash": "190523e50bf39c23190c895833d50ef40af069436b670f81fc5c6478e0bafe2b",
+      "transformHash": "d6b007ac9ad44b76a493f494d0b0c4a6a1180c18574a1f139e36c9a3abfa9dd2"
+    },
+    "protocolHashes": {
+      "contractHash": "e6505dd7eb116b724bc4633067afd28882e110fa8aa2271673dccc01a5aaa648",
+      "schemaHash": "3dd4d6e5757c789d284e75e5430774ed2d660a87339b8bfd77d628b3c22c6690",
+      "seamsHash": "45835c8f0e292c8c7cd1b9397da5d7c5834c4eec34e4147b07092355f9c0a514"
+    },
+    "ledgerBytes": 17134,
+    "policy": {
+      "requiredSteps": [
+        "Read the exact one-use first-limit head",
+        "Use fixed Node",
+        "Install existing locked dependencies",
+        "Observe first notices QA first-limit scope",
+        "Preserve sanitized first-limit diagnostic"
+      ],
+      "commandStep": "Observe first notices QA first-limit scope"
+    }
+  },
+  "rawLog": "﻿2026-11-16T19:59:53.3752798Z Current runner version: '2.338.2'\n2026-11-16T19:59:53.3771006Z ##[group]Runner Image Provisioner\n2026-11-16T19:59:53.3771565Z Hosted Compute Agent\n2026-11-16T19:59:53.3771903Z Version: 20261103.629\n2026-11-16T19:59:53.3772341Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc\n2026-11-16T19:59:53.3772762Z Build Date: 2026-11-03T17:26:59Z\n2026-11-16T19:59:53.3773173Z Worker ID: {3d1cb92f-dee0-4130-a7a7-7a6d6734f05f}\n2026-11-16T19:59:53.3773623Z Region: centralus\n2026-11-16T19:59:53.3773955Z Cloud: Azure\n2026-11-16T19:59:53.3774304Z ##[endgroup]\n2026-11-16T19:59:53.3775089Z ##[group]Operating System\n2026-11-16T19:59:53.3775469Z Ubuntu\n2026-11-16T19:59:53.3775822Z 24.04.5\n2026-11-16T19:59:53.3776127Z LTS\n2026-11-16T19:59:53.3776469Z ##[endgroup]\n2026-11-16T19:59:53.3776790Z ##[group]Runner Image\n2026-11-16T19:59:53.3777124Z Image: ubuntu-24.04\n2026-11-16T19:59:53.3777531Z Version: 20261111.370.1\n2026-11-16T19:59:53.3778260Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.370/images/ubuntu/Ubuntu2404-Readme.md\n2026-11-16T19:59:53.3779155Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.370\n2026-11-16T19:59:53.3779945Z ##[endgroup]\n2026-11-16T19:59:53.3780893Z ##[group]GITHUB_TOKEN Permissions\n2026-11-16T19:59:53.3782192Z Contents: read\n2026-11-16T19:59:53.3782599Z Metadata: read\n2026-11-16T19:59:53.3782952Z ##[endgroup]\n2026-11-16T19:59:53.3784344Z Secret source: Actions\n2026-11-16T19:59:53.3784865Z Cache mode: write\n2026-11-16T19:59:53.3785291Z Prepare workflow directory\n2026-11-16T19:59:53.3993057Z Prepare all required actions\n2026-11-16T19:59:53.4024654Z Getting action download info\n2026-11-16T19:59:53.6349853Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)\n2026-11-16T19:59:53.7323643Z Download action repository 'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)\n2026-11-16T19:59:53.8444820Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)\n2026-11-16T19:59:54.0519498Z Complete job name: c2-notices-n3-firstlimit-w1\n2026-11-16T19:59:54.1033059Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262\n2026-11-16T19:59:54.1033554Z with:\n2026-11-16T19:59:54.1033794Z   persist-credentials: false\n2026-11-16T19:59:54.1034061Z   fetch-depth: 2\n2026-11-16T19:59:54.1034336Z   repository: tokenizartinfo-ops/agent-friendly-web\n2026-11-16T19:59:54.1036330Z   token: ***\n2026-11-16T19:59:54.1036553Z   ssh-strict: true\n2026-11-16T19:59:54.1036784Z   ssh-user: git\n2026-11-16T19:59:54.1037004Z   clean: true\n2026-11-16T19:59:54.1037240Z   sparse-checkout-cone-mode: true\n2026-11-16T19:59:54.1037516Z   fetch-tags: false\n2026-11-16T19:59:54.1037748Z   show-progress: true\n2026-11-16T19:59:54.1037984Z   lfs: false\n2026-11-16T19:59:54.1038203Z   submodules: false\n2026-11-16T19:59:54.1038443Z   set-safe-directory: true\n2026-11-16T19:59:54.1038726Z   allow-unsafe-pr-checkout: false\n2026-11-16T19:59:54.1039064Z ##[endgroup]\n2026-11-16T19:59:54.3174543Z Syncing repository: tokenizartinfo-ops/agent-friendly-web\n2026-11-16T19:59:54.3176189Z ##[group]Getting Git version info\n2026-11-16T19:59:54.3176663Z Working directory is '/home/runner/work/agent-friendly-web/agent-friendly-web'\n2026-11-16T19:59:54.3177513Z [command]/usr/bin/git version\n2026-11-16T19:59:54.3237884Z git version 2.56.1\n2026-11-16T19:59:54.3251133Z ##[endgroup]\n2026-11-16T19:59:54.3264706Z Temporarily overriding HOME='/home/runner/work/_temp/02c7ab95-85bc-47de-955f-1c4c42ffc1c0' before making global git config changes\n2026-11-16T19:59:54.3266034Z Adding repository directory to the temporary git global config as a safe directory\n2026-11-16T19:59:54.3269278Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/agent-friendly-web/agent-friendly-web\n2026-11-16T19:59:54.3320522Z Deleting the contents of '/home/runner/work/agent-friendly-web/agent-friendly-web'\n2026-11-16T19:59:54.3325337Z ##[group]Initializing the repository\n2026-11-16T19:59:54.3328652Z [command]/usr/bin/git init /home/runner/work/agent-friendly-web/agent-friendly-web\n2026-11-16T19:59:54.3416540Z hint: Using 'master' as the name for the initial branch. This default branch name\n2026-11-16T19:59:54.3417308Z hint: will change to \"main\" in Git 3.0. To configure the initial branch name\n2026-11-16T19:59:54.3418127Z hint: to use in all of your new repositories, which will suppress this warning,\n2026-11-16T19:59:54.3418592Z hint: call:\n2026-11-16T19:59:54.3418835Z hint:\n2026-11-16T19:59:54.3419171Z hint: \tgit config --global init.defaultBranch <name>\n2026-11-16T19:59:54.3419532Z hint:\n2026-11-16T19:59:54.3419868Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\n2026-11-16T19:59:54.3420732Z hint: 'development'. The just-created branch can be renamed via this command:\n2026-11-16T19:59:54.3421158Z hint:\n2026-11-16T19:59:54.3421403Z hint: \tgit branch -m <name>\n2026-11-16T19:59:54.3421821Z hint:\n2026-11-16T19:59:54.3422185Z hint: Disable this message with \"git config set advice.defaultBranchName false\"\n2026-11-16T19:59:54.3425156Z Initialized empty Git repository in /home/runner/work/agent-friendly-web/agent-friendly-web/.git/\n2026-11-16T19:59:54.3433847Z [command]/usr/bin/git remote add origin https://github.com/tokenizartinfo-ops/agent-friendly-web\n2026-11-16T19:59:54.3485720Z ##[endgroup]\n2026-11-16T19:59:54.3486449Z ##[group]Disabling automatic garbage collection\n2026-11-16T19:59:54.3488642Z [command]/usr/bin/git config --local gc.auto 0\n2026-11-16T19:59:54.3518708Z ##[endgroup]\n2026-11-16T19:59:54.3519368Z ##[group]Setting up auth\n2026-11-16T19:59:54.3523715Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2026-11-16T19:59:54.3582665Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2026-11-16T19:59:54.3916775Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2026-11-16T19:59:54.3954070Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2026-11-16T19:59:54.4161835Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:\n2026-11-16T19:59:54.4208484Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url\n2026-11-16T19:59:54.4426274Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***\n2026-11-16T19:59:54.4482871Z ##[endgroup]\n2026-11-16T19:59:54.4483824Z ##[group]Fetching the repository\n2026-11-16T19:59:54.4493738Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=2 origin +c495dfa25b3babefce5c42adb1e09c2d7a31eed1:refs/remotes/origin/lab/afw-c2-source-20261116-notices-n3-firstlimit-w1\n2026-11-16T19:59:55.6617623Z From https://github.com/tokenizartinfo-ops/agent-friendly-web\n2026-11-16T19:59:55.6620355Z  * [new ref]         c495dfa25b3babefce5c42adb1e09c2d7a31eed1 -> origin/lab/afw-c2-source-20261116-notices-n3-firstlimit-w1\n2026-11-16T19:59:55.6624140Z ##[endgroup]\n2026-11-16T19:59:55.6625338Z ##[group]Determining the checkout info\n2026-11-16T19:59:55.6626650Z ##[endgroup]\n2026-11-16T19:59:55.6627465Z [command]/usr/bin/git sparse-checkout disable\n2026-11-16T19:59:55.6689622Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig\n2026-11-16T19:59:55.6728007Z ##[group]Checking out the ref\n2026-11-16T19:59:55.6731867Z [command]/usr/bin/git checkout --progress --force -B lab/afw-c2-source-20261116-notices-n3-firstlimit-w1 refs/remotes/origin/lab/afw-c2-source-20261116-notices-n3-firstlimit-w1\n2026-11-16T19:59:55.8591427Z Switched to a new branch 'lab/afw-c2-source-20261116-notices-n3-firstlimit-w1'\n2026-11-16T19:59:55.8594941Z branch 'lab/afw-c2-source-20261116-notices-n3-firstlimit-w1' set up to track 'origin/lab/afw-c2-source-20261116-notices-n3-firstlimit-w1'.\n2026-11-16T19:59:55.8607287Z ##[endgroup]\n2026-11-16T19:59:55.8657838Z [command]/usr/bin/git log -1 --format=%H\n2026-11-16T19:59:55.8688930Z c495dfa25b3babefce5c42adb1e09c2d7a31eed1\n2026-11-16T19:59:55.8698250Z ##[group]Removing auth\n2026-11-16T19:59:55.8701623Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2026-11-16T19:59:55.8738340Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2026-11-16T19:59:55.8934243Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2026-11-16T19:59:55.8966268Z http.https://github.com/.extraheader\n2026-11-16T19:59:55.8974405Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader\n2026-11-16T19:59:55.9012048Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2026-11-16T19:59:55.9199817Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:\n2026-11-16T19:59:55.9233845Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url\n2026-11-16T19:59:55.9421065Z ##[endgroup]\n2026-11-16T19:59:55.9738338Z ##[group]Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020\n2026-11-16T19:59:55.9739452Z with:\n2026-11-16T19:59:55.9739962Z   node-version: 22.23.4\n2026-11-16T19:59:55.9740696Z   always-auth: false\n2026-11-16T19:59:55.9741251Z   check-latest: false\n2026-11-16T19:59:55.9746421Z   token: ***\n2026-11-16T19:59:55.9746959Z ##[endgroup]\n2026-11-16T19:59:56.0661087Z Found in cache @ /opt/hostedtoolcache/node/22.23.4/x64\n2026-11-16T19:59:56.0663666Z (node:2195) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.\n2026-11-16T19:59:56.0665527Z (Use `node --trace-deprecation ...` to show where the warning was created)\n2026-11-16T19:59:56.0666851Z ##[group]Environment details\n2026-11-16T19:59:56.3888528Z node: v22.23.4\n2026-11-16T19:59:56.3889162Z npm: 10.9.9\n2026-11-16T19:59:56.3889363Z yarn: 1.22.22\n2026-11-16T19:59:56.3890479Z ##[endgroup]\n2026-11-16T19:59:56.4007305Z ##[group]Run npm ci --ignore-scripts --no-audit --no-fund\n2026-11-16T19:59:56.4007608Z \u001b[36;1mnpm ci --ignore-scripts --no-audit --no-fund\u001b[0m\n2026-11-16T19:59:56.4030960Z shell: /usr/bin/bash -e {0}\n2026-11-16T19:59:56.4031118Z ##[endgroup]\n2026-11-16T19:59:59.2840322Z npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.hirok.io\n2026-11-16T19:59:59.2989175Z npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.hirok.io\n2026-11-16T20:00:02.2748684Z npm warn deprecated eslint@9.39.4: This version is no longer supported. Please see https://eslint.org/version-support for other options.\n2026-11-16T20:00:06.3204730Z \n2026-11-16T20:00:06.3205761Z added 649 packages in 10s\n2026-11-16T20:00:06.3855803Z ##[group]Run node docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/run-c2-notices-n3-firstlimit-w1.mjs\n2026-11-16T20:00:06.3856265Z \u001b[36;1mnode docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/run-c2-notices-n3-firstlimit-w1.mjs\u001b[0m\n2026-11-16T20:00:06.3872964Z shell: /usr/bin/bash -e {0}\n2026-11-16T20:00:06.3873109Z ##[endgroup]\n2026-11-16T20:00:06.4658702Z AFW_C2_NOTICES_N3_SYNTHETIC {\"schema\":\"afw.c2-notices-n3.synthetic.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"head\":\"c495dfa25b3babefce5c42adb1e09c2d7a31eed1\",\"tree\":\"cff9ec5b453dd88d3e35da0b095fd397b45fca03\",\"runId\":\"43945121668\",\"runAttempt\":1,\"job\":\"c2-notices-n3-firstlimit-w1\",\"node\":\"v22.23.4\"},\"selectionHash\":\"b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503\",\"accepted\":6,\"rejected\":21,\"probeChecks\":3,\"roundtrips\":6,\"witnessRejected\":2,\"slotChecks\":5,\"guardAccepted\":3,\"guardRejected\":7,\"guardTransitions\":6,\"invarianceChecks\":10,\"guardRecordRejected\":12,\"vectorsHash\":\"dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf\",\"causal\":{\"accepted\":31,\"rejected\":32}}\n2026-11-16T20:00:06.6495602Z AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n2026-11-16T20:01:26.6339350Z AFW_C2_NOTICES_N3_CUSTODY {\"schema\":\"afw.c2-notices-n3.custody.v1\",\"context\":{\"head\":\"c495dfa25b3babefce5c42adb1e09c2d7a31eed1\",\"runId\":\"43945121668\",\"runAttempt\":1,\"job\":\"c2-notices-n3-firstlimit-w1\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":3,\"checkedProcesses\":3,\"uidGidGroupsLoopbackMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true}\n2026-11-16T20:01:26.6383455Z AFW_C2_NOTICES_N3_OUTCOME {\"schema\":\"afw.c2-notices-n3.observation.v2\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"head\":\"c495dfa25b3babefce5c42adb1e09c2d7a31eed1\",\"tree\":\"cff9ec5b453dd88d3e35da0b095fd397b45fca03\",\"runId\":\"43945121668\",\"runAttempt\":1,\"job\":\"c2-notices-n3-firstlimit-w1\",\"node\":\"v22.23.4\"},\"selectionHash\":\"b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503\",\"bindings\":{\"driverHash\":\"88137ed32bf1e657be72820529afde0ea1f1c791763e99cdded7da3d0d4f682d\",\"helperHash\":\"69386a941f9f565bfffd9846f9b8ec504b2e1c446075b72c368a8d68aaf17eb6\",\"readerHash\":\"56abe20c95ba5d324a2b72da096b0caaad6f2f8f0e4c3f198c7db64eb7fa5d57\",\"slotHash\":\"d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a\",\"fixtureHash\":\"a85e1c33412e05095ce56dce7553165f36c0235809e20acd0df3180fd4917764\",\"vectorsHash\":\"dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf\",\"loggerHash\":\"e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3\",\"worldHash\":\"7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9\",\"ledgerHash\":\"190523e50bf39c23190c895833d50ef40af069436b670f81fc5c6478e0bafe2b\",\"transformHash\":\"d6b007ac9ad44b76a493f494d0b0c4a6a1180c18574a1f139e36c9a3abfa9dd2\",\"producerManifestHash\":\"34c1b9a2e7e9d07f4a72ea343074071f54bde05bf4c398e84b0dc42b94310434\"},\"controls\":{\"accepted\":6,\"rejected\":21,\"probeChecks\":3,\"roundtrips\":6,\"witnessRejected\":2,\"slotChecks\":5,\"guardAccepted\":3,\"guardRejected\":7,\"guardTransitions\":6,\"invarianceChecks\":10,\"guardRecordRejected\":12,\"vectorsHash\":\"dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf\",\"causal\":{\"accepted\":31,\"rejected\":32}},\"capture\":{\"exitCode\":0,\"signal\":\"none\",\"errorKind\":\"none\",\"stdout\":{\"bytes\":1263,\"sha256\":\"80e6125ab48bc2cd213c6054b769956acc0d9a69634baf76a7c99fb5245f8441\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}},\"journal\":{\"bytes\":10419,\"sha256\":\"fb97c5a3b55c3e67522d485ee106d2d8ee4417e9e24ab4b98e3ce6611ce61e43\",\"stable\":true,\"recorderFaultObserved\":false,\"witness\":{\"integrity\":\"complete\",\"records\":[{\"sequence\":1,\"elapsedMs\":0,\"kind\":\"binding\",\"sourceIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"driverHash\":\"88137ed32bf1e657be72820529afde0ea1f1c791763e99cdded7da3d0d4f682d\",\"selectionHash\":\"b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503\",\"helperHash\":\"69386a941f9f565bfffd9846f9b8ec504b2e1c446075b72c368a8d68aaf17eb6\",\"readerHash\":\"56abe20c95ba5d324a2b72da096b0caaad6f2f8f0e4c3f198c7db64eb7fa5d57\",\"slotHash\":\"d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a\",\"loggerHash\":\"e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3\",\"worldHash\":\"7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9\",\"ledgerHash\":\"190523e50bf39c23190c895833d50ef40af069436b670f81fc5c6478e0bafe2b\",\"transformHash\":\"d6b007ac9ad44b76a493f494d0b0c4a6a1180c18574a1f139e36c9a3abfa9dd2\",\"producerManifestHash\":\"34c1b9a2e7e9d07f4a72ea343074071f54bde05bf4c398e84b0dc42b94310434\"},{\"sequence\":2,\"elapsedMs\":10,\"kind\":\"flow\",\"id\":\"N3_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null,\"counters\":null},{\"sequence\":3,\"elapsedMs\":50,\"kind\":\"host-proof\",\"call\":1,\"stage\":\"constructor\",\"edge\":\"prepared\",\"beforeHash\":\"38f4777d8667d6b73436b1acf6803dc0a10b999d9ea7d1a62f077792468588e5\",\"argumentHash\":\"38f4777d8667d6b73436b1acf6803dc0a10b999d9ea7d1a62f077792468588e5\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":null,\"M\":null,\"QA\":null},{\"sequence\":4,\"elapsedMs\":130,\"kind\":\"host-proof\",\"call\":1,\"stage\":\"constructor\",\"edge\":\"returned\",\"beforeHash\":\"38f4777d8667d6b73436b1acf6803dc0a10b999d9ea7d1a62f077792468588e5\",\"argumentHash\":\"38f4777d8667d6b73436b1acf6803dc0a10b999d9ea7d1a62f077792468588e5\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":null,\"M\":null,\"QA\":null},{\"sequence\":5,\"elapsedMs\":1356,\"kind\":\"host-proof\",\"call\":2,\"stage\":\"assembly\",\"edge\":\"prepared\",\"beforeHash\":\"cd067d0bc3e2fac9dd333981d41269ebb06912d786ade3cd622eb735c13f6d0a\",\"argumentHash\":\"cd067d0bc3e2fac9dd333981d41269ebb06912d786ade3cd622eb735c13f6d0a\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":true,\"M\":{\"bytes\":1996400,\"sha256\":\"ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f\"},\"QA\":{\"bytes\":2574907,\"sha256\":\"3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7\"}},{\"sequence\":6,\"elapsedMs\":2734,\"kind\":\"host-proof\",\"call\":2,\"stage\":\"assembly\",\"edge\":\"returned\",\"beforeHash\":\"cd067d0bc3e2fac9dd333981d41269ebb06912d786ade3cd622eb735c13f6d0a\",\"argumentHash\":\"cd067d0bc3e2fac9dd333981d41269ebb06912d786ade3cd622eb735c13f6d0a\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":true,\"M\":{\"bytes\":1996400,\"sha256\":\"ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f\"},\"QA\":{\"bytes\":2574907,\"sha256\":\"3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7\"}},{\"sequence\":7,\"elapsedMs\":10337,\"kind\":\"host-proof\",\"call\":3,\"stage\":\"mount\",\"edge\":\"prepared\",\"beforeHash\":\"e02a1ccf2f073d7199d7cfd2409bca2f7e5eb6e15fa76af717bab4ff2fc18bff\",\"argumentHash\":\"e02a1ccf2f073d7199d7cfd2409bca2f7e5eb6e15fa76af717bab4ff2fc18bff\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":true,\"M\":{\"bytes\":1996400,\"sha256\":\"ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f\"},\"QA\":{\"bytes\":2574907,\"sha256\":\"3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7\"}},{\"sequence\":8,\"elapsedMs\":10729,\"kind\":\"host-proof\",\"call\":3,\"stage\":\"mount\",\"edge\":\"returned\",\"beforeHash\":\"e02a1ccf2f073d7199d7cfd2409bca2f7e5eb6e15fa76af717bab4ff2fc18bff\",\"argumentHash\":\"e02a1ccf2f073d7199d7cfd2409bca2f7e5eb6e15fa76af717bab4ff2fc18bff\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":true,\"M\":{\"bytes\":1996400,\"sha256\":\"ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f\"},\"QA\":{\"bytes\":2574907,\"sha256\":\"3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7\"}},{\"sequence\":9,\"elapsedMs\":24756,\"kind\":\"host-proof\",\"call\":4,\"stage\":\"adopt\",\"edge\":\"prepared\",\"beforeHash\":\"a2e93b74cf3de60e62d33711cefa586f4fc87cbbcde74401ebe769b47c52c2ee\",\"argumentHash\":\"a2e93b74cf3de60e62d33711cefa586f4fc87cbbcde74401ebe769b47c52c2ee\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":true,\"M\":{\"bytes\":1996400,\"sha256\":\"ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f\"},\"QA\":{\"bytes\":2574907,\"sha256\":\"3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7\"}},{\"sequence\":10,\"elapsedMs\":25179,\"kind\":\"host-proof\",\"call\":4,\"stage\":\"adopt\",\"edge\":\"returned\",\"beforeHash\":\"a2e93b74cf3de60e62d33711cefa586f4fc87cbbcde74401ebe769b47c52c2ee\",\"argumentHash\":\"a2e93b74cf3de60e62d33711cefa586f4fc87cbbcde74401ebe769b47c52c2ee\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":true,\"M\":{\"bytes\":1996400,\"sha256\":\"ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f\"},\"QA\":{\"bytes\":2574907,\"sha256\":\"3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7\"}},{\"sequence\":11,\"elapsedMs\":25245,\"kind\":\"flow\",\"id\":\"N3_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null,\"counters\":null},{\"sequence\":12,\"elapsedMs\":25245,\"kind\":\"flow\",\"id\":\"N3_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null,\"counters\":null},{\"sequence\":13,\"elapsedMs\":25273,\"kind\":\"flow\",\"id\":\"N3_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null,\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1}},{\"sequence\":14,\"elapsedMs\":25274,\"kind\":\"flow\",\"id\":\"N3_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null,\"counters\":null},{\"sequence\":15,\"elapsedMs\":39466,\"kind\":\"flow\",\"id\":\"N3_OAUTH\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null,\"counters\":null},{\"sequence\":16,\"elapsedMs\":39466,\"kind\":\"flow\",\"id\":\"N3_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null,\"counters\":null},{\"sequence\":17,\"elapsedMs\":39490,\"kind\":\"flow\",\"id\":\"N3_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null,\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1}},{\"sequence\":18,\"elapsedMs\":39491,\"kind\":\"flow\",\"id\":\"N3_PHASE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null,\"counters\":null},{\"sequence\":19,\"elapsedMs\":40408,\"kind\":\"flow\",\"id\":\"N3_PHASE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null,\"counters\":null},{\"sequence\":20,\"elapsedMs\":40408,\"kind\":\"flow\",\"id\":\"N3_PHASE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null,\"counters\":null},{\"sequence\":21,\"elapsedMs\":40432,\"kind\":\"flow\",\"id\":\"N3_PHASE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null,\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1}},{\"sequence\":22,\"elapsedMs\":40432,\"kind\":\"flow\",\"id\":\"N3_NOTICES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null,\"counters\":null},{\"sequence\":23,\"elapsedMs\":40433,\"kind\":\"hook-state\",\"stage\":\"baseline\",\"callbackObserved\":true,\"excludedTags\":0,\"newGuards\":0,\"fault\":false},{\"sequence\":24,\"elapsedMs\":40463,\"kind\":\"probe\",\"stage\":\"before\",\"state\":\"observed\",\"newFailures\":null,\"correlated\":null,\"position\":null,\"correlators\":[],\"sites\":[],\"guardOrigin\":\"unknown\",\"summary\":{\"consumedTicket\":null,\"stageApproval\":null,\"receiptCount\":null}},{\"sequence\":25,\"elapsedMs\":40463,\"kind\":\"http\",\"operation\":\"notices-get\",\"edge\":\"enter\",\"status\":null,\"bodySettled\":null,\"error\":null},{\"sequence\":26,\"elapsedMs\":57155,\"kind\":\"http\",\"operation\":\"notices-get\",\"edge\":\"response\",\"status\":200,\"bodySettled\":null,\"error\":null},{\"sequence\":27,\"elapsedMs\":57162,\"kind\":\"http\",\"operation\":\"notices-get\",\"edge\":\"return\",\"status\":200,\"bodySettled\":true,\"error\":null},{\"sequence\":28,\"elapsedMs\":57162,\"kind\":\"http\",\"operation\":\"notices-post\",\"edge\":\"enter\",\"status\":null,\"bodySettled\":null,\"error\":null},{\"sequence\":29,\"elapsedMs\":78612,\"kind\":\"http\",\"operation\":\"notices-post\",\"edge\":\"response\",\"status\":200,\"bodySettled\":null,\"error\":null},{\"sequence\":30,\"elapsedMs\":78612,\"kind\":\"http\",\"operation\":\"notices-post\",\"edge\":\"return\",\"status\":200,\"bodySettled\":true,\"error\":null},{\"sequence\":31,\"elapsedMs\":78668,\"kind\":\"host-proof\",\"call\":5,\"stage\":\"adopt\",\"edge\":\"prepared\",\"beforeHash\":\"82f4849fe1cff9624a2c3aeccc926bb7c192b73c215f536b53a039e0d31402f9\",\"argumentHash\":\"82f4849fe1cff9624a2c3aeccc926bb7c192b73c215f536b53a039e0d31402f9\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":true,\"M\":{\"bytes\":1996400,\"sha256\":\"ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f\"},\"QA\":{\"bytes\":2574907,\"sha256\":\"3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7\"}},{\"sequence\":32,\"elapsedMs\":79125,\"kind\":\"host-proof\",\"call\":5,\"stage\":\"adopt\",\"edge\":\"returned\",\"beforeHash\":\"82f4849fe1cff9624a2c3aeccc926bb7c192b73c215f536b53a039e0d31402f9\",\"argumentHash\":\"82f4849fe1cff9624a2c3aeccc926bb7c192b73c215f536b53a039e0d31402f9\",\"settingsEqual\":true,\"callbackSame\":true,\"referencesSame\":true,\"compiledMatch\":true,\"M\":{\"bytes\":1996400,\"sha256\":\"ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f\"},\"QA\":{\"bytes\":2574907,\"sha256\":\"3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7\"}},{\"sequence\":33,\"elapsedMs\":79188,\"kind\":\"flow\",\"id\":\"N3_NOTICES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null,\"counters\":null},{\"sequence\":34,\"elapsedMs\":79219,\"kind\":\"probe\",\"stage\":\"after\",\"state\":\"unavailable\",\"newFailures\":null,\"correlated\":null,\"position\":null,\"correlators\":[],\"sites\":[],\"guardOrigin\":\"unknown\",\"summary\":{\"consumedTicket\":null,\"stageApproval\":null,\"receiptCount\":null}},{\"sequence\":35,\"elapsedMs\":79219,\"kind\":\"causal\",\"schema\":\"afw.c2-notices-n3.causal-record.v1\",\"snapshot\":{\"schema\":\"afw.c2-notices-n3.qa-snapshot.v1\",\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"NO_ELIGIBLE\",\"eligible\":0,\"target\":\"unknown\",\"focus\":{\"mode\":\"selected-first-target-focus\",\"pairChild\":null,\"selection\":\"none\"},\"leases\":[],\"promises\":[],\"errors\":[],\"events\":[],\"firstError\":null,\"cut\":null}},{\"sequence\":36,\"elapsedMs\":79219,\"kind\":\"flow\",\"id\":\"N3_NOTICES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null,\"counters\":null},{\"sequence\":37,\"elapsedMs\":79246,\"kind\":\"flow\",\"id\":\"N3_NOTICES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null,\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2}},{\"sequence\":38,\"elapsedMs\":79247,\"kind\":\"after\",\"edge\":\"enter\",\"error\":null},{\"sequence\":39,\"elapsedMs\":79277,\"kind\":\"after\",\"edge\":\"return\",\"error\":null},{\"sequence\":40,\"elapsedMs\":79277,\"kind\":\"hook-state\",\"stage\":\"after\",\"callbackObserved\":true,\"excludedTags\":0,\"newGuards\":0,\"fault\":false}],\"prefixBytes\":10419,\"prefixSha256\":\"fb97c5a3b55c3e67522d485ee106d2d8ee4417e9e24ab4b98e3ce6611ce61e43\"}},\"observation\":{\"valid\":true,\"code\":\"OK\",\"integrity\":\"complete\",\"flow\":[{\"id\":\"N3_CONNECTION\",\"workEntered\":true,\"action\":\"returned\",\"count\":\"returned\",\"actionError\":null,\"countError\":null,\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1}},{\"id\":\"N3_OAUTH\",\"workEntered\":true,\"action\":\"returned\",\"count\":\"returned\",\"actionError\":null,\"countError\":null,\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1}},{\"id\":\"N3_PHASE\",\"workEntered\":true,\"action\":\"returned\",\"count\":\"returned\",\"actionError\":null,\"countError\":null,\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1}},{\"id\":\"N3_NOTICES\",\"workEntered\":true,\"action\":\"returned\",\"count\":\"returned\",\"actionError\":null,\"countError\":null,\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2}}],\"http\":[{\"operation\":\"notices-get\",\"entered\":true,\"response\":true,\"status\":200,\"bodySettled\":true,\"completion\":\"returned\"},{\"operation\":\"notices-post\",\"entered\":true,\"response\":true,\"status\":200,\"bodySettled\":true,\"completion\":\"returned\"}],\"probes\":[{\"stage\":\"before\",\"state\":\"observed\",\"newFailures\":null,\"correlated\":null,\"position\":null,\"correlators\":[],\"sites\":[],\"guardOrigin\":\"unknown\",\"summary\":{\"consumedTicket\":null,\"stageApproval\":null,\"receiptCount\":null}},{\"stage\":\"after\",\"state\":\"unavailable\",\"newFailures\":null,\"correlated\":null,\"position\":null,\"correlators\":[],\"sites\":[],\"guardOrigin\":\"unknown\",\"summary\":{\"consumedTicket\":null,\"stageApproval\":null,\"receiptCount\":null}}],\"after\":\"returned\",\"guards\":{\"count\":0,\"distinctTags\":[],\"interpretation\":\"unknown\"},\"host\":{\"prepared\":5,\"returned\":5,\"openCall\":null,\"allCompared\":true},\"hook\":{\"callbackObserved\":true,\"excludedTags\":0,\"finalObserved\":true},\"causal\":{\"state\":\"unjoined\",\"coverage\":\"unknown\",\"reason\":\"NO_ELIGIBLE\",\"target\":\"unknown\",\"firstError\":null,\"focusChild\":null,\"events\":0,\"settlementsObserved\":0,\"interpretation\":\"unknown\"}},\"native\":{\"integrity\":\"complete\",\"cases\":[{\"id\":\"N3_CONNECTION\",\"status\":\"pass\",\"code\":\"OK\",\"workEntered\":true},{\"id\":\"N3_OAUTH\",\"status\":\"pass\",\"code\":\"OK\",\"workEntered\":true},{\"id\":\"N3_PHASE\",\"status\":\"pass\",\"code\":\"OK\",\"workEntered\":true},{\"id\":\"N3_NOTICES\",\"status\":\"pass\",\"code\":\"OK\",\"workEntered\":true}],\"sourceFileFailure\":false},\"custody\":{\"schema\":\"afw.c2-notices-n3.custody.v1\",\"context\":{\"head\":\"c495dfa25b3babefce5c42adb1e09c2d7a31eed1\",\"runId\":\"43945121668\",\"runAttempt\":1,\"job\":\"c2-notices-n3-firstlimit-w1\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":3,\"checkedProcesses\":3,\"uidGidGroupsLoopbackMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true},\"compilation\":{\"M\":{\"bytes\":1996400,\"sha256\":\"ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f\",\"argumentMatched\":true},\"QA\":{\"bytes\":2574907,\"sha256\":\"3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"fbec94809d8f820b76c7420e965aa2b468e53c184efbfe724317ab817c7f5795\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17134,\"sha256\":\"190523e50bf39c23190c895833d50ef40af069436b670f81fc5c6478e0bafe2b\"}},{\"id\":\"PH\",\"before\":{\"bytes\":150113,\"sha256\":\"8aa35a01b0569060713c7377e61da0e682d459e922208f1c843bc7151623fdc8\"},\"after\":{\"bytes\":153322,\"sha256\":\"5645cb2f0bda809e9ee291d3f8f9ccfce44eb679dc5231b5dfd9936818e8a70a\"}},{\"id\":\"OP\",\"before\":{\"bytes\":45576,\"sha256\":\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\"},\"after\":{\"bytes\":46604,\"sha256\":\"40dbc3de93a8887300d60fafa50713a58a476a271c991b26a3ba238fd068d131\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":2736,\"sha256\":\"ce09ffe6576ae7f117b2996c723c07a04aac57b099150b76f38b5b6cea1822b2\"},\"after\":{\"bytes\":4890,\"sha256\":\"43afe3217ae8b00e5fbdacf846205abb10c9af0ec1fdf1cf9016b7ae973afe22\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":55667,\"sha256\":\"b6cb2734ab945ec0598f02bc7f66f85c26b3c4cafa60a35bafe02d43e6af1948\"},\"after\":{\"bytes\":55769,\"sha256\":\"7f40f39a5fab9f1d6a0ae3bf931be53a220097061811c1d1681c6978bbdfd2a2\"}}]}},\"diagnosticToolingExecuted\":true,\"sourceBusinessExecuted\":true,\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n2026-11-16T20:01:26.6461864Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02\n2026-11-16T20:01:26.6462090Z with:\n2026-11-16T20:01:26.6462215Z   name: afw-c2-notices-n3-firstlimit-w1\n2026-11-16T20:01:26.6462386Z   path: output/c2-notices-n3-firstlimit-w1.json\n2026-11-16T20:01:26.6462547Z   if-no-files-found: error\n2026-11-16T20:01:26.6462674Z   retention-days: 7\n2026-11-16T20:01:26.6462792Z   compression-level: 6\n2026-11-16T20:01:26.6462910Z   overwrite: false\n2026-11-16T20:01:26.6463030Z   include-hidden-files: false\n2026-11-16T20:01:26.6463162Z ##[endgroup]\n2026-11-16T20:01:26.7565932Z (node:2377) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.\n2026-11-16T20:01:26.7566382Z (Use `node --trace-deprecation ...` to show where the warning was created)\n2026-11-16T20:01:26.7595774Z With the provided path, there will be 1 file uploaded\n2026-11-16T20:01:26.7598900Z Artifact name is valid!\n2026-11-16T20:01:26.7599468Z Root directory input is valid!\n2026-11-16T20:01:27.0460361Z Beginning upload of artifact content to blob storage\n2026-11-16T20:01:27.0575119Z (node:2377) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.\n2026-11-16T20:01:27.2023306Z Uploaded bytes 4000\n2026-11-16T20:01:27.2427249Z Finished uploading artifact content to blob storage!\n2026-11-16T20:01:27.2428077Z SHA256 digest of uploaded artifact zip is 3cc77d7a35a1b07cc94da7d9c702338732c60d31e01f84c160942ab16d807843\n2026-11-16T20:01:27.2428546Z Finalizing artifact upload\n2026-11-16T20:01:27.6512424Z Artifact afw-c2-notices-n3-firstlimit-w1.zip successfully finalized. Artifact ID 14263598025\n2026-11-16T20:01:27.6513456Z Artifact afw-c2-notices-n3-firstlimit-w1 has been successfully uploaded! Final size is 4000 bytes. Artifact ID is 14263598025\n2026-11-16T20:01:27.6517175Z Artifact download URL: https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43945121668/artifacts/14263598025\n2026-11-16T20:01:27.6679638Z Post job cleanup.\n2026-11-16T20:01:27.7457706Z (node:2389) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.\n2026-11-16T20:01:27.7458225Z (Use `node --trace-deprecation ...` to show where the warning was created)\n2026-11-16T20:01:27.7591951Z Post job cleanup.\n2026-11-16T20:01:27.8193156Z [command]/usr/bin/git version\n2026-11-16T20:01:27.8256499Z git version 2.56.1\n2026-11-16T20:01:27.8280254Z Temporarily overriding HOME='/home/runner/work/_temp/c577a465-a7d9-48d5-8766-e8cc79778f4f' before making global git config changes\n2026-11-16T20:01:27.8281173Z Adding repository directory to the temporary git global config as a safe directory\n2026-11-16T20:01:27.8283487Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/agent-friendly-web/agent-friendly-web\n2026-11-16T20:01:27.8321295Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n2026-11-16T20:01:27.8354260Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n2026-11-16T20:01:27.8560336Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n2026-11-16T20:01:27.8597431Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n2026-11-16T20:01:27.8843454Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:\n2026-11-16T20:01:27.8915236Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url\n2026-11-16T20:01:27.9252947Z Cleaning up orphan processes\n2026-11-16T20:01:27.9489709Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/\n",
+  "artifact": {
+    "archiveBase64": "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",
+    "zip": {
+      "bytes": 4000,
+      "sha256": "3cc77d7a35a1b07cc94da7d9c702338732c60d31e01f84c160942ab16d807843",
+      "blob": "610ba52177520c1349add6e76b916a57113deafe"
+    },
+    "payload": {
+      "bytes": 17103,
+      "sha256": "a4ee7b8cc14284fc29c8e204e5232bef0cfffd8be6e976938bb340cfa8f6fb04",
+      "blob": "325efbf73e0fe5ecea0713cf76df6b7d8cecd3b5"
+    },
+    "canonical": true,
+    "logEqual": true
+  },
+  "independentOwn": {
+    "reader": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+    "trace": "cc22a79695471862f36c692db7a31e283b4ee46d",
+    "native280": "03f6f5027c304124e7fbce66d5618dd5ab79d6d9",
+    "review": "21e8e4a3f2c1e7a617118b312baf574339ad56d3",
+    "receipt": {
+      "diagnosticCaptureAccepted": true,
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+        "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+        "proposalIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "head": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+        "tree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
+        "runId": "43945121668",
+        "runAttempt": 1,
+        "job": "c2-notices-n3-firstlimit-w1",
+        "node": "v22.23.4"
+      },
+      "jobId": 133572642517,
+      "commandStepNumber": 5,
+      "observation": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "complete",
+        "flow": [
+          {
+            "id": "N3_CONNECTION",
+            "workEntered": true,
+            "action": "returned",
+            "count": "returned",
+            "actionError": null,
+            "countError": null,
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            }
+          },
+          {
+            "id": "N3_OAUTH",
+            "workEntered": true,
+            "action": "returned",
+            "count": "returned",
+            "actionError": null,
+            "countError": null,
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            }
+          },
+          {
+            "id": "N3_PHASE",
+            "workEntered": true,
+            "action": "returned",
+            "count": "returned",
+            "actionError": null,
+            "countError": null,
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            }
+          },
+          {
+            "id": "N3_NOTICES",
+            "workEntered": true,
+            "action": "returned",
+            "count": "returned",
+            "actionError": null,
+            "countError": null,
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            }
+          }
+        ],
+        "http": [
+          {
+            "operation": "notices-get",
+            "entered": true,
+            "response": true,
+            "status": 200,
+            "bodySettled": true,
+            "completion": "returned"
+          },
+          {
+            "operation": "notices-post",
+            "entered": true,
+            "response": true,
+            "status": 200,
+            "bodySettled": true,
+            "completion": "returned"
+          }
+        ],
+        "probes": [
+          {
+            "stage": "before",
+            "state": "observed",
+            "newFailures": null,
+            "correlated": null,
+            "position": null,
+            "correlators": [],
+            "sites": [],
+            "guardOrigin": "unknown",
+            "summary": {
+              "consumedTicket": null,
+              "stageApproval": null,
+              "receiptCount": null
+            }
+          },
+          {
+            "stage": "after",
+            "state": "unavailable",
+            "newFailures": null,
+            "correlated": null,
+            "position": null,
+            "correlators": [],
+            "sites": [],
+            "guardOrigin": "unknown",
+            "summary": {
+              "consumedTicket": null,
+              "stageApproval": null,
+              "receiptCount": null
+            }
+          }
+        ],
+        "after": "returned",
+        "guards": {
+          "count": 0,
+          "distinctTags": [],
+          "interpretation": "unknown"
+        },
+        "host": {
+          "prepared": 5,
+          "returned": 5,
+          "openCall": null,
+          "allCompared": true
+        },
+        "hook": {
+          "callbackObserved": true,
+          "excludedTags": 0,
+          "finalObserved": true
+        },
+        "causal": {
+          "state": "unjoined",
+          "coverage": "unknown",
+          "reason": "NO_ELIGIBLE",
+          "target": "unknown",
+          "firstError": null,
+          "focusChild": null,
+          "events": 0,
+          "settlementsObserved": 0,
+          "interpretation": "unknown"
+        }
+      },
+      "native": {
+        "integrity": "complete",
+        "cases": [
+          {
+            "id": "N3_CONNECTION",
+            "status": "pass",
+            "code": "OK",
+            "workEntered": true
+          },
+          {
+            "id": "N3_OAUTH",
+            "status": "pass",
+            "code": "OK",
+            "workEntered": true
+          },
+          {
+            "id": "N3_PHASE",
+            "status": "pass",
+            "code": "OK",
+            "workEntered": true
+          },
+          {
+            "id": "N3_NOTICES",
+            "status": "pass",
+            "code": "OK",
+            "workEntered": true
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "capture": {
+        "exitCode": 0,
+        "signal": "none",
+        "errorKind": "none",
+        "stdout": {
+          "bytes": 1263,
+          "sha256": "80e6125ab48bc2cd213c6054b769956acc0d9a69634baf76a7c99fb5245f8441"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "compilation": {
+        "M": {
+          "bytes": 1996400,
+          "sha256": "ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f",
+          "argumentMatched": true
+        },
+        "QA": {
+          "bytes": 2574907,
+          "sha256": "3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7",
+          "deliberatelyChanged": true,
+          "inputManifestHash": "fbec94809d8f820b76c7420e965aa2b468e53c184efbfe724317ab817c7f5795",
+          "inputs": [
+            {
+              "id": "ledger",
+              "before": null,
+              "after": {
+                "bytes": 17134,
+                "sha256": "190523e50bf39c23190c895833d50ef40af069436b670f81fc5c6478e0bafe2b"
+              }
+            },
+            {
+              "id": "PH",
+              "before": {
+                "bytes": 150113,
+                "sha256": "8aa35a01b0569060713c7377e61da0e682d459e922208f1c843bc7151623fdc8"
+              },
+              "after": {
+                "bytes": 153322,
+                "sha256": "5645cb2f0bda809e9ee291d3f8f9ccfce44eb679dc5231b5dfd9936818e8a70a"
+              }
+            },
+            {
+              "id": "OP",
+              "before": {
+                "bytes": 45576,
+                "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+              },
+              "after": {
+                "bytes": 46604,
+                "sha256": "40dbc3de93a8887300d60fafa50713a58a476a271c991b26a3ba238fd068d131"
+              }
+            },
+            {
+              "id": "LEASE",
+              "before": {
+                "bytes": 2736,
+                "sha256": "ce09ffe6576ae7f117b2996c723c07a04aac57b099150b76f38b5b6cea1822b2"
+              },
+              "after": {
+                "bytes": 4890,
+                "sha256": "43afe3217ae8b00e5fbdacf846205abb10c9af0ec1fdf1cf9016b7ae973afe22"
+              }
+            },
+            {
+              "id": "STDIN",
+              "before": {
+                "bytes": 55667,
+                "sha256": "b6cb2734ab945ec0598f02bc7f66f85c26b3c4cafa60a35bafe02d43e6af1948"
+              },
+              "after": {
+                "bytes": 55769,
+                "sha256": "7f40f39a5fab9f1d6a0ae3bf931be53a220097061811c1d1681c6978bbdfd2a2"
+              }
+            }
+          ]
+        }
+      },
+      "producerManifestHash": "34c1b9a2e7e9d07f4a72ea343074071f54bde05bf4c398e84b0dc42b94310434",
+      "artifact": {
+        "id": 14263598025,
+        "archiveBytes": 4000,
+        "archiveSha256": "3cc77d7a35a1b07cc94da7d9c702338732c60d31e01f84c160942ab16d807843",
+        "payloadBytes": 17103,
+        "payloadSha256": "a4ee7b8cc14284fc29c8e204e5232bef0cfffd8be6e976938bb340cfa8f6fb04"
+      },
+      "SourceQualified": false,
+      "Task1Pass": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  },
+  "meaning": "Current synthetic slice4PASS, GET/POST200 bodysettled. No causalattribution for earlier503 or cap. BeforeprobeNO_ELIGIBLE/afterunavailable remainsunknown; notfullTask1. All5compiledcallsM/QAcompared. No physical/globaldrain/PCoff inferred.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
