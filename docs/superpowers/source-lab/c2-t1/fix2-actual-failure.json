@@ -1,0 +1,111 @@
+{
+  "schema": "afw.c2-source-task1-fix2.actual-failure.v1",
+  "at": "2026-11-16 05:39:29 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "prepared": {
+    "head": "12e962a850e9a48be1522befbcf479290eb1a1e6",
+    "tree": "d74ed8b8a59d783c04d3ea83f157a6bdeae818ad",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-t1-fix2",
+    "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIX2-ONEUSE-20261116",
+    "baselineBlobs": 3203,
+    "additions": 23
+  },
+  "gate": "e90d870dc1a3e4e4c43eceee46b2fabd3616e67e",
+  "runId": 43810865869,
+  "runAttempt": 1,
+  "jobId": 133111999771,
+  "runConclusion": "failure",
+  "step": {
+    "name": "Qualify isolated compiled Source data",
+    "status": "completed",
+    "conclusion": "failure",
+    "number": 5,
+    "started_at": "2026-11-16T05:32:34Z",
+    "completed_at": "2026-11-16T05:35:35Z"
+  },
+  "primaryBinding": {
+    "headerRow": 141,
+    "headerEndRow": 144
+  },
+  "diagnostics": [
+    {
+      "at": "2026-11-16T05:35:34.9641324Z",
+      "row": 146,
+      "data": {
+        "phase": "baseline-red",
+        "frontier": "launch",
+        "code": "CAPTURE_INVALID",
+        "capture": {
+          "exitCode": 1,
+          "signal": "none",
+          "errorKind": "timeout",
+          "complete": false,
+          "stdout": {
+            "bytes": 29209,
+            "sha256": "81cbf86dbbdee25c7edce2631d041500fa583b0b7702e6f74f8af63593190953"
+          },
+          "stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "observed": {
+            "tapResults": 19,
+            "knownResults": 19,
+            "knownFrames": 19,
+            "firstKnownFailure": "C2T1_HANDLE",
+            "sourceFileFailure": false,
+            "dependencyOutcome": null,
+            "errorKinds": [
+              "assertion"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "custodyPartial": [
+    {
+      "at": "2026-11-16T05:35:35.0560160Z",
+      "row": 147,
+      "data": {
+        "schema": "afw.c2-source-custody.v1",
+        "context": {
+          "head": "12e962a850e9a48be1522befbcf479290eb1a1e6",
+          "runId": "43810865869",
+          "runAttempt": 1,
+          "job": "c2-source-lab",
+          "proposalIndexHash": "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03"
+        },
+        "parentNonRoot": true,
+        "preflightOwned": true,
+        "preflightRemoved": true,
+        "checkedLaunches": 3,
+        "checkedProcesses": 3,
+        "uidGidGroupsLoopbackMatched": true,
+        "ownRootVerified": true,
+        "ownTempRemoved": true
+      }
+    }
+  ],
+  "dependencyControl": {
+    "at": "2026-11-16T05:32:34.9359303Z",
+    "row": 145,
+    "text": "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}",
+    "qualified": true
+  },
+  "receiptFrames": 0,
+  "logsFetchedOnce": true,
+  "interpretation": "Baseline-red child timed out180s with actual19 TAP results/19known/19frames, firstKnownFailure C2T1_HANDLE; no file failure. This is incomplete, does not qualify baseline or any product green/mutant/regressions. Counts of known results alone do not prove named case PASS. Three completed launches and own cleanup are partial custody, not full6-launch proof. Product code remains untested in later modes. Review baseline coverage contract against Task1 stop-after-connection requirement before another Source occurrence.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
