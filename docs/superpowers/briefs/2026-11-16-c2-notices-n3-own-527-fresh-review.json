@@ -1,0 +1,123 @@
+{
+  "schema": "AFW-N3-OWN527-FRESH-REVIEW-BRIEF/1",
+  "atUTC": "2026-11-16 17:35:01 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "task": "Fresh independent SPEC then QUALITY review of three OWN receiver repairs and static producer DATA verifier after actual527PASS. No implementation.",
+  "authority": {
+    "priorReview": "23358908713964c29511dc44d3e554387619f7c7",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "boundedPrefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
+    "ownTaskBrief": "189905a0383ff7852a86ac1d54351872cf29eb05",
+    "modelsBrief": "25b42fb2e1113488bc820596345cf0b0f7515bcb"
+  },
+  "scope": {
+    "index": "1498bbba58b4d36e2c3a2c19d6dc9e9a95a8a085",
+    "fix2Index": "42cf5a0928c4456c95a9a4a53cc5650337be06d7",
+    "traceReader": "c5efe74261a04e180476650c23a60feb268ca042",
+    "reader": "fcfe54a718f61835c35df5961bc5248431122b00",
+    "traceControls": "569aecd99fd698bcb0e46b2d79935eb3a73f4450",
+    "controls": "4f69dfa7a561656565e6b94038af6ded550efe83",
+    "fix2FullDiff": "3507fbc4a5b9911d8b56434234e5657bb40b0fa0",
+    "fix2Red": "a49e114ca82296cf1932213a8fb89659890068de",
+    "staticVerifier": "d3568aaf95cac92b06d8bbb5eab6a8de7a88ce50",
+    "staticExpected": "09f7ae83ea8d3ddcc25a9e0787e4edd480fb9cd4",
+    "staticVectors": "ff37fb5e3326435b0a9ccf308c195c3b945dc2c7",
+    "runner": "cbd827df84466bbaeab1008b0197fa8b72a3ae4e",
+    "workflow": "123c81961caa1b58c773ea3e4e0fcfc5f745fc56",
+    "selection": "a80a43a645e115336aa3e105796879a0e2d7e265",
+    "proofSchema": "5e35703fe99b59af34085ce2b53d4d62d9d86d70",
+    "finalDiff": "57137ea62afd8877fcaf6ca7b201c6294edeae7c",
+    "report": "14c889960009c8c41a295e6d1f7bf19a7070f5a8",
+    "sourceAliases": "21Source buffers plus1bindings alias are .data only, never import/eval/compile/execute"
+  },
+  "priorFindings": [
+    {
+      "id": "OWN-N3-R1-P2-01",
+      "oldTrace": "ce12154ef2568bb993581820266917a91f65ea50",
+      "problem": "coherent fullOWN accepts canonicalp2 retainedseq25 before representedpair-enter31 as joined/complete/OK",
+      "expected": "reject represented impossible order; never infer omitted evidence or couple independent progressaxes"
+    },
+    {
+      "id": "OWN-N3-R1-P2-02",
+      "oldReader": "d229289e9f9381dd285da02ce1b92ee21e483203",
+      "problem": "call3prepared/returned M/QA metadata may differ compilation whileallComparedtrue because onlycall2 checked",
+      "expected": "every represented compiledcall>=2 matches samecurrentM/QA inclopenprepared; keepcallertrusted API boundary"
+    },
+    {
+      "id": "OWN-N3-R1-P2-03",
+      "oldReader": "d229289e9f9381dd285da02ce1b92ee21e483203",
+      "problem": "validdeflate4055B+deadbeef4 bytes accepted as4059B",
+      "expected": "trusted Node inflateRawSync info:true boundedoutput, require bytesWritten==compressedmember; validmethod0/8 and DD stillaccepted; malformed/extra/overcap failclosed"
+    }
+  ],
+  "staticRequirements": [
+    "Root immutable expected pins separate from untrustedbuffer metadata; correct16manifestfield order/canonical hash vsrawprettyhash; every21body exactbytes/SHA/GitSHA/nomination/schema selections/Rootbindings; no coherent untrustedrebind overwrites authority",
+    "staticProducerDataVerified true onlyforcited producer DATA; SourceExpectedContextnull/finalSourceBindingfalse honest; no inventedhead/tree/run/job/Sourcecapture/receipt"
+  ],
+  "sourcePins": {
+    "bindings": "b186f6e5f585ed3de71f7e4e69f42f8f0ee55618",
+    "manifest": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+    "canonicalManifest": "44a2527e1a54cb79a6feec9a04a996ad1b288a35117763e2037c7e8d64cf18f8",
+    "rootDataProof": "22ab339782886ba3c01d090456b8e49fec51de7f",
+    "inactiveSourceProof": "55937b6a1fc9f6df15400d76723ab6e6b5f9a151",
+    "sourceCNotYetExecuted": true,
+    "actualExpected": "Root callerbinds nominatedSourceChead/tree andactual run/job whenavailable; changing caller values does not need a new reader implementation. No circular demand for nonexistentactual receipt."
+  },
+  "actualNative": {
+    "gate": "8723d1f85cbb575c680a6d2df8aa28adc0b3eacb",
+    "primary": "ecba20cd898cde8540f6bb71f888098fdeb4669e",
+    "proof": "4961a4e8e94a5761fb2ced8fa3c0b6b7f634f5e3",
+    "close": "769f680bc04a4186ad669cb9e2d3fdc4478707bd",
+    "head": "65b643bfa8e5394f3a239ce1b68f24631d5bb10b",
+    "tree": "81a6b80d9001c554f2b774386d28c95bc54040da",
+    "closedHead": "68a1c83001c3bca7c1441ecc895699d4b757d5c2",
+    "run": 43919176500,
+    "attempt": 1,
+    "job": 133481488055,
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n3/models-fix2/run-controls.mjs",
+    "output": "527/527PASS;517models unchanged+10SourceDATA;0fail/cancel/skip/todo/extra/missing/duplicate; actualAPI/head/tree/step4/527IDs/6bindings/schema/canonical/ZIPCRC+digest+completeDeflate/logpayload joined byRoot; bothOWNWFremoved,closeheadruns0;Main/historyunchanged",
+    "onceOnly": "Do NOT refetch logs/ZIP or rerun. Root cached primary only; no newactualcovering needed unlessconcretefix."
+  },
+  "allowed": [
+    "read pinnedimmutableblobs/searchstaticOWN code",
+    "pureOWN RAM counterexample checks with builtinNode only; Source buffers mayonlybehashed orJSON metadata parsed",
+    "create one detachedJSONreviewblob+FULLreadback/hash"
+  ],
+  "forbidden": [
+    "Source execution/import/eval/compile/syntax/tests",
+    "files/deps/builds",
+    "newrefs/runs",
+    "patchimplementation",
+    "subagents",
+    "browser/mail/liveproviders",
+    "new product/protocol architecture or budget"
+  ],
+  "reviewFocus": "Concentrate3originalP2s/fixregressions and newstaticverifier boundaries. All prior496 tests retained, do not reopen previouslyaccepted/deferred requirements without concrete evidence. Report exactfile/blob/line andrepro ifdefect, otherwise PASS. No hypothetical attackercontrol of trustedRoot context/callback or newSourceauthenticationrequirement.",
+  "declinedScope": [
+    "Sourcebusinesscapture",
+    "finaldynamicSourceBinding",
+    "MainTask1qualification/Tasks2+",
+    "productruntime",
+    "Cloudflare",
+    "release",
+    "PCoff"
+  ],
+  "output": "One immutableJSONreport withSPEC andQUALITY verdicts, fixedfindingmapping or concrete newfindings, nativeevidence reference andlimits; FULLreadback+hash toRoot.",
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
