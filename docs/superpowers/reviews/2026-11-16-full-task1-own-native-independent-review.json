@@ -1,0 +1,224 @@
+{
+  "schema": "AFW-C2-FULL-C230-OWN-INDEPENDENT-SPEC-QUALITY-REVIEW/1",
+  "date": "2026-11-16",
+  "reviewer": "c230_full_own_native_review; revisión independiente posterior al native OWN",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Lecturas privadas del conector GitHub y RAM OWN acotada",
+  "resourceType": "Git blob inmutable de revisión",
+  "allowedAction": "Crear este informe y FULL readback; ninguna otra escritura",
+  "authority": {
+    "ruling": "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+    "supplement": "bca6278fc2f4889c6c01211a10832cec9871f1c9",
+    "plan": "e5f7b6402dd64c32198149077be5c084be2e4393"
+  },
+  "inspected": {
+    "index": "1e0f7b4bf24be7ce402ff30a0b47521005df85a0",
+    "reader": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+    "readerSHA256": "a2f1aa18011c88ab7e34394054f39931c177d45bf0e2a657d4c588c70643a085",
+    "admission": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+    "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "sourceIndexSHA256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "contract": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+    "schema": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+    "originalCasePlan": "eb84f1791bb32832c807535131607abeb72a159c",
+    "inspectedCode": "Lectura completa del nuevo reader, admission, own-controls, model-builder, runner y workflow; contrato/schema y planes como DATA. Sin leer ni ejecutar módulos Source.",
+    "crossChecks": {
+      "source13": true,
+      "schema13": true,
+      "source25": true
+    }
+  },
+  "strengths": [
+    "Nueva versión explícita; Source13, c230/26b, 25 edges, nominación y witness S07/S08 fijados. No normaliza recibos históricos.",
+    "Semántica RED3/GREEN20/MUTANT20/REG11 y excepción de otros fallos honestos MUTANT; últimos tres grafos aislados y no monotonía global inventada.",
+    "Ocho frames físicos canónicos y cuatro proyecciones exactas; controles sintéticos3/35, dependencia ENOENT, custodia6/6..24, limpieza y nonclaims.",
+    "API/fechas/pasos/comando, límite job7min, rawGitTree, bytes ZIP/digest/listing/payload/log enlazados; retorno receiverChecksSatisfied sin mintar SourceQualified/Task1Pass."
+  ],
+  "nativeEvidence": {
+    "primary": "0dba0eb9ee2a4df511eaa48484ee2c179dfb621c",
+    "proof": "597cd2716af5bfc968020e694051f5440a5af7e8",
+    "run": 43958585757,
+    "attempt": 1,
+    "job": 133619605008,
+    "head": "2f00938798e2fd5c6e3d8f5268c0827a972ca643",
+    "tree": "f800341ddf0499acff7a11789e9af6a2f29ed104",
+    "independentReviewChecks": {
+      "rawLogBytesASCII": 130261,
+      "tapCount": 370,
+      "orderedExact": true,
+      "unique": 370,
+      "summary": [
+        "1..370",
+        "# tests 370",
+        "# suites 0",
+        "# pass 370",
+        "# fail 0",
+        "# cancelled 0",
+        "# skipped 0",
+        "# todo 0"
+      ],
+      "proofMarkerCount": 1,
+      "proofMatches": true,
+      "proofBindings25": true,
+      "runJobJoin": true,
+      "artifactJoin": true
+    },
+    "proofBytes": 6464,
+    "proofSHA256": "9a1bb1e79632f1fccc9cc89b674e55f8d3106161d52fcdae7c23512caa65f291",
+    "zipBytes": 2809,
+    "zipSHA256": "9b53931a13457333f865226380109e7e708bc932b0e93be8a3a6b89f1578c431",
+    "meaning": "La revisión recontó del raw log conservado los370 IDs exactos ordenados, plan/trailers0fallos/cancel/skip/todo y una prueba log igual al blob; comparó25bindings con índice y joins API/run/job/artefacto, y recalculó bytes/SHA256 de proof y ZIP. Son controles OWN sintéticos originales válidos, no cobertura de las nuevas contrapruebas ni ejecución Source. No se reejecutó el native ni se repolló historia.",
+    "closure": "dcf40f44e1950a06cf94ada3c144bfb9f23c12a4"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P2",
+      "kind": "SPEC+QUALITY",
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/full-reader.mjs",
+      "startLine": 160,
+      "endLine": 161,
+      "title": "Validar CRC y tamaños locales no cero cuando existe descriptor",
+      "observed": "El brazo flags&8 comprueba descriptor/central, pero no lee CRC/tamaños del local header en offsets14/18/22. Un ZIP con descriptor y payload válidos, pero uno de esos campos locales no cero y contradictorio, obtiene receiverChecksSatisfied:true.",
+      "requirement": "OwnPlan minimumChange.algorithmSteps exige central-local consistency y descriptor acotado; los ceros locales son admisibles, no cualquier valor contradictorio.",
+      "reproduction": "Desde ejemplo sintético1c932dbcc1106b96d6fdb28c5f4e5fef21764d35, construir ZIP stored/bit8/signedDD descrito abajo. Por separado escribir CRC xor1 en local14, payloadLength+1 en local18 o payloadLength+1 en local22. Mantener descriptor/central/payload; recalcular archiveBase64, listing.size_in_bytes y listing.digest. Los tres inputs completos fueron aceptados.",
+      "impact": "El resultado afirma validación estricta del archivo para un contenedor internamente contradictorio. No se demostró cambio de payload, escape, ZIP bomb o fallo del ZIP native original.",
+      "repair": "En bit8 aceptar cada campo local solo si es0 o coincide con el valor central/descriptor correspondiente. Agregar negativos completos y positivos locales0/valores coincidentes, preservando descriptor firmado/sin firma y métodos0/8."
+    },
+    {
+      "id": "F2",
+      "priority": "P2",
+      "kind": "SPEC+QUALITY",
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/full-reader.mjs",
+      "startLine": 155,
+      "endLine": 159,
+      "title": "Rechazar ZIP64 y extras malformados antes de omitirlos",
+      "observed": "el/lel solo ajustan longitudes; no hay lectura TLV de los extras ni rechazo de headerID0x0001. Un extra ZIP64 de20B tanto local como central, con tamaños64bit contradictorios y neededVersion45, también obtiene receiverChecksSatisfied:true.",
+      "requirement": "OwnPlan minimumChange.algorithmSteps6 requiere explícitamente no ZIP64 y central-local consistency.",
+      "reproduction": "Partir del ZIP stored/bit8/signedDD positivo; insertar en ambos headers TLV id1,len16,uncompressed=payloadLength+1,compressed=payloadLength+2 (UInt64LE), neededVersion45. Ajustar lel/el, offset/size central y bytes/digest API. El input completo fue aceptado.",
+      "impact": "Un formato excluido se admite por ignorar sus metadatos. No se afirma que el lector use esos tamaños64bit ni que el límite24577 quede evadido.",
+      "repair": "Recorrer acotadamente los extras locales/centrales, rechazar TLV incompleto y ZIP64; preservar únicamente extras compatibles que se decida admitir. Agregar negativos de ZIP64 solo local/solo central/ambos y TLV truncado con API/digest coherentes."
+    }
+  ],
+  "counterexamples": {
+    "originalExample": "1c932dbcc1106b96d6fdb28c5f4e5fef21764d35",
+    "originalExampleSHA256": "e40028bcc6040b2d240fd03270baf16e186e8dc7eab70d0c669f500ebff4ded6",
+    "execution": "Funciones originales OWN del reader en RAM, solo envoltorio import/export omitido y admission JSON fija; no cambio de algoritmo ni Source. ZIP construido por lógica original del revisor y CRC32 por tabla independiente. Sin FS, dependencias, zlib, tests Source ni native nuevo.",
+    "zipRecipe": "UTF8 payloadText y fileName exactos del ejemplo. Método0,flags8,version20,campos restantes0,nombres idénticos,localCRC/sizes0; signedDD0x08074b50+CRC32+length+length; centralCRC/sizes reales,offsetLocal0; EOCD un entry, sin comentarios/extras. Variante ZIP64 agrega20B en cada extra y version45. Mantener wrapper input/trustedExpected/log/payload del ejemplo y reparar solamente archiveBase64+listing.size_in_bytes+listing.digest=sha256(bytes).",
+    "hashConvention": "SHA256 de UTF8(JSON.stringify(input)), UTF8(JSON.stringify(trustedExpected)) y bytes ZIP; payloadSHA256 incluye LF.",
+    "results": [
+      {
+        "id": "validDD",
+        "options": {},
+        "archiveBytes": 10252,
+        "archiveSHA256": "d432b294a4615f4abf2191e9587152c31f057524a5bbdecb7816a5ebcb832645",
+        "inputSHA256": "77ededa56a13be6c16c0f324b553f8fdb0c772a7149fcaf41aa98f0013db3ca7",
+        "expectedSHA256": "9b1f820e48ec402f24a921d1aa98dd259023afbb9212e7d0cad4525bba1c0c4e",
+        "payloadSHA256": "94b4c4b9478d172117776a9e609c7db92667f248c91702a51549d88c4153ec41",
+        "accepted": true,
+        "error": null
+      },
+      {
+        "id": "badLocalCRC",
+        "options": {
+          "localCrc": true
+        },
+        "archiveBytes": 10252,
+        "archiveSHA256": "d9e3fbad9904bf1b401c821f48ceb4d7e031d634f6bb1c0d12f643d75d53bd77",
+        "inputSHA256": "f78d72566ea12c67d5c5186401df29a28f6b367ce9269212378468176d4724b9",
+        "expectedSHA256": "9b1f820e48ec402f24a921d1aa98dd259023afbb9212e7d0cad4525bba1c0c4e",
+        "payloadSHA256": "94b4c4b9478d172117776a9e609c7db92667f248c91702a51549d88c4153ec41",
+        "accepted": true,
+        "error": null
+      },
+      {
+        "id": "badLocalCompressed",
+        "options": {
+          "localCompressed": true
+        },
+        "archiveBytes": 10252,
+        "archiveSHA256": "87e5f14ef242b8d57db52c6d0cc6c320bb50b272c0eec8368f8f3f1420756ae0",
+        "inputSHA256": "88da8777bbf9eaa08a45aca5e542929a268ac68fda5073d035ae15a7ad7b05e8",
+        "expectedSHA256": "9b1f820e48ec402f24a921d1aa98dd259023afbb9212e7d0cad4525bba1c0c4e",
+        "payloadSHA256": "94b4c4b9478d172117776a9e609c7db92667f248c91702a51549d88c4153ec41",
+        "accepted": true,
+        "error": null
+      },
+      {
+        "id": "badLocalLength",
+        "options": {
+          "localLength": true
+        },
+        "archiveBytes": 10252,
+        "archiveSHA256": "a0958f6aa67f5ae98ec26e04696867e6637a6400b581761341b19506054b4977",
+        "inputSHA256": "e1037bc6a14df60dae3bc3bcc2a4c89ad6f03391c57e8f75e1946938f996cae9",
+        "expectedSHA256": "9b1f820e48ec402f24a921d1aa98dd259023afbb9212e7d0cad4525bba1c0c4e",
+        "payloadSHA256": "94b4c4b9478d172117776a9e609c7db92667f248c91702a51549d88c4153ec41",
+        "accepted": true,
+        "error": null
+      },
+      {
+        "id": "zip64Extra",
+        "options": {
+          "zip64": true
+        },
+        "archiveBytes": 10292,
+        "archiveSHA256": "29b81f9de6ef9e6c3311a5a3dfc8e48b97d16508c3414d6baf0c2aab6c0f146d",
+        "inputSHA256": "fa0d892d2e1d6f02fb008dfb98c8b8d37b0a210ec7ea340297ba6cbca05528b2",
+        "expectedSHA256": "9b1f820e48ec402f24a921d1aa98dd259023afbb9212e7d0cad4525bba1c0c4e",
+        "payloadSHA256": "94b4c4b9478d172117776a9e609c7db92667f248c91702a51549d88c4153ec41",
+        "accepted": true,
+        "error": null
+      }
+    ],
+    "expected": "validDD accept; badLocalCRC/badLocalCompressed/badLocalLength/zip64Extra reject",
+    "actual": "Los cinco devolvieron receiverChecksSatisfied:true sin error.",
+    "coverage": "Los370 IDs originales se mantienen. fixture-first-cases.json:1889 cubre descriptor corrupto, pero no local contradictorio con descriptor correcto; tampoco existe vector ZIP64. Los nuevos negativos no se cuentan retrospectivamente como native370."
+  },
+  "declinedToJudge": [
+    "Raw TAP privado Source y3 DTO de recibos no exportados: el contrato safe no permite parsearlos/autenticarlos independientemente; sí se revisó la proyección acotada.",
+    "Ejecución Source full, Task1 real y nominación Source actual: bloque posterior de Root, sin operación en esta revisión.",
+    "Causa histórica503, consentimiento, SDK/namespace global, drenaje real, readiness/PCoff: fuera del contrato y sin evidencia nueva.",
+    "Readback remoto de historia y baseline3203: se usaron los recibos conservados Root y los pines; no se declara nueva auditoría completa de historia."
+  ],
+  "verdict": {
+    "SPEC": "FAIL: F1 y F2 abiertos",
+    "QUALITY": "WITH_FIXES: dos P2, sin críticos/P1 demostrados",
+    "ownClosure": "La evidencia native370 es válida para sus controles; no cierra la validación ZIP estricta del reader completo.",
+    "operationalApproval": false,
+    "sourceCaptureApproval": false
+  },
+  "performed": {
+    "SourceExecution": false,
+    "SourceImports": false,
+    "SourceEval": false,
+    "SourceCompilation": false,
+    "SourceSyntax": false,
+    "SourceTests": false,
+    "SourceMutation": false,
+    "filesystemMutation": false,
+    "dependencies": false,
+    "builds": false,
+    "refs": false,
+    "runs": false,
+    "provider": false,
+    "browser": false,
+    "secrets": false,
+    "implementationPatch": false
+  },
+  "rollback": "Omitir este blob inmutable; ninguna ref, implementación ni recurso operativo se modifica.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

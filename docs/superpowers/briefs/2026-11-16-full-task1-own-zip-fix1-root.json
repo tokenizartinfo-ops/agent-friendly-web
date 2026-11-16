@@ -1,0 +1,89 @@
+{
+  "schema": "AFW-C2-FULL-C230-OWN-ZIP-FIX1-ROOT-RULING/1",
+  "date": "2026-11-16",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHub immutable DATA and bounded OWN RAM; later one Root-gated native Actions run",
+  "resourceType": "OWN verifier candidate only",
+  "allowedAction": "Writer may produce fixtures-first immutable blobs and corrected candidate. Root exclusively controls refs and native activation.",
+  "actor": "/root/c2_v2_own_receiver_fix1",
+  "round": 2,
+  "maxRounds": 5,
+  "basis": {
+    "originalRuling": "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+    "supplement": "bca6278fc2f4889c6c01211a10832cec9871f1c9",
+    "review": "5aabaa3f85133d126f24652b348c0c5bc3de08ab",
+    "reviewSHA256": "b891199d36f6b4d12e74fa6a2ca21336149c87f47b57584e02eaa8fd46a9ec4c",
+    "oldIndex": "1e0f7b4bf24be7ce402ff30a0b47521005df85a0",
+    "oldReader": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+    "native": {
+      "run": 43958585757,
+      "job": 133619605008,
+      "pass": 370,
+      "primary": "0dba0eb9ee2a4df511eaa48484ee2c179dfb621c",
+      "closed": "fcd3a2f0a68d03454df549f80cfdab11861ad686",
+      "closeProof": "dcf40f44e1950a06cf94ada3c144bfb9f23c12a4"
+    }
+  },
+  "ruling": [
+    "F1 and F2 are technically confirmed P2 contract gaps. Root independently reproduced F1 valid descriptor plus all three malformed local CRC/compressed/uncompressed fields, with full input, unchanged log/payload/trust and coherent archive digest/API size. Do not erase or relabel the native370 original success; it did not cover these cases.",
+    "Apply only ZIP parser guards and focused OWN fixtures plus necessary versioned harness/manifest/proof bindings. No Source13/qualifier, M, Core, original225 implementation, old370 IDs/outcomes or previously closed branch edits.",
+    "F1: under bit8=0x8, each local CRC/compressed/uncompressed32 field must be zero placeholder or equal the central/descriptor field. Zero-or-equal is this receiver's explicit compatibility contract. PKWARE normally prescribes zeros for bit3; do not misstate matching nonzero as a specification requirement. Reject contradictory nonzero values. Preserve signed/unsigned 32bit descriptors and methods0/8.",
+    "F2: parse both extra areas as bounded TLV, requiring complete4-byte header and declared data within extra-end, exact traversal to extra-end; reject any ID0x0001 even with ordinary32bit sizes. Retain compatible ordinary extra fields without interpreting their contents; document they do not override payload/name/sizes. Add negatives ZIP64 local-only, central-only, both, complete/truncated payload and trailing1..3 header bytes. Include coherently repaired archive offsets/sizes and API digest/size, so rejection reaches the intended check.",
+    "Explicit version-needed compatibility: local and central must agree; this stored/deflated, no-encryption/no-ZIP64 receiver permits10 or20 for method0 and20 for method8. Reject45 and other unsupported values or mismatch. This is an intentional bounded receiver subset, not universal ZIP compliance. Existing valid fixtures/native ZIP must remain accepted.",
+    "Fixtures first: preserve all370 original IDs in identical order as prefix. Add new full coherent input tests with positives for descriptors signed/unsigned, zero/matching nonzero, methods0/8 and allowed ordinary TLV; new negatives for all three contradictory local fields and the F2/version matrix. Seal exact case bodies, ordered IDs, expected results and RED observations against immutable dccf before corrected reader. Neither redefine historical expected outcomes nor count new tests as original370 coverage.",
+    "Provide bounded RAW own TDD RED and GREEN evidence, exact hashes/full reversible before/after bodies, complete native graph, runner/workflow/proof/schema and old/new derivation. No assertions only based on precomputed artifactSHA. Full input/trust/actual bytes/log coherence is required.",
+    "Do not create/update refs, execute workflows, rerun old native or Source, read credentials/browser/provider or mutate main. Once candidate is sealed Root reads FULL, gates a different one-use OWN native, closes it, then gets fresh independent SPEC+QUALITY review before the reserved full Source occurrence."
+  ],
+  "primaryReference": {
+    "url": "https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT",
+    "accessedUTC": "2026-11-16",
+    "version": "6.3.10 FINAL",
+    "sections": [
+      "4.4.3.1-2 minimum extraction feature version (Deflate2.0, ZIP64 4.5)",
+      "4.4.7-9 bit3 CRC/sizes placeholders",
+      "4.5.1 bounded extensible header/data",
+      "4.5.3 ZIP64 extra ID0x0001"
+    ],
+    "interpretation": "Paraphrased; bounded compatibility subset above is Root's receiver policy."
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3-zip-fix1",
+    "message": "AFW-C2-FULL-TASK1-C230-OWN-V3-ZIP-FIX1-ONEUSE-20261116",
+    "job": "c2-full-task1-c230-own-v3-zip-fix1",
+    "workflow": ".github/workflows/afw-c2-full-task1-c230-own-v3-zip-fix1.yml",
+    "prefix": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/run-controls.mjs",
+    "artifact": "afw-c2-full-task1-c230-own-v3-zip-fix1-proof",
+    "artifactPath": "output/c2-full-task1-c230-own-v3-zip-fix1-proof.json",
+    "fileName": "c2-full-task1-c230-own-v3-zip-fix1-proof.json",
+    "node": "22.23.4",
+    "runner": "ubuntu-24.04",
+    "jobTimeoutMinutes": 3,
+    "testTimeoutMs": 10000,
+    "contents": "read",
+    "attempt": 1,
+    "retentionDays": 7,
+    "activationReleased": false
+  },
+  "preservation": {
+    "source13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "SourcePreparedHead": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+    "SourceRefCreated": false,
+    "SourceCaptureHeld": true,
+    "rollback": "Ignore unattached new DATA; original closed candidate and all primary evidence remain intact. Root closes any new one-use native by removing only its workflow and preserving receipts."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
