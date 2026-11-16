@@ -1,0 +1,248 @@
+{
+  "schema": "afw.c2-notices-n3.r4-atomic-vectors.v1",
+  "phase": "SEALED_LITERAL_BEFORE_PATCH",
+  "authority": "a969930b2fea38173ac84b33aa85f9f6ef85e516",
+  "oldLedger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+  "censusVector": "00685a137f17834ff355cb2cae15285d8e9e2fd4",
+  "frozenNativeProof": "cda3acf85a765c4788bbc023b247da791a9f322a",
+  "ids": {
+    "beforeRed": [
+      "BEFORE_R4_EXACT_RELEVANT",
+      "BEFORE_R4_OTHER_ERROR",
+      "BEFORE_R4_OTHER_CLEAN"
+    ],
+    "afterGreen": [
+      "N3_CORE_CONTROLS",
+      "N3_CAUSAL_LITERALS",
+      "N3_TIMEOUT_PREFIX_CONTROLS",
+      "N3_AXIS_LITERALS",
+      "N3_SCHEMA_SELECTION_CONSTS",
+      "N3_NOTE_SYNC_NO_RPC",
+      "N3_ORIGINAL_NULL",
+      "N3_ORIGINAL_UNDEFINED",
+      "N3_ORIGINAL_FALSE",
+      "N3_ORIGINAL_ZERO",
+      "N3_ORIGINAL_EMPTY_STRING",
+      "N3_ORIGINAL_OBJECT",
+      "N3_PROMISE_IDENTITY",
+      "N3_EXISTING_SETTLED_HANDLER",
+      "N3_ROOT_IDENTITY",
+      "N3_REALM_RESET",
+      "N3_CROSS_SCOPE_LEASE",
+      "N3_SHARED_PROMISE",
+      "N3_NULL_BOUND_REF",
+      "N3_PREBIND_GAP",
+      "N3_PAIR_FORK",
+      "N3_FIRST_TARGET_ONLY",
+      "N3_SCOPE_ERROR_A_CHILD_B",
+      "N3_REPEATED_CLOSE",
+      "N3_CUT_LATE_SETTLEMENT",
+      "N3_SINK_FAULT",
+      "N3_PRIVATE_CAP",
+      "N3_SNAPSHOT_CAP",
+      "N3_WORST_SIZE",
+      "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+      "N3_ABORT_NESTED_OBSERVER_ORDER",
+      "N3_BOUND_PAIR_COVERAGE",
+      "N3_PREPAIR_FAILURE_AND_UNBOUND",
+      "N3_ACTUAL_CHILD_ABORT_MATRIX",
+      "N3_ACTUAL_PARENT_ABORT_MATRIX",
+      "N3_NESTED_ABORT_ORDER",
+      "N3_UNREACHED_ACTIVATION",
+      "N3_ORIGINAL_RACE_AXES",
+      "N3_ORIGINAL_REDUCER_CALLBACKS",
+      "N3_REVERSIBLES",
+      "N3_MAX_ENVELOPE_SIZE",
+      "N3_CENSUS_ROOT17",
+      "N3_CENSUS_IDENTITY129",
+      "N3_CENSUS_GAP_PROMOTION_AT128",
+      "N3_CENSUS_PROBE_BEFORE_ELIGIBLE",
+      "N3_CENSUS_FRESH_GET_POST_BOUNDS",
+      "N3_CENSUS_REPEAT_AND_HONEST_CAP",
+      "R4_EXACT_RELEVANT",
+      "R4_OTHER_ERROR",
+      "R4_OTHER_CLEAN",
+      "R4_NO_BORROW_AND_STICKY",
+      "R4_VALIDATION",
+      "R4_BELOW_AND_DEFAULT"
+    ]
+  },
+  "expected": {
+    "before": {
+      "tests": 3,
+      "pass": 0,
+      "fail": 3,
+      "skip": 0,
+      "todo": 0,
+      "cancel": 0,
+      "requiredReasons": [
+        "R4_EXACT_RELEVANT_EXPECTED_JOIN",
+        "R4_OTHER_ERROR_EXPECTED_PREFIX",
+        "R4_OTHER_CLEAN_EXPECTED_COMPLETE"
+      ]
+    },
+    "after": {
+      "tests": 53,
+      "pass": 53,
+      "fail": 0,
+      "skip": 0,
+      "todo": 0,
+      "cancel": 0
+    },
+    "meaning": "Actual RED independently evidenced by failing test process, first three desired discriminator assertions after confirming the complete legacy CAP snapshot. Candidate53 contiguous old41 + revised6 census +6 targeted additions."
+  },
+  "cases": [
+    {
+      "id": "R4_EXACT_RELEVANT",
+      "setup": "One actual root + 63 bound other-pair original factory clocks + 64 original unbound factory clocks closed three times each. Promote first gap to outer twice, emit admitted-scope and scope-enter DTOs, take two distinct snapshots.",
+      "before": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE",
+        "eligible": 0,
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "after": {
+        "state": "joined",
+        "coverage": "prefix",
+        "reason": "PREBIND_GAP",
+        "eligible": 1,
+        "target": "unreached",
+        "leases": [
+          "root",
+          "outer"
+        ],
+        "firstCloses": [
+          null,
+          null
+        ],
+        "firstError": null,
+        "events": [
+          "scope-enter",
+          "snapshot-cut"
+        ],
+        "cut": 2,
+        "nextCut": 3
+      },
+      "red": "R4_EXACT_RELEVANT_EXPECTED_JOIN"
+    },
+    {
+      "id": "R4_OTHER_ERROR",
+      "setup": "One original root, one bound outer, 62 other-pair clocks and 64 folded unbound actual clock gaps. Before any bind on X, force its original already-closed assertCurrent to throw (holders succeeds, same original fail). Convert X into other-pair twice; synthetic accepted-scope/enter uses the already bound outer.",
+      "before": {
+        "reason": "CAP_PRIVATE",
+        "state": "unjoined",
+        "eligible": 1
+      },
+      "after": {
+        "state": "joined",
+        "coverage": "prefix",
+        "reason": "PREBIND_GAP",
+        "eligible": 1,
+        "firstError": null,
+        "events": [
+          "scope-enter",
+          "snapshot-cut"
+        ],
+        "cut": 2
+      },
+      "red": "R4_OTHER_ERROR_EXPECTED_PREFIX"
+    },
+    {
+      "id": "R4_OTHER_CLEAN",
+      "setup": "Same as OTHER_ERROR without the original failed assertion. Nonfocus other-pair, error-free gap.",
+      "before": {
+        "reason": "CAP_PRIVATE",
+        "state": "unjoined",
+        "eligible": 1
+      },
+      "after": {
+        "state": "joined",
+        "coverage": "complete",
+        "reason": "OK",
+        "eligible": 1,
+        "firstError": null,
+        "events": [
+          "scope-enter",
+          "snapshot-cut"
+        ],
+        "cut": 2
+      },
+      "red": "R4_OTHER_CLEAN_EXPECTED_COMPLETE"
+    },
+    {
+      "id": "R4_NO_BORROW_AND_STICKY",
+      "setup": "Saturated group. Bind fresh Z as outer with gap X in leaseRef and R as correct parent; cannot spend X. Next bind X as outer and emit scope+enter. Before and after report CAP_PRIVATE. Independent ledger: valid repeated promoted X at 128 then distinct valid new lease must still refuse. Check no fake 2nd gap credit.",
+      "after": [
+        "CAP_PRIVATE",
+        "CAP_PRIVATE",
+        "CAP_PRIVATE"
+      ]
+    },
+    {
+      "id": "R4_VALIDATION",
+      "setup": "Separate original environments. An invalid role, a missing parent, and a cross-scope parent all refuse a proposed outer X; subsequent valid conversion of X at 128 must still join with preexisting UNBOUND prefix. Rebind a valid row with different role => UNBOUND. Existing same real lease under another owner => permanent AMBIGUOUS_BINDING. Canonical shared actual promise => permanent AMBIGUOUS_BINDING. All comparisons by strict object identity.",
+      "after": [
+        "UNBOUND",
+        "UNBOUND",
+        "UNBOUND",
+        "UNBOUND",
+        "AMBIGUOUS_BINDING",
+        "AMBIGUOUS_BINDING"
+      ]
+    },
+    {
+      "id": "R4_BELOW_AND_DEFAULT",
+      "setup": "At U below 128, close an unbound clock, bind as outer, add two synthetic scope/enter DTOs in distinct roots. Default snapshot before selection returns NO_ELIGIBLE/cut null on repeat; after first scope prefix PREBIND_GAP then repeated cuts preserve original first error and prior copy; after second MULTIPLE_ELIGIBLE. Default factory API exact, no probeSnapshot on A.",
+      "after": [
+        "NO_ELIGIBLE",
+        "NO_ELIGIBLE",
+        "PREBIND_GAP",
+        "PREBIND_GAP",
+        "MULTIPLE_ELIGIBLE"
+      ]
+    },
+    {
+      "id": "R4_CURRENT_CENSUS_PROMOTION",
+      "setup": "Existing six census bodies retained for frozen legacy. Candidate phase substitutes only third case's legacy-refusal assertion and expected row, leaving topology exactly intact: one root +127 original factory clocks, 63 other pairs and 64 unresolved, synthetic scope DTO without scope-enter. A joined/prefix/PREBIND_GAP, eligible1, only snapshot-cut sequence1. Census fact only (outside public replay, deliberately incomplete DTO).",
+      "after": {
+        "state": "joined",
+        "coverage": "prefix",
+        "reason": "PREBIND_GAP",
+        "eligible": 1,
+        "events": 1,
+        "cut": 1,
+        "newID": "N3_CENSUS_GAP_PROMOTION_AT128",
+        "scopeAdmissionExecuted": false
+      }
+    }
+  ],
+  "limits": {
+    "roots": 16,
+    "leasePlusGap": 128,
+    "promises": 64,
+    "opaqueErrors": 64,
+    "storedEvents": 256,
+    "metadataBytes": 65536,
+    "selectedEvents": 24,
+    "recordBytes": 6144,
+    "caseMs": 10000,
+    "jobMinutes": 3,
+    "proofBytes": 24576,
+    "inputNotesPerCase": 4096
+  },
+  "coverage": "Reuse original41 actual work/effects and 31+/32- corpus, worst full envelope6144B. No native PH/consume in DTO admission; historical first cap and business503 unresolved.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

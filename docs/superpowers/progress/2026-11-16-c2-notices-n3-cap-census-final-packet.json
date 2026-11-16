@@ -1,0 +1,248 @@
+{
+  "schema": "afw.c2-notices-n3.cap-census-packet.v1",
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "authority": {
+    "ruling": "9b4fb9eb4672847f6e5c8613c34f337569262ff1",
+    "previousToolingPacket": "e1f1b666726b2eb433d4d2d96f7266ca0c951308",
+    "previousActual41Proof": "3a8781f6a2646a3a00c521fc7f25b6a35d314ac8",
+    "previousReview": "a55a56441c81057f369a871e8891794d22ff8064",
+    "actualCDiagnosis": "dee8b1f943b0ef9e4cb16e6e78ea392090fca5ea"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-cap-census",
+    "message": "AFW-C2-N3-CAP-CENSUS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-cap-census.yml",
+    "job": "c2-notices-n3-cap-census",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/",
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+    "node": "22.23.4",
+    "attempt": 1,
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "contents": "read",
+    "artifactDays": 7
+  },
+  "artifacts": {
+    "index": {
+      "bytes": 22794,
+      "sha256": "9138cd210a4f0987e4ee3816bda7a0ff64eb5419e357ce7b04b9cbee6cfda931",
+      "gitBlob": "eddf0e03c94817509f02a334a8e73844728538f1",
+      "blob": "eddf0e03c94817509f02a334a8e73844728538f1",
+      "fullReadback": true
+    },
+    "runner": {
+      "bytes": 24109,
+      "sha256": "90ebfd267eff1e80925412d5b4d38833904566b9a6cde250548aaf6d8245e87e",
+      "gitBlob": "8215a69b7d2dfe46dbdcefc7dd963a3c08a86f0a",
+      "blob": "8215a69b7d2dfe46dbdcefc7dd963a3c08a86f0a",
+      "fullReadback": true
+    },
+    "workflow": {
+      "bytes": 1441,
+      "sha256": "55b2037eb153948738effc30d0599a80aaf95bb28ed63d54211b8ad67bc81e3f",
+      "gitBlob": "02f5f487199e2f5273d2fb56c0185a6fb7dbdc96",
+      "blob": "02f5f487199e2f5273d2fb56c0185a6fb7dbdc96",
+      "fullReadback": true
+    },
+    "censusControls": {
+      "bytes": 9884,
+      "sha256": "b237e1a12a4e6df76998fcd015d5959f14857c51f9ee97bc5ce1ae8b54226dd0",
+      "gitBlob": "e372df1adb3073912d722c836215db705dd7b391",
+      "blob": "e372df1adb3073912d722c836215db705dd7b391",
+      "fullReadback": true
+    },
+    "testFirstVectors": {
+      "bytes": 11987,
+      "sha256": "378d83c4acb05b61ca3a55d3ab21b8f0fc58768a0a8a12352fc490b4ce186f3f",
+      "gitBlob": "00685a137f17834ff355cb2cae15285d8e9e2fd4",
+      "blob": "00685a137f17834ff355cb2cae15285d8e9e2fd4",
+      "fullReadback": true
+    },
+    "selection": {
+      "bytes": 3809,
+      "sha256": "971776a9bdb14459d82eaceb649fe85565e3866d3be3fc9cccdeebcc7d8e8700",
+      "gitBlob": "fb241bc06204e5d1401822ad92679ec20665391d",
+      "blob": "fb241bc06204e5d1401822ad92679ec20665391d",
+      "fullReadback": true
+    },
+    "contract": {
+      "bytes": 9092,
+      "sha256": "ff2a82520fb1cd69aa7d29f1a19a1df2ba00cb685be0847f16877537e222aa55",
+      "gitBlob": "d255278df50c70f2b8f09b3b1ed217fa059e22dd",
+      "blob": "d255278df50c70f2b8f09b3b1ed217fa059e22dd",
+      "fullReadback": true
+    },
+    "proofSchema": {
+      "bytes": 13044,
+      "sha256": "f97e573c087c67286f44df0daa6056d99dac36d254b6bda162abf03f1c0e2650",
+      "gitBlob": "33ca2d867e04eb071aa7a0a5b4d3162e3686fce5",
+      "blob": "33ca2d867e04eb071aa7a0a5b4d3162e3686fce5",
+      "fullReadback": true
+    },
+    "report": {
+      "bytes": 14728,
+      "sha256": "4af433d4bcc6aa7abb01ac698a9b1b13979d8d924a00990a957f9614c52a5e9d",
+      "gitBlob": "6bd388642ad07c4cbcb0750fe923cd8447682ae0",
+      "blob": "6bd388642ad07c4cbcb0750fe923cd8447682ae0",
+      "fullReadback": true
+    },
+    "reversibles": {
+      "bytes": 3618,
+      "sha256": "5bf97b5efcb9fd9d30e1d5bc2d77a7fffbef90fa68c3036b4958fab040a88ff9",
+      "gitBlob": "c957e46eec62ec0dc3864a2f3bb180e71cb0dfbd",
+      "blob": "c957e46eec62ec0dc3864a2f3bb180e71cb0dfbd",
+      "fullReadback": true
+    },
+    "fullBeforeAfterDiff": {
+      "bytes": 151910,
+      "sha256": "62c7b5551d327a4d49358a087781ead6f4cc6368725086dbf7c5c777ba08120a",
+      "gitBlob": "b662485e62e28ad5233a3f896c5f224b62601bfe",
+      "blob": "b662485e62e28ad5233a3f896c5f224b62601bfe",
+      "fullReadback": true
+    }
+  },
+  "proposedTree": {
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "baseOriginalLeaves": 3203,
+    "newLeaves": 33,
+    "totalLeaves": 3236,
+    "indexIsExactOverlay": true,
+    "allNewLeafModes": "100644",
+    "expectedBaseAbsent": true,
+    "offTreeMetadata": [
+      "packet",
+      "index",
+      "fullBeforeAfterDiff"
+    ],
+    "authorization": "Root alone fresh-absence/expandedtree/head/branch admission, one tooling run and close. Author has created no tree/commit/ref/run. No new business capture."
+  },
+  "selection": {
+    "total": 47,
+    "oldPrefix": 41,
+    "newSuffix": 6,
+    "ids": [
+      "N3_CORE_CONTROLS",
+      "N3_CAUSAL_LITERALS",
+      "N3_TIMEOUT_PREFIX_CONTROLS",
+      "N3_AXIS_LITERALS",
+      "N3_SCHEMA_SELECTION_CONSTS",
+      "N3_NOTE_SYNC_NO_RPC",
+      "N3_ORIGINAL_NULL",
+      "N3_ORIGINAL_UNDEFINED",
+      "N3_ORIGINAL_FALSE",
+      "N3_ORIGINAL_ZERO",
+      "N3_ORIGINAL_EMPTY_STRING",
+      "N3_ORIGINAL_OBJECT",
+      "N3_PROMISE_IDENTITY",
+      "N3_EXISTING_SETTLED_HANDLER",
+      "N3_ROOT_IDENTITY",
+      "N3_REALM_RESET",
+      "N3_CROSS_SCOPE_LEASE",
+      "N3_SHARED_PROMISE",
+      "N3_NULL_BOUND_REF",
+      "N3_PREBIND_GAP",
+      "N3_PAIR_FORK",
+      "N3_FIRST_TARGET_ONLY",
+      "N3_SCOPE_ERROR_A_CHILD_B",
+      "N3_REPEATED_CLOSE",
+      "N3_CUT_LATE_SETTLEMENT",
+      "N3_SINK_FAULT",
+      "N3_PRIVATE_CAP",
+      "N3_SNAPSHOT_CAP",
+      "N3_WORST_SIZE",
+      "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+      "N3_ABORT_NESTED_OBSERVER_ORDER",
+      "N3_BOUND_PAIR_COVERAGE",
+      "N3_PREPAIR_FAILURE_AND_UNBOUND",
+      "N3_ACTUAL_CHILD_ABORT_MATRIX",
+      "N3_ACTUAL_PARENT_ABORT_MATRIX",
+      "N3_NESTED_ABORT_ORDER",
+      "N3_UNREACHED_ACTIVATION",
+      "N3_ORIGINAL_RACE_AXES",
+      "N3_ORIGINAL_REDUCER_CALLBACKS",
+      "N3_REVERSIBLES",
+      "N3_MAX_ENVELOPE_SIZE",
+      "N3_CENSUS_ROOT17",
+      "N3_CENSUS_IDENTITY129",
+      "N3_CENSUS_GAP_PROMOTION_AT128",
+      "N3_CENSUS_PROBE_BEFORE_ELIGIBLE",
+      "N3_CENSUS_FRESH_GET_POST_BOUNDS",
+      "N3_CENSUS_REPEAT_AND_HONEST_CAP"
+    ],
+    "expected": {
+      "cases": 47,
+      "pass": 47,
+      "fail": 0,
+      "skip": 0,
+      "todo": 0,
+      "cancel": 0,
+      "extra": 0,
+      "missing": 0
+    },
+    "old41WorkBodiesTextExactlyEqual": true,
+    "oldUnitControlsByteIdentical": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+    "inputHashes": 28,
+    "oldInputHashesUnchanged": 24
+  },
+  "frozen": {
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "historicalSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "fullQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d"
+  },
+  "meaning": {
+    "legacy": "47 expected PASS means unchanged legacy behavior reproduced. Same-ref promotion at128 still reports futureGapPromotionJoined:false; desired true is unimplemented RED.",
+    "freshGraph": "Only the approved declared2-root/8-clock/12-child/12-workpromise workload; NO_ELIGIBLE/eligible0 and no private cap. No admission, PH business, HTTP, exact actual-C census/upper bound or reset/epoch proof.",
+    "nativeScope": "Node22 tooling executes real frozen ledger, original Root/InitialLease callbacks and old41 pure Source controls. No full business world/SDK/npm/Miniflare/esbuild/M/QA compile, credentials or runtime/provider traffic.",
+    "capture": "Actual new47 execution is PENDING_ROOT_CLOUD. Root must independently join API/head/tree/TAP47/proof/input28/schema/artifact; Source self result is not acceptance."
+  },
+  "sizing": {
+    "proofModelBytes": 12666,
+    "proofByteCap": 24576,
+    "diagnosticModels": 470,
+    "maxDiagnosticModelBytes": 177,
+    "diagnosticByteCap": 256,
+    "note": "Only JSON/builtin UTF8 sizing; no Source/control/parser evaluation; model is not actual proof"
+  },
+  "preservedIntermediateArtifacts": [
+    {
+      "role": "superseded-unexecuted-workflow-draft",
+      "bytes": 1444,
+      "sha256": "a70e189c0435431cbf4b8c122d1b4ba7bc2b47413b153b38885c77b17fa2248c",
+      "gitBlob": "56b5ac08e5343ecda08d75e6f63b80a4284fd14a",
+      "blob": "56b5ac08e5343ecda08d75e6f63b80a4284fd14a",
+      "fullReadback": true,
+      "reason": "Single stale command-prefix corrected before final packet; excluded from overlay"
+    }
+  ],
+  "readback": "Every new artifact in this packet was fully fetched and exactly compared after immutable creation; builtin RAM SHA256/Gitblob/UTF8 metadata only. FullDiff7 forward/reverse joins preserve LF. Reused24 existing verified immutable bodies/hashes were not reread unnecessarily.",
+  "thisTaskExecution": {
+    "localSourceExecuted": false,
+    "newToolingExecuted": false,
+    "newBusinessExecuted": false,
+    "refsCreated": false,
+    "runsDispatched": false,
+    "sourceBodiesRepaired": false,
+    "scopeOrCapRaised": false
+  },
+  "pending": [
+    "Root DATA admission and exact proposed tree gate",
+    "Root ONE native47 occurrence then independent result review",
+    "Any observer repair remains future Root-authorized round4/5/fresh higher-capability writer; no epoch/reset or SourceC retry permitted by this packet"
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-fix2-packet.v1",
+  "round": 3,
+  "maxRounds": 5,
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "authority": {
+    "brief": "95a51e869a966359eb33edf5c4ee5b3f47589db2",
+    "actualPrimary": "e32ef76d006c139745a7eceea9f3f23716a73e9b",
+    "actualProof": "e99e3b0f31ab3c6c109c8ad4c131b720c25f6a2b",
+    "closedPriorHeadAccordingToBrief": "a6e9ef99e73f1ee9f917a098a0d12b8cd6ae6c0e"
+  },
+  "beforePacket": "905519b006512c542ee38c08c8eaeb9f2bc7e125",
+  "index": {
+    "bytes": 22729,
+    "sha256": "a01c2565adb7677526c64d12b1fd8d85da9217aeef1f2fba3b7331a32a3455ab",
+    "gitBlob": "906cfbea830100065eebdccb18d0810f8b207efb",
+    "blob": "906cfbea830100065eebdccb18d0810f8b207efb",
+    "fullReadback": true
+  },
+  "report": {
+    "bytes": 18160,
+    "sha256": "a54637c6dfd3c79060e6e46c31018f7c7497953632cdf22bee1981134516a78a",
+    "gitBlob": "e822a3d3c27d1e97d8eb8174a38b1d708e836a21",
+    "blob": "e822a3d3c27d1e97d8eb8174a38b1d708e836a21",
+    "fullReadback": true
+  },
+  "selection": {
+    "bytes": 6005,
+    "sha256": "1d2f110ece9c46b0c0c3d45747275858c48123bbdcb172cd9d4429193b46411c",
+    "gitBlob": "f5b7201b8fad54a7b0bbfb8b4ba221e370fef079",
+    "blob": "f5b7201b8fad54a7b0bbfb8b4ba221e370fef079",
+    "fullReadback": true
+  },
+  "reversibles": {
+    "bytes": 2371,
+    "sha256": "b9194c3cbf953caed904465f5b8be5956ccb242828090717d7f9e19d48f51e25",
+    "gitBlob": "2a6d230d344db3c0245ab7670a7a2974007b764d",
+    "blob": "2a6d230d344db3c0245ab7670a7a2974007b764d",
+    "fullReadback": true
+  },
+  "fullDiff": {
+    "bytes": 170446,
+    "sha256": "7fe7b5f08e6012a97453fb0a96c10dae1d127f1ed97b44a2b91ffd12717e827d",
+    "gitBlob": "edd5dacc84244ab5cbe1d53182fc60bf8158e683",
+    "blob": "edd5dacc84244ab5cbe1d53182fc60bf8158e683",
+    "fullReadback": true
+  },
+  "testFirst": {
+    "bytes": 23700,
+    "sha256": "bfff8d3388ac157986677c79fa151582e9bd08929ccde54c1bf5f33175fad45b",
+    "gitBlob": "7e4cae13603483c46e5e8ca7872290d00eb1de3a",
+    "blob": "7e4cae13603483c46e5e8ca7872290d00eb1de3a",
+    "fullReadback": true
+  },
+  "allAnchorAudit": {
+    "bytes": 12743,
+    "sha256": "e04ac361d61f80f7b1476c2843818373526c25af5c240776935c14d13c02e5fa",
+    "gitBlob": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+    "blob": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+    "fullReadback": true
+  },
+  "contractSupplement": {
+    "bytes": 4291,
+    "sha256": "db1ff3cc391800c0996b8e686c808534429dcfd0a1056e29f6306e70d498ec78",
+    "gitBlob": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95",
+    "blob": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95",
+    "fullReadback": true
+  },
+  "runner": {
+    "bytes": 22558,
+    "sha256": "9e261284cf5aa1916e1d620b03272f0eaa20158d319acd0b5df21eb0dc37703e",
+    "gitBlob": "d08312eb79e5283d21897e147c989a6d09888081",
+    "blob": "d08312eb79e5283d21897e147c989a6d09888081",
+    "fullReadback": true
+  },
+  "workflow": {
+    "bytes": 1431,
+    "sha256": "1133f8ca4758922287555ca55930e98e182bd54dc9a1e3fa8083b73979292bb8",
+    "gitBlob": "06a16595c5d801ddf17168140519002fb9aa2bc3",
+    "blob": "06a16595c5d801ddf17168140519002fb9aa2bc3",
+    "fullReadback": true
+  },
+  "proofSchema": {
+    "bytes": 11185,
+    "sha256": "3a656b1d47da3e146a8957d3d0c44f6c7bc1800e19c34f43184ccdff7cb2ab3e",
+    "gitBlob": "23bed32784cb27a4d0b8981fad862b851456fffb",
+    "blob": "23bed32784cb27a4d0b8981fad862b851456fffb",
+    "fullReadback": true
+  },
+  "changedExecutableBodies": {
+    "transform": {
+      "before": {
+        "bytes": 12498,
+        "sha256": "6eadf1ace39751e61a196c7180205b021aa5f703cbc6d1a8d26e6fa4959d9cfc",
+        "gitBlob": "3652e73d858a0958aaf50f34781043d6c910717f",
+        "blob": "3652e73d858a0958aaf50f34781043d6c910717f",
+        "fullReadback": true
+      },
+      "after": {
+        "bytes": 12694,
+        "sha256": "624ef2a8507643936aa9564bb0f978b11e31572b49c5678a6e6c4706af9ea255",
+        "gitBlob": "94e30c896056dc35b3bb75b072022644c68bfb74",
+        "blob": "94e30c896056dc35b3bb75b072022644c68bfb74",
+        "fullReadback": true
+      }
+    },
+    "units": {
+      "before": {
+        "bytes": 21884,
+        "sha256": "72b202db49738c95ffa07af7d6d8d3d58ded0b4850e1a346c5e2d95cff0f48db",
+        "gitBlob": "f8fc10631071207af883c34d25eff4f472862d61",
+        "blob": "f8fc10631071207af883c34d25eff4f472862d61",
+        "fullReadback": true
+      },
+      "after": {
+        "bytes": 21907,
+        "sha256": "8bf6a9f33a46c15f24e04b89fd6b6068b8197cb4eb9aea42c41ce7b0a1916076",
+        "gitBlob": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+        "blob": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+        "fullReadback": true
+      }
+    },
+    "runner": {
+      "before": {
+        "bytes": 20508,
+        "sha256": "72599d7c73db377503bb9802959e2070a83b5953e2107cc4aeae4a770ce0835a",
+        "gitBlob": "33d3d6eca9af1246d5550b749f7ab5836f6a7676",
+        "blob": "33d3d6eca9af1246d5550b749f7ab5836f6a7676",
+        "fullReadback": true
+      },
+      "after": {
+        "bytes": 22558,
+        "sha256": "9e261284cf5aa1916e1d620b03272f0eaa20158d319acd0b5df21eb0dc37703e",
+        "gitBlob": "d08312eb79e5283d21897e147c989a6d09888081",
+        "blob": "d08312eb79e5283d21897e147c989a6d09888081",
+        "fullReadback": true
+      }
+    }
+  },
+  "frozen": {
+    "ledger": {
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "gitBlob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "fullReadback": true
+    },
+    "reader": {
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "gitBlob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "fullReadback": true
+    },
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "historicalSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "fullQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix2",
+    "message": "AFW-C2-N3-CONTROLS-FIX2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls-fix2.yml",
+    "job": "c2-notices-n3-controls-fix2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "proposedLab": {
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "originalModesBlobs": 3203,
+    "additions": 30,
+    "inputHashes": 24,
+    "offTree": "Packet/index/fullDiff remain immutable off-tree review DATA, not extra lab paths. Root independently gates expandedtree/freshbranch/WF and all beforeabsences; author creates noRef/tree/commit/run."
+  },
+  "repair": "Selector extends to third ORIGINAL describeActivation line so measured===newMatches===newRequired===1. Historical commonprefix2 is explicitly rejected as a negative; not encoded as success. Complete raw/prepared audit persisted BEFORE code. Catch hypothesis disproved raw1/first(error)0. No first-match/bypass or productclock/guard/await/callback change.",
+  "harness": "Common actual(t) prepares Ledger/Lease/root separately. SAME transformPH still mandatory in allPH attach, FIRST_TARGET_ONLY, REVERSIBLES; cleanup registered before attach may fail.41IDs/workbodies, strictdiagnostics256B and originalcallback/clock code retained; no PHcontrol removed.",
+  "actualBefore": {
+    "runId": "43905959165",
+    "attempt": 1,
+    "jobId": "133434721789",
+    "native": {
+      "tests": 41,
+      "pass": 6,
+      "fail": 35,
+      "skip": 0,
+      "todo": 0,
+      "cancel": 0
+    },
+    "diagnostics": {
+      "phaseTransform": 34,
+      "reversibles": 1
+    },
+    "core": {
+      "accepted": 6,
+      "rejected": 21,
+      "probeChecks": 3,
+      "roundtrips": 6,
+      "witnessRejected": 2,
+      "slotChecks": 5,
+      "guardAccepted": 3,
+      "guardRejected": 7,
+      "guardTransitions": 6,
+      "invarianceChecks": 10,
+      "guardRecordRejected": 12
+    },
+    "causal": {
+      "accepted": 31,
+      "rejected": 32
+    },
+    "reducer": null,
+    "diagnosticToolingExecuted": true,
+    "sourceBusinessExecuted": false,
+    "meaning": "Admitted FAILURE, not original-callback coverage. Stage known; exact historical exception not reconstructed or asserted."
+  },
+  "afterExpected": {
+    "native": "Exact same41 orderedIDs/pass41/0fail-cancel-skip-todo-extra-missing",
+    "rawPrepared": "AllN3 selectors/raw+actualprepared counts audited together, original8preparer needles/7correlators; active selector count===required===1, corrupt2/1oracle rejected. All raw/prepared/STDIN full reversals,4clockcalls/3otherhandlers/upload unchanged.",
+    "reducer": "Actual originalcallback31→24/late34→24 with firstscopeerror/focus/exactpairp preserved, still REQUIRED",
+    "status": "PENDING_ROOT_CLOUD. No post-fix PASS declared."
+  },
+  "authorCorrection": "Prior round2 test oracle accepted measured2 because vector recorded2 despite required1. That verification error is explicitly acknowledged/preserved. This is last original-writer round; any failure needs fresh higher capability for4–5 per brief, no silentreset.",
+  "fullReadback": "All new bodies/index/report/WF pins and all30 admitted path bodies have full immutable blob readback; bytes/SHA256/Gitblob metadata computed by allowed builtin RAM operations. FullDiff preserves finalemptyLF arrays and full beforeimages. No Source/preparer execution locally; oldversions/actualFAIL evidence remain immutable.",
+  "pending": [
+    "Root fresh exacttree/admission and ONE nativefix2 occurrence with API/TAP41/proof/input24/schema/canonicalartifact/ZIPCRC/digest join; never Source self allBodies alone.",
+    "Actual nativecovering and scoped spec+quality review before C; C STOPPED/inactive, no World/SDK/esbuild/Miniflare/businessrequest, no Task2.",
+    "No author ref/run/local Source execution."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
