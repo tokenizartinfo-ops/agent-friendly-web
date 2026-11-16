@@ -1,0 +1,176 @@
+{
+  "schema": "afw.c2-notices-n2.contract.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "authority": {
+    "brief": "07a10773d721081de132baf9d4bb9b014466137e",
+    "initialBrief": "89d5f4e6350ec7165822fd7907530a9c2022489b",
+    "checkpoint": "9a6ee37a0b263fbd9747bd8494f18ebd5243f43b",
+    "resume": "49829aa9a50763b2c2758f1eee0ce319efab2d90",
+    "acceptedDiagnosis": "bc756849f9c8a4ed4653a4cb1e5d20565f945e93",
+    "windowRuling": "72480f6b32a095186b17671cb6d18b583335f9a1",
+    "preAdmission": "dea133e44247938626de925ccb6fe44de3896583"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n2",
+    "message": "AFW-C2-T1-NOTICES-N2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n2.yml",
+    "job": "c2-notices-n2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n2/",
+    "runner": "run-c2-notices-n2.mjs"
+  },
+  "selection": {
+    "bytes": 2255,
+    "sha256": "2219a67cb56c8825577f83836719f693f1b9d1012f44d1d78a34d790c70438a9",
+    "gitBlob": "590ee8bd7435db8bee9669077bcb4e657e187889",
+    "canonicalHash": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+    "blob": "590ee8bd7435db8bee9669077bcb4e657e187889",
+    "fullReadback": true
+  },
+  "vectors": {
+    "bytes": 78151,
+    "sha256": "cd4d4a0174be09c8dcae12c6a3b222de0d5f7151d2b0b94dd30f9caa5b6eedad",
+    "gitBlob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+    "blob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+    "fullReadback": true
+  },
+  "selectionHash": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+  "wire": {
+    "syntax": "marker+ASCIIspace+JSON.stringify(value)+LF; exactcanonicalkeys/order as schema properties, UTF8. Artifact exactoutcomeJSON+LF. No duplicatekeys/rawTAP/errors/HTML/IDs/headers/tokens/nonces/UID/PID/paths.",
+    "frames": [
+      [
+        "AFW_C2_NOTICES_N2_SYNTHETIC",
+        2048
+      ],
+      [
+        "AFW_C2_DEPENDENCY_CONTROL",
+        1024
+      ],
+      [
+        "AFW_C2_NOTICES_N2_CUSTODY",
+        1024
+      ],
+      [
+        "AFW_C2_NOTICES_N2_FRONTIER",
+        2048
+      ],
+      [
+        "AFW_C2_NOTICES_N2_OUTCOME",
+        24576
+      ]
+    ],
+    "outcomeOrder": [
+      "schema",
+      "context",
+      "selectionHash",
+      "bindings",
+      "controls",
+      "capture",
+      "journal",
+      "observation",
+      "native",
+      "custody",
+      "SourceQualified",
+      "Task1Pass",
+      "nonclaims"
+    ],
+    "bindingOrder": [
+      "sourceIndexHash",
+      "driverHash",
+      "selectionHash",
+      "helperHash",
+      "readerHash",
+      "slotHash",
+      "loggerHash",
+      "worldHash"
+    ],
+    "recordOrder": "sequence,elapsedMs,kind then exact union properties in schema. Actualsafe witness only; JSON.stringify(record)+LF reconstructs bytes/hash. Unknownwitness empty/hash(empty), neverraw/torn/private.",
+    "successfulCapture": "Exactly four public frames in order SYNTHETIC,DEPENDENCY_CONTROL,CUSTODY,OUTCOME. FRONTIER is fatal-only stderr, never part of a successful capture; any frontier disqualifies it. Child TAP/logs stay private RAM and are never forwarded."
+  },
+  "assembly": "Normal13/index26b verified then ONLY temporary Node S07/S08/S10 overlays. No change to compiled entry strings, guards, console markers, onLoad or transforms in S10/PH/OP/WORK/S09. S10 adds synchronous option preparation/comparison and post-original-call/await observations only. Original constructor/method/promise/await remain.",
+  "native": "Eager4 exactIDs/native sequential/120s cases/globalAFTER. Action/count independently observed with originalthrownvalue kept byboolean evennull/undefined. Anyaction/countfailure blocks laterwork/count/HTTP; latercallbacks emit blocked workEnteredfalse and throw fixed nativePREREQUISITE_BLOCKED. NevermanufacturePASS/SKIP. NativePASS requiresactualaction+countreturn; nativefail mayvalidcapture. Timeoutonly honestboundprefix.",
+  "http": "ONE noticesGET andPOSTifGETsucceeds. Enter beforeawait; actualresponse.status immediatelyafteractualf.call return BEFORE body. Return afteractualtext/cancelsettles. Throwstatusactual|null/bodySettledfalse onlyifresponseexisted. OriginalGET200assert/formparsing/POST200assert retained, noautomaticretry. No new businessrequest.",
+  "probe": "Atmost1actualprobeBEFOREnotices afterphase and1AFTER work. Reuse actualslot6507 semantics;1s observationtimeout keeps actualexclusion untilsettlement, busy skipsnextRPC, latevaluesdisposed. RawprivateJSONcap131072B/observations2048/calls32/business64. Exactbeforeprefix equalityrequired; oldphaseerrors excluded. >1newconnection-failure ambiguous, no borrowedposition/sites. Existing connection-failure lacksrequestID so correlated:null and guardOrigin:unknown ALWAYSPhaseA. Delta correlatorlabels are observations, never exactcauseproof.",
+  "summary": "Only currentnotices-ticket-consumed boolean when privateGEThandlehashknown, exactnoticesapprovalpresence and aggregateconnectionreceiptcount from existingprobe.business. Missing/unreadable allnull. Pointer/phase unavailable cheaply, notemitted. Actualnativew.counts separateupload/activation/receipts0..3, neverdefault0.",
+  "parsing": "Strict32768B/128canonicalrecords/monotonicelapsed/bindings, fourcase action/count/block FSM; HTTPonlyinsideN2_NOTICESaction, POSTrequiresactualGET200completion. Probe before beforeHTTP; after afteractionsettles beforecount. NoHTTPforblocked. Safeerrorfiniteclass/code/Source13orD07/D08sites only. Nativeexact4orhonestprefix/noskip-todo-extra-duplicate. AFTERthrowauxiliary; Sourcefalse. Every startedHTTP must reach return/throw BEFORE actionreturn/throw. PendingHTTP mayappear only inhonesttimeoutprefix, never a completedaction/count/AFTER witness. N2 extends strict replay with guard windows/baseline/sequence, hook-state consistency and host pair/script/settings/callback equality. Started HTTP must settle before action completion. New record failures code GUARD_INVALID/HOST_INVALID/HOOK_INVALID; no positive fallback. Completed entered NOTICES requires hook baseline and before/after probes even if action throws without HTTP. A genuinely blocked NOTICES may omit baseline; timeoutprefix may stop before baseline/final. Final hook-state freezes every diagnostic record; any later record is HOOK_INVALID. Late observer completions are discarded after final.",
+  "controls": {
+    "testFirst": {
+      "bytes": 78151,
+      "sha256": "cd4d4a0174be09c8dcae12c6a3b222de0d5f7151d2b0b94dd30f9caa5b6eedad",
+      "gitBlob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+      "blob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+      "fullReadback": true
+    },
+    "expected": {
+      "accepted": 6,
+      "rejected": 21,
+      "probeChecks": 3,
+      "roundtrips": 6,
+      "witnessRejected": 2,
+      "slotChecks": 5,
+      "guardAccepted": 3,
+      "guardRejected": 7,
+      "guardTransitions": 6,
+      "invarianceChecks": 10,
+      "guardRecordRejected": 12
+    },
+    "meaning": "Concrete corrected data before N2 implementation; all executions pending Root cloud. Preserve N1 controls plus guard parsing/transitions/invariance/record negatives. Synthetic controls are not Source/native evidence."
+  },
+  "limits": {
+    "node": "v22.23.4",
+    "sdk": "1.2.1",
+    "totalMs": 330000,
+    "childMs": 180000,
+    "caseMs": 120000,
+    "jobMinutes": 7,
+    "incomingMs": 30000,
+    "childLeaseMs": 5000,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "outcomeBytes": 24576,
+    "journalBytes": 32768,
+    "journalRecords": 128,
+    "artifactDays": 7,
+    "metadataObservationMs": 1000,
+    "probePrivateBytes": 131072,
+    "probeObservations": 2048,
+    "probeCalls": 32,
+    "probeBusiness": 64,
+    "guardMessageBytes": 2048,
+    "newGuardRecords": 8,
+    "hostCalls": 5,
+    "scriptMetadataBytesMax": 33554432,
+    "scriptMetadataContext": "Observer hashes existing strings/bytes under existing32MiB archive bound; no product/source cap increase."
+  },
+  "custody": "Same3actuallaunches ownedpreflight/actualbootstrapENOENT/native4; actualnonrootUID/GID/cleargroups/privateonlylo/no-new-privs/envallowlist/0600ownedjournal/owncleanup. ExactBASEparent/head/tree/run decimalstring/attempt1/job/index/fixedNode, oneusebranch/message. RootindependentAPI/job/step/artifact/replayjoin. Qualificationfalseunconditional.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "optionProof": "Every actual constructor/assembly/mount/adopt argument uses the same original converted object: snapshot before adding root handleStructuredLogs, then compare argument data/scripts/callback/reference identities; observe again synchronously after original return/existing await. No second compile/world, clock normalization, method/proxy/promise wrapper or pre-existing logger overwrite. Only logger is excluded from hash; all other properties retain order/undefined/-0/bytes/function identity. Constructor compiled M/QA are null; others must match the actual same f.firstConnectionBuild. Hash comparisons are within one current argument, not across legitimate phase settings. This proves public argument/call observations, not hidden #sharedOpts. Runtime callbackObserved is separate true|null. Root logger own descriptor is inspected before reading/installing; accessors rejected without getter/setter execution. Valid absent/data-undefined/same diagnostic handler are preserved; install uses an own data descriptor. Reflection failure stays diagnostic and never replaces business thrown value.",
+  "guards": "Exact existing3tags only, private payload<=2048B with exact keys/types/canonical JSON. Callback synchronous, nonthrowing/no await/RPC, never forwards any Worker log. Baseline after PHASE excludes earlier tags. One owned journal: guardSequence1..8, actual Node window derived from HTTP events and AFTER; duplicate/cascade/late arrivals remain observations, correlated:null and interpretation unknown. Parent-holders lacks current at/m: expiry/regression booleans null. No remainingMs/absolute clocks/timestamps/raw message/JSON/stack/IDs. Missing callback/tag stays unknown. Normative windows72480: baseline=unscoped; GETenter stays notices-get through response/body pending then return/throw unscoped. POSTenter stays notices-post through body pending then after-post through action/probe/count. AFTERenter unscoped through settlement; final freezes. Prebaseline prerequisite tags are excluded, never public prerequisite records. Arrival does not authenticate delayed phase/cascade origin.",
+  "guardProjection": {
+    "tags": [
+      "initial-parent-holders",
+      "initial-parent-clock",
+      "initial-child-clock"
+    ],
+    "windows": [
+      "prerequisite",
+      "notices-get",
+      "notices-post",
+      "after-post",
+      "unscoped"
+    ],
+    "parentHolders": "closed/aborted boolean; alive/expiry/regression null",
+    "parentClock": "closed/aborted; alive null; wallExpired at>=end; monoExpired m-mono>=end-entered; wallRegressed at<last; monoRegressed m<lastMono",
+    "childClock": "closed null; alive/aborted; wallExpired wall>=until; monoExpired monotonic-m0>=until-began; regressions wall<began/monotonic<m0 are observations, not proven cause"
+  },
+  "hostRecords": "host-proof exact call1constructor,2assembly,3mount,4adopt connection,5adopt notices if it occurs. prepared then returned on same argument; hashes/scripts/identities unchanged. A constructor/method exception leaves only prepared/openCall, never invented returned. A positive NOTICES action/nativePASS requires5completed calls; POST503/bodythrow cannot containcall5. Hook-state baseline before notices probe/HTTP, final after AFTERsettlement; callbackObserved true|null, excludedTags0..4096, newGuards0..8, fault false for valid capture."
+}

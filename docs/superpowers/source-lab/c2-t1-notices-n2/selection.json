@@ -1,0 +1,61 @@
+{
+  "schema": "afw.c2-notices-n2.selection.v1",
+  "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+  "node": "v22.23.4",
+  "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+  "pattern": "^(N2_CONNECTION|N2_OAUTH|N2_PHASE|N2_NOTICES)$",
+  "selected": [
+    {
+      "id": "N2_CONNECTION",
+      "work": "fresh actual world and approve connection; actual1/1/1 assertion"
+    },
+    {
+      "id": "N2_OAUTH",
+      "work": "actual world.oauth"
+    },
+    {
+      "id": "N2_PHASE",
+      "work": "actual corrected phase mutation/compiled denial/noSEND/exactrestore"
+    },
+    {
+      "id": "N2_NOTICES",
+      "work": "one actual notices chooseGET/post ifGET returns; actual2/2/2 assertion"
+    }
+  ],
+  "declaredNotRun": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ],
+  "normalCompilation": {
+    "S10": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+    "PH": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+    "OP": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+    "WORK": "068d35c2555c7dc711c487f6021ec572bd3af067"
+  },
+  "registration": "eager4 native root sequential+globalAFTER; after any action/count failure later callbacks emit actualNode failure PREREQUISITE_BLOCKED/workEnteredfalse without work/count/HTTP",
+  "SourceQualified": false,
+  "nodeOnlyS10": {
+    "before": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+    "scope": "Synchronous option preparation/comparison around original constructor and existing setOptions awaits only; no compile input/onLoad/entry-string/guard change."
+  },
+  "bindingRule": "N2 journal binding includes sourceIndexHash,driverHash,selectionHash,helperHash,readerHash,slotHash,loggerHash,worldHash; helper/overlays pinned separately in packet. No historical occurrence relabeling."
+}
