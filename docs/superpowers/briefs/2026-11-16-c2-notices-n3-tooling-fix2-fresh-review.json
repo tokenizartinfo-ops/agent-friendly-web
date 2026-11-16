@@ -1,0 +1,100 @@
+{
+  "schema": "AFW-C2-N3-TOOLING-FIX2-FRESH-REVIEW-BRIEF/1",
+  "atUTC": "2026-11-16 16:52:16 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "task": "Independent SPEC then QUALITY review of N3.A QA-only ledger/compiler controls, round3 actual41PASS. Return findings only, no patches.",
+  "scope": {
+    "root": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls-fix2.yml",
+    "packet": "e1f1b666726b2eb433d4d2d96f7266ca0c951308",
+    "index": "906cfbea830100065eebdccb18d0810f8b207efb",
+    "report": "e822a3d3c27d1e97d8eb8174a38b1d708e836a21",
+    "diff": "edd5dacc84244ab5cbe1d53182fc60bf8158e683",
+    "reversibles": "2a6d230d344db3c0245ab7670a7a2974007b764d",
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "units": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+    "runner": "d08312eb79e5283d21897e147c989a6d09888081",
+    "workflowBlob": "06a16595c5d801ddf17168140519002fb9aa2bc3",
+    "schema": "23bed32784cb27a4d0b8981fad862b851456fffb",
+    "selection": "f5b7201b8fad54a7b0bbfb8b4ba221e370fef079",
+    "supplement": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95",
+    "anchorAudit": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+    "vectors": "7e4cae13603483c46e5e8ca7872290d00eb1de3a"
+  },
+  "authority": {
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "semantics": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "boundedPrefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
+    "contract": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+    "seams": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac"
+  },
+  "primary": {
+    "rootGate": "2c6df35062e0316334d5599df222aa2625f9272a",
+    "nativePrimary": "6d2ae3f2396c1ef71ebba0263a55001422373000",
+    "proof": "3a8781f6a2646a3a00c521fc7f25b6a35d314ac8",
+    "close": "e9bae275ebfcd092cc4014b281eead8c03d06a4a",
+    "testedHead": "91ac03eae0a3ee384d23886bd2f814de54c59bc3",
+    "testedTree": "d0d7b38bfd4f53950db6e3eee4e1e1ead62ab860",
+    "closedHead": "13ff68c37de9c4f3c71629cc39ed5521e3422447",
+    "run": 43911561091,
+    "attempt": 1,
+    "job": 133454520846,
+    "nativeCommand": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/run-controls.mjs",
+    "nativeResult": "41/41PASS;0fail/cancel/skip/todo/extra/missing; 24input hashes; Node22.23.4; originalcallbacks reducers31→24 and34→24; primary,canonicalproof,ZIPdigest/CRC/strictdeflate,API/head/tree/step all Root joined",
+    "artifacts": "Root consumed once; DO NOT refetch logs/artifact or rerun"
+  },
+  "requirements": [
+    "QA instrumentation only, actual existing object refs, synchronous callbacks, no new RPC/callback/reaction/clock budgets",
+    "one after-probe snapshot in same actual realm; null root resolution via same alreadybound lease/promise, entityRef not independentresolver; conflicts ambiguous; gaps never fabricated complete",
+    "canonical pair p2 is actual observeOwnerPhasePair returned promise; lease canonical WORKscope, original repeatedretain and then callbacks kept, settled delete true thenfalse preserved",
+    "target markers surround first PH780 await inside retainedaction763; logical throw may precede late actualtargetterminal; target/p2/logical axes independent",
+    "abort and close events honor cited matrix; nested markerorder may differ; nofakeclosecall at parentabort/finally",
+    "deterministic reducer31/34raw to24events; anyomission=>prefix/PROJECTION_GAP; preserve mandatorymarkers,firstscopeerror,earliestfocuscheck,canonicalp2,firstcloses/aborts,focus/aliases/order; overflowunknown",
+    "record6144B inclLF/envelope;max8leases4promises4errors24events seq1..4096;privatecapsunchanged;nonclaimsfalseremain",
+    "transform exactselectors count1,fullbeforeimages and reversibles; first2activationlinesoccur2 (upload+activation), thirdoriginaldescribeActivationline selects1; oracle measured==newMatches==newRequired==1",
+    "raw/prepared anchors audited together with8preparer needles7correlators; other3PHclockcalls/upload untouched;PHtransform deferred in common actualsetup only, remains required on PHattach,FIRST_TARGET_ONLY,REVERSIBLES",
+    "runner actual41IDs, allToolingBodiesReturned fromexecutedbodies, no precomputedresults, boundeddiagnosticWeakMap; expectednegativecases cannot mask operationalfailure"
+  ],
+  "declinedScope": [
+    "Source business execution",
+    "C final manifest/runner/WF admission",
+    "OWN receiver currently separate threeP2fixloop",
+    "fullTask1qualification",
+    "product runtime",
+    "Cloudflare",
+    "release",
+    "PCoff"
+  ],
+  "allowed": [
+    "read cited immutable blobs/source strings as DATA",
+    "bounded exact counts/static code review",
+    "create detached reviewJSON blob/fullreadback only"
+  ],
+  "forbidden": [
+    "Source imports/eval/compile/syntax/tests locally",
+    "local files/deps/builds",
+    "new refs/runs",
+    "patch implementation",
+    "live resources",
+    "broad new architecture audit",
+    "subagents"
+  ],
+  "output": "One concise immutable JSON report: SPEC PASS/FAIL and QUALITY PASS/FAIL; concrete severity/id/file/blob/line/counterexample if actionable. Preserve known native41PASS scope. Findings must concern reviewed tooling, not deferred product work. No speculative new requirements or code patches.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
