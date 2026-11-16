@@ -1,0 +1,40 @@
+{
+  "schema": "afw.c2-notices-n3.root-independent-progress-axes.v1",
+  "atUTC": "2026-11-16 15:10:57 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "outerSubpackage": "8546c47b505ed0f1ff0b9d4b29d45c9f137d4b29",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "boundedPrefix": "d2831f0c1e3482550043413f60560d19be2eb4af"
+  },
+  "basis": {
+    "type": "Original source text and Source author's exact seam confirmation; no Source execution",
+    "initialLease": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+    "phase": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+    "facts": [
+      "InitialLease.child waits on wait(actual,l), a Promise.race of retained actual work versus child abort.",
+      "PH706/763 supplies the actual async action containing the first await recheckOwned at PH780.",
+      "Target markers surround that first await INSIDE the retained action, not the outer await withChild.",
+      "The outer wait may reject and reach choice-catch before the retained action resolves or throws its target await."
+    ]
+  },
+  "rules": [
+    "Keep coordinator logical-return/throw and target-enter/return/throw as independent observed axes. Exactly one logical terminal; exactly one target-enter and at most one target terminal for the selected first target.",
+    "A logical-throw may be recorded while target remains entered, and target-return/throw may be observed afterward before cut. The late target event cannot replace the earlier scope-first-error or logical outcome.",
+    "Do not reject later continuation observations solely because logical-throw was already recorded. Per-target order still requires enter before terminal and pair-enter after target-enter; target-return requires the actual pair invocation.",
+    "Logical failure while target remains entered is prefix with an explicit appropriate reason, never complete. Later complete declared focus coverage does not convert the logical failure into business success.",
+    "Target=unreached means only that first postreceipt target was not observed to enter by cut. Activation-child and its original retained Promise may already exist and fail earlier; do not reject or omit them solely for unreached.",
+    "Do not derive target terminal from p2 settlement or coordinator terminal. p2 settlement, target await and logical decision are three separate observations.",
+    "Any reducer omission remains prefix/PROJECTION_GAP and preserves observed target terminals as mandatory. Source observation order is not global physical-cause order."
+  ],
+  "scope": "No new wire keys, clocks, reads, reactions, callback replacement, capacity or source qualification. Dedicated finite axis controls may sit outside fixed31/32 Source causal corpus counters; preserve all old bodies/RED.",
+  "requiredControls": "Independent literals and coherent transports for logical-throw before target terminal, still-entered at cut, late target terminal without first-error overwrite and unreached with activation child/promise; actual original child-race/retained-continuation seam controls in Source tooling. Invalid duplicate terminals, reverse target-local order and fake completion stay rejected.",
+  "SourceExecutionAuthorizedHere": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
