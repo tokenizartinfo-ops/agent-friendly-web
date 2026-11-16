@@ -1,0 +1,160 @@
+{
+  "schema": "afw.root-own.next-get-replay-fix1.index.v1",
+  "status": "PENDING_ROOT_CLOUD_VERIFICATION_AND_SCOPED_REVIEW",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "brief": "d0de50d7da0c4d64cebdc877174f2c20d1e89790",
+    "acceptedReview": "3ed88e043b13b5b88d6f44d565769dfdb643c25d"
+  },
+  "prefix": "docs/superpowers/root-own/c2-next-get1-fix1/",
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/reader.mjs",
+      "blob": "9e972bfee039512f0827488cec4645332645e2b1",
+      "bytes": 21483,
+      "sha256": "12058b5967efb97fe88d52e3578a1775c04b18ee0046f2936e40a0866e94999c",
+      "gitBlob": "9e972bfee039512f0827488cec4645332645e2b1",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/run-controls.mjs",
+      "blob": "21a0bef854d85ec1e588d0c8e6f30c2dad73fdb2",
+      "bytes": 20057,
+      "sha256": "ca18f96a2d9800029762afadc2532083a9cb7bb803ec5d39e3f44c7e0d7fa9a6",
+      "gitBlob": "21a0bef854d85ec1e588d0c8e6f30c2dad73fdb2",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/replay-fix1-vectors.json",
+      "blob": "0524cf6ae378664fc75d11067bb9172d0396f88b",
+      "bytes": 73167,
+      "sha256": "6dbcf3fb098b2e85e5077c70b77a8f507d77924e17aa14451f12c287a1186fa1",
+      "gitBlob": "0524cf6ae378664fc75d11067bb9172d0396f88b",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/replay-fix1-red.json",
+      "blob": "463f4957b639f806e7704b422c2dbcbe25b6e740",
+      "bytes": 1458,
+      "sha256": "24dc526833f2332a22f0cb13a6410c09e6848d28cfcdcb0de35154ce44e33337",
+      "gitBlob": "463f4957b639f806e7704b422c2dbcbe25b6e740",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/control-results.json",
+      "blob": "dd85c41056ea0f02a711695dc63853c59ab0dd13",
+      "bytes": 3591,
+      "sha256": "5c16b333539223489c25d5d08b049c0f681752f6194011cce436b88dc911b5dd",
+      "gitBlob": "dd85c41056ea0f02a711695dc63853c59ab0dd13",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/vectors.json",
+      "blob": "cbaa7906025c3cf0ffd5aeefaff0b936700b08b0",
+      "bytes": 23875,
+      "sha256": "5d2af89cb324618ed6d353f6376efe031b67f6b72adc1465f91017c9f6d05bf4",
+      "gitBlob": "cbaa7906025c3cf0ffd5aeefaff0b936700b08b0",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/schema.json",
+      "blob": "7d317a0ab090924c47c1fcf66f948d51660cfd1e",
+      "bytes": 17050,
+      "sha256": "88e94592dc14dadf3751496a2367ee502bc4c45ba942bc2a6bc0363164e79d5d",
+      "gitBlob": "7d317a0ab090924c47c1fcf66f948d51660cfd1e",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/admission.json",
+      "blob": "ef6cc0db137643934c611e95b85200c26d4ea664",
+      "bytes": 1363,
+      "sha256": "5ef2a7e9f93e37e7279e20c8aebf83cd2d80033c04e211d29cb0d9c7f025b398",
+      "gitBlob": "ef6cc0db137643934c611e95b85200c26d4ea664",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/reversible-diff.json",
+      "blob": "4a2e6b24654cb4977be30bab2c43cccabc30b039",
+      "bytes": 6232,
+      "sha256": "77b8554ded3760dca0249531209a3f3d7c12189165e40ffc81081ab57de7c371",
+      "gitBlob": "4a2e6b24654cb4977be30bab2c43cccabc30b039",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/report.json",
+      "blob": "529b059e045e8221c4ccf1e66e200fff3b18402b",
+      "bytes": 9426,
+      "sha256": "7fbcc221be337b404bd70cf73b93178912a1c3c6b95ee50b46085d12598ba911",
+      "gitBlob": "529b059e045e8221c4ccf1e66e200fff3b18402b",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "runtimeMountOnly": [
+    "reader.mjs",
+    "run-controls.mjs",
+    "vectors.json",
+    "schema.json",
+    "admission.json",
+    "replay-fix1-vectors.json"
+  ],
+  "cloud": {
+    "owner": "Root only",
+    "command": "node docs/superpowers/root-own/c2-next-get1-fix1/run-controls.mjs",
+    "node": "v22.23.4",
+    "branch": "lab/afw-c2-own-receiver-20261116-nextget-fix1",
+    "job": "c2-next-get-own-fix1",
+    "message": "AFW-C2-NEXT-GET-OWN-FIX1-ONEUSE-20261116",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "expectedCounts": {
+      "journal": 33,
+      "apiLogSchema": 46,
+      "preGetMetadata": 3,
+      "fullInput": 37,
+      "replayFix1": 13,
+      "total": 132,
+      "failed": 0
+    },
+    "authorRanNativeModuleGraph": false
+  },
+  "testFirst": {
+    "oldAcceptedNewNegatives": 6,
+    "oldAcceptedIntendedPositives": 7,
+    "newRejectedNegatives": 6,
+    "newAcceptedPositives": 7,
+    "fullGlueCoherentRebinding": true,
+    "testFirstPersistedVectors": "0524cf6ae378664fc75d11067bb9172d0396f88b",
+    "testFirstRed": "463f4957b639f806e7704b422c2dbcbe25b6e740"
+  },
+  "scope": "Mandatory encountered-site firstenter; every positive counter joined to matching firstedge; snapshot lastElapsed >= max observed site edge time. Prior reverse lower-bound/missing-site and monotonic checks retained. Repeat totals and empty preGET preserved. No Source/schema/admission/Sourcebinding change.",
+  "lineage": {
+    "preimageModule": "733c2039ddfb68d1a0271507b07754228c29be55",
+    "preimageRunner": "741b3760728ef8ec39d2a9ee131150c9b642d4af",
+    "historicalActual119": "b53ed0bd19e18b8173fdee1f2ffdbc631f10cde5",
+    "historicalLogsRefetched": false,
+    "SourceDiagnosticHeld": true
+  },
+  "rollback": "Omit additive fix1 prefix/discard detached packet. Full preimages and exact reversible char spans supplied. No refs/runs/files/runtime changed by author.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

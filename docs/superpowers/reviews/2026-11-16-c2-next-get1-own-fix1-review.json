@@ -1,0 +1,83 @@
+{
+  "schema": "afw.c2-next-get.root-own-fix1-scoped-rereview.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authorityBrief": "af67db418a51003688a22acd06f150970585398e",
+  "priorReview": "3ed88e043b13b5b88d6f44d565769dfdb643c25d",
+  "scope": "Fix1 of the two prior P2 receiver findings and new breakage caused by this bounded diff only. Full Source/Task1 specification and quality review remain separate.",
+  "pins": {
+    "module": "9e972bfee039512f0827488cec4645332645e2b1",
+    "moduleBytes": 21483,
+    "moduleSha256": "12058b5967efb97fe88d52e3578a1775c04b18ee0046f2936e40a0866e94999c",
+    "runner": "21a0bef854d85ec1e588d0c8e6f30c2dad73fdb2",
+    "runnerBytes": 20057,
+    "runnerSha256": "ca18f96a2d9800029762afadc2532083a9cb7bb803ec5d39e3f44c7e0d7fa9a6",
+    "diff": "4a2e6b24654cb4977be30bab2c43cccabc30b039",
+    "vectors": "0524cf6ae378664fc75d11067bb9172d0396f88b",
+    "vectorsBytes": 73167,
+    "vectorsSha256": "6dbcf3fb098b2e85e5077c70b77a8f507d77924e17aa14451f12c287a1186fa1",
+    "testFirstRED": "463f4957b639f806e7704b422c2dbcbe25b6e740",
+    "results": "dd85c41056ea0f02a711695dc63853c59ab0dd13",
+    "packet": "470837ade091337d714a4ed2c49eb9c786bb1e9e",
+    "implementerReport": "529b059e045e8221c4ccf1e66e200fff3b18402b",
+    "primaryActualCloudEvidence": "060df6efb35fd97d713667f29bdc589103d92ec5"
+  },
+  "method": "Immutable DATA inspection only. Reconstructed exact module and runner char-span deltas forward and reverse against already reviewed full preimages; both directions match. Read all 13 concrete vectors as ordinary JSON and inspected every record delta and complete observation against the unchanged base. Hashing treated source texts only as inert strings using builtin SHA256. No Source/observer/parser/module execution, eval, import, compile or tests; no files/dependencies/clones, logs refetch, refs/runs/runtime/browser/mail/keys or subagents. Only report blob creation/readback is performed.",
+  "verdict": {
+    "specification": "PASS",
+    "quality": "PASS",
+    "scopeClean": true,
+    "newActionableFindings": 0
+  },
+  "findings": [
+    {
+      "number": 1,
+      "priorTitle": "Join positive Worker counters back to their mandatory first edges",
+      "status": "ADDRESSED",
+      "file": "docs/superpowers/root-own/c2-next-get1-fix1/reader.mjs",
+      "startLine": 100,
+      "endLine": 105,
+      "reason": "Line101 requires an encountered site's first enter and matching first edge for every positive entered/returned/threw counter. Existing reverse lower bounds, arithmetic and missing-site constraints remain at lines99/102/105. Phantom positive and all-zero rows and absent return/throw first edges now reject. The loop is empty for a legitimate empty preGET snapshot; totals greater than one remain valid because matching first edges are flags rather than total counts.",
+      "coverage": "Four coherent negative full-input vectors plus empty snapshot, repeated totals and return/throw repeated totals positives; all witness/journal/observation/frame/artifact copies consistently rebound."
+    },
+    {
+      "number": 2,
+      "priorTitle": "Bind snapshot lastElapsed to observed first-edge times",
+      "status": "ADDRESSED",
+      "file": "docs/superpowers/root-own/c2-next-get1-fix1/reader.mjs",
+      "startLine": 94,
+      "endLine": 102,
+      "reason": "Line94 tracks each site's greatest observed edge workerElapsedMs. Line101 rejects a snapshot row lastElapsed below that site's maximum. Existing row upper bound and snapshot monotonicity remain at lines99/102. An observed site always initializes the map before use; zero is valid and handled without a truthiness test.",
+      "coverage": "Both earlier-lastElapsed coherent negatives now reject. Same timestamp, increasing edge clocks, equal-time repeat snapshots and increasing repeat snapshots remain positive."
+    }
+  ],
+  "newBreakageAssessment": "No actionable new breakage found within the three module spans or runner/control diff. Receiver schema, trusted admission, Source next-get1 branch/job pins, previous119 control bodies and all other module bytes remain unchanged. The new predicates preserve the permitted empty/same-time/repeated-call cases. Synthetic archive digest rebinding is explicitly labelled control-only, and does not claim a downloaded archive.",
+  "evidence": {
+    "actualRun": 43837804273,
+    "attempt": 1,
+    "job": 133198695458,
+    "head": "360b391c1194ab024572b0c55d14f36394aa00f9",
+    "tree": "1b06948ab23d823b0a0138b4f9a0cf748203c912",
+    "nativeRootOnlyImportGraph": true,
+    "passed": 132,
+    "failed": 0,
+    "priorControls": 119,
+    "newNegatives": 6,
+    "newPositives": 7,
+    "interpretation": "Credited from the immutable primary joined evidence; no logs refetched and no independent execution by this reviewer. Implementer results report was pre-cloud and does not itself establish native execution. The newer primary evidence covers the final module/vector hashes."
+  },
+  "authorityBoundary": "This scoped PASS clears the two receiver review findings only. It does not itself activate Source, authorize business/runtime operations, or establish Source/Task1 qualification or PC-off operation. Root retains separate activation and preservation gates.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

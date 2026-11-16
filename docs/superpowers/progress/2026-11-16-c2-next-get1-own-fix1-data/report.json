@@ -1,0 +1,193 @@
+{
+  "schema": "afw.root-own.next-get-replay-fix1.report.v1",
+  "status": "PENDING_ROOT_CLOUD_VERIFICATION_AND_SCOPED_REVIEW",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached immutable OWN DATA; only OWN pure functions and synthetic JSON executed in Node RAM",
+  "authority": {
+    "brief": "d0de50d7da0c4d64cebdc877174f2c20d1e89790",
+    "review": "3ed88e043b13b5b88d6f44d565769dfdb643c25d",
+    "reviewAuthority": "69eac802655250a577555bb157d7a0acf178ac7a"
+  },
+  "lineage": {
+    "modulePreimage": "733c2039ddfb68d1a0271507b07754228c29be55",
+    "runnerPreimage": "741b3760728ef8ec39d2a9ee131150c9b642d4af",
+    "priorActualRootOnlyEvidence": "b53ed0bd19e18b8173fdee1f2ffdbc631f10cde5",
+    "priorRun": 43835250058,
+    "priorJob": 133190138462,
+    "priorActualControls": 119,
+    "logsRefetched": false,
+    "priorEvidenceScope": "Historical actual Root-only native ESM graph; not a fresh native graph or Source occurrence. Author read immutable primary DATA only."
+  },
+  "changes": {
+    "finding1": "At each worker-state, every emitted encountered-site row must have recorded first enter. Each positive entered/returned/threw counter must have its corresponding first edge. Existing reverse lower-bound and missing-site predicates remain unchanged. A phantom all-zero row also rejects because only actually encountered sites may appear.",
+    "finding2": "Track greatest observed workerElapsedMs per site and require each corresponding snapshot lastElapsed >= that maximum. Existing <= snapshot time and monotonic snapshot time/counter rules remain unchanged.",
+    "preserved": "Repeated-call totals may exceed one; first edges are first-only. Empty preGET stats[] remains valid. Source product/helper/fixtures/schema/admission and trusted Source next-get1 branch/job remain byte-identical.",
+    "runner": "Only OWN control-host branch/message/job/new script path rebound per brief; old119 control bodies retained,13 finite full-glue controls appended. No WF created."
+  },
+  "testFirst": {
+    "vectors": "0524cf6ae378664fc75d11067bb9172d0396f88b",
+    "red": "463f4957b639f806e7704b422c2dbcbe25b6e740",
+    "order": "Read brief/review and full OWN preimages/DATA. Ran old119 OWN controls. Before module edits, built13 concrete ordinary JSON record+summary vectors and executed them through a full API/log/frame/artifact input with all canonical witness bytes/hash, journal hash, observation/checkpoints and payload copies consistently rebound. Every one of six negatives was accepted by old module, as were seven intended positives. Persisted vector/red blobs with FULLreadback before edits.",
+    "coherentRebind": "Canonical witness bytes and SHA256, journal bytes/hash, observation projection/checkpoints, exact outcome frame and artifact body+LF all rebuilt. Synthetic archive digest/listing agree for control custody only; no real ZIP/native artifact was created or claimed.",
+    "negatives": [
+      "Phantom positive timeline row without edges",
+      "All-zero phantom timeline row",
+      "Positive return count without first return edge",
+      "Positive throw count without first throw edge",
+      "lastElapsed0 before enter1/return3",
+      "lastElapsed2 before return3"
+    ],
+    "positives": [
+      "Empty preGET snapshot",
+      "Same timestamp edges/snapshot",
+      "Increasing observed edge times",
+      "Repeated totals with one enter/return first edge each",
+      "Same-time repeat snapshot",
+      "Increasing-time repeat snapshot",
+      "Repeated returned/thrown totals with both matching firstedges"
+    ]
+  },
+  "verification": {
+    "executed": "OWN pure functions/control bodies directly in RAM, immutable ordinary JSON DATA and built-in crypto only. Revised runner control bodies were also extracted as OWN code and executed in RAM with its JSON read replaced by the in-memory vector object. Host guards/import graph/process output were not executed.",
+    "preservedControls": {
+      "journal": 33,
+      "apiLogSchema": 46,
+      "preGetMetadata": 3,
+      "fullInput": 37,
+      "total": 119,
+      "failed": 0
+    },
+    "newControls": {
+      "total": 13,
+      "rejectedNegatives": 6,
+      "acceptedPositives": 7,
+      "failed": 0
+    },
+    "total": 132,
+    "failed": 0,
+    "nativeModuleGraphExecutedByAuthor": false,
+    "forwardAndReverseDiffVerified": true
+  },
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/reader.mjs",
+      "blob": "9e972bfee039512f0827488cec4645332645e2b1",
+      "bytes": 21483,
+      "sha256": "12058b5967efb97fe88d52e3578a1775c04b18ee0046f2936e40a0866e94999c",
+      "gitBlob": "9e972bfee039512f0827488cec4645332645e2b1",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/run-controls.mjs",
+      "blob": "21a0bef854d85ec1e588d0c8e6f30c2dad73fdb2",
+      "bytes": 20057,
+      "sha256": "ca18f96a2d9800029762afadc2532083a9cb7bb803ec5d39e3f44c7e0d7fa9a6",
+      "gitBlob": "21a0bef854d85ec1e588d0c8e6f30c2dad73fdb2",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/replay-fix1-vectors.json",
+      "blob": "0524cf6ae378664fc75d11067bb9172d0396f88b",
+      "bytes": 73167,
+      "sha256": "6dbcf3fb098b2e85e5077c70b77a8f507d77924e17aa14451f12c287a1186fa1",
+      "gitBlob": "0524cf6ae378664fc75d11067bb9172d0396f88b",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/replay-fix1-red.json",
+      "blob": "463f4957b639f806e7704b422c2dbcbe25b6e740",
+      "bytes": 1458,
+      "sha256": "24dc526833f2332a22f0cb13a6410c09e6848d28cfcdcb0de35154ce44e33337",
+      "gitBlob": "463f4957b639f806e7704b422c2dbcbe25b6e740",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/control-results.json",
+      "blob": "dd85c41056ea0f02a711695dc63853c59ab0dd13",
+      "bytes": 3591,
+      "sha256": "5c16b333539223489c25d5d08b049c0f681752f6194011cce436b88dc911b5dd",
+      "gitBlob": "dd85c41056ea0f02a711695dc63853c59ab0dd13",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/vectors.json",
+      "blob": "cbaa7906025c3cf0ffd5aeefaff0b936700b08b0",
+      "bytes": 23875,
+      "sha256": "5d2af89cb324618ed6d353f6376efe031b67f6b72adc1465f91017c9f6d05bf4",
+      "gitBlob": "cbaa7906025c3cf0ffd5aeefaff0b936700b08b0",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/schema.json",
+      "blob": "7d317a0ab090924c47c1fcf66f948d51660cfd1e",
+      "bytes": 17050,
+      "sha256": "88e94592dc14dadf3751496a2367ee502bc4c45ba942bc2a6bc0363164e79d5d",
+      "gitBlob": "7d317a0ab090924c47c1fcf66f948d51660cfd1e",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-next-get1-fix1/admission.json",
+      "blob": "ef6cc0db137643934c611e95b85200c26d4ea664",
+      "bytes": 1363,
+      "sha256": "5ef2a7e9f93e37e7279e20c8aebf83cd2d80033c04e211d29cb0d9c7f025b398",
+      "gitBlob": "ef6cc0db137643934c611e95b85200c26d4ea664",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "fullPreimages": [
+    {
+      "role": "receiver",
+      "blob": "733c2039ddfb68d1a0271507b07754228c29be55",
+      "bytes": 21262,
+      "sha256": "11fa5e8b4bff03be3fd41a57fae0e9529bc33e49de951d8b43f5bb4cccad0ff5",
+      "gitBlob": "733c2039ddfb68d1a0271507b07754228c29be55",
+      "fullReadback": true
+    },
+    {
+      "role": "runner+controls",
+      "blob": "741b3760728ef8ec39d2a9ee131150c9b642d4af",
+      "bytes": 17592,
+      "sha256": "57b5b03dcdbebf46e7179976711051426d07d16c7fd302f63b3da9062c2a83c9",
+      "gitBlob": "741b3760728ef8ec39d2a9ee131150c9b642d4af",
+      "fullReadback": true
+    }
+  ],
+  "rootCloud": {
+    "command": "node docs/superpowers/root-own/c2-next-get1-fix1/run-controls.mjs",
+    "node": "v22.23.4",
+    "branch": "lab/afw-c2-own-receiver-20261116-nextget-fix1",
+    "message": "AFW-C2-NEXT-GET-OWN-FIX1-ONEUSE-20261116",
+    "job": "c2-next-get-own-fix1",
+    "expectedControls": 132,
+    "expectedFailed": 0,
+    "owner": "Root only; no execution/ref authorization inferred beyond brief"
+  },
+  "pending": [
+    "Root actual native OWN module graph with132/0",
+    "Independent scoped re-review of accepted P2 findings"
+  ],
+  "boundary": "No Source/product/observer/parser code fetched for implementation, executed, imported, evaluated, compiled, syntax-checked, materialized or changed. No files/deps/clones, log refetch, refs/runs/runtime/browser/mail/keys/subagents/questions. Source diagnostic activation remains held; Root owns all cloud work.",
+  "rollback": "Discard detached fix1 packet or omit additive new prefix. Full original module/runner pins plus exact char spans reconstruct both directions. No historical/source file or ref changed.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
