@@ -1,0 +1,357 @@
+{
+  "schema": "afw.c2-source-index.v1",
+  "context": {
+    "project": "AFW",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "immutable Source DATA; isolated keyless GitHub Source lab proposal",
+    "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "resourceType": "immutable blobs",
+    "resourceId": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/",
+    "allowedAction": "create+FULLreadback Source DATA only; Root owns any future cloudexecution/ref",
+    "rollback": "abandon proposal; before blobs are full recoverable preimages at pinned closed source; remove only own isolated runner temp after run",
+    "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "core": "3201",
+    "coreSha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "brief": "082aae20168e4357d30c17a84f3f99582b945f6a",
+    "plan": "3434f31d432084d1b6153f85d3b8c64c8e043850",
+    "contract": "567c84adcda2355c7eeef39656d5a1f1101262ed",
+    "status": "SOURCE_TESTS_PENDING"
+  },
+  "entries": [
+    {
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "before": {
+        "blob": "7eb8f28760de60f143e487eeb6988705059a0a44",
+        "bytes": 126504
+      },
+      "after": {
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "gzipBytes": 32414
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "role": "product"
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "before": {
+        "blob": "152e730f83af7ef063b6b1db89f8b0a779c2b60e",
+        "bytes": 45255
+      },
+      "after": {
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+        "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "gzipBytes": 11301
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "role": "product"
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "before": {
+        "blob": "e760b3579a38f1dbb73b177bb73b06d814eb881f",
+        "bytes": 2505
+      },
+      "after": {
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+        "gitBlob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "gzipBytes": 1110
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "role": "product"
+    },
+    {
+      "path": "worker/mcp-own/finite.mjs",
+      "before": {
+        "blob": "15441b6c0c779f733db65a3b59a3a9e1738d19dc",
+        "bytes": 2758
+      },
+      "after": {
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+        "gitBlob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "gzipBytes": 1061
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "role": "product"
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "before": null,
+      "after": {
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+        "gitBlob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "gzipBytes": 1592
+      },
+      "newFile": true,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "role": "product"
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "before": {
+        "blob": "1a5a2583d266179cdd89f799c64199f29044fec5",
+        "bytes": 89322
+      },
+      "after": {
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+        "gitBlob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "gzipBytes": 26076
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "role": "product"
+    },
+    {
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "before": {
+        "blob": "0a04ae3a4d74c2c7939b1654683054b1d5d751d4",
+        "bytes": 22438
+      },
+      "after": {
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+        "gitBlob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "gzipBytes": 6767
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "role": "product"
+    },
+    {
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "before": null,
+      "after": {
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+        "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "gzipBytes": 1050
+      },
+      "newFile": true,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "role": "test"
+    },
+    {
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "before": null,
+      "after": {
+        "blob": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+        "bytes": 14244,
+        "sha256": "029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318",
+        "gitBlob": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+        "gzipBytes": 4362
+      },
+      "newFile": true,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "role": "test"
+    },
+    {
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "before": {
+        "blob": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+        "bytes": 57864
+      },
+      "after": {
+        "blob": "ec57e55ea2d8f68c992af26bccca0c6e71a79f96",
+        "bytes": 60636,
+        "sha256": "092a1d8dd44b99a16e522f09234a2b0f4bf62e6575ac99664be516fc7673920d",
+        "gitBlob": "ec57e55ea2d8f68c992af26bccca0c6e71a79f96",
+        "gzipBytes": 16606
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "role": "test"
+    },
+    {
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "before": {
+        "blob": "a7b730dc9be336528f0971544099f79d05758b1a",
+        "bytes": 87501
+      },
+      "after": {
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "gzipBytes": 22824
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "role": "test"
+    },
+    {
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "before": {
+        "blob": "1298bb5b67749df0d7ee20c863b691562e6a81b9",
+        "bytes": 57221
+      },
+      "after": {
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+        "gitBlob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "gzipBytes": 14307
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "role": "test"
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "before": {
+        "blob": "ea910f0fcdeade5a794ddaa60898706924e72f80",
+        "bytes": 4750
+      },
+      "after": {
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+        "gitBlob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "gzipBytes": 2098
+      },
+      "newFile": false,
+      "fullReadback": true,
+      "dataPath": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "role": "product"
+    }
+  ],
+  "caseMap": [
+    {
+      "id": "C2T1_CONNECTION",
+      "phase": "connection"
+    },
+    {
+      "id": "C2T1_OAUTH",
+      "phase": "oauth"
+    },
+    {
+      "id": "C2T1_HANDLE",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_PROJECTREF",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_SUBJECT",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_PHASE_RENAME",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_SOURCE_BYTES",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_APPROVAL",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_PREDECESSOR",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_GRANT_REVOKED",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_EXTRA_KEY",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_NOTICES",
+      "phase": "notices"
+    },
+    {
+      "id": "C2T1_MONITOR_COOKIE",
+      "phase": "monitor"
+    },
+    {
+      "id": "C2T1_MONITOR",
+      "phase": "monitor"
+    },
+    {
+      "id": "C2T1_SCOPE_MISSING",
+      "phase": "scope"
+    },
+    {
+      "id": "C2T1_FINITE",
+      "phase": "finite"
+    },
+    {
+      "id": "C2T1_SELECTION",
+      "phase": "selection"
+    },
+    {
+      "id": "C2T1_LOST_ACK_DUPLICATE",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_UNRESOLVED_WRITER",
+      "phase": "negative"
+    },
+    {
+      "id": "C2T1_OWN_PROMISE",
+      "phase": "negative"
+    }
+  ],
+  "regressionSelection": {
+    "dataPath": "docs/superpowers/source-lab/c2-t1/regression-selection.json",
+    "blob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+    "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6",
+    "bodyHash": "8287deef6924d3f91db98078da7bca8bdb55e292f87f9fd814da794e513ba4cf",
+    "bytes": 3364
+  },
+  "mutant": {
+    "mode": "mutant-prefix",
+    "fixturePath": "test/fixtures/finite-initial-entry-world.mjs",
+    "targetPath": "lib/mcp-qa-finite-owner-phase-context.mjs",
+    "needle": "for(const k of inventory.keys())if(!['record','source','connection:approval','notices:approval','finite:approval','grant','connection','notice'].some(s=>k===prefix+s))fail();",
+    "replacement": "",
+    "occurrences": 1,
+    "expectedKilledCase": "C2T1_EXTRA_KEY",
+    "authority": "test-only esbuild mutation of exact proposed Source, never a product flag"
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
