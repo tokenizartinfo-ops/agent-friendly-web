@@ -1,0 +1,230 @@
+{
+  "schema": "AFW-C2-NORMAL-FULL-TASK1-FIXTURE-FIX1-ROOT-GATE/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHub hosted ubuntu-24.04 Node22.23.4; child Source isolated/no credentials/provider",
+  "resourceType": "One exact new full Source laboratory push / attempt1",
+  "resourceId": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+  "allowedAction": "Root may create nominated absent branch exactly at prepared head, execute the frozen normal Task1 once within ORIGINAL budgets; consume primary once and close even if incomplete/failure. No runtime/CF/client changes.",
+  "authority": {
+    "user": "Explicit resumed request to advance verifier and full flow; broad AFW trial/cloud authorization persists",
+    "plan": "6696d06831328bb52d7245c48347bd8c412b566d",
+    "OwnIndex": "7e25d39b4586786828137e10942c9ef7c7cbf642",
+    "OwnReader": "979c4fd2caadd75b47b3416275248a23310e3722",
+    "OwnNative": {
+      "run": 43963999645,
+      "job": 133638507952,
+      "pass": 419,
+      "primary": "8595247053fe516c66addbd00008d593e4d72dff",
+      "proof": "98c4d4a232a3e603bc256bf6b2e96566f71bd4f4",
+      "close": "0305cfe4250798c4d7d8538fa7f1ec6a7656d0c6",
+      "SPECandQUALITY": "797613a34698a6c4a3ade7c4cc679b7af0ad0099"
+    },
+    "SourceStaticReview": "58788e1426dd81e927d765a98f14ea50e5e3f77f",
+    "scope": "Static/no new material findings, not native or production acceptance"
+  },
+  "prepared": {
+    "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+    "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+    "originals": 3203,
+    "added": 25,
+    "leaves": 3228,
+    "refCreated": false,
+    "runCreated": false,
+    "SourceExecuted": false,
+    "captureGateHeld": true,
+    "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d"
+  },
+  "Source13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+    "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIXTURE-FIX1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+    "job": "c2-source-lab-fixture-fix1",
+    "runner": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+    "artifact": {
+      "name": "afw-c2-owner-stages-source-t1-fixture-fix1-receipt",
+      "path": "output/c2-source-lab-fixture-fix1-receipt.json",
+      "fileName": "c2-source-lab-fixture-fix1-receipt.json",
+      "count": 1,
+      "retentionDays": 7,
+      "receiptBodyBytes": 24576
+    },
+    "admission": "Pre-nominated only. Root must verify name/message/head never used, preserved prior leases and no prior corrected full occurrence; no reuse of exhausted/closed branch, placebo renaming or head fabricated from DATA. If already spent, HOLD for history reconciliation/material reason and separate nomination."
+  },
+  "oracle": {
+    "modeSelection": [
+      {
+        "mode": "baseline-red",
+        "selectionHash": "24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa",
+        "count": 3
+      },
+      {
+        "mode": "proposal-green",
+        "selectionHash": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5",
+        "count": 20
+      },
+      {
+        "mode": "mutant-prefix",
+        "selectionHash": "46239e665ffe9154fbfb81725c81ac05c0228129f49db466b061397114f970a4",
+        "count": 20
+      },
+      {
+        "mode": "regressions",
+        "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6",
+        "count": 11
+      }
+    ],
+    "hashRule": "SHA256(UTF8(JSON.stringify(modeObject))) preserving keys/order as in immutable manifest. The whole pretty JSON file has its separate byte hash. For regressions SHA256(UTF8(JSON.stringify(parsed immutable v1 regression manifest))) stays e2100bd2... The compact v2 selection objects have no self-hash.",
+    "nativeBaseIds": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH",
+      "C2T1_NOTICES"
+    ],
+    "greenAndMutantExactOrdered": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH",
+      "C2T1_HANDLE",
+      "C2T1_PROJECTREF",
+      "C2T1_SUBJECT",
+      "C2T1_PHASE_RENAME",
+      "C2T1_SOURCE_BYTES",
+      "C2T1_APPROVAL",
+      "C2T1_PREDECESSOR",
+      "C2T1_GRANT_REVOKED",
+      "C2T1_EXTRA_KEY",
+      "C2T1_NOTICES",
+      "C2T1_MONITOR_COOKIE",
+      "C2T1_MONITOR",
+      "C2T1_SCOPE_MISSING",
+      "C2T1_FINITE",
+      "C2T1_SELECTION",
+      "C2T1_LOST_ACK_DUPLICATE",
+      "C2T1_UNRESOLVED_WRITER",
+      "C2T1_OWN_PROMISE"
+    ],
+    "regressionManifest": {
+      "dataPath": "docs/superpowers/source-lab/c2-t1/regression-selection.json",
+      "blob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+      "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6",
+      "bodyHash": "8287deef6924d3f91db98078da7bca8bdb55e292f87f9fd814da794e513ba4cf",
+      "bytes": 3364
+    },
+    "regressionsExactOrdered": [
+      {
+        "id": "C2T1_REG_01",
+        "file": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "name": "T2 finite dispatch never falls through ordinary"
+      },
+      {
+        "id": "C2T1_REG_02",
+        "file": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "name": "T2 closed mounted conduits cannot authorize business"
+      },
+      {
+        "id": "C2T1_REG_03",
+        "file": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "name": "T3 same initial bytes produce connection and downstream"
+      },
+      {
+        "id": "C2T1_REG_04",
+        "file": "test/mcp-qa-finite-initial-cleanup-native.test.mjs",
+        "name": "B2b only actual finite alarm with no initial records delegates nominal unchanged"
+      },
+      {
+        "id": "C2T1_REG_05",
+        "file": "test/mcp-qa-finite-initial-cleanup-native.test.mjs",
+        "name": "Unit2a unresolved issuer prefix refuses initial alarm without inventing authority"
+      },
+      {
+        "id": "C2T1_REG_06",
+        "file": "test/mcp-qa-finite-owner-cleanup-native.test.mjs",
+        "name": "R2 native monitoring revoke rejects foreign revision and sequence"
+      },
+      {
+        "id": "C2T1_REG_07",
+        "file": "test/mcp-qa-finite-owner-cleanup-native.test.mjs",
+        "name": "R2 native monitoring revoke enforces native C1 and child window"
+      },
+      {
+        "id": "C2T1_REG_08",
+        "file": "test/mcp-qa-finite-owner-notice-get-native.test.mjs",
+        "name": "pure fixed GET wire rejects caller authority and noncanonical metadata"
+      },
+      {
+        "id": "C2T1_REG_09",
+        "file": "test/mcp-qa-finite-owner-notice-get-native.test.mjs",
+        "name": "notice cookie-list accepts token names and legitimate values"
+      },
+      {
+        "id": "C2T1_REG_10",
+        "file": "test/mcp-qa-finite-owner-notice-get-native.test.mjs",
+        "name": "notice cookie-list rejects malformed list"
+      },
+      {
+        "id": "C2T1_REG_11",
+        "file": "test/mcp-qa-finite-owner-notice-get-native.test.mjs",
+        "name": "notice cookie-list bounds assertion and native header envelope"
+      }
+    ],
+    "red": "Native filtered BASE only: CONNECTION pass, OAUTH pass, NOTICES native fail, in this order, all 1/1/1, exit1. Bind own testCodeFailure strictEqual ERR_ASSERTION actual503 expected200 in S07 definition6:30/action36:2/S08 choose18:118 and Object.approve39:29/TestContext9:6 in same target and same case. Seventeen not selected on BASE; no observation for them. Native expected RED is a baseline control, independent of historical W1 Source-C 503.",
+    "green": "All 20 PASS, exit0. First 17 on one graph, checkpoints 1/1/1 rows1–11, 2/2/2 rows12–15, 3/3/3 rows16–17. Last 3 are separate isolated graphs with measured counters (do not extend main monotonicity). Each counter object has exactly upload,activation,receipts in this order, integer 0..3, receipts≤activation≤upload. Every C2SOURCE frame must match unique native TAP case/phase/status/code/ordinal and actual counts.",
+    "mutant": "One exact esbuild-only reversible prefix inventory predicate deletion from normal manifest, AFW_C2_T1_MUTANT=prefix, same 20 IDs & order. Exit1, named C2T1_EXTRA_KEY native testCodeFailure and its paired GREEN pass; retain all other observed mutant outcomes without predeclaring all 19 PASS. C2T1_OWN_PROMISE is a real separate negative test, not a second mutant.",
+    "regressions": "Node v22.23.4 TAP only, exact frozen args/anchor from reg manifest, AFW_R2_GROUP=components, all 11 pass/no extra, exit0; not whole suite. Primary args --experimental-vm-modules --test --test-reporter=tap --test-concurrency=1; BASE only applies exact three-name filter."
+  },
+  "limits": {
+    "totalMs": 330000,
+    "nativeChildMs": 180000,
+    "nativeCaseMs": 120000,
+    "ownedPreflightMs": 10000,
+    "jobMinutes": 7,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "archiveBytes": 33554432,
+    "receiptBytes": 24576,
+    "sdk": "1.2.1",
+    "liveLease": "Original incoming <=30000ms, per-leaf <=5000ms/phase ceilings, no fresh clocks/renewals, no retry after ambiguous ticket writes. Source runner 330000ms ALL modes versus 180000ms per child/120000 per native case and 7min job. These are hard ceilings, not evidence of enough time.",
+    "scope": "ArchiveBytes=32MiB is local git archive limit, not artifact wire. Apply existing separate receiver ZIP/log/payload caps; ZIP size/hash from actual bytes and listing. Preflight 10s. Synthetic controls 3 positives +35 negatives before native; real BOOTSTRAP_DEPENDENCY_ABSENT exact ENOENT rather than mocked missing workflow.",
+    "custody": "Exact six checked launches: preflight, absent-CWD dependency, BASE, GREEN, MUTANT, REG. Parent UID non-root and executable/pinned cwd/env; each child uses clean environment/unshare separate net (loopback only), correct UID/GID, cleared groups/no-new-privs; verify own private PID records after each. Fresh 1..8 per launch, <=8 per target, cross-target 6..24 processes. Verify preflight marker/probe ownership, removal and own temporary root removal at end with readback. No credential/remote provider/owner IO; npm-ci immutable lock/actions only."
+  },
+  "rootStatic": {
+    "originals": 3203,
+    "added": 25,
+    "blobLeaves": 3228,
+    "all25Utf8SHA256Git": true,
+    "allOriginalsModesUnchanged": true,
+    "triggerAudit": {
+      "priorFull62Audit": "824b2fa8237572e5175be624d9f19cf95145414a",
+      "all62ImmutableBlobsAndPathsMatch": true,
+      "sourceBranch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+      "originalPushFilters": "18 exactmain excluded; remaining closed-origin3paths unchanged in exact one-commit25-addition diff; no create/workflow_run/schedule in BASE",
+      "closedOrigin3PathsUnchanged": true,
+      "newWorkflow": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+      "newWorkflowGate": "Exactrepo/push/branch/attempt1/oneusemessage/contentsread",
+      "SourceTriggered": false
+    },
+    "SourceUnspentAtLastCheck": "2026-11-16 21:55:22 UTC; refresh exact absence before create",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "historical": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+  },
+  "primaryPlan": "Terminal only; Root reads unique log and artifact once, uses approved independent OWN code with actual run/job/commit/rawtree/bytes/log API inputs; never execute Source locally or accept declarations/W1 as native full evidence. Preserve honest incomplete/frontier if any mode/custody/cleanup/parser/timing fails. No rerun same head/message, cap increases, missing cases filled or factory/example substituted.",
+  "rollback": "Remove only nominated new executable workflow from tested head after primary; retain all original3203 and other24 inputs, append primary/closure; CAS/readback and verify main/historical/OWNclosed unchanged and0closeheadruns. Never revive spent nomin/clock/grant.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalApproval": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
