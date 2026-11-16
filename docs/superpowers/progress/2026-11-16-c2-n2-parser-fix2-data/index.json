@@ -1,0 +1,307 @@
+{
+  "schema": "afw.c2-n2-parser-fix2.index.v1",
+  "status": "PENDING_ROOT_CLOUD",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": "7500203a0b5da273bd80834c9346812a6dae588b",
+  "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "sourceIndexFrozen": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "futureFullQualifierFrozen": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-n2-parser-fix2",
+    "message": "AFW-C2-N2-PARSER-FIX2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-n2-parser-fix2.yml",
+    "job": "c2-n2-parser-fix2",
+    "prefix": "docs/superpowers/source-lab/c2-n2-parser-fix2/",
+    "runner": "run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "admissionPaths": [
+    {
+      "path": "docs/superpowers/source-lab/c2-n2-parser-fix2/n2-reader-old.mjs",
+      "mode": "100644",
+      "bytes": 19356,
+      "sha256": "34b32c4634384d65df27f1f69fcd45c4b8f709ce8efbe92f7d169ec8d17052dc",
+      "gitBlob": "09e1bd61a6f132d1a7d029535d4b34b67ef42524",
+      "blob": "09e1bd61a6f132d1a7d029535d4b34b67ef42524",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-n2-parser-fix2/n2-reader.mjs",
+      "mode": "100644",
+      "bytes": 19416,
+      "sha256": "6cdc6569cff0676770f41ce4f794affe68c68ccbccb5cde154d513945b7bb849",
+      "gitBlob": "280fa796ad74d4451cab3d84e230d37dd31bad11",
+      "blob": "280fa796ad74d4451cab3d84e230d37dd31bad11",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-n2-parser-fix2/n2-controls-old.mjs",
+      "mode": "100644",
+      "bytes": 13183,
+      "sha256": "de52f5a2bd418e5ae96c5c126a71af5da7bc082f8a4076f8834dd1ffa54f7ec9",
+      "gitBlob": "107ef2659bc23eb81f07d1441c5c9d1770d54458",
+      "blob": "107ef2659bc23eb81f07d1441c5c9d1770d54458",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-n2-parser-fix2/n2-controls.mjs",
+      "mode": "100644",
+      "bytes": 13179,
+      "sha256": "35d5367308cca0b18f9337194fa80fd38b698a0dc3c91fb275bfd2200b491980",
+      "gitBlob": "e04c7649cec44f4e6a4e9b6287c938bc5c3811b3",
+      "blob": "e04c7649cec44f4e6a4e9b6287c938bc5c3811b3",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-n2-parser-fix2/n2-logger.mjs",
+      "mode": "100644",
+      "bytes": 8370,
+      "sha256": "64f5bc4ae951d13a6ead8d2dc28b0b0ff13ffdcf01f3d621e17dab07203d865c",
+      "gitBlob": "92420acc2306b62943ae80d14b889871c9a3957c",
+      "blob": "92420acc2306b62943ae80d14b889871c9a3957c",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-n2-parser-fix2/n2-slot.mjs",
+      "mode": "100644",
+      "key": "nextSlot",
+      "bytes": 2072,
+      "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-n2-parser-fix2/synthetic-vectors.json",
+      "mode": "100644",
+      "bytes": 78151,
+      "sha256": "cd4d4a0174be09c8dcae12c6a3b222de0d5f7151d2b0b94dd30f9caa5b6eedad",
+      "gitBlob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+      "blob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-n2-parser-fix2/timeout-vectors.json",
+      "mode": "100644",
+      "bytes": 162739,
+      "sha256": "cb2480007dbf79968962c957d6dde7c2b103a8fca2a17280fd9d3f789083f97b",
+      "gitBlob": "98ada8d8a67fa65d7e7b11bd26cc54f9397af3d9",
+      "blob": "98ada8d8a67fa65d7e7b11bd26cc54f9397af3d9",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-n2-parser-fix2/run-controls.mjs",
+      "mode": "100644",
+      "bytes": 8886,
+      "sha256": "b05417ea3f3fa8c812ee403e28ed86c73c941abf07cc809a24a9e8d12c4cc380",
+      "gitBlob": "ab18b82a6e0441d3e4a3359aa8f15182f10b9a63",
+      "blob": "ab18b82a6e0441d3e4a3359aa8f15182f10b9a63",
+      "fullReadback": true
+    },
+    {
+      "path": ".github/workflows/afw-c2-n2-parser-fix2.yml",
+      "mode": "100644",
+      "bytes": 1386,
+      "sha256": "7f2388e783b9fd1fe294def3c55f4c8ebcdeda89e0225125a0588b5ce17d9f12",
+      "gitBlob": "375e0bd665e9ff3de95fcc951fe634263def2f42",
+      "blob": "375e0bd665e9ff3de95fcc951fe634263def2f42",
+      "fullReadback": true
+    }
+  ],
+  "admissionCount": 10,
+  "original3203AndModesPreserved": true,
+  "reportVersion": {
+    "bytes": 11898,
+    "sha256": "1541d01827c088c8e95294e8f66f73b4e2a542932b80d928a93e64ebe8d0ac16",
+    "gitBlob": "2c288eeea1dabe29dda4d4b34b4b4745c8f33a51",
+    "blob": "2c288eeea1dabe29dda4d4b34b4b4745c8f33a51",
+    "fullReadback": true
+  },
+  "proofContract": {
+    "bytes": 7703,
+    "sha256": "9b6aca1dc9e42a4273645196510b49f3b3d70d7f7720abdf666945c16957ac4e",
+    "gitBlob": "1581fdc6d905d15a2654de8fd7b6bf7932879aec",
+    "blob": "1581fdc6d905d15a2654de8fd7b6bf7932879aec",
+    "fullReadback": true
+  },
+  "proofSchema": {
+    "bytes": 10606,
+    "sha256": "57a4cad0753227a1b3231cb51deec8f56dc3f39e147c8a3189932e4328ba1a60",
+    "gitBlob": "e2883f6418f8d6a425d1146bd115c069588c0779",
+    "blob": "e2883f6418f8d6a425d1146bd115c069588c0779",
+    "fullReadback": true
+  },
+  "reversibleDiff": {
+    "bytes": 2210,
+    "sha256": "8541e1832f9908ab3540f3471e0b873a8e00847500fe81dec5985cb20e6a5993",
+    "gitBlob": "b405b227bb0fc32313e732f03475fa473ab0c4c5",
+    "blob": "b405b227bb0fc32313e732f03475fa473ab0c4c5",
+    "fullReadback": true
+  },
+  "newBlobs": [
+    {
+      "key": "g2R2Vectors",
+      "bytes": 162739,
+      "sha256": "cb2480007dbf79968962c957d6dde7c2b103a8fca2a17280fd9d3f789083f97b",
+      "gitBlob": "98ada8d8a67fa65d7e7b11bd26cc54f9397af3d9",
+      "blob": "98ada8d8a67fa65d7e7b11bd26cc54f9397af3d9",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2Reader",
+      "bytes": 19416,
+      "sha256": "6cdc6569cff0676770f41ce4f794affe68c68ccbccb5cde154d513945b7bb849",
+      "gitBlob": "280fa796ad74d4451cab3d84e230d37dd31bad11",
+      "blob": "280fa796ad74d4451cab3d84e230d37dd31bad11",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2OldControls",
+      "bytes": 13183,
+      "sha256": "de52f5a2bd418e5ae96c5c126a71af5da7bc082f8a4076f8834dd1ffa54f7ec9",
+      "gitBlob": "107ef2659bc23eb81f07d1441c5c9d1770d54458",
+      "blob": "107ef2659bc23eb81f07d1441c5c9d1770d54458",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2Runner",
+      "bytes": 8886,
+      "sha256": "b05417ea3f3fa8c812ee403e28ed86c73c941abf07cc809a24a9e8d12c4cc380",
+      "gitBlob": "ab18b82a6e0441d3e4a3359aa8f15182f10b9a63",
+      "blob": "ab18b82a6e0441d3e4a3359aa8f15182f10b9a63",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2Workflow",
+      "bytes": 1386,
+      "sha256": "7f2388e783b9fd1fe294def3c55f4c8ebcdeda89e0225125a0588b5ce17d9f12",
+      "gitBlob": "375e0bd665e9ff3de95fcc951fe634263def2f42",
+      "blob": "375e0bd665e9ff3de95fcc951fe634263def2f42",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2ProofSchema",
+      "bytes": 10606,
+      "sha256": "57a4cad0753227a1b3231cb51deec8f56dc3f39e147c8a3189932e4328ba1a60",
+      "gitBlob": "e2883f6418f8d6a425d1146bd115c069588c0779",
+      "blob": "e2883f6418f8d6a425d1146bd115c069588c0779",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2ProofContract",
+      "bytes": 7703,
+      "sha256": "9b6aca1dc9e42a4273645196510b49f3b3d70d7f7720abdf666945c16957ac4e",
+      "gitBlob": "1581fdc6d905d15a2654de8fd7b6bf7932879aec",
+      "blob": "1581fdc6d905d15a2654de8fd7b6bf7932879aec",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2Diff",
+      "bytes": 2210,
+      "sha256": "8541e1832f9908ab3540f3471e0b873a8e00847500fe81dec5985cb20e6a5993",
+      "gitBlob": "b405b227bb0fc32313e732f03475fa473ab0c4c5",
+      "blob": "b405b227bb0fc32313e732f03475fa473ab0c4c5",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2Report",
+      "bytes": 11898,
+      "sha256": "1541d01827c088c8e95294e8f66f73b4e2a542932b80d928a93e64ebe8d0ac16",
+      "gitBlob": "2c288eeea1dabe29dda4d4b34b4b4745c8f33a51",
+      "blob": "2c288eeea1dabe29dda4d4b34b4b4745c8f33a51",
+      "fullReadback": true
+    }
+  ],
+  "supersededEarlyData": [
+    {
+      "key": "g2R2RunnerEarly",
+      "bytes": 8771,
+      "sha256": "ab9cc6b97699af4aba9fab674c912afe6fc014bd3767f820c6715d54df6c65de",
+      "gitBlob": "e487b288a3b64e868788c33f0eb4a2068afa3ed5",
+      "blob": "e487b288a3b64e868788c33f0eb4a2068afa3ed5",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2ProofSchemaEarly",
+      "bytes": 10421,
+      "sha256": "bd00b3d9dd3e8ccbb759d9b36ec23ab80a0ed315517d30ae703e3335c25e529f",
+      "gitBlob": "6043a57c6664d41e6020d1ece4420b75adb8cca3",
+      "blob": "6043a57c6664d41e6020d1ece4420b75adb8cca3",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2ProofContractEarly",
+      "bytes": 7373,
+      "sha256": "6e207bee193fe9c0808de4af30cd1dde9ba1593a12127d54046bbf4a390842cd",
+      "gitBlob": "0ee68a4cbf3aceb9fd1431d1505bcc58c0e3f13a",
+      "blob": "0ee68a4cbf3aceb9fd1431d1505bcc58c0e3f13a",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2DiffEarly",
+      "bytes": 1111,
+      "sha256": "3c66faff54a95db05b174aa36e8dfc3b1b9f71e71a50c6d9707a205758ef9c5f",
+      "gitBlob": "5ab5cd33428741ab1c6d2d5b6d98e48e3db96a59",
+      "blob": "5ab5cd33428741ab1c6d2d5b6d98e48e3db96a59",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2ReportFirst",
+      "bytes": 11967,
+      "sha256": "c84765c6a8d458a3582ba771ed3509857a5b8ce42cd09bb1964f15b586d424a2",
+      "gitBlob": "2c52f5b556d1587981468f6a03910169d809f1b6",
+      "blob": "2c52f5b556d1587981468f6a03910169d809f1b6",
+      "fullReadback": true
+    },
+    {
+      "key": "g2R2IndexFirst",
+      "bytes": 11374,
+      "sha256": "e52d0a9f4873c8b2131572eb79c0b920b84853296ee9947b47037c764a848ca4",
+      "gitBlob": "c09e4486ef541673d2c0e51463ed73ffcd6b498b",
+      "blob": "c09e4486ef541673d2c0e51463ed73ffcd6b498b",
+      "fullReadback": true
+    }
+  ],
+  "preservedReferences": {
+    "oldN2Packet": "a30ecbb8d4990896082cad0104a8d6e91960e8f5",
+    "oldN2Report": "4996da2322d0f54684f1521b27cf41d6f2562d4b",
+    "review": "672f35f69b215defe77d5961cf43f049250d1106",
+    "actualN2Primary": "db59d9696661b681e88c919e08ec1311d176b4de",
+    "actualN2Outcome": "eeeec6e48364422b40b599a75fad21064562eb64",
+    "readOnlyDiagnosis": "3498526a0e205b449d8b2797e4cd61a4f1582f6f"
+  },
+  "nativeIDs": [
+    "P2_ADMISSION",
+    "P2_NO_BASELINE_THROW",
+    "P2_BASELINE_NO_BEFORE_THROW",
+    "P2_NO_BASELINE_RETURN",
+    "P2_BASELINE_NO_BEFORE_RETURN",
+    "P2_OPEN_BEFORE_BASELINE",
+    "P2_OPEN_BASELINE",
+    "P2_GET_ENTER_PENDING",
+    "P2_GET_BODY_PENDING",
+    "P2_POST_ENTER_PENDING",
+    "P2_POST_BODY_PENDING",
+    "P2_SETTLED_FAILURE_PREFIX",
+    "P2_SETTLED_SUCCESS_PREFIX",
+    "P2_EXISTING_CONTROLS_OLD",
+    "P2_EXISTING_CONTROLS_NEW"
+  ],
+  "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-n2-parser-fix2/run-controls.mjs",
+  "verification": "All new listed immutable blobs created + fully fetched equal, UTF8 bytes/SHA256/GitBlob verified by builtin RAM hashing only. Prior current reader/controls/logger/slot/vectors retain exact old pins and full readbacks. Reader60char splice/control-old import-only derived copy reversible; finalLF exact. No local code execution/syntax/compile/tests, refs/runs/files/deps. Native covering command PENDING_ROOT_CLOUD.",
+  "diagnosticToolingExecutedLocally": false,
+  "sourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

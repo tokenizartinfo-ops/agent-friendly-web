@@ -1,0 +1,112 @@
+{
+  "schema": "afw.c2-notices-n2.parser-fix2-scoped-rereview.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authorityBrief": "cd3e697bd8e87b1f78f0540ad7eae5cdc0cfbaab",
+  "priorFindingReport": "672f35f69b215defe77d5961cf43f049250d1106",
+  "scope": "Only prior finding1/P2/F1 and new breakage in the parser fixround2 delta. F2/F3 and full original Source/Task1 are not reopened.",
+  "pins": {
+    "readerBefore": "09e1bd61a6f132d1a7d029535d4b34b67ef42524",
+    "readerAfter": "280fa796ad74d4451cab3d84e230d37dd31bad11",
+    "readerBytes": 19416,
+    "readerSha256": "6cdc6569cff0676770f41ce4f794affe68c68ccbccb5cde154d513945b7bb849",
+    "diff": "b405b227bb0fc32313e732f03475fa473ab0c4c5",
+    "testFirstVectors": "98ada8d8a67fa65d7e7b11bd26cc54f9397af3d9",
+    "vectorsSha256": "cb2480007dbf79968962c957d6dde7c2b103a8fca2a17280fd9d3f789083f97b",
+    "unchangedControls": "e04c7649cec44f4e6a4e9b6287c938bc5c3811b3",
+    "oldControlsImportCopy": "107ef2659bc23eb81f07d1441c5c9d1770d54458",
+    "runner": "ab18b82a6e0441d3e4a3359aa8f15182f10b9a63",
+    "packet": "35211fc624e7c2eb17639f93976c9b0f0469ddfd",
+    "index": "badd1360dab866369b99a423348ce4d25a281a62",
+    "contract": "1581fdc6d905d15a2654de8fd7b6bf7932879aec",
+    "proofSchema": "e2883f6418f8d6a425d1146bd115c069588c0779",
+    "authorActualAppend": "a6a1223dfdce2917d86e98557a0dddd28e8c125a",
+    "primary": "59dfc1c2548f7c10f884c389e6dd211850556535",
+    "exactProof": "be160a9c5c4b1901e759b84b7cb7b995bf7c267c",
+    "closeProof": "b4ed7856bedbe1f48f4967a669dd4aa940a202ac"
+  },
+  "verdict": {
+    "finding1": "ADDRESSED",
+    "scopedSPEC": "PASS",
+    "scopedQUALITY": "PASS",
+    "newFindingCount": 0,
+    "newFindings": []
+  },
+  "method": "Bounded immutable DATA reads and builtin string/JSON/hash inspection only. Compared complete old/final reader bytes and exact reversible spans; all reader bytes except the60-character insertion are unchanged. Old-controls copy differs solely by the documented4-character import rebinding. Both deltas reconstruct forward/reverse exactly. Read all12 literal timeout cases, runner, packet/contract/schema and primary/exact proof/report/close receipt. Original literal/first negative records, binding/native/condition exactly match the prior review counterexample. Independently matched reader/old-controls/timeout-vector/runner hashes and exact4459-byte proof hash; proof case IDs equal pinned15 and outcomes/counts match receipt. No Source or OWN execution/import/compile/syntax/tests, local files/dependencies/clones, refs/runs/runtime/browser/keys/mail/agents/fixes. No logs or raw artifacts refetched.",
+  "findingAssessment": {
+    "file": "docs/superpowers/source-lab/c2-n2-parser-fix2/n2-reader.mjs",
+    "line": 114,
+    "insertedPredicate": "if(at===3&&(!baseline||!before))return bad('PROBE_INVALID');",
+    "result": "ADDRESSED",
+    "reason": "The guard is at the existing stage1 NOTICES action completion boundary before either return or throw is accepted, and is independent of capture condition. It therefore rejects both no-baseline and baseline-without-before settled prefixes before EOF timeout handling or nativeJoin can accept them. The original dangling-HTTP, host completion and status/body checks remain in place. Other cases and count/AFTER logic are untouched.",
+    "prefixPreservation": "An unfinished NOTICES action can still end before baseline, after baseline, or with GET/POST headers/body pending because it has not entered the terminal flow branch. A genuinely settled failure/success prefix with baseline and before probe remains supported. No final hook or count is fabricated."
+  },
+  "coverageAssessment": {
+    "negativeCases": 4,
+    "positivePrefixes": 8,
+    "originalLiteral": "Exact23-record no-baseline NOTICES actionthrow; baseline/no-before24-record companion also preserves a valid prefix native3 join for old behavior.",
+    "actualDiscrimination": "In the covering native invocation both malformed throw prefixes are observed oldAccepted:true/oldJoined:true, then new valid:false/code:PROBE_INVALID/integrity:unknown/joined:false with empty unknown witness. Both return variants also reject. This is actual old-vs-new predicate discrimination inside a passing control suite; it is not a fabricated failed native run.",
+    "positiveCases": [
+      "unfinished action before baseline",
+      "unfinished action after baseline",
+      "GET entered",
+      "GET response/body pending",
+      "POST entered",
+      "POST response/body pending",
+      "settled failure with required baseline/before",
+      "settled success with required baseline/before"
+    ],
+    "regression": "Original parser/logger/slot/probe/witness helper controls remain unchanged and passed against both reader versions with exact6/21/3/6/2/5/3/7/6/10/12 counts. Tests use concrete finite JSON and explicit expected outcomes, not new producer-derived expectation aliases."
+  },
+  "newBreakageAssessment": "No actionable new breakage found in the bounded insertion/import-copy delta or its native coverage. Existing honest prefix admission and complete helper cases are retained. Logger/slot/business overlays/product/Source13 are unchanged. No broader feature or encoder change is requested.",
+  "actualCovering": {
+    "runId": 43874121011,
+    "attempt": 1,
+    "jobId": 133322576633,
+    "head": "95b123baf77c24be1aaaafd6a578e7949ab4eeb0",
+    "tree": "ae22e373aa356fa4d0167158068265e94a34d8c5",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "node": "v22.23.4",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-n2-parser-fix2/run-controls.mjs",
+    "step": 4,
+    "startedAt": "2026-11-16T13:16:16Z",
+    "completedAt": "2026-11-16T13:16:17Z",
+    "nativeTests": 15,
+    "pass": 15,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "exactUniqueIDs": 15,
+    "proofBytes": 4459,
+    "proofSha256": "5ca3166b8d0fa3439cf4903807a939c0b4fc16ece80c0647ea390980ce61ce97",
+    "diagnosticToolingExecuted": true,
+    "sourceBusinessExecuted": false,
+    "attribution": "Credited from the immutable actual native primary/exact proof and appended author report, with inspected bindings/IDs/hashes matched. Root's API/TAP/rawZIP CRC/digest/payload join is reported by that receipt; reviewer did not refetch or repeat it."
+  },
+  "closure": {
+    "head": "f6620136a1b5c34deb16f4a3659dc54c72b9d0e9",
+    "tree": "f8c2c3613dc746e7f0984fef18cc3252035cdb8a",
+    "proof": "b4ed7856bedbe1f48f4967a669dd4aa940a202ac",
+    "interpretation": "Later immutable close proof records workflow removed,3203originals preserved,Main/history unchanged and0close-head runs. The author's earlier 'closure in progress' appendage remains historical; no new ref/run read was performed."
+  },
+  "limits": [
+    "Scoped PASS closes finding1/F1 only. Prior F2/F3 addressed findings are unchanged. It does not certify full Source product/Task1, unfreeze normal13/future qualifier, dispatch Task2 or authorize another run.",
+    "The cloud graph executed diagnostic Source tooling only. No Miniflare business world, custody launch, business request or old N2 business rerun occurred. Reviewer executed neither Source nor OWN code.",
+    "Earlier actual complete N2 capture and its NOTICES POST503/nativeFAIL remain accepted and unchanged. This parser repair does not prove their cause, authenticated receipt, global drain, SDK namespace emptiness, operational readiness or PC-off behavior."
+  ],
+  "reviewerExecutedDiagnosticTooling": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "disposition": "Scoped re-review complete; IDLE."
+}
