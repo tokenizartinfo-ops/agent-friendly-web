@@ -1,0 +1,122 @@
+{
+  "schema": "afw.c2-notices-n3.root-early-protocol-seal.v1",
+  "atUTC": "2026-11-16 14:11:29 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": "Causal DTO, selection and declared QA-only seam design only; full outer N3 envelope and executable bodies remain pending native gates.",
+  "authority": {
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "builder": "9741a68b848456032da812ecd0a29d71d8d2d5c4",
+    "sourceBrief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83"
+  },
+  "earlyIndex": "7969655f30238b8986ea017023efe116399ec4e1",
+  "pins": {
+    "contract": {
+      "bytes": 12169,
+      "sha256": "ad4104c6f62f7623727aa90ad8ca6d991b12b0f4b6c5deb7034f6266eeee59f6",
+      "gitBlob": "eb1d149ed30c60930d667106ddf433d6feb0350f",
+      "blob": "eb1d149ed30c60930d667106ddf433d6feb0350f",
+      "fullReadback": true
+    },
+    "causalSchema": {
+      "bytes": 13899,
+      "sha256": "8780c9fcdb7f90ce35af840b22f3509c69417059b7d84a7774e708324e4a26ec",
+      "gitBlob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "blob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "fullReadback": true
+    },
+    "selection": {
+      "bytes": 2048,
+      "sha256": "ea902f464b5530f3b7894c259ec7ed5420e01a87eecfe8b49c46d175d4d59324",
+      "gitBlob": "3db514b655917bd05917a90a53cb69667041fd36",
+      "blob": "3db514b655917bd05917a90a53cb69667041fd36",
+      "fullReadback": true,
+      "canonicalHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c"
+    },
+    "seams": {
+      "bytes": 9478,
+      "sha256": "586c19cca31bed877424d58dcd6998d4ddf40fd8451b032740bac2731221e771",
+      "gitBlob": "95469be8b8578395efe2651fdf1c60af4784530a",
+      "blob": "95469be8b8578395efe2651fdf1c60af4784530a",
+      "fullReadback": true
+    },
+    "vectors": {
+      "bytes": 371456,
+      "sha256": "765ff8a0cacb9d141fe75fd49cb2c4a52ce74abd3c5db3f8afe61fd89f442b0f",
+      "gitBlob": "d2e96340f8e267b9b0b64f05c5ca9daf96372df5",
+      "blob": "d2e96340f8e267b9b0b64f05c5ca9daf96372df5",
+      "fullReadback": true
+    }
+  },
+  "hashesVerified": [
+    {
+      "role": "contract",
+      "bytes": 12169,
+      "sha256": "ad4104c6f62f7623727aa90ad8ca6d991b12b0f4b6c5deb7034f6266eeee59f6",
+      "blob": "eb1d149ed30c60930d667106ddf433d6feb0350f"
+    },
+    {
+      "role": "causalSchema",
+      "bytes": 13899,
+      "sha256": "8780c9fcdb7f90ce35af840b22f3509c69417059b7d84a7774e708324e4a26ec",
+      "blob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462"
+    },
+    {
+      "role": "selection",
+      "bytes": 2048,
+      "sha256": "ea902f464b5530f3b7894c259ec7ed5420e01a87eecfe8b49c46d175d4d59324",
+      "blob": "3db514b655917bd05917a90a53cb69667041fd36"
+    },
+    {
+      "role": "seams",
+      "bytes": 9478,
+      "sha256": "586c19cca31bed877424d58dcd6998d4ddf40fd8451b032740bac2731221e771",
+      "blob": "95469be8b8578395efe2651fdf1c60af4784530a"
+    },
+    {
+      "role": "vectors",
+      "bytes": 371456,
+      "sha256": "765ff8a0cacb9d141fe75fd49cb2c4a52ce74abd3c5db3f8afe61fd89f442b0f",
+      "blob": "d2e96340f8e267b9b0b64f05c5ca9daf96372df5"
+    }
+  ],
+  "staticDataChecks": {
+    "positiveSnapshots": 20,
+    "negativeSnapshots": 23,
+    "actualHelperUnitPlans": 26,
+    "positiveShapeChecks": 20,
+    "positiveShapeChecksMeaning": "All20 passed reviewed OWN generic schema only; causal semantic/native tests pending. No Source code executed.",
+    "oldShapeContainerRetired": "9628e56fa8d9ccaa4b95f8ff182d0084ffaaf6f8"
+  },
+  "acceptedSemantics": [
+    "Actual captured root/lease/promise references only; null root resolves an already-bound same actual lease/promise; conflicting/shared roots ambiguous; no Error/function/ordinal/global phase root resolver.",
+    "One self-contained after snapshot; no crosssnapshot/realm/M join. First scope error independent from deterministic focused pairchild.",
+    "Promise.lease is canonical original work scope, not retainer ownership. Repeated original retain/then/settled callbacks are valid; first public retained/settlement observations immutable and later routines folded with source-sequence gaps. Preserve original deletion boolean and all original reactions.",
+    "Object error kind is opaque identity-tracked object or function; primitive presence has no identity/content. Error identity never resolves root.",
+    "OP abort note is after original abort including nested callbacks; do not infer original effect order/causation from the ordering of observation sites.",
+    "Unknown/cap/fault may be unjoined with eligible1; ambiguous binding may have eligible1. Joined requires usable unambiguous projection, not merely eligible count.",
+    "Fixed role/site compatibility is required: root finish transition belongs root; initial factory close transition belongs outer/target-pair; activation/pair-child have finally/abort observations but no invented close() transition. Preserve actual source API semantics, not a generic role graph."
+  ],
+  "allowedNext": [
+    "Original Source writer may author immutable N3.A helper/QA-only transforms/reader/controls/runner proposal and full reversible preimages under spec; no Source local execution/ref/run.",
+    "Independent OWN writer may implement causal replay and finite OWN controls against this sealed subprotocol using pure OWN RAM, no Source execution; full API/outer N3 joins wait for complete additive envelope and producer manifest."
+  ],
+  "stillPending": [
+    "20/23 causal semantic replay is implementation/test work, not certified by this data seal.",
+    "Final executable Source unit controls cloud, worst core+8guards+journal/outcome sizing, full outer schema/manifest/pins and independent review.",
+    "Independent OWN native coverage/review and then ONE separately gated N3 actual business-world diagnostic."
+  ],
+  "SourceExecutionAuthorizedHere": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
