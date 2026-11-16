@@ -1,0 +1,68 @@
+{
+  "schema": "afw.c2-notices-n2.root-static-checkpoint.v1",
+  "atUTC": "2026-11-16T12:20:00Z",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "immutable Git DATA / Root docs",
+  "origin": "GitHub blob API",
+  "resourceType": "Root documentation",
+  "resourceId": "docs/finite-pcoff-continuation-20261103",
+  "allowedAction": "append checkpoint and preserve reviewed DATA blobs",
+  "rollback": "previous docs branch tip; no product/runtime/ref activation",
+  "normalIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "sourceBrief": "07a10773d721081de132baf9d4bb9b014466137e",
+  "ownBrief": "69328545699fa03d58b30e00296d06045436ce3f",
+  "windowRuling": "72480f6b32a095186b17671cb6d18b583335f9a1",
+  "findings": "dea133e44247938626de925ccb6fe44de3896583",
+  "round1": [
+    {
+      "role": "vectors",
+      "blob": "04b72e0d24b2841970cbab46223e98ae2cab0156"
+    },
+    {
+      "role": "contract",
+      "blob": "b1c2680f2ff1dbe7a8b861396e3851d69f885016"
+    },
+    {
+      "role": "schema",
+      "blob": "f006dc3a6bf8089fce11718aa2a05d97910d8145"
+    },
+    {
+      "role": "reader",
+      "blob": "09e1bd61a6f132d1a7d029535d4b34b67ef42524"
+    },
+    {
+      "role": "logger",
+      "blob": "92420acc2306b62943ae80d14b889871c9a3957c"
+    },
+    {
+      "role": "controls",
+      "blob": "e04c7649cec44f4e6a4e9b6287c938bc5c3811b3"
+    },
+    {
+      "role": "runner",
+      "blob": "33e94efe8fb9f41e68719e7a5f21389dc692a8eb"
+    },
+    {
+      "role": "workflow",
+      "blob": "8bab03d11f18807d0e0af41a93c6ba0d155dfb21"
+    }
+  ],
+  "staticChecks": [
+    "Full readback and builtin byte/SHA256/Gitblob verification for eight round1 bodies.",
+    "S10 normal vs observer textual diff only original argument extraction + prepare/complete observations; no compiled input, guard, tag or transformation changed.",
+    "F1 before-probe requires baseline; F2 any record after final rejected and late complete ignored; F3 own logger descriptor rejected before access/install without invoking getter/setter.",
+    "Contract/schema/runner counts and vectorsHash aligned."
+  ],
+  "pending": [
+    "Source final packet, reverse diffs and report",
+    "Independent OWN N2 implementation and native cloud covering",
+    "OWN scoped spec/quality review",
+    "Root Source admission/one-use execution/actual receipt/closure, only after preceding gates"
+  ],
+  "SourceExecutedHere": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
