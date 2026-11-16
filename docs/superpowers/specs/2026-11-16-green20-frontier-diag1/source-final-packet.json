@@ -1,0 +1,184 @@
+{
+  "schema": "AFW-C2-GREEN20-FRONTIER-DIAG1-SOURCE-DETACHED-IMPLEMENTATION/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "ruling": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+    "design": "09745d7a850b19d8004b3214be9357b9e278bd7d",
+    "contract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "fixtureFirst": "70f228712cf9b7e6eef08e6d784316b174271106",
+    "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac"
+  },
+  "rootSupplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+  "immutableBodyPins": {
+    "fixtureFirst": {
+      "role": "implementation-fixture-first",
+      "blob": "70f228712cf9b7e6eef08e6d784316b174271106",
+      "bytes": 9632,
+      "sha256": "2d66e480d2ea38fc78147f7ce2c28487f9cee290e100ab527c6cbb994b7bffd9",
+      "fullReadback": true
+    },
+    "toolsOnly": {
+      "role": "implementation-tools-index",
+      "blob": "68f6f9cfd90db4824b613e544b03564c96ea5bc8",
+      "bytes": 9747,
+      "sha256": "eb20191d5d57f01b996225e7814c68136c4ab26c914edd9e63cac2e482570ca5",
+      "fullReadback": true
+    },
+    "toolProofSchema": {
+      "role": "tools-proof-schema",
+      "blob": "579920d15b5a4d6492348d67a4442de81e73fdf8",
+      "bytes": 4311,
+      "sha256": "dbf73b899a866955ac0ae7ec664dc32f9491eddd2f6cbb63dc6562a1116b832b",
+      "fullReadback": true
+    },
+    "capture": {
+      "role": "implementation-capture-index",
+      "blob": "2f25941491df234890036ae8cf0609e323207b67",
+      "bytes": 12711,
+      "sha256": "f93c652e0fbb8883ab3cd28d7ea59268f34a8dd57ad907cfad3250fbdb2af05f",
+      "fullReadback": true
+    },
+    "reversibleDiffAndFullBeforeAfter": {
+      "role": "implementation-reversibles",
+      "blob": "0ab2fc67f080fab9444a54e7c2758255935ef434",
+      "bytes": 15298,
+      "sha256": "250090b8ffbfc1639c42e62e6f9fe98e4f66adc31579178d9d18bce2db87a8d4",
+      "fullReadback": true
+    }
+  },
+  "base": {
+    "revision": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "leaves": 3203,
+    "mainAsPinned": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+  },
+  "bodyVerification": {
+    "uniqueBlobCount": 30,
+    "paths": {
+      "tools": {
+        "baseline": 3203,
+        "addition": 11,
+        "total": 3214
+      },
+      "capture": {
+        "baseline": 3203,
+        "addition": 25,
+        "total": 3228
+      }
+    },
+    "mode": "100644",
+    "hashes": "UTF8 length SHA256 Git SHA1 checked from direct full Git data",
+    "against": "preserved untruncated primary68c68577 actual tested-tree afde090… minus25 full-qualifier additions; Root separately verifies authoritative current BASE/refs/triggers"
+  },
+  "fixtureToCode": {
+    "toolCaseIds": [
+      "G20_D07_SIBLING",
+      "G20_MEASURE_TWO_REAL_TARGETS",
+      "G20_SECOND_LAUNCH_CUSTODY",
+      "G20_NATIVE_ETIMEDOUT_CAPTURE",
+      "G20_NATIVE_EXIT1_TORN_AND_FAULT",
+      "G20_WIRE_AND_ZIP_LENGTH"
+    ],
+    "assertionGroups": [
+      4,
+      4,
+      6,
+      5,
+      6,
+      6
+    ],
+    "assertionLiteralOrderMatches": true,
+    "workflowDisplayedSteps": [
+      [
+        "Read the exact Source tooling head",
+        "Use the fixed Node runtime",
+        "Exercise the six Source collection adapters",
+        "Preserve the Source tooling proof"
+      ],
+      [
+        "Read the exact one-use lab head",
+        "Use the fixed Node runtime",
+        "Install only the existing locked dependencies",
+        "Observe isolated proposal-green boundaries",
+        "Preserve the bounded green diagnostic"
+      ]
+    ]
+  },
+  "wire": {
+    "markers": {
+      "custody": "AFW_C2_GREEN20_FRONTIER_DIAG1_CUSTODY",
+      "outcome": "AFW_C2_GREEN20_FRONTIER_DIAG1_OUTCOME",
+      "fault": "AFW_C2_GREEN20_FRONTIER_DIAG1_FAULT"
+    },
+    "selectionCanonical": "e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd",
+    "selectionRaw": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99",
+    "frames": 2,
+    "payloadMaxIncludingLF": 24577,
+    "outerBodyMax": 24576,
+    "attempt": 1,
+    "child": 180000,
+    "case": 120000,
+    "total": 330000,
+    "minutes": 7,
+    "targetProcessRange": [
+      2,
+      8
+    ],
+    "newLaunches": 2
+  },
+  "sharedSelection": {
+    "role": "selection",
+    "blob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "bytes": 3956,
+    "sha256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99",
+    "fullReadback": true
+  },
+  "tddOrder": "The fixture input cases, literal expected names, measurements, and examples were sealed before any new adapter code. The old preimage incompatibilities are reasoned from source text. No native red or green observed in author scope.",
+  "reversibleLineages": [
+    {
+      "role": "diagnostic runner derived from historical preimage",
+      "replayedForwardAndBackward": true
+    },
+    {
+      "role": "source workflow from historical workflow",
+      "replayedForwardAndBackward": true
+    },
+    {
+      "role": "tools workflow from historical workflow",
+      "replayedForwardAndBackward": true
+    },
+    {
+      "role": "recorder exact single alias splice",
+      "replayedForwardAndBackward": true
+    },
+    {
+      "role": "tools runner preflight root-prefix correction",
+      "replayedForwardAndBackward": true
+    },
+    {
+      "role": "tools index preflight root-prefix correction",
+      "replayedForwardAndBackward": true
+    },
+    {
+      "role": "runner custody inode verification tightening",
+      "replayedForwardAndBackward": true
+    }
+  ],
+  "correction": "The initial tools-only candidate used a nonexistent nomination.prefix. The corrected index and tools-controls input paths use the nominated runner directory. Previous detached blobs are preserved in the reversible report. The capture index is unchanged by the tooling correction.",
+  "activation": "Detached DATA only. Root owns native, readback, admission and separate closure. Tools-only and capture have separate nominations and review gates.",
+  "authorNativeRuns": 0,
+  "SourceToolingRunObservedByAuthor": false,
+  "SourceBusinessExecution": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
