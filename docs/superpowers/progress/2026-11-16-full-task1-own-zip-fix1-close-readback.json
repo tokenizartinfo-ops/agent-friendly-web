@@ -1,0 +1,39 @@
+{
+  "schema": "AFW-C2-FULL-C230-OWN-ZIP-FIX1-CLOSE-READBACK/1",
+  "atUTC": "2026-11-16 21:54:20 UTC",
+  "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3-zip-fix1",
+  "expected": "c72f73688dc82073b7e39eedd7ecf275d3c46a1b",
+  "head": "49e8a74df5d6b61ebcdc7cbd4c12bc7affb21350",
+  "tree": "9227f6ead580c047aeb16bb911b8dab916792b83",
+  "receipt": "c2dad90385c249203d00ac1a86cc176c6a114d3b",
+  "testedHead": "c72f73688dc82073b7e39eedd7ecf275d3c46a1b",
+  "refReadback": true,
+  "originalsPreserved": 3203,
+  "nativeRetained": 29,
+  "addedEvidence": 2,
+  "blobLeaves": 3234,
+  "workflowRemoved": true,
+  "mainHistoricalAndPriorOwnUnchanged": true,
+  "closeHeadRuns": 0,
+  "readbackScope": "Dated API observations, immutable tree/commit/refs/one branch history; not a continuous monitor.",
+  "primary": "8595247053fe516c66addbd00008d593e4d72dff",
+  "proof": "98c4d4a232a3e603bc256bf6b2e96566f71bd4f4",
+  "native": {
+    "run": 43963999645,
+    "job": 133638507952,
+    "passed": 419,
+    "failed": 0
+  },
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
