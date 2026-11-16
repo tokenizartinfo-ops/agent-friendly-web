@@ -1,0 +1,320 @@
+{
+  "schema": "afw.c2-green20-frontier-diag1-protocol-contract.v1",
+  "status": "DESIGN_FOR_ROOT_RECONCILIATION",
+  "authority": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Git DATA, no implementation or execution",
+  "basis": {
+    "plan": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
+    "actualIncomplete": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+    "resultReview": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
+    "closedSource": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+    "own419Review": "797613a34698a6c4a3ade7c4cc679b7af0ad0099"
+  },
+  "frozen": {
+    "Source13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "CoreM": "unchanged",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "priorBranches": "All consumed/closed, never reopen or rerun."
+  },
+  "sourceNomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+    "message": "AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+    "job": "c2-green-frontier-diag1",
+    "prefix": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/",
+    "runner": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+    "driverSibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "artifact": {
+      "name": "afw-c2-t1-green-frontier-diag1",
+      "path": "output/c2-t1-green-frontier-diag1.json",
+      "fileName": "c2-t1-green-frontier-diag1.json",
+      "retentionDays": 7
+    },
+    "activationReleased": false
+  },
+  "ownNomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-green-frontier-diag1",
+    "message": "AFW-C2-OWN-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+    "job": "c2-own-green-frontier-diag1",
+    "prefix": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/",
+    "runner": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "artifact": {
+      "name": "afw-c2-own-green-frontier-diag1-proof",
+      "path": "output/c2-own-green-frontier-diag1-proof.json",
+      "fileName": "c2-own-green-frontier-diag1-proof.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "runnerOS": "ubuntu-24.04",
+    "jobTimeoutMinutes": 3,
+    "testTimeoutMs": 10000,
+    "activationReleased": false
+  },
+  "selection": {
+    "role": "selection",
+    "blob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "bytes": 3956,
+    "sha256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99",
+    "fullReadback": true
+  },
+  "selectionWireHash": "e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd",
+  "schemaPin": {
+    "role": "schema",
+    "blob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "bytes": 21200,
+    "sha256": "a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3",
+    "fullReadback": true
+  },
+  "inventory": {
+    "role": "inventory",
+    "blob": "b3b57056fdca9a8ff8d8c341642bb9f7b6ddb65f",
+    "bytes": 20496,
+    "sha256": "491f49b28d3d2af0bff15c7f836d69b6f0b4cd1675a4437444d2966532ddd7cd",
+    "fullReadback": true
+  },
+  "examples": [
+    {
+      "role": "positive-examples",
+      "blob": "1fb2e82835a547f434170939386852e2c6e32850",
+      "bytes": 22620,
+      "sha256": "ae09d2798335a4c417a6088cf6f5dba7415141c0e0efad1e9e7b4f0a9f2aa75e",
+      "fullReadback": true
+    },
+    {
+      "role": "negative-examples",
+      "blob": "928de8cd15789afc4d61b992601016377bdd7a7b",
+      "bytes": 19764,
+      "sha256": "5502a06eed2be7214bb063812bc20703cff6147fe3d4148ed2a1d76ce0bccf13",
+      "fullReadback": true
+    }
+  ],
+  "steps": [
+    "Read the exact one-use lab head",
+    "Use the fixed Node runtime",
+    "Install only the existing locked dependencies",
+    "Observe isolated proposal-green boundaries",
+    "Preserve the bounded green diagnostic"
+  ],
+  "sourceWorkflow": "Keep exact five original logical step display names in this array and order, pinned checkout 11d5960a326750d5838078e36cf38b85af677262 with fetch-depth2/persist-credentials:false, setup-node 49933ea5288caeca8642d1e84afbd3f7d6820020 Node22.23.4 and original locked npm ci --ignore-scripts --no-audit --no-fund, exact nominated command fourth, upload-artifact ea165f8d65b6e75b540449e92b4886f43607fa02 fifth. Ubuntu24.04 seven minutes, contents:read only, exact repo/push/once message/ref/attempt1. No hardcoded numeric hosted command step: resolve actual unique jobs API entry/number for logical fourth step after provider-generated setup. Fault must fail Source command; upload only after collector success, if-no-files-found:error. Job must finish success for accepted collection.",
+  "wire": {
+    "success": [
+      {
+        "marker": "AFW_C2_GREEN20_FRONTIER_DIAG1_CUSTODY",
+        "definition": "custody",
+        "bodyBytesMax": 1024
+      },
+      {
+        "marker": "AFW_C2_GREEN20_FRONTIER_DIAG1_OUTCOME",
+        "definition": "outcome",
+        "bodyBytesMax": 24576
+      }
+    ],
+    "fault": {
+      "marker": "AFW_C2_GREEN20_FRONTIER_DIAG1_FAULT",
+      "definition": "fault",
+      "bodyBytesMax": 2048
+    },
+    "encoding": "Each marker is followed by exactly one ASCII space, UTF8(JSON.stringify(parsed body)) in normative order, then a single LF. Caps exclude marker, that space and LF. Artifact payload is the exact outcome body followed by ONE byte 0x0a, thus at most 24577 bytes total. No BOM/extra LF/duplicate keys/extra fields/whitespace/CR/smuggled second marker. ZIP size limit 1048576 bytes; specified sole exact filename, listing count1/7d/private, measured archive digest and inflated bytes agree with API/log. Overall transport log max4194304. A body of 24576 is legal only if all semantic/shape rules also hold; never enlarge the body cap to fit LF.",
+    "order": {
+      "context": [
+        "repository",
+        "baselineSource",
+        "baselineTree",
+        "sourceIndexBlob",
+        "proposalIndexHash",
+        "selectionHash",
+        "head",
+        "tree",
+        "runId",
+        "runAttempt",
+        "job",
+        "node"
+      ],
+      "custody": [
+        "schema",
+        "context",
+        "parentNonRoot",
+        "preflightOwned",
+        "preflightRemoved",
+        "checkedLaunches",
+        "preflightProcesses",
+        "greenProcesses",
+        "checkedProcesses",
+        "uidGidGroupsLoopbackMatched",
+        "targetsBeforeMatched",
+        "targetsAfterMatched",
+        "journalOwnershipMatched",
+        "ownRootVerified",
+        "ownTempRemoved"
+      ],
+      "streamOut": [
+        "bytes",
+        "sha256"
+      ],
+      "streamErr": [
+        "bytes",
+        "sha256"
+      ],
+      "capture": [
+        "exitCode",
+        "signal",
+        "errorKind",
+        "stdout",
+        "stderr"
+      ],
+      "journal": [
+        "bytes",
+        "sha256",
+        "stable",
+        "recorderFaultObserved"
+      ],
+      "site": [
+        "file",
+        "line",
+        "column"
+      ],
+      "error": [
+        "name",
+        "code",
+        "site"
+      ],
+      "event": [
+        "sequence",
+        "elapsedMs",
+        "id",
+        "operation",
+        "edge",
+        "error"
+      ],
+      "openCase": [
+        "id",
+        "operation"
+      ],
+      "witness": [
+        "integrity",
+        "frontier",
+        "events",
+        "openCase",
+        "afterOpen"
+      ],
+      "nativeCase": [
+        "id",
+        "status"
+      ],
+      "native": [
+        "integrity",
+        "cases"
+      ],
+      "observation": [
+        "capture",
+        "journal",
+        "witness",
+        "unknownReason",
+        "firstThrowSequence",
+        "native"
+      ],
+      "outcome": [
+        "schema",
+        "context",
+        "diagnosticCollectionComplete",
+        "nativeQualification",
+        "sourceReads",
+        "observation",
+        "custody",
+        "SourceQualified",
+        "Task1Pass",
+        "nonclaims"
+      ],
+      "fault": [
+        "schema",
+        "context",
+        "phase",
+        "reason",
+        "diagnosticCollectionComplete",
+        "nativeQualification",
+        "SourceQualified",
+        "Task1Pass",
+        "nonclaims"
+      ],
+      "sourceReads": [
+        "beforeSha256",
+        "afterSha256"
+      ]
+    },
+    "schemaRule": "Every object follows its $defs required and properties insertion order, exactly. Const arrays compare elementwise in supplied order; transport canonical ASCII dates and occurrence joining are separate. The schema checks wire shape and constants; enforce relational rules below separately. Generic JSON Schema ignores key order. A structural validator alone cannot admit this protocol.",
+    "artifactConsistency": "Only two normal frames in this order, emitted once after all checks/own cleanup. Embedded custody must byte-match the first frame body. Prepare both complete canonical frames/payload before emitting normal markers. On infrastructure failure use FAULT with failing command and no admissible artifact; never accept partial line, success pair + FAULT, a partial pair, upload failure, or mixing occurrences. If physical transport fails before fault can be produced, the unique occurrence still fails admission."
+  },
+  "identity": {
+    "gitSource": "Before executing, verify original 3203 BASE leaf modes/blob IDs and exact additional DATA edges per inventory. BASE absence at canonical S08 and legacy S09 there is correct. Bind all 13 canonical afterimages only in owned materialized target, plus separately sealed D07 and recorder. Compute bytes/SHA256 and Git blob for each real target canonical file before GREEN and again after child exit/timeout before cleanup. Each projection is an independently built ordered list of 13 SHA256 values recorded in sourceReads.beforeSha256 and sourceReads.afterSha256. Neither may be filled from the index or copied from the other. Bind lengths/git IDs both times locally and independently to immutable normal-13 Git DATA tree. OWN demands both arrays exactly equal index rows and tree edges. Mismatch or inability to read -> infrastructure failure; no successful observation.",
+    "manifest": "Verify raw selection artifact git/bytes/sha vs p(selection), independently compute selectionWireHash from compact UTF8 JSON.stringify(selection) WITHOUT LF. Bind exact D07 sibling in argv and stack alias, S07 still canonical; seal actual pinned D07 bytes, one-alias projected recorder, journal reader. Reject reverse alias/legacy driver path, mixed bodyhash, fake complete claim or old green manifest/job. No new callbacks, remount strategy, original clocks, test predicates or additional native business calls."
+  },
+  "custody": "Exactly two checked native launches: owned-file preflight under ten seconds THEN all twenty GREEN cases in one process launch with normal compiled fixtures. No synthetic battery/ENOENT/BASE/mutant/regression/N3/W1 in capture. Together share a single target; each observed >=1 fresh unique PID record, retain all previous, union<=8. preflightProcesses and greenProcesses are separate actual fresh counts at each launch; checkedProcesses = their sum (2..8); no invented values. Parent positive UID, child exact UID/GID, cleared supplementary groups and loopback-only, sudo unshare + setpriv --no-new-privs, exact guard before native target, fresh regular safe files. Use existing 0600/single-link/no-symlink/ownership/dev/inode/size checks for journal and scoped temp creation/removal. `uidGidGroupsLoopbackMatched` reports observed guard facts; the `--no-new-privs` launch flag is bound to reviewed runner. `journalOwnershipMatched` and two target booleans mean actual readings succeeded, prior preflight/temp removal confirmed. Maximum custody body with longest admitted runId remains within 1024 bytes.",
+  "capture": "Capture from actual returned spawnSync object only, using existing finite safeCapture. Require observed stdout/stderr buffers within caps, measured bytes and SHA256. ETIMEDOUT ⇒ errorKind:'timeout'; keep independently returned numeric status or null and finite signals as frozen mapping (null=>'none'; known names literal; unrecognized string=>'other'; unavailable=>'unavailable'). Never set status=1/HANG by inference. When errorKind:'none' require signal:'none' and exitCode 0 or 1. Other spawn/err/signal combinations, overflow/missing streams/ownership/incorrect argv ⇒ infrastructure FAULT. Artifact marks diagnosticCollectionComplete:true and nativeQualification:false for collected exit0, native exit1 or ETIMEDOUT; original child condition stays visible. No eligibility/Source proof from job success. Require exact standard SHA256(empty) whenever byte count is zero.",
+  "journal": {
+    "physical": "Fresh parent-created exclusive blank 0600 file/O_NOFOLLOW/expected device+inode/owner/nlink. Recorder opens, appends one canonical LF-terminated row, closes synchronously, has no extra active timer. Read via same identity checked fd in RAM after child; before/after stats and read length agree; oversize/short read/identity/symlink/nonstable storage => FAULT,never a sanitized stable prefix claim. Raw journal <=32768 B/128 rows. Export validated rows only. Clamp by rejecting invalid data; never clip a valid finite value into range.",
+    "intervals": "Each complete canonical row parsed from exact bytes has sequence starting 1 and +1, elapsedMs 0..330000 nondecreasing, error:null for enter/return; on throw exact error object with allowlist name/code and exact reduced alias+line/column or null. Unknown error details stay null. For 20 nominal IDs, in order: action enter→return|throw, count enter→return|throw, then next id. AFTER close independent enter→return|throw at most once, may overlap any case. A missing world means D07 does not record a counter it never called; do not fabricate one or skip missing intervals to recover later. Records stop at first semantically invalid/malformed row. Select 62a31 progress() behavior including suppressing frontier on torn/ambiguous, and nativePrefix() separately.",
+    "integrity": "Complete/prefix/empty clean journals require equality of raw byte length and SHA256 against the concatenation UTF8(JSON.stringify(event)+'\\n') for all exported rows. Stable torn/invalid tail has rawBytes strictly larger than canonical validated prefix size (raw tail not exported); observed-recorder-fault can occur with zero tail. For any integrity, if lengths equal, require raw digest equal reconstructed prefix digest. For stable torn/invalid with unexported suffix, full raw digest is a bounded producer observation; do not claim independent proof of bytes not supplied. Preserve stable recorder-fault indication observed in actual stdout/stderr; false only means marker not observed. Ambiguous/invalid marker from the *binding* is fatal; malformed alias in a stable individual event is truncated before that event and yields UNKNOWN.",
+    "unknown": "If recorderFaultObserved=true, witness.integrity='ambiguous' and unknownReason='RECORDER_FAULT' (also if an invalid/torn record is present). Else if the first unaccepted complete record is invalid (including invalid alias), integrity='ambiguous', reason='JOURNAL_INVALID_RECORD'. Else if any incomplete final line follows valid complete rows, integrity='torn', reason='JOURNAL_TORN'. Else if no data, integrity='empty', reason='JOURNAL_EMPTY'. All four set frontier='unknown',openCase=null,afterOpen=false, where null/false are protocol sentinels and cannot establish absence. Preserve valid preceding rows and native evidence independently. For prefix or complete require unknownReason=null, stable true and no recorder fault.",
+    "frontier": "For known journal, use exact legacy frontier labels and recompute from chronological events. At complete all20 case actions/count and AFTER closed, timeout plus any throw ⇒ post-settlement-process-exit, without throw ⇒ post-teardown-process-exit, else normal end ⇒ all-settled. With case & after open ⇒ case-and-after; else case action or count, else after-close, else between-action-and-count after action end, else before-after for all20 finished/AFTER unopened, else between-cases. `firstThrowSequence` is the earliest edge='throw' within the validated contiguous exported prefix, including AFTER, else null. This is a pointer to an observed record, not a verdict about missing history. Never designate last absolute event or process/physical hold from torn tail."
+  },
+  "nativeAndCross": "Use exact published LF-terminated serial top-level TAP result lines paired to corresponding Subtest, ordinal and expected exact ID; never promote C2SOURCE/unterminated line or conflate journal and native. Preserved nativePrefix62a31 results use prefix/empty/torn/ambiguous only; prefix can contain all20 without exporting complete native TAP totals. Empty => zero observed pairs; ambiguous/torn may contain only previously complete pairs. Do not invent evidence after first ambiguity. Do not claim unconditional worker settlement. For every observed native pass, any stable validated action/count throw of the SAME id is a contradiction (N2), even if later journal tail is unknown. Other id/global AFTER throw is not the same contradiction. A TAP fail need not have a journal throw (framework/timeouts exist). Alias allowlist bound to exact temp file/URL, exact source or D07 path, bounds per schema; no suffix matches.",
+  "transport": "Prebind raw tree/body/nomination before push. Receiver independently joins repo/event push/head/parent/tree/ref/message, logical job, seven-minute workflow and attempt1 to actual API unique terminal job ID and actual command-step number. All five actual required steps succeed in order for accepted diagnostic; if run/step is incomplete, preserve what actually occurred as partial separately. N1: unique timestamped ##[group]Run <exact command>, finite times on header and each marker within actual command window ±1000ms per existing N1, header closed by ##[endgroup] before stdout and before next step group. Reject malformed/smuggled/mixed duplicate markers even outside selected window, archived API job with misleading same names, artifacts outside this head/branch/run. Bind ordered pair plus canonical outcome JSON+LF to actual ZIP compressed bytes/digest/listing/entry count/name, ownership/time, exact CRC/size/full deflate consumption and closed primitive from OWN419. Reuse OWN independent logic only, never producer helper or imported Source oracle.",
+  "fault": {
+    "meaning": "Missing immutable wire/target alias, admission/custody failure, unstable owned read, process capture outside defined combinations, N2/contract conflict or failed cleanup/publication => reject. An actual fault during collection, once captured, emits only finite fault marker if reporting possible, exits nonzero, no eligible artifact. Stable incomplete evidence reasons in journal.unknown are collected; do not send FAULT just because the original child timed out or a record was torn. The `RECORDER_FAULT` reason in FAULT envelope is reserved for a failure to establish a trustworthy recorder/transport identity or fault classification; a stable orderly observed flag inside approved target is handled by the success envelope with uncertain frontier.",
+    "phaseReasons": {
+      "admission": [
+        "ADMISSION_INVALID"
+      ],
+      "materialize": [
+        "MATERIALIZATION_INVALID",
+        "TARGET_DRIFT"
+      ],
+      "preflight": [
+        "PREFLIGHT_INVALID",
+        "CUSTODY_INVALID"
+      ],
+      "green": [
+        "LAUNCH_INVALID",
+        "CUSTODY_INVALID",
+        "CAPTURE_INVALID"
+      ],
+      "journal": [
+        "JOURNAL_INVALID",
+        "RECORDER_FAULT",
+        "TARGET_DRIFT"
+      ],
+      "native": [
+        "CAPTURE_INVALID",
+        "EVIDENCE_CONFLICT"
+      ],
+      "cleanup": [
+        "CLEANUP_INVALID",
+        "TARGET_DRIFT"
+      ],
+      "publish": [
+        "PUBLICATION_INVALID"
+      ]
+    },
+    "context": "null only if admission failed before context could be established; valid pinned context mandatory after admission. No secret/raw/error stack in fault."
+  },
+  "gates": "Source diagnostics and OWN fixture controls are separate nominated families. New selection does not reuse closed branches/heads or native results. Full qualifier remains frozen. Before any executable DATA or occurrence Root must reconcile these exact wire patterns with independent OWN and seal. Root later handles recovery/inspection/closure; no repeat planned. Seven false, SourceQualified false, Task1Pass false in outcome/fault; ancillary custody is measurement only.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

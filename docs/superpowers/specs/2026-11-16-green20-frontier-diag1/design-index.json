@@ -1,0 +1,215 @@
+{
+  "schema": "AFW-GREEN20-FRONTIER-DIAG1-SOURCE-DESIGN-PACKET/1",
+  "status": "DESIGN_FOR_ROOT_RECONCILIATION_NO_IMPLEMENTATION",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "rootRuling": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
+  "resourceType": "Detached Git DATA design package",
+  "allowedAction": "Read frozen blobs as data and create/readback design artifacts only. Root retains implementation, execution and review gates.",
+  "frozen": {
+    "Source13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "CoreM": "unchanged",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "priorBranches": "All consumed/closed, never reopen or rerun."
+  },
+  "basis": {
+    "plan": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
+    "actualIncomplete": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+    "resultReview": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
+    "closedSource": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+    "own419Review": "797613a34698a6c4a3ade7c4cc679b7af0ad0099"
+  },
+  "contractLeaf": {
+    "role": "contract",
+    "blob": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "bytes": 21378,
+    "sha256": "8891598c7c0ee416762ad65d139c7e9336cc33e4123e251211055e42c3265fe7",
+    "fullReadback": true
+  },
+  "leaves": [
+    {
+      "role": "selection",
+      "blob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+      "bytes": 3956,
+      "sha256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99",
+      "fullReadback": true
+    },
+    {
+      "role": "schema",
+      "blob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+      "bytes": 21200,
+      "sha256": "a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3",
+      "fullReadback": true
+    },
+    {
+      "role": "inventory",
+      "blob": "b3b57056fdca9a8ff8d8c341642bb9f7b6ddb65f",
+      "bytes": 20496,
+      "sha256": "491f49b28d3d2af0bff15c7f836d69b6f0b4cd1675a4437444d2966532ddd7cd",
+      "fullReadback": true
+    },
+    {
+      "role": "positive-examples",
+      "blob": "1fb2e82835a547f434170939386852e2c6e32850",
+      "bytes": 22620,
+      "sha256": "ae09d2798335a4c417a6088cf6f5dba7415141c0e0efad1e9e7b4f0a9f2aa75e",
+      "fullReadback": true
+    },
+    {
+      "role": "negative-examples",
+      "blob": "928de8cd15789afc4d61b992601016377bdd7a7b",
+      "bytes": 19764,
+      "sha256": "5502a06eed2be7214bb063812bc20703cff6147fe3d4148ed2a1d76ce0bccf13",
+      "fullReadback": true
+    },
+    {
+      "role": "contract",
+      "blob": "e55a6387549a8447a5ad93356184645ae19e70de",
+      "bytes": 21378,
+      "sha256": "8891598c7c0ee416762ad65d139c7e9336cc33e4123e251211055e42c3265fe7",
+      "fullReadback": true
+    },
+    {
+      "role": "tdd",
+      "blob": "d4b598add697757ce7578ba845aae99a746d8af0",
+      "bytes": 8067,
+      "sha256": "a2e02b4eeb23e9410cde39f33f7b76b2bca9c0c5e4752eb3b563ccd2fdbbf6c3",
+      "fullReadback": true
+    }
+  ],
+  "sourceNomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+    "message": "AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+    "job": "c2-green-frontier-diag1",
+    "prefix": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/",
+    "runner": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+    "driverSibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "artifact": {
+      "name": "afw-c2-t1-green-frontier-diag1",
+      "path": "output/c2-t1-green-frontier-diag1.json",
+      "fileName": "c2-t1-green-frontier-diag1.json",
+      "retentionDays": 7
+    },
+    "activationReleased": false
+  },
+  "ownNomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-green-frontier-diag1",
+    "message": "AFW-C2-OWN-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+    "job": "c2-own-green-frontier-diag1",
+    "prefix": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/",
+    "runner": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "artifact": {
+      "name": "afw-c2-own-green-frontier-diag1-proof",
+      "path": "output/c2-own-green-frontier-diag1-proof.json",
+      "fileName": "c2-own-green-frontier-diag1-proof.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "runnerOS": "ubuntu-24.04",
+    "jobTimeoutMinutes": 3,
+    "testTimeoutMs": 10000,
+    "activationReleased": false
+  },
+  "wireMarkers": {
+    "custody": "AFW_C2_GREEN20_FRONTIER_DIAG1_CUSTODY",
+    "outcome": "AFW_C2_GREEN20_FRONTIER_DIAG1_OUTCOME",
+    "fault": "AFW_C2_GREEN20_FRONTIER_DIAG1_FAULT"
+  },
+  "success": "CUSTODY then OUTCOME, one canonical outcome body + final LF artifact. JSON body limit 24576; payload including LF limit 24577. Distinct infrastructure FAULT is never admitted as normal success. Source/Task1/nativeQualification false, even if native exited 0.",
+  "sourceMeasurement": "13 BASE Git paths retain their statuses/old blobs; verify 13 inert body DATA edges and index in Git separately. SHA arrays in outcome are read from two passes over the actual 13 canonical materialized target files. Driver remains an isolated sibling; no Worker QA instrumentation.",
+  "selectionHash": {
+    "compactBytes": 3219,
+    "compactSHA256": "e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd",
+    "rawPrettyBytes": 3956,
+    "rawPrettySHA256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99"
+  },
+  "tail": {
+    "bytes": 1794,
+    "sha256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a",
+    "sourceOffset": 991,
+    "diagnosticOffset": 1375
+  },
+  "aliasProjected": {
+    "bytes": 3833,
+    "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e",
+    "git": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "codeBlobWritten": false
+  },
+  "census": {
+    "fullPositiveWirePairs": 3,
+    "fullNegativeWirePairs": 2,
+    "fullFaultExample": 1,
+    "additionalRelationalNegativeDesigns": 15,
+    "caseIds": 20,
+    "canonicalTargetRows": 13,
+    "liveGreenLaunches": 1,
+    "livePreflightLaunches": 1,
+    "processes": [
+      2,
+      8
+    ]
+  },
+  "dataVerification": {
+    "positives": [
+      [
+        "PX_TIMEOUT_OPEN",
+        965,
+        4917,
+        4918
+      ],
+      [
+        "PX_EXIT1_THROW_THEN_TORN",
+        965,
+        5300,
+        5301
+      ],
+      [
+        "PX_TIMEOUT_EMPTY",
+        965,
+        4350,
+        4351
+      ]
+    ],
+    "negativeShapeOnly": [
+      [
+        "NX_N2_COHERENT_PASS_WITH_THROW",
+        true
+      ],
+      [
+        "NX_S08_BEFORE_AND_AFTER_LEGACY",
+        false
+      ]
+    ],
+    "faultShape": true
+  },
+  "designDecisionsForRoot": [
+    "Stable empty/torn/invalid-record or observed-recorder-fault frontier is unknown; admit the honest partial diagnostic only if all external custody, target, publication and provenance checks succeed. Record observed first throw sequence from prior validated prefix; never assign absolute last operation. Unstable read/incorrect executing alias input/N2 conflict or infrastructure failure preclude admission.",
+    "Candidate mount adds 16 inherited DATA/helper leaves +8 family paths, no full qualifier/regression/control battery. Original five human-readable Source workflow step names preserved; new fourth-step command and family identities from ruling. All occurrence IDs in literal wire examples are fixture-only.",
+    "Schema required order and $defs.properties agree; cross-field semantics are mandatory. Verify nonempty raw hashes and actual ZIP/CRC/deflate via independent OWN. No duplicate hosted execution or new native budget proposed."
+  ],
+  "inactiveRevisions": [
+    "99dfff94c6604e852b8df5723848047e8bb87d50 was an intermediate design schema without target arrays/unknown-reason; use eda6cb5b instead.",
+    "89bcb3953837d289f262700e5b48ea70ccc31992 was superseded by 928de8cd after rebinding synthetic N2 TAP digest to its own raw sample. Preserve history."
+  ],
+  "performed": "Read pinned Git data, inspected static text and JSON, computed UTF8/Git/SHA256 and literal wire checks in RAM, created design blobs only. No runtime code has been submitted, imported or run.",
+  "rollback": "Omit design DATA. All prior heads/receipts stay closed.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

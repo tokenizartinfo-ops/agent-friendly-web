@@ -1,0 +1,123 @@
+{
+  "schema": "afw.c2-green20-frontier-diag1-fixture-first-plan.v1",
+  "scope": "Prospective contract/harness TDD, no implementation, native tests or Source execution in the design. The current plan is for a diagnostic collection independent of full Source qualification.",
+  "contract": {
+    "role": "contract",
+    "blob": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "bytes": 21378,
+    "sha256": "8891598c7c0ee416762ad65d139c7e9336cc33e4123e251211055e42c3265fe7",
+    "fullReadback": true
+  },
+  "schemaPin": {
+    "role": "schema",
+    "blob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "bytes": 21200,
+    "sha256": "a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3",
+    "fullReadback": true
+  },
+  "selection": {
+    "role": "selection",
+    "blob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "bytes": 3956,
+    "sha256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99",
+    "fullReadback": true
+  },
+  "positiveLiteralBytes": {
+    "role": "positive-examples",
+    "blob": "1fb2e82835a547f434170939386852e2c6e32850",
+    "bytes": 22620,
+    "sha256": "ae09d2798335a4c417a6088cf6f5dba7415141c0e0efad1e9e7b4f0a9f2aa75e",
+    "fullReadback": true
+  },
+  "negativeLiteralBytes": {
+    "role": "negative-examples",
+    "blob": "928de8cd15789afc4d61b992601016377bdd7a7b",
+    "bytes": 19764,
+    "sha256": "5502a06eed2be7214bb063812bc20703cff6147fe3d4148ed2a1d76ce0bccf13",
+    "fullReadback": true
+  },
+  "dataChecks": {
+    "positives": [
+      [
+        "PX_TIMEOUT_OPEN",
+        965,
+        4917,
+        4918
+      ],
+      [
+        "PX_EXIT1_THROW_THEN_TORN",
+        965,
+        5300,
+        5301
+      ],
+      [
+        "PX_TIMEOUT_EMPTY",
+        965,
+        4350,
+        4351
+      ]
+    ],
+    "negativeShapeOnly": [
+      [
+        "NX_N2_COHERENT_PASS_WITH_THROW",
+        true
+      ],
+      [
+        "NX_S08_BEFORE_AND_AFTER_LEGACY",
+        false
+      ]
+    ],
+    "faultShape": true
+  },
+  "sourceSeams": [
+    {
+      "id": "G20_D07_SIBLING",
+      "given": "Sealed S07, original D07, recorder before and measured projected after, old runner preimage 069e1cc.",
+      "beforeExpected": "Static preimage runner L147–152 overwrites canonical S07. Reject this plan/target layout even if 20 registration bodies agree.",
+      "required": "Sibling created exclusively at nominated path. Exact 13 before and after and exact 1794-byte common registration suffix; D07 maps only to sibling, S07 stays normal. Swap D07->S07 alias/argv/case order must fail."
+    },
+    {
+      "id": "G20_MEASURE_TWO_REAL_TARGETS",
+      "given": "Valid exact overlay and a synthetic target-byte reader under future protocol fixture. Only test harness entity can alter a target between two measurements.",
+      "beforeExpected": "Historical runner knows its initial file hash and overlays D07; no pair of real SHA lists. A fake reader returning the sealed list without rereading the target must fail the drift control.",
+      "required": "Two independent 13-row target reads. A one-byte S08 change between snapshots or copied-before→after reveals drift, fails, no receipt; absence of canonical S08 in BASE Git alone is accepted. All measured rows follow literal source-index order; old S08 in both arrays rejects."
+    },
+    {
+      "id": "G20_SECOND_LAUNCH_CUSTODY",
+      "given": "Distinct records across owned preflight and GREEN on the same target, use path collision/double-count/eight-global neighbors.",
+      "beforeExpected": "Three-launch historical diagnostic cannot accept legitimate two-launch packet; six-launch full contract is unrelated.",
+      "required": "1+1=2 and 1+7=8 accepted, 1+0, 7+2=9, accounted count differing from sum, reused PID/no fresh item, wrong owner/symlink or failed deletion reject. Actual target scopes/umask/network command pinned; no app/secret query."
+    },
+    {
+      "id": "G20_NATIVE_ETIMEDOUT_CAPTURE",
+      "given": "Positive PX_TIMEOUT_OPEN whose child exit1+ETIMEDOUT reports one TAP pair, case2 open; PX_TIMEOUT_EMPTY whose buffers/journal were empty; native case L1->L2 chronological.",
+      "beforeExpected": "Normal c230 cannot admit either as qualified mode, as intended; prior diagnostic envelope has wrong nomination/custody.",
+      "required": "Source collection preserves exact bounded native metadata, normalizer returns data, no RAW or cause; collect successfully even for ETIMEDOUT, never pass Source. Wrong non-timeout signal/transport/oversize buffer rejects."
+    },
+    {
+      "id": "G20_NATIVE_EXIT1_TORN_AND_FAULT",
+      "given": "PX_EXIT1_THROW_THEN_TORN with first throw seq6; stable recorder-fault marker; valid chronological rows then bad alias; unstable file or wrong recorder pin as separate inputs.",
+      "required": "Clean/torn/empty/invalid-record/observed-recorder-fault policies per contract. For locked artifact/transport verify firstThrowSequence even when later record is lost. Genuine after-close overlap, case throw vs after-only throw, native fail without visible action throw; stable valid prefix retains facts. Incompatible recorder pin, unstable/truncated ownership read or N2 actual native PASS contradiction produce failure; no all-zero fallback."
+    },
+    {
+      "id": "G20_WIRE_AND_ZIP_LENGTH",
+      "given": "Canonical samples with coherent digests, repeated/omitted markers, artifact LF/payload/max neighbors.",
+      "required": "Require exact field order, two normal lines and one exact outcome+LF payload. Test length gate independently at 24576 body and 24577 with LF; reject extra byte/body, double LF, mismatched log or unexpected archive entry. Source does not need to parse a ZIP; OWN independently checks actual ZIP raw/CRC/full inflation."
+    }
+  ],
+  "proofStrategy": "Fix these input and expected literal fixtures before future code. Use preexisting runner/reader/contract preimages for the documented concrete incompatibilities (reasoned RED here, no actual native RED claim). Future writer preserves prefix/after projections and reversible preimages. Host can verify frozen tail, alias splice, DOM-free JSON/byte layout and fixture order as DATA. Executable harness tests must exercise the written production adapters on those literal fixtures when explicitly admitted; a model of the desired answers is insufficient. No new tool occurrence is nominated by this proposal. Keep future Source capture limited to live admissions, preflight and the single actual native GREEN child. Do not run a producer test battery in that capture or import producer code into OWN. Distinguish design expectations and actual future test evidence in receipts.",
+  "ownScopedControls": "OWN independently reconstructs N1 API/header/frame and N2 same-ID throw/PASS, fallback-on-unknown, CRC/full deflate ZIP and max-size+LF. Use literal bytes here and independent contradictory neighbors. Previous OWN419 or W1 bodies are not the new protocol. The separate OWN nomination and command in Root ruling cover possible future fixture-first host tests only after Root seals the design. No invented native result or a cross-implementation import.",
+  "newControlsAreMaterial": "The earlier green recorder/read-progress remain useful. These checks target only invariants that changed: sibling vs original alias and source bytes, 2-launch custody, proof arrays, SHA convention, first throw, classification of stable deficient evidence vs failing infra, 2-frame/real ZIP+LF agreement. Do not rerun existing 3/35, historical bootstrap exercise or old business modes in the Source collection.",
+  "exit": "Design closes with exact specimens and pins read back. Subsequent actual diagnostic closes once after externally bound evidence or explicitly inconclusive/fault. No second business occurrence implied.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
