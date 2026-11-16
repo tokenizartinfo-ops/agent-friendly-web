@@ -1,0 +1,940 @@
+{
+  "schema": "afw.c2-green-diag1-primary-evidence.v1",
+  "observedAtUtc": "2026-11-16 07:15:15 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "isolated GitHub-hosted green-only observer",
+  "gate": "b53e165a81ef0cf3f6a3d373da96b7708772e6a8",
+  "packet": "87ff7ee8c613b02fe04d2d8b6e01e9fee09c610e",
+  "ownIndex": "2cc1f805f8eb2c6f2386709e1d4ee0874dc3bf8c",
+  "runId": 43821243410,
+  "jobId": 133144581316,
+  "runAttempt": 1,
+  "head": "c741821fa5fcb647602021c6a2e86a260d4a9802",
+  "tree": "f70a380dc07feeefb12da9deadcb1d06ecc0f2b3",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "branch": "lab/afw-c2-source-20261116-t1-green-diag1",
+  "workflow": ".github/workflows/afw-c2-green-diag1.yml",
+  "runConclusion": "success",
+  "conclusionMeaning": "Diagnostic capture-only success; native child timed out. Not Source success.",
+  "commandStep": {
+    "name": "Observe isolated proposal-green boundaries",
+    "status": "completed",
+    "conclusion": "success",
+    "number": 5,
+    "started_at": "2026-11-16T07:05:19Z",
+    "completed_at": "2026-11-16T07:08:19Z"
+  },
+  "controls": {
+    "parserAccepted": 3,
+    "parserRejected": 35,
+    "progressChecks": 13,
+    "realBootstrapAbsent": "EXPECTED_ENOENT",
+    "ownCloudChecks": 215
+  },
+  "artifact": {
+    "id": 14204936638,
+    "name": "afw-c2-green-diag1",
+    "archiveBytes": 2384,
+    "archiveSha256": "d6a61457b1e21f17f3ddb766fe67722d21740bd19343dd396950c5de508307c6",
+    "fileName": "c2-green-diag1.json",
+    "payloadBytes": 10772,
+    "digestMatchedGitHubApi": true,
+    "payloadMatchedFrame": true
+  },
+  "ownResult": {
+    "diagnosticCaptureAccepted": true,
+    "journalUsable": true,
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "proposalIndexHash": "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03",
+      "head": "c741821fa5fcb647602021c6a2e86a260d4a9802",
+      "tree": "f70a380dc07feeefb12da9deadcb1d06ecc0f2b3",
+      "runId": "43821243410",
+      "runAttempt": 1,
+      "job": "c2-green-diag1",
+      "node": "v22.23.4"
+    },
+    "jobId": 133144581316,
+    "commandStepNumber": 5,
+    "frontier": "action",
+    "integrity": "prefix",
+    "openCase": {
+      "id": "C2T1_LOST_ACK_DUPLICATE",
+      "operation": "action"
+    },
+    "afterOpen": false,
+    "native": {
+      "integrity": "prefix",
+      "cases": [
+        {
+          "id": "C2T1_CONNECTION",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_OAUTH",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_HANDLE",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_PROJECTREF",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_SUBJECT",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_PHASE_RENAME",
+          "status": "fail"
+        },
+        {
+          "id": "C2T1_SOURCE_BYTES",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_APPROVAL",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_PREDECESSOR",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_GRANT_REVOKED",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_EXTRA_KEY",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_NOTICES",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_MONITOR_COOKIE",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_MONITOR",
+          "status": "fail"
+        },
+        {
+          "id": "C2T1_SCOPE_MISSING",
+          "status": "fail"
+        },
+        {
+          "id": "C2T1_FINITE",
+          "status": "fail"
+        },
+        {
+          "id": "C2T1_SELECTION",
+          "status": "fail"
+        }
+      ]
+    },
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false
+  },
+  "outcome": {
+    "schema": "afw.c2-green-observation.v1",
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "proposalIndexHash": "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03",
+      "head": "c741821fa5fcb647602021c6a2e86a260d4a9802",
+      "tree": "f70a380dc07feeefb12da9deadcb1d06ecc0f2b3",
+      "runId": "43821243410",
+      "runAttempt": 1,
+      "job": "c2-green-diag1",
+      "node": "v22.23.4"
+    },
+    "observation": {
+      "selectionHash": "ecb5037b4f3274c5afcab5bb2a7fdc4ca3795e450583db7b13e3eed98955d3f3",
+      "originalDriverBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "driverHash": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+      "recorderHash": "271b9abeb806acaa5e6a1d35e6e72c77cf9b25bb5cad3603f0ccbb05745f7508",
+      "readerHash": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f",
+      "parserVectorsHash": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+      "progressVectorsHash": "71c979c34d8a9fc8fcce7e99463ca0479160b32620517e69849021715c21570b",
+      "capture": {
+        "exitCode": 1,
+        "signal": "none",
+        "errorKind": "timeout",
+        "stdout": {
+          "bytes": 18193,
+          "sha256": "6e844353c810f8889a1924e21b6cb76f771d2f764ed06e779533b183176279d0"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "journal": {
+        "bytes": 7727,
+        "sha256": "862fdc8383726c49db1b6308ea8b130127cd34e3ff94c4f346026404e7395155",
+        "stable": true,
+        "recorderFaultObserved": false
+      },
+      "witness": {
+        "integrity": "prefix",
+        "frontier": "action",
+        "events": [
+          {
+            "sequence": 1,
+            "elapsedMs": 9,
+            "id": "C2T1_CONNECTION",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 2,
+            "elapsedMs": 27654,
+            "id": "C2T1_CONNECTION",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 3,
+            "elapsedMs": 27654,
+            "id": "C2T1_CONNECTION",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 4,
+            "elapsedMs": 27687,
+            "id": "C2T1_CONNECTION",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 5,
+            "elapsedMs": 27688,
+            "id": "C2T1_OAUTH",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 6,
+            "elapsedMs": 44035,
+            "id": "C2T1_OAUTH",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 7,
+            "elapsedMs": 44036,
+            "id": "C2T1_OAUTH",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 8,
+            "elapsedMs": 44065,
+            "id": "C2T1_OAUTH",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 9,
+            "elapsedMs": 44066,
+            "id": "C2T1_HANDLE",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 10,
+            "elapsedMs": 66237,
+            "id": "C2T1_HANDLE",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 11,
+            "elapsedMs": 66238,
+            "id": "C2T1_HANDLE",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 12,
+            "elapsedMs": 66275,
+            "id": "C2T1_HANDLE",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 13,
+            "elapsedMs": 66276,
+            "id": "C2T1_PROJECTREF",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 14,
+            "elapsedMs": 69977,
+            "id": "C2T1_PROJECTREF",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 15,
+            "elapsedMs": 69977,
+            "id": "C2T1_PROJECTREF",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 16,
+            "elapsedMs": 70006,
+            "id": "C2T1_PROJECTREF",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 17,
+            "elapsedMs": 70007,
+            "id": "C2T1_SUBJECT",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 18,
+            "elapsedMs": 72402,
+            "id": "C2T1_SUBJECT",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 19,
+            "elapsedMs": 72402,
+            "id": "C2T1_SUBJECT",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 20,
+            "elapsedMs": 72429,
+            "id": "C2T1_SUBJECT",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 21,
+            "elapsedMs": 72430,
+            "id": "C2T1_PHASE_RENAME",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 22,
+            "elapsedMs": 72534,
+            "id": "C2T1_PHASE_RENAME",
+            "operation": "action",
+            "edge": "throw",
+            "error": {
+              "name": "AssertionError",
+              "code": "ERR_ASSERTION",
+              "site": {
+                "file": "S08",
+                "line": 81,
+                "column": 10
+              }
+            }
+          },
+          {
+            "sequence": 23,
+            "elapsedMs": 72534,
+            "id": "C2T1_PHASE_RENAME",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 24,
+            "elapsedMs": 72560,
+            "id": "C2T1_PHASE_RENAME",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 25,
+            "elapsedMs": 72561,
+            "id": "C2T1_SOURCE_BYTES",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 26,
+            "elapsedMs": 72921,
+            "id": "C2T1_SOURCE_BYTES",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 27,
+            "elapsedMs": 72922,
+            "id": "C2T1_SOURCE_BYTES",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 28,
+            "elapsedMs": 72951,
+            "id": "C2T1_SOURCE_BYTES",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 29,
+            "elapsedMs": 72951,
+            "id": "C2T1_APPROVAL",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 30,
+            "elapsedMs": 73354,
+            "id": "C2T1_APPROVAL",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 31,
+            "elapsedMs": 73354,
+            "id": "C2T1_APPROVAL",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 32,
+            "elapsedMs": 73379,
+            "id": "C2T1_APPROVAL",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 33,
+            "elapsedMs": 73380,
+            "id": "C2T1_PREDECESSOR",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 34,
+            "elapsedMs": 73802,
+            "id": "C2T1_PREDECESSOR",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 35,
+            "elapsedMs": 73802,
+            "id": "C2T1_PREDECESSOR",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 36,
+            "elapsedMs": 73830,
+            "id": "C2T1_PREDECESSOR",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 37,
+            "elapsedMs": 73830,
+            "id": "C2T1_GRANT_REVOKED",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 38,
+            "elapsedMs": 74303,
+            "id": "C2T1_GRANT_REVOKED",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 39,
+            "elapsedMs": 74303,
+            "id": "C2T1_GRANT_REVOKED",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 40,
+            "elapsedMs": 74330,
+            "id": "C2T1_GRANT_REVOKED",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 41,
+            "elapsedMs": 74331,
+            "id": "C2T1_EXTRA_KEY",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 42,
+            "elapsedMs": 74518,
+            "id": "C2T1_EXTRA_KEY",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 43,
+            "elapsedMs": 74518,
+            "id": "C2T1_EXTRA_KEY",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 44,
+            "elapsedMs": 74545,
+            "id": "C2T1_EXTRA_KEY",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 45,
+            "elapsedMs": 74545,
+            "id": "C2T1_NOTICES",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 46,
+            "elapsedMs": 103417,
+            "id": "C2T1_NOTICES",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 47,
+            "elapsedMs": 103417,
+            "id": "C2T1_NOTICES",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 48,
+            "elapsedMs": 103450,
+            "id": "C2T1_NOTICES",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 49,
+            "elapsedMs": 103451,
+            "id": "C2T1_MONITOR_COOKIE",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 50,
+            "elapsedMs": 103977,
+            "id": "C2T1_MONITOR_COOKIE",
+            "operation": "action",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 51,
+            "elapsedMs": 103977,
+            "id": "C2T1_MONITOR_COOKIE",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 52,
+            "elapsedMs": 104006,
+            "id": "C2T1_MONITOR_COOKIE",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 53,
+            "elapsedMs": 104006,
+            "id": "C2T1_MONITOR",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 54,
+            "elapsedMs": 109258,
+            "id": "C2T1_MONITOR",
+            "operation": "action",
+            "edge": "throw",
+            "error": {
+              "name": "AssertionError",
+              "code": "ERR_ASSERTION",
+              "site": {
+                "file": "S08",
+                "line": 91,
+                "column": 147
+              }
+            }
+          },
+          {
+            "sequence": 55,
+            "elapsedMs": 109259,
+            "id": "C2T1_MONITOR",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 56,
+            "elapsedMs": 109288,
+            "id": "C2T1_MONITOR",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 57,
+            "elapsedMs": 109288,
+            "id": "C2T1_SCOPE_MISSING",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 58,
+            "elapsedMs": 139305,
+            "id": "C2T1_SCOPE_MISSING",
+            "operation": "action",
+            "edge": "throw",
+            "error": {
+              "name": "AssertionError",
+              "code": "ERR_ASSERTION",
+              "site": {
+                "file": "S08",
+                "line": 18,
+                "column": 118
+              }
+            }
+          },
+          {
+            "sequence": 59,
+            "elapsedMs": 139305,
+            "id": "C2T1_SCOPE_MISSING",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 60,
+            "elapsedMs": 139337,
+            "id": "C2T1_SCOPE_MISSING",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 61,
+            "elapsedMs": 139338,
+            "id": "C2T1_FINITE",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 62,
+            "elapsedMs": 169348,
+            "id": "C2T1_FINITE",
+            "operation": "action",
+            "edge": "throw",
+            "error": {
+              "name": "AssertionError",
+              "code": "ERR_ASSERTION",
+              "site": {
+                "file": "S08",
+                "line": 18,
+                "column": 118
+              }
+            }
+          },
+          {
+            "sequence": 63,
+            "elapsedMs": 169348,
+            "id": "C2T1_FINITE",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 64,
+            "elapsedMs": 169378,
+            "id": "C2T1_FINITE",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 65,
+            "elapsedMs": 169379,
+            "id": "C2T1_SELECTION",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 66,
+            "elapsedMs": 169428,
+            "id": "C2T1_SELECTION",
+            "operation": "action",
+            "edge": "throw",
+            "error": {
+              "name": "AssertionError",
+              "code": "ERR_ASSERTION",
+              "site": {
+                "file": "S08",
+                "line": 102,
+                "column": 4
+              }
+            }
+          },
+          {
+            "sequence": 67,
+            "elapsedMs": 169428,
+            "id": "C2T1_SELECTION",
+            "operation": "count",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 68,
+            "elapsedMs": 169454,
+            "id": "C2T1_SELECTION",
+            "operation": "count",
+            "edge": "return",
+            "error": null
+          },
+          {
+            "sequence": 69,
+            "elapsedMs": 169455,
+            "id": "C2T1_LOST_ACK_DUPLICATE",
+            "operation": "action",
+            "edge": "enter",
+            "error": null
+          }
+        ],
+        "openCase": {
+          "id": "C2T1_LOST_ACK_DUPLICATE",
+          "operation": "action"
+        },
+        "afterOpen": false
+      },
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "C2T1_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_HANDLE",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_PROJECTREF",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_SUBJECT",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_PHASE_RENAME",
+            "status": "fail"
+          },
+          {
+            "id": "C2T1_SOURCE_BYTES",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_APPROVAL",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_PREDECESSOR",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_GRANT_REVOKED",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_EXTRA_KEY",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_NOTICES",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_MONITOR_COOKIE",
+            "status": "pass"
+          },
+          {
+            "id": "C2T1_MONITOR",
+            "status": "fail"
+          },
+          {
+            "id": "C2T1_SCOPE_MISSING",
+            "status": "fail"
+          },
+          {
+            "id": "C2T1_FINITE",
+            "status": "fail"
+          },
+          {
+            "id": "C2T1_SELECTION",
+            "status": "fail"
+          }
+        ]
+      }
+    },
+    "custody": {
+      "schema": "afw.c2-green-custody.v1",
+      "context": {
+        "head": "c741821fa5fcb647602021c6a2e86a260d4a9802",
+        "runId": "43821243410",
+        "runAttempt": 1,
+        "job": "c2-green-diag1",
+        "proposalIndexHash": "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03"
+      },
+      "parentNonRoot": true,
+      "preflightOwned": true,
+      "preflightRemoved": true,
+      "checkedLaunches": 3,
+      "checkedProcesses": 3,
+      "uidGidGroupsLoopbackMatched": true,
+      "ownRootVerified": true,
+      "ownTempRemoved": true
+    },
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  },
+  "logsReadOnce": true,
+  "rawTapRetained": false,
+  "signedDownloadUrlRetained": false,
+  "datedFacts": {
+    "journalRecords": 69,
+    "stable": true,
+    "recorderFaultObserved": false,
+    "nativeCompleted": 17,
+    "nativePass": 12,
+    "nativeFail": 5,
+    "firstObservedFailure": {
+      "id": "C2T1_PHASE_RENAME",
+      "elapsedMs": 72534,
+      "code": "ERR_ASSERTION",
+      "site": {
+        "file": "S08",
+        "line": 81,
+        "column": 10
+      }
+    },
+    "otherObservedFailures": [
+      "C2T1_MONITOR",
+      "C2T1_SCOPE_MISSING",
+      "C2T1_FINITE",
+      "C2T1_SELECTION"
+    ],
+    "lastRecordedEntry": {
+      "id": "C2T1_LOST_ACK_DUPLICATE",
+      "operation": "action",
+      "elapsedMs": 169455
+    },
+    "globalAfterRecorded": false
+  },
+  "interpretation": "First actionable failure is PHASE_RENAME assertion at S08:81. Five actual failures before timeout; cumulative elapsed169455ms already used before LOST_ACK action. Open last action is a frontier only, not proof of a permanently hung case or cause. No global after entry recorded. No product/provider/credential causal attribution. Observer synchronous writes may affect timings. Future complete Source qualification remains required.",
+  "next": "Close workflow and preserve immutable facts; scoped counter-fix/observer re-review with actual controls; inspect first failure semantics and relevant product path before minimal fix or new diagnostic.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
