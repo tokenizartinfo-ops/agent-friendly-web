@@ -1,0 +1,19 @@
+{
+  "schema": "afw.c2-notices-n2.own-close-proof.v1",
+  "head": "a9f53b65be850953085be78df9868f9bbec32c67",
+  "tree": "6308cdd0fc6d098e2b5024928dfc69fa65835cbf",
+  "branch": "lab/afw-c2-own-receiver-20261116-notices-n2",
+  "testedHead": "0ccd54c6fd234c681f2967a538f7d0230fdea472",
+  "leaves": 3221,
+  "originals": 3203,
+  "workflowRemoved": true,
+  "SourceExecuted": false,
+  "MainAndHistoricalUnchanged": true,
+  "closeHeadRuns": 0,
+  "SourceRefAbsent": true,
+  "nativePrimary": "0e6ee8ed3fb9e1305eecfa74048009c7ddebf984",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
