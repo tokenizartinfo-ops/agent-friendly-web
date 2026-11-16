@@ -1,6 +1,6 @@
 {
   "schema": "afw.c2-notices-n2.root-static-checkpoint.v1",
-  "atUTC": "2026-11-16 12:56:14 UTC",
+  "atUTC": "2026-11-16 13:08:19 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "environment": "immutable Git DATA / Root docs",
@@ -56,9 +56,9 @@
     "Final Source packet/index/report/diff FULL-readback hashes verified; all14 new admission body hashes verified; normal13 metadata exactly unchanged; 3/4/5 hunks replay forward/reverse exact."
   ],
   "pending": [
-    "Scoped Source N2 instrumentation review",
-    "Read-only precise receipt-recorded/lease-holder cause diagnosis",
-    "Root next-step ruling; normal13/full qualifier/Task2 remain frozen pending evidence"
+    "Parser fix2 immutable DATA→tooling-only native control→scoped re-review",
+    "N3 read-only seam/interface design proposal→Root ruling/spec/plan before implementation",
+    "Normal13/full qualification and Task2 remain frozen; no causal product defect proved"
   ],
   "SourceExecutedHere": false,
   "SourceQualified": false,
@@ -130,5 +130,31 @@
     "frontier": "receipt-recorded",
     "guards": 2,
     "actualCauseUnknown": true
+  },
+  "sourceReview": {
+    "report": "672f35f69b215defe77d5961cf43f049250d1106",
+    "SPEC": "FAIL",
+    "QUALITY": "FAIL",
+    "finding": "F1 timeout-settled NOTICES without baseline/before",
+    "actualCaptureUnaffected": true,
+    "F2": "ADDRESSED",
+    "F3": "ADDRESSED"
+  },
+  "readOnlyDiagnosis": "3498526a0e205b449d8b2797e4cd61a4f1582f6f",
+  "parserFix2": {
+    "brief": "7500203a0b5da273bd80834c9346812a6dae588b",
+    "round": 2,
+    "maxRounds": 5,
+    "actor": "/root/c2_owner_stages_impl",
+    "earlyVectors": "98ada8d8a67fa65d7e7b11bd26cc54f9397af3d9",
+    "nativePending": true,
+    "businessRerun": false
+  },
+  "n3DesignStudy": {
+    "brief": "49cf5f68a944eeeb17d72952fce30605fe8f85a2",
+    "actor": "/root/c2_v2_own_receiver_fix1",
+    "readOnly": true,
+    "pending": true,
+    "implementationAllowed": false
   }
 }
