@@ -1,0 +1,108 @@
+{
+  "schema": "afw.c2-notices-n3.final-c-invocation-ledger.v1",
+  "status": "FINAL_INACTIVE_DATA",
+  "authority": "aa2841a97fa452190c6cfb93599e36d005b13fd9",
+  "runtimeCaps": {
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n3",
+    "message": "AFW-C2-T1-NOTICES-N3-ONEUSE-20261116",
+    "job": "c2-notices-n3",
+    "workflow": ".github/workflows/afw-c2-notices-n3.yml",
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3/run-c2-notices-n3.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-notices-n3/run-c2-notices-n3.mjs",
+    "attempt": 1,
+    "node": "22.23.4",
+    "sdk": "1.2.1",
+    "miniflare": "5.20260831.0-alpha",
+    "workerd": "1.20260831.1",
+    "jobMinutes": 7,
+    "totalMs": 330000,
+    "childMs": 180000,
+    "caseMs": 120000,
+    "incomingMs": 30000,
+    "childLeaseMs": 5000,
+    "custodyLaunches": 3,
+    "nativeCases": 4,
+    "after": true,
+    "existingProbes": 2,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "journalBytes": 32768,
+    "journalRecords": 128,
+    "outcomeBytes": 24576,
+    "artifactDays": 7
+  },
+  "rootAdmission": {
+    "function": "runneradmission",
+    "reads": "Readonly git HEAD,parent,BASEtree,message; exact Source13index/13bodydata and19TOOLING rawbytes/SHA/Gitblob; actual lock equalsBASE and Node/sdk/miniflare/workerd fixed.",
+    "effects": "No refs/commits/networkprovider. Only later root-owned jobtemp materialization after allhashadmission.",
+    "binding": "Manifest16 exactkeys/canonicalSHA44a252... plus rawfileSHA27f9...; head/tree/runId/attempt/job from admittedGHA env and Git then independently RootAPI."
+  },
+  "steps": [
+    {
+      "id": "SYNTHETIC",
+      "awaits": "checkedTool reads and reviewed runControls(core),runTraceControls(causal);15compilation join fixtures run samepurevalidator inparent, no World.",
+      "effects": "Only safeSYNTHETICframe counts; fixed core6/21/3/6/2/5/3/7/6/10/12 andcausal31/32. Extra15compilation predicates not miscounted as causalcontrols.",
+      "settlement": "Exceptions abortbeforebusiness; no fabricatedcase/native/pass."
+    },
+    {
+      "id": "MATERIALIZE",
+      "awaits": "gitarchiveBASE fixedallowlist+BootstraponlyDATA; tarintoownjobtemp; all13original beforepinschecked thenfrozenafter DATA copied, symlink existing lockednode_modules.",
+      "effects": "Only jobtemp product materialization. Git/productCore/Main unchanged. Source13data remainexact.",
+      "holders": "Fresh verified RUNNER_TEMP childpath; no computed deletion outside ownarea."
+    },
+    {
+      "id": "CUSTODY1",
+      "awaits": "Sourcepreflight10s under sudoenv-i→unshare-net+lo→setprivoriginalUID/GID/clear-groups/no-new-privs, fixedguardimport.",
+      "effects": "Actual owned600preflightfile verified/removed; custodyprocessrecords typed5booleans only."
+    },
+    {
+      "id": "CUSTODY2",
+      "awaits": "Sameisolated drop/guard; exact bootstrap absence control fromabsentcwd.",
+      "effects": "BOOTSTRAP_DEPENDENCY_ABSENT actual EXPECTED_ENOENT required; pinned originalBootstrapWF isDATAread/hash only, neverexecuted."
+    },
+    {
+      "id": "OVERLAYS",
+      "awaits": "Verify frozenSource13 files before replacing ONLY temporary S07/S08/S10 withdriver/coupled/world afterblobs. Mountreader/slot/helper/logger+QAledger/compiler exactnewfixtures.",
+      "effects": "Normal13GitData untouched. Mcompile call/sourceinputs untouched; QAonLoad temporaryPH/OP/LEASE/stdin+canonicalledger only."
+    },
+    {
+      "id": "CUSTODY3",
+      "awaits": "Sameisolated drop/guard; nativeeager4/sequential N3_CONNECTION→N3_OAUTH→N3_PHASE→N3_NOTICES→AFTER, CLIpatternexact.",
+      "effects": "SameOriginalrequests/probes2/clock5s child30sincoming; no extraWorld/monitor/finitePOST/retry. SourceactionError andcountError heldprivately withbooleans; afteractionprobe/count sameorder; originalactionthrowwins, null/undefined preserved.",
+      "retention": "Original actualpromises/then callbacks unchanged. Probe slottimeout retainsphysicalexclusion; missing callbackobservations never physicaldrain."
+    },
+    {
+      "id": "COMPILATION",
+      "awaits": "No extra build. Nodeworld compiler records SAME preparedinput before/after5 and actualM/QAcompiledbytes; driverwritesONEown600JSON<=8192 afterworldopens. Runner nofollow/fstat owneruidgid/nlink/inode/dev/size/mtime/ctime stable read.",
+      "effects": "ExactcanonicalJSON/LF/typeddescriptors/inputorder/hash/ledgerbytes; everyexposedcompiledhostrow bothprepared+returned comparescurrentM/QA,originalpublicarguments/settings/callbackrefs; requireassembly2settled andpriorpreparedforeveryreturned. NoRootprivateMiniflare introspection.",
+      "failure": "No missing/stale/malformed/discordant metadata fallback. FixedCAPTURE_INVALID/frontier; never manufactureargumentMatched:true fromcopiedmetadataalone."
+    },
+    {
+      "id": "JOURNAL",
+      "awaits": "Samebounded nofollowjournalstable read32768/128; reviewedreadObservation/nativeJoin/safeWitness/verifyWitness.",
+      "effects": "Sane complete/prefixrecords witness only; causaloneAFTERsnapshot6144LF bound, no beforeafterstitch. Hashbytes reconstructed exact. RawTAP/errors/logs/probe/privatepayload retainedonlyboundedRAM and neverpublished."
+    },
+    {
+      "id": "CLEANUP",
+      "awaits": "VerifyownabsolutejobtempwithinRUNNER_TEMP andownerUID; removeonlyownjobtemp; ENOENTverified.",
+      "effects": "Parentnonroot+preflightownedremoved+3checkedlaunches/processes3..24+net/uid/gid+ownremoval provesboundedcustodyonly; notglobalNativedrain/PCoff."
+    },
+    {
+      "id": "PUBLICATION",
+      "awaits": "Aftercustody/cleanup andwithin330s, outputONEcanonical24576BmaxJSON+LF andsameOUTCOMEframe; artifact7days.",
+      "effects": "Compiledmetadata andsafejournalwitnessexposed; all7nonclaims+SourceQualified/Task1Passfalse. No positivefallback andRoot externalAPI/head/job/native/ZIP/canonicaljoin stillrequired."
+    }
+  ],
+  "normalHelpers": "Code-level complete QA sites and await/holder semantics remain seamsac4b+compiler94e30/ledgerd9d3 revieweda55a; actual41originalcallbacktooling primary6d2a/proof3a878 validated31→24 and34→24. This ledger does not claimC execution.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

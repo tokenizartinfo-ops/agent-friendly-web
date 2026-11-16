@@ -1,0 +1,414 @@
+{
+  "schema": "afw.c2-notices-n3.final-c-report.v1",
+  "status": "FINAL_INACTIVE_SOURCE_DATA_C_CAPTURE_PENDING_ROOT_GATE",
+  "authority": {
+    "brief": "aa2841a97fa452190c6cfb93599e36d005b13fd9",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "schema": "1c336fe190816b46223546971afcf34b2c216089",
+    "contract": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+    "seams": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640"
+  },
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "baseline": {
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "source": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "originalLeaves": 3203,
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "keepFrozen": true
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n3",
+    "message": "AFW-C2-T1-NOTICES-N3-ONEUSE-20261116",
+    "job": "c2-notices-n3",
+    "workflow": ".github/workflows/afw-c2-notices-n3.yml",
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3/run-c2-notices-n3.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-notices-n3/run-c2-notices-n3.mjs",
+    "attempt": 1,
+    "node": "22.23.4",
+    "sdk": "1.2.1",
+    "miniflare": "5.20260831.0-alpha",
+    "workerd": "1.20260831.1",
+    "jobMinutes": 7,
+    "totalMs": 330000,
+    "childMs": 180000,
+    "caseMs": 120000,
+    "incomingMs": 30000,
+    "childLeaseMs": 5000,
+    "custodyLaunches": 3,
+    "nativeCases": 4,
+    "after": true,
+    "existingProbes": 2,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "journalBytes": 32768,
+    "journalRecords": 128,
+    "outcomeBytes": 24576,
+    "artifactDays": 7
+  },
+  "actualToolingA": {
+    "primary": "6d2ae3f2396c1ef71ebba0263a55001422373000",
+    "proof": "3a8781f6a2646a3a00c521fc7f25b6a35d314ac8",
+    "close": "e9bae275ebfcd092cc4014b281eead8c03d06a4a",
+    "runId": "43911561091",
+    "attempt": 1,
+    "jobId": "133454520846",
+    "head": "91ac03eae0a3ee384d23886bd2f814de54c59bc3",
+    "tree": "d0d7b38bfd4f53950db6e3eee4e1e1ead62ab860",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/run-controls.mjs",
+    "step4": {
+      "name": "Execute tooling controls only",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4,
+      "started_at": "2026-11-16T16:48:39Z",
+      "completed_at": "2026-11-16T16:48:40Z"
+    },
+    "native": {
+      "tests": 41,
+      "pass": 41,
+      "fail": 0,
+      "cancel": 0,
+      "skip": 0,
+      "todo": 0,
+      "extra": 0,
+      "missing": 0
+    },
+    "inputHashes": 24,
+    "reducer": {
+      "rawIncludingCut": 31,
+      "projected": 24,
+      "lateRawIncludingCut": 34,
+      "lateProjected": 24,
+      "firstScopeErrorPreserved": true,
+      "focusPreserved": true,
+      "exactPairPromisePreserved": true,
+      "allBounds": true
+    },
+    "artifact": {
+      "id": 14248856256,
+      "archiveBytes": 2943,
+      "archiveSHA256": "0ec991c01ee3f2f91230e5590c6392a718a3ac05c541f37828f8af2ac91556c0",
+      "file": "c2-notices-n3-tooling.json",
+      "payloadBytes": 7449,
+      "payloadSHA256": "a3bfe87e1ae197af92380b099993f2ed0965ddfc9bf034d8a2f91a28e8e40286",
+      "canonical": true,
+      "crcVerified": true,
+      "completeDeflate": {
+        "compressed": 2777,
+        "consumed": 2777,
+        "complete": true,
+        "payloadMatches": true
+      },
+      "logPayloadEqual": true
+    },
+    "diagnosticToolingExecuted": true,
+    "sourceBusinessExecuted": false,
+    "boundary": "Actual Node tooling/originalcallback covering only; full QA/M world and C not executed by that graph. All7nonclaims/SourceQualified/Task1Pass false. Root logs/artifact already consumedonce; only safe immutableproofs read here."
+  },
+  "freshReview": {
+    "blob": "a55a56441c81057f369a871e8891794d22ff8064",
+    "SPEC": "PASS",
+    "QUALITY": "PASS",
+    "findings": [],
+    "scope": "N3.A QA-only ledger/compiler tooling, fix round3. SPEC reviewed before QUALITY. No patches."
+  },
+  "finalProducer": {
+    "bindingsPacket": {
+      "bytes": 11476,
+      "sha256": "7ccf7c0c61f16d98e1033cf52f127b1181173015b95d7270a3be3ccd30199822",
+      "gitBlob": "b186f6e5f585ed3de71f7e4e69f42f8f0ee55618",
+      "blob": "b186f6e5f585ed3de71f7e4e69f42f8f0ee55618",
+      "fullReadback": true
+    },
+    "manifest": {
+      "canonicalHash": "44a2527e1a54cb79a6feec9a04a996ad1b288a35117763e2037c7e8d64cf18f8",
+      "bytes": 1334,
+      "sha256": "27f9b289888ba4155fcaca9739f0b074aeda7e781c7796a1e8e83501fcf79a5e",
+      "gitBlob": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+      "blob": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+      "fullReadback": true
+    },
+    "keyOrder": [
+      "schema",
+      "normalSourceIndexHash",
+      "selectionHash",
+      "contractHash",
+      "schemaHash",
+      "seamsHash",
+      "vectorsHash",
+      "driverHash",
+      "coupledHash",
+      "worldHash",
+      "helperHash",
+      "readerHash",
+      "loggerHash",
+      "slotHash",
+      "ledgerHash",
+      "transformHash"
+    ],
+    "normalIndex": {
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "gitBlob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "fullReadback": true
+    },
+    "meaning": "18 finalproducercomponents and immutablecanonical16fieldmanifest fixed. Rawprettyfilehash differs fromcanonicalhash; no head/tree/run/job fabricated. Root22ab3397 preservedindependentreadback. Runner/WF/index excluded frommanifest toavoidcircularity.",
+    "components": [
+      {
+        "role": "selection",
+        "file": "selection.json",
+        "bytes": 2048,
+        "sha256": "ea902f464b5530f3b7894c259ec7ed5420e01a87eecfe8b49c46d175d4d59324",
+        "blob": "3db514b655917bd05917a90a53cb69667041fd36",
+        "fullReadback": true
+      },
+      {
+        "role": "contract",
+        "file": "diagnostic-contract.json",
+        "bytes": 19539,
+        "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+        "blob": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+        "fullReadback": true
+      },
+      {
+        "role": "schema",
+        "file": "diagnostic-schema.json",
+        "bytes": 29785,
+        "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+        "blob": "1c336fe190816b46223546971afcf34b2c216089",
+        "fullReadback": true
+      },
+      {
+        "role": "seams",
+        "file": "seams.json",
+        "bytes": 14141,
+        "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+        "blob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+        "fullReadback": true
+      },
+      {
+        "role": "vectors",
+        "file": "synthetic-vectors.json",
+        "bytes": 915177,
+        "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+        "blob": "ce6aa394580a0c26e5fe5c9006cafe06db109530",
+        "fullReadback": true
+      },
+      {
+        "role": "driver",
+        "file": "observer-driver.txt",
+        "bytes": 1812,
+        "sha256": "88137ed32bf1e657be72820529afde0ea1f1c791763e99cdded7da3d0d4f682d",
+        "blob": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+        "fullReadback": true
+      },
+      {
+        "role": "coupled",
+        "file": "observer-coupled.txt",
+        "bytes": 19642,
+        "sha256": "a85e1c33412e05095ce56dce7553165f36c0235809e20acd0df3180fd4917764",
+        "blob": "3c9081cb2a04759bbe58ef317ea9db4753ce4235",
+        "fullReadback": true
+      },
+      {
+        "role": "world",
+        "file": "observer-world.txt",
+        "bytes": 89873,
+        "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+        "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+        "fullReadback": true
+      },
+      {
+        "role": "helper",
+        "file": "n3-helper.mjs",
+        "bytes": 5764,
+        "sha256": "69386a941f9f565bfffd9846f9b8ec504b2e1c446075b72c368a8d68aaf17eb6",
+        "blob": "bff0415fbbf37c787439d4c526b1c77c8fdf2a65",
+        "fullReadback": true
+      },
+      {
+        "role": "reader",
+        "file": "n3-reader.mjs",
+        "bytes": 31798,
+        "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+        "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+        "fullReadback": true
+      },
+      {
+        "role": "logger",
+        "file": "n3-logger.mjs",
+        "bytes": 8370,
+        "sha256": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+        "blob": "4eeaad011444e566f2e0cc99bd897e4a01848a77",
+        "fullReadback": true
+      },
+      {
+        "role": "slot",
+        "file": "n3-slot.mjs",
+        "bytes": 2072,
+        "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+        "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+        "fullReadback": true
+      },
+      {
+        "role": "ledger",
+        "file": "n3-qa-ledger.mjs",
+        "bytes": 16602,
+        "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+        "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+        "fullReadback": true
+      },
+      {
+        "role": "compiler",
+        "file": "n3-qa-compiler.mjs",
+        "bytes": 12694,
+        "sha256": "624ef2a8507643936aa9564bb0f978b11e31572b49c5678a6e6c4706af9ea255",
+        "blob": "94e30c896056dc35b3bb75b072022644c68bfb74",
+        "fullReadback": true
+      },
+      {
+        "role": "coreControls",
+        "file": "n3-core-controls.mjs",
+        "bytes": 13179,
+        "sha256": "fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95",
+        "blob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542",
+        "fullReadback": true
+      },
+      {
+        "role": "traceReader",
+        "file": "n3-trace-reader.mjs",
+        "bytes": 11567,
+        "sha256": "e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829",
+        "blob": "4878edb13dad6a9421c457cc850a370d75b84b1c",
+        "fullReadback": true
+      },
+      {
+        "role": "traceControls",
+        "file": "n3-trace-controls.mjs",
+        "bytes": 854,
+        "sha256": "ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758",
+        "blob": "adff3fbc4649f95389b03896ff82bc7ed538c516",
+        "fullReadback": true
+      },
+      {
+        "role": "manifest",
+        "file": "producer-manifest.json",
+        "bytes": 1334,
+        "sha256": "27f9b289888ba4155fcaca9739f0b074aeda7e781c7796a1e8e83501fcf79a5e",
+        "blob": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+        "fullReadback": true
+      },
+      {
+        "role": "compilationVectors",
+        "file": "compilation-vectors.json",
+        "bytes": 53497,
+        "sha256": "57b3f91bc5fb0102d8b8b9233ecac106138642535f0cd519c1a588cf02a0fa51",
+        "blob": "eb32ae05bc86ae943f155e36baa89844fceb8005",
+        "fullReadback": true
+      }
+    ]
+  },
+  "captureRunner": {
+    "bytes": 33675,
+    "sha256": "f786a3555c53e94e59981e08e785ef67f16b0adf98bb4e1e2a661828d61b2882",
+    "gitBlob": "e2fcee935e5544207486f2f55cbc4c9022b76c40",
+    "blob": "e2fcee935e5544207486f2f55cbc4c9022b76c40",
+    "fullReadback": true
+  },
+  "workflow": {
+    "bytes": 1440,
+    "sha256": "d687e208c15e14dc9054636aedae3cdaf3bbebf302e5d84ca2f3f7feb6c1fc3c",
+    "gitBlob": "259d587b8752b3bb89d1636891136c55cbfa108c",
+    "blob": "259d587b8752b3bb89d1636891136c55cbfa108c",
+    "fullReadback": true
+  },
+  "reversibles": {
+    "bytes": 2542,
+    "sha256": "9898978c16d2239ac27edc154938ef2ae2947dd1270b63785d1cd97887a7b04c",
+    "gitBlob": "1b6447860fe6fd7ea64291d1ff94ee0f1a286f0b",
+    "blob": "1b6447860fe6fd7ea64291d1ff94ee0f1a286f0b",
+    "fullReadback": true
+  },
+  "fullBeforeAfterDiff": {
+    "bytes": 651811,
+    "sha256": "d9ad48c8be04e167f8db5a460f484dff4b896890222c7f5c00c48e576dd9fba5",
+    "gitBlob": "966de710643bfdb792a5e36b88f1abeba419d6fb",
+    "blob": "966de710643bfdb792a5e36b88f1abeba419d6fb",
+    "fullReadback": true
+  },
+  "invocationLedger": {
+    "bytes": 6464,
+    "sha256": "3a95cf30a7eaf1d11eda0eca2be5a6e571b0133e818e281514fdf796912acdd9",
+    "gitBlob": "145fc5dd8e7c01d67070240c2ff099b9523afbe1",
+    "blob": "145fc5dd8e7c01d67070240c2ff099b9523afbe1",
+    "fullReadback": true
+  },
+  "compiledMetadata": {
+    "cap": 8192,
+    "producer": "ExistingNodeworld SAMEoriginalbuild records ledger/PH/OP/LEASE/STDIN before/after andactualM/QAbytes. ONE helper600file afteractualworldopen; no extraWorld/compile/request/authorityread.",
+    "guard": "Stableownednofollowfile andcanonicalJSON/LF/exacttypedkeys/order/hashes/changedQAinputs/canonicalledger checked. Everyexposedcompiled prepared/returnedhostrow M/QA matchescurrentcompile; everyreturned haspriorprepared andassembly2settled required. No positivefallback/default0/missingmetadata.",
+    "public": "M.argumentMatched:true derivedonlyaftercomparison to actual originalcallarguments; QA.deliberatelyChanged:true andactualinputManifestHash. No claim of normalQA equality; Mcompile path/inputs unchanged; no privateMiniflarefield introspection.",
+    "testFirst": {
+      "bytes": 53497,
+      "sha256": "57b3f91bc5fb0102d8b8b9233ecac106138642535f0cd519c1a588cf02a0fa51",
+      "gitBlob": "eb32ae05bc86ae943f155e36baa89844fceb8005",
+      "blob": "eb32ae05bc86ae943f155e36baa89844fceb8005",
+      "fullReadback": true
+    },
+    "controls": 15,
+    "testsStatus": "FiniteJSONexpectedvectors BEFORE newvalidator; no localSource/parserexecution. They run futureCpreflight beforebusiness, withoutaddingpubliccountercategories ornewcustodylaunch. C notexecuted, so these15 notreportedPASS."
+  },
+  "nativeC": {
+    "ids": [
+      "N3_CONNECTION",
+      "N3_OAUTH",
+      "N3_PHASE",
+      "N3_NOTICES"
+    ],
+    "registration": "sameeager4/sequential/globalAFTER",
+    "graph": "freshconn→SDKOAuth→phase-negative+restore→noticesGET/POST→AFTER; stopbusinessafterfirstfailure viaexplicitblockedNativeFAIL rows.",
+    "probes": "atmost1before+1after existingRPC only; singlephysicalslot excludespendingcall afterobservationaltimeout; aftercausalselfcontained, no crosssnapshot/realm/M stitch.",
+    "privateErrors": "Originalaction/count thrownvalues keptseparately withbooleans; actualcount atsameplace; actionerrorwinsifboth. NativeTAP/rawprivateErrors/probe/headers/cookies/nonces/JWT neverpublished; onlysafeenums/counters/hash.",
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "preservation": {
+    "gitTree": "BASEoriginal3203blobmodes+40expectednewData/WFpaths only; no product/Core/Main writes. Root independentlyverifiesexpandedtree/pathabsence/currentMain/history beforeanypush. No authorrefs/trees/commits/runs.",
+    "temporaryJob": "Verifyall13frozenbefore/afterpins duringtemp materialization, thenONLYS07/S08/S10Nodeoverlays+newfixturemodules. FullN2andnormal13preimages/afterimages in651811B fullDiff, exactLF lossless. Bootstrap22f324 DATAonlyread/hash, neverexecute.",
+    "cleanup": "SameverifiednonrootUID/GIDdrop afterunshare+lo/env-i/clear-groups/no-new-privs; preflightowned/removal, threecustodylaunches/processesbounded and onlyownjobtempremoved afterresolvedpath/ownerchecks. Doesnotproveglobalnativedrain."
+  },
+  "frames": {
+    "standard": [
+      "AFW_C2_NOTICES_N3_SYNTHETIC",
+      "AFW_C2_DEPENDENCY_CONTROL",
+      "AFW_C2_NOTICES_N3_CUSTODY",
+      "AFW_C2_NOTICES_N3_OUTCOME"
+    ],
+    "fatal": "AFW_C2_NOTICES_N3_FRONTIER",
+    "serialization": "ASCIIspace+canonicalJSON.stringify+LF; no TAP/assertion/rawerrordumps. Failurefrontier neverpositivecapture; no fallbackOutcome whenmetadata/custody/admissioninvalid.",
+    "artifact": "output/c2-notices-n3.json max24576B INCLUDING LF,7days; witnesssafecomplete/prefixJSON records exacthash/bytes."
+  },
+  "remaining": [
+    "Root finalDATAadmission ofexactnewtree/runner/WF andprotectedOriginals/currentRefs.",
+    "IndependentOWNfinalproducerbinding/nativecovering+freshreview; preliminary517RAM models not nativeacceptance.",
+    "Onlythen Root maygateONECactual; no authorSourceexecution/ref/run orunchangedretry. AfterterminalRoot preservesAPI/TAP/artifact once andclosesWF.",
+    "C actualSourcecause and mainTask1/fullTask2/package/PCoff remainunknown/unqualified. No SourceTask2 dispatch."
+  ],
+  "authorOperations": "Only exactimmutableGitblobreads/create+FULLreadback andRAMbuiltinmetadata string/JSON/hash operations. No Source/preparer/observer/parser evaluated/imported/compiled/syntaxchecked/tested locally; no localfiles/deps/builds.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

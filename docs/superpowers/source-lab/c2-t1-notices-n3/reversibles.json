@@ -1,0 +1,48 @@
+{
+  "schema": "afw.c2-notices-n3.final-c-reversibles.v1",
+  "status": "FINAL_INACTIVE_DATA",
+  "fullDiff": {
+    "bytes": 651811,
+    "sha256": "d9ad48c8be04e167f8db5a460f484dff4b896890222c7f5c00c48e576dd9fba5",
+    "gitBlob": "966de710643bfdb792a5e36b88f1abeba419d6fb",
+    "blob": "966de710643bfdb792a5e36b88f1abeba419d6fb",
+    "fullReadback": true
+  },
+  "beforeContexts": {
+    "N2runner": {
+      "bytes": 26594,
+      "sha256": "36d6660717050ca0c2807bb6e8eb9d8ff2d65c1ac509932f28150ece3dade7ea",
+      "gitBlob": "33e94efe8fb9f41e68719e7a5f21389dc692a8eb",
+      "blob": "33e94efe8fb9f41e68719e7a5f21389dc692a8eb",
+      "fullReadback": true
+    },
+    "N2WF": {
+      "bytes": 1433,
+      "sha256": "b903eff69e8ab8090fbb0c66d31c13663a3252ad24e65bd39e8d67da3eed5249",
+      "gitBlob": "8bab03d11f18807d0e0af41a93c6ba0d155dfb21",
+      "blob": "8bab03d11f18807d0e0af41a93c6ba0d155dfb21",
+      "fullReadback": true
+    },
+    "N2helpers": [
+      "e50a5292dfb31a7ba9d76f2ef2c28a1f58d575c0",
+      "984b66d96d7f75317515859678a26beab6ec9250",
+      "8ae7fe99ebdc791f786d39243649e2672ad90ec0",
+      "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+      "92420acc2306b62943ae80d14b889871c9a3957c",
+      "280fa796ad74d4451cab3d84e230d37dd31bad11"
+    ],
+    "normal13": {
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "gitBlob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "fullReadback": true
+    }
+  },
+  "syntax": "Completefile old/new LF arrays includeLASTempty element; joinLF exactlyrecoversallbefore/afterbytes. Entireoriginalpreimages andafterimages fullyreadback. NoSourceparser/eval required for preservation.",
+  "compiled": "Compiler94e30+ledgerd9d3 unchangedafteractual41PASS/review. FiveQApreparedinputs are recordedintheactualSAMEfutureCbuild, not precomputedbyanextrabuild. NativeREVERSIBLES alreadyprovedraw+prepared Source edits; noSource library writesinGit.",
+  "newGitTree": "Expected BASE original3203/modes plus40 nominatedadditions; only newCWF activeunderexactfutureRootgate. Root independentlychecks pathabsence/expandedtree/freshbranch. Packet/index/fullDiff remainofftree reviewmetadata, not extraadmittedpaths.",
+  "close": "Root alone may closeONEactualfutureC by removingonly itsnewWF afterterminalcapture+preservation; retainSourceDATA/receipts, readbackoriginals/Main/history andcloseheadruns. No author ref/run/write product.",
+  "SourceQualified": false,
+  "Task1Pass": false
+}
