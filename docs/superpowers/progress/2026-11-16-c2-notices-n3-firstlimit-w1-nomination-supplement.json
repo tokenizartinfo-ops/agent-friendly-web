@@ -17,7 +17,15 @@
       "Observe first notices QA first-limit scope",
       "Preserve sanitized first-limit diagnostic"
     ],
-    "commandStep": "Observe first notices QA first-limit scope"
+    "commandStep": "Observe first notices QA first-limit scope",
+    "artifact": {
+      "name": "afw-c2-notices-n3-firstlimit-w1",
+      "path": "output/c2-notices-n3-firstlimit-w1.json",
+      "fileName": "c2-notices-n3-firstlimit-w1.json",
+      "expectedCount": 1,
+      "retentionDays": 7,
+      "payloadCapBytes": 24576
+    }
   },
   "frames": {
     "markers": [
@@ -51,5 +59,14 @@
     "PCoff": false,
     "globalNativeDrainVerified": false,
     "sdkNamespaceEmptyVerified": false
-  }
+  },
+  "toolArtifact": {
+    "name": "afw-c2-notices-n3-firstlimit-w1-tool",
+    "path": "output/c2-notices-n3-firstlimit-w1-tool.json",
+    "fileName": "c2-notices-n3-firstlimit-w1-tool.json",
+    "expectedCount": 1,
+    "retentionDays": 7,
+    "payloadCapBytes": 24576
+  },
+  "artifactNominationAtUTC": "2026-11-16 19:02:30 UTC"
 }
