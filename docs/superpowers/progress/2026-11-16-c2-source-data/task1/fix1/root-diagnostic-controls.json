@@ -1,0 +1,60 @@
+{
+  "positive": 3,
+  "negative": 23,
+  "cases": [
+    "phase",
+    "frontier",
+    "code",
+    "extra",
+    "raw",
+    "exit",
+    "signal",
+    "errorKind",
+    "complete",
+    "hash",
+    "bytes",
+    "outputRaw",
+    "tapcount",
+    "knowncount",
+    "framecount",
+    "firstfailure",
+    "bool",
+    "dep",
+    "rawkind",
+    "duplicatekind",
+    "observedRaw",
+    "missing",
+    "completeNoObservation"
+  ],
+  "fixture": {
+    "phase": "baseline-red",
+    "frontier": "TAP",
+    "code": "CAPTURE_INVALID",
+    "capture": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "none",
+      "complete": true,
+      "stdout": {
+        "bytes": 100,
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "observed": {
+        "tapResults": 1,
+        "knownResults": 1,
+        "knownFrames": 1,
+        "firstKnownFailure": "C2T1_CONNECTION",
+        "sourceFileFailure": false,
+        "dependencyOutcome": null,
+        "errorKinds": [
+          "assertion"
+        ]
+      }
+    }
+  },
+  "scope": "synthetic diagnostic reader; cannot qualify Source"
+}
