@@ -1,0 +1,64 @@
+{
+  "schema": "AFW-N3-PRIVATE-ADMISSION-REPAIR4-DESIGN-BRIEF/1",
+  "atUTC": "2026-11-16 18:11:51 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "stage": "DESIGN ONLY; prospective fresh higher-capability Source fix-loop round4/5, not implementation authorization",
+  "ownerDelegation": "Owner delegated technical choices and autonomous chained work; no new human-only choice needed. Preserve existing cloud/GitDATA method. No files/localSourceexecution.",
+  "facts": {
+    "sourceCActual": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+    "outcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+    "close": "0638c9c5634c36b60835c12eb9153af4297d183e",
+    "sourceDiagnosis": "dee8b1f943b0ef9e4cb16e6e78ea392090fca5ea",
+    "independentEvidence": "3045f1e9396e725be555aaa95f2d08830f6ec37b",
+    "summary": "SourceC valid diagnostic3PASS+NOTICESFAIL/POST503;CAP_PRIVATE/eligible0 means no scope everregisteredeligible. Actualcapbranch roots16 vs lease+gap128 unknown; no productcauseorfirstcheckinference. Staticnetzero gap→lease conversion rejects at128 beforeconsume; candidateRoot/leases lifetimes accumulate beforeactualnotices admission."
+  },
+  "pins": {
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "helper": "bff0415fbbf37c787439d4c526b1c77c8fdf2a65",
+    "driver": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+    "coupled": "3c9081cb2a04759bbe58ef317ea9db4753ce4235",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "sourcePacket": "4115c1f0d163a2f51a6bbe647d3610ef36311410",
+    "sourceIndex": "26f167bc9a56184a614e37cbff2b1f03de90a83c",
+    "censusBrief": "7ed9f2f3a3d0b29690102000e8eb308a41d1ca63",
+    "censusVectors": "00685a137f17834ff355cb2cae15285d8e9e2fd4",
+    "censusActualPending": true
+  },
+  "authority": {
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "semantics": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "prefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0"
+  },
+  "question": "What is the smallest honest QA-only private-admission/bookkeeping change that can observe the selected scope within existing caps, without another unchanged capture? Compare2–3 concrete choices and recommend one with exact invariants/controlplan. No code.",
+  "candidates": [
+    "Atomic gap→lease sameactualref netoccupancy at128 (staticdefect, notclaimedactual503fix). Need parent/root/role ambiguity checks and genuinelynew129th rejection.",
+    "QA-local recording window armed at the ALREADY EXISTING beforeProbe RPC, using source-local first-probe bookkeeping and separate internal method ifneeded; no Node phase/header/extraRPC or authority. Must keep default snapshot semantics, repeatedcuts/late settlement tests, and never reset anyeligible scope. Beforecausal discardedpercurrentcontract, aftersnapshot selfcontained; no crosssnapshotjoin.",
+    "Other bounded lifecycle admission/retirement policy if safer/smaller, or a separately sealed first-private-limit witness if cap cannot be safely fixed without unknowns. Do not choose basedon invented runtime census."
+  ],
+  "hardRequirements": [
+    "No Source13/M/product/GitMainchanges, newbusinesscalls/RPC/probes/reads/headers/reactions/timers/clockreads/await/callbackreplacement; actualeligibility onlysameconsume+stageadmission, not arming.",
+    "Unchanged privatecaps16scopes/128lease-plus-gap identities/64promises/64errors/256events/65536metadata; selected8leases4promises4errors24events,6144B inclenvelope+LF; journal/outcome/probe unchanged.",
+    "Explain retained/tombstone identity memory and combined bounds explicitly. Do NOT silently redefine caps perwindow, doublebuffers or keep unbounded weakmetadata; if exactbounds impossible sayso and propose narrowwitnessinstead.",
+    "Lateprewindow root/lease/promise/call callbacks cannot be assigned toselectedroot bytime/ordinal, use staleidentity to becomejoined, consume a currentgapincorrectly, overwrite firstError or manufacturecomplete. Unknown/gaps stayhonest.",
+    "Nevererase/restarteligible scope; ambiguity/twoeligible/conflictingrefs remain. Preserve exactreturnedp2, firstscopeErrorindependentfocus, duplicateoriginalretain+settlementbooleans,cut latecallbacks,abort matrix,independentlogical/targetaxes.",
+    "Publicwire/schema preferably unchanged; anynewmethod/internalprobehook andanywireeffect mustbeexplicit. No extraRoot/Node Mbridge. ExistingmakeLedger{note,snapshot} caller behavior needscompatibleSourceA41 tests; do not reset on all snapshot calls.",
+    "Fresh GET+POST census model onlyoriginalRoot/Initial callbacks+DTOroles, NO_ELIGIBLE. It doesNOT prove nativeeligibility or actualSourceflow fits; demand targeted originalcallbackcontrols before latercandidatecapture."
+  ],
+  "deliver": "One detachedimmutableJSONdesign report FULLreadback/hash: alternatives/tradeoffs,recommendation, exactAPI/sourcehook/identitylifecycle+memoryproof, literalRED/GREENtestplan and unresolvedmaterialquestions. No implementation, refs/runs, Sourceexecution/import/compile/tests locally, log/ZIPrefetch, liveproviders/browser/mail/keys, subagents. OnlyGitDATA/staticstrings/counts. Rootsealsdecision aftercensusnative/evidence. Model choice per applicablefix-loop freshhighercapability round4 requirement, no claimedimplementation or approval yet.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false
+}
