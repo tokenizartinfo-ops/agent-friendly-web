@@ -1,0 +1,315 @@
+{
+  "schema": "afw.c2-notices-n2.readonly-diagnosis.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "mode": "READ_ONLY_DIAGNOSIS",
+  "authority": {
+    "brief": "022d954d3e3eb2ce284045acc212c9585cd90904",
+    "scope": "Bounded immutable safe DATA/source reads; ONLY this sane report + FULLreadback/hash. No implementation/unfreeze/Source/observer/parser eval/import/compile/syntax/tests/files/deps/ref/run/rerun/runtime/browser/keys/questions/subagents."
+  },
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "normalSourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "normalIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "normal13Frozen": true,
+    "futureFullQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "futureQualifierActive": false,
+    "Task2Dispatched": false,
+    "runId": "43869998890",
+    "attempt": 1,
+    "jobId": 133308331285,
+    "head": "5f3a7bf3a5103d1a00d2bb15ac66ecaa9a68786f",
+    "closedHead": "106b5a0ea543abe55dc8f27a717362dda1dfd08e",
+    "closedTree": "1d06495cb6e6bcb9b322d69a124c0c0eef3454ed",
+    "closure": "Root closeproof44a909... reports newWF removed,3203originals/modes/admittedDATA preserved, Main/history unchanged,0closeheadruns. No live ref/API poll here."
+  },
+  "evidence": {
+    "primary": "db59d9696661b681e88c919e08ec1311d176b4de",
+    "exactSafeOutcome": "eeeec6e48364422b40b599a75fad21064562eb64",
+    "closeProof": "44a9091d8cbf1745b84dcfb853f88d07836316ff",
+    "producerPacket": "a30ecbb8d4990896082cad0104a8d6e91960e8f5",
+    "independentOwn": "e5418eaa79db9f348753fa8a15b8eb28050429b6",
+    "independentOwnReview": "b44a603ba0097da4e36a8bcb70e87123ee6ddd67",
+    "journal": {
+      "records": 39,
+      "bytes": 9297,
+      "sha256": "62c8311a9e20952919577d9134c70169d4a06e9943110d5bf8260dad15b0dc1f",
+      "integrity": "complete",
+      "stable": true
+    },
+    "capture": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "none",
+      "stderrBytes": 0
+    },
+    "reusedOnly": "Immutable safe primary/outcome/earlier diagnosis and exact source. No raw log/artifact fetch/download/replay or Source execution."
+  },
+  "ruling": "N2 is a valid complete diagnostic, with genuine native3PASS/NOTICESFAIL and POST503. It reports a later local frontier receipt-recorded plus counts2/2/2 than N1 activation-observed/counts2/2/1. This is occurrence difference, not proved instrumentation improvement, HTTP success, authenticated SF acceptance or root cause. The mapped receipt-recorded continuation still owes two fresh factual rechecks before success. Two parent-holders arrivals show a caught holders failure when that tagged initial-lease instance is already closed and aborted; they do not identify its instance/parent/caller/first failure. No product fix, budget change, Task2 dispatch or rerun is justified by this evidence alone.",
+  "observed": [
+    {
+      "fact": "Native CONNECTION/OAUTH/PHASE action/count returned1/1/1; NOTICES action threw AssertionError ERR_ASSERTION D08:47:12 after actual POST503; count returned2/2/2. AFTER returned, sourceFileFailurefalse. Synthetic control counts6/21/3/6/2/5/3/7/6/10/12 matched; custody3launches/3processes/ownedcleanup true.",
+      "source": "primarydb59... + safeoutcomeeeeec..."
+    },
+    {
+      "fact": "Baseline after PHASE at49020, beforeprobe49045; GETenter49046,response72722/bodyreturn72727 actual200; POSTenter72727,response/bodyreturn102738 actual503; actionthrow102740; afterprobe102765,countreturn102796; AFTERenter102798,return/final102838.",
+      "source": "exact safe witness records23-39"
+    },
+    {
+      "fact": "GET response delta23676ms and settled-body delta23681ms; POST response/body delta30011ms. Brief mentions23781ms GET, while exact witness subtraction and primary.timing give23681ms body settlement. This report follows exact safe records, no new clock or calibration.",
+      "source": "record25->26/27,28->30/31; primary.timing.getMs"
+    },
+    {
+      "fact": "Guard1 seq29 elapsed102736 notices-post; guard2 seq33 elapsed102741 after-post. Both initial-parent-holders, closedtrue/abortedtrue; alive/wallExpired/monoExpired/regressionsnull and correlatednull. Both arrived BEFORE NodeAFTERenter102798, so the later Node world.close invocation cannot be their earlier callback-arrival event.",
+      "source": "witness29/33/37; Node arrival order only"
+    },
+    {
+      "fact": "Afterprobe observed exactly one new connection-failure with positionreceipt-recorded, no safe sites/correlators, consumedTickettrue/stageApprovaltrue/receiptCount2, correlatednull/guardOriginunknown. Four host prepared/returned pairs, no open call, no fifth notices adoption; callback observedtrue/faultfalse/finaltrue.",
+      "source": "witness34/39 + observation"
+    }
+  ],
+  "pins": {
+    "normal13": [
+      {
+        "id": "S00",
+        "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      {
+        "id": "S01",
+        "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      {
+        "id": "S02",
+        "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      {
+        "id": "S03",
+        "path": "worker/mcp-own/finite.mjs",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      {
+        "id": "S04",
+        "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      {
+        "id": "S05",
+        "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      {
+        "id": "S06",
+        "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      {
+        "id": "S07",
+        "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      {
+        "id": "S08",
+        "path": "test/fixtures/finite-coupled-native.mjs",
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+      },
+      {
+        "id": "S09",
+        "path": "test/fixtures/finite-first-connection-publication.mjs",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+      },
+      {
+        "id": "S10",
+        "path": "test/fixtures/finite-initial-entry-world.mjs",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+      },
+      {
+        "id": "S11",
+        "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      {
+        "id": "S12",
+        "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      }
+    ],
+    "unchangedBaseDependencies": [
+      {
+        "path": "lib/mcp-qa-finite-initial-lease.mjs",
+        "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+        "lines": "3-19"
+      },
+      {
+        "path": "lib/mcp-qa-finite-stage-work.mjs",
+        "blob": "068d35c2555c7dc711c487f6021ec572bd3af067",
+        "lines": "8-23,67-103"
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-native-wire.mjs",
+        "blob": "38285fa0149a38924c431b4d5a705bec1384216d",
+        "lines": "26-39"
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-native-bridge.mjs",
+        "blob": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+        "lines": "23-42"
+      }
+    ],
+    "actualNodeOverlays": {
+      "D07": "e50a5292dfb31a7ba9d76f2ef2c28a1f58d575c0",
+      "D08": "8ae7fe99ebdc791f786d39243649e2672ad90ec0",
+      "D10": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+      "logger": "92420acc2306b62943ae80d14b889871c9a3957c",
+      "helper": "984b66d96d7f75317515859678a26beab6ec9250"
+    }
+  },
+  "frontier": [
+    {
+      "order": 0,
+      "source": "S09 3e1d...:385 andS00 a9d70...:808",
+      "fact": "Existing normal fixture copies position from PH handler catch BEFORE failed=true/positionfailed. Safe probe selects one new entry but that entry has no authenticated request identifier. Therefore the exact execution map below is conditional on association with this POST continuation, not automatic request correlation."
+    },
+    {
+      "order": 1,
+      "source": "PH726-729/777-780",
+      "fact": "To assign receipt-recorded in that continuation, ownReceipt was constructed, record(activation,ConnectionReceipt,finish,l,installed) returned, including original finish result statusrecorded+hash, awaited native storage.sync, awaited journal.read installed/receipt equality; receiptReadback assigned and setEffect updated in-memory expected journal/stage/installed receipt. Position follows these steps. This is more specific than receipt-key count, but public safe evidence still does not expose/authenticate the actual SEND/ACK/receipt objects."
+    },
+    {
+      "order": 2,
+      "source": "PH780 first recheckOwned ->693-704",
+      "fact": "Immediately after receipt-recorded, awaitrecheckOwned: check root/outer initial lease/active activation child/capturedholders/admission proof; require settled actual upload+activation promises/results and ownReceipt/write/readback; retained wait for observeOwnerPhasePair703; exact canonical pair vs updated expected704; finalcheck. An error BEFORE positioncomplete remains reportedreceipt-recorded. The marker does not itself show whether this new factual pair was invoked, settled, or reached its equality."
+    },
+    {
+      "order": 3,
+      "source": "PH100-528",
+      "fact": "The fresh pair is a complete current observation under originalLease, not a receipt-only read: lineage/holders, own initial clock; retained children for storage get/list/anchors/journals, original first-primary SQL and metadata/native fetch/body/cancel; firstfacts196; firstprimary275; stage/issuer/SDK/notice/history checks; secondprimary+facts+qualification512; pair equality524/current525. request/cancel loops141-150 and SQL157/165 retain actual operations. The full pair can fail on clocks, factual data, IO, retention lineage or holder identity. No particular leaf is captured here."
+    },
+    {
+      "order": 4,
+      "source": "PH780 second recheckOwned",
+      "fact": "Only after first recheck succeeds does position become complete, followed by a second full recheckOwned of the same expected state. A caught error in that later continuation would normally reportcomplete, not receipt-recorded. Both calls are required by current code; no caching or skipped check is proposed."
+    },
+    {
+      "order": 5,
+      "source": "PH781-805",
+      "fact": "Activation withChild must return through original child current/settlement; for notices stage the finite-only block782-803 is skipped. check804 must succeed before Response200, then adopt/observe/native transport returns, response body and M conduit checks finish. These are still obligations; counts2/2/2 does not satisfy them. No additional upload/activation/receipt write is required after positionreceipt-recorded on the notices path, but the current reads/lease checks can deny."
+    },
+    {
+      "order": 6,
+      "source": "D08:45-47 ->normalS08:41-59",
+      "fact": "POST503 body settles then original200assert fails atD08:47:12. It prevents choice update, subsequent native SEND/ACK/receipt assertions and notices adoptConnectionConfiguration. That explains host4pairs rather than positive path5; the public assertion is a downstream status oracle, not the inner first error."
+    }
+  ],
+  "leaseLifecycle": [
+    {
+      "source": "LEASEa9cc...:4-7/10/19; normalS10:83-89",
+      "fact": "Initial lease closed startsfalse. Its own deadline timer calls stop(), which ONLY aborts controller. close() is the ONLY assignmentclosed=true in this mechanism; it clears timer and aborts. The existing parent-holders tag wraps holders() BEFORE the subsequent local closed/clock predicate. Thus closedtrue/abortedtrue on this tag means a holders() invocation threw while that tagged clock was already closed, not that the log evaluated or proved its own deadline expired."
+    },
+    {
+      "source": "PH120-131/528",
+      "fact": "Each factual-pair clock holders firstcurrent(parent), then captured options/storage/method/env/actor/token identity and original lineage/deadline. Parent signal abort calls its clock.close. Its finally always clock.close on SUCCESS OR FAILURE. Retained child continuations can later re-enter an already-closed clock; that is compatible with a legitimate finally/cascade, not evidence of premature close by itself."
+    },
+    {
+      "source": "PH625-633/706/809",
+      "fact": "Choice clock holders firstcurrent(originalLease), thenfailedflag/capturedholders, then current(admission.lease). Original root abort invokes clock.close; handler finally also closes. check includes activeChild. One original activation child encloses763-781, including receipt and both fresh rechecks; no clock renewal at receipt-recorded. Failure may be holder proof, ancestor, local clock or descendant before/after retainedawait."
+    },
+    {
+      "source": "S01 OP59-83, S02 receiver17/25-27, S03 worker22/41",
+      "fact": "Root requestLease aborts from incoming request abort or its deadline timer; assertCurrent can also fail synchronously on closed/aborted/wall/monotonic conditions. finish deletes request/admission context, setsclosed, removes listener/clears timer and aborts. M finiteWorker alwaysfinish in finally; receivingLOCAL root is clipped to forwarded original remaining/deadline and receiver alwaysfinish in finally. These are distinct clock/controller instances from the PH initial clock whose fields are logged."
+    },
+    {
+      "source": "native-wire38285...:26-39 + bridgef2c...:23-42",
+      "fact": "finiteNativeOperation races retained actual vs firstFailure vs abort/deadline using original remaining lifetime; a deadline-race rejection can yield a logical503 while actual work remains retained. Clearing race timer/listener does not settle actual. M bridge fetch/body checks and knownHTTPerror normalization can also yield503. Node duration30011ms does not identify which of these races, signals or predicates won."
+    },
+    {
+      "source": "LEASE11-17 andWORK068d...:8-23/67-103",
+      "fact": "Initial wait races retainedactual against abort; childfinally setsalivefalse and aborts child. Actual operations are retained before races. WORK releases outstanding only when original signalaborted AND promises.size0; actual success/failure handlers remove each exact promise. Logical timeout/close does not rollback existing receipt/native effects or assert physical drain. N2 AFTER/custody cleanup is not a global native-drain proof."
+    }
+  ],
+  "comparison": {
+    "N1Primary": "a208645ffbbd0c830134f8c79b3234667ef4cd95",
+    "priorDiagnosis": "bc756849f9c8a4ed4653a4cb1e5d20565f945e93",
+    "N1": "Same nativefirst3PASS andNOTICESFAIL/D08:47:12, GET200/POST503, counts2/2/1; unique afterprobeactivation-observed; no existing guard tags published.",
+    "N2": "Same public status failure with counts2/2/2 andreceipt-recorded; adds two parentholdersclosed/aborted arrivals, runtime callback and actual argument invariance observations.",
+    "inference": "N2 narrows the reported local marker beyond receipt record helper; it does not establish a change in source correctness, instrumentation-caused improvement, shared first cause, exact POST association or authenticated success. No frozen product change occurred between these occurrence configurations."
+  },
+  "distinguishingFactsNeeded": [
+    {
+      "candidate": "deadline as initiating cause",
+      "needed": "Same internal invocation/lease lineage and a cause-specific deadline/abort event ordered before first logical failure, with finite current-boundary predicates where actually evaluated. Current holder fields have no at/m and cannot prove expiry; absent parentclock tag does not rule out untagged deadline races."
+    },
+    {
+      "candidate": "secondary cascade",
+      "needed": "Order of first actual error/logical race outcome, root abort/finish, PH/pair close and later same-instance holder assertion. Current later tag arrival may reflect an already failed or older phase continuation."
+    },
+    {
+      "candidate": "early close defect",
+      "needed": "Same-instance close before its original work settlement, with close caller distinguished from parentabort/finally and no prior legitimate logical failure; causal control where only erroneous close moves. closedtrue alone only proves closed state, not mistimed closure."
+    },
+    {
+      "candidate": "late continuation after legitimate close",
+      "needed": "Same actual retained promise still pending at logical failure/close, later continuation entering closed instance and finally settling. Existing retention code allows this; two log arrivals lack instance/promise joins and cannot establish it as actual."
+    },
+    {
+      "candidate": "factual mismatch",
+      "needed": "First postreceipt recheck entered/completed and its exact safe mismatch/operation phase. The public marker lacks that leaf; no code contradiction in the remaining exact equality is proved by this occurrence."
+    }
+  ],
+  "recommendation": {
+    "now": "Keep Source13/futureproducer frozen. Finish independent instrumentation review separately; do not retry unchanged N2 or dispatch Task2 as a repair. No actual original-code defect/early close/expired guard has been established. No executable proposal is part of this report.",
+    "smallestConditionalNextScope": "If Root chooses another observation, nominate one fresh same four-case graph with same business requests/caps/guards and explicitly authorize only narrow observational data needed to join first postreceipt recheck with lease lifecycle. Record safe enter/returned/threw for recheck receipt-recorded vs complete; same-request local lease-role/ordinal and cause enums for root abort/finish, pair finally/parentabort, outer finally/parentabort, first logical race outcome. Keep actual Error object private and original thrown value/promise/await/guards unchanged; no extra reads/retries/world or positive Source statuses. Preserve unknown if any join is absent. This is a new scope requiring Root ruling, not authorized execution here.",
+    "whyNodeOnlyInsufficient": "Existing Node arrival windows and three tags cannot reveal which internal lease was closed, why holders failed, or whether first postreceipt pair was entered. Reusing the current logger unchanged cannot supply missing attribution. The smallest useful next DATA proposal may need a narrowly nominated temporary internal fixture instrumentation seam, separately reviewed; do not silently broaden Node-only N2 or rewrite product guards.",
+    "testFirstPreconditions": "Before such instrumentation, finite synthetic controls must reject after-the-fact cause attribution, duplicate/out-of-order close/error events, cross-invocation joins, fake settled state, stale phase logs and firstError replacement; accept honest open/pending prefix, deadline-vs-explicitclose-vs-finally separation and original thrownnull/undefined. Native causal lifecycle controls must later run only in Root cloud with original clocks and exact retained promise. If a fix is proposed later, first show a reproducible failing causal control with exact location and minimal reversible correction; then re-run appropriate Source acceptance, not infer PASS from diagnostic capture.",
+    "Task1Task2": "Current evidence proves repeated full factual reads remain on HTTP Task1 path, not that future Task2 API is structurally required or that a 30s/5s compliant implementation is impossible. If independently proven that a shared nonHTTP invocation/fact primitive planned for Task2 is a prerequisite, Root must explicitly extract just that prerequisite into a new bounded Task1 DATA scope with beforepins/interfaces/causal tests while Task1 remains unqualified. No Task2 dispatch, dependency gate waiver, stale fact cache, clock extension or broad factory rewrite."
+  },
+  "unknowns": [
+    "Which precise retained await/predicate or race first failed after the reported receipt-recorded marker.",
+    "Which lease instance/caller generated each parentholders event, and whether it is this POST or delayed prior work.",
+    "Whether root/child expiry, access/source expiry, holder identity, admission lineage, factual mismatch or IO initiated logical failure.",
+    "Actual SEND/ACK/receipt contents and full result bindings were not published; synthetic counters/receipt keys are not independent receipt authentication.",
+    "How long the first postreceipt factual pair or prior activation child actually consumed; Node elapsed is not its child budget.",
+    "Global native drain/SDK namespace emptiness/operational readiness/PCoff remain unproved."
+  ],
+  "verification": "Only bounded immutable safe evidence/source reads, cached frozen source inspection and RAM string/JSON/hash metadata. No new executable blobs, Source body edits, unfreeze, tests/compile/syntax/eval/import, files/deps, refs/runs/reruns, logs/artifact fetch, real runtime/provider/CF/browser/keys/mail/subagents. Only this report blob is created, hashed and fully read back; then IDLE.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

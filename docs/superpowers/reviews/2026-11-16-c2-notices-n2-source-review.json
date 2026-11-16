@@ -1,0 +1,550 @@
+{
+  "schema": "afw.c2-notices-n2.source-instrumentation-scoped-review.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authorityBrief": "91bc4335efdd536a4f6a8881899e1d55f0436fb7",
+  "scope": "SPEC/QUALITY of only the N2 diagnostic temporary S07/S08/S10 overlays, logger/helper/reader/controls/runner and pre-admissionF1/F2/F3. Full original Source product/Task1 qualification remains excluded and frozen.",
+  "pins": {
+    "packet": "a30ecbb8d4990896082cad0104a8d6e91960e8f5",
+    "index": "cfddde5866ac2646d301c53cfa99d74437409d13",
+    "report": "4996da2322d0f54684f1521b27cf41d6f2562d4b",
+    "diff": "4f3688411ea8b3bac021812c48e62e8c38ba27c6",
+    "driver": "e50a5292dfb31a7ba9d76f2ef2c28a1f58d575c0",
+    "coupled": "8ae7fe99ebdc791f786d39243649e2672ad90ec0",
+    "world": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+    "helper": "984b66d96d7f75317515859678a26beab6ec9250",
+    "logger": "92420acc2306b62943ae80d14b889871c9a3957c",
+    "reader": "09e1bd61a6f132d1a7d029535d4b34b67ef42524",
+    "controls": "e04c7649cec44f4e6a4e9b6287c938bc5c3811b3",
+    "runner": "33e94efe8fb9f41e68719e7a5f21389dc692a8eb",
+    "vectors": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+    "ownReview": "b44a603ba0097da4e36a8bcb70e87123ee6ddd67",
+    "ownReader": "e5418eaa79db9f348753fa8a15b8eb28050429b6",
+    "primary": "db59d9696661b681e88c919e08ec1311d176b4de",
+    "exactOutcome": "eeeec6e48364422b40b599a75fad21064562eb64",
+    "closeProof": "44a9091d8cbf1745b84dcfb853f88d07836316ff",
+    "sourceBrief": "07a10773d721081de132baf9d4bb9b014466137e",
+    "windowRuling": "72480f6b32a095186b17671cb6d18b583335f9a1",
+    "findingsLedger": "dea133e44247938626de925ccb6fe44de3896583"
+  },
+  "verdict": {
+    "SPEC": "FAIL",
+    "QUALITY": "FAIL",
+    "findingCount": 1,
+    "severityCounts": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 1,
+      "P3": 0
+    }
+  },
+  "method": "Immutable Source code/DATA inspection only, not Source execution. Read complete scoped overlay/tooling bodies and actual safe receipt/outcome; inspected exact normal-to-temp hunks and the scoped relevant fixture context. Reconstructed all3 overlay diffs forward/reverse against complete pinned before/after strings: S07three/S08four/S10five hunks match exactly, with all other bytes unchanged. Independently verified UTF8 bytes/SHA256/GitBlob of seven body pins, runner and vectors. Constructed the literal counterexample below only by JSON copy/filter/renumber and traced the actual reader/nativeJoin predicates statically. No Source eval/import/compile/syntax/tests, local files/dependencies/clones, refs/runs/runtime/browser/keys/mail/owner questions or subagents. Raw logs/artifacts were not refetched. No implementation was changed.",
+  "findings": [
+    {
+      "number": 1,
+      "priority": "P2",
+      "title": "Require baseline and before probe when a NOTICES action settles, including timeout prefixes",
+      "file": "docs/superpowers/source-lab/c2-t1-notices-n2/n2-reader.mjs",
+      "startLine": 114,
+      "endLine": 115,
+      "relatedLines": "139,149-151; n2-controls.mjs:37-39",
+      "problem": "F1's baseline check currently runs only when a before-probe record exists. A settled NOTICES actionthrow without any baseline or probe can end a timeout journal and be accepted as an honest prefix. The window ruling permits a prefix before baseline only while that action remains unfinished; a completed entered action must have baseline and ordered required probes.",
+      "staticTrace": "Use literalCounterexample below with writerFault:false. Binding, sequence/time, four completed host pairs and the first three action/count cases are valid. At NOTICES actionthrow line114 checks dangling HTTP only (none), sets action:'threw', failed:true and advances stage1→2 without requiring baseline/before. At EOF complete:false and condition:'timeout' reaches lines149-151 and returns valid:true/code:OK/integrity:prefix. nativeJoin with exactly the first three successful cases loops only those completed rows; observation integrity prefix bypasses its complete-native check, so it returns true. safeWitness can then preserve this malformed prefix. This is static predicate reasoning; no Source RED/PASS was executed by reviewer.",
+      "impact": "Producer-side diagnostic validity can be positive for a chronology forbidden by the explicit F1/window contract. The independently reviewed OWN receiver already rejects it at its own NOTICES action completion check, so there is no demonstrated false accepted Root capture and the actual N2 occurrence remains unaffected.",
+      "requestedChange": "In the existing NOTICES stage1 action return/throw branch, require its baseline and already-recorded before probe before accepting settlement, alongside the current HTTP completion rule. Preserve an unfinished action prefix that stops before baseline or with an HTTP operation still entered. Keep the change in the Source diagnostic reader and required pinned control/binding metadata only; no business/runtime change is requested.",
+      "minimumVerification": "Preserve the23-record literal timeout negative before editing; add a direct Source readObservation/nativeJoin rejection test with condition:'timeout'. Retain positives for an unfinished NOTICES action ending before baseline and for an unfinished action with GET/POST/body pending; also retain valid settled failures with baseline/before and complete/native-timeout behavior. Run the pinned existing parser/logger/slot helper controls and these finite cases in a native Node22.23.4 tooling-only cloud graph. It needs only reader/controls/logger/slot, JSON and builtins: no Miniflare business world, dependency install, custody launch, new business request or rerun of the closed N2 capture is needed. Root must separately gate any such verification. Preserve old report/receipt/pins as historical evidence; rebind only the new diagnostic candidate."
+    }
+  ],
+  "literalCounterexample": {
+    "condition": "timeout",
+    "writerFault": false,
+    "binding": {
+      "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+      "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+      "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+      "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+      "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+      "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+      "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+    },
+    "records": [
+      {
+        "sequence": 1,
+        "elapsedMs": 0,
+        "kind": "binding",
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      {
+        "sequence": 2,
+        "elapsedMs": 1,
+        "kind": "flow",
+        "id": "N2_CONNECTION",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 3,
+        "elapsedMs": 2,
+        "kind": "host-proof",
+        "call": 1,
+        "stage": "constructor",
+        "edge": "prepared",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": null,
+        "M": null,
+        "QA": null
+      },
+      {
+        "sequence": 4,
+        "elapsedMs": 3,
+        "kind": "host-proof",
+        "call": 1,
+        "stage": "constructor",
+        "edge": "returned",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": null,
+        "M": null,
+        "QA": null
+      },
+      {
+        "sequence": 5,
+        "elapsedMs": 4,
+        "kind": "host-proof",
+        "call": 2,
+        "stage": "assembly",
+        "edge": "prepared",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 6,
+        "elapsedMs": 5,
+        "kind": "host-proof",
+        "call": 2,
+        "stage": "assembly",
+        "edge": "returned",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 7,
+        "elapsedMs": 6,
+        "kind": "host-proof",
+        "call": 3,
+        "stage": "mount",
+        "edge": "prepared",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 8,
+        "elapsedMs": 7,
+        "kind": "host-proof",
+        "call": 3,
+        "stage": "mount",
+        "edge": "returned",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 9,
+        "elapsedMs": 8,
+        "kind": "host-proof",
+        "call": 4,
+        "stage": "adopt",
+        "edge": "prepared",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 10,
+        "elapsedMs": 9,
+        "kind": "host-proof",
+        "call": 4,
+        "stage": "adopt",
+        "edge": "returned",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 11,
+        "elapsedMs": 10,
+        "kind": "flow",
+        "id": "N2_CONNECTION",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 12,
+        "elapsedMs": 11,
+        "kind": "flow",
+        "id": "N2_CONNECTION",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 13,
+        "elapsedMs": 12,
+        "kind": "flow",
+        "id": "N2_CONNECTION",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      },
+      {
+        "sequence": 14,
+        "elapsedMs": 13,
+        "kind": "flow",
+        "id": "N2_OAUTH",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 15,
+        "elapsedMs": 14,
+        "kind": "flow",
+        "id": "N2_OAUTH",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 16,
+        "elapsedMs": 15,
+        "kind": "flow",
+        "id": "N2_OAUTH",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 17,
+        "elapsedMs": 16,
+        "kind": "flow",
+        "id": "N2_OAUTH",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      },
+      {
+        "sequence": 18,
+        "elapsedMs": 17,
+        "kind": "flow",
+        "id": "N2_PHASE",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 19,
+        "elapsedMs": 18,
+        "kind": "flow",
+        "id": "N2_PHASE",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 20,
+        "elapsedMs": 19,
+        "kind": "flow",
+        "id": "N2_PHASE",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 21,
+        "elapsedMs": 20,
+        "kind": "flow",
+        "id": "N2_PHASE",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      },
+      {
+        "sequence": 22,
+        "elapsedMs": 21,
+        "kind": "flow",
+        "id": "N2_NOTICES",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 23,
+        "elapsedMs": 22,
+        "kind": "flow",
+        "id": "N2_NOTICES",
+        "operation": "action",
+        "edge": "throw",
+        "error": {
+          "name": "Error",
+          "code": null,
+          "site": null
+        },
+        "counters": null
+      }
+    ],
+    "native": {
+      "integrity": "prefix",
+      "cases": [
+        {
+          "id": "N2_CONNECTION",
+          "status": "pass"
+        },
+        {
+          "id": "N2_OAUTH",
+          "status": "pass"
+        },
+        {
+          "id": "N2_PHASE",
+          "status": "pass"
+        }
+      ],
+      "sourceFileFailure": false
+    }
+  },
+  "round1": [
+    {
+      "id": "F1",
+      "status": "NOT ADDRESSED",
+      "detail": "The supplied full complete-witness counterexample now rejects when its before probe is processed, but the same mandatory baseline/before requirement is still missing at action completion for timeout prefixes. Finding1 supplies the remaining concrete case."
+    },
+    {
+      "id": "F2",
+      "status": "ADDRESSED within recorded-diagnostic scope",
+      "detail": "Reader line67 rejects every record following hook final. Logger handler and complete return after ended, preventing late guard/host-return emission. Existing literal after-final host proof and late-complete controls cover the recorded sequence freeze. This does not prove global drain."
+    },
+    {
+      "id": "F3",
+      "status": "ADDRESSED for the specified root logger accessor",
+      "detail": "Logger lines87-98 obtains the own property descriptor before prior-value access/installation and rejects unsupported accessors without invoking getter/setter; complete uses descriptor-based loggerValue. Concrete controls retain absent/data-undefined/same handler positives, reject an existing logger and verify zero accessor calls plus preservation of the original thrown object. Reflective failure remains contained as diagnostic fault."
+    }
+  ],
+  "otherScopedAssessment": [
+    {
+      "area": "Normal-to-TEMP overlays and business invariance",
+      "result": "No additional actionable finding",
+      "detail": "Exact reversible hunks preserve all unlisted normal bytes. S10 adds synchronous prepare/complete around the same original constructor and setOptions calls/existing awaits; it does not wrap methods/promises or change compiled input strings/guards/transforms/onLoad. Current-call arguments and other callback references are compared, not regenerated in a second world. S08 retains original f.call/text/cancel/post/assert/form/state/adoption ordering with safe observations; the selected graph introduces no extra business request. S07 keeps four eager diagnostic cases, original action/count thrown-value priority and blocked later callbacks. Normal13/future qualifier are not changed or qualified."
+    },
+    {
+      "area": "Logger/helper/wire bounds and proof limits",
+      "result": "No additional actionable finding",
+      "detail": "Synchronous handler recognizes three exact tags and private payload keys/types/caps; raw/unknown Worker logs are not forwarded. Parent-holders clock facts remain null. Helper uses one bounded owned journal and existing actual-promise exclusion for at most before/after probes. Public option hash/reference/callback observations do not prove hidden installed state. Arrival windows, baseline/final counts, safe outputs and failed-diagnostic behavior remain separate from actual business outcome."
+    },
+    {
+      "area": "Runner and actual covering controls",
+      "result": "Credited within covered cases; timeout boundary gap remains",
+      "detail": "Runner pins normal13 then only overlays7/8/10, runs helper controls before the same3 custody launches, keeps bounded private child outputs, stable owned journal checks, fixed safe frames/artifact and verified own cleanup. Existing controls cover the complete F1 negative, F2/F3 and actual N2 occurrence. They do not test the newly identified settled-action/no-baseline timeout prefix; controls read closure currently calls readObservation without a condition argument and defaults to normal."
+    }
+  ],
+  "actualEvidence": {
+    "runId": 43869998890,
+    "attempt": 1,
+    "jobId": 133308331285,
+    "head": "5f3a7bf3a5103d1a00d2bb15ac66ecaa9a68786f",
+    "tree": "0a40e17da150590d4e1a1506c2c3d0c236ea5c20",
+    "primary": "db59d9696661b681e88c919e08ec1311d176b4de",
+    "helperControls": {
+      "accepted": 6,
+      "rejected": 21,
+      "probeChecks": 3,
+      "roundtrips": 6,
+      "witnessRejected": 2,
+      "slotChecks": 5,
+      "guardAccepted": 3,
+      "guardRejected": 7,
+      "guardTransitions": 6,
+      "invarianceChecks": 10,
+      "guardRecordRejected": 12,
+      "vectorsHash": "cd4d4a0174be09c8dcae12c6a3b222de0d5f7151d2b0b94dd30f9caa5b6eedad"
+    },
+    "actualCaptureUnaffected": true,
+    "outcome": "Valid complete safe capture independently admitted by reviewed OWN; native CONNECTION/OAUTH/PHASE pass and NOTICES fails. GET200 and POST503 bodies settled, action AssertionError D08:47:12, counts2/2/2, after-probe positionreceipt-recorded/receiptCount2, AFTERreturned. This runtime failure is not an instrumentation defect by itself.",
+    "host": {
+      "prepared": 4,
+      "returned": 4,
+      "openCall": null,
+      "allCompared": true
+    },
+    "hook": {
+      "callbackObserved": true,
+      "excludedTags": 0,
+      "finalObserved": true
+    },
+    "guards": [
+      {
+        "sequence": 29,
+        "elapsedMs": 102736,
+        "kind": "guard",
+        "guardSequence": 1,
+        "tag": "initial-parent-holders",
+        "window": "notices-post",
+        "closed": true,
+        "aborted": true,
+        "alive": null,
+        "wallExpired": null,
+        "monoExpired": null,
+        "wallRegressed": null,
+        "monoRegressed": null,
+        "correlated": null
+      },
+      {
+        "sequence": 33,
+        "elapsedMs": 102741,
+        "kind": "guard",
+        "guardSequence": 2,
+        "tag": "initial-parent-holders",
+        "window": "after-post",
+        "closed": true,
+        "aborted": true,
+        "alive": null,
+        "wallExpired": null,
+        "monoExpired": null,
+        "wallRegressed": null,
+        "monoRegressed": null,
+        "correlated": null
+      }
+    ],
+    "interpretation": "Two parent-holders records are Node arrival observations only; closed/aborted true does not prove expiry, authenticated request association or first cause. Difference from N1 position/count is an observed occurrence difference, not demonstrated improvement caused by instrumentation.",
+    "closeHead": "106b5a0ea543abe55dc8f27a717362dda1dfd08e",
+    "closure": "Immutable close proof records preservation of all3203 originals/modes and admittedDATA, workflow removal, Main/history unchanged and0close-head runs. Reviewer did not reopen or rerun the closed lab."
+  },
+  "limitations": [
+    "Actual raw child TAP, private probe arrays and option objects remain absent by design. Review does not freshly authenticate those missing objects or private Miniflare installed state.",
+    "Actual helper control PASS and independent OWN340nativePASS are credited at their exact revisions/covered vectors. The new finding is a static counterexample, not an observed runtime failure or executed RED.",
+    "Scoped FAIL calls for a diagnostic-parser correction only. It does not explain POST503, authorize operational repairs, unfreeze normal13/future qualifier, dispatch Task2, invalidate the accepted actual capture, or grant full Source/Task1 approval."
+  ],
+  "reviewerExecutedSource": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "disposition": "Scoped review complete; IDLE. No fix or new run performed."
+}
