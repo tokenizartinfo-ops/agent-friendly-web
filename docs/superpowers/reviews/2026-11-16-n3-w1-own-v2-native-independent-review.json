@@ -1,0 +1,221 @@
+{
+  "schema": "AFW-N3-W1-OWN-V2-INDEPENDENT-SPEC-QUALITY-REVIEW/1",
+  "atUTC": "2026-11-16 19:57:25 UTC",
+  "reviewer": "fresh independent reviewer n3_w1_own_native_review",
+  "language": "es",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Revisión de blobs Git como DATA inerte; JSON y criptografía builtin solo en RAM",
+  "origin": "GitHub blobs",
+  "resourceType": "git_blob",
+  "allowedAction": "Inspección y creación/readback de este informe inmutable; ninguna ref, ejecución nativa ni captura Source",
+  "reviewedIndex": {
+    "blob": "c295cee6968b7fd0c4f328ff91b22ed28dc12fde",
+    "bytes": 31492,
+    "sha256": "c64315133ebf2060c46d010351d6afbf330d3f045342ac850417a6441af3ad99"
+  },
+  "authority": {
+    "seal": "18f7bc92ad395e87042666399e736aa4dffbe278",
+    "supplement": "fea7c4ec837887c87f33720d799fcfa76cdede3f",
+    "contract": "78451c59e98651df91bc641efaa1b9819e4dff2e",
+    "schema": "19378e2d858bfb1c60a6368fc614ebf1fad7c875"
+  },
+  "verdict": {
+    "SPEC": "PASS",
+    "QUALITY": "APPROVED",
+    "actionableFindings": 0,
+    "readyForScopedOwnGateClosure": true,
+    "operationalAuthorization": false
+  },
+  "strengths": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/trace-reader.mjs",
+      "line": 59,
+      "result": "El guard semántico aplica explícitamente la condición de las cuatro razones refinadas: unjoined/unknown, eligible 0 o 1, entidades/eventos vacíos, target unknown y foco/error/cut nulos. No delega esta condición al ngSchema que ignora if/then."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reader.mjs",
+      "line": 271,
+      "result": "El resumen se deriva por replay completo y se compara exactamente; conservar los IDs inner v1 no autodetecta ni convierte perfiles. LIVE v2 excluye CAP_PRIVATE y legacySameGap."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/trace-reader.mjs",
+      "line": 112,
+      "result": "Se conserva el rechazo de retención p2 anterior al pair-enter representado, y los ejes lógico/target/p2, ordinales, foco, primer error, abort/close y prefijos permanecen separados."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reader.mjs",
+      "line": 253,
+      "result": "La comprobación M/QA recorre TODOS los host-proof compilados call>=2, incluidos prepared y returned; no depende de la última llamada. La matriz contiene un call3 coherente negativo."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reader.mjs",
+      "line": 234,
+      "result": "El ZIP exige info:true, buffer acotado a 24576 y consumo de todos los bytes comprimidos; mantiene CRC, nombre, offsets, un archivo, digest, payload canónico y equivalencia con logs. El LF cuenta dentro del límite."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reader.mjs",
+      "line": 259,
+      "result": "La autoridad sigue en trusted separado, con manifest/protocolHashes/ledgerBytes/policy y expected explícitos. Se conservan API/head/tree/parent/message/attempt/job, los cinco nombres de pasos, command window, cuatro frames, journal/probes/native/custody y entradas de compilación."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/run-controls.mjs",
+      "line": 19,
+      "result": "El runner verifica repositorio/ref/job/workflow/Node/head/tree/parent/message, 3203 originales y 26 adiciones, y closure antes de importar únicamente módulos OWN. Los resultados nativos se computan desde los modelos; test-results.json no concede el pase."
+    }
+  ],
+  "findings": [],
+  "verification": {
+    "method": "Inspección textual completa de los módulos OWN críticos y sus diferencias; parseo JSON/validadores originales del reviewer; SHA256/CRC en RAM. Ningún import/eval/compile/syntax/test/reducer de Source; ningún rerun OWN.",
+    "independentHashChecks": {
+      "reader": {
+        "blob": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+        "bytes": 59136,
+        "sha256": "a2bc00b500b92dc37f371e040717099a3af670994d3ad66d607530b75be1920e"
+      },
+      "trace": {
+        "blob": "cc22a79695471862f36c692db7a31e283b4ee46d",
+        "bytes": 20880,
+        "sha256": "5c9ffa269a401b1708d0bc53d03996d14d0d111e74aa6aec0f5274cdfd4b6953"
+      },
+      "fullModels": {
+        "blob": "c820817c5e505ff7d233a6a667cc7cdac64ef7fa",
+        "bytes": 4635377,
+        "sha256": "b18c26492cb88b00565b8f920e9080364fdcc8176568d67b3d4ff5880d71b2ce"
+      },
+      "derived": {
+        "blob": "047e46fedf9d8fc8210bb67490d3a94695270f95",
+        "bytes": 1167047,
+        "sha256": "2dd0e9f492f37590e14ba511ef6640bd4275445ec660d61d2195484850dea6d2"
+      },
+      "reversible": {
+        "blob": "4da4a78f7d07752e9025e85faac289e5f8f60cce",
+        "bytes": 374009,
+        "sha256": "26b9ba06c14f74924a5ab3a1c62bf6aabca922b15b6bcfb2abd7a3e411e712c2"
+      }
+    },
+    "schema": {
+      "embeddedOuterEqualsSealedSchema": true,
+      "traceAndOuterDefsIdentical": true,
+      "otherFieldsLoosened": false,
+      "allowedChanges": "Perfil/job/selection y cuatro razones/condiciones; los demás campos, máximos, required y additionalProperties permanecen. El esquema de record inline equivale al antiguo $ref.",
+      "canonicalSelectionSHA256": "b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503",
+      "rawSelectionSHA256": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+      "independentNativeProofSchemaErrors": []
+    },
+    "preservation": {
+      "oldTrace": "c5efe74261a04e180476650c23a60feb268ca042",
+      "oldReader": "fcfe54a718f61835c35df5961bc5248431122b00",
+      "bothBeforeImagesEqualFreshBlobReadback": true,
+      "bothSplicesForwardAndReverseExact": true,
+      "threeNewCodeBodiesEqualFreshBlobReadback": true,
+      "historicalSourceNormalizationPerformed": false,
+      "note": "El verificador nativo exige preservar cada hoja original; el recibo de cierre confirma WF retirado y main/históricos sin cambios. Esta revisión no vuelve a consultar refs ni ejecuta git."
+    },
+    "coverage": {
+      "actualNewNativeCount": 280,
+      "groups": {
+        "ownLiterals": 28,
+        "mandatorySourceLiteralData": 22,
+        "newDerivedOwn": 155,
+        "fullInputs": 65,
+        "boundaries": 10
+      },
+      "ownLiterals": {
+        "positive": 8,
+        "negative": 20
+      },
+      "sourceMandatory": {
+        "positive": 8,
+        "negative": 14,
+        "coherentTransportMutationsCovered": 4
+      },
+      "derived": {
+        "positive": 56,
+        "negative": 99
+      },
+      "fullInputs": {
+        "accepted": 16,
+        "rejected": 49
+      },
+      "negativesDoNotUseExpectedSummaryToHideAcceptance": true,
+      "applicablePriorFixes": "p2 pair order y cardinalidad; compiled metadata de todos los calls; consumo DEFLATE; native/HTTP body settlement/prefix y tree mismatch conservados por inspección y casos v2.",
+      "legacyBoundary": "No equivale a volver a ejecutar los 517 ni los 527 casos históricos bajo v2. El corpus v1 separado queda congelado; la nueva selección cubre 155 regresiones semánticas derivadas más 65 transportes completos, sin convertir recibos históricos.",
+      "materialCoverageOmissionFound": false
+    },
+    "nativeEvidence": {
+      "primaryBlob": "5570636a59104b8d933f265664cb0c8273b0a31a",
+      "proofBlob": "03f6f5027c304124e7fbce66d5618dd5ab79d6d9",
+      "runId": 43942706278,
+      "attempt": 1,
+      "jobId": 133564127939,
+      "head": "bbce1f93f03bf959ff96e1799a6703e68c64ca38",
+      "tree": "ff0dc22c04f6097543fd28f76dcbf7dd79680577",
+      "apiRunAndJobSuccess": true,
+      "tapExact280Ordered": true,
+      "idsSHA256": "9cd977b1ba947fcf9fb1e057d67687e3c4ec0f047c082d0b2079bf452d7aad61",
+      "passed": 280,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "extra": 0,
+      "missing": 0,
+      "duplicate": 0,
+      "proofCanonicalAndLogEqual": true,
+      "sixBindingsIndependentlyMatched": true,
+      "closureSHA256": "587718b84a4d58a42c6ce6375a866d3b8dd4c8fa038b34ac00a49608041d6df4",
+      "zip": {
+        "bytes": 1445,
+        "sha256": "75deff9474340cdd1c8261cc3bc6e2ec8e4c0c69b3f788c5efaa7c3514e979e3",
+        "soleFile": "firstlimit-w1-own-v2-proof.json",
+        "payloadBytes": 2225,
+        "payloadSHA256": "aa7a76be9783bdbd584991cf6d8f91257aa3e4f19b4931b1bb6fc51dfa44f6d3",
+        "crc32": 1665984509,
+        "reviewerChecked": "Digest, nombre local/central, un miembro, offsets/extensiones, tamaños y CRC de plaintext contra central/descriptor.",
+        "inflateRerun": false,
+        "fullInflationBasis": "Recibo Root con parser OWN fcfe previamente revisado; este reviewer no repite descompresión ni ejecución nativa."
+      },
+      "commandTime": {
+        "apiStart": "2026-11-16T19:46:08Z",
+        "apiCompleted": "2026-11-16T19:46:09Z",
+        "proofStart": "2026-11-16T19:46:09.671Z",
+        "proofEnd": "2026-11-16T19:46:09.913Z",
+        "assessment": "No material: endpoints API tienen precisión de segundos; ambos extremos del proof quedan antes de completed_at+1000ms exclusivo. Comparación explícita de granularidad, sin editar timestamps ni alegar orden subsegundo entre pasos."
+      },
+      "closeProof": "885d8d716163736626655a876831a9d99e7dcdd5",
+      "closeHead": "a185dd73bf8063bec063d6d5043706f54c1c3003",
+      "closeWorkflowAbsentAndZeroCloseHeadRuns": "Consta en recibo Root leído; no se vuelve a consultar ni mutar refs/runs."
+    }
+  },
+  "declinedToJudge": [
+    "Verdad privada del tag ROOT16/GAP_NEW128/LEASE_NEW128/OTHER: el wire no la autentica. La sustitución coherente ROOT16->GAP_NEW128 se acepta estructuralmente por diseño; las pruebas callback Source son una compuerta distinta.",
+    "Causa histórica/business, target success, identidad privada p2/internalrun, igualdad de inputs compilados ausentes, pending físico, drenaje global y SDK vacío: no se deducen de proyecciones públicas.",
+    "Captura y caller binding real de Source W1: candidato inactivo, sin recibo Source válido en este alcance. Los modelos 2099 y nueve variantes compiladas son DATA sintética, no outcomes reales.",
+    "Promoción, operación, guardia activa y PC apagado: fuera del encargo y sin autorización concedida.",
+    "Reejecución íntegra de la batería histórica v1 o nueva descompresión/nativa: no autorizadas para este reviewer; se inspeccionan los cuerpos y recibos inmutables."
+  ],
+  "recommendations": "Cerrar únicamente la revisión OWN de esta revisión/hash. Cualquier captura Source exige su propia admisión y autorización vigentes; este informe no las reemplaza.",
+  "SourceImplementationImported": false,
+  "SourceImplementationEvaluated": false,
+  "SourceImplementationCompiled": false,
+  "SourceImplementationSyntaxChecked": false,
+  "SourceTestsOrReducersExecuted": false,
+  "OwnNativeRerun": false,
+  "refsCreated": 0,
+  "refsMutated": 0,
+  "runsCreated": 0,
+  "localFilesCreated": 0,
+  "dependenciesInstalled": 0,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
