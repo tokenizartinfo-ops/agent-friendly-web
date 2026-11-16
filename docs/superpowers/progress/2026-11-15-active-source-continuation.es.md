@@ -54,3 +54,7 @@
 }
 
 No old-run replay/log refetch. Root waiting SAME scoped review3 before round4. Fix-loop requires fresh implementer on more-capable model for4–5; not originalSourceactor. Roundsmax5 sameTask1, noreset. Full history/limits preserved. Correction candidate must retain explicit Buffer stdout/stderr and safe UTF8 stdin; Source local execution/compile/eval prohibited. UpcomingSource-onlyGitHubvalidation, notCF/Nativeruntime.
+
+## SameTask1 round4 fresh implementer
+
+Review40ab642d8fbcf1785e273fdba062618b56178ecc accepts phase/layout spec+quality,0newC/I/M and confirms startupE1 mechanism separately. Current actualsourceonlyexit71/unqualified; originalcausefalse. Fresh /root/serial_v2_fix4_impl onAstrahigh perfix-loopround4 nowowns narrow UTF8-buffer stdin correction and exact-shell reversionregression. Briefd8d01286/ruling626695af; previousSourceactoridle. SAMEappend<=1500/Rootcompact<=820, no capraise/truncate. Sourcefullyclosed7ca; no candidate/run. All7false; no owneractionneeded.
