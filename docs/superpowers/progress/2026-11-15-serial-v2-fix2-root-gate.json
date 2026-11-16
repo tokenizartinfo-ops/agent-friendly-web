@@ -1,0 +1,77 @@
+{
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://github.com/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Source-only GitHub laboratory",
+  "resourceType": "one Source branch CAS and one push attempt1 readonly job",
+  "resourceId": "refs/heads/feat/finite-native-cleanup-20261101",
+  "allowedAction": "one-use fix2 only; terminal logs once; restore original F7/full SAME preserved",
+  "utc": "2026-11-16 00:15:50 UTC",
+  "prepared": {
+    "commit": "ae216d6e24b2af0e44985cca0f408d42e5dc1e38",
+    "activeTree": "0450e5900e86b31667f79ee12d0bdef002abf4f7",
+    "inactiveTree": "2573a6aeddd8b53c6db752332fbfa616fd634876",
+    "parent": "e57d6f2b862deccfbb90d8e042a576c68d0ccb3c",
+    "F7": "76aed373f67b6b508964c630ee2e3be6005b7d81",
+    "SAME": "60827f4b15db58c8741d445cb2a854789f036cab",
+    "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-FIX2-ONEUSE-20261115",
+    "SourceReleased": false
+  },
+  "sourceIndex": "871ad100702810c6421f32f5d038139d42b0a36d",
+  "ownIndex": "6793b7c01ee70e4bc898b1b58f60c07f7c06c5ce",
+  "rootVerified": {
+    "SourceArtifactPins": 51,
+    "SourceDataChecks": 42,
+    "reversibleSpans": 12,
+    "OwnArtifactPins": 8,
+    "OwnReversibles": 2,
+    "OwnPositives": 45,
+    "OwnNegatives": 124,
+    "OwnPrior21_108Preserved": true,
+    "twoPredicateMutants": true,
+    "SourceExecution": false
+  },
+  "stdinMax": {
+    "boundary": 26802,
+    "trace": 30140,
+    "cap": 32768
+  },
+  "F7Headroom": 8,
+  "preservedClosedWholeSAME": {
+    "blob": "dbf9a72fd11306f368e0571204493d663df04d35",
+    "bytes": 2589863,
+    "sha256": "2b6a5e9287b7391ed6a2a347c8cf872047e95dcd5ee73192ded969d8a7d749a5"
+  },
+  "Core": {
+    "leaves": 3201,
+    "bytes": 324448,
+    "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+  },
+  "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "queues": 0,
+  "candidateHeadRuns": 0,
+  "onlyF7SAME": true,
+  "rollback": {
+    "closeParent": "ae216d6e24b2af0e44985cca0f408d42e5dc1e38",
+    "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "preserveFullCandidateSAME": true,
+    "fullActualReceiptFirst": "create/readback/preserve in Rootdocs with Git/bytes/SHA256 before closing",
+    "compactSAMEAppendMax": 1024,
+    "minimumSpareAtClose": 1024,
+    "reserve": 8851,
+    "SourceClosureReadback": "Source/commit/tree/F7/full SAME/Core/Main/5queues/closedheadruns; pending/active null only after verified"
+  },
+  "I3Open": true,
+  "C2Released": false,
+  "NativeReleased": false,
+  "providerRuntimeRead": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
