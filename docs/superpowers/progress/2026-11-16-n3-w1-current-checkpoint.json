@@ -1,8 +1,31 @@
 {
-  "schema": "AFW-N3-W1-ACTIVE-CHECKPOINT/1",
-  "atUTC": "2026-11-16 20:11:10 UTC",
-  "phase": "N3-W1-actual4PASS-GETPOST200-closed-actualreview-and-fullTask1-plan-active",
-  "ownerActionNeeded": false,
+  "schema": "AFW-OWNER-DISCONNECT-CHECKPOINT/1",
+  "atUTC": "2026-11-16 20:32:34 UTC",
+  "state": "Stopped after completed block at explicit owner temporary-disconnect request; no active work dispatched.",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "docsBranch": "docs/finite-pcoff-continuation-20261103",
+  "knownRuns": [
+    {
+      "id": 43937983127,
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 43942706278,
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    },
+    {
+      "id": 43945121668,
+      "status": "completed",
+      "conclusion": "success",
+      "attempt": 1
+    }
+  ],
+  "allKnownRunsTerminal": true,
+  "agents": "All child tasks completed/IDLE, no pending creation. OWN writer explicitly told not to start until Root followup after owner resume.",
   "sourceCurrent": {
     "head": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
     "tree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
@@ -44,7 +67,9 @@
     "closed": "05d4e6ba2381ec3182705147d9554f459bbabcc8",
     "close": "bd3550f1e06fb30d7f612d744fd15340a862fe8b",
     "reviewer": "/root/n3_w1_own_native_review",
-    "reviewPending": true
+    "reviewPending": false,
+    "actualReview": "1dfaf35713d281f091192271e768c25fdc413873",
+    "actualVerdict": "PASS diagnostic scope only"
   },
   "toolNative": {
     "packet": "1c732aaf9854b43860e76335ee40b5ec0ca42f64",
@@ -125,12 +150,46 @@
       "QUALITY": "APPROVED"
     }
   },
-  "next": "Read-only actual Source review + existing frozen fullTask1 qualifier/OWN inventories. No repeat W1 or causalobserver changes planned absent newmaterialevidence. Root must authorize exact complete qualification nomination afterplan/dataadmission.",
-  "actors": {
-    "actualReview": "/root/n3_w1_own_native_review",
-    "SourceQualificationPlan": "/root/n3_admission_repair4_design",
-    "OwnQualificationPlan": "/root/c2_v2_own_receiver_fix1"
+  "next": {
+    "SourcePlan": "6696d06831328bb52d7245c48347bd8c412b566d",
+    "OwnPlanIndex": "cb7e1c276325927c11d2c7805aa6dd9fc2ca39bd",
+    "OwnImplementationRuling": "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+    "OwnImplementationStarted": false,
+    "OwnWriter": "/root/c2_v2_own_receiver_fix1",
+    "SourceQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "Source13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "SourceFutureNomination": {
+      "branch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+      "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIXTURE-FIX1-ONEUSE-20261116",
+      "workflow": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+      "job": "c2-source-lab-fixture-fix1",
+      "runner": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+      "command": "node docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+      "artifact": {
+        "name": "afw-c2-owner-stages-source-t1-fixture-fix1-receipt",
+        "path": "output/c2-source-lab-fixture-fix1-receipt.json",
+        "fileName": "c2-source-lab-fixture-fix1-receipt.json",
+        "count": 1,
+        "retentionDays": 7,
+        "receiptBodyBytes": 24576
+      },
+      "admission": "Pre-nominated only. Root must verify name/message/head never used, preserved prior leases and no prior corrected full occurrence; no reuse of exhausted/closed branch, placebo renaming or head fabricated from DATA. If already spent, HOLD for history reconciliation/material reason and separate nomination."
+    },
+    "SourceBranchAbsentAt": "2026-11-16 20:20:47 UTC",
+    "SourcePriorRuns": 0,
+    "SourceRefCreated": false,
+    "SourceCaptureReleased": false,
+    "archive": {
+      "docsHead": "0e49d138fede37f560c3dc560725bcb4fd551a2d",
+      "path": "docs/superpowers/reviews/2026-11-16-full-task1-source-frozen/",
+      "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+      "bodies": 8,
+      "SourceExecuted": false,
+      "originalFutureSourceBranchNotCreated": true
+    }
   },
+  "relayNewAtClose": 0,
+  "ownerActionNeeded": false,
   "SourceQualified": false,
   "Task1Pass": false,
   "nonclaims": {
