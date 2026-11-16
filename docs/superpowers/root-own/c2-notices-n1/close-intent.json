@@ -1,0 +1,23 @@
+{
+  "schema": "afw.c2-notices-n1.own-close-intent.v1",
+  "testedHead": "ef8e1e1f17f298708146e26001dfb41486d707cd",
+  "testedTree": "22c7f475ac29cad7fdedd85bf0fabd91540a6897",
+  "runId": 43851316165,
+  "jobId": 133244296597,
+  "reason": "Native189/189 completed; remove one-use OWN workflow and preserve dated evidence. Original3203 files untouched.",
+  "remove": ".github/workflows/afw-c2-notices-n1-own.yml",
+  "preserve": "docs/superpowers/root-own/c2-notices-n1/native-primary.json",
+  "postWriteReadback": "Root must verify exact close ref/tree/originals/Main/historical/zero close-head runs",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
