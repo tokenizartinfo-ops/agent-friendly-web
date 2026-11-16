@@ -1,0 +1,153 @@
+{
+  "schema": "afw.c2-notices-n3.early-index.v1",
+  "status": "EARLY_DATA_PENDING_ROOT_SEAL",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "brief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "builder": "9741a68b848456032da812ecd0a29d71d8d2d5c4"
+  },
+  "artifacts": {
+    "contract": {
+      "bytes": 12169,
+      "sha256": "ad4104c6f62f7623727aa90ad8ca6d991b12b0f4b6c5deb7034f6266eeee59f6",
+      "gitBlob": "eb1d149ed30c60930d667106ddf433d6feb0350f",
+      "blob": "eb1d149ed30c60930d667106ddf433d6feb0350f",
+      "fullReadback": true
+    },
+    "causalSchema": {
+      "bytes": 13899,
+      "sha256": "8780c9fcdb7f90ce35af840b22f3509c69417059b7d84a7774e708324e4a26ec",
+      "gitBlob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "blob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "fullReadback": true
+    },
+    "selection": {
+      "bytes": 2048,
+      "sha256": "ea902f464b5530f3b7894c259ec7ed5420e01a87eecfe8b49c46d175d4d59324",
+      "gitBlob": "3db514b655917bd05917a90a53cb69667041fd36",
+      "blob": "3db514b655917bd05917a90a53cb69667041fd36",
+      "fullReadback": true,
+      "canonicalHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c"
+    },
+    "seams": {
+      "bytes": 9478,
+      "sha256": "586c19cca31bed877424d58dcd6998d4ddf40fd8451b032740bac2731221e771",
+      "gitBlob": "95469be8b8578395efe2651fdf1c60af4784530a",
+      "blob": "95469be8b8578395efe2651fdf1c60af4784530a",
+      "fullReadback": true
+    },
+    "vectors": {
+      "bytes": 371456,
+      "sha256": "765ff8a0cacb9d141fe75fd49cb2c4a52ce74abd3c5db3f8afe61fd89f442b0f",
+      "gitBlob": "d2e96340f8e267b9b0b64f05c5ca9daf96372df5",
+      "blob": "d2e96340f8e267b9b0b64f05c5ca9daf96372df5",
+      "fullReadback": true
+    }
+  },
+  "preservedEarlySchema": {
+    "bytes": 24387,
+    "sha256": "9515cae1218505c90d8cc050456522a8a7033ce006bef0824faa74709c6cd759",
+    "gitBlob": "9628e56fa8d9ccaa4b95f8ff182d0084ffaaf6f8",
+    "blob": "9628e56fa8d9ccaa4b95f8ff182d0084ffaaf6f8",
+    "fullReadback": true
+  },
+  "schemaClarification": "Finalearlyschema uses standard $ref:#/$defs/causalRecord atroot and $defs.snapshot/summary. First schema9628e... was a schema-container DATA form with nonstandard top-level snapshot/causalRecord/summary properties; do not validate against that container as a root schema. No Source/native validator executed here. Contract shape unchanged.",
+  "leaseFullBeforeImage": {
+    "bytes": 2257,
+    "sha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e",
+    "gitBlob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9"
+  },
+  "selectionHashRule": "SHA256(JSON.stringify(parsed selection) UTF8), no LF; shown canonicalHash. Contract/schema/seams/vectors body hashes are exact rawUTF8bytes. FuturemanifestHash SHA256(JSON.stringify(manifest) UTF8), no LF.",
+  "futureManifestKeyOrder": [
+    "schema",
+    "normalSourceIndexHash",
+    "selectionHash",
+    "contractHash",
+    "schemaHash",
+    "seamsHash",
+    "vectorsHash",
+    "driverHash",
+    "coupledHash",
+    "worldHash",
+    "helperHash",
+    "readerHash",
+    "loggerHash",
+    "slotHash",
+    "ledgerHash",
+    "transformHash"
+  ],
+  "bindingClarification": "Futuremanifest contains no ownhash/runner/WF/index so no circularity. Final producerindex bindsmanifest+runner+WF. Contract spelling vectorHash in prose means canonical manifest field vectorsHash as listedhere.",
+  "nativeBeforeCodePlans": {
+    "literalPositive": 20,
+    "literalNegative": 23,
+    "actualHelperUnitPlans": 26,
+    "concreteCausalRecordMaxPositiveBytes": 4795,
+    "syntheticTransportCount": 43,
+    "transport": "Every literal has freshcanonical record/witness/frame/payload/ZIPSTORE CRC/SHA256 metadata. Fixturetransport syntheticOnly, NEVER fullSource/APIreceipt."
+  },
+  "seamClarifications": [
+    "Existing retain callback is expression pendingWork.delete(p), returning its actualboolean. Any future observer-body extension MUST preserve that original returnvalue and the same original callback and p.then invocation; no newreaction.",
+    "Synchronous try/catch around the SAME original call/await is proposed only to observe/rethrow the exact original thrown value. No newPromise.catch/then. Root must seal this interpretation before executableA.",
+    "OPsharedabort mayexecute before lease initialization. Proposed nullable localalias records unjoined then binds same actualroot aftercreation, noTDZ/authorityread. Rootabort/timerwinner remainsunknown.",
+    "Firstscopeerror independently retained, even outside chosenchild; its lease:null is explicit outsidefocus/unjoined reference, not newroot. ObjecterrorordinalRootlocal; primitivepresentneveridentity.",
+    "Private allscope/lease/promise/error/event/gap bookkeeping isbounded. Relevantprebindgap/cap/serializationloss cannot becomecomplete. Realtrace mayprefix/unknown; no guarantee target orcause willbeestablished.",
+    "Promise table .lease and retained/settlement event lease are canonical actual WORKscope, not captured parentclock retainer/physical owner. Unknownworkscope staysprefix/unjoined; repeated original retain(parentclosure,samep) never rewrites workscope.",
+    "Original child() retain(actual) then wait(actual,l) retains SAMEp twice; two existing p.then calls create two different original settled callbacks, each provided identically as fulfill/reject handler. Preserve both calls/callbacks/delete returns true thenfalse. Public first retained/settlement observation immutable; repeat notes are idempotently folded and sourceSequence maygap.",
+    "Joined requires usableprojection aswell aseligible1; cap/fault canunjoinedeligible1; bindingconflict toanothernoneligibleRoot canambiguouseligible1.",
+    "Opaque objecterror identity mayinclude function; no propertyaccess/invocation and functions never rootresolvers. Primitives neveridentity.",
+    "OPpostabort note follows synchronous nested listeners, so parentabort/close mayprecederootabort marker; do not enforce reverse ordering or infer initiatingcause."
+  ],
+  "gate": "No executable ledger, transform, observer reader/helper/control/runner/WF implementation was authored or activated. Root earlywire seal stillrequired before dependentAimplementation/N3.B. FullouterN3outcome schema/proofbodyhash bindings and wholecore+8guards byteworstcase willbe completed afterseal and before anyRootgate. Only causalDTO/schema/selection/seams/literalvectors are delivered now.",
+  "frozen": {
+    "normalSource13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "futureQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "allOriginalsUntouched": true
+  },
+  "verification": "All six early artifacts (including preservedschema1) immutablecreated+FULLreadback equality/UTF8bytes/SHA256/GitBlob verified. Only literalJSON/string/builtincrypto/finiteZIPmetadata construction inRAM; no Source/parser/ledger/observer eval/import/compile/syntax/tests, files/deps/clones/refs/runs/runtime/CF/browser/keys/OTP/mail/Max/subagents. Actual testsPENDING_ROOT_CLOUD. Only proposedDATA, no Sourcepass.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "preservedBeforePromiseClarification": {
+    "contract": {
+      "bytes": 9795,
+      "sha256": "88cc33c0bb706d5720d807d92ea8a266cf81d29b589654ba4bb8d4c0699b141f",
+      "gitBlob": "1924f5c750a90e5a2de143879cf279627edd735a",
+      "blob": "1924f5c750a90e5a2de143879cf279627edd735a",
+      "fullReadback": true
+    },
+    "vectors": {
+      "bytes": 356068,
+      "sha256": "ac501ef7cb34c24c65eb8ad917337de148f63ae63f6e7ab5d9d24b5b03e30ae2",
+      "gitBlob": "9f413ed4b51d7f2be5fc7871bd9e896179779808",
+      "blob": "9f413ed4b51d7f2be5fc7871bd9e896179779808",
+      "fullReadback": true
+    },
+    "seams": {
+      "bytes": 7539,
+      "sha256": "7046f8d412ca010ec3bc3507edce8b37c907b2c01148ea7e706c8fcba4fe9103",
+      "gitBlob": "63efeb70f6cc083f3fc762abe30fcef8215cd0fe",
+      "blob": "63efeb70f6cc083f3fc762abe30fcef8215cd0fe",
+      "fullReadback": true
+    },
+    "index": {
+      "bytes": 6507,
+      "sha256": "83a154c15fc4ed52e508aa5a316eb99d2281d8c405af4521e53257c5ca4e7511",
+      "gitBlob": "48fe0005ebefd51e58b674fb7079ee55a2173724",
+      "blob": "48fe0005ebefd51e58b674fb7079ee55a2173724",
+      "fullReadback": true
+    }
+  }
+}

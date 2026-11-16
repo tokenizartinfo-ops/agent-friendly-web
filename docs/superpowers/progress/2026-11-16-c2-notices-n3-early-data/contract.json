@@ -1,0 +1,191 @@
+{
+  "schema": "afw.c2-notices-n3.early-contract.v1",
+  "status": "EARLY_DATA_PENDING_ROOT_SEAL",
+  "authority": {
+    "brief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "initialSpec": "798d4d4d1daaff6e6cddc0b4f5f78661bbaeece0",
+    "bindingRuling": "5e14dbd44184611354d732690b1b7fb6d49fd9e4",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486"
+  },
+  "interface": "makeN3QaLedger():{note(rootRef:object|null,event):void,snapshot():SafeSnapshot}; n3QaLedger singleton resolved by one canonical QA module path test/fixtures/n3-qa-causal-ledger.mjs. note synchronous/nonthrowing/noRPC/no clocks; snapshot synchronous copied DATA, noauthorityread.",
+  "privateDTO": {
+    "binding": {
+      "keys": [
+        "type",
+        "entity",
+        "leaseRef",
+        "promiseRef",
+        "entityRef",
+        "parentRef",
+        "callRef",
+        "role"
+      ],
+      "type": "bind",
+      "entity": "scope|lease|promise|call",
+      "notes": "Actualobjectrefs ornull ONLY. Scope explicitroot+originalouter registered from captured root/clock objects. Selectedeligibility original validated notices POST afterPH662. Helper newchild can resolve root through existing parentlease in leaseRef, and bind actual child entityRef parentRef; newpromise can resolve viaalreadyboundlease, entityRefactualp/callRef capturedoriginaloptions. Never rootresolvebycallRef/function/Error/string/ordinal alone. Private other-child role allowed pending exactactivationmarker; public only declaredrole."
+    },
+    "observation": {
+      "keys": [
+        "type",
+        "kind",
+        "site",
+        "leaseRef",
+        "promiseRef",
+        "errorPresent",
+        "errorRef",
+        "cause"
+      ],
+      "type": "event",
+      "kind": "fixed publicvocabulary",
+      "errorPresent": "Explicitboolean, never Errortruthiness. errorRef opaque originalthrownobjectorprimitive, never readname/message/stack/value.",
+      "cause": "explicit-finish|parent-abort|finally|unknown|null"
+    },
+    "nullRoot": "Only SAME alreadyboundactualleaseRef and/orpromiseRef resolve. Bothrefs differentroot/sharedpromisecrossroot ->ambiguous permanently; never firstassociation. Beforebinding staysunjoined; boundedperrefgapmetadata counts caps and later relevantgap preventscomplete; no retroactiveeventinsertion. No usableactualrefs ->no laterroot bytime.",
+    "focus": "root,outer,activation,targetpair + targetpairchild with earliest RECORDEDcheck-threw; ifnone,firstobservedactualchild. SourceSequence totally orders ties, duplicate sequenceinvalid. Scope FIRSTRECORDEDlogicalerror independent of focus; preserve event/erroridentity or explicitunjoinedlease reference ifoutsidefocus. Primitivecontents/equality neveridentity. Root-scoped WeakMaps only.",
+    "scopeUncertainty": "No join acrosssnapshots/realms/restarts/M. Sameordinals in two freshfactories areindependent; a publicsnapshot cannot authenticate privateobjectidentity itself. Knownproducer/nativehelper tests are proofboundary. A coherently relabelled entire publicgraph may be indistinguishable; do not claim absolute authentication.",
+    "promiseSemantics": {
+      "publicLease": "Canonical bound WORKscope, not actual retainer or physical ownership. retained/settlement-observed publicevent lease equals promise canonical workScope. Rootless event leaseRef can be captured parentclock lease; it resolves sameactualroot, never rewrites workscope.",
+      "repeated": "First retained and first settlement observation immutable. Original repeated retain and original callbacks legitimate and folded; no extra reaction introduced, no double public settlement. Each original delete return true/false preserved exactly.",
+      "binding": "Only explicit original-worksite binding establishes canonical workscope. Unknown binding→prefix/unjoined, never guess child from parent or ordinal. One p across differentactualroots→ambiguous.",
+      "state": "joined needs one eligible scope AND usable unambiguous projection. eligible1 with unjoined fault/cap is valid; bindingambiguous can have eligible1 with another noneligible root.",
+      "error": "kindobject is an opaque identity-tracked nonnull object OR function reference after root resolution. Every primitive type incl null/undefined has no identityordinal/content; functions never resolve a root.",
+      "ordering": "Original OP abort observation is after controller.abort and nested listeners; root-abort publicnote need not precede parent-abort/close. Source order is observation order."
+    }
+  },
+  "publicShape": {
+    "snapshotOrder": [
+      "schema",
+      "state",
+      "coverage",
+      "reason",
+      "eligible",
+      "target",
+      "focus",
+      "leases",
+      "promises",
+      "errors",
+      "events",
+      "firstError",
+      "cut"
+    ],
+    "focusOrder": [
+      "mode",
+      "pairChild",
+      "selection"
+    ],
+    "leaseOrder": [
+      "ordinal",
+      "role",
+      "parent",
+      "firstClose"
+    ],
+    "promiseOrder": [
+      "ordinal",
+      "lease",
+      "retained",
+      "settlement"
+    ],
+    "errorTableOrder": [
+      "ordinal",
+      "first"
+    ],
+    "eventOrder": [
+      "sequence",
+      "kind",
+      "site",
+      "lease",
+      "promise",
+      "error",
+      "cause"
+    ],
+    "errorOrder": [
+      "present",
+      "kind",
+      "errorOrdinal"
+    ],
+    "recordOrder": [
+      "sequence",
+      "elapsedMs",
+      "kind",
+      "schema",
+      "snapshot"
+    ],
+    "summaryOrder": [
+      "state",
+      "coverage",
+      "reason",
+      "target",
+      "firstError",
+      "focusChild",
+      "events",
+      "settlementsObserved",
+      "interpretation"
+    ],
+    "record": "ONE causal record in existing journal, AFTER the afterprobe's snapshot acquisition, before NOTICES countenter. Record6144B includesouterenvelope/UTF8LF; fullsnapshot appears ONLY in witnessrecord, observation.causal is smallsummary. BEFOREsnapshot ignored, neverstitched.",
+    "states": "Joined requires exactly one eligible actual scope AND a usable unambiguous projection. One eligible is NOT sufficient. eligible1+unjoined fault/cap is valid; AMBIGUOUS_BINDING can eligible1 when conflicting tracked root is noneligible. Multiple eligible roots remain ambiguous/MULTIPLE_ELIGIBLE. Fault/cap unknown snapshots have empty tables/events/nullcut; never choose first root.",
+    "coverage": "complete only declaredselectedfocus coverage THROUGHcut; neverwholeworld/businesscompletion/absence/physicallypending/drain. Targetentered cut is conservativeprefix/OPEN_AT_CUT; unreached canbejoined complete ifdeclaredcoverageknown. Unknowncapacity/fault fallback mayemptytrace preservingcorecapture.",
+    "sourceOrder": "Source event.sequence1..4096 increasing unique, mayhavegaps from nonfocusedroutineevents. Tableslocalcontiguousordinal1..limits; parent acyclic and exactroot->outer->activation / root->pair->child fork. firstError points earliest presentthroweventinselectedscope, preserved evenoutsidefocus lease:null. Error table firsteventimmutable, onlyobjectkind getsordinal.",
+    "replay": "Only exact FIRSTpostreceipt targetsitepostreceipt-check. One targetenter and atmostone targetreturn/throw. Pairenter aftertargetenter, parentroot. Promise .lease is canonical bound WORKscope, NOT captured actual retainer/physical ownership. retained/settlement-observed events use canonical workscope. Rootless captured parentlease+p resolve root only. Repeated original retain and original settled callbacks legitimate; public first retained/settlement facts immutable, no duplicate or owner drift. Unknown canonical binding prefix/unjoined, never infer actualretainer=child. Absence =unobserved. Close-call repeats allowed; atmostoneclosed-transitionperlease; firstClose pointsthatfirsttransition andneveroverwritten. Sharedabort causeunknown; no timer/racewinner field. Last selectedevent snapshot-cut atcut, noeventaftercut. Shape/semantic/canonical violationsreject, notdegradeforgeddata tovalidunknown.",
+    "mandatory": "Target/pairsettlement, ancestorabort/firstclose, first-scope-error observations relevantto focus requiredforjoinedcomplete; knownmissingbinding/event/cap→prefix/unknownreason, nevergreenrecut. Routinesoutsidefocus mayomitwithoutabsenceclaim.",
+    "unknowns": "Mjoin,rootsharedaborttrigger,exactracewinner,initiatingcause,historicalnormalbehaviour allunknown. Sourcefirstrecordederror is notfirstphysical/globalerror.",
+    "abortOrdering": "OP note follows actual controller.abort; original nested listeners may emit parent-abort close before root-abort note. Receiver MUST allow that order. No initiating trigger, timer or exact racewinner inference.",
+    "errorReference": "error.kind object means opaque identity-tracked nonnull object OR function; do not read Error properties. All primitives have presenttrue/kindprimitive/errorOrdinalnull, no value/equality identity. Functions never resolve roots."
+  },
+  "N3Wire": {
+    "markers": [
+      "AFW_C2_NOTICES_N3_SYNTHETIC",
+      "AFW_C2_DEPENDENCY_CONTROL",
+      "AFW_C2_NOTICES_N3_CUSTODY",
+      "AFW_C2_NOTICES_N3_OUTCOME"
+    ],
+    "fatal": "AFW_C2_NOTICES_N3_FRONTIER; anyfataldisqualifies successfulcapture",
+    "syntax": "marker + ASCIIspace + canonicalJSON.stringify + LF; noTAP/rawError/privatepayload forwarding.",
+    "core": "Carry exactN2native/count/blocked/HTTP/body/probe/custody/canonical/ZIP/API checks with reader280fa796 settlementbaseline+beforeguard. NewN3 context/job/schema/frame identities, nevernormalizeN2occurrence.",
+    "binding": "context.proposalIndexHash remains frozen normal13hash. N3bindings.producerManifestHash SHA256(rawUTF8canonicalstaticmanifest). Manifest includes normalSourceIndexHash/selectionHash/contractHash/schemaHash/seamsHash/vectorHash/driverHash/coupledHash/worldHash/helperHash/readerHash/loggerHash/slotHash/ledgerHash/transformHash; excludes runner/WF/index to avoidcircularity. Final index bindsmanifest+runner+WF. Caller Rootbindsactualhead/tree/run/job/attempt/API/knownproducer.",
+    "compilation": "M originalcompile50/51/transforms/inputs unchanged; currentoriginalMbytes compared toactualMargument. QA intentionallyNEW: sameQAonLoad records oldpreparedinputhash and transformedinputhash and currentcompiledQAbytes/hash, no extra normalcompile. No fake normalQAequality, prediction/priorMhash orMbridge.",
+    "coreEnvelopePending": "Final full outcome schema is additive N3 adaptation ofN2 shape plus onecausal record/observation.causal and current compilationmanifest; exact implementationbody pins and fullnativeproofbindings arrive afterseal beforeRootactivation. This earlyschema seals causalrecord/snapshot/summary, not a fabricated full Source actualreceipt."
+  },
+  "limits": {
+    "snapshotRecordBytes": 6144,
+    "selectedLeases": 8,
+    "selectedPromises": 4,
+    "selectedErrors": 4,
+    "selectedEvents": 24,
+    "sourceSequence": 4096,
+    "privateScopes": 16,
+    "privateLeases": 128,
+    "privatePromises": 64,
+    "privateErrors": 64,
+    "privateEvents": 256,
+    "privateMetadataBytes": 65536,
+    "probeBytes": 131072,
+    "probeObservations": 2048,
+    "probeCalls": 32,
+    "probeBusiness": 64,
+    "journalBytes": 32768,
+    "journalRecords": 128,
+    "outcomeBytes": 24576,
+    "guardRecords": 8,
+    "totalMs": 330000,
+    "childMs": 180000,
+    "caseMs": 120000,
+    "jobMinutes": 7,
+    "incomingMs": 30000,
+    "childLeaseMs": 5000,
+    "toolingJobMinutes": 3,
+    "toolingCaseMs": 10000
+  },
+  "tests": "Concrete20positive/23negative literal snapshots and26 actualhelper/seamcallbackunitplans. SourceAcontrols/toolingtests PENDING_ROOT_CLOUD. Rootseals wirebeforeOwnN3.B; executableSourceAimplementation notyet authored. Wholeworstcasecore+guards+journal/outcomebytes must be checked in finalnativeunits; earlyliteralmaxrecord4795B is measurement ofDATA, not executedSourcePASS.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
