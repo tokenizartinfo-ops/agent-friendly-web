@@ -1,0 +1,18 @@
+function c2RootApiJoin({run,jobs,commit,expected}){
+ const bad=()=>{throw Error('C2_API_UNQUALIFIED');};
+ const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
+ const hex=x=>typeof x==='string'&&/^[a-f0-9]{40}$/.test(x);
+ const id=x=>Number.isSafeInteger(x)&&x>0;
+ if(!obj(run)||!obj(jobs)||!obj(commit)||!obj(expected))bad();
+ if(expected.repository!=='tokenizartinfo-ops/agent-friendly-web'||expected.branch!=='lab/afw-c2-source-20261116-t1-v2-fix1'||expected.workflowPath!=='.github/workflows/afw-c2-source-lab-v2-fix1.yml'||expected.oneUseMessage!=='AFW-C2-OWNER-STAGES-SOURCE-T1-V2-FIX1-ONEUSE-20261116'||expected.job!=='c2-source-lab-v2-fix1')bad();
+ if(![expected.head,expected.tree,expected.parent].every(hex)||expected.parent!=='6791ce1bab9372e206d3c7b42b3e1394dc6e0c68'||!id(expected.runId)||!id(expected.jobId)||!Array.isArray(expected.requiredSteps)||!expected.requiredSteps.length||expected.requiredSteps.some(x=>typeof x!=='string'||!x.length)||new Set(expected.requiredSteps).size!==expected.requiredSteps.length)bad();
+ if(run.id!==expected.runId||run.head_sha!==expected.head||run.head_branch!==expected.branch||run.run_attempt!==1||run.event!=='push'||run.path!==expected.workflowPath||run.status!=='completed'||run.conclusion!=='success'||run.repository?.full_name!==expected.repository||run.head_repository?.full_name!==expected.repository)bad();
+ if(commit.sha!==expected.head||commit.tree?.sha!==expected.tree||commit.message!==expected.oneUseMessage||!Array.isArray(commit.parents)||commit.parents.length!==1||commit.parents[0]?.sha!==expected.parent)bad();
+ if(jobs.total_count!==1||!Array.isArray(jobs.jobs)||jobs.jobs.length!==1)bad();
+ const job=jobs.jobs[0];
+ if(!obj(job)||job.id!==expected.jobId||job.run_id!==expected.runId||job.run_attempt!==1||job.name!==expected.job||job.head_sha!==expected.head||job.status!=='completed'||job.conclusion!=='success'||!Array.isArray(job.steps)||!job.steps.length)bad();
+ if(job.steps.some(s=>!obj(s)||!Number.isSafeInteger(s.number)||s.number<1||typeof s.name!=='string'||s.status!=='completed'||!(s.conclusion==='success'||s.name==='Post Use the fixed Node runtime'&&s.conclusion==='skipped'))||new Set(job.steps.map(s=>s.number)).size!==job.steps.length)bad();
+ const selected=expected.requiredSteps.map(name=>{const found=job.steps.filter(s=>s.name===name);if(found.length!==1||found[0].conclusion!=='success')bad();return found[0].number;});
+ if(selected.some((n,i)=>i&&n<=selected[i-1]))bad();
+ return {repository:expected.repository,baselineSource:expected.parent,head:expected.head,tree:expected.tree,runId:String(expected.runId),runAttempt:1,job:expected.job,jobId:expected.jobId,commandStepNumbers:selected};
+}

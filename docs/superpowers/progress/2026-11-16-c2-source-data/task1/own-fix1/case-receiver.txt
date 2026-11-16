@@ -1,0 +1,23 @@
+function c2V2CheckModeCases(mode,cases,exitCode){
+ const bad=()=>{throw Error('C2_V2_MODE_CASES_REJECTED');};
+ const keys=(v,k)=>{if(v===null||typeof v!=='object'||Array.isArray(v))return false;const a=Object.keys(v);return a.length===k.length&&a.every((key,i)=>key===k[i]);};
+ const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+ const allIds=['CONNECTION','OAUTH','HANDLE','PROJECTREF','SUBJECT','PHASE_RENAME','SOURCE_BYTES','APPROVAL','PREDECESSOR','GRANT_REVOKED','EXTRA_KEY','NOTICES','MONITOR_COOKIE','MONITOR','SCOPE_MISSING','FINITE','SELECTION','LOST_ACK_DUPLICATE','UNRESOLVED_WRITER','OWN_PROMISE'].map(x=>'C2T1_'+x);
+ const phases=['connection','oauth','negative','negative','negative','negative','negative','negative','negative','negative','negative','notices','monitor','monitor','scope','finite','selection','negative','negative','negative'];
+ if(!['baseline-red','proposal-green','mutant-prefix'].includes(mode)||!Array.isArray(cases)||![0,1].includes(exitCode))bad();
+ const selected=mode==='baseline-red'?[0,1,11]:allIds.map((_,i)=>i);
+ if(cases.length!==selected.length)bad();
+ let previous={upload:0,activation:0,receipts:0};
+ for(let i=0;i<cases.length;i++){
+  const row=cases[i],original=selected[i];
+  if(!keys(row,["id","status","phase","counters","code"])||row.id!==allIds[original]||row.phase!==phases[original]||!['pass','fail'].includes(row.status)||row.code!==(row.status==='pass'?'OK':'TEST_FAILED')||!keys(row.counters,["upload","activation","receipts"]))bad();
+  const n=row.counters;if([n.upload,n.activation,n.receipts].some(v=>!Number.isSafeInteger(v)||v<0||v>3)||n.receipts>n.activation||n.activation>n.upload)bad();
+  if(original<17){if(Object.keys(n).some(k=>n[k]<previous[k]))bad();previous=n;}
+  if(mode==='baseline-red'&&(!same(n,{upload:1,activation:1,receipts:1})||row.status!==(i<2?'pass':'fail')))bad();
+  if(mode==='proposal-green'){
+   if(row.status!=='pass')bad();if(original<17){const level=original<11?1:original<15?2:3;if(!same(n,{upload:level,activation:level,receipts:level}))bad();}
+  }
+ }
+ if(mode==='baseline-red'&&exitCode!==1||mode==='proposal-green'&&exitCode!==0||mode==='mutant-prefix'&&(exitCode!==1||cases[10].status!=='fail'))bad();
+ return {mode,observedCases:cases.length,expectedOutcomeSatisfied:true};
+}

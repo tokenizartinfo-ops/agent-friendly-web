@@ -1,0 +1,30 @@
+// Full future qualification remains separate from GREEN diagnostic; inputs are actual raw API objects.
+function c2OwnReadSource(input,admitted,sha256){
+ if(!c2OwnKeys(input,['run','jobs','commit','expected','transport','artifact']))c2OwnBad();
+ const {run,jobs,commit,expected,transport,artifact}=input;
+ if(!c2OwnKeys(expected,['repository','branch','workflowPath','oneUseMessage','job','parent','head','tree','runId','jobId','requiredSteps']))c2OwnBad();
+ if(!c2OwnSame(admitted,[{"path":"lib/mcp-qa-finite-owner-phase-context.mjs","sha256":"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210","bytes":148547},{"path":"lib/mcp-qa-finite-owner-preparation.mjs","sha256":"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9","bytes":45576},{"path":"lib/mcp-qa-finite-owner-native-receiver.mjs","sha256":"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8","bytes":2497},{"path":"worker/mcp-own/finite.mjs","sha256":"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6","bytes":2810},{"path":"lib/mcp-qa-finite-owner-cleanup-scope.mjs","sha256":"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b","bytes":4153},{"path":"lib/mcp-qa-finite-owner-cleanup.mjs","sha256":"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b","bytes":101380},{"path":"lib/mcp-qa-finite-initial-cleanup.mjs","sha256":"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4","bytes":22501},{"path":"test/mcp-qa-finite-owner-three-stage-native.test.mjs","sha256":"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b","bytes":2785},{"path":"test/fixtures/finite-coupled-native.mjs","sha256":"029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318","bytes":14244},{"path":"test/fixtures/finite-first-connection-publication.mjs","sha256":"092a1d8dd44b99a16e522f09234a2b0f4bf62e6575ac99664be516fc7673920d","bytes":60636},{"path":"test/fixtures/finite-initial-entry-world.mjs","sha256":"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7","bytes":88519},{"path":"test/mcp-qa-finite-first-connection-publication-native.test.mjs","sha256":"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7","bytes":58727},{"path":"lib/mcp-qa-finite-owner-notice-get-forward.mjs","sha256":"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8","bytes":6030}]))c2OwnBad();
+ const required=['Read the exact one-use lab head','Use the fixed Node runtime','Install only the existing locked dependencies','Qualify isolated compiled Source data','Preserve only the bounded sanitized Source receipt'];
+ if(!c2OwnSame(expected.requiredSteps,required))c2OwnBad();
+ const join=c2RootApiJoin({run,jobs,commit,expected}),step=jobs.jobs[0].steps.find(s=>s.number===join.commandStepNumbers[3]);
+ if(!step||!Number.isFinite(Date.parse(step.started_at))||!Number.isFinite(Date.parse(step.completed_at))||Date.parse(step.completed_at)<Date.parse(step.started_at))c2OwnBad();
+ if(!c2OwnKeys(transport,['runId','jobId','rawLog'])||transport.runId!==run.id||transport.jobId!==join.jobId||typeof transport.rawLog!=='string'||c2OwnBytes(transport.rawLog)>4194304)c2OwnBad();
+ const command='node docs/superpowers/source-lab/c2-t1-v2-fix1/run-c2-source-lab-v2-fix1.mjs';
+ let seen=0,header=false,closed=false,window=false;const frames=[];
+ for(const line of transport.rawLog.split('\n')){
+  if(!line)continue;const m=/^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z) (.*)$/.exec(line);
+  if(!m){if(line.includes('AFW_C2_'))c2OwnBad();continue;}
+  const t=Date.parse(m[1]),s=m[2],inside=t>=Date.parse(step.started_at)-1000&&t<=Date.parse(step.completed_at)+1000;
+  if(s==='##[group]Run '+command){if(++seen!==1||!inside)c2OwnBad();header=true;window=true;continue;}
+  if(header&&s==='##[endgroup]'){closed=true;header=false;continue;}
+  if(closed&&s.startsWith('##[group]'))window=false;
+  if(s.includes('AFW_C2_')){if(!s.startsWith('AFW_C2_')||seen!==1||!closed||!window||!inside)c2OwnBad();frames.push(s+'\n');}
+ }
+ if(seen!==1||!closed)c2OwnBad();
+ const context={repository:expected.repository,baselineSource:expected.parent,baselineTree:'62e78926635d6b74f288d6c0d69e0f2516306989',proposalIndexHash:'b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03',head:expected.head,tree:expected.tree,runId:String(expected.runId),runAttempt:1,job:expected.job,node:'v22.23.4'};
+ const receipt=c2V2ReadBundle(frames,context,admitted,c2V2ReadFrame,c2V2CheckModeCases);
+ if(!c2OwnKeys(artifact,['runId','jobId','listing','artifactId','fileName','payloadText','archiveSha256'])||artifact.runId!==run.id||artifact.jobId!==join.jobId||artifact.fileName!=='c2-source-lab-v2-fix1-receipt.json'||artifact.payloadText!==JSON.stringify(receipt)+'\n'||!/^[a-f0-9]{64}$/.test(artifact.archiveSha256)||artifact.listing?.total_count!==1||!Array.isArray(artifact.listing.artifacts)||artifact.listing.artifacts.length!==1)c2OwnBad();
+ const a=artifact.listing.artifacts[0];
+ if(a.id!==artifact.artifactId||!c2OwnInt(a.id,1,Number.MAX_SAFE_INTEGER)||a.name!=='afw-c2-owner-stages-source-t1-v2-fix1-receipt'||a.expired!==false||!c2OwnInt(a.size_in_bytes,1,1048576)||a.workflow_run?.id!==run.id||a.workflow_run?.head_sha!==expected.head||a.workflow_run?.head_branch!==expected.branch||a.digest!=='sha256:'+artifact.archiveSha256)c2OwnBad();
+ return {receiverChecksSatisfied:true,context,jobId:join.jobId,commandStepNumbers:join.commandStepNumbers,receipt};
+}

@@ -1,0 +1,308 @@
+{
+  "schema": "afw.root-own-fix1-report.v1",
+  "status": "PENDING_ACTUAL_SOURCE",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached immutable OWN Git DATA; pure OWN synthetic execution in RAM only",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "immutable blobs",
+  "allowedAction": "GitHub immutable reads/create_blob/fullreadback; OWN pure RAM synthetic receiver only",
+  "authority": {
+    "brief": "12f3bd62b232a223d621450d8d9e9b19ed8baa3f",
+    "review": "4407b6a936cf2320bd3581e416bcb3aeee4eb63b",
+    "ruling": "5e0aace992d3b64a755daaba5c898ef895f4e4ca"
+  },
+  "sourceDataOnly": {
+    "fixPacket": "f1d03b381242d0814e4632ceec990fa0fdd39820",
+    "observerPacket": "87ff7ee8c613b02fe04d2d8b6e01e9fee09c610e",
+    "observerContract": "a8b63e6c5e4bb38009bddc48633cfa7af78fa776",
+    "observerSchema": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+    "fullReadAsData": [
+      "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3",
+      "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "069e1ccb580bf06ea52b2b268441c1b540256841",
+      "0ba8e013e2ddbecefebc9a25fd51e49df16271fd",
+      "cac11bfac3c19397c5074a7c52767c4990a48a87",
+      "bc33365eaf302d2296a759202a822af4a443f143",
+      "9cc607ab788335553ea97a607d9042619b35c78d",
+      "04d26808abf9a1b252781c9ed68a890576440bcc",
+      "2a925637cee8aa19fbac30bbc4d68cc35e85c374",
+      "6d4c495917aa85d8e889cdcb55be1866ed2ded99",
+      "32882e9f3e4f10157cefcd626669bb687bafe11c",
+      "f9f36a61875be344d38f19d77caf1a46c48e8f37"
+    ],
+    "execution": false,
+    "localMaterialization": false,
+    "syntaxCheck": false
+  },
+  "changes": [
+    "OWN case and frame helpers compare exact ordered key arrays by equal length and each index; named upload/activation/receipts each integer0..3, hierarchy every row. Preserve first17 green exactlevels, last3 isolated, mutant status policy, unique BASE503 witness and regression11.",
+    "Fresh Source fix1 job/branch/WF/message and parser vector hash3accepted35rejected; historical v2 receiver remains immutable. Independent source bundle equality, raw run/job/commit API, command-step timestamped log and artifact digest+payload assembly.",
+    "Independent diagnostic schema interpreter accepts only frozen normative schema SHA2566040fc9c... of compact JSON; no producer validation logic imported. Exact ordered arrays for every normalized object boundary.",
+    "Independent event interval FSM with all20 case IDs, contiguous sequence, bounded nondecreasing elapsed, legal action/count edges and independent AFTER/close interval. Close may overlap action/count. Never infer terminal native results or cause from entry/throw.",
+    "Unknown frontier on empty/torn/ambiguous/fault/unstable. Complete settled sequence plus timeout distinguishes post-teardown-process-exit from post-settlement-process-exit. Native prefix stays separate and ascending; never synthesize statuses from journal.",
+    "Diagnostic full3 custody, nonroot/owned cleanup/probes booleans, actual process count3..8 on this one target, driver/recorder/reader/selection/SourceIndex/vector pins. Raw unique API run/job/commit, actual command+step time and artifact listing/digest/payload join mandatory. Returned diagnostic never qualifies Source/Task1/PCoff."
+  ],
+  "testFirst": {
+    "fixtures": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+    "sequence": "Immutable requirements/ordinary synthetic collision+progress/control specification assembled first. Historical OWN functions then executed directly in RAM; every one/two-key collision in each isolated row of green+mutant, with embedded and observed copies matched, accepted by old OWN. Repaired OWN code written/executed after RED. Broad finite OWN controls and ordinary resulting JSON fixture packets preserved independently; no Source parser/runner/test executed.",
+    "oldValid": true,
+    "oldAcceptedAliases": 12,
+    "newRejectedSameAliases": 12
+  },
+  "synthetic": {
+    "scope": "ONLY OWN normalized receiver/helper functions, RAM, ordinary synthetic DATA. No claim about actual native Source.",
+    "rootChecks": 187,
+    "sourceAssemblyChecks": 28,
+    "failed": [],
+    "results": {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/control-results.json",
+      "blob": "5568cd74d3ae0a68f0ec9d95e525096a9544e804",
+      "bytes": 5527,
+      "sha256": "bb7e30a858f2dfb488405cc9243fc747925c45fb5d18d1a62675ba231a9e1b87",
+      "gitBlob": "5568cd74d3ae0a68f0ec9d95e525096a9544e804",
+      "fullReadback": true,
+      "before": null
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/fixture-first.json",
+      "blob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+      "bytes": 34834,
+      "sha256": "e00942909c3eab5a0d8ee5fffe9c625d38e7566fdc648baf4eb6998dcc8612bf",
+      "gitBlob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/own-receiver.mjs",
+      "blob": "aec1fbf336d5774f465756ecc1b7e06492244e0f",
+      "bytes": 30839,
+      "sha256": "526d95fec37e37bad989b65d2cd6af224a93f65963c542253a50157df29e1e7a",
+      "gitBlob": "aec1fbf336d5774f465756ecc1b7e06492244e0f",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/own-controls.mjs",
+      "blob": "56a362d16725fd2bb8fcb9e727276c79a2b920ff",
+      "bytes": 18728,
+      "sha256": "1c25ff3b3755ee4be13dc590a38fae0d31c35543bfc239b7e5706f84a0f25339",
+      "gitBlob": "56a362d16725fd2bb8fcb9e727276c79a2b920ff",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/synthetic-fixtures.json",
+      "blob": "a3fb1952a1afaca469f841b6a110f625c7e97364",
+      "bytes": 45368,
+      "sha256": "15de1b2f5839221447c2a47647bbb7e9cced5930c527bd684fa4f3ddc63fee54",
+      "gitBlob": "a3fb1952a1afaca469f841b6a110f625c7e97364",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/source-assembly-fixture.json",
+      "blob": "10a46188ae3be96657ab2ddcf83eb328c60b0a70",
+      "bytes": 39338,
+      "sha256": "9c38bb719dfe251849cc46f535fe1fed07c58d0d1a441f16f853647894d3ef00",
+      "gitBlob": "10a46188ae3be96657ab2ddcf83eb328c60b0a70",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/control-results.json",
+      "blob": "5568cd74d3ae0a68f0ec9d95e525096a9544e804",
+      "bytes": 5527,
+      "sha256": "bb7e30a858f2dfb488405cc9243fc747925c45fb5d18d1a62675ba231a9e1b87",
+      "gitBlob": "5568cd74d3ae0a68f0ec9d95e525096a9544e804",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/diagnostic-schema.json",
+      "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "bytes": 9686,
+      "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+      "gitBlob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/case-receiver.txt",
+      "blob": "f36054fee643bfb6ea96f6338b07ee9353bf459c",
+      "bytes": 2278,
+      "sha256": "8360c4242fbf35c2ec55e88b89de93e7417b21d678c0be8815a2f45d0d43add1",
+      "gitBlob": "f36054fee643bfb6ea96f6338b07ee9353bf459c",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/frame-receiver.txt",
+      "blob": "7e4c216beb9917f4238dfd9c9d5180eaca497c72",
+      "bytes": 5434,
+      "sha256": "28d98483b5b249ceb02f21195f3ac8fbc814c985a9920b39c592935276812e4f",
+      "gitBlob": "7e4c216beb9917f4238dfd9c9d5180eaca497c72",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/bundle-receiver.txt",
+      "blob": "04d6b542e0392aa0bbece7f7c23d8c495a6b80ae",
+      "bytes": 584,
+      "sha256": "67fef805239057da41178b24d27622f89511a0e8cbf30af539328ad721f64b20",
+      "gitBlob": "04d6b542e0392aa0bbece7f7c23d8c495a6b80ae",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/api-receiver.txt",
+      "blob": "7085429676505a3e8167b6f6e38b2505da062982",
+      "bytes": 2697,
+      "sha256": "8089281e349e472325ead281653e12172dee66b67fdcf036ded01fb84e089ca2",
+      "gitBlob": "7085429676505a3e8167b6f6e38b2505da062982",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/diagnostic-receiver.txt",
+      "blob": "3440f7fd11b4508739a19e8e518df653f2e9f569",
+      "bytes": 14271,
+      "sha256": "8d3a0a523ef7564f527566488123314474dfe5431bb5ce2675a49ac90030abc9",
+      "gitBlob": "3440f7fd11b4508739a19e8e518df653f2e9f569",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/source-assembly.txt",
+      "blob": "a1dedc5912f5206d6f49b0981691ef7107546d46",
+      "bytes": 5419,
+      "sha256": "b0900e9c628fdef3a821534bf3d53a16a2b7d5d4432950bf2dee39f4e6a26070",
+      "gitBlob": "a1dedc5912f5206d6f49b0981691ef7107546d46",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "fullPreimages": [
+    {
+      "role": "case",
+      "blob": "f736eeae55b9c0a9ad8e16db130b8c7920474451",
+      "bytes": 2175,
+      "sha256": "7ac3a76cae7ead3786ecafc07389890f46cdc5f46413a6cd5f2dacb1712b8d71",
+      "gitBlob": "f736eeae55b9c0a9ad8e16db130b8c7920474451",
+      "fullReadback": true,
+      "afterName": "case-receiver.txt"
+    },
+    {
+      "role": "frame",
+      "blob": "67041aae533b336c46941c4007f34874c6f771ce",
+      "bytes": 5267,
+      "sha256": "64c96dde9b0f48cd11ea331ede1f261440326dccf7f46899d0e5dcffdf8918ae",
+      "gitBlob": "67041aae533b336c46941c4007f34874c6f771ce",
+      "fullReadback": true,
+      "afterName": "frame-receiver.txt"
+    },
+    {
+      "role": "bundle",
+      "blob": "f4fc77c24ea9e47e542b0990b39bc07aa559a749",
+      "bytes": 567,
+      "sha256": "53ea11cf3cd2dd3090650b07e284bfca7bf6793b0c3ab04098602d04e7029bc1",
+      "gitBlob": "f4fc77c24ea9e47e542b0990b39bc07aa559a749",
+      "fullReadback": true,
+      "afterName": "bundle-receiver.txt"
+    },
+    {
+      "role": "api",
+      "blob": "7306bb2a076eeb8aa26c80ad4124a597e89ae1c6",
+      "bytes": 2676,
+      "sha256": "77ae4d95d2dcdba7d02ae78b76fde1cbf487dae747c2cddc2304f42fbaec5612",
+      "gitBlob": "7306bb2a076eeb8aa26c80ad4124a597e89ae1c6",
+      "fullReadback": true,
+      "afterName": "api-receiver.txt"
+    },
+    {
+      "role": "controls",
+      "blob": "89800422a53df9d84df34447d75dc3ecf4628761",
+      "bytes": 3504,
+      "sha256": "55e4f5facea74e17d599b249e19945c67418c036d1c74cd74af1489aea416141",
+      "gitBlob": "89800422a53df9d84df34447d75dc3ecf4628761",
+      "fullReadback": true,
+      "afterName": null
+    },
+    {
+      "role": "fixture",
+      "blob": "e0d2ace757c30d19e2a2f7fbfea53e54b58ce3b2",
+      "bytes": 27020,
+      "sha256": "5d0a81d18dfcf212263918cdd2577372b6b42de32d65f40c3f28cde0d185920a",
+      "gitBlob": "e0d2ace757c30d19e2a2f7fbfea53e54b58ce3b2",
+      "fullReadback": true,
+      "afterName": null
+    }
+  ],
+  "supersededDetachedOwnOnly": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/own-receiver.mjs",
+      "blob": "109018a5c0126b2244b5236706b82b3c3808d2ba",
+      "bytes": 30401,
+      "sha256": "f8df08c67cb4cddd3194ca0a1e8eef97536bf86f305a6820fa2232e3be1bd192",
+      "gitBlob": "109018a5c0126b2244b5236706b82b3c3808d2ba",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/diagnostic-receiver.txt",
+      "blob": "0ba920fb43227722a9d8aa77855527b59c122d2b",
+      "bytes": 14078,
+      "sha256": "ecbfa3d158722ace63cfe4641428d26e1aa1ca9df77744df5482227cb1b8b14d",
+      "gitBlob": "0ba920fb43227722a9d8aa77855527b59c122d2b",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix1/source-assembly.txt",
+      "blob": "7a214888517a3d3e0c40883f7eb30a47fc5efacd",
+      "bytes": 5174,
+      "sha256": "f97f139bc306b3fab0fb249d6570ed6294622c80bba5e7365cf2f7486430830f",
+      "gitBlob": "7a214888517a3d3e0c40883f7eb30a47fc5efacd",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "actualExpected": {
+    "nextScope": "GREEN diagnostic only. Future full Source qualification remains separate and is not the next executed scope.",
+    "head": "caller-bound when Root pins actual deployment occurrence; reported detached candidate c741821fa5fcb647602021c6a2e86a260d4a9802/tree f70a380dc07feeefb12da9deadcb1d06ecc0f2b3 is not a run",
+    "runId": null,
+    "jobId": null,
+    "requiredInputs": [
+      "Raw GitHub run object",
+      "Raw unique jobs list response with actual job ID and all step statuses/timestamps",
+      "Raw Git commit object",
+      "Exact expected branch/WF/message/head/tree/BASE/runId/jobId",
+      "Timestamped raw job log text from that run/job endpoint",
+      "Raw artifact-list response, selected JSON file text and SHA256 of downloaded archive"
+    ],
+    "transport": "Reject stripped frames. Require one exact Run command setup group and corresponding endgroup, frames after group and before next setup group, within actual command step timestamps. Full4 diagnostic frames, schema/context/custody equality, full outcome artifact exact body+LF. No v2 Source verdict consumed as diagnostic qualification."
+  },
+  "pending": [
+    "Root actual cloud execution of OWN module/control import graph",
+    "Root actual covering repaired producer controls and GREEN diagnostic",
+    "Root independent raw API/job/step/log/artifact readback",
+    "Scoped independent re-review before protocol acceptance"
+  ],
+  "boundary": "No refs/branches/commits/runs/workflows triggered. No Source product bytes changed/evaluated/imported/compiled/syntax-checked/materialized. No runtime/Cloudflare/browser/network probes/credentials/OTP/Mail/Max/owner questions/subagents.",
+  "rollback": "Discard detached OWN proposal or omit new additive paths. Historical OWN and Source preimages remain immutable; Root controls all ref/actual cloud changes.",
+  "ActualSource": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
