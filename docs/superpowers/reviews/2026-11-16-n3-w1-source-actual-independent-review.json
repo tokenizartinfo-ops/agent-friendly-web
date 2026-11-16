@@ -1,0 +1,220 @@
+{
+  "schema": "AFW-N3-W1-SOURCE-ACTUAL-INDEPENDENT-REVIEW/1",
+  "atUTC": "2026-11-16 20:11:27 UTC",
+  "reviewer": "n3_w1_own_native_review",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Revisión read-only de recibos Git; datos y verificadores originales en RAM",
+  "origin": "GitHub blobs",
+  "resourceType": "git_blob",
+  "allowedAction": "Leer captura real mediante sus recibos y conservar este informe; ninguna ref, rerun, control repetido ni ejecución Source",
+  "verdict": {
+    "diagnosticCaptureReview": "PASS",
+    "quality": "APPROVED_SCOPED",
+    "actionableFindings": 0,
+    "newMaterialConcernRequiringObserverChanges": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "operationalAuthorization": false
+  },
+  "evidence": {
+    "primary": {
+      "blob": "6cfb0d0827ebe0cf8591d06d09e1ced0d7aedaaa",
+      "bytes": 79243,
+      "sha256": "aa86ac5d27fa2818315cf594af0dd5a0836c396758acba039767e52eae076247"
+    },
+    "outcome": {
+      "blob": "325efbf73e0fe5ecea0713cf76df6b7d8cecd3b5",
+      "bytes": 17103,
+      "sha256": "a4ee7b8cc14284fc29c8e204e5232bef0cfffd8be6e976938bb340cfa8f6fb04"
+    },
+    "rootOwnAdmission": {
+      "blob": "2fdbd74df7127f13054cd6b72d76a349ebcb9db3",
+      "bytes": 7351,
+      "sha256": "ea3ab3e70f9c04e188b0b078dcbcfc1731eb0b5a25e9609121d1bf45c8044b3f",
+      "diagnosticCaptureAccepted": true,
+      "exactEmbeddedReceiptMatch": true
+    },
+    "approvedOwn": {
+      "reader": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+      "trace": "cc22a79695471862f36c692db7a31e283b4ee46d",
+      "review": "21e8e4a3f2c1e7a617118b312baf574339ad56d3"
+    },
+    "runId": 43945121668,
+    "attempt": 1,
+    "jobId": 133572642517,
+    "head": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+    "tree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
+    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+    "commandStep": {
+      "number": 5,
+      "name": "Observe first notices QA first-limit scope",
+      "start": "2026-11-16T20:00:06Z",
+      "completed": "2026-11-16T20:01:26Z",
+      "fourFramesWithinSecondResolutionWindow": true
+    },
+    "manifest": {
+      "blob": "15b2c5764be46b565f80c08e2c6dbd7ac9511a76",
+      "rawBytes": 1334,
+      "rawSHA256": "22a366def27153b2529febedd2ecc59c931e2e1e1394d36d8aaa9be2de4746c8",
+      "canonicalSHA256": "34c1b9a2e7e9d07f4a72ea343074071f54bde05bf4c398e84b0dc42b94310434",
+      "freshBlobEqualsCallerTrusted": true
+    },
+    "archive": {
+      "artifactId": 14263598025,
+      "bytes": 4000,
+      "sha256": "3cc77d7a35a1b07cc94da7d9c702338732c60d31e01f84c160942ab16d807843",
+      "soleFile": "c2-notices-n3-firstlimit-w1.json",
+      "independentBuiltinInflation": true,
+      "fullCompressedConsumption": true,
+      "crcLengthNameOffsetsVerified": true,
+      "payloadExactCanonicalJSONLF": true,
+      "payloadEqualsOutcomeLogFrame": true
+    },
+    "journal": {
+      "records": 40,
+      "bytes": 10419,
+      "sha256": "fb97c5a3b55c3e67522d485ee106d2d8ee4417e9e24ab4b98e3ce6611ce61e43",
+      "recordSequenceAndElapsedMonotonic": true,
+      "witnessHashesExact": true
+    },
+    "host": {
+      "prepared": 5,
+      "returned": 5,
+      "allCompiledPreparedAndReturnedMQACompared": true
+    },
+    "custody": {
+      "checkedLaunches": 3,
+      "checkedProcesses": 3,
+      "allRequiredFlags": true
+    },
+    "close": {
+      "proof": "bd3550f1e06fb30d7f612d744fd15340a862fe8b",
+      "head": "05d4e6ba2381ec3182705147d9554f459bbabcc8",
+      "tree": "8c1761b9428e6d897bbfb7c81bf5e88969bc9967",
+      "originals": 3203,
+      "leaves": 3245,
+      "workflowRemoved": true,
+      "closeHeadRuns": 0,
+      "mainAndHistoryUnchanged": "Confirmado por recibo Root leído; sin nueva consulta o mutación de refs/runs por este reviewer"
+    }
+  },
+  "currentOccurrence": {
+    "nativeProjection": {
+      "integrity": "complete",
+      "cases": [
+        "N3_CONNECTION",
+        "N3_OAUTH",
+        "N3_PHASE",
+        "N3_NOTICES"
+      ],
+      "passed": 4,
+      "failed": 0,
+      "sourceFileFailure": false
+    },
+    "flows": "Las cuatro action y count returned; sin actionError/countError; notices counters 2/2/2 y previas 1/1/1.",
+    "http": {
+      "GET": 200,
+      "POST": 200,
+      "bothBodiesSettled": true,
+      "bothReturned": true
+    },
+    "capture": {
+      "exitCode": 0,
+      "signal": "none",
+      "errorKind": "none",
+      "AFTER": "returned"
+    },
+    "coreProbeBefore": "observed",
+    "coreProbeAfter": "unavailable",
+    "exportedCausalRecord": {
+      "journalSequence": 35,
+      "state": "unjoined",
+      "coverage": "unknown",
+      "reason": "NO_ELIGIBLE",
+      "eligible": 0,
+      "target": "unknown",
+      "firstError": null,
+      "cut": null,
+      "focus": "none",
+      "entitiesAndEventsEmpty": true
+    },
+    "guards": 0,
+    "causalInterpretation": "unknown",
+    "refinedCapTagExported": false
+  },
+  "comparisonOnly": {
+    "priorOutcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+    "priorNative": "3 PASS y N3_NOTICES FAIL; GET200/POST503 con cuerpos consumidos.",
+    "M": {
+      "bytes": 1996400,
+      "sha256": "ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f",
+      "identicalCurrentAndPrior": true
+    },
+    "QA": {
+      "prior": "9d89b1d1c57ece4789f74e153f2c29146ccf56193c223d80d00f4e9eef0e94ac",
+      "current": "3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7",
+      "currentBytes": 2574907,
+      "inputManifestSHA256": "fbec94809d8f820b76c7420e965aa2b468e53c184efbfe724317ab817c7f5795",
+      "fiveInputsOrdered": [
+        "ledger",
+        "PH",
+        "OP",
+        "LEASE",
+        "STDIN"
+      ],
+      "manifestHashVerified": true
+    },
+    "conclusion": "El 503 previo no se reprodujo en ESTA ocurrencia. M igual y QA distinta no identifican la causa, el efecto del observador ni una reparación permanente."
+  },
+  "verification": {
+    "independent": {
+      "trustNomination": true,
+      "api": true,
+      "exactFiveRequiredSteps": true,
+      "manifestExact": true,
+      "fourPassProjection": true,
+      "flowAllReturned": true,
+      "httpBoth200": true,
+      "exitZeroAfterReturned": true,
+      "noSourceQualification": true,
+      "admissionSame": true,
+      "frameOrder": true
+    },
+    "method": "Lectura de API/frames/trusted/outcome/OWN receipt como DATA; controles originales del reviewer y crypto/zlib builtin verifican bytes, manifest, journal, host metadata y ZIP. El lector OWN aprobado se inspeccionó y su recibo Root se contrastó.",
+    "ownReaderReexecution": "No ejecutada: la generación dinámica de código OWN en el contexto RAM fue rechazada antes de ejecutar el lector. Se mantuvo la revisión mediante lógica explícita del reviewer y se descomprimió el ZIP con el builtin acotado. Ningún intento de ejecutar Source.",
+    "nativeRawTAP": "No se recibió raw TAP privado. 4PASS corresponde a la proyección nativa segura admitida por OWN, coherente con los flujos/HTTP/exit0; no se inventa un segundo readback de TAP.",
+    "SourceImported": false,
+    "SourceEvaluated": false,
+    "SourceCompiled": false,
+    "SourceSyntaxChecked": false,
+    "SourceTestsOrReducersExecuted": false,
+    "controlsRepeated": false,
+    "NativeSourceRerun": false,
+    "refsCreated": 0,
+    "refsMutated": 0,
+    "runsCreated": 0,
+    "dependenciesInstalled": 0,
+    "localFilesCreated": 0
+  },
+  "findings": [],
+  "declinedToJudge": [
+    "Elegibilidad interna de la ejecución, primer límite privado, target causal o drenaje: el snapshot exportado es NO_ELIGIBLE/unjoined/unknown y la sonda core posterior unavailable. No se atribuye NO_ELIGIBLE a una observación posterior exitosa ni se inventa continuidad entre sondas.",
+    "Ausencia de fallos internos a partir de guards0: cero registros no demuestra que se observó el ámbito o que no hubo fallos.",
+    "Causa del anterior POST503, efecto del cambio QA/observador/proveedor y reparación estable: una ocurrencia 200 no los autentica.",
+    "Igualdad privada de inputs compilados y p2, pending físico, drenaje global, SDK vacío, operación productiva/guardia/PC apagado: fuera de la evidencia.",
+    "Calificación FULL Task1: cuatro casos de este slice no equivalen al paquete/calificador completo."
+  ],
+  "next": "Volver a la calificación FULL Task1 como bloque separado. Esta revisión no aporta motivo material para otro cambio del observador causal ni concede autorización operativa.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
