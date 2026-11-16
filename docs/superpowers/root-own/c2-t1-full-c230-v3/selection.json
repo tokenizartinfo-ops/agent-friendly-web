@@ -1,0 +1,51 @@
+{
+  "schema": "afw.own-full-c230.native-selection.v1",
+  "authority": [
+    "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+    "bca6278fc2f4889c6c01211a10832cec9871f1c9"
+  ],
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3",
+    "message": "AFW-C2-FULL-TASK1-C230-OWN-V3-ONEUSE-20261116",
+    "job": "c2-full-task1-c230-own-v3",
+    "workflow": ".github/workflows/afw-c2-full-task1-c230-own-v3.yml",
+    "prefix": "docs/superpowers/root-own/c2-t1-full-c230-v3/",
+    "runner": "docs/superpowers/root-own/c2-t1-full-c230-v3/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-full-c230-v3/run-controls.mjs",
+    "node": "22.23.4",
+    "runnerOS": "ubuntu-24.04",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "contents": "read",
+    "attempt": 1,
+    "artifact": {
+      "name": "afw-c2-full-task1-c230-own-v3-proof",
+      "path": "output/c2-full-task1-c230-own-v3-proof.json",
+      "fileName": "c2-full-task1-c230-own-v3-proof.json",
+      "expectedCount": 1,
+      "retentionDays": 7,
+      "proofUTF8IncludingLF": 24576
+    }
+  },
+  "expected": 370,
+  "groups": {
+    "legacy225": 225,
+    "newFull139": 139,
+    "newZip6": 6
+  },
+  "idsHash": "5737f76ef490aa43eff78c4ec146c398c15ce3bff6da684906324a301702fa24",
+  "expectedIdsFile": "expected-ids.json",
+  "runtime": "Six imported OWN JS modules plus the OWN runner; immutable JSON/models only. No Source code bodies/imports/parser/selftest/eval/materialization.",
+  "sourceExpectedContext": null,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "schema": "afw.own-full-c230.native-graph.v1",
+  "authority": "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+  "expectedControls": 370,
+  "idsHash": "5737f76ef490aa43eff78c4ec146c398c15ce3bff6da684906324a301702fa24",
+  "files": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/fixture-seed.json",
+      "bytes": 51629,
+      "sha256": "2d65cbd36538ec86a47e4aa1e96fbc418db0d9be868ef0145094fa88a0debf20",
+      "gitBlob": "7480512aeaa85c160e203ffd4de4c2f221e0df7b"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/fixture-first-cases.json",
+      "bytes": 38173,
+      "sha256": "1724e63419636cd26427f266dd1a36bf7ae1d43dc4af41659e7a51249f091bec",
+      "gitBlob": "eb84f1791bb32832c807535131607abeb72a159c"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/complete-coherent-example.json",
+      "bytes": 60896,
+      "sha256": "e40028bcc6040b2d240fd03270baf16e186e8dc7eab70d0c669f500ebff4ded6",
+      "gitBlob": "1c932dbcc1106b96d6fdb28c5f4e5fef21764d35"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/expected-ids.json",
+      "bytes": 11276,
+      "sha256": "628b05610d29a218c281d9cce136f131ba34c51d3cf08a53bd57117ad9f60dc3",
+      "gitBlob": "115f420dad5e56e4d3bad93b80a6bb742f99b507"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/model-builder.mjs",
+      "bytes": 6009,
+      "sha256": "6f2d497b30de48ab9654678472191357e6c2a121608300b494bd838517e28f40",
+      "gitBlob": "25afd0e1f8a567a6c87a6f75c6502d8b3d0b4c8f"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/full-reader.mjs",
+      "bytes": 19000,
+      "sha256": "a2f1aa18011c88ab7e34394054f39931c177d45bf0e2a657d4c588c70643a085",
+      "gitBlob": "dccfce8f31a7075043aeb606f9749a511e2bb62a"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/admission.mjs",
+      "bytes": 10236,
+      "sha256": "0c3421a74a75347f1b15549db7c93d1bfe6678798d157b966d06cd6e1596da03",
+      "gitBlob": "27da18ca8489b060d37ba40a5c86dd29f308a590"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/admission.json",
+      "bytes": 12150,
+      "sha256": "3b810defcf8490e9419d8940692a016e44c3b18a900ddd712ce2a593a79081c7",
+      "gitBlob": "da6a9f9938a4433f8bd78ad84eb389d9d90f21ae"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/own-controls.mjs",
+      "bytes": 2308,
+      "sha256": "aded476f67707a2c058735d4a8686982f968275f642fc68d83c5fc1d0b57fb14",
+      "gitBlob": "5d9d2e2d48133ce8e24fdf2b289afb65d9022b86"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/proof-schema.json",
+      "bytes": 3892,
+      "sha256": "660acf6a7e4311d046cb3831b671ef608ea830600a930a202cdc02386b76f877",
+      "gitBlob": "dbb5bf55637e620ab7dca9de2d439ede8c2028ad"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/selection.json",
+      "bytes": 1862,
+      "sha256": "574b0ba85ea80ed2ae3762bef0bbd00d69c1083628c494851276a6cb1e4dbf27",
+      "gitBlob": "d6b68d6d0c1ba83b7e5969f857edd41a06c45077"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/own-receiver.mjs",
+      "bytes": 31155,
+      "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c",
+      "gitBlob": "f7994836872bcd00d19f6cead7ad1667fe16e44d"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/own-controls.mjs",
+      "bytes": 19486,
+      "sha256": "e69f12c2389616f1517dbd8f5472cda511c01b6fab2a42f6fe366afbe6a234c7",
+      "gitBlob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/fixture-first.json",
+      "bytes": 34834,
+      "sha256": "e00942909c3eab5a0d8ee5fffe9c625d38e7566fdc648baf4eb6998dcc8612bf",
+      "gitBlob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/diagnostic-schema.json",
+      "bytes": 9686,
+      "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+      "gitBlob": "552301a29267a19d8a6b57fd0e1d105286d859d3"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/fix2-vectors.json",
+      "bytes": 107420,
+      "sha256": "5f7166dc286946ee89ee61c70ea4c614f392e006ccbd1998d4611f05b66a9eef",
+      "gitBlob": "6e5929efbd58acd113bfdf5813fe2670a6cccca4"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/source-index.json",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "gitBlob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/qualifier.json",
+      "bytes": 15224,
+      "sha256": "1359d5a505e65a3a04659a0cae70fd60023ce56ae989a0277438bf50790912ed",
+      "gitBlob": "c230140201a6e12d9a355b2cfe6343749f083e1d"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/protocol-contract.json",
+      "bytes": 15709,
+      "sha256": "2bd76e556a6dbf9d394fba70d64a216fd339697fcae2e885b3fd6141f4ecd6fb",
+      "gitBlob": "ff353576f71b95e1b8ba204fb8510200b4e073e9"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/frame-schema.json",
+      "bytes": 13983,
+      "sha256": "9fc0205fbbbd4a0d61f4560291bd53caf58df083f88e4579eaa74ea02d15d61e",
+      "gitBlob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/mode-selection.json",
+      "bytes": 5460,
+      "sha256": "618e35bbeda39833ddf5c63ed16a41b44db85ab751edcb87ad5abb9ebcaae839",
+      "gitBlob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/synthetic-vectors.json",
+      "bytes": 14802,
+      "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+      "gitBlob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f"
+    },
+    {
+      "path": ".github/workflows/afw-c2-full-task1-c230-own-v3.yml",
+      "bytes": 1478,
+      "sha256": "2f537b7447774a8b185976d10f397aa88ac579e175fa05f07ec4edd9aeee91d7",
+      "gitBlob": "165b02de9131dbb982d49ae7d7cc421248176448"
+    }
+  ],
+  "imports": {
+    "runner": [
+      "node:assert/strict",
+      "node:crypto",
+      "node:fs",
+      "node:path",
+      "node:child_process",
+      "node:test",
+      "node:zlib",
+      "./own-controls.mjs",
+      "./admission.mjs"
+    ],
+    "ownControls": [
+      "./legacy/own-controls.mjs",
+      "./full-reader.mjs",
+      "./model-builder.mjs"
+    ],
+    "fullReader": [
+      "./admission.mjs"
+    ],
+    "legacyControls": [
+      "./own-receiver.mjs"
+    ],
+    "sourceImports": []
+  },
+  "sourceExpectedContext": null,
+  "meaning": "Metadata and fictional models. Actual Source capture/binding remains a separate future Root gate."
+}
