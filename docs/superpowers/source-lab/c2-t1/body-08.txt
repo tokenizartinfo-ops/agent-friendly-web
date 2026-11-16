@@ -1,0 +1,133 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {initialEntryHarness} from './finite-initial-entry-world.mjs';
+import {plain,approveFirstConnection,readFirstConnectionProbe} from './finite-first-connection-publication.mjs';
+import {hashFinitePreparationRecord as hash,hashFinitePolicyEffectIdentity as identityHash} from '../../lib/mcp-qa-finite-preparation-records.mjs';
+const O='https://delegated-canary.agentfriendlyweb.dev';
+const records=rows=>rows.filter(([k])=>k.startsWith('afw.finite-policy-effect.v1:'));
+async function open(){
+ const f=await initialEntryHarness('first-connection-publication',{coupledStages:true});
+ try{await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();await f.mountFirstConnection();
+  f.selectionSource=(await plain(f.stub.capsuleFacts())).material.ownerSelection;f.token=await f.enrollmentToken(f.selectionSource);return f;
+ }catch(error){await close(f);throw error;}
+}
+async function close(f){if(!f)return;try{await f.stub.firstConnectionRestore();await f.stub.c2ScopeRestore();await f.stub.restoreMethods();}finally{await f.mf.dispose();await f.cleanup();}}
+const discard=async r=>{const status=r.status;await r.body?.cancel();return status;};
+const headers=(f,cookie=f.choice?.cookie)=>({'Cf-Access-Jwt-Assertion':f.token,...cookie?{Cookie:cookie}:{}});
+async function choose(f){
+ const r=await f.call('/connections/finite-prepare',{headers:headers(f)}),status=r.status,text=await r.text();assert.equal(status,200);
+ const handle=/name="handle" value="([a-f0-9]{64})"/.exec(text)?.[1],projectRef=/name="projectRef" value="([a-f0-9]{64})"/.exec(text)?.[1],cookie=r.headers.get('set-cookie')?.split(';')[0];assert(handle&&projectRef&&cookie);return {handle,projectRef,cookie,text};
+}
+const post=(f,form,patch={})=>f.call('/connections/finite-prepare',{method:'POST',headers:{...headers(f,form.cookie),Origin:O,'Content-Type':'application/x-www-form-urlencoded',...patch.headers},body:patch.body??new URLSearchParams({handle:form.handle,projectRef:form.projectRef,decision:'approve'})});
+async function count(f){const rows=await plain(f.stub.snapshot());return {upload:f.uploads.length-1,activation:f.activations.length-1,receipts:records(rows).filter(([k])=>k.endsWith(':receipt')).length};}
+async function waitHeld(f){
+ const end=performance.now()+30000;for(;;){const s=await plain(f.stub.firstConnectionState());if(s.fetchHeld)return s;if(performance.now()>=end)throw Error('SYN c2 native hold missing');await new Promise(r=>setTimeout(r,10));}
+}
+async function settled(f){const end=performance.now()+30000;for(;;){if((await plain(f.stub.firstConnectionAvailability())).available)return;if(performance.now()>=end)throw Error('SYN c2 native settlement missing');await new Promise(r=>setTimeout(r,10));}}
+export async function createFiniteCoupledOwnerWorld(){
+ const main=await open();let active=main,pendingForm=null,firstCookie=null,negative=null;
+ const isolate=async()=>{await close(negative);negative=await open();active=negative;return negative;};
+ const noFurther=async(f,before,response)=>{assert.notEqual(await discard(response),200);assert.deepEqual(await count(f),before);};
+ return {
+  async close(){await close(negative);await close(main);},
+  counts(){return count(active);},
+  async approve(stage){
+   active=main;const f=main;
+   if(stage==='connection'){
+    const response=await approveFirstConnection(f);assert.equal(await discard(response),200);firstCookie=f.choice.cookie;
+   }else{
+    const form=pendingForm??await choose(f);pendingForm=null;
+    if(stage==='finite')assert(form.text.includes('revocar únicamente la concesión OAuth creada aquí.'));
+    assert.equal(await discard(await post(f,form)),200);f.choice=form;
+   }
+   const rows=await plain(f.stub.snapshot()),receipts=records(rows).filter(([k])=>k.endsWith(':receipt')).map(([,raw])=>JSON.parse(raw));
+   assert.equal(receipts.length,['connection','notices','finite'].indexOf(stage)+1);
+   const ordered=['connection','notices','finite'].slice(0,receipts.length).map(s=>receipts.find(r=>r.stage===s));assert(ordered.every(Boolean));
+   assert.equal(new Set(ordered.map(r=>r.versionId)).size,ordered.length);assert.equal(new Set(ordered.map(r=>r.deploymentId)).size,ordered.length);
+   for(let i=0;i<ordered.length;i++){
+    const r=ordered[i],previous=i?ordered[i-1]:null;
+    if(previous){assert.equal(r.baselineVersionId,previous.versionId);assert.equal(r.baselineDeploymentId,previous.deploymentId);}
+    for(const effect of ['upload','activation']){
+     const key='afw.finite-policy-effect.v1:'+identityHash({kind:'connection',preconnectionId:r.preconnectionId,sourceRevision:r.sourceRevision,stage:r.stage,effect});
+     const send=JSON.parse(rows.find(([k])=>k===key+':send')[1]),ack=JSON.parse(rows.find(([k])=>k===key+':ack')[1]);
+     assert.equal(ack.sendHash,hash('ConnectionSend',send));assert.equal(ack.resourceId,effect==='upload'?r.versionId:r.deploymentId);assert(ack.acknowledgedAt<send.deadline);
+    }
+    assert.equal(hash('ConnectionReceipt',r),r.receiptHash);
+   }
+   assert.equal(f.uploads.length-1,ordered.length);assert.equal(f.activations.length-1,ordered.length);
+   // Mount the actual provider-returned version/configuration, with unchanged actual compiled M bytes.
+   await f.adoptConnectionConfiguration({upstream:true});
+  },
+  async oauth(){
+   const f=main,current=await plain(f.stub.firstConnectionContext());assert.equal(current.source.phase,'read_consent');f.source=current.source;
+   const kv=await f.mf.getKVNamespace('OAUTH_KV','canary-first-connection');
+   await kv.put('client:'+f.source.clientId,JSON.stringify({clientId:f.source.clientId,redirectUris:['https://client.example/cb'],clientName:'SYN c2 native client',grantTypes:['authorization_code'],responseTypes:['code'],tokenEndpointAuthMethod:'none',authMethodExplicit:true,registrationDate:Math.floor(Date.now()/1000)}));
+   const verifier='v'.repeat(64),challenge=createHash('sha256').update(verifier).digest('base64url'),r=await f.call('/authorize?'+new URLSearchParams({client_id:f.source.clientId,redirect_uri:'https://client.example/cb',response_type:'code',resource:f.source.resource,scope:'afw:project:read',state:'SYN-c2',code_challenge:challenge,code_challenge_method:'S256'}),{redirect:'manual',headers:headers(f)});
+   assert.equal(r.status,200);const text=await r.text(),handle=/name="handle" value="([^"]+)"/.exec(text)?.[1],cookie=r.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);
+   const approved=await f.call('/authorize',{method:'POST',redirect:'manual',headers:{...headers(f,firstCookie+'; '+cookie),Origin:O,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle,decision:'approve',scope:'afw:project:read'})});
+   assert.equal(approved.status,302);assert(new URL(approved.headers.get('Location')).searchParams.get('code'));await approved.body?.cancel();
+   const rows=await plain(f.stub.snapshot());assert(rows.some(([k])=>k.endsWith(':sdk_complete:observed')));
+  },
+  async invalidForm(key){
+   const f=main,form=pendingForm??await choose(f);pendingForm=form;const before=await count(f),body=new URLSearchParams({handle:form.handle,projectRef:form.projectRef,decision:'approve'});body.set(key,'f'.repeat(64));await noFurther(f,before,await post(f,form,{body}));
+  },
+  async invalidSubject(){const f=main,before=await count(f),token=await f.firstConnectionToken(f.source,{subject:'SYN-c2-foreign'});await noFurther(f,before,await f.call('/connections/finite-prepare',{headers:{...headers(f),'Cf-Access-Jwt-Assertion':token}}));},
+  async corruptThenDeny(kind){
+   const f=main,before=await count(f),snapshot=await plain(f.stub.c2Snapshot()),pointer=structuredClone(f.providerRegistry.pointer),versions=structuredClone(f.providerRegistry.versions);
+   let grant;
+   try{
+    if(kind==='module'){const id=pointer.versions[0].version_id;f.providerRegistry.versions[id].modules[0].content_base64='AAAA';}
+    else if(kind==='grant'){grant=await f.db.prepare('SELECT id,revoked_at FROM delegated_access_grants WHERE revoked_at=?').bind('').first();assert(grant);await f.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').bind(new Date().toISOString(),grant.id).run();}
+    else await f.stub.c2Corrupt(kind);
+    assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable','actual compiled factual predicate rejects changed source');
+    await noFurther(f,before,await f.call('/connections/finite-prepare',{headers:headers(f)}));
+   }finally{await f.stub.c2Restore(snapshot);f.providerRegistry.pointer=pointer;f.providerRegistry.versions=versions;if(grant)await f.db.prepare('UPDATE delegated_access_grants SET revoked_at=? WHERE id=?').bind(grant.revoked_at,grant.id).run();}
+  },
+  async monitorWrongCookie(){const f=main,before=await count(f);await noFurther(f,before,await f.call('/monitoring',{headers:headers(f,firstCookie)}));},
+  async monitor(){
+   const f=main,r=await f.call('/monitoring',{headers:headers(f)});assert.equal(r.status,200);const text=await r.text(),handle=/name="handle" value="([^"]+)"/.exec(text)?.[1],cookie=r.headers.getSetCookie().map(v=>v.split(';')[0]).join('; ');assert(handle&&cookie);
+   const p=await f.call('/monitoring/grant',{method:'POST',headers:{...headers(f,f.choice.cookie+'; '+cookie),Origin:O,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({handle})});assert.equal(await discard(p),200);
+   const rows=await plain(f.stub.snapshot());assert(rows.some(([key])=>/^connection-preparation:[a-f0-9]{64}:notice$/.test(key)));
+   const events=await f.db.prepare('SELECT request_id,sequence FROM dossier_monitoring_consent_events WHERE action=?').bind('grant').all();assert.equal(events.results.length,1);
+  },
+  async noScope(){
+   const f=main,form=await choose(f),snapshot=await plain(f.stub.c2Snapshot()),before=await count(f);assert(form.text.includes('revocar únicamente la concesión OAuth creada aquí.'));
+   for(const kind of ['drop','holder']){
+    try{await f.stub.c2ScopeDrop(kind);await noFurther(f,before,await post(f,form));const stats=await plain(f.stub.c2ScopeState());if(kind==='holder'){assert.equal(stats.drifted,true);assert.equal(stats.puts,0,'changed transaction holder is rejected before scope put');}else assert.equal(stats.puts,1);}
+    finally{await f.stub.c2ScopeRestore();await f.stub.c2Restore(snapshot);}
+   }pendingForm=form;
+  },
+  async selection(){
+   const rows=await plain(main.stub.snapshot()),receipt=records(rows).map(([,v])=>JSON.parse(v)).find(v=>v.purpose==='afw.finite-connection-installed.v1'&&v.stage==='finite'),preparation=rows.map(([,v])=>{try{return JSON.parse(v);}catch{return null;}}).find(v=>v?.purpose==='afw.finite-owner-preparation.v1');
+   assert(receipt&&preparation);assert(receipt.completedAt<=preparation.selectedAt);assert(rows.some(([key])=>key==='source-selection:'+preparation.sourceRevision+':head'));assert(!rows.some(([key])=>key==='preparation:'+preparation.prepId+':bound'));
+   assert.equal(records(rows).filter(([k])=>k.endsWith(':send')).length,6);assert.equal(records(rows).filter(([k])=>k.endsWith(':receipt')).length,3);
+   const closed=main.providerRegistry.versions['55555555-5555-4555-8555-555555555555'],final=main.providerRegistry.versions[receipt.versionId],a=structuredClone(closed),b=structuredClone(final);delete a.id;delete b.id;assert.deepEqual(a,b);
+   const scope=rows.find(([key])=>key==='afw.finite-preparation-cleanup-scope.v1:'+preparation.prepId);assert(scope);const record=JSON.parse(scope[1]);assert.equal(record.startAfterMs,240000);assert.equal(record.endAfterMs,420000);assert.equal(record.approvedButton,'approve');
+  },
+  async lostAckDuplicate(){
+   const f=await isolate();await f.stub.firstConnectionConfigure('upload-lost');const r=await approveFirstConnection(f);assert.notEqual(await discard(r),200);await settled(f);const before=await count(f),rows=await plain(f.stub.snapshot());assert.equal(before.upload,1);assert.equal(before.activation,0);
+   const retry=await post(f,f.choice);await noFurther(f,before,retry);assert.deepEqual(await plain(f.stub.snapshot()),rows);
+  },
+  async heldWriter(){
+   const f=await isolate();await f.stub.firstConnectionConfigure('upload-held');const pending=approveFirstConnection(f);await waitHeld(f);
+   // The original child watchdog ends the logical request while the exact native fetch stays held.
+   const response=await pending;assert.notEqual(await discard(response),200);
+   const timedOut=await plain(f.stub.firstConnectionState());assert.equal(timedOut.fetchHeld,true);assert.equal(timedOut.fetchSettled,false);
+   const available=await plain(f.stub.firstConnectionAvailability());assert.equal(available.live,true);assert.equal(available.available,false,'physical native work retains exclusion after logical timeout');
+   assert.equal((await plain(f.stub.firstConnectionContext())).status,'unavailable');
+   const before=await count(f),snapshot=await plain(f.stub.snapshot());assert.deepEqual(before,{upload:1,activation:0,receipts:0});
+   await noFurther(f,before,await post(f,f.choice));assert.deepEqual(await plain(f.stub.snapshot()),snapshot);
+   await f.stub.firstConnectionRelease('fetch');await settled(f);
+   assert.equal((await plain(f.stub.firstConnectionState())).fetchSettled,true);
+   assert.deepEqual(await count(f),before,'late actual settlement cannot ACK, activate or create a receipt');
+   assert.deepEqual(await plain(f.stub.snapshot()),snapshot);
+  },
+  async ownPromise(){
+   const f=await isolate();await f.stub.firstConnectionConfigure('upload-held');const pending=approveFirstConnection(f);await waitHeld(f);
+   assert.deepEqual(await plain(f.stub.firstConnectionReseal('upload','ack-matched')),{codecRoundtrip:true,journalValid:true});
+   await f.stub.firstConnectionRelease('fetch');assert.notEqual(await discard(await pending),200);await settled(f);
+   const state=await plain(f.stub.firstConnectionProbe());assert(state.observation.some(v=>v.kind==='journal-mutation'&&v.recordKind==='ConnectionAck'&&v.status==='existing'));
+   assert.equal(f.activations.length,1);assert.equal((await count(f)).receipts,0);
+  }
+ };
+}
