@@ -1,0 +1,40 @@
+{
+  "schema": "AFW-C2-N3-OWN527-CLOSE/1",
+  "atUTC": "2026-11-16 17:34:02 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "testedHead": "65b643bfa8e5394f3a239ce1b68f24631d5bb10b",
+  "closedHead": "68a1c83001c3bca7c1441ecc895699d4b757d5c2",
+  "closedTree": "42c44f66c6f9d81ab8c695ef007b2e5e4632e000",
+  "workflowFilesRemoved": [
+    ".github/workflows/afw-c2-notices-n3-own-models.yml",
+    ".github/workflows/afw-c2-notices-n3-own-models-fix2.yml"
+  ],
+  "closeHeadRuns": 0,
+  "originalsPreserved": 3203,
+  "leaves": 3296,
+  "primary": "ecba20cd898cde8540f6bb71f888098fdeb4669e",
+  "proof": "4961a4e8e94a5761fb2ced8fa3c0b6b7f634f5e3",
+  "native": {
+    "run": 43919176500,
+    "job": 133481488055,
+    "tests": 527,
+    "pass": 527,
+    "fail": 0
+  },
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "historical": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
