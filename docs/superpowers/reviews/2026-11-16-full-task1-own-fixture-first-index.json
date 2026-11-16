@@ -1,0 +1,81 @@
+{
+  "schema": "afw.own-full-c230.early-fixture-index.v1",
+  "status": "FIXTURE_FIRST_SEALED_NEW_RECEIVER_NOT_YET_WRITTEN",
+  "authority": [
+    "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+    "bca6278fc2f4889c6c01211a10832cec9871f1c9"
+  ],
+  "assets": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/fixture-seed.json",
+      "mode": "100644",
+      "blob": "7480512aeaa85c160e203ffd4de4c2f221e0df7b",
+      "bytes": 51629,
+      "sha256": "2d65cbd36538ec86a47e4aa1e96fbc418db0d9be868ef0145094fa88a0debf20",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/fixture-first-cases.json",
+      "mode": "100644",
+      "blob": "a024b9a073d76439d8798a65e74093f87fc845b8",
+      "bytes": 37490,
+      "sha256": "d916452392d60622d7178d92249f89cdbb6a617041da409095f0ed38c54fcb7d",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/complete-coherent-example.json",
+      "mode": "100644",
+      "blob": "1c932dbcc1106b96d6fdb28c5f4e5fef21764d35",
+      "bytes": 60896,
+      "sha256": "e40028bcc6040b2d240fd03270baf16e186e8dc7eab70d0c669f500ebff4ded6",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/expected-ids.json",
+      "mode": "100644",
+      "blob": "7d5315e9d03e752684c443cf8971b3d2cf14326d",
+      "bytes": 11242,
+      "sha256": "6bda76685c6ab7612508e1e6a3448eaf6218d9abeca4236ba88a1d70ed2816f0",
+      "fullReadback": true,
+      "supersedes": "0b5cea4468e0f12531be0073edefc07eac284cca"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/old-red.json",
+      "mode": "100644",
+      "blob": "c24dc994131d0d70746fed5a44df4ef88e19b1b3",
+      "bytes": 612,
+      "sha256": "1871b3e7abe2a7c440a15054e85211e21f21a80b5fc7ed4beb87f4e26b207d1d",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/model-builder.mjs",
+      "mode": "100644",
+      "blob": "25afd0e1f8a567a6c87a6f75c6502d8b3d0b4c8f",
+      "bytes": 6009,
+      "sha256": "6f2d497b30de48ab9654678472191357e6c2a121608300b494bd838517e28f40",
+      "fullReadback": true
+    }
+  ],
+  "oldIdDraft": {
+    "blob": "0b5cea4468e0f12531be0073edefc07eac284cca",
+    "count": 365,
+    "status": "Superseded before receiver code/native; four already-defined tree/log bound IDs omitted from initial index serialization, restored here; case plans unchanged"
+  },
+  "controls": {
+    "legacy": 225,
+    "newFull": 138,
+    "newZip": 6,
+    "expectedNative": 369,
+    "idsUnique": 369
+  },
+  "red": {
+    "oldModule": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+    "legitimateNewFullInputRejected": true,
+    "error": "C2_OWN_DIAGNOSTIC_REJECTED",
+    "reason": "Old exact13 admission differs at frozen corrected S08/S09; old module remains unchanged"
+  },
+  "limits": "Synthetic2037 clocks/repeated-letter IDs only; actual Source head/tree/run/job not used by models; Source code execution0; native coverage pending Root.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}
