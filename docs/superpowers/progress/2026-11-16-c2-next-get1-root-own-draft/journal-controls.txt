@@ -1,0 +1,35 @@
+
+function ngRootRaw(raw,binding,condition,native,fault=false){
+ if(typeof raw!=='string'||Buffer.byteLength(raw,'utf8')>32768||!raw.endsWith('\n'))ngBad();
+ const lines=raw.slice(0,-1).split('\n'),records=[];
+ for(const l of lines){let x;try{x=JSON.parse(l);}catch{ngBad();}if(JSON.stringify(x)!==l)ngBad();records.push(x);}
+ return ngRootJournal(records,binding,condition,native,fault);
+}
+function ngTestEdits(base,edits){
+ const x=structuredClone(base);x.tail='';
+ for(const e of edits){
+  if(e.op==='truncate'){x.records.length=e.count;continue}
+  if(e.op==='tail'){x.tail+=e.value;continue}
+  let target=x;for(let i=0;i<e.path.length-1;i++)target=target[e.path[i]];
+  target[e.path[e.path.length-1]]=structuredClone(e.value);
+ }
+ return x;
+}
+function ngTestTap(tap){
+ if(typeof tap!=='string'||/\b(SKIP|TODO|cancelled)\b/i.test(tap))ngBad();
+ const cases=[];for(const l of tap.split('\n')){
+  const m=/^(not ok|ok) (\d+) - (NG_[A-Z_]+)$/.exec(l);
+  if(m){if(Number(m[2])!==cases.length+1||m[3]!==NG_IDS[cases.length])ngBad();cases.push({id:m[3],status:m[1]==='ok'?'pass':'fail'});}
+  else if(l&&l!=='TAP version 13'&&l!=='1..6')ngBad();
+ }
+ return {integrity:cases.length===6?'complete':'prefix',cases,sourceFileFailure:false};
+}
+const results=[];
+for(const v of [...ngSynthetic.accepted,...ngSynthetic.rejected]){
+ const x=ngTestEdits(ngSynthetic.base,v.edits);let actual;
+ try{const n=ngTestTap(x.tap),raw=x.records.map(r=>JSON.stringify(r)+'\n').join('')+x.tail;actual=ngRootRaw(raw,x.binding,x.condition,n,x.writerFault);}
+ catch{actual=null;}
+ const pass=v.expected.valid===!!actual&&(!actual||Object.entries(v.expected).every(([k,n])=>k==='valid'||k==='code'||k==='integrity'&&actual.integrity===n||k==='status'&&actual.http.status===n||k==='bodyReadSettled'&&actual.http.bodyReadSettled===n||k==='ticketDelta'&&actual.tickets.delta===n));
+ results.push({id:v.id,pass,actual:actual?{integrity:actual.integrity,status:actual.http.status,body:actual.http.bodyReadSettled,delta:actual.tickets.delta}:null});
+}
+nodeRepl.write({syntheticOnly:true,RootOwnPureRamOnly:true,sourceExecuted:false,pass:results.filter(x=>x.pass).length,fail:results.filter(x=>!x.pass)});

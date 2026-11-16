@@ -1,0 +1,28 @@
+
+const expected={repository:'tokenizartinfo-ops/agent-friendly-web',branch:'lab/afw-c2-source-20261116-t1-next-get1',workflowPath:'.github/workflows/afw-c2-next-get1.yml',oneUseMessage:'AFW-C2-T1-NEXT-GET1-ONEUSE-20261116',job:'c2-next-get1',parent:'6791ce1bab9372e206d3c7b42b3e1394dc6e0c68',head:'1'.repeat(40),tree:'2'.repeat(40),runId:42,jobId:43};
+const admission={requiredSteps:['Read the exact one-use lab head','Use the fixed Node runtime','Install only the existing locked dependencies','Observe one next GET','Preserve one next GET'],commandStep:'Observe one next GET'};
+const base={run:{id:42,run_attempt:1,head_sha:expected.head,head_branch:expected.branch,path:expected.workflowPath,event:'push',status:'completed',conclusion:'success',repository:{full_name:expected.repository},head_repository:{full_name:expected.repository}},jobs:{total_count:1,jobs:[{id:43,run_id:42,run_attempt:1,head_sha:expected.head,name:expected.job,status:'completed',conclusion:'success',started_at:'2026-11-16T07:00:00Z',completed_at:'2026-11-16T07:00:06Z',steps:admission.requiredSteps.map((name,i)=>({name,number:i+2,status:'completed',conclusion:'success',started_at:'2026-11-16T07:00:0'+i+'Z',completed_at:'2026-11-16T07:00:0'+(i+1)+'Z'}))}]},commit:{sha:expected.head,tree:{sha:expected.tree},message:expected.oneUseMessage,parents:[{sha:expected.parent}]}};
+let total=0,failed=[];
+function check(id,wanted,fn){let ok=true;try{fn();}catch{ok=false;}total++;if(ok!==wanted)failed.push(id);}
+check('API valid',true,()=>ngApiJoin(base,expected,admission));
+const mutations=[
+ ['run-id',['run','id'],44],['attempt',['run','run_attempt'],2],['head',['run','head_sha'],'3'.repeat(40)],['branch',['run','head_branch'],'other'],['workflow',['run','path'],'.github/workflows/other.yml'],['event',['run','event'],'workflow_dispatch'],['run-status',['run','status'],'in_progress'],['run-failed',['run','conclusion'],'failure'],['repo',['run','repository','full_name'],'else/project'],['head-repo',['run','head_repository','full_name'],'else/project'],['commit-head',['commit','sha'],'3'.repeat(40)],['commit-tree',['commit','tree','sha'],'3'.repeat(40)],['message',['commit','message'],'other'],['parent',['commit','parents',0,'sha'],'3'.repeat(40)],['job-count',['jobs','total_count'],2],['job-id',['jobs','jobs',0,'id'],44],['job-run',['jobs','jobs',0,'run_id'],44],['job-attempt',['jobs','jobs',0,'run_attempt'],2],['job-head',['jobs','jobs',0,'head_sha'],'3'.repeat(40)],['job-name',['jobs','jobs',0,'name'],'other'],['job-failed',['jobs','jobs',0,'conclusion'],'failure'],['bad-date',['jobs','jobs',0,'started_at'],'2026-99-99T07:00:00Z'],['calendar-normalization',['jobs','jobs',0,'started_at'],'2026-02-31T07:00:00Z'],['step-skipped',['jobs','jobs',0,'steps',3,'conclusion'],'skipped'],['step-name',['jobs','jobs',0,'steps',3,'name'],'other'],['step-number',['jobs','jobs',0,'steps',3,'number'],2],['step-nan',['jobs','jobs',0,'steps',3,'started_at'],'2026-99-99T07:00:03Z'],['step-outside',['jobs','jobs',0,'steps',3,'completed_at'],'2026-11-16T07:00:09Z']
+];
+for(const [id,path,value] of mutations){const x=structuredClone(base);let target=x;for(const k of path.slice(0,-1))target=target[k];target[path.at(-1)]=value;check(id,false,()=>ngApiJoin(x,expected,admission));}
+const joined=ngApiJoin(base,expected,admission),command='node docs/superpowers/source-lab/c2-t1-next-get1/run-c2-next-get1.mjs',markers=['AFW_C2_NG_SYNTHETIC','AFW_C2_DEPENDENCY_CONTROL','AFW_C2_NG_CUSTODY','AFW_C2_NEXT_GET_OUTCOME'];
+const logBase=['2026-11-16T07:00:03.001Z ##[group]Run '+command,'2026-11-16T07:00:03.002Z ##[endgroup]',...markers.map((m,i)=>'2026-11-16T07:00:03.'+(100+i)+'Z '+m+' {}')].join('\n')+'\n';
+check('log-valid',true,()=>ngLogFrames(logBase,joined,command,markers));
+for(const [id,raw] of [
+ ['log-nan',logBase.replace('2026-11-16T07:00:03.100Z','2026-99-99T07:00:03.100Z')],
+ ['log-outside',logBase.replace('2026-11-16T07:00:03.100Z','2026-11-16T07:01:03.100Z')],
+ ['log-duplicate',logBase+'2026-11-16T07:00:03.200Z '+markers[3]+' {}\n'],
+ ['log-extra-key-frame',logBase.replace(markers[2]+' {}',markers[2]+' {"key":1, "key":2}')],
+ ['log-frame-before-window','2026-11-16T07:00:03.000Z '+markers[0]+' {}\n'+logBase],
+ ['log-embedded',logBase.replace(markers[0]+' {}','prefix '+markers[0]+' {}')],
+ ['log-wrong-command',logBase.replace(command,'node wrong.mjs')],
+ ['log-wrong-frame',logBase.replace(markers[1],'AFW_C2_OTHER')],
+ ['log-no-newline-json',logBase.replace(markers[0]+' {}',markers[0]+' { }')]
+])check(id,false,()=>ngLogFrames(raw,joined,command,markers));
+const union={type:['boolean','null']};for(const v of [true,false,null])check('union-'+v,true,()=>{if(!ngSchema(v,union,union))throw 0;});for(const v of ['true',0,{},[]])check('union-reject-'+JSON.stringify(v),false,()=>{if(!ngSchema(v,union,union))throw 0;});
+nodeRepl.write({pureRootSynthetic:true,sourceExecuted:false,total,pass:total-failed.length,failed});
+return {ngApiJoin,ngLogFrames,ngSchema,ngTime,ngRootJournal,ngRootRaw,base,expected,admission};
