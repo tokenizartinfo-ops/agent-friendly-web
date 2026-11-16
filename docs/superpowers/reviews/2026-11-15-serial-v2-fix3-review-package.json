@@ -1,0 +1,88 @@
+{
+  "purpose": "afw.serial-v2.task1.fix3.scoped-review-package.v1",
+  "task": 1,
+  "round": 3,
+  "scope": "Diagnostic-phase diff, planned equivalent layout/comment factoring and nominal currentHEAD only; preserve all settled R1/R2/R3/C1/I2/I3/I5/I7 guards. Actual Task1qualification remainspending.",
+  "before": {
+    "SourceIndex": "871ad100702810c6421f32f5d038139d42b0a36d",
+    "review": "08f9bb0e4e0d66e7bc40804ebb9da83e03de68cb"
+  },
+  "after": {
+    "SourceIndex": "d138a0640a0bcdea8f0f6075a8975eb75c1b6e6b",
+    "exactDiff": "343721dc944f0344df48a797f0c00c49f86c4d37",
+    "layoutProof": "3ea6e960e53109ff8cfe4bea49bbd63d72d8f135",
+    "contract": "b240b62b0c0bf0c0dd74e8621536a70a22272efc",
+    "OWNUnchanged": "6793b7c01ee70e4bc898b1b58f60c07f7c06c5ce",
+    "actualReport": "8c48e2de81c3f0275289c880a3bb9b30067cb723"
+  },
+  "authority": {
+    "spec": "691eaa80ac88cfbb84e99169b74b851ac44047c2",
+    "plan": "2868cf2756e919aabeecda2c21fed2dcb8f7603f",
+    "brief": "8018c4abcf55536a38cd079b166f034e4db4b8f7",
+    "representation": "cfad14bec181158458f12815316f4a4fbd768bb6"
+  },
+  "actual": {
+    "run": 43783876645,
+    "attempt": 1,
+    "job": 133027042797,
+    "Source": "ef41b65dd5402092a6de3977532a8fffcac59d81",
+    "step4": "failure/exit71",
+    "otherRequiredSteps": "skipped",
+    "frames": 0,
+    "actual520": 0,
+    "reportedPhase": {
+      "code": 71,
+      "phase": "launch capture bounds unexpected child",
+      "scope": "reported last-entered group, not first assertion or cause",
+      "Source": "ef41b65dd5402092a6de3977532a8fffcac59d81",
+      "run": 43783876645,
+      "job": 133027042797,
+      "sentinelIndex": 164,
+      "platformExitIndex": 165
+    },
+    "logsConsumed": true,
+    "exactFirstException": "UNKNOWN",
+    "receipt": "d4e5a0e3ed6855afc4f7c2bc61c4011d45150168",
+    "closure": {
+      "utc": "2026-11-16 01:09:04 UTC",
+      "Source": "7ca59cc55e3f2b66212c083d1e82215a988ef7ef",
+      "tree": "4a3f2c5fd49d580c15418a7fdec1b77019fb9c05",
+      "parent": "ef41b65dd5402092a6de3977532a8fffcac59d81",
+      "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+      "SAME": {
+        "bytes": 2594126,
+        "sha256": "3f9c005127940fc259d2c2e0dc5f290da3a5932e1de870ba2ff2c6952bc06ef1",
+        "blob": "d5291b1e807d193765edfc3a257192591ae7f576"
+      },
+      "fullBodiesReadback": true,
+      "CoreInheritedExactLeaves": 3201,
+      "Core": {
+        "leaves": 3201,
+        "bytes": 324448,
+        "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+      },
+      "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "queues": 0,
+      "closedHeadRuns": 0,
+      "SourcePendingNull": true,
+      "providerRuntimeRead": false
+    }
+  },
+  "newExecutionFinding": {
+    "id": "E1",
+    "blob": "8478d5cc9f582f1e3fb437df933b8992c10c7c6a",
+    "category": "Current literal startup string input with encoding buffer; exact Node22 primary source indicates conversion throws before native spawn",
+    "relation": "pre-existing fix1/current invocation, not introduced by phase/layout diff; confirm static mechanism separately from actual71. Do not infer original historical cause or reopen publication guard semantics."
+  },
+  "constraints": "Review DATA only, no Source/local eval/import/VM/compile/syntax/test/ref/run/provider/logrefetch. Full prior reports preserved; bounded linked segment allowed.",
+  "requiredOutput": "Spec/quality diagnostic-diff verdict and new-diff C/I/M only; explicitly actualfullqualificationstillopen. Brief corroboration of E1 primary-code mechanism if possible, kept separate from diff verdict. Immutable bounded linked review segment/readback.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
