@@ -1,0 +1,288 @@
+{
+  "schema": "afw.own-full-c230.report.v1",
+  "status": "IMPLEMENTATION_READY_ROOT_STATIC_ADMISSION_NATIVE_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "date": "2026-11-16",
+  "scope": "New explicit fullTask1 c230 OWN reader, round1/5. Observer R4/W1 and historical actual receipts remain frozen.",
+  "authority": {
+    "ruling": "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+    "treeSupplement": "bca6278fc2f4889c6c01211a10832cec9871f1c9",
+    "ownPlan": "cb7e1c276325927c11d2c7805aa6dd9fc2ca39bd",
+    "sourcePlan": "6696d06831328bb52d7245c48347bd8c412b566d"
+  },
+  "result": "Independently versioned OWN receiver now binds exact c230 Source13 and all25 raw Git tree edges; canonical eight Source frames and all four full modes; actual API/command windows; six-launch custody; actual one-member ZIP/digest/CRC and complete deflate consumption. No Source implementation was executed, imported, evaluated, compiled, syntax-checked or installed locally.",
+  "entrypoint": {
+    "module": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/full-reader.mjs",
+      "mode": "100644",
+      "blob": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+      "bytes": 19000,
+      "sha256": "a2f1aa18011c88ab7e34394054f39931c177d45bf0e2a657d4c588c70643a085",
+      "gitBlob": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+      "fullReadback": true
+    },
+    "signature": "c2OwnReadSourceFixtureFix1(input,trustedExpected,sha256,inflateRawSync)",
+    "inputKeys": [
+      "run",
+      "jobs",
+      "commit",
+      "tree",
+      "transport",
+      "artifact"
+    ],
+    "expectedKeys": [
+      "repository",
+      "branch",
+      "workflowPath",
+      "oneUseMessage",
+      "job",
+      "parent",
+      "head",
+      "tree",
+      "runId",
+      "jobId",
+      "requiredSteps"
+    ],
+    "rawInputs": "Actual independently supplied GitHub run/jobs/commit/recursiveTree API objects and timestamped command-step log; actual artifact ZIP base64, payload text, listing/id/file/run/job. Trusted context must come from Root, never outcome fields.",
+    "tree": "sha==commit.tree.sha==trustedExpected.tree; untruncated; unique normalized paths;8192entries/4MiBUTF8 metadata; each frozen25path/mode100644/typeblob/GitSHA and optional API size matches fixed admission. Separate Root static gate still verifies baseline3203+25 additions and original modes.",
+    "artifactKeys": [
+      "runId",
+      "jobId",
+      "listing",
+      "artifactId",
+      "fileName",
+      "archiveBase64",
+      "payloadText"
+    ],
+    "deflateContract": "Builtin inflateRawSync(member,{maxOutputLength:24577,info:true}) => {buffer,engine}. engine.bytesWritten must equal complete compressed member length. No legacy Buffer-only callback.",
+    "returns": "receiverChecksSatisfied plus joined context/job/step numbers, observed receipt, checked25edges and exact archive/payload byte hashes. Does not mint live SourceQualified/Task1Pass/nonclaims."
+  },
+  "fixedAdmission": {
+    "module": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/admission.mjs",
+      "mode": "100644",
+      "blob": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+      "bytes": 10236,
+      "sha256": "0c3421a74a75347f1b15549db7c93d1bfe6678798d157b966d06cd6e1596da03",
+      "gitBlob": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+      "fullReadback": true
+    },
+    "json": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/admission.json",
+      "mode": "100644",
+      "blob": "da6a9f9938a4433f8bd78ad84eb389d9d90f21ae",
+      "bytes": 12150,
+      "sha256": "3b810defcf8490e9419d8940692a016e44c3b18a900ddd712ce2a593a79081c7",
+      "gitBlob": "da6a9f9938a4433f8bd78ad84eb389d9d90f21ae",
+      "fullReadback": true
+    },
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "normal13Hash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "selection": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+    "schema": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+    "contract": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+    "SourceExpectedContext": null,
+    "scope": "Source13 triples use exact path,sha256,bytes order; no old b0af/65933/ec57/W1 admission or arbitrary outcome-selected producer. Fixed objects are deeply frozen.",
+    "rootSuppliedCandidateOnly": {
+      "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+      "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "meaning": "Root-supplied inactive Git DATA only; not independently fetched/executed here, not used in fictional models. Actual Source run/job absent."
+    }
+  },
+  "semantics": {
+    "modeCounts": {
+      "baselineRed": 3,
+      "proposalGreen": 20,
+      "mutantPrefix": 20,
+      "regressions": 11
+    },
+    "modeCountTotal": 54,
+    "frames": "Exactly synthetic/dependency/4mode/custody/receipt; final observations exactly equal four standalone projections, canonical physical lines and exact object keys/order. No diagnostic/extra/missing/partial frame qualifies.",
+    "red": "PASS/PASS/FAIL, nativeexit1, counters1/1/1 and exact de8a51e/S07 GET503expected200beforeform witness. No 503 cause inference.",
+    "green": "All20pass/nativeexit0; first11 main checkpoints1, next4=2, next2=3; final3 isolated graph bounded observations.",
+    "mutant": "All20 IDs/order/nativeexit1; EXTRA_KEY must fail with paired GREEN pass; other actual mutant failures remain allowed and recorded.",
+    "regressions": "Exact frozen11 subset, allpass/exit0, no broader suite claim.",
+    "custody": "Exactly6completed launches (preflight,absent-CWDdependency,BASE,GREEN,MUTANT,REG), processes6..24, all ownership/isolation/preflight/root cleanup true.",
+    "limits": "Source JSON body<=24576+exactLF gives payload<=24577. OWN proof<=24576 includingLF. ZIP<=1MiB/rawlog<=4MiB/tree metadata<=4MiB/8192entries. Actual Source API job span<=420000ms. The unrelated32MiB runner git archive limit is not artifact size."
+  },
+  "testFirst": {
+    "initialSeal": "f92a9279f6826a67d5d05136bb64bcc8a78e4645",
+    "oldRed": "c24dc994131d0d70746fed5a44df4ef88e19b1b3",
+    "initialFeatureRed": "Old unchanged f799483 rejects legitimate c230 specimen at exact13 admission. New consumer accepts it.",
+    "durationRed": "Coherent481s job was accepted by first new reader f049a810a3ad059e2aea7bac8381af3501933e6c. Persisted literal+preimage before adding je-js>420000. Final reader rejects it; Root accepted this existing-limit addendum.",
+    "addendum": "d38f789ebc2fbef83b226c30ae490effb497f541",
+    "preservation": "Draft365 and early369 ID blobs preserved as superseded/non-native; final370 includes original225 and all144new plans unchanged plus onlyJOB_OVER7MIN. Relative order of prior IDs preserved. All ID/case plans sealed before their guards and any native activation.",
+    "synthetic": "Shared complete2037 seed, repeated-letter head/tree and 990230xxx IDs. New fictional metadata, never normalized actual history; complete coherent example is separately saved.",
+    "coherence": "OWN model builder regenerates standalone/embedded modes, canonical full receipt/log/payload, stored/deflated/DD ZIP and actual-byte API digest/size before input-level faults. Broken model construction is outside rejection catch, so builder errors cannot count as successful negatives."
+  },
+  "verification": {
+    "ramResult": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/ram-results.json",
+      "mode": "100644",
+      "blob": "2d8af856cc241c8e5b3586030c64a56875b2a305",
+      "bytes": 16142,
+      "sha256": "8e85ff60433984476ea72870af9cedb3a6e09e0a436c7c03f2823461b666a8c2",
+      "gitBlob": "2d8af856cc241c8e5b3586030c64a56875b2a305",
+      "fullReadback": true
+    },
+    "freshOwnRam": {
+      "legacy187": 187,
+      "assembly28": 28,
+      "fix2": 10,
+      "newFull139": 139,
+      "newZip6": 6,
+      "total": 370,
+      "failed": 0,
+      "idsUnique": 370,
+      "idsHash": "5737f76ef490aa43eff78c4ec146c398c15ce3bff6da684906324a301702fa24"
+    },
+    "covered": "Correct c230, other mutant failure, isolated nonmonotonic graphs, six-launch24process; canonical/witness/selection/key aliases/mode totals/status/counters; all25treehash and13admitted-byte negatives; API/date/calendar/job7min/steps/command/time; stored/deflate/signed+unsignedDD, CRC/bounds/name/path/extraentry/digest/payload/fullcompressedtail;24577positive24578negative/1MiB bound/8192positive8193negative/4MiB guards.",
+    "ownRunnerSyntaxParsed": true,
+    "ownRunnerExecuted": false,
+    "nativeImportGraphExecuted": false,
+    "SourceCodeExecuted": false,
+    "projectSourceTests": "Not run: explicitly outside authority; own-only RAM and later Root-native graph are the required verification boundary.",
+    "native": "PENDING Root static admission, one real OWN-native occurrence and fresh SPEC+QUALITY review. No historical actual370receipt exists or is fabricated."
+  },
+  "native": {
+    "nomination": {
+      "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3",
+      "message": "AFW-C2-FULL-TASK1-C230-OWN-V3-ONEUSE-20261116",
+      "job": "c2-full-task1-c230-own-v3",
+      "workflow": ".github/workflows/afw-c2-full-task1-c230-own-v3.yml",
+      "prefix": "docs/superpowers/root-own/c2-t1-full-c230-v3/",
+      "runner": "docs/superpowers/root-own/c2-t1-full-c230-v3/run-controls.mjs",
+      "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-full-c230-v3/run-controls.mjs",
+      "node": "22.23.4",
+      "runnerOS": "ubuntu-24.04",
+      "jobMinutes": 3,
+      "caseMs": 10000,
+      "contents": "read",
+      "attempt": 1,
+      "artifact": {
+        "name": "afw-c2-full-task1-c230-own-v3-proof",
+        "path": "output/c2-full-task1-c230-own-v3-proof.json",
+        "fileName": "c2-full-task1-c230-own-v3-proof.json",
+        "expectedCount": 1,
+        "retentionDays": 7,
+        "proofUTF8IncludingLF": 24576
+      }
+    },
+    "graph": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/native-graph.json",
+      "mode": "100644",
+      "blob": "57a73ddd51d21b8bb383823938fc97c71cd58c13",
+      "bytes": 6905,
+      "sha256": "5b6998bce893c99cf9b7ba513a0a2b614a1e0d77fdf38b017a54e0576b18b91c",
+      "gitBlob": "57a73ddd51d21b8bb383823938fc97c71cd58c13",
+      "fullReadback": true
+    },
+    "runner": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/run-controls.mjs",
+      "mode": "100644",
+      "blob": "1683ba493989c1f31b89a68f7daed42569783b37",
+      "bytes": 5762,
+      "sha256": "d333370746f3265164a23ef3ff26221f02d8229bad3075d83b13a3367fd5b464",
+      "gitBlob": "1683ba493989c1f31b89a68f7daed42569783b37",
+      "fullReadback": true
+    },
+    "workflow": {
+      "path": ".github/workflows/afw-c2-full-task1-c230-own-v3.yml",
+      "mode": "100644",
+      "blob": "165b02de9131dbb982d49ae7d7cc421248176448",
+      "bytes": 1478,
+      "sha256": "2f537b7447774a8b185976d10f397aa88ac579e175fa05f07ec4edd9aeee91d7",
+      "gitBlob": "165b02de9131dbb982d49ae7d7cc421248176448",
+      "fullReadback": true
+    },
+    "selection": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/selection.json",
+      "mode": "100644",
+      "blob": "d6b68d6d0c1ba83b7e5969f857edd41a06c45077",
+      "bytes": 1862,
+      "sha256": "574b0ba85ea80ed2ae3762bef0bbd00d69c1083628c494851276a6cb1e4dbf27",
+      "gitBlob": "d6b68d6d0c1ba83b7e5969f857edd41a06c45077",
+      "fullReadback": true
+    },
+    "proofSchema": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/proof-schema.json",
+      "mode": "100644",
+      "blob": "dbb5bf55637e620ab7dca9de2d439ede8c2028ad",
+      "bytes": 3892,
+      "sha256": "660acf6a7e4311d046cb3831b671ef608ea830600a930a202cdc02386b76f877",
+      "gitBlob": "dbb5bf55637e620ab7dca9de2d439ede8c2028ad",
+      "fullReadback": true
+    },
+    "expectedControls": 370,
+    "graphPaths": 25,
+    "graphBytes": 510802,
+    "modules": "Six imported OWN modules plus runner; five frozen legacy modules/data inputs preserve original225. Six SourceJSON files are immutable DATA/hash/admission checks only. No Source JS body/parser/selftest/reducer/harness is present in this native graph.",
+    "runtime": "Node22.23.4 Ubuntu24.04, one attempt1 push/job3min, each test10s, contents:read; no npm/dependency install/network/API/credentials. Read-only git metadata joins own head/tree/parent/message. Root alone materializes/activates refs and runs.",
+    "proof": "Actual native result computes observed ordered IDs hash/counts and25body bindings, checks fixed graph SHA, emits compact JSON+LF artifact and TAP comment marker '# AFW_C2_FULL_C230_OWN_PROOF '. No RAM-result file is consumed by native tests/proof.",
+    "proofFlags": {
+      "ownModelsExecuted": "true only when native runner actually executes",
+      "actualSourceExecution": false,
+      "finalSourceBinding": false
+    },
+    "closure": "Root must independently join raw API/TAP370/IDs/proof/ZIP/digest/context then remove only new OWN WF on terminal closure; preserve all DATA/evidence and originals."
+  },
+  "reversibility": {
+    "diff": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/reversible-diff.json",
+      "mode": "100644",
+      "blob": "ddf41f3889da78eac70085ee6843249a74608fa2",
+      "bytes": 731811,
+      "sha256": "948e5241bb4d12891b6323aacaf8ba1eacee6724fb2be2ef73a30c5bfb90ec5d",
+      "gitBlob": "ddf41f3889da78eac70085ee6843249a74608fa2",
+      "fullReadback": true
+    },
+    "fullBodies": 28,
+    "method": "Full before/after text and verified forward/reverse spans for historicalOWN→newversion derivation and narrow7min guard; every25native+3documentary path has before:null/fullAfter and reversible additive operation. Legacy225exact blobs copied into versioned namespace, original paths untouched.",
+    "rollback": "Omit new prefix/WF. No Source13/M/Core/oldOWN/history/runtime/ref rollback exists because none was mutated."
+  },
+  "proofLimits": {
+    "rawTap": "Absent private raw child TAP is not freshly parsed by OWN. Source native pinned producer performs its own TAP13 assertions; OWN independently checks safe mode projection plus actual external API/log/custody/artifact joins. This is not cryptographic authentication of private graph/data.",
+    "threeReceiptDTOs": "Absent private receipt objects are not invented/exported/authenticated. Known Source S08 native assertions check distinct3publication receipts, predecessor/SEND/ACK/hash/deadline links, monitor row preservation, exact finite scope and selection; safe receipt exposes13admitted triples+4observations.",
+    "consentAndDrain": "Synthetic grant/form/CleanupScope and one retained synthetic fetch are not actual human consent, scoped SDK revocation, global physical drain or empty namespace. Live/native trial and Task2 remain separate.",
+    "W1": "Actual earlier four-case W1 and changed QA observer cannot prove full Task1 or a503fix; frozen receipts remain untouched.",
+    "tree": "Raw API tree is independently supplied by Root and joined to trusted expected sha. Arbitrary coherent JSON cannot authenticate its own Git origin; Root static API/hash/custody gate is still required."
+  },
+  "performed": {
+    "immutableBlobsAndFullReadbacks": true,
+    "lightweightOwnRam": true,
+    "localFiles": false,
+    "sourceEval": false,
+    "sourceImport": false,
+    "sourceSyntax": false,
+    "sourceTests": false,
+    "refs": false,
+    "runs": false,
+    "Source13Changes": 0,
+    "MChanges": 0,
+    "CoreChanges": 0,
+    "oldOwnChanges": 0,
+    "providerAccess": false,
+    "secrets": false,
+    "subagents": false
+  },
+  "pending": [
+    "Root static full readback/hash/exact paths/trigger admission",
+    "One Root OWN-native370 occurrence, independent rawAPI/TAP/proof/artifact acceptance and closed readback",
+    "Fresh SPEC+QUALITY review before separate Root Source25 activation",
+    "Actual future Source context/run/job/logs/full capture unavailable until that gate; no further dynamic-value code change required"
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

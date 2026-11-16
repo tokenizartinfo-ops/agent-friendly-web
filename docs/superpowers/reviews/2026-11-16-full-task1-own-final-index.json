@@ -1,0 +1,552 @@
+{
+  "schema": "afw.own-full-c230.packet-index.v1",
+  "status": "READY_FOR_ROOT_STATIC_ADMISSION_NATIVE_AND_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable additive OWN DATA + pure OWN RAM; later native/ref/run only Root",
+  "resourceType": "Git blobs",
+  "resourceId": "c2-t1-full-c230-v3",
+  "allowedAction": "OWN consumer/control packet only; Source execution/modification prohibited",
+  "authority": {
+    "ruling": "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+    "treeSupplement": "bca6278fc2f4889c6c01211a10832cec9871f1c9",
+    "ownPlan": "cb7e1c276325927c11d2c7805aa6dd9fc2ca39bd",
+    "sourcePlan": "6696d06831328bb52d7245c48347bd8c412b566d",
+    "round": 1,
+    "maxRounds": 5,
+    "observerR4Unchanged": true
+  },
+  "prefix": "docs/superpowers/root-own/c2-t1-full-c230-v3/",
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/fixture-seed.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "7480512aeaa85c160e203ffd4de4c2f221e0df7b",
+        "bytes": 51629,
+        "sha256": "2d65cbd36538ec86a47e4aa1e96fbc418db0d9be868ef0145094fa88a0debf20"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/fixture-first-cases.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "eb84f1791bb32832c807535131607abeb72a159c",
+        "bytes": 38173,
+        "sha256": "1724e63419636cd26427f266dd1a36bf7ae1d43dc4af41659e7a51249f091bec"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/complete-coherent-example.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "1c932dbcc1106b96d6fdb28c5f4e5fef21764d35",
+        "bytes": 60896,
+        "sha256": "e40028bcc6040b2d240fd03270baf16e186e8dc7eab70d0c669f500ebff4ded6"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/expected-ids.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "115f420dad5e56e4d3bad93b80a6bb742f99b507",
+        "bytes": 11276,
+        "sha256": "628b05610d29a218c281d9cce136f131ba34c51d3cf08a53bd57117ad9f60dc3"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/model-builder.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "25afd0e1f8a567a6c87a6f75c6502d8b3d0b4c8f",
+        "bytes": 6009,
+        "sha256": "6f2d497b30de48ab9654678472191357e6c2a121608300b494bd838517e28f40"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/full-reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+        "bytes": 19000,
+        "sha256": "a2f1aa18011c88ab7e34394054f39931c177d45bf0e2a657d4c588c70643a085"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/admission.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+        "bytes": 10236,
+        "sha256": "0c3421a74a75347f1b15549db7c93d1bfe6678798d157b966d06cd6e1596da03"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/admission.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "da6a9f9938a4433f8bd78ad84eb389d9d90f21ae",
+        "bytes": 12150,
+        "sha256": "3b810defcf8490e9419d8940692a016e44c3b18a900ddd712ce2a593a79081c7"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/own-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "5d9d2e2d48133ce8e24fdf2b289afb65d9022b86",
+        "bytes": 2308,
+        "sha256": "aded476f67707a2c058735d4a8686982f968275f642fc68d83c5fc1d0b57fb14"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/proof-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "dbb5bf55637e620ab7dca9de2d439ede8c2028ad",
+        "bytes": 3892,
+        "sha256": "660acf6a7e4311d046cb3831b671ef608ea830600a930a202cdc02386b76f877"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/selection.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "d6b68d6d0c1ba83b7e5969f857edd41a06c45077",
+        "bytes": 1862,
+        "sha256": "574b0ba85ea80ed2ae3762bef0bbd00d69c1083628c494851276a6cb1e4dbf27"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/own-receiver.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+        "bytes": 31155,
+        "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/own-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+        "bytes": 19486,
+        "sha256": "e69f12c2389616f1517dbd8f5472cda511c01b6fab2a42f6fe366afbe6a234c7"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/fixture-first.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+        "bytes": 34834,
+        "sha256": "e00942909c3eab5a0d8ee5fffe9c625d38e7566fdc648baf4eb6998dcc8612bf"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/diagnostic-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+        "bytes": 9686,
+        "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/legacy/fix2-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "6e5929efbd58acd113bfdf5813fe2670a6cccca4",
+        "bytes": 107420,
+        "sha256": "5f7166dc286946ee89ee61c70ea4c614f392e006ccbd1998d4611f05b66a9eef"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/source-index.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+        "bytes": 11467,
+        "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/qualifier.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+        "bytes": 15224,
+        "sha256": "1359d5a505e65a3a04659a0cae70fd60023ce56ae989a0277438bf50790912ed"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/protocol-contract.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+        "bytes": 15709,
+        "sha256": "2bd76e556a6dbf9d394fba70d64a216fd339697fcae2e885b3fd6141f4ecd6fb"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/frame-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+        "bytes": 13983,
+        "sha256": "9fc0205fbbbd4a0d61f4560291bd53caf58df083f88e4579eaa74ea02d15d61e"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/mode-selection.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+        "bytes": 5460,
+        "sha256": "618e35bbeda39833ddf5c63ed16a41b44db85ab751edcb87ad5abb9ebcaae839"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/data/synthetic-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+        "bytes": 14802,
+        "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": ".github/workflows/afw-c2-full-task1-c230-own-v3.yml",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "165b02de9131dbb982d49ae7d7cc421248176448",
+        "bytes": 1478,
+        "sha256": "2f537b7447774a8b185976d10f397aa88ac579e175fa05f07ec4edd9aeee91d7"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/native-graph.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "57a73ddd51d21b8bb383823938fc97c71cd58c13",
+        "bytes": 6905,
+        "sha256": "5b6998bce893c99cf9b7ba513a0a2b614a1e0d77fdf38b017a54e0576b18b91c"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/run-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "1683ba493989c1f31b89a68f7daed42569783b37",
+        "bytes": 5762,
+        "sha256": "d333370746f3265164a23ef3ff26221f02d8229bad3075d83b13a3367fd5b464"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/ram-results.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "2d8af856cc241c8e5b3586030c64a56875b2a305",
+        "bytes": 16142,
+        "sha256": "8e85ff60433984476ea72870af9cedb3a6e09e0a436c7c03f2823461b666a8c2"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/old-red.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "c24dc994131d0d70746fed5a44df4ef88e19b1b3",
+        "bytes": 612,
+        "sha256": "1871b3e7abe2a7c440a15054e85211e21f21a80b5fc7ed4beb87f4e26b207d1d"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/test-first-addendum.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "d38f789ebc2fbef83b226c30ae490effb497f541",
+        "bytes": 1308,
+        "sha256": "fc070d5741b5243811593cf333b7e563a834a3fb24063b9ebeccef7507bc8b87"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/reversible-diff.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "ddf41f3889da78eac70085ee6843249a74608fa2",
+        "bytes": 731811,
+        "sha256": "948e5241bb4d12891b6323aacaf8ba1eacee6724fb2be2ef73a30c5bfb90ec5d"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/report.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "075d2a6af04ce3b388354e1093aa484bb80605c1",
+        "bytes": 16398,
+        "sha256": "493cad441a88ae6a698d057e4f0b3c264c951f215cd275264d44acd7bc4ee6e4"
+      },
+      "fullReadback": true,
+      "gitBlobSha1Matches": true
+    }
+  ],
+  "paths": {
+    "native": 25,
+    "total": 30,
+    "nativeBytes": 510802,
+    "allBytes": 1277073,
+    "additiveOnly": true,
+    "workflowCount": 1
+  },
+  "entrypoint": {
+    "module": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+    "signature": "c2OwnReadSourceFixtureFix1(input,trustedExpected,sha256,inflateRawSync)",
+    "inputKeys": [
+      "run",
+      "jobs",
+      "commit",
+      "tree",
+      "transport",
+      "artifact"
+    ],
+    "expectedKeys": [
+      "repository",
+      "branch",
+      "workflowPath",
+      "oneUseMessage",
+      "job",
+      "parent",
+      "head",
+      "tree",
+      "runId",
+      "jobId",
+      "requiredSteps"
+    ],
+    "fixedAdmission": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+    "admissionJSON": "da6a9f9938a4433f8bd78ad84eb389d9d90f21ae",
+    "sourceExpectedContext": null,
+    "tree": "Actual untruncated independent rawGitTree API, sha==commit.tree.sha==trustedExpected.tree,25fixededges/modes/type/blob/optional size,unique paths,max8192entries/max4MiBUTF8; Root independently verifies baseline3203+25."
+  },
+  "sourceFrozen": {
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "index": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "indexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "contract": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+    "schema": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+    "selection": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+    "scope": "13exactordered(path,sha256,bytes),25treeedges,8frames,RED3/GREEN20/MUTANT20/REG11,custody6launches/processes6..24; other honest mutant failures allowed. Actual future Source IDs only Root, never outcome."
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3",
+    "message": "AFW-C2-FULL-TASK1-C230-OWN-V3-ONEUSE-20261116",
+    "job": "c2-full-task1-c230-own-v3",
+    "workflow": ".github/workflows/afw-c2-full-task1-c230-own-v3.yml",
+    "prefix": "docs/superpowers/root-own/c2-t1-full-c230-v3/",
+    "runner": "docs/superpowers/root-own/c2-t1-full-c230-v3/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-full-c230-v3/run-controls.mjs",
+    "node": "22.23.4",
+    "runnerOS": "ubuntu-24.04",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "contents": "read",
+    "attempt": 1,
+    "artifact": {
+      "name": "afw-c2-full-task1-c230-own-v3-proof",
+      "path": "output/c2-full-task1-c230-own-v3-proof.json",
+      "fileName": "c2-full-task1-c230-own-v3-proof.json",
+      "expectedCount": 1,
+      "retentionDays": 7,
+      "proofUTF8IncludingLF": 24576
+    }
+  },
+  "native": {
+    "graph": "57a73ddd51d21b8bb383823938fc97c71cd58c13",
+    "runner": "1683ba493989c1f31b89a68f7daed42569783b37",
+    "workflow": "165b02de9131dbb982d49ae7d7cc421248176448",
+    "proofSchema": "dbb5bf55637e620ab7dca9de2d439ede8c2028ad",
+    "selection": "d6b68d6d0c1ba83b7e5969f857edd41a06c45077",
+    "expectedIds": "115f420dad5e56e4d3bad93b80a6bb742f99b507",
+    "expectedCount": 370,
+    "groups": {
+      "old187": 187,
+      "assembly28": 28,
+      "fix2": 10,
+      "newFull139": 139,
+      "newZip6": 6
+    },
+    "idsHash": "5737f76ef490aa43eff78c4ec146c398c15ce3bff6da684906324a301702fa24",
+    "proofUTF8IncludingLF": 24576,
+    "marker": "AFW_C2_FULL_C230_OWN_PROOF; Node TAP '# ' console prefix",
+    "imports": "Six OWN modules+runner; builtins only, six SourceJSON DATA files. No Source JS body/import/compiler/parser/selftest/reducer/harness/npm/network.",
+    "actualRun": null,
+    "actualJob": null,
+    "executed": false
+  },
+  "fixtureFirst": {
+    "earlyIndex": "f92a9279f6826a67d5d05136bb64bcc8a78e4645",
+    "completeExample": "1c932dbcc1106b96d6fdb28c5f4e5fef21764d35",
+    "firstPlans": "a024b9a073d76439d8798a65e74093f87fc845b8",
+    "finalPlans": "eb84f1791bb32832c807535131607abeb72a159c",
+    "oldRed": "c24dc994131d0d70746fed5a44df4ef88e19b1b3",
+    "durationPreimage": "f049a810a3ad059e2aea7bac8381af3501933e6c",
+    "durationAddendum": "d38f789ebc2fbef83b226c30ae490effb497f541",
+    "supersededIds": [
+      {
+        "blob": "0b5cea4468e0f12531be0073edefc07eac284cca",
+        "count": 365,
+        "native": false
+      },
+      {
+        "blob": "7d5315e9d03e752684c443cf8971b3d2cf14326d",
+        "count": 369,
+        "native": false
+      }
+    ],
+    "finalCount": 370,
+    "meaning": "Literal2037 synthetic models and coherent own model builder; all old225/all144priornewplans preserved plus one7min ID. No historical actual outcome converted."
+  },
+  "verification": {
+    "ramResult": "2d8af856cc241c8e5b3586030c64a56875b2a305",
+    "passed": 370,
+    "failed": 0,
+    "uniqueIds": 370,
+    "old225Unchanged": true,
+    "old12AliasesPreserved": true,
+    "ownRunnerSyntaxParsedNotExecuted": true,
+    "nativePending": true,
+    "allFullReadbacks": true,
+    "allUtf8SHA256AndGitSHA1Matched": true,
+    "allForwardReverseSpansVerified": true,
+    "limits": "Source body24576+LF=>24577; OWN proof24576inclLF; ZIP1MiB/log4MiB/tree4MiB8192/job420000ms; strictfullDeflate consumption/method0/method8/DD."
+  },
+  "reversibleDiff": "ddf41f3889da78eac70085ee6843249a74608fa2",
+  "report": "075d2a6af04ce3b388354e1093aa484bb80605c1",
+  "proofLimits": "Absent private TAP/3receiptDTOs are not parsed/authenticated independently. Safe frames+known producer/native assertions+actual API/log/custody/ZIP join only. Raw API JSON never authenticates itself. No actual consent/SDKwithdrawal/globaldrain/namespaceEmpty/readiness/503cause claim. W1 is not fullTask1.",
+  "preservation": {
+    "Source13Changes": 0,
+    "MChanges": 0,
+    "CoreChanges": 0,
+    "oldOwnChanges": 0,
+    "historicalChanges": 0,
+    "sourceExecution": 0,
+    "sourceSyntax": 0,
+    "sourceImports": 0,
+    "localFiles": 0,
+    "dependencies": 0,
+    "providerActions": 0,
+    "secrets": 0,
+    "subagents": 0,
+    "refs": 0,
+    "runs": 0
+  },
+  "rollback": "Omit additive OWN prefix/WF. Full28afterimages+originalOWNpreimages and verified spans in reversible diff; no Source/runtime rollback.",
+  "pending": [
+    "Root static exactpath/tree/trigger/fullhash admission",
+    "Root one native370 occurrence/API/TAP/proof/ZIP joins/closure",
+    "Fresh independent SPEC+QUALITY review",
+    "Separate Root Source25 capture with actual callerExpected IDs; no Task2 promotion"
+  ],
+  "ActualSource": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
