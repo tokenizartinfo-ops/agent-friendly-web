@@ -1,0 +1,135 @@
+{
+  "schema": "afw.task1.full-green-timeout.analysis-plan.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Solo Git DATA inmutable; análisis de la ocurrencia cerrada. Propuesta futura, sin código ni nominación.",
+  "allowedAction": "Leer blobs congelados como texto/JSON, comparar y crear este único informe, con lectura íntegra. Root conserva toda autoridad de refs/ocurrencias.",
+  "status": "UNQUALIFIED_INCOMPLETE_CLOSED; DIAGNOSTIC_PLAN_ONLY",
+  "decision": "La ocurrencia prueba que la captura del hijo GREEN alcanzó su límite, no en qué caso ni por qué. El rechazo del parser es correcto. No hay corrección de producto/fixture justificada como remedio de ese timeout. Próximo paso propuesto: una captura GREEN20 de frontera con el registrador de acciones/contadores/AFTER existente y compilación QA/M normal, con un contrato de diagnóstico separado. No repetir el calificador completo ni atribuir el resultado a W1/caso20.",
+  "evidence": {
+    "primary": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+    "outcome": "91b08d3ea77cd85264fc6f5ada1fd62693c56631",
+    "close": "e65c9b545c44c663f8e5ceb41794a5aab8e9e455",
+    "closedHead": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+    "run": "43965725604/1",
+    "job": "133644531547",
+    "testedHead": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+    "testedTree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "source13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "normalRunner": "1193e74ec0b0d60fb5c63d3a0340578e884dfb71",
+    "tapParser": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+    "normalContract": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+    "normalSelection": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+    "sourcePlan": "6696d06831328bb52d7245c48347bd8c412b566d",
+    "sourceReview": "58788e1426dd81e927d765a98f14ea50e5e3f77f",
+    "own419Review": "797613a34698a6c4a3ade7c4cc679b7af0ad0099",
+    "oldDiagnosticPacket": "87ff7ee8c613b02fe04d2d8b6e01e9fee09c610e",
+    "oldDiagnosticPrimary": "2cd454e96b713d409425da8f42e48959d21cb8eb",
+    "oldDiagnosticOutcome": "3ec7cff5538ef23da2089e50b3890113699612b6",
+    "oldDiagnosticAnalysis": "620335609416de6c4ac1593ba4c6530038593250",
+    "w1Outcome": "325efbf73e0fe5ecea0713cf76df6b7d8cecd3b5",
+    "w1Own": "2fdbd74df7127f13054cd6b72d76a349ebcb9db3",
+    "w1Primary": "6cfb0d0827ebe0cf8591d06d09e1ced0d7aedaaa"
+  },
+  "facts": {
+    "observed": "Controles sintéticos 3 positivos/35 negativos, dependencia ausente ENOENT real. BASE-red sólo CONNECTION PASS, OAUTH PASS, NOTICES fallo esperado 503 frente a 200, witness de GET antes de formulario/POST, contadores 1/1/1; exit1 calificado como RED. GREEN emitió CAPTURE_INVALID con exitCode/totals/witness null y cases[]. Diagnóstico del proceso lanzado: timeout, exitCode1, signal none, stdout 24395 bytes SHA256 db94fcb9537a88318ed15bb15c09bf217f566b1b5b7a1287020b9789a5fc2aa8, stderr 0. Ni MUTANT ni REG ni recibo; 0 artefactos, OWN full no admitió. Custodia parcial 4 lanzamientos/4 procesos con controles observados y temp propio eliminado. No son 6 lanzamientos completos, ni prueba de cierre de cada proceso/SDK.",
+    "timing": "Timestamps de transporte del primario ya preservado (no nueva descarga): encabezado de comando 22:00:46.6883210Z; BASE frame 22:01:48.7964404Z; GREEN frame 22:04:48.9670630Z; diagnóstico 22:04:48.9682889Z; custodia 22:04:49.1749572Z. Delta BASE→GREEN 180.1706s incluye armado del target, espera y parser; encabezado→custodia 242.4866s. Runner L16/76–86 aplica min(180000,end global−Date.now), bajo 330000/7min: el patrón medido apoya el límite por hijo, no agotamiento de 330s/7min. No mide tiempos internos de casos ni el instante exacto de señal al árbol de procesos. Dependencia→BASE frame 61.7612s incluye materialización/conclusión del RED y no es la duración de una ruta individual.",
+    "causalMechanism": "Runner L22–28 traduce ETIMEDOUT exclusivamente a timeout; ENOBUFS→buffer-limit; signal:null→none, y status es campo separado del error. L82 captura spawnSync del lanzador sudo/unshare/setpriv/node (no es un exit limpio de una prueba). L141–143 etiqueta frontier=parser solamente después de runSource. observe L159–172 inicializa null/[], exige !result.error antes de decodificar UTF-8, unir TAP y producir contadores. Con ETIMEDOUT, se rechaza ANTES de leer el TAP incluso si contiene líneas válidas. CAPTURE_INVALID y el exit1 de captura no identifican una aserción, bug del parser ni cuántos casos llegaron a ejecutarse. El modo promete no interpretar evidencia parcial. Jamás habilitar partial-as-qualified.",
+    "irrecoverable": "El capture raw del hijo no se preservó como DATA: sólo bytes/hash. El log del job no es el TAP interno. No se puede deducir caso, PASS/FAIL, origen del 503, readback, await, causa física o duración de caso desde ese hash. Las seis tramas reales (incluida custodia parcial) y el cierre no rellenan las dos modalidades faltantes. La rama y mensaje están consumidos."
+  },
+  "staticAudit": {
+    "sources": [
+      {
+        "file": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5"
+      },
+      {
+        "file": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908"
+      },
+      {
+        "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+      },
+      {
+        "file": "test/fixtures/finite-coupled-native.mjs",
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f"
+      },
+      {
+        "file": "test/fixtures/finite-first-connection-publication.mjs",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3"
+      },
+      {
+        "file": "test/fixtures/finite-initial-entry-world.mjs",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5"
+      }
+    ],
+    "stageRetention": "068d35c2555c7dc711c487f6021ec572bd3af067",
+    "ordering": "S07:5–19 registra after(await w?.close()), 20 casos con timeout120000; cada work se espera, luego w.counts(), luego marco C2SOURCE si hay contadores, y al final relanza el error original incluso null/undefined, primero acción. Node usa --test-concurrency=1. S08:8–14,27–33 usa un main para 17 casos; cada uno de los últimos 3 crea otro mundo nuevo y primero espera close del negativo anterior. Puede haber 4 inicializaciones completas; el primer main sigue vivo durante los negativos. S09:104–147 y S10:44,129,169–178 incluyen compilaciones/remounts para la fixture: costo acumulado no medido en este run. El timeout120s de un caso ni su vencimiento garantizan settlement de I/O o de un hook/cleanup.",
+    "physicalAndHousekeeping": "S08:23–26 waitHeld/settled espera primero el RPC de estado/disponibilidad y luego verifica performance.now: el plazo de polling no precancela un RPC que no retorna. S08:14 close espera firstConnectionRestore→c2ScopeRestore→restoreMethods y en finally dispose→cleanup; un rechazo intermedio puede saltar restauraciones posteriores, un rechazo de dispose salta cleanup. S08:32 close(negative) precede a close(main) sin finally externo; si el primero rechaza, no se llama al segundo en esa invocación. Si un await no termina, el siguiente no se alcanza. Los métodos tampoco certifican cierre global; el rm exitoso del temp exterior no acredita ese teardown. No se ha observado ninguna de estas ramas en este run.",
+    "conditionalDefect": "Caso 19 S08:128–140 y caso 20 S08:142–147 arman upload-held e inician approveFirstConnection; sólo liberan la barrera mediante `firstConnectionRelease('fetch')` DESPUÉS de sus verificaciones. No hay finally local ni observador de rechazo inmediato del pending en estas rutas. En caso20, si S08:144 rechaza/lanza después de waitHeld, esa invocación no llama S08:145; S07 aún intenta count y después relanza. S09:339–347 primero busca SEND; sólo si existe congela Date.now (L342) ANTES de codificar/escribir/sincronizar/leer el ACK; finish del pequeño lease de ese lector no restaura Date.now. Falla antes de la congelación y falla después NO son equivalentes. Es determinista la omisión de la liberación por ese camino, NO el fallo de reseal/assert ni un bloqueo permanente.",
+    "propagation": "S09:310–326 obtiene la respuesta de fetch real de la fixture y la mantiene en held('fetch',response). S09:280 comprueba deadline original vs Date.now y flag cada <=10ms; un valor de Date.now válido, constante y anterior al deadline no progresa hacia éste. S09:270 sólo marca el flag, no demuestra que la promesa se asentó. S09:268/337 restaura reloj/métodos si AFTER lo alcanza, sin marcar release; si el deadline original ya pasó, el tick puede rechazar. S01:60–105 retiene timers y cálculo monotónico de lease/child; congelar Date.now de test no demuestra que todo watchdog/solicitud original deje de funcionar. stage-work:8–23 retiene la operación REAL hasta settlement; vencimiento lógico no elimina la exclusión. Nadie verificó caso20 ni congelación ni cleanup pendiente aquí.",
+    "hypotheses": [
+      {
+        "hypothesis": "Costo acumulado de trabajo serial legítimo: materialización/compilación, requests, snapshots, remounts y recreación de mundos; o repetidos fallos/esperas previos a los últimos casos.",
+        "toDiscriminate": "IDs y tiempos monotónicos de entradas/salidas de acción/count muestran si hay varias etapas largas o una abierta. No convertir elapsed en causalidad ni en cota inferior para otra ejecución."
+      },
+      {
+        "hypothesis": "Una acción/count, incluido el control de nativo retenido o el riesgo de reloj en caso20, permanece abierta, falla, o coincide con AFTER.",
+        "toDiscriminate": "Diario independiente de TAP + primer throw permitido; si la frontera es caso19/20 sólo identifica acción, no que hubo release/clock freeze/pendiente físico concreto."
+      },
+      {
+        "hypothesis": "Teardown o terminación del proceso después de resolver todas las acciones, o registros truncados.",
+        "toDiscriminate": "AFTER enter sin salida, AFTER retorno/throw, prefijo TAP y timeout nativo junto con controles de integridad; nunca inferir handle/worker vivo desde el mero timeout."
+      }
+    ],
+    "olderEvidenceLimit": "Diagnóstico histórico F9 run43821243410/1 en sus PROPIOS inputs recuperó 69 registros, 17 casos, 12 PASS/5 FAIL, última entrada LOST_ACK_DUPLICATE a 169455ms, sin AFTER. Da prueba de utilidad del registrador. No prueba este último caso ni el mismo error en 43965725604. W1 cuatro PASS con QA instrumental distinta no sustituye ni descarta ninguna hipótesis. El job completo W1 (incluye overhead, no cronometría por acción) duró 97s. Refuerza como pregunta revisable el coste fijo de compilaciones/mundos/after/terminación; no permite restarlo de 180s, multiplicarlo por cuatro, identificar caso20 o inferir una duración mínima."
+  },
+  "proposedSingleDiagnostic": {
+    "purpose": "Localizar por primera vez para el índice 26b la primera excepción observable, último par nativo completo, último avance cronológico y si AFTER/terminación se alcanzan dentro de los mismos techos. Una sola ocurrencia GREEN20, no calificación ni nuevo observador QA/W1. Puede resultar inconclusa.",
+    "reuseExactly": {
+      "driver": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "recorderBefore": "e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3",
+      "journalReader": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "journalVectors": "32777d8b2d5676688d4bf7546bf6bb8ed296e3b4",
+      "oldRunnerPreimage": "069e1ccb580bf06ea52b2b268441c1b540256841",
+      "oldContractPreimage": "a8b63e6c5e4bb38009bddc48633cfa7af78fa776",
+      "oldSchemaPreimage": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "oldOwnPartialReducer": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "currentFullOwnReader": "979c4fd2caadd75b47b3416275248a23310e3722",
+      "currentOwnZipAdmission": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+      "guard": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "custodyPreflight": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2"
+    },
+    "inputDiff": "Comparación estática entre los 17 elementos heredados de ambos paquetes: 14/17 idénticos (11/13 bodies + regresión + guard/preflight); difieren índice F9 f9f36a6→26b62b5, S08 65933f3→de8a51e y S09 ec57e55→3e1d4c2. S07 d4db10e y S10 9e7f89e son idénticos. Driver 9e29 conserva byte a byte desde la primera registración C2T1_CONNECTION hasta EOF del S07; antes sólo delega las mismas acciones/count/after y las marca. Viejo runner L147–152 sobrescribía S07 en su TEMP diagnóstico y usaba selección ecb5037, nominales F9 y custodia/frames de tres lanzamientos. No se puede ejecutar tal cual.",
+    "planForImmutableSources": "Dejar las 13 rutas canónicas y el calificador normal c230 idénticos ANTES y DESPUÉS, en Git y en el target de diagnóstico. Materializar/verificar 26b en uno solo de sus targets aislados. Agregar únicamente el driver D07 ya fijado a un nombre hermano bajo test/ y el módulo registrador; ejecutar el nombre hermano con sus mismas resoluciones relativas, los 20 mismos IDs y orden; no import doble de S07 ni `--test` por descubrimiento. Ajuste mínimo permitible en futura DATA: cambiar sólo alias D07 del registrador para cotejar la ruta hermana exacta en el stack, con before/after hash y diff; sin ello dejar los sitios del driver desconocidos y nunca identificarlos como el S07 congelado. S08/S09 se resuelven a sus hashes NUEVOS. No QA/Worker/PH/OP/M/S08/S09 instrumentation, build variant, nueva llamada de negocio, timers auxiliares, RPC o probe físico. Node v22.23.4/SDK1.2.1/lock/esbuild y Source normal. La selección normal GREEN `0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5` sólo identifica la selección de referencia; la nominación diagnóstica necesita manifiesto/hashes propios para los dos archivos, comando y mismo orden20, sin hacerse pasar por G normal.",
+    "scopeAndCustody": "Una sola ejecución nativa de los 20 casos GREEN; no BASE-red, batería 3/35, bootstrap ENOENT, MUTANT, regresiones ni W1. No reutilizar resultados previos como si fueran pruebas de la nueva ocurrencia. Conservar custodia en vivo: preflight de propiedad/remoción 10s (no es reejecutar los controles de negocio) MÁS el único hijo de diagnóstico, total dos lanzamientos comprobados, 2..8 procesos realmente observados sobre un target con tope8 propio. Unshare red sólo loopback, UID/GID original no-root, grupos vacíos, no-new-privs y guard preload aborta antes del test si insuficiente. Mantener comprobaciones de directorio/propiedad/dev/inode/nlink/0600/O_NOFOLLOW y cleanup/ausencia. Nunca llamar a esa custodia las 3 históricas ni las 6 full. Si Root requiere preflight distinto, se resuelve antes del gate; nunca relajar verificación de aislamiento.",
+    "limits": "Sin reset ni ampliación: 330000ms totales desde entrada del runner; 180000ms por hijo, incluso después de preflight min con restante global; 120000ms por caso y 7min job; leases origen 30s y leaves 5s originales, mismos contenidos/cookies sintéticos. No partir en subconjuntos, no paralelizar/duplicar mundos para ahorrar tiempo. Stdout 1MiB, stderr 64KiB, archive git 32MiB, journal <=32768B/128, outcome <=24576B, artifact privado 1 archivo/7d según nominal sellado; ZIP y log sujetos a límites OWN ya aprobados. No nuevo presupuesto.",
+    "output": "Sin volcar raw TAP, stdout, datos, stack ni identificadores privados. Capturar por child el estado real de spawn/exit/signal y bytes+SHA. Cada registro propio, síncrono y cerrado marca id/operación(action,count o AFTER.close)/enter,return,throw/sequence/elapsed; throw sólo enums y primer alias:línea:col admitidos o null. Releer un único journal estable antes de borrar target; separar prefijo TAP estrictamente ascendente/terminado y resultados realmente observados del diario. Mantener primer throw aunque el contador también falle. Endpoints posibles: acción abierta, contador, entre operaciones/casos, AFTER abierto, caso+AFTER, todos settle + timeout/espera de salida, terminado normalmente, desconocido. Torn/empty/fault/unstable/alias incompatible nunca significa cero trabajo o éxito. El journal puede perturbar tiempos: nunca explicar retroactivamente la ejecución anterior.",
+    "newGate": "Sí: DATA y revisión OWN de DIAGNÓSTICO, distinta de full419/W1. No usar a la inversa el lector full fallado ni importar productor como propio. Versionar nominal único nuevo de branch/message/WF/job/comando/artefacto, índices, alias actual y selección D07 real, sin reusar cerrados y sin inventar head/run/job. A partir de c2OwnReduce/c2OwnReadGreen, conservar regla N1 ventana y grupo reales; N2 impide native PASS del mismo id tras action/count throw en journal confiable; rechazar orden/IDs/alias/hash viejo, lectura torn o ambigua como frontera certera, custodia duplicada y mezcla de ocurrencias. Reutilizar admisión OWN actual de fuente raw del ZIP, entry único, CRC/inflado completo, body+LF idéntico al frame. Fixture-first sólo para el cambio de protocolo (buena captura parcial y tras close, variantes negativos mínimos antes de un único run), no volver a correr íntegros OWN419/W1/3+35 en la captura Source. Separar 2 frames propias de custodia y outcome si completo; diagnóstico/partial de infraestructura aparte; no emitir SYNTHETIC/DEPENDENCY ni ocho frames del full. Root debe sellar inventario, schema, marcadores, conteo y artefacto antes de autorizar. Nada preparado/ejecutado en este bloque.",
+    "exit": "Salida válida = mismo repo/commit/parent/tree + 13 hashes normales antes/después + stack aliases positivos + única API/job/step/attempt1+marcadores+archivo y custodia completa. Publicar primera excepción/último caso nativo y operación/AFTER, o UNKNOWN con motivo, siempre con alcance de la NUEVA ocurrencia. (1) earliest throw/frontier concreta: dirigir inspección a esa línea y a condiciones necesarias; (2) todos los eventos+AFTER settled pero timeout: investigar sólo el fin de proceso, no un registro de handles imaginario; (3) final normal: documentar no reproducción sin convertirla en calificación; (4) registro no fiable/no discrimina: cerrar inconcluso, no segunda captura automática. Preservar también cualquier fallo, cerrar, releer originales/modes/main/historia/WF removido/cero runs sobre close head. Sin siguiente ejecución ni Task2 salvo nueva evidencia y decisión Root."
+  },
+  "futureHygieneOnly": {
+    "status": "Aparte del diagnóstico; sin unfreeze y sin implementación/test inmediato. El riesgo de error-sin-release sí existe condicionalmente aun si nunca fue la causa actual.",
+    "minimalCandidate": "Bajo futura autorización test-only: hacer al único dueño de una barrera upload-held responsable del cleanup de éxito/error, como máximo una vez por barrera y por mundo. Vincular manejo temprano al pending original; el finally jamás deberá resolver el fetch con su respuesta válida mientras un request sin ACK negativo siga autorizado. Si el request ya está denegado/terminado demostrarlo con su propia promesa/response original antes de release normal; ante fallo previo/evidencia insuficiente usar sólo salida negativa privada de esa misma barrera que rechaza el hold y nunca entrega la Response válida, sin cambiar producto/lease/resultado de un caso positivo. Restaurar handler/clock sólo a su preimagen real y cerrar/disponer exactamente una vez; no adelantar el reloj, renovar la autoridad, reintentar fetch ni fingir drenaje. Si un release de resultado incierto ya se emitió no reenviar. Normal de reseal exitoso conserva la denegación original y las aserciones post-release. Si la seguridad no puede demostrarse, no aprobar finalmente liberar por conveniencia.",
+    "futureTestFirst": "Gate corto remotamente sólo si Root lo nomina: T1 tras fetchHeld, antes de instalar cualquier ACK negativo, inyectar throw original; T2 después de congelar y antes de retorno fiable (rechazo put/sync/read o aserción), distinto del camino exitoso. Preimagen RED debe fallar la aserción observable de limpieza/un release terminal, no matar el job por timeout y llamarlo prueba; utilizar fixture/spy de propiedad de la barrera sin crear autorización ni simular éxito de Source. GREEN comprueba la misma excepción primaria (incluido valor falsy si aplicable), settlement de esa promesa y esa barrera, rollback reloj/métodos y dispose/cleanup por mundo exactamente una vez, sin activación adicional, ACK de éxito nuevo ni receipt frente al snapshot anterior. Si el fallo se inyecta después del ACK negativo, conservar explícitamente ese ACK de prueba antes/después. Mutante que libera positivamente ANTES de la denegación con guard no instalado, y mutante que omite la limpieza de error, deben morir por sus controles nombrados independientemente; de lo contrario no promover la propuesta. Ninguna prueba sustituye el futuro full ni permite atribuir este timeout."
+  },
+  "performed": "Sólo lecturas Git de blobs, comparaciones de texto/JSON y huellas del informe. No consulta Actions/log/artifact independiente, Source eval/import/compile/tests, archivos/deps locales, cambios Source/refs/runs, infra, runtime, red de negocio o colaboración con otros agentes.",
+  "rollback": "Descartar este blob de informe sin afectar Source, refs ni historial.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
