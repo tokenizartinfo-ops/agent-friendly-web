@@ -1,0 +1,28 @@
+{
+  "schema": "afw.c2-notices-n1.own-close-readback.v1",
+  "observedAtUTC": "2026-11-16 10:46:30 UTC",
+  "head": "8505e3db56493c506b9603916b366924b5bb1715",
+  "tree": "f881863fc10a1da6dc0b71c97113a2f406328eb0",
+  "testedHead": "ef8e1e1f17f298708146e26001dfb41486d707cd",
+  "branch": "lab/afw-c2-own-receiver-20261116-notices-n1",
+  "originals": 3203,
+  "leaves": 3213,
+  "workflowRemoved": true,
+  "MainAndHistoricalUnchanged": true,
+  "closeHeadRuns": 0,
+  "SourceExecuted": false,
+  "nativePrimary": "10eb5188e0ecae2beccaf414e31a44ab1fc89239",
+  "runId": 43851316165,
+  "jobId": 133244296597,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
