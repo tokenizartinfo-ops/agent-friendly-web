@@ -1,0 +1,38 @@
+{
+  "schema": "AFW-C2-N3-CONTROLS-FIX2-CLOSE/1",
+  "atUTC": "2026-11-16 16:51:26 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix2",
+  "testedHead": "91ac03eae0a3ee384d23886bd2f814de54c59bc3",
+  "closedHead": "13ff68c37de9c4f3c71629cc39ed5521e3422447",
+  "closedTree": "9a2fff33cdb817a2cc7de678c369a61d8fa9696e",
+  "workflowAbsent": true,
+  "closeHeadRuns": 0,
+  "originalsPreserved": 3203,
+  "finalLeaves": 3234,
+  "primary": "6d2ae3f2396c1ef71ebba0263a55001422373000",
+  "proof": "3a8781f6a2646a3a00c521fc7f25b6a35d314ac8",
+  "native": {
+    "run": 43911561091,
+    "job": 133454520846,
+    "tests": 41,
+    "pass": 41,
+    "fail": 0
+  },
+  "mainUnchanged": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "historicalSourceUnchanged": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "reviewPending": true,
+  "sourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
