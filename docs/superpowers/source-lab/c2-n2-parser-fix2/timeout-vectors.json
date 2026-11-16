@@ -1,0 +1,5228 @@
+{
+  "schema": "afw.c2-n2-parser-fix2.vectors.v1",
+  "syntheticOnly": true,
+  "notSourceEvidence": true,
+  "authority": "7500203a0b5da273bd80834c9346812a6dae588b",
+  "review": "672f35f69b215defe77d5961cf43f049250d1106",
+  "originalLiteral": {
+    "condition": "timeout",
+    "writerFault": false,
+    "binding": {
+      "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+      "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+      "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+      "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+      "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+      "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+      "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+    },
+    "records": [
+      {
+        "sequence": 1,
+        "elapsedMs": 0,
+        "kind": "binding",
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      {
+        "sequence": 2,
+        "elapsedMs": 1,
+        "kind": "flow",
+        "id": "N2_CONNECTION",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 3,
+        "elapsedMs": 2,
+        "kind": "host-proof",
+        "call": 1,
+        "stage": "constructor",
+        "edge": "prepared",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": null,
+        "M": null,
+        "QA": null
+      },
+      {
+        "sequence": 4,
+        "elapsedMs": 3,
+        "kind": "host-proof",
+        "call": 1,
+        "stage": "constructor",
+        "edge": "returned",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": null,
+        "M": null,
+        "QA": null
+      },
+      {
+        "sequence": 5,
+        "elapsedMs": 4,
+        "kind": "host-proof",
+        "call": 2,
+        "stage": "assembly",
+        "edge": "prepared",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 6,
+        "elapsedMs": 5,
+        "kind": "host-proof",
+        "call": 2,
+        "stage": "assembly",
+        "edge": "returned",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 7,
+        "elapsedMs": 6,
+        "kind": "host-proof",
+        "call": 3,
+        "stage": "mount",
+        "edge": "prepared",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 8,
+        "elapsedMs": 7,
+        "kind": "host-proof",
+        "call": 3,
+        "stage": "mount",
+        "edge": "returned",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 9,
+        "elapsedMs": 8,
+        "kind": "host-proof",
+        "call": 4,
+        "stage": "adopt",
+        "edge": "prepared",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 10,
+        "elapsedMs": 9,
+        "kind": "host-proof",
+        "call": 4,
+        "stage": "adopt",
+        "edge": "returned",
+        "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "settingsEqual": true,
+        "callbackSame": true,
+        "referencesSame": true,
+        "compiledMatch": true,
+        "M": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "QA": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      {
+        "sequence": 11,
+        "elapsedMs": 10,
+        "kind": "flow",
+        "id": "N2_CONNECTION",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 12,
+        "elapsedMs": 11,
+        "kind": "flow",
+        "id": "N2_CONNECTION",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 13,
+        "elapsedMs": 12,
+        "kind": "flow",
+        "id": "N2_CONNECTION",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      },
+      {
+        "sequence": 14,
+        "elapsedMs": 13,
+        "kind": "flow",
+        "id": "N2_OAUTH",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 15,
+        "elapsedMs": 14,
+        "kind": "flow",
+        "id": "N2_OAUTH",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 16,
+        "elapsedMs": 15,
+        "kind": "flow",
+        "id": "N2_OAUTH",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 17,
+        "elapsedMs": 16,
+        "kind": "flow",
+        "id": "N2_OAUTH",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      },
+      {
+        "sequence": 18,
+        "elapsedMs": 17,
+        "kind": "flow",
+        "id": "N2_PHASE",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 19,
+        "elapsedMs": 18,
+        "kind": "flow",
+        "id": "N2_PHASE",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 20,
+        "elapsedMs": 19,
+        "kind": "flow",
+        "id": "N2_PHASE",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 21,
+        "elapsedMs": 20,
+        "kind": "flow",
+        "id": "N2_PHASE",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      },
+      {
+        "sequence": 22,
+        "elapsedMs": 21,
+        "kind": "flow",
+        "id": "N2_NOTICES",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 23,
+        "elapsedMs": 22,
+        "kind": "flow",
+        "id": "N2_NOTICES",
+        "operation": "action",
+        "edge": "throw",
+        "error": {
+          "name": "Error",
+          "code": null,
+          "site": null
+        },
+        "counters": null
+      }
+    ],
+    "native": {
+      "integrity": "prefix",
+      "cases": [
+        {
+          "id": "N2_CONNECTION",
+          "status": "pass"
+        },
+        {
+          "id": "N2_OAUTH",
+          "status": "pass"
+        },
+        {
+          "id": "N2_PHASE",
+          "status": "pass"
+        }
+      ],
+      "sourceFileFailure": false
+    }
+  },
+  "cases": [
+    {
+      "id": "P2_NO_BASELINE_THROW",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "Error",
+            "code": null,
+            "site": null
+          },
+          "counters": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": false,
+        "code": "PROBE_INVALID",
+        "integrity": "unknown",
+        "joined": false,
+        "old": {
+          "valid": true,
+          "code": "OK",
+          "joined": true,
+          "integrity": "prefix"
+        }
+      }
+    },
+    {
+      "id": "P2_BASELINE_NO_BEFORE_THROW",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "hook-state",
+          "stage": "baseline",
+          "callbackObserved": true,
+          "excludedTags": 1,
+          "newGuards": 0,
+          "fault": false
+        },
+        {
+          "sequence": 24,
+          "elapsedMs": 23,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "Error",
+            "code": null,
+            "site": null
+          },
+          "counters": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": false,
+        "code": "PROBE_INVALID",
+        "integrity": "unknown",
+        "joined": false,
+        "old": {
+          "valid": true,
+          "code": "OK",
+          "joined": true,
+          "integrity": "prefix"
+        }
+      }
+    },
+    {
+      "id": "P2_NO_BASELINE_RETURN",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": false,
+        "code": "PROBE_INVALID",
+        "integrity": "unknown",
+        "joined": false,
+        "old": null
+      }
+    },
+    {
+      "id": "P2_BASELINE_NO_BEFORE_RETURN",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "hook-state",
+          "stage": "baseline",
+          "callbackObserved": true,
+          "excludedTags": 1,
+          "newGuards": 0,
+          "fault": false
+        },
+        {
+          "sequence": 24,
+          "elapsedMs": 23,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": false,
+        "code": "PROBE_INVALID",
+        "integrity": "unknown",
+        "joined": false,
+        "old": null
+      }
+    },
+    {
+      "id": "P2_OPEN_BEFORE_BASELINE",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "old": null
+      }
+    },
+    {
+      "id": "P2_OPEN_BASELINE",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "hook-state",
+          "stage": "baseline",
+          "callbackObserved": true,
+          "excludedTags": 1,
+          "newGuards": 0,
+          "fault": false
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "old": null
+      }
+    },
+    {
+      "id": "P2_GET_ENTER_PENDING",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "hook-state",
+          "stage": "baseline",
+          "callbackObserved": true,
+          "excludedTags": 1,
+          "newGuards": 0,
+          "fault": false
+        },
+        {
+          "sequence": 24,
+          "elapsedMs": 23,
+          "kind": "probe",
+          "stage": "before",
+          "state": "observed",
+          "newFailures": null,
+          "correlated": null,
+          "position": null,
+          "correlators": [],
+          "sites": [],
+          "guardOrigin": "unknown",
+          "summary": {
+            "consumedTicket": null,
+            "stageApproval": null,
+            "receiptCount": null
+          }
+        },
+        {
+          "sequence": 25,
+          "elapsedMs": 24,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "enter",
+          "status": null,
+          "bodySettled": null,
+          "error": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "old": null
+      }
+    },
+    {
+      "id": "P2_GET_BODY_PENDING",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "hook-state",
+          "stage": "baseline",
+          "callbackObserved": true,
+          "excludedTags": 1,
+          "newGuards": 0,
+          "fault": false
+        },
+        {
+          "sequence": 24,
+          "elapsedMs": 23,
+          "kind": "probe",
+          "stage": "before",
+          "state": "observed",
+          "newFailures": null,
+          "correlated": null,
+          "position": null,
+          "correlators": [],
+          "sites": [],
+          "guardOrigin": "unknown",
+          "summary": {
+            "consumedTicket": null,
+            "stageApproval": null,
+            "receiptCount": null
+          }
+        },
+        {
+          "sequence": 25,
+          "elapsedMs": 24,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "enter",
+          "status": null,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 26,
+          "elapsedMs": 25,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "response",
+          "status": 200,
+          "bodySettled": null,
+          "error": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "old": null
+      }
+    },
+    {
+      "id": "P2_POST_ENTER_PENDING",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "hook-state",
+          "stage": "baseline",
+          "callbackObserved": true,
+          "excludedTags": 1,
+          "newGuards": 0,
+          "fault": false
+        },
+        {
+          "sequence": 24,
+          "elapsedMs": 23,
+          "kind": "probe",
+          "stage": "before",
+          "state": "observed",
+          "newFailures": null,
+          "correlated": null,
+          "position": null,
+          "correlators": [],
+          "sites": [],
+          "guardOrigin": "unknown",
+          "summary": {
+            "consumedTicket": null,
+            "stageApproval": null,
+            "receiptCount": null
+          }
+        },
+        {
+          "sequence": 25,
+          "elapsedMs": 24,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "enter",
+          "status": null,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 26,
+          "elapsedMs": 25,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "response",
+          "status": 200,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 27,
+          "elapsedMs": 26,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "return",
+          "status": 200,
+          "bodySettled": true,
+          "error": null
+        },
+        {
+          "sequence": 28,
+          "elapsedMs": 27,
+          "kind": "http",
+          "operation": "notices-post",
+          "edge": "enter",
+          "status": null,
+          "bodySettled": null,
+          "error": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "old": null
+      }
+    },
+    {
+      "id": "P2_POST_BODY_PENDING",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "hook-state",
+          "stage": "baseline",
+          "callbackObserved": true,
+          "excludedTags": 1,
+          "newGuards": 0,
+          "fault": false
+        },
+        {
+          "sequence": 24,
+          "elapsedMs": 23,
+          "kind": "probe",
+          "stage": "before",
+          "state": "observed",
+          "newFailures": null,
+          "correlated": null,
+          "position": null,
+          "correlators": [],
+          "sites": [],
+          "guardOrigin": "unknown",
+          "summary": {
+            "consumedTicket": null,
+            "stageApproval": null,
+            "receiptCount": null
+          }
+        },
+        {
+          "sequence": 25,
+          "elapsedMs": 24,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "enter",
+          "status": null,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 26,
+          "elapsedMs": 25,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "response",
+          "status": 200,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 27,
+          "elapsedMs": 26,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "return",
+          "status": 200,
+          "bodySettled": true,
+          "error": null
+        },
+        {
+          "sequence": 28,
+          "elapsedMs": 27,
+          "kind": "http",
+          "operation": "notices-post",
+          "edge": "enter",
+          "status": null,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 29,
+          "elapsedMs": 28,
+          "kind": "http",
+          "operation": "notices-post",
+          "edge": "response",
+          "status": 200,
+          "bodySettled": null,
+          "error": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "old": null
+      }
+    },
+    {
+      "id": "P2_SETTLED_FAILURE_PREFIX",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "hook-state",
+          "stage": "baseline",
+          "callbackObserved": true,
+          "excludedTags": 1,
+          "newGuards": 0,
+          "fault": false
+        },
+        {
+          "sequence": 24,
+          "elapsedMs": 23,
+          "kind": "probe",
+          "stage": "before",
+          "state": "observed",
+          "newFailures": null,
+          "correlated": null,
+          "position": null,
+          "correlators": [],
+          "sites": [],
+          "guardOrigin": "unknown",
+          "summary": {
+            "consumedTicket": null,
+            "stageApproval": null,
+            "receiptCount": null
+          }
+        },
+        {
+          "sequence": 25,
+          "elapsedMs": 24,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "Error",
+            "code": null,
+            "site": null
+          },
+          "counters": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "old": null
+      }
+    },
+    {
+      "id": "P2_SETTLED_SUCCESS_PREFIX",
+      "condition": "timeout",
+      "writerFault": false,
+      "binding": {
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+        "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+        "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "records": [
+        {
+          "sequence": 1,
+          "elapsedMs": 0,
+          "kind": "binding",
+          "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+          "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+          "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+          "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+          "slotHash": "5555555555555555555555555555555555555555555555555555555555555555",
+          "loggerHash": "6666666666666666666666666666666666666666666666666666666666666666",
+          "worldHash": "7777777777777777777777777777777777777777777777777777777777777777"
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 1,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 2,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 3,
+          "kind": "host-proof",
+          "call": 1,
+          "stage": "constructor",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": null,
+          "M": null,
+          "QA": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 4,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 5,
+          "kind": "host-proof",
+          "call": 2,
+          "stage": "assembly",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 6,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 7,
+          "kind": "host-proof",
+          "call": 3,
+          "stage": "mount",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 8,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 9,
+          "kind": "host-proof",
+          "call": 4,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 10,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 11,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 12,
+          "kind": "flow",
+          "id": "N2_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 13,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 14,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 15,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 16,
+          "kind": "flow",
+          "id": "N2_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 17,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 18,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 19,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 20,
+          "kind": "flow",
+          "id": "N2_PHASE",
+          "operation": "count",
+          "edge": "return",
+          "error": null,
+          "counters": {
+            "upload": 1,
+            "activation": 1,
+            "receipts": 1
+          }
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 21,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null,
+          "counters": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 22,
+          "kind": "hook-state",
+          "stage": "baseline",
+          "callbackObserved": true,
+          "excludedTags": 1,
+          "newGuards": 0,
+          "fault": false
+        },
+        {
+          "sequence": 24,
+          "elapsedMs": 23,
+          "kind": "probe",
+          "stage": "before",
+          "state": "observed",
+          "newFailures": null,
+          "correlated": null,
+          "position": null,
+          "correlators": [],
+          "sites": [],
+          "guardOrigin": "unknown",
+          "summary": {
+            "consumedTicket": null,
+            "stageApproval": null,
+            "receiptCount": null
+          }
+        },
+        {
+          "sequence": 25,
+          "elapsedMs": 24,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "enter",
+          "status": null,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 26,
+          "elapsedMs": 25,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "response",
+          "status": 200,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 27,
+          "elapsedMs": 26,
+          "kind": "http",
+          "operation": "notices-get",
+          "edge": "return",
+          "status": 200,
+          "bodySettled": true,
+          "error": null
+        },
+        {
+          "sequence": 28,
+          "elapsedMs": 27,
+          "kind": "http",
+          "operation": "notices-post",
+          "edge": "enter",
+          "status": null,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 29,
+          "elapsedMs": 28,
+          "kind": "http",
+          "operation": "notices-post",
+          "edge": "response",
+          "status": 200,
+          "bodySettled": null,
+          "error": null
+        },
+        {
+          "sequence": 30,
+          "elapsedMs": 29,
+          "kind": "http",
+          "operation": "notices-post",
+          "edge": "return",
+          "status": 200,
+          "bodySettled": true,
+          "error": null
+        },
+        {
+          "sequence": 31,
+          "elapsedMs": 30,
+          "kind": "host-proof",
+          "call": 5,
+          "stage": "adopt",
+          "edge": "prepared",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 32,
+          "elapsedMs": 31,
+          "kind": "host-proof",
+          "call": 5,
+          "stage": "adopt",
+          "edge": "returned",
+          "beforeHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "argumentHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "settingsEqual": true,
+          "callbackSame": true,
+          "referencesSame": true,
+          "compiledMatch": true,
+          "M": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "QA": {
+            "bytes": 17,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        {
+          "sequence": 33,
+          "elapsedMs": 32,
+          "kind": "flow",
+          "id": "N2_NOTICES",
+          "operation": "action",
+          "edge": "return",
+          "error": null,
+          "counters": null
+        }
+      ],
+      "native": {
+        "integrity": "prefix",
+        "cases": [
+          {
+            "id": "N2_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N2_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N2_PHASE",
+            "status": "pass"
+          }
+        ],
+        "sourceFileFailure": false
+      },
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "old": null
+      }
+    }
+  ],
+  "expectedCaseCount": 12,
+  "existingControlCounts": {
+    "accepted": 6,
+    "rejected": 21,
+    "probeChecks": 3,
+    "roundtrips": 6,
+    "witnessRejected": 2,
+    "slotChecks": 5,
+    "guardAccepted": 3,
+    "guardRejected": 7,
+    "guardTransitions": 6,
+    "invarianceChecks": 10,
+    "guardRecordRejected": 12
+  },
+  "sourceQualified": false,
+  "Task1Pass": false
+}
