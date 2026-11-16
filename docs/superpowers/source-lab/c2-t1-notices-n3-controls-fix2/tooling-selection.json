@@ -1,0 +1,163 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-selection.v1",
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "authority": {
+    "brief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
+    "rootSeal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semantic": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "prefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
+    "fixBrief": "95a51e869a966359eb33edf5c4ee5b3f47589db2"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix2",
+    "message": "AFW-C2-N3-CONTROLS-FIX2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls-fix2.yml",
+    "job": "c2-notices-n3-controls-fix2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "ids": [
+    "N3_CORE_CONTROLS",
+    "N3_CAUSAL_LITERALS",
+    "N3_TIMEOUT_PREFIX_CONTROLS",
+    "N3_AXIS_LITERALS",
+    "N3_SCHEMA_SELECTION_CONSTS",
+    "N3_NOTE_SYNC_NO_RPC",
+    "N3_ORIGINAL_NULL",
+    "N3_ORIGINAL_UNDEFINED",
+    "N3_ORIGINAL_FALSE",
+    "N3_ORIGINAL_ZERO",
+    "N3_ORIGINAL_EMPTY_STRING",
+    "N3_ORIGINAL_OBJECT",
+    "N3_PROMISE_IDENTITY",
+    "N3_EXISTING_SETTLED_HANDLER",
+    "N3_ROOT_IDENTITY",
+    "N3_REALM_RESET",
+    "N3_CROSS_SCOPE_LEASE",
+    "N3_SHARED_PROMISE",
+    "N3_NULL_BOUND_REF",
+    "N3_PREBIND_GAP",
+    "N3_PAIR_FORK",
+    "N3_FIRST_TARGET_ONLY",
+    "N3_SCOPE_ERROR_A_CHILD_B",
+    "N3_REPEATED_CLOSE",
+    "N3_CUT_LATE_SETTLEMENT",
+    "N3_SINK_FAULT",
+    "N3_PRIVATE_CAP",
+    "N3_SNAPSHOT_CAP",
+    "N3_WORST_SIZE",
+    "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+    "N3_ABORT_NESTED_OBSERVER_ORDER",
+    "N3_BOUND_PAIR_COVERAGE",
+    "N3_PREPAIR_FAILURE_AND_UNBOUND",
+    "N3_ACTUAL_CHILD_ABORT_MATRIX",
+    "N3_ACTUAL_PARENT_ABORT_MATRIX",
+    "N3_NESTED_ABORT_ORDER",
+    "N3_UNREACHED_ACTIVATION",
+    "N3_ORIGINAL_RACE_AXES",
+    "N3_ORIGINAL_REDUCER_CALLBACKS",
+    "N3_REVERSIBLES",
+    "N3_MAX_ENVELOPE_SIZE"
+  ],
+  "expectedNative": {
+    "cases": 41,
+    "pass": 41,
+    "fail": 0,
+    "cancel": 0,
+    "skip": 0,
+    "todo": 0,
+    "extra": 0,
+    "missing": 0
+  },
+  "executedModules": "Actual ledger factory, transformed original InitialLease factory/retain/wait/child/settled/stop/close callbacks; extracted original OP requestLease root factory and exact PH outer/pair onAbort bodies. Pure Source reader/logger/slot controls execute natively. Controlled DTO stimuli and unit wrappers are test-only. Full PH business function/QA bundle/M/Miniflare/esbuild/SDK/world do NOT execute in this graph.",
+  "controlCounts": {
+    "core": {
+      "accepted": 6,
+      "rejected": 21,
+      "probeChecks": 3,
+      "roundtrips": 6,
+      "witnessRejected": 2,
+      "slotChecks": 5,
+      "guardAccepted": 3,
+      "guardRejected": 7,
+      "guardTransitions": 6,
+      "invarianceChecks": 10,
+      "guardRecordRejected": 12
+    },
+    "causal": {
+      "accepted": 31,
+      "rejected": 32
+    },
+    "timeoutCases": 12,
+    "axisPositive": 3,
+    "axisNegative": 3,
+    "selectionConstCases": 4,
+    "originalUnits": 32,
+    "reducerExpected": {
+      "rawIncludingCut": 31,
+      "projected": 24,
+      "lateRawIncludingCut": 34,
+      "lateProjected": 24
+    }
+  },
+  "limits": {
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "proofBytes": 24576,
+    "snapshotEvents": 24,
+    "snapshotRecordBytes": 6144,
+    "journalBytes": 32768,
+    "outcomeBytes": 24576
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "preparedSeamCovering": "N3_REVERSIBLES also executes the pinned original S09 pure instrumentFirstConnection/instrumentFirstConnectionObserverIo functions and exact normalS10 T2 lease preparation statements as Node-only string transforms, then applies/reverses N3 on those actual prepared strings. Actual callback units run original raw InitialLease logic with N3 hooks; they do not execute compiled workerd QA or T2 console guard output. No imported SDK/esbuild/Miniflare dependencies.",
+  "fixRound": {
+    "round": 3,
+    "max": 5,
+    "beforePacket": "905519b006512c542ee38c08c8eaeb9f2bc7e125",
+    "actualBefore": {
+      "primary": "e32ef76d006c139745a7eceea9f3f23716a73e9b",
+      "proof": "e99e3b0f31ab3c6c109c8ad4c131b720c25f6a2b",
+      "tests": 41,
+      "pass": 6,
+      "fail": 35,
+      "phaseTransformDiagnostics": 34,
+      "reversiblesDiagnostics": 1,
+      "reducer": null
+    },
+    "after": "PENDING_ROOT_CLOUD",
+    "supplement": {
+      "bytes": 4291,
+      "sha256": "db1ff3cc391800c0996b8e686c808534429dcfd0a1056e29f6306e70d498ec78",
+      "gitBlob": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95",
+      "blob": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95",
+      "fullReadback": true
+    },
+    "allAnchors": {
+      "bytes": 12743,
+      "sha256": "e04ac361d61f80f7b1476c2843818373526c25af5c240776935c14d13c02e5fa",
+      "gitBlob": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+      "blob": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+      "fullReadback": true
+    },
+    "oracle": "Active selectors require measured===newMatches===newRequired===1. Historical2 is ONLY rejected negative, never an accepted active oracle.",
+    "harness": "PH deferred to SAME transform in allPH attach/FIRST_TARGET_ONLY/REVERSIBLES; cleanup registered beforeattach. Same41IDs/work bodies/noPHcontrolremoved."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-fix2-reversibles.v1",
+  "round": 3,
+  "beforePacket": "905519b006512c542ee38c08c8eaeb9f2bc7e125",
+  "beforeIndex": "cd41daeb48bdd5d0e6f5c452618e5ba546f39dc1",
+  "fullDiff": {
+    "bytes": 170446,
+    "sha256": "7fe7b5f08e6012a97453fb0a96c10dae1d127f1ed97b44a2b91ffd12717e827d",
+    "gitBlob": "edd5dacc84244ab5cbe1d53182fc60bf8158e683",
+    "blob": "edd5dacc84244ab5cbe1d53182fc60bf8158e683",
+    "fullReadback": true
+  },
+  "format": "Completeold/new file arrays include final emptyLF element; joinLF reconstructs exactUTF8 bothdirections. No trim/implicitLF.",
+  "newNomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix2",
+    "message": "AFW-C2-N3-CONTROLS-FIX2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls-fix2.yml",
+    "job": "c2-notices-n3-controls-fix2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "newTreeExpected": "OriginalBASE3203 modes/blobs plus30 named additions. Root verifies exact absentnewprefix/WF/expandedtree; author creates noRef/tree/run. Oldclosedfix1 branch/DATA untouched; close onlynewWF after exacthead/hash readback, preserveDATA+receipts.",
+  "compiledSource": "No product library changes in Git. Temporary QA transform retains all4 clock calls,3 otherhandlers andupload code; callbackbody/await/clock unchanged. Actual raw/prepared reversals and all-anchor guards run only futureRootnative; no local syntax/execution claims.",
+  "frozen": {
+    "ledger": {
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "gitBlob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "fullReadback": true
+    },
+    "reader": {
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "gitBlob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "fullReadback": true
+    },
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac"
+  },
+  "SourceQualified": false,
+  "Task1Pass": false
+}

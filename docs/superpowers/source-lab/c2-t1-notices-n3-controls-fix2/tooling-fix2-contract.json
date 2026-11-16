@@ -1,0 +1,77 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-fix2-contract.v1",
+  "round": 3,
+  "maxRounds": 5,
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "authority": {
+    "brief": "95a51e869a966359eb33edf5c4ee5b3f47589db2",
+    "priorPacket": "905519b006512c542ee38c08c8eaeb9f2bc7e125",
+    "actualPrimary": "e32ef76d006c139745a7eceea9f3f23716a73e9b",
+    "actualProof": "e99e3b0f31ab3c6c109c8ad4c131b720c25f6a2b",
+    "priorDiagnosticContract": "e02737a1626d3487f5a32e19e6ef6a7d04c8866e"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix2",
+    "message": "AFW-C2-N3-CONTROLS-FIX2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls-fix2.yml",
+    "job": "c2-notices-n3-controls-fix2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls-fix2/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "repair": "Single semantic activation-selector extension from two lines(upload+activation2) to same three original lines including describeActivation(1). Guard stays exact1; all original lines preserved. No first-match or permissive replacement. No catch edit: raw normalCatch1 and first(error)0 hypothesis rejected.",
+  "authorError": "Prior round2 vectors already recorded2/required1; prior oracle accepted2. This was an author verification error. Current tests require measured===newMatches===newRequired===1 for EVERY new selector; a synthetic2/required1 oracle must reject.",
+  "allAnchorAudit": {
+    "bytes": 12743,
+    "sha256": "e04ac361d61f80f7b1476c2843818373526c25af5c240776935c14d13c02e5fa",
+    "gitBlob": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+    "blob": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+    "fullReadback": true
+  },
+  "testFirst": {
+    "bytes": 23700,
+    "sha256": "bfff8d3388ac157986677c79fa151582e9bd08929ccde54c1bf5f33175fad45b",
+    "gitBlob": "7e4cae13603483c46e5e8ca7872290d00eb1de3a",
+    "blob": "7e4cae13603483c46e5e8ca7872290d00eb1de3a",
+    "fullReadback": true
+  },
+  "harness": "actual(t) prepares SAME actual Ledger/Lease/root without unrelated PH transformation. Cleanup registered before attach definition/return. Every PH attach invokes SAME transformN3Phase inside controlled setup error wrapper; FIRST_TARGET_ONLY and REVERSIBLES still invoke SAME transform. No PH control omitted;41 IDs and original callback/clock bodies retained. Unit-only private abortSource property removed because it is not a public producer API.",
+  "auditMeaning": "RAW counts are RAM literal metadata. Prepared counts are static expectations inferred from disjoint pinned original-preparer edits except catch. Future native REVERSIBLES executes original pure preparer and checks ALL raw/prepared anchors, original preparer needles/correlators, strict uniqueness, raw/prepared full reversals, upload block unchanged,4 clocks and3 otherhandlers unchanged. No local Source/preparer execution.",
+  "diagnostic": "UNCHANGED previous canonical256B/1failed outercase/41total/schema/id/phase/code. WeakMap-branded SETUP phase only; unbranded errors are opaque. No raw error/value/message/stack/getters/clock/path. Same proof shape, no additional phase/subphase.",
+  "actualBefore": {
+    "tests": 41,
+    "pass": 6,
+    "fail": 35,
+    "skip": 0,
+    "todo": 0,
+    "cancel": 0,
+    "diagnostics": {
+      "phaseTransform": 34,
+      "reversibles": 1
+    },
+    "corePassed": true,
+    "causal31_32Passed": true,
+    "reducer": null,
+    "diagnosticToolingExecuted": true,
+    "sourceBusinessExecuted": false
+  },
+  "after": "PENDING_ROOT_CLOUD; original-callback/reducer coverage has not passed; no Source/Task1 qualification.",
+  "frozen": {
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "reader": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "C": "STOPPED"
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
