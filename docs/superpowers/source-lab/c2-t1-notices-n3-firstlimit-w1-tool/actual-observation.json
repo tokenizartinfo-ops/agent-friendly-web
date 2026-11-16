@@ -1,0 +1,28 @@
+{
+  "schema": "AFW-N3-W1-TOOL-OBSERVATION/1",
+  "run": 43937983127,
+  "job": 133547543582,
+  "testedHead": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+  "primary": "cd8c53f779f4fb6f45c2d7218738892d2a54c87d",
+  "proof": "817b6a0e98c26aa3c21bbee0df00e7d3f358cd33",
+  "native": {
+    "beforeTests": 3,
+    "pass": 0,
+    "fail": 3,
+    "greenTests": 62,
+    "greenPass": 62,
+    "greenFail": 0
+  },
+  "schemaNote": "4e40ff3cb23c996795fcc0508b24f84fa4763acb",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

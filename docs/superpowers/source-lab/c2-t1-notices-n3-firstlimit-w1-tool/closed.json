@@ -1,0 +1,21 @@
+{
+  "schema": "AFW-N3-W1-TOOL-CLOSE/1",
+  "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+  "testedHead": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+  "action": "Only remove this one-use tooling workflow; preserve original3203 and unique evidence. No repeat/nativebusiness occurrence authorized.",
+  "workflowRemoved": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-tool.yml",
+  "mainUnchanged": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "historicalSourceUnchanged": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "reviewPending": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
