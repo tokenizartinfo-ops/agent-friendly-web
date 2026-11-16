@@ -1,9 +1,51 @@
 {
   "schema": "AFW-N3-W1-ACTIVE-CHECKPOINT/1",
-  "atUTC": "2026-11-16 19:52:02 UTC",
-  "phase": "N3-round4-Source-tooling-approved-OWN-native280-closed-fresh-review-pending",
-  "ownerUnavailableUntilUTC": "2026-11-16T20:00:00Z",
+  "atUTC": "2026-11-16 20:11:10 UTC",
+  "phase": "N3-W1-actual4PASS-GETPOST200-closed-actualreview-and-fullTask1-plan-active",
   "ownerActionNeeded": false,
+  "sourceCurrent": {
+    "head": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+    "tree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+    "originals": 3203,
+    "added": 41,
+    "leaves": 3244,
+    "refCreated": true,
+    "runCreated": false,
+    "SourceExecuted": false,
+    "captureGateHeld": false,
+    "activated": true,
+    "gate": "376b06bd46a15530734b9fd0f19f5065ea9fc9c0",
+    "run": 43945121668,
+    "job": 133572642517,
+    "actualPending": false,
+    "diagnosticCaptureAccepted": true,
+    "native": {
+      "pass": 4,
+      "fail": 0
+    },
+    "notices": {
+      "get": 200,
+      "post": 200,
+      "bodiesSettled": true
+    },
+    "sameMAsPriorFailedC": true,
+    "QADifferent": true,
+    "probes": {
+      "beforeCore": "observed",
+      "beforeCausal": "NO_ELIGIBLE",
+      "afterCore": "unavailable",
+      "causalCoverage": "unknown"
+    },
+    "primary": "6cfb0d0827ebe0cf8591d06d09e1ced0d7aedaaa",
+    "outcome": "325efbf73e0fe5ecea0713cf76df6b7d8cecd3b5",
+    "OwnAdmission": "2fdbd74df7127f13054cd6b72d76a349ebcb9db3",
+    "closed": "05d4e6ba2381ec3182705147d9554f459bbabcc8",
+    "close": "bd3550f1e06fb30d7f612d744fd15340a862fe8b",
+    "reviewer": "/root/n3_w1_own_native_review",
+    "reviewPending": true
+  },
   "toolNative": {
     "packet": "1c732aaf9854b43860e76335ee40b5ec0ca42f64",
     "index": "6145d2070af728964c5eb414de3a3b414c4d3646",
@@ -75,23 +117,20 @@
     "RootOwnRAMLoaderReady": true,
     "nativePending": false,
     "reviewer": "/root/n3_w1_own_native_review",
-    "reviewPending": true,
-    "finalSourceBinding": false
+    "reviewPending": false,
+    "finalSourceBinding": false,
+    "review": "21e8e4a3f2c1e7a617118b312baf574339ad56d3",
+    "verdicts": {
+      "SPEC": "PASS",
+      "QUALITY": "APPROVED"
+    }
   },
-  "sourcePrepared": {
-    "head": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
-    "tree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
-    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
-    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
-    "originals": 3203,
-    "added": 41,
-    "leaves": 3244,
-    "refCreated": false,
-    "runCreated": false,
-    "SourceExecuted": false,
-    "captureGateHeld": true
+  "next": "Read-only actual Source review + existing frozen fullTask1 qualifier/OWN inventories. No repeat W1 or causalobserver changes planned absent newmaterialevidence. Root must authorize exact complete qualification nomination afterplan/dataadmission.",
+  "actors": {
+    "actualReview": "/root/n3_w1_own_native_review",
+    "SourceQualificationPlan": "/root/n3_admission_repair4_design",
+    "OwnQualificationPlan": "/root/c2_v2_own_receiver_fix1"
   },
-  "next": "Wait actual OWN280 independent review; if accepted Root prepare exact Source capture gate/caller trust. Source branch/run still absent.",
   "SourceQualified": false,
   "Task1Pass": false,
   "nonclaims": {
