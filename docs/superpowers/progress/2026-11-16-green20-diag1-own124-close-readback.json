@@ -1,0 +1,75 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-OWN124-CLOSE-READBACK/1",
+  "timestampUTC": "2026-11-16 23:27:16 UTC",
+  "testedHead": "54971367ce9b656f06beae6657a85e839b96442f",
+  "closedHead": "5713d17f79bcd7342e43bc72bfb27e8d21757165",
+  "closedTree": "f4e96cd6ba314f6dafe2e9342536269afd89a84f",
+  "receipt": "53319dac7288a1ac0f619ad5cfabf1229d629dd2",
+  "primary": "d974205b15b8492ac8a8a748b52c767631165bbd",
+  "proof": "98b9b2c9639b1e9ea66408e5d3a3a7fd06ef07d8",
+  "leafCount": 3224,
+  "original3203Unchanged": true,
+  "other19NativeLeavesUnchanged": true,
+  "onlyWorkflowRemoved": true,
+  "twoEvidenceLeavesAdded": true,
+  "mainUnchanged": true,
+  "historicalUnchanged": true,
+  "closeHeadRuns": 0,
+  "native": {
+    "nativeTests": 124,
+    "positive": 26,
+    "negative": 98,
+    "exactOrderedIDs": true,
+    "counts": {
+      "expected": 124,
+      "observed": 124,
+      "passed": 124,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "missing": 0,
+      "extra": 0,
+      "duplicate": 0
+    },
+    "actualCommandStep": 4,
+    "APIContextJoined": true,
+    "proofSchemaSubsetVerified": true,
+    "proofCanonicalLF": true,
+    "bodyBindings": 20,
+    "ZIPStrictCRCFullInflateVerified": true,
+    "artifactListingDigestJoined": true,
+    "ownModelsExecuted": true,
+    "SourceBusinessExecuted": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    },
+    "zip": {
+      "bytes": 2430,
+      "sha256": "aa93dab2f7d82cd14559c6521fd7b048845e0b127f8116c460bdc635edd8186c",
+      "blob": "0dfe58f08602bb6939bfe3fecd0ea4b5d4d7a065"
+    },
+    "payload": {
+      "bytes": 5458,
+      "sha256": "378a443c73ef899ddb558a5b02d504e28d800f09dc65aa3ecc3cf428aeb84260",
+      "blob": "98b9b2c9639b1e9ea66408e5d3a3a7fd06ef07d8"
+    },
+    "rawLog": {
+      "bytes": 57140,
+      "sha256": "64a1ac80d2266bd2940fd969eb814727e8dadc364fe99e2faa4716a6f8d5f480",
+      "blob": "8e7f8871d1ffb3b232bd7b79a8cefb593635a652"
+    }
+  },
+  "SourceExecuted": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
