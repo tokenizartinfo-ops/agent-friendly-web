@@ -1,0 +1,136 @@
+{
+  "schema": "afw.c2-notices-n3.root-abort-event-matrix.v1",
+  "atUTC": "2026-11-16 14:43:36 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "earlySeal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432"
+  },
+  "scope": "Clarify existing fixed event vocabulary from actual original callback sites; no extra Source reaction, callback, listener, timer, authority read or business change.",
+  "rows": [
+    {
+      "kind": "abort-observed",
+      "site": "root-abort",
+      "roles": [
+        "root"
+      ],
+      "cause": "unknown",
+      "position": "After original shared controller.abort(), including nested synchronous listeners."
+    },
+    {
+      "kind": "abort-observed",
+      "site": "root-finish",
+      "roles": [
+        "root"
+      ],
+      "cause": "explicit-finish",
+      "position": "After original finish controller.abort(); actual close transition separately observed."
+    },
+    {
+      "kind": "abort-observed",
+      "site": "initial-stop",
+      "roles": [
+        "outer",
+        "target-pair"
+      ],
+      "cause": "unknown",
+      "position": "After original shared factory controller.abort(); no timer/narrow/close trigger inference."
+    },
+    {
+      "kind": "abort-observed",
+      "site": "initial-child",
+      "roles": [
+        "activation-child",
+        "pair-child"
+      ],
+      "cause": "unknown",
+      "position": "After SAME original shared child abort callback c.abort(); actual affected selected child only. Nullable private alias prevents TDZ; no root inference."
+    },
+    {
+      "kind": "abort-observed",
+      "site": "pair-parent-abort",
+      "roles": [
+        "target-pair"
+      ],
+      "cause": "parent-abort",
+      "position": "After SAME existing parent listener's clock.close() returns, including nested close/stop notes."
+    },
+    {
+      "kind": "abort-observed",
+      "site": "outer-parent-abort",
+      "roles": [
+        "outer"
+      ],
+      "cause": "parent-abort",
+      "position": "After SAME existing parent listener's clock.close() returns, including nested close/stop notes."
+    },
+    {
+      "kind": "child-finally",
+      "site": "initial-child-finally",
+      "roles": [
+        "activation-child",
+        "pair-child"
+      ],
+      "cause": "finally",
+      "position": "After original alive=false/clear/remove/c.abort sequence. Only child-finally here; no second invented abort-observed and no closed-transition."
+    },
+    {
+      "kind": "close-call",
+      "site": "root-finish",
+      "roles": [
+        "root"
+      ],
+      "cause": "explicit-finish"
+    },
+    {
+      "kind": "closed-transition",
+      "site": "root-finish",
+      "roles": [
+        "root"
+      ],
+      "cause": "explicit-finish"
+    },
+    {
+      "kind": "close-call",
+      "site": "initial-close",
+      "roles": [
+        "outer",
+        "target-pair"
+      ],
+      "cause": "unknown"
+    },
+    {
+      "kind": "closed-transition",
+      "site": "initial-close",
+      "roles": [
+        "outer",
+        "target-pair"
+      ],
+      "cause": "unknown"
+    }
+  ],
+  "excludedCombinations": [
+    "close-call at pair-parent-abort, outer-parent-abort or pair-finally",
+    "closed-transition of activation-child or pair-child",
+    "abort-observed emitted from child finally in addition to child-finally",
+    "deadline/timer/race attribution from shared abort callbacks",
+    "pair-finally as an additional public lifecycle marker in this version"
+  ],
+  "completeness": "For joined-complete, parent-abort marker follows an already represented closed-transition of the SAME bound clock. A prefix with an explicit observation deficit may preserve uncertainty; never turn missing closure into complete. Repeated legitimate abort observations with distinct sourceSequence remain valid and do not replace firstClose/firstError.",
+  "meaning": "parent-abort names the original parent-listener path only; it is not the initiating physical trigger, deadline expiry, first cause or race winner. Nested child/factory close notes may precede parent marker and OP root-abort marker. Arrival at Node does not define Source effect order.",
+  "requiredControls": "Independent positives for each child role, each parent marker, repeated legitimate observations and nested ordering; negatives for wrong role/cause, fake child transition, extra close-call marker, duplicate sequence and joined-complete marker lacking prior same-clock closure. Source tests must invoke actual original seam callbacks, not models alone.",
+  "SourceExecutionAuthorizedHere": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
