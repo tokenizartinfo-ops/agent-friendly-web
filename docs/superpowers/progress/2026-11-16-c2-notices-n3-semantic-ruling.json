@@ -1,0 +1,62 @@
+{
+  "schema": "afw.c2-notices-n3.root-semantic-ruling.v1",
+  "atUTC": "2026-11-16 14:29:29 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "immutable Git DATA / Root documentation",
+  "resourceId": "docs/finite-pcoff-continuation-20261103",
+  "allowedAction": "clarify diagnostic DTO and bounded causal replay semantics; author immutable DATA only",
+  "authority": {
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "earlySeal": "8a9d366868d4be5593866637417c356bf4783e1d"
+  },
+  "privateObservation": {
+    "addOnly": "entityRef: actual affected original lease reference or null",
+    "rootResolution": "Only explicit rootRef or already-bound SAME actual leaseRef/promiseRef resolve root. entityRef, callRef, Error, function, ordinal, label and phase are never independent root resolvers.",
+    "conflict": "If affected entity is already bound to another root, ambiguity is permanent; never choose the first association.",
+    "outOfFocus": "A relevant first error may retain its actual affected entity privately while exporting lease:null. No requirement to register every routine child.",
+    "limits": "All retained identity and prebinding-gap bookkeeping count toward fixed private caps. Prebinding gaps cannot be replayed retroactively into complete history. No new reactions, listeners, callbacks, authority/context reads, signature or business changes."
+  },
+  "publicGraph": {
+    "roles": "At most one root, outer, activation-child, target-pair and selected pair-child. The eight-lease cap is a ceiling, not permission to export other branches.",
+    "parents": "root->outer->activation-child and root->target-pair->pair-child; pair is not child of activation.",
+    "promiseLease": "Canonical original WORKscope among activation-child, target-pair, selected pair-child; never routine root/outer retainer ownership.",
+    "targetPairPromise": "The exact original Promise returned by the selected observeOwnerPhasePair invocation, distinct from its internal run() Promise. Existing original retention/settlement reactions only. Fold repeats to immutable first public observations, preserving original callback results and pendingWork.delete true then false."
+  },
+  "siteMatrix": {
+    "check-threw/initial-holders": "Factory holders/check: outer or target-pair, or null when affected factory is outside focus; never root or child.",
+    "check-threw/initial-child": "Child assertion: activation-child or selected pair-child, or null outside focus.",
+    "root-finish close-call/closed-transition": "root only",
+    "initial-close close-call/closed-transition": "outer or target-pair only",
+    "child lifecycle": "Original child finally/abort observations only; no fabricated close() transition or firstClose.",
+    "error propagation": "One thrown object may appear at multiple actual observation sites. Identity preserves propagation, not a new initiating cause."
+  },
+  "coverage": {
+    "prePairFailure": "A fully observed target throw before pair-enter may be joined-complete without target-pair, pair promises or pair closes.",
+    "enteredUnbound": "pair-enter followed by missing real binding/initialization is prefix/unknown with explicit UNBOUND or relevant gap; never fabricate a complete pair.",
+    "boundPairComplete": "When pair entered and is bound, joined-complete requires first retention and settlement observation of that exact call-returned Promise and the actual pair clock first-close/finally observation.",
+    "otherPromises": "Do not require all other selected promise settlements for coverage complete. A missing handler observation does not prove physical pending work or drain.",
+    "ancestors": "Include every relevant observed ancestor abort/first-close. Complete does not require all ancestors to have closed; absence means unobserved, not open.",
+    "meaning": "Complete means declared focus observation coverage through cut only. No global causal, no business completion, no native drain and no cryptographic private identity authentication."
+  },
+  "sourceCorrectionReported": {
+    "vectors": "79ac1e8a8375bf2c210238c91f88668361a40375",
+    "bytes": 371781,
+    "sha256": "bcd46c9974b582f4be9bce9264bcdd8a19918447688c8677c07683f6aec4d4fa",
+    "description": "Four AB initial-holders child occurrences changed to initial-child; old vectors preserved. Root full readback still pending."
+  },
+  "next": "Source writer updates contract/seams/index and immutable helper/transforms; OWN writer applies independent B1 controls. Full outer envelope and native gates remain pending.",
+  "SourceExecutionAuthorizedHere": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
