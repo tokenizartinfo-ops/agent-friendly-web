@@ -1,0 +1,55 @@
+{
+  "schema": "AFW-N3-W1-SOURCE-CLOSE-READBACK/1",
+  "head": "05d4e6ba2381ec3182705147d9554f459bbabcc8",
+  "tree": "8c1761b9428e6d897bbfb7c81bf5e88969bc9967",
+  "parent": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+  "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+  "originals": 3203,
+  "leaves": 3245,
+  "workflowRemoved": true,
+  "reviewPending": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "verified": true,
+  "MainAndHistoricalUnchanged": true,
+  "closeHeadRuns": 0,
+  "receipts": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/actual-observation.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a2d12fb3b7a1ba3fb0e88a294e2b22951d294ea5"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/closed.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0ddd2cab687ee8ed89705863fbe4cb9130f458e5"
+    }
+  ],
+  "currentSlice": {
+    "pass": 4,
+    "fail": 0,
+    "noticesGET": 200,
+    "noticesPOST": 200,
+    "bodiesSettled": true,
+    "all5M_QACompared": true
+  },
+  "limitations": {
+    "historical503CauseUnknown": true,
+    "MIdenticalToPriorFailedC": true,
+    "QADifferentObserver": true,
+    "before": "NO_ELIGIBLE",
+    "after": "unavailable",
+    "causal": "unjoined/unknown"
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
