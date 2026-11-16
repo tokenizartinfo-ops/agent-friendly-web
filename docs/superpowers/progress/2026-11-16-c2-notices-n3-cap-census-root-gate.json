@@ -1,0 +1,288 @@
+{
+  "schema": "AFW-N3-CAP-CENSUS-ROOT-GATE/1",
+  "atUTC": "2026-11-16 18:29:41 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "packet": "7e422153658322797ea05adba3b1a519b8ec728a",
+  "index": "eddf0e03c94817509f02a334a8e73844728538f1",
+  "ruling": "9b4fb9eb4672847f6e5c8613c34f337569262ff1",
+  "clarification": "7ed9f2f3a3d0b29690102000e8eb308a41d1ca63",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-cap-census",
+    "message": "AFW-C2-N3-CAP-CENSUS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-cap-census.yml",
+    "job": "c2-notices-n3-cap-census",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/",
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+    "node": "22.23.4",
+    "attempt": 1,
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "contents": "read",
+    "artifactDays": 7
+  },
+  "head": "4b7170fb8146b7aa9208f0ae6661a54828955782",
+  "tree": "dc889308e50967d561478724c1479a7653cb0aeb",
+  "rootHashes": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-qa-ledger.mjs",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-qa-compiler.mjs",
+      "blob": "94e30c896056dc35b3bb75b072022644c68bfb74",
+      "bytes": 12694,
+      "sha256": "624ef2a8507643936aa9564bb0f978b11e31572b49c5678a6e6c4706af9ea255",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-unit-controls.mjs",
+      "blob": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+      "bytes": 21907,
+      "sha256": "8bf6a9f33a46c15f24e04b89fd6b6068b8197cb4eb9aea42c41ce7b0a1916076",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-reader.mjs",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-trace-reader.mjs",
+      "blob": "4878edb13dad6a9421c457cc850a370d75b84b1c",
+      "bytes": 11567,
+      "sha256": "e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-core-controls.mjs",
+      "blob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542",
+      "bytes": 13179,
+      "sha256": "fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-trace-controls.mjs",
+      "blob": "adff3fbc4649f95389b03896ff82bc7ed538c516",
+      "bytes": 854,
+      "sha256": "ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-logger.mjs",
+      "blob": "4eeaad011444e566f2e0cc99bd897e4a01848a77",
+      "bytes": 8370,
+      "sha256": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-slot.mjs",
+      "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+      "bytes": 2072,
+      "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-vectors.json",
+      "blob": "ce6aa394580a0c26e5fe5c9006cafe06db109530",
+      "bytes": 915177,
+      "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-reducer-vectors.json",
+      "blob": "8881c57552b88cd757579b6de120e1f4fca0304c",
+      "bytes": 43673,
+      "sha256": "acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/schema.json",
+      "blob": "1c336fe190816b46223546971afcf34b2c216089",
+      "bytes": 29785,
+      "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/normal-lease.txt",
+      "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+      "bytes": 2257,
+      "sha256": "a5310b6f1ea8a34e173292b9e72ecf329840211985bdb043d5154b4d434bc03e",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/normal-op.txt",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/normal-phase.txt",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/normal-publication.txt",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/normal-world.txt",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/observer-world.txt",
+      "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+      "bytes": 89873,
+      "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/contract.json",
+      "blob": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+      "bytes": 19539,
+      "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/seams.json",
+      "blob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+      "bytes": 14141,
+      "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-unfocused-routine-vectors.json",
+      "blob": "c26bdbaa9d94df8c1e3a3f281d631180023af020",
+      "bytes": 1325,
+      "sha256": "6d2655b173310765608610e69b47d1b667bd27b83197678dded4dc66b53e660d",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/fix2-vectors.json",
+      "blob": "7e4cae13603483c46e5e8ca7872290d00eb1de3a",
+      "bytes": 23700,
+      "sha256": "bfff8d3388ac157986677c79fa151582e9bd08929ccde54c1bf5f33175fad45b",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/tooling-fix2-contract.json",
+      "blob": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95",
+      "bytes": 4291,
+      "sha256": "db1ff3cc391800c0996b8e686c808534429dcfd0a1056e29f6306e70d498ec78",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/ph-anchor-audit.json",
+      "blob": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+      "bytes": 12743,
+      "sha256": "e04ac361d61f80f7b1476c2843818373526c25af5c240776935c14d13c02e5fa",
+      "reusedRootHash": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/n3-census-controls.mjs",
+      "bytes": 9884,
+      "sha256": "b237e1a12a4e6df76998fcd015d5959f14857c51f9ee97bc5ce1ae8b54226dd0",
+      "blob": "e372df1adb3073912d722c836215db705dd7b391"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/census-vectors.json",
+      "bytes": 11987,
+      "sha256": "378d83c4acb05b61ca3a55d3ab21b8f0fc58768a0a8a12352fc490b4ce186f3f",
+      "blob": "00685a137f17834ff355cb2cae15285d8e9e2fd4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/census-contract.json",
+      "bytes": 9092,
+      "sha256": "ff2a82520fb1cd69aa7d29f1a19a1df2ba00cb685be0847f16877537e222aa55",
+      "blob": "d255278df50c70f2b8f09b3b1ed217fa059e22dd"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/census-selection.json",
+      "bytes": 3809,
+      "sha256": "971776a9bdb14459d82eaceb649fe85565e3866d3be3fc9cccdeebcc7d8e8700",
+      "blob": "fb241bc06204e5d1401822ad92679ec20665391d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+      "bytes": 24109,
+      "sha256": "90ebfd267eff1e80925412d5b4d38833904566b9a6cde250548aaf6d8245e87e",
+      "blob": "8215a69b7d2dfe46dbdcefc7dd963a3c08a86f0a"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/census-proof-schema.json",
+      "bytes": 13044,
+      "sha256": "f97e573c087c67286f44df0daa6056d99dac36d254b6bda162abf03f1c0e2650",
+      "blob": "33ca2d867e04eb071aa7a0a5b4d3162e3686fce5"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/report.json",
+      "bytes": 14728,
+      "sha256": "4af433d4bcc6aa7abb01ac698a9b1b13979d8d924a00990a957f9614c52a5e9d",
+      "blob": "6bd388642ad07c4cbcb0750fe923cd8447682ae0"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/reversibles.json",
+      "bytes": 3618,
+      "sha256": "5bf97b5efcb9fd9d30e1d5bc2d77a7fffbef90fa68c3036b4958fab040a88ff9",
+      "blob": "c957e46eec62ec0dc3864a2f3bb180e71cb0dfbd"
+    },
+    {
+      "path": ".github/workflows/afw-c2-notices-n3-cap-census.yml",
+      "bytes": 1441,
+      "sha256": "55b2037eb153948738effc30d0599a80aaf95bb28ed63d54211b8ad67bc81e3f",
+      "blob": "02f5f487199e2f5273d2fb56c0185a6fb7dbdc96"
+    },
+    {
+      "path": "fullDiff",
+      "bytes": 151910,
+      "sha256": "62c7b5551d327a4d49358a087781ead6f4cc6368725086dbf7c5c777ba08120a",
+      "blob": "b662485e62e28ad5233a3f896c5f224b62601bfe"
+    },
+    {
+      "path": "index",
+      "bytes": 22794,
+      "sha256": "9138cd210a4f0987e4ee3816bda7a0ff64eb5419e357ce7b04b9cbee6cfda931",
+      "blob": "eddf0e03c94817509f02a334a8e73844728538f1"
+    }
+  ],
+  "originals": 3203,
+  "adds": 33,
+  "leaves": 3236,
+  "fullReversals": 7,
+  "old41IDsAndBodiesPreserved": true,
+  "controls": 47,
+  "inputHashes": 28,
+  "frozenLedger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+  "frozenCompiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+  "allowedAction": "fresh nominated tooling branch once; fixedNode47controls onunchangedobserver/originalcallbacks; no npm/world/request; primaryonce; closeonlynewWF",
+  "classification": "Reproducing legacy failure is diagnostic, not repair. Desired gap→lease net0 remainsRED in unchangedledger; fresh2rootDTOgraphNO_ELIGIBLE doesnotprove actualHTTP/nativeeligibility/census.",
+  "rollback": "Preserve sane primary+proof, remove onlynewcensusWF, keepBASE3203/SourceDATA, addreceipts/CAS/readback/Main/history/0closeheadruns",
+  "sourceBusinessExecuted": false,
+  "observerRepair": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
