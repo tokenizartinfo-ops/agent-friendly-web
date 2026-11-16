@@ -1,0 +1,161 @@
+{
+  "schema": "afw.c2-notices-n2.reversible-node-overlays.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "normalIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "convention": "UTF16 half-open [start,end) indexes into complete before string; replace hunks descending by start. Reverse: for each ascending before hunk shift start by accumulated (after.length-before.length); replace after with before descending by shifted start. All bytes/LF explicit; no trim/EOF inference. Full before/after bodies separately pinned. Text equality checks only, no Source parse/evaluation/execution.",
+  "files": [
+    {
+      "sourceIndex": 7,
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "before": {
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+        "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "gzipBytes": 1050
+      },
+      "after": {
+        "bytes": 1769,
+        "sha256": "cf8b73a6ddc0d9601830dadb13d428555b1e10e9ca3549c45f56787ae3efc79a",
+        "gitBlob": "e50a5292dfb31a7ba9d76f2ef2c28a1f58d575c0",
+        "blob": "e50a5292dfb31a7ba9d76f2ef2c28a1f58d575c0",
+        "fullReadback": true
+      },
+      "hunks": [
+        {
+          "start": 0,
+          "end": 38,
+          "before": "import test,{after} from 'node:test';\n",
+          "after": "// DIAGNOSTIC N2 ONLY. Normal Source20 remains separately pinned.\nimport test,{after as nativeAfter} from 'node:test';\n"
+        },
+        {
+          "start": 163,
+          "end": 987,
+          "before": "let w;\nafter(async()=>{await w?.close();});\nconst fixed=(id,phase,work)=>test(id,{timeout:120000},async()=>{\n assert(w||id==='C2T1_CONNECTION');\n let actionThrew=false,counterThrew=false,actionError,counterError,counts;\n try{await work();}catch(error){actionThrew=true;actionError=error;}\n try{counts=w?await w.counts():null;}catch(error){counterThrew=true;counterError=error;}\n // Missing counter facts cannot produce a Source frame or a qualifying receipt.\n if(!counterThrew&&counts!==null&&counts!==undefined){\n  const passed=!actionThrew;\n  console.info('C2SOURCE '+JSON.stringify({id,status:passed?'pass':'fail',phase,counters:counts,code:passed?'OK':'TEST_FAILED'}));\n }\n // Preserve the exact original thrown value, including null or undefined.\n if(actionThrew)throw actionError;\n if(counterThrew)throw counterError;\n",
+          "after": "import {ready,flow,blocked,after,captureFault,guardFinal} from './n2-helper.mjs';\nlet w,prerequisiteFailed=false;\nnativeAfter(async()=>{after('enter');try{await w?.close();after('return');guardFinal();}catch(error){after('throw',error);guardFinal();throw error;}});\nconst run=(id,work)=>test(id,{timeout:120000},async()=>{\n if(prerequisiteFailed){blocked(id);const error=Error('N2 prerequisite blocked');error.code='PREREQUISITE_BLOCKED';throw error;}\n let actionThrew=false,countThrew=false,actionError,countError;\n flow(id,'action','enter');\n try{assert(ready());if(id==='N2_NOTICES')await w.n2Before();await work();flow(id,'action','return');}\n catch(error){actionThrew=true;actionError=error;flow(id,'action','throw',error);}\n if(id==='N2_NOTICES'){try{await w.n2After();}catch{captureFault();}}\n flow(id,'count','enter');\n try{const counters=w?await w.counts():null;flow(id,'count','return',null,counters);}\n catch(error){countThrew=true;countError=error;flow(id,'count','throw',error);}\n if(actionThrew||countThrew)prerequisiteFailed=true;\n if(actionThrew)throw actionError;if(countThrew)throw countError;\n"
+        },
+        {
+          "start": 991,
+          "end": 2785,
+          "before": "fixed('C2T1_CONNECTION','connection',async()=>{\n w=await createFiniteCoupledOwnerWorld();\n await w.approve('connection');\n assert.deepEqual(await w.counts(),{upload:1,activation:1,receipts:1});\n});\nfixed('C2T1_OAUTH','oauth',async()=>{await w.oauth();});\nfixed('C2T1_HANDLE','negative',async()=>{await w.invalidForm('handle');});\nfixed('C2T1_PROJECTREF','negative',async()=>{await w.invalidForm('projectRef');});\nfixed('C2T1_SUBJECT','negative',async()=>{await w.invalidSubject();});\nfixed('C2T1_PHASE_RENAME','negative',async()=>{await w.corruptThenDeny('phase');});\nfixed('C2T1_SOURCE_BYTES','negative',async()=>{await w.corruptThenDeny('module');});\nfixed('C2T1_APPROVAL','negative',async()=>{await w.corruptThenDeny('approval');});\nfixed('C2T1_PREDECESSOR','negative',async()=>{await w.corruptThenDeny('predecessor');});\nfixed('C2T1_GRANT_REVOKED','negative',async()=>{await w.corruptThenDeny('grant');});\nfixed('C2T1_EXTRA_KEY','negative',async()=>{await w.corruptThenDeny('extra');});\nfixed('C2T1_NOTICES','notices',async()=>{\n await w.approve('notices');\n assert.deepEqual(await w.counts(),{upload:2,activation:2,receipts:2});\n});\nfixed('C2T1_MONITOR_COOKIE','monitor',async()=>{await w.monitorWrongCookie();});\nfixed('C2T1_MONITOR','monitor',async()=>{await w.monitor();});\nfixed('C2T1_SCOPE_MISSING','scope',async()=>{await w.noScope();});\nfixed('C2T1_FINITE','finite',async()=>{\n await w.approve('finite');\n assert.deepEqual(await w.counts(),{upload:3,activation:3,receipts:3});\n});\nfixed('C2T1_SELECTION','selection',async()=>{await w.selection();});\nfixed('C2T1_LOST_ACK_DUPLICATE','negative',async()=>{await w.lostAckDuplicate();});\nfixed('C2T1_UNRESOLVED_WRITER','negative',async()=>{await w.heldWriter();});\nfixed('C2T1_OWN_PROMISE','negative',async()=>{await w.ownPromise();});\n",
+          "after": "run('N2_CONNECTION',async()=>{w=await createFiniteCoupledOwnerWorld();await w.approve('connection');assert.deepEqual(await w.counts(),{upload:1,activation:1,receipts:1});});\nrun('N2_OAUTH',async()=>{await w.oauth();});\nrun('N2_PHASE',async()=>{await w.corruptThenDeny('phase');});\nrun('N2_NOTICES',async()=>{await w.approve('notices');assert.deepEqual(await w.counts(),{upload:2,activation:2,receipts:2});});\n"
+        }
+      ],
+      "checks": {
+        "forwardExact": true,
+        "reverseExact": true,
+        "beforeFinalLf": true,
+        "afterFinalLf": true
+      }
+    },
+    {
+      "sourceIndex": 8,
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "before": {
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+        "gitBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "gzipBytes": 5413
+      },
+      "after": {
+        "bytes": 19595,
+        "sha256": "efee9a74a2c464cda436b0d938911484e630d1ab1d9540c4ee5ee093289f72d8",
+        "gitBlob": "8ae7fe99ebdc791f786d39243649e2672ad90ec0",
+        "blob": "8ae7fe99ebdc791f786d39243649e2672ad90ec0",
+        "fullReadback": true
+      },
+      "hunks": [
+        {
+          "start": 1574,
+          "end": 1974,
+          "before": " const r=await f.call('/connections/finite-prepare',{headers:headers(f)}),status=r.status,text=await r.text();assert.equal(status,200);\n const handle=/name=\"handle\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],projectRef=/name=\"projectRef\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],cookie=r.headers.get('set-cookie')?.split(';')[0];assert(handle&&projectRef&&cookie);return {handle,projectRef,cookie,text};\n",
+          "after": " let r,status=null,text;n1Http('notices-get','enter');\n try{r=await f.call('/connections/finite-prepare',{headers:headers(f)});status=r.status;n1Http('notices-get','response',status);text=await r.text();n1Http('notices-get','return',status,true);}catch(error){n1Http('notices-get','throw',status,status===null?null:false,error);throw error;}\n assert.equal(status,200);\n const handle=/name=\"handle\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],projectRef=/name=\"projectRef\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],cookie=r.headers.get('set-cookie')?.split(';')[0];assert(handle&&projectRef&&cookie);n1Form(handle);return {handle,projectRef,cookie,text};\n"
+        },
+        {
+          "start": 3447,
+          "end": 3447,
+          "before": "",
+          "after": "  n2Before(){return n2BeforeProbe(()=>plain(main.stub.firstConnectionProbe()));},\n  n2After(){return n2AfterProbe(()=>plain(main.stub.firstConnectionProbe()));},\n"
+        },
+        {
+          "start": 3864,
+          "end": 3935,
+          "before": "    assert.equal(await discard(await post(f,form)),200);f.choice=form;\n",
+          "after": "    let status=null,discarded;n1Http('notices-post','enter');\n    try{const response=await post(f,form);status=response.status;n1Http('notices-post','response',status);discarded=await discard(response);n1Http('notices-post','return',discarded,true);}catch(error){n1Http('notices-post','throw',status,status===null?null:false,error);throw error;}\n    assert.equal(discarded,200);f.choice=form;\n"
+        },
+        {
+          "start": 18661,
+          "end": 18661,
+          "before": "",
+          "after": "\n// DIAGNOSTIC N2 NODE-only observation; no compiled product/Worker change.\nimport {http as n1Http,form as n1Form,beforeProbe as n2BeforeProbe,afterProbe as n2AfterProbe} from '../n2-helper.mjs';\n"
+        }
+      ],
+      "checks": {
+        "forwardExact": true,
+        "reverseExact": true,
+        "beforeFinalLf": true,
+        "afterFinalLf": true
+      }
+    },
+    {
+      "sourceIndex": 10,
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "before": {
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "gzipBytes": 22824
+      },
+      "after": {
+        "bytes": 89281,
+        "sha256": "14adcbe7149ef9bf92f756a5edae0c13b8c19deda5a7286bbafd0cd53419c64d",
+        "gitBlob": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+        "blob": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+        "fullReadback": true
+      },
+      "hunks": [
+        {
+          "start": 5405,
+          "end": 5697,
+          "before": " const mf=budgetCompileOnly?null:new Miniflare(convertV4MiniflareOptions({...base,script:'import{DurableObject}from\"cloudflare:workers\";export class Initial extends DurableObject{} export class Node extends DurableObject{} export default{fetch(){return new Response(null,{status:404})}};'}));",
+          "after": " const n2InitialOptions=budgetCompileOnly?null:convertV4MiniflareOptions({...base,script:'import{DurableObject}from\"cloudflare:workers\";export class Initial extends DurableObject{} export class Node extends DurableObject{} export default{fetch(){return new Response(null,{status:404})}};'});\n if(n2InitialOptions)n2Prepare(n2InitialOptions,'constructor');\n const mf=budgetCompileOnly?null:new Miniflare(n2InitialOptions);\n if(n2InitialOptions)n2Complete(n2InitialOptions,'constructor');"
+        },
+        {
+          "start": 53712,
+          "end": 53813,
+          "before": " mark('harness-setOptions-start');await mf.setOptions(finalOptions);mark('harness-setOptions-ready');",
+          "after": " mark('harness-setOptions-start');n2Prepare(finalOptions,'assembly',f.firstConnectionBuild);await mf.setOptions(finalOptions);n2Complete(finalOptions,'assembly');mark('harness-setOptions-ready');"
+        },
+        {
+          "start": 57911,
+          "end": 59083,
+          "before": "   mark('mount-updateOptions-start');try{if(budget)await f.captureBudgetEpoch('before-first-connection-remount');await mf.setOptions(mounted);if(budget)f.nextBudgetEpoch();currentMountedOptions=mountedRaw;}catch(error){f.mountFailed=true;console.info('T2 original mount error',JSON.stringify({name:error?.name,code:error?.code??null,issues:(error?.issues??[]).map(({path,code,expected})=>({path,code,expected})),frames:String(error?.stack??'').split('\\n').filter(line=>/^\\s+at\\s/.test(line)).slice(0,5),workers:mounted.workers.map(worker=>({name:worker.name,keys:Object.keys(worker),bindings:Object.entries(worker.bindings??{}).map(([key,value])=>({key,type:typeof value,defined:value!==undefined}))}))}));throw error;}mark('mount-updateOptions-ready');const fresh=await mf.getBindings('qa-first-connection');f.stub=fresh.AFW_INDEPENDENT_CLOSURE.get(fresh.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');mark('mount-ready');",
+          "after": "   mark('mount-updateOptions-start');try{if(budget)await f.captureBudgetEpoch('before-first-connection-remount');n2Prepare(mounted,'mount',f.firstConnectionBuild);await mf.setOptions(mounted);n2Complete(mounted,'mount');if(budget)f.nextBudgetEpoch();currentMountedOptions=mountedRaw;}catch(error){f.mountFailed=true;console.info('T2 original mount error',JSON.stringify({name:error?.name,code:error?.code??null,issues:(error?.issues??[]).map(({path,code,expected})=>({path,code,expected})),frames:String(error?.stack??'').split('\\n').filter(line=>/^\\s+at\\s/.test(line)).slice(0,5),workers:mounted.workers.map(worker=>({name:worker.name,keys:Object.keys(worker),bindings:Object.entries(worker.bindings??{}).map(([key,value])=>({key,type:typeof value,defined:value!==undefined}))}))}));throw error;}mark('mount-updateOptions-ready');const fresh=await mf.getBindings('qa-first-connection');f.stub=fresh.AFW_INDEPENDENT_CLOSURE.get(fresh.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');mark('mount-ready');"
+        },
+        {
+          "start": 60513,
+          "end": 61299,
+          "before": "   const originalWorker=rawFinalOptions.workers.find(worker=>worker.name==='canary-first-connection');assert.equal(sha(originalWorker.script),f.firstConnectionBuild.M.sha256,'actual script input remains initial M');if(budget)await f.captureBudgetEpoch('before-connection-configuration-remount');await mf.setOptions(mounted);if(budget)f.nextBudgetEpoch();currentMountedOptions=mountedRaw;const fresh=await mf.getBindings('qa-first-connection');f.stub=fresh.AFW_INDEPENDENT_CLOSURE.get(fresh.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');",
+          "after": "   const originalWorker=rawFinalOptions.workers.find(worker=>worker.name==='canary-first-connection');assert.equal(sha(originalWorker.script),f.firstConnectionBuild.M.sha256,'actual script input remains initial M');if(budget)await f.captureBudgetEpoch('before-connection-configuration-remount');n2Prepare(mounted,'adopt',f.firstConnectionBuild);await mf.setOptions(mounted);n2Complete(mounted,'adopt');if(budget)f.nextBudgetEpoch();currentMountedOptions=mountedRaw;const fresh=await mf.getBindings('qa-first-connection');f.stub=fresh.AFW_INDEPENDENT_CLOSURE.get(fresh.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');"
+        },
+        {
+          "start": 88519,
+          "end": 88519,
+          "before": "",
+          "after": "\n// N2 diagnostic Node option observation only; compiled inputs and transforms above are unchanged.\nimport {guardObserver as n2Observer} from '../n2-logger.mjs';\nconst n2Prepare=(options,stage,expected)=>n2Observer.prepare(options,stage,expected);\nconst n2Complete=(options,stage)=>n2Observer.complete(options,stage);\n"
+        }
+      ],
+      "checks": {
+        "forwardExact": true,
+        "reverseExact": true,
+        "beforeFinalLf": true,
+        "afterFinalLf": true
+      }
+    }
+  ],
+  "normal13Unchanged": true,
+  "SourceQualified": false,
+  "Task1Pass": false
+}

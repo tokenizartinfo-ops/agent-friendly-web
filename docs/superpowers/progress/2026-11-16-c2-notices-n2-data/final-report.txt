@@ -1,0 +1,246 @@
+{
+  "schema": "afw.c2-notices-n2.source-data-report.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "scope": "Immutable proposal DATA only. No Source/observer/parser execution/eval/import/compile/syntax/tests/local files/dependencies/clones/ref/run/runtime/provider/CF/browser/keys/OTP/mail/Max, no new subagents. Root exclusively gates execution and independent acceptance.",
+  "authority": {
+    "brief": "07a10773d721081de132baf9d4bb9b014466137e",
+    "checkpoint": "9a6ee37a0b263fbd9747bd8494f18ebd5243f43b",
+    "resume": "49829aa9a50763b2c2758f1eee0ce319efab2d90",
+    "windowRuling": "72480f6b32a095186b17671cb6d18b583335f9a1",
+    "preAdmissionRound1": "dea133e44247938626de925ccb6fe44de3896583"
+  },
+  "frozen": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "normal13Index": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "futureFullQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "normal13Changed": false,
+    "all3203OriginalBlobsModesPreserved": true,
+    "refsCreated": 0,
+    "runsCreated": 0
+  },
+  "previousEvidence": {
+    "primary": "a208645ffbbd0c830134f8c79b3234667ef4cd95",
+    "outcome": "14ea40add7cec80448a8c2029db49cac210e06ff",
+    "acceptedReadOnly": "bc756849f9c8a4ed4653a4cb1e5d20565f945e93",
+    "meaning": "Existing N1 only: three native pass, NOTICES fail, GET200/POST503, counts2/2/1; activation-observed position precedes recheckOwned and receipt work. No exact expired guard, receipt.finish entry, causal request binding or Task2 cycle proved. Logs/artifact were not fetched again."
+  },
+  "newGraph": "Eager four N2 native cases, same actual world/action/assertions: CONNECTION approval1/1/1 -> SDKOAuth -> raw phase mutation/compiled denial/noSEND/exactrestore -> exactly one noticesGET/POST only if earlier work succeeds -> original close. Any action/count failure blocks later callbacks with nativeFAIL/workEnteredfalse/no work/count/HTTP. No native acceptance/regression20/reg11/mutant/monitor/nextGET/finitePOST/retry/ScopeDrop.",
+  "proposal": {
+    "contract": {
+      "bytes": 11935,
+      "sha256": "c314e75b1376467ecdd206e293bbd1776a06bb3073409d3d8f0f7297e402134a",
+      "gitBlob": "b1c2680f2ff1dbe7a8b861396e3851d69f885016",
+      "blob": "b1c2680f2ff1dbe7a8b861396e3851d69f885016",
+      "fullReadback": true
+    },
+    "schema": {
+      "bytes": 22271,
+      "sha256": "b3c5d9fd2e50cd55c6db61dc669d66400b167fb4c7c1a04b4b8d61d6542832c9",
+      "gitBlob": "f006dc3a6bf8089fce11718aa2a05d97910d8145",
+      "blob": "f006dc3a6bf8089fce11718aa2a05d97910d8145",
+      "fullReadback": true
+    },
+    "selection": {
+      "bytes": 2255,
+      "sha256": "2219a67cb56c8825577f83836719f693f1b9d1012f44d1d78a34d790c70438a9",
+      "gitBlob": "590ee8bd7435db8bee9669077bcb4e657e187889",
+      "canonicalHash": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+      "blob": "590ee8bd7435db8bee9669077bcb4e657e187889",
+      "fullReadback": true
+    },
+    "vectors": {
+      "bytes": 78151,
+      "sha256": "cd4d4a0174be09c8dcae12c6a3b222de0d5f7151d2b0b94dd30f9caa5b6eedad",
+      "gitBlob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+      "blob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+      "fullReadback": true
+    },
+    "runner": {
+      "bytes": 26594,
+      "sha256": "36d6660717050ca0c2807bb6e8eb9d8ff2d65c1ac509932f28150ece3dade7ea",
+      "gitBlob": "33e94efe8fb9f41e68719e7a5f21389dc692a8eb",
+      "blob": "33e94efe8fb9f41e68719e7a5f21389dc692a8eb",
+      "fullReadback": true
+    },
+    "workflow": {
+      "bytes": 1433,
+      "sha256": "b903eff69e8ab8090fbb0c66d31c13663a3252ad24e65bd39e8d67da3eed5249",
+      "gitBlob": "8bab03d11f18807d0e0af41a93c6ba0d155dfb21",
+      "blob": "8bab03d11f18807d0e0af41a93c6ba0d155dfb21",
+      "fullReadback": true
+    },
+    "reversibleDiff": {
+      "bytes": 16346,
+      "sha256": "e15f2f7211da8c6fd3bde7da6d7f334ddef5e3c9861c1356791aa89eed72de5b",
+      "gitBlob": "4f3688411ea8b3bac021812c48e62e8c38ba27c6",
+      "blob": "4f3688411ea8b3bac021812c48e62e8c38ba27c6",
+      "fullReadback": true
+    }
+  },
+  "testFirst": {
+    "executed": false,
+    "status": "SOURCE_TESTS_PENDING",
+    "vectorBeforeImplementation": "Corrected finite vectors269c4b... preceded N2 bodies. Round1 literal vector04b72e... was created and FULL-readback BEFORE corrected logger/reader/controls bodies. Synthetic metadata JSON/string construction and builtin hashes only were performed.",
+    "draftDefects": [
+      "DRAFT ef9cb26... lacked fifth positive notices adoption; final positive graph has pair5 prepared/returned after actual synthetic POST200 completion, while POST503/bodythrow graph mutations explicitly omit pair5.",
+      "DRAFT dangling HTTP negative lacked new proofs; corrected literal negative21 carries proper calls1..4/baseline/final so it traces specifically HTTP_INVALID."
+    ],
+    "round1": [
+      {
+        "id": "F1",
+        "evidence": "Literal complete entered NOTICES with actionthrow/nativefail, before/after probes/count/AFTER/final but no baseline/HTTP/call5. Old reader82abcd... had no baseline requirement in before probe branch; text trace admitted it.",
+        "repair": "Reader09e1bd...:139 requires baseline for before probe. Literal expected PROBE_INVALID. Honest blocked no-baseline and timeoutprefix remain allowed."
+      },
+      {
+        "id": "F2",
+        "evidence": "Literal actionthrow/nativefail with prepared/open call5 and returned proof moved after hook final. Old reader82abcd... host-return branch could consume it after final.",
+        "repair": "Reader09e1bd...:67 rejects every subsequent record with HOOK_INVALID. Logger92420...:101 complete returns without emitting after ended. Concrete late-complete descriptor-model control requires no returned record after final."
+      },
+      {
+        "id": "F3",
+        "evidence": "Old logger28b32... prepare read root handleStructuredLogs before descriptor validation; snapshot skipped it. A getter(undefined)/setter can run while equal hash/callback proofs appear.",
+        "repair": "Logger92420...:87-98 own data descriptor checked before any value access/installation; unsupported accessor faults without invoking getter/setter. Data-undefined, absent and same diagnostic handler positive controls retained. Exact original thrown object preserved under finally control. complete also obtains value through own descriptor."
+      }
+    ],
+    "expected": {
+      "accepted": 6,
+      "rejected": 21,
+      "probeChecks": 3,
+      "roundtrips": 6,
+      "witnessRejected": 2,
+      "slotChecks": 5,
+      "guardAccepted": 3,
+      "guardRejected": 7,
+      "guardTransitions": 6,
+      "invarianceChecks": 10,
+      "guardRecordRejected": 12
+    },
+    "controlCoverage": "Original N1 six accepted/21 negative/three probe/six roundtrip/two witness/five actual-slot controls preserved. Added exact three tags/seven malformed-message controls/six phase-cascade-late-absent-fault-cap transitions/ten argument invariance-descriptor-final controls/twelve journal replay negatives. No actual RED/PASS result asserted; static textual traces are not native execution."
+  },
+  "formatProof": {
+    "lock": {
+      "blob": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+      "miniflare": "5.20260831.0-alpha",
+      "workerd": "1.20260831.1"
+    },
+    "workerd": {
+      "repository": "cloudflare/workerd",
+      "ref": "v1.20260831.1",
+      "worker": {
+        "path": "src/workerd/io/worker.c++",
+        "blob": "7d191a986c8c7db37ded8f0e76ff20a310f6d972",
+        "lines": "1789-1805 console.info->INFO;2179-2185 originalargs;2354-2360 internal formatLog with originalargs"
+      },
+      "inspect": {
+        "path": "src/node/internal/internal_inspect.ts",
+        "blob": "ae41e49e3dc5837df6b2ed788e24639719a095d3",
+        "lines": "2769-2782 no percent-placeholder first string;2895-2900 strings unquoted joined with one space;2995-3015 formatWithOptions and structured {timestamp,level,message}"
+      }
+    },
+    "miniflare": {
+      "repository": "cloudflare/workers-sdk",
+      "ref": "miniflare@5.20260831.0-alpha",
+      "structured": {
+        "path": "packages/miniflare/src/runtime/structured-logs.ts",
+        "blob": "5b6cbb9c0c1cd40f22fa61f24b05f212017f67ed",
+        "lines": "202 ordinary filter;212-234 JSON.parse and message unchanged"
+      },
+      "index": {
+        "blob": "9dabb8e400ec7732762ca327cee0d7132cafa427",
+        "lines": "2446-2449 structured mode;2608 callback"
+      },
+      "runtime": {
+        "blob": "55e02656cad7e450fa15ad6fac619940dff9d588",
+        "lines": "109-118 default output;287-291 actual callback"
+      },
+      "config": {
+        "blob": "f6fbc043fd4841ab2c88125cde758c37153ee38a",
+        "lines": "694-696 callback option"
+      },
+      "convert": {
+        "blob": "207fa88316c56c50319d23935d5fd583b9ad7f3c",
+        "lines": "46-57 callback retained;91-201 worker conversion;129 config.manifest modules contents"
+      }
+    },
+    "conclusion": "Pinned native formatting for actual console.info(tag,JSON.stringify(payload)) is exactly tag + one ASCII space + JSON.stringify(payload), with no enclosing quotes around string arguments. Finite synthetic messages use that spelling. Version-pinned primary code read only; no runtime calibration/world/extra request."
+  },
+  "awaitEffectLedger": [
+    {
+      "surface": "TEMP S07 driver",
+      "before": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "after": "e50a5292dfb31a7ba9d76f2ef2c28a1f58d575c0",
+      "awaits": "Original action/count separate boolean-preserved thrown values; n2Before before NOTICES actual work and n2After after action settlement before count. Actual world counts and work assertions preserved. Eager registration only four diagnostic callbacks. Original close awaited in native AFTER.",
+      "effects": "Safe flow/blocked/after records only. No Source receipt/positive Source facts. Count exception remains failure/null unavailable, no default0 or stale counters."
+    },
+    {
+      "surface": "TEMP S08 coupled",
+      "before": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "after": "8ae7fe99ebdc791f786d39243649e2672ad90ec0",
+      "awaits": "Original f.call/response.text/cancel awaits unchanged; safe enter/response/return/throw around actual GET/POST. Before/after actual existing firstConnectionProbe each at most once using original exclusion slot.",
+      "effects": "Record actual status/body settlement; retain original200 assertions/form parsing/action error. Normal phase mutation, retention/owner checks/all business predicates unchanged. Probe raw data stays private RAM; only whitelisted delta."
+    },
+    {
+      "surface": "TEMP S10 world",
+      "before": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "after": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+      "awaits": "Four existing await mf.setOptions occurrences remain four, two existing new Miniflare occurrences remain two. Only actual initial constructor, assembly, mount, adopt get synchronous before/after observation; restart constructor remains normal and is outside graph. No new await/promise/then/proxy/replacement.",
+      "effects": "Same converted option object, original constructor/method invocation and promise/await. No compiled onLoad/input/source transforms/guards/console string change. Five exercised argument pairs on full positive graph; fifth notices adoption conditional on actual successful POST."
+    },
+    {
+      "surface": "logger92420...",
+      "awaits": "NONE. Callback synchronous/nonthrowing, no RPC, unknown and recognized raw Worker logs not forwarded.",
+      "effects": "Private exact payload parse <=2048B; at most8 safe new records, excluded prebaseline tags<=4096, actual runtime callback observed true|null. Hash/descriptor/ref equality; script metadata <=32MiB context existing archive bound; unsupported settings/fault fail capture, never rewrite original work."
+    },
+    {
+      "surface": "helper984b...",
+      "awaits": "Only existing probe slot actual promise races <=1s, timeout does not settle/unlock actual RPC. Late values disposed; next read skips while actual pending. Journal append sync owned0600/sequence128/32768B.",
+      "effects": "Windows follow72480 exactly; baseline before beforeprobe, final after actual AFTER settlement. All source/private identifiers omitted. Final guards/completions ignored, not drain proof."
+    },
+    {
+      "surface": "runner33e94...",
+      "awaits": "Bounded tooling/file/hash materialization and original child captures only. Three custody child launches/preflight, real missing bootstrap ENOENT, nativefour.",
+      "effects": "Normal13 pinned first then only TEMP Node overlays7/8/10; inherited actual bootstrap data only, not executed workflow. UID/GID drop/clear groups/private loopback/no-new-privs/env allowlist/own0600journal/preflight+final own cleanup unchanged; no new permissions/users/groups."
+    }
+  ],
+  "reversibility": {
+    "diff": {
+      "bytes": 16346,
+      "sha256": "e15f2f7211da8c6fd3bde7da6d7f334ddef5e3c9861c1356791aa89eed72de5b",
+      "gitBlob": "4f3688411ea8b3bac021812c48e62e8c38ba27c6",
+      "blob": "4f3688411ea8b3bac021812c48e62e8c38ba27c6",
+      "fullReadback": true
+    },
+    "textChecks": {
+      "forwardExact": true,
+      "reverseExact": true,
+      "worldAllUnlistedBytesEqual": true,
+      "normal13Retained": true,
+      "executed": false
+    },
+    "scope": "UTF16 half-open explicit hunks, complete separately pinned preimages/afterimages. S07 three hunks, S08 four, S10 five; forward/reverse equality computed only with RAM strings. Final LFs preserved exactly. Normal13 and all old proposal bodies remain immutable."
+  },
+  "wire": "Four standard frames SYNTHETIC->DEPENDENCY_CONTROL->CUSTODY->OUTCOME only on admitted capture. Fatal FRONTIER stderr is disqualifying, never a positive fallback. Child TAP/errors/raw logs stay bounded private RAM; public only schema whitelisted records and counts/hashes/codes/booleans/sites. Outcome<=24576B contains canonical journal witness; overflow explicit failure with no cap increase. Native failure/POST503 may be valid diagnostic capture, never SourcePASS.",
+  "proofLimits": [
+    "Argument/script/settings/callback identity equals the same current original argument before/at/after original call when observed; no private Miniflare installed-state claim. A call failure leaves prepared/open only.",
+    "callbackObserved true means actual callback arrival; absence null unknown. Tag is Node arrival window only, no delayed phase/request authentication. correlated:null, guardOrigin/interpretation unknown always.",
+    "Parent holders has no current at/m; expiry/regression null. Finite booleans are projections, not exact first cause or expiry predicate proof.",
+    "Potential unsupported reflective settings/changed options/record cap/fault may fail capture honestly. No Source observation executed here. Root independent OWN/API/artifact joins and actual cloud tests remain required.",
+    "All seven nonclaims and SourceQualified/Task1Pass false; Task2 not dispatched."
+  ],
+  "pending": "Root independent inspection/gates, new one-use materialization only if admitted, cloud synthetic/native capture, scoped quality review, preserve+close. No current external operation pending from this agent.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

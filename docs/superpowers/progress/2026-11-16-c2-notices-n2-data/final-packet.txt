@@ -1,0 +1,259 @@
+{
+  "schema": "afw.c2-notices-n2.immutable-packet.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "new immutable Git DATA only",
+  "origin": "GitHub API",
+  "allowedAction": "bounded reads/create immutable proposal blobs/FULLreadbacks and builtin RAM string/JSON/hash metadata; no refs/runs/runtime",
+  "authority": {
+    "brief": "07a10773d721081de132baf9d4bb9b014466137e",
+    "initialBrief": "89d5f4e6350ec7165822fd7907530a9c2022489b",
+    "checkpoint": "9a6ee37a0b263fbd9747bd8494f18ebd5243f43b",
+    "resume": "49829aa9a50763b2c2758f1eee0ce319efab2d90",
+    "acceptedDiagnosis": "bc756849f9c8a4ed4653a4cb1e5d20565f945e93",
+    "windowRuling": "72480f6b32a095186b17671cb6d18b583335f9a1",
+    "preAdmission": "dea133e44247938626de925ccb6fe44de3896583"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n2",
+    "message": "AFW-C2-T1-NOTICES-N2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n2.yml",
+    "job": "c2-notices-n2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n2/",
+    "runner": "run-c2-notices-n2.mjs"
+  },
+  "sourceDeltaDTO": {
+    "normalSourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "normalIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "mainReadOnly": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "normalSourceEntriesChanged": [],
+    "temporaryNodeOverlays": [
+      {
+        "index": 7,
+        "before": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "after": "e50a5292dfb31a7ba9d76f2ef2c28a1f58d575c0"
+      },
+      {
+        "index": 8,
+        "before": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "after": "8ae7fe99ebdc791f786d39243649e2672ad90ec0"
+      },
+      {
+        "index": 10,
+        "before": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "after": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d"
+      }
+    ],
+    "compiledGuardInputsChanged": false,
+    "productFilesChanged": false,
+    "normal13Frozen": true,
+    "futureQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "futureQualifierActive": false,
+    "Task2Dispatched": false
+  },
+  "proposalIndex": {
+    "bytes": 16537,
+    "sha256": "3c277e55600eaae25db04349b172ada8e34ff4993b0ac515caffe799bbd40858",
+    "gitBlob": "cfddde5866ac2646d301c53cfa99d74437409d13",
+    "blob": "cfddde5866ac2646d301c53cfa99d74437409d13",
+    "fullReadback": true
+  },
+  "report": {
+    "bytes": 15829,
+    "sha256": "daea9774998419f97727e1bafb337496afea8bd905c4308ef940fcbd939d4428",
+    "gitBlob": "4996da2322d0f54684f1521b27cf41d6f2562d4b",
+    "blob": "4996da2322d0f54684f1521b27cf41d6f2562d4b",
+    "fullReadback": true
+  },
+  "normalToTempFullReversibleDiff": {
+    "bytes": 16346,
+    "sha256": "e15f2f7211da8c6fd3bde7da6d7f334ddef5e3c9861c1356791aa89eed72de5b",
+    "gitBlob": "4f3688411ea8b3bac021812c48e62e8c38ba27c6",
+    "blob": "4f3688411ea8b3bac021812c48e62e8c38ba27c6",
+    "fullReadback": true
+  },
+  "contract": {
+    "bytes": 11935,
+    "sha256": "c314e75b1376467ecdd206e293bbd1776a06bb3073409d3d8f0f7297e402134a",
+    "gitBlob": "b1c2680f2ff1dbe7a8b861396e3851d69f885016",
+    "blob": "b1c2680f2ff1dbe7a8b861396e3851d69f885016",
+    "fullReadback": true
+  },
+  "schemaDefinition": {
+    "bytes": 22271,
+    "sha256": "b3c5d9fd2e50cd55c6db61dc669d66400b167fb4c7c1a04b4b8d61d6542832c9",
+    "gitBlob": "f006dc3a6bf8089fce11718aa2a05d97910d8145",
+    "blob": "f006dc3a6bf8089fce11718aa2a05d97910d8145",
+    "fullReadback": true
+  },
+  "selection": {
+    "bytes": 2255,
+    "sha256": "2219a67cb56c8825577f83836719f693f1b9d1012f44d1d78a34d790c70438a9",
+    "gitBlob": "590ee8bd7435db8bee9669077bcb4e657e187889",
+    "canonicalHash": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+    "blob": "590ee8bd7435db8bee9669077bcb4e657e187889",
+    "fullReadback": true
+  },
+  "finiteTestFirstVectors": {
+    "bytes": 78151,
+    "sha256": "cd4d4a0174be09c8dcae12c6a3b222de0d5f7151d2b0b94dd30f9caa5b6eedad",
+    "gitBlob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+    "blob": "04b72e0d24b2841970cbab46223e98ae2cab0156",
+    "fullReadback": true
+  },
+  "bodies": {
+    "g2Driver": {
+      "bytes": 1769,
+      "sha256": "cf8b73a6ddc0d9601830dadb13d428555b1e10e9ca3549c45f56787ae3efc79a",
+      "gitBlob": "e50a5292dfb31a7ba9d76f2ef2c28a1f58d575c0",
+      "blob": "e50a5292dfb31a7ba9d76f2ef2c28a1f58d575c0",
+      "fullReadback": true
+    },
+    "g2Coupled": {
+      "bytes": 19595,
+      "sha256": "efee9a74a2c464cda436b0d938911484e630d1ab1d9540c4ee5ee093289f72d8",
+      "gitBlob": "8ae7fe99ebdc791f786d39243649e2672ad90ec0",
+      "blob": "8ae7fe99ebdc791f786d39243649e2672ad90ec0",
+      "fullReadback": true
+    },
+    "g2World": {
+      "bytes": 89281,
+      "sha256": "14adcbe7149ef9bf92f756a5edae0c13b8c19deda5a7286bbafd0cd53419c64d",
+      "gitBlob": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+      "blob": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+      "fullReadback": true
+    },
+    "g2Helper": {
+      "bytes": 3786,
+      "sha256": "b78621c06446456ecea3ddc20c80cc95145d6d012478fde7c25a83ad509f3e74",
+      "gitBlob": "984b66d96d7f75317515859678a26beab6ec9250",
+      "blob": "984b66d96d7f75317515859678a26beab6ec9250",
+      "fullReadback": true
+    },
+    "g2Logger": {
+      "bytes": 8370,
+      "sha256": "64f5bc4ae951d13a6ead8d2dc28b0b0ff13ffdcf01f3d621e17dab07203d865c",
+      "gitBlob": "92420acc2306b62943ae80d14b889871c9a3957c",
+      "blob": "92420acc2306b62943ae80d14b889871c9a3957c",
+      "fullReadback": true
+    },
+    "g2Reader": {
+      "bytes": 19356,
+      "sha256": "34b32c4634384d65df27f1f69fcd45c4b8f709ce8efbe92f7d169ec8d17052dc",
+      "gitBlob": "09e1bd61a6f132d1a7d029535d4b34b67ef42524",
+      "blob": "09e1bd61a6f132d1a7d029535d4b34b67ef42524",
+      "fullReadback": true
+    },
+    "g2Controls": {
+      "bytes": 13179,
+      "sha256": "35d5367308cca0b18f9337194fa80fd38b698a0dc3c91fb275bfd2200b491980",
+      "gitBlob": "e04c7649cec44f4e6a4e9b6287c938bc5c3811b3",
+      "blob": "e04c7649cec44f4e6a4e9b6287c938bc5c3811b3",
+      "fullReadback": true
+    }
+  },
+  "slot": {
+    "key": "nextSlot",
+    "bytes": 2072,
+    "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+    "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+    "fullReadback": true
+  },
+  "runner": {
+    "bytes": 26594,
+    "sha256": "36d6660717050ca0c2807bb6e8eb9d8ff2d65c1ac509932f28150ece3dade7ea",
+    "gitBlob": "33e94efe8fb9f41e68719e7a5f21389dc692a8eb",
+    "blob": "33e94efe8fb9f41e68719e7a5f21389dc692a8eb",
+    "fullReadback": true
+  },
+  "workflow": {
+    "bytes": 1433,
+    "sha256": "b903eff69e8ab8090fbb0c66d31c13663a3252ad24e65bd39e8d67da3eed5249",
+    "gitBlob": "8bab03d11f18807d0e0af41a93c6ba0d155dfb21",
+    "blob": "8bab03d11f18807d0e0af41a93c6ba0d155dfb21",
+    "fullReadback": true
+  },
+  "admission": {
+    "indexField": "admissionPaths",
+    "pathCount": 31,
+    "description": "17 inherited frozen DATA paths +12 N2 tooling DATA paths +runner DATA+one new workflow; exact paths/modes/bytes/SHA256/GitBlob in proposalIndex. Existing3203 paths/modes unchanged, BASE identical. No refs/trees/commits/candidates/runs/PR created by this writer. Root alone independently reviews/builds/gates.",
+    "rollback": "Normal Source paths unchanged in lab tree. Temporary materialized overlays only inside one bounded job; own verified temp cleanup required. If Root later nominates lab activation, closure removes only new WF while preserving all admitted DATA and originals; no such action authorized/executed by this packet."
+  },
+  "wire": {
+    "successMarkers": [
+      "AFW_C2_NOTICES_N2_SYNTHETIC",
+      "AFW_C2_DEPENDENCY_CONTROL",
+      "AFW_C2_NOTICES_N2_CUSTODY",
+      "AFW_C2_NOTICES_N2_OUTCOME"
+    ],
+    "fatalMarker": "AFW_C2_NOTICES_N2_FRONTIER",
+    "fatalMeaning": "Any FRONTIER disqualifies successful capture; never substitute native/Source receipt.",
+    "artifact": "output/c2-notices-n2.json",
+    "artifactMaxBytes": 24576,
+    "contextJob": "c2-notices-n2",
+    "selectionHash": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+    "bindingOrder": [
+      "sourceIndexHash",
+      "driverHash",
+      "selectionHash",
+      "helperHash",
+      "readerHash",
+      "slotHash",
+      "loggerHash",
+      "worldHash"
+    ],
+    "outcomeOrder": [
+      "schema",
+      "context",
+      "selectionHash",
+      "bindings",
+      "controls",
+      "capture",
+      "journal",
+      "observation",
+      "native",
+      "custody",
+      "SourceQualified",
+      "Task1Pass",
+      "nonclaims"
+    ]
+  },
+  "expectedSynthetic": {
+    "accepted": 6,
+    "rejected": 21,
+    "probeChecks": 3,
+    "roundtrips": 6,
+    "witnessRejected": 2,
+    "slotChecks": 5,
+    "guardAccepted": 3,
+    "guardRejected": 7,
+    "guardTransitions": 6,
+    "invarianceChecks": 10,
+    "guardRecordRejected": 12
+  },
+  "custody": "Same three real launches: actual owned preflight, actual missing-bootstrap ENOENT, actual native4. Locked Node/SDK/deps; nonroot parentUID/GID drop after private namespace loopback, clear groups/no-new-privs, child environment allowlist, own0600journal/preflight and final own cleanup. No fourth calibration world/request. Custody proof separate, fixed false Source outcome.",
+  "proof": "Actual same current option object public comparisons; constructor no compiled scripts, later M/QA actual content/settings equality vs same original f.firstConnectionBuild. Preserved original invocation/promise/await/callback refs other than logger. Exact formatting primary pins/line paths in report. Runtime callback observation true|null separately; absent unknown. No private installation claim, no exact request/firstcause from Node-arrival window/tag.",
+  "verification": {
+    "immutableBlobs": "Every new blob fully readback-equal and UTF8 bytes/SHA256/GitBlob verified. Complete old versions preserved in index. Packet itself fully read back after creation; its outer metadata reported to Root.",
+    "textDiff": "All3 forward/inverse exact, UTF16 spans and finalLF explicit, complete before+after pins. No parser/eval/compile/syntax used.",
+    "sourceTests": "SOURCE_TESTS_PENDING",
+    "nativeTests": "PENDING_ROOT_CLOUD",
+    "syntheticControls": "PENDING_ROOT_CLOUD; finite vectors and textual traces only, not executed RED/PASS.",
+    "currentExternalOperationsPending": 0
+  },
+  "next": "IDLE after immutable delivery. Root independent OWN/scoped review/gates and any actual one-use cloud run remain separate.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
