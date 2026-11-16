@@ -90,5 +90,11 @@
     "PCoff": false,
     "globalNativeDrainVerified": false,
     "sdkNamespaceEmptyVerified": false
+  },
+  "clarification": {
+    "atUTC": "2026-11-16 18:08:44 UTC",
+    "control": "N3_CENSUS_FRESH_GET_POST_BOUNDS",
+    "acceptedFiniteScope": "Only original requestLease/InitialLease callbacks, two distinct roots and explicitly literal DTO topology. No PH/consumeFiniteOwnerStageAdmission/business/HTTP. Expected NO_ELIGIBLE/eligible0 and no CAP_PRIVATE for that bounded workload.",
+    "limits": "Rolebinds are test-only DTOstimuli. This is not an exact census/upperbound of actualC or proof of nativeeligibility/GET/POST success/joinedSource. Exact47 IDs unchanged; no observer repair/epoch or Sourcecapture authorized."
   }
 }
