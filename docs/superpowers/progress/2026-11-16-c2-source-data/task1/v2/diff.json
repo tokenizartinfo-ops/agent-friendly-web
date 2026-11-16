@@ -1,0 +1,397 @@
+{
+  "schema": "afw.c2-source-protocol-diff.v2",
+  "status": "SOURCE_TESTS_PENDING",
+  "units": "Zero-based half-open exact UTF-8 byte intervals. Outside spans bytes equal in order. Reverse by exchanging old/new slices from full immutable preimages, from the last span back to the first. New files have absent preimage and may be omitted from the proposed tree. Abandoning detached DATA is sufficient rollback for this authoring task.",
+  "comparisons": [
+    {
+      "role": "runner",
+      "priorFull": {
+        "path": "docs/superpowers/source-lab/c2-t1/run-c2-source-lab.mjs",
+        "bytes": 24710,
+        "sha256": "9ae08d7591f246dc672d0917e26641f0547e34878c1030f867ac35afafe30e50",
+        "blob": "73b8ccf1116a44f0d4badca560884b4c5d9b4adc",
+        "fullReadback": true
+      },
+      "proposedFull": {
+        "key": "runner",
+        "path": "docs/superpowers/source-lab/c2-t1-v2/run-c2-source-lab-v2.mjs",
+        "before": null,
+        "bytes": 23059,
+        "sha256": "1a9556a7056a24c0a3f220be8cce1889d8c832a083e4c96861dba2695d5a95d5",
+        "blob": "5031acd80a2770d9e5eea5cde0ac9d09286e24b2",
+        "fullReadback": true
+      },
+      "spans": [
+        {
+          "oldBytes": [
+            1832,
+            1955
+          ],
+          "newBytes": [
+            1832,
+            1951
+          ]
+        },
+        {
+          "oldBytes": [
+            6719,
+            6986
+          ],
+          "newBytes": [
+            6715,
+            8198
+          ]
+        },
+        {
+          "oldBytes": [
+            7634,
+            9746
+          ],
+          "newBytes": [
+            8846,
+            8943
+          ]
+        },
+        {
+          "oldBytes": [
+            9748,
+            10122
+          ],
+          "newBytes": [
+            8945,
+            9218
+          ]
+        },
+        {
+          "oldBytes": [
+            10124,
+            10125
+          ],
+          "newBytes": [
+            9220,
+            9589
+          ]
+        },
+        {
+          "oldBytes": [
+            10665,
+            12716
+          ],
+          "newBytes": [
+            10129,
+            10129
+          ]
+        },
+        {
+          "oldBytes": [
+            13013,
+            13144
+          ],
+          "newBytes": [
+            10426,
+            10594
+          ]
+        },
+        {
+          "oldBytes": [
+            15056,
+            15056
+          ],
+          "newBytes": [
+            12506,
+            12537
+          ]
+        },
+        {
+          "oldBytes": [
+            16264,
+            16446
+          ],
+          "newBytes": [
+            13745,
+            13961
+          ]
+        },
+        {
+          "oldBytes": [
+            16870,
+            16871
+          ],
+          "newBytes": [
+            14385,
+            14385
+          ]
+        },
+        {
+          "oldBytes": [
+            16876,
+            17658
+          ],
+          "newBytes": [
+            14390,
+            15203
+          ]
+        },
+        {
+          "oldBytes": [
+            17754,
+            17893
+          ],
+          "newBytes": [
+            15299,
+            15501
+          ]
+        },
+        {
+          "oldBytes": [
+            19047,
+            19188
+          ],
+          "newBytes": [
+            16655,
+            17716
+          ]
+        },
+        {
+          "oldBytes": [
+            19358,
+            19565
+          ],
+          "newBytes": [
+            17886,
+            18351
+          ]
+        },
+        {
+          "oldBytes": [
+            21324,
+            21790
+          ],
+          "newBytes": [
+            20110,
+            20874
+          ]
+        },
+        {
+          "oldBytes": [
+            21990,
+            23120
+          ],
+          "newBytes": [
+            21074,
+            21344
+          ]
+        },
+        {
+          "oldBytes": [
+            23161,
+            24046
+          ],
+          "newBytes": [
+            21385,
+            22306
+          ]
+        },
+        {
+          "oldBytes": [
+            24333,
+            24710
+          ],
+          "newBytes": [
+            22593,
+            23059
+          ]
+        }
+      ]
+    },
+    {
+      "role": "workflow",
+      "priorFull": {
+        "path": ".github/workflows/afw-c2-source-lab.yml",
+        "bytes": 1540,
+        "sha256": "35fac40bdfd5bbef2a1b91f9a04ab1a1c94e803e5933450ce424f3fd5903a5de",
+        "blob": "3ff6dab58729c3f9cb2ff3ddd0ac620272053d11",
+        "fullReadback": true
+      },
+      "proposedFull": {
+        "key": "workflow",
+        "path": ".github/workflows/afw-c2-source-lab-v2.yml",
+        "before": null,
+        "bytes": 1552,
+        "sha256": "99841e1987267a2978e97823dd4c87a1d07b8c73086a13e10b940e45e5795fa7",
+        "blob": "98a09213f225353468eb755953b26ea111bc44da",
+        "fullReadback": true
+      },
+      "spans": [
+        {
+          "oldBytes": [
+            0,
+            37
+          ],
+          "newBytes": [
+            0,
+            40
+          ]
+        },
+        {
+          "oldBytes": [
+            63,
+            106
+          ],
+          "newBytes": [
+            66,
+            107
+          ]
+        },
+        {
+          "oldBytes": [
+            142,
+            159
+          ],
+          "newBytes": [
+            143,
+            163
+          ]
+        },
+        {
+          "oldBytes": [
+            277,
+            348
+          ],
+          "newBytes": [
+            281,
+            350
+          ]
+        },
+        {
+          "oldBytes": [
+            381,
+            476
+          ],
+          "newBytes": [
+            383,
+            476
+          ]
+        },
+        {
+          "oldBytes": [
+            1120,
+            1194
+          ],
+          "newBytes": [
+            1120,
+            1200
+          ]
+        },
+        {
+          "oldBytes": [
+            1373,
+            1477
+          ],
+          "newBytes": [
+            1379,
+            1489
+          ]
+        }
+      ]
+    }
+  ],
+  "unchangedHistoricalFull": [
+    {
+      "path": "v1 receipt contract",
+      "bytes": 11310,
+      "sha256": "ce02ec159fa230a4d0dee5f8cf2ebf3c052351c909682cb422c20ff7e412b18f",
+      "blob": "567c84adcda2355c7eeef39656d5a1f1101262ed",
+      "fullReadback": true
+    },
+    {
+      "path": "v1 capture supplement",
+      "bytes": 7677,
+      "sha256": "64ff0494bdc095c269942d9eab0cd1b63d61cd7bbca49b8f94504afda44942ee",
+      "blob": "954040183862038da3e705509b7d3a2f0d1823fb",
+      "fullReadback": true
+    },
+    {
+      "path": "v1 independent receiver",
+      "bytes": 5210,
+      "sha256": "2d1c73d381a9b783f93379352525c241b602a17d70a011dfda989fe9d8b09ea6",
+      "blob": "ff288b865b72007ae7223c8f5e8266152a130db4",
+      "fullReadback": true
+    }
+  ],
+  "newPaths": [
+    {
+      "key": "selection",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/mode-selection.json",
+      "before": null,
+      "bytes": 5460,
+      "sha256": "0dc71e54f901c91e4be06810eaead653862ae8365328e37673a548c0a3b8fb59",
+      "blob": "bf500cccd9d6e828f74e9328f849d837ee2d0db4",
+      "fullReadback": true
+    },
+    {
+      "key": "vectors",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/synthetic-vectors.json",
+      "before": null,
+      "bytes": 9873,
+      "sha256": "30634f2a8c173f670ed2b4cc33a8a8846ac54ad4b5b15d8cb6b17a1ca64acac3",
+      "blob": "40b1f06404470a73f9def3b68d366c90b6ebf7e1",
+      "fullReadback": true
+    },
+    {
+      "key": "parser",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/tap-protocol.mjs",
+      "before": null,
+      "bytes": 10020,
+      "sha256": "202b312452989d6bcda5fae18e64fa392880750ea9b3b498d19ca52366f28205",
+      "blob": "3749ba14502f251f1aa8008ff3c6d7bd70263538",
+      "fullReadback": true
+    },
+    {
+      "key": "selftest",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/synthetic-controls.mjs",
+      "before": null,
+      "bytes": 1672,
+      "sha256": "b9feaefc6e3b15cd95b10c75fe55f44f50bb4c33ba8ae4a10c96c12e3e5b8665",
+      "blob": "b108562ad11b3af1dbe291fdcd3b55b0c22bc1d1",
+      "fullReadback": true
+    },
+    {
+      "key": "runner",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/run-c2-source-lab-v2.mjs",
+      "before": null,
+      "bytes": 23059,
+      "sha256": "1a9556a7056a24c0a3f220be8cce1889d8c832a083e4c96861dba2695d5a95d5",
+      "blob": "5031acd80a2770d9e5eea5cde0ac9d09286e24b2",
+      "fullReadback": true
+    },
+    {
+      "key": "workflow",
+      "path": ".github/workflows/afw-c2-source-lab-v2.yml",
+      "before": null,
+      "bytes": 1552,
+      "sha256": "99841e1987267a2978e97823dd4c87a1d07b8c73086a13e10b940e45e5795fa7",
+      "blob": "98a09213f225353468eb755953b26ea111bc44da",
+      "fullReadback": true
+    },
+    {
+      "key": "schema",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/frame-schema.json",
+      "before": null,
+      "bytes": 13963,
+      "sha256": "6bf078cdcdede7d78883cbafc53a1b9e5219427cc60da4eea49c7524b2d156c7",
+      "blob": "eaa2259b9f7cbe7e25f21cd5ff3cecf9776e13e2",
+      "fullReadback": true
+    },
+    {
+      "key": "contract",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/protocol-contract.json",
+      "before": null,
+      "bytes": 13329,
+      "sha256": "24fe0f4bf3c3117f5ad1ab1e8650a7c874c2e4fa0868a3a1a6acf5ab254dcdd8",
+      "blob": "ce51877aa4bc8b807dd00e1089f6eeb1562b6d8a",
+      "fullReadback": true
+    }
+  ],
+  "frozenSource": "Immutable f9 index is byte-identical, including every product/test preimage/after blob and compiled mutation. No changes or spans in any of the13. Original before/after product metadata in f9 is historical and does not represent a new v2 product change."
+}

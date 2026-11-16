@@ -1,0 +1,103 @@
+{
+  "schema": "afw.c2-source-protocol-report.v2",
+  "status": "SOURCE_TESTS_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "immutable proposed Source-lab v2 DATA",
+  "allowedAction": "bounded pinned reads and create/full readback of new immutable Git blobs only",
+  "rollback": "Abandon detached proposal. No ref or execution created. Full preimages and byte spans for mechanical comparison are in diff.",
+  "brief": "37339053e2bc146adb457ce34fd652bd576790b7",
+  "ruling": "253c5324973fdacc52225c60f5422ab175c5341e",
+  "architecture": "4158ce15675031331687e36ef5caec0738c640e8",
+  "priorFailedOccurrence": "c3003c261cdce09a77e44e7c9605c8c0e7dbfdfe",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-v2",
+    "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-V2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-source-lab-v2.yml",
+    "job": "c2-source-lab-v2",
+    "runner": "docs/superpowers/source-lab/c2-t1-v2/run-c2-source-lab-v2.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-v2/run-c2-source-lab-v2.mjs",
+    "environment": "Only fixed GitHub-hosted lab after independent Root admission."
+  },
+  "protocol": {
+    "key": "contract",
+    "path": "docs/superpowers/source-lab/c2-t1-v2/protocol-contract.json",
+    "before": null,
+    "bytes": 13329,
+    "sha256": "24fe0f4bf3c3117f5ad1ab1e8650a7c874c2e4fa0868a3a1a6acf5ab254dcdd8",
+    "blob": "ce51877aa4bc8b807dd00e1089f6eeb1562b6d8a",
+    "fullReadback": true
+  },
+  "frameSchema": {
+    "key": "schema",
+    "path": "docs/superpowers/source-lab/c2-t1-v2/frame-schema.json",
+    "before": null,
+    "bytes": 13963,
+    "sha256": "6bf078cdcdede7d78883cbafc53a1b9e5219427cc60da4eea49c7524b2d156c7",
+    "blob": "eaa2259b9f7cbe7e25f21cd5ff3cecf9776e13e2",
+    "fullReadback": true
+  },
+  "diff": {
+    "key": "diff",
+    "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/v2-protocol-diff.json",
+    "before": null,
+    "bytes": 9650,
+    "sha256": "f9428b72e7b3cdd8a2aebda1617277c50d151b38be98fb780cdb2ebfcdb6c497",
+    "blob": "6fb7ea0911876b1c1c9bcfe204b58a88e72c8741",
+    "fullReadback": true
+  },
+  "testFirst": {
+    "firstArtifact": {
+      "key": "vectors",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/synthetic-vectors.json",
+      "before": null,
+      "bytes": 9873,
+      "sha256": "30634f2a8c173f670ed2b4cc33a8a8846ac54ad4b5b15d8cb6b17a1ca64acac3",
+      "blob": "40b1f06404470a73f9def3b68d366c90b6ebf7e1",
+      "fullReadback": true
+    },
+    "sequence": "Complete synthetic fixtures + expected acceptance/rejection edits uploaded and FULL fetched before parser code was authored. Parser and selftest are immutable DATA. Their actual executions and all native tests are pending.",
+    "syntheticOnly": {
+      "accepts": 1,
+      "rejects": 30,
+      "nativeTestsOrLaunchesAdded": 0
+    },
+    "futureRequired": "Root independent implementation/gate/receiver, then authorized bounded once-only proposed cloud occurrence; Root owns extraction, custody joins, status and scoped re-review before Task1 completion."
+  },
+  "staticChecks": [
+    "Canonical bytes compared after FULL GitHub fetch of every newly written artifact; metadata includes Git blob SHA-1 and SHA-256 of exact UTF-8 bytes. No locally executed Source code or parser tests.",
+    "V2 mode manifest lists all17 BASE-only exclusions, binds exact Node/driver/fixture and each immutable mode selection hash. Existing regression manifest and f9 remain intact.",
+    "The exact S07/S08 lexical sites used by witness are driver test registration 6:30, driver work await 9:6, NOTICES approval 36:2, S08 status strictEqual 18:118 and choose call 39:29. Exact throw site in its own attached native details is mandatory.",
+    "Primary Node v22.23.4 tap reporter emits failure details from the failed case, unwraps test-code assertions, emits numeric expected/actual/operator and stack frames. The runtime output for this exact pinned test remains unobserved. Unknown dialect, incomplete capture, alternate site or competing evidence stops this occurrence.",
+    "Frozen S08 line 18 reads the GET response before status assert; form parsing occurs at line 19 and POST at line 41. The numeric error is direct native data; HTTP method/path/boundary are identified by the pinned source, never by printing requests or parsing assertions globally.",
+    "New mode marker retains safe completed observations even on later failure. Mode verdict qualifies only its fixed oracle. Separate dependency, custody, and final receipt with full external Root join remain mandatory.",
+    "Old preflight and real dependency absence control, target sets, real product timeouts, source budget and six custody launches preserved. All ordinary regressions remain mandatory; regression hash remains e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6."
+  ],
+  "gatesIfRun": [
+    "Synthetic accepted=1/rejected=30, exact context/vectors hash before any Native.",
+    "Actual bootstrap ENOENT evidence from absent cwd, separate exact control frame.",
+    "BASE exact 3/exit1, own scoped witness 503/200 and three actual 1/1/1; stop on failure.",
+    "Proposal 20/allpass/exit0, actual six sends/three distinct receipts/closed selection from frozen checks.",
+    "Mutant all20/exit1 including named EXTRA_KEY fail against same green ID pass; exact compiled predicate.",
+    "Exactly 11 selected regressions pass/exit0 in unchanged manifest order.",
+    "Same-run full separate six-launch custody, cleanup, exactly one canonical Source receipt and matching file; Root API/artefact/receiver gate and re-review."
+  ],
+  "historicalScope": "Earlier 19-result 180s incomplete capture does not establish which case hung, named passes, product/Cloudflare/credential failure or causal guard. This packet has zero Source occurrences.",
+  "publicPrimaryReferences": [
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/reporter/tap.js",
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/test.js",
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/harness.js"
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
