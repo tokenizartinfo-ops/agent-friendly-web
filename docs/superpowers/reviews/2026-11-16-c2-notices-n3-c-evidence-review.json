@@ -1,0 +1,119 @@
+{
+  "schema": "AFW-N3-C-INDEPENDENT-EVIDENCE-REVIEW/1",
+  "atUTC": "2026-11-16 17:55:16 UTC",
+  "reviewer": "/root/n3_tooling_fix2_review",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "brief": "23acfcd37a7e2973a2576c3b6bfde1edac33ce62",
+  "scope": "Read-only evidence/instrumentation review of actual N3.C. No implementation, repeat capture or run authorization.",
+  "pins": {
+    "primary": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+    "outcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+    "close": "0638c9c5634c36b60835c12eb9153af4297d183e",
+    "packet": "4115c1f0d163a2f51a6bbe647d3610ef36311410",
+    "index": "26f167bc9a56184a614e37cbff2b1f03de90a83c",
+    "manifest": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "helper": "bff0415fbbf37c787439d4c526b1c77c8fdf2a65",
+    "driver": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b"
+  },
+  "evidenceVerdict": "ADMITTED_DIAGNOSTIC_FAILURE_WITH_MISSING_CAUSAL_JOIN",
+  "facts": [
+    "Root primary records independent reviewed OWN admission of full API/head/tree/job/steps/frames/schema/replay/custody/manifest/compiledmetadata/artifact joins. This review reads immutable primary/outcome, without refetching logs/ZIP or re-executing receivers.",
+    "Run43921222041/attempt1/job133488709833: N3_CONNECTION/OAUTH/PHASE PASS; N3_NOTICES TEST_FAILED. Four native cases complete, Sourcefilefailure:false, AFTER returned. Child exit1/errorKind:none/stderr0. A successful outer diagnostic job does not convert the failed business case to PASS.",
+    "Witness records25-32 show notices GET200 and POST503, both bodies settled. Record37 counters are upload2/activation2/receipts2. Record34 after-probe independently reports newFailures1/positioncomplete/consumedTickettrue/stageApprovaltrue/receiptCount2.",
+    "Witness35 is the actual causal snapshot: unjoined/unknown/CAP_PRIVATE, eligible0, targetunknown, empty tables/events, firstError:null, cut:null. Its eligible0 detail is stronger than the derived summary and must be preserved.",
+    "Journal9959B/40records is stable, complete, recorderFaultObserved:false; hook reports no fault, two initial-parent-holders guards with interpretationunknown. CAP_PRIVATE is not a Node journal/outer record overflow code.",
+    "Compiled metadata binds ledgerd9d3 and compiler94e30, five current prepared input before/after hashes and deliberately changed QA bytes. Four host calls prepared/returned/allCompared:true establishes the admitted host/compilation observations only.",
+    "Closed head9e58ccb94c046e23ed83b3b60be86eaffb7e6480 has workflow absent and zero close-head runs; primary declares Main/historical source unchanged."
+  ],
+  "instrumentation": {
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "capPrivatePaths": [
+      {
+        "line": 14,
+        "condition": "new root when all.length>=16"
+      },
+      {
+        "line": 26,
+        "condition": "new gap when leaseCount+gapCount>=128"
+      },
+      {
+        "line": 34,
+        "condition": "new lease when leaseCount+gapCount>=128"
+      },
+      {
+        "line": 38,
+        "condition": "serialized publicMeta()>65536 UTF8B; called only after storing an eligible event at113"
+      },
+      {
+        "line": 71,
+        "condition": "new canonical promise when promiseCount>=64"
+      },
+      {
+        "line": 87,
+        "condition": "eligible observation when scope.seq>=4095"
+      },
+      {
+        "line": 99,
+        "condition": "new opaque error when errorCount>=64"
+      },
+      {
+        "line": 111,
+        "condition": "stored event when eventCount>=256"
+      },
+      {
+        "line": 134,
+        "condition": "selected snapshot when scope.seq>=4096"
+      }
+    ],
+    "staticProperties": [
+      "Counters/fault are ledger-global (9-10); first fault is sticky. all[] holds scopes without removal; eligible is only ever set true (43), never reset.",
+      "Compiler36 binds each OP root before notices eligibility; compiler42 binds each phase pair, classified other-pair before target eligibility by ledger55; compiler50 binds outer before compiler52 admits notices. These actual hooks can charge root/lease capacity before the selected scope exists.",
+      "In ledger128-131, snapshot checks global ambiguity/fault before NO_ELIGIBLE. Thus an unrelated earlier global cap can force an empty unknown for the later after-probe; CAP_PRIVATE does not identify the failing object or counter.",
+      "With this instance's monotone eligible0, no scope ever registered eligibility. observe78 therefore returned before sequence/error/event increments; size38 is called only by observe113. Event/error/sequence/metadata CAP paths cannot explain this instance's snapshot. Scope admission and combined lease/gap admission are concrete remaining preeligibility routes.",
+      "Promise cap71 requires an activation-child/target-pair/pair-child canonical work lease. Pinned compiler55 introduces activation only after admitted notices, and target-pair/call bindings require eligible. It is not evidence for an independent preeligibility promise overflow route under these hooks.",
+      "Driver12/14 invokes the two existing probes. Helper44-47 discards the before causal snapshot and retains core only. Ledger with eligible0 returns before incrementing cut134: the before probe cannot explain source-sequence exhaustion here.",
+      "Repeated retain/settlement folds in ledger88-92 occur only after eligibility; ordinary unbound noncanonical retains are filtered84. They do not explain preeligibility event exhaustion. No thrown observation is recovered by the empty unknown snapshot."
+    ],
+    "concreteDefectVerdict": "No specific erroneous counter transition or sealed-contract violation proven by this evidence. Preeligibility global capacity consumption and loss of the exact first-cap branch are concrete static limitations, not proof which threshold this run crossed.",
+    "boundedCounterexample": "As static DATA reasoning only: 17 distinct root binds with no eligible scope exhaust the declared16-root admission; a later notices root cannot register and snapshot yields CAP_PRIVATE/eligible0. Analogous combined128 lease/gap exhaustion can prevent scope binding. Neither stimulus is asserted to be this run's actual schedule.",
+    "exactCounterUnknown": true
+  },
+  "interpretationLimits": [
+    "positioncomplete is a separate mutable diagnostic marker, not causal proof of first-target success, exact failed check, full logical completion or product correctness. Its difference from an earlier receipt-recorded observation is only a difference between measured markers in separate captures.",
+    "firstError:null/events0/settlementsObserved0 in an unknown snapshot means unavailable causal evidence, not absence of error, absence of work or physical pending/drained work.",
+    "Receipt/approval counters, guard observations, Node timings and host sameness cannot be joined to a lease/error/promise by ordinals or proximity. No root trigger, timer, race winner, resource failure or Cloudflare incident is established.",
+    "The earlier41/41 tooling PASS remains bounded evidence for its actual units/reducer controls, not full four-case workload capacity sufficiency."
+  ],
+  "missingJoin": "One self-contained same-realm after snapshot selecting the actual admitted notices root and its existing outer/activation/target-pair/focus-child identities, exact observeOwnerPhasePair call-returned promise retention/settlement, first recorded scoped throw and relevant close/abort order. That join is absent and cannot be reconstructed from separate position/count/guard observations.",
+  "minimalNextProposal": {
+    "status": "PROPOSAL_ONLY_NO_IMPLEMENTATION_OR_RUN_AUTHORIZATION",
+    "first": "Finish exact static census of distinct root/other-pair lease/gap admissions before notices eligibility from the pinned graph. Use the original Source author's independent analysis to distinguish16-root from combined128 admission; do not choose a cause from this aggregate snapshot.",
+    "control": "Seal one bounded tooling workload control reproducing that census with actual existing callback/object semantics and unchanged16/128/64/64/256/65536 caps. Require no cap raise, no new business call/M bridge/reaction/clock read/retry; retain two-eligible/conflicting-reference ambiguity and honest binding-gap prefix behavior.",
+    "ifStaticCensusCannotDiscriminate": "Propose a fixed first-fault privateLimit enum (scope|lease-gap|promise|error|event|sequence|metadata), latched synchronously at the existing cap site, for a bounded test-only diagnostic. It identifies recorder capacity only, never business cause. Any public export needs a separately sealed contract/schema and receiver review; no protocol is changed here.",
+    "joinRecoveryCriterion": "Only a separately reviewed QA admission/bookkeeping candidate proven against the full bounded workload may be considered for a later Root gate. It must admit the genuine selected focus within existing caps or explicitly report unknown, without silently discarding prebinding conflicts or fabricating complete history. No unchanged capture or product repair is recommended."
+  },
+  "method": {
+    "immutableDATAStaticReview": true,
+    "sourceExecutedImportedEvaluatedCompiledOrSyntaxChecked": false,
+    "localFilesDependenciesBuilds": false,
+    "codePatches": false,
+    "logsOrZIPRefetched": false,
+    "newRefsRunsRetriesOrSubagents": false,
+    "liveResources": false
+  },
+  "actualSourceExecution": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
