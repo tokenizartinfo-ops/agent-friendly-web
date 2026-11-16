@@ -1,0 +1,24 @@
+{
+  "utc": "2026-11-16 01:09:04 UTC",
+  "Source": "7ca59cc55e3f2b66212c083d1e82215a988ef7ef",
+  "tree": "4a3f2c5fd49d580c15418a7fdec1b77019fb9c05",
+  "parent": "ef41b65dd5402092a6de3977532a8fffcac59d81",
+  "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+  "SAME": {
+    "bytes": 2594126,
+    "sha256": "3f9c005127940fc259d2c2e0dc5f290da3a5932e1de870ba2ff2c6952bc06ef1",
+    "blob": "d5291b1e807d193765edfc3a257192591ae7f576"
+  },
+  "fullBodiesReadback": true,
+  "CoreInheritedExactLeaves": 3201,
+  "Core": {
+    "leaves": 3201,
+    "bytes": 324448,
+    "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+  },
+  "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "queues": 0,
+  "closedHeadRuns": 0,
+  "SourcePendingNull": true,
+  "providerRuntimeRead": false
+}

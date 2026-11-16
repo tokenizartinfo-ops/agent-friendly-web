@@ -1,0 +1,11 @@
+# AFW Source startup argument finding — after finite phase occurrence
+
+Current occurrence43783876645/1/job133027042797 onSourceef41b65dd5402092a6de3977532a8fffcac59d81 reported exact fixed preflight sentinel followed by platform exit71. No canonical frame/full520 invocation. The code identifies worker launch/capture/unexpected failure only; the precise thrown exception was not captured. Historical cause flag remainsfalse.
+
+Independent static finding E1: digest-pinned supervisor205b3b86713e82ed7e2f2b2670cbcd3836cd3e72 calls spawnSync with a nonempty string input workerSource and encoding:'buffer'. This literal combination is present since fix1; it is a startup/API defect separate from the settled publication/privacy contract.
+
+Primary Node22.23.4 implementation: https://github.com/nodejs/node/blob/v22.23.4/lib/child_process.js#L829-L847 converts string stdin via Buffer.from(input, options.encoding) before the native spawn. Buffer source https://github.com/nodejs/node/blob/v22.23.4/lib/buffer.js#L450-L460 rejects an unsupported encoding; its supported encoding selector at#L680-L727 has no buffer encoding. Thus the current literal input combination deterministically reaches ERR_UNKNOWN_ENCODING if the call is reached under that runtime. This is static mechanism evidence consistent with observed71, not a captured exception or proof of the original historical/Native failure.
+
+A tiny Root builtin-only probe, not an AFW Source execution, observed Buffer.isEncoding('buffer')false and Buffer.from(fixture-string,'buffer') rejecting with ERR_UNKNOWN_ENCODING; runtime version was not queried. It is corroboration only; the exact-version primary code establishes Node22 behavior.
+
+Smallest candidate correction to be reviewed/implemented by the fresh round4 Source actor: supply explicit UTF8 Buffer stdin while retaining Buffer stdout/stderr, or omit the output encoding and retain explicit Buffer stdin. Preserve exact source bytes/pins/bounds/argv/publication and cover actual exact-shell positive/negative tests. Do not execute product Source locally. A fresh authorized GitHub occurrence must validate the correction; no retry of consumedhead/logs. All7flagsfalse,I3open,C2/Nativeheld. Root does not implement Source fixes.
