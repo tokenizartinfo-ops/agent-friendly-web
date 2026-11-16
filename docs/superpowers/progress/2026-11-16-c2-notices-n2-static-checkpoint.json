@@ -1,6 +1,6 @@
 {
   "schema": "afw.c2-notices-n2.root-static-checkpoint.v1",
-  "atUTC": "2026-11-16 12:45:02 UTC",
+  "atUTC": "2026-11-16 12:56:14 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "environment": "immutable Git DATA / Root docs",
@@ -56,9 +56,9 @@
     "Final Source packet/index/report/diff FULL-readback hashes verified; all14 new admission body hashes verified; normal13 metadata exactly unchanged; 3/4/5 hunks replay forward/reverse exact."
   ],
   "pending": [
-    "Independent OWN scoped spec/quality review",
-    "Root Source admission/one-use execution/actual receipt/closure after review",
-    "Continue Task1 qualification and remaining frozen plan only on actual evidence"
+    "Scoped Source N2 instrumentation review",
+    "Read-only precise receipt-recorded/lease-holder cause diagnosis",
+    "Root next-step ruling; normal13/full qualifier/Task2 remain frozen pending evidence"
   ],
   "SourceExecutedHere": false,
   "SourceQualified": false,
@@ -105,7 +105,30 @@
     "review": {
       "actor": "/root/c2_next_get_own_review",
       "brief": "ea8ad653b9f0f46106a359848556e22800a8a7a2",
-      "pending": true
+      "pending": false,
+      "report": "b44a603ba0097da4e36a8bcb70e87123ee6ddd67"
     }
+  },
+  "sourceActual": {
+    "runId": 43869998890,
+    "jobId": 133308331285,
+    "primary": "db59d9696661b681e88c919e08ec1311d176b4de",
+    "outcome": "eeeec6e48364422b40b599a75fad21064562eb64",
+    "ownCaptureAccepted": true,
+    "closed": {
+      "head": "106b5a0ea543abe55dc8f27a717362dda1dfd08e",
+      "tree": "1d06495cb6e6bcb9b322d69a124c0c0eef3454ed",
+      "branch": "lab/afw-c2-source-20261116-t1-notices-n2",
+      "testedHead": "5f3a7bf3a5103d1a00d2bb15ac66ecaa9a68786f",
+      "leaves": 3235,
+      "originals": 3203,
+      "workflowRemoved": true
+    },
+    "closeProof": "44a9091d8cbf1745b84dcfb853f88d07836316ff",
+    "nativePass": 3,
+    "nativeFail": 1,
+    "frontier": "receipt-recorded",
+    "guards": 2,
+    "actualCauseUnknown": true
   }
 }
