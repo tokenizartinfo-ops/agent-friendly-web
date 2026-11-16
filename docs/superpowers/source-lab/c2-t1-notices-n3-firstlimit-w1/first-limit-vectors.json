@@ -1,0 +1,655 @@
+{
+  "schema": "afw.c2-notices-n3.first-limit-vectors.v1",
+  "positive": [
+    {
+      "id": "CAP_PRIVATE_ROOT16_0",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "summary": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "expect": "accept"
+    },
+    {
+      "id": "CAP_PRIVATE_ROOT16_1",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 1,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "summary": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "expect": "accept"
+    },
+    {
+      "id": "CAP_PRIVATE_GAP_NEW128_0",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_GAP_NEW128",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "summary": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_GAP_NEW128",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "expect": "accept"
+    },
+    {
+      "id": "CAP_PRIVATE_GAP_NEW128_1",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_GAP_NEW128",
+        "eligible": 1,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "summary": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_GAP_NEW128",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "expect": "accept"
+    },
+    {
+      "id": "CAP_PRIVATE_LEASE_NEW128_0",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEASE_NEW128",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "summary": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEASE_NEW128",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "expect": "accept"
+    },
+    {
+      "id": "CAP_PRIVATE_LEASE_NEW128_1",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEASE_NEW128",
+        "eligible": 1,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "summary": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEASE_NEW128",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "expect": "accept"
+    },
+    {
+      "id": "CAP_PRIVATE_OTHER_0",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_OTHER",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "summary": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_OTHER",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "expect": "accept"
+    },
+    {
+      "id": "CAP_PRIVATE_OTHER_1",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_OTHER",
+        "eligible": 1,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "summary": {
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_OTHER",
+        "target": "unknown",
+        "firstError": null,
+        "focusChild": null,
+        "events": 0,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "expect": "accept"
+    }
+  ],
+  "negative": [
+    {
+      "id": "LEGACY_CALIBRATION_EXCLUDED",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_LEGACY_SAME_GAP128",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "UNREFINED_EXCLUDED",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "UNKNOWN_CODE",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT17",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "TWO_ELIGIBLE",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 2,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "AMBIGUOUS",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "ambiguous",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "JOINED",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "complete",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "PREFIX",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "prefix",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "EVENT_PRESENT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "FIRST_ERROR",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": 1,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "CUT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": 1
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "RAW_EXTRA",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null,
+        "counter": 16
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "CURRENT_TARGET",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "entered",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "ELIGIBLE_OUTSIDE",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 17,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    },
+    {
+      "id": "BAD_FOCUS",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "unjoined",
+        "coverage": "unknown",
+        "reason": "CAP_PRIVATE_ROOT16",
+        "eligible": 0,
+        "target": "unknown",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "first-observed"
+        },
+        "leases": [],
+        "promises": [],
+        "errors": [],
+        "events": [],
+        "firstError": null,
+        "cut": null
+      },
+      "expect": "reject"
+    }
+  ],
+  "transportMutations": [
+    {
+      "id": "SUMMARY_REASON_DISAGREES",
+      "recordReason": "CAP_PRIVATE_ROOT16",
+      "summaryReason": "CAP_PRIVATE_GAP_NEW128",
+      "expect": "reject"
+    },
+    {
+      "id": "WRONG_SELECTION_IN_BOTH",
+      "selectionHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c",
+      "expect": "reject"
+    },
+    {
+      "id": "WRONG_JOB_ALL_LAYERS",
+      "job": "c2-notices-n3",
+      "expect": "reject"
+    },
+    {
+      "id": "OLD_OUTER",
+      "schema": "afw.c2-notices-n3.observation.v1",
+      "expect": "reject"
+    }
+  ],
+  "transport": "Independent OWN must rebuild all checksums, NDJSON+LF, hash witness, occurrence/manifest candidates, CRCs and ZIP for semantic forgeries. 8 positive/14 negative snapshots +4 coherent transport negatives in addition to old corpus. The distinct coherent substitution ROOT16->GAP_NEW128 everywhere under a correctly bound valid producer-shaped wire is structurally valid, cannot authenticate a truthful producer; verify with source callback tests.",
+  "snapshotCut": "Mutating a returned CAPPED snapshot has no history effect. Joined eligible snapshot() followed by probeSnapshot() has exactly successive cuts, never a skipped cut. Same first-fault enum on repeat; snapshots already returned are immutable-by-copy.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "selectionArtifact": {
+    "bytes": 2626,
+    "sha256": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+    "gitBlob": "c1601719648fc4992fe520ef051b89852a6216f5",
+    "blob": "c1601719648fc4992fe520ef051b89852a6216f5",
+    "fullReadback": true
+  },
+  "wireSelection": {
+    "canonicalBytes": 2424,
+    "sha256": "b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503",
+    "rule": "SHA256(UTF8 JSON.stringify(parsed selection), no LF)"
+  }
+}

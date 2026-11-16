@@ -1,0 +1,24 @@
+// DIAGNOSTIC N3 ONLY. Normal Source20 remains separately pinned.
+import test,{after as nativeAfter} from 'node:test';
+import assert from 'node:assert/strict';
+import {createFiniteCoupledOwnerWorld} from './fixtures/finite-coupled-native.mjs';
+import {ready,flow,blocked,after,captureFault,guardFinal,compilation} from './n3-helper.mjs';
+let w,prerequisiteFailed=false;
+nativeAfter(async()=>{after('enter');try{await w?.close();after('return');guardFinal();}catch(error){after('throw',error);guardFinal();throw error;}});
+const run=(id,work)=>test(id,{timeout:120000},async()=>{
+ if(prerequisiteFailed){blocked(id);const error=Error('N3 prerequisite blocked');error.code='PREREQUISITE_BLOCKED';throw error;}
+ let actionThrew=false,countThrew=false,actionError,countError;
+ flow(id,'action','enter');
+ try{assert(ready());if(id==='N3_NOTICES')await w.n3Before();await work();flow(id,'action','return');}
+ catch(error){actionThrew=true;actionError=error;flow(id,'action','throw',error);}
+ if(id==='N3_NOTICES'){try{await w.n3After();}catch{captureFault();}}
+ flow(id,'count','enter');
+ try{const counters=w?await w.counts():null;flow(id,'count','return',null,counters);}
+ catch(error){countThrew=true;countError=error;flow(id,'count','throw',error);}
+ if(actionThrew||countThrew)prerequisiteFailed=true;
+ if(actionThrew)throw actionError;if(countThrew)throw countError;
+});
+run('N3_CONNECTION',async()=>{w=await createFiniteCoupledOwnerWorld();compilation(w.n3Compilation());await w.approve('connection');assert.deepEqual(await w.counts(),{upload:1,activation:1,receipts:1});});
+run('N3_OAUTH',async()=>{await w.oauth();});
+run('N3_PHASE',async()=>{await w.corruptThenDeny('phase');});
+run('N3_NOTICES',async()=>{await w.approve('notices');assert.deepEqual(await w.counts(),{upload:2,activation:2,receipts:2});});

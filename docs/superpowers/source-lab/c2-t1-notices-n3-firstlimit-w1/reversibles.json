@@ -1,0 +1,174 @@
+{
+  "schema": "afw.c2-notices-n3.r4-reversibles.v1",
+  "fullBeforeAfter": {
+    "bytes": 424188,
+    "sha256": "adea1cc987e4c036fdc7c77e4639afffa34fc6d5ac9bf4f73fd051e3d8100e92",
+    "gitBlob": "51450ec47f19ae682f7d3d132f728c3757540f0a",
+    "blob": "51450ec47f19ae682f7d3d132f728c3757540f0a",
+    "fullReadback": true
+  },
+  "baseline": {
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "frozen": true
+  },
+  "censusBaseline": {
+    "packet": "7e422153658322797ea05adba3b1a519b8ec728a",
+    "index": "eddf0e03c94817509f02a334a8e73844728538f1",
+    "primary": "f22df7c75028c01206266a3c4df26e7c31ef7864",
+    "close": "f67891c12d4ddb662bb868701f2d04ebbe4e2b48"
+  },
+  "oldSource": {
+    "packet": "4115c1f0d163a2f51a6bbe647d3610ef36311410",
+    "index": "26f167bc9a56184a614e37cbff2b1f03de90a83c",
+    "actual": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9"
+  },
+  "policy": "Only add exact absent leaves on one disposable BASE child. Author created no refs. Reverting the detached candidate selects the frozen predecessor bodies; if Root gates a tooling or separately authorized business occurrence, preserve its readback/custody first and remove only that occurrence's one-use workflow per Root close procedure. Never mutate BASE, main, previously closed occurrences or the user's runtime.",
+  "intermediates": [
+    {
+      "role": "A-v",
+      "pin": {
+        "bytes": 8496,
+        "sha256": "6080058e4e855a4ba63efc49042a64b2731af2ac13c70b4b2d779874d06a781a",
+        "gitBlob": "d21ab3437f7a8057ccc8c3bfa2c08c246464bad8",
+        "blob": "d21ab3437f7a8057ccc8c3bfa2c08c246464bad8",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "A-select",
+      "pin": {
+        "bytes": 4191,
+        "sha256": "946eb4ba8da7872d918881ca0979b4e002d346e0c864beae8a67011e51c70be5",
+        "gitBlob": "0407e509a72bd47bda3fad98f22ffc9f1e748664",
+        "blob": "0407e509a72bd47bda3fad98f22ffc9f1e748664",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "A-before-program",
+      "pin": {
+        "bytes": 11847,
+        "sha256": "d335151e1e6c4521cc700b8d52ab58311f6b47a509f19ced0c80c50bcb912e6d",
+        "gitBlob": "30f21ecb0c37edbd48e9f12638a6b29b3f8acb84",
+        "blob": "30f21ecb0c37edbd48e9f12638a6b29b3f8acb84",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "A-green-program",
+      "pin": {
+        "bytes": 27061,
+        "sha256": "368a731f15956b0602e9faaad9b0869ad279d05226c25d14898510ebb058f238",
+        "gitBlob": "767115535364ac82515110009bd9bd0331e756a1",
+        "blob": "767115535364ac82515110009bd9bd0331e756a1",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "A-schema",
+      "pin": {
+        "bytes": 17457,
+        "sha256": "451e9fa012f15521b5c6a4ea5f62827f86bf08b246e228abde5a09831cc2b33b",
+        "gitBlob": "bd0789685b0207ca078052a2bcfdb19d65b87283",
+        "blob": "bd0789685b0207ca078052a2bcfdb19d65b87283",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "A-wf",
+      "pin": {
+        "bytes": 1605,
+        "sha256": "3608a92aaff267996f531a79179b55a62ea387e0082b15e13b7e29e09318670a",
+        "gitBlob": "de2c588aafed8ca57134b187dd8622f92fea10d6",
+        "blob": "de2c588aafed8ca57134b187dd8622f92fea10d6",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "A-ledger",
+      "pin": {
+        "bytes": 16750,
+        "sha256": "3b1cdf689adf33cb46d32ce62cf6f179ec0f161af489667dd80dac35265c7bea",
+        "gitBlob": "b395ccb51359b04e84de430a99871f605312ef28",
+        "blob": "b395ccb51359b04e84de430a99871f605312ef28",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "W-draft",
+      "pin": {
+        "bytes": 8165,
+        "sha256": "74ee05b6c4b7f50f762063f8e8fa3310407f03de3a3deb4de88f3088f19a8d59",
+        "gitBlob": "8b4511f4b56a84e402efc6d969de615619d67be0",
+        "blob": "8b4511f4b56a84e402efc6d969de615619d67be0",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "W-schema",
+      "pin": {
+        "bytes": 30988,
+        "sha256": "a38713a39366264cdfdebebfdbc9fb7aa3cadf1376d81005a5893a307c9e06ba",
+        "gitBlob": "06d4a9713d8964a20392f3533c527e01e506492f",
+        "blob": "06d4a9713d8964a20392f3533c527e01e506492f",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "W-vectors",
+      "pin": {
+        "bytes": 17345,
+        "sha256": "c88a8122457d4cd2816188873c019c64c55e2c17fb7f7914fd2a53d3f186cad2",
+        "gitBlob": "0c39ccebc1f498cb94ad23c465369d3ed0d01fc2",
+        "blob": "0c39ccebc1f498cb94ad23c465369d3ed0d01fc2",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "W-cases",
+      "pin": {
+        "bytes": 9221,
+        "sha256": "a3ee2c9c334509a555115bb2b7d2d22df6bb64274c71a56f6dc0c7e36d05fcf7",
+        "gitBlob": "4a3b6e1205c15e36f87dfc119c361f872ba72bbf",
+        "blob": "4a3b6e1205c15e36f87dfc119c361f872ba72bbf",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "W-source-run",
+      "pin": {
+        "bytes": 34816,
+        "sha256": "4be66f97849070967fa5e609c92196ab3cf7ef6a2ed805b93c12e4d9a90b2efd",
+        "gitBlob": "ae61e3467e9acb141cfca24a591512d4ac967ad4",
+        "blob": "ae61e3467e9acb141cfca24a591512d4ac967ad4",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "W-source-wf",
+      "pin": {
+        "bytes": 1534,
+        "sha256": "46c8180d31f0ae8f74e5d23e399944bf725dfe0101513ee22e7a88c9c37ccd60",
+        "gitBlob": "278025fab5acd64a09513324ccd40f33fd259078",
+        "blob": "278025fab5acd64a09513324ccd40f33fd259078",
+        "fullReadback": true
+      }
+    },
+    {
+      "role": "W-native-v",
+      "pin": {
+        "bytes": 5124,
+        "sha256": "1ebaa6503fbbbbcd38655fa3e983dfd377df4637602c56d231d24cf4a7e2699e",
+        "gitBlob": "84812d0e63fd6f204f9d789bad0f0821950f2250",
+        "blob": "84812d0e63fd6f204f9d789bad0f0821950f2250",
+        "fullReadback": true
+      }
+    }
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false
+}

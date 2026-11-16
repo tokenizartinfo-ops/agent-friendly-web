@@ -1,0 +1,183 @@
+{
+  "schema": "afw.c2-notices-n3.r4-source-author-report.v1",
+  "status": "INACTIVE_DATA_ONLY_PENDING_ROOT_NATIVE_AND_INDEPENDENT_REVIEW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "round": "4/5, Source observer",
+  "authority": {
+    "ruling": "a969930b2fea38173ac84b33aa85f9f6ef85e516",
+    "earlySeal": "18f7bc92ad395e87042666399e736aa4dffbe278",
+    "artifactSupplement": "fea7c4ec837887c87f33720d799fcfa76cdede3f",
+    "design": "d9330e833c6fc7dd72cdfb51d0dee4427e515142",
+    "censusProof": "cda3acf85a765c4788bbc023b247da791a9f322a",
+    "censusReview": "f5e61bf12e1db35aa29ce19652a760b3baaf9624"
+  },
+  "decision": "U=L+G. A consumes an existing exact-ref gap before charging its lease slot, only after existing lease/root/parent/role admission rules. No extra buffer. W records the first capacity site in the existing sticky fault and exposes its reason only in the already-invoked QA snapshot. Closure of an earlier scope and an empty before snapshot do not retire identities. No cut or callback is synthesized.",
+  "testing": {
+    "frozenBefore3": {
+      "bytes": 8496,
+      "sha256": "6080058e4e855a4ba63efc49042a64b2731af2ac13c70b4b2d779874d06a781a",
+      "gitBlob": "d21ab3437f7a8057ccc8c3bfa2c08c246464bad8",
+      "blob": "d21ab3437f7a8057ccc8c3bfa2c08c246464bad8",
+      "fullReadback": true
+    },
+    "additionalTestFirst": {
+      "bytes": 5124,
+      "sha256": "1ebaa6503fbbbbcd38655fa3e983dfd377df4637602c56d231d24cf4a7e2699e",
+      "gitBlob": "84812d0e63fd6f204f9d789bad0f0821950f2250",
+      "blob": "84812d0e63fd6f204f9d789bad0f0821950f2250",
+      "fullReadback": true
+    },
+    "supplementOnly": {
+      "bytes": 5368,
+      "sha256": "19fb57d62a60d00845d1c4885cbdfca477b413c2c1f2ef7dc7355ba1f34ce3a7",
+      "gitBlob": "58b14b6af5dddc78693a1fd313d42834049af103",
+      "blob": "58b14b6af5dddc78693a1fd313d42834049af103",
+      "fullReadback": true
+    },
+    "selection": {
+      "bytes": 5189,
+      "sha256": "fbf76015ca498a2a73229b907c661ba0d6580da6ed1ac0ae73c9e846325297aa",
+      "gitBlob": "870f0847593656cbf38b2b22695b29fb86124e98",
+      "blob": "870f0847593656cbf38b2b22695b29fb86124e98",
+      "fullReadback": true
+    },
+    "programBefore": {
+      "bytes": 13447,
+      "sha256": "7b591826e2d6f780b2c5ab8ff807ee64f8049c42789e68639b7facbdf1f4fd96",
+      "gitBlob": "a24f33e50fef8b82cc9d81b8891735d7cf70dd4c",
+      "blob": "a24f33e50fef8b82cc9d81b8891735d7cf70dd4c",
+      "fullReadback": true
+    },
+    "beforeSuite": {
+      "bytes": 1171,
+      "sha256": "e123666909f47d95e03208890cb2adc808685d0b202e5b4089b001dba7029990",
+      "gitBlob": "9746c641eef82bcfa57fd48bceec59267547ce19",
+      "blob": "9746c641eef82bcfa57fd48bceec59267547ce19",
+      "fullReadback": true
+    },
+    "greenProgram": {
+      "bytes": 28977,
+      "sha256": "137c6daaaa92766d8cd5a21918c033179926bd124fe60b187a1bac60252b71b5",
+      "gitBlob": "d9a27ab6dd058595b6961610e33b99cc5b617db4",
+      "blob": "d9a27ab6dd058595b6961610e33b99cc5b617db4",
+      "fullReadback": true
+    },
+    "schema": {
+      "bytes": 20743,
+      "sha256": "eb0235ceea63b70ac23b8ab4b1802a414aef17680ded063b9a59e03d584f6dbc",
+      "gitBlob": "7051988b191b33dbd99f2cd318def52587fd637b",
+      "blob": "7051988b191b33dbd99f2cd318def52587fd637b",
+      "fullReadback": true
+    },
+    "proposed": {
+      "red": 3,
+      "green": 62,
+      "old41BodyTextVerified": true
+    },
+    "coverage": "Frozen direct failure process status1, exactly3 designated ERR_ASSERTION discriminators witnessed with original complete CAP snapshot and matching positive desired facts. Candidate62 old41/frozen unit file, updated six census DTO roles, six additional A and nine W cases. After before-program validates actual TAP/bytes/results, GREEN must consume same-run proof and publish one <=24576B JSON artifact. All source-control phase/case limits unchanged.",
+    "expectedSizeModelBytes": 19171,
+    "actualExecution": "PENDING_ROOT_NATIVE; no producer execution by author"
+  },
+  "manifest": {
+    "artifact": {
+      "bytes": 1334,
+      "sha256": "22a366def27153b2529febedd2ecc59c931e2e1e1394d36d8aaa9be2de4746c8",
+      "gitBlob": "15b2c5764be46b565f80c08e2c6dbd7ac9511a76",
+      "blob": "15b2c5764be46b565f80c08e2c6dbd7ac9511a76",
+      "fullReadback": true
+    },
+    "canonical": "34c1b9a2e7e9d07f4a72ea343074071f54bde05bf4c398e84b0dc42b94310434",
+    "selectionHashCanonical": "b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503",
+    "selectionFileHash": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07"
+  },
+  "limits": "Source13 and M transformed inputs untouched. Fixed budgets 16/128/64/64/256/65536; selected 8/4/4/24 and 6144 bytes incl record/LF; core journal32768/128/outcome24576/Source seven minutes/three custody launches. No new Source business request, probe, callback, timer, then, clockread, epoch or reset. Complete pertains only to selected local evidence at cut.",
+  "evidenceLimits": "A reproduced legacy same-gap defect is unrelated to a proven business cause. Actual historic cap counter roots16 vs lease+gap128 unknown. Model-derived fresh2-root/8-clock GET/POST uses DTO admission only. The coherent ROOT16 to GAP_NEW128 substitution cannot be authenticated by a structural receiver. Separate Root capture gate mandatory after real cloud tooling plus independent OWN and Source reviews.",
+  "nomination": {
+    "tool": {
+      "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+      "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-tool.yml",
+      "job": "c2-notices-n3-firstlimit-w1-tool",
+      "message": "AFW-C2-N3-FIRSTLIMIT-W1-TOOL-ONEUSE-20261116",
+      "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs",
+      "caseMs": 10000,
+      "jobMinutes": 3,
+      "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/",
+      "node": "22.23.4",
+      "attempt": 1,
+      "contents": "read",
+      "artifactDays": 7,
+      "artifact": {
+        "name": "afw-c2-notices-n3-firstlimit-w1-tool",
+        "path": "output/c2-notices-n3-firstlimit-w1-tool.json",
+        "fileName": "c2-notices-n3-firstlimit-w1-tool.json",
+        "expectedCount": 1,
+        "retentionDays": 7,
+        "payloadCapBytes": 24576
+      },
+      "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs",
+      "beforeRunner": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-before.mjs",
+      "commandBefore": "node docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-before.mjs"
+    },
+    "source": {
+      "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+      "message": "AFW-C2-N3-FIRSTLIMIT-W1-ONEUSE-20261116",
+      "job": "c2-notices-n3-firstlimit-w1",
+      "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1.yml",
+      "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/",
+      "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/run-c2-notices-n3-firstlimit-w1.mjs",
+      "command": "node docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/run-c2-notices-n3-firstlimit-w1.mjs",
+      "requiredSteps": [
+        "Read the exact one-use first-limit head",
+        "Use fixed Node",
+        "Install existing locked dependencies",
+        "Observe first notices QA first-limit scope",
+        "Preserve sanitized first-limit diagnostic"
+      ],
+      "commandStep": "Observe first notices QA first-limit scope",
+      "artifact": {
+        "name": "afw-c2-notices-n3-firstlimit-w1",
+        "path": "output/c2-notices-n3-firstlimit-w1.json",
+        "fileName": "c2-notices-n3-firstlimit-w1.json",
+        "expectedCount": 1,
+        "retentionDays": 7,
+        "payloadCapBytes": 24576
+      }
+    }
+  },
+  "baseAbsence": {
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "path404": [
+      "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool",
+      ".github/workflows/afw-c2-notices-n3-firstlimit-w1-tool.yml",
+      "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1",
+      ".github/workflows/afw-c2-notices-n3-firstlimit-w1.yml"
+    ],
+    "oldSharedFrozenSourceLeaves": "Reuse vetted inactive N3 index for the 16 common inputs; Root independently expands and checks all baseline paths and modes."
+  },
+  "reversibles": {
+    "bytes": 6162,
+    "sha256": "e1e8ca702a54db76b22214fca757f670917d066d343e6e5ee1801c76f6b34561",
+    "gitBlob": "6b20607886f35f5f9bcebe4d39aded141b848dd1",
+    "blob": "6b20607886f35f5f9bcebe4d39aded141b848dd1",
+    "fullReadback": true
+  },
+  "fullBeforeAfter": {
+    "bytes": 424188,
+    "sha256": "adea1cc987e4c036fdc7c77e4639afffa34fc6d5ac9bf4f73fd051e3d8100e92",
+    "gitBlob": "51450ec47f19ae682f7d3d132f728c3757540f0a",
+    "blob": "51450ec47f19ae682f7d3d132f728c3757540f0a",
+    "fullReadback": true
+  },
+  "sourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

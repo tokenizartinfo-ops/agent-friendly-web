@@ -1,0 +1,784 @@
+{
+  "schema": "afw.c2-notices-n3.compilation-vectors.v1",
+  "status": "TEST_FIRST_FINAL_COMPILATION_JOIN_NATIVE_PENDING",
+  "syntheticOnly": true,
+  "notSourceEvidence": true,
+  "cases": [
+    {
+      "id": "COMPILATION_SAME_BUILD_CURRENT_ARGUMENT",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": true
+    },
+    {
+      "id": "COMPILATION_BAD_LF",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_EXTRA_KEY",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]},\"extra\":true}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_MISMATCH_CURRENT_M",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_MISSING_SETTLED_ARGUMENT",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_SETTINGS_NOT_EQUAL",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": false,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_LEDGER_WRONG",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_INPUT_ORDER",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"25b1effba19c87bf608867fe9a37e8917c3cbb93dfc61a10cee03c52317bb6a7\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_INPUT_HASH_WRONG",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_UNCHANGED_QA_INPUT",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"5d8913f463712d401cd1b2df2b961f86bc6d7b9495f03a174a8cb8bfc313c305\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_LATER_RETURNED_QA_MISMATCH",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_LATER_ADOPT_MISMATCH",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 5,
+            "stage": "adopt",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 18,
+              "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 5,
+            "stage": "adopt",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 18,
+              "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_UNPAIRED_RETURNED",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 3,
+            "stage": "mount",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_RAW_OVER8192",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"2c2a6628bc579f8134cc01f32266fdaf0154843d22fff75d5d82e841a59629e1\",\"inputs\":[{\"id\":\"ledger\",\"before\":null,\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    },
+    {
+      "id": "COMPILATION_LEDGER_BEFORE_NOT_NULL",
+      "input": {
+        "raw": "{\"M\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"QA\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"deliberatelyChanged\":true,\"inputManifestHash\":\"b354722b95582b9c41e2c3dcab1213a18e0491921257c3627002347c1d5fc7e6\",\"inputs\":[{\"id\":\"ledger\",\"before\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"PH\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"OP\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"LEASE\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}},{\"id\":\"STDIN\",\"before\":{\"bytes\":16,\"sha256\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"},\"after\":{\"bytes\":17,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}\n",
+        "hostRecords": [
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "prepared",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          },
+          {
+            "kind": "host-proof",
+            "call": 2,
+            "stage": "assembly",
+            "edge": "returned",
+            "settingsEqual": true,
+            "callbackSame": true,
+            "referencesSame": true,
+            "compiledMatch": true,
+            "M": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "QA": {
+              "bytes": 17,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            }
+          }
+        ],
+        "ledger": {
+          "bytes": 17,
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "expected": false
+    }
+  ],
+  "scope": "Only Node same-build compilation DATA and actual already-recorded host-proof comparison. No private options inspection, second build/world/request, predicted priorMhash or compiled business changes.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "authority": "aa2841a97fa452190c6cfb93599e36d005b13fd9",
+  "additionalRule": "All exposed prepared/returned compiled host calls must match SAME current compiledM/QA descriptors, not only first or final. One settled assembly is required; every returned compiledcall must have original prior prepared matching call+stage. Constructor remains precompile/null. No positive fallback/missing metadata."
+}

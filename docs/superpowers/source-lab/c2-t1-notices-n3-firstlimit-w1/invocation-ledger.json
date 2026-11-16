@@ -1,0 +1,126 @@
+{
+  "schema": "afw.c2-notices-n3.first-limit-invocation-ledger.v1",
+  "status": "FINAL_INACTIVE_NO_CAPTURE_AUTHORIZATION",
+  "authority": "18f7bc92ad395e87042666399e736aa4dffbe278",
+  "runtimeCaps": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+    "message": "AFW-C2-N3-FIRSTLIMIT-W1-ONEUSE-20261116",
+    "job": "c2-notices-n3-firstlimit-w1",
+    "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1.yml",
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/run-c2-notices-n3-firstlimit-w1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/run-c2-notices-n3-firstlimit-w1.mjs",
+    "attempt": 1,
+    "node": "22.23.4",
+    "sdk": "1.2.1",
+    "miniflare": "5.20260831.0-alpha",
+    "workerd": "1.20260831.1",
+    "jobMinutes": 7,
+    "totalMs": 330000,
+    "childMs": 180000,
+    "caseMs": 120000,
+    "incomingMs": 30000,
+    "childLeaseMs": 5000,
+    "custodyLaunches": 3,
+    "nativeCases": 4,
+    "after": true,
+    "existingProbes": 2,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "journalBytes": 32768,
+    "journalRecords": 128,
+    "outcomeBytes": 24576,
+    "artifactDays": 7,
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/",
+    "requiredSteps": [
+      "Read the exact one-use first-limit head",
+      "Use fixed Node",
+      "Install existing locked dependencies",
+      "Observe first notices QA first-limit scope",
+      "Preserve sanitized first-limit diagnostic"
+    ],
+    "commandStep": "Observe first notices QA first-limit scope",
+    "artifact": {
+      "name": "afw-c2-notices-n3-firstlimit-w1",
+      "path": "output/c2-notices-n3-firstlimit-w1.json",
+      "fileName": "c2-notices-n3-firstlimit-w1.json",
+      "expectedCount": 1,
+      "retentionDays": 7,
+      "payloadCapBytes": 24576
+    }
+  },
+  "rootAdmission": {
+    "function": "runneradmission",
+    "reads": "Readonly git HEAD,parent,BASEtree,message; exact Source13index/13bodydata and20TOOLING rawbytes/SHA/Gitblob; actual lock equalsBASE and Node/sdk/miniflare/workerd fixed.",
+    "effects": "No refs/commits/networkprovider. Only later root-owned jobtemp materialization after allhashadmission.",
+    "binding": "Producer manifest exact 16 keys, raw SHA256 22a366def27153b2529febedd2ecc59c931e2e1e1394d36d8aaa9be2de4746c8, canonical 34c1b9a2e7e9d07f4a72ea343074071f54bde05bf4c398e84b0dc42b94310434; actual head/tree/occurrence from future Root-admitted job only."
+  },
+  "steps": [
+    {
+      "id": "SYNTHETIC",
+      "awaits": "checkedTool reads and reviewed runControls(core),runTraceControls(causal);15compilation join fixtures run samepurevalidator inparent, no World. W1 reader separately enforces 8 positive and 14 negative first-limit literals before any Source work.",
+      "effects": "Only safeSYNTHETICframe counts; fixed core6/21/3/6/2/5/3/7/6/10/12 andcausal31/32. Extra15compilation predicates not miscounted as causalcontrols.",
+      "settlement": "Exceptions abortbeforebusiness; no fabricatedcase/native/pass."
+    },
+    {
+      "id": "MATERIALIZE",
+      "awaits": "gitarchiveBASE fixedallowlist+BootstraponlyDATA; tarintoownjobtemp; all13original beforepinschecked thenfrozenafter DATA copied, symlink existing lockednode_modules.",
+      "effects": "Only jobtemp product materialization. Git/productCore/Main unchanged. Source13data remainexact.",
+      "holders": "Fresh verified RUNNER_TEMP childpath; no computed deletion outside ownarea."
+    },
+    {
+      "id": "CUSTODY1",
+      "awaits": "Sourcepreflight10s under sudoenv-i→unshare-net+lo→setprivoriginalUID/GID/clear-groups/no-new-privs, fixedguardimport.",
+      "effects": "Actual owned600preflightfile verified/removed; custodyprocessrecords typed5booleans only."
+    },
+    {
+      "id": "CUSTODY2",
+      "awaits": "Sameisolated drop/guard; exact bootstrap absence control fromabsentcwd.",
+      "effects": "BOOTSTRAP_DEPENDENCY_ABSENT actual EXPECTED_ENOENT required; pinned originalBootstrapWF isDATAread/hash only, neverexecuted."
+    },
+    {
+      "id": "OVERLAYS",
+      "awaits": "Verify frozenSource13 files before replacing ONLY temporary S07/S08/S10 withdriver/coupled/world afterblobs. Mountreader/slot/helper/logger+QAledger/compiler exactnewfixtures.",
+      "effects": "Normal13GitData untouched. Mcompile call/sourceinputs untouched; QAonLoad temporaryPH/OP/LEASE/stdin+canonicalledger only."
+    },
+    {
+      "id": "CUSTODY3",
+      "awaits": "Sameisolated drop/guard; nativeeager4/sequential N3_CONNECTION→N3_OAUTH→N3_PHASE→N3_NOTICES→AFTER, CLIpatternexact.",
+      "effects": "SameOriginalrequests/probes2/clock5s child30sincoming; no extraWorld/monitor/finitePOST/retry. SourceactionError andcountError heldprivately withbooleans; afteractionprobe/count sameorder; originalactionthrowwins, null/undefined preserved.",
+      "retention": "Original actualpromises/then callbacks unchanged. Probe slottimeout retainsphysicalexclusion; missing callbackobservations never physicaldrain."
+    },
+    {
+      "id": "COMPILATION",
+      "awaits": "No extra build. Nodeworld compiler records SAME preparedinput before/after5 and actualM/QAcompiledbytes; driverwritesONEown600JSON<=8192 afterworldopens. Runner nofollow/fstat owneruidgid/nlink/inode/dev/size/mtime/ctime stable read.",
+      "effects": "ExactcanonicalJSON/LF/typeddescriptors/inputorder/hash/ledgerbytes; everyexposedcompiledhostrow bothprepared+returned comparescurrentM/QA,originalpublicarguments/settings/callbackrefs; requireassembly2settled andpriorpreparedforeveryreturned. NoRootprivateMiniflare introspection.",
+      "failure": "No missing/stale/malformed/discordant metadata fallback. FixedCAPTURE_INVALID/frontier; never manufactureargumentMatched:true fromcopiedmetadataalone."
+    },
+    {
+      "id": "JOURNAL",
+      "awaits": "Samebounded nofollowjournalstable read32768/128; reviewedreadObservation/nativeJoin/safeWitness/verifyWitness.",
+      "effects": "Sane complete/prefixrecords witness only; causaloneAFTERsnapshot6144LF bound, no beforeafterstitch. Hashbytes reconstructed exact. RawTAP/errors/logs/probe/privatepayload retainedonlyboundedRAM and neverpublished. Four public capacity tags are unjoined/unknown empty shapes with eligible0 or1. Source verifies outcome v2, selection/job identity, witness bytes and freshly replayed exact summary before publication."
+    },
+    {
+      "id": "CLEANUP",
+      "awaits": "VerifyownabsolutejobtempwithinRUNNER_TEMP andownerUID; removeonlyownjobtemp; ENOENTverified.",
+      "effects": "Parentnonroot+preflightownedremoved+3checkedlaunches/processes3..24+net/uid/gid+ownremoval provesboundedcustodyonly; notglobalNativedrain/PCoff."
+    },
+    {
+      "id": "PUBLICATION",
+      "awaits": "Aftercustody/cleanup andwithin330s, outputONEcanonical24576BmaxJSON+LF andsameOUTCOMEframe; artifact7days. Fixed path output/c2-notices-n3-firstlimit-w1.json and artifact afw-c2-notices-n3-firstlimit-w1.",
+      "effects": "Compiledmetadata andsafejournalwitnessexposed; all7nonclaims+SourceQualified/Task1Passfalse. No positivefallback andRoot externalAPI/head/job/native/ZIP/canonicaljoin stillrequired."
+    }
+  ],
+  "normalHelpers": "Existing original callback paths and 41 controls remain frozen. The candidate ledger and compiler are pinned by the actual producer manifest. A exact-ref transfer and QA singleton probeSnapshot use a single projection at the existing QA probe site. No operation in this authoring session executed the Source capture.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "artifactSupplement": "fea7c4ec837887c87f33720d799fcfa76cdede3f"
+}
