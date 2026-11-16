@@ -1,0 +1,11 @@
+{
+  "schema": "afw.c2-notices-n3.own-b2-state-red.v1",
+  "execution": "Pure OWN model only",
+  "checks": [
+    {
+      "id": "B2_STATE/MISSING_CAUSAL_SUMMARY_NO_CROSS_CALL_ALIAS",
+      "pass": false
+    }
+  ],
+  "SourceExecuted": false
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "afw.c2-notices-n3.own-axis-fix1-red.v1",
+  "ruling": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
+  "beforeReader": "c6d67df47fa9c7b30c854133744e463bf5242330",
+  "execution": "Pure OWN RAM, before narrow independent axes change",
+  "checks": [
+    {
+      "id": "OWN/AXIS_LOGICAL_THROW_WITH_TARGET_ENTERED",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_LATE_TARGET_THROW_AFTER_P2_CALLBACK",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_LATE_TARGET_THROW_BEFORE_P2_CALLBACK",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_TARGET_THROW_WITH_P2_CALLBACK_UNOBSERVED",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_P2_CALLBACK_DOES_NOT_CREATE_TARGET_MARKER",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_LATE_TARGET_RETURN_COMPLETE_IS_NOT_LOGICAL_SUCCESS",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_UNREACHED_TARGET_WITH_CREATED_ACTIVATION_AND_PROMISE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/AXIS_UNREACHED_ACTIVATION_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/AXIS_PRIMITIVE_THROW_PRESENT_WITHOUT_VALUE_OR_IDENTITY",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_FAKE_COMPLETE_WHILE_TARGET_ENTERED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_TARGET_RETURN_INFERRED_FROM_P2",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_TARGET_THROW_INFERRED_FROM_LOGICAL_THROW",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_P2_SETTLEMENT_INFERRED_FROM_LOGICAL_THROW",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_FIRST_ERROR_OVERWRITTEN_BY_LATE_TARGET",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_DUPLICATE_LOGICAL_TERMINAL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_DUPLICATE_TARGET_TERMINAL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AXIS_TARGET_TERMINAL_BEFORE_ENTER",
+      "pass": true,
+      "accepted": false
+    }
+  ]
+}

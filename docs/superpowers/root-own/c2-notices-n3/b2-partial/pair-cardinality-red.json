@@ -1,0 +1,23 @@
+{
+  "schema": "root-own.n3.pair-cardinality-red.v1",
+  "stage": "before-guard",
+  "pureOwnRamOnly": true,
+  "checks": [
+    {
+      "id": "OWN/OWN_CANONICAL_PAIR_PUBLIC_ORDINAL_THREE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/OWN_SECOND_UNOBSERVED_PAIR_PROMISE",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "OWN/OWN_SECOND_OBSERVED_PAIR_PROMISE_PREFIX",
+      "pass": false,
+      "accepted": true
+    }
+  ],
+  "SourceExecuted": false
+}

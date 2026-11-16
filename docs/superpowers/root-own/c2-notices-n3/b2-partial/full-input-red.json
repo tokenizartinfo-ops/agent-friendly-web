@@ -1,0 +1,216 @@
+{
+  "schema": "afw.c2-notices-n3.own-b2-shape-only-red.v1",
+  "execution": "OWN generic shape only; no Source parser execution",
+  "checks": [
+    {
+      "id": "B2/FULL_MODEL_BASE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/FULL_CAUSAL_UNKNOWN_HONEST",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/FULL_CUSTODY_9",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/FULL_CUSTODY_24",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/FULL_AFTER_THROW_AUXILIARY",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/FULL_HONEST_TIMEOUT_POST_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "B2/CAUSAL_BEFORE_AFTER_PROBE",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/CAUSAL_AFTER_COUNT_ENTER",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/CAUSAL_MISSING_ON_ENTERED_NOTICES",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/CAUSAL_DUPLICATE_SMALL_UNKNOWN",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/CAUSAL_SUMMARY_FORGED",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/CAUSAL_EVENT_AFTER_CUT",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COHERENT_NATIVE_FAIL_WITH_RETURNED_OPS",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COHERENT_NATIVE_PREFIX_FOUR_TIMEOUT",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COHERENT_COMPLETE_JOURNAL_NATIVE_THREE_TIMEOUT",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COHERENT_CUSTODY_2",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COHERENT_CUSTODY_25",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "B2/WITNESS_HASH_WRONG",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/JOURNAL_HASH_WRONG",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/MANIFEST_HASH_WRONG",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COHERENT_FORGED_BODY_BINDING_VS_TRUSTED",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/NO_TRUSTED_AUTHORITY",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/TRUSTED_MANIFEST_KEY_ORDER",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COMPILATION_INPUT_ORDER",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COMPILATION_LEDGER_BEFORE_FORGED",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COMPILATION_LEDGER_AFTER_NOT_KNOWN_PRODUCER",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COMPILATION_INPUT_HASH_WRONG",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COMPILATION_CURRENT_M_DISAGREES_HOST_ARGUMENT",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/COMPILATION_CURRENT_QA_DISAGREES_HOST_ARGUMENT",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/SOURCE_QUALIFIED_FORGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "B2/BUSINESS_EXECUTED_FALSE_IN_CAPTURE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "B2/API_RUN_ATTEMPT_TWO",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/API_RUN_BRANCH",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/API_STEP_NAN_TIME",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/API_JOB_WRONG_ID",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/LOG_LITERAL_ECHO",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/LOG_FRONTIER",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/ARTIFACT_DIGEST_WRONG",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/ZIP_PATH",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/ZIP_CRC",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/ZIP_MULTIPLE_ENTRIES",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "B2/ZIP_CENTRAL_BOUNDS",
+      "pass": false,
+      "accepted": true
+    }
+  ]
+}

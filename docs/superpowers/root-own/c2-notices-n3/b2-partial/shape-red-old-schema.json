@@ -1,0 +1,44 @@
+{
+  "schema": "afw.c2-notices-n3.own-b2-schema-value-red.v1",
+  "beforeSchema": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+  "beforeLiteral": "7c29545df251f4eb1e35eadcc00ee820218fa3cb",
+  "beforeShapeAccepted": false,
+  "beforeFailures": [
+    "selectionHash",
+    "journal"
+  ],
+  "rootCorrectedSchema": "1c336fe190816b46223546971afcf34b2c216089",
+  "correctedLiteral": "c36998642c62c93b43720ffe18c666f442a1253f",
+  "afterShapeAccepted": true,
+  "exactDataChanges": [
+    {
+      "path": [
+        "properties",
+        "selectionHash",
+        "const"
+      ],
+      "before": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+      "after": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c"
+    },
+    {
+      "path": [
+        "properties",
+        "journal",
+        "properties",
+        "witness",
+        "properties",
+        "records",
+        "items",
+        "oneOf",
+        "0",
+        "properties",
+        "selectionHash",
+        "const"
+      ],
+      "before": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+      "after": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c"
+    }
+  ],
+  "meaning": "Only reviewed OWN generic shape validation over Source JSON DATA; no Source code/runtime/parser execution. Original N3 literal remained correct, no normalization to N2.",
+  "SourceExecuted": false
+}

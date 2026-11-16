@@ -1,0 +1,28 @@
+{
+  "schema": "root-own.n3.b2-control-input-map.v1",
+  "export": "n3B2AllControls(data,sha256,inflateRawSync)",
+  "data": {
+    "own": "trace-vectors.json",
+    "oldSealed": "sealed-vectors-data.json",
+    "raw": "raw-record-inputs.json",
+    "transport": "synthetic-transport.json",
+    "ruling": "ruling-vectors.json",
+    "rulingTransport": "ruling-transport.json",
+    "abort": "abort-vectors.json",
+    "axis": "axes-vectors.json",
+    "pairCardinality": "pair-cardinality-vectors.json",
+    "pairCardinalityFull": "pair-cardinality-full.json",
+    "currentSource": "source-current-snapshots-data.json",
+    "sourceAxes": "source-axes-plans-data.json",
+    "reducer": "source-reducer-plans-data.json",
+    "full": "full-input-models.json",
+    "supplement": "full-input-supplement.json",
+    "fullAxes": "full-input-axes.json",
+    "blocked": "full-input-blocked.json"
+  },
+  "expectedTotal": 496,
+  "uniqueIds": 496,
+  "expectedFailureCount": 0,
+  "executionStatus": "Pure OWN RAM verified; native import graph deferred Root",
+  "SourceExecuted": false
+}
