@@ -1,0 +1,242 @@
+{
+  "schema": "afw.c2-notices-n3.root-own-models-primary.v1",
+  "atUTC": "2026-11-16 16:33:06 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "gate": "1675e526e439f9b8e815fd7b757e8dbde150bbed",
+  "nativeIndex": "ff70ff8b6ac5c6865053ebe73e01ecff9d55ee07",
+  "B2PartialIndex": "9f3f4ec2af4615cd9cc297b70cf1cd0e18a67aa5",
+  "head": "83b8b48bfdb169d43b8917c4af3af2f12d68a671",
+  "tree": "9cdeb1103ab2a018f5ce83e7195d6f3dc9c883ca",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "nomination": {
+    "schema": "afw.c2-notices-n3.own-models-nomination.v1",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "branch": "lab/afw-c2-own-receiver-20261116-notices-n3-models",
+    "message": "AFW-C2-N3-OWN-MODELS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-own-models.yml",
+    "job": "c2-notices-n3-own-models",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "node": "v22.23.4",
+    "runner": "docs/superpowers/root-own/c2-notices-n3/native-models/run-controls.mjs",
+    "proofFile": "n3-own-models-proof.json",
+    "artifactName": "afw-c2-notices-n3-own-models-proof"
+  },
+  "api": {
+    "run": {
+      "id": 43908195474,
+      "run_attempt": 1,
+      "event": "push",
+      "path": ".github/workflows/afw-c2-notices-n3-own-models.yml",
+      "head_sha": "83b8b48bfdb169d43b8917c4af3af2f12d68a671",
+      "head_branch": "lab/afw-c2-own-receiver-20261116-notices-n3-models",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-16T16:30:12Z",
+      "updated_at": "2026-11-16T16:30:23Z",
+      "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/actions/runs/43908195474"
+    },
+    "job": {
+      "id": 133442638511,
+      "name": "c2-notices-n3-own-models",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-11-16T16:30:15Z",
+      "completed_at": "2026-11-16T16:30:23Z",
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-16T16:30:15Z",
+          "completed_at": "2026-11-16T16:30:16Z"
+        },
+        {
+          "number": 2,
+          "name": "Checkout nominated OWN model tree",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-16T16:30:16Z",
+          "completed_at": "2026-11-16T16:30:19Z"
+        },
+        {
+          "number": 3,
+          "name": "Setup exact Node",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-16T16:30:19Z",
+          "completed_at": "2026-11-16T16:30:19Z"
+        },
+        {
+          "number": 4,
+          "name": "Run native OWN model controls",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-16T16:30:19Z",
+          "completed_at": "2026-11-16T16:30:20Z"
+        },
+        {
+          "number": 5,
+          "name": "Upload compact OWN model proof",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-16T16:30:20Z",
+          "completed_at": "2026-11-16T16:30:21Z"
+        },
+        {
+          "number": 9,
+          "name": "Post Setup exact Node",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-16T16:30:21Z",
+          "completed_at": "2026-11-16T16:30:21Z"
+        },
+        {
+          "number": 10,
+          "name": "Post Checkout nominated OWN model tree",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-16T16:30:21Z",
+          "completed_at": "2026-11-16T16:30:21Z"
+        },
+        {
+          "number": 11,
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-16T16:30:21Z",
+          "completed_at": "2026-11-16T16:30:21Z"
+        }
+      ]
+    },
+    "artifact": {
+      "id": 14245603716,
+      "name": "afw-c2-notices-n3-own-models-proof",
+      "size_in_bytes": 1259,
+      "digest": "sha256:63595b7543a9e8479dcbda99b96419c2c864ba95f0df4e314cd2c683fbcfe0c7",
+      "expired": false,
+      "created_at": "2026-11-16T16:30:20Z",
+      "expires_at": "2026-11-23T16:30:20Z",
+      "workflow_run": {
+        "id": 43908195474,
+        "repository_id": 1347578006,
+        "head_repository_id": 1347578006,
+        "head_branch": "lab/afw-c2-own-receiver-20261116-notices-n3-models",
+        "head_sha": "83b8b48bfdb169d43b8917c4af3af2f12d68a671"
+      }
+    }
+  },
+  "native": {
+    "tests": 496,
+    "idsHash": "fd681c0056bb1e2881d0b7ffb253632038700039ad941ea78feac3cef2d5a840",
+    "passed": 496,
+    "failed": 0,
+    "skipped": 0,
+    "todo": 0,
+    "cancelled": 0,
+    "exactIdsOrder": true
+  },
+  "proof": {
+    "schema": "afw.c2-notices-n3.own-models-proof.v1",
+    "nomination": "AFW-C2-N3-OWN-MODELS-ONEUSE-20261116",
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "branch": "lab/afw-c2-own-receiver-20261116-notices-n3-models",
+      "workflow": ".github/workflows/afw-c2-notices-n3-own-models.yml",
+      "job": "c2-notices-n3-own-models",
+      "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "head": "83b8b48bfdb169d43b8917c4af3af2f12d68a671",
+      "tree": "9cdeb1103ab2a018f5ce83e7195d6f3dc9c883ca",
+      "runId": "43908195474",
+      "runAttempt": 1,
+      "node": "v22.23.4",
+      "startedAt": "2026-11-16T16:30:19.568Z",
+      "completedAt": "2026-11-16T16:30:19.932Z"
+    },
+    "bindings": {
+      "runnerHash": "972e92ba6442794ddb8d0f2cfd1d8246cb4e7febd0b33bad5c8f8dd290d90d8c",
+      "workflowHash": "b236d67ea7399844b0e975ad4cca5dfe3614c22e3e10dce7b8b0bea36a66a66e",
+      "inputIndexHash": "e2a17a2471e8430f97fc3acca66a44585c7373d22ef8a11a46aa956107903591",
+      "closureHash": "a43174fe58a221b1b9ca8b24153a87c88b09f3a8a7ef032fbb83f63190a42e06",
+      "selectionHash": "5473adcb5b7336e02d5c3056da7260395f8a1daa425c19b8921a24ed81ad929d",
+      "proofSchemaHash": "14c7614d5ece44d28a7a782c9c3e23fdd4d54073826e1ae2fd057c94ce99d123"
+    },
+    "selection": {
+      "count": 496,
+      "idsHash": "fd681c0056bb1e2881d0b7ffb253632038700039ad941ea78feac3cef2d5a840"
+    },
+    "results": {
+      "passed": 496,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "cancelled": 0,
+      "missing": 0,
+      "extra": 0,
+      "duplicate": 0,
+      "ordered": true
+    },
+    "models": {
+      "kind": "OWN_FICTITIOUS_INPUTS_AND_SOURCE_LITERAL_DATA_ONLY",
+      "inputFiles": 17,
+      "ownModules": 4
+    },
+    "ownModelsExecuted": true,
+    "actualSourceExecution": false,
+    "finalSourceBinding": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  },
+  "artifactVerification": {
+    "zip": {
+      "bytes": 1259,
+      "sha256": "63595b7543a9e8479dcbda99b96419c2c864ba95f0df4e314cd2c683fbcfe0c7",
+      "blob": "832bc5a852681bd0154bbeba26b72bb7414824a8"
+    },
+    "payload": {
+      "bytes": 1847,
+      "sha256": "fc4b191ce4d2d3cb66ef6d658972e5efea902ac321c4071070e8e625097eeb66",
+      "blob": "5a85be5d6cc2af1f6c93aaefc89d2ce902ff14fb"
+    },
+    "canonical": true,
+    "logMatches": true,
+    "schemaValid": true
+  },
+  "joins": {
+    "actualAPIHeadTreeJobStep": true,
+    "exact496TAPIdsOrder": true,
+    "runtimeBindingsAllExact": true,
+    "proofSchema": true,
+    "ZIPCRCDigestPayload": true,
+    "canonicalStdoutArtifactMatch": true
+  },
+  "conclusion": "Actual native OWN model import graph PASS496. Scope only4 OWN modules with17 fictitious/model JSON inputs; not a Source receipt, actual Source execution or final producer admission. Scoped code review and final known producer binding remain pending.",
+  "logsConsumedOnce": true,
+  "artifactDownloadedOnce": true,
+  "ownModelsExecuted": true,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

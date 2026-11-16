@@ -1,0 +1,17 @@
+{
+  "schema": "afw.c2-notices-n3.own-models-lab-close.v1",
+  "atUTC": "2026-11-16 16:33:47 UTC",
+  "testedHead": "83b8b48bfdb169d43b8917c4af3af2f12d68a671",
+  "testedTree": "9cdeb1103ab2a018f5ce83e7195d6f3dc9c883ca",
+  "runId": 43908195474,
+  "jobId": 133442638511,
+  "primary": "32632d659d5108e7064beda0124a8a0f7c0f80aa",
+  "status": "CLOSED_OWN_MODELS_NATIVE_PASS496",
+  "workflowRemoved": ".github/workflows/afw-c2-notices-n3-own-models.yml",
+  "ownModelsExecuted": true,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}
