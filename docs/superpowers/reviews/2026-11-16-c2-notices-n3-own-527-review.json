@@ -1,0 +1,218 @@
+{
+  "schema": "afw.c2-notices-n3.own527-fresh-review.v1",
+  "atUTC": "2026-11-16 17:40:33 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewer": "/root/n3_own_527_review",
+  "environment": "Detached immutable Git DATA; built-in Node crypto RAM for hashes only",
+  "authority": {
+    "brief": "a24f73c47bc3cb618337e4be5903a61ca7a756f8",
+    "priorReview": "23358908713964c29511dc44d3e554387619f7c7",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "boundedPrefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
+    "ownTaskBrief": "189905a0383ff7852a86ac1d54351872cf29eb05",
+    "modelsBrief": "25b42fb2e1113488bc820596345cf0b0f7515bcb"
+  },
+  "scope": {
+    "index": "1498bbba58b4d36e2c3a2c19d6dc9e9a95a8a085",
+    "fix2Index": "42cf5a0928c4456c95a9a4a53cc5650337be06d7",
+    "testedHead": "65b643bfa8e5394f3a239ce1b68f24631d5bb10b",
+    "testedTree": "81a6b80d9001c554f2b774386d28c95bc54040da",
+    "traceReader": "c5efe74261a04e180476650c23a60feb268ca042",
+    "reader": "fcfe54a718f61835c35df5961bc5248431122b00",
+    "traceControls": "569aecd99fd698bcb0e46b2d79935eb3a73f4450",
+    "controls": "4f69dfa7a561656565e6b94038af6ded550efe83",
+    "staticVerifier": "d3568aaf95cac92b06d8bbb5eab6a8de7a88ce50",
+    "staticExpected": "09f7ae83ea8d3ddcc25a9e0787e4edd480fb9cd4",
+    "staticVectors": "ff37fb5e3326435b0a9ccf308c195c3b945dc2c7",
+    "runner": "cbd827df84466bbaeab1008b0197fa8b72a3ae4e",
+    "workflow": "123c81961caa1b58c773ea3e4e0fcfc5f745fc56",
+    "selection": "a80a43a645e115336aa3e105796879a0e2d7e265",
+    "proofSchema": "5e35703fe99b59af34085ce2b53d4d62d9d86d70",
+    "fix2FullDiff": "3507fbc4a5b9911d8b56434234e5657bb40b0fa0",
+    "finalDiff": "57137ea62afd8877fcaf6ca7b201c6294edeae7c",
+    "fix2Red": "a49e114ca82296cf1932213a8fb89659890068de",
+    "report": "14c889960009c8c41a295e6d1f7bf19a7070f5a8"
+  },
+  "reviewOrder": [
+    "SPEC",
+    "QUALITY"
+  ],
+  "verdicts": {
+    "SPEC": "PASS",
+    "QUALITY": "PASS",
+    "findingCounts": {
+      "P1": 0,
+      "P2": 0,
+      "P3": 0
+    },
+    "nativeCovering": "Preserved actual 527/527 PASS, bounded to OWN model methods and static Source DATA checks",
+    "scopedReviewPassed": true,
+    "authorizesSourceActivation": false,
+    "productReleaseReady": false
+  },
+  "findings": [],
+  "fixedFindingMapping": [
+    {
+      "id": "OWN-N3-R1-P2-01",
+      "status": "FIXED",
+      "location": {
+        "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/trace-reader.mjs",
+        "blob": "c5efe74261a04e180476650c23a60feb268ca042",
+        "startLine": 106,
+        "endLine": 111
+      },
+      "reason": "Line109 rejects retention for target-pair before the represented selected pair-enter. It applies to complete and prefix snapshots when that pair-enter is represented, without requiring or inferring an omitted event. Existing independent logical/target/p2 axes, late target terminals, and explicit projection deficits remain unchanged.",
+      "covering": "3 added literal causal cases and their 3 coherent full-envelope counterparts cover valid order and impossible order for both complete and prefix. Supplied RED shows both bad orders accepted before the fix; native527 covers the corrected methods.",
+      "unchangedLimits": "This establishes represented local chronology only, not hidden p2 object identity, undisclosed omission honesty, global cause, business completion or drain."
+    },
+    {
+      "id": "OWN-N3-R1-P2-02",
+      "status": "FIXED",
+      "location": {
+        "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/reader.mjs",
+        "blob": "fcfe54a718f61835c35df5961bc5248431122b00",
+        "startLine": 249,
+        "endLine": 255
+      },
+      "reason": "n3Compilation now checks each represented host-proof row with call>=2 against current outcome.compilation M and QA descriptors. Both prepared and returned rows are covered, including an open prepared call. It no longer relies on only call2.",
+      "covering": "Six full-envelope negatives cover calls3/4/5, M-only, QA-only, and open-prepared mismatch. Two positives preserve the consistent open timeout prefix and distinct per-call argument proofs with the same current compiled descriptors.",
+      "unchangedLimits": "The comparison is of exposed current-call metadata against separately caller-trusted producer context. It does not reconstruct hidden compiler inputs, demand prior-run M equality, or make outcome metadata its own authority."
+    },
+    {
+      "id": "OWN-N3-R1-P2-03",
+      "status": "FIXED",
+      "location": {
+        "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/reader.mjs",
+        "blob": "fcfe54a718f61835c35df5961bc5248431122b00",
+        "startLine": 218,
+        "endLine": 236
+      },
+      "reason": "Method8 uses the caller-trusted Node inflater with maxOutputLength24577 and info:true, requires a Buffer result and safe-integer engine.bytesWritten equal to the declared compressed member, then retains output-length and CRC checks. A buffer-only inflater is rejected. Extra deadbeef or concatenated raw-deflate members cannot satisfy consumed-byte equality.",
+      "covering": "Full-envelope cases include valid deflate, appended deadbeef, concatenated streams, trailing bytes with a descriptor, and a valid unsigned descriptor. Two inflater controls also exercise stored/deflate24577B acceptance, oversized declared rejection before inflate, and bounded rejection of a lying oversized stream. Existing method0 and descriptor controls remain in retained496.",
+      "unchangedLimits": "The hash and inflater callbacks remain trusted caller capabilities; no hostile replacement-callback sandbox claim is introduced."
+    }
+  ],
+  "staticProducerDataReview": {
+    "verdict": "PASS",
+    "location": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/fix2-producer-data/source-admission.mjs",
+      "blob": "d3568aaf95cac92b06d8bbb5eab6a8de7a88ce50",
+      "startLine": 5,
+      "endLine": 32
+    },
+    "authorityBoundary": "expected comes from the independently closure-pinned admission-context.json, not bindingsRaw, outcome metadata, or a Source-supplied replacement. Runner42-45 hashes the closure before import; runner58-64 constructs static DATA input and calls the separate OWN verifier. Root separately admits the exact OWN runner.",
+    "checks": [
+      "Exact21 role set and Buffer bodies; exact Root-pinned byte length, SHA256 and Git blob identity for every role.",
+      "Exact16 manifest key order, schema, canonical no-LF JSON hash and linked body hashes, alongside a separate exact raw pretty-manifest pin.",
+      "Frozen normal13 index, Source four-case selection, nomination, outer/binding key orders and top/journal selection hashes agree with Root authority.",
+      "Exact bindingsRaw byte length/SHA/Git identity is checked against Root's independent b186 pin after metadata consistency checks.",
+      "Static positive plus9 negatives include coherent untrusted helper/body/manifest/metadata rebinding while Root expected stays fixed.",
+      "Return value labels only cited static DATA as verified and keeps sourceCaptureExpectedContext:null, actualSourceExecution:false and finalSourceBinding:false."
+    ],
+    "bindings": "b186f6e5f585ed3de71f7e4e69f42f8f0ee55618",
+    "manifest": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+    "manifestCanonicalHash": "44a2527e1a54cb79a6feec9a04a996ad1b288a35117763e2037c7e8d64cf18f8",
+    "rawManifestHash": "27f9b289888ba4155fcaca9739f0b074aeda7e781c7796a1e8e83501fcf79a5e",
+    "rootDataProof": "22ab339782886ba3c01d090456b8e49fec51de7f",
+    "inactiveSourceProof": "55937b6a1fc9f6df15400d76723ab6e6b5f9a151",
+    "all21ExpectedPinsMatchInactiveSourceProof": true,
+    "fullSourceProgramBuffersRehashedByReviewer": false,
+    "sourceBodyHashOccurrenceBasis": "Preserved Root readback/hash proof and native static verification, with reviewer comparison of all21 expected pins to the inactive Source materialization receipt. Reviewer freshly fetched/hashed Source metadata JSON only; no Source program was loaded for execution.",
+    "futureDynamicBoundary": "Root later supplies nominated Source head/tree and actual run/job/API occurrence to the unchanged caller-trusted n3Read interface when available. Static admission and OWN models supply none of these values and do not authenticate a Source receipt. No circular prerequisite for a not-yet-existing Source capture is imposed."
+  },
+  "qualityChecks": {
+    "original496IdsOrderPreserved": true,
+    "prior517IdsOrderPreserved": true,
+    "combined527Unique": true,
+    "idsHash": "7ebfe81081f2acedc229960be97f00eb1747746a02a857d3a318248d06cabedd",
+    "modelIdsHash": "d490d6ce80ba0364adc3edf75c9188b510b1a0766dd7bff553f9dcb2534ca267",
+    "producerDataIdsHash": "81c9065544e14dbc45a3cdea148c663acd1d62046ba8584373d6c8f63d7538f3",
+    "sourceImportsObserved": 0,
+    "sourceProgramsTreatment": "Opaque .data byte/hash aliases; only manifest/selection/schema/contract/normal-index/bindings metadata JSON is parsed.",
+    "fourFixedOwnBodiesMatchFullBeforeAfterDiff": true,
+    "fix2DeltasForwardAndReverseExact": true,
+    "finalRunnerBeforeAfterForwardAndReverseExact": true,
+    "traceControlsBodyUnchanged": true,
+    "sixProofBindingsIndependentlyRehashedAndMatched": true,
+    "closureFiles": 89,
+    "supplementalExecutableTestsRunByReviewer": 0,
+    "method": "Code and literal-vector inspection plus pure metadata comparisons and built-in Node crypto hashes in RAM; no implementation code evaluated, compiled, syntax-tested or imported during this review."
+  },
+  "actualNativeEvidence": {
+    "gate": "8723d1f85cbb575c680a6d2df8aa28adc0b3eacb",
+    "primary": "ecba20cd898cde8540f6bb71f888098fdeb4669e",
+    "proof": "4961a4e8e94a5761fb2ced8fa3c0b6b7f634f5e3",
+    "close": "769f680bc04a4186ad669cb9e2d3fdc4478707bd",
+    "run": 43919176500,
+    "attempt": 1,
+    "job": 133481488055,
+    "step": 4,
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n3/models-fix2/run-controls.mjs",
+    "native": {
+      "tests": 527,
+      "pass": 527,
+      "fail": 0,
+      "cancel": 0,
+      "skip": 0,
+      "todo": 0,
+      "extra": 0,
+      "missing": 0,
+      "duplicate": 0,
+      "exactIdsOrder": true
+    },
+    "groups": {
+      "models": 517,
+      "staticProducerData": 10
+    },
+    "proofPayload": {
+      "bytes": 2434,
+      "sha256": "0e17c1761ca7edb91e93d5335ee0c4c5e0c27e9e19b53ccfe00c7eb686ee36b3",
+      "fullReadbackHashMatched": true
+    },
+    "basis": "Read preserved primary/proof/close DATA only. Root's primary joins actual API/head/tree/run/attempt/job/step4, exact527 TAP IDs/order, six bindings, canonical/schema proof, ZIPCRC/digest/full-member-deflate and equal log/artifact payload. Reviewer independently matches proof bytes, six bindings and exact selection hashes; raw logs/ZIP were not refetched.",
+    "closedHead": "68a1c83001c3bca7c1441ecc895699d4b757d5c2",
+    "closedTree": "42c44f66c6f9d81ab8c695ef007b2e5e4632e000",
+    "closureBasis": "Supplied Root close receipt records both OWN workflows removed, close-head runs0,3203 originals preserved and Main/history unchanged; no new closure API request was made."
+  },
+  "consideredLimits": [
+    "No finding or new requirement is raised for coherently undisclosed omissions, hidden private p2 identity, hidden compiler inputs, physical/global cause, native drain or SDK namespace emptiness.",
+    "Actual Source callbacks/helper/reducer execution, final dynamic Source binding and Source captureC remain separate Root gates.",
+    "Passing this scoped review does not complete main C2Task1, dispatch Tasks2+, authorize runtime/Cloudflare/release, or establish PC-off operation."
+  ],
+  "actions": {
+    "implementationsPatched": 0,
+    "filesWritten": 0,
+    "dependenciesInstalled": 0,
+    "refsChanged": 0,
+    "branchesCreated": 0,
+    "workflowsDispatched": 0,
+    "runsCreated": 0,
+    "sourceExecutions": 0,
+    "rawLogsRefetched": 0,
+    "artifactsRefetched": 0,
+    "commentsPublished": 0,
+    "subagentsCreated": 0,
+    "detachedReviewBlobCreated": 1
+  },
+  "recommendation": "Accept the three repairs and static DATA verifier within this pinned OWN scope. Preserve actual527PASS and the closed lab receipts. Proceed only through the separately authorized Root Source gates; no additional OWN rerun is required absent a concrete change.",
+  "ownModelsExecuted": true,
+  "ownProgramsExecutedInReview": false,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "sourceExpectedContext": null,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
