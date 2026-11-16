@@ -1,0 +1,55 @@
+{
+  "schema": "afw.c2-notices-n3.outer-selection-fix-test-first.v1",
+  "status": "TEXT_CONTRADICTION_NATIVE_PENDING",
+  "beforeSchema": {
+    "bytes": 29785,
+    "sha256": "2c1b440ba9498fda6470bf6d75d8c33f53fec4a7ac20bc916df3533350495129",
+    "gitBlob": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+    "blob": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+    "fullReadback": true
+  },
+  "authority": {
+    "bytes": 2048,
+    "sha256": "ea902f464b5530f3b7894c259ec7ed5420e01a87eecfe8b49c46d175d4d59324",
+    "gitBlob": "3db514b655917bd05917a90a53cb69667041fd36",
+    "blob": "3db514b655917bd05917a90a53cb69667041fd36",
+    "fullReadback": true
+  },
+  "cases": [
+    {
+      "id": "N3_OUTER_SELECTION_TOP_CORRECT",
+      "pointer": "/properties/selectionHash",
+      "input": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c",
+      "oldConst": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+      "oldModelAccepts": false,
+      "newExpected": true
+    },
+    {
+      "id": "N3_OUTER_SELECTION_BINDING_CORRECT",
+      "pointer": "/properties/journal/properties/witness/properties/records/items/oneOf/0/properties/selectionHash",
+      "input": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c",
+      "oldConst": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+      "oldModelAccepts": false,
+      "newExpected": true
+    },
+    {
+      "id": "N2_SELECTION_TOP_REJECT",
+      "pointer": "/properties/selectionHash",
+      "input": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+      "oldConst": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+      "oldModelAccepts": true,
+      "newExpected": false
+    },
+    {
+      "id": "N2_SELECTION_BINDING_REJECT",
+      "pointer": "/properties/journal/properties/witness/properties/records/items/oneOf/0/properties/selectionHash",
+      "input": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+      "oldConst": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+      "oldModelAccepts": true,
+      "newExpected": false
+    }
+  ],
+  "meaning": "Literal equality contradiction from pinned schema text; not a Source parser/native execution. Actual generic schema coverage pending Root cloud/independent OWN.",
+  "SourceQualified": false,
+  "Task1Pass": false
+}

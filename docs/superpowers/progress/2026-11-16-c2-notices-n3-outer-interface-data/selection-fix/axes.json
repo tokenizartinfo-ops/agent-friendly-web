@@ -1,0 +1,2110 @@
+{
+  "schema": "afw.c2-notices-n3.axis-vectors.v1",
+  "syntheticOnly": true,
+  "notSourceEvidence": true,
+  "authority": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
+  "status": "TEST_FIRST_DATA_NATIVE_PENDING",
+  "positives": [
+    {
+      "id": "AXIS_LOGICAL_THREW_THEN_LATE_TARGET_THREW",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "complete",
+        "reason": "OK",
+        "eligible": 1,
+        "target": "threw",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": 5,
+          "selection": "first-observed"
+        },
+        "leases": [
+          {
+            "ordinal": 1,
+            "role": "root",
+            "parent": null,
+            "firstClose": 21
+          },
+          {
+            "ordinal": 2,
+            "role": "outer",
+            "parent": 1,
+            "firstClose": 18
+          },
+          {
+            "ordinal": 3,
+            "role": "activation-child",
+            "parent": 2,
+            "firstClose": null
+          },
+          {
+            "ordinal": 4,
+            "role": "target-pair",
+            "parent": 1,
+            "firstClose": 10
+          },
+          {
+            "ordinal": 5,
+            "role": "pair-child",
+            "parent": 4,
+            "firstClose": null
+          }
+        ],
+        "promises": [
+          {
+            "ordinal": 1,
+            "lease": 3,
+            "retained": 2,
+            "settlement": 15
+          },
+          {
+            "ordinal": 2,
+            "lease": 4,
+            "retained": 6,
+            "settlement": 12
+          },
+          {
+            "ordinal": 3,
+            "lease": 5,
+            "retained": 5,
+            "settlement": 7
+          }
+        ],
+        "errors": [
+          {
+            "ordinal": 1,
+            "first": 13
+          },
+          {
+            "ordinal": 2,
+            "first": 14
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "scope-enter",
+            "site": "choice-admitted",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 2,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 3,
+            "kind": "target-enter",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 4,
+            "kind": "pair-enter",
+            "site": "target-pair",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 5,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 6,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 7,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 8,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 5,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 9,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 10,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 11,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 12,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 13,
+            "kind": "logical-throw",
+            "site": "choice-catch",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 1
+            },
+            "cause": null
+          },
+          {
+            "sequence": 14,
+            "kind": "target-throw",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 2
+            },
+            "cause": null
+          },
+          {
+            "sequence": 15,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 16,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 17,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 18,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 19,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 20,
+            "kind": "close-call",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 21,
+            "kind": "closed-transition",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 22,
+            "kind": "abort-observed",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 23,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": 13,
+        "cut": 23
+      },
+      "expected": "accept"
+    },
+    {
+      "id": "AXIS_LOGICAL_THREW_TARGET_STILL_ENTERED",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "prefix",
+        "reason": "OPEN_AT_CUT",
+        "eligible": 1,
+        "target": "entered",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": 5,
+          "selection": "first-observed"
+        },
+        "leases": [
+          {
+            "ordinal": 1,
+            "role": "root",
+            "parent": null,
+            "firstClose": 21
+          },
+          {
+            "ordinal": 2,
+            "role": "outer",
+            "parent": 1,
+            "firstClose": 18
+          },
+          {
+            "ordinal": 3,
+            "role": "activation-child",
+            "parent": 2,
+            "firstClose": null
+          },
+          {
+            "ordinal": 4,
+            "role": "target-pair",
+            "parent": 1,
+            "firstClose": 10
+          },
+          {
+            "ordinal": 5,
+            "role": "pair-child",
+            "parent": 4,
+            "firstClose": null
+          }
+        ],
+        "promises": [
+          {
+            "ordinal": 1,
+            "lease": 3,
+            "retained": 2,
+            "settlement": 15
+          },
+          {
+            "ordinal": 2,
+            "lease": 4,
+            "retained": 6,
+            "settlement": 12
+          },
+          {
+            "ordinal": 3,
+            "lease": 5,
+            "retained": 5,
+            "settlement": 7
+          }
+        ],
+        "errors": [
+          {
+            "ordinal": 1,
+            "first": 13
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "scope-enter",
+            "site": "choice-admitted",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 2,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 3,
+            "kind": "target-enter",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 4,
+            "kind": "pair-enter",
+            "site": "target-pair",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 5,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 6,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 7,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 8,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 5,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 9,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 10,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 11,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 12,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 13,
+            "kind": "logical-throw",
+            "site": "choice-catch",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 1
+            },
+            "cause": null
+          },
+          {
+            "sequence": 15,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 16,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 17,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 18,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 19,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 20,
+            "kind": "close-call",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 21,
+            "kind": "closed-transition",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 22,
+            "kind": "abort-observed",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 23,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": 13,
+        "cut": 23
+      },
+      "expected": "accept"
+    },
+    {
+      "id": "AXIS_UNREACHED_ACTIVATION_PRESENT",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "complete",
+        "reason": "OK",
+        "eligible": 1,
+        "target": "unreached",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": null,
+          "selection": "none"
+        },
+        "leases": [
+          {
+            "ordinal": 1,
+            "role": "root",
+            "parent": null,
+            "firstClose": null
+          },
+          {
+            "ordinal": 2,
+            "role": "outer",
+            "parent": 1,
+            "firstClose": null
+          },
+          {
+            "ordinal": 3,
+            "role": "activation-child",
+            "parent": 2,
+            "firstClose": null
+          }
+        ],
+        "promises": [
+          {
+            "ordinal": 1,
+            "lease": 3,
+            "retained": 2,
+            "settlement": null
+          }
+        ],
+        "errors": [
+          {
+            "ordinal": 1,
+            "first": 3
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "scope-enter",
+            "site": "choice-admitted",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 2,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 3,
+            "kind": "check-threw",
+            "site": "initial-child",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 1
+            },
+            "cause": null
+          },
+          {
+            "sequence": 4,
+            "kind": "logical-throw",
+            "site": "choice-catch",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 1
+            },
+            "cause": null
+          },
+          {
+            "sequence": 5,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": 3,
+        "cut": 5
+      },
+      "expected": "accept"
+    }
+  ],
+  "negatives": [
+    {
+      "id": "AXIS_DUPLICATE_TARGET_TERMINAL",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "complete",
+        "reason": "OK",
+        "eligible": 1,
+        "target": "threw",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": 5,
+          "selection": "first-observed"
+        },
+        "leases": [
+          {
+            "ordinal": 1,
+            "role": "root",
+            "parent": null,
+            "firstClose": 21
+          },
+          {
+            "ordinal": 2,
+            "role": "outer",
+            "parent": 1,
+            "firstClose": 18
+          },
+          {
+            "ordinal": 3,
+            "role": "activation-child",
+            "parent": 2,
+            "firstClose": null
+          },
+          {
+            "ordinal": 4,
+            "role": "target-pair",
+            "parent": 1,
+            "firstClose": 10
+          },
+          {
+            "ordinal": 5,
+            "role": "pair-child",
+            "parent": 4,
+            "firstClose": null
+          }
+        ],
+        "promises": [
+          {
+            "ordinal": 1,
+            "lease": 3,
+            "retained": 2,
+            "settlement": 15
+          },
+          {
+            "ordinal": 2,
+            "lease": 4,
+            "retained": 6,
+            "settlement": 12
+          },
+          {
+            "ordinal": 3,
+            "lease": 5,
+            "retained": 5,
+            "settlement": 7
+          }
+        ],
+        "errors": [
+          {
+            "ordinal": 1,
+            "first": 13
+          },
+          {
+            "ordinal": 2,
+            "first": 14
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "scope-enter",
+            "site": "choice-admitted",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 2,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 3,
+            "kind": "target-enter",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 4,
+            "kind": "pair-enter",
+            "site": "target-pair",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 5,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 6,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 7,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 8,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 5,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 9,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 10,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 11,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 12,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 13,
+            "kind": "logical-throw",
+            "site": "choice-catch",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 1
+            },
+            "cause": null
+          },
+          {
+            "sequence": 14,
+            "kind": "target-throw",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 2
+            },
+            "cause": null
+          },
+          {
+            "sequence": 15,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 16,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 17,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 18,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 19,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 20,
+            "kind": "close-call",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 21,
+            "kind": "closed-transition",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 22,
+            "kind": "abort-observed",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 23,
+            "kind": "target-return",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 24,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": 13,
+        "cut": 24
+      },
+      "expected": "reject"
+    },
+    {
+      "id": "AXIS_REVERSE_TARGET_LOCAL_ORDER",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "complete",
+        "reason": "OK",
+        "eligible": 1,
+        "target": "threw",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": 5,
+          "selection": "first-observed"
+        },
+        "leases": [
+          {
+            "ordinal": 1,
+            "role": "root",
+            "parent": null,
+            "firstClose": 21
+          },
+          {
+            "ordinal": 2,
+            "role": "outer",
+            "parent": 1,
+            "firstClose": 18
+          },
+          {
+            "ordinal": 3,
+            "role": "activation-child",
+            "parent": 2,
+            "firstClose": null
+          },
+          {
+            "ordinal": 4,
+            "role": "target-pair",
+            "parent": 1,
+            "firstClose": 10
+          },
+          {
+            "ordinal": 5,
+            "role": "pair-child",
+            "parent": 4,
+            "firstClose": null
+          }
+        ],
+        "promises": [
+          {
+            "ordinal": 1,
+            "lease": 3,
+            "retained": 2,
+            "settlement": 15
+          },
+          {
+            "ordinal": 2,
+            "lease": 4,
+            "retained": 6,
+            "settlement": 12
+          },
+          {
+            "ordinal": 3,
+            "lease": 5,
+            "retained": 5,
+            "settlement": 7
+          }
+        ],
+        "errors": [
+          {
+            "ordinal": 1,
+            "first": 13
+          },
+          {
+            "ordinal": 2,
+            "first": 14
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "scope-enter",
+            "site": "choice-admitted",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 2,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 3,
+            "kind": "target-throw",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 2
+            },
+            "cause": null
+          },
+          {
+            "sequence": 4,
+            "kind": "pair-enter",
+            "site": "target-pair",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 5,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 6,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 7,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 8,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 5,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 9,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 10,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 11,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 12,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 13,
+            "kind": "logical-throw",
+            "site": "choice-catch",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 1
+            },
+            "cause": null
+          },
+          {
+            "sequence": 14,
+            "kind": "target-throw",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 2
+            },
+            "cause": null
+          },
+          {
+            "sequence": 15,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 16,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 17,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 18,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 19,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 20,
+            "kind": "close-call",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 21,
+            "kind": "closed-transition",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 22,
+            "kind": "abort-observed",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 23,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": 13,
+        "cut": 23
+      },
+      "expected": "reject"
+    },
+    {
+      "id": "AXIS_ENTERED_FAKE_COMPLETE",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "complete",
+        "reason": "OK",
+        "eligible": 1,
+        "target": "entered",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": 5,
+          "selection": "first-observed"
+        },
+        "leases": [
+          {
+            "ordinal": 1,
+            "role": "root",
+            "parent": null,
+            "firstClose": 21
+          },
+          {
+            "ordinal": 2,
+            "role": "outer",
+            "parent": 1,
+            "firstClose": 18
+          },
+          {
+            "ordinal": 3,
+            "role": "activation-child",
+            "parent": 2,
+            "firstClose": null
+          },
+          {
+            "ordinal": 4,
+            "role": "target-pair",
+            "parent": 1,
+            "firstClose": 10
+          },
+          {
+            "ordinal": 5,
+            "role": "pair-child",
+            "parent": 4,
+            "firstClose": null
+          }
+        ],
+        "promises": [
+          {
+            "ordinal": 1,
+            "lease": 3,
+            "retained": 2,
+            "settlement": 15
+          },
+          {
+            "ordinal": 2,
+            "lease": 4,
+            "retained": 6,
+            "settlement": 12
+          },
+          {
+            "ordinal": 3,
+            "lease": 5,
+            "retained": 5,
+            "settlement": 7
+          }
+        ],
+        "errors": [
+          {
+            "ordinal": 1,
+            "first": 13
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "kind": "scope-enter",
+            "site": "choice-admitted",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 2,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 3,
+            "kind": "target-enter",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 4,
+            "kind": "pair-enter",
+            "site": "target-pair",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 5,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 6,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 7,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 8,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 5,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 9,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 10,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 11,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 12,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 13,
+            "kind": "logical-throw",
+            "site": "choice-catch",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": true,
+              "kind": "object",
+              "errorOrdinal": 1
+            },
+            "cause": null
+          },
+          {
+            "sequence": 15,
+            "kind": "settlement-observed",
+            "site": "initial-settled",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 16,
+            "kind": "child-finally",
+            "site": "initial-child-finally",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "finally"
+          },
+          {
+            "sequence": 17,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 18,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 19,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 20,
+            "kind": "close-call",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 21,
+            "kind": "closed-transition",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 22,
+            "kind": "abort-observed",
+            "site": "root-finish",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "explicit-finish"
+          },
+          {
+            "sequence": 23,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": 13,
+        "cut": 23
+      },
+      "expected": "reject"
+    }
+  ],
+  "nativePlan": "Execute original InitialLease.child+wait+retain callback path with actual root/outer/child objects; root abort rejects original child race while actual action retains an unresolved target await. Record logical throw, then settle held actual target await; require late target terminal and original first scope error retained. No clocks replaced, no Miniflare/world, no product request.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "transportMetadata": [
+    {
+      "id": "AXIS_LOGICAL_THREW_THEN_LATE_TARGET_THREW",
+      "recordBytes": 4656,
+      "recordSha256": "f45f7d86ee8a2171254053c60fa92e5eb5d2577946fad3e13225a675175782cc",
+      "witnessBytes": 4656,
+      "witnessSha256": "f45f7d86ee8a2171254053c60fa92e5eb5d2577946fad3e13225a675175782cc",
+      "frameBytes": 4631,
+      "frameSha256": "019c94c00691ef467a0931827627e528675f0e607a55d7732bf3cf82710a9c99",
+      "payloadBytes": 4615,
+      "payloadSha256": "97ee8336369dc7c4e3dd3a919a6841a62bcfb7285018d3b31f7c81a7a03d0bb3",
+      "zipBytes": 4737,
+      "zipSha256": "b90cd9ede1d7b9cee13a420d78f9fe1dd4bb0e4abce8d5ebf081e127a40ab4f9",
+      "zipCRC32": 1061966087
+    },
+    {
+      "id": "AXIS_LOGICAL_THREW_TARGET_STILL_ENTERED",
+      "recordBytes": 4479,
+      "recordSha256": "5cd9866c64f52cc2076e674f64431bd14ac428e4b59d99a806cecd37afa0a793",
+      "witnessBytes": 4479,
+      "witnessSha256": "5cd9866c64f52cc2076e674f64431bd14ac428e4b59d99a806cecd37afa0a793",
+      "frameBytes": 4454,
+      "frameSha256": "64b3b900c91070a6af0a0a0741f580ba859d4e518a2f39c511f65de1f188cbfe",
+      "payloadBytes": 4438,
+      "payloadSha256": "8a5429ffbbb9b436d4449dc6a1a12079e663af67fc44d053c120db8c43ab8fda",
+      "zipBytes": 4560,
+      "zipSha256": "5ca44fb95d49e8adbd919386bc0ab06b4417ddcd53e8de4665d2c211e624a529",
+      "zipCRC32": 597745005
+    },
+    {
+      "id": "AXIS_UNREACHED_ACTIVATION_PRESENT",
+      "recordBytes": 1428,
+      "recordSha256": "891e2a81cc1081f258b445380ad36273aca4f077ed0a87b88e662ffc01cf70dd",
+      "witnessBytes": 1428,
+      "witnessSha256": "891e2a81cc1081f258b445380ad36273aca4f077ed0a87b88e662ffc01cf70dd",
+      "frameBytes": 1403,
+      "frameSha256": "0d5c4f335d27f87aba69a9ca489b8963a8dbffb6456a1140c54417211ab4bfbc",
+      "payloadBytes": 1387,
+      "payloadSha256": "bf1e75e633208eeed7a62c7acd7d7ca59bfed1bcb9f15367cabb6c0605dffdcd",
+      "zipBytes": 1509,
+      "zipSha256": "8bb4c78e7a7f7845d58fbb21c13eec6e5773ff2af739da613bdf36549d71970d",
+      "zipCRC32": 948541327
+    },
+    {
+      "id": "AXIS_DUPLICATE_TARGET_TERMINAL",
+      "recordBytes": 4820,
+      "recordSha256": "7c7272d89e59dc3414c0bcc118610b3ace53baaefdf02d6561f1d43a748eab93",
+      "witnessBytes": 4820,
+      "witnessSha256": "7c7272d89e59dc3414c0bcc118610b3ace53baaefdf02d6561f1d43a748eab93",
+      "frameBytes": 4795,
+      "frameSha256": "eeaf46f6ff2a395e5e1f1244946bd33dddb57a08de636b9e42603f4a696f2dba",
+      "payloadBytes": 4779,
+      "payloadSha256": "d1215add756f6321a78e72849235ef800e727f340bb7ed1f3bab95b7a6d7a9ad",
+      "zipBytes": 4901,
+      "zipSha256": "8b575a867cc84efb60bd983d2c8e0518f8c5e5f2b23c35fc5b6efae641e0f85c",
+      "zipCRC32": 3760031543
+    },
+    {
+      "id": "AXIS_REVERSE_TARGET_LOCAL_ORDER",
+      "recordBytes": 4654,
+      "recordSha256": "142c8649a118a8c9b9952e81b0313bc558399a05e2a07fbd605466aad071b9a8",
+      "witnessBytes": 4654,
+      "witnessSha256": "142c8649a118a8c9b9952e81b0313bc558399a05e2a07fbd605466aad071b9a8",
+      "frameBytes": 4629,
+      "frameSha256": "883c7f22e2ccfd445100d2682debb3790c930b90126fb3be247e41378e5983c6",
+      "payloadBytes": 4613,
+      "payloadSha256": "3b32b7ab8ccc7933064c03879c66cfb0773fa61a550d57cf49e6a62c11434ba2",
+      "zipBytes": 4735,
+      "zipSha256": "cdcf24f6c01b1cde4fee60e57bd2d62a4f2e5b328d2d5d38b18f9fbc151c8df0",
+      "zipCRC32": 3358728315
+    },
+    {
+      "id": "AXIS_ENTERED_FAKE_COMPLETE",
+      "recordBytes": 4472,
+      "recordSha256": "dd28c711c5d1a35c4e1017f00209d21209b54578e28d3eac3be08dc5cbb482da",
+      "witnessBytes": 4472,
+      "witnessSha256": "dd28c711c5d1a35c4e1017f00209d21209b54578e28d3eac3be08dc5cbb482da",
+      "frameBytes": 4447,
+      "frameSha256": "442fa81bac76eff9020c9a2e76435493ae1e9fe137c7bdbe0f632b313303fd11",
+      "payloadBytes": 4431,
+      "payloadSha256": "3e83e12d93370d8960b27abd8f6ee3d8a17eacfc5a66a23dadbe38bd2d094e4c",
+      "zipBytes": 4553,
+      "zipSha256": "dd59268036e2faaef1efacd1f32fcc95edb85948c632dad9ebff9cdaf351cac9",
+      "zipCRC32": 4137708850
+    }
+  ],
+  "transportRecipe": "One causal record LF; finite literal-frame and literal-payload LF; deterministic single-entry ZIP STORE outcome.json, zero DOS time/date and flags, CRC32. SHA256 raw UTF8. Synthetic transport only."
+}

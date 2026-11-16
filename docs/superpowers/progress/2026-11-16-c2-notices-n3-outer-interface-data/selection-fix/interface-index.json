@@ -1,0 +1,207 @@
+{
+  "schema": "afw.c2-notices-n3.outer-interface-subpackage.v1",
+  "status": "PENDING_ROOT_OUTER_SEAL_NOT_EXECUTION",
+  "authority": {
+    "rootSeal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "prefixRuling": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "brief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
+    "independentProgressAxes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0"
+  },
+  "contract": {
+    "bytes": 19236,
+    "sha256": "6fa214df6b8a7a474e8e1d797e741eb0ac39d8b03769630c798efc1d4954c834",
+    "gitBlob": "a43ca8667d2a884bf3079a4072058cec39a919b8",
+    "blob": "a43ca8667d2a884bf3079a4072058cec39a919b8",
+    "fullReadback": true
+  },
+  "seams": {
+    "bytes": 13838,
+    "sha256": "39f59f4efb837849a2c7e3ef31445ba0e55e8f03098cd775e52a81efb7e4a5a5",
+    "gitBlob": "27623553b80168a0e4fd9fb8411f7d0e087a270e",
+    "blob": "27623553b80168a0e4fd9fb8411f7d0e087a270e",
+    "fullReadback": true
+  },
+  "causalSchema": {
+    "bytes": 13899,
+    "sha256": "8780c9fcdb7f90ce35af840b22f3509c69417059b7d84a7774e708324e4a26ec",
+    "gitBlob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+    "blob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+    "fullReadback": true
+  },
+  "outerSchema": {
+    "bytes": 29785,
+    "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+    "gitBlob": "1c336fe190816b46223546971afcf34b2c216089",
+    "blob": "1c336fe190816b46223546971afcf34b2c216089",
+    "fullReadback": true
+  },
+  "selection": {
+    "bytes": 2048,
+    "sha256": "ea902f464b5530f3b7894c259ec7ed5420e01a87eecfe8b49c46d175d4d59324",
+    "gitBlob": "3db514b655917bd05917a90a53cb69667041fd36",
+    "blob": "3db514b655917bd05917a90a53cb69667041fd36",
+    "fullReadback": true,
+    "canonicalHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c"
+  },
+  "literalVectors": {
+    "bytes": 499181,
+    "sha256": "194c5958ee8c24711e2659759d12b9a74087c4728fd8225e392f57d3fe4359ac",
+    "gitBlob": "0361be577aad4f0a5559a42924347591a605d43f",
+    "blob": "0361be577aad4f0a5559a42924347591a605d43f",
+    "fullReadback": true
+  },
+  "outcomeOrder": [
+    "schema",
+    "context",
+    "selectionHash",
+    "bindings",
+    "controls",
+    "capture",
+    "journal",
+    "observation",
+    "native",
+    "custody",
+    "compilation",
+    "diagnosticToolingExecuted",
+    "sourceBusinessExecuted",
+    "SourceQualified",
+    "Task1Pass",
+    "nonclaims"
+  ],
+  "bindingOrder": [
+    "driverHash",
+    "helperHash",
+    "readerHash",
+    "slotHash",
+    "fixtureHash",
+    "vectorsHash",
+    "loggerHash",
+    "worldHash",
+    "ledgerHash",
+    "transformHash",
+    "producerManifestHash"
+  ],
+  "journalBindingOrder": [
+    "sourceIndexHash",
+    "driverHash",
+    "selectionHash",
+    "helperHash",
+    "readerHash",
+    "slotHash",
+    "loggerHash",
+    "worldHash",
+    "ledgerHash",
+    "transformHash",
+    "producerManifestHash"
+  ],
+  "producerManifest": {
+    "keyOrder": [
+      "schema",
+      "normalSourceIndexHash",
+      "selectionHash",
+      "contractHash",
+      "schemaHash",
+      "seamsHash",
+      "vectorsHash",
+      "driverHash",
+      "coupledHash",
+      "worldHash",
+      "helperHash",
+      "readerHash",
+      "loggerHash",
+      "slotHash",
+      "ledgerHash",
+      "transformHash"
+    ],
+    "fieldCount": 16,
+    "serialization": "SHA256(JSON.stringify(manifest) UTF8), noLF. contractHash binds this final fulloutercontract. schemaHash binds fullouterJSONschema; Rootseal/semantic/abort authorities named here and finalindex. Allbodyhashes exact rawUTF8. Finalindex additionally binds all controls/native fixtures/runner/WF/transitiveinputfiles not enumerated in this fixedmanifest; Root exacttreegate authenticates fulladmittedset. No placeholders accepted.",
+    "values": "NOT PROVIDED/NOT EVIDENCE until finalimmutablebodypins. No fabricatedhead/API/run/context."
+  },
+  "structuralStatus": "These outer keys/types/order and16field manifestorder are the concrete proposedB2interface. Reducer uses existing coverageprefix/reasonPROJECTION_GAP, no newpublickeys. Causalcontrol counters31/32 remainfixed; dedicatedreducerplans areseparatesizing/unitdata.",
+  "pendingFinalBodyHashes": [
+    "ledger",
+    "QAtransform",
+    "helper",
+    "driver",
+    "coupled",
+    "world",
+    "reader-final",
+    "logger",
+    "controls",
+    "combinedvectors",
+    "runner",
+    "WF",
+    "producerManifest",
+    "toolingrunner",
+    "toolingproofschema",
+    "Nativeactualcover+review"
+  ],
+  "preservedVersions": {
+    "oldContractBeforePluralSpelling": {
+      "bytes": 18075,
+      "sha256": "97c7fb78d91cab6f151eeb94f0796b0018cc5393b577a1702c1a350a9cf9ee57",
+      "gitBlob": "6eb363cabf7089fe100d21835137a77a2f4e3fc0",
+      "blob": "6eb363cabf7089fe100d21835137a77a2f4e3fc0",
+      "fullReadback": true
+    },
+    "earlyContract": {
+      "bytes": 9795,
+      "sha256": "88cc33c0bb706d5720d807d92ea8a266cf81d29b589654ba4bb8d4c0699b141f",
+      "gitBlob": "1924f5c750a90e5a2de143879cf279627edd735a",
+      "blob": "1924f5c750a90e5a2de143879cf279627edd735a",
+      "fullReadback": true
+    },
+    "earlyIndex": {
+      "bytes": 8771,
+      "sha256": "5fec66ff3d073aa95ef41980c315be52e751f999966557b3bcb5349a47bf2d2d",
+      "gitBlob": "7969655f30238b8986ea017023efe116399ec4e1",
+      "blob": "7969655f30238b8986ea017023efe116399ec4e1",
+      "fullReadback": true
+    }
+  },
+  "scope": "B2 DATA may be preparedafterRootseal; API/native/capture gate staysblocked until finalSource/OWNpackets+actualnative+reviews. No Sourceexecution locally, refs/runs/candidate here. Normal13/Main/Task2frozen.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "selectionFix": {
+    "testFirst": {
+      "bytes": 2357,
+      "sha256": "5c63e45fa04b84665b53eb62c52a8f787138e6021d0e890bf37b32f72d76851a",
+      "gitBlob": "c2891a1cb538ebc11d684c29695dc8036bb81bae",
+      "blob": "c2891a1cb538ebc11d684c29695dc8036bb81bae",
+      "fullReadback": true
+    },
+    "before": {
+      "bytes": 29785,
+      "sha256": "2c1b440ba9498fda6470bf6d75d8c33f53fec4a7ac20bc916df3533350495129",
+      "gitBlob": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+      "blob": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+      "fullReadback": true
+    },
+    "delta": "Exactly two selectionHash const literals replaced N2→actual N3; all other schema bytes unchanged. Full lossless before/after blobs preserved. Native tests pending."
+  },
+  "dedicatedAxes": {
+    "bytes": 56266,
+    "sha256": "ad07c91d6ddf16b41a15f013f80f278d451b09b27749c03a3bb766bc32bc032c",
+    "gitBlob": "acd36e4e8a512a71c0cfef2185443fd57f896de2",
+    "blob": "acd36e4e8a512a71c0cfef2185443fd57f896de2",
+    "fullReadback": true
+  },
+  "dedicatedReducer": {
+    "bytes": 43673,
+    "sha256": "acb3cd09a2514fc92eaf9e9302e0bec6a2276151d857b53a2a888cbd2e68f2c9",
+    "gitBlob": "8881c57552b88cd757579b6de120e1f4fca0304c",
+    "blob": "8881c57552b88cd757579b6de120e1f4fca0304c",
+    "fullReadback": true
+  }
+}

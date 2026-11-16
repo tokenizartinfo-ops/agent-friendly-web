@@ -1,0 +1,156 @@
+{
+  "schema": "afw.c2-notices-n3.seams.v1",
+  "status": "EARLY_DATA_PENDING_ROOT_SEAL",
+  "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+  "module": "test/fixtures/n3-qa-causal-ledger.mjs",
+  "exports": "makeN3QaLedger()=>{note(rootRef:object|null,event):void,snapshot():SafeSnapshot}; n3QaLedger singleton. QA bundle resolves ONE canonical module; no Node singleton/public authority.",
+  "beforePins": [
+    {
+      "id": "PH",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "gzipBytes": 32414
+    },
+    {
+      "id": "OP",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "gzipBytes": 11301
+    },
+    {
+      "id": "LEASE",
+      "path": "lib/mcp-qa-finite-initial-lease.mjs",
+      "blob": "a9cc083baae71c89af2f6436c00571dc8e7a20c9"
+    },
+    {
+      "id": "S09",
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "gitBlob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "gzipBytes": 16768
+    },
+    {
+      "id": "S10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "gzipBytes": 22824
+    },
+    {
+      "id": "N2_NODE_WORLD",
+      "blob": "7fc28db8dade75b2e6cbbb7c3fd1ff14566a845d",
+      "bytes": 89281,
+      "sha256": "14adcbe7149ef9bf92f756a5edae0c13b8c19deda5a7286bbafd0cd53419c64d"
+    },
+    {
+      "id": "N2_FIXED_READER",
+      "bytes": 19416,
+      "sha256": "6cdc6569cff0676770f41ce4f794affe68c68ccbccb5cde154d513945b7bb849",
+      "gitBlob": "280fa796ad74d4451cab3d84e230d37dd31bad11",
+      "blob": "280fa796ad74d4451cab3d84e230d37dd31bad11",
+      "fullReadback": true
+    }
+  ],
+  "seams": [
+    {
+      "site": "OP59-83",
+      "anchor": "const abort=()=>controller.abort();",
+      "intent": "Extend SAME existing shared abort callback with note after original abort, causeunknown. Local diagnostic nullable alias set once to actual lease after creation avoids TDZ if request alreadyaborted before lease exists; initialization stays unjoined. Same callback/timer/listener/signature/return. Rootcreation binding observes actuallease/requestContexts existingroot, no newcontextread. finish notes actual closecall/firstfalse->true transition/abort explicitfinish using capturedlocalclosed before originalassignment, no getter/clock read. Post-abort note is after original nested synchronous listeners, so public parent-abort close may precede root-abort marker."
+    },
+    {
+      "site": "PH630-633/662",
+      "anchor": "admission=consumeFiniteOwnerStageAdmission({ctx,env,preconnectionId:id,stage},originalLease);",
+      "intent": "Actual root/outer binding and eligibility ONLY exactoriginal notices POST admitted branch. Bind-only DTO has originalLease/root andclock.lease actual refs. Root resolution never uses Error, function, IDs or Nodephase. All original authority calls unchanged."
+    },
+    {
+      "site": "PH693-705 and780",
+      "anchor": "position='receipt-recorded';await recheckOwned();position='complete';await recheckOwned();",
+      "intent": "Observe ONLY firsttarget call/throw/return at receipt-recorded; ordinary synchronous try/catch may preserve exact original thrown value, never newPromise.catch/then or newpromise. Extract current original options object for observeOwnerPhasePair to bind actual callRef; same original function/callback/call/returnedpromise/await. Capture actual pairpromise in same original callback body, no wrapper. positioncomplete never target. No extra check/context/getter/clock."
+    },
+    {
+      "site": "PH100-133/528",
+      "anchor": "const {root,deadline}=readFiniteOwnerRequestContext(parent);",
+      "intent": "Reuse ALREADY captured root,parent and actual options callRef, bind targetpair clock.lease parentroot only when exactcallRef selected. Add note inside SAME original onAbort and finally; no new listener/timer. Bind child aliases by actual parent/child ref, not activeglobalphase."
+    },
+    {
+      "site": "PH706/763",
+      "anchor": "await withChild(async(l,end)=>{",
+      "intent": "Exact activation block763 original callback hasactual l; bind its childrole with parentclock.lease. Generic child binding can remain privateunclassified until this originalsite; no substitute from upload/baseline child."
+    },
+    {
+      "site": "LEASE7/9/11/13-19",
+      "anchor": "const retain=p=>{pendingWork.add(p);const settled=()=>pendingWork.delete(p);p.then(settled,settled);return p;};",
+      "intent": "Bind actual child l/parentlease and actual workpromise inside original child callback lifecycle; observe original retainedp and SAME existing settled callbackbody, no newreaction/callback/listener/timer. Rootless notes resolve only alreadyboundactuallease/promise; conflicting refs/sharedpromise ambiguous. Existing synchronous guards/catches receive note while preserving originalthrow, predicates/order/clockreads. closecall/firsttransition causeunknown at originalclose; childfinally causefinally. Sharedabort causeunknown; no timer/race seam. Original child() retain(actual) followed by wait(actual,l) retains the SAME p twice. The public promise lease is canonical actual WORKscope l, not captured retainer parentlease. Keep both original .then calls/callback identities; settled deletion returns true thenfalse unchanged. note maps actual capturedparentlease/p only to root; public first retained/settlement folded immutably. No added/replaced reaction."
+    },
+    {
+      "site": "S09:351",
+      "anchor": "async firstConnectionProbe(){const rows=[...await this.ctx.storage.list()];return {",
+      "intent": "Append causal:n3QaLedger.snapshot() to SAME response after originalIO; noextraRPC/storage/read. snapshotcopies safevalues synchronously, noauthorityread."
+    },
+    {
+      "site": "S10 QA58/107-135",
+      "anchor": "const built=await build(",
+      "intent": "QA stdin imports canonicalledger once; QA-onlyonLoad transforms PH/OP/InitialLease plusprivateprobe generatedmethod. Capture actual before/after preparedinput hashes in same QA build. Deliberate QA bytes change. M compile50/51 andallM source/transforms untouched; current original Mbytes match actual M argument asN2. No separatelytimednormalcompile or priorMhash."
+    }
+  ],
+  "unchanged": [
+    "M compiler inputs/entry/guards",
+    "native-wire38285fa0149a38924c431b4d5a705bec1384216d",
+    "retention068d35c2555c7dc711c487f6021ec572bd3af067",
+    "normal13/index26b",
+    "fullqualifierc230",
+    "alloriginalauthority/facts/methods/promises/awaits/deadlines"
+  ],
+  "captureBinding": "Existing context.proposalIndexHash stays frozen normal13hash; N3 bindings.producerManifestHash binds a canonical static manifest of normalIndex/selection/contract/schema/seams/vectors + all final body hashes, excluding runner/WF/index to avoid circularity. Finalindex references manifest+runner+WF. Journalbinding and actualRoot admission also require manifesthash; noN2metadata normalization.",
+  "knownLimits": "Before-binding notes/gaps and privateidentity bookkeeping all count caps; no retroinsertion. Unbound labels never become roots. If exact binding/focus/bytes cannot be retained/exported, snapshotprefix/unknown withreason, corecapture preserved. Final executable transforms+fullpreimages/diffs are intentionally NOT authored before Rootearlyseal.",
+  "promiseBinding": {
+    "publicLease": "Canonical bound WORKscope, not actual retainer or physical ownership. retained/settlement-observed publicevent lease equals promise canonical workScope. Rootless event leaseRef can be captured parentclock lease; it resolves sameactualroot, never rewrites workscope.",
+    "repeated": "First retained and first settlement observation immutable. Original repeated retain and original callbacks legitimate and folded; no extra reaction introduced, no double public settlement. Each original delete return true/false preserved exactly.",
+    "binding": "Only explicit original-worksite binding establishes canonical workscope. Unknown binding→prefix/unjoined, never guess child from parent or ordinal. One p across differentactualroots→ambiguous.",
+    "state": "joined needs one eligible scope AND usable unambiguous projection. eligible1 with unjoined fault/cap is valid; bindingambiguous can have eligible1 with another noneligible root.",
+    "error": "kindobject is an opaque identity-tracked nonnull object OR function reference after root resolution. Every primitive type incl null/undefined has no identityordinal/content; functions never resolve a root.",
+    "ordering": "Original OP abort observation is after controller.abort and nested listeners; root-abort publicnote need not precede parent-abort/close. Source order is observation order."
+  },
+  "rootSeal": "8a9d366868d4be5593866637417c356bf4783e1d",
+  "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+  "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+  "privateEventEntityRef": "Actual affected leaseor null, NEVER independent rootresolver. Root resolves ONLY explicitroot or SAME alreadyboundleaseRef/promiseRef. ConflicttoanotherRoot ambiguous. An outoffocus affectedentity mayexportlease:null; firstscopeerror preserved and all retained identity/gapmetadata counts caps.",
+  "targetPairPromise": "Bind exact promise returned by original observeOwnerPhasePair call in SAME original work callback before it returns. Do not attach newreaction or substituteinternalrunPromise. Original callback/returnedpromise/await retained; compiledQAintentionallychanged.",
+  "coverage": "Complete means declaredfocus throughcut only. Boundpaircomplete requires exactobserveOwnerPhasePair CALL-RETURNEDpromise firstretain/settlement andpairfirstclose/finally. Internalrunpromise excluded. Otherpromisehandlerobservationsandallancestorclosures notmandatory; missing meansunobserved, notpending/open/drained. Fullyobservedtargetthrowbeforepair-enter cancompletewithoutpair. Pair-enterunboundprefix/unknownUNBOUND. Targetunreached canretainobservedactivationwork; it is notabsenceofprioractivation.",
+  "abortMapping": "Exact matrix8b791e...: rootabortunknown postcontroller.abort; initialstopouter/pairunknownpostabort; childsharedabortinitial-child/unknownpostc.abort; childfinallyONLYchild-finally/finally. Pair/outerparentabortmarkerparent-abortAFTERclock.close/nestednotes; noextra closecall. Complete parentmarker requires earlier sameclockclosedtransition, explicitdeficitprefixmayremainunknown. rootfinish/root/explicitfinish only; factorycloseouter/pair/unknown only.",
+  "prefixRuling": "d2831f0c1e3482550043413f60560d19be2eb4af",
+  "projection": {
+    "authority": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "selection": "Choose actualfocus/FIRSTscopeerror over fullboundedprivateledger BEFORE pruning; neverchangefocus tofit.",
+    "mandatory": [
+      "first scope/target/pair markers; observed targetend/firstlogicalend",
+      "FIRSTscopeerror; earliestfocusedcheck; exactaliases andfirstobjecterror references",
+      "exactselectedpair CALL-RETURNEDp firstretained/settlement",
+      "firstclosedtransition+firstclosecall forroot/outer/pair",
+      "firstabort foractualsite/lease/cause",
+      "atleastoneactualselectedchild event",
+      "snapshot-cut"
+    ],
+    "order": [
+      "omitnonpairpromise rows/events",
+      "omitrepeatclose-call/repeatabort observations",
+      "omitsecondarychecks exceptfirstscopeerror/earliestfocusedcheck",
+      "omitchild-finally only ifstillneeded"
+    ],
+    "classification": "ANY observedomission→joined/prefix/PROJECTION_GAP, nevercomplete. Closeall refs/tables, preserve originalsequence andactualidentityalias. Ifmandatory+cut>24 orcanonicalrecord+LF>6144, unknown/unjoinedCAP_SNAPSHOT. No capraise, no captureC knownunabletorepresenttargetpath.",
+    "evidence": "Literal31→24 andlateleaf variants BEFOREreducercode; actualoriginalcallbacks/unitcounts cloudmustproveactual result, not atextsimulationPASS."
+  },
+  "independentProgressAxes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
+  "axisRule": "Target markers are inside SAME retained activation async callback around FIRST receipt-recorded await; logical coordinator terminal, target await terminal and exact pair-returned promise settlement are independent observations. Logical throw may precede late target terminal; unreached may retain activation work. First scope error remains immutable. Dedicated axis controls separate from fixed31/32 corpus.",
+  "bindingImplementation": "Explicit captured originalLease binds outer clock immediately after existing creation, before eligibility; scope-enter/eligibility remains ONLY validated admitted notices POST. Other-pair records before eligibility are not selected or stored; no retrospective event replay. For target call-returned p, SAME existing PH703 callback extracts its original options literal, binds actual options callRef, calls original async observeOwnerPhasePair, then binds its exact returned p using explicit originalLease and same callRef to the already-bound target-pair lease. No extra read/callback/reaction/await or internal run-p substitution."
+}
