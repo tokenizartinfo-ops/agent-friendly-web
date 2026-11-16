@@ -1,172 +1,109 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/10",
-  "timestampUTC": "2026-11-16 23:43:41 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/11",
+  "timestampUTC": "2026-11-16 23:59:52 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "phase": "GREEN20_FRONTIER_DIAG1_ACCEPTED_CLOSED_ACTUAL_RESULT_REVIEW_AND_DIAGNOSIS_PENDING",
-  "allCurrentOneUseRunsTerminalAndWorkflowsClosed": true,
-  "fullSourceTask1": {
-    "spent": true,
-    "run": 43965725604,
-    "result": "INCOMPLETE_CHILD_ETIMEDOUT_180S",
-    "primary": "68c68577dca6ed01980dd673ed9b2623096a71f9",
-    "closedHead": "089356513d1ccef9bdffa375d3a822c7c9fd01d3"
+  "phase": "HOST_JSON_FIX1_SOURCE_IMPLEMENTATION_RELEASED",
+  "activeNativeRuns": [],
+  "closedCurrentOccurrences": {
+    "SourceFull43965725604": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+    "SourceTools43977281603": "3441b4a43dd52aff5089e21b085cff1df4e064b8",
+    "Own12443979001179": "5713d17f79bcd7342e43bc72bfb27e8d21757165",
+    "SourceDiag43980317236": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
   },
-  "tools": {
-    "run": 43977281603,
-    "tests": 6,
-    "checks": 31,
-    "primary": "5ecdf44b7bdea99ae1692a8eff9a5ca5b1939303",
-    "review": "6f1ce3574354652cd5fff0f66dc0f0ae26fb12f3",
-    "closeReadback": "9da853b6316233047eaac5c1aac6afd1aecbfc08",
-    "SPECPASS": true,
-    "QUALITYPASS": true
-  },
-  "own": {
-    "run": 43979001179,
-    "tests": 124,
-    "positive": 26,
-    "negative": 98,
-    "primary": "d974205b15b8492ac8a8a748b52c767631165bbd",
-    "review": "5434afae4f5a1cfc09209357ee5666ec28935118",
-    "closeReadback": "92d3b7873769d7b7b3e5beb0ac1960efe2046416",
-    "SPECPASS": true,
-    "QUALITYPASS": true
+  "toolsAndVerifier": {
+    "SourceTools6checks31Review": "6f1ce3574354652cd5fff0f66dc0f0ae26fb12f3",
+    "Own124Review": "5434afae4f5a1cfc09209357ee5666ec28935118",
+    "bothPassedAndClosed": true
   },
   "green20": {
-    "plan": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
-    "ruling": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
-    "SourceImplementationReleased": true,
-    "OwnImplementationReleased": true,
-    "SourceCaptureReleased": true,
-    "pathSupplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
-    "sourceDrafts": {
-      "selection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
-      "schema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
-      "inventory": "b3b57056fdca9a8ff8d8c341642bb9f7b6ddb65f",
-      "positiveExamples": "1fb2e82835a547f434170939386852e2c6e32850",
-      "negativeExamples": "928de8cd15789afc4d61b992601016377bdd7a7b"
-    },
-    "sourceDesignIndex": "09745d7a850b19d8004b3214be9357b9e278bd7d",
-    "contract": "e55a6387549a8447a5ad93356184645ae19e70de",
-    "SourceSchema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
-    "SourceDesignHashesVerified": true,
-    "OwnPlanPending": true,
-    "OwnDesign": "548ada038264c8b8e250e41047c4aa2e0b2593a5",
-    "OwnWireReview": "db0e81549a5018adb92c33be5b1000347e58e505",
-    "implementationRuling": "696fb02dc8a29f0c394d91f661922610403ec4bf",
-    "OwnNativeReleased": true,
-    "SourceToolsNativeReleased": true,
-    "SourceBusinessCaptureReleased": true,
-    "SourceEarlyFixtureSeal": "70f228712cf9b7e6eef08e6d784316b174271106",
-    "SourceToolsExpected": 6,
-    "SourceToolsAssertions": 31,
-    "OwnEarlyFixtureSeal": "28a00cc5c296ca245389a5cccfdcd929864cb133",
-    "OwnExpected": 124,
-    "OwnPositive": 26,
-    "OwnNegative": 98,
-    "OwnBodyAdmission": "66640053f64d9da3b72f1d3b583e81c7d74f8ea5",
-    "SourceToolsHead": "6d6ab08491f1bdb77b0ab492294731715b43a64f",
-    "SourceToolsGate": "3f54074d0ff4a9320300e8bccbab174c3afeea6c",
-    "SourceToolsNativePassed": true,
-    "SourceToolsNativeCounts": {
-      "tests": 6,
-      "checks": 31
-    },
-    "SourceToolsPrimary": "5ecdf44b7bdea99ae1692a8eff9a5ca5b1939303",
-    "SourceToolsProof": "466c6af28eba2581f1e487c947bcd76d11fb0afc",
-    "SourceToolsClosedHead": "3441b4a43dd52aff5089e21b085cff1df4e064b8",
-    "SourceToolsCloseReadback": "9da853b6316233047eaac5c1aac6afd1aecbfc08",
-    "SourceToolsFreshReviewPending": false,
-    "SourcePrepared": {
-      "head": "6e41d44919d86f0bacc97edab022460449316987",
-      "tree": "fd5fa1eb66c0f1503af570c4a7be0233494016e7",
-      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
-      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
-      "index": "2f25941491df234890036ae8cf0609e323207b67",
-      "refCreated": true,
-      "runCreated": true,
-      "SourceBusinessExecuted": true,
-      "gate": "SINGLE_SOURCE_DIAGNOSTIC_ACTIVATED",
-      "activatedAt": "2026-11-16 23:33:30 UTC",
-      "run": 43980317236,
-      "closed": true,
-      "closedHead": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
-    },
-    "RootTrustedBodyEdges": "1fe62f22a3067029c651e99320c94624998eb58b",
-    "SourceToolsFinalReview": "6f1ce3574354652cd5fff0f66dc0f0ae26fb12f3",
-    "OwnNativeHead": "54971367ce9b656f06beae6657a85e839b96442f",
-    "OwnIndex": "c91b094805387623df47426f7fe1af9f68251f56",
-    "OwnNativeGate": "5eb981957915b1bd71c9966ab805b088fd0ea3b6",
-    "OwnNativePassed": true,
-    "OwnNativeCounts": {
-      "tests": 124,
-      "positive": 26,
-      "negative": 98,
-      "failed": 0
-    },
-    "OwnNativePrimary": "d974205b15b8492ac8a8a748b52c767631165bbd",
-    "OwnNativeProof": "98b9b2c9639b1e9ea66408e5d3a3a7fd06ef07d8",
-    "OwnNativeClosedHead": "5713d17f79bcd7342e43bc72bfb27e8d21757165",
-    "OwnNativeCloseReadback": "92d3b7873769d7b7b3e5beb0ac1960efe2046416",
-    "OwnFreshReviewPending": false,
-    "OwnFinalReview": "5434afae4f5a1cfc09209357ee5666ec28935118",
-    "SourceCaptureGate": "54b7d09ed5e87ff62689dc9fb28eed3436ea2e7a",
-    "SourceRun": 43980317236,
-    "SourceJob": 133694794167,
-    "SourcePrimary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
-    "SourceOutcome": "f39f7e43c4010acbaca7a679d61dbe048da24688",
-    "OwnAdmission": "a9993d7411d0a943d2f247915d91ef17b0b38f09",
-    "SourceClosedHead": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
-    "SourceCloseReadback": "071bccca74d1f1e0497b18bf3ee65ad532df7363",
-    "SourceResultReviewPending": true,
-    "run": 43980317236,
-    "job": 133694794167,
-    "status": "DIAGNOSTIC_REPORTING_SUCCESS_SOURCE_QUALIFICATION_INCOMPLETE",
     "primary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
     "outcome": "f39f7e43c4010acbaca7a679d61dbe048da24688",
+    "OwnAdmission": "a9993d7411d0a943d2f247915d91ef17b0b38f09",
     "closeReadback": "071bccca74d1f1e0497b18bf3ee65ad532df7363",
-    "actual": {
-      "first11Pass": true,
-      "nativePrefix19": {
-        "pass": 14,
-        "fail": 5
-      },
-      "firstThrow": {
-        "sequence": 46,
-        "elapsedMs": 114318,
-        "id": "C2T1_NOTICES",
-        "operation": "action",
-        "edge": "throw",
-        "error": {
-          "name": "AssertionError",
-          "code": "ERR_ASSERTION",
-          "site": {
-            "file": "S08",
-            "line": 41,
-            "column": 12
-          }
+    "resultReview": "e62f6352e8761a3a71d4e781950892291ba68a52",
+    "diagnosticReportingAccepted": true,
+    "SourceQualificationIncomplete": true,
+    "native19": {
+      "pass": 14,
+      "fail": 5
+    },
+    "firstThrow": {
+      "sequence": 46,
+      "elapsedMs": 114318,
+      "id": "C2T1_NOTICES",
+      "operation": "action",
+      "edge": "throw",
+      "error": {
+        "name": "AssertionError",
+        "code": "ERR_ASSERTION",
+        "site": {
+          "file": "S08",
+          "line": 41,
+          "column": 12
         }
+      }
+    },
+    "lastOpen": {
+      "id": "C2T1_OWN_PROMISE",
+      "operation": "action",
+      "sequence": 77,
+      "elapsedMs": 176469
+    },
+    "unknown": "Actual HTTP numeric status and postthrow effect counters not exported; do not infer503/noeffects/earlierhistoricalcause. FirstNoticesPOST action~30.008s; lower-levelwinner unknown."
+  },
+  "hostJsonFix1": {
+    "plan": "0a04e29e7a72c4ef853942fc6f7093416c9e9a71",
+    "ruling": "5b62cc4b148d5667f7845957012bca03c49e6be0",
+    "SourceImplementationReleased": true,
+    "HostNativeReleased": false,
+    "SourceBusinessReleased": false,
+    "round": 1,
+    "maxRounds": 5,
+    "fixtureFirst": "65dd370ef52c0bcbb8fd56b2012d2c8bb93f3ae4",
+    "hostExpected": {
+      "old": {
+        "tests": 4,
+        "pass": 3,
+        "fail": 1,
+        "scope": "expected serialization RED only"
       },
-      "openCase": {
-        "id": "C2T1_OWN_PROMISE",
-        "operation": "action",
-        "enteredElapsedMs": 176469
+      "proposed": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0
+      }
+    },
+    "implementer": "n3_admission_repair4_design",
+    "native": "HELD",
+    "SourceBusiness": "HELD",
+    "delta": "Only candidate S10hostprovider JSON serialization2→1 per freshcall;other12Source13/M/QA/SDK/securitychecks/clock/caps unchanged. Source author creates DATA only, no Sourceexec locally.",
+    "expected": {
+      "old": {
+        "tests": 4,
+        "pass": 3,
+        "fail": 1,
+        "expectedRED": "HOST_ENCODE_ONCE actual2 expected1"
       },
-      "afterOpen": false,
-      "capture": {
-        "errorKind": "timeout",
-        "childCapMs": 180000
+      "candidate": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0
       },
-      "Source13BeforeAfterMatch": true,
-      "custodyLaunches": 2,
-      "custodyProbes": 2,
-      "cleanupClaimMatched": true
+      "namedChecks": 13
     }
   },
-  "next": "Await fresh actual-result review c230_full_own_native_review and bounded diagnosis/design n3_admission_repair4_design. Both have primary/outcome/OWNadmission/closure. Diagnose earliest NOTICES POST non200 after~30s atS08:41, no numeric status captured. Keep last openCase separate; no claim it caused earlier failure. No code/native released for fixes, no Source13/budget/QA/M change yet.",
-  "doNotRepeat": "All three GREEN20 nominations and full source43965725604 spent and closed. No Source business rerun or cap increase by inference. No liveCloudflare/OAuth/OTP/tokens/mail/Max action.",
-  "RootDocs": "dded26005ad6b7291e8d99724546d1baaa7a72c8",
+  "firstFailurePostDiag2": {
+    "stage": "SOURCE_AND_OWN_DESIGN_ONLY",
+    "SourceDesigner": "c230_full_own_native_review",
+    "OwnDesigner": "c2_v2_own_receiver_fix1",
+    "SourceImplementationReleased": false,
+    "OwnImplementationReleased": false,
+    "NativeReleased": false,
+    "SourceBusinessReleased": false,
+    "reason": "Current admitted diagnostic omitted status scalar and Source C2SOURCE counters; prepare bounded extraction of already-emitted bytes, no newhooks/RPCs/RAW export."
+  },
+  "next": "Read host implementation packet when author delivers, static fullhash/reversible/importscope/fixturefirst check; Root owns separate nativehostonly gate and freshreview. Source/OWN DIAG2 contracts need jointdesign and Root acceptance before anycode. No further businessrun/Source13overwrite/fullqualification released.",
   "SourceQualified": false,
   "Task1Pass": false,
   "nonclaims": {
