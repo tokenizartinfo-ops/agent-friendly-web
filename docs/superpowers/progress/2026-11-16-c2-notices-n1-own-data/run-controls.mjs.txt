@@ -1,0 +1,20 @@
+import test,{after} from 'node:test';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
+import {inflateRawSync,deflateRawSync} from 'node:zlib';
+import {n1AllControls} from './controls.mjs';
+const fail=()=>{throw Error('ROOT_N1_OWN_HOST_REJECTED');};
+const git=(...args)=>execFileSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+const path='docs/superpowers/root-own/c2-notices-n1/',repository='tokenizartinfo-ops/agent-friendly-web',branch='refs/heads/lab/afw-c2-own-receiver-20261116-notices-n1',message='AFW-C2-NOTICES-N1-OWN-ONEUSE-20261116',job='c2-notices-n1-own';
+if(process.argv.length!==2||process.version!=='v22.23.4'||!fileURLToPath(import.meta.url).replaceAll('\\','/').endsWith('/'+path+'run-controls.mjs')||process.env.GITHUB_REPOSITORY!==repository||process.env.GITHUB_EVENT_NAME!=='push'||process.env.GITHUB_REF!==branch||process.env.GITHUB_JOB!==job||process.env.GITHUB_RUN_ATTEMPT!=='1'||!/^[1-9]\d*$/.test(process.env.GITHUB_RUN_ID??'')||git('rev-parse','HEAD')!==process.env.GITHUB_SHA||git('rev-parse','HEAD^')!=='6791ce1bab9372e206d3c7b42b3e1394dc6e0c68'||git('show','-s','--format=%B','HEAD')!==message)fail();
+const read=n=>readFileSync(new URL(n,import.meta.url)),hash=v=>createHash('sha256').update(v).digest('hex');
+const suite=n1AllControls(JSON.parse(read('vectors.json')),JSON.parse(read('schema.json')),JSON.parse(read('admission.json')),hash,inflateRawSync,deflateRawSync,JSON.parse(read('custody-fix1-vectors.json')),JSON.parse(read('consistency-fix1-vectors.json')));
+if(suite.journal.length!==78||suite.privateProbe.length!==12||suite.full.length!==91||suite.custody.length!==4||suite.consistency.length!==4||suite.checks.length!==189||new Set(suite.checks.map(c=>c.id)).size!==189)fail();
+for(const c of suite.checks)test(c.id,()=>assert.equal(c.pass,true,'OWN bounded synthetic control failed'));
+after(()=>{
+ const failed=suite.checks.filter(c=>!c.pass);if(failed.length)fail();
+ process.stdout.write('AFW_C2_NOTICES_N1_OWN_CONTROL '+JSON.stringify({schema:'afw.c2-notices-n1.root-own-control.v1',repository,head:process.env.GITHUB_SHA,tree:git('rev-parse','HEAD^{tree}'),runId:process.env.GITHUB_RUN_ID,runAttempt:1,job,node:process.version,controls:{journal:78,privateProbe:12,fullInput:91,custodyFix1:4,consistencyFix1:4,total:189,failed:0},moduleSha256:hash(read('reader.mjs')),controlsSha256:hash(read('controls.mjs')),vectorsSha256:hash(read('vectors.json')),schemaSha256:hash(read('schema.json')),admissionSha256:hash(read('admission.json')),custodyVectorsSha256:hash(read('custody-fix1-vectors.json')),consistencyVectorsSha256:hash(read('consistency-fix1-vectors.json')),actualNativeImportGraph:true,SourceExecuted:false,SourceQualified:false,Task1Pass:false,nonclaims:{historicalCauseProven:false,receiptAuthenticated:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false}})+'\n');
+});

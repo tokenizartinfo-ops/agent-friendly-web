@@ -1,0 +1,333 @@
+{
+  "schema": "afw.c2-notices-n1.root-own-reversible-diff.v1",
+  "authority": "e8c7ecd23515c92d211285693054e3ecc0b50b74",
+  "units": "Zero-based UTF-8/ASCII half-open [oldStart,oldEnd,newStart,newEnd]. Full pinned before/after blobs recover every byte in both directions. Whole-file comparisons deliberately show independent new-role implementation; no historical file is overwritten.",
+  "comparisons": [
+    {
+      "before": {
+        "role": "clean OWN generic receiver",
+        "blob": "9e972bfee039512f0827488cec4645332645e2b1",
+        "bytes": 21483,
+        "sha256": "12058b5967efb97fe88d52e3578a1775c04b18ee0046f2936e40a0866e94999c",
+        "gitBlob": "9e972bfee039512f0827488cec4645332645e2b1",
+        "fullReadback": true
+      },
+      "after": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/reader.mjs",
+        "blob": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+        "bytes": 31480,
+        "sha256": "5765a9b9ba7760a08da449a1e025dc483563ed98d8db55e2465e2e417c8886f5",
+        "gitBlob": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+        "fullReadback": true,
+        "before": null
+      },
+      "spans": [
+        [
+          0,
+          21483,
+          0,
+          31480
+        ]
+      ],
+      "description": "New N1 role derives only generic shape/time/schema/log/API primitives from clean OWN receiver. Entire N1 journal/probe/ZIP/replay semantics are original; Source nomination explicitly N1. This is a lossless role comparison, not mutation of historical nextGET path.",
+      "forwardAndReverseVerified": true
+    },
+    {
+      "before": {
+        "role": "clean OWN runner scaffold",
+        "blob": "21a0bef854d85ec1e588d0c8e6f30c2dad73fdb2",
+        "bytes": 20057,
+        "sha256": "ca18f96a2d9800029762afadc2532083a9cb7bb803ec5d39e3f44c7e0d7fa9a6",
+        "gitBlob": "21a0bef854d85ec1e588d0c8e6f30c2dad73fdb2",
+        "fullReadback": true
+      },
+      "after": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/run-controls.mjs",
+        "blob": "604087ac9a9f871acd99e48dde0f8bb3ac629452",
+        "bytes": 3093,
+        "sha256": "cfb54240374400705f31386454b4ad4e0a2e12712a62ea346aca06ce6d9b75a9",
+        "gitBlob": "604087ac9a9f871acd99e48dde0f8bb3ac629452",
+        "fullReadback": true,
+        "before": null
+      },
+      "spans": [
+        [
+          0,
+          20057,
+          0,
+          3093
+        ]
+      ],
+      "description": "New native node:test one-use OWN runner replaces historical role in a new path. Own control functions are a separate additive controls.mjs; no Source import or locked dependency installation.",
+      "forwardAndReverseVerified": true
+    }
+  ],
+  "newPathPreimages": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/reader.mjs",
+      "blob": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+      "bytes": 31480,
+      "sha256": "5765a9b9ba7760a08da449a1e025dc483563ed98d8db55e2465e2e417c8886f5",
+      "gitBlob": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/controls.mjs",
+      "blob": "79005b155d69a754dfe203a9a8e5a0baf9935a12",
+      "bytes": 19965,
+      "sha256": "a2a42cb63e3d501f0755ebed0d55d02150a473ae32c053559cb87dc5f5e264ab",
+      "gitBlob": "79005b155d69a754dfe203a9a8e5a0baf9935a12",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/run-controls.mjs",
+      "blob": "604087ac9a9f871acd99e48dde0f8bb3ac629452",
+      "bytes": 3093,
+      "sha256": "cfb54240374400705f31386454b4ad4e0a2e12712a62ea346aca06ce6d9b75a9",
+      "gitBlob": "604087ac9a9f871acd99e48dde0f8bb3ac629452",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/vectors.json",
+      "blob": "08b9edf048cf3f04cd223a645b1aa782fa454447",
+      "bytes": 29684,
+      "sha256": "cc8fce836948dcbe968393952ce0a99894defa01e35e21bb9241209cf099600f",
+      "gitBlob": "08b9edf048cf3f04cd223a645b1aa782fa454447",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/schema.json",
+      "blob": "5830b573c0a8a2a9ec6bd3e5202b8c9cdcb3a6fd",
+      "bytes": 17719,
+      "sha256": "3780436515245b3e62a7b69596f401f45a174f32e1c925a036fb6088691b91be",
+      "gitBlob": "5830b573c0a8a2a9ec6bd3e5202b8c9cdcb3a6fd",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/admission.json",
+      "blob": "dfef3e26e11e487346a47c37ff53c247b22feb2b",
+      "bytes": 1138,
+      "sha256": "aa7579f44f35260b88b0a94c3d73dd279cfc5c81126038b211d3d6547d9a61a5",
+      "gitBlob": "dfef3e26e11e487346a47c37ff53c247b22feb2b",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/custody-fix1-vectors.json",
+      "blob": "39038ef5fc8181151f4d025fa2dd82f14d2f3b68",
+      "bytes": 141218,
+      "sha256": "bd83b814b8696994f72217a21f0e6ba75c01ed7ee8b0571531e82b7d604a1f88",
+      "gitBlob": "39038ef5fc8181151f4d025fa2dd82f14d2f3b68",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/consistency-fix1-vectors.json",
+      "blob": "db28cff3c3b399a26b27097b805752017d34d978",
+      "bytes": 140938,
+      "sha256": "a43e562b3de64f9962433b1dc65598d4998607ee1da3ee36e6f3ee97f009b1ce",
+      "gitBlob": "db28cff3c3b399a26b27097b805752017d34d978",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/custody-fix1-red.json",
+      "blob": "966981ea4ff5d98ae96a8d06ff7713e949f4d0a4",
+      "bytes": 387,
+      "sha256": "43869b9268a7d6e9819efc5d4911c0787b4e12975e5fe35d69ac98508f36a5de",
+      "gitBlob": "966981ea4ff5d98ae96a8d06ff7713e949f4d0a4",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/consistency-fix1-red.json",
+      "blob": "a02afbbfab033e243e80ebaafbad7af49c0844ff",
+      "bytes": 536,
+      "sha256": "a112e248e4933943bc032db2796b0659a37df8b759d53889201f6e265928200e",
+      "gitBlob": "a02afbbfab033e243e80ebaafbad7af49c0844ff",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/control-results.json",
+      "blob": "7b6d5f5ef7a3534ea2fbe812fe38ab432fee2907",
+      "bytes": 12878,
+      "sha256": "34e5b97ff077fc278323d3376cd954722fd001d95782c5a3fa63284811dd9266",
+      "gitBlob": "7b6d5f5ef7a3534ea2fbe812fe38ab432fee2907",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": ".github/workflows/afw-c2-notices-n1-own.yml",
+      "blob": "cc3314e7ba5b787aec85a0d93329df998f1ec686",
+      "bytes": 1059,
+      "sha256": "5e23b47b862ffca9d94d204dd8d5354c9a88de99a1fe86b4afdc540ba5dfd926",
+      "gitBlob": "cc3314e7ba5b787aec85a0d93329df998f1ec686",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "genericReuse": [
+    "ngObj/ngKeys/ngInt/ngSame/ngBad",
+    "ngTime finite UTC/calendar checks",
+    "ngSchema normative JSON DATA evaluator",
+    "ngLogFrames raw command-step transport",
+    "ngApiJoin adapted explicitly to N1 plus raw run time bounds"
+  ],
+  "newSemantics": [
+    "Original four-case action/count/block FSM and independent HTTP interval reduction",
+    "Safe probe projection/null/stale/ambiguity constraints and independent synthetic private-prefix delta",
+    "Strict native safe-projection consistency and capture-exit join",
+    "Direct bounded ZIP/descriptor/CRC/entry/hash/payload verification"
+  ],
+  "SourceProductOrProducerMutated": false,
+  "rollback": "Omit additive OWN c2-notices-n1 paths and workflow or discard detached packet. Old clean OWN preimages and Source packet remain immutable. Root owns any future refs/runs/cleanup, no Source/runtime operation performed here.",
+  "round1": {
+    "authority": [
+      "29f7d74086d21aac8333b706e3233f8ea130b91b",
+      "aaa3bdfdc66373fb43ad672e145dd29aa05ef796",
+      "cdd98dac483965d16967882094c9c8b4b6f2b3ce"
+    ],
+    "module": {
+      "before": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/reader.mjs",
+        "blob": "856fa38655339020195657f7286505f5df11a408",
+        "bytes": 31491,
+        "sha256": "0030c8983f8f2f9883a7d075304c5337630470fa36ee858916ee43b7ec297372",
+        "gitBlob": "856fa38655339020195657f7286505f5df11a408",
+        "fullReadback": true,
+        "before": null
+      },
+      "after": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/reader.mjs",
+        "blob": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+        "bytes": 31480,
+        "sha256": "5765a9b9ba7760a08da449a1e025dc483563ed98d8db55e2465e2e417c8886f5",
+        "gitBlob": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+        "fullReadback": true,
+        "before": null
+      },
+      "spans": [
+        [
+          12649,
+          12701,
+          12649,
+          12711
+        ],
+        [
+          12754,
+          12873,
+          12764,
+          12861
+        ],
+        [
+          13362,
+          13426,
+          13350,
+          13414
+        ],
+        [
+          28542,
+          28578,
+          28530,
+          28567
+        ]
+      ],
+      "forwardAndReverseVerified": true
+    },
+    "controls": {
+      "before": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/controls.mjs",
+        "blob": "5c611fda40fb7e4c2f8406ab67571c10164ba837",
+        "bytes": 19376,
+        "sha256": "ada97a79622b2fa0b157a85774a728fab31ff15b7cbf54c35aeaee33db9bce4b",
+        "gitBlob": "5c611fda40fb7e4c2f8406ab67571c10164ba837",
+        "fullReadback": true,
+        "before": null
+      },
+      "after": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/controls.mjs",
+        "blob": "79005b155d69a754dfe203a9a8e5a0baf9935a12",
+        "bytes": 19965,
+        "sha256": "a2a42cb63e3d501f0755ebed0d55d02150a473ae32c053559cb87dc5f5e264ab",
+        "gitBlob": "79005b155d69a754dfe203a9a8e5a0baf9935a12",
+        "fullReadback": true,
+        "before": null
+      },
+      "spans": [
+        [
+          0,
+          19376,
+          0,
+          19965
+        ]
+      ],
+      "forwardAndReverseVerified": true
+    },
+    "runner": {
+      "before": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/run-controls.mjs",
+        "blob": "c6fa24a73f9e0508ee846bc4429234d775dc03cf",
+        "bytes": 2779,
+        "sha256": "2cc5a94be425018f2f72fdce855e1dfb26159dd4c5aee55764a20ccdd35795da",
+        "gitBlob": "c6fa24a73f9e0508ee846bc4429234d775dc03cf",
+        "fullReadback": true,
+        "before": null
+      },
+      "after": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/run-controls.mjs",
+        "blob": "604087ac9a9f871acd99e48dde0f8bb3ac629452",
+        "bytes": 3093,
+        "sha256": "cfb54240374400705f31386454b4ad4e0a2e12712a62ea346aca06ce6d9b75a9",
+        "gitBlob": "604087ac9a9f871acd99e48dde0f8bb3ac629452",
+        "fullReadback": true,
+        "before": null
+      },
+      "spans": [
+        [
+          0,
+          2779,
+          0,
+          3093
+        ]
+      ],
+      "forwardAndReverseVerified": true
+    },
+    "vectors": {
+      "before": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/vectors.json",
+        "blob": "acc4a93f1fe52839964de87e51e7ef912c680211",
+        "bytes": 28805,
+        "sha256": "004e5dfbedabd49ab3559cc8b7c043c24c1fbcc38e72d14578e96eb63463be60",
+        "gitBlob": "acc4a93f1fe52839964de87e51e7ef912c680211",
+        "fullReadback": true,
+        "before": null
+      },
+      "after": {
+        "path": "docs/superpowers/root-own/c2-notices-n1/vectors.json",
+        "blob": "08b9edf048cf3f04cd223a645b1aa782fa454447",
+        "bytes": 29684,
+        "sha256": "cc8fce836948dcbe968393952ce0a99894defa01e35e21bb9241209cf099600f",
+        "gitBlob": "08b9edf048cf3f04cd223a645b1aa782fa454447",
+        "fullReadback": true,
+        "before": null
+      },
+      "spans": [
+        [
+          0,
+          28805,
+          0,
+          29684
+        ]
+      ]
+    },
+    "sourceUnchanged": true,
+    "schemaAdmissionWorkflowUnchanged": true,
+    "meaning": "Pre-activation correction in same independent OWN proposal. No old refs/runs or Source evidence reinterpreted."
+  }
+}

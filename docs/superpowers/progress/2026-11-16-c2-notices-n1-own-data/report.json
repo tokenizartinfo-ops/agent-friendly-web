@@ -1,0 +1,276 @@
+{
+  "schema": "afw.c2-notices-n1.root-own-report.v1",
+  "status": "PENDING_ROOT_NATIVE_CLOUD_AND_ORIGINAL_PLUS_SCOPED_REVIEW",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached immutable OWN Git DATA; only tiny bounded OWN functions and ordinary synthetic JSON executed in RAM",
+  "authority": {
+    "brief": "e8c7ecd23515c92d211285693054e3ecc0b50b74",
+    "sourceBrief": "3a380eab1707df6689b4c53d6acd3abb0a59a229",
+    "sourcePacket": "d9762f018568fedf9080985781c7fb08b36707ca",
+    "contract": "2a7ac8dfbb4469e8ad63875e7667ac4fbf95be4e",
+    "captureSupplement": "4c558caaff6158634610fa84d9b48b8df9b221a4",
+    "finalSchema": "5830b573c0a8a2a9ec6bd3e5202b8c9cdcb3a6fd"
+  },
+  "independence": "Original independent N1 journal/probe/native/ZIP semantics. Reused only clean OWN generic shape/time/schema/log/API primitives with explicit fresh N1 nomination. Never invoked/evaluated/imported/compiled/syntax-checked Source/observer/parser/test code. Normative schema/selection and Source packet/runner/driver/helper were read as DATA; Source validation implementation is not a receiver dependency.",
+  "testFirst": {
+    "vectors": "acc4a93f1fe52839964de87e51e7ef912c680211",
+    "beforeReceiver": true,
+    "caseTable": "71 concrete journal cases with exact record edits/native metadata/expected acceptance:16 positive55 negative, plus4 raw canonical/UTF8 rejects. Persisted FULLreadback before authoring original receiver. Source old incomplete-HTTP acceptance was not borrowed as a rule; own complete-dangling-POST negative was predeclared and rejects. Round1 supersedes the initial NativeFAIL-with-returned-operations positive expectation: the pinned N1 nativeJoin requires exact status; final corpus has74 cases plus4 raw rejects.",
+    "fullGlue": "Coherent counterexamples later joined into complete synthetic raw API/log/outcome/real ZIP inputs with canonical witness bytes/hash, journal hash, observation projection, frame, archive digest and payload consistently rebound. They reject on independent semantics rather than stale hashes.",
+    "finalVectors": "08b9edf048cf3f04cd223a645b1aa782fa454447"
+  },
+  "behavior": [
+    "Exact canonical NDJSON/keys/UTF8/bounds/contiguous sequence/monotonic elapsed and initial SourceIndex/driver/selection/helper/reader/slot bindings.",
+    "Four sequential N1 action/count callbacks; any action/count failure poisons later work and requires explicit blocked callbacks without business/count/HTTP. Native blocked FAIL/workEnteredfalse joins exact IDs. Original action and count errors retained separately including original null/undefined represented by finite all-null error fields.",
+    "Independent notices GET/POST interval FSM: POST requires completed GET200/bodytrue; HTTP stays inside actual notices action; every started HTTP settles before actionreturn/throw. Complete dangling POST rejects; a real timeout-prefix open action/HTTP remains a prefix.",
+    "Probe before/after order, duplicate/unknown/stale/ambiguous constraints. correlated:null and guardOrigin:unknown always. Private prefix reducer independently tested with synthetic before/after JSON, bounded observations/calls/business, exact old prefixes, phase-failure exclusion and safe sites/facts.",
+    "Normal/timeout native safe projections, counts/hierarchy, exit/status coherence and auxiliary AFTER errors. For this pinned N1 producer, each present native result exactly matches blocked/action/count failure status. No native result is fabricated for a missing callback; complete journal requires native complete even under timeout.",
+    "Raw unique GitHub run/jobs/Git commit join with exact N1 branch/WF/message/head/tree/BASE/push/attempt1/job, strict finite calendar UTC times and job/command/run bounds; exactly4 correctly ordered canonical frames, no echo/frontier/extra/missing accepted.",
+    "Final schema and trusted admission normalized hashes fixed; control6/21/3/6/2/5 with final Source vector hash; real3 custody launches,3..24 documented total processes and all required booleans including owned cleanup.",
+    "Actual artifact-list id/name/run/head/branch/digest/size joined to independently decoded raw ZIP bytes. Bounded single exact entry, stored/deflate/data descriptor, CRC, sizes, no foreign path/extra entry, canonical exact outcome+LF payload bytes/hash."
+  ],
+  "evidenceBoundary": {
+    "native": "Raw child TAP remains private. OWN independently replays safe journal and joins Source-emitted native case projection to actual capture exit/status/context and known pinned producer. It does not independently parse absent raw TAP. File/AFTER failures remain auxiliary; no receipt authentication or Source qualification.",
+    "probe": "Actual private before/after arrays are absent from wire by design. OWN checks published safe projection semantics and independently tests private-prefix reduction on synthetic DATA, but cannot authenticate actual private-prefix equality from missing inputs. Probe labels do not establish guard origin/root cause.",
+    "syntheticZIP": "ZIP controls use actual synthetic ZIP bytes and independent CRC known-vector/stored/deflate/descriptor checks; they are never represented as a downloaded native Source artifact."
+  },
+  "validation": {
+    "scope": "OWN PURE RAM ONLY; native module import graph and host/workflow not executed by author",
+    "counts": {
+      "journal": 78,
+      "privateProbe": 12,
+      "fullInput": 91,
+      "custodyFix1": 4,
+      "consistencyFix1": 4,
+      "total": 189,
+      "failed": 0
+    },
+    "uniqueNativeTestIds": 189,
+    "results": {
+      "path": "docs/superpowers/root-own/c2-notices-n1/control-results.json",
+      "blob": "7b6d5f5ef7a3534ea2fbe812fe38ab432fee2907",
+      "bytes": 12878,
+      "sha256": "34e5b97ff077fc278323d3376cd954722fd001d95782c5a3fa63284811dd9266",
+      "gitBlob": "7b6d5f5ef7a3534ea2fbe812fe38ab432fee2907",
+      "fullReadback": true,
+      "before": null
+    },
+    "meaningfulChecks": "Successful, failed, blocked and timeout-prefix captures; dual failures; complete dangling HTTP; no POST after failed GET/body; unavailable/ambiguous/stale probes; coherent witness/summary mutations; raw API/time/log/schema/custody/artifact tampering; actual ZIP bytes and CRC32 123456789 reference."
+  },
+  "runtime": {
+    "prefix": "docs/superpowers/root-own/c2-notices-n1/",
+    "workflow": ".github/workflows/afw-c2-notices-n1-own.yml",
+    "branch": "lab/afw-c2-own-receiver-20261116-notices-n1",
+    "message": "AFW-C2-NOTICES-N1-OWN-ONEUSE-20261116",
+    "job": "c2-notices-n1-own",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n1/run-controls.mjs",
+    "node": "v22.23.4",
+    "noNpmOrSourceImports": true,
+    "rootOnly": true
+  },
+  "sourceNomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n1",
+    "job": "c2-notices-n1",
+    "candidateHeadDeclaredByRoot": "e10c4f40d63fba5f13e1edbb6a8021d04b26f778",
+    "candidateTreeDeclaredByRoot": "2e46b839f6fb7bd4dd0b844d7110fb4e6a160f94",
+    "actualRunId": null,
+    "actualJobId": null,
+    "activationHeld": true,
+    "meaning": "Prepared detached candidate only, not actual execution. Expected metadata is supplied from actual raw occurrence by Root; synthetic test heads are explicitly fictional."
+  },
+  "inputInterface": {
+    "function": "n1Read(input,schema,admission,sha256,inflateRawSync)",
+    "inputOrder": [
+      "run",
+      "jobs",
+      "commit",
+      "expected",
+      "transport",
+      "artifact"
+    ],
+    "artifactOrder": [
+      "runId",
+      "jobId",
+      "listing",
+      "artifactId",
+      "fileName",
+      "archiveBase64",
+      "payloadText"
+    ],
+    "notes": "Use actual raw GitHub API objects and exact timestamped raw job log. archiveBase64 is actual downloaded ZIP bytes encoded canonically; decoder independently calculates archive/payload SHA256 and bytes and validates inner entry. inflateRawSync is Node builtin bounded to24577 output bytes. No wrapper stripped metadata or old nextGET conversion."
+  },
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/reader.mjs",
+      "blob": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+      "bytes": 31480,
+      "sha256": "5765a9b9ba7760a08da449a1e025dc483563ed98d8db55e2465e2e417c8886f5",
+      "gitBlob": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/controls.mjs",
+      "blob": "79005b155d69a754dfe203a9a8e5a0baf9935a12",
+      "bytes": 19965,
+      "sha256": "a2a42cb63e3d501f0755ebed0d55d02150a473ae32c053559cb87dc5f5e264ab",
+      "gitBlob": "79005b155d69a754dfe203a9a8e5a0baf9935a12",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/run-controls.mjs",
+      "blob": "604087ac9a9f871acd99e48dde0f8bb3ac629452",
+      "bytes": 3093,
+      "sha256": "cfb54240374400705f31386454b4ad4e0a2e12712a62ea346aca06ce6d9b75a9",
+      "gitBlob": "604087ac9a9f871acd99e48dde0f8bb3ac629452",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/vectors.json",
+      "blob": "08b9edf048cf3f04cd223a645b1aa782fa454447",
+      "bytes": 29684,
+      "sha256": "cc8fce836948dcbe968393952ce0a99894defa01e35e21bb9241209cf099600f",
+      "gitBlob": "08b9edf048cf3f04cd223a645b1aa782fa454447",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/schema.json",
+      "blob": "5830b573c0a8a2a9ec6bd3e5202b8c9cdcb3a6fd",
+      "bytes": 17719,
+      "sha256": "3780436515245b3e62a7b69596f401f45a174f32e1c925a036fb6088691b91be",
+      "gitBlob": "5830b573c0a8a2a9ec6bd3e5202b8c9cdcb3a6fd",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/admission.json",
+      "blob": "dfef3e26e11e487346a47c37ff53c247b22feb2b",
+      "bytes": 1138,
+      "sha256": "aa7579f44f35260b88b0a94c3d73dd279cfc5c81126038b211d3d6547d9a61a5",
+      "gitBlob": "dfef3e26e11e487346a47c37ff53c247b22feb2b",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/custody-fix1-vectors.json",
+      "blob": "39038ef5fc8181151f4d025fa2dd82f14d2f3b68",
+      "bytes": 141218,
+      "sha256": "bd83b814b8696994f72217a21f0e6ba75c01ed7ee8b0571531e82b7d604a1f88",
+      "gitBlob": "39038ef5fc8181151f4d025fa2dd82f14d2f3b68",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/consistency-fix1-vectors.json",
+      "blob": "db28cff3c3b399a26b27097b805752017d34d978",
+      "bytes": 140938,
+      "sha256": "a43e562b3de64f9962433b1dc65598d4998607ee1da3ee36e6f3ee97f009b1ce",
+      "gitBlob": "db28cff3c3b399a26b27097b805752017d34d978",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/custody-fix1-red.json",
+      "blob": "966981ea4ff5d98ae96a8d06ff7713e949f4d0a4",
+      "bytes": 387,
+      "sha256": "43869b9268a7d6e9819efc5d4911c0787b4e12975e5fe35d69ac98508f36a5de",
+      "gitBlob": "966981ea4ff5d98ae96a8d06ff7713e949f4d0a4",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/consistency-fix1-red.json",
+      "blob": "a02afbbfab033e243e80ebaafbad7af49c0844ff",
+      "bytes": 536,
+      "sha256": "a112e248e4933943bc032db2796b0659a37df8b759d53889201f6e265928200e",
+      "gitBlob": "a02afbbfab033e243e80ebaafbad7af49c0844ff",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n1/control-results.json",
+      "blob": "7b6d5f5ef7a3534ea2fbe812fe38ab432fee2907",
+      "bytes": 12878,
+      "sha256": "34e5b97ff077fc278323d3376cd954722fd001d95782c5a3fa63284811dd9266",
+      "gitBlob": "7b6d5f5ef7a3534ea2fbe812fe38ab432fee2907",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": ".github/workflows/afw-c2-notices-n1-own.yml",
+      "blob": "cc3314e7ba5b787aec85a0d93329df998f1ec686",
+      "bytes": 1059,
+      "sha256": "5e23b47b862ffca9d94d204dd8d5354c9a88de99a1fe86b4afdc540ba5dfd926",
+      "gitBlob": "cc3314e7ba5b787aec85a0d93329df998f1ec686",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "preimages": [
+    {
+      "role": "clean OWN generic receiver",
+      "blob": "9e972bfee039512f0827488cec4645332645e2b1",
+      "bytes": 21483,
+      "sha256": "12058b5967efb97fe88d52e3578a1775c04b18ee0046f2936e40a0866e94999c",
+      "gitBlob": "9e972bfee039512f0827488cec4645332645e2b1",
+      "fullReadback": true
+    },
+    {
+      "role": "clean OWN runner scaffold",
+      "blob": "21a0bef854d85ec1e588d0c8e6f30c2dad73fdb2",
+      "bytes": 20057,
+      "sha256": "ca18f96a2d9800029762afadc2532083a9cb7bb803ec5d39e3f44c7e0d7fa9a6",
+      "gitBlob": "21a0bef854d85ec1e588d0c8e6f30c2dad73fdb2",
+      "fullReadback": true
+    }
+  ],
+  "pending": [
+    "Root actual OWN node:test native module graph189/0",
+    "Independent original receiver review plus scoped round1 verdict",
+    "Source diagnostic activation remains Root-only and held until gates"
+  ],
+  "rollback": "Discard detached proposal or omit additive OWN paths/WF. Recoverable clean OWN preimages and whole-byte reversible role comparisons supplied. No existing/historical Source or OWN path overwritten; no refs/runs/files/runtime/credentials/browser/mail/subagents/owner questions.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "round1": {
+    "ledgers": [
+      "29f7d74086d21aac8333b706e3233f8ea130b91b",
+      "aaa3bdfdc66373fb43ad672e145dd29aa05ef796",
+      "cdd98dac483965d16967882094c9c8b4b6f2b3ce"
+    ],
+    "beforeModule": "856fa38655339020195657f7286505f5df11a408",
+    "beforeControls": "5c611fda40fb7e4c2f8406ab67571c10164ba837",
+    "beforeRunner": "c6fa24a73f9e0508ee846bc4429234d775dc03cf",
+    "beforeReport": "34bc9748ec1df9bdbf2851719b85556226aeae5d",
+    "beforeDiff": "5f4e1db38ef0986936652ff72c2af4a76b001489",
+    "testFirstCustody": {
+      "vectors": "39038ef5fc8181151f4d025fa2dd82f14d2f3b68",
+      "red": "966981ea4ff5d98ae96a8d06ff7713e949f4d0a4",
+      "old": "9/24 rejected incorrectly;2/25 rejected",
+      "new": "9/24 accepted;2/25 rejected. Three launches and all custody booleans unchanged; no process/privilege behavior expanded."
+    },
+    "testFirstConsistency": {
+      "vectors": "db28cff3c3b399a26b27097b805752017d34d978",
+      "red": "a02afbbfab033e243e80ebaafbad7af49c0844ff",
+      "directVectorsBeforeGuard": "08b9edf048cf3f04cd223a645b1aa782fa454447",
+      "old": "Full coherent FAIL-with-returns/captureexit1, prefix4timeout and completejournal+prefix3timeout all accepted; completeNative+completejournal timeout positive also accepted.",
+      "new": "All three contradictions reject; completeNative timeout, real incomplete native prefix and AFTERthrow/filefailure positives remain valid."
+    },
+    "scope": "Four narrow receiver predicate changes plus concrete direct/full-input controls; Source/schema/admission/WF unchanged. Same proposed OWN host nomination remains unactivated. Root performs189-check native cloud and independent original+scoped review; no self-review PASS declared."
+  }
+}
