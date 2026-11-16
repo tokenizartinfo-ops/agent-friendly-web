@@ -161,3 +161,11 @@ Ninguna labrama activa trasloscierres; SourceActorúnicoimplementadoractivo. Own
 5. Gates OriginalCLI/Native y ensayo real: entrega útil, procesamiento/ACK, retirada, cierre y evidencia desde nube.
 
 Todos siguen false hasta evidencia correspondiente: historicalCauseProven, receiptAuthenticated, operationalReadiness, completePackage, PCoff, globalNativeDrainVerified, sdkNamespaceEmptyVerified. No pedir apagar ni dar fecha fiable de PC-off mientras falten esos gates.
+
+## 16nov 08:10UTC — revisión parcial de fixtures, actor sigue activo
+
+Root leyó completos los13 metadatos y cinco cuerpos/diffs iniciales y verificó hashes en RAM. Entrega7d6e486/S081f7ea5f rechazada: monitor corregido anexado fuera del objeto, viejo oráculo global aún activo. Actor reconoció anclaje -1, corrigió desdeF9: índice26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac, S08de8a51e5a6023342b1b3aeccadf66e90611d268f/18667B, S093e1d4c2695dce2d13ba064274ba441c4ce9447c3/61073B, parcialreversible8c30a804ae360ae84ad4df3645c57531d620b388. Root confirmó unmonitor, noScope→EOF exactoF9, línea18 exacta, índice cambiasólo8/9, ambos sentidos deldiff parcial y S09 ORIGINALBASE exacto; otros11 fullhunks invariantes. Fuente aún no ejecutada.
+
+Corrección1: integración ADDRESSED por inspección textual; nuevo bloqueo de integridad en fullDiffdc705cef3f66d8ba5a7cfd15e4aa98440ef7d168: hunkS08 pierdeLF final. Corrección2 DATA encargada al mismo actor; noRootfix ni LF implícito. Requiere13 reconstrucciones byteexactas, nuevo fullDiff/report y luego próximosbinds. Draftsfallidos no admisibles. Registro d50f0252f86a7f5374425f0d65ccab993c9ee29c en docs/superpowers/progress/2026-11-16-c2-fixture-fix1-partial-review.md.
+
+ObservernextGET sigue preparándose; ningún ref/run nuevo activo. SourceQualified/Task1Pass/PCoff false. Ownernointervenciónantes08:30Argentina, se continúa sinOTP/browser/runtime/keys. Próximaacción: fullDiff corregido + observarpacket completos → Rootgates/consumer independientes → labcloud único si admisible.
