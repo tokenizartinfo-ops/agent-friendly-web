@@ -1,0 +1,584 @@
+{
+  "schema": "afw.c2-green-progress-vectors.v1",
+  "normalRows": [
+    [
+      "C2T1_CONNECTION",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_CONNECTION",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_CONNECTION",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_CONNECTION",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_OAUTH",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_OAUTH",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_OAUTH",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_OAUTH",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_HANDLE",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_HANDLE",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_HANDLE",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_HANDLE",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_PROJECTREF",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_PROJECTREF",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_PROJECTREF",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_PROJECTREF",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_SUBJECT",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_SUBJECT",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_SUBJECT",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_SUBJECT",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_PHASE_RENAME",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_PHASE_RENAME",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_PHASE_RENAME",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_PHASE_RENAME",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_SOURCE_BYTES",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_SOURCE_BYTES",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_SOURCE_BYTES",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_SOURCE_BYTES",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_APPROVAL",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_APPROVAL",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_APPROVAL",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_APPROVAL",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_PREDECESSOR",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_PREDECESSOR",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_PREDECESSOR",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_PREDECESSOR",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_GRANT_REVOKED",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_GRANT_REVOKED",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_GRANT_REVOKED",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_GRANT_REVOKED",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_EXTRA_KEY",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_EXTRA_KEY",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_EXTRA_KEY",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_EXTRA_KEY",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_NOTICES",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_NOTICES",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_NOTICES",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_NOTICES",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_MONITOR_COOKIE",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_MONITOR_COOKIE",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_MONITOR_COOKIE",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_MONITOR_COOKIE",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_MONITOR",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_MONITOR",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_MONITOR",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_MONITOR",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_SCOPE_MISSING",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_SCOPE_MISSING",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_SCOPE_MISSING",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_SCOPE_MISSING",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_FINITE",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_FINITE",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_FINITE",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_FINITE",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_SELECTION",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_SELECTION",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_SELECTION",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_SELECTION",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_LOST_ACK_DUPLICATE",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_LOST_ACK_DUPLICATE",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_LOST_ACK_DUPLICATE",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_LOST_ACK_DUPLICATE",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_UNRESOLVED_WRITER",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_UNRESOLVED_WRITER",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_UNRESOLVED_WRITER",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_UNRESOLVED_WRITER",
+      "count",
+      "return"
+    ],
+    [
+      "C2T1_OWN_PROMISE",
+      "action",
+      "enter"
+    ],
+    [
+      "C2T1_OWN_PROMISE",
+      "action",
+      "return"
+    ],
+    [
+      "C2T1_OWN_PROMISE",
+      "count",
+      "enter"
+    ],
+    [
+      "C2T1_OWN_PROMISE",
+      "count",
+      "return"
+    ],
+    [
+      "AFTER",
+      "close",
+      "enter"
+    ],
+    [
+      "AFTER",
+      "close",
+      "return"
+    ]
+  ],
+  "controls": [
+    {
+      "id": "NORMAL_PREFIX",
+      "take": 4,
+      "condition": "normal",
+      "expect": [
+        "prefix",
+        "between-cases"
+      ]
+    },
+    {
+      "id": "ACTION_TIMEOUT",
+      "take": 1,
+      "condition": "timeout",
+      "expect": [
+        "prefix",
+        "action"
+      ]
+    },
+    {
+      "id": "COUNTER_TIMEOUT",
+      "take": 3,
+      "condition": "timeout",
+      "expect": [
+        "prefix",
+        "count"
+      ]
+    },
+    {
+      "id": "AFTER_OVERLAP",
+      "take": 1,
+      "append": [
+        [
+          "AFTER",
+          "close",
+          "enter"
+        ]
+      ],
+      "condition": "timeout",
+      "expect": [
+        "prefix",
+        "case-and-after"
+      ]
+    },
+    {
+      "id": "POST_TEARDOWN_TIMEOUT",
+      "take": 82,
+      "condition": "timeout",
+      "expect": [
+        "complete",
+        "post-teardown-process-exit"
+      ]
+    },
+    {
+      "id": "TORN_FINAL",
+      "take": 3,
+      "tail": "{\"sequence\":4",
+      "condition": "timeout",
+      "expect": [
+        "torn",
+        "unknown"
+      ]
+    },
+    {
+      "id": "MALFORMED",
+      "take": 1,
+      "tail": "{}\n",
+      "condition": "timeout",
+      "expect": [
+        "ambiguous",
+        "unknown"
+      ]
+    },
+    {
+      "id": "FOREIGN",
+      "take": 0,
+      "append": [
+        [
+          "FOREIGN",
+          "action",
+          "enter"
+        ]
+      ],
+      "condition": "timeout",
+      "expect": [
+        "ambiguous",
+        "unknown"
+      ]
+    },
+    {
+      "id": "DUPLICATE",
+      "take": 1,
+      "append": [
+        [
+          "C2T1_CONNECTION",
+          "action",
+          "enter"
+        ]
+      ],
+      "condition": "timeout",
+      "expect": [
+        "ambiguous",
+        "unknown"
+      ]
+    },
+    {
+      "id": "ORDER",
+      "take": 1,
+      "append": [
+        [
+          "C2T1_CONNECTION",
+          "count",
+          "enter"
+        ]
+      ],
+      "condition": "timeout",
+      "expect": [
+        "ambiguous",
+        "unknown"
+      ]
+    },
+    {
+      "id": "NO_ENTRY",
+      "take": 0,
+      "condition": "timeout",
+      "expect": [
+        "empty",
+        "unknown"
+      ]
+    },
+    {
+      "id": "AFTER_COUNT_OVERLAP",
+      "take": 3,
+      "append": [
+        [
+          "AFTER",
+          "close",
+          "enter"
+        ]
+      ],
+      "condition": "timeout",
+      "expect": [
+        "prefix",
+        "case-and-after"
+      ]
+    },
+    {
+      "id": "THREW_ACTION",
+      "take": 1,
+      "append": [
+        [
+          "C2T1_CONNECTION",
+          "action",
+          "throw"
+        ],
+        [
+          "C2T1_CONNECTION",
+          "count",
+          "enter"
+        ]
+      ],
+      "condition": "timeout",
+      "expect": [
+        "prefix",
+        "count"
+      ]
+    }
+  ],
+  "context": "Synthetic controls, integer sequence/elapsed derived only for constructing test DATA; native journal markers always written by actual executing child."
+}
