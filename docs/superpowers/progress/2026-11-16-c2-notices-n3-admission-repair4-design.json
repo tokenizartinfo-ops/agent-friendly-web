@@ -1,0 +1,143 @@
+{
+  "schema": "AFW-N3-PRIVATE-ADMISSION-REPAIR4-DESIGN/1",
+  "dateUTC": "2026-11-16",
+  "stage": "DESIGN ONLY / proposed Source fix-loop round 4 of 5; Root decision pending; no implementation, native execution or capture authorized by this report",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "detached immutable Git DATA only",
+  "origin": "GitHub Git blob API",
+  "resourceType": "detached design JSON blob",
+  "allowedAction": "read static immutable inputs; create and fully read back this one detached report; no refs or runs",
+  "brief": "0d404601d2809a6bd3da6513ee946f890517c287",
+  "authority": {
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "semantics": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abort": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "prefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+    "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0"
+  },
+  "inputs": {
+    "sourceC": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+    "outcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+    "close": "0638c9c5634c36b60835c12eb9153af4297d183e",
+    "sourceDiagnosis": "dee8b1f943b0ef9e4cb16e6e78ea392090fca5ea",
+    "independentEvidence": "3045f1e9396e725be555aaa95f2d08830f6ec37b",
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "helper": "bff0415fbbf37c787439d4c526b1c77c8fdf2a65",
+    "driver": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+    "coupled": "3c9081cb2a04759bbe58ef317ea9db4753ce4235",
+    "originalInitialLease": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+    "unit41": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+    "censusRuling": "7ed9f2f3a3d0b29690102000e8eb308a41d1ca63",
+    "census47Literals": "00685a137f17834ff355cb2cae15285d8e9e2fd4",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "sourceIndex": "26f167bc9a56184a614e37cbff2b1f03de90a83c"
+  },
+  "verdict": "Recommend A: repair only the zero-net-occupancy conversion under existing admission rules, with a targeted negative and positive control using original callbacks. Reject B's automatic pool reset. Do not release a business capture solely because A passes. If discriminator evidence is required for any further lifecycle change or another C, separately seal C (first-limit witness); A and C have separate purposes. An honest solution that always admits arbitrary distinct roots under 16 does not exist. That uncertainty is material now: do not treat A alone as grounds for repeating C. A root/full discriminator must receive its own scope, or stop with the known bounded result.",
+  "observed": "Reviewed C had 3 PASS / N3_NOTICES failed; GET 200, POST 503, final causal unjoined/unknown/CAP_PRIVATE/eligible0, empty events, firstError null. In this monotone ledger no eligible scope was ever registered. Candidate private gates on the pinned real producer are scope admission at 16 or lease/gap admission at 128. Exact first branch, object and before/after boundary are unknown. Neither the business cause, first recheck verdict nor first physical error follows. The census brief/literals characterize synthetic allocations using original factories; the fresh GET/POST-shaped case deliberately supplies no PH or native consume and expects NO_ELIGIBLE. Native census disposition is Root-owned, pending at drafting; even a 47/47 would not discriminate historical C.",
+  "alternatives": [
+    {
+      "id": "A",
+      "choice": "Atomic conversion of an exact existing gap to an otherwise valid lease",
+      "benefit": "The same object was already charged. Allows a genuine scope bind to progress if its previously unresolved root/outer was the blocker; gap history stays incomplete.",
+      "cost": "One private bookkeeping condition/transfer in addLease. No source seam, new API, new protocol, new storage or timing. Cannot free the seventeenth root or a genuinely new 129th anchor; does not cure preexisting faults.",
+      "decision": "Recommend independently of which cap historical C hit; not a claim that A recovers actual C."
+    },
+    {
+      "id": "B",
+      "choice": "A new private snapshot/arming method at the existing before probe; retire or replace pre-window pools only when there is no eligible scope",
+      "benefit": "Would make room for a finite post-probe workload if it could safely retire past identity associations.",
+      "cost": "Zero eligible says nothing about previously bound noneligible clocks, unresolved errors, retained work, outstanding callbacks or cross-scope aliases. The before response can be discarded, but its discard is not a proof of disjoint object lifetimes. A call ordinal is not an identity or an admission; ownPromise also contains firstConnectionProbe in another fixture path.",
+      "decision": "Reject unconditional reset/rehydration on first probe, and do not release prior CAP_PRIVATE/ambiguity on arm. No second ledger, WeakSet archive, epoch tags on every outstanding closure, object mutation or new business/context reads."
+    },
+    {
+      "id": "C",
+      "choice": "Separately sealed, source-local, first-private-limit discriminator",
+      "benefit": "Observes which recorder gate refused first in a FUTURE changed capture, including true distinct-root versus true distinct-anchor versus same-gap conversion on a legacy calibration. No missed causal event is reconstructed.",
+      "cost": "Wire semantics, frozen selection/reader and receiver need a separate versioned contract and controls for public export. Cannot recover the previous capture or the business cause. A tooling-only view needs no C but says nothing new about its historical counter.",
+      "decision": "Fallback evidence gate before another capture when A's limited coverage cannot justify expecting a join; never run C simply to reproduce the empty result."
+    }
+  ],
+  "proposal": {
+    "api": "makeN3QaLedger() still returns Object.freeze({note,snapshot}); n3QaLedger still the same singleton per QA compilation. note(rootRef,event) is synchronous/nonthrowing, returns undefined; snapshot() remains a synchronous independent copy and increments the selected cut exactly as before. No new or overloaded public/private probe method in A.",
+    "hook": "Only the internal addLease(s,ref,parent,role) of the future QA-only ledger candidate: after existing identity/ownership/parent/role validation and existing-row handling, before rejecting capacity or mutating gap/lease maps. No new compile seam: unchanged transformN3Op root factory; transformN3Phase binds original root/outer only after the same consumeFiniteOwnerStageAdmission succeeds and captured stage is notices, then emits existing scope-enter. Neither a probe, GET, branch label, nor gap promotion establishes eligibility.",
+    "transfer": "Use the exact existing gaps entry keyed by ref itself. Existing accepted lease rebind: exact owner/parent/role is a no-op; known competing owner stays ambiguous, differing bound parent/role stays deficient under the pinned rules. On a valid absent lease, charge delta 0 iff that exact gap exists, otherwise 1. Refuse before mutation if U+delta>128 (or invalid underlying state); never borrow a pending gap of parent/leaseRef/promiseRef merely because it resolved to the same scope. For the zero-delta case remember just old.error, relinquish that gap row/count before adding the one lease row/count, preserving normal ordinal allocation. Same synchronous turn, no user callbacks, getters, lookups via user objects or clocks between transfer steps. Best-effort failure must fail closed through existing sink-fault handling; never declare completeness for a partial transfer.",
+    "ownership": "Gap encodes a deficit/error bit, not a scope, role, parent or event history. Require the same actual-root and validated parent/role relationships that admit the row below the limit. Preserve conflicting bound root/lease/promise/affected-entity ambiguity; do not let the capacity exception choose a root or legalize a bad/cross-scope bind. Invalid or unresolved bind does not consume its pending gap or confer eligibility. Source author checks exact legacy conflict-vs-unbound classifications against sealed contract at RED; stop rather than silently changing generic bind semantics.",
+    "coverage": "Matching conversion uses the same relevance rule as consumeGap: if role is not other-pair OR that old gap carried an error, latch s.gap. Never replay a prior check, close, settlement or error; no firstError/firstClose/cut from the gap. An irrelevant error-free other-pair gap does not manufacture a focus deficit. Never clear ambiguity, sticky fault, unbound, selected evidence, per-scope error map or cut.",
+    "unchanged": "All snapshot/sequence/mandatory/optional projection, exact pair-call options and original returned p2, scoped-first-error independent of focus, original duplicate retention, pendingWork.delete booleans, child/parent/abort matrix, logical/target-independent axes and late callback/cut rules are unchanged. Referenced wire remains self-contained after only. No new clockread/await/timer/then/catch/listener/callback replacement/headers/probe/M bridge/logging. Core before and after observations/journal/outcome unchanged."
+  },
+  "memory": {
+    "definition": "U=L+G where L is allocated canonical lease rows and G is unresolved gap rows. No tombstones and no alternative identity side table; never rely on JavaScript GC. L only increases on a new bound lease; G is relinquished only once for the exact matching key. Count actual stored entries conservatively even if a WeakMap key might later be reclaimed. Existing scope, lease, promise, call and error associations are not released/recreated/aliased across windows.",
+    "transitions": [
+      "valid existing lease: (L,G)->(L,G)",
+      "new gap when U<128: (L,G)->(L,G+1); repeat of same exact gap does not allocate",
+      "new lease, no gap: (L,G)->(L+1,G) only if U<128",
+      "same-key conversion, including U=128: (L,G)->(L,G-1)->(L+1,G-1), final U unchanged, no transient 129th identity",
+      "bound promise and existing relevant gap resolution follow frozen promise rules; no remapping of a promise into a lease or conversion of a different anchor",
+      "no reset on before, after, second snapshot, 0 eligible, existing CAP_PRIVATE or eligible>0"
+    ],
+    "bounds": "One original ledger for the isolate: 16 scopes total, 128 combined lease-plus-gap identities, 64 promises, 64 opaque errors, 256 stored events; existing per-eligible-scope single target call (<=16 associations). No new persistent per-ref bit, key, weak metadata or unbounded list. Transfer saves at most one transient boolean for an already charged entry. Canonical publicMeta/size and 65536 UTF8 private metadata limit remain; this is serialized metadata, not a VM-heap-size or GC guarantee. A promoted row is the ordinary valid row already reachable below 128, with indices 1..128. Require native worst-mix and real byte accounting, including candidate envelope+LF, before release. Selected <=8 leases,4 promises,4 errors,24 events,6144B with complete causal envelope+LF; 32768B/128-record journal, 24576B outcome and all clock, case and job budgets unchanged.",
+    "noGoExample": "Counterexample for B: two distinct eligible-free histories both have one bound noneligible clock, once old clock X, once unrelated Y. If storage is forgotten they appear identical. After new eligible scope binds work P, a delayed original callback carrying leaseRef X and promiseRef P must reveal cross-scope ambiguity in the first history, but X alone need not conflict in the second. Resolution through P alone would quietly misjoin the first. Separately, a pending pre-window gap on X carrying an error versus on Y changes the required gap deficit when X later binds. These are identity-contract counterexamples, not a claim of a real-C interleaving. For 16 versus 17 old roots or 128 versus 129 retired anchors, an exact membership ledger still owns those identities even if held weakly. If counted against the existing pool, it cannot guarantee admitting further distinct objects when full. An alternative may return unknown on uncertainty or prove non-reuse and discharge every preexisting callback from admitted Source facts; neither follows from the present probe/census."
+  },
+  "witnessIfSeparatelySealed": {
+    "hookAndRepresentation": "Do not implement with A absent a separate ruling. In a witness-enabled candidate latch the FIRST existing recorder fault, at its existing refusal point. Replace internal sticky CAP_PRIVATE code with one fixed enum: ROOT16, GAP_NEW128, LEASE_NEW128, LEASE_SAME_GAP128_LEGACY (calibration only; unreachable at this check after A), OTHER_PRIVATE; preserve non-cap faults and priority. No data- or identity-bearing counters/membership table. Default note/snapshot/selection still maps all of these to existing CAP_PRIVATE; no reset/overwrite. Stop if an existing site cannot be classified from already-read operands.",
+    "exposure": "If public evidence becomes necessary, nominate a separate QA-only probeSnapshot() on the SAME singleton; use instead of snapshot() at the one existing causal expression after the unchanged getAlarm in transformN3Entry, on both preexisting firstConnectionProbe calls. Implement one projection/cut, not snapshot() twice. Before core still discards causal, after is the sole self-contained causal witness. Default snapshot() and regular callers unchanged. Version-pinned wire/receiver changes only for the reason of an otherwise unjoined CAP_PRIVATE snapshot, e.g. CAP_PRIVATE_ROOT16|CAP_PRIVATE_GAP_NEW128|CAP_PRIVATE_LEASE_NEW128|CAP_PRIVATE_LEGACY_SAME_GAP128|CAP_PRIVATE_OTHER; joined, ambiguous and non-cap shapes/precedence unchanged. No additional record/RPC/clock/phase/window, no occupancy tables or site/error identity. Complete a dedicated versioned producer, reader/OWN-coherent literal/transport and worst-envelope review before considering C. A tiny tag does not identify whether a historical failure preceded the before probe."
+  },
+  "tests": {
+    "status": "Test-first proposed literal DATA only, no new native RED/GREEN here. Preserve original 41 producer bodies and independent corpora; keep old census47 on frozen pins as a historical characterization. Do not flip a legacy refusal assertion in place or count an expected legacy PASS as a repaired PASS. Use distinct candidate vectors/IDs and, if needed, distinct ordered candidate selection.",
+    "cases": [
+      [
+        "R4_PROMOTE_EXACT_128",
+        "Using original OP factory/InitialLease clocks: R=1 and 63 validated other-pair clocks => L64. Make 64 distinct unbound clocks issue their actual close/stop notes => G64; repeat some closes to show folding. Bind the FIRST actual gap clock X as outer (same root and parent), then deliberate notices scope DTO and existing scope-enter note. No PH or business call in this literal. Frozen expect unjoined/unknown/CAP_PRIVATE/eligible0. Candidate must join/eligible1/PREFIX/PREBIND_GAP, target unreached, rows root+outer, firstError null, outer.firstClose null (old close is not replayed), events scope-enter[1],snapshot-cut[2]. Known resulting L65,G63,U128. Confirm default snapshot next cut3, no retroinsertion."
+      ],
+      [
+        "R4_GENUINE_129_NOT_PROMOTION",
+        "Same saturated prefix. Try a different original X2 with no gap (also test a lookalike with same fields); expect unjoined/unknown/CAP_PRIVATE/eligible0. In an independent case after successful X promotion, repeat SAME valid bind without consuming another gap; then add truly new identity. Result CAP_PRIVATE with prior eligible1 preserved, no overwritten first evidence, no capacity refund. Earlier CAP remains sticky even when a later otherwise admissible transfer is attempted."
+      ],
+      [
+        "R4_GAP_ANCHOR_AND_CONFLICT",
+        "At saturation hold gaps G(X),G(Y). Attempt binding an absent Z with X merely as anchor or parent; it cannot use X's credit. Missing/invalid parent and wrong allowed-role relation cannot consume G(X); use a separate ledger per negative. Existing-row wrong-role/parent remains UNBOUND, competing actual lease owner and shared promise across scopes remain permanently ambiguous, two real scope binds remain ambiguous/MULTIPLE_ELIGIBLE. Include same-gap with old.error true at other-pair, error-free irrelevant other-pair, and relevant outer: no replay, firstError null until an eligible error."
+      ],
+      [
+        "R4_PROBE_STABILITY_LATE",
+        "16 distinct never-eligible roots, snapshot twice => NO_ELIGIBLE/cut null twice; seventeenth root => CAP_PRIVATE/eligible0. Already eligible before both probes: successive selected cuts advance and firstError/p2 associations stay. Original old-root/old-clock late retain/settlement/close and cross-scope actual ref conflicts must not consume a different scope's same-looking gap, attach by ordinal, rewrite firstError or alter a previous snapshot. Unresolved old refs may produce a charged gap or honest CAP; no manufactured complete."
+      ],
+      [
+        "R4_ORIGINALS_AND_TARGETED_ADMISSION",
+        "Fresh declared GET/POST-shaped graph with original OP/Initial factories and test DTO roles stays NO_ELIGIBLE. Keep a separate first-actual-admission control: exercise the exact transformed PH successful consume+stage==notices bind seam and same cached root/outer via an admitted isolated tooling fixture; failing consume/non-notices yield zero, successful notices alone yields one; keep unit DTO-only observations explicitly labelled. A test double or extracted text cannot prove native business admission. If the actual seam cannot be reached in authorized tooling without expanding capability, report the missing proof; never substitute census PASS. Drive original duplicate retains, both original settled handlers and true/false returns, exact original returned p2 versus inner promise, first scope error versus later focus error, child/parent abort matrix, logical-throw before target terminal and honest late cut. Preserve native callback counts and effects."
+      ],
+      [
+        "R4_SATURATION_AND_OUTPUT",
+        "Independent boundary 16/17 scopes,128/129 U,64/65 promises,64/65 errors,256/257 events, sequence limit and metadata sizing. Verify truthful selected prefix/unknown on projection/mandatory overflow; real UTF8 worst-size envelope+LF <=6144, <=8/4/4/24 tables, original journal/outcome limits. Recheck 31->24 focus projection and late-leaf corpus. Default 41 original controls plus prior negative transports/replay still pass on candidate where compatible; legacy full 47 against frozen input separately."
+      ],
+      [
+        "WITNESS_ONLY_IF_RULED",
+        "Independent first-limit cases trigger each named enum and OTHER, repeated errors and eligibility changes do not overwrite first fault, ambiguous precedence wins, non-cap faults are untouched; legacy SAME versus candidate genuinely new distinguishable. No witness on ordinary snapshot. Receiver rejects forged joined/CAP tags, unknown enum, extra fields and mismatched version. No new record or additional cut."
+      ]
+    ],
+    "release": "First preserve literal text/objects, pins, expected outcomes and revert images. After a separate Root decision, Root-managed cloud native RED on frozen ledger (designed behavioral discriminator fails for exact stated reason; no setup fault), GREEN on candidate with original-callback gates, actual input/observed count and byte proofs; independent review of semantics, coherent receiver if witness proposed, and acknowledgement of remaining failures. Counters used only inside bounded test-owned harness from supplied actual references; never install public inspectors. No native eligibility, actual workload capacity or application qualification follows from fresh-census DTOs. No full C until independent scope, new information yield, pins, rollback/closure and separate Root gate."
+  },
+  "unresolved": [
+    "Which recorder cap/branch was first reached in the historical run, and when relative to the before snapshot? Existing data cannot decide.",
+    "Did the notices root/outer actually encounter a same-gap conversion at saturation? Unknown; another truly-full gate may dominate even with A.",
+    "Can original-callback coverage exercise the exact PH binding seam without an additional business world? If not, keep the frozen limitation explicit and ask Root to adjudicate technical scope, not the owner to reapprove delegated choices.",
+    "Is a witness-bearing new wire protocol warranted or should the project stop after the bounded repair? Root to decide after actual census and independent review; the business POST503 still lacks any proven cause."
+  ],
+  "provenance": "Static immutable input text only. No Source/observer import, evaluation, compilation, syntax checks or tests, local files/dependencies/builds, refs/runs/releases, log/ZIP refetch, providers, browser, mail, keys or subagents. No Source13/M, product/main, replay receiver, journal or budgets changed. Reversion of any future A candidate means use frozen ledger d9d3 with compiler 94e30 and prior sealed selection/receiver; no live state is touched here.",
+  "SourceExecutionAuthorizedHere": false,
+  "implementationAuthorized": false,
+  "captureAuthorized": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
