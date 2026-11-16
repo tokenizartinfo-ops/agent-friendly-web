@@ -1,0 +1,623 @@
+{
+  "schema": "afw.c2-notices-n3.final-inactive-index.v1",
+  "status": "FINAL_SOURCE_C_DATA_ONLY_CAPTURE_NOT_AUTHORIZED",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "baseline": {
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "source": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "originalLeaves": 3203,
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "keepFrozen": true
+  },
+  "authority": {
+    "brief": "aa2841a97fa452190c6cfb93599e36d005b13fd9",
+    "toolingPrimary": "6d2ae3f2396c1ef71ebba0263a55001422373000",
+    "toolingProof": "3a8781f6a2646a3a00c521fc7f25b6a35d314ac8",
+    "toolingClose": "e9bae275ebfcd092cc4014b281eead8c03d06a4a",
+    "review": "a55a56441c81057f369a871e8891794d22ff8064",
+    "SPEC": "PASS",
+    "QUALITY": "PASS",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "contract": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+    "schema": "1c336fe190816b46223546971afcf34b2c216089",
+    "seams": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n3",
+    "message": "AFW-C2-T1-NOTICES-N3-ONEUSE-20261116",
+    "job": "c2-notices-n3",
+    "workflow": ".github/workflows/afw-c2-notices-n3.yml",
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3/run-c2-notices-n3.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-notices-n3/run-c2-notices-n3.mjs",
+    "attempt": 1,
+    "node": "22.23.4",
+    "sdk": "1.2.1",
+    "miniflare": "5.20260831.0-alpha",
+    "workerd": "1.20260831.1",
+    "jobMinutes": 7,
+    "totalMs": 330000,
+    "childMs": 180000,
+    "caseMs": 120000,
+    "incomingMs": 30000,
+    "childLeaseMs": 5000,
+    "custodyLaunches": 3,
+    "nativeCases": 4,
+    "after": true,
+    "existingProbes": 2,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "journalBytes": 32768,
+    "journalRecords": 128,
+    "outcomeBytes": 24576,
+    "artifactDays": 7
+  },
+  "manifest": {
+    "canonicalHash": "44a2527e1a54cb79a6feec9a04a996ad1b288a35117763e2037c7e8d64cf18f8",
+    "bytes": 1334,
+    "sha256": "27f9b289888ba4155fcaca9739f0b074aeda7e781c7796a1e8e83501fcf79a5e",
+    "gitBlob": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+    "blob": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+    "fullReadback": true
+  },
+  "manifestOrder": [
+    "schema",
+    "normalSourceIndexHash",
+    "selectionHash",
+    "contractHash",
+    "schemaHash",
+    "seamsHash",
+    "vectorsHash",
+    "driverHash",
+    "coupledHash",
+    "worldHash",
+    "helperHash",
+    "readerHash",
+    "loggerHash",
+    "slotHash",
+    "ledgerHash",
+    "transformHash"
+  ],
+  "selectionHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c",
+  "entries": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "mode": "100644",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-index-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "mode": "100644",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "mode": "100644",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "mode": "100644",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "frozen-Source13-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "custody-code-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "custody-code-DATA"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/selection.json",
+      "mode": "100644",
+      "blob": "3db514b655917bd05917a90a53cb69667041fd36",
+      "bytes": 2048,
+      "sha256": "ea902f464b5530f3b7894c259ec7ed5420e01a87eecfe8b49c46d175d4d59324",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "selection"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/diagnostic-contract.json",
+      "mode": "100644",
+      "blob": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+      "bytes": 19539,
+      "sha256": "d8260b4e7280d36416e6a1731fcc8135e381684508d22b7d0d9ad258dfb9f886",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "contract"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/diagnostic-schema.json",
+      "mode": "100644",
+      "blob": "1c336fe190816b46223546971afcf34b2c216089",
+      "bytes": 29785,
+      "sha256": "2e44cb86b98dd052a643b0d1ee157a7d072ddf2185895893067770758089e6eb",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "schema"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/seams.json",
+      "mode": "100644",
+      "blob": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+      "bytes": 14141,
+      "sha256": "d6e41eaf3f811a82eeb38f97f1c7e5aa0ab1ae081616e5b221e75ac09720e3b5",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "seams"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/synthetic-vectors.json",
+      "mode": "100644",
+      "blob": "ce6aa394580a0c26e5fe5c9006cafe06db109530",
+      "bytes": 915177,
+      "sha256": "dcd3c592e568e046a837873609cdecd11dddf2d9bf5271788df2710f18db0cdf",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "vectors"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/observer-driver.txt",
+      "mode": "100644",
+      "blob": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+      "bytes": 1812,
+      "sha256": "88137ed32bf1e657be72820529afde0ea1f1c791763e99cdded7da3d0d4f682d",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "driver"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/observer-coupled.txt",
+      "mode": "100644",
+      "blob": "3c9081cb2a04759bbe58ef317ea9db4753ce4235",
+      "bytes": 19642,
+      "sha256": "a85e1c33412e05095ce56dce7553165f36c0235809e20acd0df3180fd4917764",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "coupled"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/observer-world.txt",
+      "mode": "100644",
+      "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+      "bytes": 89873,
+      "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "world"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-helper.mjs",
+      "mode": "100644",
+      "blob": "bff0415fbbf37c787439d4c526b1c77c8fdf2a65",
+      "bytes": 5764,
+      "sha256": "69386a941f9f565bfffd9846f9b8ec504b2e1c446075b72c368a8d68aaf17eb6",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "helper"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-reader.mjs",
+      "mode": "100644",
+      "blob": "83b62b4dc84bdde7b1c7d343b328a3e3f09c0626",
+      "bytes": 31798,
+      "sha256": "bdb227d557e058da7c7df3f5d7c2ff04663afaa09714c479a8f7e810634cd4c5",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "reader"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-logger.mjs",
+      "mode": "100644",
+      "blob": "4eeaad011444e566f2e0cc99bd897e4a01848a77",
+      "bytes": 8370,
+      "sha256": "e2fe1fd58cfe5c1959643c80a2efe6c3fa43982bde7b2da2b5ef06612e1fe6d3",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "logger"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-slot.mjs",
+      "mode": "100644",
+      "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+      "bytes": 2072,
+      "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "slot"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-qa-ledger.mjs",
+      "mode": "100644",
+      "blob": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+      "bytes": 16602,
+      "sha256": "b23473dd06df58cd7390207f5ba5a8100992957092711b57a52b0930b59d0bf1",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "ledger"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-qa-compiler.mjs",
+      "mode": "100644",
+      "blob": "94e30c896056dc35b3bb75b072022644c68bfb74",
+      "bytes": 12694,
+      "sha256": "624ef2a8507643936aa9564bb0f978b11e31572b49c5678a6e6c4706af9ea255",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "compiler"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-core-controls.mjs",
+      "mode": "100644",
+      "blob": "ef73fa56b9b6dd9acacffbe25522f9e0e7ad2542",
+      "bytes": 13179,
+      "sha256": "fa77a9c7509d8645e78e913181a27fc4e556fd2f0e07dbf377b2965960371b95",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "coreControls"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-trace-reader.mjs",
+      "mode": "100644",
+      "blob": "4878edb13dad6a9421c457cc850a370d75b84b1c",
+      "bytes": 11567,
+      "sha256": "e4d7ca27660a979dcfc018f0585bdd0ae647e158c0792d0e49f72666580f1829",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "traceReader"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/n3-trace-controls.mjs",
+      "mode": "100644",
+      "blob": "adff3fbc4649f95389b03896ff82bc7ed538c516",
+      "bytes": 854,
+      "sha256": "ae170334b83432764f36e8ead26159207c3324f62b8d0c3ce46232795836f758",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "traceControls"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/producer-manifest.json",
+      "mode": "100644",
+      "blob": "75e0a0f52287e6b1eed46a821621e3a85e55d1a0",
+      "bytes": 1334,
+      "sha256": "27f9b289888ba4155fcaca9739f0b074aeda7e781c7796a1e8e83501fcf79a5e",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "manifest"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/compilation-vectors.json",
+      "mode": "100644",
+      "blob": "eb32ae05bc86ae943f155e36baa89844fceb8005",
+      "bytes": 53497,
+      "sha256": "57b3f91bc5fb0102d8b8b9233ecac106138642535f0cd519c1a588cf02a0fa51",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "compilationVectors"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/run-c2-notices-n3.mjs",
+      "mode": "100644",
+      "blob": "e2fcee935e5544207486f2f55cbc4c9022b76c40",
+      "bytes": 33675,
+      "sha256": "f786a3555c53e94e59981e08e785ef67f16b0adf98bb4e1e2a661828d61b2882",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "run-c2-notices-n3.mjs"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/report.json",
+      "mode": "100644",
+      "blob": "13a8499adcd33bc6bf2ba7f5de6b63646d170921",
+      "bytes": 17030,
+      "sha256": "08104917cf012b57abfba7f734c79db1f11d94642f137dfe3881a14c0d7d3fcb",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "report.json"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/reversibles.json",
+      "mode": "100644",
+      "blob": "1b6447860fe6fd7ea64291d1ff94ee0f1a286f0b",
+      "bytes": 2542,
+      "sha256": "9898978c16d2239ac27edc154938ef2ae2947dd1270b63785d1cd97887a7b04c",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "reversibles.json"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3/invocation-ledger.json",
+      "mode": "100644",
+      "blob": "145fc5dd8e7c01d67070240c2ff099b9523afbe1",
+      "bytes": 6464,
+      "sha256": "3a95cf30a7eaf1d11eda0eca2be5a6e571b0133e818e281514fdf796912acdd9",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "invocation-ledger.json"
+    },
+    {
+      "path": ".github/workflows/afw-c2-notices-n3.yml",
+      "mode": "100644",
+      "blob": "259d587b8752b3bb89d1636891136c55cbfa108c",
+      "bytes": 1440,
+      "sha256": "d687e208c15e14dc9054636aedae3cdaf3bbebf302e5d84ca2f3f7feb6c1fc3c",
+      "expectedBase": null,
+      "fullReadback": true,
+      "role": "one-use-C-WF-DATA"
+    }
+  ],
+  "expandedTreeRule": "Exactly BASEtree62e789 original3203blob/modes+these40newleaves; expectedBase:null is requiredabsenceforRootindependentgate, not an authorref/tree claim. Index/packet/fullDiff/b186bindings are off-tree reviewmetadata; not extra candidate paths. Bootstrap22f324 alreadyBASE and remainsuntouched/notexecuted.",
+  "temporaryJobOverlays": [
+    {
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "before": {
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+        "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "gzipBytes": 1050,
+        "fullReadback": true
+      },
+      "after": {
+        "bytes": 1812,
+        "sha256": "88137ed32bf1e657be72820529afde0ea1f1c791763e99cdded7da3d0d4f682d",
+        "gitBlob": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+        "blob": "2bcfa9b4adc14bfe268ba7a10a1321651e76f95b",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "before": {
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+        "gitBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "gzipBytes": 5413,
+        "fullReadback": true
+      },
+      "after": {
+        "bytes": 19642,
+        "sha256": "a85e1c33412e05095ce56dce7553165f36c0235809e20acd0df3180fd4917764",
+        "gitBlob": "3c9081cb2a04759bbe58ef317ea9db4753ce4235",
+        "blob": "3c9081cb2a04759bbe58ef317ea9db4753ce4235",
+        "fullReadback": true
+      }
+    },
+    {
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "before": {
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "gzipBytes": 22824,
+        "fullReadback": true
+      },
+      "after": {
+        "bytes": 89873,
+        "sha256": "7dc4442f09b8ced3a317237a3d9c746d4bc2082f097207907db519455c1849b9",
+        "gitBlob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+        "blob": "a21a3614f0cd6b21ce37b99690043507ea105a23",
+        "fullReadback": true,
+        "metadataAuthority": "6d2ae3f2396c1ef71ebba0263a55001422373000"
+      }
+    }
+  ],
+  "qaOnly": "Reviewed compiler94e30 andledgerd9d3 mountedONLY temporarytestfixtures; SAMEQA build records5actualprepared before/after inputs ledger/PH/OP/LEASE/STDIN andnewQA script. No productGitwrites, no M input/compile-path modification, no precomputedQAhash/extracompile; actualvalues awaitRootC.",
+  "bindingsPacket": {
+    "bytes": 11476,
+    "sha256": "7ccf7c0c61f16d98e1033cf52f127b1181173015b95d7270a3be3ccd30199822",
+    "gitBlob": "b186f6e5f585ed3de71f7e4e69f42f8f0ee55618",
+    "blob": "b186f6e5f585ed3de71f7e4e69f42f8f0ee55618",
+    "fullReadback": true
+  },
+  "fullBeforeAfterDiff": {
+    "bytes": 651811,
+    "sha256": "d9ad48c8be04e167f8db5a460f484dff4b896890222c7f5c00c48e576dd9fba5",
+    "gitBlob": "966de710643bfdb792a5e36b88f1abeba419d6fb",
+    "blob": "966de710643bfdb792a5e36b88f1abeba419d6fb",
+    "fullReadback": true
+  },
+  "reversibles": {
+    "bytes": 2542,
+    "sha256": "9898978c16d2239ac27edc154938ef2ae2947dd1270b63785d1cd97887a7b04c",
+    "gitBlob": "1b6447860fe6fd7ea64291d1ff94ee0f1a286f0b",
+    "blob": "1b6447860fe6fd7ea64291d1ff94ee0f1a286f0b",
+    "fullReadback": true
+  },
+  "invocationLedger": {
+    "bytes": 6464,
+    "sha256": "3a95cf30a7eaf1d11eda0eca2be5a6e571b0133e818e281514fdf796912acdd9",
+    "gitBlob": "145fc5dd8e7c01d67070240c2ff099b9523afbe1",
+    "blob": "145fc5dd8e7c01d67070240c2ff099b9523afbe1",
+    "fullReadback": true
+  },
+  "report": {
+    "bytes": 17030,
+    "sha256": "08104917cf012b57abfba7f734c79db1f11d94642f137dfe3881a14c0d7d3fcb",
+    "gitBlob": "13a8499adcd33bc6bf2ba7f5de6b63646d170921",
+    "blob": "13a8499adcd33bc6bf2ba7f5de6b63646d170921",
+    "fullReadback": true
+  },
+  "compiledMetadataChecks": {
+    "privateFileMaxBytes": 8192,
+    "vectors": {
+      "bytes": 53497,
+      "sha256": "57b3f91bc5fb0102d8b8b9233ecac106138642535f0cd519c1a588cf02a0fa51",
+      "gitBlob": "eb32ae05bc86ae943f155e36baa89844fceb8005",
+      "blob": "eb32ae05bc86ae943f155e36baa89844fceb8005",
+      "fullReadback": true
+    },
+    "cases": 15,
+    "executedHere": false,
+    "everyExposedCompiledCall": "preparedANDreturnedM/QA comparedSAMEcurrent,priorpreparedrequiredforreturned/assembly2settled; nofallback"
+  },
+  "runtimeCaps": {
+    "jobMinutes": 7,
+    "totalMs": 330000,
+    "childMs": 180000,
+    "caseMs": 120000,
+    "incomingMs": 30000,
+    "childLeaseMs": 5000,
+    "custodyLaunches": 3,
+    "nativeCases": 4,
+    "after": true,
+    "existingProbes": 2,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "journalBytes": 32768,
+    "journalRecords": 128,
+    "outcomeBytesIncludingLF": 24576,
+    "causalRecordBytesIncludingLF": 6144,
+    "artifactDays": 7
+  },
+  "pending": "Root finalDATAadmission/freshrefs/Main/history/exacttree; independentOWNfinalbindings/native/review; onlythen separateRootONEcapture gate. Noauthorref/tree/commit/run; noSourceeval/import/compile/test/files locally. Native41PASS scopedtooling only, no C orTask1qualification.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
