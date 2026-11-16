@@ -1,0 +1,17 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-lab-close.v1",
+  "atUTC": "2026-11-16 16:02:57 UTC",
+  "testedHead": "eb9c875e7e465c69aece7026cd6434ff0e71e522",
+  "testedTree": "71afeac1f869d6fecf0a6916a62950449f7e071c",
+  "runId": 43901818639,
+  "jobId": 133420132559,
+  "primary": "2c556a2e8083ce2d83a49029991724d73e817187",
+  "status": "CLOSED_FAILED_TOOLING",
+  "nativePass": 6,
+  "nativeFail": 35,
+  "workflowRemoved": ".github/workflows/afw-c2-notices-n3-controls.yml",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "sourceBusinessExecuted": false,
+  "PCoff": false
+}
