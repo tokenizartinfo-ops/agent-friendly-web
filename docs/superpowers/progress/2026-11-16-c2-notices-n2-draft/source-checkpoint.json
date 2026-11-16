@@ -1,0 +1,95 @@
+{
+  "schema": "afw.c2-notices-n2.pause-checkpoint.v1",
+  "status": "DRAFT_INCOMPLETE_NOT_FOR_EXECUTION",
+  "disposition": "IDLE after saving this checkpoint at Root/owner request. Do not start another block or any ref/run until Root resumes.",
+  "authority": {
+    "currentFullBrief": "07a10773d721081de132baf9d4bb9b014466137e",
+    "earlierBrief": "89d5f4e6350ec7165822fd7907530a9c2022489b",
+    "acceptedReadonlyDiagnosis": "bc756849f9c8a4ed4653a4cb1e5d20565f945e93"
+  },
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "frozen": {
+    "normalSourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "all13Unchanged": true,
+    "futureQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "normalS10Before": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+    "N1Packet": "d9762f018568fedf9080985781c7fb08b36707ca"
+  },
+  "newArtifactsCreatedThisN2Turn": [
+    {
+      "role": "DRAFT selection JSON, not final contract",
+      "bytes": 2081,
+      "sha256": "977214669868a7a25ffafa246defe5bb28697684bf9630dec969bcfe0b267da8",
+      "gitBlob": "7103d0fa1d205b5dbf692ee7d86c6405c9478497",
+      "blob": "7103d0fa1d205b5dbf692ee7d86c6405c9478497",
+      "fullReadback": true
+    },
+    {
+      "role": "DRAFT concrete control vectors JSON with known open issues",
+      "bytes": 38053,
+      "sha256": "09ade58e8189bbb04ec934e741fb9956b2fc59aef3fe58a68fe81491e55ca584",
+      "gitBlob": "ef9cb26d2a12b8162f6366b3fa450b197662553e",
+      "blob": "ef9cb26d2a12b8162f6366b3fa450b197662553e",
+      "fullReadback": true
+    }
+  ],
+  "authoredExecutableBodies": [],
+  "contractState": "NOT authored/created. No final N2 contract pin exists.",
+  "schemaState": "NOT authored/created. No N2 schema pin exists.",
+  "vectorsState": "Draft finite data only, full readback verified. Control counts are declarations and require completion plus Root cloud execution. Known incomplete invariance/HTTP-causal fixtures are explicitly listed inside the draft.",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n2",
+    "message": "AFW-C2-T1-NOTICES-N2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n2.yml",
+    "job": "c2-notices-n2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n2/",
+    "runner": "run-c2-notices-n2.mjs",
+    "authority": "DATA nomination only; Root alone may gate a later occurrence. No activation performed."
+  },
+  "proofRuling": "Root accepted actual public option-argument/script/settings equality and diagnostic callback identity per original call, plus successful original call/settlement when observed. Do not introspect private Miniflare fields or claim hidden installation. Runtime callback observation stays separate; none means unknown. Compare within one original call, not across legitimate phase settings.",
+  "proposedProofDesignNotImplemented": [
+    "Use one owned journal, extending N1 union with guard, host-proof and hook-state records.",
+    "S10 temporary Node-only wiring at the original constructor and original setOptions calls: synchronous prepare on the same already-converted option argument before the call; synchronous completion observation after the existing original await. No method/proxy/promise wrapper or extra await.",
+    "Capture original M/QA manifest script bytes/hashes and deterministic settings before adding only root handleStructuredLogs. Compare the same original objects immediately before the actual call and after settlement; preserve every other callback reference. No second compilation/world or deadline normalization.",
+    "Constructor initially has only placeholder QA script, so compiled-role fields must honestly be null/unbuilt. Final assembly/mount/adopt use the actual same f.firstConnectionBuild and converted worker manifests. Settings are compared per call; legitimate phase settings can differ between calls.",
+    "Root handleStructuredLogs must not overwrite an existing different callback. Private option data/function-reference checks must fail diagnostically without throwing into work or rewriting business settings.",
+    "Tentative settings encoder must preserve undefined, negative zero, property order, functions by private identity, byte arrays by exact hash and reference identities. Unsupported/accessor/symbol/cyclic input should produce capture fault/unknown, never silently normalize or mutate it. This has NOT been coded.",
+    "At most eight new guard records after a baseline following PHASE. Node windows derive from actual HTTP events: prerequisite, notices-get, notices-post, after-post, unscoped. All records keep correlated:null and probe guardOrigin:unknown.",
+    "Only three exact existing T2 tags are recognized. Parent-holders has no at/m, so expiry/regression projections stay null. Exact private payload keys/types and 2048-byte cap; never emit clocks, remainingMs, structured timestamp, raw message/JSON/stack or IDs. Callback synchronous, nonthrowing, no await/RPC.",
+    "Normal S10/PH/OP/WORK compile inputs, entry strings, guards, onLoad/transforms and returned worker-script/settings construction remain untouched. The only additional allowed temporary S10 changes are Node options preparation/comparison and logger wiring."
+  ],
+  "sourceAnchors": {
+    "S10": "29 harness options;43 base;44 constructor;83–89 existing T2 tags;129 actual build;135 firstConnectionBuild;145–151 final options/actual setOptions;169–172 mount;174–178 adoption. Check exact full text before patching.",
+    "versionedAPI": "Miniflare5.20260831.0-alpha locked by36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b. Official versioned source paths/blobs/lines are in readonly report bc756...; config converter preserves handleStructuredLogs."
+  },
+  "knownDraftIssues": [
+    "Positive full N2 synthetic graph requires the fifth adopt proof pair if NOTICES succeeds; failed POST variants must omit that pair causally.",
+    "The inherited literal dangling-HTTP counterexample must gain full N2 host/hook records, so it isolates the HTTP completion guard rather than a missing invariance proof.",
+    "Finalize record field orders, per-call host proof pairing and actual compiledMatch/null semantics before publishing contract/schema/selection as final.",
+    "Preserve N1's6/21/3/6/2/5 controls and add concrete guard parsing, phase exclusion, duplicate/cascade/late/absent tags, callback fault preservation, synchronous/no-RPC, script/settings/reference equality and lost-hook controls. Do not claim any were run.",
+    "All helper/logger/reader/driver/S08/S10-overlay/control implementation and N2 runner/WF remain pending; no new executable body was saved."
+  ],
+  "resumeOrder": [
+    "Read the full current brief and this checkpoint.",
+    "Complete concrete synthetic vector causality and save test-first data.",
+    "Finalize early contract/schema/selection and send Root pins for independent OWN work.",
+    "Only then author bounded Node observer/logger/proof helper and exact reversible overlays, reader/controls, fixed runner/WF.",
+    "Full readbacks, hashes, report and final packet; Root review/gate/cloud only."
+  ],
+  "pendingOperations": "None. No tool call, Source process, compile/test, queued run, ref creation, cloud execution or background observer remains pending. Root may archive these immutable JSON drafts and this checkpoint in its authorized docs destination.",
+  "verification": "Only immutable data reads and builtin RAM string/JSON/hash operations. Draft blobs created and fully fetched back with exact byte comparison. No local Source/observer/parser evaluation/import/compile/syntax/test/files/dependencies, no executable blobs/refs/runs/runtime/browser/keys/mail/subagents.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
