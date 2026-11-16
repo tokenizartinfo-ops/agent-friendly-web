@@ -1,4 +1,4 @@
-# AFW · continuación vigente — 2026-11-16 04:51:23 UTC
+# AFW · continuación vigente — 2026-11-16 05:19:05 UTC
 
 ## Alcance y estado
 
@@ -28,31 +28,45 @@ Se probó estáticamente una dependencia omitida por el archive: bootstrapWorld 
 
 2. Fix1: 43802367592/1, job 133085365498. Control de ausencia PASS/EXPECTED_ENOENT. Después timeout de 180s; TAP20/known20/frames4, primer caso etiquetado FAIL C2T1_OAUTH; diagnóstico separado de cleanup sin causa. Sin recibo. Evidencia 7c250f7d58c70f88766e52421480c045751da3e5. Rama lab/afw-c2-source-20261116-t1-fix1 cerrada en 7a52969aa6f4e71e8a1e28b46ebee0489912e4a5; workflow retirado. Gate 155eb12a6a0f3b6746b611e69bd3a1589b750ea1. Logs ya consumidos UNA vez. No se probaron la causa OAuth ni la de limpieza; no atribuir a Cloudflare.
 
-## Diagnóstico acotado concluido; investigación activa
+## Diagnósticos cerrados; defecto de ciclo de prueba observado
 
-Rama lab/afw-c2-source-20261116-t1-oauth-diag1. Head activo 31359f9160c935f1251e4cc6157bdd544107151b, árbol 98b9639d3408b21f414997f098af4461b196f4ec. Gate Root 72c21f4ddf5ad92d5b2095dc19ac177eef4efbb9. Delta 905dba67eb524261a9802e91390c005bf62b0d68; runner 3006d7d01cb9e24a83a001361318eecf842f013f; reporter 681f7eafa32df84cd585f29f85ac4b3e8e89835d; guard f84c0fe47eaf386d9f0a4ae3e300d7b738972450; schema 4506e181d6cf54348b4cebc0915cd1e407e99e9a. Todos hash/Git/bytes FULL readback por Root. OWN reader 880e0cd52f1fb9be544158aec0e88bd17c7e8d67 y API d6066f8fe5d879ba8bcceaaea8090fc8f14141f6; controles sintéticos 777340cb4de75bda4dc7b4002bf72470896ca866 (2 positivos/36 negativos de registro y 1/18 de API). No equivalen a Source PASS.
+Diagnostic1: run43806081140/1, job133097056460, head31359f9160c935f1251e4cc6157bdd544107151b. Captura válida; CONNECTION PASS, OAUTH-labelled FAIL Error S08:22:55, count()->plain(f.stub.snapshot()). El finally del driver S07 esperaba el contador y podía ocultar un error anterior. Resumen083c8fe5ceeb6c024bd38793edb6f01511098ce2; primaria be00422c02fdf45c94a416042aa6596808226f29. Rama lab/afw-c2-source-20261116-t1-oauth-diag1 cerrada00fd293a502c8a6358f1e105da9be559e9f06f51, workflow nuevo retirado. Logs ya consumidos UNA vez.
 
-Ocurrencia 43806081140/1, job 133097056460, terminal SUCCESS. Solo dos casos nativos seleccionados, los otros 18 fuera de scope. Node v22.23.4. API run/job/commit/step5 y frame único unidos por Root. Logs consumidos UNA vez. Resumen primario 083c8fe5ceeb6c024bd38793edb6f01511098ce2; evidencia be00422c02fdf45c94a416042aa6596808226f29. Carpeta Rootdocs docs/superpowers/progress/2026-11-16-c2-oauth-diagnostic/.
+Diagnostic2: rama lab/afw-c2-source-20261116-t1-oauth-diag2, gate436ef5af284912551bfc83b0fbef3cf83ecfd44e. DTO9bcd616e8d50dbb5b6fac1de1907095914216b6b, contrato029a043847b227c332104f060af1419c4d2ee175, runneraa03cb3eceba513724cbe4f3b81263dc049a78b2, driver9b4ba6d899d4b4218ec1da676c7c8140511d2eb5, reporter0ecfeb3d2ac6072d47fabbfafb4140e571095b72, sanitizer58184b44f96be778c42589a61c7fdb50cd264d16. Guard/preflight iguales a diagnostic1. Root verificó hashes, 3203 originales intactos y23 adiciones; OWN readerd4cbd27f968355633f00998ffb286e13d44f90ef+dependencia880e0cd52f1fb9be544158aec0e88bd17c7e8d67, OWN API6f3cf94c7e98878e76f4f4c866dea2c4c73107b3, controles1positivo/24negativos d9a34d5944905bdd005744cf552f847c719b8058. Sintéticos, no Source PASS.
 
-Hechos:
-- diagnosticCaptureValid=true, SourceQualified=false, Task1Pass=false.
-- CONNECTION nativo PASS. Caso etiquetado OAUTH nativo FAIL: Error, code null, posición S08:22:55.
-- S08 es test/fixtures/finite-coupled-native.mjs; línea22 es count(), await plain(f.stub.snapshot()). No es una posición de la acción oauth().
-- El test wrapper ejecuta w.counts() en finally; por semántica JS ese error puede ocultar uno previo del trabajo, o la acción pudo terminar y fallar solo el contador. No se conoce aún el resultado original de oauth().
-- Child terminó exit1, signal none/errorKind none, stderr0; no timeout en esta ocurrencia. Custodia UID/GID/grupos/loopback, preflight real y remoción final propia verificadas. Esto no prueba la causa histórica del cleanup ni drenaje global.
-- Rama cerrada 00fd293a502c8a6358f1e105da9be559e9f06f51, árbol 671d80ce505ac2b5c99ef2c21874dc8fc50383fd, workflow nuevo retirado, DATA y evidencia preservadas. Readback cierre: Main e histórico intactos, 0 runs del close head.
+Ocurrencia43808831618/1, job133105688907, head4c0f19096453e5c5d1757744f52d1b1c04d76548/tree8f9ca7bd955dada334d70562cce9708b6f8e87f0. Run/job terminal SUCCESS, API/commit/step5/frame único unidos por Root; logs consumidos UNA vez. Resumen626784c349ebd62c2dd7e8867f59860919b576cd; evidencia primaria8f11256bc95cd187a27e4e52951bff0eaf31d62a. diagnosticCaptureValid=true y Root ownDiagnosticValid=true; SourceQualified/Task1Pass=false.
 
-Siguiente trabajo ACTIVO: actor original confirmó por Source que adoptConnectionConfiguration hace setOptions y vuelve a vincular stub/db antes del CONNECTION PASS; oauth no remonta ni dispone Miniflare. Por tanto no se autoriza un arreglo de stub/producto por hipótesis. El error original de acción no se conserva y no es recuperable del frame fallido. Root nominó UNA observación diagnostic2, aún SIN ref ni run: rama lab/afw-c2-source-20261116-t1-oauth-diag2; mensaje AFW-C2-OWNER-STAGES-OAUTH-DIAGNOSTIC2-ONEUSE-20261116; workflow .github/workflows/afw-c2-oauth-diagnostic2.yml; job c2-oauth-diagnostic2. Driver propio de diagnóstico importa las funciones nativas actuales, conserva el registro esperado await CONNECTION→await OAUTH y captura actionError inmediatamente ANTES del contador, counterError por separado y repropaga el valor original con booleano explícito de throw. También observará entrada/settlement del after global con secuencia real. Root detectó una hipótesis concreta, NO acreditada todavía: el registro de tests top-level esperado uno a uno puede ejecutar after y cerrar el world después del primero; Node v22.23.4 test.js:1188–1194 llama root.run cuando acaban todos los subtests conocidos y createHook:815–821 ejecuta after una vez. Primaria https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/test.js y harness.js. El diagnóstico debe conservar esta topología para observarla, sin corregirla accidentalmente. Los 13 cuerpos siguen congelados; Root espera DTO/schema/pins finales y gate independiente. No releer logs ni reabrir las tres ramas.
+Secuencia REAL:
+1. CONNECTION action returned.
+2. CONNECTION counter returned.
+3. after ENTERED con driverPhase=oauth-action.
+4. OAUTH action THREW TypeError, S09:5:40 (plain, await del RPC).
+5. OAUTH counter THREW Error, S08:22:55.
+6. after close-returned con driverPhase=complete.
 
-## Orden de los próximos bloques
+El cierre comenzó MIENTRAS OAuth estaba trabajando; no se acredita cierre ya completado antes de su invocación. El caso nativo FAIL conserva correctamente el TypeError original de acción, distinto del Error del contador. Hay un defecto observado de ciclo de prueba: cierre prematuro del world compartido durante el siguiente caso. No basta para atribuir todos los errores históricos a esa causa, probar un defecto del producto o culpar a Cloudflare. Primero corregir ese ciclo y comprobar si el recorrido vuelve a ser válido.
 
-1. Completar Task1: causa concreta, corrección justificada, pruebas Source reales y revisión spec/calidad.
-2. Task2: fábrica/material/testigo, invocaciones originales y guard SQL. Brief condicional df77f4d064346ca966f132acae3c362184f146c8 en docs/superpowers/briefs/2026-11-16-c2-material-invocations-task2-PENDING.md, todavía NO DISPATCHED. No iniciar antes de Task1 PASS.
-3. Task3: ruta real QA/M/Workflow, guard, fallback de alarma en tres fronteras y restauración.
-4. Task4: candidata separada, build --staging con revisión exacta y revisión integral del plan.
-5. Gates OriginalCLI/Native y ensayo real: entrega útil, procesamiento/ACK, retirada, cierre y evidencia desde nube. Ningún diagnóstico ni CI los sustituye.
+Node22.23.4 primaria test.js40658B/SHA256efebe79e3471470f7daade809a4f83b32f737db69126381d21a23ebb392da3ab (ruling ae4852057eb77a38c2108718f4b03795cdf9e16a) explica root.run al acabar todos los casos conocidos y after runOnce. El registro top-level await de casos deja esa ventana. S10 vuelve a vincular stub/db tras setOptions; no se autoriza una corrección de stub por hipótesis. Reporter contempla Error reconstruido por Node error_serdes, sin imprimir mensajes/pilas.
 
-Todos siguen false hasta su evidencia correspondiente: historicalCauseProven, receiptAuthenticated, operationalReadiness, completePackage, PCoff, globalNativeDrainVerified, sdkNamespaceEmptyVerified. No pedir apagar el ordenador ni dar fecha fiable de PC-off mientras estos gates no estén cerrados.
+Ambos diagnósticos comprobaron UID/GID/grupos/loopback, preflight real y remoción final de su propio temporal. No prueba causa histórica de cleanup ni drenaje global. Diagnostic2 cerradae9c5beb0f62bace710dfb2f7968258c25b8ba703/tree3e7380577743b5d34cff9bd224d9caf884640001; nuevo WF retirado, DATA/evidencia preservadas. Readback de cierre Main e histórico intactos y0runs del close head. No reabrir ni releer logs de ninguna de las cuatro ramas de laboratorio.
 
+## Bloque ACTIVO: Task1 fix2, propuesta DATA pendiente
 
-Estado actual diagnostic2: gate Root 436ef5af284912551bfc83b0fbef3cf83ecfd44e; DTO9bcd616e8d50dbb5b6fac1de1907095914216b6b, contrato029a043847b227c332104f060af1419c4d2ee175, runneraa03cb3eceba513724cbe4f3b81263dc049a78b2. Rama nominada creada y activada una sola vez: head4c0f19096453e5c5d1757744f52d1b1c04d76548/árbol8f9ca7bd955dada334d70562cce9708b6f8e87f0, 3203 originales intactos +23 adiciones DATA/WF. Run43808831618/attempt1, job133105688907 completed; logs TODAVÍA NO consumidos. No repetir/reforzar ni crear otra ocurrencia: esperar terminal de este run/job, unir metadata, leer logs una vez y cerrar solo el nuevo WF. Las frases anteriores de propuesta sin ref quedaron históricas; este párrafo fija el estado activo.
+Actor original /root/c2_owner_stages_impl retomado con evidencia diagnostic2. Root autoriza SOLO:
+- Cambiar S07 test/mcp-qa-finite-owner-three-stage-native.test.mjs para registrar los20 casos de modo síncrono antes de terminar el primero; conservar IDs, orden nativo secuencial, work bodies y assertions. Sin parent/extra case ni cambio de clocks.
+- Conservar el valor original lanzado en action con booleano explícito; contador en catch separado; no reemplazarlo desde finally, no default0/countersviejos/fallo tragado/recibo positivo con countersnull.
+- Los otros12 cuerpos e20 siguen congelados. Nuevo SourceIndex13, delta exacta, ledger afectado, reporte y reversión deben reflejar solo S07.
+- Tooling Source-lab fix2 parte de runner fix1: conservar tres modos baseline-red/proposal-green/mutant-prefix, los11 regresiones, dependencia bootstrap22f324 y su control ENOENT nativo. Reutilizar reducción UID/GID después de unshare+lo y custodia/limpieza propias verificadas. Prueba de custodia separada del recibo Source canónico; no inventar TAP/counters ni rediseñar producto.
+- Nominar rama lab/afw-c2-source-20261116-t1-fix2, mensaje AFW-C2-OWNER-STAGES-SOURCE-T1-FIX2-ONEUSE-20261116, WF .github/workflows/afw-c2-source-lab.yml, jobc2-source-lab. Ningún ref/run fix2 creado aún. Root espera pins finales/contrato suplementario/gate independiente. No local Source ni OTP ni intervención owner.
+
+La corrección deberá probar CONNECTION+OAuth en baseline antes de su notices-red esperado; green completo y mutant nombrado siguen pendientes. Corregir el driver no califica el producto por sí mismo.
+
+## Orden restante
+
+1. Task1: corrección acotada, pruebas Source reales, revisión de especificación/calidad.
+2. Task2: fábrica/material/testigo, invocaciones originales y SQL. Brief condicional df77f4d064346ca966f132acae3c362184f146c8 en docs/superpowers/briefs/2026-11-16-c2-material-invocations-task2-PENDING.md; NO DISPATCHED hasta Task1 PASS.
+3. Task3: ruta QA/M/Workflow, guard, fallback de alarma en tres fronteras y restauración.
+4. Task4: candidata separada, build --staging y revisión integral.
+5. Gates OriginalCLI/Native y ensayo real: entrega útil, procesamiento/ACK, retirada, cierre y evidencia desde nube.
+
+Todos siguen false hasta evidencia correspondiente: historicalCauseProven, receiptAuthenticated, operationalReadiness, completePackage, PCoff, globalNativeDrainVerified, sdkNamespaceEmptyVerified. No pedir apagar ni dar fecha fiable de PC-off mientras falten esos gates.
