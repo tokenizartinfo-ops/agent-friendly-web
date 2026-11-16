@@ -112,6 +112,16 @@ Root preparó commit c741821fa5fcb647602021c6a2e86a260d4a9802/treef70a380dc07fee
 
 OWNindependiente confirmó12RED aceptadospre-fix y rechazo12post-fix con bundleválido preservado; está terminando controles FSM/API/artefacto y FULLreadback. Es solo avance anunciado; Root espera reporte/pins y leerá verificará todo antes del gate/Sourcecloud. No Source/PConoff ni productoTask1PASS inferido.
 
+### OWN cloud PASS215 y GREEN observador ACTIVO
+
+OWN paquete2cc1f805f8eb2c6f2386709e1d4ee0874dc3bf8c/reportd55838c8c23ba6e0e8e11d0234f500c00134e3d6/diffc51b358bf02428266d4a5b0f2f40f0e92248f174. Código módulo aec1fbf336d5774f465756ecc1b7e06492244e0f y controles56a362d16725fd2bb8fcb9e727276c79a2b920ff completos leídos; hashes4entradasGraphverificados. Root sólo ejecutó modulegraph/215tests OWN en GitHub, no Source. Head45f52216ff1f5fb135eb4ed2562c9f8b1ce382c1/t treebac590b47ec9464212251796d947555954d6af33, gate285b4a1785c86eeb12d6593cd0f2b57fb5b6488b. Run43820754225/1 job133143022562 success, step4 07:00:53UTC16nov,187+28PASS0FAIL,moduleGraphLoadedtrue. API/job/commit/step/frame canónico unidos. Evidencia49dee78f625a96ec5b746b550b2541502ea28237. Logs consumidosUNAvez, no refetch/replay.
+
+OWN rama lab/afw-c2-own-receiver-20261116-fix1 CERRADA46c02209376f23f78b223f4a92cc375a5920b5a2/treeed1e46eae8f30ccde02084d915a6f509aec3fd74; WF retirado,3203originales/modes intactos,Main/histórico sin cambio,0closeheadruns. SóloOWN sintético; SourceQualified/Task1Pass/PCofffalse.
+
+ACTIVO GREENdiagnostic1: lab/afw-c2-source-20261116-t1-green-diag1, headc741821fa5fcb647602021c6a2e86a260d4a9802/treef70a380dc07feeefb12da9deadcb1d06ecc0f2b3, gateb53e165a81ef0cf3f6a3d373da96b7708772e6a8. Run43821243410/1 job133144581316; Nativeobserverstep5enprogreso. Logs NO leídos aún. Full3/35parser+13progresscontrols primeroenparent,preflight+ENOENT+green20serial privado,3custodylaunches,mismos330/180/120s/7min. Aceptaciónsólodiagnóstica exige API/log/artefactoreal y receptor independiente; timeout sigueexplícito. NO calificará Source aunque20PASS. No re-run/refactivation.
+
+Al terminar runYjob: leerlogsUNAVEZ, guardar contexto+captura+nativeprefix+journal seguro, obtenerlistadoartefactosAPIcrudo y descargarexact ZIP para SHA256/canonicalpayload. OWN c2OwnReadGreen espera run/jobs/commit/expected y transport{runId,jobId,rawLog}, artifact{runId,jobId,listing,artifactId,fileName,payloadText,archiveSha256}; esquema552301a... JSONpin y SHA256inyectado. No inventar bytes/hash si fichero inaccesible. Después cerrar sóloWF, preservarevidencia, readback3203/Core+Mainhist+0runsclose y scopedre-review4407b6a...hallazgos1/2 con coveringtests Source controles y OWN215. No producto fix por conjetura; Sourcefull/Task1review siguenpendientes. Antes08:30Argentina ninguna peticiónOwner.
+
 ## Orden restante
 
 1. Task1: corrección acotada, pruebas Source reales, revisión de especificación/calidad.
