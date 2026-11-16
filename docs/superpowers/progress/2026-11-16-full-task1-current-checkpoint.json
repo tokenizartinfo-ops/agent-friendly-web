@@ -1,26 +1,28 @@
 {
-  "schema": "AFW-FULL-TASK1-ACTIVE/7",
-  "atUTC": "2026-11-16 22:52:44 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/8",
+  "timestampUTC": "2026-11-16 23:19:42 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
   "phase": "GREEN20_FRONTIER_DIAG1_SOURCE_AND_OWN_IMPLEMENTATION_ACTIVE",
-  "verifier": {
-    "native419Pass": true,
-    "review": "797613a34698a6c4a3ade7c4cc679b7af0ad0099",
-    "SourceRealRunRejectedCorrectly": true
-  },
-  "lastFullSource": {
+  "fullSourceTask1": {
     "run": 43965725604,
     "job": 133644531547,
-    "SourceExecutedInGitHub": true,
-    "SourceExecutedLocally": false,
-    "disposition": "INCOMPLETE_GREEN180S_CAPTURE_TIMEOUT",
+    "result": "INCOMPLETE: proposal-green native child ETIMEDOUT at180s; BASE3 passed specified expected-red contracts. No causa demonstrated.",
+    "SourceExecuted": true,
+    "closed": true,
     "primary": "68c68577dca6ed01980dd673ed9b2623096a71f9",
-    "resultReview": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
-    "closed": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
-    "closeProof": "e65c9b545c44c663f8e5ceb41794a5aab8e9e455",
-    "consumed": true,
-    "noReplay": true
+    "outcome": "91b08d3ea77cd85264fc6f5ada1fd62693c56631",
+    "review": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
+    "closedHead": "089356513d1ccef9bdffa375d3a822c7c9fd01d3"
   },
-  "newDiagnostic": {
+  "own419": {
+    "nativePass": true,
+    "closed": true,
+    "run": 43963999645,
+    "primary": "8595247053fe516c66addbd00008d593e4d72dff",
+    "review": "797613a34698a6c4a3ade7c4cc679b7af0ad0099"
+  },
+  "green20": {
     "plan": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
     "ruling": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
     "SourceImplementationReleased": true,
@@ -43,13 +45,60 @@
     "OwnWireReview": "db0e81549a5018adb92c33be5b1000347e58e505",
     "implementationRuling": "696fb02dc8a29f0c394d91f661922610403ec4bf",
     "OwnNativeReleased": false,
-    "SourceToolsNativeReleased": false,
+    "SourceToolsNativeReleased": true,
     "SourceBusinessCaptureReleased": false,
-    "SourceEarlyFixtureSeal": "70f228712cf9b7e6eef08e6d784316b174271106"
+    "SourceEarlyFixtureSeal": "70f228712cf9b7e6eef08e6d784316b174271106",
+    "SourceToolsExpected": 6,
+    "SourceToolsAssertions": 31,
+    "OwnEarlyFixtureSeal": "28a00cc5c296ca245389a5cccfdcd929864cb133",
+    "OwnExpected": 124,
+    "OwnPositive": 26,
+    "OwnNegative": 98,
+    "OwnBodyAdmission": "66640053f64d9da3b72f1d3b583e81c7d74f8ea5",
+    "SourceToolsHead": "6d6ab08491f1bdb77b0ab492294731715b43a64f",
+    "SourceToolsGate": "3f54074d0ff4a9320300e8bccbab174c3afeea6c",
+    "SourceToolsNativePassed": true,
+    "SourceToolsNativeCounts": {
+      "tests": 6,
+      "checks": 31
+    },
+    "SourceToolsPrimary": "5ecdf44b7bdea99ae1692a8eff9a5ca5b1939303",
+    "SourceToolsProof": "466c6af28eba2581f1e487c947bcd76d11fb0afc",
+    "SourceToolsClosedHead": "3441b4a43dd52aff5089e21b085cff1df4e064b8",
+    "SourceToolsCloseReadback": "9da853b6316233047eaac5c1aac6afd1aecbfc08",
+    "SourceToolsFreshReviewPending": true,
+    "SourcePrepared": {
+      "head": "6e41d44919d86f0bacc97edab022460449316987",
+      "tree": "fd5fa1eb66c0f1503af570c4a7be0233494016e7",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "index": "2f25941491df234890036ae8cf0609e323207b67",
+      "refCreated": false,
+      "runCreated": false,
+      "SourceBusinessExecuted": false,
+      "gate": "HELD_UNTIL_SOURCE_TOOLS_AND_OWN_NATIVE_FRESH_REVIEW"
+    },
+    "RootTrustedBodyEdges": "1fe62f22a3067029c651e99320c94624998eb58b"
   },
-  "scope": "Accepted shared contract e55+eda6+2cb with3033 and Root release696fb. Source and OWN implementation DATA active; authors cannot run refs/natives. Source fixture-first70f228 seals6toolsIDs/31checks beforeadaptercode; OWNsealpending.",
-  "next": "Receive SourceTOOLS+Sourcefuture+OWN packets; Root FULL/hash/diff/fixture-first review, SourceTOOLS-only native6 and focusedOWNnative+freshreviews; only then oneGREEN20 diagnostic PF+child. No sourcefix, no capraise, no Task2/live PCoff trial yet.",
-  "ownerActionNeeded": false,
+  "tools": {
+    "run": 43977281603,
+    "job": 133684396049,
+    "primary": "5ecdf44b7bdea99ae1692a8eff9a5ca5b1939303",
+    "proof": "466c6af28eba2581f1e487c947bcd76d11fb0afc",
+    "closeReadback": "9da853b6316233047eaac5c1aac6afd1aecbfc08",
+    "closedHead": "3441b4a43dd52aff5089e21b085cff1df4e064b8",
+    "tests": 6,
+    "checks": 31,
+    "freshReview": "PENDING"
+  },
+  "own124": {
+    "state": "AUTHOR_FINALIZING_PACKET",
+    "fixtureFirst": "28a00cc5c296ca245389a5cccfdcd929864cb133",
+    "SourceBodyPins": "1fe62f22a3067029c651e99320c94624998eb58b",
+    "nativeReleased": false
+  },
+  "next": "Finish independent OWN124 verifier packet; Root full body/TDD/reversal/graph check and one OWN-only native124, preserve+close and fresh independent review. After Source-tools fresh review and OWN review pass, Root may release exactly one GREEN20 diagnostic, not Task1 qualification.",
+  "restrictions": "No Source13 edits, WorkerQA/W1 instrumentation, old-full-task reruns, Source local execution, cap increase, remote AFW mutation, OAuth/tokens/mail/Max. Native computations on GitHub. No readiness or PC-off claim.",
   "SourceQualified": false,
   "Task1Pass": false,
   "nonclaims": {
