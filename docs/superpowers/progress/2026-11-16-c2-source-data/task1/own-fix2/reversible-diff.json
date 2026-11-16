@@ -1,0 +1,167 @@
+{
+  "schema": "afw.root-own-fix2-reversible-diff.v1",
+  "scope": "N1/N2 independent consumer only; additive fix2 prefix. Historical fix1 files remain immutable.",
+  "units": "Zero-based UTF-8 half-open spans [oldStart,oldEnd,newStart,newEnd]. These bodies are ASCII; byte indexes equal string indexes. Full before/after immutable blobs allow exact reconstruction and reversal.",
+  "comparisons": [
+    {
+      "role": "OWN receiver",
+      "before": {
+        "path": "docs/superpowers/root-own/c2-t1-v2-fix1/own-receiver.mjs",
+        "blob": "aec1fbf336d5774f465756ecc1b7e06492244e0f",
+        "bytes": 30839,
+        "sha256": "526d95fec37e37bad989b65d2cd6af224a93f65963c542253a50157df29e1e7a",
+        "gitBlob": "aec1fbf336d5774f465756ecc1b7e06492244e0f",
+        "fullReadback": true,
+        "before": null
+      },
+      "after": {
+        "path": "docs/superpowers/root-own/c2-t1-v2-fix2/own-receiver.mjs",
+        "blob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+        "bytes": 31155,
+        "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c",
+        "gitBlob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+        "fullReadback": true,
+        "before": null
+      },
+      "spans": [
+        [
+          21297,
+          21297,
+          21297,
+          21318
+        ],
+        [
+          21807,
+          21807,
+          21828,
+          21849
+        ],
+        [
+          24031,
+          24031,
+          24073,
+          24347
+        ]
+      ],
+      "forwardReconstructionVerified": true,
+      "reverseReconstructionVerified": true
+    },
+    {
+      "role": "OWN controls",
+      "before": {
+        "path": "docs/superpowers/root-own/c2-t1-v2-fix1/own-controls.mjs",
+        "blob": "56a362d16725fd2bb8fcb9e727276c79a2b920ff",
+        "bytes": 18728,
+        "sha256": "1c25ff3b3755ee4be13dc590a38fae0d31c35543bfc239b7e5706f84a0f25339",
+        "gitBlob": "56a362d16725fd2bb8fcb9e727276c79a2b920ff",
+        "fullReadback": true,
+        "before": null
+      },
+      "after": {
+        "path": "docs/superpowers/root-own/c2-t1-v2-fix2/own-controls.mjs",
+        "blob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+        "bytes": 19486,
+        "sha256": "e69f12c2389616f1517dbd8f5472cda511c01b6fab2a42f6fe366afbe6a234c7",
+        "gitBlob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+        "fullReadback": true,
+        "before": null
+      },
+      "spans": [
+        [
+          18728,
+          18728,
+          18728,
+          19486
+        ]
+      ],
+      "forwardReconstructionVerified": true,
+      "reverseReconstructionVerified": true
+    }
+  ],
+  "additions": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/own-receiver.mjs",
+      "blob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "bytes": 31155,
+      "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c",
+      "gitBlob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/own-controls.mjs",
+      "blob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+      "bytes": 19486,
+      "sha256": "e69f12c2389616f1517dbd8f5472cda511c01b6fab2a42f6fe366afbe6a234c7",
+      "gitBlob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/fix2-vectors.json",
+      "blob": "6e5929efbd58acd113bfdf5813fe2670a6cccca4",
+      "bytes": 107420,
+      "sha256": "5f7166dc286946ee89ee61c70ea4c614f392e006ccbd1998d4611f05b66a9eef",
+      "gitBlob": "6e5929efbd58acd113bfdf5813fe2670a6cccca4",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/fix2-red.json",
+      "blob": "73ea15f372f728182936c1414479856365d1be93",
+      "bytes": 726,
+      "sha256": "82b207fc72561767d771a8fa5aae09c2a9317172cd35b632ab40e5ab759c3d6f",
+      "gitBlob": "73ea15f372f728182936c1414479856365d1be93",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/control-results.json",
+      "blob": "084acca4ac976c6adf25279d539c30ad9438e67b",
+      "bytes": 6790,
+      "sha256": "a630e6ae2c5988efae02d007f7da8ac1b28a6fc49d57413d3bb9c8f9ddca3dd4",
+      "gitBlob": "084acca4ac976c6adf25279d539c30ad9438e67b",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/fixture-first.json",
+      "blob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+      "bytes": 34834,
+      "sha256": "e00942909c3eab5a0d8ee5fffe9c625d38e7566fdc648baf4eb6998dcc8612bf",
+      "gitBlob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/diagnostic-schema.json",
+      "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "bytes": 9686,
+      "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+      "gitBlob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/synthetic-fixtures.json",
+      "blob": "a3fb1952a1afaca469f841b6a110f625c7e97364",
+      "bytes": 45368,
+      "sha256": "15de1b2f5839221447c2a47647bbb7e9cced5930c527bd684fa4f3ddc63fee54",
+      "gitBlob": "a3fb1952a1afaca469f841b6a110f625c7e97364",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/source-assembly-fixture.json",
+      "blob": "10a46188ae3be96657ab2ddcf83eb328c60b0a70",
+      "bytes": 39338,
+      "sha256": "9c38bb719dfe251849cc46f535fe1fed07c58d0d1a441f16f853647894d3ef00",
+      "gitBlob": "10a46188ae3be96657ab2ddcf83eb328c60b0a70",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "SourceAssemblyByteIdentical": true,
+  "unchanged": "Original exact-key/counter repairs, v2-fix1 future Source identity/selection, schema, all187+28 controls and12 aliases unchanged.",
+  "rollback": "Omit additive fix2 paths or discard detached proposal. All fix1 blobs/pins are full recoverable immutable preimages. No Source/ref/runtime mutation occurred; Root owns any cloud/ref preservation."
+}

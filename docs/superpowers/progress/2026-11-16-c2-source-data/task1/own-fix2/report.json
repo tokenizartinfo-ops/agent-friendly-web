@@ -1,0 +1,168 @@
+{
+  "schema": "afw.root-own-fix2-report.v1",
+  "status": "PENDING_ROOT_CLOUD_MODULE_GRAPH_AND_SCOPED_REVIEW",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached immutable OWN Git DATA; pure OWN normalized synthetic functions only in RAM",
+  "authority": {
+    "brief": "830b354469e6ab50f405f4d92efb73042ee49a90",
+    "review": "a279a930e3b0a89f186137b299fa20e8d44f6cf3"
+  },
+  "lineage": {
+    "fix1Index": "2cc1f805f8eb2c6f2386709e1d4ee0874dc3bf8c",
+    "fix1Report": "d55838c8c23ba6e0e8e11d0234f500c00134e3d6",
+    "fix1Diff": "c51b358bf02428266d4a5b0f2f40f0e92248f174",
+    "modulePreimage": "aec1fbf336d5774f465756ecc1b7e06492244e0f",
+    "controlsPreimage": "56a362d16725fd2bb8fcb9e727276c79a2b920ff",
+    "preimagesFullyReadBack": true
+  },
+  "scope": "ONLY N1 timestamp finite guard and N2 same-case reliable recorded throw/native PASS contradiction. Original key/counter findings are CLOSED per review; repairs and all old checks preserved. This author does not self-declare scoped review complete.",
+  "testFirst": {
+    "vectors": "6e5929efbd58acd113bfdf5813fe2670a6cccca4",
+    "sequence": "Built ordinary JSON synthetic inputs and ran them against exact fix1 OWN before receiver changes. Persisted FULLreadback vector blob before edits. RED showed all four malformed/inconsistent inputs accepted by old OWN, while all six intended positives remained accepted. Then changed OWN consumer and appended finite controls.",
+    "negativeSemantics": [
+      "N1: change only month11 to99 on command header timestamp; syntactic regex still matches, parsed date is NaN",
+      "N1: same invalid-month single edit at synthetic frame timestamp",
+      "N2: stable validated first-case action throw with same-case native PASS; matching outcome frame and artifact text",
+      "N2: stable validated first-case counter throw with same-case native PASS; matching outcome frame and artifact text"
+    ],
+    "positiveSemantics": [
+      "Action throw with no native result",
+      "Counter throw with no native result",
+      "Native FAIL although action and count both returned",
+      "Global AFTER/close throw with prior named-case PASS",
+      "Action throw with native FAIL",
+      "Counter throw with native FAIL"
+    ]
+  },
+  "implementation": {
+    "N1": "Require Number.isFinite(t) in diagnostic command-header rejection and diagnostic frame rejection before time-window comparisons. Source assembly positive inside-window conjunction and full source-assembly function remain byte-identical.",
+    "N2": "After schema, journal FSM, prefix/canonical bytes and native IDs/order validation, reject same-case native PASS if stable journal prefix records action or count throw. Applies only to actual matched allowlisted case; missing native result remains allowed. No PASS inferred from returns; native FAIL with returns remains valid; independent AFTERclose throw does not contradict named-case PASS.",
+    "delta": "Three insertion spans in receiver, append-only control function. New prefix docs/superpowers/root-own/c2-t1-v2-fix2/; no historical overwrite."
+  },
+  "verification": {
+    "scope": "ONLY OWN pure normalized receiver/helper functions in RAM; no Source or producer/parser/runner/test evaluation/import/compile/syntax-check/files/dependency or native execution.",
+    "newControlsPassed": 10,
+    "newControlsFailed": 0,
+    "newNegativesRejected": 4,
+    "newPositivesAccepted": 6,
+    "preservedOwnControlsPassed": 187,
+    "preservedSourceAssemblyControlsPassed": 28,
+    "preservedFailed": 0,
+    "preservedAliasRejects": 12,
+    "historicalAliasRedAccepts": 12,
+    "totalPassingChecks": 225,
+    "forwardAndReverseDiffReconstruction": true,
+    "fullSourceAssemblyFunctionByteIdentical": true,
+    "moduleGraphExecutionByAuthor": false
+  },
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/own-receiver.mjs",
+      "blob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "bytes": 31155,
+      "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c",
+      "gitBlob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/own-controls.mjs",
+      "blob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+      "bytes": 19486,
+      "sha256": "e69f12c2389616f1517dbd8f5472cda511c01b6fab2a42f6fe366afbe6a234c7",
+      "gitBlob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/fix2-vectors.json",
+      "blob": "6e5929efbd58acd113bfdf5813fe2670a6cccca4",
+      "bytes": 107420,
+      "sha256": "5f7166dc286946ee89ee61c70ea4c614f392e006ccbd1998d4611f05b66a9eef",
+      "gitBlob": "6e5929efbd58acd113bfdf5813fe2670a6cccca4",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/fix2-red.json",
+      "blob": "73ea15f372f728182936c1414479856365d1be93",
+      "bytes": 726,
+      "sha256": "82b207fc72561767d771a8fa5aae09c2a9317172cd35b632ab40e5ab759c3d6f",
+      "gitBlob": "73ea15f372f728182936c1414479856365d1be93",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/control-results.json",
+      "blob": "084acca4ac976c6adf25279d539c30ad9438e67b",
+      "bytes": 6790,
+      "sha256": "a630e6ae2c5988efae02d007f7da8ac1b28a6fc49d57413d3bb9c8f9ddca3dd4",
+      "gitBlob": "084acca4ac976c6adf25279d539c30ad9438e67b",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/fixture-first.json",
+      "blob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+      "bytes": 34834,
+      "sha256": "e00942909c3eab5a0d8ee5fffe9c625d38e7566fdc648baf4eb6998dcc8612bf",
+      "gitBlob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/diagnostic-schema.json",
+      "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "bytes": 9686,
+      "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+      "gitBlob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/synthetic-fixtures.json",
+      "blob": "a3fb1952a1afaca469f841b6a110f625c7e97364",
+      "bytes": 45368,
+      "sha256": "15de1b2f5839221447c2a47647bbb7e9cced5930c527bd684fa4f3ddc63fee54",
+      "gitBlob": "a3fb1952a1afaca469f841b6a110f625c7e97364",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-v2-fix2/source-assembly-fixture.json",
+      "blob": "10a46188ae3be96657ab2ddcf83eb328c60b0a70",
+      "bytes": 39338,
+      "sha256": "9c38bb719dfe251849cc46f535fe1fed07c58d0d1a441f16f853647894d3ef00",
+      "gitBlob": "10a46188ae3be96657ab2ddcf83eb328c60b0a70",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "historicalActual": {
+    "source": "Brief/review Root evidence; retained as original occurrence, not reread/replayed/reexecuted by author.",
+    "priorOwnCloud": "49dee78f625a96ec5b746b550b2541502ea28237",
+    "greenPrimary": "2cd454e96b713d409425da8f42e48959d21cb8eb",
+    "greenOutcome": "3ec7cff5538ef23da2089e50b3890113699612b6",
+    "greenFacts": "The existing 17 completed native facts remain valid. Neither N1 nor N2 describes a discrepancy in that preserved outcome. No new native repeat, old job-log refetch or replay was performed or requested."
+  },
+  "pending": [
+    "Root distinct one-use OWN cloud module-graph job including new10 and preserved187+28 controls",
+    "Root scoped independent N1/N2 re-review"
+  ],
+  "futureSource": "Identity, selection and v2-fix1 qualification untouched. Historical GREEN capture does not qualify Source or Task1.",
+  "rollback": "Discard detached fix2 packet or omit additive fix2 paths. Immutable full preimages permit exact reversal. No refs/runs/runtime/Source mutations performed.",
+  "ActualSource": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

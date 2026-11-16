@@ -1,0 +1,41 @@
+{
+  "schema": "afw.c2-own-fix2-cloud-gate.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "isolated GitHub-hosted pure OWN synthetic module graph",
+  "resourceType": "one-use Git ref and fixed Actions job",
+  "resourceId": "lab/afw-c2-own-receiver-20261116-fix2",
+  "allowedAction": "one leased push exact head,225OWN synthetic checks only,readuniquejoblogonceafterterminal,preserveandremoveonlynewWF",
+  "authority": {
+    "owner": "autonomous reversible AFW cloud development, no intervention before08:30Argentina",
+    "brief": "830b354469e6ab50f405f4d92efb73042ee49a90",
+    "review": "a279a930e3b0a89f186137b299fa20e8d44f6cf3",
+    "index": "682cdfd5421a0b2030487ead6f48a1381745ebb4",
+    "report": "fcf9c7c35e8862c24d4008dd26630b0658446c38",
+    "diff": "50856ee83bcf04ee166e5d6f4c9670ac15d97556"
+  },
+  "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "head": "d6a78b4f8916ae27b3357e2283b709e72e57a333",
+  "tree": "9517e15d55a2b414babd71562b199af0809a0454",
+  "oneUseMessage": "AFW-C2-OWN-RECEIVER-FIX2-ONEUSE-20261116",
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-fix2",
+    "workflow": ".github/workflows/afw-c2-own-receiver-fix2.yml",
+    "job": "c2-own-receiver-fix2",
+    "command": "node docs/superpowers/root-own/c2-t1-v2-fix2/run-cloud-controls.mjs"
+  },
+  "originalLeavesPreserved": 3203,
+  "additions": 7,
+  "sourceFrozen": true,
+  "scope": "Only3insertions in independent OWN consumer +append10ordinarysyntheticcontrols, noSourceorproducerchanges. Original187+28 preserved, new4negatives/6positives. ActualGREEN17facts unaffected; noNativeGREENrepeat orlogsrefetch. Root fullread/digest module31155B/controls19486B/vector107420B. Native modulegraphcloud +225checks, no npm/dependencies/Sourceimport orrequests. Job3min/read-only/fixedofficialactions/credentialsfalse/oneuseguardrepo/ref/push/message/attempt1.",
+  "inheritedTriggerAudit": "824b2fa8237572e5175be624d9f19cf95145414a/f8229c89791b84ea4a10cc49883c7895c7e1c3fa; all original3203 leaves/modes unchanged",
+  "acceptance": "Unique actualsameheadrun/job/commit/step success, exactcanonicalAFW_C2_OWN_CONTROLS schemaV2 head/tree/run/job/node+module/controls hashes 187/28/10 and0failed,moduleGraphLoadedtrue,SourceExecuted/SourceQualified/Task1Pass/PCofffalse. Never infer SourcePASS.",
+  "rollback": "Afterterminal/readonce removeonly .github/workflows/afw-c2-own-receiver-fix2.yml andaddsanitizedprimary,leasedchildrefupdate; readback3203originals,Mainhistunchanged,0closeheadruns. No repeats.",
+  "next": "Scoped re-review N1/N2 with covering evidence. SourceTask1 staticdiagnosis separatelypending; noSourcefixauthorizebythisgate.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}
