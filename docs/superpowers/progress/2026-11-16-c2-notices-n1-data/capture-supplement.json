@@ -1,0 +1,92 @@
+{
+  "schema": "afw.c2-notices-n1.capture-supplement.v1",
+  "contract": {
+    "bytes": 6414,
+    "sha256": "1cb15666c249f0fd163e6a60eee7a216cfaca2962ba45622d105e954347312e2",
+    "gitBlob": "2a7ac8dfbb4469e8ad63875e7667ac4fbf95be4e",
+    "blob": "2a7ac8dfbb4469e8ad63875e7667ac4fbf95be4e",
+    "fullReadback": true
+  },
+  "sourceIndex": {
+    "key": "repairSourceIndex",
+    "bytes": 11467,
+    "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "fullReadback": true
+  },
+  "selection": {
+    "bytes": 1776,
+    "sha256": "daa64765c98b1ebe06774d42575246eddb6721334211f135c971af7d0707f6f4",
+    "gitBlob": "4390c05bba8c123523f49c522d117fbeb215b4b4",
+    "canonicalHash": "fae234be9a7462b6065fdbfeaf0ddea0d0e086d434145750823a9894b988ad0f",
+    "blob": "4390c05bba8c123523f49c522d117fbeb215b4b4",
+    "fullReadback": true
+  },
+  "normalSuccessfulCapture": [
+    "AFW_C2_NOTICES_N1_SYNTHETIC",
+    "AFW_C2_DEPENDENCY_CONTROL",
+    "AFW_C2_NOTICES_N1_CUSTODY",
+    "AFW_C2_NOTICES_N1_OUTCOME"
+  ],
+  "standard": "Exactlyone ofeach inthisorder, noFRONTIER; canonicalmarkers+JSON+LF. Control6/21/3/6/2/5 beforethreeactualcustodylaunches. TerminaljobmaySUCCESS with actualnativeFAIL/blocked; capture-only.",
+  "fatal": "FRONTIER onlyfataladmission/control/materialization/custody/cleanup/publicationfailure, static code+finitephase/frontier/context/capturehashbytes; neverpositive. AnyFRONTIER rejects capture evenifotherframes exist. Partialcustody maybeemitted but no positivefallback. Invalidsemantic/nativeoutcome maybepreservedasunknownartifact with jobexit1, neverqualifies.",
+  "outcome": "Single output/c2-notices-n1.json is exactOUTCOMEJSON+LF, artifactafw-c2-notices-n1/retention7days. NoTAP/privateprobe/errors/HTML/headers/cookies/nonces/IDs/UID/PID/path published. Journalwitnesscontainswhitelisted canonicalrecords only; reconstructedLFbytes/hash mandatory. CapJSONbody24576B; overflowfixedOUTCOME_LIMIT/no positiveartifact.",
+  "diagnostic": {
+    "schema": "afw.c2-notices-n1.frontier.v1",
+    "fieldOrder": [
+      "schema",
+      "context",
+      "phase",
+      "frontier",
+      "code",
+      "capture"
+    ],
+    "phases": [
+      "admission",
+      "synthetic-controls",
+      "materialize",
+      "custody-preflight",
+      "notices-observer",
+      "cleanup",
+      "publication"
+    ],
+    "frontiers": [
+      "launch",
+      "parser",
+      "frames",
+      "overlays",
+      "journal"
+    ],
+    "codes": [
+      "CAPTURE_INVALID",
+      "SYNTHETIC_CONTROL_INVALID",
+      "CLEANUP_INVALID",
+      "PUBLICATION_INVALID",
+      "OUTCOME_LIMIT"
+    ],
+    "physicalLineCap": 2048
+  },
+  "reviewFix1": {
+    "ledger": "5ff22a759339c297b87d6257024b5ab660346047",
+    "beforeReader": "3a940e5c53250494fdeeeae532fde04d4d52d1ba",
+    "literalNegativeBeforeGuard": "5f867b41157f13c7906b3c5f26c073d55dea176b",
+    "currentReader": "ddf8b886f75330144be158c799513f3c81cf08e4",
+    "rule": "At N1_NOTICES actionreturn/throw allstartedHTTP musthave observedreturn/throw. A genuinely unfinishedaction under timeout canremainprefix. No actualRED/PASS observedhere; pendingRootcloud."
+  },
+  "limitations": [
+    "PhaseAexistingprivateprobeconnection-failure has noerrorobject/requestID, so correlated:null/guardOriginunknown unconditionally. Sites mayempty ifcompiledstackdoesnotmatch13exactSourcepaths.",
+    "Normal successfulnoticesadoption mayrestartprivateprobe memory; prefixdrift=>unavailable, neverborrowoldphasefailure.",
+    "Timeout/nativeambiguousjoin canmake captureinvalid/unknown; safe journalprefix preserved inwitness, no missingnativecase fabricated."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

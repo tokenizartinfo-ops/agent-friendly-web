@@ -1,0 +1,39 @@
+name: AFW C2 first notices N1 diagnostic
+on:
+  push:
+    branches:
+      - lab/afw-c2-source-20261116-t1-notices-n1
+permissions:
+  contents: read
+jobs:
+  c2-notices-n1:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/lab/afw-c2-source-20261116-t1-notices-n1' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'AFW-C2-T1-NOTICES-N1-ONEUSE-20261116'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Read the exact one-use diagnostic head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Use fixed Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+      - name: Install existing locked dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Observe first notices GET and POST
+        run: node docs/superpowers/source-lab/c2-t1-notices-n1/run-c2-notices-n1.mjs
+      - name: Preserve sanitized diagnostic only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-c2-notices-n1
+          path: output/c2-notices-n1.json
+          if-no-files-found: error
+          retention-days: 7

@@ -1,0 +1,927 @@
+{
+  "schema": "afw.c2-notices-n1.controls.v1",
+  "syntheticOnly": true,
+  "notSourceEvidence": true,
+  "binding": {
+    "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+    "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+    "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+    "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+    "slotHash": "5555555555555555555555555555555555555555555555555555555555555555"
+  },
+  "base": {
+    "records": [
+      {
+        "sequence": 1,
+        "elapsedMs": 0,
+        "kind": "binding",
+        "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+        "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+        "slotHash": "5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      {
+        "sequence": 2,
+        "elapsedMs": 1,
+        "kind": "flow",
+        "id": "N1_CONNECTION",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 3,
+        "elapsedMs": 2,
+        "kind": "flow",
+        "id": "N1_CONNECTION",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 4,
+        "elapsedMs": 3,
+        "kind": "flow",
+        "id": "N1_CONNECTION",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 5,
+        "elapsedMs": 4,
+        "kind": "flow",
+        "id": "N1_CONNECTION",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      },
+      {
+        "sequence": 6,
+        "elapsedMs": 5,
+        "kind": "flow",
+        "id": "N1_OAUTH",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 7,
+        "elapsedMs": 6,
+        "kind": "flow",
+        "id": "N1_OAUTH",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 8,
+        "elapsedMs": 7,
+        "kind": "flow",
+        "id": "N1_OAUTH",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 9,
+        "elapsedMs": 8,
+        "kind": "flow",
+        "id": "N1_OAUTH",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      },
+      {
+        "sequence": 10,
+        "elapsedMs": 9,
+        "kind": "flow",
+        "id": "N1_PHASE",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 11,
+        "elapsedMs": 10,
+        "kind": "flow",
+        "id": "N1_PHASE",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 12,
+        "elapsedMs": 11,
+        "kind": "flow",
+        "id": "N1_PHASE",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 13,
+        "elapsedMs": 12,
+        "kind": "flow",
+        "id": "N1_PHASE",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      },
+      {
+        "sequence": 14,
+        "elapsedMs": 13,
+        "kind": "flow",
+        "id": "N1_NOTICES",
+        "operation": "action",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 15,
+        "elapsedMs": 14,
+        "kind": "probe",
+        "stage": "before",
+        "state": "observed",
+        "newFailures": null,
+        "correlated": null,
+        "position": null,
+        "correlators": [],
+        "sites": [],
+        "guardOrigin": "unknown",
+        "summary": {
+          "consumedTicket": null,
+          "stageApproval": null,
+          "receiptCount": null
+        }
+      },
+      {
+        "sequence": 16,
+        "elapsedMs": 15,
+        "kind": "http",
+        "operation": "notices-get",
+        "edge": "enter",
+        "status": null,
+        "bodySettled": null,
+        "error": null
+      },
+      {
+        "sequence": 17,
+        "elapsedMs": 16,
+        "kind": "http",
+        "operation": "notices-get",
+        "edge": "response",
+        "status": 200,
+        "bodySettled": null,
+        "error": null
+      },
+      {
+        "sequence": 18,
+        "elapsedMs": 17,
+        "kind": "http",
+        "operation": "notices-get",
+        "edge": "return",
+        "status": 200,
+        "bodySettled": true,
+        "error": null
+      },
+      {
+        "sequence": 19,
+        "elapsedMs": 18,
+        "kind": "http",
+        "operation": "notices-post",
+        "edge": "enter",
+        "status": null,
+        "bodySettled": null,
+        "error": null
+      },
+      {
+        "sequence": 20,
+        "elapsedMs": 19,
+        "kind": "http",
+        "operation": "notices-post",
+        "edge": "response",
+        "status": 200,
+        "bodySettled": null,
+        "error": null
+      },
+      {
+        "sequence": 21,
+        "elapsedMs": 20,
+        "kind": "http",
+        "operation": "notices-post",
+        "edge": "return",
+        "status": 200,
+        "bodySettled": true,
+        "error": null
+      },
+      {
+        "sequence": 22,
+        "elapsedMs": 21,
+        "kind": "flow",
+        "id": "N1_NOTICES",
+        "operation": "action",
+        "edge": "return",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 23,
+        "elapsedMs": 22,
+        "kind": "probe",
+        "stage": "after",
+        "state": "observed",
+        "newFailures": 0,
+        "correlated": null,
+        "position": null,
+        "correlators": [],
+        "sites": [],
+        "guardOrigin": "unknown",
+        "summary": {
+          "consumedTicket": true,
+          "stageApproval": true,
+          "receiptCount": 2
+        }
+      },
+      {
+        "sequence": 24,
+        "elapsedMs": 23,
+        "kind": "flow",
+        "id": "N1_NOTICES",
+        "operation": "count",
+        "edge": "enter",
+        "error": null,
+        "counters": null
+      },
+      {
+        "sequence": 25,
+        "elapsedMs": 24,
+        "kind": "flow",
+        "id": "N1_NOTICES",
+        "operation": "count",
+        "edge": "return",
+        "error": null,
+        "counters": {
+          "upload": 2,
+          "activation": 2,
+          "receipts": 2
+        }
+      },
+      {
+        "sequence": 26,
+        "elapsedMs": 25,
+        "kind": "after",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 27,
+        "elapsedMs": 26,
+        "kind": "after",
+        "edge": "return",
+        "error": null
+      }
+    ],
+    "native": [
+      {
+        "id": "N1_CONNECTION",
+        "status": "pass"
+      },
+      {
+        "id": "N1_OAUTH",
+        "status": "pass"
+      },
+      {
+        "id": "N1_PHASE",
+        "status": "pass"
+      },
+      {
+        "id": "N1_NOTICES",
+        "status": "pass"
+      }
+    ]
+  },
+  "accepted": [
+    {
+      "id": "COMPLETE_200",
+      "edits": []
+    },
+    {
+      "id": "POST_503",
+      "edits": [
+        {
+          "op": "httpStatus",
+          "operation": "notices-post",
+          "status": 503
+        },
+        {
+          "op": "flowThrow",
+          "id": "N1_NOTICES",
+          "operation": "action",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "D08",
+              "line": 45,
+              "column": 7
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "POST_BODY_THROW",
+      "edits": [
+        {
+          "op": "httpThrow",
+          "operation": "notices-post",
+          "error": {
+            "name": "Error",
+            "code": null,
+            "site": null
+          }
+        },
+        {
+          "op": "flowThrow",
+          "id": "N1_NOTICES",
+          "operation": "action",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "D08",
+              "line": 45,
+              "column": 7
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ORIGINAL_ACTION_AND_COUNT_THROW",
+      "edits": [
+        {
+          "op": "flowThrow",
+          "id": "N1_NOTICES",
+          "operation": "action",
+          "error": {
+            "name": null,
+            "code": null,
+            "site": null
+          }
+        },
+        {
+          "op": "flowThrow",
+          "id": "N1_NOTICES",
+          "operation": "count",
+          "error": {
+            "name": "Error",
+            "code": null,
+            "site": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "PREREQUISITE_BLOCKED",
+      "edits": [
+        {
+          "op": "failAndBlock",
+          "id": "N1_OAUTH",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "D08",
+              "line": 45,
+              "column": 7
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "PROBE_UNAVAILABLE",
+      "edits": [
+        {
+          "op": "probeUnavailable"
+        }
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "id": "EXTRA_KEY",
+      "op": "extraKey"
+    },
+    {
+      "id": "BAD_SEQUENCE",
+      "op": "sequence"
+    },
+    {
+      "id": "BAD_BINDING",
+      "op": "binding"
+    },
+    {
+      "id": "TORN",
+      "op": "torn"
+    },
+    {
+      "id": "REORDER_CASE",
+      "op": "caseOrder"
+    },
+    {
+      "id": "BLOCKED_WITH_HTTP",
+      "op": "blockedHttp"
+    },
+    {
+      "id": "BLOCKED_NATIVE_PASS",
+      "op": "blockedNativePass"
+    },
+    {
+      "id": "PASS_AFTER_ACTION_THROW",
+      "op": "nativePassAfterThrow"
+    },
+    {
+      "id": "COUNTER_FAKE_ZERO",
+      "op": "badCounters"
+    },
+    {
+      "id": "HTTP_PRIVATE_FIELD",
+      "op": "httpPrivate"
+    },
+    {
+      "id": "HTTP_STATUS_600",
+      "op": "httpRange"
+    },
+    {
+      "id": "HTTP_DUP_RESPONSE",
+      "op": "httpDuplicate"
+    },
+    {
+      "id": "HTTP_RETURN_WITHOUT_RESPONSE",
+      "op": "httpNoResponse"
+    },
+    {
+      "id": "PROBE_ORIGIN_GUESSED",
+      "op": "origin"
+    },
+    {
+      "id": "PROBE_DUP_BEFORE",
+      "op": "probeDuplicate"
+    },
+    {
+      "id": "PROBE_BAD_POSITION",
+      "op": "position"
+    },
+    {
+      "id": "ERROR_RAW_MESSAGE",
+      "op": "message"
+    },
+    {
+      "id": "SITES_UNKNOWN",
+      "op": "site"
+    },
+    {
+      "id": "AFTER_DUP",
+      "op": "afterDuplicate"
+    },
+    {
+      "id": "NATIVE_EXTRA",
+      "op": "nativeExtra"
+    },
+    {
+      "id": "HTTP_UNSETTLED_ACTION_THROW",
+      "op": "literal",
+      "input": {
+        "records": [
+          {
+            "sequence": 1,
+            "elapsedMs": 0,
+            "kind": "binding",
+            "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+            "driverHash": "1111111111111111111111111111111111111111111111111111111111111111",
+            "selectionHash": "2222222222222222222222222222222222222222222222222222222222222222",
+            "helperHash": "3333333333333333333333333333333333333333333333333333333333333333",
+            "readerHash": "4444444444444444444444444444444444444444444444444444444444444444",
+            "slotHash": "5555555555555555555555555555555555555555555555555555555555555555"
+          },
+          {
+            "sequence": 2,
+            "elapsedMs": 1,
+            "kind": "flow",
+            "id": "N1_CONNECTION",
+            "operation": "action",
+            "edge": "enter",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 3,
+            "elapsedMs": 2,
+            "kind": "flow",
+            "id": "N1_CONNECTION",
+            "operation": "action",
+            "edge": "return",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 4,
+            "elapsedMs": 3,
+            "kind": "flow",
+            "id": "N1_CONNECTION",
+            "operation": "count",
+            "edge": "enter",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 5,
+            "elapsedMs": 4,
+            "kind": "flow",
+            "id": "N1_CONNECTION",
+            "operation": "count",
+            "edge": "return",
+            "error": null,
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            }
+          },
+          {
+            "sequence": 6,
+            "elapsedMs": 5,
+            "kind": "flow",
+            "id": "N1_OAUTH",
+            "operation": "action",
+            "edge": "enter",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 7,
+            "elapsedMs": 6,
+            "kind": "flow",
+            "id": "N1_OAUTH",
+            "operation": "action",
+            "edge": "return",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 8,
+            "elapsedMs": 7,
+            "kind": "flow",
+            "id": "N1_OAUTH",
+            "operation": "count",
+            "edge": "enter",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 9,
+            "elapsedMs": 8,
+            "kind": "flow",
+            "id": "N1_OAUTH",
+            "operation": "count",
+            "edge": "return",
+            "error": null,
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            }
+          },
+          {
+            "sequence": 10,
+            "elapsedMs": 9,
+            "kind": "flow",
+            "id": "N1_PHASE",
+            "operation": "action",
+            "edge": "enter",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 11,
+            "elapsedMs": 10,
+            "kind": "flow",
+            "id": "N1_PHASE",
+            "operation": "action",
+            "edge": "return",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 12,
+            "elapsedMs": 11,
+            "kind": "flow",
+            "id": "N1_PHASE",
+            "operation": "count",
+            "edge": "enter",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 13,
+            "elapsedMs": 12,
+            "kind": "flow",
+            "id": "N1_PHASE",
+            "operation": "count",
+            "edge": "return",
+            "error": null,
+            "counters": {
+              "upload": 1,
+              "activation": 1,
+              "receipts": 1
+            }
+          },
+          {
+            "sequence": 14,
+            "elapsedMs": 13,
+            "kind": "flow",
+            "id": "N1_NOTICES",
+            "operation": "action",
+            "edge": "enter",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 15,
+            "elapsedMs": 14,
+            "kind": "probe",
+            "stage": "before",
+            "state": "observed",
+            "newFailures": null,
+            "correlated": null,
+            "position": null,
+            "correlators": [],
+            "sites": [],
+            "guardOrigin": "unknown",
+            "summary": {
+              "consumedTicket": null,
+              "stageApproval": null,
+              "receiptCount": null
+            }
+          },
+          {
+            "sequence": 16,
+            "elapsedMs": 15,
+            "kind": "http",
+            "operation": "notices-get",
+            "edge": "enter",
+            "status": null,
+            "bodySettled": null,
+            "error": null
+          },
+          {
+            "sequence": 17,
+            "elapsedMs": 16,
+            "kind": "http",
+            "operation": "notices-get",
+            "edge": "response",
+            "status": 200,
+            "bodySettled": null,
+            "error": null
+          },
+          {
+            "sequence": 18,
+            "elapsedMs": 17,
+            "kind": "http",
+            "operation": "notices-get",
+            "edge": "return",
+            "status": 200,
+            "bodySettled": true,
+            "error": null
+          },
+          {
+            "sequence": 19,
+            "elapsedMs": 18,
+            "kind": "http",
+            "operation": "notices-post",
+            "edge": "enter",
+            "status": null,
+            "bodySettled": null,
+            "error": null
+          },
+          {
+            "sequence": 20,
+            "elapsedMs": 19,
+            "kind": "flow",
+            "id": "N1_NOTICES",
+            "operation": "action",
+            "edge": "throw",
+            "error": {
+              "name": "Error",
+              "code": null,
+              "site": null
+            },
+            "counters": null
+          },
+          {
+            "sequence": 21,
+            "elapsedMs": 20,
+            "kind": "probe",
+            "stage": "after",
+            "state": "observed",
+            "newFailures": 0,
+            "correlated": null,
+            "position": null,
+            "correlators": [],
+            "sites": [],
+            "guardOrigin": "unknown",
+            "summary": {
+              "consumedTicket": true,
+              "stageApproval": true,
+              "receiptCount": 2
+            }
+          },
+          {
+            "sequence": 22,
+            "elapsedMs": 21,
+            "kind": "flow",
+            "id": "N1_NOTICES",
+            "operation": "count",
+            "edge": "enter",
+            "error": null,
+            "counters": null
+          },
+          {
+            "sequence": 23,
+            "elapsedMs": 22,
+            "kind": "flow",
+            "id": "N1_NOTICES",
+            "operation": "count",
+            "edge": "return",
+            "error": null,
+            "counters": {
+              "upload": 2,
+              "activation": 2,
+              "receipts": 2
+            }
+          },
+          {
+            "sequence": 24,
+            "elapsedMs": 23,
+            "kind": "after",
+            "edge": "enter",
+            "error": null
+          },
+          {
+            "sequence": 25,
+            "elapsedMs": 24,
+            "kind": "after",
+            "edge": "return",
+            "error": null
+          }
+        ],
+        "native": [
+          {
+            "id": "N1_CONNECTION",
+            "status": "pass"
+          },
+          {
+            "id": "N1_OAUTH",
+            "status": "pass"
+          },
+          {
+            "id": "N1_PHASE",
+            "status": "pass"
+          },
+          {
+            "id": "N1_NOTICES",
+            "status": "fail"
+          }
+        ]
+      }
+    }
+  ],
+  "probeControls": [
+    {
+      "id": "OLD_PHASE_IGNORED",
+      "before": {
+        "observation": [
+          {
+            "kind": "failure",
+            "frames": []
+          }
+        ],
+        "calls": [],
+        "business": []
+      },
+      "after": {
+        "observation": [
+          {
+            "kind": "failure",
+            "frames": []
+          }
+        ],
+        "calls": [],
+        "business": []
+      },
+      "expected": {
+        "state": "observed",
+        "newFailures": 0
+      }
+    },
+    {
+      "id": "AMBIGUOUS_TWO_FAILURES",
+      "before": {
+        "observation": [],
+        "calls": [],
+        "business": []
+      },
+      "after": {
+        "observation": [
+          {
+            "kind": "connection-failure",
+            "position": "entry",
+            "frames": []
+          },
+          {
+            "kind": "connection-failure",
+            "position": "approved",
+            "frames": []
+          }
+        ],
+        "calls": [],
+        "business": []
+      },
+      "expected": {
+        "state": "ambiguous",
+        "newFailures": 2
+      }
+    },
+    {
+      "id": "PREFIX_DRIFT",
+      "before": {
+        "observation": [
+          {
+            "kind": "failure",
+            "frames": []
+          }
+        ],
+        "calls": [],
+        "business": []
+      },
+      "after": {
+        "observation": [],
+        "calls": [],
+        "business": []
+      },
+      "expected": {
+        "state": "unavailable",
+        "newFailures": null
+      }
+    }
+  ],
+  "slotControls": {
+    "checks": 5,
+    "observationLimitMsForSynthetic": 1,
+    "normalObservationLimitMs": 1000
+  },
+  "witnessControls": [
+    "roundtrip-exact-bytes-and-hash",
+    "reject-altered-prefixBytes",
+    "reject-altered-prefixSha256"
+  ],
+  "expected": {
+    "accepted": 6,
+    "rejected": 21,
+    "probeChecks": 3,
+    "roundtrips": 6,
+    "witnessRejected": 2,
+    "slotChecks": 5
+  }
+}
