@@ -1,0 +1,18 @@
+{
+  "schema": "AFW-N3-W1-SOURCE-CLOSE/1",
+  "testedHead": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+  "workflowRemoved": ".github/workflows/afw-c2-notices-n3-firstlimit-w1.yml",
+  "action": "Remove only one-use Source W1 workflow; preserve originals3203 and uniqueSource/evidence. No rollback/mutation of production or historical branches.",
+  "reviewPending": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

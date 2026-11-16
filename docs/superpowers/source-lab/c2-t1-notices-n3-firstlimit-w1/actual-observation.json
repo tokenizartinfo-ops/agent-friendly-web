@@ -1,0 +1,28 @@
+{
+  "schema": "AFW-N3-W1-SOURCE-OBSERVATION/1",
+  "testedHead": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
+  "run": 43945121668,
+  "job": 133572642517,
+  "primary": "6cfb0d0827ebe0cf8591d06d09e1ced0d7aedaaa",
+  "outcome": "325efbf73e0fe5ecea0713cf76df6b7d8cecd3b5",
+  "admission": "2fdbd74df7127f13054cd6b72d76a349ebcb9db3",
+  "native4PASS": true,
+  "noticesHTTP": {
+    "get": 200,
+    "post": 200,
+    "bodiesSettled": true
+  },
+  "diagnostic": "beforeNO_ELIGIBLE,afterunavailable,causalunknown; nofirst-refusalclassificationobserved",
+  "prior503NotReproduced": "Only this new occurrence; cause and repair not established; MidenticaltohistoricalC, QAobserverchanged",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
