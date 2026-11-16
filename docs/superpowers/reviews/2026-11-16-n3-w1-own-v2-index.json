@@ -1,0 +1,678 @@
+{
+  "schema": "root-own.firstlimit-w1.v2-complete-index.v1",
+  "status": "DATA_READY_OWN280_NATIVE_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA and OWN RAM only; cloud OWN gate pending Root",
+  "origin": "GitHub API",
+  "allowedAction": "Independent versioned FIRSTLIMIT-W1 v2 receiver/controls/native-DATA; no Source code import/eval/compile/syntax/tests/execution, refs/runs/local files/dependencies/provider/browser/mail/secrets/subagents",
+  "authority": {
+    "rootSeal": "18f7bc92ad395e87042666399e736aa4dffbe278",
+    "supplement": "fea7c4ec837887c87f33720d799fcfa76cdede3f",
+    "contract": "78451c59e98651df91bc641efaa1b9819e4dff2e",
+    "selection": "c1601719648fc4992fe520ef051b89852a6216f5",
+    "outerSchema": "19378e2d858bfb1c60a6368fc614ebf1fad7c875",
+    "mandatoryVectors": "bd8bfae45c75ce498aab5a6bbb7258cdec185e0a"
+  },
+  "nomination": {
+    "schema": "root-own.firstlimit-w1.v2-native-nomination.v1",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "branch": "lab/afw-c2-own-receiver-20261116-notices-n3-firstlimit-w1-v2",
+    "message": "AFW-C2-N3-FIRSTLIMIT-W1-OWN-V2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-own-v2.yml",
+    "job": "c2-notices-n3-firstlimit-w1-own-v2",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "node": "v22.23.4",
+    "runner": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/run-controls.mjs",
+    "proofFile": "firstlimit-w1-own-v2-proof.json",
+    "artifactName": "afw-c2-notices-n3-firstlimit-w1-own-v2-proof"
+  },
+  "selfPath": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/index.json",
+  "selfMode": "100644",
+  "selfBefore": null,
+  "paths": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-vectors.json",
+      "blob": "a2457271d8fbc88fd3ecb0cf383ba61ba9f000c6",
+      "bytes": 21315,
+      "sha256": "4f5ffadc2fd12238fa552fe06a1674df74b9acf37f78a516853ddd170ff14286",
+      "gitBlob": "a2457271d8fbc88fd3ecb0cf383ba61ba9f000c6",
+      "fullReadback": true,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-red.json",
+      "blob": "d979ec3c1097fe2c61f89bae6cce018298719a89",
+      "bytes": 3383,
+      "sha256": "cc6f96497c174c0f689bc67042aea3801183c0b9c7c81d6dbe11c58e2ab6e2f6",
+      "gitBlob": "d979ec3c1097fe2c61f89bae6cce018298719a89",
+      "fullReadback": true,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/trace-reader.mjs",
+      "blob": "cc22a79695471862f36c692db7a31e283b4ee46d",
+      "bytes": 20880,
+      "sha256": "5c9ffa269a401b1708d0bc53d03996d14d0d111e74aa6aec0f5274cdfd4b6953",
+      "gitBlob": "cc22a79695471862f36c692db7a31e283b4ee46d",
+      "fullReadback": true,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/early-results.json",
+      "blob": "5232da087e572cdcf7d9961475897af33881f9a9",
+      "bytes": 5680,
+      "sha256": "d80c2541ee3f267f94f169de69decbd8106c661bfe8c2a921b58c898165bebcb",
+      "gitBlob": "5232da087e572cdcf7d9961475897af33881f9a9",
+      "fullReadback": true,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-controls.mjs",
+      "blob": "6dc836a11e28f143b32cb6323a4869947368083f",
+      "bytes": 431,
+      "sha256": "6f16b8e9cc9ef2e0e947946d97c35e437128cea74d5f7236d01c83b5ff8a83aa",
+      "gitBlob": "6dc836a11e28f143b32cb6323a4869947368083f",
+      "fullReadback": true,
+      "mode": "100644"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/full-input-models.json",
+      "mode": "100644",
+      "blob": "c820817c5e505ff7d233a6a667cc7cdac64ef7fa",
+      "bytes": 4635377,
+      "sha256": "b18c26492cb88b00565b8f920e9080364fdcc8176568d67b3d4ff5880d71b2ce",
+      "gitBlob": "c820817c5e505ff7d233a6a667cc7cdac64ef7fa",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/boundary-data.json",
+      "mode": "100644",
+      "blob": "965f2480b623f0ce18efc3114c2c30c6048711e7",
+      "bytes": 40936,
+      "sha256": "9ac08e19962e08a76e46619516bb25bd5ac63c3c1b404e3dd5e82baaa317d66a",
+      "gitBlob": "965f2480b623f0ce18efc3114c2c30c6048711e7",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/test-results.json",
+      "mode": "100644",
+      "blob": "b9d25287ac4ba67297f086c3cffddb761c778f42",
+      "bytes": 34538,
+      "sha256": "7d99e9fd2e59e4046941bd4d9bc01935e40cf25b5a88317c179f579b07a14ab3",
+      "gitBlob": "b9d25287ac4ba67297f086c3cffddb761c778f42",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/derived-own-regressions.json",
+      "mode": "100644",
+      "blob": "047e46fedf9d8fc8210bb67490d3a94695270f95",
+      "bytes": 1167047,
+      "sha256": "2dd0e9f492f37590e14ba511ef6640bd4275445ec660d61d2195484850dea6d2",
+      "gitBlob": "047e46fedf9d8fc8210bb67490d3a94695270f95",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reader.mjs",
+      "mode": "100644",
+      "blob": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+      "bytes": 59136,
+      "sha256": "a2bc00b500b92dc37f371e040717099a3af670994d3ad66d607530b75be1920e",
+      "gitBlob": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/controls.mjs",
+      "mode": "100644",
+      "blob": "674f1752b17a827f5962165ab3032f4a122a0c44",
+      "bytes": 4375,
+      "sha256": "bc8d041ef7af688cb2967983f018fa220ebc71b4b231b9b6cb7ceac799c4731f",
+      "gitBlob": "674f1752b17a827f5962165ab3032f4a122a0c44",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/source-mandatory-vectors.json",
+      "mode": "100644",
+      "blob": "bd8bfae45c75ce498aab5a6bbb7258cdec185e0a",
+      "bytes": 17556,
+      "sha256": "be94a9381b937ab655e8a0bd652dc4d6bbe2f21b2449b23d49f609ad9a0efe26",
+      "gitBlob": "bd8bfae45c75ce498aab5a6bbb7258cdec185e0a",
+      "fullReadback": true,
+      "dataOnly": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/outer-schema.json",
+      "mode": "100644",
+      "blob": "19378e2d858bfb1c60a6368fc614ebf1fad7c875",
+      "bytes": 30988,
+      "sha256": "3dd4d6e5757c789d284e75e5430774ed2d660a87339b8bfd77d628b3c22c6690",
+      "gitBlob": "19378e2d858bfb1c60a6368fc614ebf1fad7c875",
+      "fullReadback": true,
+      "dataOnly": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/source-selection.json",
+      "mode": "100644",
+      "blob": "c1601719648fc4992fe520ef051b89852a6216f5",
+      "bytes": 2626,
+      "sha256": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+      "gitBlob": "c1601719648fc4992fe520ef051b89852a6216f5",
+      "fullReadback": true,
+      "dataOnly": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/source-contract.json",
+      "mode": "100644",
+      "blob": "78451c59e98651df91bc641efaa1b9819e4dff2e",
+      "bytes": 8674,
+      "sha256": "e6505dd7eb116b724bc4633067afd28882e110fa8aa2271673dccc01a5aaa648",
+      "gitBlob": "78451c59e98651df91bc641efaa1b9819e4dff2e",
+      "fullReadback": true,
+      "dataOnly": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/nomination-supplement.json",
+      "mode": "100644",
+      "blob": "fea7c4ec837887c87f33720d799fcfa76cdede3f",
+      "bytes": 3204,
+      "sha256": "ceab5379cbda1a3ca3a8a709784fee59fc950a6b95b9aadc6b39e60781104e28",
+      "gitBlob": "fea7c4ec837887c87f33720d799fcfa76cdede3f",
+      "fullReadback": true,
+      "dataOnly": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/trace-reader.mjs",
+      "mode": "100644",
+      "blob": "c5efe74261a04e180476650c23a60feb268ca042",
+      "bytes": 19219,
+      "sha256": "d70dd4311d59cfb25f556997bf661e33afc6419c2cdd7a46c25f2546e3412807",
+      "gitBlob": "c5efe74261a04e180476650c23a60feb268ca042",
+      "fullReadback": true,
+      "frozenDefault": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/input-map.json",
+      "mode": "100644",
+      "blob": "204dd3158195c9882e409a008c9eeae232f197f8",
+      "bytes": 550,
+      "sha256": "241fbdd54b41744b3b02299b2ad45fd328b9399bcd379cc929ad3e7dc7469a21",
+      "gitBlob": "204dd3158195c9882e409a008c9eeae232f197f8",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/selection.json",
+      "mode": "100644",
+      "blob": "92ca0cac0e5a522bbc172038da1347707ae23951",
+      "bytes": 16738,
+      "sha256": "9c4bc9a2cdd2ff2312d0beb9b57f935c84b07ffc81eb46619b126c0361adc9a9",
+      "gitBlob": "92ca0cac0e5a522bbc172038da1347707ae23951",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/proof.schema.json",
+      "mode": "100644",
+      "blob": "4999c1c5f1adf22bb17ea087af5b05fc6058b6cc",
+      "bytes": 6882,
+      "sha256": "73c77b0e2da60a43e1021f75f669a720b21b9c0799bc0ed21855011d1722ae43",
+      "gitBlob": "4999c1c5f1adf22bb17ea087af5b05fc6058b6cc",
+      "fullReadback": true
+    },
+    {
+      "path": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-own-v2.yml",
+      "mode": "100644",
+      "blob": "dcea458861a7bcf26bd291273189887e928050fc",
+      "bytes": 1281,
+      "sha256": "738e257dff9d67853d331d74493bc64d4233efa6b539aa8583ebc61dcc403d44",
+      "gitBlob": "dcea458861a7bcf26bd291273189887e928050fc",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/early-index.json",
+      "mode": "100644",
+      "blob": "e503bca5e863d9d225b24bf85f0e3daed256d624",
+      "bytes": 4113,
+      "sha256": "75ae27e56c0ed65673107a0f97350b35ccbb77d0a7205f39c199632f61d65b41",
+      "gitBlob": "e503bca5e863d9d225b24bf85f0e3daed256d624",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/run-controls.mjs",
+      "mode": "100644",
+      "blob": "cf31b0527a3b7c5e6dd8cacb3183cfa0560e2a66",
+      "bytes": 14116,
+      "sha256": "cc9570802409c7b72b2faa0af0e3826d54d5fce0ce2888244daa39eff4c2a6a7",
+      "gitBlob": "cf31b0527a3b7c5e6dd8cacb3183cfa0560e2a66",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/report.json",
+      "mode": "100644",
+      "blob": "4b7e37c3802d52de9f976536e7a98c7c80dac438",
+      "bytes": 12908,
+      "sha256": "e27be17bbeefd6099333e669cf900c61aeb5f82a3a5d3d81bcc6430d4a199095",
+      "gitBlob": "4b7e37c3802d52de9f976536e7a98c7c80dac438",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reversible-diff.json",
+      "mode": "100644",
+      "blob": "4da4a78f7d07752e9025e85faac289e5f8f60cce",
+      "bytes": 374009,
+      "sha256": "26b9ba06c14f74924a5ab3a1c62bf6aabca922b15b6bcfb2abd7a3e411e712c2",
+      "gitBlob": "4da4a78f7d07752e9025e85faac289e5f8f60cce",
+      "fullReadback": true
+    }
+  ],
+  "proposedPathsIncludingSelf": 26,
+  "tree": {
+    "activationParent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "activationBaseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "originalLeaves": 3203,
+    "originalModesAndBlobsPreserved": true,
+    "exactAddedPaths": [
+      ".github/workflows/afw-c2-notices-n3-firstlimit-w1-own-v2.yml",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/boundary-data.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/controls.mjs",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/derived-own-regressions.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/early-index.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/early-results.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/full-input-models.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/index.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/input-map.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-controls.mjs",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-red.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-vectors.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/nomination-supplement.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/outer-schema.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/proof.schema.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reader.mjs",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/report.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reversible-diff.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/run-controls.mjs",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/selection.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/source-contract.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/source-mandatory-vectors.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/source-selection.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/test-results.json",
+      "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/trace-reader.mjs",
+      "docs/superpowers/root-own/c2-notices-n3/models-fix2/trace-reader.mjs"
+    ],
+    "expectedLeaves": 3229,
+    "allAddedModes": "100644",
+    "historicalDefaultBlobUntouched": "c5efe74261a04e180476650c23a60feb268ca042"
+  },
+  "wire": {
+    "outer": "afw.c2-notices-n3.observation.v2",
+    "innerSnapshot": "afw.c2-notices-n3.qa-snapshot.v1",
+    "innerRecord": "afw.c2-notices-n3.causal-record.v1",
+    "selectionHashCanonical": "b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503",
+    "selectionRawFileHash": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+    "normal13Hash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "refinedReasons": [
+      "CAP_PRIVATE_ROOT16",
+      "CAP_PRIVATE_GAP_NEW128",
+      "CAP_PRIVATE_LEASE_NEW128",
+      "CAP_PRIVATE_OTHER"
+    ],
+    "canonicalRestriction": "Only unjoined/unknown eligible0or1; empty leases/promises/errors/events; targetunknown/firstErrornull/cutnull/focusnone. Exact summary reason/shape. Livev2 rejects genericCAP_PRIVATE and calibrationCAP_PRIVATE_LEGACY_SAME_GAP128.",
+    "conditionalHandling": "ngSchema legacy ignores if/then; new semantic guard explicitly enforces the snapshot conditional, and full independent journal replay derives and exactly compares canonical summary. No conditional node is treated as acceptance authority.",
+    "artifact": {
+      "name": "afw-c2-notices-n3-firstlimit-w1",
+      "path": "output/c2-notices-n3-firstlimit-w1.json",
+      "fileName": "c2-notices-n3-firstlimit-w1.json",
+      "expectedCount": 1,
+      "retentionDays": 7,
+      "payloadCapBytes": 24576
+    },
+    "payloadBudget": "Artifact canonicalJSON+LF <=24576UTF8B, including LF. ZIP length and bounded inflater maxOutputLength=24576; full deflate consumption, CRC/name/offset/digest remain strict."
+  },
+  "interfaces": {
+    "causal": [
+      "w1TraceReplay(snapshot)",
+      "w1CausalReplay(recordObject|canonicalNDJSONstring|UTF8Buffer)"
+    ],
+    "full": [
+      "w1Read(input,trusted,sha256,inflateRawSync)",
+      "w1Replay(raw,binding,condition,native)",
+      "w1ApiJoin(input,expected,policy)",
+      "w1ZipPayload(base64,name,inflateRawSync)"
+    ],
+    "controls": "w1AllControls(data,sha256,inflateRawSync)",
+    "callerTrust": "Same explicit separate trusted{expected,manifest,protocolHashes,ledgerBytes,policy}; no untrusted outcome supplies authority. Source final manifest/head/tree/run/job values are not guessed or substituted into synthetic models.",
+    "policy": "Exact five Source step names/commandStep from fea7 supplement, exact W1 sourcebranch/workflow/message/job/CLI and four N3 frame identities; Source head/tree/run/job caller-bound.",
+    "SourceContextPending": true
+  },
+  "bodyNomination": {
+    "sourceBranch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+    "sourceMessage": "AFW-C2-N3-FIRSTLIMIT-W1-ONEUSE-20261116",
+    "sourceWorkflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1.yml",
+    "sourceJob": "c2-notices-n3-firstlimit-w1",
+    "sourceCommand": "node docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/run-c2-notices-n3-firstlimit-w1.mjs",
+    "requiredSteps": [
+      "Read the exact one-use first-limit head",
+      "Use fixed Node",
+      "Install existing locked dependencies",
+      "Observe first notices QA first-limit scope",
+      "Preserve sanitized first-limit diagnostic"
+    ],
+    "commandStep": "Observe first notices QA first-limit scope",
+    "SourceExpectedContext": "Caller-bound Root, no guessed actual manifest/head/tree/run/job fields"
+  },
+  "entrypoints": {
+    "reader": {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reader.mjs",
+      "mode": "100644",
+      "blob": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+      "bytes": 59136,
+      "sha256": "a2bc00b500b92dc37f371e040717099a3af670994d3ad66d607530b75be1920e",
+      "gitBlob": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+      "fullReadback": true
+    },
+    "trace": {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/trace-reader.mjs",
+      "blob": "cc22a79695471862f36c692db7a31e283b4ee46d",
+      "bytes": 20880,
+      "sha256": "5c9ffa269a401b1708d0bc53d03996d14d0d111e74aa6aec0f5274cdfd4b6953",
+      "gitBlob": "cc22a79695471862f36c692db7a31e283b4ee46d",
+      "fullReadback": true
+    },
+    "controls": {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/controls.mjs",
+      "mode": "100644",
+      "blob": "674f1752b17a827f5962165ab3032f4a122a0c44",
+      "bytes": 4375,
+      "sha256": "bc8d041ef7af688cb2967983f018fa220ebc71b4b231b9b6cb7ceac799c4731f",
+      "gitBlob": "674f1752b17a827f5962165ab3032f4a122a0c44",
+      "fullReadback": true
+    },
+    "runner": {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/run-controls.mjs",
+      "mode": "100644",
+      "blob": "cf31b0527a3b7c5e6dd8cacb3183cfa0560e2a66",
+      "bytes": 14116,
+      "sha256": "cc9570802409c7b72b2faa0af0e3826d54d5fce0ce2888244daa39eff4c2a6a7",
+      "gitBlob": "cf31b0527a3b7c5e6dd8cacb3183cfa0560e2a66",
+      "fullReadback": true
+    },
+    "workflow": {
+      "path": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-own-v2.yml",
+      "mode": "100644",
+      "blob": "dcea458861a7bcf26bd291273189887e928050fc",
+      "bytes": 1281,
+      "sha256": "738e257dff9d67853d331d74493bc64d4233efa6b539aa8583ebc61dcc403d44",
+      "gitBlob": "dcea458861a7bcf26bd291273189887e928050fc",
+      "fullReadback": true
+    }
+  },
+  "inputMap": {
+    "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/input-map.json",
+    "mode": "100644",
+    "blob": "204dd3158195c9882e409a008c9eeae232f197f8",
+    "bytes": 550,
+    "sha256": "241fbdd54b41744b3b02299b2ad45fd328b9399bcd379cc929ad3e7dc7469a21",
+    "gitBlob": "204dd3158195c9882e409a008c9eeae232f197f8",
+    "fullReadback": true
+  },
+  "closure": {
+    "files": [
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-vectors.json",
+        "bytes": 21315,
+        "sha256": "4f5ffadc2fd12238fa552fe06a1674df74b9acf37f78a516853ddd170ff14286",
+        "gitBlob": "a2457271d8fbc88fd3ecb0cf383ba61ba9f000c6"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-red.json",
+        "bytes": 3383,
+        "sha256": "cc6f96497c174c0f689bc67042aea3801183c0b9c7c81d6dbe11c58e2ab6e2f6",
+        "gitBlob": "d979ec3c1097fe2c61f89bae6cce018298719a89"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/trace-reader.mjs",
+        "bytes": 20880,
+        "sha256": "5c9ffa269a401b1708d0bc53d03996d14d0d111e74aa6aec0f5274cdfd4b6953",
+        "gitBlob": "cc22a79695471862f36c692db7a31e283b4ee46d"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/early-results.json",
+        "bytes": 5680,
+        "sha256": "d80c2541ee3f267f94f169de69decbd8106c661bfe8c2a921b58c898165bebcb",
+        "gitBlob": "5232da087e572cdcf7d9961475897af33881f9a9"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/literal-controls.mjs",
+        "bytes": 431,
+        "sha256": "6f16b8e9cc9ef2e0e947946d97c35e437128cea74d5f7236d01c83b5ff8a83aa",
+        "gitBlob": "6dc836a11e28f143b32cb6323a4869947368083f"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/full-input-models.json",
+        "bytes": 4635377,
+        "sha256": "b18c26492cb88b00565b8f920e9080364fdcc8176568d67b3d4ff5880d71b2ce",
+        "gitBlob": "c820817c5e505ff7d233a6a667cc7cdac64ef7fa"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/boundary-data.json",
+        "bytes": 40936,
+        "sha256": "9ac08e19962e08a76e46619516bb25bd5ac63c3c1b404e3dd5e82baaa317d66a",
+        "gitBlob": "965f2480b623f0ce18efc3114c2c30c6048711e7"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/test-results.json",
+        "bytes": 34538,
+        "sha256": "7d99e9fd2e59e4046941bd4d9bc01935e40cf25b5a88317c179f579b07a14ab3",
+        "gitBlob": "b9d25287ac4ba67297f086c3cffddb761c778f42"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/derived-own-regressions.json",
+        "bytes": 1167047,
+        "sha256": "2dd0e9f492f37590e14ba511ef6640bd4275445ec660d61d2195484850dea6d2",
+        "gitBlob": "047e46fedf9d8fc8210bb67490d3a94695270f95"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reader.mjs",
+        "bytes": 59136,
+        "sha256": "a2bc00b500b92dc37f371e040717099a3af670994d3ad66d607530b75be1920e",
+        "gitBlob": "c16a77d93cc6cf75338db5e3c27e823669706b3e"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/controls.mjs",
+        "bytes": 4375,
+        "sha256": "bc8d041ef7af688cb2967983f018fa220ebc71b4b231b9b6cb7ceac799c4731f",
+        "gitBlob": "674f1752b17a827f5962165ab3032f4a122a0c44"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/source-mandatory-vectors.json",
+        "bytes": 17556,
+        "sha256": "be94a9381b937ab655e8a0bd652dc4d6bbe2f21b2449b23d49f609ad9a0efe26",
+        "gitBlob": "bd8bfae45c75ce498aab5a6bbb7258cdec185e0a"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/outer-schema.json",
+        "bytes": 30988,
+        "sha256": "3dd4d6e5757c789d284e75e5430774ed2d660a87339b8bfd77d628b3c22c6690",
+        "gitBlob": "19378e2d858bfb1c60a6368fc614ebf1fad7c875"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/source-selection.json",
+        "bytes": 2626,
+        "sha256": "91490adc8fa64c654e4706cdbc7fe6c71596b4c323cc9788a5170a746afade07",
+        "gitBlob": "c1601719648fc4992fe520ef051b89852a6216f5"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/source-contract.json",
+        "bytes": 8674,
+        "sha256": "e6505dd7eb116b724bc4633067afd28882e110fa8aa2271673dccc01a5aaa648",
+        "gitBlob": "78451c59e98651df91bc641efaa1b9819e4dff2e"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/nomination-supplement.json",
+        "bytes": 3204,
+        "sha256": "ceab5379cbda1a3ca3a8a709784fee59fc950a6b95b9aadc6b39e60781104e28",
+        "gitBlob": "fea7c4ec837887c87f33720d799fcfa76cdede3f"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3/models-fix2/trace-reader.mjs",
+        "bytes": 19219,
+        "sha256": "d70dd4311d59cfb25f556997bf661e33afc6419c2cdd7a46c25f2546e3412807",
+        "gitBlob": "c5efe74261a04e180476650c23a60feb268ca042"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/input-map.json",
+        "bytes": 550,
+        "sha256": "241fbdd54b41744b3b02299b2ad45fd328b9399bcd379cc929ad3e7dc7469a21",
+        "gitBlob": "204dd3158195c9882e409a008c9eeae232f197f8"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/selection.json",
+        "bytes": 16738,
+        "sha256": "9c4bc9a2cdd2ff2312d0beb9b57f935c84b07ffc81eb46619b126c0361adc9a9",
+        "gitBlob": "92ca0cac0e5a522bbc172038da1347707ae23951"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/proof.schema.json",
+        "bytes": 6882,
+        "sha256": "73c77b0e2da60a43e1021f75f669a720b21b9c0799bc0ed21855011d1722ae43",
+        "gitBlob": "4999c1c5f1adf22bb17ea087af5b05fc6058b6cc"
+      },
+      {
+        "path": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-own-v2.yml",
+        "bytes": 1281,
+        "sha256": "738e257dff9d67853d331d74493bc64d4233efa6b539aa8583ebc61dcc403d44",
+        "gitBlob": "dcea458861a7bcf26bd291273189887e928050fc"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/early-index.json",
+        "bytes": 4113,
+        "sha256": "75ae27e56c0ed65673107a0f97350b35ccbb77d0a7205f39c199632f61d65b41",
+        "gitBlob": "e503bca5e863d9d225b24bf85f0e3daed256d624"
+      }
+    ],
+    "count": 22,
+    "sha256": "587718b84a4d58a42c6ce6375a866d3b8dd4c8fa038b34ac00a49608041d6df4",
+    "rule": "SHA256(JSON.stringify(ordered entries {path,bytes,sha256,gitBlob}),noLF)",
+    "selfRunnerReportDiffIndexExcluded": true
+  },
+  "nativeSelection": {
+    "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/selection.json",
+    "mode": "100644",
+    "blob": "92ca0cac0e5a522bbc172038da1347707ae23951",
+    "bytes": 16738,
+    "sha256": "9c4bc9a2cdd2ff2312d0beb9b57f935c84b07ffc81eb46619b126c0361adc9a9",
+    "gitBlob": "92ca0cac0e5a522bbc172038da1347707ae23951",
+    "fullReadback": true
+  },
+  "proofSchema": {
+    "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/proof.schema.json",
+    "mode": "100644",
+    "blob": "4999c1c5f1adf22bb17ea087af5b05fc6058b6cc",
+    "bytes": 6882,
+    "sha256": "73c77b0e2da60a43e1021f75f669a720b21b9c0799bc0ed21855011d1722ae43",
+    "gitBlob": "4999c1c5f1adf22bb17ea087af5b05fc6058b6cc",
+    "fullReadback": true
+  },
+  "controlSummary": {
+    "total": 280,
+    "uniqueIds": 280,
+    "groups": {
+      "ownLiterals": 28,
+      "sourceMandatory": 22,
+      "derivedOwn": 155,
+      "full": 65,
+      "boundaries": 10,
+      "total": 280
+    },
+    "idsHash": "9cd977b1ba947fcf9fb1e057d67687e3c4ec0f047c082d0b2079bf452d7aad61",
+    "ramFailed": 0,
+    "actualNativeImportGraph": false,
+    "SourceImplementationExecuted": false
+  },
+  "results": {
+    "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/test-results.json",
+    "mode": "100644",
+    "blob": "b9d25287ac4ba67297f086c3cffddb761c778f42",
+    "bytes": 34538,
+    "sha256": "7d99e9fd2e59e4046941bd4d9bc01935e40cf25b5a88317c179f579b07a14ab3",
+    "gitBlob": "b9d25287ac4ba67297f086c3cffddb761c778f42",
+    "fullReadback": true
+  },
+  "report": {
+    "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/report.json",
+    "mode": "100644",
+    "blob": "4b7e37c3802d52de9f976536e7a98c7c80dac438",
+    "bytes": 12908,
+    "sha256": "e27be17bbeefd6099333e669cf900c61aeb5f82a3a5d3d81bcc6430d4a199095",
+    "gitBlob": "4b7e37c3802d52de9f976536e7a98c7c80dac438",
+    "fullReadback": true
+  },
+  "fullBeforeAfterDiff": {
+    "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/reversible-diff.json",
+    "mode": "100644",
+    "blob": "4da4a78f7d07752e9025e85faac289e5f8f60cce",
+    "bytes": 374009,
+    "sha256": "26b9ba06c14f74924a5ab3a1c62bf6aabca922b15b6bcfb2abd7a3e411e712c2",
+    "gitBlob": "4da4a78f7d07752e9025e85faac289e5f8f60cce",
+    "fullReadback": true
+  },
+  "reversion": {
+    "allNewVersionedPaths": true,
+    "oldV1DefaultCodeAndActualReceiptsUntouched": true,
+    "fullC5AndFcfeBeforeAfterTexts": true,
+    "bidirectionalExact": true
+  },
+  "truthBoundary": {
+    "coherentSubstitution": "ROOT16->GAP_NEW128 everywhere under a correctly bound producer-shaped wire is STRUCTURALLY VALID and explicitly accepted. OWN cannot authenticate truth of a private Source latched first-fault code from public wire; Source fixed-producer callback tests establish that.",
+    "cause": "No historical first-limit, initiating error, epoch reset, POST503 cause, target success, physical promise pending, global drain, nativebusiness capability, Task1 or PCoff conclusion.",
+    "privateEquality": "Public ordinal/retention/compiled metadata joins do not authenticate hiddenp2versusinternalrun, private object graph/crossrealm continuity or absent raw compiler/probe/TAP inputs."
+  },
+  "proofContract": {
+    "schema": "root-own.firstlimit-w1.v2-native-proof.v1",
+    "marker": "AFW_FIRSTLIMIT_W1_OWN_V2_PROOF",
+    "artifact": "afw-c2-notices-n3-firstlimit-w1-own-v2-proof",
+    "file": "firstlimit-w1-own-v2-proof.json",
+    "maxUTF8IncludingLF": 24576,
+    "frame": "Single marker+space+canonicalJSON+LF; TAP may prefix stdout with '# ', Root unwraps only exact transport. Artifact solefile is identical canonicalJSON+LF.",
+    "labels": {
+      "ownModelsExecuted": true,
+      "actualSourceExecution": false,
+      "finalSourceBinding": false,
+      "SourceQualified": false,
+      "Task1Pass": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    },
+    "rootIndependentJoin": "Exact280 TAP IDs/order/results and zero fail/cancel/skip/todo/extra/missing/duplicate; actual OWN API/head/tree/run/attempt/job/step; six bindings/selection/schema/closure and raw artifact ZIPCRC/digest/fullDeflate/payload."
+  },
+  "pending": [
+    "Root FULLread/hash/tree native admission",
+    "Actual OWN280 native ESM covering, independent API/TAP/proof/ZIP verification and closure",
+    "Fresh scoped independent review",
+    "Root real Source caller binding and authorized capture if later admitted; Source business not authorized by this packet"
+  ],
+  "ownModelsExecuted": false,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "refsCreated": 0,
+  "runsCreated": 0,
+  "filesCreated": 0,
+  "dependenciesInstalled": 0,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
