@@ -1,0 +1,56 @@
+{
+  "schema": "afw.c2-notices-n3.root-bounded-prefix-ruling.v1",
+  "atUTC": "2026-11-16 15:00:37 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "earlySeal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe"
+  },
+  "finding": {
+    "basis": "Source author concrete TEXT trace only, no Source execution",
+    "observedPlan": "Original targeted root/parent/child abort path has 31 events including cut before extra late leaf checks; naive 24-event projection would empty CAP_SNAPSHOT.",
+    "disposition": "Do not execute actual C against a producer known unable to preserve its target path."
+  },
+  "decision": "A deterministic bounded focus projection may omit listed optional observations only while declaring joined/prefix/PROJECTION_GAP. This clarifies original incomplete-coverage policy, does not increase any cap or permit complete after omission.",
+  "selection": "Choose focus and scope FIRST recorded error over the full bounded private ledger before pruning. Never change focus to fit. Keep original sourceSequence values and relative observation order; no crosssnapshot/realm join.",
+  "mandatoryWhenActuallyObserved": [
+    "scope-enter, first target-enter, selected pair-enter, target-return/throw and first logical-return/throw",
+    "FIRST scope-error event and earliest focused check-threw event, including exact error alias relationship",
+    "Exact selected observeOwnerPhasePair call-returned Promise first retained and settlement observations",
+    "First closed-transition and its first close-call for each root/outer/target-pair clock with an observed transition",
+    "First abort observation for each actual selected site/lease/cause combination",
+    "At least one actual selected child observation sufficient for the declared public focus mode, when a focus child exists",
+    "snapshot-cut"
+  ],
+  "optionalOmissionOrder": [
+    "Nonpair promise rows and their retained/settlement events",
+    "Repeated close-call and repeated abort observations",
+    "Secondary check-threw observations that are neither scope first-error nor selected earliest child check",
+    "Child-finally observations only if still necessary"
+  ],
+  "projectionRules": [
+    "Any omission of an already observed relevant event or nonpair promise sets prefix/PROJECTION_GAP, including if target returned and pair settled.",
+    "Close all remaining table/event references; reindex only public projected ordinals deterministically from actual retained identity associations. Preserve exact aliases and private first-error identity; never manufacture or overwrite a fact.",
+    "Missing settlement observations mean unobserved, not physical pending or native drain. Missing first-close means unobserved; cannot be relabelled open.",
+    "No new RPC/getter/context/authority read or reaction. Test-owned input counters may measure supplied real-callback notes; no new public diagnostic capability.",
+    "If mandatory set plus cut exceeds24 events or full canonical record plusLF exceeds6144UTF8B, emit explicit unknown/unjoined CAP_SNAPSHOT; never trim a mandatory event into joined-complete.",
+    "All private caps, 32768B journal,128 records,24576B outcome, original clocks and Source business behaviour remain unchanged."
+  ],
+  "proofBoundary": "Wire can check remaining graph consistency and explicit deficit, not authenticate that a known producer secretly omitted nothing. A coherently unreported omission cannot be diagnosed from ordinal graph alone. Pinned producer plus actual callback/reducer controls establish the declared projection policy.",
+  "requiredEvidence": "Persist literal31->24 and late-leaf cases before reducer code, coherent transports and worst exact bytes. Tooling cloud must execute actual original callbacks plus reducer and report actual recorded/projected counts, preserved first error/focus/p2, prefix classification and unchanged original effects before a separate C gate.",
+  "SourceExecutionAuthorizedHere": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
