@@ -1,0 +1,40 @@
+{
+  "schema": "AFW-C2-FULL-C230-OWN-CLOSE-READBACK/1",
+  "head": "fcd3a2f0a68d03454df549f80cfdab11861ad686",
+  "tree": "827657b3293f5dd6bb2be0678e3981ce42162392",
+  "parent": "2f00938798e2fd5c6e3d8f5268c0827a972ca643",
+  "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3",
+  "originals": 3203,
+  "leaves": 3229,
+  "workflowRemoved": true,
+  "reviewPending": true,
+  "SourceExecuted": false,
+  "verified": true,
+  "closeHeadRuns": 0,
+  "MainAndHistoricalUnchanged": true,
+  "receipts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/actual-observation.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4af87af3e3b8f36ab034ae477dd4f6e9ae553c14"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3/closed.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "61ac4c901397d2a4419a7529f90eeffa9ec065ec"
+    }
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
