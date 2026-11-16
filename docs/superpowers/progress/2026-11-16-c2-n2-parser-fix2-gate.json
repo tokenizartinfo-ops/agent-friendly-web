@@ -1,0 +1,84 @@
+{
+  "schema": "afw.c2-n2-parser-fix2.root-gate.v1",
+  "atUTC": "2026-11-16 13:15:45 UTC",
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "one tooling-only GitHub Actions graph",
+  "ORIGIN": "GitHub API",
+  "RESOURCE_TYPE": "one-use parser lab branch/workflow",
+  "RESOURCE_ID": "lab/afw-c2-source-20261116-n2-parser-fix2",
+  "ALLOWED_ACTION": "one actual native15-case old/newparser/logger/slot regression run; preserve proof and close",
+  "ROLLBACK": "remove only newworkflow/preserveoriginal3203+allDATA+receipts; no product/runtime mutations",
+  "prepared": {
+    "head": "95b123baf77c24be1aaaafd6a578e7949ab4eeb0",
+    "tree": "ae22e373aa356fa4d0167158068265e94a34d8c5",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-n2-parser-fix2",
+    "originals": 3203,
+    "added": 10,
+    "leaves": 3213,
+    "activated": false,
+    "businessWorldExecuted": false
+  },
+  "packet": "35211fc624e7c2eb17639f93976c9b0f0469ddfd",
+  "index": "badd1360dab866369b99a423348ce4d25a281a62",
+  "round": 2,
+  "maxRounds": 5,
+  "findingReport": "672f35f69b215defe77d5961cf43f049250d1106",
+  "finding": "P2 F1 NOTICES settlement must require baseline/before even in timeout prefix",
+  "newReader": "280fa796ad74d4451cab3d84e230d37dd31bad11",
+  "originalReader": "09e1bd61a6f132d1a7d029535d4b34b67ef42524",
+  "reversibles": [
+    {
+      "path": "n2-reader.mjs",
+      "forward": true,
+      "reverse": true
+    },
+    {
+      "path": "n2-controls-old.mjs",
+      "forward": true,
+      "reverse": true
+    }
+  ],
+  "all15BodyMetadataHashChecksPassed": true,
+  "expectedIDs": [
+    "P2_ADMISSION",
+    "P2_NO_BASELINE_THROW",
+    "P2_BASELINE_NO_BEFORE_THROW",
+    "P2_NO_BASELINE_RETURN",
+    "P2_BASELINE_NO_BEFORE_RETURN",
+    "P2_OPEN_BEFORE_BASELINE",
+    "P2_OPEN_BASELINE",
+    "P2_GET_ENTER_PENDING",
+    "P2_GET_BODY_PENDING",
+    "P2_POST_ENTER_PENDING",
+    "P2_POST_BODY_PENDING",
+    "P2_SETTLED_FAILURE_PREFIX",
+    "P2_SETTLED_SUCCESS_PREFIX",
+    "P2_EXISTING_CONTROLS_OLD",
+    "P2_EXISTING_CONTROLS_NEW"
+  ],
+  "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-n2-parser-fix2/run-controls.mjs",
+  "limits": {
+    "Node": "22.23.4",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "proofBytes": 8192,
+    "retentionDays": 7
+  },
+  "diagnosticToolingWillExecute": true,
+  "sourceBusinessWillExecute": false,
+  "oldN2CaptureWillNotRerun": true,
+  "normal13Frozen": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
