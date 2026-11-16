@@ -212,3 +212,14 @@ Rootruling PhaseA mínima: NORMALS10/PH/OP/WORK sincompilemarkers/workertrace/po
 ACTIVO /root/c2_owner_stages_impl implementa N1DATA brief3a380eab1707df6689b4c53d6acd3abb0a59a229, pathdocs/superpowers/briefs/2026-11-16-c2-first-notices-n1-data.md. Próximonominationlab/afw-c2-source-20261116-t1-notices-n1, msgAFW-C2-T1-NOTICES-N1-ONEUSE-20261116,WF.github/workflows/afw-c2-notices-n1.yml/jobc2-notices-n1/prefixdocs/superpowers/source-lab/c2-t1-notices-n1/. SóloDATA, Rootconsumer/gates después. Ningúnref/runN1 aún. TodosSource/OWNlabsanterioresCLOSED.
 
 NoSourceeval/import/compile/syntax/test/localfiles/deps niRootrealruntime/CF/browser/key/OTP/mail/Max. Noownerquestionsantes08:30Argentina. Rootcontinúaautónomo, SourceQualified/Task1Pass/sieteclaimsfalse, Task2nodispatch.
+
+
+## Checkpoint 2026-11-16 10:17:16 UTC — N1 observer y receptor independiente en preparación
+
+Rootleyó completos/hashes9DATA+runner/WF/supplement/overlay. Overlay905cb136 S07d4db→6f46 yS08de8a→50bf reversible ambos sentidos yexact4editsNode+append; S10/PH/OP/WORK normales sininstrumentación nueva. Sourcepacketfinalpendiente /root/c2_owner_stages_impl. Ownoriginalreceiver /root/c2_v2_own_receiver_fix1 activo, briefe8c7ecd23515c92d211285693054e3ecc0b50b74; explícita N1nomination, sinreusaridentidadnextGET, controlespropiosAPI/log/schema/custody/ZIP/journal/probe.
+
+RevisiónestáticaSourceReader3a940 encontrócompleteHTTPentered sinterminalantesactionthrow. Ronda1/5 originalimplementador, ledger5ff22a759339c297b87d6257024b5ab660346047: literalJSONnegative21ANTESguard en5f867b41157f13c7906b3c5f26c073d55dea176b; readerddf8b886f75330144be158c799513f3c81cf08e4, controls403a1145, schema5830b573, contract2a7ac8df. Rootguardtextualverificado, actualRED/PASSaúnNO; coveringhelpercloudpendiente. Controlesesperados6accepted21rejected3probe6roundtrip2witness5slot. TimeoutHTTPopen solo honestprefix.
+
+Runner44a5ce1f/WFf525a641/supplement4c558caaff6158634610fa84d9b48b8df9b221a4. Capturaválida exactamente4frames SYNTHETIC→DEPENDENCY_CONTROL→CUSTODY→OUTCOME; cualquierFRONTIERfatalinvalida. ArtifactexactOUTCOME+LF. Losprobes seguros sonproyecciónSourceemitida, noRootreconstrucción deactualprefixprivadoausente; correlatednull/guardOriginunknown. Ambasimplementaciones testsintéticosindependientes,preservarlímiteepistémico.
+
+AúnningúnN1ref/run niOWNnewref/run; laboratoriosanterioresCLOSED. Source13/index26b/producerfullc230 FROZEN, Task2sinDispatch. NoCF/runtime/browser/OTP/keys/mail/Max niSourceejecuciónlocal. Ownernointervenciónantes11:30UTC/08:30Argentina. SourceQualified/Task1Pass/sieteclaimsfalse.
