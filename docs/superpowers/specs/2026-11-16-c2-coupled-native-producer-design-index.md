@@ -1,0 +1,18 @@
+# C2 · Immutable design index
+
+AFW / tokenizartinfo-ops/agent-friendly-web / GitHub Source DATA / origin https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web. Resource: two UTF-8 Markdown design blobs and this unattached index; authorized action: bounded public GitDB reads + design DATA blobs. Rollback: abandon these blobs. No product/ref/Core/Main/PR/run/runtime action.
+
+Logical document: docs/superpowers/specs/2026-11-16-c2-coupled-native-producer-design.md. Read in order; segment 2 continues segment 1.
+
+| Segment | Git blob | UTF-8 bytes | SHA-256 |
+|---|---|---:|---|
+| 1. Owner continuations, factual finite_prearm, Setup and material | 64c9a109750940d820a20c9dd1dcedcddc64ee01 | 24370 | 639c79749132eb04378323810ddced835f907a9c97558b32759381de1b79165b |
+| 2. Original native parent, fixed guard, alarm handoff and integration | 9f5a03c2b6f8e99bf7340d2890ddb94ccb15bd06 | 24200 | 39236540433dd6a5ccc588a4c0e016181626d9c38def3ed862f912d840178ba7 |
+
+Exact brief 2d8c014043f48c72ce3ce79aeeb7b581c0bc1e12; closed product fc65eea04e956919735f2a965154d2456ced288c/tree 70238dca64e2195d91bd2b088916f841ea7d6494; Core 3201 / SHA256 aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703; Main 0c9c475b3ebaa970fc11d628b40e50a90cceb727. These are the design's immutable inputs. PH 7eb8f287; OP 152e730f; SF c2821f1b; SET 34285e7c; PT fa1cb012; CTL 18996dc3; CH b77bba63; RED 6ce7798e; WR c0e3551c; stage scope 068d35c2. Exact additional pins: closed-prearm DATA 504fa988c4e6f5db0e4d21c3da32cb69017bc2e8, full configuration 57ce0b4eeffadcf7e34946da3444e88b2bb437ee, initial alarm 0a04ae3a4d74c2c7939b1654683054b1d5d751d4, owner cleanup 1a5a2583d266179cdd89f799c64199f29044fec5, finite guard 0e4a6f059c5e094409473f99fead676fcf92cd6d, compiled QA finite mount 1f1e5b95776b189fc8d952930467e6ff99c233c3, M mount 15441b6c0c779f733db65a3b59a3a9e1738d19dc, SQL monitor writer 703b9d3cbb04bc5effff3f4ef8276cdb4cb95803. Other full existing Source aliases: 0c3ce18b3765bf1ed5148c9e846c2fe2e67931ef, confirmed against the closed tree.
+
+Builder-check focus: (1) strict same-source finite M/QA build, historical configs vs actual deployment IDs, owner tickets+real SENDs and factual phase, (2) constructor/primitive retention including nested timeouts, two-readback and actual queued SQL fences, (3) restore coverage with original alarm takeover, no lost owner SDK/fence work, no alternate grant from historical consent. Preserve source-only pseudocode status. Future implementation requires complete fixed producer source as DATA before Core may change.
+
+Two consequential qualification questions remain; design chooses a route for each. A. Can the compiled native Workflow provide its completed witness-step output to the fixed actor and can its narrowly scoped callback reads interleave without cycles, all within the original clocks? Failure closes setup/launch; no refreshed deadline. B. Does the sourced, bounded provider history plus retained pre-publication anchor uniquely attest each required historical closed deployment and terminal pending writer? Ambiguity closes the corresponding material/restore output. Builder must demonstrate both through the specified compiled path; a synthetic pass does not establish remote latency or current custody. The future owner's explicit finite-scope authorization (text in segment 2) and independently qualified eligible custody are real, separate prerequisites. No current owner consent, readiness, deployed service or PC-off result is claimed.
+
+historicalCauseProven=false; receiptAuthenticated=false; operationalReadiness=false; completePackage=false; PCoff=false; globalNativeDrainVerified=false; sdkNamespaceEmptyVerified=false.
