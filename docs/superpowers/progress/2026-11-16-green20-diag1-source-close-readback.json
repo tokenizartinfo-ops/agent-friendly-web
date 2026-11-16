@@ -1,0 +1,32 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-SOURCE-CAPTURE-CLOSE-READBACK/1",
+  "timestampUTC": "2026-11-16 23:40:18 UTC",
+  "testedHead": "6e41d44919d86f0bacc97edab022460449316987",
+  "closedHead": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+  "closedTree": "35cffb578a96cda48b75e6236cdbcd1cd175ccea",
+  "primary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
+  "outcome": "f39f7e43c4010acbaca7a679d61dbe048da24688",
+  "ownAdmission": "a9993d7411d0a943d2f247915d91ef17b0b38f09",
+  "receipt": "a20ad14ff24ac2b95856f8dbabc5a4091c96b463",
+  "leafCount": 3229,
+  "original3203Unchanged": true,
+  "other24SourceLeavesUnchanged": true,
+  "onlyWorkflowRemoved": true,
+  "twoEvidenceLeavesAdded": true,
+  "mainUnchanged": true,
+  "historicalUnchanged": true,
+  "closeHeadRuns": 0,
+  "status": "DIAGNOSTIC_COMPLETE_SOURCE_QUALIFICATION_INCOMPLETE",
+  "SourceExecuted": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
