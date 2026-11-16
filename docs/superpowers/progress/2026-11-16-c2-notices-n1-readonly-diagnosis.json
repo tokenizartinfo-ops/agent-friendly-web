@@ -1,0 +1,372 @@
+{
+  "schema": "afw.c2-notices-n1.readonly-diagnosis.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "mode": "READ_ONLY_DIAGNOSIS",
+  "authority": {
+    "brief": "8d225c29edc320192e792c503cc91260366761fe",
+    "allowed": "BoundedimmutableDATAreads; ONLYthissane report/recommendationblob+FULLreadback; no implementation/executableblob/ref/run/Sourceexecution."
+  },
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "sourceIndex": {
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7"
+    },
+    "packet": "d9762f018568fedf9080985781c7fb08b36707ca",
+    "runId": "43852706603",
+    "attempt": 1,
+    "jobId": 133249068774,
+    "head": "e10c4f40d63fba5f13e1edbb6a8021d04b26f778",
+    "tree": "2e46b839f6fb7bd4dd0b844d7110fb4e6a160f94",
+    "closedHead": "02dbbeea3659033fc66539a081b766c85d163e01",
+    "closedTree": "6065eab879e451accf935e8471dc642a641bd15a",
+    "closure": "Root reportsnewWFremoved/original3203+modes/Main/historyunchanged/0closeheadruns; no re-pollhere."
+  },
+  "evidence": {
+    "primary": "a208645ffbbd0c830134f8c79b3234667ef4cd95",
+    "exactSafeOutcome": "14ea40add7cec80448a8c2029db49cac210e06ff",
+    "receiver": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+    "review": "bbfcf80ac81a9ce50443b75bb19c4da87db63965",
+    "rootNativeChecks": 189,
+    "journal": {
+      "records": 27,
+      "bytes": 4364,
+      "sha256": "cfdaf4eabbd7be3166c431518e47b18cca30de98c72ce40ad828d56935ae1f88",
+      "stable": true
+    },
+    "artifact": {
+      "payloadBytes": 8755,
+      "payloadSha256": "ba603c9b42d7d97970b4618d2b77dac003a927081310d3dc3700768e30153e3c"
+    },
+    "use": "Readsafeimmutableprimary/outcomeonly. No rawlogs/artifactrefetch, no historicalrawpositive reconstruction."
+  },
+  "ruling": "N1 reproduces noticesPOSTfailure with NORMALcompiledS10/PH/OP/WORK, so prior nextGETpolling/compiledmarkers are unnecessary for this failure. GET200 took24041ms; POST503 took30005ms, consistentwith30s incomingwindow but not exactguardproof. Uniqueafterprobe reportsactivation-observed yetcorrelatednull/guardOriginunknown. Sourcecode narrows that frontier to freshrecheck, receipt construction or finish/sync/readback before receipt-recorded; no exactleaf justified. Preservepartialstate and diagnose, no Sourcepatch/budgetraise/retry.",
+  "observed": [
+    {
+      "id": "native",
+      "fact": "CONNECTION/OAUTH/PHASEactualnativePASS; NOTICESnativeFAIL AssertionError/ERR_ASSERTION atD08:47:12. Countsactualreturned1/1/1 afterfirst3;2/2/1 afterNOTICES. AFTERreturned."
+    },
+    {
+      "id": "timing",
+      "fact": "NOTICESaction48459→102542ms; beforeprobe48491; GETenter48491/response72532/bodyreturn72534 actual200; POSTenter72535/response102540/bodyreturn102541 actual503. Individualresponseelapsed GET24041ms/POST30005ms."
+    },
+    {
+      "id": "probe",
+      "fact": "Afterprobe102571observed exactly1newconnection-failurepositionactivation-observed; nocorrelators/sites; correlatednull/guardOriginunknown. Summarycurrentnoticesticketconsumedtrue/noticesstageApprovaltrue/receiptCount1."
+    },
+    {
+      "id": "capture",
+      "fact": "Actualhelpers6/21/3/6/2/5; ENOENTcontrolPASS; normalchildexit1/nosignal/noparenttimeout/stdout6075B SHA180fa1e49b9c152a5f7a49662aec00a2db409526402cc4259a32b25e44dbca23/stderr0. Actual3custodylaunches/processes3/owncleanuptrue. JobSUCCESSmeanscaptureonly."
+    },
+    {
+      "id": "scope",
+      "fact": "N1doesnotrunmonitor/finiteGET/finitePOST/othernegatives/mutant/reg11. No realprovider/runtimepublication is evidenced by syntheticsendcounters."
+    }
+  ],
+  "sourcePins": [
+    {
+      "id": "S00",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "originalBaseBefore": {
+        "blob": "7eb8f28760de60f143e487eeb6988705059a0a44",
+        "bytes": 126504
+      },
+      "currentNormal": {
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      }
+    },
+    {
+      "id": "S01",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "originalBaseBefore": {
+        "blob": "152e730f83af7ef063b6b1db89f8b0a779c2b60e",
+        "bytes": 45255
+      },
+      "currentNormal": {
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      }
+    },
+    {
+      "id": "S08",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "originalBaseBefore": null,
+      "currentNormal": {
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+      }
+    },
+    {
+      "id": "S09",
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "originalBaseBefore": {
+        "blob": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+        "bytes": 57864
+      },
+      "currentNormal": {
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+      }
+    },
+    {
+      "id": "S10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "originalBaseBefore": {
+        "blob": "a7b730dc9be336528f0971544099f79d05758b1a",
+        "bytes": 87501
+      },
+      "currentNormal": {
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+      }
+    },
+    {
+      "id": "D07",
+      "normal": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "N1temporary": "6f4602987cfeed0583bcd27c9e465df420d7d412",
+      "purpose": "Eager4/stopbusiness/separateactioncount/AFTER"
+    },
+    {
+      "id": "D08",
+      "normal": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "N1temporary": "50bf3f2ba49b995fa659a75ed65879c335872e25",
+      "lines": "18–23GET;45–47POST; normal41assert/59adopt"
+    },
+    {
+      "id": "SF",
+      "path": "lib/mcp-qa-finite-policy-journal.mjs",
+      "baseAndCurrent": "6e3de33d04075740fb57e5f9afcf87dd9f68ee79",
+      "lines": "12–15current;23–38transact;40–52state/append;97–106finish"
+    },
+    {
+      "id": "LEASE",
+      "path": "lib/mcp-qa-finite-initial-lease.mjs",
+      "baseAndCurrent": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+      "lines": "7parentcheck;11waitabortrace;13–17child"
+    },
+    {
+      "id": "WORK",
+      "path": "lib/mcp-qa-finite-stage-work.mjs",
+      "baseAndCurrent": "068d35c2555c7dc711c487f6021ec572bd3af067",
+      "purpose": "Actualpromise retention/exclusion; no rollbackofalreadyperformedwrite/nativeeffect onlogicaltimeout"
+    },
+    {
+      "id": "plan",
+      "blob": "3434f31d432084d1b6153f85d3b8c64c8e043850",
+      "lines": "17invocationbeforefirstpromise;38Task2nonHTTPprivatefacts;46–57Task1fullproof/review;59–67Task2consumesreviewedIndex1"
+    }
+  ],
+  "frontierSemantics": [
+    {
+      "source": "S09current3e1d...:379–390",
+      "meaning": "Existing fixture instrumentsPHcatch to copy connection-failure.position BEFORE settingfailed/positionfailed, and privatelycapturesframes. N1helper onlysafeprojectsexactnewdelta; no requestID inthatentry."
+    },
+    {
+      "source": "PHa9d70...:763–776",
+      "meaning": "Activationblock usesoneoriginal clock.child. Positionactivation-observed is assigned AFTER engine.readPointer thenengine.readVersion, immediately BEFORE awaitrecheckOwned(). The next assignment isreceipt-recorded780. Mapping is conditionalonthatprobeentrybeingthePOSTcontinuation; publicprojectiondoesnotauthenticateit."
+    },
+    {
+      "source": "D08N1:45–47 andnormalS08:41–59",
+      "meaning": "ActualPOSTresponse503 wasobserved before statusassert47. Failureprevents f.choice=form, receiptassertions/ownSENDACKchecks andnormaladoptConnectionConfiguration59. Onlyexistingconnectionadoptionwascompleted. N1correctlycloseswithoutdependentmonitor/finitecalls."
+    }
+  ],
+  "afterActivationObserved": [
+    {
+      "order": 1,
+      "source": "PH776→693–704",
+      "operation": "awaitrecheckOwned()",
+      "possibleFailure": "Synchronouscheck ofroot/activechild/capturedholders/admissionproof/stateandownactualresults; retained wait on observeOwnerPhasePair703; exactpairvs expected704; finalcheck. This fresh factualread is a complete candidate failure region BEFORE receiptconstruction."
+    },
+    {
+      "order": 2,
+      "source": "PH100–528 calledfrom703",
+      "operation": "fullfreshpair",
+      "possibleFailure": "Parentlineage/holders100–131; nested5sretainedstorage/nativefetch/body/cancel/first-primarySQLchildren133–167; firstfacts169–196; credentials/nativeQA+Mmetadata primary205–275; stage/issuer/SDK/notice/history/ticket/pointerpredicates279–510; secondprimary+facts+qualification512; pairequality524/current525. Anytiming/IO/factual/methodidentityerror canpropagate; noneisobserveduniquely."
+    },
+    {
+      "order": 3,
+      "source": "PH777–778",
+      "operation": "synchronousConnectionReceiptraw/configurationhash/completedAt/recordhash",
+      "possibleFailure": "Hash/codec/configurationexception orcheckbeforefollowingrecord; no await here. These statements stillrunwhilepositionactivation-observed."
+    },
+    {
+      "order": 4,
+      "source": "PH779→record726–729",
+      "operation": "awaitrecord(activation,ConnectionReceipt,finish)",
+      "possibleFailure": "check726–727 beforeinvocation; retainedwaitj.finish727; exactnewmutationstatusrecorded+recordHash; awaitnative storage.sync728; awaitj.read(l)728; exactinstalledstate+receiptencode. A timeout/uncertain/existing/mismatch maydeny without positionadvance."
+    },
+    {
+      "order": 5,
+      "source": "SF97–106,23–52",
+      "operation": "finishtransaction/internal awaits",
+      "possibleFailure": "Receiptcodec/effectcheck98; transactioncurrent24/27; activationstate anduploadstate eachreadsend/ack/receipt/failure40–41; current andack/deadline/ID/contextpredicates100–104; appendexistingread50 oractualput52; currentaftereverytxget/put29–32/aftercallback34/aftertransaction36. Failure/uncertainACK canoccur aftersomeIO; statusacceptedonlyoriginalrecorded inPH727."
+    },
+    {
+      "order": 6,
+      "source": "PH779–780",
+      "operation": "postrecordnoawaitthenpositionadvance",
+      "possibleFailure": "Afterrecordreturns, receiptReadbackassigned779; setEffect780 executes synchronousencode/expectedrecordupdates712–724. OnlyAFTERthose doespositionbecomereceipt-recorded. A synchronoussetEffectexceptionisalsowithinthe reportedfrontier. Laterrechecks atreceipt-recorded/complete780wouldnormallyyieldadifferentposition."
+    }
+  ],
+  "opAndBudgetRelationship": [
+    {
+      "source": "OP239–260 +PH652/661–664",
+      "fact": "OPticket/stageapproval validatesoriginalnoticePOST andpublishesconsumableWeakMapstageadmission;PHconsumesit662beforepublication. SafeconsumedTicket/stageApprovaltrue supportsdurableapprovalprogress butdoesnotproveallOPguards/one-useadmission/ownresultreceipt."
+    },
+    {
+      "source": "OP147–156 +PH625–633/706",
+      "fact": "Admittedproofleasecontinuesenforcingoriginalparent/Accessexpiry/sourcewindow. PHholders628checksadmission.lease; check632alsoactiveChild; wait633checksBEFOREandAFTERretainedactualpromise. Post-admissionnoticespublicationisPH, notnewOPstepfactoryre-entry."
+    },
+    {
+      "source": "OP75–83/85–106 +LEASE3–19",
+      "fact": "Rootincoming≤30000; receivingrootclippedtosameoriginalremainder; localchildren≤5000clippedtoparent/ceilings. PHactivationblock763–781 keepssamechildacrossfreshrechecks/nativeactivation/journalACK/receipt. No renewedleaseatactivation-observed."
+    },
+    {
+      "source": "SF102",
+      "fact": "finishalsorequiresat<activationSENDdeadline; predicatecanrejectwithoutwaitingforatimerevent. 30sresponsealonecannotdistinguishrootabort/childclip/finishpredicate/freshpairrejection/forwarderstatusnormalization."
+    }
+  ],
+  "partialState": {
+    "facts": "Currentobservedworldhasconsumednoticesticket/noticesapprovaland2upload/2activationcountersbutonly1receiptkeycount. ThesearelocalSyntheticfixtureobservations, notremoteAFWreceiptproof.",
+    "conditionalDeductions": "Ifactivation-observedentrybelongstothisPOST, actualupload/activationresultsandprecedingownACKwrites/checks were reached before776. PublicsafeprojectiondoesnotincludeACKobjects/SENDlinks/receipttransactionoutcome, so donotupgradeconditionalexecutionmaptocompleteproof.",
+    "preserved": "No codeinthisfailurepath rollsbacksyntheticprovideractivationorresetscounters. PH808mapsknownstatusor503,809closeslease; actualpromise retention preservesphysicalwork bookkeeping, nevermeansalreadyperformednative/storageeffects vanished. TheclosedSource-labworldwascleanedbyAFTER/Rootcustody, notrewoundintoaqualifiedlogicalstage.",
+    "missingPositive": "Secondnativeown-result-backedSFreceipt with exactpredecessor/module/configuration/ACKlinks, successfulnoticesPOST+adoption, repairedmonitororacle, thirdclosedM/finiteconsent/CleanupScope/selection/full20/mutant/reg11 remainunproven. ExistingTask1positivecontractcannotaccept2/2/1.",
+    "forbidden": "No retry of the closed partial world, fake receipt, counter reset, guard deletion, cached-away checks or budget increase."
+  },
+  "loggerInvestigation": {
+    "lock": {
+      "packageJSON": "f4fd38ac380c46a149d8cf0f3bd828a28406f761",
+      "lockBlob": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+      "installedDeclaredMiniflare": "5.20260831.0-alpha",
+      "workerd": "1.20260831.1",
+      "note": "ReadlockedmetadataasDATA; noinstall/dependencyexecution/download."
+    },
+    "existingTags": {
+      "source": "normalS10 9e7f...:83–89",
+      "tags": [
+        "T2 original parent holders rejected",
+        "T2 original parent clock rejected",
+        "T2 original child clock rejected"
+      ],
+      "mechanism": "Normalexistingfixturealreadyaddsconsole.info immediatelybeforethe originalguardthrows. Predicates/deadlinesunchanged. RawJSONfieldscontainabsoluteclocksandmustremainprivate."
+    },
+    "primarySources": [
+      {
+        "repository": "cloudflare/workers-sdk",
+        "ref": "miniflare@5.20260831.0-alpha",
+        "blob": "9dabb8e400ec7732762ca327cee0d7132cafa427",
+        "path": "packages/miniflare/src/index.ts",
+        "lines": "2446–2449,2598–2608",
+        "url": "https://github.com/cloudflare/workers-sdk/blob/miniflare%405.20260831.0-alpha/packages/miniflare/src/index.ts",
+        "finding": "Structuredloggingalwaysenabled; runtimegetsNodehandleStructuredLogsoption."
+      },
+      {
+        "repository": "cloudflare/workers-sdk",
+        "ref": "miniflare@5.20260831.0-alpha",
+        "blob": "55e02656cad7e450fa15ad6fac619940dff9d588",
+        "path": "packages/miniflare/src/runtime/index.ts",
+        "lines": "100–119,287–291",
+        "url": "https://github.com/cloudflare/workers-sdk/blob/miniflare%405.20260831.0-alpha/packages/miniflare/src/runtime/index.ts",
+        "finding": "DefaultWorkerlogforwarderusesNodeconsole.log/error; customstructuredhandlerreplacesdefault. ALogclassaloneisnotthisWorkerconsoletransport."
+      },
+      {
+        "repository": "cloudflare/workers-sdk",
+        "ref": "miniflare@5.20260831.0-alpha",
+        "blob": "f6fbc043fd4841ab2c88125cde758c37153ee38a",
+        "path": "packages/miniflare/src/config/schema.ts",
+        "lines": "692–696",
+        "url": "https://github.com/cloudflare/workers-sdk/blob/miniflare%405.20260831.0-alpha/packages/miniflare/src/config/schema.ts",
+        "finding": "PinnedversionacceptshandleStructuredLogs callbackinNodeinstanceoptions."
+      },
+      {
+        "repository": "cloudflare/workers-sdk",
+        "ref": "miniflare@5.20260831.0-alpha",
+        "blob": "207fa88316c56c50319d23935d5fd583b9ad7f3c",
+        "path": "packages/miniflare/src/config/v4-convert.ts",
+        "lines": "46–57",
+        "url": "https://github.com/cloudflare/workers-sdk/blob/miniflare%405.20260831.0-alpha/packages/miniflare/src/config/v4-convert.ts",
+        "finding": "convertV4MiniflareOptionspreservestheNodecallback."
+      },
+      {
+        "repository": "cloudflare/workers-sdk",
+        "ref": "miniflare@5.20260831.0-alpha",
+        "blob": "5b6cbb9c0c1cd40f22fa61f24b05f212017f67ed",
+        "path": "packages/miniflare/src/runtime/structured-logs.ts",
+        "lines": "4–6,14–65,parseStructuredLog",
+        "url": "https://github.com/cloudflare/workers-sdk/blob/miniflare%405.20260831.0-alpha/packages/miniflare/src/runtime/structured-logs.ts",
+        "finding": "Callbackreceivesfinitelevel/timestamp/messagestringafterstreamparse/filter; defaultabsolute timestamp/message stayprivate."
+      }
+    ],
+    "finding": "The pinned API supports Node-side capture of existing guard tags without changing Worker guards. Delivery, redaction and causal association remain untested.",
+    "alternatives": [
+      {
+        "id": "A-smallestfiles",
+        "approach": "ForonefreshRoot-authorizedN1-shapedrun, independentlysanitizethealreadycapturedprivatechildTAP/consoleRAM foronlythe3fixedtagrecords. NoS10/sourceoverlayneeded.",
+        "limit": "Defaultconsoletransport/TAPescapingandoperationassociationmustbefixed/tested; a merelyfoundtagmaybelongtophasenegative/cleanup. Cannotre-readoldlogs ordeclareexactoriginfromtextpresence."
+      },
+      {
+        "id": "B-preferred-observation",
+        "approach": "RootmaynominatetemporaryNODE-onlyS10sharedoptionsoverlaywiringversionedhandleStructuredLogsfromconstructionandpreservingitthroughfinaloptions/adoption. Noentrystring/onLoad/product/guardtransformationchange. CapturefixedguardtagtoownjournalwithcurrentNodeoperationwindow.",
+        "limit": "RequiresnewexplicitRootscopeforNodeS10overlay; normalSource13staysfrozen. FuturecloudmustcompareactualcompiledM/QAbytesandsettings withnormalassembly. Nohandlerimplementationhere."
+      }
+    ],
+    "limits": "Tagscoveronlyexistinginitialleaseholder/checkbranches. LEASEwait11mayrejectonabortwithoutanytag; OPchild100/101andotherSourceguardsareuntagged. A latercheckcanlogafteranearliererror, soearliestNodearrivalisnotautomaticallyfirstcause. Absenceoftagdoesnotexcludeadeadline. Structuredtimestamp/Nodeoperationwindowisalocalassociation, notauthenticatedrequestID; correlatedstaysnullunlessindependentfactsproveit."
+  },
+  "minimumNextObservation": {
+    "recommendation": "PreferBifRootauthorizestheminimalNodeS10optionoverlay; otherwiseAonlyasexplicitlylimitedpresencecapture. Repeatfresh4caseN1graph ONCE onlyundernewRootbrief/gate, notthisclosedworld. Do notaddbusinessrequests orcompiledguardmarkers. Do notrefactorproductfromcurrenthypothesis.",
+    "graph": "freshconnection→SDKOAuth→correctedphase→oneactualnoticesGET/POSTifprerequisitespass→close, sameoriginalmethods/callbacks/proxies/Source13/clocks; eager4/blockedworkfalse/globalAFTER/independentactioncount asN1.",
+    "telemetry": "AtNodehookentryandbeforeanyawait, recognizethreeEXACTliteralguardtagprefixesandboundedprivateJSONshape; ignoreunrecognizedmessages. Keepprivatebaselinecursorafterphase; emitonlynewguardTag enum, actualNodeoperationwindow, sequence/cappedrelativeelapsed, booleansfromobservedguardcondition,andboundedremaining/elapsedderivedprivatelywhenfieldspermit. Neverpublishabsolutewall/mono/timestamp/message/stack/IDs/rawJSON. KeepguardOriginunknownifassociation/firstcauseambiguous.",
+    "proposedSafeShape": {
+      "guardTag": "initial-parent-holders|initial-parent-clock|initial-child-clock",
+      "operationWindow": "prerequisite|notices-get|notices-post|after-post|unscoped",
+      "relativeElapsedMs": "integer0..180000",
+      "closed": "boolean|null",
+      "aborted": "boolean|null",
+      "alive": "boolean|null",
+      "wallExpired": "boolean|null",
+      "monoExpired": "boolean|null",
+      "wallRegressed": "boolean|null",
+      "monoRegressed": "boolean|null",
+      "remainingMs": "integer-180000..30000|null",
+      "correlated": null
+    },
+    "admission": "TestFIRSTconcretefinitelogvectors: exact3tags→enums,phasenegativeignored,prefixforgery/keyextras/rawprivateout/torn/overcap/malformednumberrejected,multipleoriginsunknown,callbackarrivallateafterresponsehonest,firstthrowretaineddespitesubsequenttag. Rootindependentconsumer/replay/API/custody/compiledbytecomparisonbeforeoneactualoccurrence. NoSource/Task1PASSfromcapturesuccess.",
+    "caps": "Nominate≤8newtagrecords/≤2048privatebytesperrecognizedmessage; overflow/ambiguous=>unknown/fixedcapturefault, no capraise. Preserve330000total/180000nativechild/120000case/job7min/incoming30000/child5000/outcome24576/journal32768-128/stdout1MiB/stderr64KiB/7days/Node22.23.4/SDK1.2.1/lockeddeps andsame3custodylaunches.",
+    "successCriterion": "AuniquelyobservedexistingguardbranchplusvalidrelativeconditionduringtheactualPOSTwindowcanseparaterootclock/childclock/holdercandidatesfromcurrentunknown, whilepreservingcausallimits. Ifnone/multiple/cascade/untagged, reportunknown; noautomaticrerun/productfix ornew20casequalification."
+  },
+  "taskSequencing": {
+    "currentPlan": "Plan3434...:57requirestaskreviewafteractualTask1fullproofbeforeTask2;:61Task2consumesreviewedIndex1. Task2:38/65ownsnonHTTPfactualentry/privateQAinvocationandnineMbeginOwnFiniteInvocationbeforefirstpromise. Task1HTTPalreadyestablishesreceivingrootbeforeawaitandcapturesholders; thosefutureAPIsarenotcalledafteractivation-observed.",
+    "rulingNow": "NoformalTask1↔Task2cycleisprovenbythisN1failure. Pre-awaitmeanscapture/brandoriginalauthoritybeforeasyncwork; itdoesnotallowallfactualIObeforeawaitorclockrenewal. Task2dispatchcannotbejustifiedasimplicitfixforthecurrentPOST.",
+    "conditionalConflict": "IfRootlaterprovesthatasharedprivateQAinvocation/fact-normalizationprimitiveplannedinTask2isarequiredprerequisiteforTask1withinoriginal30s/5s, strictTask1PASS→Task2primitive→Task1PASSbecomesacircularvalidationgate. Repeatedfullfreshmetadatareadsmaybecostly, butcurrentevidenceisnotsufficienttoprovethisarchitecturalnecessity.",
+    "minimumPlanRuling": "If the shared primitive is proved necessary, Root can extract only that primitive into a separately nominated Task1 prerequisite Source DATA scope, while Task1 stays unqualified. Fix exact files/interfaces/before pins/guards/reversibles and causal tests; preserve frozen history in a new reviewed index. No other Task2 or Task3 work. Full Task1 3/20/20+11 must then pass, followed by Task2's own tests/review. No cached-away current facts, fake positive factory, deadline extension or Task1 gate waiver.",
+    "recommendation": "FirstobtainminimalexistingguardobservationorRootdesignruling; keepcurrentTask1andfutureproducerfrozen. Do notstartTask2now."
+  },
+  "unknowns": [
+    "ExactfirstPOSTinnerErrorandguardbranch; whetherrecheckOwned/receiptconstruction/finishinvocation/sync/readback/setEffectwaslastinstruction.",
+    "ActualcurrentSEND/ACK/receiptobjects,exactown-resultbindingandphysicalpointerafterfailedPOSTnotpublishedinN1safeprojection.",
+    "Whether30srootdeadline,clipped5schild,originalexpiry,holderdrift,factualpredicateornativeIOwon; duration/frontieraloneinsufficient.",
+    "WhetherNodeinstancehookreceivesrelevanttaguniquelybeforelogicalresponseandwhetheritrepresentstriggerorsecondarycascade; Sourceinspectiononly.",
+    "WhetherTask2sharedprimitiveisactuallyneededforTask1latency; no dependency/proofPASSinferred."
+  ],
+  "verification": "Read only bounded immutable safe evidence, source, plan and versioned official Miniflare data. Wrong log.ts path returned404 before exact shared/log.ts was found. No source/observer execution, imports, compile/syntax/tests/files/dependencies/downloads, code/executable blobs, refs/runs, raw logs/artifact refetch, runtime/browser/keys/mail/subagents. Only this report is created and fully read back.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
