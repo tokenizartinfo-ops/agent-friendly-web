@@ -1,0 +1,142 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-ROOT-SOURCE-TOOLS-NATIVE-GATE/1",
+  "timestampUTC": "2026-11-16T23:13:00Z",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHub Actions one-use isolated tooling-only branch",
+  "resourceType": "one native tools-only run and additive evidence/closure commits",
+  "allowedAction": "Create exact absent branch at sealed head once; observe 6 native controls/31 checks, conserve primary, remove only nominated workflow, read back closure. No Source business capture or qualification released.",
+  "authority": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+  "design": "09745d7a850b19d8004b3214be9357b9e278bd7d",
+  "index": "68f6f9cfd90db4824b613e544b03564c96ea5bc8",
+  "packet": "aa09170b70ea8f4de32251e7db38544c3ef0c057",
+  "reversible": "0ab2fc67f080fab9444a54e7c2758255935ef434",
+  "staticReview": "0643071cce0703bc3229fb503136282b7fcc8798",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-green-frontier-diag1-tools",
+    "message": "AFW-C2-GREEN-FRONTIER-DIAG1-TOOLS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-green-frontier-diag1-tools.yml",
+    "job": "c2-green-frontier-diag1-tools",
+    "runner": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/tools-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-green-frontier-diag1/tools-controls.mjs",
+    "artifact": {
+      "name": "afw-c2-green-frontier-diag1-tools-proof",
+      "path": "output/c2-green-frontier-diag1-tools-proof.json",
+      "fileName": "c2-green-frontier-diag1-tools-proof.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "runnerOS": "ubuntu-24.04",
+    "jobTimeoutMinutes": 3,
+    "testTimeoutMs": 10000,
+    "permissions": "contents:read",
+    "npmInstall": false,
+    "SourceToolingExecutionOnly": true,
+    "SourceBusinessExecution": false,
+    "activationReleased": false
+  },
+  "head": "6d6ab08491f1bdb77b0ab492294731715b43a64f",
+  "tree": "4d97f2f93277d48f79a9aaaa905fe2b90f21af79",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "branch": "lab/afw-c2-source-20261116-green-frontier-diag1-tools",
+  "refCreated": false,
+  "runCreated": false,
+  "SourceToolingExecuted": false,
+  "SourceBusinessExecuted": false,
+  "readback": {
+    "original": 3203,
+    "added": 11,
+    "leaves": 3214,
+    "allOriginalModesBodiesUnchanged": true
+  },
+  "lineages": {
+    "seven": true,
+    "SourceExecutedLocally": false
+  },
+  "nativeExpected": {
+    "ids": [
+      "G20_D07_SIBLING",
+      "G20_MEASURE_TWO_REAL_TARGETS",
+      "G20_SECOND_LAUNCH_CUSTODY",
+      "G20_NATIVE_ETIMEDOUT_CAPTURE",
+      "G20_NATIVE_EXIT1_TORN_AND_FAULT",
+      "G20_WIRE_AND_ZIP_LENGTH"
+    ],
+    "checks": [
+      [
+        "identicalRegistrationTail",
+        "siblingExclusive",
+        "beforeOriginalUntouched",
+        "wrongAliasDenied"
+      ],
+      [
+        "firstDiskRead",
+        "secondDiskRead",
+        "postMutationDenied",
+        "symlinkDenied"
+      ],
+      [
+        "onePlusOne",
+        "onePlusSeven",
+        "zeroDenied",
+        "nineDenied",
+        "duplicateOrLostDenied",
+        "badProbeDenied"
+      ],
+      [
+        "actualPositivePair",
+        "timeoutRetainsNativePrefix",
+        "timeoutEmpty",
+        "unexpectedSignalDenied",
+        "oversizeStreamDenied"
+      ],
+      [
+        "exit1TornNativePair",
+        "stableMalformedUnknown",
+        "stableRecorderFaultUnknown",
+        "firstThrowSequence",
+        "n2ConflictDenied",
+        "unstableOrReplacedFileDenied"
+      ],
+      [
+        "twoCanonicalFrames",
+        "artifactEqualsBodyLF",
+        "body24576Accepted",
+        "body24577Rejected",
+        "sourceReadsMismatchDenied",
+        "faultSeparate"
+      ]
+    ],
+    "counts": {
+      "native": 6,
+      "checks": 31
+    }
+  },
+  "preservedRefs": {
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "historical": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+  },
+  "triggerAuditReuse": {
+    "priorFull62Audit": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "all62ImmutableBlobsAndPathsMatch": true,
+    "sourceBranch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+    "originalPushFilters": "18 exactmain excluded; remaining closed-origin3paths unchanged in exact one-commit25-addition diff; no create/workflow_run/schedule in BASE",
+    "closedOrigin3PathsUnchanged": true,
+    "newWorkflow": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+    "newWorkflowGate": "Exactrepo/push/branch/attempt1/oneusemessage/contentsread",
+    "SourceTriggered": false
+  },
+  "conditions": "Fresh exact branch absence, exact head zero prior runs and refs checked immediately before sole activation; fail closed otherwise. No reruns of spent head. Close only this workflow; preserve source/data/evidence and original 3203 leaves.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
