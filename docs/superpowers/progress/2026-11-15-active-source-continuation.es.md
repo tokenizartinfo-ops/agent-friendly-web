@@ -80,7 +80,7 @@ No SourceTests/SourceQualified/Task1Pass ni runtime/PCoff acreditados. Todos los
 
 Paquete f8b080edc6a33991263fb0bde1f8edfe704d92a2, contrato ce51877aa4bc8b807dd00e1089f6eeb1562b6d8a; 8 cuerpos completos verificados como DATA. Receptor Root independiente frame67041aae533b336c46941c4007f34874c6f771ce, bundlef4fc77c24ea9e47e542b0990b39bc07aa559a749, API7306bb2a076eeb8aa26c80ad4124a597e89ae1c6; 1positivo/94negativos bundle y1/24 API sintéticos. No son prueba Source. Gate 9a4da6c59e83c020e986d01c1c54e8758c791616. Preparado b80119500f26d5db40a991e36f40b6bba2153b98/treea8e082d4696d8631e2516986e0e107c3187f8a07 sobre BASE6791ce1, 25adiciones únicamente,3203hojas originales/modes intactos. Main/histórico recién comprobados sin cambio; rama nominada ausente.
 
-Root activará solo lab/afw-c2-source-20261116-t1-v2 con push oneuse; no repetir. Después leer metadata+logs una vez al terminar, guardar evidencia saneada, retirar solo WF nuevo con CAS y comprobar cierre. SourceQualified/Task1Pass/PCoff permanecen false. No intervención antes08:30Argentina ni acciones runtime/keys/OTP/browser/Max.
+ACTIVO Source-lab v2: rama lab/afw-c2-source-20261116-t1-v2 en b80119500f26d5db40a991e36f40b6bba2153b98, run43815383087/1, job133126136465. Push oneuse ya consumido; no repetir ni activar de nuevo. Prueba en progreso, logs aún NO leídos. Después leer metadata+logs una vez al terminar, guardar evidencia saneada, retirar solo WF nuevo con CAS y comprobar cierre. SourceQualified/Task1Pass/PCoff permanecen false. No intervención antes08:30Argentina ni acciones runtime/keys/OTP/browser/Max.
 
 ## Orden restante
 
