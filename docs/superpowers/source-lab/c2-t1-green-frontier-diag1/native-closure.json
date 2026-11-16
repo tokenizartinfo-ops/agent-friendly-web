@@ -1,0 +1,27 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-SOURCE-CAPTURE-CLOSURE/1",
+  "timestampUTC": "2026-11-16 23:39:34 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+  "testedHead": "6e41d44919d86f0bacc97edab022460449316987",
+  "testedTree": "fd5fa1eb66c0f1503af570c4a7be0233494016e7",
+  "run": 43980317236,
+  "job": 133694794167,
+  "primary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
+  "outcome": "f39f7e43c4010acbaca7a679d61dbe048da24688",
+  "ownAdmission": "a9993d7411d0a943d2f247915d91ef17b0b38f09",
+  "result": "Diagnostic collection accepted; Sourcequalification incomplete. Native19prefix14pass5fail, firstthrow46 C2T1_NOTICES action AssertionError S08:41:12 at114318ms, open20 C2T1_OWN_PROMISE action at176469ms, childETIMEDOUT180s. No historical cause inferred.",
+  "delta": "Delete only Source diagnostic workflow; add primary+receipt, preserve original3203+other24. Git closure/custody temp removal do not establish global/native SDK drain.",
+  "SourceExecuted": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
