@@ -1,0 +1,36 @@
+{
+  "schema": "AFW-N3-CAP-CENSUS-CLOSE/1",
+  "atUTC": "2026-11-16 18:39:49 UTC",
+  "head": "4b7170fb8146b7aa9208f0ae6661a54828955782",
+  "closedHead": "118d26b32a32d8fe9f71403fbda61c7e486321f1",
+  "closedTree": "06fdec12d09844bfef81cb463e936bed36a342db",
+  "workflowAbsent": true,
+  "closeHeadRuns": 0,
+  "originals": 3203,
+  "leaves": 3237,
+  "primary": "f22df7c75028c01206266a3c4df26e7c31ef7864",
+  "proof": "cda3acf85a765c4788bbc023b247da791a9f322a",
+  "run": 43929488119,
+  "job": 133517776579,
+  "native": {
+    "tests": 47,
+    "pass": 47,
+    "fail": 0
+  },
+  "ledgerCompilerUnchanged": true,
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "historical": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "observerRepair": false,
+  "sourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
