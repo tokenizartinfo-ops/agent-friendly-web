@@ -1,0 +1,244 @@
+{
+  "schema": "afw.own-green20-frontier.minimal-plan.v1",
+  "status": "DESIGN_COMPLETE_CODE_HELD",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Read-only design; no implementation or tests",
+  "authority": {
+    "ruling": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
+    "targetSupplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+    "sourceContract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "sourceSchema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "selection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "acceptance": "Root reconciliation/code release pending"
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "goal": "One independent reader for the single proposed GREEN20 frontier diagnostic, with a small scoped own fixture suite and one later Root-native gate. No code or concrete new wire schema is introduced by this document.",
+  "reuseDecision": "Keep old225/370/419 implementations, IDs, runs, receipts and closed refs as immutable history. Reuse proven OWN algorithms/primitives by explicit new version/nomination, not existing default reader metadata. Focused new cases must exercise adapted code; no old Source3/35/ENOENT/BASE/MUTANT/REG/W1 battery is scheduled by this diagnostic.",
+  "productionEvidenceBoundary": {
+    "native": "Actual OUTCOME exports only native.integrity and cases(id,status), not child TAP. OWN verifies that finite safe projection is an exact structural ordered selected-ID prefix and enforces N2. It never parses/authenticates absent RAW TAP of the actual run. Synthetic raw TAP may check model consistency as DATA, never a Source62a oracle or actual native evidence.",
+    "journal": "Recompute safe published contiguous events/frontier/firstThrow under accepted rules. For a clean journal verify canonical NDJSON bytes/hash; unexported torn/invalid suffix has only bounded producer-observed raw digest. Do not claim proof of those missing bytes.",
+    "target": "Before/after13 targethash observations are checked against immutable normal13 and DATA tree; correctness of real measurement comes from pinned producer+Root review/custody. No new raw target/TAP/DTO fields or exports are proposed.",
+    "outcomeMeaning": "diagnosticCollectionComplete means custody/reporting succeeded; nativeQualification:false is mandatory. Child timeout/failure can coexist with valid collection; infrastructure faults cannot."
+  },
+  "coreSemantics": {
+    "events": "Independent per-case action enter→return|throw, count enter→return|throw; advance only on counted pair. AFTER close is independent at most one enter/exit and may interleave. Seq1contiguous/+1 and elapsed0..330000nondecreasing; exact finiteerror/siteallowlist; no arbitrary reordering or skipped records.",
+    "missingWorld": "Existing D07 assertion occurs before action mark for later missingworld cases, and count is skipped if world never exists. A truthful journal prefix can therefore remain before count while native FAILs continue; never invent markers or force native/journal cardinalities to match.",
+    "firstThrow": "Earliest edge throw in validated contiguous exported prefix, including AFTER, or null. Primitive null/undefined thrown values retain a throw edge with nullable projected details. Unknown tail prevents claims about absolute/physical first/last, not retention of already observed prefix.",
+    "unknownVsFault": "Stable empty/torn/invalidrecord/observedrecorderflag produces exact UNKNOWN reason and suppressed openCase/afterOpen sentinels, previousvalidrows retained. Root contract priority RecorderFault > invalidcomplete > torn > empty. Unstable identity/read, wrong executing alias/pin, custody/target drift, N2 or publication errors are FAULT; no accepted pair/artifact.",
+    "N1": "Actual raw API unique terminal job and actual logical fourthcommand step; five exact stepnames/order,repo/event/ref/message/head/parent/tree/attempt1. Strict realUTC dates (not NaN or impossible calendar), one header+closed group, exact two markers within command±1000ms, no smuggled/duplicate/mixed family marker even outside window. No hardcoded hosted stepnumber.",
+    "N2": "For each observed nativePASS, a reliable validated action/count throw of SAME selected id is a fatal contradiction, even if later journaltail is unknown. NativeFAIL with returns is allowed. Independent globalAFTER or anotherID throw does not contradict that namedPASS.",
+    "nativeProjection": "empty=>0pairs; exact contiguous selected-ID prefix, no duplicates/foreignnames/order recovery. Proposed schema has prefix/empty/torn/ambiguous only; prefix20 is allowed without promoting native qualification/complete TAP totals. Do not copy oldN3 native.complete cardinality rules into this family.",
+    "sourceReads": "Use two independent real13canonicalTARGET measurements. Do not compare proposed canonicalS08/S09 to GitBASE or fill arrays fromSourceIndex. Both hashes must match normal13 in index order and roottarget flags; rawGit checks exact inertDATA edges and baselinepreservation separately.",
+    "externalAndZip": "Keep current419 raw archive-byte/CRC/full-deflate/DD/TLV/noZIP64/version/size/name/digest checks and strict API/tree/log bounds. New family context, role manifests and two frames must be explicitly sealed; no outcome-controlled expected source/selection/admission.",
+    "emptyStreams": "Zero-byte stdout/stderr (and any equal-length empty canonical journal prefix) must use exact SHA256(empty). APIjob span stays<=420000ms; child180/case120/total330 remain sealed producer/procedure limits, not invented timing fields or inference from a stdout hash.",
+    "faultEnvelope": "Use exact e55 phaseReasons and post-admission context/nullability semantics when retaining failed occurrences; no structurally valid FAULT is accepted as completed collection."
+  },
+  "fixturePlan": {
+    "stage": "Semantic families only, not executable tests/newwire or fixed nativecensus. Actual new literal models and IDs must be sealed after Root accepts shared contract and BEFORE implementation.",
+    "independence": "Author own full coherent models/expected facts; use Source3positive/2negative/1faultwire examples as separately labeled Source-intended DATA, not copied implementation or new actual truth.",
+    "models": "Shared clearly fictional clock/head/tree/run/job/targetdata; complete raw API/tree/log/twoframes/artifact actualZIP bytes. Mutations repair canonical outcome, embeddedcustody, archive/listingdigest/size so intended guard is exercised. Model construction errors never count as expected receiver rejection.",
+    "families": [
+      {
+        "label": "KNOWN_ACTION_OPEN",
+        "facts": "Trusted prefix ends on actual action-enter; timeout capture and shorter independent native prefix.",
+        "expect": "Admit diagnostic; recompute action frontier; no inferred physical await/root cause."
+      },
+      {
+        "label": "KNOWN_COUNT_OPEN",
+        "facts": "Action settled then count-enter without exit.",
+        "expect": "Admit count frontier; preserve actual last native pair independently."
+      },
+      {
+        "label": "BETWEEN_ACTION_COUNT",
+        "facts": "Action settled, world missing or no later count marker; later native FAILs may exist.",
+        "expect": "Do not fabricate count call or skip interval to recover later; recorded gap is not proof physically blocked."
+      },
+      {
+        "label": "AFTER_OVERLAP",
+        "facts": "AFTER.close starts while action/count remains open, settles in either order allowed by chronological journal.",
+        "expect": "Recompute case-and-after/open flags from observed events."
+      },
+      {
+        "label": "COMPLETE_TIMEOUT",
+        "facts": "All20 action/count plus AFTER returned; child ETIMEDOUT.",
+        "expect": "post-teardown-process-exit; no live-handle/SDK/process cause claim."
+      },
+      {
+        "label": "COMPLETE_THROW_TIMEOUT",
+        "facts": "Same complete event set with any throw, including AFTER.",
+        "expect": "post-settlement-process-exit; preserve earliest validated throw."
+      },
+      {
+        "label": "NORMAL_END",
+        "facts": "Valid complete or honest prefix evidence with native exit0/1, no signal/error; all external collection gates hold.",
+        "expect": "NativeQualification/SourceQualified/Task1Pass remain false even all20 native PASS."
+      },
+      {
+        "label": "FIRST_THROW_PRECEDENCE",
+        "facts": "Action throws, counter later also throws; nullable error details include original null/undefined thrown values.",
+        "expect": "Earliest throw pointer refers to first recorded edge, not last throw/non-null details; no Native PASS sameid."
+      },
+      {
+        "label": "AFTER_THROW_NAMED_PASS",
+        "facts": "Named native cases PASS, independent AFTER throws and child exits1.",
+        "expect": "Valid diagnostic; AFTER is not same-case N2 contradiction."
+      },
+      {
+        "label": "NATIVE_FAIL_WITH_RETURNS",
+        "facts": "Action/count returned but native FAIL from framework/outside markers.",
+        "expect": "Allowed; never infer PASS from returns or require recorded throw for every native FAIL."
+      },
+      {
+        "label": "EMPTY_UNKNOWN",
+        "facts": "Stable owned zero-byte journal, independent nonempty/empty native evidence.",
+        "expect": "UNKNOWN/JOURNAL_EMPTY; empty is not zero activity."
+      },
+      {
+        "label": "TORN_UNKNOWN",
+        "facts": "Stable invalid last byte fragment after valid complete rows; actual rawlength exceeds prefix.",
+        "expect": "UNKNOWN/JOURNAL_TORN, valid prefix and firstthrow retained; no absolute last-event claim."
+      },
+      {
+        "label": "MALFORMED_RECORD_UNKNOWN",
+        "facts": "Stable raw row with malformed site/illegal transition; earlier valid prefix only exported.",
+        "expect": "UNKNOWN/JOURNAL_INVALID_RECORD; malformed row must not be published inside witness.events."
+      },
+      {
+        "label": "RECORDER_FLAG_UNKNOWN",
+        "facts": "Stable read and observed flag, possibly with torn/invalid suffix.",
+        "expect": "UNKNOWN/RECORDER_FAULT priority; valid earlier prefix+TAP remain independent."
+      },
+      {
+        "label": "UNKNOWN_REASON_PRIORITY",
+        "facts": "Recorderflag+invalid/torn, invalidcomplete+torn, empty combinations.",
+        "expect": "Exact contract priority; do not accept arbitrary reason/integrity/frontier combinations."
+      },
+      {
+        "label": "UNKNOWN_RAW_HASH",
+        "facts": "Equal raw/prefix length or genuine unexported suffix.",
+        "expect": "Equal lengths require exact digest; torn/invalid tail requires rawlength>prefix and no fabricated full-hash equality."
+      },
+      {
+        "label": "N2_ACTION_PASS_CONFLICT",
+        "facts": "Trusted same-ID action throw but finite native projection reports PASS; full frames/artifact/API digest coherent.",
+        "expect": "FAULT/EVIDENCE_CONFLICT, not accepted UNKNOWN."
+      },
+      {
+        "label": "N2_COUNT_PASS_CONFLICT",
+        "facts": "Trusted same-ID count throw + nativePASS, including later torn/recorderfault.",
+        "expect": "FAULT even if later frontier UNKNOWN; preserve earlier trustworthy throw."
+      },
+      {
+        "label": "N1_NATIVE_STEP",
+        "facts": "Wrong unique command step, finite-invalid date/month/calendar, outside±1000ms, duplicate/header/marker/window smuggling, same names foreignrun.",
+        "expect": "Reject actual collection; whole envelopes rehashed so validation reaches provenance guard."
+      },
+      {
+        "label": "OCCURRENCE_AND_TREE",
+        "facts": "Cross run/job/head/tree/ref/parent/message/attempt or oldSource/W1/F9 selection/alias/bodyDATA edge.",
+        "expect": "Reject; trusted expectedcontext from Root not outcome. Correct BASE absenceS08/oldS09 is a positive Git fixture."
+      },
+      {
+        "label": "TARGET_MEASUREMENTS",
+        "facts": "Before/after ordered13 hashes wrong/reordered/missing, either targetflag false, one targetchanged.",
+        "expect": "Reject successful outcome. Coherent correct-looking arrays alone cannot authenticate real reads; mark limitation, do not fake a detectable test."
+      },
+      {
+        "label": "TWO_LAUNCH_CUSTODY",
+        "facts": "2launch actual partition1+1,1+7 and7+1; sum mismatch,duplicate/3or6launch,0or9process,ownership/cleanup false.",
+        "expect": "Admit only exact2 and real partitiontotal2..8 with all booleans true and embedded/separate equality."
+      },
+      {
+        "label": "NATIVE_PROJECTION_PREFIX",
+        "facts": "Cases unique exact selection prefix; empty zeroobserved; prefix may contain all20; torn/ambiguous keep prior pairs only.",
+        "expect": "Reject foreign/duplicate/outoforder/falseempty. Do not impose legacy complete-native enum absent from this contract."
+      },
+      {
+        "label": "FRAMES_AND_FAULT",
+        "facts": "Exactly custody/outcome; duplicate/extra/reordered/missing/smuggled frame, mixed success+fault, incompletejob/uploadfailure; valid standalone fault.",
+        "expect": "Reject collection on fault/infrastructure. Preserve typed failed occurrence separately; fault shape is not success."
+      },
+      {
+        "label": "CANONICAL_SHAPE",
+        "facts": "Duplicatekeys/aliases/unknownkeys/keyorder/noncanonical JSON/CR/BOM inbody/secondmarker; nullable error withedge mismatch; badfirstThrow pointer.",
+        "expect": "Exact schema/order/semantic fence, not generic permissive parsing."
+      },
+      {
+        "label": "ZIP_ACTUAL_BYTES",
+        "facts": "Stored/deflate/signed+unsignedDD/zero-or-equal/ordinaryTLV positives; CRC/name/path/count/localcontradiction/ZIP64/TLVtrunc/version45/tail negatives.",
+        "expect": "Reuse reviewed419 strict primitive; actual compressed bytes/hash/listing/entry/payload equal outcome+LF. No supplied-digest-only shortcut."
+      },
+      {
+        "label": "CAP_BOUNDARIES",
+        "facts": "Outcome body24576+LF24577 where shape permits; reject body+1/LFextra; custody1024, journal32768/128, stdout1MiB/stderr64KiB, ZIP1MiB/log4MiB/tree4MiB8192. Include zero-byte/wrong-empty-SHA coherent neighbors.",
+        "expect": "Separate Source body cap from OWNnative proof inclusiveLF and gitArchive32MiB; no cap increase."
+      },
+      {
+        "label": "PRIVACY_AND_ALIAS",
+        "facts": "Null site honest; malformed event alias→safe prefixUNKNOWN; executing file/alias manifest wrong→FAULT; rawstack/message/privateprefix injected.",
+        "expect": "No unapproved alias/path or data leak. New D07 sibling belongs only to projectedrecorder, never mislabeledS07."
+      },
+      {
+        "label": "D07_BEFORE_MARKER_ASSERT",
+        "facts": "Connection world unavailable: actionthrow then no count and later cases may fail before any mark.",
+        "expect": "Do not manufacture action/count for unrecorded cases or infer their execution from safe event absence."
+      },
+      {
+        "label": "MODEL_TRUTH_LIMIT",
+        "facts": "Own fictional models with internally coherent values, and Source-intended samples as separate DATA.",
+        "expect": "Acceptance is syntactic/semantic projection validation, not actual rawTAP/target-read/private-object authentication."
+      }
+    ],
+    "nativeCount": "Pending concrete fixture materialization; seal exact ordered unique ID list/count/hash before Root activation. Do not rerun old419 suite or call its receipt coverage of new protocol."
+  },
+  "minimalSequence": [
+    "Root reconciles e55contract+eda6schema+2cbselection+3033target supplement and explicitly releases code. Finalwirecheck in companiondesign-wire-review finds no remaining interoperability contradiction; Source/OWNcode stillheld now.",
+    "Seal new independent literal shared models, expected semantic neighbors and deterministic IDs. Preserve beforeimages f799/979c/admission and classify Source-intended examples separately. Capture legitimate new-family RED against old incompatible reader; use direct pre-guard negatives where applicable.",
+    "Implement only versioned OWN independent safe-event/prefix/unknown/firstThrow semantics plus N1/N2/new admission/two-frame/custody/measurement joins. Use original OWN primitives, no Source62a/parser/helper import or execution.",
+    "Verify focused OWN-only RAM RED→GREEN and full bounds/privacy/provenance neighbors; actual module graph remains pending cloud. Retain complete preimage/afterimage/diffs and all original histories.",
+    "Deliver fixed own graph/selection/runner/WF/proofschema/count/hash. Root one new nativeOwn occurrence uses22.23.4/3min/10scase; independent TAP/count/ID/proof/API/ZIP joins and closure, then fresh SPEC+QUALITY review. NativeOwn proves code with models, not Source.",
+    "Only after Root accepts OWN and Source finalcode/staticpins, Root verifies original3203+exact newDATA edges/modes, exactD07tail+onealiasrecorder, targetbefore/after reads/guard provenance and one-use trigger/lease gates.",
+    "Root performs only PF10s plus oneall20nativeGreen under original child180/case120/total330/job7 caps, no split/subset/parallelsource/no timers/reset. No full qualifier/battery3/35/ENOENT/base/mutant/regression/W1 replay.",
+    "Independent OWN consumes actual new rawAPI/tree/log/frame pair/archive/payload; publishes scoped observed earliestthrow/nativeprefix/action/count/AFTER frontier or honestUNKNOWN. A normal end is nonreproduction, not Source/Task1 qualification; completejournal+timeout is process-exit observation, not a physicalhandle diagnosis.",
+    "Root preserves failure/partial evidence and closes only newWF/ref occurrence with originals/DATA/main/history/readbacks/zeroCloseRuns. No automatic secondcapture or Sourcefix; subsequent decisions require new evidence and Root authority."
+  ],
+  "closure": {
+    "thisDesign": "Inventory/plan/wire reconciliation saved as immutable boundedDATA with fullUTF8/SHA256/GitSHA1 readback; no code/tests/refs/runs. Ready for Root shared-contract decision.",
+    "futureCollector": "Exact2normalframes+sameoutcomeJSONbodyLFartifact, all occurrence/target/custody/integrity/report gates; childexit0/1/timeout can be admitted only in defined combinations. Fault/noartifact never an admittedcollection.",
+    "investigation": "Frontier identifies observed operation/firstsafe throw only. It does not retroactively identify43965725604 case20 or503cause/clockfreeze/physicalpendingIO."
+  },
+  "pending": [
+    "Explicit Root acceptance of shared protocol and code release",
+    "Actual published executable/helper/runner/WF/bodyadmission pins after authorization; projectedrecorder662ec intentionally not a published body now",
+    "Concrete ownfullfixtures/census/graph and nativeownreview",
+    "Actual newSource head/tree/run/job remain absent until later Root gate"
+  ],
+  "performed": {
+    "implementation": false,
+    "tests": false,
+    "sourceExecution": false,
+    "sourceImports": false,
+    "sourceSyntax": false,
+    "filesystem": false,
+    "dependencies": false,
+    "refs": false,
+    "runs": false,
+    "provider": false,
+    "secrets": false,
+    "subagents": false
+  },
+  "rollback": "Omit this additive design DATA; all original/historical artifacts intact.",
+  "sourceToolsOnlyGate": "A short Source-tools-only native on six real adapters may be separately nominated by Root before singleGREEN20, per latestRootclarification. It does not add launches to PF+GREENcapture or authorize Source imports in OWN. No nomination/operation added here."
+}

@@ -1,0 +1,396 @@
+{
+  "schema": "afw.own-green20-frontier.design-inventory.v1",
+  "status": "DESIGN_COMPLETE_PENDING_ROOT_SHARED_CONTRACT_ACCEPTANCE",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Read-only design and immutable Git DATA; no receiver implementation or tests",
+  "resourceType": "OWN design inventory/plan",
+  "allowedAction": "Read pinned DATA; publish this bounded design report only. Root owns contract acceptance, code release, refs and runs.",
+  "authority": {
+    "ruling": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
+    "plan": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
+    "targetSupplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+    "sourceDesignIndex": "09745d7a850b19d8004b3214be9357b9e278bd7d",
+    "sourceContract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "sourceContractStatus": "DESIGN_FOR_ROOT_RECONCILIATION; no code authorization inferred"
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "conclusion": "Reuse independent OWN partial-state semantics/N1+N2 knowledge from f799 and strict API/tree/log/actualZIP primitives from reviewed419 reader979c. New explicitly nominated two-frame diagnostic receiver and focused fixture-first controls are required. Existing full419/four-frame old green are not drop-in interfaces; do not normalize old actual receipts or run old business batteries.",
+  "observedBasis": {
+    "primary": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+    "review": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
+    "run": "43965725604/1",
+    "job": 133644531547,
+    "disposition": "Full Source unqualified/incomplete and closed. BASE RED3 admitted; GREEN CAPTURE_INVALID after child ETIMEDOUT; no MUTANT/REG/finalreceipt/artifact. Custody4/4 is partial, not full6/6..24.",
+    "safeGreen": "exit/totals/witness null,cases[] is absence of accepted full join, not zero work or20failures. Returned child capture exit1/signalnone/errorKindtimeout, stdout24395B hashdb94fcb9537a88318ed15bb15c09bf217f566b1b5b7a1287020b9789a5fc2aa8; stderr0.",
+    "irrecoverable": "Internal child TAP bytes were not retained. Job rawLog preserved in Primary is transport, not that private TAP. No firstthrow/lastcase/frontier/case20/frozenclock/physicalpending cause can be reconstructed from stdout hash. No new defect or budget/retry justification is inferred.",
+    "readBoundary": "Read only immutable saved Primary/review; no Actions/log/artifact endpoint repoll or download. Closure is linked conserved evidence, not a fresh history audit."
+  },
+  "sourceVsTarget": {
+    "authority": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+    "git": "Keep3203 originalBASE leaves/modes/statuses. Proposed13 stays immutable SourceIndex26b plus13inert BODYDATA; rawGit admission joins DATA edges, not proposed canonicalpaths. ProposedSource24mount is still design, not a prepared actual head.",
+    "counterexample": "CanonicalGit S08 absent; canonicalGit S09 cede301c/57864B. Correct proposed targetS08 de8a51e/18667B and targetS09 3e1d4c2/61073B exist via inertDATA. Do not reject correctGitBASE because it lacks proposed canonicalS08 or carries oldS09.",
+    "target": "Owned materialized target installs13normal26b canonical paths only for capture; beforeSha256 and afterSha256 arrays must come from independent real reads of those13 files, ordered as26b, before child and after return/timeout before cleanup. SourceS07 remains exact. Add only D07sibling+one-alias recorder.",
+    "evidenceLimit": "OWN can compare emitted arrays to pinned expected rows and DATA tree; cannot independently authenticate absent private target file reads from correct-looking arrays. Known producer pins/static review and Root custody are required. No fake rejection test for structurally identical echoed-correct arrays."
+  },
+  "reusable": [
+    {
+      "blob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "bytes": 31155,
+      "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c",
+      "interfaces": [
+        [
+          "c2OwnReduce(events,condition,integrity='prefix',fault=false)",
+          "lines135-181"
+        ],
+        [
+          "c2OwnGreenApi({run,jobs,commit,expected})",
+          "lines184-198"
+        ],
+        [
+          "c2OwnReadGreen(input,schema,sha256)",
+          "lines204-257"
+        ],
+        [
+          "c2OwnSchema(value,node,document)",
+          "lines109-133"
+        ]
+      ],
+      "reuse": "Original OWN serial action/count cursor with independent AFTER overlap; canonical keys/finite event/site validation; exact same-ID nativePASS-vs-recordedthrow rule and existing N1 provenance lessons.",
+      "changesRequired": "New family identity/context/source26b,2frames instead of4,2launches instead of3,measured before/after arrays,firstThrowSequence,unknownReason and actualZIP instead of supplied archive digest. Reducer does not currently return firstThrowSequence. Its strict whole-array function needs separate published-valid-prefix handling/relational output logic; no Source helper imported.",
+      "stale": "Old green names/job/F9b0af/index65933S08/ec57S09/selectionecb503,old schema hash,synthetic+dependency frames,3launches/process3..8 and old artifact names are frozen historical only."
+    },
+    {
+      "blob": "979c4fd2caadd75b47b3416275248a23310e3722",
+      "bytes": 19653,
+      "sha256": "5af9b48390c62bf579261ea83416ee23895234bb7783733ca4ee7c185f660454",
+      "interfaces": [
+        "c230Time",
+        "c230ApiJoin",
+        "c230Tree",
+        "c230Log",
+        "c230ZipExtra",
+        "c230Crc32",
+        "c230ZipPayload"
+      ],
+      "reuse": "N1 realUTC/calendar/finite API/step-window logic, external caller authority, tree bounds/unique paths, raw byte ZIP/digest/CRC/strict complete deflate/method0method8/DD primitives. Preserve reviewed419 zero-or-equal local fields,TLV/noZIP64/version-needed subset10/20.",
+      "changesRequired": "Only adapt identity/admission/expected SourceDATA edge roster and two marker extraction to acceptednewfamily. Do not keep hardcodedfull25tree/full8frames/fullSource5step fourthname/full6launch constraints; do not generalize trust to outcome-owned expected values.",
+      "zipContract": "Builtin inflateRawSync(member,{maxOutputLength:24577,info:true}) with engine.bytesWritten==complete compressed length. ZIP<=1MiB, one exact regular filename, bounded descriptors/local-central/CRC/size/name/noextraentries, canonical base64, actual digest/listing/size and payload exactoutcome+LF."
+    },
+    {
+      "blob": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+      "reuse": "Fixed normal13 path/sha256/bytes and SourceIndex26b provenance data; baseline6791/tree62e789.",
+      "changesRequired": "Explicit new diagnostic nomination/admission/selection/bodypins; old frozenC230_ADMISSION cannot authorize a different family by metadata rewriting."
+    }
+  ],
+  "producerDataOnly": {
+    "packet": "87ff7ee8c613b02fe04d2d8b6e01e9fee09c610e",
+    "driver": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "originalS07": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+    "recorderBefore": "e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3",
+    "journalReader": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+    "oldContract": "a8b63e6c5e4bb38009bddc48633cfa7af78fa776",
+    "oldSchema": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+    "rule": "Source bodies inspected only as inert text/JSON. No Source journalReader/tapParser/runner/selftest import/evaluation/compilation/syntax/testing; no algorithm copied from62a31. Old Source schema/contract is lineage, not new authority.",
+    "staticDataComparison": {
+      "tailByteIdentical": true,
+      "tailBytes": 1794,
+      "tailSHA256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a",
+      "tailMatchesDraft": true,
+      "oldAliasOccurrences": 1,
+      "derivedRecorderBytes": 3833,
+      "derivedRecorderSHA256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e",
+      "derivedRecorderGitSHA1": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "derivedMatchesDraft": true,
+      "draftRecorderFetch": "404_NOT_FOUND; declared candidate body not treated as immutable published body",
+      "recorderFullRead": false,
+      "SourceEvaluated": false
+    },
+    "projectedRecorder": "662ec... is intentionally not yet a published executable blob.404 observed; pure string comparison of exactly one alias substitution matches3833B/SHAa3fb952.../Git662ec817. This is not a FULL read or permission to publish Source code."
+  },
+  "candidateProtocol": {
+    "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "selection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "selectionRawSHA256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99",
+    "selectionCompactSHA256": "e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd",
+    "schema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "normalReferenceGreenHash": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5",
+    "newFamilyIsNotNormalGreen": true,
+    "selected20": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH",
+      "C2T1_HANDLE",
+      "C2T1_PROJECTREF",
+      "C2T1_SUBJECT",
+      "C2T1_PHASE_RENAME",
+      "C2T1_SOURCE_BYTES",
+      "C2T1_APPROVAL",
+      "C2T1_PREDECESSOR",
+      "C2T1_GRANT_REVOKED",
+      "C2T1_EXTRA_KEY",
+      "C2T1_NOTICES",
+      "C2T1_MONITOR_COOKIE",
+      "C2T1_MONITOR",
+      "C2T1_SCOPE_MISSING",
+      "C2T1_FINITE",
+      "C2T1_SELECTION",
+      "C2T1_LOST_ACK_DUPLICATE",
+      "C2T1_UNRESOLVED_WRITER",
+      "C2T1_OWN_PROMISE"
+    ],
+    "sourceNomination": {
+      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "message": "AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+      "workflow": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+      "job": "c2-green-frontier-diag1",
+      "prefix": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/",
+      "runner": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+      "command": "node docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+      "driverSibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+      "artifact": {
+        "name": "afw-c2-t1-green-frontier-diag1",
+        "path": "output/c2-t1-green-frontier-diag1.json",
+        "fileName": "c2-t1-green-frontier-diag1.json",
+        "retentionDays": 7
+      },
+      "activationReleased": false
+    },
+    "ownNomination": {
+      "branch": "lab/afw-c2-own-receiver-20261116-green-frontier-diag1",
+      "message": "AFW-C2-OWN-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+      "workflow": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+      "job": "c2-own-green-frontier-diag1",
+      "prefix": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/",
+      "runner": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+      "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+      "artifact": {
+        "name": "afw-c2-own-green-frontier-diag1-proof",
+        "path": "output/c2-own-green-frontier-diag1-proof.json",
+        "fileName": "c2-own-green-frontier-diag1-proof.json",
+        "retentionDays": 7
+      },
+      "node": "22.23.4",
+      "runnerOS": "ubuntu-24.04",
+      "jobTimeoutMinutes": 3,
+      "testTimeoutMs": 10000,
+      "activationReleased": false
+    },
+    "actualNewHead": null,
+    "actualNewTree": null,
+    "actualNewRun": null,
+    "actualNewJob": null
+  },
+  "readAssets": [
+    {
+      "key": "frontierRuling",
+      "blob": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
+      "bytes": 6464,
+      "sha256": "d895e2365b46f972014afdeb4e0ae039e031298dafb49b3a8dbd0ad220467296",
+      "gitBlobSHA1": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
+      "fullRead": true
+    },
+    {
+      "key": "frontierPlan",
+      "blob": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
+      "bytes": 22107,
+      "sha256": "28c8c6e9d918f1c144a9c6e53ec6904c2b0af94e4b3dba049b8d941e1e60f6d9",
+      "gitBlobSHA1": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
+      "fullRead": true
+    },
+    {
+      "key": "frontierActual",
+      "blob": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+      "bytes": 1234250,
+      "sha256": "5f7353cad07b4f7c8e78563db3dd76ff1e88cf17f372b139ccf71a2205e7ba7c",
+      "gitBlobSHA1": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+      "fullRead": true
+    },
+    {
+      "key": "frontierActualReview",
+      "blob": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
+      "bytes": 12508,
+      "sha256": "89229c27a454c908e2c4f0e7ebd162839f4940d26c1f08feff49e4f42079902f",
+      "gitBlobSHA1": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
+      "fullRead": true
+    },
+    {
+      "key": "oldOwn",
+      "blob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "bytes": 31155,
+      "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c",
+      "gitBlobSHA1": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+      "fullRead": true
+    },
+    {
+      "key": "zip419",
+      "blob": "979c4fd2caadd75b47b3416275248a23310e3722",
+      "bytes": 19653,
+      "sha256": "5af9b48390c62bf579261ea83416ee23895234bb7783733ca4ee7c185f660454",
+      "gitBlobSHA1": "979c4fd2caadd75b47b3416275248a23310e3722",
+      "fullRead": true
+    },
+    {
+      "key": "admission419",
+      "blob": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+      "bytes": 10236,
+      "sha256": "0c3421a74a75347f1b15549db7c93d1bfe6678798d157b966d06cd6e1596da03",
+      "gitBlobSHA1": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+      "fullRead": true
+    },
+    {
+      "key": "oldDiagPacket",
+      "blob": "87ff7ee8c613b02fe04d2d8b6e01e9fee09c610e",
+      "bytes": 15047,
+      "sha256": "b1f0d746af6285f2c574b7086078d60964a436a2249fddd1a65141955be2867d",
+      "gitBlobSHA1": "87ff7ee8c613b02fe04d2d8b6e01e9fee09c610e",
+      "fullRead": true
+    },
+    {
+      "key": "oldContract",
+      "blob": "a8b63e6c5e4bb38009bddc48633cfa7af78fa776",
+      "bytes": 14400,
+      "sha256": "531f5b5031daec165849bce724f90bb9816a981a25fb1aa8211a2082bb132086",
+      "gitBlobSHA1": "a8b63e6c5e4bb38009bddc48633cfa7af78fa776",
+      "fullRead": true
+    },
+    {
+      "key": "oldSchema",
+      "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "bytes": 9686,
+      "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+      "gitBlobSHA1": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "fullRead": true
+    },
+    {
+      "key": "oldDriver",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+      "gitBlobSHA1": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "fullRead": true
+    },
+    {
+      "key": "recorderBefore",
+      "blob": "e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3",
+      "bytes": 3812,
+      "sha256": "271b9abeb806acaa5e6a1d35e6e72c77cf9b25bb5cad3603f0ccbb05745f7508",
+      "gitBlobSHA1": "e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3",
+      "fullRead": true
+    },
+    {
+      "key": "draftSchema",
+      "blob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+      "bytes": 21200,
+      "sha256": "a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3",
+      "gitBlobSHA1": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+      "fullRead": true
+    },
+    {
+      "key": "draftSelection",
+      "blob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+      "bytes": 3956,
+      "sha256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99",
+      "gitBlobSHA1": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+      "fullRead": true
+    },
+    {
+      "key": "originalS07",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "gitBlobSHA1": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "fullRead": true
+    },
+    {
+      "key": "finalContractIndex",
+      "blob": "09745d7a850b19d8004b3214be9357b9e278bd7d",
+      "bytes": 9139,
+      "sha256": "b40d3f0f1b2eb54621071a1ca6642f6179a64dda58bfbc9009dfafddaf56e929",
+      "gitBlobSHA1": "09745d7a850b19d8004b3214be9357b9e278bd7d",
+      "fullRead": true
+    },
+    {
+      "key": "finalContract",
+      "blob": "e55a6387549a8447a5ad93356184645ae19e70de",
+      "bytes": 21378,
+      "sha256": "8891598c7c0ee416762ad65d139c7e9336cc33e4123e251211055e42c3265fe7",
+      "gitBlobSHA1": "e55a6387549a8447a5ad93356184645ae19e70de",
+      "fullRead": true
+    },
+    {
+      "key": "targetSupplement",
+      "blob": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+      "bytes": 2568,
+      "sha256": "72a4dbeeaf0598dbc817557bc95d876c977e8e362de2d3b0bbaf3642648b9f29",
+      "gitBlobSHA1": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+      "fullRead": true
+    },
+    {
+      "key": "final_inventory",
+      "blob": "b3b57056fdca9a8ff8d8c341642bb9f7b6ddb65f",
+      "bytes": 20496,
+      "sha256": "491f49b28d3d2af0bff15c7f836d69b6f0b4cd1675a4437444d2966532ddd7cd",
+      "gitBlobSHA1": "b3b57056fdca9a8ff8d8c341642bb9f7b6ddb65f",
+      "fullRead": true
+    },
+    {
+      "key": "final_positive-examples",
+      "blob": "1fb2e82835a547f434170939386852e2c6e32850",
+      "bytes": 22620,
+      "sha256": "ae09d2798335a4c417a6088cf6f5dba7415141c0e0efad1e9e7b4f0a9f2aa75e",
+      "gitBlobSHA1": "1fb2e82835a547f434170939386852e2c6e32850",
+      "fullRead": true
+    },
+    {
+      "key": "final_negative-examples",
+      "blob": "928de8cd15789afc4d61b992601016377bdd7a7b",
+      "bytes": 19764,
+      "sha256": "5502a06eed2be7214bb063812bc20703cff6147fe3d4148ed2a1d76ce0bccf13",
+      "gitBlobSHA1": "928de8cd15789afc4d61b992601016377bdd7a7b",
+      "fullRead": true
+    },
+    {
+      "key": "final_tdd",
+      "blob": "d4b598add697757ce7578ba845aae99a746d8af0",
+      "bytes": 8067,
+      "sha256": "a2e02b4eeb23e9410cde39f33f7b76b2bca9c0c5e4752eb3b563ccd2fdbbf6c3",
+      "gitBlobSHA1": "d4b598add697757ce7578ba845aae99a746d8af0",
+      "fullRead": true
+    }
+  ],
+  "performed": {
+    "targetReceiverCodeAuthored": false,
+    "targetControlsAuthored": false,
+    "testsExecuted": false,
+    "sourceCodeExecuted": false,
+    "sourceImports": false,
+    "sourceSyntax": false,
+    "sourceCompilation": false,
+    "sourceMutation": false,
+    "ownHistoricalMutation": false,
+    "filesystem": false,
+    "dependencies": false,
+    "refs": false,
+    "runs": false,
+    "provider": false,
+    "browser": false,
+    "secrets": false,
+    "subagents": false,
+    "ActionsRepoll": false,
+    "logsRepoll": false,
+    "artifactRepoll": false,
+    "onlyOwnHashJsonStringUtilities": true
+  },
+  "rollback": "Omit these additive design blobs; no implementation/runtime/ref was mutated."
+}

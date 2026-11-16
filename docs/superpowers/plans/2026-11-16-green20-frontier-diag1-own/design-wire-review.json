@@ -1,0 +1,290 @@
+{
+  "schema": "afw.own-green20-frontier.wire-reconciliation-plan.v1",
+  "status": "COMPATIBLE_FOR_ROOT_DECISION_NO_IMPLEMENTATION_AUTHORITY",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "ruling": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
+    "supplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+    "candidateContract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "candidateSchema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "candidateSelection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "candidatePacket": "09745d7a850b19d8004b3214be9357b9e278bd7d"
+  },
+  "decision": "No remaining N1/N2/UNKNOWN-vs-FAULT or target-vs-Git wire contradiction found in the final Source design e55 when read with Root supplement3033 and clarifications. Recommend Root seal this ONE shared contract before authorizing either implementation. This report itself does not release code, refs or runs.",
+  "staticDataChecks": {
+    "orderChecks": [
+      {
+        "name": "context",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "custody",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "streamOut",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "streamErr",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "capture",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "journal",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "site",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "error",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "event",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "openCase",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "witness",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "nativeCase",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "native",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "observation",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "outcome",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "fault",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      },
+      {
+        "name": "sourceReads",
+        "requiredMatches": true,
+        "propertiesMatches": true
+      }
+    ],
+    "allOrderChecks": true,
+    "selectionCompactSHA256": "e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd",
+    "selectionHashMatchesSchema": true,
+    "targetArraysMatchCurrentNormal13": true,
+    "registrationTail": {
+      "tailByteIdentical": true,
+      "tailBytes": 1794,
+      "tailSHA256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a",
+      "tailMatchesDraft": true,
+      "oldAliasOccurrences": 1,
+      "derivedRecorderBytes": 3833,
+      "derivedRecorderSHA256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e",
+      "derivedRecorderGitSHA1": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "derivedMatchesDraft": true,
+      "draftRecorderFetch": "404_NOT_FOUND; declared candidate body not treated as immutable published body",
+      "recorderFullRead": false,
+      "SourceEvaluated": false
+    },
+    "method": "Only JSON/string/hash analysis. No semantic receiver/parser execution or tests."
+  },
+  "resolvedItems": [
+    {
+      "id": "R1_GIT_TARGET",
+      "resolution": "Git3203BASE canonicalpaths/modes/statuses stay unchanged;13proposalafterimages are inertBODYDATA+26b. before/after arrays describe two REAL measurements of materializedTARGET13, not canonicalGit. S08absentGit and S09cede301/57864 are positiveGitcases, not oldbody rejection."
+    },
+    {
+      "id": "R2_N1",
+      "resolution": "Exact new Source identity/command/five logical required stepnames from e55; resolve actual unique jobsAPI stepnumber. All five success and jobterminalsuccess for admittedcollection. Childtimeout/exit1 does not turn into stepfailure if reporting/custody complete. Header and every frame use realfinitecalendar dates/step±1000ms with closed uniquegroup. Wrong/duplicate/smuggled marker cannot hide outside window."
+    },
+    {
+      "id": "R3_N2",
+      "resolution": "Stable validated same-ID action/countthrow conflicts with nativePASS, including when a later suffix is torn/recorderfault. FatalEVIDENCE_CONFLICT, not UNKNOWNaccept. NativeFAILwithreturnedmarkers is permitted; otherID/AFTERthrow is separate."
+    },
+    {
+      "id": "R4_UNKNOWN",
+      "resolution": "Stable empty/torn/invalidrecord/recorderflag are honest collectedUNKNOWN with validprecedingrows/nativeprojection retained. Exact priority recorderflag>invalidcomplete>torn>empty. Site-null is legitimate unknownlocation; malformedpublishedrow is never accepted. Invalid executingalias/pin, nonstable read/ownership/custody/target/publication areFAULT."
+    },
+    {
+      "id": "R5_RECORDER_FAULT_ENUM",
+      "resolution": "Fault.reason RECORDER_FAULT reserved for inability to establish trustworthy recorder/transport identity/classification. Stableobservedflag inside approvedtarget instead normal outcomeUNKNOWN/RECORDER_FAULT. Finalcontract removes the draft ambiguity."
+    },
+    {
+      "id": "R6_NATIVE_PREFIX_ONLY",
+      "resolution": "ActualOUTCOME carries only integrity+cases(id,status). IndependentOWN validates safe selected-ID prefix and N2, not rawactualTAP names/ordinals/lines. No Source62a import. FixtureTAPraw is syntheticmodelDATA only; native.prefix can contain all20 and never becomes nativeQualification."
+    },
+    {
+      "id": "R7_PARTIAL_HASH",
+      "resolution": "Clean rawjournal equals canonical validrowsNDJSON length/hash; torn/invalid suffix rawlength strictlylarger; any equal lengths require identical digest. Recorderflag mayhavezerotail. Missingrawtail digest is Source-observed bounded evidence, not independently proved. FirstThrowSequence points earliest validexportedthrow only."
+    },
+    {
+      "id": "R8_TWO_FRAMES",
+      "resolution": "ExactCUSTODY thenOUTCOME, both prepared after allchecks/cleanup, embeddedcustody identical. FAULT distinct/failingcommand/noeligibleartifact; success+fault orpartialpair rejects. No source3/35/dependency/base/mutant/regression/W1/four/eightframe piggyback."
+    },
+    {
+      "id": "R9_CUSTODY",
+      "resolution": "ExactlyPF+GREEN launches; eachfreshcount>=1, partition sum equals checkedprocesses2..8, one targetmax8 and allbooleans true. Does not certify globalphysicaldrain/SDK/namespace/processshutdown."
+    },
+    {
+      "id": "R10_CAPS",
+      "resolution": "SourceJSON body<=24576; exactpayloadLF<=24577. Custody<=1024,fault<=2048,ZIP<=1MiB,log<=4MiB,journal32768/128,stdout1MiB/stderr64KiB,child180/case120/total330/job7. OWNnativeproof cap is separate; no budgetraise."
+    },
+    {
+      "id": "R11_ALIAS_CODE_GATE",
+      "resolution": "D07tail1794Bbyte-identicalS07; oneexactrecorderalias replacement mathematically matchesprojected662ec. Projectedbodyunpublished404 is intentional codeheld, not a badsourcepin to normalize. Need publishedbody+actualfinaladmission before code/capture gate; no sourcecodeblob manufactured by OWN."
+    },
+    {
+      "id": "R12_STEP_WORDING",
+      "resolution": "e55.steps ARRAY exactlynormative. 'fiveoriginal' prose does not require full-source fourthQualify/fifthPreserveSourceReceipt names. Actualfourth is Observeisolatedproposal-greenboundaries and fifthPreservetheboundedgreendiagnostic as exactstrings below."
+    }
+  ],
+  "exactProposedWire": {
+    "steps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Install only the existing locked dependencies",
+      "Observe isolated proposal-green boundaries",
+      "Preserve the bounded green diagnostic"
+    ],
+    "normalMarkers": [
+      {
+        "marker": "AFW_C2_GREEN20_FRONTIER_DIAG1_CUSTODY",
+        "definition": "custody",
+        "bodyBytesMax": 1024
+      },
+      {
+        "marker": "AFW_C2_GREEN20_FRONTIER_DIAG1_OUTCOME",
+        "definition": "outcome",
+        "bodyBytesMax": 24576
+      }
+    ],
+    "faultMarker": {
+      "marker": "AFW_C2_GREEN20_FRONTIER_DIAG1_FAULT",
+      "definition": "fault",
+      "bodyBytesMax": 2048
+    },
+    "artifact": {
+      "name": "afw-c2-t1-green-frontier-diag1",
+      "path": "output/c2-t1-green-frontier-diag1.json",
+      "fileName": "c2-t1-green-frontier-diag1.json",
+      "retentionDays": 7
+    },
+    "sourceSelectionHash": "e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd",
+    "contextKeyOrder": [
+      "repository",
+      "baselineSource",
+      "baselineTree",
+      "sourceIndexBlob",
+      "proposalIndexHash",
+      "selectionHash",
+      "head",
+      "tree",
+      "runId",
+      "runAttempt",
+      "job",
+      "node"
+    ],
+    "outcomeKeyOrder": [
+      "schema",
+      "context",
+      "diagnosticCollectionComplete",
+      "nativeQualification",
+      "sourceReads",
+      "observation",
+      "custody",
+      "SourceQualified",
+      "Task1Pass",
+      "nonclaims"
+    ],
+    "observationKeyOrder": [
+      "capture",
+      "journal",
+      "witness",
+      "unknownReason",
+      "firstThrowSequence",
+      "native"
+    ],
+    "sourceReadsKeyOrder": [
+      "beforeSha256",
+      "afterSha256"
+    ],
+    "scope": "Copied exact candidatecontract data for Root reconciliation; not inventednewinterface and not yet an accepted/code-published protocol."
+  },
+  "mandatoryIndependentGuards": "Schema intentionally cannot enforce all relational rules: partitioncount/context equality, earliestthrow,validstatecursor,reasonpriority/rawprefixhash relations,N2,N1,correcttargetlists and sourceAPI/ZIP/provenance. Do not call structurally valid NX_N2 accepted merely because schema permits it.",
+  "productionEvidenceLimits": {
+    "rawTap": "No RAWactualTAP in OUTCOME. OWN does not parse/authenticate it, nor turn aSourcefixtureTAP intotheactualnativeoracle. No newTAPfield/privateexport proposed.",
+    "targetReads": "Correct-looking constarrays cannot prove real filesystem reads; Rootfixedproducer+actualtargetcustody/measurementcode reviews are the origin authority. Report only safeprojectionvalidation; do not fake an impossible fullycoherentecho rejection.",
+    "privateSuffix": "Rawinvalid/tornjournalbytes notexported; prefixbounds/hash checks can'tproveunseencontent. UNKNOWN suppressesfrontier absoluteclaims.",
+    "timing": "Chronologicalsafeevents and firstobservedthrow are scopednewrun observations; not physicalcause/actualrootcallback/release/clockfreeze proof. Normalend meansnotreproducedwithinthiswindow, not Sourcequalification."
+  },
+  "implementationGates": [
+    "Root accepts exactwire+supplement and explicitly releases Source/OWNcode",
+    "Source author publishes actualalias/runner/helper/WF/bodymanifest, thenRoot fullread/hash/nomination/staticadmission; projectedhashisnotexecutedbody",
+    "OWN authors focused fullcoherentmodel/fixture-firstnewIDs and independentcodeonly afterRootrelease; nativecensussealedbeforeRootnative",
+    "Root later exactOwnnative/API/TAP/proof/ZIP/closure+SPECQUALITY; separate finalSourcecapturegate"
+  ],
+  "toolsOnlyNative": "Root may separately nominate a short Source-tools-only native for six real adapter seams before the singleGREEN20. It is a distinctRootauthority/run, not part of the capture's two launches and not fullqualification/business replay. This design does not nominate or execute it. No Source imports move into OWNcontrols.",
+  "done": "Bounded design complete. No exhaustive freshBASEaudit, Sourcefix, timer/budget/reset or newobservabilityscope proposed. Only remaining implementation inputs are explicitRootacceptance/code-release and lateractualpublishedbody/admission/occurrencepins.",
+  "performed": {
+    "targetCode": false,
+    "targetTests": false,
+    "SourceExecution": false,
+    "SourceImport": false,
+    "SourceCompile": false,
+    "SourceSyntax": false,
+    "filesystem": false,
+    "dependencies": false,
+    "refs": false,
+    "runs": false,
+    "ActionsRepoll": false,
+    "logsRepoll": false,
+    "artifactRepoll": false,
+    "provider": false,
+    "secrets": false,
+    "subagents": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "rollback": "Ignore additive design artifacts; all existingcode/evidence/refs untouched."
+}
