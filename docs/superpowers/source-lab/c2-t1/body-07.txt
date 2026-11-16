@@ -1,0 +1,42 @@
+import test,{after} from 'node:test';
+import assert from 'node:assert/strict';
+import {createFiniteCoupledOwnerWorld} from './fixtures/finite-coupled-native.mjs';
+let w;
+after(async()=>{await w?.close();});
+const fixed=async(id,phase,work)=>test(id,{timeout:120000},async()=>{
+ assert(w||id==='C2T1_CONNECTION');
+ let passed=false;try{await work();passed=true;}finally{
+  const counts=w?await w.counts():null;
+  console.info('C2SOURCE '+JSON.stringify({id,status:passed?'pass':'fail',phase,counters:counts,code:passed?'OK':'TEST_FAILED'}));
+ }
+});
+await fixed('C2T1_CONNECTION','connection',async()=>{
+ w=await createFiniteCoupledOwnerWorld();
+ await w.approve('connection');
+ assert.deepEqual(await w.counts(),{upload:1,activation:1,receipts:1});
+});
+await fixed('C2T1_OAUTH','oauth',async()=>{await w.oauth();});
+await fixed('C2T1_HANDLE','negative',async()=>{await w.invalidForm('handle');});
+await fixed('C2T1_PROJECTREF','negative',async()=>{await w.invalidForm('projectRef');});
+await fixed('C2T1_SUBJECT','negative',async()=>{await w.invalidSubject();});
+await fixed('C2T1_PHASE_RENAME','negative',async()=>{await w.corruptThenDeny('phase');});
+await fixed('C2T1_SOURCE_BYTES','negative',async()=>{await w.corruptThenDeny('module');});
+await fixed('C2T1_APPROVAL','negative',async()=>{await w.corruptThenDeny('approval');});
+await fixed('C2T1_PREDECESSOR','negative',async()=>{await w.corruptThenDeny('predecessor');});
+await fixed('C2T1_GRANT_REVOKED','negative',async()=>{await w.corruptThenDeny('grant');});
+await fixed('C2T1_EXTRA_KEY','negative',async()=>{await w.corruptThenDeny('extra');});
+await fixed('C2T1_NOTICES','notices',async()=>{
+ await w.approve('notices');
+ assert.deepEqual(await w.counts(),{upload:2,activation:2,receipts:2});
+});
+await fixed('C2T1_MONITOR_COOKIE','monitor',async()=>{await w.monitorWrongCookie();});
+await fixed('C2T1_MONITOR','monitor',async()=>{await w.monitor();});
+await fixed('C2T1_SCOPE_MISSING','scope',async()=>{await w.noScope();});
+await fixed('C2T1_FINITE','finite',async()=>{
+ await w.approve('finite');
+ assert.deepEqual(await w.counts(),{upload:3,activation:3,receipts:3});
+});
+await fixed('C2T1_SELECTION','selection',async()=>{await w.selection();});
+await fixed('C2T1_LOST_ACK_DUPLICATE','negative',async()=>{await w.lostAckDuplicate();});
+await fixed('C2T1_UNRESOLVED_WRITER','negative',async()=>{await w.heldWriter();});
+await fixed('C2T1_OWN_PROMISE','negative',async()=>{await w.ownPromise();});
