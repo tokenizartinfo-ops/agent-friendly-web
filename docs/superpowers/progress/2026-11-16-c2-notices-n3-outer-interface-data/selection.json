@@ -1,0 +1,36 @@
+{
+  "schema": "afw.c2-notices-n3.selection.v1",
+  "normalSourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "normalSourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+  "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+  "ids": [
+    "N3_CONNECTION",
+    "N3_OAUTH",
+    "N3_PHASE",
+    "N3_NOTICES"
+  ],
+  "pattern": "^(N3_CONNECTION|N3_OAUTH|N3_PHASE|N3_NOTICES)$",
+  "registration": "eager4/sequential/globalAFTER, same original work/count/assertions/blockedfalse policy",
+  "eligibility": "Actual original admitted POST branch after PH662 and stage===notices from validated chooseOwnerStage638; GET is never eligible. Actual originalLease object, not a request header or Node phase.",
+  "target": "Only PH780 first awaitrecheckOwned after positionreceipt-recorded. PH780 second after positioncomplete is NEVER target.",
+  "focus": "root->outer->activation-child AND root->target-pair->focused pair-child; earliestRECORDEDcheck-threw targetpairchild else firstobserved. Scopefirsterror independent, preserved even outsidefocus.",
+  "probe": "Same before/after firstConnectionProbe only; causal consumes AFTER snapshot only, before causalsnapshot discarded. No stitching across resets, snapshots, scopes or M.",
+  "actualNomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n3",
+    "message": "AFW-C2-T1-NOTICES-N3-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3.yml",
+    "job": "c2-notices-n3",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3/"
+  },
+  "toolingNomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-controls",
+    "message": "AFW-C2-N3-CONTROLS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-controls.yml",
+    "job": "c2-notices-n3-controls",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-controls/run-controls.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000
+  },
+  "SourceQualified": false,
+  "Task1Pass": false
+}
