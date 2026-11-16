@@ -1,0 +1,29 @@
+{
+  "requiredSteps": [
+    "Read the exact one-use diagnostic head",
+    "Use fixed Node",
+    "Install existing locked dependencies",
+    "Observe one finite-form GET",
+    "Preserve sanitized diagnostic only"
+  ],
+  "commandStep": "Observe one finite-form GET",
+  "selectionHash": "b11cb5434f7b66a925af39bc86ceff4b672b84f8895dd269140d70511dccea80",
+  "bindings": {
+    "driverHash": "2ac917ef89f3e285dc6d0ebb654fb163c8cf46a791795173174775373c5cf31d",
+    "recorderHash": "7c96e4986b104a7f742b135dcdb292d5bac36d5f89d8b3465907d798e2fd9820",
+    "readerHash": "17c0f4bb4d110bd47fec176dd4e911c6cd621ce18d19882b54f506a4fb0946c2",
+    "slotHash": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+    "instrumentationHash": "bacc1fdfad03410135176e85c29749a0075ce22dde46ad16083c00dc963a7c36",
+    "worldVariantHash": "fc278eee9247972a205a93fe7108685b24ade1e3d445f6be61bb8bd5eb09d784",
+    "coupledVariantHash": "f5a13e8753222361ea4bf869264fe48a5117595cd07e185a5f43594e05f7fb82",
+    "workerTraceHash": "9e44073d4faa73fb605c6b8bce192c24b0255b9e7a1775423040f4b7e5d385ac",
+    "vectorsHash": "5d2af89cb324618ed6d353f6376efe031b67f6b72adc1465f91017c9f6d05bf4"
+  },
+  "controls": {
+    "accepted": 5,
+    "rejected": 30,
+    "roundtrips": 5,
+    "slotChecks": 5,
+    "vectorsHash": "5d2af89cb324618ed6d353f6376efe031b67f6b72adc1465f91017c9f6d05bf4"
+  }
+}

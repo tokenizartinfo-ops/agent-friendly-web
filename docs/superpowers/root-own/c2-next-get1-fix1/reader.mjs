@@ -1,0 +1,241 @@
+
+// Root-owned independent reader: pure bounded diagnostic DATA. No Source import/execution.
+const NG_IDS=['NG_CONNECTION','NG_OAUTH','NG_PHASE','NG_NOTICES','NG_MONITOR','NG_NEXT_GET'];
+const NG_SITES=['initial-timeline','timeline','op-source','op-check','op-step','finite-permission','finite-history','ticket-put','ticket-readback'];
+const ngObj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+const ngKeys=(v,a)=>ngObj(v)&&Object.keys(v).length===a.length&&Object.keys(v).every((k,i)=>k===a[i]);
+const ngInt=(v,a,b)=>Number.isSafeInteger(v)&&v>=a&&v<=b;
+const ngSame=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const ngBad=()=>{throw Error('ROOT_NEXT_GET_DATA_REJECTED');};
+const ngUnknownTickets=()=>({state:'unavailable',count:null,uses:null});
+const ngUnknownRetention=()=>({state:'unavailable',count:null});
+function ngRetention(v){
+ if(!ngKeys(v,['state','count'])||!['active','absent','unavailable'].includes(v.state))ngBad();
+ if(v.state==='unavailable'?v.count!==null:!ngInt(v.count,0,4096)||v.state==='absent'&&v.count!==0)ngBad();
+ return structuredClone(v);
+}
+function ngTickets(v){
+ if(!ngKeys(v,['state','count','uses'])||!['observed','unavailable'].includes(v.state))ngBad();
+ if(v.state==='unavailable'?v.count!==null||v.uses!==null:!ngInt(v.count,0,3)||!ngInt(v.uses,0,3))ngBad();
+ return structuredClone(v);
+}
+function ngError(v){
+ if(!ngKeys(v,['name','code','site'])||![null,'AssertionError','Error','TypeError','RangeError','SyntaxError','AggregateError','AbortError','TimeoutError'].includes(v.name)||![null,'ERR_ASSERTION','ERR_TEST_FAILURE','ABORT_ERR','ETIMEDOUT','ENOENT','ERR_MODULE_NOT_FOUND','ECONNRESET','ERR_INVALID_ARG_TYPE'].includes(v.code))ngBad();
+ const s=v.site;
+ if(s!==null&&(!ngKeys(s,['file','line','column'])||!['S00','S01','S02','S03','S04','S05','S06','D07','S08','S09','S10','S11','S12'].includes(s.file)||!ngInt(s.line,1,999999)||!ngInt(s.column,1,999999)))ngBad();
+}
+function ngNative(v){
+ if(!ngKeys(v,['integrity','cases','sourceFileFailure'])||!['complete','prefix','unknown'].includes(v.integrity)||typeof v.sourceFileFailure!=='boolean'||!Array.isArray(v.cases)||v.cases.length>6)ngBad();
+ for(let i=0;i<v.cases.length;i++)if(!ngKeys(v.cases[i],['id','status'])||v.cases[i].id!==NG_IDS[i]||!['pass','fail'].includes(v.cases[i].status))ngBad();
+ if(v.integrity==='complete'&&v.cases.length!==6)ngBad();
+ return structuredClone(v);
+}
+function ngRootJournal(records,binding,condition,native,writerFault=false){
+ if(!ngKeys(binding,['sourceIndexHash','selectionHash','driverHash'])||Object.values(binding).some(x=>typeof x!=='string'||!/^[a-f0-9]{64}$/.test(x))||!['normal','timeout'].includes(condition)||writerFault!==false||!Array.isArray(records)||records.length<1||records.length>128)ngBad();
+ native=ngNative(native);
+ let elapsed=-1,index=0,stage=0,after=0,afterThrew=false,workerSequence=0,workerElapsed=-1,workerFault=false;
+ const complete=[],operations=new Map(),edges=new Set(),edgeCounts=new Map(),edgeElapsed=new Map(),stats=new Map();
+ const http={requestEntered:false,responseArrived:false,status:null,bodyReadSettled:null,requestMs:null,responseMs:null,bodyMs:null};
+ let ticketsBefore=ngUnknownTickets(),ticketsAfter=ngUnknownTickets(),beforeSeen=false,afterSeen=false;
+ let retainedBefore=ngUnknownRetention(),retainedLatest=ngUnknownRetention(),retainedAfter=ngUnknownRetention();
+ const inNext=()=>index===5&&stage===1;
+ for(let ri=0;ri<records.length;ri++){
+  const r=records[ri];
+  if(!ngObj(r)||r.sequence!==ri+1||!ngInt(r.elapsedMs,0,180000)||r.elapsedMs<elapsed)ngBad();elapsed=r.elapsedMs;
+  if(ri===0){
+   if(!ngKeys(r,['sequence','elapsedMs','kind','sourceIndexHash','selectionHash','driverHash'])||r.kind!=='binding'||!ngSame({sourceIndexHash:r.sourceIndexHash,selectionHash:r.selectionHash,driverHash:r.driverHash},binding))ngBad();
+   continue;
+  }
+  if(r.kind==='flow'){
+   if(!ngKeys(r,['sequence','elapsedMs','kind','id','operation','edge','error'])||!['enter','return','throw'].includes(r.edge))ngBad();
+   if(r.edge==='throw')ngError(r.error);else if(r.error!==null)ngBad();
+   if(index<6){
+    if(r.id!==NG_IDS[index]||r.operation!==(stage<2?'action':'count')||r.edge!==(stage%2===0?'enter':r.edge)||stage%2===1&&!['return','throw'].includes(r.edge))ngBad();
+    const key=r.id+':'+r.operation;
+    if(stage%2===0)operations.set(key,{entered:true,edge:null,error:null});
+    else operations.set(key,{entered:true,edge:r.edge,error:r.error});
+    if(index===5&&stage===1&&r.edge==='return'&&(!http.requestEntered||!http.responseArrived||http.status!==200||http.bodyReadSettled!==true))ngBad();
+    stage++;
+    if(stage===4){
+     const a=operations.get(r.id+':action'),c=operations.get(r.id+':count');
+     complete.push({id:r.id,status:a.edge==='return'&&c.edge==='return'?'pass':'fail'});
+     index++;stage=0;
+    }
+   }else{
+    if(r.id!=='AFTER'||r.operation!=='after'||after>1||r.edge!==(after===0?'enter':r.edge)||after===1&&!['return','throw'].includes(r.edge))ngBad();
+    after++;if(r.edge==='throw')afterThrew=true;
+   }
+  }else if(r.kind==='http'){
+   if(!ngKeys(r,['sequence','elapsedMs','kind','edge','status'])||!inNext())ngBad();
+   if(r.edge==='request'){
+    if(http.requestEntered||r.status!==null||!beforeSeen)ngBad();
+    http.requestEntered=true;http.requestMs=r.elapsedMs;
+   }else if(r.edge==='response'){
+    if(!http.requestEntered||http.responseArrived||!ngInt(r.status,100,599))ngBad();
+    http.responseArrived=true;http.status=r.status;http.responseMs=r.elapsedMs;
+   }else if(r.edge==='body-return'||r.edge==='body-throw'){
+    if(!http.responseArrived||http.bodyReadSettled!==null||r.status!==http.status)ngBad();
+    http.bodyReadSettled=r.edge==='body-return';http.bodyMs=r.elapsedMs;
+   }else ngBad();
+  }else if(r.kind==='metadata'){
+   if(!ngKeys(r,['sequence','elapsedMs','kind','stage','tickets','retention'])||!inNext())ngBad();
+   const t=ngTickets(r.tickets),ret=ngRetention(r.retention);
+   retainedLatest=ret;
+   if(r.stage==='before'){
+    if(beforeSeen||http.requestEntered)ngBad();beforeSeen=true;ticketsBefore=t;retainedBefore=ret;
+   }else if(r.stage==='after'){
+    if(afterSeen||!http.requestEntered)ngBad();afterSeen=true;ticketsAfter=t;retainedAfter=ret;
+   }else ngBad();
+  }else if(r.kind==='worker-edge'){
+   if(!ngKeys(r,['sequence','elapsedMs','kind','workerSequence','workerElapsedMs','site','edge','remainingMs','ceilingMs'])||!inNext()||!http.requestEntered||r.workerSequence!==workerSequence+1||r.workerSequence>27||!ngInt(r.workerElapsedMs,0,180000)||r.workerElapsedMs<workerElapsed||!NG_SITES.includes(r.site)||!['enter','return','throw'].includes(r.edge)||r.remainingMs!==null&&!ngInt(r.remainingMs,-30000,30000)||r.ceilingMs!==null&&!ngInt(r.ceilingMs,-900000,900000))ngBad();
+   const k=r.site+':'+r.edge;if(edges.has(k)||r.edge!=='enter'&&!edges.has(r.site+':enter'))ngBad();
+   edges.add(k);workerSequence=r.workerSequence;workerElapsed=r.workerElapsedMs;
+   const c=edgeCounts.get(r.site)||[0,0,0];c[['enter','return','throw'].indexOf(r.edge)]=1;edgeCounts.set(r.site,c);
+   edgeElapsed.set(r.site,Math.max(edgeElapsed.get(r.site)??0,r.workerElapsedMs));
+  }else if(r.kind==='worker-state'){
+   if(!ngKeys(r,['sequence','elapsedMs','kind','epoch','workerSequence','workerElapsedMs','fault','stats','retention'])||!inNext()||r.epoch!==1||r.workerSequence!==workerSequence||!ngInt(r.workerElapsedMs,0,180000)||r.workerElapsedMs<workerElapsed||typeof r.fault!=='boolean'||!Array.isArray(r.stats)||r.stats.length>9)ngBad();
+   workerElapsed=r.workerElapsedMs;workerFault ||= r.fault;const seen=new Set(),next=new Map();
+   for(const row of r.stats){
+    if(!Array.isArray(row)||row.length!==8||!NG_SITES.includes(row[0])||seen.has(row[0])||row.slice(1,5).some(x=>!ngInt(x,0,4096))||row[4]!==row[1]-row[2]-row[3]||!ngInt(row[5],0,r.workerElapsedMs)||row[6]!==null&&!ngInt(row[6],-30000,30000)||row[7]!==null&&!ngInt(row[7],-900000,900000))ngBad();
+    seen.add(row[0]);const old=stats.get(row[0]),first=edgeCounts.get(row[0]);
+    if(!first||first[0]!==1||row.slice(1,4).some((n,j)=>n>0&&first[j]!==1)||row[5]<edgeElapsed.get(row[0]))ngBad();
+    if(old&&row.slice(1,4).some((n,j)=>n<old[j+1])||old&&row[5]<old[5]||first&&first.some((n,j)=>row[j+1]<n))ngBad();
+    next.set(row[0],structuredClone(row));
+   }
+   if([...stats.keys(),...edgeCounts.keys()].some(k=>!next.has(k)))ngBad();
+   stats.clear();for(const [k,v]of next)stats.set(k,v);
+   retainedLatest=ngRetention(r.retention);
+  }else if(r.kind==='worker-unavailable'){
+   if(!ngKeys(r,['sequence','elapsedMs','kind'])||!inNext())ngBad();
+   retainedLatest=ngUnknownRetention();
+  }else ngBad();
+ }
+ if(workerFault)ngBad();
+ for(let i=0;i<native.cases.length;i++){
+  const n=native.cases[i],completed=complete[i],a=operations.get(n.id+':action'),c=operations.get(n.id+':count');
+  if(n.status==='pass'&&(a?.edge==='throw'||c?.edge==='throw'))ngBad();
+  if(completed&&n.status!==completed.status)ngBad();
+ }
+ if(native.cases.some((n,i)=>!complete[i])&&native.integrity!=='unknown')ngBad();
+ const integrity=index===6&&after===2&&native.integrity==='complete'?'complete':'prefix';
+ const delta=ticketsBefore.state==='observed'&&ticketsAfter.state==='observed'?ticketsAfter.count-ticketsBefore.count:null;
+ const flow=NG_IDS.filter(id=>operations.has(id+':action')).map(id=>{const a=operations.get(id+':action'),c=operations.get(id+':count');return {id,action:a.edge==='return'?'returned':a.edge==='throw'?'threw':'entered',count:!c?'unobserved':c.edge==='return'?'returned':c.edge==='throw'?'threw':'entered',actionError:a.error,countError:c?.error??null};});
+ return {integrity,flow,complete,openCase:index<6&&stage>0?NG_IDS[index]:null,openOperation:index<6&&stage>0?(stage<2?'action':'count'):null,afterOpen:after===1,afterThrew,http,tickets:{before:ticketsBefore,after:ticketsAfter,delta},checkpoints:[...stats.values()],retention:{before:retainedBefore,latest:retainedLatest,after:retainedAfter},workerSequence,workerElapsedMs:workerElapsed<0?null:workerElapsed,sourceQualified:false,task1Pass:false,PCoff:false};
+}
+
+function ngRootRaw(raw,binding,condition,native,fault=false){
+ if(typeof raw!=='string'||Buffer.byteLength(raw,'utf8')>32768||!raw.endsWith('\n'))ngBad();
+ const lines=raw.slice(0,-1).split('\n'),records=[];
+ for(const l of lines){let x;try{x=JSON.parse(l);}catch{ngBad();}if(JSON.stringify(x)!==l)ngBad();records.push(x);}
+ return ngRootJournal(records,binding,condition,native,fault);
+}
+
+function ngTime(v){
+ if(typeof v!=='string'||!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,9})?Z$/.test(v))ngBad();
+ const n=Date.parse(v);if(!Number.isFinite(n)||new Date(n).toISOString().slice(0,19)!==v.slice(0,19))ngBad();return n;
+}
+function ngApiJoin(input,expected,admission){
+ if(!ngKeys(input,['run','jobs','commit'])||!ngKeys(expected,['repository','branch','workflowPath','oneUseMessage','job','parent','head','tree','runId','jobId']))ngBad();
+ const e=expected,r=input.run,c=input.commit,js=input.jobs;
+ if(e.repository!=='tokenizartinfo-ops/agent-friendly-web'||e.branch!=='lab/afw-c2-source-20261116-t1-next-get1'||e.workflowPath!=='.github/workflows/afw-c2-next-get1.yml'||e.oneUseMessage!=='AFW-C2-T1-NEXT-GET1-ONEUSE-20261116'||e.job!=='c2-next-get1'||e.parent!=='6791ce1bab9372e206d3c7b42b3e1394dc6e0c68'||![e.head,e.tree].every(x=>typeof x==='string'&&/^[a-f0-9]{40}$/.test(x))||!ngInt(e.runId,1,Number.MAX_SAFE_INTEGER)||!ngInt(e.jobId,1,Number.MAX_SAFE_INTEGER))ngBad();
+ if(!ngObj(r)||r.id!==e.runId||r.run_attempt!==1||r.head_sha!==e.head||r.head_branch!==e.branch||r.path!==e.workflowPath||r.event!=='push'||r.status!=='completed'||r.conclusion!=='success'||r.repository?.full_name!==e.repository||r.head_repository?.full_name!==e.repository)ngBad();
+ if(!ngObj(c)||c.sha!==e.head||c.tree?.sha!==e.tree||c.message!==e.oneUseMessage||!Array.isArray(c.parents)||c.parents.length!==1||c.parents[0].sha!==e.parent)ngBad();
+ if(!ngObj(js)||js.total_count!==1||!Array.isArray(js.jobs)||js.jobs.length!==1)ngBad();
+ const j=js.jobs[0];
+ if(!ngObj(j)||j.id!==e.jobId||j.run_id!==e.runId||j.run_attempt!==1||j.head_sha!==e.head||j.name!==e.job||j.status!=='completed'||j.conclusion!=='success'||!Array.isArray(j.steps)||new Set(j.steps.map(s=>s.number)).size!==j.steps.length)ngBad();
+ const start=ngTime(j.started_at),end=ngTime(j.completed_at);if(end<start||end-start>420000)ngBad();
+ if(!ngObj(admission)||!Array.isArray(admission.requiredSteps)||admission.requiredSteps.length!==5||new Set(admission.requiredSteps).size!==5||admission.requiredSteps.some(x=>typeof x!=='string'||!x.length)||admission.commandStep!==admission.requiredSteps[3])ngBad();
+ let number=0,previousEnd=start,command=null;
+ for(const step of j.steps){
+  if(!ngObj(step)||!ngInt(step.number,1,100)||typeof step.name!=='string'||step.status!=='completed'||!(step.conclusion==='success'||step.name==='Post '+admission.requiredSteps[1]&&step.conclusion==='skipped'))ngBad();
+ }
+ for(const name of admission.requiredSteps){
+  const found=j.steps.filter(s=>s.name===name);if(found.length!==1)ngBad();const step=found[0],a=ngTime(step.started_at),b=ngTime(step.completed_at);
+  if(step.number<=number||step.conclusion!=='success'||a<start||b>end||b<a||a<previousEnd)ngBad();
+  number=step.number;previousEnd=b;if(name===admission.commandStep)command=step;
+ }
+ if(!command)ngBad();
+ return {context:{repository:e.repository,baselineSource:e.parent,baselineTree:'62e78926635d6b74f288d6c0d69e0f2516306989',proposalIndexHash:'0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7',head:e.head,tree:e.tree,runId:String(e.runId),runAttempt:1,job:e.job,node:'v22.23.4'},jobId:j.id,commandStep:command};
+}
+function ngLogFrames(raw,joined,command,markers){
+ if(typeof raw!=='string'||Buffer.byteLength(raw,'utf8')>4194304||typeof command!=='string'||!Array.isArray(markers)||markers.length!==4||new Set(markers).size!==4)ngBad();
+ const start=ngTime(joined.commandStep.started_at)-1000,end=ngTime(joined.commandStep.completed_at)+1000,frames=[];
+ let group=false,commandSeen=0,closed=false,window=false;
+ for(const row of raw.split('\n')){
+  if(!row)continue;const m=/^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z) (.*)$/.exec(row);
+  if(!m){if(row.includes('AFW_C2_'))ngBad();continue}
+  const line=m[2];
+  if(line==='##[group]Run '+command){
+   const t=ngTime(m[1]);if(++commandSeen!==1||group||t<start||t>end)ngBad();group=true;window=true;continue;
+  }
+  if(group&&line==='##[endgroup]'){closed=true;group=false;continue;}
+  if(closed&&line.startsWith('##[group]'))window=false;
+  if(line.includes('AFW_C2_')&&!line.startsWith('AFW_C2_'))ngBad();
+  if(line.startsWith('AFW_C2_')){
+   const t=ngTime(m[1]);if(!window||!closed||commandSeen!==1||t<start||t>end)ngBad();frames.push(line);
+  }
+ }
+ if(commandSeen!==1||!closed||frames.length!==4)ngBad();
+ return frames.map((line,i)=>{
+  const prefix=markers[i]+' ';if(!line.startsWith(prefix))ngBad();
+  const rawValue=line.slice(prefix.length);if(Buffer.byteLength(rawValue,'utf8')>(i===3?24576:2048))ngBad();
+  let value;try{value=JSON.parse(rawValue);}catch{ngBad();}
+  if(JSON.stringify(value)!==rawValue)ngBad();return value;
+ });
+}
+
+function ngSchema(value,node,document){
+ if(!ngObj(node))return false;
+ if(node.$ref){if(typeof node.$ref!=='string'||!node.$ref.startsWith('#/$defs/'))return false;return ngSchema(value,document.$defs[node.$ref.slice(8)],document);}
+ if(Object.hasOwn(node,'const')&&!ngSame(value,node.const))return false;
+ if(node.enum&&!node.enum.some(v=>ngSame(v,value)))return false;
+ if(node.anyOf&&!node.anyOf.some(s=>ngSchema(value,s,document)))return false;
+ if(node.oneOf&&node.oneOf.filter(s=>ngSchema(value,s,document)).length!==1)return false;
+ if(node.allOf&&!node.allOf.every(s=>ngSchema(value,s,document)))return false;
+ const isType=(v,t)=>t==='object'?ngObj(v):t==='array'?Array.isArray(v):t==='integer'?Number.isSafeInteger(v):t==='number'?typeof v==='number'&&Number.isFinite(v):t==='string'?typeof v==='string':t==='null'?v===null:t==='boolean'?typeof v==='boolean':false;
+ if(node.type&&!(Array.isArray(node.type)?node.type.some(t=>isType(value,t)):isType(value,node.type)))return false;
+ if(node.properties&&ngObj(value)){
+  const names=Object.keys(node.properties);
+  if(node.additionalProperties===false&&Object.keys(value).some(k=>!names.includes(k)))return false;
+  if(node.required&&!node.required.every(k=>Object.hasOwn(value,k)))return false;
+  if(node.required?.length===names.length&&node.additionalProperties===false&&!ngKeys(value,names))return false;
+  for(const k of names)if(Object.hasOwn(value,k)&&!ngSchema(value[k],node.properties[k],document))return false;
+ }
+ if(typeof value==='number'&&(node.minimum!==undefined&&value<node.minimum||node.maximum!==undefined&&value>node.maximum))return false;
+ if(typeof value==='string'&&node.pattern&&!new RegExp(node.pattern).test(value))return false;
+ if(Array.isArray(value)){
+  if(node.minItems!==undefined&&value.length<node.minItems||node.maxItems!==undefined&&value.length>node.maxItems)return false;
+  for(let i=0;i<value.length;i++){const rule=node.prefixItems?.[i]??node.items;if(rule===false||rule&&!ngSchema(value[i],rule,document))return false;}
+ }
+ return true;
+}
+
+function ngReadNext(input,schema,admission,hash){
+ if(!ngKeys(input,['run','jobs','commit','expected','transport','artifact'])||typeof hash!=='function'||hash(JSON.stringify(schema))!=='5c4a50df6bf9cb707a106ac8e6389831ec0dda88e9aecdda6ddbea7ad7ff5ced')ngBad();
+ const joined=ngApiJoin({run:input.run,jobs:input.jobs,commit:input.commit},input.expected,admission),t=input.transport;
+ if(!ngKeys(t,['runId','jobId','rawLog'])||t.runId!==input.run.id||t.jobId!==joined.jobId)ngBad();
+ const command='node docs/superpowers/source-lab/c2-t1-next-get1/run-c2-next-get1.mjs';
+ const frames=ngLogFrames(t.rawLog,joined,command,['AFW_C2_NEXT_GET_SYNTHETIC','AFW_C2_DEPENDENCY_CONTROL','AFW_C2_NEXT_GET_CUSTODY','AFW_C2_NEXT_GET_OUTCOME']);
+ const [synthetic,dependency,custody,outcome]=frames;
+ if(!ngSchema(outcome,schema,schema)||!ngSame(outcome.context,joined.context)||outcome.selectionHash!==admission.selectionHash||!ngSame(outcome.bindings,admission.bindings)||!ngSame(outcome.controls,admission.controls))ngBad();
+ const expectedSynthetic={schema:'afw.c2-next-get.synthetic.v1',context:joined.context,selectionHash:admission.selectionHash,...admission.controls};
+ if(!ngSame(synthetic,expectedSynthetic)||!ngSame(dependency,{schema:'afw.c2-bootstrap-dependency-control.v1',id:'BOOTSTRAP_DEPENDENCY_ABSENT',status:'pass',observation:'EXPECTED_ENOENT'}))ngBad();
+ const cx={head:joined.context.head,runId:joined.context.runId,runAttempt:1,job:joined.context.job,proposalIndexHash:joined.context.proposalIndexHash};
+ if(!ngSame(custody,outcome.custody)||custody.schema!=='afw.c2-next-get.custody.v1'||!ngSame(custody.context,cx)||custody.checkedLaunches!==3||!ngInt(custody.checkedProcesses,3,24)||!['parentNonRoot','preflightOwned','preflightRemoved','uidGidGroupsLoopbackMatched','ownRootVerified','ownTempRemoved'].every(k=>custody[k]===true))ngBad();
+ const c=outcome.capture,j=outcome.journal,o=outcome.observation,w=j.witness;
+ if(!(c.errorKind==='timeout'||c.errorKind==='none'&&c.signal==='none'&&[0,1].includes(c.exitCode))||c.stdout===null||c.stderr===null||!j.stable||j.recorderFaultObserved||!o.valid||o.code!=='OK'||o.writerFault||!['complete','prefix'].includes(w.integrity)||outcome.native.integrity==='unknown')ngBad();
+ const raw=w.records.map(r=>JSON.stringify(r)+'\n').join('');
+ if(Buffer.byteLength(raw,'utf8')!==w.prefixBytes||hash(raw)!==w.prefixSha256||j.bytes!==w.prefixBytes||j.sha256!==w.prefixSha256)ngBad();
+ const binding={sourceIndexHash:joined.context.proposalIndexHash,selectionHash:admission.selectionHash,driverHash:admission.bindings.driverHash};
+ const read=ngRootRaw(raw,binding,c.errorKind==='timeout'?'timeout':'normal',outcome.native,false);
+ if(read.integrity!==w.integrity||read.integrity!==o.integrity)ngBad();
+ for(const key of ['flow','http','tickets','checkpoints','retention'])if(!ngSame(read[key],o[key]))ngBad();
+ const a=input.artifact;
+ if(!ngKeys(a,['runId','jobId','listing','artifactId','fileName','payloadText','archiveSha256'])||a.runId!==input.run.id||a.jobId!==joined.jobId||a.fileName!=='c2-next-get1.json'||typeof a.payloadText!=='string'||a.payloadText!==JSON.stringify(outcome)+'\n'||Buffer.byteLength(a.payloadText,'utf8')>24577||!/^[a-f0-9]{64}$/.test(a.archiveSha256))ngBad();
+ const list=a.listing;if(!ngObj(list)||list.total_count!==1||!Array.isArray(list.artifacts)||list.artifacts.length!==1)ngBad();
+ const item=list.artifacts[0];
+ if(item.id!==a.artifactId||!ngInt(item.id,1,Number.MAX_SAFE_INTEGER)||item.name!=='afw-c2-next-get1'||item.expired!==false||!ngInt(item.size_in_bytes,1,1048576)||item.workflow_run?.id!==input.run.id||item.workflow_run?.head_sha!==input.expected.head||item.workflow_run?.head_branch!==input.expected.branch||item.digest!=='sha256:'+a.archiveSha256)ngBad();
+ return {diagnosticCaptureAccepted:true,context:joined.context,jobId:joined.jobId,commandStepNumber:joined.commandStep.number,http:read.http,tickets:read.tickets,checkpoints:read.checkpoints,retention:read.retention,flow:read.flow,openCase:read.openCase,openOperation:read.openOperation,afterOpen:read.afterOpen,afterThrew:read.afterThrew,native:outcome.native,capture:c,integrity:read.integrity,SourceQualified:false,Task1Pass:false,PCoff:false};
+}
+
+export {ngRootJournal,ngRootRaw,ngNative,ngTickets,ngRetention,ngTime,ngApiJoin,ngLogFrames,ngSchema,ngReadNext,ngSame,ngBad,NG_IDS,NG_SITES};
