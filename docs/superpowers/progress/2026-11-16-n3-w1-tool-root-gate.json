@@ -1,0 +1,93 @@
+{
+  "schema": "AFW-N3-W1-TOOLING-ROOT-GATE/1",
+  "atUTC": "2026-11-16 19:18:07 UTC",
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "GitHub Actions synthetic tooling lab",
+  "ORIGIN": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+  "RESOURCE_TYPE": "one-use branch and workflow",
+  "RESOURCE_ID": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+  "ALLOWED_ACTION": "One push-trigger attempt1 of exact tooling job; inspect actual native results and close by removing this new workflow. No business capture, production, OAuth, provider runtime or credentials.",
+  "prepared": {
+    "head": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+    "tree": "e0132848dff710d2e6038c6f68721f6338b4fdc1",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+    "originals": 3203,
+    "added": 47,
+    "leaves": 3250,
+    "sourceBusinessExecuted": false,
+    "refCreated": false
+  },
+  "packet": "1c732aaf9854b43860e76335ee40b5ec0ca42f64",
+  "index": "6145d2070af728964c5eb414de3a3b414c4d3646",
+  "rootSeal": "18f7bc92ad395e87042666399e736aa4dffbe278",
+  "supplement": "fea7c4ec837887c87f33720d799fcfa76cdede3f",
+  "hashVerification": {
+    "total": 66,
+    "reusedPriorRootVerified": 38,
+    "newIndependent": 28,
+    "allPassed": true
+  },
+  "fullDiff": {
+    "deltas": 17,
+    "newBodies": 10,
+    "forwardReverseExact": true
+  },
+  "tree": {
+    "originalsPreserved": 3203,
+    "added": 47,
+    "total": 3250,
+    "noOtherChanges": true
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+    "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-tool.yml",
+    "job": "c2-notices-n3-firstlimit-w1-tool",
+    "message": "AFW-C2-N3-FIRSTLIMIT-W1-TOOL-ONEUSE-20261116",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs",
+    "caseMs": 10000,
+    "jobMinutes": 3,
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/",
+    "node": "22.23.4",
+    "attempt": 1,
+    "contents": "read",
+    "artifactDays": 7,
+    "artifact": {
+      "name": "afw-c2-notices-n3-firstlimit-w1-tool",
+      "path": "output/c2-notices-n3-firstlimit-w1-tool.json",
+      "fileName": "c2-notices-n3-firstlimit-w1-tool.json",
+      "expectedCount": 1,
+      "retentionDays": 7,
+      "payloadCapBytes": 24576
+    },
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-controls.mjs",
+    "beforeRunner": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-before.mjs",
+    "commandBefore": "node docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/run-before.mjs"
+  },
+  "expected": {
+    "redTests": 3,
+    "redPass": 0,
+    "redFail": 3,
+    "redExactObservationAndTAPRequired": true,
+    "greenTests": 62,
+    "greenPass": 62,
+    "greenFail": 0,
+    "cancel": 0,
+    "skip": 0,
+    "todo": 0
+  },
+  "rollback": "After terminal run remove only new workflow at exact observed branch head; preserve original3203 and all unique evidence; verify closed head/tree and zero close-head runs. No retries/re-runs or business capture inferred.",
+  "authority": "Owner continuing synthetic AFW roadmap authorization; Root controlled technical implementation ruling a969930b2fea38173ac84b33aa85f9f6ef85e516, round4/5 fresh author. No owner manual step.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
