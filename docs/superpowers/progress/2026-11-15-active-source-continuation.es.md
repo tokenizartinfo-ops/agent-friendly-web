@@ -1,60 +1,36 @@
-# AFW continuation — closed Source, observed phase71
+# AFW active continuation
+
+FIX4 ONE-USE SOURCE ACTIVO.
 
 {
-  "Source": "7ca59cc55e3f2b66212c083d1e82215a988ef7ef",
-  "tree": "4a3f2c5fd49d580c15418a7fdec1b77019fb9c05",
-  "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
-  "SAME": {
-    "bytes": 2594126,
-    "sha256": "3f9c005127940fc259d2c2e0dc5f290da3a5932e1de870ba2ff2c6952bc06ef1",
-    "blob": "d5291b1e807d193765edfc3a257192591ae7f576"
+  "prepared": {
+    "commit": "388c98eb84ed0034a5b2736a430b295f4594cea6",
+    "activeTree": "4b423eda8f9ff61f7e0c9b94714f6281dbdc22a8",
+    "inactiveTree": "05c9df14831d05ece9fb902eecc91e65edd88abe",
+    "parent": "7ca59cc55e3f2b66212c083d1e82215a988ef7ef",
+    "F7": "eb0b41df8ed9785b035202ad88be8730b3917431",
+    "SAME": "da3f401b360d92d6e2031bb42e8dcc42375099af",
+    "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-FIX4-ONEUSE-20261115",
+    "SourceReleased": false
   },
-  "Core": {
-    "leaves": 3201,
-    "bytes": 324448,
-    "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
+  "gate": "0988b30011bb46ea966d52c7ae125f73b2b3f76c",
+  "SourceIndex": "9f2871494681f1562b44efea13e74e5b7a43a269",
+  "OwnIndex": "6793b7c01ee70e4bc898b1b58f60c07f7c06c5ce",
+  "rollback": {
+    "parent": "388c98eb84ed0034a5b2736a430b295f4594cea6",
+    "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "preserveEntireSAME": true,
+    "fullActualExternalBeforeClose": true,
+    "compactMax": 820,
+    "minimumClosedSpare": 1024,
+    "readback": "Source/commit/tree/F7/fullSAME/Core/Main/5queues/closedheadruns"
   },
-  "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
-  "readback": "2026-11-16 01:09:04 UTC",
-  "queues": 0,
-  "closedHeadRuns": 0,
-  "pending": null,
-  "active": null,
-  "frozen": false,
-  "fixRound": 3,
-  "actual": {
-    "run": 43783876645,
-    "attempt": 1,
-    "job": 133027042797,
-    "preflight": "failure exit71",
-    "phase": "worker launch/capture/unexpected failure",
-    "otherSteps": "skipped",
-    "canonicalFrames": 0,
-    "actual520": 0,
-    "firstException": "UNKNOWN",
-    "logsConsumed": true
-  },
-  "fullReceipt": "d4e5a0e3ed6855afc4f7c2bc61c4011d45150168",
-  "actualReport": "8c48e2de81c3f0275289c880a3bb9b30067cb723",
-  "reviewer": "/root/serial_v2_task_review",
-  "reviewPackage": "379776bff97622aac76bc5556af9f2f759bd9815",
-  "reviewPending": true,
-  "newStaticExecutionFinding": "8478d5cc9f582f1e3fb437df933b8992c10c7c6a",
-  "findingSummary": "Node22 primary implementation converts string stdin using options.encoding; current encoding buffer is not valid Buffer string encoding. Deterministic static invocation defect consistent with71; actual thrown exception/historicalcause not captured.",
-  "primary": [
-    "https://github.com/nodejs/node/blob/v22.23.4/lib/child_process.js#L829-L847",
-    "https://github.com/nodejs/node/blob/v22.23.4/lib/buffer.js#L450-L460"
-  ],
+  "run": "await identification",
+  "SourceFrozen": true,
+  "allSevenFalse": true,
   "I3Open": true,
   "C2Held": true,
-  "NativeHeld": true,
-  "providerRuntimeUnread": true,
-  "all7false": true,
-  "ownerActionNeeded": false
+  "NativeHeld": true
 }
 
-No old-run replay/log refetch. Root waiting SAME scoped review3 before round4. Fix-loop requires fresh implementer on more-capable model for4–5; not originalSourceactor. Roundsmax5 sameTask1, noreset. Full history/limits preserved. Correction candidate must retain explicit Buffer stdout/stderr and safe UTF8 stdin; Source local execution/compile/eval prohibited. UpcomingSource-onlyGitHubvalidation, notCF/Nativeruntime.
-
-## SameTask1 round4 fresh implementer
-
-Review40ab642d8fbcf1785e273fdba062618b56178ecc accepts phase/layout spec+quality,0newC/I/M and confirms startupE1 mechanism separately. Current actualsourceonlyexit71/unqualified; originalcausefalse. Fresh /root/serial_v2_fix4_impl onAstrahigh perfix-loopround4 nowowns narrow UTF8-buffer stdin correction and exact-shell reversionregression. Briefd8d01286/ruling626695af; previousSourceactoridle. SAMEappend<=1500/Rootcompact<=820, no capraise/truncate. Sourcefullyclosed7ca; no candidate/run. All7false; no owneractionneeded.
+No repeat/refetch. Terminaluniquejob, logsONCE. Positivegates+strictcurrentrecord only; codephase is unqualifieddiagnostic. FullactualreceiptRootdocs beforeoriginalF7+wholeSAME+compact<=820, fullclosurereadback thenpending/active null. Provider/runtime unread. No owneraction.
