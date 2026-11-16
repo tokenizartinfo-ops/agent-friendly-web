@@ -1,0 +1,71 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-SOURCE-TOOLS-CLOSURE/1",
+  "timestampUTC": "2026-11-16 23:16:16 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261116-green-frontier-diag1-tools",
+  "testedHead": "6d6ab08491f1bdb77b0ab492294731715b43a64f",
+  "testedTree": "4d97f2f93277d48f79a9aaaa905fe2b90f21af79",
+  "run": 43977281603,
+  "job": 133684396049,
+  "primary": "5ecdf44b7bdea99ae1692a8eff9a5ca5b1939303",
+  "proof": "466c6af28eba2581f1e487c947bcd76d11fb0afc",
+  "result": {
+    "nativeTests": 6,
+    "assertions": 31,
+    "counts": {
+      "pass": 6,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "actualCommandStep": 4,
+    "APIContextJoined": true,
+    "proofSchemaSubsetVerified": true,
+    "proofCanonicalLF": true,
+    "ZIPStrictCRCFullInflateVerified": true,
+    "artifactListingDigestJoined": true,
+    "sourceToolingOnly": true,
+    "SourceBusinessExecuted": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    },
+    "zip": {
+      "bytes": 2169,
+      "sha256": "f93c9930a0fa564c6d6a392bcbf59299c0c513eec5fe5ee8c348c870fd054fd4",
+      "blob": "543eccb53435b24dc87ba9a49c20514db8079fdd"
+    },
+    "payload": {
+      "bytes": 4058,
+      "sha256": "de83b4cc817aa0f6ca236436769dc9d36e89cf8d276d99cff333d91a5a483a23",
+      "blob": "466c6af28eba2581f1e487c947bcd76d11fb0afc"
+    },
+    "rawLog": {
+      "bytes": 22096,
+      "sha256": "8284ee1ce5d9c2ccddc641cd4f7ecefc2819e1800cbd8d256b6ad71cc0bf575f",
+      "blob": "ab92c678e6c140eeeb5c147979e06c6f5a050560"
+    }
+  },
+  "delta": "Delete only nominated tooling workflow; add primary and this receipt. Keep other 10 additive leaves and all original3203 unchanged. This is a Git workflow closure, not physical/native AFW drain.",
+  "SourceToolingExecuted": true,
+  "SourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
