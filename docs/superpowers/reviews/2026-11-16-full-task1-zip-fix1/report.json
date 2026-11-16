@@ -1,0 +1,240 @@
+{
+  "schema": "afw.own-full-c230.zip-fix1.report.v1",
+  "status": "READY_ROOT_STATIC_ADMISSION_NATIVE419_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": {
+    "round": 2,
+    "maxRounds": 5,
+    "findings": [
+      "F1",
+      "F2"
+    ],
+    "authority": "fc6287a46a8acefbb5ba9892214e351d52423e7f",
+    "review": "5aabaa3f85133d126f24652b348c0c5bc3de08ab",
+    "oldIndex": "1e0f7b4bf24be7ce402ff30a0b47521005df85a0",
+    "oldReader": "dccfce8f31a7075043aeb606f9749a511e2bb62a"
+  },
+  "result": "Only the independent OWN ZIP guard changed. New versioned harness admits the same original370 control IDs/expectations as prefix against the corrected reader and appends49 focused full-input ZIP cases. RAM419PASS0FAIL; actual native419 and fresh independent review remain pending Root.",
+  "reader": {
+    "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/full-reader.mjs",
+    "mode": "100644",
+    "blob": "979c4fd2caadd75b47b3416275248a23310e3722",
+    "bytes": 19653,
+    "sha256": "5af9b48390c62bf579261ea83416ee23895234bb7783733ca4ee7c185f660454",
+    "gitBlob": "979c4fd2caadd75b47b3416275248a23310e3722",
+    "fullReadback": true
+  },
+  "changes": [
+    {
+      "finding": "F1",
+      "behavior": "When flags&0x8, each local32bit CRC/compressed-size/uncompressed-size field must independently be0 or equal the authoritative central/descriptor field. Contradictory nonzero values reject. Signed/unsigned32bit descriptors, stored/deflate, localzeros/matchingnonzeros stay admitted.",
+      "policy": "Zero-or-equal is Root's explicit bounded compatibility policy, not a claim that matching nonzero placeholders are required by PKWARE."
+    },
+    {
+      "finding": "F2",
+      "behavior": "Walk local and central extra areas as bounded TLV. Each item needs full4byteheader and exact bounded payload; reject trailing1..3headerbytes, overdeclareddata and any ID0x0001 even with ordinary32bit sizes. Ordinary complete TLVs, including0length and multiple fields, remain compatible.",
+      "policy": "Ordinary extra contents are uninterpreted metadata; they cannot override expected path, member payload, CRC or lengths."
+    },
+    {
+      "finding": "F2/version subset",
+      "behavior": "Local and central version-needed must agree. Stored method0 permits10/20; deflate8 permits20 only. Reject45, unsupported values and mismatch.",
+      "policy": "Deliberate receiver subset under fc628; no universal ZIP implementation claim."
+    }
+  ],
+  "scopeAssertion": {
+    "beforeReader": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+    "unchangedPrefixBytes": 16419,
+    "unchangedPrefixSHA256": "d8f5f6113f67775ad54993d63ef1129ee68215893e48025a669735674a27f1c5",
+    "unchangedExportSuffixSHA256": "f72d8f711923806a4863ac102f0e6ef73a45ae80e2260b3640484191d2c1b558",
+    "outsideZipIdentical": true,
+    "deltaBytes": 653
+  },
+  "preserved": "16419 prefix bytes covering Source mode/schema/selection/witness/API/time/tree/command/receipt/custody semantics and the exact export suffix match dccf byte-for-byte. ZIP strict full-deflate consumption, sizes/caps/CRC/path/one-member/stored+DD logic remains. Admission27da18, Source13/qualifier/c230/M/Core, legacy225, all370 prior IDs/fixtures/expected outcomes and the closed native370 branch/primary remain immutable.",
+  "fixtureFirst": {
+    "seal": {
+      "blob": "dff8c473656afc984cab2555f66e07dfddba4942",
+      "bytes": 2941,
+      "sha256": "b3560777d2974403801e4dee787e2f8e06a4a562385250711426d57b145f2206",
+      "fullReadback": true
+    },
+    "plans": "c4deff93c37157d7cf39e36629fc19e76f832adb",
+    "expectedIds": "aaf415f4ade63826b0fbee438575b6e2dcb5be5b",
+    "modelBuilder": "f257d2ce5320e1f3ace0f08edb2b6c67959dde3b",
+    "rawRed": "eb17d5d26ee62a19c48b63007be74d19147865e9",
+    "redBeforeCorrection": {
+      "originalReader": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+      "positive13Accepted": 13,
+      "negative36FalseAccepted": 36
+    },
+    "coherence": "Same full fictional original2037 input/trust/log/payload. OWN builder creates real ZIP bytes, correct central offsets/sizes/descriptors, then refreshes archiveBase64/listing.size/digest from actual bytes. All RAW result records preserve ZIP/input/trust/payload SHA256 and ZIP byte counts. Broken model construction stays outside rejection catch.",
+    "old370PrefixIdentical": true,
+    "expected419Unique": true,
+    "idsHash": "27801c804733daa829c629af6acf41fdcfa44f441f42b05a995581b0a5fdeb8d",
+    "caseMatrix": "13positive: methods0/8,signed/unsignedDD,allzero/allmatchinglocalfields,storedversion10,ordinaryTLVlocal/both/multiple/zero-length.36negative:3contradictorylocalfields×2methods×2descriptorforms,ZIP64local/central/both complete/truncated,1..3trailingheaderbytes perarea,ordinaryTLVtruncated perarea,ZIP64+45,9version/mismatch cases.",
+    "superseded": "Initial pretty RED fdb0f4e5576f98964413dd6311f5a632287ce9cf and seal12e742149f61e2a6db31b3979bee78320262f586 remain; RED compacted to22199B without changing values/expectations to honor report cap."
+  },
+  "green": {
+    "ramProof": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/zip-green.json",
+      "mode": "100644",
+      "blob": "fd3a1e6a1705df3f2c417551eb233dd07ca25761",
+      "bytes": 9199,
+      "sha256": "11727a6068f9bbbe3dba905b0b55c205a9739ed3a8c847c13b10bb56762919ee",
+      "gitBlob": "fd3a1e6a1705df3f2c417551eb233dd07ca25761",
+      "fullReadback": true
+    },
+    "original370": 370,
+    "new49": 49,
+    "total": 419,
+    "failed": 0,
+    "positiveAccepted": 13,
+    "negativeRejected": 36,
+    "old370PrefixHash": "5737f76ef490aa43eff78c4ec146c398c15ce3bff6da684906324a301702fa24",
+    "newNativeNotExecuted": true,
+    "ownRunnerSyntaxParsedNotExecuted": true
+  },
+  "native": {
+    "nomination": {
+      "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3-zip-fix1",
+      "message": "AFW-C2-FULL-TASK1-C230-OWN-V3-ZIP-FIX1-ONEUSE-20261116",
+      "job": "c2-full-task1-c230-own-v3-zip-fix1",
+      "workflow": ".github/workflows/afw-c2-full-task1-c230-own-v3-zip-fix1.yml",
+      "prefix": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/",
+      "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/run-controls.mjs",
+      "artifact": "afw-c2-full-task1-c230-own-v3-zip-fix1-proof",
+      "artifactPath": "output/c2-full-task1-c230-own-v3-zip-fix1-proof.json",
+      "fileName": "c2-full-task1-c230-own-v3-zip-fix1-proof.json",
+      "node": "22.23.4",
+      "runner": "ubuntu-24.04",
+      "jobTimeoutMinutes": 3,
+      "testTimeoutMs": 10000,
+      "contents": "read",
+      "attempt": 1,
+      "retentionDays": 7,
+      "activationReleased": false
+    },
+    "graph": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/native-graph.json",
+      "mode": "100644",
+      "blob": "418cfb76b7e9d9cfb7cd8be37a2ff5817d653cfe",
+      "bytes": 8794,
+      "sha256": "fe0d4fd234004b83412cfe5d9a0d1be9b72ae4f21d810c02444628e8b105511b",
+      "gitBlob": "418cfb76b7e9d9cfb7cd8be37a2ff5817d653cfe",
+      "fullReadback": true
+    },
+    "runner": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/run-controls.mjs",
+      "mode": "100644",
+      "blob": "0f4ccaf978dd83afab6660d56e9eecb7184287dd",
+      "bytes": 5990,
+      "sha256": "9e2256889cb692ad3c44765de4b3aaf027c05aa8ee319abbe820e01eb9d19a04",
+      "gitBlob": "0f4ccaf978dd83afab6660d56e9eecb7184287dd",
+      "fullReadback": true
+    },
+    "workflow": {
+      "path": ".github/workflows/afw-c2-full-task1-c230-own-v3-zip-fix1.yml",
+      "mode": "100644",
+      "blob": "dfe28f22d4dcb33e8cff1e326da3fe5e438a57d2",
+      "bytes": 1550,
+      "sha256": "87c612f03cdc25604c2cefe8cd083d4c5a79f622e7bf477586ee836be5e2a6a0",
+      "gitBlob": "dfe28f22d4dcb33e8cff1e326da3fe5e438a57d2",
+      "fullReadback": true
+    },
+    "proofSchema": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/proof-schema.json",
+      "mode": "100644",
+      "blob": "93001b5f9e7d4d35d37bb3eaf0f352015625c63b",
+      "bytes": 3928,
+      "sha256": "2f7845dd577ca3cf9e2c993ad79546b9e4af53930cd8671c4543fa9eb9c5821c",
+      "gitBlob": "93001b5f9e7d4d35d37bb3eaf0f352015625c63b",
+      "fullReadback": true
+    },
+    "selection": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/selection.json",
+      "mode": "100644",
+      "blob": "1c033261885b035e4f4f518ef34dc8f0b83e94e9",
+      "bytes": 1854,
+      "sha256": "3075da939d7bed0a1abe1227e6d6c7715436b4e9c389a248242ff88b8c16a3a1",
+      "gitBlob": "1c033261885b035e4f4f518ef34dc8f0b83e94e9",
+      "fullReadback": true
+    },
+    "expectedCount": 419,
+    "nativePaths": 30,
+    "nativeBytes": 547450,
+    "moduleGraph": "Nine imported OWN modules plus runner. Original370factory body5d9d2e2 unchanged as controls-baseline370.mjs; its relative full-reader import uses corrected reader. Legacy225 original implementation/JSON stays byte-identical. An identical original model-builder under baseline370 supplies only OWN test CRC to the early sealed ZIP builder. Six SourceJSON DATA bodies are hashed/compared, never Source JS.",
+    "proof": "Native computes419orderedTAP IDs/counts, fixed graph+body bindings and actual ownGit/run context. Compact JSON+LF<=24576, artifact7d, Node22.23.4/job3min/case10s/contents:read/attempt1. Marker AFW_C2_FULL_C230_OWN_ZIP_FIX1_PROOF. No RAM-result report is read by native tests/proof.",
+    "ownModelsExecuted": "true only in future actual native proof",
+    "actualSourceExecution": false,
+    "finalSourceBinding": false,
+    "actualRun": null,
+    "actualJob": null
+  },
+  "historicalNative370": {
+    "basis": "Root ruling fc628 plus independent review5aabaa, not refetched or reexecuted by writer",
+    "run": 43958585757,
+    "job": 133619605008,
+    "primary": "0dba0eb9ee2a4df511eaa48484ee2c179dfb621c",
+    "closeProof": "dcf40f44e1950a06cf94ada3c144bfb9f23c12a4",
+    "meaning": "Valid historical370coverage; none of49newcases is attributed retrospectively. New reader419awaits a distinct Root occurrence."
+  },
+  "sourceHeld": {
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "index": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "rootPreparedGitDataHead": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+    "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+    "sourceRefCreated": false,
+    "actualSourceContext": null,
+    "meaning": "Root-supplied inactive Source25GitDATA only. No Source context is fabricated or inserted into fictional tests."
+  },
+  "reversibility": {
+    "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/reversible-diff.json",
+    "mode": "100644",
+    "blob": "4708b09f62c9714f592712fa31cc83800e5104c8",
+    "bytes": 735297,
+    "sha256": "084e8720ec49a4890ea778af8487961aaba4ffc4da55c26fa69e7de0d1f54805",
+    "gitBlob": "4708b09f62c9714f592712fa31cc83800e5104c8",
+    "fullReadback": true
+  },
+  "evidenceLimits": "Source private raw TAP/three receipt DTOs remain absent; no independent parse/authentication is claimed. CallertrustedSource IDs/API origin are Root's later authority, never outcome-controlled. Source13 exact25tree/API/8frames/4modes/custody/raw ZIP are unchanged full contract. No503cause, live consent, SDKwithdrawal, globaldrain, namespaceEmpty, readiness or PCoff proof.",
+  "performed": {
+    "newImmutableOwnData": true,
+    "allFullReadbacksHashes": true,
+    "pureOwnRam": true,
+    "sourceCodeExecution": false,
+    "sourceImport": false,
+    "sourceEval": false,
+    "sourceCompile": false,
+    "sourceSyntax": false,
+    "sourceTests": false,
+    "sourceMutation": false,
+    "oldOwnMutation": false,
+    "filesystem": false,
+    "dependencies": false,
+    "refs": false,
+    "runs": false,
+    "provider": false,
+    "browser": false,
+    "secrets": false,
+    "subagents": false
+  },
+  "pending": [
+    "Root exactpath/hash/trigger/static admission",
+    "One distinct Root-native419actualAPI/TAP/proof/ZIP/context join and close",
+    "Fresh independent SPEC+QUALITY review",
+    "Only then separate Root reserved Source25 occurrence; no Source activation by writer"
+  ],
+  "rollback": "Omit new additive prefix and one newWF. Do not change original closed370candidate/receipt/history/Source graph.",
+  "ActualSource": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

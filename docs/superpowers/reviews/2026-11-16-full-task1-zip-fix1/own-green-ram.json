@@ -1,0 +1,355 @@
+{
+  "schema": "afw.own-full-c230.zip-fix1.green.v1",
+  "ownRamOnly": true,
+  "nativeExecuted": false,
+  "actualSourceExecution": false,
+  "passed": 419,
+  "failed": 0,
+  "old370PrefixIdentical": true,
+  "idsHash": "27801c804733daa829c629af6acf41fdcfa44f441f42b05a995581b0a5fdeb8d",
+  "results": [
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DD_M0_SIGNED_ZERO",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DD_M0_SIGNED_MATCH",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DD_M0_UNSIGNED_ZERO",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DD_M0_UNSIGNED_MATCH",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DD_M8_SIGNED_ZERO",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DD_M8_SIGNED_MATCH",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DD_M8_UNSIGNED_ZERO",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DD_M8_UNSIGNED_MATCH",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_STORED_VERSION10",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_STORED_DD_VERSION10",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ORDINARY_TLV_BOTH",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ORDINARY_ZERO_LENGTH_LOCAL",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ORDINARY_MULTIPLE_CENTRAL",
+      "expected": "accept",
+      "accepted": true,
+      "pass": true,
+      "error": null
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M0_SIGNED_CRC",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M0_SIGNED_COMPRESSED",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M0_SIGNED_LENGTH",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M0_UNSIGNED_CRC",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M0_UNSIGNED_COMPRESSED",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M0_UNSIGNED_LENGTH",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M8_SIGNED_CRC",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M8_SIGNED_COMPRESSED",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M8_SIGNED_LENGTH",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M8_UNSIGNED_CRC",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M8_UNSIGNED_COMPRESSED",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_CONTRADICT_M8_UNSIGNED_LENGTH",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ZIP64_COMPLETE_LOCAL",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ZIP64_COMPLETE_CENTRAL",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ZIP64_COMPLETE_BOTH",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ZIP64_TRUNCATED_LOCAL",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ZIP64_TRUNCATED_CENTRAL",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ZIP64_TRUNCATED_BOTH",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_TRAILING_HEADER_LOCAL_1",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_TRAILING_HEADER_LOCAL_2",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_TRAILING_HEADER_LOCAL_3",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_TRAILING_HEADER_CENTRAL_1",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_TRAILING_HEADER_CENTRAL_2",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_TRAILING_HEADER_CENTRAL_3",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ORDINARY_TRUNCATED_LOCAL",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ORDINARY_TRUNCATED_CENTRAL",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_ZIP64_VERSION45_BOTH",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_STORED_VERSION45",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DEFLATE_VERSION45",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_STORED_VERSION0",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_STORED_VERSION21",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_DEFLATE_VERSION10",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_STORED_MISMATCH_10_20",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_STORED_MISMATCH_20_10",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_LOCAL_VERSION45",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    },
+    {
+      "id": "OWN_FULL_C230_ZIP_FIX1_CENTRAL_VERSION45",
+      "expected": "reject",
+      "accepted": false,
+      "pass": true,
+      "error": "C230_OWN_UNQUALIFIED"
+    }
+  ]
+}

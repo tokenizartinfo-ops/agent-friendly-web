@@ -1,0 +1,581 @@
+{
+  "schema": "afw.own-full-c230.zip-fix1.packet-index.v1",
+  "status": "READY_FOR_ROOT_STATIC_ADMISSION_NATIVE419_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable OWN DATA + bounded pure OWN RAM; refs/CI onlyRoot",
+  "resourceType": "Git blobs",
+  "resourceId": "c2-t1-full-c230-v3-zip-fix1",
+  "authority": {
+    "ruling": "fc6287a46a8acefbb5ba9892214e351d52423e7f",
+    "review": "5aabaa3f85133d126f24652b348c0c5bc3de08ab",
+    "originalRuling": "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+    "oldIndex": "1e0f7b4bf24be7ce402ff30a0b47521005df85a0",
+    "round": 2,
+    "maxRounds": 5,
+    "scope": "Only OWN ZIP F1/F2 guards and necessary versioned fixtures/harness/proof metadata; no Source/product changes"
+  },
+  "prefix": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/",
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/fixture-seed.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "7480512aeaa85c160e203ffd4de4c2f221e0df7b",
+        "bytes": 51629,
+        "sha256": "2d65cbd36538ec86a47e4aa1e96fbc418db0d9be868ef0145094fa88a0debf20"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/fixture-first-cases.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "eb84f1791bb32832c807535131607abeb72a159c",
+        "bytes": 38173,
+        "sha256": "1724e63419636cd26427f266dd1a36bf7ae1d43dc4af41659e7a51249f091bec"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/complete-coherent-example.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "1c932dbcc1106b96d6fdb28c5f4e5fef21764d35",
+        "bytes": 60896,
+        "sha256": "e40028bcc6040b2d240fd03270baf16e186e8dc7eab70d0c669f500ebff4ded6"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/model-builder.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "25afd0e1f8a567a6c87a6f75c6502d8b3d0b4c8f",
+        "bytes": 6009,
+        "sha256": "6f2d497b30de48ab9654678472191357e6c2a121608300b494bd838517e28f40"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/admission.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+        "bytes": 10236,
+        "sha256": "0c3421a74a75347f1b15549db7c93d1bfe6678798d157b966d06cd6e1596da03"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/admission.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "da6a9f9938a4433f8bd78ad84eb389d9d90f21ae",
+        "bytes": 12150,
+        "sha256": "3b810defcf8490e9419d8940692a016e44c3b18a900ddd712ce2a593a79081c7"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/controls-baseline370.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "5d9d2e2d48133ce8e24fdf2b289afb65d9022b86",
+        "bytes": 2308,
+        "sha256": "aded476f67707a2c058735d4a8686982f968275f642fc68d83c5fc1d0b57fb14"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/legacy/own-receiver.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+        "bytes": 31155,
+        "sha256": "fb23c3ec162136f24a4519a09eab3acd04113f8369ed5304e7a58313e4d7bb2c"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/legacy/own-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "1d04d617be16f9e84e6f1b57ff48347ae91b267e",
+        "bytes": 19486,
+        "sha256": "e69f12c2389616f1517dbd8f5472cda511c01b6fab2a42f6fe366afbe6a234c7"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/legacy/fixture-first.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "8a53d5b1e55dc8e62339f9d23b5dcb5168cab3c0",
+        "bytes": 34834,
+        "sha256": "e00942909c3eab5a0d8ee5fffe9c625d38e7566fdc648baf4eb6998dcc8612bf"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/legacy/diagnostic-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+        "bytes": 9686,
+        "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/legacy/fix2-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "6e5929efbd58acd113bfdf5813fe2670a6cccca4",
+        "bytes": 107420,
+        "sha256": "5f7166dc286946ee89ee61c70ea4c614f392e006ccbd1998d4611f05b66a9eef"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/data/source-index.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+        "bytes": 11467,
+        "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/data/qualifier.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+        "bytes": 15224,
+        "sha256": "1359d5a505e65a3a04659a0cae70fd60023ce56ae989a0277438bf50790912ed"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/data/protocol-contract.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+        "bytes": 15709,
+        "sha256": "2bd76e556a6dbf9d394fba70d64a216fd339697fcae2e885b3fd6141f4ecd6fb"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/data/frame-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+        "bytes": 13983,
+        "sha256": "9fc0205fbbbd4a0d61f4560291bd53caf58df083f88e4579eaa74ea02d15d61e"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/data/mode-selection.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+        "bytes": 5460,
+        "sha256": "618e35bbeda39833ddf5c63ed16a41b44db85ab751edcb87ad5abb9ebcaae839"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/data/synthetic-vectors.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+        "bytes": 14802,
+        "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/baseline370/model-builder.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "25afd0e1f8a567a6c87a6f75c6502d8b3d0b4c8f",
+        "bytes": 6009,
+        "sha256": "6f2d497b30de48ab9654678472191357e6c2a121608300b494bd838517e28f40"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/baseline370-expected-ids.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "115f420dad5e56e4d3bad93b80a6bb742f99b507",
+        "bytes": 11276,
+        "sha256": "628b05610d29a218c281d9cce136f131ba34c51d3cf08a53bd57117ad9f60dc3"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/full-reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "979c4fd2caadd75b47b3416275248a23310e3722",
+        "bytes": 19653,
+        "sha256": "5af9b48390c62bf579261ea83416ee23895234bb7783733ca4ee7c185f660454"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/own-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "f995b31298ccc38b1b95c98d136467834f7a0b21",
+        "bytes": 1223,
+        "sha256": "83a8b50ec3d30dc1e4525dba1d169b606b777770c88b7510421c2e0544db9581"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/zip-model-builder.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "f257d2ce5320e1f3ace0f08edb2b6c67959dde3b",
+        "bytes": 2336,
+        "sha256": "323a6c183b076cdb028c22560cb62b48a8eef956d6cc2b9d920cc33e141e05cf"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/zip-fixture-first.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "c4deff93c37157d7cf39e36629fc19e76f832adb",
+        "bytes": 10266,
+        "sha256": "8d7e6a83729992f95a3c91d68c808781f49a2530d68075e0b844a61730c16041"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/expected-ids.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "aaf415f4ade63826b0fbee438575b6e2dcb5be5b",
+        "bytes": 13944,
+        "sha256": "b9540de5d0925df2c596283132948651de9eb5a24b081ce073108c4027028ba8"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/proof-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "93001b5f9e7d4d35d37bb3eaf0f352015625c63b",
+        "bytes": 3928,
+        "sha256": "2f7845dd577ca3cf9e2c993ad79546b9e4af53930cd8671c4543fa9eb9c5821c"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/selection.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "1c033261885b035e4f4f518ef34dc8f0b83e94e9",
+        "bytes": 1854,
+        "sha256": "3075da939d7bed0a1abe1227e6d6c7715436b4e9c389a248242ff88b8c16a3a1"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": ".github/workflows/afw-c2-full-task1-c230-own-v3-zip-fix1.yml",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "dfe28f22d4dcb33e8cff1e326da3fe5e438a57d2",
+        "bytes": 1550,
+        "sha256": "87c612f03cdc25604c2cefe8cd083d4c5a79f622e7bf477586ee836be5e2a6a0"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/native-graph.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "418cfb76b7e9d9cfb7cd8be37a2ff5817d653cfe",
+        "bytes": 8794,
+        "sha256": "fe0d4fd234004b83412cfe5d9a0d1be9b72ae4f21d810c02444628e8b105511b"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/run-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "0f4ccaf978dd83afab6660d56e9eecb7184287dd",
+        "bytes": 5990,
+        "sha256": "9e2256889cb692ad3c44765de4b3aaf027c05aa8ee319abbe820e01eb9d19a04"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/zip-red.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "eb17d5d26ee62a19c48b63007be74d19147865e9",
+        "bytes": 22199,
+        "sha256": "ab3b18077015ee0c3f0cbb8f77e423457837d32c149c1ef45ecba1f5334567cb"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/zip-green.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "fd3a1e6a1705df3f2c417551eb233dd07ca25761",
+        "bytes": 9199,
+        "sha256": "11727a6068f9bbbe3dba905b0b55c205a9739ed3a8c847c13b10bb56762919ee"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/fixture-first-seal.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "dff8c473656afc984cab2555f66e07dfddba4942",
+        "bytes": 2941,
+        "sha256": "b3560777d2974403801e4dee787e2f8e06a4a562385250711426d57b145f2206"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/reversible-diff.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "4708b09f62c9714f592712fa31cc83800e5104c8",
+        "bytes": 735297,
+        "sha256": "084e8720ec49a4890ea778af8487961aaba4ffc4da55c26fa69e7de0d1f54805"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/report.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "2878725cf7311875dd2e0c7cd1b9a7a35005f2b6",
+        "bytes": 12638,
+        "sha256": "f6169e26e1695468b3212e1c8f9e780c860e0ecd5b436349fe914e8fe556d33f"
+      },
+      "fullReadback": true
+    }
+  ],
+  "paths": {
+    "native": 30,
+    "total": 35,
+    "nativeBytes": 547450,
+    "allBytes": 1329724,
+    "newOneUseWorkflowCount": 1
+  },
+  "entrypoint": {
+    "module": "979c4fd2caadd75b47b3416275248a23310e3722",
+    "bytes": 19653,
+    "sha256": "5af9b48390c62bf579261ea83416ee23895234bb7783733ca4ee7c185f660454",
+    "signature": "c2OwnReadSourceFixtureFix1(input,trustedExpected,sha256,inflateRawSync)",
+    "admissionUnchanged": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+    "inputKeys": [
+      "run",
+      "jobs",
+      "commit",
+      "tree",
+      "transport",
+      "artifact"
+    ],
+    "sourceExpectedContext": null,
+    "sourceIDs": "ActualSource IDs from independent Root API only, never outcome. Source25 remains held."
+  },
+  "fix": {
+    "F1": "Flags0x8: local CRC/compressed/uncompressed fields individually0or-central-equal; contradictory nonzero rejects.",
+    "F2": "Both bounded extraareas parsed as complete TLV; reject ID0x0001 and truncated header/data; ordinary complete metadata remains compatible without overriding name/payload/sizes.",
+    "versionSubset": "Local==centralneeded. Stored0 permits10/20; deflate8 permits20; reject45/unsupported/mismatch. Root compatibility subset, not universal ZIP claim.",
+    "scopeAssertion": {
+      "beforeReader": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+      "unchangedPrefixBytes": 16419,
+      "unchangedPrefixSHA256": "d8f5f6113f67775ad54993d63ef1129ee68215893e48025a669735674a27f1c5",
+      "unchangedExportSuffixSHA256": "f72d8f711923806a4863ac102f0e6ef73a45ae80e2260b3640484191d2c1b558",
+      "outsideZipIdentical": true,
+      "deltaBytes": 653
+    },
+    "outsideZIPUnchanged": true
+  },
+  "fixtureFirst": {
+    "seal": "dff8c473656afc984cab2555f66e07dfddba4942",
+    "cases": "c4deff93c37157d7cf39e36629fc19e76f832adb",
+    "ids": "aaf415f4ade63826b0fbee438575b6e2dcb5be5b",
+    "builder": "f257d2ce5320e1f3ace0f08edb2b6c67959dde3b",
+    "rawRed": "eb17d5d26ee62a19c48b63007be74d19147865e9",
+    "oldReader": "dccfce8f31a7075043aeb606f9749a511e2bb62a",
+    "red": {
+      "positive13Accepted": 13,
+      "negative36FalseAccepted": 36
+    },
+    "fullCoherence": "Original fictional complete example1c932.../trust/log/payload unchanged; actual ZIP/header/extras/descriptor bytes plus API digest/size rebuilt. No precomputed SHA-only assertion.",
+    "all370IDsPrefixIdentical": true,
+    "added49": 49,
+    "expected419": 419,
+    "idsHash": "27801c804733daa829c629af6acf41fdcfa44f441f42b05a995581b0a5fdeb8d",
+    "historical370PrefixHash": "5737f76ef490aa43eff78c4ec146c398c15ce3bff6da684906324a301702fa24"
+  },
+  "verification": {
+    "ramGreen": "fd3a1e6a1705df3f2c417551eb233dd07ca25761",
+    "original370Pass": 370,
+    "new49Pass": 49,
+    "totalPass": 419,
+    "fail": 0,
+    "newPositiveAccepted": 13,
+    "newNegativeRejected": 36,
+    "old225ImplementationUnchanged": true,
+    "original370factory": "5d9d2e2d48133ce8e24fdf2b289afb65d9022b86",
+    "originalFactoryBinding": "Byte-exact original370factory copied as controls-baseline370.mjs; relative full-reader import resolves to corrected reader, so original145full/ZIP controls exercise new guard; legacy225 stays byte-exact.",
+    "newModelsAreFictional": true,
+    "nativeExecuted": false,
+    "ownRunnerSyntaxParsedNotExecuted": true,
+    "allFullReadbacks": true,
+    "allNativeUtf8BytesSHA256GitSHA1Rechecked": true,
+    "fullBeforeAfterAndReverseSpans": true
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-full-task1-c230-v3-zip-fix1",
+    "message": "AFW-C2-FULL-TASK1-C230-OWN-V3-ZIP-FIX1-ONEUSE-20261116",
+    "job": "c2-full-task1-c230-own-v3-zip-fix1",
+    "workflow": ".github/workflows/afw-c2-full-task1-c230-own-v3-zip-fix1.yml",
+    "prefix": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/run-controls.mjs",
+    "artifact": "afw-c2-full-task1-c230-own-v3-zip-fix1-proof",
+    "artifactPath": "output/c2-full-task1-c230-own-v3-zip-fix1-proof.json",
+    "fileName": "c2-full-task1-c230-own-v3-zip-fix1-proof.json",
+    "node": "22.23.4",
+    "runner": "ubuntu-24.04",
+    "jobTimeoutMinutes": 3,
+    "testTimeoutMs": 10000,
+    "contents": "read",
+    "attempt": 1,
+    "retentionDays": 7,
+    "activationReleased": false
+  },
+  "native": {
+    "graph": "418cfb76b7e9d9cfb7cd8be37a2ff5817d653cfe",
+    "runner": "0f4ccaf978dd83afab6660d56e9eecb7184287dd",
+    "workflow": "dfe28f22d4dcb33e8cff1e326da3fe5e438a57d2",
+    "proofSchema": "93001b5f9e7d4d35d37bb3eaf0f352015625c63b",
+    "selection": "1c033261885b035e4f4f518ef34dc8f0b83e94e9",
+    "expectedIds": "aaf415f4ade63826b0fbee438575b6e2dcb5be5b",
+    "expectedCount": 419,
+    "groups": {
+      "original370": 370,
+      "new49": 49
+    },
+    "marker": "AFW_C2_FULL_C230_OWN_ZIP_FIX1_PROOF (TAP console '# ' prefix)",
+    "proofMaxIncludingLF": 24576,
+    "graphBodyBindings": 30,
+    "sourceImports": [],
+    "ownModules": "Nine imported OWN modules plus runner; six SourceJSON DATA files hashed/compared only. No Source JS bodies/parser/harness/reducer/compiler/selftest/deps/network.",
+    "actualRun": null,
+    "actualJob": null
+  },
+  "historicalNative370": {
+    "run": 43958585757,
+    "job": 133619605008,
+    "primary": "0dba0eb9ee2a4df511eaa48484ee2c179dfb621c",
+    "closeProof": "dcf40f44e1950a06cf94ada3c144bfb9f23c12a4",
+    "source": "Root ruling/review; no refetch/rerun here",
+    "meaning": "Retained historical370coverage only, not new49coverage; original closed branch/history unchanged."
+  },
+  "sourceFrozen": {
+    "index": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "preparedGitData": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+    "refCreated": false,
+    "captureHeld": true,
+    "Source13MCoreUnchanged": true
+  },
+  "reversibleDiff": "4708b09f62c9714f592712fa31cc83800e5104c8",
+  "report": "2878725cf7311875dd2e0c7cd1b9a7a35005f2b6",
+  "proofLimits": "Known producer/safe projection + actual external API/tree/frames/custody/ZIP only. Absent private Source TAP/receipt DTOs are not independently parsed or authenticated. Coherent JSON cannot authenticate its own Git origin. No actual consent, SDKwithdrawal, globaldrain/namespaceEmpty/readiness/503cause/PCoff inference.",
+  "preservation": {
+    "Source13Changes": 0,
+    "qualifierChanges": 0,
+    "MChanges": 0,
+    "CoreChanges": 0,
+    "oldOwnChanges": 0,
+    "historical370Changes": 0,
+    "SourceExecution": 0,
+    "SourceEval": 0,
+    "SourceImport": 0,
+    "SourceCompile": 0,
+    "SourceSyntax": 0,
+    "SourceTests": 0,
+    "filesystem": 0,
+    "dependencies": 0,
+    "refs": 0,
+    "runs": 0,
+    "provider": 0,
+    "browser": 0,
+    "secrets": 0,
+    "subagents": 0
+  },
+  "rollback": "Omit additive new prefix/WF only. Full33afterimages/fullold+newreader/runner/WF beforeafter texts and verifiedreverse spans included. Preserve old closed candidate/native370 and Source25.",
+  "pending": [
+    "Root static path/hash/trigger admission",
+    "One distinct actual Root-native419/API/TAP/proof/ZIP/context join+close",
+    "Fresh independent SPEC+QUALITY review",
+    "Then separate Root reserved full Source25 gate; writer does not activate it"
+  ],
+  "ActualSource": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
