@@ -1,0 +1,258 @@
+{
+  "schema": "afw.c2-green-diagnostic-contract.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "authority": {
+    "brief": "0ddd62ffa45b595b6790d789adcf2e8318c789c0",
+    "ruling": "5e0aace992d3b64a755daaba5c898ef895f4e4ca",
+    "review": "4407b6a936cf2320bd3581e416bcb3aeee4eb63b",
+    "priorActual": "ef9ab21507a89650ce9c267f2d12ad8d852a3607"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-green-diag1",
+    "message": "AFW-C2-SOURCE-T1-GREEN-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-green-diag1.yml",
+    "job": "c2-green-diag1",
+    "command": "node docs/superpowers/source-lab/c2-t1-green-diag1/run-c2-green-diag1.mjs"
+  },
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "sourceIndex": {
+      "path": "source-index.json",
+      "bytes": 11467,
+      "sha256": "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03",
+      "blob": "f9f36a61875be344d38f19d77caf1a46c48e8f37",
+      "fullReadback": true
+    },
+    "selectionHash": "ecb5037b4f3274c5afcab5bb2a7fdc4ca3795e450583db7b13e3eed98955d3f3",
+    "original": {
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "gzipBytes": 1050
+    },
+    "diagnosticDriver": {
+      "key": "gdriver",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/observer-driver.txt",
+      "before": null,
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "fullReadback": true
+    },
+    "helperRoles": {
+      "selection": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/mode-selection.json",
+        "bytes": 5460,
+        "blob": "bf500cccd9d6e828f74e9328f849d837ee2d0db4",
+        "sha256": "0dc71e54f901c91e4be06810eaead653862ae8365328e37673a548c0a3b8fb59"
+      },
+      "vectors": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/synthetic-vectors.json",
+        "bytes": 14802,
+        "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+        "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402"
+      },
+      "parser": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/tap-protocol.mjs",
+        "bytes": 10291,
+        "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+        "sha256": "3de67d5b30f7a0019b8f02118cf3727be7ae79d22ecfdc56bc7d39e60681dfd4"
+      },
+      "selftest": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/synthetic-controls.mjs",
+        "bytes": 3313,
+        "blob": "bc33365eaf302d2296a759202a822af4a443f143",
+        "sha256": "2f49b434e3e51a4a3c225903b3a681e4f01ea3f62b58f337e6a26d0fdde8fcae"
+      },
+      "driver": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/observer-driver.txt",
+        "bytes": 3169,
+        "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+        "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+      },
+      "recorder": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/progress-recorder.mjs",
+        "bytes": 3812,
+        "blob": "e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3",
+        "sha256": "271b9abeb806acaa5e6a1d35e6e72c77cf9b25bb5cad3603f0ccbb05745f7508"
+      },
+      "reader": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/read-progress.mjs",
+        "bytes": 5507,
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      },
+      "progressVectors": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/progress-vectors.json",
+        "bytes": 8624,
+        "blob": "32777d8b2d5676688d4bf7546bf6bb8ed296e3b4",
+        "sha256": "71c979c34d8a9fc8fcce7e99463ca0479160b32620517e69849021715c21570b"
+      }
+    },
+    "wireSchema": {
+      "key": "gschema",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/diagnostic-schema.json",
+      "before": null,
+      "bytes": 9686,
+      "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+      "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "fullReadback": true
+    }
+  },
+  "isolation": "Frozen13 Source DATA admitted with product/fixtures installed exactly as f9 under private proposal-green temp. Only after verifying installed S07 do we overlay separately pinned observer driver at the same S07 test path; add one adjacent separately pinned recorder. Just this temp differs from original green, no product module, fixture or work function changes. No qualified Source parser command is run on this diagnostic TAP. Every inherited BASE leaf, including bootstrap workflow, remains in Git at its original mode/blob. Bootstrap file is read as data.",
+  "sourceBehavior": "Exact S07 fixed() registration order, all twenty native test functions, 120s case option, await work(), separate await w.counts(), canonical C2SOURCE and exact action-then-counter rethrow precedence including null/undefined. Add only sync finite marks at actual operation boundaries. A missing world issues no actual count call and no count marker; gaps fail closed at the first inconsistent record. AFTER/close uses the same awaited optional close, records settlement then rethrows original value. No extra business requests, token, DB, provider or service call.",
+  "wire": {
+    "rules": "Marker then one ASCII SPACE followed by exact compact JSON.stringify field order from schema properties/const then LF. No extra/duplicate keys; compare ordered arrays by length and each key. Unique matching native GitHub run/attempt/job ID/head/tree/command step and artifact bytes required. Sanitize before a single public write. Final JSON artifact is identical to that outcome JSON body plus LF.",
+    "frames": [
+      [
+        "AFW_C2_GREEN_SYNTHETIC",
+        "synthetic",
+        2048
+      ],
+      [
+        "AFW_C2_DEPENDENCY_CONTROL",
+        "dependency",
+        1024
+      ],
+      [
+        "AFW_C2_GREEN_FRONTIER",
+        "frontier",
+        2048
+      ],
+      [
+        "AFW_C2_GREEN_CUSTODY",
+        "custody",
+        1024
+      ],
+      [
+        "AFW_C2_GREEN_OUTCOME",
+        "outcome",
+        24576
+      ]
+    ],
+    "order": "In a usable record require synthetic, dependency, full3 custody and one outcome in that order, all one occurrence; compare embedded and separate custody exactly. FRONTIER marks runner failure. For early failure there may only be partial custody/typed frontier and no usable outcome. Raw Source/TAP/journal paths/IDs and raw exceptions never published; only finite case IDs and loc aliases/integers/codes in schema are allowed."
+  },
+  "custody": {
+    "launches": [
+      "owned-file preflight (10s)",
+      "real absent-workdir bootstrapWorld ENOENT control",
+      "proposal-green observer with all20 native serial cases (180s)"
+    ],
+    "guard": {
+      "path": "c2-source-custody-guard.mjs",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "fullReadback": true
+    },
+    "preflight": {
+      "path": "c2-source-custody-preflight.mjs",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "fullReadback": true
+    },
+    "bootstrap": {
+      "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+      "bytes": 1844,
+      "sha256": "ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14",
+      "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+      "fullReadback": true
+    },
+    "contract": "All three launch probes real; 1..8 fresh file names per launch, max8/target (all launches share this target), max24 across all targets. Same actual parent positive UID and GID, clear groups, network namespace only loopback, no-new-privs, same explicit env. Verify own fresh exclusive probe ownership and removal, all probe records, owned scoped temp root, removal and absence. Same repo/head/run/attempt1/job/index. Exactly3 launches, required booleans all true; since single target and no previous probe removal, full actual process count 3..8. Root independently binds actual unique API job and command step."
+  },
+  "journal": {
+    "path": "private own target/green-progress.ndjson",
+    "wire": "Fresh empty exclusive O_NOFOLLOW parent-created regular file mode 0600, nlink=1, exact parent owner/group, dev/inode retained. Child appends one synchronous canonical UTF-8 NDJSON record per actual event under cap and closes fd per record. No timer, promise, subprocess, signal hook or pending file handle. Each append checks own regular file/mode/size/nlink, writeSync count. A recorder failure disables further writes and attempts a safe fault marker without replacing native action/count/after throws. Parent opens exact file O_NOFOLLOW after child returns (also timeout), checks identity/size/owner, reads bounded bytes once using fd, stats again before own cleanup. Size/mtime/ctime change or short read => ambiguous. A storage validation failure does not qualify a clean capture.",
+    "fields": "Sequence from1; integer elapsedMs from child process monotonic import time; exact id, operation, edge, error. Errors only on throw: allowlisted name/code or null, first matching admitted user-stack frame reduced to file alias and bounded line/column or null. Source matches exact target absolute path or file URL, no suffix match; site is first admitted stack frame, not an inferred root cause. File aliases for all actual temp paths are listed below; D07 names the instrumented driver at S07 path.",
+    "aliases": [
+      [
+        "S00",
+        "lib/mcp-qa-finite-owner-phase-context.mjs"
+      ],
+      [
+        "S01",
+        "lib/mcp-qa-finite-owner-preparation.mjs"
+      ],
+      [
+        "S02",
+        "lib/mcp-qa-finite-owner-native-receiver.mjs"
+      ],
+      [
+        "S03",
+        "worker/mcp-own/finite.mjs"
+      ],
+      [
+        "S04",
+        "lib/mcp-qa-finite-owner-cleanup-scope.mjs"
+      ],
+      [
+        "S05",
+        "lib/mcp-qa-finite-owner-cleanup.mjs"
+      ],
+      [
+        "S06",
+        "lib/mcp-qa-finite-initial-cleanup.mjs"
+      ],
+      [
+        "D07",
+        "test/mcp-qa-finite-owner-three-stage-native.test.mjs"
+      ],
+      [
+        "S08",
+        "test/fixtures/finite-coupled-native.mjs"
+      ],
+      [
+        "S09",
+        "test/fixtures/finite-first-connection-publication.mjs"
+      ],
+      [
+        "S10",
+        "test/fixtures/finite-initial-entry-world.mjs"
+      ],
+      [
+        "S11",
+        "test/mcp-qa-finite-first-connection-publication-native.test.mjs"
+      ],
+      [
+        "S12",
+        "lib/mcp-qa-finite-owner-notice-get-forward.mjs"
+      ]
+    ],
+    "limits": {
+      "bytes": 32768,
+      "records": 128,
+      "elapsedMs": 330000
+    },
+    "semantics": "Replicate finite-state parser independently. Per selected id in order action enter then return|throw; count enter then return|throw, then advance. AFTER close enter then return|throw independently and may interleave. Never manufacture missing enters/exits. Prefix means only complete canonical validated events in order. At first invalid line expose previous valid rows with ambiguous/unknown. Torn incomplete final bytes expose previous valid rows with torn/unknown. Empty => empty/unknown. Observed recorder-fault or unstable read => ambiguous/unknown. Null openCase and false afterOpen for unknown mean no reliable frontier conclusion. No inference that unrecorded activity did not occur. On clean prefix report recorded open case and/or global hook separately, including overlapping intervals. All 20 actions/counters and close returned plus actual timeout => post-teardown-process-exit; if any threw use post-settlement-process-exit. Neither is a causal bottleneck claim."
+  },
+  "native": "Native TAP stays in parent RAM. Only LF-terminated, allowlisted exact ascending top-level native result lines paired with corresponding Subtest name report case/status. No partial byte line promotion or using C2SOURCE as TAP. First ambiguous line stops extraction; earlier valid prefix retained. Missing/foreign/duplicate/truncated output never yields success of missing cases. Standard output/error returned as bytes and SHA256 only plus finite native exit/signal/spawn error kind, including timeout. This diagnostic has no complete Source mode verdict even on normal exit0.",
+  "budget": {
+    "totalMs": 330000,
+    "childMs": 180000,
+    "nativeCaseMs": 120000,
+    "jobMinutes": 7,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "archiveBytes": 33554432,
+    "receiptOrOutcomeBytes": 24576,
+    "node": "v22.23.4",
+    "sdk": "1.2.1"
+  },
+  "controls": "Parent first executes repaired parser synthetic 3/35 with the same pinned vectors and helper code as future fullSource, then 13 distinct progress controls. All are synthetic, parent-only, no native case or custody launch added. Then actual bootstrap absence control and single all20 unfiltered serial native proposal-green observer. No baseline/mutant/regression scheduled by this diagnostic.",
+  "statusPolicy": "A stable admitted capture with verified three-launch custody, owned cleanup and fitting canonical sanitized outcome may complete the diagnostic when native child times out or exits normally 0/1. Its capture.errorKind explicitly records timeout and native outcome may be empty or partial. Other transport failures may publish sanitized evidence but return failing step. Missing outcome, invalid custody, schema drift or incorrect API/artefact join prevents accepting even a successful capture. Root independently verifies every gate; never Source or Task1 qualification.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false
+}

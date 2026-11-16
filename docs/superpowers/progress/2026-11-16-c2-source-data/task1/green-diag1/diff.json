@@ -1,0 +1,373 @@
+{
+  "schema": "afw.c2-green-diag1-diff.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "units": "Zero-based UTF-8 half-open byte intervals [oldStart,oldEnd,newStart,newEnd]. Copy untouched intervals identically, exchange ranges with bytes from full pinned blobs; reverse from last span to first. All new paths have absent preimage on the proposed base tree; comparisons describe derivation from immutable prior proposals or the installed S07 temp driver, not edits to historical Git paths.",
+  "comparisons": [
+    {
+      "before": {
+        "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+        "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "gzipBytes": 1050,
+        "fullReadback": true
+      },
+      "after": {
+        "key": "gdriver",
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/observer-driver.txt",
+        "before": null,
+        "bytes": 3169,
+        "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+        "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          163,
+          163,
+          163,
+          222
+        ],
+        [
+          170,
+          207,
+          229,
+          401
+        ],
+        [
+          383,
+          541,
+          577,
+          925
+        ]
+      ]
+    },
+    {
+      "before": {
+        "key": "frunner",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/run-c2-source-lab-v2-fix1.mjs",
+        "before": null,
+        "bytes": 23155,
+        "sha256": "0f24c5c8ac3fd7821e25dcafab45566c282069cd295ff24dc9bb4f14d4d1d4b1",
+        "blob": "9cc607ab788335553ea97a607d9042619b35c78d",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "grunner",
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/run-c2-green-diag1.mjs",
+        "before": null,
+        "bytes": 23804,
+        "sha256": "da859312875783dea7478cae762385e1708f9d53d068eb995637314ae73c23a2",
+        "blob": "069e1ccb580bf06ea52b2b268441c1b540256841",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          86,
+          178,
+          86,
+          183
+        ],
+        [
+          1832,
+          6160,
+          1837,
+          4483
+        ],
+        [
+          6725,
+          7721,
+          5048,
+          6969
+        ],
+        [
+          7948,
+          8239,
+          7196,
+          7487
+        ],
+        [
+          9010,
+          9197,
+          8258,
+          8436
+        ],
+        [
+          10170,
+          10261,
+          9409,
+          9507
+        ],
+        [
+          11396,
+          11551,
+          10642,
+          10749
+        ],
+        [
+          12489,
+          12587,
+          11687,
+          11763
+        ],
+        [
+          12664,
+          13121,
+          11840,
+          12195
+        ],
+        [
+          13832,
+          14048,
+          12906,
+          13122
+        ],
+        [
+          14472,
+          14472,
+          13546,
+          14340
+        ],
+        [
+          14477,
+          15069,
+          14345,
+          14930
+        ],
+        [
+          16128,
+          16488,
+          15989,
+          15989
+        ],
+        [
+          17322,
+          17393,
+          16823,
+          16853
+        ],
+        [
+          17631,
+          17772,
+          17091,
+          17593
+        ],
+        [
+          17977,
+          18614,
+          17798,
+          18010
+        ],
+        [
+          19662,
+          19754,
+          19058,
+          19139
+        ],
+        [
+          20197,
+          21435,
+          19582,
+          21492
+        ],
+        [
+          21931,
+          22757,
+          21988,
+          22810
+        ],
+        [
+          22841,
+          22841,
+          22894,
+          23340
+        ],
+        [
+          22899,
+          23086,
+          23398,
+          23735
+        ]
+      ]
+    },
+    {
+      "before": {
+        "key": "fworkflow",
+        "path": ".github/workflows/afw-c2-source-lab-v2-fix1.yml",
+        "before": null,
+        "bytes": 1592,
+        "sha256": "a3bc8d108ed0ee36836ac5811ca4ffbd578d0503b59f97dd3e5287630d8c7a08",
+        "blob": "c3ab3d9001d896db62531e006dcfd03b21d0ff0e",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "gworkflow",
+        "path": ".github/workflows/afw-c2-green-diag1.yml",
+        "before": null,
+        "bytes": 1523,
+        "sha256": "e4705b66ec419f3201b44bbd813183021305173124cd417f2895012df6341108",
+        "blob": "0ba8e013e2ddbecefebc9a25fd51e49df16271fd",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          0,
+          40,
+          0,
+          32
+        ],
+        [
+          66,
+          112,
+          58,
+          108
+        ],
+        [
+          148,
+          173,
+          144,
+          162
+        ],
+        [
+          291,
+          365,
+          280,
+          358
+        ],
+        [
+          398,
+          496,
+          391,
+          480
+        ],
+        [
+          1049,
+          1101,
+          1033,
+          1090
+        ],
+        [
+          1140,
+          1295,
+          1129,
+          1268
+        ],
+        [
+          1409,
+          1529,
+          1382,
+          1460
+        ]
+      ]
+    }
+  ],
+  "newRoles": [
+    {
+      "key": "gdriver",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/observer-driver.txt",
+      "before": null,
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "fullReadback": true
+    },
+    {
+      "key": "grecorder",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/progress-recorder.mjs",
+      "before": null,
+      "bytes": 3812,
+      "sha256": "271b9abeb806acaa5e6a1d35e6e72c77cf9b25bb5cad3603f0ccbb05745f7508",
+      "blob": "e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3",
+      "fullReadback": true
+    },
+    {
+      "key": "gvectors",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/progress-vectors.json",
+      "before": null,
+      "bytes": 8624,
+      "sha256": "71c979c34d8a9fc8fcce7e99463ca0479160b32620517e69849021715c21570b",
+      "blob": "32777d8b2d5676688d4bf7546bf6bb8ed296e3b4",
+      "fullReadback": true
+    },
+    {
+      "key": "gprogress",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/read-progress.mjs",
+      "before": null,
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "fullReadback": true
+    },
+    {
+      "key": "grunner",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/run-c2-green-diag1.mjs",
+      "before": null,
+      "bytes": 23804,
+      "sha256": "da859312875783dea7478cae762385e1708f9d53d068eb995637314ae73c23a2",
+      "blob": "069e1ccb580bf06ea52b2b268441c1b540256841",
+      "fullReadback": true
+    },
+    {
+      "key": "gworkflow",
+      "path": ".github/workflows/afw-c2-green-diag1.yml",
+      "before": null,
+      "bytes": 1523,
+      "sha256": "e4705b66ec419f3201b44bbd813183021305173124cd417f2895012df6341108",
+      "blob": "0ba8e013e2ddbecefebc9a25fd51e49df16271fd",
+      "fullReadback": true
+    },
+    {
+      "key": "gschema",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/diagnostic-schema.json",
+      "before": null,
+      "bytes": 9686,
+      "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+      "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "fullReadback": true
+    },
+    {
+      "key": "gcontract",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/diagnostic-contract.json",
+      "before": null,
+      "bytes": 14400,
+      "sha256": "531f5b5031daec165849bce724f90bb9816a981a25fb1aa8211a2082bb132086",
+      "blob": "a8b63e6c5e4bb38009bddc48633cfa7af78fa776",
+      "fullReadback": true
+    }
+  ],
+  "fixedParserRolesReused": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/mode-selection.json",
+      "bytes": 5460,
+      "blob": "bf500cccd9d6e828f74e9328f849d837ee2d0db4",
+      "sha256": "0dc71e54f901c91e4be06810eaead653862ae8365328e37673a548c0a3b8fb59"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/synthetic-vectors.json",
+      "bytes": 14802,
+      "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+      "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/tap-protocol.mjs",
+      "bytes": 10291,
+      "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+      "sha256": "3de67d5b30f7a0019b8f02118cf3727be7ae79d22ecfdc56bc7d39e60681dfd4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/synthetic-controls.mjs",
+      "bytes": 3313,
+      "blob": "bc33365eaf302d2296a759202a822af4a443f143",
+      "sha256": "2f49b434e3e51a4a3c225903b3a681e4f01ea3f62b58f337e6a26d0fdde8fcae"
+    }
+  ],
+  "caseFunctions": "Byte-identical entire suffix from first fixed(C2T1_CONNECTION) to EOF, same registration, order and work/fixtures. Observer adds sync marks around original awaited action/count/after. See exact before/after spans.",
+  "originalSourceIndex": {
+    "path": "source-index.json",
+    "bytes": 11467,
+    "sha256": "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03",
+    "blob": "f9f36a61875be344d38f19d77caf1a46c48e8f37",
+    "fullReadback": true
+  }
+}

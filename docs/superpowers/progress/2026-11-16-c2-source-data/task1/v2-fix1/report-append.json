@@ -1,0 +1,289 @@
+{
+  "schema": "afw.c2-source-fix1-report-lineage.v1",
+  "priorReportPin": {
+    "key": "report",
+    "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/v2-protocol-report.json",
+    "before": null,
+    "bytes": 6574,
+    "sha256": "278d5d30ed9c30dd60d5a2272165816aa745072710ec4bc555d2f3c947d4618f",
+    "blob": "83c8a67642e90f37244b26897d1c7bc59fcab23f",
+    "fullReadback": true
+  },
+  "priorReport": {
+    "schema": "afw.c2-source-protocol-report.v2",
+    "status": "SOURCE_TESTS_PENDING",
+    "project": "AFW",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "environment": "immutable proposed Source-lab v2 DATA",
+    "allowedAction": "bounded pinned reads and create/full readback of new immutable Git blobs only",
+    "rollback": "Abandon detached proposal. No ref or execution created. Full preimages and byte spans for mechanical comparison are in diff.",
+    "brief": "37339053e2bc146adb457ce34fd652bd576790b7",
+    "ruling": "253c5324973fdacc52225c60f5422ab175c5341e",
+    "architecture": "4158ce15675031331687e36ef5caec0738c640e8",
+    "priorFailedOccurrence": "c3003c261cdce09a77e44e7c9605c8c0e7dbfdfe",
+    "nomination": {
+      "branch": "lab/afw-c2-source-20261116-t1-v2",
+      "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-V2-ONEUSE-20261116",
+      "workflow": ".github/workflows/afw-c2-source-lab-v2.yml",
+      "job": "c2-source-lab-v2",
+      "runner": "docs/superpowers/source-lab/c2-t1-v2/run-c2-source-lab-v2.mjs",
+      "command": "node docs/superpowers/source-lab/c2-t1-v2/run-c2-source-lab-v2.mjs",
+      "environment": "Only fixed GitHub-hosted lab after independent Root admission."
+    },
+    "protocol": {
+      "key": "contract",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/protocol-contract.json",
+      "before": null,
+      "bytes": 13329,
+      "sha256": "24fe0f4bf3c3117f5ad1ab1e8650a7c874c2e4fa0868a3a1a6acf5ab254dcdd8",
+      "blob": "ce51877aa4bc8b807dd00e1089f6eeb1562b6d8a",
+      "fullReadback": true
+    },
+    "frameSchema": {
+      "key": "schema",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/frame-schema.json",
+      "before": null,
+      "bytes": 13963,
+      "sha256": "6bf078cdcdede7d78883cbafc53a1b9e5219427cc60da4eea49c7524b2d156c7",
+      "blob": "eaa2259b9f7cbe7e25f21cd5ff3cecf9776e13e2",
+      "fullReadback": true
+    },
+    "diff": {
+      "key": "diff",
+      "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/v2-protocol-diff.json",
+      "before": null,
+      "bytes": 9650,
+      "sha256": "f9428b72e7b3cdd8a2aebda1617277c50d151b38be98fb780cdb2ebfcdb6c497",
+      "blob": "6fb7ea0911876b1c1c9bcfe204b58a88e72c8741",
+      "fullReadback": true
+    },
+    "testFirst": {
+      "firstArtifact": {
+        "key": "vectors",
+        "path": "docs/superpowers/source-lab/c2-t1-v2/synthetic-vectors.json",
+        "before": null,
+        "bytes": 9873,
+        "sha256": "30634f2a8c173f670ed2b4cc33a8a8846ac54ad4b5b15d8cb6b17a1ca64acac3",
+        "blob": "40b1f06404470a73f9def3b68d366c90b6ebf7e1",
+        "fullReadback": true
+      },
+      "sequence": "Complete synthetic fixtures + expected acceptance/rejection edits uploaded and FULL fetched before parser code was authored. Parser and selftest are immutable DATA. Their actual executions and all native tests are pending.",
+      "syntheticOnly": {
+        "accepts": 1,
+        "rejects": 30,
+        "nativeTestsOrLaunchesAdded": 0
+      },
+      "futureRequired": "Root independent implementation/gate/receiver, then authorized bounded once-only proposed cloud occurrence; Root owns extraction, custody joins, status and scoped re-review before Task1 completion."
+    },
+    "staticChecks": [
+      "Canonical bytes compared after FULL GitHub fetch of every newly written artifact; metadata includes Git blob SHA-1 and SHA-256 of exact UTF-8 bytes. No locally executed Source code or parser tests.",
+      "V2 mode manifest lists all17 BASE-only exclusions, binds exact Node/driver/fixture and each immutable mode selection hash. Existing regression manifest and f9 remain intact.",
+      "The exact S07/S08 lexical sites used by witness are driver test registration 6:30, driver work await 9:6, NOTICES approval 36:2, S08 status strictEqual 18:118 and choose call 39:29. Exact throw site in its own attached native details is mandatory.",
+      "Primary Node v22.23.4 tap reporter emits failure details from the failed case, unwraps test-code assertions, emits numeric expected/actual/operator and stack frames. The runtime output for this exact pinned test remains unobserved. Unknown dialect, incomplete capture, alternate site or competing evidence stops this occurrence.",
+      "Frozen S08 line 18 reads the GET response before status assert; form parsing occurs at line 19 and POST at line 41. The numeric error is direct native data; HTTP method/path/boundary are identified by the pinned source, never by printing requests or parsing assertions globally.",
+      "New mode marker retains safe completed observations even on later failure. Mode verdict qualifies only its fixed oracle. Separate dependency, custody, and final receipt with full external Root join remain mandatory.",
+      "Old preflight and real dependency absence control, target sets, real product timeouts, source budget and six custody launches preserved. All ordinary regressions remain mandatory; regression hash remains e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6."
+    ],
+    "gatesIfRun": [
+      "Synthetic accepted=1/rejected=30, exact context/vectors hash before any Native.",
+      "Actual bootstrap ENOENT evidence from absent cwd, separate exact control frame.",
+      "BASE exact 3/exit1, own scoped witness 503/200 and three actual 1/1/1; stop on failure.",
+      "Proposal 20/allpass/exit0, actual six sends/three distinct receipts/closed selection from frozen checks.",
+      "Mutant all20/exit1 including named EXTRA_KEY fail against same green ID pass; exact compiled predicate.",
+      "Exactly 11 selected regressions pass/exit0 in unchanged manifest order.",
+      "Same-run full separate six-launch custody, cleanup, exactly one canonical Source receipt and matching file; Root API/artefact/receiver gate and re-review."
+    ],
+    "historicalScope": "Earlier 19-result 180s incomplete capture does not establish which case hung, named passes, product/Cloudflare/credential failure or causal guard. This packet has zero Source occurrences.",
+    "publicPrimaryReferences": [
+      "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/reporter/tap.js",
+      "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/test.js",
+      "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/harness.js"
+    ],
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  },
+  "append": {
+    "status": "SOURCE_TESTS_PENDING",
+    "authority": {
+      "brief": "0ddd62ffa45b595b6790d789adcf2e8318c789c0",
+      "ruling": "5e0aace992d3b64a755daaba5c898ef895f4e4ca",
+      "review": "4407b6a936cf2320bd3581e416bcb3aeee4eb63b",
+      "priorActual": "ef9ab21507a89650ce9c267f2d12ad8d852a3607"
+    },
+    "scope": "Source-side protocol fix round 1/5 plus separate observation-only green diagnostic proposal. This author did not change or validate the independent Root receiver.",
+    "historical": "Prior occurrence 43815383087/1 job 133126136465 on b80119500f26d5db40a991e36f40b6bba2153b98 independently qualified BASE3 with exact native 503/200. Green capture timed out at 180s without accepted cases/totals; zero mutant/regressions/full receipt, four partial custody launches. No log re-fetch. Earlier observations cannot fill any future qualification.",
+    "findings": [
+      {
+        "finding": "Joined counter keys can collide",
+        "fix": "Elementwise key array length/index equality for canonical frames, counters and custody shape; explicitly named integers precede arithmetic, including isolated rows.",
+        "vectors": "One joined key plus left and right two-key partial collisions in final isolated mutant row. Matching complete synthetic green and mutant pass first, and each malformed capture must return COUNTERS_INVALID."
+      },
+      {
+        "finding": "Immediate runner gate weaker than Root hierarchy/exact first17 green",
+        "fix": "Every native row has receipts <= activation <= upload, and every first17 green index has exact stage triple according to fixed order. Remaining isolated graphs retain independent counters with hierarchy. Mutant exact named case and all other observed outcome policy preserved.",
+        "vectors": "HANDLE..EXTRA_KEY changed together to 2/2/2, isolated last green receipts above activations. Both must fail specifically on counters."
+      }
+    ],
+    "synthetics": {
+      "parser": {
+        "firstData": {
+          "key": "fvectors",
+          "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/synthetic-vectors.json",
+          "before": null,
+          "bytes": 14802,
+          "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+          "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+          "fullReadback": true
+        },
+        "implementation": {
+          "key": "fparser",
+          "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/tap-protocol.mjs",
+          "before": null,
+          "bytes": 10291,
+          "sha256": "3de67d5b30f7a0019b8f02118cf3727be7ae79d22ecfdc56bc7d39e60681dfd4",
+          "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+          "fullReadback": true
+        },
+        "driver": {
+          "key": "fselftest",
+          "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/synthetic-controls.mjs",
+          "before": null,
+          "bytes": 3313,
+          "sha256": "2f49b434e3e51a4a3c225903b3a681e4f01ea3f62b58f337e6a26d0fdde8fcae",
+          "blob": "bc33365eaf302d2296a759202a822af4a443f143",
+          "fullReadback": true
+        },
+        "accepted": 3,
+        "rejected": 35,
+        "nativeOrCustodyLaunchesAdded": 0
+      },
+      "progress": {
+        "firstData": {
+          "key": "gvectors",
+          "path": "docs/superpowers/source-lab/c2-t1-green-diag1/progress-vectors.json",
+          "before": null,
+          "bytes": 8624,
+          "sha256": "71c979c34d8a9fc8fcce7e99463ca0479160b32620517e69849021715c21570b",
+          "blob": "32777d8b2d5676688d4bf7546bf6bb8ed296e3b4",
+          "fullReadback": true
+        },
+        "implementation": {
+          "key": "gprogress",
+          "path": "docs/superpowers/source-lab/c2-t1-green-diag1/read-progress.mjs",
+          "before": null,
+          "bytes": 5507,
+          "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f",
+          "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+          "fullReadback": true
+        },
+        "controlCount": 13,
+        "nativeOrCustodyLaunchesAdded": 0
+      },
+      "actualThisRound": "None. Synthetic inputs FULL read back before writing respective implementation. Counters are expected results for future official pinned cloud controls."
+    },
+    "futureQualification": {
+      "nomination": {
+        "branch": "lab/afw-c2-source-20261116-t1-v2-fix1",
+        "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-V2-FIX1-ONEUSE-20261116",
+        "workflow": ".github/workflows/afw-c2-source-lab-v2-fix1.yml",
+        "job": "c2-source-lab-v2-fix1",
+        "runner": "docs/superpowers/source-lab/c2-t1-v2-fix1/run-c2-source-lab-v2-fix1.mjs",
+        "command": "node docs/superpowers/source-lab/c2-t1-v2-fix1/run-c2-source-lab-v2-fix1.mjs"
+      },
+      "contract": {
+        "key": "fcontract",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/protocol-contract.json",
+        "before": null,
+        "bytes": 14586,
+        "sha256": "5b06c19b0be9a83baec9cbc8d34727b3c6e5c49bbc48c56ecc0e53c0b0bc4b44",
+        "blob": "2a925637cee8aa19fbac30bbc4d68cc35e85c374",
+        "fullReadback": true
+      },
+      "schema": {
+        "key": "fschema",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/frame-schema.json",
+        "before": null,
+        "bytes": 13973,
+        "sha256": "e18041c3caf5d16adc34e032e540fb724c1f3efaa53c48ec0c6a6e7aab3fea1a",
+        "blob": "04d26808abf9a1b252781c9ed68a890576440bcc",
+        "fullReadback": true
+      },
+      "diff": {
+        "key": "fdiff",
+        "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/v2-fix1-diff.json",
+        "before": null,
+        "bytes": 10080,
+        "sha256": "01c400015a1931162e052a4a27f39a7634b80bfef4374855173fa220a5eb43df",
+        "blob": "6d4c495917aa85d8e889cdcb55be1866ed2ded99",
+        "fullReadback": true
+      },
+      "selectionHashes": [
+        "7daaeb72f174744ecc11e234f899c75ed5a17daa1e820271e015bf179e9aac6b",
+        "ecb5037b4f3274c5afcab5bb2a7fdc4ca3795e450583db7b13e3eed98955d3f3",
+        "7b77711a74b39e7e4381dc66fa7044c31d532b9f52a118f5990df3c9246ed29e",
+        "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6"
+      ],
+      "gate": "Requires all 3/20/20+11 native, ENOENT, six-launch full custody and cleanup, then independent Root fixed receiver/API join/re-review. Not nominated for the next execution."
+    },
+    "nextPossibleDiagnostic": {
+      "nomination": {
+        "branch": "lab/afw-c2-source-20261116-t1-green-diag1",
+        "message": "AFW-C2-SOURCE-T1-GREEN-DIAG1-ONEUSE-20261116",
+        "workflow": ".github/workflows/afw-c2-green-diag1.yml",
+        "job": "c2-green-diag1",
+        "command": "node docs/superpowers/source-lab/c2-t1-green-diag1/run-c2-green-diag1.mjs"
+      },
+      "contract": {
+        "key": "gcontract",
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/diagnostic-contract.json",
+        "before": null,
+        "bytes": 14400,
+        "sha256": "531f5b5031daec165849bce724f90bb9816a981a25fb1aa8211a2082bb132086",
+        "blob": "a8b63e6c5e4bb38009bddc48633cfa7af78fa776",
+        "fullReadback": true
+      },
+      "schema": {
+        "key": "gschema",
+        "path": "docs/superpowers/source-lab/c2-t1-green-diag1/diagnostic-schema.json",
+        "before": null,
+        "bytes": 9686,
+        "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+        "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+        "fullReadback": true
+      },
+      "diff": {
+        "key": "gdiff",
+        "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/green-diag1-diff.json",
+        "before": null,
+        "bytes": 9712,
+        "sha256": "15a1ba71046eb4c081ec7cf969c02bac6bfa70a2afa46884ff40bdce86267d93",
+        "blob": "32882e9f3e4f10157cefcd626669bb687bafe11c",
+        "fullReadback": true
+      },
+      "gate": "Only isolated full20 proposal-green observer, with repaired parser synthetics and progress controls before preflight/actual dependency/observer launches. Native child timeout remains explicit in outcome; no product proof. Actual Root cloud job may produce useful partial progress or unknown frontier. No timing diagnosis from last entered marker. Observer sync filesystem operations may perturb timing; their presence means performance is scoped to this diagnostic execution."
+    },
+    "sourceProtection": "All13 f9 bodies immutable. Only the diagnostic temp S07 is overlaid by its separately pinned driver after verifying the original. Static byte comparison confirmed every fixed case/work body from first registration through EOF identical, including order/awaits; reversible spans and preimages recorded. Same 180s/120s/330s/7min and Node22.23.4/SDK1.2.1 unchanged.",
+    "verification": "All newly proposed immutable bytes FULL fetched and compared to authored bytes; independent SHA-256 and Git object hashes computed in RAM. Assembly paths, ownership gates, declared selection hashes, repair keys/counter guards, native arguments and the exact driver unchanged suffix inspected as DATA. No Source, helper or tests executed; no local Source materialization, refs/runs, operational or owner action.",
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  }
+}

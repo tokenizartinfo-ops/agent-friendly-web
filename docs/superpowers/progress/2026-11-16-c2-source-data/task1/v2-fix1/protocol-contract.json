@@ -1,0 +1,212 @@
+{
+  "schema": "afw.c2-source-protocol-contract.v2-fix1",
+  "status": "SOURCE_TESTS_PENDING",
+  "authority": {
+    "brief": "37339053e2bc146adb457ce34fd652bd576790b7",
+    "ruling": "253c5324973fdacc52225c60f5422ab175c5341e",
+    "architecture": "4158ce15675031331687e36ef5caec0738c640e8",
+    "historicalV1": "567c84adcda2355c7eeef39656d5a1f1101262ed",
+    "historicalReceiver": "ff288b865b72007ae7223c8f5e8266152a130db4",
+    "captureSupplement": "954040183862038da3e705509b7d3a2f0d1823fb",
+    "fixBrief": "0ddd62ffa45b595b6790d789adcf2e8318c789c0",
+    "rulingFix1": "5e0aace992d3b64a755daaba5c898ef895f4e4ca",
+    "reviewFix1": "4407b6a936cf2320bd3581e416bcb3aeee4eb63b",
+    "preimage": {
+      "key": "contract",
+      "path": "docs/superpowers/source-lab/c2-t1-v2/protocol-contract.json",
+      "before": null,
+      "bytes": 13329,
+      "sha256": "24fe0f4bf3c3117f5ad1ab1e8650a7c874c2e4fa0868a3a1a6acf5ab254dcdd8",
+      "blob": "ce51877aa4bc8b807dd00e1089f6eeb1562b6d8a",
+      "fullReadback": true
+    }
+  },
+  "wire": {
+    "encoding": "Single marker, one ASCII space, UTF-8 JSON.stringify(value) with the exact insertion order below, no whitespace outside strings, then LF. Reject duplicate keys and noncanonical text by canonical reserialization. JSON body byte limits exclude marker and LF except diagnostic cap is entire physical line. File is exact final body plus LF. Never accept two logical frames from one physical line. GitHub timestamp/step transport belongs to Root.",
+    "schema": {
+      "key": "fschema",
+      "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/frame-schema.json",
+      "before": null,
+      "bytes": 13973,
+      "sha256": "e18041c3caf5d16adc34e032e540fb724c1f3efaa53c48ec0c6a6e7aab3fea1a",
+      "blob": "04d26808abf9a1b252781c9ed68a890576440bcc",
+      "fullReadback": true
+    },
+    "frames": [
+      [
+        "AFW_C2_SOURCE_SYNTHETIC_V2_FIX1",
+        "synthetic",
+        2048
+      ],
+      [
+        "AFW_C2_DEPENDENCY_CONTROL",
+        "dependency",
+        1024
+      ],
+      [
+        "AFW_C2_SOURCE_MODE_V2",
+        "modeFrame",
+        12288
+      ],
+      [
+        "AFW_C2_SOURCE_CUSTODY_V2",
+        "custody",
+        1024
+      ],
+      [
+        "AFW_C2_SOURCE_DIAGNOSTIC_V2",
+        "diagnostic",
+        2048
+      ],
+      [
+        "AFW_C2_SOURCE_RECEIPT_V2",
+        "receipt",
+        24576
+      ]
+    ],
+    "orders": "Every object has the insertion order of properties in its frame-schema definition. For constants use the order in const. In particular observations are mode,selectionHash,verdict,code,exitCode,totals,cases,witness. Nonclaims and admissions follow frozen SourceIndex order. Marker, type and schema must agree. No extra keys. Shape alone never qualifies."
+  },
+  "context": "Exact repository, BASE commit/tree, fixed f9 index SHA256 and actual host git HEAD/head tree, same GitHub run decimal string, attempt 1, c2-source-lab-v2-fix1 logical job, v22.23.4. Independent Root gate must bind actual event/branch/message/head and API run, unique job ID and qualifying command-step on that job, result/artifact/frames. Job name alone never identifies an occurrence.",
+  "selection": {
+    "file": {
+      "key": "fselection",
+      "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/mode-selection.json",
+      "before": null,
+      "bytes": 5460,
+      "sha256": "0dc71e54f901c91e4be06810eaead653862ae8365328e37673a548c0a3b8fb59",
+      "blob": "bf500cccd9d6e828f74e9328f849d837ee2d0db4",
+      "fullReadback": true
+    },
+    "hashRule": "SHA256(UTF8(JSON.stringify(modeObject))) preserving keys/order as in immutable manifest. The whole pretty JSON file has its separate byte hash. For regressions SHA256(UTF8(JSON.stringify(parsed immutable v1 regression manifest))) stays e2100bd2... The compact v2 selection objects have no self-hash.",
+    "items": [
+      {
+        "mode": "baseline-red",
+        "selectionHash": "7daaeb72f174744ecc11e234f899c75ed5a17daa1e820271e015bf179e9aac6b",
+        "count": 3
+      },
+      {
+        "mode": "proposal-green",
+        "selectionHash": "ecb5037b4f3274c5afcab5bb2a7fdc4ca3795e450583db7b13e3eed98955d3f3",
+        "count": 20
+      },
+      {
+        "mode": "mutant-prefix",
+        "selectionHash": "7b77711a74b39e7e4381dc66fa7044c31d532b9f52a118f5990df3c9246ed29e",
+        "count": 20
+      },
+      {
+        "mode": "regressions",
+        "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6",
+        "count": 11
+      }
+    ],
+    "node": "v22.23.4",
+    "sourceIndex": "f9f36a61875be344d38f19d77caf1a46c48e8f37",
+    "regressionManifest": {
+      "dataPath": "docs/superpowers/source-lab/c2-t1/regression-selection.json",
+      "blob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+      "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6",
+      "bodyHash": "8287deef6924d3f91db98078da7bca8bdb55e292f87f9fd814da794e513ba4cf",
+      "bytes": 3364
+    },
+    "baseOnlyExclusions": [
+      "C2T1_HANDLE",
+      "C2T1_PROJECTREF",
+      "C2T1_SUBJECT",
+      "C2T1_PHASE_RENAME",
+      "C2T1_SOURCE_BYTES",
+      "C2T1_APPROVAL",
+      "C2T1_PREDECESSOR",
+      "C2T1_GRANT_REVOKED",
+      "C2T1_EXTRA_KEY",
+      "C2T1_MONITOR_COOKIE",
+      "C2T1_MONITOR",
+      "C2T1_SCOPE_MISSING",
+      "C2T1_FINITE",
+      "C2T1_SELECTION",
+      "C2T1_LOST_ACK_DUPLICATE",
+      "C2T1_UNRESOLVED_WRITER",
+      "C2T1_OWN_PROMISE"
+    ],
+    "meaning": "Explicitly outside BASE coverage. Never invent an observation for any excluded ID. No exclusion applies to proposal or mutant."
+  },
+  "nativeOracle": {
+    "capture": "Normal synchronous child completion, error absent, signal null, status 0 or 1, strict LF-terminated UTF-8 TAP 13. Bind exact selected subtest names, consecutive ordinal integer results starting at 1 and complete per-result native details. Match canonical C2SOURCE array in selected order, exact keys, phase, code and matching native status. Raw diagnostic/TAP/stack stays only in parent RAM. No missing/duplicate/extra cases/frames, hook/file results, directives, skipped/todo/cancelled, suite, nonzero cancelled count, extra plan or wrong totals. Any parser or custody error gates subsequent modes. Regression cases use native TAP only; no C2SOURCE frames.",
+    "red": "baseline-red filters S07 by the exact anchored pattern. Exact joined sequence CONNECTION/pass/connection/OK, OAUTH/pass/oauth/OK, NOTICES/fail/notices/TEST_FAILED. Every boundary independently sampled upload=activation=receipts=1. Native exit 1. Numeric 503/200, strictEqual, AssertionError, ERR_ASSERTION and unique testCodeFailure from that third native failure only. Its own S07 definition location at 6:30 is distinct from its action frame at 36:2 and S08 assertion at 18:118. No cross-record or global text matching. Do not infer an internal guard or failed POST.",
+    "witness": "Resolve both S07/S08 full file URLs from this mode target. Native definition must be exact target S07 at 6:30. First stack frame choose at S08 18:118; exact application chain Object.approve at S08 39:29, S07 36:2 and TestContext callback S07 9:6. Allow intervening literal node:internal frames. Reject unknown/foreign/duplicate/conflicting record, code, number, site or method. HTTP GET /connections/finite-prepare and before-form-parse-and-post derive from the uniquely pinned S08 line 18 and its S07 NOTICES chain. No raw error text, route argument supplied by client, or method string is used as proof.",
+    "green": "proposal-green runs all20 with canonical frames, all pass exit0, same actual-counter/historical graph separation. First17 main monotone, last3 isolated graphs. Require exact 1/1/1 connection/OAuth, 2/2/2 notices, 3/3/3 finite/selection. Actual S08 approve checks distinct IDs, links each ACK to actual recorded SEND/result and stage receipt; S08 selection checks six sends/three distinct actual stage receipts and unbound closed selection. Frames contain observed counters, not invented per-send DTOs.",
+    "mutant": "mutant-prefix uses frozen f9 mutation only, same all20 names/order, canonical frames and actual counters, exit1; require named EXTRA_KEY fail with native testCodeFailure and the same ID pass in the already qualified green observation. Record every other actual outcome. No claim based on arbitrary nonzero exit. No new acceptance rule on statuses of other mutant cases beyond the frozen contract/framework failures policy.",
+    "regressions": "Exact11 named manifest entries, proposal target, inherited exact arguments/AFW_R2_GROUP, no extra or omitted TAP, native exit0 allpass. This proves only these eleven chosen regressions.",
+    "counters": "Every row of every native mode has exactly three ordered individual keys upload, activation, receipts by elementwise length/key equality. Every named value is integer 0..3 and receipts <= activation <= upload. Green rows 0..10 exactly 1/1/1, 11..14 exactly 2/2/2, 15..16 exactly 3/3/3; last three are separate actual isolated graphs. Preserve mutant non-checkpoint policy and green-vs-mutant named EXTRA_KEY requirement."
+  },
+  "state": {
+    "sequence": [
+      "synthetic parser controls",
+      "owned preflight",
+      "real absent-cwd bootstrap ENOENT control",
+      "baseline-red",
+      "proposal-green",
+      "mutant-prefix",
+      "regressions",
+      "owned cleanup + separate custody",
+      "final Source receipt"
+    ],
+    "mode": "Retain one bounded mode frame in this command-step stdout immediately after evaluating each valid-custody native capture and before any next scope. A valid native failure expected by the mode can have qualified mode verdict. An unqualified returned mode emits its real validated fields once, then diagnostic and stop. If custody fails before capture release, emit diagnostic and partial custody without a mode verdict. Null totals/exit/witness mean unavailable or inapplicable, never zero. A blank cases array means no complete join accepted. No partial evidence is reused in another occurrence or emits a final receipt.",
+    "partial": "Earlier completed mode frames remain independently visible in the same step if a later scope fails. No Source artifact on incomplete run. Successful final receipt embeds the same four observations exactly in their original order. Require appropriate witness nullability and mandatory case order/types/counter/status semantics. Root compares the four observed frames byte-for-byte with each embedded observation and verifies synthetic, real dependency, full custody, external job/step and clean conclusion.",
+    "full": "Full positive order: synthetic once, actual dependency once, four qualified mode frames, full separate custody once after own cleanup, one final v2 receipt. No diagnostics, unexpected frame, missing/dupe/partial/unauthorized run, extra scope or mismatched artifact. Validate controls from same unique actual command, unique job ID/run/attempt/head/tree. All four observations and honest custody/cleanup are mandatory."
+  },
+  "controls": {
+    "synthetic": {
+      "vectors": {
+        "key": "fvectors",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/synthetic-vectors.json",
+        "before": null,
+        "bytes": 14802,
+        "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+        "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+        "fullReadback": true
+      },
+      "helper": {
+        "key": "fselftest",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/synthetic-controls.mjs",
+        "before": null,
+        "bytes": 3313,
+        "sha256": "2f49b434e3e51a4a3c225903b3a681e4f01ea3f62b58f337e6a26d0fdde8fcae",
+        "blob": "bc33365eaf302d2296a759202a822af4a443f143",
+        "fullReadback": true
+      },
+      "command": "Fixed pinned runner calls runSyntheticControls(vectors,selections,SELECTION_HASHES) in parent RAM. Preserve all 30 old negatives and old good denial; require two complete synthetic good green/mutant positives and five otherwise valid TAP negatives returning specifically COUNTERS_INVALID. No additional native child.",
+      "expectedFrame": "AFW_C2_SOURCE_SYNTHETIC_V2_FIX1 once, same exact fix1 job context and exact vectorsHash accepted=3/rejected=35."
+    },
+    "dependency": "Preserve bootstrap DATA and preflight/absent-workdir execution exactly; actual failure must be ENOENT at exact BOOTSTRAP.workflowPath then exact canonical dependency stdout with empty stderr and native exit0.",
+    "custody": "V2 versions job and wire marker/schema only. Same stdout-suppressed verified guard, owned private PID JSON records, positive parent UID, exact UID/GID, clear supplementary groups, private network with only loopback and no-new-privs. Re-read actual probe files after every launch; fresh 1..8/launch, <=8/target and <=24 cross-target. Distinct 6 completed custody-checked launches required with 6..24 observed processes. Early BASE stop normally 3 launches has partial custody only. All required booleans true including preflight owned/removed and own verified temp removed. Context binds same head/run/attempt/job/index. Body <=1024B. Never emit UID/GID/PID/path/contents."
+  },
+  "limits": {
+    "totalMs": 330000,
+    "nativeChildMs": 180000,
+    "nativeCaseMs": 120000,
+    "ownedPreflightMs": 10000,
+    "jobMinutes": 7,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "archiveBytes": 33554432,
+    "receiptBytes": 24576,
+    "sdk": "1.2.1"
+  },
+  "redaction": "Emit only schema-conforming finite values. On parser rejection return the typed reason from its exact validation stage. No raw TAP or error messages/stacks/headers/cookies/JWT/nonces/absolute child path. Diagnostic captures only exit/signal/errorKind plus bounded stream byte-count+SHA256 when available.",
+  "docEvidence": [
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/reporter/tap.js",
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/test.js",
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/assert/assertion_error.js"
+  ],
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "versioning": "Wire retains existing mode/custody/receipt schema and markers; fix1 requires distinct exact job, run, head/tree and new vectors hash/synthetic marker. Separate report/packet/runner/files. No historical requalification."
+}

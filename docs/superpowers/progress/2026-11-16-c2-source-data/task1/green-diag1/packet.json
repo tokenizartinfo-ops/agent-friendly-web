@@ -1,0 +1,353 @@
+{
+  "schema": "afw.c2-green-diag1-packet.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "immutable proposed Git DATA",
+  "authority": {
+    "brief": "0ddd62ffa45b595b6790d789adcf2e8318c789c0",
+    "ruling": "5e0aace992d3b64a755daaba5c898ef895f4e4ca",
+    "review": "4407b6a936cf2320bd3581e416bcb3aeee4eb63b",
+    "priorActual": "ef9ab21507a89650ce9c267f2d12ad8d852a3607"
+  },
+  "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "baselineLeaves": 3203,
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "baseExistingBootstrap": {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "bytes": 1844,
+    "sha256": "ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "fullReadback": true
+  },
+  "inherited17": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "bytes": 11467,
+      "sha256": "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03",
+      "blob": "f9f36a61875be344d38f19d77caf1a46c48e8f37",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "bytes": 148547,
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "bytes": 45576,
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "bytes": 2497,
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "productOrTestPath": "worker/mcp-own/finite.mjs",
+      "bytes": 2810,
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "bytes": 4153,
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "bytes": 101380,
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "bytes": 22501,
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "productOrTestPath": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "bytes": 2785,
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "productOrTestPath": "test/fixtures/finite-coupled-native.mjs",
+      "bytes": 14244,
+      "blob": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+      "sha256": "029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "productOrTestPath": "test/fixtures/finite-first-connection-publication.mjs",
+      "bytes": 60636,
+      "blob": "ec57e55ea2d8f68c992af26bccca0c6e71a79f96",
+      "sha256": "092a1d8dd44b99a16e522f09234a2b0f4bf62e6575ac99664be516fc7673920d",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "productOrTestPath": "test/fixtures/finite-initial-entry-world.mjs",
+      "bytes": 88519,
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "productOrTestPath": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "bytes": 58727,
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "bytes": 6030,
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/regression-selection.json",
+      "bytes": 3364,
+      "sha256": "8287deef6924d3f91db98078da7bca8bdb55e292f87f9fd814da794e513ba4cf",
+      "blob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "fullReadback": true
+    }
+  ],
+  "earlierPacket": {
+    "key": "packet",
+    "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/v2-protocol-packet.json",
+    "before": null,
+    "bytes": 13900,
+    "sha256": "771618e9a1ad494f8c6538893d3ba3168582924f255b4562e1935afc46755c61",
+    "blob": "f8b080edc6a33991263fb0bde1f8edfe704d92a2",
+    "fullReadback": true
+  },
+  "earlierReport": {
+    "key": "report",
+    "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/v2-protocol-report.json",
+    "before": null,
+    "bytes": 6574,
+    "sha256": "278d5d30ed9c30dd60d5a2272165816aa745072710ec4bc555d2f3c947d4618f",
+    "blob": "83c8a67642e90f37244b26897d1c7bc59fcab23f",
+    "fullReadback": true
+  },
+  "report": {
+    "key": "freport",
+    "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/v2-fix1-report-append.json",
+    "before": null,
+    "bytes": 16733,
+    "sha256": "7854e87f733f3de371eeb73ccf27730488b7f8111ebcf4a59422191dcb0a192c",
+    "blob": "5de66bbff48b3b104637aa5953c3ca99b2ba2580",
+    "fullReadback": true
+  },
+  "selectionHashes": [
+    "7daaeb72f174744ecc11e234f899c75ed5a17daa1e820271e015bf179e9aac6b",
+    "ecb5037b4f3274c5afcab5bb2a7fdc4ca3795e450583db7b13e3eed98955d3f3",
+    "7b77711a74b39e7e4381dc66fa7044c31d532b9f52a118f5990df3c9246ed29e",
+    "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6"
+  ],
+  "selectionHashOrder": [
+    "baseline-red",
+    "proposal-green",
+    "mutant-prefix",
+    "regressions"
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-green-diag1",
+    "message": "AFW-C2-SOURCE-T1-GREEN-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-green-diag1.yml",
+    "job": "c2-green-diag1",
+    "command": "node docs/superpowers/source-lab/c2-t1-green-diag1/run-c2-green-diag1.mjs"
+  },
+  "newObserverPaths12": [
+    {
+      "key": "reused-selection",
+      "before": null,
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/mode-selection.json",
+      "bytes": 5460,
+      "blob": "bf500cccd9d6e828f74e9328f849d837ee2d0db4",
+      "sha256": "0dc71e54f901c91e4be06810eaead653862ae8365328e37673a548c0a3b8fb59",
+      "fullReadback": true
+    },
+    {
+      "key": "reused-vectors",
+      "before": null,
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/synthetic-vectors.json",
+      "bytes": 14802,
+      "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+      "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+      "fullReadback": true
+    },
+    {
+      "key": "reused-parser",
+      "before": null,
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/tap-protocol.mjs",
+      "bytes": 10291,
+      "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+      "sha256": "3de67d5b30f7a0019b8f02118cf3727be7ae79d22ecfdc56bc7d39e60681dfd4",
+      "fullReadback": true
+    },
+    {
+      "key": "reused-selftest",
+      "before": null,
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/synthetic-controls.mjs",
+      "bytes": 3313,
+      "blob": "bc33365eaf302d2296a759202a822af4a443f143",
+      "sha256": "2f49b434e3e51a4a3c225903b3a681e4f01ea3f62b58f337e6a26d0fdde8fcae",
+      "fullReadback": true
+    },
+    {
+      "key": "gdriver",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/observer-driver.txt",
+      "before": null,
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "fullReadback": true
+    },
+    {
+      "key": "grecorder",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/progress-recorder.mjs",
+      "before": null,
+      "bytes": 3812,
+      "sha256": "271b9abeb806acaa5e6a1d35e6e72c77cf9b25bb5cad3603f0ccbb05745f7508",
+      "blob": "e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3",
+      "fullReadback": true
+    },
+    {
+      "key": "gvectors",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/progress-vectors.json",
+      "before": null,
+      "bytes": 8624,
+      "sha256": "71c979c34d8a9fc8fcce7e99463ca0479160b32620517e69849021715c21570b",
+      "blob": "32777d8b2d5676688d4bf7546bf6bb8ed296e3b4",
+      "fullReadback": true
+    },
+    {
+      "key": "gprogress",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/read-progress.mjs",
+      "before": null,
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "fullReadback": true
+    },
+    {
+      "key": "grunner",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/run-c2-green-diag1.mjs",
+      "before": null,
+      "bytes": 23804,
+      "sha256": "da859312875783dea7478cae762385e1708f9d53d068eb995637314ae73c23a2",
+      "blob": "069e1ccb580bf06ea52b2b268441c1b540256841",
+      "fullReadback": true
+    },
+    {
+      "key": "gworkflow",
+      "path": ".github/workflows/afw-c2-green-diag1.yml",
+      "before": null,
+      "bytes": 1523,
+      "sha256": "e4705b66ec419f3201b44bbd813183021305173124cd417f2895012df6341108",
+      "blob": "0ba8e013e2ddbecefebc9a25fd51e49df16271fd",
+      "fullReadback": true
+    },
+    {
+      "key": "gschema",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/diagnostic-schema.json",
+      "before": null,
+      "bytes": 9686,
+      "sha256": "80af228d31d39d4759b222ac47be7fd5f62f5ec05514e23f7170d1ec7fc437ab",
+      "blob": "552301a29267a19d8a6b57fd0e1d105286d859d3",
+      "fullReadback": true
+    },
+    {
+      "key": "gcontract",
+      "path": "docs/superpowers/source-lab/c2-t1-green-diag1/diagnostic-contract.json",
+      "before": null,
+      "bytes": 14400,
+      "sha256": "531f5b5031daec165849bce724f90bb9816a981a25fb1aa8211a2082bb132086",
+      "blob": "a8b63e6c5e4bb38009bddc48633cfa7af78fa776",
+      "fullReadback": true
+    }
+  ],
+  "mount": "Exactly 29 additive paths on fixed baseline: inherited17 (the frozen DATA/guard/preflight/regression manifest, even though no regression runs) and newObserverPaths12. Four new-path copies are byte-identical to specified fixed protocol control modules/DATA, checked and imported under the observer prefix. No Source qualification workflow or runner. Observer driver is text DATA until separately overlaid solely on temporary S07 for this occurrence after materializing and verifying all13. Detached report/diff/packet are not runtime mounts. Existing bootstrap data untouched.",
+  "syntheticMarker": "AFW_C2_GREEN_SYNTHETIC",
+  "syntheticExpected": {
+    "accepted": 3,
+    "rejected": 35,
+    "progressChecks": 13,
+    "parserVectorsHash": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+    "progressVectorsHash": "71c979c34d8a9fc8fcce7e99463ca0479160b32620517e69849021715c21570b"
+  },
+  "actualExpectedScope": {
+    "selectionHash": "ecb5037b4f3274c5afcab5bb2a7fdc4ca3795e450583db7b13e3eed98955d3f3",
+    "caseCount": 20,
+    "launches": 3,
+    "sourceQualified": false,
+    "task1Pass": false,
+    "usableOutcomeIfTimedOut": "Capture-only with normalized journal, finite TAP prefix, full3 real custody, cleanup and independent same-job/frame/artifact join. No cause inference."
+  },
+  "diff": {
+    "key": "gdiff",
+    "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/green-diag1-diff.json",
+    "before": null,
+    "bytes": 9712,
+    "sha256": "15a1ba71046eb4c081ec7cf969c02bac6bfa70a2afa46884ff40bdce86267d93",
+    "blob": "32882e9f3e4f10157cefcd626669bb687bafe11c",
+    "fullReadback": true
+  },
+  "rollback": "Abandon detached proposal. New observer roles can be omitted entirely. Full S07/qualification-runner/workflow preimages and exact reversible spans attached. No Git product/fixture edit. Root manages all execution, branch preservation/closure and outcome joins."
+}

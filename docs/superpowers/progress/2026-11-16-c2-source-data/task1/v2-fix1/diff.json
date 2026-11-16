@@ -1,0 +1,410 @@
+{
+  "schema": "afw.c2-source-fix1-diff.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "units": "Zero-based UTF-8 half-open byte intervals [oldStart,oldEnd,newStart,newEnd]. Copy untouched intervals identically, exchange ranges with bytes from full pinned blobs; reverse from last span to first. All new paths have absent preimage on the proposed base tree; comparisons describe derivation from immutable prior proposals or the installed S07 temp driver, not edits to historical Git paths.",
+  "comparisons": [
+    {
+      "before": {
+        "key": "vectors",
+        "path": "docs/superpowers/source-lab/c2-t1-v2/synthetic-vectors.json",
+        "before": null,
+        "bytes": 9873,
+        "sha256": "30634f2a8c173f670ed2b4cc33a8a8846ac54ad4b5b15d8cb6b17a1ca64acac3",
+        "blob": "40b1f06404470a73f9def3b68d366c90b6ebf7e1",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "fvectors",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/synthetic-vectors.json",
+        "before": null,
+        "bytes": 14802,
+        "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+        "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          2,
+          49,
+          2,
+          54
+        ],
+        [
+          9867,
+          9871,
+          9872,
+          14800
+        ]
+      ]
+    },
+    {
+      "before": {
+        "key": "selection",
+        "path": "docs/superpowers/source-lab/c2-t1-v2/mode-selection.json",
+        "before": null,
+        "bytes": 5460,
+        "sha256": "0dc71e54f901c91e4be06810eaead653862ae8365328e37673a548c0a3b8fb59",
+        "blob": "bf500cccd9d6e828f74e9328f849d837ee2d0db4",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "fselection",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/mode-selection.json",
+        "before": null,
+        "bytes": 5460,
+        "sha256": "0dc71e54f901c91e4be06810eaead653862ae8365328e37673a548c0a3b8fb59",
+        "blob": "bf500cccd9d6e828f74e9328f849d837ee2d0db4",
+        "fullReadback": true
+      },
+      "spans": []
+    },
+    {
+      "before": {
+        "key": "parser",
+        "path": "docs/superpowers/source-lab/c2-t1-v2/tap-protocol.mjs",
+        "before": null,
+        "bytes": 10020,
+        "sha256": "202b312452989d6bcda5fae18e64fa392880750ea9b3b498d19ca52366f28205",
+        "blob": "3749ba14502f251f1aa8008ff3c6d7bd70263538",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "fparser",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/tap-protocol.mjs",
+        "before": null,
+        "bytes": 10291,
+        "sha256": "3de67d5b30f7a0019b8f02118cf3727be7ae79d22ecfdc56bc7d39e60681dfd4",
+        "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          198,
+          324,
+          198,
+          455
+        ],
+        [
+          882,
+          987,
+          1013,
+          1128
+        ],
+        [
+          1125,
+          1295,
+          1266,
+          1600
+        ],
+        [
+          7523,
+          7732,
+          7828,
+          8003
+        ]
+      ]
+    },
+    {
+      "before": {
+        "key": "selftest",
+        "path": "docs/superpowers/source-lab/c2-t1-v2/synthetic-controls.mjs",
+        "before": null,
+        "bytes": 1672,
+        "sha256": "b9feaefc6e3b15cd95b10c75fe55f44f50bb4c33ba8ae4a10c96c12e3e5b8665",
+        "blob": "b108562ad11b3af1dbe291fdcd3b55b0c22bc1d1",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "fselftest",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/synthetic-controls.mjs",
+        "before": null,
+        "bytes": 3313,
+        "sha256": "2f49b434e3e51a4a3c225903b3a681e4f01ea3f62b58f337e6a26d0fdde8fcae",
+        "blob": "bc33365eaf302d2296a759202a822af4a443f143",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          90,
+          164,
+          90,
+          236
+        ],
+        [
+          1638,
+          1670,
+          1710,
+          3311
+        ]
+      ]
+    },
+    {
+      "before": {
+        "key": "runner",
+        "path": "docs/superpowers/source-lab/c2-t1-v2/run-c2-source-lab-v2.mjs",
+        "before": null,
+        "bytes": 23059,
+        "sha256": "1a9556a7056a24c0a3f220be8cce1889d8c832a083e4c96861dba2695d5a95d5",
+        "blob": "5031acd80a2770d9e5eea5cde0ac9d09286e24b2",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "frunner",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/run-c2-source-lab-v2-fix1.mjs",
+        "before": null,
+        "bytes": 23155,
+        "sha256": "0f24c5c8ac3fd7821e25dcafab45566c282069cd295ff24dc9bb4f14d4d1d4b1",
+        "blob": "9cc607ab788335553ea97a607d9042619b35c78d",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          1832,
+          1951,
+          1832,
+          1961
+        ],
+        [
+          6715,
+          7680,
+          6725,
+          7721
+        ],
+        [
+          11903,
+          12146,
+          11944,
+          12233
+        ],
+        [
+          14390,
+          14977,
+          14477,
+          15069
+        ],
+        [
+          17463,
+          17681,
+          17555,
+          17772
+        ],
+        [
+          22808,
+          22917,
+          22899,
+          23013
+        ]
+      ]
+    },
+    {
+      "before": {
+        "key": "workflow",
+        "path": ".github/workflows/afw-c2-source-lab-v2.yml",
+        "before": null,
+        "bytes": 1552,
+        "sha256": "99841e1987267a2978e97823dd4c87a1d07b8c73086a13e10b940e45e5795fa7",
+        "blob": "98a09213f225353468eb755953b26ea111bc44da",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "fworkflow",
+        "path": ".github/workflows/afw-c2-source-lab-v2-fix1.yml",
+        "before": null,
+        "bytes": 1592,
+        "sha256": "a3bc8d108ed0ee36836ac5811ca4ffbd578d0503b59f97dd3e5287630d8c7a08",
+        "blob": "c3ab3d9001d896db62531e006dcfd03b21d0ff0e",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          66,
+          107,
+          66,
+          112
+        ],
+        [
+          143,
+          163,
+          148,
+          173
+        ],
+        [
+          281,
+          350,
+          291,
+          365
+        ],
+        [
+          383,
+          476,
+          398,
+          496
+        ],
+        [
+          1120,
+          1200,
+          1140,
+          1230
+        ],
+        [
+          1379,
+          1489,
+          1409,
+          1529
+        ]
+      ]
+    },
+    {
+      "before": {
+        "key": "schema",
+        "path": "docs/superpowers/source-lab/c2-t1-v2/frame-schema.json",
+        "before": null,
+        "bytes": 13963,
+        "sha256": "6bf078cdcdede7d78883cbafc53a1b9e5219427cc60da4eea49c7524b2d156c7",
+        "blob": "eaa2259b9f7cbe7e25f21cd5ff3cecf9776e13e2",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "fschema",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/frame-schema.json",
+        "before": null,
+        "bytes": 13973,
+        "sha256": "e18041c3caf5d16adc34e032e540fb724c1f3efaa53c48ec0c6a6e7aab3fea1a",
+        "blob": "04d26808abf9a1b252781c9ed68a890576440bcc",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          0,
+          13963,
+          0,
+          13973
+        ]
+      ]
+    },
+    {
+      "before": {
+        "key": "contract",
+        "path": "docs/superpowers/source-lab/c2-t1-v2/protocol-contract.json",
+        "before": null,
+        "bytes": 13329,
+        "sha256": "24fe0f4bf3c3117f5ad1ab1e8650a7c874c2e4fa0868a3a1a6acf5ab254dcdd8",
+        "blob": "ce51877aa4bc8b807dd00e1089f6eeb1562b6d8a",
+        "fullReadback": true
+      },
+      "after": {
+        "key": "fcontract",
+        "path": "docs/superpowers/source-lab/c2-t1-v2-fix1/protocol-contract.json",
+        "before": null,
+        "bytes": 14586,
+        "sha256": "5b06c19b0be9a83baec9cbc8d34727b3c6e5c49bbc48c56ecc0e53c0b0bc4b44",
+        "blob": "2a925637cee8aa19fbac30bbc4d68cc35e85c374",
+        "fullReadback": true
+      },
+      "spans": [
+        [
+          2,
+          52,
+          2,
+          57
+        ],
+        [
+          418,
+          486,
+          423,
+          1015
+        ],
+        [
+          980,
+          1075,
+          1509,
+          1610
+        ],
+        [
+          1097,
+          1261,
+          1632,
+          1796
+        ],
+        [
+          1319,
+          1357,
+          1854,
+          1897
+        ],
+        [
+          2216,
+          2613,
+          2756,
+          3158
+        ],
+        [
+          2644,
+          2744,
+          3189,
+          3295
+        ],
+        [
+          7892,
+          8099,
+          8443,
+          9090
+        ],
+        [
+          10064,
+          10169,
+          11055,
+          11166
+        ],
+        [
+          10193,
+          10362,
+          11190,
+          11360
+        ],
+        [
+          10418,
+          10524,
+          11416,
+          11528
+        ],
+        [
+          10548,
+          10717,
+          11552,
+          11721
+        ],
+        [
+          10755,
+          11214,
+          11759,
+          12233
+        ],
+        [
+          13323,
+          13327,
+          14342,
+          14584
+        ]
+      ]
+    }
+  ],
+  "historicalIndex": {
+    "key": "packet",
+    "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/v2-protocol-packet.json",
+    "before": null,
+    "bytes": 13900,
+    "sha256": "771618e9a1ad494f8c6538893d3ba3168582924f255b4562e1935afc46755c61",
+    "blob": "f8b080edc6a33991263fb0bde1f8edfe704d92a2",
+    "fullReadback": true
+  },
+  "historicalDiff": {
+    "key": "diff",
+    "path": "docs/superpowers/progress/2026-11-16-c2-source-data/task1/v2-protocol-diff.json",
+    "before": null,
+    "bytes": 9650,
+    "sha256": "f9428b72e7b3cdd8a2aebda1617277c50d151b38be98fb780cdb2ebfcdb6c497",
+    "blob": "6fb7ea0911876b1c1c9bcfe204b58a88e72c8741",
+    "fullReadback": true
+  }
+}
