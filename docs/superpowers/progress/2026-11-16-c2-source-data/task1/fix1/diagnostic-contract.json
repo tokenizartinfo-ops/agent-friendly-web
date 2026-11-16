@@ -1,0 +1,168 @@
+{
+  "schema": "afw.c2-source-fix1-diagnostic-contract.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "baseEvidence": "95a2a6321ad5503fa9ca0c1ef447678889d6ee28",
+  "priorSourceIndex": "e20ae5a991a291004c3a8dde098031865c1e4c13",
+  "sourceBodiesFrozen": true,
+  "branch": "lab/afw-c2-source-20261116-t1-fix1",
+  "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIX1-ONEUSE-20261116",
+  "runner": "8d2e34b03aa8f6ada906fddd65c8b3cb32054e67",
+  "workflow": "795299dba34d1152b96dfffc305218989dec90f5",
+  "diagnostic": {
+    "channel": "stderr",
+    "frame": "AFW_C2_SOURCE_DIAGNOSTIC JSON.stringify({phase,frontier,code:\"CAPTURE_INVALID\",capture}) + LF",
+    "maximumUtf8": 2048,
+    "fieldOrder": [
+      "phase",
+      "frontier",
+      "code",
+      "capture"
+    ],
+    "phases": [
+      "admission",
+      "materialize",
+      "baseline-red",
+      "proposal-green",
+      "mutant-prefix",
+      "regressions",
+      "cleanup"
+    ],
+    "frontiers": [
+      "launch",
+      "TAP",
+      "frames",
+      "counters"
+    ],
+    "captureNull": "Unavailable native child observation. No invented zero counters.",
+    "captureFieldOrder": [
+      "exitCode",
+      "signal",
+      "errorKind",
+      "complete",
+      "stdout",
+      "stderr",
+      "observed"
+    ],
+    "exitCode": "integer0..255 ornull",
+    "signals": [
+      "none",
+      "SIGTERM",
+      "SIGKILL",
+      "SIGABRT",
+      "SIGSEGV",
+      "SIGINT",
+      "SIGHUP",
+      "SIGPIPE",
+      "other",
+      "unavailable"
+    ],
+    "errorKinds": [
+      "none",
+      "spawn-enoent",
+      "spawn-eacces",
+      "spawn-eperm",
+      "timeout",
+      "buffer-limit",
+      "spawn-other"
+    ],
+    "outputObject": {
+      "fields": [
+        "bytes",
+        "sha256"
+      ],
+      "source": "Actual captured Buffer length+SHA256; null if unavailable; incomplete capture never qualifies."
+    },
+    "observedFieldOrder": [
+      "tapResults",
+      "knownResults",
+      "knownFrames",
+      "firstKnownFailure",
+      "sourceFileFailure",
+      "dependencyOutcome",
+      "errorKinds"
+    ],
+    "observedCaps": {
+      "tapResults": 128,
+      "knownResults": 31,
+      "knownFrames": 20
+    },
+    "firstKnownFailure": "Only first failed known TAP result mapped to one of existing20 C2T1 IDs or11 regression IDs; otherwise null. Never inferred from frame absence, elapsed time or raw names.",
+    "sourceFileFailure": "Boolean true only for failed TAP result naming the fixed main Source test file; never emit variable path.",
+    "dependencyOutcomes": [
+      null,
+      "EXPECTED_ENOENT",
+      "UNEXPECTED_SUCCESS",
+      "UNEXPECTED_ERROR"
+    ],
+    "observedErrorKinds": {
+      "values": [
+        "file-not-found",
+        "module-not-found",
+        "assertion",
+        "syntax"
+      ],
+      "meaning": "Whitelist literal markers observed in captured TAP, not an authenticated root-cause claim; no raw error/message/assertion/path leaves RAM."
+    },
+    "qualification": "Any diagnostic blocks qualification. No synthetic positive/fallback Source receipt. Child result metadata does not prove global physical drain."
+  },
+  "dependencyControl": {
+    "frame": "AFW_C2_DEPENDENCY_CONTROL JSON.stringify({schema:\"afw.c2-bootstrap-dependency-control.v1\",id:\"BOOTSTRAP_DEPENDENCY_ABSENT\",status,observation}) + LF",
+    "id": "BOOTSTRAP_DEPENDENCY_ABSENT",
+    "fieldOrder": [
+      "schema",
+      "id",
+      "status",
+      "observation"
+    ],
+    "status": [
+      "pass",
+      "fail"
+    ],
+    "observations": [
+      "EXPECTED_ENOENT",
+      "UNEXPECTED_SUCCESS",
+      "UNEXPECTED_ERROR"
+    ],
+    "maximumUtf8": 256,
+    "actualPath": "The exact existing bootstrapWorld() function imported from admitted baseline materialization is called once from a fresh empty cwd within the same network isolation.",
+    "expected": "Only error.code===ENOENT AND error.path===BOOTSTRAP.workflowPath yields pass/EXPECTED_ENOENT/exit0. No assertions/body/raw error emitted. Extra stderr/output or failed launch blocks.",
+    "publicOutput": "Runner forwards exact actual child Buffer only after exact canonical expected record+LF/exit0 validation. This is a dependency diagnostic, never one of20 Source case outcomes.",
+    "scope": "No M/QA publication, Workflow execution, CLI call, provider request, permission or real owner consent. Merely calling the original fixture's failing file-read path.",
+    "tempFilesOnly": [
+      "c2-bootstrap-absent-control.mjs",
+      "bootstrap-absent-cwd"
+    ],
+    "SourceReceiptCaseSetUnchanged": true
+  },
+  "dependency": {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "bytes": 1844,
+    "sha256": "ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14",
+    "gitBlob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "treatment": "Add ONLY this exact file to fixed git archive input, verify full bytes/blob/SHA256 after extraction. Data-only fixture input, never execute or modify workflow. Distinct from original I3F7 afw-finite-budget-qualification.yml."
+  },
+  "unchangedLimits": {
+    "jobMinutes": 7,
+    "runnerTotalMs": 330000,
+    "archiveBytes": 33554432,
+    "stdoutCapture": 1048576,
+    "stderrCapture": 65536,
+    "SourceReceiptBytes": 24576,
+    "SourceCasesPerMode": 20,
+    "regressionCases": 11,
+    "Node": "v22.23.4",
+    "SDK": "1.2.1"
+  },
+  "SourceReceiptContract": "567c84adcda2355c7eeef39656d5a1f1101262ed remains exact except fix1 branch/message+diagnostic addendum; successful canonical receipt schema/body/3modes/20IDs/reg11 acceptance unchanged.",
+  "authority": "Immutable DATA only. Root must approve new diagnostic/control schema and exact gate before one new material head/attempt1 occurrence. No refs/runs/PR/Core/runtime actions by author.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

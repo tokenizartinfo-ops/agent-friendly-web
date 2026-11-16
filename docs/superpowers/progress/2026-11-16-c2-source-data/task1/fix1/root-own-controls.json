@@ -1,0 +1,266 @@
+{
+  "schema": "afw.c2-fix1-root-own-controls.v1",
+  "recordCode": "ff288b865b72007ae7223c8f5e8266152a130db4",
+  "recordControls": {
+    "scope": "synthetic OWN controller only; no Source or actual API qualification",
+    "positive": 1,
+    "negative": 85,
+    "cases": [
+      "schema",
+      "unknown-top",
+      "context-repository",
+      "context-baselineSource",
+      "context-baselineTree",
+      "context-proposalIndexHash",
+      "context-head",
+      "context-tree",
+      "context-runId",
+      "context-runAttempt",
+      "context-job",
+      "context-node",
+      "missing-context-key",
+      "run-number",
+      "run-leading-zero",
+      "attempt-string",
+      "admitted-path",
+      "admitted-sha256",
+      "admitted-bytes",
+      "empty-admitted",
+      "extra-admitted",
+      "modes-reorder",
+      "missing-mode",
+      "mode-label",
+      "baseline-exit0",
+      "green-exit1",
+      "green-qualified-false",
+      "green-qualified-string",
+      "case-missing",
+      "case-extra",
+      "case-reorder",
+      "case-id",
+      "case-status",
+      "case-phase",
+      "case-code",
+      "case-extra",
+      "counter-negative",
+      "counter-fraction",
+      "counter-overflow",
+      "counter-boolean",
+      "counter-string",
+      "counter-null",
+      "counter-missing",
+      "counter-extra",
+      "counter-hierarchy",
+      "counter-main-reset",
+      "green-missing-stage3",
+      "green-hidden-failure",
+      "baseline-no-causal-red",
+      "baseline-no-connection",
+      "baseline-zero-as-missing",
+      "mutant-missing-kill",
+      "mutant-exit0",
+      "regressions-missing",
+      "regressions-exit1",
+      "regressions-exit-string",
+      "regressions-missing-case",
+      "regressions-extra-case",
+      "regressions-reorder",
+      "regression-id",
+      "regression-status",
+      "regression-code",
+      "regression-extra",
+      "regression-selection-hash",
+      "invented-excluded",
+      "nonclaim-historicalCauseProven",
+      "nonclaim-receiptAuthenticated",
+      "nonclaim-operationalReadiness",
+      "nonclaim-completePackage",
+      "nonclaim-PCoff",
+      "nonclaim-globalNativeDrainVerified",
+      "nonclaim-sdkNamespaceEmptyVerified",
+      "nonclaim-string",
+      "nonclaim-missing",
+      "nonclaim-extra",
+      "no-LF",
+      "double-LF",
+      "duplicate-frame",
+      "leading",
+      "old-marker",
+      "spacing",
+      "duplicate-key",
+      "oversize",
+      "invalid",
+      "surrogate"
+    ],
+    "positiveResult": {
+      "schema": "afw.c2-source-lab-receipt.v1",
+      "sourceLabQualified": true,
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+        "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+        "proposalIndexHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "head": "1111111111111111111111111111111111111111",
+        "tree": "2222222222222222222222222222222222222222",
+        "runId": "100",
+        "runAttempt": 1,
+        "job": "c2-source-lab",
+        "node": "v22.23.4"
+      },
+      "admitted": 1,
+      "casesPerMode": 20,
+      "modes": [
+        "baseline-red",
+        "proposal-green",
+        "mutant-prefix"
+      ],
+      "regressions": 11,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  },
+  "apiCode": "6f52bc344f0d85d331ec8eb0c0eb7d0215f24508",
+  "apiControls": {
+    "positive": 1,
+    "negative": 21,
+    "cases": [
+      "ordinary skipped",
+      "required skipped",
+      "post failed",
+      "post cancelled",
+      "post unknown",
+      "post nonterminal",
+      "other post skipped",
+      "old branch",
+      "old message",
+      "retry",
+      "failed job",
+      "failed run",
+      "mismatched commit",
+      "mismatched tree",
+      "wrong parent",
+      "extra job",
+      "wrong jobhead",
+      "missing required",
+      "ambiguous required",
+      "receipt step order",
+      "required post skip nominated"
+    ],
+    "scope": "synthetic OWN controller only; inactive known post-step may be skipped; required commands cannot"
+  },
+  "apiFixture": {
+    "expected": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "branch": "lab/afw-c2-source-20261116-t1-fix1",
+      "workflowPath": ".github/workflows/afw-c2-source-lab.yml",
+      "oneUseMessage": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIX1-ONEUSE-20261116",
+      "job": "c2-source-lab",
+      "head": "1111111111111111111111111111111111111111",
+      "tree": "2222222222222222222222222222222222222222",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "runId": 100,
+      "jobId": 200,
+      "requiredSteps": [
+        "Verify admission",
+        "Run C2 owner stages Source lab"
+      ]
+    },
+    "run": {
+      "id": 100,
+      "head_sha": "1111111111111111111111111111111111111111",
+      "head_branch": "lab/afw-c2-source-20261116-t1-fix1",
+      "run_attempt": 1,
+      "event": "push",
+      "path": ".github/workflows/afw-c2-source-lab.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      },
+      "head_repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      }
+    },
+    "commit": {
+      "sha": "1111111111111111111111111111111111111111",
+      "tree": {
+        "sha": "2222222222222222222222222222222222222222"
+      },
+      "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIX1-ONEUSE-20261116",
+      "parents": [
+        {
+          "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        }
+      ]
+    },
+    "jobs": {
+      "total_count": 1,
+      "jobs": [
+        {
+          "id": 200,
+          "run_id": 100,
+          "run_attempt": 1,
+          "name": "c2-source-lab",
+          "head_sha": "1111111111111111111111111111111111111111",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Verify admission",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run C2 owner stages Source lab",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Post Use the fixed Node runtime",
+              "status": "completed",
+              "conclusion": "skipped"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "dependencyCode": "204aed3811d4ddf1dc5f12934a627fd570d3772d",
+  "dependencyControls": {
+    "positive": 1,
+    "negative": 12,
+    "scope": "synthetic OWN only; actual dependency record must join Source job/step",
+    "fixture": "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n",
+    "negativeFrames": [
+      "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}",
+      "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n\n",
+      "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\nAFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n",
+      "noteAFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n",
+      "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"fail\",\"observation\":\"EXPECTED_ENOENT\"}\n",
+      "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"UNEXPECTED_SUCCESS\"}\n",
+      "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"UNEXPECTED_ERROR\"}\n",
+      "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n",
+      "AFW_C2_DEPENDENCY_CONTROL { \"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n",
+      "AFW_C2_DEPENDENCY_CONTROL {\"extra\":false,\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n",
+      "AFW_C2_DEPENDENCY_CONTROL {\"schema\":\"afw.c2-bootstrap-dependency-control.v0\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n",
+      "OTHER {\"schema\":\"afw.c2-bootstrap-dependency-control.v1\",\"id\":\"BOOTSTRAP_DEPENDENCY_ABSENT\",\"status\":\"pass\",\"observation\":\"EXPECTED_ENOENT\"}\n"
+    ]
+  },
+  "actualQualified": false
+}
