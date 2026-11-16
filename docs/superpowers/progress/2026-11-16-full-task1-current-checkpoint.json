@@ -1,32 +1,54 @@
 {
-  "schema": "AFW-FULL-TASK1-ACTIVE/6",
-  "atUTC": "2026-11-16 22:21:40 UTC",
-  "phase": "GREEN20_FRONTIER_DIAG1_SHARED_CONTRACT_DESIGN_ACTIVE",
+  "schema": "AFW-FULL-TASK1-ACTIVE/7",
+  "atUTC": "2026-11-16 22:52:44 UTC",
+  "phase": "GREEN20_FRONTIER_DIAG1_SOURCE_AND_OWN_IMPLEMENTATION_ACTIVE",
   "verifier": {
     "native419Pass": true,
-    "SPEC": "PASS",
-    "QUALITY": "PASS",
-    "review": "797613a34698a6c4a3ade7c4cc679b7af0ad0099"
+    "review": "797613a34698a6c4a3ade7c4cc679b7af0ad0099",
+    "SourceRealRunRejectedCorrectly": true
   },
   "lastFullSource": {
     "run": 43965725604,
     "job": 133644531547,
-    "disposition": "INCOMPLETE",
+    "SourceExecutedInGitHub": true,
+    "SourceExecutedLocally": false,
+    "disposition": "INCOMPLETE_GREEN180S_CAPTURE_TIMEOUT",
     "primary": "68c68577dca6ed01980dd673ed9b2623096a71f9",
-    "outcome": "91b08d3ea77cd85264fc6f5ada1fd62693c56631",
-    "close": "e65c9b545c44c663f8e5ceb41794a5aab8e9e455",
-    "independentResultReview": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
-    "hypothesesNotCause": true
+    "resultReview": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
+    "closed": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+    "closeProof": "e65c9b545c44c663f8e5ceb41794a5aab8e9e455",
+    "consumed": true,
+    "noReplay": true
   },
-  "nextBlock": {
+  "newDiagnostic": {
     "plan": "a6ec591ee9d1c8ce6c10dd6016243c7cb5eed15f",
-    "rootDesignRuling": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
-    "SourceContractDesigner": "/root/n3_admission_repair4_design",
-    "OwnPlanDesigner": "/root/c2_v2_own_receiver_fix1",
-    "implementationReleased": false,
+    "ruling": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
+    "SourceImplementationReleased": true,
+    "OwnImplementationReleased": true,
     "SourceCaptureReleased": false,
-    "scope": "ONE future GREEN20 frontier capture, existingD07recorder, samefrozen13+allcaps, newpartialOWNcontract andbytesZIP, noTask1PASS/newproductfix or live effects"
+    "pathSupplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+    "sourceDrafts": {
+      "selection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+      "schema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+      "inventory": "b3b57056fdca9a8ff8d8c341642bb9f7b6ddb65f",
+      "positiveExamples": "1fb2e82835a547f434170939386852e2c6e32850",
+      "negativeExamples": "928de8cd15789afc4d61b992601016377bdd7a7b"
+    },
+    "sourceDesignIndex": "09745d7a850b19d8004b3214be9357b9e278bd7d",
+    "contract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "SourceSchema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "SourceDesignHashesVerified": true,
+    "OwnPlanPending": true,
+    "OwnDesign": "548ada038264c8b8e250e41047c4aa2e0b2593a5",
+    "OwnWireReview": "db0e81549a5018adb92c33be5b1000347e58e505",
+    "implementationRuling": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+    "OwnNativeReleased": false,
+    "SourceToolsNativeReleased": false,
+    "SourceBusinessCaptureReleased": false,
+    "SourceEarlyFixtureSeal": "70f228712cf9b7e6eef08e6d784316b174271106"
   },
+  "scope": "Accepted shared contract e55+eda6+2cb with3033 and Root release696fb. Source and OWN implementation DATA active; authors cannot run refs/natives. Source fixture-first70f228 seals6toolsIDs/31checks beforeadaptercode; OWNsealpending.",
+  "next": "Receive SourceTOOLS+Sourcefuture+OWN packets; Root FULL/hash/diff/fixture-first review, SourceTOOLS-only native6 and focusedOWNnative+freshreviews; only then oneGREEN20 diagnostic PF+child. No sourcefix, no capraise, no Task2/live PCoff trial yet.",
   "ownerActionNeeded": false,
   "SourceQualified": false,
   "Task1Pass": false,
