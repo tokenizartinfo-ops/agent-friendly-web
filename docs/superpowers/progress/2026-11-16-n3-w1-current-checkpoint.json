@@ -1,7 +1,7 @@
 {
   "schema": "AFW-N3-W1-ACTIVE-CHECKPOINT/1",
-  "atUTC": "2026-11-16 19:35:25 UTC",
-  "phase": "N3-round4-tool-native-and-independent-review-approved-OWN-W1-fullinput-native-pending",
+  "atUTC": "2026-11-16 19:52:02 UTC",
+  "phase": "N3-round4-Source-tooling-approved-OWN-native280-closed-fresh-review-pending",
   "ownerUnavailableUntilUTC": "2026-11-16T20:00:00Z",
   "ownerActionNeeded": false,
   "toolNative": {
@@ -42,6 +42,42 @@
       "scope": "Future compatible action-pin upkeep, not patch/rerun closed candidate"
     }
   },
+  "ownW1": {
+    "actor": "/root/c2_v2_own_receiver_fix1",
+    "index": "c295cee6968b7fd0c4f328ff91b22ed28dc12fde",
+    "reader": "c16a77d93cc6cf75338db5e3c27e823669706b3e",
+    "trace": "cc22a79695471862f36c692db7a31e283b4ee46d",
+    "gate": "6c76244f49ffe284e89e62c7fabf00054af4f2a2",
+    "head": "bbce1f93f03bf959ff96e1799a6703e68c64ca38",
+    "tree": "ff0dc22c04f6097543fd28f76dcbf7dd79680577",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-own-receiver-20261116-notices-n3-firstlimit-w1-v2",
+    "originals": 3203,
+    "added": 26,
+    "leaves": 3229,
+    "SourceExecuted": false,
+    "refCreated": true,
+    "runCreated": false,
+    "activated": true,
+    "run": 43942706278,
+    "job": 133564127939,
+    "native": {
+      "pass": 280,
+      "fail": 0,
+      "skip": 0,
+      "todo": 0,
+      "cancel": 0
+    },
+    "primary": "5570636a59104b8d933f265664cb0c8273b0a31a",
+    "proof": "03f6f5027c304124e7fbce66d5618dd5ab79d6d9",
+    "closed": "a185dd73bf8063bec063d6d5043706f54c1c3003",
+    "close": "885d8d716163736626655a876831a9d99e7dcdd5",
+    "RootOwnRAMLoaderReady": true,
+    "nativePending": false,
+    "reviewer": "/root/n3_w1_own_native_review",
+    "reviewPending": true,
+    "finalSourceBinding": false
+  },
   "sourcePrepared": {
     "head": "c495dfa25b3babefce5c42adb1e09c2d7a31eed1",
     "tree": "cff9ec5b453dd88d3e35da0b095fd397b45fca03",
@@ -55,15 +91,7 @@
     "SourceExecuted": false,
     "captureGateHeld": true
   },
-  "ownW1": {
-    "actor": "/root/c2_v2_own_receiver_fix1",
-    "earlyIndex": "e503bca5e863d9d225b24bf85f0e3daed256d624",
-    "ownTrace": "cc22a79695471862f36c692db7a31e283b4ee46d",
-    "RootOwnRAM": 50,
-    "nativePending": true,
-    "fullInputPending": true
-  },
-  "next": "Finish independent OWN v2 full-input/coherent tests, native one-use controls and review. No Source capture before both gates.",
+  "next": "Wait actual OWN280 independent review; if accepted Root prepare exact Source capture gate/caller trust. Source branch/run still absent.",
   "SourceQualified": false,
   "Task1Pass": false,
   "nonclaims": {
