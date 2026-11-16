@@ -1,0 +1,121 @@
+{
+  "schema": "afw.c2-notices-n1.contract.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "authority": {
+    "brief": "3a380eab1707df6689b4c53d6acd3abb0a59a229",
+    "diagnosis": "58daa49eef0c25d21b3e4b1b9fc7c00763383f61"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n1",
+    "message": "AFW-C2-T1-NOTICES-N1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n1.yml",
+    "job": "c2-notices-n1",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n1/",
+    "runner": "run-c2-notices-n1.mjs"
+  },
+  "selection": {
+    "bytes": 1776,
+    "sha256": "daa64765c98b1ebe06774d42575246eddb6721334211f135c971af7d0707f6f4",
+    "gitBlob": "4390c05bba8c123523f49c522d117fbeb215b4b4",
+    "canonicalHash": "fae234be9a7462b6065fdbfeaf0ddea0d0e086d434145750823a9894b988ad0f",
+    "blob": "4390c05bba8c123523f49c522d117fbeb215b4b4",
+    "fullReadback": true
+  },
+  "vectors": {
+    "bytes": 21832,
+    "sha256": "ee90a1002416d2624e4569f5860727f0f0eb914314bc92495ca78ba12eb80d9e",
+    "gitBlob": "5f867b41157f13c7906b3c5f26c073d55dea176b",
+    "blob": "5f867b41157f13c7906b3c5f26c073d55dea176b",
+    "fullReadback": true
+  },
+  "selectionHash": "fae234be9a7462b6065fdbfeaf0ddea0d0e086d434145750823a9894b988ad0f",
+  "wire": {
+    "syntax": "marker+ASCIIspace+JSON.stringify(value)+LF; exactcanonicalkeys/order as schema properties, UTF8. Artifact exactoutcomeJSON+LF. No duplicatekeys/rawTAP/errors/HTML/IDs/headers/tokens/nonces/UID/PID/paths.",
+    "frames": [
+      [
+        "AFW_C2_NOTICES_N1_SYNTHETIC",
+        2048
+      ],
+      [
+        "AFW_C2_DEPENDENCY_CONTROL",
+        1024
+      ],
+      [
+        "AFW_C2_NOTICES_N1_CUSTODY",
+        1024
+      ],
+      [
+        "AFW_C2_NOTICES_N1_FRONTIER",
+        2048
+      ],
+      [
+        "AFW_C2_NOTICES_N1_OUTCOME",
+        24576
+      ]
+    ],
+    "outcomeOrder": [
+      "schema",
+      "context",
+      "selectionHash",
+      "bindings",
+      "controls",
+      "capture",
+      "journal",
+      "observation",
+      "native",
+      "custody",
+      "SourceQualified",
+      "Task1Pass",
+      "nonclaims"
+    ],
+    "bindingOrder": [
+      "sourceIndexHash",
+      "driverHash",
+      "selectionHash",
+      "helperHash",
+      "readerHash",
+      "slotHash"
+    ],
+    "recordOrder": "sequence,elapsedMs,kind then exact union properties in schema. Actualsafe witness only; JSON.stringify(record)+LF reconstructs bytes/hash. Unknownwitness empty/hash(empty), neverraw/torn/private."
+  },
+  "assembly": "Normal13/index26b verified then ONLYtempS07driver/S08Nodeobservation. NormalS10/PH/OP/WORK/existingS09compileinstrumentation unchanged. NoWorkertrace/arm/poll/newcompiledmarkers/proxy/method/sourcecallbackreplacement. InertDATAplusnewWF only,Rootgate.",
+  "native": "Eager4 exactIDs/native sequential/120s cases/globalAFTER. Action/count independently observed with originalthrownvalue kept byboolean evennull/undefined. Anyaction/countfailure blocks laterwork/count/HTTP; latercallbacks emit blocked workEnteredfalse and throw fixed nativePREREQUISITE_BLOCKED. NevermanufacturePASS/SKIP. NativePASS requiresactualaction+countreturn; nativefail mayvalidcapture. Timeoutonly honestboundprefix.",
+  "http": "ONE noticesGET andPOSTifGETsucceeds. Enter beforeawait; actualresponse.status immediatelyafteractualf.call return BEFORE body. Return afteractualtext/cancelsettles. Throwstatusactual|null/bodySettledfalse onlyifresponseexisted. OriginalGET200assert/formparsing/POST200assert retained, noautomaticretry. No new businessrequest.",
+  "probe": "Atmost1actualprobeBEFOREnotices afterphase and1AFTER work. Reuse actualslot6507 semantics;1s observationtimeout keeps actualexclusion untilsettlement, busy skipsnextRPC, latevaluesdisposed. RawprivateJSONcap131072B/observations2048/calls32/business64. Exactbeforeprefix equalityrequired; oldphaseerrors excluded. >1newconnection-failure ambiguous, no borrowedposition/sites. Existing connection-failure lacksrequestID so correlated:null and guardOrigin:unknown ALWAYSPhaseA. Delta correlatorlabels are observations, never exactcauseproof.",
+  "summary": "Only currentnotices-ticket-consumed boolean when privateGEThandlehashknown, exactnoticesapprovalpresence and aggregateconnectionreceiptcount from existingprobe.business. Missing/unreadable allnull. Pointer/phase unavailable cheaply, notemitted. Actualnativew.counts separateupload/activation/receipts0..3, neverdefault0.",
+  "parsing": "Strict32768B/128canonicalrecords/monotonicelapsed/bindings, fourcase action/count/block FSM; HTTPonlyinsideN1_NOTICESaction, POSTrequiresactualGET200completion. Probe before beforeHTTP; after afteractionsettles beforecount. NoHTTPforblocked. Safeerrorfiniteclass/code/Source13orD07/D08sites only. Nativeexact4orhonestprefix/noskip-todo-extra-duplicate. AFTERthrowauxiliary; Sourcefalse. Every startedHTTP must reach return/throw BEFORE actionreturn/throw. PendingHTTP mayappear only inhonesttimeoutprefix, never a completedaction/count/AFTER witness.",
+  "controls": "TestFIRST4a3eb... originalvectors then literalHTTPcompletion counterexample5f867... beforeguard. Expected6accepted21rejected3probechecks6roundtrips2witnessrejects5slotchecks. All executionpendingRootcloud, syntheticnotnative.",
+  "limits": {
+    "node": "v22.23.4",
+    "sdk": "1.2.1",
+    "totalMs": 330000,
+    "childMs": 180000,
+    "caseMs": 120000,
+    "jobMinutes": 7,
+    "incomingMs": 30000,
+    "childLeaseMs": 5000,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "outcomeBytes": 24576,
+    "journalBytes": 32768,
+    "journalRecords": 128,
+    "artifactDays": 7,
+    "metadataObservationMs": 1000,
+    "probePrivateBytes": 131072,
+    "probeObservations": 2048,
+    "probeCalls": 32,
+    "probeBusiness": 64
+  },
+  "custody": "Same3actuallaunches ownedpreflight/actualbootstrapENOENT/native4; actualnonrootUID/GID/cleargroups/privateonlylo/no-new-privs/envallowlist/0600ownedjournal/owncleanup. ExactBASEparent/head/tree/run decimalstring/attempt1/job/index/fixedNode, oneusebranch/message. RootindependentAPI/job/step/artifact/replayjoin. Qualificationfalseunconditional.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
