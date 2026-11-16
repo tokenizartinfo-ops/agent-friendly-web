@@ -1,0 +1,102 @@
+{
+  "schema": "AFW-C2-N3-TOOLING-FIX2-INDEPENDENT-REVIEW/1",
+  "atUTC": "2026-11-16 16:55:42 UTC",
+  "reviewer": "/root/n3_tooling_fix2_review",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "brief": "cddf96d7d7275fe7cee2a1c6d602b63b14d8cb13",
+  "scope": "N3.A QA-only ledger/compiler tooling, fix round3. SPEC reviewed before QUALITY. No patches.",
+  "reviewed": {
+    "packet": "e1f1b666726b2eb433d4d2d96f7266ca0c951308",
+    "index": "906cfbea830100065eebdccb18d0810f8b207efb",
+    "diff": "edd5dacc84244ab5cbe1d53182fc60bf8158e683",
+    "reversibles": "2a6d230d344db3c0245ab7670a7a2974007b764d",
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "units": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+    "runner": "d08312eb79e5283d21897e147c989a6d09888081",
+    "workflow": "06a16595c5d801ddf17168140519002fb9aa2bc3",
+    "proofSchema": "23bed32784cb27a4d0b8981fad862b851456fffb",
+    "selection": "f5b7201b8fad54a7b0bbfb8b4ba221e370fef079",
+    "supplement": "ae8c5d4984902f5b81e8016fa2fe4b548ba68d95",
+    "anchorAudit": "9b858f9bd542dcb2b56ac52f85af951e87afe685",
+    "vectors": "7e4cae13603483c46e5e8ca7872290d00eb1de3a",
+    "authority": {
+      "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+      "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+      "semantics": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+      "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+      "boundedPrefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
+      "axes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
+      "contract": "40e93f21d6564e2a0bbe9a4ace266d992a357718",
+      "seams": "ac4b57435939d0d4c6c2d2d03086bc7ffd4d6640",
+      "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac"
+    },
+    "originalAnchors": {
+      "lease": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+      "op": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "phase": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "publication": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "world": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "observerWorld": "a21a3614f0cd6b21ce37b99690043507ea105a23"
+    }
+  },
+  "SPEC": {
+    "verdict": "PASS",
+    "basis": [
+      "Compiler lines42-63 preserve original PH703 callback and bind the exact observeOwnerPhasePair call-returned promise using its original options; target markers surround PH780 first receipt await inside retained activation763, leaving the later recheck intact.",
+      "Ledger lines17-35,64-78 resolve rootless events only through already-bound lease/promise refs, disclose binding gaps/conflicts, and keep entityRef from independently resolving a root. Lines87-113 preserve original first error and immutable first retained/settlement/close observations.",
+      "Compiler lines16-38 retain existing callback/reaction and clock behavior, original repeated retain, delete true then false, and the ruled nested abort/finally marker order without fabricated child close.",
+      "Ledger lines132-218 choose focus before reduction; preserve mandatory markers, first scope error, earliest focused check, exact p2 and first closes/aborts; any reducer omission yields prefix/PROJECTION_GAP, with explicit bounded unknown on overflow and record envelope plus LF included.",
+      "Raw DATA count audit confirms historical activation prefix2, corrected three-line describeActivation selector1, all other active raw selectors1, eight original-preparer needles1 and seven correlators1. Native REVERSIBLES covers actual prepared anchors/full reversals; Source business execution is deferred."
+    ]
+  },
+  "QUALITY": {
+    "verdict": "PASS",
+    "basis": [
+      "Full old/new diff narrows the compiler change to the activation selector extension; its replacement retains all three original statements. Shared unit setup defers PH transformation to the same mandatory attach path, preserving PH-specific controls and registering cleanup before attach.",
+      "Runner lines55-109 enforce newMatches===newRequired===1, reject synthetic2/1, audit raw/prepared tables, preserve upload/four clock calls/three later handlers, and reverse exact preimages. Expected negative failures are local assertions rather than substitutes for outer-case results.",
+      "Runner lines33-45 bounds canonical diagnostics and reads only WeakMap-branded setup errors. Lines134-146 derive proof rows from executed bodies; Root separately joined exact native IDs/status, hashes and artifact receipt. No concrete actionable tooling defect found."
+    ]
+  },
+  "findings": [],
+  "nativeEvidence": {
+    "source": "Root immutable primary and proof; logs/artifact not refetched",
+    "primary": "6d2ae3f2396c1ef71ebba0263a55001422373000",
+    "proof": "3a8781f6a2646a3a00c521fc7f25b6a35d314ac8",
+    "close": "e9bae275ebfcd092cc4014b281eead8c03d06a4a",
+    "testedHead": "91ac03eae0a3ee384d23886bd2f814de54c59bc3",
+    "testedTree": "d0d7b38bfd4f53950db6e3eee4e1e1ead62ab860",
+    "closedHead": "13ff68c37de9c4f3c71629cc39ed5521e3422447",
+    "run": 43911561091,
+    "attempt": 1,
+    "job": 133454520846,
+    "node": "v22.23.4",
+    "result": "41/41 PASS;0 fail/cancel/skip/todo/extra/missing;24 input hashes",
+    "reducer": {
+      "rawIncludingCut": 31,
+      "projected": 24,
+      "lateRawIncludingCut": 34,
+      "lateProjected": 24
+    },
+    "acknowledgedBoundary": "Actual native tooling and original callback/reducer coverage only. No Source business-world run, full Task1, product, OWN receiver or PC-off qualification; closed workflow remains closed."
+  },
+  "method": {
+    "immutableDATAStaticReview": true,
+    "sourceExecutedImportedEvaluatedCompiledOrSyntaxChecked": false,
+    "localFilesDependenciesBuilds": false,
+    "newRefsRunsPatchesOrSubagents": false,
+    "liveResources": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
