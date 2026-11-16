@@ -1,0 +1,70 @@
+{
+  "schema": "AFW-N3-ADMISSION-REPAIR4-ROOT-IMPLEMENTATION-RULING/1",
+  "atUTC": "2026-11-16 18:46:59 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "round": 4,
+  "maxRounds": 5,
+  "writer": "/root/n3_admission_repair4_design, fresh higher-capability Source writer; prior Source writer remains read-only after completed census",
+  "ownerAvailability": "Owner away until17:00America/Argentina/Buenos_Aires; no manual steps are needed in this block. Never request OTP/keys/browser steps during absence.",
+  "authority": {
+    "design": "d9330e833c6fc7dd72cdfb51d0dee4427e515142",
+    "censusPrimary": "f22df7c75028c01206266a3c4df26e7c31ef7864",
+    "censusProof": "cda3acf85a765c4788bbc023b247da791a9f322a",
+    "censusClose": "f67891c12d4ddb662bb868701f2d04ebbe4e2b48",
+    "censusReview": "f5e61bf12e1db35aa29ce19652a760b3baaf9624",
+    "actualCPrimary": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+    "actualCUnknown": "roots16 vs combinedidentities128 firstcounterUNKNOWN;business503notexplained"
+  },
+  "decision": {
+    "A": "ACCEPT exact same-reference atomic gap→lease conversion. Implement test-first only this bounded correctness repair now.",
+    "B": "REJECT epoch/reseed/reset/retire policy: existing identity conflicts/gaps and lifetimecaps cannot be silently forgotten or doubled.",
+    "C": "First-limit witness is warranted because actualoverflowbranch remainsmaterial and unknown. Author a separate concrete EARLY wire contract/schema/seams/literalvectors/nomination DATA proposal now. Witness CODE/export remains held until Root separately seals that proposal. No new businesscapture."
+  },
+  "atomicContract": {
+    "defaultAPI": "Object.freeze({note,snapshot}) unchanged for A; same singleton, synchronous nonthrowing undefined note, same snapshot copy/cut semantics.",
+    "occupancy": "U=L+G<=128. Existing row rebind checks, root/parent/role validity and ambiguity first. New row with EXACT same ref in gaps has delta0, othernewrowdelta1. Refuse beforemutation ifU+delta>128; never borrow parent/leaseRef/promiseRef gap.",
+    "transfer": "Once valid, consume matchinggap exactlyonce before incrementingL so no transient129; retain old.error/relevance PREBIND_GAP. No callback/getter/IO/clock/await betweensteps. Existing sink-fault safety holds if unexpectedfailure.",
+    "unchanged": "Do not clear fault/ambiguity/unbound/firstError/firstClose/cut. Do not replay missed history or letcapacity choose root. New129th stillrefused. Root16/promise64/error64/event256/meta65536 and selected8/4/4/24/6144 remainexact. All41 othertooling behavior, originalretain/settlementtruefalse, scopedfirsterror, target/p2/logicalaxes/abortmatrix unchanged."
+  },
+  "testFirst": {
+    "before": "Preserve new desiredtestvectors BEFORE patch. Actualold d9 native47 alreadyproves legacy same-ref at128 refusal withnet0; add exact desiredassertions thatfailbefore andpassafter. Produce beforeRED program+expected failures and afterGREEN program; Root alone runsactualNative.",
+    "required": [
+      "same-ref relevantgap promotion at128;honestPREBIND_GAP,nofakecomplete",
+      "same-ref errorbearing otherpairgap latches gap;errorfree irrelevantotherpair preserveslegacy relevance",
+      "one-timeconsumption/ordinalallocation/repeatedvalidrebind/noBorrowDifferentAnchor",
+      "wrongroot/parent/role/conflictinglease orpromise reject withoutconsumingorrepairinggap",
+      "genuinelynew129threfused;stickypriorCAP notcleared;wellbelow128legacyunchanged",
+      "old41 IDs/workbodies retained; oldsixcensusroles/cases preserved as BEFORE oracles and logicallyupdateddesiredpromotion AFTER, never label identitypromotion asnativeScopeeligibility",
+      "actual originalRoot/Initialcallbacks/worstoccupancy/memory/6144envelope/oldliteral31+/32- retained"
+    ],
+    "native": "Prepare one bounded beforeRED+afterGREEN tooling packet, exactIDs/counts/phases fixedbeforeRootgate. Node22.23.4/job3min/case10s/read-only/pushattempt1/artifact7days; no npm/esbuild/SDK/world or Sourcebusiness. Author onlyGitDATA, noSourceexec/import/eval/compile/syntax/tests locally."
+  },
+  "witnessDraft": {
+    "basedOn": "DesignC; noepoch/window/newreferencebuffer/countertable.",
+    "internal": "Latch FIRST existingcap refusal as fixedenum ROOT16|GAP_NEW128|LEASE_NEW128|LEASE_SAME_GAP128_LEGACY(calibration-only,unreachableafterA)|OTHER_PRIVATE. Reuse one faultstatefield, noncap priorityunchanged; sourceexistingreadoperands only. No thresholdchange or rawError/message/stack/ref/time.",
+    "probe": "Propose probeSnapshot() on same singleton called INSTEAD of snapshot at the one existing causal expression after unchanged getAlarm intransformN3Entry,onall existingcalls. Oneprojection/cut only. Defaultsnapshot/publiccallers stillCAP_PRIVATE; only unjoinedCAP probe reason isrefined. Joined/ambiguous/noncap shapes/precedence unchanged; noadditionalRPC/record/clock/phase/headers/Mbridge.",
+    "earlyDeliver": "Concrete versioned contract/schema/selection/seams and literalpositive/negativevectors BEFORE witness implementation. Prefer minimal reason-enum refinement in otherwiseempty unknownsnapshot, no newfields/identity leakage. Explicitnewcandidate nomination, no reuseclosedbranch; no fakehead/tree/run/job. Rootwillseal andstartindependentOWNv2 DATA consumer once preciseinterfaceaccepted.",
+    "safety": "Reasoncodesidentifyrecordercapacityonly, not businesscause,timingrelativebeforeProbeor targetsuccess. CalibratelegacySameGap only inoldtooling. Proveboundaries/worstbytes/ambigpriority/stickyfault/defaultsnapshot compatibility/coherentforgeries andnomination."
+  },
+  "preservation": {
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "frozen": true
+  },
+  "delivery": "Immutable vectors/patch/fulloldnew/roles/path+mode+absent/bytes/SHA/GitSHA/FULLreadback/reversibles/reports and earlywitnessproposal. Rootneverpatchesimplementation; onlyRootrefs/runs. No Source13/M/product/remote/auth/mail/Max changes. No freshSourcebusiness capture untilall gates/reviews+newRootnomination. A-onlysuccess neverjustifiesnewC.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false
+}
