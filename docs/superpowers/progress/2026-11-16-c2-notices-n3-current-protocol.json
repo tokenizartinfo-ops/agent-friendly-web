@@ -1,0 +1,57 @@
+{
+  "schema": "afw.c2-notices-n3.root-current-protocol.v1",
+  "atUTC": "2026-11-16 15:35:55 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "status": "STRUCTURAL_DATA_ONLY_NATIVE_BLOCKED",
+  "currentSubpackage": "def7123feb4aabb809509836014d63e7cf6b477a",
+  "outerSchema": "1c336fe190816b46223546971afcf34b2c216089",
+  "contract": "a43ca8667d2a884bf3079a4072058cec39a919b8",
+  "seams": "27623553b80168a0e4fd9fb8411f7d0e087a270e",
+  "selectionHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c",
+  "hashVerification": {
+    "files": 7,
+    "totalBytes": 172450,
+    "allExact": true
+  },
+  "retiredSchema": {
+    "blob": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+    "reason": "Two stale N2 selection constants; original Source writer corrected only those bytes. Preserved as counterexample, do not use for N3 validation."
+  },
+  "sourceSelectionControls": "c2891a1cb538ebc11d684c29695dc8036bb81bae",
+  "rootDiff": {
+    "old": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+    "current": "1c336fe190816b46223546971afcf34b2c216089",
+    "exactlyTwo": true
+  },
+  "reducerPlans": "8881c57552b88cd757579b6de120e1f4fca0304c",
+  "axisPlans": "acd36e4e8a512a71c0cfef2185443fd57f896de2",
+  "rootOwnDataReplay": {
+    "reducerModels": 2,
+    "acceptedPrefixes": 2,
+    "recordBytes": [
+      4779,
+      4775
+    ],
+    "sourceExecuted": false,
+    "cloudNative": false
+  },
+  "pending": [
+    "Final Source executable/helper/transform/tooling body hashes and producerManifest",
+    "Source actual callback tooling+review",
+    "OWN B2 final producer binding/native+review",
+    "ONE separately Root-gated Source C capture then exact diagnosis"
+  ],
+  "nativeGateReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schema": "afw.c2-notices-n2.root-static-checkpoint.v1",
-  "atUTC": "2026-11-16 15:12:44 UTC",
+  "atUTC": "2026-11-16 15:35:55 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "environment": "immutable Git DATA / Root docs",
@@ -207,12 +207,30 @@
     "builderRulingCheck": "nothing important left",
     "abortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
     "capacityPreflightPending": true,
-    "outerInterface": "8546c47b505ed0f1ff0b9d4b29d45c9f137d4b29",
+    "outerInterface": "def7123feb4aabb809509836014d63e7cf6b477a",
     "interfaceHashesVerified": 7,
     "boundedPrefix": "d2831f0c1e3482550043413f60560d19be2eb4af",
     "independentAxes": "53b1c35d692fabcef1a1614e33edc8f794aa3cf0",
     "ownB2Brief": "189905a0383ff7852a86ac1d54351872cf29eb05",
     "activeResume": "docs/superpowers/progress/2026-11-16-active-n3-continuation.es.md",
-    "fullProducerManifestPending": true
+    "fullProducerManifestPending": true,
+    "currentOuterSchema": "1c336fe190816b46223546971afcf34b2c216089",
+    "currentContract": "a43ca8667d2a884bf3079a4072058cec39a919b8",
+    "currentSeams": "27623553b80168a0e4fd9fb8411f7d0e087a270e",
+    "outerSelectionConstFixPending": false,
+    "retiredOuterSchema": "d8d19ea7561e2032ec82fa8aba50670cfe2ae336",
+    "currentProtocolPath": "docs/superpowers/progress/2026-11-16-c2-notices-n3-current-protocol.json",
+    "sourceReducerPlans": "8881c57552b88cd757579b6de120e1f4fca0304c",
+    "sourceAxisPlans": "acd36e4e8a512a71c0cfef2185443fd57f896de2",
+    "reducerDataOwnReplay": {
+      "reducerModels": 2,
+      "acceptedPrefixes": 2,
+      "recordBytes": [
+        4779,
+        4775
+      ],
+      "sourceExecuted": false,
+      "cloudNative": false
+    }
   }
 }
