@@ -1,0 +1,138 @@
+{
+  "schema": "afw.c2-source-fix2.capture-supplement.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "extendsContract": "567c84adcda2355c7eeef39656d5a1f1101262ed",
+  "sourceReceipt": "UNCHANGED schema/field order/modes/case IDs/phases/code enum/counter semantics/regression selection. proposalIndexHash is SHA256 of exact NEW SourceIndex bytes; all other12 bodies fixed.",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-fix2",
+    "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIX2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-source-lab.yml",
+    "job": "c2-source-lab",
+    "runner": "docs/superpowers/source-lab/c2-t1/run-c2-source-lab.mjs"
+  },
+  "sourceIndex": {
+    "key": "fix2Index",
+    "blob": "f9f36a61875be344d38f19d77caf1a46c48e8f37",
+    "bytes": 11467,
+    "sha256": "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03",
+    "fullReadback": true
+  },
+  "testBody": {
+    "key": "fix2Test",
+    "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+    "bytes": 2785,
+    "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+    "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+    "gzipBytes": 1050,
+    "fullReadback": true
+  },
+  "runner": {
+    "key": "fix2Runner",
+    "blob": "73b8ccf1116a44f0d4badca560884b4c5d9b4adc",
+    "bytes": 24710,
+    "sha256": "9ae08d7591f246dc672d0917e26641f0547e34878c1030f867ac35afafe30e50",
+    "fullReadback": true
+  },
+  "workflow": {
+    "key": "fix2Workflow",
+    "blob": "3ff6dab58729c3f9cb2ff3ddd0ac620272053d11",
+    "bytes": 1540,
+    "sha256": "35fac40bdfd5bbef2a1b91f9a04ab1a1c94e803e5933450ce424f3fd5903a5de",
+    "fullReadback": true
+  },
+  "driverCorrection": {
+    "registration": "20 synchronous fixed(...) calls before module yields; fixed is synchronous and returns native test promise. No awaited registration, parent test, extra case or concurrency expansion. Root default native concurrency1 and existing --test-concurrency=1 retained.",
+    "failures": "Independent actionThrew/counterThrew booleans preserve even null/undefined throws. Work await then actual w?await w.counts():null at original place/order. Emit canonical C2SOURCE only after actual non-null returned count. If count throws/null/undefined, omit frame, runner missing-frame/counters validation cannot qualify. Never copy last snapshot or manufacture0. Rethrow exact action value first, counter value otherwise.",
+    "settlement": "Global after and await w?.close() remain unchanged. Actual shared world closes after all20 registered native cases have finished, using existing framework; no stub/rebind/business/clock change."
+  },
+  "custodyFrame": {
+    "marker": "AFW_C2_SOURCE_CUSTODY ",
+    "schema": "afw.c2-source-custody.v1",
+    "encoding": "marker + JSON.stringify(proof) + LF UTF8; exactly one bounded separate frame, never inserted into Source receipt/TAP/case counters.",
+    "fieldOrder": [
+      "schema",
+      "context",
+      "parentNonRoot",
+      "preflightOwned",
+      "preflightRemoved",
+      "checkedLaunches",
+      "checkedProcesses",
+      "uidGidGroupsLoopbackMatched",
+      "ownRootVerified",
+      "ownTempRemoved"
+    ],
+    "contextOrder": [
+      "head",
+      "runId",
+      "runAttempt",
+      "job",
+      "proposalIndexHash"
+    ],
+    "context": "null only admission failure; for usable proof exact admitted GITHUB_SHA/gitHEAD, decimal-string runId, attempt integer1, job literal c2-source-lab, new INDEX_HASH. Bind actual same command step/API run; no authority from a stand-alone proof.",
+    "booleans": "all remaining non-counter/non-context fields are actual booleans; all true required for usable proof.",
+    "checkedLaunches": "integer0..6, must6:preflight, actual dependency-absence control, baseline-red, proposal-green, mutant-prefix, regressions.",
+    "checkedProcesses": "integer0..24 from fresh actual owned PID probe names only,6..24 required. PIDs/UIDs/GIDs/paths are not emitted.",
+    "caps": {
+      "publicUtf8": 1024,
+      "launches": 6,
+      "newProbeFilesPerLaunch": {
+        "min": 1,
+        "max": 8
+      },
+      "totalProbeFilesPerTarget": 8,
+      "totalProbeFilesAllTargets": 24,
+      "privateProbeBytes": 1024,
+      "preflightMilliseconds": 10000
+    },
+    "custodyOnly": "Perprocess files use the unchanged private afw.c2-oauth-custody.v1 boolean schema from verified diagnostic2. Source guard suppresses only stdout; all identity/group/lo/file checks remain. No raw custody frame is added to Source TAP.",
+    "qualification": "Preflight and launch proofs actual, final cleanup checked before Source receipt publication. Missing custody/cleanup => no Source receipt file/frame, runner nonzero plus fixed diagnostic. Source receipt alone remains insufficient for Root acceptance."
+  },
+  "custodyHelpers": {
+    "guard": {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "beforeBlob": null,
+      "after": {
+        "key": "fix2Guard",
+        "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "bytes": 1208,
+        "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf",
+        "gitBlob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "gzipBytes": 604,
+        "fullReadback": true
+      },
+      "derivedFrom": "f84c0fe47eaf386d9f0a4ae3e300d7b738972450",
+      "onlyChange": "Delete process.stdout.write custody proof; retain all checks and actual exclusive owned perprocess file."
+    },
+    "preflight": {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "beforeBlob": null,
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae",
+      "unchanged": true
+    }
+  },
+  "capture": "Existing fixed CAPTURE_INVALID safe diagnostic/capture frontier remains. custody-preflight is added diagnostic phase; no raw TAP/assertions/errors/headers/cookies/JWT/nonces emitted. Publication filesystem errors caught into same fixed diagnostic, no raw fallback. Captures remain RAM-only bounded hashes/counters/enums.",
+  "execution": "Same fixed Nodev22.23.4/SDK1.2.1/locked npm ci ignore-scripts/read-only checkout; explicit childenv. sudo env-i unshare--net, onlylo UP, exact parent UID/GID via setpriv clear-groups no-new-privs. No user/group/sudoers/production policy mutation. Owned parent temp used for HOME/TMPDIR/RUNNER_TEMP/XDG caches/config; actual child UID/GID/lo/group file proofs after each launch.",
+  "unchangedCaps": {
+    "sourceTotalMilliseconds": 330000,
+    "jobMinutes": 7,
+    "sourceChildMilliseconds": 180000,
+    "perTestMilliseconds": 120000,
+    "receiptBytes": 24576,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "archiveBytes": 33554432
+  },
+  "dependencyControl": "BOOTSTRAP archive exact22f324e480dbe0295fe23fb7415328cba7952b1b/hashff64a890... retained as DATA. Original actual bootstrapWorld() from cwd lacking workflow must throw exact ENOENT path; PASS frame remains unchanged. Never execute bootstrap workflow.",
+  "acceptance": "No acceptance relaxation: baseline exact20 observed, CONNECTION+OAUTHpass, NOTICESfail/actual1-1-1; proposal all20pass/exit0; mutant-prefix actual EXTRA_KEYfail/nonzero; exact11 selected regressions allpass/exit0/no skip/todo/cancel/extra/missing; independent Root API/OWN join plus custody/cleanup. All unexecuted tests SOURCE_TESTS_PENDING.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

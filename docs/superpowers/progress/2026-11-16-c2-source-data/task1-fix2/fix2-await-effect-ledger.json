@@ -1,0 +1,116 @@
+{
+  "schema": "afw.c2-source-fix2.await-effect-ledger.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "extendsSourceReport": "13321c84a447f3b123470e1748024e322e7ba3d0",
+  "frozenPreviousIndex": "e20ae5a991a291004c3a8dde098031865c1e4c13",
+  "newIndex": {
+    "key": "fix2Index",
+    "blob": "f9f36a61875be344d38f19d77caf1a46c48e8f37",
+    "bytes": 11467,
+    "sha256": "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03",
+    "fullReadback": true
+  },
+  "sourceDelta": {
+    "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+    "before": {
+      "blob": "db7f97301bfac415da4c66463439c576adf0bbfb",
+      "bytes": 2462,
+      "sha256": "7f527179f32ab56c3a430c1180002af8d0e5d5fadd2608559f719c980d37cbb6",
+      "gitBlob": "db7f97301bfac415da4c66463439c576adf0bbfb",
+      "gzipBytes": 872
+    },
+    "after": {
+      "key": "fix2Test",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "gzipBytes": 1050,
+      "fullReadback": true
+    },
+    "completeNewSpan": "lines1..49; full body in body-07.txt proposed blob",
+    "unchangedWorkBodies": "Exact text comparison after removing only top-level await fixed prefix proves all20 IDs/phases/work assertions/bodies byte-equal; other12 index entries and all non-entry index fields byte-equivalent under canonical JSON."
+  },
+  "effects": [
+    {
+      "site": "S07:5",
+      "await": "w?.close()",
+      "holder": "native global after once; shared w",
+      "effect": "restore actual fixture methods then actual MF dispose/cleanup unchanged",
+      "settlement": "all20 known native cases now synchronously registered, sequentially settle before root exhaustion; no top-level awaited registration gap"
+    },
+    {
+      "site": "S07:6,20..49",
+      "await": "none in registration",
+      "holder": "native root pending queue/test promises",
+      "effect": "20 native calls with original timeout120000; fixed synchronous",
+      "settlement": "Native root concurrency1 unchanged; no parent/extra test. Imports finish before registrations; first async work awaits cannot settle before synchronous registration continuation."
+    },
+    {
+      "site": "S07:9",
+      "await": "work()",
+      "holder": "native case callback + original actionError private",
+      "effect": "same actual work body and assertions; no substituted result",
+      "settlement": "catch sets explicit actionThrew, retains exact original thrown value even null/undefined"
+    },
+    {
+      "site": "S07:10",
+      "await": "w?await w.counts():null",
+      "holder": "same actual shared-world snapshot, local counts only",
+      "effect": "actual storage snapshot after work regardless action returned/threw; no inherited/reset/default counters",
+      "settlement": "independent catch retains counterError + boolean; cannot replace action Error"
+    },
+    {
+      "site": "S07:12..18",
+      "await": "none",
+      "holder": "actual returned local counts and original thrown values",
+      "effect": "only observed non-null counts permit canonical C2SOURCE; frame status actual action success/failure. Otherwise no frame and runner invalid.",
+      "settlement": "exact action rethrow first if flagged, else exact counter rethrow; no catch swallows business failure"
+    },
+    {
+      "site": "runner materialize()",
+      "await": "read helper DATA; write verified own target helper",
+      "holder": "owned mkdtemp + hashed guard/preflight",
+      "effect": "only temporary Source job target; existing beforeSource reads and12 frozen bodies unchanged",
+      "settlement": "helpers hash/bytes before writing; exact baseline bootstrap archive/check retained"
+    },
+    {
+      "site": "runner runSource()",
+      "await": "probeNames before; synchronous dropped-child launch; probeNames/lstat/read afterward",
+      "holder": "owned target/custody-probes, no public caller callbacks",
+      "effect": "actual UID/GID/group/lo proof files, no TAP writes; all after names preserved;1..8 fresh probe files per launch",
+      "settlement": "own regular files/same UID+GID/size<=1024/content exact whitelist; any failure sets custodyValidfalse and throws fixed parent failure"
+    },
+    {
+      "site": "runner custody-preflight",
+      "await": "actual helper child; lstat/read15-byte owned probe; rm preflight dir; lstat absence",
+      "holder": "parent-owned target/preflight-owned",
+      "effect": "tests drop identity and actual own-file cleanup before first Source native run",
+      "settlement": "no Source positive publication unless all preflight facts true"
+    },
+    {
+      "site": "runner finally",
+      "await": "lstat own temp; rm forcefalse; lstat ENOENT",
+      "holder": "verified absolute temp strictly under RUNNER_TEMP, same parent UID",
+      "effect": "delete only own ephemeral Source target/caches after actual child capture",
+      "settlement": "sets ownRootVerified/ownTempRemoved; receipt deferred until these and all custody checks true; fixed static diagnostic on failure"
+    },
+    {
+      "site": "runner publication",
+      "await": "mkdir output; write sanitized receipt",
+      "holder": "already bounded actual canonical output, after cleanup",
+      "effect": "unchanged Source receipt shape and artifact path, separate custody context proof first",
+      "settlement": "publication exceptions caught; no raw error/positive fallback"
+    }
+  ],
+  "unchanged": "All product Source functions/awaits/effect/holders and other12 test bodies remain the original frozen e20 proposal. Global lease/watchdog/business checks, owner consent, six result-backed SENDs, retention/ownPromise controls and clocks untouched. This ledger adds only affected S07 and private runner custody flows.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

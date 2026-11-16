@@ -1,0 +1,10 @@
+{
+  "custody": {
+    "syntheticOnly": true,
+    "positives": 1,
+    "negatives": 15,
+    "qualifiedSource": false
+  },
+  "record": "Reuse ff288b865b72007ae7223c8f5e8266152a130db4,1positive/85negatives; index/admitted bindings provided freshly per run",
+  "api": "Same validated fix1 logic with fix2 branch/message literals and reviewed workflow step names only"
+}
