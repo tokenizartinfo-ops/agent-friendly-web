@@ -56,9 +56,9 @@
     "Final Source packet/index/report/diff FULL-readback hashes verified; all14 new admission body hashes verified; normal13 metadata exactly unchanged; 3/4/5 hunks replay forward/reverse exact."
   ],
   "pending": [
-    "Parser fix2 immutable DATA→tooling-only native control→scoped re-review",
-    "N3 read-only seam/interface design proposal→Root ruling/spec/plan before implementation",
-    "Normal13/full qualification and Task2 remain frozen; no causal product defect proved"
+    "N3.Source early protocol→Root seal",
+    "N3 actual producer tooling/native→review and independent OWN native→review",
+    "One separately gated N3 diagnostic capture, then precise cause ruling; normal13/mainplanTask2 stillfrozen"
   ],
   "SourceExecutedHere": false,
   "SourceQualified": false,
@@ -147,14 +147,46 @@
     "maxRounds": 5,
     "actor": "/root/c2_owner_stages_impl",
     "earlyVectors": "98ada8d8a67fa65d7e7b11bd26cc54f9397af3d9",
-    "nativePending": true,
-    "businessRerun": false
+    "nativePending": false,
+    "businessRerun": false,
+    "runId": 43874121011,
+    "jobId": 133322576633,
+    "primary": "59dfc1c2548f7c10f884c389e6dd211850556535",
+    "proof": "be160a9c5c4b1901e759b84b7cb7b995bf7c267c",
+    "closed": {
+      "head": "f6620136a1b5c34deb16f4a3659dc54c72b9d0e9",
+      "tree": "f8c2c3613dc746e7f0984fef18cc3252035cdb8a",
+      "branch": "lab/afw-c2-source-20261116-n2-parser-fix2",
+      "testedHead": "95b123baf77c24be1aaaafd6a578e7949ab4eeb0",
+      "originals": 3203,
+      "leaves": 3214,
+      "workflowRemoved": true,
+      "MainAndHistoricalUnchanged": true,
+      "closeHeadRuns": 0,
+      "diagnosticToolingExecuted": true,
+      "sourceBusinessExecuted": false,
+      "SourceQualified": false,
+      "Task1Pass": false,
+      "PCoff": false
+    },
+    "closeProof": "b4ed7856bedbe1f48f4967a669dd4aa940a202ac",
+    "nativePassed": 15,
+    "review": "304e33c28250ff593b39c39832e127a9c99a0249",
+    "F1": "ADDRESSED",
+    "SPEC": "PASS",
+    "QUALITY": "PASS"
   },
   "n3DesignStudy": {
-    "brief": "49cf5f68a944eeeb17d72952fce30605fe8f85a2",
-    "actor": "/root/c2_v2_own_receiver_fix1",
-    "readOnly": true,
-    "pending": true,
-    "implementationAllowed": false
+    "report": "50e2a98030d2f11e0a7320b04b75f801dd61a3f8",
+    "pending": false
+  },
+  "n3": {
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "builderCheck": "9741a68b848456032da812ecd0a29d71d8d2d5c4",
+    "sourceBrief": "5630c77bcd4130a0f2eae675ea2794d7c9df5b83",
+    "status": "Source early concrete contract/schema/vector/seam DATA pending; no N3 code/ref/run",
+    "rootBinding": "nullable only actual already-bound lease/promise, gaps unjoined",
+    "focus": "selected-first-target-focus; scope-first-error independent"
   }
 }
