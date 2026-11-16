@@ -1,0 +1,41 @@
+{
+  "schema": "afw.c2-notices-n3.root-b1-static-checkpoint.v1",
+  "atUTC": "2026-11-16 14:41:08 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA and builtin hash verification only",
+  "allowedAction": "Preserve B1 data and report integrity; no native activation",
+  "index": "5fb38b6b85c94aace6ffbabc5ba20beffbf810c2",
+  "reader": "83f5a63f0515f7eabafba9f693be5df52f15647e",
+  "report": "27d2595c60bb3763118c3d59449062fd177560e2",
+  "results": "321440d29ca3e1c424cc5af3cc0d70cb095da930",
+  "hashReadback": {
+    "files": 15,
+    "totalBytes": 2916104,
+    "algorithm": "Node builtin SHA256 and Git blob SHA1",
+    "allExact": true,
+    "localFiles": 0,
+    "sourceEvaluated": false
+  },
+  "reportedOwnRAM": {
+    "passed": 272,
+    "total": 272,
+    "native": false
+  },
+  "ruling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+  "builderRulingCheck": {
+    "actor": "/root/n3_causal_builder_check",
+    "result": "nothing important left",
+    "scope": "Incremental Root semantic ruling only; no code or native review"
+  },
+  "openFrontier": "Child abort and pair/outer onAbort kind/site/cause mapping requires exact Source proposal and Root matrix before B1 compatibility seal; not a native failure or Source execution.",
+  "pending": [
+    "Exact callback event matrix and independent finite controls",
+    "Final N3 outer envelope and producer manifest for B2",
+    "Native module graphs and independent review; one separate Root-gated Source capture"
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}

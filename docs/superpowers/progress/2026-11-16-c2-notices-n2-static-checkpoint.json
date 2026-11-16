@@ -1,6 +1,6 @@
 {
   "schema": "afw.c2-notices-n2.root-static-checkpoint.v1",
-  "atUTC": "2026-11-16 13:08:19 UTC",
+  "atUTC": "2026-11-16 14:41:08 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "environment": "immutable Git DATA / Root docs",
@@ -194,6 +194,15 @@
     "earlySourceImplementationPending": true,
     "fullOuterEnvelopePending": true,
     "nativePending": true,
-    "actualPending": true
+    "actualPending": true,
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "ownB1": {
+      "index": "5fb38b6b85c94aace6ffbabc5ba20beffbf810c2",
+      "hashesVerified": 15,
+      "reportedRAM": 272,
+      "native": false,
+      "interopMappingPending": true
+    },
+    "builderRulingCheck": "nothing important left"
   }
 }

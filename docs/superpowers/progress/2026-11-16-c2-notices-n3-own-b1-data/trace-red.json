@@ -1,0 +1,790 @@
+{
+  "schema": "afw.c2-notices-n3.own-b1-red-history.v1",
+  "meaning": "OWN RAM only. First literal corpus persisted before semantic implementation; boundaries persisted before targeted narrow guards; no Source RED or native result.",
+  "shapeOnlyBaseline": {
+    "schema": "afw.c2-notices-n3.own-b1-red.v1",
+    "stage": "B1",
+    "meaning": "OWN shape-only baseline deliberately lacks causal semantic guards; all31 positives accepted,44 concrete semantically invalid snapshots falsely accepted before original semantic implementation. Not a Source run.",
+    "baseline": "OWN reviewed generic shape only; causal semantics absent",
+    "total": 90,
+    "failed": [
+      {
+        "id": "OWN/PAIR_PARENT_ACTIVATION",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PAIR_CHILD_PARENT_ROOT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ROOT_PARENT_CYCLE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/LEASE_ALIAS_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/LEASE_TABLE_GAP",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PROMISE_TABLE_GAP",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/WORK_SCOPE_REPLACED_BY_RETAINER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PROMISE_OWNER_DRIFT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SETTLEMENT_WITHOUT_RETAIN",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PUBLIC_SETTLEMENT_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PUBLIC_RETAIN_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RETAINED_POINTS_LATER_EVENT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SETTLEMENT_POINTS_OTHER_PROMISE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FIRST_CLOSE_REPLACED_BY_CALL",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/DUPLICATE_CLOSED_TRANSITION",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/CHILD_INVENTED_CLOSE_METHOD",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ROOT_FACTORY_CLOSE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/OUTER_ROOT_FINISH",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/CHILD_FINALLY_ON_OUTER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ROOT_ABORT_ON_PAIR",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/INITIAL_STOP_ON_ROOT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PAIR_PARENT_ABORT_ON_OUTER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/TARGET_RETURN_BEFORE_ENTER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/TARGET_ENTER_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/TARGET_UNKNOWN_WITH_ENTER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/TARGET_THROW_MASKED_NONE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FIRST_SCOPE_ERROR_A_OVERWRITTEN_B",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ERROR_FIRST_USE_OVERWRITTEN",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/UNDECLARED_ERROR_ORDINAL",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FIRST_ERROR_ERASED",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/EMPTY_FIRST_ERROR_FORGED",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/AFTER_CUT_EVENT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/CUT_POINTS_BEFORE_LAST",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SOURCE_SEQUENCE_REORDER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SOURCE_SEQUENCE_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/GAP_DECLARED_COMPLETE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ELIGIBLE_TWO_JOINED",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ELIGIBLE_ZERO_JOINED",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ONE_ELIGIBLE_UNJOINED_OK",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/UNKNOWN_RETAINS_HIDDEN_EVENTS",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/MULTIPLE_ELIGIBLE_REASON_WRONG",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/UNUSED_ERROR_TABLE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FOCUS_WRONG_ROLE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FOCUS_BAD_SELECTION",
+        "pass": false,
+        "accepted": true
+      }
+    ],
+    "positiveFailures": [],
+    "checks": [
+      {
+        "id": "OWN/RETURNED_WITH_FORKED_LEASES",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/REAL_CLOSE_CALL_TWICE_ONE_TRANSITION",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/OPEN_WITH_PAIR_AND_UNOBSERVED_SETTLEMENT",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/OPEN_FIRST_CHECK_BEFORE_PAIR_CALL",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/UNREACHED_WITH_PRIMITIVE_ORIGINAL_THROW",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/NO_ELIGIBLE_SCOPE",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/MULTIPLE_ELIGIBLE_SCOPES",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ONE_ELIGIBLE_CONFLICTING_NONELIGIBLE_ROOT",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ONE_ELIGIBLE_UNJOINED_CAP_PRIVATE",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ONE_ELIGIBLE_UNJOINED_CAP_SNAPSHOT",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ONE_ELIGIBLE_UNJOINED_SINK_FAULT",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ONE_ELIGIBLE_UNJOINED_INVALID_EVENT",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ONE_ELIGIBLE_UNJOINED_OUTER_LIMIT",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/EMPTY_UNKNOWN_PROBE_UNAVAILABLE",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/EMPTY_UNKNOWN_UNBOUND",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/EMPTY_UNKNOWN_PREBIND_GAP",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/EMPTY_UNKNOWN_PROJECTION_GAP",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/KNOWN_PREBIND_DEFICIT_PREFIX",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/MISSING_SETTLEMENT_DECLARED_PREFIX",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/OUTSIDE_FOCUS_A_BEFORE_SELECTED_CHILD_B",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SAME_OBJECT_RETHROWN_AT_TARGET_AND_CATCH",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/OPAQUE_FUNCTION_ERROR_SAME_PUBLIC_OBJECT_KIND",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PRIMITIVE_PRESENT_NULL",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PRIMITIVE_PRESENT_UNDEFINED",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PRIMITIVE_PRESENT_FALSE",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PRIMITIVE_PRESENT_ZERO",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PRIMITIVE_PRESENT_EMPTY_STRING",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FOLDED_RETAIN_CALLBACKS_LEAVE_SOURCE_GAPS",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/COHERENT_OPAQUE_RELABEL_CANNOT_AUTHENTICATE_OBJECTS",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FIRST_CHECK_THROWS_BEFORE_PAIR_REACHED",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PAIR_PARENT_ACTIVATION",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PAIR_CHILD_PARENT_ROOT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ROOT_PARENT_CYCLE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/LEASE_ALIAS_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/LEASE_TABLE_GAP",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PROMISE_TABLE_GAP",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/WORK_SCOPE_REPLACED_BY_RETAINER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PROMISE_OWNER_DRIFT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SETTLEMENT_WITHOUT_RETAIN",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PUBLIC_SETTLEMENT_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PUBLIC_RETAIN_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RETAINED_POINTS_LATER_EVENT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SETTLEMENT_POINTS_OTHER_PROMISE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FIRST_CLOSE_REPLACED_BY_CALL",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/DUPLICATE_CLOSED_TRANSITION",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/CHILD_INVENTED_CLOSE_METHOD",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ROOT_FACTORY_CLOSE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/OUTER_ROOT_FINISH",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/CHILD_FINALLY_ON_OUTER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ROOT_ABORT_ON_PAIR",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/INITIAL_STOP_ON_ROOT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PAIR_PARENT_ABORT_ON_OUTER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/TARGET_RETURN_BEFORE_ENTER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SECOND_RECHECK_SITE",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/TARGET_ENTER_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/TARGET_UNKNOWN_WITH_ENTER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/TARGET_THROW_MASKED_NONE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FIRST_SCOPE_ERROR_A_OVERWRITTEN_B",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ERROR_FIRST_USE_OVERWRITTEN",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/UNDECLARED_ERROR_ORDINAL",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/PRIMITIVE_IDENTITY_FABRICATED",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/PRIMITIVE_PRIVATE_CONTENT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/FIRST_ERROR_ERASED",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/EMPTY_FIRST_ERROR_FORGED",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FIRST_ERROR_LEASE_ROOT_RESOLVER",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/AFTER_CUT_EVENT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/CUT_POINTS_BEFORE_LAST",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SOURCE_SEQUENCE_REORDER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SOURCE_SEQUENCE_DUPLICATE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/SOURCE_SEQUENCE_OVER_CAP",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/MORE_THAN24_EVENTS",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/GAP_DECLARED_COMPLETE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ELIGIBLE_TWO_JOINED",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ELIGIBLE_ZERO_JOINED",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/ONE_ELIGIBLE_UNJOINED_OK",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/UNKNOWN_RETAINS_HIDDEN_EVENTS",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/MULTIPLE_ELIGIBLE_REASON_WRONG",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/M_REALM_BRIDGE",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/RACE_WINNER",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/DEADLINE_CAUSE_ENUM",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/DRAIN_FLAG",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/PRIVATE_EVENT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/SNAPSHOT_KEY_ORDER",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/EVENT_KEY_ORDER",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/EVENT_WRONG_TYPE",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/SNAPSHOT_FOREIGN_IDENTITY",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/UNUSED_ERROR_TABLE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FOCUS_WRONG_ROLE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/FOCUS_BAD_SELECTION",
+        "pass": false,
+        "accepted": true
+      }
+    ],
+    "SourceExecuted": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "publicJsonBoundary": {
+    "schema": "afw.c2-notices-n3.own-b1-public-json-red.v1",
+    "case": "Ordinary JSON object cloned across execution realms retains exact safe fields but strict Object.prototype identity rejects it",
+    "originalAccepted": true,
+    "structuredCloneAccepted": false,
+    "clonePrototypeIsCurrentObjectPrototype": false,
+    "clonePrototypeParentIsNull": true,
+    "expected": "Accept internally valid public JSON graph without claiming shared private realm identity; reject accessor/toJSON evaluation",
+    "meaning": "OWN-only boundary model, not Source callback/private identity test.",
+    "SourceExecuted": false
+  },
+  "serializerModels": [
+    {
+      "id": "JSON_MODEL/ARRAY_NONENUMERABLE_TOJSON",
+      "pass": false,
+      "accepted": true,
+      "callbackCalls": 1
+    },
+    {
+      "id": "JSON_MODEL/ARRAY_INHERITED_TOJSON",
+      "pass": false,
+      "accepted": true,
+      "callbackCalls": 1
+    },
+    {
+      "id": "JSON_MODEL/OBJECT_INHERITED_TOJSON",
+      "pass": true,
+      "accepted": false,
+      "callbackCalls": 0
+    }
+  ],
+  "rootRulingBoundary": {
+    "schema": "afw.c2-notices-n3.own-b1-ruling-red.v1",
+    "ruling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "execution": "OWN RAM only; before narrow ruling guards",
+    "checks": [
+      {
+        "id": "OWN/RULING_PREPAIR_THROW_COMPLETE",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RULING_COMPLETE_OTHER_PROMISE_HANDLER_UNOBSERVED",
+        "pass": false,
+        "accepted": false
+      },
+      {
+        "id": "OWN/RULING_COMPLETE_WITH_ANCESTOR_CLOSE_UNOBSERVED",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RULING_PAIR_INITIALIZATION_MISSING_BINDING_PREFIX",
+        "pass": false,
+        "accepted": false
+      },
+      {
+        "id": "OWN/RULING_ACTIVATION_CHILD_CHECK_A_BEFORE_FOCUSED_B",
+        "pass": true,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RULING_COMPLETE_BOUND_PAIR_NO_RETURNED_PROMISE_SETTLEMENT",
+        "pass": true,
+        "accepted": false
+      },
+      {
+        "id": "OWN/RULING_COMPLETE_BOUND_PAIR_NO_FIRST_CLOSE",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RULING_MULTIPLE_PAIR_CHILDREN",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RULING_HOLDERS_ON_ACTIVATION_CHILD",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RULING_PROMISE_WORK_SCOPE_ROOT",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RULING_PROMISE_WORK_SCOPE_OUTER",
+        "pass": false,
+        "accepted": true
+      },
+      {
+        "id": "OWN/RULING_UNBOUND_PAIR_NOT_COMPLETE",
+        "pass": true,
+        "accepted": false
+      }
+    ]
+  },
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false
+}

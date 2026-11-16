@@ -1,0 +1,136 @@
+{
+  "schema": "afw.c2-notices-n3.own-b1-report.v1",
+  "status": "B1_DATA_READY_B2_HANDOFF",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHub immutable blobs + tiny pure OWN RAM",
+  "origin": "GitHub API",
+  "allowedAction": "Immutable reads/create_blob/FULLreadback; independent OWN causal core/finite literal DATA; no Source execution, files/deps/clones/ref/commit/run/runtime/browser/CF/keys/mail/new agents",
+  "authority": {
+    "brief": "a3fb7c96298183eaa290f35137bca0ba50ad0633",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486",
+    "seal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "earlySourceIndex": "7969655f30238b8986ea017023efe116399ec4e1",
+    "earlyContract": "eb1d149ed30c60930d667106ddf433d6feb0350f",
+    "causalSchema": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+    "sourceVectorCorrection": "79ac1e8a8375bf2c210238c91f88668361a40375",
+    "selection": "3db514b655917bd05917a90a53cb69667041fd36",
+    "selectionHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c",
+    "precedence": "Root9a31 overrides child-holders wording/examples and completeness ambiguity in early DATA. Source contract/seams/index updates pending; no final outer admission is invented."
+  },
+  "interface": {
+    "reader": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-reader.mjs",
+      "blob": "83f5a63f0515f7eabafba9f693be5df52f15647e",
+      "bytes": 18695,
+      "sha256": "062b1330abca20e5582e7b5fd587329cc9aa4cc526dee799e33c49691d5fdb16",
+      "gitBlob": "83f5a63f0515f7eabafba9f693be5df52f15647e",
+      "fullReadback": true,
+      "before": null
+    },
+    "functions": [
+      "n3TraceReplay(snapshot): exact sealed nine-field summary",
+      "n3CausalReplay(recordObject|canonicalNDJSONstring|UTF8Buffer): same summary"
+    ],
+    "caps": "Exact causal-record UTF8+LF <=6144B; outer sequence1..128/elapsed0..180000; selected entities/arrays/schema/sourceSequence guards preserved. Snapshot-only method checks shape/semantics/bounded size; envelope bytes must be checked through n3CausalReplay.",
+    "summary": "state,coverage,reason,target,firstError,focusChild,events,settlementsObserved,interpretation:unknown; no extra private/authentication claims",
+    "noSourceImports": true,
+    "fullOuterWrapperAuthored": false,
+    "workflowAuthored": false
+  },
+  "implementation": [
+    "Original OWN source-event FSM, no Source ledger/parser/helper invocation. Explicit reviewed OWN N2 generic schema and ZIP helper reuse only; generic helpers adapted to new N3 rejection/causal context.",
+    "Every public lease role singular; exact fork; holders only factory outer/pair/null, child checks only activation/focus-child/null. Children have no fake close transition. Rootfinish versus factoryclose fixed.",
+    "Canonical promise workscope only activation/pair/focus-child, not retainer. Original repeated retain/settled callbacks are represented by immutable first public facts and legitimate source sequence gaps.",
+    "Target first postreceipt only. Complete pre-pair throw valid; pair-enter with missing initialization binding is explicit prefix UNBOUND; bound pair complete needs observed original call-returned promise retained/settled and pair clock first close. No all-promise or all-ancestor drainage requirement.",
+    "First scope error remains independent from focused child's error; explicit lease:null outside focus supported. Object ordinal preserves opaque object/function identity assertion; primitive present never value/content/identity. No Error/ordinal/global root resolver implemented.",
+    "Unknown/cap/fault/ambiguous states validated explicitly: eligible1 may be unjoined or ambiguous; inconsistent graph is rejected rather than normalized into unknown. Cut freezes snapshot. No crosssnapshot/realm/M merge.",
+    "Strict public JSON data guard avoids getter/toJSON execution while allowing equivalent safe JSON across execution realms. This does not identify private realm continuity and is not a general proxy-authentication claim."
+  ],
+  "testFirst": {
+    "ownLiteralBeforeCore": "65dedb92f5d1baa71488ba17f866e185db10971c",
+    "ownPositives": 31,
+    "ownNegatives": 59,
+    "shapeOnlyRed": "ff3aa3479ed87d1ee4997fc22c1b506a33094740",
+    "shapeOnlyFalseAccepts": 44,
+    "shapeOnlyPositiveFailures": 0,
+    "jsonBoundaryRed": "daee272f448b8fffb561e138a1cf5260167a8072",
+    "serializerModelBeforeCorrection": "2a559ee8c15be58140fc118a0e4e738332d62ca0",
+    "rulingLiteralBeforeNarrowCorrection": "dda1ab3a5e6e7c6f09c63b192111f446ac7ecd47",
+    "rulingPositives": 5,
+    "rulingNegatives": 7,
+    "rulingRed": "dff55f60b9fb7c5074ffaa2cdbbfb22302e7982d",
+    "rulingRedFailures": 7,
+    "traceability": "Original literal/RED/draft bodies retained. Role/coverage expectations follow explicit Root ruling, not Source implementation or borrowed producer output. Raw fixture and synthetic transport DATA were persisted before their consumption checks. No Source RED/PASS."
+  },
+  "verification": {
+    "execution": "OWN pure RAM functions; final reader/control definitions checked together; native module graph NOT executed",
+    "groups": {
+      "literal": 90,
+      "sealedData": 43,
+      "rawRecord": 15,
+      "syntheticTransport": 90,
+      "boundaries": 7,
+      "jsonModels": 3,
+      "ruling": 12,
+      "rulingTransport": 12
+    },
+    "total": 272,
+    "uniqueIds": 272,
+    "failed": 0,
+    "all102SyntheticTransportModelsValid": true,
+    "maxOriginalPositiveCausalRecordBytes": 4812,
+    "recordCap6144": true,
+    "results": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-results.json",
+      "blob": "321440d29ca3e1c424cc5af3cc0d70cb095da930",
+      "bytes": 33767,
+      "sha256": "4d40e8f19ddd0226a013aae867527ba4162d97463c18ae42ce188ceb3f2a523a",
+      "gitBlob": "321440d29ca3e1c424cc5af3cc0d70cb095da930",
+      "fullReadback": true,
+      "before": null
+    },
+    "noNativeOrSourceClaim": true
+  },
+  "models": {
+    "transport": "102 canonical causal-record/witness/OWN_SYNTHETIC_N3_B1_TRACE/ZIPSTORE models with actual ZIP bytes, CRC and fresh hashes. Not Source fourframes, full outcome, actual API receipt or final producer admission. Every semantic rejection is tested only after its model transport verifies true.",
+    "sealedData": "43 corrected Source-intended snapshots consumed as DATA by original OWN code; this is not Source execution or a Source test run.",
+    "privateIdentity": "No actual Source callbacks/hidden private objects tested here. Separate accepted snapshots/equal ordinal1 and coherent opaque relabel remain indistinguishable at the public wire boundary. Identity notes in vectors are model/proof limits, not actual producer helper tests."
+  },
+  "proofLimits": [
+    "Wire alone cannot authenticate that a promiseOrdinal denotes the original observeOwnerPhasePair returned Promise rather than internal run(). Workscope/first pointers are checked; actual p2 identity and real callback effects require known pinned producer plus future actual seam units.",
+    "No crosssnapshot/realm/restart/M join. Same ordinal/script hash/Node delivery does not authenticate object identity. Source order is recorded observation order; OP abort note can follow nested parent closes.",
+    "Source first RECORDED error is not initiating/global/physical first cause. Error propagation and secondary focused B do not overwrite A.",
+    "SettlementObserved counts handlers actually represented in snapshot. Missing handler is unobserved; no physical-pending/drain/clock expiry/racewinner/receipt claim.",
+    "Whole N3 core+eightguards+journal/outcome sizing, outer canonical/witness/hash/API/log/artifact/producerManifest admission and actual native graph are B2/final Source gates, not proved by B1 per-record max."
+  ],
+  "reversible": {
+    "fullBeforeimagesIncluded": true,
+    "oldOwnN2Unchanged": true,
+    "forwardExact": true,
+    "reverseExact": true,
+    "normalSource13Unchanged": true,
+    "qualifierUnchanged": true,
+    "rollback": "Only new B1 paths proposed. No activated writer ref exists; all older immutable versions remain."
+  },
+  "pending": [
+    "Root B2 handoff with final Source full outer schema/producerManifest/body hashes/corrected contract-seams-index",
+    "Full independent n3Replay/n3Read/API/ZIP/native controls and fresh explicit N3 nomination after that handoff",
+    "Root cloud native modulegraph and independent review before any Source activation"
+  ],
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "actualNativeImportGraph": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

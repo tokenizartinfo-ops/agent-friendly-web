@@ -1,0 +1,299 @@
+{
+  "schema": "afw.c2-notices-n3.own-b1-immutable-index.v1",
+  "status": "B1_READY_B2_HANDOFF_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA + pure OWN RAM",
+  "origin": "GitHub API",
+  "resourceType": "detached immutable blobs only",
+  "allowedAction": "N3.B1 causal core and finite independent DATA/control authoring; no Source execution/ref/run",
+  "authority": {
+    "brief": "a3fb7c96298183eaa290f35137bca0ba50ad0633",
+    "seal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432",
+    "plan": "dd921c1daec574726c1d261f87897eb7c595e486"
+  },
+  "n3Protocol": {
+    "earlyIndex": "7969655f30238b8986ea017023efe116399ec4e1",
+    "earlyContract": "eb1d149ed30c60930d667106ddf433d6feb0350f",
+    "schema": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+    "correctedVectors": "79ac1e8a8375bf2c210238c91f88668361a40375",
+    "selection": "3db514b655917bd05917a90a53cb69667041fd36",
+    "selectionCanonicalHash": "fa42fdb50fd0b3a04e1cdfe903a8de56bdb0ddf4e51cbbd5f570895a6bfcff8c",
+    "meaning": "Root semantic ruling is authoritative over superseded child-holders examples. Full outer N3 envelope/producerManifest/body hashes/new contract-seams-index B2 handoff pending; no fabricated actual receipt."
+  },
+  "paths": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-reader.mjs",
+      "blob": "83f5a63f0515f7eabafba9f693be5df52f15647e",
+      "bytes": 18695,
+      "sha256": "062b1330abca20e5582e7b5fd587329cc9aa4cc526dee799e33c49691d5fdb16",
+      "gitBlob": "83f5a63f0515f7eabafba9f693be5df52f15647e",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-controls.mjs",
+      "blob": "92aa3d6257343c7f466176bbf85b8a303a8a2fab",
+      "bytes": 7961,
+      "sha256": "c41de580fa73e029db63654504a4061098e848e98d08001bc9ad662595c09a74",
+      "gitBlob": "92aa3d6257343c7f466176bbf85b8a303a8a2fab",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-vectors.json",
+      "blob": "65dedb92f5d1baa71488ba17f866e185db10971c",
+      "bytes": 672868,
+      "sha256": "ae3f6f008d4ce34729002b2117340814b5df9037b5da43cc5c310cb9f00743c8",
+      "gitBlob": "65dedb92f5d1baa71488ba17f866e185db10971c",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/causal-schema.json",
+      "blob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "bytes": 13899,
+      "sha256": "8780c9fcdb7f90ce35af840b22f3509c69417059b7d84a7774e708324e4a26ec",
+      "gitBlob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/sealed-vectors-data.json",
+      "blob": "79ac1e8a8375bf2c210238c91f88668361a40375",
+      "bytes": 371781,
+      "sha256": "bcd46c9974b582f4be9bce9264bcdd8a19918447688c8677c07683f6aec4d4fa",
+      "gitBlob": "79ac1e8a8375bf2c210238c91f88668361a40375",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/raw-record-inputs.json",
+      "blob": "48f2cd757be9440bc7aad556828c3e9da49f760a",
+      "bytes": 88664,
+      "sha256": "d19cbfe46d03c942eb030075a35b8f0486948cab5e31c28a5be6afa8a5fd7614",
+      "gitBlob": "48f2cd757be9440bc7aad556828c3e9da49f760a",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/synthetic-transport.json",
+      "blob": "bc8fc94aa4229711cb980143c79cd3f7ddff7459",
+      "bytes": 1240760,
+      "sha256": "ed199f48131a7e1cba36eaa71f255458abaa2a15d39e6a2c4e511e115d9a815d",
+      "gitBlob": "bc8fc94aa4229711cb980143c79cd3f7ddff7459",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/json-boundary-models.json",
+      "blob": "2a559ee8c15be58140fc118a0e4e738332d62ca0",
+      "bytes": 1192,
+      "sha256": "30d797eb4258776bb7eb29aba7abc940dde9bcfb6561896352bfe1212e199e9e",
+      "gitBlob": "2a559ee8c15be58140fc118a0e4e738332d62ca0",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/ruling-vectors.json",
+      "blob": "dda1ab3a5e6e7c6f09c63b192111f446ac7ecd47",
+      "bytes": 96673,
+      "sha256": "8118d3e6d6d4b1420dd22733b9409b3f06110fcbdee6a21c65d3f9a688edbb9b",
+      "gitBlob": "dda1ab3a5e6e7c6f09c63b192111f446ac7ecd47",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/ruling-transport.json",
+      "blob": "7909d8aa6c6231cbe9498aa7615e3c50764fcd25",
+      "bytes": 175253,
+      "sha256": "325f24debd11ef0b78320b17fa942269e69e7d37449ced92f8350fe48b29e80f",
+      "gitBlob": "7909d8aa6c6231cbe9498aa7615e3c50764fcd25",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-results.json",
+      "blob": "321440d29ca3e1c424cc5af3cc0d70cb095da930",
+      "bytes": 33767,
+      "sha256": "4d40e8f19ddd0226a013aae867527ba4162d97463c18ae42ce188ceb3f2a523a",
+      "gitBlob": "321440d29ca3e1c424cc5af3cc0d70cb095da930",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-red.json",
+      "blob": "0bf5ec09d8819039efc218f3e98aac225acb301d",
+      "bytes": 18642,
+      "sha256": "f984cd9a9f6da3c8837213a4d1d032b7dc3b39be7610cec117e40d9dd74cb1c1",
+      "gitBlob": "0bf5ec09d8819039efc218f3e98aac225acb301d",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-reversible-diff.json",
+      "blob": "201e647d82554b32dc5c498cf0ebc2206557ca01",
+      "bytes": 154889,
+      "sha256": "350b0da5a85b3cf14ae2c8f29824c5d18f48243caccfd536a7d3feb2933023e4",
+      "gitBlob": "201e647d82554b32dc5c498cf0ebc2206557ca01",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-report.json",
+      "blob": "27d2595c60bb3763118c3d59449062fd177560e2",
+      "bytes": 8972,
+      "sha256": "68c1470108bce2e5099d5cd3be05c701f386d766a01200d37101897e59d2c1fc",
+      "gitBlob": "27d2595c60bb3763118c3d59449062fd177560e2",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "selfPath": "docs/superpowers/root-own/c2-notices-n3/trace-index-b1.json",
+  "proposedAdditionsIncludingSelf": 15,
+  "beforeimages": [
+    {
+      "role": "Reviewed OWN N2 reader",
+      "blob": "e5418eaa79db9f348753fa8a15b8eb28050429b6",
+      "bytes": 41543,
+      "sha256": "cd8bea5115fe0f35c0cffd3f9a52017136911e7826b26b9b3ea9d91f38376a19",
+      "gitBlob": "e5418eaa79db9f348753fa8a15b8eb28050429b6",
+      "fullReadback": true,
+      "nominateForExecution": false
+    },
+    {
+      "role": "B1 before public JSON correction",
+      "blob": "41fd12a5f729897f1e311828086286c4cc7a640f",
+      "bytes": 18124,
+      "sha256": "5d38f6341f10cab65c6432cb1980491b04730de2f78164230425b79f3d0c5a92",
+      "gitBlob": "41fd12a5f729897f1e311828086286c4cc7a640f",
+      "fullReadback": true,
+      "nominateForExecution": false
+    },
+    {
+      "role": "B1 before Root9a31 ruling",
+      "blob": "b6e2759ac0fba4c30123786d24a43787566ed3ae",
+      "bytes": 18403,
+      "sha256": "41f0bc996a6137b97703ed84ed4c5076ad692a47cce32703fd5c37c0053a506f",
+      "gitBlob": "b6e2759ac0fba4c30123786d24a43787566ed3ae",
+      "fullReadback": true,
+      "nominateForExecution": false
+    },
+    {
+      "role": "OWN schema-only RED baseline",
+      "blob": "cc74496956f2747c7cbd8da60c66edc38b58098f",
+      "bytes": 8474,
+      "sha256": "e4b03f1fdeeebc45e98716a079a05e8044be12fd68ce03179b7377bd5597245c",
+      "gitBlob": "cc74496956f2747c7cbd8da60c66edc38b58098f",
+      "fullReadback": true,
+      "nominateForExecution": false
+    }
+  ],
+  "interface": {
+    "module": "83f5a63f0515f7eabafba9f693be5df52f15647e",
+    "exports": [
+      "n3TraceReplay(snapshot)",
+      "n3CausalReplay(canonicalRecordObject|canonicalNDJSONstring|UTF8Buffer)"
+    ],
+    "summaryKeys": [
+      "state",
+      "coverage",
+      "reason",
+      "target",
+      "firstError",
+      "focusChild",
+      "events",
+      "settlementsObserved",
+      "interpretation"
+    ],
+    "recordCapUTF8IncludingLF": 6144,
+    "interpretation": "unknown",
+    "fullOuterN3ReplayReadAuthored": false,
+    "nativeWorkflowOrFinalRunnerAuthored": false
+  },
+  "controls": {
+    "module": "92aa3d6257343c7f466176bbf85b8a303a8a2fab",
+    "export": "n3B1AllControls(own,sealed,raw,transport,sha256,ruling,rulingTransport)",
+    "arguments": {
+      "own": "trace-vectors.json",
+      "sealed": "sealed-vectors-data.json",
+      "raw": "raw-record-inputs.json",
+      "transport": "synthetic-transport.json",
+      "ruling": "ruling-vectors.json",
+      "rulingTransport": "ruling-transport.json"
+    },
+    "groups": {
+      "literal": 90,
+      "sealedData": 43,
+      "rawRecord": 15,
+      "syntheticTransport": 90,
+      "boundaries": 7,
+      "jsonModels": 3,
+      "ruling": 12,
+      "rulingTransport": 12
+    },
+    "total": 272,
+    "uniqueIds": 272,
+    "failed": 0,
+    "all102SyntheticTransportModelsValid": true,
+    "actualNativeImportGraph": false,
+    "execution": "Pure OWN RAM; final function bodies checked together. Source semantic/producer implementations never invoked.",
+    "literalRedAndResults": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-red.json",
+      "blob": "0bf5ec09d8819039efc218f3e98aac225acb301d",
+      "bytes": 18642,
+      "sha256": "f984cd9a9f6da3c8837213a4d1d032b7dc3b39be7610cec117e40d9dd74cb1c1",
+      "gitBlob": "0bf5ec09d8819039efc218f3e98aac225acb301d",
+      "fullReadback": true,
+      "before": null
+    },
+    "results": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-results.json",
+      "blob": "321440d29ca3e1c424cc5af3cc0d70cb095da930",
+      "bytes": 33767,
+      "sha256": "4d40e8f19ddd0226a013aae867527ba4162d97463c18ae42ce188ceb3f2a523a",
+      "gitBlob": "321440d29ca3e1c424cc5af3cc0d70cb095da930",
+      "fullReadback": true,
+      "before": null
+    }
+  },
+  "reversible": {
+    "diff": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/trace-reversible-diff.json",
+      "blob": "201e647d82554b32dc5c498cf0ebc2206557ca01",
+      "bytes": 154889,
+      "sha256": "350b0da5a85b3cf14ae2c8f29824c5d18f48243caccfd536a7d3feb2933023e4",
+      "gitBlob": "201e647d82554b32dc5c498cf0ebc2206557ca01",
+      "fullReadback": true,
+      "before": null
+    },
+    "beforeimagesFull": true,
+    "forwardExact": true,
+    "reverseExact": true,
+    "normalSourceChanged": false,
+    "oldOwnN2Changed": false,
+    "noActiveRef": true,
+    "rollback": "Only these new B1 paths proposed. Omit exact new paths in any future detached OWN tree; older immutable blobs and all Source files remain."
+  },
+  "limits": "Wire only validates local graph consistency and pointers. It cannot authenticate p2 versus internal run(), actual private objects/callbacks, same realm across snapshots or historical cause. Known pinned producer + real seam units are required provenance. No M bridge/timertrigger/racewinner/expiry/drain/receipt claim.",
+  "handoff": "Root supplies final full N3 outer schema/producerManifest/body hashes and actual context for B2. Retain this independent core for integration; native graph and review remain Root gates. Author IDLE after B1 delivery.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "refsCreated": 0,
+  "runsCreated": 0,
+  "localSourceFilesCreated": 0,
+  "dependenciesInstalled": 0,
+  "subagentsCreated": 0,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
