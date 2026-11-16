@@ -1,0 +1,107 @@
+{
+  "schema": "afw.own-green20.fixture-first-seal.v1",
+  "status": "SEALED_BEFORE_NEW_RECEIVER",
+  "authority": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+  "contract": "e55a6387549a8447a5ad93356184645ae19e70de",
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/model-builder.mjs",
+      "mode": "100644",
+      "blob": "20e2f7c16677be936b037953cbb8e4573755ba8f",
+      "bytes": 8004,
+      "sha256": "b810e18625d17d3cb9ea57ba0ca4b822b476155c9ca2f39442c1cf092da4e4bf",
+      "gitBlob": "20e2f7c16677be936b037953cbb8e4573755ba8f",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/fixture-seed.json",
+      "mode": "100644",
+      "blob": "1f7d93629d7f9f1789db894d860c1b44d88a04c1",
+      "bytes": 132652,
+      "sha256": "a7b71a680691f90efde82ac25519a545fd6df1d81ffe25ae7686c6b753de3689",
+      "gitBlob": "1f7d93629d7f9f1789db894d860c1b44d88a04c1",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/fixture-first-cases.json",
+      "mode": "100644",
+      "blob": "123a3af4c204f470237a476172ff4d90b53c90b8",
+      "bytes": 27496,
+      "sha256": "04b8a420038507a46d5b1557afb7c7890749af22f792e46cf1664b54997fc5c8",
+      "gitBlob": "123a3af4c204f470237a476172ff4d90b53c90b8",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/expected-ids.json",
+      "mode": "100644",
+      "blob": "696dde71d176989160f1471594a56618466ca0fc",
+      "bytes": 3522,
+      "sha256": "5fc279bf620146034d91868e846dc5301b812b9e434431d2db31df7291968bf8",
+      "gitBlob": "696dde71d176989160f1471594a56618466ca0fc",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/complete-coherent-example.json",
+      "mode": "100644",
+      "blob": "a08f3d39e11761a7ff394eb65bb1728de8684524",
+      "bytes": 36401,
+      "sha256": "63e4de9e934908a925941c7e6dd525e2f7ae6537139231b32ae66465f34f370b",
+      "gitBlob": "a08f3d39e11761a7ff394eb65bb1728de8684524",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/old-red.json",
+      "mode": "100644",
+      "blob": "24183a96a762d7ff13085bf01b4414025ab7556d",
+      "bytes": 627,
+      "sha256": "f3f2da1213a9188beda12c37d1d1c84c97900e5b08b71642ba00b50fd24ab6af",
+      "gitBlob": "24183a96a762d7ff13085bf01b4414025ab7556d",
+      "fullReadback": true
+    }
+  ],
+  "census": {
+    "count": 124,
+    "positive": 26,
+    "negative": 98,
+    "idsHash": "c96e7b9f0e680b2fe841b1ad0f0bf52d2f90c12237a03b821b60a028171b61d9"
+  },
+  "red": {
+    "schema": "afw.own-green20.fixture-first-red.v1",
+    "stage": "Before new receiver code",
+    "reds": [
+      {
+        "pin": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+        "accepted": false,
+        "error": "C2_OWN_DIAGNOSTIC_REJECTED",
+        "expectedNew": "accept"
+      },
+      {
+        "pin": "979c4fd2caadd75b47b3416275248a23310e3722",
+        "accepted": false,
+        "error": "C230_OWN_UNQUALIFIED",
+        "expectedNew": "accept"
+      }
+    ],
+    "partialPreimage": {
+      "observedFirstThrowSequence": null,
+      "required": 2,
+      "fieldMissing": true
+    },
+    "models": 124,
+    "SourceExecuted": false,
+    "nativeExecuted": false
+  },
+  "SourceBusinessExecuted": false,
+  "nativeExecuted": false,
+  "finalSourceBinding": false,
+  "bodyAdmissionStatus": "Root finalSource25pins pending; explicit separate trusted interface proposed, never outcome-chosen",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
