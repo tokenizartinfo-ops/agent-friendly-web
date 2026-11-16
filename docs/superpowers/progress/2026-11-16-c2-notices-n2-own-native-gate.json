@@ -1,0 +1,95 @@
+{
+  "schema": "afw.c2-notices-n2.own-native-gate.v1",
+  "atUTC": "2026-11-16 12:40:42 UTC",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "OWN synthetic native GitHub Actions only",
+    "ORIGIN": "GitHub API",
+    "RESOURCE_TYPE": "immutable tree/commit + one-use OWN branch",
+    "RESOURCE_ID": "lab/afw-c2-own-receiver-20261116-notices-n2",
+    "ALLOWED_ACTION": "preserve3203originals+17 OWN additions, one native340 controls then close; Source inactive",
+    "ROLLBACK": "remove only OWN new workflow, preserve evidence and all originals"
+  },
+  "prepared": {
+    "branch": "lab/afw-c2-own-receiver-20261116-notices-n2",
+    "head": "0ccd54c6fd234c681f2967a538f7d0230fdea472",
+    "tree": "6aa775d08aaba921b0970400f591f8c9871bea10",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "originals": 3203,
+    "added": 17,
+    "leaves": 3220,
+    "activated": false,
+    "SourceExecuted": false
+  },
+  "index": "c3c2abe48c82545f982bd2fc741225987d89d048",
+  "sourcePrepared": {
+    "head": "5f3a7bf3a5103d1a00d2bb15ac66ecaa9a68786f",
+    "tree": "0a40e17da150590d4e1a1506c2c3d0c236ea5c20",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-t1-notices-n2",
+    "message": "AFW-C2-T1-NOTICES-N2-ONEUSE-20261116",
+    "originals": 3203,
+    "added": 31,
+    "leaves": 3234,
+    "treeVerified": true,
+    "commitVerified": true,
+    "SourceExecuted": false,
+    "refCreated": false,
+    "activated": false,
+    "packet": "a30ecbb8d4990896082cad0104a8d6e91960e8f5"
+  },
+  "bodyVerification": {
+    "count": 17,
+    "bytes": 2570034,
+    "allHashesMatch": true
+  },
+  "reversibles": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n2/reader.mjs",
+      "beforeBlob": "a9ac8f19a7f4d0738205776daa852ec67750cb91",
+      "afterBlob": "e5418eaa79db9f348753fa8a15b8eb28050429b6",
+      "forward": true,
+      "reverse": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n2/controls.mjs",
+      "beforeBlob": "79005b155d69a754dfe203a9a8e5a0baf9935a12",
+      "afterBlob": "05e74a5d208cb13bcde22f9e6e9ea4209c343800",
+      "forward": true,
+      "reverse": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n2/run-controls.mjs",
+      "beforeBlob": "604087ac9a9f871acd99e48dde0f8bb3ac629452",
+      "afterBlob": "8de4b0e83c8fb14623c3aa117dc8e146577dccce",
+      "forward": true,
+      "reverse": true
+    },
+    {
+      "path": ".github/workflows/afw-c2-notices-n2-own.yml",
+      "beforeBlob": "cc3314e7ba5b787aec85a0d93329df998f1ec686",
+      "afterBlob": "534168bca8dbecfb1c9f4daabf8d75639c485560",
+      "forward": true,
+      "reverse": true
+    }
+  ],
+  "native": {
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n2/run-controls.mjs",
+    "node": "v22.23.4",
+    "job": "c2-notices-n2-own",
+    "timeoutMinutes": 3,
+    "expectedTotal": 340,
+    "pending": true
+  },
+  "authorRAMOnly": {
+    "total": 340,
+    "failed": 0,
+    "actualNative": false
+  },
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
