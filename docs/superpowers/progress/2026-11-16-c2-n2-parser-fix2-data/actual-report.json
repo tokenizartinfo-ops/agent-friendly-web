@@ -1,0 +1,251 @@
+{
+  "schema": "afw.c2-notices-n2.source-data-report.v3",
+  "versioning": "Append-only immutable report chain. Prior report2c288 and its carried base4996 remain byte-for-byte unchanged. This version appends actual cloud tooling evidence only; it does not edit Source/candidate/packet.",
+  "previousVersion": {
+    "bytes": 11898,
+    "sha256": "1541d01827c088c8e95294e8f66f73b4e2a542932b80d928a93e64ebe8d0ac16",
+    "gitBlob": "2c288eeea1dabe29dda4d4b34b4b4745c8f33a51",
+    "blob": "2c288eeea1dabe29dda4d4b34b4b4745c8f33a51",
+    "fullReadback": true
+  },
+  "originalReport": "4996da2322d0f54684f1521b27cf41d6f2562d4b",
+  "round": "2/5",
+  "authority": "7500203a0b5da273bd80834c9346812a6dae588b",
+  "reviewFinding": "672f35f69b215defe77d5961cf43f049250d1106",
+  "status": "NATIVE_TOOLING_COVERING_PASS_SCOPED_REREVIEW_PENDING",
+  "actualCovering": {
+    "primary": "59dfc1c2548f7c10f884c389e6dd211850556535",
+    "exactSafeProof": "be160a9c5c4b1901e759b84b7cb7b995bf7c267c",
+    "gate": "89f84d3bd31e46ef363a3044d5680c28f90ddac4",
+    "packet": "35211fc624e7c2eb17639f93976c9b0f0469ddfd",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "head": "95b123baf77c24be1aaaafd6a578e7949ab4eeb0",
+    "tree": "ae22e373aa356fa4d0167158068265e94a34d8c5",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "runId": "43874121011",
+    "runAttempt": 1,
+    "jobId": 133322576633,
+    "job": "c2-n2-parser-fix2",
+    "node": "v22.23.4",
+    "stepNumber": 4,
+    "stepStarted": "2026-11-16T13:16:16Z",
+    "stepCompleted": "2026-11-16T13:16:17Z",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-n2-parser-fix2/run-controls.mjs",
+    "nativeTAP": {
+      "total": 15,
+      "pass": 15,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "exactUniqueIDs": [
+        "P2_ADMISSION",
+        "P2_NO_BASELINE_THROW",
+        "P2_BASELINE_NO_BEFORE_THROW",
+        "P2_NO_BASELINE_RETURN",
+        "P2_BASELINE_NO_BEFORE_RETURN",
+        "P2_OPEN_BEFORE_BASELINE",
+        "P2_OPEN_BASELINE",
+        "P2_GET_ENTER_PENDING",
+        "P2_GET_BODY_PENDING",
+        "P2_POST_ENTER_PENDING",
+        "P2_POST_BODY_PENDING",
+        "P2_SETTLED_FAILURE_PREFIX",
+        "P2_SETTLED_SUCCESS_PREFIX",
+        "P2_EXISTING_CONTROLS_OLD",
+        "P2_EXISTING_CONTROLS_NEW"
+      ]
+    },
+    "proofBindings": {
+      "oldReader": "34b32c4634384d65df27f1f69fcd45c4b8f709ce8efbe92f7d169ec8d17052dc",
+      "reader": "6cdc6569cff0676770f41ce4f794affe68c68ccbccb5cde154d513945b7bb849",
+      "oldControls": "de52f5a2bd418e5ae96c5c126a71af5da7bc082f8a4076f8834dd1ffa54f7ec9",
+      "controls": "35d5367308cca0b18f9337194fa80fd38b698a0dc3c91fb275bfd2200b491980",
+      "logger": "64f5bc4ae951d13a6ead8d2dc28b0b0ff13ffdcf01f3d621e17dab07203d865c",
+      "slot": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "vectors": "cd4d4a0174be09c8dcae12c6a3b222de0d5f7151d2b0b94dd30f9caa5b6eedad",
+      "timeoutVectors": "cb2480007dbf79968962c957d6dde7c2b103a8fca2a17280fd9d3f789083f97b",
+      "runnerHash": "b05417ea3f3fa8c812ee403e28ed86c73c941abf07cc809a24a9e8d12c4cc380"
+    },
+    "runtimeLabels": {
+      "diagnosticToolingExecuted": true,
+      "sourceBusinessExecuted": false,
+      "toolingControlsPassed": true
+    },
+    "observedVectors": [
+      {
+        "id": "P2_NO_BASELINE_THROW",
+        "valid": false,
+        "code": "PROBE_INVALID",
+        "integrity": "unknown",
+        "joined": false,
+        "oldAccepted": true,
+        "oldJoined": true
+      },
+      {
+        "id": "P2_BASELINE_NO_BEFORE_THROW",
+        "valid": false,
+        "code": "PROBE_INVALID",
+        "integrity": "unknown",
+        "joined": false,
+        "oldAccepted": true,
+        "oldJoined": true
+      },
+      {
+        "id": "P2_NO_BASELINE_RETURN",
+        "valid": false,
+        "code": "PROBE_INVALID",
+        "integrity": "unknown",
+        "joined": false,
+        "oldAccepted": null,
+        "oldJoined": null
+      },
+      {
+        "id": "P2_BASELINE_NO_BEFORE_RETURN",
+        "valid": false,
+        "code": "PROBE_INVALID",
+        "integrity": "unknown",
+        "joined": false,
+        "oldAccepted": null,
+        "oldJoined": null
+      },
+      {
+        "id": "P2_OPEN_BEFORE_BASELINE",
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "oldAccepted": null,
+        "oldJoined": null
+      },
+      {
+        "id": "P2_OPEN_BASELINE",
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "oldAccepted": null,
+        "oldJoined": null
+      },
+      {
+        "id": "P2_GET_ENTER_PENDING",
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "oldAccepted": null,
+        "oldJoined": null
+      },
+      {
+        "id": "P2_GET_BODY_PENDING",
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "oldAccepted": null,
+        "oldJoined": null
+      },
+      {
+        "id": "P2_POST_ENTER_PENDING",
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "oldAccepted": null,
+        "oldJoined": null
+      },
+      {
+        "id": "P2_POST_BODY_PENDING",
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "oldAccepted": null,
+        "oldJoined": null
+      },
+      {
+        "id": "P2_SETTLED_FAILURE_PREFIX",
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "oldAccepted": null,
+        "oldJoined": null
+      },
+      {
+        "id": "P2_SETTLED_SUCCESS_PREFIX",
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "joined": true,
+        "oldAccepted": null,
+        "oldJoined": null
+      }
+    ],
+    "controlCounts": {
+      "old": {
+        "accepted": 6,
+        "rejected": 21,
+        "probeChecks": 3,
+        "roundtrips": 6,
+        "witnessRejected": 2,
+        "slotChecks": 5,
+        "guardAccepted": 3,
+        "guardRejected": 7,
+        "guardTransitions": 6,
+        "invarianceChecks": 10,
+        "guardRecordRejected": 12
+      },
+      "new": {
+        "accepted": 6,
+        "rejected": 21,
+        "probeChecks": 3,
+        "roundtrips": 6,
+        "witnessRejected": 2,
+        "slotChecks": 5,
+        "guardAccepted": 3,
+        "guardRejected": 7,
+        "guardTransitions": 6,
+        "invarianceChecks": 10,
+        "guardRecordRejected": 12
+      }
+    },
+    "artifact": {
+      "id": 14229625165,
+      "zip": {
+        "bytes": 1528,
+        "sha256": "93e084b74e9548c8997a7653431ed167be5fcb95133d3afd625daa7bf9f73d85",
+        "blob": "39cee842cd990d0e8153e1dc810a4c5c1dbd7827"
+      },
+      "payload": {
+        "bytes": 4459,
+        "sha256": "5ca3166b8d0fa3439cf4903807a939c0b4fc16ece80c0647ea390980ce61ce97",
+        "blob": "be160a9c5c4b1901e759b84b7cb7b995bf7c267c"
+      },
+      "payloadBound": true
+    },
+    "acceptanceAttribution": "Root independently verified API/job/head/parent/tree/command, exact real nativeTAP15PASS/no fail/cancel/skip/todo, schema, rawZIP CRC/digest/payload+LF join. This author read only the preserved safe primary and exact safe proof; did not fetch raw logs/artifact or rerun any source."
+  },
+  "interpretation": {
+    "baseline": "In the actual cloud invocation, the exact23-record no-baseline throw and24-record baseline/no-before throw were accepted by old readObservation and old nativeJoin. The corrected parser rejected both with PROBE_INVALID/unknown/nativeJoinfalse; the two return variants also rejected. This is observed predicate discrimination within a passing native control suite, not a manufactured failing native test or a separate historical Source RED run.",
+    "preserved": "All8 honest timeoutprefix cases accepted with OK/prefix/nativeJointrue; original complete parser/logger/slot/witness/probe helper counts matched old and new:6/21/3/6/2/5/3/7/6/10/12. All15 native cases actually passed. F1 covering evidence is now available for independent scoped rereview; this report does not self-award SPEC/QUALITY review PASS.",
+    "limits": "Actual Source diagnostic tooling (old/new reader, controls, logger, slot) WAS imported/executed natively on GitHub under the nominated graph. No product business world/Miniflare/custody launch/business request/old N2business rerun was executed by this graph. Native controls do not explain the prior POST503, prove authenticated receipt/first cause/drain or qualify Task1.",
+    "normalSource": "Normal13/index26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac and future fullqualifierc230140201a6e12d9a355b2cfe6343749f083e1d remain frozen. Existing accepted N2 capturedb59.../outcomeeeeec... and read-only diagnosis3498526... are preserved without reinterpretation. Task2 not dispatched.",
+    "workflowClosure": "Root states workflow closure is in progress; no new closure proof was supplied to this appendage. This author does not poll or infer closed state. Root will preserve/close and request scoped rereview separately."
+  },
+  "localVerification": "Safe JSON field comparisons only; native IDs/order from primary/proof equal the pinned15. Builtin RAM hashes for this report and exact safe proof bytes only. No localSource/parser/eval/import/compile/syntax/tests/files/deps, Source edits/newcode/candidate/ref/run, log/artifact refetch, runtime/browser/keys/subagents. Only this report immutable blob created and FULL-readback, thenIDLE.",
+  "diagnosticToolingExecuted": true,
+  "sourceBusinessExecuted": false,
+  "localDiagnosticToolingExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
