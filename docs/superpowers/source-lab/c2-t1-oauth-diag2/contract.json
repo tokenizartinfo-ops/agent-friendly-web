@@ -1,0 +1,476 @@
+{
+  "schema": "afw.c2-oauth-independent-diagnostic.contract.v1",
+  "scope": {
+    "kind": "DIAGNOSTIC_ONLY",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "frozenSourceIndex": {
+      "blob": "e20ae5a991a291004c3a8dde098031865c1e4c13",
+      "bytes": 11466,
+      "sha256": "71ca47bfd1f793f7ac6a4738fb6431e20a23dd95a06d3c67728a894f929ed26b"
+    },
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "excluded": "Other18 main cases, green, mutant and regression modes are outside this diagnostic; no excluded result is manufactured."
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-oauth-diag2",
+    "message": "AFW-C2-OWNER-STAGES-OAUTH-DIAGNOSTIC2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-oauth-diagnostic2.yml",
+    "job": "c2-oauth-diagnostic2",
+    "dataPrefix": "docs/superpowers/source-lab/c2-t1-oauth-diag2/",
+    "executionAuthority": "Root gate only; this proposal creates no ref/run."
+  },
+  "transport": {
+    "publicMarker": "AFW_C2_OAUTH_INDEPENDENT_DIAGNOSTIC ",
+    "encoding": "UTF-8",
+    "canonical": "marker + JSON.stringify(report) + LF; no alternate public summary frame, no TAP/error bodies",
+    "artifact": "output/c2-oauth-diagnostic2.json",
+    "artifactBytes": "JSON.stringify(report) + LF",
+    "topOrder": [
+      "schema",
+      "context",
+      "phase",
+      "SourceQualified",
+      "Task1Pass",
+      "diagnosticCaptureValid",
+      "capture",
+      "operations",
+      "lifecycle",
+      "cases",
+      "auxiliaryEvents",
+      "joins",
+      "custody",
+      "cleanup",
+      "nonclaims"
+    ],
+    "reportSchema": "afw.c2-oauth-independent-diagnostic.v1",
+    "contextOrder": [
+      "repository",
+      "baselineSource",
+      "baselineTree",
+      "sourceIndexHash",
+      "head",
+      "tree",
+      "runId",
+      "runAttempt",
+      "job",
+      "node",
+      "pattern",
+      "diagnosticDriverHash"
+    ],
+    "contextBindings": {
+      "head": "actual GITHUB_SHA, exact git HEAD",
+      "tree": "actual HEAD^{tree}",
+      "runId": "nonzero decimal string",
+      "runAttempt": 1,
+      "node": "v22.23.4",
+      "pattern": "^(C2T1_CONNECTION|C2T1_OAUTH)$",
+      "diagnosticDriverHash": "f95d1abca7ed884dd9345fe1b63ba7182800088baa3ca0f0c47cab48c87902cd"
+    }
+  },
+  "caps": {
+    "jobMinutes": 7,
+    "totalMilliseconds": 330000,
+    "sourceChildMilliseconds": 90000,
+    "preflightMilliseconds": 10000,
+    "hostCommandMilliseconds": 30000,
+    "perNativeTestMilliseconds": 120000,
+    "archiveBytes": 33554432,
+    "childStdoutBytes": 1048576,
+    "childStderrBytes": 65536,
+    "summaryBytes": 24576,
+    "reporterInputChunkCharacters": 4096,
+    "typedFrameBytes": 2048,
+    "operations": 4,
+    "lifecycle": 2,
+    "totalSequencedObservations": 6,
+    "nativeCases": 2,
+    "auxiliaryEvents": 4,
+    "custodyRecords": 8,
+    "custodyFiles": {
+      "min": 2,
+      "max": 8
+    },
+    "errorStackPrivateCharacters": 65536,
+    "errorStackPrivateFrames": 32,
+    "line": {
+      "min": 1,
+      "max": 5000
+    },
+    "column": {
+      "min": 1,
+      "max": 16384
+    }
+  },
+  "driver": {
+    "path": "oauth-independent-driver.test.mjs",
+    "body": {
+      "key": "diag2Driver",
+      "bytes": 2609,
+      "sha256": "f95d1abca7ed884dd9345fe1b63ba7182800088baa3ca0f0c47cab48c87902cd",
+      "blob": "9b4ba6d899d4b4218ec1da676c7c8140511d2eb5",
+      "fullReadback": true
+    },
+    "actualImport": "./test/fixtures/finite-coupled-native.mjs",
+    "topology": "Global after registered before sequential top-level await observe(CONNECTION), then await observe(OAUTH); observe is async and returns native test() promise. No eager registration or parent test wrapping.",
+    "workBodies": {
+      "C2T1_CONNECTION": "w=await createFiniteCoupledOwnerWorld(); await w.approve(\"connection\"); assert.deepEqual(await w.counts(),{upload:1,activation:1,receipts:1});",
+      "C2T1_OAUTH": "await w.oauth();"
+    },
+    "semantics": "Explicit actionThrew/counterThrew flags distinguish throwing null/undefined from returning. Retain both original thrown values privately. Publish action outcome immediately after action try/catch BEFORE independent counter await. Always then call the original expression w?await w.counts():null; returned counter expression is observed, never default counters. Publish actual counter outcome. Rethrow exact original action value if actionThrew, otherwise actual counter value if counterThrew. The unchanged precondition assert remains before action; failure there yields incomplete observations and invalid capture.",
+    "after": "Emit entered, invoke original await w?.close(), emit close-returned or close-threw, rethrow exact original close value using explicit closeThrew flag. After failure is auxiliary and cannot replace a retained action value. No counter or close value is swallowed."
+  },
+  "operation": {
+    "marker": "AFW_C2_OAUTH_OPERATION ",
+    "schema": "afw.c2-oauth-operation.v1",
+    "order": [
+      "schema",
+      "sequence",
+      "id",
+      "operation",
+      "status",
+      "error",
+      "sanitized"
+    ],
+    "sequence": "Safe integer1..6 shared with lifecycle; frames accepted only contiguous actual order starting1. No fabricated missing record.",
+    "id": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH"
+    ],
+    "operation": [
+      "action",
+      "counter"
+    ],
+    "status": [
+      "returned",
+      "threw"
+    ],
+    "error": "null exactly for returned; typed Error projection exactly for threw, including unavailable for non-Error thrown values.",
+    "sanitized": "boolean; must true for valid capture",
+    "orderIgnoringLifecycle": [
+      "C2T1_CONNECTION/action",
+      "C2T1_CONNECTION/counter",
+      "C2T1_OAUTH/action",
+      "C2T1_OAUTH/counter"
+    ]
+  },
+  "lifecycle": {
+    "marker": "AFW_C2_OAUTH_LIFECYCLE ",
+    "schema": "afw.c2-oauth-lifecycle.v1",
+    "order": [
+      "schema",
+      "sequence",
+      "hook",
+      "driverPhase",
+      "status",
+      "error",
+      "sanitized"
+    ],
+    "hook": "after",
+    "status": [
+      "entered",
+      "close-returned",
+      "close-threw"
+    ],
+    "expected": "Exactly entered then close-returned|close-threw; interleaving with operations is ACTUALLY OBSERVED, never required to be after OAuth. Sequence reconstructs total driver order.",
+    "error": "null for entered or close-returned; typed projection for close-threw; sanitized true required",
+    "driverPhase": [
+      "initial",
+      "connection-action",
+      "connection-counter",
+      "between-cases",
+      "oauth-action",
+      "oauth-counter",
+      "complete"
+    ],
+    "phaseSemantics": "Actual synchronous driver variable snapshot at after frame emission. Set immediately before each action/counter call; after each counter observation sets between-cases for CONNECTION or complete for OAUTH. close-returned with between-cases establishes actual close settled before OAuth work invocation; oauth-action means closure settled while that actual action was in progress. Sequence alone only orders outcomes, not invocation starts."
+  },
+  "native": {
+    "marker": "AFW_C2_OAUTH_EVENT ",
+    "schema": "afw.c2-oauth-event.v1",
+    "order": [
+      "schema",
+      "id",
+      "status",
+      "casePhase",
+      "skip",
+      "todo",
+      "definition",
+      "error",
+      "sanitized"
+    ],
+    "ids": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH"
+    ],
+    "status": [
+      "pass",
+      "fail"
+    ],
+    "casePhase": [
+      "connection",
+      "oauth",
+      null
+    ],
+    "definition": "null for diagnostic driver outside frozen13 whitelist; positions from thrown errors may identify only frozen13.",
+    "auxiliary": "id:null; valid complete capture admits zero unless after close-threw, then exactly one native fail matching that projected after error. Unknown extra events invalidate.",
+    "join": "For each pair, native event must fail with the same canonical projected Error as first thrown action, else thrown counter; if neither threw it must pass with null error. Case order exactly CONNECTION then OAUTH. No skip/todo/extra/missing."
+  },
+  "errorProjection": {
+    "order": [
+      "kind",
+      "code",
+      "position",
+      "sitePhase",
+      "httpActual",
+      "httpExpected",
+      "booleanActual",
+      "booleanExpected"
+    ],
+    "kind": [
+      "Error",
+      "TypeError",
+      "AssertionError",
+      "SyntaxError",
+      "RangeError",
+      "AbortError",
+      "other",
+      "unavailable"
+    ],
+    "code": [
+      null,
+      "ERR_ASSERTION",
+      "ERR_TEST_FAILURE",
+      "ENOENT",
+      "EACCES",
+      "EPERM",
+      "ERR_MODULE_NOT_FOUND",
+      "ETIMEDOUT",
+      "ERR_INVALID_ARG_TYPE",
+      "ERR_STREAM_PREMATURE_CLOSE",
+      "other"
+    ],
+    "position": "null or exactly {fileId,line,column}; fileId whitelist13 below; stack consumed privately, never emitted.",
+    "sitePhase": [
+      null,
+      "oauth-context",
+      "oauth-kv",
+      "oauth-client-registration",
+      "oauth-get",
+      "oauth-post",
+      "oauth-sdk-observation"
+    ],
+    "siteMapping": "S08 line62=context,63=kv,64=client-registration,65..66=get,67..68=post,69=sdk-observation; all other positions sitePhase:null.",
+    "http": "null or integer100..599, only assertion errors whose expected value is200 or302 admit HTTP actual/expected.",
+    "boolean": "null or actual boolean from assertion Error fields.",
+    "nonErrorThrows": "unavailable kind with other fields null and sanitized:true; status remains threw. Sanitizer-access failures give same opaque projection with sanitized:false, which invalidates capture. Native wrapper is unwrapped using own cause presence, preserving null/undefined causes.",
+    "nativeReconstruction": "Driver projectThrown requires util.types.isNativeError on the exact original value. Reporter projectNativeFailure unwraps own cause, then admits native Error or instanceof Error reconstruction: exact Node22.23.4 internal/error_serdes.js :167..178 reconstructs via ObjectCreate(ctor.prototype, properties), so brand alone is insufficient. Plain non-Error thrown values project unavailable. Accessor failure yields sanitized:false. Same field projector and strict canonical join prevent a mismatch from qualifying capture."
+  },
+  "acceptance": {
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "diagnosticCaptureValid": "Context admitted; complete normal exit0|1/no signal/no capture error/stderr0; canonical bounded protocol; exactly4 ordered operation observations +2 sequenced after observations +2 ordered native events; every projection sanitized; exact native first-thrown join; after auxiliary join; native exit0 if all native pass else1; actual UID/GID/group/lo custody/preflight/owned cleanup verified. A real failed action may yield valid diagnostic capture. A timeout/hang/incomplete pair is NEVER valid; actual accepted partial frames remain in report.",
+    "joinsOrder": [
+      "operationOrderValid",
+      "lifecycleValid",
+      "nativeJoinValid",
+      "exitJoinValid"
+    ],
+    "phase": [
+      "admission",
+      "materialize",
+      "custody-preflight",
+      "connection-oauth",
+      "custody-observation"
+    ],
+    "captureOrder": [
+      "exitCode",
+      "signal",
+      "errorKind",
+      "complete",
+      "stdout",
+      "stderr"
+    ],
+    "signal": [
+      "none",
+      "SIGTERM",
+      "SIGKILL",
+      "SIGABRT",
+      "SIGSEGV",
+      "SIGINT",
+      "SIGHUP",
+      "SIGPIPE",
+      "other"
+    ],
+    "errorKind": [
+      "none",
+      "timeout",
+      "buffer-limit",
+      "spawn-enoent",
+      "spawn-eacces",
+      "spawn-eperm",
+      "spawn-other"
+    ],
+    "bytesHash": "null when unavailable, else {bytes:nonnegative integer,sha256:64 lowercase hex}; actual captured stdout/stderr only, never last successful inherited snapshot.",
+    "failure": "No positive fallback receipt. Runner output is diagnostic only; incomplete retained data cannot qualify Source."
+  },
+  "custody": "Reuse exact verified guard f84c0fe47eaf386d9f0a4ae3e300d7b738972450 and preflight d311f579e95ab64a5f2d897d6c40f1fce784e8e2 unchanged. sudo env -i -> unshare --net -> only lo up -> setpriv to exact nonroot parent UID/GID, clear supplemental groups, no-new-privs. Explicit child env only; no ambient tokens. npm ci fixed lock beforehand separate from isolated tests. Probe ownership/removal + final owned-temp cleanup required. No chown/chmod/user/group/policy mutation.",
+  "whitelist": [
+    {
+      "fileId": "S00",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs"
+    },
+    {
+      "fileId": "S01",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs"
+    },
+    {
+      "fileId": "S02",
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs"
+    },
+    {
+      "fileId": "S03",
+      "path": "worker/mcp-own/finite.mjs"
+    },
+    {
+      "fileId": "S04",
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs"
+    },
+    {
+      "fileId": "S05",
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs"
+    },
+    {
+      "fileId": "S06",
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs"
+    },
+    {
+      "fileId": "S07",
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs"
+    },
+    {
+      "fileId": "S08",
+      "path": "test/fixtures/finite-coupled-native.mjs"
+    },
+    {
+      "fileId": "S09",
+      "path": "test/fixtures/finite-first-connection-publication.mjs"
+    },
+    {
+      "fileId": "S10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs"
+    },
+    {
+      "fileId": "S11",
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs"
+    },
+    {
+      "fileId": "S12",
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs"
+    }
+  ],
+  "frozenSourcePins": [
+    {
+      "fileId": "S00",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "fileId": "S01",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "fileId": "S02",
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "fileId": "S03",
+      "path": "worker/mcp-own/finite.mjs",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "fileId": "S04",
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "fileId": "S05",
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "fileId": "S06",
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "fileId": "S07",
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "blob": "db7f97301bfac415da4c66463439c576adf0bbfb",
+      "bytes": 2462,
+      "sha256": "7f527179f32ab56c3a430c1180002af8d0e5d5fadd2608559f719c980d37cbb6"
+    },
+    {
+      "fileId": "S08",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "blob": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+      "bytes": 14244,
+      "sha256": "029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318"
+    },
+    {
+      "fileId": "S09",
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "blob": "ec57e55ea2d8f68c992af26bccca0c6e71a79f96",
+      "bytes": 60636,
+      "sha256": "092a1d8dd44b99a16e522f09234a2b0f4bf62e6575ac99664be516fc7673920d"
+    },
+    {
+      "fileId": "S10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+    },
+    {
+      "fileId": "S11",
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "fileId": "S12",
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    }
+  ],
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
