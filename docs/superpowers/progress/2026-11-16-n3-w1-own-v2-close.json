@@ -1,0 +1,49 @@
+{
+  "schema": "AFW-N3-W1-OWN-V2-CLOSE-READBACK/1",
+  "head": "a185dd73bf8063bec063d6d5043706f54c1c3003",
+  "tree": "fb9bcedb7770ceb959594aae183d78720f00e99d",
+  "parent": "bbce1f93f03bf959ff96e1799a6703e68c64ca38",
+  "branch": "lab/afw-c2-own-receiver-20261116-notices-n3-firstlimit-w1-v2",
+  "originals": 3203,
+  "leaves": 3230,
+  "workflowRemoved": true,
+  "reviewPending": true,
+  "SourceExecuted": false,
+  "verified": true,
+  "closeHeadRuns": 0,
+  "MainAndHistoricalUnchanged": true,
+  "receiptEntries": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/actual-observation.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b681b006659a4cb3c8e6170f343d5f491d934597"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3-firstlimit-w1-v2/closed.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "14356a6c92eadb55674fbf474459b0c981007d53"
+    }
+  ],
+  "commandWindow": {
+    "step": 4,
+    "start": "2026-11-16T19:46:08Z",
+    "end": "2026-11-16T19:46:09Z",
+    "proofStart": "2026-11-16T19:46:09.671Z",
+    "proofEnd": "2026-11-16T19:46:09.913Z",
+    "apiPrecision": "API step endpoints are second-resolution; end-exclusive upper bound is stated completed_at+1000ms; no timestamps edited.",
+    "endExclusiveMs": 1794858370000
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
