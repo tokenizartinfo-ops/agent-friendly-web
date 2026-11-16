@@ -1,0 +1,32 @@
+{
+  "schema": "AFW-C2-FULL-SOURCE-FIXTURE-FIX1-CLOSE-READBACK/1",
+  "atUTC": "2026-11-16 22:07:55 UTC",
+  "branch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+  "expected": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+  "head": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+  "tree": "dfbf2ebfa8ec108252a4f88f59a9a16fac26b26d",
+  "receipt": "2c288ddc5c21779e4f19b34edbdfbbcf08c215e2",
+  "testedHead": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+  "refReadback": true,
+  "originalsPreserved": 3203,
+  "sourceAdditionsRetained": 24,
+  "evidenceAdded": 2,
+  "blobLeaves": 3229,
+  "workflowRemoved": true,
+  "mainHistoricalOwnClosedUnchanged": true,
+  "closeHeadRuns": 0,
+  "primary": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+  "outcome": "91b08d3ea77cd85264fc6f5ada1fd62693c56631",
+  "readbackScope": "Dated immutable tree/commit + current exact refs and branch run history; not continuous monitoring/runtime readback.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
