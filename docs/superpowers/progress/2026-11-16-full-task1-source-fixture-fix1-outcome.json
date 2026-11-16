@@ -1,0 +1,248 @@
+{
+  "schema": "AFW-C2-FULL-SOURCE-FIXTURE-FIX1-UNQUALIFIED-OUTCOME/1",
+  "project": "AFW",
+  "run": 43965725604,
+  "attempt": 1,
+  "job": 133644531547,
+  "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+  "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+  "SourcePlan": "6696d06831328bb52d7245c48347bd8c412b566d",
+  "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+  "result": "UNQUALIFIED_INCOMPLETE",
+  "fullReceipt": false,
+  "artifactCount": 0,
+  "fullReceiverAdmission": false,
+  "observedSourceFrames": [
+    {
+      "marker": "AFW_C2_SOURCE_SYNTHETIC_V2_FIX1",
+      "value": {
+        "schema": "afw.c2-source-synthetic.v2",
+        "context": {
+          "repository": "tokenizartinfo-ops/agent-friendly-web",
+          "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+          "proposalIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+          "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+          "runId": "43965725604",
+          "runAttempt": 1,
+          "job": "c2-source-lab-fixture-fix1",
+          "node": "v22.23.4"
+        },
+        "vectorsHash": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+        "accepted": 3,
+        "rejected": 35
+      }
+    },
+    {
+      "marker": "AFW_C2_DEPENDENCY_CONTROL",
+      "value": {
+        "schema": "afw.c2-bootstrap-dependency-control.v1",
+        "id": "BOOTSTRAP_DEPENDENCY_ABSENT",
+        "status": "pass",
+        "observation": "EXPECTED_ENOENT"
+      }
+    },
+    {
+      "marker": "AFW_C2_SOURCE_MODE_V2",
+      "value": {
+        "schema": "afw.c2-source-mode.v2",
+        "context": {
+          "repository": "tokenizartinfo-ops/agent-friendly-web",
+          "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+          "proposalIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+          "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+          "runId": "43965725604",
+          "runAttempt": 1,
+          "job": "c2-source-lab-fixture-fix1",
+          "node": "v22.23.4"
+        },
+        "observation": {
+          "mode": "baseline-red",
+          "selectionHash": "24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa",
+          "verdict": "qualified",
+          "code": "OK",
+          "exitCode": 1,
+          "totals": {
+            "plan": 3,
+            "tests": 3,
+            "suites": 0,
+            "pass": 2,
+            "fail": 1,
+            "cancelled": 0,
+            "skipped": 0,
+            "todo": 0
+          },
+          "cases": [
+            {
+              "id": "C2T1_CONNECTION",
+              "status": "pass",
+              "phase": "connection",
+              "counters": {
+                "upload": 1,
+                "activation": 1,
+                "receipts": 1
+              },
+              "code": "OK"
+            },
+            {
+              "id": "C2T1_OAUTH",
+              "status": "pass",
+              "phase": "oauth",
+              "counters": {
+                "upload": 1,
+                "activation": 1,
+                "receipts": 1
+              },
+              "code": "OK"
+            },
+            {
+              "id": "C2T1_NOTICES",
+              "status": "fail",
+              "phase": "notices",
+              "counters": {
+                "upload": 1,
+                "activation": 1,
+                "receipts": 1
+              },
+              "code": "TEST_FAILED"
+            }
+          ],
+          "witness": {
+            "caseId": "C2T1_NOTICES",
+            "phase": "notices",
+            "failureType": "testCodeFailure",
+            "code": "ERR_ASSERTION",
+            "operator": "strictEqual",
+            "definitionFile": "S07",
+            "definitionBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+            "definitionLine": 6,
+            "actionLine": 36,
+            "fixtureFile": "S08",
+            "fixtureBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+            "function": "choose",
+            "line": 18,
+            "method": "GET",
+            "route": "/connections/finite-prepare",
+            "boundary": "before-form-parse-and-post",
+            "actual": 503,
+            "expected": 200
+          }
+        }
+      }
+    },
+    {
+      "marker": "AFW_C2_SOURCE_MODE_V2",
+      "value": {
+        "schema": "afw.c2-source-mode.v2",
+        "context": {
+          "repository": "tokenizartinfo-ops/agent-friendly-web",
+          "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+          "proposalIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+          "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+          "runId": "43965725604",
+          "runAttempt": 1,
+          "job": "c2-source-lab-fixture-fix1",
+          "node": "v22.23.4"
+        },
+        "observation": {
+          "mode": "proposal-green",
+          "selectionHash": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5",
+          "verdict": "unqualified",
+          "code": "CAPTURE_INVALID",
+          "exitCode": null,
+          "totals": null,
+          "cases": [],
+          "witness": null
+        }
+      }
+    },
+    {
+      "marker": "AFW_C2_SOURCE_DIAGNOSTIC_V2",
+      "value": {
+        "schema": "afw.c2-source-diagnostic.v2",
+        "context": {
+          "repository": "tokenizartinfo-ops/agent-friendly-web",
+          "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+          "proposalIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+          "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+          "runId": "43965725604",
+          "runAttempt": 1,
+          "job": "c2-source-lab-fixture-fix1",
+          "node": "v22.23.4"
+        },
+        "phase": "proposal-green",
+        "frontier": "parser",
+        "code": "CAPTURE_INVALID",
+        "capture": {
+          "exitCode": 1,
+          "signal": "none",
+          "errorKind": "timeout",
+          "stdout": {
+            "bytes": 24395,
+            "sha256": "db94fcb9537a88318ed15bb15c09bf217f566b1b5b7a1287020b9789a5fc2aa8"
+          },
+          "stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    },
+    {
+      "marker": "AFW_C2_SOURCE_CUSTODY_V2",
+      "value": {
+        "schema": "afw.c2-source-custody.v2",
+        "context": {
+          "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+          "runId": "43965725604",
+          "runAttempt": 1,
+          "job": "c2-source-lab-fixture-fix1",
+          "proposalIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7"
+        },
+        "parentNonRoot": true,
+        "preflightOwned": true,
+        "preflightRemoved": true,
+        "checkedLaunches": 4,
+        "checkedProcesses": 4,
+        "uidGidGroupsLoopbackMatched": true,
+        "ownRootVerified": true,
+        "ownTempRemoved": true
+      }
+    }
+  ],
+  "observedSourceReports": {
+    "syntheticPositive": 3,
+    "syntheticNegative": 35,
+    "dependency": "EXPECTED_ENOENT",
+    "baseline": "qualified RED3: 2pass/1expectedfail",
+    "green": "unqualified CAPTURE_INVALID; actual capture errorKind timeout exit1/no signal/stdout24395B/SHA256db94fcb9537a88318ed15bb15c09bf217f566b1b5b7a1287020b9789a5fc2aa8/stderr0",
+    "remaining": "No mutant/regression frames or final receipt observed",
+    "custody": "Reports4launches/4processes, parentNonRoot/UIDGIDGroups/loopback/preflight/ownRoot/temp removal true. This partial report is not the required6launch/6..24 complete qualification."
+  },
+  "limits": "Original native child180s/case120s/total330s/job7min unchanged. No replay, cap increase or accepted-case stitching.",
+  "unknown": [
+    "Green native per-case outcomes/totals/first failure/last accepted case are absent from exported evidence",
+    "Whether timeout reflects pending physical work, test harness/cleanup or another cause",
+    "Mutant/regressions coverage in this occurrence"
+  ],
+  "interpretation": "Parent reports failure at capture/parser boundary. Do not label CAPTURE_INVALID a proven parser implementation bug; timeout is an observed capture condition. Expected BASE503 is the fixed RED control, not renewed historical provider diagnosis.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
