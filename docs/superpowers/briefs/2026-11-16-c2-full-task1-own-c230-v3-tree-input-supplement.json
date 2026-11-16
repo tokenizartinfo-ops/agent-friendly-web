@@ -1,0 +1,37 @@
+{
+  "schema": "AFW-C2-FULL-C230-OWN-INPUT-SUPPLEMENT/1",
+  "atUTC": "2026-11-16 20:55:21 UTC",
+  "rootRuling": "e2ee2e3a8e3f554f014d79e02115250a21daa82e",
+  "inputKeys": [
+    "run",
+    "jobs",
+    "commit",
+    "tree",
+    "transport",
+    "artifact"
+  ],
+  "treeSource": "Raw independent GitHub recursive tree API supplied by Root; not Source receipt or caller-chosen roster",
+  "treeChecks": {
+    "sha": "equal commit.tree.sha and trustedExpected.tree",
+    "truncated": false,
+    "maxEntries": 8192,
+    "maxUTF8Bytes": 4194304,
+    "uniquePaths": true,
+    "exact25": "All fixed c230 paths typeblob/mode100644/GitSHA; bytes equal fixed admission when actual API carries size (expected blob entries do)",
+    "noSourceEval": true
+  },
+  "staticRootGate": "Still independently checks BASE3203unchanged+exact25new=3228blobleaves/modes and all Source byte/hash pins before any Source activation; runtime receiver does not mint Source provenance/authentication from arbitrary JSON.",
+  "fixtureMethod": "Seal positive/negative actual-tree-shaped coherent literals/IDs before guards; wrong SHA/truncated/missing/duplicate/old/W1/path/mode/type/blob/size disagreements reject. Compact shared DATA fixtures permitted, with independent expected values.",
+  "SourceWireChanged": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
