@@ -1,0 +1,122 @@
+{
+  "schema": "afw.c2-green20-frontier-diag1-negative-wire-design.v1",
+  "fixtureOnly": true,
+  "schemaPin": {
+    "role": "schema",
+    "blob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "bytes": 21200,
+    "sha256": "a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3",
+    "fullReadback": true
+  },
+  "fullRejectedPairs": [
+    {
+      "id": "NX_N2_COHERENT_PASS_WITH_THROW",
+      "positiveBase": "PX_EXIT1_THROW_THEN_TORN",
+      "expected": "REJECT",
+      "why": "C2T1_OAUTH has observed action.throw seq6; matching embedded/native PASS violates N2 even when artifact and shadows are repaired. Both the failing and passing TAP fixture digests follow their respective actual synthetic byte strings.",
+      "custodyLine": "AFW_C2_GREEN20_FRONTIER_DIAG1_CUSTODY {\"schema\":\"afw.c2-green20-frontier-diag1-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"900001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true}\n",
+      "outcomeLine": "AFW_C2_GREEN20_FRONTIER_DIAG1_OUTCOME {\"schema\":\"afw.c2-green20-frontier-diag1-outcome.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"900001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"diagnosticCollectionComplete\":true,\"nativeQualification\":false,\"sourceReads\":{\"beforeSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"],\"afterSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"]},\"observation\":{\"capture\":{\"exitCode\":1,\"signal\":\"none\",\"errorKind\":\"none\",\"stdout\":{\"bytes\":105,\"sha256\":\"5064264072cd5d7ca5450cd582726e7c817060443f740be6b03ece19fc8f27f0\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}},\"journal\":{\"bytes\":888,\"sha256\":\"2d3cf4c4417965941c6d81fa333ccde84824171d7aa4e65af1c7cc24e59be7d0\",\"stable\":true,\"recorderFaultObserved\":false},\"witness\":{\"integrity\":\"torn\",\"frontier\":\"unknown\",\"events\":[{\"sequence\":1,\"elapsedMs\":10,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":2,\"elapsedMs\":15,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":3,\"elapsedMs\":16,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":4,\"elapsedMs\":17,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":5,\"elapsedMs\":18,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":6,\"elapsedMs\":22,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"throw\",\"error\":{\"name\":\"AssertionError\",\"code\":\"ERR_ASSERTION\",\"site\":{\"file\":\"S08\",\"line\":18,\"column\":118}}},{\"sequence\":7,\"elapsedMs\":23,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":8,\"elapsedMs\":24,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}],\"openCase\":null,\"afterOpen\":false},\"unknownReason\":\"JOURNAL_TORN\",\"firstThrowSequence\":6,\"native\":{\"integrity\":\"prefix\",\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\"}]}},\"custody\":{\"schema\":\"afw.c2-green20-frontier-diag1-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"900001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true},\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "artifact": "Exactly the mutated outcome JSON body plus LF. Recompute outer digest/CRC/listing consistently; never reuse an inconsistent stale artifact as the only reason for rejection.",
+      "nativeStdoutFixture": "TAP version 13\n# Subtest: C2T1_CONNECTION\nok 1 - C2T1_CONNECTION\n# Subtest: C2T1_OAUTH\nok 2 - C2T1_OAUTH\n"
+    },
+    {
+      "id": "NX_S08_BEFORE_AND_AFTER_LEGACY",
+      "positiveBase": "PX_TIMEOUT_OPEN",
+      "expected": "REJECT",
+      "why": "Both snapshots agree with each other but use stale S08 rather than sealed overlay.",
+      "custodyLine": "AFW_C2_GREEN20_FRONTIER_DIAG1_CUSTODY {\"schema\":\"afw.c2-green20-frontier-diag1-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"900001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true}\n",
+      "outcomeLine": "AFW_C2_GREEN20_FRONTIER_DIAG1_OUTCOME {\"schema\":\"afw.c2-green20-frontier-diag1-outcome.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"900001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"diagnosticCollectionComplete\":true,\"nativeQualification\":false,\"sourceReads\":{\"beforeSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"],\"afterSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"]},\"observation\":{\"capture\":{\"exitCode\":1,\"signal\":\"none\",\"errorKind\":\"timeout\",\"stdout\":{\"bytes\":65,\"sha256\":\"547ecc94c619c62e30da5fe68970f6a31bfe5e3e1e6066793be89fdd78738692\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}},\"journal\":{\"bytes\":505,\"sha256\":\"f4a690ba8defab33cf52d52bd723835a1e052835ab8969129f0b5930d3895884\",\"stable\":true,\"recorderFaultObserved\":false},\"witness\":{\"integrity\":\"prefix\",\"frontier\":\"action\",\"events\":[{\"sequence\":1,\"elapsedMs\":10,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":2,\"elapsedMs\":15,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":3,\"elapsedMs\":16,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":4,\"elapsedMs\":17,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":5,\"elapsedMs\":18,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}],\"openCase\":{\"id\":\"C2T1_OAUTH\",\"operation\":\"action\"},\"afterOpen\":false},\"unknownReason\":null,\"firstThrowSequence\":null,\"native\":{\"integrity\":\"prefix\",\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\"}]}},\"custody\":{\"schema\":\"afw.c2-green20-frontier-diag1-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"900001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true},\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+      "artifact": "Exactly the mutated outcome JSON body plus LF. Recompute outer digest/CRC/listing consistently; never reuse an inconsistent stale artifact as the only reason for rejection."
+    }
+  ],
+  "validInfraExample": {
+    "given": "Stable identity or atomic read unavailable",
+    "line": "AFW_C2_GREEN20_FRONTIER_DIAG1_FAULT {\"schema\":\"afw.c2-green20-frontier-diag1-fault.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"900001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"phase\":\"journal\",\"reason\":\"JOURNAL_INVALID\",\"diagnosticCollectionComplete\":false,\"nativeQualification\":false,\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n",
+    "successFrameCount": 0,
+    "artifactCount": 0,
+    "conclusion": "failure; no diagnostic collection admission"
+  },
+  "additionalRelationalCuts": [
+    [
+      "NX_N1_TIME",
+      "Copy otherwise correct pair outside actual command-step time or move header across step window.",
+      "REJECT"
+    ],
+    [
+      "NX_EMBEDDED_CUSTODY",
+      "Change checkedProcesses=3 in embedded custody only, or change both to 3 when launch counts are 1+1.",
+      "REJECT"
+    ],
+    [
+      "NX_OWN_LEASE",
+      "Replay head/run/attempt for old green-diag1, its 3-launch custody, or W1 logical job.",
+      "REJECT"
+    ],
+    [
+      "NX_FRAMING",
+      "Extra/reordered/duplicate marker, duplicate JSON key, reordering, CRLF, two frames on one physical line or product payload pasted into log.",
+      "REJECT"
+    ],
+    [
+      "NX_TORN_CERTAINTY",
+      "Set frontier=action or openCase=... on stable torn tail, coherently re-encode artifact.",
+      "REJECT"
+    ],
+    [
+      "NX_EMPTY_ZERO",
+      "Treat empty journal as all-settled or zero actions completed in a past/full run.",
+      "REJECT"
+    ],
+    [
+      "NX_ALIAS_BINDING",
+      "Change D07 alias link/name or manifest hash in expected target; wrong producer alias mapping is admission failure.",
+      "REJECT"
+    ],
+    [
+      "NX_ALIAS_ROW",
+      "Stable journal includes an out-of-allowlist site, preceded by actual canonical rows; output claims bad site/known frontier.",
+      "REJECT; only prior valid prefix and JOURNAL_INVALID_RECORD may be collected"
+    ],
+    [
+      "NX_NATIVE_NORMAL",
+      "Non-timeout signal or missing/overbound streams presented as collection complete.",
+      "REJECT"
+    ],
+    [
+      "NX_FAULT_SHADOW",
+      "Success-looking markers accompanying a FAULT/nonzero job/nonunique artifact.",
+      "REJECT"
+    ],
+    [
+      "NX_ZIP",
+      "Digest not computed on raw bytes; trailing deflate bytes/second member/name traversal/CRC mismatch; or LF body mismatch.",
+      "REJECT"
+    ],
+    [
+      "NX_FIRST_THROW",
+      "Label the later failing counter as first when earlier action.throw was retained.",
+      "REJECT"
+    ],
+    [
+      "NX_TORN_SHA",
+      "A longer torn journal reports rawBytes<=validatedPrefixBytes, or claims a complete journal with SHA different from recomputed prefix SHA.",
+      "REJECT deterministic length or complete-hash contradictions. A longer proper torn tail's raw digest remains a producer observation."
+    ],
+    [
+      "NX_CLAIMS",
+      "Set nativeQualification or any frozen flag true after child exit0/20 native PASS.",
+      "REJECT"
+    ],
+    [
+      "NX_PHASE_REASON",
+      "Set mandatory FAULT context to null after admission, or wrong phase/reason pair.",
+      "REJECT"
+    ]
+  ],
+  "positiveFrontierCoverage": [
+    "An AFTER interval can overlap earliest open action or count; preserve both intervals in actual chronological order.",
+    "Complete 82 canonical rows, timeout + all returned gives post-teardown-process-exit. If any action, count or after throws, label post-settlement-process-exit; normal native completion yields all-settled. No specific outstanding physical handle inferred.",
+    "Stable observed recorder fault with valid preceding rows => ambiguous/RECORDER_FAULT; native TAP prefix remains independently reportable. Stable malformed record without writer-fault => JOURNAL_INVALID_RECORD, same suppression of openCase/afterOpen.",
+    "Use byte count boundaries exactly: maximum body=24576 allowed, plus one LF payload=24577 allowed; body=24577 or a second payload LF rejected. Check transport cap at the independent boundary layer."
+  ]
+}
