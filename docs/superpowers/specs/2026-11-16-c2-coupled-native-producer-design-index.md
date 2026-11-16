@@ -2,12 +2,14 @@
 
 AFW / tokenizartinfo-ops/agent-friendly-web / GitHub Source DATA / origin https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web. Resource: two UTF-8 Markdown design blobs and this unattached index; authorized action: bounded public GitDB reads + design DATA blobs. Rollback: abandon these blobs. No product/ref/Core/Main/PR/run/runtime action.
 
-Logical document: docs/superpowers/specs/2026-11-16-c2-coupled-native-producer-design.md. Read in order; segment 2 continues segment 1.
+Logical document: docs/superpowers/specs/2026-11-16-c2-coupled-native-producer-design.md. Read in order. Revised segment 2 integrates the alarm builder ruling and its compiled crash-cut manifest; it supersedes the earlier segment 2. Segment 1 is unchanged.
 
 | Segment | Git blob | UTF-8 bytes | SHA-256 |
 |---|---|---:|---|
 | 1. Owner continuations, factual finite_prearm, Setup and material | 64c9a109750940d820a20c9dd1dcedcddc64ee01 | 24370 | 639c79749132eb04378323810ddced835f907a9c97558b32759381de1b79165b |
-| 2. Original native parent, fixed guard, alarm handoff and integration | 9f5a03c2b6f8e99bf7340d2890ddb94ccb15bd06 | 24200 | 39236540433dd6a5ccc588a4c0e016181626d9c38def3ed862f912d840178ba7 |
+| 2. Original native parent, fixed guard, alarm handoff and integration | cd0296158941515eb6839faf7a8de5ea608f330c | 24558 | 4f2051454b5e7923d168300245b5e9d6cce5420df72c60c499872d73cdbee885 |
+
+Revision evidence: builder question 839fd2949e146faf527521ada15766b6c2a7107c, binding ruling d2f5070a820fcb30db76d4fe68037cfc560f27c7 at Rootdocs 9e41ce52957875cfa6858e11231d5d529b375567. Previous index 1ccf308bb31727af1a00a44738277a653556483c (3696 B, SHA-256 f92c0b40d7c933ce55a0794f31df7f3ee10f867ecc09540b83b3bfdec6702739); previous segment 2 9f5a03c2b6f8e99bf7340d2890ddb94ccb15bd06 (24200 B, SHA-256 39236540433dd6a5ccc588a4c0e016181626d9c38def3ed862f912d840178ba7). Narrow recheck: HEAD transfer, first dispatch before factory, reservation of every attempt including last. Require fallback at both requested cuts; no SEND on uncertain/duplicate and no normal return obscuring a precommit failure. No code or tests executed.
 
 Exact brief 2d8c014043f48c72ce3ce79aeeb7b581c0bc1e12; closed product fc65eea04e956919735f2a965154d2456ced288c/tree 70238dca64e2195d91bd2b088916f841ea7d6494; Core 3201 / SHA256 aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703; Main 0c9c475b3ebaa970fc11d628b40e50a90cceb727. These are the design's immutable inputs. PH 7eb8f287; OP 152e730f; SF c2821f1b; SET 34285e7c; PT fa1cb012; CTL 18996dc3; CH b77bba63; RED 6ce7798e; WR c0e3551c; stage scope 068d35c2. Exact additional pins: closed-prearm DATA 504fa988c4e6f5db0e4d21c3da32cb69017bc2e8, full configuration 57ce0b4eeffadcf7e34946da3444e88b2bb437ee, initial alarm 0a04ae3a4d74c2c7939b1654683054b1d5d751d4, owner cleanup 1a5a2583d266179cdd89f799c64199f29044fec5, finite guard 0e4a6f059c5e094409473f99fead676fcf92cd6d, compiled QA finite mount 1f1e5b95776b189fc8d952930467e6ff99c233c3, M mount 15441b6c0c779f733db65a3b59a3a9e1738d19dc, SQL monitor writer 703b9d3cbb04bc5effff3f4ef8276cdb4cb95803. Other full existing Source aliases: 0c3ce18b3765bf1ed5148c9e846c2fe2e67931ef, confirmed against the closed tree.
 
