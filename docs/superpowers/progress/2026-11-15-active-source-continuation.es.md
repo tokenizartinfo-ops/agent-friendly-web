@@ -1,35 +1,56 @@
-# AFW active Source continuation
-
-FIX3 ONE-USE ACTIVO.
+# AFW continuation — closed Source, observed phase71
 
 {
-  "prepared": {
-    "commit": "ef41b65dd5402092a6de3977532a8fffcac59d81",
-    "activeTree": "ff3691c4bedcd855b66ba69485ce8f20d920e537",
-    "inactiveTree": "45850c8f684161854f6ec636149faa3e5f1e5bb3",
-    "parent": "b26843c72dccc9bdcf9a9771e59faeff077c6461",
-    "F7": "54aa12557867127bf85d5707845e400a19b662d5",
-    "SAME": "bb58ba7ebe5bcca0cd27e4a2ec0050f220460225",
-    "oneUseMessage": "AFW-Q1-SERIAL-LAB-V2-FIX3-ONEUSE-20261115",
-    "SourceReleased": false
+  "Source": "7ca59cc55e3f2b66212c083d1e82215a988ef7ef",
+  "tree": "4a3f2c5fd49d580c15418a7fdec1b77019fb9c05",
+  "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+  "SAME": {
+    "bytes": 2594126,
+    "sha256": "3f9c005127940fc259d2c2e0dc5f290da3a5932e1de870ba2ff2c6952bc06ef1",
+    "blob": "d5291b1e807d193765edfc3a257192591ae7f576"
   },
-  "gate": "083cb71b7337ca099bca9a726e514600cb0d76f9",
-  "phaseContract": "b240b62b0c0bf0c0dd74e8621536a70a22272efc",
-  "run": "await identification",
-  "SourceFrozen": true,
-  "rollback": {
-    "parent": "ef41b65dd5402092a6de3977532a8fffcac59d81",
-    "F7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
-    "preserveEntireCandidateSAME": true,
-    "fullActualReceiptBeforeClose": true,
-    "compactAppendMax": 1024,
-    "spareAfterCloseMin": 1024,
-    "fullReadback": "Source/commit/tree/F7/fullSAME/Core/Main/5queues/closedheadruns"
+  "Core": {
+    "leaves": 3201,
+    "bytes": 324448,
+    "sha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703"
   },
-  "allSevenFalse": true,
+  "Main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "readback": "2026-11-16 01:09:04 UTC",
+  "queues": 0,
+  "closedHeadRuns": 0,
+  "pending": null,
+  "active": null,
+  "frozen": false,
+  "fixRound": 3,
+  "actual": {
+    "run": 43783876645,
+    "attempt": 1,
+    "job": 133027042797,
+    "preflight": "failure exit71",
+    "phase": "worker launch/capture/unexpected failure",
+    "otherSteps": "skipped",
+    "canonicalFrames": 0,
+    "actual520": 0,
+    "firstException": "UNKNOWN",
+    "logsConsumed": true
+  },
+  "fullReceipt": "d4e5a0e3ed6855afc4f7c2bc61c4011d45150168",
+  "actualReport": "8c48e2de81c3f0275289c880a3bb9b30067cb723",
+  "reviewer": "/root/serial_v2_task_review",
+  "reviewPackage": "379776bff97622aac76bc5556af9f2f759bd9815",
+  "reviewPending": true,
+  "newStaticExecutionFinding": "8478d5cc9f582f1e3fb437df933b8992c10c7c6a",
+  "findingSummary": "Node22 primary implementation converts string stdin using options.encoding; current encoding buffer is not valid Buffer string encoding. Deterministic static invocation defect consistent with71; actual thrown exception/historicalcause not captured.",
+  "primary": [
+    "https://github.com/nodejs/node/blob/v22.23.4/lib/child_process.js#L829-L847",
+    "https://github.com/nodejs/node/blob/v22.23.4/lib/buffer.js#L450-L460"
+  ],
   "I3Open": true,
+  "C2Held": true,
   "NativeHeld": true,
-  "C2Held": true
+  "providerRuntimeUnread": true,
+  "all7false": true,
+  "ownerActionNeeded": false
 }
 
-No unchanged retry/refetch. Terminal run+job, logsONCE; finite reported phases only, not firstcause. Full receipt Rootdocs beforeclose, originalF7+wholeSAME+compactreceipt<=1024; full readback beforependingnull. Provider/runtime unread; no owneraction.
+No old-run replay/log refetch. Root waiting SAME scoped review3 before round4. Fix-loop requires fresh implementer on more-capable model for4–5; not originalSourceactor. Roundsmax5 sameTask1, noreset. Full history/limits preserved. Correction candidate must retain explicit Buffer stdout/stderr and safe UTF8 stdin; Source local execution/compile/eval prohibited. UpcomingSource-onlyGitHubvalidation, notCF/Nativeruntime.
