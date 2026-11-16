@@ -1,0 +1,32 @@
+{
+  "schema": "afw.c2-notices-n3.root-tooling-fix1-close-proof.v1",
+  "atUTC": "2026-11-16 16:30:50 UTC",
+  "head": "a6e9ef99e73f1ee9f917a098a0d12b8cd6ae6c0e",
+  "tree": "8297a41c390149184f1a1a339cc9de8deb698721",
+  "testedHead": "6822ec45110488b835e46b0d2d9482b06c84dd82",
+  "branch": "lab/afw-c2-source-20261116-notices-n3-controls-fix1",
+  "originals": 3203,
+  "leaves": 3233,
+  "workflowRemoved": true,
+  "primary": "e32ef76d006c139745a7eceea9f3f23716a73e9b",
+  "closeReceipt": "0d6b8b093b96121191b01b3ed3e339c9ef3024fc",
+  "runId": 43905959165,
+  "jobId": 133434721789,
+  "counts": {
+    "pass": 6,
+    "fail": 35,
+    "skip": 0,
+    "todo": 0,
+    "cancel": 0
+  },
+  "closeHeadRuns": 0,
+  "mainAndHistoricalUnchanged": true,
+  "rawLogsConsumedOnce": true,
+  "artifactDownloadedOnce": true,
+  "diagnosticsCanonicalBoundedUnique": 35,
+  "sourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "next": "Original writer fix2 round3/5 under95a51e; same41IDs, no C."
+}
