@@ -1,0 +1,1487 @@
+{
+  "schema": "afw.own-green20.fixture-first-plans.v1",
+  "authority": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+  "syntheticOnly": true,
+  "cases": [
+    {
+      "id": "G20_VALID_action",
+      "expected": "accept",
+      "variant": "action"
+    },
+    {
+      "id": "G20_VALID_count",
+      "expected": "accept",
+      "variant": "count"
+    },
+    {
+      "id": "G20_VALID_between",
+      "expected": "accept",
+      "variant": "between"
+    },
+    {
+      "id": "G20_VALID_overlap",
+      "expected": "accept",
+      "variant": "overlap"
+    },
+    {
+      "id": "G20_VALID_after",
+      "expected": "accept",
+      "variant": "after"
+    },
+    {
+      "id": "G20_VALID_beforeAfter",
+      "expected": "accept",
+      "variant": "beforeAfter"
+    },
+    {
+      "id": "G20_VALID_completeTimeout",
+      "expected": "accept",
+      "variant": "completeTimeout"
+    },
+    {
+      "id": "G20_VALID_completeNormal",
+      "expected": "accept",
+      "variant": "completeNormal"
+    },
+    {
+      "id": "G20_VALID_throwTimeout",
+      "expected": "accept",
+      "variant": "throwTimeout"
+    },
+    {
+      "id": "G20_VALID_afterThrow",
+      "expected": "accept",
+      "variant": "afterThrow"
+    },
+    {
+      "id": "G20_VALID_failReturns",
+      "expected": "accept",
+      "variant": "failReturns"
+    },
+    {
+      "id": "G20_VALID_empty",
+      "expected": "accept",
+      "variant": "empty"
+    },
+    {
+      "id": "G20_VALID_torn",
+      "expected": "accept",
+      "variant": "torn"
+    },
+    {
+      "id": "G20_VALID_invalid",
+      "expected": "accept",
+      "variant": "invalid"
+    },
+    {
+      "id": "G20_VALID_recorder",
+      "expected": "accept",
+      "variant": "recorder"
+    },
+    {
+      "id": "G20_VALID_recorderTorn",
+      "expected": "accept",
+      "variant": "recorderTorn"
+    },
+    {
+      "id": "G20_VALID_missingWorld",
+      "expected": "accept",
+      "variant": "missingWorld"
+    },
+    {
+      "id": "G20_VALID_countThrow",
+      "expected": "accept",
+      "variant": "countThrow"
+    },
+    {
+      "id": "G20_VALID_dualThrow",
+      "expected": "accept",
+      "variant": "dualThrow"
+    },
+    {
+      "id": "G20_VALID_CUSTODY8",
+      "expected": "accept",
+      "patches": [
+        [
+          "set",
+          [
+            "custody",
+            "greenProcesses"
+          ],
+          7
+        ],
+        [
+          "set",
+          [
+            "custody",
+            "checkedProcesses"
+          ],
+          8
+        ]
+      ]
+    },
+    {
+      "id": "G20_VALID_ZIP_DEFLATE",
+      "expected": "accept",
+      "zip": {
+        "method": 8
+      }
+    },
+    {
+      "id": "G20_VALID_ZIP_DD_SIGNED",
+      "expected": "accept",
+      "zip": {
+        "method": 8,
+        "dd": true
+      }
+    },
+    {
+      "id": "G20_VALID_ZIP_DD_UNSIGNED",
+      "expected": "accept",
+      "zip": {
+        "method": 8,
+        "dd": true,
+        "signed": false
+      }
+    },
+    {
+      "id": "G20_VALID_ZIP_DD_MATCH",
+      "expected": "accept",
+      "zip": {
+        "method": 0,
+        "dd": true,
+        "match": true
+      }
+    },
+    {
+      "id": "G20_VALID_ZIP_ORDINARY_TLV",
+      "expected": "accept",
+      "zip": {
+        "localExtra": "feca0300112233",
+        "centralExtra": "feca0000"
+      }
+    },
+    {
+      "id": "G20_VALID_ZIP_STORED_VERSION10",
+      "expected": "accept",
+      "zip": {
+        "version": 10
+      }
+    },
+    {
+      "id": "G20_N2_ACTION_PASS",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "native",
+            "cases",
+            0,
+            "status"
+          ],
+          "pass"
+        ]
+      ],
+      "variant": "throwTimeout"
+    },
+    {
+      "id": "G20_N2_COUNT_PASS",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "native",
+            "cases",
+            0,
+            "status"
+          ],
+          "pass"
+        ]
+      ],
+      "variant": "countThrow"
+    },
+    {
+      "id": "G20_N2_UNKNOWN_LATER_PASS",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "native",
+            "cases",
+            0,
+            "status"
+          ],
+          "pass"
+        ]
+      ],
+      "variant": "recorderTorn"
+    },
+    {
+      "id": "G20_WITNESS_frontier",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "frontier"
+          ],
+          "count"
+        ]
+      ]
+    },
+    {
+      "id": "G20_WITNESS_openCase",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "openCase"
+          ],
+          null
+        ]
+      ]
+    },
+    {
+      "id": "G20_WITNESS_afterOpen",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "afterOpen"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "G20_WITNESS_integrity",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "integrity"
+          ],
+          "complete"
+        ]
+      ]
+    },
+    {
+      "id": "G20_SEQUENCE",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "events",
+            0,
+            "sequence"
+          ],
+          2
+        ]
+      ]
+    },
+    {
+      "id": "G20_ELAPSED_NEG",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "events",
+            0,
+            "elapsedMs"
+          ],
+          -1
+        ]
+      ]
+    },
+    {
+      "id": "G20_FOREIGN_EVENT",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "events",
+            0,
+            "id"
+          ],
+          "FOREIGN"
+        ]
+      ]
+    },
+    {
+      "id": "G20_CLOSE_ON_CASE",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "events",
+            0,
+            "operation"
+          ],
+          "close"
+        ]
+      ]
+    },
+    {
+      "id": "G20_ENTER_ERROR",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "events",
+            0,
+            "error"
+          ],
+          {
+            "name": null,
+            "code": null,
+            "site": null
+          }
+        ]
+      ]
+    },
+    {
+      "id": "G20_FIRST_THROW_NONE",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "firstThrowSequence"
+          ],
+          2
+        ]
+      ]
+    },
+    {
+      "id": "G20_NATIVE_FALSE_EMPTY",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "native",
+            "cases"
+          ],
+          [
+            {
+              "id": "C2T1_CONNECTION",
+              "status": "pass"
+            }
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "G20_RAW_HASH",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "journal",
+            "sha256"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_RAW_LENGTH",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "journal",
+            "bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "G20_STABLE_FALSE",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "journal",
+            "stable"
+          ],
+          false
+        ]
+      ]
+    },
+    {
+      "id": "G20_ZERO_STDERR_HASH",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "capture",
+            "stderr",
+            "sha256"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_SPAWN_KIND",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "capture",
+            "errorKind"
+          ],
+          "spawn-enoent"
+        ]
+      ]
+    },
+    {
+      "id": "G20_NATIVE_SIGNAL",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "capture",
+            "signal"
+          ],
+          "SIGTERM"
+        ]
+      ],
+      "variant": "completeNormal"
+    },
+    {
+      "id": "G20_FIRST_THROW_WRONG",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "firstThrowSequence"
+          ],
+          4
+        ]
+      ],
+      "variant": "dualThrow"
+    },
+    {
+      "id": "G20_THROW_NULL_ERROR",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "events",
+            3,
+            "error"
+          ],
+          null
+        ]
+      ],
+      "variant": "countThrow"
+    },
+    {
+      "id": "G20_PUBLISHED_BAD_SITE",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "events",
+            1,
+            "error",
+            "site"
+          ],
+          {
+            "file": "PRIVATE",
+            "line": 1,
+            "column": 1
+          }
+        ]
+      ],
+      "variant": "throwTimeout"
+    },
+    {
+      "id": "G20_UNKNOWN_REASON_WRONG",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "unknownReason"
+          ],
+          "JOURNAL_TORN"
+        ]
+      ],
+      "variant": "recorderTorn"
+    },
+    {
+      "id": "G20_UNKNOWN_OPEN_CLAIM",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "witness",
+            "openCase"
+          ],
+          {
+            "id": "C2T1_CONNECTION",
+            "operation": "action"
+          }
+        ]
+      ],
+      "variant": "torn"
+    },
+    {
+      "id": "G20_UNKNOWN_RAW_NO_TAIL",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "journal",
+            "bytes"
+          ],
+          102
+        ]
+      ],
+      "variant": "torn"
+    },
+    {
+      "id": "G20_TARGET_beforeSha256_0",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "sourceReads",
+            "beforeSha256",
+            0
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_TARGET_beforeSha256_8",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "sourceReads",
+            "beforeSha256",
+            8
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_TARGET_beforeSha256_9",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "sourceReads",
+            "beforeSha256",
+            9
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_TARGET_beforeSha256_12",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "sourceReads",
+            "beforeSha256",
+            12
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_TARGET_afterSha256_0",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "sourceReads",
+            "afterSha256",
+            0
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_TARGET_afterSha256_8",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "sourceReads",
+            "afterSha256",
+            8
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_TARGET_afterSha256_9",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "sourceReads",
+            "afterSha256",
+            9
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_TARGET_afterSha256_12",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "sourceReads",
+            "afterSha256",
+            12
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_CUSTODY_checkedLaunches",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "custody",
+            "checkedLaunches"
+          ],
+          3
+        ]
+      ]
+    },
+    {
+      "id": "G20_CUSTODY_checkedProcesses",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "custody",
+            "checkedProcesses"
+          ],
+          3
+        ]
+      ]
+    },
+    {
+      "id": "G20_CUSTODY_greenProcesses",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "custody",
+            "greenProcesses"
+          ],
+          0
+        ]
+      ]
+    },
+    {
+      "id": "G20_CUSTODY_targetsAfterMatched",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "custody",
+            "targetsAfterMatched"
+          ],
+          false
+        ]
+      ]
+    },
+    {
+      "id": "G20_CUSTODY_journalOwnershipMatched",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "custody",
+            "journalOwnershipMatched"
+          ],
+          false
+        ]
+      ]
+    },
+    {
+      "id": "G20_CUSTODY_ownTempRemoved",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "custody",
+            "ownTempRemoved"
+          ],
+          false
+        ]
+      ]
+    },
+    {
+      "id": "G20_EMBED_CUSTODY_MISMATCH",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "custody",
+            "greenProcesses"
+          ],
+          2
+        ]
+      ],
+      "syncCustody": false
+    },
+    {
+      "id": "G20_CLAIM_nativeQualification",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "nativeQualification"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "G20_CLAIM_SourceQualified",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "SourceQualified"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "G20_CLAIM_Task1Pass",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "Task1Pass"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "G20_CLAIM_PCoff",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "nonclaims",
+            "PCoff"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "G20_CONTEXT_OLD_INDEX",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "context",
+            "proposalIndexHash"
+          ],
+          "b0af9ed81c8e7b21a35a3a8a08ca7b465b4549c625b20fcc883b1982ff97db03"
+        ]
+      ]
+    },
+    {
+      "id": "G20_CONTEXT_OLD_SELECTION",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "context",
+            "selectionHash"
+          ],
+          "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5"
+        ]
+      ]
+    },
+    {
+      "id": "G20_KEY_ALIAS",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "capture",
+            "stdout"
+          ],
+          {
+            "bytes,sha256": 0
+          }
+        ]
+      ]
+    },
+    {
+      "id": "G20_NATIVE_DUPLICATE",
+      "expected": "reject",
+      "patches": [
+        [
+          "set",
+          [
+            "outcome",
+            "observation",
+            "native",
+            "cases",
+            1,
+            "id"
+          ],
+          "C2T1_CONNECTION"
+        ]
+      ],
+      "variant": "completeTimeout"
+    },
+    {
+      "id": "G20_WIRE_missing",
+      "expected": "reject",
+      "wire": "missing"
+    },
+    {
+      "id": "G20_WIRE_duplicate",
+      "expected": "reject",
+      "wire": "duplicate"
+    },
+    {
+      "id": "G20_WIRE_reverse",
+      "expected": "reject",
+      "wire": "reverse"
+    },
+    {
+      "id": "G20_WIRE_fault",
+      "expected": "reject",
+      "wire": "fault"
+    },
+    {
+      "id": "G20_WIRE_pretty",
+      "expected": "reject",
+      "wire": "pretty"
+    },
+    {
+      "id": "G20_WIRE_dupKey",
+      "expected": "reject",
+      "wire": "dupKey"
+    },
+    {
+      "id": "G20_WIRE_cr",
+      "expected": "reject",
+      "wire": "cr"
+    },
+    {
+      "id": "G20_WIRE_double",
+      "expected": "reject",
+      "wire": "double"
+    },
+    {
+      "id": "G20_N1_LOG_wrongCommand",
+      "expected": "reject",
+      "log": "wrongCommand"
+    },
+    {
+      "id": "G20_N1_LOG_nan",
+      "expected": "reject",
+      "log": "nan"
+    },
+    {
+      "id": "G20_N1_LOG_calendar",
+      "expected": "reject",
+      "log": "calendar"
+    },
+    {
+      "id": "G20_N1_LOG_outside",
+      "expected": "reject",
+      "log": "outside"
+    },
+    {
+      "id": "G20_N1_LOG_unwrapped",
+      "expected": "reject",
+      "log": "unwrapped"
+    },
+    {
+      "id": "G20_N1_LOG_hidden",
+      "expected": "reject",
+      "log": "hidden"
+    },
+    {
+      "id": "G20_N1_LOG_noLF",
+      "expected": "reject",
+      "log": "noLF"
+    },
+    {
+      "id": "G20_PAYLOAD_extraLF",
+      "expected": "reject",
+      "payload": "extraLF"
+    },
+    {
+      "id": "G20_PAYLOAD_wrong",
+      "expected": "reject",
+      "payload": "wrong"
+    },
+    {
+      "id": "G20_API_RUN_ATTEMPT",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "run",
+            "run_attempt"
+          ],
+          2
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_RUN_REPO",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "run",
+            "repository",
+            "full_name"
+          ],
+          "other/repo"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_RUN_EVENT",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "run",
+            "event"
+          ],
+          "workflow_dispatch"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_JOB_ID",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "jobs",
+            "jobs",
+            0,
+            "id"
+          ],
+          99051999
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_STEP_SKIP",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "jobs",
+            "jobs",
+            0,
+            "steps",
+            3,
+            "conclusion"
+          ],
+          "skipped"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_STEP_WRONG_NAME",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "jobs",
+            "jobs",
+            0,
+            "steps",
+            3,
+            "name"
+          ],
+          "Qualify isolated compiled Source data"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_STEP_NAN",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "jobs",
+            "jobs",
+            0,
+            "steps",
+            3,
+            "started_at"
+          ],
+          "invalid"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_TREE_SHA",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "tree",
+            "sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_TREE_TRUNCATED",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "tree",
+            "truncated"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_TREE_MISSING",
+      "expected": "reject",
+      "post": [
+        [
+          "splice",
+          [
+            "input",
+            "tree",
+            "tree"
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_TREE_SIZE",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "tree",
+            "tree",
+            0,
+            "size"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_TREE_DUPLICATE",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "tree",
+            "tree",
+            1,
+            "path"
+          ],
+          "docs/superpowers/source-lab/c2-t1/source-index.json"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_TREE_S09_PROPOSED",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "tree",
+            "tree",
+            25,
+            "sha"
+          ],
+          "3e1d4c2695dce2d13ba064274ba441c4ce9447c3"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_TRUST_BODY_HASH",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "trusted",
+            "bodyEdgesHash"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_ARTIFACT_DIGEST",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "artifact",
+            "listing",
+            "artifacts",
+            0,
+            "digest"
+          ],
+          "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_ARTIFACT_EXPIRED",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "artifact",
+            "listing",
+            "artifacts",
+            0,
+            "expired"
+          ],
+          true
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_ARTIFACT_HEAD",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "artifact",
+            "listing",
+            "artifacts",
+            0,
+            "workflow_run",
+            "head_sha"
+          ],
+          "ffffffffffffffffffffffffffffffffffffffff"
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_ARTIFACT_SIZE",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "artifact",
+            "listing",
+            "artifacts",
+            0,
+            "size_in_bytes"
+          ],
+          1
+        ]
+      ]
+    },
+    {
+      "id": "G20_API_ARTIFACT_COUNT",
+      "expected": "reject",
+      "post": [
+        [
+          "set",
+          [
+            "input",
+            "artifact",
+            "listing",
+            "total_count"
+          ],
+          2
+        ]
+      ]
+    },
+    {
+      "id": "G20_ZIP_TAIL",
+      "expected": "reject",
+      "zip": {
+        "method": 8,
+        "tail": true
+      }
+    },
+    {
+      "id": "G20_ZIP_LOCAL_CRC",
+      "expected": "reject",
+      "zip": {
+        "dd": true,
+        "badLocal": 1
+      }
+    },
+    {
+      "id": "G20_ZIP_LOCAL_COMPRESSED",
+      "expected": "reject",
+      "zip": {
+        "dd": true,
+        "badLocal": 2
+      }
+    },
+    {
+      "id": "G20_ZIP_LOCAL_LENGTH",
+      "expected": "reject",
+      "zip": {
+        "dd": true,
+        "badLocal": 3
+      }
+    },
+    {
+      "id": "G20_ZIP_ZIP64_LOCAL",
+      "expected": "reject",
+      "zip": {
+        "localExtra": "01000000"
+      }
+    },
+    {
+      "id": "G20_ZIP_ZIP64_CENTRAL",
+      "expected": "reject",
+      "zip": {
+        "centralExtra": "01000000"
+      }
+    },
+    {
+      "id": "G20_ZIP_TLV_LOCAL",
+      "expected": "reject",
+      "zip": {
+        "localExtra": "feca080011"
+      }
+    },
+    {
+      "id": "G20_ZIP_TLV_CENTRAL",
+      "expected": "reject",
+      "zip": {
+        "centralExtra": "ab"
+      }
+    },
+    {
+      "id": "G20_ZIP_VERSION45",
+      "expected": "reject",
+      "zip": {
+        "version": 45
+      }
+    },
+    {
+      "id": "G20_ZIP_PATH",
+      "expected": "reject",
+      "zip": {
+        "name": "../c2-t1-green-frontier-diag1.json"
+      }
+    },
+    {
+      "id": "G20_ZIP_CRC",
+      "expected": "reject",
+      "zip": {
+        "corrupt": "crc"
+      }
+    },
+    {
+      "id": "G20_ZIP_EXTRA_ENTRIES",
+      "expected": "reject",
+      "zip": {
+        "corrupt": "entries"
+      }
+    },
+    {
+      "id": "G20_ZIP_BOUNDS",
+      "expected": "reject",
+      "zip": {
+        "corrupt": "bounds"
+      }
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "context",
+    "counts",
+    "idsHash",
+    "bindings",
+    "ownModelsExecuted",
+    "actualSourceExecution",
+    "finalSourceBinding",
+    "SourceQualified",
+    "Task1Pass",
+    "nonclaims"
+  ],
+  "properties": {
+    "schema": {
+      "const": "afw.own-green20-frontier.native-proof.v1"
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "branch",
+        "head",
+        "tree",
+        "parent",
+        "runId",
+        "runAttempt",
+        "job",
+        "node"
+      ],
+      "properties": {
+        "repository": {
+          "const": "tokenizartinfo-ops/agent-friendly-web"
+        },
+        "branch": {
+          "const": "lab/afw-c2-own-receiver-20261116-green-frontier-diag1"
+        },
+        "head": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "parent": {
+          "const": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        },
+        "runId": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "runAttempt": {
+          "const": 1
+        },
+        "job": {
+          "const": "c2-own-green-frontier-diag1"
+        },
+        "node": {
+          "const": "v22.23.4"
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected",
+        "observed",
+        "passed",
+        "failed",
+        "cancelled",
+        "skipped",
+        "todo",
+        "missing",
+        "extra",
+        "duplicate"
+      ],
+      "properties": {
+        "expected": {
+          "const": 124
+        },
+        "observed": {
+          "const": 124
+        },
+        "passed": {
+          "const": 124
+        },
+        "failed": {
+          "const": 0
+        },
+        "cancelled": {
+          "const": 0
+        },
+        "skipped": {
+          "const": 0
+        },
+        "todo": {
+          "const": 0
+        },
+        "missing": {
+          "const": 0
+        },
+        "extra": {
+          "const": 0
+        },
+        "duplicate": {
+          "const": 0
+        }
+      }
+    },
+    "idsHash": {
+      "const": "c96e7b9f0e680b2fe841b1ad0f0bf52d2f90c12237a03b821b60a028171b61d9"
+    },
+    "bindings": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "bytes",
+          "sha256",
+          "gitBlob"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "gitBlob": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$"
+          }
+        }
+      }
+    },
+    "ownModelsExecuted": {
+      "const": true
+    },
+    "actualSourceExecution": {
+      "const": false
+    },
+    "finalSourceBinding": {
+      "const": false
+    },
+    "SourceQualified": {
+      "const": false
+    },
+    "Task1Pass": {
+      "const": false
+    },
+    "nonclaims": {
+      "const": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  }
+}

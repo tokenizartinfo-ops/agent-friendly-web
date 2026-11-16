@@ -1,0 +1,539 @@
+{
+  "syntheticOnly": true,
+  "expected": "accept",
+  "input": {
+    "run": {
+      "id": 99051001,
+      "run_attempt": 1,
+      "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "head_branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "path": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      },
+      "head_repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      },
+      "created_at": "2037-01-02T03:09:59Z",
+      "run_started_at": "2037-01-02T03:10:00Z",
+      "updated_at": "2037-01-02T03:14:21Z"
+    },
+    "jobs": {
+      "total_count": 1,
+      "jobs": [
+        {
+          "id": 99051002,
+          "run_id": 99051001,
+          "run_attempt": 1,
+          "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "name": "c2-green-frontier-diag1",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2037-01-02T03:10:00Z",
+          "completed_at": "2037-01-02T03:14:20Z",
+          "steps": [
+            {
+              "number": 2,
+              "name": "Read the exact one-use lab head",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:10:00Z",
+              "completed_at": "2037-01-02T03:10:05Z"
+            },
+            {
+              "number": 3,
+              "name": "Use the fixed Node runtime",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:10:05Z",
+              "completed_at": "2037-01-02T03:10:10Z"
+            },
+            {
+              "number": 4,
+              "name": "Install only the existing locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:10:10Z",
+              "completed_at": "2037-01-02T03:10:30Z"
+            },
+            {
+              "number": 5,
+              "name": "Observe isolated proposal-green boundaries",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:10:30Z",
+              "completed_at": "2037-01-02T03:13:40Z"
+            },
+            {
+              "number": 6,
+              "name": "Preserve the bounded green diagnostic",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2037-01-02T03:13:40Z",
+              "completed_at": "2037-01-02T03:14:15Z"
+            }
+          ]
+        }
+      ]
+    },
+    "commit": {
+      "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "tree": {
+        "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "message": "AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+      "parents": [
+        {
+          "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        }
+      ]
+    },
+    "tree": {
+      "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "truncated": false,
+      "tree": [
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+          "size": 11467
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+          "size": 148547
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+          "size": 45576
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+          "size": 2497
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+          "size": 2810
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+          "size": 4153
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a177d50ff73f8fad1d60827ef904a204126796fb",
+          "size": 101380
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+          "size": 22501
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+          "size": 2785
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+          "size": 18667
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+          "size": 61073
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+          "size": 88519
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+          "size": 58727
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+          "size": 6030
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+          "size": 1208
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+          "size": 417
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/mode-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+          "size": 3956
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/frame-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+          "size": 21200
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/protocol-contract.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e55a6387549a8447a5ad93356184645ae19e70de",
+          "size": 21378
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/diagnostic-driver.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9e29c5197207b03bdb4b10069089f37df289e88c",
+          "size": 3169
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/progress-recorder.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "662ec8170bbfe81831b557824d1a466e722842d7",
+          "size": 3833
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/read-progress.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+          "size": 5507
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "dddddddddddddddddddddddddddddddddddddddd",
+          "size": 1234
+        },
+        {
+          "path": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "size": 1234
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/collection-adapters.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ffffffffffffffffffffffffffffffffffffffff",
+          "size": 1234
+        },
+        {
+          "path": "test/fixtures/finite-first-connection-publication.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+          "size": 57864
+        }
+      ]
+    },
+    "transport": {
+      "runId": 99051001,
+      "jobId": 99051002,
+      "rawLog": "2037-01-02T03:10:30.0000000Z ##[group]Run node docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs\n2037-01-02T03:10:30.0000000Z node docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs\n2037-01-02T03:10:30.0000000Z ##[endgroup]\n2037-01-02T03:13:30.0000000Z AFW_C2_GREEN20_FRONTIER_DIAG1_CUSTODY {\"schema\":\"afw.c2-green20-frontier-diag1-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99051001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true}\n2037-01-02T03:13:31.0000000Z AFW_C2_GREEN20_FRONTIER_DIAG1_OUTCOME {\"schema\":\"afw.c2-green20-frontier-diag1-outcome.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99051001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"diagnosticCollectionComplete\":true,\"nativeQualification\":false,\"sourceReads\":{\"beforeSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"],\"afterSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"]},\"observation\":{\"capture\":{\"exitCode\":1,\"signal\":\"none\",\"errorKind\":\"timeout\",\"stdout\":{\"bytes\":15,\"sha256\":\"7cb03ab03edf5190a8aa546c78285344395fad3d42d4011cd224f934aef96b3f\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}},\"journal\":{\"bytes\":102,\"sha256\":\"54f7237d49d5b41506d452c3eeaddb30d45bfe372018d82e44f0615ca7cb863d\",\"stable\":true,\"recorderFaultObserved\":false},\"witness\":{\"integrity\":\"prefix\",\"frontier\":\"action\",\"events\":[{\"sequence\":1,\"elapsedMs\":10,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}],\"openCase\":{\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\"},\"afterOpen\":false},\"unknownReason\":null,\"firstThrowSequence\":null,\"native\":{\"integrity\":\"empty\",\"cases\":[]}},\"custody\":{\"schema\":\"afw.c2-green20-frontier-diag1-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99051001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true},\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    "artifact": {
+      "runId": 99051001,
+      "jobId": 99051002,
+      "listing": {
+        "total_count": 1,
+        "artifacts": [
+          {
+            "id": 99051003,
+            "name": "afw-c2-t1-green-frontier-diag1",
+            "expired": false,
+            "size_in_bytes": 4643,
+            "created_at": "2037-01-02T03:14:10Z",
+            "expires_at": "2037-01-09T03:14:10Z",
+            "workflow_run": {
+              "id": 99051001,
+              "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "head_branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1"
+            },
+            "digest": "sha256:b133ab277a4b6552fb7f5edbdc87a8e1d4e9ac6f00b0a30a9b43ddad69e39733"
+          }
+        ]
+      },
+      "artifactId": 99051003,
+      "fileName": "c2-t1-green-frontier-diag1.json",
+      "archiveBase64": "UEsDBBQAAAAAAAAAAACHGD07gxEAAIMRAAAfAAAAYzItdDEtZ3JlZW4tZnJvbnRpZXItZGlhZzEuanNvbnsic2NoZW1hIjoiYWZ3LmMyLWdyZWVuMjAtZnJvbnRpZXItZGlhZzEtb3V0Y29tZS52MSIsImNvbnRleHQiOnsicmVwb3NpdG9yeSI6InRva2VuaXphcnRpbmZvLW9wcy9hZ2VudC1mcmllbmRseS13ZWIiLCJiYXNlbGluZVNvdXJjZSI6IjY3OTFjZTFiYWI5MzcyZTIwNmQzYzdiNDJiM2UxMzk0ZGM2ZTBjNjgiLCJiYXNlbGluZVRyZWUiOiI2MmU3ODkyNjYzNWQ2Yjc0ZjI4OGQ2YzBkNjllMGYyNTE2MzA2OTg5Iiwic291cmNlSW5kZXhCbG9iIjoiMjZiNjJiNWNlOGY0MTNiNmY3ZmQxNDZlMDNiOGY4Y2RjZjY5OTVhYyIsInByb3Bvc2FsSW5kZXhIYXNoIjoiMDY4MWNhZGM3NzRmY2RkZjdhMDA5ZTg2ZTI0YjIyZmE4Nzk4NTdhZjFlOTAwZjYxNDNkMjNjMmQ3ZWFhOWJlNyIsInNlbGVjdGlvbkhhc2giOiJlOGQ0ZDhjZDFmYjRmODFjNWJmZWVjM2Q3YzVjZTk4Y2NiZGEzYjlkYzdiMWUyOTU2ODUyN2RiM2JlN2VmZWNkIiwiaGVhZCI6ImFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEiLCJ0cmVlIjoiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYiIsInJ1bklkIjoiOTkwNTEwMDEiLCJydW5BdHRlbXB0IjoxLCJqb2IiOiJjMi1ncmVlbi1mcm9udGllci1kaWFnMSIsIm5vZGUiOiJ2MjIuMjMuNCJ9LCJkaWFnbm9zdGljQ29sbGVjdGlvbkNvbXBsZXRlIjp0cnVlLCJuYXRpdmVRdWFsaWZpY2F0aW9uIjpmYWxzZSwic291cmNlUmVhZHMiOnsiYmVmb3JlU2hhMjU2IjpbIjAyZWU5OGRhOTIzOWRkMjg5NDhkYjY2NDEyN2M1NzllZjY5OTQxZTVlOWM4MTUxYjE1Njg1Mjc1MDk4MTUyMTAiLCJmYzIyN2I1OWIzYjU4MTVlYWRmZmJkNTgyZjAxOGNiZDNlNjRjZWFhNTk2ZjA3YmMyMWEyMDMxZjdjZDFkNmU5IiwiNjQ0OTczMjIxZDVkYmMzZTliZGI4Nzg4ODg0MGMyOGMzNzBmM2IxZWQ2ZGZmMmM4OTUzNGM0ZGUwZTg2NDJmOCIsIjcwNTliOWNjYzE4ZmNjZDRkYThkZmY0MmU5YzA0YzRjNzU0N2FmZWY5OTc2ODUyY2JlZmJlZWY1MTc1NTA0ZjYiLCI1NGUyMjYxYWFjMmJiZTNkMjQ0NmQ3ZmE1OTExZjJiOTIxYjRkOGRjNjE4OTQzYWJkNWQzNGUzZjExMjVjYTRiIiwiNTkxMTY5OGZlOGRlNzI0NDFkMTI1NDE0Zjg3OWQ3MjVhNjc3ZGJjMjZmM2MxYTQwY2RjZDI5OTliNmQ0YjQwYiIsImYwOGI5MTRhMWU2NjhhZDM2YjQ4NDhkMGI2MWNiZThiNDRkZmIzZTU0YmM3NDc0ODA1NjRhOGFhY2M1ODdkZjQiLCI2NzhmYzNjNTM4ZjJmYzI5ZTcwYzQxNDc1Nzk0ZjU4ZTVkNjkwYTdjN2FhZTY5YjFiOTdhZTkzMDlhNzI4YjZiIiwiYWM3NGJlMTA2ZWMzNmEwZGQwOTNjZmI1NDJiYTJlOGRkMjIyMGFlODljOGM0OTg3OWIyMGMxOTEwYmJjYjcxZSIsIjJkYzMzNTc2MWFjN2YxNjg1MzJhZjM3ZmQ0MTI4ZDJmYzhiMTVjOWI1YjMwNzJmMzc3YTk5MTNlN2I5MzgyOWQiLCI3OWExMzVmYmM5ODk3NDYzYjU2NjYyNGE0NjYyOTQ2MDg5YjhiNWZkMjViYWVkYTM2ODY2M2ZmNjViZTNjZGM3IiwiZDk4OTUwNTJlYjUwYmY3NWNhMWExNGQ3NDNmYWM1YzVlNGM5YjRjZjIyYWUwYjY0NjAyNjhmMDU4NzhmMjZmNyIsIjBkYjQ1YTI5MDI4Mjg0YTg4NmI3ZTJmNDZiNGVmMGY4ODM0YjljZmVmZGVlZDJmYzAyNmFhNzI2OTRhN2M4ZTgiXSwiYWZ0ZXJTaGEyNTYiOlsiMDJlZTk4ZGE5MjM5ZGQyODk0OGRiNjY0MTI3YzU3OWVmNjk5NDFlNWU5YzgxNTFiMTU2ODUyNzUwOTgxNTIxMCIsImZjMjI3YjU5YjNiNTgxNWVhZGZmYmQ1ODJmMDE4Y2JkM2U2NGNlYWE1OTZmMDdiYzIxYTIwMzFmN2NkMWQ2ZTkiLCI2NDQ5NzMyMjFkNWRiYzNlOWJkYjg3ODg4ODQwYzI4YzM3MGYzYjFlZDZkZmYyYzg5NTM0YzRkZTBlODY0MmY4IiwiNzA1OWI5Y2NjMThmY2NkNGRhOGRmZjQyZTljMDRjNGM3NTQ3YWZlZjk5NzY4NTJjYmVmYmVlZjUxNzU1MDRmNiIsIjU0ZTIyNjFhYWMyYmJlM2QyNDQ2ZDdmYTU5MTFmMmI5MjFiNGQ4ZGM2MTg5NDNhYmQ1ZDM0ZTNmMTEyNWNhNGIiLCI1OTExNjk4ZmU4ZGU3MjQ0MWQxMjU0MTRmODc5ZDcyNWE2NzdkYmMyNmYzYzFhNDBjZGNkMjk5OWI2ZDRiNDBiIiwiZjA4YjkxNGExZTY2OGFkMzZiNDg0OGQwYjYxY2JlOGI0NGRmYjNlNTRiYzc0NzQ4MDU2NGE4YWFjYzU4N2RmNCIsIjY3OGZjM2M1MzhmMmZjMjllNzBjNDE0NzU3OTRmNThlNWQ2OTBhN2M3YWFlNjliMWI5N2FlOTMwOWE3MjhiNmIiLCJhYzc0YmUxMDZlYzM2YTBkZDA5M2NmYjU0MmJhMmU4ZGQyMjIwYWU4OWM4YzQ5ODc5YjIwYzE5MTBiYmNiNzFlIiwiMmRjMzM1NzYxYWM3ZjE2ODUzMmFmMzdmZDQxMjhkMmZjOGIxNWM5YjViMzA3MmYzNzdhOTkxM2U3YjkzODI5ZCIsIjc5YTEzNWZiYzk4OTc0NjNiNTY2NjI0YTQ2NjI5NDYwODliOGI1ZmQyNWJhZWRhMzY4NjYzZmY2NWJlM2NkYzciLCJkOTg5NTA1MmViNTBiZjc1Y2ExYTE0ZDc0M2ZhYzVjNWU0YzliNGNmMjJhZTBiNjQ2MDI2OGYwNTg3OGYyNmY3IiwiMGRiNDVhMjkwMjgyODRhODg2YjdlMmY0NmI0ZWYwZjg4MzRiOWNmZWZkZWVkMmZjMDI2YWE3MjY5NGE3YzhlOCJdfSwib2JzZXJ2YXRpb24iOnsiY2FwdHVyZSI6eyJleGl0Q29kZSI6MSwic2lnbmFsIjoibm9uZSIsImVycm9yS2luZCI6InRpbWVvdXQiLCJzdGRvdXQiOnsiYnl0ZXMiOjE1LCJzaGEyNTYiOiI3Y2IwM2FiMDNlZGY1MTkwYThhYTU0NmM3ODI4NTM0NDM5NWZhZDNkNDJkNDAxMWNkMjI0ZjkzNGFlZjk2YjNmIn0sInN0ZGVyciI6eyJieXRlcyI6MCwic2hhMjU2IjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9fSwiam91cm5hbCI6eyJieXRlcyI6MTAyLCJzaGEyNTYiOiI1NGY3MjM3ZDQ5ZDViNDE1MDZkNDUyYzNlZWFkZGIzMGQ0NWJmZTM3MjAxOGQ4MmU0NGYwNjE1Y2E3Y2I4NjNkIiwic3RhYmxlIjp0cnVlLCJyZWNvcmRlckZhdWx0T2JzZXJ2ZWQiOmZhbHNlfSwid2l0bmVzcyI6eyJpbnRlZ3JpdHkiOiJwcmVmaXgiLCJmcm9udGllciI6ImFjdGlvbiIsImV2ZW50cyI6W3sic2VxdWVuY2UiOjEsImVsYXBzZWRNcyI6MTAsImlkIjoiQzJUMV9DT05ORUNUSU9OIiwib3BlcmF0aW9uIjoiYWN0aW9uIiwiZWRnZSI6ImVudGVyIiwiZXJyb3IiOm51bGx9XSwib3BlbkNhc2UiOnsiaWQiOiJDMlQxX0NPTk5FQ1RJT04iLCJvcGVyYXRpb24iOiJhY3Rpb24ifSwiYWZ0ZXJPcGVuIjpmYWxzZX0sInVua25vd25SZWFzb24iOm51bGwsImZpcnN0VGhyb3dTZXF1ZW5jZSI6bnVsbCwibmF0aXZlIjp7ImludGVncml0eSI6ImVtcHR5IiwiY2FzZXMiOltdfX0sImN1c3RvZHkiOnsic2NoZW1hIjoiYWZ3LmMyLWdyZWVuMjAtZnJvbnRpZXItZGlhZzEtY3VzdG9keS52MSIsImNvbnRleHQiOnsicmVwb3NpdG9yeSI6InRva2VuaXphcnRpbmZvLW9wcy9hZ2VudC1mcmllbmRseS13ZWIiLCJiYXNlbGluZVNvdXJjZSI6IjY3OTFjZTFiYWI5MzcyZTIwNmQzYzdiNDJiM2UxMzk0ZGM2ZTBjNjgiLCJiYXNlbGluZVRyZWUiOiI2MmU3ODkyNjYzNWQ2Yjc0ZjI4OGQ2YzBkNjllMGYyNTE2MzA2OTg5Iiwic291cmNlSW5kZXhCbG9iIjoiMjZiNjJiNWNlOGY0MTNiNmY3ZmQxNDZlMDNiOGY4Y2RjZjY5OTVhYyIsInByb3Bvc2FsSW5kZXhIYXNoIjoiMDY4MWNhZGM3NzRmY2RkZjdhMDA5ZTg2ZTI0YjIyZmE4Nzk4NTdhZjFlOTAwZjYxNDNkMjNjMmQ3ZWFhOWJlNyIsInNlbGVjdGlvbkhhc2giOiJlOGQ0ZDhjZDFmYjRmODFjNWJmZWVjM2Q3YzVjZTk4Y2NiZGEzYjlkYzdiMWUyOTU2ODUyN2RiM2JlN2VmZWNkIiwiaGVhZCI6ImFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEiLCJ0cmVlIjoiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYiIsInJ1bklkIjoiOTkwNTEwMDEiLCJydW5BdHRlbXB0IjoxLCJqb2IiOiJjMi1ncmVlbi1mcm9udGllci1kaWFnMSIsIm5vZGUiOiJ2MjIuMjMuNCJ9LCJwYXJlbnROb25Sb290Ijp0cnVlLCJwcmVmbGlnaHRPd25lZCI6dHJ1ZSwicHJlZmxpZ2h0UmVtb3ZlZCI6dHJ1ZSwiY2hlY2tlZExhdW5jaGVzIjoyLCJwcmVmbGlnaHRQcm9jZXNzZXMiOjEsImdyZWVuUHJvY2Vzc2VzIjoxLCJjaGVja2VkUHJvY2Vzc2VzIjoyLCJ1aWRHaWRHcm91cHNMb29wYmFja01hdGNoZWQiOnRydWUsInRhcmdldHNCZWZvcmVNYXRjaGVkIjp0cnVlLCJ0YXJnZXRzQWZ0ZXJNYXRjaGVkIjp0cnVlLCJqb3VybmFsT3duZXJzaGlwTWF0Y2hlZCI6dHJ1ZSwib3duUm9vdFZlcmlmaWVkIjp0cnVlLCJvd25UZW1wUmVtb3ZlZCI6dHJ1ZX0sIlNvdXJjZVF1YWxpZmllZCI6ZmFsc2UsIlRhc2sxUGFzcyI6ZmFsc2UsIm5vbmNsYWltcyI6eyJoaXN0b3JpY2FsQ2F1c2VQcm92ZW4iOmZhbHNlLCJyZWNlaXB0QXV0aGVudGljYXRlZCI6ZmFsc2UsIm9wZXJhdGlvbmFsUmVhZGluZXNzIjpmYWxzZSwiY29tcGxldGVQYWNrYWdlIjpmYWxzZSwiUENvZmYiOmZhbHNlLCJnbG9iYWxOYXRpdmVEcmFpblZlcmlmaWVkIjpmYWxzZSwic2RrTmFtZXNwYWNlRW1wdHlWZXJpZmllZCI6ZmFsc2V9fQpQSwECFAAUAAAAAAAAAAAAhxg9O4MRAACDEQAAHwAAAAAAAAAAAAAAAAAAAAAAYzItdDEtZ3JlZW4tZnJvbnRpZXItZGlhZzEuanNvblBLBQYAAAAAAQABAE0AAADAEQAAAAA=",
+      "payloadText": "{\"schema\":\"afw.c2-green20-frontier-diag1-outcome.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99051001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"diagnosticCollectionComplete\":true,\"nativeQualification\":false,\"sourceReads\":{\"beforeSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"],\"afterSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"]},\"observation\":{\"capture\":{\"exitCode\":1,\"signal\":\"none\",\"errorKind\":\"timeout\",\"stdout\":{\"bytes\":15,\"sha256\":\"7cb03ab03edf5190a8aa546c78285344395fad3d42d4011cd224f934aef96b3f\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}},\"journal\":{\"bytes\":102,\"sha256\":\"54f7237d49d5b41506d452c3eeaddb30d45bfe372018d82e44f0615ca7cb863d\",\"stable\":true,\"recorderFaultObserved\":false},\"witness\":{\"integrity\":\"prefix\",\"frontier\":\"action\",\"events\":[{\"sequence\":1,\"elapsedMs\":10,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}],\"openCase\":{\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\"},\"afterOpen\":false},\"unknownReason\":null,\"firstThrowSequence\":null,\"native\":{\"integrity\":\"empty\",\"cases\":[]}},\"custody\":{\"schema\":\"afw.c2-green20-frontier-diag1-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\"proposalIndexHash\":\"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\",\"selectionHash\":\"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99051001\",\"runAttempt\":1,\"job\":\"c2-green-frontier-diag1\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true},\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    }
+  },
+  "trusted": {
+    "expected": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "workflowPath": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+      "oneUseMessage": "AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+      "job": "c2-green-frontier-diag1",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "runId": 99051001,
+      "jobId": 99051002,
+      "requiredSteps": [
+        "Read the exact one-use lab head",
+        "Use the fixed Node runtime",
+        "Install only the existing locked dependencies",
+        "Observe isolated proposal-green boundaries",
+        "Preserve the bounded green diagnostic"
+      ]
+    },
+    "bodyEdges": [
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+        "bytes": 11467,
+        "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "bytes": 1208,
+        "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "bytes": 417,
+        "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/mode-selection.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+        "bytes": 3956,
+        "sha256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/frame-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+        "bytes": 21200,
+        "sha256": "a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/protocol-contract.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e55a6387549a8447a5ad93356184645ae19e70de",
+        "bytes": 21378,
+        "sha256": "8891598c7c0ee416762ad65d139c7e9336cc33e4123e251211055e42c3265fe7"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/diagnostic-driver.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+        "bytes": 3169,
+        "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/progress-recorder.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+        "bytes": 3833,
+        "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/read-progress.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "bytes": 5507,
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dddddddddddddddddddddddddddddddddddddddd",
+        "bytes": 1234,
+        "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      {
+        "path": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "bytes": 1234,
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ffffffffffffffffffffffffffffffffffffffff",
+        "bytes": 1234,
+        "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    ],
+    "bodyEdgesHash": "0748820c307b8f43ca0257a2ce56e9c757c4ceaf5c84e49ed6fff6e2ecda7204"
+  }
+}

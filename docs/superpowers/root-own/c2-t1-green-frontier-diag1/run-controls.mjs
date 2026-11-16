@@ -1,0 +1,47 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFileSync,writeFileSync,mkdirSync,realpathSync} from 'node:fs';
+import {resolve,relative,sep} from 'node:path';
+import {execFileSync} from 'node:child_process';
+import test from 'node:test';
+import {deflateRawSync,inflateRawSync} from 'node:zlib';
+import {g20Cases} from './controls.mjs';
+import {g20Trusted} from './transport.mjs';
+import {G20_FIXED,G20_SCHEMA} from './fixed.mjs';
+// OWN-only controls. Source executable bodies/helpers are never imported or evaluated.
+const PREFIX='docs/superpowers/root-own/c2-t1-green-frontier-diag1/',ROOT=realpathSync(process.cwd());
+const hash=x=>createHash('sha256').update(x).digest('hex'),blob=x=>createHash('sha1').update(Buffer.concat([Buffer.from('blob '+x.length+'\0'),x])).digest('hex');
+const read=path=>{const p=resolve(ROOT,path),r=relative(ROOT,p);assert(r&&!r.startsWith('..'+sep)&&r!=='..'&&!r.startsWith(sep));return readFileSync(p);};
+const json=name=>JSON.parse(read(PREFIX+name).toString('utf8'));
+const git=(...args)=>execFileSync('git',args,{cwd:ROOT,encoding:'utf8',maxBuffer:1048576}).trim();
+assert.equal(process.version,'v22.23.4');assert.equal(process.platform,'linux');
+assert.equal(process.env.GITHUB_REPOSITORY,'tokenizartinfo-ops/agent-friendly-web');
+assert.equal(process.env.GITHUB_REF,'refs/heads/lab/afw-c2-own-receiver-20261116-green-frontier-diag1');
+assert.equal(process.env.GITHUB_EVENT_NAME,'push');assert.equal(process.env.GITHUB_RUN_ATTEMPT,'1');
+assert.equal(process.env.GITHUB_JOB,'c2-own-green-frontier-diag1');assert.match(process.env.GITHUB_RUN_ID??'',/^[1-9][0-9]*$/);
+const head=git('rev-parse','HEAD'),tree=git('rev-parse','HEAD^{tree}'),parents=git('show','-s','--format=%P','HEAD').split(' ');
+assert.equal(head,process.env.GITHUB_SHA);assert.deepEqual(parents,['6791ce1bab9372e206d3c7b42b3e1394dc6e0c68']);
+assert.equal(git('show','-s','--format=%B','HEAD'),'AFW-C2-OWN-GREEN-FRONTIER-DIAG1-ONEUSE-20261116');
+const graphBytes=read(PREFIX+'native-graph.json');assert.equal(hash(graphBytes),'ada3a410e1f45ea0045570d757d8294d6bef928b0cba3b55f1617c0bab47a24c');
+const graph=JSON.parse(graphBytes),bindings=[];assert.equal(graph.expectedCount,124);assert.equal(graph.files.length,18);
+for(const e of graph.files){const b=read(e.path);assert.equal(b.length,e.bytes);assert.equal(hash(b),e.sha256);assert.equal(blob(b),e.gitBlob);bindings.push({path:e.path,bytes:b.length,sha256:hash(b),gitBlob:blob(b)});}
+for(const path of [PREFIX+'native-graph.json',PREFIX+'run-controls.mjs']){const b=read(path);bindings.push({path,bytes:b.length,sha256:hash(b),gitBlob:blob(b)});}
+assert.deepEqual(json('data/frame-schema.json'),G20_SCHEMA);
+const c=json('data/protocol-contract.json'),s=json('data/mode-selection.json');
+assert.equal(hash(JSON.stringify(s)),G20_FIXED.selectionHash);assert.deepEqual(c.steps,G20_FIXED.sourceSteps);
+const finalSource=json('source-admission.json');
+assert.equal(finalSource.status,'ROOT_FINAL_SOURCE_BODY_DATA');assert.match(finalSource.sourcePacket,/^[a-f0-9]{40}$/);
+assert.equal(finalSource.sourceExpectedContext,null);
+g20Trusted({expected:null,bodyEdges:finalSource.bodyEdges,bodyEdgesHash:finalSource.bodyEdgesHash},hash);
+const seed=json('fixture-seed.json'),plans=json('fixture-first-cases.json'),ids=json('expected-ids.json');
+assert.equal(seed.syntheticOnly,true);assert.equal(plans.syntheticOnly,true);
+const cases=g20Cases(seed,plans,hash,deflateRawSync,inflateRawSync);
+assert.equal(cases.length,124);assert.deepEqual(cases.map(c=>c.id),ids.ids);assert.equal(new Set(ids.ids).size,124);
+assert.equal(hash(JSON.stringify(ids.ids)),'c96e7b9f0e680b2fe841b1ad0f0bf52d2f90c12237a03b821b60a028171b61d9');
+const observed=[];for(const c of cases)await test(c.id,{timeout:10000},()=>{try{c.run();observed.push({id:c.id,passed:true});}catch(error){observed.push({id:c.id,passed:false});throw error;}});
+assert.deepEqual(observed.map(r=>r.id),ids.ids);
+const passed=observed.filter(r=>r.passed).length,failed=observed.length-passed;
+const proof={schema:'afw.own-green20-frontier.native-proof.v1',context:{repository:process.env.GITHUB_REPOSITORY,branch:process.env.GITHUB_REF.slice(11),head,tree,parent:parents[0],runId:process.env.GITHUB_RUN_ID,runAttempt:1,job:process.env.GITHUB_JOB,node:process.version},counts:{expected:124,observed:observed.length,passed,failed,cancelled:0,skipped:0,todo:0,missing:0,extra:0,duplicate:observed.length-new Set(observed.map(r=>r.id)).size},idsHash:hash(JSON.stringify(observed.map(r=>r.id))),bindings,ownModelsExecuted:true,actualSourceExecution:false,finalSourceBinding:false,SourceQualified:false,Task1Pass:false,nonclaims:{historicalCauseProven:false,receiptAuthenticated:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false}};
+const text=JSON.stringify(proof)+'\n';assert(Buffer.byteLength(text)<=24576);
+mkdirSync(resolve(ROOT,'output'),{recursive:true});writeFileSync(resolve(ROOT,'output/c2-own-green-frontier-diag1-proof.json'),text);
+console.log('AFW_C2_OWN_GREEN20_FRONTIER_DIAG1_PROOF '+JSON.stringify(proof));
