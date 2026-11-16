@@ -1,0 +1,106 @@
+{
+  "schema": "afw.c2-notices-n1.source-parser-round1-scoped-review.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": "Only the HTTP-completion consistency finding and new breakage in the narrow Source diagnostic parser/control/vector fix, including honest timeout prefix preservation. This is separate from full Task1 or full Source specification/quality review.",
+  "authorityFinding": "5ff22a759339c297b87d6257024b5ab660346047",
+  "pins": {
+    "readerBefore": "3a940e5c53250494fdeeeae532fde04d4d52d1ba",
+    "readerAfter": "ddf8b886f75330144be158c799513f3c81cf08e4",
+    "readerAfterBytes": 15064,
+    "readerAfterSha256": "06694cf67194271f5a568452f7ecd7cae0caa48eaf541117c8b66d0d274b4c7f",
+    "controlsBefore": "d69c6b84f441b0c0c5d4400720f14bf237f04180",
+    "controlsAfter": "403a1145be7de90a1aa331727f74b0a64103af9e",
+    "vectors": "5f867b41157f13c7906b3c5f26c073d55dea176b",
+    "vectorsSha256": "ee90a1002416d2624e4569f5860727f0f0eb914314bc92495ca78ba12eb80d9e",
+    "packet": "d9762f018568fedf9080985781c7fb08b36707ca",
+    "report": "30c4ddcec8c058ab1e90be61a48bd41ada4f0dc0",
+    "contract": "2a7ac8dfbb4469e8ad63875e7667ac4fbf95be4e",
+    "schema": "5830b573c0a8a2a9ec6bd3e5202b8c9cdcb3a6fd",
+    "supplement": "4c558caaff6158634610fa84d9b48b8df9b221a4",
+    "primary": "a208645ffbbd0c830134f8c79b3234667ef4cd95",
+    "outcome": "14ea40add7cec80448a8c2029db49cac210e06ff",
+    "closeProof": "4b61bd346c93d8365a5e9c7dded60b0993cfd9e8"
+  },
+  "verdict": {
+    "finding": "ADDRESSED",
+    "scopedSPEC": "PASS",
+    "scopedQUALITY": "PASS",
+    "newActionableFindings": []
+  },
+  "method": "Immutable DATA inspection only. Read complete reader preimage/final text and controls preimage/final text as inert strings, literal vectors, finding/report/contract/supplement/schema, and dated primary/outcome/close evidence. Compared full bodies and independently hashed both readers, both controls, final vectors and safe outcome. No Source execution/import/eval/compile/syntax/tests, files/dependencies/clones, refs/runs/runtime/browser/keys/owner questions or agents. No raw logs or actual artifact refetch. SHA256 and ordinary JSON inspection were the only RAM computations.",
+  "changeAssessment": {
+    "reader": {
+      "file": "docs/superpowers/source-lab/c2-t1-notices-n1/n1-reader.mjs",
+      "line": 76,
+      "exactInsertion": "if(at===3&&out.http.some(h=>h.completion==='entered'))return bad('HTTP_INVALID');",
+      "offset": 8865,
+      "insertedBytes": 81,
+      "reason": "The only reader change is this insertion at stage1, before assigning NOTICES action returned/threw. It rejects any started GET or POST still entered, whether or not a response arrived, before action/count/AFTER can be promoted into complete evidence. Other stages/cases and settled HTTP failures retain existing behavior."
+    },
+    "controls": {
+      "file": "docs/superpowers/source-lab/c2-t1-notices-n1/n1-controls.mjs",
+      "lines": "41-43",
+      "reason": "Only adds selection of item.input when supplied and a no-transformation literal branch. Existing rejected cases still clone v.base, existing accepted cases are unchanged, and the new literal records/native projection reach the amended parser without transformation that could hide the counterexample."
+    },
+    "literalCounterexample": {
+      "id": "HTTP_UNSETTLED_ACTION_THROW",
+      "records": 25,
+      "postEdges": [
+        "enter"
+      ],
+      "description": "A complete concrete canonical witness contains GET200 completion, POST enter with no response/terminal edge, NOTICES action throw/nativeFAIL, after probe/count/AFTER. The new guard returns HTTP_INVALID at the action throw. The remaining complete witness cannot bypass the guard through nativeFAIL or timeout."
+    }
+  },
+  "timeoutAssessment": {
+    "result": "PRESERVED",
+    "analysis": "An honest timeout prefix ending with an unfinished NOTICES action and GET/POST entered has not reached the stage1 flow completion branch, so the inserted guard is not evaluated. Existing end-of-input lines111-113 still accept an incomplete journal only when condition is timeout and mark it prefix. safeWitness lines145-148 reuses the same condition and exact bytes. nativeJoin can retain only already completed prior native cases; no missing pass is fabricated. A timeout capture that does include action return/throw with HTTP still entered is contradictory and correctly rejects.",
+    "coverageLimit": "The scoped Source helper suite does not add a new explicit timeout-prefix vector. Preservation is established here by the exact unchanged prefix path and one-guard diff, supported separately by the reviewed independent OWN honest-prefix controls; no Source prefix execution was performed or claimed by this reviewer."
+  },
+  "coveringEvidence": {
+    "run": 43852706603,
+    "attempt": 1,
+    "job": 133249068774,
+    "head": "e10c4f40d63fba5f13e1edbb6a8021d04b26f778",
+    "tree": "2e46b839f6fb7bd4dd0b844d7110fb4e6a160f94",
+    "command": "node docs/superpowers/source-lab/c2-t1-notices-n1/run-c2-notices-n1.mjs",
+    "commandStep": 5,
+    "startedAt": "2026-11-16T10:52:54Z",
+    "completedAt": "2026-11-16T10:54:38Z",
+    "helperControls": {
+      "accepted": 6,
+      "rejected": 21,
+      "probeChecks": 3,
+      "roundtrips": 6,
+      "witnessRejected": 2,
+      "slotChecks": 5
+    },
+    "realBootstrapAbsent": "EXPECTED_ENOENT",
+    "custodyLaunches": 3,
+    "interpretation": "Credited from actual dated primary: final pinned controls and literal vectors ran before custody launches, with exact SYNTHETIC marker joined to the real command step by the independent OWN method. The original author report remains a historical pre-cloud declaration and is not relabelled as observed execution.",
+    "runtimeResult": "The distinct actual native capture has three PASS cases then NOTICES FAIL, GET200/POST503 with both bodies settled, action AssertionError, count returned and AFTER returned. This is useful admitted runtime failure evidence, not parser rejection and not a repaired product.",
+    "outcomeBytes": 8755,
+    "outcomeSha256": "ba603c9b42d7d97970b4618d2b77dac003a927081310d3dc3700768e30153e3c",
+    "sourceClosedHead": "02dbbeea3659033fc66539a081b766c85d163e01",
+    "closeEvidence": "Dated close proof records workflow removal, preservation of3203originals, unchanged Main/historical baseline and zero close-head runs. No refs/runs were re-read by reviewer."
+  },
+  "limitations": [
+    "Review does not freshly parse absent raw child TAP or authenticate absent actual private before/after arrays. correlated:null and guardOrigin:unknown remain unchanged.",
+    "Parser-fix PASS is scoped to the one guard and accompanying literal control support. It does not grant full Source/Task1 quality or specification approval, explain the runtime POST503, establish receipt authentication, or authorize another run/runtime action.",
+    "The actual native failure and local synthetic counts do not establish remote publication, operational readiness, global native drain or PC-off operation."
+  ],
+  "reviewerExecutedSource": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "disposition": "Scoped review complete; IDLE."
+}
