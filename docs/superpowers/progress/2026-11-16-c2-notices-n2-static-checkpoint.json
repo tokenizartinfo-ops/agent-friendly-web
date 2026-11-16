@@ -1,6 +1,6 @@
 {
   "schema": "afw.c2-notices-n2.root-static-checkpoint.v1",
-  "atUTC": "2026-11-16 12:27:09 UTC",
+  "atUTC": "2026-11-16 12:45:02 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "environment": "immutable Git DATA / Root docs",
@@ -56,9 +56,9 @@
     "Final Source packet/index/report/diff FULL-readback hashes verified; all14 new admission body hashes verified; normal13 metadata exactly unchanged; 3/4/5 hunks replay forward/reverse exact."
   ],
   "pending": [
-    "Independent OWN N2 implementation and native cloud covering",
-    "OWN scoped spec/quality review",
-    "Root Source admission/one-use execution/actual receipt/closure, only after preceding gates"
+    "Independent OWN scoped spec/quality review",
+    "Root Source admission/one-use execution/actual receipt/closure after review",
+    "Continue Task1 qualification and remaining frozen plan only on actual evidence"
   ],
   "SourceExecutedHere": false,
   "SourceQualified": false,
@@ -82,5 +82,30 @@
     "refCreated": false,
     "activated": false,
     "packet": "a30ecbb8d4990896082cad0104a8d6e91960e8f5"
+  },
+  "own": {
+    "index": "c3c2abe48c82545f982bd2fc741225987d89d048",
+    "hashesVerified": 17,
+    "runId": 43868775637,
+    "jobId": 133304082546,
+    "tests": 340,
+    "failed": 0,
+    "primary": "0e6ee8ed3fb9e1305eecfa74048009c7ddebf984",
+    "closed": {
+      "head": "a9f53b65be850953085be78df9868f9bbec32c67",
+      "tree": "6308cdd0fc6d098e2b5024928dfc69fa65835cbf",
+      "branch": "lab/afw-c2-own-receiver-20261116-notices-n2",
+      "testedHead": "0ccd54c6fd234c681f2967a538f7d0230fdea472",
+      "leaves": 3221,
+      "originals": 3203,
+      "workflowRemoved": true,
+      "SourceExecuted": false
+    },
+    "closeProof": "292f2304aa3b406279dd741789cfb730834518b6",
+    "review": {
+      "actor": "/root/c2_next_get_own_review",
+      "brief": "ea8ad653b9f0f46106a359848556e22800a8a7a2",
+      "pending": true
+    }
   }
 }
