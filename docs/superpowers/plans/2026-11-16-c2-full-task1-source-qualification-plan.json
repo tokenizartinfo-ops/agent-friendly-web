@@ -1,0 +1,267 @@
+{
+  "schema": "afw.c2-task1-full-source-roadmap.v1",
+  "status": "PLAN_ONLY_SOURCE_TESTS_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA. Proposal for at most one later GitHub keyless lab occurrence, pending independent gates.",
+  "resourceType": "Detached analysis report",
+  "allowedAction": "Read named immutable DATA and publish only this detached plan. No product, Source, livesite, refs, runs or executable writes.",
+  "rollback": "Discard this plan; existing proposal and evidence are immutable and unchanged.",
+  "evidence": {
+    "plan": "3434f31d432084d1b6153f85d3b8c64c8e043850",
+    "spec1": "64c9a109750940d820a20c9dd1dcedcddc64ee01",
+    "spec2": "cd0296158941515eb6839faf7a8de5ea608f330c",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "normal": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "authorityBrief": "ddca3344996d049bd2311ec66656fbe71dfbb9d5",
+    "ruling": "0be646b3302105b8191ee8f6f9d70ca0bff09d91",
+    "oldFullSourceV2": "f1d03b381242d0814e4632ceec990fa0fdd39820",
+    "oldOwn": "682cdfd5421a0b2030487ead6f48a1381745ebb4",
+    "oldOwnReader": "f7994836872bcd00d19f6cead7ad1667fe16e44d",
+    "oldOwnReview": "0a7f59f90c5134491c4fcd2442bf8d4daeeaa520",
+    "legacyDiagnosis": "620335609416de6c4ac1593ba4c6530038593250",
+    "latestW1": "6cfb0d0827ebe0cf8591d06d09e1ced0d7aedaaa",
+    "w1Outcome": "325efbf73e0fe5ecea0713cf76df6b7d8cecd3b5",
+    "w1Own": "2fdbd74df7127f13054cd6b72d76a349ebcb9db3",
+    "w1Closure": "bd3550f1e06fb30d7f612d744fd15340a862fe8b"
+  },
+  "decision": "Return directly to the frozen normal Task 1 qualification. No Source change, new observer, new cases/mutants, increased budget or W1 proof substitution. Corrected S08/S09 fix actual fixture contradictions in the earlier F9 world; this materially changes the input to a full qualification from the former F9 selection. It does not diagnose or fix any historical 503. A qualification is a test that can fail.",
+  "priorEvidence": {
+    "w1Run": "43945121668/1",
+    "job": "133572642517",
+    "scope": "4 diagnostic cases only; GET and POST 200 and bodies settled; child exit 0, AFTER returned. Before observed but unjoined NO_ELIGIBLE; after unavailable, no guard observed; causal interpretation unknown. W1 M 1996400B ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f matched previous Source-C M; QA 3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7 deliberately changed. Neither hash is a new full-run output or an admission pin for its normal QA. W1 closed. All prior partial/diagnostic results remain historical.",
+    "timingRisk": "Prior F9 green diagnostic 43821243410/1 native 12 PASS/5 FAIL over 17 completed outcomes, no completed last 3; finite-form requests cost ~30s, a later isolated action entered ~169455ms against 180000ms child. Different corrected fixtures/new qualification may still exceed unchanged limits. W1 did not test monitor/third/isolates/mutant/regressions. No extrapolated PASS, no replay on timeout."
+  },
+  "reuse": {
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "core": "3201",
+    "coreSha256": "aefb08c118db0e099833b8f1065779949be6bc8c1978eb828c26728ef0840703",
+    "mount": "Exactly 3203 unchanged BASE leaves and modes plus 25 named leaves from c230: inherited17 = frozen index + 13 inert body texts + fixed regression manifest + custody guard/preflight, and 8 qualifier paths. BASE bootstrap workflow 22f324e480dbe0295fe23fb7415328cba7952b1b is dependency DATA only. No W1/N3 files/workflows/QA/ledger/driver/helper, legacy lab workflow or replacement normal M. Hardcoded receiver gates remain external to Source tree. No bind/run/head/job claimed.",
+    "producerPaths": [
+      "c38ce3bda9f7cc88ef180b4f1a938812435b377f 5460 docs/superpowers/source-lab/c2-t1-fixture-fix1/mode-selection.json",
+      "cac11bfac3c19397c5074a7c52767c4990a48a87 10291 docs/superpowers/source-lab/c2-t1-fixture-fix1/tap-protocol.mjs",
+      "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f 14802 docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-vectors.json",
+      "bc33365eaf302d2296a759202a822af4a443f143 3313 docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-controls.mjs",
+      "1193e74ec0b0d60fb5c63d3a0340578e884dfb71 23205 docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+      "ff353576f71b95e1b8ba204fb8510200b4e073e9 15709 docs/superpowers/source-lab/c2-t1-fixture-fix1/protocol-contract.json",
+      "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b 13983 docs/superpowers/source-lab/c2-t1-fixture-fix1/frame-schema.json",
+      "98b96a9389a24893cbb5b197c4812c8b9543b1ad 1641 .github/workflows/afw-c2-source-lab-fixture-fix1.yml"
+    ],
+    "normalSourceFiles": [
+      "00 a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5 lib/mcp-qa-finite-owner-phase-context.mjs",
+      "01 cfbfb1656d4a013b40e770ee8335d5e1eb85a908 lib/mcp-qa-finite-owner-preparation.mjs",
+      "02 8505cfe4e020c570ec37cb5943b703770e4d06c8 lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "03 8b43e03e96b055be49b66a6788b27f129dd894c8 worker/mcp-own/finite.mjs",
+      "04 e2f35568a51360e3cbda4801f8d0d895d3f0dd7e lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "05 a177d50ff73f8fad1d60827ef904a204126796fb lib/mcp-qa-finite-owner-cleanup.mjs",
+      "06 4c1d7355e1759a5d597b520fcb79c2689b9bb966 lib/mcp-qa-finite-initial-cleanup.mjs",
+      "07 d4db10ee8a091434835a9ac28e0d607a5e9efd21 test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "08 de8a51e5a6023342b1b3aeccadf66e90611d268f test/fixtures/finite-coupled-native.mjs",
+      "09 3e1d4c2695dce2d13ba064274ba441c4ce9447c3 test/fixtures/finite-first-connection-publication.mjs",
+      "10 9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5 test/fixtures/finite-initial-entry-world.mjs",
+      "11 19441f9aa4a464b9594431b6e196d4318a7809b3 test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "12 e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd lib/mcp-qa-finite-owner-notice-get-forward.mjs"
+    ],
+    "indexSha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "reversible": [
+      {
+        "role": "producer full reversible DATA",
+        "blob": "e244651659a83957106b9fcbab66ebdb30a0eb48"
+      },
+      {
+        "role": "SourceF9 exact reversible delta",
+        "blob": "8c30a804ae360ae84ad4df3645c57531d620b388"
+      },
+      {
+        "role": "SourceORIGINALBASE full13 exact lossless diff",
+        "blob": "e871940513864ee4ab80a7cb80b8ec4155377cd5"
+      }
+    ],
+    "materialize": "Runner verifies true parent, tree and before/after Git/blob/byte digests. RED archives BASE product files and installs only proposed test roles. GREEN/MUTANT install the frozen 13 only in own temporary target; regression reruns its exact selected four files on the GREEN target in a new native process. S07 is the actual 20-case driver; S08 and S09 are the two corrected fixtures; S10 is the normal F9 compile harness (existing native test seams, no W1 variant).",
+    "originalSDK": "Use existing Miniflare normal first-connection harness, locked @cloudflare/workers-oauth-provider 1.2.1, original /authorize code+PKCE synthetic flow and SDK provenance, actual M→QA→PH/OP; reject stand-in helper, direct call bypass, observer build, replaced data or extended lease. S08:58-69 remounts actual provider configuration, checks synthetic authorization and sdk_complete:observed. S10:174-178 binds version module bytes to original closed bytes and actual worker script to initial M build hash on each remount. Full V2 wire does not output a per-compile SHA or justify reconstructing one from W1."
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+    "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIXTURE-FIX1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+    "job": "c2-source-lab-fixture-fix1",
+    "runner": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+    "artifact": {
+      "name": "afw-c2-owner-stages-source-t1-fixture-fix1-receipt",
+      "path": "output/c2-source-lab-fixture-fix1-receipt.json",
+      "fileName": "c2-source-lab-fixture-fix1-receipt.json",
+      "count": 1,
+      "retentionDays": 7,
+      "receiptBodyBytes": 24576
+    },
+    "admission": "Pre-nominated only. Root must verify name/message/head never used, preserved prior leases and no prior corrected full occurrence; no reuse of exhausted/closed branch, placebo renaming or head fabricated from DATA. If already spent, HOLD for history reconciliation/material reason and separate nomination."
+  },
+  "oracle": {
+    "modeSelection": [
+      {
+        "mode": "baseline-red",
+        "selectionHash": "24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa",
+        "count": 3
+      },
+      {
+        "mode": "proposal-green",
+        "selectionHash": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5",
+        "count": 20
+      },
+      {
+        "mode": "mutant-prefix",
+        "selectionHash": "46239e665ffe9154fbfb81725c81ac05c0228129f49db466b061397114f970a4",
+        "count": 20
+      },
+      {
+        "mode": "regressions",
+        "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6",
+        "count": 11
+      }
+    ],
+    "hashRule": "SHA256(UTF8(JSON.stringify(modeObject))) preserving keys/order as in immutable manifest. The whole pretty JSON file has its separate byte hash. For regressions SHA256(UTF8(JSON.stringify(parsed immutable v1 regression manifest))) stays e2100bd2... The compact v2 selection objects have no self-hash.",
+    "nativeBaseIds": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH",
+      "C2T1_NOTICES"
+    ],
+    "greenAndMutantExactOrdered": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH",
+      "C2T1_HANDLE",
+      "C2T1_PROJECTREF",
+      "C2T1_SUBJECT",
+      "C2T1_PHASE_RENAME",
+      "C2T1_SOURCE_BYTES",
+      "C2T1_APPROVAL",
+      "C2T1_PREDECESSOR",
+      "C2T1_GRANT_REVOKED",
+      "C2T1_EXTRA_KEY",
+      "C2T1_NOTICES",
+      "C2T1_MONITOR_COOKIE",
+      "C2T1_MONITOR",
+      "C2T1_SCOPE_MISSING",
+      "C2T1_FINITE",
+      "C2T1_SELECTION",
+      "C2T1_LOST_ACK_DUPLICATE",
+      "C2T1_UNRESOLVED_WRITER",
+      "C2T1_OWN_PROMISE"
+    ],
+    "regressionManifest": {
+      "dataPath": "docs/superpowers/source-lab/c2-t1/regression-selection.json",
+      "blob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+      "selectionHash": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6",
+      "bodyHash": "8287deef6924d3f91db98078da7bca8bdb55e292f87f9fd814da794e513ba4cf",
+      "bytes": 3364
+    },
+    "regressionsExactOrdered": [
+      {
+        "id": "C2T1_REG_01",
+        "file": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "name": "T2 finite dispatch never falls through ordinary"
+      },
+      {
+        "id": "C2T1_REG_02",
+        "file": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "name": "T2 closed mounted conduits cannot authorize business"
+      },
+      {
+        "id": "C2T1_REG_03",
+        "file": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "name": "T3 same initial bytes produce connection and downstream"
+      },
+      {
+        "id": "C2T1_REG_04",
+        "file": "test/mcp-qa-finite-initial-cleanup-native.test.mjs",
+        "name": "B2b only actual finite alarm with no initial records delegates nominal unchanged"
+      },
+      {
+        "id": "C2T1_REG_05",
+        "file": "test/mcp-qa-finite-initial-cleanup-native.test.mjs",
+        "name": "Unit2a unresolved issuer prefix refuses initial alarm without inventing authority"
+      },
+      {
+        "id": "C2T1_REG_06",
+        "file": "test/mcp-qa-finite-owner-cleanup-native.test.mjs",
+        "name": "R2 native monitoring revoke rejects foreign revision and sequence"
+      },
+      {
+        "id": "C2T1_REG_07",
+        "file": "test/mcp-qa-finite-owner-cleanup-native.test.mjs",
+        "name": "R2 native monitoring revoke enforces native C1 and child window"
+      },
+      {
+        "id": "C2T1_REG_08",
+        "file": "test/mcp-qa-finite-owner-notice-get-native.test.mjs",
+        "name": "pure fixed GET wire rejects caller authority and noncanonical metadata"
+      },
+      {
+        "id": "C2T1_REG_09",
+        "file": "test/mcp-qa-finite-owner-notice-get-native.test.mjs",
+        "name": "notice cookie-list accepts token names and legitimate values"
+      },
+      {
+        "id": "C2T1_REG_10",
+        "file": "test/mcp-qa-finite-owner-notice-get-native.test.mjs",
+        "name": "notice cookie-list rejects malformed list"
+      },
+      {
+        "id": "C2T1_REG_11",
+        "file": "test/mcp-qa-finite-owner-notice-get-native.test.mjs",
+        "name": "notice cookie-list bounds assertion and native header envelope"
+      }
+    ],
+    "red": "Native filtered BASE only: CONNECTION pass, OAUTH pass, NOTICES native fail, in this order, all 1/1/1, exit1. Bind own testCodeFailure strictEqual ERR_ASSERTION actual503 expected200 in S07 definition6:30/action36:2/S08 choose18:118 and Object.approve39:29/TestContext9:6 in same target and same case. Seventeen not selected on BASE; no observation for them. Native expected RED is a baseline control, independent of historical W1 Source-C 503.",
+    "green": "All 20 PASS, exit0. First 17 on one graph, checkpoints 1/1/1 rows1–11, 2/2/2 rows12–15, 3/3/3 rows16–17. Last 3 are separate isolated graphs with measured counters (do not extend main monotonicity). Each counter object has exactly upload,activation,receipts in this order, integer 0..3, receipts≤activation≤upload. Every C2SOURCE frame must match unique native TAP case/phase/status/code/ordinal and actual counts.",
+    "mutant": "One exact esbuild-only reversible prefix inventory predicate deletion from normal manifest, AFW_C2_T1_MUTANT=prefix, same 20 IDs & order. Exit1, named C2T1_EXTRA_KEY native testCodeFailure and its paired GREEN pass; retain all other observed mutant outcomes without predeclaring all 19 PASS. C2T1_OWN_PROMISE is a real separate negative test, not a second mutant.",
+    "regressions": "Node v22.23.4 TAP only, exact frozen args/anchor from reg manifest, AFW_R2_GROUP=components, all 11 pass/no extra, exit0; not whole suite. Primary args --experimental-vm-modules --test --test-reporter=tap --test-concurrency=1; BASE only applies exact three-name filter."
+  },
+  "businessEvidence": {
+    "stageResults": "S00:683–779 retains actual engine upload/activate pending work before awaiting; rechecks own result identities and journal records on same stage. S08:34–59/117–122 binds 3 stages by name, 3 distinct version and 3 deployment IDs, baseline version/deployment to predecessor, each journal ACK to own SEND + resourceId before deadline, each receipt hash to its body, actual arrays to counts, exactly six SEND and three SF receipts. Verify closed final module/config excluding allocated id; selected after last receipt, head present/unbound. S00:785ff also rereads selection, prep and publication witness. Receipts here are synthetic policy-effect journal records, distinct from the one sanitized CI artifact. Never emit or invent three raw DTOs or use aggregate counts alone as proof.",
+    "monitor": "S08:86–108 rejects first-stage cookie. Notices GET/POST uses current policy plus original OAuth grant; native monitoring GET /monitoring and POST /monitoring/grant separate. Current exact grant, old grant set unchanged, all historical events unchanged, exactly 1 added row for the current grant. Validate subject/project/revision/client/resource/action/purpose/requestId/sequence/time, SEND+ACK window/row hash and NoticeLink eventHash. OAuth and application monitoring remain separate consents.",
+    "finiteCleanup": "S08:110–122 tests synthetic third-form scope under actual signed fixture identity, both omitted-write and drifting-holder (zero put for the latter) denied/no new effects, then genuine finite POST and unbound selection. S04 e2f3556 binds exact full consent text in spec2 (project+goal shown by S00:657–659), version/hash/button=approve, stageApprovalHash/prepId/sourceRevision, issuer reservation/fence + original SDK root/grant + GrantLink/NoticeLink, +240000/+420000ms, approvedAt, tuple hash. Append only, bound same storage/transaction/get/put/sync; reread exact returned body before third upload and selection (S00:746). Old consent never authorizes earlier revocation. Only synthetic approval and prepared fallback here; no real revoke, fence, drain, handoff or alarm inferred.",
+    "negativeWork": "Lost ACK+duplicate POST denies unchanged history; held actual fetch keeps exclusion beyond request timeout until physical release then no late ACK/activation/receipt; resealed matching ACK without own settled result cannot activate. Fallback C0/C1/backup/counters remain from original; old initial/cleanup regressions cover only selected cases. No global native drain/namespace claim."
+  },
+  "limits": {
+    "totalMs": 330000,
+    "nativeChildMs": 180000,
+    "nativeCaseMs": 120000,
+    "ownedPreflightMs": 10000,
+    "jobMinutes": 7,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "archiveBytes": 33554432,
+    "receiptBytes": 24576,
+    "sdk": "1.2.1",
+    "liveLease": "Original incoming <=30000ms, per-leaf <=5000ms/phase ceilings, no fresh clocks/renewals, no retry after ambiguous ticket writes. Source runner 330000ms ALL modes versus 180000ms per child/120000 per native case and 7min job. These are hard ceilings, not evidence of enough time.",
+    "scope": "ArchiveBytes=32MiB is local git archive limit, not artifact wire. Apply existing separate receiver ZIP/log/payload caps; ZIP size/hash from actual bytes and listing. Preflight 10s. Synthetic controls 3 positives +35 negatives before native; real BOOTSTRAP_DEPENDENCY_ABSENT exact ENOENT rather than mocked missing workflow.",
+    "custody": "Exact six checked launches: preflight, absent-CWD dependency, BASE, GREEN, MUTANT, REG. Parent UID non-root and executable/pinned cwd/env; each child uses clean environment/unshare separate net (loopback only), correct UID/GID, cleared groups/no-new-privs; verify own private PID records after each. Fresh 1..8 per launch, <=8 per target, cross-target 6..24 processes. Verify preflight marker/probe ownership, removal and own temporary root removal at end with readback. No credential/remote provider/owner IO; npm-ci immutable lock/actions only."
+  },
+  "ownGate": {
+    "available": "Historical independent OWN225 full Source receiver f799483: c2RootApiJoin, c2V2CheckModeCases, c2V2ReadFrame/c2V2ReadBundle/c2OwnReadSource, prior control lineage available. W1 independent occurrence provides transport/strict ZIP admission primitives only, never substitute its four N3 cases or reducer/selection for full. No borrowing Source.tap-protocol, expected-via-fixture results, diagnostic flags or new business truth.",
+    "missing": "Historical full OWN is hardcoded to v2-fix1 job/branch/command/artifact/index b0af9e… and its old S08 65933/14244B + S09 ec57e/60636B, old canonical selections and baseline witness. Must bind corrected nomination, actual WFs/steps/command/artifact, raw 13 Git/bytes/SHA separately, proof admitted projection exactly path,sha256,bytes (this field order); S08 de8a51e/18667B, S09 3e1d4c2/61073B, hashes of three new mode objects/S08 in witness; fixed regressions hash. Legacy c2OwnReadSource takes a supplied archiveSha256 string+payloadText/listing, not raw ZIP bytes; prebind actual-byte ZIP/hashes/CRC/full-member semantics, preserve RAW→physical line→command-step checks. No generic schema/ordering exception or dynamic arbitrary expected values.",
+    "beforeExecution": "OWN specialist supplies separate, versioned, independent fixture-first controls for positive/negative full protocol + wrong old/W1 pins, scope IDs/status/counters/witness/totals, cross-run/time/command aliases/ZIP spoofing/mismatched fields/custody, unchanged old controls. Root reviews and proves actual independent reader can accept correct and reject bad examples before Source attempt. Require sealed full Source13+25 path edges and byte values, expected values independently derived from pins. No Source/Task1 claim from tooling controls or specimen.",
+    "wire": "Exactly 8 canonical physical UTF8 JSON+LF frames from actual unique command step: AFW_C2_SOURCE_SYNTHETIC_V2_FIX1, AFW_C2_DEPENDENCY_CONTROL, AFW_C2_SOURCE_MODE_V2 x4 (baseline-red/proposal-green/mutant-prefix/regressions), AFW_C2_SOURCE_CUSTODY_V2, AFW_C2_SOURCE_RECEIPT_V2. Diagnostic/partial or extra frame disqualifies. Compare four embedded observations to separate frames byte-for-byte canonical; constrain every key/order/type/finite value and whitelist/semantic witness/counter/checkpoints. Artifact sole JSON = final receipt body + LF and exact listed name/run/head/id/digest/raw bytes; bind timeline attempt1, terminal unique job and command group; no cross-mode or occurrence stitching. Only sanitized frames/statistics/cryptographic hashes to durable evidence."
+  },
+  "rootGate": [
+    "Complete pending W1 review for its own scope only. Verify new full was not already consumed; establish actual distinct nomination/head/parent/tree and immutable original leases; compare 3203 BASE paths+mode, Core, main and historical refs, preimages. Root audits EVERY inherited workflow trigger, no extra running workflow/privileged environment, keyless contents:read and exact pinned checkout/setup/upload-artifact before admitting push.",
+    "Require independent OWN gate/controls/review for corrected 25-path fixture admission before any full Source push. Root alone may issue one attempt1 -- future action. No Task2 or new observer round; R4/5 remains historical.",
+    "Wait whole run/job terminal; ingest allowed log and ZIP once and preserve actual evidence even on failure. If timing/parsing/custody/transport/any case cannot qualify: keep actual code/frontier/last accepted mode, remaining unknown; an incomplete run yields no qualifying final receipt. Never fill blanks from declarations/W1, rerun same head, raise budgets or silently skip a case. Reconsider only a material new reason.",
+    "Root closes even an incomplete run: remove ONLY nominated executable/ability to dispatch using verified parent/rollback, compare all original leaves/modes, main and prior tips; read back closed head/tree/absence of workflow and zero runs on close head; preserve inputs/outputs/source deltas and independent receipt/review. Later Source qualification requires actual independent full acceptance. Task1Pass requires task spec+quality review of native result plus complete Source callgraph, not CI green alone."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
