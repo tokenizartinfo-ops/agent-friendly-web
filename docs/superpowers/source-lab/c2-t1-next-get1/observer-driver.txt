@@ -1,0 +1,19 @@
+// DIAGNOSTIC ONLY. Normal Source S07 remains separately pinned.
+import test,{after} from 'node:test';
+import assert from 'node:assert/strict';
+import {createFiniteCoupledOwnerWorld} from './fixtures/finite-coupled-native.mjs';
+import {mark,recorderReady} from './next-get-recorder.mjs';
+let w;
+after(async()=>{mark('AFTER','after','enter');try{await w?.close();mark('AFTER','after','return');}catch(error){mark('AFTER','after','throw',error);throw error;}});
+const run=(id,work)=>test(id,{timeout:120000},async()=>{
+ let actionThrew=false,counterThrew=false,actionError,counterError;
+ mark(id,'action','enter');try{assert(recorderReady());await work();mark(id,'action','return');}catch(error){actionThrew=true;actionError=error;mark(id,'action','throw',error);}
+ mark(id,'count','enter');try{const counts=w?await w.counts():null;void counts;mark(id,'count','return');}catch(error){counterThrew=true;counterError=error;mark(id,'count','throw',error);}
+ if(actionThrew)throw actionError;if(counterThrew)throw counterError;
+});
+run('NG_CONNECTION',async()=>{w=await createFiniteCoupledOwnerWorld();await w.approve('connection');assert.deepEqual(await w.counts(),{upload:1,activation:1,receipts:1});});
+run('NG_OAUTH',async()=>{await w.oauth();});
+run('NG_PHASE',async()=>{await w.corruptThenDeny('phase');});
+run('NG_NOTICES',async()=>{await w.approve('notices');assert.deepEqual(await w.counts(),{upload:2,activation:2,receipts:2});});
+run('NG_MONITOR',async()=>{await w.monitor();});
+run('NG_NEXT_GET',async()=>{const result=await w.nextGetDiagnostic();assert.equal(result.status,200);});

@@ -1,0 +1,77 @@
+{
+  "schema": "afw.c2-next-get.selection.v1",
+  "node": "v22.23.4",
+  "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "sourceIndexHash": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+  "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+  "driverBlob": "20d194d9b6b87eff6d1b68d08668e5183bc66195",
+  "driverHash": "2ac917ef89f3e285dc6d0ebb654fb163c8cf46a791795173174775373c5cf31d",
+  "normalDriverBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+  "fixtureBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+  "observerFixtureBlob": "171f57edcb8f957798459f5a5677f48ed8400489",
+  "normalWorldBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+  "observerWorldBlob": "24707e47e042ee60b4e549c1a5a195ede7ca0019",
+  "compileInstrumentationBlob": "0b8f087711a24018ef869f093e80d0f235e45d4d",
+  "workerTraceBlob": "86daedb5b2bc8d100c37874ecd8e6c0ad5311fb8",
+  "pattern": "^(NG_CONNECTION|NG_OAUTH|NG_PHASE|NG_NOTICES|NG_MONITOR|NG_NEXT_GET)$",
+  "selected": [
+    {
+      "id": "NG_CONNECTION",
+      "work": "actual create world; approve connection; actual1/1/1 assertion",
+      "sourceCase": "C2T1_CONNECTION"
+    },
+    {
+      "id": "NG_OAUTH",
+      "work": "actual world.oauth()",
+      "sourceCase": "C2T1_OAUTH"
+    },
+    {
+      "id": "NG_PHASE",
+      "work": "corrected rawphase corruption; actualcompiledunavailable/GETdenial/noSEND/exactrestore",
+      "sourceCase": "C2T1_PHASE_RENAME"
+    },
+    {
+      "id": "NG_NOTICES",
+      "work": "actual world.approve notices; actual2/2/2 assertion",
+      "sourceCase": "C2T1_NOTICES"
+    },
+    {
+      "id": "NG_MONITOR",
+      "work": "actual world.monitor with currentidentity/delta/completehistory assertion",
+      "sourceCase": "C2T1_MONITOR"
+    },
+    {
+      "id": "NG_NEXT_GET",
+      "work": "exactONE finiteformGET, actualHTTP/body/metadata observation then actualstatus200 assertion; noPOST",
+      "sourceCase": null
+    }
+  ],
+  "declaredNotRun": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ],
+  "qualification": false,
+  "registration": "eager6 native root sequential plus globalafter; no extra parent/native cases; old Source20 not exercised as qualification.",
+  "recorderBlob": "c1647140c7b20654ea80c212f3bc7032bc1f18ff",
+  "readerBlob": "c94c06b6fed51baa35dfe4b5b335126413fc4966",
+  "slotBlob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+  "vectorsBlob": "cbaa7906025c3cf0ffd5aeefaff0b936700b08b0"
+}

@@ -1,0 +1,21 @@
+// DIAGNOSTIC-ONLY pure Worker memory. No storage, filesystem, network or business authority.
+export const NEXT_INDEX_HASH='0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7';
+const sites=['initial-timeline','timeline','op-source','op-check','op-step','finite-permission','finite-history','ticket-put','ticket-readback'];
+let armed=false,epoch=0,start=0,fault=false,events=[],stats=new Map(),seen=new Set();
+const num=(v,a,b)=>Number.isSafeInteger(v)&&v>=a&&v<=b;
+const margin=(v,n)=>v===null||num(v,-n,n)?v:null;
+export const nextGetArmed=()=>armed;
+export function armNextGet(){if(armed||epoch)throw Error('NEXT_DIAGNOSTIC_ALREADY_ARMED');armed=true;epoch=1;start=Date.now();return true;}
+export function nextGetMark(site,edge,remainingMs=null,ceilingMs=null){
+ if(!armed||fault)return;
+ try{
+  const elapsed=Date.now()-start;if(!sites.includes(site)||!['enter','return','throw'].includes(edge)||!num(elapsed,0,180000))throw 0;
+  const row=stats.get(site)??[site,0,0,0,0,elapsed,null,null];row[edge==='enter'?1:edge==='return'?2:3]++;row[4]=row[1]-row[2]-row[3];row[5]=elapsed;row[6]=margin(remainingMs,30000);row[7]=margin(ceilingMs,900000);
+  if(row.slice(1,5).some(v=>!num(v,0,4096)))throw 0;stats.set(site,row);
+  const key=site+'/'+edge;if(!seen.has(key)){if(events.length>=27)throw 0;seen.add(key);events.push({workerSequence:events.length+1,workerElapsedMs:elapsed,site,edge,remainingMs:row[6],ceilingMs:row[7]});}
+ }catch{fault=true;}
+}
+export function readNextGetTrace(){
+ const elapsed=Date.now()-start;
+ return {schema:'afw.c2-next-get.worker.v1',sourceIndexHash:NEXT_INDEX_HASH,epoch,workerElapsedMs:num(elapsed,0,180000)?elapsed:null,fault:fault||!armed||!num(elapsed,0,180000),events:events.map(e=>({...e})),stats:[...stats.values()].map(s=>[...s])};
+}

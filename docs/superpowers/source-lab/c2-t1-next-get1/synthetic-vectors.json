@@ -1,0 +1,1137 @@
+{
+  "schema": "afw.c2-next-get.controls.v1",
+  "syntheticOnly": true,
+  "notSourceEvidence": true,
+  "base": {
+    "binding": {
+      "sourceIndexHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "selectionHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "driverHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "records": [
+      {
+        "sequence": 1,
+        "elapsedMs": 0,
+        "kind": "binding",
+        "sourceIndexHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "selectionHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "driverHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      },
+      {
+        "sequence": 2,
+        "elapsedMs": 1,
+        "kind": "flow",
+        "id": "NG_CONNECTION",
+        "operation": "action",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 3,
+        "elapsedMs": 2,
+        "kind": "flow",
+        "id": "NG_CONNECTION",
+        "operation": "action",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 4,
+        "elapsedMs": 3,
+        "kind": "flow",
+        "id": "NG_CONNECTION",
+        "operation": "count",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 5,
+        "elapsedMs": 4,
+        "kind": "flow",
+        "id": "NG_CONNECTION",
+        "operation": "count",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 6,
+        "elapsedMs": 5,
+        "kind": "flow",
+        "id": "NG_OAUTH",
+        "operation": "action",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 7,
+        "elapsedMs": 6,
+        "kind": "flow",
+        "id": "NG_OAUTH",
+        "operation": "action",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 8,
+        "elapsedMs": 7,
+        "kind": "flow",
+        "id": "NG_OAUTH",
+        "operation": "count",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 9,
+        "elapsedMs": 8,
+        "kind": "flow",
+        "id": "NG_OAUTH",
+        "operation": "count",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 10,
+        "elapsedMs": 9,
+        "kind": "flow",
+        "id": "NG_PHASE",
+        "operation": "action",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 11,
+        "elapsedMs": 10,
+        "kind": "flow",
+        "id": "NG_PHASE",
+        "operation": "action",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 12,
+        "elapsedMs": 11,
+        "kind": "flow",
+        "id": "NG_PHASE",
+        "operation": "count",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 13,
+        "elapsedMs": 12,
+        "kind": "flow",
+        "id": "NG_PHASE",
+        "operation": "count",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 14,
+        "elapsedMs": 13,
+        "kind": "flow",
+        "id": "NG_NOTICES",
+        "operation": "action",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 15,
+        "elapsedMs": 14,
+        "kind": "flow",
+        "id": "NG_NOTICES",
+        "operation": "action",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 16,
+        "elapsedMs": 15,
+        "kind": "flow",
+        "id": "NG_NOTICES",
+        "operation": "count",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 17,
+        "elapsedMs": 16,
+        "kind": "flow",
+        "id": "NG_NOTICES",
+        "operation": "count",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 18,
+        "elapsedMs": 17,
+        "kind": "flow",
+        "id": "NG_MONITOR",
+        "operation": "action",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 19,
+        "elapsedMs": 18,
+        "kind": "flow",
+        "id": "NG_MONITOR",
+        "operation": "action",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 20,
+        "elapsedMs": 19,
+        "kind": "flow",
+        "id": "NG_MONITOR",
+        "operation": "count",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 21,
+        "elapsedMs": 20,
+        "kind": "flow",
+        "id": "NG_MONITOR",
+        "operation": "count",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 22,
+        "elapsedMs": 21,
+        "kind": "flow",
+        "id": "NG_NEXT_GET",
+        "operation": "action",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 23,
+        "elapsedMs": 22,
+        "kind": "metadata",
+        "stage": "before",
+        "tickets": {
+          "state": "observed",
+          "count": 0,
+          "uses": 0
+        },
+        "retention": {
+          "state": "absent",
+          "count": 0
+        }
+      },
+      {
+        "sequence": 24,
+        "elapsedMs": 23,
+        "kind": "http",
+        "edge": "request",
+        "status": null
+      },
+      {
+        "sequence": 25,
+        "elapsedMs": 24,
+        "kind": "worker-edge",
+        "workerSequence": 1,
+        "workerElapsedMs": 1,
+        "site": "initial-timeline",
+        "edge": "enter",
+        "remainingMs": 29990,
+        "ceilingMs": null
+      },
+      {
+        "sequence": 26,
+        "elapsedMs": 25,
+        "kind": "worker-edge",
+        "workerSequence": 2,
+        "workerElapsedMs": 3,
+        "site": "initial-timeline",
+        "edge": "return",
+        "remainingMs": 29988,
+        "ceilingMs": null
+      },
+      {
+        "sequence": 27,
+        "elapsedMs": 26,
+        "kind": "worker-state",
+        "epoch": 1,
+        "workerSequence": 2,
+        "workerElapsedMs": 4,
+        "fault": false,
+        "stats": [
+          [
+            "initial-timeline",
+            1,
+            1,
+            0,
+            0,
+            3,
+            29988,
+            null
+          ]
+        ],
+        "retention": {
+          "state": "active",
+          "count": 2
+        }
+      },
+      {
+        "sequence": 28,
+        "elapsedMs": 27,
+        "kind": "http",
+        "edge": "response",
+        "status": 200
+      },
+      {
+        "sequence": 29,
+        "elapsedMs": 28,
+        "kind": "http",
+        "edge": "body-return",
+        "status": 200
+      },
+      {
+        "sequence": 30,
+        "elapsedMs": 29,
+        "kind": "metadata",
+        "stage": "after",
+        "tickets": {
+          "state": "observed",
+          "count": 1,
+          "uses": 0
+        },
+        "retention": {
+          "state": "absent",
+          "count": 0
+        }
+      },
+      {
+        "sequence": 31,
+        "elapsedMs": 30,
+        "kind": "flow",
+        "id": "NG_NEXT_GET",
+        "operation": "action",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 32,
+        "elapsedMs": 31,
+        "kind": "flow",
+        "id": "NG_NEXT_GET",
+        "operation": "count",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 33,
+        "elapsedMs": 32,
+        "kind": "flow",
+        "id": "NG_NEXT_GET",
+        "operation": "count",
+        "edge": "return",
+        "error": null
+      },
+      {
+        "sequence": 34,
+        "elapsedMs": 33,
+        "kind": "flow",
+        "id": "AFTER",
+        "operation": "after",
+        "edge": "enter",
+        "error": null
+      },
+      {
+        "sequence": 35,
+        "elapsedMs": 34,
+        "kind": "flow",
+        "id": "AFTER",
+        "operation": "after",
+        "edge": "return",
+        "error": null
+      }
+    ],
+    "tap": "TAP version 13\nok 1 - NG_CONNECTION\nok 2 - NG_OAUTH\nok 3 - NG_PHASE\nok 4 - NG_NOTICES\nok 5 - NG_MONITOR\nok 6 - NG_NEXT_GET\n1..6\n",
+    "condition": "normal",
+    "writerFault": false
+  },
+  "accepted": [
+    {
+      "id": "complete-http200",
+      "edits": [],
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "complete",
+        "status": 200,
+        "bodyReadSettled": true,
+        "ticketDelta": 1
+      }
+    },
+    {
+      "id": "observed-http503",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            27,
+            "status"
+          ],
+          "value": 503
+        },
+        {
+          "op": "set",
+          "path": [
+            "records",
+            28,
+            "status"
+          ],
+          "value": 503
+        },
+        {
+          "op": "set",
+          "path": [
+            "records",
+            30,
+            "edge"
+          ],
+          "value": "throw"
+        },
+        {
+          "op": "set",
+          "path": [
+            "records",
+            30,
+            "error"
+          ],
+          "value": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": null
+          }
+        },
+        {
+          "op": "set",
+          "path": [
+            "tap"
+          ],
+          "value": "TAP version 13\nok 1 - NG_CONNECTION\nok 2 - NG_OAUTH\nok 3 - NG_PHASE\nok 4 - NG_NOTICES\nok 5 - NG_MONITOR\nnot ok 6 - NG_NEXT_GET\n1..6\n"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "complete",
+        "status": 503,
+        "bodyReadSettled": true,
+        "ticketDelta": 1
+      }
+    },
+    {
+      "id": "timeout-null",
+      "edits": [
+        {
+          "op": "truncate",
+          "count": 25
+        },
+        {
+          "op": "set",
+          "path": [
+            "condition"
+          ],
+          "value": "timeout"
+        },
+        {
+          "op": "set",
+          "path": [
+            "tap"
+          ],
+          "value": "TAP version 13\nok 1 - NG_CONNECTION\nok 2 - NG_OAUTH\nok 3 - NG_PHASE\nok 4 - NG_NOTICES\nok 5 - NG_MONITOR\n"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "prefix",
+        "status": null,
+        "bodyReadSettled": null,
+        "ticketDelta": null
+      }
+    },
+    {
+      "id": "partial-ticket-unknown",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            27,
+            "status"
+          ],
+          "value": 503
+        },
+        {
+          "op": "set",
+          "path": [
+            "records",
+            28,
+            "status"
+          ],
+          "value": 503
+        },
+        {
+          "op": "set",
+          "path": [
+            "records",
+            28,
+            "edge"
+          ],
+          "value": "body-throw"
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            29,
+            "tickets"
+          ],
+          "value": {
+            "state": "unavailable",
+            "count": null,
+            "uses": null
+          }
+        },
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            29,
+            "retention"
+          ],
+          "value": {
+            "state": "unavailable",
+            "count": null
+          }
+        },
+        {
+          "op": "set",
+          "path": [
+            "records",
+            30,
+            "edge"
+          ],
+          "value": "throw"
+        },
+        {
+          "op": "set",
+          "path": [
+            "records",
+            30,
+            "error"
+          ],
+          "value": {
+            "name": "Error",
+            "code": null,
+            "site": null
+          }
+        },
+        {
+          "op": "set",
+          "path": [
+            "tap"
+          ],
+          "value": "TAP version 13\nok 1 - NG_CONNECTION\nok 2 - NG_OAUTH\nok 3 - NG_PHASE\nok 4 - NG_NOTICES\nok 5 - NG_MONITOR\nnot ok 6 - NG_NEXT_GET\n1..6\n"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "complete",
+        "status": 503,
+        "bodyReadSettled": false,
+        "ticketDelta": null
+      }
+    },
+    {
+      "id": "latest-unavailable-does-not-inherit",
+      "edits": [
+        {
+          "op": "insert",
+          "index": 30,
+          "value": {
+            "kind": "worker-unavailable"
+          }
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "code": "OK",
+        "integrity": "complete",
+        "status": 200,
+        "bodyReadSettled": true,
+        "ticketDelta": 1,
+        "latestRetention": "unavailable"
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "id": "binding-source",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            0,
+            "sourceIndexHash"
+          ],
+          "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "BINDING_INVALID"
+      }
+    },
+    {
+      "id": "binding-selection",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            0,
+            "selectionHash"
+          ],
+          "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "BINDING_INVALID"
+      }
+    },
+    {
+      "id": "binding-driver",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            0,
+            "driverHash"
+          ],
+          "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "BINDING_INVALID"
+      }
+    },
+    {
+      "id": "duplicate-sequence",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            2,
+            "sequence"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "JOURNAL_INVALID"
+      }
+    },
+    {
+      "id": "torn-record",
+      "edits": [
+        {
+          "op": "tail",
+          "value": "{\"torn\":"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "JOURNAL_TORN"
+      }
+    },
+    {
+      "id": "raw-error-field",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            1,
+            "message"
+          ],
+          "value": "forbidden"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "JOURNAL_INVALID"
+      }
+    },
+    {
+      "id": "unknown-site",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            24,
+            "site"
+          ],
+          "value": "private"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "TRACE_INVALID"
+      }
+    },
+    {
+      "id": "worker-epoch",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            26,
+            "epoch"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "TRACE_INVALID"
+      }
+    },
+    {
+      "id": "duplicate-worker-edge",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            25,
+            "edge"
+          ],
+          "value": "enter"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "TRACE_INVALID"
+      }
+    },
+    {
+      "id": "worker-sequence",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            25,
+            "workerSequence"
+          ],
+          "value": 1
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "TRACE_INVALID"
+      }
+    },
+    {
+      "id": "counter-collision",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            26,
+            "stats",
+            0
+          ],
+          "value": {
+            "entered,returned": 1
+          }
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "TRACE_INVALID"
+      }
+    },
+    {
+      "id": "counter-range",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            26,
+            "stats",
+            0,
+            1
+          ],
+          "value": 4097
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "TRACE_INVALID"
+      }
+    },
+    {
+      "id": "open-inconsistent",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            26,
+            "stats",
+            0,
+            2
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "TRACE_INVALID"
+      }
+    },
+    {
+      "id": "status-string",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            27,
+            "status"
+          ],
+          "value": "200"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "HTTP_INVALID"
+      }
+    },
+    {
+      "id": "status-cap",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            27,
+            "status"
+          ],
+          "value": 600
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "HTTP_INVALID"
+      }
+    },
+    {
+      "id": "unknown-zero",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            27,
+            "status"
+          ],
+          "value": 0
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "HTTP_INVALID"
+      }
+    },
+    {
+      "id": "body-before-response",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            27,
+            "edge"
+          ],
+          "value": "body-return"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "HTTP_INVALID"
+      }
+    },
+    {
+      "id": "second-request",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            27,
+            "edge"
+          ],
+          "value": "request"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "HTTP_INVALID"
+      }
+    },
+    {
+      "id": "tickets-cap",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            29,
+            "tickets",
+            "count"
+          ],
+          "value": 4
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "METADATA_INVALID"
+      }
+    },
+    {
+      "id": "ticket-unavailable-zero",
+      "edits": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            29,
+            "tickets"
+          ],
+          "value": {
+            "state": "unavailable",
+            "count": 0,
+            "uses": 0
+          }
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "METADATA_INVALID"
+      }
+    },
+    {
+      "id": "retained-unavailable-zero",
+      "edits": [
+        {
+          "op": "replace",
+          "path": [
+            "records",
+            29,
+            "retention"
+          ],
+          "value": {
+            "state": "unavailable",
+            "count": 0
+          }
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "METADATA_INVALID"
+      }
+    },
+    {
+      "id": "retained-absent-one",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            29,
+            "retention",
+            "count"
+          ],
+          "value": 1
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "METADATA_INVALID"
+      }
+    },
+    {
+      "id": "extra-business-case",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            1,
+            "id"
+          ],
+          "value": "FINITE_POST"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "ORDER_INVALID"
+      }
+    },
+    {
+      "id": "duplicate-case",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "records",
+            5,
+            "id"
+          ],
+          "value": "NG_CONNECTION"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "ORDER_INVALID"
+      }
+    },
+    {
+      "id": "native-duplicate",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "tap"
+          ],
+          "value": "TAP version 13\nok 1 - NG_CONNECTION\nok 2 - NG_CONNECTION\nok 3 - NG_PHASE\nok 4 - NG_NOTICES\nok 5 - NG_MONITOR\nok 6 - NG_NEXT_GET\n1..6\n"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "NATIVE_INVALID"
+      }
+    },
+    {
+      "id": "native-skip",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "tap"
+          ],
+          "value": "TAP version 13\nok 1 - NG_CONNECTION\nok 2 - NG_OAUTH # SKIP\nok 3 - NG_PHASE\nok 4 - NG_NOTICES\nok 5 - NG_MONITOR\nok 6 - NG_NEXT_GET\n1..6\n"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "NATIVE_INVALID"
+      }
+    },
+    {
+      "id": "native-extra",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "tap"
+          ],
+          "value": "TAP version 13\nok 1 - NG_CONNECTION\nok 2 - OTHER_BUSINESS\nok 3 - NG_PHASE\nok 4 - NG_NOTICES\nok 5 - NG_MONITOR\nok 6 - NG_NEXT_GET\n1..6\n"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "NATIVE_INVALID"
+      }
+    },
+    {
+      "id": "recorder-fault",
+      "edits": [
+        {
+          "op": "set",
+          "path": [
+            "writerFault"
+          ],
+          "value": true
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "code": "JOURNAL_INVALID"
+      }
+    }
+  ],
+  "witnessVectors": {
+    "source": "base.records",
+    "expected": {
+      "prefixBytes": 4270,
+      "prefixSha256": "37e89aff67026c6aaed0fddffbf2de625cf5dceb323f5faa38b760cc4ffe0d8b"
+    },
+    "rejected": [
+      {
+        "id": "witness-hash-mismatch",
+        "field": "prefixSha256",
+        "value": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      {
+        "id": "witness-byte-mismatch",
+        "field": "prefixBytes",
+        "value": 1
+      }
+    ]
+  },
+  "slotControls": {
+    "checks": 5,
+    "observationLimitMsForSynthetic": 1,
+    "normalObservationLimitMs": 1000,
+    "steps": [
+      {
+        "id": "timeout-retains-actual",
+        "operation": "start unresolved syntheticRPC and wait1ms timeout",
+        "expected": "okfalse,busytrue,launches1"
+      },
+      {
+        "id": "busy-skips-new-rpc",
+        "operation": "attempt next metadataread while actualpending",
+        "expected": "okfalse,busytrue,launches1"
+      },
+      {
+        "id": "settlement-releases-actual",
+        "operation": "resolve original deferred; wait completion microtasks",
+        "expected": "busyfalse,latevalueDisposed1"
+      },
+      {
+        "id": "fresh-read-after-settlement",
+        "operation": "actualfreshread returns literalSYNonly",
+        "expected": "oktrue,launches2"
+      },
+      {
+        "id": "stop-discards-late",
+        "operation": "start deferredread, setallowfalse, resolve; preserve exactactualcompletion",
+        "expected": "okfalse,disposed1,no retained busy"
+      }
+    ]
+  }
+}
