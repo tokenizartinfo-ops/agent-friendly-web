@@ -1,0 +1,133 @@
+{
+  "schema": "afw.c2-task1-source-actual-failure.v1",
+  "checkedAt": "2026-11-16 03:55:01 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261116-t1",
+  "head": "8b6dc45a1fb69d15b3d7863c8781635cb6aca461",
+  "tree": "e272ce80e37a6e1795f891a5d3e665d9495058e5",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "gate": "f2421559e949f4a69d85239f95dd3cb0f733e1e0",
+  "index": "e20ae5a991a291004c3a8dde098031865c1e4c13",
+  "runner": "8732cce3fb989eeafa7d30f895611a9f5c018654",
+  "run": {
+    "id": 43800561259,
+    "attempt": 1,
+    "event": "push",
+    "path": ".github/workflows/afw-c2-source-lab.yml",
+    "status": "completed",
+    "conclusion": "failure",
+    "createdAt": "2026-11-16T03:50:53Z",
+    "updatedAt": "2026-11-16T03:51:24Z"
+  },
+  "job": {
+    "id": 133079544014,
+    "name": "c2-source-lab",
+    "status": "completed",
+    "conclusion": "failure",
+    "steps": [
+      {
+        "number": 1,
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T03:50:57Z",
+        "completedAt": "2026-11-16T03:51:00Z"
+      },
+      {
+        "number": 2,
+        "name": "Read the exact one-use lab head",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T03:51:00Z",
+        "completedAt": "2026-11-16T03:51:04Z"
+      },
+      {
+        "number": 3,
+        "name": "Use the fixed Node runtime",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T03:51:04Z",
+        "completedAt": "2026-11-16T03:51:06Z"
+      },
+      {
+        "number": 4,
+        "name": "Install only the existing locked dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T03:51:06Z",
+        "completedAt": "2026-11-16T03:51:18Z"
+      },
+      {
+        "number": 5,
+        "name": "Qualify isolated compiled Source data",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-11-16T03:51:18Z",
+        "completedAt": "2026-11-16T03:51:20Z"
+      },
+      {
+        "number": 6,
+        "name": "Preserve only the bounded sanitized Source receipt",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-11-16T03:51:20Z",
+        "completedAt": "2026-11-16T03:51:20Z"
+      },
+      {
+        "number": 11,
+        "name": "Post Use the fixed Node runtime",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-11-16T03:51:20Z",
+        "completedAt": "2026-11-16T03:51:20Z"
+      },
+      {
+        "number": 12,
+        "name": "Post Read the exact one-use lab head",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T03:51:20Z",
+        "completedAt": "2026-11-16T03:51:21Z"
+      },
+      {
+        "number": 13,
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-11-16T03:51:21Z",
+        "completedAt": "2026-11-16T03:51:21Z"
+      }
+    ]
+  },
+  "capture": {
+    "logsReadOnce": true,
+    "readAfterWholeRunAndJobTerminal": true,
+    "canonicalReceiptCount": 0,
+    "diagnostic": {
+      "phase": "baseline-red",
+      "code": "CAPTURE_INVALID"
+    },
+    "diagnosticLogIndex": 145,
+    "sourceDetailedCaseOutcomesUnavailable": true
+  },
+  "claims": {
+    "SourceQualified": false,
+    "baselineConnectionPassed": false,
+    "baselineOAuthPassed": false,
+    "proposedGreenExecuted": false,
+    "mutantExecuted": false,
+    "regressionsExecuted": false,
+    "historicalSourceMainMoved": false,
+    "providerRuntimeTouched": false
+  },
+  "limits": "No root-cause inference from CAPTURE_INVALID alone. It could be launch/capture/Source failure within this phase; no same-head replay or log refetch.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
