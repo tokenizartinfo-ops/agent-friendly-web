@@ -1,0 +1,29 @@
+name: AFW C2 N2 independent OWN controls
+on:
+  push:
+    branches:
+      - lab/afw-c2-own-receiver-20261116-notices-n2
+permissions:
+  contents: read
+jobs:
+  c2-notices-n2-own:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/lab/afw-c2-own-receiver-20261116-notices-n2' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'AFW-C2-NOTICES-N2-OWN-ONEUSE-20261116'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Read exact one-use OWN head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Use fixed Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+      - name: Run independent N2 OWN node tests
+        run: node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n2/run-controls.mjs

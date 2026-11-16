@@ -1,0 +1,87 @@
+{
+  "schema": "afw.c2-notices-n2.own-private-probe-models.v1",
+  "syntheticOnly": true,
+  "lineage": {
+    "blob": "08b9edf048cf3f04cd223a645b1aa782fa454447",
+    "scope": "unchanged private synthetic before/after controls; no old occurrence metadata"
+  },
+  "privateProbeControls": [
+    {
+      "id": "OLD_PHASE_IGNORED",
+      "before": {
+        "observation": [
+          {
+            "kind": "failure",
+            "frames": []
+          }
+        ],
+        "calls": [],
+        "business": []
+      },
+      "after": {
+        "observation": [
+          {
+            "kind": "failure",
+            "frames": []
+          }
+        ],
+        "calls": [],
+        "business": []
+      },
+      "expected": {
+        "state": "observed",
+        "newFailures": 0
+      }
+    },
+    {
+      "id": "AMBIGUOUS_TWO_FAILURES",
+      "before": {
+        "observation": [],
+        "calls": [],
+        "business": []
+      },
+      "after": {
+        "observation": [
+          {
+            "kind": "connection-failure",
+            "position": "entry",
+            "frames": []
+          },
+          {
+            "kind": "connection-failure",
+            "position": "approved",
+            "frames": []
+          }
+        ],
+        "calls": [],
+        "business": []
+      },
+      "expected": {
+        "state": "ambiguous",
+        "newFailures": 2
+      }
+    },
+    {
+      "id": "PREFIX_DRIFT",
+      "before": {
+        "observation": [
+          {
+            "kind": "failure",
+            "frames": []
+          }
+        ],
+        "calls": [],
+        "business": []
+      },
+      "after": {
+        "observation": [],
+        "calls": [],
+        "business": []
+      },
+      "expected": {
+        "state": "unavailable",
+        "newFailures": null
+      }
+    }
+  ]
+}

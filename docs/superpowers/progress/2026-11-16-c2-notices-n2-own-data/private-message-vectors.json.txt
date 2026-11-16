@@ -1,0 +1,1245 @@
+{
+  "schema": "afw.root-own.notices-n2.early-private-message-vectors.v1",
+  "status": "PRIVATE_TEST_DATA_ONLY_EARLY_N2_PROTOCOL_READ_IMPLEMENTATION_PENDING",
+  "authority": "07a10773d721081de132baf9d4bb9b014466137e",
+  "sourceData": {
+    "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+    "lines": [
+      86,
+      87,
+      88
+    ],
+    "tagsAndExactKeyOrder": [
+      {
+        "tag": "T2 original parent holders rejected",
+        "keys": [
+          "closed",
+          "aborted",
+          "entered",
+          "end",
+          "last",
+          "mono",
+          "lastMono"
+        ]
+      },
+      {
+        "tag": "T2 original parent clock rejected",
+        "keys": [
+          "closed",
+          "aborted",
+          "entered",
+          "end",
+          "last",
+          "at",
+          "mono",
+          "m",
+          "lastMono"
+        ]
+      },
+      {
+        "tag": "T2 original child clock rejected",
+        "keys": [
+          "alive",
+          "aborted",
+          "began",
+          "until",
+          "m0",
+          "wall",
+          "monotonic"
+        ]
+      }
+    ]
+  },
+  "formatBoundary": "literalTag plus serializedPayload models the existing console.info two arguments as PRIVATE synthetic DATA; privateMessageText is their exact one-ASCII-space concatenation. Root reports pinned workerd/internal_inspect/Miniflare provenance for this private framing. These are not Workerd callback envelopes or public N2 wire records. Semantic comparison names remain private test descriptions; public integration is governed separately by early N2 schema.",
+  "numberBoundary": "Small obviously synthetic clocks only. Wall fields require finite safe integers; monotonic fields finite numbers. Early N2 contract defines child regressions as wall<began and monotonic<m0, which are start comparisons and not first-cause/last-observation proof.",
+  "privacy": "No real private arrays/TAP/clocks/IDs. All privacy strings are explicit OWN_SYNTHETIC sentinels and must never be forwarded into safe projections. remainingMs/absolute clocks/rawJSON/messages/paths are prohibited outputs.",
+  "cases": [
+    {
+      "id": "EXACT_PARENT_HOLDERS",
+      "input": {
+        "literalTag": "T2 original parent holders rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"mono\":10,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": true,
+        "facts": {
+          "branchLabel": "initial-parent-holders",
+          "correlated": null,
+          "firstCauseKnown": false,
+          "rawForwardingAllowed": false,
+          "closed": false,
+          "aborted": false,
+          "alive": null,
+          "wallExpired": null,
+          "monoExpired": null,
+          "wallComparedToLast": null,
+          "monoComparedToLast": null
+        }
+      },
+      "privateMessageText": "T2 original parent holders rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"mono\":10,\"lastMono\":20}"
+    },
+    {
+      "id": "EXACT_PARENT_WALL_EXPIRED_AT_BOUNDARY",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": true,
+        "facts": {
+          "branchLabel": "initial-parent-clock",
+          "correlated": null,
+          "firstCauseKnown": false,
+          "rawForwardingAllowed": false,
+          "closed": false,
+          "aborted": false,
+          "alive": null,
+          "wallExpired": true,
+          "monoExpired": false,
+          "wallComparedToLast": "not-earlier",
+          "monoComparedToLast": "not-earlier"
+        }
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "PARENT_MONO_EXPIRED_AT_BOUNDARY",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1010,\"mono\":10,\"m\":40,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": true,
+        "facts": {
+          "branchLabel": "initial-parent-clock",
+          "correlated": null,
+          "firstCauseKnown": false,
+          "rawForwardingAllowed": false,
+          "wallExpired": false,
+          "monoExpired": true,
+          "wallComparedToLast": "not-earlier",
+          "monoComparedToLast": "not-earlier"
+        }
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1010,\"mono\":10,\"m\":40,\"lastMono\":20}"
+    },
+    {
+      "id": "PARENT_OBSERVED_REGRESSION",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1007,\"mono\":10,\"m\":19,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": true,
+        "facts": {
+          "branchLabel": "initial-parent-clock",
+          "correlated": null,
+          "firstCauseKnown": false,
+          "rawForwardingAllowed": false,
+          "wallExpired": false,
+          "monoExpired": false,
+          "wallComparedToLast": "earlier",
+          "monoComparedToLast": "earlier"
+        }
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1007,\"mono\":10,\"m\":19,\"lastMono\":20}"
+    },
+    {
+      "id": "PARENT_BOOLEAN_FAILURE_WITH_UNEXPIRED_CLOCKS",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":true,\"aborted\":true,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1010,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": true,
+        "facts": {
+          "branchLabel": "initial-parent-clock",
+          "correlated": null,
+          "firstCauseKnown": false,
+          "rawForwardingAllowed": false,
+          "closed": true,
+          "aborted": true,
+          "wallExpired": false,
+          "monoExpired": false
+        }
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":true,\"aborted\":true,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1010,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "EXACT_CHILD_ALIVE_FALSE",
+      "input": {
+        "literalTag": "T2 original child clock rejected",
+        "serializedPayload": "{\"alive\":false,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2005,\"monotonic\":55}"
+      },
+      "expected": {
+        "recognized": true,
+        "facts": {
+          "branchLabel": "initial-child-clock",
+          "correlated": null,
+          "firstCauseKnown": false,
+          "rawForwardingAllowed": false,
+          "closed": null,
+          "aborted": false,
+          "alive": false,
+          "wallExpired": false,
+          "monoExpired": false,
+          "wallComparedToStart": "not-earlier",
+          "monoComparedToStart": "not-earlier",
+          "wallComparedToLast": null,
+          "monoComparedToLast": null
+        }
+      },
+      "privateMessageText": "T2 original child clock rejected {\"alive\":false,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2005,\"monotonic\":55}"
+    },
+    {
+      "id": "CHILD_EXPIRED_BOUNDARIES",
+      "input": {
+        "literalTag": "T2 original child clock rejected",
+        "serializedPayload": "{\"alive\":true,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2010,\"monotonic\":60}"
+      },
+      "expected": {
+        "recognized": true,
+        "facts": {
+          "branchLabel": "initial-child-clock",
+          "correlated": null,
+          "firstCauseKnown": false,
+          "rawForwardingAllowed": false,
+          "wallExpired": true,
+          "monoExpired": true,
+          "wallComparedToStart": "not-earlier",
+          "monoComparedToStart": "not-earlier",
+          "wallComparedToLast": null,
+          "monoComparedToLast": null
+        }
+      },
+      "privateMessageText": "T2 original child clock rejected {\"alive\":true,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2010,\"monotonic\":60}"
+    },
+    {
+      "id": "CHILD_BEFORE_START_IS_NOT_LAST_OBSERVATION_PROOF",
+      "input": {
+        "literalTag": "T2 original child clock rejected",
+        "serializedPayload": "{\"alive\":false,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":1999,\"monotonic\":49}"
+      },
+      "expected": {
+        "recognized": true,
+        "facts": {
+          "branchLabel": "initial-child-clock",
+          "correlated": null,
+          "firstCauseKnown": false,
+          "rawForwardingAllowed": false,
+          "wallExpired": false,
+          "monoExpired": false,
+          "wallComparedToStart": "earlier",
+          "monoComparedToStart": "earlier",
+          "wallComparedToLast": null,
+          "monoComparedToLast": null
+        }
+      },
+      "privateMessageText": "T2 original child clock rejected {\"alive\":false,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":1999,\"monotonic\":49}"
+    },
+    {
+      "id": "FINITE_FRACTIONAL_MONOTONIC_ALLOWED",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10.25,\"m\":25.75,\"lastMono\":20.5}"
+      },
+      "expected": {
+        "recognized": true,
+        "facts": {
+          "branchLabel": "initial-parent-clock",
+          "correlated": null,
+          "firstCauseKnown": false,
+          "rawForwardingAllowed": false,
+          "wallExpired": true,
+          "monoExpired": false,
+          "monoComparedToLast": "not-earlier"
+        }
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10.25,\"m\":25.75,\"lastMono\":20.5}"
+    },
+    {
+      "id": "PREFIX_FORGERY",
+      "input": {
+        "literalTag": "noise T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "not-one-exact-existing-tag",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "noise T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "TAG_SUFFIX_FORGERY",
+      "input": {
+        "literalTag": "T2 original parent clock rejected extra",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "not-one-exact-existing-tag",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected extra {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "TAG_CASE_FORGERY",
+      "input": {
+        "literalTag": "t2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "not-one-exact-existing-tag",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "t2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "TWO_TAGS_FORGED",
+      "input": {
+        "literalTag": "T2 original parent clock rejected T2 original child clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "not-one-exact-existing-tag",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected T2 original child clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "PARTIAL_TAG",
+      "input": {
+        "literalTag": "T2 original parent clock",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "not-one-exact-existing-tag",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "EXTRA_PRIVATE_KEY_cookie",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"cookie\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "extra-payload-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"cookie\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+    },
+    {
+      "id": "EXTRA_PRIVATE_KEY_token",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"token\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "extra-payload-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"token\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+    },
+    {
+      "id": "EXTRA_PRIVATE_KEY_requestId",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"requestId\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "extra-payload-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"requestId\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+    },
+    {
+      "id": "EXTRA_PRIVATE_KEY_stack",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"stack\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "extra-payload-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"stack\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+    },
+    {
+      "id": "EXTRA_PRIVATE_KEY_path",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"path\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "extra-payload-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"path\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+    },
+    {
+      "id": "EXTRA_PRIVATE_KEY_remainingMs",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"remainingMs\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "extra-payload-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"remainingMs\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+    },
+    {
+      "id": "EXTRA_PRIVATE_KEY___proto__",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"__proto__\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "extra-payload-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20,\"__proto__\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"}"
+    },
+    {
+      "id": "MISSING_KEY",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "missing-payload-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25}"
+    },
+    {
+      "id": "WRONG_TAG_PAYLOAD",
+      "input": {
+        "literalTag": "T2 original parent holders rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "keys-do-not-match-tag",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent holders rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "DUPLICATE_KEY",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":true,\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "duplicate-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":true,\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "ESCAPED_DUPLICATE_KEY",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"\\u0063losed\":true,\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "duplicate-decoded-key",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"\\u0063losed\":true,\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "TORN_JSON",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "torn",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20"
+    },
+    {
+      "id": "TRAILING_PRIVATE_TEXT",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20} OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "trailing-message",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20} OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT"
+    },
+    {
+      "id": "TWO_JSON_VALUES",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}{\"alive\":false,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2005,\"monotonic\":55}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "multiple-values",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}{\"alive\":false,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2005,\"monotonic\":55}"
+    },
+    {
+      "id": "NESTED_OBJECT_IN_BOOLEAN",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":{\"private\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"},\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "wrong-type",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":{\"private\":\"OWN_SYNTHETIC_PRIVATE_SENTINEL_DO_NOT_EMIT\"},\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "STRING_NUMBER",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":\"1030\",\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "wrong-number-type",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":\"1030\",\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "NULL_NUMBER",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":null,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "not-finite-number",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":null,\"lastMono\":20}"
+    },
+    {
+      "id": "INFINITY_LITERAL",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":Infinity,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "invalid-json-number",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":Infinity,\"lastMono\":20}"
+    },
+    {
+      "id": "EXPONENT_OVERFLOW",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":1e309,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "non-finite-number",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":1e309,\"lastMono\":20}"
+    },
+    {
+      "id": "UNSAFE_WALL_INTEGER",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":9007199254740992,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "wall-not-safe-integer",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":9007199254740992,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "FRACTIONAL_WALL",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030.5,\"mono\":10,\"m\":25,\"lastMono\":20}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "wall-not-integer",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030.5,\"mono\":10,\"m\":25,\"lastMono\":20}"
+    },
+    {
+      "id": "PRIVATE_MESSAGE_OVER_CAP",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 }"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "recognized-message-over2048-bytes",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 }"
+    },
+    {
+      "id": "PRIVATE_ARRAY_PAYLOAD",
+      "input": {
+        "literalTag": "T2 original parent clock rejected",
+        "serializedPayload": "[false,false,1000,1030,1008,1030,10,25,20]"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "not-exact-object",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original parent clock rejected [false,false,1000,1030,1008,1030,10,25,20]"
+    },
+    {
+      "id": "BOOLEAN_STRING",
+      "input": {
+        "literalTag": "T2 original child clock rejected",
+        "serializedPayload": "{\"alive\":\"false\",\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2005,\"monotonic\":55}"
+      },
+      "expected": {
+        "recognized": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "reason": "wrong-boolean-type",
+        "rawForwardingAllowed": false,
+        "originalErrorMayBeReplaced": false
+      },
+      "privateMessageText": "T2 original child clock rejected {\"alive\":\"false\",\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2005,\"monotonic\":55}"
+    }
+  ],
+  "deliveryCases": [
+    {
+      "id": "PHASE_BASELINE_EXCLUDES_EARLIER_NODE_ARRIVALS",
+      "baselineArrivalOrdinal": 2,
+      "arrivals": [
+        {
+          "ordinal": 1,
+          "nodeElapsed": 2,
+          "nodeWindow": "prerequisite",
+          "message": {
+            "literalTag": "T2 original parent holders rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"mono\":10,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 2,
+          "nodeElapsed": 4,
+          "nodeWindow": "prerequisite",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        }
+      ],
+      "expected": {
+        "newRecords": 0,
+        "requestCorrelation": null,
+        "cause": "unknown"
+      }
+    },
+    {
+      "id": "ONE_POST_WINDOW_ARRIVAL_IS_ASSOCIATION_ONLY",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 25,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        }
+      ],
+      "expected": {
+        "newRecords": 1,
+        "branchLabels": [
+          "initial-parent-clock"
+        ],
+        "nodeAssociation": "notices-post",
+        "requestCorrelation": null,
+        "firstCauseKnown": false
+      }
+    },
+    {
+      "id": "DUPLICATE_DELIVERY_NOT_DEDUPLICATED_INTO_ONE_CAUSE",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 25,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 3,
+          "nodeElapsed": 26,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        }
+      ],
+      "expected": {
+        "newRecords": 2,
+        "distinctBranchLabels": 1,
+        "cause": "unknown",
+        "firstCauseKnown": false
+      }
+    },
+    {
+      "id": "MULTIPLE_ORIGINS_AND_CASCADE_UNKNOWN",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 25,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 3,
+          "nodeElapsed": 26,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original child clock rejected",
+            "serializedPayload": "{\"alive\":false,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2005,\"monotonic\":55}"
+          }
+        }
+      ],
+      "expected": {
+        "newRecords": 2,
+        "distinctBranchLabels": 2,
+        "cause": "unknown",
+        "firstCauseKnown": false
+      }
+    },
+    {
+      "id": "LATE_AFTER_POST_ARRIVAL",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 55,
+          "nodeWindow": "after-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        }
+      ],
+      "expected": {
+        "newRecords": 1,
+        "nodeAssociation": "after-post",
+        "requestCorrelation": null,
+        "cause": "unknown"
+      }
+    },
+    {
+      "id": "PHASE_ORIGIN_NOT_OBSERVABLE_AFTER_LATE_ARRIVAL",
+      "storyOnly": "The harness imagines phase emission, but that emitter stage is NOT supplied to the observer.",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 25,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent holders rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"mono\":10,\"lastMono\":20}"
+          }
+        }
+      ],
+      "expected": {
+        "newRecords": 1,
+        "emitterStage": "unknown",
+        "nodeAssociation": "notices-post",
+        "requestCorrelation": null,
+        "cause": "unknown"
+      }
+    },
+    {
+      "id": "NO_TAG_WITH_UNTAGGED_FAILURE",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [],
+      "expected": {
+        "newRecords": 0,
+        "guardObserved": false,
+        "timeoutExcluded": false,
+        "cause": "unknown"
+      }
+    },
+    {
+      "id": "UNSCOPED_ARRIVAL",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 25,
+          "nodeWindow": "unscoped",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        }
+      ],
+      "expected": {
+        "newRecords": 1,
+        "nodeAssociation": "unscoped",
+        "requestCorrelation": null,
+        "cause": "unknown"
+      }
+    },
+    {
+      "id": "EIGHT_NEW_RECORDS_BOUNDED",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 20,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 3,
+          "nodeElapsed": 21,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 4,
+          "nodeElapsed": 22,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 5,
+          "nodeElapsed": 23,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 6,
+          "nodeElapsed": 24,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 7,
+          "nodeElapsed": 25,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 8,
+          "nodeElapsed": 26,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 9,
+          "nodeElapsed": 27,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        }
+      ],
+      "expected": {
+        "newRecords": 8,
+        "withinCap": true,
+        "cause": "unknown"
+      }
+    },
+    {
+      "id": "NINTH_NEW_RECORD_EXPLICIT_UNKNOWN_OR_FAULT",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 20,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 3,
+          "nodeElapsed": 21,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 4,
+          "nodeElapsed": 22,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 5,
+          "nodeElapsed": 23,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 6,
+          "nodeElapsed": 24,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 7,
+          "nodeElapsed": 25,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 8,
+          "nodeElapsed": 26,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 9,
+          "nodeElapsed": 27,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        },
+        {
+          "ordinal": 10,
+          "nodeElapsed": 28,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        }
+      ],
+      "expected": {
+        "withinCap": false,
+        "safeState": "unknown-or-fixed-capture-fault",
+        "mustNotClaimCompleteEight": true,
+        "originalErrorMayBeReplaced": false
+      }
+    },
+    {
+      "id": "GUARD_BEFORE_HTTP_RESPONSE_DOES_NOT_PROVE_FIRST_CAUSE",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 29,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original child clock rejected",
+            "serializedPayload": "{\"alive\":false,\"aborted\":false,\"began\":2000,\"until\":2010,\"m0\":50,\"wall\":2005,\"monotonic\":55}"
+          }
+        }
+      ],
+      "responseObservedAtSyntheticNodeElapsed": 30,
+      "expected": {
+        "newRecords": 1,
+        "requestCorrelation": null,
+        "firstCauseKnown": false
+      }
+    },
+    {
+      "id": "ELAPSED_OVER_CAP",
+      "baselineArrivalOrdinal": 1,
+      "arrivals": [
+        {
+          "ordinal": 2,
+          "nodeElapsed": 180001,
+          "nodeWindow": "notices-post",
+          "message": {
+            "literalTag": "T2 original parent clock rejected",
+            "serializedPayload": "{\"closed\":false,\"aborted\":false,\"entered\":1000,\"end\":1030,\"last\":1008,\"at\":1030,\"mono\":10,\"m\":25,\"lastMono\":20}"
+          }
+        }
+      ],
+      "expected": {
+        "safeState": "unknown-or-fixed-capture-fault",
+        "originalErrorMayBeReplaced": false
+      }
+    }
+  ],
+  "errorPreservation": [
+    {
+      "id": "PRESERVE_ORIGINAL_null",
+      "originalThrow": {
+        "present": true,
+        "kind": "null",
+        "identity": null
+      },
+      "diagnosticFault": {
+        "kind": "OWN_CAPTURE_FAULT_B"
+      },
+      "expected": {
+        "thrownValueIsOriginal": true,
+        "originalThrowPresent": true,
+        "diagnosticFaultMayReplace": false,
+        "callbackMayThrowIntoWork": false,
+        "callbackAwaitCount": 0,
+        "callbackRpcCount": 0,
+        "rawForwardCount": 0
+      }
+    },
+    {
+      "id": "PRESERVE_ORIGINAL_undefined",
+      "originalThrow": {
+        "present": true,
+        "kind": "undefined",
+        "identity": null
+      },
+      "diagnosticFault": {
+        "kind": "OWN_CAPTURE_FAULT_B"
+      },
+      "expected": {
+        "thrownValueIsOriginal": true,
+        "originalThrowPresent": true,
+        "diagnosticFaultMayReplace": false,
+        "callbackMayThrowIntoWork": false,
+        "callbackAwaitCount": 0,
+        "callbackRpcCount": 0,
+        "rawForwardCount": 0
+      }
+    },
+    {
+      "id": "PRESERVE_ORIGINAL_false",
+      "originalThrow": {
+        "present": true,
+        "kind": "false",
+        "identity": null
+      },
+      "diagnosticFault": {
+        "kind": "OWN_CAPTURE_FAULT_B"
+      },
+      "expected": {
+        "thrownValueIsOriginal": true,
+        "originalThrowPresent": true,
+        "diagnosticFaultMayReplace": false,
+        "callbackMayThrowIntoWork": false,
+        "callbackAwaitCount": 0,
+        "callbackRpcCount": 0,
+        "rawForwardCount": 0
+      }
+    },
+    {
+      "id": "PRESERVE_ORIGINAL_zero",
+      "originalThrow": {
+        "present": true,
+        "kind": "zero",
+        "identity": null
+      },
+      "diagnosticFault": {
+        "kind": "OWN_CAPTURE_FAULT_B"
+      },
+      "expected": {
+        "thrownValueIsOriginal": true,
+        "originalThrowPresent": true,
+        "diagnosticFaultMayReplace": false,
+        "callbackMayThrowIntoWork": false,
+        "callbackAwaitCount": 0,
+        "callbackRpcCount": 0,
+        "rawForwardCount": 0
+      }
+    },
+    {
+      "id": "PRESERVE_ORIGINAL_empty-string",
+      "originalThrow": {
+        "present": true,
+        "kind": "empty-string",
+        "identity": null
+      },
+      "diagnosticFault": {
+        "kind": "OWN_CAPTURE_FAULT_B"
+      },
+      "expected": {
+        "thrownValueIsOriginal": true,
+        "originalThrowPresent": true,
+        "diagnosticFaultMayReplace": false,
+        "callbackMayThrowIntoWork": false,
+        "callbackAwaitCount": 0,
+        "callbackRpcCount": 0,
+        "rawForwardCount": 0
+      }
+    },
+    {
+      "id": "PRESERVE_ORIGINAL_object-identity",
+      "originalThrow": {
+        "present": true,
+        "kind": "object-identity",
+        "identity": "OWN_ORIGINAL_ERROR_A"
+      },
+      "diagnosticFault": {
+        "kind": "OWN_CAPTURE_FAULT_B"
+      },
+      "expected": {
+        "thrownValueIsOriginal": true,
+        "originalThrowPresent": true,
+        "diagnosticFaultMayReplace": false,
+        "callbackMayThrowIntoWork": false,
+        "callbackAwaitCount": 0,
+        "callbackRpcCount": 0,
+        "rawForwardCount": 0
+      }
+    }
+  ],
+  "validNullableFacts": "Parent holders has no current at/m, so expiry and current-clock comparison facts are null. Child lacks parent closed and previous-observation last/lastMono; do not invent them. Early N2 maps child wallRegressed/monoRegressed to the explicitly described start comparisons, not to a complete clock-history claim.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "protocolRead": {
+    "contract": "5b53482268b6cfbfa6142c8d361013dda15abc0b",
+    "schema": "e86ffe3a8adda6ebb5038ce5c22601b97229ef42",
+    "selection": "590ee8bd7435db8bee9669077bcb4e657e187889",
+    "sourceVectors": "269c4b9035c63e377b82d79090b033b7420e2092",
+    "implementationHashesFinal": false
+  }
+}

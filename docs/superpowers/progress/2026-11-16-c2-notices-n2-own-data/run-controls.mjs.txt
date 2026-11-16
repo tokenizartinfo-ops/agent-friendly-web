@@ -1,0 +1,23 @@
+import test,{after} from 'node:test';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
+import {inflateRawSync,deflateRawSync} from 'node:zlib';
+import {n2AllControls} from './controls.mjs';
+const fail=()=>{throw Error('ROOT_N2_OWN_HOST_REJECTED');};
+const git=(...args)=>execFileSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+const path='docs/superpowers/root-own/c2-notices-n2/',repository='tokenizartinfo-ops/agent-friendly-web',branch='refs/heads/lab/afw-c2-own-receiver-20261116-notices-n2',message='AFW-C2-NOTICES-N2-OWN-ONEUSE-20261116',job='c2-notices-n2-own';
+if(process.argv.length!==2||process.version!=='v22.23.4'||!fileURLToPath(import.meta.url).replaceAll('\\','/').endsWith('/'+path+'run-controls.mjs')||process.env.GITHUB_REPOSITORY!==repository||process.env.GITHUB_EVENT_NAME!=='push'||process.env.GITHUB_REF!==branch||process.env.GITHUB_JOB!==job||process.env.GITHUB_RUN_ATTEMPT!=='1'||!/^[1-9]\d*$/.test(process.env.GITHUB_RUN_ID??'')||git('rev-parse','HEAD')!==process.env.GITHUB_SHA||git('rev-parse','HEAD^')!=='6791ce1bab9372e206d3c7b42b3e1394dc6e0c68'||git('show','-s','--format=%B','HEAD')!==message)fail();
+const read=n=>readFileSync(new URL(n,import.meta.url)),hash=v=>createHash('sha256').update(v).digest('hex'),json=n=>JSON.parse(read(n));
+const expectedHashes={"reader.mjs":"cd8bea5115fe0f35c0cffd3f9a52017136911e7826b26b9b3ea9d91f38376a19","controls.mjs":"b763682666ac485ef6e39fe14c8a4c66ad6b205863981136d4b7c82e203dda4e","admission.json":"ee8e9032f9689e835ca734e0dfbdd88b627986f9959f3afff0a7841940bfe8be","private-probe-vectors.json":"9a3260d63b97f75d4e0edad9b4acb6329f905e1060bef8ff9ba23d25a0c08bc5","control-results.json":"1b6eb0ac091ca84b2ff8a47929bcea840e6ec40d2a71d00a0b5fdb48b8267706","vectors.json":"7d96f1484d97f546c569ae7ff8ee39885bf333281dd15f1f86ca57d6c7adb8a1","generic-vectors.json":"88957f8b761cf1cba55d7305465636dbb05d70e041c8fe82e4885749bd79d073","private-message-vectors.json":"976b269018ed22b9336669639f0e1705b2822dc699b7f3edbe365162b6287dd5","options-vectors.json":"1d95584800e0a7e5f28e8c781d95cff89b5e60bcf4ffbf68940c943edcab33a1","accessor-vectors.json":"4d2608e1986f3282f293a3c48b4ba6b2a9debba73ef0d7262a8c284d32bb5238","coherent-full-inputs.json":"4049a5bc951fb0f0d7f81677ecef9fb1e3e80a69ad86d50e74d752c83a2a39b6","schema.json":"b3c5d9fd2e50cd55c6db61dc669d66400b167fb4c7c1a04b4b8d61d6542832c9"};
+for(const [file,sha256]of Object.entries(expectedHashes))if(hash(read(file))!==sha256)fail();
+const data={journal:json('vectors.json'),generic:json('generic-vectors.json'),messages:json('private-message-vectors.json'),options:json('options-vectors.json'),accessors:json('accessor-vectors.json'),privateProbe:json('private-probe-vectors.json'),coherent:json('coherent-full-inputs.json')};
+const suite=n2AllControls(data,json('schema.json'),json('admission.json'),hash,inflateRawSync,deflateRawSync),expected=json('control-results.json'),expectedGroups={"journal":65,"generic":33,"privateModels":74,"deliveryErrorModels":24,"privateProbe":12,"fullInput":104,"coherent":18,"zipFormats":10};
+if(JSON.stringify(Object.fromEntries(Object.entries(suite.groups).map(([k,v])=>[k,v.length])))!==JSON.stringify(expectedGroups)||suite.checks.length!==340||new Set(suite.checks.map(c=>c.id)).size!==340||suite.checks.some((c,i)=>c.id!==expected.checks[i]?.id))fail();
+for(const c of suite.checks)test(c.id,()=>assert.equal(c.pass,true,'OWN bounded synthetic control failed'));
+after(()=>{
+ if(suite.checks.some(c=>!c.pass))fail();
+ process.stdout.write('AFW_C2_NOTICES_N2_OWN_CONTROL '+JSON.stringify({schema:'afw.c2-notices-n2.root-own-control.v1',repository,head:process.env.GITHUB_SHA,tree:git('rev-parse','HEAD^{tree}'),runId:process.env.GITHUB_RUN_ID,runAttempt:1,job,node:process.version,controls:{...expectedGroups,total:340,failed:0},verifiedHashes:expectedHashes,actualNativeImportGraph:true,syntheticOnly:true,SourceExecuted:false,SourceQualified:false,Task1Pass:false,nonclaims:{historicalCauseProven:false,receiptAuthenticated:false,operationalReadiness:false,completePackage:false,PCoff:false,globalNativeDrainVerified:false,sdkNamespaceEmptyVerified:false}})+'\n');
+});

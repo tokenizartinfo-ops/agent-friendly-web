@@ -1,0 +1,3888 @@
+{
+  "schema": "afw.root-own.notices-n2.early-options-invariance-vectors.v1",
+  "status": "PRIVATE_TEST_MODELS_NOT_EXECUTION_PROOF",
+  "authority": "07a10773d721081de132baf9d4bb9b014466137e",
+  "protocolRead": {
+    "contract": "5b53482268b6cfbfa6142c8d361013dda15abc0b",
+    "schema": "e86ffe3a8adda6ebb5038ce5c22601b97229ef42",
+    "selection": "590ee8bd7435db8bee9669077bcb4e657e187889",
+    "implementationHashesFinal": false
+  },
+  "formatBoundary": "These ordinary JSON descriptors are PRIVATE synthetic test models, not Source option objects, function objects, runtime calls, or public N2 wire records. Callback/promise labels mean test reference identities that must be instantiated and checked in future authorized OWN controls. No hidden Miniflare state is observed or claimed.",
+  "perCallInvariant": "Before adding the logger, snapshot the same original converted argument/compiled objects. Compare actual argument data/scripts/settings and every existing callback/reference on that same original call, then synchronously observe original return or settlement after the existing await. Never recompile at a different time, normalize clocks, wrap/replace methods/promises, or compare across legitimate phase/adoption settings changes.",
+  "propertyValueModel": "Typed entries deliberately preserve order/undefined/negative-zero/bytes/function identity; naive JSON equality that drops functions/undefined or normalizes -0 is insufficient. All scripts/settings are obvious OWN_SYNTHETIC data, never evaluated or compiled.",
+  "cases": [
+    {
+      "id": "CALL1_CONSTRUCTOR",
+      "operation": "constructor",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL1_CONSTRUCTOR",
+        "scripts": {
+          "M": null,
+          "QA": null
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL1_CONSTRUCTOR",
+        "scripts": {
+          "M": null,
+          "QA": null
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_constructor",
+      "actualMethodRef": "ORIGINAL_constructor",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_INSTANCE_A",
+      "actualReturnRef": "ORIGINAL_INSTANCE_A",
+      "awaitedRef": null,
+      "originalAwaitCount": 0,
+      "actualAwaitCount": 0,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": true,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "CALL2_ASSEMBLY",
+      "operation": "assembly",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL2_ASSEMBLY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL2_ASSEMBLY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_assembly",
+      "actualMethodRef": "ORIGINAL_assembly",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_CALL2_ASSEMBLY",
+      "actualReturnRef": "ORIGINAL_PROMISE_CALL2_ASSEMBLY",
+      "awaitedRef": "ORIGINAL_PROMISE_CALL2_ASSEMBLY",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": true,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "CALL3_MOUNT",
+      "operation": "mount",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL3_MOUNT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL3_MOUNT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_mount",
+      "actualMethodRef": "ORIGINAL_mount",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_CALL3_MOUNT",
+      "actualReturnRef": "ORIGINAL_PROMISE_CALL3_MOUNT",
+      "awaitedRef": "ORIGINAL_PROMISE_CALL3_MOUNT",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": true,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "CALL4_ADOPT_CONNECTION",
+      "operation": "adopt-connection",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL4_ADOPT_CONNECTION",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL4_ADOPT_CONNECTION",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-connection",
+      "actualMethodRef": "ORIGINAL_adopt-connection",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_CALL4_ADOPT_CONNECTION",
+      "actualReturnRef": "ORIGINAL_PROMISE_CALL4_ADOPT_CONNECTION",
+      "awaitedRef": "ORIGINAL_PROMISE_CALL4_ADOPT_CONNECTION",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": true,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "CALL5_ADOPT_NOTICES",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL5_ADOPT_NOTICES",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALL5_ADOPT_NOTICES",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_CALL5_ADOPT_NOTICES",
+      "actualReturnRef": "ORIGINAL_PROMISE_CALL5_ADOPT_NOTICES",
+      "awaitedRef": "ORIGINAL_PROMISE_CALL5_ADOPT_NOTICES",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": true,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "LEGITIMATE_CURRENT_CALL_SETTINGS_CHANGE",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_LEGIT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_B\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_B\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "B"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_LEGIT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_B\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_B\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "B"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_LEGITIMATE_CURRENT_CALL_SETTINGS_CHANGE",
+      "actualReturnRef": "ORIGINAL_PROMISE_LEGITIMATE_CURRENT_CALL_SETTINGS_CHANGE",
+      "awaitedRef": "ORIGINAL_PROMISE_LEGITIMATE_CURRENT_CALL_SETTINGS_CHANGE",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": true,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "SAME_LOGGER_REFERENCE_RETAINED",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SAME_LOGGER_REFERENCE_RETAINED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SAME_LOGGER_REFERENCE_RETAINED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_SAME_LOGGER_REFERENCE_RETAINED",
+      "actualReturnRef": "ORIGINAL_PROMISE_SAME_LOGGER_REFERENCE_RETAINED",
+      "awaitedRef": "ORIGINAL_PROMISE_SAME_LOGGER_REFERENCE_RETAINED",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": true,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "CALLBACK_OBSERVED_SEPARATE_FROM_PUBLIC_ARGUMENT",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALLBACK_OBSERVED_SEPARATE_FROM_PUBLIC_ARGUMENT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_CALLBACK_OBSERVED_SEPARATE_FROM_PUBLIC_ARGUMENT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_CALLBACK_OBSERVED_SEPARATE_FROM_PUBLIC_ARGUMENT",
+      "actualReturnRef": "ORIGINAL_PROMISE_CALLBACK_OBSERVED_SEPARATE_FROM_PUBLIC_ARGUMENT",
+      "awaitedRef": "ORIGINAL_PROMISE_CALLBACK_OBSERVED_SEPARATE_FROM_PUBLIC_ARGUMENT",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": true,
+      "expected": {
+        "publicArgumentProof": true,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "observed-local-callback-only",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "SCRIPT_M_CHANGED",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SCRIPT_M_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SCRIPT_M_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_TAMPER\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_SCRIPT_M_CHANGED",
+      "actualReturnRef": "ORIGINAL_PROMISE_SCRIPT_M_CHANGED",
+      "awaitedRef": "ORIGINAL_PROMISE_SCRIPT_M_CHANGED",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "SCRIPT_QA_CHANGED",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SCRIPT_QA_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SCRIPT_QA_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_TAMPER\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_SCRIPT_QA_CHANGED",
+      "actualReturnRef": "ORIGINAL_PROMISE_SCRIPT_QA_CHANGED",
+      "awaitedRef": "ORIGINAL_PROMISE_SCRIPT_QA_CHANGED",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "SETTING_VALUE_CHANGED",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SETTING_VALUE_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SETTING_VALUE_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "TAMPER"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_SETTING_VALUE_CHANGED",
+      "actualReturnRef": "ORIGINAL_PROMISE_SETTING_VALUE_CHANGED",
+      "awaitedRef": "ORIGINAL_PROMISE_SETTING_VALUE_CHANGED",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "SETTING_ORDER_CHANGED",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SETTING_ORDER_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SETTING_ORDER_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_SETTING_ORDER_CHANGED",
+      "actualReturnRef": "ORIGINAL_PROMISE_SETTING_ORDER_CHANGED",
+      "awaitedRef": "ORIGINAL_PROMISE_SETTING_ORDER_CHANGED",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "UNDEFINED_DROPPED_NOT_JSON_EQUALITY",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_UNDEFINED_DROPPED_NOT_JSON_EQUALITY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_UNDEFINED_DROPPED_NOT_JSON_EQUALITY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_UNDEFINED_DROPPED_NOT_JSON_EQUALITY",
+      "actualReturnRef": "ORIGINAL_PROMISE_UNDEFINED_DROPPED_NOT_JSON_EQUALITY",
+      "awaitedRef": "ORIGINAL_PROMISE_UNDEFINED_DROPPED_NOT_JSON_EQUALITY",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "NEGATIVE_ZERO_NORMALIZED_NOT_JSON_EQUALITY",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_NEGATIVE_ZERO_NORMALIZED_NOT_JSON_EQUALITY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_NEGATIVE_ZERO_NORMALIZED_NOT_JSON_EQUALITY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": false
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_NEGATIVE_ZERO_NORMALIZED_NOT_JSON_EQUALITY",
+      "actualReturnRef": "ORIGINAL_PROMISE_NEGATIVE_ZERO_NORMALIZED_NOT_JSON_EQUALITY",
+      "awaitedRef": "ORIGINAL_PROMISE_NEGATIVE_ZERO_NORMALIZED_NOT_JSON_EQUALITY",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "BYTE_CONTENT_CHANGED",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_BYTE_CONTENT_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_BYTE_CONTENT_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                4
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_BYTE_CONTENT_CHANGED",
+      "actualReturnRef": "ORIGINAL_PROMISE_BYTE_CONTENT_CHANGED",
+      "awaitedRef": "ORIGINAL_PROMISE_BYTE_CONTENT_CHANGED",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "OTHER_CALLBACK_REFERENCE_CHANGED",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_OTHER_CALLBACK_REFERENCE_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_OTHER_CALLBACK_REFERENCE_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_OTHER_BUT_SAME_NAME"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_OTHER_CALLBACK_REFERENCE_CHANGED",
+      "actualReturnRef": "ORIGINAL_PROMISE_OTHER_CALLBACK_REFERENCE_CHANGED",
+      "awaitedRef": "ORIGINAL_PROMISE_OTHER_CALLBACK_REFERENCE_CHANGED",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "LOST_HOOK_ADOPTION",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_LOST_HOOK_ADOPTION",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_LOST_HOOK_ADOPTION",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "absent",
+        "ref": null
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_LOST_HOOK_ADOPTION",
+      "actualReturnRef": "ORIGINAL_PROMISE_LOST_HOOK_ADOPTION",
+      "awaitedRef": "ORIGINAL_PROMISE_LOST_HOOK_ADOPTION",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "DIAGNOSTIC_LOGGER_REFERENCE_CHANGED",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_DIAGNOSTIC_LOGGER_REFERENCE_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_DIAGNOSTIC_LOGGER_REFERENCE_CHANGED",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_B"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_DIAGNOSTIC_LOGGER_REFERENCE_CHANGED",
+      "actualReturnRef": "ORIGINAL_PROMISE_DIAGNOSTIC_LOGGER_REFERENCE_CHANGED",
+      "awaitedRef": "ORIGINAL_PROMISE_DIAGNOSTIC_LOGGER_REFERENCE_CHANGED",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "EXISTING_LOGGER_OVERWRITE",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_EXISTING_LOGGER_OVERWRITE",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_EXISTING_LOGGER_OVERWRITE",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "function",
+        "ref": "ORIGINAL_EXISTING_LOGGER"
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_EXISTING_LOGGER_OVERWRITE",
+      "actualReturnRef": "ORIGINAL_PROMISE_EXISTING_LOGGER_OVERWRITE",
+      "awaitedRef": "ORIGINAL_PROMISE_EXISTING_LOGGER_OVERWRITE",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "SECOND_COMPILE_EQUAL_BYTES_WRONG_SNAPSHOT",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SECOND_COMPILE_EQUAL_BYTES_WRONG_SNAPSHOT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "SEPARATELY_COMPILED_SNAPSHOT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_SECOND_COMPILE_EQUAL_BYTES_WRONG_SNAPSHOT",
+      "actualReturnRef": "ORIGINAL_PROMISE_SECOND_COMPILE_EQUAL_BYTES_WRONG_SNAPSHOT",
+      "awaitedRef": "ORIGINAL_PROMISE_SECOND_COMPILE_EQUAL_BYTES_WRONG_SNAPSHOT",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "CACHED_PRIOR_CALL_HASHES_NOT_CURRENT_ARGUMENT",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "PRIOR_CALL_CACHE",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_REAL_CALL",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_CACHED_PRIOR_CALL_HASHES_NOT_CURRENT_ARGUMENT",
+      "actualReturnRef": "ORIGINAL_PROMISE_CACHED_PRIOR_CALL_HASHES_NOT_CURRENT_ARGUMENT",
+      "awaitedRef": "ORIGINAL_PROMISE_CACHED_PRIOR_CALL_HASHES_NOT_CURRENT_ARGUMENT",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "METHOD_PROXY_REPLACEMENT",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_METHOD_PROXY_REPLACEMENT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_METHOD_PROXY_REPLACEMENT",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "WRAPPED_METHOD",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_METHOD_PROXY_REPLACEMENT",
+      "actualReturnRef": "ORIGINAL_PROMISE_METHOD_PROXY_REPLACEMENT",
+      "awaitedRef": "ORIGINAL_PROMISE_METHOD_PROXY_REPLACEMENT",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": true,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "PROMISE_THEN_WRAPPER_SAME_SETTLEMENT_NOT_IDENTITY",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_PROMISE_THEN_WRAPPER_SAME_SETTLEMENT_NOT_IDENTITY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_PROMISE_THEN_WRAPPER_SAME_SETTLEMENT_NOT_IDENTITY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_PROMISE_THEN_WRAPPER_SAME_SETTLEMENT_NOT_IDENTITY",
+      "actualReturnRef": "NEW_CHAINED_PROMISE",
+      "awaitedRef": "NEW_CHAINED_PROMISE",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": true,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "AWAIT_DIFFERENT_PROMISE",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_AWAIT_DIFFERENT_PROMISE",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_AWAIT_DIFFERENT_PROMISE",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_AWAIT_DIFFERENT_PROMISE",
+      "actualReturnRef": "ORIGINAL_PROMISE_AWAIT_DIFFERENT_PROMISE",
+      "awaitedRef": "OTHER_PROMISE",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "EXTRA_AWAIT_INSTEAD_OF_ORIGINAL_ONE",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_EXTRA_AWAIT_INSTEAD_OF_ORIGINAL_ONE",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_EXTRA_AWAIT_INSTEAD_OF_ORIGINAL_ONE",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_EXTRA_AWAIT_INSTEAD_OF_ORIGINAL_ONE",
+      "actualReturnRef": "ORIGINAL_PROMISE_EXTRA_AWAIT_INSTEAD_OF_ORIGINAL_ONE",
+      "awaitedRef": "ORIGINAL_PROMISE_EXTRA_AWAIT_INSTEAD_OF_ORIGINAL_ONE",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 2,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "EXTRA_CONSTRUCTOR_OR_WORLD",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_EXTRA_CONSTRUCTOR_OR_WORLD",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_EXTRA_CONSTRUCTOR_OR_WORLD",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 2,
+      "extraWorldCount": 1,
+      "originalReturnRef": "ORIGINAL_PROMISE_EXTRA_CONSTRUCTOR_OR_WORLD",
+      "actualReturnRef": "ORIGINAL_PROMISE_EXTRA_CONSTRUCTOR_OR_WORLD",
+      "awaitedRef": "ORIGINAL_PROMISE_EXTRA_CONSTRUCTOR_OR_WORLD",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "SWAPPED_RECEIVER_INSTANCE",
+      "operation": "adopt-notices",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SWAPPED_RECEIVER_INSTANCE",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_SWAPPED_RECEIVER_INSTANCE",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_adopt-notices",
+      "actualMethodRef": "ORIGINAL_adopt-notices",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "OTHER_INSTANCE",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_SWAPPED_RECEIVER_INSTANCE",
+      "actualReturnRef": "ORIGINAL_PROMISE_SWAPPED_RECEIVER_INSTANCE",
+      "awaitedRef": "ORIGINAL_PROMISE_SWAPPED_RECEIVER_INSTANCE",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": false,
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "compiledOrSettingsNormalizationAllowed": false
+      }
+    },
+    {
+      "id": "ORIGINAL_CALL_REJECTS_KEEP_PREPARED_ONLY",
+      "operation": "mount",
+      "originalArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_ORIGINAL_CALL_REJECTS_KEEP_PREPARED_ONLY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "actualArgumentSnapshot": {
+        "snapshotIdentity": "CURRENT_CALL_ORIGINAL_CALL_REJECTS_KEEP_PREPARED_ONLY",
+        "scripts": {
+          "M": "OWN_SYNTHETIC_M_BYTES_A\n",
+          "QA": "OWN_SYNTHETIC_QA_BYTES_A\n"
+        },
+        "settingsEntries": [
+          [
+            "OWN_SYNTHETIC_SETTING_MODE",
+            {
+              "type": "string",
+              "value": "A"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_OPTIONAL",
+            {
+              "type": "undefined"
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_ZERO",
+            {
+              "type": "number",
+              "value": 0,
+              "negativeZero": true
+            }
+          ],
+          [
+            "OWN_SYNTHETIC_BYTES",
+            {
+              "type": "bytes",
+              "value": [
+                1,
+                2,
+                3
+              ]
+            }
+          ]
+        ],
+        "callbacks": [
+          {
+            "role": "OWN_EXISTING_CALLBACK_A",
+            "ref": "CALLBACK_KEEP_A"
+          },
+          {
+            "role": "OWN_EXISTING_CALLBACK_B",
+            "ref": "CALLBACK_KEEP_B"
+          }
+        ]
+      },
+      "loggerBefore": {
+        "state": "absent",
+        "ref": null
+      },
+      "loggerActual": {
+        "state": "function",
+        "ref": "DIAGNOSTIC_LOGGER_A"
+      },
+      "originalMethodRef": "ORIGINAL_mount",
+      "actualMethodRef": "ORIGINAL_mount",
+      "originalReceiverRef": "ORIGINAL_INSTANCE_A",
+      "actualReceiverRef": "ORIGINAL_INSTANCE_A",
+      "originalInvocationCount": 1,
+      "extraWorldCount": 0,
+      "originalReturnRef": "ORIGINAL_PROMISE_ORIGINAL_CALL_REJECTS_KEEP_PREPARED_ONLY",
+      "actualReturnRef": "ORIGINAL_PROMISE_ORIGINAL_CALL_REJECTS_KEEP_PREPARED_ONLY",
+      "awaitedRef": "ORIGINAL_PROMISE_ORIGINAL_CALL_REJECTS_KEEP_PREPARED_ONLY",
+      "originalAwaitCount": 1,
+      "actualAwaitCount": 1,
+      "promiseWrapped": false,
+      "methodWrapped": false,
+      "comparisonTiming": "synchronous-before-call-and-after-original-return-or-existing-await",
+      "callbackObserved": null,
+      "expected": {
+        "publicArgumentProof": "prepared-only-no-returned-proof",
+        "hiddenInternalInstallation": "not-observable",
+        "runtimeCallbackProof": "unknown",
+        "mustNotInventReturned": true,
+        "originalErrorPreserved": true
+      },
+      "publicCallSettlement": {
+        "observed": "rejected",
+        "originalErrorRef": "OWN_ORIGINAL_ERROR_A",
+        "actualErrorRef": "OWN_ORIGINAL_ERROR_A"
+      },
+      "returnObservation": "not-yet-returned"
+    }
+  ],
+  "hookSafety": [
+    {
+      "id": "SYNC_CALLBACK_ONLY",
+      "input": {
+        "callbackReturns": "undefined",
+        "awaitCount": 0,
+        "rpcCount": 0,
+        "rawForwardCount": 0,
+        "sinkThrows": false
+      },
+      "expected": {
+        "admissible": true,
+        "doesNotThrow": true
+      }
+    },
+    {
+      "id": "ASYNC_CALLBACK_FORBIDDEN",
+      "input": {
+        "callbackReturns": "promise",
+        "awaitCount": 1,
+        "rpcCount": 0,
+        "rawForwardCount": 0
+      },
+      "expected": {
+        "admissible": false
+      }
+    },
+    {
+      "id": "RPC_IN_CALLBACK_FORBIDDEN",
+      "input": {
+        "callbackReturns": "undefined",
+        "awaitCount": 0,
+        "rpcCount": 1,
+        "rawForwardCount": 0
+      },
+      "expected": {
+        "admissible": false
+      }
+    },
+    {
+      "id": "RAW_FORWARD_RECOGNIZED_FORBIDDEN",
+      "input": {
+        "callbackReturns": "undefined",
+        "awaitCount": 0,
+        "rpcCount": 0,
+        "rawForwardCount": 1,
+        "messageClass": "recognized"
+      },
+      "expected": {
+        "admissible": false
+      }
+    },
+    {
+      "id": "RAW_FORWARD_UNKNOWN_FORBIDDEN",
+      "input": {
+        "callbackReturns": "undefined",
+        "awaitCount": 0,
+        "rpcCount": 0,
+        "rawForwardCount": 1,
+        "messageClass": "unknown-private-sentinel"
+      },
+      "expected": {
+        "admissible": false
+      }
+    },
+    {
+      "id": "SINK_FAILURE_ORIGINAL_ERROR_RETAINED",
+      "input": {
+        "sinkThrows": true,
+        "sinkErrorRef": "OWN_CAPTURE_ERROR_B",
+        "originalErrorRef": "OWN_ORIGINAL_ERROR_A"
+      },
+      "expected": {
+        "callbackThrowsIntoWork": false,
+        "actualWorkErrorRef": "OWN_ORIGINAL_ERROR_A",
+        "safeDiagnosticState": "fault-or-unknown"
+      }
+    }
+  ],
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

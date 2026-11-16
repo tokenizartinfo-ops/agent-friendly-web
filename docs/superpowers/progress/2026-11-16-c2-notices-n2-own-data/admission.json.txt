@@ -1,0 +1,35 @@
+{
+  "requiredSteps": [
+    "Read the exact one-use diagnostic head",
+    "Use fixed Node",
+    "Install existing locked dependencies",
+    "Observe first notices GET and POST",
+    "Preserve sanitized diagnostic only"
+  ],
+  "commandStep": "Observe first notices GET and POST",
+  "selectionHash": "5f7ce49e0f99966360cbd680509c2d10a9aecc965596e9a2764661ea6bec1920",
+  "bindings": {
+    "driverHash": "cf8b73a6ddc0d9601830dadb13d428555b1e10e9ca3549c45f56787ae3efc79a",
+    "helperHash": "b78621c06446456ecea3ddc20c80cc95145d6d012478fde7c25a83ad509f3e74",
+    "readerHash": "34b32c4634384d65df27f1f69fcd45c4b8f709ce8efbe92f7d169ec8d17052dc",
+    "slotHash": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+    "fixtureHash": "efee9a74a2c464cda436b0d938911484e630d1ab1d9540c4ee5ee093289f72d8",
+    "vectorsHash": "cd4d4a0174be09c8dcae12c6a3b222de0d5f7151d2b0b94dd30f9caa5b6eedad",
+    "loggerHash": "64f5bc4ae951d13a6ead8d2dc28b0b0ff13ffdcf01f3d621e17dab07203d865c",
+    "worldHash": "14adcbe7149ef9bf92f756a5edae0c13b8c19deda5a7286bbafd0cd53419c64d"
+  },
+  "controls": {
+    "accepted": 6,
+    "rejected": 21,
+    "probeChecks": 3,
+    "roundtrips": 6,
+    "witnessRejected": 2,
+    "slotChecks": 5,
+    "guardAccepted": 3,
+    "guardRejected": 7,
+    "guardTransitions": 6,
+    "invarianceChecks": 10,
+    "guardRecordRejected": 12,
+    "vectorsHash": "cd4d4a0174be09c8dcae12c6a3b222de0d5f7151d2b0b94dd30f9caa5b6eedad"
+  }
+}

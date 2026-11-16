@@ -1,0 +1,1621 @@
+{
+  "schema": "afw.c2-notices-n2.own-control-results.v1",
+  "execution": "pure OWN RAM functions; not native modulegraph, Source or actual capture",
+  "syntheticOnly": true,
+  "groups": {
+    "journal": 65,
+    "generic": 33,
+    "privateModels": 74,
+    "deliveryErrorModels": 24,
+    "privateProbe": 12,
+    "fullInput": 104,
+    "coherent": 18,
+    "zipFormats": 10
+  },
+  "checks": [
+    {
+      "id": "journal/FULL_FIVE_PAIR_POSITIVE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/QUIET_HOOK_CALLBACK_UNKNOWN",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/LEGITIMATE_CURRENT_CALL_CHANGE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/FOUR_PAIR_POST_503",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/FOUR_PAIR_BODY_THROW",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/FAILED_FIFTH_CALL_PREPARED_ONLY",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/ORIGINAL_ACTION_AND_COUNT_ERRORS",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/AFTER_THROW_SEPARATE_FILE_FAILURE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/COMPLETE_NATIVE_TIMEOUT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/HONEST_POST_TIMEOUT_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/HONEST_BEFORE_BASELINE_TIMEOUT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/BLOCKED_NOTICES_NO_BASELINE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/EARLY_HOST_FAILURE_NO_FAKE_RETURN",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/GUARD_BASELINE_GAP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/GUARD_GET_BODY_PENDING",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/GUARD_GET_POST_GAP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/GUARD_POST_BODY_PENDING",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/GUARD_AFTER_POST_DURING_COUNT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/GUARD_DURING_AFTER",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/GUARD_AFTER_SETTLEMENT_BEFORE_FINAL",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/DUPLICATE_AND_CASCADE_OBSERVATIONS",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/CHILD_TYPED_GUARD",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/WRONG_HOST_STAGE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/WRONG_HOST_CALL_ORDER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_RETURN_WITHOUT_PREPARE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/MISSING_HOST_RETURN_ON_SUCCESS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_ARGUMENT_HASH_MISMATCH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_PAIR_HASH_MISMATCH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_CALLBACK_CHANGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_REFERENCE_CHANGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_SETTING_CHANGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_COMPILED_FALSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_CONSTRUCTOR_INVENTED_COMPILED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_COMPILED_MISSING",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_COMPILED_PAIR_CHANGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/MISSING_FIFTH_POSITIVE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/FORGED_FIFTH_AFTER_POST503",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_DURING_OAUTH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_BASELINE_MISSING",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_BASELINE_TOO_EARLY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_BASELINE_DUP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_FINAL_MISSING",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_FINAL_BEFORE_AFTER_SETTLED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_CALLBACK_REGRESSED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_EXCLUDED_CHANGED_AFTER_BASELINE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_FAULT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_CALLBACK_FALSE_NOT_UNKNOWN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOOK_NEW_COUNT_FORGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/GUARD_BEFORE_BASELINE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/GUARD_WRONG_WINDOW",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/GUARD_PREREQUISITE_PUBLIC",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/GUARD_SEQUENCE_GAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/GUARD_HOLDERS_INVENTED_EXPIRY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/GUARD_CHILD_CLOSED_NOT_NULL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/GUARD_PARENT_ALIVE_NOT_NULL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/GUARD_PRIVATE_FIELD",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/GUARD_CORRELATION_FORGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/RECORD_AFTER_FINAL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/COMPLETE_DANGLING_HTTP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/NATIVE_FAIL_WITH_RETURNED_OPS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/NATIVE_PREFIX_FOUR_TIMEOUT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/COMPLETE_JOURNAL_NATIVE_PREFIX_THREE_TIMEOUT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/FAILED_ENTERED_NOTICES_BASELINE_WITH_NO_HTTP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "journal/FAILED_ENTERED_NOTICES_NO_BASELINE_NO_HTTP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "journal/HOST_RETURNED_AFTER_FINAL_FREEZE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/COUNTER_UPLOAD_SKEW",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/COUNTER_MISSING_KEY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/COUNTER_KEY_ORDER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/COUNTER_EXTRA_KEY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/FLOW_WRONG_ID",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/FLOW_RETURN_BEFORE_ENTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/FLOW_ERROR_ON_RETURN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/FLOW_THROW_NULL_ERROR",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/HTTP_POST_AFTER_FAILED_GET",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/HTTP_POST_AFTER_BODY_THROW",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/HTTP_END_AFTER_ACTION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/HTTP_RESPONSE_DUPLICATED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/HTTP_STATUS_CHANGED_AT_RETURN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/HTTP_RESPONSE_BODY_PRESET",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/TIME_REGRESSION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/TIME_OVER_CAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/BINDING_EXTRA_FIELD",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/JOURNAL_ROW_PRIVATE_FIELD",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/NATIVE_WORK_ENTERED_FALSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/NATIVE_IDS_WRONG",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/NATIVE_PASS_CODE_WRONG",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/NATIVE_EXTRA_CASE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/NATIVE_ZERO_CASES",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/BLOCKED_FAKES_WORK",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/BLOCKED_THEN_HTTP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/TORN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/NONCANONICAL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/DUPLICATE_JSON_KEY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/INVALID_UTF8",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/CRLF",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/EMPTY_LINE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/REORDER_KEYS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "generic/OVER_BYTE_CAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "privateModels/private-message/EXACT_PARENT_HOLDERS",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXACT_PARENT_WALL_EXPIRED_AT_BOUNDARY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/PARENT_MONO_EXPIRED_AT_BOUNDARY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/PARENT_OBSERVED_REGRESSION",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/PARENT_BOOLEAN_FAILURE_WITH_UNEXPIRED_CLOCKS",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXACT_CHILD_ALIVE_FALSE",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/CHILD_EXPIRED_BOUNDARIES",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/CHILD_BEFORE_START_IS_NOT_LAST_OBSERVATION_PROOF",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/FINITE_FRACTIONAL_MONOTONIC_ALLOWED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/PREFIX_FORGERY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/TAG_SUFFIX_FORGERY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/TAG_CASE_FORGERY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/TWO_TAGS_FORGED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/PARTIAL_TAG",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXTRA_PRIVATE_KEY_cookie",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXTRA_PRIVATE_KEY_token",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXTRA_PRIVATE_KEY_requestId",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXTRA_PRIVATE_KEY_stack",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXTRA_PRIVATE_KEY_path",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXTRA_PRIVATE_KEY_remainingMs",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXTRA_PRIVATE_KEY___proto__",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/MISSING_KEY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/WRONG_TAG_PAYLOAD",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/DUPLICATE_KEY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/ESCAPED_DUPLICATE_KEY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/TORN_JSON",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/TRAILING_PRIVATE_TEXT",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/TWO_JSON_VALUES",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/NESTED_OBJECT_IN_BOOLEAN",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/STRING_NUMBER",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/NULL_NUMBER",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/INFINITY_LITERAL",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/EXPONENT_OVERFLOW",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/UNSAFE_WALL_INTEGER",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/FRACTIONAL_WALL",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/PRIVATE_MESSAGE_OVER_CAP",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/PRIVATE_ARRAY_PAYLOAD",
+      "pass": true
+    },
+    {
+      "id": "privateModels/private-message/BOOLEAN_STRING",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/CALL1_CONSTRUCTOR",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/CALL2_ASSEMBLY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/CALL3_MOUNT",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/CALL4_ADOPT_CONNECTION",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/CALL5_ADOPT_NOTICES",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/LEGITIMATE_CURRENT_CALL_SETTINGS_CHANGE",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/SAME_LOGGER_REFERENCE_RETAINED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/CALLBACK_OBSERVED_SEPARATE_FROM_PUBLIC_ARGUMENT",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/SCRIPT_M_CHANGED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/SCRIPT_QA_CHANGED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/SETTING_VALUE_CHANGED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/SETTING_ORDER_CHANGED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/UNDEFINED_DROPPED_NOT_JSON_EQUALITY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/NEGATIVE_ZERO_NORMALIZED_NOT_JSON_EQUALITY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/BYTE_CONTENT_CHANGED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/OTHER_CALLBACK_REFERENCE_CHANGED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/LOST_HOOK_ADOPTION",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/DIAGNOSTIC_LOGGER_REFERENCE_CHANGED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/EXISTING_LOGGER_OVERWRITE",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/SECOND_COMPILE_EQUAL_BYTES_WRONG_SNAPSHOT",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/CACHED_PRIOR_CALL_HASHES_NOT_CURRENT_ARGUMENT",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/METHOD_PROXY_REPLACEMENT",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/PROMISE_THEN_WRAPPER_SAME_SETTLEMENT_NOT_IDENTITY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/AWAIT_DIFFERENT_PROMISE",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/EXTRA_AWAIT_INSTEAD_OF_ORIGINAL_ONE",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/EXTRA_CONSTRUCTOR_OR_WORLD",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/SWAPPED_RECEIVER_INSTANCE",
+      "pass": true
+    },
+    {
+      "id": "privateModels/options-model/ORIGINAL_CALL_REJECTS_KEEP_PREPARED_ONLY",
+      "pass": true
+    },
+    {
+      "id": "privateModels/accessor/ABSENT_LOGGER_ALLOWED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/accessor/DATA_UNDEFINED_ALLOWED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/accessor/SAME_DIAGNOSTIC_HANDLER_ALLOWED",
+      "pass": true
+    },
+    {
+      "id": "privateModels/accessor/OTHER_LOGGER_NOT_OVERWRITTEN",
+      "pass": true
+    },
+    {
+      "id": "privateModels/accessor/GETTER_ONLY_REJECT_WITHOUT_READ",
+      "pass": true
+    },
+    {
+      "id": "privateModels/accessor/SETTER_ONLY_REJECT_WITHOUT_WRITE",
+      "pass": true
+    },
+    {
+      "id": "privateModels/accessor/GETTER_SETTER_REJECT_NO_INVOKE",
+      "pass": true
+    },
+    {
+      "id": "privateModels/accessor/INHERITED_ACCESSOR_REJECT_NO_INVOKE",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/PHASE_BASELINE_EXCLUDES_EARLIER_NODE_ARRIVALS",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/ONE_POST_WINDOW_ARRIVAL_IS_ASSOCIATION_ONLY",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/DUPLICATE_DELIVERY_NOT_DEDUPLICATED_INTO_ONE_CAUSE",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/MULTIPLE_ORIGINS_AND_CASCADE_UNKNOWN",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/LATE_AFTER_POST_ARRIVAL",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/PHASE_ORIGIN_NOT_OBSERVABLE_AFTER_LATE_ARRIVAL",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/NO_TAG_WITH_UNTAGGED_FAILURE",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/UNSCOPED_ARRIVAL",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/EIGHT_NEW_RECORDS_BOUNDED",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/NINTH_NEW_RECORD_EXPLICIT_UNKNOWN_OR_FAULT",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/GUARD_BEFORE_HTTP_RESPONSE_DOES_NOT_PROVE_FIRST_CAUSE",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/private-arrival/ELAPSED_OVER_CAP",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/original-error-model/PRESERVE_ORIGINAL_null",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/original-error-model/PRESERVE_ORIGINAL_undefined",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/original-error-model/PRESERVE_ORIGINAL_false",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/original-error-model/PRESERVE_ORIGINAL_zero",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/original-error-model/PRESERVE_ORIGINAL_empty-string",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/original-error-model/PRESERVE_ORIGINAL_object-identity",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/callback-model/SYNC_CALLBACK_ONLY",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/callback-model/ASYNC_CALLBACK_FORBIDDEN",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/callback-model/RPC_IN_CALLBACK_FORBIDDEN",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/callback-model/RAW_FORWARD_RECOGNIZED_FORBIDDEN",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/callback-model/RAW_FORWARD_UNKNOWN_FORBIDDEN",
+      "pass": true
+    },
+    {
+      "id": "deliveryErrorModels/callback-model/SINK_FAILURE_ORIGINAL_ERROR_RETAINED",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/OLD_PHASE_IGNORED",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/AMBIGUOUS_TWO_FAILURES",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PREFIX_DRIFT",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PRIVATE_SINGLE_SAFE_SITE",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PRIVATE_IGNORE_NEW_PHASE_FAILURE",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PRIVATE_CALL_PREFIX_DRIFT",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PRIVATE_UNKNOWN_NO_STALE_SUMMARY",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PRIVATE_FACTS_ONLY_KNOWN_KEYS",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PRIVATE_UNKNOWN_HANDLE_NOT_FALSE",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PRIVATE_FOREIGN_SUFFIX_SITE_IGNORED",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PRIVATE_OVER_CAP_UNKNOWN",
+      "pass": true
+    },
+    {
+      "id": "privateProbe/PRIVATE_TOO_MANY_FAILURES_UNKNOWN",
+      "pass": true
+    },
+    {
+      "id": "fullInput/ZIP_CRC_KNOWN_VECTOR",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_VALID_STORED_ZIP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_VALID_DEFLATE_ZIP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_VALID_DESCRIPTOR_ZIP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_FULL_FIVE_PAIR_POSITIVE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_QUIET_HOOK_CALLBACK_UNKNOWN",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_LEGITIMATE_CURRENT_CALL_CHANGE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_FOUR_PAIR_POST_503",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_FOUR_PAIR_BODY_THROW",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_FAILED_FIFTH_CALL_PREPARED_ONLY",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_ORIGINAL_ACTION_AND_COUNT_ERRORS",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_AFTER_THROW_SEPARATE_FILE_FAILURE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_COMPLETE_NATIVE_TIMEOUT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_HONEST_POST_TIMEOUT_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_HONEST_BEFORE_BASELINE_TIMEOUT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_BLOCKED_NOTICES_NO_BASELINE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_EARLY_HOST_FAILURE_NO_FAKE_RETURN",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_GUARD_BASELINE_GAP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_GUARD_GET_BODY_PENDING",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_GUARD_GET_POST_GAP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_GUARD_POST_BODY_PENDING",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_GUARD_AFTER_POST_DURING_COUNT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_GUARD_DURING_AFTER",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_GUARD_AFTER_SETTLEMENT_BEFORE_FINAL",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_DUPLICATE_AND_CASCADE_OBSERVATIONS",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_CHILD_TYPED_GUARD",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/FULL_FAILED_ENTERED_NOTICES_BASELINE_WITH_NO_HTTP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "fullInput/SOURCE_QUALIFIED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/TASK1",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/PCOFF",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/CONTEXT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/BINDING",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/SELECTION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/CONTROLS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/CUSTODY_ROOT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/CUSTODY_LAUNCHES",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/CUSTODY_PROCESS_CAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/CLEANUP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOURNAL_UNSTABLE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RECORDER_FAULT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOURNAL_HASH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/WITNESS_BYTES",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/WITNESS_HASH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/PROJECTION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ACTION_ERROR_MASKING",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/NATIVE_FALSE_WORK",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/CAPTURE_SPAWN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/CAPTURE_EXIT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RUN_ID",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RUN_HEAD",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RUN_BRANCH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RUN_WORKFLOW",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RUN_EVENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RUN_ATTEMPT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RUN_FAILURE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/FOREIGN_REPO",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/FOREIGN_HEAD_REPO",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RUN_NAN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/RUN_BOUNDS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOB_ID",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOB_RUN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOB_HEAD",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOB_NAME",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOB_ATTEMPT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOB_FAILED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOB_COUNT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/JOB_CALENDAR",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/STEP_NAN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/STEP_TIME",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/STEP_SKIP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/STEP_NAME",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/STEP_DUP_NUMBER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/COMMIT_TREE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/COMMIT_MSG",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/COMMIT_PARENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/TRANSPORT_JOB",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ARTIFACT_ID",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ARTIFACT_JOB",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ARTIFACT_RUN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ARTIFACT_FILENAME",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ARTIFACT_DIGEST",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ARTIFACT_SIZE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ARTIFACT_EXPIRED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ARTIFACT_HEAD",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ARTIFACT_COUNT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/PAYLOAD_CHANGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/LOG_INVALID_HEADER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/LOG_INVALID_FRAME",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/LOG_OUTSIDE_TIME",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/LOG_NO_TIMESTAMP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/LOG_LITERAL_ECHO",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/LOG_WRONG_COMMAND",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/LOG_FRONTIER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/LOG_DUPLICATE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/LOG_MISSING",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ZIP_CRC",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ZIP_PATH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ZIP_MULTI_ENTRY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ZIP_PAYLOAD_BYTE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ZIP_CENTRAL_BOUNDS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ZIP_TRUNCATED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ZIP_ENCRYPTED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/SCHEMA_SWAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "fullInput/ADMISSION_SWAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_HOST_ARGUMENT_HASH_MISMATCH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_HOST_CALLBACK_CHANGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_HOST_COMPILED_PAIR_CHANGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_MISSING_FIFTH_POSITIVE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_FORGED_FIFTH_AFTER_POST503",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_GUARD_WRONG_WINDOW",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_GUARD_HOLDERS_INVENTED_EXPIRY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_HOOK_NEW_COUNT_FORGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_FAILED_ENTERED_NOTICES_NO_BASELINE_NO_HTTP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_HOST_RETURNED_AFTER_FINAL_FREEZE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_COMPLETE_DANGLING_HTTP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_NATIVE_FAIL_WITH_RETURNED_OPS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_NATIVE_PREFIX_FOUR_TIMEOUT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_COMPLETE_JOURNAL_NATIVE_PREFIX_THREE_TIMEOUT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_CUSTODY_2",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "coherent/COHERENT_CUSTODY_9",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "coherent/COHERENT_CUSTODY_24",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "coherent/COHERENT_CUSTODY_25",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "zipFormats/ZIP_DESCRIPTOR_NO_SIGNATURE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "zipFormats/ZIP_DESCRIPTOR_CRC",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "zipFormats/ZIP_DESCRIPTOR_SIZE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "zipFormats/ZIP_LOCAL_NAME",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "zipFormats/ZIP_CENTRAL_NAME",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "zipFormats/ZIP_ZERO_ENTRY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "zipFormats/ZIP_MULTIDISK",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "zipFormats/ZIP64_LENGTH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "zipFormats/ZIP_EXTRA_TRAILER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "zipFormats/ZIP_NONCANONICAL_BASE64",
+      "pass": true,
+      "accepted": false
+    }
+  ],
+  "failed": 0,
+  "actualNativeImportGraph": false,
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
