@@ -1,0 +1,47 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-PATH-LAYERS-ROOT-SUPPLEMENT/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": "9bbc2e132450c9bdb54769b8400f386ec5c9817e",
+  "allowedAction": "Clarify immutable DATA vs materialized target before shared contract/code; no Source implementation or execution authorized.",
+  "baseline": {
+    "commit": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "originalBlobLeaves": 3203
+  },
+  "SourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "interpretation": {
+    "Git": "Preserve original canonical BASE paths byte/mode-exact, including absence where original absent; carry Source13 only as identical inert body DATA plus index. Never install proposal product/test paths into Git by reading '13 routes unchanged'.",
+    "materializedTarget": "Only in owned isolated diagnostic target, materialize all13 current proposal canonical paths from pinned DATA; measure actual file bytes SHA before and after, in index order, both arrays must match current26b. S07 stays exact; add only siblingD07+recorder alias path.",
+    "provenance": "Raw Git API tree admission checks actual DATA edges and preserved original leaves, not an invented assumption that proposal13 is installed under Git canonical paths. Exact source-target reads, not source-index echo, supply before/after arrays."
+  },
+  "concreteCounterexample": {
+    "S08": {
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "baselineCanonical": "ABSENT",
+      "proposedData": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "proposedBytes": 18667
+    },
+    "S09": {
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "baselineCanonical": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+      "baselineBytes": 57864,
+      "proposedData": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "proposedBytes": 61073
+    },
+    "verifiedAgainstImmutableRawTree": "afde090ec400a81b1ddced7b65c967636b5c7714"
+  },
+  "noChangesToDecision": "Same caps/2launches/GREEN20only/diagUNKNOWNvsFAULT/SourceQualifiedfalse. Contract designs still pending Root acceptance.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "rollback": "Ignore this clarification; no ref or implementation mutated."
+}
