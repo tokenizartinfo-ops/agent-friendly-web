@@ -1,0 +1,346 @@
+{
+  "schema": "AFW-C2-T1-NOTICES-POST-AFTER-GREEN20-DIAGNOSIS-DESIGN/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached Git DATA and immutable static Source text only",
+  "status": "DESIGN_ONLY_NEXT_FAMILY_DECISION_PENDING",
+  "authorization": "Create and verify this diagnostic report. No candidate code, new native execution, source mutation, ref, dispatch or provider action.",
+  "evidence": {
+    "primary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
+    "outcome": "f39f7e43c4010acbaca7a679d61dbe048da24688",
+    "own": "a9993d7411d0a943d2f247915d91ef17b0b38f09",
+    "closeReadback": "071bccca74d1f1e0497b18bf3ee65ad532df7363",
+    "run": "43980317236",
+    "attempt": 1,
+    "jobId": 133694794167,
+    "testedHead": "6e41d44919d86f0bacc97edab022460449316987",
+    "testedTree": "fd5fa1eb66c0f1503af570c4a7be0233494016e7",
+    "closedHead": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "driver": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "previousCOutcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+    "previousW1Primary": "6cfb0d0827ebe0cf8591d06d09e1ced0d7aedaaa",
+    "previousW1Outcome": "325efbf73e0fe5ecea0713cf76df6b7d8cecd3b5"
+  },
+  "immutableInventory": [
+    {
+      "id": "S00",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "id": "S01",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "id": "S02",
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "id": "S03",
+      "path": "worker/mcp-own/finite.mjs",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "id": "S04",
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "id": "S05",
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "id": "S06",
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "id": "S07",
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "id": "S08",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+    },
+    {
+      "id": "S09",
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+    },
+    {
+      "id": "S10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+    },
+    {
+      "id": "S11",
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "id": "S12",
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    }
+  ],
+  "targetVerification": "All thirteen full immutable Git text bodies fetched. Their UTF-8 lengths matched index 26b. All 13 index SHA-256 entries matched both actual TARGET arrays in the independently admitted outcome. Diagnostic sibling never replaced S07. Closed receipt reports baseline 3203 unchanged, only workflow removed and zero close-head runs.",
+  "baseHelpers": {
+    "mcp-qa-finite-owner-native-bridge.mjs": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "mcp-qa-finite-owner-native-wire.mjs": "38285fa0149a38924c431b4d5a705bec1384216d",
+    "mcp-qa-finite-stage-work.mjs": "068d35c2555c7dc711c487f6021ec572bd3af067",
+    "mcp-qa-finite-initial-lease.mjs": "a9cc083baae71c89af2f6436c00571dc8e7a20c9",
+    "mcp-qa-finite-candidate-residency.mjs": "29373312a0e60ed6ca87ca3952dba751186662a8",
+    "mcp-qa-finite-initial-upload-wire.mjs": "be1c7d1f25ffd1c6184f6139acb03110b7b148bb",
+    "finite-owner-io-fanout.mjs": "e181bfd7634b6f71e4129b03fbb529a2f1b04f10"
+  },
+  "actual": {
+    "diagnosticCollectionComplete": true,
+    "nativeQualification": false,
+    "capture": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "timeout",
+      "stdout": {
+        "bytes": 23371,
+        "sha256": "fd2362d5c7e3e1bedd5e064cecc8735993c55fc3cf6c73cbb2d7ee77accaaf43"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "reportedNative": 19,
+    "passed": 14,
+    "failed": 5,
+    "first11Passed": true,
+    "firstThrow": {
+      "sequence": 46,
+      "elapsedMs": 114318,
+      "id": "C2T1_NOTICES",
+      "operation": "action",
+      "edge": "throw",
+      "error": {
+        "name": "AssertionError",
+        "code": "ERR_ASSERTION",
+        "site": {
+          "file": "S08",
+          "line": 41,
+          "column": 12
+        }
+      }
+    },
+    "noticesActionMs": 30008,
+    "actualReturnedStatus": null,
+    "actualCounters": null,
+    "actualFailureMechanism": null,
+    "otherThrows": [
+      {
+        "id": "C2T1_MONITOR",
+        "sequence": 54,
+        "site": {
+          "file": "S08",
+          "line": 96,
+          "column": 69
+        }
+      },
+      {
+        "id": "C2T1_SCOPE_MISSING",
+        "sequence": 58,
+        "site": {
+          "file": "S08",
+          "line": 18,
+          "column": 118
+        }
+      },
+      {
+        "id": "C2T1_FINITE",
+        "sequence": 62,
+        "site": {
+          "file": "S08",
+          "line": 18,
+          "column": 118
+        }
+      },
+      {
+        "id": "C2T1_SELECTION",
+        "sequence": 66,
+        "site": {
+          "file": "S08",
+          "line": 119,
+          "column": 4
+        }
+      }
+    ],
+    "lastEntered": {
+      "case": "C2T1_OWN_PROMISE",
+      "elapsedMs": 176469,
+      "afterSeen": false,
+      "edge": "enter",
+      "remainingApproxMsAtMost": 3531
+    },
+    "custody": {
+      "launches": 2,
+      "processes": 2,
+      "preflightOwned": true,
+      "tempRemoved": true
+    },
+    "evidenceLimit": "S08:15,39–41 reads status, awaits response cancellation, then asserts equality. At that line an actual non-200 was compared to 200. The admitted projection omits its numeric value, stdout TAP diagnostics and per-case counters. Root ETIMEDOUT at 180 s is a different clock. No claim which inner predicate or promise won."
+  },
+  "workloadAndOrder": [
+    "S07:20–38, S08:27–41,71–84. One main world serves cases 1–17. HANDLE first GETs the real notices form under the connection cookie, validates 200/form/cookie at S08:18–19 and retains pendingForm. HANDLE and PROJECTREF each alter a newly constructed form body. The successful ticket stays in pendingForm until NOTICES clears it before dispatch. Those 30,008 ms therefore contain the POST and response settlement, with no GET. The cookie is the notices form cookie even though f.choice still refers to connection. The earlier fixture accepts non-200 and unchanged effect counts, not a particular error code.",
+    "M S03:17–29 first opens the original request lease. S01:59–83 caps it at 30,000 ms with wall and monotonic guards. The BASE native-bridge:24–44 validates the body, forwards the actual request to the fixed QA receiver, normalizes statuses, reads exact response bytes and validates choice HTML. Native-wire:24–39 retains actual work while racing its failure/deadline. QA S02:16–27 clips the forwarded lease to the original remaining time. Fresh entry per POST excludes debit of this request clock by earlier cases. S01:89–106 and initial-lease child bounds, the original business expiries and retained work still matter.",
+    "BASE native-wire:78–86 rejects the mismatched HANDLE before forwarding. S01:238–246 rejects PROJECTREF before consumeTicket. S08:74 exercises a foreign subject on GET. S08:75–84 snapshots DO storage, pointer and versions, mutates one dimension, rejects and restores in finally. Grant revocation is a SQL update restored separately. S09:164–173 rewrites exact saved rows, drops rows not in snapshot and syncs. The phase case additionally verifies snapshot and public context equality. A passing negative measures coarse effect counts. It does not prove every private promise settled, every grant/window still fresh or that the final business request was time-independent. No deterministic un-restored mutation found. S09:336–342 clock freeze requires the distinct late isolated ACK scenario in S08:142–145, after NOTICES.",
+    "QA S00:587–599,637–675 resolves both observations, expects one predecessor receipt, active grant, original SDK completion, empty notice; validates the choice, consumes same-lineage stage admission and narrows the same clock. S00:76–85 derives a synthetic notices configuration with both flags and a grant-bound expiry. S00:693–704,731–780 rechecks before/after actual upload, activation and receipt under original leases. S00:780 runs receipt-recorded then complete checks; S00:804–809 returns HTML only afterwards. M bridge:36–44 still has its own error/body/filter checks. A failed HTTP result can therefore occur either side of a persisted notice receipt.",
+    "S08:41 prevents updating f.choice and all later assertions/actual remount at :43–59 on any non-200. Therefore the successful connection-stage M mount is still the client-facing configuration; S10:174–180 remounts only on explicit adoption. S03:35–38 denies monitoring there while OAuth is enabled and monitoring is still disabled. The MONITOR_COOKIE pass may simply observe this closed route; MONITOR fails on the first status check before consent POST. Scope/finite fail at GET before any scope drop or finite POST. Selection fails finding receipt AND preparation at S08:119 (which conjunct absent is not reported). This causal dependency explains why the later failures do not identify four more root bugs.",
+    "S08:29,124–145 opens independent worlds for the last three controls. Lost-ACK and unresolved-writer returned with count. At 176,469 ms OWN_PROMISE has only its action-entry mark. The fresh-world open, waitHeld, reseal, release and assertions have no individual marks here; neither a leak nor a missing release can be located. AFTER has no event."
+  ],
+  "staticCost": {
+    "classification": "Deterministic call graph on a successful, uncorrupted notices POST, not an observed operation count or per-operation duration in GREEN20.",
+    "scope": "S01 readSource through the real ownedContext at S00:641–652. One complete pair reads first/second primary at S00:275,512. Primary credentials plus QA and M reads include modules. For one installed connection with current pointer distinct from initial, S00:215–233,239–251 fetches one QA and two M version payloads per primary; both primary passes are fresh. S00:523–525 checks pair equality. Stage-work:78–89 runs the actual callback per call.",
+    "beforeFirstMutation": {
+      "initialPair": 1,
+      "firstTicketContext": 10,
+      "secondTicketContextInApproved": 10,
+      "approvedPredecessorReads": 8,
+      "permissions": 14,
+      "oneStageHistory": 14,
+      "totalPairsBeforeConsumeStep": 57,
+      "precheckOfConsumeStep": 1,
+      "minimumVersionPayloadReadsThroughThisPrecheck": 348
+    },
+    "derivation": "S01:134–172 resolve reads source once, checks once, brackets JWT and ownership (6); :190–191 brackets two more reads (4). POST :239–243 uses ticketContext and stageContext→approved→ticketContext. :267–270 four bracketed steps. :395–399 and :282,290,294,297,341–342 seven bracketed steps. :380–386 original ticket plus six bracketed stage reads. Each :159 step calls check on both sides. Initial :637 pair plus 56 subsequent pairs gives 57, with one more :246 precheck before consume actually mutates. At >=6 version responses per pair this is >=348 on that successful control-flow prefix, independent of later stage publishing; a failing path may stop earlier. No current run count inferred.",
+    "hostAmplification": "S10:27 J=JSON.stringify. On every firstConnection respond :213–215 J(payload) creates bookkeeping bytes/hash then Response.json serializes that payload again. Provider fixture :234 rebuilds QA module base64. :295 and :312–323 supply actual version/module values. The firstConnection callback handles multi-megabyte module-bearing objects fresh. S08 mutations are required to stay visible per call. No synthetic ioDelay on the default route (finite-owner-io-fanout:86–88). BASE candidate-residency:32–39 eagerly decodes once, not gzip on every pair.",
+    "materialHypotheses": [
+      "A tight 30 s POST deadline (M and/or forwarded QA original root) is the leading timing hypothesis. Spending the full ~30 s under repeated live reads and serializations is plausible. An inner child/factual/authority failure, a late response/settlement or holder change can also produce a non-200. No original first-error identity, time-clipped branch or effect counters are admitted for this run.",
+      "Nine intervening negatives can change retained work, elapsed time of previously minted form/grant or host load. They cannot retroactively age the per-POST root. Source S01:189,222,244 and S00:671–672 enforce absolute ticket/identity/grant/preconnection horizons independently. Before claiming expiration or contamination require a matched actual witness.",
+      "Clock/byte optimizations cannot promise full 180 s qualification. A successful notices stage may execute later positive stages that failed quickly in this diagnostic."
+    ]
+  },
+  "crossRun": {
+    "C": {
+      "blob": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+      "actualPostMs": 30006,
+      "status": 503,
+      "afterCounts": {
+        "upload": 2,
+        "activation": 2,
+        "receipts": 2
+      },
+      "afterPosition": "complete",
+      "guardOrigin": "unknown",
+      "scope": "Separate four-case N3. Actual native post503 and two aggregate receipts coexist. CAP_PRIVATE unjoined. Position complete and two initial-parent-holders tags cannot identify original failure. This is a counterexample to equating an HTTP failure with no durable effects."
+    },
+    "W1": {
+      "blob": "325efbf73e0fe5ecea0713cf76df6b7d8cecd3b5",
+      "actualPostMs": 21450,
+      "status": 200,
+      "afterCounts": {
+        "upload": 2,
+        "activation": 2,
+        "receipts": 2
+      },
+      "M": "ebb8eda6cc4e2e633615436ae1730b397a27d0432403559a86cad49c77dd391f",
+      "QA": "3d04ef14b386850a48964463d444189e7865f0ef2474f0b26b49a88ff0b71cc7",
+      "scope": "Separate connection/oauth/phase/notices sequence including preceding GET, changed QA observer and different time. Physical POST body returned with 200. No proof why either other run failed."
+    }
+  },
+  "decision": {
+    "first": "Approve design/TDD for a single host fixture improvement, only if Root chooses the next family. It has a deterministic counterexample and equality oracle independent of business runtime variance. Do the bounded host RED/GREEN before spending another business nomination. Qualify this as removal of duplicate serialization from the synthetic provider. No 503, timeout, receipt, throughput or Task1 repair claim.",
+    "delta": "Only the frozen S10 after-body would receive a new proposed full successor. Keep the other 12 byte-for-byte, preserve old 26b/c230 as historical; a new index and reversible old/new S10 pin would be required. Restrict edit to firstConnection respond under createInitialEntrySynOutbound, outside all bundler input transformations. Per invocation serialize its actual payload once, encode UTF-8 once and use these exact bytes for SHA256, byte count and response body. Preserve explicit headers/status/statusText and default application/json including absent options. Keep other modes native Response.json. No memoization by request, URL, version, object identity or hash; no suppression of queries, fresh snapshots or denials. Match M/QA build inputs and compiled bytes from equivalent build mode if later invoked; no assumption from filename alone.",
+    "alternatives": "Do not coalesce adjacent authority checks or reuse a prior pair/ticket merely from a shared parent. They span awaits, native mutations and external drift; each check binds live holders and both primary observations. No production shortening/clock reset, altered scopes or case reordering. Optimizing isolated-world construction at case 20 does not resolve first-failure evidence."
+  },
+  "fixtureFirst": {
+    "entry": "Actual S10:209 exported createInitialEntrySynOutbound, using firstConnection=true and its existing request-to-keys path :219. Prepare minimal in-memory fixture registry, Request and synthetic serializable input. No MF instance, build, SDK operation, real provider call or trial. S10 has static esbuild/Miniflare/jose imports; a future Node native fixture gate must admit its locked transitive imports separately. It is not the previous builtins-only six-seam tooling gate. Retain old S10 and run identical independent literal assertions against old/new, with explicit expected old failure only for the single-serialization check.",
+    "tests": [
+      [
+        "HOST_ENCODE_ONCE",
+        "Existing certs response embeds jwk. Use a deterministic counting toJSON on this test input returning the SAME static object each time. Old actual callback must count 2, proposed callback 1; wire bytes, reads and one registration per invocation must be identical. Count calls structurally, no timing thresholds."
+      ],
+      [
+        "HOST_WIRE_EQUAL",
+        "Independent exact JSON UTF-8 fixture with Unicode, escaping, arrays, quotes and non-ASCII, plus representative multi-megabyte module metadata under existing payload bounds. Assert body bytes/hash and byte length against pinned literal/digest AND ledger entry, status/statusText and complete headers including application/json/date/custom headers where present. Check normal status and a genuine existing fixture non-200 branch plus firstConnection=false behavior. Compare dynamic Date via header format/adjacent native reference with the same supplied header values, never a forced product clock."
+      ],
+      [
+        "HOST_FRESH_PER_CALL",
+        "Two same-URL requests around actual fixture mutation of same version object (including module byte mutation and restoration) must record new bytes/digest for changed or restored response. Calls independently count, old receipt data unchanged; a cache-by-URL/identity or stale baseline dies here. Keep consumed originals/corruptions and strict business selectors."
+      ],
+      [
+        "HOST_CLOSURE",
+        "Do not wrap/rewrite worker source, M transport or SDK. New S10 reversible proof plus 12 exact intact target bodies. Check parent counts, wire shape, no extra registration on failed serialization, existing error semantics on supported inputs, bounded own test cleanup. After native and independent review only the fixture improvement may be admitted."
+      ]
+    ],
+    "redGreenMeaning": "All RED and GREEN here are planned. No native TDD executed by this author. OLD/NEW native harness only, fixed contents, no full business mode, no new budgets. If equality, fresh response or 2→1 oracle fails, stop before any subsequent collection."
+  },
+  "futureObservation": {
+    "trigger": "If Root next needs to choose between pre-publication/partial/after-receipt paths, that split is genuinely not recoverable from the existing GREEN20 artifact. Do not run a new qualifier only to see if the host improvement happened to be faster. Add one independent, sealed extraction contract to a separately justified, future full-order run, or stop with unknown. No new QA/Worker probe, RPC, fixture clock, additional business request or case subset.",
+    "source": "The existing D07:15–27 captures count after action throw and emits one C2SOURCE record; S07:8–18 equivalent. Use the already-buffered child TAP inside existing stdout limit, inspected even on ETIMEDOUT. Exact top-level C2T1_NOTICES, native fail ordinal12, firstThrow S08:41:12 ERR_ASSERTION, canonical phase/code/id, exactly one source row plus unique structured native assertion scalar actual/expected (if reported). Keep only finite integer status 100..599 and expected 200 and upload/activation/receipts counters in existing bounds; optional immediately preceding EXTRA_KEY counts only if explicitly bound to compare a delta. No message/stack/URLs/handles/forms/SQL/D1/provider rows, arbitrary strings or raw TAP outside parent. A separate future schema, fixtures and OWN gate must bind exact context/case and reject copies, nested TAP, wrong site/case, duplicates/out-of-order/forged scalar, digest-only recovery or contradictory counts. Missing/truncation/unparseable yields UNKNOWN; no assumed 503/zero. No collecting older raw logs/artifacts.",
+    "decisionMatrix": [
+      "Comparable before 1/1/1 and after 1/1/1 locates no additional observed upload/activation/receipt; it does not exclude a consumed ticket, stage approval or durable send. Target pre-effect/guard family only with more evidence.",
+      "2/1/1 or 2/2/1 etc locates partial observed effects under the bounded fixture; keep irreversible progress and same-promise retention, never replay the POST.",
+      "2/2/2 plus returned non-200 locates return/final proof path after effects were visible to post-action count; counts alone do not authenticate receipts, pin exact completion before response or distinguish M vs QA first failure.",
+      "200 on a future run only establishes that sample. Unavailable data or an unjoined frontier leaves the mechanism unknown; no automatic W1, repeated run, broader cap or transfer to earlier runs."
+    ],
+    "originalLimits": {
+      "perCaseMs": 120000,
+      "childMs": 180000,
+      "totalMs": 330000,
+      "jobMinutes": 7
+    },
+    "scope": "Separate admission and actual immutable preimages required before any runtime or Source change. Original Task1 includes full baseline/green/mutant/regression and cleanup consent requirements. Neither this diagnostic nor a mechanical fixture control can grant its qualification."
+  },
+  "performed": {
+    "readOnlySource": true,
+    "immutableGitDataOnly": true,
+    "sourceExecution": false,
+    "provider": false,
+    "refsCreated": 0,
+    "nativeRuns": 0
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

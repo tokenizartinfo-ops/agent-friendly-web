@@ -1,0 +1,300 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-INDEPENDENT-ACTUAL-RESULT-REVIEW/1",
+  "timestampUTC": "2026-11-16 23:49:37 UTC",
+  "reviewer": "c230_full_own_native_review; revisión independiente SPEC+QUALITY",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "GitHub privado; blobs inmutables conservados, sin nuevos endpoints Actions",
+  "disposition": "INCOMPLETE",
+  "decisions": {
+    "diagnosticCollection": "ACCEPTED; SPEC+QUALITY PASS exclusivamente para la evidencia diagnóstica acotada conservada",
+    "sourceBusiness": "GREEN20 observado no pasa: prefijo19 con14PASS/5FAIL y caso20 sin resultado",
+    "nativeQualification": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "codeFinding": "No se ha demostrado un defecto nuevo del colector/contrato ni una causa raíz de producto; sí se han localizado cinco aserciones fallidas del recorrido nativo observado.",
+    "operationalApproval": false
+  },
+  "scope": {
+    "performed": "FULL lectura/hash de Primary, outcome, admisión OWN y dos recibos de cierre. Contraste independiente de DATA: API/contexto/commit/rawtree/25edges/3203 originales, ZIP/CRC/DEFLATE/payload/frame, reconstrucción completa del journal77 y su hash, intervalos/resultados/primera excepción/frontera y lectura estática focal S08/S09/D07/runner/adapter/recorder.",
+    "restrictionsObserved": "Sin evaluación/importación/compilación/syntax/tests Source, FS/dependencias/builds, refs/runs, endpoints de Actions/log/artifact, proveedor/Cloudflare/navegador, secretos ni patches. Cálculos propios en RAM y crypto/zlib incorporados exclusivamente sobre DATA conservada. Única escritura: este blob de revisión, seguida de FULL readback.",
+    "inherited": "Reutiliza revisión estática Source13 58788e1426dd81e927d765a98f14ea50e5e3f77f, preflight0643071cce0703bc3229fb503136282b7fcc8798 y tooling6 real6f1ce3574354652cd5fff0f66dc0f0ae26fb12f3 para límites e implementación ya inspeccionados. No reaudita BASE entero, imports heredados, métodos M/QA, todos los guards ni todo el callgraph de nuevo. Su alcance estático y tooling6/31 no acreditan Task1 ni se amplían por este resultado.",
+    "physicalEvidenceLimit": "La revisión no leyó FS del runner ni raw TAP privado del hijo: corrobora las observaciones saneadas del productor sellado y los joins Git/API/transporte. La admisión OWN124 f844dd8789012b95edaf0aec4db20edea885a4ca consta en evidencia; no se ejecutó aquí."
+  },
+  "authority": {
+    "release": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+    "supplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+    "contract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "schema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "selection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "sourceIndexSha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+    "fullTask1Qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "captureIndex": "2f25941491df234890036ae8cf0609e323207b67",
+    "runner": "dec4bb5585375423ca87d8d3baecb2edbe733b6f",
+    "adapter": "5c8123b9e66166a198add4a0593372cfef13a1db",
+    "readProgress": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "S08": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+    "S09": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3"
+  },
+  "fullInputs": [
+    {
+      "label": "Primary",
+      "blob": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
+      "bytes": 1359621,
+      "sha256": "b47cb23e30fb7b1d5ef3ea86dcc6a79d19dfce05af8361624b583afa6c86c3f0"
+    },
+    {
+      "label": "Outcome",
+      "blob": "f39f7e43c4010acbaca7a679d61dbe048da24688",
+      "bytes": 13809,
+      "sha256": "e842015117d7a68d58578d0ab7f4c16f933d1cc802e0e62dae6b0edbe2b18fe3"
+    },
+    {
+      "label": "Admisión OWN",
+      "blob": "a9993d7411d0a943d2f247915d91ef17b0b38f09",
+      "bytes": 26557,
+      "sha256": "84e35106534c638ac62d5536d11aa7a1876fa0089c152f566126efb92b189250"
+    },
+    {
+      "label": "Close readback Root",
+      "blob": "071bccca74d1f1e0497b18bf3ee65ad532df7363",
+      "bytes": 1163,
+      "sha256": "871b0dad5eb8daf9bb3d3b64c63b001de4de6637bbde0dabc27320050bd27327"
+    },
+    {
+      "label": "Closure receipt Root",
+      "blob": "a20ad14ff24ac2b95856f8dbabc5a4091c96b463",
+      "bytes": 1353,
+      "sha256": "db3a2c3a92f18bd4616f9031055a191de04c4c37ee69472a7e94c847530d3f4b"
+    }
+  ],
+  "apiAndGit": {
+    "run": 43980317236,
+    "attempt": 1,
+    "job": 133694794167,
+    "event": "push",
+    "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+    "head": "6e41d44919d86f0bacc97edab022460449316987",
+    "tree": "fd5fa1eb66c0f1503af570c4a7be0233494016e7",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "message": "AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+    "runAndJobTerminal": "success de reporting",
+    "expectedIdentity": "Coincide con la nominación congelada y el contexto separado aportado por Root; el outcome no se usa como autoridad para escoger head/tree/run.",
+    "fiveRequiredSteps": "Únicos, completed/success; comando step5. Job23:33:36→23:37:03=207s; comando23:34:00→23:37:00=180s; ambos por debajo de job7min.",
+    "treeCheck": "Raw recursive tree no truncado,3392 entradas/rutas únicas,3228blobs. Join exacto25 rutas/modos/blobs/tamaños con captureIndex y Primary.bodyEdges; conserva los3203 blobsBASE con path/mode/sha/size del baseline reconstruido de la evidencia previa completa, sin cambios históricos. Es join de DATA y contexto confiable, no autenticación criptográfica Source desde JSON no confiable.",
+    "bodyEdgesHash": "4c126eb50b1b59debb0db6cc3808ff31275a7267b4ef260d3fbbc699f2798496",
+    "source13": "Ambos arrays before/after de13 hashes coinciden exactamente y en orden con Source26b. La implementación mide los TARGET13 reales en temp antes y después (runner244/252; adapter measureTargets), no los paths canónicos históricos de Git. Esta revisión valida sus valores exportados y el código como texto, no vuelve a medir ese FS.",
+    "custody": "2 launches exactos,1 preflight+1GREEN,2 procesos/probes; los bools de UID/GID/grupos/loopback/ownership/targets/temp propios son true. Los frames y la admisión coinciden. No acreditan drenaje global, namespace vacío ni finalización física de toda tarea nativa."
+  },
+  "transport": {
+    "artifactId": 14283570700,
+    "artifactName": "afw-c2-t1-green-frontier-diag1",
+    "fileName": "c2-t1-green-frontier-diag1.json",
+    "archiveBytes": 2964,
+    "archiveSha256": "dfeab3da0293a88ea83a3a4a6cd97ec68294fc87f802a53092163e293bbf79eb",
+    "checks": "Base64 canónico, EOCD exacto sin comentario,1disco/1archivo, central/local/name/flags/method/bounds/regular-file/extras sin ZIP64, bit8 local cero-o-igual y descriptor CRC/tamaños exactos. DEFLATE método8 consume los2788B completos, sin sufijo; CRC32 propio0b1cc481. Payload exacto13809B igual a outcomeFULL y a frame outcome, UTF8 canónico JSON.stringify+LF.",
+    "apiJoin": "Único artifact listing no expirado; id/run/head/branch,size2964 y API digest sha256 se unen a los bytes ZIP reales de Primary. No se acepta un SHA meramente declarado.",
+    "payloadSha256": "e842015117d7a68d58578d0ab7f4c16f933d1cc802e0e62dae6b0edbe2b18fe3",
+    "logBytes": 31349,
+    "logSha256": "f450748480120c5ba5c9a8ed9b11d42808d245f01c713fc42ecb03186a692f93",
+    "frames": "Exactamente1custody+1outcome físicos, sin FAULT; custody970B<=1024 y outcome13808B<=24576, payload incluyeLF13809<=24577. Custody autónoma idéntica a la embebida. Log yZIP dentro de4MiB/1MiB. Se usó solo la copia conservada, sin recaptura.",
+    "childStreams": "stdout23371B SHA256fd2362d5c7e3e1bedd5e064cecc8735993c55fc3cf6c73cbb2d7ee77accaaf43; stderr0B SHA256vacío e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Son medidas saneadas del productor; esos bytes privados del hijo no están exportados y sus hashes no permiten reanalizar TAP ni inferir estados HTTP."
+  },
+  "journalAndNative": {
+    "integrity": "prefix estable, sin recorderFault observado; unknownReason null",
+    "reconstruction": "77 filas canónicas seriales,seq1..77,elapsed entero no decreciente y dentro330000, IDs/operaciones/edges exactos. Reconstrucción UTF8(JSON.stringify(event)+LF) de todas las filas da8636B y SHA2562b0572e01c8e4808d5eba858eaf88b76109b2689e2f3059f4e11b7244bb9cb74, igual a journal. No tail privado/torn/ambiguous en esta evidencia.",
+    "observedCases": 19,
+    "pass": 14,
+    "fail": 5,
+    "first11Pass": true,
+    "passesAfterFirst11": [
+      "C2T1_MONITOR_COOKIE",
+      "C2T1_LOST_ACK_DUPLICATE",
+      "C2T1_UNRESOLVED_WRITER"
+    ],
+    "throws": [
+      {
+        "sequence": 46,
+        "elapsedMs": 114318,
+        "id": "C2T1_NOTICES",
+        "operation": "action",
+        "edge": "throw",
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 41,
+            "column": 12
+          }
+        }
+      },
+      {
+        "sequence": 54,
+        "elapsedMs": 114528,
+        "id": "C2T1_MONITOR",
+        "operation": "action",
+        "edge": "throw",
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 96,
+            "column": 69
+          }
+        }
+      },
+      {
+        "sequence": 58,
+        "elapsedMs": 114961,
+        "id": "C2T1_SCOPE_MISSING",
+        "operation": "action",
+        "edge": "throw",
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 18,
+            "column": 118
+          }
+        }
+      },
+      {
+        "sequence": 62,
+        "elapsedMs": 115389,
+        "id": "C2T1_FINITE",
+        "operation": "action",
+        "edge": "throw",
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 18,
+            "column": 118
+          }
+        }
+      },
+      {
+        "sequence": 66,
+        "elapsedMs": 115454,
+        "id": "C2T1_SELECTION",
+        "operation": "action",
+        "edge": "throw",
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 119,
+            "column": 4
+          }
+        }
+      }
+    ],
+    "consistency": "19 acciones terminadas y19 counts retornados;5 throws de acción coinciden con5 FAIL saneados. Ningún PASS comparte id con throw de acción/count (N2). La proyección nativa dice prefix, no TAP completo: no se inventan totals finales/cancel/skips/todos ni caso20. Journal y TAP son canales distintos.",
+    "firstThrow": "Seq46 C2T1_NOTICES action AssertionError/ERR_ASSERTION S08:41:12 elapsed114318; action.enter84310, duraciónobservada30008ms. Es la primera excepción exportada del prefijo validado, no una primera causa física/global.",
+    "frontier": "Seq77 C2T1_OWN_PROMISE action.enter elapsed176469 sin return/throw/count observado; frontier action/openCase20. No registros AFTER. afterOpen=false aquí indica que no hay AFTER.enter exportado; no prueba que nunca arrancase física o posteriormente.",
+    "interpretation": "La colección completa del diagnóstico puede ser válida con prefijo de negocio y timeout; diagnosticCollectionComplete=true no significa20 casos completos, nativeQualification ni Task1Pass."
+  },
+  "timeoutClassification": {
+    "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/collection-adapters.mjs",
+    "lines": [
+      130,
+      135,
+      136,
+      139,
+      145
+    ],
+    "observation": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "timeout",
+      "stdout": {
+        "bytes": 23371,
+        "sha256": "fd2362d5c7e3e1bedd5e064cecc8735993c55fc3cf6c73cbb2d7ee77accaaf43"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "code": "adapter130 reconoce child.error.code==='ETIMEDOUT';135 conserva child.status numérico1 devuelto y el mapeo real child.signal null→none;136 marca errorKind timeout. No convierte timeout en exit1 por inferencia, HANG, SIGKILL ni causa de caso. El reporting permanece exitoso porque runner268..278 publica la colección aceptable y solo FAULT281.. produce exit no cero.",
+    "budget": "Runner6 fija total330000; remain131 toma min(restante,total permitido). spawnSync191..194 usa timeout:remain(limit);247..248 llama GREEN una sola vez con180000. Es presupuesto del proceso hijo serial completo, no180s para cada caso; D07:11 fija120000 por caso. API step5 dura180s, journal llega176469 y errorKind timeout: consistente con el cap global180s observado, sin afirmar una medición independiente de la opción efectiva milisegundo a milisegundo.",
+    "noCause": "El caso20 comienza cerca del final del presupuesto global, no cuenta con120s propios completos observados. No demuestra hang, agotamiento de timeout por caso, waitHeld/reseal alcanzado, reloj congelado, fetch físicamente retenido ni causa de AFTER ausente. No se atribuye la causa a parser/recorder por nombres de frontera."
+  },
+  "staticFailureSites": [
+    {
+      "id": "C2T1_NOTICES",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "line": 41,
+      "column": 12,
+      "observed": "Primera aserción fallida en approve('notices') según D07:45..47 y journal46. S08:21 construye POST /connections/finite-prepare;S08:15 discard retiene status/cancela body;S08:41 espera200.",
+      "established": "La aserción externa de igualdad200 falla. No se alcanzan en esa acción la asignación f.choice=form posterior ni los asserts de recibos43..59 ni el assert de contadores2/2/2 de D07:47.",
+      "limit": "No hay actual/expected/message HTTP exportado ni cuerpo interno: no afirmar503, receptor que lo produjo, lease concreto o guard específico. Los30008ms son compatibles con límites30s presentes (S01:76/83), pero no identifican cuál espera/timer o causa."
+    },
+    {
+      "id": "C2T1_MONITOR",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "line": 96,
+      "column": 69,
+      "observed": "Aserción de r.status200 del GET /monitoring falla. No acredita los asserts posteriores de consentimiento/grant/event/notice/ACK de97..108."
+    },
+    {
+      "id": "C2T1_SCOPE_MISSING",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "line": 18,
+      "column": 118,
+      "observed": "choose falla al esperar200 del GET /connections/finite-prepare, antes del bucle drop/holder de112..115. Este FAIL no demuestra que ese bucle se haya ejercitado."
+    },
+    {
+      "id": "C2T1_FINITE",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "line": 18,
+      "column": 118,
+      "observed": "Mismo assert GET de choose; no acredita approve finite completo, POST/recibo3 ni el assert3/3/3 de D07:54."
+    },
+    {
+      "id": "C2T1_SELECTION",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "line": 119,
+      "column": 4,
+      "observed": "Falla assert(receipt&&preparation); no identifica por sí solo cuál falta y no acredita los asserts posteriores de source-selection,6send/3receipt,M/QA ni scope."
+    }
+  ],
+  "ownPromiseStaticBoundary": {
+    "path": "test/fixtures/finite-coupled-native.mjs",
+    "line": 143,
+    "code": "S08:143..147 contiene isolate/configure/approveFirstConnection/waitHeld, reseal ACK-matched, release/settled y aserciones finales. S09:339..347 muestra reseal, incluida asignación Date.now en342 y root.finish en347; restore general existe en337. Son texto congelado.",
+    "restriction": "El único marker action.enter20 precede al work entero; no ubica en cuál await interno estaba ni demuestra llegada a S09:342. Ningún defecto causal, clock leak actual ni corrección se deduce de esta ruta estática. No se ejecutó ni alteró para investigar."
+  },
+  "closure": {
+    "receipt": "a20ad14ff24ac2b95856f8dbabc5a4091c96b463",
+    "readback": "071bccca74d1f1e0497b18bf3ee65ad532df7363",
+    "closedHead": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+    "closedTree": "35cffb578a96cda48b75e6236cdbcd1cd175ccea",
+    "recordedRootResult": "3229=3203 originales+24 Source+2 evidence; solo WF retirado, main/history originales intactos,0 runs del closehead. Joins de pins/contexto/flags de ambos recibos coinciden con Primary/outcome.",
+    "limit": "Son constancias inmutables de lectura/cierre de Root fechadas23:39:34/23:40:18; no una repoll independiente actual por este reviewer. Retirada de WF y borrado del temp propio no demuestran drenaje nativo global."
+  },
+  "openItems": [
+    "Resultado de negocio incompleto y con5fallos localizados: NOTICES es el primero observado; su causa interna/valorHTTP no están presentes en la evidencia saneada.",
+    "Resultado20 y teardown/AFTER no observados: el timeout global del hijo limita la conclusión. No adjudicar culpabilidad a OWN_PROMISE.",
+    "No hay aquí el paquete fullTask1 completo con sus ocho frames, RED/GREEN20 completo/MUTANT/REG11 y receipt íntegro; este diagnóstico acotado no lo sustituye.",
+    "No nuevo ensayo, observador, caso, presupuesto ni cambio de fuente autorizado por esta revisión. La investigación posterior debe conservar estas incertidumbres; este informe no la ejecuta ni la prescribe."
+  ],
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
