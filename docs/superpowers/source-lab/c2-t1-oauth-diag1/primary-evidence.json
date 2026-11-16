@@ -1,0 +1,175 @@
+{
+  "schema": "afw.c2-oauth-diagnostic-primary-evidence.v1",
+  "at": "2026-11-16 04:49:19 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "prepared": {
+    "head": "31359f9160c935f1251e4cc6157bdd544107151b",
+    "tree": "98b9639d3408b21f414997f098af4461b196f4ec",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-t1-oauth-diag1",
+    "message": "AFW-C2-OWNER-STAGES-OAUTH-DIAGNOSTIC-ONEUSE-20261116",
+    "baselineBlobs": 3203,
+    "additions": 19
+  },
+  "gate": "72c21f4ddf5ad92d5b2095dc19ac177eef4efbb9",
+  "runId": 43806081140,
+  "runAttempt": 1,
+  "jobId": 133097056460,
+  "apiJoin": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "head": "31359f9160c935f1251e4cc6157bdd544107151b",
+    "tree": "98b9639d3408b21f414997f098af4461b196f4ec",
+    "runId": "43806081140",
+    "runAttempt": 1,
+    "job": "c2-oauth-diagnostic",
+    "jobId": 133097056460,
+    "commandStepNumbers": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "primaryBinding": {
+    "headerRow": 141,
+    "headerEndRow": 144,
+    "frameRow": 145,
+    "frameAt": "2026-11-16T04:47:30.2215828Z",
+    "stepNumber": 5,
+    "stepStarted": "2026-11-16T04:46:50Z",
+    "stepCompleted": "2026-11-16T04:47:30Z"
+  },
+  "summaryBlob": "083c8fe5ceeb6c024bd38793edb6f01511098ce2",
+  "summary": {
+    "schema": "afw.c2-oauth-diagnostic.v1",
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "sourceIndexHash": "71ca47bfd1f793f7ac6a4738fb6431e20a23dd95a06d3c67728a894f929ed26b",
+      "head": "31359f9160c935f1251e4cc6157bdd544107151b",
+      "tree": "98b9639d3408b21f414997f098af4461b196f4ec",
+      "runId": "43806081140",
+      "runAttempt": 1,
+      "job": "c2-oauth-diagnostic",
+      "node": "v22.23.4",
+      "pattern": "^(C2T1_CONNECTION|C2T1_OAUTH)$"
+    },
+    "phase": "custody-observation",
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "diagnosticCaptureValid": true,
+    "capture": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "none",
+      "complete": true,
+      "stdout": {
+        "bytes": 748,
+        "sha256": "a35a62e93bca4a05ba1a4f239ea143f0194807680af8edc3026d6dd48990eb4d"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "cases": [
+      {
+        "schema": "afw.c2-oauth-event.v1",
+        "id": "C2T1_CONNECTION",
+        "status": "pass",
+        "casePhase": "connection",
+        "skip": false,
+        "todo": false,
+        "definition": {
+          "fileId": "S07",
+          "line": 6,
+          "column": 35
+        },
+        "error": null,
+        "sanitized": true
+      },
+      {
+        "schema": "afw.c2-oauth-event.v1",
+        "id": "C2T1_OAUTH",
+        "status": "fail",
+        "casePhase": "oauth",
+        "skip": false,
+        "todo": false,
+        "definition": {
+          "fileId": "S07",
+          "line": 6,
+          "column": 35
+        },
+        "error": {
+          "kind": "Error",
+          "code": null,
+          "position": {
+            "fileId": "S08",
+            "line": 22,
+            "column": 55
+          },
+          "sitePhase": null,
+          "httpActual": null,
+          "httpExpected": null,
+          "booleanActual": null,
+          "booleanExpected": null
+        },
+        "sanitized": true
+      }
+    ],
+    "auxiliaryEvents": [],
+    "custody": {
+      "parentNonRoot": true,
+      "observedGuardRecords": 2,
+      "uidGidAndGroupsAndLoopbackMatched": true,
+      "preflightCapture": {
+        "exitCode": 0,
+        "signal": "none",
+        "errorKind": "none",
+        "complete": true,
+        "stdout": {
+          "bytes": 212,
+          "sha256": "dce8c82259869295ce1c3bd4dcfca1d6e13b35167ee68e492d28910cc827643f"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "preflightOwned": true,
+      "preflightRemoved": true,
+      "custodyFilesOwned": true
+    },
+    "cleanup": {
+      "attempted": true,
+      "ownRootVerified": true,
+      "success": true,
+      "errorKind": null
+    },
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  },
+  "interpretation": "Diagnostic collection and its own custody/cleanup passed. Actual CONNECTION passed. Native OAUTH-labelled test failed with Error at S08:22:55, the counts() snapshot awaited by test finally. This is not an error position in the OAuth action; finally may mask an earlier work error. No original OAuth cause or successful OAuth action is established. No Cloudflare fault inferred.",
+  "logsFetchedOnce": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
