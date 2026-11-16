@@ -65,3 +65,7 @@
 }
 
 Do not re-run consumed heads or refetch logs. No provider/runtime/OriginalCLI/Native/credentials authority in this phase. If another correction is needed, read final scoped review before round3 original Source actor; preserve caps/history and fix-loop maximum5. First actual failing instruction remains unknown; a generic marker does not identify a cause.
+
+## Round3 continuation
+
+Review08f9bb0e4e0d66e7bc40804ebb9da83e03de68cb accepts R1/R2/R3 statically,0C/0I/0newMinor; actualmandatory execution stillred/unknown. Same original Source actor nowworks finite phasecodes per spec691eaa80/plan2868cf27/brief8018c4ab. Validwire/schema/8controls unchanged; failedstdoutheld/fixedstderr/nonzero, noRawlogs. Codebook worker80..87/bootstrap supervisor70..73, Bashpreservesstatus; codes report stage only, notfirstcause/authentication/I3. Still sameTask1round3/5; no reset. Source remainsfullyclosedb26843c...; no newcandidate/run. All7false.
