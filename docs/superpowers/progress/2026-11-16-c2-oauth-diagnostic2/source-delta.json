@@ -1,0 +1,476 @@
+{
+  "schema": "afw.c2-oauth-independent-diagnostic.SourceDeltaDTO.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "SOURCE_DIAGNOSTIC_DATA_ONLY",
+  "origin": {
+    "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "Core": "3201aefb08c1",
+    "Main": "0c9c475",
+    "readOnly": true
+  },
+  "allowedAction": "Create immutable DATA blobs and FULL readback only; Root alone gates refs/trees/commits/mount/run/close.",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-oauth-diag2",
+    "message": "AFW-C2-OWNER-STAGES-OAUTH-DIAGNOSTIC2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-oauth-diagnostic2.yml",
+    "job": "c2-oauth-diagnostic2",
+    "dataPrefix": "docs/superpowers/source-lab/c2-t1-oauth-diag2/",
+    "executionAuthority": "Root gate only; this proposal creates no ref/run."
+  },
+  "actualEvidence": {
+    "summary": "083c8fe5ceeb6c024bd38793edb6f01511098ce2",
+    "rootPrimary": "be00422c02fdf45c94a416042aa6596808226f29",
+    "runId": "43806081140",
+    "runAttempt": 1,
+    "jobId": "133097056460",
+    "head": "31359f9160c935f1251e4cc6157bdd544107151b",
+    "interpretation": "Capture-valid ONLY: CONNECTION nativePASS, OAUTH-labelled nativeFAIL at counter S08:22:55; original action outcome unknown; no logs refetched."
+  },
+  "files": [
+    {
+      "path": ".github/workflows/afw-c2-oauth-diagnostic2.yml",
+      "role": "workflow",
+      "beforeBlob": null,
+      "after": {
+        "blob": "3e4ad71958d4d7d28c3d2e92682f54950e543997",
+        "bytes": 1542,
+        "sha256": "11620a118d7949ff113867a595eb2f17e93bcc646775a7282a311048b18ea1c2",
+        "fullReadback": true
+      },
+      "reversible": "Remove this new lab path only; no baseline path is replaced."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag2/run-oauth-diagnostic2.mjs",
+      "role": "runner",
+      "beforeBlob": null,
+      "after": {
+        "blob": "aa03cb3eceba513724cbe4f3b81263dc049a78b2",
+        "bytes": 20765,
+        "sha256": "2ba54326b1ce7abc85ccdb1e0a71bdcbcbf7f94f44625c72edbe1b273a966526",
+        "fullReadback": true
+      },
+      "reversible": "Remove this new lab path only; no baseline path is replaced."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag2/oauth-independent-driver.test.mjs",
+      "role": "diagnostic-driver",
+      "beforeBlob": null,
+      "after": {
+        "blob": "9b4ba6d899d4b4218ec1da676c7c8140511d2eb5",
+        "bytes": 2609,
+        "sha256": "f95d1abca7ed884dd9345fe1b63ba7182800088baa3ca0f0c47cab48c87902cd",
+        "fullReadback": true
+      },
+      "reversible": "Remove this new lab path only; no baseline path is replaced."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag2/oauth-independent-reporter.mjs",
+      "role": "native-reporter",
+      "beforeBlob": null,
+      "after": {
+        "blob": "0ecfeb3d2ac6072d47fabbfafb4140e571095b72",
+        "bytes": 2763,
+        "sha256": "573466a6a3e287f118c16d8b86354c2f84e6ccfe88b71fe9634a8de4cbefdc5e",
+        "fullReadback": true
+      },
+      "reversible": "Remove this new lab path only; no baseline path is replaced."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag2/oauth-error-sanitizer.mjs",
+      "role": "pure-sanitizer",
+      "beforeBlob": null,
+      "after": {
+        "blob": "58184b44f96be778c42589a61c7fdb50cd264d16",
+        "bytes": 4892,
+        "sha256": "3e655323f84c9f4da02ab3ea7b390ac1591502defb14a0c7455243f643ecebc2",
+        "fullReadback": true
+      },
+      "reversible": "Remove this new lab path only; no baseline path is replaced."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag2/contract.json",
+      "role": "contract",
+      "beforeBlob": null,
+      "after": {
+        "blob": "029a043847b227c332104f060af1419c4d2ee175",
+        "bytes": 17453,
+        "sha256": "762cbc54eeccec12a6b0714c524374c46fc12119b9a227b615bac76590cc5630",
+        "fullReadback": true
+      },
+      "reversible": "Remove this new lab path only; no baseline path is replaced."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag2/causal-ruling.md",
+      "role": "causal-ruling",
+      "beforeBlob": null,
+      "after": {
+        "blob": "ae4852057eb77a38c2108718f4b03795cdf9e16a",
+        "bytes": 5125,
+        "sha256": "ef9fe27222ce8da4c4d00577709f828be1890f7eda0884625f21d277f2553a02",
+        "fullReadback": true
+      },
+      "reversible": "Remove this new lab path only; no baseline path is replaced."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag2/oauth-custody-guard.mjs",
+      "role": "reused-guard",
+      "beforeBlob": null,
+      "after": {
+        "blob": "f84c0fe47eaf386d9f0a4ae3e300d7b738972450",
+        "bytes": 1283,
+        "sha256": "13d77562658316ebc7d9b29bfc4063977b310751ae2fd3e7c08880fd884e530f",
+        "fullReadback": true
+      },
+      "reversible": "Remove this new lab path; body reused byte-exact from diagnostic1."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag2/oauth-custody-preflight.mjs",
+      "role": "reused-preflight",
+      "beforeBlob": null,
+      "after": {
+        "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "bytes": 417,
+        "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae",
+        "fullReadback": true
+      },
+      "reversible": "Remove this new lab path; body reused byte-exact from diagnostic1."
+    }
+  ],
+  "frozenSourceData": {
+    "index": {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "blob": "e20ae5a991a291004c3a8dde098031865c1e4c13",
+      "bytes": 11466,
+      "sha256": "71ca47bfd1f793f7ac6a4738fb6431e20a23dd95a06d3c67728a894f929ed26b",
+      "fullReadback": true
+    },
+    "entries": [
+      {
+        "fileId": "S00",
+        "logicalPath": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "role": "product",
+        "before": {
+          "blob": "7eb8f28760de60f143e487eeb6988705059a0a44",
+          "bytes": 126504
+        },
+        "after": {
+          "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+          "bytes": 148547,
+          "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+        },
+        "materialization": "Keep actual BASE product body; proposed product body admitted as hash-only DATA, never applied by diagnostic."
+      },
+      {
+        "fileId": "S01",
+        "logicalPath": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "role": "product",
+        "before": {
+          "blob": "152e730f83af7ef063b6b1db89f8b0a779c2b60e",
+          "bytes": 45255
+        },
+        "after": {
+          "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+          "bytes": 45576,
+          "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+        },
+        "materialization": "Keep actual BASE product body; proposed product body admitted as hash-only DATA, never applied by diagnostic."
+      },
+      {
+        "fileId": "S02",
+        "logicalPath": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "role": "product",
+        "before": {
+          "blob": "e760b3579a38f1dbb73b177bb73b06d814eb881f",
+          "bytes": 2505
+        },
+        "after": {
+          "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+          "bytes": 2497,
+          "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+        },
+        "materialization": "Keep actual BASE product body; proposed product body admitted as hash-only DATA, never applied by diagnostic."
+      },
+      {
+        "fileId": "S03",
+        "logicalPath": "worker/mcp-own/finite.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "role": "product",
+        "before": {
+          "blob": "15441b6c0c779f733db65a3b59a3a9e1738d19dc",
+          "bytes": 2758
+        },
+        "after": {
+          "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+          "bytes": 2810,
+          "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+        },
+        "materialization": "Keep actual BASE product body; proposed product body admitted as hash-only DATA, never applied by diagnostic."
+      },
+      {
+        "fileId": "S04",
+        "logicalPath": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "role": "product",
+        "before": null,
+        "after": {
+          "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+          "bytes": 4153,
+          "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+        },
+        "materialization": "Keep actual BASE product body; proposed product body admitted as hash-only DATA, never applied by diagnostic."
+      },
+      {
+        "fileId": "S05",
+        "logicalPath": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "role": "product",
+        "before": {
+          "blob": "1a5a2583d266179cdd89f799c64199f29044fec5",
+          "bytes": 89322
+        },
+        "after": {
+          "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+          "bytes": 101380,
+          "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+        },
+        "materialization": "Keep actual BASE product body; proposed product body admitted as hash-only DATA, never applied by diagnostic."
+      },
+      {
+        "fileId": "S06",
+        "logicalPath": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "role": "product",
+        "before": {
+          "blob": "0a04ae3a4d74c2c7939b1654683054b1d5d751d4",
+          "bytes": 22438
+        },
+        "after": {
+          "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+          "bytes": 22501,
+          "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+        },
+        "materialization": "Keep actual BASE product body; proposed product body admitted as hash-only DATA, never applied by diagnostic."
+      },
+      {
+        "fileId": "S07",
+        "logicalPath": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "role": "test",
+        "before": null,
+        "after": {
+          "blob": "db7f97301bfac415da4c66463439c576adf0bbfb",
+          "bytes": 2462,
+          "sha256": "7f527179f32ab56c3a430c1180002af8d0e5d5fadd2608559f719c980d37cbb6"
+        },
+        "materialization": "Apply byte-exact frozen test body only in isolated temporary job target."
+      },
+      {
+        "fileId": "S08",
+        "logicalPath": "test/fixtures/finite-coupled-native.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "role": "test",
+        "before": null,
+        "after": {
+          "blob": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+          "bytes": 14244,
+          "sha256": "029db37d98bfee81fec3f1b462c0c2daed4fa4b30fc65a06fffcf80369557318"
+        },
+        "materialization": "Apply byte-exact frozen test body only in isolated temporary job target."
+      },
+      {
+        "fileId": "S09",
+        "logicalPath": "test/fixtures/finite-first-connection-publication.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "role": "test",
+        "before": {
+          "blob": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+          "bytes": 57864
+        },
+        "after": {
+          "blob": "ec57e55ea2d8f68c992af26bccca0c6e71a79f96",
+          "bytes": 60636,
+          "sha256": "092a1d8dd44b99a16e522f09234a2b0f4bf62e6575ac99664be516fc7673920d"
+        },
+        "materialization": "Apply byte-exact frozen test body only in isolated temporary job target."
+      },
+      {
+        "fileId": "S10",
+        "logicalPath": "test/fixtures/finite-initial-entry-world.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "role": "test",
+        "before": {
+          "blob": "a7b730dc9be336528f0971544099f79d05758b1a",
+          "bytes": 87501
+        },
+        "after": {
+          "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+          "bytes": 88519,
+          "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+        },
+        "materialization": "Apply byte-exact frozen test body only in isolated temporary job target."
+      },
+      {
+        "fileId": "S11",
+        "logicalPath": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "role": "test",
+        "before": {
+          "blob": "1298bb5b67749df0d7ee20c863b691562e6a81b9",
+          "bytes": 57221
+        },
+        "after": {
+          "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+          "bytes": 58727,
+          "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+        },
+        "materialization": "Apply byte-exact frozen test body only in isolated temporary job target."
+      },
+      {
+        "fileId": "S12",
+        "logicalPath": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "role": "product",
+        "before": {
+          "blob": "ea910f0fcdeade5a794ddaa60898706924e72f80",
+          "bytes": 4750
+        },
+        "after": {
+          "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+          "bytes": 6030,
+          "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+        },
+        "materialization": "Keep actual BASE product body; proposed product body admitted as hash-only DATA, never applied by diagnostic."
+      }
+    ],
+    "unchanged": true,
+    "sourceProductPathsWritten": false,
+    "originalS07Driver": "Preserved as immutable DATA. New separate diagnostic-only driver is executed; it cannot count as Source regression acceptance."
+  },
+  "bootstrapDependency": {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "bytes": 1844,
+    "sha256": "ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14",
+    "usage": "Exact BASE archive dependency read only as DATA by actual fixture; never execute this workflow; not original I3 F7."
+  },
+  "command": "node --import <isolated-target>/oauth-custody-guard.mjs --experimental-vm-modules --test --test-concurrency=1 --test-name-pattern=^(C2T1_CONNECTION|C2T1_OAUTH)$ --test-reporter=<isolated-target>/oauth-independent-reporter.mjs oauth-independent-driver.test.mjs",
+  "custody": "Identical verified guard/preflight/drop-privilege/isolation/owned-cleanup semantics and caps; explicit allowlisted childenv. Source tests have no external interface. Fixed locked npm install is separate before network-isolated tests.",
+  "rootGate": {
+    "required": "Independent review of final pins/schema + nominal Root admission before exactly one occurrence. No Source qualification or20case/regression run authorized by this DTO.",
+    "publicMarker": "AFW_C2_OAUTH_INDEPENDENT_DIAGNOSTIC ",
+    "summarySchema": "afw.c2-oauth-independent-diagnostic.v1",
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "partial": "Retain actual operation/lifecycle/native frames if later timeout occurs; diagnosticCaptureValid false unless complete exact joins/custody/cleanup."
+  },
+  "reversal": {
+    "preimages": "All13 before/preimages in unchanged SourceIndex preserved. These9 new diagnostic DATA/WF paths are absent from BASE tree. Preserve all prior source/diagnostic records. Root closure removes only the nominated new workflow to prevent future invocation.",
+    "sourceBaselinePreserved": true,
+    "newPathBeforeChecks": "Cached full BASE tree index contains no new diagnostic2 prefix or workflow path.",
+    "noRefMutationPerformed": true
+  },
+  "primaryNodeReads": [
+    {
+      "url": "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/test.js",
+      "bytes": 40658,
+      "sha256": "efebe79e3471470f7daade809a4f83b32f737db69126381d21a23ebb392da3ab",
+      "positions": "finalize1264..1270 root.run, createHook868 runOnce"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/error_serdes.js",
+      "bytes": 6023,
+      "sha256": "ddea3fc5a79eefd670fa1f0810efc86fa1169e3efcd8661ca26edd7666233849",
+      "positions": "167..178 reconstruct Error via ObjectCreate"
+    }
+  ],
+  "supersededDiagnostic2Drafts": [
+    {
+      "key": "diag2Sanitizer",
+      "bytes": 4592,
+      "sha256": "b9957bcad92b97687e329a076c8f9357f3eb4b656b5eddf36e8196fd2b3eabf0",
+      "blob": "e50b3c965969547fa1022e0caa07ee01264c0a94",
+      "fullReadback": true,
+      "mount": false,
+      "reason": "Historical draft, superseded by final files; immutable preservation only."
+    },
+    {
+      "key": "diag2Driver",
+      "bytes": 2365,
+      "sha256": "ad728d0891b0e395e71315d5e2d66bc5e6ce934bab7fbe3349ca22f270018b73",
+      "blob": "962a06db4a4d9f8c79a1f1a214659168e9a220fc",
+      "fullReadback": true,
+      "mount": false,
+      "reason": "Historical draft, superseded by final files; immutable preservation only."
+    },
+    {
+      "key": "diag2Reporter",
+      "bytes": 2615,
+      "sha256": "1287e5c06456efba2be3acdc50b832b4fc7e4ae13db96e97e5318d31cc17b9f6",
+      "blob": "cd704e3efeb7142d33fad676e4ed57a65c6b64ec",
+      "fullReadback": true,
+      "mount": false,
+      "reason": "Historical draft, superseded by final files; immutable preservation only."
+    },
+    {
+      "key": "diag2Runner",
+      "bytes": 20613,
+      "sha256": "1a78e013c13aaa667d2859307898fc2a09eeb6dda64e7a97b210cc62e0450147",
+      "blob": "e6ddf0a82b98b019b846c5aacda51185baeafeab",
+      "fullReadback": true,
+      "mount": false,
+      "reason": "Historical draft, superseded by final files; immutable preservation only."
+    },
+    {
+      "key": "diag2Runner",
+      "bytes": 20765,
+      "sha256": "d702a9589e1cbdfa98d0edc0e71a68db69855893786d3a40fc69aa2abf24f9b6",
+      "blob": "af23193baef970a30aa6276d8349a96f83495ed5",
+      "fullReadback": true,
+      "mount": false,
+      "reason": "Historical draft, superseded by final files; immutable preservation only."
+    },
+    {
+      "key": "diag2Schema",
+      "bytes": 16901,
+      "sha256": "73d79a5118c8ae49b599388a9655b7e7ac80d61eba33464013e5cd69bc6c544f",
+      "blob": "863e4a24867c0da7c6d6bbf899fc6941ceface5b",
+      "fullReadback": true,
+      "mount": false,
+      "reason": "Historical draft, superseded by final files; immutable preservation only."
+    },
+    {
+      "key": "diag2Ruling",
+      "bytes": 4537,
+      "sha256": "25eea26407f55f1f586731d71e97e91743afa41d3adf80fc50aba423257ab5cf",
+      "blob": "e87b467def3804c27a99578f350a2feb5b172033",
+      "fullReadback": true,
+      "mount": false,
+      "reason": "Historical draft, superseded by final files; immutable preservation only."
+    }
+  ],
+  "verification": {
+    "sourceExecution": "SOURCE_TESTS_PENDING",
+    "localSourceEvaluation": false,
+    "localSourceImports": false,
+    "localSourceCompileSyntaxTests": false,
+    "localFilesClonesDependenciesBuilds": false,
+    "refsRunsTreesCommitsPRs": false,
+    "logRefetch": false,
+    "hashMethod": "Builtin crypto SHA256 and Git-blob SHA1 over own RAM UTF-8 DATA strings; no Source execution.",
+    "artifactVerification": "Every created artifact FULL fetch/readback equal to complete proposed text; final bytes/hash/Git-blob agree. Reused guard/preflight FULL fetched and equal byte-exact. No runtime or provider API."
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

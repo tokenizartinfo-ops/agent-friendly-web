@@ -1,0 +1,8 @@
+{
+  "syntheticOnly": true,
+  "positives": 1,
+  "negatives": 24,
+  "baseReader": "880e0cd52f1fb9be544158aec0e88bd17c7e8d67",
+  "SourceQualified": false,
+  "Task1Pass": false
+}

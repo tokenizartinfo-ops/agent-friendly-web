@@ -1,0 +1,119 @@
+{
+  "schema": "afw.c2-oauth-independent-root-gate.v1",
+  "at": "2026-11-16 05:13:04 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "one-use keyless isolated GitHub Source diagnostic2",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "new nominated branch and one push workflow",
+  "resourceId": "lab/afw-c2-source-20261116-t1-oauth-diag2",
+  "allowedAction": "Create this branch at closed BASE then leased update once to exact prepared head; after terminal collect logs once, preserve sanitized evidence and retire added workflow.",
+  "prepared": {
+    "head": "4c0f19096453e5c5d1757744f52d1b1c04d76548",
+    "tree": "8f9ca7bd955dada334d70562cce9708b6f8e87f0",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-t1-oauth-diag2",
+    "message": "AFW-C2-OWNER-STAGES-OAUTH-DIAGNOSTIC2-ONEUSE-20261116",
+    "baselineBlobs": 3203,
+    "additions": 23
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-oauth-diag2",
+    "message": "AFW-C2-OWNER-STAGES-OAUTH-DIAGNOSTIC2-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-oauth-diagnostic2.yml",
+    "job": "c2-oauth-diagnostic2",
+    "dataPrefix": "docs/superpowers/source-lab/c2-t1-oauth-diag2/",
+    "executionAuthority": "Root gate only; this proposal creates no ref/run."
+  },
+  "sourceDelta": "9bcd616e8d50dbb5b6fac1de1907095914216b6b",
+  "contract": "029a043847b227c332104f060af1419c4d2ee175",
+  "ruling": "ae4852057eb77a38c2108718f4b03795cdf9e16a",
+  "ownReader": "d4cbd27f968355633f00998ffb286e13d44f90ef",
+  "ownReaderDependency": "880e0cd52f1fb9be544158aec0e88bd17c7e8d67",
+  "ownApi": "6f3cf94c7e98878e76f4f4c866dea2c4c73107b3",
+  "ownControls": "d9a34d5944905bdd005744cf552f847c719b8058",
+  "controls": {
+    "syntheticOnly": true,
+    "positives": 1,
+    "negatives": 24,
+    "baseReader": "880e0cd52f1fb9be544158aec0e88bd17c7e8d67",
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "previousPrimary": "be00422c02fdf45c94a416042aa6596808226f29",
+  "checks": {
+    "allFinalArtifactGitSha256BytesVerified": true,
+    "allOriginal3203BlobsAndModesPreserved": true,
+    "source13Frozen": true,
+    "onlyTestRoleOverlay": true,
+    "exactBootstrapData": true,
+    "driverActualWorldFunctions": true,
+    "originalAwaitedRegistrationTopologyPreserved": true,
+    "actionRecordedBeforeCounterAwait": true,
+    "explicitThrowBooleansAndExactRethrow": true,
+    "afterHookSequenceAndActualPhaseObserved": true,
+    "noRawMessagesOrPrivateData": true,
+    "reporterNativeReconstructedErrorHandled": true,
+    "ownReaderRecomputesNativeAndExitJoins": true,
+    "credentialsNone": true,
+    "contentsReadOnly": true,
+    "explicitChildEnvLoopbackNonrootUidGid": true,
+    "verifiedOwnCustodyAndCleanupRequired": true,
+    "sourceChild90sJob7min": true,
+    "originalProductClocksUnchanged": true,
+    "priorLogsNotFetchedAgain": true,
+    "freshMainAndHistoricalSourceUnchanged": true,
+    "newBranchAbsent": true
+  },
+  "inheritedAudit": [
+    "824b2fa8237572e5175be624d9f19cf95145414a",
+    "f8229c89791b84ea4a10cc49883c7895c7e1c3fa"
+  ],
+  "limits": {
+    "jobMinutes": 7,
+    "totalMilliseconds": 330000,
+    "sourceChildMilliseconds": 90000,
+    "preflightMilliseconds": 10000,
+    "hostCommandMilliseconds": 30000,
+    "perNativeTestMilliseconds": 120000,
+    "archiveBytes": 33554432,
+    "childStdoutBytes": 1048576,
+    "childStderrBytes": 65536,
+    "summaryBytes": 24576,
+    "reporterInputChunkCharacters": 4096,
+    "typedFrameBytes": 2048,
+    "operations": 4,
+    "lifecycle": 2,
+    "totalSequencedObservations": 6,
+    "nativeCases": 2,
+    "auxiliaryEvents": 4,
+    "custodyRecords": 8,
+    "custodyFiles": {
+      "min": 2,
+      "max": 8
+    },
+    "errorStackPrivateCharacters": 65536,
+    "errorStackPrivateFrames": 32,
+    "line": {
+      "min": 1,
+      "max": 5000
+    },
+    "column": {
+      "min": 1,
+      "max": 16384
+    }
+  },
+  "scope": "Diagnostic-only collection of actual2 actions, counters, native results and after hook. No product behavior fix, no20case/red/green/mutant/regression qualification. Hook-order hypothesis unproved before actual observations.",
+  "rollback": "After whole run+job terminal, remove only exact new workflow under lease, append actual primary evidence; preserve all baseline/new DATA and legitimate later activity. No force or runtime change.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
