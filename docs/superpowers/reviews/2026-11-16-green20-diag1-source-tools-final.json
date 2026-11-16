@@ -1,0 +1,225 @@
+{
+  "schema": "AFW-GREEN20-DIAG1-SOURCE-TOOLS-FRESH-SPEC-QUALITY-REVIEW/1",
+  "date": "2026-11-16",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Git evidence conservada; review estático y crypto/inflate DATA en RAM",
+  "resourceType": "Informe Git blob inmutable",
+  "allowedAction": "Leer Primary/proof/closure y pines inertes; crear informe+FULL readback. Cero Actions/log/artifact endpoints.",
+  "summary": "Tooling6 SPEC PASS y QUALITY PASS para sus6tests/31checks reales. Composición del código de captura futura estáticamente coherente, sin hallazgos nuevos; Source business capture permanece HELD y Task1 no queda calificado.",
+  "priorStaticReview": "0643071cce0703bc3229fb503136282b7fcc8798",
+  "authority": {
+    "release": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+    "pathSupplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+    "contract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "schema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "selection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d"
+  },
+  "reviewedPins": {
+    "toolsIndex": "68f6f9cfd90db4824b613e544b03564c96ea5bc8",
+    "toolsRunner": "61c38d39dee9af78852ff6210fe227d95443fa22",
+    "adapters": "5c8123b9e66166a198add4a0593372cfef13a1db",
+    "reader": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "sourceCaptureIndex": "2f25941491df234890036ae8cf0609e323207b67",
+    "sourceCaptureRunner": "dec4bb5585375423ca87d8d3baecb2edbe733b6f",
+    "Source13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d"
+  },
+  "actual": {
+    "primary": "5ecdf44b7bdea99ae1692a8eff9a5ca5b1939303",
+    "proof": "466c6af28eba2581f1e487c947bcd76d11fb0afc",
+    "gate": "3f54074d0ff4a9320300e8bccbab174c3afeea6c",
+    "run": 43977281603,
+    "attempt": 1,
+    "job": 133684396049,
+    "head": "6d6ab08491f1bdb77b0ab492294731715b43a64f",
+    "tree": "4d97f2f93277d48f79a9aaaa905fe2b90f21af79",
+    "commandStep": 4,
+    "tests": 6,
+    "pass": 6,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "checks": 31,
+    "artifactId": 14280624988,
+    "SourceToolingExecuted": true,
+    "SourceBusinessExecuted": false
+  },
+  "independentVerification": {
+    "checks": {
+      "apiRunJob": true,
+      "commitHeadParentTreeMessage": true,
+      "tree": true,
+      "original3203ReusedTree": true,
+      "input11": true,
+      "actualCommandStep": true,
+      "commandGroupOnce": true,
+      "nativeSixExact": true,
+      "nativeSummary": true,
+      "proof31": true,
+      "markerUniqueCanonical": true,
+      "proofOccurrence": true,
+      "proofLogPayload": true,
+      "timesWithinCommandWindow": true,
+      "allAPIChronological": true,
+      "gateClockCorrection": true,
+      "closureLinked": true
+    },
+    "orderedProofKeys": true,
+    "proofSchema": true,
+    "artifactAPIJoin": true,
+    "method": "Relectura FULL de Primary y blobs proof/gate/cierre por SHA; parseo JSON y lógica propia del revisor sobre DATA. Recontó seis top-level TAP y sus6Subtest/ordinal/IDs exactos y todos trailers. Proof31 coincide con sello fixture-first e inputs11 en mismo orden, bytes/SHA/Git y rawtree modo100644/typeblob/size; contexto real y ventana/grupo únicos ligados a API step4. Esquema de proof validado con intérprete propio para su subconjunto JSON Schema, no código Source.",
+    "originalLeaves": "Comparación independiente de3203originales: se derivaron del rawtreeafde090e conservado en68c68577 excluyendo sus25adiciones admitidas; mismo BASE6791. Cada path/type/mode/blob/size aparece idéntico en rawtreeTools4d97f2f; más11exactos=3214. No es nuevo readback remoto.",
+    "metrics": {
+      "proofBytes": 4058,
+      "proofSHA256": "de83b4cc817aa0f6ca236436769dc9d36e89cf8d276d99cff333d91a5a483a23",
+      "zipBytes": 2169,
+      "zipSHA256": "f93c9930a0fa564c6d6a392bcbf59299c0c513eec5fe5ee8c348c870fd054fd4",
+      "rawLogBytes": 22096,
+      "rawLogSHA256": "8284ee1ce5d9c2ccddc641cd4f7ecefc2819e1800cbd8d256b6ad71cc0bf575f"
+    },
+    "zip": {
+      "singleRegularExactFilename": true,
+      "method": 8,
+      "flags": 8,
+      "zipBytes": 2169,
+      "compressedBytes": 1975,
+      "payloadBytes": 4058,
+      "CRC32": 1315970437,
+      "fullConsumed": true,
+      "localCentralDescriptorMatched": true,
+      "noZIP64": true,
+      "payloadExact": true,
+      "payloadSHA256": "de83b4cc817aa0f6ca236436769dc9d36e89cf8d276d99cff333d91a5a483a23",
+      "zipGitBlob": "543eccb53435b24dc87ba9a49c20514db8079fdd"
+    },
+    "zipMethod": "Validación propia sobre ZIPbase64 conservado, sin importar OWN/Source: single regular exactfilename, EOCD/central/local/bounds/flags/method, extras sinZIP64 y longitudes, descriptorCRC/sizes y campos locales0oiguales. Inflate builtin coninfo/maxOutput y bytesWritten1975 completo; CRC32 por tabla propia y payload4058 exacto. Digest/tamaño/listing/run/head/branch/id enlazados; único marker Node '# '+JSON igual a artifactpayloadbody+LF y blobproof.",
+    "clock": "El gate contiene timestampUTC23:13:00Z como placeholder; Primary lo corrige expresamente y conserva activationPrecheck2026-11-16 23:12:42 UTC. APIruncreated23:12:46Z y job23:12:48–23:12:55Z. Se usa API+precheck observado; no se trata el placeholder como reloj real ni se deduce nueva autorización de él.",
+    "evidenceHashesFULL": [
+      {
+        "key": "g20NativePrimary",
+        "bytes": 1286868,
+        "sha256": "4ffc4c410c71ece169ef5ad0afc41c0839cca73d45a1f269c4af8c5af33f164f",
+        "blob": "5ecdf44b7bdea99ae1692a8eff9a5ca5b1939303"
+      },
+      {
+        "key": "g20NativeProof",
+        "bytes": 4058,
+        "sha256": "de83b4cc817aa0f6ca236436769dc9d36e89cf8d276d99cff333d91a5a483a23",
+        "blob": "466c6af28eba2581f1e487c947bcd76d11fb0afc"
+      },
+      {
+        "key": "g20NativeClose",
+        "bytes": 2145,
+        "sha256": "62b0cce107557a6838278687da63814505efc3173656002153aa7e333d0d8a09",
+        "blob": "9da853b6316233047eaac5c1aac6afd1aecbfc08"
+      },
+      {
+        "key": "g20NativeCloseReceipt",
+        "bytes": 2432,
+        "sha256": "5a5f72031a3951588a943729ba8714422bd65505dc2d36e65150c822d7eeb1c3",
+        "blob": "ac7d54a9b9b7f49ba08896067ff2cb127cabb509"
+      },
+      {
+        "key": "g20NativeGate",
+        "bytes": 5246,
+        "sha256": "b4643caf7a543e893e43b1b0ca0c6408aa8bb907ffbd621471ac7587f81f23b0",
+        "blob": "3f54074d0ff4a9320300e8bccbab174c3afeea6c"
+      }
+    ]
+  },
+  "toolingAssessment": {
+    "SPEC": "PASS",
+    "QUALITY": "PASS",
+    "basis": [
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/tools-controls.mjs",
+        "lines": "103–125,127–242",
+        "finding": "Sin defecto nuevo. Runner verificado por su pin real; import graph solo builtins+collection-adapters+read-progress. Los6tests llamaron helpers compartidos,31nombres completados tras assertions y cleanup readback, proof emitido después. La evidencia nativa coincide con esa implementación."
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/tools-controls.mjs",
+        "lines": "149–224",
+        "finding": "Cobertura acotada real: D07tail/sibling/S07intacto/alias;13FSfakelecturas2/mutación/symlink;custodycount/probe;colección de fixtures timeout/exit1/torn/empty/malformed/recorderflag/firstthrow/N2/replacedfile;framing/bodyLF/caps/mismatch/fault. No era un simple proof prefabricado."
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/collection-adapters.mjs",
+        "lines": "39–145,147–163",
+        "finding": "Helpers compartidos comprobados por tooling: lecturas reales y estables, identidad deljournal, before/after target hashes, UNKNOWN separado de FAULT, nativeprefix independiente y N2 incluso con suffix desconocido, primerthrow validado, dosframes canónicos y caps sin ampliar LF."
+      }
+    ],
+    "scope": "13archivos30B son fixtures declarados, no Source13business; child.status/ETIMEDOUT/TAP/journal en estos tests provienen de literales sellados. Native6 significa que esos tests unitarios sí ejecutaron los helpers. No se ejecutó D07 ni compilación M/QA/SDK. Test6 verifica framing/longitud, no ZIP futuro. ZIP de este proof sí fue comprobado independientemente en esta revisión."
+  },
+  "sourceCaptureCodeAssessment": {
+    "SPEC_STATIC": "PASS_ACOTADO, sin hallazgos materiales nuevos",
+    "QUALITY_STATIC": "Coherente con el contrato y composición inspeccionados en0643071; aún sin native business",
+    "status": "HELD_UNTIL_OWN124_NATIVE_AND_FRESH_REVIEW_AND_ROOT_GATE",
+    "evidence": [
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+        "lines": "149–167,203–254",
+        "assessment": "Los13canonicalafterimages se instalan solo en targetpropio desdeindex26b, no enGitBASE; S07 queda exacto, D07+recorder son siblingsWX. Las mediciones reales target13 antes244 y después252 llaman al mismo measureTargets probado; arrays independientes y pinned bytes/Git/SHA. No indexecho ni Sourceoverwrite."
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+        "lines": "168–200,232–288",
+        "assessment": "Doslaunches exactos PF10s+GREEN20D07serial180s, flags/UIDGID/cleargroups/unshareloopback/no-new-privs/guard. Budget330s/caso120s/job7min intactos. Hashes13, journal estable, N2, custody y cleanup deben cerrar antes del único outcome+artifact. Infra/Fault falla comando; timeout/torn estable conserva UNKNOWN. Tooling6 no añade launches al futuro Source."
+      },
+      {
+        "path": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+        "lines": "1–59",
+        "assessment": "D079e29registrationtail1794B idéntico aS07 desde offsetsfijados; wrappers registran mismo work/count/AFTER y preservan throw original. Recorder662ec cambia alias D07 exacto solo. La observación puede perturbar tiempos; no explica retroactivamente43965725604."
+      }
+    ],
+    "notProven": "Ni las13medidas actuales del futurotarget, ni sucustody física2launches, ni GREEN20/resultados/frontera/firstthrow/AFTER/runtime timing han ocurrido por este tooling. Tampoco resultado deOWN124, ZIP/artifact Source futuro o aprobación de captura. SourceQualified yTask1Pass continúan false."
+  },
+  "closure": {
+    "receipt": "ac7d54a9b9b7f49ba08896067ff2cb127cabb509",
+    "readback": "9da853b6316233047eaac5c1aac6afd1aecbfc08",
+    "closedHead": "3441b4a43dd52aff5089e21b085cff1df4e064b8",
+    "closedTree": "cc397a886bf77bf3a2d7db3329f7ce10c31f1085",
+    "recorded": "3215=3203originales+10toolleaves+2evidence, soloWFtoolsretirado, main/históricos intactos,0closeheadruns. Enlaces aPrimary/proof/head/tree/run/job y aritmética cotejados.",
+    "limit": "Cierre es el readback fechado de Root conservado, no nuevo poll de refs/Actions ni prueba física de drenaje AFW/PCoff. Esta revisión no descargó nuevamente log/artefacto."
+  },
+  "findings": [],
+  "declinedToJudge": [
+    "No nueva auditoría de todoBASE/imports de negocio ni de runtime/FCO/CF; conserva alcance estático58788 y failedSource45ab03.",
+    "No review deOWN124ni Sourcebusiness capture real; sigue un gate separado.",
+    "No autenticación de rawTAP Source/suffixjournal ausentes. Proof deltooling y ejemplos no sustituyen evidencia del futuro Source.",
+    "No consentimiento real, SDKwithdrawal, namespaceEmpty/globaldrain, causa histórica503 o timeout ni Task2/readiness."
+  ],
+  "performed": {
+    "SourceEval": false,
+    "SourceImport": false,
+    "SourceSyntax": false,
+    "SourceCompilation": false,
+    "SourceTestsByReviewer": false,
+    "filesystem": false,
+    "dependencies": false,
+    "refs": false,
+    "runs": false,
+    "ActionsPoll": false,
+    "logsEndpoint": false,
+    "artifactEndpoint": false,
+    "provider": false,
+    "Cloudflare": false,
+    "codePatch": false,
+    "cryptoOnInertData": true,
+    "builtinInflateArtifactData": true
+  },
+  "rollback": "Omitir este blob; ninguna implementación o ref se alteró.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

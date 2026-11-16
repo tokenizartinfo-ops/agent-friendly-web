@@ -1,0 +1,472 @@
+{
+  "schema": "afw.own-green20-frontier.packet-index.v1",
+  "status": "READY_ROOT_STATIC_ADMISSION_NATIVE124_AND_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "Immutable versioned OWN code/models/DATA",
+  "environment": "BoundedOWNRAM done; actualnative/ref/run solelyRoot",
+  "allowedAction": "Own newfamily only; no Sourcehelper imports/execution or historicalsuite rerun",
+  "authority": {
+    "implementationRelease": "696fb02dc8a29f0c394d91f661922610403ec4bf",
+    "design": "548ada038264c8b8e250e41047c4aa2e0b2593a5",
+    "sharedContract": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "schema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "selection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+    "pathLayerSupplement": "3033f9998ba9575ba1c88179a557c1bc78caebbd",
+    "round": 1,
+    "maxRounds": 5
+  },
+  "prefix": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/",
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/model-builder.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "20e2f7c16677be936b037953cbb8e4573755ba8f",
+        "bytes": 8004,
+        "sha256": "b810e18625d17d3cb9ea57ba0ca4b822b476155c9ca2f39442c1cf092da4e4bf"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/fixture-seed.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "1f7d93629d7f9f1789db894d860c1b44d88a04c1",
+        "bytes": 132652,
+        "sha256": "a7b71a680691f90efde82ac25519a545fd6df1d81ffe25ae7686c6b753de3689"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/fixture-first-cases.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "123a3af4c204f470237a476172ff4d90b53c90b8",
+        "bytes": 27496,
+        "sha256": "04b8a420038507a46d5b1557afb7c7890749af22f792e46cf1664b54997fc5c8"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/expected-ids.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "696dde71d176989160f1471594a56618466ca0fc",
+        "bytes": 3522,
+        "sha256": "5fc279bf620146034d91868e846dc5301b812b9e434431d2db31df7291968bf8"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/complete-coherent-example.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "a08f3d39e11761a7ff394eb65bb1728de8684524",
+        "bytes": 36401,
+        "sha256": "63e4de9e934908a925941c7e6dd525e2f7ae6537139231b32ae66465f34f370b"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/fixed.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "7a8f434f9f486d3c01fa1229041ba4d5b2e0b0e7",
+        "bytes": 20221,
+        "sha256": "42efb9ccb03301e68014bdc4d1117a5901acc6a97e9f2a4189fde730ce33f85b"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/shape.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+        "bytes": 2440,
+        "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/partial.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+        "bytes": 4511,
+        "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/transport.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "abab6d90b74c87428102d96f31d3e250f374e27a",
+        "bytes": 9634,
+        "sha256": "62868cb5bc8a2dc63eeb0e2750c718f37f3cac6b0458a06e53ba7762a6156353"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "f844dd8789012b95edaf0aec4db20edea885a4ca",
+        "bytes": 3285,
+        "sha256": "b77e7000a500a3cfba93f4d832dddef5f94516d65ee76bbb7b91598afe775935"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "a384f0832c3cebf66ecd929cef2c2e09708ca3da",
+        "bytes": 879,
+        "sha256": "7f2301aa857af531deb9dac6e2b0b932a60f99dcafed3f93e14718ca79277197"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/source-admission.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "417ace1ecd30a4b78e12d5f4e09f3e143045afec",
+        "bytes": 7975,
+        "sha256": "44bf10143c02085c79fd6a47432c6f922e12a3af7a291132502c1ea5d83c44dc"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/data/protocol-contract.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "e55a6387549a8447a5ad93356184645ae19e70de",
+        "bytes": 21378,
+        "sha256": "8891598c7c0ee416762ad65d139c7e9336cc33e4123e251211055e42c3265fe7"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/data/frame-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+        "bytes": 21200,
+        "sha256": "a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/data/mode-selection.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+        "bytes": 3956,
+        "sha256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "5af850175365643566eaa0d94e2c65dacf7b4ff1",
+        "bytes": 1489,
+        "sha256": "e3dba15eebcb7d4dbbc203bd4865457e4658307dc7409d135b37f782dd3794ae"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/proof-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "10a1d7bffdef10da674d4a64ab45814ca2941084",
+        "bytes": 3764,
+        "sha256": "0b5558feecd920d993d88127eaf2d552d7c4103943acfc2a947adafa4d87507a"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/selection.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "aae69921a1b3186973e973f2260835c6e938a24c",
+        "bytes": 1581,
+        "sha256": "5d4f688230b5dc48a6f4f456ebc2540d9b55e9cbc31b6e79bcab9c7f8d65fd92"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/native-graph.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "713753c9e35bf9998cbd6dd0de7319da12e2cd47",
+        "bytes": 5972,
+        "sha256": "ada3a410e1f45ea0045570d757d8294d6bef928b0cba3b55f1617c0bab47a24c"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "edb8dad084d56830912e5be7b262bea2d0a85777",
+        "bytes": 5140,
+        "sha256": "f68c8946de2a783acbea2ffef509758fc16c244c29fcb6d609e6a19e0ec8bf54"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/ram-green.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "dc2bf99af1001a99371acd260ee5a179c1eb27f0",
+        "bytes": 12381,
+        "sha256": "11bfc1457b1887c9f6591be6d77d80ce8f5f4aa1c4bf80a4a6bb4c612e1b88ae"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/old-red.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "24183a96a762d7ff13085bf01b4414025ab7556d",
+        "bytes": 627,
+        "sha256": "f3f2da1213a9188beda12c37d1d1c84c97900e5b08b71642ba00b50fd24ab6af"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/derivation-scope.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "967e0468d69bff77aec21086b0e3aed99ec697d7",
+        "bytes": 25403,
+        "sha256": "f00ff3f7cfcb0707557b67b719a1765bf226d6388fb9e0cff1fc2f9ce7640f32"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/body-admission-proposal.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "66640053f64d9da3b72f1d3b583e81c7d74f8ea5",
+        "bytes": 8041,
+        "sha256": "12e541e0edb0be5cbbec4521a1f46b6309edfebd8ebc69e86d407c77d019a2c0"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/reversible-diff.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "129405a2f73bc0f35730a53b1864fc35fe14cdb3",
+        "bytes": 492217,
+        "sha256": "1145a59c0b1fb533b260ab63bc298c9e70c8159a1ec440848fe41c9c0d1b9161"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/report.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "43cebfb6ada58c10cfcba9df9d9c1c4708593b12",
+        "bytes": 15873,
+        "sha256": "59ac9f2753fa99fc2ec4c409c8bd40fa65020014fb2086ae303b6072120249c6"
+      },
+      "fullReadback": true
+    }
+  ],
+  "paths": {
+    "native": 20,
+    "total": 26,
+    "nativeBytes": 321500,
+    "allBytes": 876042,
+    "newWorkflowCount": 1
+  },
+  "entrypoint": {
+    "blob": "f844dd8789012b95edaf0aec4db20edea885a4ca",
+    "path": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/reader.mjs",
+    "signature": "g20Read(input,trusted,hash,inflate)",
+    "inputKeys": [
+      "run",
+      "jobs",
+      "commit",
+      "tree",
+      "transport",
+      "artifact"
+    ],
+    "trustedKeys": [
+      "expected",
+      "bodyEdges",
+      "bodyEdgesHash"
+    ],
+    "expectedKeys": [
+      "repository",
+      "branch",
+      "workflowPath",
+      "oneUseMessage",
+      "job",
+      "parent",
+      "head",
+      "tree",
+      "runId",
+      "jobId",
+      "requiredSteps"
+    ],
+    "authority": "ExpectedAPIcontext and finalSourceclosure independentRoot input, never outcome. SourceExpectedContext/head/tree/run/jobnull here."
+  },
+  "semantics": "Twoexactcanonicalcustody/outcome frames+sameJSONLFartifact; source13TARGETbefore/afterarrays,2launchpartition2..8 and cleanup; independentchronologicalaction/count/AFTER/firstthrow/UNKNOWN; Native safeIDprefix/N2 only; N1realAPI/UTC/steps/header/window; rawGit DATAedges+knownBASES08absence/S09old; actualZIP419guards byte-identical modulo names. No actual RAWTAP/target/privateTail authentication.",
+  "fixtureFirst": {
+    "seal": "28a00cc5c296ca245389a5cccfdcd929864cb133",
+    "plans": "123a3af4c204f470237a476172ff4d90b53c90b8",
+    "ids": "696dde71d176989160f1471594a56618466ca0fc",
+    "oldRED": "24183a96a762d7ff13085bf01b4414025ab7556d",
+    "census": 124,
+    "positive26": 26,
+    "negative98": 98,
+    "idsHash": "c96e7b9f0e680b2fe841b1ad0f0bf52d2f90c12237a03b821b60a028171b61d9",
+    "red": "Beforecode,f799+979c rejected newfamily validmodel; directoldOWNreducer lacked firstThrowSequence2.",
+    "fictional": "2037clocks/99051xxxIDs/repeatedletterheads;25Root-likemodelededges with3explicittoycodepins. These are never actualSource context or finalproducerpins."
+  },
+  "sourceBodyAdmission": {
+    "rootSeal": "1fe62f22a3067029c651e99320c94624998eb58b",
+    "sourceDataIndex": "2f25941491df234890036ae8cf0609e323207b67",
+    "admissionFile": "417ace1ecd30a4b78e12d5f4e09f3e143045afec",
+    "status": "ROOT_FINAL_SOURCE_BODY_DATA",
+    "edges": 25,
+    "bodyEdgesHash": "4c126eb50b1b59debb0db6cc3808ff31275a7267b4ef260d3fbbc699f2798496",
+    "actualSourceExpectedContext": null,
+    "knownCore22Pinned": true,
+    "RootFinalRunnerWFAdapterPinsValidated": true,
+    "bodyDataOnlyNotSourceRuntimeBinding": true,
+    "proposalHistory": "66640053... retained asdocumentaryproposal, superseded bydefinitiveadmission417ace; no controllercodepatch or fixture/IDchange."
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261116-green-frontier-diag1",
+    "message": "AFW-C2-OWN-GREEN-FRONTIER-DIAG1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-own-green-frontier-diag1.yml",
+    "job": "c2-own-green-frontier-diag1",
+    "prefix": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/",
+    "runner": "docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-green-frontier-diag1/run-controls.mjs",
+    "artifact": {
+      "name": "afw-c2-own-green-frontier-diag1-proof",
+      "path": "output/c2-own-green-frontier-diag1-proof.json",
+      "fileName": "c2-own-green-frontier-diag1-proof.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "runnerOS": "ubuntu-24.04",
+    "jobTimeoutMinutes": 3,
+    "testTimeoutMs": 10000,
+    "activationReleased": false
+  },
+  "native": {
+    "graph": "713753c9e35bf9998cbd6dd0de7319da12e2cd47",
+    "runner": "edb8dad084d56830912e5be7b262bea2d0a85777",
+    "workflow": "5af850175365643566eaa0d94e2c65dacf7b4ff1",
+    "proofSchema": "10a1d7bffdef10da674d4a64ab45814ca2941084",
+    "selection": "aae69921a1b3186973e973f2260835c6e938a24c",
+    "expectedIds": "696dde71d176989160f1471594a56618466ca0fc",
+    "expectedCount": 124,
+    "idsHash": "c96e7b9f0e680b2fe841b1ad0f0bf52d2f90c12237a03b821b60a028171b61d9",
+    "marker": "AFW_C2_OWN_GREEN20_FRONTIER_DIAG1_PROOF (NodeTAP '# ' comment)",
+    "proofUTF8IncludingLFMax": 24576,
+    "bodyBindings": 20,
+    "imports": "7Ownmodules+runner,builtins only;3acceptedSourceJSON DATA files+Rootfinal25metadata;noSourcecode/privateTAP/parser/helper/harness import; no419/W1batteryrerun.",
+    "actualRun": null,
+    "actualJob": null,
+    "executed": false
+  },
+  "verification": {
+    "ramPassed": 124,
+    "ramFailed": 0,
+    "idsUnique": 124,
+    "RootFinal25AdmissionValidated": true,
+    "ownZIP419RenameOnly": true,
+    "allFullReadbacks": true,
+    "allUtf8BytesSHA256GitSHA1Matched": true,
+    "oldPreimagesAndFullAfterImages": true,
+    "forwardReverseSpans": true,
+    "ownFinalRunnerSyntaxParsedNotRun": true,
+    "nativePending": true,
+    "ramProof": "dc2bf99af1001a99371acd260ee5a179c1eb27f0"
+  },
+  "reversibleDiff": "129405a2f73bc0f35730a53b1864fc35fe14cdb3",
+  "report": "43cebfb6ada58c10cfcba9df9d9c1c4708593b12",
+  "limits": "Sourcebody24576+LF24577,custody1024,FAULT2048,journal32768/128,std1MiB/err64KiB,ZIP1MiB/log4MiB/tree4MiB8192;sourcechild180/case120/total330/job7 remain producer/procedure limits. OWNNode22.23.4/job3min/case10s/proof24576inclLF. No budget/reset/clock/scopeexpansion.",
+  "proofLimits": "ActualOUTCOME native.integrity+cases(id,status) is safeprojection only. OWN does not parse/authenticate absent actualRAW TAP or unseen private suffix/targetbytes. Correct-lookingtargethasharrayscannotprove actualreads absentpinnedproducer/RootSourceTOOLS/custody. No newprivateRAWfield. No503cause/oldcase20/physicalpending/drain/SDK/namespaceEmpty/readiness/PCoff inference.",
+  "preservation": {
+    "Source13Changes": 0,
+    "c230Changes": 0,
+    "MChanges": 0,
+    "CoreChanges": 0,
+    "oldOwnChanges": 0,
+    "historicalReceiptChanges": 0,
+    "SourceExecution": 0,
+    "SourceImports": 0,
+    "SourceSyntax": 0,
+    "SourceCompilation": 0,
+    "SourceTests": 0,
+    "whole419W1Reruns": 0,
+    "filesystem": 0,
+    "dependencies": 0,
+    "refs": 0,
+    "runs": 0,
+    "provider": 0,
+    "browser": 0,
+    "secrets": 0,
+    "subagents": 0
+  },
+  "rollback": "Omit/remove only listednewpaths/WF inRootisolatedcheckout afterevidencepreservation. Preserve oldcode/history/original3203/main/Source13 and unmounteddesigncheckpoints.",
+  "pending": [
+    "Rootstaticfullhash/path/triggeradmission",
+    "OneRootOWNnative124actualAPI/TAP/ID/proof/ZIP/contextjoin+closure",
+    "Fresh independentSPEC+QUALITY",
+    "SeparateRootSourceTOOLSreview/finalSource review and uniqueGREEN20businesscapture; actualSourcecontext laterRootinput"
+  ],
+  "ActualSource": false,
+  "finalSourceBinding": false,
+  "nativeQualification": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
