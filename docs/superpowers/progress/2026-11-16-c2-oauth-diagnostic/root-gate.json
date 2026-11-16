@@ -1,0 +1,90 @@
+{
+  "schema": "afw.c2-oauth-diagnostic-root-gate.v1",
+  "at": "2026-11-16 04:45:53 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "single-use GitHub Actions keyless Source diagnostic",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "nominated Git branch and one push workflow",
+  "resourceId": "lab/afw-c2-source-20261116-t1-oauth-diag1",
+  "allowedAction": "Create only this new branch at closed BASE, then one leased fast-forward to this exact prepared commit; collect once after terminal; retire only added workflow.",
+  "prepared": {
+    "head": "31359f9160c935f1251e4cc6157bdd544107151b",
+    "tree": "98b9639d3408b21f414997f098af4461b196f4ec",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-t1-oauth-diag1",
+    "message": "AFW-C2-OWNER-STAGES-OAUTH-DIAGNOSTIC-ONEUSE-20261116",
+    "baselineBlobs": 3203,
+    "additions": 19
+  },
+  "workflow": ".github/workflows/afw-c2-oauth-diagnostic.yml",
+  "job": "c2-oauth-diagnostic",
+  "sourceDelta": "905dba67eb524261a9802e91390c005bf62b0d68",
+  "contract": "4506e181d6cf54348b4cebc0915cd1e407e99e9a",
+  "runner": "3006d7d01cb9e24a83a001361318eecf842f013f",
+  "reporter": "681f7eafa32df84cd585f29f85ac4b3e8e89835d",
+  "guard": "f84c0fe47eaf386d9f0a4ae3e300d7b738972450",
+  "preflight": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+  "comparison": "d9a20da5d49371c106ce992ccfded8e17443d4d5",
+  "ownReader": "880e0cd52f1fb9be544158aec0e88bd17c7e8d67",
+  "ownApi": "d6066f8fe5d879ba8bcceaaea8090fc8f14141f6",
+  "ownControls": "777340cb4de75bda4dc7b4002bf72470896ca866",
+  "controls": {
+    "record": {
+      "syntheticOnly": true,
+      "positives": 2,
+      "negatives": 36,
+      "SourceQualified": false,
+      "Task1Pass": false
+    },
+    "api": {
+      "syntheticOnly": true,
+      "positives": 1,
+      "negatives": 18,
+      "SourceQualified": false
+    }
+  },
+  "primaryNodeReview": {
+    "version": "v22.23.4",
+    "sources": [
+      "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/tests_stream.js",
+      "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/test.js"
+    ],
+    "result": "getReportDetails only spreads skip/todo directive when actual skip/todo; reporter undefined check is correct. Error original/cause projection read; no Source code executed locally."
+  },
+  "checks": {
+    "finalAllArtifactHashes": true,
+    "baseline3203BlobsIntact": true,
+    "all13SourceBodiesFrozen": true,
+    "onlyTestRoleOverlayInBaseline": true,
+    "exactBootstrapData": true,
+    "noCredentialsOrGhaEnvironment": true,
+    "contentsReadOnly": true,
+    "networkNamespaceOnlyLoopback": true,
+    "childDropsToActualNonrootParent": true,
+    "custodyPreflightAndFinalCleanupRequired": true,
+    "sourceChild90s": true,
+    "job7min": true,
+    "originalProductClocksUnchanged": true,
+    "primaryLogsFetchedAgain": false,
+    "allInheritedWorkflowTriggerSourcesUnchanged": true
+  },
+  "inheritedTriggerAudit": [
+    "824b2fa8237572e5175be624d9f19cf95145414a",
+    "f8229c89791b84ea4a10cc49883c7895c7e1c3fa"
+  ],
+  "scope": "Only C2T1_CONNECTION + C2T1_OAUTH, native TestsStream. Other18 excluded, no green/mutant/regression, no Source qualification. Capture may preserve actual failed OAuth/timeout; all PCoff/product claims stay false.",
+  "rollback": "After terminal collect logs once, append sanitized primary evidence to this branch, remove only this newly added workflow with lease and verify original3203 untouched; preserve DATA and all later activity. No branch/main/runtime force update.",
+  "limitations": "Two prior failed Source qualifications preserved. This observation does not prove their exact first error/cleanup cause, Cloudflare fault, Source acceptance or live completion.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

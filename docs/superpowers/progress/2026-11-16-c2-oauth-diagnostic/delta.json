@@ -1,0 +1,124 @@
+{
+  "schema": "afw.c2-oauth-diagnostic-source-delta.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261116-t1-oauth-diag1",
+  "message": "AFW-C2-OWNER-STAGES-OAUTH-DIAGNOSTIC-ONEUSE-20261116",
+  "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "frozenSourceIndex": {
+    "blob": "e20ae5a991a291004c3a8dde098031865c1e4c13",
+    "sha256": "71ca47bfd1f793f7ac6a4738fb6431e20a23dd95a06d3c67728a894f929ed26b",
+    "bodyCount": 13,
+    "changed": false
+  },
+  "evidence": {
+    "originalFailure": "95a2a6321ad5503fa9ca0c1ef447678889d6ee28",
+    "fix1Failure": "7c250f7d58c70f88766e52421480c045751da3e5",
+    "logsFetchedAgain": false
+  },
+  "files": [
+    {
+      "role": "runner",
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag1/run-oauth-diagnostic.mjs",
+      "beforeBlob": null,
+      "newFile": true,
+      "afterBlob": "3006d7d01cb9e24a83a001361318eecf842f013f",
+      "bytes": 16867,
+      "sha256": "e7e7f467dd5e136f5101eac8d4239f688fb78a0b86f59e5f1a86bc35763edc87",
+      "fullReadback": true
+    },
+    {
+      "role": "reporter",
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag1/oauth-event-reporter.mjs",
+      "beforeBlob": null,
+      "newFile": true,
+      "afterBlob": "681f7eafa32df84cd585f29f85ac4b3e8e89835d",
+      "bytes": 5111,
+      "sha256": "f25e0791f6e29126dc7e9f65575e38e520713c8d68f2d1e3ad8b2b9476d0cdaf",
+      "fullReadback": true
+    },
+    {
+      "role": "custodyGuard",
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag1/oauth-custody-guard.mjs",
+      "beforeBlob": null,
+      "newFile": true,
+      "afterBlob": "f84c0fe47eaf386d9f0a4ae3e300d7b738972450",
+      "bytes": 1283,
+      "sha256": "13d77562658316ebc7d9b29bfc4063977b310751ae2fd3e7c08880fd884e530f",
+      "fullReadback": true
+    },
+    {
+      "role": "custodyPreflight",
+      "path": "docs/superpowers/source-lab/c2-t1-oauth-diag1/oauth-custody-preflight.mjs",
+      "beforeBlob": null,
+      "newFile": true,
+      "afterBlob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae",
+      "fullReadback": true
+    },
+    {
+      "role": "workflow",
+      "path": ".github/workflows/afw-c2-oauth-diagnostic.yml",
+      "beforeBlob": null,
+      "newFile": true,
+      "afterBlob": "7bd8a145fdd365ac45485dac5a963d3ee3e4744d",
+      "bytes": 1523,
+      "sha256": "9c3617c78d29df1dd08acec4971d4f1f0f7e159a8a0e04fdb6b501ee85ff1b38",
+      "fullReadback": true
+    }
+  ],
+  "contract": {
+    "blob": "4506e181d6cf54348b4cebc0915cd1e407e99e9a",
+    "bytes": 9865,
+    "sha256": "224b0c067731f55f4b7a0bfef0cf4a68aba86877449bf0162289ca0be90382d7",
+    "fullReadback": true
+  },
+  "comparison": {
+    "blob": "d9a20da5d49371c106ce992ccfded8e17443d4d5",
+    "bytes": 9106,
+    "sha256": "e8edcfd5e16c9444ad0baab924af06d4ff9ca617c3e221a98cd79f274822a02c",
+    "fullReadback": true
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nativeCaseScope": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH"
+  ],
+  "excluded": "Other18 declared out of scope; no green/mutant/regression or fallback Source receipt.",
+  "reverse": "Abandon immutable proposals now. Any future Root mount only on nominated diagnostic branch, Base lease and trigger gate; remove only these exact new helper/WF bytes when retiring, preserving later legitimate activity. No product/pre-existing Source body mutated.",
+  "historicalDiagnosticDrafts": {
+    "status": "NOT_ADMITTED",
+    "fullReadback": true,
+    "blobs": [
+      "6c5b40ff3bca2fa7c8fb2d4ba24d27b11cc07e58",
+      "912f3c320354a173fdd3d400d2a1a6e07a2112e8",
+      "835b4d95f09ed81818621b7f6790809df0767433",
+      "be0ca416d789f6d09aa3ed9d4a67f5c1d3f11441",
+      "a52e5bc6d9b966eac7919e44ac61ae189beb3946",
+      "c414640ae99bcd74a19485cf8345a4b6d948cbb5",
+      "10e179445ed3ff7d6fa9e6b30ca9143ac8dc81c1",
+      "1d8293d29538d3bf631caf6a233ab29b4783be3d"
+    ]
+  },
+  "authorActions": {
+    "localSourceExecution": false,
+    "SourceFilesWrittenLocally": false,
+    "refsTreesCommitsCreated": false,
+    "cloudRunsStarted": false,
+    "subagentsSpawned": false,
+    "productCoreMainChanged": false
+  },
+  "nextGate": "Root independent schema/reader/artifact/trigger review before one diagnostic occurrence; no execution authority is conferred by this DTO.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

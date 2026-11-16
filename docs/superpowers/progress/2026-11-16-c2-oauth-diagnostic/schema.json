@@ -1,0 +1,229 @@
+{
+  "schema": "afw.c2-oauth-diagnostic-contract.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "branch": "lab/afw-c2-source-20261116-t1-oauth-diag1",
+  "message": "AFW-C2-OWNER-STAGES-OAUTH-DIAGNOSTIC-ONEUSE-20261116",
+  "workflow": ".github/workflows/afw-c2-oauth-diagnostic.yml",
+  "job": "c2-oauth-diagnostic",
+  "SourceIndex": {
+    "blob": "e20ae5a991a291004c3a8dde098031865c1e4c13",
+    "sha256": "71ca47bfd1f793f7ac6a4738fb6431e20a23dd95a06d3c67728a894f929ed26b",
+    "all13BodiesFrozen": true,
+    "productMaterialization": "Exact BASE originals only; overlay unchanged admitted test-role bodies, as prior baseline-red."
+  },
+  "pattern": "^(C2T1_CONNECTION|C2T1_OAUTH)$",
+  "selectedCaseIds": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH"
+  ],
+  "excludedCoverage": "Other18 known cases are declared outside scope, natively filtered; never invented as missing/fail/pass. No mutant/green/regression/Task1 qualification.",
+  "nativeNode": "v22.23.4",
+  "primarySources": [
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/doc/api/test.md",
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/tests_stream.js",
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/lib/internal/test_runner/reporter/tap.js",
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/doc/api/process.md",
+    "https://raw.githubusercontent.com/nodejs/node/v22.23.4/doc/api/cli.md"
+  ],
+  "reporter": {
+    "input": "Actual Node TestsStream test:pass/test:fail; original thrown error from data.details.error.cause per exact-version primary docs. No raw TAP parsing.",
+    "eventFrame": "AFW_C2_OAUTH_EVENT JSON.stringify({schema,id,status,casePhase,skip,todo,definition,error,sanitized}) + LF",
+    "maximumFrameBytes": 2048,
+    "nativeCasesOnly": "IDs only if native test name exactly matches selected2; unknown/file/hook native events have id:null and are auxiliaryEvents, never Source cases.",
+    "errorFields": [
+      "kind",
+      "code",
+      "position",
+      "sitePhase",
+      "httpActual",
+      "httpExpected",
+      "booleanActual",
+      "booleanExpected"
+    ],
+    "kinds": [
+      "Error",
+      "TypeError",
+      "AssertionError",
+      "SyntaxError",
+      "RangeError",
+      "AbortError",
+      "other",
+      "unavailable"
+    ],
+    "codes": [
+      null,
+      "ERR_ASSERTION",
+      "ERR_TEST_FAILURE",
+      "ENOENT",
+      "EACCES",
+      "EPERM",
+      "ERR_MODULE_NOT_FOUND",
+      "ETIMEDOUT",
+      "ERR_INVALID_ARG_TYPE",
+      "ERR_STREAM_PREMATURE_CLOSE",
+      "other"
+    ],
+    "position": {
+      "fieldOrder": [
+        "fileId",
+        "line",
+        "column"
+      ],
+      "source": "Only actual error stack frame or native test definition matched to exact13 admitted relative paths under fixed materialization root. Never raw stack/file path. Unmatched is null.",
+      "lineRange": [
+        1,
+        5000
+      ],
+      "columnRange": [
+        1,
+        16384
+      ],
+      "whitelist": [
+        {
+          "fileId": "S00",
+          "path": "lib/mcp-qa-finite-owner-phase-context.mjs"
+        },
+        {
+          "fileId": "S01",
+          "path": "lib/mcp-qa-finite-owner-preparation.mjs"
+        },
+        {
+          "fileId": "S02",
+          "path": "lib/mcp-qa-finite-owner-native-receiver.mjs"
+        },
+        {
+          "fileId": "S03",
+          "path": "worker/mcp-own/finite.mjs"
+        },
+        {
+          "fileId": "S04",
+          "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs"
+        },
+        {
+          "fileId": "S05",
+          "path": "lib/mcp-qa-finite-owner-cleanup.mjs"
+        },
+        {
+          "fileId": "S06",
+          "path": "lib/mcp-qa-finite-initial-cleanup.mjs"
+        },
+        {
+          "fileId": "S07",
+          "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs"
+        },
+        {
+          "fileId": "S08",
+          "path": "test/fixtures/finite-coupled-native.mjs"
+        },
+        {
+          "fileId": "S09",
+          "path": "test/fixtures/finite-first-connection-publication.mjs"
+        },
+        {
+          "fileId": "S10",
+          "path": "test/fixtures/finite-initial-entry-world.mjs"
+        },
+        {
+          "fileId": "S11",
+          "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs"
+        },
+        {
+          "fileId": "S12",
+          "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs"
+        }
+      ]
+    },
+    "sitePhases": [
+      null,
+      "oauth-context",
+      "oauth-kv",
+      "oauth-client-registration",
+      "oauth-get",
+      "oauth-post",
+      "oauth-sdk-observation"
+    ],
+    "siteMap": {
+      "fileId": "S08",
+      "sourceBlob": "65933f3ebd753859a3b341f684b46d11f5c43a5a",
+      "lines": {
+        "62": "oauth-context",
+        "63": "oauth-kv",
+        "64": "oauth-client-registration",
+        "69": "oauth-sdk-observation",
+        "65-66": "oauth-get",
+        "67-68": "oauth-post"
+      },
+      "meaning": "Static classification from actual whitelisted error position, not guessed completion/progress."
+    },
+    "values": "Actual/expected only booleans; HTTP integers100..599 only for an actual assertion whose expected is200 or302. Other actual/expected (strings/objects/cookies/tokens/etc) never inspected for output.",
+    "stdoutPolicy": "All Source stdout/stderr/diagnostic messages suppressed. Only exact typed custody preload record forwarded from test:stdout. No data.message output, raw Error.message, assertion text, stack/body/header/JWT/nonce/private field."
+  },
+  "custody": {
+    "childFlow": "sudo -n env -i <explicit allowlist> unshare --net; root enables ONLY loopback; exec setpriv --reuid capturedParentUID --regid capturedParentGID --clear-groups --no-new-privs node. No sudo -E or user/group/sudoers/production permission mutation.",
+    "parent": "Actual parent uid>0/gid>=0 captured before first await; fail closed for root parent. No arbitrary UID input.",
+    "guard": "Loaded before test framework in each actual Node process. Compare getuid/getgid to exact captured parent; getgroups may include primary gid as Node guarantees, but no other supplementary group; networkInterfaces onlylo/internal127.0.0.1. Write owned per-process probe only inside verified task temp.",
+    "publicFields": "Only booleans and count. No raw uid/gid/pid/path.",
+    "preflight": "Same isolated/dropped-privilege child writes fixed owned probe. Outer verifies uid/gid+content then actually removes only own preflight area and verifies absence BEFORE Source diagnostic.",
+    "final": "Inspect bounded own custody probes, then remove only own verified task temp and verify absence. Actual cleanup success is required for diagnosticCaptureValid. Failure publishes only enum errno, no chmod/chown/bypass.",
+    "hypothesisLimit": "Previous cleanup cause is unknown; root-owned caches are a source-based hypothesis. New successful own-area cleanup cannot retroactively prove that cause or global native drain.",
+    "guardThreadBehavior": "Node22.23.4 --import is inherited by worker threads. Guard checks UID/GID/network on every import, but writes/emits per-process proof only on isMainThread, avoiding duplicate same-PID wx probes from worker threads."
+  },
+  "summary": {
+    "frame": "AFW_C2_OAUTH_DIAGNOSTIC JSON.stringify(report) + LF",
+    "schema": "afw.c2-oauth-diagnostic.v1",
+    "maximumBytes": 24576,
+    "fields": [
+      "schema",
+      "context",
+      "phase",
+      "SourceQualified",
+      "Task1Pass",
+      "diagnosticCaptureValid",
+      "capture",
+      "cases",
+      "auxiliaryEvents",
+      "custody",
+      "cleanup",
+      "nonclaims"
+    ],
+    "phases": [
+      "admission",
+      "materialize",
+      "custody-preflight",
+      "connection-oauth",
+      "custody-observation"
+    ],
+    "capture": "Actual native status/signal/allowed spawn-error enum; complete flag; raw captured Buffer bytes/hash only. Data retained even if after-hook/open-handle timeout. No raw stdout/stderr.",
+    "custodyPreflightCapture": "Same bounded native metadata, separately captured even when preflight fails.",
+    "casePolicy": "Only actual selected Node events go into cases, no synthetic missing outcomes. Preserve observed2 even if child timeout; auxiliary file/hook events stay separate. Exact order checked only to validate capture.",
+    "validMeaning": "Schema/protocol+actual2 events+UID/GID/network/owned-preflight/final-cleanup validated. This is diagnostic data validity, NEVER Source qualification or Task1 PASS. Valid diagnostic can have failed OAuth or child timeout; SourceQualified andTask1Pass alwaysfalse.",
+    "returnCode": "0 only for valid bounded diagnostic capture with observed2 actual cases and custody/cleanup verified, irrespective of casepass/fail; otherwise1. WorkflowSUCCESS is diagnostic collection only."
+  },
+  "limits": {
+    "jobMinutes": 7,
+    "runnerMs": 330000,
+    "sourceChildMs": 90000,
+    "preflightMs": 10000,
+    "hostCommandMs": 30000,
+    "archiveBytes": 33554432,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "summaryBytes": 24576,
+    "caseMax": 2,
+    "auxiliaryMax": 4,
+    "custodyRecordMax": 8
+  },
+  "unchanged": "Node22.23.4, existing lock/SDK1.2.1, noSource product/test byte changes, original5schild/30srequest clocks. Exact bootstrap dependency22f324e480dbe0295fe23fb7415328cba7952b1b asData only.",
+  "authority": "Immutable DATA proposals only. Root must gate exact hashes/branch/workflow/triggers/diagnostic reader before one new diagnostic occurrence. No refs/runs authorized to author.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "record": {
+    "syntheticOnly": true,
+    "positives": 2,
+    "negatives": 36,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "api": {
+    "syntheticOnly": true,
+    "positives": 1,
+    "negatives": 18,
+    "SourceQualified": false
+  }
+}
