@@ -1,0 +1,22 @@
+{
+  "schema": "AFW-C2-FULL-C230-OWN-OBSERVATION/1",
+  "testedHead": "2f00938798e2fd5c6e3d8f5268c0827a972ca643",
+  "run": 43958585757,
+  "job": 133619605008,
+  "primary": "0dba0eb9ee2a4df511eaa48484ee2c179dfb621c",
+  "proof": "597cd2716af5bfc968020e694051f5440a5af7e8",
+  "nativePass": 370,
+  "nativeFail": 0,
+  "exactContext": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

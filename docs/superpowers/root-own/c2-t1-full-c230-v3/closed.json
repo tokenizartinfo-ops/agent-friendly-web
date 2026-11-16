@@ -1,0 +1,17 @@
+{
+  "schema": "AFW-C2-FULL-C230-OWN-CLOSE/1",
+  "testedHead": "2f00938798e2fd5c6e3d8f5268c0827a972ca643",
+  "workflowRemoved": ".github/workflows/afw-c2-full-task1-c230-own-v3.yml",
+  "action": "Remove only one-use OWN native workflow after terminal occurrence. Preserve all originals3203+unique inputs/evidence. Source full still gated; independentreviewpending.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
