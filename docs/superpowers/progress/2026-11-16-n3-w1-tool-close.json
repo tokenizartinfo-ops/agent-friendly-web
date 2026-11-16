@@ -1,0 +1,40 @@
+{
+  "schema": "AFW-N3-W1-TOOL-CLOSE-READBACK/1",
+  "head": "0240f4bcf0794b0b1d952567c5aaa7737632fdca",
+  "tree": "a77231016106405889ec5bc26f8113344e16def7",
+  "parent": "3d90069ffbb47d9919df38f9a5b7fe5789d64fd2",
+  "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1-tool",
+  "originals": 3203,
+  "leaves": 3251,
+  "workflowRemoved": true,
+  "proof": "817b6a0e98c26aa3c21bbee0df00e7d3f358cd33",
+  "reviewPending": true,
+  "verified": true,
+  "closeHeadRuns": 0,
+  "MainAndHistoricalUnchanged": true,
+  "receiptEntries": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/actual-observation.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4237813dea3c1639e0cb77e809a6b9f78d8f586"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1-tool/closed.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "82d1a6d517702cbe8f54cc8f318571cc00f2444a"
+    }
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
