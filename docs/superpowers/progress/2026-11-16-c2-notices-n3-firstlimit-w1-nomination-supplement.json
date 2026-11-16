@@ -1,0 +1,55 @@
+{
+  "schema": "AFW-N3-FIRSTLIMIT-W1-NOMINATION-SUPPLEMENT/1",
+  "atUTC": "2026-11-16 18:59:14 UTC",
+  "rootSeal": "18f7bc92ad395e87042666399e736aa4dffbe278",
+  "source": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-firstlimit-w1",
+    "message": "AFW-C2-N3-FIRSTLIMIT-W1-ONEUSE-20261116",
+    "job": "c2-notices-n3-firstlimit-w1",
+    "workflow": ".github/workflows/afw-c2-notices-n3-firstlimit-w1.yml",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/",
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/run-c2-notices-n3-firstlimit-w1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-notices-n3-firstlimit-w1/run-c2-notices-n3-firstlimit-w1.mjs",
+    "requiredSteps": [
+      "Read the exact one-use first-limit head",
+      "Use fixed Node",
+      "Install existing locked dependencies",
+      "Observe first notices QA first-limit scope",
+      "Preserve sanitized first-limit diagnostic"
+    ],
+    "commandStep": "Observe first notices QA first-limit scope"
+  },
+  "frames": {
+    "markers": [
+      "AFW_C2_NOTICES_N3_SYNTHETIC",
+      "AFW_C2_DEPENDENCY_CONTROL",
+      "AFW_C2_NOTICES_N3_CUSTODY",
+      "AFW_C2_NOTICES_N3_OUTCOME"
+    ],
+    "syntheticSchema": "afw.c2-notices-n3.synthetic.v1",
+    "dependencySchema": "afw.c2-bootstrap-dependency-control.v1",
+    "outcomeSchema": "afw.c2-notices-n3.observation.v2",
+    "custodyContextJob": "c2-notices-n3-firstlimit-w1",
+    "selectionHash": "b1bede9ac6e90116e2e71162b3c9bbc1777fcb416e9e6e1ac3d18c3911440503",
+    "caseIds": [
+      "N3_CONNECTION",
+      "N3_OAUTH",
+      "N3_PHASE",
+      "N3_NOTICES"
+    ]
+  },
+  "limits": "Same original330000/180000/120000/30000/5000ms,job7min,3custodylaunches,4cases+AFTER,2existingprobes;no newread/case/budget",
+  "selectionUnchanged": "This supplementary nominated CLI/API metadata is not inserted into sealedselection file; canonical b1bede remains. Real head/tree/run/job supplied onlyafterRootmaterialization/API.",
+  "legacy": "Keep old v1 Source/OWN files and actual receipts frozen. Source default snapshot/Causal literalcontrols may retain v1 contract in separate mode/module; v2 LIVE probe/journal/summary fullreplay muststrictlyreject genericCAP_PRIVATE andlegacySameGap. Do not normalizeoldactualdata into v2.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
