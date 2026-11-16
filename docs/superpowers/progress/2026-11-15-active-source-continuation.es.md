@@ -92,11 +92,19 @@ Re-review metodológico terminado4407b6a936cf2320bd3581e416bcb3aeee4eb63b, spec/
 
 ### ACTIVO protocolo fix1/5 + observador green
 
-Root aceptó dos hallazgos en ruling5e0aace992d3b64a755daaba5c898ef895f4e4ca; brief0ddd62ffa45b595b6790d789adcf2e8318c789c0. Autor /root/c2_source_v2_protocol_impl (Astra/high) resume: Source-side exactkeys por arrays/longitud, jerarquía de contadores en20 y niveles green1/2/3 enprimeros17, pruebas sintéticas negativas previas. No cambia13f9, clocks/caps ni reglas20/20/11. Receptor Root se corregirá por autor independiente después, sin implementaciones paralelas.
+Root aceptó dos hallazgos en ruling5e0aace992d3b64a755daaba5c898ef895f4e4ca; brief0ddd62ffa45b595b6790d789adcf2e8318c789c0. Autor /root/c2_source_v2_protocol_impl (Astra/high) terminó DATA: Source-side exactkeys por arrays/longitud, jerarquía de contadores en20 y niveles green1/2/3 enprimeros17, pruebas sintéticas negativas previas. No cambia13f9, clocks/caps ni reglas20/20/11. Receptor Root se corregirá por autor independiente después, sin implementaciones paralelas.
 
 Nuevo diagnóstico SOLOgreen20 íntegro: rama nominada lab/afw-c2-source-20261116-t1-green-diag1; WF .github/workflows/afw-c2-green-diag1.yml/jobc2-green-diag1; oneuseAFW-C2-SOURCE-T1-GREEN-DIAG1-ONEUSE-20261116. DATA pendiente, sin ref/run. Driver observador separado preservará work/awaits/orden/errores deS07, journal propio<=32768B/128records con entradas/salidas/throws action,counter,after+elapsed/seq y cursor/parcial honesto antes de cleanup incluso timeout. Sin rawTAP/privados/extraacciones. Mismoscaps330s/180s/120s/7min, custodia3launches preflight+ENOENT+green. NuncaSourcePASS por ese diagnóstico. ProtocoloSourcev2-fix1 futuroDATA separado, no próximoensayo.
 
 Round1/5 pendiente pruebas cloud y re-review:0 addressed verificados/2open. No ejecutar nueva cualificación ni cambiar producto por hipótesis. Root preserva cierre previo y seguirá con receptor independiente/gate/diagnóstico al recibirpaquetes.
+
+### Paquetes fix1 y observador terminados; receptor independiente ACTIVO
+
+Source-side fix1f1d03b381242d0814e4632ceec990fa0fdd39820; observador87ff7ee8c613b02fe04d2d8b6e01e9fee09c610e; reportlineage5de66bbff48b3b104637aa5953c3ca99b2ba2580; reversibles6d4c495917aa85d8e889cdcb55be1866ed2ded99/32882e9f3e4f10157cefcd626669bb687bafe11c. Root FULL read actual observer driver/recorder/reader/runner/contract/schema/WF and changed Source parser/selftests/runner-delta; hashes de17unique cuerpos verificados como DATA en RAM. Sufijo completo20workbodies+orden+awaits idénticoS07;13índice/cuerpos frozen sin cambio. PruebasSource/controlesProducer NO ejecutados, nuevosrefs/runs NO creados.
+
+Nuevo parsercac11bfac3c19397c5074a7c52767c4990a48a87, vectorsd8cdb6f14f0c4dcd9101e2af76deeefde3862b9f/hashc630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402, controles esperados3accepted/35rejected. GREENprogressvectors32777d8b2d5676688d4bf7546bf6bb8ed296e3b4/hash71c979c34d8a9fc8fcce7e99463ca0479160b32620517e69849021715c21570b,13checks; ejecutarse cloud primero. Observador:driver9e29c5197207b03bdb4b10069089f37df289e88c,recorder e12bfc1c6734767c3eabb10c6d57d8ff5d1de1c3,reader62a31e3c16cc710c84ebfb5b0242abb00671363c,runner069e1ccb580bf06ea52b2b268441c1b540256841,WF0ba8e013e2ddbecefebc9a25fd51e49df16271fd,contracta8b63e6c5e4bb38009bddc48633cfa7af78fa776,schema552301a29267a19d8a6b57fd0e1d105286d859d3. Mount29adiciones;3launches. FuturoSourcefix1 NO es próximo run.
+
+ACTIVO independiente OWN /root/c2_v2_own_receiver_fix1, gpt-6.1-sol/high, fresh/forknone perSDD; brief12f3bd62b232a223d621450d8d9e9b19ed8baa3f. Corrige recepción Root arraykeys y consumidor de observador/API/journal/custodia; solo OWN pure RAM synthetic tests, jamásProducer/Source local. AutorSourceidle, único implementadoractivo. Root propiosRED0f6f2102715a55547ca18702727d2eb4d54a4325 confirman ambosalias aceptadospre-fix; no datoSource realmalformado. Root gate/ejecución/artefacto/revisión quedan pendientes.
 
 ## Orden restante
 
