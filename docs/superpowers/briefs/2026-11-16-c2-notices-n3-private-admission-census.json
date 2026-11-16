@@ -1,0 +1,94 @@
+{
+  "schema": "AFW-N3-PRIVATE-ADMISSION-CENSUS-ROOT-RULING/1",
+  "atUTC": "2026-11-16 18:06:29 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "decision": "Authorize a tooling-only bounded reproduction/census on the unchanged reviewed ledger and original callback helpers before any observer repair or new business capture.",
+  "evidence": {
+    "sourceDiagnosis": "dee8b1f943b0ef9e4cb16e6e78ea392090fca5ea",
+    "independentReview": "3045f1e9396e725be555aaa95f2d08830f6ec37b",
+    "actualPrimary": "4a265bf7f9fc1d066fb29134ce3f1f0715084ff9",
+    "actualOutcome": "a3b2adb1fac282bef3b03bc310f3f1baf9ae1164",
+    "actualClose": "0638c9c5634c36b60835c12eb9153af4297d183e"
+  },
+  "facts": "CAP_PRIVATE/eligible0 implies no registeredeligible scope; event/error/sequence/metadata/cut and actualhookpromise64 excluded. Actual root16 vs combinedlease+gap128 remainsunknown. Static gap promotion at128 checks admission before consuming SAME ref gap, although netoccupancy0. This is not proven business503 cause.",
+  "result": "Immutable test-first workload vectors, unchangedledger/native tool47candidate controls and sane census proof, no implementation repair.",
+  "writer": "Original Source author may write only the new isolated test/control/runner/proof DATA. Reviewed ledgerd9d3 andcompiler94e30 stay byte-identical.",
+  "scope": {
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "originals": 3203,
+    "normal13Frozen": true,
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "oldControlsPacket": "e1f1b666726b2eb433d4d2d96f7266ca0c951308",
+    "sourceAReview": "a55a56441c81057f369a871e8891794d22ff8064"
+  },
+  "controls": [
+    {
+      "id": "N3_CENSUS_ROOT17",
+      "expected": "Actual original requestLease callbacks produce16 distinct nevereligible rootcontexts plus intended17; oldledger emits CAP_PRIVATE/eligible0; exactinputcount known from actual distinctrefs."
+    },
+    {
+      "id": "N3_CENSUS_IDENTITY129",
+      "expected": "One knownroot plus distinct original factory otherpair clocks and foldedunresolved anchors attain128; genuinelynew129th refuses. Capture literalcounts, not oneallocation percallback."
+    },
+    {
+      "id": "N3_CENSUS_GAP_PROMOTION_AT128",
+      "expected": "Same actual reference promoted gap→lease when aggregate128 reproduces oldrejection; persist desiredfuture no-net-increase assertion as RED, do not patchledger. Parent/role/otherroot ambiguity cases retained."
+    },
+    {
+      "id": "N3_CENSUS_PROBE_BEFORE_ELIGIBLE",
+      "expected": "Existing snapshot on zeroeligible prefix returns beforecut and doesnotreset/fix globalpools; do not claim it wasempty inactualC."
+    },
+    {
+      "id": "N3_CENSUS_FRESH_GET_POST_BOUNDS",
+      "expected": "A bounded actualclock/root callback graph representing fresh noticesGET+POST mayfit in a genuinelyfresh ledger under samecaps; honestcontrol only, not evidence that any reset/epoch implementation is safe or authorized."
+    },
+    {
+      "id": "N3_CENSUS_REPEAT_AND_HONEST_CAP",
+      "expected": "Originalduplicate retain/settlement,logical/targetaxes, conflictingrefs and actualcap behavior preserved; no inventedbusiness success/Scope eligibility."
+    }
+  ],
+  "selection": "Keep all41 old N3.A IDs/order as prefix; append these6=47 exactuniqueIDs. If control feasibility requires another finitecount explain BEFORE gate, do not invent actual source-world census from models.",
+  "testFirst": "Vectors immutable before new control implementation; exactoriginal helper transformedbodies+full before/after/reversible DATA; ordinary Root native41 method. No Source eval/import/compile/syntax/tests locally, only GitDATA/hashes; new actualtooling runs only Root.",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-cap-census",
+    "message": "AFW-C2-N3-CAP-CENSUS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-cap-census.yml",
+    "job": "c2-notices-n3-cap-census",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/",
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+    "node": "22.23.4",
+    "attempt": 1,
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "contents": "read",
+    "artifactDays": 7
+  },
+  "deliver": "Packet/index/paths+mode+BASEabsence/bytes/SHA/GitSHA/FULLreadback, exactexpected47IDs/proofschema, all code beforeimages/diffs/reversibles/report. Root alone tree/commit/branch/run/capture/close. Reuse verified immutable bodies/hashes, no baseline3203 rereads.",
+  "notAuthorized": [
+    "ledger orcompiler repair",
+    "epoch/reset protocolchange",
+    "scope/identitycapincrease",
+    "new wire export/receiverchange",
+    "new business capture/world/request/probe",
+    "new callbacks/reactions/clockread/header/Mbridge",
+    "Source13/product/Task2",
+    "refs/runs by author"
+  ],
+  "future": "Root will compare census with read-only reports, then seal a minimal private-admission repair if justified. The first3 N3.A repair rounds remain preserved; any next observer implementation repair is Sourcefix-loop round4/5 and requires a fresh higher-capability writer per skill, not a reset of that loop. This census does not patch observer code or qualify it.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
