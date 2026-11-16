@@ -1,0 +1,68 @@
+{
+  "schema": "afw.c2-notices-n3.root-b1-abort-fix1-static.v1",
+  "atUTC": "2026-11-16 14:56:36 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": "Immutable DATA integrity and textual reversibility only; native and final review pending",
+  "index": "deb142e172bbb183b60ed5ce489fca538885afa2",
+  "reader": "c6d67df47fa9c7b30c854133744e463bf5242330",
+  "report": "015a46acf6b767d485957c80d2db208870aeea50",
+  "matrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+  "oldB1": "5fb38b6b85c94aace6ffbabc5ba20beffbf810c2",
+  "rootHashVerification": {
+    "files": 16,
+    "totalBytes": 3388025,
+    "allByteSHA256GitSHAExact": true,
+    "oldImmutableBodiesReused": 6
+  },
+  "rootTextChecks": {
+    "checks": [
+      {
+        "role": "Narrow reader matrix correction",
+        "hunks": 1,
+        "forwardExact": true,
+        "reverseExact": true,
+        "beforeCacheExact": true
+      },
+      {
+        "role": "OWN aggregate adds matrix corpus to preserved B1 groups",
+        "hunks": 1,
+        "forwardExact": true,
+        "reverseExact": true,
+        "beforeCacheExact": true
+      }
+    ],
+    "corpusChanges": [
+      {
+        "group": "positives",
+        "id": "NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE",
+        "at": 29
+      }
+    ],
+    "resultCount": 332,
+    "uniqueIds": 332
+  },
+  "reportedOwnRAM": {
+    "passed": 332,
+    "unique": 332,
+    "transportSetups": 132,
+    "meaning": "Author OWN RAM output only; no actual native module import graph yet"
+  },
+  "pending": [
+    "Source final helper/transforms and callback capacity preflight",
+    "Final outer N3 envelope/manifest for OWN B2",
+    "Actual native module graphs and independent scoped reviews before Source capture"
+  ],
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

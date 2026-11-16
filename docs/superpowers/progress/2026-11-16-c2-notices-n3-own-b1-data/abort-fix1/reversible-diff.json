@@ -1,0 +1,723 @@
+{
+  "schema": "afw.c2-notices-n3.own-abort-fix1-reversible.v1",
+  "matrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+  "beforeIndex": "5fb38b6b85c94aace6ffbabc5ba20beffbf810c2",
+  "units": "UTF16 half-open text offsets, LF preserved",
+  "newPaths": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-reader.mjs",
+      "blob": "c6d67df47fa9c7b30c854133744e463bf5242330",
+      "bytes": 18894,
+      "sha256": "905f2270405129abeae78955ca1550184402a9eb99522c322ac2ab8a00a04e77",
+      "gitBlob": "c6d67df47fa9c7b30c854133744e463bf5242330",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-controls.mjs",
+      "blob": "5a9f631e9e2a9be395d98224ee54f584e3b4017b",
+      "bytes": 8288,
+      "sha256": "1b96f48f11736471f40c586d1d0a400f57c8227bc580dc320c32b200fc9d66fa",
+      "gitBlob": "5a9f631e9e2a9be395d98224ee54f584e3b4017b",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-vectors.json",
+      "blob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "bytes": 673148,
+      "sha256": "dc602f3d129735afc9aceb9927b2448d77e135265137addb91fa7bdc7b54c068",
+      "gitBlob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/causal-schema.json",
+      "blob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "bytes": 13899,
+      "sha256": "8780c9fcdb7f90ce35af840b22f3509c69417059b7d84a7774e708324e4a26ec",
+      "gitBlob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/sealed-vectors-data.json",
+      "blob": "79ac1e8a8375bf2c210238c91f88668361a40375",
+      "bytes": 371781,
+      "sha256": "bcd46c9974b582f4be9bce9264bcdd8a19918447688c8677c07683f6aec4d4fa",
+      "gitBlob": "79ac1e8a8375bf2c210238c91f88668361a40375",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/raw-record-inputs.json",
+      "blob": "48f2cd757be9440bc7aad556828c3e9da49f760a",
+      "bytes": 88664,
+      "sha256": "d19cbfe46d03c942eb030075a35b8f0486948cab5e31c28a5be6afa8a5fd7614",
+      "gitBlob": "48f2cd757be9440bc7aad556828c3e9da49f760a",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/synthetic-transport.json",
+      "blob": "2d14f32d900bc69828def726f583add0ab7ac67b",
+      "bytes": 1595506,
+      "sha256": "2f4a642a080e1efe7076900bcc89ea40d34f6e6adb7c2d34c958cbfddcd09088",
+      "gitBlob": "2d14f32d900bc69828def726f583add0ab7ac67b",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/json-boundary-models.json",
+      "blob": "2a559ee8c15be58140fc118a0e4e738332d62ca0",
+      "bytes": 1192,
+      "sha256": "30d797eb4258776bb7eb29aba7abc940dde9bcfb6561896352bfe1212e199e9e",
+      "gitBlob": "2a559ee8c15be58140fc118a0e4e738332d62ca0",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/ruling-vectors.json",
+      "blob": "dda1ab3a5e6e7c6f09c63b192111f446ac7ecd47",
+      "bytes": 96673,
+      "sha256": "8118d3e6d6d4b1420dd22733b9409b3f06110fcbdee6a21c65d3f9a688edbb9b",
+      "gitBlob": "dda1ab3a5e6e7c6f09c63b192111f446ac7ecd47",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/ruling-transport.json",
+      "blob": "7909d8aa6c6231cbe9498aa7615e3c50764fcd25",
+      "bytes": 175253,
+      "sha256": "325f24debd11ef0b78320b17fa942269e69e7d37449ced92f8350fe48b29e80f",
+      "gitBlob": "7909d8aa6c6231cbe9498aa7615e3c50764fcd25",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/abort-vectors.json",
+      "blob": "19a8d50514e7ba0edf8352f5c51f4eaf4530b960",
+      "bytes": 192084,
+      "sha256": "fbde88f9f98e3356efc48379836696285146c3b0de00d69b447f46ad37304be5",
+      "gitBlob": "19a8d50514e7ba0edf8352f5c51f4eaf4530b960",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-results.json",
+      "blob": "9bbb1d92c3ac62a9ef54e72fb7b0d9da6dc511c3",
+      "bytes": 42075,
+      "sha256": "f4f0c86db7f5f0366f99ac120fd59c1c33c6b573685e6665fdeb14c9d96f3586",
+      "gitBlob": "9bbb1d92c3ac62a9ef54e72fb7b0d9da6dc511c3",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/abort-red.json",
+      "blob": "26992e233a8ef4a777fc8cae66ed7945a960be41",
+      "bytes": 3706,
+      "sha256": "225533388387c2e7d303d4b923d5e6d08534e1a19b81014cbf206de17dba503e",
+      "gitBlob": "26992e233a8ef4a777fc8cae66ed7945a960be41",
+      "fullReadback": true,
+      "before": null,
+      "operation": "ADD",
+      "rollback": "Omit only this new abort-fix1 path; original B1 tree/paths untouched."
+    }
+  ],
+  "codeLineage": [
+    {
+      "role": "Narrow reader matrix correction",
+      "beforeBlob": "83f5a63f0515f7eabafba9f693be5df52f15647e",
+      "beforeBytes": 18695,
+      "beforeSha256": "062b1330abca20e5582e7b5fd587329cc9aa4cc526dee799e33c49691d5fdb16",
+      "beforeFullText": "// Independent OWN N3.B1 causal core. No Source implementation import or execution.\n// Normative schema + Root9a31 ruling; full outer N3 protocol remains pending B2.\nconst ngObj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);\nconst ngKeys=(v,a)=>ngObj(v)&&Object.keys(v).length===a.length&&Object.keys(v).every((k,i)=>k===a[i]);\nconst ngInt=(v,a,b)=>Number.isSafeInteger(v)&&v>=a&&v<=b;\nconst ngSame=(a,b)=>JSON.stringify(a)===JSON.stringify(b);\nconst ngBad=()=>{throw Error('ROOT_N3_OWN_CAUSAL_REJECTED');};\n\nfunction ngSchema(value,node,document){\n if(!ngObj(node))return false;\n if(node.$ref){if(typeof node.$ref!=='string'||!node.$ref.startsWith('#/$defs/'))return false;return ngSchema(value,document.$defs[node.$ref.slice(8)],document);}\n if(Object.hasOwn(node,'const')&&!ngSame(value,node.const))return false;\n if(node.enum&&!node.enum.some(v=>ngSame(v,value)))return false;\n if(node.anyOf&&!node.anyOf.some(s=>ngSchema(value,s,document)))return false;\n if(node.oneOf&&node.oneOf.filter(s=>ngSchema(value,s,document)).length!==1)return false;\n if(node.allOf&&!node.allOf.every(s=>ngSchema(value,s,document)))return false;\n const isType=(v,t)=>t==='object'?ngObj(v):t==='array'?Array.isArray(v):t==='integer'?Number.isSafeInteger(v):t==='number'?typeof v==='number'&&Number.isFinite(v):t==='string'?typeof v==='string':t==='null'?v===null:t==='boolean'?typeof v==='boolean':false;\n if(node.type&&!(Array.isArray(node.type)?node.type.some(t=>isType(value,t)):isType(value,node.type)))return false;\n if(node.properties&&ngObj(value)){\n  const names=Object.keys(node.properties);\n  if(node.additionalProperties===false&&Object.keys(value).some(k=>!names.includes(k)))return false;\n  if(node.required&&!node.required.every(k=>Object.hasOwn(value,k)))return false;\n  if(node.required?.length===names.length&&node.additionalProperties===false&&!ngKeys(value,names))return false;\n  for(const k of names)if(Object.hasOwn(value,k)&&!ngSchema(value[k],node.properties[k],document))return false;\n }\n if(typeof value==='number'&&(node.minimum!==undefined&&value<node.minimum||node.maximum!==undefined&&value>node.maximum))return false;\n if(typeof value==='string'&&node.pattern&&!new RegExp(node.pattern).test(value))return false;\n if(Array.isArray(value)){\n  if(node.minItems!==undefined&&value.length<node.minItems||node.maxItems!==undefined&&value.length>node.maxItems)return false;\n  for(let i=0;i<value.length;i++){const rule=node.prefixItems?.[i]??node.items;if(rule===false||rule&&!ngSchema(value[i],rule,document))return false;}\n }\n return true;\n}\n\n\n\nconst N3_CAUSAL_SCHEMA={\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"$id\":\"afw.c2-notices-n3.causal-schema.v1\",\"$ref\":\"#/$defs/causalRecord\",\"$defs\":{\"snapshot\":{\"type\":\"object\",\"properties\":{\"schema\":{\"const\":\"afw.c2-notices-n3.qa-snapshot.v1\"},\"state\":{\"enum\":[\"joined\",\"unjoined\",\"ambiguous\"]},\"coverage\":{\"enum\":[\"complete\",\"prefix\",\"unknown\"]},\"reason\":{\"enum\":[\"OK\",\"NO_ELIGIBLE\",\"MULTIPLE_ELIGIBLE\",\"UNBOUND\",\"AMBIGUOUS_BINDING\",\"PREBIND_GAP\",\"CAP_PRIVATE\",\"CAP_SNAPSHOT\",\"SINK_FAULT\",\"INVALID_EVENT\",\"PROJECTION_GAP\",\"PROBE_UNAVAILABLE\",\"OUTER_LIMIT\",\"OPEN_AT_CUT\"]},\"eligible\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":16},\"target\":{\"enum\":[\"unreached\",\"entered\",\"returned\",\"threw\",\"unknown\"]},\"focus\":{\"type\":\"object\",\"properties\":{\"mode\":{\"const\":\"selected-first-target-focus\"},\"pairChild\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"selection\":{\"enum\":[\"first-check-threw\",\"first-observed\",\"none\"]}},\"required\":[\"mode\",\"pairChild\",\"selection\"],\"additionalProperties\":false},\"leases\":{\"type\":\"array\",\"maxItems\":8,\"items\":{\"type\":\"object\",\"properties\":{\"ordinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},\"role\":{\"enum\":[\"root\",\"outer\",\"activation-child\",\"target-pair\",\"pair-child\"]},\"parent\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"firstClose\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]}},\"required\":[\"ordinal\",\"role\",\"parent\",\"firstClose\"],\"additionalProperties\":false}},\"promises\":{\"type\":\"array\",\"maxItems\":4,\"items\":{\"type\":\"object\",\"properties\":{\"ordinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4},\"lease\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},\"retained\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]},\"settlement\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]}},\"required\":[\"ordinal\",\"lease\",\"retained\",\"settlement\"],\"additionalProperties\":false}},\"errors\":{\"type\":\"array\",\"maxItems\":4,\"items\":{\"type\":\"object\",\"properties\":{\"ordinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4},\"first\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096}},\"required\":[\"ordinal\",\"first\"],\"additionalProperties\":false}},\"events\":{\"type\":\"array\",\"maxItems\":24,\"items\":{\"type\":\"object\",\"properties\":{\"sequence\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},\"kind\":{\"enum\":[\"scope-enter\",\"target-enter\",\"pair-enter\",\"check-threw\",\"target-return\",\"target-throw\",\"logical-return\",\"logical-throw\",\"abort-observed\",\"close-call\",\"closed-transition\",\"child-finally\",\"retained\",\"settlement-observed\",\"snapshot-cut\"]},\"site\":{\"enum\":[\"choice-admitted\",\"postreceipt-check\",\"target-pair\",\"initial-holders\",\"initial-child\",\"initial-retain\",\"initial-settled\",\"initial-close\",\"initial-stop\",\"initial-child-finally\",\"root-abort\",\"root-finish\",\"pair-parent-abort\",\"pair-finally\",\"outer-parent-abort\",\"choice-catch\",\"choice-return\",\"snapshot\"]},\"lease\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"promise\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4},{\"type\":\"null\"}]},\"error\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"present\":{\"const\":false},\"kind\":{\"const\":\"none\"},\"errorOrdinal\":{\"const\":null}},\"required\":[\"present\",\"kind\",\"errorOrdinal\"],\"additionalProperties\":false},{\"type\":\"object\",\"properties\":{\"present\":{\"const\":true},\"kind\":{\"const\":\"primitive\"},\"errorOrdinal\":{\"const\":null}},\"required\":[\"present\",\"kind\",\"errorOrdinal\"],\"additionalProperties\":false},{\"type\":\"object\",\"properties\":{\"present\":{\"const\":true},\"kind\":{\"const\":\"object\"},\"errorOrdinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4}},\"required\":[\"present\",\"kind\",\"errorOrdinal\"],\"additionalProperties\":false}]},\"cause\":{\"enum\":[null,\"explicit-finish\",\"parent-abort\",\"finally\",\"unknown\"]}},\"required\":[\"sequence\",\"kind\",\"site\",\"lease\",\"promise\",\"error\",\"cause\"],\"additionalProperties\":false}},\"firstError\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]},\"cut\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]}},\"required\":[\"schema\",\"state\",\"coverage\",\"reason\",\"eligible\",\"target\",\"focus\",\"leases\",\"promises\",\"errors\",\"events\",\"firstError\",\"cut\"],\"additionalProperties\":false},\"causalRecord\":{\"type\":\"object\",\"properties\":{\"sequence\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":128},\"elapsedMs\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":180000},\"kind\":{\"const\":\"causal\"},\"schema\":{\"const\":\"afw.c2-notices-n3.causal-record.v1\"},\"snapshot\":{\"$ref\":\"#/$defs/snapshot\"}},\"required\":[\"sequence\",\"elapsedMs\",\"kind\",\"schema\",\"snapshot\"],\"additionalProperties\":false},\"summary\":{\"type\":\"object\",\"properties\":{\"state\":{\"enum\":[\"joined\",\"unjoined\",\"ambiguous\"]},\"coverage\":{\"enum\":[\"complete\",\"prefix\",\"unknown\"]},\"reason\":{\"enum\":[\"OK\",\"NO_ELIGIBLE\",\"MULTIPLE_ELIGIBLE\",\"UNBOUND\",\"AMBIGUOUS_BINDING\",\"PREBIND_GAP\",\"CAP_PRIVATE\",\"CAP_SNAPSHOT\",\"SINK_FAULT\",\"INVALID_EVENT\",\"PROJECTION_GAP\",\"PROBE_UNAVAILABLE\",\"OUTER_LIMIT\",\"OPEN_AT_CUT\"]},\"target\":{\"enum\":[\"unreached\",\"entered\",\"returned\",\"threw\",\"unknown\"]},\"firstError\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]},\"focusChild\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"events\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":24},\"settlementsObserved\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":4},\"interpretation\":{\"const\":\"unknown\"}},\"required\":[\"state\",\"coverage\",\"reason\",\"target\",\"firstError\",\"focusChild\",\"events\",\"settlementsObserved\",\"interpretation\"],\"additionalProperties\":false}},\"$comment\":\"Canonical order and source contract FSM required in addition to JSON shape. Record6144UTF8 bytes includes envelope+LF. One snapshot only; never crosssnapshot join.\"};\n\n// Original independent OWN causal FSM. Sealed schema is DATA; no Source implementation imported.\nfunction n3JsonData(value,seen=new Set(),depth=0){\n if(value===null||typeof value==='string'||typeof value==='boolean')return true;\n if(typeof value==='number')return Number.isFinite(value)&&!Object.is(value,-0);\n if(typeof value!=='object'||depth>12||seen.has(value)||Object.getOwnPropertySymbols(value).length)return false;\n for(let p=value;p!==null;p=Object.getPrototypeOf(p))if(Object.getOwnPropertyDescriptor(p,'toJSON')!==undefined)return false;\n const array=Array.isArray(value);if(!array){const proto=Object.getPrototypeOf(value);if(proto!==null&&(Object.getPrototypeOf(proto)!==null||Object.getOwnPropertyDescriptor(proto,'toJSON')!==undefined))return false;}\n const descriptors=Object.getOwnPropertyDescriptors(value),keys=Object.keys(value);\n if(array){if(Object.keys(descriptors).length!==keys.length+1||keys.length!==value.length||keys.some((k,i)=>k!==String(i)))return false;}\n else if(Object.keys(descriptors).length!==keys.length)return false;\n seen.add(value);\n for(const k of keys){const d=descriptors[k];if(!d||!Object.hasOwn(d,'value')||!d.enumerable||!n3JsonData(d.value,seen,depth+1))return false;}\n seen.delete(value);return true;\n}\nfunction n3TraceSummary(s){return {state:s.state,coverage:s.coverage,reason:s.reason,target:s.target,firstError:s.firstError,focusChild:s.focus.pairChild,events:s.events.length,settlementsObserved:s.promises.filter(p=>p.settlement!==null).length,interpretation:'unknown'};}\nfunction n3TraceReplay(s){\n if(!n3JsonData(s)||!ngSchema(s,N3_CAUSAL_SCHEMA.$defs.snapshot,N3_CAUSAL_SCHEMA)||Buffer.byteLength(JSON.stringify(s),'utf8')>6144)ngBad();\n const empty=s.leases.length===0&&s.promises.length===0&&s.errors.length===0&&s.events.length===0&&s.firstError===null&&s.cut===null&&s.target==='unknown'&&s.focus.pairChild===null&&s.focus.selection==='none';\n if(s.state!=='joined'){\n  if(s.coverage!=='unknown'||!empty)ngBad();\n  if(s.eligible>1){if(s.state!=='ambiguous'||s.reason!=='MULTIPLE_ELIGIBLE')ngBad();}\n  else if(s.state==='ambiguous'){if(s.eligible!==1||s.reason!=='AMBIGUOUS_BINDING')ngBad();}\n  else if(s.reason==='NO_ELIGIBLE'){if(s.eligible!==0)ngBad();}\n  else if(!['UNBOUND','PREBIND_GAP','CAP_PRIVATE','CAP_SNAPSHOT','SINK_FAULT','INVALID_EVENT','PROJECTION_GAP','PROBE_UNAVAILABLE','OUTER_LIMIT'].includes(s.reason))ngBad();\n  return n3TraceSummary(s);\n }\n if(s.eligible!==1||s.coverage==='unknown'||s.target==='unknown')ngBad();\n if(s.coverage==='complete'){if(s.reason!=='OK'||s.target==='entered')ngBad();}\n else if(!['PREBIND_GAP','PROJECTION_GAP','UNBOUND','OPEN_AT_CUT'].includes(s.reason)||s.reason==='OPEN_AT_CUT'&&s.target!=='entered')ngBad();\n for(const table of [s.leases,s.promises,s.errors])if(table.some((r,i)=>r.ordinal!==i+1))ngBad();\n const lease=n=>s.leases[n-1],promise=n=>s.promises[n-1],roles=new Map();\n for(const l of s.leases){const list=roles.get(l.role)??[];list.push(l);roles.set(l.role,list);}\n if((roles.get('root')?.length??0)!==1||(roles.get('outer')?.length??0)!==1||['activation-child','target-pair','pair-child'].some(r=>(roles.get(r)?.length??0)>1))ngBad();\n const one=r=>roles.get(r)?.[0]??null,root=one('root'),outer=one('outer'),activation=one('activation-child'),pair=one('target-pair');\n for(const l of s.leases){\n  const expected=l.role==='root'?null:l.role==='outer'||l.role==='target-pair'?root.ordinal:l.role==='activation-child'?outer.ordinal:pair?.ordinal;\n  if(l.parent!==expected||['activation-child','pair-child'].includes(l.role)&&l.firstClose!==null)ngBad();\n }\n if(s.focus.pairChild===null){if(s.focus.selection!=='none'||(roles.get('pair-child')?.length??0)>0)ngBad();}\n else if(!lease(s.focus.pairChild)||lease(s.focus.pairChild).role!=='pair-child'||s.focus.selection==='none')ngBad();\n for(const p of s.promises)if(!lease(p.lease)||!['activation-child','target-pair','pair-child'].includes(lease(p.lease).role))ngBad();\n let last=0,target='unreached',pairSeen=false,scopeSeen=false,logicalSeen=false,firstError=null,cutSeen=false;\n const closeCalls=new Map(),closed=new Map(),retained=new Map(),settled=new Map(),errorFirst=new Map(),childFinal=new Set(),pairChecks=[];\n const role=n=>n===null?null:lease(n)?.role;\n const plain=(e,hasError=false)=>{if(e.error.present!==hasError||hasError===false&&e.error.kind!=='none')ngBad();};\n for(const e of s.events){\n  if(e.sequence<=last||cutSeen||e.lease!==null&&!lease(e.lease)||e.promise!==null&&!promise(e.promise))ngBad();last=e.sequence;\n  const r=role(e.lease),requireRole=(...allowed)=>{if(!allowed.includes(r))ngBad();},requireSite=site=>{if(e.site!==site)ngBad();};\n  if(e.error.present){if(firstError===null)firstError=e.sequence;if(e.error.kind==='object'){if(!s.errors[e.error.errorOrdinal-1])ngBad();if(!errorFirst.has(e.error.errorOrdinal))errorFirst.set(e.error.errorOrdinal,e.sequence);}}\n  if(!['retained','settlement-observed'].includes(e.kind)&&e.promise!==null)ngBad();\n  if(!['abort-observed','close-call','closed-transition','child-finally'].includes(e.kind)&&e.cause!==null)ngBad();\n  switch(e.kind){\n   case 'scope-enter':\n    requireSite('choice-admitted');requireRole('root');plain(e);if(scopeSeen||e!==s.events[0])ngBad();scopeSeen=true;break;\n   case 'target-enter':\n    requireSite('postreceipt-check');requireRole('activation-child');plain(e);if(!scopeSeen||target!=='unreached'||logicalSeen)ngBad();target='entered';break;\n   case 'pair-enter':\n    requireSite('target-pair');requireRole(null,'target-pair');plain(e);if(target!=='entered'||pairSeen||logicalSeen||e.lease===null&&!(s.coverage==='prefix'&&['UNBOUND','PREBIND_GAP','PROJECTION_GAP'].includes(s.reason)))ngBad();pairSeen=true;break;\n   case 'target-return':case 'target-throw':\n    requireSite('postreceipt-check');requireRole('activation-child');plain(e,e.kind==='target-throw');if(target!=='entered'||logicalSeen)ngBad();if(e.kind==='target-return'&&!pairSeen)ngBad();target=e.kind==='target-return'?'returned':'threw';break;\n   case 'check-threw':\n    plain(e,true);if(!scopeSeen||!['initial-holders','initial-child'].includes(e.site))ngBad();\n    if(e.site==='initial-child')requireRole(null,'activation-child','pair-child');else requireRole(null,'outer','target-pair');\n    if(r==='pair-child')pairChecks.push(e);break;\n   case 'logical-return':case 'logical-throw':\n    requireSite(e.kind==='logical-return'?'choice-return':'choice-catch');requireRole('outer');plain(e,e.kind==='logical-throw');if(!scopeSeen||logicalSeen||target==='entered')ngBad();logicalSeen=true;break;\n   case 'retained':case 'settlement-observed':{\n    requireSite(e.kind==='retained'?'initial-retain':'initial-settled');plain(e);\n    const p=promise(e.promise);if(!p||p.lease!==e.lease)ngBad();\n    const table=e.kind==='retained'?retained:settled;if(table.has(p.ordinal))ngBad();\n    if(e.kind==='settlement-observed'&&(!retained.has(p.ordinal)||retained.get(p.ordinal)>=e.sequence))ngBad();table.set(p.ordinal,e.sequence);break;\n   }\n   case 'close-call':\n    plain(e);\n    if(e.site==='root-finish'){requireRole('root');if(e.cause!=='explicit-finish')ngBad();}\n    else if(e.site==='initial-close'){requireRole('outer','target-pair');if(e.cause!=='unknown')ngBad();}\n    else if(e.site==='outer-parent-abort'){requireRole('outer');if(e.cause!=='parent-abort')ngBad();}\n    else if(e.site==='pair-parent-abort'){requireRole('target-pair');if(e.cause!=='parent-abort')ngBad();}\n    else if(e.site==='pair-finally'){requireRole('target-pair');if(e.cause!=='finally')ngBad();}else ngBad();\n    if(e.site==='initial-close'||e.site==='root-finish')closeCalls.set(e.lease,e.sequence);break;\n   case 'closed-transition':\n    plain(e);if(e.site==='root-finish'){requireRole('root');if(e.cause!=='explicit-finish')ngBad();}\n    else if(e.site==='initial-close'){requireRole('outer','target-pair');if(e.cause!=='unknown')ngBad();}else ngBad();\n    if(closed.has(e.lease)||!closeCalls.has(e.lease)||closeCalls.get(e.lease)>=e.sequence)ngBad();closed.set(e.lease,e.sequence);break;\n   case 'abort-observed':\n    plain(e);if(e.site==='root-finish'){requireRole('root');if(e.cause!=='explicit-finish')ngBad();}\n    else if(e.site==='root-abort'){requireRole('root');if(e.cause!=='unknown')ngBad();}\n    else if(e.site==='initial-stop'){requireRole('outer','target-pair');if(e.cause!=='unknown')ngBad();}else ngBad();break;\n   case 'child-finally':\n    requireSite('initial-child-finally');requireRole('activation-child','pair-child');plain(e);if(e.cause!=='finally'||childFinal.has(e.lease))ngBad();childFinal.add(e.lease);break;\n   case 'snapshot-cut':\n    requireSite('snapshot');requireRole('root');plain(e);if(!scopeSeen||e!==s.events.at(-1)||e.sequence!==s.cut)ngBad();cutSeen=true;break;\n   default:ngBad();\n  }\n }\n if(!scopeSeen||!cutSeen||s.target!==target||s.firstError!==firstError||pairSeen&&!pair&&!(s.coverage==='prefix'&&['UNBOUND','PREBIND_GAP','PROJECTION_GAP'].includes(s.reason))||!pairSeen&&s.coverage==='complete'&&pair)ngBad();\n for(const l of s.leases)if(l.firstClose!==(closed.get(l.ordinal)??null))ngBad();\n for(const p of s.promises)if(p.retained!==(retained.get(p.ordinal)??null)||p.settlement!==(settled.get(p.ordinal)??null))ngBad();\n for(const e of s.errors)if(e.first!==errorFirst.get(e.ordinal))ngBad();\n if(s.focus.selection==='first-check-threw'){\n  if(!pairChecks.length||pairChecks[0].lease!==s.focus.pairChild)ngBad();\n }else if(s.focus.selection==='first-observed'){\n  if(pairChecks.length||s.events.find(e=>role(e.lease)==='pair-child')?.lease!==s.focus.pairChild)ngBad();\n }\n if(s.coverage==='complete'){\n  if(target!=='unreached'&&!activation)ngBad();\n  if(pairSeen&&(!pair||pair.firstClose===null||!s.promises.some(p=>p.lease===pair.ordinal&&p.retained!==null&&p.settlement!==null&&pair.firstClose<p.settlement)))ngBad();\n }\n return n3TraceSummary(s);\n}\nfunction n3CausalReplay(record){\n let value=record;\n if(typeof record==='string'||Buffer.isBuffer(record)){\n  const bytes=typeof record==='string'?Buffer.from(record,'utf8'):record;if(bytes.length>6144)ngBad();\n  let text;try{text=new TextDecoder('utf-8',{fatal:true}).decode(bytes);}catch{ngBad();}\n  if(!text.endsWith('\\n'))ngBad();try{value=JSON.parse(text.slice(0,-1));}catch{ngBad();}\n  if(JSON.stringify(value)+'\\n'!==text)ngBad();\n }\n if(!n3JsonData(value)||!ngSchema(value,N3_CAUSAL_SCHEMA,N3_CAUSAL_SCHEMA)||Buffer.byteLength(JSON.stringify(value)+'\\n','utf8')>6144)ngBad();\n return n3TraceReplay(value.snapshot);\n}\n\nexport {n3TraceReplay,n3CausalReplay};\n",
+      "after": {
+        "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-reader.mjs",
+        "blob": "c6d67df47fa9c7b30c854133744e463bf5242330",
+        "bytes": 18894,
+        "sha256": "905f2270405129abeae78955ca1550184402a9eb99522c322ac2ab8a00a04e77",
+        "gitBlob": "c6d67df47fa9c7b30c854133744e463bf5242330",
+        "fullReadback": true,
+        "before": null
+      },
+      "hunks": [
+        {
+          "start": 87,
+          "beforeEnd": 16537,
+          "afterEnd": 16736,
+          "removed": "Normative schema + Root9a31 ruling; full outer N3 protocol remains pending B2.\nconst ngObj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);\nconst ngKeys=(v,a)=>ngObj(v)&&Object.keys(v).length===a.length&&Object.keys(v).every((k,i)=>k===a[i]);\nconst ngInt=(v,a,b)=>Number.isSafeInteger(v)&&v>=a&&v<=b;\nconst ngSame=(a,b)=>JSON.stringify(a)===JSON.stringify(b);\nconst ngBad=()=>{throw Error('ROOT_N3_OWN_CAUSAL_REJECTED');};\n\nfunction ngSchema(value,node,document){\n if(!ngObj(node))return false;\n if(node.$ref){if(typeof node.$ref!=='string'||!node.$ref.startsWith('#/$defs/'))return false;return ngSchema(value,document.$defs[node.$ref.slice(8)],document);}\n if(Object.hasOwn(node,'const')&&!ngSame(value,node.const))return false;\n if(node.enum&&!node.enum.some(v=>ngSame(v,value)))return false;\n if(node.anyOf&&!node.anyOf.some(s=>ngSchema(value,s,document)))return false;\n if(node.oneOf&&node.oneOf.filter(s=>ngSchema(value,s,document)).length!==1)return false;\n if(node.allOf&&!node.allOf.every(s=>ngSchema(value,s,document)))return false;\n const isType=(v,t)=>t==='object'?ngObj(v):t==='array'?Array.isArray(v):t==='integer'?Number.isSafeInteger(v):t==='number'?typeof v==='number'&&Number.isFinite(v):t==='string'?typeof v==='string':t==='null'?v===null:t==='boolean'?typeof v==='boolean':false;\n if(node.type&&!(Array.isArray(node.type)?node.type.some(t=>isType(value,t)):isType(value,node.type)))return false;\n if(node.properties&&ngObj(value)){\n  const names=Object.keys(node.properties);\n  if(node.additionalProperties===false&&Object.keys(value).some(k=>!names.includes(k)))return false;\n  if(node.required&&!node.required.every(k=>Object.hasOwn(value,k)))return false;\n  if(node.required?.length===names.length&&node.additionalProperties===false&&!ngKeys(value,names))return false;\n  for(const k of names)if(Object.hasOwn(value,k)&&!ngSchema(value[k],node.properties[k],document))return false;\n }\n if(typeof value==='number'&&(node.minimum!==undefined&&value<node.minimum||node.maximum!==undefined&&value>node.maximum))return false;\n if(typeof value==='string'&&node.pattern&&!new RegExp(node.pattern).test(value))return false;\n if(Array.isArray(value)){\n  if(node.minItems!==undefined&&value.length<node.minItems||node.maxItems!==undefined&&value.length>node.maxItems)return false;\n  for(let i=0;i<value.length;i++){const rule=node.prefixItems?.[i]??node.items;if(rule===false||rule&&!ngSchema(value[i],rule,document))return false;}\n }\n return true;\n}\n\n\n\nconst N3_CAUSAL_SCHEMA={\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"$id\":\"afw.c2-notices-n3.causal-schema.v1\",\"$ref\":\"#/$defs/causalRecord\",\"$defs\":{\"snapshot\":{\"type\":\"object\",\"properties\":{\"schema\":{\"const\":\"afw.c2-notices-n3.qa-snapshot.v1\"},\"state\":{\"enum\":[\"joined\",\"unjoined\",\"ambiguous\"]},\"coverage\":{\"enum\":[\"complete\",\"prefix\",\"unknown\"]},\"reason\":{\"enum\":[\"OK\",\"NO_ELIGIBLE\",\"MULTIPLE_ELIGIBLE\",\"UNBOUND\",\"AMBIGUOUS_BINDING\",\"PREBIND_GAP\",\"CAP_PRIVATE\",\"CAP_SNAPSHOT\",\"SINK_FAULT\",\"INVALID_EVENT\",\"PROJECTION_GAP\",\"PROBE_UNAVAILABLE\",\"OUTER_LIMIT\",\"OPEN_AT_CUT\"]},\"eligible\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":16},\"target\":{\"enum\":[\"unreached\",\"entered\",\"returned\",\"threw\",\"unknown\"]},\"focus\":{\"type\":\"object\",\"properties\":{\"mode\":{\"const\":\"selected-first-target-focus\"},\"pairChild\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"selection\":{\"enum\":[\"first-check-threw\",\"first-observed\",\"none\"]}},\"required\":[\"mode\",\"pairChild\",\"selection\"],\"additionalProperties\":false},\"leases\":{\"type\":\"array\",\"maxItems\":8,\"items\":{\"type\":\"object\",\"properties\":{\"ordinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},\"role\":{\"enum\":[\"root\",\"outer\",\"activation-child\",\"target-pair\",\"pair-child\"]},\"parent\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"firstClose\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]}},\"required\":[\"ordinal\",\"role\",\"parent\",\"firstClose\"],\"additionalProperties\":false}},\"promises\":{\"type\":\"array\",\"maxItems\":4,\"items\":{\"type\":\"object\",\"properties\":{\"ordinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4},\"lease\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},\"retained\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]},\"settlement\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]}},\"required\":[\"ordinal\",\"lease\",\"retained\",\"settlement\"],\"additionalProperties\":false}},\"errors\":{\"type\":\"array\",\"maxItems\":4,\"items\":{\"type\":\"object\",\"properties\":{\"ordinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4},\"first\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096}},\"required\":[\"ordinal\",\"first\"],\"additionalProperties\":false}},\"events\":{\"type\":\"array\",\"maxItems\":24,\"items\":{\"type\":\"object\",\"properties\":{\"sequence\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},\"kind\":{\"enum\":[\"scope-enter\",\"target-enter\",\"pair-enter\",\"check-threw\",\"target-return\",\"target-throw\",\"logical-return\",\"logical-throw\",\"abort-observed\",\"close-call\",\"closed-transition\",\"child-finally\",\"retained\",\"settlement-observed\",\"snapshot-cut\"]},\"site\":{\"enum\":[\"choice-admitted\",\"postreceipt-check\",\"target-pair\",\"initial-holders\",\"initial-child\",\"initial-retain\",\"initial-settled\",\"initial-close\",\"initial-stop\",\"initial-child-finally\",\"root-abort\",\"root-finish\",\"pair-parent-abort\",\"pair-finally\",\"outer-parent-abort\",\"choice-catch\",\"choice-return\",\"snapshot\"]},\"lease\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"promise\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4},{\"type\":\"null\"}]},\"error\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"present\":{\"const\":false},\"kind\":{\"const\":\"none\"},\"errorOrdinal\":{\"const\":null}},\"required\":[\"present\",\"kind\",\"errorOrdinal\"],\"additionalProperties\":false},{\"type\":\"object\",\"properties\":{\"present\":{\"const\":true},\"kind\":{\"const\":\"primitive\"},\"errorOrdinal\":{\"const\":null}},\"required\":[\"present\",\"kind\",\"errorOrdinal\"],\"additionalProperties\":false},{\"type\":\"object\",\"properties\":{\"present\":{\"const\":true},\"kind\":{\"const\":\"object\"},\"errorOrdinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4}},\"required\":[\"present\",\"kind\",\"errorOrdinal\"],\"additionalProperties\":false}]},\"cause\":{\"enum\":[null,\"explicit-finish\",\"parent-abort\",\"finally\",\"unknown\"]}},\"required\":[\"sequence\",\"kind\",\"site\",\"lease\",\"promise\",\"error\",\"cause\"],\"additionalProperties\":false}},\"firstError\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]},\"cut\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]}},\"required\":[\"schema\",\"state\",\"coverage\",\"reason\",\"eligible\",\"target\",\"focus\",\"leases\",\"promises\",\"errors\",\"events\",\"firstError\",\"cut\"],\"additionalProperties\":false},\"causalRecord\":{\"type\":\"object\",\"properties\":{\"sequence\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":128},\"elapsedMs\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":180000},\"kind\":{\"const\":\"causal\"},\"schema\":{\"const\":\"afw.c2-notices-n3.causal-record.v1\"},\"snapshot\":{\"$ref\":\"#/$defs/snapshot\"}},\"required\":[\"sequence\",\"elapsedMs\",\"kind\",\"schema\",\"snapshot\"],\"additionalProperties\":false},\"summary\":{\"type\":\"object\",\"properties\":{\"state\":{\"enum\":[\"joined\",\"unjoined\",\"ambiguous\"]},\"coverage\":{\"enum\":[\"complete\",\"prefix\",\"unknown\"]},\"reason\":{\"enum\":[\"OK\",\"NO_ELIGIBLE\",\"MULTIPLE_ELIGIBLE\",\"UNBOUND\",\"AMBIGUOUS_BINDING\",\"PREBIND_GAP\",\"CAP_PRIVATE\",\"CAP_SNAPSHOT\",\"SINK_FAULT\",\"INVALID_EVENT\",\"PROJECTION_GAP\",\"PROBE_UNAVAILABLE\",\"OUTER_LIMIT\",\"OPEN_AT_CUT\"]},\"target\":{\"enum\":[\"unreached\",\"entered\",\"returned\",\"threw\",\"unknown\"]},\"firstError\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]},\"focusChild\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"events\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":24},\"settlementsObserved\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":4},\"interpretation\":{\"const\":\"unknown\"}},\"required\":[\"state\",\"coverage\",\"reason\",\"target\",\"firstError\",\"focusChild\",\"events\",\"settlementsObserved\",\"interpretation\"],\"additionalProperties\":false}},\"$comment\":\"Canonical order and source contract FSM required in addition to JSON shape. Record6144UTF8 bytes includes envelope+LF. One snapshot only; never crosssnapshot join.\"};\n\n// Original independent OWN causal FSM. Sealed schema is DATA; no Source implementation imported.\nfunction n3JsonData(value,seen=new Set(),depth=0){\n if(value===null||typeof value==='string'||typeof value==='boolean')return true;\n if(typeof value==='number')return Number.isFinite(value)&&!Object.is(value,-0);\n if(typeof value!=='object'||depth>12||seen.has(value)||Object.getOwnPropertySymbols(value).length)return false;\n for(let p=value;p!==null;p=Object.getPrototypeOf(p))if(Object.getOwnPropertyDescriptor(p,'toJSON')!==undefined)return false;\n const array=Array.isArray(value);if(!array){const proto=Object.getPrototypeOf(value);if(proto!==null&&(Object.getPrototypeOf(proto)!==null||Object.getOwnPropertyDescriptor(proto,'toJSON')!==undefined))return false;}\n const descriptors=Object.getOwnPropertyDescriptors(value),keys=Object.keys(value);\n if(array){if(Object.keys(descriptors).length!==keys.length+1||keys.length!==value.length||keys.some((k,i)=>k!==String(i)))return false;}\n else if(Object.keys(descriptors).length!==keys.length)return false;\n seen.add(value);\n for(const k of keys){const d=descriptors[k];if(!d||!Object.hasOwn(d,'value')||!d.enumerable||!n3JsonData(d.value,seen,depth+1))return false;}\n seen.delete(value);return true;\n}\nfunction n3TraceSummary(s){return {state:s.state,coverage:s.coverage,reason:s.reason,target:s.target,firstError:s.firstError,focusChild:s.focus.pairChild,events:s.events.length,settlementsObserved:s.promises.filter(p=>p.settlement!==null).length,interpretation:'unknown'};}\nfunction n3TraceReplay(s){\n if(!n3JsonData(s)||!ngSchema(s,N3_CAUSAL_SCHEMA.$defs.snapshot,N3_CAUSAL_SCHEMA)||Buffer.byteLength(JSON.stringify(s),'utf8')>6144)ngBad();\n const empty=s.leases.length===0&&s.promises.length===0&&s.errors.length===0&&s.events.length===0&&s.firstError===null&&s.cut===null&&s.target==='unknown'&&s.focus.pairChild===null&&s.focus.selection==='none';\n if(s.state!=='joined'){\n  if(s.coverage!=='unknown'||!empty)ngBad();\n  if(s.eligible>1){if(s.state!=='ambiguous'||s.reason!=='MULTIPLE_ELIGIBLE')ngBad();}\n  else if(s.state==='ambiguous'){if(s.eligible!==1||s.reason!=='AMBIGUOUS_BINDING')ngBad();}\n  else if(s.reason==='NO_ELIGIBLE'){if(s.eligible!==0)ngBad();}\n  else if(!['UNBOUND','PREBIND_GAP','CAP_PRIVATE','CAP_SNAPSHOT','SINK_FAULT','INVALID_EVENT','PROJECTION_GAP','PROBE_UNAVAILABLE','OUTER_LIMIT'].includes(s.reason))ngBad();\n  return n3TraceSummary(s);\n }\n if(s.eligible!==1||s.coverage==='unknown'||s.target==='unknown')ngBad();\n if(s.coverage==='complete'){if(s.reason!=='OK'||s.target==='entered')ngBad();}\n else if(!['PREBIND_GAP','PROJECTION_GAP','UNBOUND','OPEN_AT_CUT'].includes(s.reason)||s.reason==='OPEN_AT_CUT'&&s.target!=='entered')ngBad();\n for(const table of [s.leases,s.promises,s.errors])if(table.some((r,i)=>r.ordinal!==i+1))ngBad();\n const lease=n=>s.leases[n-1],promise=n=>s.promises[n-1],roles=new Map();\n for(const l of s.leases){const list=roles.get(l.role)??[];list.push(l);roles.set(l.role,list);}\n if((roles.get('root')?.length??0)!==1||(roles.get('outer')?.length??0)!==1||['activation-child','target-pair','pair-child'].some(r=>(roles.get(r)?.length??0)>1))ngBad();\n const one=r=>roles.get(r)?.[0]??null,root=one('root'),outer=one('outer'),activation=one('activation-child'),pair=one('target-pair');\n for(const l of s.leases){\n  const expected=l.role==='root'?null:l.role==='outer'||l.role==='target-pair'?root.ordinal:l.role==='activation-child'?outer.ordinal:pair?.ordinal;\n  if(l.parent!==expected||['activation-child','pair-child'].includes(l.role)&&l.firstClose!==null)ngBad();\n }\n if(s.focus.pairChild===null){if(s.focus.selection!=='none'||(roles.get('pair-child')?.length??0)>0)ngBad();}\n else if(!lease(s.focus.pairChild)||lease(s.focus.pairChild).role!=='pair-child'||s.focus.selection==='none')ngBad();\n for(const p of s.promises)if(!lease(p.lease)||!['activation-child','target-pair','pair-child'].includes(lease(p.lease).role))ngBad();\n let last=0,target='unreached',pairSeen=false,scopeSeen=false,logicalSeen=false,firstError=null,cutSeen=false;\n const closeCalls=new Map(),closed=new Map(),retained=new Map(),settled=new Map(),errorFirst=new Map(),childFinal=new Set(),pairChecks=[];\n const role=n=>n===null?null:lease(n)?.role;\n const plain=(e,hasError=false)=>{if(e.error.present!==hasError||hasError===false&&e.error.kind!=='none')ngBad();};\n for(const e of s.events){\n  if(e.sequence<=last||cutSeen||e.lease!==null&&!lease(e.lease)||e.promise!==null&&!promise(e.promise))ngBad();last=e.sequence;\n  const r=role(e.lease),requireRole=(...allowed)=>{if(!allowed.includes(r))ngBad();},requireSite=site=>{if(e.site!==site)ngBad();};\n  if(e.error.present){if(firstError===null)firstError=e.sequence;if(e.error.kind==='object'){if(!s.errors[e.error.errorOrdinal-1])ngBad();if(!errorFirst.has(e.error.errorOrdinal))errorFirst.set(e.error.errorOrdinal,e.sequence);}}\n  if(!['retained','settlement-observed'].includes(e.kind)&&e.promise!==null)ngBad();\n  if(!['abort-observed','close-call','closed-transition','child-finally'].includes(e.kind)&&e.cause!==null)ngBad();\n  switch(e.kind){\n   case 'scope-enter':\n    requireSite('choice-admitted');requireRole('root');plain(e);if(scopeSeen||e!==s.events[0])ngBad();scopeSeen=true;break;\n   case 'target-enter':\n    requireSite('postreceipt-check');requireRole('activation-child');plain(e);if(!scopeSeen||target!=='unreached'||logicalSeen)ngBad();target='entered';break;\n   case 'pair-enter':\n    requireSite('target-pair');requireRole(null,'target-pair');plain(e);if(target!=='entered'||pairSeen||logicalSeen||e.lease===null&&!(s.coverage==='prefix'&&['UNBOUND','PREBIND_GAP','PROJECTION_GAP'].includes(s.reason)))ngBad();pairSeen=true;break;\n   case 'target-return':case 'target-throw':\n    requireSite('postreceipt-check');requireRole('activation-child');plain(e,e.kind==='target-throw');if(target!=='entered'||logicalSeen)ngBad();if(e.kind==='target-return'&&!pairSeen)ngBad();target=e.kind==='target-return'?'returned':'threw';break;\n   case 'check-threw':\n    plain(e,true);if(!scopeSeen||!['initial-holders','initial-child'].includes(e.site))ngBad();\n    if(e.site==='initial-child')requireRole(null,'activation-child','pair-child');else requireRole(null,'outer','target-pair');\n    if(r==='pair-child')pairChecks.push(e);break;\n   case 'logical-return':case 'logical-throw':\n    requireSite(e.kind==='logical-return'?'choice-return':'choice-catch');requireRole('outer');plain(e,e.kind==='logical-throw');if(!scopeSeen||logicalSeen||target==='entered')ngBad();logicalSeen=true;break;\n   case 'retained':case 'settlement-observed':{\n    requireSite(e.kind==='retained'?'initial-retain':'initial-settled');plain(e);\n    const p=promise(e.promise);if(!p||p.lease!==e.lease)ngBad();\n    const table=e.kind==='retained'?retained:settled;if(table.has(p.ordinal))ngBad();\n    if(e.kind==='settlement-observed'&&(!retained.has(p.ordinal)||retained.get(p.ordinal)>=e.sequence))ngBad();table.set(p.ordinal,e.sequence);break;\n   }\n   case 'close-call':\n    plain(e);\n    if(e.site==='root-finish'){requireRole('root');if(e.cause!=='explicit-finish')ngBad();}\n    else if(e.site==='initial-close'){requireRole('outer','target-pair');if(e.cause!=='unknown')ngBad();}\n    else if(e.site==='outer-parent-abort'){requireRole('outer');if(e.cause!=='parent-abort')ngBad();}\n    else if(e.site==='pair-parent-abort'){requireRole('target-pair');if(e.cause!=='parent-abort')ngBad();}\n    else if(e.site==='pair-finally'){requireRole('target-pair');if(e.cause!=='finally')ngBad();}else ngBad();\n    if(e.site==='initial-close'||e.site==='root-finish')closeCalls.set(e.lease,e.sequence);break;\n   case 'closed-transition':\n    plain(e);if(e.site==='root-finish'){requireRole('root');if(e.cause!=='explicit-finish')ngBad();}\n    else if(e.site==='initial-close'){requireRole('outer','target-pair');if(e.cause!=='unknown')ngBad();}else ngBad();\n    if(closed.has(e.lease)||!closeCalls.has(e.lease)||closeCalls.get(e.lease)>=e.sequence)ngBad();closed.set(e.lease,e.sequence);break;\n   case 'abort-observed':\n    plain(e);if(e.site==='root-finish'){requireRole('root');if(e.cause!=='explicit-finish')ngBad();}\n    else if(e.site==='root-abort'){requireRole('root');if(e.cause!=='unknown')ngBad();}\n    else if(e.site==='initial-stop'){requireRole('outer','target-pair');if(e.cause!=='unknown')ngBad();",
+          "inserted": "Root9a31 + abort matrix8b791; full outer N3 protocol remains pending B2.\nconst ngObj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);\nconst ngKeys=(v,a)=>ngObj(v)&&Object.keys(v).length===a.length&&Object.keys(v).every((k,i)=>k===a[i]);\nconst ngInt=(v,a,b)=>Number.isSafeInteger(v)&&v>=a&&v<=b;\nconst ngSame=(a,b)=>JSON.stringify(a)===JSON.stringify(b);\nconst ngBad=()=>{throw Error('ROOT_N3_OWN_CAUSAL_REJECTED');};\n\nfunction ngSchema(value,node,document){\n if(!ngObj(node))return false;\n if(node.$ref){if(typeof node.$ref!=='string'||!node.$ref.startsWith('#/$defs/'))return false;return ngSchema(value,document.$defs[node.$ref.slice(8)],document);}\n if(Object.hasOwn(node,'const')&&!ngSame(value,node.const))return false;\n if(node.enum&&!node.enum.some(v=>ngSame(v,value)))return false;\n if(node.anyOf&&!node.anyOf.some(s=>ngSchema(value,s,document)))return false;\n if(node.oneOf&&node.oneOf.filter(s=>ngSchema(value,s,document)).length!==1)return false;\n if(node.allOf&&!node.allOf.every(s=>ngSchema(value,s,document)))return false;\n const isType=(v,t)=>t==='object'?ngObj(v):t==='array'?Array.isArray(v):t==='integer'?Number.isSafeInteger(v):t==='number'?typeof v==='number'&&Number.isFinite(v):t==='string'?typeof v==='string':t==='null'?v===null:t==='boolean'?typeof v==='boolean':false;\n if(node.type&&!(Array.isArray(node.type)?node.type.some(t=>isType(value,t)):isType(value,node.type)))return false;\n if(node.properties&&ngObj(value)){\n  const names=Object.keys(node.properties);\n  if(node.additionalProperties===false&&Object.keys(value).some(k=>!names.includes(k)))return false;\n  if(node.required&&!node.required.every(k=>Object.hasOwn(value,k)))return false;\n  if(node.required?.length===names.length&&node.additionalProperties===false&&!ngKeys(value,names))return false;\n  for(const k of names)if(Object.hasOwn(value,k)&&!ngSchema(value[k],node.properties[k],document))return false;\n }\n if(typeof value==='number'&&(node.minimum!==undefined&&value<node.minimum||node.maximum!==undefined&&value>node.maximum))return false;\n if(typeof value==='string'&&node.pattern&&!new RegExp(node.pattern).test(value))return false;\n if(Array.isArray(value)){\n  if(node.minItems!==undefined&&value.length<node.minItems||node.maxItems!==undefined&&value.length>node.maxItems)return false;\n  for(let i=0;i<value.length;i++){const rule=node.prefixItems?.[i]??node.items;if(rule===false||rule&&!ngSchema(value[i],rule,document))return false;}\n }\n return true;\n}\n\n\n\nconst N3_CAUSAL_SCHEMA={\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"$id\":\"afw.c2-notices-n3.causal-schema.v1\",\"$ref\":\"#/$defs/causalRecord\",\"$defs\":{\"snapshot\":{\"type\":\"object\",\"properties\":{\"schema\":{\"const\":\"afw.c2-notices-n3.qa-snapshot.v1\"},\"state\":{\"enum\":[\"joined\",\"unjoined\",\"ambiguous\"]},\"coverage\":{\"enum\":[\"complete\",\"prefix\",\"unknown\"]},\"reason\":{\"enum\":[\"OK\",\"NO_ELIGIBLE\",\"MULTIPLE_ELIGIBLE\",\"UNBOUND\",\"AMBIGUOUS_BINDING\",\"PREBIND_GAP\",\"CAP_PRIVATE\",\"CAP_SNAPSHOT\",\"SINK_FAULT\",\"INVALID_EVENT\",\"PROJECTION_GAP\",\"PROBE_UNAVAILABLE\",\"OUTER_LIMIT\",\"OPEN_AT_CUT\"]},\"eligible\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":16},\"target\":{\"enum\":[\"unreached\",\"entered\",\"returned\",\"threw\",\"unknown\"]},\"focus\":{\"type\":\"object\",\"properties\":{\"mode\":{\"const\":\"selected-first-target-focus\"},\"pairChild\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"selection\":{\"enum\":[\"first-check-threw\",\"first-observed\",\"none\"]}},\"required\":[\"mode\",\"pairChild\",\"selection\"],\"additionalProperties\":false},\"leases\":{\"type\":\"array\",\"maxItems\":8,\"items\":{\"type\":\"object\",\"properties\":{\"ordinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},\"role\":{\"enum\":[\"root\",\"outer\",\"activation-child\",\"target-pair\",\"pair-child\"]},\"parent\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"firstClose\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]}},\"required\":[\"ordinal\",\"role\",\"parent\",\"firstClose\"],\"additionalProperties\":false}},\"promises\":{\"type\":\"array\",\"maxItems\":4,\"items\":{\"type\":\"object\",\"properties\":{\"ordinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4},\"lease\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},\"retained\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]},\"settlement\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]}},\"required\":[\"ordinal\",\"lease\",\"retained\",\"settlement\"],\"additionalProperties\":false}},\"errors\":{\"type\":\"array\",\"maxItems\":4,\"items\":{\"type\":\"object\",\"properties\":{\"ordinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4},\"first\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096}},\"required\":[\"ordinal\",\"first\"],\"additionalProperties\":false}},\"events\":{\"type\":\"array\",\"maxItems\":24,\"items\":{\"type\":\"object\",\"properties\":{\"sequence\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},\"kind\":{\"enum\":[\"scope-enter\",\"target-enter\",\"pair-enter\",\"check-threw\",\"target-return\",\"target-throw\",\"logical-return\",\"logical-throw\",\"abort-observed\",\"close-call\",\"closed-transition\",\"child-finally\",\"retained\",\"settlement-observed\",\"snapshot-cut\"]},\"site\":{\"enum\":[\"choice-admitted\",\"postreceipt-check\",\"target-pair\",\"initial-holders\",\"initial-child\",\"initial-retain\",\"initial-settled\",\"initial-close\",\"initial-stop\",\"initial-child-finally\",\"root-abort\",\"root-finish\",\"pair-parent-abort\",\"pair-finally\",\"outer-parent-abort\",\"choice-catch\",\"choice-return\",\"snapshot\"]},\"lease\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"promise\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4},{\"type\":\"null\"}]},\"error\":{\"anyOf\":[{\"type\":\"object\",\"properties\":{\"present\":{\"const\":false},\"kind\":{\"const\":\"none\"},\"errorOrdinal\":{\"const\":null}},\"required\":[\"present\",\"kind\",\"errorOrdinal\"],\"additionalProperties\":false},{\"type\":\"object\",\"properties\":{\"present\":{\"const\":true},\"kind\":{\"const\":\"primitive\"},\"errorOrdinal\":{\"const\":null}},\"required\":[\"present\",\"kind\",\"errorOrdinal\"],\"additionalProperties\":false},{\"type\":\"object\",\"properties\":{\"present\":{\"const\":true},\"kind\":{\"const\":\"object\"},\"errorOrdinal\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":4}},\"required\":[\"present\",\"kind\",\"errorOrdinal\"],\"additionalProperties\":false}]},\"cause\":{\"enum\":[null,\"explicit-finish\",\"parent-abort\",\"finally\",\"unknown\"]}},\"required\":[\"sequence\",\"kind\",\"site\",\"lease\",\"promise\",\"error\",\"cause\"],\"additionalProperties\":false}},\"firstError\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]},\"cut\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]}},\"required\":[\"schema\",\"state\",\"coverage\",\"reason\",\"eligible\",\"target\",\"focus\",\"leases\",\"promises\",\"errors\",\"events\",\"firstError\",\"cut\"],\"additionalProperties\":false},\"causalRecord\":{\"type\":\"object\",\"properties\":{\"sequence\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":128},\"elapsedMs\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":180000},\"kind\":{\"const\":\"causal\"},\"schema\":{\"const\":\"afw.c2-notices-n3.causal-record.v1\"},\"snapshot\":{\"$ref\":\"#/$defs/snapshot\"}},\"required\":[\"sequence\",\"elapsedMs\",\"kind\",\"schema\",\"snapshot\"],\"additionalProperties\":false},\"summary\":{\"type\":\"object\",\"properties\":{\"state\":{\"enum\":[\"joined\",\"unjoined\",\"ambiguous\"]},\"coverage\":{\"enum\":[\"complete\",\"prefix\",\"unknown\"]},\"reason\":{\"enum\":[\"OK\",\"NO_ELIGIBLE\",\"MULTIPLE_ELIGIBLE\",\"UNBOUND\",\"AMBIGUOUS_BINDING\",\"PREBIND_GAP\",\"CAP_PRIVATE\",\"CAP_SNAPSHOT\",\"SINK_FAULT\",\"INVALID_EVENT\",\"PROJECTION_GAP\",\"PROBE_UNAVAILABLE\",\"OUTER_LIMIT\",\"OPEN_AT_CUT\"]},\"target\":{\"enum\":[\"unreached\",\"entered\",\"returned\",\"threw\",\"unknown\"]},\"firstError\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":4096},{\"type\":\"null\"}]},\"focusChild\":{\"anyOf\":[{\"type\":\"integer\",\"minimum\":1,\"maximum\":8},{\"type\":\"null\"}]},\"events\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":24},\"settlementsObserved\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":4},\"interpretation\":{\"const\":\"unknown\"}},\"required\":[\"state\",\"coverage\",\"reason\",\"target\",\"firstError\",\"focusChild\",\"events\",\"settlementsObserved\",\"interpretation\"],\"additionalProperties\":false}},\"$comment\":\"Canonical order and source contract FSM required in addition to JSON shape. Record6144UTF8 bytes includes envelope+LF. One snapshot only; never crosssnapshot join.\"};\n\n// Original independent OWN causal FSM. Sealed schema is DATA; no Source implementation imported.\nfunction n3JsonData(value,seen=new Set(),depth=0){\n if(value===null||typeof value==='string'||typeof value==='boolean')return true;\n if(typeof value==='number')return Number.isFinite(value)&&!Object.is(value,-0);\n if(typeof value!=='object'||depth>12||seen.has(value)||Object.getOwnPropertySymbols(value).length)return false;\n for(let p=value;p!==null;p=Object.getPrototypeOf(p))if(Object.getOwnPropertyDescriptor(p,'toJSON')!==undefined)return false;\n const array=Array.isArray(value);if(!array){const proto=Object.getPrototypeOf(value);if(proto!==null&&(Object.getPrototypeOf(proto)!==null||Object.getOwnPropertyDescriptor(proto,'toJSON')!==undefined))return false;}\n const descriptors=Object.getOwnPropertyDescriptors(value),keys=Object.keys(value);\n if(array){if(Object.keys(descriptors).length!==keys.length+1||keys.length!==value.length||keys.some((k,i)=>k!==String(i)))return false;}\n else if(Object.keys(descriptors).length!==keys.length)return false;\n seen.add(value);\n for(const k of keys){const d=descriptors[k];if(!d||!Object.hasOwn(d,'value')||!d.enumerable||!n3JsonData(d.value,seen,depth+1))return false;}\n seen.delete(value);return true;\n}\nfunction n3TraceSummary(s){return {state:s.state,coverage:s.coverage,reason:s.reason,target:s.target,firstError:s.firstError,focusChild:s.focus.pairChild,events:s.events.length,settlementsObserved:s.promises.filter(p=>p.settlement!==null).length,interpretation:'unknown'};}\nfunction n3TraceReplay(s){\n if(!n3JsonData(s)||!ngSchema(s,N3_CAUSAL_SCHEMA.$defs.snapshot,N3_CAUSAL_SCHEMA)||Buffer.byteLength(JSON.stringify(s),'utf8')>6144)ngBad();\n const empty=s.leases.length===0&&s.promises.length===0&&s.errors.length===0&&s.events.length===0&&s.firstError===null&&s.cut===null&&s.target==='unknown'&&s.focus.pairChild===null&&s.focus.selection==='none';\n if(s.state!=='joined'){\n  if(s.coverage!=='unknown'||!empty)ngBad();\n  if(s.eligible>1){if(s.state!=='ambiguous'||s.reason!=='MULTIPLE_ELIGIBLE')ngBad();}\n  else if(s.state==='ambiguous'){if(s.eligible!==1||s.reason!=='AMBIGUOUS_BINDING')ngBad();}\n  else if(s.reason==='NO_ELIGIBLE'){if(s.eligible!==0)ngBad();}\n  else if(!['UNBOUND','PREBIND_GAP','CAP_PRIVATE','CAP_SNAPSHOT','SINK_FAULT','INVALID_EVENT','PROJECTION_GAP','PROBE_UNAVAILABLE','OUTER_LIMIT'].includes(s.reason))ngBad();\n  return n3TraceSummary(s);\n }\n if(s.eligible!==1||s.coverage==='unknown'||s.target==='unknown')ngBad();\n if(s.coverage==='complete'){if(s.reason!=='OK'||s.target==='entered')ngBad();}\n else if(!['PREBIND_GAP','PROJECTION_GAP','UNBOUND','OPEN_AT_CUT'].includes(s.reason)||s.reason==='OPEN_AT_CUT'&&s.target!=='entered')ngBad();\n for(const table of [s.leases,s.promises,s.errors])if(table.some((r,i)=>r.ordinal!==i+1))ngBad();\n const lease=n=>s.leases[n-1],promise=n=>s.promises[n-1],roles=new Map();\n for(const l of s.leases){const list=roles.get(l.role)??[];list.push(l);roles.set(l.role,list);}\n if((roles.get('root')?.length??0)!==1||(roles.get('outer')?.length??0)!==1||['activation-child','target-pair','pair-child'].some(r=>(roles.get(r)?.length??0)>1))ngBad();\n const one=r=>roles.get(r)?.[0]??null,root=one('root'),outer=one('outer'),activation=one('activation-child'),pair=one('target-pair');\n for(const l of s.leases){\n  const expected=l.role==='root'?null:l.role==='outer'||l.role==='target-pair'?root.ordinal:l.role==='activation-child'?outer.ordinal:pair?.ordinal;\n  if(l.parent!==expected||['activation-child','pair-child'].includes(l.role)&&l.firstClose!==null)ngBad();\n }\n if(s.focus.pairChild===null){if(s.focus.selection!=='none'||(roles.get('pair-child')?.length??0)>0)ngBad();}\n else if(!lease(s.focus.pairChild)||lease(s.focus.pairChild).role!=='pair-child'||s.focus.selection==='none')ngBad();\n for(const p of s.promises)if(!lease(p.lease)||!['activation-child','target-pair','pair-child'].includes(lease(p.lease).role))ngBad();\n let last=0,target='unreached',pairSeen=false,scopeSeen=false,logicalSeen=false,firstError=null,cutSeen=false;\n const closeCalls=new Map(),closed=new Map(),retained=new Map(),settled=new Map(),errorFirst=new Map(),childFinal=new Set(),pairChecks=[];\n const role=n=>n===null?null:lease(n)?.role;\n const plain=(e,hasError=false)=>{if(e.error.present!==hasError||hasError===false&&e.error.kind!=='none')ngBad();};\n for(const e of s.events){\n  if(e.sequence<=last||cutSeen||e.lease!==null&&!lease(e.lease)||e.promise!==null&&!promise(e.promise))ngBad();last=e.sequence;\n  const r=role(e.lease),requireRole=(...allowed)=>{if(!allowed.includes(r))ngBad();},requireSite=site=>{if(e.site!==site)ngBad();};\n  if(e.error.present){if(firstError===null)firstError=e.sequence;if(e.error.kind==='object'){if(!s.errors[e.error.errorOrdinal-1])ngBad();if(!errorFirst.has(e.error.errorOrdinal))errorFirst.set(e.error.errorOrdinal,e.sequence);}}\n  if(!['retained','settlement-observed'].includes(e.kind)&&e.promise!==null)ngBad();\n  if(!['abort-observed','close-call','closed-transition','child-finally'].includes(e.kind)&&e.cause!==null)ngBad();\n  switch(e.kind){\n   case 'scope-enter':\n    requireSite('choice-admitted');requireRole('root');plain(e);if(scopeSeen||e!==s.events[0])ngBad();scopeSeen=true;break;\n   case 'target-enter':\n    requireSite('postreceipt-check');requireRole('activation-child');plain(e);if(!scopeSeen||target!=='unreached'||logicalSeen)ngBad();target='entered';break;\n   case 'pair-enter':\n    requireSite('target-pair');requireRole(null,'target-pair');plain(e);if(target!=='entered'||pairSeen||logicalSeen||e.lease===null&&!(s.coverage==='prefix'&&['UNBOUND','PREBIND_GAP','PROJECTION_GAP'].includes(s.reason)))ngBad();pairSeen=true;break;\n   case 'target-return':case 'target-throw':\n    requireSite('postreceipt-check');requireRole('activation-child');plain(e,e.kind==='target-throw');if(target!=='entered'||logicalSeen)ngBad();if(e.kind==='target-return'&&!pairSeen)ngBad();target=e.kind==='target-return'?'returned':'threw';break;\n   case 'check-threw':\n    plain(e,true);if(!scopeSeen||!['initial-holders','initial-child'].includes(e.site))ngBad();\n    if(e.site==='initial-child')requireRole(null,'activation-child','pair-child');else requireRole(null,'outer','target-pair');\n    if(r==='pair-child')pairChecks.push(e);break;\n   case 'logical-return':case 'logical-throw':\n    requireSite(e.kind==='logical-return'?'choice-return':'choice-catch');requireRole('outer');plain(e,e.kind==='logical-throw');if(!scopeSeen||logicalSeen||target==='entered')ngBad();logicalSeen=true;break;\n   case 'retained':case 'settlement-observed':{\n    requireSite(e.kind==='retained'?'initial-retain':'initial-settled');plain(e);\n    const p=promise(e.promise);if(!p||p.lease!==e.lease)ngBad();\n    const table=e.kind==='retained'?retained:settled;if(table.has(p.ordinal))ngBad();\n    if(e.kind==='settlement-observed'&&(!retained.has(p.ordinal)||retained.get(p.ordinal)>=e.sequence))ngBad();table.set(p.ordinal,e.sequence);break;\n   }\n   case 'close-call':\n    plain(e);\n    if(e.site==='root-finish'){requireRole('root');if(e.cause!=='explicit-finish')ngBad();}\n    else if(e.site==='initial-close'){requireRole('outer','target-pair');if(e.cause!=='unknown')ngBad();}\n    else ngBad();\n    if(e.site==='initial-close'||e.site==='root-finish')closeCalls.set(e.lease,e.sequence);break;\n   case 'closed-transition':\n    plain(e);if(e.site==='root-finish'){requireRole('root');if(e.cause!=='explicit-finish')ngBad();}\n    else if(e.site==='initial-close'){requireRole('outer','target-pair');if(e.cause!=='unknown')ngBad();}else ngBad();\n    if(closed.has(e.lease)||!closeCalls.has(e.lease)||closeCalls.get(e.lease)>=e.sequence)ngBad();closed.set(e.lease,e.sequence);break;\n   case 'abort-observed':\n    plain(e);if(e.site==='root-finish'){requireRole('root');if(e.cause!=='explicit-finish')ngBad();}\n    else if(e.site==='root-abort'){requireRole('root');if(e.cause!=='unknown')ngBad();}\n    else if(e.site==='initial-stop'){requireRole('outer','target-pair');if(e.cause!=='unknown')ngBad();}\n    else if(e.site==='initial-child'){requireRole('activation-child','pair-child');if(e.cause!=='unknown')ngBad();}\n    else if(e.site==='pair-parent-abort'||e.site==='outer-parent-abort'){\n     requireRole(e.site==='pair-parent-abort'?'target-pair':'outer');if(e.cause!=='parent-abort')ngBad();\n     const first=lease(e.lease).firstClose;\n     if(first!==null&&first>=e.sequence||!closed.has(e.lease)&&!(s.coverage==='prefix'&&['UNBOUND','PREBIND_GAP','PROJECTION_GAP'].includes(s.reason)))ngBad();\n    "
+        }
+      ],
+      "forwardExact": true,
+      "reverseExact": true
+    },
+    {
+      "role": "OWN aggregate adds matrix corpus to preserved B1 groups",
+      "beforeBlob": "92aa3d6257343c7f466176bbf85b8a303a8a2fab",
+      "beforeBytes": 7961,
+      "beforeSha256": "c41de580fa73e029db63654504a4061098e848e98d08001bc9ad662595c09a74",
+      "beforeFullText": "import {n3TraceReplay,n3CausalReplay} from './trace-reader.mjs';\nconst ngBad=()=>{throw Error('OWN_N3_B1_MODEL_REJECTED');};\nfunction n3ModelCrc(bytes){let crc=0xffffffff;for(const x of bytes){crc^=x;for(let k=0;k<8;k++)crc=crc&1?(crc>>>1)^0xedb88320:crc>>>1;}return (crc^0xffffffff)>>>0;}\nfunction n3ModelZip(base64,name,inflate){\n if(typeof base64!=='string'||base64.length>1500000)ngBad();const z=Buffer.from(base64,'base64');if(z.toString('base64')!==base64||z.length<22||z.length>1048576)ngBad();\n let e=-1;for(let p=z.length-22;p>=Math.max(0,z.length-65557);p--)if(z.readUInt32LE(p)===0x06054b50&&p+22+z.readUInt16LE(p+20)===z.length){e=p;break;}\n if(e<0||z.readUInt16LE(e+4)!==0||z.readUInt16LE(e+6)!==0||z.readUInt16LE(e+8)!==1||z.readUInt16LE(e+10)!==1)ngBad();\n const size=z.readUInt32LE(e+12),c=z.readUInt32LE(e+16);if(c+size!==e||size<46||c<30||z.readUInt32LE(c)!==0x02014b50)ngBad();\n const flags=z.readUInt16LE(c+8),method=z.readUInt16LE(c+10),crc=z.readUInt32LE(c+16),compressed=z.readUInt32LE(c+20),length=z.readUInt32LE(c+24),nl=z.readUInt16LE(c+28),el=z.readUInt16LE(c+30),cl=z.readUInt16LE(c+32),local=z.readUInt32LE(c+42);\n if(flags&~0x80e||![0,8].includes(method)||length<1||length>24577||compressed>1048576||46+nl+el+cl!==size||z.readUInt16LE(c+34)!==0||local!==0||((z.readUInt32LE(c+38)>>>16)&0xf000)!==0&&((z.readUInt32LE(c+38)>>>16)&0xf000)!==0x8000)ngBad();\n if(z.subarray(c+46,c+46+nl).toString('utf8')!==name||z.readUInt32LE(0)!==0x04034b50||z.readUInt16LE(6)!==flags||z.readUInt16LE(8)!==method)ngBad();\n const lnl=z.readUInt16LE(26),lel=z.readUInt16LE(28),start=30+lnl+lel,end=start+compressed;\n if(z.subarray(30,30+lnl).toString('utf8')!==name||end>c)ngBad();\n if(flags&8){let d=end;if(c-d===16&&z.readUInt32LE(d)===0x08074b50)d+=4;if(c-d!==12||z.readUInt32LE(d)!==crc||z.readUInt32LE(d+4)!==compressed||z.readUInt32LE(d+8)!==length)ngBad();}\n else if(end!==c||z.readUInt32LE(14)!==crc||z.readUInt32LE(18)!==compressed||z.readUInt32LE(22)!==length)ngBad();\n let payload;if(method===0)payload=z.subarray(start,end);else{if(typeof inflate!=='function')ngBad();try{payload=inflate(z.subarray(start,end),{maxOutputLength:24577});}catch{ngBad();}}\n if(!Buffer.isBuffer(payload)||payload.length!==length||n3ModelCrc(payload)!==crc)ngBad();return {archive:z,payload};\n}\n\n\nfunction n3TraceLiteralControls(v,replay){\n const checks=[];\n for(const t of v.positives){let result=null;try{result=replay(t.snapshot);}catch{}checks.push({id:'OWN/'+t.id,pass:result!==null&&JSON.stringify(result)===JSON.stringify(t.expected),accepted:result!==null});}\n for(const t of v.negatives){let accepted=false;try{accepted=replay(t.snapshot)!==null;}catch{}checks.push({id:'OWN/'+t.id,pass:!accepted,accepted});}\n return checks;\n}\nfunction n3SealedDataControls(v,replay){\n const checks=[];for(const [rows,accepted]of [[v.positives,true],[v.negatives,false]])for(const t of rows){let got=false;try{got=replay(t.snapshot)!==null;}catch{}checks.push({id:'SEALED_DATA/'+t.id,pass:got===accepted,accepted:got});}return checks;\n}\nfunction n3JsonBoundaryControls(v,replay){\n const checks=[];\n for(const id of ['ARRAY_NONENUMERABLE_TOJSON','ARRAY_INHERITED_TOJSON','OBJECT_INHERITED_TOJSON']){\n  const s=structuredClone(v.positives[0].snapshot);let calls=0;\n  const toJSON=()=>{calls++;return [];};\n  if(id==='ARRAY_NONENUMERABLE_TOJSON')Object.defineProperty(s.events,'toJSON',{value:toJSON,enumerable:false});\n  if(id==='ARRAY_INHERITED_TOJSON'){const proto=Object.create(Object.getPrototypeOf(s.events));Object.defineProperty(proto,'toJSON',{value:toJSON});Object.setPrototypeOf(s.events,proto);}\n  if(id==='OBJECT_INHERITED_TOJSON'){const proto=Object.create(null);Object.defineProperty(proto,'toJSON',{value:toJSON});Object.setPrototypeOf(s,proto);}\n  let accepted=false;try{accepted=replay(s)!==null;}catch{}checks.push({id:'JSON_MODEL/'+id,pass:!accepted&&calls===0,accepted,callbackCalls:calls});\n }return checks;\n}\n\nfunction n3RawRecordControls(data,readRecord,want){\n const checks=[];for(const t of data.cases){let result=null;try{result=readRecord(t.text);}catch{}checks.push({id:'RAW/'+t.id,pass:t.accepted?result!==null&&JSON.stringify(result)===JSON.stringify(want):result===null,accepted:result!==null});}\n const good=Buffer.from(data.cases[0].text),bad=Buffer.from(good);bad[data.invalidUtf8.corruptByteIndex]=255;let accepted=false;try{accepted=readRecord(bad)!==null;}catch{}checks.push({id:'RAW/INVALID_UTF8',pass:!accepted,accepted});return checks;\n}\nfunction n3SyntheticTransportControls(v,readRecord,hash){\n const checks=[];for(const t of v.cases){let transportValid=false,accepted=false;try{\n  const m=t.metadata,zip=n3ModelZip(t.archiveBase64,'own-b1-causal.json',null),bytes=Buffer.from(t.recordText);\n  transportValid=zip.payload.equals(bytes)&&m.recordBytes===bytes.length&&m.recordSha256===hash(bytes)&&m.witnessBytes===bytes.length&&m.witnessSha256===hash(bytes)&&m.frameBytes===Buffer.byteLength(t.frameText)&&m.frameSha256===hash(t.frameText)&&t.frameText==='OWN_SYNTHETIC_N3_B1_TRACE '+t.recordText&&m.payloadSha256===hash(zip.payload)&&m.archiveBytes===zip.archive.length&&m.archiveSha256===hash(zip.archive)&&m.crc32===n3ModelCrc(zip.payload);\n  if(transportValid)try{accepted=readRecord(bytes)!==null;}catch{}\n }catch{}\n checks.push({id:'SYNTHETIC_TRANSPORT/'+t.id,pass:transportValid&&accepted===t.accepted,transportValid,accepted});}return checks;\n}\nfunction n3IsolationControls(v,replay,readRecord){\n const checks=[],base=v.positives[0],reject=(id,input)=>{let rejected=false;try{replay(input);}catch{rejected=true;}checks.push({id:'BOUNDARY/'+id,pass:rejected});};\n reject('NO_CROSS_SNAPSHOT_ARRAY',[base.snapshot,structuredClone(base.snapshot)]);\n reject('NO_BEFORE_AFTER_STITCH',{before:base.snapshot,after:structuredClone(base.snapshot)});\n reject('NO_FOREIGN_REALM_WRAPPER',{realm:'M',snapshot:base.snapshot});\n const before=JSON.stringify(base.snapshot),a=replay(base.snapshot),b=replay(structuredClone(base.snapshot));\n checks.push({id:'BOUNDARY/RESET_EQUAL_ORDINAL_SEPARATE_CALLS',pass:JSON.stringify(a)===JSON.stringify(b)&&a!==b&&JSON.stringify(base.snapshot)===before&&a.interpretation==='unknown'});\n const frozen=structuredClone(base.snapshot),freeze=x=>{if(x&&typeof x==='object'){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};\n let immutable=false;try{immutable=JSON.stringify(replay(freeze(frozen)))===JSON.stringify(base.expected)&&JSON.stringify(frozen)===before;}catch{}\n checks.push({id:'BOUNDARY/INPUT_NOT_MUTATED',pass:immutable});\n let reads=0;const accessor=structuredClone(base.snapshot);Object.defineProperty(accessor,'state',{enumerable:true,get(){reads++;return 'joined';}});\n let rejected=false;try{replay(accessor);}catch{rejected=true;}checks.push({id:'BOUNDARY/PUBLIC_ACCESSOR_REJECT_WITHOUT_INVOCATION',pass:rejected&&reads===0});\n const privateRecord={sequence:7,elapsedMs:123,kind:'causal',schema:'afw.c2-notices-n3.causal-record.v1',snapshot:structuredClone(base.snapshot)};privateRecord.snapshot.privateValue='OWN_N3_PRIVATE_SENTINEL';let message='';try{readRecord(privateRecord);}catch(error){message=String(error?.message??'');}checks.push({id:'BOUNDARY/REJECTION_DOES_NOT_FORWARD_PRIVATE_PAYLOAD',pass:!!message&&!message.includes('OWN_N3_PRIVATE_SENTINEL')});\n return checks;\n}\nfunction n3B1AllControls(own,sealed,raw,transport,hash,ruling,rulingTransport){\n const groups={literal:n3TraceLiteralControls(own,n3TraceReplay),sealedData:n3SealedDataControls(sealed,n3TraceReplay),rawRecord:n3RawRecordControls(raw,n3CausalReplay,own.positives[0].expected),syntheticTransport:n3SyntheticTransportControls(transport,n3CausalReplay,hash),boundaries:n3IsolationControls(own,n3TraceReplay,n3CausalReplay),jsonModels:n3JsonBoundaryControls(own,n3TraceReplay),ruling:n3TraceLiteralControls(ruling,n3TraceReplay),rulingTransport:n3SyntheticTransportControls(rulingTransport,n3CausalReplay,hash)};\n return {groups,checks:Object.values(groups).flat()};\n}\n\nexport {n3B1AllControls};\n",
+      "after": {
+        "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-controls.mjs",
+        "blob": "5a9f631e9e2a9be395d98224ee54f584e3b4017b",
+        "bytes": 8288,
+        "sha256": "1b96f48f11736471f40c586d1d0a400f57c8227bc580dc320c32b200fc9d66fa",
+        "gitBlob": "5a9f631e9e2a9be395d98224ee54f584e3b4017b",
+        "fullReadback": true,
+        "before": null
+      },
+      "hunks": [
+        {
+          "start": 7935,
+          "beforeEnd": 7950,
+          "afterEnd": 8277,
+          "removed": "export {n3B1All",
+          "inserted": "function n3AbortFix1Controls(own,sealed,raw,transport,hash,ruling,rulingTransport,abort){\n const suite=n3B1AllControls(own,sealed,raw,transport,hash,ruling,rulingTransport);\n suite.groups.abortMatrix=n3TraceLiteralControls(abort,n3TraceReplay);suite.checks.push(...suite.groups.abortMatrix);return suite;\n}\nexport {n3B1AllControls,n3AbortFix1"
+        }
+      ],
+      "forwardExact": true,
+      "reverseExact": true
+    }
+  ],
+  "corpusCorrection": {
+    "beforeBlob": "65dedb92f5d1baa71488ba17f866e185db10971c",
+    "after": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-vectors.json",
+      "blob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "bytes": 673148,
+      "sha256": "dc602f3d129735afc9aceb9927b2448d77e135265137addb91fa7bdc7b54c068",
+      "gitBlob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "fullReadback": true,
+      "before": null
+    },
+    "onlyChangedLiteral": "NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE",
+    "beforeFullLiteral": {
+      "id": "NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "prefix",
+        "reason": "OPEN_AT_CUT",
+        "eligible": 1,
+        "target": "entered",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": 5,
+          "selection": "first-observed"
+        },
+        "leases": [
+          {
+            "ordinal": 1,
+            "role": "root",
+            "parent": null,
+            "firstClose": null
+          },
+          {
+            "ordinal": 2,
+            "role": "outer",
+            "parent": 1,
+            "firstClose": 44
+          },
+          {
+            "ordinal": 3,
+            "role": "activation-child",
+            "parent": 2,
+            "firstClose": null
+          },
+          {
+            "ordinal": 4,
+            "role": "target-pair",
+            "parent": 1,
+            "firstClose": null
+          },
+          {
+            "ordinal": 5,
+            "role": "pair-child",
+            "parent": 4,
+            "firstClose": null
+          }
+        ],
+        "promises": [
+          {
+            "ordinal": 1,
+            "lease": 3,
+            "retained": 17,
+            "settlement": null
+          },
+          {
+            "ordinal": 2,
+            "lease": 4,
+            "retained": 37,
+            "settlement": null
+          },
+          {
+            "ordinal": 3,
+            "lease": 5,
+            "retained": 41,
+            "settlement": null
+          }
+        ],
+        "errors": [],
+        "events": [
+          {
+            "sequence": 11,
+            "kind": "scope-enter",
+            "site": "choice-admitted",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 17,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 23,
+            "kind": "target-enter",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 31,
+            "kind": "pair-enter",
+            "site": "target-pair",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 37,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 41,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 42,
+            "kind": "close-call",
+            "site": "outer-parent-abort",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "parent-abort"
+          },
+          {
+            "sequence": 43,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 44,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 45,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 46,
+            "kind": "abort-observed",
+            "site": "root-abort",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 47,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": null,
+        "cut": 47
+      },
+      "expected": {
+        "state": "joined",
+        "coverage": "prefix",
+        "reason": "OPEN_AT_CUT",
+        "target": "entered",
+        "firstError": null,
+        "focusChild": 5,
+        "events": 12,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Observation after original root.abort may follow synchronous nested listeners."
+    },
+    "afterFullLiteral": {
+      "id": "NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE",
+      "snapshot": {
+        "schema": "afw.c2-notices-n3.qa-snapshot.v1",
+        "state": "joined",
+        "coverage": "prefix",
+        "reason": "OPEN_AT_CUT",
+        "eligible": 1,
+        "target": "entered",
+        "focus": {
+          "mode": "selected-first-target-focus",
+          "pairChild": 5,
+          "selection": "first-observed"
+        },
+        "leases": [
+          {
+            "ordinal": 1,
+            "role": "root",
+            "parent": null,
+            "firstClose": null
+          },
+          {
+            "ordinal": 2,
+            "role": "outer",
+            "parent": 1,
+            "firstClose": 43
+          },
+          {
+            "ordinal": 3,
+            "role": "activation-child",
+            "parent": 2,
+            "firstClose": null
+          },
+          {
+            "ordinal": 4,
+            "role": "target-pair",
+            "parent": 1,
+            "firstClose": null
+          },
+          {
+            "ordinal": 5,
+            "role": "pair-child",
+            "parent": 4,
+            "firstClose": null
+          }
+        ],
+        "promises": [
+          {
+            "ordinal": 1,
+            "lease": 3,
+            "retained": 17,
+            "settlement": null
+          },
+          {
+            "ordinal": 2,
+            "lease": 4,
+            "retained": 37,
+            "settlement": null
+          },
+          {
+            "ordinal": 3,
+            "lease": 5,
+            "retained": 41,
+            "settlement": null
+          }
+        ],
+        "errors": [],
+        "events": [
+          {
+            "sequence": 11,
+            "kind": "scope-enter",
+            "site": "choice-admitted",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 17,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 3,
+            "promise": 1,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 23,
+            "kind": "target-enter",
+            "site": "postreceipt-check",
+            "lease": 3,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 31,
+            "kind": "pair-enter",
+            "site": "target-pair",
+            "lease": 4,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 37,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 4,
+            "promise": 2,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 41,
+            "kind": "retained",
+            "site": "initial-retain",
+            "lease": 5,
+            "promise": 3,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          },
+          {
+            "sequence": 42,
+            "kind": "close-call",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 43,
+            "kind": "closed-transition",
+            "site": "initial-close",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 44,
+            "kind": "abort-observed",
+            "site": "initial-stop",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 45,
+            "kind": "abort-observed",
+            "site": "outer-parent-abort",
+            "lease": 2,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "parent-abort"
+          },
+          {
+            "sequence": 46,
+            "kind": "abort-observed",
+            "site": "root-abort",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": "unknown"
+          },
+          {
+            "sequence": 47,
+            "kind": "snapshot-cut",
+            "site": "snapshot",
+            "lease": 1,
+            "promise": null,
+            "error": {
+              "present": false,
+              "kind": "none",
+              "errorOrdinal": null
+            },
+            "cause": null
+          }
+        ],
+        "firstError": null,
+        "cut": 47
+      },
+      "expected": {
+        "state": "joined",
+        "coverage": "prefix",
+        "reason": "OPEN_AT_CUT",
+        "target": "entered",
+        "firstError": null,
+        "focusChild": 5,
+        "events": 12,
+        "settlementsObserved": 0,
+        "interpretation": "unknown"
+      },
+      "meaning": "Root8b791 exact post-close parent marker; supersedes old pre-matrix close-call path. Old snapshot preserved in65dedb... and B1index5fb38..."
+    },
+    "addedRootMetadata": {
+      "root": "8b791e3431faf44be717e534afc11cad73692bbe",
+      "beforeCorpus": "65dedb92f5d1baa71488ba17f866e185db10971c",
+      "changedPositiveOnly": "NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE"
+    },
+    "allOtherPositivesAndNegativesUnchanged": true
+  },
+  "transport": {
+    "beforeBlob": "bc8fc94aa4229711cb980143c79cd3f7ddff7459",
+    "after": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/synthetic-transport.json",
+      "blob": "2d14f32d900bc69828def726f583add0ab7ac67b",
+      "bytes": 1595506,
+      "sha256": "2f4a642a080e1efe7076900bcc89ea40d34f6e6adb7c2d34c958cbfddcd09088",
+      "gitBlob": "2d14f32d900bc69828def726f583add0ab7ac67b",
+      "fullReadback": true,
+      "before": null
+    },
+    "meaning": "Same90 corpus records with one documented matrix correction plus30 literal matrix records; every witness/model-frame/payload/ZIP CRC/hash freshly consistent. Before body remains immutable."
+  },
+  "allBeforeBodiesFullRead": true,
+  "SourceExecuted": false
+}

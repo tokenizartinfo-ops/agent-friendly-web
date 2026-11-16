@@ -1,0 +1,1824 @@
+{
+  "schema": "afw.c2-notices-n3.own-abort-fix1-results.v1",
+  "execution": "Pure OWN RAM only, exact reader/control definitions together; not Source or native import graph",
+  "matrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+  "groups": {
+    "literal": 90,
+    "sealedData": 43,
+    "rawRecord": 15,
+    "syntheticTransport": 120,
+    "boundaries": 7,
+    "jsonModels": 3,
+    "ruling": 12,
+    "rulingTransport": 12,
+    "abortMatrix": 30
+  },
+  "checks": [
+    {
+      "id": "OWN/RETURNED_WITH_FORKED_LEASES",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/REAL_CLOSE_CALL_TWICE_ONE_TRANSITION",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/OPEN_WITH_PAIR_AND_UNOBSERVED_SETTLEMENT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/OPEN_FIRST_CHECK_BEFORE_PAIR_CALL",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/UNREACHED_WITH_PRIMITIVE_ORIGINAL_THROW",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/NO_ELIGIBLE_SCOPE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/MULTIPLE_ELIGIBLE_SCOPES",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ONE_ELIGIBLE_CONFLICTING_NONELIGIBLE_ROOT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ONE_ELIGIBLE_UNJOINED_CAP_PRIVATE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ONE_ELIGIBLE_UNJOINED_CAP_SNAPSHOT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ONE_ELIGIBLE_UNJOINED_SINK_FAULT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ONE_ELIGIBLE_UNJOINED_INVALID_EVENT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ONE_ELIGIBLE_UNJOINED_OUTER_LIMIT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/EMPTY_UNKNOWN_PROBE_UNAVAILABLE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/EMPTY_UNKNOWN_UNBOUND",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/EMPTY_UNKNOWN_PREBIND_GAP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/EMPTY_UNKNOWN_PROJECTION_GAP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/KNOWN_PREBIND_DEFICIT_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/MISSING_SETTLEMENT_DECLARED_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/OUTSIDE_FOCUS_A_BEFORE_SELECTED_CHILD_B",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/SAME_OBJECT_RETHROWN_AT_TARGET_AND_CATCH",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/OPAQUE_FUNCTION_ERROR_SAME_PUBLIC_OBJECT_KIND",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/PRIMITIVE_PRESENT_NULL",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/PRIMITIVE_PRESENT_UNDEFINED",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/PRIMITIVE_PRESENT_FALSE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/PRIMITIVE_PRESENT_ZERO",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/PRIMITIVE_PRESENT_EMPTY_STRING",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/FOLDED_RETAIN_CALLBACKS_LEAVE_SOURCE_GAPS",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/COHERENT_OPAQUE_RELABEL_CANNOT_AUTHENTICATE_OBJECTS",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/FIRST_CHECK_THROWS_BEFORE_PAIR_REACHED",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/PAIR_PARENT_ACTIVATION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/PAIR_CHILD_PARENT_ROOT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ROOT_PARENT_CYCLE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/LEASE_ALIAS_DUPLICATE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/LEASE_TABLE_GAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/PROMISE_TABLE_GAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/WORK_SCOPE_REPLACED_BY_RETAINER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/PROMISE_OWNER_DRIFT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/SETTLEMENT_WITHOUT_RETAIN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/PUBLIC_SETTLEMENT_DUPLICATE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/PUBLIC_RETAIN_DUPLICATE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/RETAINED_POINTS_LATER_EVENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/SETTLEMENT_POINTS_OTHER_PROMISE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/FIRST_CLOSE_REPLACED_BY_CALL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/DUPLICATE_CLOSED_TRANSITION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/CHILD_INVENTED_CLOSE_METHOD",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ROOT_FACTORY_CLOSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/OUTER_ROOT_FINISH",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/CHILD_FINALLY_ON_OUTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ROOT_ABORT_ON_PAIR",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/INITIAL_STOP_ON_ROOT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/PAIR_PARENT_ABORT_ON_OUTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/TARGET_RETURN_BEFORE_ENTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/SECOND_RECHECK_SITE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/TARGET_ENTER_DUPLICATE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/TARGET_UNKNOWN_WITH_ENTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/TARGET_THROW_MASKED_NONE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/FIRST_SCOPE_ERROR_A_OVERWRITTEN_B",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ERROR_FIRST_USE_OVERWRITTEN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/UNDECLARED_ERROR_ORDINAL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/PRIMITIVE_IDENTITY_FABRICATED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/PRIMITIVE_PRIVATE_CONTENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/FIRST_ERROR_ERASED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/EMPTY_FIRST_ERROR_FORGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/FIRST_ERROR_LEASE_ROOT_RESOLVER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/AFTER_CUT_EVENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/CUT_POINTS_BEFORE_LAST",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/SOURCE_SEQUENCE_REORDER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/SOURCE_SEQUENCE_DUPLICATE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/SOURCE_SEQUENCE_OVER_CAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/MORE_THAN24_EVENTS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/GAP_DECLARED_COMPLETE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ELIGIBLE_TWO_JOINED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ELIGIBLE_ZERO_JOINED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ONE_ELIGIBLE_UNJOINED_OK",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/UNKNOWN_RETAINS_HIDDEN_EVENTS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/MULTIPLE_ELIGIBLE_REASON_WRONG",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/M_REALM_BRIDGE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/RACE_WINNER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/DEADLINE_CAUSE_ENUM",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/DRAIN_FLAG",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/PRIVATE_EVENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/SNAPSHOT_KEY_ORDER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/EVENT_KEY_ORDER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/EVENT_WRONG_TYPE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/SNAPSHOT_FOREIGN_IDENTITY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/UNUSED_ERROR_TABLE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/FOCUS_WRONG_ROLE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/FOCUS_BAD_SELECTION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/TRACE_NORMAL_FIRST_TARGET",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_OPEN_CUT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_UNREACHED",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_NO_ELIGIBLE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_MULTIPLE_ELIGIBLE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_REPEATED_CLOSE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_OBJECT_ERROR_PROPAGATION",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_EARLIER_SCOPE_ERROR_A_CHILD_B",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_PRIMITIVE_NULL",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_PRIMITIVE_UNDEFINED",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_PRIMITIVE_FALSE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_PRIMITIVE_ZERO",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_PRIMITIVE_EMPTY_STRING",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_PREBIND_GAP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_SINK_FAULT",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_PRIVATE_CAP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_SNAPSHOT_CAP",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_PROBE_UNAVAILABLE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_REPEATED_RETAIN_CALLBACKS",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/TRACE_BINDING_AMBIGUOUS_ONE_ELIGIBLE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "SEALED_DATA/BAD_PAIR_PARENT_ACTIVATION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_LEASE_CYCLE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_DUPLICATE_ALIAS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_SECOND_TARGET_SUBSTITUTION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_FIRST_ERROR_OVERWRITE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_FIRST_ERROR_ORDINAL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_ERROR_IDENTITY_MERGE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_FIRST_CLOSE_OVERWRITE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_REPEAT_CLOSED_TRANSITION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_SETTLEMENT_WITHOUT_RETAIN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_SETTLEMENT_ALIAS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_DRAIN_CLAIM",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_TIMER_CAUSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_RACE_WINNER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_M_JOIN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_EVENT_AFTER_CUT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_SEQUENCE_REORDER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_EVENT_PRIVATE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_PRIMITIVE_CONTENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_PRIMITIVE_ORDINAL",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_GAP_COMPLETE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_EXTRA_ELIGIBLE_JOIN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SEALED_DATA/BAD_TOO_MANY_EVENTS",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/RECORD_CANONICAL_LF",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "RAW/RECORD_OBJECT_ORDER_CHANGED",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/TORN_LF",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/CRLF",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/LEADING_SPACE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/DUPLICATE_KEY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/PRIVATE_OVER_CAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/MULTI_RECORD",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/TRAILING_SPACE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/MAX_RECORD_SEQUENCE_AND_ELAPSED",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "RAW/RECORD_SEQUENCE_ZERO",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/RECORD_ELAPSED_OVER_CAP",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/RECORD_PRIVATE_LEAK",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/RECORD_FOREIGN_IDENTITY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "RAW/INVALID_UTF8",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RETURNED_WITH_FORKED_LEASES",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/REAL_CLOSE_CALL_TWICE_ONE_TRANSITION",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/OPEN_WITH_PAIR_AND_UNOBSERVED_SETTLEMENT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/OPEN_FIRST_CHECK_BEFORE_PAIR_CALL",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/UNREACHED_WITH_PRIMITIVE_ORIGINAL_THROW",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/NO_ELIGIBLE_SCOPE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/MULTIPLE_ELIGIBLE_SCOPES",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ONE_ELIGIBLE_CONFLICTING_NONELIGIBLE_ROOT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ONE_ELIGIBLE_UNJOINED_CAP_PRIVATE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ONE_ELIGIBLE_UNJOINED_CAP_SNAPSHOT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ONE_ELIGIBLE_UNJOINED_SINK_FAULT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ONE_ELIGIBLE_UNJOINED_INVALID_EVENT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ONE_ELIGIBLE_UNJOINED_OUTER_LIMIT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/EMPTY_UNKNOWN_PROBE_UNAVAILABLE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/EMPTY_UNKNOWN_UNBOUND",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/EMPTY_UNKNOWN_PREBIND_GAP",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/EMPTY_UNKNOWN_PROJECTION_GAP",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/KNOWN_PREBIND_DEFICIT_PREFIX",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/MISSING_SETTLEMENT_DECLARED_PREFIX",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/OUTSIDE_FOCUS_A_BEFORE_SELECTED_CHILD_B",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/SAME_OBJECT_RETHROWN_AT_TARGET_AND_CATCH",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/OPAQUE_FUNCTION_ERROR_SAME_PUBLIC_OBJECT_KIND",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PRIMITIVE_PRESENT_NULL",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PRIMITIVE_PRESENT_UNDEFINED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PRIMITIVE_PRESENT_FALSE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PRIMITIVE_PRESENT_ZERO",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PRIMITIVE_PRESENT_EMPTY_STRING",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/FOLDED_RETAIN_CALLBACKS_LEAVE_SOURCE_GAPS",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/COHERENT_OPAQUE_RELABEL_CANNOT_AUTHENTICATE_OBJECTS",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/FIRST_CHECK_THROWS_BEFORE_PAIR_REACHED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PAIR_PARENT_ACTIVATION",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PAIR_CHILD_PARENT_ROOT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ROOT_PARENT_CYCLE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/LEASE_ALIAS_DUPLICATE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/LEASE_TABLE_GAP",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PROMISE_TABLE_GAP",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/WORK_SCOPE_REPLACED_BY_RETAINER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PROMISE_OWNER_DRIFT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/SETTLEMENT_WITHOUT_RETAIN",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PUBLIC_SETTLEMENT_DUPLICATE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PUBLIC_RETAIN_DUPLICATE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RETAINED_POINTS_LATER_EVENT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/SETTLEMENT_POINTS_OTHER_PROMISE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/FIRST_CLOSE_REPLACED_BY_CALL",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/DUPLICATE_CLOSED_TRANSITION",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/CHILD_INVENTED_CLOSE_METHOD",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ROOT_FACTORY_CLOSE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/OUTER_ROOT_FINISH",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/CHILD_FINALLY_ON_OUTER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ROOT_ABORT_ON_PAIR",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/INITIAL_STOP_ON_ROOT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PAIR_PARENT_ABORT_ON_OUTER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/TARGET_RETURN_BEFORE_ENTER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/SECOND_RECHECK_SITE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/TARGET_ENTER_DUPLICATE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/TARGET_UNKNOWN_WITH_ENTER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/TARGET_THROW_MASKED_NONE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/FIRST_SCOPE_ERROR_A_OVERWRITTEN_B",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ERROR_FIRST_USE_OVERWRITTEN",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/UNDECLARED_ERROR_ORDINAL",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PRIMITIVE_IDENTITY_FABRICATED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PRIMITIVE_PRIVATE_CONTENT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/FIRST_ERROR_ERASED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/EMPTY_FIRST_ERROR_FORGED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/FIRST_ERROR_LEASE_ROOT_RESOLVER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/AFTER_CUT_EVENT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/CUT_POINTS_BEFORE_LAST",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/SOURCE_SEQUENCE_REORDER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/SOURCE_SEQUENCE_DUPLICATE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/SOURCE_SEQUENCE_OVER_CAP",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/MORE_THAN24_EVENTS",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/GAP_DECLARED_COMPLETE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ELIGIBLE_TWO_JOINED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ELIGIBLE_ZERO_JOINED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ONE_ELIGIBLE_UNJOINED_OK",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/UNKNOWN_RETAINS_HIDDEN_EVENTS",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/MULTIPLE_ELIGIBLE_REASON_WRONG",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/M_REALM_BRIDGE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RACE_WINNER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/DEADLINE_CAUSE_ENUM",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/DRAIN_FLAG",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/PRIVATE_EVENT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/SNAPSHOT_KEY_ORDER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/EVENT_KEY_ORDER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/EVENT_WRONG_TYPE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/SNAPSHOT_FOREIGN_IDENTITY",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/UNUSED_ERROR_TABLE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/FOCUS_WRONG_ROLE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/FOCUS_BAD_SELECTION",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_ACTIVATION_CHILD_UNKNOWN",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_FOCUSED_PAIR_CHILD_UNKNOWN",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_SHARED_CHILD_REPEATED_DISTINCT_SEQUENCE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_PAIR_PARENT_AFTER_SAME_CLOSE_COMPLETE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_OUTER_PARENT_AFTER_SAME_CLOSE_COMPLETE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_NESTED_CLOSE_PARENT_MARKER_BEFORE_OP_NOTE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_PAIR_PARENT_MISSING_CLOSE_EXPLICIT_PREFIX",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_OUTER_PARENT_MISSING_CLOSE_EXPLICIT_PREFIX",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_PARENT_REPEATED_CLOSE_IDEMPOTENT_FIRST_UNCHANGED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_CHILD_WRONG_ROLE_ROOT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_CHILD_WRONG_ROLE_OUTER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_CHILD_WRONG_ROLE_PAIR_FACTORY",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_CHILD_WRONG_CAUSE_parent-abort",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_CHILD_WRONG_CAUSE_finally",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_CHILD_WRONG_CAUSE_explicit-finish",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_PAIR_PARENT_WRONG_ROLE_OUTER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_OUTER_PARENT_WRONG_ROLE_PAIR",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_PAIR_PARENT_WRONG_CAUSE_UNKNOWN",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_OUTER_PARENT_WRONG_CAUSE_FINALLY",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_FORBIDDEN_CLOSE_PAIR_PARENT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_FORBIDDEN_CLOSE_OUTER_PARENT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_FORBIDDEN_CLOSE_PAIR_FINALLY",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_FORBIDDEN_PAIR_FINALLY_ABORT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_FORBIDDEN_EXTRA_CHILD_FINALLY_ABORT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_CHILD_FAKE_CLOSED_TRANSITION",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_DUPLICATE_SOURCE_SEQUENCE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_COMPLETE_OUTER_MARKER_WITHOUT_CLOSE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_COMPLETE_PAIR_MARKER_PRECEDES_CLOSE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_COMPLETE_OUTER_MARKER_PRECEDES_CLOSE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/ABORT_PREFIX_MISSING_CLOSE_NOT_DISCLOSED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "BOUNDARY/NO_CROSS_SNAPSHOT_ARRAY",
+      "pass": true
+    },
+    {
+      "id": "BOUNDARY/NO_BEFORE_AFTER_STITCH",
+      "pass": true
+    },
+    {
+      "id": "BOUNDARY/NO_FOREIGN_REALM_WRAPPER",
+      "pass": true
+    },
+    {
+      "id": "BOUNDARY/RESET_EQUAL_ORDINAL_SEPARATE_CALLS",
+      "pass": true
+    },
+    {
+      "id": "BOUNDARY/INPUT_NOT_MUTATED",
+      "pass": true
+    },
+    {
+      "id": "BOUNDARY/PUBLIC_ACCESSOR_REJECT_WITHOUT_INVOCATION",
+      "pass": true
+    },
+    {
+      "id": "BOUNDARY/REJECTION_DOES_NOT_FORWARD_PRIVATE_PAYLOAD",
+      "pass": true
+    },
+    {
+      "id": "JSON_MODEL/ARRAY_NONENUMERABLE_TOJSON",
+      "pass": true,
+      "accepted": false,
+      "callbackCalls": 0
+    },
+    {
+      "id": "JSON_MODEL/ARRAY_INHERITED_TOJSON",
+      "pass": true,
+      "accepted": false,
+      "callbackCalls": 0
+    },
+    {
+      "id": "JSON_MODEL/OBJECT_INHERITED_TOJSON",
+      "pass": true,
+      "accepted": false,
+      "callbackCalls": 0
+    },
+    {
+      "id": "OWN/RULING_PREPAIR_THROW_COMPLETE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/RULING_COMPLETE_OTHER_PROMISE_HANDLER_UNOBSERVED",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/RULING_COMPLETE_WITH_ANCESTOR_CLOSE_UNOBSERVED",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/RULING_PAIR_INITIALIZATION_MISSING_BINDING_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/RULING_ACTIVATION_CHILD_CHECK_A_BEFORE_FOCUSED_B",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/RULING_COMPLETE_BOUND_PAIR_NO_RETURNED_PROMISE_SETTLEMENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/RULING_COMPLETE_BOUND_PAIR_NO_FIRST_CLOSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/RULING_MULTIPLE_PAIR_CHILDREN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/RULING_HOLDERS_ON_ACTIVATION_CHILD",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/RULING_PROMISE_WORK_SCOPE_ROOT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/RULING_PROMISE_WORK_SCOPE_OUTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/RULING_UNBOUND_PAIR_NOT_COMPLETE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_PREPAIR_THROW_COMPLETE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_COMPLETE_OTHER_PROMISE_HANDLER_UNOBSERVED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_COMPLETE_WITH_ANCESTOR_CLOSE_UNOBSERVED",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_PAIR_INITIALIZATION_MISSING_BINDING_PREFIX",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_ACTIVATION_CHILD_CHECK_A_BEFORE_FOCUSED_B",
+      "pass": true,
+      "transportValid": true,
+      "accepted": true
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_COMPLETE_BOUND_PAIR_NO_RETURNED_PROMISE_SETTLEMENT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_COMPLETE_BOUND_PAIR_NO_FIRST_CLOSE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_MULTIPLE_PAIR_CHILDREN",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_HOLDERS_ON_ACTIVATION_CHILD",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_PROMISE_WORK_SCOPE_ROOT",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_PROMISE_WORK_SCOPE_OUTER",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "SYNTHETIC_TRANSPORT/RULING_UNBOUND_PAIR_NOT_COMPLETE",
+      "pass": true,
+      "transportValid": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_ACTIVATION_CHILD_UNKNOWN",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_FOCUSED_PAIR_CHILD_UNKNOWN",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_SHARED_CHILD_REPEATED_DISTINCT_SEQUENCE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_PAIR_PARENT_AFTER_SAME_CLOSE_COMPLETE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_OUTER_PARENT_AFTER_SAME_CLOSE_COMPLETE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_NESTED_CLOSE_PARENT_MARKER_BEFORE_OP_NOTE",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_PAIR_PARENT_MISSING_CLOSE_EXPLICIT_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_OUTER_PARENT_MISSING_CLOSE_EXPLICIT_PREFIX",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_PARENT_REPEATED_CLOSE_IDEMPOTENT_FIRST_UNCHANGED",
+      "pass": true,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_ROLE_ROOT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_ROLE_OUTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_ROLE_PAIR_FACTORY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_CAUSE_parent-abort",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_CAUSE_finally",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_CAUSE_explicit-finish",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_PAIR_PARENT_WRONG_ROLE_OUTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_OUTER_PARENT_WRONG_ROLE_PAIR",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_PAIR_PARENT_WRONG_CAUSE_UNKNOWN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_OUTER_PARENT_WRONG_CAUSE_FINALLY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_CLOSE_PAIR_PARENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_CLOSE_OUTER_PARENT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_CLOSE_PAIR_FINALLY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_PAIR_FINALLY_ABORT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_EXTRA_CHILD_FINALLY_ABORT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_FAKE_CLOSED_TRANSITION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_DUPLICATE_SOURCE_SEQUENCE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_COMPLETE_OUTER_MARKER_WITHOUT_CLOSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_COMPLETE_PAIR_MARKER_PRECEDES_CLOSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_COMPLETE_OUTER_MARKER_PRECEDES_CLOSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_PREFIX_MISSING_CLOSE_NOT_DISCLOSED",
+      "pass": true,
+      "accepted": false
+    }
+  ],
+  "failed": 0,
+  "maxPositiveCausalRecordBytes": 4818,
+  "all132SyntheticTransportModelsValid": true,
+  "total": 332,
+  "uniqueIds": 332,
+  "actualNativeImportGraph": false,
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

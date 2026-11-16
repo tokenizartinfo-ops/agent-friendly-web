@@ -1,0 +1,136 @@
+{
+  "schema": "afw.c2-notices-n3.own-abort-fix1-report.v1",
+  "status": "B1_ABORT_MATRIX_FIXED_DATA_READY",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA and pure OWN RAM",
+  "origin": "GitHub API",
+  "allowedAction": "Narrow independent OWN B1 event-matrix correction; no Source eval/import/compile/tests/files/deps/refs/runs/runtime/WF or B2 wrapper",
+  "authority": {
+    "brief": "a3fb7c96298183eaa290f35137bca0ba50ad0633",
+    "seal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "exactAbortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "beforeOwnIndex": "5fb38b6b85c94aace6ffbabc5ba20beffbf810c2",
+    "beforeReader": "83f5a63f0515f7eabafba9f693be5df52f15647e"
+  },
+  "problem": "B1 rejected child-shared abort and specific parent-listener markers, while admitting PH close-call sites that do not emit close-call in the sealed original callback mapping.",
+  "change": [
+    "abort-observed/initial-child only activation-child or selected pair-child, cause unknown; no timing/parent/root-trigger inference.",
+    "abort-observed/pair-parent-abort only target-pair, outer-parent-abort only outer, cause parent-abort as listener-path enum. The same clock firstClose must be represented earlier. Missing closure may remain prefix only with explicit UNBOUND/PREBIND_GAP/PROJECTION_GAP deficit; a later claimed firstClose contradicts an earlier completed parent callback marker.",
+    "close-call/closed-transition only root-finish/root/explicit-finish or initial-close/outer|target-pair/unknown. Removed PH pair-parent/outer-parent/pair-finally close-call branches.",
+    "Child finally remains child-finally/initial-child-finally/finally only. No invented second abort marker or pair-finally event.",
+    "Repeated legitimate aborts with distinct sourceSequence remain accepted; no firstClose or firstError rewriting. Nested close/stop/parent markers may precede OP root-abort note."
+  ],
+  "testFirst": {
+    "literalMatrixCorpus": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/abort-vectors.json",
+      "blob": "19a8d50514e7ba0edf8352f5c51f4eaf4530b960",
+      "bytes": 192084,
+      "sha256": "fbde88f9f98e3356efc48379836696285146c3b0de00d69b447f46ad37304be5",
+      "gitBlob": "19a8d50514e7ba0edf8352f5c51f4eaf4530b960",
+      "fullReadback": true,
+      "before": null
+    },
+    "positives": 9,
+    "negatives": 21,
+    "persistedBeforeCode": true,
+    "oldB1Red": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/abort-red.json",
+      "blob": "26992e233a8ef4a777fc8cae66ed7945a960be41",
+      "bytes": 3706,
+      "sha256": "225533388387c2e7d303d4b923d5e6d08534e1a19b81014cbf206de17dba503e",
+      "gitBlob": "26992e233a8ef4a777fc8cae66ed7945a960be41",
+      "fullReadback": true,
+      "before": null
+    },
+    "oldFalseRejects": 9,
+    "oldFalseAccepts": 3,
+    "meaning": "Original OWN corpus and RED, no Source code/callback/unit invocation. Old B1 reader and entire B1 packet preserved."
+  },
+  "oldCorpusCorrection": {
+    "before": "65dedb92f5d1baa71488ba17f866e185db10971c",
+    "after": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-vectors.json",
+      "blob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "bytes": 673148,
+      "sha256": "dc602f3d129735afc9aceb9927b2448d77e135265137addb91fa7bdc7b54c068",
+      "gitBlob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "fullReadback": true,
+      "before": null
+    },
+    "onlyLiteral": "NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE",
+    "reason": "Before8b791 was sealed, this old positive used close-call/outer-parent-abort. It now uses abort-observed/outer-parent-abort after original factory close/transition/stop, before OP abort note. Expectation derived from Root exact mapping; old literal/RED remain intact.",
+    "allOtherLiteralsUnchanged": true
+  },
+  "verification": {
+    "execution": "Pure OWN RAM; exact final reader/control bodies checked together",
+    "groups": {
+      "literal": 90,
+      "sealedData": 43,
+      "rawRecord": 15,
+      "syntheticTransport": 120,
+      "boundaries": 7,
+      "jsonModels": 3,
+      "ruling": 12,
+      "rulingTransport": 12,
+      "abortMatrix": 30
+    },
+    "total": 332,
+    "uniqueIds": 332,
+    "failed": 0,
+    "all132SyntheticTransportModelsValid": true,
+    "maxPositiveCausalRecordBytes": 4818,
+    "recordCap6144": true,
+    "actualNativeImportGraph": false,
+    "results": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-results.json",
+      "blob": "9bbb1d92c3ac62a9ef54e72fb7b0d9da6dc511c3",
+      "bytes": 42075,
+      "sha256": "f4f0c86db7f5f0366f99ac120fd59c1c33c6b573685e6665fdeb14c9d96f3586",
+      "gitBlob": "9bbb1d92c3ac62a9ef54e72fb7b0d9da6dc511c3",
+      "fullReadback": true,
+      "before": null
+    },
+    "transport": "120 new coherent causal-record/witness/OWN model frame/ZIPSTORE fixtures plus12 preserved ruling transports; semantic acceptance/rejection tested after every setup verifies its fresh hashes/CRC."
+  },
+  "proofLimits": [
+    "Events validate safe public projected observation order and known callback-site compatibility. They do not independently authenticate that original callbacks actually ran after c.abort/clock.close; known pinned producer and actual Source seam units must prove that separately.",
+    "parent-abort is the parent-listener path, not physical initiating trigger, timer expiry, first cause or racewinner. Source sequence is observation order; Node arrival does not define effect order.",
+    "No crosssnapshot/realm/restart/M join, no hidden actual root/promise/Error authentication from ordinal equality. p2 versus internal run() provenance remains producer/seam-unit dependent.",
+    "Missing settlement handler does not prove physical pending/drain. Complete still means selected focus coverage through cut, not all ancestor closures/all promise settlements or business success.",
+    "These synthetic model ZIPs and OWN_SYNTHETIC frames are not final Source fourframes, outer outcome/API receipt, producerManifest admission or whole N3 max-size proof."
+  ],
+  "reversibility": {
+    "beforeReaderFullText": true,
+    "beforeControlsFullText": true,
+    "beforeCorpusAndTransportBlobsPreserved": true,
+    "allOtherB1ArtifactsPreserved": true,
+    "codeForwardExact": true,
+    "codeReverseExact": true,
+    "newPrefix": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/",
+    "rollback": "No active ref was created. Omit new fix-prefix paths; all old B1 and Source paths untouched."
+  },
+  "pending": [
+    "Root full readback/review and later actual OWN native graph",
+    "Final N3 full outer schema/manifest/body hashes/context for B2; no B2 wrapper/native workflow authored here",
+    "Source actual callback coverage independently by Source author/Root, never performed by this writer"
+  ],
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "refsCreated": 0,
+  "runsCreated": 0,
+  "localFilesCreated": 0,
+  "dependenciesInstalled": 0,
+  "actualNativeImportGraph": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

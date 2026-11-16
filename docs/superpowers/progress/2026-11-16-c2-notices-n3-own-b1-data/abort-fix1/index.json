@@ -1,0 +1,324 @@
+{
+  "schema": "afw.c2-notices-n3.own-abort-fix1-index.v1",
+  "status": "B1_ABORT_FIX1_READY_B2_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git DATA + pure OWN RAM",
+  "origin": "GitHub API",
+  "allowedAction": "Narrow OWN causal matrix correction only; no Source execution/ref/run/files/deps/WF/final wrapper",
+  "authority": {
+    "baseOwnIndex": "5fb38b6b85c94aace6ffbabc5ba20beffbf810c2",
+    "earlySeal": "8a9d366868d4be5593866637417c356bf4783e1d",
+    "semanticRuling": "9a31eef41d4e4a093f78aba636393cee0f3f50b0",
+    "exactAbortMatrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+    "spec": "6e33289827f12d7abc9f3b983e06c5f28b9f7432"
+  },
+  "paths": [
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-reader.mjs",
+      "blob": "c6d67df47fa9c7b30c854133744e463bf5242330",
+      "bytes": 18894,
+      "sha256": "905f2270405129abeae78955ca1550184402a9eb99522c322ac2ab8a00a04e77",
+      "gitBlob": "c6d67df47fa9c7b30c854133744e463bf5242330",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-controls.mjs",
+      "blob": "5a9f631e9e2a9be395d98224ee54f584e3b4017b",
+      "bytes": 8288,
+      "sha256": "1b96f48f11736471f40c586d1d0a400f57c8227bc580dc320c32b200fc9d66fa",
+      "gitBlob": "5a9f631e9e2a9be395d98224ee54f584e3b4017b",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-vectors.json",
+      "blob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "bytes": 673148,
+      "sha256": "dc602f3d129735afc9aceb9927b2448d77e135265137addb91fa7bdc7b54c068",
+      "gitBlob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/causal-schema.json",
+      "blob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "bytes": 13899,
+      "sha256": "8780c9fcdb7f90ce35af840b22f3509c69417059b7d84a7774e708324e4a26ec",
+      "gitBlob": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/sealed-vectors-data.json",
+      "blob": "79ac1e8a8375bf2c210238c91f88668361a40375",
+      "bytes": 371781,
+      "sha256": "bcd46c9974b582f4be9bce9264bcdd8a19918447688c8677c07683f6aec4d4fa",
+      "gitBlob": "79ac1e8a8375bf2c210238c91f88668361a40375",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/raw-record-inputs.json",
+      "blob": "48f2cd757be9440bc7aad556828c3e9da49f760a",
+      "bytes": 88664,
+      "sha256": "d19cbfe46d03c942eb030075a35b8f0486948cab5e31c28a5be6afa8a5fd7614",
+      "gitBlob": "48f2cd757be9440bc7aad556828c3e9da49f760a",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/synthetic-transport.json",
+      "blob": "2d14f32d900bc69828def726f583add0ab7ac67b",
+      "bytes": 1595506,
+      "sha256": "2f4a642a080e1efe7076900bcc89ea40d34f6e6adb7c2d34c958cbfddcd09088",
+      "gitBlob": "2d14f32d900bc69828def726f583add0ab7ac67b",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/json-boundary-models.json",
+      "blob": "2a559ee8c15be58140fc118a0e4e738332d62ca0",
+      "bytes": 1192,
+      "sha256": "30d797eb4258776bb7eb29aba7abc940dde9bcfb6561896352bfe1212e199e9e",
+      "gitBlob": "2a559ee8c15be58140fc118a0e4e738332d62ca0",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/ruling-vectors.json",
+      "blob": "dda1ab3a5e6e7c6f09c63b192111f446ac7ecd47",
+      "bytes": 96673,
+      "sha256": "8118d3e6d6d4b1420dd22733b9409b3f06110fcbdee6a21c65d3f9a688edbb9b",
+      "gitBlob": "dda1ab3a5e6e7c6f09c63b192111f446ac7ecd47",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/ruling-transport.json",
+      "blob": "7909d8aa6c6231cbe9498aa7615e3c50764fcd25",
+      "bytes": 175253,
+      "sha256": "325f24debd11ef0b78320b17fa942269e69e7d37449ced92f8350fe48b29e80f",
+      "gitBlob": "7909d8aa6c6231cbe9498aa7615e3c50764fcd25",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/abort-vectors.json",
+      "blob": "19a8d50514e7ba0edf8352f5c51f4eaf4530b960",
+      "bytes": 192084,
+      "sha256": "fbde88f9f98e3356efc48379836696285146c3b0de00d69b447f46ad37304be5",
+      "gitBlob": "19a8d50514e7ba0edf8352f5c51f4eaf4530b960",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-results.json",
+      "blob": "9bbb1d92c3ac62a9ef54e72fb7b0d9da6dc511c3",
+      "bytes": 42075,
+      "sha256": "f4f0c86db7f5f0366f99ac120fd59c1c33c6b573685e6665fdeb14c9d96f3586",
+      "gitBlob": "9bbb1d92c3ac62a9ef54e72fb7b0d9da6dc511c3",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/abort-red.json",
+      "blob": "26992e233a8ef4a777fc8cae66ed7945a960be41",
+      "bytes": 3706,
+      "sha256": "225533388387c2e7d303d4b923d5e6d08534e1a19b81014cbf206de17dba503e",
+      "gitBlob": "26992e233a8ef4a777fc8cae66ed7945a960be41",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/reversible-diff.json",
+      "blob": "0eba6097e516ccc93bdd5efe00189628aee058b6",
+      "bytes": 85890,
+      "sha256": "bf916fd9132ca0f97f10b332287169433839a6a47128d1fa34a0c543234c2f0b",
+      "gitBlob": "0eba6097e516ccc93bdd5efe00189628aee058b6",
+      "fullReadback": true,
+      "before": null
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/report.json",
+      "blob": "015a46acf6b767d485957c80d2db208870aeea50",
+      "bytes": 7413,
+      "sha256": "a2449837b1d9ca5453cb3efa61314c3874f8ca781198678bba13c7ff26c40b06",
+      "gitBlob": "015a46acf6b767d485957c80d2db208870aeea50",
+      "fullReadback": true,
+      "before": null
+    }
+  ],
+  "selfPath": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/index.json",
+  "proposedNewPathsIncludingSelf": 16,
+  "interface": {
+    "reader": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-reader.mjs",
+      "blob": "c6d67df47fa9c7b30c854133744e463bf5242330",
+      "bytes": 18894,
+      "sha256": "905f2270405129abeae78955ca1550184402a9eb99522c322ac2ab8a00a04e77",
+      "gitBlob": "c6d67df47fa9c7b30c854133744e463bf5242330",
+      "fullReadback": true,
+      "before": null
+    },
+    "exports": [
+      "n3TraceReplay(snapshot)",
+      "n3CausalReplay(recordObject|canonicalNDJSONstring|UTF8Buffer)"
+    ],
+    "summaryShapeUnchanged": true,
+    "causalSchemaUnchanged": "2e3c89a1aebd0cc9a804071ad593e2800b4ef462",
+    "recordMaxUTF8BytesIncludingLF": 6144
+  },
+  "changes": "Accept exact child-shared and parent-listener abort markers. Exclude PH close-call/finally markers. Parent marker requires prior same-clock closure for complete; explicit relevant prefix deficit may preserve unknown, never a contradictory later firstClose. No other replay/API wrapper behavior changed.",
+  "corpus": {
+    "before": "65dedb92f5d1baa71488ba17f866e185db10971c",
+    "after": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-vectors.json",
+      "blob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "bytes": 673148,
+      "sha256": "dc602f3d129735afc9aceb9927b2448d77e135265137addb91fa7bdc7b54c068",
+      "gitBlob": "d7fa515903496205b5b08d1c3768190120f74fbd",
+      "fullReadback": true,
+      "before": null
+    },
+    "onlyOldLiteralChanged": "NESTED_PARENT_CLOSE_BEFORE_OP_ABORT_NOTE",
+    "reason": "Root8b791 corrected pre-matrix tentative close-call marker to actual post-close abort-observed marker; old literal remains immutable.",
+    "newMatrix": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/abort-vectors.json",
+      "blob": "19a8d50514e7ba0edf8352f5c51f4eaf4530b960",
+      "bytes": 192084,
+      "sha256": "fbde88f9f98e3356efc48379836696285146c3b0de00d69b447f46ad37304be5",
+      "gitBlob": "19a8d50514e7ba0edf8352f5c51f4eaf4530b960",
+      "fullReadback": true,
+      "before": null
+    },
+    "newPositives": 9,
+    "newNegatives": 21,
+    "red": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/abort-red.json",
+      "blob": "26992e233a8ef4a777fc8cae66ed7945a960be41",
+      "bytes": 3706,
+      "sha256": "225533388387c2e7d303d4b923d5e6d08534e1a19b81014cbf206de17dba503e",
+      "gitBlob": "26992e233a8ef4a777fc8cae66ed7945a960be41",
+      "fullReadback": true,
+      "before": null
+    },
+    "oldB1FalseRejects": 9,
+    "oldB1FalseAccepts": 3,
+    "persistedBeforeImplementation": true
+  },
+  "controlGraph": {
+    "module": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-controls.mjs",
+      "blob": "5a9f631e9e2a9be395d98224ee54f584e3b4017b",
+      "bytes": 8288,
+      "sha256": "1b96f48f11736471f40c586d1d0a400f57c8227bc580dc320c32b200fc9d66fa",
+      "gitBlob": "5a9f631e9e2a9be395d98224ee54f584e3b4017b",
+      "fullReadback": true,
+      "before": null
+    },
+    "export": "n3AbortFix1Controls(own,sealed,raw,transport,sha256,ruling,rulingTransport,abort)",
+    "arguments": {
+      "own": "trace-vectors.json",
+      "sealed": "sealed-vectors-data.json",
+      "raw": "raw-record-inputs.json",
+      "transport": "synthetic-transport.json",
+      "ruling": "ruling-vectors.json",
+      "rulingTransport": "ruling-transport.json",
+      "abort": "abort-vectors.json"
+    },
+    "groups": {
+      "literal": 90,
+      "sealedData": 43,
+      "rawRecord": 15,
+      "syntheticTransport": 120,
+      "boundaries": 7,
+      "jsonModels": 3,
+      "ruling": 12,
+      "rulingTransport": 12,
+      "abortMatrix": 30
+    },
+    "total": 332,
+    "uniqueIds": 332,
+    "failed": 0,
+    "all132SyntheticTransportModelsValid": true,
+    "actualNativeImportGraph": false,
+    "execution": "Pure OWN RAM final bodies checked together; native graph pending Root cloud. No Source helper/parser/runner/test invoked.",
+    "results": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/trace-results.json",
+      "blob": "9bbb1d92c3ac62a9ef54e72fb7b0d9da6dc511c3",
+      "bytes": 42075,
+      "sha256": "f4f0c86db7f5f0366f99ac120fd59c1c33c6b573685e6665fdeb14c9d96f3586",
+      "gitBlob": "9bbb1d92c3ac62a9ef54e72fb7b0d9da6dc511c3",
+      "fullReadback": true,
+      "before": null
+    }
+  },
+  "beforeimages": [
+    {
+      "role": "B1 reader",
+      "blob": "83f5a63f0515f7eabafba9f693be5df52f15647e",
+      "bytes": 18695,
+      "sha256": "062b1330abca20e5582e7b5fd587329cc9aa4cc526dee799e33c49691d5fdb16",
+      "fullReadback": true,
+      "fullTextInDiff": true
+    },
+    {
+      "role": "B1 controls",
+      "blob": "92aa3d6257343c7f466176bbf85b8a303a8a2fab",
+      "bytes": 7961,
+      "sha256": "c41de580fa73e029db63654504a4061098e848e98d08001bc9ad662595c09a74",
+      "fullReadback": true,
+      "fullTextInDiff": true
+    },
+    {
+      "role": "B1 literal corpus",
+      "blob": "65dedb92f5d1baa71488ba17f866e185db10971c",
+      "bytes": 672868,
+      "sha256": "ae3f6f008d4ce34729002b2117340814b5df9037b5da43cc5c310cb9f00743c8",
+      "fullReadback": true
+    },
+    {
+      "role": "B1 transport",
+      "blob": "bc8fc94aa4229711cb980143c79cd3f7ddff7459",
+      "bytes": 1240760,
+      "sha256": "ed199f48131a7e1cba36eaa71f255458abaa2a15d39e6a2c4e511e115d9a815d",
+      "fullReadback": true
+    }
+  ],
+  "reversibility": {
+    "diff": {
+      "path": "docs/superpowers/root-own/c2-notices-n3/abort-fix1/reversible-diff.json",
+      "blob": "0eba6097e516ccc93bdd5efe00189628aee058b6",
+      "bytes": 85890,
+      "sha256": "bf916fd9132ca0f97f10b332287169433839a6a47128d1fa34a0c543234c2f0b",
+      "gitBlob": "0eba6097e516ccc93bdd5efe00189628aee058b6",
+      "fullReadback": true,
+      "before": null
+    },
+    "forwardExact": true,
+    "reverseExact": true,
+    "allOtherB1LiteralsUnchanged": true,
+    "oldB1SourcePathsUntouched": true,
+    "rollback": "No activated ref exists from this writer. Omit new abort-fix1 paths in any future detached tree; immutable B1/Source bodies remain."
+  },
+  "proofLimits": "Callback-site order is a known-producer assertion checked as safe DATA. This wire cannot authenticate actual callbacks, p2 versus run(), private object identity or crosssnapshot/realm/M continuity. parent-abort names listener path, not physical trigger/cause/racewinner/expiry. Missing settlement is unobserved, not physical pending or drain. Synthetic OWN frames/ZIPs are not Source/API receipts.",
+  "pending": "Root independent readback/review/native integration and final full N3 outer schema/manifest/body/context handoff for B2. No workflow, final runner or full wrapper authored.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "refsCreated": 0,
+  "runsCreated": 0,
+  "filesCreated": 0,
+  "dependenciesInstalled": 0,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

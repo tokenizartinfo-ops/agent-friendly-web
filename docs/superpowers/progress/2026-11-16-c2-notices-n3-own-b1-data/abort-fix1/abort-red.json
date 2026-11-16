@@ -1,0 +1,158 @@
+{
+  "schema": "afw.c2-notices-n3.own-abort-fix1-red.v1",
+  "matrix": "8b791e3431faf44be717e534afc11cad73692bbe",
+  "beforeReader": "83f5a63f0515f7eabafba9f693be5df52f15647e",
+  "execution": "OWN RAM only; before abort matrix change",
+  "checks": [
+    {
+      "id": "OWN/ABORT_ACTIVATION_CHILD_UNKNOWN",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_FOCUSED_PAIR_CHILD_UNKNOWN",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_SHARED_CHILD_REPEATED_DISTINCT_SEQUENCE",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_PAIR_PARENT_AFTER_SAME_CLOSE_COMPLETE",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_OUTER_PARENT_AFTER_SAME_CLOSE_COMPLETE",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_NESTED_CLOSE_PARENT_MARKER_BEFORE_OP_NOTE",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_PAIR_PARENT_MISSING_CLOSE_EXPLICIT_PREFIX",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_OUTER_PARENT_MISSING_CLOSE_EXPLICIT_PREFIX",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_PARENT_REPEATED_CLOSE_IDEMPOTENT_FIRST_UNCHANGED",
+      "pass": false,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_ROLE_ROOT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_ROLE_OUTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_ROLE_PAIR_FACTORY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_CAUSE_parent-abort",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_CAUSE_finally",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_WRONG_CAUSE_explicit-finish",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_PAIR_PARENT_WRONG_ROLE_OUTER",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_OUTER_PARENT_WRONG_ROLE_PAIR",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_PAIR_PARENT_WRONG_CAUSE_UNKNOWN",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_OUTER_PARENT_WRONG_CAUSE_FINALLY",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_CLOSE_PAIR_PARENT",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_CLOSE_OUTER_PARENT",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_CLOSE_PAIR_FINALLY",
+      "pass": false,
+      "accepted": true
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_PAIR_FINALLY_ABORT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_FORBIDDEN_EXTRA_CHILD_FINALLY_ABORT",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_CHILD_FAKE_CLOSED_TRANSITION",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_DUPLICATE_SOURCE_SEQUENCE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_COMPLETE_OUTER_MARKER_WITHOUT_CLOSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_COMPLETE_PAIR_MARKER_PRECEDES_CLOSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_COMPLETE_OUTER_MARKER_PRECEDES_CLOSE",
+      "pass": true,
+      "accepted": false
+    },
+    {
+      "id": "OWN/ABORT_PREFIX_MISSING_CLOSE_NOT_DISCLOSED",
+      "pass": true,
+      "accepted": false
+    }
+  ]
+}

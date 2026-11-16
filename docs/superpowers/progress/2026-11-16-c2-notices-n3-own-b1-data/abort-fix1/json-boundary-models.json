@@ -1,0 +1,34 @@
+{
+  "schema": "afw.c2-notices-n3.own-b1-json-boundary-models.v1",
+  "syntheticOnly": true,
+  "cases": [
+    {
+      "id": "ARRAY_NONENUMERABLE_TOJSON",
+      "input": "Same valid literal events array, extra own nonenumerable toJSON function returning empty array",
+      "expected": {
+        "accepted": false,
+        "callbackCalls": 0
+      },
+      "breakCaught": "Shape validates original events while serialization invokes hidden function and hashes different events."
+    },
+    {
+      "id": "ARRAY_INHERITED_TOJSON",
+      "input": "Same valid literal events array, own private prototype with inherited toJSON function",
+      "expected": {
+        "accepted": false,
+        "callbackCalls": 0
+      },
+      "breakCaught": "Public DTO must not execute inherited custom serialization."
+    },
+    {
+      "id": "OBJECT_INHERITED_TOJSON",
+      "input": "Same valid literal snapshot with private null-root prototype carrying toJSON",
+      "expected": {
+        "accepted": false,
+        "callbackCalls": 0
+      },
+      "breakCaught": "No inherited serializer invocation."
+    }
+  ],
+  "meaning": "OWN public DTO boundary models only; not original Source callback/hook tests."
+}
