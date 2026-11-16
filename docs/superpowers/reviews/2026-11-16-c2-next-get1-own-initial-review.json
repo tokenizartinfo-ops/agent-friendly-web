@@ -1,0 +1,66 @@
+{
+  "schema": "afw.c2-next-get.root-own-scoped-review.v1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "immutable DATA; static independent review",
+  "authorityBrief": "69eac802655250a577555bb157d7a0acf178ac7a",
+  "scope": {
+    "moduleBlob": "733c2039ddfb68d1a0271507b07754228c29be55",
+    "controlsBlob": "741b3760728ef8ec39d2a9ee131150c9b642d4af",
+    "vectorsBlob": "cbaa7906025c3cf0ffd5aeefaff0b936700b08b0",
+    "schemaBlob": "7d317a0ab090924c47c1fcf66f948d51660cfd1e",
+    "admissionBlob": "ef6cc0db137643934c611e95b85200c26d4ea664",
+    "wireContractBlob": "a9368d6e3876cab8e34d071d0a36f5fa7b188854",
+    "packetBlob": "055104f5181e0637fa36758e13743a5572b155fc",
+    "coveringEvidenceBlob": "b53ed0bd19e18b8173fdee1f2ffdbc631f10cde5"
+  },
+  "verdict": {
+    "specification": "FAIL",
+    "quality": "FAIL",
+    "activationGate": "DO_NOT_ACTIVATE_WITH_THIS_RECEIVER"
+  },
+  "method": "Read complete immutable brief, Root module/controls, JSON vectors/schema/admission, wire-only contract/packet and covering actual119-control evidence. No Source product implementation was fetched or reviewed. No Source/observer/parser code execution, eval, import, compile or tests; no files/dependencies/clones, logs refetch, refs/runs/runtime/browser/mail/credentials or subagents. Examples below are static predicate walkthroughs, not executed controls. Only review-report blob creation/readback is performed.",
+  "evidenceAssessment": "Primary immutable evidence reports actual native ESM Root-only cloud run43835250058 attempt1 job133190138462 SUCCESS and119PASS/0FAIL. This is credited within its own covered controls. It does not cover the coherent-worker-stat counterexamples below; successful existing controls do not establish their rejection. No logs were refetched. No unsafe arbitrary string/private field leakage was found in the inspected outcome boundary.",
+  "findings": [
+    {
+      "number": 1,
+      "priority": "P2",
+      "title": "Join positive Worker counters back to their mandatory first edges",
+      "file": "docs/superpowers/root-own/c2-next-get1/reader.mjs",
+      "startLine": 98,
+      "endLine": 103,
+      "problem": "The worker-state validator only enforces first-edge-to-counter lower bounds. If edgeCounts has no entry for a row's site, `first` is undefined and line100 imposes no evidence requirement on its positive counters. A row for a never-encountered site can therefore be promoted into accepted checkpoints.",
+      "staticCounterexample": "Starting from the valid vector base, append [\"timeline\",1,1,0,0,3,null,null] to records[26].stats without adding any timeline worker-edge. workerSequence stays2 (the existing initial-timeline enter/return only). The new row is within every bound, is unique, satisfies open=entered-returned-threw, and has no old/first entry. Lines98-103 accept it. In a full input, consistently reconstruct witness bytes/hash, journal hash and observation.checkpoints and update the exact frame/artifact payload; no other reader predicate rejects the contradiction.",
+      "impact": "diagnosticCaptureAccepted:true can carry fabricated completion for a fixed checkpoint even though the supposedly complete first-edge witness contains no enter or return for that site. This breaks the binding spec's coherent stats and the wire contract's only-actually-encountered-sites rule.",
+      "requestedChange": "At each worker-state, require every emitted encountered-site row to have its observed first enter; for each counter >0 require its matching first edge, and keep the existing reverse lower-bound/missing-site checks. Preserve legitimate empty preGET snapshots and valid repeated-call totals.",
+      "verification": "Add a negative full-glue control with the phantom row and all witness/aggregate hashes and payloads consistently rebound, plus negative positive-return/throw counters without corresponding first edges. Existing 119 controls must remain covered."
+    },
+    {
+      "number": 2,
+      "priority": "P2",
+      "title": "Bind snapshot lastElapsed to observed first-edge times",
+      "file": "docs/superpowers/root-own/c2-next-get1/reader.mjs",
+      "startLine": 90,
+      "endLine": 100,
+      "problem": "The validator keeps only per-site first-edge flags, not per-site times. A stats row's lastElapsed is checked against snapshot time and an earlier stats row, but never against that site's already replayed edges.",
+      "staticCounterexample": "In the valid base, initial-timeline has enter@workerElapsedMs1 and return@3, followed by worker-state@4. Change records[26].stats[0][5] from3 to0. Row0 remains within0..4; it has no prior snapshot and its [1,1,0] counters satisfy all first-edge flags. Lines98-100 accept lastElapsed0 despite both observed events occurring later. Consistently rebind full witness/summary/artifact as above.",
+      "impact": "Accepted checkpoint timing can contradict the replayed event stream. This violates coherent bounded stats and permits the diagnostic to report a latest operation time earlier than its witnessed completion.",
+      "requestedChange": "Track each site's greatest observed edge workerElapsedMs and require every corresponding snapshot row lastElapsed to be at least that value, alongside existing monotonic snapshot checks.",
+      "verification": "Add a negative full-glue control rebinding witness/journal/summary/artifact for the earlier lastElapsed example; retain positive same-timestamp and increasing-timestamp cases."
+    }
+  ],
+  "proportionality": "Findings are bounded acceptance false positives in the fresh Root receiver. No Source implementation change, runtime feature expansion, complete Source qualification, or operational action is requested. Fixing them and revalidating belongs to Root under its separate authorization.",
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

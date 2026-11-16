@@ -1,0 +1,452 @@
+{
+  "schema": "afw.c2-t1.fixture-repair-next-get.report.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "authority": {
+    "brief": "ddca3344996d049bd2311ec66656fbe71dfbb9d5",
+    "ruling": "0be646b3302105b8191ee8f6f9d70ca0bff09d91",
+    "diagnosis": "620335609416de6c4ac1593ba4c6530038593250"
+  },
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "resourceType": "immutable Git blobs only",
+    "allowedAction": "bounded reads/create immutable proposal blobs/FULL readback; Root gates all execution"
+  },
+  "staticFindings": [
+    "S09 old phase mutator invoked normative OwnerSourceSnapshot hash/encode after changing phase to notice_consent; codec only admits coherent closed_ui. New fixture deliberately writes raw clone changing exactly phase while retaining original hash, verifies actual stored/synced readback, then actual compiled denial/noSEND and exact restoration.",
+    "S08 old MONITOR asserted entire global grant result length1 despite legacy grants/revocation fixture history. New fixture proves current grant/link/consent/ACK identity, exact event delta1, preserves all prior event/grant rows; no global history deletion or alternate business path.",
+    "Prior nextGET failures do not establish a leaf cause. This packet observes ONE finiteGET only, does not retry ambiguous partial writes. Native503/action-or-count throw is never SourcePASS."
+  ],
+  "normalSourceBoundary": {
+    "sourceIndex": {
+      "key": "repairSourceIndex",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "fullReadback": true
+    },
+    "changedEntries": [
+      8,
+      9
+    ],
+    "frozenOtherEntries": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      10,
+      11,
+      12
+    ],
+    "normal20CasesAndReg11Unchanged": true,
+    "normalS10Unchanged": true,
+    "originalsInGitUntouched": true
+  },
+  "normalCorrections": [
+    {
+      "id": 1,
+      "issue": "A three-space monitor anchor did not match; replacement text appended after EOF.",
+      "correction": "Rebuilt from exact F9 span using unique two-space method anchors. Exactly one async monitor(){ inside return object; noScope-to-EOF suffix exact old bytes; line18 witness unchanged; global count1 absent.",
+      "verification": "RAM string comparisons only; Root independent textual review addressed.",
+      "drafts": []
+    },
+    {
+      "id": 2,
+      "issue": "OriginalBASE fullDiff omitted S08 terminal LF.",
+      "correction": "Hunks preserve split('\\n') final empty element, join('\\n') exact without implicit LF/trim.",
+      "verification": "All13 complete before/after fetched as immutableDATA; forward+reverse reconstruction exact. Root independent review addressed.",
+      "draft": {
+        "key": "repairOriginalDiff",
+        "bytes": 156076,
+        "sha256": "a3544ffb494d92de8fc105e67b55b15d2ffcb05af1d75e0771b5650c7703c4c7",
+        "blob": "dc705cef3f66d8ba5a7cfd15e4aa98440ef7d168",
+        "fullReadback": true
+      }
+    }
+  ],
+  "observer": {
+    "nativeCases": [
+      "NG_CONNECTION",
+      "NG_OAUTH",
+      "NG_PHASE",
+      "NG_NOTICES",
+      "NG_MONITOR",
+      "NG_NEXT_GET"
+    ],
+    "nativeRegistration": "six eager root sequential tests; global after observed; action/count separate catch explicit booleans preserves exact original thrown value",
+    "flow": "actual world connection→SDKOAuth→raw phase-only mutation/compiled denial+restore→notices→current native MONITOR→ONE finite-formGET→close",
+    "overlays": "normal13 pinned/verified first; temporary exact S07driver/S08/S10 assembly overlays and compile-only PH/OP/WORK observation insertions; normal13 unchanged in Git",
+    "tracePath": "Worker private module memory; fixture read-only nextGetMetadata RPC transfers detached trace+scope-local actual retention; Node append-only owned0600 journal; parent bounded stable read after native child. Worker uses no fs.",
+    "oneActualRpc": "one shared slot includes arm/state/ticketSnapshot/poll/final; timeout does not release actual promise. Busy slot returns unavailable without second launch. Stop discards late results. No businessGET holder/proxy replacement or cancellation.",
+    "earlyReturn": "OP readSource !ownedContext validates and returns same value with matching return marker; all original actual awaits/identity guards retained",
+    "unknown": "worker-unavailable makes latest retention unavailable; no old snapshot reused as current, no count0/closed default",
+    "witness": "only complete parsed canonical whitelisted records copied into journal.witness; JSON.stringify(record)+LF reconstruction has independently checked bytes/SHA256. Torn/private/raw bytes never exposed. Invalid capture witness empty/unknown. Outcome cap24576 unchanged; overflow yields fixed OUTCOME_LIMIT without positivefallback."
+  },
+  "affectedAwaitEffectLedger": [
+    {
+      "site": "S09 phase RPC",
+      "awaits": "existing raw storage mutation→sync→readback",
+      "effects": "writes only deliberately malformed phase clone then caller finally exact rows/pointer restoration",
+      "authority": "fixture-only; original Source hash retained deliberately; compiled authority rejects"
+    },
+    {
+      "site": "S08 corruptThenDeny(phase)",
+      "awaits": "valid before context→real mutator→compiled context denial→real formGET denial→actual counts→finally exact restoration→valid context",
+      "effects": "all other mutation kinds/actions unchanged"
+    },
+    {
+      "site": "S08 monitor",
+      "awaits": "before actual SQL+DO snapshots→existing actual GET/POST→after actual SQL+DO snapshots",
+      "effects": "same business calls; additional current-identity/history/delta assertions only"
+    },
+    {
+      "site": "observer begin/poll/final",
+      "awaits": "shared single actual read-only metadata RPC with bounded wait; physical settlement owns exclusion after timeout",
+      "effects": "private trace/safe journal append only; no extra businessrequest"
+    },
+    {
+      "site": "compiled PH/OP",
+      "awaits": "no new await in observer insertion; actual old awaits and callbacks retained",
+      "effects": "private memory marks enter/return/throw and relative original margins only"
+    },
+    {
+      "site": "Worker retention",
+      "awaits": "none",
+      "effects": "read actual existing WeakMap retained-entry for same ctx; scope-local, never namespace drain"
+    },
+    {
+      "site": "parent capture",
+      "awaits": "same three custody launches; owned journal read then verified own cleanup",
+      "effects": "only own temp/owned artifact sanitizedJSON; locknpm before isolated Source launch"
+    }
+  ],
+  "controls": {
+    "testFirst": "Concrete finite synthetic DATA precedes parser implementation/corrections; no parser/test evaluated locally.",
+    "expected": {
+      "accepted": 5,
+      "rejected": 30,
+      "roundtrips": 5,
+      "slotChecks": 5
+    },
+    "execution": "SOURCE_TESTS_PENDING; Root cloud must execute controls before actual native selection and independently join API/head/job/context/custody/artifact."
+  },
+  "artifacts": [
+    {
+      "key": "nextDriver",
+      "bytes": 1589,
+      "sha256": "2ac917ef89f3e285dc6d0ebb654fb163c8cf46a791795173174775373c5cf31d",
+      "blob": "20d194d9b6b87eff6d1b68d08668e5183bc66195",
+      "fullReadback": true
+    },
+    {
+      "key": "nextCoupled",
+      "bytes": 19355,
+      "sha256": "f5a13e8753222361ea4bf869264fe48a5117595cd07e185a5f43594e05f7fb82",
+      "blob": "171f57edcb8f957798459f5a5677f48ed8400489",
+      "fullReadback": true
+    },
+    {
+      "key": "nextWorld",
+      "bytes": 88974,
+      "sha256": "fc278eee9247972a205a93fe7108685b24ade1e3d445f6be61bb8bd5eb09d784",
+      "blob": "24707e47e042ee60b4e549c1a5a195ede7ca0019",
+      "fullReadback": true
+    },
+    {
+      "key": "nextWorkerTrace",
+      "bytes": 1784,
+      "sha256": "9e44073d4faa73fb605c6b8bce192c24b0255b9e7a1775423040f4b7e5d385ac",
+      "blob": "86daedb5b2bc8d100c37874ecd8e6c0ad5311fb8",
+      "fullReadback": true
+    },
+    {
+      "key": "nextRecorder",
+      "bytes": 7403,
+      "sha256": "7c96e4986b104a7f742b135dcdb292d5bac36d5f89d8b3465907d798e2fd9820",
+      "blob": "c1647140c7b20654ea80c212f3bc7032bc1f18ff",
+      "fullReadback": true
+    },
+    {
+      "key": "nextReader",
+      "bytes": 14142,
+      "sha256": "17c0f4bb4d110bd47fec176dd4e911c6cd621ce18d19882b54f506a4fb0946c2",
+      "blob": "c94c06b6fed51baa35dfe4b5b335126413fc4966",
+      "fullReadback": true
+    },
+    {
+      "key": "nextSlot",
+      "bytes": 2072,
+      "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+      "fullReadback": true
+    },
+    {
+      "key": "nextInstrumentation",
+      "bytes": 6367,
+      "sha256": "bacc1fdfad03410135176e85c29749a0075ce22dde46ad16083c00dc963a7c36",
+      "blob": "0b8f087711a24018ef869f093e80d0f235e45d4d",
+      "fullReadback": true
+    },
+    {
+      "key": "nextVectors",
+      "bytes": 23875,
+      "sha256": "5d2af89cb324618ed6d353f6376efe031b67f6b72adc1465f91017c9f6d05bf4",
+      "blob": "cbaa7906025c3cf0ffd5aeefaff0b936700b08b0",
+      "fullReadback": true
+    },
+    {
+      "key": "nextSelection",
+      "bytes": 2845,
+      "sha256": "1608f46824c8820a36d22cb335274debbe03aaf509455ff71872bb03b7632a31",
+      "blob": "a6ee9308d8bc9c3a097b215a0e002decb3d378b3",
+      "selectionHash": "b11cb5434f7b66a925af39bc86ceff4b672b84f8895dd269140d70511dccea80",
+      "fullReadback": true
+    },
+    {
+      "key": "nextContract",
+      "bytes": 12706,
+      "sha256": "2d327b94a30f0751717bdee9b876127116e1535cb72ed830b3e2e360a7f5e8b9",
+      "blob": "a9368d6e3876cab8e34d071d0a36f5fa7b188854",
+      "fullReadback": true
+    },
+    {
+      "key": "nextSchema",
+      "bytes": 17050,
+      "sha256": "88e94592dc14dadf3751496a2367ee502bc4c45ba942bc2a6bc0363164e79d5d",
+      "blob": "7d317a0ab090924c47c1fcf66f948d51660cfd1e",
+      "fullReadback": true
+    },
+    {
+      "key": "nextRunner",
+      "bytes": 26100,
+      "sha256": "ee096912e44326addf98f5e39d47be6bba07051588954313eeccc71ebdcad3f4",
+      "gzip": 9318,
+      "gitBlob": "4a2fbed18e1ea00155d128dd817222a1d44ead1b",
+      "blob": "4a2fbed18e1ea00155d128dd817222a1d44ead1b",
+      "fullReadback": true
+    },
+    {
+      "key": "nextWorkflow",
+      "bytes": 1414,
+      "sha256": "23af806231866af380fd87e6c68f74d1917ffef1304167b2f3c60f3fab69ecbc",
+      "gzip": 737,
+      "gitBlob": "66088645e1275ee8e645752d3c46b7ce8d1dad0a",
+      "blob": "66088645e1275ee8e645752d3c46b7ce8d1dad0a",
+      "fullReadback": true
+    },
+    {
+      "key": "nextOverlaysDiff",
+      "bytes": 106799,
+      "sha256": "59dc63dd68a7209ae2cdeb54722eaba500f1ca5aa625f3aca73a0e67e857ac8b",
+      "gzip": 26239,
+      "gitBlob": "a6d0b6a18a6565fa423ad28feae87b7cb5b1653c",
+      "blob": "a6d0b6a18a6565fa423ad28feae87b7cb5b1653c",
+      "fullReadback": true
+    },
+    {
+      "key": "repairS08",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "gzipBytes": 5413,
+      "fullReadback": true
+    },
+    {
+      "key": "repairS09",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "gzipBytes": 16768,
+      "fullReadback": true
+    },
+    {
+      "key": "repairSourceIndex",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "fullReadback": true
+    },
+    {
+      "key": "repairF9Diff",
+      "bytes": 26979,
+      "sha256": "c4df19dfc7fffc8792abf7820f35644d7bbe6ef08c3745bf3138aef86417f88c",
+      "blob": "8c30a804ae360ae84ad4df3645c57531d620b388",
+      "fullReadback": true
+    },
+    {
+      "key": "repairOriginalDiff",
+      "bytes": 156655,
+      "sha256": "c54be0ad65ff8e94756d64da6188a1f912f36f262ec2e6f55a742df8622c17ce",
+      "blob": "e871940513864ee4ab80a7cb80b8ec4155377cd5",
+      "fullReadback": true
+    }
+  ],
+  "historyPreservedInactive": [
+    {
+      "key": "repairS08",
+      "bytes": 19510,
+      "sha256": "2f25408db10cd59a64ca8522f72ab8f697e6d4a7043dfb651f3818403f956c15",
+      "blob": "1f7ea5f5021179153a69bd145a2fa01b55668edb",
+      "gzipBytes": 5451,
+      "fullReadback": true
+    },
+    {
+      "key": "repairSourceIndex",
+      "bytes": 11467,
+      "sha256": "cfaf421e3b9ba6d4520b8b9ca36043b27994357268000034d440179fa6a4c5d3",
+      "blob": "7d6e486a006b78aeeec49e15335a466f16f49354",
+      "fullReadback": true
+    },
+    {
+      "key": "repairF9Diff",
+      "bytes": 36576,
+      "sha256": "5e60048eb351edf93cb6d0e087a435e834fd14d4d0eb5d97353c961d37416906",
+      "blob": "69655f48c824646348baa5dae729112aca6477cd",
+      "fullReadback": true
+    },
+    {
+      "key": "repairOriginalDiff",
+      "bytes": 157015,
+      "sha256": "22c566d6e7882e4de0547a41d3958a54fa32cc081489781690b77fa243bfbba5",
+      "blob": "7275ecb821f0de32e0ecc7e359a230e2757a1107",
+      "fullReadback": true
+    },
+    {
+      "key": "repairOriginalDiff",
+      "bytes": 156076,
+      "sha256": "a3544ffb494d92de8fc105e67b55b15d2ffcb05af1d75e0771b5650c7703c4c7",
+      "blob": "dc705cef3f66d8ba5a7cfd15e4aa98440ef7d168",
+      "fullReadback": true
+    },
+    {
+      "key": "nextVectors",
+      "bytes": 21856,
+      "sha256": "de19fd5b05408876a1a344b842567daa5488469e578acaefbfb6a973b3da9f0a",
+      "blob": "3a20e00454241925265f32e7eb6b09d2c4f030de",
+      "fullReadback": true
+    },
+    {
+      "key": "nextVectors",
+      "bytes": 22357,
+      "sha256": "83db4ad1b7b05f1652973e0e69f7cd28d367fe1dccd580e5f11516a867145273",
+      "blob": "2c7df80a8972b92e037ffe16c9f356f52fac2b35",
+      "fullReadback": true
+    },
+    {
+      "key": "nextReader",
+      "bytes": 11748,
+      "sha256": "931c311b93ff103c5eb5539c173004d6ea94f24262846ec6ff8ffead957257fa",
+      "blob": "78372a89f1ecb4f499538b0feff4a281238b01de",
+      "fullReadback": true
+    },
+    {
+      "key": "nextRecorder",
+      "bytes": 7613,
+      "sha256": "83c4009111c5f39a0e8a005ae07510b10636826a6395d2bc07e98314675aece3",
+      "blob": "4b6ecc81b809abb3d17776d9457cd9e65974e537",
+      "fullReadback": true
+    },
+    {
+      "key": "nextInstrumentation",
+      "bytes": 6155,
+      "sha256": "7b86a00ae78fb899478d0aaeb411a6091c3976e9fe4925a1157011820f6dc185",
+      "blob": "f2ed5e1d4cef823f30ea1bd8a9bc1042673a9370",
+      "fullReadback": true
+    },
+    {
+      "key": "nextContract",
+      "bytes": 10549,
+      "sha256": "8b8be631c7f4446ef0fba399cedec63ee6dc764d50a51cb1b9026e59828ed6e9",
+      "blob": "4b09152755d03c1709f777ae5b01e9bf8e5eac8d",
+      "fullReadback": true
+    },
+    {
+      "key": "nextSchema",
+      "bytes": 11139,
+      "sha256": "a9f46a269842ec2a95e325374064182ac0529b425ef322f545758d2c8fd1f6a1",
+      "blob": "a459593f94fab0340beef75606e2bb0f56c99a2a",
+      "fullReadback": true
+    },
+    {
+      "key": "nextSelection",
+      "bytes": 2604,
+      "sha256": "0d94e5479db77505e2803bace74b56fe8b70c12db1dab376f80fef144343f1ea",
+      "blob": "7e07199bc56335fc6159765abf9279751dc47c67",
+      "selectionHash": "6105045e493d1cc56ddc97ddab427df2e08c259d6b8aac9848b08c3e1df8a6b4",
+      "fullReadback": true
+    },
+    {
+      "label": "initial scenario-only vector draft",
+      "key": "repairVectors",
+      "bytes": 6305,
+      "sha256": "12aa887b3baeb009880c0309dfcec5c5ffa2ba1c2f05e82c963be73a75a288fe",
+      "blob": "298e9edc1e1b1d62acb7ac31217c4944b1271430",
+      "fullReadback": true
+    }
+  ],
+  "reversible": {
+    "f9ToNew": {
+      "key": "repairF9Diff",
+      "bytes": 26979,
+      "sha256": "c4df19dfc7fffc8792abf7820f35644d7bbe6ef08c3745bf3138aef86417f88c",
+      "blob": "8c30a804ae360ae84ad4df3645c57531d620b388",
+      "fullReadback": true
+    },
+    "originalBaseToNew13": {
+      "key": "repairOriginalDiff",
+      "bytes": 156655,
+      "sha256": "c54be0ad65ff8e94756d64da6188a1f912f36f262ec2e6f55a742df8622c17ce",
+      "blob": "e871940513864ee4ab80a7cb80b8ec4155377cd5",
+      "fullReadback": true
+    },
+    "temporaryOverlays": {
+      "bytes": 106799,
+      "sha256": "59dc63dd68a7209ae2cdeb54722eaba500f1ca5aa625f3aca73a0e67e857ac8b",
+      "gzip": 26239,
+      "gitBlob": "a6d0b6a18a6565fa423ad28feae87b7cb5b1653c",
+      "blob": "a6d0b6a18a6565fa423ad28feae87b7cb5b1653c",
+      "fullReadback": true
+    },
+    "rule": "exact UTF16 half-open string spans with full beforeText/afterText, or exact splitLF hunks; all before blobs preserved; no implicit trim/newline; abandon immutable proposal to roll back"
+  },
+  "limits": {
+    "totalMs": 330000,
+    "childMs": 180000,
+    "nativeCaseMs": 120000,
+    "jobMinutes": 7,
+    "node": "v22.23.4",
+    "sdk": "1.2.1",
+    "incomingMs": 30000,
+    "originalChildMs": 5000,
+    "stdout": 1048576,
+    "stderr": 65536,
+    "outcome": 24576,
+    "journal": 32768,
+    "records": 128,
+    "artifactDays": 7
+  },
+  "concerns": [
+    "Extra diagnostic read-only RPCs cost time but never change Source budgets. Timeout/unavailable is honest unknown.",
+    "Private journal may exceed outcome24576 after witness; no truncation/invented positive result, fixed cap failure.",
+    "Current exact normalSource fixture oracle still requires actual cloud covering evidence; static integration is not nativePASS.",
+    "Future complete qualification v2 producer rebinding remains separate required delivery; this packet is only next possible diagnostic."
+  ],
+  "verification": "Every listed current artifact created as immutable blob and FULL fetched/readback compared to exact authored data. Builtin RAM hashing/gzip/string/JSON only. No local Source/fixture/parser syntax/build/test execution, no refs/runs/runtime/logrefetch.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

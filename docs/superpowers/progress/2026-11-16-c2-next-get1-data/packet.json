@@ -1,0 +1,349 @@
+{
+  "schema": "afw.c2-next-get.packet.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "immutable DATA only",
+  "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "authority": {
+    "brief": "ddca3344996d049bd2311ec66656fbe71dfbb9d5",
+    "ruling": "0be646b3302105b8191ee8f6f9d70ca0bff09d91"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-next-get1",
+    "message": "AFW-C2-T1-NEXT-GET1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-next-get1.yml",
+    "job": "c2-next-get1",
+    "runner": "docs/superpowers/source-lab/c2-t1-next-get1/run-c2-next-get1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-next-get1/run-c2-next-get1.mjs"
+  },
+  "inherited17": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "bytes": 148547,
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "bytes": 45576,
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "bytes": 2497,
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "productOrTestPath": "worker/mcp-own/finite.mjs",
+      "bytes": 2810,
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "bytes": 4153,
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "bytes": 101380,
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "bytes": 22501,
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "productOrTestPath": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "bytes": 2785,
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "productOrTestPath": "test/fixtures/finite-coupled-native.mjs",
+      "bytes": 18667,
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+      "readbackEvidence": "frozen f9 SourceIndex entry",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "productOrTestPath": "test/fixtures/finite-first-connection-publication.mjs",
+      "bytes": 61073,
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "readbackEvidence": "frozen f9 SourceIndex entry",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "productOrTestPath": "test/fixtures/finite-initial-entry-world.mjs",
+      "bytes": 88519,
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "productOrTestPath": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "bytes": 58727,
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "bytes": 6030,
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/regression-selection.json",
+      "bytes": 3364,
+      "sha256": "8287deef6924d3f91db98078da7bca8bdb55e292f87f9fd814da794e513ba4cf",
+      "blob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "fullReadback": true
+    }
+  ],
+  "newObserverPaths14": [
+    {
+      "role": "selection",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/selection.json",
+      "bytes": 2845,
+      "blob": "a6ee9308d8bc9c3a097b215a0e002decb3d378b3",
+      "sha256": "1608f46824c8820a36d22cb335274debbe03aaf509455ff71872bb03b7632a31",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "vectors",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/synthetic-vectors.json",
+      "bytes": 23875,
+      "blob": "cbaa7906025c3cf0ffd5aeefaff0b936700b08b0",
+      "sha256": "5d2af89cb324618ed6d353f6376efe031b67f6b72adc1465f91017c9f6d05bf4",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "reader",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/next-get-reader.mjs",
+      "bytes": 14142,
+      "blob": "c94c06b6fed51baa35dfe4b5b335126413fc4966",
+      "sha256": "17c0f4bb4d110bd47fec176dd4e911c6cd621ce18d19882b54f506a4fb0946c2",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "slot",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/next-get-slot.mjs",
+      "bytes": 2072,
+      "blob": "6507ca2410ac27606f4996e97a91736c5e14b615",
+      "sha256": "d4a82b40841cc9277f3cdd1c1355f95fcd4e00cc283fa73d54266c08f982247a",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "driver",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/observer-driver.txt",
+      "bytes": 1589,
+      "blob": "20d194d9b6b87eff6d1b68d08668e5183bc66195",
+      "sha256": "2ac917ef89f3e285dc6d0ebb654fb163c8cf46a791795173174775373c5cf31d",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "recorder",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/next-get-recorder.mjs",
+      "bytes": 7403,
+      "blob": "c1647140c7b20654ea80c212f3bc7032bc1f18ff",
+      "sha256": "7c96e4986b104a7f742b135dcdb292d5bac36d5f89d8b3465907d798e2fd9820",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "compile",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/next-get-compile.mjs",
+      "bytes": 6367,
+      "blob": "0b8f087711a24018ef869f093e80d0f235e45d4d",
+      "sha256": "bacc1fdfad03410135176e85c29749a0075ce22dde46ad16083c00dc963a7c36",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "worker",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/worker-trace.txt",
+      "bytes": 1784,
+      "blob": "86daedb5b2bc8d100c37874ecd8e6c0ad5311fb8",
+      "sha256": "9e44073d4faa73fb605c6b8bce192c24b0255b9e7a1775423040f4b7e5d385ac",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "coupled",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/observer-coupled.txt",
+      "bytes": 19355,
+      "blob": "171f57edcb8f957798459f5a5677f48ed8400489",
+      "sha256": "f5a13e8753222361ea4bf869264fe48a5117595cd07e185a5f43594e05f7fb82",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "world",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/observer-world.txt",
+      "bytes": 88974,
+      "blob": "24707e47e042ee60b4e549c1a5a195ede7ca0019",
+      "sha256": "fc278eee9247972a205a93fe7108685b24ade1e3d445f6be61bb8bd5eb09d784",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "contract",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/diagnostic-contract.json",
+      "bytes": 12706,
+      "blob": "a9368d6e3876cab8e34d071d0a36f5fa7b188854",
+      "sha256": "2d327b94a30f0751717bdee9b876127116e1535cb72ed830b3e2e360a7f5e8b9",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "schema",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/diagnostic-schema.json",
+      "bytes": 17050,
+      "blob": "7d317a0ab090924c47c1fcf66f948d51660cfd1e",
+      "sha256": "88e94592dc14dadf3751496a2367ee502bc4c45ba942bc2a6bc0363164e79d5d",
+      "before": null,
+      "fullReadback": true
+    },
+    {
+      "role": "runner",
+      "path": "docs/superpowers/source-lab/c2-t1-next-get1/run-c2-next-get1.mjs",
+      "before": null,
+      "bytes": 26100,
+      "sha256": "ee096912e44326addf98f5e39d47be6bba07051588954313eeccc71ebdcad3f4",
+      "gzip": 9318,
+      "gitBlob": "4a2fbed18e1ea00155d128dd817222a1d44ead1b",
+      "blob": "4a2fbed18e1ea00155d128dd817222a1d44ead1b",
+      "fullReadback": true
+    },
+    {
+      "role": "workflow",
+      "path": ".github/workflows/afw-c2-next-get1.yml",
+      "before": null,
+      "bytes": 1414,
+      "sha256": "23af806231866af380fd87e6c68f74d1917ffef1304167b2f3c60f3fab69ecbc",
+      "gzip": 737,
+      "gitBlob": "66088645e1275ee8e645752d3c46b7ce8d1dad0a",
+      "blob": "66088645e1275ee8e645752d3c46b7ce8d1dad0a",
+      "fullReadback": true
+    }
+  ],
+  "baseExistingBootstrap": {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "bytes": 1844,
+    "sha256": "ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "fullReadback": true
+  },
+  "selectionHash": "b11cb5434f7b66a925af39bc86ceff4b672b84f8895dd269140d70511dccea80",
+  "metadata": [
+    {
+      "role": "report",
+      "bytes": 18413,
+      "sha256": "be9d20d090002ef685eb894ab7b248cce7cf57058b5bf821653159e7e0a1c45b",
+      "gitBlob": "bcc40a646e9563e91f31eb6fdff2aa4072091b8e",
+      "blob": "bcc40a646e9563e91f31eb6fdff2aa4072091b8e",
+      "fullReadback": true
+    },
+    {
+      "role": "normal F9 reversible delta",
+      "key": "repairF9Diff",
+      "bytes": 26979,
+      "sha256": "c4df19dfc7fffc8792abf7820f35644d7bbe6ef08c3745bf3138aef86417f88c",
+      "blob": "8c30a804ae360ae84ad4df3645c57531d620b388",
+      "fullReadback": true
+    },
+    {
+      "role": "normal ORIGINALBASE complete13 reversible diff",
+      "key": "repairOriginalDiff",
+      "bytes": 156655,
+      "sha256": "c54be0ad65ff8e94756d64da6188a1f912f36f262ec2e6f55a742df8622c17ce",
+      "blob": "e871940513864ee4ab80a7cb80b8ec4155377cd5",
+      "fullReadback": true
+    },
+    {
+      "role": "temporary observer complete variants reversible diff",
+      "bytes": 106799,
+      "sha256": "59dc63dd68a7209ae2cdeb54722eaba500f1ca5aa625f3aca73a0e67e857ac8b",
+      "gzip": 26239,
+      "gitBlob": "a6d0b6a18a6565fa423ad28feae87b7cb5b1653c",
+      "blob": "a6d0b6a18a6565fa423ad28feae87b7cb5b1653c",
+      "fullReadback": true
+    }
+  ],
+  "actualSelection": "six fixed eager sequential native cases NG_CONNECTION→NG_OAUTH→NG_PHASE→NG_NOTICES→NG_MONITOR→NG_NEXT_GET; actual work+counts independent failure; one business finiteGET, no finitePOST/ScopeDrop/retry/othernegatives/regressions/qualification",
+  "mount": "On exact pinned BASE31 additions only: inherited17 inert DATA with source-index and body08/body09 updated by exact pins here;14 new observerDATA/WF paths. Original3203 untouched. Product/test paths materialized only inside owned ephemeral namespace target after all13 verified. Temporary overlays separate from normalSourceIndex. No legacy qualification/observer WF or runner mount; existing bootstrap extracted DATA only never executed.",
+  "witness": "Single sanitized outcome includes only independently parseable whitelist canonical records with bytes/SHA256; nativeTAP/errors/HTML/IDs/cookies/headers never published. Unknown remains null/unavailable. Max24576B output with no evidence truncation for success.",
+  "rollback": "Abandon immutable DATA before Root gate. After any Root-nominated run, Root preserves/closes branch/removes only nominated newWF and verifies original3203, exact own-temp cleanup and context. Full originalBASE beforeimages/F9 delta/temp overlay reversibles linked.",
+  "pending": "No refs/trees/commits/runs/Source execution created here. Root alone independently inspects/gates/executes and joins API+actual artifact+custody. SOURCE_TESTS_PENDING. Future full v2 qualification producer rebinding separate; this diagnostic never qualifies Source.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

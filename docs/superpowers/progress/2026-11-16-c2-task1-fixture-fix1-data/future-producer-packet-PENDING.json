@@ -1,0 +1,347 @@
+{
+  "schema": "afw.c2-source-fixture-fix1.packet.v1",
+  "status": "SOURCE_TESTS_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "environment": "immutable DATA only; FUTURE QUALIFICATION, not next diagnostic",
+  "authority": {
+    "brief": "ddca3344996d049bd2311ec66656fbe71dfbb9d5",
+    "ruling": "0be646b3302105b8191ee8f6f9d70ca0bff09d91"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+    "message": "AFW-C2-OWNER-STAGES-SOURCE-T1-FIXTURE-FIX1-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+    "job": "c2-source-lab-fixture-fix1",
+    "runner": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs"
+  },
+  "inherited17": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "bytes": 148547,
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "bytes": 45576,
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "bytes": 2497,
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "productOrTestPath": "worker/mcp-own/finite.mjs",
+      "bytes": 2810,
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "bytes": 4153,
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "bytes": 101380,
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "bytes": 22501,
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "productOrTestPath": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "bytes": 2785,
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "productOrTestPath": "test/fixtures/finite-coupled-native.mjs",
+      "bytes": 18667,
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+      "readbackEvidence": "frozen f9 SourceIndex entry",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "productOrTestPath": "test/fixtures/finite-first-connection-publication.mjs",
+      "bytes": 61073,
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "readbackEvidence": "frozen f9 SourceIndex entry",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "productOrTestPath": "test/fixtures/finite-initial-entry-world.mjs",
+      "bytes": 88519,
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "productOrTestPath": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "bytes": 58727,
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "productOrTestPath": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "bytes": 6030,
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+      "readbackEvidence": "frozen f9 SourceIndex entry"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/regression-selection.json",
+      "bytes": 3364,
+      "sha256": "8287deef6924d3f91db98078da7bca8bdb55e292f87f9fd814da794e513ba4cf",
+      "blob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "fullReadback": true
+    }
+  ],
+  "newFutureQualificationPaths8": [
+    {
+      "role": "selection",
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/mode-selection.json",
+      "before": null,
+      "bytes": 5460,
+      "sha256": "618e35bbeda39833ddf5c63ed16a41b44db85ab751edcb87ad5abb9ebcaae839",
+      "gitBlob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+      "blob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+      "fullReadback": true
+    },
+    {
+      "role": "parser",
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/tap-protocol.mjs",
+      "before": null,
+      "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+      "bytes": 10291,
+      "sha256": "3de67d5b30f7a0019b8f02118cf3727be7ae79d22ecfdc56bc7d39e60681dfd4",
+      "fullReadback": true
+    },
+    {
+      "role": "vectors",
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-vectors.json",
+      "before": null,
+      "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+      "bytes": 14802,
+      "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402",
+      "fullReadback": true
+    },
+    {
+      "role": "selftest",
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-controls.mjs",
+      "before": null,
+      "blob": "bc33365eaf302d2296a759202a822af4a443f143",
+      "bytes": 3313,
+      "sha256": "2f49b434e3e51a4a3c225903b3a681e4f01ea3f62b58f337e6a26d0fdde8fcae",
+      "fullReadback": true
+    },
+    {
+      "role": "runner",
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+      "before": null,
+      "bytes": 23205,
+      "sha256": "7a581800dc588ed081d05fa253f7adaac1f9c83e66398a6b4a6354994285cae8",
+      "gitBlob": "1193e74ec0b0d60fb5c63d3a0340578e884dfb71",
+      "blob": "1193e74ec0b0d60fb5c63d3a0340578e884dfb71",
+      "fullReadback": true
+    },
+    {
+      "role": "contract",
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/protocol-contract.json",
+      "before": null,
+      "bytes": 15709,
+      "sha256": "2bd76e556a6dbf9d394fba70d64a216fd339697fcae2e885b3fd6141f4ecd6fb",
+      "gitBlob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+      "blob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+      "fullReadback": true
+    },
+    {
+      "role": "schema",
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/frame-schema.json",
+      "before": null,
+      "bytes": 13983,
+      "sha256": "9fc0205fbbbd4a0d61f4560291bd53caf58df083f88e4579eaa74ea02d15d61e",
+      "gitBlob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+      "blob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+      "fullReadback": true
+    },
+    {
+      "role": "workflow",
+      "path": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+      "before": null,
+      "bytes": 1641,
+      "sha256": "ea910cdfe2058d2ef9f49ee5d20973ae4e565182d0e916f2edb64fd374625fdb",
+      "gitBlob": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+      "blob": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+      "fullReadback": true
+    }
+  ],
+  "baseExistingBootstrap": {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "bytes": 1844,
+    "sha256": "ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "fullReadback": true
+  },
+  "selectionHashOrder": [
+    "baseline-red",
+    "proposal-green",
+    "mutant-prefix",
+    "regressions"
+  ],
+  "selectionHashes": [
+    "24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa",
+    "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5",
+    "46239e665ffe9154fbfb81725c81ac05c0228129f49db466b061397114f970a4",
+    "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6"
+  ],
+  "metadata": [
+    {
+      "role": "lineage appended report",
+      "bytes": 22830,
+      "sha256": "371727883cecd8199749a5a854aff90ec426118742ec7d9492bd58023f22fd10",
+      "gitBlob": "35d978372295a2c40a4009c5430a87bd7bc464f4",
+      "blob": "35d978372295a2c40a4009c5430a87bd7bc464f4",
+      "fullReadback": true
+    },
+    {
+      "role": "producer full reversible DATA",
+      "bytes": 121729,
+      "sha256": "5ff64e250a6d25a16fec7bf04c64813349479546a2312e040ecc74997c6d864b",
+      "gitBlob": "e244651659a83957106b9fcbab66ebdb30a0eb48",
+      "blob": "e244651659a83957106b9fcbab66ebdb30a0eb48",
+      "fullReadback": true
+    },
+    {
+      "role": "SourceF9 exact reversible delta",
+      "key": "repairF9Diff",
+      "bytes": 26979,
+      "sha256": "c4df19dfc7fffc8792abf7820f35644d7bbe6ef08c3745bf3138aef86417f88c",
+      "blob": "8c30a804ae360ae84ad4df3645c57531d620b388",
+      "fullReadback": true
+    },
+    {
+      "role": "SourceORIGINALBASE full13 exact lossless diff",
+      "key": "repairOriginalDiff",
+      "bytes": 156655,
+      "sha256": "c54be0ad65ff8e94756d64da6188a1f912f36f262ec2e6f55a742df8622c17ce",
+      "blob": "e871940513864ee4ab80a7cb80b8ec4155377cd5",
+      "fullReadback": true
+    }
+  ],
+  "preimages": [
+    {
+      "role": "selection",
+      "bytes": 5460,
+      "sha256": "0dc71e54f901c91e4be06810eaead653862ae8365328e37673a548c0a3b8fb59",
+      "gitBlob": "bf500cccd9d6e828f74e9328f849d837ee2d0db4",
+      "blob": "bf500cccd9d6e828f74e9328f849d837ee2d0db4",
+      "fullReadback": true
+    },
+    {
+      "role": "runner",
+      "bytes": 23155,
+      "sha256": "0f24c5c8ac3fd7821e25dcafab45566c282069cd295ff24dc9bb4f14d4d1d4b1",
+      "gitBlob": "9cc607ab788335553ea97a607d9042619b35c78d",
+      "blob": "9cc607ab788335553ea97a607d9042619b35c78d",
+      "fullReadback": true
+    },
+    {
+      "role": "workflow",
+      "bytes": 1592,
+      "sha256": "a3bc8d108ed0ee36836ac5811ca4ffbd578d0503b59f97dd3e5287630d8c7a08",
+      "gitBlob": "c3ab3d9001d896db62531e006dcfd03b21d0ff0e",
+      "blob": "c3ab3d9001d896db62531e006dcfd03b21d0ff0e",
+      "fullReadback": true
+    },
+    {
+      "role": "contract",
+      "bytes": 14586,
+      "sha256": "5b06c19b0be9a83baec9cbc8d34727b3c6e5c49bbc48c56ecc0e53c0b0bc4b44",
+      "gitBlob": "2a925637cee8aa19fbac30bbc4d68cc35e85c374",
+      "blob": "2a925637cee8aa19fbac30bbc4d68cc35e85c374",
+      "fullReadback": true
+    },
+    {
+      "role": "schema",
+      "bytes": 13973,
+      "sha256": "e18041c3caf5d16adc34e032e540fb724c1f3efaa53c48ec0c6a6e7aab3fea1a",
+      "gitBlob": "04d26808abf9a1b252781c9ed68a890576440bcc",
+      "blob": "04d26808abf9a1b252781c9ed68a890576440bcc",
+      "fullReadback": true
+    }
+  ],
+  "sourceBoundary": "Normal Source13 onlyentries8/9 changed; originalSource07all20cases,Source10,other11andreg11/product guards/callbacks/leases/clocks/SDK/dependencies frozen. Witness fixtureBlob binds corrected de8a not stale65933. Same unique full byte definitions/fileline18/driveraction36 kept. See nextGET report for fixture repair corrections and exact beforeimages.",
+  "acceptance": "Future producer emits existing v2 schemas/markers only under new actual job/head/context with newly fixed index/selection. Preserve parsed35negative+3good synthetic controls, actual bootstrap absence, allcustodychecks, native3RED/20green/20mutant+11regressions/counters/nativesites. No full qualification executed or asserted. Root independently rebinds its consumer; no Root consumer delivered.",
+  "mount": "On exact BASE25 additions only: inherited17 inert DATA with correctedindex/body08/body09 plus8 newfutureproducerpaths. Do not mount nextGET observer tools/WF or oldlabWF. Product materialization only jobtemp. Base bootstrap file DATAextraction only, never run.",
+  "rollback": "Immutable preimages and exact string diff reconstruct bothdirections; abandon DATA to cancelproposal. Root alone may later admit one nominated branch/message after preserving original3203 and owncleanup/custody. Alloldversions preserved.",
+  "verification": "All new proposal blobs created and FULLreadback exact; reusedparser/vectors/selftest fully fetched exact pinneddata. BuiltinRAM hash/string/JSON only, no localSource/syntax/test/compile/deps,refs/runs/runtime.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
