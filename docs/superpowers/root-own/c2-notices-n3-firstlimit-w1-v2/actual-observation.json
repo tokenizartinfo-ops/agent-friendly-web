@@ -1,0 +1,20 @@
+{
+  "schema": "AFW-N3-W1-OWN-V2-OBSERVATION/1",
+  "head": "bbce1f93f03bf959ff96e1799a6703e68c64ca38",
+  "run": 43942706278,
+  "job": 133564127939,
+  "primary": "5570636a59104b8d933f265664cb0c8273b0a31a",
+  "proof": "03f6f5027c304124e7fbce66d5618dd5ab79d6d9",
+  "native280": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

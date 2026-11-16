@@ -1,0 +1,19 @@
+{
+  "schema": "AFW-N3-W1-OWN-V2-CLOSE/1",
+  "tested": "bbce1f93f03bf959ff96e1799a6703e68c64ca38",
+  "workflowRemoved": ".github/workflows/afw-c2-notices-n3-firstlimit-w1-own-v2.yml",
+  "originalsPreserved": 3203,
+  "reviewPending": true,
+  "action": "Remove only newly nominated OWN workflow; preserve exactmodels/code/evidence. No new Source capture authorized.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
