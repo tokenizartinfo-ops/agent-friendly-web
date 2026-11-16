@@ -1,0 +1,18 @@
+{
+  "close": {
+    "commit": "b26843c72dccc9bdcf9a9771e59faeff077c6461",
+    "tree": "c24a3bb487032ea8e21a715a28984c6d8cc64578",
+    "parent": "ae216d6e24b2af0e44985cca0f408d42e5dc1e38",
+    "SAME": "c00499fe9a769290bf25515ee588c4bd207760ee",
+    "originalF7": "f7a71f1a0fa4f5ddf069ff411f008a098455e5cc",
+    "receipt": "304961613ca7e0d42441db61b11dc133f6cf690d"
+  },
+  "run": 43779366057,
+  "job": 133012825499,
+  "terminal": true,
+  "logsConsumed": true,
+  "SourceStillActive": "ae216d6e24b2af0e44985cca0f408d42e5dc1e38",
+  "compactAppendBytes": 743,
+  "fullReceiptDurable": true,
+  "allClaimsFalse": true
+}
