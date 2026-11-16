@@ -1,0 +1,13 @@
+# N1 OWN: one-use native cloud control gate
+
+Fecha UTC: 2026-11-16 10:42:28 UTC
+
+PROJECT AFW; REPOSITORY tokenizartinfo-ops/agent-friendly-web. ENVIRONMENT fixed GitHub-hosted Ubuntu24.04/Node22.23.4. ORIGIN GitHub API. RESOURCE_TYPE additive one-use Git branch/workflow. RESOURCE_ID lab/afw-c2-own-receiver-20261116-notices-n1. ALLOWED_ACTION one original push to test only independent OWN code, preserve evidence, then close workflow. User's existing authorization covers reversible project development; no new credential or human step.
+
+Packet4c322267f9c092c596568f81cf56a872650b5949/report5d98f922/diffb779d1d9. Root fetched full14 bodies, independent byte/SHA256/GitBlob checks all match. Runtime mount8 OWN files plus WF, no Source imports/dependencies. Prepared head ef8e1e1f17f298708146e26001dfb41486d707cd, tree 22c7f475ac29cad7fdedd85bf0fabd91540a6897, exact one parent6791ce1/message AFW-C2-NOTICES-N1-OWN-ONEUSE-20261116; raw recursive readback verifies3203 original modes/blobs plus9 exact additions=3212leaves, untruncated. Fresh Main0c9/historical6791 unchanged and new branch absent. Root also reconstructed round1's exact4 reader byte edits in both directions; old proposals not activated.
+
+Expected command: node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-notices-n1/run-controls.mjs. Expected native189 PASS,0FAIL/cancel/skip/todo,189 unique IDs (journal78, private probe12, full input91, custody4, consistency4). Actual native import graph required, not author's189 RAM report. Total job3min, no npm install, external calls or Source evaluation. Matching actual run/head/parent/tree/event/attempt1/job/step/log time/marker hashes required. One log read after terminal run and job; no rerun/retry or fabricated metadata.
+
+Fixround1 findings: documented custody3..24, exact native status vs returned/thrown work, exact case-cardinality integrity, and completejournal→nativecomplete regardless capture timeout. Test-first coherent RED exists in own data. Coverage and original/scoped independent review remain pending; Source N1 activation stays HELD.
+
+Rollback/closure: after terminal control run preserve dated sanitized primary, remove ONLY .github/workflows/afw-c2-notices-n1-own.yml, add closure evidence, leased fast-forward from exact tested head, re-read close head/tree and original3203 modes, Main/historical refs, and verify0closeheadruns. Never force or mutate Source/historic/Main. This gate permits OWN tests only, no real AFW runtime/CF/OAuth/cron/consumers/keys/Max. SourceExecuted:false; SourceQualified:false; Task1Pass:false; all seven nonclaimsfalse.
