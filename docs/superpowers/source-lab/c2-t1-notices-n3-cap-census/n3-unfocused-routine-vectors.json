@@ -1,0 +1,41 @@
+{
+  "schema": "afw.c2-notices-n3.unfocused-routine-vectors.v1",
+  "status": "TEST_FIRST_TEXT_NATIVE_PENDING",
+  "syntheticOnly": true,
+  "notSourceEvidence": true,
+  "authority": "d2831f0c1e3482550043413f60560d19be2eb4af",
+  "cases": [
+    {
+      "id": "UNBOUND_PROMISE_ROUTINES_OUTSIDE_FOCUS",
+      "input": {
+        "otherPairClock": true,
+        "unboundWorkPromise": true,
+        "retainedNotes": 500,
+        "settlementNotes": 500
+      },
+      "expected": {
+        "storedRoutineEvents": 0,
+        "sourceSequenceCost": 0,
+        "claimedPromiseSettlement": false
+      },
+      "reason": "Private root anchor may exist for first error; unbound noncanonical promises are outside declared work focus, never public retained/settlement facts."
+    },
+    {
+      "id": "OTHER_PAIR_ROUTINES_FIRST_ERROR_PRESERVED",
+      "input": {
+        "otherPairClock": true,
+        "childUnbound": true,
+        "abortFinallyNotes": 500,
+        "thenActualGuardThrow": true
+      },
+      "expected": {
+        "storedRoutineEvents": 0,
+        "firstScopeErrorStored": true,
+        "publicFirstErrorLease": null
+      },
+      "reason": "Routine unselected-pair lifecycle is outside declared focus; first actual scope error is still recorded independently."
+    }
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false
+}

@@ -1,0 +1,538 @@
+{
+  "schema": "afw.c2-notices-n3.tooling-fix2-test-first.v1",
+  "status": "TEXT_RED_ACTUAL_NATIVE_COVERING_PENDING",
+  "syntheticOnly": true,
+  "notSourceEvidence": true,
+  "before": {
+    "packet": {
+      "bytes": 9062,
+      "sha256": "1f9bfa7cbcbbb35a39a3608ba33b21cd4cc89e34b5408d53479e9ecf1b5478b5",
+      "gitBlob": "905519b006512c542ee38c08c8eaeb9f2bc7e125",
+      "blob": "905519b006512c542ee38c08c8eaeb9f2bc7e125",
+      "fullReadback": true
+    },
+    "transform": {
+      "bytes": 12498,
+      "sha256": "6eadf1ace39751e61a196c7180205b021aa5f703cbc6d1a8d26e6fa4959d9cfc",
+      "gitBlob": "3652e73d858a0958aaf50f34781043d6c910717f",
+      "blob": "3652e73d858a0958aaf50f34781043d6c910717f",
+      "fullReadback": true
+    },
+    "units": {
+      "bytes": 21884,
+      "sha256": "72b202db49738c95ffa07af7d6d8d3d58ded0b4850e1a346c5e2d95cff0f48db",
+      "gitBlob": "f8fc10631071207af883c34d25eff4f472862d61",
+      "blob": "f8fc10631071207af883c34d25eff4f472862d61",
+      "fullReadback": true
+    },
+    "runner": {
+      "bytes": 20508,
+      "sha256": "72599d7c73db377503bb9802959e2070a83b5953e2107cc4aeae4a770ce0835a",
+      "gitBlob": "33d3d6eca9af1246d5550b749f7ab5836f6a7676",
+      "blob": "33d3d6eca9af1246d5550b749f7ab5836f6a7676",
+      "fullReadback": true
+    }
+  },
+  "actualRootSummary": {
+    "runId": "43905959165",
+    "runAttempt": 1,
+    "jobId": "133434721789",
+    "head": "6822ec45110488b835e46b0d2d9482b06c84dd82",
+    "pass": 6,
+    "fail": 35,
+    "skip": 0,
+    "todo": 0,
+    "cancel": 0,
+    "phaseTransformDiagnostics": 34,
+    "reversiblesDiagnostics": 1,
+    "reducer": null,
+    "primary": "e32ef76d006c139745a7eceea9f3f23716a73e9b",
+    "proof": "e99e3b0f31ab3c6c109c8ad4c131b720c25f6a2b",
+    "evidence": "Durable safe primary/proof FULL read; no raw logs/artifact refetch."
+  },
+  "cases": [
+    {
+      "id": "GLOBAL_CLOCK_SELECTOR_RED",
+      "file": {
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "fullReadback": true
+      },
+      "oldNeedle": "clock=createFiniteInitialLease(readFiniteOwnerRequestDeadline(originalLease),readFiniteOwnerRequestDeadline(originalLease),holders,fail);",
+      "oldMatches": 4,
+      "oldRequired": 1,
+      "textResult": "old exact guard rejects at4matches",
+      "newScope": {
+        "start": "export async function handlePrivateQaFiniteOwnerChoice(",
+        "end": "/** Fixed unmounted QA implementation.",
+        "startLine": 610,
+        "endLine": 812
+      },
+      "newMatches": 1,
+      "newRequired": 1
+    },
+    {
+      "id": "ACTIVATION_INDENT_RED",
+      "file": {
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "fullReadback": true
+      },
+      "oldNeedle": "await withChild(async(l,end)=>{\n      await recheckOwned();await engine.readPointer(baseline,l);",
+      "oldMatches": 0,
+      "newNeedle": "await withChild(async(l,end)=>{\n     await recheckOwned();await engine.readPointer(baseline,l);\n     const input={versionId:actualUploadResult.id},description=engine.describeActivation(input);",
+      "newMatches": 1,
+      "newRequired": 1,
+      "previousRepairFailure": {
+        "newNeedle": "await withChild(async(l,end)=>{\n     await recheckOwned();await engine.readPointer(baseline,l);",
+        "newMatches": 2,
+        "newRequired": 1,
+        "problem": "Prior test compared measured count to2 and failed to require newMatches===newRequired===1."
+      },
+      "criterion": "Actual common-prefix0old6spaces,2after5space repair; only semantic third-line describeActivation selector exactly1."
+    },
+    {
+      "id": "OUTER_CALLBACK_END_INDENT_RED",
+      "file": {
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "fullReadback": true
+      },
+      "oldNeedle": "\n    const check=()=>",
+      "oldMatches": 0,
+      "newNeedle": "\n   const check=()=>",
+      "newMatches": 1,
+      "newRequired": 1
+    },
+    {
+      "id": "PREPARED_T2_START_INDENT_RED",
+      "file": {
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "fullReadback": true
+      },
+      "oldNeedle": "    const holder='holders();const at=Date.now()'",
+      "oldMatches": 0,
+      "newNeedle": "   const holder='holders();const at=Date.now()'",
+      "newMatches": 1,
+      "newRequired": 1
+    },
+    {
+      "id": "PREPARED_T2_END_INDENT_RED",
+      "file": {
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+        "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "fullReadback": true
+      },
+      "oldNeedle": "    sources.set('mcp-qa-finite-initial-lease.mjs',lease);",
+      "oldMatches": 0,
+      "newNeedle": "   sources.set('mcp-qa-finite-initial-lease.mjs',lease);",
+      "newMatches": 1,
+      "newRequired": 1
+    }
+  ],
+  "semanticControls": [
+    "Missing or duplicated exact handler delimiter must reject, never fall back to whole Source.",
+    "All4 original clock creation call texts remain; only selected handler gets original-root/outer diagnostic binding.",
+    "Original four-case business/Source13/QAguard/clock/promise/callback signatures remain unchanged.",
+    "Keep41native IDs and six originallyPASS controlgroups; no skip/todo/cancel/missing/fakepass.",
+    "No statement that global-clock selector was the first ACTUAL native error: earlier import/transform failures remain possible until observed.",
+    "Each new exact selector must satisfy measured count===newMatches===newRequired===1 before any transform is invoked; corrupted oracle2/required1 must fail.",
+    "All N3 PH raw and actual prepared anchors are audited together; original-preparer8 needles and7 correlator lines also asserted before actual preparation.",
+    "PH setup is independent of Lease/root units; SAME transform mandatory in PH attach, FIRST_TARGET_ONLY and REVERSIBLES. Cleanup registered before attach can run."
+  ],
+  "diagnosticProposal": {
+    "marker": "AFW_C2_N3_TOOLING_DIAGNOSTIC ",
+    "fields": [
+      "schema",
+      "id",
+      "phase",
+      "code"
+    ],
+    "schema": "afw.c2-notices-n3.tooling-diagnostic.v1",
+    "phase": [
+      "fixture-read",
+      "ledger-import",
+      "lease-transform",
+      "lease-import",
+      "op-transform",
+      "root-import",
+      "phase-transform",
+      "root-setup",
+      "case-body",
+      "reversibles"
+    ],
+    "code": "CONTROL_INVALID",
+    "maxBytes": 256,
+    "maxPerCase": 1,
+    "rawForbidden": [
+      "message",
+      "stack",
+      "Error",
+      "thrownValue",
+      "path",
+      "clock",
+      "token",
+      "header"
+    ],
+    "maxTotal": 41,
+    "authority": "Root explicit message accepted marker/schema/id/phase/code,256UTF8B,line max1 percase41total; no proofshape/IDs change."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "diagnosticCases": [
+    {
+      "id": "DIAG_CANONICAL_MAX_KNOWN_FIELDS",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\"}\n",
+      "expected": true
+    },
+    {
+      "id": "DIAG_UNKNOWN_CASE",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_UNKNOWN\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\"}\n",
+      "expected": false
+    },
+    {
+      "id": "DIAG_UNKNOWN_PHASE",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"phase\":\"unknown\",\"code\":\"CONTROL_INVALID\"}\n",
+      "expected": false
+    },
+    {
+      "id": "DIAG_EXTRA_MESSAGE",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\",\"message\":\"SYNTHETIC_FORBIDDEN_FIELD\"}\n",
+      "expected": false
+    },
+    {
+      "id": "DIAG_NONCANONICAL_SPACING",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\n \"schema\": \"afw.c2-notices-n3.tooling-diagnostic.v1\",\n \"id\": \"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\n \"phase\": \"lease-transform\",\n \"code\": \"CONTROL_INVALID\"\n}\n",
+      "expected": false
+    },
+    {
+      "id": "DIAG_MISSING_LF",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_REPEATED_RETAIN_FIRST_OBSERVATION\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\"}",
+      "expected": false
+    },
+    {
+      "id": "DIAG_OVER256",
+      "line": "AFW_C2_N3_TOOLING_DIAGNOSTIC {\"schema\":\"afw.c2-notices-n3.tooling-diagnostic.v1\",\"id\":\"N3_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\"phase\":\"lease-transform\",\"code\":\"CONTROL_INVALID\"}\n",
+      "expected": false
+    }
+  ],
+  "round": 3,
+  "maxRounds": 5,
+  "tableAudit": {
+    "schema": "afw.c2-notices-n3.ph-anchor-audit.v1",
+    "status": "STATIC_ALL_ANCHORS_NATIVE_PREPARED_PENDING",
+    "beforeCompiler": {
+      "bytes": 12498,
+      "sha256": "6eadf1ace39751e61a196c7180205b021aa5f703cbc6d1a8d26e6fa4959d9cfc",
+      "gitBlob": "3652e73d858a0958aaf50f34781043d6c910717f",
+      "blob": "3652e73d858a0958aaf50f34781043d6c910717f",
+      "fullReadback": true
+    },
+    "phase": {
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "fullReadback": true
+    },
+    "originalPreparer": {
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "gitBlob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "fullReadback": true
+    },
+    "raw": [
+      {
+        "id": "PAIR_CLOCK",
+        "scope": "global",
+        "needle": "  clock=createFiniteInitialLease(deadline,deadline,holders,fail);",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "PAIR_ABORT",
+        "scope": "global",
+        "needle": "parentSignal=signal;onAbort=()=>clock.close();",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "HANDLER_START",
+        "scope": "global",
+        "needle": "export async function handlePrivateQaFiniteOwnerChoice(",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "HANDLER_END",
+        "scope": "global",
+        "needle": "/** Fixed unmounted QA implementation.",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "HANDLER_VARS",
+        "scope": "handler",
+        "needle": " let clock,onAbort,failed=false,position='entry';",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "OUTER_CLOCK",
+        "scope": "handler",
+        "needle": "clock=createFiniteInitialLease(readFiniteOwnerRequestDeadline(originalLease),readFiniteOwnerRequestDeadline(originalLease),holders,fail);",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "OUTER_ABORT",
+        "scope": "handler",
+        "needle": "onAbort=()=>{clock.close();};originalLease.signal.addEventListener",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "ADMISSION",
+        "scope": "handler",
+        "needle": "admission=consumeFiniteOwnerStageAdmission({ctx,env,preconnectionId:id,stage},originalLease);",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "PAIR_INVOKE",
+        "scope": "handler",
+        "needle": "const pair=await wait(()=>observeOwnerPhasePair({ctx,env,parent:originalLease,preconnectionId:id}));",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "ACTIVATION",
+        "scope": "handler",
+        "needle": "await withChild(async(l,end)=>{\n     await recheckOwned();await engine.readPointer(baseline,l);",
+        "count": 2,
+        "rawCount": 2,
+        "preparedExpectedCount": 2,
+        "required": 1
+      },
+      {
+        "id": "TARGET",
+        "scope": "handler",
+        "needle": "position='receipt-recorded';await recheckOwned();position='complete';await recheckOwned();",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "RETURN",
+        "scope": "handler",
+        "needle": "check();return new Response('<h1>'+({connection:'Configuración de lectura preparada',notices:'Configuración de avisos preparada',finite:'Ensayo finito preparado'}[stage])+'</h1><p>La lectura y los avisos requieren decisiones separadas.</p>',{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      },
+      {
+        "id": "RAW_CATCH",
+        "scope": "handler",
+        "needle": "}catch(error){failed=true;position='failed';",
+        "count": 1,
+        "rawCount": 1,
+        "preparedExpectedCount": 0,
+        "required": "raw1/prepared0"
+      },
+      {
+        "id": "PREPARED_CATCH",
+        "scope": "handler",
+        "needle": "}catch(error){(globalThis.__t3Observation??=[]).push({kind:'connection-failure',position,",
+        "count": 0,
+        "rawCount": 0,
+        "preparedExpectedCount": 1,
+        "required": "raw0/prepared1"
+      },
+      {
+        "id": "ACTIVATION_WITH_DESCRIBE",
+        "scope": "handler",
+        "needle": "await withChild(async(l,end)=>{\n     await recheckOwned();await engine.readPointer(baseline,l);\n     const input={versionId:actualUploadResult.id},description=engine.describeActivation(input);",
+        "rawCount": 1,
+        "preparedExpectedCount": 1,
+        "required": 1
+      }
+    ],
+    "preparer": {
+      "anchors": [
+        {
+          "id": "PREP_FAIL",
+          "needle": "const fail=()=>{throw Error('Finite owner phase context unavailable');};",
+          "count": 1
+        },
+        {
+          "id": "PREP_RESULT",
+          "needle": "const result=await wait(()=>j[method](value,l));",
+          "count": 1
+        },
+        {
+          "id": "PREP_PUBLIC",
+          "needle": "if(s.records.effects.length&&!s.installed.receipt||s.preparation.ticketUse&&!s.preparation.stageApproval)fail();",
+          "count": 1
+        },
+        {
+          "id": "PREP_PAIR_DECL",
+          "needle": "async function observeOwnerPhasePair(options){\n let clock,onAbort,parentSignal;",
+          "count": 1
+        },
+        {
+          "id": "PREP_PAIR_FINALLY",
+          "needle": "}finally{if(parentSignal&&onAbort)parentSignal.removeEventListener('abort',onAbort);clock?.close();}",
+          "count": 1
+        },
+        {
+          "id": "PREP_HTTP_DECL",
+          "needle": "const request=(path,cap=65536,token=reader)=>child(async l=>{\n    let response,stream;",
+          "count": 1
+        },
+        {
+          "id": "PREP_HTTP_LOOP",
+          "needle": "for(;;){const part=await retain(stream.read());current(l);",
+          "count": 1
+        },
+        {
+          "id": "PREP_HTTP_FINALLY",
+          "needle": "}finally{if(stream)await retain(stream.cancel()).catch(()=>{});else if(response?.body&&!response.body.locked)await retain(response.body.cancel()).catch(()=>{});}",
+          "count": 1
+        }
+      ],
+      "correlators": [
+        {
+          "id": "preparation",
+          "first": "pre.owner.subject!==p.subject",
+          "second": "sa.ticketHash!==t.ticketHash",
+          "matches": [
+            {
+              "line": 397,
+              "text": "      if(pre.preconnectionId!==id||pre.sourceRevision!==source.sourceRevision||pre.actorId!==actorId||pre.owner.subject!==p.subject||pre.owner.accessRealmHash!==realm||pre.clientId!==source.clientId||pre.resource!==source.resource||canonical(pre.project)!==canonical(source.project)||pre.baselineHash!==evidence('baseline',source.initialBaseline)||pre.startedAt<capsule.I0||pre.expiresAt>capsule.C0||(sa&&(sa.preconnectionId!==id||sa.sourceRevision!==source.sourceRevision||sa.stage!=='connection'||sa.ticketHash!==t.ticketHash||sa.approvalHash!==pre.approvalHash))||pre.approvalHash!==prepHash('ConfigurationApproval',a)||a.subjectHash!==subject||a.sourceRevision!==source.sourceRevision||a.clientId!==source.clientId||a.projectHash!==projectHash(source.project)||a.csrfReceiptHash!==decision||use.ticketHash!==t.ticketHash||use.recordHash!==decision||use.consumedAt<a.approvedAt||use.consumedAt>Date.now()||a.approvedAt<pre.startedAt||a.approvedAt<t.createdAt||a.expiresAt>Math.min(pre.expiresAt,pre.owner.accessExpiresAt,t.expiresAt,capsule.C0))fail();",
+              "endsFail": true
+            }
+          ]
+        },
+        {
+          "id": "ticket-map",
+          "first": "t.ticketHash!==data.sourceSnapshot.initialTicketHash",
+          "second": "t.action!=='connection'",
+          "matches": [
+            {
+              "line": 387,
+              "text": "     if(t.ticketHash!==data.sourceSnapshot.initialTicketHash||t.preconnectionId!==id||t.sourceRevision!==source.sourceRevision||t.action!=='connection'||t.connectionRef!==null||t.subjectHash!==subject||map.preconnectionId!==id||map.projectRef!==t.projectRef||map.sourceRevision!==source.sourceRevision||map.projectId!==source.project.projectId||map.revision!==source.project.revision||map.subjectHash!==subject||t.expiresAt>map.expiresAt||t.createdAt<source.window.startedAt||t.createdAt>Date.now()||map.issuedAt<source.window.startedAt||map.issuedAt>t.createdAt||map.expiresAt>capsule.C0||t.expiresAt>capsule.C0||Date.now()>=Math.min(t.expiresAt,map.expiresAt))fail();",
+              "endsFail": true
+            }
+          ]
+        },
+        {
+          "id": "source-snapshot",
+          "first": "data.sourceSnapshot.preconnectionId!==id",
+          "second": "canonical(data.sourceSnapshot.source)!==canonical(source)",
+          "matches": [
+            {
+              "line": 378,
+              "text": "     if(data.sourceSnapshot.preconnectionId!==id||canonical(data.sourceSnapshot.source)!==canonical(source))fail();",
+              "endsFail": true
+            }
+          ]
+        },
+        {
+          "id": "connection-history",
+          "first": "v.preconnectionId!==id",
+          "second": "v.contextHash!==contextHash",
+          "matches": [
+            {
+              "line": 435,
+              "text": "      if(v.preconnectionId!==id||v.sourceRevision!==source.sourceRevision||v.stage!==stage||v.effect!==effect||v.contextHash!==contextHash||v.baselineVersionId!==predecessor.versionId||v.baselineDeploymentId!==predecessor.deploymentId||v.issuedAt<Math.max(ack.acknowledgedAt,approval.approvedAt,use.consumedAt)||v.issuedAt>Date.now()||v.deadline>Math.min(data.preconnection.expiresAt,data.preconnection.owner.accessExpiresAt,approval.expiresAt,capsule.C0)||v.deadline-v.issuedAt>5000||a&&(a.sendHash!==prepHash('ConnectionSend',v)||a.acknowledgedAt<v.issuedAt||a.acknowledgedAt>=v.deadline||a.acknowledgedAt>Date.now()))fail();",
+              "endsFail": true
+            }
+          ]
+        },
+        {
+          "id": "publication-pointer",
+          "first": "const seen=actual.versions",
+          "second": "receipts.map",
+          "matches": [
+            {
+              "line": 444,
+              "text": "      const seen=actual.versions[upload.ack.resourceId];if(!seen||canonical(seen)!==canonical(configuration)||[capsule.activatedVersionId,capsule.qaVersionId,...receipts.map(r=>r.versionId)].includes(upload.ack.resourceId))fail();",
+              "endsFail": true
+            }
+          ]
+        },
+        {
+          "id": "receipt-physical-hash",
+          "first": "installed.moduleHash!==capsule.moduleHash",
+          "second": "installed.configurationHash!==finiteActivationConfigurationHash",
+          "matches": [
+            {
+              "line": 449,
+              "text": "      if(installed.moduleHash!==capsule.moduleHash||installed.configurationHash!==finiteActivationConfigurationHash(configuration))fail();",
+              "endsFail": true
+            }
+          ]
+        },
+        {
+          "id": "writer-head",
+          "first": "f.effects.size!==expectedKeys.length",
+          "second": "writer-head",
+          "matches": [
+            {
+              "line": 455,
+              "text": "     if(f.effects.size!==expectedKeys.length||[...f.effects.keys()].some(key=>!expectedKeys.includes(key))||f.effects.get('afw.finite-policy-effect.v1:writer-head')!==JSON.stringify({identityHash:lastIdentity,sendHash:prepHash('ConnectionSend',lastJournal)}))fail();",
+              "endsFail": true
+            }
+          ]
+        }
+      ]
+    },
+    "preparedMethod": "Expected counts inferred from the pinned original instrumentFirstConnection and private IO-preparer literal edits. All original-preparer exact needles1 and seven correlator guards1/endsfail; those edits are disjoint from N3 needles except catch808, where raw1 becomes prepared0 and prepared-prefix1. No Source/preparer function was executed locally. Future REVERSIBLES invokes actual original preparer and checks ALL expected counts before N3 transform.",
+    "rootRejectedHypothesis": "normalCatch has1 in pinned raw a9d70; first(error)0. No change to catch semantics.",
+    "finding": "ACTIVATION2 is the only nonconditional N3 raw/prepared selector cardinality defect found in this complete static table. It spans upload752 andactivation763. Third original describeActivation line yields exact1. This does not establish the first error of original old run; actualfix1 narrowed34 failures to phase-transform.",
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "acknowledgedAuthorError": "Round2 vector already exposed2/required1; the test accepted2 instead of enforcing1. This omission is corrected, not re-labelled PASS. Native6/35 remains admitted FAILURE; exact original first exception not recovered from the phase enum."
+}

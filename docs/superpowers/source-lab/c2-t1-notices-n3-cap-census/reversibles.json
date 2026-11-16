@@ -1,0 +1,92 @@
+{
+  "schema": "afw.c2-notices-n3.cap-census-reversibles.v1",
+  "authority": "9b4fb9eb4672847f6e5c8613c34f337569262ff1",
+  "baseline": {
+    "source": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "originalLeaves": 3203
+  },
+  "proposalOnly": true,
+  "newPrefix": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/",
+  "newWorkflow": ".github/workflows/afw-c2-notices-n3-cap-census.yml",
+  "allNewPathsExpectedAbsentAtBase": true,
+  "beforePacket": "e1f1b666726b2eb433d4d2d96f7266ca0c951308",
+  "fullDiff": {
+    "bytes": 151910,
+    "sha256": "62c7b5551d327a4d49358a087781ead6f4cc6368725086dbf7c5c777ba08120a",
+    "gitBlob": "b662485e62e28ad5233a3f896c5f224b62601bfe",
+    "blob": "b662485e62e28ad5233a3f896c5f224b62601bfe",
+    "fullReadback": true
+  },
+  "reconstruction": [
+    {
+      "file": "n3-census-controls.mjs",
+      "forwardExact": true,
+      "reverseExact": true,
+      "finalLfPreserved": true,
+      "beforeIsTemplateOnly": true
+    },
+    {
+      "file": "run-controls.mjs",
+      "forwardExact": true,
+      "reverseExact": true,
+      "finalLfPreserved": true,
+      "beforeIsTemplateOnly": true
+    },
+    {
+      "file": "tooling-proof-schema.json",
+      "forwardExact": true,
+      "reverseExact": true,
+      "finalLfPreserved": true,
+      "beforeIsTemplateOnly": true
+    },
+    {
+      "file": "workflow",
+      "forwardExact": true,
+      "reverseExact": true,
+      "finalLfPreserved": true,
+      "beforeIsTemplateOnly": true
+    },
+    {
+      "file": "census-vectors.json",
+      "forwardExact": true,
+      "reverseExact": true,
+      "finalLfPreserved": true,
+      "beforeIsTemplateOnly": true
+    },
+    {
+      "file": "census-contract.json",
+      "forwardExact": true,
+      "reverseExact": true,
+      "finalLfPreserved": true,
+      "beforeIsTemplateOnly": true
+    },
+    {
+      "file": "selection",
+      "forwardExact": true,
+      "reverseExact": true,
+      "finalLfPreserved": true,
+      "beforeIsTemplateOnly": true
+    }
+  ],
+  "frozen": {
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "oldUnitControls": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac"
+  },
+  "restore": "No product/normalSource path is modified. Root may abandon an unexecuted proposal without any runtime rollback. If Root later creates the nominated one-use branch, Root alone closes by removing ONLY the new workflow and preserving all DATA/evidence; verify originals3203/modes, Main/history and zero close-head runs. No author ref/run/close is authorized.",
+  "temporaryTooling": "Native controls use builtin imports/data: modules and original timers/promises in the ephemeral Actions process only. t.after is registered before original factories; successful census explicitly closes original clock/root resources before return. No production files, policies, services, credentials or users touched.",
+  "oldVersions": "All template blobs and all old41 bodies remain reachable by original pins. The intermediate draft WF56b5ac08e5343ecda08d75e6f63b80a4284fd14a is preserved but superseded by final WF02f5f487199e2f5273d2fb56c0185a6fb7dbdc96; it is not a mounted path or admission input.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "schema": "afw.c2-notices-n3.cap-census-contract.v1",
+  "status": "SOURCE_TESTS_PENDING_ROOT_CLOUD",
+  "authority": {
+    "brief": "9b4fb9eb4672847f6e5c8613c34f337569262ff1",
+    "oldPacket": "e1f1b666726b2eb433d4d2d96f7266ca0c951308",
+    "oldActualProof": "3a8781f6a2646a3a00c521fc7f25b6a35d314ac8",
+    "oldReview": "a55a56441c81057f369a871e8891794d22ff8064"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-notices-n3-cap-census",
+    "message": "AFW-C2-N3-CAP-CENSUS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-notices-n3-cap-census.yml",
+    "job": "c2-notices-n3-cap-census",
+    "prefix": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/",
+    "runner": "docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/source-lab/c2-t1-notices-n3-cap-census/run-controls.mjs",
+    "node": "22.23.4",
+    "attempt": 1,
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "contents": "read",
+    "artifactDays": 7
+  },
+  "ordering": {
+    "native": [
+      "N3_CORE_CONTROLS",
+      "N3_CAUSAL_LITERALS",
+      "N3_TIMEOUT_PREFIX_CONTROLS",
+      "N3_AXIS_LITERALS",
+      "N3_SCHEMA_SELECTION_CONSTS",
+      "N3_NOTE_SYNC_NO_RPC",
+      "N3_ORIGINAL_NULL",
+      "N3_ORIGINAL_UNDEFINED",
+      "N3_ORIGINAL_FALSE",
+      "N3_ORIGINAL_ZERO",
+      "N3_ORIGINAL_EMPTY_STRING",
+      "N3_ORIGINAL_OBJECT",
+      "N3_PROMISE_IDENTITY",
+      "N3_EXISTING_SETTLED_HANDLER",
+      "N3_ROOT_IDENTITY",
+      "N3_REALM_RESET",
+      "N3_CROSS_SCOPE_LEASE",
+      "N3_SHARED_PROMISE",
+      "N3_NULL_BOUND_REF",
+      "N3_PREBIND_GAP",
+      "N3_PAIR_FORK",
+      "N3_FIRST_TARGET_ONLY",
+      "N3_SCOPE_ERROR_A_CHILD_B",
+      "N3_REPEATED_CLOSE",
+      "N3_CUT_LATE_SETTLEMENT",
+      "N3_SINK_FAULT",
+      "N3_PRIVATE_CAP",
+      "N3_SNAPSHOT_CAP",
+      "N3_WORST_SIZE",
+      "N3_REPEATED_RETAIN_FIRST_OBSERVATION",
+      "N3_ABORT_NESTED_OBSERVER_ORDER",
+      "N3_BOUND_PAIR_COVERAGE",
+      "N3_PREPAIR_FAILURE_AND_UNBOUND",
+      "N3_ACTUAL_CHILD_ABORT_MATRIX",
+      "N3_ACTUAL_PARENT_ABORT_MATRIX",
+      "N3_NESTED_ABORT_ORDER",
+      "N3_UNREACHED_ACTIVATION",
+      "N3_ORIGINAL_RACE_AXES",
+      "N3_ORIGINAL_REDUCER_CALLBACKS",
+      "N3_REVERSIBLES",
+      "N3_MAX_ENVELOPE_SIZE",
+      "N3_CENSUS_ROOT17",
+      "N3_CENSUS_IDENTITY129",
+      "N3_CENSUS_GAP_PROMOTION_AT128",
+      "N3_CENSUS_PROBE_BEFORE_ELIGIBLE",
+      "N3_CENSUS_FRESH_GET_POST_BOUNDS",
+      "N3_CENSUS_REPEAT_AND_HONEST_CAP"
+    ],
+    "oldPrefixCount": 41,
+    "newSuffixCount": 6,
+    "registration": "Eager synchronous top-level registration; native sequential concurrency1. No skipped/todo/cancel/extra/missing case accepted."
+  },
+  "frozen": {
+    "ledger": "d9d3a0af3b6f1e6738957f703e368f19852cdce8",
+    "compiler": "94e30c896056dc35b3bb75b072022644c68bfb74",
+    "originalUnits": "e987e103122b3318638d7a5e57bd6e41df81cd8d",
+    "normal13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "tree": "62e78926635d6b74f288d6c0d69e0f2516306989"
+  },
+  "vectors": {
+    "bytes": 11987,
+    "sha256": "378d83c4acb05b61ca3a55d3ab21b8f0fc58768a0a8a12352fc490b4ce186f3f",
+    "gitBlob": "00685a137f17834ff355cb2cae15285d8e9e2fd4",
+    "blob": "00685a137f17834ff355cb2cae15285d8e9e2fd4",
+    "fullReadback": true
+  },
+  "modules": {
+    "old41": "Actual ledger factory, transformed original InitialLease factory/retain/wait/child/settled/stop/close callbacks; extracted original OP requestLease root factory and exact PH outer/pair onAbort bodies. Pure Source reader/logger/slot controls execute natively. Controlled DTO stimuli and unit wrappers are test-only. Full PH business function/QA bundle/M/Miniflare/esbuild/SDK/world do NOT execute in this graph.",
+    "new6": "Same reviewed transformN3Lease/transformN3Op, original full InitialLease and extracted original OP requestLease. Test adapter only forwards synchronous notes to unchanged ledger and retains <=4096 input DTO refs per case for Set-based census. It adds no production reactions/timers/clock reads. Node test wrappers await original callbacks; no World/SDK/esbuild/Miniflare/npm/PH handler/HTTP/business execution.",
+    "seams": "Original OP requestLease body is extracted between unique fixed function/request-entry comment. Full original InitialLease body is transformed by frozen compiler; ONLY import target is rehosted to isolated test adapter. No body/clock/promise changes; same original callbacks/return values. Old41 REVERSIBLES still covers raw/prepared PH/LEASE/OP/STDIN and M build text.",
+    "cleanup": "Native t.after registered before imports/factories. Each observed successful census calls idempotent wrapper cleanup of all original clocks/roots before comparing counts; original close()/finish() bodies themselves retain repeated-close semantics. Existing case10s/job3min unchanged."
+  },
+  "proof": {
+    "schema": "afw.c2-notices-n3.cap-census-proof.v1",
+    "marker": "AFW_C2_N3_TOOLING_PROOF ",
+    "frame": "marker + JSON.stringify(proof) + LF; fixed top order schema,context,inputHashes,ids,results,allToolingBodiesReturned,core,causal,reducer,census,diagnosticToolingExecuted,sourceBusinessExecuted,SourceQualified,Task1Pass,nonclaims",
+    "file": "output/c2-notices-n3-cap-census.json",
+    "artifact": "afw-c2-notices-n3-cap-census",
+    "bytes": 24576,
+    "census": "Exactly6 ordered {id,observation} records. observation null if never successfully returned; never fill defaults. A returned observation contains createdRefs,stimuli,notes,snapshots,checks,futureGapPromotionJoined,actualCensusOfBusiness:false,scopeAdmissionExecuted:false. Every value is compared against test-first literal expectations before publication.",
+    "counts": "createdRefs are actual distinct objects returned by original root/clock/child/work callbacks in this finite tooling workload. pairBindings and unresolvedClocks are nominated DTO stimuli, not claimed private accepted counts. notes count actual retained/settlement hook invocations; callbacks never count as distinct identities. None is an inferred actual-C census.",
+    "legacy": "Native47 PASS would mean frozen legacy oracles reproduced. GAP_PROMOTION_AT128 must retain futureGapPromotionJoined:false even on native PASS; desired future true is preserved only in vectors as RED and is not repaired.",
+    "join": "Root independently joins API/head/tree/command/TAP47/proofshape/input hashes/artifact bytes; allToolingBodiesReturned alone is insufficient."
+  },
+  "diagnostics": {
+    "marker": "AFW_C2_N3_TOOLING_DIAGNOSTIC ",
+    "schema": "afw.c2-notices-n3.tooling-diagnostic.v1",
+    "keys": [
+      "schema",
+      "id",
+      "phase",
+      "code"
+    ],
+    "code": "CONTROL_INVALID",
+    "phases": [
+      "fixture-read",
+      "ledger-import",
+      "lease-transform",
+      "lease-import",
+      "op-transform",
+      "root-import",
+      "phase-transform",
+      "root-setup",
+      "case-body",
+      "reversibles"
+    ],
+    "maximumLines": 47,
+    "maximumUtf8BytesPerLine": 256,
+    "meaning": "Only controlled owned data/enumerable phase values from private setup WeakMaps; no exception text/message/stack/getter. Static wrapper Error replaces any private thrown value in native TAP. Missing diagnostic does not identify phase."
+  },
+  "freshGraphRuling": "Root accepted finite adjustment by parent message:2 actual roots,8 original clocks,12 original child/work promises. Expect NO_ELIGIBLE and no CAP_PRIVATE. This is a declared load, never actual-C census/upper bound or real native admission/HTTP success. No reset/epoch change authorized.",
+  "limits": {
+    "roots": 16,
+    "leasePlusGap": 128,
+    "promises": 64,
+    "opaqueErrors": 64,
+    "storedEvents": 256,
+    "metadataBytes": 65536,
+    "selectedEvents": 24,
+    "recordBytes": 6144,
+    "caseMs": 10000,
+    "jobMinutes": 3,
+    "proofBytes": 24576,
+    "inputNotesPerCase": 4096
+  },
+  "forbidden": [
+    "ledger orcompiler repair",
+    "epoch/reset protocolchange",
+    "scope/identitycapincrease",
+    "new wire export/receiverchange",
+    "new business capture/world/request/probe",
+    "new callbacks/reactions/clockread/header/Mbridge",
+    "Source13/product/Task2",
+    "refs/runs by author"
+  ],
+  "verification": {
+    "local": "None. Source/observer/parser has NOT been evaluated/imported/compiled/syntax-checked/tested locally.",
+    "cloud": "PENDING_ROOT_CLOUD. Existing old41 native PASS referenced only at its old head; new47 not executed.",
+    "accounting": {
+      "diagnosticToolingExecuted": "true only in an actual emitted cloud tooling proof",
+      "sourceBusinessExecuted": false,
+      "SourceQualified": false,
+      "Task1Pass": false
+    }
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
