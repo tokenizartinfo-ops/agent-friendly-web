@@ -1,0 +1,257 @@
+{
+  "schema": "AFW-C2-HOST-JSON-FIX1-FRESH-SPEC-QUALITY-REVIEW/1",
+  "timestampUTC": "2026-11-17 00:26:59 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "reviewer": "/root/green20_own124_review; independent reviewer, not author",
+  "environment": "Immutable Git blobs; static source text and inert JSON/crypto/artifact inflation in RAM",
+  "resourceType": "One immutable final review blob",
+  "allowedAction": "Read full fixed blobs and Root-preserved Primary/proof/closure, inert analysis, one final review+full hash readback. No Source execution/import/syntax/AST/compile/test by reviewer, local FS/dependencies, ref/run/native-endpoint mutations or repeat.",
+  "result": {
+    "SPEC": "PASS",
+    "QUALITY": "PASS",
+    "materialFindings": 0,
+    "sourceCandidateEligibility": "ELIGIBLE_AS_BOUNDED_HOST_SERIALIZATION_IMPROVEMENT",
+    "summary": "S10 candidate serializes each firstConnection response once and uses the same encoded bytes for trace/hash/Response. Exact OLD native comparison has expected one failure from2calls versus1expected; candidate passes4tests/13checks. No material defect found in the scoped change or evidence. Any future Source business/qualification gate remains separate."
+  },
+  "authority": {
+    "ruling": "5b62cc4b148d5667f7845957012bca03c49e6be0",
+    "design": "0a04e29e7a72c4ef853942fc6f7093416c9e9a71",
+    "fixtureFirst": "65dd370ef52c0bcbb8fd56b2012d2c8bb93f3ae4",
+    "nativeGate": "c16e7f38e651692aac2715d466d23c4c57e31e4a"
+  },
+  "pins": {
+    "packet": "5a00a46bedc3fcdd073647bb4f6c5ea1e2b7472b",
+    "oldS10": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+    "candidateS10": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+    "oldSource13": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "successorSource13": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "qualifierHistory": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "reversible": "3ea5df08fb6e454698153050faf41e14034c32cb",
+    "runner": "ef5b42e26ef48148361f5b3b68311e0f1d9614dd",
+    "controls": "18bc9a01789895579428c7bddbd7c270a249b34a",
+    "workflow": "a5e5e7aa550fa406c3f84bea6a4505becdb11e93",
+    "proofSchema": "2ce3d07042abc76c586d25d5e0cd95ad57348dab",
+    "independentProtocol": "cd9c2a8af90a0f57e2dfdc34986c6f22f8d3e48d"
+  },
+  "staticAssessment": [
+    {
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "lines": "213-223",
+      "assessment": "Only changed source span. Non-firstConnection immediately preserves native Response.json(payload,options). FirstConnection invokes fresh J(payload) once, creates UTF8 Buffer, records bytes.length and SHA256 of that same Buffer and passes it as Response body. New Headers(options.headers) plus absent-content-type application/json preserves tested status/statusText/header behavior. No cache, URL memoization, reuse of prior serialization or request-clock change."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/host-controls.mjs",
+      "lines": "13-24,30-47,97-113",
+      "assessment": "UID/GID/groups/net-namespace/internal-address checks precede Source imports. Tests invoke exported actual createInitialEntrySynOutbound and directly returned callback with synthetic Request objects. Counting nested toJSON is actual callback work, not copied replacement function. OLD two completed non-timing checks precede expected singleSerialization assertion failure."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/host-controls.mjs",
+      "lines": "49-77,114-165",
+      "assessment": "Actual Response arrayBuffer and exact literal UTF8 bytes/length/SHA matched, with complete response Headers, status/statusText and valid bounded IMF-fixdate asserted natively. Tests include Unicode/escaping,2097349B module body,401 response, ordinary non-firstConnection one native serialization and no trace, same object/same URL mutation and restoration, preserved prior ledger rows."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/host-controls.mjs",
+      "lines": "167-212",
+      "assessment": "BigInt serialization TypeError leaves response trace unchanged; subsequent call returns fresh original bytes. Both owned targets'13canonical files are actually read and compared to declared hashes; only S10 differs. Native facts carry mode-specific13hash arrays."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/run-host-controls.mjs",
+      "lines": "159-247,279-360",
+      "assessment": "Pinned23input bodies/self plus manifest source files copied into two separate fresh owned RUNNER_TEMP targets; existing locked dependencies installed ignore-scripts/no-audit/no-fund in cloud only. Each callback suite runs nonroot with cleared groups/no-new-privs in separate network namespace and stripped env. Before/after target measures, actual old/new child statuses/TAP/facts and guarded realpath/dev/ino/uid cleanup precede canonical bounded proof."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/run-host-controls.mjs",
+      "lines": "250-277,293-337",
+      "assessment": "Runner requires exact native case status/ID/ordinal/totals/plan, expected old assertion diagnostics, exact mode-specific completed checks and old2/new1 facts, both target fingerprints and cross-mode equivalence. Fresh independent admission additionally reparses full exported native TAP, schema prefixItems and ordered facts."
+    }
+  ],
+  "sourceDelta": {
+    "oldBytes": 88519,
+    "candidateBytes": 88713,
+    "prefixBytes": 67280,
+    "removedBytes": 371,
+    "insertedBytes": 565,
+    "suffixBytes": 20868,
+    "forwardByteExact": true,
+    "reverseByteExact": true,
+    "successorIndexOnlyChangedPointer": "/entries/10/after",
+    "other12Unchanged": true,
+    "oldIndexAndC230HistoryPreserved": true,
+    "canonicalProductGitMutation": false,
+    "meaning": "Git contains additive inert BODY/candidate/index data; old/new canonical Source13 versions were materialized only in two owned test targets."
+  },
+  "importScope": {
+    "repoFiles": 79,
+    "initializationJSONReads": 1,
+    "directNpmRoots": 6,
+    "potentialLockedPackages": 98,
+    "relativeEdgesClosed": true,
+    "bareImportsExactlyDeclaredSix": true,
+    "all98VersionAndIntegrityPinsMatchLock": true,
+    "rawTreePinsJoinBASEOrFrozenSource13": true,
+    "limitation": "79 is the declared repository import graph and98potential locked package closure, not an observed per-file runtime import trace. Unchanged module/package internals were not independently exhaustively re-audited. Tooling invokes only direct synthetic host callback; no initialEntryHarness, Miniflare constructor, build, SDK/provider/network business call is authorized or credited."
+  },
+  "fixtureFirst": {
+    "sameFourIDs": [
+      "HOST_ENCODE_ONCE",
+      "HOST_WIRE_EQUAL",
+      "HOST_FRESH_PER_CALL",
+      "HOST_CLOSURE"
+    ],
+    "candidateNamedChecks": 13,
+    "sealUnchanged": true,
+    "literalsIndependentlyRecomputed": {
+      "unicode": {
+        "bytes": 76,
+        "sha256": "bc86b9f4007c3cd0b3bf52f0beee61caf4c201c0ced40b51802d8d98d774bd05"
+      },
+      "large": {
+        "bytes": 2097349,
+        "sha256": "7f376e602b669c97c9b198b0bbfcd95cf7dcd98ca4be9622694b920a1d00db49"
+      },
+      "denied": {
+        "status": 401,
+        "bytes": 57,
+        "sha256": "b802ca281a2ced06f4c674bbafdf6ac51b317991bee4a8c9f0655610fa014c4a"
+      },
+      "freshHashes": [
+        "8c6991064379168054b5bb24737e58b2dd85752d802a0dd0f5d5461e0820cb31",
+        "df7836da48bf8d2b56276823938dbca097406ec4b999c51b6655c05c0f81dd15",
+        "8c6991064379168054b5bb24737e58b2dd85752d802a0dd0f5d5461e0820cb31"
+      ]
+    }
+  },
+  "actual": {
+    "primary": "38b19d479e1f01b901e99840ff493e1764678714",
+    "proof": "6fef356140f55010261133cc6a4b19446b0bc73c",
+    "run": 43986290322,
+    "attempt": 1,
+    "job": 133715167187,
+    "head": "b86a289c1fd856e4c972753938c7512ecd067310",
+    "tree": "80d88198bec85e6e3305faef48f542d8ff2aecc5",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "commandStep": 4,
+    "jobDurationMs": 29000,
+    "old": {
+      "tests": 4,
+      "pass": 3,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "onlyFailure": "HOST_ENCODE_ONCE singleSerialization",
+      "code": "ERR_ASSERTION",
+      "operator": "strictEqual",
+      "actual": 2,
+      "expected": 1,
+      "priorChecks": 2,
+      "tapBytes": 1632,
+      "tapSHA256": "5598a457d6cca1717405cc87867024cb46e370e6c1c7fa7a2f16ffd7904604f5"
+    },
+    "candidate": {
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "namedChecks": 13,
+      "actualCalls": 1,
+      "tapBytes": 529,
+      "tapSHA256": "bae8e7bf2c9babbef0602516c94c930eae2e9c1975db35ab0984d6f38c3fe171"
+    },
+    "independentChecks": [
+      "Both native UTF8 TAP fingerprints/full LF data independently reparsed: exact4Subtest/result pairs,ordinals/status,unique plan1..4 and every trailer; OLD first block has specific actual2/expected1/strictEqual error.",
+      "Full proof schema including prefixItems/items/const/ranges and every ordered key/fact array checked with reviewer inert-data validator.",
+      "All named checks and explicit actual facts compared independently to presealed literals:Unicode,large,401,ordinarypath,fresh hashes,error/noappend and mode-specific13target arrays.",
+      "APIrepo/event/ref/head/parent/tree/message/attempt/job/requiredsteps,unique actual command step4,commandgroup/window and unique canonical proof frame joined to this occurrence.",
+      "Proof23input fingerprints equal full immutable mounted bodies and rawtree mode/type/blob/size in exact order. Graph79+descriptor pins and package/lock joins checked.",
+      "Canonical Git tree rebuilt from3226leaves equals80d88198...; remove exact23additions and rebuild3203leaves yields BASE62e78926635d6b74f288d6c0d69e0f2516306989."
+    ],
+    "proofBytes": 13571,
+    "proofSHA256": "3369880046e605f7d9a0731bbfb6bc44a2510b37c31b0a776b890dc603ec0ce5",
+    "rawLogBytes": 29243,
+    "rawLogSHA256": "c647a220ee7574a94d54b831c27a0f982f384e9f5c04de00172e8c7461f2526d",
+    "SourceHostHelpersExecutedByRoot": true,
+    "SourceExecutedLocally": false,
+    "SourceBusinessExecuted": false
+  },
+  "artifact": {
+    "id": 14284899036,
+    "zipBytes": 4150,
+    "zipSHA256": "ca8e41f9c1c126425666b27160d4d7891ed65a3e17a75d8f8c348a9131055fe5",
+    "filename": "c2-host-json-fix1-tools-proof.json",
+    "method": "Reviewer independent inert ZIP metadata/CRC parser and builtin inflateRawSync with info/bound; no producer/OWN helper imported.",
+    "flags": 8,
+    "compressedBytes": 3968,
+    "CRC32": 2418039355,
+    "fullInflateConsumption": true,
+    "EOCDCentralLocalDescriptorBoundsMatched": true,
+    "singleRegularExactFilename": true,
+    "noZIP64": true,
+    "payloadEqualsFetchedProofAndCanonicalLogBodyPlusSingleLF": true,
+    "listingDigestSizeIdRunHeadBranchTimeAnd7DayExpiryWithin1000msJoined": true
+  },
+  "closure": {
+    "receipt": "3515e8797b512aaa6a8ba71b6d0db9118917e0a6",
+    "readback": "5cdc1dc255ef344668a3868913f8146b0971e10a",
+    "closedHead": "1f62e087f0d9000f9c08519cd162db1104827af8",
+    "closedTree": "91a06578f7270a86ac18d1075ad9fc710beb661c",
+    "recordedLeaves": 3227,
+    "arithmetic": "3203original+22retainedadditions+2evidence=3227;onlynominatedworkflowremoved",
+    "linksAndResultsCoherent": true,
+    "RootRecordsMainHistoryOriginalsUnchanged": true,
+    "RootRecordsCloseHeadRuns": 0,
+    "limit": "FULL immutable Root receipt/readback verified for links/counts; no new refs or Actions endpoint poll and no independent current remote closure observation. Not physical AFW drain."
+  },
+  "reviewIntegrity": {
+    "fullUniqueInputBlobs": 36,
+    "allFetchedGitHashesMatched": true,
+    "allDeclaredUTF8BytesSHA256Matched": true,
+    "all23MountedBodiesFullyRead": true,
+    "SourceCodeExecutedByReviewer": false
+  },
+  "findings": [],
+  "eligibilityAndLimits": [
+    "Candidate S10 is eligible for separately controlled use as the narrow fresh-once host serialization improvement with successor13 e2ca46... . Other12 hashes, old26b/c230 and historical receipts remain preserved.",
+    "The measured reduction2calls→1 is deterministic redundant-work removal. No elapsed-time speedup, cause of NOTICES POST/current or historical timeout/503, or resolution of those incidents is established.",
+    "Native assertions checked complete body/trace/header values/status/date windows. Compact facts export lengths/hashes/status/header names; they do not contain full multi-megabyte bodies or actual date values. This is scoped code+native assertion evidence, not independent authentication of absent raw output.",
+    "Four host-helper tests do not exercise full Source business modes, M/QA/SDK execution, provider/runtime behavior or Task1 qualification. A future Source trial requires separately bound successor13 and Root gate; no repeat or new runtime action is authorized by this review."
+  ],
+  "performed": {
+    "staticFullBlobReads": true,
+    "inertJSONStringsCrypto": true,
+    "builtinArtifactInflation": true,
+    "SourceEval": false,
+    "SourceImport": false,
+    "SourceSyntax": false,
+    "SourceAST": false,
+    "SourceCompilation": false,
+    "SourceTestsByReviewer": false,
+    "localFilesystem": false,
+    "dependencies": false,
+    "refMutation": false,
+    "runMutation": false,
+    "nativeEndpointQueries": false,
+    "provider": false,
+    "browser": false,
+    "credentials": false,
+    "email": false,
+    "subagents": false,
+    "codeChanges": false
+  },
+  "rollback": "Omit this additive unattached review blob. Reviewer changed no implementation, workflow, ref or run.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
