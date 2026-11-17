@@ -1,0 +1,66 @@
+name: AFW first finite GET startup observation
+on:
+  push:
+    branches:
+      - lab/afw-c2-get-winner-20261117-fixtures-manifest1
+permissions:
+  contents: read
+jobs:
+  c2-get-winner-fixtures-manifest1:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/lab/afw-c2-get-winner-20261117-fixtures-manifest1' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'AFW-C2-GET-WINNER-FIXTURES-MANIFEST1-ONEUSE-20261117'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Read the exact one-use lab head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Use the fixed Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+      - name: Check the tooling controller syntax
+        shell: bash
+        run: |
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/run-get-winner-red.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/startup-diagnostics.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/startup-bootstrap.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/startup-diagnostics.test.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/native-red-child.mjs
+      - name: Check the 46 startup metadata controls
+        shell: bash
+        run: node docs/superpowers/source-lab/c2-get-winner-dependent/startup-diagnostics.test.mjs
+      - name: Install only the existing locked dependencies
+        shell: bash
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Exercise the single original guarded positive GET
+        id: source
+        shell: bash
+        run: |
+          set +e
+          node docs/superpowers/source-lab/c2-get-winner-dependent/run-get-winner-red.mjs
+          result=$?
+          echo "controller_exit=$result" >> "$GITHUB_OUTPUT"
+          exit "$result"
+      - name: Preserve the bounded named RED evidence
+        if: ${{ failure() && steps.source.outcome == 'failure' && steps.source.outputs.controller_exit == '41' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-c2-get-winner-red
+          path: output/get-winner-red.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Preserve the bounded startup diagnostic
+        if: ${{ failure() && steps.source.outcome == 'failure' && steps.source.outputs.controller_exit == '1' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-c2-get-winner-startup-diagnostic
+          path: output/get-winner-startup-diagnostic.json
+          if-no-files-found: ignore
+          retention-days: 7
