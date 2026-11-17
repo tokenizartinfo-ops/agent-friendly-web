@@ -1,0 +1,120 @@
+{
+  "schema": "AFW.DROP.SOURCE5.NATIVE_AND_TRANSPORT.INDEPENDENT_REVIEW/1",
+  "timestampUTC": "2026-11-17T13:55:05.559732+00:00",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "SPEC": "PASS",
+  "QUALITY": "PASS",
+  "scope": "Tooling-only execution and conditional application-route value provenance. Detached report, no activation.",
+  "inputs": {
+    "full": {
+      "bytes": 1232208,
+      "sha256": "2d25edcbdc655e8553288a5bb1ea90142cdc6c4fca454dda5e701ef5d46eec94",
+      "blob": "7ae7b6a8cd8c2fb71e6ef59bab4298fce0bed67c"
+    },
+    "proof": {
+      "bytes": 904,
+      "sha256": "9211e55176f3bd31e72781c98c7cdea65c78738a9eb192adba0cb1d8585a64a5",
+      "blob": "33d612dc0c5614000f8b8f89ca953b9e5f487b9d"
+    },
+    "val": {
+      "bytes": 2500,
+      "sha256": "5689e663d5ccc59781f6693b95c6e4454124cff84c27646cb85c2a98e63496ea",
+      "blob": "a60e560734a2fe4e1be5a63e906a79a53fc4653f"
+    },
+    "close": {
+      "bytes": 1251898,
+      "sha256": "82a72a86fa8b26af5f5ed59f03ab6aa5600d30c51b2d506080af876a5e724f74",
+      "blob": "fc6017cd0b1cc3659771551a6c56fd3025a5739f"
+    }
+  },
+  "admission": {
+    "gate": "2e10790581652fb6b0f3940c98b476a5d0aa8d8d",
+    "proposal": "cde0ccf98e9500ae75aa586a7b5328f1b0c1cb7d",
+    "originalStaticReview": "74c530b9f5d803f1ac293b76ca07655642d53e84",
+    "launchStaticReview": "38e2d38b724f2e860c68920617bd9baf4b454560",
+    "design": "1a5ccbf3aa73495e3c4f4ebfe39e5693d78d91cb",
+    "builtinRuling": "1fa82c9895bcb8b515de00f53d99e84a8b6a042d",
+    "leaseSitesRuling": "713834d1311f4cd888f8505f67441fe622325077",
+    "sourceIndex": "fc5b71098da76696278765f43805f0f2a1953b22",
+    "reversibles": "59289f6688d0cb3c49ee738cbc700769c7251a21"
+  },
+  "results": {
+    "run": 44095907983,
+    "attempt": 1,
+    "job": 134082838390,
+    "head": "b7a2cbb6abb460089b38fa31fa1d787dd8a68902",
+    "tree": "bb497eedca051300366d29548c12f0523a1bb92f",
+    "api": "Single successful push/job/attempt, six ordered admitted steps and all ten completed successfully. One artifact; exact bytes/digest and run tuple.",
+    "jobLog": {
+      "bytes": 16835,
+      "sha256": "36adbe669c20a64417601922d136e1f1c56034cd3b8b154ea7971db6fa859f23",
+      "blob": "2a977703948ad10553a6c886afdc7723be972a6a"
+    },
+    "coveringCheck": "Ordered node --check on exact tooling controller before frozen-lock npm ci and controller execution; TOOLING_ONLY then 730 byte upload.",
+    "archive": {
+      "bytes": 730,
+      "sha256": "bd594a4c8394f467936606b49caa6382cb2d9b124232b2f2eeee2dc8345e951a",
+      "blob": "9f76837a92f913571e176f9487eebd00d546c2de"
+    },
+    "memberName": "drop-winner-tools.json",
+    "member": {
+      "bytes": 904,
+      "sha256": "9211e55176f3bd31e72781c98c7cdea65c78738a9eb192adba0cb1d8585a64a5",
+      "blob": "33d612dc0c5614000f8b8f89ca953b9e5f487b9d"
+    },
+    "crc32": "ddbf02e0",
+    "zipInspection": "One LF-canonical proof; local and central records, ASCII name, flags 8, deflate, 572 compressed bytes, signed 16-byte descriptor, sizes, CRC, strict raw inflate full consumption, EOCD at exact end. Payload byte-equal to saved primary and detached proof.",
+    "controls": {
+      "modelPass": 63,
+      "modelFailed": null,
+      "compiler": "PASS",
+      "distinctSites": [
+        "S01:69",
+        "S01:95",
+        "S01:247",
+        "S00:743",
+        "S04:37",
+        "S04:43"
+      ],
+      "nativeControls": 16,
+      "differential": 14,
+      "unsupported": null
+    },
+    "counts": {
+      "preflight": 1,
+      "tool": 1,
+      "targetHashesRechecked": true,
+      "ownedTempRemoved": true
+    },
+    "limitation": "Controller attests internal outcomes. No per-control TAP retained. Compiler-only disposed before fixture dispatch; same-factory native controls use separate workers. No actual business occurrence."
+  },
+  "closure": {
+    "head": "442174a54aa7b8eaad71fb978ac2022df961d26b",
+    "tree": "608790a87aba365dfc4c62678a8911e488df7561",
+    "intent": "ba6b95f9ed41ca11798982c74421b0f51ca71ee7",
+    "checked": "Rebuilt BASE, admitted and closed Git tree hashes from leaf tuples: 3203 originals, 34 added in admitted, 33 retained plus primary and closure = 3238. Workflow removed. Exact 13 protected ref names and tips from gate agree with saved closure API; 0 close runs. Snapshot only."
+  },
+  "routes": {
+    "qaClosed": true,
+    "mClosed": true,
+    "scope": "Exact Source5 opt-in positive first DROP only, expected resident hashes, directed binding, ordinary pinned Miniflare/workerd serialization. These booleans designate a reviewed premise for value provenance, not a run observation, signature, changed flag or branch release.",
+    "qaToM": "S09:152-157,545-565,668-688 capture epoch before super.fetch and mark only original registered request/response/status; promise reaction registered before adoption. S09:354-357 binds positive M directly to Initial in qa-first-connection, fixed actor/uniqueKey, no negative spy. Bridge uses fresh allowlisted request headers, fresh UUID, single manual POST to private target and direct awaited stub.fetch. Prepared bridge records the marker from that actual non-OK response prior to first/cancel. S02 receiver and wire pending/finalizer failures construct fresh unmarked responses. No app-level replay, alternate writer or fallback copying a marked response in this route.",
+    "mToHost": "Prepared S03 (S09:638-648) gives P its own cell, invokes original async fetch exactly once, attaches nonthrowing tap and returns original promise; only surviving B with matching P/cell is marked after original finally. Bridge pending is fresh with fixed headers; success reconstructs only its own allowlist. S09 firstConnectionWorkers places positive M first; S10:188-199 retains scripts over remounts and f.call directly returns mf.dispatchFetch. S08:21/110-114 captures that exact response before noFurther and uses it at existing cut. No marked cache, fallback producer, substitution or copy in that application chain.",
+    "controls": "Native same-factory positive, substitution/late marks/crossing/revocation/collision/finalizer negatives, and explicit qa-copied-all and outer-copied-all; copied-all yields the identical valid marker at both hops. Normal serialization preserves values; no cross-isolate JS identity and no independent response/body authentication. Hidden provider, malicious adapter or changed route is not disproved by header grammar or native observations.",
+    "invalidation": "If QA premise fails, V downgrades to STUB_NON_OK/publicSite UNKNOWN; if M premise fails, outer/publicSite UNKNOWN. Re-review changed scripts, route, transport or middleware; require actual mounted hashes, exact join/cut and occurrence before applying to an observed case."
+  },
+  "findings": [],
+  "method": "Read saved Git DATA only; application sources inspected as inert text. No terminal refetch, replay, dependency install, Source execution, local parser/build or native dispatch.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
