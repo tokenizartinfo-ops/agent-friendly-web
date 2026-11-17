@@ -1,0 +1,36 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.STAGE_A.STARTUP_APERTURE_RULING/1",
+  "timestampUTC": "2026-11-17 16:27:13 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "actualReview": "6da29cd79d736a11f8c520b357c7ef951a76740e",
+  "finding": "Saved generic red LAUNCH_INVALID combines preflight/red fresh counts, checkedLaunch/probe/budget failures and child status/error/signal/buffers. No child outcome is retained; no demonstrated underlying launch or business repair can be selected.",
+  "decision": "StageA fix round2: implement the smallest bounded isolated tooling startup/fault aperture, with literal fault fixtures sealed before helper code. Split custody counts and launch predicates, preserve primary failure separately from cleanup, use a fixed bootstrap dynamic import to capture import/runtime rejection class/code/known assertion and safe basename-location or UNKNOWN. Preserve the original native child, Source13, one GET/controlledactor, RED admission, all original clocks/caps and315expectations. No feature observer or business fix. Future launch requires new one-use nomination and independent SPEC+QUALITY plus Root gate.",
+  "why": "This is a concrete observation defect in the failed prerequisite, not a guessed remedy for the historical503. A changed controlled launch can reveal which existing startup boundary failed.",
+  "costIfWrong": "Abandon additive tool-only proposal; baseline, originalchild/Source13/315fixtures, oldref and allruntime/permissions unchanged.",
+  "editorial": "Actual review's word 'authenticated' for the expected named proof means qualified context-bound evidence only; receiptAuthenticated remainsfalse.",
+  "release": {
+    "toolingFixCodeProposal": true,
+    "localExecution": false,
+    "native": false,
+    "featureObserver": false,
+    "business": false,
+    "runtime": false
+  },
+  "counts": {
+    "StageAFixRound": 2,
+    "StageAMaxFixRounds": 5,
+    "Source": 5,
+    "Own": 5,
+    "noReset": true
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

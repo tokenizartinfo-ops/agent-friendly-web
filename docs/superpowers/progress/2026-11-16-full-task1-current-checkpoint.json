@@ -1,10 +1,10 @@
 {
-  "schema": 56,
-  "timestampUTC": "2026-11-17 16:18:59 UTC",
+  "schema": 57,
+  "timestampUTC": "2026-11-17 16:27:13 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "ddd66aa67866f08cb8935fa67d0560356f2ef5f7",
-  "phase": "GET_WINNER_STAGE_A_PREREQUISITE_FAILURE_PRESERVED_CLOSED_ACTUAL_REVIEW_ACTIVE",
+  "previousCheckpoint": "7341416c5281ea5d74e2d9561636ce272d836964",
+  "phase": "GET_WINNER_STAGE_A_ACTUAL_REVIEW_ACCEPTED_STARTUP_FIX2_PROPOSAL",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Independent saved actual StageA review plus DATA-only launch triage. Controller generic fault hides child outcome; no guessed cause/retry. Need smallest demonstrated startup correction or bounded failure aperture, preserve Source5/OWN5 cap and all old refs; no user action.",
+  "next": "Original StageA author prepares bounded failure capture/bootstrap/helper proposal with fixtures first; independently review then Root decides one changed isolated launch. No unchanged retry, Source feature or business/runtime release; no user intervention.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -516,9 +516,9 @@
   "completedOwnVmReleased": true,
   "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
   "getWinnerDependent": {
-    "phase": "STAGE_A_FAILED_BEFORE_EXPECTED_RED_CLOSED",
+    "phase": "STARTUP_APERTURE_FIX2_PROPOSAL_ONLY",
     "featureCodeReleased": false,
-    "nativeReleased": true,
+    "nativeReleased": false,
     "roundsUnchanged": true,
     "actor": "/root/get_winner_fixture_stage_a",
     "reviewer": "/root/get_winner_stage_a_review",
@@ -527,7 +527,7 @@
     "originalFixtureSeal": "3d39778abe9105f20c44cc11320fad92f8574d91",
     "originalFixtureMeasurement": "d8045b31f8ad35a2603350660a9943ae6d977b72",
     "review": "9d638a8e0cd6ab05db82eaa926af83a2345b1dca",
-    "stageAFixRound": 1,
+    "stageAFixRound": 2,
     "findings": [
       "A1 duplicate controller const st in same try blocks parsing before native; rename receipt-only variable",
       "A2 copy-all oracle must preserve serialized marker while trusted classification stays UNKNOWN"
@@ -573,6 +573,7 @@
     "nativeAttempts": 1,
     "expectedREDVerified": false,
     "businessReleased": false,
-    "actualReviewer": "/root/get_winner_stage_a_native_review RUNNING"
+    "actualReviewer": "/root/get_winner_stage_a_native_review RUNNING",
+    "actualReview": "6da29cd79d736a11f8c520b357c7ef951a76740e"
   }
 }
