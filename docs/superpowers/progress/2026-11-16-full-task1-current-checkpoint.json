@@ -1,19 +1,12 @@
 {
-  "schema": 46,
-  "timestampUTC": "2026-11-17 14:58:57 UTC",
+  "schema": 47,
+  "timestampUTC": "2026-11-17 15:04:57 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "49e69bd309c4962f3ed8792504adfa823a44e5f1",
-  "phase": "DROP_WINNER_OWN5_NATIVE_COVERING_CONTROLS_ACTIVE",
-  "activeNativeRuns": [
-    {
-      "id": 44109040240,
-      "head": "724d6a2998320daf7f86a95fe12229fb21fdf621",
-      "attempt": 1,
-      "status": "in_progress"
-    }
-  ],
-  "allCurrentNativeOccurrencesClosed": false,
+  "previousCheckpoint": "d59070c06105806e4f426c634700bf2ac0e2a67f",
+  "phase": "DROP_WINNER_OWN5_NATIVE_PASS_CLOSED_ACTUAL_REVIEW_ACTIVE",
+  "activeNativeRuns": [],
+  "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -141,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Observe this exact one-use OWN5 native covering occurrence. Need all9groups/142fixture outcomes/original73hash/new69hash/10adapterunits with exact proof/API/log/ZIP. Saveonce/close/review; only then admit actualSource5 one-use full-order20 diagnostic. No Source/real runtime activation yet.",
+  "next": "Independent saved OWN5 native evidence + Source26 interface review. Then Root may admit Source5 exact preparedhead2457ad... one full-order20 diagnostic, captureonce/close/admit via qualifiedD4actualreader with independent API tuple; neverborrowMODEL asACTUAL. Allcurrentnativeoccurrencesclosed; no useraction yet.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -391,7 +384,7 @@
   },
   "own5DataPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
   "OWN5": {
-    "stage": "B_NATIVE_COVERING_ACTIVE",
+    "stage": "B_NATIVE_CONTROLS_PASS_CLOSED",
     "brief": "b11d18f929b413d098dc368692debf71a85660a3",
     "actor": "/root/drop_own5_fixture_stage_a",
     "publicBoundaryRuling": "f1716eba86aa6d64132d1c1d6e42ef0b7a4f77fa",
@@ -420,7 +413,11 @@
       "leaves": 3376,
       "fullTreeVerified": true,
       "gate": "bcb9a881c96a9c67259142335effcd30fa8dd3e0",
-      "activationUTC": "2026-11-17 14:58:40 UTC"
+      "activationUTC": "2026-11-17 14:58:40 UTC",
+      "run": 44109040240,
+      "closed": true,
+      "closedHead": "8b41c57cb6a8a9ba7a92c3a56820786a41f95f86",
+      "closedTree": "7ae626b4bbb58275ba31292dc9cb0cfe40010a78"
     },
     "root13FullHashesMatched": true,
     "appendCount": 69,
@@ -473,6 +470,21 @@
       "groups": 9,
       "fixtures": 142,
       "adapterUnits": 10
-    }
+    },
+    "nativePrimary": "916c021c0afd9a5d05b31cdf6717204de2f15eb4",
+    "nativeProof": "aeb81a1566cf69e337db0e2ed7d09013c82d53bb",
+    "nativeValidation": "9615f57f2aaae476748f1af8ed06d033114b5022",
+    "nativeClosure": "ab4d08ea24e98b4b14869d02a14ef5fe283788be",
+    "actualReview": "/root/drop_fixture_review RUNNING",
+    "nativeObserved": {
+      "groups": 9,
+      "fixtures": 142,
+      "matched": 142,
+      "admit": 58,
+      "reject": 84,
+      "adapterUnits": 10,
+      "old73Unchanged": true
+    },
+    "actualSourceBusinessAdmitted": false
   }
 }
