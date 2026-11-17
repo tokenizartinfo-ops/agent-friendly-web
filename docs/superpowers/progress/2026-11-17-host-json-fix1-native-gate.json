@@ -1,0 +1,129 @@
+{
+  "schema": "AFW-C2-ROOT-HOST-JSON-FIX1-NATIVE-GATE/1",
+  "timestampUTC": "2026-11-17 00:15:28 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHub Actions, owned ephemeral install and old/new targets, each child network namespace isolated",
+  "resourceType": "One host-helper-only test occurrence, two suites",
+  "allowedAction": "Fresh absent branch/zero priorrun check then one activation; preserveactualoldRED1/newGREEN4TAP+API+artifact, close onlythisworkflow/readback. No Sourcebusiness mode.",
+  "authority": "5b62cc4b148d5667f7845957012bca03c49e6be0",
+  "index": "5a00a46bedc3fcdd073647bb4f6c5ea1e2b7472b",
+  "fixtureFirst": "65dd370ef52c0bcbb8fd56b2012d2c8bb93f3ae4",
+  "prepared": {
+    "head": "b86a289c1fd856e4c972753938c7512ecd067310",
+    "tree": "80d88198bec85e6e3305faef48f542d8ff2aecc5",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+    "refCreated": false,
+    "runCreated": false,
+    "SourceBusinessExecution": false
+  },
+  "readback": {
+    "original3203Unchanged": true,
+    "new23Exact": true,
+    "leaves": 3226,
+    "sourceImport79PinsJoinBaseOrExplicit13": true,
+    "SourceExecuted": false
+  },
+  "fullHashes": {
+    "mountCount": 23,
+    "UTF8SHA256GitMatched": true,
+    "SourceExecuted": false
+  },
+  "reversals": {
+    "S10ForwardReverse": true,
+    "indexForwardReverse": true,
+    "onlyEntry10": true,
+    "SourceExecuted": false
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+    "message": "AFW-C2-HOST-JSON-FIX1-TOOLS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-host-json-fix1-tools.yml",
+    "job": "c2-host-json-fix1-tools",
+    "prefix": "docs/superpowers/source-lab/c2-t1-host-json-fix1/",
+    "runner": "docs/superpowers/source-lab/c2-t1-host-json-fix1/run-host-controls.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-host-json-fix1/run-host-controls.mjs",
+    "os": "ubuntu-24.04",
+    "node": "22.23.4",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "attempt": 1,
+    "permissions": "contents: read",
+    "artifact": {
+      "name": "afw-c2-host-json-fix1-tools-proof",
+      "path": "output/c2-host-json-fix1-tools-proof.json",
+      "fileName": "c2-host-json-fix1-tools-proof.json",
+      "retentionDays": 7,
+      "count": 1,
+      "payloadMaxBytes": 24576,
+      "zipMaxBytes": 1048576,
+      "logMaxBytes": 4194304
+    },
+    "activationReleased": false
+  },
+  "SourceCandidate": {
+    "S10": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+    "successor13": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "other12Unchanged": true,
+    "notBusinessQualified": true
+  },
+  "expected": {
+    "old": {
+      "tests": 4,
+      "pass": 3,
+      "fail": 1,
+      "onlyFailure": "HOST_ENCODE_ONCE singleSerialization",
+      "actual": 2,
+      "expected": 1
+    },
+    "candidate": {
+      "tests": 4,
+      "pass": 4,
+      "fail": 0
+    },
+    "namedChecks": 13,
+    "ids": [
+      "HOST_ENCODE_ONCE",
+      "HOST_WIRE_EQUAL",
+      "HOST_FRESH_PER_CALL",
+      "HOST_CLOSURE"
+    ]
+  },
+  "scope": "Actual synthetic outbound callback only. Locked npm plus79repo/1JSONdata imports allowed onlyfutureGHA; no Miniflareconstructor/harness/build/SDK/network/business. Original3203/code untouched,13dataonlyGit and old/newmaterializedtargets. No Source locally executed. Header/wire/freshness checks unchanged, no caches, request clocks unchanged.",
+  "proofSchema": {
+    "blob": "2ce3d07042abc76c586d25d5e0cd95ad57348dab",
+    "bytes": 31067,
+    "sha256": "c90b078be6dddbdfbcb1274e12ed663a47f38abacb204ab60ae28a81a945edad",
+    "fullReadback": true
+  },
+  "independentProtocol": {
+    "blob": "cd9c2a8af90a0f57e2dfdc34986c6f22f8d3e48d",
+    "bytes": 3086,
+    "sha256": "c89516a37d370bb0bbfd85c5828945b59a25f41c94c5618181316a2163b4093e",
+    "fullReadback": true
+  },
+  "triggerAuditReuse": {
+    "priorFull62Audit": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "all62ImmutableBlobsAndPathsMatch": true,
+    "sourceBranch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+    "originalPushFilters": "18 exactmain excluded; remaining closed-origin3paths unchanged in exact one-commit25-addition diff; no create/workflow_run/schedule in BASE",
+    "closedOrigin3PathsUnchanged": true,
+    "newWorkflow": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+    "newWorkflowGate": "Exactrepo/push/branch/attempt1/oneusemessage/contentsread",
+    "SourceTriggered": false
+  },
+  "closeRule": "Delete onlynominatedWF addprimary+receipt; retainoriginal3203+other22+evidence+history; no spentnominationretry.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
