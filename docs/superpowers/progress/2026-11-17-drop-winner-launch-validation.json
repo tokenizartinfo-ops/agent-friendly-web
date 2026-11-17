@@ -1,0 +1,80 @@
+{
+  "schema": "AFW.DROP.TOOLING_LAUNCH.ROOT_VALIDATION/1",
+  "timestampUTC": "2026-11-17 13:47:56 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "run": 44095907983,
+  "attempt": 1,
+  "job": 134082838390,
+  "head": "b7a2cbb6abb460089b38fa31fa1d787dd8a68902",
+  "tree": "bb497eedca051300366d29548c12f0523a1bb92f",
+  "checks": {
+    "run": true,
+    "commit": true,
+    "job": true,
+    "steps": true,
+    "allCompletedSteps": true,
+    "artifact": true,
+    "canonical": true,
+    "headProof": true,
+    "proof": true,
+    "pins": true,
+    "custody": true,
+    "falseClaims": true,
+    "log": true
+  },
+  "logMeasurement": {
+    "bytes": 16835,
+    "sha256": "36adbe669c20a64417601922d136e1f1c56034cd3b8b154ea7971db6fa859f23",
+    "blob": "2a977703948ad10553a6c886afdc7723be972a6a"
+  },
+  "zip": {
+    "archive": {
+      "bytes": 730,
+      "sha256": "bd594a4c8394f467936606b49caa6382cb2d9b124232b2f2eeee2dc8345e951a",
+      "blob": "9f76837a92f913571e176f9487eebd00d546c2de"
+    },
+    "payload": {
+      "bytes": 904,
+      "sha256": "9211e55176f3bd31e72781c98c7cdea65c78738a9eb192adba0cb1d8585a64a5",
+      "blob": "33d612dc0c5614000f8b8f89ca953b9e5f487b9d"
+    },
+    "crc32": "ddbf02e0",
+    "compressedBytes": 572,
+    "descriptorBytes": 16,
+    "flags": 8
+  },
+  "stage": "TOOLING_ONLY",
+  "observation": {
+    "modelPass": 63,
+    "modelFailed": null,
+    "compiler": "PASS",
+    "distinctSites": [
+      "S01:69",
+      "S01:95",
+      "S01:247",
+      "S00:743",
+      "S04:37",
+      "S04:43"
+    ],
+    "nativeControls": 16,
+    "differential": 14,
+    "unsupported": null
+  },
+  "boundary": "Actual keyless isolated compiler/model/native-tool controls only. Source13/shared factory/fixtures unchanged. Six generated throw/caller sites distinguishable under actual compiler gate. Header/copy indistinguishability remains; closed transport premise needs independent scoped route review before any business attribution. No business/PC-off/drain/production proof.",
+  "coveringCheck": {
+    "command": "node --check docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+    "observed": "SUCCESS before npm/controller"
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
