@@ -1,0 +1,1600 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-FIXTURE-FIRST-INDEX/3",
+  "status": "DATA_ONLY_PREFIX_COHERENCE_RED_CONFIRMED_CODE_FIX_HELD",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "ownRound": 4,
+  "maxRounds": 5,
+  "ids": {
+    "original": {
+      "original": {
+        "blob": "fd7012bc0daf0faf8d310c6cf8fb49da1d3c29b0",
+        "bytes": 6508,
+        "sha256": "06bd6a0a7c70173b55a5d8cbfeb90650db6128afa14c52557f5960e52dd38bc5"
+      },
+      "append": {
+        "blob": "08d42d217903f4f0887dd6be2b30a268ef1cc595",
+        "bytes": 4647,
+        "sha256": "0c7ed5fcd24feb25937ee3b32cb2158d797accc75af48831af194d02c2d157af"
+      }
+    },
+    "prefixCoherenceAppend": {
+      "blob": "7f911c1060aaf193ccd0ac3bf62a024d3ab0b0d0",
+      "bytes": 5452,
+      "sha256": "17f35534035f93e113f0014fcadd3e6fb6093d83d23fc6bfe57c26319636290a"
+    }
+  },
+  "report": {
+    "blob": "5d6112871c532d5d6f6b5a22148eb9b0fa2809d1",
+    "bytes": 9930,
+    "sha256": "30a3b291fc8f671caf9c9cc96a344ce569cdb6580cee330618c72f9e892c1882"
+  },
+  "counts": {
+    "nativeGroups": 8,
+    "evaluations": 73,
+    "old70Exact": true,
+    "newNegatives": 3,
+    "admit": 32,
+    "reject": 41
+  },
+  "groups": [
+    {
+      "id": "FG3_OWN_D2_COMPAT",
+      "evaluations": 44
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_KNOWN",
+      "evaluations": 4
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_INDEPENDENCE",
+      "evaluations": 3
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_POINTERS",
+      "evaluations": 4
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_VISIBLE_BLOCKERS",
+      "evaluations": 7
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_STREAM_CONSISTENCY",
+      "evaluations": 6
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_WIRE",
+      "evaluations": 3
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_CALLER_BINDING",
+      "evaluations": 2
+    }
+  ],
+  "orderedEvaluationIds": [
+    "OWN_D2_K01",
+    "OWN_D2_K02",
+    "OWN_D2_K03",
+    "OWN_D2_K04",
+    "OWN_D2_K05",
+    "OWN_D2_A01",
+    "OWN_D2_A02",
+    "OWN_D2_A03",
+    "OWN_D2_A04",
+    "OWN_D2_A05",
+    "OWN_D2_A06",
+    "OWN_D2_U01",
+    "OWN_D2_U02",
+    "OWN_D2_U03",
+    "OWN_D2_U04",
+    "OWN_D2_U05",
+    "OWN_D2_U06",
+    "OWN_D2_K06",
+    "OWN_D2_U08",
+    "OWN_D2_R01",
+    "OWN_D2_R02",
+    "OWN_D2_R03",
+    "OWN_D2_R04",
+    "OWN_D2_R05",
+    "OWN_D2_R06",
+    "OWN_D2_R07",
+    "OWN_D2_R08",
+    "OWN_D2_R09",
+    "OWN_D2_R10",
+    "OWN_D2_R11",
+    "OWN_D2_R12",
+    "OWN_D2_R13",
+    "OWN_D2_R14",
+    "OWN_D2_R15",
+    "OWN_D2_F01",
+    "OWN_D2_F02",
+    "OWN_D2_F03",
+    "OWN_D2_F04",
+    "OWN_D2_F05",
+    "OWN_D2_F06",
+    "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT",
+    "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT",
+    "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT",
+    "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT",
+    "FG3_K01",
+    "FG3_K02",
+    "FG3_K03",
+    "FG3_K04",
+    "FG3_I01",
+    "FG3_I02",
+    "FG3_I03",
+    "FG3_P01",
+    "FG3_P02",
+    "FG3_P03",
+    "FG3_P04",
+    "FG3_B01",
+    "FG3_B02",
+    "FG3_B03",
+    "FG3_B04",
+    "FG3_B05",
+    "FG3_S01",
+    "FG3_S02",
+    "FG3_S03",
+    "FG3_W01",
+    "FG3_W02",
+    "FG3_W03",
+    "FG3_C01",
+    "FG3_C02",
+    "FG3_B06",
+    "FG3_B07",
+    "FG3_S04",
+    "FG3_S05",
+    "FG3_S06"
+  ],
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K01.json",
+      "mode": "100644",
+      "before": {
+        "blob": "470bd64b727c050ba64c375eccf895a14db8dd6f",
+        "bytes": 65689,
+        "sha256": "3fb31ceaf4168ea2466e3669c09b0285f2e379888dcc14ff1e68c0caef8e26c2"
+      },
+      "after": {
+        "blob": "470bd64b727c050ba64c375eccf895a14db8dd6f",
+        "bytes": 65689,
+        "sha256": "3fb31ceaf4168ea2466e3669c09b0285f2e379888dcc14ff1e68c0caef8e26c2"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K02.json",
+      "mode": "100644",
+      "before": {
+        "blob": "396a0edececfe6e532e328088e93d06b34e8ed24",
+        "bytes": 80034,
+        "sha256": "d7a5331b8c0f306e4b34298ee58c9c0bfa38cbdac454cec1eb1bcdc053ded056"
+      },
+      "after": {
+        "blob": "396a0edececfe6e532e328088e93d06b34e8ed24",
+        "bytes": 80034,
+        "sha256": "d7a5331b8c0f306e4b34298ee58c9c0bfa38cbdac454cec1eb1bcdc053ded056"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K03.json",
+      "mode": "100644",
+      "before": {
+        "blob": "3a4b9b5936bdaeac752be3051110f9e642d4eb9c",
+        "bytes": 65683,
+        "sha256": "35a53c771771096362aa6b6bccb08f7c42e90b250a614132f8dcb3db022b58c7"
+      },
+      "after": {
+        "blob": "3a4b9b5936bdaeac752be3051110f9e642d4eb9c",
+        "bytes": 65683,
+        "sha256": "35a53c771771096362aa6b6bccb08f7c42e90b250a614132f8dcb3db022b58c7"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K04.json",
+      "mode": "100644",
+      "before": {
+        "blob": "30aa3f49e67e442b2608f78cb33adca7a6da0c7a",
+        "bytes": 65689,
+        "sha256": "60b12b75b613cd5d846f70f012f98679c35ce5fcfec3ef45559174aed910aec3"
+      },
+      "after": {
+        "blob": "30aa3f49e67e442b2608f78cb33adca7a6da0c7a",
+        "bytes": 65689,
+        "sha256": "60b12b75b613cd5d846f70f012f98679c35ce5fcfec3ef45559174aed910aec3"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K05.json",
+      "mode": "100644",
+      "before": {
+        "blob": "feab23a303317ff615a8b1d6203991256db8a9b1",
+        "bytes": 65663,
+        "sha256": "00e40149544dcf4eb3d46b4a57f70c3c9c628310408980eb400feedb887017a2"
+      },
+      "after": {
+        "blob": "feab23a303317ff615a8b1d6203991256db8a9b1",
+        "bytes": 65663,
+        "sha256": "00e40149544dcf4eb3d46b4a57f70c3c9c628310408980eb400feedb887017a2"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A01.json",
+      "mode": "100644",
+      "before": {
+        "blob": "a806aa17813815a1fc62fcde3906176501bb0c36",
+        "bytes": 51324,
+        "sha256": "bf1f5e40d5aed6c52a370ef937e99a07be3af9535332034545c67613c908578c"
+      },
+      "after": {
+        "blob": "a806aa17813815a1fc62fcde3906176501bb0c36",
+        "bytes": 51324,
+        "sha256": "bf1f5e40d5aed6c52a370ef937e99a07be3af9535332034545c67613c908578c"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A02.json",
+      "mode": "100644",
+      "before": {
+        "blob": "7d22ee267116beed85e178d25a0ed2e60ef4193d",
+        "bytes": 66972,
+        "sha256": "6ccf0167b0fec82e64433b66e9e99722bbd22d5a3f80ba446c6d8e83645d9f83"
+      },
+      "after": {
+        "blob": "7d22ee267116beed85e178d25a0ed2e60ef4193d",
+        "bytes": 66972,
+        "sha256": "6ccf0167b0fec82e64433b66e9e99722bbd22d5a3f80ba446c6d8e83645d9f83"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A03.json",
+      "mode": "100644",
+      "before": {
+        "blob": "c94e0a626207ac5619fbc83183d2bc5810b3e69c",
+        "bytes": 65631,
+        "sha256": "10211084572d9e171cdd1a3f712577c2628cb580bdd502d4515802e92f785906"
+      },
+      "after": {
+        "blob": "c94e0a626207ac5619fbc83183d2bc5810b3e69c",
+        "bytes": 65631,
+        "sha256": "10211084572d9e171cdd1a3f712577c2628cb580bdd502d4515802e92f785906"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A04.json",
+      "mode": "100644",
+      "before": {
+        "blob": "9eee1335d0dea2b4ac5e822ecb76c2500c14f727",
+        "bytes": 65138,
+        "sha256": "a37dafbb3e7207aa411b6096b28eba1c933b7d249078096002b97b7a3b61bf19"
+      },
+      "after": {
+        "blob": "9eee1335d0dea2b4ac5e822ecb76c2500c14f727",
+        "bytes": 65138,
+        "sha256": "a37dafbb3e7207aa411b6096b28eba1c933b7d249078096002b97b7a3b61bf19"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A05.json",
+      "mode": "100644",
+      "before": {
+        "blob": "15ba19d71c48fcc02028880b8950c4641df7e0bb",
+        "bytes": 65297,
+        "sha256": "0138a8e6ad599330c403cd7b6cabbea203e4b1dacd1ab7b2c48db484d9b69b55"
+      },
+      "after": {
+        "blob": "15ba19d71c48fcc02028880b8950c4641df7e0bb",
+        "bytes": 65297,
+        "sha256": "0138a8e6ad599330c403cd7b6cabbea203e4b1dacd1ab7b2c48db484d9b69b55"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A06.json",
+      "mode": "100644",
+      "before": {
+        "blob": "3860e0e3e0545b9cfcfa6fcfb4c8c2f9a39df357",
+        "bytes": 65299,
+        "sha256": "8602b0086158d6585579443348725a92d087af932fe38c25f17f0e193e1194fb"
+      },
+      "after": {
+        "blob": "3860e0e3e0545b9cfcfa6fcfb4c8c2f9a39df357",
+        "bytes": 65299,
+        "sha256": "8602b0086158d6585579443348725a92d087af932fe38c25f17f0e193e1194fb"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U01.json",
+      "mode": "100644",
+      "before": {
+        "blob": "f3f450da6b914cc964d185c2993599b66b54d7b0",
+        "bytes": 51685,
+        "sha256": "7e26a3f267a7e6641b652af74fab0fe503dbe3296524360d04db5788194f07d6"
+      },
+      "after": {
+        "blob": "f3f450da6b914cc964d185c2993599b66b54d7b0",
+        "bytes": 51685,
+        "sha256": "7e26a3f267a7e6641b652af74fab0fe503dbe3296524360d04db5788194f07d6"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U02.json",
+      "mode": "100644",
+      "before": {
+        "blob": "c4427f5d1de8c5e1af8203a8bdd646defbb4d064",
+        "bytes": 50615,
+        "sha256": "c8478d5f12bb6b8e9ab93599fa2578e51e84e8d641fae9035ac9f999da22d786"
+      },
+      "after": {
+        "blob": "c4427f5d1de8c5e1af8203a8bdd646defbb4d064",
+        "bytes": 50615,
+        "sha256": "c8478d5f12bb6b8e9ab93599fa2578e51e84e8d641fae9035ac9f999da22d786"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U03.json",
+      "mode": "100644",
+      "before": {
+        "blob": "d378874d9aab36c8f73010517b35d682260dcdea",
+        "bytes": 50945,
+        "sha256": "f1eeb6e2c6461e73902812c77680eb06ace5e0764daa668450c2dcdc0fd0e5dd"
+      },
+      "after": {
+        "blob": "d378874d9aab36c8f73010517b35d682260dcdea",
+        "bytes": 50945,
+        "sha256": "f1eeb6e2c6461e73902812c77680eb06ace5e0764daa668450c2dcdc0fd0e5dd"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U04.json",
+      "mode": "100644",
+      "before": {
+        "blob": "fed672ecd4d8dbb4b8a68610cd06525ecd8f3502",
+        "bytes": 49020,
+        "sha256": "0993dac93a1907b906532d3428a72d1ebfc96f9e17d41f54bba2ab68552d9685"
+      },
+      "after": {
+        "blob": "fed672ecd4d8dbb4b8a68610cd06525ecd8f3502",
+        "bytes": 49020,
+        "sha256": "0993dac93a1907b906532d3428a72d1ebfc96f9e17d41f54bba2ab68552d9685"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U05.json",
+      "mode": "100644",
+      "before": {
+        "blob": "69bd67a867a7e32a889825364458510ee26f439b",
+        "bytes": 65099,
+        "sha256": "dada3190926086a2411edb0f0b8d55c6857cddb3fbc37d73268b95ed87f8c4f8"
+      },
+      "after": {
+        "blob": "69bd67a867a7e32a889825364458510ee26f439b",
+        "bytes": 65099,
+        "sha256": "dada3190926086a2411edb0f0b8d55c6857cddb3fbc37d73268b95ed87f8c4f8"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U06.json",
+      "mode": "100644",
+      "before": {
+        "blob": "ea6588c3d4835f12e16a39426a3106979d1cbee6",
+        "bytes": 65257,
+        "sha256": "3c29c2b1dc1c1c89af5bd6be035ccd0882536884dd2fa481d6c76ed3d9ea47d6"
+      },
+      "after": {
+        "blob": "ea6588c3d4835f12e16a39426a3106979d1cbee6",
+        "bytes": 65257,
+        "sha256": "3c29c2b1dc1c1c89af5bd6be035ccd0882536884dd2fa481d6c76ed3d9ea47d6"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K06.json",
+      "mode": "100644",
+      "before": {
+        "blob": "b2a82a3253cbb3b3c58336dad8b9ed5ca41387de",
+        "bytes": 65632,
+        "sha256": "c4759d69aa0dfa00e5c9edf7720c0c1ca4bb5f0d2abfc574979ed49a90e3e706"
+      },
+      "after": {
+        "blob": "b2a82a3253cbb3b3c58336dad8b9ed5ca41387de",
+        "bytes": 65632,
+        "sha256": "c4759d69aa0dfa00e5c9edf7720c0c1ca4bb5f0d2abfc574979ed49a90e3e706"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U08.json",
+      "mode": "100644",
+      "before": {
+        "blob": "813819cabd94f990cf5105bc057ab3e117dbacbb",
+        "bytes": 65417,
+        "sha256": "1c88805085c38f342fdd228ce7a15b0967ba1561ab198cf3c2a7e4ca6252f1a4"
+      },
+      "after": {
+        "blob": "813819cabd94f990cf5105bc057ab3e117dbacbb",
+        "bytes": 65417,
+        "sha256": "1c88805085c38f342fdd228ce7a15b0967ba1561ab198cf3c2a7e4ca6252f1a4"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R01.json",
+      "mode": "100644",
+      "before": {
+        "blob": "d047ed5784534e5f2ab9a3700a53604276dff38f",
+        "bytes": 65668,
+        "sha256": "329716f6399037d8a05d23df7177449a8a20d7e3d2990fd89cc6ff55c44a0ac9"
+      },
+      "after": {
+        "blob": "d047ed5784534e5f2ab9a3700a53604276dff38f",
+        "bytes": 65668,
+        "sha256": "329716f6399037d8a05d23df7177449a8a20d7e3d2990fd89cc6ff55c44a0ac9"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R02.json",
+      "mode": "100644",
+      "before": {
+        "blob": "ea43e6eb1c2fed0945aee09714f4f335ebfd2ed9",
+        "bytes": 51340,
+        "sha256": "e8c87d958e64c7706f3e52af21ed16ab44d0738550fbe66c030b96d62ec747a5"
+      },
+      "after": {
+        "blob": "ea43e6eb1c2fed0945aee09714f4f335ebfd2ed9",
+        "bytes": 51340,
+        "sha256": "e8c87d958e64c7706f3e52af21ed16ab44d0738550fbe66c030b96d62ec747a5"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R03.json",
+      "mode": "100644",
+      "before": {
+        "blob": "b2226ac5998597afe212efd5cc83435cf5c16eb1",
+        "bytes": 65372,
+        "sha256": "65c4d92b5767683e568e4a57898dbec8e16154e43673a06e458786a0b8c81de2"
+      },
+      "after": {
+        "blob": "b2226ac5998597afe212efd5cc83435cf5c16eb1",
+        "bytes": 65372,
+        "sha256": "65c4d92b5767683e568e4a57898dbec8e16154e43673a06e458786a0b8c81de2"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R04.json",
+      "mode": "100644",
+      "before": {
+        "blob": "dad56fe2c8a45966554ea121c2ae038ad34c9b47",
+        "bytes": 65672,
+        "sha256": "81c90fcff050a9342fb22c4f807bc7b2bbcd326a1b81917ce5eb4b56531ca63c"
+      },
+      "after": {
+        "blob": "dad56fe2c8a45966554ea121c2ae038ad34c9b47",
+        "bytes": 65672,
+        "sha256": "81c90fcff050a9342fb22c4f807bc7b2bbcd326a1b81917ce5eb4b56531ca63c"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R05.json",
+      "mode": "100644",
+      "before": {
+        "blob": "ac280d067c50657e87b939ce4ad81ac272091705",
+        "bytes": 65670,
+        "sha256": "f4c60c35b0adbb022aab2c3af2534517210e88cc968684e94b9da67dd8377fdd"
+      },
+      "after": {
+        "blob": "ac280d067c50657e87b939ce4ad81ac272091705",
+        "bytes": 65670,
+        "sha256": "f4c60c35b0adbb022aab2c3af2534517210e88cc968684e94b9da67dd8377fdd"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R06.json",
+      "mode": "100644",
+      "before": {
+        "blob": "4a26402754e5969d2bcda2637569e6e2e5e10791",
+        "bytes": 65638,
+        "sha256": "b326beefedc5248869d12512a0d26c4534aa919024a209c6e7c351d93d10d411"
+      },
+      "after": {
+        "blob": "4a26402754e5969d2bcda2637569e6e2e5e10791",
+        "bytes": 65638,
+        "sha256": "b326beefedc5248869d12512a0d26c4534aa919024a209c6e7c351d93d10d411"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R07.json",
+      "mode": "100644",
+      "before": {
+        "blob": "4f34e7907f6bce96d299f3bd8263f2c85aa69f6d",
+        "bytes": 65668,
+        "sha256": "5fb900c52317eac5826bf57c5961ca386e10113b79b6d24f9a52151a580865c0"
+      },
+      "after": {
+        "blob": "4f34e7907f6bce96d299f3bd8263f2c85aa69f6d",
+        "bytes": 65668,
+        "sha256": "5fb900c52317eac5826bf57c5961ca386e10113b79b6d24f9a52151a580865c0"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R08.json",
+      "mode": "100644",
+      "before": {
+        "blob": "937a1789ee5aa9cb24daefda2b03a9457ce2adc5",
+        "bytes": 65666,
+        "sha256": "0a7adc58ce87c95938f4d110956851b3263cb2cab2e9a1cdd31246a98ab61db3"
+      },
+      "after": {
+        "blob": "937a1789ee5aa9cb24daefda2b03a9457ce2adc5",
+        "bytes": 65666,
+        "sha256": "0a7adc58ce87c95938f4d110956851b3263cb2cab2e9a1cdd31246a98ab61db3"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R09.json",
+      "mode": "100644",
+      "before": {
+        "blob": "51eca42d0c983672ca90e5a2294e846fad20dcd1",
+        "bytes": 65668,
+        "sha256": "8442a268e5fed5ff2051a1f757651cbf9a056e6f88669182be9ccbc28cb9b3ff"
+      },
+      "after": {
+        "blob": "51eca42d0c983672ca90e5a2294e846fad20dcd1",
+        "bytes": 65668,
+        "sha256": "8442a268e5fed5ff2051a1f757651cbf9a056e6f88669182be9ccbc28cb9b3ff"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R10.json",
+      "mode": "100644",
+      "before": {
+        "blob": "a3c2b36c9a074b1e5b1d053dde2ce36ac31e0dad",
+        "bytes": 65676,
+        "sha256": "e9fbfa28820f12aa1af58515682e7aade9e85916b191d29f7c69945e16ccc7c7"
+      },
+      "after": {
+        "blob": "a3c2b36c9a074b1e5b1d053dde2ce36ac31e0dad",
+        "bytes": 65676,
+        "sha256": "e9fbfa28820f12aa1af58515682e7aade9e85916b191d29f7c69945e16ccc7c7"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R11.json",
+      "mode": "100644",
+      "before": {
+        "blob": "4746c28a8c10f3029217b6b349dca24234f7bb66",
+        "bytes": 65772,
+        "sha256": "7bb569fda37514c92b89bb57b6071696eb29fe72994f34e35d9f16b25571a891"
+      },
+      "after": {
+        "blob": "4746c28a8c10f3029217b6b349dca24234f7bb66",
+        "bytes": 65772,
+        "sha256": "7bb569fda37514c92b89bb57b6071696eb29fe72994f34e35d9f16b25571a891"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R12.json",
+      "mode": "100644",
+      "before": {
+        "blob": "cbed7f583d63e59e76c904e3d2d3256623c5b69e",
+        "bytes": 65604,
+        "sha256": "fe5084ab67ff047ac829d401028140f0895b7cc816616654897828260bdac80a"
+      },
+      "after": {
+        "blob": "cbed7f583d63e59e76c904e3d2d3256623c5b69e",
+        "bytes": 65604,
+        "sha256": "fe5084ab67ff047ac829d401028140f0895b7cc816616654897828260bdac80a"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R13.json",
+      "mode": "100644",
+      "before": {
+        "blob": "d085c2cc5a94c3d30dcd334ffe0cb869da3661ff",
+        "bytes": 65668,
+        "sha256": "edf7579270e1d792b5c03e0667e6c59c4a72209f5a738efd51e9cf0540b7bb21"
+      },
+      "after": {
+        "blob": "d085c2cc5a94c3d30dcd334ffe0cb869da3661ff",
+        "bytes": 65668,
+        "sha256": "edf7579270e1d792b5c03e0667e6c59c4a72209f5a738efd51e9cf0540b7bb21"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R14.json",
+      "mode": "100644",
+      "before": {
+        "blob": "39a8aa3ed14c27d5697a5924022604c882273e06",
+        "bytes": 65700,
+        "sha256": "3b0c76c36dfa540b02f1e5e12a96dd1b9aebb03f6b94eb01bf25a25439b6de5e"
+      },
+      "after": {
+        "blob": "39a8aa3ed14c27d5697a5924022604c882273e06",
+        "bytes": 65700,
+        "sha256": "3b0c76c36dfa540b02f1e5e12a96dd1b9aebb03f6b94eb01bf25a25439b6de5e"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R15.json",
+      "mode": "100644",
+      "before": {
+        "blob": "8e40a1ad621a4943b202cb1aa9a3f596ebed4e72",
+        "bytes": 65676,
+        "sha256": "cc424549c74c08fcad9eacf3913dc40bee5bf14219857ccac5dc0dd75fcfa6c1"
+      },
+      "after": {
+        "blob": "8e40a1ad621a4943b202cb1aa9a3f596ebed4e72",
+        "bytes": 65676,
+        "sha256": "cc424549c74c08fcad9eacf3913dc40bee5bf14219857ccac5dc0dd75fcfa6c1"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F01.json",
+      "mode": "100644",
+      "before": {
+        "blob": "c8ad98dd533042ba98f31ccff96d290df2be4a80",
+        "bytes": 65668,
+        "sha256": "56b3d6df64789345166c1bd6f5249a12e84550eb221c93e553661661c1167020"
+      },
+      "after": {
+        "blob": "c8ad98dd533042ba98f31ccff96d290df2be4a80",
+        "bytes": 65668,
+        "sha256": "56b3d6df64789345166c1bd6f5249a12e84550eb221c93e553661661c1167020"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F02.json",
+      "mode": "100644",
+      "before": {
+        "blob": "3ec869f4d475137d4a0686465c4fc7e4ece655dc",
+        "bytes": 65823,
+        "sha256": "dd029df6b2d33df76571f56db7219d6942f6b6f28fda4e9e8c0852711a0510d7"
+      },
+      "after": {
+        "blob": "3ec869f4d475137d4a0686465c4fc7e4ece655dc",
+        "bytes": 65823,
+        "sha256": "dd029df6b2d33df76571f56db7219d6942f6b6f28fda4e9e8c0852711a0510d7"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F03.json",
+      "mode": "100644",
+      "before": {
+        "blob": "a4648a84dc4c5f2f9eb1273745aea88a0e5479e3",
+        "bytes": 65668,
+        "sha256": "a9ea503d9a0da478f8d9ec8801e28f7c121686050364ff5bca6ea0f504762307"
+      },
+      "after": {
+        "blob": "a4648a84dc4c5f2f9eb1273745aea88a0e5479e3",
+        "bytes": 65668,
+        "sha256": "a9ea503d9a0da478f8d9ec8801e28f7c121686050364ff5bca6ea0f504762307"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F04.json",
+      "mode": "100644",
+      "before": {
+        "blob": "c87ae1141a7a821ff2257ef63f45d1dc4e40a17a",
+        "bytes": 65668,
+        "sha256": "57fb76e79672c8dac824c94206530bc9e8766796ff806bf18d6700d4599f3294"
+      },
+      "after": {
+        "blob": "c87ae1141a7a821ff2257ef63f45d1dc4e40a17a",
+        "bytes": 65668,
+        "sha256": "57fb76e79672c8dac824c94206530bc9e8766796ff806bf18d6700d4599f3294"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F05.json",
+      "mode": "100644",
+      "before": {
+        "blob": "e5858ce580c4fdc61358fada1877d67a6275192c",
+        "bytes": 65676,
+        "sha256": "cd5f3546a6362eb7acc46b08268ff8f0e2db1c597d684542b29245d7d953b1cc"
+      },
+      "after": {
+        "blob": "e5858ce580c4fdc61358fada1877d67a6275192c",
+        "bytes": 65676,
+        "sha256": "cd5f3546a6362eb7acc46b08268ff8f0e2db1c597d684542b29245d7d953b1cc"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F06.json",
+      "mode": "100644",
+      "before": {
+        "blob": "e7ef2d5dec127de908876f5a027a9e1bd153dd65",
+        "bytes": 65672,
+        "sha256": "360191bd8668d21049ab9af4f1482c01bc662a758a0a40304c79676c3cad3213"
+      },
+      "after": {
+        "blob": "e7ef2d5dec127de908876f5a027a9e1bd153dd65",
+        "bytes": 65672,
+        "sha256": "360191bd8668d21049ab9af4f1482c01bc662a758a0a40304c79676c3cad3213"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/appendix/OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT.json",
+      "mode": "100644",
+      "before": {
+        "blob": "67231a9f903f12a05670db953c941ee7f3612f73",
+        "bytes": 65853,
+        "sha256": "c6ce8854dec078b65faa0804c8efa23eec92102da034d71eace69c938bf462c2"
+      },
+      "after": {
+        "blob": "67231a9f903f12a05670db953c941ee7f3612f73",
+        "bytes": 65853,
+        "sha256": "c6ce8854dec078b65faa0804c8efa23eec92102da034d71eace69c938bf462c2"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/appendix/OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT.json",
+      "mode": "100644",
+      "before": {
+        "blob": "b92a1d26036eb0f76dd3fe743a9f48ea4220c2dc",
+        "bytes": 65442,
+        "sha256": "8c8106ca6e31c85a62def7abb2351bbe98e439b4eb2a6036c498f9ac65f01ddc"
+      },
+      "after": {
+        "blob": "b92a1d26036eb0f76dd3fe743a9f48ea4220c2dc",
+        "bytes": 65442,
+        "sha256": "8c8106ca6e31c85a62def7abb2351bbe98e439b4eb2a6036c498f9ac65f01ddc"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/appendix/OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT.json",
+      "mode": "100644",
+      "before": {
+        "blob": "88cb15dadba6d476076cafcf00688309ccf4525b",
+        "bytes": 65834,
+        "sha256": "ee52734f0b16e6467af545c66f5b999629cd3a59eb4a733fc44648a6f0da7004"
+      },
+      "after": {
+        "blob": "88cb15dadba6d476076cafcf00688309ccf4525b",
+        "bytes": 65834,
+        "sha256": "ee52734f0b16e6467af545c66f5b999629cd3a59eb4a733fc44648a6f0da7004"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/appendix/OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT.json",
+      "mode": "100644",
+      "before": {
+        "blob": "1cc547cb1e67f8a6303fe00833e83f58696d2d99",
+        "bytes": 65409,
+        "sha256": "ae3f16590e20a0e8953b775f8353101f1bf474b58230915facd3c671876dcc4a"
+      },
+      "after": {
+        "blob": "1cc547cb1e67f8a6303fe00833e83f58696d2d99",
+        "bytes": 65409,
+        "sha256": "ae3f16590e20a0e8953b775f8353101f1bf474b58230915facd3c671876dcc4a"
+      },
+      "role": "immutable-original44",
+      "reusedUnchanged": true,
+      "readbackProvenance": "Root previously FULL-verified final70 archive; current writer index hash reuse"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixture-first-ids.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "fd7012bc0daf0faf8d310c6cf8fb49da1d3c29b0",
+        "bytes": 6508,
+        "sha256": "06bd6a0a7c70173b55a5d8cbfeb90650db6128afa14c52557f5960e52dd38bc5"
+      },
+      "role": "sealed-expectations-before-materialization",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-admission.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "c6cacc5fc19091cdef1c7d8bb43d6c6a195e62a0",
+        "bytes": 13657,
+        "sha256": "4b0e196ad9ab4ca0682c7a609179c94e6c558147ed88cdf83f1cacf905fb0645"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-source-index.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "511175ff2514542501d3c51e8269a0902a6fb54c",
+        "bytes": 3474,
+        "sha256": "b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-s08.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "b6cfe95188a51662b8b121e7a8c6d2bc3a22292e",
+        "bytes": 134,
+        "sha256": "cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-selection.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "a5ff3abbb4b9c0d089432edd2f44549faffa1992",
+        "bytes": 4539,
+        "sha256": "daa9717eddae4464f0b72423955d44ef584441cae01c4afb5db6f6a7f32c1788"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "dd55c44c2acca5ee4639ed6d86e0baad51b7416b",
+        "bytes": 33261,
+        "sha256": "278f6b123583f4c1fdda496947364a3f2989801c26858669702197c0e952412a"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-contract.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "a86aade0483e00e6ec9cc208dc6c5fd7eec535fd",
+        "bytes": 200,
+        "sha256": "009bf9f4634b819d9219c82672a311ec838aa9b23645954d28a3ca6ba14c6381"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-slot-19.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "dd0c08374acc0817f3eb29a15714512951e8ce69",
+        "bytes": 112,
+        "sha256": "76764d0443a82b5958da992ae2ac9c513c99a3d437379793d6eb50c781c7770b"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-slot-23.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "28ebe8f1ff5167a0ffafccfb785364e18ef7dc2f",
+        "bytes": 109,
+        "sha256": "1170ec655ad96bd4ed8a69e9419412c19c7a46c03cecc06856e415c4235768f2"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-slot-24.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "e829ab00b715a2ab2b7c599c3cfb4c0bfd4688b8",
+        "bytes": 111,
+        "sha256": "515f860ee162edbdadd41060f7570f579825a0d6ab890f4419bd32e5e1efb63b"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_K01.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "900bad75e9387f2902c4f3b3871f357c18b093ba",
+        "bytes": 68135,
+        "sha256": "03d9aa840cfd1da0ff3cf7b71e551f7537173455a7ec27f7063591d7034ea2b7"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_K02.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "22d6c562784c696fd35cdf05687d55869385c9ea",
+        "bytes": 68115,
+        "sha256": "bb3a6b8b70b7129902c6110157e02e665d357512126e2981fcf8f8314b66834a"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_K03.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "a5982453c5fb6cef978f210de204612a63da1756",
+        "bytes": 68120,
+        "sha256": "643721bb12702c7d15e62ad485832580eba80825198a8d290955a801cea45d2b"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_K04.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "c80d4f9ed5fda9eb06ad15c1a313810d680163a7",
+        "bytes": 68087,
+        "sha256": "a59ce05e9bb9ba42a817f7c438069ea4f11dea337233300adf5a2d74ac9c8d3f"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_I01.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "9d644d7d3a76394a0cb611f5c3580736ca8e4a84",
+        "bytes": 68160,
+        "sha256": "f3682c676fca16284eb7ae5e37183fc458bc67743f212dbdf109d43a322333c9"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_I02.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "2581115799bd89551a80fe09639759f59afe828e",
+        "bytes": 68180,
+        "sha256": "e739f9587bca358355556b729d22707125518c90e8e75e4845b269a757536eb9"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_I03.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "f7ef9b4846ccc96d6bb417bef787299fb4ca2424",
+        "bytes": 61421,
+        "sha256": "2b13b4a1462d42a18cd7ec343397d2cd5605b168590ede9ef3bce204a6537164"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_P01.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "109d4e46b9c4166199088af30ceed36048e66e2c",
+        "bytes": 67642,
+        "sha256": "0080cdde7038f6f5fd7d2001c2f8568466e95efbf4351a581d023520591cc524"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_P02.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "481dbc8d6a6abc65014adad5908c7e64da54c5fd",
+        "bytes": 67626,
+        "sha256": "3057bc8db099e263ab51ad96d896b793f7ddf7c84c1ba7e30187fe44893ba4e4"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_P03.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "0bcd83d309441a58ea072584c4e0d05b53b0953e",
+        "bytes": 67447,
+        "sha256": "420a59f2a2040c16f71b0d26ef24b8b92feba2b74321f469258c328d3ab0bf32"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_P04.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "82eb626ba2c763cabe8cf15dec8e7c069b464739",
+        "bytes": 67949,
+        "sha256": "f0ddf3aeffaa774b1768c9361868fc48454754775e2818a4593d76c62943bb7c"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B01.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "4cbcbe0de86f54d4817273ea45f287eb009a95dd",
+        "bytes": 67638,
+        "sha256": "5e58395d343dd6ac76afd0122295df7498c5921765e1065086962fb66899ce82"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B02.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "34bf231b9b5e06d73307e5123788259591a480d5",
+        "bytes": 68200,
+        "sha256": "8427a3a008b9e4d0d09b8746b015f36084f807d3f9ae20965a6df9bcc4cc4052"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B03.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "9d507e0ed5f6d829b723931edb7815ab2fbd1eb2",
+        "bytes": 67678,
+        "sha256": "fb1d0b6a8239411655df57568e4f0ea33546e23247a8044fcc521818cabe11cf"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B04.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "8ef46d444f0958dae5ce7aed912a04d77a0baba4",
+        "bytes": 67448,
+        "sha256": "0c54a44e2c563bda6944895a258c10644ed02b9391042d504717f577bf563617"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B05.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "34d2b2d0ff641f38c4b6bf86e30fbcefd53599ff",
+        "bytes": 68050,
+        "sha256": "8fdc57c4758d39ceb0ea20cbc88c2b2597a3fa60a1f39de96cb9e4dfafe51169"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_S01.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "3266a0900e1f41efbc2be9235b872ffecdc45cf5",
+        "bytes": 67756,
+        "sha256": "72c1f83e35d1e8a5f6a3e788090c4c34974c210f2e345a58f1c4cfb6938a30d3"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_S02.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "9e849a9c90ff1a45ff65f90c8b617a7ab2a74510",
+        "bytes": 67676,
+        "sha256": "cd43e2f7f990b0d086af60a944d73fd95ba5e1e898507ceacd08646f0304a6bf"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_S03.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "084aba655f0c42e92c985f445e79a6d808821b1c",
+        "bytes": 68619,
+        "sha256": "68d69275b2732fd8d91346350f5349040f7db2f452739529c880c36bba536d1a"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_W01.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "655bfb1e6d2afd2609b9be1903cc8a2cdd822472",
+        "bytes": 66757,
+        "sha256": "d3f4944d7596c1cb0f262b75f8ba83271c1afa5812c6ac0ca4d6ddb72dabbcf7"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_W02.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "a95b1de2597239a3821a028858a8b0e4d6efe934",
+        "bytes": 67650,
+        "sha256": "99945dbb8353bfaf4646fed9f9a0f9dba566d0264898693b8b179cbea7a6f86d"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_W03.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "2c4bda975d8d1de2b650d352ca22d3f911396167",
+        "bytes": 67633,
+        "sha256": "cd5e9d77cc4e608e060adf584855facc1b817636f33f17112132b549eb1929b6"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_C01.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "a80a8c49b61fe8681d8849ff1d4be6c4f8aa2455",
+        "bytes": 67681,
+        "sha256": "98d2515806da7583ee50c973c6079a5f76e0848ffde703d84fb7609d9fcaf81e"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_C02.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "98cca5b43bac54ebd2db70a73c6238254bdd246e",
+        "bytes": 67703,
+        "sha256": "8c43eb7e8a193b6f351cf1c28d4e9f7f60194e1afd5c8dfabb7d67357bbdb0f1"
+      },
+      "role": "new-complete-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/expected.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "60c82effad3d3be36c42d92c6eeaa6ee0f7877b6",
+        "bytes": 49710,
+        "sha256": "0fac0f0de1e890ea54b9f110fa17f540f74ef508e5a8738430f6187557c7014a"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/data-checks.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "42dc5d205e4cbd79567ec5bbe3f831c003dbbfae",
+        "bytes": 26318,
+        "sha256": "36e8ae5e97e2d1d659a5a4bd041dca6224d975b6a8b83d13bb13ad5a9ffed098"
+      },
+      "role": "inert-model-data",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixture-first-report.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "d3a01f02e4018d9b0d77d732ad45294428137c4e",
+        "bytes": 5554,
+        "sha256": "4d031336cc26deeef3c9aa6048a3c43393ea03455f367a6c752f718527eda4e9"
+      },
+      "role": "data-report",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/append2-ids.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "08d42d217903f4f0887dd6be2b30a268ef1cc595",
+        "bytes": 4647,
+        "sha256": "0c7ed5fcd24feb25937ee3b32cb2158d797accc75af48831af194d02c2d157af"
+      },
+      "role": "append-expectations-before-new-literals",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix/FG3_B06.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "1020897e6d18a53dca9aade12acaadf9a7a036d5",
+        "bytes": 68588,
+        "sha256": "d71009c5e942b4d46b0912e3f58cb335f3ec7e360904be847b029ed21cd1337c"
+      },
+      "role": "new-complete-literal-positive",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix/FG3_B07.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "8ed19f0001142d3d28a2a932e6ff2f69fe7764fb",
+        "bytes": 68666,
+        "sha256": "53fa4130aba6676a49d0a985e7f12b491a72471b99bafeedc7117f80f1f554a8"
+      },
+      "role": "new-complete-literal-positive",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/append2-report.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "d70bb882854e10095116ffa09f238d05f21e51a4",
+        "bytes": 9768,
+        "sha256": "ab8eb483f3c3708b0404a6aa7de4a66d39b50e8af7c2e296bff18292d666c08a"
+      },
+      "role": "partial-information-data-report",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/prefix-coherence-ids.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "7f911c1060aaf193ccd0ac3bf62a024d3ab0b0d0",
+        "bytes": 5452,
+        "sha256": "17f35534035f93e113f0014fcadd3e6fb6093d83d23fc6bfe57c26319636290a"
+      },
+      "role": "negative-expectations-before-guards",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix-prefix/FG3_S04.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "6b1266fe4e910a3b3547cf766f5c89106360033e",
+        "bytes": 67934,
+        "sha256": "3ee2d3998379dc1d5bb5e3c506ac1f426fcc9fb05c67c25f58c97df6de8586fc"
+      },
+      "role": "complete-coherent-negative-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix-prefix/FG3_S05.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "ceceb6aff92829ee3b0d0f543a8782d8d335b416",
+        "bytes": 67985,
+        "sha256": "00f2e2463418bb7a3c7cff7dae2d2417bd7b075ccf516bf1e24a4e92155d4d40"
+      },
+      "role": "complete-coherent-negative-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix-prefix/FG3_S06.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "fdd7581fab53fb1f7fb9e0e4f279ed78f952e675",
+        "bytes": 68010,
+        "sha256": "8b7d3d7677b5000933e06537315e6d875c9ed1bb354658da12af0648b3f7944e"
+      },
+      "role": "complete-coherent-negative-literal",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/prefix-coherence-red.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "5d6112871c532d5d6f6b5a22148eb9b0fa2809d1",
+        "bytes": 9930,
+        "sha256": "30a3b291fc8f671caf9c9cc96a344ce569cdb6580cee330618c72f9e892c1882"
+      },
+      "role": "actual-full-reader-preimage-RED",
+      "fullReadback": true
+    }
+  ],
+  "preservation": {
+    "old44Exact": true,
+    "oldExpectedIds": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+    "oldIndex": "b5d274852deae3ce7bd1d7c08563d1e6862b8b00",
+    "oldNativeHistoryUnchanged": true,
+    "Source13Unchanged": true,
+    "refsWritten": 0
+  },
+  "reversal": {
+    "immutableBlobsRemainRecoverable": true,
+    "repositoryRefsMutated": false,
+    "original44": "No changes; retain exact same paths/modes/blobs.",
+    "newData": "No ref was published. If later included by Root, omit only new prefix paths listed before:null; preserve all prior files and later legitimate data."
+  },
+  "limits": [
+    "No actual private TAP/C2SOURCE/C2FT3/rows are exported to OWN. Synthetic witness strings are DATA outside input, not an actual raw oracle.",
+    "Known HTTP and joined saturated categories remain pinned-producer assertions plus visible API/journal/native metadata joins, not authentication of hidden source evidence.",
+    "A coherent hidden503→429 or category1→2+ substitution cannot be detected without raw inputs; not claimed as an OWN negative.",
+    "No active/unconsumed ticket, preconnection continuity, subtraction/delta, cause, no-effects, security or fullTask1 claims.",
+    "Model API IDs and2041 timestamps are obviously fictitious; caller expectations are independent of candidate outcomes."
+  ],
+  "pending": [
+    "Root FULLread/hash of fixture3 and RED plus exact ternary semantic ruling.",
+    "Explicit OwnRound4 code release; no fix code written.",
+    "Source25 successor semantics/admission may change publisher/protocol/runner pins; no automaticactual fallback."
+  ],
+  "guardCodePublished": false,
+  "guardExecuted": true,
+  "nativeExecuted": false,
+  "SourceCodeExecuted": false,
+  "actualExpectedSourceContext": null,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "bytes": {
+    "newArtifacts": 2136038,
+    "oldReused": 2813260,
+    "newCompleteLiterals": 1962554
+  },
+  "originalIndex": {
+    "blob": "c758a24c92519a7928ca8f3d5d7996d59a28e316",
+    "bytes": 51425,
+    "sha256": "edcc0bf503f49f42cc931f37ce245a0cba679a4f77b842ec7e1278b253571716"
+  },
+  "originalSeal": {
+    "blob": "8d64186b700a6ff79e946c7353ac0279d7856fd1",
+    "bytes": 7353,
+    "sha256": "32197b73ad98f77c96783dc978183407b4f56f75feca28ddcaf47e075397f490"
+  },
+  "partialRule": {
+    "nativeAmbiguous": {
+      "never": [
+        "KNOWN",
+        "JOINED_SNAPSHOT"
+      ],
+      "eligibleHttpReasons": [
+        "NATIVE_FORMAT_UNSUPPORTED",
+        "AMBIGUOUS_EVIDENCE"
+      ],
+      "countReason": "NATIVE_UNJOINED",
+      "unless": "A publicly demonstrable higher-priority journal/native prerequisite blocker wins; private raw grammar is unavailable."
+    },
+    "nativeTorn": {
+      "httpReason": "TRUNCATED_NATIVE",
+      "countReason": "NATIVE_UNJOINED"
+    },
+    "rawHeaderInReceiverInput": false,
+    "privateReasonAuthentication": false,
+    "coherentRawRewriteDetectable": false
+  },
+  "actualSourceBinding": {
+    "provisionalMeasurement": "266289bbe7e34d1a323e5140001cd3e8d7232507",
+    "provisionalHash": "273296dc776c8519c4f3644df8827097e44c599460501e099a9d6f42af3a2099",
+    "semanticallyAdopted": false,
+    "defaultActualConstantsAllowed": false,
+    "successorRootSeal": null,
+    "actualContext": null
+  },
+  "groupMembershipAppend": {
+    "FG3_OWN_FINITE_GET_VISIBLE_BLOCKERS": [
+      "FG3_B06",
+      "FG3_B07"
+    ],
+    "order": "Original68 evaluation IDs remain exact prefix; appended2 belong to existing VISIBLE_BLOCKERS group. Preserve8 native group IDs; no extra native group inferred.",
+    "FG3_OWN_FINITE_GET_STREAM_CONSISTENCY": [
+      "FG3_S04",
+      "FG3_S05",
+      "FG3_S06"
+    ]
+  },
+  "unchangedOriginalArtifacts": 81,
+  "originalArtifactsExact": true,
+  "original70Index": {
+    "blob": "f1046e48ffa3f571288a81cf62de0822feb183af",
+    "bytes": 54892,
+    "sha256": "f20fea2724474cac1ef6978b205a8b6b34279aa7f4ef2d53aa29a300587e6ba1"
+  },
+  "original70Seal": {
+    "blob": "5a9ae339da360eb7f0ef0b8892b421dd2f9571b5",
+    "bytes": 5135,
+    "sha256": "408ce422e7631cb0eaf8fbe45bbdde80599426006b8de04745f5f4ef914e1c6c"
+  },
+  "roundStatus": "PROPOSED_ROUND4_RELEASE_PENDING",
+  "preimageR3": {
+    "blob": "6a09a92a87da81e8dbcb4efeeab7ed9e50a24377",
+    "bytes": 45171,
+    "sha256": "25a0c3a7f9989f46f0c1da4df464ffb7f18bbc6c68c6a6a1ec33a7ddd67eb8ee"
+  },
+  "finding": "dce75c9706a9a19a01ea206f151b77b8aabb0e65",
+  "minimumRule": {
+    "sampleClaims": {
+      "false": [
+        "SOURCE_UNJOINED"
+      ],
+      "true": [
+        "JOINED_SNAPSHOT",
+        "MARKER_STREAM_INVALID",
+        "MARKER_UNAVAILABLE",
+        "SNAPSHOT_INVALID"
+      ],
+      "neutral": [
+        "JOURNAL_UNRESOLVED",
+        "NATIVE_UNJOINED"
+      ]
+    },
+    "http15Claims": {
+      "true": [
+        "KNOWN",
+        "UNKNOWN/ASSERTION_SCALARS_UNAVAILABLE"
+      ],
+      "false": [
+        "UNKNOWN/SOURCE_ROW_UNAVAILABLE"
+      ],
+      "other": "neutral"
+    },
+    "entailment": "prefix15 true implies prefix14 true",
+    "rejection": "Reject conflicting exported facts only; no private prefix reconstruction/header/row intake."
+  },
+  "original70ArtifactRecordsExact": true,
+  "original70IdPrefixExact": true,
+  "guardCodePublishedMeaning": "No Round4 patch. Frozen R3 guard5b726... is published separately and reproduces3falseadmissions.",
+  "guardExecutionMeaning": "Only3 preimageR3 full-reader RED evaluations in this addition; previous70RAM historical unchanged. No newGREEN/no native."
+}

@@ -1,0 +1,219 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-PREFIX-COHERENCE-FIXTURE-FIRST-IDS/1",
+  "status": "DATA_ONLY_NO_GUARD_PATCH",
+  "finding": "dce75c9706a9a19a01ea206f151b77b8aabb0e65",
+  "preimageIndex": {
+    "blob": "6a09a92a87da81e8dbcb4efeeab7ed9e50a24377",
+    "bytes": 45171,
+    "sha256": "25a0c3a7f9989f46f0c1da4df464ffb7f18bbc6c68c6a6a1ec33a7ddd67eb8ee"
+  },
+  "preimageFiniteGet": {
+    "name": "finite-get.mjs",
+    "blob": "5b726edfe6cdd5bd58d6eea4ddab94d2e8a9f277",
+    "bytes": 4706,
+    "sha256": "561d7b0b8c7f359d86c90a6aadf60680925d7c60cd8b6863d52d4505b2b68829",
+    "unchangedLegacy": false,
+    "fullReadback": true
+  },
+  "originalFixtureIndex": {
+    "blob": "f1046e48ffa3f571288a81cf62de0822feb183af",
+    "bytes": 54892,
+    "sha256": "f20fea2724474cac1ef6978b205a8b6b34279aa7f4ef2d53aa29a300587e6ba1"
+  },
+  "originalFixtureSeal": {
+    "blob": "5a9ae339da360eb7f0ef0b8892b421dd2f9571b5",
+    "bytes": 5135,
+    "sha256": "408ce422e7631cb0eaf8fbe45bbdde80599426006b8de04745f5f4ef914e1c6c"
+  },
+  "round": {
+    "original": 3,
+    "nextProposed": 4,
+    "max": 5,
+    "codeReleasePending": true
+  },
+  "group": "FG3_OWN_FINITE_GET_STREAM_CONSISTENCY",
+  "newCases": [
+    {
+      "id": "FG3_S04",
+      "expected": {
+        "accepted": false
+      },
+      "exactMutation": "K01: HTTP UNKNOWN/SOURCE_ROW_UNAVAILABLE with allHTTPmetadata null; Monitor JOINED0/count56 andScope JOINED1/count60 retained. HTTP asserts prefix15false whileScope asserts prefix15true."
+    },
+    {
+      "id": "FG3_S05",
+      "expected": {
+        "accepted": false
+      },
+      "exactMutation": "K01: HTTP UNKNOWN/ASSERTION_SCALARS_UNAVAILABLE/nulls; Monitor JOINED0/count56 retained;Scope UNKNOWN/SOURCE_UNJOINED/null. HTTP asserts prefix15true whileScope asserts prefix15false."
+    },
+    {
+      "id": "FG3_S06",
+      "expected": {
+        "accepted": false
+      },
+      "exactMutation": "K01: HTTP UNKNOWN/UNSUPPORTED_SCALARS/nulls; Monitor UNKNOWN/SOURCE_UNJOINED/null andScope JOINED1/count60. Scope asserts prefix15true implyingprefix14true whileMonitor asserts prefix14false; HTTPreason remains neutral for this minimumrule."
+    }
+  ],
+  "minimumRule": {
+    "sampleClaims": {
+      "false": [
+        "SOURCE_UNJOINED"
+      ],
+      "true": [
+        "JOINED_SNAPSHOT",
+        "MARKER_STREAM_INVALID",
+        "MARKER_UNAVAILABLE",
+        "SNAPSHOT_INVALID"
+      ],
+      "neutral": [
+        "JOURNAL_UNRESOLVED",
+        "NATIVE_UNJOINED"
+      ]
+    },
+    "http15Claims": {
+      "true": [
+        "KNOWN",
+        "UNKNOWN/ASSERTION_SCALARS_UNAVAILABLE"
+      ],
+      "false": [
+        "UNKNOWN/SOURCE_ROW_UNAVAILABLE"
+      ],
+      "other": "neutral"
+    },
+    "entailment": "prefix15 true implies prefix14 true",
+    "rejection": "Reject conflicting exported facts only; no private prefix reconstruction/header/row intake."
+  },
+  "counts": {
+    "nativeGroups": 8,
+    "evaluations": 73,
+    "old70Exact": true,
+    "newNegatives": 3,
+    "admit": 32,
+    "reject": 41
+  },
+  "canonicalEvaluationIds": [
+    "OWN_D2_K01",
+    "OWN_D2_K02",
+    "OWN_D2_K03",
+    "OWN_D2_K04",
+    "OWN_D2_K05",
+    "OWN_D2_A01",
+    "OWN_D2_A02",
+    "OWN_D2_A03",
+    "OWN_D2_A04",
+    "OWN_D2_A05",
+    "OWN_D2_A06",
+    "OWN_D2_U01",
+    "OWN_D2_U02",
+    "OWN_D2_U03",
+    "OWN_D2_U04",
+    "OWN_D2_U05",
+    "OWN_D2_U06",
+    "OWN_D2_K06",
+    "OWN_D2_U08",
+    "OWN_D2_R01",
+    "OWN_D2_R02",
+    "OWN_D2_R03",
+    "OWN_D2_R04",
+    "OWN_D2_R05",
+    "OWN_D2_R06",
+    "OWN_D2_R07",
+    "OWN_D2_R08",
+    "OWN_D2_R09",
+    "OWN_D2_R10",
+    "OWN_D2_R11",
+    "OWN_D2_R12",
+    "OWN_D2_R13",
+    "OWN_D2_R14",
+    "OWN_D2_R15",
+    "OWN_D2_F01",
+    "OWN_D2_F02",
+    "OWN_D2_F03",
+    "OWN_D2_F04",
+    "OWN_D2_F05",
+    "OWN_D2_F06",
+    "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT",
+    "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT",
+    "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT",
+    "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT",
+    "FG3_K01",
+    "FG3_K02",
+    "FG3_K03",
+    "FG3_K04",
+    "FG3_I01",
+    "FG3_I02",
+    "FG3_I03",
+    "FG3_P01",
+    "FG3_P02",
+    "FG3_P03",
+    "FG3_P04",
+    "FG3_B01",
+    "FG3_B02",
+    "FG3_B03",
+    "FG3_B04",
+    "FG3_B05",
+    "FG3_S01",
+    "FG3_S02",
+    "FG3_S03",
+    "FG3_W01",
+    "FG3_W02",
+    "FG3_W03",
+    "FG3_C01",
+    "FG3_C02",
+    "FG3_B06",
+    "FG3_B07",
+    "FG3_S04",
+    "FG3_S05",
+    "FG3_S06"
+  ],
+  "groupCounts": [
+    {
+      "id": "FG3_OWN_D2_COMPAT",
+      "evaluations": 44
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_KNOWN",
+      "evaluations": 4
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_INDEPENDENCE",
+      "evaluations": 3
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_POINTERS",
+      "evaluations": 4
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_VISIBLE_BLOCKERS",
+      "evaluations": 7
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_STREAM_CONSISTENCY",
+      "evaluations": 6
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_WIRE",
+      "evaluations": 3
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_CALLER_BINDING",
+      "evaluations": 2
+    }
+  ],
+  "controlsExecuted": 0,
+  "SourceExecuted": false,
+  "nativeExecuted": false,
+  "refsWritten": 0,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

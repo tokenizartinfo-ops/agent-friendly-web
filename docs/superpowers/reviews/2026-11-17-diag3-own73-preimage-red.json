@@ -1,0 +1,309 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-PREFIX-COHERENCE-RED/1",
+  "status": "THREE_CONFIRMED_FALSE_ADMISSIONS_PREIMAGE_UNCHANGED",
+  "finding": "dce75c9706a9a19a01ea206f151b77b8aabb0e65",
+  "idsSealedBeforeFixtures": {
+    "blob": "7f911c1060aaf193ccd0ac3bf62a024d3ab0b0d0",
+    "bytes": 5452,
+    "sha256": "17f35534035f93e113f0014fcadd3e6fb6093d83d23fc6bfe57c26319636290a"
+  },
+  "preimageIndex": {
+    "blob": "6a09a92a87da81e8dbcb4efeeab7ed9e50a24377",
+    "bytes": 45171,
+    "sha256": "25a0c3a7f9989f46f0c1da4df464ffb7f18bbc6c68c6a6a1ec33a7ddd67eb8ee"
+  },
+  "preimageReader": {
+    "name": "reader.mjs",
+    "blob": "ddaa91771171abf0dba6110184b06e631849c2ec",
+    "bytes": 4080,
+    "sha256": "eeb28b5daa384c3b04331d5a982e8950669672483349154474c32d74cd500e4c",
+    "unchangedLegacy": false,
+    "fullReadback": true
+  },
+  "preimageFiniteGet": {
+    "name": "finite-get.mjs",
+    "blob": "5b726edfe6cdd5bd58d6eea4ddab94d2e8a9f277",
+    "bytes": 4706,
+    "sha256": "561d7b0b8c7f359d86c90a6aadf60680925d7c60cd8b6863d52d4505b2b68829",
+    "unchangedLegacy": false,
+    "fullReadback": true
+  },
+  "results": [
+    {
+      "id": "FG3_S04",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "diagnosticCollectionAccepted": true,
+      "error": null,
+      "actualFiniteGet": {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "UNKNOWN",
+          "reason": "SOURCE_ROW_UNAVAILABLE",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 56
+        },
+        "afterScopeMissing": {
+          "value": "1",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        }
+      },
+      "actualProjectionSha256": "8ff0cb3bbe5c52801c684f7e3f1a39839d4a9275090a7405f14dd073674446d2",
+      "fixture": {
+        "blob": "6b1266fe4e910a3b3547cf766f5c89106360033e",
+        "bytes": 67934,
+        "sha256": "3ee2d3998379dc1d5bb5e3c506ac1f426fcc9fb05c67c25f58c97df6de8586fc"
+      },
+      "input": {
+        "blob": "75087695f5d4fbd909f13b047538aaf3aa4b4752",
+        "bytes": 41425,
+        "sha256": "76511f7b2d23cf2fe810c8b338a921580d68a076d4d625884abb977d577200e8"
+      }
+    },
+    {
+      "id": "FG3_S05",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "diagnosticCollectionAccepted": true,
+      "error": null,
+      "actualFiniteGet": {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "UNKNOWN",
+          "reason": "ASSERTION_SCALARS_UNAVAILABLE",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 56
+        },
+        "afterScopeMissing": {
+          "value": "UNKNOWN",
+          "reason": "SOURCE_UNJOINED",
+          "countSequence": null
+        }
+      },
+      "actualProjectionSha256": "bf62992622341f1c4013fd477d11c8009ed00235dbb2e42e198ed423783b3162",
+      "fixture": {
+        "blob": "ceceb6aff92829ee3b0d0f543a8782d8d335b416",
+        "bytes": 67985,
+        "sha256": "00f2e2463418bb7a3c7cff7dae2d2417bd7b075ccf516bf1e24a4e92155d4d40"
+      },
+      "input": {
+        "blob": "a3e6682273ff166ca815b73c331f8ad3a68a4451",
+        "bytes": 41479,
+        "sha256": "02f0c6d51f466476dc4069f0a858758c23a571a494800da0ee2d02460974239e"
+      }
+    },
+    {
+      "id": "FG3_S06",
+      "expectedAccepted": false,
+      "actualAccepted": true,
+      "diagnosticCollectionAccepted": true,
+      "error": null,
+      "actualFiniteGet": {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "UNKNOWN",
+          "reason": "UNSUPPORTED_SCALARS",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "UNKNOWN",
+          "reason": "SOURCE_UNJOINED",
+          "countSequence": null
+        },
+        "afterScopeMissing": {
+          "value": "1",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        }
+      },
+      "actualProjectionSha256": "6f02fad5e810394637921490499fd17d48faaa1441a396447779e700272349e7",
+      "fixture": {
+        "blob": "fdd7581fab53fb1f7fb9e0e4f279ed78f952e675",
+        "bytes": 68010,
+        "sha256": "8b7d3d7677b5000933e06537315e6d875c9ed1bb354658da12af0648b3f7944e"
+      },
+      "input": {
+        "blob": "7d90763f00c90d1dedeecfd8f05d7f8508c3fe7f",
+        "bytes": 41447,
+        "sha256": "3b483ea7d51df5e4fd06efd74add0f31011e7d46a5a9d181a3598b5c5e48e2c0"
+      }
+    }
+  ],
+  "dataConsistency": [
+    {
+      "id": "FG3_S04",
+      "checks": {
+        "trustedOriginal": true,
+        "runJobsCommitTreeOriginal": true,
+        "rawSyntheticWitnessOriginal": true,
+        "journalNativeOriginal": true,
+        "canonicalLF": true,
+        "payloadCap": true,
+        "finiteCap": true,
+        "zipCRC": true,
+        "zipFullDeflate": true,
+        "zipPayload": true,
+        "listingDigest": true,
+        "listingSize": true,
+        "frameCanonical": true
+      },
+      "fixture": {
+        "blob": "6b1266fe4e910a3b3547cf766f5c89106360033e",
+        "bytes": 67934,
+        "sha256": "3ee2d3998379dc1d5bb5e3c506ac1f426fcc9fb05c67c25f58c97df6de8586fc"
+      },
+      "input": {
+        "blob": "75087695f5d4fbd909f13b047538aaf3aa4b4752",
+        "bytes": 41425,
+        "sha256": "76511f7b2d23cf2fe810c8b338a921580d68a076d4d625884abb977d577200e8"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      }
+    },
+    {
+      "id": "FG3_S05",
+      "checks": {
+        "trustedOriginal": true,
+        "runJobsCommitTreeOriginal": true,
+        "rawSyntheticWitnessOriginal": true,
+        "journalNativeOriginal": true,
+        "canonicalLF": true,
+        "payloadCap": true,
+        "finiteCap": true,
+        "zipCRC": true,
+        "zipFullDeflate": true,
+        "zipPayload": true,
+        "listingDigest": true,
+        "listingSize": true,
+        "frameCanonical": true
+      },
+      "fixture": {
+        "blob": "ceceb6aff92829ee3b0d0f543a8782d8d335b416",
+        "bytes": 67985,
+        "sha256": "00f2e2463418bb7a3c7cff7dae2d2417bd7b075ccf516bf1e24a4e92155d4d40"
+      },
+      "input": {
+        "blob": "a3e6682273ff166ca815b73c331f8ad3a68a4451",
+        "bytes": 41479,
+        "sha256": "02f0c6d51f466476dc4069f0a858758c23a571a494800da0ee2d02460974239e"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      }
+    },
+    {
+      "id": "FG3_S06",
+      "checks": {
+        "trustedOriginal": true,
+        "runJobsCommitTreeOriginal": true,
+        "rawSyntheticWitnessOriginal": true,
+        "journalNativeOriginal": true,
+        "canonicalLF": true,
+        "payloadCap": true,
+        "finiteCap": true,
+        "zipCRC": true,
+        "zipFullDeflate": true,
+        "zipPayload": true,
+        "listingDigest": true,
+        "listingSize": true,
+        "frameCanonical": true
+      },
+      "fixture": {
+        "blob": "fdd7581fab53fb1f7fb9e0e4f279ed78f952e675",
+        "bytes": 68010,
+        "sha256": "8b7d3d7677b5000933e06537315e6d875c9ed1bb354658da12af0648b3f7944e"
+      },
+      "input": {
+        "blob": "7d90763f00c90d1dedeecfd8f05d7f8508c3fe7f",
+        "bytes": 41447,
+        "sha256": "3b483ea7d51df5e4fd06efd74add0f31011e7d46a5a9d181a3598b5c5e48e2c0"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      }
+    }
+  ],
+  "proposedMinimumRule": {
+    "sampleClaims": {
+      "false": [
+        "SOURCE_UNJOINED"
+      ],
+      "true": [
+        "JOINED_SNAPSHOT",
+        "MARKER_STREAM_INVALID",
+        "MARKER_UNAVAILABLE",
+        "SNAPSHOT_INVALID"
+      ],
+      "neutral": [
+        "JOURNAL_UNRESOLVED",
+        "NATIVE_UNJOINED"
+      ]
+    },
+    "http15Claims": {
+      "true": [
+        "KNOWN",
+        "UNKNOWN/ASSERTION_SCALARS_UNAVAILABLE"
+      ],
+      "false": [
+        "UNKNOWN/SOURCE_ROW_UNAVAILABLE"
+      ],
+      "other": "neutral"
+    },
+    "entailment": "prefix15 true implies prefix14 true",
+    "rejection": "Reject conflicting exported facts only; no private prefix reconstruction/header/row intake."
+  },
+  "original70FixturesUnchanged": true,
+  "original70ExpectedUnchanged": true,
+  "census": {
+    "nativeGroups": 8,
+    "evaluations": 73,
+    "old70Exact": true,
+    "newNegatives": 3,
+    "admit": 32,
+    "reject": 41
+  },
+  "guardPatchWritten": false,
+  "nativeExecuted": false,
+  "SourceExecuted": false,
+  "refsWritten": 0,
+  "filesWritten": 0,
+  "interpretation": "These3 complete coherent containers were evaluated by exactR3 full d3ModelRead AFTER literal blobs were published and FULLreadback. Each was incorrectly admitted despite conflicting exported source-prefix assertions. This is a reachable guard defect, not a raw-source/header authentication claim.",
+  "pending": [
+    "Root FULLread/hash of fixture3 and RED plus exact ternary semantic ruling.",
+    "Explicit OwnRound4 code release; no fix code written.",
+    "Source25 successor semantics/admission may change publisher/protocol/runner pins; no automaticactual fallback."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

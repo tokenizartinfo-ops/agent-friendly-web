@@ -1,0 +1,134 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-PREFIX-COHERENCE-DATA-SEAL/1",
+  "status": "FIXTURE_FIRST_RED_COMPLETE_AWAIT_ROOT_ROUND4_RELEASE",
+  "finding": "dce75c9706a9a19a01ea206f151b77b8aabb0e65",
+  "round": {
+    "preimage": 3,
+    "nextProposed": 4,
+    "max": 5,
+    "patchReleased": false
+  },
+  "index": {
+    "blob": "7ddd5716920ef46ef93afbcab2e68bf62ee1e5e7",
+    "bytes": 59084,
+    "sha256": "752035ffffffdda986aab94cdb23512e97efb70281b4fa75fbf77a0a7436fc36"
+  },
+  "ids": {
+    "blob": "7f911c1060aaf193ccd0ac3bf62a024d3ab0b0d0",
+    "bytes": 5452,
+    "sha256": "17f35534035f93e113f0014fcadd3e6fb6093d83d23fc6bfe57c26319636290a"
+  },
+  "red": {
+    "blob": "5d6112871c532d5d6f6b5a22148eb9b0fa2809d1",
+    "bytes": 9930,
+    "sha256": "30a3b291fc8f671caf9c9cc96a344ce569cdb6580cee330618c72f9e892c1882"
+  },
+  "preimageIndex": {
+    "blob": "6a09a92a87da81e8dbcb4efeeab7ed9e50a24377",
+    "bytes": 45171,
+    "sha256": "25a0c3a7f9989f46f0c1da4df464ffb7f18bbc6c68c6a6a1ec33a7ddd67eb8ee"
+  },
+  "preimageFiniteGet": {
+    "name": "finite-get.mjs",
+    "blob": "5b726edfe6cdd5bd58d6eea4ddab94d2e8a9f277",
+    "bytes": 4706,
+    "sha256": "561d7b0b8c7f359d86c90a6aadf60680925d7c60cd8b6863d52d4505b2b68829",
+    "unchangedLegacy": false,
+    "fullReadback": true
+  },
+  "newNegativePins": [
+    {
+      "id": "FG3_S04",
+      "blob": "6b1266fe4e910a3b3547cf766f5c89106360033e",
+      "bytes": 67934,
+      "sha256": "3ee2d3998379dc1d5bb5e3c506ac1f426fcc9fb05c67c25f58c97df6de8586fc",
+      "expectedAccepted": false
+    },
+    {
+      "id": "FG3_S05",
+      "blob": "ceceb6aff92829ee3b0d0f543a8782d8d335b416",
+      "bytes": 67985,
+      "sha256": "00f2e2463418bb7a3c7cff7dae2d2417bd7b075ccf516bf1e24a4e92155d4d40",
+      "expectedAccepted": false
+    },
+    {
+      "id": "FG3_S06",
+      "blob": "fdd7581fab53fb1f7fb9e0e4f279ed78f952e675",
+      "bytes": 68010,
+      "sha256": "8b7d3d7677b5000933e06537315e6d875c9ed1bb354658da12af0648b3f7944e",
+      "expectedAccepted": false
+    }
+  ],
+  "original70Index": {
+    "blob": "f1046e48ffa3f571288a81cf62de0822feb183af",
+    "bytes": 54892,
+    "sha256": "f20fea2724474cac1ef6978b205a8b6b34279aa7f4ef2d53aa29a300587e6ba1"
+  },
+  "original70Seal": {
+    "blob": "5a9ae339da360eb7f0ef0b8892b421dd2f9571b5",
+    "bytes": 5135,
+    "sha256": "408ce422e7631cb0eaf8fbe45bbdde80599426006b8de04745f5f4ef914e1c6c"
+  },
+  "original70ArtifactRecordsExact": true,
+  "original70CanonicalPrefixExact": true,
+  "minimumRule": {
+    "sampleClaims": {
+      "false": [
+        "SOURCE_UNJOINED"
+      ],
+      "true": [
+        "JOINED_SNAPSHOT",
+        "MARKER_STREAM_INVALID",
+        "MARKER_UNAVAILABLE",
+        "SNAPSHOT_INVALID"
+      ],
+      "neutral": [
+        "JOURNAL_UNRESOLVED",
+        "NATIVE_UNJOINED"
+      ]
+    },
+    "http15Claims": {
+      "true": [
+        "KNOWN",
+        "UNKNOWN/ASSERTION_SCALARS_UNAVAILABLE"
+      ],
+      "false": [
+        "UNKNOWN/SOURCE_ROW_UNAVAILABLE"
+      ],
+      "other": "neutral"
+    },
+    "entailment": "prefix15 true implies prefix14 true",
+    "rejection": "Reject conflicting exported facts only; no private prefix reconstruction/header/row intake."
+  },
+  "counts": {
+    "nativeGroups": 8,
+    "evaluations": 73,
+    "old70Exact": true,
+    "newNegatives": 3,
+    "admit": 32,
+    "reject": 41
+  },
+  "results": {
+    "R3FullReaderFalseAdmissions": 3,
+    "expectedRejections": 3,
+    "fullContainerDataConsistency": 3,
+    "guardPatchWritten": false,
+    "nativeRuns": 0,
+    "SourceExecution": 0,
+    "refsWritten": 0,
+    "filesWritten": 0
+  },
+  "provenance": "Own independent DD/method8 literal ZIPs, complete canonical log/outcome+LF/listing/API/trusted. IDs+expectedsealed first;3literal blobs published and FULLread before R3 fullguard evaluations. Privatewitness unchanged and excluded frominput. No Source import/parser/evaluation.",
+  "newBodiesFullReadback": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

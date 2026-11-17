@@ -1,0 +1,356 @@
+{
+  "schema": "AFW-FG3-SOURCE-PUBLICATION-PREFIX-FIXTURE-FIRST/1",
+  "status": "PRECODE_DATA_ONLY",
+  "family": "FINITE_GET_DIAG3",
+  "plannedSourceRound": 4,
+  "maximumSameFamily": 5,
+  "group": "FG3_PUBLICATION_CLOSURE",
+  "nativeGroups": 9,
+  "prior146": {
+    "fixture145": "4469d73e40f758e356e172c119687dde119c1fe6",
+    "fixture146": "b307c25b01c98bdddbeafe908bf7b60ebcf438e1",
+    "actualOrderedOracle": {
+      "bytes": 51184,
+      "sha256": "f54b26c93cba714fb596cb50b6d3cd341a1d570ca36f5a2a6b62b8ebf7eacc3e",
+      "blob": "8aceac899034528b5d657f8bc7dd774b2d6ec2bd"
+    },
+    "nativeToolIndex": {
+      "bytes": 19362,
+      "sha256": "9c871eecce19f087bef0d158e78312fe805ec56821e8e886a7247ea1b2f6a926",
+      "blob": "1bf532b9fa15db9c5c4a388c1786e7bda21d5d71"
+    },
+    "source25": {
+      "bytes": 18499,
+      "sha256": "d50c86b56810c84e0f416879cd9628fe318eb7fd1da2a43d2fe02a1e398a502a",
+      "blob": "452895beeedf528748e51ec2ea4ccb91d684552a"
+    },
+    "adapter": {
+      "bytes": 31647,
+      "sha256": "d3f27d5e093dd07866e3c2da6b10beb200e28949abcfcc4090f01671db3e4c04",
+      "blob": "527149a4ecf3e5f4f06e0d801cef38a256b60ceb"
+    }
+  },
+  "review": {
+    "blob": "dce75c9706a9a19a01ea206f151b77b8aabb0e65",
+    "scope": "Observed OWN model acceptance. R3 Source publisher reviewed as text only. No Source preimage RED execution."
+  },
+  "groupCounts": [
+    6,
+    24,
+    9,
+    4,
+    20,
+    6,
+    12,
+    35,
+    33
+  ],
+  "innerEvaluations": 149,
+  "legacyC1Individual": 35,
+  "rows": [
+    {
+      "group": "FG3_PUBLICATION_CLOSURE",
+      "id": "P_PREFIX15_ABSENT_YET_JOINED",
+      "ordinalWithinGroup": 31,
+      "canonicalIndex": 147,
+      "input": {
+        "actualCollectorFixture": "H_KNOWN_503",
+        "fullInputRef": {
+          "source": "1b5b319f98f678e79979c3bfadc77544917a5957",
+          "stdoutAtoms": [
+            "HEADER",
+            "B1_12",
+            "R13",
+            "N13",
+            "Y14",
+            "R14",
+            "N14",
+            "Z15",
+            "R15Fail",
+            "N15Fail",
+            "D503"
+          ],
+          "journalAtoms": [
+            "J1_14",
+            "J15"
+          ],
+          "atoms": "8301628a2141c6e125cef9e549158e3a1712f5a1",
+          "child": {
+            "exitCode": 1,
+            "signal": null,
+            "errorCode": "ETIMEDOUT",
+            "stderrUtf8": ""
+          }
+        },
+        "replaceFiniteGet": {
+          "schema": "afw.c2-finite-get-diag3.v1",
+          "http": {
+            "state": "UNKNOWN",
+            "reason": "SOURCE_ROW_UNAVAILABLE",
+            "throwSequence": null,
+            "actual": null,
+            "expected": null
+          },
+          "afterMonitor": {
+            "value": "0",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 56
+          },
+          "afterScopeMissing": {
+            "value": "1",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 60
+          }
+        },
+        "publicationContextAndCustodyRef": {
+          "corpus": "1ef8ffb9001be3dcbb16962a11ab982e7204e910",
+          "case": "P_JOINED",
+          "actualPinnedSourceIndex": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+          "selection": "179fb6c9cd431a38f084211021843286aaa70671"
+        }
+      },
+      "expectation": {
+        "value": {
+          "decision": "REJECT",
+          "reason": "PUBLICATION_INVALID",
+          "normalFrameCount": 0
+        },
+        "state": "REJECT",
+        "reason": "PUBLICATION_INVALID",
+        "sha256": "ca36d007969c7eb84bd755ec6901e22b461c11b141159ffdf9cf80dc0771dac1",
+        "compactUtf8Bytes": 73
+      },
+      "reviewReproductionInputHash": "b7ca935bbd0e0012877f7106758d63c6d56f15c3ed769cb972e792460496073d"
+    },
+    {
+      "group": "FG3_PUBLICATION_CLOSURE",
+      "id": "P_PREFIX15_SCALARS_AFTER_UNJOINED",
+      "ordinalWithinGroup": 32,
+      "canonicalIndex": 148,
+      "input": {
+        "actualCollectorFixture": "H_KNOWN_503",
+        "fullInputRef": {
+          "source": "1b5b319f98f678e79979c3bfadc77544917a5957",
+          "stdoutAtoms": [
+            "HEADER",
+            "B1_12",
+            "R13",
+            "N13",
+            "Y14",
+            "R14",
+            "N14",
+            "Z15",
+            "R15Fail",
+            "N15Fail",
+            "D503"
+          ],
+          "journalAtoms": [
+            "J1_14",
+            "J15"
+          ],
+          "atoms": "8301628a2141c6e125cef9e549158e3a1712f5a1",
+          "child": {
+            "exitCode": 1,
+            "signal": null,
+            "errorCode": "ETIMEDOUT",
+            "stderrUtf8": ""
+          }
+        },
+        "replaceFiniteGet": {
+          "schema": "afw.c2-finite-get-diag3.v1",
+          "http": {
+            "state": "UNKNOWN",
+            "reason": "ASSERTION_SCALARS_UNAVAILABLE",
+            "throwSequence": null,
+            "actual": null,
+            "expected": null
+          },
+          "afterMonitor": {
+            "value": "0",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 56
+          },
+          "afterScopeMissing": {
+            "value": "UNKNOWN",
+            "reason": "SOURCE_UNJOINED",
+            "countSequence": null
+          }
+        },
+        "publicationContextAndCustodyRef": {
+          "corpus": "1ef8ffb9001be3dcbb16962a11ab982e7204e910",
+          "case": "P_JOINED",
+          "actualPinnedSourceIndex": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+          "selection": "179fb6c9cd431a38f084211021843286aaa70671"
+        }
+      },
+      "expectation": {
+        "value": {
+          "decision": "REJECT",
+          "reason": "PUBLICATION_INVALID",
+          "normalFrameCount": 0
+        },
+        "state": "REJECT",
+        "reason": "PUBLICATION_INVALID",
+        "sha256": "ca36d007969c7eb84bd755ec6901e22b461c11b141159ffdf9cf80dc0771dac1",
+        "compactUtf8Bytes": 73
+      },
+      "reviewReproductionInputHash": "6faeee195e0e1eb9b640bd4c9d7ac219d1daac15d147c96d6aa4786b593e3c48"
+    },
+    {
+      "group": "FG3_PUBLICATION_CLOSURE",
+      "id": "P_PREFIX15_VALID_AFTER_PREFIX14_INVALID",
+      "ordinalWithinGroup": 33,
+      "canonicalIndex": 149,
+      "input": {
+        "actualCollectorFixture": "H_KNOWN_503",
+        "fullInputRef": {
+          "source": "1b5b319f98f678e79979c3bfadc77544917a5957",
+          "stdoutAtoms": [
+            "HEADER",
+            "B1_12",
+            "R13",
+            "N13",
+            "Y14",
+            "R14",
+            "N14",
+            "Z15",
+            "R15Fail",
+            "N15Fail",
+            "D503"
+          ],
+          "journalAtoms": [
+            "J1_14",
+            "J15"
+          ],
+          "atoms": "8301628a2141c6e125cef9e549158e3a1712f5a1",
+          "child": {
+            "exitCode": 1,
+            "signal": null,
+            "errorCode": "ETIMEDOUT",
+            "stderrUtf8": ""
+          }
+        },
+        "replaceFiniteGet": {
+          "schema": "afw.c2-finite-get-diag3.v1",
+          "http": {
+            "state": "UNKNOWN",
+            "reason": "UNSUPPORTED_SCALARS",
+            "throwSequence": null,
+            "actual": null,
+            "expected": null
+          },
+          "afterMonitor": {
+            "value": "UNKNOWN",
+            "reason": "SOURCE_UNJOINED",
+            "countSequence": null
+          },
+          "afterScopeMissing": {
+            "value": "1",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 60
+          }
+        },
+        "publicationContextAndCustodyRef": {
+          "corpus": "1ef8ffb9001be3dcbb16962a11ab982e7204e910",
+          "case": "P_JOINED",
+          "actualPinnedSourceIndex": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+          "selection": "179fb6c9cd431a38f084211021843286aaa70671"
+        },
+        "alsoPublishUnmodifiedActualObservation": {
+          "id": "M_MISSING_MONITOR",
+          "source": "1b5b319f98f678e79979c3bfadc77544917a5957",
+          "stdoutAtoms": [
+            "HEADER",
+            "B1_12",
+            "R13",
+            "N13",
+            "R14",
+            "N14",
+            "Z15",
+            "R15Fail",
+            "N15Fail",
+            "D429"
+          ],
+          "journalAtoms": [
+            "J1_14",
+            "J15"
+          ],
+          "atoms": "8301628a2141c6e125cef9e549158e3a1712f5a1",
+          "child": {
+            "exitCode": 1,
+            "signal": null,
+            "errorCode": "ETIMEDOUT",
+            "stderrUtf8": ""
+          }
+        }
+      },
+      "expectation": {
+        "value": {
+          "contradiction": {
+            "decision": "REJECT",
+            "reason": "PUBLICATION_INVALID",
+            "normalFrameCount": 0
+          },
+          "missingMonitor": {
+            "finiteGet": {
+              "schema": "afw.c2-finite-get-diag3.v1",
+              "http": {
+                "state": "KNOWN",
+                "reason": "TARGET_GET_ASSERTION",
+                "throwSequence": 58,
+                "actual": 429,
+                "expected": 200
+              },
+              "afterMonitor": {
+                "value": "UNKNOWN",
+                "reason": "MARKER_UNAVAILABLE",
+                "countSequence": null
+              },
+              "afterScopeMissing": {
+                "value": "1",
+                "reason": "JOINED_SNAPSHOT",
+                "countSequence": 60
+              }
+            },
+            "publisher": {
+              "decision": "PUBLISH",
+              "normalFrameCount": 2,
+              "firstMarker": "AFW_C2_FINITE_GET_DIAG3_CUSTODY",
+              "secondMarker": "AFW_C2_FINITE_GET_DIAG3_OUTCOME",
+              "artifactMatchesOutcomePlusOneLF": true,
+              "nonclaimsFalse": 7,
+              "SourceQualified": false,
+              "Task1Pass": false
+            }
+          }
+        },
+        "state": "REJECT",
+        "reason": "PUBLICATION_INVALID",
+        "sha256": "dda8802f6b68cd70149b215f5a8045723436cf52b41841477090e175615b8baa",
+        "compactUtf8Bytes": 685
+      },
+      "reviewReproductionInputHash": "12594ef4ec8dddea93fd01dd046d734ea2415a36b2a0641ab8c5513b0c92fbbf"
+    }
+  ],
+  "semanticPredicate": {
+    "samples": "For each eligible sample, SOURCE_UNJOINED asserts its C2SOURCE prefix INVALID. JOINED_SNAPSHOT, MARKER_STREAM_INVALID, MARKER_UNAVAILABLE and SNAPSHOT_INVALID each assert VALID (got through the source gate before that state). Earlier JOURNAL_UNRESOLVED/NATIVE_UNJOINED imply NEUTRAL. No bucket is imputed for NEUTRAL or UNKNOWN.",
+    "http": "KNOWN and UNKNOWN/ASSERTION_SCALARS_UNAVAILABLE imply VALID prefix15. UNKNOWN/SOURCE_ROW_UNAVAILABLE implies INVALID prefix15. All other reasons/states are NEUTRAL about C2SOURCE validity. Preserve all prior HTTP/torn/ambiguous/private-boundary semantics and existing releasebe1fb rules.",
+    "intersection": "Merge only claims about the same prefix: VALID+INVALID rejects. If VALID prefix15 (either source), infer VALID prefix14 and reject an INVALID prefix14. An INVALID prefix15 does not imply INVALID prefix14. Missing C14 marker is compatible with VALID14, valid15 and a known post15 sample. Neutral public journal/native blockers are not a statement about private rows. No new fields, private data, reads or count semantics."
+  },
+  "implementationIfReleased": "Add only shared-prefix consistency checks in the existing Source publisher after prior visible blocker/marker checks. Retain collector/decoder, C1, E3/13, selection/schema, test clocks/caps and full20 ordering; pin changed adapter/config/protocol/index/tooling with exact before/after, only three new subchecks at end of group9. Negative path obtains H_KNOWN_503 from actual collector, injects exactly the sealed finiteGet into the otherwise genuine observation, calls actual successPacket, records actual caught rejection reason and number of published normal frames. Never manufacture an accepted response. In P_PREFIX15_VALID_AFTER_PREFIX14_INVALID the existing M_MISSING_MONITOR is separately run through actual collector and actual successPacket; compare/return actual carried finiteGet and parsed frame/envelope/flags facts, not expected-as-actual. Hash both contrastive subresults together. Old146 rows stay byte-identical. No new top-level native case or job; absent code may not be called native RED.",
+  "futureToolReceipt": "Three ordered entries, each [id,SHA256(UTF8 JSON.stringify(actual normalized value)),state,reason]. For composite entry its public state/reason labels describe the negative branch; the actual normalized object also includes the positive branch. Inner compare old source9/146 future reruns not implied by DATA stage.",
+  "sourceCodeWrittenForThisFix": false,
+  "sourceExecuted": false,
+  "native": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
