@@ -1,0 +1,171 @@
+{
+  "schema": "AFW-DIAG2-OWN-FIX1-FRESH-SPEC-QUALITY-NATIVE-APPEND/1",
+  "timestampUTC": "2026-11-17 02:05:01 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "project": "AFW",
+  "verdict": {
+    "SPEC": "PASS_BOUNDED_MODELED_NATIVE",
+    "QUALITY": "PASS_BOUNDED_MODELED_NATIVE",
+    "openFindings": [],
+    "nativeAccepted": true,
+    "entrypoint": "d2ModelRead",
+    "actualSourceCaptureAccepted": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "disposition": "OWNfix1 elegible en el alcance MODEL probado. Esta constancia completa el review estático previo con la ocurrencia Native42 conservada y cerrada. No es aprobación de una captura Source ni del recorrido d2Read actual.",
+  "scope": {
+    "reviewed": "Primary, proof, gate y cierre FULL como DATA; composición con el review estático propio ya sellado.",
+    "reused": [
+      {
+        "role": "review estático propio OWNfix1/controller/schema/guard/pins",
+        "blob": "47ad88e0b14f1c8fe19bd202d432327eb472e119",
+        "bytes": 17251,
+        "sha256": "c4fa651f42b1671c41ddd749f1d09572afdf354d274eb9c335677e446ae3c6ba"
+      },
+      {
+        "role": "review propio de los 40 fixtures originales",
+        "blob": "228ed5c858c9e62e5c3ae125372c4da6179d1471",
+        "bytes": 21277,
+        "sha256": "c63e0d4e41863782a725e246e5866633a8f633272f080423c86930c9ac1a5b35"
+      }
+    ],
+    "notReaudited": "Source35, toy, hostfix, BASE completo y los 40 cuerpos originales. No se amplía este review a otras familias ni al recorrido de negocio futuro.",
+    "reviewerActions": "Lecturas de blobs Git conservados; lógica original del reviewer, crypto y zlib builtin sobre DATA en RAM. Ningún módulo Source/OWN importado, evaluado, compilado, analizado por AST o ejecutado; sin FS/deps/builds/ref/run/CF ni parche. Sin volver a consultar endpoints de Actions/log/artifact ni descargar artefactos.",
+    "authorFinalDocumentation": "Root informó b5d274852deae3ce7bd1d7c08563d1e6862b8b00 con 70 afterimages posteriores y native64/código sin cambios. Su preservación/reversibles está a cargo de Root; no se presenta como una nueva auditoría de esos documentos."
+  },
+  "fullReadHashes": [
+    {
+      "name": "primary",
+      "bytes": 1360158,
+      "sha256": "8f9f854e6f2b693a53a25800ac8b2583b94caca40b09328956ff6862f87792cc",
+      "gitBlob": "18b9b680de9c462f8d9595677c4c054536bcb418"
+    },
+    {
+      "name": "proof",
+      "bytes": 20748,
+      "sha256": "e81ea62ddc308a1c748b0580090e61f4610e791cd4b0064c6a4f7f2c2298a15a",
+      "gitBlob": "56c682180663231356b9523d7d30e03a1fe1c564"
+    },
+    {
+      "name": "close",
+      "bytes": 3478,
+      "sha256": "4992a203957da7905fa5bbacf776afe2526a582854c9f1913e3199cc2a70c87e",
+      "gitBlob": "bce8e38235618e56d6fd0a7e597c782c5339ad70"
+    },
+    {
+      "name": "gate",
+      "bytes": 5007,
+      "sha256": "bd9374e384ef44e762919cc85e12421d7b3c25ce132bd3ce8f764cf345e09876",
+      "gitBlob": "4bec1b09e47eb15987dc522e83f59f701ac635fc"
+    }
+  ],
+  "fixedCode": {
+    "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/first-failure.mjs",
+    "line": 28,
+    "before": "cd1aaa2c0cfaa1f278e383cc7a58cb2df59b187f",
+    "after": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+    "bytes": 3355,
+    "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e",
+    "soleDelta": "    if(o.native.integrity!=='prefix')gBad();\n",
+    "conclusion": "Cierra el gap confirmado de KNOWN con native.integrity ambiguous/torn. Se conserva el prefijo validado del journal y K06 con nativeprefix+journalTorn. No modifica Source, schema, caps ni otros branches."
+  },
+  "nativePacket": {
+    "graph": "5eeb7f6370b9a1dcf678e7717ce60e084d08f619",
+    "earlyIndex": "88caab27a1024a0c8e30eed5f58a8eac7f347260",
+    "runner": "8a7b0f57a46085126926e8ba989ab762eb333f0a",
+    "workflow": "4a341ec8f9e0dcc8b334b8c5b267b856d8100d47",
+    "proofSchema": "7c279e0c77814a6f496ead2394c5d8f6a7e3c490",
+    "protocol": "fabb36f9191c4e7a575d35afcd38bb3eb72a82e9",
+    "selection": "7efb6b2ae68721eb060d6a6a8ce07a0cf67c0d94",
+    "expected42": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+    "appendixSeal": "b362aa0310f9f1e34f488343bf206eaf17cd6ea4",
+    "mount": "62 hojas del graph, más native-graph.json y runner = 64 bindings. Los 40 fixtures originales permanecen idénticos; dos grupos añadidos prueban cuatro entradas completas."
+  },
+  "actual": {
+    "run": 43998984564,
+    "attempt": 1,
+    "job": 133758016801,
+    "head": "82451b46e44ed999ea57ceb64605857a1722f1bf",
+    "tree": "8f05780be2a466a1bfccb37dae61864d1d2e2496",
+    "commandStep": 4,
+    "jobSeconds": 19,
+    "commandSeconds": 1,
+    "frames": 1,
+    "TAP42Exact": true,
+    "evaluations44Exact": true,
+    "admit": 21,
+    "reject": 23,
+    "bindings64": true,
+    "original3203Unchanged": true,
+    "treeEntries": 3433,
+    "leafCount": 3267,
+    "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+    "exactCommand": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/run-controls.mjs",
+    "runtime": "Node v22.23.4 / ubuntu-24.04",
+    "terminal": "run y job success; attempt 1; command step 4 success dentro de la ventana conservada",
+    "nativeIdsHash": "ff6288b209189c1ddc94767ddc34b18034a9d320d018196f62dc99321128a036",
+    "receiverIdsHash": "507cf4b050315d945b71a83843b9dae6b0642a0f5b8d4653daf4a3a9f7ce0872",
+    "totals": "42 pruebas / 42 PASS, 0 FAIL/cancelled/skipped/todo; 44 evaluaciones / 44 comprobaciones correctas; 21 admisiones y 23 rechazos; sin IDs ausentes, extra, duplicados o desordenados.",
+    "apiAndTreeJoins": "Run/job/repo/ref/path/attempt/head/message/commit/tree/parent exactos; rawtree no truncado, paths únicos; 64 bindings path/mode/blob/bytes/hash exactos y 3203 hojas BASE originales preservadas.",
+    "proofAndLog": "Una sola frame canónica bajo '# AFW_C2_OWN_FIRST_FAILURE_POST_DIAG2_FIX1_PROOF ' dentro del step 4. Proof LF igual al payload ZIP y a la frame del log; schema y orden/valores de las 44 evaluaciones exactos.",
+    "zip": {
+      "archiveBytes": 6249,
+      "archiveSha256": "9cd3442853a5bd8053f2fe7ad241a4b008016383387b1b9e35632af8ddd28409",
+      "artifactId": 14290599249,
+      "method": 8,
+      "flags": 8,
+      "crc32": "528fbe4b",
+      "compressed": 6053,
+      "consumed": 6053,
+      "payloadLFBytes": 20748,
+      "payloadSha256": "e81ea62ddc308a1c748b0580090e61f4610e791cd4b0064c6a4f7f2c2298a15a",
+      "schemaPass": true
+    },
+    "zipChecks": "Base64 estricta; un archivo exacto; central/local/bounds/extras sin ZIP64, bit8 y descriptor concordantes; CRC32; DEFLATE completo sin cola (6053/6053 B); UTF-8 canónico + LF; listing/API artifact/run/head/digest ligados al ZIP de 6249 B. No se confunde hash declarado con verificación de bytes.",
+    "modeledOnly": "d2ModelRead probado sobre modelos sintéticos 2039/head-tree repetidos y tres cuerpos JSON placeholder. ownModelsExecuted=true; actualSourceExecution=false; finalSourceBinding=false. No import de código de negocio Source."
+  },
+  "appendixInterpretation": {
+    "AMBIGUOUS": "KNOWN rechazado; UNKNOWN/AMBIGUOUS_EVIDENCE admitido.",
+    "TORN": "KNOWN rechazado; UNKNOWN/TRUNCATED_NATIVE admitido.",
+    "coherence": "Las cuatro entradas conservan outer firstThrow seq46 y counter return; sus log/payload/ZIP/API/digest fueron reparados coherentemente y revisados antes del native. Los rechazos no están enmascarados por fallos de transporte.",
+    "originality": "El native original40 sigue siendo evidencia válida de sus controles originales; los dos pares agregan el control de elegibilidad nativeprefix que faltaba.",
+    "limits": "El PASS nativo confirma las expectativas selladas y la composición exacta MODEL. No prueba autenticidad del productor frente a falsificación coherente ni reconstruye rawTAP privado desde un SHA."
+  },
+  "closure": {
+    "source": "Constancia Root conservada FULL, no nuevo sondeo de refs/runs por este reviewer.",
+    "blob": "bce8e38235618e56d6fd0a7e597c782c5339ad70",
+    "closedHead": "c511b6f061fb4eb0c5594779d3123e824f34f243",
+    "closedTree": "bdf92ea1c7154dceb5cd97972e51745efe71f97c",
+    "parent": "82451b46e44ed999ea57ceb64605857a1722f1bf",
+    "leaves": 3268,
+    "allOriginal3203Preserved": true,
+    "onlyWFDeletedAndTwoEvidenceAdditions": true,
+    "closedHeadRuns": 0,
+    "unchangedLeases": {
+      "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "source": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "diag1": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+      "host": "1f62e087f0d9000f9c08519cd162db1104827af8",
+      "toy": "5f5295265217b31a19fbed2379f697c5a6a83080",
+      "source35": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+    },
+    "conclusion": "Cierre concordante con la ocurrencia probada: 3267 hojas durante native, 3268 tras quitar sólo WF y añadir dos evidencias; main, historia y leases anteriores preservados según el recibo Root."
+  },
+  "pending": [
+    "d2Read conserva el trust set actual25 fijado por Root18e2, separado del trust set MODEL y sin fallback; una futura captura Source necesita contexto real exacto proporcionado por Root y su propia evidencia/review.",
+    "Ningún resultado aquí acredita el estado o causalidad HTTP de NOTICES actual/histórico, receipts privados, readiness, global drain o namespace SDK vacío."
+  ],
+  "SourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
