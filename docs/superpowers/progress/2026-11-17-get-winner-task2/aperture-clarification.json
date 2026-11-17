@@ -1,0 +1,23 @@
+{
+  "schema": "AFW.C2.GET_WINNER.TASK2_APERTURE_CLARIFICATION/1",
+  "timestampUTC": "2026-11-17 23:27:32 UTC",
+  "brief": "9719704de9811786ee651b163933d18fb7b56d25",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "ruling": "Closed target count means the uniquely joined original journal action/count return, not necessarily a known count snapshot bucket. Do not strengthen the accepted producer contract during consumer binding.",
+  "evidence": {
+    "publisher": "77183a2558a9e071b562485e1b3bd7622fffdf66",
+    "finiteSample": "398–405: count UNKNOWN -> SNAPSHOT_INVALID",
+    "getEligibility": "586–593: finiteJournal closed target count required, independent known HTTP",
+    "projection": "595–600: canonical private tuple may qualify without JOINED_SNAPSHOT count value"
+  },
+  "controls": [
+    "An otherwise eligible visible winner with unavailable snapshot is not rejected solely for SNAPSHOT_INVALID; preserve public HTTP.",
+    "Raw current143 is the qualified assertion; raw historical118 must not qualify a current known GET/winner.",
+    "Unsupported historical coordinates with wholly UNKNOWN/non-applicable projections follow the current public protocol; no blanket rejection or misleading legacy helper interpretation."
+  ],
+  "compatibilityBoundary": "Any explicit non-mutating compatibility view is private to helper validation after raw current schema/custody/eligibility checks; original observation, coordinates, payload and returned evidence remain unchanged.",
+  "sourceChanged": false,
+  "implementationByRoot": false,
+  "testsExecuted": false
+}
