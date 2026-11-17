@@ -1,0 +1,32 @@
+{
+  "schema": "AFW-DIAG3-SOURCE149-ROOT-CLOSE-RECEIPT/1",
+  "timestampUTC": "2026-11-17 04:33:55 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+  "attemptedHead": "e58e4ea587951d6f6d0b4c3676466c266a0eae11",
+  "attemptedTree": "b43aee1d1b19a0d65f931367fdc6c2f796773743",
+  "run": 44017015847,
+  "attempt": 1,
+  "job": 133817260473,
+  "primary": "c421639e3b9efa775aa5b022ea2ca8a65f3679e7",
+  "proof": "329f48b8973c137d3c45d20ee50d565bc3c69caa",
+  "disposition": "Tooling native9/149 passed Root checks; close spent occurrence; fresh independent review pending.",
+  "mutation": "Delete only this nominated workflow; add this receipt and the preserved primary under the owned lab prefix. Do not rerun or reopen.",
+  "workflowDeleted": ".github/workflows/afw-c2-finite-get-diag3-tools.yml",
+  "Original3203Preserved": true,
+  "RetainedProposalLeaves": 35,
+  "finalExpectedLeaves": 3240,
+  "SourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
