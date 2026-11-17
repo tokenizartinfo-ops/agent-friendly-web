@@ -1,10 +1,10 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/28",
-  "timestampUTC": "2026-11-17 05:23:58 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/29",
+  "timestampUTC": "2026-11-17 05:42:59 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "865986c7f74d1f738c7f86d524eb39c6a53e5c03",
-  "phase": "SCOPE_WRITE_STATIC_CONTRACT_CONTRAST_DESIGN_ONLY",
+  "previousCheckpoint": "d9c1adbea4b63be5635ddbc427551661be053933",
+  "phase": "DIAG3_CLOSED_REVIEWED_STATIC_CONTRACT_BLOCK_COMPLETE_NEXT_TRACE_DESIGN_PENDING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -134,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finish static exact-one transaction/callback contract + drop reachability review. Design/fixtures only, no Source/OWN changes or new runs. Runtime repair not proven.",
+  "next": "Next Root resumes from this exact checkpoint; no old run replay, no scalar recovered from hash, no unsupported repair. Source/OWN4of5 unchanged. Product flags, clocks and Source13 unchanged; no Cloudflare runtime/OAuth/OTP/tokens/mail/Max action. No user manual requests before11:00UTC17Nov. Finish diagnostic design/review before last-cycle code/native release.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -159,16 +159,66 @@
   },
   "nextDesign": {
     "decision": "88e8b25c0f422f41d01f1785ae87515c1425d3ec",
-    "state": "DESIGN_ONLY_CODE_NATIVE_HOLD",
-    "datum": "Actual numeric scope put assertion at existing S08:113:283",
-    "reviewBeforeCode": true,
-    "round5NotConsumed": true,
-    "costReview": {
-      "recommendation": "Do not consume last5 solely for0-vs2 before exact-one contract and reachability contrast",
-      "implementationHold": true,
-      "nativeHold": true
-    },
-    "contract": "40e56188f2add83f6929801027318fe72df309a4",
-    "fixturesBeforeCode": "9c357895afeb46d5f3e19c4c42bab63691d35102"
+    "state": "DATA_DESIGN_ONLY_NOT_RELEASED",
+    "implementationHold": true,
+    "nativeHold": true,
+    "lastRoundNotConsumed": true,
+    "costDecision": "Do not spend last5 on ZERO/TWO_PLUS alone: it separates audits without identifying repair.",
+    "nextMeaningfulBlock": "Prepare a bounded diagnostic proposal identifying the exact first drop POST and the response/error that wins the outer bridge race, with a version-verified generated-code location or honest UNKNOWN. Prefer existing data; if an isolated lab observer is required, explicitly scope reversible Source13 changes before implementation. No code or run authorized by this checkpoint.",
+    "privateBuildMapGate": "Current esbuild0.28.2 needs explicitoutfile for externalmap even write:false. Compare JS bytes from same prepared inputs in SAMEharness, select .js/.map by path (notoutputFiles[0]), no newdeps or localSourcecompile. Compilation is futureGHA only and needs Rootgate. Do not infer that metafile/sourceURL alone gives a reliable map.",
+    "zeroReplay": true
+  },
+  "staticContracts": {
+    "scopeDiagnosis": "e5570431c54ef1556692fcdf1349c503ef983ecb",
+    "dropReachability": "86a0d3ae1e32e5b6c61bd28a41426a725c1aecf8",
+    "fixedSqliteCallbackAndCostReview": "d23d5d45cdacbca02b2970a8b6aebab138510dc9",
+    "scopeWriteProposal": "e83b8f3f752d48e24ed344d03dd1219c41a255a6",
+    "postFrontierFeasibility": "135ca8aade653df553812b4be1687d342681ec7e",
+    "generatedLocationFeasibility": "73f7f85c66ce56f5debbd5418cd6814592f57952",
+    "findings": [
+      "Only puts!=1 at DROP is observed; actual0 vs2+ remains unknown.",
+      "A valid GET/Ticket does not prove POST reaches append before its independent lease/guards.",
+      "Pinned SQLite transaction source shows no replay of the already-started callback in the inspected function, but stats aggregates the whole interval and overlap census is absent; global<=1/actualZERO unproven.",
+      "Persisted TicketUse/ConfigApproval/StageApproval frontier can be reduced from existing pre/post snapshots without newRPC, but is not exact refusal or winner causality.",
+      "Existing QA catch lacks invocation binding and generated-site discrimination; metadata is not a source map. Need exact same prepared JS inputs for any private twin source-map comparison; different harnesses contain distinct approval time.",
+      "Even a QA catch with site does not establish that its error won the outer bridge deadline race."
+    ],
+    "capsEditorialCorrection": "Unreleased dcfa proposal accidentally included LF in24576 cap. Existing R4 JSONbody24576 +LF1=payload24577 remains authoritative. Never execute proposal as binding."
+  },
+  "finalRefReadback": {
+    "timestampUTC": "2026-11-17 05:42:59 UTC",
+    "refs": [
+      {
+        "name": "main",
+        "branch": "main",
+        "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+      },
+      {
+        "name": "source",
+        "branch": "feat/finite-native-cleanup-20261101",
+        "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+      },
+      {
+        "name": "source149Closed",
+        "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+        "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0"
+      },
+      {
+        "name": "own73Closed",
+        "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+        "sha": "067a012121a58f7c2baf938228765242c433a1d5"
+      },
+      {
+        "name": "diag3BusinessClosed",
+        "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+        "sha": "08061db79cd0f38f25df8977e1ded8e17542e684"
+      }
+    ],
+    "noMutationsThisStaticBlock": true
+  },
+  "relay": {
+    "checked": true,
+    "newComments": 0,
+    "thread176Only": true
   }
 }
