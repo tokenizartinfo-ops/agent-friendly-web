@@ -1,0 +1,133 @@
+{
+  "schema": "AFW-ROOT-FIRST-FAILURE-POST-DIAG2-TOY-NATIVE-GATE/1",
+  "timestampUTC": "2026-11-17 00:42:58 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "One builtins-only syntheticNode format calibration",
+  "environment": "GitHub Actions exactoneusebranch; no packages or Source business",
+  "allowedAction": "Fresh branch absence/headruns0/ref checks then one Node22calibration, terminalprimary+rawsyntheticTAP/ZIP, closeonlyWF+readback/freshreview. No Sourcecollector/parser code or realtrial released by this gate.",
+  "authority": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+  "index": "ec9d2ccca9368016ca118f77ff9ff864e6fcd96b",
+  "acceptedDesign": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+  "fixtureFirst": {
+    "blob": "e8bef167b07052e5b4274b7d9fbe5f3b2301cb54",
+    "bytes": 39555,
+    "sha256": "bbb2070d49b21ab9d4f19f95421ff00d147be465e10e5e40909368704dae281d",
+    "FULLreadback": true,
+    "sealedBeforeParentCode": true,
+    "controls": 6,
+    "executed": 0,
+    "note": "Not observed RED/GREEN; Root explicitly held execution while author packaged code as inert DATA."
+  },
+  "prepared": {
+    "head": "0911ae422b34c91c136405e1d35deaddbdd9fb05",
+    "tree": "cd694494400b4966099f629b9e83bd5a1d568603",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+    "refCreated": false,
+    "runCreated": false,
+    "toyExecuted": false,
+    "SourceBusinessExecuted": false
+  },
+  "preparedReadback": {
+    "original3203Unchanged": true,
+    "onlyFiveAdditions": true,
+    "leaves": 3208,
+    "noSourceImports": true,
+    "noNpm": true
+  },
+  "hashes": {
+    "mounts": 5,
+    "UTF8SHAGit": true,
+    "exactC1Toy": true,
+    "SourceExecuted": false
+  },
+  "reversibles": true,
+  "nomination": {
+    "round": 1,
+    "maxRounds": 5,
+    "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+    "message": "AFW-C2-FIRST-FAILURE-POST-DIAG2-TOY-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-first-failure-diag2-toy.yml",
+    "job": "c2-first-failure-diag2-toy",
+    "command": "node docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/run-toy.mjs",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "head": null,
+    "tree": null,
+    "runId": null,
+    "jobId": null,
+    "node": "22.23.4",
+    "runsOn": "ubuntu-24.04",
+    "permissions": "contents:read",
+    "attempt": 1,
+    "jobMinutes": 2,
+    "parentDeadlineMs": 10000,
+    "childTimeoutMaxMs": 10000,
+    "codeActivationAllowedToAuthor": false
+  },
+  "expected": {
+    "toyCodeBytes": 1628,
+    "toyCodeSha256": "988b241402d628d86c1a2513af80ba14be22540cc2c97925e8e81837f4ee5d69",
+    "nodeNativeCases": 20,
+    "nodeNativePass": 19,
+    "nodeNativeFail": 1,
+    "targetOrdinal": 12,
+    "targetId": "C2T1_NOTICES",
+    "sourceRows": 20,
+    "targetCounts": {
+      "upload": 2,
+      "activation": 2,
+      "receipts": 1
+    },
+    "nativeAssertion": {
+      "actual": 503,
+      "expected": 200,
+      "code": "ERR_ASSERTION",
+      "name": "AssertionError",
+      "operator": "strictEqual"
+    },
+    "SourceSiteProved": false,
+    "SourceRowsSubtestAdjacencyRequired": false
+  },
+  "proof": {
+    "schema": "050f58f2d3221419c751ff1c8d0a8757dfdf270f",
+    "payloadIncludingLFMaxBytes": 24576,
+    "normalMarker": "AFW_C2_FIRST_FAILURE_POST_DIAG2_TOY_PROOF",
+    "faultMarker": "AFW_C2_FIRST_FAILURE_POST_DIAG2_TOY_FAULT",
+    "artifact": "afw-c2-first-failure-post-diag2-toy",
+    "fileName": "c2-first-failure-post-diag2-toy-proof.json",
+    "path": "output/c2-first-failure-post-diag2-toy-proof.json",
+    "retentionDays": 7,
+    "requireRaw": "Original complete SYNTHETIC toy TAP exactUTF8/bytes/SHA retained inside proof; no Source actualraw."
+  },
+  "imports": "FiveNodebuiltins parent,twochild; NO npm/Source/helper/MF/SDK/provider; rawTAP is entirelysyntheticdeclaredfixture.",
+  "literalControls": 6,
+  "childCases": 20,
+  "expectedPass19Fail1": "Intentional503vs200assertion in ordinal12 only. Does NOT tell usactualSourcePOSTstatus. Full20caseSourceRow orderindependentofSubtest placement; siteSourceS08notprovedbytoy.",
+  "triggerAuditReuse": {
+    "priorFull62Audit": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "all62ImmutableBlobsAndPathsMatch": true,
+    "sourceBranch": "lab/afw-c2-source-20261116-t1-fixture-fix1",
+    "originalPushFilters": "18 exactmain excluded; remaining closed-origin3paths unchanged in exact one-commit25-addition diff; no create/workflow_run/schedule in BASE",
+    "closedOrigin3PathsUnchanged": true,
+    "newWorkflow": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+    "newWorkflowGate": "Exactrepo/push/branch/attempt1/oneusemessage/contentsread",
+    "SourceTriggered": false
+  },
+  "closeRule": "Delete onlyWF; retainoriginal3203+other4+primary/receipt; zero closeheadruns andmain/historyunchanged.",
+  "SourceCollectorExecuted": false,
+  "SourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
