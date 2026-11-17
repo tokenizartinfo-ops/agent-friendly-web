@@ -1,0 +1,33 @@
+{
+  "schema": "AFW-DIAG3-OWN73-ROOT-CLOSE-RECEIPT/1",
+  "timestampUTC": "2026-11-17 04:50:47 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+  "attemptedHead": "928d9aa69b5186eacb7f043363bbdd12f2713bb3",
+  "attemptedTree": "59c261f3cf338579be961b3967ea7990afbb0d6b",
+  "run": 44019109681,
+  "attempt": 1,
+  "job": 133824068377,
+  "primary": "642e52b89f0eb284494435257b82bc806e4b564c",
+  "proof": "3b223dddbe73ee40d6a5d5905b84551fcec6dd31",
+  "disposition": "OWN-only MODEL native8/73 passed Root checks. Close spent occurrence; fresh independent review pending. No ACTUAL producer qualification.",
+  "workflowDeleted": ".github/workflows/afw-c2-own-finite-get-diag3-tools.yml",
+  "mutation": "Delete only nominated WF; add preserved primary and this closure receipt.",
+  "original3203Preserved": true,
+  "retainedProposalLeaves": 94,
+  "expectedFinalLeaves": 3299,
+  "SourceExecuted": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
