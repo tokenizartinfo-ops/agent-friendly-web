@@ -12,7 +12,7 @@
     "workflow": ".github/workflows/afw-c2-get-winner-tools1.yml",
     "event": "push"
   },
-  "result": "SUCCESS_PENDING_INDEPENDENT_ACTUAL_REVIEW",
+  "result": "ACCEPTED_TOOLING_FOR_DEPENDENT_TASK2_ONLY",
   "rootAdmission": {
     "contextMatched": true,
     "bindingsMatched": true,
@@ -67,5 +67,7 @@
     "receiptAuthenticated": false,
     "globalNativeDrainVerified": false,
     "sdkNamespaceEmptyVerified": false
-  }
+  },
+  "independentActualReview": "08b75777bb39efaad0a439082cd430044c0b07d6",
+  "closure": "bd3c3c583a17209be9390084eb390a24e515aeae"
 }
