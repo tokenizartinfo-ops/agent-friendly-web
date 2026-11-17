@@ -1,0 +1,28 @@
+{
+  "schema": "AFW.DROP.S5.LOAD_BEARING_CONTROLLER_RULING/1",
+  "timestampUTC": "2026-11-17 13:38:43 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "sourceRound": 5,
+  "ownRound": 4,
+  "maxSameFamily": 5,
+  "noReset": true,
+  "primary": "00680c0a0c9595c34c5510f48d0cf591a1574dee",
+  "closure": "1a45c35d67c4cb741df47eaece25a14ee44b2d54",
+  "finding": "Node22.23.4 rejects the nominated tooling controller before entry: const st redeclared at line323 in the same try block as preflight-owned stat. No Source helper/model/compiler/native controls executed and no artifact exists.",
+  "ruling": "Source5 qualification remains failed and the Source implementation fix-loop is not restarted. Carry this real load-bearing controller launch defect into the next tooling-launch repair task: rename only output-stat binding/references, preserve all Source13/helper/fixtures/collector/adapter/business code byte-exact, add a native Node --check covering step before dependency installation, update only one-use nomination/pins. Independently review minimal diff, then Root may admit ONE new isolated tooling-launch occurrence. No Source6, no same-family reset, no behavioral repair or business activation.",
+  "why": "The observed parse failure has an exact, mechanical correction. It prevents every downstream diagnostic but does not justify modifying Source behavior or clocks; every path forward is not a guess.",
+  "costIfWrong": "Discard detached launch-only proposal; no main/shared/product runtime mutation. A failed new invocation cannot qualify Source or be retried.",
+  "scopeBoundary": "Next task may not alter a Source body, old fixture expected, diagnostic semantics, timeout, assertions or business gates. Any such new finding returns to Root cap adjudication.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
