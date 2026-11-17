@@ -1,177 +1,109 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/23",
-  "timestampUTC": "2026-11-17 04:07:37 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/24",
+  "timestampUTC": "2026-11-17 04:54:50 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "d0a4ac0ca3e5668b371273facf059589ba691a1f",
-  "phase": "FINITE_GET_DIAG3_SOURCE_AND_OWN_ROUND4_IMPLEMENTATION",
+  "previousCheckpoint": "e3aeb2fa2067409dc427158a22b67fa3c7240251",
+  "phase": "FINITE_GET_DIAG3_BOTH_TOOLING_PASSED_CLOSED_OWN_FRESH_REVIEW_PENDING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
-  "lastActual": {
+  "lastActualBusiness": {
     "run": 44000942332,
-    "attempt": 1,
     "primary": "16f788a652c644763d74ffa0e955375786064c2d",
     "outcome": "f7306430e390cf69787347daa1b8b396b543dbc5",
     "OwnAdmission": "6d2f2e1a54507f70e2f553512dc35472e529e96e",
-    "closedHead": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
-    "closeReadback": "b96b7831b92e9200a4cd360fa9703c61b284d765",
-    "freshReview": "16599e9905523b42fbb63a944182d838224de440",
+    "close": "b96b7831b92e9200a4cd360fa9703c61b284d765",
     "first14Pass": true,
-    "firstFailure": "case15 GET S08:18:118",
+    "firstFailure": "GET case15 S08:18:118",
     "native17": {
       "pass": 14,
       "fail": 3
     },
-    "childTimeout180s": true,
-    "full20Incomplete": true,
-    "httpAndFiniteCountNotCaptured": true
+    "HTTPAndFiniteTicketBuckets": "UNKNOWN_NOT_CAPTURED",
+    "child180sTimeout": true,
+    "qualificationIncomplete": true
   },
-  "diag3": {
-    "SourceDesigner": "/root/n3_admission_repair4_design",
-    "OwnDesigner": "/root/c2_v2_own_receiver_fix1",
-    "status": "SOURCE_CODE_RELEASED_OWN_LITERAL_FIXTURES_ONLY",
-    "SourceImplementationReleased": true,
-    "OwnImplementationReleased": true,
-    "NativeReleased": false,
-    "Reason": "GETfinitepreparefailsbeforeScopeDrop/POST. NeedactualsafeHTTPstatusand0/1/2+/UNKNOWNfinite-ticketcountsat alreadycapturedMONITOR/ScopeMissing snapshots; stateunknownnow. No newRPC/sourcepredicates/caching/clocks/caps.",
-    "doNotResetFixFamilyBudget": true,
-    "SourceNextExtensionRound": 2,
-    "OwnNextExtensionRound": 3,
-    "maxRounds": 5,
-    "SourceDesign": "866bd15a36e0dc3e09d55bf6431ce94ae55f9d9b",
-    "SourceSharedObserverSupplement": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686",
-    "SourceDesignPeer": "93c5f4a4855e27ace6d8bd413a2aba741e1aad46",
-    "SourceFixtureDataReleased": true,
-    "OwnDesignPending": true,
-    "CombinedDesignPeer": "0a61ac955e39fb1572532cca811ef11876490f75",
-    "RootSourceCodeRelease": "641256e34573b53a707298cdb26149def251e6b1",
-    "SourceFixtureSeal": "4469d73e40f758e356e172c119687dde119c1fe6",
-    "SourceNativeCensus": {
-      "groups": 9,
-      "inner": 149
+  "tooling": {
+    "source149": {
+      "run": 44017015847,
+      "job": 133817260473,
+      "primary": "c421639e3b9efa775aa5b022ea2ca8a65f3679e7",
+      "proof": "329f48b8973c137d3c45d20ee50d565bc3c69caa",
+      "close": "4ce1c1a2136b776f0633d1cf772ffea89c9b64b8",
+      "closedHead": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+      "freshReview": "257d7a05391e64b1fd0371f67979b24073cbe7f7",
+      "native9Inner149": true,
+      "acceptedToolingOnly": true,
+      "SourceBusiness": false
     },
-    "OwnDesign": "d6af36ae35d1abfb5f51476bb8e78a4c1584f820",
-    "OwnCensus": {
-      "groups": 8,
-      "evaluations": 68,
-      "admit": 30,
-      "reject": 38
-    },
-    "OwnFixtureDataReleased": true,
-    "RootEarlyE3Measurement": "f0b91359fd67c011c368042c66ec46492b77d100",
-    "SourceE3Index": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
-    "SourceE3S08": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
-    "EarlySelection": "179fb6c9cd431a38f084211021843286aaa70671",
-    "EarlySchema": "bdb37d27e0c5e217d7b7249c216d674750046b73",
-    "EarlyFourBodiesFullHashVerified": true,
-    "Inherited12SchemaDefinitionsExact": true,
-    "SourceSemanticsReviewPending": true,
-    "Source25FinalPending": true,
-    "Source25IndexProposed": "dd6f6d44c577551388bffa9434baa332d1e12dfd",
-    "RootSource25FullBodyMeasurement": "266289bbe7e34d1a323e5140001cd3e8d7232507",
-    "Source25SemanticAdoption": false,
-    "SourcePriorityFinding": {
-      "adapter": "9ed7ad37d9912977fc9f0d6b600c9c323e2b8382",
-      "case": "H_KNOWN_429 only TAP header13→12",
-      "expected": "UNKNOWN/NATIVE_FORMAT_UNSUPPORTED",
-      "staticObservedPath": "UNKNOWN/AMBIGUOUS_EVIDENCE",
-      "scope": "collector and publisher partial-private distinction",
-      "SourceExecuted": false
-    },
-    "SourceFixRound3Pending": true,
-    "OwnFixtureIndex": "c758a24c92519a7928ca8f3d5d7996d59a28e316",
-    "OwnFixtureSeal": "8d64186b700a6ff79e946c7353ac0279d7856fd1",
-    "OwnFixtureNew39RootWholeBytesVerified": true,
-    "Old44RootRehashedExact": true,
-    "Own24StrictZIPRootPassed": true,
-    "OwnPrivateReasonReconciliationPending": true,
-    "SourceBusinessReleased": false,
-    "RootSourceFixRelease": "be1fbf3eaaab07bdfaf8a3b84a7665d42d45d71c",
-    "RootOwnCodeRelease": "efcaa376a9ddf11b60f1502f322e369f0396b69d",
-    "SourceRound": 4,
-    "OwnRound": 4,
-    "OwnFixture70Seal": "5a9ae339da360eb7f0ef0b8892b421dd2f9571b5",
-    "OwnNativeCensus": {
-      "groups": 8,
+    "own73": {
+      "run": 44019109681,
+      "job": 133824068377,
+      "primary": "642e52b89f0eb284494435257b82bc806e4b564c",
+      "proof": "3b223dddbe73ee40d6a5d5905b84551fcec6dd31",
+      "close": "7a4a1cf1e714bd5832d0ff4eb0d0bfc3101c0948",
+      "closedHead": "067a012121a58f7c2baf938228765242c433a1d5",
+      "native8Evaluations73": {
+        "admit": 32,
+        "reject": 41
+      },
+      "freshReviewPending": true,
+      "RootPassedClosed": true,
+      "MODELOnly": true
+    }
+  },
+  "sourceR4": {
+    "delivery": "f56c8e3cecd841fe97b40e0d10000f4d8058ed2b",
+    "source25Index": "672455978db4210eedef61502682e03404e0f462",
+    "Root25FullMeasurement": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+    "hash": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+    "Source13E3": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+    "S08": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+    "other12Exact": true
+  },
+  "OWN_R4": {
+    "index": "520860e0f90337f764a34ea55f77eb4851000c48",
+    "toolIndex": "b33a7aba421b9ab3935b0bff2e072055d8f192ff",
+    "staticReview": "724f1f65260e0d16b2015a097e3b626a3b077bab",
+    "RootFinal73RAM": {
       "evaluations": 73,
       "admit": 32,
-      "reject": 41
+      "reject": 41,
+      "modelResultHash": "98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb",
+      "ACTUALRejectsAll29Models": 29,
+      "finalActualBindings": true,
+      "SourceExecuted": false
     },
-    "SourcePriorityFixCodeReleased": true,
-    "SourceR3CodeReview": "19486d4e2f957efb3acb82b3ec8406f946c642b6",
-    "SourceR3Tool35RootFullHash": true,
-    "SourceR3Repo83RootFullHash": true,
-    "SourceR3Final77RootFullHash": true,
-    "SourceR3ReversiblesRoot": {
-      "bidirectional": 16,
-      "newOnly": 3
-    },
-    "OwnR3EarlyCode": "990861667a075f4934fcf9f0ff9b0fb77c38c2ad",
-    "OwnR3PeerFinding": "dce75c9706a9a19a01ea206f151b77b8aabb0e65",
-    "finding": "P2_SHARED_SOURCE_PREFIX_CONSISTENCY",
-    "SourceRound4Pending": true,
-    "OwnRound4Pending": true,
-    "SourceRound4CodeReleased": true,
-    "OwnRound4CodeReleased": true,
-    "Source149FixtureDataReleased": true,
-    "Own73FixtureDataReleased": true,
-    "RootRound4Release": "ce4e65195fd0f02adf6de5b64748abaaf3470fbd",
-    "Source149Fixture": "dfc37b27bad9189eb368f711727fc83f672d71af",
-    "Source149Oracle": "cef66140db83421b2cbd371a6e1b5e0a296a10ff",
-    "Own73FixtureIndex": "7ddd5716920ef46ef93afbcab2e68bf62ee1e5e7",
-    "Own73FixtureSeal": "daa8f98024c58f650c8ffffbfb835abe42e4a8f5",
-    "RootOwn70RAMPassed": true,
-    "RootOwn3REDReproduced": true
+    "FULL95": true,
+    "reversible8Plus3": true
   },
-  "rootR3InertVerification": {
-    "Source25Measurement": "4161ef0439a28580e2d3a1124e48ee6369b0d399",
-    "Source25Hash": "93db4eeb78cdb22923ac5fcb5ccdd79b64cfff3a48cca427a572c61fe7bd41eb",
-    "source35MountsFullHash": true,
-    "sourceRepo83FullHash": true,
-    "source77ObjectsAndPreimagesFullHash": true,
-    "reversible16BothDirectionsAnd3New": true,
-    "SourceCodeLocallyNeverExecuted": true
+  "rounds": {
+    "Source": 4,
+    "Own": 4,
+    "maxSameFamily": 5,
+    "noReset": true
   },
-  "rootOwnR3RAM": {
-    "evaluations": 70,
-    "admit": 32,
-    "reject": 38,
-    "resultHash": "9afcb5fec4cdc0191d86b5f1beb88c38a363f620db4cd50d311cc7a4fcda17d1",
-    "ACTUALRejectedAll26Models": 26,
-    "SourceExecuted": false,
-    "NativeExecuted": false
+  "preparedBusiness": {
+    "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+    "index": "672455978db4210eedef61502682e03404e0f462",
+    "refCreated": false,
+    "SourceBusinessReleased": false,
+    "SourceBusinessExecuted": false,
+    "preparing": false,
+    "tree": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
+    "head": "17582e124c2728800788dcbe46c740f38aea861a",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "unattached": true,
+    "mounts": 25,
+    "fullTreeVerified": true,
+    "leaves": 3228,
+    "original3203Preserved": true
   },
-  "sharedPrefixFinding": {
-    "peer": "dce75c9706a9a19a01ea206f151b77b8aabb0e65",
-    "RootOwnBeforeFixRED": [
-      {
-        "id": "FG3_S04",
-        "expectedAccepted": false,
-        "actualAccepted": true,
-        "input": "76511f7b2d23cf2fe810c8b338a921580d68a076d4d625884abb977d577200e8",
-        "strictZIPVerified": true
-      },
-      {
-        "id": "FG3_S05",
-        "expectedAccepted": false,
-        "actualAccepted": true,
-        "input": "02f0c6d51f466476dc4069f0a858758c23a571a494800da0ee2d02460974239e",
-        "strictZIPVerified": true
-      },
-      {
-        "id": "FG3_S06",
-        "expectedAccepted": false,
-        "actualAccepted": true,
-        "input": "3b483ea7d51df5e4fd06efd74add0f31011e7d46a5a9d181a3598b5c5e48e2c0",
-        "strictZIPVerified": true
-      }
-    ],
-    "sourceAlsoNeedsPublisherConsistency": true,
-    "round4Release": "ce4e65195fd0f02adf6de5b64748abaaf3470fbd"
-  },
-  "RootNativeRefCreatedForDIAG3": false,
-  "next": "Both authors implement only approved ternary exported-prefix consistency (Round4/max5, no reset). Source149+OWN73 fixtures sealed first and Root reproduced OLD guard3RED. Receive Source25R4 first, fully measure and send caller-bound data to OWN; review code/reversibles/graphs+Root RAM73, then separately gate unique source9/149 andOWN8/73 native tools, close/readback/fresh-review; only then decide one new full-order20 business diagnostic. Normal fullTask1 still held.",
-  "normalFullTask1PlanHeld": "a4cebfbb3c91ec706429253c9809a0096774108b",
+  "SourceBusinessReleased": false,
+  "next": "Finish fresh OWN73 actual-native review from savedPrimary/proof/close (no logs/ZIPrefetch). Then Root accept both tooling only, gate ONE new Source full-order20 diagnostic at prepared17582/tree4b09, after fresh lease/freshbranch/0priorruns. Full25/driver/SDK/caps unchanged; sourceS08observer adds status+existing snapshot metric. Native capture/admit actuald3Read/finalclose/freshresultreview; stop at returned facts/unknown/timeout, no automatic replay. Normal fullTask1E2plan remains held until diagnosis addressed.",
+  "noLocalSourceExecution": true,
+  "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
     "temporarilyDisconnecting": false,
     "resumedAtUTC": "2026-11-16 20:51:24 UTC",
@@ -181,7 +113,6 @@
     "noManualRequestsBeforeBoundary": true,
     "pcLeftOn": true
   },
-  "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "SourceQualified": false,
   "Task1Pass": false,
   "nonclaims": {
