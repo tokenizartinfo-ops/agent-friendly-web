@@ -1,12 +1,14 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/32",
-  "timestampUTC": "2026-11-17 12:46:02 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/33",
+  "timestampUTC": "2026-11-17 12:47:30 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "0834800150a77c12e3798c31f120db26c8042f2d",
-  "phase": "DROP_WINNER_FIXTURE_RED_NATIVE_GATE_READY",
-  "activeNativeRuns": [],
-  "allCurrentNativeOccurrencesClosed": true,
+  "previousCheckpoint": "553d3a396ce8be143cac9af5cb85a074b266da58",
+  "phase": "DROP_WINNER_FIXTURE_RED_NATIVE_ACTIVE",
+  "activeNativeRuns": [
+    44086328643
+  ],
+  "allCurrentNativeOccurrencesClosed": false,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -134,7 +136,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Activate exact one-use fixture RED gate once; observe and close before source feature implementation. ModelRED only. All past business and tooling refs stayclosed.",
+  "next": "Observe THIS fixture attempt1 terminal, capture logs/soleZIP once; accept ONLY named expected model RED+uploadsuccess+exactreceipt, closeWF/readback; then release minimal implementation to SAME source5 author. NoSourcebusiness orNativeRuntime.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -183,9 +185,12 @@
       "mounts": 5,
       "leaves": 3208,
       "fullTreeVerified": true,
-      "refCreated": false,
-      "activationAttempted": false,
-      "unattached": true
+      "refCreated": true,
+      "activationAttempted": true,
+      "unattached": false,
+      "gate": "fbc5650a521f71ef430176ce3b9bd14f3734c952",
+      "activationUTC": "2026-11-17 12:46:42 UTC",
+      "run": 44086328643
     }
   },
   "staticContracts": {
