@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "6425a8de1cb71a298311fb7f1ad7e77f8992fb6c",
-  "phase": "GET_WINNER_STAGE_B_FIX4_SCOPED_STATIC_REREVIEW_RUNNING",
+  "previousCheckpoint": "20ab42e41f8707f1bbee4a518757fc65c68b410b",
+  "phase": "GET_WINNER_STAGE_B_FIX4_STATIC_4_CLOSED_FP1_OPEN_FIX5_READY",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -671,7 +671,7 @@
       "responsePrimaryNote": "1ded0afe15a9b443240776e3ce4bf4fbc509b79d",
       "actor": "/root/get_winner_stage_b_fixwave4",
       "scopedReviewer": "/root/get_winner_stage_a_review",
-      "status": "FIX4_SCOPED_REREVIEW_RUNNING",
+      "status": "FIX5_BRIEF_READY",
       "currentAuthorSource": {
         "S08": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
         "S09": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
@@ -798,9 +798,10 @@
       "completedFixWaves": {
         "retentionComponent": 2,
         "controllerIntegration": 1,
-        "totalTask1StageB": 3
+        "fullPacket": 1,
+        "totalTask1StageB": 4
       },
-      "nextFixWaveIfRequired": 4,
+      "nextFixWaveIfRequired": 5,
       "fullReview": "27065f2876c4c102452ccc0cf866f58c2bfb14e3",
       "currentFixWave": 4,
       "maximumFixWaves": 5,
@@ -832,11 +833,23 @@
       "fix4FinalDelta": "97e4fb33f6b2b319a2dfee43dc4ddf231aaa5ccf",
       "fix4FinalMeasurement": "385e56954a381a07c1e2d22131d1137fd2553d73",
       "fix4ReversibleTransitionsVerified": 42,
-      "fix4Rereviewer": "/root/get_winner_stage_b_full_packet_review"
+      "fix4Rereviewer": "/root/get_winner_stage_b_full_packet_review",
+      "fix4Rereview": "835e4c4453a06ae6d54c84df5489c110cdace2af",
+      "fix4StaticAddressed": [
+        "FP2",
+        "FP3",
+        "FP4",
+        "FP5"
+      ],
+      "fix4Open": [
+        "FP1"
+      ],
+      "fix4NewCritical": 0,
+      "fix4NewImportant": 0
     }
   },
-  "schemaVersion": 76,
-  "updatedAtUTC": "2026-11-17 21:07:47 UTC",
+  "schemaVersion": 77,
+  "updatedAtUTC": "2026-11-17 21:17:21 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",

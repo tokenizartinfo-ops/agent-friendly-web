@@ -1,0 +1,102 @@
+{
+  "schema": "AFW.INDEPENDENT.GET_WINNER.STAGE_B.FIX4_SCOPED_STATIC/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "detached immutable review DATA",
+  "allowedAction": "read fixed delta and save one detached report",
+  "rollback": "disregard this report",
+  "fixWave": "4/5",
+  "reviewBase": "27065f2876c4c102452ccc0cf866f58c2bfb14e3",
+  "proposalBase": "93162bc3f83536d55e8dfcbf9fe8092865b6da8f",
+  "logicalHeadProposal": "9de7d971b8a3cf51f1cccfe6908c2b9ecc392d27",
+  "brief": "77da8bd675fbd8991c3864b534f8b8b2a55ca7aa",
+  "authorReport": "919b44cbd7a061692209c8cda1eadd053932af5e",
+  "delta": "97e4fb33f6b2b319a2dfee43dc4ddf231aaa5ccf",
+  "SPEC": "CHANGES_REQUIRED_FP1",
+  "QUALITY": "CHANGES_REQUIRED_FP1",
+  "nativeGate": "HOLD",
+  "findingsInOriginalOrder": [
+    {
+      "id": "FP1",
+      "decision": "NOT ADDRESSED",
+      "severity": "Important, carried forward",
+      "locations": [
+        "model-get-controls.mjs 8d6ae83f38437d4652096086aa48bef157571777 lines 48-69 and 109-122",
+        "body-08-get-winner.txt e488965a58b989aa1c2f05a16aa6d5b74d4e411a lines 202-232"
+      ],
+      "evidence": "The old model and S08 object IDs are unchanged. The former still builds the supposedly emitted count line locally with a fixed bucket. No new driver exercises the real count callback and its emit. The new protocol's focusedTool.reviewGate explicitly carries FP1 OPEN. Honest deferral preserves the issue.",
+      "closure": "The outstanding acceptance criterion is actual capture from the exported S08 observer/count path, the existing frozen result and preservation of the parent's stated limits. A synthetic model result or assembled copy of the emitter cannot establish this."
+    },
+    {
+      "id": "FP2",
+      "decision": "ADDRESSED",
+      "scope": "static implementation and test wiring",
+      "locations": [
+        "receipt-normalization.mjs f4d3c9ed6ea3146368d78235e59be331c2c11ba5 lines 1-11,23-36,45-61,69-70",
+        "run-get-winner-tools.mjs 974c658260f89cd088fa01bd5064d9b5e9dcf01a lines 2,813-817",
+        "receipt-normalization.test.mjs 0d714437ed3f700f079a3b36dfca2fcfdfbe0ab2 lines 28-45",
+        "partial-tool-proof.schema.json ef0fa3eb50091d3153fd61c747dcb42e8d120192 line 1"
+      ],
+      "evidence": "The parent uses the shared complete normalizer. Every retained dynamic digest now passes a primitive-string, exact-length and lowercase hexadecimal check. The remaining constant digests are checked by strict canonical equality against pinned data. The shared-function tests name 14 representative paths across the three groups and eight invalid values per path, check the digest-specific error, and include one ordinary positive. These are 112 planned negative assertions, not 112 different fields. The updated schema keeps the earlier fixed shapes and binds the current schedule."
+    },
+    {
+      "id": "FP3",
+      "decision": "ADDRESSED",
+      "scope": "static implementation and test wiring",
+      "locations": [
+        "component-work-boundaries.mjs a4c15d2fc7438845ce9df890097b7857e1bb9fe5 lines 1-25",
+        "retention-component-entry.mjs b5b2e45fe2ee2e4634b8f9d9d8d92017dee54980 lines 35-64,69-79,94-98",
+        "native-retention-controls.mjs 4f3473db3cfb6bfaf79caf2e6f8a5bc9526ec693 lines 8-14",
+        "component-work-boundaries.test.mjs eed0e1d7f0d03ca18ad4df4257026c23b8800414 lines 5-44"
+      ],
+      "evidence": "Entry now observes the actual outer promise, and late cancel entry observes the actual retained promise. Early rejection propagates its original value; fulfillment before the associated signal fails. The wrapper attempts both release callbacks and parent finish independently, preserves a primary failure, and waits for all captured work including its expected rejection. The proposed tests exercise both real helper paths, early completion and falsy exceptions. Added synchronization reactions are confined to the measured component. Original successful workerd event ordering and drain are unverified pending native evidence."
+    },
+    {
+      "id": "FP4",
+      "decision": "ADDRESSED",
+      "scope": "static implementation and test wiring",
+      "locations": [
+        "controller-file-boundaries.mjs 1272ca4d684979e8385bbdf53cc779628db1b684 lines 8-25",
+        "run-get-winner-tools.mjs 974c658260f89cd088fa01bd5064d9b5e9dcf01a lines 726,800-817",
+        "controller-file-boundaries.test.mjs 8c0a568e8b5abaf2b4b80a959ff7f4c15b0bd20d lines 14-45"
+      ],
+      "evidence": "Both materialized custody copies are measured for file type, real path, byte count, Git SHA1 and SHA256 before and after successful preflight and each group. Both are checked once more before receipt admission, alongside the existing Source13 and materialized tool checks. A thrown launch cannot produce an admitted receipt. Tests exercise both copies with same-size drift at three stages and intact repeated boundaries."
+    },
+    {
+      "id": "FP5",
+      "decision": "ADDRESSED",
+      "scope": "static success-eligibility deadline and test wiring",
+      "locations": [
+        "controller-file-boundaries.mjs 1272ca4d684979e8385bbdf53cc779628db1b684 lines 27-62",
+        "run-get-winner-tools.mjs 974c658260f89cd088fa01bd5064d9b5e9dcf01a lines 12,589,666,827-845",
+        "deadline_supervisor.py 26eb9f3c12120643578819d3d4684c95bbded077 lines 10-27",
+        "afw-c2-get-winner-tools1.yml d0f8e93ea8e9f957d1b468fa3665f40fd1d45f1f lines 77-95",
+        "controller-file-boundaries.test.mjs 8c0a568e8b5abaf2b4b80a959ff7f4c15b0bd20d lines 48-87; deadline_supervisor_test.py 1832ea81b6c5cfd69159d53755b6c202c7859371 lines 8-57"
+      ],
+      "evidence": "The Node controller uses monotonic remaining time, owned temp verification, staged plus final readback, staging unlink, and postpublication checks. The independent monotonic supervisor starts before spawn, includes observed process completion, and disqualifies expiry even if cleanup eventually returns zero. Upload requires timely supervisor exit zero. These checks close the success boundary at 330 seconds. An unresolved cleanup may still consume the remaining seven-minute job cap. This explicitly limits success and makes no claim of hard process termination or completed cleanup at second 330. Proposed tests cover blocked file operations, cleanup, equality at the deadline and a late zero."
+    }
+  ],
+  "newCriticalFindings": [],
+  "newImportantFindings": [],
+  "shortContract": "FP1 OPEN. FP2-FP5 addressed by static code inspection. Native and unit results NOT_RUN. Both execution holds stay in effect. No whole-packet or PC-off acceptance.",
+  "verification": [
+    "Examined the 7 replacement bodies, 8 additions and their bounded review metadata. Independently matched UTF-8 length, Git SHA1 and SHA256 of all 15 changed/new mount bodies (138130 bytes), without rereading the 76 untouched bodies. No repository Source imported, parsed, built or executed.",
+    "The constant-false job condition retains the existing one-use repository/event/ref/attempt/message checks (workflow lines 10-16). The controller throws its explicit review hold before its main operation (controller line 11). These intentional holds are part of the submitted bytes. Removing a hold changes the candidate and its dependent pins; this review authorizes no removal or execution.",
+    "Workflow lines 32-65 name 35 syntax inputs in 34 commands. Lines 66-76 schedule the new 34 Node and 2 Python defensive tests before startup46 and the locked install. All syntax, tests, startup controls, 287 MODEL controls and 39 native dispatches are unexecuted for this proposal. No changed/new runtime target has passed by virtue of this review.",
+    "Full 91-body, 1502623-byte graph and 42 literal direction-pair comparisons are separate Root measurement/checkpoint evidence. Source13, frozen fixture holds and previous findings outside this delta retain their original scope. No new Critical or Important finding was identified in the reviewed changes."
+  ],
+  "deferred": [
+    "FP1 is an outstanding requirement, not a native result or a separate new finding. The earlier minor startup diagnostic site-map observation remains deferred; it was not re-reviewed.",
+    "The Python supervisor closes success eligibility. Physical cleanup completion, native event order, actual SHA values of compiled residents, provider upload and PC-off operation still require their own evidence. A valid marker remains unauthenticated; parent-only canonical substitution detection remains outside the evidence aperture."
+  ],
+  "Source5": 5,
+  "OWN5": 5,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "executedTests": 0,
+  "nativeExecuted": 0
+}
