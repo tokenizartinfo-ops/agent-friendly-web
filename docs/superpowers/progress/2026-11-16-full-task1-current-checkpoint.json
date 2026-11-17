@@ -1,20 +1,12 @@
 {
-  "schema": 55,
-  "timestampUTC": "2026-11-17 16:12:45 UTC",
+  "schema": 56,
+  "timestampUTC": "2026-11-17 16:18:59 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "2719dc836f9b745c2e2bc6fcd7f7e8d3ea482ed3",
-  "phase": "GET_WINNER_STAGE_A_EXPECTED_RED_NATIVE_ACTIVE",
-  "activeNativeRuns": [
-    {
-      "run": 44123016528,
-      "branch": "lab/afw-c2-get-winner-20261117-fixtures",
-      "head": "5b93675aecccc76339fce18880f354a7c0ec42d2",
-      "kind": "ONE_CONTROLLED_M_GET_EXPECTED_RED",
-      "state": "completed"
-    }
-  ],
-  "allCurrentNativeOccurrencesClosed": false,
+  "previousCheckpoint": "ddd66aa67866f08cb8935fa67d0560356f2ef5f7",
+  "phase": "GET_WINNER_STAGE_A_PREREQUISITE_FAILURE_PRESERVED_CLOSED_ACTUAL_REVIEW_ACTIVE",
+  "activeNativeRuns": [],
+  "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
     "run": 44110921244,
     "job": 134135963389,
@@ -120,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Observe this exact stageA attempt to terminal; acquire log/artifact once, preserve expectedRED vs prerequisite failure, closeonlyWF. No source feature or business/live release.",
+  "next": "Independent saved actual StageA review plus DATA-only launch triage. Controller generic fault hides child outcome; no guessed cause/retry. Need smallest demonstrated startup correction or bounded failure aperture, preserve Source5/OWN5 cap and all old refs; no user action.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -524,7 +516,7 @@
   "completedOwnVmReleased": true,
   "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
   "getWinnerDependent": {
-    "phase": "STAGE_A_NATIVE_ACTIVE",
+    "phase": "STAGE_A_FAILED_BEFORE_EXPECTED_RED_CLOSED",
     "featureCodeReleased": false,
     "nativeReleased": true,
     "roundsUnchanged": true,
@@ -542,7 +534,7 @@
     ],
     "fixtureIDs": 315,
     "fixtureExpectationsExecuted": 0,
-    "nativeGETsExecuted": 0,
+    "nativeGETsExecuted": "UNKNOWN_NOT_RETAINED",
     "allCurrentRefsClosed": true,
     "rootChecked28NewPathsAbsentAtBase": true,
     "amendedProposal": "36049472ef3a71f4e2055a5a0cd6a1b03b78dfd3",
@@ -568,8 +560,19 @@
       "gate": "864ee8e2afcc970593c02795f193dba525c48e11",
       "activationUTC": "2026-11-17 16:12:01 UTC",
       "run": 44123016528,
-      "job": 134179191125
+      "job": 134179191125,
+      "closed": true,
+      "closedHead": "a360239dfbbfa3263f634042bbe7bb4a56c5b3d7",
+      "closedTree": "0e7bd10ff333ffa18e85582f5df73ddab5f2c2fe"
     },
-    "rootNativeGate": "864ee8e2afcc970593c02795f193dba525c48e11"
+    "rootNativeGate": "864ee8e2afcc970593c02795f193dba525c48e11",
+    "actualPrimary": "b3267a5b4245da1dbe0612c13540c54ceaa19297",
+    "actualOutcome": "23e11dac9ecf06a16d8d141bc497207392330d1d",
+    "actualClosure": "a45965bd990ca2bf6190f6a473eea5198bd32bdd",
+    "actualResult": "red LAUNCH_INVALID, controllerSyntaxPASS, artifact0, notExpectedRED",
+    "nativeAttempts": 1,
+    "expectedREDVerified": false,
+    "businessReleased": false,
+    "actualReviewer": "/root/get_winner_stage_a_native_review RUNNING"
   }
 }

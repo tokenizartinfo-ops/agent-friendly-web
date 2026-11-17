@@ -1,0 +1,41 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.STAGE_A.ACTUAL_OUTCOME/1",
+  "timestampUTC": "2026-11-17 16:16:42 UTC",
+  "run": 44123016528,
+  "job": 134179191125,
+  "runAttempt": 1,
+  "head": "5b93675aecccc76339fce18880f354a7c0ec42d2",
+  "tree": "855d245693c37336af9069ee51b4d35cc047eacd",
+  "status": "PREREQUISITE_FAILURE_NOT_EXPECTED_RED",
+  "controllerSyntaxStep": "success",
+  "nativeStep": "failure",
+  "controllerExit": 1,
+  "reportedFault": {
+    "phase": "red",
+    "reason": "LAUNCH_INVALID"
+  },
+  "artifactCount": 0,
+  "artifactFailure": "No get-winner-red.json existed to upload",
+  "expectedRED": false,
+  "namedAssertionObserved": false,
+  "childExit": "UNKNOWN",
+  "childFault": "UNKNOWN_NOT_RETAINED",
+  "actorArrived": "UNKNOWN_NOT_RETAINED",
+  "GETCount": "UNKNOWN_NOT_RETAINED",
+  "fixtureIDsSealed": 315,
+  "fixtureExpectationsExecuted": 0,
+  "featureObserverImplemented": false,
+  "sourceBusinessExecuted": false,
+  "allFalseClaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "note": "Controller red gate combines fresh custody count and child error/signal/status/buffer predicates, then emits one generic sanitized fault. Saved log cannot identify the failed predicate or child cause. Do not infer provider outage, actor routing or Source repair. Child raw stdout/stderr were not retained by this controller; no artifact/archive or expected RED receipt exists. Must close this spent attempt and perform DATA-only triage before a changed gate."
+}
