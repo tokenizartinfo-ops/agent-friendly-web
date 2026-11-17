@@ -1,0 +1,44 @@
+{
+ "schema": "AFW.C2.DROP_JOIN/2 scoped independent design review",
+ "scope": {
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "private Git DATA",
+  "ORIGIN": "github.com",
+  "RESOURCE_TYPE": "detached JSON review",
+  "RESOURCE_ID": "case15:firstDROP:design-review-v2",
+  "ALLOWED_ACTION": "read immutable text and create/read back this detached report",
+  "ROLLBACK": "discard detached report"
+ },
+ "inputs": {
+  "designV2": {
+   "git": "1a5ccbf3aa73495e3c4f4ebfe39e5693d78d91cb",
+   "bytes": 9173,
+   "sha256": "46913085a61f8613c048a18b610850b13db509f52499748a581237076c9d206d"
+  },
+  "designV1": "05b1cbbf9c42d72bc6ee797a4f070aa8d79cd949",
+  "priorReview": "e297e38ffe595ee5feeb0536e3c7d6a2abf17bb5",
+  "ruling": "ada670c9bbe3741a714cec6486a20dd2751a01b6",
+  "source13": "4c62b37a2e94efa057a1df97dd32c193761b8dcb"
+ },
+ "SPEC": "PASS_DESIGN",
+ "QUALITY": "PASS_DESIGN",
+ "findings": [
+  {
+   "id": "P1-1",
+   "status": "ADDRESSED",
+   "refs": "v2 seams[1-6], join, transport, matrix[0-2]. S09:152-157, bridge:33-44, S03:28,41, S08:110-115.",
+   "basis": "QA writes q1 on the exact surviving non-ok Q for the armed request. M verifies the single canonical q1 against its own forwarded UUID digest and the status on the response actually received before associating validation with D. Exact D must win. The second marker binds the winner and inner status to the M response that survived S03. The host checks its own dispatch result, status, matching unique actor cut, form and mapped site. These conditions distinguish an unmarked same-status stub failure from the marked QA value.",
+   "limit": "The claim covers marked value provenance on the pinned route. If QA-to-M synthesis or reuse cannot be excluded, at most STUB_NON_OK with publicSite UNKNOWN. If M-to-host synthesis or reuse cannot be excluded, outer and publicSite are UNKNOWN. Copying a valid marker onto a fabricated response is observationally indistinguishable. The transport review and controls are explicit evidence gates."
+  },
+  {
+   "id": "P2-1",
+   "status": "ADDRESSED",
+   "refs": "v2 seams[1-6], join, matrix[2-3]. S02:25-27, S09:152-157,175-185, wire:26-39, bridge:6,33-44, S03:17-41.",
+   "basis": "QA captures the actor epoch before super.fetch, binds R and Q, consumes its slot once, and rejects revoked, sealed or duplicate epochs. M allocates C before S03, ties originalLease and P to C, records D and the wire deadline error for that invocation, and admits B only against the captured P/C and unused entry after parent.finish. The separate deadline label requires the owned lease/C and a matching entry at the existing cut. The matrix covers crossed cells, previously marked foreign responses, re-arm, late returns, duplicate egress and thrown finalizers."
+  }
+ ],
+ "newLoadBearingFindings": [],
+ "acceptance": "The two response observers must run before serialization on the actual mounted paths and preserve fulfillment and rejection, including consuming any derived tap rejection. Treat any path capable of re-emitting an already-marked substitute as unsupported even if the record lookup correctly rejects it. Both requirements are covered by the v2 order, transport and noninterference gates. Their evidence is pending.",
+ "decision": "Design objection closed. Root can separately scope concrete compiler and identity tooling. Business/native execution remains under its separate release gates. Historical run 44021068647/1, Source/OWN 4 of 5 and all recorded nonclaims retain their previous status."
+}
