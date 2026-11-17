@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "26443ede37601549d2118f380a9d057925dc2a8c",
-  "phase": "TASK2_PREREQUISITE_FULL20_CARRIER_PREPARATION_READY",
+  "previousCheckpoint": "812531cd82c1998f7c9b531275b1ac1aa1ecb20b",
+  "phase": "TASK2_PREREQUISITE_FULL20_CARRIER_PREPARATION_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Prepare and independently measure closed/unactivated full20 GET Source carrier; then Task2 public-reader fixture/guard/binding and native controls. No business run before OWN acceptance.",
+  "next": "Await and fully measure exact closed/unactivated full20 Source carrier, obtain independent static review, then implement Task2 public-reader fixtures/guard/binding. No business run before OWN native acceptance.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -249,7 +249,9 @@
       "requestComment": 6957603515,
       "replyComment": 6957793271,
       "action": "RECORDED_ONLY_NO_ACTIVATION_OR_CONSUMPTION"
-    }
+    },
+    "lastRead": "2026-11-17 22:52:00 UTC",
+    "newRequests": 0
   },
   "rulings": [
     {
@@ -943,18 +945,21 @@
       }
     },
     "task2": {
-      "status": "SOURCE_CARRIER_PREPARATION_READY",
+      "status": "SOURCE_CARRIER_PREPARATION_RUNNING",
       "toolingActualAccepted": "08b75777bb39efaad0a439082cd430044c0b07d6",
       "currentReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
       "currentBinding": "4d54d57322ea67c3a29278f75288c7c9b686105b",
       "oldSource26": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
       "scope": "Prepare new closed full20 Source DATA before freezing actual consumer binding; Task3 execution held",
       "actualConsumerReleased": false,
-      "nativeBusinessReleased": false
+      "nativeBusinessReleased": false,
+      "author": "/root/get_winner_full20_carrier",
+      "brief": "524c1558cc21d1df4b950b064ef0041d48ce6163",
+      "transportPremise": "Candidate STATIC mounted-route premise under author inspection; requires independent review and Root gate, no full20 qualification inferred from TOOL"
     }
   },
-  "schemaVersion": 88,
-  "updatedAtUTC": "2026-11-17 22:44:52 UTC",
+  "schemaVersion": 89,
+  "updatedAtUTC": "2026-11-17 22:56:00 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
