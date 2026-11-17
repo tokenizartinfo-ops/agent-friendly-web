@@ -1,0 +1,48 @@
+{
+ "kind": "AFW.C2.DROP_JOIN/1 independent SPEC+QUALITY design review",
+ "scope": {
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "private Git DATA only",
+  "ORIGIN": "github.com",
+  "RESOURCE_TYPE": "detached JSON report",
+  "RESOURCE_ID": "case15:firstDROP:design-review-v1",
+  "ALLOWED_ACTION": "read immutable Git text; create/read back this report only",
+  "ROLLBACK": "abandon detached blob; no ref or runtime change"
+ },
+ "reviewed": {
+  "design": "05b1cbbf9c42d72bc6ee797a4f070aa8d79cd949",
+  "bytes": 8077,
+  "sha256": "4bc717a49fd2d401f0371679273b6aa73baae136c4d4a6f5a53be7c336e1ef75",
+  "source13": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "agentRules": "b67942223e5633011573f2a2165489afd9ff3f67:283-355",
+  "priorContextOnly": "40e7c737fe2f20f32d0df385800b4c967e46c3fe"
+ },
+ "SPEC": "CHANGES_REQUIRED for end-to-end QA site attribution. Conditional PASS for narrowed, independently named observations.",
+ "QUALITY": "CHANGES_REQUIRED on attribution boundary and invocation binding. Compiler-only composition/site mapping is sound as a proposed gated experiment, not evidence of feasibility or operation.",
+ "findings": [
+  {
+   "id": "P1-1",
+   "where": "design.seams[1,3,4], join, output; S02:25-27; S09:154-157; bridge f2c473c:33-38,44; S03:28,41",
+   "finding": "Forwarded UUID identifies the stub call and QA request, not the value returned across the QA-to-M hop. Two worlds produce the same observations: QA returns its exact mapped pending response and M gets its transported status; or QA returns that same object and the transport supplies an unrelated non-ok to the same stub call. In both cases M creates D from the received non-ok, catches that very D, S03 fulfills with its registered pending, and the host sees the same M marker. No check on the QA return at M distinguishes them. Checking only UUID/status, timestamps, or QA and M object identity on their respective sides cannot attribute the observed denial to that QA site.",
+   "minimum": "Keep the one-header design if the contract is narrowed: site=local mapped QA observation for the uniquely joined request (or UNKNOWN); outer=STUB_NON_OK or M_DEADLINE_OR_ABORT only for exact owned winner; publicSite=UNKNOWN for QA causation. This can direct a new audit and outperforms a coarse rerun without asserting the missing hop.",
+   "ifEndToEndRequired": "Allow a second opt-in lab-only response marker. In the armed DROP epoch, on the exact registered, non-ok QA pending that survived S00/S02 and is being returned by S09, emit one reserved canonical marker containing a domain-separated hash of the already-forwarded UUID and the exact returned status; no raw UUID, cookie, frame or site needed on wire. Prove original observed at S09:155-157 edits headers synchronously before serialization for the mounted native path; no new wait. At bridge:36-38 validate that exact received response's single marker, join and status for this invocation BEFORE associating validation with D; keep original non-ok handling/cancel. Carry validated-inner vs unvalidated-stub enum on the post-S03 outer marker. Only combine a unique matching pre-cut QA row/site, exact call and both valid markers. Add negative stripped/swapped/stale/duplicate/collision/status-changed/substituted/copy controls. Preserve original response on helper failure. No new request headers or RPC.",
+   "limit": "Two markers establish provenance of marked values only in the declared closed, pinned transport with single writers and no synthesis/replay or fallback laundering. Serialization/copy preserving those fields is permissible value transport, not cross-isolate object identity, body equality, cryptographic authentication or proof against arbitrary replacement. If fallback copies proof fields to an independently synthesized failure, they cannot distinguish it. Bound that claim explicitly or leave publicSite UNKNOWN; a test with one example alone does not exclude arbitrary transport behavior."
+  },
+  {
+   "id": "P2-1",
+   "where": "design.seams[3,4], join/matrix; wire 38285fa:26-39; bridge f2c473c:6,24-38,44; S03:17-41",
+   "finding": "'Local WeakSet' and use of the fulfilled Response as the sole WeakMap key leave the required scope ambiguous. A tagged deadline error or already-tagged pending from another M invocation is different from a fresh untagged substitute. Membership proves past observation, not ownership by the current fetch. Especially relevant to an outer deadline label with no timely QA witness.",
+   "minimum": "Tag deadline error -> exact originalLease or invocation cell; map pending -> {original inbound Request/cell, join, winner, innerValidated}. In adapter require the exact same Request/cell in addition to returned Response, once only; never use current/latest global state. QA analogously binds inbound Request, exact returned Response and the identical unsealed actor epoch; capture that epoch before super.fetch; late callbacks never consult a replacement arm. Poison duplicate or collision; do not emit an unmatched marker. Add crossed-cell, already-marked substitute and restore/re-arm negatives. Missing QA can still permit a proven exact M winner, never a QA-origin label."
+  }
+ ],
+ "accepted": [
+  "S08:21,30,110-115 plus S10:180 identifies exact first post() dispatch response before discard; same preexisting c2Snapshot/Ticket and c2ScopeState cut, no later snapshot; do not infer puts scalar, operand or physical drain. No evidence if the cut never completes.",
+  "Post-S03 fulfillment is essential: parent.finish at S03:41 and S02:27 may replace success with rejection. Identity-bound nonthrowing observers must leave fallback/rejection/body/headers except explicit marker(s), original race order, timer, retention/waitUntil and cancellation intact. D distinguishes cause from deadline, not first vs actual when both carry D.",
+  "Compiler-only route mirrors actual S08:9/S10:29,44-54,129; use real provisional namespace and same composed inputs, build through line 129, dispose even on failure, stop before setOptions/seed/dispatch. This is provisional native initialization, not a business run. Materialize private exact generated throw+caller maps from byte-identical sibling QA build for same harness; bind verified script identity before stripping to bounded coordinates (UTF-16 column, exact segments incl. adjacent S00:747); two positive sites and neighbor/foreign/shared/truncated negatives, otherwise UNKNOWN. Recheck mounted bytes per dated occurrence.",
+  "Outer report strictly fixed enums only, sanitized before existing puts assertion even when it throws; raw labels/IDs/hash joins/handles/stack/maps/compiled code never in outer artifacts or error strings; reserved header single-writer/collision policy and negative off/on noninterference compared on same synthetic input.",
+  "Historical 44021068647/1 is context only: first 14 passed, 15 first DROP puts!=1 actual omitted, 16 open at 180s; 17-20 unobserved. No historicalCauseProven, SourceQualified, Task1Pass or authority flags promoted; retain Source/OWN 4/5, source 20/order, D07, recorder/core3203, leases/caps."
+ ],
+ "decision": "No code or native release from this review. Scoped compiler/site-map tooling may be proposed independently under separate authorization; hold winner-attribution tooling until Root records scope choice and exact invocation semantics. No refs, workflow, product change, case execution, source reset, or automatic promotion."
+}
