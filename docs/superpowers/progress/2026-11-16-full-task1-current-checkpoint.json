@@ -1,12 +1,19 @@
 {
-  "schema": 38,
-  "timestampUTC": "2026-11-17 13:39:29 UTC",
+  "schema": 39,
+  "timestampUTC": "2026-11-17 13:45:36 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "97edea79de53e7345df29e512bb72c041de715c6",
-  "phase": "DROP_WINNER_SOURCE5_TOOLING_STARTUP_FAILURE_CLOSED_LAUNCH_REPAIR_ACTIVE",
-  "activeNativeRuns": [],
-  "allCurrentNativeOccurrencesClosed": true,
+  "previousCheckpoint": "327114a66ea00772c17141c08b28502e025678da",
+  "phase": "DROP_WINNER_CONTROLLER_LAUNCH_REPAIR_NATIVE_ACTIVE",
+  "activeNativeRuns": [
+    {
+      "id": 44095907983,
+      "attempt": 1,
+      "head": "b7a2cbb6abb460089b38fa31fa1d787dd8a68902",
+      "status": "in_progress"
+    }
+  ],
+  "allCurrentNativeOccurrencesClosed": false,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -134,7 +141,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Repair launch controller mechanically as ruled, unchanged Source5 bodies/helpers/fixtures. Independent static minimal diff, then one new launch-only native gate. No Source6/reset; no business until actual tooling qualification/transport+OWN binding. Actual case15 failure remains unresolved.",
+  "next": "Observe this launch-only new occurrence. Node --check must pass before npm/controller; exact one native tooling receipt required. Preserve once and close nominated workflow, independent actual evidence review. Source5 semantics/fixtures remain pinned and unqualified. No business/newSource code.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -314,14 +321,34 @@
     "primary": "00680c0a0c9595c34c5510f48d0cf591a1574dee",
     "validation": "68669599e6f57052eebbaf936c86edcd63a26775",
     "closure": "1a45c35d67c4cb741df47eaece25a14ee44b2d54",
-    "toolingQualified": false
+    "toolingQualified": false,
+    "toolingFailureReview": "68a8fc98f3844c1c90e58502ff7d5dd3c8102480"
   },
   "launchRepair": {
     "brief": "ff3f06c4f56b126c9d6a5680d881e724bc9535bc",
     "ruling": "f91f6c44911b96b2b9b63f2e216fdc5ab0481b92",
     "actor": "/root/drop_tooling_launch_repair",
     "scope": "duplicate local output-stat identifier + fresh one-use nomination + covering Node --check step only",
-    "nativeReleased": false
+    "nativeReleased": true,
+    "prepared": {
+      "branch": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+      "tree": "bb497eedca051300366d29548c12f0523a1bb92f",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "activationAttempted": true,
+      "refCreated": true,
+      "unattached": false,
+      "head": "b7a2cbb6abb460089b38fa31fa1d787dd8a68902",
+      "original3203Preserved": true,
+      "mounts": 34,
+      "leaves": 3237,
+      "fullTreeVerified": true,
+      "gate": "2e10790581652fb6b0f3940c98b476a5d0aa8d8d",
+      "activationUTC": "2026-11-17 13:45:19 UTC"
+    },
+    "rootGate": "2e10790581652fb6b0f3940c98b476a5d0aa8d8d",
+    "staticReview": "38e2d38b724f2e860c68920617bd9baf4b454560",
+    "nativeOutcome": "PENDING"
   },
   "own5DataPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68"
 }
