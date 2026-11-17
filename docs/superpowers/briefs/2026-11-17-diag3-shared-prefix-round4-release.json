@@ -1,0 +1,126 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-ROOT-SHARED-PREFIX-ROUND4-RELEASE/1",
+  "timestampUTC": "2026-11-17 04:05:53 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "allowedAction": "Authors may apply only the exported Source-prefix consistency predicate below to Source publication and independent OWN admission, with fixed literal controls. Native/ref/business/runtime remain held.",
+  "rounds": {
+    "Source": 4,
+    "Own": 4,
+    "maximumSameFamily": 5,
+    "noReset": true
+  },
+  "basis": {
+    "finding": "dce75c9706a9a19a01ea206f151b77b8aabb0e65",
+    "SourcePreimage": "7f7b1dd32b18805fd58d182ba996a03c5d47870c",
+    "SourcePreimage25": "452895beeedf528748e51ec2ea4ccb91d684552a",
+    "SourcePreimageTooling": "1bf532b9fa15db9c5c4a388c1786e7bda21d5d71",
+    "SourcePreimageStaticReview": "19486d4e2f957efb3acb82b3ec8406f946c642b6",
+    "OwnPreimageCode": "990861667a075f4934fcf9f0ff9b0fb77c38c2ad",
+    "OwnPreimage70RAM": "b6bbbf86b874ca3c734b88b22f6da16ef8f5ef70",
+    "Source149Fixture": "dfc37b27bad9189eb368f711727fc83f672d71af",
+    "Source149Oracle": "cef66140db83421b2cbd371a6e1b5e0a296a10ff",
+    "Own73IDs": "7f911c1060aaf193ccd0ac3bf62a024d3ab0b0d0",
+    "Own73Index": "7ddd5716920ef46ef93afbcab2e68bf62ee1e5e7",
+    "Own73Seal": "daa8f98024c58f650c8ffffbfb835abe42e4a8f5",
+    "OwnPreimageRED": "5d6112871c532d5d6f6b5a22148eb9b0fa2809d1"
+  },
+  "RootEvidence": {
+    "allNew9DataWholeHashes": true,
+    "SourcePrior146OraclesExact": true,
+    "OwnPrior70ArtifactRecordsAndIDPrefixExact": true,
+    "Own11ModulesWholeHashes": true,
+    "RootOwnRAM70": {
+      "evaluations": 70,
+      "admit": 32,
+      "reject": 38,
+      "hash": "9afcb5fec4cdc0191d86b5f1beb88c38a363f620db4cd50d311cc7a4fcda17d1",
+      "ACTUALRejectedAll26Models": true
+    },
+    "RootReproducedThreeFalseAdmissions": true,
+    "RootRED": [
+      {
+        "id": "FG3_S04",
+        "expectedAccepted": false,
+        "actualAccepted": true,
+        "input": "76511f7b2d23cf2fe810c8b338a921580d68a076d4d625884abb977d577200e8",
+        "strictZIPVerified": true
+      },
+      {
+        "id": "FG3_S05",
+        "expectedAccepted": false,
+        "actualAccepted": true,
+        "input": "02f0c6d51f466476dc4069f0a858758c23a571a494800da0ee2d02460974239e",
+        "strictZIPVerified": true
+      },
+      {
+        "id": "FG3_S06",
+        "expectedAccepted": false,
+        "actualAccepted": true,
+        "input": "3b483ea7d51df5e4fd06efd74add0f31011e7d46a5a9d181a3598b5c5e48e2c0",
+        "strictZIPVerified": true
+      }
+    ],
+    "noSourceExecution": true
+  },
+  "predicate": {
+    "samples": "SOURCE_UNJOINED asserts INVALID prefix at its checkpoint. JOINED_SNAPSHOT and MARKER_STREAM_INVALID/MARKER_UNAVAILABLE/SNAPSHOT_INVALID assert VALID prefix (source gate passed). Higher JOURNAL_UNRESOLVED/NATIVE_UNJOINED are NEUTRAL.",
+    "http": "KNOWN or UNKNOWN/ASSERTION_SCALARS_UNAVAILABLE asserts VALID prefix15. UNKNOWN/SOURCE_ROW_UNAVAILABLE asserts INVALID prefix15. Other states/reasons are NEUTRAL about Source rows.",
+    "merge": "Merge claims only at the same prefix: VALID vs INVALID rejects. VALID15 implies VALID14 and conflicts with INVALID14. INVALID15 does not imply INVALID14. A missing marker14 is compatible with VALID14 and a joined sample15. Neutral does not invent missing/present records.",
+    "privacy": "Only consistency of assertions already exported. No raw header, rows, counters, probe, clock, auth or stronger source truth is inferred; unknown values stay unknown."
+  },
+  "SourceScope": "Only add predicate to existing publisher after its current visible/marker checks; retain collector (including corrected format classification), C1, E3 source13, sites, selection/schema, D07/S07/tail/62a/662, SDK/QA/M/security, clocks/calls/caps/case order. Update exact adapter/protocol/runner pin/Source25 index/tooling/reversibles metadata only as required.",
+  "SourceControls": {
+    "nativeGroups": 9,
+    "innerChecks": 149,
+    "groupChecks": [
+      6,
+      24,
+      9,
+      4,
+      20,
+      6,
+      12,
+      35,
+      33
+    ],
+    "old146Unchanged": true,
+    "new3Expected": "PUBLICATION_INVALID; third also actual existing M_MISSING_MONITOR collect→publish succeeds, as sealed composite oracle.",
+    "preimageScope": "No local Source execution and no invented native RED. Keep all Source preimages immutable; candidate controls executed only in separately gated GHA."
+  },
+  "OwnScope": "Small independent predicate in finiteGet layer, no Source import/parser or new observable. Keep original D2 modules/44 and all prior26 D3 literal data/code protections. Corrected same guard is shared by separate ACTUAL and MODEL wrappers with caller-prebound constants, no fallback.",
+  "OwnControls": {
+    "nativeGroups": 8,
+    "evaluations": 73,
+    "admit": 32,
+    "reject": 41,
+    "previous70Unchanged": true,
+    "new3": [
+      "FG3_S04",
+      "FG3_S05",
+      "FG3_S06"
+    ],
+    "OwnOnlyRAMReleased": true
+  },
+  "actualBinding": "Current4161/93db R3 is frozen preimage. Final ACTUAL table must use explicit Root FULL Source25 R4 successor measurement when delivered; no silently using old/default table. Model data unchanged; expected outcomes are pre-sealed.",
+  "deliverables": "Whole hashes, before/after minimal reversible splices and complete exact import/mount graph, bounded proof schema; actual per-result digests from real variables compared to fixed expectations. Preserve clear distinction canonical receipt order vs physical native group order.",
+  "permissions": {
+    "SourceFixCodeReleased": true,
+    "OwnFixCodeReleased": true,
+    "SourceLocallyExecuted": false,
+    "NativeReleased": false,
+    "SourceBusinessReleased": false,
+    "CloudflareOAuthOTPTokenMailMaxRuntime": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
