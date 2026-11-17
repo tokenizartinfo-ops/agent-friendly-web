@@ -1,12 +1,19 @@
 {
-  "schema": 47,
-  "timestampUTC": "2026-11-17 15:04:57 UTC",
+  "schema": 48,
+  "timestampUTC": "2026-11-17 15:09:16 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "d59070c06105806e4f426c634700bf2ac0e2a67f",
-  "phase": "DROP_WINNER_OWN5_NATIVE_PASS_CLOSED_ACTUAL_REVIEW_ACTIVE",
-  "activeNativeRuns": [],
-  "allCurrentNativeOccurrencesClosed": true,
+  "previousCheckpoint": "5018387482b72960e2e507b7e503a096460076e6",
+  "phase": "DROP_WINNER_SOURCE5_FULL_ORDER20_BUSINESS_DIAGNOSTIC_ACTIVE",
+  "activeNativeRuns": [
+    {
+      "id": 44110921244,
+      "head": "2457ad4bd71aa1bd7703f56fba9284ddb85f05aa",
+      "attempt": 1,
+      "status": "in_progress"
+    }
+  ],
+  "allCurrentNativeOccurrencesClosed": false,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -134,7 +141,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Independent saved OWN5 native evidence + Source26 interface review. Then Root may admit Source5 exact preparedhead2457ad... one full-order20 diagnostic, captureonce/close/admit via qualifiedD4actualreader with independent API tuple; neverborrowMODEL asACTUAL. Allcurrentnativeoccurrencesclosed; no useraction yet.",
+  "next": "Observe this ONE Source5 full-order20 native diagnostic only. Terminal fullAPI/log+soleZIP once, preserve primary/close exactWF/protectedrefs. Admit actual captured data with qualifiedOWN5d4Read and independent RootAPI tuple (neverMODELfallback), then independent diagnostic/outcome review. 20-case results are not yet known; operationalReadinessfalse.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -287,7 +294,7 @@
     "staticSPEC": "PASS_STATIC",
     "staticQUALITY": "PASS_STATIC",
     "nativeReleased": true,
-    "businessReleased": false,
+    "businessReleased": true,
     "staticReview": "74c530b9f5d803f1ac293b76ca07655642d53e84",
     "toolingPrepared": {
       "branch": "lab/afw-c2-source-20261117-drop-winner-tools",
@@ -327,18 +334,21 @@
       "tree": "39ce40a45052f931068ef98e38da388018a8fbe6",
       "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
       "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
-      "activationAttempted": false,
-      "refCreated": false,
-      "unattached": true,
+      "activationAttempted": true,
+      "refCreated": true,
+      "unattached": false,
       "SourceRootMeasurement": "1fea33135f8943707738d4f078ff3616e9b5132c",
       "finalIndex": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
-      "businessReleased": false,
+      "businessReleased": true,
       "head": "2457ad4bd71aa1bd7703f56fba9284ddb85f05aa",
       "original3203Preserved": true,
       "mounts": 26,
       "leaves": 3229,
-      "fullTreeVerified": true
-    }
+      "fullTreeVerified": true,
+      "gate": "cd04d3d226deace907d7226e4a324ba2e918aef4",
+      "activationUTC": "2026-11-17 15:08:35 UTC"
+    },
+    "businessRootGate": "cd04d3d226deace907d7226e4a324ba2e918aef4"
   },
   "launchRepair": {
     "brief": "ff3f06c4f56b126c9d6a5680d881e724bc9535bc",
@@ -384,7 +394,7 @@
   },
   "own5DataPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
   "OWN5": {
-    "stage": "B_NATIVE_CONTROLS_PASS_CLOSED",
+    "stage": "B_NATIVE_TOOLING_ACCEPTED_CLOSED",
     "brief": "b11d18f929b413d098dc368692debf71a85660a3",
     "actor": "/root/drop_own5_fixture_stage_a",
     "publicBoundaryRuling": "f1716eba86aa6d64132d1c1d6e42ef0b7a4f77fa",
@@ -485,6 +495,7 @@
       "adapterUnits": 10,
       "old73Unchanged": true
     },
-    "actualSourceBusinessAdmitted": false
+    "actualSourceBusinessAdmitted": false,
+    "actualNativeReview": "6a76d5a3a18303e69cbdf08ad7d1eee328f17746"
   }
 }
