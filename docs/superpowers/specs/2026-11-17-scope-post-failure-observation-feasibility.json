@@ -1,0 +1,50 @@
+{
+  "schema": "AFW-CASE15-POST-FRONTIER-FEASIBILITY/1",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "status": "STATIC_FEASIBILITY_HOLD",
+  "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "source13": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+  "closedEvidence": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
+  "previousDiagnosis": "e5570431c54ef1556692fcdf1349c503ef983ecb",
+  "previousDesign": "e83b8f3f752d48e24ed344d03dd1219c41a255a6",
+  "existingData": "S08:111 obtains all storage rows after the finite GET. S08:113 calls noFurther; S08:30 calls count(f) after discard, and S08:22 has the entire post-denial snapshot BEFORE scopeState/restore. Today it retains only upload/activation/receipt counters. S09:153–157 already binds the private choice response to its captured request ID if firstState.trace exists. S09:379–385 instruments the QA catch with position and up to six stack frames, but that event contains no request ID. S09:405–424 correlator labels also lack invocation binding. firstConnectionProbe (S09:350–351) would be a new RPC/read here. S10:180,212–224 phase/provider response data identifies synthetic transport requests, not the upper denial guard. No discarded row, stack or scalar can be recovered from the closed digest.",
+  "alternatives": [
+    {
+      "option": "A — derive a persisted boundary from the two existing snapshots",
+      "seam": "At S08:22 use its existing optional observation argument only for the noFurther count belonging to the first drop of this form. Bind pre/post to this local noScope invocation (closure/object identity). Decode the known finite base for SHA256(form.handle) and check project/preconnection/revision against its canonical record. Compare corresponding post-only TicketUse, linked ConfigurationApproval and finite StageApproval. Validate each record and the complete predecessor chain against S01:244–259 and store 122bc0:66–92,123–142. Emit one finite milestone or UNKNOWN; never emit keys or hashes. No second snapshot or RPC. Compute after the original snapshot/counter operations, synchronously, with a bounded input and nonthrowing fallback. Close on the original count/finally.",
+      "defines": "Latest coherently linked record OBSERVED at that pre-restore read, for example TicketUse with no linked approval, or the finite StageApproval present. Missing/malformed predecessor, ambiguous linkage or overflow gives UNKNOWN. A reachable record proves persisted progress to at least its write; the following c.step recheck/readback can still fail (S01:153–159,176–178). An absent record proves only absence at the sampling instant. Late physical work and competing writers prevent attribution of a row to a particular response without extra evidence.",
+      "cost": "Smallest change: host-side S08 fixture/projection only; all business checks and existing calls retained. It changes a pinned fixture and requires explicit separate review. It locates an interval; it cannot identify the exact failed check."
+    },
+    {
+      "option": "B — classify the existing QA denial catch for one exact forwarded invocation",
+      "seam": "Optional diagnostic-only S09 transform at its existing handler catch, immediately before S00:808 folds the error into pending. Use only the already caught error/position and existing captured stack. Bind one drop slot in S09:175–185 to one exact forwarded original POST/private-choice Request at S09:152–157. The identical Request object is passed through the factory and S02:25. An invocation-local token/WeakMap ties that request to the catch; do not select the newest global observation or pair arrays by time. A stricter selector can join its private cookie digest to the sole finite ticket already read in S09:164 and S08:111; ambiguous, repeated or mismatched candidates poison the slot. Keep one terminal classification; seal at the existing c2ScopeState cut and revoke on c2ScopeRestore/finally. Late or missing catches, duplicate requests, unknown mapping or a consumed slot give UNKNOWN. No added RPC or snapshot; a fixed private-lab marker emitted at that cut avoids changing RPC arguments/results. Marker visibility, absence of perturbation of original control flow, and bounded extraction would need future proof.",
+      "defines": "Only allow a symbolic label when the caught winning error has an unambiguous, preverified throw+caller location in the exact built QA bytes. Generated locations change with builds: S10:129 uses esbuild metafile, not a source-map guarantee. An entry/approved string, a generic shared fail function, a timer/abort stack or a malformed/unmapped trace cannot be turned into an exact inner guard. No arbitrary stack/message, identifier, request data or record leaves the fixture. QA stage alone does not prove the public M denial used that QA result: the outer bridge races its own original deadline or can reject before forwarding (f2c473:6–44; 38285f:26–39); the receiver can also reject before S00 (S02:12–26). A QA catch identifies its own rejection site only. Exact public causality additionally requires proof the same response won the outer operation; absent such a join, report UNKNOWN for public causality.",
+      "cost": "Higher than A: a change in the isolated QA fixture bundle, identity/closure validation, exact version-specific map and parent/OWN confirmation. Before consuming a business occurrence, demonstrate from pinned generated bytes that concrete sites can be distinguished; if no reliable map exists the option is insufficient. No release implied."
+    }
+  ],
+  "decision": "Neither output chooses a repair on its own. A linked durable gap can restrict inspection to one storage interval. An exact QA refusal can select a specific candidate only when it identifies a reproducible defective input or implementation invariant, e.g. a concrete approval/readback mismatch independently reproduced with the same bindings. Then repair that proven fixture/store seam and retain the denial. A legitimate expiry or an unknown/pre-forward/timeout result warrants no relaxed guard or broader clock. Maintain HOLD while the cheaper static inspection remains possible. For exact public cause across both M and QA, the requested guarantee is infeasible from the surviving data and the single proposed QA cut.",
+  "capsCorrection": "Previous design dcfa64df wire accidentally counted the framing LF inside 24576 bytes. R4 0465cae:512–513 limits the JSON body to 24576 UTF8 bytes, then appends one LF (payload maximum 24577). Correction to apply only if a future design is released; retain existing caps. No previous blob modified.",
+  "authority": "Read-only static feasibility. Two alternatives, no new fixtures, code, execution or nomination. Source 4/5 and OWN 4/5.",
+  "evidencePins": {
+    "S08": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+    "S09": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+    "S10": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+    "S00": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+    "S01": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+    "S02": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+    "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "wire": "38285fa0149a38924c431b4d5a705bec1384216d",
+    "store": "122bc0e52870c71da7ae98ef73cd7762171d89ca"
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
