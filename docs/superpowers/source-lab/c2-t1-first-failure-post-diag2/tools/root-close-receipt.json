@@ -1,0 +1,31 @@
+{
+  "schema": "AFW-DIAG2-SOURCE35-CLOSED-RECEIPT/1",
+  "timestampUTC": "2026-11-17 01:18:53 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+  "closedOccurrence": {
+    "head": "802a0e3624c2cf0a5ff98f0bc1d7683c4ddb68df",
+    "tree": "77c51a1663a3afbc57fc61c7c315226699e9bb70",
+    "run": 43994157972,
+    "job": 133741931686,
+    "attempt": 1,
+    "nativeTests": 35,
+    "nativePass": 35,
+    "nativeFail": 0,
+    "checkpointGroups": 358
+  },
+  "primary": "97c742290e0ba58cab5c15be7e09208f3753bc90",
+  "proof": "0c2c1f3b34fe668a17250a509528d8b4578a4134",
+  "allowedClosure": "Deleteexactnominatedworkflowonlyandaddthisreceipt+primaryunderownedprefix. Preserveall3203originals+other12inputs, no remoteruntime changes.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
