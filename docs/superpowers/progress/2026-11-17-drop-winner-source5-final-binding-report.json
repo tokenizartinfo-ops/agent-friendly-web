@@ -1,0 +1,156 @@
+{
+  "schema": "AFW.DROP.SOURCE5.FINAL_BINDING_DELIVERY/1",
+  "status": "DETACHED_FINAL_BINDING_READY",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private immutable Git DATA",
+  "authority": "3f3e97ea92978fdf312821ff99b62ee2dea4d1a0",
+  "previousBusiness25": {
+    "bytes": 12468,
+    "sha256": "c8ab15d91307cfac9cefdbd40d7313a689ab4dfa73cf5387a20fef684a981384",
+    "blob": "fae315e9ceae442a658b361ba31f5adfa6d95d4d"
+  },
+  "business26": {
+    "bytes": 13613,
+    "sha256": "31c1d325c72c4253fdac1ca2680120d3590334244b78fbeff1fced8ef51f4041",
+    "blob": "fc11e972ceb33c8ce7cdace34aed482d71bb6224"
+  },
+  "diff": {
+    "bytes": 2417,
+    "sha256": "fd6b457aa79112e8f70eec0738fc55d7aef8faaf9b66a9d62a409dce0f531660",
+    "blob": "11e60999d4a466fefc39b78bb9039409f6655297"
+  },
+  "preservation": {
+    "bytes": 14272,
+    "sha256": "700e9f9691a02f3fdc9d7bb51d80a6c646a157761d9f20c69e237377c2ca064a",
+    "blob": "efae84637e2047d399d41fc320d013d17ae088fe"
+  },
+  "changed": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+      "before": {
+        "bytes": 17819,
+        "sha256": "4b04cc128f068589da63cd17bc0d1890368b0b2c5e13aa9c2e926b935f4f2c03",
+        "blob": "4dfc00e4d1a716f9bd5b7c423ac09b1b649fd1d9"
+      },
+      "after": {
+        "bytes": 18104,
+        "sha256": "5cd2da31b361d4498cd6085825ef7bdb31a53604a66106d0764ab71fd837a408",
+        "blob": "08c558f71c8b2552e16a08e10a767ebba67e6b9e"
+      },
+      "soleDelta": "Replace config.transportRelease null with the literal Root descriptor."
+    },
+    {
+      "path": ".github/workflows/afw-c2-drop-winner-diag4.yml",
+      "before": {
+        "bytes": 1547,
+        "sha256": "4cb2a8d5a182c65a564fa6ab4af4a8fc66d6ce3e9f73b5d767dde9a38bfd54b8",
+        "blob": "427397f50486553dce926f574ec1dd248c4c5d5f"
+      },
+      "after": {
+        "bytes": 1722,
+        "sha256": "a678ed156d70f07a197f8b788dddf1cd70b0821ee6a5e394fa1ac6e78a8b5052",
+        "blob": "5824c2e6cacba6a291b961938131051a885c4b9f"
+      },
+      "soleDelta": "Insert one Node --check of the nominated business runner after setup Node and before npm."
+    }
+  ],
+  "appended": {
+    "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/native-release.json",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "6be5c0b5b9bfd6a1b89ffb11cf32cba1f045712a",
+    "bytes": 355,
+    "sha256": "4820a930174dc9abe1c3705796ffdae806a58f72c04f103ecf519bd85da39806"
+  },
+  "source13": {
+    "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/source-index.json",
+    "mode": "100644",
+    "bytes": 11559,
+    "sha256": "1da326e60821aec91c7635a227b42f14b0710a3a2d5fb6f8764722fbbaa3d141",
+    "blob": "fc5b71098da76696278765f43805f0f2a1953b22"
+  },
+  "sourceDataPreserved": 13,
+  "untouchedOldMounts": 23,
+  "orderedOldPaths": 25,
+  "expectedBaseLeaves": 3203,
+  "proposedTotalLeaves": 3229,
+  "canonicalMountLeaves": {
+    "bytes": 6252,
+    "sha256": "47d154b05de3d62c8d2af6f49060a82da328e1d5105975be0a883a913f8ee280",
+    "rule": "UTF8(JSON.stringify(mountLeaves)), no LF"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261117-t1-drop-winner-diag4",
+    "message": "AFW-C2-T1-DROP-WINNER-DIAG4-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-drop-winner-diag4.yml",
+    "job": "c2-drop-winner-diag4",
+    "prefix": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/",
+    "runner": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+    "artifact": {
+      "name": "afw-c2-drop-winner-diag4",
+      "path": "output/c2-drop-winner-diag4.json",
+      "fileName": "c2-drop-winner-diag4.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Check the business controller syntax",
+      "Install only the existing locked dependencies",
+      "Observe first DROP in the full case order",
+      "Preserve the bounded first DROP diagnostic"
+    ],
+    "jobMinutes": 7,
+    "activationReleased": false
+  },
+  "acceptedNative": {
+    "review": {
+      "bytes": 7245,
+      "sha256": "4cdd8811c82741b22e80ad12dbb3276bff86c9ab077b267a47800e5529f08634",
+      "blob": "3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c"
+    },
+    "proof": {
+      "bytes": 904,
+      "sha256": "9211e55176f3bd31e72781c98c7cdea65c78738a9eb192adba0cb1d8585a64a5",
+      "blob": "33d612dc0c5614000f8b8f89ca953b9e5f487b9d"
+    },
+    "run": "44095907983/1",
+    "job": "134082838390",
+    "model": 63,
+    "differential": 14,
+    "wireAndCalibration": 16,
+    "distinctCompilerSites": 6,
+    "scope": "Closed positive QA→M→host application value routes and pinned native serialization. Copying already-valid fields remains indistinguishable. Current case attribution depends on the actual measured cut and mounted bindings."
+  },
+  "checks": [
+    "Read immutable authority, review, proof, previous index, receipt and both preimages as Git DATA. Recomputed input byte length/SHA256/Git blob ID.",
+    "Verified exactly one replacement of the null config literal and one inserted workflow stanza. Reversing both edits restores full original texts. Checked equal path/order for old 25, exact original descriptors for 23, and unique receipt at position 26.",
+    "Fully read back every new blob and compared exact content, UTF-8 size, SHA256 and Git SHA1. Preserved files continue to be bound by the prior full-read inventory."
+  ],
+  "pending": [
+    "Root independent final Source body/tree measurement and OWN5 gate.",
+    "Future gated GitHub syntax check and the twenty ordered business cases. The final nomination supersedes the previous protocol description of five steps only for the added syntax step."
+  ],
+  "refsMutated": false,
+  "businessExecuted": false,
+  "businessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "rounds": {
+    "Source": 5,
+    "OWN": 4,
+    "maxSameFamily": 5,
+    "noReset": true
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "AFW.DROP.S5.FINAL_BINDING.INDEPENDENT_STATIC_REVIEW/1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "detached immutable Git DATA",
+    "ORIGIN": "github.com",
+    "RESOURCE_TYPE": "JSON review",
+    "RESOURCE_ID": "final Source5 business26 evidence binding",
+    "ALLOWED_ACTION": "static text/JSON/hash comparison; create_blob/FULL readback",
+    "ROLLBACK": "discard detached proposal; no refs/runtime changed"
+  },
+  "inputs": {
+    "brief": "3f3e97ea92978fdf312821ff99b62ee2dea4d1a0",
+    "acceptedNativeRouteReview": "3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c",
+    "acceptedNativeProof": "33d612dc0c5614000f8b8f89ca953b9e5f487b9d",
+    "beforeBusiness25": "fae315e9ceae442a658b361ba31f5adfa6d95d4d",
+    "business26": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+    "report": "4b5fc878613a88461ea10d2aab4faf364cb00420",
+    "diff": "11e60999d4a466fefc39b78bb9039409f6655297",
+    "inventory": "efae84637e2047d399d41fc320d013d17ae088fe",
+    "runner": "08c558f71c8b2552e16a08e10a767ebba67e6b9e",
+    "workflow": "5824c2e6cacba6a291b961938131051a885c4b9f",
+    "rootReceipt": "6be5c0b5b9bfd6a1b89ffb11cf32cba1f045712a"
+  },
+  "SPEC": "PASS_STATIC",
+  "QUALITY": "PASS_STATIC",
+  "findings": [],
+  "checks": [
+    {
+      "result": "PASS",
+      "refs": "runner config.transportRelease; diff hunk1",
+      "evidence": "Complete new runner equals prior business runner with only transportRelease:null replaced by exact Root receipt descriptor. Every function/control/call/clock/pin outside that descriptor remains byte-exact. Existing pinned helper verifies receipt path/bytes/SHA256/GitSHA and exact8-key schema before supplying the two reviewed booleans."
+    },
+    {
+      "result": "PASS",
+      "refs": "receipt; accepted review results/routes/admission; native proof",
+      "evidence": "Canonical355B receipt has exactly schema/sourceIndex/fixture/toolHead/toolProof/independentReview/qaClosed/mClosed in expected order. Source13, oracle63, tool head b7a2cbb6abb460089b38fa31fa1d787dd8a68902, proof33d612dc and review3f93cbd6 match accepted review/proof. Both true booleans designate only reviewed exact application value-route premise, with actual mounted script/join/cut gates retained. Copied valid fields remain indistinguishable; no authentication/body/cross-isolate identity/physical-drain/business inference."
+    },
+    {
+      "result": "PASS",
+      "refs": "workflow; diff hunk2; nomination.requiredSteps",
+      "evidence": "Complete workflow equals prior workflow plus exactly one bash node --check of nominated business runner after setup-node/before deps. All branch/message/job/path values remain the planned business nomination; Node22.23.4,Ubuntu24.04,contents:read,attempt1,7min,action SHA pins,installation flags and artifact limits/7d exact. Final6-step nomination supersedes prior5-step description only for added syntax check; actual freshness remains Root verification."
+    },
+    {
+      "result": "PASS",
+      "refs": "business26.mountLeaves/canonicalMountLeaves; inventory",
+      "evidence": "Old23 mount descriptors remain exact; old25 paths/order preserved; only runner/workflow descriptors replaced; exact receipt appended at26. Source13/helpers/adapters/schema/protocol/selection/reader/driver/recorder/custody/proof schema unchanged. All caps/rounds/nonclaims remain exact;3203+26 proposed3229. Canonical26 inventory independently6252B SHA25647d154b05de3d62c8d2af6f49060a82da328e1d5105975be0a883a913f8ee280."
+    },
+    {
+      "result": "PASS",
+      "refs": "business26 metadata; report; diff3 hunks",
+      "evidence": "Index deltas confined to schema/status/count,required syntax step,two descriptors/receipt/canonical inventory and explicitly allowed binding/gate metadata. NativeGate records the already-closed tooling occurrence, no new release. Three unified hunks exact counts and match full old/new slices. Independent UTF8 byte/SHA256/GitSHA verification matches runner/workflow/receipt/index/diff/inventory/accepted review/report descriptors. Report FULL read6349B SHA256fab3fa9fa93ee5571fd4ecdd2448c190d077e402cd75bfc80eb0dc921c9c5c23."
+    }
+  ],
+  "boundary": "Narrow binding review only. Accepted native results and route premise are attributed to accepted independent review/proof; no historical rerun/refetch or broad Source rereview performed. No Source imports/eval/parser/syntax/build/tests/native/ref/Rootdocs mutations. Actual final Node --check/full20, exact staged tree/BASE preservation, nomination freshness, measured Source tuple/OWN5 and Root one-use release remain pending. Static acceptance grants no business execution authority.",
+  "rounds": {
+    "Source": 5,
+    "OWN": 4,
+    "maxSameFamily": 5,
+    "noReset": true
+  },
+  "businessExecuted": false,
+  "businessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
