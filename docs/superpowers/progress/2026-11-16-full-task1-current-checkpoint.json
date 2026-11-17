@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "e326d6d6278b84298e6c9acecff2592eed0af982",
-  "phase": "TASK2_PUBLIC_CONSUMER_IMPLEMENTATION_RUNNING",
+  "previousCheckpoint": "61aefaa5b58bdada8bdd7779d4b29293487e5385",
+  "phase": "TASK2_PUBLIC_CONSUMER_STATIC_REVIEW_READY",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -945,7 +945,7 @@
       }
     },
     "task2": {
-      "status": "PUBLIC_CONSUMER_IMPLEMENTATION_RUNNING",
+      "status": "PUBLIC_CONSUMER_CODE_MEASURED_STATIC_REVIEW_READY",
       "toolingActualAccepted": "08b75777bb39efaad0a439082cd430044c0b07d6",
       "currentReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
       "currentBinding": "4d54d57322ea67c3a29278f75288c7c9b686105b",
@@ -1007,11 +1007,31 @@
         "sourceOrOwnExecution": false
       },
       "rootFixtureDataMeasurement": "All 6 Brotli envelopes and 69 compact records match sealed bytes/Git/SHA256; original32 order and7/25 outcomes preserved; no reader executed",
-      "apertureClarification": "875675d93ba35f662d517061b533dce44d099dc5"
+      "apertureClarification": "875675d93ba35f662d517061b533dce44d099dc5",
+      "authorReport": "17b423f9114ff9cf9d5e735d0272ba99cb8e0760",
+      "graph": "7048d4135d3cfe5131a88c05ad2ddedc50ce6757",
+      "map": "b7632878fd48188a9bf94305f8e45a61bbdbd902",
+      "reversible": "679cf862b69decf114fa1f069b9ce0680e67b5da",
+      "RootMeasurement": "efe23d2bbc4031b872a481c7be0dbf60455b41ba",
+      "reviewPackage": "f176f959ed3024ecdf4750ce8612932ca0296a34",
+      "bodyCount": 38,
+      "bodyBytes": 644178,
+      "expectedCandidateLeaves": 3241,
+      "syntaxModules": 15,
+      "declaredMapDigest": "047667996fac62ad81cfd8d05fc089ceff44fa0e134f57ff3a48c6a1ecd33f70",
+      "mountDirectionsMatched": 76,
+      "reportConcernDisposition": {
+        "status": "OBSERVATION_FOR_FUTURE_ACTUAL_GATE; proceed to independent static review",
+        "reason": "No actual Source occurrence exists in the current family. Future capture step/artifact timing must be independently acquired and compared, never inferred from MODEL fixtures or promised in advance.",
+        "strictFutureAdmissionUnchanged": true,
+        "actualSourceIDsFabricated": false,
+        "concernText": "Actual GHA source artifact timing and exact capture step representation are unobserved for current family."
+      },
+      "fullRESTCapturePrecedent": "d2e0d5e901974c1064c74f0989d94fc9370f9334"
     }
   },
-  "schemaVersion": 94,
-  "updatedAtUTC": "2026-11-17 23:32:31 UTC",
+  "schemaVersion": 95,
+  "updatedAtUTC": "2026-11-17 23:48:14 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
