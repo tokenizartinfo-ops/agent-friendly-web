@@ -1,19 +1,12 @@
 {
-  "schema": 37,
-  "timestampUTC": "2026-11-17 13:35:28 UTC",
+  "schema": 38,
+  "timestampUTC": "2026-11-17 13:39:29 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "9992df3c796d41fcc2edd7a82d2221703a39e81e",
-  "phase": "DROP_WINNER_SOURCE5_NATIVE_TOOLING_ACTIVE",
-  "activeNativeRuns": [
-    {
-      "id": 44094213474,
-      "head": "435e0b1e90251288695cf71ba166baa45e041936",
-      "attempt": 1,
-      "status": "in_progress"
-    }
-  ],
-  "allCurrentNativeOccurrencesClosed": false,
+  "previousCheckpoint": "97edea79de53e7345df29e512bb72c041de715c6",
+  "phase": "DROP_WINNER_SOURCE5_TOOLING_STARTUP_FAILURE_CLOSED_LAUNCH_REPAIR_ACTIVE",
+  "activeNativeRuns": [],
+  "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -141,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Observe this one occurrence only, save exact terminal API/log/single ZIP once, classify TOOLING_ONLY or UNSUPPORTED/fault, close only workflow, independent saved-evidence review. No business run before native pass + final transport/OWN binding.",
+  "next": "Repair launch controller mechanically as ruled, unchanged Source5 bodies/helpers/fixtures. Independent static minimal diff, then one new launch-only native gate. No Source6/reset; no business until actual tooling qualification/transport+OWN binding. Actual case15 failure remains unresolved.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -310,8 +303,25 @@
       "leaves": 3237,
       "fullTreeVerified": true,
       "gate": "c7705ccbe14af47e01fe85274ed42b129aed46fa",
-      "activationUTC": "2026-11-17 13:35:12 UTC"
+      "activationUTC": "2026-11-17 13:35:12 UTC",
+      "run": 44094213474,
+      "closed": true,
+      "closedHead": "86594c358557023d41cb3cae5d000bca3c67296b",
+      "closedTree": "0dae7d52caf8f9828b8230c7eb51c200fc3dea18"
     },
-    "rootGate": "c7705ccbe14af47e01fe85274ed42b129aed46fa"
-  }
+    "rootGate": "c7705ccbe14af47e01fe85274ed42b129aed46fa",
+    "toolingOutcome": "MODULE_PARSE_FAILURE_BEFORE_CONTROLLER_ENTRY",
+    "primary": "00680c0a0c9595c34c5510f48d0cf591a1574dee",
+    "validation": "68669599e6f57052eebbaf936c86edcd63a26775",
+    "closure": "1a45c35d67c4cb741df47eaece25a14ee44b2d54",
+    "toolingQualified": false
+  },
+  "launchRepair": {
+    "brief": "ff3f06c4f56b126c9d6a5680d881e724bc9535bc",
+    "ruling": "f91f6c44911b96b2b9b63f2e216fdc5ab0481b92",
+    "actor": "/root/drop_tooling_launch_repair",
+    "scope": "duplicate local output-stat identifier + fresh one-use nomination + covering Node --check step only",
+    "nativeReleased": false
+  },
+  "own5DataPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68"
 }
