@@ -1,0 +1,81 @@
+{
+  "schema": "AFW.OWN5.STAGE_B.ROOT_NATIVE_VALIDATION/1",
+  "timestampUTC": "2026-11-17 15:01:59 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "run": 44109040240,
+  "attempt": 1,
+  "job": 134129278041,
+  "head": "724d6a2998320daf7f86a95fe12229fb21fdf621",
+  "tree": "b172c39ac7257d69bf578555b12360123449c843",
+  "checks": {
+    "run": true,
+    "commit": true,
+    "job": true,
+    "steps": true,
+    "artifact": true,
+    "canonical": true,
+    "proofKeys": true,
+    "proofConstants": true,
+    "proofOccurrence": true,
+    "codeHashes": true,
+    "fixtureCounts": true,
+    "groups": true,
+    "bodyAndResults": true,
+    "falseClaims": true
+  },
+  "zip": {
+    "archive": {
+      "bytes": 1404,
+      "sha256": "35daee58f68ba3910b497bc52a257a8decf4c4d5c6aedfde1fcdb0ce5c8181e8",
+      "blob": "f71f3751aa20be0cc43f084c0291022edb9687e5"
+    },
+    "payload": {
+      "bytes": 2254,
+      "sha256": "fa8bf74bb8c66e333153b3092dc63a22a36932563e1e35c267cb355e73d7cdbe",
+      "blob": "aeb81a1566cf69e337db0e2ed7d09013c82d53bb"
+    },
+    "crc32": "f20ed79a",
+    "compressedBytes": 1238,
+    "descriptorBytes": 16,
+    "flags": 8
+  },
+  "logMeasurement": {
+    "bytes": 18771,
+    "sha256": "2301db78a4eabe9ed8763b401428907b94961c982c003bb946826b81bb2be70b",
+    "blob": "5322a238186a4e6da7388de0653dee0fdafbb3d0"
+  },
+  "outcome": "MODEL_TOOLING_ONLY_CONTROLS_PASS",
+  "controls": {
+    "nativeGroups": 9,
+    "groupPass": 9,
+    "fixtureEvaluations": 142,
+    "matched": 142,
+    "admit": 58,
+    "reject": 84,
+    "originalAdmit": 32,
+    "originalReject": 41,
+    "appendAdmit": 26,
+    "appendReject": 43,
+    "separateUnitAssertions": 10,
+    "fail": 0,
+    "skipped": 0,
+    "todo": 0,
+    "cancelled": 0
+  },
+  "sourceBodyEdges": "47d154b05de3d62c8d2af6f49060a82da328e1d5105975be0a883a913f8ee280",
+  "boundary": "Pinned native controller attests all9groups/142fixture outcomes and10separate synthetic API units. Exactold73/new69expected hashes unchanged. No actualSourcebusiness, authorization, SourceQualified, PCoff or physicaldrain proof. Raw individual TAP is not exported if absent from saved log; rely only pinned measuredcontroller plus bounded receipt.",
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
