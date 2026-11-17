@@ -1,11 +1,21 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/18",
-  "timestampUTC": "2026-11-17 01:59:08 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/19",
+  "timestampUTC": "2026-11-17 02:11:29 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "phase": "DIAG2_OWN42_PASSED_CLOSED_FRESH_REVIEW_PENDING",
-  "activeNativeRuns": [],
-  "currentAllNativeOccurrencesClosed": true,
+  "phase": "DIAG2_FULL_ORDER20_SOURCE_CAPTURE_ACTIVE",
+  "activeNativeRuns": [
+    {
+      "run": 44000942332,
+      "job": 133764541578,
+      "head": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+      "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+      "phase": "FULL_ORDER20_SOURCE_DIAG2",
+      "logsConsumed": false,
+      "artifactDownloaded": false
+    }
+  ],
+  "currentAllNativeOccurrencesClosed": false,
   "green20": {
     "run": 43980317236,
     "primary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
@@ -116,7 +126,7 @@
     "SourceImplementationReleased": true,
     "OwnImplementationReleased": true,
     "NativeReleased": false,
-    "SourceBusinessReleased": false,
+    "SourceBusinessReleased": true,
     "reason": "Current admitted diagnostic omitted status scalar and Source C2SOURCE counters; prepare bounded extraction of already-emitted bytes, no newhooks/RPCs/RAW export.",
     "sourceDesign": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
     "ownDesignIndex": "61785e34b1e47a007ef8dfc604eb4b653eb56fb4",
@@ -238,10 +248,17 @@
       "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
       "index": "98d85420ec517978a18eab639b60c1dbb8353eee",
       "bodySeal": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8",
-      "refCreated": false,
-      "runCreated": false,
+      "refCreated": true,
+      "runCreated": true,
       "SourceBusinessExecuted": false,
-      "businessActivationReleased": false
+      "businessActivationReleased": true,
+      "SourceCaptureActivated": true,
+      "actualPending": true,
+      "gate": "aecf3f3f00d30f0d37d47da7e8a752dfd6bbe987",
+      "activatedAt": "2026-11-17 02:09:52 UTC",
+      "run": 44000942332,
+      "job": 133764541578,
+      "SourceParentStarted": true
     },
     "Source35FreshReview": "82294234ee0345d63c85d7518ae96d3857e6c649",
     "Source35AcceptedToolingOnly": true,
@@ -276,9 +293,11 @@
       "proof": "56c682180663231356b9523d7d30e03a1fe1c564",
       "closeReadback": "bce8e38235618e56d6fd0a7e597c782c5339ad70"
     },
-    "Own42FreshReviewPending": true
+    "Own42FreshReviewPending": false,
+    "Own42FreshReview": "247fb10edd01a5449333f15ca68a8064742202f3",
+    "SourceCaptureGate": "aecf3f3f00d30f0d37d47da7e8a752dfd6bbe987"
   },
-  "next": "FreshOWN42finalreviewactualPrimary18b9/closurebce8pending c230. Rootfinal70afterimages/reversibleshashverification active. Source35alreadyaccepted. SourceDIAG2prepared32fe.../2576... stillDETACHEDnoREF; nextonefullorder20captureandactuald2Readadmissionafterreview. NormalFullTask1successorPLANa4ceonlyhelduntilDIAG2result. Noowneractionbefore17nov11UTC.",
+  "next": "ObservecurrentSourceDIAG2runonly; noreplay. Onterminalfetchlog/artifactonce, actuald2ReadadmitRootcurrentSource25+actualcontext, close/readback/freshresultreview. NormalFullTask1planheldforactualresult. No manualrequests before17nov11UTC.",
   "preservation": "Original3203/main/history/26b/c230/DIAG1/old419 unchanged. Source locally neverexecuted; allnativeheavyworkGHA. No Cloudflare/OAuth/OTP/tokens/mail/Max/runtimeaction.",
   "SourceQualified": false,
   "Task1Pass": false,
