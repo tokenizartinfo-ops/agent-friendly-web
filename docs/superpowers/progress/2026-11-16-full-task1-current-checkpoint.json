@@ -1,19 +1,12 @@
 {
-  "schema": 48,
-  "timestampUTC": "2026-11-17 15:09:16 UTC",
+  "schema": 49,
+  "timestampUTC": "2026-11-17 15:20:13 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "5018387482b72960e2e507b7e503a096460076e6",
-  "phase": "DROP_WINNER_SOURCE5_FULL_ORDER20_BUSINESS_DIAGNOSTIC_ACTIVE",
-  "activeNativeRuns": [
-    {
-      "id": 44110921244,
-      "head": "2457ad4bd71aa1bd7703f56fba9284ddb85f05aa",
-      "attempt": 1,
-      "status": "in_progress"
-    }
-  ],
-  "allCurrentNativeOccurrencesClosed": false,
+  "previousCheckpoint": "ddad17eb7da694e4ff8db6d5840fff7ff087b260",
+  "phase": "DROP_WINNER_SOURCE5_ACTUAL_GET503_CAPTURE_ADMITTED_CLOSED_REVIEW_TRIAGE_ACTIVE",
+  "activeNativeRuns": [],
+  "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -141,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Observe this ONE Source5 full-order20 native diagnostic only. Terminal fullAPI/log+soleZIP once, preserve primary/close exactWF/protectedrefs. Admit actual captured data with qualifiedOWN5d4Read and independent RootAPI tuple (neverMODELfallback), then independent diagnostic/outcome review. 20-case results are not yet known; operationalReadinessfalse.",
+  "next": "Independent actual Source5/OWN5 evidence + whole diagnostic interface review and bounded DATA-only GET path triage. Source/Ownsamefamilymax5 bothspent, no reset/no blind rerun. Preserve actualCauseUNKNOWN: current knownGET503 precedes the targetedPOST,14pass3fail/18open. Next dependent task only after Root smallest load-bearing ruling/evidence contract; no Sourcecode/auth/CF runtime change currently authorized bynewhypothesis. OperationalReadiness/Task1false; no useraction now.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -346,9 +339,37 @@
       "leaves": 3229,
       "fullTreeVerified": true,
       "gate": "cd04d3d226deace907d7226e4a324ba2e918aef4",
-      "activationUTC": "2026-11-17 15:08:35 UTC"
+      "activationUTC": "2026-11-17 15:08:35 UTC",
+      "run": 44110921244,
+      "closed": true,
+      "closedHead": "ed9538c6b186a901f1c8ffdc3b93d9f8f18f1399",
+      "closedTree": "daf9d52f2dfde6eb0d5b331ef41e6f44bc4a6c14"
     },
-    "businessRootGate": "cd04d3d226deace907d7226e4a324ba2e918aef4"
+    "businessRootGate": "cd04d3d226deace907d7226e4a324ba2e918aef4",
+    "businessPrimary": "7d8f310d69e718727ce2cb392e565dea90205693",
+    "businessOutcome": "f4daf53fee3e78ba2cad36c6b525559d9fd47d67",
+    "businessOwnAdmission": "88edaaa27b4bd5eda5cf9664266422f6b3d5029e",
+    "businessValidation": "a889df71ff176ea52d5a5e437e2692c05b3ddc1b",
+    "businessClosure": "3ffbd94439539328587de363f8ca6444b4ee7cd5",
+    "businessResult": "INCOMPLETE; GET503 BEFORE FIRST DROP POST",
+    "businessRootActualAdmitted": true,
+    "actualReviewAndTriage": "/root/drop_winner_native_transport_review RUNNING",
+    "observed": {
+      "nativeRows": 17,
+      "pass": 14,
+      "fail": 3,
+      "journalRows": 69,
+      "openCase": "C2T1_LOST_ACK_DUPLICATE",
+      "GET503vs200": true,
+      "firstThrowSequence": 58,
+      "dropWinner": "ALL_UNKNOWN_FIRST_POST_NOT_REACHED",
+      "later19and20": "UNOBSERVED"
+    },
+    "artifactRecovery": {
+      "requests": 2,
+      "successfulArchives": 1,
+      "ruling": "ef700c72f91122d89d60f6e803efd92c2a1efc1a"
+    }
   },
   "launchRepair": {
     "brief": "ff3f06c4f56b126c9d6a5680d881e724bc9535bc",
