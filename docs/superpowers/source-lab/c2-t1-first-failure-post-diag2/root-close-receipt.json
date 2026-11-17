@@ -1,0 +1,53 @@
+{
+  "schema": "AFW-DIAG2-FULL20-SOURCE-CLOSE-RECEIPT/1",
+  "timestampUTC": "2026-11-17 02:22:27 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+  "head": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+  "tree": "25765b8c85c7657e7d8084647198064b4f597965",
+  "run": 44000942332,
+  "job": 133764541578,
+  "attempt": 1,
+  "primary": "16f788a652c644763d74ffa0e955375786064c2d",
+  "outcome": "f7306430e390cf69787347daa1b8b396b543dbc5",
+  "actualOwnAdmission": "6d2f2e1a54507f70e2f553512dc35472e529e96e",
+  "diagnosticAdmitted": true,
+  "qualificationIncomplete": true,
+  "native17": {
+    "pass": 14,
+    "fail": 3
+  },
+  "first14Pass": true,
+  "firstThrow": {
+    "sequence": 58,
+    "elapsedMs": 133639,
+    "id": "C2T1_SCOPE_MISSING",
+    "operation": "action",
+    "edge": "throw",
+    "error": {
+      "name": "AssertionError",
+      "code": "ERR_ASSERTION",
+      "site": {
+        "file": "S08",
+        "line": 18,
+        "column": 118
+      }
+    }
+  },
+  "openCase": {
+    "id": "C2T1_LOST_ACK_DUPLICATE",
+    "operation": "action"
+  },
+  "closure": "DeleteonlynominatedWF; preservePrimary+thisreceiptunderownedprefix; maintain3203originals+24otherinputs; no rerun or normalfullqualification.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
