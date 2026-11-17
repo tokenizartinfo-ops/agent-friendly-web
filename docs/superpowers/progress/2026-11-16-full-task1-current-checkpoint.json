@@ -1,12 +1,19 @@
 {
-  "schema": 45,
-  "timestampUTC": "2026-11-17 14:54:50 UTC",
+  "schema": 46,
+  "timestampUTC": "2026-11-17 14:58:57 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "b888949cf8a17c5c48e93d4e8beed5c5fb213578",
-  "phase": "DROP_WINNER_OWN5_STAGE_B_CODE_COMPLETE_STATIC_REVIEW_ACTIVE",
-  "activeNativeRuns": [],
-  "allCurrentNativeOccurrencesClosed": true,
+  "previousCheckpoint": "49e69bd309c4962f3ed8792504adfa823a44e5f1",
+  "phase": "DROP_WINNER_OWN5_NATIVE_COVERING_CONTROLS_ACTIVE",
+  "activeNativeRuns": [
+    {
+      "id": 44109040240,
+      "head": "724d6a2998320daf7f86a95fe12229fb21fdf621",
+      "attempt": 1,
+      "status": "in_progress"
+    }
+  ],
+  "allCurrentNativeOccurrencesClosed": false,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -134,7 +141,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finalize scoped independent static SPEC/QUALITY then Root one-use native OWN5 controls (9groups/142fixtures/10units), capture/save/close/review. No local OWN/Source execution; no Source business ref yet. Original StageA closed, Source5/OwN5max5nobudgetreset.",
+  "next": "Observe this exact one-use OWN5 native covering occurrence. Need all9groups/142fixture outcomes/original73hash/new69hash/10adapterunits with exact proof/API/log/ZIP. Saveonce/close/review; only then admit actualSource5 one-use full-order20 diagnostic. No Source/real runtime activation yet.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -384,13 +391,13 @@
   },
   "own5DataPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
   "OWN5": {
-    "stage": "B_CODE_COMPLETE_STATIC_REVIEW",
+    "stage": "B_NATIVE_COVERING_ACTIVE",
     "brief": "b11d18f929b413d098dc368692debf71a85660a3",
     "actor": "/root/drop_own5_fixture_stage_a",
     "publicBoundaryRuling": "f1716eba86aa6d64132d1c1d6e42ef0b7a4f77fa",
     "planV2": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
     "guardCodeReleased": true,
-    "nativeReleased": false,
+    "nativeReleased": true,
     "actualFinalSourceBinding": "1fea33135f8943707738d4f078ff3616e9b5132c",
     "original73PreservedRequired": true,
     "original95PreservedRequired": true,
@@ -404,14 +411,16 @@
       "tree": "b172c39ac7257d69bf578555b12360123449c843",
       "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
       "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
-      "activationAttempted": false,
-      "refCreated": false,
-      "unattached": true,
+      "activationAttempted": true,
+      "refCreated": true,
+      "unattached": false,
       "head": "724d6a2998320daf7f86a95fe12229fb21fdf621",
       "original3203Preserved": true,
       "mounts": 173,
       "leaves": 3376,
-      "fullTreeVerified": true
+      "fullTreeVerified": true,
+      "gate": "bcb9a881c96a9c67259142335effcd30fa8dd3e0",
+      "activationUTC": "2026-11-17 14:58:40 UTC"
     },
     "root13FullHashesMatched": true,
     "appendCount": 69,
@@ -420,8 +429,8 @@
     "matrixExecuted": false,
     "redDesignRuling": "1291992edd15c61d8f8c59ae0a93d9a60345aaad",
     "independentStaticReviewer": "/root/c2_v2_own_receiver_fix1 RUNNING",
-    "staticReview": "4e3b80d97fce9a54383b5e9d69cbaf61ba1dd476",
-    "rootGate": "0fb65a9269b9f882bb1cb963c900e3dc2dd09079",
+    "staticReview": "f9896e64ac34ad52cd83ac231a200e9ba16d1587",
+    "rootGate": "bcb9a881c96a9c67259142335effcd30fa8dd3e0",
     "preparedStageA": {
       "branch": "lab/afw-c2-own-20261117-drop-winner-fixtures",
       "tree": "b93e3075b6d7cf1cfae14e1261813b17fe96b644",
@@ -459,6 +468,11 @@
     "nativeIndex": "59083d99813f3490e249d59d5e91190ea1fa2780",
     "graph": "d1d28d86c2e9908ed2c3f3ee8243f61883814666",
     "diff": "4bb41bcd7e1b4d5e471329753a0ae4e4ff76e1a0",
-    "staticReviewer": "/root/c2_v2_own_receiver_fix1 RUNNING"
+    "staticReviewer": "/root/c2_v2_own_receiver_fix1 RUNNING",
+    "expected": {
+      "groups": 9,
+      "fixtures": 142,
+      "adapterUnits": 10
+    }
   }
 }
