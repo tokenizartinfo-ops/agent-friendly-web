@@ -1,0 +1,325 @@
+{
+  "schema": "AFW.OWN5.STAGE_A.ROOT_ONE_USE_GATE/1",
+  "timestampUTC": "2026-11-17 14:30:57 UTC",
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "keyless GitHub hosted Node22.23.4 MODEL-only old receiver test",
+  "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "RESOURCE_TYPE": "one fresh native fixture workflow ref",
+  "RESOURCE_ID": "lab/afw-c2-own-20261117-drop-winner-fixtures",
+  "ALLOWED_ACTION": "Create exact absent ref once at pinned head; observe attempt1 expected named RED assertion with preceding valid oldD3 MODEL baseline; acquire one terminal log+sole ZIP once, preserve and close only nominated workflow. No guard implementation or Source/business/production actions.",
+  "ROLLBACK": "CAS exact attemptedhead; remove only nominated workflow; retain12 mounted old/data/test files, all3203 originals and two Root evidence files; verify fulltree/ref/14protected/0closeheadruns; never reopen/rerun.",
+  "proposal": "55d80f85696757125eab2074f8921f893877eb0b",
+  "authorIndex": "6729841042a32990606af9c6641fb9f1bebfbd57",
+  "report": "e71c41472362ed4cb97b0bfaa41ab9577cb5e835",
+  "staticReview": "4e3b80d97fce9a54383b5e9d69cbaf61ba1dd476",
+  "rootDataMeasurement": "fb4bb5344af62d9ccb604a40001024de3ed3ea47",
+  "designRuling": "1291992edd15c61d8f8c59ae0a93d9a60345aaad",
+  "head": "317b4e1f547b23ad1bcb4170a5e4f28a865deafe",
+  "tree": "b93e3075b6d7cf1cfae14e1261813b17fe96b644",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "mounts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+      "bytes": 5365,
+      "sha256": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1",
+      "bytes": 9733,
+      "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bindings.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "aaee696f0c05cda224d7f20fa7a364c445b0741c",
+      "bytes": 64627,
+      "sha256": "05c48c3204c148f1dae31723e3f71561b9e5df31c22280e6da30743500b92e8f"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854",
+      "bytes": 35339,
+      "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+      "bytes": 2440,
+      "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+      "bytes": 4511,
+      "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+      "bytes": 3355,
+      "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/reader.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ddaa91771171abf0dba6110184b06e631849c2ec",
+      "bytes": 4080,
+      "sha256": "eeb28b5daa384c3b04331d5a982e8950669672483349154474c32d74cd500e4c"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/d3-component-required.test.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5ba4d036aa70c5ba7cff4de880a4f57a87b85582",
+      "bytes": 4264,
+      "sha256": "d997831fe6721d9ed9569adb45b7ccc0574d9bcafb4c62a4876c53e5088d77b6"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/run-own-drop-fixtures.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "937769a594716af7279342884fe23c426436e96b",
+      "bytes": 2780,
+      "sha256": "5231d6004c90cfe62ed5baf2be1ada24e36ae6b56811e8373e3e5c136d54cc5b"
+    },
+    {
+      "path": ".github/workflows/afw-c2-own-drop-winner-fixtures.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d55ebd4039848025414052f5540eeba125befbcd",
+      "bytes": 2337,
+      "sha256": "8ce3aa50077518e8c46e65b6b48ae5e7acb7932860be66635eacb835b00cf0b6"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/d3-control.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0565ff565eea44fd2aadff41189e5fb750742fa3",
+      "bytes": 56180,
+      "sha256": "32e72a9652ad777b3d9dfacdb7b66421f45b2b1e59a073b39dcb848e127e525e"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/d3-twin.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d9b717879d508a53caf522d8d2f1b1c7e1a7d4ee",
+      "bytes": 56582,
+      "sha256": "8c66d4a534c5b74206c70f60345890328cf7d49cb4efb8657c005954dd29e19f"
+    }
+  ],
+  "original3203Preserved": true,
+  "totalLeaves": 3216,
+  "nomination": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "originalLeaves": 3203,
+    "branch": "lab/afw-c2-own-20261117-drop-winner-fixtures",
+    "message": "AFW-C2-OWN-DROP-WINNER-FIXTURES-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-drop-winner-fixtures.yml",
+    "job": "own-drop-winner-fixtures",
+    "steps": [
+      "Read the exact one-use receiver head",
+      "Use the fixed Node runtime",
+      "Check receiver test and controller syntax",
+      "Observe the declared receiver assertion",
+      "Preserve the bounded receiver assertion receipt"
+    ],
+    "prefix": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/",
+    "runner": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/run-own-drop-fixtures.mjs",
+    "test": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/d3-component-required.test.mjs",
+    "node": "22.23.4",
+    "image": "ubuntu-24.04",
+    "permissions": {
+      "contents": "read"
+    },
+    "event": "push",
+    "attempt": 1,
+    "jobMinutes": 3,
+    "totalMs": 120000,
+    "stdoutCap": 65536,
+    "stderrCap": 65536,
+    "artifact": {
+      "name": "afw-c2-own-drop-winner-fixtures",
+      "path": "output/own-drop-winner-fixtures.json",
+      "fileName": "own-drop-winner-fixtures.json",
+      "retentionDays": 7,
+      "bytesIncludingLF": 2048
+    }
+  },
+  "expected": "Jobfailure ONLY named test step exit1, preceding syntax/admission success, sole exact named assertion + baselineADMIT/twinsemanticchecks, uploader success. Foreign error/cancel/timeout/green/extra/missing artifact is not RED.",
+  "artifact": {
+    "name": "afw-c2-own-drop-winner-fixtures",
+    "path": "output/own-drop-winner-fixtures.json",
+    "fileName": "own-drop-winner-fixtures.json",
+    "retentionDays": 7,
+    "bytesIncludingLF": 2048,
+    "soleMember": "own-drop-winner-fixtures.json",
+    "rawCapIncludingLF": 2048,
+    "zipCap": 1048576
+  },
+  "expectedProof": {
+    "schema": "AFW.OWN5.STAGE_A.RED/1",
+    "observedAssertionError": "AFW_OWN_D4_RECEIPT_COMPONENT_REQUIRED",
+    "errorCode": "ERR_ASSERTION",
+    "baseline": {
+      "reader": "ddaa91771171abf0dba6110184b06e631849c2ec",
+      "entry": "d3ModelRead",
+      "admitted": true,
+      "bindingKind": "MODELED_ONLY",
+      "matchedBodyEdges": 25,
+      "witnessEvents": 57,
+      "nativeRows": 14
+    },
+    "twin": {
+      "onlySemanticAddition": "observation.dropWinner",
+      "oldError": "G20_OWN_UNQUALIFIED"
+    },
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "head": "317b4e1f547b23ad1bcb4170a5e4f28a865deafe",
+    "runId": "<independently observed run ID positive decimal string>",
+    "attempt": 1,
+    "job": "own-drop-winner-fixtures",
+    "scope": "SYNTHETIC_MODEL_ONLY",
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nativeQualification": false,
+    "finalSourceBinding": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  },
+  "preflight": {
+    "time": "2026-11-17 14:26:46 UTC",
+    "branchAbsent": true,
+    "headPriorRuns": 0,
+    "protectedRefs": [
+      {
+        "name": "main",
+        "branch": "main",
+        "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+      },
+      {
+        "name": "source",
+        "branch": "feat/finite-native-cleanup-20261101",
+        "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+      },
+      {
+        "name": "own42",
+        "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+        "sha": "c511b6f061fb4eb0c5594779d3123e824f34f243"
+      },
+      {
+        "name": "source35",
+        "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+        "sha": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+      },
+      {
+        "name": "diag1",
+        "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+        "sha": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
+      },
+      {
+        "name": "host",
+        "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+        "sha": "1f62e087f0d9000f9c08519cd162db1104827af8"
+      },
+      {
+        "name": "toy",
+        "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+        "sha": "5f5295265217b31a19fbed2379f697c5a6a83080"
+      },
+      {
+        "name": "diag2",
+        "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+        "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01"
+      },
+      {
+        "name": "source149",
+        "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+        "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0"
+      },
+      {
+        "name": "own73",
+        "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+        "sha": "067a012121a58f7c2baf938228765242c433a1d5"
+      },
+      {
+        "name": "diag3Business",
+        "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+        "sha": "08061db79cd0f38f25df8977e1ded8e17542e684"
+      },
+      {
+        "name": "fixture59",
+        "branch": "lab/afw-c2-source-20261117-drop-winner-fixtures",
+        "sha": "4dec9811009052b4088068a06ece37a7af70b4cf"
+      },
+      {
+        "name": "source5ToolFailedClosed",
+        "branch": "lab/afw-c2-source-20261117-drop-winner-tools",
+        "sha": "86594c358557023d41cb3cae5d000bca3c67296b"
+      },
+      {
+        "name": "launchPassedClosed",
+        "branch": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+        "sha": "442174a54aa7b8eaad71fb978ac2022df961d26b"
+      }
+    ],
+    "triggerAudit": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "original62WorkflowsUnchanged": true,
+    "closedOriginThreePathsUnchanged": true
+  },
+  "authority": {
+    "ownerRequest": "que falta para hacer la prueba con mi PC apagada y continua con todo",
+    "autonomousAfwAuthorization": true,
+    "StageATestOnly": true,
+    "guardCodeReleased": false
+  },
+  "budget": {
+    "Source": 5,
+    "OWN": 4,
+    "max": 5,
+    "noReset": true
+  },
+  "matrix69": {
+    "sealed": true,
+    "executed": false,
+    "mounted": false,
+    "stageBCoverageReviewPending": true
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

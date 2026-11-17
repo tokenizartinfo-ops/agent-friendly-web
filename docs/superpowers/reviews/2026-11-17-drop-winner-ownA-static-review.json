@@ -1,0 +1,447 @@
+{
+  "schema": "AFW.OWN5.STAGE_A.INDEPENDENT_STATIC_REVIEW/1",
+  "timestampUTC": "2026-11-17 14:28:42 UTC",
+  "reviewer": "/root/c2_v2_own_receiver_fix1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": "Stage A focused original-D3 control/twin native RED packet plus sealed Stage B matrix metadata. Detached immutable review only.",
+  "verdict": {
+    "SPEC": "PASS_STATIC",
+    "QUALITY": "PASS_STATIC",
+    "findings": [],
+    "nativeAuthority": false,
+    "StageBReleased": false
+  },
+  "requirements": {
+    "brief": "b11d18f929b413d098dc368692debf71a85660a3",
+    "redRuling": "1291992edd15c61d8f8c59ae0a93d9a60345aaad",
+    "publicBoundary": "f1716eba86aa6d64132d1c1d6e42ef0b7a4f77fa"
+  },
+  "reviewed": {
+    "documents": [
+      {
+        "name": "brief",
+        "blob": "b11d18f929b413d098dc368692debf71a85660a3",
+        "bytes": 6529,
+        "sha256": "fa421930d6dcaf8386d24d7f0b93368d1b0ccc89fdfc97d92c5fa59f9e56fb64"
+      },
+      {
+        "name": "redRuling",
+        "blob": "1291992edd15c61d8f8c59ae0a93d9a60345aaad",
+        "bytes": 1736,
+        "sha256": "817609ea57cd377b88bab367ab6890c2da7ab2fbb4ff05083cb6d857757ca053"
+      },
+      {
+        "name": "boundary",
+        "blob": "f1716eba86aa6d64132d1c1d6e42ef0b7a4f77fa",
+        "bytes": 1677,
+        "sha256": "d4bacfef9b88e1a29552bab0dc4fad8ca3b838c23b45377f9878fa063e57356d"
+      },
+      {
+        "name": "index",
+        "blob": "55d80f85696757125eab2074f8921f893877eb0b",
+        "bytes": 7406,
+        "sha256": "f317f750a896183caece37471abb84a5795456a2b22b6ebb02cb8af94515e685"
+      },
+      {
+        "name": "expectationSeal",
+        "blob": "a1291b71dd21b263d280f6feae8efc8d3fce0c24",
+        "bytes": 30212,
+        "sha256": "74c26493ec61dc8e442139ea412e5a629617e3b4dcdb6a235e6ab6938c9d331c"
+      },
+      {
+        "name": "fullSeal",
+        "blob": "bfff4346bdbe21bbd431df80a07d234828a89d97",
+        "bytes": 16153,
+        "sha256": "b06de3862ea2fcb5464386db0b627b963d37ed2917afe8de3be1b9e1df37b712"
+      },
+      {
+        "name": "baseline",
+        "blob": "0565ff565eea44fd2aadff41189e5fb750742fa3",
+        "bytes": 56180,
+        "sha256": "32e72a9652ad777b3d9dfacdb7b66421f45b2b1e59a073b39dcb848e127e525e"
+      },
+      {
+        "name": "twin",
+        "blob": "d9b717879d508a53caf522d8d2f1b1c7e1a7d4ee",
+        "bytes": 56582,
+        "sha256": "8c66d4a534c5b74206c70f60345890328cf7d49cb4efb8657c005954dd29e19f"
+      },
+      {
+        "name": "test",
+        "blob": "5ba4d036aa70c5ba7cff4de880a4f57a87b85582",
+        "bytes": 4264,
+        "sha256": "d997831fe6721d9ed9569adb45b7ccc0574d9bcafb4c62a4876c53e5088d77b6"
+      },
+      {
+        "name": "runner",
+        "blob": "937769a594716af7279342884fe23c426436e96b",
+        "bytes": 2780,
+        "sha256": "5231d6004c90cfe62ed5baf2be1ada24e36ae6b56811e8373e3e5c136d54cc5b"
+      },
+      {
+        "name": "workflow",
+        "blob": "d55ebd4039848025414052f5540eeba125befbcd",
+        "bytes": 2337,
+        "sha256": "8ce3aa50077518e8c46e65b6b48ae5e7acb7932860be66635eacb835b00cf0b6"
+      },
+      {
+        "name": "plan",
+        "blob": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
+        "bytes": 6881,
+        "sha256": "4d13c32e798288b9d80f39bba5267bd9c8cddd01e5e112d6367bce4085837ad8"
+      },
+      {
+        "name": "report",
+        "blob": "e71c41472362ed4cb97b0bfaa41ab9577cb5e835",
+        "bytes": 5085,
+        "sha256": "7460311e37832b274b6038f352c00cbc80796943da3044fd313318ab78cd3057"
+      },
+      {
+        "name": "fullIndex",
+        "blob": "6729841042a32990606af9c6641fb9f1bebfbd57",
+        "bytes": 21254,
+        "sha256": "01e0a28ebb6947a5450aa843b4ac227329103e0f672dfb7749664f625a9455ca"
+      },
+      {
+        "name": "preservation",
+        "blob": "eccc1cf19a39a1166fc163ee906a46ee627d797d",
+        "bytes": 35608,
+        "sha256": "80ed78931a28ad163a59630f16b61f2d09d150fd09d44629135b3fea46ed710e"
+      },
+      {
+        "name": "diffIndex",
+        "blob": "3830d3be889ca134a430a7b321f05c70889b01ff",
+        "bytes": 6115,
+        "sha256": "cd30cffedc0592b51c7ea8fe9f73397d42b10e83d042214cf57847edbb0a883d"
+      },
+      {
+        "name": "model",
+        "blob": "53bfd6716ecb04153158e6653700648140528d27",
+        "bytes": 13909,
+        "sha256": "8c65a21b836eb192bc1a6a954f5d625e55231fc2dad86229287b4ba9b831c25d"
+      },
+      {
+        "name": "protocol",
+        "blob": "6349fd2706b084e3c56309d6aac00a469310e73a",
+        "bytes": 59226,
+        "sha256": "1d2da1a8e853055f22cedbebb4dd813228f7641396409170c586805b6f2a9587"
+      },
+      {
+        "name": "diff1",
+        "blob": "badef81683a262d8a0b787139f8cb56268906943",
+        "bytes": 175229,
+        "sha256": "2cb0c6cfa507b51a6eb1998c872d0561a7e9bc14fbcbf84834367c19290a6a30"
+      },
+      {
+        "name": "diff23",
+        "blob": "664e8a82e954dac196a2c0333b420fac5db4ea99",
+        "bytes": 210531,
+        "sha256": "f159a2d13b81b2991f0ae99942f5136ab497787eee45b4afadc0b2e9cbd68543"
+      },
+      {
+        "name": "diff24",
+        "blob": "1c13ec68980641023b0775879bec98610479e3f3",
+        "bytes": 87975,
+        "sha256": "524714971dd3a3407400c4fa30cac928a5688aba5280009c303b96d2069b5a7a"
+      }
+    ],
+    "nativeMounts": [
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+        "blob": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+        "bytes": 5365,
+        "sha256": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs",
+        "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1",
+        "bytes": 9733,
+        "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bindings.mjs",
+        "blob": "aaee696f0c05cda224d7f20fa7a364c445b0741c",
+        "bytes": 64627,
+        "sha256": "05c48c3204c148f1dae31723e3f71561b9e5df31c22280e6da30743500b92e8f"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs",
+        "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854",
+        "bytes": 35339,
+        "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs",
+        "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+        "bytes": 2440,
+        "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs",
+        "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+        "bytes": 4511,
+        "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs",
+        "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+        "bytes": 3355,
+        "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/reader.mjs",
+        "blob": "ddaa91771171abf0dba6110184b06e631849c2ec",
+        "bytes": 4080,
+        "sha256": "eeb28b5daa384c3b04331d5a982e8950669672483349154474c32d74cd500e4c"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/d3-component-required.test.mjs",
+        "blob": "5ba4d036aa70c5ba7cff4de880a4f57a87b85582",
+        "bytes": 4264,
+        "sha256": "d997831fe6721d9ed9569adb45b7ccc0574d9bcafb4c62a4876c53e5088d77b6"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/run-own-drop-fixtures.mjs",
+        "blob": "937769a594716af7279342884fe23c426436e96b",
+        "bytes": 2780,
+        "sha256": "5231d6004c90cfe62ed5baf2be1ada24e36ae6b56811e8373e3e5c136d54cc5b"
+      },
+      {
+        "path": ".github/workflows/afw-c2-own-drop-winner-fixtures.yml",
+        "blob": "d55ebd4039848025414052f5540eeba125befbcd",
+        "bytes": 2337,
+        "sha256": "8ce3aa50077518e8c46e65b6b48ae5e7acb7932860be66635eacb835b00cf0b6"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/d3-control.json",
+        "blob": "0565ff565eea44fd2aadff41189e5fb750742fa3",
+        "bytes": 56180,
+        "sha256": "32e72a9652ad777b3d9dfacdb7b66421f45b2b1e59a073b39dcb848e127e525e"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/d3-twin.json",
+        "blob": "d9b717879d508a53caf522d8d2f1b1c7e1a7d4ee",
+        "bytes": 56582,
+        "sha256": "8c66d4a534c5b74206c70f60345890328cf7d49cb4efb8657c005954dd29e19f"
+      }
+    ],
+    "nativeMountCount": 13,
+    "nativeMountUTF8Bytes": 251593,
+    "nativeIndex": "55d80f85696757125eab2074f8921f893877eb0b",
+    "fullIndex": "6729841042a32990606af9c6641fb9f1bebfbd57",
+    "fullContextParts": [
+      "badef81683a262d8a0b787139f8cb56268906943",
+      "664e8a82e954dac196a2c0333b420fac5db4ea99",
+      "1c13ec68980641023b0775879bec98610479e3f3"
+    ],
+    "scopeLimit": "Read full 13 native bodies, both immutable seals, all 69 expectation recipes/metadata, MODEL26/boundary/protocol/plan/preservation and relevant full-context diff parts 1/23/24. Did not fetch every 69 Stage B complete input or all 24 diff parts, and did not re-fetch all old 95 bodies. Their later guard/native coverage remains pending."
+  },
+  "dataChecks": [
+    {
+      "name": "flat13 exactfocusedmounts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "fullindex exactnativepacketmounts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "expectation+fullseal metadata wholehashes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "69sealed distinct26A43R",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "nativeonlytwo D3models notmatrix",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "oldD3MODEL25 exactfrozen separatefromMODEL26",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "twinonlydeclaredsemanticfield",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "allotherAPIcontextcustodyinputjoinsidentical",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "open15 publiccontrol57events14native",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "baselinefrozen13beforeafter",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "oldschemaexplicitadditionalfieldrejection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "admittedcomponentscanonicalboundedclosedenum",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "sixsitesindependentaxes",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "focusednewnativefivefullcontextdiffexact",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "old8mountspreservationexact",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "old73and95historicalnotnewcoverage",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "ZIPDataChecks": {
+    "method": "Independent reviewer DATA-only bounded byte parser with builtin crypto/zlib; no OWN/Source receiver, parser or test executed.",
+    "result": "Both single-entry ZIPs, names/bounds/size/CRC/canonical JSON+LF/payload/listing digest and exact OUTCOME log match checked. Both actual fixture archives use method0; no claim of executing deflate coverage.",
+    "summary": {
+      "baseline": {
+        "archive": {
+          "blob": "f19f2619d8aa84e5bcfef048d1d2e66fa73dc22b",
+          "bytes": 11511,
+          "sha256": "c3c21baab210ee9a244f5fb9cd9bcb141beb99a1f5c1f439725e6a84202e6064"
+        },
+        "payload": {
+          "blob": "b056517f98784a7760ca30341a3012f50c3bdb42",
+          "bytes": 11365,
+          "sha256": "162e8955e82f1a841025549a788f71dd77ce13ef493f5ae82d3d4b22c1627a21"
+        },
+        "method": 0,
+        "flags": 0,
+        "crc": "a214bba9"
+      },
+      "twin": {
+        "archive": {
+          "blob": "2bca4cd805b7c63d23b1e59b3ebca014d40fe013",
+          "bytes": 11620,
+          "sha256": "0452e602b1af1e66fb65abe870830e6dfd2280d03b0185b91a5e6f63247916fb"
+        },
+        "payload": {
+          "blob": "52a9e1824426df8b43b8e5ac8c7633feb7c8b901",
+          "bytes": 11474,
+          "sha256": "79409f8a6859a5c6e4eba4fe38cc5e9ef51ed10116cc83e6bd22aecfb15003d8"
+        },
+        "method": 0,
+        "flags": 0,
+        "crc": "6c40bbf1"
+      }
+    },
+    "unpublishedDigestWarning": "ZIP/payload blob values here are computed Git object digests, not claims those byte bodies were published as separate Git blobs."
+  },
+  "controlTwin": {
+    "baseline": "0565ff565eea44fd2aadff41189e5fb750742fa3",
+    "twin": "d9b717879d508a53caf522d8d2f1b1c7e1a7d4ee",
+    "baselineVisible": "57 journal events, ordered 14 action/count return pairs and 14 native PASS rows, event57 Scope15 action.enter, open selected action, AFTER not open; old MODEL25 tuple and frozen 13 arrays exact.",
+    "onlySemanticAddition": "observation.dropWinner={case:15:firstDROP,site:S01:247,outer:QA_MARKED_STUB_NON_OK,publicSite:S01:247}",
+    "transportChanges": "Only canonical outcome payload, its log occurrence and single archive plus required listing digest/size change. Other API/tree/trusted/context/custody fields are byte/data identical.",
+    "oldRejection": "Frozen D3 schema observation additionalProperties=false and no dropWinner. Static inspection explains expected G20_OWN_UNQUALIFIED. This is missing public receipt support, not business/cause reproduction."
+  },
+  "REDReview": {
+    "test": "5ba4d036aa70c5ba7cff4de880a4f57a87b85582",
+    "runner": "937769a594716af7279342884fe23c426436e96b",
+    "workflow": "Exact repository/push/branch/attempt1/message, fixed BASE parent/tree and head checks, pinned checkout/setup/upload, no persisted checkout credential, Node22.23.4 Ubuntu24.04 contents:read, job3min. Only OWN test/controller future syntax checks. Child90s, outer105s+3s kill; child maxBuffer60000 per stream is below65536 bound. Sole receipt <=2048 UTF8 includingLF, always uploader when receipt exists, exact file/artifact, retention7days.",
+    "criterion": "First old d3ModelRead control must admit MODEL25 and exact public baseline. Both ZIP/log envelopes and sole semantic difference are independently checked by the native test before twin read. Only exact constructor Error/message G20_OWN_UNQUALIFIED sets missing-support state. Only inspected AssertionError ERR_ASSERTION named AFW_OWN_D4_RECEIPT_COMPONENT_REQUIRED with actual=false expected=true emits exact child marker then rethrows.",
+    "unrelatedFailure": "Setup/import/namespace/invalid envelope/baseline failure cannot produce the exact marker; admitted wrong receipt yields another assertion and cannot count. Unexpected GREEN, timeout, signal, buffer limit or other exception cannot count.",
+    "parent": "Requires child exit1 without error/signal, exact stdout and matching named assertion stderr before wx-creating sole bounded receipt. Controller remains exit1; no continue-on-error green conversion.",
+    "security": "No npm/dependencies/custom secrets/provider/application network calls or Source import in new native code. Checkout/setup/upload necessarily use GitHub service network; this is not a network-disabled execution claim. No private wire/TAP in receipt.",
+    "cleanup": "Native job is one-use; ephemeral child has no descendant process creation in the inspected graph. Receipt is retained evidence. Root must save actual result and remove only WF under authorized closure; review writes no refs."
+  },
+  "matrix69": {
+    "expectedAdmit": 26,
+    "expectedReject": 43,
+    "executed": 0,
+    "coverage": "All expectation recipe rows inspected: six site labels, independent UNKNOWN axes and one-way publicSite implication; exact four keys/order/canonicality/duplicate/allowlists; O57/14 and closed target eligibility; torn/ambiguous/empty journal/native; same-ID N2 contradictions; earlier/AFTER/count contrasts; finiteGET conflict; inherited transport/custody/tree/hash failures; explicit ACTUAL-vs-MODEL/crossed tuple negatives.",
+    "capQualification": "Q11 exceeds cap with extra padding and therefore also fails shape. It does not isolate cap-only behavior and is not represented as independent coverage of all alternatives.",
+    "bindingBoundary": "Stage B explicit new D4 MODEL26 uses 11 inert measured slots and a distinct tuple. None of that matrix is mounted in the 13-file RED graph. Original D3 MODEL25 baseline is unchanged. Future ACTUAL must bind final independently measured Root26 and real caller context, never a MODEL fallback.",
+    "privateBoundary": "Four public fields cannot authenticate hidden marker ordering, Source rows, Request/epoch/cell/lease/error/private QA-M identity. Pinned producer and its admitted native controls carry those obligations. No guessed private-field rejection or cryptographic authentication claim is accepted."
+  },
+  "preservation": {
+    "nativeOldModules": 8,
+    "original73": {
+      "blob": "7ddd5716920ef46ef93afbcab2e68bf62ee1e5e7",
+      "bytes": 59084,
+      "sha256": "752035ffffffdda986aab94cdb23512e97efb70281b4fa75fbf77a0a7436fc36",
+      "count": 73,
+      "canonicalResultsSha256": "98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb",
+      "canonicalIds": "824d5a29870dc010c6024aca2a7ae47367b5f38c13b240547e1c59ef1229ebf8",
+      "admit": 32,
+      "reject": 41,
+      "groups": 8,
+      "resultsProvenance": "Historical R4. No re-execution in Stage A."
+    },
+    "original95": {
+      "blob": "b33a7aba421b9ab3935b0bff2e072055d8f192ff",
+      "bytes": 38432,
+      "sha256": "8c0b11d5b843ba0afe965d323c1912ac1747477b6bd39a24433fd4ddfc515b9c",
+      "count": 95,
+      "fields": "nativeFiles in original order: path,mode,type,blob,bytes,sha256,role; use this immutable inventory. No old body edited."
+    },
+    "guardChanged": false,
+    "oldEntryPointsUnchanged": true,
+    "focusedNewDiffBodiesReconstructed": 5,
+    "note": "Eight mounted old module bodies FULL hashed against preservation/native inventory. Old73/95 remain historical immutable pins, no new execution or wholesale body verification claim."
+  },
+  "pending": {
+    "actualStageARED": "Root must activate only nominated immutable graph and independently admit actual failed step plus exact receipt/API/context, then close once. Static PASS is not observed RED and does not release Stage B.",
+    "futureStageB": "No guard code or 69-input native pass exists in this packet. Future implementation needs explicit Root release after admitted RED.",
+    "RootPreparedDataOnly": {
+      "head": "317b4e1f547b23ad1bcb4170a5e4f28a865deafe",
+      "tree": "b93e3075b6d7cf1cfae14e1261813b17fe96b644",
+      "provenance": "Parent-supplied prepared Git DATA only, not independently ref/API audited by this review; no ref/run at review time."
+    }
+  },
+  "actions": {
+    "SourceExecuted": false,
+    "OWNExecuted": false,
+    "syntaxChecked": false,
+    "ASTParsed": false,
+    "testsExecuted": false,
+    "refsWritten": false,
+    "runsCreated": false,
+    "filesMaterialized": false,
+    "packagesInstalled": false,
+    "artifactOrLogRefetch": false,
+    "onlyBuiltinsUsedForDATA": true
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
