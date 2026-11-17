@@ -1,0 +1,224 @@
+{
+  "schema": "AFW-FULL-TASK1-E2-COMPATIBILITY-PLAN/1",
+  "status": "PLAN_ONLY_HELD_FOR_ROOT_DIAG2_EVIDENCE_AND_SEPARATE_DECISION",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached Git DATA analysis",
+  "allowedAction": "Describe the successor, preserve the preimages and return this plan.",
+  "beforeimages": {
+    "bytes": 17474,
+    "sha256": "9965d21abc10384afc2da1b1284f4333988547e75a859d28eb8d4842e217e0a3",
+    "blob": "001230c94d8c9b205da223e86670e3b22939b8e5"
+  },
+  "historical": {
+    "occurrence": {
+      "run": 43965725604,
+      "attempt": 1,
+      "job": 133644531547,
+      "head": "34ee2927985c4e18916ac1c3e5ce9ce9c1430f74",
+      "tree": "afde090ec400a81b1ddced7b65c967636b5c7714",
+      "close": "089356513d1ccef9bdffa375d3a822c7c9fd01d3",
+      "closeProof": "e65c9b545c44c663f8e5ceb41794a5aab8e9e455",
+      "review": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca"
+    },
+    "retained": "3 positive/35 negative controls. Real bootstrap ENOENT. BASE 3 qualified with 2 pass + 1 expected failure, GET 503/200 and S07/S08 witness. GREEN unqualified, capture timeout exit1/signal none, 24395 B stdout. Four launches/four observed processes and cleanup. MUTANT/REG/final receipt absent. Artifact listing count0. The closed run cannot contribute frames to a new occurrence."
+  },
+  "decision": "If the reviewed DIAG2 evidence identifies an unresolved failure, a contradiction, or a continuing timeout, retain this plan and let Root address that evidence. A reviewed, materially changed trajectory on accepted E2 can support Root considering the original full Task1 gate. A normal full capture still requires all four native modes, six launches and one final receipt under the original clocks in its own occurrence. A short diagnostic alone cannot establish adequate total time for later modes.",
+  "freshNomination": {
+    "status": "One candidate only, proposed and unreserved. Root must establish that its branch/message/one-use occurrence is unused and that prior heads are preserved before sealing. Availability was not checked in this DATA assignment.",
+    "branch": "lab/afw-c2-source-20261117-t1-full-host-json-fix1",
+    "message": "AFW-C2-T1-FULL-HOST-JSON-FIX1-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-source-full-host-json-fix1.yml",
+    "job": "c2-source-full-host-json-fix1",
+    "prefix": "docs/superpowers/source-lab/c2-t1-full-host-json-fix1/",
+    "runner": "docs/superpowers/source-lab/c2-t1-full-host-json-fix1/run-c2-source-full-host-json-fix1.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-full-host-json-fix1/run-c2-source-full-host-json-fix1.mjs",
+    "artifact": {
+      "name": "afw-c2-source-full-host-json-fix1-receipt",
+      "path": "output/c2-source-full-host-json-fix1-receipt.json",
+      "fileName": "c2-source-full-host-json-fix1-receipt.json",
+      "count": 1,
+      "retentionDays": 7
+    },
+    "steps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Install only the existing locked dependencies",
+      "Qualify isolated compiled Source data",
+      "Preserve only the bounded sanitized Source receipt"
+    ]
+  },
+  "source": {
+    "predecessor": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "successor13": {
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    },
+    "hostAcceptance": "55e95b5018e7fef76caeef64f2982e504a5e7a60",
+    "shape": "Exact BASE3203 + 25 added leaves from a direct child of 6791. Common17: only source-index and body-10 differ, 15 stay byte-identical. Eight producer paths under the new nomination: four bodies change (runner, schema, contract, workflow), four keep identical bytes (mode-selection, parser, vectors, selftest). Therefore 19/25 body identities reusable and 6/25 replacements. All 8 versioned path changes must be reflected in tree bindings. Canonical product/test paths remain BASE in Git and materialize in the private per-mode target.",
+    "frozenFour": [
+      {
+        "role": "selection",
+        "blob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f"
+      },
+      {
+        "role": "parser",
+        "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87"
+      },
+      {
+        "role": "vectors",
+        "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f"
+      },
+      {
+        "role": "selftest",
+        "blob": "bc33365eaf302d2296a759202a822af4a443f143"
+      }
+    ],
+    "selection": [
+      {
+        "mode": "baseline-red",
+        "compactBytes": 789,
+        "sha256": "24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa"
+      },
+      {
+        "mode": "proposal-green",
+        "compactBytes": 1187,
+        "sha256": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5"
+      },
+      {
+        "mode": "mutant-prefix",
+        "compactBytes": 1186,
+        "sha256": "46239e665ffe9154fbfb81725c81ac05c0228129f49db466b061397114f970a4"
+      },
+      {
+        "mode": "regressions",
+        "compactBytes": 3363,
+        "sha256": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6"
+      }
+    ],
+    "selectionRule": "c38ce3 mode-selection refers to S07 driver d4db10e and S08 fixture de8a51e, plus IDs, phases, filter and exclusions. S10 has no field here. Per-mode compact JSON UTF8/SHA256 verified, REG compact ef1da... verified separately. Retain all four hashes and raw selection bytes. Keep witness on S08 choose18 GET and S07 native definition/action.",
+    "runner": {
+      "preimage": "1193e74ec0b0d60fb5c63d3a0340578e884dfb71",
+      "bindings": [
+        "L7,92: index SHA256 and Git id change to E2, 11467 byte length remains. L93–98 keep exact 13 paths/roles/ordered cases/REG manifest/lockfile and original SDK 1.2.1.",
+        "L11,18–19,89–90,162: new branch/ref/message/LAB prefix/job/runner basename, paths of 4 measured tools with same content pins, and final artifact filename. No change to L20 SELECTION_HASHES.",
+        "L52–68: verify old baseline preimage before applying each entry. BASE receives test-role S07–S11 (including S10 cb95), product roles remain BASE. GREEN/MUTANT receive candidate proposals. REG uses the already materialized GREEN target. Fresh observation required for BASE expected RED despite unchanged S07/S08 witness.",
+        "L99–100,151: frame/custody context derives E2 index hash and nominated job. Receipt admitted remains exact path/sha256/bytes from E2 entries; only tuple10 changes. Detached full-read NEW results and reversible diff are future implementation deliverables."
+      ]
+    },
+    "schema": {
+      "preimage": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+      "changes": {
+        "/$defs/context/properties/proposalIndexHash/const": [
+          "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+        ],
+        "/$defs/context/properties/job/const": [
+          "c2-source-lab-fixture-fix1",
+          "c2-source-full-host-json-fix1"
+        ],
+        "/$defs/custodyContext/properties/proposalIndexHash/const": [
+          "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7",
+          "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+        ],
+        "/$defs/custodyContext/properties/job/const": [
+          "c2-source-lab-fixture-fix1",
+          "c2-source-full-host-json-fix1"
+        ],
+        "/$defs/receipt/properties/admitted/const/10/sha256": [
+          "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+          "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+        ],
+        "/$defs/receipt/properties/admitted/const/10/bytes": [
+          88519,
+          88713
+        ]
+      },
+      "require": "Exactly these 6 JSON pointer values change for the proposed nomination. Preserve all 20 defs, required order, markers and wire schemas v2, mode selections, synthetics, RED witness, all counter/order/EOF constraints."
+    },
+    "contract": {
+      "preimage": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+      "rebind": [
+        "authority/provenance plus current package-family status",
+        "wire.schema (new path/bytes/SHA/Git from new measured schema)",
+        "context + selection.sourceIndex (E2/indexHash/job), selection.file.path only",
+        "controls.synthetic.vectors.path, helper.path and expectedFrame job wording",
+        "nomination and versioning/readback text, retaining historical preimages as historical",
+        "full producer packet from c230: update current nomination, inherited17 rows0/11, eight proposed paths/pins, sourceBoundary and linked reversible metadata"
+      ]
+    },
+    "workflow": "Fresh branch/message/job and exact runner command/artifact. Keep 5 fixed step names, checkout/setup-node/upload pinned actions, attempt1/push/contents:read, Ubuntu24.04/v22.23.4, locked npm ci scripts disabled, job7min, upload always with missing-file error and retention7d."
+  },
+  "fullOracle": {
+    "order": [
+      "3 positive/35 negative controls",
+      "custody preflight",
+      "real absent-cwd ENOENT",
+      "baseline-red:3",
+      "proposal-green:20",
+      "mutant-prefix:20",
+      "regressions:11",
+      "own cleanup/custody",
+      "final receipt"
+    ],
+    "caseOrderSource": "Read full exact IDs/names from frozen c38ce3 + ef1da4. SourcePlan6696d068.oracle enumerates the four sets and all eleven full regression names. E2 caseMap and mutant object exactly equal 26b.",
+    "red": "CONNECTION pass, OAUTH pass, NOTICES fail. All three measured 1/1/1, exit1, S07/S08 attributed actual503/expected200 GET before POST. Seventeen excluded cases are outside BASE.",
+    "green": "All20 PASS exit0, 11 main rows at 1/1/1, 4 at 2/2/2, 2 at 3/3/3, final3 isolated with measured bounded ordered counters. Native/frames and existing S08 tests cover receipt/SEND/ACK links, monitor, finite scope and signed cleanup consent.",
+    "mutantAndReg": "Same frozen prefix mutation, exit1, paired EXTRA_KEY pass on already qualified GREEN and fail with testCodeFailure on MUTANT. Observe all 20 mutant outcomes. REG exact11 all pass exit0. No substitution or split across runs.",
+    "limits": "330s for the entire producer, 180s max per native child, 120s per native case, 10s custody preflight, 7min job, 30s incoming root and original leaf/phase ceilings. Six custody-checked launches with actual 6..24 processes, per-target maximum8. Keep loopback-only isolation, clean groups, no-new-privs, actual SDK1.2.1 and original temp ownership/removal. Git archive32MiB, child stdout1MiB, stderr64KiB. Receipt body24576B + LF, one ZIP<=1MiB, raw log<=4MiB.",
+    "receipt": "Exactly eight normal canonical physical frames from the one real command step. Join all four separate qualified observations byte-for-byte against receipt, and require full custody after cleanup plus log/file/ZIP equality. If an earlier mode fails, preserve only actual data, stop and close that occurrence."
+  },
+  "independentOWN": {
+    "source": {
+      "blob": "7e25d39b4586786828137e10942c9ef7c7cbf642",
+      "bytes": 21660,
+      "sha256": "2bfff0aab71a88e4ba07c9c2564c4e1d898299337191728a884ef14a25ae82a2"
+    },
+    "reader": {
+      "blob": "979c4fd2caadd75b47b3416275248a23310e3722",
+      "bytes": 19653,
+      "sha256": "5af9b48390c62bf579261ea83416ee23895234bb7783733ca4ee7c185f660454"
+    },
+    "admission": {
+      "blob": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+      "bytes": 10236,
+      "sha256": "0c3421a74a75347f1b15549db7c93d1bfe6678798d157b966d06cd6e1596da03"
+    },
+    "dataTwin": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/admission.json",
+      "blob": "da6a9f9938a4433f8bd78ad84eb389d9d90f21ae",
+      "bytes": 12150,
+      "sha256": "3b810defcf8490e9419d8940692a016e44c3b18a900ddd712ce2a593a79081c7"
+    },
+    "rebind": [
+      "Create a separate full reader/admission version. Rebuild the admission data twin and frozen module from independently measured successor qualifier, E2 index/hash, proposed occurrence, exact25 tree edges and E2 admitted[10]. Keep selectionHashes and sourceSteps byte-identical.",
+      "979c L33–34 directly hardcode old indexHash/job. Replace those exact expectations or bind them from the pre-sealed independent admission constants. L120 namespace rejection needs the actual new prefix alongside common c2-t1/. L1 must resolve to new exact admission. Adding E2 to a runtime allowlist or trusting candidate-supplied context would admit stale occurrences.",
+      "Keep L3–27 cases, L41–69 RED witness, exact 8-frame sequence L74–81, API/commit/job/step joins L94–112, fixed tree edge/mode and raw-log window, ZIP F1/F2/CRC/full-deflate/length. Root externally verifies exact 3203+25 tree and every full edge; reader checks 25 + rejects extras under admitted namespaces.",
+      "New independent trusted head/tree/runId/jobId only when real. New artifact/step/command/name and file bound to actual listing, measured archive and canonical LF body. Original 419 synthetic proof, DIAG2 reader/guard and Source35 remain in their historical scopes."
+    ],
+    "minimalBindingControls": {
+      "method": "Use the existing full OWN reader input constructor plus actual successor admission/reader. One coherent synthetic positive with new context, E2 tuples, all 25 edges and internally consistent ZIP/log; a few isolated binding contrasts. Compare unchanged algorithms bytewise to 979c. No proposed new native family or replay of the 419 synthetic controls.",
+      "contrasts": [
+        "Keep trusted successor nomination fixed; feed an otherwise coherent old c230 occurrence and require rejection.",
+        "On the coherent positive, substitute old E2 predecessor hash in context (all correlated frame/log/file fields repaired) or substitute old S10 tuple in the final admitted projection (repair ZIP/listing/log). Check rejection for each independent binding.",
+        "Keep expected caller and current tuple fixed; substitute old body-10 tree Git id/size in a coherent model. Independently exercise an extra unlisted leaf inside the NEW family namespace so the literal-prefix guard is actually tested.",
+        "Check the new expected filename in ZIP/log/listing against the old name with other bytes/digests repaired. Then use the actual complete Source occurrence and immutable future Root expected context for final full admission."
+      ]
+    },
+    "hold": "Existing OWN419 published positive under c230 cannot accept E2 as-is. Source25 DIAG2 has a different protocol and leaves. New full Source package, measured bindings and receiver still require a later decision."
+  },
+  "finalGate": "After independent admission of the same full Source run and actual closure/readback, Root judges Task1 under the original authority. Preserve the tried head and evidence, remove only the one-use workflow at close, confirm original3203/main/history and zero close-head runs. No business, ref, native, or successor implementation performed here.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

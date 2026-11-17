@@ -1,0 +1,464 @@
+{
+  "schema": "AFW-FULL-TASK1-E2-QUALIFIER-SUCCESSOR-FROZEN-BEFOREIMAGES/1",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Immutable Git Data evidence",
+  "purpose": "Frozen preimages for a conditional plan. Git IDs address full original bodies.",
+  "oldFullPackage": {
+    "blob": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "bytes": 15224,
+    "sha256": "1359d5a505e65a3a04659a0cae70fd60023ce56ae989a0277438bf50790912ed"
+  },
+  "source25": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "mode": "100644",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "mode": "100644",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "mode": "100644",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "mode": "100644",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/regression-selection.json",
+      "mode": "100644",
+      "blob": "ef1da464569b344b5a1024e5d4af988a133e7dbd",
+      "bytes": 3364,
+      "sha256": "8287deef6924d3f91db98078da7bca8bdb55e292f87f9fd814da794e513ba4cf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/mode-selection.json",
+      "mode": "100644",
+      "blob": "c38ce3bda9f7cc88ef180b4f1a938812435b377f",
+      "bytes": 5460,
+      "sha256": "618e35bbeda39833ddf5c63ed16a41b44db85ab751edcb87ad5abb9ebcaae839"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/tap-protocol.mjs",
+      "mode": "100644",
+      "blob": "cac11bfac3c19397c5074a7c52767c4990a48a87",
+      "bytes": 10291,
+      "sha256": "3de67d5b30f7a0019b8f02118cf3727be7ae79d22ecfdc56bc7d39e60681dfd4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-vectors.json",
+      "mode": "100644",
+      "blob": "d8cdb6f14f0c4dcd9101e2af76deeefde3862b9f",
+      "bytes": 14802,
+      "sha256": "c630dc5d213f8102ad5b36ae30e8251f14d6b9652207c6ab4044d57fc1b5f402"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/synthetic-controls.mjs",
+      "mode": "100644",
+      "blob": "bc33365eaf302d2296a759202a822af4a443f143",
+      "bytes": 3313,
+      "sha256": "2f49b434e3e51a4a3c225903b3a681e4f01ea3f62b58f337e6a26d0fdde8fcae"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/run-c2-source-lab-fixture-fix1.mjs",
+      "mode": "100644",
+      "blob": "1193e74ec0b0d60fb5c63d3a0340578e884dfb71",
+      "bytes": 23205,
+      "sha256": "7a581800dc588ed081d05fa253f7adaac1f9c83e66398a6b4a6354994285cae8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/protocol-contract.json",
+      "mode": "100644",
+      "blob": "ff353576f71b95e1b8ba204fb8510200b4e073e9",
+      "bytes": 15709,
+      "sha256": "2bd76e556a6dbf9d394fba70d64a216fd339697fcae2e885b3fd6141f4ecd6fb"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-fixture-fix1/frame-schema.json",
+      "mode": "100644",
+      "blob": "f6b59ba6abde99ef4a3686ae5c11cdfe4a29bd8b",
+      "bytes": 13983,
+      "sha256": "9fc0205fbbbd4a0d61f4560291bd53caf58df083f88e4579eaa74ea02d15d61e"
+    },
+    {
+      "path": ".github/workflows/afw-c2-source-lab-fixture-fix1.yml",
+      "mode": "100644",
+      "blob": "98b96a9389a24893cbb5b197c4812c8b9543b1ad",
+      "bytes": 1641,
+      "sha256": "ea910cdfe2058d2ef9f49ee5d20973ae4e565182d0e916f2edb64fd374625fdb"
+    }
+  ],
+  "source25Order": "c230 inherited17 (index,13bodies,regression manifest,guard,preflight), followed by eight distinct producer leaves in packet order. All were additions to BASE. Fullread independently matched Git+UTF8/SHA256 for every supplied beforeimage.",
+  "baseline": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "baselineOriginalLeaves": 3203,
+  "baselineCanonicalPaths": [
+    {
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "BASE": {
+        "blob": "7eb8f28760de60f143e487eeb6988705059a0a44",
+        "bytes": 126504,
+        "sha256": "d97d07f69916c45f58af511a6dfb57322ed3fe7d8fa1f6fbb2220d44be15b921"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "BASE": {
+        "blob": "152e730f83af7ef063b6b1db89f8b0a779c2b60e",
+        "bytes": 45255,
+        "sha256": "444e0e748a8cadb84ba1fd125d51d5e7e123cd02a48e8276b4c4e7f558694866"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "BASE": {
+        "blob": "e760b3579a38f1dbb73b177bb73b06d814eb881f",
+        "bytes": 2505,
+        "sha256": "792cc680c103bef1d86ecb3a957e04112411bec8acd71c0a098e483bdec58750"
+      }
+    },
+    {
+      "path": "worker/mcp-own/finite.mjs",
+      "BASE": {
+        "blob": "15441b6c0c779f733db65a3b59a3a9e1738d19dc",
+        "bytes": 2758,
+        "sha256": "b13e7fad6e1ea5e5bb1ab25d43e5051fdcf77c5ef0794d2389dd5041057b3470"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "BASE": null
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "BASE": {
+        "blob": "1a5a2583d266179cdd89f799c64199f29044fec5",
+        "bytes": 89322,
+        "sha256": "866cdda4ea43f56c3c2f69c0a2846167e95f36ae26be35a76cc7eaa7b34a4483"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "BASE": {
+        "blob": "0a04ae3a4d74c2c7939b1654683054b1d5d751d4",
+        "bytes": 22438,
+        "sha256": "f0e8a2720987d13d0011c437abd3c5ef7d1452493b3c0e67b5da5d319e474de5"
+      }
+    },
+    {
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "BASE": null
+    },
+    {
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "BASE": null
+    },
+    {
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "BASE": {
+        "blob": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+        "bytes": 57864,
+        "sha256": "54a63203b6465224687f143e1151c4158cd307a2bd9ec38192a81a31639f6603"
+      }
+    },
+    {
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "BASE": {
+        "blob": "a7b730dc9be336528f0971544099f79d05758b1a",
+        "bytes": 87501,
+        "sha256": "0a1bcfa9721673386b08af45e4a24c33fa2db939d5edf021628d92590e883abb"
+      }
+    },
+    {
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "BASE": {
+        "blob": "1298bb5b67749df0d7ee20c863b691562e6a81b9",
+        "bytes": 57221,
+        "sha256": "495b4d7220b3726697755f0306a866f4672b4ab1c76d5ec039394a420132e31e"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "BASE": {
+        "blob": "ea910f0fcdeade5a794ddaa60898706924e72f80",
+        "bytes": 4750,
+        "sha256": "f7f72160e688d1c3aa57d2da0021d3c617cceb54c81e5947f5c11d7c17ce07ad"
+      }
+    }
+  ],
+  "baseBootstrap": {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "bytes": 1844,
+    "sha256": "ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14"
+  },
+  "successorInput": {
+    "index": {
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    },
+    "onlyChangedAfter": {
+      "ordinal": 10,
+      "prior": {
+        "path": "test/fixtures/finite-initial-entry-world.mjs",
+        "before": {
+          "blob": "a7b730dc9be336528f0971544099f79d05758b1a",
+          "bytes": 87501
+        },
+        "after": {
+          "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+          "bytes": 88519,
+          "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+          "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+          "gzipBytes": 22824
+        },
+        "newFile": false,
+        "fullReadback": true,
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "role": "test"
+      },
+      "accepted": {
+        "path": "test/fixtures/finite-initial-entry-world.mjs",
+        "before": {
+          "blob": "a7b730dc9be336528f0971544099f79d05758b1a",
+          "bytes": 87501
+        },
+        "after": {
+          "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+          "bytes": 88713,
+          "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+          "gitBlob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+          "gzipBytes": 22873
+        },
+        "newFile": false,
+        "fullReadback": true,
+        "dataPath": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "role": "test"
+      },
+      "verifiedAfter": {
+        "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+        "bytes": 88713,
+        "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+      }
+    },
+    "wholeComparison": "Equal context/caseMap/regressionSelection/mutant/nonclaims/schema and equal ordered 12 other entries. Only entries[10].after differs."
+  },
+  "modeCanonical": [
+    {
+      "mode": "baseline-red",
+      "compactBytes": 789,
+      "sha256": "24a24cf5dd911d7675f1007ca4d4ddd5881757885f3849aa61d88bc923c628fa"
+    },
+    {
+      "mode": "proposal-green",
+      "compactBytes": 1187,
+      "sha256": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5"
+    },
+    {
+      "mode": "mutant-prefix",
+      "compactBytes": 1186,
+      "sha256": "46239e665ffe9154fbfb81725c81ac05c0228129f49db466b061397114f970a4"
+    },
+    {
+      "mode": "regressions",
+      "compactBytes": 3363,
+      "sha256": "e2100bd28bf4143ed768ce5f0441baa42f7b19a14fc1c28249f68dfa961a68d6"
+    }
+  ],
+  "evidence": {
+    "qual": {
+      "blob": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+      "bytes": 15224,
+      "sha256": "1359d5a505e65a3a04659a0cae70fd60023ce56ae989a0277438bf50790912ed"
+    },
+    "normal13": {
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7"
+    },
+    "e2": {
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    },
+    "primary": {
+      "blob": "68c68577dca6ed01980dd673ed9b2623096a71f9",
+      "bytes": 1234250,
+      "sha256": "5f7353cad07b4f7c8e78563db3dd76ff1e88cf17f372b139ccf71a2205e7ba7c"
+    },
+    "outcome": {
+      "blob": "91b08d3ea77cd85264fc6f5ada1fd62693c56631",
+      "bytes": 9229,
+      "sha256": "ac9b7c59a0b86a9e9a013faaf9b91b92e41cb7a42f0a49be1db5cf0f6a5a5d00"
+    },
+    "review": {
+      "blob": "45ab03b14f3e27b7ba75d15104553f38b9f2f6ca",
+      "bytes": 12508,
+      "sha256": "89229c27a454c908e2c4f0e7ebd162839f4940d26c1f08feff49e4f42079902f"
+    },
+    "oldPlan": {
+      "blob": "6696d06831328bb52d7245c48347bd8c412b566d",
+      "bytes": 23421,
+      "sha256": "112a81f270cdee48779020eb0edb0054009bc0b3534459090d095f0f55631d83"
+    },
+    "oldOwn": {
+      "blob": "cb7e1c276325927c11d2c7805aa6dd9fc2ca39bd",
+      "bytes": 3824,
+      "sha256": "a6eaf77e4a0d5fb496ce116bd2d1ec4373cd043318edc6afe8d9b9cc96f0c640"
+    },
+    "own419review": {
+      "blob": "797613a34698a6c4a3ade7c4cc679b7af0ad0099",
+      "bytes": 15585,
+      "sha256": "ec9d6ca815248d706467ffb3ef20ff0fa86690066bfa155d71e1102bcd0a47fd"
+    },
+    "hostAccept": {
+      "blob": "55e95b5018e7fef76caeef64f2982e504a5e7a60",
+      "bytes": 2219,
+      "sha256": "e239a028bf6b6466d80f8a680289a5e0530951be11c52996c3805b8dca9353ff"
+    }
+  },
+  "oldSourceRootGate": {
+    "blob": "752c3d862a1fc5398770415fdd7235c4319f3591",
+    "bytes": 12637,
+    "sha256": "20936c12cd261911331eaad936b0f9ad7cc5347b63250ac5db1d870e9d022048"
+  },
+  "oldFullOWN": {
+    "index": {
+      "blob": "7e25d39b4586786828137e10942c9ef7c7cbf642",
+      "bytes": 21660,
+      "sha256": "2bfff0aab71a88e4ba07c9c2564c4e1d898299337191728a884ef14a25ae82a2"
+    },
+    "module": {
+      "blob": "979c4fd2caadd75b47b3416275248a23310e3722",
+      "bytes": 19653,
+      "sha256": "5af9b48390c62bf579261ea83416ee23895234bb7783733ca4ee7c185f660454"
+    },
+    "admissionModule": {
+      "blob": "27da18ca8489b060d37ba40a5c86dd29f308a590",
+      "bytes": 10236,
+      "sha256": "0c3421a74a75347f1b15549db7c93d1bfe6678798d157b966d06cd6e1596da03"
+    },
+    "admissionJSON": {
+      "path": "docs/superpowers/root-own/c2-t1-full-c230-v3-zip-fix1/admission.json",
+      "blob": "da6a9f9938a4433f8bd78ad84eb389d9d90f21ae",
+      "bytes": 12150,
+      "sha256": "3b810defcf8490e9419d8940692a016e44c3b18a900ddd712ce2a593a79081c7"
+    },
+    "all35CompleteFullPins": "Versioned OWN package 7e25d39... artifacts[] retains all 35 complete path/mode/after(blob,bytes,sha256) preimages. Reviewed by 797613a...; this plan directly measured the index/reader/admission pair.",
+    "review": {
+      "blob": "797613a34698a6c4a3ade7c4cc679b7af0ad0099",
+      "bytes": 15585,
+      "sha256": "ec9d6ca815248d706467ffb3ef20ff0fa86690066bfa155d71e1102bcd0a47fd"
+    },
+    "zipF1F2Fix": "Flags0x8: local CRC/compressed/uncompressed fields individually0or-central-equal; contradictory nonzero rejects. Both bounded extraareas parsed as complete TLV; reject ID0x0001 and truncated header/data; ordinary complete metadata remains compatible without overriding name/payload/sizes."
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false
+}
