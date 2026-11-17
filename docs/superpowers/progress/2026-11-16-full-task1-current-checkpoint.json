@@ -1,21 +1,11 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/19",
-  "timestampUTC": "2026-11-17 02:11:29 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/20",
+  "timestampUTC": "2026-11-17 02:23:17 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "phase": "DIAG2_FULL_ORDER20_SOURCE_CAPTURE_ACTIVE",
-  "activeNativeRuns": [
-    {
-      "run": 44000942332,
-      "job": 133764541578,
-      "head": "32fe5795e31648a3f5f59e042f12edc56d92c224",
-      "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
-      "phase": "FULL_ORDER20_SOURCE_DIAG2",
-      "logsConsumed": false,
-      "artifactDownloaded": false
-    }
-  ],
-  "currentAllNativeOccurrencesClosed": false,
+  "phase": "DIAG2_CLOSED_ADMITTED_INCOMPLETE_FIRST_SCOPE_MISSING",
+  "activeNativeRuns": [],
+  "currentAllNativeOccurrencesClosed": true,
   "green20": {
     "run": 43980317236,
     "primary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
@@ -250,15 +240,22 @@
       "bodySeal": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8",
       "refCreated": true,
       "runCreated": true,
-      "SourceBusinessExecuted": false,
+      "SourceBusinessExecuted": true,
       "businessActivationReleased": true,
       "SourceCaptureActivated": true,
-      "actualPending": true,
+      "actualPending": false,
       "gate": "aecf3f3f00d30f0d37d47da7e8a752dfd6bbe987",
       "activatedAt": "2026-11-17 02:09:52 UTC",
       "run": 44000942332,
       "job": 133764541578,
-      "SourceParentStarted": true
+      "SourceParentStarted": true,
+      "closed": true,
+      "closedHead": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+      "closeReadback": "b96b7831b92e9200a4cd360fa9703c61b284d765",
+      "primary": "16f788a652c644763d74ffa0e955375786064c2d",
+      "outcome": "f7306430e390cf69787347daa1b8b396b543dbc5",
+      "actualOwnAdmission": "6d2f2e1a54507f70e2f553512dc35472e529e96e",
+      "result": "ADMITTED_DIAGNOSTIC_INCOMPLETE_14_PREFIX_PASS_FIRST_SCOPE_MISSING_TIMEOUT_OPEN18"
     },
     "Source35FreshReview": "82294234ee0345d63c85d7518ae96d3857e6c649",
     "Source35AcceptedToolingOnly": true,
@@ -295,9 +292,10 @@
     },
     "Own42FreshReviewPending": false,
     "Own42FreshReview": "247fb10edd01a5449333f15ca68a8064742202f3",
-    "SourceCaptureGate": "aecf3f3f00d30f0d37d47da7e8a752dfd6bbe987"
+    "SourceCaptureGate": "aecf3f3f00d30f0d37d47da7e8a752dfd6bbe987",
+    "SourceActualReviewPending": true
   },
-  "next": "ObservecurrentSourceDIAG2runonly; noreplay. Onterminalfetchlog/artifactonce, actuald2ReadadmitRootcurrentSource25+actualcontext, close/readback/freshresultreview. NormalFullTask1planheldforactualresult. No manualrequests before17nov11UTC.",
+  "next": "FreshactualDIAG2resultreview plusSourceS08:18:118/SCOPE_MISSINGstaticdiagnosis. First14pass (NOTICES/MONITORnowpass),17native14pass3fail,child180stimeout withcase18actionopen. HTTP/countersatnewfirstfailureunknown; no causeclaim orreplay. NormalFullTask1planheld duecontinuingtimeout/failure. No owneractionbefore17nov11UTC.",
   "preservation": "Original3203/main/history/26b/c230/DIAG1/old419 unchanged. Source locally neverexecuted; allnativeheavyworkGHA. No Cloudflare/OAuth/OTP/tokens/mail/Max/runtimeaction.",
   "SourceQualified": false,
   "Task1Pass": false,
