@@ -1,0 +1,345 @@
+import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
+import { readFile,writeFile,mkdir,mkdtemp,symlink,rm,lstat,readdir,realpath } from 'node:fs/promises';
+import { dirname,join,resolve,sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const entered=Date.now(), end=entered+330000;
+const config={
+  "repo": "tokenizartinfo-ops/agent-friendly-web",
+  "BASE": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "TREE": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
+  "message": "AFW-C2-GET-WINNER-DIAGNOSTIC1-ONEUSE-20261117",
+  "job": "c2-get-winner-diagnostic1",
+  "runner": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+  "prefix": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/",
+  "artifact": "output/c2-get-winner-diagnostic1.json",
+  "childFile": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+  "selectHash": "fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd",
+  "bootstrap": {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "bytes": 1844,
+    "sha256": "ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "fullReadback": true
+  },
+  "rootFiles": [
+    "package-lock.json",
+    "package.json",
+    "tsconfig.json",
+    "wrangler.a2a-canary.jsonc",
+    "wrangler.a2a-production.jsonc",
+    "wrangler.assistance-goal-context.jsonc",
+    "wrangler.assistance-goal-context.qa.jsonc",
+    "wrangler.assistance-supervision-producer.jsonc",
+    "wrangler.contact.jsonc",
+    "wrangler.delegated-canary.jsonc",
+    "wrangler.delegated-real-pilot.example.jsonc",
+    "wrangler.delegated-real-pilot.jsonc",
+    "wrangler.delegated.jsonc",
+    "wrangler.dossier-supervision-producer.jsonc",
+    "wrangler.independent-closure-qa.finite.jsonc",
+    "wrangler.independent-closure-qa.jsonc",
+    "wrangler.independent-closure-qa.rollback.jsonc",
+    "wrangler.mail-canary.jsonc",
+    "wrangler.mcp-own-events.example.jsonc",
+    "wrangler.mcp-own.finite.jsonc",
+    "wrangler.mcp.jsonc",
+    "wrangler.operations-manager.jsonc",
+    "wrangler.operations-producer.jsonc",
+    "wrangler.operations-review-qa.jsonc",
+    "wrangler.operations-review.jsonc",
+    "wrangler.operations-watchdog.jsonc",
+    "wrangler.operations.jsonc",
+    "wrangler.release-operator.jsonc"
+  ],
+  "transportRelease": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-release.json",
+    "blob": "a37dc79fe27518557f9082932c0acb05fcbcd557",
+    "bytes": 2061,
+    "sha256": "ad272eec1204f53abd89d1c86f226ebe0da6dad6d9e750696b8761f83896e32d"
+  },
+  "selectionDataPaths": [
+    "docs/superpowers/source-lab/c2-t1/body-00.txt",
+    "docs/superpowers/source-lab/c2-t1/body-01.txt",
+    "docs/superpowers/source-lab/c2-t1/body-02.txt",
+    "docs/superpowers/source-lab/c2-t1/body-03.txt",
+    "docs/superpowers/source-lab/c2-t1/body-04.txt",
+    "docs/superpowers/source-lab/c2-t1/body-05.txt",
+    "docs/superpowers/source-lab/c2-t1/body-06.txt",
+    "docs/superpowers/source-lab/c2-t1/body-07.txt",
+    "docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+    "docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+    "docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt",
+    "docs/superpowers/source-lab/c2-t1/body-11.txt",
+    "docs/superpowers/source-lab/c2-t1/body-12.txt"
+  ],
+  "route": {
+    "scope": "CONDITIONAL_REVIEWED_APPLICATION_CONSTRUCTION",
+    "sourceSeamReview": "a279c2e6238927b0f7b1544c0f4d058852177651",
+    "priorMountConstructionReview": "3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c",
+    "miniflareDispatchApi": "1ded0afe15a9b443240776e3ce4bf4fbc509b79d",
+    "source": [
+      "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+      "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+      "9ffce28ba28961937c4f24f1cc00eb8d899bc495"
+    ],
+    "origin": "https://delegated-canary.agentfriendlyweb.dev",
+    "path": "/connections/finite-prepare",
+    "worker": "canary-first-connection",
+    "outcomeCut": "S08:18:143",
+    "rootAcceptanceRequired": true,
+    "verifiedFull20Occurrence": false
+  },
+  "toolReview": "08b75777bb39efaad0a439082cd430044c0b07d6"
+};
+const pins={
+  "index": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json",
+    "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "bytes": 9228,
+    "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153"
+  },
+  "selection": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/mode-selection.json",
+    "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+    "bytes": 4403,
+    "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+  },
+  "schema": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/frame-schema.json",
+    "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+    "bytes": 35611,
+    "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+  },
+  "contract": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/protocol-contract.json",
+    "blob": "1a49667923ee7a2a4f902b3622d30daac1000c89",
+    "bytes": 68624,
+    "sha256": "8c14bbcc4912905059e379e266729e7969ad8fce42748d5f62afbf783a38d0bb"
+  },
+  "adapters": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+    "blob": "77183a2558a9e071b562485e1b3bd7622fffdf66",
+    "bytes": 38299,
+    "sha256": "dd6f9474ddf47386276e40f6d83cde2f38bcf1263f72008870f2d1700f2e0a80"
+  },
+  "reader": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/read-progress.mjs",
+    "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+    "bytes": 5507,
+    "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+  },
+  "driver": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/diagnostic-driver.txt",
+    "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "bytes": 3169,
+    "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+  },
+  "recorder": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/progress-recorder.txt",
+    "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "bytes": 3833,
+    "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+  },
+  "guard": {
+    "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+    "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+    "bytes": 1208,
+    "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+  },
+  "preflight": {
+    "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+    "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+    "bytes": 417,
+    "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+  }
+};
+const flags={"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false};
+
+const workspace=resolve(process.cwd()), node=process.execPath, uid=process.getuid(),gid=process.getgid();
+const root=resolve(process.env.RUNNER_TEMP??''), parentEnv={PATH:dirname(node)+':/usr/bin:/bin:/usr/sbin:/sbin',HOME:root,LANG:'C.UTF-8',LC_ALL:'C.UTF-8'};
+let phase='admission', context=null, fault=null, temp=null, tempInitial=null, target=null, adapters=null;
+let beforeHashes, afterHashes, expected, observation, pfCount, greenCount, getTransport;
+const valid={admission:['ADMISSION_INVALID'],materialize:['MATERIALIZATION_INVALID','TARGET_DRIFT'],
+  preflight:['PREFLIGHT_INVALID','CUSTODY_INVALID'],green:['LAUNCH_INVALID','CUSTODY_INVALID','CAPTURE_INVALID'],
+  journal:['JOURNAL_INVALID','RECORDER_FAULT','TARGET_DRIFT'],native:['CAPTURE_INVALID','EVIDENCE_CONFLICT'],
+  cleanup:['CLEANUP_INVALID','TARGET_DRIFT'],publish:['PUBLICATION_INVALID']};
+const fail=(reason=valid[phase][0])=>{throw Object.assign(new Error(reason),{code:reason});};
+const need=(condition,reason)=>{if(!condition)fail(reason);};
+const remain=(limit)=>{const ms=end-Date.now();need(ms>0);return Math.max(1,Math.min(ms,limit));};
+const digest=b=>createHash('sha256').update(b).digest('hex');
+const gitBlob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex');
+const existsAbsent=async p=>{try{await lstat(p);}catch(e){if(e.code==='ENOENT')return;throw e;}fail();};
+async function pinned(rootDir,pin) {
+  const path=join(rootDir,pin.path);need((await lstat(path)).isFile() && await realpath(path)===resolve(path));
+  const data=await readFile(path);
+  need(data.length===pin.bytes&&gitBlob(data)===pin.blob&&digest(data)===pin.sha256);
+  return data;
+}
+function hostCmd(cmd,args,max=1048576,input) {
+  const result=spawnSync(cmd,args,{cwd:workspace,env:parentEnv,encoding:null,
+    input,stdio:['pipe','pipe','pipe'],maxBuffer:max,timeout:remain(cmd==='tar'?30000:330000)});
+  need(!result.error&&result.signal===null&&result.status===0&&Buffer.isBuffer(result.stdout)&&
+    result.stdout.length<=max&&Buffer.isBuffer(result.stderr)&&result.stderr.length<=65536);
+  return result.stdout;
+}
+const gitText=(...args)=>new TextDecoder('utf-8',{fatal:true}).decode(hostCmd('git',args)).trim();
+async function materialize(index,files) {
+  target=join(temp,'proposal-green'); await mkdir(target,{mode:0o700});
+  const archive=hostCmd('git',['archive','--format=tar',config.BASE,'--','lib','worker','scripts','test','db','config',
+    config.bootstrap.path,...config.rootFiles],33554432);
+  hostCmd('tar',['-xf','-','-C',target],65536,archive);
+  await pinned(target,config.bootstrap);
+  for(const e of index.entries) {
+    const destination=join(target,e.path), admitted=await pinned(workspace,{...e.after,path:e.dataPath});
+    if(e.before) {
+      const old=await readFile(destination);
+      need((await lstat(destination)).isFile()&&old.length===e.before.bytes&&gitBlob(old)===e.before.blob);
+    } else await existsAbsent(destination);
+    await mkdir(dirname(destination),{recursive:true});
+    await writeFile(destination,admitted,{flag:e.before?'w':'wx'});
+  }
+  await symlink(join(workspace,'node_modules'),join(target,'node_modules'),'dir');
+  await writeFile(join(target,'c2-source-custody-guard.mjs'),files.guard,{flag:'wx'});
+  await writeFile(join(target,'c2-source-custody-preflight.mjs'),files.preflight,{flag:'wx'});
+}
+function admitGetTransport(receipt,index){
+  need(config.transportRelease.path===config.prefix+'native-release.json');
+  need(receipt.schema==='AFW.C2.GET_WINNER.FULL20_NATIVE_RELEASE/1' &&
+    receipt.sourceIndex===pins.index.blob && receipt.toolEvidence?.review===config.toolReview &&
+    receipt.toolEvidence.sourceIndex===pins.index.blob &&
+    receipt.toolEvidence.limits?.full20BusinessRouteExecuted===false &&
+    receipt.legacyDrop?.qaClosed===false && receipt.legacyDrop?.mClosed===false &&
+    receipt.activationReleased===false && receipt.nativeReleased===false && receipt.businessReleased===false);
+  // The independently reviewed carrier and Root's exact one-use admission supply the conditional application premise.
+  // S10 checks actual call/dispatch identities and mounted resident hash before observing any marker.
+  need(adapters.same(receipt.getRoute,config.route) && config.route.rootAcceptanceRequired===true &&
+    config.route.verifiedFull20Occurrence===false &&
+    adapters.same(index.entries.slice(8,11).map(entry=>entry.after.blob),config.route.source));
+  return 'verified';
+}
+let previous = new Map();
+async function probeMap() {
+  const dir=join(target,'custody-probes');
+  let names;
+  try{const stat=await lstat(dir);need(stat.isDirectory()&&stat.uid===uid&&stat.gid===gid,'CUSTODY_INVALID');names=await readdir(dir);}
+  catch(e){if(e.code==='ENOENT')return new Map();throw e;}
+  need(names.length<=8 && names.every(n=>/^[1-9][0-9]*\.json$/.test(n)),'CUSTODY_INVALID');
+  const map=new Map();
+  for(const name of names.sort()) {
+    const path=join(dir,name), stat=await lstat(path), h=await adapters.readProbe(path);
+    const last=await lstat(path);
+    need(stat.dev===last.dev&&stat.ino===last.ino&&stat.size===last.size&&stat.ctimeMs===last.ctimeMs,'CUSTODY_INVALID');
+    map.set(name,[last.dev,last.ino,h]);
+  }
+  return map;
+}
+async function checkedLaunch(args,limit,observeGet=false) {
+  const prior=await probeMap();
+  need(adapters.same([...prior],[...previous]),'CUSTODY_INVALID');
+  const env={PATH:parentEnv.PATH,HOME:temp,TMPDIR:temp,RUNNER_TEMP:temp,XDG_CACHE_HOME:join(temp,'cache'),
+    XDG_CONFIG_HOME:join(temp,'config'),LANG:'C.UTF-8',LC_ALL:'C.UTF-8',CI:'true',NODE_ENV:'test',
+    AFW_C2_DROP_WINNER:'1',AFW_C2_QA_TRANSPORT:'unverified',AFW_C2_M_TRANSPORT:'unverified',
+    ...(observeGet?{AFW_C2_GET_WINNER:'1',AFW_C2_GET_TRANSPORT:getTransport}:{}),
+    GITHUB_SHA:context.head,GITHUB_REPOSITORY:config.repo,AFW_C2_DIAG_ROOT:target,
+    AFW_C2_DIAG_PARENT_UID:String(uid),AFW_C2_DIAG_PARENT_GID:String(gid)};
+  const child=spawnSync('sudo',['-n','/usr/bin/env','-i',...Object.entries(env).map(([k,v])=>k+'='+v),
+    'unshare','--net','/bin/sh','-c','uid="$1"; gid="$2"; shift 2; ip link set lo up && exec /usr/bin/setpriv --reuid "$uid" --regid "$gid" --clear-groups --no-new-privs "$@"',
+    'c2-source',String(uid),String(gid),node,'--import',join(target,'c2-source-custody-guard.mjs'),...args],
+    {cwd:target,env,encoding:null,maxBuffer:1048576,timeout:remain(limit),stdio:['ignore','pipe','pipe']});
+  const after=await probeMap();
+  for(const [key,v] of prior)need(adapters.same(after.get(key),v),'CUSTODY_INVALID');
+  const fresh=adapters.freshProbes([...prior.keys()],[...after.keys()]);
+  previous=after;
+  return {child,fresh};
+}
+const checks={parentNonRoot:false,preflightOwned:false,preflightRemoved:false,uidGidGroupsLoopbackMatched:false,
+  targetsBeforeMatched:false,targetsAfterMatched:false,journalOwnershipMatched:false,ownRootVerified:false,ownTempRemoved:false};
+try {
+  const e=process.env;
+  need(process.argv.length===2&&process.version==='v22.23.4'&&Number.isSafeInteger(uid)&&uid>0&&Number.isSafeInteger(gid)&&gid>=0);
+  need(e.GITHUB_REPOSITORY===config.repo&&e.GITHUB_EVENT_NAME==='push'&&e.GITHUB_REF==='refs/heads/'+config.branch
+    &&e.GITHUB_JOB===config.job&&e.GITHUB_RUN_ATTEMPT==='1'&&/^[1-9][0-9]{0,19}$/.test(e.GITHUB_RUN_ID??'')
+    &&/^[0-9a-f]{40}$/.test(e.GITHUB_SHA??'')&&e.RUNNER_TEMP&&root===await realpath(root)
+    &&workspace===resolve(e.GITHUB_WORKSPACE??'')&&fileURLToPath(import.meta.url)===join(workspace,config.runner));
+  need(gitText('rev-parse','HEAD')===e.GITHUB_SHA&&gitText('rev-parse','HEAD^')===config.BASE&&
+    gitText('rev-parse',config.BASE+'^{tree}')===config.TREE&&gitText('show','-s','--format=%B','HEAD')===config.message);
+  const tree=gitText('rev-parse','HEAD^{tree}');need(/^[0-9a-f]{40}$/.test(tree));
+  const files={};for(const [key,pin]of Object.entries(pins))files[key]=await pinned(workspace,pin);
+  const selection=JSON.parse(files.selection), index=JSON.parse(files.index);
+  need(digest(Buffer.from(JSON.stringify(selection)))===config.selectHash&&index.entries.length===13
+    &&index.context.baselineSource===config.BASE&&index.context.baselineTree===config.TREE
+    &&index.context.repository===config.repo&&index.context.status==='SOURCE_TESTS_PENDING');
+  for(const [i,entry] of index.entries.entries())need(entry.dataPath===config.selectionDataPaths[i]);
+  need(JSON.stringify(index.caseMap.map(x=>x.id))===JSON.stringify(selection.selected)&&selection.selected.length===20);
+  const lock=await readFile(join(workspace,'package-lock.json'));
+  need(lock.equals(hostCmd('git',['show',config.BASE+':package-lock.json']))&&JSON.parse(lock).packages?.['node_modules/@cloudflare/workers-oauth-provider']?.version==='1.2.1');
+  adapters=await import('./collection-adapters.mjs');
+  getTransport=admitGetTransport(JSON.parse(await pinned(workspace,config.transportRelease)),index);
+  context={repository:config.repo,baselineSource:config.BASE,baselineTree:config.TREE,sourceIndexBlob:pins.index.blob,
+    proposalIndexHash:pins.index.sha256,selectionHash:config.selectHash,head:e.GITHUB_SHA,tree,runId:e.GITHUB_RUN_ID,
+    runAttempt:1,job:config.job,node:process.version};
+  checks.parentNonRoot=true;
+  phase='materialize';
+  temp=await mkdtemp(join(root,'afw-green20-')); tempInitial=await lstat(temp);
+  need(dirname(temp)===root&&tempInitial.isDirectory()&&tempInitial.uid===uid&&tempInitial.gid===gid);
+  await materialize(index,files);
+  await adapters.installSiblings(target,selection,files.driver,files.recorder);
+  phase='preflight';
+  const pf=await checkedLaunch([join(target,'c2-source-custody-preflight.mjs')],10000);
+  pfCount=pf.fresh;
+  need(!pf.child.error&&pf.child.signal===null&&pf.child.status===0&&
+    pf.child.stdout?.equals(Buffer.from('AFW_C2_OAUTH_PREFLIGHT {"schema":"afw.c2-oauth-preflight.v1","written":true}\n'))&&pf.child.stderr?.length===0);
+  const pd=join(target,'preflight-owned'),probe=join(pd,'probe'),st=await lstat(probe);
+  need((await lstat(pd)).isDirectory()&&await realpath(probe)===probe&&st.isFile()&&st.nlink===1&&st.uid===uid&&st.gid===gid&&
+    st.size===15&&(await readFile(probe)).equals(Buffer.from('C2_OAUTH_OWNED\n')));
+  checks.preflightOwned=true;await rm(pd,{recursive:true,force:false});await existsAbsent(pd);checks.preflightRemoved=true;
+  phase='materialize';
+  const journalPath=join(target,'green-progress.ndjson'),initial=await adapters.createJournal(journalPath);
+  await adapters.verifySiblings(target,selection);
+  beforeHashes=await adapters.measureTargets(target,index.entries);
+  expected=index.entries.map(e=>e.after.sha256);checks.targetsBeforeMatched=true;
+  phase='green';
+  const green=await checkedLaunch(['--experimental-vm-modules','--test','--test-reporter=tap','--test-concurrency=1',
+    config.childFile],180000,true);greenCount=green.fresh;
+  checks.uidGidGroupsLoopbackMatched=true;
+  phase='journal';
+  await adapters.verifySiblings(target,selection);
+  afterHashes=await adapters.measureTargets(target,index.entries);checks.targetsAfterMatched=true;
+  const raw=await adapters.readJournal(journalPath,initial);checks.journalOwnershipMatched=true;
+  phase='native';observation=adapters.collectObservation(green.child,raw,selection.selected);
+} catch(error) {
+  fault={phase,reason:valid[phase].includes(error?.code)?error.code:valid[phase][0]};
+} finally {
+  if(temp) {
+    try {
+      phase='cleanup';
+      const s=await lstat(temp);
+      need(tempInitial&&dirname(temp)===root&&await realpath(temp)===temp&&s.isDirectory()&&
+        s.dev===tempInitial.dev&&s.ino===tempInitial.ino&&s.uid===uid&&s.gid===gid);
+      checks.ownRootVerified=true;await rm(temp,{recursive:true,force:false});await existsAbsent(temp);checks.ownTempRemoved=true;
+    } catch {fault={phase:'cleanup',reason:'CLEANUP_INVALID'};}
+  }
+}
+if(!fault) {
+  try {
+    phase='publish';remain(330000);
+    const custody=adapters.custodyFrame(context,pfCount,greenCount,checks);
+    const packet=adapters.successPacket(context,custody,beforeHashes,afterHashes,expected,observation);
+    const dest=join(workspace,config.artifact),outDir=dirname(dest);
+    await mkdir(outDir,{recursive:true});
+    need(await realpath(outDir)===outDir);
+    await writeFile(dest,packet.payload,{flag:'wx',mode:0o600});
+    need((await readFile(dest)).equals(Buffer.from(packet.payload))&&Date.now()<end);
+    process.stdout.write(packet.custodyLine+packet.outcomeLine);
+  } catch {fault={phase:'publish',reason:'PUBLICATION_INVALID'};}
+}
+if(fault) {
+  process.exitCode=1;
+  const text=adapters?adapters.faultLine(context,fault.phase,fault.reason):
+    'AFW_C2_GET_WINNER_OBSERVATION1_FAULT '+JSON.stringify({schema:'afw.c2-get-winner-observation1-fault.v1',context,
+    phase:fault.phase,reason:fault.reason,diagnosticCollectionComplete:false,nativeQualification:false,
+    SourceQualified:false,Task1Pass:false,nonclaims:flags})+'\n';
+  process.stderr.write(text);
+}

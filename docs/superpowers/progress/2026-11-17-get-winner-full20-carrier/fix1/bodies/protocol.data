@@ -1,0 +1,871 @@
+{
+  "schema": "afw.c2-get-winner-diagnostic1-protocol.v1",
+  "status": "CLOSED_UNACTIVATED_EXECUTION_NOT_RUN",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "brief": "524c1558cc21d1df4b950b064ef0041d48ce6163",
+    "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+    "plan": "0b8368869f60978c536b056c37e451f8c899f93f",
+    "toolProtocol": "b862b4653819bbead0e916d939dfca8156ba8a1e",
+    "sourceSeamReview": "a279c2e6238927b0f7b1544c0f4d058852177651",
+    "rootReviewRequired": true
+  },
+  "purpose": "Bind one future synthetic full20 observation of the first finite GET cut and ordered preceding evidence. No predetermined business outcome or repair.",
+  "source": {
+    "preimage13": "fc5b71098da76696278765f43805f0f2a1953b22",
+    "preimage26": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+    "preimageRoot26": "1fea33135f8943707738d4f078ff3616e9b5132c",
+    "index": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+      "bytes": 9228,
+      "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153"
+    },
+    "currentBodyMeasurement": "e38715fe3078efa0318783e171039cd7128917c5",
+    "onlyChangedIds": [
+      "S08",
+      "S09",
+      "S10"
+    ],
+    "sourceRows": [
+      {
+        "id": "S00",
+        "canonicalPath": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "gzipBytes": 32414
+      },
+      {
+        "id": "S01",
+        "canonicalPath": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+        "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "gzipBytes": 11301
+      },
+      {
+        "id": "S02",
+        "canonicalPath": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+        "gitBlob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "gzipBytes": 1110
+      },
+      {
+        "id": "S03",
+        "canonicalPath": "worker/mcp-own/finite.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+        "gitBlob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "gzipBytes": 1061
+      },
+      {
+        "id": "S04",
+        "canonicalPath": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+        "gitBlob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "gzipBytes": 1592
+      },
+      {
+        "id": "S05",
+        "canonicalPath": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+        "gitBlob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "gzipBytes": 26076
+      },
+      {
+        "id": "S06",
+        "canonicalPath": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+        "gitBlob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "gzipBytes": 6767
+      },
+      {
+        "id": "S07",
+        "canonicalPath": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+        "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "gzipBytes": 1050
+      },
+      {
+        "id": "S08",
+        "canonicalPath": "test/fixtures/finite-coupled-native.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+        "blob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+        "bytes": 23226,
+        "sha256": "75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046",
+        "gitBlob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a"
+      },
+      {
+        "id": "S09",
+        "canonicalPath": "test/fixtures/finite-first-connection-publication.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+        "blob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+        "bytes": 83571,
+        "sha256": "a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80",
+        "gitBlob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4"
+      },
+      {
+        "id": "S10",
+        "canonicalPath": "test/fixtures/finite-initial-entry-world.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt",
+        "blob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+        "bytes": 98851,
+        "sha256": "7c8680d6b86b1ccc0acdcfecb4d8e4312e6d6971f36b00bd6dcf88c289309604",
+        "gitBlob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495"
+      },
+      {
+        "id": "S11",
+        "canonicalPath": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+        "gitBlob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "gzipBytes": 14307
+      },
+      {
+        "id": "S12",
+        "canonicalPath": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+        "gitBlob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "gzipBytes": 2098
+      }
+    ],
+    "orderedCases": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH",
+      "C2T1_HANDLE",
+      "C2T1_PROJECTREF",
+      "C2T1_SUBJECT",
+      "C2T1_PHASE_RENAME",
+      "C2T1_SOURCE_BYTES",
+      "C2T1_APPROVAL",
+      "C2T1_PREDECESSOR",
+      "C2T1_GRANT_REVOKED",
+      "C2T1_EXTRA_KEY",
+      "C2T1_NOTICES",
+      "C2T1_MONITOR_COOKIE",
+      "C2T1_MONITOR",
+      "C2T1_SCOPE_MISSING",
+      "C2T1_FINITE",
+      "C2T1_SELECTION",
+      "C2T1_LOST_ACK_DUPLICATE",
+      "C2T1_UNRESOLVED_WRITER",
+      "C2T1_OWN_PROMISE"
+    ],
+    "driver": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/diagnostic-driver.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    "recorder": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/progress-recorder.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    "reader": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    }
+  },
+  "sourceNomination": {
+    "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
+    "message": "AFW-C2-GET-WINNER-DIAGNOSTIC1-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+    "job": "c2-get-winner-diagnostic1",
+    "prefix": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/",
+    "runner": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+    "command": "node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+    "artifact": {
+      "name": "afw-c2-get-winner-diagnostic1",
+      "path": "output/c2-get-winner-diagnostic1.json",
+      "fileName": "c2-get-winner-diagnostic1.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Check the business controller syntax",
+      "Install only the existing locked dependencies",
+      "Observe first finite GET in full case order",
+      "Preserve the bounded first finite GET diagnostic"
+    ],
+    "jobMinutes": 7,
+    "activationReleased": false,
+    "commandStep": "Observe first finite GET in full case order",
+    "event": "push",
+    "attempt": 1
+  },
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "sourceIndexBlob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "proposalIndexHash": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153",
+    "selectionHash": "fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd",
+    "runAttempt": 1,
+    "job": "c2-get-winner-diagnostic1",
+    "node": "v22.23.4"
+  },
+  "selection": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/mode-selection.json",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+    "bytes": 4403,
+    "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+  },
+  "selectionWireHash": "fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd",
+  "selectionWireBytes": 4402,
+  "selectionWireRule": "UTF8 JSON.stringify(selection) without LF; independently compare raw artifact bytes/GitID/SHA256.",
+  "schemaPin": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/frame-schema.json",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+    "bytes": 35611,
+    "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+  },
+  "publisher": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "77183a2558a9e071b562485e1b3bd7622fffdf66",
+    "bytes": 38299,
+    "sha256": "dd6f9474ddf47386276e40f6d83cde2f38bcf1263f72008870f2d1700f2e0a80"
+  },
+  "sourceWorkflow": {
+    "path": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "eea7ccdf5632b04ad44ed7ceb4b638ba9f053a7b",
+    "bytes": 2255,
+    "sha256": "c44a8760e783cc39966656daceb1e0428bac5cba0a45bd41e62db78fcfcbd1e3"
+  },
+  "nativeRelease": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-release.json",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "a37dc79fe27518557f9082932c0acb05fcbcd557",
+    "bytes": 2061,
+    "sha256": "ad272eec1204f53abd89d1c86f226ebe0da6dad6d9e750696b8761f83896e32d"
+  },
+  "wire": {
+    "success": [
+      {
+        "marker": "AFW_C2_GET_WINNER_OBSERVATION1_CUSTODY",
+        "definition": "custody",
+        "bodyBytesMax": 1024
+      },
+      {
+        "marker": "AFW_C2_GET_WINNER_OBSERVATION1_OUTCOME",
+        "definition": "outcome",
+        "bodyBytesMax": 24576
+      }
+    ],
+    "fault": {
+      "marker": "AFW_C2_GET_WINNER_OBSERVATION1_FAULT",
+      "definition": "fault",
+      "bodyBytesMax": 2048
+    },
+    "encoding": "Each marker is followed by exactly one ASCII space, UTF8(JSON.stringify(parsed body)) in normative order, then a single LF. Caps exclude marker, that space and LF. Artifact payload is the exact outcome body followed by ONE byte 0x0a, thus at most 24577 bytes total. No BOM/extra LF/duplicate keys/extra fields/whitespace/CR/smuggled second marker. ZIP size limit 1048576 bytes; specified sole exact filename, listing count1/7d/private, measured archive digest and inflated bytes agree with API/log. Overall transport log max4194304. A body of 24576 is legal only if all semantic/shape rules also hold; never enlarge the body cap to fit LF.",
+    "order": {
+      "context": [
+        "repository",
+        "baselineSource",
+        "baselineTree",
+        "sourceIndexBlob",
+        "proposalIndexHash",
+        "selectionHash",
+        "head",
+        "tree",
+        "runId",
+        "runAttempt",
+        "job",
+        "node"
+      ],
+      "custody": [
+        "schema",
+        "context",
+        "parentNonRoot",
+        "preflightOwned",
+        "preflightRemoved",
+        "checkedLaunches",
+        "preflightProcesses",
+        "greenProcesses",
+        "checkedProcesses",
+        "uidGidGroupsLoopbackMatched",
+        "targetsBeforeMatched",
+        "targetsAfterMatched",
+        "journalOwnershipMatched",
+        "ownRootVerified",
+        "ownTempRemoved"
+      ],
+      "streamOut": [
+        "bytes",
+        "sha256"
+      ],
+      "streamErr": [
+        "bytes",
+        "sha256"
+      ],
+      "capture": [
+        "exitCode",
+        "signal",
+        "errorKind",
+        "stdout",
+        "stderr"
+      ],
+      "journal": [
+        "bytes",
+        "sha256",
+        "stable",
+        "recorderFaultObserved"
+      ],
+      "site": [
+        "file",
+        "line",
+        "column"
+      ],
+      "error": [
+        "name",
+        "code",
+        "site"
+      ],
+      "event": [
+        "sequence",
+        "elapsedMs",
+        "id",
+        "operation",
+        "edge",
+        "error"
+      ],
+      "openCase": [
+        "id",
+        "operation"
+      ],
+      "witness": [
+        "integrity",
+        "frontier",
+        "events",
+        "openCase",
+        "afterOpen"
+      ],
+      "nativeCase": [
+        "id",
+        "status"
+      ],
+      "native": [
+        "integrity",
+        "cases"
+      ],
+      "observation": [
+        "capture",
+        "journal",
+        "witness",
+        "unknownReason",
+        "firstThrowSequence",
+        "native",
+        "firstFailure",
+        "finiteGet",
+        "dropWinner",
+        "getWinner"
+      ],
+      "outcome": [
+        "schema",
+        "context",
+        "diagnosticCollectionComplete",
+        "nativeQualification",
+        "sourceReads",
+        "observation",
+        "custody",
+        "SourceQualified",
+        "Task1Pass",
+        "nonclaims"
+      ],
+      "fault": [
+        "schema",
+        "context",
+        "phase",
+        "reason",
+        "diagnosticCollectionComplete",
+        "nativeQualification",
+        "SourceQualified",
+        "Task1Pass",
+        "nonclaims"
+      ],
+      "sourceReads": [
+        "beforeSha256",
+        "afterSha256"
+      ],
+      "firstFailure": [
+        "schema",
+        "state",
+        "reason",
+        "throwSequence",
+        "source",
+        "assertion"
+      ],
+      "firstFailureSource": [
+        "id",
+        "status",
+        "phase",
+        "counters",
+        "code"
+      ],
+      "firstFailureCounters": [
+        "upload",
+        "activation",
+        "receipts"
+      ],
+      "firstFailureAssertion": [
+        "actual",
+        "expected"
+      ],
+      "nonclaims": [
+        "historicalCauseProven",
+        "receiptAuthenticated",
+        "operationalReadiness",
+        "completePackage",
+        "PCoff",
+        "globalNativeDrainVerified",
+        "sdkNamespaceEmptyVerified"
+      ],
+      "finiteGet": [
+        "schema",
+        "http",
+        "afterMonitor",
+        "afterScopeMissing"
+      ],
+      "finiteHttp": [
+        "state",
+        "reason",
+        "throwSequence",
+        "actual",
+        "expected"
+      ],
+      "finiteCheckpoint": [
+        "value",
+        "reason",
+        "countSequence"
+      ],
+      "dropWinner": [
+        "case",
+        "site",
+        "outer",
+        "publicSite"
+      ],
+      "getWinner": [
+        "case",
+        "winner",
+        "stubStatus",
+        "qaLastCompleted"
+      ]
+    },
+    "schemaRule": "Every object follows its $defs required and properties insertion order, exactly. Const arrays compare elementwise in supplied order; transport canonical ASCII dates and occurrence joining are separate. The schema checks wire shape and constants; enforce relational rules below separately. Generic JSON Schema ignores key order. A structural validator alone cannot admit this protocol.",
+    "artifactConsistency": "Only two normal frames in this order, emitted once after all checks/own cleanup. Embedded custody must byte-match the first frame body. Prepare both complete canonical frames/payload before emitting normal markers. On infrastructure failure use FAULT with failing command and no admissible artifact; never accept partial line, success pair + FAULT, a partial pair, upload failure, or mixing occurrences. If physical transport fails before fault can be produced, the unique occurrence still fails admission.",
+    "firstFailureBodyBytesMax": 512,
+    "finiteGetBodyBytesMax": 512,
+    "dropWinnerBodyBytesMax": 512,
+    "artifact": {
+      "name": "afw-c2-get-winner-diagnostic1",
+      "path": "output/c2-get-winner-diagnostic1.json",
+      "fileName": "c2-get-winner-diagnostic1.json",
+      "retentionDays": 7
+    }
+  },
+  "caps": {
+    "perCaseMs": 120000,
+    "childMs": 180000,
+    "totalMs": 330000,
+    "jobMinutes": 7,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "journalBytes": 32768,
+    "journalRows": 128,
+    "rawTransportLogBytes": 4194304,
+    "zipBytes": 1048576,
+    "custodyBodyBytes": 1024,
+    "outcomeBodyBytes": 24576,
+    "payloadIncludingLFBytes": 24577,
+    "firstFailureBodyBytes": 512,
+    "finiteGetBodyBytes": 512,
+    "dropWinnerBodyBytes": 512,
+    "getWinnerBodyBytes": 512,
+    "privateScopeMarkerIncludingTapAndLF": 96,
+    "originalMLeaseMs": 30000
+  },
+  "identity": {
+    "gitSource": "Before executing, verify original 3203 BASE leaf modes/blob IDs and exact additional DATA edges per inventory. BASE absence at canonical S08 and legacy S09 there is correct. Bind all 13 canonical afterimages only in owned materialized target, plus separately sealed D07 and recorder. Compute bytes/SHA256 and Git blob for each real target canonical file before GREEN and again after child exit/timeout before cleanup. Each projection is an independently built ordered list of 13 SHA256 values recorded in sourceReads.beforeSha256 and sourceReads.afterSha256. Neither may be filled from the index or copied from the other. Bind lengths/git IDs both times locally and independently to immutable normal-13 Git DATA tree. OWN demands both arrays exactly equal index rows and tree edges. Mismatch or inability to read -> infrastructure failure; no successful observation.",
+    "manifest": "Verify raw selection artifact git/bytes/sha vs p(selection), independently compute selectionWireHash from compact UTF8 JSON.stringify(selection) WITHOUT LF. Bind exact D07 sibling in argv and stack alias, S07 still canonical; seal actual pinned D07 bytes, one-alias projected recorder, journal reader. Reject reverse alias/legacy driver path, mixed bodyhash, fake complete claim or old green manifest/job. No new callbacks, remount strategy, original clocks, test predicates or additional native business calls.",
+    "activeIndex": "Current Source13 is unchanged from accepted TOOL inputs. Its 13 entries bind carrier afterimages in order. S08–S10 keep their exact inert dataPath entries from the immutable index."
+  },
+  "custody": "Exactly two checked native launches: owned-file preflight under ten seconds THEN all twenty GREEN cases in one process launch with normal compiled fixtures. No synthetic battery/ENOENT/BASE/mutant/regression/N3/W1 in capture. Together share a single target; each observed >=1 fresh unique PID record, retain all previous, union<=8. preflightProcesses and greenProcesses are separate actual fresh counts at each launch; checkedProcesses = their sum (2..8); no invented values. Parent positive UID, child exact UID/GID, cleared supplementary groups and loopback-only, sudo unshare + setpriv --no-new-privs, exact guard before native target, fresh regular safe files. Use existing 0600/single-link/no-symlink/ownership/dev/inode/size checks for journal and scoped temp creation/removal. `uidGidGroupsLoopbackMatched` reports observed guard facts; the `--no-new-privs` launch flag is bound to reviewed runner. `journalOwnershipMatched` and two target booleans mean actual readings succeeded, prior preflight/temp removal confirmed. Maximum custody body with longest admitted runId remains within 1024 bytes.",
+  "capture": "Capture from actual returned spawnSync object only, using existing finite safeCapture. Require observed stdout/stderr buffers within caps, measured bytes and SHA256. ETIMEDOUT ⇒ errorKind:'timeout'; keep independently returned numeric status or null and finite signals as frozen mapping (null=>'none'; known names literal; unrecognized string=>'other'; unavailable=>'unavailable'). Never set status=1/HANG by inference. When errorKind:'none' require signal:'none' and exitCode 0 or 1. Other spawn/err/signal combinations, overflow/missing streams/ownership/incorrect argv ⇒ infrastructure FAULT. Artifact marks diagnosticCollectionComplete:true and nativeQualification:false for collected exit0, native exit1 or ETIMEDOUT; original child condition stays visible. No eligibility/Source proof from job success. Require exact standard SHA256(empty) whenever byte count is zero.",
+  "journal": {
+    "physical": "Fresh parent-created exclusive blank 0600 file/O_NOFOLLOW/expected device+inode/owner/nlink. Recorder opens, appends one canonical LF-terminated row, closes synchronously, has no extra active timer. Read via same identity checked fd in RAM after child; before/after stats and read length agree; oversize/short read/identity/symlink/nonstable storage => FAULT,never a sanitized stable prefix claim. Raw journal <=32768 B/128 rows. Export validated rows only. Clamp by rejecting invalid data; never clip a valid finite value into range.",
+    "intervals": "Each complete canonical row parsed from exact bytes has sequence starting 1 and +1, elapsedMs 0..330000 nondecreasing, error:null for enter/return; on throw exact error object with allowlist name/code and exact reduced alias+line/column or null. Unknown error details stay null. For 20 nominal IDs, in order: action enter→return|throw, count enter→return|throw, then next id. AFTER close independent enter→return|throw at most once, may overlap any case. A missing world means D07 does not record a counter it never called; do not fabricate one or skip missing intervals to recover later. Records stop at first semantically invalid/malformed row. Select 62a31 progress() behavior including suppressing frontier on torn/ambiguous, and nativePrefix() separately.",
+    "integrity": "Complete/prefix/empty clean journals require equality of raw byte length and SHA256 against the concatenation UTF8(JSON.stringify(event)+'\\n') for all exported rows. Stable torn/invalid tail has rawBytes strictly larger than canonical validated prefix size (raw tail not exported); observed-recorder-fault can occur with zero tail. For any integrity, if lengths equal, require raw digest equal reconstructed prefix digest. For stable torn/invalid with unexported suffix, full raw digest is a bounded producer observation; do not claim independent proof of bytes not supplied. Preserve stable recorder-fault indication observed in actual stdout/stderr; false only means marker not observed. Ambiguous/invalid marker from the *binding* is fatal; malformed alias in a stable individual event is truncated before that event and yields UNKNOWN.",
+    "unknown": "If recorderFaultObserved=true, witness.integrity='ambiguous' and unknownReason='RECORDER_FAULT' (also if an invalid/torn record is present). Else if the first unaccepted complete record is invalid (including invalid alias), integrity='ambiguous', reason='JOURNAL_INVALID_RECORD'. Else if any incomplete final line follows valid complete rows, integrity='torn', reason='JOURNAL_TORN'. Else if no data, integrity='empty', reason='JOURNAL_EMPTY'. All four set frontier='unknown',openCase=null,afterOpen=false, where null/false are protocol sentinels and cannot establish absence. Preserve valid preceding rows and native evidence independently. For prefix or complete require unknownReason=null, stable true and no recorder fault.",
+    "frontier": "For known journal, use exact legacy frontier labels and recompute from chronological events. At complete all20 case actions/count and AFTER closed, timeout plus any throw ⇒ post-settlement-process-exit, without throw ⇒ post-teardown-process-exit, else normal end ⇒ all-settled. With case & after open ⇒ case-and-after; else case action or count, else after-close, else between-action-and-count after action end, else before-after for all20 finished/AFTER unopened, else between-cases. `firstThrowSequence` is the earliest edge='throw' within the validated contiguous exported prefix, including AFTER, else null. This is a pointer to an observed record, not a verdict about missing history. Never designate last absolute event or process/physical hold from torn tail."
+  },
+  "nativeAndCross": "Use exact published LF-terminated serial top-level TAP result lines paired to corresponding Subtest, ordinal and expected exact ID; never promote C2SOURCE/unterminated line or conflate journal and native. Preserved nativePrefix62a31 results use prefix/empty/torn/ambiguous only; prefix can contain all20 without exporting complete native TAP totals. Empty => zero observed pairs; ambiguous/torn may contain only previously complete pairs. Do not invent evidence after first ambiguity. Do not claim unconditional worker settlement. For every observed native pass, any stable validated action/count throw of the SAME id is a contradiction (N2), even if later journal tail is unknown. Other id/global AFTER throw is not the same contradiction. A TAP fail need not have a journal throw (framework/timeouts exist). Alias allowlist bound to exact temp file/URL, exact source or D07 path, bounds per schema; no suffix matches.",
+  "transport": "Prebind raw tree/body/nomination before push. Receiver independently joins repo/event push/head/parent/tree/ref/message, logical job, seven-minute workflow and attempt1 to actual API unique terminal job ID and actual command-step number. All six actual required steps succeed in order for accepted diagnostic; if run/step is incomplete, preserve what actually occurred as partial separately. N1: unique timestamped ##[group]Run <exact command>, finite times on header and each marker within actual command window ±1000ms per existing N1, header closed by ##[endgroup] before stdout and before next step group. Reject malformed/smuggled/mixed duplicate markers even outside selected window, archived API job with misleading same names, artifacts outside this head/branch/run. Bind ordered pair plus canonical outcome JSON+LF to actual ZIP compressed bytes/digest/listing/entry count/name, ownership/time, exact CRC/size/full deflate consumption and closed primitive from OWN419. Reuse OWN independent logic only, never producer helper or imported Source oracle.",
+  "fault": {
+    "meaning": "Missing immutable wire/target alias, admission/custody failure, unstable owned read, process capture outside defined combinations, N2/contract conflict or failed cleanup/publication => reject. An actual fault during collection, once captured, emits only finite fault marker if reporting possible, exits nonzero, no eligible artifact. Stable incomplete evidence reasons in journal.unknown are collected; do not send FAULT just because the original child timed out or a record was torn. The `RECORDER_FAULT` reason in FAULT envelope is reserved for a failure to establish a trustworthy recorder/transport identity or fault classification; a stable orderly observed flag inside approved target is handled by the success envelope with uncertain frontier.",
+    "phaseReasons": {
+      "admission": [
+        "ADMISSION_INVALID"
+      ],
+      "materialize": [
+        "MATERIALIZATION_INVALID",
+        "TARGET_DRIFT"
+      ],
+      "preflight": [
+        "PREFLIGHT_INVALID",
+        "CUSTODY_INVALID"
+      ],
+      "green": [
+        "LAUNCH_INVALID",
+        "CUSTODY_INVALID",
+        "CAPTURE_INVALID"
+      ],
+      "journal": [
+        "JOURNAL_INVALID",
+        "RECORDER_FAULT",
+        "TARGET_DRIFT"
+      ],
+      "native": [
+        "CAPTURE_INVALID",
+        "EVIDENCE_CONFLICT"
+      ],
+      "cleanup": [
+        "CLEANUP_INVALID",
+        "TARGET_DRIFT"
+      ],
+      "publish": [
+        "PUBLICATION_INVALID"
+      ]
+    },
+    "context": "null only if admission failed before context could be established; valid pinned context mandatory after admission. No secret/raw/error stack in fault."
+  },
+  "firstFailure": {
+    "definition": "#/$defs/firstFailure",
+    "componentCanonicalSha256": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+    "mandatory": true,
+    "bodyBytesMax": 512,
+    "scope": "Capacidad opcional por selección explícita de familia nueva; DIAG1 heredado queda inmutable y rechaza campos nuevos. En DIAG2 firstFailure es obligatorio y emite UNKNOWN/NOT_APPLICABLE explícitos cuando corresponda; ausencia no equivale a UNKNOWN válido. No field silenciosamente opcional dentro de la nueva versión.",
+    "outputOnly": "Sólo firstFailure6keys; KNOWN contiene source canonical5keys y assertion2ints. UNKNOWN/NOT_APPLICABLE tienen throwSequence/source/assertion null. Los hechos ya disponibles permanecen sin cambios en outer journal/native; null no borra ni niega esos hechos.",
+    "sourceProjection": {
+      "inputs": "Mismos child.stdout Buffer ya capturado y sus sha/bytes, observación journal validada por readProgress y nativePrefix heredados, selección20 y contexto/pins fijados. Incluso ETIMEDOUT se inspecciona el buffer existente; no nueva lectura de proceso/servicio ni source hook.",
+      "output": "Sólo firstFailure6keys; KNOWN contiene source canonical5keys y assertion2ints. UNKNOWN/NOT_APPLICABLE tienen throwSequence/source/assertion null. Los hechos ya disponibles permanecen sin cambios en outer journal/native; null no borra ni niega esos hechos.",
+      "knownCandidate": [
+        "El prefijo journal exportado se valida desde seq1 sin huecos; su primera edge throw dentro de ese prefijo es idC2T1_NOTICES,operationaction,error.nameAssertionError,codeERR_ASSERTION,siteS08:41:12. No utilizar una throw posterior ni buscar el target saltando una anterior.",
+        "Los11 casos previos actuales del mismo prefijo tienen action/countreturn y los11 nativepairs actuales PASS en orden; native[11] es exactamente fail C2T1_NOTICES con ordinal12 top-level y sin skip/todo. No heredar estos hechos de DIAG1/historia.",
+        "El target tiene su count.enter y count.return completos tras la action.throw, sin countthrow. Estos hechos pueden estar en un prefijo conservado de journal luego torn/ambiguous/recorder-fault; no se requiere recuperar ni afirmar el sufijo privado. Si el propio candidato o su counter no están cerrados, UNKNOWN.",
+        "Un único C2SOURCE target canonical id/status/phase/counters/code exactos, fail/notices/TEST_FAILED y counters0..3 enteros; se extrae del stdout en su envoltura real TAP '# C2SOURCE '. El prefijo SourceRows aceptado hasta target debe concordar con orden20 y las filas precedentes presentes, sin duplicados, saltos ni reorden. El extractor no pide ni exporta un beforeEXTRA_KEY.",
+        "Único bloque diagnóstico estructural del par nativo12, completo y cerrado, con failureType testCodeFailure,codeERR_ASSERTION,nameAssertionError,operatorstrictEqual. Sólo scalars mapping al nivel2espacios expected200 y actualint100..599 distinto200; no mensajes/stack/location como fuente de status. El bloque pertenece al result12; SourceRow se enlaza por ID/orden propio, sin adyacencia ni orden físico relativo aSubtest.",
+        "La gramática física de las envolturas console y diagnostic debe haber sido calibrada y sellada por toy Node22.23.4 con await work()/awaitcounts()/catch/rethrow. No imponer SourceRow/Subtest adyacentes ni un orden físico relativo; mantener SourceRows ordenados por selectedIDs y pares/bloques nativos por ordinal/ID, site de journal. No ampliar tolerancias a ciegas si difiere del sello; STOP o UNKNOWN. Context/source/helper pins caller expectation exactos."
+      ],
+      "prefixUnknownSuffix": "Root ruling: un sufijo posterior torn/unknown no deshace un candidato completo y validado. En ese caso KNOWN significa first throw del prefijo validado; nunca globallyearliest, drenaje o integridad de bytes no exportados. Se conservan integrity/unknownReason/firstThrowSequence outer originales.",
+      "sourceCounters": "Sólo bounds heredados0..3, sin receipts<=activation<=upload inventado, monotonicidad, delta, forzar2/2/2 ni cero por default. Los counters son las tres medidas post-action de D07:18 y no prueban causalidad, autenticidad de receipt ni completitud M/QA.",
+      "rawGrammar": [
+        "Parseo delimitado de LF UTF8 canónico; sin YAML general ni deps. Nativepairs se enlazan a Subtest top-level exacto yordinal, manteniendo gramática flat y parser heredado independiente. El bloque del target pertenece exclusivamente a su result y delimitadores '  ---'/'  ...'. SourceRows C2SOURCE se enlazan por ID y orden de selectedIDs, nunca por adyacencia física al Subtest ni posición relativa entre esas dos corrientes. No capturar bloque posterior o anidado.",
+        "Dentro del bloque sólo los campos top-level2espacios pueden aportar scalars. Textos de error/stack y su indent4+ son opacos y se descartan; un actual/expected falso allí no cuenta. Datos unsupported/tabs/CR/bloqueabierto o scalarambiguo son UNKNOWN, no coerción.",
+        "No strings numéricos, floats/exponente/hex/NaN/Infinity/null/boolean/arrays/maps; actual200 o expected distinto200 contradicen esta aserción y son UNKNOWN CONFLICTING_EVIDENCE. Duplicados de scalar/source/par,ordinal/case/site erróneos,nesting/source keyorder no canónico/reorden no producen KNOWN. Un mapping anidado o texto opaco se ignora para scalars, no se promueve ni se usa como fallback.",
+        "Escanear el buffer ya acotado para duplicados/fakes relevantes; no cerrar el scan tras el primer valor válido. Descartar copias de C2SOURCE dentro de YAML/comments escapados, stack o nested TAP. Una falsificación estructural no se promueve aunque el númeroparezca plausible.",
+        "Timeout global no equivale a truncación del candidato: prefijo nativo19 limpio con target12/bloque completos puede KNOWN aunque20sigaabierto. TRUNCATED_NATIVE se refiere al candidato/gramática relevante no cerrados o un sufijo ambiguo que impide unicidad, no a la mera ausencia de20/TAPtotals."
+      ],
+      "reasonPriority": [
+        "0: Fallos heredados de API/contexto/tree/pins/transporte/custody/N2 impiden admisión y siguen FAULT; nunca normalizarlos medianteUNKNOWN.",
+        "1: Primera throw fiable en el prefijo validado con id/op/name/code/site diferente del candidato exacto ⇒ NOT_APPLICABLE EARLIEST_THROW_DIFFERENT. Unknownsuffix posterior no borra esa prueba; no significa primerfalloglobal.",
+        "2: Pareja native previa a12 FAIL inequívoca ⇒ NOT_APPLICABLE EARLIER_NATIVE_FAILURE. TargetPASS inequívoco más action/countreturn12 validados ⇒ NOT_APPLICABLE TARGET_PASSED. Si faltan las pruebas journal de ese PASS por un corte, UNKNOWN JOURNAL_UNRESOLVED.",
+        "3: NO_QUALIFYING_THROW sólo con journal cleancomplete20+AFTER y ausencia de throws: NOT_APPLICABLE. Nunca inferir ausencia desde un prefijo cortado/unknown. Sin candidato comprobado en el prefijo ⇒ UNKNOWN JOURNAL_UNRESOLVED.",
+        "4: Para un exactcandidate comprobado, countthrow/count no cerrado ⇒ UNKNOWN COUNTER_UNAVAILABLE. Más allá de eso, bytes/grammarrelevante cortados ⇒ TRUNCATED_NATIVE; CR/UTF8 o layout no calibrado ⇒ NATIVE_FORMAT_UNSUPPORTED; native pair/ordinal/duplicados/reorden ambiguos ⇒ AMBIGUOUS_EVIDENCE; targetpair ausente ⇒ TARGET_NATIVE_UNAVAILABLE.",
+        "5: SourceRow o campo estructural relevante duplicado/nested falso/no canónico/reorden ⇒ AMBIGUOUS_EVIDENCE; contradicción de campos conocidos ⇒ CONFLICTING_EVIDENCE; SourceRow ausente ⇒ SOURCE_ROW_UNAVAILABLE; expected/actual top-level faltante (incluso sólo fake anidado/message/stack) ⇒ ASSERTION_SCALARS_UNAVAILABLE; tipo/rango no soportado ⇒ UNSUPPORTED_SCALARS. Primero aplicar estas categorías a SourceRow y luego al bloque assertion; nunca rescatar un valor entre duplicados.",
+        "6: Sólo todos los joins completos ⇒ KNOWN TARGET_POST_ASSERTION. throwSequence igual al outerfirstThrowSequence dentro del prefijovalidado. Journalunknown posterior no lo deshace si el candidato/count y todos sus antecedentes necesarios ya estaban completos."
+      ],
+      "forbiddenExport": "No RAWactualTAP, message/stack/location/URLs/paths absolutos/formularios/handles/cookies/SQL/D1/providerrows/arbitrarystrings fuera del parent. Error metadata previa sigue su allowlist. SHAstdout bindea bytes capturados pero no recupera contenido ausente ni autentica un productor no confiable."
+    },
+    "schemaVsSemantics": "JSON Schema no valida orden ni joins/ausencias/relaciones. La validación semántica y el contexto fijado son obligatorios además del schema. KNOWN sólo indica proyección de hechos seguros presentes del primer throw del prefijo validado.",
+    "interpretation": {
+      "noDelta": "Sin EXTRA_KEY before: no calcular diferencia ni asegurar ausencia de ticket/send desde unafter1/1/1.",
+      "afterExamples": "Counts2/1/1 o2/2/1 son efectosobservados parciales;2/2/2+non200 orienta retorno/prueba final después de efectos visibles al contador, sin autenticar receipts ni fijarMvsQA. Sólo registrar medidas; no clasificador de causa ni permiso de replay.",
+      "historical": "CurrentDIAG1 sigue statusHTTP/countersUNKNOWN. Futuro200 sóloestablece esa muestra; sinW1automático ni transferir status a historia.",
+      "task1": "No package completo fullTask1; todas lasSourceQualified/Task1Pass y7nonclaimsfalse. Esteplan no libera nuevo negocio."
+    }
+  },
+  "finiteGet": {
+    "component": {
+      "bytes": 5761,
+      "sha256": "10303c6098b54ab7c00cdf61f0b168783a0ff2283db75c79edc01202acb6f684",
+      "blob": "4a98aa0c77c0d1eb61c5ba6ecabdbf6a4d72ec32"
+    },
+    "producer": {
+      "world": "Use exact S08, S09 and S10 bound in current Source13. Unchanged choose assertion is at S08:18:143; S08:18:118 is historical only. Preserve separate notices POST assertion S08:41:12, original rejection, counts and settlements.",
+      "labels": "S08 world created per original createFiniteCoupledOwnerWorld. Arm private one-use method label on entry to monitor()/noScope() before first await using closed-over main and world-local state, mark ready in finally upon its normal or exceptional end without replacing any outcome. Only public counts() consumes a ready label synchronously, once before the existing async read. All ordinary direct count(f), noFurther, repeated internal counts, subcase calls, other worlds and active!=main never provide a measurement. No module-global or last-id inference; overlapping/unconsumed rearm or public count during armed work poisons pending observer for this world; it may emit UNKNOWN or omit, never reassign old facts. On scope failure S08:111 cannot reach internal snapshot when choose throws; postaction public count remains the measurement. No alteration to D07 (which marks enter, takes counts once, marks settled, emits C2SOURCE).",
+      "flow": "In labeled public counts only, use the very same detached rows from existing plain(f.stub.snapshot()) at historic S08:22, once. Compute original business counters normally; only upon their successful construction project on already-returned rows then emit at most one bounded marker before returning unchanged counters. Projection/format/console errors are observation-only (UNKNOWN safely, or absent); original snapshot/count rejection, throw value, and failure to create business counters retain original path. Do not use finally to perform a new read or to publish an initialized zero. No label in public counts after successfully consumed. No second projection or retry. No action/after call added.",
+      "time": "FIRST checkpoint is after case14 action and at its settled counter, before case15 action. SECOND is after case15 action at its own settled counter, before case16. Neither is an atomic bracket around provider execution; if 15 passes/different assertion, second remains post-entire-action. In an exact failed GET sample noScope did not execute its subsequent snapshot/drop/POST/restore path. Even so the count may include asynchronously progressing operations."
+    },
+    "predicate": {
+      "source": "S01:220–232 creates the Ticket, S00:192,483–499 separates Ticket from TicketUse and detects duplicate stages. BASE codec e9b66f68b6dbabbfecc46072949a0d5d9f059141:18–30 sorts copied object keys, :59,:70–71 defines map/tickets, :81–112 validates types/keys/semantics, :130–133 canonical decoding. S10:58 snapshot returns the existing list, S09:5 detaches/disposes. Projection measures returned rows, distinct from S00 admission/decision. Never apply S00 duplicate-action rejection to two distinct finite Tickets; seeing them is the subject of the measure.",
+      "input": "Ordinary dense array of 1..512 exact length-two [string key,value] pairs, unique nonempty string keys <=1024 UTF8 bytes. At most 16 rows in owner-ticket: namespace (bases plus :use), exactly one owner-project-ref: row. Stop before decoding overbounds. Short length check first on long keys/raw to avoid allocating unbounded strings; ASCII patterns and UTF8 bounds. Other namespace values are opaque; do not decode, stringify or hash them. Invalid/missing/capped input always UNKNOWN. These observer-only bounds can reduce available observation; they do not restrict or modify the business read.",
+      "classified": "For every owner-project-ref: key require exactly owner-project-ref:<lowerhex64>, canonical decode ProjectRef of string <=8192 UTF8 B, map.projectRef equals suffix. For every owner-ticket: row accept only owner-ticket:<lowerhex64> or same + :use. String <=8192B, decode Ticket or TicketUse by key class using unchanged codec (roundtrip exact; no loose JSON equality). Key suffix digest must equal decoded ticketHash. Never accept a noncanonical prefix match, unrecognized suffix, body/key mismatch, foreign linkage, duplicate, malformed row or decoder failure as zero. For every base Ticket require map.projectRef,preconnectionId,subjectHash,sourceRevision exact match, map.issuedAt<=createdAt<expiresAt<=map.expiresAt. The actual codec checks purpose, exact fields, types, hash/time/action/TTL. No wall-clock read or live authorization.",
+      "anchors": "Require exactly one connection Ticket with null connectionRef and one notices Ticket with nonnull connectionRef. Require one canonical :use for each of those anchors (joined by hash; use.consumedAt>=base.createdAt and <base.expiresAt). Each other base must be action finite, connectionRef identical to the notices anchor. Every :use must join a unique canonical base and same valid consumption interval. Finite :use neither increments nor removes a Ticket. Missing anchor, absent/doubled map, orphan use, broken anchor binding or invalid remaining row invalidates the whole measure, even after seeing two valid finite records. No source read/clock to strengthen links. No latest-record pick.",
+      "value": "Only after validating all candidate rows, count DISTINCT valid base ticket hashes with action finite among the returned snapshot from the labeled main world. 0 -> string \"0\", 1 -> \"1\", >=2 -> \"2+\". Base business caps/duplicate-stage protection retain original meaning. Empty snapshots, invalid anchors, missing markers and sample failure are UNKNOWN. This is a local snapshot projection. The result authenticates neither ticket ownership nor issue or commit by this request. No keys, handles, identity, record contents, source revision, raw timestamp, record hashes or independently linkable ticket fingerprints escape.",
+      "currentWorld": "Bind both observations to the same existing world-local f.choice.projectRef (the already accepted notices form S08:41, unchanged through the C15 public counter) and f.source.sourceRevision from S08:62. Require exact lowerhex64/lowerhex40 and equality to the map fields. Only these two existing primitive properties are read from f; never touch handle/cookie/token, take a new snapshot or cache identity between observations. Missing/mismatched anchor yields UNKNOWN. Each snapshot ties all eligible tickets and uses to its own unique map. A common world/projectRef/revision is evidence of comparable scope; no stronger cross-snapshot preconnection continuity or causal claim."
+    },
+    "childWire": {
+      "raw": "Use the same bounded child stdout. The current producer emits monitor as '# C2FT3 ' plus canonical JSON keys id,value and LF, and scope as '# C2FT4 ' plus keys id,value,w,s,h and LF. The publisher also accepts a canonical C2FT3 scope frame as count-only compatibility. A valid C2FT3 scope frame with a known bucket and the required ordered native/TAP/Source/journal joins may yield afterScopeMissing.reason JOINED_SNAPSHOT. It supplies no winner tuple, so getWinner remains UNKNOWN and an independently known HTTP observation is preserved. A canonical C2FT4 scope frame can supply the winner tuple subject to the existing eligibility, status and normalization checks. Each frame and LF is at most 96 ASCII bytes. Count value is a string 0, 1, 2+ or UNKNOWN. The existing stream framing, order, and duplicate rules apply across both formats, including two frames for the same scope ordinal. No raw frame or child stdout enters the public artifact.",
+      "join": "Process two independent streams as existing C1 grammar: native Subtest/result/block ordinal pairs and top-level console stream. In console stream require canonical ordered unique valid C2SOURCE prefix up to relevant checkpoint with id/status/phase/code and three 0..3 integer counters. For C14 phase monitor; for C15 scope; pass→OK,fail→TEST_FAILED, aligned with native. In this ordered console stream, the candidate marker lies strictly between predecessor C2SOURCE and its own C2SOURCE (13/14 or 14/15). Ignore other ordinary console lines. Do not require Subtest adjacency or order relative to C2SOURCE. Counter area emits marker before D07 C2SOURCE; business calls emit none. Scan whole bounded buffer for duplicates and foreign/reversed/malformed typed records, no accepting a first valid out of conflicting candidates. Ignore nested YAML/stack/message/escaped fake tokens as candidates; if only a nested lookalike is present, real marker is missing. Unsupported framing/undecodable text/torn typed candidate, >96 bytes, duplicate/reordered/foreign/misbracketed typed markers or over two top-level candidates taint marker stream for both counts (HTTP independent). An absent marker for one label does not erase another valid marker. A closed before-prefix survives an unrelated later missing marker or journal fault; no claim that unseen events did not happen."
+    },
+    "http": {
+      "gates": "Exact C1 native-format rules/scalar provenance and total priority from protocol59ab firstFailure.sourceProjection, retarget exclusively to ordinal15 C2T1_SCOPE_MISSING, phase scope, expected GET assertion S08:18:143, first14 pairs/actions/counts returned; case15 action.throw (AssertionError/ERR_ASSERTION) is first throw in valid prefix and precisely matched, own count.return, native15fail and canonical C2SOURCE15 required. E3 measured S08 and select separate site. No C1 source row exported again. Require single flat testCodeFailure/ERR_ASSERTION/AssertionError/strictEqual block, two top-level decimal integer scalars actual=100..599 except200 and expected=200 with no dup/nesting/type coercion. Include actual/expected and matching throwSequence only on KNOWN. Http does not depend on C2FT3, C2FT4 or snapshot anchors.",
+      "priority": [
+        "0 infrastructure/admission/custody/N2 fault, no normal outcome.",
+        "1 First validated throw different → NOT_APPLICABLE EARLIEST_THROW_DIFFERENT. 2 prior native failure → NOT_APPLICABLE EARLIER_NATIVE_FAILURE. 3 target native pass and its action/count.return → NOT_APPLICABLE TARGET_PASSED, otherwise UNKNOWN JOURNAL_UNRESOLVED. 4 complete clean journal without throw → NOT_APPLICABLE NO_QUALIFYING_THROW, otherwise missing target/antecedent → UNKNOWN JOURNAL_UNRESOLVED.",
+        "5 target count missing/not returned → UNKNOWN COUNTER_UNAVAILABLE; torn native → TRUNCATED_NATIVE; invalid UTF8/control/header → NATIVE_FORMAT_UNSUPPORTED; ambiguous native → AMBIGUOUS_EVIDENCE; absent exact ordered native prefix/target -> TARGET_NATIVE_UNAVAILABLE.",
+        "6 bounded C1 scanner priorities for ordered Source stream and target diagnostic, with alphabet of fragment (TRUNCATED_NATIVE, NATIVE_FORMAT_UNSUPPORTED, AMBIGUOUS_EVIDENCE, CONFLICTING_EVIDENCE, SOURCE_ROW_UNAVAILABLE, ASSERTION_SCALARS_UNAVAILABLE, UNSUPPORTED_SCALARS). No typed marker influences these rules. 7 all conditions → KNOWN TARGET_GET_ASSERTION. Assertion language restricted to sealed Node22 native grammar. Nullable fields in every other state must all be null."
+      ],
+      "publicationPartialBoundary": "Publication and independent OWN cannot infer a private header from native metadata. After higher-priority visible exclusions, native ambiguous permits UNKNOWN AMBIGUOUS_EVIDENCE OR NATIVE_FORMAT_UNSUPPORTED, all pointers/scalars null; missing native target/prefix at the raw-dependent tier permits UNKNOWN TARGET_NATIVE_UNAVAILABLE OR NATIVE_FORMAT_UNSUPPORTED. Native torn still requires TRUNCATED_NATIVE. Never admit KNOWN from these alternatives or JOINED counts without clean prefix. This is partial evidence, not header authentication. Marker/cross-check rules unchanged."
+    },
+    "counts": {
+      "priority": [
+        "0 inherited infra/physical capture/context/schema/N2 contradiction → FAULT. 1 JOURNAL_UNRESOLVED if required monotonic prefix is missing, a predecessor action/count did not return or target action has no return/throw + count.enter/count.return, any other case/AFTER interleaves before the target count.return (normal earlier serial cases allowed); check14 requires through14 ALL return, check15 through14 ALL return + own settled action/returned count. count.throw never settles a count for this observation.",
+        "2 NATIVE_UNJOINED unless current clean native prefix contains all prior cases PASS through13 (for14) or14 (for15) and target matches the action return/pass or throw/fail; require14PASS for first checkpoint. A framework timeout without corresponding action throw cannot join as returned PASS. For all known counts and KNOWN http native.integrity must equal prefix; N2 applies first. A torn journal *after* valid joins can still preserve a checkpoint.",
+        "3 SOURCE_UNJOINED if canonical ordered typed C2SOURCE prefix/status/phase/counters/code not joined independently to the checkpoint (syntax/ordinal/duplicates included). 4 MARKER_STREAM_INVALID if typed stream framing/order/multiplicity constraints fail. 5 MARKER_UNAVAILABLE if marker for the target missing. 6 SNAPSHOT_INVALID if unique joined marker explicitly says UNKNOWN (includes producer invalid observation), else JOINED_SNAPSHOT and string count with countSequence equal to that checkpoint’s actual count.return sequence. UNKNOWN carries countSequence:null, never an implicit zero.",
+        "Each checkpoint evaluated separately. afterMonitor may be known when15 absent or its HTTP unsupported. afterScopeMissing may be known on case15 PASS or different/local fail after14PASS. http KNOWN on exact failed GET may coexist with one/both counts UNKNOWN. Do not enforce monotonic count, causal subtraction, equal count/HTTP states or a reconciliation with the three C2SOURCE counters. Two-or-more is censored; two snapshots cannot identify tickets."
+      ]
+    },
+    "interpretation": {
+      "examples": [
+        "KNOWN actual429 with 0→0 means both snapshots contain zero qualifying finite Tickets and GET asserted 429 in this occurrence; rate limiter origin, no writes and why 429 remain unproved.",
+        "0→1 or 0→2+ after exact failed GET locates increased visible qualifying cardinality between the checkpoint samples. No attribution to this call/provider, no inference about receipt/send.",
+        "1→1 or 2+→2+ is compatible with different records/activities; 1→0 does not by itself prove revoke or deletion. Any UNKNOWN withholds that comparison while preserving other known fields.",
+        "If first throw goes elsewhere C1 and finiteGet are evaluated independently. Never infer the previous DIAG2 numeric status/counts."
+      ]
+    },
+    "crossChecks": {
+      "priorityA": "MARKER_STREAM_INVALID is global within the two samples. If one value has this reason, other can share it or show a higher-priority JOURNAL_UNRESOLVED, NATIVE_UNJOINED or SOURCE_UNJOINED consistent with outer facts. Never pair this reason with JOINED_SNAPSHOT, MARKER_UNAVAILABLE or SNAPSHOT_INVALID.",
+      "priorityB": "HTTP KNOWN requires same exact canonical ordered/phase-status-code-counters-matched C2SOURCE prefix through15 used by both sample joins. Thus incompatible with SOURCE_UNJOINED and NATIVE_UNJOINED in either sample. It also establishes all required serial action/count settlements, so JOURNAL_UNRESOLVED inconsistent unless a validated AFTER edge before that sample count.return prevented a reliable world sample (visible in journal); the HTTP status remains independently eligible. Without this exception the only compatible sample reasons with HTTP KNOWN are JOINED_SNAPSHOT, MARKER_STREAM_INVALID, MARKER_UNAVAILABLE, SNAPSHOT_INVALID. Apply priorityA across siblings. Test both rules with coherently re-encoded transport; new cases nested under existing named groups, not extra native/top-level IDs. OWN cannot authenticate hidden scalars or private rows."
+    },
+    "publicConsistency": {
+      "samples": "SOURCE_UNJOINED asserts INVALID prefix at its checkpoint. JOINED_SNAPSHOT and MARKER_STREAM_INVALID/MARKER_UNAVAILABLE/SNAPSHOT_INVALID assert VALID prefix (source gate passed). Higher JOURNAL_UNRESOLVED/NATIVE_UNJOINED are NEUTRAL.",
+      "http": "KNOWN or UNKNOWN/ASSERTION_SCALARS_UNAVAILABLE asserts VALID prefix15. UNKNOWN/SOURCE_ROW_UNAVAILABLE asserts INVALID prefix15. Other states/reasons are NEUTRAL about Source rows.",
+      "merge": "Merge claims only at the same prefix: VALID vs INVALID rejects. VALID15 implies VALID14 and conflicts with INVALID14. INVALID15 does not imply INVALID14. A missing marker14 is compatible with VALID14 and a joined sample15. Neutral does not invent missing/present records.",
+      "privacy": "Only consistency of assertions already exported. No raw header, rows, counters, probe, clock, auth or stronger source truth is inferred; unknown values stay unknown."
+    }
+  },
+  "dropWinner": {
+    "case": "15:firstDROP",
+    "sites": [
+      "S01:247",
+      "S00:743",
+      "S04:37",
+      "S04:43",
+      "S01:69",
+      "S01:95",
+      "UNKNOWN"
+    ],
+    "outer": [
+      "QA_MARKED_STUB_NON_OK",
+      "STUB_NON_OK",
+      "DEADLINE_OR_ABORT",
+      "UNKNOWN"
+    ],
+    "producer": "Exactly one bounded C2DW4 child line at original state cut before puts assertion; exact received POST object, one host ticket for its handle/project, single QA epoch + surviving Q, original M request/cell/lease/error + surviving B, and same harness map/transport gates. No raw marker or stack in normal output.",
+    "collector": "One LF-terminated canonical TAP comment \"# C2DW4 \" + compact four-key JSON (<=512B). Require journal integrity prefix/complete and no unknownReason, TAP integrity prefix, exact first 14 ordered action enter/return, count enter/return with no error + 14 ordered native PASS + valid C2SOURCE rows through monitor, followed by case 15 action enter. Closed variant also requires matching action return/throw, count return, native and valid Source row 15 with marker strictly between Source14 and Source15. Open variant requires journal prefix length exactly 57, openCase case15 action, afterOpen false, precisely 14 native rows; unique marker after Source14 and no following Source row. Otherwise all UNKNOWN. A positive marker proves the producer reached and sealed its existing state cut even if action15 is still open. No extrapolation from earlier/partial evidence.",
+    "receiver": "Validate four keys/order, site/publicSite allowlist of six sites+UNKNOWN, four outer values, publicSite!=UNKNOWN implies publicSite===site and outer===QA_MARKED_STUB_NON_OK. Require the exact open15/closed15 eligibility above for any non-UNKNOWN axis. Marker source-prefix checks and cut attested only by measured controller. Reject known claim when public journal/native data contradict eligibility; allow all UNKNOWN when cut/transport/map unavailable. Reject duplicate, unknown field, shifted marker or unverified private causal identity. No scalar/frames disclosed.",
+    "transport": "Keep original POST capture and publication. Prior DROP qualification binds historical Source13. The unchanged POST observation fails closed under unverified QA/M premises on this changed carrier.",
+    "leaseSites": "S01:69 request, S01:95 child. No individual failing conjunct is identified."
+  },
+  "getWinner": {
+    "publicField": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent/get-winner-field.schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "kind": "DRAFT_PUBLIC_FIELD_SCHEMA",
+      "blob": "2d012ec22c28c2f4843404e8271e4ab58de8ba7c",
+      "bytes": 540,
+      "sha256": "e26f1596871b084e271029e407764735e382be5b807f49b41806050826c6c5b5",
+      "fullReadback": true
+    },
+    "exactSite": {
+      "preimage": {
+        "file": "S08",
+        "line": 18,
+        "column": 118
+      },
+      "current": {
+        "file": "S08",
+        "line": 18,
+        "column": 143
+      },
+      "meaning": "Same original GET equal call. Current matcher accepts only143. Historical118 at current pin is UNKNOWN. Foreign119 and body-read106 remain negatives. Frozen315 bytes stay unchanged; separately measured TEST-only corpus adapter limited to explicit paths and exact input hashes."
+    },
+    "producer": {
+      "enabled": "Nominated positive M compiled with dropWinner true and getWinner true only. QA source and negative worker remain original.",
+      "identity": "Cell binds original P and root L after original guarded selector. Only exact error identity escaping original race seals L/S/V. Original prepared DROP input hashes are asserted. Generic throws and failed guards remain UNKNOWN.",
+      "status": "Use already evaluated original selector/status values. No extra diagnostic P method/url getter reads. L/V normalized503/0. S original deliberate nonOK400..599 or0; original allowlisted400/401/403/404/405/413/429 retained, others503.",
+      "egress": "Same pending native B, exactly once, synchronously after original parent.finish returns normally and before serialization. Pristine native status/Headers identity and absent reserved header required. Observation guards contain diagnostic exceptions. No new IO/await/timer/guard invocation. Original S03 await forward remains. Closed B flow gives no external mutation aperture; original finally parent.finish then observer.finish is synchronous before outer fetch resolution.",
+      "header": "Only x-afw-lab-get-winner with g1.h.[LSV].s. U has no new header. No QA attribution."
+    },
+    "host": {
+      "responseConstructor": "The S08 snapshot observer uses the exact exported Miniflare Response. The scheduled H composition exercises that observer with its own token lifecycle. Independent Node Response-injected normalization and host checks remain MODEL only.",
+      "cut": "Original choose status/body read then capture same returned R before original equal assertion. No body reread/clone/tee/cancel. Original label/main/token, one capture, closed action and one consuming count required.",
+      "directRoute": "Conditional premise from exact Source seam review, unchanged first-worker factory/remount path, pinned Miniflare dispatch behavior and ordinary TOOL witness for shared compiler/factory. Separate exact full20 review and Root gate required. S10 dynamically matches captured call, dispatch identities and mounted resident script. Header presence and TOOL alone do not establish full20 directness.",
+      "marker": "Only existing scope count emits C2FT4 ordered id,value,w,s,h once. Monitor retains C2FT3. h/s are integers, U0/0; L/V503/0; S normalized mapping. Entire top-level typed stream checked for order/window/duplicates/grammar. Raw marker max96 ASCII bytes including # prefix and LF."
+    },
+    "publisherRules": {
+      "positive": "Clean first14 native passes and action/count returns; earliest exact target GET throw at143; same target count returns; native15 fails; independently KNOWN finiteGet HTTP/scalar/sequence; canonical private C2FT4 with equal h. Any failed join leaves getWinner UNKNOWN. Independently known finiteGet HTTP persists.",
+      "normalization": "Public ordered case,winner,stubStatus,qaLastCompleted. case15:firstFiniteGET. L->DEADLINE_OR_ABORT, V->POST_STUB_VALIDATION with stubUNKNOWN. S->STUB_NON_OK with400..599 orUNKNOWN. QA alwaysUNKNOWN. Unknown keeps all diagnostic valuesUNKNOWN.",
+      "priorFrontier": "Original POST firstFailure/dropWinner diagnostic remains. GET200 then original DROP failure produces getWinnerUNKNOWN and the independently proven original DROP projection.",
+      "private": "No R/P/L/error/header/marker/body/request identifiers enter public packet. Public schema plus relational checks enforce visible consistency only."
+    },
+    "canonicalForeignTupleLimit": "Parent receives only private marker values via child stdout plus independent journal/HTTP. OWN receives bounded public projections and measured capture. A coherently replaced valid tuple is indistinguishable from those apertures alone. The genuine-only GB1 MODEL boundary stays in force. Header values and hashes supply neither response authentication nor physical identity across isolates."
+  },
+  "receiver": {
+    "inputKeys": [
+      "run",
+      "jobs",
+      "commit",
+      "tree",
+      "transport",
+      "artifact"
+    ],
+    "expected": "Independently pinned Source26/Root26, public schema, selection and canonical digest plus fresh trusted actual occurrence head/tree/run/logical job/actual job ID/command step/artifact ID.",
+    "checks": "Preserve independent API, full tree, framing, ZIP/member/descriptor/CRC/full-inflate, canonical outcome and custody. Require first14 clean native passes and action/count returns, earliest matching case15 GET assertion and closed target count, known HTTP status/sequence for any positive. Verify exact four public getWinner keys and normalized relation. Keep independent HTTP on UNKNOWN. Raw header/token/child stdout remain inside Source."
+  },
+  "toolEvidence": {
+    "review": "08b75777bb39efaad0a439082cd430044c0b07d6",
+    "primary": "a290e3c26382660f67c5ae8d2f8b0571c9f61956",
+    "payload": "e8d57d9f37de40d1e02c6dfd17a141bc9e68f81c",
+    "closure": "bd3c3c583a17209be9390084eb390a24e515aeae",
+    "closedHead": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+    "proposal": "597f4f4091700a2a046b37ccefb1c53ac488a284",
+    "sourceIndex": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "ordinaryControl": "b97a7415951e7fe4ecb988a921cc0d777ea18f35",
+    "ordinaryOnResident": {
+      "sha256": "faec968dcc56d51f7273c62c9456252f723ae56903e41c411f2edfa440d2c5cc",
+      "bytes": 2010306
+    },
+    "limits": {
+      "adverseTransportDirectRoute": false,
+      "full20BusinessRouteExecuted": false,
+      "businessGET503Cause": "UNKNOWN"
+    },
+    "acceptedActualControls": {
+      "syntax": 35,
+      "defensive": {
+        "nodePassed": 34,
+        "nodeFailed": 0,
+        "pythonPassed": 2,
+        "pythonResult": "OK"
+      },
+      "startup": 46,
+      "model": 287,
+      "nativeDispatches": {
+        "ordinary": 15,
+        "retention": 8,
+        "fixedFault": 12,
+        "transport": 4,
+        "total": 39
+      }
+    },
+    "scope": "Accepted TOOL only. Shared ordinary positive compiler/factory observed; full20 business path execution/qualification pending.",
+    "heldNativeDomainExceptions": {
+      "authority": "963160414f6aaf6f035d40449b63d36b4964aeae",
+      "ids": [
+        "M-immutable",
+        "M-late-mark"
+      ],
+      "status": [
+        "STATIC_DOMAIN_EXCLUSION",
+        "UNEXECUTED_NATIVE",
+        "UNSUPPORTED_GENERIC"
+      ],
+      "modelLateMark": "Separately scheduled MODEL only"
+    }
+  },
+  "gates": {
+    "source5": 5,
+    "own5": 5,
+    "stageB": 5,
+    "cap": 5,
+    "rootAcceptExactRouteAndCarrierReviewRequired": true,
+    "actualOWNBindingAndControlsAccepted": false,
+    "rootExactOneUseActivation": false,
+    "activationReleased": false,
+    "nativeReleased": false,
+    "businessReleased": false,
+    "execution": "NOT_RUN"
+  },
+  "plannedControls": {
+    "syntax": [
+      "node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+      "node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+      "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+      "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+      "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt"
+    ],
+    "lockedInstall": "npm ci --ignore-scripts --no-audit --no-fund",
+    "preflight": "node --import c2-source-custody-guard.mjs c2-source-custody-preflight.mjs",
+    "guardedOriginalFull20": "node --import c2-source-custody-guard.mjs --experimental-vm-modules --test --test-reporter=tap --test-concurrency=1 test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "legacyToolControls": [
+      "node --test --test-concurrency=1 docs/superpowers/source-lab/c2-get-winner-dependent/receipt-normalization.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/controller-file-boundaries.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.test.mjs",
+      "python3 docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor_test.py"
+    ],
+    "nominationCommand": "node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+    "result": "NOT_RUN"
+  },
+  "historicalGET503Cause": "UNKNOWN",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

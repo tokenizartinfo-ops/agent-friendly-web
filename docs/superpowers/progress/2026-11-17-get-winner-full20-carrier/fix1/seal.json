@@ -1,0 +1,41 @@
+{
+  "schema": "AFW.GET_WINNER.FULL20.FIX1.EXPECTATION_SEAL/1",
+  "status": "DETACHED_DATA_ONLY",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "proposalPreimage": "cf2933aaad43938e98efcc8ffd93dfe7c8160bf9",
+  "review": "ddb1a3717267674aa8a51bfe66ee5f460891e828",
+  "finding": "I1",
+  "change": "One finiteGet.childWire.raw protocol field. Retain original collector: producer monitor=C2FT3, producer scope=C2FT4, publisher accepts valid scope C2FT3 count only; valid scope C2FT3 may JOINED_SNAPSHOT with getWinner UNKNOWN; preserve independent HTTP. Order/invalid/duplicate rules still apply. Correct only docs and dependent digest pins.",
+  "expectedMountBodyChanges": [
+    "protocol",
+    "runner contract pin only"
+  ],
+  "frozenBodies": [
+    "Source13",
+    "all overlays",
+    "selection",
+    "schema",
+    "publisher",
+    "workflow",
+    "native-release",
+    "D07",
+    "recorder",
+    "read-progress",
+    "custody siblings"
+  ],
+  "tests": {
+    "newRuntimeTests": "NONE_DATA_ONLY",
+    "actualOutput": "NOT_RUN"
+  },
+  "round": {
+    "carrierFix": 1,
+    "carrierFixCap": 5,
+    "source5": 5,
+    "own5": 5,
+    "stageB": 5
+  },
+  "activationReleased": false,
+  "nativeReleased": false,
+  "businessReleased": false
+}

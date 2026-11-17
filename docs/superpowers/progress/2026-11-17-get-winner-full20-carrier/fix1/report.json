@@ -1,0 +1,293 @@
+{
+  "schema": "AFW.GET_WINNER.FULL20.CARRIER_FIX_AUTHOR_REPORT/1",
+  "status": "I1_ADDRESSED_DATA_ONLY_REVIEW_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached GitHub DATA",
+  "resourceType": "immutable detached blobs",
+  "allowedAction": "Static DATA correction, full readback, and measurement",
+  "rollback": "Discard this fix and use the initial detached proposal and its original ordered map. No refs or runtime state changed.",
+  "chain": {
+    "round": 1,
+    "cap": 5,
+    "previousAuthorProposal": {
+      "bytes": 24747,
+      "sha256": "900b86b7fd53a3e117e5452d48b0428a6ecbe66579545139ace4503cea8c0e47",
+      "blob": "cf2933aaad43938e98efcc8ffd93dfe7c8160bf9"
+    },
+    "previousRootPackage": "ecc49a35db217683e69f9de5a86fa40fc6924ab9",
+    "previousIndependentMeasurement": "2c3b0ab6b613c1d97e4dc14bce2d09ac06a31d1b",
+    "review": "ddb1a3717267674aa8a51bfe66ee5f460891e828",
+    "expectationSeal": {
+      "bytes": 1263,
+      "sha256": "ffc5cf9a0ffefc7be1079ba73f778eb458850de864557052068694971ad33d3a",
+      "blob": "0b111fd1b62f05788c404a3ccf297ead253419c7"
+    }
+  },
+  "finding": "I1 corrected. The nominated producer emits C2FT3 for monitor and C2FT4 for scope. A canonical legacy C2FT3 scope marker may join the existing count under the same ordering and evidence rules. It supplies no winner tuple and leaves getWinner UNKNOWN, preserving independently known finiteGet HTTP. Only a qualifying canonical C2FT4 scope marker supplies the winner tuple. A duplicate scope ordinal across formats remains invalid.",
+  "before": {
+    "protocol": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/protocol-contract.json",
+      "mode": "100644",
+      "bytes": 68136,
+      "sha256": "dbf8cb3cd96d3892d11d7d7b942fd59f9003732b38e264bd72ad4e84231379b2",
+      "blob": "5634256c188580dd4ef0cc2017ced4d0980ca6d8"
+    },
+    "runner": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+      "mode": "100644",
+      "bytes": 20179,
+      "sha256": "6db6754097a1fe426898c7ea1df60996792b2b9a7fbd0b1ab3ab5046044c5bc5",
+      "blob": "7172e63f474c055723124b346be1b63c7ddd3c6d"
+    },
+    "proposal": {
+      "bytes": 24747,
+      "sha256": "900b86b7fd53a3e117e5452d48b0428a6ecbe66579545139ace4503cea8c0e47",
+      "blob": "cf2933aaad43938e98efcc8ffd93dfe7c8160bf9"
+    },
+    "map": {
+      "bytes": 9003,
+      "sha256": "3bd9f4b00275e1e3a11017a9fe1c5a9fbfc6dee87b0a4a3e30199f1b7fdb4df3",
+      "blob": "73b5f3f784eb8d33ceb003e0b8b4f78470665056"
+    },
+    "reversibleData": {
+      "bytes": 25621,
+      "sha256": "7db06ccb19573d2bdc6fc35acad1b2d09cf71d36c461fe64d12a3977b5a352cc",
+      "blob": "dc19f6b25bd9c533482171b8bec588b5b70c24f4"
+    }
+  },
+  "after": {
+    "protocol": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/protocol-contract.json",
+      "mode": "100644",
+      "bytes": 68624,
+      "sha256": "8c14bbcc4912905059e379e266729e7969ad8fce42748d5f62afbf783a38d0bb",
+      "blob": "1a49667923ee7a2a4f902b3622d30daac1000c89"
+    },
+    "runner": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+      "mode": "100644",
+      "bytes": 20179,
+      "sha256": "d3b86e3ae504de508b37c300fad199bed16fa851a9bd006a4de132ccbe525934",
+      "blob": "50acdda42fd32a706b4a33bb214dc195b4485766"
+    },
+    "proposal": {
+      "bytes": 26775,
+      "sha256": "652c72ff3c54691c3135bb031c73ca5038621619d06d28b3cc4fc428efa43393",
+      "blob": "de40fdd5cb0a0aabdf0f0c52281c80ecb2734ab5"
+    },
+    "map": {
+      "bytes": 9216,
+      "sha256": "bb327c2516f59928eeb3246f7ae1ecdab96785bd8af5cb17f6756a2ca883ba54",
+      "blob": "4e17bb469f8f4765fb9d5fa5c81df8aa2b0c8cc5"
+    },
+    "reversibleData": {
+      "bytes": 27051,
+      "sha256": "35889ea46af3609dff94cbdc1ef125cb0af38b306bb3762e3960314733a0fd20",
+      "blob": "e0f9980e845cd5f4b16d071656e288f337f9b722"
+    }
+  },
+  "noChange": {
+    "source13": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json",
+      "mode": "100644",
+      "bytes": 9228,
+      "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153",
+      "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694"
+    },
+    "publisher": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+      "mode": "100644",
+      "bytes": 38299,
+      "sha256": "dd6f9474ddf47386276e40f6d83cde2f38bcf1263f72008870f2d1700f2e0a80",
+      "blob": "77183a2558a9e071b562485e1b3bd7622fffdf66"
+    },
+    "schema": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/frame-schema.json",
+      "mode": "100644",
+      "bytes": 35611,
+      "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228",
+      "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70"
+    },
+    "selection": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/mode-selection.json",
+      "mode": "100644",
+      "bytes": 4403,
+      "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b",
+      "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0"
+    },
+    "selectionWireSha256": "fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd",
+    "workflow": {
+      "path": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+      "mode": "100644",
+      "bytes": 2255,
+      "sha256": "c44a8760e783cc39966656daceb1e0428bac5cba0a45bd41e62db78fcfcbd1e3",
+      "blob": "eea7ccdf5632b04ad44ed7ceb4b638ba9f053a7b"
+    },
+    "nativeRelease": {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-release.json",
+      "mode": "100644",
+      "bytes": 2061,
+      "sha256": "ad272eec1204f53abd89d1c86f226ebe0da6dad6d9e750696b8761f83896e32d",
+      "blob": "a37dc79fe27518557f9082932c0acb05fcbcd557"
+    },
+    "nomination": {
+      "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
+      "message": "AFW-C2-GET-WINNER-DIAGNOSTIC1-ONEUSE-20261117",
+      "workflow": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+      "job": "c2-get-winner-diagnostic1",
+      "prefix": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/",
+      "runner": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+      "command": "node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+      "artifact": {
+        "name": "afw-c2-get-winner-diagnostic1",
+        "path": "output/c2-get-winner-diagnostic1.json",
+        "fileName": "c2-get-winner-diagnostic1.json",
+        "retentionDays": 7
+      },
+      "requiredSteps": [
+        "Read the exact one-use lab head",
+        "Use the fixed Node runtime",
+        "Check the business controller syntax",
+        "Install only the existing locked dependencies",
+        "Observe first finite GET in full case order",
+        "Preserve the bounded first finite GET diagnostic"
+      ],
+      "jobMinutes": 7,
+      "activationReleased": false,
+      "commandStep": "Observe first finite GET in full case order",
+      "event": "push",
+      "attempt": 1
+    },
+    "bodyPathsAndOrderUnchanged": true
+  },
+  "measurement": {
+    "bodies": 26,
+    "mountedBytes": 795448,
+    "priorExact": 24,
+    "protocolDataOnly": 1,
+    "runnerContractPinOnly": 1,
+    "legacyChanged": 11,
+    "legacyExact": 15,
+    "compactBytes": 6404,
+    "compactSHA256": "40b9e19ef3c2307e8b39995b1ce89b8aaa13e1c99931a51a46b805120fa85e29",
+    "encoding": "UTF8(JSON.stringify(mountLeaves)), no LF",
+    "fullReadback": "Both modified runtime-mount bodies and all new detached metadata and delta blobs read back and checked against Git SHA1, independent SHA256 and UTF8 lengths."
+  },
+  "deltas": {
+    "cumulativeLegacyDirections": 22,
+    "initialCarrierToFix1Directions": 4,
+    "newlyReconstructedDirections": 8,
+    "pairs": [
+      {
+        "scope": "LEGACY_SOURCE26_TO_FIX1",
+        "edgeIndex": 18,
+        "slot": "protocol",
+        "operations": 44,
+        "bytes": 38809,
+        "sha256": "9b01f55e166e1f62b45422744b730dd248a55408bc697403781ea2749af32e61",
+        "blob": "365be047f79914ed9c16a8fa581ffdc524ec54ba",
+        "fullReadback": true
+      },
+      {
+        "scope": "INITIAL_CARRIER_TO_FIX1",
+        "edgeIndex": 18,
+        "slot": "protocol",
+        "operations": 1,
+        "bytes": 2431,
+        "sha256": "3ea428ceda5aa2396546f3aba6d9049d937ad02aec001d5a24d6d9a39fc50db6",
+        "blob": "69615978f3b4b28889b1cbb0a01398980c394b4a",
+        "fullReadback": true
+      },
+      {
+        "scope": "LEGACY_SOURCE26_TO_FIX1",
+        "edgeIndex": 23,
+        "slot": "runner",
+        "operations": 19,
+        "bytes": 11969,
+        "sha256": "76f44eeb939ea7ecab27e96681b03601a686a27c7d33ec37dd39d948b38773e5",
+        "blob": "b2eee055ed5cac9dab2b88e89731fdc480aa39d6",
+        "fullReadback": true
+      },
+      {
+        "scope": "INITIAL_CARRIER_TO_FIX1",
+        "edgeIndex": 23,
+        "slot": "runner",
+        "operations": 1,
+        "bytes": 1625,
+        "sha256": "143a677b4c4bdef73075518a29e20133ac6835836390ed22d7398a0797760b96",
+        "blob": "f28feb2b52659629db0a1e6583ae21c3eb4e31e0",
+        "fullReadback": true
+      }
+    ],
+    "previousLiteralDeltaInventory": "dc19f6b25bd9c533482171b8bec588b5b70c24f4"
+  },
+  "checks": [
+    "Exactly one protocol DATA field changed, finiteGet.childWire.raw.",
+    "Runner exact contract digest repin with literal reversal to its initial bytes.",
+    "Pinned publisher re-read and rehashed with no change.",
+    "Publisher lines 333–342 accept scope C2FT3 in the original count window without creating a winner tuple.",
+    "Publisher lines 398–405 join a valid known count after the original proof gates.",
+    "Only canonical C2FT4 supplies the scope tuple; mixed duplicate scope frames retain existing invalidation.",
+    "Publisher lines 411–419 compute HTTP independently from marker presence and tuple qualification.",
+    "Only two of 26 mount bodies changed versus the initial carrier; all paths and order preserved.",
+    "Independent static route support retained with actual full20 and legacy POST transport qualification held."
+  ],
+  "plannedControls": {
+    "syntax": [
+      "node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+      "node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+      "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+      "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+      "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt"
+    ],
+    "lockedInstall": "npm ci --ignore-scripts --no-audit --no-fund",
+    "preflight": "node --import c2-source-custody-guard.mjs c2-source-custody-preflight.mjs",
+    "guardedOriginalFull20": "node --import c2-source-custody-guard.mjs --experimental-vm-modules --test --test-reporter=tap --test-concurrency=1 test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "legacyToolControls": [
+      "node --test --test-concurrency=1 docs/superpowers/source-lab/c2-get-winner-dependent/receipt-normalization.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/controller-file-boundaries.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.test.mjs",
+      "python3 docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor_test.py"
+    ],
+    "nominationCommand": "node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+    "result": "NOT_RUN"
+  },
+  "newRuntimeTests": "None required for the protocol-only correction and exact data pin repackaging.",
+  "actualOutput": {
+    "syntax": "NOT_RUN",
+    "unit": "NOT_RUN",
+    "controlledNative": "NOT_RUN",
+    "full20": "NOT_RUN",
+    "activation": "NOT_RUN"
+  },
+  "holds": {
+    "scopeRereviewRequired": true,
+    "newIndependentRootMeasurementRequired": true,
+    "actualOWNBindingAndControlsAccepted": false,
+    "independentReviewRouteDisposition": "CONDITIONAL_STATIC_APPLICATION_PREMISE_SUPPORTED",
+    "actualFull20Qualified": false,
+    "nativeReleased": false,
+    "activationReleased": false,
+    "businessReleased": false,
+    "legacyPostTransportQualified": false
+  },
+  "counters": {
+    "carrierFix": 1,
+    "carrierFixCap": 5,
+    "Source5": 5,
+    "OWN5": 5,
+    "StageB": 5
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "historicalGET503Cause": "UNKNOWN",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}

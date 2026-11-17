@@ -1,0 +1,768 @@
+{
+  "schema": "AFW.GET_WINNER.FULL20.REVERSIBLES/1",
+  "status": "READ_BACK_AND_RECONSTRUCTED_DATA_ONLY",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "preimage26": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+  "afterMap": "4e17bb469f8f4765fb9d5fa5c81df8aa2b0c8cc5",
+  "expectationSeal": "9fe4659058cf43df81f6d9e6ac30713bc33c1262",
+  "pairs": [
+    {
+      "position": 0,
+      "slot": "index",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/source-index.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "fc5b71098da76696278765f43805f0f2a1953b22",
+        "bytes": 11559,
+        "sha256": "1da326e60821aec91c7635a227b42f14b0710a3a2d5fb6f8764722fbbaa3d141"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+        "bytes": 9228,
+        "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "edgeIndex": 0,
+        "slot": "index",
+        "operations": 1,
+        "bytes": 23841,
+        "sha256": "5404f2c362d63820dbe11705779254390e0afaadcef6e9bbffd0a68cb4a8e26e",
+        "blob": "d96a417476d908ac04c3ce9024e5cf5dc461b4ba",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 1,
+      "slot": "S00",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 2,
+      "slot": "S01",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 3,
+      "slot": "S02",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 4,
+      "slot": "S03",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 5,
+      "slot": "S04",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 6,
+      "slot": "S05",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 7,
+      "slot": "S06",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 8,
+      "slot": "S07",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 9,
+      "slot": "S08",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-08.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "14b1a67b0557dbc660a3900d8767b40c5bff7755",
+        "bytes": 22615,
+        "sha256": "da134d91f132195a787c549a1d3552335efc29720506dbf2ca9cb7e4371af677"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+        "bytes": 23226,
+        "sha256": "75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "edgeIndex": 9,
+        "slot": "S08",
+        "operations": 10,
+        "bytes": 3777,
+        "sha256": "fe06cc121893be7e8bb79924dbf538765ff5b007d3e92012b265c11b76761fcb",
+        "blob": "8b2dd694daabe2a010daece314358b912b066c37",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 10,
+      "slot": "S09",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-09.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9da84b3f0606e9cb84d8308de26c7f193c5c778a",
+        "bytes": 72687,
+        "sha256": "93c0d34a0221797c09e4602065af570ad4711fdc019eea0fbcd9b0c8f90f08b9"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+        "bytes": 83571,
+        "sha256": "a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "edgeIndex": 10,
+        "slot": "S09",
+        "operations": 3,
+        "bytes": 12796,
+        "sha256": "c6b497b14d67eeda2223e764c3956234ede3e84f727319fabd051b35280472f4",
+        "blob": "7d3eb0cddceafeb1566925f7dc01c6fc67e20f80",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 11,
+      "slot": "S10",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-10.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "955fa904a89733fabfa5c73736f59922b6e58023",
+        "bytes": 98440,
+        "sha256": "01bd570328eb52d05a5d290f391bfc3da80d8298fba25fee7beff542096a0f34"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+        "bytes": 98851,
+        "sha256": "7c8680d6b86b1ccc0acdcfecb4d8e4312e6d6971f36b00bd6dcf88c289309604"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "edgeIndex": 11,
+        "slot": "S10",
+        "operations": 2,
+        "bytes": 2687,
+        "sha256": "df3374bc057cc2f46d37dafddf7c94fdba8caddff7284fcf34de662979a515b0",
+        "blob": "9d0ef974afa69714dfefda5ddaa84a4e786bec9b",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 12,
+      "slot": "S11",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 13,
+      "slot": "S12",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 14,
+      "slot": "custody guard",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "bytes": 1208,
+        "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "bytes": 1208,
+        "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 15,
+      "slot": "custody preflight",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "bytes": 417,
+        "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "bytes": 417,
+        "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+      },
+      "sameBody": true,
+      "samePath": true
+    },
+    {
+      "position": 16,
+      "slot": "selection",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/mode-selection.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8fe9907fb12fb71361819551df04c2830a78452b",
+        "bytes": 5173,
+        "sha256": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/mode-selection.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+        "bytes": 4403,
+        "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "edgeIndex": 16,
+        "slot": "selection",
+        "operations": 1,
+        "bytes": 11587,
+        "sha256": "f78287d7b4bf32f7f3ea3dcf05612ff783bb3fca78502f349008cc81b5053627",
+        "blob": "06c30e29fac6c248b02d5203827337675c08d13a",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 17,
+      "slot": "public frame-schema",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/frame-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "81be13ca960a143d565d55dd958b4e4ff24d3c96",
+        "bytes": 34193,
+        "sha256": "c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/frame-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+        "bytes": 35611,
+        "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "edgeIndex": 17,
+        "slot": "public frame-schema",
+        "operations": 13,
+        "bytes": 5451,
+        "sha256": "fc21a42169d3db0d503f7cff0124f081ada2be46f60c0402687bc5b43d8a9c6a",
+        "blob": "bcc27c2ebdf99a41d29af6fa8607224fe2371d66",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 18,
+      "slot": "protocol",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/protocol-contract.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6349fd2706b084e3c56309d6aac00a469310e73a",
+        "bytes": 59226,
+        "sha256": "1d2da1a8e853055f22cedbebb4dd813228f7641396409170c586805b6f2a9587"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/protocol-contract.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "1a49667923ee7a2a4f902b3622d30daac1000c89",
+        "bytes": 68624,
+        "sha256": "8c14bbcc4912905059e379e266729e7969ad8fce42748d5f62afbf783a38d0bb"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "scope": "LEGACY_SOURCE26_TO_FIX1",
+        "edgeIndex": 18,
+        "slot": "protocol",
+        "operations": 44,
+        "bytes": 38809,
+        "sha256": "9b01f55e166e1f62b45422744b730dd248a55408bc697403781ea2749af32e61",
+        "blob": "365be047f79914ed9c16a8fa581ffdc524ec54ba",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 19,
+      "slot": "publisher",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "f1a26313b53079fa9a88340e15d86024d24f4cbf",
+        "bytes": 35151,
+        "sha256": "7a6adaefbaffab94258323fe214ad9d45f23816fed8a9e6f0d508cd03cdbf00e"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "77183a2558a9e071b562485e1b3bd7622fffdf66",
+        "bytes": 38299,
+        "sha256": "dd6f9474ddf47386276e40f6d83cde2f38bcf1263f72008870f2d1700f2e0a80"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "edgeIndex": 19,
+        "slot": "publisher",
+        "operations": 11,
+        "bytes": 9273,
+        "sha256": "eb872a4eae04472c48abece42d7dd12833aedb6295da7b6efb8c3ae136293fba",
+        "blob": "940532f340e67f60b280ad329eb2dbd7374967e0",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 20,
+      "slot": "read-progress",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/read-progress.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "bytes": 5507,
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/read-progress.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "bytes": 5507,
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      },
+      "sameBody": true,
+      "samePath": false
+    },
+    {
+      "position": 21,
+      "slot": "D07",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/diagnostic-driver.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+        "bytes": 3169,
+        "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/diagnostic-driver.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+        "bytes": 3169,
+        "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+      },
+      "sameBody": true,
+      "samePath": false
+    },
+    {
+      "position": 22,
+      "slot": "recorder",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/progress-recorder.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+        "bytes": 3833,
+        "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/progress-recorder.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+        "bytes": 3833,
+        "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+      },
+      "sameBody": true,
+      "samePath": false
+    },
+    {
+      "position": 23,
+      "slot": "runner",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "08c558f71c8b2552e16a08e10a767ebba67e6b9e",
+        "bytes": 18104,
+        "sha256": "5cd2da31b361d4498cd6085825ef7bdb31a53604a66106d0764ab71fd837a408"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "50acdda42fd32a706b4a33bb214dc195b4485766",
+        "bytes": 20179,
+        "sha256": "d3b86e3ae504de508b37c300fad199bed16fa851a9bd006a4de132ccbe525934"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "scope": "LEGACY_SOURCE26_TO_FIX1",
+        "edgeIndex": 23,
+        "slot": "runner",
+        "operations": 19,
+        "bytes": 11969,
+        "sha256": "76f44eeb939ea7ecab27e96681b03601a686a27c7d33ec37dd39d948b38773e5",
+        "blob": "b2eee055ed5cac9dab2b88e89731fdc480aa39d6",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 24,
+      "slot": "workflow",
+      "before": {
+        "path": ".github/workflows/afw-c2-drop-winner-diag4.yml",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5824c2e6cacba6a291b961938131051a885c4b9f",
+        "bytes": 1722,
+        "sha256": "a678ed156d70f07a197f8b788dddf1cd70b0821ee6a5e394fa1ac6e78a8b5052"
+      },
+      "after": {
+        "path": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "eea7ccdf5632b04ad44ed7ceb4b638ba9f053a7b",
+        "bytes": 2255,
+        "sha256": "c44a8760e783cc39966656daceb1e0428bac5cba0a45bd41e62db78fcfcbd1e3"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "edgeIndex": 24,
+        "slot": "workflow",
+        "operations": 9,
+        "bytes": 3366,
+        "sha256": "b7b361e5a4c2edfd4697129ad0f87c57f01d84a18756855a9c78071b2f532726",
+        "blob": "609d24c118a9d95f2683e83bc7b897438d5792c0",
+        "fullReadback": true
+      }
+    },
+    {
+      "position": 25,
+      "slot": "native-release",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/native-release.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6be5c0b5b9bfd6a1b89ffb11cf32cba1f045712a",
+        "bytes": 355,
+        "sha256": "4820a930174dc9abe1c3705796ffdae806a58f72c04f103ecf519bd85da39806"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-release.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a37dc79fe27518557f9082932c0acb05fcbcd557",
+        "bytes": 2061,
+        "sha256": "ad272eec1204f53abd89d1c86f226ebe0da6dad6d9e750696b8761f83896e32d"
+      },
+      "sameBody": false,
+      "samePath": false,
+      "literalDelta": {
+        "edgeIndex": 25,
+        "slot": "native-release",
+        "operations": 1,
+        "bytes": 3641,
+        "sha256": "501460ad06f0f181395cf263554603c17ed6b2982448788f00bd31c489014893",
+        "blob": "442c28509684d6f25df522dbe9630ded1736a301",
+        "fullReadback": true
+      }
+    }
+  ],
+  "acceptedToolToCarrier": [
+    {
+      "slot": "public frame-schema",
+      "acceptedToolBody": {
+        "bytes": 35597,
+        "sha256": "23061d7301e4d69b682d036cb96b9201da1b0d7543706aa0b67496c42941cb52",
+        "blob": "34e2a75a79f3b848d7fba6d55022b8d08a08f9b3"
+      },
+      "carrierBody": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/frame-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+        "bytes": 35611,
+        "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+      },
+      "literalChanges": [
+        "public schema title metadata",
+        "context.properties.job.const"
+      ]
+    },
+    {
+      "slot": "publisher",
+      "acceptedToolBody": {
+        "bytes": 38293,
+        "sha256": "4aa49d8cab7f4f02a46ef350b19ba68d14823922edba51b4d496fde328a16e67",
+        "blob": "5dad0068909814d8525f92310035c36d10653e77"
+      },
+      "carrierBody": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "77183a2558a9e071b562485e1b3bd7622fffdf66",
+        "bytes": 38299,
+        "sha256": "dd6f9474ddf47386276e40f6d83cde2f38bcf1263f72008870f2d1700f2e0a80"
+      },
+      "literalChanges": [
+        "fixedPublication.job"
+      ]
+    }
+  ],
+  "directionsReconstructed": 22,
+  "bodyReplacements": 11,
+  "exactBodies": 15,
+  "relocatedExactSiblings": [
+    20,
+    21,
+    22
+  ],
+  "method": "Both complete preimages and afterimages were read as Git DATA and independently hashed. For each body replacement, apply the separate ascending literal offset pair operations in either direction and compare to the full exact byte body. Move backlinks by index for path changes. Reversing all rows reconstructs the original mount order.",
+  "rollback": "Discard detached data. No refs or protected state changed.",
+  "actualOutput": "NOT_RUN",
+  "previousReversiblePacket": "dc19f6b25bd9c533482171b8bec588b5b70c24f4",
+  "carrierFix": {
+    "round": 1,
+    "cap": 5,
+    "finding": "I1",
+    "expectationSeal": "0b111fd1b62f05788c404a3ccf297ead253419c7",
+    "previousProposal": "cf2933aaad43938e98efcc8ffd93dfe7c8160bf9",
+    "initialCarrierToFix1": [
+      {
+        "scope": "INITIAL_CARRIER_TO_FIX1",
+        "edgeIndex": 18,
+        "slot": "protocol",
+        "operations": 1,
+        "bytes": 2431,
+        "sha256": "3ea428ceda5aa2396546f3aba6d9049d937ad02aec001d5a24d6d9a39fc50db6",
+        "blob": "69615978f3b4b28889b1cbb0a01398980c394b4a",
+        "fullReadback": true
+      },
+      {
+        "scope": "INITIAL_CARRIER_TO_FIX1",
+        "edgeIndex": 23,
+        "slot": "runner",
+        "operations": 1,
+        "bytes": 1625,
+        "sha256": "143a677b4c4bdef73075518a29e20133ac6835836390ed22d7398a0797760b96",
+        "blob": "f28feb2b52659629db0a1e6583ae21c3eb4e31e0",
+        "fullReadback": true
+      }
+    ],
+    "additionalDirectionsReconstructed": 4,
+    "note": "Original 22 directions were verified for the initial carrier. This fix additionally verified eight fresh reconstructions: both directions for each of two replaced cumulative pairs, and both directions for each of two new fix-only pairs. Nine original legacy-to-carrier pairs remain unchanged."
+  }
+}
