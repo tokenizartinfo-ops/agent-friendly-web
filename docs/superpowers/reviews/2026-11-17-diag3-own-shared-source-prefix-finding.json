@@ -1,0 +1,349 @@
+{
+  "schema": "AFW-FG3-INDEPENDENT-OWN-EARLY-CODE-REVIEW/1",
+  "status": "FINDING_P2_SHARED_SOURCE_PREFIX_CONSISTENCY",
+  "timestampUTC": "2026-11-17 03:57:51 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewer": "Independent Source specialist; did not author reviewed OWN modules.",
+  "stage": "Independent review only. OWN tool graph/native archive/reversibles pending; did not activate native or run Source.",
+  "index": "990861667a075f4934fcf9f0ff9b0fb77c38c2ad",
+  "authorRAM": {
+    "blob": "b6bbbf86b874ca3c734b88b22f6da16ef8f5ef70",
+    "bytes": 20610,
+    "sha256": "d6794b6d91aab99500f2dff8cb9151b64640faf32fcafd79bc899255009d41be"
+  },
+  "ownCodeAuthority": "efcaa376a9ddf11b60f1502f322e369f0396b69d",
+  "sourceFixAuthority": "be1fbf3eaaab07bdfaf8a3b84a7665d42d45d71c",
+  "sourceContract": "609738496d65c21f2cce0c2969ce14f2b64dec07",
+  "sourceSupplement": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686",
+  "sourceCollectorReviewedAsInertText": "527149a4ecf3e5f4f06e0d801cef38a256b60ceb",
+  "rootMeasurement": "4161ef0439a28580e2d3a1124e48ee6369b0d399",
+  "actualEdgesHash": "93db4eeb78cdb22923ac5fcb5ccdd79b64cfff3a48cca427a572c61fe7bd41eb",
+  "modelEdgesHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6",
+  "fixtureIndex": "f1046e48ffa3f571288a81cf62de0822feb183af",
+  "fixtureSeal": "5a9ae339da360eb7f0ef0b8892b421dd2f9571b5",
+  "fullReadback": [
+    {
+      "name": "finite-get.mjs",
+      "bytes": 4706,
+      "sha256": "561d7b0b8c7f359d86c90a6aadf60680925d7c60cd8b6863d52d4505b2b68829",
+      "blob": "5b726edfe6cdd5bd58d6eea4ddab94d2e8a9f277"
+    },
+    {
+      "name": "bound-transport.mjs",
+      "bytes": 9733,
+      "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe",
+      "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1"
+    },
+    {
+      "name": "bindings.mjs",
+      "bytes": 64627,
+      "sha256": "025ffd652bee384019085aa082f428913b7a008273a50e37679454af11a3d985",
+      "blob": "2f3dc738f7538d28ab876cf6338b0b671ed76914"
+    },
+    {
+      "name": "legacy/fixed.mjs",
+      "bytes": 35339,
+      "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04",
+      "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854"
+    },
+    {
+      "name": "legacy/shape.mjs",
+      "bytes": 2440,
+      "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4",
+      "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067"
+    },
+    {
+      "name": "legacy/partial.mjs",
+      "bytes": 4511,
+      "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72",
+      "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7"
+    },
+    {
+      "name": "legacy/transport.mjs",
+      "bytes": 9613,
+      "sha256": "2e72b645d42fa75a7d04f2e1ab5a3d057e97139f02ae35c9755442f702a6944f",
+      "blob": "5b8b36129eb9ab3af25ead0bbba840a32bdf67c2"
+    },
+    {
+      "name": "legacy/first-failure.mjs",
+      "bytes": 3355,
+      "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e",
+      "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e"
+    },
+    {
+      "name": "legacy/reader.mjs",
+      "bytes": 4002,
+      "sha256": "e01335d6b38840c82dd9f0d5693fcf95a49ecdd10384dee37b302f73ad73b26c",
+      "blob": "4fb5a8d5e5b0b14c58f9935f5fd4dbc0589c23e0"
+    },
+    {
+      "name": "reader.mjs",
+      "bytes": 4080,
+      "sha256": "eeb28b5daa384c3b04331d5a982e8950669672483349154474c32d74cd500e4c",
+      "blob": "ddaa91771171abf0dba6110184b06e631849c2ec"
+    },
+    {
+      "name": "controls.mjs",
+      "bytes": 1921,
+      "sha256": "189beee245f5a3c61510dfbb1bb02b4315f5284800fe2d728f2a984a089c79fe",
+      "blob": "c3c1cc2aeb667d068d16e1fadf64fa5c1e9c4ef0"
+    },
+    {
+      "name": "index",
+      "bytes": 4448,
+      "sha256": "9c5ed8db68ace03c9ca6ed0016f653172b31a28c4b641af24406fef7f4dececd",
+      "blob": "990861667a075f4934fcf9f0ff9b0fb77c38c2ad"
+    },
+    {
+      "name": "ram",
+      "bytes": 20610,
+      "sha256": "d6794b6d91aab99500f2dff8cb9151b64640faf32fcafd79bc899255009d41be",
+      "blob": "b6bbbf86b874ca3c734b88b22f6da16ef8f5ef70"
+    },
+    {
+      "name": "root",
+      "bytes": 9091,
+      "sha256": "25c39d07498aa364f6a101be6c5097807d9a85967e21ed10108f2dc0777ddae6",
+      "blob": "4161ef0439a28580e2d3a1124e48ee6369b0d399"
+    },
+    {
+      "name": "fixtures",
+      "bytes": 54892,
+      "sha256": "f20fea2724474cac1ef6978b205a8b6b34279aa7f4ef2d53aa29a300587e6ba1",
+      "blob": "f1046e48ffa3f571288a81cf62de0822feb183af"
+    },
+    {
+      "name": "seal",
+      "bytes": 5135,
+      "sha256": "408ce422e7631cb0eaf8fbe45bbdde80599426006b8de04745f5f4ef914e1c6c",
+      "blob": "5a9ae339da360eb7f0ef0b8892b421dd2f9571b5"
+    },
+    {
+      "name": "rule",
+      "bytes": 4663,
+      "sha256": "c37ad7d8e7442fc72fd92e93bff5bdc1720db3d26d0b949eab7efd5fd9b24355",
+      "blob": "efcaa376a9ddf11b60f1502f322e369f0396b69d"
+    },
+    {
+      "name": "modelbasis",
+      "bytes": 13657,
+      "sha256": "4b0e196ad9ab4ca0682c7a609179c94e6c558147ed88cdf83f1cacf905fb0645",
+      "blob": "c6cacc5fc19091cdef1c7d8bb43d6c6a195e62a0"
+    },
+    {
+      "name": "modelsch",
+      "bytes": 33261,
+      "sha256": "278f6b123583f4c1fdda496947364a3f2989801c26858669702197c0e952412a",
+      "blob": "dd55c44c2acca5ee4639ed6d86e0baad51b7416b"
+    },
+    {
+      "name": "fixture:FG3_K01.json",
+      "bytes": 68135,
+      "sha256": "03d9aa840cfd1da0ff3cf7b71e551f7537173455a7ec27f7063591d7034ea2b7",
+      "blob": "900bad75e9387f2902c4f3b3871f357c18b093ba"
+    },
+    {
+      "name": "fixture:FG3_S01.json",
+      "bytes": 67756,
+      "sha256": "72c1f83e35d1e8a5f6a3e788090c4c34974c210f2e345a58f1c4cfb6938a30d3",
+      "blob": "3266a0900e1f41efbc2be9235b872ffecdc45cf5"
+    },
+    {
+      "name": "fixture:FG3_C01.json",
+      "bytes": 67681,
+      "sha256": "98d2515806da7583ee50c973c6079a5f76e0848ffde703d84fb7609d9fcaf81e",
+      "blob": "a80a8c49b61fe8681d8849ff1d4be6c4f8aa2455"
+    },
+    {
+      "name": "fixture:FG3_C02.json",
+      "bytes": 67703,
+      "sha256": "8c43eb7e8a193b6f351cf1c28d4e9f7f60194e1afd5c8dfabb7d67357bbdb0f1",
+      "blob": "98cca5b43bac54ebd2db70a73c6238254bdd246e"
+    },
+    {
+      "name": "fixture:FG3_B06.json",
+      "bytes": 68588,
+      "sha256": "d71009c5e942b4d46b0912e3f58cb335f3ec7e360904be847b029ed21cd1337c",
+      "blob": "1020897e6d18a53dca9aade12acaadf9a7a036d5"
+    },
+    {
+      "name": "fixture:FG3_B07.json",
+      "bytes": 68666,
+      "sha256": "53fa4130aba6676a49d0a985e7f12b491a72471b99bafeedc7117f80f1f554a8",
+      "blob": "8ed19f0001142d3d28a2a932e6ff2f69fe7764fb"
+    }
+  ],
+  "verified": {
+    "commonWrapper": "ddaa917…:8–34. ACTUAL and MODEL each call the same readBound with disjoint recursively frozen constants. Caller-prebound edges and canonical edge hash verified before transport. No fallback/private TAP/readers. ACTUAL exact Root4161 25 array, E3 schema equals bdb37, canonical selection and 13 target hashes; MODEL exact c6cacc5… model edges and dd55c… model schema.",
+    "legacy": "Six opaque legacy module pins match listed immutable beforeimages; actual prior DIAG2 primary separately pins legacy reader4fb5 and firstFailureee346. All gTime..gZipPayload function bodies byte-identical to legacy transport, parameterized immutable binding only. Journal replay enforces monotonic contiguous selected20 and firstThrowSequence/N2 then C1 checks. Legitimate runtime and independent Root BASE3203 provenance are separate.",
+    "envelopes": "Ordered custody+outcome normal frames, field order + strict shape, UTF8 caps1024/24576/24577, digest and sole file, ZIP1MiB + CRC/local/central/full DEFLATE consumption, total log4MiB, retention/session time, gates. No private TAP, storage values, status authenticity nor cross-snapshot population equivalence inferred.",
+    "partialRules": "finite-get5b726…:11–33 caller evaluates earliest throw/earlier fail/pass/completion/count and torn before ambiguous/missing alternatives. KNOWN only exact S08:18:118 in clean native prefix, first14 passed/current action/count, correct scalar100..599 excluding200, expected200. :34–54 pointers to matching settled count, AFTER exclusion, gate order and global marker/public KNOWN crosschecks. B06/B07 both admitted correctly.",
+    "authorRAMInventory": "The date-stamped early author RAM records70 distinct ids in the sealed order and 32/38. Independent reviewer exercised six chosen model fixtures and six actual-wrapper rejection probes. No new fixture added to native census.",
+    "OWNOnlyExecution": "Genuinely linked the exact 11 immutable ES module texts in node:vm.SourceTextModule with a contained relative OWN-only import linker, Buffer/TextEncoder/TextDecoder and builtin SHA/inflate passed as trusted parameters. No local FS/Source code evaluated. Earlier attempts to use data: imports ended before execution because runner does not support those import URLs."
+  },
+  "independentSealedChecks": [
+    [
+      {
+        "id": "FG3_K01",
+        "accepted": true,
+        "state": "KNOWN",
+        "reason": "TARGET_GET_ASSERTION",
+        "projectionSha256": "e6f0a2a7cb85cd93c33ef769f74e940e25ac1d35bf185d8c1ffedd402e919fc2"
+      },
+      "G20_OWN_UNQUALIFIED"
+    ],
+    [
+      {
+        "id": "FG3_B06",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "NATIVE_FORMAT_UNSUPPORTED",
+        "projectionSha256": "39959bc6ed5693759c354e89e3f5ae2429be922d8bb2ee523dcdf793eebf8c5a"
+      },
+      "G20_OWN_UNQUALIFIED"
+    ],
+    [
+      {
+        "id": "FG3_B07",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE",
+        "projectionSha256": "b03760cc2e54416bc983008dbeed202fee51d9ecfa12e3b262d1f97d853aac37"
+      },
+      "G20_OWN_UNQUALIFIED"
+    ],
+    [
+      {
+        "id": "FG3_S01",
+        "accepted": false,
+        "state": "REJECTED",
+        "reason": "G20_OWN_UNQUALIFIED",
+        "projectionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      "G20_OWN_UNQUALIFIED"
+    ],
+    [
+      {
+        "id": "FG3_C01",
+        "accepted": false,
+        "state": "REJECTED",
+        "reason": "G20_OWN_UNQUALIFIED",
+        "projectionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      "G20_OWN_UNQUALIFIED"
+    ],
+    [
+      {
+        "id": "FG3_C02",
+        "accepted": false,
+        "state": "REJECTED",
+        "reason": "G20_OWN_UNQUALIFIED",
+        "projectionSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+      },
+      "G20_OWN_UNQUALIFIED"
+    ]
+  ],
+  "extraReviewFinding": {
+    "id": "FG3_OWN_P2_SHARED_SOURCE_PREFIX",
+    "severity": "P2",
+    "consequence": "Recipient accepts a digest-consistent payload whose own public explanations contradict each other about the same canonical C2SOURCE prefix. Case A preserves a positively reported 1 after the claimed absent target row. Exact normal Source collector cannot emit these combinations. They do not establish an issue in a real native occurrence, cause, no-effects or authorization.",
+    "sourceLines": "527149a… line350 rowError(n) applies prefix errors/row absence. In finiteAssertion, lines362–363 check rowError(15) before returning ASSERTION_SCALARS_UNAVAILABLE at366/372. In finiteSample lines387–389 rowError(ordinal) yields SOURCE_UNJOINED before all markers. FiniteSample requires own native/journal check first. Common Source publisher lines443–465 only checks row consistency when h.state KNOWN. No Source execution; publisher issue static. Receiver finite-get5b726…:43–54 permits combinations below because it checks MARKER_STREAM_INVALID + HTTP KNOWN only.",
+    "base": "Sealed FG3_K01 in f1046e48, all current ordinal requirements clean. Use a deep copy of that MODEL input+trusted, with only finiteGet edits and the consequent coherent transport re-encoding. No modeled or historical business truth altered.",
+    "counterexamples": [
+      {
+        "label": "A_target_row_absent_yet_post15_one",
+        "accepted": true,
+        "finiteGet": {
+          "schema": "afw.c2-finite-get-diag3.v1",
+          "http": {
+            "state": "UNKNOWN",
+            "reason": "SOURCE_ROW_UNAVAILABLE",
+            "throwSequence": null,
+            "actual": null,
+            "expected": null
+          },
+          "afterMonitor": {
+            "value": "0",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 56
+          },
+          "afterScopeMissing": {
+            "value": "1",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 60
+          }
+        },
+        "inputHash": "b7ca935bbd0e0012877f7106758d63c6d56f15c3ed769cb972e792460496073d",
+        "zip": "76da97c63fd4936f7a30e7929cd9557ecc37821932f9285793c35f9a2c846ed2"
+      },
+      {
+        "label": "B_scalars_missing_after_row_acceptance_yet_post15_source_unjoined",
+        "accepted": true,
+        "finiteGet": {
+          "schema": "afw.c2-finite-get-diag3.v1",
+          "http": {
+            "state": "UNKNOWN",
+            "reason": "ASSERTION_SCALARS_UNAVAILABLE",
+            "throwSequence": null,
+            "actual": null,
+            "expected": null
+          },
+          "afterMonitor": {
+            "value": "0",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 56
+          },
+          "afterScopeMissing": {
+            "value": "UNKNOWN",
+            "reason": "SOURCE_UNJOINED",
+            "countSequence": null
+          }
+        },
+        "inputHash": "6faeee195e0e1eb9b640bd4c9d7ac219d1daac15d147c96d6aa4786b593e3c48",
+        "zip": "7f13092248054b3fe2485f38f64e874beb8d724a9c8926c1aa50c83bb8854cd4"
+      },
+      {
+        "label": "C_post14_source_unjoined_yet_post15_one",
+        "accepted": true,
+        "finiteGet": {
+          "schema": "afw.c2-finite-get-diag3.v1",
+          "http": {
+            "state": "UNKNOWN",
+            "reason": "UNSUPPORTED_SCALARS",
+            "throwSequence": null,
+            "actual": null,
+            "expected": null
+          },
+          "afterMonitor": {
+            "value": "UNKNOWN",
+            "reason": "SOURCE_UNJOINED",
+            "countSequence": null
+          },
+          "afterScopeMissing": {
+            "value": "1",
+            "reason": "JOINED_SNAPSHOT",
+            "countSequence": 60
+          }
+        },
+        "inputHash": "12594ef4ec8dddea93fd01dd046d734ea2415a36b2a0641ab8c5513b0c92fbbf",
+        "zip": "05b28ee8bbac1177a7665e2674a199219963077a73f7f501f90f8c8428f0a807"
+      }
+    ],
+    "reproduction": "For each replacement copy the exact projected object shown. Replace entire original canonical outcome+LF in rawLog with new compact JSON outcome+LF; same context/native/journal/tree/trusted. Set payloadText, archiveBase64, listing item size+sha256. Build single-file STORE ZIP with zero fields unless listed: local signature04034b50, version10, CRC32/length/compressed length/name length; central02014b50, versions10, identical CRC/length/name; EOCD06054b50 with one entry both counts and standard central size/offset. All headers little-endian; payload/name UTF8. Run real d3ModelRead with Node SHA256/inflateRawSync, result.diagnosticCollectionAccepted=true in all three. Input hashes here use SHA256(UTF8(JSON.stringify(input))). These are review reproductions, outside the sealed70 tests.",
+    "boundedDecision": "For each eligible sample, SOURCE_UNJOINED asserts invalid C2SOURCE prefix, all later marker reasons or JOINED assert valid prefix, higher JOURNAL/NATIVE blockers assert nothing. For this exact producer, HTTP KNOWN and ASSERTION_SCALARS_UNAVAILABLE imply valid prefix15, SOURCE_ROW_UNAVAILABLE implies invalid prefix15. Other HTTP reasons alone imply neither in general. Valid prefix15 entails valid prefix14. Reject contradictory exported assertions without reconstructing private rows or invalidating an independently missing checkpoint marker. Root to decide follow-up scope and official fixture-before-fix. No guard or Source change here."
+  },
+  "remaining": "No early-code PASS for unconditional admission until Root resolves this finding. Completed reviewed early module scope; eventual one-use OWN workflow/controller/native/cleanup review remains distinct.",
+  "actualSourceExecution": false,
+  "native": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

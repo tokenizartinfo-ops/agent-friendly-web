@@ -1,0 +1,427 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-R3-SOURCE-AND-TOOLS-INDEPENDENT-STATIC-REVIEW/1",
+  "timestampUTC": "2026-11-17 03:56:03 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "project": "AFW",
+  "disposition": "PASS_STATIC_BOUNDED_READY_FOR_ROOT_TOOLING_GATE",
+  "verdict": {
+    "SPEC": "PASS_STATIC_BOUNDED",
+    "QUALITY": "PASS_STATIC_BOUNDED",
+    "openFindings": [],
+    "priorP2": "CLOSED_STATIC_ON_R3",
+    "nativeAccepted": false,
+    "SourceBusinessReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "scope": "Source25R3 y tooling35mounts revisados como texto/JSON inertes. Se lee el rulingbe1fbf3e yfixture146b307 antes de evaluar el fix. Sólo lógica original del reviewer para comparación deDATA/hash/oráculos/closure/shape. Sin Source/OWNeval/import/AST/syntax/compile/tests, FS/deps/builds, refs/runs/Actions/log/artifactdownloads/provider/CF ni patches. Única escritura: esta constancia inmutableGitDATA conFULLreadback. PASSestático no es permiso operativo ni resultado nativo.",
+  "authority": "be1fbf3eaaab07bdfaf8a3b84a7665d42d45d71c autoriza únicamente fixSourceRound3 yfixturesOWN; conserva todos losnative/businessheld. Familia SourceRound3/OWNRound3/máximo5, sinreset.",
+  "preservedReviews": [
+    {
+      "role": "P2R2histórico",
+      "blob": "499730a9b58ac3329015a6d31382bd4b147d6ffe",
+      "bytes": 26887,
+      "sha256": "9f4b5216118aa77aea6f156954f4773ba780b7df41d7fb287449f1518f1b6823"
+    },
+    {
+      "role": "S08E3earlysin cambioR3",
+      "blob": "5584f68de9521ed0d54e123f85c3fc055cb7b843",
+      "bytes": 10841,
+      "sha256": "7753bd5ab2cd7d0b551b135a20417227dbba2629b40412e5cf6c9527403b9a95"
+    },
+    {
+      "role": "SourceDesign yFixture145/OWN68DATA",
+      "blob": "0a61ac955e39fb1572532cca811ef11876490f75"
+    },
+    {
+      "role": "Source35original/C1history",
+      "blob": "82294234ee0345d63c85d7518ae96d3857e6c649"
+    }
+  ],
+  "fullReadHashes": [
+    {
+      "name": "sourceIndex",
+      "bytes": 18499,
+      "sha256": "d50c86b56810c84e0f416879cd9628fe318eb7fd1da2a43d2fe02a1e398a502a",
+      "gitBlob": "452895beeedf528748e51ec2ea4ccb91d684552a"
+    },
+    {
+      "name": "toolsIndex",
+      "bytes": 19362,
+      "sha256": "9c871eecce19f087bef0d158e78312fe805ec56821e8e886a7247ea1b2f6a926",
+      "gitBlob": "1bf532b9fa15db9c5c4a388c1786e7bda21d5d71"
+    },
+    {
+      "name": "protocol",
+      "bytes": 55926,
+      "sha256": "c4e2fc98e62d6da94f024ba7a2c2cb3968e662bff7cef528f4115ec198818700",
+      "gitBlob": "506b53c922ebc0f9a101ae1108604993143adaed"
+    },
+    {
+      "name": "adapter",
+      "bytes": 31647,
+      "sha256": "d3f27d5e093dd07866e3c2da6b10beb200e28949abcfcc4090f01671db3e4c04",
+      "gitBlob": "527149a4ecf3e5f4f06e0d801cef38a256b60ceb"
+    },
+    {
+      "name": "runner",
+      "bytes": 16767,
+      "sha256": "4a79a4468efb2c05ed705b8b30b2b519e10377788eca1a0ac2df162e0712bec2",
+      "gitBlob": "1478619761188d61ef510a9a588bb1e1098bd067"
+    },
+    {
+      "name": "controls",
+      "bytes": 11471,
+      "sha256": "f908bf5889208c58184bf15451a5368447a8f3c9d7eeaa7fed69417335d508e0",
+      "gitBlob": "249ae55a4ccae7126e12f8c5640691d3c5aaddf0"
+    },
+    {
+      "name": "toolsRunner",
+      "bytes": 20283,
+      "sha256": "ca78f36a2de86a1437588b652058c6c4ad7c522515bd3064c610ebc5f98530fd",
+      "gitBlob": "6f48584c2302f18d8b28e0138b99286678ba73ff"
+    },
+    {
+      "name": "toolsWF",
+      "bytes": 1792,
+      "sha256": "a35f2feae78107c227bc0f0fd80dc8bd072c71f86dbb584fc82c2e108d87a770",
+      "gitBlob": "7aba56a4677aa04ffdea744f3a98f639322c0125"
+    },
+    {
+      "name": "toolsSchema",
+      "bytes": 39549,
+      "sha256": "91981138dc972952728450f45ca4efaf72145e58e6ddbc636029d5572294c2f1",
+      "gitBlob": "69a6fd5a319f57468b063474df98ae6424560c2f"
+    },
+    {
+      "name": "priorityFixture",
+      "bytes": 17838,
+      "sha256": "4ef2427d0e6efbc5e57d23679d6fd9ea39dadf3b473b28c70b84e479fe866e57",
+      "gitBlob": "b307c25b01c98bdddbeafe908bf7b60ebcf438e1"
+    },
+    {
+      "name": "repoImports",
+      "bytes": 43470,
+      "sha256": "fda2e7cd8cd9016e13edc210010a3e3842bca9dbc5c92e0175bc1668115c2b40",
+      "gitBlob": "89cab1e859a628e3f5e94cfc27be21347a79b721"
+    },
+    {
+      "name": "oracle",
+      "bytes": 51184,
+      "sha256": "f54b26c93cba714fb596cb50b6d3cd341a1d570ca36f5a2a6b62b8ebf7eacc3e",
+      "gitBlob": "8aceac899034528b5d657f8bc7dd774b2d6ec2bd"
+    },
+    {
+      "name": "fixRuling",
+      "bytes": 4370,
+      "sha256": "f5995ed85e0cf13ac12a132749748d83ed92e9935a7581e06728046fa426b0ff",
+      "gitBlob": "be1fbf3eaaab07bdfaf8a3b84a7665d42d45d71c"
+    },
+    {
+      "name": "packageClosure",
+      "bytes": 38204,
+      "sha256": "819003b4c156576d9f43ba250a152ad2482dafbd80cdceded88c66fdee5c80d4",
+      "gitBlob": "c505a9d26aac123275cbc8bb28a56d4986e7e16e"
+    }
+  ],
+  "deltaChecks": {
+    "protocolChangedPaths": [
+      "/authority/priorityFix",
+      "/authority/priorityFixture",
+      "/gates/sourceRound",
+      "/gates/business",
+      "/gates/ownCensus",
+      "/finiteGet/http/publicationPartialBoundary"
+    ],
+    "runnerChangedLines": [
+      78,
+      79,
+      80,
+      84,
+      85,
+      86
+    ],
+    "C1Exact": true,
+    "source25OnlyChangedSlots": [
+      18,
+      19,
+      23
+    ],
+    "inlineToolsInputsExact": true
+  },
+  "metadataChecks": {
+    "pinMismatches": [],
+    "source25EdgesSha256": "93db4eeb78cdb22923ac5fcb5ccdd79b64cfff3a48cca427a572c61fe7bd41eb",
+    "priorityInputMatchesReview": true
+  },
+  "priorFindingClosure": {
+    "id": "FG3_STATIC_P2_FORMAT_BEFORE_AMBIGUITY",
+    "adapter": "527149a4ecf3e5f4f06e0d801cef38a256b60ceb",
+    "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+    "lines": [
+      297,
+      298,
+      396,
+      397,
+      400,
+      403,
+      404,
+      405,
+      406,
+      443,
+      447,
+      449
+    ],
+    "collector": "rawDependentExclusion sóloaplica aUNKNOWN/AMBIGUOUS_EVIDENCE oTARGET_NATIVE_UNAVAILABLE. En ese tier obliga scan bounded/fatalUTF8/control/header noemptyTAP13 ypriorizaNATIVE_FORMAT_UNSUPPORTED antesdeambigüedad/ausenciadepair. No modificaNA/earlierjournal/nativeFAIL/counter/torn. Emptyraw queda missingevidence. C1unidad125..247 permanecebyteidéntica.",
+    "publication": "L449 admite la razón públicaoriginal oNATIVE_FORMAT_UNSUPPORTED sólo en esas dos exclusiones raw-dependent, conobjeto exactamenteigual/nulls. No conoceelheaderprivado yno lo autentica. No amplíaKNOWN niJOINEDcounts; torn/earlierexclusions conservan razónexacta. Alternativaexplícitamenteautorizada porbe1fbf3e eincorporada a506b53.",
+    "fixture": "b307c25b01c98bdddbeafe908bf7b60ebcf438e1 usa exactamente nuestrostdout/journalcontraprueba deR2; comparaciónDATA byteigual. NuevoinnerID sóloH_NATIVE_HEADER_FORMAT_PRIORITY, grupoHTTP_EXCLUSIONS19→20, total145→146sinotro nativeID. El145anterior ysu evidencia no se reemplazan.",
+    "actualNativePending": "Toolingscript comparará old9ed collector+publisher contra new527 collector+publisher sobrebufferssellados ycomprobaráC1igual. Además publicará elcasoTAP13 H_NATIVE_AMBIGUOUS mediante527149a4 para conservar su razónAMBIGUOUS. Estasinvocaciones todavía no se ejecutaron en este review."
+  },
+  "source25": {
+    "index": "452895beeedf528748e51ec2ea4ccb91d684552a",
+    "onlyChangedSlots": [
+      18,
+      19,
+      23
+    ],
+    "meaning": "R3actualiza sólo protocolo/adapter/runnerpinhashes deR2. Runnerdifiere sólo6líneas deblob/bytes/SHA para los2pins; source13/schema/selection/S08sites/caps/D07/reader/recorder/WFbusiness permanecen. No se reaudita M/QA/security/SDK niBASE completo.",
+    "orderedEdgesSha256": "93db4eeb78cdb22923ac5fcb5ccdd79b64cfff3a48cca427a572c61fe7bd41eb",
+    "latchScope": "5584continúavigente: factory genérico nofencea seenID/order/inflightread, pero D07serialúnico ycollectorjoinscerrados acotan laobservación. No se amplía API/casos ni se pidehardeningfuera delrecorrido."
+  },
+  "controlsAssessment": [
+    {
+      "path": "controls.mjs",
+      "lines": [
+        17,
+        18,
+        19,
+        38,
+        46,
+        49,
+        51,
+        60,
+        64,
+        77,
+        80
+      ],
+      "result": "ImportaactualE3S08 factory+alias delcountreal, newcollector yold9ed sóloparahistory. Fakesf/stubs controlan exactamente una snapshot porcount, world/mainOther,returnedbusinesscounters yemitcapture. Lifecyclecallsfuncionesreales; no fórmula paralela ni worldfactory/initialEntryHarness/Miniflare/SDKbusiness. Error dework se simula sentinel+finally yse compara identidad; snapshotthrow propagareal ysinkthrow secontiene. Eltry/finallyreal monitor/noScope se sustenta en5584estático, no se presenta el fakecomo ejecución delactionde negocio."
+    },
+    {
+      "path": "controls.mjs",
+      "lines": [
+        93,
+        99,
+        105,
+        110,
+        120,
+        122,
+        123,
+        127,
+        130,
+        133,
+        143,
+        151,
+        154,
+        158,
+        161,
+        173,
+        178,
+        180,
+        182,
+        183,
+        185
+      ],
+      "result": "Collectors recibenbuffersconcatenados deliteralatoms, llaman collectObservation real yregistranresultadoactual. C1invoca35veces elprojectorreal conrawseal/parentfactsoriginales yhashfull6keys. Publisherpositivos conservan proyecciónreal, negativos reemplazan sólofieldsliterales sellados; encodeBodyesguardreal. Cadaactualvalue sehashea ycompara aloráculo sellado, no expected-asactual. Headercomparative mideambos módulos+publishers ychecksTAP13ambiguo de candidato. Factsfiles contienen únicamenteID/hash/state/reason, sinrawprivado."
+    },
+    {
+      "path": "controls.mjs",
+      "lines": [
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164
+      ],
+      "result": "P_FAULT_ALONE ejercita collectN2conflict+faultLine reales yforma de fault. No ejecuta elbusinessrunner; la ruta deemisión/cleanupdelrunner está revisada estáticamente. No se afirma ejecución de una rama real de negocio."
+    },
+    {
+      "path": "tools-finite-get.mjs",
+      "lines": [
+        16,
+        21,
+        29,
+        48,
+        49,
+        50,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        68,
+        69,
+        74,
+        76,
+        78
+      ],
+      "result": "Callerrepo/ref/message/head/parent/tree/attempt1/Node22 fijados; diffGit exactamente35adiciones aBASE. Los34inputsinline sonexactosti.mountLeavesmenosself; selfse mideGit/bytes/SHA yRoot debecomparar afuera. Pins corpus/oracle/old/new/graph/packageclosure comprobados antes de usar código. Lockedmanifest/lock y98version/integrity exactos; sin dependency nueva."
+    },
+    {
+      "path": "tools-finite-get.mjs",
+      "lines": [
+        81,
+        83,
+        90,
+        93,
+        94,
+        97,
+        98,
+        100,
+        103,
+        104,
+        107,
+        110,
+        113,
+        115,
+        117,
+        118,
+        119,
+        121,
+        122,
+        123,
+        125,
+        126,
+        127,
+        128,
+        130
+      ],
+      "result": "SetupnpmciignoreScripts sóloenTEMPownedseparado, envreducido. Copia80repo+descriptor ytarget13 de lospins, coloca helpers/testsactuales yresuelve dependenciasdesdeRootTEMPconpackage/lockparent. Childnonroot/cleargroups/no-newprivs/unshareNET/env-i, controls comprueban namespace distinto e interfacesinternas. Un child90s,9tests10s, job3min; no harness/build/provider/Worker/SDKbusiness. 13target antes/después; SourceM/QA sóloDATAoverlay salvoseamS08ydependenciesimportadas como ya autorizado."
+    },
+    {
+      "path": "tools-finite-get.mjs",
+      "lines": [
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        138,
+        140,
+        141,
+        142,
+        143,
+        145,
+        147,
+        149,
+        151,
+        154,
+        155,
+        156,
+        157,
+        158,
+        160,
+        162,
+        163,
+        164,
+        165,
+        168,
+        169
+      ],
+      "result": "RawTAPni stderrprivados no se emiten. Fallos sóloIDs+digestwhitelisted; éxito filtrado exactamente9pairs/Subtests/plan/totales0fail/skip/cancel/todo. Lee146factsactuales ycompara cadatupla conoracle antesproof. Cleanupidentitydev/inode/uid/gidverified yabsence antespublicación. Artefactoflagwx/oneLF/readback; proof≤24576INCLUYENDOLF, diferente decapSourceoutcome24576sinLF. RootnativeAPI/ZIP/log/schema/closure independientes aúnnecesarios."
+    },
+    {
+      "path": ".github/workflows/afw-c2-finite-get-diag3-tools.yml",
+      "result": "Pushúniconominado/repo/ref/message/attempt1/contentsread,Ubuntu24.04/Node22.23.4/job3min. Setupcontroller--installproduceownedroot/dev/ino; sóloesos pasan alstepcontrols, artifactexact7d/no-fileerror. No permisoWrite/ref/dispatch genérico ni businesscapture."
+    }
+  ],
+  "oracleVerification": {
+    "count": 146,
+    "unique": 146,
+    "mismatches": [],
+    "groupCounts": [
+      6,
+      24,
+      9,
+      4,
+      20,
+      6,
+      12,
+      35,
+      30
+    ],
+    "nativeGroups": 9,
+    "c1Inner": 35,
+    "method": "Reviewer reconstruyó los146value/state/reason normalizados desde fixturesDATAseparados145+146 yrecalculó cadaSHA256 canónico. Cero discrepancias;146IDsúnicos. No se ejecutóningunafunciónSource. Esto valida oracle/census, no resultados nativos. Las invocacionescomparativas no se sumancomoIDs adicionales.",
+    "old145": "Oráculosprevios siguen Sourcefixture4469. Nuevoheader146 es un control adicional autorizado porbe1fbf3e, no unreset de familia. Se conserva elC1corpus35 original8e303/7055Bcode exacto ylímites deinterpretación."
+  },
+  "staticImportGraph": {
+    "repoModules": 80,
+    "initData": 1,
+    "packages": 2,
+    "staticClosureFiles": 83,
+    "uniqueModulePaths": 80,
+    "allRelativeImportsBound": true,
+    "importsIssues": [],
+    "bareDirect": [
+      "node_modules/@modelcontextprotocol/client",
+      "node_modules/esbuild",
+      "node_modules/jose",
+      "node_modules/miniflare",
+      "node_modules/typescript",
+      "node_modules/yaml"
+    ],
+    "expectedDirect": [
+      "node_modules/@modelcontextprotocol/client",
+      "node_modules/esbuild",
+      "node_modules/jose",
+      "node_modules/miniflare",
+      "node_modules/typescript",
+      "node_modules/yaml"
+    ],
+    "overlay13Exact": true,
+    "packageClosureCount": 98,
+    "SourceS08AndS10Bound": true
+  },
+  "importGraphLimits": "80repo/1descriptor/2package=83 esclosureestática declarada, conrelativos resueltos y6importsbare coincidentes;98sonpackage-lockpotential, no reporte de módulos efectivamentecargados. No se ejecutaron/reauditaron semánticamentetodoslos80; se reutilizan pines/reviews delbaseline yse inspecciona elnuevoS08+toolcontrolcallgraph. E3 yS10cb95/overlays13 exactos. Root mide íntegramente cuerpos aparte.",
+  "prospectiveProof": {
+    "proofLFBytes": 20347,
+    "proofSchemaErrors": [],
+    "toolEdgesCanonicalBytes": 8386,
+    "toolEdgesCanonicalSha256": "f93d15fa6298cf7dcae9ed410d5124ba8e8aac9142ad311fb422280fbbf54b15"
+  },
+  "prospectiveProofLimits": "20347B es cálculo deDATAcon20digitsrunId/headtree40 yresultadossellados, no proofnativereal. Elcontroller mide supropioTAP/resultados ysolamente despuésconstruyeproof. Schema no sustituyeAPI/tree/step/log/ZIP niadmisiónRoot.",
+  "RootSeparateVerification": {
+    "provenance": "ComunicaciónRoot durante este review; no atribuida al reviewer.",
+    "reported": "Root confirmó FULL77objetosSourcefinal+preimágenes yfull83repo/descriptor/packagefiles2056338B,35canonicalf93d15/8386B ySource25hash93db4eeb. Reversibles reportados por prefijo9682:16/16splicesbidireccionales (8D2→R2,3businessR2→R3,5tooling) y3adicionesonly, beforeafterbyte/Git/SHAexactos; original3203sinpathcollision. SinSourceexec.",
+    "reversiblePinAsProvided": "9682 (sólo prefijo; fullpin no suministrado aeste reviewer)",
+    "independentlyReauditedHere": false,
+    "gate": "RootNativegatependiente, sinref/run/activación por el reviewer."
+  },
+  "remaining": [
+    "Root controla la admisión de reversibles/paquete final yel gate delúnico tooling. Este PASSestático no activa nada.",
+    "Native9/146real aúnpendiente: conservarPrimaryAPI/tree/log/ZIP/proof,Rootrecompute146hashes/IDs/totales yfreshresultreview+cierre. No25Sourcebusinessrun liberado.",
+    "OWNsuccessor70fixtures/guard/review se tramitan aparte con alternativas públicasnull; este review no los acepta ni ejecuta.",
+    "FullTask1/SourceQualified/Task1Pass+7nonclaimsfalse. Sincausalidadhistórica503/no-writes/receipts/readiness/PCoff/globaldrain/namespaceSDKvacío."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "editorialSupersedes": {
+    "blob": "f109747c65e329f380c972a8f84080a6bd6e4f98",
+    "delta": "Sólo depuración de dos frases editoriales; pines, evidencia, scope y veredictos sin cambios."
+  }
+}
