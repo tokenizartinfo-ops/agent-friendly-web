@@ -1,0 +1,86 @@
+{
+  "schema": "AFW.C2.DROP_WINNER_FIXTURE_RED_READBACK_REVIEW/1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "saved immutable Git DATA",
+    "ORIGIN": "github.com",
+    "RESOURCE_TYPE": "detached JSON review",
+    "RESOURCE_ID": "run44086328643/1 fixture-stage RED and closure",
+    "ALLOWED_ACTION": "saved blob reads, static JSON/hash/archive verification, create_blob and full readback",
+    "ROLLBACK": "discard detached review; no refs changed"
+  },
+  "inputs": {
+    "primary": "6f98dadad0d3ac0533d1d4399344cac1f8fb9667",
+    "proof": "b77f84620c7cd3c83bc2ef48d3e53dfec5d41ac0",
+    "rootValidation": "e58f9364b66c10cf098e560c05da7d1607da25bf",
+    "rootCloseReadback": "355fe040214731112bbc8c927e42b3476f635bd0",
+    "priorStaticReview": "bc67e84d624e60501b83a0572126f55c84158763"
+  },
+  "SPEC": "PASS",
+  "QUALITY": "PASS",
+  "findings": [],
+  "run": {
+    "id": 44086328643,
+    "attempt": 1,
+    "job": 134049601692,
+    "head": "d561b138ed6906cdf90c69bdb18afaca1e2188b2",
+    "tree": "a2aa1337e9cc05a4aab820f4c879a50624420579",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "conclusion": "failure",
+    "redStep": 4,
+    "redStepConclusion": "failure",
+    "uploadStep": 5,
+    "uploadStepConclusion": "success",
+    "artifact": 14329596832
+  },
+  "independentSavedDataChecks": [
+    {
+      "result": "PASS",
+      "refs": "primary.api.run/jobs/commit; primary.rawJobLog",
+      "evidence": "One saved job binds correct repository, named push branch, exact head/message/parent/tree, attempt1, Ubuntu24.04 and node22.23.4. All three action SHA pins match reviewed workflow. Job started12:46:47Z/completed12:47:02Z, within3min. RED command log at12:46:59 contains exactly the expected AFW_C2_POSITIVE_QA_M_HOST_MARKER_JOIN line followed by exit1, then nominated uploader. Not classified from arbitrary failure."
+    },
+    {
+      "result": "PASS",
+      "refs": "primary.api.tree",
+      "evidence": "Saved recursive tree is untruncated with3208 leaves. All5 proposal entries exactly match path/mode/blob/bytes. Independent Git tree hashing of touched ancestors reconstructs a2aa1337e9cc05a4aab820f4c879a50624420579; removing only5 additions reconstructs BASE tree62e78926635d6b74f288d6c0d69e0f2516306989, confirming original3203 leaf preservation for executed head."
+    },
+    {
+      "result": "PASS",
+      "refs": "primary.api.artifacts; primary.rawJobLog; primary.artifact.archiveBase64",
+      "evidence": "Exactly1 artifact with fixed name, ID14329596832, head/run binding,815B and7d expiry. Upload log confirms1 file,815B, same ID and SHA256 digest."
+    },
+    {
+      "result": "PASS",
+      "refs": "primary.artifact; proof",
+      "evidence": "Independently decoded saved ZIP only:815B SHA2561fbd4c0dcd1650f252b2de2ee1f720ddadc2083116b5b5235139aa9212237b56/Gitfdb2266ecdf190daa4f212e5d4fab78b7849dae6; one disk/one entry, no comment; local/central sole filename drop-winner-fixtures.json; flags8/method8. Full raw-deflate consumed651B; DD16 signature/CRC/sizes consistent; CRC32a67356c6. Exact inflate equals saved payload and independently fetched proof."
+    },
+    {
+      "result": "PASS",
+      "refs": "proof; proposal.proof",
+      "evidence": "Payload is canonical one JSON object+LF,1050B SHA25698c0c7369987f1c57242b483c14ebfea7e43adc14d047d24f863c0d0426d5b40/Gitb77f84620c7cd3c83bc2ef48d3e53dfec5d41ac0. Exact reviewed template after binding head/runId. Named AssertionError/ERR_ASSERTION/deepStrictEqual, absent markers/UNKNOWN join, preserved403/503/body/header/original error/finally flags. executed1/notExecuted58; MODEL-only and all qualification/nonclaims false."
+    },
+    {
+      "result": "PASS_WITH_ATTRIBUTION",
+      "refs": "rootCloseReadback.ref/commit/closedHead/closedTree/parent",
+      "evidence": "Saved ref and commit consistently bind closure4dec9811009052b4088068a06ece37a7af70b4cf/tree6de381b7d06c70cae3a98d3c1c6841a603741327, exact executed parent, closure message and receipt reference. No live endpoint requery performed."
+    }
+  ],
+  "attributionBoundary": "Closed-tree3209=3203+4+2, sole workflow deletion/two evidence additions, all11 protected refs unchanged and zero close-head runs are Root assertions from saved close readback. Closed recursive tree and fresh endpoint state were not independently reconstructed/refetched here; do not present these as reviewer-direct observations.",
+  "decision": "Expected fixture-stage MODEL RED is corroborated from saved primary evidence. Supports Root recording this stage gate and separately preparing feature code. No activation authority; source implementation/native tools and subsequent independent gates remain separate.",
+  "executedByReviewer": "JSON/static text, builtin hash and bounded saved ZIP inflate only; no Source import/eval/AST/syntax/compile/tests/deps/clones, terminal endpoint fetch, log/ZIP redownload, GHA/run/ref/Rootdocs/runtime mutation.",
+  "fixtureCount": 59,
+  "executedModelCases": 1,
+  "notExecuted": 58,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
