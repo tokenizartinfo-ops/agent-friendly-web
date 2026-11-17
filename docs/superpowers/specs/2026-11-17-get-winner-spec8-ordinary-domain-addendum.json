@@ -1,0 +1,55 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.SPEC8.ORDINARY_DOMAIN_ADDENDUM/1",
+  "timestampUTC": "2026-11-17 18:42:29 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Scoped detached keyless diagnostic TOOL design only",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "Traceable spec8 gate addendum",
+  "authority": "Owner authorized autonomous AFW development/testing; accepted dependent observation task and current ordinary-M diagnostic scope. No production behavior or permissions change.",
+  "acceptedSpec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+  "proposal": "00c45c7a974b9618882c437d0e1ad223ced107ed",
+  "independentReview": "08e36c2d22f63b2f88d67ffe2e94fa78002e1f6e",
+  "decision": "Root explicitly ACCEPTS and adopts the required scoped section8 gate addendum below, limited to the two named ordinary-domain native exceptions. This replaces those native-execution obligations by reviewed static domain/cut exclusions, without representing their frozen oracles as executed/passed.",
+  "pinnedGraph": {
+    "source13": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "factoryAndTransforms": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+    "entryOriginal": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+    "bridgeOriginal": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "wireOriginal": "38285fa0149a38924c431b4d5a705bec1384216d",
+    "rootMeasurement": "37a3c7a11e5765ab8e0b039917ad346497cbe5a7"
+  },
+  "scopeRequirements": {
+    "form": "A traceable scoped design/gate addendum to accepted spec section8, naming this proposal/review and the exact pinned ordinary source/factory graph. A review interpretation alone must not silently declare the original explicit native immutable/late obligations executed.",
+    "domain": "Only the nominated closed ordinary-M GET diagnostic with the original pending constructor, original response identity, original parent/finish, selected native compiled bytes and direct route. No scope extension to arbitrary factory inputs, replaced response origins, modified serializers, active adversaries or unreviewed adapters.",
+    "exactExceptions": [
+      "M-immutable",
+      "M-late-mark"
+    ],
+    "census": "Keep frozen315 corpus IDs/bytes/oracles unchanged. Label these two obligations STATIC_DOMAIN_EXCLUSION and UNEXECUTED_NATIVE; arbitrary-input behavior stays UNSUPPORTED/HELD. Never count them as native PASS or claim all original section8 negatives ran. If a separate MODEL row is exercised, report that separately as MODEL evidence and do not let it discharge the excluded native obligation.",
+    "mandatoryEvidence": "Actual ordinary OFF/ON native GET with exact residence/manifest/direct route, original actor/bridge/entry/finalizer, status/body/ALL-header differential and marker on the genuine mutable B. All other required reachable nominated finalizer/collision/transport negatives and the separately qualified retention component remain mandatory and cannot be waived by this two-case addendum.",
+    "futureWidening": "If later work needs arbitrary native immutable-response handling or physical post-serialization mutation detection, reopen those exact obligations with a new scoped design and genuine native evidence. Current factory/ordinary evidence grants neither capability.",
+    "release": "Scope addendum only; no native/ref/provider/runtime release. Whole packet/controller/budget/custody/one-use Root gate and actual acceptance still required."
+  },
+  "wordingPrecision": "The original S03 await forwardFiniteOwnerChoice remains between invocation/bridge completion and entry continuation. Do not claim absence of every await or microtask from caught(B) to finish. The proof relies on absence of external B exposure/mutation in the pinned graph and the synchronous finally-to-fetch-resolution ordering, with actual native direct-route witness still mandatory.",
+  "censusRule": "These TWO native obligations remain UNEXECUTED_NATIVE / STATIC_DOMAIN_EXCLUSION / UNSUPPORTED_GENERIC. A separately executed MODEL row is counted only as MODEL. Frozen315 inputs/IDs/oracles unchanged; no all-obligations-executed/native PASS claim.",
+  "allOtherControls": "Mandatory ordinary OFF/ON actual native witness, all other reachable required finalizer/collision/transport controls, separate native retention component, exact full packet/budget/custody/Root one-use gate and actual independent review remain unchanged.",
+  "release": {
+    "scopeAddendum": true,
+    "detachedCensusProtocolUpdate": true,
+    "native": false,
+    "refs": false,
+    "business": false,
+    "runtime": false
+  },
+  "rollback": "Discard detached unpublished proposal/addendum; no runtime/main/BASE modified.",
+  "Source5": 5,
+  "OWN5": 5,
+  "budgetReset": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "receiptAuthenticated": false,
+  "globalNativeDrainVerified": false
+}

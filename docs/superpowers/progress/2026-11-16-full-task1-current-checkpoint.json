@@ -723,11 +723,19 @@
       ],
       "retentionComponentFixRound": 1,
       "retentionCurrentEntry": "e599e62c93bb2fbeef2957b2c5fbb920944c8746",
-      "retentionCurrentBuilder": "edb8d2a3e6b9d0befdbd8d51b0b8ef8e1f0cf15f",
-      "ordinaryCurrentDraft": "dacfb3b451086af7d386af8b838c44715caf0965",
-      "retentionScopeRuling": "760e6e4ea9126ddd3e48f01fab4931702e91996f"
+      "retentionCurrentBuilder": "c2b057585da9da62a21fe065ef31ad3bfedf02bf",
+      "ordinaryCurrentDraft": "9ab8e1fa7d0223c9339869994a7df4224373ff26",
+      "retentionScopeRuling": "760e6e4ea9126ddd3e48f01fab4931702e91996f",
+      "retentionCleanupFixRound": 2,
+      "retentionCleanupReview": "b46b3fef7ecdb3ff94dfc3a07cda1dc3a792437a",
+      "immutableLateDomainProposal": "00c45c7a974b9618882c437d0e1ad223ced107ed",
+      "immutableLateScopeReview": "08e36c2d22f63b2f88d67ffe2e94fa78002e1f6e",
+      "nativeExcludedDomainCases": [
+        "M-immutable",
+        "M-late-mark"
+      ]
     }
   },
-  "schemaVersion": 68,
-  "updatedAtUTC": "2026-11-17 18:30:37 UTC"
+  "schemaVersion": 69,
+  "updatedAtUTC": "2026-11-17 18:42:29 UTC"
 }

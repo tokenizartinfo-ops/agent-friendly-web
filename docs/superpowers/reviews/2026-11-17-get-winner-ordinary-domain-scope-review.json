@@ -1,0 +1,56 @@
+{
+  "schema": "AFW.GET_WINNER.STAGE_B.ORDINARY_DOMAIN_EXCLUSION_REVIEW/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private detached Git design DATA",
+  "allowedAction": "Narrow immutable/late-mark feasibility and scope DATA review; detached report only",
+  "rollback": "Disregard detached review and proposed scope amendment",
+  "proposal": {
+    "blob": "00c45c7a974b9618882c437d0e1ad223ced107ed",
+    "bytes": 7676,
+    "sha256": "9afbbe19825024ec8e9c3077741c2559c3e73b6d3d6fee9f9bc3c30f3a542632"
+  },
+  "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+  "priorFaultScope": "5098d356ae7ee9f08c7edab00202af854177cac1",
+  "factoryAndTransforms": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+  "SPEC": "CONDITIONAL_ACCEPT_EXPLICIT_ORDINARY_DOMAIN_GATE_AMENDMENT",
+  "QUALITY": "CONDITIONAL_ACCEPT_STATIC_EXCLUSION_WITH_UNEXECUTED_NATIVE_LABELS",
+  "decision": "Accept the proposed static ordinary-domain/cut exclusion for these two events, conditional on the precise Root amendment below before native. Do not add a broad M-local channel, generic header worker or arbitrary factory-input experiment merely to call the frozen negatives executed.",
+  "basis": [
+    {
+      "case": "M-immutable",
+      "result": "The admitted ordinary bridge catch creates the pristine pending B through the original finiteNativePending/Response.json constructor. The same B is registered and returned; the pinned ordinary flow exposes no external B reference or native-header-guard mutator before finish. Freezing a Headers object does not make its internal guard immutable, and replacing B with a fetched/redirect/error response changes the origin/object domain. A same-B immutable transition is therefore excluded only within this exact closed graph. Captured setter failure is guarded, but no general native immutable-header support capability is established."
+    },
+    {
+      "case": "M-late-mark",
+      "result": "The original entry stores the awaited bridge result and then runs original synchronous parent.finish followed by synchronous observer.finish in its finally. The async fetch cannot resolve its returned response until finally completes; direct runtime serialization of that return therefore occurs after this cut. There is no deferred observer callback in that finally. The factory has no serialized flag/API and cannot claim to detect a manually staged post-serialization mutable B."
+    }
+  ],
+  "wordingPrecision": "The original S03 await forwardFiniteOwnerChoice remains between invocation/bridge completion and entry continuation. Do not claim absence of every await or microtask from caught(B) to finish. The proof relies on absence of external B exposure/mutation in the pinned graph and the synchronous finally-to-fetch-resolution ordering, with actual native direct-route witness still mandatory.",
+  "requiredRootDecision": {
+    "form": "A traceable scoped design/gate addendum to accepted spec section8, naming this proposal/review and the exact pinned ordinary source/factory graph. A review interpretation alone must not silently declare the original explicit native immutable/late obligations executed.",
+    "domain": "Only the nominated closed ordinary-M GET diagnostic with the original pending constructor, original response identity, original parent/finish, selected native compiled bytes and direct route. No scope extension to arbitrary factory inputs, replaced response origins, modified serializers, active adversaries or unreviewed adapters.",
+    "exactExceptions": [
+      "M-immutable",
+      "M-late-mark"
+    ],
+    "census": "Keep frozen315 corpus IDs/bytes/oracles unchanged. Label these two obligations STATIC_DOMAIN_EXCLUSION and UNEXECUTED_NATIVE; arbitrary-input behavior stays UNSUPPORTED/HELD. Never count them as native PASS or claim all original section8 negatives ran. If a separate MODEL row is exercised, report that separately as MODEL evidence and do not let it discharge the excluded native obligation.",
+    "mandatoryEvidence": "Actual ordinary OFF/ON native GET with exact residence/manifest/direct route, original actor/bridge/entry/finalizer, status/body/ALL-header differential and marker on the genuine mutable B. All other required reachable nominated finalizer/collision/transport negatives and the separately qualified retention component remain mandatory and cannot be waived by this two-case addendum.",
+    "futureWidening": "If later work needs arbitrary native immutable-response handling or physical post-serialization mutation detection, reopen those exact obligations with a new scoped design and genuine native evidence. Current factory/ordinary evidence grants neither capability.",
+    "release": "Scope addendum only; no native/ref/provider/runtime release. Whole packet/controller/budget/custody/one-use Root gate and actual acceptance still required."
+  },
+  "verification": "Full proposal UTF8bytes/SHA256/GitSHA1 independently matched. Reviewed exact already pinned source object flow, synchronous finalizer and stated factory limits as DATA. No code, new test mechanism, Source parsing/AST/eval/import/syntax/native execution or ref/provider/runtime operation.",
+  "Source5": 5,
+  "OWN5": 5,
+  "budgetReset": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "receiptAuthenticated": false,
+  "globalNativeDrainVerified": false,
+  "nativeExecuted": false,
+  "sourceExecuted": false,
+  "implemented": false
+}
