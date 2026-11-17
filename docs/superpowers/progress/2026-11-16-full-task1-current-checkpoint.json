@@ -1,10 +1,10 @@
 {
-  "schema": 52,
-  "timestampUTC": "2026-11-17 15:45:53 UTC",
+  "schema": 53,
+  "timestampUTC": "2026-11-17 16:05:45 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "036c66c2648da5eed93c76f6b0132ddc8798c167",
-  "phase": "GET_WINNER_DESIGN_ACCEPTED_FIXTURE_STAGE_A_RELEASED",
+  "previousCheckpoint": "607a4c3a81b828da9aa08cea1d9ea8b0a81bb48c",
+  "phase": "GET_WINNER_STAGE_A_FIX_ROUND1_BEFORE_NATIVE_RELEASE",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Task1 StageA author fixture seal and original prepared-M RED proposal; no featurecode or native released. Root then static review/tree gate and exact one-use RED. No user intervention needed.",
+  "next": "Author fixes only two reviewed StageA findings with reversible evidence; then one scoped re-review and exact Root native RED activation gate. No Source feature/native or live runtime release; no manual user action needed.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -516,9 +516,26 @@
   "completedOwnVmReleased": true,
   "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
   "getWinnerDependent": {
-    "phase": "FIXTURE_FIRST_SEAL_AND_RED_PROPOSAL_ONLY",
+    "phase": "STAGE_A_REVIEW_FIX1",
     "featureCodeReleased": false,
     "nativeReleased": false,
-    "roundsUnchanged": true
+    "roundsUnchanged": true,
+    "actor": "/root/get_winner_fixture_stage_a",
+    "reviewer": "/root/get_winner_stage_a_review",
+    "originalProposal": "d5c3de5d6b8c8eed2ad557be66dcc448ba41d4fc",
+    "originalAuthorReport": "bcaab5d55502821f92dc0df9aa6325d65523524a",
+    "originalFixtureSeal": "3d39778abe9105f20c44cc11320fad92f8574d91",
+    "originalFixtureMeasurement": "d8045b31f8ad35a2603350660a9943ae6d977b72",
+    "review": "9d638a8e0cd6ab05db82eaa926af83a2345b1dca",
+    "stageAFixRound": 1,
+    "findings": [
+      "A1 duplicate controller const st in same try blocks parsing before native; rename receipt-only variable",
+      "A2 copy-all oracle must preserve serialized marker while trusted classification stays UNKNOWN"
+    ],
+    "fixtureIDs": 315,
+    "fixtureExpectationsExecuted": 0,
+    "nativeGETsExecuted": 0,
+    "allCurrentRefsClosed": true,
+    "rootChecked28NewPathsAbsentAtBase": true
   }
 }
