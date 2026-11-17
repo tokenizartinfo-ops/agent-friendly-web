@@ -1,0 +1,170 @@
+{
+  "schema": "AFW.C2.GET_WINNER.FULL20.EXPECTATION_SEAL/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "unreferenced GitHub DATA",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "detached Git blob",
+  "resourceId": "fixed diagnostic1 permitted-delta and control contract",
+  "allowedAction": "create, read back and measure detached DATA",
+  "rollback": "Discard detached DATA",
+  "brief": "524c1558cc21d1df4b950b064ef0041d48ce6163",
+  "preimage": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+  "nomination": {
+    "branch": "lab/afw-c2-get-winner-20261117-diagnostic1",
+    "message": "AFW-C2-GET-WINNER-DIAGNOSTIC1-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+    "job": "c2-get-winner-diagnostic1",
+    "prefix": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/",
+    "runner": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+    "command": "node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+    "artifact": {
+      "name": "afw-c2-get-winner-diagnostic1",
+      "path": "output/c2-get-winner-diagnostic1.json",
+      "fileName": "c2-get-winner-diagnostic1.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Check the business controller syntax",
+      "Install only the existing locked dependencies",
+      "Observe first finite GET in full case order",
+      "Preserve the bounded first finite GET diagnostic"
+    ],
+    "jobMinutes": 7,
+    "activationReleased": false,
+    "commandStep": "Observe first finite GET in full case order",
+    "event": "push",
+    "attempt": 1
+  },
+  "permittedDelta": {
+    "slots": [
+      "index",
+      "S08",
+      "S09",
+      "S10",
+      "selection",
+      "public frame schema",
+      "protocol",
+      "publisher",
+      "runner",
+      "workflow",
+      "native release"
+    ],
+    "exactBodySlots": [
+      "S00",
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S11",
+      "S12",
+      "custody guard",
+      "custody preflight",
+      "read-progress",
+      "D07",
+      "recorder"
+    ],
+    "relocatedExactSiblings": [
+      "read-progress",
+      "D07",
+      "recorder"
+    ],
+    "preserveSource13": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "preserveSelection": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+    "sourceTargets": [
+      "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+      "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+      "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+      "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd"
+    ],
+    "caseIds": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH",
+      "C2T1_HANDLE",
+      "C2T1_PROJECTREF",
+      "C2T1_SUBJECT",
+      "C2T1_PHASE_RENAME",
+      "C2T1_SOURCE_BYTES",
+      "C2T1_APPROVAL",
+      "C2T1_PREDECESSOR",
+      "C2T1_GRANT_REVOKED",
+      "C2T1_EXTRA_KEY",
+      "C2T1_NOTICES",
+      "C2T1_MONITOR_COOKIE",
+      "C2T1_MONITOR",
+      "C2T1_SCOPE_MISSING",
+      "C2T1_FINITE",
+      "C2T1_SELECTION",
+      "C2T1_LOST_ACK_DUPLICATE",
+      "C2T1_UNRESOLVED_WRITER",
+      "C2T1_OWN_PROMISE"
+    ],
+    "kept": "Full original ordered cases, D07 registration and recorder bytes, QA, M and original guards/clock/await/race/cancel/lease/retention, GET and POST observations, HTTP/native/witness projections, existing isolation and roles.",
+    "new": "Synthetic GET enable for nominated positive fixture; fixed conditional app-route premise from exact reviewed construction and accepted ordinary TOOL evidence. ORIGINAL POST observation kept; exact old transport proof remains historical, and unavailable attribution is UNKNOWN. No positive from header presence, copied bytes or matching public hashes.",
+    "caps": {
+      "jobMinutes": 7,
+      "childMs": 180000,
+      "totalMs": 330000,
+      "stdout": 1048576,
+      "stderr": 65536,
+      "artifactIncludingLF": 24577,
+      "journalBytes": 32768,
+      "journalRows": 128,
+      "perCaseMs": 120000,
+      "originalMLeaseMs": 30000,
+      "artifactJson": 24576
+    },
+    "wire": [
+      "AFW_C2_GET_WINNER_OBSERVATION1_CUSTODY",
+      "AFW_C2_GET_WINNER_OBSERVATION1_OUTCOME",
+      "AFW_C2_GET_WINNER_OBSERVATION1_FAULT"
+    ],
+    "businessOutputExpected": "No predetermined winner, failure, or success. Historical 503 cause UNKNOWN.",
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    }
+  },
+  "plannedControls": {
+    "syntax": [
+      "node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+      "node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+      "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+      "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+      "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt"
+    ],
+    "lockedInstall": "npm ci --ignore-scripts --no-audit --no-fund",
+    "preflight": "node --import c2-source-custody-guard.mjs c2-source-custody-preflight.mjs",
+    "guardedOriginalFull20": "node --import c2-source-custody-guard.mjs --experimental-vm-modules --test --test-reporter=tap --test-concurrency=1 test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "legacyToolControls": [
+      "node --test --test-concurrency=1 docs/superpowers/source-lab/c2-get-winner-dependent/receipt-normalization.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/controller-file-boundaries.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.test.mjs",
+      "python3 docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor_test.py"
+    ],
+    "nominationCommand": "node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+    "result": "NOT_RUN"
+  },
+  "nativeExecuted": false,
+  "businessReleased": false,
+  "activationReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false
+}

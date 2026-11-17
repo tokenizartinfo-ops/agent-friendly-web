@@ -1,0 +1,237 @@
+{
+  "schema": "AFW.GET_WINNER.FULL20.ORDERED_MOUNT26/1",
+  "status": "AUTHOR_MEASUREMENT_COMPLETE_ALL_BODIES_READ_BACK",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "baseLeavesExpected": 3203,
+  "totalLeavesExpected": 3229,
+  "namespaceGate": "Root independently verifies unchanged BASE leaves, absence of collisions, protected refs, and exact new tree before any one-use mutation.",
+  "preimage26": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+  "indexFirstAnd13EntriesInOrder": true,
+  "mountLeaves": [
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+      "bytes": 9228,
+      "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+      "bytes": 23226,
+      "sha256": "75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+      "bytes": 83571,
+      "sha256": "a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+      "bytes": 98851,
+      "sha256": "7c8680d6b86b1ccc0acdcfecb4d8e4312e6d6971f36b00bd6dcf88c289309604"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+      "bytes": 4403,
+      "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+      "bytes": 35611,
+      "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5634256c188580dd4ef0cc2017ced4d0980ca6d8",
+      "bytes": 68136,
+      "sha256": "dbf8cb3cd96d3892d11d7d7b942fd59f9003732b38e264bd72ad4e84231379b2"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "77183a2558a9e071b562485e1b3bd7622fffdf66",
+      "bytes": 38299,
+      "sha256": "dd6f9474ddf47386276e40f6d83cde2f38bcf1263f72008870f2d1700f2e0a80"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/diagnostic-driver.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/progress-recorder.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7172e63f474c055723124b346be1b63c7ddd3c6d",
+      "bytes": 20179,
+      "sha256": "6db6754097a1fe426898c7ea1df60996792b2b9a7fbd0b1ab3ab5046044c5bc5"
+    },
+    {
+      "path": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "eea7ccdf5632b04ad44ed7ceb4b638ba9f053a7b",
+      "bytes": 2255,
+      "sha256": "c44a8760e783cc39966656daceb1e0428bac5cba0a45bd41e62db78fcfcbd1e3"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-release.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a37dc79fe27518557f9082932c0acb05fcbcd557",
+      "bytes": 2061,
+      "sha256": "ad272eec1204f53abd89d1c86f226ebe0da6dad6d9e750696b8761f83896e32d"
+    }
+  ],
+  "bodyEdgesHash": "b849e01d0da0e8a76f80fba749bcb4dff0b9b8b09e8580584e52dc6605d9f553",
+  "canonicalWire": {
+    "bytes": 6404,
+    "sha256": "b849e01d0da0e8a76f80fba749bcb4dff0b9b8b09e8580584e52dc6605d9f553",
+    "rule": "UTF8(JSON.stringify(mountLeaves)), no LF"
+  },
+  "bodyBytes": 794960,
+  "changedBodies": 11,
+  "exactBodies": 15,
+  "relocatedExactSiblings": [
+    "read-progress",
+    "D07",
+    "recorder"
+  ],
+  "actualFull20Execution": "NOT_RUN"
+}

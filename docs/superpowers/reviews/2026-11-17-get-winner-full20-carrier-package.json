@@ -1,0 +1,2150 @@
+{
+  "schema": "AFW.C2.GET_WINNER.CARRIER_SCOPED_REVIEW_PACKAGE/2",
+  "timestampUTC": "2026-11-17 23:03:39 UTC",
+  "task": "Closed/unactivated full20 carrier prerequisite to Task2; static only",
+  "brief": "524c1558cc21d1df4b950b064ef0041d48ce6163",
+  "authorReport": "cf2933aaad43938e98efcc8ffd93dfe7c8160bf9",
+  "baseCommit": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "oldFull26": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+  "candidateManifest": "cf2933aaad43938e98efcc8ffd93dfe7c8160bf9",
+  "candidateCommit": null,
+  "inputVersionChanges": [
+    {
+      "slot": "index",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/source-index.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "fc5b71098da76696278765f43805f0f2a1953b22",
+        "bytes": 11559,
+        "sha256": "1da326e60821aec91c7635a227b42f14b0710a3a2d5fb6f8764722fbbaa3d141"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+        "bytes": 9228,
+        "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153"
+      },
+      "bodyChanged": true,
+      "patch": "d96a417476d908ac04c3ce9024e5cf5dc461b4ba"
+    },
+    {
+      "slot": "S00",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "S01",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "S02",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "S03",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "S04",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "S05",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "S06",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "S07",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "S08",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-08.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "14b1a67b0557dbc660a3900d8767b40c5bff7755",
+        "bytes": 22615,
+        "sha256": "da134d91f132195a787c549a1d3552335efc29720506dbf2ca9cb7e4371af677"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+        "bytes": 23226,
+        "sha256": "75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046"
+      },
+      "bodyChanged": true,
+      "patch": "8b2dd694daabe2a010daece314358b912b066c37"
+    },
+    {
+      "slot": "S09",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-09.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9da84b3f0606e9cb84d8308de26c7f193c5c778a",
+        "bytes": 72687,
+        "sha256": "93c0d34a0221797c09e4602065af570ad4711fdc019eea0fbcd9b0c8f90f08b9"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+        "bytes": 83571,
+        "sha256": "a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80"
+      },
+      "bodyChanged": true,
+      "patch": "7d3eb0cddceafeb1566925f7dc01c6fc67e20f80"
+    },
+    {
+      "slot": "S10",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-10.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "955fa904a89733fabfa5c73736f59922b6e58023",
+        "bytes": 98440,
+        "sha256": "01bd570328eb52d05a5d290f391bfc3da80d8298fba25fee7beff542096a0f34"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+        "bytes": 98851,
+        "sha256": "7c8680d6b86b1ccc0acdcfecb4d8e4312e6d6971f36b00bd6dcf88c289309604"
+      },
+      "bodyChanged": true,
+      "patch": "9d0ef974afa69714dfefda5ddaa84a4e786bec9b"
+    },
+    {
+      "slot": "S11",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "S12",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "custody guard",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "bytes": 1208,
+        "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "bytes": 1208,
+        "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "custody preflight",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "bytes": 417,
+        "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "bytes": 417,
+        "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+      },
+      "bodyChanged": false
+    },
+    {
+      "slot": "selection",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/mode-selection.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8fe9907fb12fb71361819551df04c2830a78452b",
+        "bytes": 5173,
+        "sha256": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/mode-selection.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+        "bytes": 4403,
+        "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+      },
+      "bodyChanged": true,
+      "patch": "06c30e29fac6c248b02d5203827337675c08d13a"
+    }
+  ],
+  "inputBoundary": "Current Source13 and its thirteen bodies are exact accepted TOOL inputs, with prior source review a279c2e6238927b0f7b1544c0f4d058852177651; they are not newly edited by this carrier task. Historical Source26 transitions are pinned in the reversible index for audit. Their mounted direct-route use is a concrete risk to review here, not a transfer of TOOL full20 qualification.",
+  "executableDiffs": [
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+      "beforeBlob": "08c558f71c8b2552e16a08e10a767ebba67e6b9e",
+      "afterBlob": "7172e63f474c055723124b346be1b63c7ddd3c6d",
+      "fullBefore": "import { createHash } from 'node:crypto';\nimport { spawnSync } from 'node:child_process';\nimport { readFile,writeFile,mkdir,mkdtemp,symlink,rm,lstat,readdir,realpath } from 'node:fs/promises';\nimport { dirname,join,resolve,sep } from 'node:path';\nimport { fileURLToPath } from 'node:url';\nconst entered=Date.now(), end=entered+330000;\nconst config={\n  \"repo\": \"tokenizartinfo-ops/agent-friendly-web\",\n  \"BASE\": \"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\n  \"TREE\": \"62e78926635d6b74f288d6c0d69e0f2516306989\",\n  \"branch\": \"lab/afw-c2-source-20261117-t1-drop-winner-diag4\",\n  \"message\": \"AFW-C2-T1-DROP-WINNER-DIAG4-ONEUSE-20261117\",\n  \"job\": \"c2-drop-winner-diag4\",\n  \"runner\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs\",\n  \"prefix\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/\",\n  \"artifact\": \"output/c2-drop-winner-diag4.json\",\n  \"childFile\": \"test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs\",\n  \"selectHash\": \"09f9928830b63294f7ed27b00ea2a9593477fda2d6d0f7300e536faa5cd0bd27\",\n  \"bootstrap\": {\n    \"path\": \".github/workflows/afw-finite-qa-bootstrap.yml\",\n    \"bytes\": 1844,\n    \"sha256\": \"ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14\",\n    \"blob\": \"22f324e480dbe0295fe23fb7415328cba7952b1b\",\n    \"fullReadback\": true\n  },\n  \"rootFiles\": [\n    \"package-lock.json\",\n    \"package.json\",\n    \"tsconfig.json\",\n    \"wrangler.a2a-canary.jsonc\",\n    \"wrangler.a2a-production.jsonc\",\n    \"wrangler.assistance-goal-context.jsonc\",\n    \"wrangler.assistance-goal-context.qa.jsonc\",\n    \"wrangler.assistance-supervision-producer.jsonc\",\n    \"wrangler.contact.jsonc\",\n    \"wrangler.delegated-canary.jsonc\",\n    \"wrangler.delegated-real-pilot.example.jsonc\",\n    \"wrangler.delegated-real-pilot.jsonc\",\n    \"wrangler.delegated.jsonc\",\n    \"wrangler.dossier-supervision-producer.jsonc\",\n    \"wrangler.independent-closure-qa.finite.jsonc\",\n    \"wrangler.independent-closure-qa.jsonc\",\n    \"wrangler.independent-closure-qa.rollback.jsonc\",\n    \"wrangler.mail-canary.jsonc\",\n    \"wrangler.mcp-own-events.example.jsonc\",\n    \"wrangler.mcp-own.finite.jsonc\",\n    \"wrangler.mcp.jsonc\",\n    \"wrangler.operations-manager.jsonc\",\n    \"wrangler.operations-producer.jsonc\",\n    \"wrangler.operations-review-qa.jsonc\",\n    \"wrangler.operations-review.jsonc\",\n    \"wrangler.operations-watchdog.jsonc\",\n    \"wrangler.operations.jsonc\",\n    \"wrangler.release-operator.jsonc\"\n  ],\n  \"transportRelease\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/native-release.json\",\n    \"mode\": \"100644\",\n    \"type\": \"blob\",\n    \"blob\": \"6be5c0b5b9bfd6a1b89ffb11cf32cba1f045712a\",\n    \"bytes\": 355,\n    \"sha256\": \"4820a930174dc9abe1c3705796ffdae806a58f72c04f103ecf519bd85da39806\"\n  }\n};\nconst pins={\n  \"index\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/source-index.json\",\n    \"blob\": \"fc5b71098da76696278765f43805f0f2a1953b22\",\n    \"bytes\": 11559,\n    \"sha256\": \"1da326e60821aec91c7635a227b42f14b0710a3a2d5fb6f8764722fbbaa3d141\"\n  },\n  \"selection\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/mode-selection.json\",\n    \"blob\": \"8fe9907fb12fb71361819551df04c2830a78452b\",\n    \"bytes\": 5173,\n    \"sha256\": \"61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4\"\n  },\n  \"schema\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/frame-schema.json\",\n    \"blob\": \"81be13ca960a143d565d55dd958b4e4ff24d3c96\",\n    \"bytes\": 34193,\n    \"sha256\": \"c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11\"\n  },\n  \"contract\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/protocol-contract.json\",\n    \"blob\": \"6349fd2706b084e3c56309d6aac00a469310e73a\",\n    \"bytes\": 59226,\n    \"sha256\": \"1d2da1a8e853055f22cedbebb4dd813228f7641396409170c586805b6f2a9587\"\n  },\n  \"adapters\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/collection-adapters.mjs\",\n    \"blob\": \"f1a26313b53079fa9a88340e15d86024d24f4cbf\",\n    \"bytes\": 35151,\n    \"sha256\": \"7a6adaefbaffab94258323fe214ad9d45f23816fed8a9e6f0d508cd03cdbf00e\"\n  },\n  \"reader\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/read-progress.mjs\",\n    \"blob\": \"62a31e3c16cc710c84ebfb5b0242abb00671363c\",\n    \"bytes\": 5507,\n    \"sha256\": \"c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f\"\n  },\n  \"driver\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/diagnostic-driver.txt\",\n    \"blob\": \"9e29c5197207b03bdb4b10069089f37df289e88c\",\n    \"bytes\": 3169,\n    \"sha256\": \"3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc\"\n  },\n  \"recorder\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-drop-winner-diag4/progress-recorder.txt\",\n    \"blob\": \"662ec8170bbfe81831b557824d1a466e722842d7\",\n    \"bytes\": 3833,\n    \"sha256\": \"a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e\"\n  },\n  \"guard\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs\",\n    \"blob\": \"5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb\",\n    \"bytes\": 1208,\n    \"sha256\": \"c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf\"\n  },\n  \"preflight\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs\",\n    \"blob\": \"d311f579e95ab64a5f2d897d6c40f1fce784e8e2\",\n    \"bytes\": 417,\n    \"sha256\": \"3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae\"\n  }\n};\nconst flags={\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false};\n\nconst workspace=resolve(process.cwd()), node=process.execPath, uid=process.getuid(),gid=process.getgid();\nconst root=resolve(process.env.RUNNER_TEMP??''), parentEnv={PATH:dirname(node)+':/usr/bin:/bin:/usr/sbin:/sbin',HOME:root,LANG:'C.UTF-8',LC_ALL:'C.UTF-8'};\nlet phase='admission', context=null, fault=null, temp=null, tempInitial=null, target=null, adapters=null;\nlet beforeHashes, afterHashes, expected, observation, pfCount, greenCount;\nconst valid={admission:['ADMISSION_INVALID'],materialize:['MATERIALIZATION_INVALID','TARGET_DRIFT'],\n  preflight:['PREFLIGHT_INVALID','CUSTODY_INVALID'],green:['LAUNCH_INVALID','CUSTODY_INVALID','CAPTURE_INVALID'],\n  journal:['JOURNAL_INVALID','RECORDER_FAULT','TARGET_DRIFT'],native:['CAPTURE_INVALID','EVIDENCE_CONFLICT'],\n  cleanup:['CLEANUP_INVALID','TARGET_DRIFT'],publish:['PUBLICATION_INVALID']};\nconst fail=(reason=valid[phase][0])=>{throw Object.assign(new Error(reason),{code:reason});};\nconst need=(condition,reason)=>{if(!condition)fail(reason);};\nconst remain=(limit)=>{const ms=end-Date.now();need(ms>0);return Math.max(1,Math.min(ms,limit));};\nconst digest=b=>createHash('sha256').update(b).digest('hex');\nconst gitBlob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\\0')).update(b).digest('hex');\nconst existsAbsent=async p=>{try{await lstat(p);}catch(e){if(e.code==='ENOENT')return;throw e;}fail();};\nasync function pinned(rootDir,pin) {\n  const path=join(rootDir,pin.path);need((await lstat(path)).isFile() && await realpath(path)===resolve(path));\n  const data=await readFile(path);\n  need(data.length===pin.bytes&&gitBlob(data)===pin.blob&&digest(data)===pin.sha256);\n  return data;\n}\nfunction hostCmd(cmd,args,max=1048576,input) {\n  const result=spawnSync(cmd,args,{cwd:workspace,env:parentEnv,encoding:null,\n    input,stdio:['pipe','pipe','pipe'],maxBuffer:max,timeout:remain(cmd==='tar'?30000:330000)});\n  need(!result.error&&result.signal===null&&result.status===0&&Buffer.isBuffer(result.stdout)&&\n    result.stdout.length<=max&&Buffer.isBuffer(result.stderr)&&result.stderr.length<=65536);\n  return result.stdout;\n}\nconst gitText=(...args)=>new TextDecoder('utf-8',{fatal:true}).decode(hostCmd('git',args)).trim();\nasync function materialize(index,files) {\n  target=join(temp,'proposal-green'); await mkdir(target,{mode:0o700});\n  const archive=hostCmd('git',['archive','--format=tar',config.BASE,'--','lib','worker','scripts','test','db','config',\n    config.bootstrap.path,...config.rootFiles],33554432);\n  hostCmd('tar',['-xf','-','-C',target],65536,archive);\n  await pinned(target,config.bootstrap);\n  for(const e of index.entries) {\n    const destination=join(target,e.path), admitted=await pinned(workspace,{...e.after,path:e.dataPath});\n    if(e.before) {\n      const old=await readFile(destination);\n      need((await lstat(destination)).isFile()&&old.length===e.before.bytes&&gitBlob(old)===e.before.blob);\n    } else await existsAbsent(destination);\n    await mkdir(dirname(destination),{recursive:true});\n    await writeFile(destination,admitted,{flag:e.before?'w':'wx'});\n  }\n  await symlink(join(workspace,'node_modules'),join(target,'node_modules'),'dir');\n  await writeFile(join(target,'c2-source-custody-guard.mjs'),files.guard,{flag:'wx'});\n  await writeFile(join(target,'c2-source-custody-preflight.mjs'),files.preflight,{flag:'wx'});\n}\nlet qaTransport='unverified',mTransport='unverified';\nasync function admitTransport(){\n  const pin=config.transportRelease;\n  if(!pin)return;\n  need(pin.path===config.prefix+'native-release.json');\n  const receipt=JSON.parse(await pinned(workspace,pin));\n  need(adapters.same(Object.keys(receipt),['schema','sourceIndex','fixture','toolHead','toolProof','independentReview','qaClosed','mClosed']));\n  need(receipt.schema==='AFW.C2.DROP_NATIVE_RELEASE/1'&&receipt.sourceIndex===pins.index.blob&&receipt.fixture==='a78efb5290deb184c70fc4282bf438d818d02588'&&\n    [receipt.toolHead,receipt.toolProof,receipt.independentReview].every(v=>/^[0-9a-f]{40}$/.test(v))&&typeof receipt.qaClosed==='boolean'&&typeof receipt.mClosed==='boolean');\n  qaTransport=receipt.qaClosed?'verified':'unverified';mTransport=receipt.mClosed?'verified':'unverified';\n}\nlet previous = new Map();\nasync function probeMap() {\n  const dir=join(target,'custody-probes');\n  let names;\n  try{const stat=await lstat(dir);need(stat.isDirectory()&&stat.uid===uid&&stat.gid===gid,'CUSTODY_INVALID');names=await readdir(dir);}\n  catch(e){if(e.code==='ENOENT')return new Map();throw e;}\n  need(names.length<=8 && names.every(n=>/^[1-9][0-9]*\\.json$/.test(n)),'CUSTODY_INVALID');\n  const map=new Map();\n  for(const name of names.sort()) {\n    const path=join(dir,name), stat=await lstat(path), h=await adapters.readProbe(path);\n    const last=await lstat(path);\n    need(stat.dev===last.dev&&stat.ino===last.ino&&stat.size===last.size&&stat.ctimeMs===last.ctimeMs,'CUSTODY_INVALID');\n    map.set(name,[last.dev,last.ino,h]);\n  }\n  return map;\n}\nasync function checkedLaunch(args,limit) {\n  const prior=await probeMap();\n  need(adapters.same([...prior],[...previous]),'CUSTODY_INVALID');\n  const env={PATH:parentEnv.PATH,HOME:temp,TMPDIR:temp,RUNNER_TEMP:temp,XDG_CACHE_HOME:join(temp,'cache'),\n    XDG_CONFIG_HOME:join(temp,'config'),LANG:'C.UTF-8',LC_ALL:'C.UTF-8',CI:'true',NODE_ENV:'test',\n    AFW_C2_DROP_WINNER:'1',AFW_C2_QA_TRANSPORT:qaTransport,AFW_C2_M_TRANSPORT:mTransport,\n    GITHUB_SHA:context.head,GITHUB_REPOSITORY:config.repo,AFW_C2_DIAG_ROOT:target,\n    AFW_C2_DIAG_PARENT_UID:String(uid),AFW_C2_DIAG_PARENT_GID:String(gid)};\n  const child=spawnSync('sudo',['-n','/usr/bin/env','-i',...Object.entries(env).map(([k,v])=>k+'='+v),\n    'unshare','--net','/bin/sh','-c','uid=\"$1\"; gid=\"$2\"; shift 2; ip link set lo up && exec /usr/bin/setpriv --reuid \"$uid\" --regid \"$gid\" --clear-groups --no-new-privs \"$@\"',\n    'c2-source',String(uid),String(gid),node,'--import',join(target,'c2-source-custody-guard.mjs'),...args],\n    {cwd:target,env,encoding:null,maxBuffer:1048576,timeout:remain(limit),stdio:['ignore','pipe','pipe']});\n  const after=await probeMap();\n  for(const [key,v] of prior)need(adapters.same(after.get(key),v),'CUSTODY_INVALID');\n  const fresh=adapters.freshProbes([...prior.keys()],[...after.keys()]);\n  previous=after;\n  return {child,fresh};\n}\nconst checks={parentNonRoot:false,preflightOwned:false,preflightRemoved:false,uidGidGroupsLoopbackMatched:false,\n  targetsBeforeMatched:false,targetsAfterMatched:false,journalOwnershipMatched:false,ownRootVerified:false,ownTempRemoved:false};\ntry {\n  const e=process.env;\n  need(process.argv.length===2&&process.version==='v22.23.4'&&Number.isSafeInteger(uid)&&uid>0&&Number.isSafeInteger(gid)&&gid>=0);\n  need(e.GITHUB_REPOSITORY===config.repo&&e.GITHUB_EVENT_NAME==='push'&&e.GITHUB_REF==='refs/heads/'+config.branch\n    &&e.GITHUB_JOB===config.job&&e.GITHUB_RUN_ATTEMPT==='1'&&/^[1-9][0-9]{0,19}$/.test(e.GITHUB_RUN_ID??'')\n    &&/^[0-9a-f]{40}$/.test(e.GITHUB_SHA??'')&&e.RUNNER_TEMP&&root===await realpath(root)\n    &&workspace===resolve(e.GITHUB_WORKSPACE??'')&&fileURLToPath(import.meta.url)===join(workspace,config.runner));\n  need(gitText('rev-parse','HEAD')===e.GITHUB_SHA&&gitText('rev-parse','HEAD^')===config.BASE&&\n    gitText('rev-parse',config.BASE+'^{tree}')===config.TREE&&gitText('show','-s','--format=%B','HEAD')===config.message);\n  const tree=gitText('rev-parse','HEAD^{tree}');need(/^[0-9a-f]{40}$/.test(tree));\n  const files={};for(const [key,pin]of Object.entries(pins))files[key]=await pinned(workspace,pin);\n  const selection=JSON.parse(files.selection), index=JSON.parse(files.index);\n  need(digest(Buffer.from(JSON.stringify(selection)))===config.selectHash&&index.entries.length===13\n    &&index.context.baselineSource===config.BASE&&index.context.baselineTree===config.TREE\n    &&index.context.repository===config.repo&&index.context.status==='SOURCE_TESTS_PENDING');\n  for(const [i,entry] of index.entries.entries())need(entry.dataPath===(i>=8&&i<=10?config.prefix:'docs/superpowers/source-lab/c2-t1/')+'body-'+String(i).padStart(2,'0')+'.txt');\n  need(JSON.stringify(index.caseMap.map(x=>x.id))===JSON.stringify(selection.selected)&&selection.selected.length===20);\n  const lock=await readFile(join(workspace,'package-lock.json'));\n  need(lock.equals(hostCmd('git',['show',config.BASE+':package-lock.json']))&&JSON.parse(lock).packages?.['node_modules/@cloudflare/workers-oauth-provider']?.version==='1.2.1');\n  adapters=await import('./collection-adapters.mjs');\n  await admitTransport();\n  context={repository:config.repo,baselineSource:config.BASE,baselineTree:config.TREE,sourceIndexBlob:pins.index.blob,\n    proposalIndexHash:pins.index.sha256,selectionHash:config.selectHash,head:e.GITHUB_SHA,tree,runId:e.GITHUB_RUN_ID,\n    runAttempt:1,job:config.job,node:process.version};\n  checks.parentNonRoot=true;\n  phase='materialize';\n  temp=await mkdtemp(join(root,'afw-green20-')); tempInitial=await lstat(temp);\n  need(dirname(temp)===root&&tempInitial.isDirectory()&&tempInitial.uid===uid&&tempInitial.gid===gid);\n  await materialize(index,files);\n  await adapters.installSiblings(target,selection,files.driver,files.recorder);\n  phase='preflight';\n  const pf=await checkedLaunch([join(target,'c2-source-custody-preflight.mjs')],10000);\n  pfCount=pf.fresh;\n  need(!pf.child.error&&pf.child.signal===null&&pf.child.status===0&&\n    pf.child.stdout?.equals(Buffer.from('AFW_C2_OAUTH_PREFLIGHT {\"schema\":\"afw.c2-oauth-preflight.v1\",\"written\":true}\\n'))&&pf.child.stderr?.length===0);\n  const pd=join(target,'preflight-owned'),probe=join(pd,'probe'),st=await lstat(probe);\n  need((await lstat(pd)).isDirectory()&&await realpath(probe)===probe&&st.isFile()&&st.nlink===1&&st.uid===uid&&st.gid===gid&&\n    st.size===15&&(await readFile(probe)).equals(Buffer.from('C2_OAUTH_OWNED\\n')));\n  checks.preflightOwned=true;await rm(pd,{recursive:true,force:false});await existsAbsent(pd);checks.preflightRemoved=true;\n  phase='materialize';\n  const journalPath=join(target,'green-progress.ndjson'),initial=await adapters.createJournal(journalPath);\n  await adapters.verifySiblings(target,selection);\n  beforeHashes=await adapters.measureTargets(target,index.entries);\n  expected=index.entries.map(e=>e.after.sha256);checks.targetsBeforeMatched=true;\n  phase='green';\n  const green=await checkedLaunch(['--experimental-vm-modules','--test','--test-reporter=tap','--test-concurrency=1',\n    config.childFile],180000);greenCount=green.fresh;\n  checks.uidGidGroupsLoopbackMatched=true;\n  phase='journal';\n  await adapters.verifySiblings(target,selection);\n  afterHashes=await adapters.measureTargets(target,index.entries);checks.targetsAfterMatched=true;\n  const raw=await adapters.readJournal(journalPath,initial);checks.journalOwnershipMatched=true;\n  phase='native';observation=adapters.collectObservation(green.child,raw,selection.selected);\n} catch(error) {\n  fault={phase,reason:valid[phase].includes(error?.code)?error.code:valid[phase][0]};\n} finally {\n  if(temp) {\n    try {\n      phase='cleanup';\n      const s=await lstat(temp);\n      need(tempInitial&&dirname(temp)===root&&await realpath(temp)===temp&&s.isDirectory()&&\n        s.dev===tempInitial.dev&&s.ino===tempInitial.ino&&s.uid===uid&&s.gid===gid);\n      checks.ownRootVerified=true;await rm(temp,{recursive:true,force:false});await existsAbsent(temp);checks.ownTempRemoved=true;\n    } catch {fault={phase:'cleanup',reason:'CLEANUP_INVALID'};}\n  }\n}\nif(!fault) {\n  try {\n    phase='publish';remain(330000);\n    const custody=adapters.custodyFrame(context,pfCount,greenCount,checks);\n    const packet=adapters.successPacket(context,custody,beforeHashes,afterHashes,expected,observation);\n    const dest=join(workspace,config.artifact),outDir=dirname(dest);\n    await mkdir(outDir,{recursive:true});\n    need(await realpath(outDir)===outDir);\n    await writeFile(dest,packet.payload,{flag:'wx',mode:0o600});\n    need((await readFile(dest)).equals(Buffer.from(packet.payload))&&Date.now()<end);\n    process.stdout.write(packet.custodyLine+packet.outcomeLine);\n  } catch {fault={phase:'publish',reason:'PUBLICATION_INVALID'};}\n}\nif(fault) {\n  process.exitCode=1;\n  const text=adapters?adapters.faultLine(context,fault.phase,fault.reason):\n    'AFW_C2_DROP_WINNER_DIAG4_FAULT '+JSON.stringify({schema:'afw.c2-drop-winner-diag4-fault.v1',context,\n    phase:fault.phase,reason:fault.reason,diagnosticCollectionComplete:false,nativeQualification:false,\n    SourceQualified:false,Task1Pass:false,nonclaims:flags})+'\\n';\n  process.stderr.write(text);\n}\n",
+      "fullAfter": "import { createHash } from 'node:crypto';\nimport { spawnSync } from 'node:child_process';\nimport { readFile,writeFile,mkdir,mkdtemp,symlink,rm,lstat,readdir,realpath } from 'node:fs/promises';\nimport { dirname,join,resolve,sep } from 'node:path';\nimport { fileURLToPath } from 'node:url';\nconst entered=Date.now(), end=entered+330000;\nconst config={\n  \"repo\": \"tokenizartinfo-ops/agent-friendly-web\",\n  \"BASE\": \"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\n  \"TREE\": \"62e78926635d6b74f288d6c0d69e0f2516306989\",\n  \"branch\": \"lab/afw-c2-get-winner-20261117-diagnostic1\",\n  \"message\": \"AFW-C2-GET-WINNER-DIAGNOSTIC1-ONEUSE-20261117\",\n  \"job\": \"c2-get-winner-diagnostic1\",\n  \"runner\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs\",\n  \"prefix\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/\",\n  \"artifact\": \"output/c2-get-winner-diagnostic1.json\",\n  \"childFile\": \"test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs\",\n  \"selectHash\": \"fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd\",\n  \"bootstrap\": {\n    \"path\": \".github/workflows/afw-finite-qa-bootstrap.yml\",\n    \"bytes\": 1844,\n    \"sha256\": \"ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14\",\n    \"blob\": \"22f324e480dbe0295fe23fb7415328cba7952b1b\",\n    \"fullReadback\": true\n  },\n  \"rootFiles\": [\n    \"package-lock.json\",\n    \"package.json\",\n    \"tsconfig.json\",\n    \"wrangler.a2a-canary.jsonc\",\n    \"wrangler.a2a-production.jsonc\",\n    \"wrangler.assistance-goal-context.jsonc\",\n    \"wrangler.assistance-goal-context.qa.jsonc\",\n    \"wrangler.assistance-supervision-producer.jsonc\",\n    \"wrangler.contact.jsonc\",\n    \"wrangler.delegated-canary.jsonc\",\n    \"wrangler.delegated-real-pilot.example.jsonc\",\n    \"wrangler.delegated-real-pilot.jsonc\",\n    \"wrangler.delegated.jsonc\",\n    \"wrangler.dossier-supervision-producer.jsonc\",\n    \"wrangler.independent-closure-qa.finite.jsonc\",\n    \"wrangler.independent-closure-qa.jsonc\",\n    \"wrangler.independent-closure-qa.rollback.jsonc\",\n    \"wrangler.mail-canary.jsonc\",\n    \"wrangler.mcp-own-events.example.jsonc\",\n    \"wrangler.mcp-own.finite.jsonc\",\n    \"wrangler.mcp.jsonc\",\n    \"wrangler.operations-manager.jsonc\",\n    \"wrangler.operations-producer.jsonc\",\n    \"wrangler.operations-review-qa.jsonc\",\n    \"wrangler.operations-review.jsonc\",\n    \"wrangler.operations-watchdog.jsonc\",\n    \"wrangler.operations.jsonc\",\n    \"wrangler.release-operator.jsonc\"\n  ],\n  \"transportRelease\": {\n    \"path\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-release.json\",\n    \"blob\": \"a37dc79fe27518557f9082932c0acb05fcbcd557\",\n    \"bytes\": 2061,\n    \"sha256\": \"ad272eec1204f53abd89d1c86f226ebe0da6dad6d9e750696b8761f83896e32d\"\n  },\n  \"selectionDataPaths\": [\n    \"docs/superpowers/source-lab/c2-t1/body-00.txt\",\n    \"docs/superpowers/source-lab/c2-t1/body-01.txt\",\n    \"docs/superpowers/source-lab/c2-t1/body-02.txt\",\n    \"docs/superpowers/source-lab/c2-t1/body-03.txt\",\n    \"docs/superpowers/source-lab/c2-t1/body-04.txt\",\n    \"docs/superpowers/source-lab/c2-t1/body-05.txt\",\n    \"docs/superpowers/source-lab/c2-t1/body-06.txt\",\n    \"docs/superpowers/source-lab/c2-t1/body-07.txt\",\n    \"docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt\",\n    \"docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt\",\n    \"docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt\",\n    \"docs/superpowers/source-lab/c2-t1/body-11.txt\",\n    \"docs/superpowers/source-lab/c2-t1/body-12.txt\"\n  ],\n  \"route\": {\n    \"scope\": \"CONDITIONAL_REVIEWED_APPLICATION_CONSTRUCTION\",\n    \"sourceSeamReview\": \"a279c2e6238927b0f7b1544c0f4d058852177651\",\n    \"priorMountConstructionReview\": \"3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c\",\n    \"miniflareDispatchApi\": \"1ded0afe15a9b443240776e3ce4bf4fbc509b79d\",\n    \"source\": [\n      \"e488965a58b989aa1c2f05a16aa6d5b74d4e411a\",\n      \"b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4\",\n      \"9ffce28ba28961937c4f24f1cc00eb8d899bc495\"\n    ],\n    \"origin\": \"https://delegated-canary.agentfriendlyweb.dev\",\n    \"path\": \"/connections/finite-prepare\",\n    \"worker\": \"canary-first-connection\",\n    \"outcomeCut\": \"S08:18:143\",\n    \"rootAcceptanceRequired\": true,\n    \"verifiedFull20Occurrence\": false\n  },\n  \"toolReview\": \"08b75777bb39efaad0a439082cd430044c0b07d6\"\n};\nconst pins={\n  \"index\": {\n    \"path\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json\",\n    \"blob\": \"adf5e3d04562a34718cce9a04ccb480bc70fa694\",\n    \"bytes\": 9228,\n    \"sha256\": \"86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153\"\n  },\n  \"selection\": {\n    \"path\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/mode-selection.json\",\n    \"blob\": \"2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0\",\n    \"bytes\": 4403,\n    \"sha256\": \"e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b\"\n  },\n  \"schema\": {\n    \"path\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/frame-schema.json\",\n    \"blob\": \"39e692752ac8813a5a64b42fd7d38b6b00ff7d70\",\n    \"bytes\": 35611,\n    \"sha256\": \"d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228\"\n  },\n  \"contract\": {\n    \"path\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/protocol-contract.json\",\n    \"blob\": \"5634256c188580dd4ef0cc2017ced4d0980ca6d8\",\n    \"bytes\": 68136,\n    \"sha256\": \"dbf8cb3cd96d3892d11d7d7b942fd59f9003732b38e264bd72ad4e84231379b2\"\n  },\n  \"adapters\": {\n    \"path\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs\",\n    \"blob\": \"77183a2558a9e071b562485e1b3bd7622fffdf66\",\n    \"bytes\": 38299,\n    \"sha256\": \"dd6f9474ddf47386276e40f6d83cde2f38bcf1263f72008870f2d1700f2e0a80\"\n  },\n  \"reader\": {\n    \"path\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/read-progress.mjs\",\n    \"blob\": \"62a31e3c16cc710c84ebfb5b0242abb00671363c\",\n    \"bytes\": 5507,\n    \"sha256\": \"c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f\"\n  },\n  \"driver\": {\n    \"path\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/diagnostic-driver.txt\",\n    \"blob\": \"9e29c5197207b03bdb4b10069089f37df289e88c\",\n    \"bytes\": 3169,\n    \"sha256\": \"3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc\"\n  },\n  \"recorder\": {\n    \"path\": \"docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/progress-recorder.txt\",\n    \"blob\": \"662ec8170bbfe81831b557824d1a466e722842d7\",\n    \"bytes\": 3833,\n    \"sha256\": \"a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e\"\n  },\n  \"guard\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs\",\n    \"blob\": \"5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb\",\n    \"bytes\": 1208,\n    \"sha256\": \"c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf\"\n  },\n  \"preflight\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs\",\n    \"blob\": \"d311f579e95ab64a5f2d897d6c40f1fce784e8e2\",\n    \"bytes\": 417,\n    \"sha256\": \"3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae\"\n  }\n};\nconst flags={\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false};\n\nconst workspace=resolve(process.cwd()), node=process.execPath, uid=process.getuid(),gid=process.getgid();\nconst root=resolve(process.env.RUNNER_TEMP??''), parentEnv={PATH:dirname(node)+':/usr/bin:/bin:/usr/sbin:/sbin',HOME:root,LANG:'C.UTF-8',LC_ALL:'C.UTF-8'};\nlet phase='admission', context=null, fault=null, temp=null, tempInitial=null, target=null, adapters=null;\nlet beforeHashes, afterHashes, expected, observation, pfCount, greenCount, getTransport;\nconst valid={admission:['ADMISSION_INVALID'],materialize:['MATERIALIZATION_INVALID','TARGET_DRIFT'],\n  preflight:['PREFLIGHT_INVALID','CUSTODY_INVALID'],green:['LAUNCH_INVALID','CUSTODY_INVALID','CAPTURE_INVALID'],\n  journal:['JOURNAL_INVALID','RECORDER_FAULT','TARGET_DRIFT'],native:['CAPTURE_INVALID','EVIDENCE_CONFLICT'],\n  cleanup:['CLEANUP_INVALID','TARGET_DRIFT'],publish:['PUBLICATION_INVALID']};\nconst fail=(reason=valid[phase][0])=>{throw Object.assign(new Error(reason),{code:reason});};\nconst need=(condition,reason)=>{if(!condition)fail(reason);};\nconst remain=(limit)=>{const ms=end-Date.now();need(ms>0);return Math.max(1,Math.min(ms,limit));};\nconst digest=b=>createHash('sha256').update(b).digest('hex');\nconst gitBlob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\\0')).update(b).digest('hex');\nconst existsAbsent=async p=>{try{await lstat(p);}catch(e){if(e.code==='ENOENT')return;throw e;}fail();};\nasync function pinned(rootDir,pin) {\n  const path=join(rootDir,pin.path);need((await lstat(path)).isFile() && await realpath(path)===resolve(path));\n  const data=await readFile(path);\n  need(data.length===pin.bytes&&gitBlob(data)===pin.blob&&digest(data)===pin.sha256);\n  return data;\n}\nfunction hostCmd(cmd,args,max=1048576,input) {\n  const result=spawnSync(cmd,args,{cwd:workspace,env:parentEnv,encoding:null,\n    input,stdio:['pipe','pipe','pipe'],maxBuffer:max,timeout:remain(cmd==='tar'?30000:330000)});\n  need(!result.error&&result.signal===null&&result.status===0&&Buffer.isBuffer(result.stdout)&&\n    result.stdout.length<=max&&Buffer.isBuffer(result.stderr)&&result.stderr.length<=65536);\n  return result.stdout;\n}\nconst gitText=(...args)=>new TextDecoder('utf-8',{fatal:true}).decode(hostCmd('git',args)).trim();\nasync function materialize(index,files) {\n  target=join(temp,'proposal-green'); await mkdir(target,{mode:0o700});\n  const archive=hostCmd('git',['archive','--format=tar',config.BASE,'--','lib','worker','scripts','test','db','config',\n    config.bootstrap.path,...config.rootFiles],33554432);\n  hostCmd('tar',['-xf','-','-C',target],65536,archive);\n  await pinned(target,config.bootstrap);\n  for(const e of index.entries) {\n    const destination=join(target,e.path), admitted=await pinned(workspace,{...e.after,path:e.dataPath});\n    if(e.before) {\n      const old=await readFile(destination);\n      need((await lstat(destination)).isFile()&&old.length===e.before.bytes&&gitBlob(old)===e.before.blob);\n    } else await existsAbsent(destination);\n    await mkdir(dirname(destination),{recursive:true});\n    await writeFile(destination,admitted,{flag:e.before?'w':'wx'});\n  }\n  await symlink(join(workspace,'node_modules'),join(target,'node_modules'),'dir');\n  await writeFile(join(target,'c2-source-custody-guard.mjs'),files.guard,{flag:'wx'});\n  await writeFile(join(target,'c2-source-custody-preflight.mjs'),files.preflight,{flag:'wx'});\n}\nfunction admitGetTransport(receipt,index){\n  need(config.transportRelease.path===config.prefix+'native-release.json');\n  need(receipt.schema==='AFW.C2.GET_WINNER.FULL20_NATIVE_RELEASE/1' &&\n    receipt.sourceIndex===pins.index.blob && receipt.toolEvidence?.review===config.toolReview &&\n    receipt.toolEvidence.sourceIndex===pins.index.blob &&\n    receipt.toolEvidence.limits?.full20BusinessRouteExecuted===false &&\n    receipt.legacyDrop?.qaClosed===false && receipt.legacyDrop?.mClosed===false &&\n    receipt.activationReleased===false && receipt.nativeReleased===false && receipt.businessReleased===false);\n  // The independently reviewed carrier and Root's exact one-use admission supply the conditional application premise.\n  // S10 checks actual call/dispatch identities and mounted resident hash before observing any marker.\n  need(adapters.same(receipt.getRoute,config.route) && config.route.rootAcceptanceRequired===true &&\n    config.route.verifiedFull20Occurrence===false &&\n    adapters.same(index.entries.slice(8,11).map(entry=>entry.after.blob),config.route.source));\n  return 'verified';\n}\nlet previous = new Map();\nasync function probeMap() {\n  const dir=join(target,'custody-probes');\n  let names;\n  try{const stat=await lstat(dir);need(stat.isDirectory()&&stat.uid===uid&&stat.gid===gid,'CUSTODY_INVALID');names=await readdir(dir);}\n  catch(e){if(e.code==='ENOENT')return new Map();throw e;}\n  need(names.length<=8 && names.every(n=>/^[1-9][0-9]*\\.json$/.test(n)),'CUSTODY_INVALID');\n  const map=new Map();\n  for(const name of names.sort()) {\n    const path=join(dir,name), stat=await lstat(path), h=await adapters.readProbe(path);\n    const last=await lstat(path);\n    need(stat.dev===last.dev&&stat.ino===last.ino&&stat.size===last.size&&stat.ctimeMs===last.ctimeMs,'CUSTODY_INVALID');\n    map.set(name,[last.dev,last.ino,h]);\n  }\n  return map;\n}\nasync function checkedLaunch(args,limit,observeGet=false) {\n  const prior=await probeMap();\n  need(adapters.same([...prior],[...previous]),'CUSTODY_INVALID');\n  const env={PATH:parentEnv.PATH,HOME:temp,TMPDIR:temp,RUNNER_TEMP:temp,XDG_CACHE_HOME:join(temp,'cache'),\n    XDG_CONFIG_HOME:join(temp,'config'),LANG:'C.UTF-8',LC_ALL:'C.UTF-8',CI:'true',NODE_ENV:'test',\n    AFW_C2_DROP_WINNER:'1',AFW_C2_QA_TRANSPORT:'unverified',AFW_C2_M_TRANSPORT:'unverified',\n    ...(observeGet?{AFW_C2_GET_WINNER:'1',AFW_C2_GET_TRANSPORT:getTransport}:{}),\n    GITHUB_SHA:context.head,GITHUB_REPOSITORY:config.repo,AFW_C2_DIAG_ROOT:target,\n    AFW_C2_DIAG_PARENT_UID:String(uid),AFW_C2_DIAG_PARENT_GID:String(gid)};\n  const child=spawnSync('sudo',['-n','/usr/bin/env','-i',...Object.entries(env).map(([k,v])=>k+'='+v),\n    'unshare','--net','/bin/sh','-c','uid=\"$1\"; gid=\"$2\"; shift 2; ip link set lo up && exec /usr/bin/setpriv --reuid \"$uid\" --regid \"$gid\" --clear-groups --no-new-privs \"$@\"',\n    'c2-source',String(uid),String(gid),node,'--import',join(target,'c2-source-custody-guard.mjs'),...args],\n    {cwd:target,env,encoding:null,maxBuffer:1048576,timeout:remain(limit),stdio:['ignore','pipe','pipe']});\n  const after=await probeMap();\n  for(const [key,v] of prior)need(adapters.same(after.get(key),v),'CUSTODY_INVALID');\n  const fresh=adapters.freshProbes([...prior.keys()],[...after.keys()]);\n  previous=after;\n  return {child,fresh};\n}\nconst checks={parentNonRoot:false,preflightOwned:false,preflightRemoved:false,uidGidGroupsLoopbackMatched:false,\n  targetsBeforeMatched:false,targetsAfterMatched:false,journalOwnershipMatched:false,ownRootVerified:false,ownTempRemoved:false};\ntry {\n  const e=process.env;\n  need(process.argv.length===2&&process.version==='v22.23.4'&&Number.isSafeInteger(uid)&&uid>0&&Number.isSafeInteger(gid)&&gid>=0);\n  need(e.GITHUB_REPOSITORY===config.repo&&e.GITHUB_EVENT_NAME==='push'&&e.GITHUB_REF==='refs/heads/'+config.branch\n    &&e.GITHUB_JOB===config.job&&e.GITHUB_RUN_ATTEMPT==='1'&&/^[1-9][0-9]{0,19}$/.test(e.GITHUB_RUN_ID??'')\n    &&/^[0-9a-f]{40}$/.test(e.GITHUB_SHA??'')&&e.RUNNER_TEMP&&root===await realpath(root)\n    &&workspace===resolve(e.GITHUB_WORKSPACE??'')&&fileURLToPath(import.meta.url)===join(workspace,config.runner));\n  need(gitText('rev-parse','HEAD')===e.GITHUB_SHA&&gitText('rev-parse','HEAD^')===config.BASE&&\n    gitText('rev-parse',config.BASE+'^{tree}')===config.TREE&&gitText('show','-s','--format=%B','HEAD')===config.message);\n  const tree=gitText('rev-parse','HEAD^{tree}');need(/^[0-9a-f]{40}$/.test(tree));\n  const files={};for(const [key,pin]of Object.entries(pins))files[key]=await pinned(workspace,pin);\n  const selection=JSON.parse(files.selection), index=JSON.parse(files.index);\n  need(digest(Buffer.from(JSON.stringify(selection)))===config.selectHash&&index.entries.length===13\n    &&index.context.baselineSource===config.BASE&&index.context.baselineTree===config.TREE\n    &&index.context.repository===config.repo&&index.context.status==='SOURCE_TESTS_PENDING');\n  for(const [i,entry] of index.entries.entries())need(entry.dataPath===config.selectionDataPaths[i]);\n  need(JSON.stringify(index.caseMap.map(x=>x.id))===JSON.stringify(selection.selected)&&selection.selected.length===20);\n  const lock=await readFile(join(workspace,'package-lock.json'));\n  need(lock.equals(hostCmd('git',['show',config.BASE+':package-lock.json']))&&JSON.parse(lock).packages?.['node_modules/@cloudflare/workers-oauth-provider']?.version==='1.2.1');\n  adapters=await import('./collection-adapters.mjs');\n  getTransport=admitGetTransport(JSON.parse(await pinned(workspace,config.transportRelease)),index);\n  context={repository:config.repo,baselineSource:config.BASE,baselineTree:config.TREE,sourceIndexBlob:pins.index.blob,\n    proposalIndexHash:pins.index.sha256,selectionHash:config.selectHash,head:e.GITHUB_SHA,tree,runId:e.GITHUB_RUN_ID,\n    runAttempt:1,job:config.job,node:process.version};\n  checks.parentNonRoot=true;\n  phase='materialize';\n  temp=await mkdtemp(join(root,'afw-green20-')); tempInitial=await lstat(temp);\n  need(dirname(temp)===root&&tempInitial.isDirectory()&&tempInitial.uid===uid&&tempInitial.gid===gid);\n  await materialize(index,files);\n  await adapters.installSiblings(target,selection,files.driver,files.recorder);\n  phase='preflight';\n  const pf=await checkedLaunch([join(target,'c2-source-custody-preflight.mjs')],10000);\n  pfCount=pf.fresh;\n  need(!pf.child.error&&pf.child.signal===null&&pf.child.status===0&&\n    pf.child.stdout?.equals(Buffer.from('AFW_C2_OAUTH_PREFLIGHT {\"schema\":\"afw.c2-oauth-preflight.v1\",\"written\":true}\\n'))&&pf.child.stderr?.length===0);\n  const pd=join(target,'preflight-owned'),probe=join(pd,'probe'),st=await lstat(probe);\n  need((await lstat(pd)).isDirectory()&&await realpath(probe)===probe&&st.isFile()&&st.nlink===1&&st.uid===uid&&st.gid===gid&&\n    st.size===15&&(await readFile(probe)).equals(Buffer.from('C2_OAUTH_OWNED\\n')));\n  checks.preflightOwned=true;await rm(pd,{recursive:true,force:false});await existsAbsent(pd);checks.preflightRemoved=true;\n  phase='materialize';\n  const journalPath=join(target,'green-progress.ndjson'),initial=await adapters.createJournal(journalPath);\n  await adapters.verifySiblings(target,selection);\n  beforeHashes=await adapters.measureTargets(target,index.entries);\n  expected=index.entries.map(e=>e.after.sha256);checks.targetsBeforeMatched=true;\n  phase='green';\n  const green=await checkedLaunch(['--experimental-vm-modules','--test','--test-reporter=tap','--test-concurrency=1',\n    config.childFile],180000,true);greenCount=green.fresh;\n  checks.uidGidGroupsLoopbackMatched=true;\n  phase='journal';\n  await adapters.verifySiblings(target,selection);\n  afterHashes=await adapters.measureTargets(target,index.entries);checks.targetsAfterMatched=true;\n  const raw=await adapters.readJournal(journalPath,initial);checks.journalOwnershipMatched=true;\n  phase='native';observation=adapters.collectObservation(green.child,raw,selection.selected);\n} catch(error) {\n  fault={phase,reason:valid[phase].includes(error?.code)?error.code:valid[phase][0]};\n} finally {\n  if(temp) {\n    try {\n      phase='cleanup';\n      const s=await lstat(temp);\n      need(tempInitial&&dirname(temp)===root&&await realpath(temp)===temp&&s.isDirectory()&&\n        s.dev===tempInitial.dev&&s.ino===tempInitial.ino&&s.uid===uid&&s.gid===gid);\n      checks.ownRootVerified=true;await rm(temp,{recursive:true,force:false});await existsAbsent(temp);checks.ownTempRemoved=true;\n    } catch {fault={phase:'cleanup',reason:'CLEANUP_INVALID'};}\n  }\n}\nif(!fault) {\n  try {\n    phase='publish';remain(330000);\n    const custody=adapters.custodyFrame(context,pfCount,greenCount,checks);\n    const packet=adapters.successPacket(context,custody,beforeHashes,afterHashes,expected,observation);\n    const dest=join(workspace,config.artifact),outDir=dirname(dest);\n    await mkdir(outDir,{recursive:true});\n    need(await realpath(outDir)===outDir);\n    await writeFile(dest,packet.payload,{flag:'wx',mode:0o600});\n    need((await readFile(dest)).equals(Buffer.from(packet.payload))&&Date.now()<end);\n    process.stdout.write(packet.custodyLine+packet.outcomeLine);\n  } catch {fault={phase:'publish',reason:'PUBLICATION_INVALID'};}\n}\nif(fault) {\n  process.exitCode=1;\n  const text=adapters?adapters.faultLine(context,fault.phase,fault.reason):\n    'AFW_C2_GET_WINNER_OBSERVATION1_FAULT '+JSON.stringify({schema:'afw.c2-get-winner-observation1-fault.v1',context,\n    phase:fault.phase,reason:fault.reason,diagnosticCollectionComplete:false,nativeQualification:false,\n    SourceQualified:false,Task1Pass:false,nonclaims:flags})+'\\n';\n  process.stderr.write(text);\n}\n"
+    },
+    {
+      "path": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+      "beforeBlob": "5824c2e6cacba6a291b961938131051a885c4b9f",
+      "afterBlob": "eea7ccdf5632b04ad44ed7ceb4b638ba9f053a7b",
+      "fullBefore": "name: AFW C2 first DROP diagnostic\non:\n  push:\n    branches:\n      - lab/afw-c2-source-20261117-t1-drop-winner-diag4\npermissions:\n  contents: read\njobs:\n  c2-drop-winner-diag4:\n    if: >-\n      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&\n      github.event_name == 'push' &&\n      github.ref == 'refs/heads/lab/afw-c2-source-20261117-t1-drop-winner-diag4' &&\n      github.run_attempt == 1 &&\n      github.event.head_commit.message == 'AFW-C2-T1-DROP-WINNER-DIAG4-ONEUSE-20261117'\n    runs-on: ubuntu-24.04\n    timeout-minutes: 7\n    steps:\n      - name: Read the exact one-use lab head\n        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262\n        with:\n          persist-credentials: false\n          fetch-depth: 2\n      - name: Use the fixed Node runtime\n        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020\n        with:\n          node-version: 22.23.4\n      - name: Check the business controller syntax\n        shell: bash\n        run: node --check docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs\n      - name: Install only the existing locked dependencies\n        shell: bash\n        run: npm ci --ignore-scripts --no-audit --no-fund\n      - name: Observe first DROP in the full case order\n        id: source\n        shell: bash\n        run: node docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs\n      - name: Preserve the bounded first DROP diagnostic\n        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02\n        with:\n          name: afw-c2-drop-winner-diag4\n          path: output/c2-drop-winner-diag4.json\n          if-no-files-found: error\n          retention-days: 7\n",
+      "fullAfter": "name: AFW C2 first finite GET diagnostic\non:\n  push:\n    branches:\n      - lab/afw-c2-get-winner-20261117-diagnostic1\npermissions:\n  contents: read\njobs:\n  c2-get-winner-diagnostic1:\n    if: >-\n      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&\n      github.event_name == 'push' &&\n      github.ref == 'refs/heads/lab/afw-c2-get-winner-20261117-diagnostic1' &&\n      github.run_attempt == 1 &&\n      github.event.head_commit.message == 'AFW-C2-GET-WINNER-DIAGNOSTIC1-ONEUSE-20261117'\n    runs-on: ubuntu-24.04\n    timeout-minutes: 7\n    steps:\n      - name: Read the exact one-use lab head\n        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262\n        with:\n          persist-credentials: false\n          fetch-depth: 2\n      - name: Use the fixed Node runtime\n        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020\n        with:\n          node-version: 22.23.4\n      - name: Check the business controller syntax\n        shell: bash\n        run: |\n          node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs\n          node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs\n          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt\n          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt\n          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt\n      - name: Install only the existing locked dependencies\n        shell: bash\n        run: npm ci --ignore-scripts --no-audit --no-fund\n      - name: Observe first finite GET in full case order\n        id: source\n        shell: bash\n        run: node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs\n      - name: Preserve the bounded first finite GET diagnostic\n        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02\n        with:\n          name: afw-c2-get-winner-diagnostic1\n          path: output/c2-get-winner-diagnostic1.json\n          if-no-files-found: error\n          retention-days: 7\n"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+      "beforeBlob": "5dad0068909814d8525f92310035c36d10653e77",
+      "afterBlob": "77183a2558a9e071b562485e1b3bd7622fffdf66",
+      "exactLiteralOnly": {
+        "from": "c2-get-winner-tools",
+        "to": "c2-get-winner-diagnostic1",
+        "occurrences": 1,
+        "rootWholeBodyEqualityAfterLiteralSubstitution": true
+      },
+      "contextBefore": "482:     firstThrowSequence:witness.events.find(e=>e.edge==='throw')?.sequence??null,native};\n483:   const finiteGet=projectFiniteGet(child.stdout,facts,ids);\n484:   return {capture,...facts,firstFailure:projectFirstFailure(child.stdout,facts,ids),finiteGet,dropWinner:projectDrop(child.stdout,facts,ids),getWinner:projectGetWinner(child.stdout,facts,ids,finiteGet)};\n485: }\n486: export function encodeBody(value,limit) {\n487:   const text=JSON.stringify(value);\n488:   requireFact(typeof text==='string'&&Buffer.byteLength(text,'utf8')<=limit,'PUBLICATION_INVALID');\n489:   return text;\n490: }\n491: const targetHashes=[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046\",\"a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80\",\"7c8680d6b86b1ccc0acdcfecb4d8e4312e6d6971f36b00bd6dcf88c289309604\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"];\n492: const fixedPublication={\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"adf5e3d04562a34718cce9a04ccb480bc70fa694\",\"proposalIndexHash\":\"86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153\",\"selectionHash\":\"fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd\",\"runAttempt\":1,\"job\":\"c2-get-winner-tools\",\"node\":\"v22.23.4\"};\n493: const allowedReasons=[[\"JOURNAL_UNRESOLVED\",\"TARGET_NATIVE_UNAVAILABLE\",\"COUNTER_UNAVAILABLE\",\"SOURCE_ROW_UNAVAILABLE\",\"ASSERTION_SCALARS_UNAVAILABLE\",\"UNSUPPORTED_SCALARS\",\"NATIVE_FORMAT_UNSUPPORTED\",\"AMBIGUOUS_EVIDENCE\",\"CONFLICTING_EVIDENCE\",\"TRUNCATED_NATIVE\"],[\"EARLIEST_THROW_DIFFERENT\",\"EARLIER_NATIVE_FAILURE\",\"TARGET_PASSED\",\"NO_QUALIFYING_THROW\"]];\n494: const selectionIds=[\"C2T1_CONNECTION\",\"C2T1_OAUTH\",\"C2T1_HANDLE\",\"C2T1_PROJECTREF\",\"C2T1_SUBJECT\",\"C2T1_PHASE_RENAME\",\"C2T1_SOURCE_BYTES\",\"C2T1_APPROVAL\",\"C2T1_PREDECESSOR\",\"C2T1_GRANT_REVOKED\",\"C2T1_EXTRA_KEY\",\"C2T1_NOTICES\",\"C2T1_MONITOR_COOKIE\",\"C2T1_MONITOR\",\"C2T1_SCOPE_MISSING\",\"C2T1_FINITE\",\"C2T1_SELECTION\",\"C2T1_LOST_ACK_DUPLICATE\",\"C2T1_UNRESOLVED_WRITER\",\"C2T1_OWN_PROMISE\"];\n495: function checkFinitePublication(o){\n496:  const f=o.finiteGet,ok=x=>requireFact(x,'PUBLICATION_INVALID');\n497:  ok(keyOrder(f,['schema','http','afterMonitor','afterScopeMissing'])&&f.schema===finiteSchema);\n498:  const h=f.http,monitor=finiteJournal(o,selectionIds,14),scope=finiteJournal(o,selectionIds,15);\n499:  const outside=finiteCandidate(o,selectionIds,scope);\n500:  ok(keyOrder(h,['state','reason','throwSequence','actual','expected']));\n501:  if(outside)ok(same(h,outside)||(rawDependentExclusion(outside)&&same(h,missedHttp('NATIVE_FORMAT_UNSUPPORTED'))));\n502:  else if(h.state==='KNOWN'){",
+      "contextAfter": "482:     firstThrowSequence:witness.events.find(e=>e.edge==='throw')?.sequence??null,native};\n483:   const finiteGet=projectFiniteGet(child.stdout,facts,ids);\n484:   return {capture,...facts,firstFailure:projectFirstFailure(child.stdout,facts,ids),finiteGet,dropWinner:projectDrop(child.stdout,facts,ids),getWinner:projectGetWinner(child.stdout,facts,ids,finiteGet)};\n485: }\n486: export function encodeBody(value,limit) {\n487:   const text=JSON.stringify(value);\n488:   requireFact(typeof text==='string'&&Buffer.byteLength(text,'utf8')<=limit,'PUBLICATION_INVALID');\n489:   return text;\n490: }\n491: const targetHashes=[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046\",\"a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80\",\"7c8680d6b86b1ccc0acdcfecb4d8e4312e6d6971f36b00bd6dcf88c289309604\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"];\n492: const fixedPublication={\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"adf5e3d04562a34718cce9a04ccb480bc70fa694\",\"proposalIndexHash\":\"86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153\",\"selectionHash\":\"fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd\",\"runAttempt\":1,\"job\":\"c2-get-winner-diagnostic1\",\"node\":\"v22.23.4\"};\n493: const allowedReasons=[[\"JOURNAL_UNRESOLVED\",\"TARGET_NATIVE_UNAVAILABLE\",\"COUNTER_UNAVAILABLE\",\"SOURCE_ROW_UNAVAILABLE\",\"ASSERTION_SCALARS_UNAVAILABLE\",\"UNSUPPORTED_SCALARS\",\"NATIVE_FORMAT_UNSUPPORTED\",\"AMBIGUOUS_EVIDENCE\",\"CONFLICTING_EVIDENCE\",\"TRUNCATED_NATIVE\"],[\"EARLIEST_THROW_DIFFERENT\",\"EARLIER_NATIVE_FAILURE\",\"TARGET_PASSED\",\"NO_QUALIFYING_THROW\"]];\n494: const selectionIds=[\"C2T1_CONNECTION\",\"C2T1_OAUTH\",\"C2T1_HANDLE\",\"C2T1_PROJECTREF\",\"C2T1_SUBJECT\",\"C2T1_PHASE_RENAME\",\"C2T1_SOURCE_BYTES\",\"C2T1_APPROVAL\",\"C2T1_PREDECESSOR\",\"C2T1_GRANT_REVOKED\",\"C2T1_EXTRA_KEY\",\"C2T1_NOTICES\",\"C2T1_MONITOR_COOKIE\",\"C2T1_MONITOR\",\"C2T1_SCOPE_MISSING\",\"C2T1_FINITE\",\"C2T1_SELECTION\",\"C2T1_LOST_ACK_DUPLICATE\",\"C2T1_UNRESOLVED_WRITER\",\"C2T1_OWN_PROMISE\"];\n495: function checkFinitePublication(o){\n496:  const f=o.finiteGet,ok=x=>requireFact(x,'PUBLICATION_INVALID');\n497:  ok(keyOrder(f,['schema','http','afterMonitor','afterScopeMissing'])&&f.schema===finiteSchema);\n498:  const h=f.http,monitor=finiteJournal(o,selectionIds,14),scope=finiteJournal(o,selectionIds,15);\n499:  const outside=finiteCandidate(o,selectionIds,scope);\n500:  ok(keyOrder(h,['state','reason','throwSequence','actual','expected']));\n501:  if(outside)ok(same(h,outside)||(rawDependentExclusion(outside)&&same(h,missedHttp('NATIVE_FORMAT_UNSUPPORTED'))));\n502:  else if(h.state==='KNOWN'){"
+    }
+  ],
+  "dataDiffs": {
+    "schemaFromAcceptedTools": [
+      {
+        "path": "/title",
+        "before": "AFW first finite GET winner observation, detached StageB proposal",
+        "after": "AFW first finite GET winner observation, closed full20 diagnostic carrier"
+      },
+      {
+        "path": "/$defs/context/properties/job/const",
+        "before": "c2-get-winner-tools",
+        "after": "c2-get-winner-diagnostic1"
+      }
+    ],
+    "protocolFromOldFull26": [
+      {
+        "path": "/schema",
+        "before": "afw.c2-drop-winner-diag4-protocol.v1",
+        "after": "afw.c2-get-winner-diagnostic1-protocol.v1"
+      },
+      {
+        "path": "/status",
+        "before": "CODE_DATA_ONLY_UNRELEASED_NATIVE",
+        "after": "CLOSED_UNACTIVATED_EXECUTION_NOT_RUN"
+      },
+      {
+        "path": "/authority/release",
+        "before": "dba854a26f71e8bbc2da6ae02cca48551af063d2"
+      },
+      {
+        "path": "/authority/design",
+        "before": "1a5ccbf3aa73495e3c4f4ebfe39e5693d78d91cb"
+      },
+      {
+        "path": "/authority/builtin",
+        "before": "1fa82c9895bcb8b515de00f53d99e84a8b6a042d"
+      },
+      {
+        "path": "/authority/leaseSites",
+        "before": "713834d1311f4cd888f8505f67441fe622325077"
+      },
+      {
+        "path": "/authority/previousProtocol",
+        "before": "290aad4bd227d604510d3adde69ec30759386160"
+      },
+      {
+        "path": "/authority/scenarios",
+        "before": "a78efb5290deb184c70fc4282bf438d818d02588"
+      },
+      {
+        "path": "/authority/brief",
+        "after": "524c1558cc21d1df4b950b064ef0041d48ce6163"
+      },
+      {
+        "path": "/authority/spec",
+        "after": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c"
+      },
+      {
+        "path": "/authority/plan",
+        "after": "0b8368869f60978c536b056c37e451f8c899f93f"
+      },
+      {
+        "path": "/authority/toolProtocol",
+        "after": "b862b4653819bbead0e916d939dfca8156ba8a1e"
+      },
+      {
+        "path": "/authority/sourceSeamReview",
+        "after": "a279c2e6238927b0f7b1544c0f4d058852177651"
+      },
+      {
+        "path": "/authority/rootReviewRequired",
+        "after": true
+      },
+      {
+        "path": "/purpose",
+        "before": "Observe the first DROP response in case 15 at the existing cut.",
+        "after": "Bind one future synthetic full20 observation of the first finite GET cut and ordered preceding evidence. No predetermined business outcome or repair."
+      },
+      {
+        "path": "/source/base",
+        "before": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+      },
+      {
+        "path": "/source/baseTree",
+        "before": "62e78926635d6b74f288d6c0d69e0f2516306989"
+      },
+      {
+        "path": "/source/main",
+        "before": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+      },
+      {
+        "path": "/source/originalGitLeaves",
+        "before": 3203
+      },
+      {
+        "path": "/source/mode",
+        "before": "proposal-green"
+      },
+      {
+        "path": "/source/sourceIndexBlob",
+        "before": "fc5b71098da76696278765f43805f0f2a1953b22"
+      },
+      {
+        "path": "/source/sourceIndexBytes",
+        "before": 11559
+      },
+      {
+        "path": "/source/proposalIndexHash",
+        "before": "1da326e60821aec91c7635a227b42f14b0710a3a2d5fb6f8764722fbbaa3d141"
+      },
+      {
+        "path": "/source/sourceRows",
+        "before": [
+          {
+            "id": "S00",
+            "canonicalPath": "lib/mcp-qa-finite-owner-phase-context.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+            "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+            "bytes": 148547,
+            "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+            "fullReadback": true
+          },
+          {
+            "id": "S01",
+            "canonicalPath": "lib/mcp-qa-finite-owner-preparation.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+            "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+            "bytes": 45576,
+            "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+            "fullReadback": true
+          },
+          {
+            "id": "S02",
+            "canonicalPath": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+            "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+            "bytes": 2497,
+            "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+            "fullReadback": true
+          },
+          {
+            "id": "S03",
+            "canonicalPath": "worker/mcp-own/finite.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+            "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+            "bytes": 2810,
+            "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+            "fullReadback": true
+          },
+          {
+            "id": "S04",
+            "canonicalPath": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+            "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+            "bytes": 4153,
+            "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+            "fullReadback": true
+          },
+          {
+            "id": "S05",
+            "canonicalPath": "lib/mcp-qa-finite-owner-cleanup.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+            "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+            "bytes": 101380,
+            "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+            "fullReadback": true
+          },
+          {
+            "id": "S06",
+            "canonicalPath": "lib/mcp-qa-finite-initial-cleanup.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+            "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+            "bytes": 22501,
+            "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+            "fullReadback": true
+          },
+          {
+            "id": "S07",
+            "canonicalPath": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+            "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+            "bytes": 2785,
+            "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+            "fullReadback": true
+          },
+          {
+            "id": "S08",
+            "canonicalPath": "test/fixtures/finite-coupled-native.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-08.txt",
+            "blob": "14b1a67b0557dbc660a3900d8767b40c5bff7755",
+            "bytes": 22615,
+            "sha256": "da134d91f132195a787c549a1d3552335efc29720506dbf2ca9cb7e4371af677",
+            "fullReadback": true
+          },
+          {
+            "id": "S09",
+            "canonicalPath": "test/fixtures/finite-first-connection-publication.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-09.txt",
+            "blob": "9da84b3f0606e9cb84d8308de26c7f193c5c778a",
+            "bytes": 72687,
+            "sha256": "93c0d34a0221797c09e4602065af570ad4711fdc019eea0fbcd9b0c8f90f08b9",
+            "fullReadback": true
+          },
+          {
+            "id": "S10",
+            "canonicalPath": "test/fixtures/finite-initial-entry-world.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-10.txt",
+            "blob": "955fa904a89733fabfa5c73736f59922b6e58023",
+            "bytes": 98440,
+            "sha256": "01bd570328eb52d05a5d290f391bfc3da80d8298fba25fee7beff542096a0f34",
+            "fullReadback": true
+          },
+          {
+            "id": "S11",
+            "canonicalPath": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+            "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+            "bytes": 58727,
+            "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+            "fullReadback": true
+          },
+          {
+            "id": "S12",
+            "canonicalPath": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+            "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+            "bytes": 6030,
+            "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+            "fullReadback": true
+          }
+        ],
+        "after": [
+          {
+            "id": "S00",
+            "canonicalPath": "lib/mcp-qa-finite-owner-phase-context.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+            "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+            "bytes": 148547,
+            "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+            "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+            "gzipBytes": 32414
+          },
+          {
+            "id": "S01",
+            "canonicalPath": "lib/mcp-qa-finite-owner-preparation.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+            "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+            "bytes": 45576,
+            "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+            "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+            "gzipBytes": 11301
+          },
+          {
+            "id": "S02",
+            "canonicalPath": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+            "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+            "bytes": 2497,
+            "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+            "gitBlob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+            "gzipBytes": 1110
+          },
+          {
+            "id": "S03",
+            "canonicalPath": "worker/mcp-own/finite.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+            "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+            "bytes": 2810,
+            "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+            "gitBlob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+            "gzipBytes": 1061
+          },
+          {
+            "id": "S04",
+            "canonicalPath": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+            "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+            "bytes": 4153,
+            "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+            "gitBlob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+            "gzipBytes": 1592
+          },
+          {
+            "id": "S05",
+            "canonicalPath": "lib/mcp-qa-finite-owner-cleanup.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+            "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+            "bytes": 101380,
+            "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+            "gitBlob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+            "gzipBytes": 26076
+          },
+          {
+            "id": "S06",
+            "canonicalPath": "lib/mcp-qa-finite-initial-cleanup.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+            "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+            "bytes": 22501,
+            "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+            "gitBlob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+            "gzipBytes": 6767
+          },
+          {
+            "id": "S07",
+            "canonicalPath": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+            "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+            "bytes": 2785,
+            "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+            "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+            "gzipBytes": 1050
+          },
+          {
+            "id": "S08",
+            "canonicalPath": "test/fixtures/finite-coupled-native.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+            "blob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+            "bytes": 23226,
+            "sha256": "75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046",
+            "gitBlob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a"
+          },
+          {
+            "id": "S09",
+            "canonicalPath": "test/fixtures/finite-first-connection-publication.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+            "blob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+            "bytes": 83571,
+            "sha256": "a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80",
+            "gitBlob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4"
+          },
+          {
+            "id": "S10",
+            "canonicalPath": "test/fixtures/finite-initial-entry-world.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt",
+            "blob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+            "bytes": 98851,
+            "sha256": "7c8680d6b86b1ccc0acdcfecb4d8e4312e6d6971f36b00bd6dcf88c289309604",
+            "gitBlob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495"
+          },
+          {
+            "id": "S11",
+            "canonicalPath": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+            "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+            "bytes": 58727,
+            "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+            "gitBlob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+            "gzipBytes": 14307
+          },
+          {
+            "id": "S12",
+            "canonicalPath": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+            "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+            "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+            "bytes": 6030,
+            "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+            "gitBlob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+            "gzipBytes": 2098
+          }
+        ]
+      },
+      {
+        "path": "/source/originalDriver",
+        "before": {
+          "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+          "bytes": 2785,
+          "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+          "git": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+        }
+      },
+      {
+        "path": "/source/driverSibling",
+        "before": {
+          "path": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+          "bytes": 3169,
+          "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+          "git": "9e29c5197207b03bdb4b10069089f37df289e88c"
+        }
+      },
+      {
+        "path": "/source/registrationTail",
+        "before": {
+          "originalOffset": 991,
+          "driverOffset": 1375,
+          "bytes": 1794,
+          "sha256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a"
+        }
+      },
+      {
+        "path": "/source/recorder/path",
+        "before": "test/finite-green-progress-recorder.mjs",
+        "after": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/progress-recorder.txt"
+      },
+      {
+        "path": "/source/recorder/git",
+        "before": "662ec8170bbfe81831b557824d1a466e722842d7"
+      },
+      {
+        "path": "/source/recorder/mode",
+        "after": "100644"
+      },
+      {
+        "path": "/source/recorder/type",
+        "after": "blob"
+      },
+      {
+        "path": "/source/recorder/blob",
+        "after": "662ec8170bbfe81831b557824d1a466e722842d7"
+      },
+      {
+        "path": "/source/reader/file",
+        "before": "read-progress.mjs"
+      },
+      {
+        "path": "/source/reader/git",
+        "before": "62a31e3c16cc710c84ebfb5b0242abb00671363c"
+      },
+      {
+        "path": "/source/reader/path",
+        "after": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/read-progress.mjs"
+      },
+      {
+        "path": "/source/reader/mode",
+        "after": "100644"
+      },
+      {
+        "path": "/source/reader/type",
+        "after": "blob"
+      },
+      {
+        "path": "/source/reader/blob",
+        "after": "62a31e3c16cc710c84ebfb5b0242abb00671363c"
+      },
+      {
+        "path": "/source/selected",
+        "before": [
+          "C2T1_CONNECTION",
+          "C2T1_OAUTH",
+          "C2T1_HANDLE",
+          "C2T1_PROJECTREF",
+          "C2T1_SUBJECT",
+          "C2T1_PHASE_RENAME",
+          "C2T1_SOURCE_BYTES",
+          "C2T1_APPROVAL",
+          "C2T1_PREDECESSOR",
+          "C2T1_GRANT_REVOKED",
+          "C2T1_EXTRA_KEY",
+          "C2T1_NOTICES",
+          "C2T1_MONITOR_COOKIE",
+          "C2T1_MONITOR",
+          "C2T1_SCOPE_MISSING",
+          "C2T1_FINITE",
+          "C2T1_SELECTION",
+          "C2T1_LOST_ACK_DUPLICATE",
+          "C2T1_UNRESOLVED_WRITER",
+          "C2T1_OWN_PROMISE"
+        ]
+      },
+      {
+        "path": "/source/node",
+        "before": "v22.23.4"
+      },
+      {
+        "path": "/source/sdk",
+        "before": "1.2.1"
+      },
+      {
+        "path": "/source/history",
+        "before": {
+          "previous13": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+          "previous25": "672455978db4210eedef61502682e03404e0f462",
+          "closedRun": "44021068647/1"
+        }
+      },
+      {
+        "path": "/source/preimage13",
+        "after": "fc5b71098da76696278765f43805f0f2a1953b22"
+      },
+      {
+        "path": "/source/preimage26",
+        "after": "fc11e972ceb33c8ce7cdace34aed482d71bb6224"
+      },
+      {
+        "path": "/source/preimageRoot26",
+        "after": "1fea33135f8943707738d4f078ff3616e9b5132c"
+      },
+      {
+        "path": "/source/index",
+        "after": {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+          "bytes": 9228,
+          "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153"
+        }
+      },
+      {
+        "path": "/source/currentBodyMeasurement",
+        "after": "e38715fe3078efa0318783e171039cd7128917c5"
+      },
+      {
+        "path": "/source/onlyChangedIds",
+        "after": [
+          "S08",
+          "S09",
+          "S10"
+        ]
+      },
+      {
+        "path": "/source/orderedCases",
+        "after": [
+          "C2T1_CONNECTION",
+          "C2T1_OAUTH",
+          "C2T1_HANDLE",
+          "C2T1_PROJECTREF",
+          "C2T1_SUBJECT",
+          "C2T1_PHASE_RENAME",
+          "C2T1_SOURCE_BYTES",
+          "C2T1_APPROVAL",
+          "C2T1_PREDECESSOR",
+          "C2T1_GRANT_REVOKED",
+          "C2T1_EXTRA_KEY",
+          "C2T1_NOTICES",
+          "C2T1_MONITOR_COOKIE",
+          "C2T1_MONITOR",
+          "C2T1_SCOPE_MISSING",
+          "C2T1_FINITE",
+          "C2T1_SELECTION",
+          "C2T1_LOST_ACK_DUPLICATE",
+          "C2T1_UNRESOLVED_WRITER",
+          "C2T1_OWN_PROMISE"
+        ]
+      },
+      {
+        "path": "/source/driver",
+        "after": {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/diagnostic-driver.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+          "bytes": 3169,
+          "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+        }
+      },
+      {
+        "path": "/sourceNomination/branch",
+        "before": "lab/afw-c2-source-20261117-t1-drop-winner-diag4",
+        "after": "lab/afw-c2-get-winner-20261117-diagnostic1"
+      },
+      {
+        "path": "/sourceNomination/message",
+        "before": "AFW-C2-T1-DROP-WINNER-DIAG4-ONEUSE-20261117",
+        "after": "AFW-C2-GET-WINNER-DIAGNOSTIC1-ONEUSE-20261117"
+      },
+      {
+        "path": "/sourceNomination/workflow",
+        "before": ".github/workflows/afw-c2-drop-winner-diag4.yml",
+        "after": ".github/workflows/afw-c2-get-winner-diagnostic1.yml"
+      },
+      {
+        "path": "/sourceNomination/job",
+        "before": "c2-drop-winner-diag4",
+        "after": "c2-get-winner-diagnostic1"
+      },
+      {
+        "path": "/sourceNomination/prefix",
+        "before": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/",
+        "after": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/"
+      },
+      {
+        "path": "/sourceNomination/runner",
+        "before": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+        "after": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs"
+      },
+      {
+        "path": "/sourceNomination/command",
+        "before": "node docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+        "after": "node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs"
+      },
+      {
+        "path": "/sourceNomination/artifact/name",
+        "before": "afw-c2-drop-winner-diag4",
+        "after": "afw-c2-get-winner-diagnostic1"
+      },
+      {
+        "path": "/sourceNomination/artifact/path",
+        "before": "output/c2-drop-winner-diag4.json",
+        "after": "output/c2-get-winner-diagnostic1.json"
+      },
+      {
+        "path": "/sourceNomination/artifact/fileName",
+        "before": "c2-drop-winner-diag4.json",
+        "after": "c2-get-winner-diagnostic1.json"
+      },
+      {
+        "path": "/sourceNomination/requiredSteps",
+        "before": [
+          "Read the exact one-use lab head",
+          "Use the fixed Node runtime",
+          "Install only the existing locked dependencies",
+          "Observe first DROP in the full case order",
+          "Preserve the bounded first DROP diagnostic"
+        ],
+        "after": [
+          "Read the exact one-use lab head",
+          "Use the fixed Node runtime",
+          "Check the business controller syntax",
+          "Install only the existing locked dependencies",
+          "Observe first finite GET in full case order",
+          "Preserve the bounded first finite GET diagnostic"
+        ]
+      },
+      {
+        "path": "/sourceNomination/driverSibling",
+        "before": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs"
+      },
+      {
+        "path": "/sourceNomination/commandStep",
+        "after": "Observe first finite GET in full case order"
+      },
+      {
+        "path": "/sourceNomination/event",
+        "after": "push"
+      },
+      {
+        "path": "/sourceNomination/attempt",
+        "after": 1
+      },
+      {
+        "path": "/selection/bytes",
+        "before": 5173,
+        "after": 4403
+      },
+      {
+        "path": "/selection/sha256",
+        "before": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4",
+        "after": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+      },
+      {
+        "path": "/selection/blob",
+        "before": "8fe9907fb12fb71361819551df04c2830a78452b",
+        "after": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0"
+      },
+      {
+        "path": "/selection/fullReadback",
+        "before": true
+      },
+      {
+        "path": "/selection/path",
+        "after": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/mode-selection.json"
+      },
+      {
+        "path": "/selection/mode",
+        "after": "100644"
+      },
+      {
+        "path": "/selection/type",
+        "after": "blob"
+      },
+      {
+        "path": "/selectionWireHash",
+        "before": "09f9928830b63294f7ed27b00ea2a9593477fda2d6d0f7300e536faa5cd0bd27",
+        "after": "fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd"
+      },
+      {
+        "path": "/selectionWireBytes",
+        "before": 4127,
+        "after": 4402
+      },
+      {
+        "path": "/selectionWireRule",
+        "before": "SHA256 and length of UTF8(JSON.stringify(selection)) without LF. The raw selection artifact uses pretty two-space JSON plus LF and has its own size/SHA256/Git blob. Preserve both checks.",
+        "after": "UTF8 JSON.stringify(selection) without LF; independently compare raw artifact bytes/GitID/SHA256."
+      },
+      {
+        "path": "/schemaPin/bytes",
+        "before": 34193,
+        "after": 35611
+      },
+      {
+        "path": "/schemaPin/sha256",
+        "before": "c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11",
+        "after": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+      },
+      {
+        "path": "/schemaPin/blob",
+        "before": "81be13ca960a143d565d55dd958b4e4ff24d3c96",
+        "after": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70"
+      },
+      {
+        "path": "/schemaPin/fullReadback",
+        "before": true
+      },
+      {
+        "path": "/schemaPin/path",
+        "after": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/frame-schema.json"
+      },
+      {
+        "path": "/schemaPin/mode",
+        "after": "100644"
+      },
+      {
+        "path": "/schemaPin/type",
+        "after": "blob"
+      },
+      {
+        "path": "/sourceWorkflow",
+        "before": "Exact five requiredSteps in sourceNomination, in that order. Pinned checkout 11d5960a326750d5838078e36cf38b85af677262, fetch-depth 2, persist-credentials false. setup-node 49933ea5288caeca8642d1e84afbd3f7d6820020 with Node 22.23.4. Locked npm ci --ignore-scripts --no-audit --no-fund. Fourth logical step runs exact nominated command. Fifth uses upload-artifact ea165f8d65b6e75b540449e92b4886f43607fa02, if-no-files-found error, one filename, seven days. Ubuntu 24.04, seven minutes, contents:read, exact repo/push/message/ref, attempt 1. Use actual unique command-step API number and exact time window. Fault fails the command with no admissible outcome artifact.",
+        "after": {
+          "path": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "eea7ccdf5632b04ad44ed7ceb4b638ba9f053a7b",
+          "bytes": 2255,
+          "sha256": "c44a8760e783cc39966656daceb1e0428bac5cba0a45bd41e62db78fcfcbd1e3"
+        }
+      },
+      {
+        "path": "/wire/success",
+        "before": [
+          {
+            "marker": "AFW_C2_DROP_WINNER_DIAG4_CUSTODY",
+            "definition": "custody",
+            "bodyBytesMax": 1024
+          },
+          {
+            "marker": "AFW_C2_DROP_WINNER_DIAG4_OUTCOME",
+            "definition": "outcome",
+            "bodyBytesMax": 24576
+          }
+        ],
+        "after": [
+          {
+            "marker": "AFW_C2_GET_WINNER_OBSERVATION1_CUSTODY",
+            "definition": "custody",
+            "bodyBytesMax": 1024
+          },
+          {
+            "marker": "AFW_C2_GET_WINNER_OBSERVATION1_OUTCOME",
+            "definition": "outcome",
+            "bodyBytesMax": 24576
+          }
+        ]
+      },
+      {
+        "path": "/wire/fault/marker",
+        "before": "AFW_C2_DROP_WINNER_DIAG4_FAULT",
+        "after": "AFW_C2_GET_WINNER_OBSERVATION1_FAULT"
+      },
+      {
+        "path": "/wire/order/observation",
+        "before": [
+          "capture",
+          "journal",
+          "witness",
+          "unknownReason",
+          "firstThrowSequence",
+          "native",
+          "firstFailure",
+          "finiteGet",
+          "dropWinner"
+        ],
+        "after": [
+          "capture",
+          "journal",
+          "witness",
+          "unknownReason",
+          "firstThrowSequence",
+          "native",
+          "firstFailure",
+          "finiteGet",
+          "dropWinner",
+          "getWinner"
+        ]
+      },
+      {
+        "path": "/wire/order/getWinner",
+        "after": [
+          "case",
+          "winner",
+          "stubStatus",
+          "qaLastCompleted"
+        ]
+      },
+      {
+        "path": "/wire/artifact",
+        "after": {
+          "name": "afw-c2-get-winner-diagnostic1",
+          "path": "output/c2-get-winner-diagnostic1.json",
+          "fileName": "c2-get-winner-diagnostic1.json",
+          "retentionDays": 7
+        }
+      },
+      {
+        "path": "/caps/getWinnerBodyBytes",
+        "after": 512
+      },
+      {
+        "path": "/caps/privateScopeMarkerIncludingTapAndLF",
+        "after": 96
+      },
+      {
+        "path": "/caps/originalMLeaseMs",
+        "after": 30000
+      },
+      {
+        "path": "/identity/activeIndex",
+        "before": "13 rows in source.sourceRows, the three nominated afterimages replace only the corresponding R4 inert payloads.",
+        "after": "Current Source13 is unchanged from accepted TOOL inputs. Its 13 entries bind carrier afterimages in order. S08–S10 keep their exact inert dataPath entries from the immutable index."
+      },
+      {
+        "path": "/transport",
+        "before": "Prebind raw tree/body/nomination before push. Receiver independently joins repo/event push/head/parent/tree/ref/message, logical job, seven-minute workflow and attempt1 to actual API unique terminal job ID and actual command-step number. All five actual required steps succeed in order for accepted diagnostic; if run/step is incomplete, preserve what actually occurred as partial separately. N1: unique timestamped ##[group]Run <exact command>, finite times on header and each marker within actual command window ±1000ms per existing N1, header closed by ##[endgroup] before stdout and before next step group. Reject malformed/smuggled/mixed duplicate markers even outside selected window, archived API job with misleading same names, artifacts outside this head/branch/run. Bind ordered pair plus canonical outcome JSON+LF to actual ZIP compressed bytes/digest/listing/entry count/name, ownership/time, exact CRC/size/full deflate consumption and closed primitive from OWN419. Reuse OWN independent logic only, never producer helper or imported Source oracle.",
+        "after": "Prebind raw tree/body/nomination before push. Receiver independently joins repo/event push/head/parent/tree/ref/message, logical job, seven-minute workflow and attempt1 to actual API unique terminal job ID and actual command-step number. All six actual required steps succeed in order for accepted diagnostic; if run/step is incomplete, preserve what actually occurred as partial separately. N1: unique timestamped ##[group]Run <exact command>, finite times on header and each marker within actual command window ±1000ms per existing N1, header closed by ##[endgroup] before stdout and before next step group. Reject malformed/smuggled/mixed duplicate markers even outside selected window, archived API job with misleading same names, artifacts outside this head/branch/run. Bind ordered pair plus canonical outcome JSON+LF to actual ZIP compressed bytes/digest/listing/entry count/name, ownership/time, exact CRC/size/full deflate consumption and closed primitive from OWN419. Reuse OWN independent logic only, never producer helper or imported Source oracle."
+      },
+      {
+        "path": "/receiver/expected",
+        "before": "Complete proposed Source13, ordered inventory, schema, adapter and actual occurrence head/tree/run/job/steps, each independently read.",
+        "after": "Independently pinned Source26/Root26, public schema, selection and canonical digest plus fresh trusted actual occurrence head/tree/run/logical job/actual job ID/command step/artifact ID."
+      },
+      {
+        "path": "/receiver/checks",
+        "before": "OWN uses independently prebound Source25/context/occurrence/api/tree/ZIP/raw log/one-file/body/one-LF and exact N1,N2 plus old C1/full Source13 before/after. Verify finiteGet exactly and correlate KNOWN http with earliest throw/site/native and count.return, prior14return/nativePASS. Compare two countSequence pointers to the actual returned count for matching ids with required predecessors, not just to a permissible integer; recompute every externally visible exclusion/unknown/NA priority. Reject later throw substitution/earlierfail/currentrun swaps, fictitious getter status200/coherent mutation of context/site native state/hidden keys/digest or marker transport. UNKNOWN cannot contradict visible blockers or claim positive measurement. OWN does not receive raw child lines or storage rows, so non200→different valid non200 and one valid count→another can remain indistinguishable if all artifact+log data are consistently rewritten. No claim to authenticate those changes.",
+        "after": "Preserve independent API, full tree, framing, ZIP/member/descriptor/CRC/full-inflate, canonical outcome and custody. Require first14 clean native passes and action/count returns, earliest matching case15 GET assertion and closed target count, known HTTP status/sequence for any positive. Verify exact four public getWinner keys and normalized relation. Keep independent HTTP on UNKNOWN. Raw header/token/child stdout remain inside Source."
+      },
+      {
+        "path": "/receiver/trustBoundary",
+        "before": "OWN no tiene rawchildstdout: no puede recomputar uniqueTAPscalar/C2SOURCE ni detectar un rawduplicate/nested/fake que un productor reescriba u omita coherentemente. Son assertions acotadas del collector exacto revisado y ensayado, ligadas a API y digest; NO autenticación criptográfica del contenido no suministrado. Una sustitución coherente503→429 de todos los bytes/declaraciones no la detecta sólo schema/OWN; no probar ni reclamar ese control inexistente."
+      },
+      {
+        "path": "/receiver/interpretation",
+        "before": "Acepta diagnosticCollectionChecksSatisfied en su ámbito, noSourceQualified/Task1Pass/readiness. UNKNOWN no destruye hechosouter anteriores y no autoriza otro run."
+      },
+      {
+        "path": "/receiver/occurrence",
+        "before": "Exact new Root-gated occurrence only."
+      },
+      {
+        "path": "/gates/sourceRound",
+        "before": 5
+      },
+      {
+        "path": "/gates/ownRound",
+        "before": 4
+      },
+      {
+        "path": "/gates/max",
+        "before": 5
+      },
+      {
+        "path": "/gates/modelRed",
+        "before": 44086328643
+      },
+      {
+        "path": "/gates/business",
+        "before": "Requires native tooling, independent validation + receiver + Root one-use release."
+      },
+      {
+        "path": "/gates/source5",
+        "after": 5
+      },
+      {
+        "path": "/gates/own5",
+        "after": 5
+      },
+      {
+        "path": "/gates/stageB",
+        "after": 5
+      },
+      {
+        "path": "/gates/cap",
+        "after": 5
+      },
+      {
+        "path": "/gates/rootAcceptExactRouteAndCarrierReviewRequired",
+        "after": true
+      },
+      {
+        "path": "/gates/actualOWNBindingAndControlsAccepted",
+        "after": false
+      },
+      {
+        "path": "/gates/rootExactOneUseActivation",
+        "after": false
+      },
+      {
+        "path": "/gates/activationReleased",
+        "after": false
+      },
+      {
+        "path": "/gates/nativeReleased",
+        "after": false
+      },
+      {
+        "path": "/gates/businessReleased",
+        "after": false
+      },
+      {
+        "path": "/gates/execution",
+        "after": "NOT_RUN"
+      },
+      {
+        "path": "/finiteGet/producer/world",
+        "before": "E3 only changes the test fixture S08. Keep the bytes/line/column of choose GET assertion S08:18:118 and C1 notices POST S08:41:12. Preserve public world methods and actual business exception, count result keys/order/values and all settlements. The new diagnostic fixture uses same existing module import path S08:5 for decodeFinitePreparationRecord. Append helpers after existing body; make in-place same-line edits for other hooks so calibrated assertion coordinates remain fixed. Full pre/post target hashes required.",
+        "after": "Use exact S08, S09 and S10 bound in current Source13. Unchanged choose assertion is at S08:18:143; S08:18:118 is historical only. Preserve separate notices POST assertion S08:41:12, original rejection, counts and settlements."
+      },
+      {
+        "path": "/finiteGet/childWire/raw",
+        "before": "Exactly console message C2FT3 + ASCII space + compact JSON with ordered id,value. Existing calibrated Node TAP physical envelope at top level: # C2FT3 <JSON> followed by one LF, bytes<=96 including wrapper/LF, id in C2T1_MONITOR,C2T1_SCOPE_MISSING, value exactly string 0,1,2+,UNKNOWN. No other keys/fields/unicode/whitespace/coercion/extra LF. At most two producer attempts once each, only labels in ordinal order. Decode from same <=1048576 bytes actual child.stdout, no second channel. The old raw private TAP, text of errors/stack/SQL/body and raw typed markers never leave Source.",
+        "after": "Use the same bounded child stdout. Monitor uses exactly '# C2FT3 ' plus canonical JSON keys id,value and LF; scope uses '# C2FT4 ' plus keys id,value,w,s,h and LF, one row per corresponding label. Each frame and LF is <=96 ASCII bytes. value is a string 0, 1, 2+ or UNKNOWN; w,s,h obey getWinner rules. Keep native/TAP/Source/journal joins and stream-taint rules. Original scope C2FT3 is incompatible; no raw frame or child stdout enters the public artifact."
+      },
+      {
+        "path": "/finiteGet/http/gates",
+        "before": "Exact C1 native-format rules/scalar provenance and total priority from protocol59ab firstFailure.sourceProjection, retarget exclusively to ordinal15 C2T1_SCOPE_MISSING, phase scope, expected GET assertion S08:18:118, first14 pairs/actions/counts returned; case15 action.throw (AssertionError/ERR_ASSERTION) is first throw in valid prefix and precisely matched, own count.return, native15fail and canonical C2SOURCE15 required. E3 measured S08 and select separate site. No C1 source row exported again. Require single flat testCodeFailure/ERR_ASSERTION/AssertionError/strictEqual block, two top-level decimal integer scalars actual=100..599 except200 and expected=200 with no dup/nesting/type coercion. Include actual/expected and matching throwSequence only on KNOWN. Http does not depend on either C2FT3 marker or anchor.",
+        "after": "Exact C1 native-format rules/scalar provenance and total priority from protocol59ab firstFailure.sourceProjection, retarget exclusively to ordinal15 C2T1_SCOPE_MISSING, phase scope, expected GET assertion S08:18:143, first14 pairs/actions/counts returned; case15 action.throw (AssertionError/ERR_ASSERTION) is first throw in valid prefix and precisely matched, own count.return, native15fail and canonical C2SOURCE15 required. E3 measured S08 and select separate site. No C1 source row exported again. Require single flat testCodeFailure/ERR_ASSERTION/AssertionError/strictEqual block, two top-level decimal integer scalars actual=100..599 except200 and expected=200 with no dup/nesting/type coercion. Include actual/expected and matching throwSequence only on KNOWN. Http does not depend on C2FT3, C2FT4 or snapshot anchors."
+      },
+      {
+        "path": "/dropWinner/transport",
+        "before": "Gate QA->M and M->host independently from pinned evidence. Unverified QA reduces marked V to STUB_NON_OK/publicSite UNKNOWN; unverified M yields UNKNOWN.",
+        "after": "Keep original POST capture and publication. Prior DROP qualification binds historical Source13. The unchanged POST observation fails closed under unverified QA/M premises on this changed carrier."
+      },
+      {
+        "path": "/context",
+        "after": {
+          "repository": "tokenizartinfo-ops/agent-friendly-web",
+          "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+          "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+          "sourceIndexBlob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+          "proposalIndexHash": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153",
+          "selectionHash": "fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd",
+          "runAttempt": 1,
+          "job": "c2-get-winner-diagnostic1",
+          "node": "v22.23.4"
+        }
+      },
+      {
+        "path": "/publisher",
+        "after": {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "77183a2558a9e071b562485e1b3bd7622fffdf66",
+          "bytes": 38299,
+          "sha256": "dd6f9474ddf47386276e40f6d83cde2f38bcf1263f72008870f2d1700f2e0a80"
+        }
+      },
+      {
+        "path": "/nativeRelease",
+        "after": {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-release.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a37dc79fe27518557f9082932c0acb05fcbcd557",
+          "bytes": 2061,
+          "sha256": "ad272eec1204f53abd89d1c86f226ebe0da6dad6d9e750696b8761f83896e32d"
+        }
+      },
+      {
+        "path": "/getWinner",
+        "after": {
+          "publicField": {
+            "path": "docs/superpowers/source-lab/c2-get-winner-dependent/get-winner-field.schema.json",
+            "mode": "100644",
+            "type": "blob",
+            "kind": "DRAFT_PUBLIC_FIELD_SCHEMA",
+            "blob": "2d012ec22c28c2f4843404e8271e4ab58de8ba7c",
+            "bytes": 540,
+            "sha256": "e26f1596871b084e271029e407764735e382be5b807f49b41806050826c6c5b5",
+            "fullReadback": true
+          },
+          "exactSite": {
+            "preimage": {
+              "file": "S08",
+              "line": 18,
+              "column": 118
+            },
+            "current": {
+              "file": "S08",
+              "line": 18,
+              "column": 143
+            },
+            "meaning": "Same original GET equal call. Current matcher accepts only143. Historical118 at current pin is UNKNOWN. Foreign119 and body-read106 remain negatives. Frozen315 bytes stay unchanged; separately measured TEST-only corpus adapter limited to explicit paths and exact input hashes."
+          },
+          "producer": {
+            "enabled": "Nominated positive M compiled with dropWinner true and getWinner true only. QA source and negative worker remain original.",
+            "identity": "Cell binds original P and root L after original guarded selector. Only exact error identity escaping original race seals L/S/V. Original prepared DROP input hashes are asserted. Generic throws and failed guards remain UNKNOWN.",
+            "status": "Use already evaluated original selector/status values. No extra diagnostic P method/url getter reads. L/V normalized503/0. S original deliberate nonOK400..599 or0; original allowlisted400/401/403/404/405/413/429 retained, others503.",
+            "egress": "Same pending native B, exactly once, synchronously after original parent.finish returns normally and before serialization. Pristine native status/Headers identity and absent reserved header required. Observation guards contain diagnostic exceptions. No new IO/await/timer/guard invocation. Original S03 await forward remains. Closed B flow gives no external mutation aperture; original finally parent.finish then observer.finish is synchronous before outer fetch resolution.",
+            "header": "Only x-afw-lab-get-winner with g1.h.[LSV].s. U has no new header. No QA attribution."
+          },
+          "host": {
+            "responseConstructor": "The S08 snapshot observer uses the exact exported Miniflare Response. The scheduled H composition exercises that observer with its own token lifecycle. Independent Node Response-injected normalization and host checks remain MODEL only.",
+            "cut": "Original choose status/body read then capture same returned R before original equal assertion. No body reread/clone/tee/cancel. Original label/main/token, one capture, closed action and one consuming count required.",
+            "directRoute": "Conditional premise from exact Source seam review, unchanged first-worker factory/remount path, pinned Miniflare dispatch behavior and ordinary TOOL witness for shared compiler/factory. Separate exact full20 review and Root gate required. S10 dynamically matches captured call, dispatch identities and mounted resident script. Header presence and TOOL alone do not establish full20 directness.",
+            "marker": "Only existing scope count emits C2FT4 ordered id,value,w,s,h once. Monitor retains C2FT3. h/s are integers, U0/0; L/V503/0; S normalized mapping. Entire top-level typed stream checked for order/window/duplicates/grammar. Raw marker max96 ASCII bytes including # prefix and LF."
+          },
+          "publisherRules": {
+            "positive": "Clean first14 native passes and action/count returns; earliest exact target GET throw at143; same target count returns; native15 fails; independently KNOWN finiteGet HTTP/scalar/sequence; canonical private C2FT4 with equal h. Any failed join leaves getWinner UNKNOWN. Independently known finiteGet HTTP persists.",
+            "normalization": "Public ordered case,winner,stubStatus,qaLastCompleted. case15:firstFiniteGET. L->DEADLINE_OR_ABORT, V->POST_STUB_VALIDATION with stubUNKNOWN. S->STUB_NON_OK with400..599 orUNKNOWN. QA alwaysUNKNOWN. Unknown keeps all diagnostic valuesUNKNOWN.",
+            "priorFrontier": "Original POST firstFailure/dropWinner diagnostic remains. GET200 then original DROP failure produces getWinnerUNKNOWN and the independently proven original DROP projection.",
+            "private": "No R/P/L/error/header/marker/body/request identifiers enter public packet. Public schema plus relational checks enforce visible consistency only."
+          },
+          "canonicalForeignTupleLimit": "Parent receives only private marker values via child stdout plus independent journal/HTTP. OWN receives bounded public projections and measured capture. A coherently replaced valid tuple is indistinguishable from those apertures alone. The genuine-only GB1 MODEL boundary stays in force. Header values and hashes supply neither response authentication nor physical identity across isolates."
+        }
+      },
+      {
+        "path": "/toolEvidence",
+        "after": {
+          "review": "08b75777bb39efaad0a439082cd430044c0b07d6",
+          "primary": "a290e3c26382660f67c5ae8d2f8b0571c9f61956",
+          "payload": "e8d57d9f37de40d1e02c6dfd17a141bc9e68f81c",
+          "closure": "bd3c3c583a17209be9390084eb390a24e515aeae",
+          "closedHead": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+          "proposal": "597f4f4091700a2a046b37ccefb1c53ac488a284",
+          "sourceIndex": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+          "ordinaryControl": "b97a7415951e7fe4ecb988a921cc0d777ea18f35",
+          "ordinaryOnResident": {
+            "sha256": "faec968dcc56d51f7273c62c9456252f723ae56903e41c411f2edfa440d2c5cc",
+            "bytes": 2010306
+          },
+          "limits": {
+            "adverseTransportDirectRoute": false,
+            "full20BusinessRouteExecuted": false,
+            "businessGET503Cause": "UNKNOWN"
+          },
+          "acceptedActualControls": {
+            "syntax": 35,
+            "defensive": {
+              "nodePassed": 34,
+              "nodeFailed": 0,
+              "pythonPassed": 2,
+              "pythonResult": "OK"
+            },
+            "startup": 46,
+            "model": 287,
+            "nativeDispatches": {
+              "ordinary": 15,
+              "retention": 8,
+              "fixedFault": 12,
+              "transport": 4,
+              "total": 39
+            }
+          },
+          "scope": "Accepted TOOL only. Shared ordinary positive compiler/factory observed; full20 business path execution/qualification pending.",
+          "heldNativeDomainExceptions": {
+            "authority": "963160414f6aaf6f035d40449b63d36b4964aeae",
+            "ids": [
+              "M-immutable",
+              "M-late-mark"
+            ],
+            "status": [
+              "STATIC_DOMAIN_EXCLUSION",
+              "UNEXECUTED_NATIVE",
+              "UNSUPPORTED_GENERIC"
+            ],
+            "modelLateMark": "Separately scheduled MODEL only"
+          }
+        }
+      },
+      {
+        "path": "/plannedControls",
+        "after": {
+          "syntax": [
+            "node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+            "node --check docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+            "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+            "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+            "node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt"
+          ],
+          "lockedInstall": "npm ci --ignore-scripts --no-audit --no-fund",
+          "preflight": "node --import c2-source-custody-guard.mjs c2-source-custody-preflight.mjs",
+          "guardedOriginalFull20": "node --import c2-source-custody-guard.mjs --experimental-vm-modules --test --test-reporter=tap --test-concurrency=1 test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+          "legacyToolControls": [
+            "node --test --test-concurrency=1 docs/superpowers/source-lab/c2-get-winner-dependent/receipt-normalization.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/controller-file-boundaries.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.test.mjs",
+            "python3 docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor_test.py"
+          ],
+          "nominationCommand": "node docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+          "result": "NOT_RUN"
+        }
+      },
+      {
+        "path": "/historicalGET503Cause",
+        "after": "UNKNOWN"
+      }
+    ],
+    "nativeReleaseBefore": {
+      "schema": "AFW.C2.DROP_NATIVE_RELEASE/1",
+      "sourceIndex": "fc5b71098da76696278765f43805f0f2a1953b22",
+      "fixture": "a78efb5290deb184c70fc4282bf438d818d02588",
+      "toolHead": "b7a2cbb6abb460089b38fa31fa1d787dd8a68902",
+      "toolProof": "33d612dc0c5614000f8b8f89ca953b9e5f487b9d",
+      "independentReview": "3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c",
+      "qaClosed": true,
+      "mClosed": true
+    },
+    "nativeReleaseAfter": {
+      "schema": "AFW.C2.GET_WINNER.FULL20_NATIVE_RELEASE/1",
+      "sourceIndex": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+      "toolEvidence": {
+        "review": "08b75777bb39efaad0a439082cd430044c0b07d6",
+        "primary": "a290e3c26382660f67c5ae8d2f8b0571c9f61956",
+        "payload": "e8d57d9f37de40d1e02c6dfd17a141bc9e68f81c",
+        "closure": "bd3c3c583a17209be9390084eb390a24e515aeae",
+        "closedHead": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+        "proposal": "597f4f4091700a2a046b37ccefb1c53ac488a284",
+        "sourceIndex": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+        "ordinaryControl": "b97a7415951e7fe4ecb988a921cc0d777ea18f35",
+        "ordinaryOnResident": {
+          "sha256": "faec968dcc56d51f7273c62c9456252f723ae56903e41c411f2edfa440d2c5cc",
+          "bytes": 2010306
+        },
+        "limits": {
+          "adverseTransportDirectRoute": false,
+          "full20BusinessRouteExecuted": false,
+          "businessGET503Cause": "UNKNOWN"
+        }
+      },
+      "getRoute": {
+        "scope": "CONDITIONAL_REVIEWED_APPLICATION_CONSTRUCTION",
+        "sourceSeamReview": "a279c2e6238927b0f7b1544c0f4d058852177651",
+        "priorMountConstructionReview": "3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c",
+        "miniflareDispatchApi": "1ded0afe15a9b443240776e3ce4bf4fbc509b79d",
+        "source": [
+          "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+          "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+          "9ffce28ba28961937c4f24f1cc00eb8d899bc495"
+        ],
+        "origin": "https://delegated-canary.agentfriendlyweb.dev",
+        "path": "/connections/finite-prepare",
+        "worker": "canary-first-connection",
+        "outcomeCut": "S08:18:143",
+        "rootAcceptanceRequired": true,
+        "verifiedFull20Occurrence": false
+      },
+      "legacyDrop": {
+        "historicalRelease": "6be5c0b5b9bfd6a1b89ffb11cf32cba1f045712a",
+        "historicalSourceIndex": "fc5b71098da76696278765f43805f0f2a1953b22",
+        "qaClosed": false,
+        "mClosed": false
+      },
+      "stageB5": 5,
+      "Source5": 5,
+      "OWN5": 5,
+      "activationReleased": false,
+      "nativeReleased": false,
+      "businessReleased": false,
+      "SourceQualified": false,
+      "Task1Pass": false,
+      "PCoff": false
+    }
+  },
+  "routeContext": [
+    {
+      "source": "S08",
+      "blob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+      "ranges": [
+        "1: import assert from 'node:assert/strict';\n2: import {createHash} from 'node:crypto';import {Response as DispatchResponse} from 'miniflare';\n3: import {initialEntryHarness} from './finite-initial-entry-world.mjs';\n4: import {plain,approveFirstConnection,readFirstConnectionProbe,createGetWinnerHost} from './finite-first-connection-publication.mjs';\n5: import {decodeFinitePreparationRecord as decode,hashFinitePreparationRecord as hash,hashFinitePolicyEffectIdentity as identityHash,hashFiniteOwnerEvidence as evidence} from '../../lib/mcp-qa-finite-preparation-records.mjs';import {initialHash as rowHash} from '../../lib/mcp-qa-finite-initial-material-records.mjs';\n6: const O='https://delegated-canary.agentfriendlyweb.dev';\n7: const records=rows=>rows.filter(([k])=>k.startsWith('afw.finite-policy-effect.v1:'));\n8: async function open(enableDrop=false){\n9:  const f=await initialEntryHarness('first-connection-publication',{coupledStages:true,dropWinner:enableDrop});\n10:  try{await f.stub.configure('normal');assert.equal((await plain(f.stub.invoke(f.refs))).status,'material_recorded');await f.stub.restoreMethods();await f.mountFirstConnection();\n11:   f.selectionSource=(await plain(f.stub.capsuleFacts())).material.ownerSelection;f.token=await f.enrollmentToken(f.selectionSource);return f;\n12:  }catch(error){await close(f);throw error;}\n13: }\n14: async function close(f){if(!f)return;try{await f.stub.firstConnectionRestore();await f.stub.c2ScopeRestore();await f.stub.restoreMethods();}finally{await f.mf.dispose();await f.cleanup();}}\n15: const discard=async r=>{const status=r.status;await r.body?.cancel();return status;};\n16: const headers=(f,cookie=f.choice?.cookie)=>({'Cf-Access-Jwt-Assertion':f.token,...cookie?{Cookie:cookie}:{}});\n17: async function choose(f,get=null){\n18:  const r=await f.call('/connections/finite-prepare',{headers:headers(f)}),status=r.status,text=await r.text();get?.capture(f,r,status);assert.equal(status,200);\n19:  const handle=/name=\"handle\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],projectRef=/name=\"projectRef\" value=\"([a-f0-9]{64})\"/.exec(text)?.[1],cookie=r.headers.get('set-cookie')?.split(';')[0];assert(handle&&projectRef&&cookie);return {handle,projectRef,cookie,text};\n20: }\n21: const post=(f,form,patch={})=>f.call('/connections/finite-prepare',{method:'POST',headers:{...headers(f,form.cookie),Origin:O,'Content-Type':'application/x-www-form-urlencoded',...patch.headers},body:patch.body??new URLSearchParams({handle:form.handle,projectRef:form.projectRef,decision:'approve'})});\n22: async function count(f,observe){const rows=await plain(f.stub.snapshot());const counters={upload:f.uploads.length-1,activation:f.activations.length-1,receipts:records(rows).filter(([k])=>k.endsWith(':receipt')).length};if(observe)observe(rows);return counters;}\n23: async function waitHeld(f){\n24:  const end=performance.now()+30000;for(;;){const s=await plain(f.stub.firstConnectionState());if(s.fetchHeld)return s;if(performance.now()>=end)throw Error('SYN c2 native hold missing');await new Promise(r=>setTimeout(r,10));}\n25: }\n26: async function settled(f){const end=performance.now()+30000;for(;;){if((await plain(f.stub.firstConnectionAvailability())).available)return;if(performance.now()>=end)throw Error('SYN c2 native settlement missing');await new Promise(r=>setTimeout(r,10));}}\n27: export async function createFiniteCoupledOwnerWorld(){\n28:  const main=await open(process.env.AFW_C2_DROP_WINNER==='1');let active=main,pendingForm=null,firstCookie=null,negative=null;const observer=createFiniteSnapshotObserver(main,()=>active);\n29:  const isolate=async()=>{await close(negative);negative=await open();active=negative;return negative;};\n30:  const noFurther=async(f,before,response)=>{assert.notEqual(await discard(response),200);assert.deepEqual(await count(f),before);};",
+        "105:     assert.deepEqual(event,{sequence:notice.sequence,grant_id:actualGrant.id,project_id:pre.project.projectId,user_id:pre.owner.subject,client_id:pre.clientId,resource:pre.resource,revision:pre.project.revision,action:'grant',purpose:'afw.dossier-monitoring.v1',request_id:t.requestId,issued_at:event.issued_at,expires_at:t.permissionExpiresAt});\n106:     assert(Number.isSafeInteger(event.sequence)&&event.sequence>0&&Number.isSafeInteger(event.issued_at));assert(event.issued_at>=Math.max(send.window.startedAt,send.issuedAt,t.issuedAt)&&event.issued_at<Math.min(send.window.deadline,t.permissionExpiresAt));\n107:     assert.equal(notice.preconnectionId,pre.preconnectionId);assert.equal(notice.grantHash,grantLink.grantHash);assert.equal(notice.eventHash,evidence('event',{grantId:event.grant_id,projectId:event.project_id,subject:event.user_id,clientId:event.client_id,resource:event.resource,revision:event.revision,action:event.action,purpose:event.purpose,requestId:event.request_id,sequence:event.sequence,issuedAt:event.issued_at,expiresAt:event.expires_at}));\n108:     assert.equal(ack.outcome,'applied');assert.equal(ack.sendHash,send.recordHash);assert.equal(ack.rowHash,rowHash('afw.finite-preparation-notice-row.v1',event));assert.equal(ack.sequence,event.sequence);assert(event.issued_at<=ack.observedAt&&ack.observedAt<send.window.deadline);assert.equal(afterEvents.filter(e=>e.grant_id===actualGrant.id).length,1);\n109:    }finally{observer.finish(label);}},\n110:   async noScope(){const label=observer.enter('C2T1_SCOPE_MISSING');try{\n111:    const f=main,form=await choose(f,observer.getToken(label)),snapshot=await plain(f.stub.c2Snapshot()),before=await count(f);assert(form.text.includes('revocar únicamente la concesión OAuth creada aquí.'));\n112:    for(const kind of ['drop','holder']){\n113:     try{await f.stub.c2ScopeDrop(kind);const response=await post(f,form);if(kind==='drop')f.dropReceive?.(response);await noFurther(f,before,response);const stats=await plain(f.stub.c2ScopeState());if(kind==='drop'&&f.dropAtCut){try{console.info('C2DW4 '+JSON.stringify(f.dropAtCut(response,stats?.diag,form,snapshot,decode)));}catch{}}if(kind==='holder'){assert.equal(stats.drifted,true);assert.equal(stats.puts,0,'changed transaction holder is rejected before scope put');}else assert.equal(stats.puts,1);}\n114:     finally{await f.stub.c2ScopeRestore();await f.stub.c2Restore(snapshot);}\n115:    }pendingForm=form;\n116:   }finally{observer.finish(label);}},\n117:   async selection(){\n118:    const rows=await plain(main.stub.snapshot()),receipt=records(rows).map(([,v])=>JSON.parse(v)).find(v=>v.purpose==='afw.finite-connection-installed.v1'&&v.stage==='finite'),preparation=rows.map(([,v])=>{try{return JSON.parse(v);}catch{return null;}}).find(v=>v?.purpose==='afw.finite-owner-preparation.v1');\n119:    assert(receipt&&preparation);assert(receipt.completedAt<=preparation.selectedAt);assert(rows.some(([key])=>key==='source-selection:'+preparation.sourceRevision+':head'));assert(!rows.some(([key])=>key==='preparation:'+preparation.prepId+':bound'));\n120:    assert.equal(records(rows).filter(([k])=>k.endsWith(':send')).length,6);assert.equal(records(rows).filter(([k])=>k.endsWith(':receipt')).length,3);",
+        "198:  }\n199:  return finite===0?'0':finite===1?'1':'2+';\n200: }\n201: \n202: export function createFiniteSnapshotObserver(main,getActive,emit=message=>console.info(message)) {\n203:  const get=createGetWinnerHost(main,()=>main.getWinnerDirect?.()===true,DispatchResponse);let getToken=null;\n204:  let state='idle',pending=null;\n205:  function enter(id) {\n206:   if(state!=='idle'||!['C2T1_MONITOR','C2T1_SCOPE_MISSING'].includes(id)){\n207:    state='poisoned';pending=null;return null;\n208:   }\n209:   pending={id};state='active';if(id==='C2T1_SCOPE_MISSING')getToken=get.begin(pending);return pending;\n210:  }\n211:  function finish(label) {\n212:   if(state==='active'&&label===pending){state='ready';if(label.id==='C2T1_SCOPE_MISSING')get.finish(label);}\n213:   else {state='poisoned';pending=null;get.poison();}\n214:  }\n215:  function counts() {\n216:   const active=getActive();\n217:   if(state==='active'){state='poisoned';pending=null;get.poison();}\n218:   if(state!=='ready')return count(active);\n219:   const label=pending;pending=null;state='idle';\n220:   if(active!==main)return count(active);\n221:   return count(active,rows=>{\n222:    let value='UNKNOWN';\n223:    try{value=snapshotBucket(rows,main);}catch{}\n224:    try{\n225:     if(label.id==='C2T1_SCOPE_MISSING') {\n226:      const winner=get.take(label,active)??{w:'U',s:0,h:0};\n227:      emit('C2FT4 '+JSON.stringify({id:label.id,value,...winner}));\n228:     } else emit('C2FT3 '+JSON.stringify({id:label.id,value}));"
+      ]
+    },
+    {
+      "source": "S09",
+      "blob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+      "ranges": [
+        "100: import {finiteWranglerProfileTemplate} from '../../lib/mcp-qa-finite-profile.mjs';\n101: const digest=x=>createHash('sha256').update(x).digest('hex');\n102: const origin='https://delegated-canary.agentfriendlyweb.dev';\n103: export async function compileFirstConnectionCandidate(revision,tree,{negativeProfile=false,budgetQualification=false,dropWinner=false,getWinner=false}={}){\n104:  if(getWinner)assert(dropWinner&&!negativeProfile&&!budgetQualification,'GET observer requires ordinary positive prepared M');\n105:  const node=await buildMcpNodeProgram(),define={'globalThis.__AFW_QA_SOURCE_REVISION__':JSON.stringify(revision),'globalThis.__AFW_NODE_SOURCE_REVISION__':JSON.stringify(revision),'globalThis.__AFW_NODE_PROGRAM__':JSON.stringify(node.program),'globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__':JSON.stringify('finite_trial_event')};\n106:  const options={bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],format:'esm',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',define};\n107:  const budget=budgetQualification?createBudgetCompiler('M'):null;\n108:  const m=await build({...options,entryPoints:['worker/mcp-own/finite.mjs'],...budget?{plugins:[budget.plugin()]}:getWinner?{plugins:[getWinnerPlugin()]}:dropWinner?{plugins:[dropMPlugin()]}:{}});\n109:  const bytes=m.outputFiles[0].contents,compressed=gzipSync(bytes,{level:9,mtime:0});\n110:  const resident={purpose:'afw.finite-candidate-residency.v1',encoding:'gzip-base64.v1',sourceRevision:revision,sourceTree:tree,sourceCheck:'git-inputs-before-after-v1',programHash:node.programHash,module:{name:'index.mjs',sha256:digest(bytes),bytes:bytes.length},compressedSha256:digest(compressed),compressedBytes:compressed.length,content:Buffer.from(compressed).toString('base64')};\n111:  // Negative-only, separately hashed ordinary-entry/SQL spy. The positive M\n112:  // uses m.outputFiles unchanged, not this instrumented wrapper.",
+        "350: \n351:  async firstConnectionContext(){const request=new Request('https://delegated-canary.agentfriendlyweb.dev/fixture/current'),root=createFiniteOwnerRequestLease(request);try{return await firstConnectionContext({ctx:this.ctx,env:this.env,parent:root.lease});}catch(error){(globalThis.__t3Observation??=[]).push({kind:'public-reader-rejected',frames:String(error.stack).split('\\n').filter(line=>/^\\s+at\\s/.test(line)).slice(0,8)});return {status:'unavailable'};}finally{root.finish();}}\n352:  async firstConnectionProbe(){const rows=[...await this.ctx.storage.list()];return {observation:globalThis.__t3Observation??[],calls:this.firstConnectionCalls??[],business:rows.filter(([k])=>k.startsWith('afw.finite-policy-effect.v1:')||k.startsWith('connection-preparation:')||k.startsWith('afw.finite-preparation-cleanup.v1:')||k.startsWith('owner-ticket:')).map(([key])=>key),alarm:await this.ctx.storage.getAlarm()};}\n353:  `);\n354: }\n355: export function firstConnectionWorkers(qa,candidate){\n356:  const p=finiteWranglerProfileTemplate('canaryLive'),bindingValues={...p.vars};\n357:  const options={modules:true,outboundService:async()=>new Response(null,{status:503}),compatibilityDate:p.compatibility_date,compatibilityFlags:p.compatibility_flags,durableObjects:{AFW_FINITE_TRIAL_CONTROL:{className:'Initial',scriptName:'qa-first-connection',useSQLite:true,uniqueKey:'initial-c2a'},AFW_DOSSIER_EVENTS_NODE:{className:'AfwOwnEventNode',useSQLite:true,uniqueKey:'first-connection-node'}},d1Databases:{DB:'initial-db'},kvNamespaces:{OAUTH_KV:'first-connection-oauth'},ratelimits:{DELEGATED_RATE_LIMITER:{namespace_id:'99126',simple:{limit:1000,period:60}}},bindings:{...bindingValues,AFW_FINITE_TRIAL_VERSION:{id:'55555555-5555-4555-8555-555555555555'}}};\n358:  return {workers:[{...options,name:'canary-first-connection',script:candidate.script},qa,{...options,name:'negative-first-connection',script:candidate.spyScript},...(candidate.wrongProfileScript?[{...options,name:'wrong-profile-first-connection',script:candidate.wrongProfileScript}]:[])]};\n359: }\n360: export async function approveFirstConnection(f,{token=null}={}){",
+        "770: }\n771: \n772: export function prepareGetWinner(name,source) {\n773:   if(name==='worker/mcp-own/finite.mjs') {\n774:     source=dropReplace(source,' const parent=createFiniteOwnerRequestLease(request);',\n775:       ' const parent=createFiniteOwnerRequestLease(request);let getResponse,getCell;');\n776:     source=dropReplace(source,\"if(path==='/connections/finite-prepare'){\\n   if(!['GET','POST'].includes(request.method))return finiteNativePending(405);\",\n777:       \"if(path==='/connections/finite-prepare'){let getMethod;\\n   if(!['GET','POST'].includes(getMethod=request.method))return finiteNativePending(405);if(getMethod==='GET')getCell=globalThis.__afwGetWinner?.enter(request);\");\n778:     source=dropReplace(source,'return await forwardFiniteOwnerChoice(input,parent.lease);',\n779:       'return getResponse=await forwardFiniteOwnerChoice(input,parent.lease);');\n780:     source=dropReplace(source,'finally{parent.finish();}',\n781:       'finally{parent.finish();globalThis.__afwGetWinner?.finish(getCell,request,parent.lease,getResponse);}');\n782:     return source+'\\nglobalThis.__afwGetWinner=('+createGetWinnerObserver.toString()+')();\\n';\n783:   }\n784:   if(name==='lib/mcp-qa-finite-owner-native-bridge.mjs') {\n785:     source=dropReplace(source,'if(readFiniteOwnerRequestContext(originalLease).root!==originalLease)fail();',\n786:       'if(readFiniteOwnerRequestContext(originalLease).root!==originalLease)fail();globalThis.__afwGetWinner?.bind(request,originalLease);');\n787:     source=dropReplace(source,'const response=await Reflect.apply(fetcher,stub,[forwarded]);',\n788:       'globalThis.__afwGetWinner?.forward(request,originalLease);const response=await Reflect.apply(fetcher,stub,[forwarded]);');\n789:     source=dropReplace(source,'if(!response.ok){try{fail([400,401,403,404,405,413,429].includes(response.status)?response.status:503);}',\n790:       'if(!response.ok){let getStatus;const getFail=status=>{try{fail(status);}catch(error){globalThis.__afwGetWinner?.denied(request,originalLease,response,error,getStatus);throw error;}};try{getFail([400,401,403,404,405,413,429].includes(getStatus=response.status)?response.status:503);}');\n791:     source=dropReplace(source,'return finiteNativeChoiceHtml(response,bytes);',\n792:       'globalThis.__afwGetWinner?.validate(originalLease,response);try{return finiteNativeChoiceHtml(response,bytes);}finally{globalThis.__afwGetWinner?.validationEnd(originalLease,response);}');\n793:     source=dropReplace(source,'globalThis.__afwDropM?.caught(request,originalLease,error,b);return b;',\n794:       'globalThis.__afwDropM?.caught(request,originalLease,error,b);globalThis.__afwGetWinner?.caught(request,originalLease,error,b);return b;');\n795:     return source;\n796:   }\n797:   assert.equal(name,'lib/mcp-qa-finite-owner-native-wire.mjs');\n798:   source=dropReplace(source,'globalThis.__afwDropM?.deadline(lease,error);reject(error);',\n799:     'globalThis.__afwDropM?.deadline(lease,error);globalThis.__afwGetWinner?.deadline(lease,error);reject(error);');\n800:   source=dropReplace(source,'try{return await Promise.race([actual,first,deadline]);}',\n801:     'try{return await Promise.race([actual,first,deadline]);}catch(error){globalThis.__afwGetWinner?.race(lease,error);throw error;}');\n802:   const start=source.indexOf('export function finiteNativeChoiceHtml(response,bytes){');\n803:   assert(start>=0 && source.indexOf('export function finiteNativeChoiceHtml(response,bytes){',start+1)<0);\n804:   const original=source.slice(start);\n805:   assert.equal((original.match(/finiteNativeFailure\\(\\)/g)||[]).length,4);\n806:   const changed=original.replaceAll('finiteNativeFailure()','getDenial()').replace(\n807:     'export function finiteNativeChoiceHtml(response,bytes){',\n808:     'export function finiteNativeChoiceHtml(response,bytes){const getDenial=()=>{try{finiteNativeFailure();}catch(error){globalThis.__afwGetWinner?.validationDenied(error);throw error;}};');\n809:   return source.slice(0,start)+changed;\n810: }\n811: \n812: function getWinnerPlugin() {\n813:   return {name:'first-get-winner-positive-M',setup(build) {\n814:     build.onLoad({filter:/(?:worker\\/mcp-own\\/finite|lib\\/mcp-qa-finite-owner-native-(?:bridge|wire))\\.mjs$/},async args=>{\n815:       const name=args.path.slice(process.cwd().length+1);\n816:       const prepared=prepareDropM(name,await readFile(args.path,'utf8'));\n817:       const before={\"worker/mcp-own/finite.mjs\":\"922428af9ac17d0f11ad2928c8ad60b88b8b78fa8729cafd512e407d2ec9ab67\",\"lib/mcp-qa-finite-owner-native-bridge.mjs\":\"97856b44f9b46f4110cb3e23e85d047cae895d2f39ed6d027c528f9a1c373633\",\"lib/mcp-qa-finite-owner-native-wire.mjs\":\"d0b88ce5a6319ff7559f13cda5d9aea6be6bb226fc775422547abce923bab3fe\"};\n818:       assert.equal(digest(prepared),before[name],'unchanged prepared DROP input');\n819:       return {contents:prepareGetWinner(name,prepared),loader:'js'};\n820:     });\n821:   }};\n822: }\n823: \n824: export function getWinnerTuple(w,s,h) {\n825:   if(!Number.isInteger(s)||!Number.isInteger(h))return false;\n826:   if(w==='U')return s===0&&h===0;\n827:   if(w==='L'||w==='V')return s===0&&h===503;\n828:   return w==='S' && (s===0?h===503:s>=400&&s<=599&&h===([400,401,403,404,405,413,429].includes(s)?s:503));\n829: }\n830: export function createGetWinnerHost(main,directRoute=()=>false,DispatchResponse) {\n831:   const tokens=new WeakMap(),seen=new WeakSet(),empty=()=>({w:'U',s:0,h:0});\n832:   let current=null,poisoned=false;\n833:   const safe=fn=>(...args)=>{try{return fn(...args);}catch{poisoned=true;return null;}};\n834:   function begin(label) {\n835:     if(current||poisoned||!label||label.id!=='C2T1_SCOPE_MISSING'||tokens.has(label)){poisoned=true;return null;}\n836:     const entry={label,response:null,calls:0,done:false,value:empty()};\n837:     const token=Object.freeze({capture:safe((f,r,status)=>{\n838:       entry.calls++;\n839:       if(poisoned||entry!==current||entry.done||f!==main||entry.calls!==1||label.id!=='C2T1_SCOPE_MISSING'||seen.has(r)){poisoned=true;return;}\n840:       seen.add(r);entry.response=r;\n841:       if(directRoute()!==true || typeof DispatchResponse!=='function' || !(r instanceof DispatchResponse) || !Number.isInteger(status) || status===200)return;\n842:       const raw=r.headers.get('x-afw-lab-get-winner');\n843:       const m=/^g1\\.([45][0-9]{2})\\.([LSV])\\.([45][0-9]{2}|0)$/.exec(raw??'');\n844:       if(!m||Number(m[1])!==status||!getWinnerTuple(m[2],Number(m[3]),status))return;\n845:       entry.value={w:m[2],s:Number(m[3]),h:status};\n846:     })});\n847:     tokens.set(label,{entry,token});current=entry;return token;\n848:   }\n849:   function finish(label) {\n850:     const item=tokens.get(label);\n851:     if(!item||item.entry!==current||poisoned){poisoned=true;return;}\n852:     item.entry.done=true;current=null;\n853:   }\n854:   function take(label,f) {\n855:     const item=tokens.get(label);\n856:     if(item)tokens.delete(label);\n857:     if(poisoned||current||!item||f!==main||label.id!=='C2T1_SCOPE_MISSING'||!item.entry.done||item.entry.calls!==1||!item.entry.response)return empty();\n858:     return item.entry.value;\n859:   }\n860:   return Object.freeze({begin:safe(begin),finish:safe(finish),take:safe(take),poison:safe(()=>{poisoned=true;})});"
+      ]
+    },
+    {
+      "source": "S10",
+      "blob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+      "ranges": [
+        "29: export async function initialEntryHarness(mode='normal',{negativeProfile=false,ownerCleanup=false,cleanupCheckpoint=false,budgetCompileOnly=false,budgetQualification=false,coupledStages=false,dropWinner=false,dropCompilerOnly=false}={}){\n30:  if(dropWinner||dropCompilerOnly)assert(mode==='first-connection-publication'&&coupledStages&&!budgetCompileOnly&&!budgetQualification&&!ownerCleanup&&!cleanupCheckpoint&&!negativeProfile&&!process.env.AFW_T3_MUTANT);\n31:  if(budgetCompileOnly)assert((process.env.AFW_BUDGET_INSPECTION==='compile-only'||budgetQualification&&process.env.AFW_BUDGET_GROUP==='positive')&&mode==='first-connection-publication'&&ownerCleanup&&cleanupCheckpoint&&!negativeProfile,'SYN compile-only inspection route');\n32:  if(budgetQualification)assert(mode==='first-connection-publication'&&ownerCleanup&&cleanupCheckpoint&&!negativeProfile&&!process.env.AFW_T3_MUTANT,'fixed positive budget composition');\n33:  const budget=budgetQualification?createBudgetCompiler('QA'):null;\n34:  const owned=budgetQualification&&!budgetCompileOnly?beginFixedBudgetOwnedAllocation():null;\n35:  const compileInputs=new Map();\n36:  const firstConnection=mode==='first-connection-publication',firstConnectionMutation=firstConnection?(process.env.AFW_T3_MUTANT??null):null;if(![null,'public-partial','existing-ack'].includes(firstConnectionMutation))throw Error('SYN unknown negative mutation');\n37:  const mark=stage=>{if(firstConnection)console.info('T2 native stage',stage);};mark('harness-start');\n38:  const enrollmentComponent=mode==='first-connection-enrollment-component';\n39:  const pair=!budgetCompileOnly&&(firstConnection||enrollmentComponent||mode.startsWith('enrollment')||mode==='private-choice'||mode.startsWith('phase-context-sdk'))?await generateKeyPair('RS256'):null,privateKey=pair?.privateKey,jwk=pair?{...await exportJWK(pair.publicKey),kid:'enrollment-SYN',alg:'RS256'}:null;\n40:  if(cleanupCheckpoint)assert(firstConnection&&ownerCleanup,'SYN checkpoint requires unchanged owner producer mode');\n41:  const persist=!budgetCompileOnly&&(mode.endsWith('restart')||cleanupCheckpoint)?await mkdtemp(join(tmpdir(),'afw-entry-restart-')):null;\n42:  if(persist)owned?.attachPersist(persist);\n43:  const sdkProfile=mode.startsWith('phase-context-sdk')?finiteWranglerProfileTemplate('qaLive'):null;\n44:  const base={...(firstConnection?{name:'qa-first-connection'}:{}),...(sdkProfile?{name:'qa-sdk'}:{}),...(persist?{resourcePersistencePath:persist}:{}),...(firstConnection?{kvNamespaces:{AFW_FINITE_OWNER_OAUTH_KV:'first-connection-oauth'}}:mode.startsWith('phase-context')?{kvNamespaces:{AFW_FINITE_OWNER_OAUTH_KV:'finite-sdk-shared'}}:{}),modules:true,compatibilityDate:sdkProfile?.compatibility_date??'2026-09-07',compatibilityFlags:sdkProfile?.compatibility_flags??['nodejs_compat'],ratelimits:{AFW_QA_OCCURRENCE_RATE_LIMITER:{namespace_id:'99122',simple:{limit:1000,period:60}}},bindings:{AFW_QA_VERSION:{id:UUID},AFW_MCP_CLOSURE_READ_TOKEN:'synthetic-native-reader',AFW_MCP_CLOSURE_PUBLISH_TOKEN:'synthetic-native-publisher'},d1Databases:{RELEASE_DB:'initial-db'},durableObjects:{AFW_INDEPENDENT_CLOSURE:{className:'Initial',useSQLite:true,uniqueKey:'initial-c2a'},AFW_RELEASE_EVENTS_NODE:{className:'Node',useSQLite:true,uniqueKey:'initial-node'}}};\n45:  const mf=budgetCompileOnly?null:new Miniflare(convertV4MiniflareOptions({...base,script:'import{DurableObject}from\"cloudflare:workers\";export class Initial extends DurableObject{} export class Node extends DurableObject{} export default{fetch(){return new Response(null,{status:404})}};'}));\n46:  owned?.attachMiniflare(mf);\n47:  let failedInitializationDisposal;\n48:  const disposeFailedInitialization=()=>failedInitializationDisposal??=mf?.dispose();\n49:  try{\n50:  mark(budgetCompileOnly?'MODELED compile-only namespace DATA':'provisional-bindings-start');const b=budgetCompileOnly?null:await mf.getBindings();if(!budgetCompileOnly)mark('provisional-bindings-ready');const ns=b?.AFW_RELEASE_EVENTS_NODE,compileIds=budgetCompileOnly?{original:sha('MODELED compile-only original namespace'),candidate:sha('MODELED compile-only candidate namespace')}:null,x=initialHistoryFixture(compileIds??{original:ns.idFromName('afw-own-event-one-occurrence-v1').toString(),candidate:ns.idFromName('afw-own-event-first-successor-v1').toString()},mode);x.ids={original:x.original.containerId,candidate:compileIds?.candidate??ns.idFromName('afw-own-event-first-successor-v1').toString()};\n51:  mark('M-compile-start');const firstCandidate=firstConnection?await compileFirstConnectionCandidate(M,TREE,{negativeProfile,budgetQualification,dropWinner:dropWinner||dropCompilerOnly,getWinner:dropWinner&&process.env.AFW_C2_GET_WINNER==='1'}):null;mark('M-compile-done');\n52:  const program=firstCandidate?.program??'SYNTHETIC actual resident candidate program',script='// SYNTHETIC B1 candidate bytes\\nexport default{};',bytes=firstCandidate?.bytes??Buffer.from(script),compressed=gzipSync(bytes,{level:9,mtime:0}),resident={purpose:'afw.finite-candidate-residency.v1',encoding:'gzip-base64.v1',sourceRevision:M,sourceTree:TREE,sourceCheck:'git-inputs-before-after-v1',programHash:sha(program),module:{name:'index.mjs',sha256:sha(bytes),bytes:bytes.length},compressedSha256:sha(compressed),compressedBytes:compressed.length,content:compressed.toString('base64')};",
+        "149:  let finalOptions={...base,script:built.outputFiles[0].text,outboundService:createInitialEntrySynOutbound({f,firstConnection,jwk,w,mode,created,approval,opPin,opMetadata,built,x,cleanupCheckpoint,coupledStages})};\n150:  if(mode.startsWith('phase-context-sdk')){finalOptions=await finiteOwnerSdkWorkers(finalOptions,{observed:mode.startsWith('phase-context-sdk-observed'),token:mode.includes('-token'),io:mode==='phase-context-sdk-io',noticeGet:mode==='phase-context-sdk-token-notice-get'});f.sdkProfiles=Object.fromEntries(finalOptions.workers.map(worker=>[worker.name,{compatibilityDate:worker.compatibilityDate,compatibilityFlags:worker.compatibilityFlags}]));console.info('D02 actual Miniflare SDK profiles',JSON.stringify(f.sdkProfiles));}\n151:  if(firstConnection)finalOptions=firstConnectionWorkers(finalOptions,firstCandidate);\n152:  if(cleanupCheckpoint)finalOptions={...finalOptions,resourcePersistencePath:persist};\n153:  const rawFinalOptions=finalOptions;let currentMountedOptions=rawFinalOptions;\n154:  if(dropWinner){\n155:    const h=createDropDiagnostic(sha);\n156:    f.dropQAClosed=process.env.AFW_C2_QA_TRANSPORT==='verified';\n157:    f.dropMClosed=process.env.AFW_C2_M_TRANSPORT==='verified';\n158:    f.dropReceive=h.receive;\n159:    f.dropAtCut=(response,diag,form,rows,decode)=>{\n160:      try{\n161:        const qa=currentMountedOptions.workers.find(w=>w.name==='qa-first-connection'),m=currentMountedOptions.workers.find(w=>w.name==='canary-first-connection');\n162:        const matched=qa && m && sha(qa.script)===paired.qaHash && sha(m.script)===resident.module.sha256 && paired.sites.usable.length>=2;\n163:        const mapped=resolveDropSite({prep:opts,siblingPrep:opts,realNamespace:Boolean(mf&&ns&&!compileIds),qa:paired.qaHash,sibling:paired.qaHash,mountedQA:qa&&sha(qa.script),m:resident.module.sha256,mountedM:m&&sha(m.script),sites:paired.sites.usable},diag?.coords);\n164:        const axes=h.host(response,diag,form.handle,dropTicket(rows,form,decode),mapped,Boolean(matched&&f.dropQAClosed),Boolean(matched&&f.dropMClosed));\n165:        return axes??h.unknown();\n166:      }catch{return h.unknown();}\n167:    };\n168:  }\n169:  finalOptions=convertV4MiniflareOptions(finalOptions);\n170:  mark('harness-setOptions-start');await mf.setOptions(finalOptions);mark('harness-setOptions-ready');\n171:  mark('QA-bindings-start');const bindings=await mf.getBindings(firstConnection?'qa-first-connection':mode.startsWith('phase-context-sdk')?'qa-sdk':undefined);f.stub=bindings.AFW_INDEPENDENT_CLOSURE.get(bindings.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB',firstConnection?'qa-first-connection':mode.startsWith('phase-context-sdk')?'qa-sdk':undefined);\n172:  if(mode.startsWith('phase-context-sdk'))console.info('D02 native identity comparison',JSON.stringify({provisionalWorker:base.name,finalWorker:'qa-sdk',original:bindings.AFW_RELEASE_EVENTS_NODE.idFromName('afw-own-event-one-occurrence-v1').toString()===x.ids.original,candidate:bindings.AFW_RELEASE_EVENTS_NODE.idFromName('afw-own-event-first-successor-v1').toString()===x.ids.candidate}));\n173:  if(budget)attachBudgetEpochCapture(f);\n174:  mark('QA-bindings-ready');if(firstConnection||mode.startsWith('phase-context')){try{if(mode==='phase-context-init-failure')throw Error('SYN phase fixture initialization failed');await seedFiniteOwnerPhaseHistory(f.db,x,seedInitialHistory);for(const sql of FINITE_PREPARATION_ISSUER_SCHEMA)await f.db.prepare(sql).run();\n175:  const oldMonitoringSql=(await f.db.prepare(\"SELECT type,name,tbl_name,sql FROM sqlite_schema WHERE tbl_name='dossier_monitoring_consent_events' AND sql IS NOT NULL ORDER BY name LIMIT 5\").all()).results;\n176:  const oldMonitoringEvents=(await f.db.prepare('SELECT sequence,grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at FROM dossier_monitoring_consent_events ORDER BY sequence LIMIT 4').all()).results;\n177:  const originalGrants=(await f.db.prepare('SELECT id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at,exchanged_at FROM delegated_access_grants ORDER BY id LIMIT 3').all()).results;\n178:  assert.equal(originalGrants.length,2);assert.equal(oldMonitoringSql.length,4);assert.equal(oldMonitoringEvents.length,3);\n179:  for(const sql of FINITE_PREPARATION_MONITORING_SCHEMA)await f.db.prepare(sql).run();\n180:  assert.deepEqual((await f.db.prepare(\"SELECT type,name,tbl_name,sql FROM sqlite_schema WHERE tbl_name='dossier_monitoring_consent_events' AND sql IS NOT NULL ORDER BY name LIMIT 5\").all()).results,oldMonitoringSql);\n181:  assert.deepEqual((await f.db.prepare('SELECT sequence,grant_id,project_id,user_id,client_id,resource,revision,action,purpose,request_id,issued_at,expires_at FROM dossier_monitoring_consent_events ORDER BY sequence LIMIT 4').all()).results,oldMonitoringEvents);\n182:  assert.equal((await f.db.prepare(\"SELECT type,name,tbl_name,sql FROM sqlite_schema WHERE tbl_name IN ('dossier_monitoring_consent_events','dossier_monitoring_owner_tickets') AND sql IS NOT NULL ORDER BY name LIMIT 8\").all()).results.length,7);\n183:  assert.deepEqual((await f.db.prepare('SELECT id,user_id,client_id,project_id,resource,scopes_json,created_at,expires_at,revoked_at,exchanged_at FROM delegated_access_grants ORDER BY id LIMIT 3').all()).results,originalGrants);\n184:  console.info('NOTICE SYN schema adapter',JSON.stringify({consentObjectsPreserved:4,consentRowsPreserved:3,grantsPreserved:2,objectsAfter:7,addedObjects:3}));}catch(error){await disposeFailedInitialization();error.fixtureDisposed=true;throw error;}}else await seedInitialHistory(f.db,x);await f.stub.seed(x.rows);f.resident=resident;\n185:  if(mode==='invalid-owned-revision')await f.db.prepare('UPDATE site_projects SET revision=0').run();\n186:  if(mode==='wrong-owned-subject')await f.db.prepare(\"UPDATE site_projects SET user_id='another-owner'\").run();\n187:  if(firstConnection){\n188:   f.mountFirstConnection=async()=>{mark('mount-start');assert.equal(f.uploads.length,1);assert.equal(f.activations.length,1);assert.equal(f.pointerMode,'candidate');\n189:    const vars=Object.fromEntries(f.uploaded.bindings.filter(b=>b.type==='plain_text').map(b=>[b.name,b.text]));\n190:    const mountedRaw={...rawFinalOptions,workers:rawFinalOptions.workers.map(worker=>worker.name==='qa-first-connection'?worker:{...worker,bindings:{...vars,AFW_FINITE_TRIAL_VERSION:{id:f.uploaded.id}}})},mounted=convertV4MiniflareOptions(mountedRaw);\n191:    mark('mount-updateOptions-start');try{if(budget)await f.captureBudgetEpoch('before-first-connection-remount');await mf.setOptions(mounted);if(budget)f.nextBudgetEpoch();currentMountedOptions=mountedRaw;}catch(error){f.mountFailed=true;console.info('T2 original mount error',JSON.stringify({name:error?.name,code:error?.code??null,issues:(error?.issues??[]).map(({path,code,expected})=>({path,code,expected})),frames:String(error?.stack??'').split('\\n').filter(line=>/^\\s+at\\s/.test(line)).slice(0,5),workers:mounted.workers.map(worker=>({name:worker.name,keys:Object.keys(worker),bindings:Object.entries(worker.bindings??{}).map(([key,value])=>({key,type:typeof value,defined:value!==undefined}))}))}));throw error;}mark('mount-updateOptions-ready');const fresh=await mf.getBindings('qa-first-connection');f.stub=fresh.AFW_INDEPENDENT_CLOSURE.get(fresh.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');mark('mount-ready');\n192:   };\n193:   f.adoptConnectionConfiguration=async({upstream=false}={})=>{\n194:    if(!coupledStages){assert.equal(f.uploads.length,2);assert.equal(f.activations.length,2);}else{assert(f.uploads.length>=2&&f.uploads.length<=4);assert.equal(f.activations.length,f.uploads.length);}const pointer=f.providerRegistry.pointer,version=f.providerRegistry.versions[pointer.versions[0].version_id],closed=f.providerRegistry.versions['55555555-5555-4555-8555-555555555555'];\n195:    assert.equal(version.id,pointer.versions[0].version_id);assert.equal(version.modules[0].content_base64,closed.modules[0].content_base64);if(!coupledStages){const candidate=structuredClone(closed);candidate.id=version.id;candidate.bindings.find(b=>b.name==='AFW_DELEGATED_OAUTH_ENABLED').text='true';assert.deepEqual(version,candidate);}else{assert.equal(version.modules[0].content_base64,closed.modules[0].content_base64);}\n196:    const vars=Object.fromEntries(version.bindings.filter(b=>b.type==='plain_text').map(b=>[b.name,b.text]));const mountedRaw={...rawFinalOptions,...upstream?{upstream:'https://delegated-canary.agentfriendlyweb.dev'}:{},workers:rawFinalOptions.workers.map(worker=>worker.name==='qa-first-connection'?worker:{...worker,bindings:{...vars,AFW_FINITE_TRIAL_VERSION:{id:version.id}}})},mounted=convertV4MiniflareOptions(mountedRaw);f.transportNormalized=upstream;if(upstream)assert.equal(mounted.upstream,'https://delegated-canary.agentfriendlyweb.dev');\n197:    const originalWorker=rawFinalOptions.workers.find(worker=>worker.name==='canary-first-connection');assert.equal(sha(originalWorker.script),f.firstConnectionBuild.M.sha256,'actual script input remains initial M');if(budget)await f.captureBudgetEpoch('before-connection-configuration-remount');await mf.setOptions(mounted);if(budget)f.nextBudgetEpoch();currentMountedOptions=mountedRaw;const fresh=await mf.getBindings('qa-first-connection');f.stub=fresh.AFW_INDEPENDENT_CLOSURE.get(fresh.AFW_INDEPENDENT_CLOSURE.idFromName('afw-own-successor-closure-v1'));f.db=await mf.getD1Database('RELEASE_DB','qa-first-connection');f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');\n198:   };\n199:   let getDirectCall;const getDispatch=mf.dispatchFetch;f.getWinnerDirect=()=>{const m=currentMountedOptions.workers.find(w=>w.name==='canary-first-connection');return process.env.AFW_C2_GET_TRANSPORT==='verified' && f.call===getDirectCall && mf.dispatchFetch===getDispatch && Boolean(m) && sha(m.script)===resident.module.sha256;};\n200:   f.negative=await mf.getWorker('negative-first-connection');if(firstCandidate.wrongProfileScript)f.wrongProfile=await mf.getWorker('wrong-profile-first-connection');f.call=(path,options)=>{f.providerPhase=(options?.method??'GET')+' '+new URL('https://delegated-canary.agentfriendlyweb.dev'+path).pathname;return mf.dispatchFetch('https://delegated-canary.agentfriendlyweb.dev'+path,options);};getDirectCall=f.call;}"
+      ]
+    }
+  ],
+  "routePremises": {
+    "status": "CANDIDATE_CONDITIONAL_STATIC_APPLICATION_ROUTE",
+    "reviewerAcceptanceRequired": true,
+    "rootReleaseRequired": true,
+    "actualFull20RouteQualified": false,
+    "closedOccurrenceToolingOnly": true,
+    "conjuncts": [
+      {
+        "rule": "The reviewed ordinary compiler activates GET instrumentation only for the nominated positive main; negative worlds and product stay unchanged.",
+        "evidence": [
+          "S08:8–11,27–29",
+          "S10:29–32,51",
+          "S09:103–110,772–822",
+          "a279c2e6238927b0f7b1544c0f4d058852177651"
+        ]
+      },
+      {
+        "rule": "The shared factory selects positive canary-first-connection as first worker and the existing QA binding separately. Full20 remounts preserve worker order and scripts and change only the existing configuration/bindings.",
+        "evidence": [
+          "S09:355–358",
+          "S10:149–170,188–198",
+          "3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c"
+        ],
+        "comparison": "The entire factory function is byte-identical to the old S09 function; the whole S10 preimage→afterimage difference is the GET compiler argument and directness/method capture lines."
+      },
+      {
+        "rule": "The actual host call remains exact original dispatch to the target, with current function identity and positive resident script hash checked by unchanged S10 before S09 inspects any marker.",
+        "evidence": [
+          "S10:199–200",
+          "S08:17–19,110–116,202–228",
+          "S09:830–860",
+          "1ded0afe15a9b443240776e3ce4bf4fbc509b79d"
+        ],
+        "transport": "Miniflare pinned index.ts:3022–3058 exposes dispatchFetch as an instance arrow field and routes through its native entry while preserving user origin. The exact finite GET branch returns fresh 200 qualified HTML or normalized 4xx/5xx; no app redirect/copy path for a marked response. Existing target status/body read and same lexical label/token/current R cut remain."
+      },
+      {
+        "rule": "Accept actual ordinary TOOL evidence only for shared ordinary compiler/factory and native serialization. TOOL adverse transport uses an intermediary and correctly does not qualify directness. No full20 configuration, QA business path or real operating assertion is derived from TOOL.",
+        "evidence": [
+          "08b75777bb39efaad0a439082cd430044c0b07d6",
+          "b97a7415951e7fe4ecb988a921cc0d777ea18f35",
+          "e8d57d9f37de40d1e02c6dfd17a141bc9e68f81c"
+        ],
+        "limit": "A valid but coherently copied header is indistinguishable under this aperture. No authenticated response, physical identity across isolates or weaker fallback for missing premises."
+      },
+      {
+        "rule": "Exact source pins, nomination, runtime context, observed f.call/dispatch identities and mounted script all remain necessary. The activation-time premise must be reviewed for this exact carrier before Root allows its nominated command; unresolved premises leave the one-use activation held.",
+        "evidence": [
+          "runner admission and native-release",
+          "S10:199–200",
+          "final independent Source carrier review (required, never presumed)"
+        ]
+      }
+    ],
+    "legacyPOST": "Keep original POST capture/marker and public check. Its legacy QA/M transport proof is tied to older Source13 and cannot be transferred to new residency. Flags remain unverified, with unavailable DROP attribution UNKNOWN and native/HTTP/witness siblings preserved.",
+    "diagnostics": "No business 503 cause is determined; known observations require the actual bounded occurrence and independent admission."
+  },
+  "rootMeasurement": {
+    "blob": "2c3b0ab6b613c1d97e4dc14bce2d09ac06a31d1b",
+    "value": {
+      "schema": "AFW.C2.GET_WINNER.ROOT26_MEASUREMENT/1",
+      "timestampUTC": "2026-11-17 23:02:12 UTC",
+      "project": "AFW",
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "index": {
+        "blob": "cf2933aaad43938e98efcc8ffd93dfe7c8160bf9",
+        "bytes": 24747,
+        "sha256": "900b86b7fd53a3e117e5452d48b0428a6ecbe66579545139ace4503cea8c0e47"
+      },
+      "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "bodyEdges": [
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+          "bytes": 9228,
+          "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+          "bytes": 148547,
+          "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+          "bytes": 45576,
+          "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+          "bytes": 2497,
+          "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+          "bytes": 2810,
+          "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+          "bytes": 4153,
+          "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+          "bytes": 101380,
+          "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+          "bytes": 22501,
+          "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+          "bytes": 2785,
+          "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+          "bytes": 23226,
+          "sha256": "75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+          "bytes": 83571,
+          "sha256": "a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+          "bytes": 98851,
+          "sha256": "7c8680d6b86b1ccc0acdcfecb4d8e4312e6d6971f36b00bd6dcf88c289309604"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+          "bytes": 58727,
+          "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+          "bytes": 6030,
+          "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+          "bytes": 1208,
+          "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+          "bytes": 417,
+          "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/mode-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+          "bytes": 4403,
+          "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/frame-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+          "bytes": 35611,
+          "sha256": "d4f420c2434a8dd7e67f6c4f30d0b69a1b4d30195520c5ecb4758abbe86fc228"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/protocol-contract.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "5634256c188580dd4ef0cc2017ced4d0980ca6d8",
+          "bytes": 68136,
+          "sha256": "dbf8cb3cd96d3892d11d7d7b942fd59f9003732b38e264bd72ad4e84231379b2"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/collection-adapters.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "77183a2558a9e071b562485e1b3bd7622fffdf66",
+          "bytes": 38299,
+          "sha256": "dd6f9474ddf47386276e40f6d83cde2f38bcf1263f72008870f2d1700f2e0a80"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/read-progress.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+          "bytes": 5507,
+          "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/diagnostic-driver.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+          "bytes": 3169,
+          "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/progress-recorder.txt",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+          "bytes": 3833,
+          "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/run-get-winner-diagnostic.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "7172e63f474c055723124b346be1b63c7ddd3c6d",
+          "bytes": 20179,
+          "sha256": "6db6754097a1fe426898c7ea1df60996792b2b9a7fbd0b1ab3ab5046044c5bc5"
+        },
+        {
+          "path": ".github/workflows/afw-c2-get-winner-diagnostic1.yml",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "eea7ccdf5632b04ad44ed7ceb4b638ba9f053a7b",
+          "bytes": 2255,
+          "sha256": "c44a8760e783cc39966656daceb1e0428bac5cba0a45bd41e62db78fcfcbd1e3"
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/native-release.json",
+          "mode": "100644",
+          "type": "blob",
+          "blob": "a37dc79fe27518557f9082932c0acb05fcbcd557",
+          "bytes": 2061,
+          "sha256": "ad272eec1204f53abd89d1c86f226ebe0da6dad6d9e750696b8761f83896e32d"
+        }
+      ],
+      "bodyEdgesHash": "b849e01d0da0e8a76f80fba749bcb4dff0b9b8b09e8580584e52dc6605d9f553",
+      "fullMeasurement": {
+        "bodies": 26,
+        "bytes": 794960,
+        "canonicalBytes": 6404,
+        "rule": "UTF8(JSON.stringify(bodyEdges)), NO LF",
+        "allGitBlobSHA1AndSHA256Matched": true,
+        "orderedIndexThen13Sources": true
+      },
+      "measured": true,
+      "SourceExecuted": false,
+      "original3203Unaffected": true,
+      "original3203Status": "All 26 proposed paths are absent at immutable BASE; no tree/ref or original Source has been changed",
+      "baselinePathCollisions": [],
+      "unboundEdges": [],
+      "source13": {
+        "path": "docs/superpowers/source-lab/c2-get-winner-dependent-diagnostic/source-index.json",
+        "mode": "100644",
+        "bytes": 9228,
+        "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153",
+        "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694"
+      },
+      "source13UnchangedFromQualifiedTooling": true,
+      "previousBusiness26": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+      "changedSlots": [
+        {
+          "position": 0,
+          "slot": "index",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 1,
+          "patch": "d96a417476d908ac04c3ce9024e5cf5dc461b4ba"
+        },
+        {
+          "position": 9,
+          "slot": "S08",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 10,
+          "patch": "8b2dd694daabe2a010daece314358b912b066c37"
+        },
+        {
+          "position": 10,
+          "slot": "S09",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 3,
+          "patch": "7d3eb0cddceafeb1566925f7dc01c6fc67e20f80"
+        },
+        {
+          "position": 11,
+          "slot": "S10",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 2,
+          "patch": "9d0ef974afa69714dfefda5ddaa84a4e786bec9b"
+        },
+        {
+          "position": 16,
+          "slot": "selection",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 1,
+          "patch": "06c30e29fac6c248b02d5203827337675c08d13a"
+        },
+        {
+          "position": 17,
+          "slot": "public frame-schema",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 13,
+          "patch": "bcc27c2ebdf99a41d29af6fa8607224fe2371d66"
+        },
+        {
+          "position": 18,
+          "slot": "protocol",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 44,
+          "patch": "9b5859a052b172f38655ce3324ac066648477696"
+        },
+        {
+          "position": 19,
+          "slot": "publisher",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 11,
+          "patch": "940532f340e67f60b280ad329eb2dbd7374967e0"
+        },
+        {
+          "position": 23,
+          "slot": "runner",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 19,
+          "patch": "d78a652ae186cbcc1ab004de41141af4d2a335aa"
+        },
+        {
+          "position": 24,
+          "slot": "workflow",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 9,
+          "patch": "609d24c118a9d95f2683e83bc7b897438d5792c0"
+        },
+        {
+          "position": 25,
+          "slot": "native-release",
+          "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+          "operations": 1,
+          "patch": "442c28509684d6f25df522dbe9630ded1736a301"
+        }
+      ],
+      "exactBodyCount": 15,
+      "relocatedExactSiblings": 3,
+      "reversibleLiteralDirectionsMatched": 22,
+      "selectionCanonicalSha256": "fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd",
+      "selectionWireSha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b",
+      "nativeProof": {
+        "toolingOnlyReview": "08b75777bb39efaad0a439082cd430044c0b07d6",
+        "full20Occurrence": null
+      },
+      "carrierStaticReview": "PENDING",
+      "routePremiseAcceptance": "PENDING",
+      "actualContextMustComeFromFreshIndependentAPI": true,
+      "sourceRound": 5,
+      "ownRound": 5,
+      "stageBFixRound": 5,
+      "SourceQualified": false,
+      "Task1Pass": false,
+      "nonclaims": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  },
+  "reversibleIndex": "dc19f6b25bd9c533482171b8bec588b5b70c24f4",
+  "RootLiteralChecks": [
+    {
+      "position": 0,
+      "slot": "index",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 1,
+      "patch": "d96a417476d908ac04c3ce9024e5cf5dc461b4ba"
+    },
+    {
+      "position": 1,
+      "slot": "S00",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 2,
+      "slot": "S01",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 3,
+      "slot": "S02",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 4,
+      "slot": "S03",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 5,
+      "slot": "S04",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 6,
+      "slot": "S05",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 7,
+      "slot": "S06",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 8,
+      "slot": "S07",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 9,
+      "slot": "S08",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 10,
+      "patch": "8b2dd694daabe2a010daece314358b912b066c37"
+    },
+    {
+      "position": 10,
+      "slot": "S09",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 3,
+      "patch": "7d3eb0cddceafeb1566925f7dc01c6fc67e20f80"
+    },
+    {
+      "position": 11,
+      "slot": "S10",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 2,
+      "patch": "9d0ef974afa69714dfefda5ddaa84a4e786bec9b"
+    },
+    {
+      "position": 12,
+      "slot": "S11",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 13,
+      "slot": "S12",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 14,
+      "slot": "custody guard",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 15,
+      "slot": "custody preflight",
+      "kind": "IDENTICAL",
+      "relocated": false
+    },
+    {
+      "position": 16,
+      "slot": "selection",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 1,
+      "patch": "06c30e29fac6c248b02d5203827337675c08d13a"
+    },
+    {
+      "position": 17,
+      "slot": "public frame-schema",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 13,
+      "patch": "bcc27c2ebdf99a41d29af6fa8607224fe2371d66"
+    },
+    {
+      "position": 18,
+      "slot": "protocol",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 44,
+      "patch": "9b5859a052b172f38655ce3324ac066648477696"
+    },
+    {
+      "position": 19,
+      "slot": "publisher",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 11,
+      "patch": "940532f340e67f60b280ad329eb2dbd7374967e0"
+    },
+    {
+      "position": 20,
+      "slot": "read-progress",
+      "kind": "IDENTICAL",
+      "relocated": true
+    },
+    {
+      "position": 21,
+      "slot": "D07",
+      "kind": "IDENTICAL",
+      "relocated": true
+    },
+    {
+      "position": 22,
+      "slot": "recorder",
+      "kind": "IDENTICAL",
+      "relocated": true
+    },
+    {
+      "position": 23,
+      "slot": "runner",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 19,
+      "patch": "d78a652ae186cbcc1ab004de41141af4d2a335aa"
+    },
+    {
+      "position": 24,
+      "slot": "workflow",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 9,
+      "patch": "609d24c118a9d95f2683e83bc7b897438d5792c0"
+    },
+    {
+      "position": 25,
+      "slot": "native-release",
+      "kind": "LITERAL_BOTH_DIRECTIONS_MATCHED",
+      "operations": 1,
+      "patch": "442c28509684d6f25df522dbe9630ded1736a301"
+    }
+  ],
+  "execution": "NOT_RUN",
+  "activationReleased": false
+}
