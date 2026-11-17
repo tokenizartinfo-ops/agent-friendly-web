@@ -1,0 +1,119 @@
+{
+  "schema": "AFW-DIAG3-SOURCE149-ROOT-CLOSE-READBACK/1",
+  "timestampUTC": "2026-11-17 04:34:52 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "primary": "c421639e3b9efa775aa5b022ea2ca8a65f3679e7",
+  "proof": "329f48b8973c137d3c45d20ee50d565bc3c69caa",
+  "closedHead": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+  "closedTree": "b0bd233c11b885fec87c6f553263a2813897a3aa",
+  "parent": "e58e4ea587951d6f6d0b4c3676466c266a0eae11",
+  "receipt": "79419eef01e537b737733de9f858d352431e9ff5",
+  "ref": {
+    "ref": "refs/heads/lab/afw-c2-source-20261117-finite-get-diag3-tools",
+    "node_id": "REF_kwDOUFJoltoAPHJlZnMvaGVhZHMvbGFiL2Fmdy1jMi1zb3VyY2UtMjAyNjExMTctZmluaXRlLWdldC1kaWFnMy10b29scw",
+    "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/refs/heads/lab/afw-c2-source-20261117-finite-get-diag3-tools",
+    "object": {
+      "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+      "type": "commit",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/cae10ee68e5942df89fbd1906fd61b443e3eaac0"
+    }
+  },
+  "commit": {
+    "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+    "node_id": "C_kwDOUFJoltoAKGNhZTEwZWU2OGU1OTQyZGY4OWZiZDE5MDZmZDYxYjQ0M2UzZWFhYzA",
+    "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+    "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+    "author": {
+      "name": "tokenizart",
+      "email": "tokenizart.info@gmail.com",
+      "date": "2026-11-17T04:33:58Z"
+    },
+    "committer": {
+      "name": "tokenizart",
+      "email": "tokenizart.info@gmail.com",
+      "date": "2026-11-17T04:33:58Z"
+    },
+    "tree": {
+      "sha": "b0bd233c11b885fec87c6f553263a2813897a3aa",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/trees/b0bd233c11b885fec87c6f553263a2813897a3aa"
+    },
+    "message": "AFW-C2-FINITE-GET-DIAG3-TOOLS-CLOSED-20261117",
+    "parents": [
+      {
+        "sha": "e58e4ea587951d6f6d0b4c3676466c266a0eae11",
+        "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/e58e4ea587951d6f6d0b4c3676466c266a0eae11",
+        "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/e58e4ea587951d6f6d0b4c3676466c266a0eae11"
+      }
+    ],
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "leaves": 3240,
+  "allOriginal3203Preserved": true,
+  "allRetained35Preserved": true,
+  "onlyWorkflowDeletedAndTwoEvidenceAdditions": true,
+  "mainAndHistoryLeases": [
+    {
+      "name": "main",
+      "branch": "main",
+      "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+    },
+    {
+      "name": "source",
+      "branch": "feat/finite-native-cleanup-20261101",
+      "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+    },
+    {
+      "name": "own42",
+      "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+      "sha": "c511b6f061fb4eb0c5594779d3123e824f34f243"
+    },
+    {
+      "name": "source35",
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+      "sha": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+    },
+    {
+      "name": "diag1",
+      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "sha": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
+    },
+    {
+      "name": "host",
+      "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+      "sha": "1f62e087f0d9000f9c08519cd162db1104827af8"
+    },
+    {
+      "name": "toy",
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+      "sha": "5f5295265217b31a19fbed2379f697c5a6a83080"
+    },
+    {
+      "name": "diag2",
+      "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+      "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01"
+    }
+  ],
+  "closedHeadRuns": 0,
+  "NativeToolingPassed": true,
+  "nativeGroups": 9,
+  "innerChecks": 149,
+  "freshReviewPending": true,
+  "SourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
