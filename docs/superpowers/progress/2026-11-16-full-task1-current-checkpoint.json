@@ -1,10 +1,10 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/31",
-  "timestampUTC": "2026-11-17 12:36:12 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/32",
+  "timestampUTC": "2026-11-17 12:46:02 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "5a5b9910c16863bbcb81a58e24777c05712bb538",
-  "phase": "DROP_WINNER_SOURCE5_FIXTURES_FIRST_PREPARATION",
+  "previousCheckpoint": "0834800150a77c12e3798c31f120db26c8042f2d",
+  "phase": "DROP_WINNER_FIXTURE_RED_NATIVE_GATE_READY",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -134,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Receive sealed fixture/RED proposal, inspect and stage exact fresh one-use model RED workflow. Observe named feature-absence assertion, close/readback; then resume SAME source5 author for minimal actual diagnostic helpers and compiler/native tooling proposal. No feature code before observed RED; no old business replay.",
+  "next": "Activate exact one-use fixture RED gate once; observe and close before source feature implementation. ModelRED only. All past business and tooling refs stayclosed.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -170,7 +170,23 @@
     "fixtureCount": 59,
     "codeReleased": false,
     "nativeReleased": false,
-    "oldTrialsClosed": true
+    "oldTrialsClosed": true,
+    "fixtureProposal": "f0c9080b4b928a0ce0d01213d7c205281e0d06e0",
+    "fixtureReview": "bc67e84d624e60501b83a0572126f55c84158763",
+    "fixturePrepared": {
+      "branch": "lab/afw-c2-source-20261117-drop-winner-fixtures",
+      "head": "d561b138ed6906cdf90c69bdb18afaca1e2188b2",
+      "tree": "a2aa1337e9cc05a4aab820f4c879a50624420579",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "original3203Preserved": true,
+      "mounts": 5,
+      "leaves": 3208,
+      "fullTreeVerified": true,
+      "refCreated": false,
+      "activationAttempted": false,
+      "unattached": true
+    }
   },
   "staticContracts": {
     "scopeDiagnosis": "e5570431c54ef1556692fcdf1349c503ef983ecb",

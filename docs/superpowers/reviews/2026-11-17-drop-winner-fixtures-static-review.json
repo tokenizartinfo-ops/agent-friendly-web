@@ -1,0 +1,124 @@
+{
+  "schema": "AFW.C2.DROP_WINNER_FIXTURE_STATIC_REVIEW/1",
+  "reviewer": "independent drop_fixture_review",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "private Git DATA",
+    "ORIGIN": "github.com",
+    "RESOURCE_TYPE": "detached JSON review",
+    "RESOURCE_ID": "C2 first DROP stage A fixture package",
+    "ALLOWED_ACTION": "immutable reads; create_blob and full readback only",
+    "ROLLBACK": "discard detached review; no refs changed"
+  },
+  "inputs": {
+    "brief": "9ece9fd8e23bf2ad214f32ec0f1a12bbef371f95",
+    "report": "39f4aab3b868539336a548dfc2582dedf00d1cbe",
+    "diffPackage": "0409080db65caeab535cd43401ed49d322b40572",
+    "proposal": "f0c9080b4b928a0ce0d01213d7c205281e0d06e0",
+    "plan": "7a27a72a1c5e01dd4db03b71e6fc04478a85797c",
+    "design": "1a5ccbf3aa73495e3c4f4ebfe39e5693d78d91cb",
+    "acceptedDesignReview": "56e08ba3af37540421e1897d79b416c6ba4c12dc",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+  },
+  "SPEC": "PASS",
+  "QUALITY": "PASS",
+  "findings": [],
+  "stage": "FIXTURE_STAGE_STATIC_ONLY",
+  "mounts": [
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/scenarios.json",
+      "mode": "100644",
+      "bytes": 15741,
+      "sha256": "6f51b5c2cdf68fb98a15022de9b79a95dcc3c8081bb4e641626cda685322f665",
+      "blob": "0625f0864da7c70f6a9b6abf0fb989c36fae22f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/fixture-seal.json",
+      "mode": "100644",
+      "bytes": 3004,
+      "sha256": "2c0227e4411358e03fcb439abf43391f4e2bcfe54669fa21d770efb88b28694e",
+      "blob": "b00113ce95aca4c1ab95dfa7cfdf83d298e839d1"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/check-scenarios.mjs",
+      "mode": "100644",
+      "bytes": 2103,
+      "sha256": "bc4c9cebcfb098a60e5f6906f207343ece44a929dca9365aff016f844ed64da6",
+      "blob": "7ed4423a7ee9adba3ea6455111d88dd7d147165f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/run-red.mjs",
+      "mode": "100644",
+      "bytes": 7144,
+      "sha256": "9ff895d0da7b0d37b36d4ab4a1b31b6ec11b08a92bc9c67dce6e2ef024099a8c",
+      "blob": "05a71f99c350edc4bf63f054c7ca8491d59ab37f"
+    },
+    {
+      "path": ".github/workflows/afw-c2-drop-winner-fixtures.yml",
+      "mode": "100644",
+      "bytes": 1596,
+      "sha256": "ec8cadcba633e61127aebd7936b888279f6cdcba908be6e478cb36e5a72fb3a9",
+      "blob": "f81d64340d5a5b91622d122180f9f6bff5400586"
+    }
+  ],
+  "checks": [
+    {
+      "result": "PASS",
+      "evidence": "All five complete fetched blobs equal full diff additions; independent UTF-8 bytes, SHA256 and Git blob SHA1 match every proposal descriptor. No production/Core file patch in package."
+    },
+    {
+      "result": "PASS",
+      "evidence": "scenarios.json has 59 unique IDs in sealed canonical order; positive literal q1/o1 expected join matches SHA256 domain+NUL+fixed synthetic UUID. Literal fixture and seal are fixed independently of future feature code."
+    },
+    {
+      "result": "PASS",
+      "evidence": "check-scenarios.mjs:10-37 passes cloned input only to exercise; reads actual receiving Response headers and public observation; first row deepStrictEqual has named missing-observability assertion. Future shared-helper requirement remains explicit."
+    },
+    {
+      "result": "PASS",
+      "evidence": "run-red.mjs:41-77 exercises real Request/Response/Promise without observer/marker/classifier. It verifies QA403/M503 body, ordinary header, original caught error identity and finally once before expected assertion."
+    },
+    {
+      "result": "PASS",
+      "evidence": "run-red.mjs:15-35 gates exact repository/event/branch/job/attempt1/Node22.23.4, HEAD=GITHUB_SHA, one exact BASE parent, message, five additions and sealed input descriptors. Root must independently bind all five final tree entries/modes to this reviewed package and retain all3203 BASE leaves."
+    },
+    {
+      "result": "PASS",
+      "evidence": "run-red.mjs:79-112 admits only named AssertionError ERR_ASSERTION/deepStrictEqual with exact first oracle expected and null/null/UNKNOWN actual; any other fault exits2 without expected-red output. Receipt states executed1/notExecuted58 and all nonclaims false."
+    },
+    {
+      "result": "PASS",
+      "evidence": "workflow:1-41 limits push to named disposable branch, exact message/head, attempt1, contents:read, Ubuntu24.04,3min, three SHA-pinned actions, exact Node22.23.4, no npm/install, credentials not persisted. Failed RED step uploads sole fixed receipt only on expected-red output; no continue-on-error."
+    },
+    {
+      "result": "PASS",
+      "evidence": "Receipt fixed schema statically measured at1059 UTF-8 bytes including LF with maximal20-digit runId and40-char head, below2048 cap. No source values, private joins, markers, frames, credentials or environment dump in receipt/logs. Code uses only Git admission subprocess and fixed output writes; no network call apart from nominated workflow actions."
+    }
+  ],
+  "executed": [
+    "Static text review of complete five-file package",
+    "JSON parsing, literal/ID comparison, builtin cryptographic hashes and receipt byte measurement only"
+  ],
+  "notExecuted": [
+    "No Source import/eval/AST/syntax/compile/test/dependency/clone or feature code execution",
+    "No GitHub Actions activation, ref/tree/commit mutation, Root documentation edit or runtime mutation"
+  ],
+  "pending": [
+    "Root independent exact tree/head/base preservation check before nominated occurrence",
+    "Root single observed GHA RED, upload-success and exact sole artifact/member/receipt readback; job failure is expected, arbitrary job failure is not RED",
+    "Separate release before source implementation, actual shared-helper matrix, native compiler/transport/privacy and compatibility proof"
+  ],
+  "decision": "Supports Root fixture-stage static gate only. No automatic authorization, feature acceptance, source business root cause, native Source qualification or PC-off readiness.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
