@@ -1,0 +1,178 @@
+{
+  "schema": "AFW-DIAG3-OWN73-ROOT-ONE-USE-NATIVE-GATE/1",
+  "timestampUTC": "2026-11-17 04:42:49 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHub-hosted Ubuntu24.04/Node22.23.4 OWN-only standalone synthetic guard tests",
+  "resourceType": "New one-use receiver tooling ref/workflow",
+  "resourceId": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+  "allowedAction": "Create this absent ref exactly once at the verified prepared head; observe one attempt1 job; preserve actual proof/fault then close its only workflow by exact lease. No rerun/reopen, Source execution or runtime actions.",
+  "authority": {
+    "ownerBroadContinuation": true,
+    "round4Release": "ce4e65195fd0f02adf6de5b64748abaaf3470fbd",
+    "codeStaticReview": "724f1f65260e0d16b2015a097e3b626a3b077bab",
+    "authorIndex": "520860e0f90337f764a34ea55f77eb4851000c48",
+    "authorSeal": "413498f2da5149261036716ca126f6e7fc8cbda2",
+    "fixtureIndex": "7ddd5716920ef46ef93afbcab2e68bf62ee1e5e7",
+    "fixtureSeal": "daa8f98024c58f650c8ffffbfb835abe42e4a8f5"
+  },
+  "head": "928d9aa69b5186eacb7f043363bbdd12f2713bb3",
+  "tree": "59c261f3cf338579be961b3967ea7990afbb0d6b",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "originalLeaves": 3203,
+  "additions": 95,
+  "totalLeaves": 3298,
+  "allOriginalLeavesPreserved": true,
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+    "message": "AFW-C2-OWN-FINITE-GET-DIAG3-TOOLS-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-finite-get-diag3-tools.yml",
+    "job": "c2-own-finite-get-diag3-tools",
+    "prefix": "docs/superpowers/root-own/c2-t1-finite-get-diag3/",
+    "runner": "docs/superpowers/root-own/c2-t1-finite-get-diag3/tools-own-finite-get.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-finite-get-diag3/tools-own-finite-get.mjs",
+    "steps": [
+      "Read the exact one-use receiver head",
+      "Use the fixed Node runtime",
+      "Check finite GET admission controls",
+      "Preserve bounded receiver tooling evidence"
+    ],
+    "artifact": {
+      "name": "afw-c2-own-finite-get-diag3-tools",
+      "path": "output/c2-own-finite-get-diag3-tools.json",
+      "fileName": "c2-own-finite-get-diag3-tools.json",
+      "retentionDays": 7
+    },
+    "node": "v22.23.4",
+    "platform": "linux",
+    "jobMinutes": 3,
+    "caseTimeoutMs": 10000,
+    "attempt": 1
+  },
+  "nativeToolingIndex": "b33a7aba421b9ab3935b0bff2e072055d8f192ff",
+  "RootNative95Measurement": {
+    "files": 95,
+    "bytes": 5148250,
+    "bodyEdgesSha256": "1215367ceff7b6a5a0b61185163025d74640fe0de508ae9cf8597eba8c660662",
+    "fullHash": true,
+    "SourceExecuted": false
+  },
+  "actualSourceExpectedData": {
+    "RootMeasurement": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+    "bodyEdgesSHA256": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+    "MODELSeparate": true,
+    "ACTUALDefaultFallback": false
+  },
+  "census": {
+    "nativeGroups": 8,
+    "evaluations": 73,
+    "legacy44": 44,
+    "D3": 29,
+    "expectedAdmit": 32,
+    "expectedReject": 41,
+    "canonicalManifestOrderDistinctFromPhysicalGroupOrder": true
+  },
+  "RootBeforeNative": {
+    "all95FullHashBytes": 5148250,
+    "minimalGuardInsertion659B": true,
+    "old44AndPrior26Exact": true,
+    "RootOwn73FinalRAM": {
+      "evaluations": 73,
+      "admit": 32,
+      "reject": 41,
+      "modelResultHash": "98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb",
+      "ACTUALRejectsAll29Models": 29,
+      "finalActualBindings": true,
+      "SourceExecuted": false
+    },
+    "reversibles": {
+      "changes": 11,
+      "bidirectional": 8,
+      "newOnly": 3,
+      "SourceExecuted": false
+    },
+    "fullTreeCommitVerified": true,
+    "branchAbsent": true,
+    "headPriorRuns": 0,
+    "protectedRefs": [
+      {
+        "name": "main",
+        "branch": "main",
+        "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+      },
+      {
+        "name": "source",
+        "branch": "feat/finite-native-cleanup-20261101",
+        "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+      },
+      {
+        "name": "own42",
+        "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+        "sha": "c511b6f061fb4eb0c5594779d3123e824f34f243"
+      },
+      {
+        "name": "source35",
+        "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+        "sha": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+      },
+      {
+        "name": "diag1",
+        "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+        "sha": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
+      },
+      {
+        "name": "host",
+        "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+        "sha": "1f62e087f0d9000f9c08519cd162db1104827af8"
+      },
+      {
+        "name": "toy",
+        "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+        "sha": "5f5295265217b31a19fbed2379f697c5a6a83080"
+      },
+      {
+        "name": "diag2",
+        "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+        "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01"
+      },
+      {
+        "name": "source149",
+        "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+        "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0"
+      }
+    ],
+    "triggerAuditOriginal62Unchanged": "824b2fa8237572e5175be624d9f19cf95145414a"
+  },
+  "caps": {
+    "jobMinutes": 3,
+    "perTestMs": 10000,
+    "contentsPermission": "read",
+    "attempt": 1,
+    "noNpm": true,
+    "artifactRetainedDays": 7,
+    "proofWithLFMax": 24576
+  },
+  "outputBoundary": "Native fixture controls are MODELED only, though ACTUAL and MODEL share independently pinned guard code with closed entrypoints. This occurrence is not positive ACTUAL producer qualification; future real Source diagnostic admission is separate. Source executables are not mounted/imported; no SDK/provider calls.",
+  "rollback": "After terminal capture once, preserve Rootprimary/proof or honestfault. CAS attempted head, delete only nominated workflow and add primary/closure receipt. Verify original3203+94retained+2evidence=3299, protected refs untouched and zero close-head runs. Old histories stay closed.",
+  "holds": {
+    "SourceBusinessReleased": false,
+    "normalFullTask1Held": true,
+    "CloudflareRuntime": false,
+    "OAuthOTPTokenMailMax": false,
+    "operationalReadiness": false,
+    "PCoff": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
