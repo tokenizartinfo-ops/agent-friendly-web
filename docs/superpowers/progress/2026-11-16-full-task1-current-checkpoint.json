@@ -1,19 +1,12 @@
 {
-  "schema": 39,
-  "timestampUTC": "2026-11-17 13:45:36 UTC",
+  "schema": 40,
+  "timestampUTC": "2026-11-17 13:50:12 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "327114a66ea00772c17141c08b28502e025678da",
-  "phase": "DROP_WINNER_CONTROLLER_LAUNCH_REPAIR_NATIVE_ACTIVE",
-  "activeNativeRuns": [
-    {
-      "id": 44095907983,
-      "attempt": 1,
-      "head": "b7a2cbb6abb460089b38fa31fa1d787dd8a68902",
-      "status": "in_progress"
-    }
-  ],
-  "allCurrentNativeOccurrencesClosed": false,
+  "previousCheckpoint": "2eecdfb6c1afca6b802a5e5330397aa1ab44ce78",
+  "phase": "DROP_WINNER_SOURCE5_TOOLING_PASS_CLOSED_INDEPENDENT_TRANSPORT_REVIEW_ACTIVE",
+  "activeNativeRuns": [],
+  "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -141,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Observe this launch-only new occurrence. Node --check must pass before npm/controller; exact one native tooling receipt required. Preserve once and close nominated workflow, independent actual evidence review. Source5 semantics/fixtures remain pinned and unqualified. No business/newSource code.",
+  "next": "Independent saved-evidence + exact QA/M route transport ruling. Tooling pass is not businessSource/PCoff qualification. After accepted gate bind measured native-release receipt + final business runner/index/bodyEdges, then release OWN5 against exact Root tuple, fixtures/model/native tooling. Only then one full-order20 business occurrence. All current refs closed.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -344,11 +337,27 @@
       "leaves": 3237,
       "fullTreeVerified": true,
       "gate": "2e10790581652fb6b0f3940c98b476a5d0aa8d8d",
-      "activationUTC": "2026-11-17 13:45:19 UTC"
+      "activationUTC": "2026-11-17 13:45:19 UTC",
+      "run": 44095907983,
+      "closed": true,
+      "closedHead": "442174a54aa7b8eaad71fb978ac2022df961d26b",
+      "closedTree": "608790a87aba365dfc4c62678a8911e488df7561"
     },
     "rootGate": "2e10790581652fb6b0f3940c98b476a5d0aa8d8d",
     "staticReview": "38e2d38b724f2e860c68920617bd9baf4b454560",
-    "nativeOutcome": "PENDING"
+    "nativeOutcome": "TOOLING_ONLY",
+    "primary": "7ae7b6a8cd8c2fb71e6ef59bab4298fce0bed67c",
+    "proof": "33d612dc0c5614000f8b8f89ca953b9e5f487b9d",
+    "validation": "a60e560734a2fe4e1be5a63e906a79a53fc4653f",
+    "closure": "fc6017cd0b1cc3659771551a6c56fd3025a5739f",
+    "controls": {
+      "model": 63,
+      "differential": 14,
+      "native": 16,
+      "compiler": "PASS",
+      "sites": 6
+    },
+    "independentActualReview": "/root/drop_winner_native_transport_review RUNNING"
   },
   "own5DataPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68"
 }
