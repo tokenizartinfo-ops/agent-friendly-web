@@ -1,10 +1,10 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/35",
-  "timestampUTC": "2026-11-17 13:05:40 UTC",
+  "schema": 36,
+  "timestampUTC": "2026-11-17 13:30:22 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "4a4171750453f53468175d595c646e96c900f52f",
-  "phase": "DROP_WINNER_SOURCE5_IMPLEMENTATION_ACTIVE_FIXTURES63_SEALED",
+  "previousCheckpoint": "580ab934133a930613bc7fbfd1b3be75206f77d2",
+  "phase": "DROP_WINNER_SOURCE5_CODE_COMPLETE_STATIC_REVIEW_ACTIVE",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -134,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Source5 author implementing reviewed two-carrier diagnostic/compiler/native tooling package as detached blobs. Six specific site labels (fouroriginal +S01:69/S01:95); no genericorigin expansion. Original59+4fixturedata sealed first; actual58+4notyetexecuted. No localSource execution, native/business activation pendingindependentreview.",
+  "next": "Independent STATIC SPEC then QUALITY; only after both pass Root may admit one native tooling occurrence. Source5 code is detached and unexecuted. No business run, code correction or operational readiness claimed. OWN5 refined data plan can proceed; code release waits Source native qualification and Root actual measured tuple.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -277,5 +277,16 @@
       "codeReleased": false,
       "nativeReleased": false
     }
-  ]
+  ],
+  "source5": {
+    "nativeIndex": "a1dc2376bd54154015f76a70ce732b5325aa581a",
+    "businessIndex": "fae315e9ceae442a658b361ba31f5adfa6d95d4d",
+    "protocol": "6349fd2706b084e3c56309d6aac00a469310e73a",
+    "authorReport": "892086045c26d2be05e4dcb62c200e7570191b69",
+    "rootMeasurement": "c9d843999bf4cbb52a6a794473ba111a629ccfb3",
+    "staticSPEC": "RUNNING",
+    "staticQUALITY": "PENDING",
+    "nativeReleased": false,
+    "businessReleased": false
+  }
 }
