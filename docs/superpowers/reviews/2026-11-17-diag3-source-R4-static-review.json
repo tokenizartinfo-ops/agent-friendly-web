@@ -1,0 +1,340 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-SOURCE-R4-STATIC-GATE-REVIEW/1",
+  "timestampUTC": "2026-11-17 04:22:42 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "disposition": "PASS_STATIC_SOURCE4_FOR_ROOT_TOOLING_GATE",
+  "verdict": {
+    "SPEC": "PASS_STATIC_BOUNDED",
+    "QUALITY": "PASS_STATIC_BOUNDED",
+    "openFindings": [],
+    "nativeAccepted": false,
+    "SourceBusinessReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "scope": "Source R4 final f56c8e3c/business25+tooling36, rulingce4 yfixtures149, todo como texto/JSON inerte. Comparación conR3 ytri-stateRoot, controlesnuevos ymanifiestos. Sin Source/OWNmoduleeval/import/AST/syntax/compile/tests, FS/deps/builds, refs/runs/Actions/log/artifact/provider/CF, parches o nuevosobservadores. Crypto yshape sólo DATA enRAM. Únicaescritura: constanciaGitDATA+FULLreadback. OWNfinal se revisa aparte; noNative liberado por esteinforme.",
+  "reused": [
+    {
+      "role": "SourceR3code+tooling static",
+      "blob": "19486d4e2f957efb3acb82b3ec8406f946c642b6",
+      "bytes": 17208,
+      "sha256": "bf27e8107b4cfe399e2704c1a4e0b682014266601090b18e14058632c31da637"
+    },
+    {
+      "role": "S08E3 static",
+      "blob": "5584f68de9521ed0d54e123f85c3fc055cb7b843"
+    },
+    {
+      "role": "Source146/145literalDATA review",
+      "blob": "0a61ac955e39fb1572532cca811ef11876490f75"
+    },
+    {
+      "role": "PriorSource35/C1",
+      "blob": "82294234ee0345d63c85d7518ae96d3857e6c649"
+    }
+  ],
+  "fullReadHashes": [
+    {
+      "name": "ruling",
+      "bytes": 6083,
+      "sha256": "38b3e3f51235ed3ac8d1d5451e9b27e09884e0bb9251ceda9fd46e0dad07f32c",
+      "gitBlob": "ce4e65195fd0f02adf6de5b64748abaaf3470fbd"
+    },
+    {
+      "name": "sourceIndex",
+      "bytes": 18706,
+      "sha256": "74855a01a9ac8cd450c2ac5cafd2ec26fe23b6bf458563dea22a6337b051d9ff",
+      "gitBlob": "672455978db4210eedef61502682e03404e0f462"
+    },
+    {
+      "name": "rootMeasure",
+      "bytes": 9111,
+      "sha256": "d6409fa2217baeef338d4bfe911346713b31fb688ce34f856e6ece1310d8d294",
+      "gitBlob": "bd26df072e8cf4f32fe1e266f7c2d639223d317e"
+    },
+    {
+      "name": "protocol",
+      "bytes": 57085,
+      "sha256": "f9c3c5be4c01b49b42dfc7c76ab8809935c82f5a9c2d107521003d56d63eeaf1",
+      "gitBlob": "290aad4bd227d604510d3adde69ec30759386160"
+    },
+    {
+      "name": "adapter",
+      "bytes": 32312,
+      "sha256": "f484bbfaa879b7b0121a1ed2f0038ae358457ab636ca7e51c3c80678528448d6",
+      "gitBlob": "0465caea70e7a80aeb631fd73f267bb00dfc0f5d"
+    },
+    {
+      "name": "runner",
+      "bytes": 16767,
+      "sha256": "4465b9a4a88c818b1420076617fc7677092f7cd5ea1145fae85df9757229ba57",
+      "gitBlob": "b88f9ecb3317e0e82f11eaa540d4a03846b70733"
+    },
+    {
+      "name": "fixture149",
+      "bytes": 13004,
+      "sha256": "3fc96c856f31cc6ed801968deb84af192ebf10f0a901b239c419aa47d63c4d4a",
+      "gitBlob": "dfc37b27bad9189eb368f711727fc83f672d71af"
+    },
+    {
+      "name": "oracle149",
+      "bytes": 52609,
+      "sha256": "1a5ffabd0018084a75b3b4b35935f3095c13661c1a49585e1b4d93df21ed686d",
+      "gitBlob": "cef66140db83421b2cbd371a6e1b5e0a296a10ff"
+    },
+    {
+      "name": "packet",
+      "bytes": 22997,
+      "sha256": "e0dfa24a2f59fda875caeb8c3dac466847951deb4cbfd842faeaf8718ba53853",
+      "gitBlob": "f56c8e3cecd841fe97b40e0d10000f4d8058ed2b"
+    },
+    {
+      "name": "toolsIndex",
+      "bytes": 20085,
+      "sha256": "de6d410dc095cfd1337aa7e3a79b4501d8b357724a69894024121cb2d726163e",
+      "gitBlob": "ecf5d3c3178704926eb37d21d14b1fd24b3da04b"
+    },
+    {
+      "name": "reversibles",
+      "bytes": 8721,
+      "sha256": "3a37fcdefd622731b581356276dd7af41c25abb2e18a851ba322df7050262f6e",
+      "gitBlob": "9f6df627575fc2bb5ff2cf9a9cd5bbb0d74ec56a"
+    },
+    {
+      "name": "controls",
+      "bytes": 12271,
+      "sha256": "f4385d4c10626dcdfe3cf092bd4309d40bb85d0cbc487014ddc185b2d28535c7",
+      "gitBlob": "4b0474dbd5c06d0ed199ccd18c66ee0ffd40cbfc"
+    },
+    {
+      "name": "toolsRunner",
+      "bytes": 20541,
+      "sha256": "72627325419192cc12209c804c1a301d5e53919b0ec1765aadcd46b66a335bb1",
+      "gitBlob": "4d27c96440f354a4f3c2ea85eb4260ebe2ec7b8a"
+    },
+    {
+      "name": "toolsSchema",
+      "bytes": 40291,
+      "sha256": "159cdf25f438334279c225442c8a379c4f4a708926c226b919463066c388d396",
+      "gitBlob": "296cc32a8ccff56d6fe01d17a15959a73aef864b"
+    }
+  ],
+  "sourceChecks": {
+    "collectorAndC1Exact": true,
+    "C1RegionExact": true,
+    "SourceBodyEdgesExact": true,
+    "changedSourceSlots": [
+      18,
+      19,
+      23
+    ],
+    "old146OracleExact": true,
+    "groupCounts": [
+      6,
+      24,
+      9,
+      4,
+      20,
+      6,
+      12,
+      35,
+      33
+    ],
+    "oldGraphExact": true,
+    "sameS08": true,
+    "sameWorkflow": true
+  },
+  "bindingAndProofData": {
+    "newOracleHashMismatches": [],
+    "toolEdgesBytes": 8630,
+    "toolEdgesSha256": "fe64691bb8e3c6a0c6f95455196d769b506f57315c665f07bde7ee0a3a7577eb",
+    "sourceEdgesSha256": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+    "proofLFBytes": 20756,
+    "proofSchemaErrors": []
+  },
+  "changes": {
+    "businessIndex": "672455978db4210eedef61502682e03404e0f462",
+    "businessChangedSlots": [
+      18,
+      19,
+      23
+    ],
+    "collectorUnchanged": true,
+    "C1Unchanged": true,
+    "E3Source13Unchanged": true,
+    "adapter": "0465caea70e7a80aeb631fd73f267bb00dfc0f5d",
+    "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+    "newPredicateLines": [
+      470,
+      471,
+      472,
+      473,
+      474,
+      475,
+      476,
+      477,
+      478,
+      479,
+      480,
+      481
+    ],
+    "result": "Únicamente agrega coherencia de afirmaciones sobreprefijos Source después de guardsanteriores yantes delcap512. El resto deladapterR3, incluido collector/formatoC1/finiteGetscanner, esexacto. Runner sóloactualiza metadata protocol/adapter; schema/selection/S08/18:118/41:12/SDK/M/QA/security/calls/clocks/caps/tail/62a/662 quedan fijos. No se reauditan sus cuerpos heredados."
+  },
+  "predicateAssessment": {
+    "samples": "SOURCE_UNJOINED=INVALID. JOINED_SNAPSHOT/MARKER_STREAM_INVALID/MARKER_UNAVAILABLE/SNAPSHOT_INVALID=VALID. JOURNAL_UNRESOLVED/NATIVE_UNJOINED=NEUTRAL.",
+    "http": "KNOWN yUNKNOWN/ASSERTION_SCALARS_UNAVAILABLE=VALID15; UNKNOWN/SOURCE_ROW_UNAVAILABLE=INVALID15; restoNEUTRAL. EnSource el reason sinstateexplícito enL478-479 es equivalente dentrodel dominio ya validado por losguardsanteriores; esosreasons no son legales enNA.",
+    "merge": "Rechaza VALID/INVALID enprefijo15. VALID15 implicaVALID14 yrechazaINVALID14; INVALID15 no implicaINVALID14. No fuerza un valor/contenido/raw paraNEUTRAL. ConservacrossAglobalmarker,crossBHTTPKNOWN yAFTERvisible.",
+    "noOverreject": "Siguen compatibles neutral/neutral, missingmarker14 conjoined15, joined14 coninvalid15 yglobalmarker14 conblockerSource15. Cada combinación debe además pasar losguardsanteriores; no se prometeadmitir unmodeloabstracto físicamentecontradictorio.",
+    "symbolicReview": {
+      "totalAbstractValidatedReasonCombinations": 735,
+      "rejectedByNewPredicateOnly": 102,
+      "mismatches": [],
+      "positives": [
+        {
+          "id": "neutralAll",
+          "a": "JOURNAL_UNRESOLVED",
+          "b": "NATIVE_UNJOINED",
+          "h": {
+            "state": "UNKNOWN",
+            "reason": "TRUNCATED_NATIVE"
+          },
+          "newPredicateReject": false
+        },
+        {
+          "id": "missingMarker14Joined15",
+          "a": "MARKER_UNAVAILABLE",
+          "b": "JOINED_SNAPSHOT",
+          "h": {
+            "state": "KNOWN",
+            "reason": "TARGET_GET_ASSERTION"
+          },
+          "newPredicateReject": false
+        },
+        {
+          "id": "valid14Invalid15",
+          "a": "JOINED_SNAPSHOT",
+          "b": "SOURCE_UNJOINED",
+          "h": {
+            "state": "UNKNOWN",
+            "reason": "SOURCE_ROW_UNAVAILABLE"
+          },
+          "newPredicateReject": false
+        },
+        {
+          "id": "globalMarker14HigherSource15",
+          "a": "MARKER_STREAM_INVALID",
+          "b": "SOURCE_UNJOINED",
+          "h": {
+            "state": "UNKNOWN",
+            "reason": "SOURCE_ROW_UNAVAILABLE"
+          },
+          "newPredicateReject": false
+        }
+      ],
+      "scope": "Own original symbolic review of reason domains, not Source/OWNartifact execution, no new sealed tests/census"
+    },
+    "privacy": "Sonconsistencias deaseveraciones ya exportadas. Ninguna propiedadwire nueva, parseprivado/row/header, RPC/reloj/probe/countercall extra oautenticación. SHA no recuperaRAW, ningúnUNKNOWNseconvierteencero."
+  },
+  "fixtureAndControls": {
+    "seal": "dfc37b27bad9189eb368f711727fc83f672d71af",
+    "oracle": "cef66140db83421b2cbd371a6e1b5e0a296a10ff",
+    "nativeGroups": 9,
+    "inner": 149,
+    "groupCounts": [
+      6,
+      24,
+      9,
+      4,
+      20,
+      6,
+      12,
+      35,
+      33
+    ],
+    "old146Exact": true,
+    "c1Individual": 35,
+    "newCases": [
+      {
+        "id": "P_PREFIX15_ABSENT_YET_JOINED",
+        "expected": "PUBLICATION_INVALID",
+        "reason": "HTTPINVALID15 contraScopeVALID15."
+      },
+      {
+        "id": "P_PREFIX15_SCALARS_AFTER_UNJOINED",
+        "expected": "PUBLICATION_INVALID",
+        "reason": "HTTPVALID15 contraScopeINVALID15."
+      },
+      {
+        "id": "P_PREFIX15_VALID_AFTER_PREFIX14_INVALID",
+        "expected": "PUBLICATION_INVALID ypositiveM_MISSING_MONITOR",
+        "reason": "ScopeVALID15 contraMonitorINVALID14; también protegeMarkerUnavailable14 comoVALID14."
+      }
+    ],
+    "code": "4b0474dbd5c06d0ed199ccd18c66ee0ffd40cbfc",
+    "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/controls.mjs",
+    "newLines": [
+      37,
+      134,
+      135,
+      137,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      184,
+      189,
+      190,
+      191,
+      193,
+      194
+    ],
+    "actualMeasurement": "Cada negativo obtiene H_KNOWN_503 delcollector real, aplica únicamente reemplazofiniteGet sellado, llama successPacket real yregistra error/normalframes reales. Si se admite porerror, elhash/estado fallan contraoráculo. No expected-asactual.",
+    "positive": "Eltercero invoca assemble(M_MISSING_MONITOR) real ypasala mismaobservation a measuredPacket. La ramaunchangedObservation no sobreescribefiniteGet: publicaactually con successPacket, parseapayload ylo compara entero conobservation, devolviendo sufiniteGet ydatos deenvoltura/flags medidos. Elhashnormalizado incluyeamboscontrastes; no se cuenta como otroID.",
+    "hashes": "Los146oráculosprevios fueron recompuestos enR3; susobjetospermanecen exactos. Los3nuevosvalue/state/reason sonexactos alfixture149 y susSHAcanónicosfueronrecalculados sinSourceejecución. Counts y35C1 individuales no se colapsan."
+  },
+  "tooling": {
+    "index": "ecf5d3c3178704926eb37d21d14b1fd24b3da04b",
+    "mounts": 36,
+    "canonicalBytes": 8630,
+    "canonicalSha256": "fe64691bb8e3c6a0c6f95455196d769b506f57315c665f07bde7ee0a3a7577eb",
+    "runner": "4d27c96440f354a4f3c2ea85eb4260ebe2ec7b8a",
+    "delta": "Sólo inlineinputsmedidos,expectedGroup9de30→33ycopia deprefix.json. La lógicaadmission/diff36additions/Node22/attempt1/caller/lock/environment/identity/netns/setup/capture/N2/13beforeafter/cleanup/proof permaneceR3.",
+    "unchangedWF": "7aba56a4677aa04ffdea744f3a98f639322c0125",
+    "graph": "Mismo83closure declaradoR3:80repo+1descriptor+2package, mismos6direct/98potential yS08E3/S10cb95/target13. Se reutiliza verificaciónestáticaR3; no se presenta como nuevaauditoríasemántica de80módulos olista decargasefectivas.",
+    "safety": "Helpers deS08/actualcount,codec,collector,publisher reales enchildnonroot/netnsnuevo/env-i; noinitialEntryHarness/world/Miniflare/Worker/SDKbusiness oprovider. RawTAP/rowsnoexportados, sólonueveTAPfiltrados yID/hash/state/reason. Cleanupidentidadmedidaantesproof.",
+    "prospectiveProof": "20756BLFincluidoconrunId20digits ymetadata máximaensayada enDATA; schema40291noerrores enshapecomprobada. Esunmodelo decap, no proofactual. Límite toolproof24576inclLF; Sourceoutcome24576body+LF24577 permanece separado."
+  },
+  "reversibles": {
+    "manifest": "9f6df627575fc2bb5ff2cf9a9cd5bbb0d74ec56a",
+    "reviewer": "FULLread/hash delmanifiesto ybefore/after actualesnecesarios paraelcódigo. Delta directo deladapter comprobado como sóloinserción; no se reejecutaron siete splicesajenos.",
+    "RootSeparate": "Root comunicóFULL36mounts y65objetosfinales2064397B,7splicesbidireccionales+1adición reproducidos exactamente,83repo idénticoR3; original3203sincolisiones. Se conserva comoverificaciónRootseparada, no resultado delreviewer.",
+    "preparedContextByRoot": {
+      "head": "e58e4ea587951d6f6d0b4c3676466c266a0eae11",
+      "tree": "b43aee1d1b19a0d65f931367fdc6c2f796773743",
+      "leaves": 3239,
+      "composition": "3203+36",
+      "refAndRun": "Rootinformósinref/run; no se consultaron ni modificaron por estereviewer"
+    }
+  },
+  "holds": [
+    "Root decide elgate delúnico SourceToolingNative9/149. Este PASSestático no activa ref/runniaceptaunnative.",
+    "Luego se necesitaPrimary/API/rawtree/log/ZIP/proof/149resultados+freshresultreview+cierre; no se infierePASS nativo desde losoráculos.",
+    "OWNfinalSourceR4actualbindings/table/8groups73 se revisa aparte. NoDefaultSourceR3 niMODELfallback.",
+    "FullTask1 ySourcebusinesscapture siguenheld. SourceQualified/Task1Pass y7nonclaimsfalse."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
