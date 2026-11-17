@@ -1,0 +1,441 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-ACTUAL-SCOPE-DROP-DIAGNOSIS/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": "Diagnóstico estático solicitado por Root después del único DIAG3 cerrado.",
+  "state": "DIAGNOSIS_ONLY_NO_IMPLEMENTATION_OR_NATIVE_RELEASE",
+  "roundBudget": {
+    "Source": 4,
+    "OWN": 4,
+    "max": 5,
+    "nextRoundReserved": false
+  },
+  "occurrence": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "sourceIndexBlob": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+    "proposalIndexHash": "3094be0e4276e7ffc31a08864f588bbdab97da67f38becc771c51344a601955e",
+    "selectionHash": "7baee5f4a5c38c341a1a8f6a446ffbbc1e531ac8a0871de7cdc3cf1b422b178b",
+    "head": "17582e124c2728800788dcbe46c740f38aea861a",
+    "tree": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
+    "runId": "44021068647",
+    "runAttempt": 1,
+    "job": "c2-finite-get-diag3",
+    "node": "v22.23.4",
+    "jobId": "133830419181",
+    "primary": "3b38e269929a88eef353f00016726d1ca3270f01",
+    "outcome": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
+    "ownAdmission": "e7530d7f55172ee36035b655d120bcae7479f862",
+    "closure": "8a474ec9f52ad14abf9259b81eedefc61e97e018",
+    "closedHead": "08061db79cd0f38f25df8977e1ded8e17542e684",
+    "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb",
+    "closedHeadRuns": 0
+  },
+  "result": {
+    "diagnosticCollectionAccepted": true,
+    "nativeCompleted": 15,
+    "pass": 14,
+    "fail": 1,
+    "firstThrow": {
+      "sequence": 58,
+      "elapsedMs": 161713,
+      "id": "C2T1_SCOPE_MISSING",
+      "operation": "action",
+      "edge": "throw",
+      "error": {
+        "name": "AssertionError",
+        "code": "ERR_ASSERTION",
+        "site": {
+          "file": "S08",
+          "line": 113,
+          "column": 283
+        }
+      }
+    },
+    "case15StartMs": 101900,
+    "case15ElapsedMs": 59813,
+    "countEndMs": 161743,
+    "openCase": {
+      "id": "C2T1_FINITE",
+      "operation": "action"
+    },
+    "case16StartMs": 161743,
+    "firstFailure": {
+      "schema": "afw.c2-first-failure-post-diag2.v1",
+      "state": "NOT_APPLICABLE",
+      "reason": "EARLIEST_THROW_DIFFERENT",
+      "throwSequence": null,
+      "source": null,
+      "assertion": null
+    },
+    "finiteGet": {
+      "schema": "afw.c2-finite-get-diag3.v1",
+      "http": {
+        "state": "NOT_APPLICABLE",
+        "reason": "EARLIEST_THROW_DIFFERENT",
+        "throwSequence": null,
+        "actual": null,
+        "expected": null
+      },
+      "afterMonitor": {
+        "value": "0",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 56
+      },
+      "afterScopeMissing": {
+        "value": "1",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 60
+      }
+    },
+    "capture": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "timeout",
+      "stdout": {
+        "bytes": 9955,
+        "sha256": "07e757d0739ab9cd7030e7de9feecdf5e48bf9c910a8dc037e23f214af23efb4"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "custody": {
+      "launches": 2,
+      "processes": 2,
+      "cleanup": true,
+      "preAndPost13": true
+    },
+    "full20Complete": false
+  },
+  "conclusion": "La primera aserción fallida exige un intento de put del scope durante el POST negativo en modo drop. La llegada a esa aserción demuestra que el GET había pasado su comprobación de 200 y el POST su comprobación de respuesta distinta de 200. El valor numérico del POST y la cantidad concreta de puts no están en la proyección admitida.",
+  "siteAndSequence": [
+    {
+      "path": "D07 11–27, 51–54; S08 27–41, 110–116",
+      "finding": "El caso 15 usa main. noScope entra en el observador, espera choose, toma el snapshot restaurable y los contadores, verifica el texto de revocación y recorre drop antes de holder. D07 preserva la excepción original, recoge el conteo y luego la relanza."
+    },
+    {
+      "path": "S08 15–22,30,111–114",
+      "finding": "choose retorna sólo tras leer todo el cuerpo, comprobar HTTP 200 y encontrar handle, projectRef y cookie. Antes del fallo terminaron snapshot, count y la aserción del texto. El POST usa el formulario de ese GET. noFurther espera la cancelación del cuerpo, comprueba status distinto de 200 e igualdad de upload, activation y receipts contra before. La comprobación no cubre TicketUse, autorizaciones, writes tardíos ni toda la persistencia."
+    },
+    {
+      "path": "S08 112–116",
+      "line": 113,
+      "column": 283,
+      "expression": "else assert.equal(stats.puts,1)",
+      "finding": "Columna 283, primera letra de equal en la rama drop. c2ScopeState devolvió un objeto accesible. La comparación estricta no dio 1. El tipo/valor numérico y las duraciones de cada subpaso no salen del wire. Con el objeto inicial y los únicos incrementos fijados, las alternativas de conteo son cero o dos o más. La asignación pendingForm=form y la iteración holder no se alcanzan."
+    },
+    {
+      "path": "S09 5,164–165,175–185; S08 114–116",
+      "finding": "El wrapper parte de puts:0; suma antes de cada put de una clave del prefijo exacto de scope y en drop resuelve sin delegar ese put. Las otras claves delegan al tx real. c2ScopeRestore reinstala el método y c2Restore vuelve a los pares del snapshot obtenido después del GET, elimina claves ajenas a ese conjunto y sincroniza. Que D07 registre la excepción original implica que ambos awaits de finally finalizaron sin sustituirla. La lectura posterior no autentica una lista exhaustiva de efectos ni drenaje."
+    }
+  ],
+  "ticket": [
+    {
+      "path": "S01 209–233; store 119–141",
+      "finding": "Con cookie previa y fase notice_consent, el GET deriva el estadio finite, usa el projectRef/preconnection cualificados, verifica el límite, crea un handle opaco y escribe/lee de vuelta el Ticket base antes de entregar la pantalla. Un POST puede escribir TicketUse en otra clave y después las aprobaciones. El Ticket base no desaparece al consumirse."
+    },
+    {
+      "path": "S08 154–200,202–224; D07 16–24",
+      "finding": "Las lecturas ya existentes, emitidas tras las acciones 14 y 15, cuantizan Tickets base finite válidos en su contexto main, con mapa y revisión, formato/clave/relación coherentes y registros previos conexión/avisos usados. Las muestras son independientes; una base se cuenta incluso usada o vencida en el momento de contar. No se restan usos ni se consulta now. Observado 0 en seq56 y 1 en seq60, ambos JOINED_SNAPSHOT. No se exportó igualdad de identificadores privados entre snapshots."
+    },
+    {
+      "path": "S08 39,71–72,110–116; S00 483–500; S01 222–233",
+      "finding": "La rama notices ya había vaciado pendingForm. Al fallar drop no se conserva el formulario en pendingForm y el snapshot restaurado conserva el Ticket creado por choose. Cuando FINITE llega a la rama de selección de formulario, debe solicitar un GET fresco. Si conserva la primera base y llega a escribir un segundo Ticket finite distinto, la relectura de S00:490 rechaza dos bases para la misma acción. Es una dependencia futura demostrable. El ingreso en la acción a 161743ms no demuestra ese segundo GET completado, segundo ticket, denegación ni nueva causa."
+    }
+  ],
+  "pathToIntendedScope": [
+    "M pública S03:22–28 abre un lease por petición y reenvía la elección por el puente f2c473:6–44. El puente mantiene el deadline, originalMethod y la identidad del destinatario. La fábrica privada 1f1e5b9:22–30 construye el receptor en cada fetch; S02:5–25 captura los holders y limita la raíz local al tiempo restante. Un método de transacción sustituido antes del POST no prueba por sí solo una deriva de holder a mitad de la petición.",
+    "QA S00:613–652 y 587–599 cualifica el par inicial, selecciona finite y sigue la elección en el lease original. S01:180–196,235–261,378–412 comprueba cookie/handle, contexto y titular, dos recibos previos, grant/notice vigentes; después debe observar consumo nuevo, aprobación de configuración y aprobación de estadio. store 122bc0:135–142 distingue base y uso. Las comprobaciones de origen, acceso y estado siguen presentes alrededor de cada operación (S01:128–173).",
+    "Después de admisión (S00:661–672), el productor relee, revisa la configuración y el historial y revalida antes/después de las lecturas del puntero y las versiones (693–706,731–732). Únicamente en finite construye y valida el registro de cierre y llama a append una vez en la ruta JavaScript (741–749). El SEND/upload viene después, en 750–756. Un único callsite no prueba cantidad de invocaciones físicas del callback transaccional.",
+    "S04:28–43 exige lease y holders vivos, tx.get/tx.put estables, ausencia previa, put, sync y lectura durable coincidente. El mecanismo de drop busca un intento interceptado y posterior denegación por lectura ausente. En holder el propio get altera la identidad del método put y checkTx rechaza antes de escribir. La segunda rama no fue ejercitada en este caso."
+  ],
+  "hypotheses": [
+    {
+      "when": "Si puts era 0",
+      "interpretation": "La ruta pudo denegar antes del put (acceso, validación de historia, estado retenido, comprobación de titular, lease original/hijo, falta de tiempo, o fallo previo dentro de append). Una ruta o receptor distinto del que intercepta el wrapper también explica cero. Se verificó que la fábrica del receptor se construye por fetch y que el append real usa el transaction actual. No se observó ninguna de esas causas concretas."
+    },
+    {
+      "when": "Si puts era 2+",
+      "interpretation": "El interceptor observó varias invocaciones de put contra el prefijo durante esa ventana. Hay un append en el callpath y un put por callback. Habría que distinguir repetición del callback o trabajo concurrente/tardío. No equivale a varias escrituras durables; el wrapper descarta esos puts. Tampoco hay evidencia de reintento nativo en este run."
+    },
+    {
+      "when": "Relojes",
+      "interpretation": "59813ms cubren GET, lectura del formulario, dos conteos implicados, snapshot, instalación del wrapper, POST con cuerpo/cancelación, inspección de stats y los finally hasta el throw registrado. GET y POST son peticiones separadas con hasta 30000ms por raíz y tiempo del padre recortado al reenviar (S01:53–104). El hijo de 180s acabó con FINITE abierto; el presupuesto por caso es 120s, el global 330s. Cercanía de 59813 a dos techos de 30s hace plausible presión temporal, no observa dos timeouts ni sitúa el vencimiento. El GET de hecho pasó."
+    },
+    {
+      "when": "Costo",
+      "interpretation": "S01:153–159 vuelve a cualificar antes y después de cada step. S00:637–652, 215–269 y 512–525 enlazan lecturas primarias originales de QA/M con módulos, pares estables y verificaciones. S10:209–225 serializa cada respuesta sintética una vez y registra el hash de sus bytes. Es una carga estática posible. El run no midió costo CPU, latencias particulares, número de lecturas en el POST ni causa atribuible a proveedor."
+    }
+  ],
+  "minimalDecision": {
+    "alreadyDecided": "La evidencia actual permite descartar el punto de fallo GET de DIAG2 para este run y distinguir el primer modo drop. No acredita que el negativo haya recorrido el put cuya supresión debía probar. El full Task1 continúa pendiente. La revisión independiente posterior pasó el alcance/calidad del diagnóstico y dejó Task1 incompleta.",
+    "historicalContrast": {
+      "prior": "f7306430e390cf69787347daa1b8b396b543dbc5",
+      "priorFirst": "C2T1_SCOPE_MISSING S08:18:118, 30012ms de acción",
+      "currentFirst": "C2T1_SCOPE_MISSING S08:113:283, 59813ms de acción",
+      "causalComparison": false
+    },
+    "smallestDatum": "El contador real ya leído por c2ScopeState y confrontado por assert.equal en S08:113 es el dato mínimo que separa las ramas. En una falla alcanzada de este tipo Node puede incluir el par actual/expected de la misma aserción en su TAP. El contexto publicado sólo contiene site, secuencia, clases y hash de stdout; ni el hash ni el ZIP de la proyección recuperan el escalar. Un status numérico aislado o otro conteo de Tickets no distingue las ramas.",
+    "decisionNow": "Mantener el productor, sus límites y el calificador sin cambios, con el hallazgo actual preservado. No hay base para modificar la persistencia, suavizar stats.puts===1 ni adelantar el uso de pendingForm. La evidencia conservada no selecciona una reparación del primer fallo.",
+    "conditionalOnly": "Si Root decide que la bifurcación cero/múltiple justifica otra ocurrencia completa y acotada, proponer primero un apéndice de datos sobre el TAP existente. Sólo ante primer throw exacto case15, acción, S08:113:283, AssertionError/ERR_ASSERTION, 14 PASS previos y case15 FAIL canónico, admitir un bloque de aserción única, operador strictEqual, expected entero 1 y actual entero seguro >=0 distinto de 1. Exponer únicamente ZERO o TWO_PLUS; evidencia incompleta o ambigua UNKNOWN y otro primer throw NOT_APPLICABLE. Guardar juntos el prefijo nativo, secuencia y razón. Sin hooks, otra llamada RPC, snapshots, clocks nuevos ni exportación del TAP. El receptor sólo valida consistencia observable y procedencia; no recibe el TAP privado.",
+    "exit": "ZERO descarta la repetición observada pero deja abierta la etapa anterior/bypass; TWO_PLUS dirige la investigación al interceptor y a multiplicidad del callback sin inferir persistencia. UNKNOWN u otro primer throw cierran la propuesta sin segundo intento automático. Antes de cualquier ejecución Root decide explícitamente si uno de esos dos resultados cambiaría la acción; este informe no abre ronda ni nominación.",
+    "rollback": "La operación actual es sólo un informe Git separado. Para cualquier apéndice futuro se preservan primero los bytes R4 completos: binding Source25 672455978db4210eedef61502682e03404e0f462, preimágenes/rollback 9f6df627575fc2bb5ff2cf9a9cd5bbb0d74ec56a, delivery f56c8e3cecd841fe97b40e0d10000f4d8058ed2b y el expediente cerrado. Descartar la propuesta separada recupera el estado actual. Cualquier release nominal y cierre/readback de workflow serían decisiones nuevas de Root."
+  },
+  "source13": [
+    {
+      "slot": "S00",
+      "file": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "slot": "S01",
+      "file": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "slot": "S02",
+      "file": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "slot": "S03",
+      "file": "worker/mcp-own/finite.mjs",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "slot": "S04",
+      "file": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "slot": "S05",
+      "file": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "slot": "S06",
+      "file": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "slot": "S07",
+      "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "slot": "S08",
+      "file": "test/fixtures/finite-coupled-native.mjs",
+      "blob": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+      "bytes": 22336,
+      "sha256": "0ea1a915b33ea380fe847c7b7bb7fe9659a207a87b922cedc4b85ce20195ecaa"
+    },
+    {
+      "slot": "S09",
+      "file": "test/fixtures/finite-first-connection-publication.mjs",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+    },
+    {
+      "slot": "S10",
+      "file": "test/fixtures/finite-initial-entry-world.mjs",
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+    },
+    {
+      "slot": "S11",
+      "file": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "slot": "S12",
+      "file": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    }
+  ],
+  "method": "Lectura completa de objetos Git como texto/JSON y hashes UTF8 en RAM. El código se inspeccionó sólo como texto. No se descargó otra vez el log o el ZIP desde endpoints ni se creó una ref, ejecución, build o prueba. No se dedujo el escalar privado del hash.",
+  "SourceBusinessExecutionByThisReport": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "freshIndependentReview": {
+    "bytes": 16871,
+    "sha256": "e8f8426558b141eba44b58e8a64154ddb36c56ceb18a78c2f97042b890b90568",
+    "blob": "b50ec6e9d40bfed7f252656f027429879d0b543c"
+  },
+  "sourceInputsWholeReadback": {
+    "uniqueObjects": 26,
+    "totalUtf8Bytes": 2034467,
+    "each": [
+      {
+        "bytes": 22336,
+        "sha256": "0ea1a915b33ea380fe847c7b7bb7fe9659a207a87b922cedc4b85ce20195ecaa",
+        "blob": "49f3fa30c6754e64c36ab5cba769c9ef88669969"
+      },
+      {
+        "bytes": 88713,
+        "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+        "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7"
+      },
+      {
+        "bytes": 11467,
+        "sha256": "3094be0e4276e7ffc31a08864f588bbdab97da67f38becc771c51344a601955e",
+        "blob": "4c62b37a2e94efa057a1df97dd32c193761b8dcb"
+      },
+      {
+        "bytes": 12000,
+        "sha256": "af0c1752edc2951faabdd2e73b42ca6f87bc571a59e6bfaf3a286e4076893241",
+        "blob": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064"
+      },
+      {
+        "bytes": 19435,
+        "sha256": "0ffbc41a34f10b1446a8ec3ca16d6809726808bc3a821316187fd297bd43d5ec",
+        "blob": "e7530d7f55172ee36035b655d120bcae7479f862"
+      },
+      {
+        "bytes": 1341883,
+        "sha256": "3581ab02d6e778d8e5f89a2db7a2d12b087a13f59456979442c4ce51bd5f1abb",
+        "blob": "3b38e269929a88eef353f00016726d1ca3270f01"
+      },
+      {
+        "bytes": 4798,
+        "sha256": "94d2ce8c719774c59a1bc757084fd821dffdd847ee44262dfc37d5528ee0c71b",
+        "blob": "8a474ec9f52ad14abf9259b81eedefc61e97e018"
+      },
+      {
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5"
+      },
+      {
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908"
+      },
+      {
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8"
+      },
+      {
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8"
+      },
+      {
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e"
+      },
+      {
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb"
+      },
+      {
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966"
+      },
+      {
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+      },
+      {
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3"
+      },
+      {
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3"
+      },
+      {
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd"
+      },
+      {
+        "bytes": 21006,
+        "sha256": "0e9f61a69fbb022676fef823948877b69585a261d63f4f639ae708a9c567c153",
+        "blob": "122bc0e52870c71da7ae98ef73cd7762171d89ca"
+      },
+      {
+        "bytes": 4853,
+        "sha256": "ee56e016fdd17f97cb079cccd78d8c3aa4d0eb811cbdfda1b7b702a40d7bdaeb",
+        "blob": "f2c473cdd11b055a3c6037de317f73d7b3a7a968"
+      },
+      {
+        "bytes": 3683,
+        "sha256": "78126556ee3fe172381b508e58ff6dfadf06cf80054aa9d6bb7f3f3426186890",
+        "blob": "1f1e5b95776b189fc8d952930467e6ff99c233c3"
+      },
+      {
+        "bytes": 7405,
+        "sha256": "9ffa53cb3dc37e7c115f1a01430adf8e578cf9ce6933b63da2680f670f711a6c",
+        "blob": "068d35c2555c7dc711c487f6021ec572bd3af067"
+      },
+      {
+        "bytes": 7953,
+        "sha256": "32bcc2e8ca3867fa212e82267372fb58cd695c20952ba3e3e009b43d7df47829",
+        "blob": "38285fa0149a38924c431b4d5a705bec1384216d"
+      },
+      {
+        "bytes": 3169,
+        "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+        "blob": "9e29c5197207b03bdb4b10069089f37df289e88c"
+      },
+      {
+        "bytes": 12816,
+        "sha256": "4cf086fe9c63406f3c7ecaaceab5cb60395b2bca5a88fa6f572ccef1a5f01c25",
+        "blob": "f7306430e390cf69787347daa1b8b396b543dbc5"
+      },
+      {
+        "bytes": 16871,
+        "sha256": "e8f8426558b141eba44b58e8a64154ddb36c56ceb18a78c2f97042b890b90568",
+        "blob": "b50ec6e9d40bfed7f252656f027429879d0b543c"
+      }
+    ]
+  },
+  "sealedProjectionBoundary": {
+    "collectorR4": "0465caea70e7a80aeb631fd73f267bb00dfc0f5d",
+    "runnerR4": "b88f9ecb3317e0e82f11eaa540d4a03846b70733",
+    "collectorLines": "R4:250–256,275–289,400–425 reduce sólo el GET de scope exacto. El resto no expone argumentos de aserción.",
+    "runnerLines": "R4:247–255,257–264,270–278 reducen green.child en memoria, eliminan el TEMP y publican sólo custody/outcome. El stdout de 9955B es evidencia por digest, no un adjunto recuperable.",
+    "nativeConnectedPrimary": true
+  }
+}
