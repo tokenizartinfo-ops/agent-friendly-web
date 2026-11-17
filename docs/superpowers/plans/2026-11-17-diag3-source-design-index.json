@@ -1,0 +1,146 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-SOURCE-DESIGN-INDEX/1",
+  "status": "ROOT_REVIEW_REQUIRED_DESIGN_ONLY",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Private Git DATA. Future nominations in data only.",
+  "allowedAction": "Immutable blob text read and detached design-JSON creation with whole UTF8 hash readback. No Source execution, active refs or runtime changes.",
+  "basis": {
+    "primary": "16f788a652c644763d74ffa0e955375786064c2d",
+    "outcome": "f7306430e390cf69787347daa1b8b396b543dbc5",
+    "own": "6d2f2e1a54507f70e2f553512dc35472e529e96e",
+    "close": "b96b7831b92e9200a4cd360fa9703c61b284d765",
+    "run": "44000942332",
+    "attempt": 1,
+    "job": "133764541578",
+    "diagnosis": "85cd124dc261eef3db8a7706ddc6cb46839ccc8f",
+    "normalFullTask1E2PlanHeld": "a4cebfbb3c91ec706429253c9809a0096774108b",
+    "diagnosticReason": "Case14 count returned at seq56 103627ms. Case15 exact first throw seq58 at133639ms reached choose GET S08:18:118, subsequent count returned seq60. Case16 later failed at same site. Native14PASS,3FAIL and child timed out. Closed DIAG2 does not contain required response-status integer or finite ticket counts. Source13/QA/M/SDK unchanged by any design work. Static 672 module-bearing responses on a successful GET is a cost hypothesis, never a measured call count/performance result/provider attribution."
+  },
+  "components": {
+    "finiteGetComponentSchema": {
+      "bytes": 5761,
+      "sha256": "10303c6098b54ab7c00cdf61f0b168783a0ff2283db75c79edc01202acb6f684",
+      "blob": "4a98aa0c77c0d1eb61c5ba6ecabdbf6a4d72ec32"
+    },
+    "fullNonAdmittingOuterSchemaBlueprint": {
+      "bytes": 33248,
+      "sha256": "9d5fa4bd7ab5ce3e7cec883094449986f47a93e32541ba74e7c30ec8741d8af6",
+      "blob": "32789882150f65092607780a796a7cb28efe8e7a"
+    },
+    "fullSelectionTemplateInventory25AndNominations": {
+      "bytes": 24325,
+      "sha256": "6f959945effd84751baa9135cda1e70b66dcffa194ad53d3f4ab0db996ea65ce",
+      "blob": "6b2c733af81c5ca9e7bf02c7d92a4de968bcb9ff"
+    },
+    "producerReceiverProtocol": {
+      "bytes": 18806,
+      "sha256": "347491b2041e467b2443dac683d7bce0e66949b55c035eae07826f67b061ab2b",
+      "blob": "609738496d65c21f2cce0c2969ce14f2b64dec07"
+    },
+    "wireExamplesAndControlPlan": {
+      "bytes": 11017,
+      "sha256": "8f19c42d5523660d463549c46e04e8b69f1555a83d3e40f9cc4503327c84c78c",
+      "blob": "eae704ae66396197406a9a7166669d5ff551878b"
+    }
+  },
+  "joinSummary": "Restrict status to current earliest C15 action throw plus native prefix and C1-calibrated strictEqual scalars. Snapshot count uses exactly two already existing postaction reads, independently joined typed signals, no new RPC. Numeric http and each count can stand independently. Source-derived values are bounded attestations; OWN has full transport/journal/native replay, not the private rows/TAP. No inference of absent effects or causal origin.",
+  "schemaAudit": {
+    "exactInheritedDefs": [
+      "streamOut",
+      "streamErr",
+      "capture",
+      "journal",
+      "site",
+      "error",
+      "event",
+      "openCase",
+      "witness",
+      "nativeCase",
+      "native",
+      "firstFailure"
+    ],
+    "changedInheritedDefs": [
+      "context",
+      "custody",
+      "observation",
+      "outcome",
+      "fault",
+      "sourceReads"
+    ],
+    "addedDefs": [
+      "finiteGet"
+    ],
+    "firstFailureContentUnchanged": true,
+    "nonAdmittingGuard": "not:{}",
+    "heldNullsOnlyInInventoryAndTypedDeferredTemplate": "Final runtime constants and expected caller all measured. No null wildcard.",
+    "oldC1PrivateRegionDigest": "eae704 control-plan oldControl.textRegion.git-style SHA identifies measured substring only, not a promise of an existing independent repository object."
+  },
+  "preservation": {
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "original3203": true,
+    "source25Slots": 25,
+    "byteIdenticalEdges": 17,
+    "unmeasuredEdges": [
+      [
+        0,
+        "docs/superpowers/source-lab/c2-t1/source-index.json"
+      ],
+      [
+        9,
+        "docs/superpowers/source-lab/c2-t1/body-08.txt"
+      ],
+      [
+        16,
+        "docs/superpowers/source-lab/c2-t1-finite-get-diag3/mode-selection.json"
+      ],
+      [
+        17,
+        "docs/superpowers/source-lab/c2-t1-finite-get-diag3/frame-schema.json"
+      ],
+      [
+        18,
+        "docs/superpowers/source-lab/c2-t1-finite-get-diag3/protocol-contract.json"
+      ],
+      [
+        19,
+        "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs"
+      ],
+      [
+        23,
+        "docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs"
+      ],
+      [
+        24,
+        ".github/workflows/afw-c2-finite-get-diag3.yml"
+      ]
+    ],
+    "proposedE3": "only E2 S08→diagnostic S08; real index+body deferred. Other12 exact including hosted S10 cb95. No change to normal E2 qualifier. D07 original9e29… and S07 registration 1794B SHA256 256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a. Same C1 site41:12 and choose GET18:118 by measured static proof before native."
+  },
+  "decisionsForRoot": [
+    "Confirm final private metric scope: map bound to current world notices projectRef+source revision, consumed connection/notices anchors and canonical codec, 2+ retained even when counting would expose an original duplicate-stage denial. No cross-snapshot identity cache. Values describe eligible rows returned.",
+    "Confirm two independent checkpoint value pointers requiring native.integrity=prefix; incomplete/torn journal suffix after the required events may coexist. HTTP retains C1 priority adapted to case15.",
+    "Reconcile OWN proposal and one-use names/history and exact tooling census. Source suggests nine named groups (preserved35 literal C1s inside one group) in a single tooling occurrence, no new toy/framework. Histories never reopened.",
+    "If accepted, only then authorize fixture-first literal capture/implementation, measure E3/index/selection/final schema+all25 and own binding, verify custody and both tooling reviews before any new full-order20 diagnostic. Only one future diagnostic occurrence would be in scope. On partial/moved frontier, return the facts and stop pending a new evidence-backed decision."
+  ],
+  "supersededWorkingDraft": {
+    "protocol": "855a909ed62d97e41124b11053be5db9545bbde4",
+    "reason": "Final protocol binds both snapshots to existing in-memory accepted notices form projectRef and selection sourceRevision, and spells out native prefix requirement. Wire unchanged."
+  },
+  "sourceCodeWritten": false,
+  "sourceExecuted": false,
+  "activationReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

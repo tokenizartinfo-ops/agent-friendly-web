@@ -1,0 +1,102 @@
+{
+  "schema": "afw.finite-get-diag3.design-supplement.v1",
+  "state": "DATA_ONLY_PROPOSAL",
+  "parentDesign": "866bd15a36e0dc3e09d55bf6431ce94ae55f9d9b",
+  "rootRound": {
+    "source": 2,
+    "own": 3,
+    "max": 5
+  },
+  "realSeam": {
+    "implementationShape": "One named fixture-only exported factory in E3 S08 creates world-local label state, enter/finish and the actual counts callable. The real createFiniteCoupledOwnerWorld binds that exact counts function reference in the returned world object, and its actual monitor/noScope use enter before their first await and finish in finally preserving the original exception/return. Production-source fixture and controls refer to the same internal count(f,label?) frame. It performs the original plain(f.stub.snapshot()) once, constructs the original 3 counters, conditionally calls the one actual canonical-codec quantizer on those rows and emits bounded metadata. Do not expose competing formulas, E2 comparisons as the E3 oracle, code extraction/copying or business world construction to tooling. Preserve original method bodies/identity semantics and measured S08:18:118/S08:41:12. Seals and review must prove unchanged bytes on those lines + new Git/SHA/alias. Neither site may be repaired in the decoder by accepting old coordinates if it drifted.",
+    "invocation": "A single native tools occurrence imports E3 fixture via materialized canonical test/fixtures/finite-coupled-native.mjs. The tests create the SAME factory with small SYN main, getActive and recording emit; use its actual counts function for both codec groups and latch lifecycle errors. The fake f provides a controlled stub.snapshot() return/throw, uploads/activations and real-shaped in-memory choice.projectRef/source.sourceRevision, with read count and emit capture. Inspect actual restricted codec/projector/return object and check original arbitrary error identity and single settle. A separate control tests the real adapter and publisher against sealed raw native-format fixtures. No reconstruction of S08 by extracting/evaluating a substring. Static exact dispatch binding plus these unit controls prove the seam; the future full20 separately exercises actual world wiring. No import of S08 by OWN.",
+    "importGraph": {
+      "basisIndex": "5a00a46bedc3fcdd073647bb4f6c5ea1e2b7472b",
+      "repositoryGraph": "506ca639a60e18a82f902e858cc1c08be2133d59",
+      "packageClosure": "c505a9d26aac123275cbc8bb28a56d4986e7e16e",
+      "manifest": "f4fd38ac380c46a149d8cf0f3bd828a28406f761",
+      "lock": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+      "initJson": {
+        "blob": "be695028e4c12c3cb7d3b7bf2c5f2e7508f3db15",
+        "bytes": 329786
+      },
+      "rootBranches": [
+        "node:assert/strict",
+        "node:crypto",
+        "./finite-initial-entry-world.mjs",
+        "./finite-first-connection-publication.mjs",
+        "../../lib/mcp-qa-finite-preparation-records.mjs",
+        "../../lib/mcp-qa-finite-initial-material-records.mjs"
+      ],
+      "derivation": "HOST graph 79 repo modules includes S09/BASEcodec/initial-material and original S10, excludes S08. Rebind S10 to cb95; proposed graph is same79 + real E3 S08 = 80 repo modules at these imports, plus one initialization JSON datum. 6 direct npm,98 potential package-lock nodes. These are proposed static imports, not proof that every package is loaded; attempt seals every actual repo/lock/runner/adapter/fixture edge before native. Tooling controller graph tagged separately from S08 transitive graph. Stage in owned ephemeral mirror with 13 canonical-target overlays and matching repo modules/descriptor/package files/installed node_modules under matching resolution layout; verify before+after/cleanup. Git baseline leaves unchanged. Use existing locked npm ci --ignore-scripts --no-audit --no-fund only during setup; no new dependency. Run actual imported E3 fixture on nonroot loopback isolated child with stripped env like HOST, no Miniflare construction, initialEntryHarness invocation, builds, Workers/SDK business or external provider requests. Runtime imports need esbuild/miniflare/etc to resolve even if fixture methods never start."
+    }
+  },
+  "c1Census": {
+    "sourceLiteralCorpus": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+    "ordered35Ids": [
+      "S01_KNOWN_503_COUNTS_222",
+      "S02_KNOWN_429_PARTIAL",
+      "S03_KNOWN_599_BOUNDS_ONLY",
+      "S04_MISSING_SOURCE",
+      "S05_DUPLICATE_SOURCE",
+      "S06_SOURCE_STATUS_CONFLICT",
+      "S07_SOURCE_WRONG_PHASE",
+      "S08_SOURCE_WRONG_CODE",
+      "S09_SOURCE_EXTRA_KEY",
+      "S10_SOURCE_NONCANONICAL",
+      "S11_MISSING_SCALAR",
+      "S12_DUPLICATE_SCALAR",
+      "S13_SCALAR_MESSAGE_FAKE",
+      "S14_SCALAR_NESTED_FAKE",
+      "S15_SCALAR_STRING",
+      "S16_SCALAR_FLOAT",
+      "S17_SCALAR_600",
+      "S18_SCALAR_200_CONFLICT",
+      "S19_WRONG_EXPECTED",
+      "S20_COUNTER_RANGE",
+      "S21_WRONG_OPERATOR",
+      "S22_WRONG_NATIVE_ORDINAL",
+      "S23_NESTED_TARGET_PAIR",
+      "S24_TORN_CANDIDATE",
+      "S25_CRLF_UNSUPPORTED",
+      "S26_SOURCE_WRONG_ORDER",
+      "S27_EARLIEST_WRONG_SITE",
+      "S28_COUNTER_THROW",
+      "S29_COUNTER_OPEN",
+      "S30_VALID_CANDIDATE_LATER_TORN",
+      "S31_EARLIER_NATIVE_FAILURE",
+      "S32_TARGET_PASS",
+      "S33_NO_QUALIFYING_THROW",
+      "S34_TARGET_RESULT_MISSING",
+      "S35_TARGET_THROW_NOT_IN_VALIDATED_PREFIX"
+    ],
+    "ordered35CanonicalIdsSha256": "ddf05026f0075f6a14942beeeb4ccda9d271815dba2e7fe11ca6ea751577caf8",
+    "observedExpectedDistribution": {
+      "KNOWN": 4,
+      "UNKNOWN": 27,
+      "NOT_APPLICABLE": 4
+    },
+    "definition": "FG3_C1_COMPAT is one top-level TAP result among 9 native groups; in that one group iterate all 35 ordered C1 inputs after verifying fixed corpus bytes and per-case stdout seal, using original parentObservationRef and complete supplied journal facts. Execute the actual successor C1 projector once for each and assert canonical equality of ALL six returned fields vs that distinct literal expected projection. No expected-as-result. Carry per-evaluation id, actual state/reason and SHA256 of actual canonical six-key projection. Root independently recomputes each expected hash/ID/order, compares 35 results + actual TAP 9 plus contexts. Count35 inner selections exactly (no nested TAP tests, duplicates/skips or 44 top-level count). All must match for group PASS. Keep previous historical oldcollector S01 incompatibility and prior admitted proofs. Scoped preimage new finiteGet absent visible statically without a new fictitious native RED."
+  },
+  "crossChecks": {
+    "priorityA": "MARKER_STREAM_INVALID is global within the two samples. If one value has this reason, other can share it or show a higher-priority JOURNAL_UNRESOLVED, NATIVE_UNJOINED or SOURCE_UNJOINED consistent with outer facts. Never pair this reason with JOINED_SNAPSHOT, MARKER_UNAVAILABLE or SNAPSHOT_INVALID.",
+    "priorityB": "HTTP KNOWN requires same exact canonical ordered/phase-status-code-counters-matched C2SOURCE prefix through15 used by both sample joins. Thus incompatible with SOURCE_UNJOINED and NATIVE_UNJOINED in either sample. It also establishes all required serial action/count settlements, so JOURNAL_UNRESOLVED inconsistent unless a validated AFTER edge before that sample count.return prevented a reliable world sample (visible in journal); the HTTP status remains independently eligible. Without this exception the only compatible sample reasons with HTTP KNOWN are JOINED_SNAPSHOT, MARKER_STREAM_INVALID, MARKER_UNAVAILABLE, SNAPSHOT_INVALID. Apply priorityA across siblings. Test both rules with coherently re-encoded transport; new cases nested under existing named groups, not extra native/top-level IDs. OWN cannot authenticate hidden scalars or private rows."
+  },
+  "optionalCost": {
+    "scope": "Separate static opportunity only, lower priority than E3. No benchmark or runtime authorized; no estimate for actual elapsed time, CPU, failed request depth, throughput or origin.",
+    "fixtureOnly": "S10 cb95e1f3b2e6c14d07f661f1b818c38d470564d7:241 QA include=modules re-reads built.outputFiles[0].contents then Buffer.from(view).toString(base64). For a regular Uint8Array of fixed nonshared bytes, Buffer.from(typedArray) copies the range before encoding, so a fresh synchronous byte-range view and the same base64 encoding could remove just that copy. Restrict to proven unshared fixed plain Uint8Array/Node buffer geometry or retain original exact fallback. No memoization, pointer reuse across calls, mutable/racy alias, fresh request changes or omission of fault substitutions, trace SHA or response bytes. Under the prior conditional successful path definition this QA branch is 1 of 4 module types (84×2=168 prospective calls), never 672 copies actually observed.",
+    "keepSeparate": "S00 a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5:223-225 decode actual QA reply, re-encode to verify canonical Base64 and SHA==expected; these perform different validations. S00:233 delegates to BASE be1c7d1f25ffd1c6184f6139acb03110b7b148bb:30-47 that checks initial M. S00:251 and259 encode resident.bytes for distinct fresh current/prior M comparisons with await boundaries, :263 hashes resident bytes for returned baseline. Leave checks separate. S10:216-222 uses one fresh JSON serialization and records exact byte length/SHA, :360-376 mutates response only for nominated faults; do not bypass.",
+    "boundedMeasurementOnlyIfLaterNeeded": "Optional side-by-side Node22.23.4 tooling on synthetic bytes only, single job <=3min, 10s per case, no provider/harness or full GET: distinct small/subarray nonzero offset and actual-order-of-magnitude ~2MiB regular views, repeated same view mutated between calls; unsupported/shared/odd inputs prove fallback semantics. Pin identical encoded outputs/lengths/SHA per invocation and unchanged host response trace/status/headers under actual createInitialEntrySynOutbound on a QA URL (fresh variant data each call, optional injected qa-module mutation). For a separately approved microbenchmark: five alternating old/new blocks each with three synchronous encodes on the one 2MiB in-memory fixture, no network; report elapsed ns and counts per block, no acceptance threshold or extrapolation to full runtime. If measured impact does not justify complexity stop. No case buffering, caching, or Source/product edits in this decision."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

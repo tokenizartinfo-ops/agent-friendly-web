@@ -1,0 +1,1325 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AFW FINITE_GET_DIAG3 diagnostic envelopes (non-admitting design template)",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/custody"
+    },
+    {
+      "$ref": "#/$defs/outcome"
+    },
+    {
+      "$ref": "#/$defs/fault"
+    }
+  ],
+  "$defs": {
+    "context": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "const": "tokenizartinfo-ops/agent-friendly-web"
+        },
+        "baselineSource": {
+          "const": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        },
+        "baselineTree": {
+          "const": "62e78926635d6b74f288d6c0d69e0f2516306989"
+        },
+        "sourceIndexBlob": {
+          "const": {
+            "$deferred": "E3_INDEX_GIT"
+          }
+        },
+        "proposalIndexHash": {
+          "const": {
+            "$deferred": "E3_INDEX_FILE_SHA256"
+          }
+        },
+        "selectionHash": {
+          "const": {
+            "$deferred": "D3_SELECTION_CANONICAL_SHA256"
+          }
+        },
+        "head": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "runId": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{0,19}$"
+        },
+        "runAttempt": {
+          "const": 1
+        },
+        "job": {
+          "const": "c2-finite-get-diag3"
+        },
+        "node": {
+          "const": "v22.23.4"
+        }
+      },
+      "required": [
+        "repository",
+        "baselineSource",
+        "baselineTree",
+        "sourceIndexBlob",
+        "proposalIndexHash",
+        "selectionHash",
+        "head",
+        "tree",
+        "runId",
+        "runAttempt",
+        "job",
+        "node"
+      ],
+      "additionalProperties": false
+    },
+    "custody": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "afw.c2-finite-get-diag3-custody.v1"
+        },
+        "context": {
+          "$ref": "#/$defs/context"
+        },
+        "parentNonRoot": {
+          "const": true
+        },
+        "preflightOwned": {
+          "const": true
+        },
+        "preflightRemoved": {
+          "const": true
+        },
+        "checkedLaunches": {
+          "const": 2
+        },
+        "preflightProcesses": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 7
+        },
+        "greenProcesses": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 7
+        },
+        "checkedProcesses": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 8
+        },
+        "uidGidGroupsLoopbackMatched": {
+          "const": true
+        },
+        "targetsBeforeMatched": {
+          "const": true
+        },
+        "targetsAfterMatched": {
+          "const": true
+        },
+        "journalOwnershipMatched": {
+          "const": true
+        },
+        "ownRootVerified": {
+          "const": true
+        },
+        "ownTempRemoved": {
+          "const": true
+        }
+      },
+      "required": [
+        "schema",
+        "context",
+        "parentNonRoot",
+        "preflightOwned",
+        "preflightRemoved",
+        "checkedLaunches",
+        "preflightProcesses",
+        "greenProcesses",
+        "checkedProcesses",
+        "uidGidGroupsLoopbackMatched",
+        "targetsBeforeMatched",
+        "targetsAfterMatched",
+        "journalOwnershipMatched",
+        "ownRootVerified",
+        "ownTempRemoved"
+      ],
+      "additionalProperties": false
+    },
+    "streamOut": {
+      "type": "object",
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048576
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "bytes",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "streamErr": {
+      "type": "object",
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65536
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "bytes",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "capture": {
+      "type": "object",
+      "properties": {
+        "exitCode": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "signal": {
+          "enum": [
+            "none",
+            "SIGTERM",
+            "SIGKILL",
+            "SIGABRT",
+            "SIGSEGV",
+            "SIGINT",
+            "SIGHUP",
+            "SIGPIPE",
+            "other",
+            "unavailable"
+          ]
+        },
+        "errorKind": {
+          "enum": [
+            "none",
+            "timeout"
+          ]
+        },
+        "stdout": {
+          "$ref": "#/$defs/streamOut"
+        },
+        "stderr": {
+          "$ref": "#/$defs/streamErr"
+        }
+      },
+      "required": [
+        "exitCode",
+        "signal",
+        "errorKind",
+        "stdout",
+        "stderr"
+      ],
+      "additionalProperties": false
+    },
+    "journal": {
+      "type": "object",
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 32768
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "stable": {
+          "const": true
+        },
+        "recorderFaultObserved": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "bytes",
+        "sha256",
+        "stable",
+        "recorderFaultObserved"
+      ],
+      "additionalProperties": false
+    },
+    "site": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "enum": [
+            "S00",
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S05",
+            "S06",
+            "D07",
+            "S08",
+            "S09",
+            "S10",
+            "S11",
+            "S12"
+          ]
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999999
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999999
+        }
+      },
+      "required": [
+        "file",
+        "line",
+        "column"
+      ],
+      "additionalProperties": false
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "enum": [
+                "AssertionError",
+                "Error",
+                "TypeError",
+                "RangeError",
+                "SyntaxError",
+                "AggregateError",
+                "AbortError",
+                "TimeoutError"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "code": {
+          "anyOf": [
+            {
+              "enum": [
+                "ERR_ASSERTION",
+                "ERR_TEST_FAILURE",
+                "ABORT_ERR",
+                "ETIMEDOUT",
+                "ENOENT",
+                "ERR_MODULE_NOT_FOUND",
+                "ECONNRESET",
+                "ERR_INVALID_ARG_TYPE"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "site": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/site"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "code",
+        "site"
+      ],
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "elapsedMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 330000
+        },
+        "id": {
+          "enum": [
+            "C2T1_CONNECTION",
+            "C2T1_OAUTH",
+            "C2T1_HANDLE",
+            "C2T1_PROJECTREF",
+            "C2T1_SUBJECT",
+            "C2T1_PHASE_RENAME",
+            "C2T1_SOURCE_BYTES",
+            "C2T1_APPROVAL",
+            "C2T1_PREDECESSOR",
+            "C2T1_GRANT_REVOKED",
+            "C2T1_EXTRA_KEY",
+            "C2T1_NOTICES",
+            "C2T1_MONITOR_COOKIE",
+            "C2T1_MONITOR",
+            "C2T1_SCOPE_MISSING",
+            "C2T1_FINITE",
+            "C2T1_SELECTION",
+            "C2T1_LOST_ACK_DUPLICATE",
+            "C2T1_UNRESOLVED_WRITER",
+            "C2T1_OWN_PROMISE",
+            "AFTER"
+          ]
+        },
+        "operation": {
+          "enum": [
+            "action",
+            "count",
+            "close"
+          ]
+        },
+        "edge": {
+          "enum": [
+            "enter",
+            "return",
+            "throw"
+          ]
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/error"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "sequence",
+        "elapsedMs",
+        "id",
+        "operation",
+        "edge",
+        "error"
+      ],
+      "additionalProperties": false
+    },
+    "openCase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "enum": [
+            "C2T1_CONNECTION",
+            "C2T1_OAUTH",
+            "C2T1_HANDLE",
+            "C2T1_PROJECTREF",
+            "C2T1_SUBJECT",
+            "C2T1_PHASE_RENAME",
+            "C2T1_SOURCE_BYTES",
+            "C2T1_APPROVAL",
+            "C2T1_PREDECESSOR",
+            "C2T1_GRANT_REVOKED",
+            "C2T1_EXTRA_KEY",
+            "C2T1_NOTICES",
+            "C2T1_MONITOR_COOKIE",
+            "C2T1_MONITOR",
+            "C2T1_SCOPE_MISSING",
+            "C2T1_FINITE",
+            "C2T1_SELECTION",
+            "C2T1_LOST_ACK_DUPLICATE",
+            "C2T1_UNRESOLVED_WRITER",
+            "C2T1_OWN_PROMISE"
+          ]
+        },
+        "operation": {
+          "enum": [
+            "action",
+            "count"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "operation"
+      ],
+      "additionalProperties": false
+    },
+    "witness": {
+      "type": "object",
+      "properties": {
+        "integrity": {
+          "enum": [
+            "empty",
+            "prefix",
+            "complete",
+            "torn",
+            "ambiguous"
+          ]
+        },
+        "frontier": {
+          "enum": [
+            "unknown",
+            "action",
+            "count",
+            "case-and-after",
+            "after-close",
+            "post-settlement-process-exit",
+            "post-teardown-process-exit",
+            "all-settled",
+            "between-action-and-count",
+            "before-after",
+            "between-cases"
+          ]
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          },
+          "minItems": 0,
+          "maxItems": 128
+        },
+        "openCase": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/openCase"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "afterOpen": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "integrity",
+        "frontier",
+        "events",
+        "openCase",
+        "afterOpen"
+      ],
+      "additionalProperties": false
+    },
+    "nativeCase": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "enum": [
+            "C2T1_CONNECTION",
+            "C2T1_OAUTH",
+            "C2T1_HANDLE",
+            "C2T1_PROJECTREF",
+            "C2T1_SUBJECT",
+            "C2T1_PHASE_RENAME",
+            "C2T1_SOURCE_BYTES",
+            "C2T1_APPROVAL",
+            "C2T1_PREDECESSOR",
+            "C2T1_GRANT_REVOKED",
+            "C2T1_EXTRA_KEY",
+            "C2T1_NOTICES",
+            "C2T1_MONITOR_COOKIE",
+            "C2T1_MONITOR",
+            "C2T1_SCOPE_MISSING",
+            "C2T1_FINITE",
+            "C2T1_SELECTION",
+            "C2T1_LOST_ACK_DUPLICATE",
+            "C2T1_UNRESOLVED_WRITER",
+            "C2T1_OWN_PROMISE"
+          ]
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "native": {
+      "type": "object",
+      "properties": {
+        "integrity": {
+          "enum": [
+            "empty",
+            "prefix",
+            "torn",
+            "ambiguous"
+          ]
+        },
+        "cases": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nativeCase"
+          },
+          "minItems": 0,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "integrity",
+        "cases"
+      ],
+      "additionalProperties": false
+    },
+    "observation": {
+      "type": "object",
+      "properties": {
+        "capture": {
+          "$ref": "#/$defs/capture"
+        },
+        "journal": {
+          "$ref": "#/$defs/journal"
+        },
+        "witness": {
+          "$ref": "#/$defs/witness"
+        },
+        "unknownReason": {
+          "enum": [
+            null,
+            "JOURNAL_EMPTY",
+            "JOURNAL_TORN",
+            "RECORDER_FAULT",
+            "JOURNAL_INVALID_RECORD"
+          ]
+        },
+        "firstThrowSequence": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "native": {
+          "$ref": "#/$defs/native"
+        },
+        "firstFailure": {
+          "$ref": "#/$defs/firstFailure"
+        },
+        "finiteGet": {
+          "$ref": "#/$defs/finiteGet"
+        }
+      },
+      "required": [
+        "capture",
+        "journal",
+        "witness",
+        "unknownReason",
+        "firstThrowSequence",
+        "native",
+        "firstFailure",
+        "finiteGet"
+      ],
+      "additionalProperties": false
+    },
+    "outcome": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "afw.c2-finite-get-diag3-outcome.v1"
+        },
+        "context": {
+          "$ref": "#/$defs/context"
+        },
+        "diagnosticCollectionComplete": {
+          "const": true
+        },
+        "nativeQualification": {
+          "const": false
+        },
+        "sourceReads": {
+          "$ref": "#/$defs/sourceReads"
+        },
+        "observation": {
+          "$ref": "#/$defs/observation"
+        },
+        "custody": {
+          "$ref": "#/$defs/custody"
+        },
+        "SourceQualified": {
+          "const": false
+        },
+        "Task1Pass": {
+          "const": false
+        },
+        "nonclaims": {
+          "type": "object",
+          "properties": {
+            "historicalCauseProven": {
+              "const": false
+            },
+            "receiptAuthenticated": {
+              "const": false
+            },
+            "operationalReadiness": {
+              "const": false
+            },
+            "completePackage": {
+              "const": false
+            },
+            "PCoff": {
+              "const": false
+            },
+            "globalNativeDrainVerified": {
+              "const": false
+            },
+            "sdkNamespaceEmptyVerified": {
+              "const": false
+            }
+          },
+          "required": [
+            "historicalCauseProven",
+            "receiptAuthenticated",
+            "operationalReadiness",
+            "completePackage",
+            "PCoff",
+            "globalNativeDrainVerified",
+            "sdkNamespaceEmptyVerified"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema",
+        "context",
+        "diagnosticCollectionComplete",
+        "nativeQualification",
+        "sourceReads",
+        "observation",
+        "custody",
+        "SourceQualified",
+        "Task1Pass",
+        "nonclaims"
+      ],
+      "additionalProperties": false
+    },
+    "fault": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "afw.c2-finite-get-diag3-fault.v1"
+        },
+        "context": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/context"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "phase": {
+          "enum": [
+            "admission",
+            "materialize",
+            "preflight",
+            "green",
+            "journal",
+            "native",
+            "cleanup",
+            "publish"
+          ]
+        },
+        "reason": {
+          "enum": [
+            "ADMISSION_INVALID",
+            "MATERIALIZATION_INVALID",
+            "PREFLIGHT_INVALID",
+            "LAUNCH_INVALID",
+            "CUSTODY_INVALID",
+            "CAPTURE_INVALID",
+            "JOURNAL_INVALID",
+            "RECORDER_FAULT",
+            "EVIDENCE_CONFLICT",
+            "TARGET_DRIFT",
+            "CLEANUP_INVALID",
+            "PUBLICATION_INVALID"
+          ]
+        },
+        "diagnosticCollectionComplete": {
+          "const": false
+        },
+        "nativeQualification": {
+          "const": false
+        },
+        "SourceQualified": {
+          "const": false
+        },
+        "Task1Pass": {
+          "const": false
+        },
+        "nonclaims": {
+          "type": "object",
+          "properties": {
+            "historicalCauseProven": {
+              "const": false
+            },
+            "receiptAuthenticated": {
+              "const": false
+            },
+            "operationalReadiness": {
+              "const": false
+            },
+            "completePackage": {
+              "const": false
+            },
+            "PCoff": {
+              "const": false
+            },
+            "globalNativeDrainVerified": {
+              "const": false
+            },
+            "sdkNamespaceEmptyVerified": {
+              "const": false
+            }
+          },
+          "required": [
+            "historicalCauseProven",
+            "receiptAuthenticated",
+            "operationalReadiness",
+            "completePackage",
+            "PCoff",
+            "globalNativeDrainVerified",
+            "sdkNamespaceEmptyVerified"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema",
+        "context",
+        "phase",
+        "reason",
+        "diagnosticCollectionComplete",
+        "nativeQualification",
+        "SourceQualified",
+        "Task1Pass",
+        "nonclaims"
+      ],
+      "additionalProperties": false
+    },
+    "sourceReads": {
+      "type": "object",
+      "properties": {
+        "beforeSha256": {
+          "const": [
+            "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+            "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+            "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+            "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+            "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+            "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+            "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+            "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+            {
+              "$deferred": "E3_S08_FILE_SHA256"
+            },
+            "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+            "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+            "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+            "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+          ]
+        },
+        "afterSha256": {
+          "const": [
+            "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+            "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+            "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+            "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+            "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+            "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+            "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+            "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+            {
+              "$deferred": "E3_S08_FILE_SHA256"
+            },
+            "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+            "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+            "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+            "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+          ]
+        }
+      },
+      "required": [
+        "beforeSha256",
+        "afterSha256"
+      ],
+      "additionalProperties": false
+    },
+    "firstFailure": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "AFW FIRST_FAILURE_POST_DIAG2 bounded firstFailure metadata v1",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "afw.c2-first-failure-post-diag2.v1"
+            },
+            "state": {
+              "const": "KNOWN"
+            },
+            "reason": {
+              "const": "TARGET_POST_ASSERTION"
+            },
+            "throwSequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            },
+            "source": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "C2T1_NOTICES"
+                },
+                "status": {
+                  "const": "fail"
+                },
+                "phase": {
+                  "const": "notices"
+                },
+                "counters": {
+                  "type": "object",
+                  "properties": {
+                    "upload": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 3
+                    },
+                    "activation": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 3
+                    },
+                    "receipts": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 3
+                    }
+                  },
+                  "required": [
+                    "upload",
+                    "activation",
+                    "receipts"
+                  ],
+                  "additionalProperties": false
+                },
+                "code": {
+                  "const": "TEST_FAILED"
+                }
+              },
+              "required": [
+                "id",
+                "status",
+                "phase",
+                "counters",
+                "code"
+              ],
+              "additionalProperties": false
+            },
+            "assertion": {
+              "type": "object",
+              "properties": {
+                "actual": {
+                  "type": "integer",
+                  "minimum": 100,
+                  "maximum": 599,
+                  "not": {
+                    "const": 200
+                  }
+                },
+                "expected": {
+                  "const": 200
+                }
+              },
+              "required": [
+                "actual",
+                "expected"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema",
+            "state",
+            "reason",
+            "throwSequence",
+            "source",
+            "assertion"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "afw.c2-first-failure-post-diag2.v1"
+            },
+            "state": {
+              "const": "UNKNOWN"
+            },
+            "reason": {
+              "enum": [
+                "JOURNAL_UNRESOLVED",
+                "TARGET_NATIVE_UNAVAILABLE",
+                "COUNTER_UNAVAILABLE",
+                "SOURCE_ROW_UNAVAILABLE",
+                "ASSERTION_SCALARS_UNAVAILABLE",
+                "UNSUPPORTED_SCALARS",
+                "NATIVE_FORMAT_UNSUPPORTED",
+                "AMBIGUOUS_EVIDENCE",
+                "CONFLICTING_EVIDENCE",
+                "TRUNCATED_NATIVE"
+              ]
+            },
+            "throwSequence": {
+              "const": null
+            },
+            "source": {
+              "const": null
+            },
+            "assertion": {
+              "const": null
+            }
+          },
+          "required": [
+            "schema",
+            "state",
+            "reason",
+            "throwSequence",
+            "source",
+            "assertion"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "afw.c2-first-failure-post-diag2.v1"
+            },
+            "state": {
+              "const": "NOT_APPLICABLE"
+            },
+            "reason": {
+              "enum": [
+                "EARLIEST_THROW_DIFFERENT",
+                "EARLIER_NATIVE_FAILURE",
+                "TARGET_PASSED",
+                "NO_QUALIFYING_THROW"
+              ]
+            },
+            "throwSequence": {
+              "const": null
+            },
+            "source": {
+              "const": null
+            },
+            "assertion": {
+              "const": null
+            }
+          },
+          "required": [
+            "schema",
+            "state",
+            "reason",
+            "throwSequence",
+            "source",
+            "assertion"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "finiteGet": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "AFW FINITE_GET_DIAG3 bounded finiteGet projection v1",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "afw.c2-finite-get-diag3.v1"
+        },
+        "http": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "const": "KNOWN"
+                },
+                "reason": {
+                  "const": "TARGET_GET_ASSERTION"
+                },
+                "throwSequence": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 128
+                },
+                "actual": {
+                  "type": "integer",
+                  "minimum": 100,
+                  "maximum": 599,
+                  "not": {
+                    "const": 200
+                  }
+                },
+                "expected": {
+                  "const": 200
+                }
+              },
+              "required": [
+                "state",
+                "reason",
+                "throwSequence",
+                "actual",
+                "expected"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "const": "NOT_APPLICABLE"
+                },
+                "reason": {
+                  "enum": [
+                    "EARLIEST_THROW_DIFFERENT",
+                    "EARLIER_NATIVE_FAILURE",
+                    "TARGET_PASSED",
+                    "NO_QUALIFYING_THROW"
+                  ]
+                },
+                "throwSequence": {
+                  "const": null
+                },
+                "actual": {
+                  "const": null
+                },
+                "expected": {
+                  "const": null
+                }
+              },
+              "required": [
+                "state",
+                "reason",
+                "throwSequence",
+                "actual",
+                "expected"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "const": "UNKNOWN"
+                },
+                "reason": {
+                  "enum": [
+                    "JOURNAL_UNRESOLVED",
+                    "COUNTER_UNAVAILABLE",
+                    "TRUNCATED_NATIVE",
+                    "NATIVE_FORMAT_UNSUPPORTED",
+                    "AMBIGUOUS_EVIDENCE",
+                    "TARGET_NATIVE_UNAVAILABLE",
+                    "CONFLICTING_EVIDENCE",
+                    "SOURCE_ROW_UNAVAILABLE",
+                    "ASSERTION_SCALARS_UNAVAILABLE",
+                    "UNSUPPORTED_SCALARS"
+                  ]
+                },
+                "throwSequence": {
+                  "const": null
+                },
+                "actual": {
+                  "const": null
+                },
+                "expected": {
+                  "const": null
+                }
+              },
+              "required": [
+                "state",
+                "reason",
+                "throwSequence",
+                "actual",
+                "expected"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "afterMonitor": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "enum": [
+                    "0",
+                    "1",
+                    "2+"
+                  ]
+                },
+                "reason": {
+                  "const": "JOINED_SNAPSHOT"
+                },
+                "countSequence": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 128
+                }
+              },
+              "required": [
+                "value",
+                "reason",
+                "countSequence"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "const": "UNKNOWN"
+                },
+                "reason": {
+                  "enum": [
+                    "JOURNAL_UNRESOLVED",
+                    "NATIVE_UNJOINED",
+                    "SOURCE_UNJOINED",
+                    "MARKER_STREAM_INVALID",
+                    "MARKER_UNAVAILABLE",
+                    "SNAPSHOT_INVALID"
+                  ]
+                },
+                "countSequence": {
+                  "const": null
+                }
+              },
+              "required": [
+                "value",
+                "reason",
+                "countSequence"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "afterScopeMissing": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "enum": [
+                    "0",
+                    "1",
+                    "2+"
+                  ]
+                },
+                "reason": {
+                  "const": "JOINED_SNAPSHOT"
+                },
+                "countSequence": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 128
+                }
+              },
+              "required": [
+                "value",
+                "reason",
+                "countSequence"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "const": "UNKNOWN"
+                },
+                "reason": {
+                  "enum": [
+                    "JOURNAL_UNRESOLVED",
+                    "NATIVE_UNJOINED",
+                    "SOURCE_UNJOINED",
+                    "MARKER_STREAM_INVALID",
+                    "MARKER_UNAVAILABLE",
+                    "SNAPSHOT_INVALID"
+                  ]
+                },
+                "countSequence": {
+                  "const": null
+                }
+              },
+              "required": [
+                "value",
+                "reason",
+                "countSequence"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "http",
+        "afterMonitor",
+        "afterScopeMissing"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "not": {}
+}

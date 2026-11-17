@@ -1,0 +1,220 @@
+{
+  "schema": "afw.finite-get-diag3.source-control-plan.v1",
+  "type": "DESIGN_ONLY_TEST_CENSUS_PROPOSAL",
+  "oldControl": {
+    "c1": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+    "literalCorpusSha256": "15d470df5e7ed5350bdedb333236f648c86e69c844e5784d1d8478f6ebac5aaf",
+    "retainedIDs": 35,
+    "preimageAdapter": "9f457450ba1e7a746117fc1498922972613df789",
+    "textRegion": {
+      "firstLine": 125,
+      "lastLine": 247,
+      "bytes": 7055,
+      "sha256": "6e8a25ad347866935c50bf52131b78dbfe993f86d592bdbb3e76bb3278c5e29f",
+      "blob": "d8def22c472de51b5e450112e33a44e5ea4f5a5c"
+    },
+    "condition": "Require exact byte inclusion (once) of frozen C1 scalar extractor/dependencies at old lines125..247 as a unit in successor. Keep shared helpers invoked by it and 62a31 byte-equivalent, re-pin reviewed helpers. Prior admission still covers old35 with prior publication. New fixture-first Source census below exercises successor C1 full-projection compatibility with all original35 literals as a single named regression group, with original per-literal identities/expected values preserved. Run fresh successor D3 publisher with its own shape; do not claim D2 old envelope == D3. If shared grammar changes, stop for explicit revised gate; no silently narrowing old35."
+  },
+  "native": {
+    "environment": "Proposed one Source tooling occurrence, Ubuntu24.04/Node22.23.4,3min,10s per named test, contents:read, attempt1, fixed imports/graph. Locked install only for import of actual S08 fixture/dependency graph; no initialEntryHarness(), createFiniteCoupledOwnerWorld(), SDK/Worker/Miniflare construction, provider/network or D07 business launch. Old C1 native format toy and raw envelope calibration remain pinned. No new toy run. Planned nine grouped IDs, with closed fixture tables and literal expected outcomes/actions sealed before implementation, including actual real helper instead of a parallel implementation. No repeated full419 or prior business modes.",
+    "ids": [
+      [
+        "FG3_CODEC_COUNTS",
+        "Real S08 projector plus canonical codec bytes for map, consumed connection and notices anchors, 0,1,2,3 distinct finite; finite :use never additional; cap→2+; invalid after two→UNKNOWN; frozen business counters identical."
+      ],
+      [
+        "FG3_CODEC_REJECTS",
+        "Missing/empty/nonpairs/duplicate key/noncanonical raw/extra key/wrong purpose/key digest mismatch/foreign or mismatched project/world/revision/connection/orphan or wrong-use time/missing anchors/overbound. Each returns UNKNOWN, no raw detail."
+      ],
+      [
+        "FG3_ONE_SNAPSHOT",
+        "Exercise actual S08 counting/labelling helpers with inert fake f/stub and call/settlement spies: enter label before work, ready on return or throw, use existing one snapshot only, unchanged original counters/errors; internal direct count/unlabelled positive counts/overlap/activeOther/after reuse emit no known marker, no added RPCs. No world open."
+      ],
+      [
+        "FG3_HTTP_JOIN",
+        "Actual successor collector with sealed full-order prefix, same stdout in RAM, ordinal15 strict block (e.g.429; actual503 separate synthetic), 14 earlier returns/passes, count.enter→return, current earliest S08. One partial/journal-torn-after-target still KNOWN if native clean; no laterC16 substitution."
+      ],
+      [
+        "FG3_HTTP_EXCLUSIONS",
+        "Wrong site/earlier native failure/target pass/absent counts, native torn or ambiguous, missing/malformed/nested/quoted/extra numeric/actual200/expected wrong, contradictory native PASS plus journal throw. Distinguish NA/UNKNOWN from N2 FAULT."
+      ],
+      [
+        "FG3_MARKER_JOIN",
+        "Both allowed labels/ordered SourceRows independent of Subtest positions, 0→1 and 1→2+, 15 pass vs15 failed GET,14-only when15 unavailable, explicit UNKNOWN, missing14 plus valid15, partial HTTP-only and counts-only. Journal prefix cut after14 vs after15."
+      ],
+      [
+        "FG3_MARKER_REJECTS",
+        "Duplicate/reversed/misbracketed/foreign/torn/overlong/third marker, extra keys/embedded scalar/string coercion/fake nested; source row duplicates/counter throw/missing; bound count to correct return sequence and prove HTTP unchanged across marker failures."
+      ],
+      [
+        "FG3_C1_COMPAT",
+        "Same 35 sealed C1 literal inputs/expected C1 firstFailure in actual compiled source-side adapter under unchanged projectFirstFailure API. For any negative whose original oracle is gate/layer-specific retain that original decision at that layer, with only nominated outer-family bindings replaced for D3. Report exact per-ID inner verdicts and one native group. Old adapter/producer incapable of providing mandatory finiteGet on valid S01+new schema is scoped preimage incompatibility, no fabricated RED runtime."
+      ],
+      [
+        "FG3_PUBLICATION_CLOSURE",
+        "Real collector+successPacket/publisher on synthetic pairs at allowed bounds, correct notice projection and finiteGet order, Source13 before/after/C1 envelope/one LF; reject unknown extra raw/member, out-of-range/context/E2/wrongcountseq/mixed positive and fault. Prove C1 512, finiteGet512, outcome24576+LF max independent no clipping."
+      ]
+    ]
+  },
+  "own": "Independent OWN author owns actual count/proposal. Suggested minimum distinct guard contrasts even when Source output coherently re-serialized and its archive+log hashes recomputed: joined exact vs native nonprefix/earlier fail, wrong site or pointer, missing count.return, after14/post15 swapped, stale E2 or D2, unknown carrying numbers/unknownReason contradicting proved outer blocker, actual200 or wrong expected, shared C1 regression/N2. Can use existing OWN40 inputs as unmodified data and small targeted groups. Reuse guard/ZIP/API/transport, never import Source helpers. No numerical source truth recoverable from opaque digest. Root reconciles exact census before code/native.",
+  "examples": {
+    "meaning": "Synthetic component literals only, not actual DIAG2/D3 data. Canonical serializations in this order. In examples where all14precursors settled and no interleaving, count.return sequences56/60, target.throw58. Replay consults actual journal, never fixed offsets.",
+    "allow": [
+      {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "KNOWN",
+          "reason": "TARGET_GET_ASSERTION",
+          "throwSequence": 58,
+          "actual": 429,
+          "expected": 200
+        },
+        "afterMonitor": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 56
+        },
+        "afterScopeMissing": {
+          "value": "1",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        }
+      },
+      {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "KNOWN",
+          "reason": "TARGET_GET_ASSERTION",
+          "throwSequence": 58,
+          "actual": 429,
+          "expected": 200
+        },
+        "afterMonitor": {
+          "value": "1",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 56
+        },
+        "afterScopeMissing": {
+          "value": "2+",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        }
+      },
+      {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "KNOWN",
+          "reason": "TARGET_GET_ASSERTION",
+          "throwSequence": 58,
+          "actual": 429,
+          "expected": 200
+        },
+        "afterMonitor": {
+          "value": "UNKNOWN",
+          "reason": "MARKER_STREAM_INVALID",
+          "countSequence": null
+        },
+        "afterScopeMissing": {
+          "value": "UNKNOWN",
+          "reason": "MARKER_STREAM_INVALID",
+          "countSequence": null
+        }
+      },
+      {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "UNKNOWN",
+          "reason": "UNSUPPORTED_SCALARS",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 56
+        },
+        "afterScopeMissing": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        }
+      },
+      {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "UNKNOWN",
+          "reason": "JOURNAL_UNRESOLVED",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 56
+        },
+        "afterScopeMissing": {
+          "value": "UNKNOWN",
+          "reason": "JOURNAL_UNRESOLVED",
+          "countSequence": null
+        }
+      },
+      {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "NOT_APPLICABLE",
+          "reason": "TARGET_PASSED",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "1",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 56
+        },
+        "afterScopeMissing": {
+          "value": "1",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        }
+      }
+    ],
+    "reject": [
+      {
+        "mutation": "KNOWN.http.actual=200,599.1,quoted or missing expected",
+        "reason": "exact scalar contract"
+      },
+      {
+        "mutation": "afterMonitor.countSequence=60 afterScopeMissing.countSequence=56 with digest-consistent artifact",
+        "reason": "wrong settled counter joins"
+      },
+      {
+        "mutation": "afterScopeMissing.value UNKNOWN plus countSequence 60",
+        "reason": "UNKNOWN strict shape"
+      },
+      {
+        "mutation": "numeric 0, integer2 or raw list under value",
+        "reason": "only bounded string enum"
+      },
+      {
+        "mutation": "KNOWN.status from case16 despite exact same S08 assertion",
+        "reason": "case15 first validated throw only"
+      },
+      {
+        "mutation": "14joined with 13 PASS and native14 unavailable",
+        "reason": "not a verified checkpoint"
+      },
+      {
+        "mutation": "native.integrity ambiguous/torn plus known of either kind",
+        "reason": "needs prefix; distinction from journal tail"
+      },
+      {
+        "mutation": "earlier valid NOTICES first throw plus finiteGet.http.KNOWN",
+        "reason": "cannot represent two different earliest throws"
+      }
+    ]
+  },
+  "release": "Root alone may authorize fixture-first DATA then implementation, measured immutable E3/source25 and independent OWN successor, both tooling natives+freshreviews, then one full-order diagnostic; no immediate run or code. Stop after the single collected result or failed collection, independently preserve/admit/close, return to cause analysis. A NA/UNKNOWN/timeout yields no automatic repeat."
+}

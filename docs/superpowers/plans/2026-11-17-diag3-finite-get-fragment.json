@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AFW FINITE_GET_DIAG3 bounded finiteGet projection v1",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "afw.c2-finite-get-diag3.v1"
+    },
+    "http": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "state": {
+              "const": "KNOWN"
+            },
+            "reason": {
+              "const": "TARGET_GET_ASSERTION"
+            },
+            "throwSequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            },
+            "actual": {
+              "type": "integer",
+              "minimum": 100,
+              "maximum": 599,
+              "not": {
+                "const": 200
+              }
+            },
+            "expected": {
+              "const": 200
+            }
+          },
+          "required": [
+            "state",
+            "reason",
+            "throwSequence",
+            "actual",
+            "expected"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "state": {
+              "const": "NOT_APPLICABLE"
+            },
+            "reason": {
+              "enum": [
+                "EARLIEST_THROW_DIFFERENT",
+                "EARLIER_NATIVE_FAILURE",
+                "TARGET_PASSED",
+                "NO_QUALIFYING_THROW"
+              ]
+            },
+            "throwSequence": {
+              "const": null
+            },
+            "actual": {
+              "const": null
+            },
+            "expected": {
+              "const": null
+            }
+          },
+          "required": [
+            "state",
+            "reason",
+            "throwSequence",
+            "actual",
+            "expected"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "state": {
+              "const": "UNKNOWN"
+            },
+            "reason": {
+              "enum": [
+                "JOURNAL_UNRESOLVED",
+                "COUNTER_UNAVAILABLE",
+                "TRUNCATED_NATIVE",
+                "NATIVE_FORMAT_UNSUPPORTED",
+                "AMBIGUOUS_EVIDENCE",
+                "TARGET_NATIVE_UNAVAILABLE",
+                "CONFLICTING_EVIDENCE",
+                "SOURCE_ROW_UNAVAILABLE",
+                "ASSERTION_SCALARS_UNAVAILABLE",
+                "UNSUPPORTED_SCALARS"
+              ]
+            },
+            "throwSequence": {
+              "const": null
+            },
+            "actual": {
+              "const": null
+            },
+            "expected": {
+              "const": null
+            }
+          },
+          "required": [
+            "state",
+            "reason",
+            "throwSequence",
+            "actual",
+            "expected"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "afterMonitor": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "enum": [
+                "0",
+                "1",
+                "2+"
+              ]
+            },
+            "reason": {
+              "const": "JOINED_SNAPSHOT"
+            },
+            "countSequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            }
+          },
+          "required": [
+            "value",
+            "reason",
+            "countSequence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "const": "UNKNOWN"
+            },
+            "reason": {
+              "enum": [
+                "JOURNAL_UNRESOLVED",
+                "NATIVE_UNJOINED",
+                "SOURCE_UNJOINED",
+                "MARKER_STREAM_INVALID",
+                "MARKER_UNAVAILABLE",
+                "SNAPSHOT_INVALID"
+              ]
+            },
+            "countSequence": {
+              "const": null
+            }
+          },
+          "required": [
+            "value",
+            "reason",
+            "countSequence"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "afterScopeMissing": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "enum": [
+                "0",
+                "1",
+                "2+"
+              ]
+            },
+            "reason": {
+              "const": "JOINED_SNAPSHOT"
+            },
+            "countSequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            }
+          },
+          "required": [
+            "value",
+            "reason",
+            "countSequence"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "const": "UNKNOWN"
+            },
+            "reason": {
+              "enum": [
+                "JOURNAL_UNRESOLVED",
+                "NATIVE_UNJOINED",
+                "SOURCE_UNJOINED",
+                "MARKER_STREAM_INVALID",
+                "MARKER_UNAVAILABLE",
+                "SNAPSHOT_INVALID"
+              ]
+            },
+            "countSequence": {
+              "const": null
+            }
+          },
+          "required": [
+            "value",
+            "reason",
+            "countSequence"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "http",
+    "afterMonitor",
+    "afterScopeMissing"
+  ],
+  "additionalProperties": false
+}
