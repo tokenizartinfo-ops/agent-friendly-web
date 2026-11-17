@@ -1,10 +1,10 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/27",
-  "timestampUTC": "2026-11-17 05:21:16 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/28",
+  "timestampUTC": "2026-11-17 05:23:58 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "c5ae95785877afe2a9a317bb7ca31f1d967e2f57",
-  "phase": "FINITE_GET_DIAG3_REVIEWED_CLOSED_SCOPE_CAPTURE_DESIGN_ONLY",
+  "previousCheckpoint": "865986c7f74d1f738c7f86d524eb39c6a53e5c03",
+  "phase": "SCOPE_WRITE_STATIC_CONTRACT_CONTRAST_DESIGN_ONLY",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -134,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finish data-only minimal scope scalar design + decision/cost review. No code, new test ref or native activation yet. Existing actual diagnostic fully closed. Source4/OWN4 of5; no reset.",
+  "next": "Finish static exact-one transaction/callback contract + drop reachability review. Design/fixtures only, no Source/OWN changes or new runs. Runtime repair not proven.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -162,6 +162,13 @@
     "state": "DESIGN_ONLY_CODE_NATIVE_HOLD",
     "datum": "Actual numeric scope put assertion at existing S08:113:283",
     "reviewBeforeCode": true,
-    "round5NotConsumed": true
+    "round5NotConsumed": true,
+    "costReview": {
+      "recommendation": "Do not consume last5 solely for0-vs2 before exact-one contract and reachability contrast",
+      "implementationHold": true,
+      "nativeHold": true
+    },
+    "contract": "40e56188f2add83f6929801027318fe72df309a4",
+    "fixturesBeforeCode": "9c357895afeb46d5f3e19c4c42bab63691d35102"
   }
 }
