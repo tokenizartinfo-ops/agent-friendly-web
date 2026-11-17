@@ -1,0 +1,71 @@
+{
+  "schema": "AFW-DIAG3-ROOT-INERT-DATA-AUDIT/1",
+  "timestampUTC": "2026-11-17 03:22:16 UTC",
+  "unchangedDefs": [
+    {
+      "key": "streamOut",
+      "same": true
+    },
+    {
+      "key": "streamErr",
+      "same": true
+    },
+    {
+      "key": "capture",
+      "same": true
+    },
+    {
+      "key": "journal",
+      "same": true
+    },
+    {
+      "key": "site",
+      "same": true
+    },
+    {
+      "key": "error",
+      "same": true
+    },
+    {
+      "key": "event",
+      "same": true
+    },
+    {
+      "key": "openCase",
+      "same": true
+    },
+    {
+      "key": "witness",
+      "same": true
+    },
+    {
+      "key": "nativeCase",
+      "same": true
+    },
+    {
+      "key": "native",
+      "same": true
+    },
+    {
+      "key": "firstFailure",
+      "same": true
+    }
+  ],
+  "source25Previous25": true,
+  "frozen17": true,
+  "deferred8Null": true,
+  "finiteGetExact": true,
+  "blueprintInadmissible": true,
+  "SourceExecuted": false,
+  "SourceFixtureSeal": "4469d73e40f758e356e172c119687dde119c1fe6",
+  "wholeSixComponentsVerified": true,
+  "Source9Groups145Inner": true,
+  "C1Original35IDsAndOraclesRetained": true,
+  "byteGuard": {
+    "raw510Encoded512": true,
+    "raw511Encoded513": true,
+    "raw24574Encoded24576": true,
+    "raw24575Encoded24577": true
+  },
+  "sourceExecution": false
+}
