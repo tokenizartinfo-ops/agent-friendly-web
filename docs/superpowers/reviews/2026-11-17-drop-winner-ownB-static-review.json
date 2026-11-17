@@ -1,0 +1,675 @@
+{
+  "schema": "AFW.OWN5.STAGE_B.INDEPENDENT_STATIC_REVIEW/1",
+  "timestampUTC": "2026-11-17 14:57:02 UTC",
+  "reviewer": "/root/c2_v2_own_receiver_fix1",
+  "scope": {
+    "project": "AFW",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "immutable Git DATA only",
+    "origin": "github.com",
+    "resourceType": "detached blob",
+    "allowedAction": "read and create immutable review blob with FULL readback",
+    "rollback": "discard review proposal"
+  },
+  "verdict": {
+    "SPEC": "PASS_STATIC",
+    "QUALITY": "PASS_STATIC",
+    "findings": [],
+    "blockingQuestions": [],
+    "nativeAuthority": false,
+    "actualBusinessAuthority": false
+  },
+  "requirements": {
+    "brief": "f0eeffdd2bc4a86e9b8935f0fd737743903d7f23",
+    "adapterRuling": "aff36fcb7858462c2984d55bc2903ff0963cc252",
+    "publicBoundary": "f1716eba86aa6d64132d1c1d6e42ef0b7a4f77fa",
+    "observedStageAREDReview": "9de5ca38b5550f6ef21a2e2b4449d56e58caefc6",
+    "rounds": {
+      "Source": 5,
+      "OWN": 5,
+      "max": 5,
+      "noReset": true
+    }
+  },
+  "reviewed": {
+    "documents": [
+      {
+        "name": "brief",
+        "blob": "f0eeffdd2bc4a86e9b8935f0fd737743903d7f23",
+        "bytes": 10260,
+        "sha256": "240848d7eb41f03048f3959a41f45ad4bc55d0b060a7ceb7bda7ee5f69b26cec"
+      },
+      {
+        "name": "adapterRuling",
+        "blob": "aff36fcb7858462c2984d55bc2903ff0963cc252",
+        "bytes": 2244,
+        "sha256": "2d79a2fa5371d5ba0972b12009232e688e6f8d56f806f87f0022ed5b03848a43"
+      },
+      {
+        "name": "nativeIndex",
+        "blob": "59083d99813f3490e249d59d5e91190ea1fa2780",
+        "bytes": 59341,
+        "sha256": "60a8a6cf96305d688dc245626f19ac43a7066f4efa7bea251720c3992003e26e"
+      },
+      {
+        "name": "graph",
+        "blob": "d1d28d86c2e9908ed2c3f3ee8243f61883814666",
+        "bytes": 57020,
+        "sha256": "cd99df54188a0443781f96686f7437555616974befce4415fe1861ffa84c4ae9"
+      },
+      {
+        "name": "runner",
+        "blob": "6f1e7cae0a00cba0152be58c6880afa5dddc788d",
+        "bytes": 6480,
+        "sha256": "c315f2e4875cc9ac235d64c764636feea4d06b957482bb7f4821ba28e15640b5"
+      },
+      {
+        "name": "workflow",
+        "blob": "a713c414759a6d8e73577d24a9da5607efd4b8f3",
+        "bytes": 2660,
+        "sha256": "677daa1d5002d5e43c241a3df32bd5fecfba50d8a575767fed55b8bb00402223"
+      },
+      {
+        "name": "report",
+        "blob": "e01d4e2d1c753e8ec211af2c46a0e72145831f3d",
+        "bytes": 8041,
+        "sha256": "1b79aaffb34e4ece6a36f8ef3a749006ee6941359f0584c6f1bb99c1a09a8083"
+      },
+      {
+        "name": "fullIndex",
+        "blob": "f486a16f72de1559952f3a2e9b8b6f1d2566426e",
+        "bytes": 60788,
+        "sha256": "e58212c62ee227cc50796e12bc617b1a5302703806200a6abd1b14d8f29edf6b"
+      },
+      {
+        "name": "diff",
+        "blob": "4bb41bcd7e1b4d5e471329753a0ae4e4ff76e1a0",
+        "bytes": 96437,
+        "sha256": "c6c030a57c0e1d1234e037fe45918892c8a5ca9983132618abca0e0a825adedb"
+      },
+      {
+        "name": "preservation",
+        "blob": "da382a77f0c183d525c44e670013d75d8f1990f7",
+        "bytes": 41738,
+        "sha256": "10e7a4151245681cafc0a7ff7a8bfdbe2998e8b76f19d51d437195adc410dac1"
+      },
+      {
+        "name": "oldNative95",
+        "blob": "b33a7aba421b9ab3935b0bff2e072055d8f192ff",
+        "bytes": 38432,
+        "sha256": "8c0b11d5b843ba0afe965d323c1912ac1747477b6bd39a24433fd4ddfc515b9c"
+      }
+    ],
+    "nativeBodiesIndependentlyMeasured": [
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+        "blob": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+        "bytes": 5365,
+        "sha256": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs",
+        "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1",
+        "bytes": 9733,
+        "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bindings.mjs",
+        "blob": "aaee696f0c05cda224d7f20fa7a364c445b0741c",
+        "bytes": 64627,
+        "sha256": "05c48c3204c148f1dae31723e3f71561b9e5df31c22280e6da30743500b92e8f"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs",
+        "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854",
+        "bytes": 35339,
+        "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs",
+        "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+        "bytes": 2440,
+        "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs",
+        "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+        "bytes": 4511,
+        "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs",
+        "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+        "bytes": 3355,
+        "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/reader.mjs",
+        "blob": "4fb5a8d5e5b0b14c58f9935f5fd4dbc0589c23e0",
+        "bytes": 4002,
+        "sha256": "e01335d6b38840c82dd9f0d5693fcf95a49ecdd10384dee37b302f73ad73b26c"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/reader.mjs",
+        "blob": "ddaa91771171abf0dba6110184b06e631849c2ec",
+        "bytes": 4080,
+        "sha256": "eeb28b5daa384c3b04331d5a982e8950669672483349154474c32d74cd500e4c"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/controls.mjs",
+        "blob": "c3c1cc2aeb667d068d16e1fadf64fa5c1e9c4ef0",
+        "bytes": 1921,
+        "sha256": "189beee245f5a3c61510dfbb1bb02b4315f5284800fe2d728f2a984a089c79fe"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/selection.json",
+        "blob": "f921fe1897d1a70b2217d0925a6508c110834067",
+        "bytes": 34181,
+        "sha256": "45280821703102c3a29c262fe196ba2fe915b4d6b3f8acbd8bba70cca422e440"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/root-actual26.json",
+        "blob": "1fea33135f8943707738d4f078ff3616e9b5132c",
+        "bytes": 17603,
+        "sha256": "53f327fcd0add7a32639c9cd172a26e91d27eafd5bfaeaa29b2acad9618c3705"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/source-final-index.json",
+        "blob": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+        "bytes": 13613,
+        "sha256": "31c1d325c72c4253fdac1ca2680120d3590334244b78fbeff1fced8ef51f4041"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-schema.json",
+        "blob": "81be13ca960a143d565d55dd958b4e4ff24d3c96",
+        "bytes": 34193,
+        "sha256": "c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-selection.json",
+        "blob": "8fe9907fb12fb71361819551df04c2830a78452b",
+        "bytes": 5173,
+        "sha256": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model26.json",
+        "blob": "53bfd6716ecb04153158e6653700648140528d27",
+        "bytes": 13909,
+        "sha256": "8c65a21b836eb192bc1a6a954f5d625e55231fc2dad86229287b4ba9b831c25d"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-schema.json",
+        "blob": "c8e05b8882728cdcfaffa18f5d311256a42851ec",
+        "bytes": 34193,
+        "sha256": "60a3e768fdf5e6032dcaed07a54f0dd3c7aba342926689c9e9566c3d9f832f9f"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-selection.json",
+        "blob": "162c194073a87e2a3bc906b3b605df28b17ea17f",
+        "bytes": 733,
+        "sha256": "0ac2d8294c51e2f2b4735ce9d0bb995591d31bb70dc72ff01efee3d59af8de7b"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/expectations.json",
+        "blob": "a1291b71dd21b263d280f6feae8efc8d3fce0c24",
+        "bytes": 30212,
+        "sha256": "74c26493ec61dc8e442139ea412e5a629617e3b4dcdb6a235e6ab6938c9d331c"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/fixture-seal.json",
+        "blob": "bfff4346bdbe21bbd431df80a07d234828a89d97",
+        "bytes": 16153,
+        "sha256": "b06de3862ea2fcb5464386db0b627b963d37ed2917afe8de3be1b9e1df37b712"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_O01.json",
+        "blob": "55635df6cbff1e7bbf72a165c2db077371f9c710",
+        "bytes": 57179,
+        "sha256": "4bc1a689cbab532d692191da20aa5b601dfa5881b9ab1d175dce89b165a5220a"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_C01.json",
+        "blob": "538b8e92709a8299a6525c6221bf087495ebc1c2",
+        "bytes": 58557,
+        "sha256": "cfb0a495d2c0d3bcec073daf80a77b7b9e25a49b3a24caccb190125c6e4c0577"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_C04.json",
+        "blob": "d67d25f148c90051ba415cde1541632e6c8fae6d",
+        "bytes": 67779,
+        "sha256": "b19d32ac6a18cca5f87582356aef087d30a3cfe1fd2383e54df428e5b197932a"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_U03.json",
+        "blob": "79d2fa3cd1c973bd589328bcc94eb1e73fedec8d",
+        "bytes": 58521,
+        "sha256": "628f1784cf21f9b375084ef883bcb6818c3899ad302c35b54933c46f1f80c34e"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_U04.json",
+        "blob": "0d1ea21f873dbc4ef7ed065a3eaab2717c19eef0",
+        "bytes": 58575,
+        "sha256": "135791b920bdfcd3bcfeca6aad1aee98053553e52c2b2e3e123ded307d42c960"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_U08.json",
+        "blob": "b7e44097c3647f475125508cccb0f0e5bed8b588",
+        "bytes": 58331,
+        "sha256": "0d4b4c9b3d643032a243bdf5418b0769bc8aa90772b71903b4f6373a9739ae96"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_U09.json",
+        "blob": "7dd365c1eedf1c2adfcbcbcca52a5cd89b02576c",
+        "bytes": 59215,
+        "sha256": "cdc85434d5fae9954c91a917ed24c90e9a548b9997e2d06f52aa36f52c6f0176"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_A02.json",
+        "blob": "49905075ea732cca4f6f0b9b4bc0ee9704fc8159",
+        "bytes": 57179,
+        "sha256": "c855ac22c5a8b5a90b245e98a1e84780a00aad459626302e7ecb85b69a99be0b"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_A05.json",
+        "blob": "a0de74b81e8035aa01bfdcc4b183372fc7dbd9d9",
+        "bytes": 57173,
+        "sha256": "cf591b2f297b04a3ac43e4b2eb830af5585a7e456fa9eb3171cd72a5a42938f3"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_R01.json",
+        "blob": "8bcba118f1b21e4baa75cdf12b4d9a21e8ebe56e",
+        "bytes": 57473,
+        "sha256": "7b683f136ad759cc05b66e0dbc675a3b25b3a48f74370c343cf364e75d17137b"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_R05.json",
+        "blob": "58b9e342ce7ff68c26e309bbad418b4d2dd824c0",
+        "bytes": 59297,
+        "sha256": "1cdc19c632165419b7d0228be9154da0274bc678040a5169272851e566749c13"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_R11c.json",
+        "blob": "e9f1c250d7d7e4fd44a5e8c3d959634e8cceb334",
+        "bytes": 58550,
+        "sha256": "eed8227822ba85ee91f29ddb97b095fc6be288006d515cf75972ae1f847a6efd"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_R12.json",
+        "blob": "606c89466848bf990ce18729fcbbeddccd828194",
+        "bytes": 58697,
+        "sha256": "76a5a0498c6254400903aba66334edb7deee3ead2c3c3027db72c903d53c79f6"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_Q14.json",
+        "blob": "277c3c18445bbd8cfdfcfa193e2ce941cbadab3c",
+        "bytes": 57259,
+        "sha256": "de6770910fa163af6572914d5e8af079a1f13a3d8c1ddf3d3d3ff32974a1774d"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_B02b.json",
+        "blob": "95809044076ba04a0971411b49d0b1c7934b98f9",
+        "bytes": 57195,
+        "sha256": "4b113d4cd98b6ce61e6c9eee35e6cad92f23100b6fa7b5302895ed903b9dbec8"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_I01.json",
+        "blob": "7306173624525f187224579de1911bfff0b01189",
+        "bytes": 57131,
+        "sha256": "290d7fb811d7e881602877732ab2a8bd100b78552b350014d1a891cb00a33c08"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/fixtures/DW4_I06.json",
+        "blob": "592487e4bee0b04ab793ec7ddab294424bb3375d",
+        "bytes": 57131,
+        "sha256": "a6bd1677aaa0a0b4641d44fc2c1cb84e5142212962d8a47924146c9422b587d5"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/bindings.mjs",
+        "blob": "4d54d57322ea67c3a29278f75288c7c9b686105b",
+        "bytes": 3189,
+        "sha256": "df2215b4aaea2cf3428e08531c4ed74ba9a35dd8e710389e2c6f0f8c138b8a23"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/drop-winner.mjs",
+        "blob": "8e794a8039575694aa53064eccc4ed397e8d19a4",
+        "bytes": 2726,
+        "sha256": "2d24ac7238028ce13eac83eaf20539d49710f011ba8914fcb5626f1fe592ec9a"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/reader.mjs",
+        "blob": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
+        "bytes": 4983,
+        "sha256": "6a88e4d5844aa03b26b495046dbf3f5d42904416aefed800d1007ca1dd45b544"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/occurrence.mjs",
+        "blob": "1298c105fd934b0b8053596b8473aba947eb1854",
+        "bytes": 852,
+        "sha256": "b1fa2b21546d401801d17be7fe126ad6753bdce89de64f35089180eb1c07a5f4"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/occurrence-controls.mjs",
+        "blob": "1e78c4a01e6f19a247134c21434a6f538f9a60fa",
+        "bytes": 2216,
+        "sha256": "e3601d551581beeea438985cfa23e49788591fc5fbfbe655d50ccd09b08736e3"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/drop-winner-tools.test.mjs",
+        "blob": "ce04cc3bc05e0b8e537c674bf3ef75911262f5af",
+        "bytes": 6416,
+        "sha256": "94cc0b0bac61448214b3ffaa62ecdc03409fd04bf96c705dfbb44d82710b7fe3"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/proof-schema.json",
+        "blob": "3dcbe744f52b7b285bdfdecb4f7f124a2ef5e969",
+        "bytes": 4136,
+        "sha256": "a9105fbdeaba0ab75281557443e1e7212fe8033c213344981afe9281153ecf29"
+      },
+      {
+        "path": ".github/workflows/afw-c2-own-drop-winner-tools.yml",
+        "blob": "a713c414759a6d8e73577d24a9da5607efd4b8f3",
+        "bytes": 2660,
+        "sha256": "677daa1d5002d5e43c241a3df32bd5fecfba50d8a575767fed55b8bb00402223"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/native-graph.json",
+        "blob": "d1d28d86c2e9908ed2c3f3ee8243f61883814666",
+        "bytes": 57020,
+        "sha256": "cd99df54188a0443781f96686f7437555616974befce4415fe1861ffa84c4ae9"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/run-own-drop-tools.mjs",
+        "blob": "6f1e7cae0a00cba0152be58c6880afa5dddc788d",
+        "bytes": 6480,
+        "sha256": "c315f2e4875cc9ac235d64c764636feea4d06b957482bb7f4821ba28e15640b5"
+      }
+    ],
+    "measuredBodyCount": 47,
+    "measuredBodyUTF8Bytes": 1421256,
+    "nativeAllDescriptors": 173,
+    "expectedGraphFiles": 171,
+    "representativeCompleteInputs": [
+      "DW4_O01",
+      "DW4_C01",
+      "DW4_C04",
+      "DW4_U03",
+      "DW4_U04",
+      "DW4_U08",
+      "DW4_U09",
+      "DW4_A02",
+      "DW4_A05",
+      "DW4_R01",
+      "DW4_R05",
+      "DW4_R11c",
+      "DW4_R12",
+      "DW4_Q14",
+      "DW4_B02b",
+      "DW4_I01",
+      "DW4_I06"
+    ],
+    "fullTextReadAdditional": [
+      "Original73 fixture index 7ddd5716920ef46ef93afbcab2e68bf62ee1e5e7 as DATA; not its 73 bodies.",
+      "Frozen legacy/transport.mjs 5b8b36129eb9ab3af25ead0bbba840a32bdf67c2; scoped unchanged import text."
+    ],
+    "limits": "Static review of full new code/test/controller/WF/schema/binding DATA, relevant unchanged imported OWN code, all69 recipe/expectation rows and 17 complete new literal boundary inputs. No wholesale fetch of old95 or all142 complete inputs. No import, evaluation, parser/AST, compilation, syntax check, test or native run of OWN or Source code. Builtin/generic JSON/crypto DATA inspection only. Exact95 and remaining fixture preservation checked against immutable descriptors; runtime full173 byte validation remains mandatory."
+  },
+  "dataAssertions": [
+    {
+      "name": "173unique_exact_graph171_plus_runner_graph",
+      "passed": true
+    },
+    {
+      "name": "old95descriptor_preservation",
+      "passed": true
+    },
+    {
+      "name": "old85mounted_same_descriptors",
+      "passed": true
+    },
+    {
+      "name": "69sealed_fixture_descriptors_unchanged",
+      "passed": true
+    },
+    {
+      "name": "69expectation_digest_independent",
+      "passed": true
+    },
+    {
+      "name": "ten_new_before_null_diff_full_reconstruction",
+      "passed": true
+    },
+    {
+      "name": "actual26_canonical_hash_exact",
+      "passed": true
+    },
+    {
+      "name": "model26_hash_separate_fixed",
+      "passed": true
+    },
+    {
+      "name": "both_selection_hash_and_same20order",
+      "passed": true
+    },
+    {
+      "name": "schema_source13_exact_binding",
+      "passed": true
+    },
+    {
+      "name": "reused_reducer20IDs_match_both_new_bindings",
+      "passed": true
+    },
+    {
+      "name": "inherited_C1_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_finiteGet_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_capture_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_journal_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_witness_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_event_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_native_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_nativeCase_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_site_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "inherited_error_schema_unchanged",
+      "passed": true
+    },
+    {
+      "name": "original73_selection_ids_expectation_authority",
+      "passed": true
+    },
+    {
+      "name": "inspected_literal_imports_closed_only_OWN_or_Node",
+      "passed": true
+    }
+  ],
+  "bindingReview": {
+    "entrypoints": "d4Read(input,trusted) fixes D4_ACTUAL; d4ModelRead fixes D4_MODEL. A single shared readBound implements admission. No outcome-dependent selection, wildcard, model fallback, live source context derivation or trust override.",
+    "actual": {
+      "measurement": "1fea33135f8943707738d4f078ff3616e9b5132c",
+      "sourceIndex": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+      "canonical26SHA256": "47d154b05de3d62c8d2af6f49060a82da328e1d5105975be0a883a913f8ee280",
+      "schema": "81be13ca960a143d565d55dd958b4e4ff24d3c96",
+      "canonicalSelectionSHA256": "09f9928830b63294f7ed27b00ea2a9593477fda2d6d0f7300e536faa5cd0bd27",
+      "actualCaptureContext": "Must be supplied later independently by Root; no run/job invented or admitted by this review."
+    },
+    "model": {
+      "measurement": "53bfd6716ecb04153158e6653700648140528d27",
+      "canonical26SHA256": "c9eafc12cfcb8d3b8696f18fd05cdc876728bbacd84c8638e5e334803c6aeae6",
+      "scope": "Synthetic MODEL26 only, separate from Stage A original D3 MODEL25; eleven inert slot descriptors are model DATA, not Source execution."
+    },
+    "pins": "pinnedJson verifies immutable Git object ID before parsing DATA. binding verifies 26 canonical edges, index blob/SHA, selection hash, schema job and measured 13 before/after SHA arrays, then deep-freezes the tuple. bindEdges admits only exact ordered tuple equality and its builtin SHA256 digest; g20Trusted's old25 shortcut is not weakened or invoked. Exact fixed descriptor equality preserves path/mode/type/blob/bytes/SHA typing. No caller crypto/inflate callback participates in new D4 proof.",
+    "caller": "gApiJoin requires exact trusted.expected keys and nomination/parent/steps, valid head/tree/run/job types, and independent API run/job/commit agreement. Missing trusted is closed. The receiver cannot authenticate where a caller obtained expected; Root must supply that independent authority and fresh capture tuple."
+  },
+  "codeReview": {
+    "wholeEnvelope": "Exact six input keys; fixed-bound full API+job/step/time/commit checks, untruncated capped raw tree and every26 admitted path/blob/mode/optional size; full canonical two-frame log/context/custody matching. Whole new outcome schema is validated before pure projection joins; the implementation passes the original complete observation without deleting facts or mutating input.",
+    "artifact": "Fixed artifact name/file, one listing item, run/job/head/branch match, created/expiry bounds; payload <=24577 bytes including LF and exact canonical log outcome+LF. Frozen strict ZIP parser retains single entry, UTF8 canonical base64, sizes/CRC, allowed version10/20, complete extras TLV/noZIP64, DD zero-or-equal and CRC/length agreement, bounded deflate output and complete compressed input consumption. Uses builtin inflateRawSync directly. No transport/ZIP change.",
+    "publicComponent": "dropWinner enforces exact ordered four keys/case/enums, <=512 UTF8 bytes, one-way publicSite!=UNKNOWN -> site equality and QA_MARKED_STUB_NON_OK. Whole canonical outcome prevents duplicate or reordered wire objects. Independent UNKNOWN axes remain allowed. Returns a separate four-field copy in unchanged order.",
+    "eligibility": "Every nonUNKNOWN axis requires clean prefix|complete journal with null unknown reason and native prefix, exact first56 serial 14 action/count enter/return/error-null rows/current14 native PASS, event57 Scope15 action.enter. Open case must be exactly57 events/native14/open selected action/no AFTER; closed case requires positions58 action return|throw,59 count.enter,60 count.return and row15 PASS iff return/FAIL iff throw. Interleaved AFTER before count.return fails those positions; valid later rows or complete82 remain allowed. Torn/ambiguous/empty is never eligible for nonUNKNOWN.",
+    "inheritedConsistency": "g20Partial runs first and retains serial reducer, digest/byte/firstThrow/unknownReason/native ordering checks and same-case nativePASS versus action/countthrow rejection even for allUNKNOWN/torn tails. C1 and finiteGet run unchanged; their schemas,20 selected IDs and legacy replay/capture/journal/native/event/site/error schema shapes equal both new DATA schemas. Known finiteGet pre-DROP GET assertion conflicts with any nonUNKNOWN DROP. AllUNKNOWN bypasses only new DROP eligibility, never inherited checks.",
+    "receipt": "Returns exact admitted component plus inherited replay/native/witness/firstFailure/finiteGet/sourceReads/custody/capture/context/artifact digests. SourceQualified, Task1Pass, nativeQualification, finalSourceBinding and seven nonclaims remain false.",
+    "privateBoundary": "Four fields do not expose private raw marker positions/Source rows, transport origin, Request/map/epoch/cell/lease/error identity or absent private RAW TAP. Static review accepts only public shape/eligibility/contradiction and fixed producer binding. Hidden coherent substitution remains untestable here; pinned Source qualification/native proof is a separate obligation, never a cryptographic authentication claim."
+  },
+  "occurrenceReview": {
+    "exactAdapter": "Original gApiJoin verifies all selected step names uniquely and monotonically. readOccurrence then chooses the exact fixed command name Observe first DROP in the full case order and verifies its selected step number before invoking old log window validation. This handles ACTUAL6 command fifth and MODEL5 command fourth, correcting positional coupling without changing oldABI.",
+    "units": [
+      "MODEL5_COMMAND_WINDOW",
+      "MODEL5_SHIFTED_MARKER",
+      "MODEL5_FOREIGN_COMMAND",
+      "MODEL5_FOREIGN_STEP",
+      "ACTUAL6_COMMAND_WINDOW",
+      "ACTUAL6_SHIFTED_MARKER",
+      "ACTUAL6_FOREIGN_COMMAND",
+      "ACTUAL6_FOREIGN_STEP",
+      "ACTUAL_MISSING_TRUSTED",
+      "MODEL_MISSING_TRUSTED"
+    ],
+    "unitsBoundary": "Eight units exercise API/log adapters on synthetic IDs and times: each family has positive command-window plus shifted-marker, foreign-command and foreign-step rejects. Two additional missing-trusted entrypoint negatives. They are separate from142 fixture evaluations and do not demonstrate a complete actual business positive.",
+    "closure": "All literal relative imports in the inspected new and reused graph resolve to mounted OWN files; nonrelative imports are Node builtins. Frozen legacy transport/fixed/shape are mounted exact. Binding DATA paths are explicitly mounted. No Source code/body text import, dynamic Source execution or dependency installation is present."
+  },
+  "fixtureReview": {
+    "old": {
+      "count": 73,
+      "admit": 32,
+      "reject": 41,
+      "canonicalResultsSHA256": "98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb",
+      "unchangedNativeDescriptorInventory": 95,
+      "reusedOldBodiesMounted": 85,
+      "meaning": "Old73 selection canonical IDs, original8 group identities, fixture descriptors and unchanged old control/reader ABI retained; remaining10 old metadata/retired controller/WF records preserved by immutable reference, not mounted as a current workflow."
+    },
+    "append": {
+      "count": 69,
+      "expectedAdmit": 26,
+      "expectedReject": 43,
+      "expectationSeal": "a1291b71dd21b263d280f6feae8efc8d3fce0c24",
+      "fixtureSeal": "bfff4346bdbe21bbd431df80a07d234828a89d97",
+      "expectedResultsSHA256": "7bd0f0c8d8ca7a5280cfb2fe3238b93b42dcaeaf49e4a00203f5732e6d98ae27",
+      "meaning": "Independent digest recomputed solely from presealed {id,entry,accepted,dropWinner} recipes, not guard output. All69 mounted descriptors equal StageA seal; all69 expectation rows read."
+    },
+    "representativeAssessment": [
+      "O01 confirms exact open57/native14; C01 target throw/fail with settled count; C04 all20+AFTER complete82 accepted.",
+      "U03 torn suffix, U04 ambiguous native, U08 native FAIL without journalthrow, U09 AFTERthrow preserve allUNKNOWN and inherited fact distinctions.",
+      "A02 unknown site with known QA outer and A05 known site+QA but UNKNOWN publicSite preserve independent axes/no converse.",
+      "R01 between action/count and R05 AFTER interleaving violate eligibility. R11c same-ID PASS+throw remains inherited rejection despite torn suffix/allUNKNOWN. R12 known pre-DROP GET conflicts with knownDROP.",
+      "Q14 duplicate raw member produces noncanonical payload despite parsed shape; reject. B02b uses crossed ACTUAL edges on MODEL; reject. I01 wrong archive digest and I06 wrong tree blob remain rejected with allUNKNOWN."
+    ],
+    "scopeLimit": "These are static full-input boundary inspections, not 17 executions or predictions authenticated by the guard. All142 controls still require first covering native run. Fixed-enum Q11 exceeds512 with an extra key and is also invalid shape; not an isolated cap-only test.",
+    "combinedExpected": {
+      "nativeGroups": 9,
+      "fixtureEvaluations": 142,
+      "admit": 58,
+      "reject": 84,
+      "separateUnits": 10,
+      "executedInThisReview": 0
+    },
+    "testLogic": "Each original group invokes original runEvaluation on unchanged inputs; canonical old73 result hash fixed. New group reads all69 in immutable expectation/seal order, invokes explicit MODEL or ACTUAL wrapper, checks exact G20 rejection or complete nonclaim/inherited/exact DROP receipt, and requires fixed new69 result digest/count. Unit names/count are fixed separately. after-hook requires all groups/physical old order, complete canonical results and no missing/extra units before emitting one bounded summary. Canonical order is distinguished from physical grouped execution."
+  },
+  "nativeSafety": {
+    "nomination": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "originalLeaves": 3203,
+      "branch": "lab/afw-c2-own-20261117-drop-winner-tools",
+      "message": "AFW-C2-OWN-DROP-WINNER-TOOLS-ONEUSE-20261117",
+      "workflow": ".github/workflows/afw-c2-own-drop-winner-tools.yml",
+      "job": "own-drop-winner-tools",
+      "steps": [
+        "Read the exact one-use receiver head",
+        "Use the fixed Node runtime",
+        "Check receiver modules and test syntax",
+        "Run all receiver controls",
+        "Preserve the bounded receiver tooling receipt"
+      ],
+      "prefix": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/",
+      "runner": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/run-own-drop-tools.mjs",
+      "test": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/drop-winner-tools.test.mjs",
+      "node": "22.23.4",
+      "image": "ubuntu-24.04",
+      "permissions": {
+        "contents": "read"
+      },
+      "event": "push",
+      "attempt": 1,
+      "jobMinutes": 3,
+      "totalMs": 120000,
+      "stdoutCap": 65536,
+      "stderrCap": 65536,
+      "artifact": {
+        "name": "afw-c2-own-drop-winner-tools",
+        "path": "output/own-drop-winner-tools.json",
+        "fileName": "own-drop-winner-tools.json",
+        "retentionDays": 7,
+        "bytesIncludingLF": 4096
+      }
+    },
+    "controller": "Pins graph raw SHA256, all171 graph body byte/SHA/GitSHA values; adds graph and self to exact173 additive Git delta census against fixed BASE parent/tree/message. Checks host/runtime/repo/push/branch/job/attempt1/workflowRef/head/run and fresh receipt destination before tests. No old retired WF mounted.",
+    "limits": "Node22.23.4 Ubuntu24.04, contents:read;3minute job;85s child plus110s outer timeout+3s kill, bounded60000-per-stream child output under65536. Pinned actions, persist-credentials:false, no npm/dependencies/custom secrets/provider/application calls. Git commands are bounded read-only metadata checks. Normal GitHub checkout/setup/upload service traffic is not described as network-disabled.",
+    "passCondition": "Spawn must exit0 without error/signal/stderr; exact9 successful TAP records/names/order plus terminal9/0/0/0/0/0 census and exactly one canonical summary. Summary counts/hashes/units must equal fixed graph. Failures emit only bounded known fixture ID/reason, not raw private wire/body.",
+    "proof": "Builds fresh canonical proof only after all controls satisfy. Schema exact keys, nomination, graph/runner digests, Root+MODEL26/fixture bindings, expected original+append result hashes,9group identities,10unit names and distinct142 counts, false qualifications. Enforces <=4096B includingLF and wx destination. Receipt upload only on job success, exact one file/artifact and7day retention. No continue-on-error.",
+    "authority": "This static PASS permits no ref/run/business action by reviewer. Root must measure prepared Git closure, nominate and activate once, independently verify actual API/log/ZIP/proof/census/code bindings, then close only nominated workflow."
+  },
+  "reversal": {
+    "preservation": "da382a77f0c183d525c44e670013d75d8f1990f7",
+    "diff": "4bb41bcd7e1b4d5e471329753a0ae4e4ff76e1a0",
+    "tenAfterImagesReconstructed": true,
+    "beforeImages": "All10 newly authored bodies before:null; full-context add-only patches independently reconstruct exact blob/UTF8 bytes/SHA afterimages. Existing163 mounts reuse immutable data and original bodies. No Source/BASE/oldOWN edits; rollback of unattached proposal is discard. Root later owns reversible removal of only current one-use WF with evidence preservation.",
+    "legacyInventory": "95 descriptors compared to authoritative old95;85 current mounts equal all descriptor fields. No claim of freshly rehashing all old95 payloads."
+  },
+  "pending": [
+    "Native9groups/142evaluations+10units remains PENDING_GITHUB. No native success or qualification inferred from static inspection.",
+    "No ACTUAL Source5 business capture exists at review time; trusted fresh head/tree/run/job must later come from Root.",
+    "All Source qualification, PC-off readiness, physical/global drain, SDK namespace-empty and production claims remain false."
+  ],
+  "actions": {
+    "SourceExecuted": false,
+    "OWNExecuted": false,
+    "SourceImported": false,
+    "OwnImported": false,
+    "ASTParsed": false,
+    "syntaxChecked": false,
+    "testsExecuted": false,
+    "refsWritten": false,
+    "runsCreated": false,
+    "filesMaterialized": false,
+    "depsInstalled": false,
+    "logsOrArtifactsRefetched": false
+  },
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
