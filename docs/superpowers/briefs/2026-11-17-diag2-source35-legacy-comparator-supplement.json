@@ -1,0 +1,23 @@
+{
+  "schema": "AFW-DIAG2-SOURCE35-LEGACY-COMPARATOR-SUPPLEMENT/1",
+  "timestampUTC": "2026-11-17 01:02:50 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "parent": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+  "allowedAction": "GHA tooling only, add inert frozen oldcollector beforeimage5c8123b9e66166a198add4a0593372cfef13a1db under tools/legacy, with unchanged62a31e3c16cc710c84ebfb5b0242abb00671363c read-progress sibling. Actual Source imports permitted in future Source35 unit GHA: newadapter, oldadapter comparator and unchangedread-progress/builtins only. Never Sourcebusinessdriver/M/QA/SDK. No local Source import/eval/AST/syntax/compile/test.",
+  "census": "Exactly35presealedC1 IDs, S01dual comparator noextraID; oldvalidS01 expected to preserve identical six inherited fields but omitfirstFailure. New S01testsprojector/collectObservation/successPacket plusfault/caps/custody meaningful assertions; all35newcases use samefutureactualfunctions. Record actualcheckcount separately, no inflatedcasecount.",
+  "graph": "Explicit oldadapter+legacyreadprogress paths/pins and unitnativegraph required; this adds tooling edges only, futurebusiness25 unchanged. Full old/new afterimages/reversibles. No qualification or historicalbug claim.",
+  "fixtureFirstSeal": "d1b79ae4c7987fcc8f876ffd6f7d211bb2970465",
+  "nativeRefOrRunReleased": false,
+  "SourceBusinessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
