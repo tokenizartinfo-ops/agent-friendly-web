@@ -1,0 +1,40 @@
+{
+  "schema": "AFW.STAGE_B.FIX4.DEFENSIVE_EXPECTATIONS/1",
+  "review": "27065f2876c4c102452ccc0cf866f58c2bfb14e3",
+  "proposal": "93162bc3f83536d55e8dfcbf9fe8092865b6da8f",
+  "counters": {
+    "Source5": 5,
+    "OWN5": 5,
+    "stageBFix": 4
+  },
+  "status": "NOT_RUN",
+  "controls": [
+    [
+      "FP1",
+      "Observe one valid controlled snapshot through the exported S08 observer and compare captured text, count, label, field order and tuple to the sealed positive oracle. Discard ambiguous emission."
+    ],
+    [
+      "FP2",
+      "At the existing receipt normalization boundary feed all digest families primitive lowercase hexadecimal strings, then arrays, numbers, booleans, objects, null, uppercase, short strings and strings with a terminal LF. Only exact 64-character primitive lowercase hexadecimal strings are eligible."
+    ],
+    [
+      "FP3",
+      "Inject early fulfillment or rejection including false, null and undefined before the entry and cancellation barriers. Original rejection identity must survive. Independently assert cleanup attempted every release, finish and owned settlement exactly as applicable."
+    ],
+    [
+      "FP4",
+      "Mutate each custody copy separately on either side of preflight and after each group. The corresponding boundary must fail before accepting the next receipt or launching another child."
+    ],
+    [
+      "FP5",
+      "With a controlled monotonic clock cross the 330000 ms boundary separately during final cleanup, staged write, readback, link, unlink and process completion. Include an unresolved cleanup and an unresolved publication. No success admission; cleanup attempts continue within job cap."
+    ]
+  ],
+  "facts": {
+    "modelExecuted": 0,
+    "nativeExecuted": 0,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false
+  }
+}
