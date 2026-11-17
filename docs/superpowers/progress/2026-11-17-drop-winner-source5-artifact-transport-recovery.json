@@ -1,0 +1,25 @@
+{
+  "schema": "AFW.SOURCE5.ARTIFACT_TRANSPORT_RECOVERY_RULING/1",
+  "timestampUTC": "2026-11-17 15:14:26 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "run": 44110921244,
+  "artifact": 14341695903,
+  "artifactDigest": "sha256:d9278238d116737efe8e7c9a17aee149793d62d60bd282f33a7a47ba7d55521b",
+  "artifactBytes": 3073,
+  "observed": "First download_workflow_artifact call returned isError MCP-32603 Internal error, no file reference/download ticket/archive bytes available to Root. Exact error retained. One log already acquired/cached; no re-fetch.",
+  "ruling": "Permit one bounded recovery call for SAME immutable artifact ID/digest. This is second transport request, not a second Source trial or successful archive redownload. Max2requests total, max1successful archive acquisition; if failure repeats preserve unavailable state and do not loop. Never reconstruct or invent ZIP from payload, never rerun job/ref; raw log frame alone remains UNADMITTED until exact archive/canonical/proof verified.",
+  "why": "The planned acquire-once safeguard prevents replacing evidence/replaying trials; a connector internal error returned no usable evidence. Recovering the fixed existing archive is a reversible read, required for qualified actual OWN admission.",
+  "cost": "One additional scoped read; no source/runtime/permissions/token change or native budget reset.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
