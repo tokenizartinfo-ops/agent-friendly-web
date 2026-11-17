@@ -1,28 +1,47 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/25",
-  "timestampUTC": "2026-11-17 05:01:24 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/26",
+  "timestampUTC": "2026-11-17 05:08:06 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "527b1ed1104cb0b14e8b8909c18668aaa7c36148",
-  "phase": "FINITE_GET_DIAG3_ONE_BUSINESS_NATIVE_ACTIVE",
-  "activeNativeRuns": [
-    44021068647
-  ],
-  "allCurrentNativeOccurrencesClosed": false,
+  "previousCheckpoint": "c69ad5ed0da6b2ceacc7651cd7221962db44b7c6",
+  "phase": "FINITE_GET_DIAG3_ACTUAL_ADMITTED_CLOSED_RESULT_REVIEW_PENDING",
+  "activeNativeRuns": [],
+  "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
-    "run": 44000942332,
-    "primary": "16f788a652c644763d74ffa0e955375786064c2d",
-    "outcome": "f7306430e390cf69787347daa1b8b396b543dbc5",
-    "OwnAdmission": "6d2f2e1a54507f70e2f553512dc35472e529e96e",
-    "close": "b96b7831b92e9200a4cd360fa9703c61b284d765",
+    "run": 44021068647,
+    "job": 133830419181,
+    "primary": "3b38e269929a88eef353f00016726d1ca3270f01",
+    "outcome": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
+    "OwnAdmission": "e7530d7f55172ee36035b655d120bcae7479f862",
+    "close": "8a474ec9f52ad14abf9259b81eedefc61e97e018",
     "first14Pass": true,
-    "firstFailure": "GET case15 S08:18:118",
-    "native17": {
+    "native15": {
       "pass": 14,
-      "fail": 3
+      "fail": 1
     },
-    "HTTPAndFiniteTicketBuckets": "UNKNOWN_NOT_CAPTURED",
+    "firstFailure": "case15SCOPE_MISSING AssertionError S08:113:283",
+    "finiteGet": {
+      "schema": "afw.c2-finite-get-diag3.v1",
+      "http": {
+        "state": "NOT_APPLICABLE",
+        "reason": "EARLIEST_THROW_DIFFERENT",
+        "throwSequence": null,
+        "actual": null,
+        "expected": null
+      },
+      "afterMonitor": {
+        "value": "0",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 56
+      },
+      "afterScopeMissing": {
+        "value": "1",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 60
+      }
+    },
     "child180sTimeout": true,
+    "openCase": "C2T1_FINITE action",
     "qualificationIncomplete": true
   },
   "tooling": {
@@ -92,7 +111,7 @@
     "index": "672455978db4210eedef61502682e03404e0f462",
     "refCreated": true,
     "SourceBusinessReleased": true,
-    "SourceBusinessExecuted": false,
+    "SourceBusinessExecuted": true,
     "preparing": false,
     "tree": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
     "head": "17582e124c2728800788dcbe46c740f38aea861a",
@@ -106,10 +125,14 @@
     "activationAttempted": true,
     "gate": "01565efbe0f92a8623260ee63d2b0c6a32be0a4e",
     "activationUTC": "2026-11-17 05:00:46 UTC",
-    "run": 44021068647
+    "run": 44021068647,
+    "job": 133830419181,
+    "closed": true,
+    "closedHead": "08061db79cd0f38f25df8977e1ded8e17542e684",
+    "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Observe one current diagnostic run; capture logs and ZIP once terminal; ACTUAL d3Read join, preserve, close workflow, independent result review. No replay.",
+  "next": "Fresh actual result review c230 + static DATA diagnosis n3. No replay or round reset. Determine exact assertion113:283 and relation to finiteTicket0→1; numericHTTP unavailable because firstthrowmoved; fullTask1E2held. No remote runtime/user asks.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
