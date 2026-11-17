@@ -1,12 +1,19 @@
 {
-  "schema": 42,
-  "timestampUTC": "2026-11-17 14:24:53 UTC",
+  "schema": 43,
+  "timestampUTC": "2026-11-17 14:31:42 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "d2bd38ca8440a611a4a73eff1946b6477a93cfc8",
-  "phase": "DROP_WINNER_OWN5_FIXTURE_STAGE_A_CODE_COMPLETE_STATIC_REVIEW_ACTIVE",
-  "activeNativeRuns": [],
-  "allCurrentNativeOccurrencesClosed": true,
+  "previousCheckpoint": "e02f852d2263b0b856f014465ef5ad0f77f227f6",
+  "phase": "DROP_WINNER_OWN5_STAGE_A_NATIVE_RED_ACTIVE",
+  "activeNativeRuns": [
+    {
+      "id": 44104034023,
+      "attempt": 1,
+      "head": "317b4e1f547b23ad1bcb4170a5e4f28a865deafe",
+      "status": "in_progress"
+    }
+  ],
+  "allCurrentNativeOccurrencesClosed": false,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -134,7 +141,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "OWN StageA static review final then Root one-use RED: coherent oldD3 MODEL25 baseline must admit; twin only observation.dropWinner plus consistent wire must reject G20_OWN_UNQUALIFIED and produce named AssertionError. 69 D4 MODEL26 matrix still sealed/unexecuted; no guard implementation before actual admitted RED+closed evidence. No current native runs.",
+  "next": "Observe this one old-receiver MODEL RED occurrence, capture terminal log/single artifact once ifexpectedassertion genuine. Verify API/proof/ZIP, save and close onlyWF, independentactualreview. Only then release guard code OWN5 against fixed SourceRoot26, all69 plusold73 covering tests. No business yet.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -384,13 +391,13 @@
   },
   "own5DataPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
   "OWN5": {
-    "stage": "A_FIXTURES69_SEALED_NATIVE_RED_STATIC_REVIEW",
+    "stage": "A_NATIVE_RED_ACTIVE",
     "brief": "b11d18f929b413d098dc368692debf71a85660a3",
     "actor": "/root/drop_own5_fixture_stage_a",
     "publicBoundaryRuling": "f1716eba86aa6d64132d1c1d6e42ef0b7a4f77fa",
     "planV2": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
     "guardCodeReleased": false,
-    "nativeReleased": false,
+    "nativeReleased": true,
     "actualFinalSourceBinding": "1fea33135f8943707738d4f078ff3616e9b5132c",
     "original73PreservedRequired": true,
     "original95PreservedRequired": true,
@@ -404,14 +411,16 @@
       "tree": "b93e3075b6d7cf1cfae14e1261813b17fe96b644",
       "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
       "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
-      "activationAttempted": false,
-      "refCreated": false,
-      "unattached": true,
+      "activationAttempted": true,
+      "refCreated": true,
+      "unattached": false,
       "head": "317b4e1f547b23ad1bcb4170a5e4f28a865deafe",
       "original3203Preserved": true,
       "mounts": 13,
       "leaves": 3216,
-      "fullTreeVerified": true
+      "fullTreeVerified": true,
+      "gate": "0fb65a9269b9f882bb1cb963c900e3dc2dd09079",
+      "activationUTC": "2026-11-17 14:31:21 UTC"
     },
     "root13FullHashesMatched": true,
     "appendCount": 69,
@@ -419,6 +428,8 @@
     "expectedReject": 43,
     "matrixExecuted": false,
     "redDesignRuling": "1291992edd15c61d8f8c59ae0a93d9a60345aaad",
-    "independentStaticReviewer": "/root/c2_v2_own_receiver_fix1 RUNNING"
+    "independentStaticReviewer": "/root/c2_v2_own_receiver_fix1 RUNNING",
+    "staticReview": "4e3b80d97fce9a54383b5e9d69cbaf61ba1dd476",
+    "rootGate": "0fb65a9269b9f882bb1cb963c900e3dc2dd09079"
   }
 }
