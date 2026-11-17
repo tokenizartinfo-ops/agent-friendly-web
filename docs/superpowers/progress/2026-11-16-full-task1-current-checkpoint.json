@@ -1,10 +1,10 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/34",
-  "timestampUTC": "2026-11-17 12:53:31 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/35",
+  "timestampUTC": "2026-11-17 13:05:40 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "62a0a33c3f2e46a7d35c3a68bcdc477f0990db10",
-  "phase": "DROP_WINNER_SOURCE5_IMPLEMENTATION_PROPOSAL_ACTIVE",
+  "previousCheckpoint": "4a4171750453f53468175d595c646e96c900f52f",
+  "phase": "DROP_WINNER_SOURCE5_IMPLEMENTATION_ACTIVE_FIXTURES63_SEALED",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -134,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Resume SAME source5 author with RED readback and narrow code release; author prepares detached diagnostic/compiler/native tooling proposal. Root independent code review precedes any activation; receiver and actual full-order trial remain held. Source cycle5, no reset.",
+  "next": "Source5 author implementing reviewed two-carrier diagnostic/compiler/native tooling package as detached blobs. Six specific site labels (fouroriginal +S01:69/S01:95); no genericorigin expansion. Original59+4fixturedata sealed first; actual58+4notyetexecuted. No localSource execution, native/business activation pendingindependentreview.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -205,8 +205,14 @@
       "executed": 1,
       "sealedNotExecuted": 58,
       "jobFailureExpected": true,
-      "noHistoricalCauseProof": true
-    }
+      "noHistoricalCauseProof": true,
+      "freshReview": "4936c033588b9644fa04af085007d2900897b882"
+    },
+    "codeRelease": "dba854a26f71e8bbc2da6ae02cca48551af063d2",
+    "cryptoArcRuling": "1fa82c9895bcb8b515de00f53d99e84a8b6a042d",
+    "leaseSiteRuling": "713834d1311f4cd888f8505f67441fe622325077",
+    "fixtures63": "a78efb5290deb184c70fc4282bf438d818d02588",
+    "original59Preserved": true
   },
   "staticContracts": {
     "scopeDiagnosis": "e5570431c54ef1556692fcdf1349c503ef983ecb",
