@@ -1,0 +1,514 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-ACTUAL-INDEPENDENT-RESULT-REVIEW/1",
+  "timestampUTC": "2026-11-17 02:28:45 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "verdict": {
+    "SPEC": "PASS_BOUNDED_DIAGNOSTIC_CONTRACT",
+    "QUALITY": "PASS_BOUNDED_EVIDENCE_AND_INTERPRETATION",
+    "disposition": "INCOMPLETE_FULL20",
+    "diagnosticCollectionAccepted": true,
+    "newCaptureOrAdmissionDefects": [],
+    "nativeQualification": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "conclusion": "La primera admisión d2Read del contexto Source real concuerda con el contrato fijado y con la Primary conservada. El resultado de negocio no se completa: hay 17 casos nativos observados, 14 PASS y 3 FAIL. El job success acredita recolección/reporte, no Full20 ni Task1 PASS.",
+  "scope": {
+    "performed": "Lectura FULL de Primary/outcome/admisión/cierre/gate inmutables. Comprobaciones originales del reviewer sobre DATA en RAM, crypto/zlib builtin y schema JSON inerte. Comparación descriptiva con el outcome DIAG1 conservado.",
+    "reused": [
+      {
+        "role": "Source35/code y composición Source25 ya revisados",
+        "review": "82294234ee0345d63c85d7518ae96d3857e6c649"
+      },
+      {
+        "role": "OWNfix1 static",
+        "review": "47ad88e0b14f1c8fe19bd202d432327eb472e119"
+      },
+      {
+        "role": "OWNfix1 actual Native42",
+        "review": "247fb10edd01a5449333f15ca68a8064742202f3"
+      }
+    ],
+    "notRepeated": "No reauditoría de Source35/OWN42/corpus40, toy/hostfix ni árbol completo de negocio. No endpoints terminales API/log/artifact, nuevas descargas, refs, runs, replay, pruebas Source/OWN, import/eval/AST/syntax/compile, FS/deps/builds, provider o Cloudflare. El reviewer no ejecutó Source.",
+    "trustBoundary": "Se comprueban pines, API y bytes conservados contra la expectativa Root; los JSON no autentican criptográficamente al productor. Raw TAP de negocio/C2SOURCE privados no fueron exportados ni parseados por este reviewer. SHA de stdout liga el stream, pero no recupera su contenido."
+  },
+  "fullReadHashes": [
+    {
+      "name": "primary",
+      "bytes": 1347724,
+      "sha256": "39a59a3d3819d063ce3a434a779be014c585a98ef4702e3178678516ca3f48a1",
+      "gitBlob": "16f788a652c644763d74ffa0e955375786064c2d"
+    },
+    {
+      "name": "outcome",
+      "bytes": 12816,
+      "sha256": "4cf086fe9c63406f3c7ecaaceab5cb60395b2bca5a88fa6f572ccef1a5f01c25",
+      "gitBlob": "f7306430e390cf69787347daa1b8b396b543dbc5"
+    },
+    {
+      "name": "admission",
+      "bytes": 21138,
+      "sha256": "f5b95d83abac83ebd2f5f5d7cf65380135965abc12da0069ab8fa28472af9c32",
+      "gitBlob": "6d2f2e1a54507f70e2f553512dc35472e529e96e"
+    },
+    {
+      "name": "close",
+      "bytes": 3644,
+      "sha256": "d43e454feeaa8141bf02342bed54a400db710a8c191cb8d88e6da0623ada42ba",
+      "gitBlob": "b96b7831b92e9200a4cd360fa9703c61b284d765"
+    },
+    {
+      "name": "gate",
+      "bytes": 5339,
+      "sha256": "c171aefb14e8457ec0b4d904301bc6d4cc1ab9a0d0cc99d1ccb7b916cd6a1fcb",
+      "gitBlob": "aecf3f3f00d30f0d37d47da7e8a752dfd6bbe987"
+    },
+    {
+      "name": "diag1Comparison",
+      "bytes": 13809,
+      "sha256": "e842015117d7a68d58578d0ab7f4c16f933d1cc802e0e62dae6b0edbe2b18fe3",
+      "gitBlob": "f39f7e43c4010acbaca7a679d61dbe048da24688"
+    },
+    {
+      "name": "schema",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb",
+      "gitBlob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e"
+    }
+  ],
+  "actualOccurrence": {
+    "actualEntrypoint": "d2Read",
+    "run": 44000942332,
+    "attempt": 1,
+    "job": 133764541578,
+    "head": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+    "tree": "25765b8c85c7657e7d8084647198064b4f597965",
+    "matchedActual25": true,
+    "original3203Preserved": true,
+    "leaves": 3228,
+    "commandStep": 5,
+    "commandSeconds": 180,
+    "jobSeconds": 209,
+    "canonicalFrames": 2,
+    "cases": 17,
+    "pass": 14,
+    "fail": 3,
+    "firstThrow": {
+      "sequence": 58,
+      "elapsedMs": 133639,
+      "id": "C2T1_SCOPE_MISSING",
+      "operation": "action",
+      "edge": "throw",
+      "error": {
+        "name": "AssertionError",
+        "code": "ERR_ASSERTION",
+        "site": {
+          "file": "S08",
+          "line": 18,
+          "column": 118
+        }
+      }
+    },
+    "case18Open": {
+      "sequence": 69,
+      "elapsedMs": 161782,
+      "id": "C2T1_LOST_ACK_DUPLICATE",
+      "operation": "action",
+      "edge": "enter",
+      "error": null
+    },
+    "cases19and20Observed": false,
+    "afterObserved": false,
+    "firstFailure": {
+      "schema": "afw.c2-first-failure-post-diag2.v1",
+      "state": "NOT_APPLICABLE",
+      "reason": "EARLIEST_THROW_DIFFERENT",
+      "throwSequence": null,
+      "source": null,
+      "assertion": null
+    },
+    "Source13BeforeAfter": true,
+    "cleanupFlags": true,
+    "closedHead": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+    "closedTree": "eee20d1530be7b456648740946123c1ea52e3d22",
+    "closedLeaves": 3229,
+    "closedHeadRuns": 0,
+    "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+    "workflow": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+    "message": "AFW-C2-T1-FIRST-FAILURE-POST-DIAG2-ONEUSE-20261117",
+    "runtime": "Node v22.23.4 / ubuntu-24.04",
+    "apiResult": "Run y job terminal success, attempt1. Step5 'Observe full-order first NOTICES POST boundary' success; los cinco steps requeridos success. Step5 API=180s, job API=209s.",
+    "context": "E2 Source13 e2ca46e8ecf98dd0d87f148068dd240b147db1ec / SHA256 87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7. No se sustituyó por el viejo índice26b.",
+    "producer": "Source25 índice98d85420ec517978a18eab639b60c1dbb8353eee, body admission18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8, ordered edges SHA256 d11f63d57ea36fdc9a7509ecec33b3611fe95be8197294ae7820b421394313bf.",
+    "own": "Entrypoint d2Read, reader4fb5a8d5e5b0b14c58f9935f5fd4dbc0589c23e0 + first-failure ee346f8e6a4e711a198c69db5a3a1593fbaad85e; ROOT_PINNED_PRODUCER_DATA. Admisión publicada igual a OwnAdmission de Primary. No MODEL ni fallback. finalSourceBinding=false se conserva.",
+    "git": "Commit/tree/parent/message/ref/repo/run/job ligados a expectativa Root/gate. Árbol recursivo no truncado, paths únicos; 25 path/mode/blob/bytes exactos y 3203 originales preservados por comparación con el baseline conservado ya validado en Native42; 3228 hojas durante la ocurrencia.",
+    "wire": "Una frame CUSTODY y una OUTCOME, canónicas y dentro de step5; outcome JSON+LF igual al blob y payload ZIP. Schema fijado90e52 sin errores. No se extrapola del SHA a raw privado.",
+    "zip": {
+      "archiveBytes": 2908,
+      "archiveSha256": "3ce82579d04c305194a1a7099cfb12d4b4edb47eaf6fadeb5b7e09009cc6c0a5",
+      "archiveGitBlob": "ab4dcd3324b3333a6ed2e3b2d2b6b0fedc64bff9",
+      "artifactId": 14291893240,
+      "flags": 8,
+      "method": 8,
+      "crc32": "0819fc85",
+      "compressedBytes": 2724,
+      "consumedBytes": 2724,
+      "payloadLFBytes": 12816,
+      "payloadSha256": "4cf086fe9c63406f3c7ecaaceab5cb60395b2bca5a88fa6f572ccef1a5f01c25",
+      "schemaPass": true,
+      "rawLogBytes": 30428,
+      "rawLogSha256": "2950c3752654548fe480ff92495a0b2d1f8cacd6991445fe9006ec3aac8bd4b9",
+      "rawLogGitBlob": "a85031e10426fcca2d634446478b39c823e48edc"
+    }
+  },
+  "observedBusiness": {
+    "native": {
+      "integrity": "prefix",
+      "observed": 17,
+      "pass": 14,
+      "fail": 3,
+      "first14Pass": true,
+      "full20Complete": false
+    },
+    "journal": {
+      "events": 69,
+      "integrity": "prefix",
+      "stable": true,
+      "recorderFaultObserved": false,
+      "firstThrowSequence": 58,
+      "afterObserved": false,
+      "openCase": {
+        "id": "C2T1_LOST_ACK_DUPLICATE",
+        "operation": "action",
+        "sequence": 69,
+        "elapsedMs": 161782
+      }
+    },
+    "witnesses": [
+      {
+        "ordinal": 12,
+        "id": "C2T1_NOTICES",
+        "native": "pass",
+        "actionEnterMs": 71216,
+        "actionReturnMs": 98250,
+        "countReturnMs": 98284
+      },
+      {
+        "ordinal": 14,
+        "id": "C2T1_MONITOR",
+        "native": "pass",
+        "actionEnterMs": 98806,
+        "actionReturnMs": 103598,
+        "countReturnMs": 103627
+      },
+      {
+        "ordinal": 15,
+        "id": "C2T1_SCOPE_MISSING",
+        "native": "fail",
+        "actionEnterMs": 103627,
+        "actionThrowMs": 133639,
+        "sequence": 58,
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 18,
+            "column": 118
+          }
+        },
+        "countReturnMs": 133682
+      },
+      {
+        "ordinal": 16,
+        "id": "C2T1_FINITE",
+        "native": "fail",
+        "actionEnterMs": 133683,
+        "actionThrowMs": 161670,
+        "sequence": 62,
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 18,
+            "column": 118
+          }
+        },
+        "countReturnMs": 161698
+      },
+      {
+        "ordinal": 17,
+        "id": "C2T1_SELECTION",
+        "native": "fail",
+        "actionEnterMs": 161699,
+        "actionThrowMs": 161733,
+        "sequence": 66,
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 119,
+            "column": 4
+          }
+        },
+        "countReturnMs": 161782
+      }
+    ],
+    "coherence": "Los primeros17 IDs/orden y sus estados se corresponden con cada action enter→return/throw→count enter→return del journal; seq1..69 contiguas, tiempos enteros monótonos. El primer throw es58, no46. Caso18 sólo actionenter; no resultado nativo de18,19/20 ni AFTER.",
+    "firstFailure": {
+      "schema": "afw.c2-first-failure-post-diag2.v1",
+      "state": "NOT_APPLICABLE",
+      "reason": "EARLIEST_THROW_DIFFERENT",
+      "throwSequence": null,
+      "source": null,
+      "assertion": null
+    },
+    "firstFailureInterpretation": "NOT_APPLICABLE/EARLIEST_THROW_DIFFERENT es correcto para la proyección limitada al primer fallo NOTICES/ordinal12/action ERR_ASSERTION S08:41:12. En esta ocurrencia NOTICES pasa y el primer throw del prefijo validado corresponde a SCOPE_MISSING/S08:18:118. Los campos throwSequence/source/assertion quedan null; no se relabela el fallo nuevo como NOTICES.",
+    "unknowns": "No hay scalar HTTP actual/expected ni valores de counters del nuevo fallo SCOPE_MISSING en la proyección publicada. Se conservan UNKNOWN; no se infieren503,200,0,2/2/2 ni causalidad a partir del sitio/error/hash. Los count return prueban la terminación de esas llamadas en el journal, no sus valores ni la autenticación de receipts."
+  },
+  "timeoutAndCustody": {
+    "capture": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "timeout",
+      "stdout": {
+        "bytes": 15953,
+        "sha256": "09d9a03eda42f9001684c14377c6627ae0c7cc4ed303896b368f092e945cb6d1"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "timeoutInterpretation": "Source clasifica el child como timeout; exitCode1/signalnone no es una salida de éxito del negocio. El runner fijado y ya revisado usa180000ms por child; el step5 conservado dura180s a precisión API. Esto es compatible con el límite observado. No demuestra un timeout de120s del caso18, bloqueo permanente, causa de LOST_ACK, ni que19/20 fallaran.",
+    "fixedCaps": {
+      "childMs": 180000,
+      "perCaseMs": 120000,
+      "totalMs": 330000,
+      "jobMinutes": 7
+    },
+    "custody": {
+      "schema": "afw.c2-first-failure-post-diag2-custody.v1",
+      "context": {
+        "repository": "tokenizartinfo-ops/agent-friendly-web",
+        "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+        "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+        "sourceIndexBlob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+        "proposalIndexHash": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+        "selectionHash": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc",
+        "head": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+        "tree": "25765b8c85c7657e7d8084647198064b4f597965",
+        "runId": "44000942332",
+        "runAttempt": 1,
+        "job": "c2-first-failure-post-diag2",
+        "node": "v22.23.4"
+      },
+      "parentNonRoot": true,
+      "preflightOwned": true,
+      "preflightRemoved": true,
+      "checkedLaunches": 2,
+      "preflightProcesses": 1,
+      "greenProcesses": 1,
+      "checkedProcesses": 2,
+      "uidGidGroupsLoopbackMatched": true,
+      "targetsBeforeMatched": true,
+      "targetsAfterMatched": true,
+      "journalOwnershipMatched": true,
+      "ownRootVerified": true,
+      "ownTempRemoved": true
+    },
+    "sourceReads": "Las13 SHA256 target leídas antes y después son exactas a E2; no sólo metadatos de archivos propuestos en Git. Dos launches/probes, procesos1+1=2; flags de ownership/isolation/cleanup reportados true y concordantes con el contrato. No equivalen a global drain o SDK namespace vacío.",
+    "diagnosticCollectionCompleteMeaning": "true describe la finalización de la recolección/reporting. nativeQualification/SourceQualified/Task1Pass siguen false; no acredita el recorrido de20 completo."
+  },
+  "descriptiveComparison": {
+    "immutableDIAG1": "f39f7e43c4010acbaca7a679d61dbe048da24688",
+    "facts": {
+      "diagnostic1": {
+        "run": "43980317236",
+        "sourceIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+        "nativeObserved": 19,
+        "pass": 14,
+        "fail": 5,
+        "firstThrow": {
+          "sequence": 46,
+          "elapsedMs": 114318,
+          "id": "C2T1_NOTICES",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "S08",
+              "line": 41,
+              "column": 12
+            }
+          }
+        },
+        "notices": {
+          "sequence": 46,
+          "elapsedMs": 114318,
+          "id": "C2T1_NOTICES",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "S08",
+              "line": 41,
+              "column": 12
+            }
+          }
+        },
+        "monitor": {
+          "sequence": 54,
+          "elapsedMs": 114528,
+          "id": "C2T1_MONITOR",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "S08",
+              "line": 96,
+              "column": 69
+            }
+          }
+        },
+        "scopeMissing": {
+          "sequence": 58,
+          "elapsedMs": 114961,
+          "id": "C2T1_SCOPE_MISSING",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "S08",
+              "line": 18,
+              "column": 118
+            }
+          }
+        },
+        "lastOpen": {
+          "sequence": 77,
+          "elapsedMs": 176469,
+          "id": "C2T1_OWN_PROMISE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        }
+      },
+      "diagnostic2": {
+        "run": "44000942332",
+        "sourceIndex": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+        "nativeObserved": 17,
+        "pass": 14,
+        "fail": 3,
+        "firstThrow": {
+          "sequence": 58,
+          "elapsedMs": 133639,
+          "id": "C2T1_SCOPE_MISSING",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "S08",
+              "line": 18,
+              "column": 118
+            }
+          }
+        },
+        "notices": {
+          "sequence": 46,
+          "elapsedMs": 98250,
+          "id": "C2T1_NOTICES",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        "monitor": {
+          "sequence": 54,
+          "elapsedMs": 103598,
+          "id": "C2T1_MONITOR",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        "scopeMissing": {
+          "sequence": 58,
+          "elapsedMs": 133639,
+          "id": "C2T1_SCOPE_MISSING",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "S08",
+              "line": 18,
+              "column": 118
+            }
+          }
+        },
+        "lastOpen": {
+          "sequence": 69,
+          "elapsedMs": 161782,
+          "id": "C2T1_LOST_ACK_DUPLICATE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        }
+      }
+    },
+    "interpretation": "DIAG1:19 observados14PASS5FAIL, primeroNOTICES46@114318, MONITOR54FAIL, OWN_PROMISE20 abierto176469. DIAG2:17 observados14PASS3FAIL, NOTICES12/MONITOR14PASS, primeroSCOPE_MISSING58@133639, LOST_ACK18 abierto161782. Son ocurrencias/contextos y Source13 distintos. No se adjudica el cambio a hostfix, collector, HTTP histórico503, parser, red o provider; no mejora universal ni regresión causal demostradas. Un prefix con menos FAIL no es Full20 PASS."
+  },
+  "closure": {
+    "source": "Recibo Root FULL conservado; no sondeo nuevo por el reviewer.",
+    "blob": "b96b7831b92e9200a4cd360fa9703c61b284d765",
+    "parent": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+    "closedHead": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+    "closedTree": "eee20d1530be7b456648740946123c1ea52e3d22",
+    "leaves": 3229,
+    "allOriginal3203Preserved": true,
+    "onlyWorkflowDeletedAndTwoEvidenceAdditions": true,
+    "mainAndHistoryLeases": {
+      "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "source": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "own42": "c511b6f061fb4eb0c5594779d3123e824f34f243",
+      "source35": "ee43d4669d5ed63832e326ea47a3579a12190c09",
+      "diag1": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+      "host": "1f62e087f0d9000f9c08519cd162db1104827af8",
+      "toy": "5f5295265217b31a19fbed2379f697c5a6a83080"
+    },
+    "closedHeadRuns": 0,
+    "noReplayAuthorized": true,
+    "transferNote": "Según la Primary, dos generaciones de ticket temporal debido a error JS de helper Root antes del primer download; hubo una única transferencia real del ZIP2908B y ningún replay Source. No se confunden tickets con transferencias; el reviewer usó sólo el ZIP base64 conservado."
+  },
+  "remaining": [
+    "Full20 no calificado: tres FAIL nativos;18 sin resultado,19/20 y AFTER no observados. Cualquier siguiente diseño/diagnóstico requiere alcance separado de Root; este review no autoriza repetir la nominación.",
+    "HTTP/assertion scalars/counters y causa de SCOPE_MISSING permanecen desconocidos; esta proyección FIRST_FAILURE no amplía su target para cubrirlos.",
+    "No se acredita causalidad histórica503, autenticación de receipts, readiness, entrega útil, PCoff, global drain o namespace SDK vacío."
+  ],
+  "SourceBusinessExecutedByRoot": true,
+  "SourceExecutionByReviewer": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
