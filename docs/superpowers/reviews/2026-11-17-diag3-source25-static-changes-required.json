@@ -1,0 +1,357 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-FINAL-SOURCE25-INDEPENDENT-STATIC-REVIEW/1",
+  "timestampUTC": "2026-11-17 03:38:15 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "disposition": "CHANGES_REQUIRED_STATIC_CONTRACT_PRIORITY",
+  "verdict": {
+    "SPEC": "CHANGES_REQUIRED",
+    "QUALITY": "CHANGES_REQUIRED_BOUNDED_REASON_PRIORITY",
+    "findings": [
+      "FG3_STATIC_P2_FORMAT_BEFORE_AMBIGUITY"
+    ],
+    "nativeAccepted": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "scope": "Review estático del Source25dd6f y collector/runner/WF/protocol/schema/selection finales, como texto/JSON inerte. Sin Source/OWNeval/import/AST/syntax/compile/tests, FS/deps/builds, refs/runs/Actions/log/artifactconsultas/provider/CF ni patches. Builtincrypto/gzip y lógica original del reviewer sólo sobreDATA. No creación de nuevo controlSource ni ampliación del censo. Única escritura: esta constanciaGitDATA conFULLreadback.",
+  "reused": [
+    {
+      "role": "EarlyS08E3",
+      "review": "5584f68de9521ed0d54e123f85c3fc055cb7b843",
+      "bytes": 10841,
+      "sha256": "7753bd5ab2cd7d0b551b135a20417227dbba2629b40412e5cf6c9527403b9a95"
+    },
+    {
+      "role": "SourceDesign",
+      "review": "93c5f4a4855e27ace6d8bd413a2aba741e1aad46"
+    },
+    {
+      "role": "OWNdesign+SourcefixtureDATA",
+      "review": "0a61ac955e39fb1572532cca811ef11876490f75"
+    },
+    {
+      "role": "Source35originalcode/native",
+      "review": "82294234ee0345d63c85d7518ae96d3857e6c649"
+    }
+  ],
+  "fullReadHashes": [
+    {
+      "name": "source25Index",
+      "bytes": 18310,
+      "sha256": "f8ccf99de51ed3ee3618b63bba318167b095ba9d8d59a47f914a678a3429f409",
+      "gitBlob": "dd6f6d44c577551388bffa9434baa332d1e12dfd"
+    },
+    {
+      "name": "RootFull25",
+      "bytes": 8895,
+      "sha256": "7dfdf161b8e22f3fc4c0f8798c6a9d74ddd5e89886a8e3c342696cb6c05bbaab",
+      "gitBlob": "266289bbe7e34d1a323e5140001cd3e8d7232507"
+    },
+    {
+      "name": "adapter",
+      "bytes": 31198,
+      "sha256": "161d29277e48fb26a062fb6b158913b79921e7e641161f2fa945839941af01b0",
+      "gitBlob": "9ed7ad37d9912977fc9f0d6b600c9c323e2b8382"
+    },
+    {
+      "name": "runner",
+      "bytes": 16767,
+      "sha256": "fca84ca56656f6d5e72e1dbdebfbc161f61fa8136ab2d44c88d9d1d210728545",
+      "gitBlob": "24babaf3535f2b436c7185cd848c32998b604a74"
+    },
+    {
+      "name": "workflow",
+      "bytes": 1541,
+      "sha256": "78d8eec6ff313540928b187d551e69e06de697469a54f8029d80297e530713b9",
+      "gitBlob": "e900cd550ed1ba51c92fc5b65e20110afb750c06"
+    },
+    {
+      "name": "protocol",
+      "bytes": 55056,
+      "sha256": "41137d510da36e48a101c107ba6d41bd22fd38ad0ee4546a020774891763c556",
+      "gitBlob": "32137e9cc4e865ce16faeb90e6f65650dc979088"
+    },
+    {
+      "name": "schema",
+      "bytes": 33199,
+      "sha256": "f4600dd644257bea198646afae5bee496cd5eea4727e59e8d52d22c47d900852",
+      "gitBlob": "bdb37d27e0c5e217d7b7249c216d674750046b73"
+    },
+    {
+      "name": "selection",
+      "bytes": 4541,
+      "sha256": "5b5c299504b143aa6c3d7093eeff28c1e0db4baecfafd2afb70283e5e278042a",
+      "gitBlob": "179fb6c9cd431a38f084211021843286aaa70671"
+    },
+    {
+      "name": "oldAdapter",
+      "bytes": 20195,
+      "sha256": "e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e",
+      "gitBlob": "9f457450ba1e7a746117fc1498922972613df789"
+    },
+    {
+      "name": "reader",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f",
+      "gitBlob": "62a31e3c16cc710c84ebfb5b0242abb00671363c"
+    }
+  ],
+  "bindingChecks": {
+    "schemaDiffAfterBind": [
+      {
+        "path": "/title",
+        "before": "AFW FINITE_GET_DIAG3 diagnostic envelopes (non-admitting design template)",
+        "after": "AFW FINITE_GET_DIAG3 diagnostic envelopes"
+      }
+    ],
+    "selectionDiffAfterBind": [],
+    "finiteExact": {
+      "producer": true,
+      "predicate": true,
+      "childWire": true,
+      "http": true,
+      "counts": true,
+      "interpretation": true
+    },
+    "crossExact": true,
+    "bodyEdgesExact": true,
+    "C1ComponentExact": true,
+    "fieldExact": true,
+    "Source13BothArraysExact": true
+  },
+  "additionalDataChecks": {
+    "bodyEdgesHash": "273296dc776c8519c4f3644df8827097e44c599460501e099a9d6f42af3a2099",
+    "selectionCanonicalSha256": "7baee5f4a5c38c341a1a8f6a446ffbbc1e531ac8a0871de7cdc3cf1b422b178b",
+    "C1RegionBytes": 7055,
+    "C1RegionSha256": "6e8a25ad347866935c50bf52131b78dbfe993f86d592bdbb3e76bb3278c5e29f",
+    "frozen17Exact": true,
+    "frozenMismatch": []
+  },
+  "findings": [
+    {
+      "id": "FG3_STATIC_P2_FORMAT_BEFORE_AMBIGUITY",
+      "priority": "P2",
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+      "blob": "9ed7ad37d9912977fc9f0d6b600c9c323e2b8382",
+      "line": 285,
+      "relatedLines": [
+        296,
+        297,
+        298,
+        399,
+        400,
+        401,
+        440,
+        441,
+        443
+      ],
+      "title": "La ambigüedad se decide antes de comprobar el formato nativo",
+      "required": "609.http.priority y el protocolo final32137.http heredado exigen: tras torn, invalid UTF8/control/header -> UNKNOWN/NATIVE_FORMAT_UNSUPPORTED; sólo luego native ambiguous -> UNKNOWN/AMBIGUOUS_EVIDENCE. C1 conservado hace ese orden en238-241.",
+      "trigger": "Partir del literal H_KNOWN_429 de1b5b319f y sustituir sólo el atomHEADER por 'TAP version 12\\n'; journalJ1_14+J15, todos los demás atoms y child shape permanecen idénticos.",
+      "staticTrace": [
+        "read-progress62a:71 clasifica el header incorrecto con LF como native.integrity='ambiguous', cases[]. El journal conserva Scopeactionthrow58 y countreturn60.",
+        "finiteCandidate:276-285 no encuentra earliestdifferent/priorFAIL/targetPASS, sí priorreturns ycountreturn, y devuelve UNKNOWN/AMBIGUOUS_EVIDENCE en285.",
+        "finiteJournal14/15 devuelve NATIVE_UNJOINED. projectFiniteGet:400 deja scan=null porqueoutside yambosreasons sontrue; nunca alcanza validación deheader296-298.",
+        "checkFinitePublication:440-443 reutiliza el mismofiniteCandidate y exige esa misma razónAMBIGUOUS. Una corrección solamente enel scanner no resolveríaambospuntos deconsistencia."
+      ],
+      "derivedCurrent": {
+        "http": {
+          "state": "UNKNOWN",
+          "reason": "AMBIGUOUS_EVIDENCE",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "UNKNOWN",
+          "reason": "NATIVE_UNJOINED",
+          "countSequence": null
+        },
+        "afterScopeMissing": {
+          "value": "UNKNOWN",
+          "reason": "NATIVE_UNJOINED",
+          "countSequence": null
+        }
+      },
+      "requiredHttp": {
+        "state": "UNKNOWN",
+        "reason": "NATIVE_FORMAT_UNSUPPORTED",
+        "throwSequence": null,
+        "actual": null,
+        "expected": null
+      },
+      "impact": "Razón pública/prioridad incorrecta para header/UTF8/control inválidos que ya fueron colapsados a nativeambiguous por62a. No falsoKNOWN, dato privado exportado, ejecuciónreal ni calificaciónTask1. Impide PASS SPEC del adapter nominado contra609/32137 hasta reconciliación deRoot.",
+      "evidenceKind": "DETERMINISTIC_STATIC_TRACE_ONLY",
+      "SourceFunctionExecuted": false,
+      "inputHashes": {
+        "inputBytes": 12485,
+        "inputSha256": "43e05e4d082de3941a8af3c2d602a6a260b1355421b8ebd62bcd334caf35b66c",
+        "inputGitBlobDigest": "d6de591df917f5cdaccb629ec43cb701ff228957",
+        "stdoutBytes": 3816,
+        "stdoutSha256": "6b9387fa2787468e9477bca3ab8ba3ea79c9e8232cd3283245ab9284066a3794",
+        "journalBytes": 6226,
+        "journalSha256": "fac212a8b05680d9f7aad15e464b77ba4e0e916f87e11f8ce535755cdcd83f67"
+      },
+      "inputHashNote": "inputGitBlobDigest es digest de la serialización aislada canónica del objeto standaloneSyntheticInput+LF, no se afirma que exista como objetoGit separado. El objeto íntegro se incluye en esta constancia.",
+      "standaloneSyntheticInput": {
+        "schema": "AFW-FG3-REVIEW-STATIC-TRACE-INPUT/1",
+        "synthetic": true,
+        "sourceFixture": "4469d73e40f758e356e172c119687dde119c1fe6",
+        "sourceCase": "H_KNOWN_429",
+        "atoms": "8301628a2141c6e125cef9e549158e3a1712f5a1",
+        "mutation": "Replace only HEADER atom with exact UTF8 TAP version 12 plus LF. No other atom changes.",
+        "selected": [
+          "C2T1_CONNECTION",
+          "C2T1_OAUTH",
+          "C2T1_HANDLE",
+          "C2T1_PROJECTREF",
+          "C2T1_SUBJECT",
+          "C2T1_PHASE_RENAME",
+          "C2T1_SOURCE_BYTES",
+          "C2T1_APPROVAL",
+          "C2T1_PREDECESSOR",
+          "C2T1_GRANT_REVOKED",
+          "C2T1_EXTRA_KEY",
+          "C2T1_NOTICES",
+          "C2T1_MONITOR_COOKIE",
+          "C2T1_MONITOR",
+          "C2T1_SCOPE_MISSING",
+          "C2T1_FINITE",
+          "C2T1_SELECTION",
+          "C2T1_LOST_ACK_DUPLICATE",
+          "C2T1_UNRESOLVED_WRITER",
+          "C2T1_OWN_PROMISE"
+        ],
+        "child": {
+          "status": 1,
+          "signal": null,
+          "errorCode": "ETIMEDOUT",
+          "stdoutUtf8": "TAP version 12\n# C2SOURCE {\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_CONNECTION\nok 1 - C2T1_CONNECTION\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_OAUTH\nok 2 - C2T1_OAUTH\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_HANDLE\nok 3 - C2T1_HANDLE\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PROJECTREF\nok 4 - C2T1_PROJECTREF\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SUBJECT\nok 5 - C2T1_SUBJECT\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PHASE_RENAME\nok 6 - C2T1_PHASE_RENAME\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SOURCE_BYTES\nok 7 - C2T1_SOURCE_BYTES\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_APPROVAL\nok 8 - C2T1_APPROVAL\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PREDECESSOR\nok 9 - C2T1_PREDECESSOR\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_GRANT_REVOKED\nok 10 - C2T1_GRANT_REVOKED\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_EXTRA_KEY\nok 11 - C2T1_EXTRA_KEY\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"}\n# Subtest: C2T1_NOTICES\nok 12 - C2T1_NOTICES\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"}\n# Subtest: C2T1_MONITOR_COOKIE\nok 13 - C2T1_MONITOR_COOKIE\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2FT3 {\"id\":\"C2T1_MONITOR\",\"value\":\"0\"}\n# C2SOURCE {\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"}\n# Subtest: C2T1_MONITOR\nok 14 - C2T1_MONITOR\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2FT3 {\"id\":\"C2T1_SCOPE_MISSING\",\"value\":\"1\"}\n# C2SOURCE {\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"fail\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"TEST_FAILED\"}\n# Subtest: C2T1_SCOPE_MISSING\nnot ok 15 - C2T1_SCOPE_MISSING\n  ---\n  duration_ms: 1\n  type: 'test'\n  location: '/synthetic/finite-get-syn.mjs:15:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    SYNTHETIC_ASSERTION_TEXT_NOT_PARSED\n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 200\n  actual: 429\n  operator: 'strictEqual'\n  stack: |-\n    SYNTHETIC_STACK_NOT_PARSED\n  ...\n",
+          "stderrUtf8": ""
+        },
+        "journalUtf8": "{\"sequence\":1,\"elapsedMs\":1,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":2,\"elapsedMs\":2,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":3,\"elapsedMs\":3,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":4,\"elapsedMs\":4,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":5,\"elapsedMs\":5,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":6,\"elapsedMs\":6,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":7,\"elapsedMs\":7,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":8,\"elapsedMs\":8,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":9,\"elapsedMs\":9,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":10,\"elapsedMs\":10,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":11,\"elapsedMs\":11,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":12,\"elapsedMs\":12,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":13,\"elapsedMs\":13,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":14,\"elapsedMs\":14,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":15,\"elapsedMs\":15,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":16,\"elapsedMs\":16,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":17,\"elapsedMs\":17,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":18,\"elapsedMs\":18,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":19,\"elapsedMs\":19,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":20,\"elapsedMs\":20,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":21,\"elapsedMs\":21,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":22,\"elapsedMs\":22,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":23,\"elapsedMs\":23,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":24,\"elapsedMs\":24,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":25,\"elapsedMs\":25,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":26,\"elapsedMs\":26,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":27,\"elapsedMs\":27,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":28,\"elapsedMs\":28,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":29,\"elapsedMs\":29,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":30,\"elapsedMs\":30,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":31,\"elapsedMs\":31,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":32,\"elapsedMs\":32,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":33,\"elapsedMs\":33,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":34,\"elapsedMs\":34,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":35,\"elapsedMs\":35,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":36,\"elapsedMs\":36,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":37,\"elapsedMs\":37,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":38,\"elapsedMs\":38,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":39,\"elapsedMs\":39,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":40,\"elapsedMs\":40,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":41,\"elapsedMs\":41,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":42,\"elapsedMs\":42,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":43,\"elapsedMs\":43,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":44,\"elapsedMs\":44,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":45,\"elapsedMs\":45,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":46,\"elapsedMs\":46,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":47,\"elapsedMs\":47,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":48,\"elapsedMs\":48,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":49,\"elapsedMs\":49,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":50,\"elapsedMs\":50,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":51,\"elapsedMs\":51,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":52,\"elapsedMs\":52,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":53,\"elapsedMs\":53,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":54,\"elapsedMs\":54,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":55,\"elapsedMs\":55,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":56,\"elapsedMs\":56,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":57,\"elapsedMs\":57,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":58,\"elapsedMs\":58,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"throw\",\"error\":{\"name\":\"AssertionError\",\"code\":\"ERR_ASSERTION\",\"site\":{\"file\":\"S08\",\"line\":18,\"column\":118}}}\n{\"sequence\":59,\"elapsedMs\":59,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":60,\"elapsedMs\":60,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n"
+      },
+      "boundary": "OWN no recibe el rawheader y no puede distinguir por sí solo formatunsupported frente a otra ambigüedad privada. Source/publication/OWN deben preservar el acuerdo sin fabricar una observación. Este review no escribeelpatch, no libera nuevo caso/censo ni autoriza native."
+    }
+  ],
+  "otherwiseBoundedAssessment": [
+    {
+      "path": "collection-adapters.mjs",
+      "lines": [
+        1,
+        41,
+        62,
+        71,
+        83,
+        90,
+        98,
+        105,
+        113
+      ],
+      "result": "Importsbuiltin+62a, sin businessimports. Lecturas13target reales coninode/path/stability yhash, siblings/tail fijados, journalprivate600/nlink1/ownership, probesunion y2launches/2..8procesos. Prefix1..124 igual salvofamilia/markers; C1unit125..247 exacta7055B/SHA6e8a25ad. Se conserva el núcleo ya revisado; no reauditoría completa deBASE."
+    },
+    {
+      "path": "collection-adapters.mjs",
+      "lines": [
+        258,
+        275,
+        290,
+        322,
+        333,
+        349,
+        360,
+        387,
+        396,
+        406,
+        422
+      ],
+      "result": "Fuera delhallazgo deorden deformat, targetScope15 exacto, primeraacciónthrow/14settlements+nativePASS, punterosdecount reales, journalposteriorpreservado, SourceRows ymarkersindependientes deSubtest. Globalbadmarker tañeamboscounts respetandoblockersanteriores; marker missingnoerasibling. N2pass+action/countthrowcontradictorio esFAULT. Cantidad0/1/2+ no afecta elegibilidadHTTP; no monotonía/reconciliacióncon3counters. Rawstdout/stderr se reducen a bytes/SHA ydatosbounded; noTAP/SQL/stacks niC2FT3raw apublicación."
+    },
+    {
+      "path": "collection-adapters.mjs",
+      "lines": [
+        428,
+        433,
+        434,
+        437,
+        462,
+        467,
+        488,
+        494,
+        497
+      ],
+      "result": "E3target13 ycontextoíndice/selection fijos, C1+finiteGetkeyorder/nulls/scalars/caps512 separados; globalmarker crossA, crossB deblockers visibles yAFTER bajo facts delcollector; publication outcome24576 ycustody1024 preparadoscompletos+LF antesframes. NoLFreinterpretado como24577body. Publisherconfía enfacts producidospor progress/nativePrefix cerrados; no se acredita como APIgenérica resistente afactsarbitrarios fuera delpipelinefijado."
+    },
+    {
+      "path": "run-finite-get-diag3.mjs",
+      "lines": [
+        57,
+        125,
+        135,
+        141,
+        149,
+        155,
+        184,
+        187,
+        191,
+        205,
+        210,
+        213,
+        220,
+        222
+      ],
+      "result": "Pinesfixedadmission/seleccióncanónica/E3índice13/datos ysharedmodules medidosantesimportadapter. Repo/ref/message/attempt/node/gitparent/tree/baseline/lockSDK1.2.1 exactos. MaterializaarchiveBASEsóloenTEMPowned, aplica13desdetextData allí ysymlinkdeps existentes; no sobrescribe Sourcecheckout. Envstripped, nonroot, cleargroups/no-newprivs/unshareNETloopback, capturapipes, timeout180s dentro330total. Sourcehead/tree sólo contextotéxtil; Rootexpected/API/tree25 independientes siguennecesarios."
+    },
+    {
+      "path": "run-finite-get-diag3.mjs",
+      "lines": [
+        228,
+        231,
+        233,
+        240,
+        242,
+        244,
+        247,
+        251,
+        252,
+        253,
+        254,
+        258,
+        264,
+        270,
+        272,
+        276,
+        278,
+        281
+      ],
+      "result": "Doslaunches preflight/GREEN; actual13before/after ysiblings comprobados, journalestableread, cleanupowninode antespublicación. CLItest-concurrency1 yD07exacto sostienen alcanceclosedserial delS08early. Artefactoflagwx/oneLF/readback yframesnormales sólotraschecks; fallossaneadosFAULT+exit1 sinprivateerror. Nohiddenretry, nuevoRPC obranchactivation."
+    },
+    {
+      "path": ".github/workflows/afw-c2-finite-get-diag3.yml",
+      "result": "Push exactrepo/ref/message/attempt1, contentsread/Ubuntu24/Node22.23.4/job7min, lockednpmciignoreScripts, comandosfijos, artifactfilename/name/7d/no-fileerror. Sin dispatch genérico ni permisoswrite. Un jobdiagnosticsuccess futuro noacreditaríaFull20."
+    },
+    {
+      "path": "frame-schema.json/mode-selection.json/protocol-contract.json",
+      "result": "Schemafinal difiere delblueprint sólo bindingsE3medidos, remociónnot:{}ytítulo; fieldfiniteGet/C1exactos, ambas13arraysE3 yselección20exactas. Protocolo finito copia609producer/predicate/wire/http/counts/interpretation ycross1ebddsin cambios. Source25edgesexactos aRoot266289/hash273296dc;17frozenexactos. Head/tree/run/jobactual siguenfutureRoot, sinwildcardnullruntime."
+    }
+  ],
+  "latchScope": "Se mantiene la limitaciónno-blocking de5584: factorysinseen-ID/order eidleantesasyncsnapshot sólo es aceptado paraD07único/serial yjoinsnative calificados. Runneractual conserva --test-concurrency=1 yD07pin; no ampliación alAPIgenérico ni petición de casos adicionales.",
+  "pending": [
+    "Root debe resolver elhallazgoP2 Source/Publication/OWNreasoncontract antes de admitir esta propuesta para native. Reviewer no implementa ni instruye un patch.",
+    "Tooling9/145yreversibles/freshnativeevidence aún no suministrados paraeste review; nativerefsHOLD. Los145sonliterales selladosprevios, no resultados obtenidos aquí.",
+    "No unbound metadata Source25 segúnRootmeasurement; faltaoccurrencerealRoot + tooling/reviews/gate separadoparacualquieracciónfutura. No businessrun ni replay liberado.",
+    "EarlyS08/staticbinding no revocados por este hallazgo deladapter; FullTask1/SourceQualified/Task1Pass y7nonclaimsfalse."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
