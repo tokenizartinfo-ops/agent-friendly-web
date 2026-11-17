@@ -1,9 +1,9 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/13",
-  "timestampUTC": "2026-11-17 00:50:03 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/14",
+  "timestampUTC": "2026-11-17 01:02:03 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "phase": "DIAG2_NODE_FORMAT_TOY_PASSED_CLOSED_FRESH_REVIEW_PENDING",
+  "phase": "DIAG2_SOURCE35_OWN40_IMPLEMENTATION_RELEASED",
   "activeNativeRuns": [],
   "currentAllNativeOccurrencesClosed": true,
   "green20": {
@@ -110,11 +110,11 @@
     "NO_NOTICES_speed_or_cause_claim": true
   },
   "diag2": {
-    "stage": "DESIGN_ACCEPTED_TOY_IMPLEMENTATION_ONLY",
+    "stage": "SOURCE35_OWN40_IMPLEMENTATION_ACTIVE",
     "SourceDesigner": "c230_full_own_native_review",
     "OwnDesigner": "c2_v2_own_receiver_fix1",
-    "SourceImplementationReleased": false,
-    "OwnImplementationReleased": false,
+    "SourceImplementationReleased": true,
+    "OwnImplementationReleased": true,
     "NativeReleased": false,
     "SourceBusinessReleased": false,
     "reason": "Current admitted diagnostic omitted status scalar and Source C2SOURCE counters; prepare bounded extraction of already-emitted bytes, no newhooks/RPCs/RAW export.",
@@ -133,12 +133,12 @@
     "OwnCensus40": "e01fc7fa1737d6498b70fc866a41ab64ae04c345",
     "OwnEarly40IdsSeal": "e4c75949c6849b2fd8f83d8ca34ad6f526d39f78",
     "roles": {
-      "c230_full_own_native_review": "Peer DATA review fullbindingJSON vsC1 contract only; no codependingRoot",
-      "c2_v2_own_receiver_fix1": "40complete fixtureDATA allwritten,finalizingindex/fullseal; no guard/parser code",
-      "green20_own124_review": "Fresh actualtoyreview Primary+closure; no nativeendpointsrepeated",
-      "n3_admission_repair4_design": "FullbindingDATA done; IDLE, readySourcecollectorimplementation onlyafterRootrelease"
+      "n3_admission_repair4_design": "Source35 and final25 newfamilycode implementation round1",
+      "c2_v2_own_receiver_fix1": "IndependentOWN40 guard implementation round1;literalDATAsealed",
+      "c230_full_own_native_review": "SourcefullbindingpeerreviewPASS; availablefreshreview",
+      "green20_own124_review": "ToyfreshreviewPASS; availableindependentOWNreview"
     },
-    "CodeAndBusinessGate": "Source/OWNparsercode helduntilactualToyfreshreview+Rootfullbinding/peers acceptance. NativeandSourcebusinessnotreleased.",
+    "CodeAndBusinessGate": "Source35/OWN40 implementation released byRoot7502f3b; allnative/businessrefcreation stillheld. Root final25fullhash required before OWNnative. Toy/peerfullbindingaccepted.",
     "preliminaryDataNotYetRootAdmitted": {
       "selection": "5a554a8fb75439f1549d03baf29be09572fdddac",
       "schema": "90e52e44f2364355c6a25daccb4684ed41ba0f7e"
@@ -162,7 +162,7 @@
     "ToyProof": "9f3ec19e53267713dd037fca22a9f3bb3742cb3a",
     "ToyCloseReadback": "6967fb10ea015964ce7f68e1c0baf9b2b2f930ba",
     "ToyClosedHead": "5f5295265217b31a19fbed2379f697c5a6a83080",
-    "ToyFreshReviewPending": true,
+    "ToyFreshReviewPending": false,
     "fullBindingIndex": "5b5e67e14d623930dc7cea9e5579a64ec98a9508",
     "fullSchema": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
     "selection": "5a554a8fb75439f1549d03baf29be09572fdddac",
@@ -184,11 +184,23 @@
       },
       "literalChecks6Pass": true,
       "parent281msChild154ms": true,
-      "freshReviewPending": true,
-      "NOTActualSource503": true
-    }
+      "freshReviewPending": false,
+      "NOTActualSource503": true,
+      "freshReview": "7ef372eb9dfc70d01c939f76167048f1e102e484"
+    },
+    "ToyFreshReview": "7ef372eb9dfc70d01c939f76167048f1e102e484",
+    "ToyFormatAccepted": true,
+    "BindingAccepted": true,
+    "BindingPeer": "50ffcbb3c65917ff3884eec10f006d91e2d068fe",
+    "ImplementationRuling": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+    "SourceNativeReleased": false,
+    "OwnNativeReleased": false,
+    "OwnFinalFixtureIndex": "394f7dde265fb7b3c3b5de26cede262c6f744daa",
+    "OwnFinalFixtureSeal": "1edcd74e5a89f65394ca0521305f5fa52c44f391",
+    "OwnFixture40RootFullHashVerified": true,
+    "OwnFixtureNativeExecuted": false
   },
-  "next": "Get fresh toy finalreview and sourcepeerfullbindingreview +OWN40seal; Rootaccept fullschema/format then release bounded Source35/OWN40 implementations with same25sourceedges. Rootowns native gates/closure. Sourcebusinesscapture remainsheld untilboth implementations/natives/reviews/context ready.",
+  "next": "Review newSource35 andOWN40 implementations, gate actualGHA tests/close/freshreview. Then one newfull-orderDIAG2 capture for actualstatus/counters under unchangedbusinessclocks/caseorder. No normalTask1 oroldrun replay.",
   "preservation": "Original3203/main/history/26b/c230/DIAG1/old419 unchanged. Source locally neverexecuted; allnativeheavyworkGHA. No Cloudflare/OAuth/OTP/tokens/mail/Max/runtimeaction.",
   "SourceQualified": false,
   "Task1Pass": false,
