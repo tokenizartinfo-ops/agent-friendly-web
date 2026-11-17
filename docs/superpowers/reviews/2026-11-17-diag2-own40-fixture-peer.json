@@ -1,0 +1,617 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-OWN40-SOURCE-PEER-FIXTURE-DATA-REVIEW/1",
+  "timestampUTC": "2026-11-17 01:16:11 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "disposition": "ACK_COMPATIBLE_FIXTURE_DATA_ONLY",
+  "findings": [],
+  "scope": "Peer review de los40 fixtures literales de OWN, su expected/seal/packet/context/admission y byteprovenance como DATA, contra C18e30344042e65b888d1f912a9a375d365f3e5c4e y fullbinding5b5e67e14d623930dc7cea9e5579a64ec98a9508. No aceptación del guard, implementación, native ni Sourcebusiness.",
+  "authority": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+  "fullMetadataInputs": [
+    {
+      "name": "packet",
+      "bytes": 24556,
+      "sha256": "25b3928bd14d6ce5d1515dd09bac7c770e9da688f8a28a84a062ac2dccc25bab",
+      "gitBlob": "394f7dde265fb7b3c3b5de26cede262c6f744daa"
+    },
+    {
+      "name": "seal",
+      "bytes": 10530,
+      "sha256": "1f8f0859c585fe0087d7637868626ae7f0238d0f2d0056957565c428efad6f09",
+      "gitBlob": "1edcd74e5a89f65394ca0521305f5fa52c44f391"
+    },
+    {
+      "name": "expected",
+      "bytes": 15285,
+      "sha256": "e80ce661bce5f4e396a28fa39e4073eee84ebb675b0157678d2142b4e3511627",
+      "gitBlob": "e4c75949c6849b2fd8f83d8ca34ad6f526d39f78"
+    },
+    {
+      "name": "modelContext",
+      "bytes": 24855,
+      "sha256": "c1ed7dd3c2301346aa634963ad718f1151a7eb1b459a396e6788bb5d4997fe98",
+      "gitBlob": "81d80000df6c21991da7a4eaa86290422536c659"
+    },
+    {
+      "name": "modelAdmission",
+      "bytes": 25702,
+      "sha256": "ecd30f43e0b09d66a5b95e9336717960af5d33dba011bae62d7e4f97e4e5df79",
+      "gitBlob": "bd72d6f0e42b5c830241ae3d66ef331bbe39381a"
+    },
+    {
+      "name": "byteAudit",
+      "bytes": 17415,
+      "sha256": "33203432e04674b0423bd4dc733e805032abc1f63dd338dec06d690ced5c74bc",
+      "gitBlob": "aad2a7657d25220f4ffb8e6be5cc0c13bfc7ef45"
+    },
+    {
+      "name": "outerDataReview",
+      "bytes": 2752,
+      "sha256": "7107ff1871ba9b512e33523cf6f922d04c70d7fb32526433f4dc63b74b83cea7",
+      "gitBlob": "3329a83566bbe6aefd96de22e2cd25e10b2ef008"
+    },
+    {
+      "name": "report",
+      "bytes": 9616,
+      "sha256": "14c1ee0c83c498f69da358d4a85dcb0edc14b551c108e7a0ccaf3a66e26d8f83",
+      "gitBlob": "5e8fcbc0c2f00ebd78728a66241a96df82f68e91"
+    },
+    {
+      "name": "release",
+      "bytes": 6303,
+      "sha256": "3f623e044008b79a350f2b09b19b6604de9f5a354d0db81ad6bc40745ea217fc",
+      "gitBlob": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140"
+    }
+  ],
+  "literalReads": {
+    "count": 40,
+    "totalBytes": 2550722,
+    "allFullFetched": true,
+    "allBytesSha256GitBlobMatched": true,
+    "expectedAndSealIdOrderExact": true,
+    "idsCanonicalSha256": "54461d3312a5867db8eb8495bf1cb86b5d54f10be8acb0109c36a320996a1b3f",
+    "fullLiteralHashListCanonicalSha256": "25af9a0c817974e5c744a301675a173857931d176f644a4f78f07abb5c2783e2",
+    "manifest": "394f7dde265fb7b3c3b5de26cede262c6f744daa.artifacts supplies each literal pin/path/bytes/SHA; all40 independently checked. Root reported FULL48+index; I did not re-audit/import the model-builder.mjs materializer."
+  },
+  "expectedDesign": {
+    "total": 40,
+    "accept": 19,
+    "reject": 21,
+    "acceptedStates": {
+      "KNOWN": 6,
+      "NOT_APPLICABLE": 6,
+      "UNKNOWN": 7
+    },
+    "runtimeControlsExecuted": 0,
+    "guardExecuted": false,
+    "nativeExecuted": false
+  },
+  "reviewerDataChecks": {
+    "fixtureCount": 40,
+    "predictedAdmit": 19,
+    "predictedReject": 21,
+    "expectationMismatches": 0,
+    "semanticNegativeTransportClean": true,
+    "ordinaryZipComplete": 39,
+    "F06": {
+      "errors": [
+        "fullDeflate"
+      ],
+      "zipBytes": 3083,
+      "payloadBytes": 13669,
+      "compressedBytes": 2899,
+      "consumedBytes": 2895,
+      "unconsumedBytes": 4,
+      "zipSha256": "4feaf7a72640bce5cb2bc188a3a458396ea14ee57e4fee46773df4b295dd242c",
+      "payloadSha256": "a2a536c38afa659a2e8d8b275f775fcdeb3a41aaec7321b45a84a4dbd01dd42f"
+    },
+    "maxPayloadLF": 13955,
+    "maxMetadata": 327,
+    "maxCustody": 973,
+    "fullLiteralHashListSha256": "25af9a0c817974e5c744a301675a173857931d176f644a4f78f07abb5c2783e2",
+    "placeholders": [
+      {
+        "role": "collector",
+        "bytes": 83,
+        "sha256": "65cfb1ec24ad9fd9b49d0eeb9bb3185917c07b5f0243dbf87789cb7a76590ea2",
+        "notSourceCode": true
+      },
+      {
+        "role": "runner",
+        "bytes": 80,
+        "sha256": "9094623a9d9a994e93269bf6a5ead3a9b661fd50e449c873c40507939f5ce789",
+        "notSourceCode": true
+      },
+      {
+        "role": "workflow",
+        "bytes": 82,
+        "sha256": "a0a435e1015a12d356139369f245c16fed19b2e6740ec5e56d3b6eb18967954a",
+        "notSourceCode": true
+      }
+    ],
+    "modelsSynthetic2039": true,
+    "actualSourceContext": null,
+    "receiverCodeExecuted": false,
+    "nativeExecuted": false
+  },
+  "semantics": {
+    "known": "K01..K06 tienen earliest validated prefixthrow46NOTICES/action/AssertionError/ERR_ASSERTION/S08:41:12, first11nativePASS+action/countreturn actuales del modelo, ordinal12nativeFAIL y countreturn48. throwSequence46 coincide. Scalars/counters coinciden con expectedliteral, 0..3independientes; K05[0,3,1] evita inventar jerarquía; noEXTRA/delta. K02dato429 y sus syntheticraw/privatewitness no autentican un Source status real.",
+    "prefix": "K06 mantiene candidato completo46/count48 y firstThrow46 bajo journal torn posterior, sin borrar hechos ni afirmar earliestglobal/ausencia de actividad privada. C1 exige ese alcance de prefijo.",
+    "notApplicable": "A01 PASS12+returns; A02 journalcleancomplete20+AFTER sinthrows y nativeframeworkFAIL12, así NO_QUALIFYING_THROW no queda eclipsado por TARGET_PASSED; A03 primerthrow42EXTRA_KEY; A04 primerthrow48count; A05 earliernativeFAILconnection confirstthrow46NOTICES; A06 sitio/código diferente. Razones/precedencia son coherentes, N2 no contradice estospositivos.",
+    "unknown": "U01 counterthrow/U02counterabierto→COUNTER_UNAVAILABLE; U03 nativeprefix11→TARGET_NATIVE_UNAVAILABLE; U04 sin candidato cerrado→JOURNAL_UNRESOLVED. U05/U06/U08 son declaraciones acotadas de productor sobre source/scalars/ambigüedad ausentes, con nulls; no afirman que OWN pueda inspeccionar rawchild privado ni demostrar su ausencia.",
+    "negativeSemantic": "R01seq ajena; R02native12ausente; R03PASS12 conthrow46N2; R04id;R05phase;R06code;R07actual200;R08actual99;R09actual600;R10actualstring;R11rogueextra;R12UNKNOWNsource no-null;R13upload4;R14counterextra;R15earliernativeFAIL. Los15 cumplen los joins externos y ZIP salvo su defecto semántico previsto, sin transport failure ajeno que los enmascare.",
+    "negativeFault": "F01 rebindea payload/log/API a head/tree3/4 pero caller1/2 sigue distinto;F02 duplicate rawtreepath;F03frames fuera del commandstep válido;F04custodycheckedLaunches distinto2;F05after13 no coincideE2. Todos conservan ZIP/CRC/payload/digest correctos. F06 conserva payload/CRC/digest y sólo agrega4bytes dentro del compressed member, que inflate no consume.",
+    "qualification": "Cada caso mantiene SourceQualified/Task1Pass y7nonclaimsfalse. Los19expectedaccept son admisión diagnóstica de modelo, no un Source outcome verificado."
+  },
+  "transportAndIsolation": {
+    "zip": "Strict base64/EOCD/disco1/entry1/central-local/name/flags/method/bounds/extras/noZIP64/regularfile/descriptor/localzero-or-match/CRC/completeUTF8+LF revisados con lógica propia+builtincrypto/zlib.39ZIP consumen todo;F06 tienecompressed2899/consumed2895/trailing4, ZIP3083B SHA4feaf7a72640bce5cb2bc188a3a458396ea14ee57e4fee46773df4b295dd242c. Payload13669B SHAA2a536c38afa659a2e8d8b275f775fcdeb3a41aaec7321b45a84a4dbd01dd42f, idéntico al bodydeclarado incluso allí.",
+    "joins": "Independientemente contrastados run/jobs/commit/rawtree/trusted25edges/hash/callercontext/transportIDs/artifactlistingrunheadbranch/size/digest. Normalframes únicos, canonicalpayload +embeddedcustody iguales, commandgroup y timestamps dentrostep salvoF03. Ningún R-case tiene un fallo externo inesperado.",
+    "streams": "Los syntheticChildStdoutUtf8 y syntheticJournalUtf8 están fuera de receiverinput; sus bytes/SHA concuerdan con capture/journal. Replay propio de secuencia/intervalos verifica las filas exportadas, nativepairs y earliestprefix; K06conserva suffixnoexportado/torn. Se auditan sólo los literales sintéticos, no raw Source real.",
+    "size": "PayloadLFmáximo13955<=24577, metadata327<=512, custody973<=1024. Caps originales permanecen. F06 no se rechaza por cap, CRC, payload o API digest."
+  },
+  "rejectionIsolationTable": [
+    {
+      "id": "OWN_D2_K01",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_K02",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_K03",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_K04",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_K05",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_A01",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_A02",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_A03",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_A04",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_A05",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_A06",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_U01",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_U02",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_U03",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_U04",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_U05",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_U06",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_K06",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_U08",
+      "expectedAccepted": true,
+      "reviewPrediction": true,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R01",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [],
+      "semanticIssues": [
+        "knownSequence"
+      ],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R02",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [],
+      "semanticIssues": [
+        "knownNative12"
+      ],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R03",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [],
+      "semanticIssues": [
+        "knownNative12",
+        "inheritedN2"
+      ],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R04",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/source/id:const",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R05",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/source/phase:const",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R06",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/source/code:const",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R07",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/assertion/actual:not",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R08",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/assertion/actual:minimum",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R09",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/assertion/actual:maximum",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R10",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/assertion/actual:type",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R11",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/rogue:extra",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R12",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/source:const",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R13",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/source/counters/upload:maximum",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R14",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/observation/firstFailure/source/counters/extra:extra",
+        "/observation/firstFailure:oneOf"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_R15",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [],
+      "semanticIssues": [
+        "knownPrior11",
+        "knownEarlierNativeFailure"
+      ],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_F01",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [
+        "callerHead",
+        "callerTree"
+      ],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_F02",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [
+        "rawTreeUnique"
+      ],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_F03",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [
+        "commandFrameWindow"
+      ],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_F04",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/custody/checkedLaunches:const"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [
+        "custodyPartition"
+      ],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_F05",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [
+        "/sourceReads/afterSha256:const"
+      ],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": []
+    },
+    {
+      "id": "OWN_D2_F06",
+      "expectedAccepted": false,
+      "reviewPrediction": false,
+      "schemaIssues": [],
+      "semanticIssues": [],
+      "joinIssues": [],
+      "zipIssues": [
+        "fullDeflate"
+      ]
+    }
+  ],
+  "syntheticBoundary": {
+    "dates": "2039-07-08 y run99172001/job99172002/head111.../tree222... son ficciones explícitas; no ocurrencia existente.",
+    "placeholders": [
+      {
+        "role": "collector",
+        "bytes": 83,
+        "sha256": "65cfb1ec24ad9fd9b49d0eeb9bb3185917c07b5f0243dbf87789cb7a76590ea2",
+        "notSourceCode": true
+      },
+      {
+        "role": "runner",
+        "bytes": 80,
+        "sha256": "9094623a9d9a994e93269bf6a5ead3a9b661fd50e449c873c40507939f5ce789",
+        "notSourceCode": true
+      },
+      {
+        "role": "workflow",
+        "bytes": 82,
+        "sha256": "a0a435e1015a12d356139369f245c16fed19b2e6740ec5e56d3b6eb18967954a",
+        "notSourceCode": true
+      }
+    ],
+    "bodyAdmission": "Model-admission reemplaza exclusivamente los3roles Sourcecódigo todavía no ligados por pequeños JSON inertsyntheticOnly/notSourceCode/finalRootPin:null. Sus byte/SHA/GitIDs sí corresponden a esos strings, no a ejecutables Source. Los22known DATAedges/E2 y source-family strings son contexto de modelo.",
+    "actualExpectedSourceContext": null,
+    "actualFinalSourceBinding": false,
+    "RootRelease": "El sello fixture-only antecede al código y declara HELD histórico;7502autoriza ahora a losautores a implementar. Este ACK no revoca ni amplía ese ruling y no concede native/business."
+  },
+  "coverageLimits": [
+    "Exactamente40 literales/reasons esperados verificados; no ejecución de40controles ni resultado runtime. Predicciones19/21 son consistencia independiente de DATA.",
+    "Cada descripción con alternativas or ejercita su variante literal: por ejemplo R10stringactual, R11extra deprojection y R14counterextra. No afirmar que todas lasvariantes mencionadas fueron probadas ni añadircasos/budgets por este review.",
+    "OWN no recibe rawchildstdout: no detecta duplicados/nesting privados omitidos coherentemente ni autentica503frente429 por unSHA. Los fixtures no demuestran ese control inexistente.",
+    "No re-review del full25business, hostfix o toyactual; reutiliza SourceDATAcontractreview50ffcbb3c65917ff3884eec10f006d91e2d068fe y SourceC1. La revisión posterior debe examinar guardcode y native real por separado."
+  ],
+  "performed": "Sólo lecturasGitFULL, JSONDATA, lógica propia de revisiónRAM ycrypto/zlibbuiltin sobre bytes ZIP. Ningún Source/guard/harness import/eval/AST/syntax/compile/test, FS/deps/builds, Actions/log/artifact endpoint, ref/native/provider. Ninguna edición defixtures/docsrefs. Se escribe únicamente esta constanciaGitDATA con FULLreadback.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
