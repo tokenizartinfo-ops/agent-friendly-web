@@ -1,0 +1,2891 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Independent OWN finite GET DIAG3 round4 tooling proof; actual normalized73 and native8, no Source execution",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "afw.c2-own-finite-get-diag3-tools-proof.v1"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "const": "tokenizartinfo-ops/agent-friendly-web"
+        },
+        "branch": {
+          "const": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools"
+        },
+        "workflow": {
+          "const": ".github/workflows/afw-c2-own-finite-get-diag3-tools.yml"
+        },
+        "message": {
+          "const": "AFW-C2-OWN-FINITE-GET-DIAG3-TOOLS-ONEUSE-20261117"
+        },
+        "head": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "runId": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "runAttempt": {
+          "const": 1
+        },
+        "job": {
+          "const": "c2-own-finite-get-diag3-tools"
+        },
+        "node": {
+          "const": "v22.23.4"
+        },
+        "platform": {
+          "const": "linux"
+        },
+        "startedUTC": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "completedUTC": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "repository",
+        "branch",
+        "workflow",
+        "message",
+        "head",
+        "tree",
+        "runId",
+        "runAttempt",
+        "job",
+        "node",
+        "platform",
+        "startedUTC",
+        "completedUTC"
+      ],
+      "additionalProperties": false
+    },
+    "graphSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "runnerSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "selectionSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "proofSchemaSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "idsSha256": {
+      "const": "824d5a29870dc010c6024aca2a7ae47367b5f38c13b240547e1c59ef1229ebf8"
+    },
+    "resultsSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "physicalIdsSha256": {
+      "const": "9730902d9c4ddbd6f3f9352e8323e9532fdc53919b52749eebb488d16d11f493"
+    },
+    "nativeIds": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "const": "FG3_OWN_D2_COMPAT"
+        },
+        {
+          "const": "FG3_OWN_FINITE_GET_KNOWN"
+        },
+        {
+          "const": "FG3_OWN_FINITE_GET_INDEPENDENCE"
+        },
+        {
+          "const": "FG3_OWN_FINITE_GET_POINTERS"
+        },
+        {
+          "const": "FG3_OWN_FINITE_GET_VISIBLE_BLOCKERS"
+        },
+        {
+          "const": "FG3_OWN_FINITE_GET_STREAM_CONSISTENCY"
+        },
+        {
+          "const": "FG3_OWN_FINITE_GET_WIRE"
+        },
+        {
+          "const": "FG3_OWN_FINITE_GET_CALLER_BINDING"
+        }
+      ],
+      "items": false,
+      "minItems": 8,
+      "maxItems": 8
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "nativeGroups": {
+          "const": 8
+        },
+        "receiverEvaluations": {
+          "const": 73
+        },
+        "matched": {
+          "const": 73
+        },
+        "admit": {
+          "const": 32
+        },
+        "reject": {
+          "const": 41
+        },
+        "fail": {
+          "const": 0
+        },
+        "skip": {
+          "const": 0
+        },
+        "todo": {
+          "const": 0
+        },
+        "cancelled": {
+          "const": 0
+        }
+      },
+      "required": [
+        "nativeGroups",
+        "receiverEvaluations",
+        "matched",
+        "admit",
+        "reject",
+        "fail",
+        "skip",
+        "todo",
+        "cancelled"
+      ],
+      "additionalProperties": false
+    },
+    "results": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_K01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_K02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_K03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_K04"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_K05"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_A01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_A02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_A03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_A04"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_A05"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_A06"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_U01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_U02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_U03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_U04"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_U05"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_U06"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_K06"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_U08"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R04"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R05"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R06"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R07"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R08"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R09"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R10"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R11"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R12"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R13"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R14"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_R15"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_F01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_F02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_F03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_F04"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_F05"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_F06"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_K01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_K02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_K03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_K04"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_I01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_I02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_I03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_P01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_P02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_P03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_P04"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_B01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_B02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_B03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_B04"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_B05"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_S01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_S02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_S03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_W01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_W02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_W03"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_C01"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_C02"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_B06"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_B07"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_S04"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_S05"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "const": "FG3_S06"
+            },
+            "accepted": {
+              "type": "boolean"
+            },
+            "state": {
+              "enum": [
+                "KNOWN",
+                "UNKNOWN",
+                "NOT_APPLICABLE",
+                "REJECTED"
+              ]
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "projectionSha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "id",
+            "accepted",
+            "state",
+            "reason",
+            "projectionSha256"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "items": false,
+      "minItems": 73,
+      "maxItems": 73
+    },
+    "ownModelsExecuted": {
+      "const": true
+    },
+    "actualSourceExecution": {
+      "const": false
+    },
+    "actualEntryQualifiedByModels": {
+      "const": false
+    },
+    "finalSourceBinding": {
+      "const": false
+    },
+    "SourceQualified": {
+      "const": false
+    },
+    "Task1Pass": {
+      "const": false
+    },
+    "nonclaims": {
+      "type": "object",
+      "properties": {
+        "historicalCauseProven": {
+          "const": false
+        },
+        "receiptAuthenticated": {
+          "const": false
+        },
+        "operationalReadiness": {
+          "const": false
+        },
+        "completePackage": {
+          "const": false
+        },
+        "PCoff": {
+          "const": false
+        },
+        "globalNativeDrainVerified": {
+          "const": false
+        },
+        "sdkNamespaceEmptyVerified": {
+          "const": false
+        }
+      },
+      "required": [
+        "historicalCauseProven",
+        "receiptAuthenticated",
+        "operationalReadiness",
+        "completePackage",
+        "PCoff",
+        "globalNativeDrainVerified",
+        "sdkNamespaceEmptyVerified"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema",
+    "context",
+    "graphSha256",
+    "runnerSha256",
+    "selectionSha256",
+    "proofSchemaSha256",
+    "idsSha256",
+    "resultsSha256",
+    "physicalIdsSha256",
+    "nativeIds",
+    "counts",
+    "results",
+    "ownModelsExecuted",
+    "actualSourceExecution",
+    "actualEntryQualifiedByModels",
+    "finalSourceBinding",
+    "SourceQualified",
+    "Task1Pass",
+    "nonclaims"
+  ],
+  "additionalProperties": false
+}

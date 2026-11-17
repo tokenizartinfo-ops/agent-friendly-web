@@ -1,0 +1,579 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-COMPLETE-LITERAL/1",
+  "id": "FG3_W03",
+  "syntheticOnly": true,
+  "actualExpectedSourceContext": null,
+  "modelAdmissionRef": "model-admission.json",
+  "expected": {
+    "accepted": false,
+    "finiteGet": null,
+    "outerFirstThrowSequence": null,
+    "firstFailureState": null,
+    "firstFailureReason": null,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "input": {
+    "run": {
+      "id": 99303001,
+      "run_attempt": 1,
+      "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "head_branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+      "path": ".github/workflows/afw-c2-finite-get-diag3.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      },
+      "head_repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      },
+      "created_at": "2041-04-05T00:59:59Z",
+      "run_started_at": "2041-04-05T01:00:00Z",
+      "updated_at": "2041-04-05T01:04:21Z"
+    },
+    "jobs": {
+      "total_count": 1,
+      "jobs": [
+        {
+          "id": 99303002,
+          "run_id": 99303001,
+          "run_attempt": 1,
+          "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "name": "c2-finite-get-diag3",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2041-04-05T01:00:00Z",
+          "completed_at": "2041-04-05T01:04:20Z",
+          "steps": [
+            {
+              "number": 2,
+              "name": "Read the exact one-use lab head",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:00:00Z",
+              "completed_at": "2041-04-05T01:00:05Z"
+            },
+            {
+              "number": 3,
+              "name": "Use the fixed Node runtime",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:00:05Z",
+              "completed_at": "2041-04-05T01:00:10Z"
+            },
+            {
+              "number": 4,
+              "name": "Install only the existing locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:00:10Z",
+              "completed_at": "2041-04-05T01:00:30Z"
+            },
+            {
+              "number": 5,
+              "name": "Observe finite GET in the full case order",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:00:30Z",
+              "completed_at": "2041-04-05T01:03:40Z"
+            },
+            {
+              "number": 6,
+              "name": "Preserve the bounded finite GET diagnostic",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:03:40Z",
+              "completed_at": "2041-04-05T01:04:15Z"
+            }
+          ]
+        }
+      ]
+    },
+    "commit": {
+      "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "tree": {
+        "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "message": "AFW-C2-T1-FINITE-GET-DIAG3-ONEUSE-20261117",
+      "parents": [
+        {
+          "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        }
+      ]
+    },
+    "tree": {
+      "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "truncated": false,
+      "tree": [
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "511175ff2514542501d3c51e8269a0902a6fb54c",
+          "size": 3474
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+          "size": 148547
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+          "size": 45576
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+          "size": 2497
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+          "size": 2810
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+          "size": 4153
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a177d50ff73f8fad1d60827ef904a204126796fb",
+          "size": 101380
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+          "size": 22501
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+          "size": 2785
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b6cfe95188a51662b8b121e7a8c6d2bc3a22292e",
+          "size": 134
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+          "size": 61073
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+          "size": 88713
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+          "size": 58727
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+          "size": 6030
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+          "size": 1208
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+          "size": 417
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/mode-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a5ff3abbb4b9c0d089432edd2f44549faffa1992",
+          "size": 4539
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/frame-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "dd55c44c2acca5ee4639ed6d86e0baad51b7416b",
+          "size": 33261
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/protocol-contract.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a86aade0483e00e6ec9cc208dc6c5fd7eec535fd",
+          "size": 200
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "dd0c08374acc0817f3eb29a15714512951e8ce69",
+          "size": 112
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/read-progress.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+          "size": 5507
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/diagnostic-driver.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9e29c5197207b03bdb4b10069089f37df289e88c",
+          "size": 3169
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/progress-recorder.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "662ec8170bbfe81831b557824d1a466e722842d7",
+          "size": 3833
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "28ebe8f1ff5167a0ffafccfb785364e18ef7dc2f",
+          "size": 109
+        },
+        {
+          "path": ".github/workflows/afw-c2-finite-get-diag3.yml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e829ab00b715a2ab2b7c599c3cfb4c0bfd4688b8",
+          "size": 111
+        },
+        {
+          "path": "test/fixtures/finite-first-connection-publication.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+          "size": 57864
+        }
+      ]
+    },
+    "transport": {
+      "runId": 99303001,
+      "jobId": 99303002,
+      "rawLog": "2041-04-05T01:00:30.0000000Z ##[group]Run node docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs\n2041-04-05T01:00:30.0000000Z node docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs\n2041-04-05T01:00:30.0000000Z ##[endgroup]\n2041-04-05T01:03:35.0000000Z AFW_C2_FINITE_GET_DIAG3_CUSTODY {\"schema\":\"afw.c2-finite-get-diag3-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true}\n2041-04-05T01:03:36.0000000Z AFW_C2_FINITE_GET_DIAG3_OUTCOME {\"schema\":\"afw.c2-finite-get-diag3-outcome.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"diagnosticCollectionComplete\":true,\"nativeQualification\":false,\"sourceReads\":{\"beforeSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"],\"afterSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"]},\"observation\":{\"capture\":{\"exitCode\":1,\"signal\":\"none\",\"errorKind\":\"timeout\",\"stdout\":{\"bytes\":3452,\"sha256\":\"9f1f70fb0aadff1b916cab1e255d3b4b5973d5385ad06e6eb664726d0b9ee08a\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}},\"journal\":{\"bytes\":7288,\"sha256\":\"78c7011c20a8ee612bec6b2b3a83539363200cf0d975f6bbeaf38b0609a319e9\",\"stable\":true,\"recorderFaultObserved\":false},\"witness\":{\"integrity\":\"prefix\",\"frontier\":\"action\",\"events\":[{\"sequence\":1,\"elapsedMs\":1013,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":2,\"elapsedMs\":1026,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":3,\"elapsedMs\":1039,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":4,\"elapsedMs\":1052,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":5,\"elapsedMs\":1065,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":6,\"elapsedMs\":1078,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":7,\"elapsedMs\":1091,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":8,\"elapsedMs\":1104,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":9,\"elapsedMs\":1117,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":10,\"elapsedMs\":1130,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":11,\"elapsedMs\":1143,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":12,\"elapsedMs\":1156,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":13,\"elapsedMs\":1169,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":14,\"elapsedMs\":1182,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":15,\"elapsedMs\":1195,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":16,\"elapsedMs\":1208,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":17,\"elapsedMs\":1221,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":18,\"elapsedMs\":1234,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":19,\"elapsedMs\":1247,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":20,\"elapsedMs\":1260,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":21,\"elapsedMs\":1273,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":22,\"elapsedMs\":1286,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":23,\"elapsedMs\":1299,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":24,\"elapsedMs\":1312,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":25,\"elapsedMs\":1325,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":26,\"elapsedMs\":1338,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":27,\"elapsedMs\":1351,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":28,\"elapsedMs\":1364,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":29,\"elapsedMs\":1377,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":30,\"elapsedMs\":1390,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":31,\"elapsedMs\":1403,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":32,\"elapsedMs\":1416,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":33,\"elapsedMs\":1429,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":34,\"elapsedMs\":1442,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":35,\"elapsedMs\":1455,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":36,\"elapsedMs\":1468,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":37,\"elapsedMs\":1481,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":38,\"elapsedMs\":1494,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":39,\"elapsedMs\":1507,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":40,\"elapsedMs\":1520,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":41,\"elapsedMs\":1533,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":42,\"elapsedMs\":1546,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":43,\"elapsedMs\":1559,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":44,\"elapsedMs\":1572,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":45,\"elapsedMs\":1585,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":46,\"elapsedMs\":1598,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":47,\"elapsedMs\":1611,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":48,\"elapsedMs\":1624,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":49,\"elapsedMs\":1637,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":50,\"elapsedMs\":1650,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":51,\"elapsedMs\":1663,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":52,\"elapsedMs\":1676,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":53,\"elapsedMs\":1689,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":54,\"elapsedMs\":1702,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":55,\"elapsedMs\":1715,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":56,\"elapsedMs\":1728,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":57,\"elapsedMs\":1741,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":58,\"elapsedMs\":1754,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"throw\",\"error\":{\"name\":\"AssertionError\",\"code\":\"ERR_ASSERTION\",\"site\":{\"file\":\"S08\",\"line\":18,\"column\":118}}},{\"sequence\":59,\"elapsedMs\":1767,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":60,\"elapsedMs\":1780,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":61,\"elapsedMs\":1793,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":62,\"elapsedMs\":1806,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":63,\"elapsedMs\":1819,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":64,\"elapsedMs\":1832,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":65,\"elapsedMs\":1845,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":66,\"elapsedMs\":1858,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":67,\"elapsedMs\":1871,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":68,\"elapsedMs\":1884,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":69,\"elapsedMs\":1897,\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}],\"openCase\":{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\"},\"afterOpen\":false},\"unknownReason\":null,\"firstThrowSequence\":58,\"native\":{\"integrity\":\"prefix\",\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"fail\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\"}]},\"firstFailure\":{\"schema\":\"afw.c2-first-failure-post-diag2.v1\",\"state\":\"NOT_APPLICABLE\",\"reason\":\"EARLIEST_THROW_DIFFERENT\",\"throwSequence\":null,\"source\":null,\"assertion\":null},\"finiteGet\":{\"schema\":\"afw.c2-finite-get-diag3.v1\",\"http\":{\"state\":\"KNOWN\",\"reason\":\"TARGET_GET_ASSERTION\",\"throwSequence\":58,\"actual\":200,\"expected\":200},\"afterMonitor\":{\"value\":\"0\",\"reason\":\"JOINED_SNAPSHOT\",\"countSequence\":56},\"afterScopeMissing\":{\"value\":\"1\",\"reason\":\"JOINED_SNAPSHOT\",\"countSequence\":60}}},\"custody\":{\"schema\":\"afw.c2-finite-get-diag3-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true},\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    "artifact": {
+      "runId": 99303001,
+      "jobId": 99303002,
+      "listing": {
+        "total_count": 1,
+        "artifacts": [
+          {
+            "id": 99303003,
+            "name": "afw-c2-finite-get-diag3",
+            "expired": false,
+            "size_in_bytes": 3015,
+            "created_at": "2041-04-05T01:04:10Z",
+            "expires_at": "2041-04-12T01:04:10Z",
+            "workflow_run": {
+              "id": 99303001,
+              "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "head_branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3"
+            },
+            "digest": "sha256:ed185cc92e7b59ac5c3174615338acb5e3e3be6a2f2a7cb34d6d2bcfc01cf5e1"
+          }
+        ]
+      },
+      "artifactId": 99303003,
+      "fileName": "c2-finite-get-diag3.json",
+      "archiveBase64": "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",
+      "payloadText": "{\"schema\":\"afw.c2-finite-get-diag3-outcome.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"diagnosticCollectionComplete\":true,\"nativeQualification\":false,\"sourceReads\":{\"beforeSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"],\"afterSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"]},\"observation\":{\"capture\":{\"exitCode\":1,\"signal\":\"none\",\"errorKind\":\"timeout\",\"stdout\":{\"bytes\":3452,\"sha256\":\"9f1f70fb0aadff1b916cab1e255d3b4b5973d5385ad06e6eb664726d0b9ee08a\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}},\"journal\":{\"bytes\":7288,\"sha256\":\"78c7011c20a8ee612bec6b2b3a83539363200cf0d975f6bbeaf38b0609a319e9\",\"stable\":true,\"recorderFaultObserved\":false},\"witness\":{\"integrity\":\"prefix\",\"frontier\":\"action\",\"events\":[{\"sequence\":1,\"elapsedMs\":1013,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":2,\"elapsedMs\":1026,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":3,\"elapsedMs\":1039,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":4,\"elapsedMs\":1052,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":5,\"elapsedMs\":1065,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":6,\"elapsedMs\":1078,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":7,\"elapsedMs\":1091,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":8,\"elapsedMs\":1104,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":9,\"elapsedMs\":1117,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":10,\"elapsedMs\":1130,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":11,\"elapsedMs\":1143,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":12,\"elapsedMs\":1156,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":13,\"elapsedMs\":1169,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":14,\"elapsedMs\":1182,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":15,\"elapsedMs\":1195,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":16,\"elapsedMs\":1208,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":17,\"elapsedMs\":1221,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":18,\"elapsedMs\":1234,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":19,\"elapsedMs\":1247,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":20,\"elapsedMs\":1260,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":21,\"elapsedMs\":1273,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":22,\"elapsedMs\":1286,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":23,\"elapsedMs\":1299,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":24,\"elapsedMs\":1312,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":25,\"elapsedMs\":1325,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":26,\"elapsedMs\":1338,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":27,\"elapsedMs\":1351,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":28,\"elapsedMs\":1364,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":29,\"elapsedMs\":1377,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":30,\"elapsedMs\":1390,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":31,\"elapsedMs\":1403,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":32,\"elapsedMs\":1416,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":33,\"elapsedMs\":1429,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":34,\"elapsedMs\":1442,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":35,\"elapsedMs\":1455,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":36,\"elapsedMs\":1468,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":37,\"elapsedMs\":1481,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":38,\"elapsedMs\":1494,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":39,\"elapsedMs\":1507,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":40,\"elapsedMs\":1520,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":41,\"elapsedMs\":1533,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":42,\"elapsedMs\":1546,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":43,\"elapsedMs\":1559,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":44,\"elapsedMs\":1572,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":45,\"elapsedMs\":1585,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":46,\"elapsedMs\":1598,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":47,\"elapsedMs\":1611,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":48,\"elapsedMs\":1624,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":49,\"elapsedMs\":1637,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":50,\"elapsedMs\":1650,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":51,\"elapsedMs\":1663,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":52,\"elapsedMs\":1676,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":53,\"elapsedMs\":1689,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":54,\"elapsedMs\":1702,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":55,\"elapsedMs\":1715,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":56,\"elapsedMs\":1728,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":57,\"elapsedMs\":1741,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":58,\"elapsedMs\":1754,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"throw\",\"error\":{\"name\":\"AssertionError\",\"code\":\"ERR_ASSERTION\",\"site\":{\"file\":\"S08\",\"line\":18,\"column\":118}}},{\"sequence\":59,\"elapsedMs\":1767,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":60,\"elapsedMs\":1780,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":61,\"elapsedMs\":1793,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":62,\"elapsedMs\":1806,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":63,\"elapsedMs\":1819,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":64,\"elapsedMs\":1832,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":65,\"elapsedMs\":1845,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":66,\"elapsedMs\":1858,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":67,\"elapsedMs\":1871,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":68,\"elapsedMs\":1884,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":69,\"elapsedMs\":1897,\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}],\"openCase\":{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\"},\"afterOpen\":false},\"unknownReason\":null,\"firstThrowSequence\":58,\"native\":{\"integrity\":\"prefix\",\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"fail\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\"}]},\"firstFailure\":{\"schema\":\"afw.c2-first-failure-post-diag2.v1\",\"state\":\"NOT_APPLICABLE\",\"reason\":\"EARLIEST_THROW_DIFFERENT\",\"throwSequence\":null,\"source\":null,\"assertion\":null},\"finiteGet\":{\"schema\":\"afw.c2-finite-get-diag3.v1\",\"http\":{\"state\":\"KNOWN\",\"reason\":\"TARGET_GET_ASSERTION\",\"throwSequence\":58,\"actual\":200,\"expected\":200},\"afterMonitor\":{\"value\":\"0\",\"reason\":\"JOINED_SNAPSHOT\",\"countSequence\":56},\"afterScopeMissing\":{\"value\":\"1\",\"reason\":\"JOINED_SNAPSHOT\",\"countSequence\":60}}},\"custody\":{\"schema\":\"afw.c2-finite-get-diag3-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true},\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    }
+  },
+  "trusted": {
+    "expected": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+      "workflowPath": ".github/workflows/afw-c2-finite-get-diag3.yml",
+      "oneUseMessage": "AFW-C2-T1-FINITE-GET-DIAG3-ONEUSE-20261117",
+      "job": "c2-finite-get-diag3",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "runId": 99303001,
+      "jobId": 99303002,
+      "requiredSteps": [
+        "Read the exact one-use lab head",
+        "Use the fixed Node runtime",
+        "Install only the existing locked dependencies",
+        "Observe finite GET in the full case order",
+        "Preserve the bounded finite GET diagnostic"
+      ]
+    },
+    "bodyEdges": [
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "511175ff2514542501d3c51e8269a0902a6fb54c",
+        "bytes": 3474,
+        "sha256": "b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b6cfe95188a51662b8b121e7a8c6d2bc3a22292e",
+        "bytes": 134,
+        "sha256": "cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+        "bytes": 88713,
+        "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "bytes": 1208,
+        "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "bytes": 417,
+        "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/mode-selection.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a5ff3abbb4b9c0d089432edd2f44549faffa1992",
+        "bytes": 4539,
+        "sha256": "daa9717eddae4464f0b72423955d44ef584441cae01c4afb5db6f6a7f32c1788"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/frame-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dd55c44c2acca5ee4639ed6d86e0baad51b7416b",
+        "bytes": 33261,
+        "sha256": "278f6b123583f4c1fdda496947364a3f2989801c26858669702197c0e952412a"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/protocol-contract.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a86aade0483e00e6ec9cc208dc6c5fd7eec535fd",
+        "bytes": 200,
+        "sha256": "009bf9f4634b819d9219c82672a311ec838aa9b23645954d28a3ca6ba14c6381"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dd0c08374acc0817f3eb29a15714512951e8ce69",
+        "bytes": 112,
+        "sha256": "76764d0443a82b5958da992ae2ac9c513c99a3d437379793d6eb50c781c7770b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/read-progress.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "bytes": 5507,
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/diagnostic-driver.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+        "bytes": 3169,
+        "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/progress-recorder.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+        "bytes": 3833,
+        "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "28ebe8f1ff5167a0ffafccfb785364e18ef7dc2f",
+        "bytes": 109,
+        "sha256": "1170ec655ad96bd4ed8a69e9419412c19c7a46c03cecc06856e415c4235768f2"
+      },
+      {
+        "path": ".github/workflows/afw-c2-finite-get-diag3.yml",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e829ab00b715a2ab2b7c599c3cfb4c0bfd4688b8",
+        "bytes": 111,
+        "sha256": "515f860ee162edbdadd41060f7570f579825a0d6ab890f4419bd32e5e1efb63b"
+      }
+    ],
+    "bodyEdgesHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6"
+  },
+  "fixtureOnlyWitness": {
+    "syntheticChildStdoutUtf8": "TAP version 13\n# C2SOURCE {\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_CONNECTION\nok 1 - C2T1_CONNECTION\n# C2SOURCE {\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_OAUTH\nok 2 - C2T1_OAUTH\n# C2SOURCE {\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_HANDLE\nok 3 - C2T1_HANDLE\n# C2SOURCE {\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PROJECTREF\nok 4 - C2T1_PROJECTREF\n# C2SOURCE {\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SUBJECT\nok 5 - C2T1_SUBJECT\n# C2SOURCE {\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PHASE_RENAME\nok 6 - C2T1_PHASE_RENAME\n# C2SOURCE {\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SOURCE_BYTES\nok 7 - C2T1_SOURCE_BYTES\n# C2SOURCE {\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_APPROVAL\nok 8 - C2T1_APPROVAL\n# C2SOURCE {\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PREDECESSOR\nok 9 - C2T1_PREDECESSOR\n# C2SOURCE {\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_GRANT_REVOKED\nok 10 - C2T1_GRANT_REVOKED\n# C2SOURCE {\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_EXTRA_KEY\nok 11 - C2T1_EXTRA_KEY\n# C2SOURCE {\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"}\n# Subtest: C2T1_NOTICES\nok 12 - C2T1_NOTICES\n# C2SOURCE {\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_MONITOR_COOKIE\nok 13 - C2T1_MONITOR_COOKIE\n# C2FT3 {\"id\":\"C2T1_MONITOR\",\"value\":\"0\"}\n# C2SOURCE {\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_MONITOR\nok 14 - C2T1_MONITOR\n# C2FT3 {\"id\":\"C2T1_SCOPE_MISSING\",\"value\":\"1\"}\n# C2SOURCE {\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"fail\",\"phase\":\"scope\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"TEST_FAILED\"}\n# Subtest: C2T1_SCOPE_MISSING\nnot ok 15 - C2T1_SCOPE_MISSING\n  ---\n  failureType: 'testCodeFailure'\n  error: |-\n    Expected values to be strictly equal:\n\n    200 !== 200\n\n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 200\n  actual: 200\n  operator: 'strictEqual'\n  ...\n# C2SOURCE {\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_FINITE\nok 16 - C2T1_FINITE\n# C2SOURCE {\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SELECTION\nok 17 - C2T1_SELECTION\n",
+    "syntheticJournalUtf8": "{\"sequence\":1,\"elapsedMs\":1013,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":2,\"elapsedMs\":1026,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":3,\"elapsedMs\":1039,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":4,\"elapsedMs\":1052,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":5,\"elapsedMs\":1065,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":6,\"elapsedMs\":1078,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":7,\"elapsedMs\":1091,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":8,\"elapsedMs\":1104,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":9,\"elapsedMs\":1117,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":10,\"elapsedMs\":1130,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":11,\"elapsedMs\":1143,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":12,\"elapsedMs\":1156,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":13,\"elapsedMs\":1169,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":14,\"elapsedMs\":1182,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":15,\"elapsedMs\":1195,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":16,\"elapsedMs\":1208,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":17,\"elapsedMs\":1221,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":18,\"elapsedMs\":1234,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":19,\"elapsedMs\":1247,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":20,\"elapsedMs\":1260,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":21,\"elapsedMs\":1273,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":22,\"elapsedMs\":1286,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":23,\"elapsedMs\":1299,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":24,\"elapsedMs\":1312,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":25,\"elapsedMs\":1325,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":26,\"elapsedMs\":1338,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":27,\"elapsedMs\":1351,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":28,\"elapsedMs\":1364,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":29,\"elapsedMs\":1377,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":30,\"elapsedMs\":1390,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":31,\"elapsedMs\":1403,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":32,\"elapsedMs\":1416,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":33,\"elapsedMs\":1429,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":34,\"elapsedMs\":1442,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":35,\"elapsedMs\":1455,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":36,\"elapsedMs\":1468,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":37,\"elapsedMs\":1481,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":38,\"elapsedMs\":1494,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":39,\"elapsedMs\":1507,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":40,\"elapsedMs\":1520,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":41,\"elapsedMs\":1533,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":42,\"elapsedMs\":1546,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":43,\"elapsedMs\":1559,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":44,\"elapsedMs\":1572,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":45,\"elapsedMs\":1585,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":46,\"elapsedMs\":1598,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":47,\"elapsedMs\":1611,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":48,\"elapsedMs\":1624,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":49,\"elapsedMs\":1637,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":50,\"elapsedMs\":1650,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":51,\"elapsedMs\":1663,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":52,\"elapsedMs\":1676,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":53,\"elapsedMs\":1689,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":54,\"elapsedMs\":1702,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":55,\"elapsedMs\":1715,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":56,\"elapsedMs\":1728,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":57,\"elapsedMs\":1741,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":58,\"elapsedMs\":1754,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"throw\",\"error\":{\"name\":\"AssertionError\",\"code\":\"ERR_ASSERTION\",\"site\":{\"file\":\"S08\",\"line\":18,\"column\":118}}}\n{\"sequence\":59,\"elapsedMs\":1767,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":60,\"elapsedMs\":1780,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":61,\"elapsedMs\":1793,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":62,\"elapsedMs\":1806,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":63,\"elapsedMs\":1819,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":64,\"elapsedMs\":1832,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":65,\"elapsedMs\":1845,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":66,\"elapsedMs\":1858,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":67,\"elapsedMs\":1871,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":68,\"elapsedMs\":1884,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":69,\"elapsedMs\":1897,\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n",
+    "container": {
+      "payloadBytes": 12831,
+      "payloadSha256": "de2aaba5be0da4d8c785d5b15eb5960cb122f2413ea13016aaad3419d75afb58",
+      "archiveBytes": 3015,
+      "archiveSha256": "ed185cc92e7b59ac5c3174615338acb5e3e3be6a2f2a7cb34d6d2bcfc01cf5e1",
+      "crc32": "49bc85dc",
+      "compressedBytes": 2853,
+      "method": 8,
+      "descriptor": "signed",
+      "version": 20
+    },
+    "limit": "Synthetic private-message DATA only. No actual raw TAP/private rows provided to OWN; these strings are excluded from input and are never an actual producer oracle."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "exactMutation": "Set HTTPKNOWN actual=200 integer; no string or conditional-null alternative."
+}

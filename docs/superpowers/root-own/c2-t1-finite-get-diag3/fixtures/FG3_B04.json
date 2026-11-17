@@ -1,0 +1,579 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-COMPLETE-LITERAL/1",
+  "id": "FG3_B04",
+  "syntheticOnly": true,
+  "actualExpectedSourceContext": null,
+  "modelAdmissionRef": "model-admission.json",
+  "expected": {
+    "accepted": false,
+    "finiteGet": null,
+    "outerFirstThrowSequence": null,
+    "firstFailureState": null,
+    "firstFailureReason": null,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "input": {
+    "run": {
+      "id": 99303001,
+      "run_attempt": 1,
+      "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "head_branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+      "path": ".github/workflows/afw-c2-finite-get-diag3.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      },
+      "head_repository": {
+        "full_name": "tokenizartinfo-ops/agent-friendly-web"
+      },
+      "created_at": "2041-04-05T00:59:59Z",
+      "run_started_at": "2041-04-05T01:00:00Z",
+      "updated_at": "2041-04-05T01:04:21Z"
+    },
+    "jobs": {
+      "total_count": 1,
+      "jobs": [
+        {
+          "id": 99303002,
+          "run_id": 99303001,
+          "run_attempt": 1,
+          "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "name": "c2-finite-get-diag3",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2041-04-05T01:00:00Z",
+          "completed_at": "2041-04-05T01:04:20Z",
+          "steps": [
+            {
+              "number": 2,
+              "name": "Read the exact one-use lab head",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:00:00Z",
+              "completed_at": "2041-04-05T01:00:05Z"
+            },
+            {
+              "number": 3,
+              "name": "Use the fixed Node runtime",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:00:05Z",
+              "completed_at": "2041-04-05T01:00:10Z"
+            },
+            {
+              "number": 4,
+              "name": "Install only the existing locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:00:10Z",
+              "completed_at": "2041-04-05T01:00:30Z"
+            },
+            {
+              "number": 5,
+              "name": "Observe finite GET in the full case order",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:00:30Z",
+              "completed_at": "2041-04-05T01:03:40Z"
+            },
+            {
+              "number": 6,
+              "name": "Preserve the bounded finite GET diagnostic",
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2041-04-05T01:03:40Z",
+              "completed_at": "2041-04-05T01:04:15Z"
+            }
+          ]
+        }
+      ]
+    },
+    "commit": {
+      "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "tree": {
+        "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "message": "AFW-C2-T1-FINITE-GET-DIAG3-ONEUSE-20261117",
+      "parents": [
+        {
+          "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        }
+      ]
+    },
+    "tree": {
+      "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "truncated": false,
+      "tree": [
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "511175ff2514542501d3c51e8269a0902a6fb54c",
+          "size": 3474
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+          "size": 148547
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+          "size": 45576
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+          "size": 2497
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+          "size": 2810
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+          "size": 4153
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a177d50ff73f8fad1d60827ef904a204126796fb",
+          "size": 101380
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+          "size": 22501
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+          "size": 2785
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b6cfe95188a51662b8b121e7a8c6d2bc3a22292e",
+          "size": 134
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+          "size": 61073
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+          "size": 88713
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+          "size": 58727
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+          "size": 6030
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+          "size": 1208
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+          "size": 417
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/mode-selection.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a5ff3abbb4b9c0d089432edd2f44549faffa1992",
+          "size": 4539
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/frame-schema.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "dd55c44c2acca5ee4639ed6d86e0baad51b7416b",
+          "size": 33261
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/protocol-contract.json",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a86aade0483e00e6ec9cc208dc6c5fd7eec535fd",
+          "size": 200
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "dd0c08374acc0817f3eb29a15714512951e8ce69",
+          "size": 112
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/read-progress.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+          "size": 5507
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/diagnostic-driver.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9e29c5197207b03bdb4b10069089f37df289e88c",
+          "size": 3169
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/progress-recorder.txt",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "662ec8170bbfe81831b557824d1a466e722842d7",
+          "size": 3833
+        },
+        {
+          "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "28ebe8f1ff5167a0ffafccfb785364e18ef7dc2f",
+          "size": 109
+        },
+        {
+          "path": ".github/workflows/afw-c2-finite-get-diag3.yml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e829ab00b715a2ab2b7c599c3cfb4c0bfd4688b8",
+          "size": 111
+        },
+        {
+          "path": "test/fixtures/finite-first-connection-publication.mjs",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cede301c3e9cd95716ae2134f938dbb1d940e7a9",
+          "size": 57864
+        }
+      ]
+    },
+    "transport": {
+      "runId": 99303001,
+      "jobId": 99303002,
+      "rawLog": "2041-04-05T01:00:30.0000000Z ##[group]Run node docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs\n2041-04-05T01:00:30.0000000Z node docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs\n2041-04-05T01:00:30.0000000Z ##[endgroup]\n2041-04-05T01:03:35.0000000Z AFW_C2_FINITE_GET_DIAG3_CUSTODY {\"schema\":\"afw.c2-finite-get-diag3-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true}\n2041-04-05T01:03:36.0000000Z AFW_C2_FINITE_GET_DIAG3_OUTCOME {\"schema\":\"afw.c2-finite-get-diag3-outcome.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"diagnosticCollectionComplete\":true,\"nativeQualification\":false,\"sourceReads\":{\"beforeSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"],\"afterSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"]},\"observation\":{\"capture\":{\"exitCode\":1,\"signal\":\"none\",\"errorKind\":\"timeout\",\"stdout\":{\"bytes\":3217,\"sha256\":\"97ad6fa5920a5842f584075c5445fdef3d6aec5a44464619fb94ecc1b83ee5ac\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}},\"journal\":{\"bytes\":7288,\"sha256\":\"78c7011c20a8ee612bec6b2b3a83539363200cf0d975f6bbeaf38b0609a319e9\",\"stable\":true,\"recorderFaultObserved\":false},\"witness\":{\"integrity\":\"prefix\",\"frontier\":\"action\",\"events\":[{\"sequence\":1,\"elapsedMs\":1013,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":2,\"elapsedMs\":1026,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":3,\"elapsedMs\":1039,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":4,\"elapsedMs\":1052,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":5,\"elapsedMs\":1065,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":6,\"elapsedMs\":1078,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":7,\"elapsedMs\":1091,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":8,\"elapsedMs\":1104,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":9,\"elapsedMs\":1117,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":10,\"elapsedMs\":1130,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":11,\"elapsedMs\":1143,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":12,\"elapsedMs\":1156,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":13,\"elapsedMs\":1169,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":14,\"elapsedMs\":1182,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":15,\"elapsedMs\":1195,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":16,\"elapsedMs\":1208,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":17,\"elapsedMs\":1221,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":18,\"elapsedMs\":1234,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":19,\"elapsedMs\":1247,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":20,\"elapsedMs\":1260,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":21,\"elapsedMs\":1273,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":22,\"elapsedMs\":1286,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":23,\"elapsedMs\":1299,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":24,\"elapsedMs\":1312,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":25,\"elapsedMs\":1325,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":26,\"elapsedMs\":1338,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":27,\"elapsedMs\":1351,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":28,\"elapsedMs\":1364,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":29,\"elapsedMs\":1377,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":30,\"elapsedMs\":1390,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":31,\"elapsedMs\":1403,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":32,\"elapsedMs\":1416,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":33,\"elapsedMs\":1429,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":34,\"elapsedMs\":1442,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":35,\"elapsedMs\":1455,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":36,\"elapsedMs\":1468,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":37,\"elapsedMs\":1481,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":38,\"elapsedMs\":1494,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":39,\"elapsedMs\":1507,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":40,\"elapsedMs\":1520,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":41,\"elapsedMs\":1533,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":42,\"elapsedMs\":1546,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":43,\"elapsedMs\":1559,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":44,\"elapsedMs\":1572,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":45,\"elapsedMs\":1585,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":46,\"elapsedMs\":1598,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":47,\"elapsedMs\":1611,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":48,\"elapsedMs\":1624,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":49,\"elapsedMs\":1637,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":50,\"elapsedMs\":1650,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":51,\"elapsedMs\":1663,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":52,\"elapsedMs\":1676,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":53,\"elapsedMs\":1689,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":54,\"elapsedMs\":1702,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":55,\"elapsedMs\":1715,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":56,\"elapsedMs\":1728,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":57,\"elapsedMs\":1741,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":58,\"elapsedMs\":1754,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"throw\",\"error\":{\"name\":\"AssertionError\",\"code\":\"ERR_ASSERTION\",\"site\":{\"file\":\"S08\",\"line\":18,\"column\":118}}},{\"sequence\":59,\"elapsedMs\":1767,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":60,\"elapsedMs\":1780,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":61,\"elapsedMs\":1793,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":62,\"elapsedMs\":1806,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":63,\"elapsedMs\":1819,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":64,\"elapsedMs\":1832,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":65,\"elapsedMs\":1845,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":66,\"elapsedMs\":1858,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":67,\"elapsedMs\":1871,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":68,\"elapsedMs\":1884,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":69,\"elapsedMs\":1897,\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}],\"openCase\":{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\"},\"afterOpen\":false},\"unknownReason\":null,\"firstThrowSequence\":58,\"native\":{\"integrity\":\"prefix\",\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\"}]},\"firstFailure\":{\"schema\":\"afw.c2-first-failure-post-diag2.v1\",\"state\":\"NOT_APPLICABLE\",\"reason\":\"EARLIEST_THROW_DIFFERENT\",\"throwSequence\":null,\"source\":null,\"assertion\":null},\"finiteGet\":{\"schema\":\"afw.c2-finite-get-diag3.v1\",\"http\":{\"state\":\"UNKNOWN\",\"reason\":\"CONFLICTING_EVIDENCE\",\"throwSequence\":null,\"actual\":null,\"expected\":null},\"afterMonitor\":{\"value\":\"UNKNOWN\",\"reason\":\"NATIVE_UNJOINED\",\"countSequence\":null},\"afterScopeMissing\":{\"value\":\"UNKNOWN\",\"reason\":\"NATIVE_UNJOINED\",\"countSequence\":null}}},\"custody\":{\"schema\":\"afw.c2-finite-get-diag3-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true},\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    },
+    "artifact": {
+      "runId": 99303001,
+      "jobId": 99303002,
+      "listing": {
+        "total_count": 1,
+        "artifacts": [
+          {
+            "id": 99303003,
+            "name": "afw-c2-finite-get-diag3",
+            "expired": false,
+            "size_in_bytes": 3010,
+            "created_at": "2041-04-05T01:04:10Z",
+            "expires_at": "2041-04-12T01:04:10Z",
+            "workflow_run": {
+              "id": 99303001,
+              "head_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "head_branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3"
+            },
+            "digest": "sha256:dae804be8b1e8cff94cc8ac5d81c1441cc8589bca0f241cd568cbd2521a1c167"
+          }
+        ]
+      },
+      "artifactId": 99303003,
+      "fileName": "c2-finite-get-diag3.json",
+      "archiveBase64": "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",
+      "payloadText": "{\"schema\":\"afw.c2-finite-get-diag3-outcome.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"diagnosticCollectionComplete\":true,\"nativeQualification\":false,\"sourceReads\":{\"beforeSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"],\"afterSha256\":[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"]},\"observation\":{\"capture\":{\"exitCode\":1,\"signal\":\"none\",\"errorKind\":\"timeout\",\"stdout\":{\"bytes\":3217,\"sha256\":\"97ad6fa5920a5842f584075c5445fdef3d6aec5a44464619fb94ecc1b83ee5ac\"},\"stderr\":{\"bytes\":0,\"sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}},\"journal\":{\"bytes\":7288,\"sha256\":\"78c7011c20a8ee612bec6b2b3a83539363200cf0d975f6bbeaf38b0609a319e9\",\"stable\":true,\"recorderFaultObserved\":false},\"witness\":{\"integrity\":\"prefix\",\"frontier\":\"action\",\"events\":[{\"sequence\":1,\"elapsedMs\":1013,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":2,\"elapsedMs\":1026,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":3,\"elapsedMs\":1039,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":4,\"elapsedMs\":1052,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":5,\"elapsedMs\":1065,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":6,\"elapsedMs\":1078,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":7,\"elapsedMs\":1091,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":8,\"elapsedMs\":1104,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":9,\"elapsedMs\":1117,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":10,\"elapsedMs\":1130,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":11,\"elapsedMs\":1143,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":12,\"elapsedMs\":1156,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":13,\"elapsedMs\":1169,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":14,\"elapsedMs\":1182,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":15,\"elapsedMs\":1195,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":16,\"elapsedMs\":1208,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":17,\"elapsedMs\":1221,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":18,\"elapsedMs\":1234,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":19,\"elapsedMs\":1247,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":20,\"elapsedMs\":1260,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":21,\"elapsedMs\":1273,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":22,\"elapsedMs\":1286,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":23,\"elapsedMs\":1299,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":24,\"elapsedMs\":1312,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":25,\"elapsedMs\":1325,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":26,\"elapsedMs\":1338,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":27,\"elapsedMs\":1351,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":28,\"elapsedMs\":1364,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":29,\"elapsedMs\":1377,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":30,\"elapsedMs\":1390,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":31,\"elapsedMs\":1403,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":32,\"elapsedMs\":1416,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":33,\"elapsedMs\":1429,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":34,\"elapsedMs\":1442,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":35,\"elapsedMs\":1455,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":36,\"elapsedMs\":1468,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":37,\"elapsedMs\":1481,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":38,\"elapsedMs\":1494,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":39,\"elapsedMs\":1507,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":40,\"elapsedMs\":1520,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":41,\"elapsedMs\":1533,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":42,\"elapsedMs\":1546,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":43,\"elapsedMs\":1559,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":44,\"elapsedMs\":1572,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":45,\"elapsedMs\":1585,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":46,\"elapsedMs\":1598,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":47,\"elapsedMs\":1611,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":48,\"elapsedMs\":1624,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":49,\"elapsedMs\":1637,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":50,\"elapsedMs\":1650,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":51,\"elapsedMs\":1663,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":52,\"elapsedMs\":1676,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":53,\"elapsedMs\":1689,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":54,\"elapsedMs\":1702,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":55,\"elapsedMs\":1715,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":56,\"elapsedMs\":1728,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":57,\"elapsedMs\":1741,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":58,\"elapsedMs\":1754,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"throw\",\"error\":{\"name\":\"AssertionError\",\"code\":\"ERR_ASSERTION\",\"site\":{\"file\":\"S08\",\"line\":18,\"column\":118}}},{\"sequence\":59,\"elapsedMs\":1767,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":60,\"elapsedMs\":1780,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":61,\"elapsedMs\":1793,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":62,\"elapsedMs\":1806,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":63,\"elapsedMs\":1819,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":64,\"elapsedMs\":1832,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":65,\"elapsedMs\":1845,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null},{\"sequence\":66,\"elapsedMs\":1858,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null},{\"sequence\":67,\"elapsedMs\":1871,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null},{\"sequence\":68,\"elapsedMs\":1884,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null},{\"sequence\":69,\"elapsedMs\":1897,\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}],\"openCase\":{\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\"},\"afterOpen\":false},\"unknownReason\":null,\"firstThrowSequence\":58,\"native\":{\"integrity\":\"prefix\",\"cases\":[{\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\"},{\"id\":\"C2T1_OAUTH\",\"status\":\"pass\"},{\"id\":\"C2T1_HANDLE\",\"status\":\"pass\"},{\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\"},{\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\"},{\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\"},{\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\"},{\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\"},{\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\"},{\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\"},{\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\"},{\"id\":\"C2T1_NOTICES\",\"status\":\"pass\"},{\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\"},{\"id\":\"C2T1_MONITOR\",\"status\":\"pass\"},{\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\"},{\"id\":\"C2T1_FINITE\",\"status\":\"pass\"},{\"id\":\"C2T1_SELECTION\",\"status\":\"pass\"}]},\"firstFailure\":{\"schema\":\"afw.c2-first-failure-post-diag2.v1\",\"state\":\"NOT_APPLICABLE\",\"reason\":\"EARLIEST_THROW_DIFFERENT\",\"throwSequence\":null,\"source\":null,\"assertion\":null},\"finiteGet\":{\"schema\":\"afw.c2-finite-get-diag3.v1\",\"http\":{\"state\":\"UNKNOWN\",\"reason\":\"CONFLICTING_EVIDENCE\",\"throwSequence\":null,\"actual\":null,\"expected\":null},\"afterMonitor\":{\"value\":\"UNKNOWN\",\"reason\":\"NATIVE_UNJOINED\",\"countSequence\":null},\"afterScopeMissing\":{\"value\":\"UNKNOWN\",\"reason\":\"NATIVE_UNJOINED\",\"countSequence\":null}}},\"custody\":{\"schema\":\"afw.c2-finite-get-diag3-custody.v1\",\"context\":{\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"511175ff2514542501d3c51e8269a0902a6fb54c\",\"proposalIndexHash\":\"b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be\",\"selectionHash\":\"ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3\",\"head\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"tree\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"runId\":\"99303001\",\"runAttempt\":1,\"job\":\"c2-finite-get-diag3\",\"node\":\"v22.23.4\"},\"parentNonRoot\":true,\"preflightOwned\":true,\"preflightRemoved\":true,\"checkedLaunches\":2,\"preflightProcesses\":1,\"greenProcesses\":1,\"checkedProcesses\":2,\"uidGidGroupsLoopbackMatched\":true,\"targetsBeforeMatched\":true,\"targetsAfterMatched\":true,\"journalOwnershipMatched\":true,\"ownRootVerified\":true,\"ownTempRemoved\":true},\"SourceQualified\":false,\"Task1Pass\":false,\"nonclaims\":{\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false}}\n"
+    }
+  },
+  "trusted": {
+    "expected": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+      "workflowPath": ".github/workflows/afw-c2-finite-get-diag3.yml",
+      "oneUseMessage": "AFW-C2-T1-FINITE-GET-DIAG3-ONEUSE-20261117",
+      "job": "c2-finite-get-diag3",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "tree": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "runId": 99303001,
+      "jobId": 99303002,
+      "requiredSteps": [
+        "Read the exact one-use lab head",
+        "Use the fixed Node runtime",
+        "Install only the existing locked dependencies",
+        "Observe finite GET in the full case order",
+        "Preserve the bounded finite GET diagnostic"
+      ]
+    },
+    "bodyEdges": [
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "511175ff2514542501d3c51e8269a0902a6fb54c",
+        "bytes": 3474,
+        "sha256": "b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b6cfe95188a51662b8b121e7a8c6d2bc3a22292e",
+        "bytes": 134,
+        "sha256": "cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+        "bytes": 88713,
+        "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "bytes": 1208,
+        "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "bytes": 417,
+        "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/mode-selection.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a5ff3abbb4b9c0d089432edd2f44549faffa1992",
+        "bytes": 4539,
+        "sha256": "daa9717eddae4464f0b72423955d44ef584441cae01c4afb5db6f6a7f32c1788"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/frame-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dd55c44c2acca5ee4639ed6d86e0baad51b7416b",
+        "bytes": 33261,
+        "sha256": "278f6b123583f4c1fdda496947364a3f2989801c26858669702197c0e952412a"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/protocol-contract.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a86aade0483e00e6ec9cc208dc6c5fd7eec535fd",
+        "bytes": 200,
+        "sha256": "009bf9f4634b819d9219c82672a311ec838aa9b23645954d28a3ca6ba14c6381"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dd0c08374acc0817f3eb29a15714512951e8ce69",
+        "bytes": 112,
+        "sha256": "76764d0443a82b5958da992ae2ac9c513c99a3d437379793d6eb50c781c7770b"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/read-progress.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "bytes": 5507,
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/diagnostic-driver.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+        "bytes": 3169,
+        "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/progress-recorder.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+        "bytes": 3833,
+        "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+      },
+      {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "28ebe8f1ff5167a0ffafccfb785364e18ef7dc2f",
+        "bytes": 109,
+        "sha256": "1170ec655ad96bd4ed8a69e9419412c19c7a46c03cecc06856e415c4235768f2"
+      },
+      {
+        "path": ".github/workflows/afw-c2-finite-get-diag3.yml",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e829ab00b715a2ab2b7c599c3cfb4c0bfd4688b8",
+        "bytes": 111,
+        "sha256": "515f860ee162edbdadd41060f7570f579825a0d6ab890f4419bd32e5e1efb63b"
+      }
+    ],
+    "bodyEdgesHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6"
+  },
+  "fixtureOnlyWitness": {
+    "syntheticChildStdoutUtf8": "TAP version 13\n# C2SOURCE {\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_CONNECTION\nok 1 - C2T1_CONNECTION\n# C2SOURCE {\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_OAUTH\nok 2 - C2T1_OAUTH\n# C2SOURCE {\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_HANDLE\nok 3 - C2T1_HANDLE\n# C2SOURCE {\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PROJECTREF\nok 4 - C2T1_PROJECTREF\n# C2SOURCE {\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SUBJECT\nok 5 - C2T1_SUBJECT\n# C2SOURCE {\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PHASE_RENAME\nok 6 - C2T1_PHASE_RENAME\n# C2SOURCE {\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SOURCE_BYTES\nok 7 - C2T1_SOURCE_BYTES\n# C2SOURCE {\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_APPROVAL\nok 8 - C2T1_APPROVAL\n# C2SOURCE {\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PREDECESSOR\nok 9 - C2T1_PREDECESSOR\n# C2SOURCE {\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_GRANT_REVOKED\nok 10 - C2T1_GRANT_REVOKED\n# C2SOURCE {\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_EXTRA_KEY\nok 11 - C2T1_EXTRA_KEY\n# C2SOURCE {\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"}\n# Subtest: C2T1_NOTICES\nok 12 - C2T1_NOTICES\n# C2SOURCE {\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_MONITOR_COOKIE\nok 13 - C2T1_MONITOR_COOKIE\n# C2FT3 {\"id\":\"C2T1_MONITOR\",\"value\":\"0\"}\n# C2SOURCE {\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_MONITOR\nok 14 - C2T1_MONITOR\n# C2FT3 {\"id\":\"C2T1_SCOPE_MISSING\",\"value\":\"1\"}\n# C2SOURCE {\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"pass\",\"phase\":\"scope\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SCOPE_MISSING\nok 15 - C2T1_SCOPE_MISSING\n# C2SOURCE {\"id\":\"C2T1_FINITE\",\"status\":\"pass\",\"phase\":\"finite\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_FINITE\nok 16 - C2T1_FINITE\n# C2SOURCE {\"id\":\"C2T1_SELECTION\",\"status\":\"pass\",\"phase\":\"selection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SELECTION\nok 17 - C2T1_SELECTION\n",
+    "syntheticJournalUtf8": "{\"sequence\":1,\"elapsedMs\":1013,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":2,\"elapsedMs\":1026,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":3,\"elapsedMs\":1039,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":4,\"elapsedMs\":1052,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":5,\"elapsedMs\":1065,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":6,\"elapsedMs\":1078,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":7,\"elapsedMs\":1091,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":8,\"elapsedMs\":1104,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":9,\"elapsedMs\":1117,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":10,\"elapsedMs\":1130,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":11,\"elapsedMs\":1143,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":12,\"elapsedMs\":1156,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":13,\"elapsedMs\":1169,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":14,\"elapsedMs\":1182,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":15,\"elapsedMs\":1195,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":16,\"elapsedMs\":1208,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":17,\"elapsedMs\":1221,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":18,\"elapsedMs\":1234,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":19,\"elapsedMs\":1247,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":20,\"elapsedMs\":1260,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":21,\"elapsedMs\":1273,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":22,\"elapsedMs\":1286,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":23,\"elapsedMs\":1299,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":24,\"elapsedMs\":1312,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":25,\"elapsedMs\":1325,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":26,\"elapsedMs\":1338,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":27,\"elapsedMs\":1351,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":28,\"elapsedMs\":1364,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":29,\"elapsedMs\":1377,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":30,\"elapsedMs\":1390,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":31,\"elapsedMs\":1403,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":32,\"elapsedMs\":1416,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":33,\"elapsedMs\":1429,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":34,\"elapsedMs\":1442,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":35,\"elapsedMs\":1455,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":36,\"elapsedMs\":1468,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":37,\"elapsedMs\":1481,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":38,\"elapsedMs\":1494,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":39,\"elapsedMs\":1507,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":40,\"elapsedMs\":1520,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":41,\"elapsedMs\":1533,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":42,\"elapsedMs\":1546,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":43,\"elapsedMs\":1559,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":44,\"elapsedMs\":1572,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":45,\"elapsedMs\":1585,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":46,\"elapsedMs\":1598,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":47,\"elapsedMs\":1611,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":48,\"elapsedMs\":1624,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":49,\"elapsedMs\":1637,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":50,\"elapsedMs\":1650,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":51,\"elapsedMs\":1663,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":52,\"elapsedMs\":1676,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":53,\"elapsedMs\":1689,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":54,\"elapsedMs\":1702,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":55,\"elapsedMs\":1715,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":56,\"elapsedMs\":1728,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":57,\"elapsedMs\":1741,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":58,\"elapsedMs\":1754,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"throw\",\"error\":{\"name\":\"AssertionError\",\"code\":\"ERR_ASSERTION\",\"site\":{\"file\":\"S08\",\"line\":18,\"column\":118}}}\n{\"sequence\":59,\"elapsedMs\":1767,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":60,\"elapsedMs\":1780,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":61,\"elapsedMs\":1793,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":62,\"elapsedMs\":1806,\"id\":\"C2T1_FINITE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":63,\"elapsedMs\":1819,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":64,\"elapsedMs\":1832,\"id\":\"C2T1_FINITE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":65,\"elapsedMs\":1845,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":66,\"elapsedMs\":1858,\"id\":\"C2T1_SELECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":67,\"elapsedMs\":1871,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":68,\"elapsedMs\":1884,\"id\":\"C2T1_SELECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":69,\"elapsedMs\":1897,\"id\":\"C2T1_LOST_ACK_DUPLICATE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n",
+    "container": {
+      "payloadBytes": 12853,
+      "payloadSha256": "c8f7af1531c69728b34730ba48cbb35cdf2436097c0e3022d9c73536815a4630",
+      "archiveBytes": 3010,
+      "archiveSha256": "dae804be8b1e8cff94cc8ac5d81c1441cc8589bca0f241cd568cbd2521a1c167",
+      "crc32": "ba8a3002",
+      "compressedBytes": 2848,
+      "method": 8,
+      "descriptor": "signed",
+      "version": 20
+    },
+    "limit": "Synthetic private-message DATA only. No actual raw TAP/private rows provided to OWN; these strings are excluded from input and are never an actual producer oracle."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "exactMutation": "Change native15 to PASS despite reliable Scope actionthrow58; finiteGet all UNKNOWN cannot heal N2."
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-NATIVE-PROTOCOL/2",
+  "authority": "ce4e65195fd0f02adf6de5b64748abaaf3470fbd",
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+    "message": "AFW-C2-OWN-FINITE-GET-DIAG3-TOOLS-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-finite-get-diag3-tools.yml",
+    "job": "c2-own-finite-get-diag3-tools",
+    "prefix": "docs/superpowers/root-own/c2-t1-finite-get-diag3/",
+    "runner": "docs/superpowers/root-own/c2-t1-finite-get-diag3/tools-own-finite-get.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-finite-get-diag3/tools-own-finite-get.mjs",
+    "steps": [
+      "Read the exact one-use receiver head",
+      "Use the fixed Node runtime",
+      "Check finite GET admission controls",
+      "Preserve bounded receiver tooling evidence"
+    ],
+    "artifact": {
+      "name": "afw-c2-own-finite-get-diag3-tools",
+      "path": "output/c2-own-finite-get-diag3-tools.json",
+      "fileName": "c2-own-finite-get-diag3-tools.json",
+      "retentionDays": 7
+    },
+    "node": "v22.23.4",
+    "platform": "linux",
+    "jobMinutes": 3,
+    "caseTimeoutMs": 10000,
+    "attempt": 1
+  },
+  "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-finite-get-diag3/tools-own-finite-get.mjs",
+  "node": "22.23.4",
+  "jobMs": 180000,
+  "caseMs": 10000,
+  "permissions": {
+    "contents": "read"
+  },
+  "npm": false,
+  "census": {
+    "nativeGroups": 8,
+    "evaluations": 73,
+    "admit": 32,
+    "reject": 41
+  },
+  "fixtureOrder": "Canonical receipt preserves70IDs then S04/S05/S06. Physical8group order runsB06/B07 in group5 and S04/S05/S06 in group6 before groups7/8. Do not claim physical70prefix.",
+  "proof": "Canonical JSON+oneLF <=24576 bytes. Only real per-evaluation state/reason and actual projection digest,73 in canonical order;8actual nativeTAPgroup IDs separately. Hash every runtime graph body before dynamic OWN import. Root compares external pinned bootstrap runner selfSHA,graph/selection/schema hashes,TAP/API/head/tree/runtime and payload.",
+  "bootstrap": "native-graph.json excludes its own bytes and bootstrap runner to avoid self-reference; Root full packet independently pins both. Runner embeds graphSHA and hashes itself into proof. Graph includes exact workflow; no Source executable bodies mounted/imported.",
+  "imports": "Only independent OWN modules and node: builtins; Source schema/index/selection/body-edge manifest are inert DATA embedded or read as JSON, never Source helper/parser.",
+  "preservation": "44 originalD2 +26 previouslysealedD3 +3newnegatives; same8nativegroup IDs. Old70result/IDprefix exact; no newSourceobservable or rawTAP decoder.",
+  "closure": "Root only: after actualtooling admission close isolated nominatedlab, remove exact owned workflow with leased tip; preserve all3203BASE originals plusDATA. Capture gate separate.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "round": {
+    "Own": 4,
+    "max": 5,
+    "noReset": true
+  }
+}

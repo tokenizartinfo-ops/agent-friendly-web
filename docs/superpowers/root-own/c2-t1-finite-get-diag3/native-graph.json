@@ -1,0 +1,1060 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-NATIVE-GRAPH/2",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": "ce4e65195fd0f02adf6de5b64748abaaf3470fbd",
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+    "message": "AFW-C2-OWN-FINITE-GET-DIAG3-TOOLS-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-finite-get-diag3-tools.yml",
+    "job": "c2-own-finite-get-diag3-tools",
+    "prefix": "docs/superpowers/root-own/c2-t1-finite-get-diag3/",
+    "runner": "docs/superpowers/root-own/c2-t1-finite-get-diag3/tools-own-finite-get.mjs",
+    "command": "node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-finite-get-diag3/tools-own-finite-get.mjs",
+    "steps": [
+      "Read the exact one-use receiver head",
+      "Use the fixed Node runtime",
+      "Check finite GET admission controls",
+      "Preserve bounded receiver tooling evidence"
+    ],
+    "artifact": {
+      "name": "afw-c2-own-finite-get-diag3-tools",
+      "path": "output/c2-own-finite-get-diag3-tools.json",
+      "fileName": "c2-own-finite-get-diag3-tools.json",
+      "retentionDays": 7
+    },
+    "node": "v22.23.4",
+    "platform": "linux",
+    "jobMinutes": 3,
+    "caseTimeoutMs": 10000,
+    "attempt": 1
+  },
+  "files": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "470bd64b727c050ba64c375eccf895a14db8dd6f",
+      "bytes": 65689,
+      "sha256": "3fb31ceaf4168ea2466e3669c09b0285f2e379888dcc14ff1e68c0caef8e26c2",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "396a0edececfe6e532e328088e93d06b34e8ed24",
+      "bytes": 80034,
+      "sha256": "d7a5331b8c0f306e4b34298ee58c9c0bfa38cbdac454cec1eb1bcdc053ded056",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3a4b9b5936bdaeac752be3051110f9e642d4eb9c",
+      "bytes": 65683,
+      "sha256": "35a53c771771096362aa6b6bccb08f7c42e90b250a614132f8dcb3db022b58c7",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K04.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "30aa3f49e67e442b2608f78cb33adca7a6da0c7a",
+      "bytes": 65689,
+      "sha256": "60b12b75b613cd5d846f70f012f98679c35ce5fcfec3ef45559174aed910aec3",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K05.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "feab23a303317ff615a8b1d6203991256db8a9b1",
+      "bytes": 65663,
+      "sha256": "00e40149544dcf4eb3d46b4a57f70c3c9c628310408980eb400feedb887017a2",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a806aa17813815a1fc62fcde3906176501bb0c36",
+      "bytes": 51324,
+      "sha256": "bf1f5e40d5aed6c52a370ef937e99a07be3af9535332034545c67613c908578c",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7d22ee267116beed85e178d25a0ed2e60ef4193d",
+      "bytes": 66972,
+      "sha256": "6ccf0167b0fec82e64433b66e9e99722bbd22d5a3f80ba446c6d8e83645d9f83",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c94e0a626207ac5619fbc83183d2bc5810b3e69c",
+      "bytes": 65631,
+      "sha256": "10211084572d9e171cdd1a3f712577c2628cb580bdd502d4515802e92f785906",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A04.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9eee1335d0dea2b4ac5e822ecb76c2500c14f727",
+      "bytes": 65138,
+      "sha256": "a37dafbb3e7207aa411b6096b28eba1c933b7d249078096002b97b7a3b61bf19",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A05.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "15ba19d71c48fcc02028880b8950c4641df7e0bb",
+      "bytes": 65297,
+      "sha256": "0138a8e6ad599330c403cd7b6cabbea203e4b1dacd1ab7b2c48db484d9b69b55",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_A06.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3860e0e3e0545b9cfcfa6fcfb4c8c2f9a39df357",
+      "bytes": 65299,
+      "sha256": "8602b0086158d6585579443348725a92d087af932fe38c25f17f0e193e1194fb",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f3f450da6b914cc964d185c2993599b66b54d7b0",
+      "bytes": 51685,
+      "sha256": "7e26a3f267a7e6641b652af74fab0fe503dbe3296524360d04db5788194f07d6",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c4427f5d1de8c5e1af8203a8bdd646defbb4d064",
+      "bytes": 50615,
+      "sha256": "c8478d5f12bb6b8e9ab93599fa2578e51e84e8d641fae9035ac9f999da22d786",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d378874d9aab36c8f73010517b35d682260dcdea",
+      "bytes": 50945,
+      "sha256": "f1eeb6e2c6461e73902812c77680eb06ace5e0764daa668450c2dcdc0fd0e5dd",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U04.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fed672ecd4d8dbb4b8a68610cd06525ecd8f3502",
+      "bytes": 49020,
+      "sha256": "0993dac93a1907b906532d3428a72d1ebfc96f9e17d41f54bba2ab68552d9685",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U05.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "69bd67a867a7e32a889825364458510ee26f439b",
+      "bytes": 65099,
+      "sha256": "dada3190926086a2411edb0f0b8d55c6857cddb3fbc37d73268b95ed87f8c4f8",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U06.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ea6588c3d4835f12e16a39426a3106979d1cbee6",
+      "bytes": 65257,
+      "sha256": "3c29c2b1dc1c1c89af5bd6be035ccd0882536884dd2fa481d6c76ed3d9ea47d6",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_K06.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b2a82a3253cbb3b3c58336dad8b9ed5ca41387de",
+      "bytes": 65632,
+      "sha256": "c4759d69aa0dfa00e5c9edf7720c0c1ca4bb5f0d2abfc574979ed49a90e3e706",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_U08.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "813819cabd94f990cf5105bc057ab3e117dbacbb",
+      "bytes": 65417,
+      "sha256": "1c88805085c38f342fdd228ce7a15b0967ba1561ab198cf3c2a7e4ca6252f1a4",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d047ed5784534e5f2ab9a3700a53604276dff38f",
+      "bytes": 65668,
+      "sha256": "329716f6399037d8a05d23df7177449a8a20d7e3d2990fd89cc6ff55c44a0ac9",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ea43e6eb1c2fed0945aee09714f4f335ebfd2ed9",
+      "bytes": 51340,
+      "sha256": "e8c87d958e64c7706f3e52af21ed16ab44d0738550fbe66c030b96d62ec747a5",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b2226ac5998597afe212efd5cc83435cf5c16eb1",
+      "bytes": 65372,
+      "sha256": "65c4d92b5767683e568e4a57898dbec8e16154e43673a06e458786a0b8c81de2",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R04.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "dad56fe2c8a45966554ea121c2ae038ad34c9b47",
+      "bytes": 65672,
+      "sha256": "81c90fcff050a9342fb22c4f807bc7b2bbcd326a1b81917ce5eb4b56531ca63c",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R05.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ac280d067c50657e87b939ce4ad81ac272091705",
+      "bytes": 65670,
+      "sha256": "f4c60c35b0adbb022aab2c3af2534517210e88cc968684e94b9da67dd8377fdd",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R06.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4a26402754e5969d2bcda2637569e6e2e5e10791",
+      "bytes": 65638,
+      "sha256": "b326beefedc5248869d12512a0d26c4534aa919024a209c6e7c351d93d10d411",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R07.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4f34e7907f6bce96d299f3bd8263f2c85aa69f6d",
+      "bytes": 65668,
+      "sha256": "5fb900c52317eac5826bf57c5961ca386e10113b79b6d24f9a52151a580865c0",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R08.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "937a1789ee5aa9cb24daefda2b03a9457ce2adc5",
+      "bytes": 65666,
+      "sha256": "0a7adc58ce87c95938f4d110956851b3263cb2cab2e9a1cdd31246a98ab61db3",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R09.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "51eca42d0c983672ca90e5a2294e846fad20dcd1",
+      "bytes": 65668,
+      "sha256": "8442a268e5fed5ff2051a1f757651cbf9a056e6f88669182be9ccbc28cb9b3ff",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R10.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a3c2b36c9a074b1e5b1d053dde2ce36ac31e0dad",
+      "bytes": 65676,
+      "sha256": "e9fbfa28820f12aa1af58515682e7aade9e85916b191d29f7c69945e16ccc7c7",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R11.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4746c28a8c10f3029217b6b349dca24234f7bb66",
+      "bytes": 65772,
+      "sha256": "7bb569fda37514c92b89bb57b6071696eb29fe72994f34e35d9f16b25571a891",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R12.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cbed7f583d63e59e76c904e3d2d3256623c5b69e",
+      "bytes": 65604,
+      "sha256": "fe5084ab67ff047ac829d401028140f0895b7cc816616654897828260bdac80a",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R13.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d085c2cc5a94c3d30dcd334ffe0cb869da3661ff",
+      "bytes": 65668,
+      "sha256": "edf7579270e1d792b5c03e0667e6c59c4a72209f5a738efd51e9cf0540b7bb21",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R14.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "39a8aa3ed14c27d5697a5924022604c882273e06",
+      "bytes": 65700,
+      "sha256": "3b0c76c36dfa540b02f1e5e12a96dd1b9aebb03f6b94eb01bf25a25439b6de5e",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_R15.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8e40a1ad621a4943b202cb1aa9a3f596ebed4e72",
+      "bytes": 65676,
+      "sha256": "cc424549c74c08fcad9eacf3913dc40bee5bf14219857ccac5dc0dd75fcfa6c1",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c8ad98dd533042ba98f31ccff96d290df2be4a80",
+      "bytes": 65668,
+      "sha256": "56b3d6df64789345166c1bd6f5249a12e84550eb221c93e553661661c1167020",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3ec869f4d475137d4a0686465c4fc7e4ece655dc",
+      "bytes": 65823,
+      "sha256": "dd029df6b2d33df76571f56db7219d6942f6b6f28fda4e9e8c0852711a0510d7",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a4648a84dc4c5f2f9eb1273745aea88a0e5479e3",
+      "bytes": 65668,
+      "sha256": "a9ea503d9a0da478f8d9ec8801e28f7c121686050364ff5bca6ea0f504762307",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F04.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c87ae1141a7a821ff2257ef63f45d1dc4e40a17a",
+      "bytes": 65668,
+      "sha256": "57fb76e79672c8dac824c94206530bc9e8766796ff806bf18d6700d4599f3294",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F05.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e5858ce580c4fdc61358fada1877d67a6275192c",
+      "bytes": 65676,
+      "sha256": "cd5f3546a6362eb7acc46b08268ff8f0e2db1c597d684542b29245d7d953b1cc",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/fixtures/OWN_D2_F06.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e7ef2d5dec127de908876f5a027a9e1bd153dd65",
+      "bytes": 65672,
+      "sha256": "360191bd8668d21049ab9af4f1482c01bc662a758a0a40304c79676c3cad3213",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/appendix/OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "67231a9f903f12a05670db953c941ee7f3612f73",
+      "bytes": 65853,
+      "sha256": "c6ce8854dec078b65faa0804c8efa23eec92102da034d71eace69c938bf462c2",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/appendix/OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b92a1d26036eb0f76dd3fe743a9f48ea4220c2dc",
+      "bytes": 65442,
+      "sha256": "8c8106ca6e31c85a62def7abb2351bbe98e439b4eb2a6036c498f9ac65f01ddc",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/appendix/OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "88cb15dadba6d476076cafcf00688309ccf4525b",
+      "bytes": 65834,
+      "sha256": "ee52734f0b16e6467af545c66f5b999629cd3a59eb4a733fc44648a6f0da7004",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/appendix/OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1cc547cb1e67f8a6303fe00833e83f58696d2d99",
+      "bytes": 65409,
+      "sha256": "ae3f16590e20a0e8953b775f8353101f1bf474b58230915facd3c671876dcc4a",
+      "role": "immutable-D2-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_K01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "900bad75e9387f2902c4f3b3871f357c18b093ba",
+      "bytes": 68135,
+      "sha256": "03d9aa840cfd1da0ff3cf7b71e551f7537173455a7ec27f7063591d7034ea2b7",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_K02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "22d6c562784c696fd35cdf05687d55869385c9ea",
+      "bytes": 68115,
+      "sha256": "bb3a6b8b70b7129902c6110157e02e665d357512126e2981fcf8f8314b66834a",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_K03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a5982453c5fb6cef978f210de204612a63da1756",
+      "bytes": 68120,
+      "sha256": "643721bb12702c7d15e62ad485832580eba80825198a8d290955a801cea45d2b",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_K04.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c80d4f9ed5fda9eb06ad15c1a313810d680163a7",
+      "bytes": 68087,
+      "sha256": "a59ce05e9bb9ba42a817f7c438069ea4f11dea337233300adf5a2d74ac9c8d3f",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_I01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9d644d7d3a76394a0cb611f5c3580736ca8e4a84",
+      "bytes": 68160,
+      "sha256": "f3682c676fca16284eb7ae5e37183fc458bc67743f212dbdf109d43a322333c9",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_I02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2581115799bd89551a80fe09639759f59afe828e",
+      "bytes": 68180,
+      "sha256": "e739f9587bca358355556b729d22707125518c90e8e75e4845b269a757536eb9",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_I03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f7ef9b4846ccc96d6bb417bef787299fb4ca2424",
+      "bytes": 61421,
+      "sha256": "2b13b4a1462d42a18cd7ec343397d2cd5605b168590ede9ef3bce204a6537164",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_P01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "109d4e46b9c4166199088af30ceed36048e66e2c",
+      "bytes": 67642,
+      "sha256": "0080cdde7038f6f5fd7d2001c2f8568466e95efbf4351a581d023520591cc524",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_P02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "481dbc8d6a6abc65014adad5908c7e64da54c5fd",
+      "bytes": 67626,
+      "sha256": "3057bc8db099e263ab51ad96d896b793f7ddf7c84c1ba7e30187fe44893ba4e4",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_P03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0bcd83d309441a58ea072584c4e0d05b53b0953e",
+      "bytes": 67447,
+      "sha256": "420a59f2a2040c16f71b0d26ef24b8b92feba2b74321f469258c328d3ab0bf32",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_P04.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "82eb626ba2c763cabe8cf15dec8e7c069b464739",
+      "bytes": 67949,
+      "sha256": "f0ddf3aeffaa774b1768c9361868fc48454754775e2818a4593d76c62943bb7c",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4cbcbe0de86f54d4817273ea45f287eb009a95dd",
+      "bytes": 67638,
+      "sha256": "5e58395d343dd6ac76afd0122295df7498c5921765e1065086962fb66899ce82",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "34bf231b9b5e06d73307e5123788259591a480d5",
+      "bytes": 68200,
+      "sha256": "8427a3a008b9e4d0d09b8746b015f36084f807d3f9ae20965a6df9bcc4cc4052",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9d507e0ed5f6d829b723931edb7815ab2fbd1eb2",
+      "bytes": 67678,
+      "sha256": "fb1d0b6a8239411655df57568e4f0ea33546e23247a8044fcc521818cabe11cf",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B04.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8ef46d444f0958dae5ce7aed912a04d77a0baba4",
+      "bytes": 67448,
+      "sha256": "0c54a44e2c563bda6944895a258c10644ed02b9391042d504717f577bf563617",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_B05.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "34d2b2d0ff641f38c4b6bf86e30fbcefd53599ff",
+      "bytes": 68050,
+      "sha256": "8fdc57c4758d39ceb0ea20cbc88c2b2597a3fa60a1f39de96cb9e4dfafe51169",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_S01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3266a0900e1f41efbc2be9235b872ffecdc45cf5",
+      "bytes": 67756,
+      "sha256": "72c1f83e35d1e8a5f6a3e788090c4c34974c210f2e345a58f1c4cfb6938a30d3",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_S02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e849a9c90ff1a45ff65f90c8b617a7ab2a74510",
+      "bytes": 67676,
+      "sha256": "cd43e2f7f990b0d086af60a944d73fd95ba5e1e898507ceacd08646f0304a6bf",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_S03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "084aba655f0c42e92c985f445e79a6d808821b1c",
+      "bytes": 68619,
+      "sha256": "68d69275b2732fd8d91346350f5349040f7db2f452739529c880c36bba536d1a",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_W01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "655bfb1e6d2afd2609b9be1903cc8a2cdd822472",
+      "bytes": 66757,
+      "sha256": "d3f4944d7596c1cb0f262b75f8ba83271c1afa5812c6ac0ca4d6ddb72dabbcf7",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_W02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a95b1de2597239a3821a028858a8b0e4d6efe934",
+      "bytes": 67650,
+      "sha256": "99945dbb8353bfaf4646fed9f9a0f9dba566d0264898693b8b179cbea7a6f86d",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_W03.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2c4bda975d8d1de2b650d352ca22d3f911396167",
+      "bytes": 67633,
+      "sha256": "cd5e9d77cc4e608e060adf584855facc1b817636f33f17112132b549eb1929b6",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_C01.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a80a8c49b61fe8681d8849ff1d4be6c4f8aa2455",
+      "bytes": 67681,
+      "sha256": "98d2515806da7583ee50c973c6079a5f76e0848ffde703d84fb7609d9fcaf81e",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/fixtures/FG3_C02.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "98cca5b43bac54ebd2db70a73c6238254bdd246e",
+      "bytes": 67703,
+      "sha256": "8c43eb7e8a193b6f351cf1c28d4e9f7f60194e1afd5c8dfabb7d67357bbdb0f1",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix/FG3_B06.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1020897e6d18a53dca9aade12acaadf9a7a036d5",
+      "bytes": 68588,
+      "sha256": "d71009c5e942b4d46b0912e3f58cb335f3ec7e360904be847b029ed21cd1337c",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix/FG3_B07.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8ed19f0001142d3d28a2a932e6ff2f69fe7764fb",
+      "bytes": 68666,
+      "sha256": "53fa4130aba6676a49d0a985e7f12b491a72471b99bafeedc7117f80f1f554a8",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix-prefix/FG3_S04.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6b1266fe4e910a3b3547cf766f5c89106360033e",
+      "bytes": 67934,
+      "sha256": "3ee2d3998379dc1d5bb5e3c506ac1f426fcc9fb05c67c25f58c97df6de8586fc",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix-prefix/FG3_S05.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ceceb6aff92829ee3b0d0f543a8782d8d335b416",
+      "bytes": 67985,
+      "sha256": "00f2e2463418bb7a3c7cff7dae2d2417bd7b075ccf516bf1e24a4e92155d4d40",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/appendix-prefix/FG3_S06.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fdd7581fab53fb1f7fb9e0e4f279ed78f952e675",
+      "bytes": 68010,
+      "sha256": "8b7d3d7677b5000933e06537315e6d875c9ed1bb354658da12af0648b3f7944e",
+      "role": "synthetic-D3-literal"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+      "bytes": 5365,
+      "sha256": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102",
+      "role": "independent-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1",
+      "bytes": 9733,
+      "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe",
+      "role": "independent-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bindings.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "aaee696f0c05cda224d7f20fa7a364c445b0741c",
+      "bytes": 64627,
+      "sha256": "05c48c3204c148f1dae31723e3f71561b9e5df31c22280e6da30743500b92e8f",
+      "role": "independent-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854",
+      "bytes": 35339,
+      "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04",
+      "role": "immutable-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+      "bytes": 2440,
+      "sha256": "95c93d59565812af32a85d7999a0865042b3e85d2534b4d5dfe8e1d332ae72c4",
+      "role": "immutable-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+      "bytes": 4511,
+      "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72",
+      "role": "immutable-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/transport.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5b8b36129eb9ab3af25ead0bbba840a32bdf67c2",
+      "bytes": 9613,
+      "sha256": "2e72b645d42fa75a7d04f2e1ab5a3d057e97139f02ae35c9755442f702a6944f",
+      "role": "immutable-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+      "bytes": 3355,
+      "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e",
+      "role": "immutable-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/reader.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4fb5a8d5e5b0b14c58f9935f5fd4dbc0589c23e0",
+      "bytes": 4002,
+      "sha256": "e01335d6b38840c82dd9f0d5693fcf95a49ecdd10384dee37b302f73ad73b26c",
+      "role": "immutable-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/reader.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ddaa91771171abf0dba6110184b06e631849c2ec",
+      "bytes": 4080,
+      "sha256": "eeb28b5daa384c3b04331d5a982e8950669672483349154474c32d74cd500e4c",
+      "role": "independent-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/controls.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c3c1cc2aeb667d068d16e1fadf64fa5c1e9c4ef0",
+      "bytes": 1921,
+      "sha256": "189beee245f5a3c61510dfbb1bb02b4315f5284800fe2d728f2a984a089c79fe",
+      "role": "independent-OWN-module"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f921fe1897d1a70b2217d0925a6508c110834067",
+      "bytes": 34181,
+      "sha256": "45280821703102c3a29c262fe196ba2fe915b4d6b3f8acbd8bba70cca422e440",
+      "role": "OWN-tooling-DATA"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/proof-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ce5896bea193625ca7534cd8833435ac7683a970",
+      "bytes": 69384,
+      "sha256": "3e8562f05cc4f588cd7abd71b454031f9efdc803d2fe977cb02590dd4882869f",
+      "role": "OWN-tooling-DATA"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/native-protocol.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "db4dfcfac66cbb52ed374fa0dc57f30091c1d482",
+      "bytes": 3344,
+      "sha256": "e967b2e32095bf899bfa54260b5a4b75176592857c948b787fdce1e4f3b4a828",
+      "role": "OWN-tooling-DATA"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/data/root-actual25.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+      "bytes": 9111,
+      "sha256": "d6409fa2217baeef338d4bfe911346713b31fb688ce34f856e6ece1310d8d294",
+      "role": "inert-Source-JSON-DATA"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/data/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+      "bytes": 11467,
+      "sha256": "3094be0e4276e7ffc31a08864f588bbdab97da67f38becc771c51344a601955e",
+      "role": "inert-Source-JSON-DATA"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/data/source-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "179fb6c9cd431a38f084211021843286aaa70671",
+      "bytes": 4541,
+      "sha256": "5b5c299504b143aa6c3d7093eeff28c1e0db4baecfafd2afb70283e5e278042a",
+      "role": "inert-Source-JSON-DATA"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/data/source-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bdb37d27e0c5e217d7b7249c216d674750046b73",
+      "bytes": 33199,
+      "sha256": "f4600dd644257bea198646afae5bee496cd5eea4727e59e8d52d22c47d900852",
+      "role": "inert-Source-JSON-DATA"
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/model-admission.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c6cacc5fc19091cdef1c7d8bb43d6c6a195e62a0",
+      "bytes": 13657,
+      "sha256": "4b0e196ad9ab4ca0682c7a609179c94e6c558147ed88cdf83f1cacf905fb0645",
+      "role": "OWN-tooling-DATA"
+    },
+    {
+      "path": ".github/workflows/afw-c2-own-finite-get-diag3-tools.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6352cae734c36f90a4eedcfa136770aa05682939",
+      "bytes": 1516,
+      "sha256": "17065672114fef20850bfaaf16a774e1dd3ca0757ae39213a1ba47b21f8b1785",
+      "role": "nominated-workflow"
+    }
+  ],
+  "filesBytes": 5101200,
+  "filesCount": 93,
+  "moduleImports": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+      "imports": [
+        {
+          "specifier": "./legacy/shape.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs",
+      "imports": [
+        {
+          "specifier": "./legacy/shape.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bindings.mjs",
+      "imports": []
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs",
+      "imports": []
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs",
+      "imports": []
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs",
+      "imports": [
+        {
+          "specifier": "./fixed.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs"
+        },
+        {
+          "specifier": "./shape.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/transport.mjs",
+      "imports": [
+        {
+          "specifier": "./fixed.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs"
+        },
+        {
+          "specifier": "./shape.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs",
+      "imports": [
+        {
+          "specifier": "./fixed.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs"
+        },
+        {
+          "specifier": "./shape.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/reader.mjs",
+      "imports": [
+        {
+          "specifier": "./fixed.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/fixed.mjs"
+        },
+        {
+          "specifier": "./shape.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs"
+        },
+        {
+          "specifier": "./partial.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs"
+        },
+        {
+          "specifier": "./first-failure.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs"
+        },
+        {
+          "specifier": "./transport.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/transport.mjs"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/reader.mjs",
+      "imports": [
+        {
+          "specifier": "./bindings.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bindings.mjs"
+        },
+        {
+          "specifier": "./legacy/shape.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/shape.mjs"
+        },
+        {
+          "specifier": "./legacy/partial.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/partial.mjs"
+        },
+        {
+          "specifier": "./legacy/first-failure.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/first-failure.mjs"
+        },
+        {
+          "specifier": "./bound-transport.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/bound-transport.mjs"
+        },
+        {
+          "specifier": "./finite-get.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs"
+        }
+      ]
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/controls.mjs",
+      "imports": [
+        {
+          "specifier": "./reader.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/reader.mjs"
+        },
+        {
+          "specifier": "./legacy/reader.mjs",
+          "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/legacy/reader.mjs"
+        }
+      ]
+    }
+  ],
+  "builtinImports": [
+    "node:test",
+    "node:fs",
+    "node:path",
+    "node:url",
+    "node:crypto",
+    "node:zlib",
+    "node:child_process",
+    "node:assert/strict"
+  ],
+  "bootstrap": {
+    "runner": "docs/superpowers/root-own/c2-t1-finite-get-diag3/tools-own-finite-get.mjs",
+    "graph": "docs/superpowers/root-own/c2-t1-finite-get-diag3/native-graph.json",
+    "runnerAndGraphPinnedExternallyByRootPacket": true,
+    "reason": "Runner embeds graph SHA; graph excludes runner/itself to avoid cycles. Root immutable package separately pins both, runner selfSHA exported for actual join."
+  },
+  "closure": {
+    "SourceExecutableImports": 0,
+    "SourceExecutableBodiesMounted": 0,
+    "rawChildTAPIntake": false,
+    "privateRowsIntake": false,
+    "externalDependencyInstall": false,
+    "relativeOwnImportsClosed": true,
+    "ownModules": 11,
+    "inertSourceJSONBodies": 4,
+    "fixtures": 73,
+    "nativeGroups": 8
+  },
+  "actualBinding": {
+    "measurement": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+    "bodyEdgesHash": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+    "actualCallerContext": null,
+    "modelCoverageQualifiesActual": false
+  },
+  "nativeReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "round": {
+    "Own": 4,
+    "max": 5
+  }
+}
