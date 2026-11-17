@@ -1,0 +1,170 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-ROOT-SOURCE-CODE-OWN-FIXTURE-RELEASE/1",
+  "timestampUTC": "2026-11-17 03:21:23 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Private detached Git data and cloud tooling preparation only",
+  "resourceType": "Additive bounded diagnostic Source/OWN proposal blobs",
+  "allowedAction": "Source author implementation only after the already sealed Source9/145 fixture data. OWN author may finish literal24 DATA only; OWN code remains held until Root fully verifies its fixture seal. No active refs, native runs, business execution or runtime mutation.",
+  "rounds": {
+    "Source": 2,
+    "Own": 3,
+    "maximumSameFamily": 5,
+    "noResetByDiagnosticName": true
+  },
+  "basis": {
+    "actualPrimary": "16f788a652c644763d74ffa0e955375786064c2d",
+    "actualOutcome": "f7306430e390cf69787347daa1b8b396b543dbc5",
+    "actualOwn": "6d2f2e1a54507f70e2f553512dc35472e529e96e",
+    "actualClosedReadback": "b96b7831b92e9200a4cd360fa9703c61b284d765",
+    "actualFreshReview": "16599e9905523b42fbb63a944182d838224de440",
+    "diagnosis": "85cd124dc261eef3db8a7706ddc6cb46839ccc8f",
+    "SourceDesign": "866bd15a36e0dc3e09d55bf6431ce94ae55f9d9b",
+    "SourceProtocol": "609738496d65c21f2cce0c2969ce14f2b64dec07",
+    "SourceSharedObserver": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686",
+    "SourceDesignPeer": "93c5f4a4855e27ace6d8bd413a2aba741e1aad46",
+    "SourceFixtureSeal": "4469d73e40f758e356e172c119687dde119c1fe6",
+    "OwnDesign": "d6af36ae35d1abfb5f51476bb8e78a4c1584f820",
+    "OwnCensus": "68841353d0e1563bcca8116cc3450fa7157bdfba",
+    "OwnFixtureSeal": "REQUIRED_BEFORE_OWN_CODE",
+    "CombinedDesignPeer": "0a61ac955e39fb1572532cca811ef11876490f75"
+  },
+  "Source": {
+    "scope": "Only diagnostic S08 observer + E3 Source13 index; other12 exactly E2 including S10cb95. Keep choose18:118 and NOTICES41:12, D07/S07/tail1794/62a/662 exact. Full25 final:17 frozen,8 measured successors. No null/blueprint/default wildcard at admission.",
+    "observer": "The real world and actual tooling use the SAME exported factory counts reference and underlying original single snapshot; labels only monitor/noScope, same settled actions/errors, no additional calls, timing, cache or business predicate changes. Canonical BASE codec. No top-level world/harness/SDK/Miniflare construction in unit tooling.",
+    "collector": "C1 exact retained; finiteGet independent HTTP/counters with609+1ebdd priorities. Scan real child stdout once, bounded typed marker joins independent of native physical adjacency; private data never exported.",
+    "tooling": {
+      "nativeGroups": 9,
+      "innerChecks": 145,
+      "orderedGroupChecks": [
+        6,
+        24,
+        9,
+        4,
+        19,
+        6,
+        12,
+        35,
+        30
+      ],
+      "legacyC1Individual": 35,
+      "additional": 110,
+      "strictIDs": true,
+      "receipt": "Actual per-check verdict/projection digest, no expected-as-actual or claimed44native. Root recomputes ordered145 and C1 hashes.",
+      "graph": "Full measured actual import graph80repo+descriptor+manifest/lock, real E3 file/overlays. Root native only; isolated lockednpm ci ignore-scripts, no business world."
+    }
+  },
+  "Own": {
+    "scope": "Preserve D2 frozen reader/core and all original44 input bytes/oracles/IDs. New separate explicit D3 actual/model entrypoints and independent semantic join/pins. Reuse shape/replay/ZIP/API/time/tree/C1 unchanged wherever possible. No Source helper imports/evaluation.",
+    "fixtureFirst": "Before guard code: seal ALL24 coherent literal model API/tree/log/custody/outcome/ZIP inputs with independent fixed expected outcomes and IDs. Model edges explicitly modeled; actual expected25 must be prebound by Root, never inferred from payload. Full E3 pins required before actual binding/native release. OWN code release requires a subsequent explicit Root record.",
+    "tooling": {
+      "nativeGroups": 8,
+      "innerEvaluations": 68,
+      "legacyD2": 44,
+      "newD3": 24,
+      "admit": 30,
+      "reject": 38,
+      "newAdmit": 9,
+      "newReject": 15,
+      "strictIDs": true
+    },
+    "crossChecks": "609+1ebdd global marker reason precedence; HTTPKNOWN excludes native/source blockers and journal except visibleAFTER interleave; exact event-sequence pointers; no monotonicity/delta/causal/no-effects/authentication claim."
+  },
+  "reviewAndRollback": "Authors provide FULL UTF8 byte/SHA256/Git hashes, complete graph/index and reversible exact before/after splices. Root independently checks all data, preserves proposal, gates tooling on new one-use refs, closes workflow-only, and seeks fresh reviews. Nothing mutates active product paths/runtime now; rollback is retain immutable old versions and close only owned future workflow after occurrence.",
+  "holds": {
+    "nativeReleased": false,
+    "SourceBusinessReleased": false,
+    "normalFullTask1PlanHeld": true,
+    "normalFullTask1Plan": "a4cebfbb3c91ec706429253c9809a0096774108b",
+    "newBusinessDecision": "Only after both native tooling results closed/readback/fresh-review and actual25/E3 pinned. At most one new full-order20 diagnostic under separate Root gate; no replay/autoretry on timeout/NA/UNKNOWN.",
+    "cloudflareRuntime": false,
+    "oauth": false,
+    "tokens": false,
+    "otp": false,
+    "mail": false,
+    "Max": false
+  },
+  "owner": {
+    "awayUntilUTC": "2026-11-17T11:00:00Z",
+    "manualRequestsBeforeBoundary": false,
+    "currentManualNeed": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "RootSourceFixtureWholeBytesVerified": true,
+  "RootInertDataAudit": {
+    "unchangedDefs": [
+      {
+        "key": "streamOut",
+        "same": true
+      },
+      {
+        "key": "streamErr",
+        "same": true
+      },
+      {
+        "key": "capture",
+        "same": true
+      },
+      {
+        "key": "journal",
+        "same": true
+      },
+      {
+        "key": "site",
+        "same": true
+      },
+      {
+        "key": "error",
+        "same": true
+      },
+      {
+        "key": "event",
+        "same": true
+      },
+      {
+        "key": "openCase",
+        "same": true
+      },
+      {
+        "key": "witness",
+        "same": true
+      },
+      {
+        "key": "nativeCase",
+        "same": true
+      },
+      {
+        "key": "native",
+        "same": true
+      },
+      {
+        "key": "firstFailure",
+        "same": true
+      }
+    ],
+    "source25Previous25": true,
+    "frozen17": true,
+    "deferred8Null": true,
+    "finiteGetExact": true,
+    "blueprintInadmissible": true,
+    "SourceExecuted": false
+  },
+  "permissions": {
+    "SourceImplementationReleased": true,
+    "OwnFixtureDataReleased": true,
+    "OwnImplementationReleased": false,
+    "NativeReleased": false,
+    "SourceBusinessReleased": false
+  }
+}
