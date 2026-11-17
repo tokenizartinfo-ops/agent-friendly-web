@@ -1,0 +1,55 @@
+import {openSync,closeSync,writeSync,fstatSync,constants} from 'node:fs';
+import {join} from 'node:path';
+import {pathToFileURL} from 'node:url';
+
+const cases = ["C2T1_CONNECTION","C2T1_OAUTH","C2T1_HANDLE","C2T1_PROJECTREF","C2T1_SUBJECT","C2T1_PHASE_RENAME","C2T1_SOURCE_BYTES","C2T1_APPROVAL","C2T1_PREDECESSOR","C2T1_GRANT_REVOKED","C2T1_EXTRA_KEY","C2T1_NOTICES","C2T1_MONITOR_COOKIE","C2T1_MONITOR","C2T1_SCOPE_MISSING","C2T1_FINITE","C2T1_SELECTION","C2T1_LOST_ACK_DUPLICATE","C2T1_UNRESOLVED_WRITER","C2T1_OWN_PROMISE"];
+const aliases = [["S00","lib/mcp-qa-finite-owner-phase-context.mjs"],["S01","lib/mcp-qa-finite-owner-preparation.mjs"],["S02","lib/mcp-qa-finite-owner-native-receiver.mjs"],["S03","worker/mcp-own/finite.mjs"],["S04","lib/mcp-qa-finite-owner-cleanup-scope.mjs"],["S05","lib/mcp-qa-finite-owner-cleanup.mjs"],["S06","lib/mcp-qa-finite-initial-cleanup.mjs"],["D07","test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs"],["S08","test/fixtures/finite-coupled-native.mjs"],["S09","test/fixtures/finite-first-connection-publication.mjs"],["S10","test/fixtures/finite-initial-entry-world.mjs"],["S11","test/mcp-qa-finite-first-connection-publication-native.test.mjs"],["S12","lib/mcp-qa-finite-owner-notice-get-forward.mjs"]];
+const root = process.env.AFW_C2_DIAG_ROOT;
+const started = process.hrtime.bigint();
+let sequence = 0, written = 0, disabled = false;
+const faults = new Set(['AssertionError','Error','TypeError','RangeError','SyntaxError','AggregateError','AbortError','TimeoutError']);
+const codes = new Set(['ERR_ASSERTION','ERR_TEST_FAILURE','ABORT_ERR','ETIMEDOUT','ENOENT','ERR_MODULE_NOT_FOUND','ECONNRESET','ERR_INVALID_ARG_TYPE']);
+
+function summarize(error) {
+  let name = null, code = null, site = null;
+  try {
+    const candidateName=error?.name, candidateCode=error?.code, candidateStack=error?.stack;
+    if (faults.has(candidateName)) name = candidateName;
+    if (codes.has(candidateCode)) code = candidateCode;
+    const stack = typeof candidateStack === 'string' ? candidateStack : '';
+    for (const line of stack.slice(0,16384).split('\n').slice(1,17)) {
+      if (!/^    at /.test(line)) continue;
+      const position = /(?:\(| )((?:file:\/\/\/|\/)[^()\r\n]+):([1-9]\d{0,5}):([1-9]\d{0,5})\)?$/.exec(line);
+      if (!position) continue;
+      const entry = aliases.find(([,path]) => position[1] === join(root,path) ||
+        position[1] === pathToFileURL(join(root,path)).href);
+      if (entry) {site={file:entry[0],line:Number(position[2]),column:Number(position[3])};break;}
+    }
+  } catch { /* Keep any already observed finite fields. */ }
+  return {name,code,site};
+}
+
+// Synchronous bounded journal writes leave no active handle between markers.
+// Every error is contained; a recording failure must never replace an original throw.
+export function mark(id,operation,edge,error) {
+  if (disabled) return;
+  let fd;
+  try {
+    if ((!cases.includes(id) && id !== 'AFTER') || sequence >= 128) throw 0;
+    const event = {sequence:sequence+1,elapsedMs:Number((process.hrtime.bigint()-started)/1000000n),
+      id,operation,edge,error:edge === 'throw' ? summarize(error) : null};
+    const bytes = Buffer.from(JSON.stringify(event)+'\n');
+    if (written+bytes.length > 32768) throw 0;
+    fd = openSync(join(root,'green-progress.ndjson'),constants.O_WRONLY|constants.O_APPEND|constants.O_NOFOLLOW);
+    const s = fstatSync(fd);
+    if (!s.isFile() || (s.mode&0o777)!==0o600 || s.nlink!==1 || s.uid!==process.getuid() ||
+      s.gid!==process.getgid() || s.size!==written) throw 0;
+    if (writeSync(fd,bytes)!==bytes.length) throw 0;
+    written+=bytes.length;sequence++;
+  } catch {
+    disabled=true;
+    try {process.stderr.write('AFW_C2_GREEN_RECORDER_FAULT\n');} catch {}
+  } finally {
+    if (fd!==undefined) {try {closeSync(fd);} catch {}}
+  }
+}

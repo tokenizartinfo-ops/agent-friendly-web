@@ -1,0 +1,575 @@
+{
+  "schema": "afw.c2-first-failure-post-diag2-protocol-contract.v1",
+  "status": "BINDING_DATA_PREPARED_RUNTIME_HELD",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "designRuling": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+    "bindingSupplement": "8781b614dd914f581c0a6806c4f92423242eac79",
+    "firstFailureContract": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+    "acceptedSource13Candidate": "55e95b5018e7fef76caeef64f2982e504a5e7a60",
+    "inheritedProtocol": "e55a6387549a8447a5ad93356184645ae19e70de",
+    "inheritedSchema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+    "inheritedSelection": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d"
+  },
+  "purpose": "Escoger entre hipótesis sobre el primer POST NOTICES de un futuro recorrido completo GREEN20 cuando existan hechos suficientes. Admisión diagnóstica separada del calificador completo de Task1.",
+  "source": {
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "originalGitLeaves": 3203,
+    "mode": "proposal-green",
+    "sourceIndexBlob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "sourceIndexBytes": 11467,
+    "proposalIndexHash": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+    "sourceRows": [
+      {
+        "id": "S00",
+        "canonicalPath": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      {
+        "id": "S01",
+        "canonicalPath": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      {
+        "id": "S02",
+        "canonicalPath": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      {
+        "id": "S03",
+        "canonicalPath": "worker/mcp-own/finite.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      {
+        "id": "S04",
+        "canonicalPath": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      {
+        "id": "S05",
+        "canonicalPath": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      {
+        "id": "S06",
+        "canonicalPath": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      {
+        "id": "S07",
+        "canonicalPath": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      {
+        "id": "S08",
+        "canonicalPath": "test/fixtures/finite-coupled-native.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+      },
+      {
+        "id": "S09",
+        "canonicalPath": "test/fixtures/finite-first-connection-publication.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+      },
+      {
+        "id": "S10",
+        "canonicalPath": "test/fixtures/finite-initial-entry-world.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+        "bytes": 88713,
+        "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+      },
+      {
+        "id": "S11",
+        "canonicalPath": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      {
+        "id": "S12",
+        "canonicalPath": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+        "inertGitPath": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      }
+    ],
+    "originalDriver": {
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "git": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+    },
+    "driverSibling": {
+      "path": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+      "git": "9e29c5197207b03bdb4b10069089f37df289e88c"
+    },
+    "registrationTail": {
+      "originalOffset": 991,
+      "driverOffset": 1375,
+      "bytes": 1794,
+      "sha256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a"
+    },
+    "recorder": {
+      "path": "test/finite-green-progress-recorder.mjs",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e",
+      "git": "662ec8170bbfe81831b557824d1a466e722842d7"
+    },
+    "reader": {
+      "file": "read-progress.mjs",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f",
+      "git": "62a31e3c16cc710c84ebfb5b0242abb00671363c"
+    },
+    "selected": [
+      "C2T1_CONNECTION",
+      "C2T1_OAUTH",
+      "C2T1_HANDLE",
+      "C2T1_PROJECTREF",
+      "C2T1_SUBJECT",
+      "C2T1_PHASE_RENAME",
+      "C2T1_SOURCE_BYTES",
+      "C2T1_APPROVAL",
+      "C2T1_PREDECESSOR",
+      "C2T1_GRANT_REVOKED",
+      "C2T1_EXTRA_KEY",
+      "C2T1_NOTICES",
+      "C2T1_MONITOR_COOKIE",
+      "C2T1_MONITOR",
+      "C2T1_SCOPE_MISSING",
+      "C2T1_FINITE",
+      "C2T1_SELECTION",
+      "C2T1_LOST_ACK_DUPLICATE",
+      "C2T1_UNRESOLVED_WRITER",
+      "C2T1_OWN_PROMISE"
+    ],
+    "node": "v22.23.4",
+    "sdk": "1.2.1",
+    "history": {
+      "oldIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "fullQualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+      "legacyNormalGreenSelectionHash": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5",
+      "meaning": "Historical full qualifier selection hash only. Current DIAG2 context.selectionHash and sourceIndexBlob/proposalIndexHash must equal the new bindings."
+    }
+  },
+  "sourceNomination": {
+    "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+    "message": "AFW-C2-T1-FIRST-FAILURE-POST-DIAG2-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+    "job": "c2-first-failure-post-diag2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/",
+    "runner": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+    "artifact": {
+      "name": "afw-c2-t1-first-failure-post-diag2",
+      "path": "output/c2-t1-first-failure-post-diag2.json",
+      "fileName": "c2-t1-first-failure-post-diag2.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Install only the existing locked dependencies",
+      "Observe full-order first NOTICES POST boundary",
+      "Preserve bounded first POST diagnostic"
+    ],
+    "driverSibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "activationReleased": false
+  },
+  "selection": {
+    "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+    "bytes": 4070,
+    "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e",
+    "fullReadback": true
+  },
+  "selectionWireHash": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc",
+  "selectionWireBytes": 3317,
+  "selectionWireRule": "SHA256 and length of UTF8(JSON.stringify(selection)) without LF. The raw selection artifact uses pretty two-space JSON plus LF and has its own size/SHA256/Git blob. Preserve both checks.",
+  "schemaPin": {
+    "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+    "bytes": 26400,
+    "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb",
+    "fullReadback": true
+  },
+  "sourceWorkflow": "Exact five requiredSteps in sourceNomination, in that order. Pinned checkout 11d5960a326750d5838078e36cf38b85af677262, fetch-depth 2, persist-credentials false. setup-node 49933ea5288caeca8642d1e84afbd3f7d6820020 with Node 22.23.4. Locked npm ci --ignore-scripts --no-audit --no-fund. Fourth logical step runs exact nominated command. Fifth uses upload-artifact ea165f8d65b6e75b540449e92b4886f43607fa02, if-no-files-found error, one filename, seven days. Ubuntu 24.04, seven minutes, contents:read, exact repo/push/message/ref, attempt 1. Use actual unique command-step API number and exact time window. Fault fails the command with no admissible outcome artifact.",
+  "wire": {
+    "success": [
+      {
+        "marker": "AFW_C2_FIRST_FAILURE_POST_DIAG2_CUSTODY",
+        "definition": "custody",
+        "bodyBytesMax": 1024
+      },
+      {
+        "marker": "AFW_C2_FIRST_FAILURE_POST_DIAG2_OUTCOME",
+        "definition": "outcome",
+        "bodyBytesMax": 24576
+      }
+    ],
+    "fault": {
+      "marker": "AFW_C2_FIRST_FAILURE_POST_DIAG2_FAULT",
+      "definition": "fault",
+      "bodyBytesMax": 2048
+    },
+    "encoding": "Each marker is followed by exactly one ASCII space, UTF8(JSON.stringify(parsed body)) in normative order, then a single LF. Caps exclude marker, that space and LF. Artifact payload is the exact outcome body followed by ONE byte 0x0a, thus at most 24577 bytes total. No BOM/extra LF/duplicate keys/extra fields/whitespace/CR/smuggled second marker. ZIP size limit 1048576 bytes; specified sole exact filename, listing count1/7d/private, measured archive digest and inflated bytes agree with API/log. Overall transport log max4194304. A body of 24576 is legal only if all semantic/shape rules also hold; never enlarge the body cap to fit LF.",
+    "order": {
+      "context": [
+        "repository",
+        "baselineSource",
+        "baselineTree",
+        "sourceIndexBlob",
+        "proposalIndexHash",
+        "selectionHash",
+        "head",
+        "tree",
+        "runId",
+        "runAttempt",
+        "job",
+        "node"
+      ],
+      "custody": [
+        "schema",
+        "context",
+        "parentNonRoot",
+        "preflightOwned",
+        "preflightRemoved",
+        "checkedLaunches",
+        "preflightProcesses",
+        "greenProcesses",
+        "checkedProcesses",
+        "uidGidGroupsLoopbackMatched",
+        "targetsBeforeMatched",
+        "targetsAfterMatched",
+        "journalOwnershipMatched",
+        "ownRootVerified",
+        "ownTempRemoved"
+      ],
+      "streamOut": [
+        "bytes",
+        "sha256"
+      ],
+      "streamErr": [
+        "bytes",
+        "sha256"
+      ],
+      "capture": [
+        "exitCode",
+        "signal",
+        "errorKind",
+        "stdout",
+        "stderr"
+      ],
+      "journal": [
+        "bytes",
+        "sha256",
+        "stable",
+        "recorderFaultObserved"
+      ],
+      "site": [
+        "file",
+        "line",
+        "column"
+      ],
+      "error": [
+        "name",
+        "code",
+        "site"
+      ],
+      "event": [
+        "sequence",
+        "elapsedMs",
+        "id",
+        "operation",
+        "edge",
+        "error"
+      ],
+      "openCase": [
+        "id",
+        "operation"
+      ],
+      "witness": [
+        "integrity",
+        "frontier",
+        "events",
+        "openCase",
+        "afterOpen"
+      ],
+      "nativeCase": [
+        "id",
+        "status"
+      ],
+      "native": [
+        "integrity",
+        "cases"
+      ],
+      "observation": [
+        "capture",
+        "journal",
+        "witness",
+        "unknownReason",
+        "firstThrowSequence",
+        "native",
+        "firstFailure"
+      ],
+      "outcome": [
+        "schema",
+        "context",
+        "diagnosticCollectionComplete",
+        "nativeQualification",
+        "sourceReads",
+        "observation",
+        "custody",
+        "SourceQualified",
+        "Task1Pass",
+        "nonclaims"
+      ],
+      "fault": [
+        "schema",
+        "context",
+        "phase",
+        "reason",
+        "diagnosticCollectionComplete",
+        "nativeQualification",
+        "SourceQualified",
+        "Task1Pass",
+        "nonclaims"
+      ],
+      "sourceReads": [
+        "beforeSha256",
+        "afterSha256"
+      ],
+      "firstFailure": [
+        "schema",
+        "state",
+        "reason",
+        "throwSequence",
+        "source",
+        "assertion"
+      ],
+      "firstFailureSource": [
+        "id",
+        "status",
+        "phase",
+        "counters",
+        "code"
+      ],
+      "firstFailureCounters": [
+        "upload",
+        "activation",
+        "receipts"
+      ],
+      "firstFailureAssertion": [
+        "actual",
+        "expected"
+      ],
+      "nonclaims": [
+        "historicalCauseProven",
+        "receiptAuthenticated",
+        "operationalReadiness",
+        "completePackage",
+        "PCoff",
+        "globalNativeDrainVerified",
+        "sdkNamespaceEmptyVerified"
+      ]
+    },
+    "schemaRule": "Every object follows its $defs required and properties insertion order, exactly. Const arrays compare elementwise in supplied order; transport canonical ASCII dates and occurrence joining are separate. The schema checks wire shape and constants; enforce relational rules below separately. Generic JSON Schema ignores key order. A structural validator alone cannot admit this protocol.",
+    "artifactConsistency": "Only two normal frames in this order, emitted once after all checks/own cleanup. Embedded custody must byte-match the first frame body. Prepare both complete canonical frames/payload before emitting normal markers. On infrastructure failure use FAULT with failing command and no admissible artifact; never accept partial line, success pair + FAULT, a partial pair, upload failure, or mixing occurrences. If physical transport fails before fault can be produced, the unique occurrence still fails admission.",
+    "firstFailureBodyBytesMax": 512
+  },
+  "caps": {
+    "perCaseMs": 120000,
+    "childMs": 180000,
+    "totalMs": 330000,
+    "jobMinutes": 7,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "journalBytes": 32768,
+    "journalRows": 128,
+    "rawTransportLogBytes": 4194304,
+    "zipBytes": 1048576,
+    "custodyBodyBytes": 1024,
+    "outcomeBodyBytes": 24576,
+    "payloadIncludingLFBytes": 24577,
+    "firstFailureBodyBytes": 512
+  },
+  "identity": {
+    "gitSource": "Before executing, verify original 3203 BASE leaf modes/blob IDs and exact additional DATA edges per inventory. BASE absence at canonical S08 and legacy S09 there is correct. Bind all 13 canonical afterimages only in owned materialized target, plus separately sealed D07 and recorder. Compute bytes/SHA256 and Git blob for each real target canonical file before GREEN and again after child exit/timeout before cleanup. Each projection is an independently built ordered list of 13 SHA256 values recorded in sourceReads.beforeSha256 and sourceReads.afterSha256. Neither may be filled from the index or copied from the other. Bind lengths/git IDs both times locally and independently to immutable normal-13 Git DATA tree. OWN demands both arrays exactly equal index rows and tree edges. Mismatch or inability to read -> infrastructure failure; no successful observation.",
+    "manifest": "Verify raw selection artifact git/bytes/sha vs p(selection), independently compute selectionWireHash from compact UTF8 JSON.stringify(selection) WITHOUT LF. Bind exact D07 sibling in argv and stack alias, S07 still canonical; seal actual pinned D07 bytes, one-alias projected recorder, journal reader. Reject reverse alias/legacy driver path, mixed bodyhash, fake complete claim or old green manifest/job. No new callbacks, remount strategy, original clocks, test predicates or additional native business calls.",
+    "activeIndex": "For this family the 13 rows are exactly source.sourceRows from E2; normal-13 refers to this pinned candidate target. Keep canonical BASE paths in Git. Materialize E2 separately in owned TARGET only. D07 and recorder remain siblings. Existing full qualifier 26b/c230 is historical and does not admit E2."
+  },
+  "custody": "Exactly two checked native launches: owned-file preflight under ten seconds THEN all twenty GREEN cases in one process launch with normal compiled fixtures. No synthetic battery/ENOENT/BASE/mutant/regression/N3/W1 in capture. Together share a single target; each observed >=1 fresh unique PID record, retain all previous, union<=8. preflightProcesses and greenProcesses are separate actual fresh counts at each launch; checkedProcesses = their sum (2..8); no invented values. Parent positive UID, child exact UID/GID, cleared supplementary groups and loopback-only, sudo unshare + setpriv --no-new-privs, exact guard before native target, fresh regular safe files. Use existing 0600/single-link/no-symlink/ownership/dev/inode/size checks for journal and scoped temp creation/removal. `uidGidGroupsLoopbackMatched` reports observed guard facts; the `--no-new-privs` launch flag is bound to reviewed runner. `journalOwnershipMatched` and two target booleans mean actual readings succeeded, prior preflight/temp removal confirmed. Maximum custody body with longest admitted runId remains within 1024 bytes.",
+  "capture": "Capture from actual returned spawnSync object only, using existing finite safeCapture. Require observed stdout/stderr buffers within caps, measured bytes and SHA256. ETIMEDOUT ⇒ errorKind:'timeout'; keep independently returned numeric status or null and finite signals as frozen mapping (null=>'none'; known names literal; unrecognized string=>'other'; unavailable=>'unavailable'). Never set status=1/HANG by inference. When errorKind:'none' require signal:'none' and exitCode 0 or 1. Other spawn/err/signal combinations, overflow/missing streams/ownership/incorrect argv ⇒ infrastructure FAULT. Artifact marks diagnosticCollectionComplete:true and nativeQualification:false for collected exit0, native exit1 or ETIMEDOUT; original child condition stays visible. No eligibility/Source proof from job success. Require exact standard SHA256(empty) whenever byte count is zero.",
+  "journal": {
+    "physical": "Fresh parent-created exclusive blank 0600 file/O_NOFOLLOW/expected device+inode/owner/nlink. Recorder opens, appends one canonical LF-terminated row, closes synchronously, has no extra active timer. Read via same identity checked fd in RAM after child; before/after stats and read length agree; oversize/short read/identity/symlink/nonstable storage => FAULT,never a sanitized stable prefix claim. Raw journal <=32768 B/128 rows. Export validated rows only. Clamp by rejecting invalid data; never clip a valid finite value into range.",
+    "intervals": "Each complete canonical row parsed from exact bytes has sequence starting 1 and +1, elapsedMs 0..330000 nondecreasing, error:null for enter/return; on throw exact error object with allowlist name/code and exact reduced alias+line/column or null. Unknown error details stay null. For 20 nominal IDs, in order: action enter→return|throw, count enter→return|throw, then next id. AFTER close independent enter→return|throw at most once, may overlap any case. A missing world means D07 does not record a counter it never called; do not fabricate one or skip missing intervals to recover later. Records stop at first semantically invalid/malformed row. Select 62a31 progress() behavior including suppressing frontier on torn/ambiguous, and nativePrefix() separately.",
+    "integrity": "Complete/prefix/empty clean journals require equality of raw byte length and SHA256 against the concatenation UTF8(JSON.stringify(event)+'\\n') for all exported rows. Stable torn/invalid tail has rawBytes strictly larger than canonical validated prefix size (raw tail not exported); observed-recorder-fault can occur with zero tail. For any integrity, if lengths equal, require raw digest equal reconstructed prefix digest. For stable torn/invalid with unexported suffix, full raw digest is a bounded producer observation; do not claim independent proof of bytes not supplied. Preserve stable recorder-fault indication observed in actual stdout/stderr; false only means marker not observed. Ambiguous/invalid marker from the *binding* is fatal; malformed alias in a stable individual event is truncated before that event and yields UNKNOWN.",
+    "unknown": "If recorderFaultObserved=true, witness.integrity='ambiguous' and unknownReason='RECORDER_FAULT' (also if an invalid/torn record is present). Else if the first unaccepted complete record is invalid (including invalid alias), integrity='ambiguous', reason='JOURNAL_INVALID_RECORD'. Else if any incomplete final line follows valid complete rows, integrity='torn', reason='JOURNAL_TORN'. Else if no data, integrity='empty', reason='JOURNAL_EMPTY'. All four set frontier='unknown',openCase=null,afterOpen=false, where null/false are protocol sentinels and cannot establish absence. Preserve valid preceding rows and native evidence independently. For prefix or complete require unknownReason=null, stable true and no recorder fault.",
+    "frontier": "For known journal, use exact legacy frontier labels and recompute from chronological events. At complete all20 case actions/count and AFTER closed, timeout plus any throw ⇒ post-settlement-process-exit, without throw ⇒ post-teardown-process-exit, else normal end ⇒ all-settled. With case & after open ⇒ case-and-after; else case action or count, else after-close, else between-action-and-count after action end, else before-after for all20 finished/AFTER unopened, else between-cases. `firstThrowSequence` is the earliest edge='throw' within the validated contiguous exported prefix, including AFTER, else null. This is a pointer to an observed record, not a verdict about missing history. Never designate last absolute event or process/physical hold from torn tail."
+  },
+  "nativeAndCross": "Use exact published LF-terminated serial top-level TAP result lines paired to corresponding Subtest, ordinal and expected exact ID; never promote C2SOURCE/unterminated line or conflate journal and native. Preserved nativePrefix62a31 results use prefix/empty/torn/ambiguous only; prefix can contain all20 without exporting complete native TAP totals. Empty => zero observed pairs; ambiguous/torn may contain only previously complete pairs. Do not invent evidence after first ambiguity. Do not claim unconditional worker settlement. For every observed native pass, any stable validated action/count throw of the SAME id is a contradiction (N2), even if later journal tail is unknown. Other id/global AFTER throw is not the same contradiction. A TAP fail need not have a journal throw (framework/timeouts exist). Alias allowlist bound to exact temp file/URL, exact source or D07 path, bounds per schema; no suffix matches.",
+  "transport": "Prebind raw tree/body/nomination before push. Receiver independently joins repo/event push/head/parent/tree/ref/message, logical job, seven-minute workflow and attempt1 to actual API unique terminal job ID and actual command-step number. All five actual required steps succeed in order for accepted diagnostic; if run/step is incomplete, preserve what actually occurred as partial separately. N1: unique timestamped ##[group]Run <exact command>, finite times on header and each marker within actual command window ±1000ms per existing N1, header closed by ##[endgroup] before stdout and before next step group. Reject malformed/smuggled/mixed duplicate markers even outside selected window, archived API job with misleading same names, artifacts outside this head/branch/run. Bind ordered pair plus canonical outcome JSON+LF to actual ZIP compressed bytes/digest/listing/entry count/name, ownership/time, exact CRC/size/full deflate consumption and closed primitive from OWN419. Reuse OWN independent logic only, never producer helper or imported Source oracle.",
+  "fault": {
+    "meaning": "Missing immutable wire/target alias, admission/custody failure, unstable owned read, process capture outside defined combinations, N2/contract conflict or failed cleanup/publication => reject. An actual fault during collection, once captured, emits only finite fault marker if reporting possible, exits nonzero, no eligible artifact. Stable incomplete evidence reasons in journal.unknown are collected; do not send FAULT just because the original child timed out or a record was torn. The `RECORDER_FAULT` reason in FAULT envelope is reserved for a failure to establish a trustworthy recorder/transport identity or fault classification; a stable orderly observed flag inside approved target is handled by the success envelope with uncertain frontier.",
+    "phaseReasons": {
+      "admission": [
+        "ADMISSION_INVALID"
+      ],
+      "materialize": [
+        "MATERIALIZATION_INVALID",
+        "TARGET_DRIFT"
+      ],
+      "preflight": [
+        "PREFLIGHT_INVALID",
+        "CUSTODY_INVALID"
+      ],
+      "green": [
+        "LAUNCH_INVALID",
+        "CUSTODY_INVALID",
+        "CAPTURE_INVALID"
+      ],
+      "journal": [
+        "JOURNAL_INVALID",
+        "RECORDER_FAULT",
+        "TARGET_DRIFT"
+      ],
+      "native": [
+        "CAPTURE_INVALID",
+        "EVIDENCE_CONFLICT"
+      ],
+      "cleanup": [
+        "CLEANUP_INVALID",
+        "TARGET_DRIFT"
+      ],
+      "publish": [
+        "PUBLICATION_INVALID"
+      ]
+    },
+    "context": "null only if admission failed before context could be established; valid pinned context mandatory after admission. No secret/raw/error stack in fault."
+  },
+  "firstFailure": {
+    "definition": "#/$defs/firstFailure",
+    "componentCanonicalSha256": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+    "mandatory": true,
+    "bodyBytesMax": 512,
+    "scope": "Capacidad opcional por selección explícita de familia nueva; DIAG1 heredado queda inmutable y rechaza campos nuevos. En DIAG2 firstFailure es obligatorio y emite UNKNOWN/NOT_APPLICABLE explícitos cuando corresponda; ausencia no equivale a UNKNOWN válido. No field silenciosamente opcional dentro de la nueva versión.",
+    "outputOnly": "Sólo firstFailure6keys; KNOWN contiene source canonical5keys y assertion2ints. UNKNOWN/NOT_APPLICABLE tienen throwSequence/source/assertion null. Los hechos ya disponibles permanecen sin cambios en outer journal/native; null no borra ni niega esos hechos.",
+    "sourceProjection": {
+      "inputs": "Mismos child.stdout Buffer ya capturado y sus sha/bytes, observación journal validada por readProgress y nativePrefix heredados, selección20 y contexto/pins fijados. Incluso ETIMEDOUT se inspecciona el buffer existente; no nueva lectura de proceso/servicio ni source hook.",
+      "output": "Sólo firstFailure6keys; KNOWN contiene source canonical5keys y assertion2ints. UNKNOWN/NOT_APPLICABLE tienen throwSequence/source/assertion null. Los hechos ya disponibles permanecen sin cambios en outer journal/native; null no borra ni niega esos hechos.",
+      "knownCandidate": [
+        "El prefijo journal exportado se valida desde seq1 sin huecos; su primera edge throw dentro de ese prefijo es idC2T1_NOTICES,operationaction,error.nameAssertionError,codeERR_ASSERTION,siteS08:41:12. No utilizar una throw posterior ni buscar el target saltando una anterior.",
+        "Los11 casos previos actuales del mismo prefijo tienen action/countreturn y los11 nativepairs actuales PASS en orden; native[11] es exactamente fail C2T1_NOTICES con ordinal12 top-level y sin skip/todo. No heredar estos hechos de DIAG1/historia.",
+        "El target tiene su count.enter y count.return completos tras la action.throw, sin countthrow. Estos hechos pueden estar en un prefijo conservado de journal luego torn/ambiguous/recorder-fault; no se requiere recuperar ni afirmar el sufijo privado. Si el propio candidato o su counter no están cerrados, UNKNOWN.",
+        "Un único C2SOURCE target canonical id/status/phase/counters/code exactos, fail/notices/TEST_FAILED y counters0..3 enteros; se extrae del stdout en su envoltura real TAP '# C2SOURCE '. El prefijo SourceRows aceptado hasta target debe concordar con orden20 y las filas precedentes presentes, sin duplicados, saltos ni reorden. El extractor no pide ni exporta un beforeEXTRA_KEY.",
+        "Único bloque diagnóstico estructural del par nativo12, completo y cerrado, con failureType testCodeFailure,codeERR_ASSERTION,nameAssertionError,operatorstrictEqual. Sólo scalars mapping al nivel2espacios expected200 y actualint100..599 distinto200; no mensajes/stack/location como fuente de status. El bloque pertenece al result12; SourceRow se enlaza por ID/orden propio, sin adyacencia ni orden físico relativo aSubtest.",
+        "La gramática física de las envolturas console y diagnostic debe haber sido calibrada y sellada por toy Node22.23.4 con await work()/awaitcounts()/catch/rethrow. No imponer SourceRow/Subtest adyacentes ni un orden físico relativo; mantener SourceRows ordenados por selectedIDs y pares/bloques nativos por ordinal/ID, site de journal. No ampliar tolerancias a ciegas si difiere del sello; STOP o UNKNOWN. Context/source/helper pins caller expectation exactos."
+      ],
+      "prefixUnknownSuffix": "Root ruling: un sufijo posterior torn/unknown no deshace un candidato completo y validado. En ese caso KNOWN significa first throw del prefijo validado; nunca globallyearliest, drenaje o integridad de bytes no exportados. Se conservan integrity/unknownReason/firstThrowSequence outer originales.",
+      "sourceCounters": "Sólo bounds heredados0..3, sin receipts<=activation<=upload inventado, monotonicidad, delta, forzar2/2/2 ni cero por default. Los counters son las tres medidas post-action de D07:18 y no prueban causalidad, autenticidad de receipt ni completitud M/QA.",
+      "rawGrammar": [
+        "Parseo delimitado de LF UTF8 canónico; sin YAML general ni deps. Nativepairs se enlazan a Subtest top-level exacto yordinal, manteniendo gramática flat y parser heredado independiente. El bloque del target pertenece exclusivamente a su result y delimitadores '  ---'/'  ...'. SourceRows C2SOURCE se enlazan por ID y orden de selectedIDs, nunca por adyacencia física al Subtest ni posición relativa entre esas dos corrientes. No capturar bloque posterior o anidado.",
+        "Dentro del bloque sólo los campos top-level2espacios pueden aportar scalars. Textos de error/stack y su indent4+ son opacos y se descartan; un actual/expected falso allí no cuenta. Datos unsupported/tabs/CR/bloqueabierto o scalarambiguo son UNKNOWN, no coerción.",
+        "No strings numéricos, floats/exponente/hex/NaN/Infinity/null/boolean/arrays/maps; actual200 o expected distinto200 contradicen esta aserción y son UNKNOWN CONFLICTING_EVIDENCE. Duplicados de scalar/source/par,ordinal/case/site erróneos,nesting/source keyorder no canónico/reorden no producen KNOWN. Un mapping anidado o texto opaco se ignora para scalars, no se promueve ni se usa como fallback.",
+        "Escanear el buffer ya acotado para duplicados/fakes relevantes; no cerrar el scan tras el primer valor válido. Descartar copias de C2SOURCE dentro de YAML/comments escapados, stack o nested TAP. Una falsificación estructural no se promueve aunque el númeroparezca plausible.",
+        "Timeout global no equivale a truncación del candidato: prefijo nativo19 limpio con target12/bloque completos puede KNOWN aunque20sigaabierto. TRUNCATED_NATIVE se refiere al candidato/gramática relevante no cerrados o un sufijo ambiguo que impide unicidad, no a la mera ausencia de20/TAPtotals."
+      ],
+      "reasonPriority": [
+        "0: Fallos heredados de API/contexto/tree/pins/transporte/custody/N2 impiden admisión y siguen FAULT; nunca normalizarlos medianteUNKNOWN.",
+        "1: Primera throw fiable en el prefijo validado con id/op/name/code/site diferente del candidato exacto ⇒ NOT_APPLICABLE EARLIEST_THROW_DIFFERENT. Unknownsuffix posterior no borra esa prueba; no significa primerfalloglobal.",
+        "2: Pareja native previa a12 FAIL inequívoca ⇒ NOT_APPLICABLE EARLIER_NATIVE_FAILURE. TargetPASS inequívoco más action/countreturn12 validados ⇒ NOT_APPLICABLE TARGET_PASSED. Si faltan las pruebas journal de ese PASS por un corte, UNKNOWN JOURNAL_UNRESOLVED.",
+        "3: NO_QUALIFYING_THROW sólo con journal cleancomplete20+AFTER y ausencia de throws: NOT_APPLICABLE. Nunca inferir ausencia desde un prefijo cortado/unknown. Sin candidato comprobado en el prefijo ⇒ UNKNOWN JOURNAL_UNRESOLVED.",
+        "4: Para un exactcandidate comprobado, countthrow/count no cerrado ⇒ UNKNOWN COUNTER_UNAVAILABLE. Más allá de eso, bytes/grammarrelevante cortados ⇒ TRUNCATED_NATIVE; CR/UTF8 o layout no calibrado ⇒ NATIVE_FORMAT_UNSUPPORTED; native pair/ordinal/duplicados/reorden ambiguos ⇒ AMBIGUOUS_EVIDENCE; targetpair ausente ⇒ TARGET_NATIVE_UNAVAILABLE.",
+        "5: SourceRow o campo estructural relevante duplicado/nested falso/no canónico/reorden ⇒ AMBIGUOUS_EVIDENCE; contradicción de campos conocidos ⇒ CONFLICTING_EVIDENCE; SourceRow ausente ⇒ SOURCE_ROW_UNAVAILABLE; expected/actual top-level faltante (incluso sólo fake anidado/message/stack) ⇒ ASSERTION_SCALARS_UNAVAILABLE; tipo/rango no soportado ⇒ UNSUPPORTED_SCALARS. Primero aplicar estas categorías a SourceRow y luego al bloque assertion; nunca rescatar un valor entre duplicados.",
+        "6: Sólo todos los joins completos ⇒ KNOWN TARGET_POST_ASSERTION. throwSequence igual al outerfirstThrowSequence dentro del prefijovalidado. Journalunknown posterior no lo deshace si el candidato/count y todos sus antecedentes necesarios ya estaban completos."
+      ],
+      "forbiddenExport": "No RAWactualTAP, message/stack/location/URLs/paths absolutos/formularios/handles/cookies/SQL/D1/providerrows/arbitrarystrings fuera del parent. Error metadata previa sigue su allowlist. SHAstdout bindea bytes capturados pero no recupera contenido ausente ni autentica un productor no confiable."
+    },
+    "schemaVsSemantics": "JSON Schema no valida orden ni joins/ausencias/relaciones. La validación semántica y el contexto fijado son obligatorios además del schema. KNOWN sólo indica proyección de hechos seguros presentes del primer throw del prefijo validado.",
+    "interpretation": {
+      "noDelta": "Sin EXTRA_KEY before: no calcular diferencia ni asegurar ausencia de ticket/send desde unafter1/1/1.",
+      "afterExamples": "Counts2/1/1 o2/2/1 son efectosobservados parciales;2/2/2+non200 orienta retorno/prueba final después de efectos visibles al contador, sin autenticar receipts ni fijarMvsQA. Sólo registrar medidas; no clasificador de causa ni permiso de replay.",
+      "historical": "CurrentDIAG1 sigue statusHTTP/countersUNKNOWN. Futuro200 sóloestablece esa muestra; sinW1automático ni transferir status a historia.",
+      "task1": "No package completo fullTask1; todas lasSourceQualified/Task1Pass y7nonclaimsfalse. Esteplan no libera nuevo negocio."
+    }
+  },
+  "receiver": {
+    "inputKeys": [
+      "run",
+      "jobs",
+      "commit",
+      "tree",
+      "transport",
+      "artifact"
+    ],
+    "expected": "Expectedcaller nueva separada con head/tree/run/job/nomination/pinsSource13/25edges/schema+collector+fixture+toy+OWNindex explícitos. No deducirlos de firstFailure ni aceptar index26b por defecto tras HOST_JSON_FIX1.",
+    "checks": "Reusar guards acotados Git/API/tree/archive/log/body/context y replayjournal/native de OWN124. Validar schema/keyorder512B; KNOWN targetnative[11] fail,11nativePASS, firstthrowexact enprefijovalidado/countreturn,seqigual, source5keys/statusphasecode/countersbounds,actualrange!=200/expected200. NA reasons deben concordar con hechosouter suficientes; UNKNOWNnull permitido sin inventar ausencia. Coherent forged knownmetadata sin esosjoins se rechaza.",
+    "trustBoundary": "OWN no tiene rawchildstdout: no puede recomputar uniqueTAPscalar/C2SOURCE ni detectar un rawduplicate/nested/fake que un productor reescriba u omita coherentemente. Son assertions acotadas del collector exacto revisado y ensayado, ligadas a API y digest; NO autenticación criptográfica del contenido no suministrado. Una sustitución coherente503→429 de todos los bytes/declaraciones no la detecta sólo schema/OWN; no probar ni reclamar ese control inexistente.",
+    "interpretation": "Acepta diagnosticCollectionChecksSatisfied en su ámbito, noSourceQualified/Task1Pass/readiness. UNKNOWN no destruye hechosouter anteriores y no autoriza otro run.",
+    "occurrence": "Independent trusted caller prebinds the exact source nomination, E2 index, ordered 25 tree edges with file SHA/byte/Git IDs, pins of collector, schema, contract, fixtures and accepted tooling; joins exact API head/tree/run/attempt/job ID/step. No runtime expectation may be derived from the untrusted candidate payload. Any unbound expectation blocks admission. No OWN import or execution of Source helper."
+  },
+  "gates": {
+    "sourceCorpus": {
+      "blob": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+      "path": "sourceLiteralCorpus",
+      "count": 35,
+      "canonicalSha256": "15d470df5e7ed5350bdedb333236f648c86e69c844e5784d1d8478f6ebac5aaf",
+      "oracle": "Fixture data sealed before implementation. The old synthetic literals are not the as-yet-unmeasured Node output. Calibration may require controlled design revision."
+    },
+    "ownDesign": "61785e34b1e47a007ef8dfc604eb4b653eb56fb4",
+    "ownCensus": "e01fc7fa1737d6498b70fc866a41ab64ae04c345",
+    "toyOnly": {
+      "design": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+      "toyCanonicalUtf8Sha256": "988b241402d628d86c1a2513af80ba14be22540cc2c97925e8e81837f4ee5d69",
+      "node": "v22.23.4",
+      "release": "Exact Node-format toy must be natively admitted and reviewed by Root before parser/collector/OWN guard code; validate actual grammar, maintain separate SourceRow ordering and native ordinal blocks. If observed layout differs, stop and explicitly revise contract or return unsupported under approved grammar."
+    },
+    "business": "Future only. Root separately seals the final three code pins, final 25 edges, independent OWN fixtures/guard/actual proof and reviews, actual occurrence context and one-use activation checks. Admission fails until all are present. Reuse the existing D07, S07, recorder, read-progress. Inline extractor only in separately reviewed collection-adapters; no new Worker hook/RPC, test cases, business calls, budgets, retries or subset. No raw child TAP beyond parent; only approved six keys plus inherited metadata. Preserve private buffers, no recovery from historical hashes. All preexisting branches/receipts remain historical."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

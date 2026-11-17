@@ -1,0 +1,387 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-SOURCE25-CODE-BINDING/1",
+  "status": "COMPLETE_PROPOSAL_ROOT_MEASUREMENT_REQUIRED_NO_REF_OR_EXECUTION",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "originalLeaves": 3203,
+  "totalLeaves": 3228,
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+    "message": "AFW-C2-T1-FIRST-FAILURE-POST-DIAG2-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+    "job": "c2-first-failure-post-diag2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/",
+    "runner": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+    "artifact": {
+      "name": "afw-c2-t1-first-failure-post-diag2",
+      "path": "output/c2-t1-first-failure-post-diag2.json",
+      "fileName": "c2-t1-first-failure-post-diag2.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Install only the existing locked dependencies",
+      "Observe full-order first NOTICES POST boundary",
+      "Preserve bounded first POST diagnostic"
+    ],
+    "driverSibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "activationReleased": false
+  },
+  "authority": {
+    "implementation": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+    "supplement": "8781b614dd914f581c0a6806c4f92423242eac79",
+    "fixtureFirst": {
+      "bytes": 17929,
+      "sha256": "e4bb383ae6acfdf844463188398ca6642981ec6a3427258a67a76fcc44ab5998",
+      "blob": "d1b79ae4c7987fcc8f876ffd6f7d211bb2970465"
+    },
+    "binding": "5b5e67e14d623930dc7cea9e5579a64ec98a9508",
+    "draft": "932a26178e388620d47e91b71384b8537860be18"
+  },
+  "mountLeaves": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+      "bytes": 4070,
+      "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e",
+      "bytes": 41095,
+      "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9f457450ba1e7a746117fc1498922972613df789",
+      "bytes": 20195,
+      "sha256": "e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/diagnostic-driver.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/progress-recorder.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c0fbc1674de5a41760598ec248d97147a33dc517",
+      "bytes": 16898,
+      "sha256": "292b9f8f0a2388c514a40ae336bc97df9b3f8571beaa00b41f0976896dea17b2"
+    },
+    {
+      "path": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "29441f47097afe3760b831e7b360614ea397e4e1",
+      "bytes": 1620,
+      "sha256": "24dc2e5c5f454af60ebba59d502e42d73a75af1594b327d2400fc3b29c247069"
+    }
+  ],
+  "graph": {
+    "runner": {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c0fbc1674de5a41760598ec248d97147a33dc517",
+      "bytes": 16898,
+      "sha256": "292b9f8f0a2388c514a40ae336bc97df9b3f8571beaa00b41f0976896dea17b2"
+    },
+    "parentImports": [
+      "node:crypto",
+      "node:child_process",
+      "node:fs/promises",
+      "node:path",
+      "node:url",
+      "./collection-adapters.mjs"
+    ],
+    "adapterImports": [
+      "node:crypto",
+      "node:fs",
+      "node:fs/promises",
+      "node:path",
+      "./read-progress.mjs"
+    ],
+    "children": [
+      "owned custody preflight 10000ms",
+      "node --experimental-vm-modules --test --test-reporter=tap --test-concurrency=1 test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs"
+    ],
+    "driver": {
+      "sibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "relativeImports": [
+        "node:test",
+        "node:assert/strict",
+        "./fixtures/finite-coupled-native.mjs",
+        "./finite-green-progress-recorder.mjs"
+      ],
+      "tail": {
+        "bytes": 1794,
+        "sha256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a",
+        "git": "9f2b7ef5a93a183bcceda74d950c991c41f4440e"
+      },
+      "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "original": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+    },
+    "adapter": {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9f457450ba1e7a746117fc1498922972613df789",
+      "bytes": 20195,
+      "sha256": "e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e"
+    },
+    "reader": {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    "fixedImports": "One versioned collection-adapters inline. projectFirstFailure(child.stdout,facts,ids) after existing witness, native prefix & N2 checks and before original successPacket. No other calls to children or changes to epochs, limits, topology or capabilities.",
+    "dataOnly": "Frames/contract/selection/index/source bodies in Git; body13 applied only to isolated temp target. D07/recorder inert .txt in Git and measured sibling-only under TEMP."
+  },
+  "steps": [
+    "Read the exact one-use lab head",
+    "Use the fixed Node runtime",
+    "Install only the existing locked dependencies",
+    "Observe full-order first NOTICES POST boundary",
+    "Preserve bounded first POST diagnostic"
+  ],
+  "caps": {
+    "perCaseMs": 120000,
+    "childMs": 180000,
+    "totalMs": 330000,
+    "jobMinutes": 7,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "journalBytes": 32768,
+    "journalRows": 128,
+    "rawTransportLogBytes": 4194304,
+    "zipBytes": 1048576,
+    "custodyBodyBytes": 1024,
+    "outcomeBodyBytes": 24576,
+    "payloadIncludingLFBytes": 24577,
+    "firstFailureBodyBytes": 512
+  },
+  "held": {
+    "actualHead": null,
+    "actualTree": null,
+    "actualRunId": null,
+    "actualJobId": null,
+    "notAdmissible": true
+  },
+  "wire": {
+    "selectionHash": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc",
+    "selectionRaw": {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+      "bytes": 4070,
+      "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e"
+    },
+    "schema": {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb"
+    },
+    "protocol": {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e",
+      "bytes": 41095,
+      "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389"
+    },
+    "source13": {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    }
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
