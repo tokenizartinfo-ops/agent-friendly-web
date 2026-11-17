@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "67f503402cf1be228bbf5eae45ddac92da8cb02a",
-  "phase": "GET_WINNER_STAGE_B_RESUMED_FINAL_CONTROLLER_INTEGRATION",
+  "phase": "GET_WINNER_STAGE_B_INTEGRATION_FIX1_STATIC_ADDRESSED_FINAL_PACKAGE_PENDING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -762,11 +762,20 @@
         "guardedNodeProcessesWithPreflight": 4,
         "executedStageB": 0
       },
-      "staleWorkflowMustNotRun": "ded7da7c9cb00361e598c6506017979c959837ef"
+      "staleWorkflowMustNotRun": "ded7da7c9cb00361e598c6506017979c959837ef",
+      "integrationFixRound": 1,
+      "integrationFinding": "IC1: missing3 retained-overlay pre-native syntax checks",
+      "integrationDisposition": "ADDRESSED_STATIC_NOT_EXECUTED",
+      "currentController": "fbb9da4aa49456a379fdc1f0f31cbdff2f9b37aa",
+      "currentWorkflow": "19cd8c49f9f489067805baf6e8e8c8679bdc3a5c",
+      "currentModelDriver": "8d6ae83f38437d4652096086aa48bef157571777",
+      "currentProtocol": "6dcd86e3280d562c80950d450bfb5fd558574cb5",
+      "currentCensus": "2119426285fda06fd975f74f133f617a16362bba",
+      "syntaxCommandsPlanned": 27
     }
   },
-  "schemaVersion": 71,
-  "updatedAtUTC": "2026-11-17 19:21:53 UTC",
+  "schemaVersion": 72,
+  "updatedAtUTC": "2026-11-17 19:34:31 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
