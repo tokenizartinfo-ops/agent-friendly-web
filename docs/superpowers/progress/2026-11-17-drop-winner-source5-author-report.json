@@ -1,0 +1,255 @@
+{
+  "schema": {
+    "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/frame-schema.json",
+    "mode": "100644",
+    "bytes": 34193,
+    "sha256": "c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11",
+    "blob": "81be13ca960a143d565d55dd958b4e4ff24d3c96"
+  },
+  "status": "DONE_WITH_CONCERNS",
+  "stage": "CODE_COMPLETE_NATIVE_PENDING",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "github.com",
+  "environment": "private detached Git DATA",
+  "allowedAction": "immutable blob creation and FULL readback; proposal for independent review",
+  "budget": {
+    "Source": 5,
+    "Own": 4,
+    "maxSameFamily": 5,
+    "noReset": true,
+    "lastSourceCycle": true
+  },
+  "release": "dba854a26f71e8bbc2da6ae02cca48551af063d2",
+  "red": {
+    "run": 44086328643,
+    "job": 134049601692,
+    "primary": "6f98dadad0d3ac0533d1d4399344cac1f8fb9667",
+    "proof": "b77f84620c7cd3c83bc2ef48d3e53dfec5d41ac0",
+    "validation": "e58f9364b66c10cf098e560c05da7d1607da25bf",
+    "closure": "355fe040214731112bbc8c927e42b3476f635bd0",
+    "MODELOnly": true,
+    "executed": 1,
+    "sealedNotExecuted": 58,
+    "jobFailureExpected": true,
+    "noHistoricalCauseProof": true
+  },
+  "review": "4936c033588b9644fa04af085007d2900897b882",
+  "rulings": [
+    "1fa82c9895bcb8b515de00f53d99e84a8b6a042d",
+    "713834d1311f4cd888f8505f67441fe622325077"
+  ],
+  "fixtures": {
+    "original59": {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/scenarios.json",
+      "mode": "100644",
+      "bytes": 15741,
+      "sha256": "6f51b5c2cdf68fb98a15022de9b79a95dcc3c8081bb4e641626cda685322f665",
+      "blob": "0625f0864da7c70f6a9b6abf0fb989c36fae22f6"
+    },
+    "seal": {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/fixture-seal.json",
+      "mode": "100644",
+      "bytes": 3004,
+      "sha256": "2c0227e4411358e03fcb439abf43391f4e2bcfe54669fa21d770efb88b28694e",
+      "blob": "b00113ce95aca4c1ab95dfa7cfdf83d298e839d1"
+    },
+    "checker": {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/check-scenarios.mjs",
+      "mode": "100644",
+      "bytes": 2103,
+      "sha256": "bc4c9cebcfb098a60e5f6906f207343ece44a929dca9365aff016f844ed64da6",
+      "blob": "7ed4423a7ee9adba3ea6455111d88dd7d147165f"
+    },
+    "new63SealedBeforeNewSites": {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/scenarios-63.json",
+      "mode": "100644",
+      "bytes": 17457,
+      "sha256": "bb2383a06cb2c7a08ae248371b5ea06cbf597ee15689a98c4eba03cd64c0b709",
+      "blob": "a78efb5290deb184c70fc4282bf438d818d02588"
+    },
+    "stageAExecuted": 1,
+    "stageASealedNotExecuted": 58,
+    "stageBExecuted": 0
+  },
+  "toolingIndex": {
+    "path": "DETACHED:nativeIx.json",
+    "mode": "100644",
+    "bytes": 15367,
+    "sha256": "4620bb3d8f09f738adac10639fe1e63dbe2cbc212f09402579f12dff47c302a6",
+    "blob": "a1dc2376bd54154015f76a70ce732b5325aa581a"
+  },
+  "businessIndex": {
+    "path": "DETACHED:busIx.json",
+    "mode": "100644",
+    "bytes": 12468,
+    "sha256": "c8ab15d91307cfac9cefdbd40d7313a689ab4dfa73cf5387a20fef684a981384",
+    "blob": "fae315e9ceae442a658b361ba31f5adfa6d95d4d"
+  },
+  "protocol": {
+    "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/protocol-contract.json",
+    "mode": "100644",
+    "bytes": 59226,
+    "sha256": "1d2da1a8e853055f22cedbebb4dd813228f7641396409170c586805b6f2a9587",
+    "blob": "6349fd2706b084e3c56309d6aac00a469310e73a"
+  },
+  "nativeProofSchema": {
+    "path": "DETACHED:tool-proof-schema.json",
+    "mode": "100644",
+    "bytes": 4942,
+    "sha256": "5b78a23bd1e0afb02c85e810a7ee2f9306613a72fbae57e3e4729b29ca35e817",
+    "blob": "0ccaf3d02cc50145e5afab4557ebdb259af60600"
+  },
+  "selection": {
+    "file": {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/mode-selection.json",
+      "mode": "100644",
+      "bytes": 5173,
+      "sha256": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4",
+      "blob": "8fe9907fb12fb71361819551df04c2830a78452b"
+    },
+    "canonicalBytes": 4127,
+    "canonicalSha256": "09f9928830b63294f7ed27b00ea2a9593477fda2d6d0f7300e536faa5cd0bd27"
+  },
+  "adapters": {
+    "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/collection-adapters.mjs",
+    "mode": "100644",
+    "bytes": 35151,
+    "sha256": "7a6adaefbaffab94258323fe214ad9d45f23816fed8a9e6f0d508cd03cdbf00e",
+    "blob": "f1a26313b53079fa9a88340e15d86024d24f4cbf"
+  },
+  "source13": {
+    "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/source-index.json",
+    "mode": "100644",
+    "bytes": 11559,
+    "sha256": "1da326e60821aec91c7635a227b42f14b0710a3a2d5fb6f8764722fbbaa3d141",
+    "blob": "fc5b71098da76696278765f43805f0f2a1953b22"
+  },
+  "reversibles": {
+    "path": "DETACHED:reversibles.json",
+    "mode": "100644",
+    "bytes": 6532,
+    "sha256": "4028d6808e453ff3682462949c1d7ae84c2bb89312d954403d8508f81f98f42c",
+    "blob": "59289f6688d0cb3c49ee738cbc700769c7251a21"
+  },
+  "graph": {
+    "path": "DETACHED:bound-graph.json",
+    "mode": "100644",
+    "bytes": 2697,
+    "sha256": "13d17422a5082428a0ed10e43f5c06144ee57ce99967b3fb8d66be7cf5cd8629",
+    "blob": "df498ee7a25748a2e6e05fcbd7aff8c3c5ca3571"
+  },
+  "mounts": {
+    "tools": 34,
+    "business": 25,
+    "distinct": 36,
+    "fullyRead": true
+  },
+  "verification": {
+    "bodyContent": {
+      "newOrSealed": 20,
+      "inheritedVerifiedAgain": 16,
+      "unique": 36
+    },
+    "fixedIndex": {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/source-index.json",
+      "mode": "100644",
+      "bytes": 11559,
+      "sha256": "1da326e60821aec91c7635a227b42f14b0710a3a2d5fb6f8764722fbbaa3d141",
+      "blob": "fc5b71098da76696278765f43805f0f2a1953b22"
+    },
+    "C1": {
+      "offset": 7047,
+      "newOffset": 7051,
+      "bytes": 7055,
+      "sha256": "6e8a25ad347866935c50bf52131b78dbfe993f86d592bdbb3e76bb3278c5e29f"
+    },
+    "finiteGetRegion": {
+      "bytes": 9233,
+      "sha256": "19c8ceb6317ca16eae7e335a392ad05c21f58f2ed5405f8483674f3738e5020b",
+      "blob": "19d1f709a8d1a0fb014cc6052cd7cbf2fbb25f71"
+    },
+    "driver": {
+      "path": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+      "git": "9e29c5197207b03bdb4b10069089f37df289e88c"
+    },
+    "regTail": {
+      "originalOffset": 991,
+      "driverOffset": 1375,
+      "bytes": 1794,
+      "sha256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a"
+    },
+    "recorder": {
+      "path": "test/finite-green-progress-recorder.mjs",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e",
+      "git": "662ec8170bbfe81831b557824d1a466e722842d7"
+    },
+    "unchangedSlots": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      11,
+      12
+    ]
+  },
+  "implemented": [
+    "S08 reads exact case15 first POST marker before original noFurther and seals existing returned actor state before original puts assertion. No additional business RPC/snapshot/wait/poll. Only main opted harness; negative reopen uses ordinary fixture.",
+    "S09 same QA/M helper factories for actual worker fixture, Node model and native synthetic workers, once-only epoch/request/Q and request/cell/lease/error/B ownership including early deadline without QA catch. Canonical q1/o1 errors only.",
+    "S10 real provisional ns + ordinary prepared sibling byte equality; strict generated Error/caller segment offsets, unique original guard text, entity/UTF16 and script key checks. No nearest match. Read native proof independently.",
+    "Actual R4 capture/driver/projections retained, fail-closed four-key dropWinner appended. Open and closed case15 join rules in protocol. Six named anchors; lease labels identify whole guard only.",
+    "Single bounded tooling child uses fixed old/new adapters for 14 differential cases, all 63 independent literal scenarios and 16 separate Miniflare/workerd calibration/transport checks. Private in-memory source maps."
+  ],
+  "executed": [
+    "Git DATA comparison only. Every new descriptor, index and complete body FULL-readback matched UTF8 total/SHA256/Git SHA1. Original 16 inherited blobs re-read and remeasured. Data-only verification of all 13 canonical targets against all runner/index pins, original two S08 lines and unchanged C1/finiteGet blocks."
+  ],
+  "pendingCommands": [
+    {
+      "stage": "native tooling",
+      "command": "node docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+      "prerequisites": [
+        "independent SPEC/QUALITY + Root admission",
+        "ubuntu-24.04, Node22.23.4, npm ci --ignore-scripts --no-audit --no-fund"
+      ],
+      "expected": "63 model, 14 R4 equivalence/collector controls, 16 wire/calibration, >=2 unique simultaneous generated-site anchors. A valid UNSUPPORTED report is not a pass."
+    },
+    {
+      "stage": "future business",
+      "command": "node docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+      "prerequisites": [
+        "native and independent tooling readback review and separate OWN + Root delivery gate",
+        "bind actual controlled-transport proof + independent ruling as measured native-release.json in revised non-activated packet; current transportRelease null forces UNKNOWN",
+        "separate one-use admission; no historical replay"
+      ],
+      "caps": "20 in canonical order; child180s/total330s/job7min"
+    }
+  ],
+  "risk": [
+    "The generated script frame/column conventions, the installed Miniflare transport and complete fixture syntax/build were not executed locally. GitHub is the first code execution for this stage. Unsupported compiler or wire evidence cannot authorize business or PC-off.",
+    "A fallback copying valid fields is indistinguishable by value. QA and M transport premises need independent closed-route review. The staged business runner cannot attribute while these gates are unbound.",
+    "The two additional request/child lease sites leave individual rejecting conjunct and business cause unresolved. Model cutoff and controls do not establish native coverage."
+  ],
+  "sourceExecution": false,
+  "rawHistoricalScalarRecovered": false,
+  "newRefs": false,
+  "toolingReleased": false,
+  "businessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
