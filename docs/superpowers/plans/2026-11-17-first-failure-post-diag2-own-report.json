@@ -1,0 +1,291 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-OWN-DESIGN/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+  "authority": {
+    "parentTask": "/root/c2_v2_own_receiver_fix1",
+    "sourcePlan": "0a04e29e7a72c4ef853942fc6f7093416c9e9a71",
+    "sourceContract": {
+      "blob": "5b2cdf009fb5a6ba3c05350d49d05cf6c4c1d5ea",
+      "bytes": 234496,
+      "sha256": "90215654ee2ef860a0f5f936d0157a1a45cbb31b02449f5efbfba7e42068b9b5",
+      "status": "DRAFT_FOR_ROOT_ACCEPTANCE",
+      "fullReadback": true
+    },
+    "sourceContractAcceptedByRoot": false,
+    "newTrialAuthorized": false
+  },
+  "evidence": {
+    "sourcePlan": "0a04e29e7a72c4ef853942fc6f7093416c9e9a71",
+    "actualOutcome": "f39f7e43c4010acbaca7a679d61dbe048da24688",
+    "actualReview": "e62f6352e8761a3a71d4e781950892291ba68a52",
+    "actualPrimary": "24794a48d76fcfb81d36d3f75497b6d46551f43a",
+    "observed": "19 native results=14PASS/5FAIL; earliest observed throw sequence46 NOTICES/action ERR_ASSERTION exactS08:41:12; OWN_PROMISE entered at176469ms then child180s timeout.",
+    "actualHttpStatus": null,
+    "actualCounters": null,
+    "cause": null,
+    "limit": "No numeric status/counters in actual artifact; never infer503/zero from other runs or retrofit fields. Prior124/419 remain historical coverage only."
+  },
+  "inventory": [
+    {
+      "role": "entrypoint",
+      "blob": "f844dd8789012b95edaf0aec4db20edea885a4ca",
+      "use": "new versioned family shell only; old schema/markers/fixed pins cannot admit successor"
+    },
+    {
+      "role": "partial replay",
+      "blob": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7",
+      "use": "ordered20 journal reducer, stable-prefix/UNKNOWN priority, earliest throw and same-case action/count N2; preserve AFTER separation"
+    },
+    {
+      "role": "transport",
+      "blob": "abab6d90b74c87428102d96f31d3e250f374e27a",
+      "use": "actual API numeric command/time join, raw tree Root-edge admission, canonical markers and strict actual ZIP parser incl fullDeflate; isolate old family constants"
+    },
+    {
+      "role": "fixed/schema",
+      "blob": "7a8f434f9f486d3c01fa1229041ba4d5b2e0b0e7",
+      "use": "inventory only; new family must explicitly nominate successor Source13/schema/selection/manifest rather than normalize metadata"
+    }
+  ],
+  "protocol": {
+    "schemaIdentifier": "afw.c2-first-failure-post-diag2.v1",
+    "orderedKeys": [
+      "schema",
+      "state",
+      "reason",
+      "throwSequence",
+      "source",
+      "assertion"
+    ],
+    "sourceKeys": [
+      "id",
+      "status",
+      "phase",
+      "counters",
+      "code"
+    ],
+    "assertionKeys": [
+      "actual",
+      "expected"
+    ],
+    "reasonEnums": {
+      "KNOWN": [
+        "TARGET_POST_ASSERTION"
+      ],
+      "NOT_APPLICABLE": [
+        "EARLIEST_THROW_DIFFERENT",
+        "EARLIER_NATIVE_FAILURE",
+        "TARGET_PASSED",
+        "NO_QUALIFYING_THROW"
+      ],
+      "UNKNOWN": [
+        "JOURNAL_UNRESOLVED",
+        "TARGET_NATIVE_UNAVAILABLE",
+        "COUNTER_UNAVAILABLE",
+        "SOURCE_ROW_UNAVAILABLE",
+        "ASSERTION_SCALARS_UNAVAILABLE",
+        "UNSUPPORTED_SCALARS",
+        "NATIVE_FORMAT_UNSUPPORTED",
+        "AMBIGUOUS_EVIDENCE",
+        "CONFLICTING_EVIDENCE",
+        "TRUNCATED_NATIVE"
+      ]
+    },
+    "states": {
+      "KNOWN": "Earliest validated-PREFIX throw is NOTICES/action/AssertionError/ERR_ASSERTION/S08:41:12; current native first11PASS plus their action/count returns, native[11]NOTICESfail and target countreturn. Exactly one canonical source row fail/notices/TEST_FAILED and one unambiguous assertion expected200/actual finiteint100..599!=200. All admitted counters individually finiteint0..3. Complete candidate remains usable despite unrelated later torn/unknown journal suffix; no global-order claim.",
+      "UNKNOWN": "Missing/cut candidate, unresolved no-throw prefix, missing native/count/row/assertion, ambiguous/truncated/unsupported candidate evidence. reason admitted; throwSequence/source/assertion allnull. Outer valid-prefix firstThrowSequence remains preserved.",
+      "NOT_APPLICABLE": "Earliest validated-prefix throw differs; earlier native failure; proven targetPASS+returns; or cleancomplete20+AFTER without qualifying throw. Exact admitted reason; same nulls. No override of inheritedN2.",
+      "FAULT": "Inherited N2/provenance/schema/transport faults remain fatal. KNOWN with contradictory joins/values rejects. Enforce conditional nullability semantically rather than silently ignoring unsupported schema if/then."
+    },
+    "counterLimit": "Only per-key bounds0..3; no hierarchy/monotonicity/delta/beforeEXTRA_KEY. Unexpected tuple[0,3,1] is admissible DATA, not cause/receipt proof. Aggregate tuple alone cannot show new-effects absence or pre/post-effect path.",
+    "observationKeyOrder": [
+      "capture",
+      "journal",
+      "witness",
+      "unknownReason",
+      "firstThrowSequence",
+      "native",
+      "firstFailure"
+    ],
+    "countersKeys": [
+      "upload",
+      "activation",
+      "receipts"
+    ],
+    "firstFailureBodyBytes": 512,
+    "fragmentSha256": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+    "markers": [
+      "AFW_C2_FIRST_FAILURE_POST_DIAG2_CUSTODY",
+      "AFW_C2_FIRST_FAILURE_POST_DIAG2_OUTCOME"
+    ],
+    "faultMarker": "AFW_C2_FIRST_FAILURE_POST_DIAG2_FAULT"
+  },
+  "trust": {
+    "caller": "Root supplies separate expected repository/branch/WF/message/job/parent/head/tree/run/job/steps and measured bodyEdges(path,mode,blob,bytes,SHA256), canonical hash, successor Source13/index/schema/selection/manifest. Outcome never chooses authority. No head/tree/run/job or Source pins invented.",
+    "outer": "Keep exact outer keys[run,jobs,commit,tree,transport,artifact]; retain unique actual numeric command-step/time, ordered20 replay, TARGET13 before/after, custody2, canonical log+payloadLF and strict actual ZIP(fullDeflate/CRC/member/size/digest/descriptor/TLV/version). New family explicit constants, old receipts untouched. TARGET13 arrays are producer-emitted measurements compared with RootSource13, not independent OWN filesystem reads; canonical TARGET is distinct from preserved BASE Git paths.",
+    "N1": "Projection must be inside actual admitted numeric command/time interval; no declared step or parseNaN acceptance.",
+    "N2": "NativePASS with reliable same-case action/countthrow rejects even underUNKNOWN; FAILwithreturns or separateAFTERthrow can bevalid.",
+    "collector": "Actual rawTAP is absent. Source collector grammar/duplicate/nesting/scalar controls need pinned implementation and admitted Node22toy; OWN validates exported metadata joins and actualAPI/Git/ZIP, not privateRAW. Coherent503->429 rebind can be structurally valid: no invented rejection/authentication.",
+    "caps": "Full20 order; case120000/child180000/total330000ms/job7min; no new hook/RPC/business call/raw export or cap change."
+  },
+  "fixtureFirst": {
+    "status": "PROPOSED_DESIGN_NOT_EXECUTED",
+    "count": 40,
+    "counts": {
+      "KNOWN": 6,
+      "NOT_APPLICABLE": 6,
+      "UNKNOWN": 7,
+      "REJECT_SEMANTIC": 15,
+      "REJECT_TRANSPORT": 6
+    },
+    "catalogue": {
+      "blob": "e01fc7fa1737d6498b70fc866a41ab64ae04c345",
+      "bytes": 6992,
+      "sha256": "b9f07c699857e299ada9c019f6f60b6a35e9ae1e4326c5baa1477a959d930dce",
+      "gitSha": "e01fc7fa1737d6498b70fc866a41ab64ae04c345",
+      "fullReadback": true
+    },
+    "plan": "After Root wire acceptance, seal literal complete synthetic caller/API/tree/log/custody/outcome/rawZIP base+IDs/expectations before any guard. Refresh canonical JSON/LF/log/ZIPCRC/digest/full compressed byte metadata coherently; caller expected authority remains fixed in negative joins. Mark every model fictitious.",
+    "red": "Old124 new-family incompatibility RED is expected, not executed and not evidence of a semantic old bug. Add isolated algorithm beforeimages only where meaningful; no Source execution or absent-RAW oracle.",
+    "native": "New focused controls only; no whole124/419/W1 reruns and no inherited native coverage credit.",
+    "supersededDesigns": [
+      {
+        "blob": "c4826bdf1fa0495b533fa7a2a7f82d2e6f52592c",
+        "status": "superseded design/no execution"
+      },
+      {
+        "blob": "1c01d47e3fc8531d09600226e892b504443d70ba",
+        "status": "superseded conservative design/no execution"
+      }
+    ]
+  },
+  "minimalPlan": [
+    "Accept exact Source DATA contract/schema/order/reasons and Node22 grammar/toy gate; no implementation authorized by this report.",
+    "On explicit release: sealed fixtures first, original OWN semantic join/new family constants while reusing reviewed transport/replay primitives.",
+    "Root supplies definitive collector/runner/WF/adapters/successorSource13/finalBodyAdmission, then actual context only after it exists; do not block design on future IDs or guess values.",
+    "OWN-only RAM then full immutable diff/reversibles/native graph/proof/runner/WF packet; parent native admission and fresh review before any future actual capture."
+  ],
+  "compatibilityReview": {
+    "status": "DESIGN_COMPATIBLE_PENDING_ROOT_ACCEPTANCE_AND_FORMAT_GATE",
+    "reference": "5b2cdf009fb5a6ba3c05350d49d05cf6c4c1d5ea",
+    "componentHashes": {
+      "schema": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+      "corpus": "15d470df5e7ed5350bdedb333236f648c86e69c844e5784d1d8478f6ebac5aaf",
+      "toy": "d81ae8472305d9a90d5f7b971f836825712bf3a65b91e784c93ff97b0c9b50ec",
+      "ids": "f6718c2d0852789be60249467a37211eca1bffe17a73bb430da8e698a34d2354"
+    },
+    "literalDataAudit": {
+      "rows": 35,
+      "allStdoutSealsMatch": true,
+      "allObservationRefsPresent": true,
+      "mismatches": [],
+      "operation": "inert JSON/string/hash only, no projection/parser evaluated"
+    },
+    "agreed": [
+      "Required additive observation.firstFailure after native; oldDIAG1 untouched.",
+      "Exact six metadata keys, Source5keys/counters3keys/assertion2keys, reason enums and512B cap within original outcome cap.",
+      "KNOWN only exactNOTICES candidate in validatedprefix + current first11 nativePASS + targetnativefail/countreturn; later torn journal suffix does not erase completed candidate.",
+      "No-throw NA only cleancomplete20+AFTER; cut candidateUNKNOWN; inherited N2/provenance fatal.",
+      "Only counter0..3 bounds; no EXTRA_KEY/delta or ordering relation.",
+      "PrivateRAW ambiguity checked by pinned collector/toy controls; OWN cannot authenticate absentRAW or coherent503->429.",
+      "ActualG20 remains14PASS5FAIL/prefix19 with no numericHTTP/counters; no historical fill."
+    ],
+    "calibrationClarification": {
+      "id": "C1_ASYNC_TOY_SEAM",
+      "evidence": {
+        "D07": {
+          "bytes": 3169,
+          "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+          "gitSha": "9e29c5197207b03bdb4b10069089f37df289e88c"
+        },
+        "lines": [
+          15,
+          18
+        ]
+      },
+      "observation": "D07 awaits work and counts; proposed toy async callback has no await and sets counters synchronously. Relative console/Subtest placement can depend on scheduling; this is a future calibration question, not a proved collector/runtime defect.",
+      "minimalResolution": "Do not require a SourceRow's physical position relative to its Subtest; independently join ordered SourceRows and exact nativeordinal/block. If implementation would impose such a position, first calibrate both immediate and await-yield synthetic work/count variants using original-error rethrow, without Source imports/business calls.",
+      "gate": "Root acceptance before parser code; separately nominated actualNode22toy before fixed grammar. No extra business trial."
+    },
+    "pending": [
+      "Root accepts exact design and resolves C1 as explicit grammar/gate condition.",
+      "Outer full schema/selection/Source13 successor/body edges/collector/runner/WF/adapters/fixture/toy proof final pins remain future Root DATA.",
+      "Actual nomination/head/tree/run/job remain future caller expectation; no null as wildcard."
+    ]
+  },
+  "fullReadInputHashes": [
+    {
+      "key": "d2_plan",
+      "bytes": 24507,
+      "sha256": "73727ae12b042a8c449108c9ef799dc5d9f95c88243d9e2c2be298d9009c30cf",
+      "gitSha": "0a04e29e7a72c4ef853942fc6f7093416c9e9a71"
+    },
+    {
+      "key": "d2_actualReview",
+      "bytes": 17974,
+      "sha256": "4b1cca5edab75483ec2b0104fce7c4e9ac6a62c5097885ed1226fdc010209097",
+      "gitSha": "e62f6352e8761a3a71d4e781950892291ba68a52"
+    },
+    {
+      "key": "d2_outcome",
+      "bytes": 13809,
+      "sha256": "e842015117d7a68d58578d0ab7f4c16f933d1cc802e0e62dae6b0edbe2b18fe3",
+      "gitSha": "f39f7e43c4010acbaca7a679d61dbe048da24688"
+    },
+    {
+      "key": "d2_oldReader",
+      "bytes": 3285,
+      "sha256": "b77e7000a500a3cfba93f4d832dddef5f94516d65ee76bbb7b91598afe775935",
+      "gitSha": "f844dd8789012b95edaf0aec4db20edea885a4ca"
+    },
+    {
+      "key": "d2_oldPartial",
+      "bytes": 4511,
+      "sha256": "518d43f9aa99c55b1fb5b11ffe6638b4112aff4d11a00d7556e882fb8b29bd72",
+      "gitSha": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7"
+    },
+    {
+      "key": "d2_oldTransport",
+      "bytes": 9634,
+      "sha256": "62868cb5bc8a2dc63eeb0e2750c718f37f3cac6b0458a06e53ba7762a6156353",
+      "gitSha": "abab6d90b74c87428102d96f31d3e250f374e27a"
+    },
+    {
+      "key": "d2_sourceContract",
+      "bytes": 234496,
+      "sha256": "90215654ee2ef860a0f5f936d0157a1a45cbb31b02449f5efbfba7e42068b9b5",
+      "gitSha": "5b2cdf009fb5a6ba3c05350d49d05cf6c4c1d5ea"
+    },
+    {
+      "key": "D07DataOnly",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+      "gitSha": "9e29c5197207b03bdb4b10069089f37df289e88c"
+    }
+  ],
+  "performed": {
+    "immutableReads": true,
+    "designDataOnly": true,
+    "codeImplemented": false,
+    "testsExecuted": 0,
+    "nativeRuns": 0,
+    "sourceExecution": false,
+    "refsChanged": false,
+    "filesWritten": false,
+    "providerCalls": false,
+    "logOrArtifactRepoll": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

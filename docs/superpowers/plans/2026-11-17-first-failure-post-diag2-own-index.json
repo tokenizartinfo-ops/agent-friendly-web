@@ -1,0 +1,71 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-OWN-DESIGN-INDEX/1",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "status": "DESIGN_ONLY_READY_FOR_ROOT_RECONCILIATION",
+  "authority": "Parent task design only; no code/native/business release",
+  "sourceDesign": {
+    "bytes": 234496,
+    "sha256": "90215654ee2ef860a0f5f936d0157a1a45cbb31b02449f5efbfba7e42068b9b5",
+    "gitSha": "5b2cdf009fb5a6ba3c05350d49d05cf6c4c1d5ea"
+  },
+  "artifacts": [
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-design/report.json",
+      "mode": "100644",
+      "blob": "eda4f0eee9c97dc733ef090b3a7d91e037f6936a",
+      "bytes": 14479,
+      "sha256": "4edbde65bddf48243202227db888366977d9d5cf6f2d4a30b0a5cd53eae9815e",
+      "gitSha": "eda4f0eee9c97dc733ef090b3a7d91e037f6936a",
+      "fullReadback": true
+    },
+    {
+      "path": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-design/proposed-census.json",
+      "mode": "100644",
+      "blob": "e01fc7fa1737d6498b70fc866a41ab64ae04c345",
+      "bytes": 6992,
+      "sha256": "b9f07c699857e299ada9c019f6f60b6a35e9ae1e4326c5baa1477a959d930dce",
+      "gitSha": "e01fc7fa1737d6498b70fc866a41ab64ae04c345",
+      "fullReadback": true
+    }
+  ],
+  "allBytes": 21471,
+  "superseded": [
+    {
+      "blob": "c4826bdf1fa0495b533fa7a2a7f82d2e6f52592c",
+      "bytes": 6474,
+      "sha256": "607019904c3da70aae4aa6cdbd8f5c8da25a1f64d832d96cf7cc38d647ba5fa6",
+      "status": "superseded design/no execution"
+    },
+    {
+      "blob": "1c01d47e3fc8531d09600226e892b504443d70ba",
+      "bytes": 6760,
+      "sha256": "903249f4b69023a513d51d1c3e2fed5d129dcf21434278ad64f5332d0c97c654",
+      "status": "superseded conservative design/no execution"
+    }
+  ],
+  "plannedControls": 40,
+  "executedControls": 0,
+  "implementation": false,
+  "nativeRuns": 0,
+  "sourceExecution": false,
+  "refsChanged": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "pending": [
+    "Root accepts contract/OWNplan",
+    "C1 async toy placement condition",
+    "definitive Source13 successor/body/schema/selection/collector and toy actual proof",
+    "caller actual nomination/head/tree/run/job"
+  ],
+  "next": "After Root explicit implementation release: immutable literal full-input fixtures/IDs before guard; independent OWN TDD and bounded packet/native gate. Current role returns IDLE."
+}

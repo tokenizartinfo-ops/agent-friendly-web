@@ -1,0 +1,223 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-OWN-PROPOSED-CENSUS/1",
+  "status": "DESIGN_ONLY_NOT_EXECUTED",
+  "targetFamily": "FIRST_FAILURE_POST_DIAG2",
+  "plannedCount": 40,
+  "counts": {
+    "KNOWN": 6,
+    "NOT_APPLICABLE": 6,
+    "UNKNOWN": 7,
+    "REJECT_SEMANTIC": 15,
+    "REJECT_TRANSPORT": 6
+  },
+  "cases": [
+    {
+      "id": "OWN_D2_K01",
+      "expect": "KNOWN",
+      "model": "503 with counters [2,2,2]; eligible earliest NOTICES action; native fail ordinal12/count return; timeout prefix19 and case20 open"
+    },
+    {
+      "id": "OWN_D2_K02",
+      "expect": "KNOWN",
+      "model": "429 with [1,1,1]; no comparison with EXTRA_KEY"
+    },
+    {
+      "id": "OWN_D2_K03",
+      "expect": "KNOWN",
+      "model": "500 with [2,1,1]; partial aggregate effects remain observable"
+    },
+    {
+      "id": "OWN_D2_K04",
+      "expect": "KNOWN",
+      "model": "599 with [3,3,3]; inclusive scalar/counter upper bounds"
+    },
+    {
+      "id": "OWN_D2_K05",
+      "expect": "KNOWN",
+      "model": "400 with [0,3,1]; independently bounded counters; no invented ordering relation"
+    },
+    {
+      "id": "OWN_D2_A01",
+      "expect": "NOT_APPLICABLE",
+      "model": "NOTICES native pass, action/count return"
+    },
+    {
+      "id": "OWN_D2_A02",
+      "expect": "NOT_APPLICABLE",
+      "model": "clean complete journal all20 plus AFTER with no qualifying throw"
+    },
+    {
+      "id": "OWN_D2_A03",
+      "expect": "NOT_APPLICABLE",
+      "model": "earliest throw belongs to another case"
+    },
+    {
+      "id": "OWN_D2_A04",
+      "expect": "NOT_APPLICABLE",
+      "model": "earliest throw is count rather than action"
+    },
+    {
+      "id": "OWN_D2_A05",
+      "expect": "NOT_APPLICABLE",
+      "model": "earlier native failure despite earliest journal throw at NOTICES"
+    },
+    {
+      "id": "OWN_D2_A06",
+      "expect": "NOT_APPLICABLE",
+      "model": "earliest NOTICES action throw has a different site/code"
+    },
+    {
+      "id": "OWN_D2_U01",
+      "expect": "UNKNOWN",
+      "model": "eligible action throw followed by count throw"
+    },
+    {
+      "id": "OWN_D2_U02",
+      "expect": "UNKNOWN",
+      "model": "eligible action throw before count settlement"
+    },
+    {
+      "id": "OWN_D2_U03",
+      "expect": "UNKNOWN",
+      "model": "eligible action throw but native prefix has not reached ordinal12"
+    },
+    {
+      "id": "OWN_D2_U04",
+      "expect": "UNKNOWN",
+      "model": "honest journal/native prefix before NOTICES with no qualifying throw"
+    },
+    {
+      "id": "OWN_D2_U05",
+      "expect": "UNKNOWN",
+      "model": "eligible joined case; producer reports missing canonical source row"
+    },
+    {
+      "id": "OWN_D2_U06",
+      "expect": "UNKNOWN",
+      "model": "eligible joined case; producer reports missing assertion scalars"
+    },
+    {
+      "id": "OWN_D2_K06",
+      "expect": "KNOWN",
+      "model": "eligible complete NOTICES candidate in validated journal prefix plus later torn/unknown suffix; preserve outer firstThrow and claim prefix scope only"
+    },
+    {
+      "id": "OWN_D2_U08",
+      "expect": "UNKNOWN",
+      "model": "eligible joined case; producer reports ambiguous/truncated/unsupported scalar input"
+    },
+    {
+      "id": "OWN_D2_R01",
+      "expect": "REJECT",
+      "model": "KNOWN throwSequence does not point to independently earliest eligible throw of the validated journal prefix"
+    },
+    {
+      "id": "OWN_D2_R02",
+      "expect": "REJECT",
+      "model": "KNOWN lacks exact native ordinal12 NOTICES fail"
+    },
+    {
+      "id": "OWN_D2_R03",
+      "expect": "REJECT",
+      "model": "native PASS contradicts same-case action/count throw (inherited N2)"
+    },
+    {
+      "id": "OWN_D2_R04",
+      "expect": "REJECT",
+      "model": "KNOWN source id differs from NOTICES"
+    },
+    {
+      "id": "OWN_D2_R05",
+      "expect": "REJECT",
+      "model": "KNOWN source phase differs from notices"
+    },
+    {
+      "id": "OWN_D2_R06",
+      "expect": "REJECT",
+      "model": "KNOWN source status/code differs from fail/TEST_FAILED"
+    },
+    {
+      "id": "OWN_D2_R07",
+      "expect": "REJECT",
+      "model": "KNOWN assertion actual equals expected200"
+    },
+    {
+      "id": "OWN_D2_R08",
+      "expect": "REJECT",
+      "model": "KNOWN actual99"
+    },
+    {
+      "id": "OWN_D2_R09",
+      "expect": "REJECT",
+      "model": "KNOWN actual600"
+    },
+    {
+      "id": "OWN_D2_R10",
+      "expect": "REJECT",
+      "model": "KNOWN scalar noninteger/string or expected differs from200"
+    },
+    {
+      "id": "OWN_D2_R11",
+      "expect": "REJECT",
+      "model": "source/assertion/projection extra keys or nested object replaces scalar"
+    },
+    {
+      "id": "OWN_D2_R12",
+      "expect": "REJECT",
+      "model": "UNKNOWN/NOT_APPLICABLE carries nonnull throwSequence/source/assertion"
+    },
+    {
+      "id": "OWN_D2_R13",
+      "expect": "REJECT",
+      "model": "counter below0/above3/noninteger"
+    },
+    {
+      "id": "OWN_D2_R14",
+      "expect": "REJECT",
+      "model": "counter object misses or adds a normative key"
+    },
+    {
+      "id": "OWN_D2_R15",
+      "expect": "REJECT",
+      "model": "KNOWN declares first failure despite earlier native failure"
+    },
+    {
+      "id": "OWN_D2_F01",
+      "expect": "REJECT",
+      "model": "coherent payload/log/ZIP rebound to head/tree differing from caller expected"
+    },
+    {
+      "id": "OWN_D2_F02",
+      "expect": "REJECT",
+      "model": "coherent new-family body edge missing/duplicated/mismatched in raw Git tree"
+    },
+    {
+      "id": "OWN_D2_F03",
+      "expect": "REJECT",
+      "model": "valid-looking projection appears outside actual numeric command step/time window"
+    },
+    {
+      "id": "OWN_D2_F04",
+      "expect": "REJECT",
+      "model": "coherent outcome embeds invalid two-launch custody partition"
+    },
+    {
+      "id": "OWN_D2_F05",
+      "expect": "REJECT",
+      "model": "TARGET before/after13 arrays differ from trusted successor Source13"
+    },
+    {
+      "id": "OWN_D2_F06",
+      "expect": "REJECT",
+      "model": "correct payload/digest/CRC but extra trailing compressed bytes fail fullDeflate"
+    }
+  ],
+  "scope": "OWN safe-projection joins and inherited transport only. Private raw-TAP duplicate/nesting/scalar extraction obligations require separate pinned collector/toy controls, not false OWN raw authentication.",
+  "fixtureGate": "Root-accepted exact wire first; immutable literal complete-input/expected-ID seal before guard; all contexts fictitious. This design is not a fixture execution or implementation.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "supersedes": {
+    "blob": "1c01d47e3fc8531d09600226e892b504443d70ba",
+    "reason": "Root clarification conveyed through DATA contract coordinator: complete candidate in validated prefix survives later torn/unknown suffix; candidate cut staysUNKNOWN; NO_QUALIFYING_THROW requires cleancomplete20+AFTER. Replace proposedU07 withK06 before implementation; total40 unchanged."
+  }
+}
