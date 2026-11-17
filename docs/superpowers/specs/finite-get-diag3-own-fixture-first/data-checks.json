@@ -1,0 +1,871 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-INERT-DATA-CHECKS/1",
+  "guardExecuted": false,
+  "SourceCodeExecuted": false,
+  "checks": [
+    {
+      "id": "FG3_K01",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "35613506af65add172a2db34a78c6836606aaa46",
+        "bytes": 41409,
+        "sha256": "45f63b40cfeb66e53894791574260476a7232ac370d2d3e1e578fe2a83ae5c87"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "900bad75e9387f2902c4f3b3871f357c18b093ba",
+        "bytes": 68135,
+        "sha256": "03d9aa840cfd1da0ff3cf7b71e551f7537173455a7ec27f7063591d7034ea2b7"
+      }
+    },
+    {
+      "id": "FG3_K02",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "4c1d8bd95b3c542b5734285ee9b660211b8be829",
+        "bytes": 41401,
+        "sha256": "8fb49dc7e778d760d1ed76fcc7c3c8b88505d51612a1cfbca7adc715433b9b52"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "22d6c562784c696fd35cdf05687d55869385c9ea",
+        "bytes": 68115,
+        "sha256": "bb3a6b8b70b7129902c6110157e02e665d357512126e2981fcf8f8314b66834a"
+      }
+    },
+    {
+      "id": "FG3_K03",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "2e25a7c04ba683cf5f9e7f2204707f9ac1221651",
+        "bytes": 41411,
+        "sha256": "89e6453181c82cb83eb475ab6e535b59fca984985d8d752029d56d994f534b8e"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "a5982453c5fb6cef978f210de204612a63da1756",
+        "bytes": 68120,
+        "sha256": "643721bb12702c7d15e62ad485832580eba80825198a8d290955a801cea45d2b"
+      }
+    },
+    {
+      "id": "FG3_K04",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "e6403b0300dc09e34b2924b23d943cd997822974",
+        "bytes": 41329,
+        "sha256": "d05ad6d014ced140ada586aebc13c1619582d5d96f9e4d37870f0b05a09bbaa9"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "c80d4f9ed5fda9eb06ad15c1a313810d680163a7",
+        "bytes": 68087,
+        "sha256": "a59ce05e9bb9ba42a817f7c438069ea4f11dea337233300adf5a2d74ac9c8d3f"
+      }
+    },
+    {
+      "id": "FG3_I01",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "a9646b66ea6a656e01aa3ca9270009983e21fdf9",
+        "bytes": 41451,
+        "sha256": "9e96edbbc46f7d0d3aeae68b791d89cc91ead254dcbd5fe125d905a4e70cae73"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "9d644d7d3a76394a0cb611f5c3580736ca8e4a84",
+        "bytes": 68160,
+        "sha256": "f3682c676fca16284eb7ae5e37183fc458bc67743f212dbdf109d43a322333c9"
+      }
+    },
+    {
+      "id": "FG3_I02",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "0c89618fbd73c988b8e72caa2872b67d3cfce7ff",
+        "bytes": 41419,
+        "sha256": "f69a4988a078a12bb9509a8a7bae3f46a93c2254da5210590b67a7fc91a8b685"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "2581115799bd89551a80fe09639759f59afe828e",
+        "bytes": 68180,
+        "sha256": "e739f9587bca358355556b729d22707125518c90e8e75e4845b269a757536eb9"
+      }
+    },
+    {
+      "id": "FG3_I03",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "a9a67128c48ba8e029afa86e4da72ac8747fe0fe",
+        "bytes": 37297,
+        "sha256": "95b43087d0d5ed82be0636249c323801f88e3e2aa27d0074a7ad4ea99601b949"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "f7ef9b4846ccc96d6bb417bef787299fb4ca2424",
+        "bytes": 61421,
+        "sha256": "2b13b4a1462d42a18cd7ec343397d2cd5605b168590ede9ef3bce204a6537164"
+      }
+    },
+    {
+      "id": "FG3_P01",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "960707998c5a10b5d8aff974381744a0728b9300",
+        "bytes": 41409,
+        "sha256": "aa87ac19401138991a3a6c8ce0477a1cff0d2dc383f50a3f5e8266dd66dab346"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "109d4e46b9c4166199088af30ceed36048e66e2c",
+        "bytes": 67642,
+        "sha256": "0080cdde7038f6f5fd7d2001c2f8568466e95efbf4351a581d023520591cc524"
+      }
+    },
+    {
+      "id": "FG3_P02",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "9a7c968c1278ae52656c3705f51fc4b30d0367b4",
+        "bytes": 41409,
+        "sha256": "bb1ec62e246f84d3cec12873088a039a4396f8c65449f72aa62ad8466052e068"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "481dbc8d6a6abc65014adad5908c7e64da54c5fd",
+        "bytes": 67626,
+        "sha256": "3057bc8db099e263ab51ad96d896b793f7ddf7c84c1ba7e30187fe44893ba4e4"
+      }
+    },
+    {
+      "id": "FG3_P03",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "a943d7529f7c3c9dd7015ebc3d96472a84720efd",
+        "bytes": 41409,
+        "sha256": "30428b5e119a660e0862b2a08b13f5351c931dd8419017aee5ee3bc18824fb49"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "0bcd83d309441a58ea072584c4e0d05b53b0953e",
+        "bytes": 67447,
+        "sha256": "420a59f2a2040c16f71b0d26ef24b8b92feba2b74321f469258c328d3ab0bf32"
+      }
+    },
+    {
+      "id": "FG3_P04",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "14924ce54da40868b2861be2cd995d5fc11f79fc",
+        "bytes": 41603,
+        "sha256": "89b2c5ffc69387216ed55d7fadf57f7fe8c52dce4b4bc112f5fb6a448e3d7641"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "82eb626ba2c763cabe8cf15dec8e7c069b464739",
+        "bytes": 67949,
+        "sha256": "f0ddf3aeffaa774b1768c9361868fc48454754775e2818a4593d76c62943bb7c"
+      }
+    },
+    {
+      "id": "FG3_B01",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "b4ff07147342ba784c74f5b73f5030959f6773b6",
+        "bytes": 41409,
+        "sha256": "6b1defec60fff69d65349cae7d9f22cdbce881aa47521a974a83315e7e81ba1b"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "4cbcbe0de86f54d4817273ea45f287eb009a95dd",
+        "bytes": 67638,
+        "sha256": "5e58395d343dd6ac76afd0122295df7498c5921765e1065086962fb66899ce82"
+      }
+    },
+    {
+      "id": "FG3_B02",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "3eb30caa2b9b6595b22085be7336a653871ed45d",
+        "bytes": 41433,
+        "sha256": "a37e917b7209e4792062e29b489e599f676f6d040abd8cadc16a8d1bb4979c07"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "34bf231b9b5e06d73307e5123788259591a480d5",
+        "bytes": 68200,
+        "sha256": "8427a3a008b9e4d0d09b8746b015f36084f807d3f9ae20965a6df9bcc4cc4052"
+      }
+    },
+    {
+      "id": "FG3_B03",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "62e41c4261800ed8658b18a262a317215183353d",
+        "bytes": 41409,
+        "sha256": "e89d869a7f262df0932516e1285147461888d21b05a3ef2bf38d0ed6185bab99"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "9d507e0ed5f6d829b723931edb7815ab2fbd1eb2",
+        "bytes": 67678,
+        "sha256": "fb1d0b6a8239411655df57568e4f0ea33546e23247a8044fcc521818cabe11cf"
+      }
+    },
+    {
+      "id": "FG3_B04",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "74801c886846ebe0e2dc38a9dbd896bca6e99b8c",
+        "bytes": 41445,
+        "sha256": "1f7bb6e8353d3fa8aeb359839ddeacfd2105cc7e46378c9b77fbc8f5290d6f92"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "8ef46d444f0958dae5ce7aed912a04d77a0baba4",
+        "bytes": 67448,
+        "sha256": "0c54a44e2c563bda6944895a258c10644ed02b9391042d504717f577bf563617"
+      }
+    },
+    {
+      "id": "FG3_B05",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "37bad5f43c1af58cf03dc8f0733a66bcd93e2e70",
+        "bytes": 41687,
+        "sha256": "9f3fc2e6669c08f862322309d057176026b310b99375746de5268b92dad32d23"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "34d2b2d0ff641f38c4b6bf86e30fbcefd53599ff",
+        "bytes": 68050,
+        "sha256": "8fdc57c4758d39ceb0ea20cbc88c2b2597a3fa60a1f39de96cb9e4dfafe51169"
+      }
+    },
+    {
+      "id": "FG3_S01",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "534857e1a678d48a96e71ec3dc793bfb3262d058",
+        "bytes": 41465,
+        "sha256": "7652059b8b555089238d1d22d2cf230868e1efd1f66fe29dbc276d0373de66c1"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "3266a0900e1f41efbc2be9235b872ffecdc45cf5",
+        "bytes": 67756,
+        "sha256": "72c1f83e35d1e8a5f6a3e788090c4c34974c210f2e345a58f1c4cfb6938a30d3"
+      }
+    },
+    {
+      "id": "FG3_S02",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "6de2c9111d7b50874a6d7d8aa767a152097df345",
+        "bytes": 41437,
+        "sha256": "9acfdd918e2800cc100094a294210f37e2b81f5a3db8f7df4291266d9c37480d"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "9e849a9c90ff1a45ff65f90c8b617a7ab2a74510",
+        "bytes": 67676,
+        "sha256": "cd43e2f7f990b0d086af60a944d73fd95ba5e1e898507ceacd08646f0304a6bf"
+      }
+    },
+    {
+      "id": "FG3_S03",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "936001c187c84ac2b65323c226ec6d7f85f61ce2",
+        "bytes": 41737,
+        "sha256": "2db941b94c1fb594bccb82f09e8b639e9f8bd70d8d07e68b6e7c7b7e6afa56c0"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "084aba655f0c42e92c985f445e79a6d808821b1c",
+        "bytes": 68619,
+        "sha256": "68d69275b2732fd8d91346350f5349040f7db2f452739529c880c36bba536d1a"
+      }
+    },
+    {
+      "id": "FG3_W01",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "b5e3d79ac3e377f2509c9db503bc1a9ddba3a2ee",
+        "bytes": 40535,
+        "sha256": "beacffbfc5dd325dfa10dae089cbec7ffa21bfd81760246c74cc9a4d6b176520"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "655bfb1e6d2afd2609b9be1903cc8a2cdd822472",
+        "bytes": 66757,
+        "sha256": "d3f4944d7596c1cb0f262b75f8ba83271c1afa5812c6ac0ca4d6ddb72dabbcf7"
+      }
+    },
+    {
+      "id": "FG3_W02",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "738fa97cb0ad7dd0a30a7774667ef8c59da8faad",
+        "bytes": 41447,
+        "sha256": "21006909062729b85707186de39b1131421d147aec08ccec8f8a878601d112e8"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "a95b1de2597239a3821a028858a8b0e4d6efe934",
+        "bytes": 67650,
+        "sha256": "99945dbb8353bfaf4646fed9f9a0f9dba566d0264898693b8b179cbea7a6f86d"
+      }
+    },
+    {
+      "id": "FG3_W03",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "8fe04663054c711aeb3f6800a512260b0985f2ce",
+        "bytes": 41405,
+        "sha256": "6a7c78ddb9c9620b183b852117084d64353d132e29f011cdfbb8087a531ef95c"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "2c4bda975d8d1de2b650d352ca22d3f911396167",
+        "bytes": 67633,
+        "sha256": "cd5e9d77cc4e608e060adf584855facc1b817636f33f17112132b549eb1929b6"
+      }
+    },
+    {
+      "id": "FG3_C01",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "10accfe6ff3bc49632d4d75bec26a3c8cf669043",
+        "bytes": 41409,
+        "sha256": "1de732d71f165a4cf7e9076720911a3ebb0d787a1c2f46ff56f8753cc171e7ac"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "a80a8c49b61fe8681d8849ff1d4be6c4f8aa2455",
+        "bytes": 67681,
+        "sha256": "98d2515806da7583ee50c973c6079a5f76e0848ffde703d84fb7609d9fcaf81e"
+      }
+    },
+    {
+      "id": "FG3_C02",
+      "checks": {
+        "inputKeys": true,
+        "trustedKeys": true,
+        "bodyHash": true,
+        "payloadCanonical": true,
+        "payloadCap": true,
+        "zipDigest": true,
+        "zipSize": true,
+        "zipPayload": true,
+        "deflateConsumed": true,
+        "crc": true,
+        "journalHash": true,
+        "journalBytes": true,
+        "stdoutHash": true,
+        "frames": true,
+        "tree25": true,
+        "finiteBytes": true
+      },
+      "input": {
+        "blob": "0f36b649b0b88ae2599ec82d2fa198c6cb524392",
+        "bytes": 41412,
+        "sha256": "26a55ad2e911312380540d7fa484d972f994db1642046184da73508dd6471676"
+      },
+      "trusted": {
+        "blob": "8692dc08f7474c2a0814b02a2e3cf534f7967724",
+        "bytes": 6686,
+        "sha256": "95763a155340b76eae5b1905dcdaf05b1da510c277d37c1bfac87604b8c49e5f"
+      },
+      "fixture": {
+        "blob": "98cca5b43bac54ebd2db70a73c6238254bdd246e",
+        "bytes": 67703,
+        "sha256": "8c43eb7e8a193b6f351cf1c28d4e9f7f60194e1afd5c8dfabb7d67357bbdb0f1"
+      }
+    }
+  ]
+}

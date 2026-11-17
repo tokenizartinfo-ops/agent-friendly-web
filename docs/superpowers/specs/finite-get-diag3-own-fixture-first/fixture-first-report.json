@@ -1,0 +1,134 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-FIXTURE-FIRST-REPORT/1",
+  "status": "DATA_COMPLETE_GUARD_AND_NATIVE_HELD",
+  "family": "FINITE_GET_DIAG3",
+  "ownRound": 3,
+  "maxRounds": 5,
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "designIndex": "d6af36ae35d1abfb5f51476bb8e78a4c1584f820",
+    "plan": "42569afe21ac5153d0d02da438ce8fb23130d591",
+    "census": "68841353d0e1563bcca8116cc3450fa7157bdfba",
+    "peerDesign": "0a61ac955e39fb1572532cca811ef11876490f75",
+    "sourceContract": "609738496d65c21f2cce0c2969ce14f2b64dec07",
+    "sourceCrossChecks": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686"
+  },
+  "fixtureFirst": {
+    "idsPublishedBeforeMaterialization": {
+      "blob": "fd7012bc0daf0faf8d310c6cf8fb49da1d3c29b0",
+      "bytes": 6508,
+      "sha256": "06bd6a0a7c70173b55a5d8cbfeb90650db6128afa14c52557f5960e52dd38bc5"
+    },
+    "newCompleteLiterals": 24,
+    "newAdmit": 9,
+    "newReject": 15,
+    "oldExactFixtures": 44,
+    "oldAdmit": 21,
+    "oldReject": 23,
+    "nativeGroups": 8,
+    "receiverEvaluations": 68,
+    "totalAdmit": 30,
+    "totalReject": 38,
+    "exactAlternativeChoice": "Every new ID fixes one mutation in IDs and fixture.exactMutation. No OR alternative is claimed covered."
+  },
+  "inertAssembly": {
+    "jsonStrings": true,
+    "crypto": true,
+    "builtinZlibForContainer": true,
+    "guardExecuted": false,
+    "SourceCodeReadForExecution": false,
+    "SourceCodeExecuted": false,
+    "SourceImports": false,
+    "filesWritten": 0,
+    "dependencies": 0,
+    "refsWritten": 0,
+    "runsStarted": 0,
+    "guardTestsExecuted": 0,
+    "nativeTestsExecuted": 0,
+    "dataConsistencyChecks": 24,
+    "dataConsistencyAll": true,
+    "meaning": "Container construction and byte/hash consistency only; not RED/GREEN or native receiver coverage."
+  },
+  "bytes": {
+    "newDataBodies": 35,
+    "newDataBytes": 1752996,
+    "newLiteralBytes": 1621371,
+    "oldReuseBytes": 2813260,
+    "maxPayloadBytes": 12943,
+    "maxArchiveBytes": 3068
+  },
+  "bindings": {
+    "type": "EXPLICIT_SYNTHETIC_MODEL_ONLY",
+    "modelAdmission": {
+      "name": "model-admission.json",
+      "blob": "c6cacc5fc19091cdef1c7d8bb43d6c6a195e62a0",
+      "bytes": 13657,
+      "sha256": "4b0e196ad9ab4ca0682c7a609179c94e6c558147ed88cdf83f1cacf905fb0645",
+      "fullReadback": true
+    },
+    "bodyEdgesHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6",
+    "bodyEdges": 25,
+    "frozenDataMetadataReused": 17,
+    "syntheticMeasuredSlots": [
+      0,
+      9,
+      16,
+      17,
+      18,
+      19,
+      23,
+      24
+    ],
+    "modelS08": {
+      "blob": "b6cfe95188a51662b8b121e7a8c6d2bc3a22292e",
+      "bytes": 134,
+      "sha256": "cd1de6c5e4107439cedca4a22d59636e4fc8544d6daf9229ac2a2c331b51e961"
+    },
+    "modelIndex": {
+      "blob": "511175ff2514542501d3c51e8269a0902a6fb54c",
+      "bytes": 3474,
+      "sha256": "b937fbf0c3c022ad05518f17f2808c571349bf3e6780d1c5b59085e896f0b2be"
+    },
+    "selectionHash": "ffed97665d68b0a157286c81d8cf6001ba284c2f21cae9826a643aed6abedbf3",
+    "actualRootExpectedContext": null,
+    "actualRootSource25": {
+      "measurement": "266289bbe7e34d1a323e5140001cd3e8d7232507",
+      "bodyEdgesHash": "273296dc776c8519c4f3644df8827097e44c599460501e099a9d6f42af3a2099",
+      "notAppliedToModels": true,
+      "actualRuntimeReceipt": null
+    },
+    "actualRuntimeReceipt": null,
+    "finalSourceBinding": false,
+    "provisionalSourceAuthorPinsNotUsed": "E3 author DATA pins received during assembly; not silently substituted for eight predeclared synthetic slots. Root actual admission remains a later independent wrapper/context gate."
+  },
+  "oldReuse": {
+    "index": "b5d274852deae3ce7bd1d7c08563d1e6862b8b00",
+    "expectedIds": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+    "unchanged": true,
+    "readbackProvenance": "44 hashes/bytes reused exactly from immutable final70 index and Root previously FULL-verified archive; current stage fetched baseline K01 and index, not all44 again. Never claim new native coverage."
+  },
+  "limits": [
+    "No actual private TAP/C2SOURCE/C2FT3/rows are exported to OWN. Synthetic witness strings are DATA outside input, not an actual raw oracle.",
+    "Known HTTP and joined saturated categories remain pinned-producer assertions plus visible API/journal/native metadata joins, not authentication of hidden source evidence.",
+    "A coherent hidden503→429 or category1→2+ substitution cannot be detected without raw inputs; not claimed as an OWN negative.",
+    "No active/unconsumed ticket, preconnection continuity, subtraction/delta, cause, no-effects, security or fullTask1 claims.",
+    "Model API IDs and2041 timestamps are obviously fictitious; caller expectations are independent of candidate outcomes."
+  ],
+  "pending": [
+    "Root FULLread/hash review of this fixture-first seal.",
+    "Explicit Root guard-code release; none granted yet.",
+    "After explicit code release, consume Root actual25 measurement266289 separately from synthetic fixtures; real caller context still future.",
+    "Only after code release: minimal independent finiteGet semantic layer plus unchanged DIAG2 original44 gate and exactly24 new evaluations; native8groups/68evaluations pending Root."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

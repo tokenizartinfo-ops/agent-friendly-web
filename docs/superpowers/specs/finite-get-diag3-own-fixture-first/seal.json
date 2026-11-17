@@ -1,0 +1,222 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-LITERAL-DATA-SEAL/1",
+  "status": "FIXTURE_FIRST_DATA_COMPLETE_AWAIT_ROOT_RELEASE",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "ownRound": 3,
+  "maxRounds": 5,
+  "ids": {
+    "blob": "fd7012bc0daf0faf8d310c6cf8fb49da1d3c29b0",
+    "bytes": 6508,
+    "sha256": "06bd6a0a7c70173b55a5d8cbfeb90650db6128afa14c52557f5960e52dd38bc5"
+  },
+  "index": {
+    "blob": "c758a24c92519a7928ca8f3d5d7996d59a28e316",
+    "bytes": 51425,
+    "sha256": "edcc0bf503f49f42cc931f37ce245a0cba679a4f77b842ec7e1278b253571716"
+  },
+  "report": {
+    "blob": "d3a01f02e4018d9b0d77d732ad45294428137c4e",
+    "bytes": 5554,
+    "sha256": "4d031336cc26deeef3c9aa6048a3c43393ea03455f367a6c752f718527eda4e9"
+  },
+  "expected": {
+    "name": "expected.json",
+    "blob": "60c82effad3d3be36c42d92c6eeaa6ee0f7877b6",
+    "bytes": 49710,
+    "sha256": "0fac0f0de1e890ea54b9f110fa17f540f74ef508e5a8738430f6187557c7014a",
+    "fullReadback": true
+  },
+  "modelAdmission": {
+    "name": "model-admission.json",
+    "blob": "c6cacc5fc19091cdef1c7d8bb43d6c6a195e62a0",
+    "bytes": 13657,
+    "sha256": "4b0e196ad9ab4ca0682c7a609179c94e6c558147ed88cdf83f1cacf905fb0645",
+    "fullReadback": true
+  },
+  "dataConsistency": {
+    "name": "data-checks.json",
+    "blob": "42dc5d205e4cbd79567ec5bbe3f831c003dbbfae",
+    "bytes": 26318,
+    "sha256": "36e8ae5e97e2d1d659a5a4bd041dca6224d975b6a8b83d13bb13ad5a9ffed098",
+    "fullReadback": true
+  },
+  "counts": {
+    "nativeGroups": 8,
+    "receiverEvaluations": 68,
+    "oldExact": 44,
+    "newComplete": 24,
+    "expectedAdmit": 30,
+    "expectedReject": 38,
+    "newAdmit": 9,
+    "newReject": 15
+  },
+  "newLiteralPins": [
+    {
+      "id": "FG3_K01",
+      "blob": "900bad75e9387f2902c4f3b3871f357c18b093ba",
+      "bytes": 68135,
+      "sha256": "03d9aa840cfd1da0ff3cf7b71e551f7537173455a7ec27f7063591d7034ea2b7"
+    },
+    {
+      "id": "FG3_K02",
+      "blob": "22d6c562784c696fd35cdf05687d55869385c9ea",
+      "bytes": 68115,
+      "sha256": "bb3a6b8b70b7129902c6110157e02e665d357512126e2981fcf8f8314b66834a"
+    },
+    {
+      "id": "FG3_K03",
+      "blob": "a5982453c5fb6cef978f210de204612a63da1756",
+      "bytes": 68120,
+      "sha256": "643721bb12702c7d15e62ad485832580eba80825198a8d290955a801cea45d2b"
+    },
+    {
+      "id": "FG3_K04",
+      "blob": "c80d4f9ed5fda9eb06ad15c1a313810d680163a7",
+      "bytes": 68087,
+      "sha256": "a59ce05e9bb9ba42a817f7c438069ea4f11dea337233300adf5a2d74ac9c8d3f"
+    },
+    {
+      "id": "FG3_I01",
+      "blob": "9d644d7d3a76394a0cb611f5c3580736ca8e4a84",
+      "bytes": 68160,
+      "sha256": "f3682c676fca16284eb7ae5e37183fc458bc67743f212dbdf109d43a322333c9"
+    },
+    {
+      "id": "FG3_I02",
+      "blob": "2581115799bd89551a80fe09639759f59afe828e",
+      "bytes": 68180,
+      "sha256": "e739f9587bca358355556b729d22707125518c90e8e75e4845b269a757536eb9"
+    },
+    {
+      "id": "FG3_I03",
+      "blob": "f7ef9b4846ccc96d6bb417bef787299fb4ca2424",
+      "bytes": 61421,
+      "sha256": "2b13b4a1462d42a18cd7ec343397d2cd5605b168590ede9ef3bce204a6537164"
+    },
+    {
+      "id": "FG3_P01",
+      "blob": "109d4e46b9c4166199088af30ceed36048e66e2c",
+      "bytes": 67642,
+      "sha256": "0080cdde7038f6f5fd7d2001c2f8568466e95efbf4351a581d023520591cc524"
+    },
+    {
+      "id": "FG3_P02",
+      "blob": "481dbc8d6a6abc65014adad5908c7e64da54c5fd",
+      "bytes": 67626,
+      "sha256": "3057bc8db099e263ab51ad96d896b793f7ddf7c84c1ba7e30187fe44893ba4e4"
+    },
+    {
+      "id": "FG3_P03",
+      "blob": "0bcd83d309441a58ea072584c4e0d05b53b0953e",
+      "bytes": 67447,
+      "sha256": "420a59f2a2040c16f71b0d26ef24b8b92feba2b74321f469258c328d3ab0bf32"
+    },
+    {
+      "id": "FG3_P04",
+      "blob": "82eb626ba2c763cabe8cf15dec8e7c069b464739",
+      "bytes": 67949,
+      "sha256": "f0ddf3aeffaa774b1768c9361868fc48454754775e2818a4593d76c62943bb7c"
+    },
+    {
+      "id": "FG3_B01",
+      "blob": "4cbcbe0de86f54d4817273ea45f287eb009a95dd",
+      "bytes": 67638,
+      "sha256": "5e58395d343dd6ac76afd0122295df7498c5921765e1065086962fb66899ce82"
+    },
+    {
+      "id": "FG3_B02",
+      "blob": "34bf231b9b5e06d73307e5123788259591a480d5",
+      "bytes": 68200,
+      "sha256": "8427a3a008b9e4d0d09b8746b015f36084f807d3f9ae20965a6df9bcc4cc4052"
+    },
+    {
+      "id": "FG3_B03",
+      "blob": "9d507e0ed5f6d829b723931edb7815ab2fbd1eb2",
+      "bytes": 67678,
+      "sha256": "fb1d0b6a8239411655df57568e4f0ea33546e23247a8044fcc521818cabe11cf"
+    },
+    {
+      "id": "FG3_B04",
+      "blob": "8ef46d444f0958dae5ce7aed912a04d77a0baba4",
+      "bytes": 67448,
+      "sha256": "0c54a44e2c563bda6944895a258c10644ed02b9391042d504717f577bf563617"
+    },
+    {
+      "id": "FG3_B05",
+      "blob": "34d2b2d0ff641f38c4b6bf86e30fbcefd53599ff",
+      "bytes": 68050,
+      "sha256": "8fdc57c4758d39ceb0ea20cbc88c2b2597a3fa60a1f39de96cb9e4dfafe51169"
+    },
+    {
+      "id": "FG3_S01",
+      "blob": "3266a0900e1f41efbc2be9235b872ffecdc45cf5",
+      "bytes": 67756,
+      "sha256": "72c1f83e35d1e8a5f6a3e788090c4c34974c210f2e345a58f1c4cfb6938a30d3"
+    },
+    {
+      "id": "FG3_S02",
+      "blob": "9e849a9c90ff1a45ff65f90c8b617a7ab2a74510",
+      "bytes": 67676,
+      "sha256": "cd43e2f7f990b0d086af60a944d73fd95ba5e1e898507ceacd08646f0304a6bf"
+    },
+    {
+      "id": "FG3_S03",
+      "blob": "084aba655f0c42e92c985f445e79a6d808821b1c",
+      "bytes": 68619,
+      "sha256": "68d69275b2732fd8d91346350f5349040f7db2f452739529c880c36bba536d1a"
+    },
+    {
+      "id": "FG3_W01",
+      "blob": "655bfb1e6d2afd2609b9be1903cc8a2cdd822472",
+      "bytes": 66757,
+      "sha256": "d3f4944d7596c1cb0f262b75f8ba83271c1afa5812c6ac0ca4d6ddb72dabbcf7"
+    },
+    {
+      "id": "FG3_W02",
+      "blob": "a95b1de2597239a3821a028858a8b0e4d6efe934",
+      "bytes": 67650,
+      "sha256": "99945dbb8353bfaf4646fed9f9a0f9dba566d0264898693b8b179cbea7a6f86d"
+    },
+    {
+      "id": "FG3_W03",
+      "blob": "2c4bda975d8d1de2b650d352ca22d3f911396167",
+      "bytes": 67633,
+      "sha256": "cd5e9d77cc4e608e060adf584855facc1b817636f33f17112132b549eb1929b6"
+    },
+    {
+      "id": "FG3_C01",
+      "blob": "a80a8c49b61fe8681d8849ff1d4be6c4f8aa2455",
+      "bytes": 67681,
+      "sha256": "98d2515806da7583ee50c973c6079a5f76e0848ffde703d84fb7609d9fcaf81e"
+    },
+    {
+      "id": "FG3_C02",
+      "blob": "98cca5b43bac54ebd2db70a73c6238254bdd246e",
+      "bytes": 67703,
+      "sha256": "8c43eb7e8a193b6f351cf1c28d4e9f7f60194e1afd5c8dfabb7d67357bbdb0f1"
+    }
+  ],
+  "old44PinsHash": "0dd83402c404cdb8dbd1da1f7435d757ba7b057040152f2a4f9cbff02acb7c2d",
+  "modelBodyEdgesHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6",
+  "actualSource25MeasurementSeparate": "266289bbe7e34d1a323e5140001cd3e8d7232507",
+  "actualExpectedSourceContext": null,
+  "guardCodeWritten": false,
+  "guardEvaluations": 0,
+  "nativeExecutions": 0,
+  "SourceCodeExecution": 0,
+  "refsWritten": 0,
+  "filesWritten": 0,
+  "fullReadbackNewBodies": true,
+  "old44HashReuse": "Exact immutable index metadata; no byte changes or new execution claim.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

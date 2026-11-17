@@ -1,0 +1,200 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-FIXTURE-FIRST-IDS/1",
+  "authority": {
+    "plan": "42569afe21ac5153d0d02da438ce8fb23130d591",
+    "census": "68841353d0e1563bcca8116cc3450fa7157bdfba"
+  },
+  "ownRound": 3,
+  "maxRounds": 5,
+  "status": "LITERAL_EXPECTATIONS_SEALED_BEFORE_GUARD",
+  "groups": [
+    {
+      "id": "FG3_OWN_D2_COMPAT",
+      "evaluations": 44,
+      "cases": [
+        {
+          "unchangedIndex": "b5d274852deae3ce7bd1d7c08563d1e6862b8b00",
+          "expectedIds": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+          "evaluations": 44,
+          "admit": 21,
+          "reject": 23
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_KNOWN",
+      "evaluations": 4,
+      "cases": [
+        {
+          "id": "FG3_K01",
+          "accepted": true,
+          "exactMutation": "HTTP503; snapshots 0/1; first14 native pass; Scope15 actionthrow58/countreturn60."
+        },
+        {
+          "id": "FG3_K02",
+          "accepted": true,
+          "exactMutation": "Change actualHTTP only to429 and afterScope value to0; afterMonitor0."
+        },
+        {
+          "id": "FG3_K03",
+          "accepted": true,
+          "exactMutation": "Change actualHTTP to599 and afterMonitor value2+, afterScope0."
+        },
+        {
+          "id": "FG3_K04",
+          "accepted": true,
+          "exactMutation": "Append one unterminated '{' journal byte after69 valid events; witness torn/unknown; retain closed target joins."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_INDEPENDENCE",
+      "evaluations": 3,
+      "cases": [
+        {
+          "id": "FG3_I01",
+          "accepted": true,
+          "exactMutation": "Only afterMonitor metadata UNKNOWN/MARKER_UNAVAILABLE/null; omit synthetic marker14; afterScope JOINED1."
+        },
+        {
+          "id": "FG3_I02",
+          "accepted": true,
+          "exactMutation": "HTTP UNKNOWN/UNSUPPORTED_SCALARS/nulls; synthetic actual scalar string 'opaque'; both snapshots JOINED."
+        },
+        {
+          "id": "FG3_I03",
+          "accepted": true,
+          "exactMutation": "Truncate journal to completedMonitor count.return56/native14PASS; HTTP and Scope UNKNOWN/JOURNAL_UNRESOLVED; Monitor JOINED0."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_POINTERS",
+      "evaluations": 4,
+      "cases": [
+        {
+          "id": "FG3_P01",
+          "accepted": false,
+          "exactMutation": "Set HTTP throwSequence=60, which is Scope count.return rather than actionthrow58."
+        },
+        {
+          "id": "FG3_P02",
+          "accepted": false,
+          "exactMutation": "Swap afterMonitor countSequence56 and afterScope countSequence60."
+        },
+        {
+          "id": "FG3_P03",
+          "accepted": false,
+          "exactMutation": "Scope action58 returns/native15PASS; FINITE16 action62 throws at same S08:18:118/native16FAIL; forge HTTPKNOWN pointer62."
+        },
+        {
+          "id": "FG3_P04",
+          "accepted": false,
+          "exactMutation": "Scope count event60 is throw instead of return; HTTP UNKNOWN/COUNTER_UNAVAILABLE; forge Scope JOINED1 pointer60."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_VISIBLE_BLOCKERS",
+      "evaluations": 5,
+      "cases": [
+        {
+          "id": "FG3_B01",
+          "accepted": false,
+          "exactMutation": "Only native.integrity becomes torn; retain forged HTTPKNOWN/JOINED snapshots."
+        },
+        {
+          "id": "FG3_B02",
+          "accepted": true,
+          "exactMutation": "native.integrity=torn; HTTP UNKNOWN/TRUNCATED_NATIVE/nulls; both snapshots UNKNOWN/NATIVE_UNJOINED/null."
+        },
+        {
+          "id": "FG3_B03",
+          "accepted": false,
+          "exactMutation": "Change native13 to FAIL while its journal action/count return; retain forged HTTPKNOWN/JOINED snapshots."
+        },
+        {
+          "id": "FG3_B04",
+          "accepted": false,
+          "exactMutation": "Change native15 to PASS despite reliable Scope actionthrow58; finiteGet all UNKNOWN cannot heal N2."
+        },
+        {
+          "id": "FG3_B05",
+          "accepted": false,
+          "exactMutation": "Insert AFTER.close.enter at59 before Scope count.enter/return60/61; forge Scope JOINED1 pointer61."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_STREAM_CONSISTENCY",
+      "evaluations": 3,
+      "cases": [
+        {
+          "id": "FG3_S01",
+          "accepted": false,
+          "exactMutation": "afterMonitor UNKNOWN/MARKER_STREAM_INVALID/null; retain incompatible afterScope JOINED1."
+        },
+        {
+          "id": "FG3_S02",
+          "accepted": false,
+          "exactMutation": "afterScope UNKNOWN/SOURCE_UNJOINED/null while HTTP remains KNOWN; afterMonitor JOINED0."
+        },
+        {
+          "id": "FG3_S03",
+          "accepted": true,
+          "exactMutation": "Same visible AFTER interleave as B05; Scope UNKNOWN/JOURNAL_UNRESOLVED/null, Monitor JOINED0, HTTPKNOWN retained."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_WIRE",
+      "evaluations": 3,
+      "cases": [
+        {
+          "id": "FG3_W01",
+          "accepted": false,
+          "exactMutation": "Delete observation.finiteGet only; not an extra-key/order alternative."
+        },
+        {
+          "id": "FG3_W02",
+          "accepted": false,
+          "exactMutation": "afterMonitor UNKNOWN/MARKER_UNAVAILABLE but countSequence=56 nonnull; no numeric-category alternative."
+        },
+        {
+          "id": "FG3_W03",
+          "accepted": false,
+          "exactMutation": "Set HTTPKNOWN actual=200 integer; no string or conditional-null alternative."
+        }
+      ]
+    },
+    {
+      "id": "FG3_OWN_FINITE_GET_CALLER_BINDING",
+      "evaluations": 2,
+      "cases": [
+        {
+          "id": "FG3_C01",
+          "accepted": false,
+          "exactMutation": "Rebind every candidate API/context/log/ZIP to foreign head/tree/run/job; preserve independent original trusted.expected."
+        },
+        {
+          "id": "FG3_C02",
+          "accepted": false,
+          "exactMutation": "Substitute candidate source-index/S08 tree edges, context and target reads with oldE2 pins; preserve independent modeledE3 trusted bodyset."
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "nativeGroups": 8,
+    "evaluations": 68,
+    "retained": 44,
+    "new": 24,
+    "admit": 30,
+    "reject": 38,
+    "newAdmit": 9,
+    "newReject": 15
+  },
+  "controlsExecuted": 0,
+  "SourceQualified": false,
+  "Task1Pass": false
+}
