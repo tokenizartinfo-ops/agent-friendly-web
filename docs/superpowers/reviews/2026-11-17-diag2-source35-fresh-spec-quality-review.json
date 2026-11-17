@@ -1,0 +1,285 @@
+{
+  "schema": "AFW-DIAG2-SOURCE35-FRESH-SPEC-QUALITY-REVIEW/1",
+  "timestampUTC": "2026-11-17 01:33:17 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewer": "Independiente del autor de adapter/suite/runner Source35; revisión sin ejecutar código",
+  "verdict": {
+    "SPEC": "PASS_TOOLING_ONLY",
+    "QUALITY": "PASS_BOUNDED",
+    "findings": [],
+    "toolingEligibleOnly": true,
+    "businessNativeAccepted": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "reviewed": "Source35 native43994157972/1 job133741931686, su adapter9f457 y composición estática con Source25; no nuevo native ni aceptación del negocio.",
+  "fullInputs": [
+    {
+      "name": "primary",
+      "bytes": 1307845,
+      "sha256": "48f3337d4d33d54a986af18261dacbf6e04ce28aad7114509b07318f33558103",
+      "gitBlob": "97c742290e0ba58cab5c15be7e09208f3753bc90"
+    },
+    {
+      "name": "proof",
+      "bytes": 13278,
+      "sha256": "af43dbfc7567b2aeeaaae000414dc6532f82720bca185ed84389ff020f8cd41c",
+      "gitBlob": "0c2c1f3b34fe668a17250a509528d8b4578a4134"
+    },
+    {
+      "name": "closure",
+      "bytes": 3404,
+      "sha256": "be7c20903ddf7e361717e15bb56592a7278bb937ae2b8d44efa645f83447725d",
+      "gitBlob": "8cc0c654b4ce4fe032fb7d2f0fc937afbb0ad8c1"
+    },
+    {
+      "name": "gate",
+      "bytes": 4584,
+      "sha256": "3602363f318053d7966af7bbb30d99e1a5294ebbdccd2a649a46366a0c803bbc",
+      "gitBlob": "cb26824a15e15c8d0f0fc748d2771ff85527aa1d"
+    },
+    {
+      "name": "packet",
+      "bytes": 4364,
+      "sha256": "bbd3bfb5e30244d8b605556462c5f212798d4c034501d2dc00998db2d669fb9b",
+      "gitBlob": "7a038f22b3e6782bc089fbfebf9a8049dd16a554"
+    },
+    {
+      "name": "toolsIndex",
+      "bytes": 9671,
+      "sha256": "5e87dec225f005dbb3b50c49af798e89f05e2782cb9cc552de57b11a606fe3ee",
+      "gitBlob": "e6fad54239858d779573fc724a73ee6231133e52"
+    },
+    {
+      "name": "businessIndex",
+      "bytes": 14768,
+      "sha256": "15b19b3ea359c4d3d84bcf408a87a700ddbb402b541bf8d153ed0a33694b428b",
+      "gitBlob": "98d85420ec517978a18eab639b60c1dbb8353eee"
+    },
+    {
+      "name": "Root25",
+      "bytes": 10116,
+      "sha256": "1632f38f4ffeaae864a32714a534b26e1e3b11684dc99fcf0f90283817203f6c",
+      "gitBlob": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8"
+    },
+    {
+      "name": "reversible",
+      "bytes": 83825,
+      "sha256": "9904311418ecb40892e2e11f6dba7747dd491ead395f6a30a20adf5d89614846",
+      "gitBlob": "f5c8ed79a7c72fb01a003b921b9ec809a14c1e55"
+    },
+    {
+      "name": "adapter",
+      "bytes": 20195,
+      "sha256": "e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e",
+      "gitBlob": "9f457450ba1e7a746117fc1498922972613df789"
+    },
+    {
+      "name": "businessRunner",
+      "bytes": 16898,
+      "sha256": "292b9f8f0a2388c514a40ae336bc97df9b3f8571beaa00b41f0976896dea17b2",
+      "gitBlob": "c0fbc1674de5a41760598ec248d97147a33dc517"
+    },
+    {
+      "name": "businessWorkflow",
+      "bytes": 1620,
+      "sha256": "24dc2e5c5f454af60ebba59d502e42d73a75af1594b327d2400fc3b29c247069",
+      "gitBlob": "29441f47097afe3760b831e7b360614ea397e4e1"
+    },
+    {
+      "name": "suite",
+      "bytes": 7154,
+      "sha256": "7a35ae0ac86a0047fe85982a756b6779bc8c9cde381bce442361698ec7324cad",
+      "gitBlob": "763b04a5d358528beca961920af9aaadeced0101"
+    },
+    {
+      "name": "toolsRunner",
+      "bytes": 12108,
+      "sha256": "3eafda0c3eb71140602e27ff2b9a44e9ed8c7baf445bd41664152354aad8dc4c",
+      "gitBlob": "5d389b03c54a3ff01c44fc270ec186d33fb069bb"
+    },
+    {
+      "name": "toolsWorkflow",
+      "bytes": 1459,
+      "sha256": "839062f469a741b1f0934a1fa02cf8838cfda7eabbf8a52ef876dd298af648a5",
+      "gitBlob": "74ae2a7bded33eff15d29b4f3f436c2403968e31"
+    },
+    {
+      "name": "proofSchema",
+      "bytes": 20345,
+      "sha256": "6470e3737a6eb5e3e4e206df42538b321962e1eea36a0bc4936e7dad4f6a7f2f",
+      "gitBlob": "0dd58cc5646b8fe74b45967d6207084a4fbf59c6"
+    },
+    {
+      "name": "toolsProtocol",
+      "bytes": 12193,
+      "sha256": "39aafd3e2b8c4990719084dfe43306b861d7ebc1e49f8973b9f4e6078dd86257",
+      "gitBlob": "50cdc14fbe7e823468253067c670bf0bdee9dab8"
+    },
+    {
+      "name": "fixtureFirst",
+      "bytes": 17929,
+      "sha256": "e4bb383ae6acfdf844463188398ca6642981ec6a3427258a67a76fcc44ab5998",
+      "gitBlob": "d1b79ae4c7987fcc8f876ffd6f7d211bb2970465"
+    },
+    {
+      "name": "legacyRuling",
+      "bytes": 1708,
+      "sha256": "8ab5bca95d1baa2d57e265c33bf4acb8e93d4b41c0e9f355d9857e71ef3d1381",
+      "gitBlob": "2806614c0e50975bc1a6d912b7e0b1db6038a47a"
+    }
+  ],
+  "nativeEvidence": {
+    "run": 43994157972,
+    "attempt": 1,
+    "job": 133741931686,
+    "head": "802a0e3624c2cf0a5ff98f0bc1d7683c4ddb68df",
+    "tree": "77c51a1663a3afbc57fc61c7c315226699e9bb70",
+    "commandStep": 4,
+    "jobSeconds": 20,
+    "commandApiSeconds": [
+      "2026-11-17T01:15:41Z",
+      "2026-11-17T01:15:41Z"
+    ],
+    "frameTimestamp": "2026-11-17T01:15:41.5442425Z",
+    "apiTimePrecision": "seconds; completed_at denotes its complete second, half-open next-second bound",
+    "treeEntries": 3381,
+    "leaves": 3216,
+    "preserved3203": true,
+    "all13Edges": true,
+    "ordered35": true,
+    "checkpointGroups": 358,
+    "legacyScoped": true
+  },
+  "archive": {
+    "artifactId": 14289305781,
+    "archiveBytes": 3847,
+    "archiveSha256": "32dce62ded8771f00672aa54a6304f05ab8fa32f24e4675513a1686fa2fc249b",
+    "method": 8,
+    "flags": 8,
+    "compressedBytes": 3657,
+    "consumedBytes": 3657,
+    "crc32": "2682b878",
+    "payloadIncludingLFBytes": 13278,
+    "payloadSha256": "af43dbfc7567b2aeeaaae000414dc6532f82720bca185ed84389ff020f8cd41c",
+    "schemaPass": true,
+    "ordered35ExpectedValueHashes": true
+  },
+  "census": {
+    "C1": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+    "fixtureFirst": "d1b79ae4c7987fcc8f876ffd6f7d211bb2970465",
+    "corpusSha256": "15d470df5e7ed5350bdedb333236f648c86e69c844e5784d1d8478f6ebac5aaf",
+    "ids": 35,
+    "allIdsUniqueOrderedExact": true,
+    "expectedLiteralValueHashes": "Los35results/projectionSha256 se recalcularon desde cada seis-keyexpected C1 y coinciden con proof y schema. No se usa helper Source para calcular el oráculo.",
+    "reportedNative": {
+      "tests": 35,
+      "pass": 35,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "checkpointGroups": 358,
+    "groupMeaning": "18grupos S01 +34*10; no358testcases ni afirmación de cada assertindividual. Las funcionesbody/schema agregan asserts internos además de esos grupos nombrados.",
+    "actualChildStdout": {
+      "bytes": 11784,
+      "sha256": "67e03afa1f9f4b7033b9213cffb8efce270ca852ee1743682a890c2b3c3e98d9"
+    },
+    "actualChildStderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "limitation": "El TAP completo privado del hijo de Source35 no se exporta en Primary: los35pares/grupos son observación del controlador fijado, unidos al jobAPI/proof/graph y al código inspeccionado. No afirmo haber reparseado bytes de TAP ausentes ni reconstruirlos porSHA. El transportelog/proof/ZIP sí se inspeccionó completo."
+  },
+  "codeAssessment": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+      "blob": "9f457450ba1e7a746117fc1498922972613df789",
+      "line": 138,
+      "result": "PASS estático del extractor acotado. Separa sourceRows porID/orden y nativeblock porresult/owner; noSourceRow/Subtestadjacency. CanonicalJSON/keys,counters0..3,uniqueSourceprefix,duplicatefields/rows/order,nested/messagefakes y calibratedscalar2space son tratados sinpromoverprivate text aKNOWN. Sólo source5keys yassertion2ints permitidos; num100..599!=200/expected200; sin jerarquía/delta/EXTRA ni mensaje/stack/location exportados."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+      "line": 222,
+      "result": "PASS del flujo C1: primerthrow del prefijo validado exactoNOTICES/action/AssertionError/ERR_ASSERTION/S08:41:12; primeros11action/countreturn ynativePASS;countsettlement,target12FAIL; precedenciaNA/UNKNOWN ynulls. FirstThrowpointer no se rellena ni se cambia. Sufijo journalunknown no borra candidato validado completo; no ausencia/earliestglobal."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+      "line": 250,
+      "result": "Captura conserva buffersmedidos ystatus/signal/errorKind reales; ETIMEDOUT no fabrica un estado. Reutiliza exactamente reader62a31. N2 se exige en266..267 antes de proyección, incluso con prefijo posterior ambiguo: nativePASSsameID+action/countthrow es EVIDENCE_CONFLICT, no un UNKNOWN normalizado. No I/O/hooks/RPC/businesscalls nuevos en el projector."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+      "line": 280,
+      "result": "Publisher fija familia/contextoE2/selection, requiere metadata6keys/reasons/knownshape/nums,512B dentro delcap. successPacket300..307 exige ambos13arrays yexpected exactos E2/targetHashes, custodycontext igual yprepara dos frames/body+LF sin ampliar24576body/24577payload. Flags7false,SourceQualified/Task1false. Infra/caps no emiten éxito parcial."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/source35.test.mjs",
+      "line": 47,
+      "result": "Los35testcases llaman projector ycollectObservation reales sobre literales preexistentes; comparan contraexpected independiente ycontra parentFacts fijados, y pasan exactamente esa observación por publisher/custody reales a schema/wire/context/E2. Sin traducción a otro modelo ni parsermirror usado comooráculo. S01añadelegacy/fault/cap/custody/drift/N2 dentro delcenso35autorizado, no36ID."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/run-source35.mjs",
+      "line": 179,
+      "result": "Controlador exactrepo/ref/message/attempt/node/linux/BASE/paths13aditivos ymedición realGit/bytes/SHA antes del hijo. Única ejecución35serial con10s/case,105sparent,1MiBstdout/64KiBstderr. Exige35top-levelok únicos sinskip/todo/cancel/extras y35reports valorhash/orden/count/legacy; proofcontextactual/graph13/readbackJSONLF<=24576. No npm ni Sourcebusinessdriver/M/QA/SDK importado."
+    }
+  ],
+  "legacy": {
+    "ruling": "2806614c0e50975bc1a6d912b7e0b1db6038a47a",
+    "scope": "Explícitamente permite oldadapter5c8123 yreader62a31 bajo tools/legacy en S01. El texto corto heredado de nomination.sourceImports se interpreta con ese suplemento y con la aclaración explícita del gatecb268; el grafo real13 sí los incluye.",
+    "observed": {
+      "inheritedFieldsMatched": 6,
+      "oldFirstFailurePresent": false,
+      "oldFitsNewObservation": false
+    },
+    "meaning": "Mismo inputS01 válido invoca amboscollectors. Los6campos heredados coinciden; oldfirstFailureausente yoldshape no cumple nuevaobservation. Incompatibilidad aditiva estrecha demostrada sin un fallo deimport/proceso; no regresión histórica ni rednativeprocess adicional."
+  },
+  "graphAndStaticBusiness": {
+    "original3203Preserved": true,
+    "toolAdditions": 13,
+    "toolNativeLeaves": 3216,
+    "realGraph": "Builtinscontroller/suite +newadapter/oldadapter +sus read-progressidénticos. C1/schema/contract/selection/index son JSONDATA; Source13programas,D07,recorder,MF,SDK,M/QA no se importaron en Source35. Legacy exception está preautorizada y visible.",
+    "sameAdapter": "La misma path/blob/bytes/SHA9f457 aparece en tools13 ySource25. Root25bodyEdges se compararon exactamente con98d854; noSourceBusiness ejecución todavía.",
+    "businessRunner": "c0fbc1674de5a41760598ec248d97147a33dc517 yWF29441f47097afe3760b831e7b360614ea397e4e1 sólo se leyeron como texto. Mantienen180schild/120scase/330stotal/7minjob,PF10s y2launches,unshare--net/UID/GID/groups/no-new-privs,envlimpio/lockSDK1.2.1. TARGET13real before244/after252, siblings antes/después, journalinode ycleanupdev/ino/owner se conservan. No nuevos callbacks/Sourceops ni overwriteGitcanonical;13afterimages sólotempowned.",
+    "publicationPath": "Businessrunner254 llama al mismo collectObservation probado;271..278 sólo publica después de checks/owncleanup, preparoambasframes+copiawx/readback. N2/caps/targetdrift pasan porFAULT/noadmisión. Todo esto es evaluación estática del código, no prueba de Source35 sobre filesystemtarget13real ni depromesasnativas de negocio.",
+    "reversibles": "Los3splicesold/new completosadapter/runner/workflow se reconstruyeron bidireccionalmente enRAM contra preimágenes pinneadas. No cambiosM/QA/S07/D07/recorder/reader/SDK añadidos por este delta.",
+    "actualSourceExpectedContext": null,
+    "held": "Index98d854 conserva head/tree/runId/jobId null/notAdmissible. Son inventario pendiente, nuncacomodines ni autoridad tomada del outcome. Root debe fijar ocurrenciafinal y demásgates antes de Sourcebusiness."
+  },
+  "evidenceJoins": {
+    "caller": "Gatecb268 fijó head802a0e3624c2cf0a5ff98f0bc1d7683c4ddb68df/tree77c51a1663a3afbc57fc61c7c315226699e9bb70 antes delrun. Se usaron como expectativa separada, no los eligió el proof.",
+    "runJob": "43994157972/attempt1/job133741931686 completed/success, exactpushbranch/message/workflow/repo/parentBASE.4requiredsteps únicos success, comando numericstep4.20s job menor3min.",
+    "time": "APIstep4started/completed ambos01:15:41Z tiene precisión desegundos; frame01:15:41.5442425Z está en ese segundo y en el commandgroup correcto. Se comparó intervalo half-open hasta el siguiente segundo; no falsa precisión milisegundo deAPI.",
+    "tree": "Rawrecursive3381entries,unique/no truncation,3216blobs.13edges exactos y3203originales path/mode/blob/size comparados con baselineDATA completo conservado.",
+    "proof": "13278B SHAaf43dbfc7567b2aeeaaae000414dc6532f82720bca185ed84389ff020f8cd41c, schema0dd58PASS,canonicalJSON+LF ylogframeúnico exactos. Inputgraph13 yfixture/corpus/35values/legacy/counts coinciden. SHA dechildstdout es medida productora, no recuperación del contenido no exportado.",
+    "zip": "Artifact14289305781/3847B SHA32dce62ded8771f00672aa54a6304f05ab8fa32f24e4675513a1686fa2fc249b unido a APIlistingcount1/run/head/branch/size/digest. Bas64canónico,EOCD único,central-local/file/bounds/noZIP64/descriptors,CRC2682b878 yDEFLATEconsume3657/3657: payloadexactocanonical13278B. Sinrelecturaendpoint/descarga."
+  },
+  "closure": {
+    "record": "8cc0c654b4ce4fe032fb7d2f0fc937afbb0ad8c1",
+    "closedHead": "ee43d4669d5ed63832e326ea47a3579a12190c09",
+    "closedTree": "30387ecb6038424e498f419d7e6ddcd5bf19f873",
+    "recordedRoot": "3217=3203originales+12toolsretenidos+2evidencias;onlyWFremoved,history/mainunchanged,closedHeadRuns0,oneUseConsumedtrue. Pins/context/parent/proofPrimary unidos al native.",
+    "scope": "Constancia de cierre deRoot fechada01:19:33; no repoll de refs/Actions por este reviewer. Ni cierreGit ni ausencia de workflow acreditan drenaje global/SDK vacío."
+  },
+  "limits": [
+    "SPEC/QUALITYPASS para el tooling35/358 y composición estática descrita, no Sourcebusiness/fullTask1, runtimeCloudflare ni respuestaHTTPactual.",
+    "HTTP histórico/countersnotices/causa de503 siguen desconocidos; Source35KNOWN503 son fixtures sintéticos. No se trasladan deltoy/SourceC/historia.",
+    "No reaudité todoBASE ni imports de negocioM/QA ni nuevoSource13 completo; reutiliza reviewDATA50ffcbb3... y hostS10 aceptado55e95 porRoot. No se amplía cobertura por inferencia.",
+    "Private SourceTAP ausente y7nonclaimsfalse: sólo productor sellado acotado+GHAAPI/frame/archive; no autenticación criptográfica de rawJSONno confiable/receipt ni recuperación de bytes porSHA.",
+    "No patches, nueva captura, ref, run, CF/provider ni aprobación operacional por esta revisión. Root decide los siguientes gates; aún se requiere su contexto/autorización de negocio."
+  ],
+  "performed": "FULLGit lecturas/bytes/SHA/Git y textos inertes; comparacionesJSONDATA yreversibles/ZIP mediante lógica propiaRAM+crypto/zlibbuiltin. Ningún Source/guard/harness eval/import/AST/syntax/compile/test local; no endpoints terminales deActions/log/artifact ni filesystem/deps/builds/refwrites.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
