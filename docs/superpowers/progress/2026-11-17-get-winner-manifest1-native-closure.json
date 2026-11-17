@@ -1,0 +1,117 @@
+{
+  "schema": "AFW.GET_WINNER.MANIFEST1.CLOSURE/1",
+  "branch": "lab/afw-c2-get-winner-20261117-fixtures-manifest1",
+  "spentHead": "f8fbf79837b1238a36077ad7951bc908478a9aa8",
+  "spentTree": "1ae6c6ce938f8e5fccc34435b9f15d3a34990234",
+  "run": 44134958107,
+  "attempt": 1,
+  "job": 134221843459,
+  "primary": "0919eb82966125450d60922aaa40ff2f23b45133",
+  "outcome": "b6d80077fc2504660aef6b524c6a9dc0d0c57fa3",
+  "action": "Remove only the nominated one-use lab workflow and preserve two inert primary/closure evidence leaves. Never rerun spent head.",
+  "removedWorkflow": ".github/workflows/afw-c2-get-winner-fixtures-manifest1.yml",
+  "original3203Preserved": true,
+  "other32AdditionsPreserved": true,
+  "expectedClosedLeaves": 3237,
+  "protectedRefs": [
+    {
+      "name": "main",
+      "branch": "main",
+      "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+    },
+    {
+      "name": "source",
+      "branch": "feat/finite-native-cleanup-20261101",
+      "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+    },
+    {
+      "name": "own42",
+      "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+      "sha": "c511b6f061fb4eb0c5594779d3123e824f34f243"
+    },
+    {
+      "name": "source35",
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+      "sha": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+    },
+    {
+      "name": "diag1",
+      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "sha": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
+    },
+    {
+      "name": "host",
+      "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+      "sha": "1f62e087f0d9000f9c08519cd162db1104827af8"
+    },
+    {
+      "name": "toy",
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+      "sha": "5f5295265217b31a19fbed2379f697c5a6a83080"
+    },
+    {
+      "name": "diag2",
+      "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+      "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01"
+    },
+    {
+      "name": "source149",
+      "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+      "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0"
+    },
+    {
+      "name": "own73",
+      "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+      "sha": "067a012121a58f7c2baf938228765242c433a1d5"
+    },
+    {
+      "name": "diag3Business",
+      "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+      "sha": "08061db79cd0f38f25df8977e1ded8e17542e684"
+    },
+    {
+      "name": "fixture59",
+      "branch": "lab/afw-c2-source-20261117-drop-winner-fixtures",
+      "sha": "4dec9811009052b4088068a06ece37a7af70b4cf"
+    },
+    {
+      "name": "source5ToolFailedClosed",
+      "branch": "lab/afw-c2-source-20261117-drop-winner-tools",
+      "sha": "86594c358557023d41cb3cae5d000bca3c67296b"
+    },
+    {
+      "name": "launchPassedClosed",
+      "branch": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+      "sha": "442174a54aa7b8eaad71fb978ac2022df961d26b"
+    },
+    {
+      "name": "ownFixtureClosed",
+      "branch": "lab/afw-c2-own-20261117-drop-winner-fixtures",
+      "sha": "0fe46529b2c0243d977afd54b914184a5b31963c"
+    },
+    {
+      "name": "ownToolsClosed",
+      "branch": "lab/afw-c2-own-20261117-drop-winner-tools",
+      "sha": "8b41c57cb6a8a9ba7a92c3a56820786a41f95f86"
+    },
+    {
+      "name": "source5BusinessClosed",
+      "branch": "lab/afw-c2-source-20261117-t1-drop-winner-diag4",
+      "sha": "ed9538c6b186a901f1c8ffdc3b93d9f8f18f1399"
+    },
+    {
+      "name": "getWinnerFixtureStageAClosed",
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures",
+      "sha": "a360239dfbbfa3263f634042bbe7bb4a56c5b3d7"
+    },
+    {
+      "name": "getWinnerStartup1Closed",
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures-startup1",
+      "sha": "3fc6c6fa561a0cce504dcc735046f440eb3f1690"
+    }
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false
+}
