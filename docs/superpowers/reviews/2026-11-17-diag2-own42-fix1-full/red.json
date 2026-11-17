@@ -1,0 +1,73 @@
+{
+  "schema": "AFW-DIAG2-OWN-FIX1-FULL-READBOUND-RED/1",
+  "beforeSemanticHash": {
+    "bytes": 3310,
+    "sha256": "ac771fe58dea62883f09e4eceac7c0d6696fb54986c679781944ed4117302ed0",
+    "gitSha": "cd1aaa2c0cfaa1f278e383cc7a58cb2df59b187f"
+  },
+  "original40Pass": 40,
+  "appendixPass": 2,
+  "appendixFail": 2,
+  "results": [
+    {
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT: controlled guard rejection required\n+ actual - expected\n\n+ undefined\n- 'Error'\n"
+    },
+    {
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE"
+      }
+    },
+    {
+      "id": "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT: controlled guard rejection required\n+ actual - expected\n\n+ undefined\n- 'Error'\n"
+    },
+    {
+      "id": "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "TRUNCATED_NATIVE"
+      }
+    }
+  ],
+  "inputHashesNoLF": [
+    {
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT",
+      "bytes": 43676,
+      "sha256": "0de1550f489ea6da4ebfa0f533195e4984c19fedd18a437261044a9ecf136365",
+      "gitSha": "e6c0bf2f586ed5f6abdd218cc27952b302aa4eba"
+    },
+    {
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT",
+      "bytes": 43244,
+      "sha256": "e5031f5773cdb58206d33e11164134a8322677291c4f821ad15b31918a5a86ca",
+      "gitSha": "47d6a6185a5280e8491184ea5625cc088eef6f81"
+    },
+    {
+      "id": "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT",
+      "bytes": 43662,
+      "sha256": "fcc0b58efae1f872685ce826ba71bf260eeb8500266f3982752b507d273d6b93",
+      "gitSha": "8b9d07d46f9e78880b643d9950234333b2f64588"
+    },
+    {
+      "id": "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT",
+      "bytes": 43218,
+      "sha256": "4282476e8dc2b19e52236a58d7467cefdff78a0f0f4ab3428b2c2b9ea19eae4c",
+      "gitSha": "1deae77efb123a0e3b992ba4372fe408e7dbff3c"
+    }
+  ],
+  "SourceExecuted": false,
+  "nativeRuns": 0
+}

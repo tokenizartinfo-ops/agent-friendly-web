@@ -1,0 +1,311 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "afw.own-first-failure-post-diag2-fix1.native-proof.v1"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "const": "tokenizartinfo-ops/agent-friendly-web"
+        },
+        "branch": {
+          "const": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1"
+        },
+        "head": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "parent": {
+          "const": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        },
+        "runId": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "runAttempt": {
+          "const": 1
+        },
+        "job": {
+          "const": "c2-own-first-failure-post-diag2-fix1"
+        },
+        "node": {
+          "const": "v22.23.4"
+        }
+      },
+      "required": [
+        "repository",
+        "branch",
+        "head",
+        "tree",
+        "parent",
+        "runId",
+        "runAttempt",
+        "job",
+        "node"
+      ],
+      "additionalProperties": false
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "expectedNative": {
+          "const": 42
+        },
+        "observedNative": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42
+        },
+        "passedNative": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42
+        },
+        "failedNative": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42
+        },
+        "cancelled": {
+          "const": 0
+        },
+        "skipped": {
+          "const": 0
+        },
+        "todo": {
+          "const": 0
+        },
+        "missing": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42
+        },
+        "extra": {
+          "const": 0
+        },
+        "duplicate": {
+          "const": 0
+        },
+        "expectedReceiver": {
+          "const": 44
+        },
+        "observedReceiver": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 44
+        },
+        "passedReceiver": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 44
+        },
+        "failedReceiver": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 44
+        },
+        "admitted": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 44
+        },
+        "rejected": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 44
+        }
+      },
+      "required": [
+        "expectedNative",
+        "observedNative",
+        "passedNative",
+        "failedNative",
+        "cancelled",
+        "skipped",
+        "todo",
+        "missing",
+        "extra",
+        "duplicate",
+        "expectedReceiver",
+        "observedReceiver",
+        "passedReceiver",
+        "failedReceiver",
+        "admitted",
+        "rejected"
+      ],
+      "additionalProperties": false
+    },
+    "idsHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "receiverIdsHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "bindings": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 80,
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4194304
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "gitBlob": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$"
+          }
+        },
+        "required": [
+          "path",
+          "bytes",
+          "sha256",
+          "gitBlob"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "evaluations": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 44,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "accepted": {
+            "enum": [
+              true,
+              false,
+              null
+            ]
+          },
+          "state": {
+            "enum": [
+              "KNOWN",
+              "UNKNOWN",
+              "NOT_APPLICABLE",
+              null
+            ]
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "passed",
+          "accepted",
+          "state",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "entrypoint": {
+      "const": "d2ModelRead"
+    },
+    "actualProducerBodyDataMatched": {
+      "const": true
+    },
+    "ownModelsExecuted": {
+      "const": true
+    },
+    "actualSourceExecution": {
+      "const": false
+    },
+    "finalSourceBinding": {
+      "const": false
+    },
+    "SourceQualified": {
+      "const": false
+    },
+    "Task1Pass": {
+      "const": false
+    },
+    "nonclaims": {
+      "type": "object",
+      "properties": {
+        "historicalCauseProven": {
+          "const": false
+        },
+        "receiptAuthenticated": {
+          "const": false
+        },
+        "operationalReadiness": {
+          "const": false
+        },
+        "completePackage": {
+          "const": false
+        },
+        "PCoff": {
+          "const": false
+        },
+        "globalNativeDrainVerified": {
+          "const": false
+        },
+        "sdkNamespaceEmptyVerified": {
+          "const": false
+        }
+      },
+      "required": [
+        "historicalCauseProven",
+        "receiptAuthenticated",
+        "operationalReadiness",
+        "completePackage",
+        "PCoff",
+        "globalNativeDrainVerified",
+        "sdkNamespaceEmptyVerified"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema",
+    "context",
+    "counts",
+    "idsHash",
+    "receiverIdsHash",
+    "bindings",
+    "evaluations",
+    "entrypoint",
+    "actualProducerBodyDataMatched",
+    "ownModelsExecuted",
+    "actualSourceExecution",
+    "finalSourceBinding",
+    "SourceQualified",
+    "Task1Pass",
+    "nonclaims"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,97 @@
+{
+  "schema": "AFW-DIAG2-OWN-FIX1-FIXTURE-FIRST-IDS/1",
+  "authority": "ccf33edb19d3971a8182c78200330ba9bff0fb4f",
+  "original40": {
+    "index": "394f7dde265fb7b3c3b5de26cede262c6f744daa",
+    "expectedIds": "e4c75949c6849b2fd8f83d8ca34ad6f526d39f78",
+    "unchanged": true
+  },
+  "nativeIds": [
+    "OWN_D2_K01",
+    "OWN_D2_K02",
+    "OWN_D2_K03",
+    "OWN_D2_K04",
+    "OWN_D2_K05",
+    "OWN_D2_A01",
+    "OWN_D2_A02",
+    "OWN_D2_A03",
+    "OWN_D2_A04",
+    "OWN_D2_A05",
+    "OWN_D2_A06",
+    "OWN_D2_U01",
+    "OWN_D2_U02",
+    "OWN_D2_U03",
+    "OWN_D2_U04",
+    "OWN_D2_U05",
+    "OWN_D2_U06",
+    "OWN_D2_K06",
+    "OWN_D2_U08",
+    "OWN_D2_R01",
+    "OWN_D2_R02",
+    "OWN_D2_R03",
+    "OWN_D2_R04",
+    "OWN_D2_R05",
+    "OWN_D2_R06",
+    "OWN_D2_R07",
+    "OWN_D2_R08",
+    "OWN_D2_R09",
+    "OWN_D2_R10",
+    "OWN_D2_R11",
+    "OWN_D2_R12",
+    "OWN_D2_R13",
+    "OWN_D2_R14",
+    "OWN_D2_R15",
+    "OWN_D2_F01",
+    "OWN_D2_F02",
+    "OWN_D2_F03",
+    "OWN_D2_F04",
+    "OWN_D2_F05",
+    "OWN_D2_F06",
+    "OWN_D2_NATIVE_AMBIGUOUS_PAIR",
+    "OWN_D2_NATIVE_TORN_PAIR"
+  ],
+  "nativeCount": 42,
+  "receiverEvaluations": 44,
+  "expectedAdmit": 21,
+  "expectedReject": 23,
+  "pairs": [
+    {
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR",
+      "integrity": "ambiguous",
+      "unknownReason": "AMBIGUOUS_EVIDENCE",
+      "knownFixture": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT",
+      "unknownFixture": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT",
+      "knownExpected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null
+      },
+      "unknownExpected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "AMBIGUOUS_EVIDENCE",
+        "outerFirstThrowSequence": 46
+      }
+    },
+    {
+      "id": "OWN_D2_NATIVE_TORN_PAIR",
+      "integrity": "torn",
+      "unknownReason": "TRUNCATED_NATIVE",
+      "knownFixture": "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT",
+      "unknownFixture": "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT",
+      "knownExpected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null
+      },
+      "unknownExpected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "TRUNCATED_NATIVE",
+        "outerFirstThrowSequence": 46
+      }
+    }
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false
+}

@@ -1,0 +1,455 @@
+{
+  "schema": "AFW-DIAG2-OWN-FIX1-RAM-GREEN/1",
+  "nativeGroups": 42,
+  "receiverEvaluations": 44,
+  "pass": 44,
+  "fail": 0,
+  "admitted": 21,
+  "rejected": 23,
+  "results": [
+    {
+      "id": "OWN_D2_K01",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_K01",
+        "accepted": true,
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION"
+      }
+    },
+    {
+      "id": "OWN_D2_K02",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_K02",
+        "accepted": true,
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION"
+      }
+    },
+    {
+      "id": "OWN_D2_K03",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_K03",
+        "accepted": true,
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION"
+      }
+    },
+    {
+      "id": "OWN_D2_K04",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_K04",
+        "accepted": true,
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION"
+      }
+    },
+    {
+      "id": "OWN_D2_K05",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_K05",
+        "accepted": true,
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION"
+      }
+    },
+    {
+      "id": "OWN_D2_A01",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_A01",
+        "accepted": true,
+        "state": "NOT_APPLICABLE",
+        "reason": "TARGET_PASSED"
+      }
+    },
+    {
+      "id": "OWN_D2_A02",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_A02",
+        "accepted": true,
+        "state": "NOT_APPLICABLE",
+        "reason": "NO_QUALIFYING_THROW"
+      }
+    },
+    {
+      "id": "OWN_D2_A03",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_A03",
+        "accepted": true,
+        "state": "NOT_APPLICABLE",
+        "reason": "EARLIEST_THROW_DIFFERENT"
+      }
+    },
+    {
+      "id": "OWN_D2_A04",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_A04",
+        "accepted": true,
+        "state": "NOT_APPLICABLE",
+        "reason": "EARLIEST_THROW_DIFFERENT"
+      }
+    },
+    {
+      "id": "OWN_D2_A05",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_A05",
+        "accepted": true,
+        "state": "NOT_APPLICABLE",
+        "reason": "EARLIER_NATIVE_FAILURE"
+      }
+    },
+    {
+      "id": "OWN_D2_A06",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_A06",
+        "accepted": true,
+        "state": "NOT_APPLICABLE",
+        "reason": "EARLIEST_THROW_DIFFERENT"
+      }
+    },
+    {
+      "id": "OWN_D2_U01",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_U01",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "COUNTER_UNAVAILABLE"
+      }
+    },
+    {
+      "id": "OWN_D2_U02",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_U02",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "COUNTER_UNAVAILABLE"
+      }
+    },
+    {
+      "id": "OWN_D2_U03",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_U03",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "TARGET_NATIVE_UNAVAILABLE"
+      }
+    },
+    {
+      "id": "OWN_D2_U04",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_U04",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "JOURNAL_UNRESOLVED"
+      }
+    },
+    {
+      "id": "OWN_D2_U05",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_U05",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "SOURCE_ROW_UNAVAILABLE"
+      }
+    },
+    {
+      "id": "OWN_D2_U06",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_U06",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "ASSERTION_SCALARS_UNAVAILABLE"
+      }
+    },
+    {
+      "id": "OWN_D2_K06",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_K06",
+        "accepted": true,
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION"
+      }
+    },
+    {
+      "id": "OWN_D2_U08",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_U08",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE"
+      }
+    },
+    {
+      "id": "OWN_D2_R01",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R01",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R02",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R02",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R03",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R03",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R04",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R04",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R05",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R05",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R06",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R06",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R07",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R07",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R08",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R08",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R09",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R09",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R10",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R10",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R11",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R11",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R12",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R12",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R13",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R13",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R14",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R14",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_R15",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_R15",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_F01",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_F01",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_F02",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_F02",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_F03",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_F03",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_F04",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_F04",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_F05",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_F05",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_F06",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_F06",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE"
+      }
+    },
+    {
+      "id": "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT",
+        "accepted": false,
+        "state": null,
+        "reason": null
+      }
+    },
+    {
+      "id": "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT",
+      "pass": true,
+      "result": {
+        "id": "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT",
+        "accepted": true,
+        "state": "UNKNOWN",
+        "reason": "TRUNCATED_NATIVE"
+      }
+    }
+  ],
+  "entrypoint": "d2ModelRead",
+  "nativeRuns": 0,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "AFW-DIAG2-OWN-FIX1-APPENDIX-FIRST-SEAL/1",
+  "authority": "ccf33edb19d3971a8182c78200330ba9bff0fb4f",
+  "expected42": {
+    "blob": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+    "bytes": 2415,
+    "sha256": "80b57fb40df747a1ce06acd1879502bcdf2bf70aaebe6e9253d0e19bfa24b8af",
+    "gitSha": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+    "fullReadback": true
+  },
+  "original40Index": "394f7dde265fb7b3c3b5de26cede262c6f744daa",
+  "original40ByteIdsExpectedUnchanged": true,
+  "nativeGroups": 42,
+  "receiverEvaluations": 44,
+  "expectedAdmit": 21,
+  "expectedReject": 23,
+  "appendix": [
+    {
+      "path": "appendix/OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT.json",
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "67231a9f903f12a05670db953c941ee7f3612f73",
+        "bytes": 65853,
+        "sha256": "c6ce8854dec078b65faa0804c8efa23eec92102da034d71eace69c938bf462c2"
+      },
+      "fullReadback": true,
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      }
+    },
+    {
+      "path": "appendix/OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT.json",
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "b92a1d26036eb0f76dd3fe743a9f48ea4220c2dc",
+        "bytes": 65442,
+        "sha256": "8c8106ca6e31c85a62def7abb2351bbe98e439b4eb2a6036c498f9ac65f01ddc"
+      },
+      "fullReadback": true,
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "AMBIGUOUS_EVIDENCE",
+        "SourceQualified": false,
+        "Task1Pass": false
+      }
+    },
+    {
+      "path": "appendix/OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT.json",
+      "id": "OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "88cb15dadba6d476076cafcf00688309ccf4525b",
+        "bytes": 65834,
+        "sha256": "ee52734f0b16e6467af545c66f5b999629cd3a59eb4a733fc44648a6f0da7004"
+      },
+      "fullReadback": true,
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      }
+    },
+    {
+      "path": "appendix/OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT.json",
+      "id": "OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "1cc547cb1e67f8a6303fe00833e83f58696d2d99",
+        "bytes": 65409,
+        "sha256": "ae3f16590e20a0e8953b775f8353101f1bf474b58230915facd3c671876dcc4a"
+      },
+      "fullReadback": true,
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "TRUNCATED_NATIVE",
+        "SourceQualified": false,
+        "Task1Pass": false
+      }
+    }
+  ],
+  "preimageSemantic": "cd1aaa2c0cfaa1f278e383cc7a58cb2df59b187f",
+  "preimageReader": "4fb5a8d5e5b0b14c58f9935f5fd4dbc0589c23e0",
+  "minimalFixNotWrittenYet": true,
+  "SourceCodeExecuted": false,
+  "nativeRuns": 0,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
