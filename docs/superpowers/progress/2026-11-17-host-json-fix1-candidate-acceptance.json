@@ -1,0 +1,46 @@
+{
+  "schema": "AFW-ROOT-HOST-JSON-FIX1-CANDIDATE-ACCEPTANCE/1",
+  "timestampUTC": "2026-11-17 00:28:11 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "Fixture candidate acceptance only",
+  "allowedAction": "Use acceptedS10successor as explicitlypinned DATA in subsequentprepared diagnostic/tooling packages; no businesstrial/promotion/runtime authorized by this receipt.",
+  "implementationRuling": "5b62cc4b148d5667f7845957012bca03c49e6be0",
+  "packet": "5a00a46bedc3fcdd073647bb4f6c5ea1e2b7472b",
+  "fixtureFirst": "65dd370ef52c0bcbb8fd56b2012d2c8bb93f3ae4",
+  "primary": "38b19d479e1f01b901e99840ff493e1764678714",
+  "proof": "6fef356140f55010261133cc6a4b19446b0bc73c",
+  "closeReadback": "5cdc1dc255ef344668a3868913f8146b0971e10a",
+  "freshReview": "325db326566cb2be237b0d642f5736e678ca4df5",
+  "result": {
+    "old": "expected3PASS1FAIL singleSerialization2",
+    "candidate": "4PASS13checks singleSerialization1",
+    "wireStatusHeadersFreshness": true
+  },
+  "oldIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "candidateIndex": {
+    "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "bytes": 11467,
+    "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+  },
+  "onlyChangedCandidate": {
+    "path": "test/fixtures/finite-initial-entry-world.mjs",
+    "oldBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+    "newBlob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+    "bytes": 88713,
+    "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+  },
+  "other12Exact": true,
+  "qualification": "Hosthelpermechanicalequivalence/serializationworkonly. No measured business speedup, NOTICES resolution or historicalcause; no fullTask1qualification. Legacy26b/c230/DIAG1 remain untouched historical. New DIAG2 finalSource13arrays mustexplicitlyusecandidateE2+newS10pin ratherthaninferold26b.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
