@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "32c9d3867d04af96f0c8cbcae3532b30c6a4f967",
-  "phase": "TASK2_PUBLIC_CONSUMER_STATIC_REVIEW_RUNNING",
+  "previousCheckpoint": "264e8f1b1ec51b62f656372c6d468bfb99d1d672",
+  "phase": "TASK2_PUBLIC_CONTRADICTION_FIX1_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finish independent Task2 spec+quality review, resolve any findings; then Root finite OWN-only GHA controls with once-only full REST capture/closure/actual review. Full20 Source gate stays held.",
+  "next": "Finish Task2 public-marker contradiction fix with append-only fixture seal, independently measure and scoped re-review; only then finite OWN cloud controls. Source full20 still held.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -945,7 +945,7 @@
       }
     },
     "task2": {
-      "status": "PUBLIC_CONSUMER_STATIC_REVIEW_RUNNING",
+      "status": "PUBLIC_CONTRADICTION_FIX1_RUNNING",
       "toolingActualAccepted": "08b75777bb39efaad0a439082cd430044c0b07d6",
       "currentReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
       "currentBinding": "4d54d57322ea67c3a29278f75288c7c9b686105b",
@@ -1034,11 +1034,22 @@
         "result": "NO_REPOSITORY_READ_NO_TECHNICAL_REVIEW_CONTEXT_MISMATCH",
         "resolution": "Root clarified current AFW scope; reassigned fresh independent review; no candidate code finding or native action"
       },
-      "staticReviewAccepted": false
+      "staticReviewAccepted": false,
+      "staticReview": "e4e460e381a8655e21618e40025fe3db04112cf0",
+      "fixRound": 1,
+      "maxFixRounds": 5,
+      "openFindings": [
+        {
+          "id": "T2-I1",
+          "severity": "Important",
+          "scope": "Positive GET winner with visible scope MARKER_UNAVAILABLE or MARKER_STREAM_INVALID contradicts qualified publisher; add gate and four append-only MODEL controls",
+          "status": "FIX_RUNNING"
+        }
+      ]
     }
   },
-  "schemaVersion": 96,
-  "updatedAtUTC": "2026-11-17 23:52:30 UTC",
+  "schemaVersion": 97,
+  "updatedAtUTC": "2026-11-17 23:56:49 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
