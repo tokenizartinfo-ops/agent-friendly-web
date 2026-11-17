@@ -1,0 +1,275 @@
+{
+  "schema": "AFW-DIAG3-ROOT-SOURCE25-R3-BODY-MEASUREMENT/1",
+  "timestampUTC": "2026-11-17 03:44:32 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "index": "452895beeedf528748e51ec2ea4ccb91d684552a",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "bodyEdges": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+      "bytes": 11467,
+      "sha256": "3094be0e4276e7ffc31a08864f588bbdab97da67f38becc771c51344a601955e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+      "bytes": 22336,
+      "sha256": "0ea1a915b33ea380fe847c7b7bb7fe9659a207a87b922cedc4b85ce20195ecaa"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "179fb6c9cd431a38f084211021843286aaa70671",
+      "bytes": 4541,
+      "sha256": "5b5c299504b143aa6c3d7093eeff28c1e0db4baecfafd2afb70283e5e278042a"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "bdb37d27e0c5e217d7b7249c216d674750046b73",
+      "bytes": 33199,
+      "sha256": "f4600dd644257bea198646afae5bee496cd5eea4727e59e8d52d22c47d900852"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "506b53c922ebc0f9a101ae1108604993143adaed",
+      "bytes": 55926,
+      "sha256": "c4e2fc98e62d6da94f024ba7a2c2cb3968e662bff7cef528f4115ec198818700"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "527149a4ecf3e5f4f06e0d801cef38a256b60ceb",
+      "bytes": 31647,
+      "sha256": "d3f27d5e093dd07866e3c2da6b10beb200e28949abcfcc4090f01671db3e4c04"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/diagnostic-driver.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/progress-recorder.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1478619761188d61ef510a9a588bb1e1098bd067",
+      "bytes": 16767,
+      "sha256": "4a79a4468efb2c05ed705b8b30b2b519e10377788eca1a0ac2df162e0712bec2"
+    },
+    {
+      "path": ".github/workflows/afw-c2-finite-get-diag3.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e900cd550ed1ba51c92fc5b65e20110afb750c06",
+      "bytes": 1541,
+      "sha256": "78d8eec6ff313540928b187d551e69e06de697469a54f8029d80297e530713b9"
+    }
+  ],
+  "bodyEdgesHash": "93db4eeb78cdb22923ac5fcb5ccdd79b64cfff3a48cca427a572c61fe7bd41eb",
+  "fullMeasurement": true,
+  "SourceExecuted": false,
+  "original3203Unaffected": true,
+  "baselinePathCollisions": 0,
+  "unboundEdges": 0,
+  "frozenSlots": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    20,
+    21,
+    22
+  ],
+  "changedSlots": [
+    0,
+    9,
+    16,
+    17,
+    18,
+    19,
+    23,
+    24
+  ],
+  "E3OnlyS08Changed": true,
+  "other12Exact": true,
+  "site18And41LinesExact": true,
+  "selectionCanonicalSha256": "7baee5f4a5c38c341a1a8f6a446ffbbc1e531ac8a0871de7cdc3cf1b422b178b",
+  "collectorAndRunnerSemanticReviewPending": true,
+  "toolingPending": true,
+  "permissions": {
+    "NativeReleased": false,
+    "SourceBusinessReleased": false,
+    "SourceLocallyExecuted": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "previousMeasurement": "266289bbe7e34d1a323e5140001cd3e8d7232507",
+  "changedVsPreviousSlots": [
+    18,
+    19,
+    23
+  ],
+  "SourceFixRelease": "be1fbf3eaaab07bdfaf8a3b84a7665d42d45d71c"
+}
