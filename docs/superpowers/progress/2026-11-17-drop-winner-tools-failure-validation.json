@@ -1,0 +1,50 @@
+{
+  "schema": "AFW.DROP.S5.TOOLING_STARTUP_FAILURE/1",
+  "timestampUTC": "2026-11-17 13:36:59 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "run": 44094213474,
+  "attempt": 1,
+  "job": 134076945897,
+  "head": "435e0b1e90251288695cf71ba166baa45e041936",
+  "tree": "3462bb1530a27a0b48f1ebe2f5b122d53dde6bff",
+  "checks": {
+    "exactRun": true,
+    "exactCommit": true,
+    "oneJob": true,
+    "steps": true,
+    "noArtifacts": true,
+    "compilerError": true,
+    "logAcquiredOnce": true
+  },
+  "log": {
+    "bytes": 15523,
+    "sha256": "7482b57f6f4420a82cfadb895aa9bd50331c31e45d0b1a6239bea68f1eee0d5f",
+    "blob": "a66e072be2a3b7a86cfc605c91119aa78e33daa4"
+  },
+  "outcome": "MODULE_PARSE_FAILURE_BEFORE_CONTROLLER_ENTRY",
+  "nativeControlsExecuted": 0,
+  "modelControlsExecuted": 0,
+  "differentialExecuted": 0,
+  "sourceCompilerExecuted": false,
+  "artifact": null,
+  "artifactDownloadAttempted": false,
+  "causeObserved": {
+    "kind": "SyntaxError",
+    "message": "Identifier 'st' has already been declared",
+    "path": "docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+    "line": 323
+  },
+  "boundary": "Node refused to parse the Root nominated tooling runner. Dependency installation succeeded; no controller materialization/child dispatch/tool model/compiler/wire evidence. This occurrence cannot qualify Source or identify case15 cause.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
