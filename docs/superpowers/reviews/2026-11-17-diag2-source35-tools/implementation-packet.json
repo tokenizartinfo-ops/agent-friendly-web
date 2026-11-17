@@ -1,0 +1,95 @@
+{
+  "schema": "AFW-DIAG2-SOURCE-IMPLEMENTATION-ROUND1-PACKET/1",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "round": 1,
+  "maxRounds": 5,
+  "status": "DETACHED_COMPLETE_FOR_ROOT_STATIC_AND_TOOLS_GATE; NO_NATIVE_OR_BUSINESS_RESULT",
+  "authority": {
+    "rootImplementation": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+    "legacyComparator": "2806614c0e50975bc1a6d912b7e0b1db6038a47a",
+    "priorBinding": "5b5e67e14d623930dc7cea9e5579a64ec98a9508",
+    "sourcePeer": "50ffcbb3c65917ff3884eec10f006d91e2d068fe",
+    "toyProof": "9f3ec19e53267713dd037fca22a9f3bb3742cb3a",
+    "RootComplete25Measure": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8"
+  },
+  "objects": {
+    "seal": {
+      "bytes": 17929,
+      "sha256": "e4bb383ae6acfdf844463188398ca6642981ec6a3427258a67a76fcc44ab5998",
+      "blob": "d1b79ae4c7987fcc8f876ffd6f7d211bb2970465"
+    },
+    "newad": {
+      "bytes": 20195,
+      "sha256": "e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e",
+      "blob": "9f457450ba1e7a746117fc1498922972613df789"
+    },
+    "newrun": {
+      "bytes": 16898,
+      "sha256": "292b9f8f0a2388c514a40ae336bc97df9b3f8571beaa00b41f0976896dea17b2",
+      "blob": "c0fbc1674de5a41760598ec248d97147a33dc517"
+    },
+    "newwf": {
+      "bytes": 1620,
+      "sha256": "24dc2e5c5f454af60ebba59d502e42d73a75af1594b327d2400fc3b29c247069",
+      "blob": "29441f47097afe3760b831e7b360614ea397e4e1"
+    },
+    "business": {
+      "bytes": 14768,
+      "sha256": "15b19b3ea359c4d3d84bcf408a87a700ddbb402b541bf8d153ed0a33694b428b",
+      "blob": "98d85420ec517978a18eab639b60c1dbb8353eee"
+    },
+    "suite": {
+      "bytes": 7154,
+      "sha256": "7a35ae0ac86a0047fe85982a756b6779bc8c9cde381bce442361698ec7324cad",
+      "blob": "763b04a5d358528beca961920af9aaadeced0101"
+    },
+    "toolwf": {
+      "bytes": 1459,
+      "sha256": "839062f469a741b1f0934a1fa02cf8838cfda7eabbf8a52ef876dd298af648a5",
+      "blob": "74ae2a7bded33eff15d29b4f3f436c2403968e31"
+    },
+    "toolrun": {
+      "bytes": 12108,
+      "sha256": "3eafda0c3eb71140602e27ff2b9a44e9ed8c7baf445bd41664152354aad8dc4c",
+      "blob": "5d389b03c54a3ff01c44fc270ec186d33fb069bb"
+    },
+    "proofschema": {
+      "bytes": 20345,
+      "sha256": "6470e3737a6eb5e3e4e206df42538b321962e1eea36a0bc4936e7dad4f6a7f2f",
+      "blob": "0dd58cc5646b8fe74b45967d6207084a4fbf59c6"
+    },
+    "toolprotocol": {
+      "bytes": 12193,
+      "sha256": "39aafd3e2b8c4990719084dfe43306b861d7ebc1e49f8973b9f4e6078dd86257",
+      "blob": "50cdc14fbe7e823468253067c670bf0bdee9dab8"
+    },
+    "toolindex": {
+      "bytes": 9671,
+      "sha256": "5e87dec225f005dbb3b50c49af798e89f05e2782cb9cc552de57b11a606fe3ee",
+      "blob": "e6fad54239858d779573fc724a73ee6231133e52"
+    },
+    "reversible": {
+      "bytes": 83825,
+      "sha256": "9904311418ecb40892e2e11f6dba7747dd491ead395f6a30a20adf5d89614846",
+      "blob": "f5c8ed79a7c72fb01a003b921b9ec809a14c1e55"
+    }
+  },
+  "verification": {
+    "allAfterimages": "Each detached newly authored body measured UTF8/SHA256/Git ID, sent via Git Data API, fully retrieved with exact original string equality. All three complete old/new codepairs reversible on DATA; C1 full corpus compact SHA, 13 shared parentjournal raw SHA/bytes, component pin and 35 expected projection hashes computed using builtin crypto only.",
+    "nativeActual": null,
+    "crossScope": "Tool e6fad... has 13 mounted additions; external protocol, schema, reversible index and final packet are NOT executable mount additions. Business98d85... has 25 mounted additions. No package changes to official Source13 beyond previously accepted S10 host serialization candidate.",
+    "limits": "No head/tree/runId/jobId assigned here. 35 and358 are sealed expectations only. No Source interpreted, tested, executed, compiled or parsed as code by author. Root alone can nominate native and obtain evidence. This package does not establish actual HTTP status, effects, historical cause or full Task1."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

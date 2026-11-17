@@ -1,0 +1,536 @@
+{
+  "schema": "AFW-DIAG2-SOURCE-IMPLEMENTATION-ROUND1-REVERSIBLE/1",
+  "status": "READBACK_VERIFIED_DATA_NO_NATIVE",
+  "authority": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "fixtureFirst": {
+    "bytes": 17929,
+    "sha256": "e4bb383ae6acfdf844463188398ca6642981ec6a3427258a67a76fcc44ab5998",
+    "blob": "d1b79ae4c7987fcc8f876ffd6f7d211bb2970465"
+  },
+  "businessIndex": {
+    "bytes": 14768,
+    "sha256": "15b19b3ea359c4d3d84bcf408a87a700ddbb402b541bf8d153ed0a33694b428b",
+    "blob": "98d85420ec517978a18eab639b60c1dbb8353eee"
+  },
+  "toolsIndex": {
+    "bytes": 9671,
+    "sha256": "5e87dec225f005dbb3b50c49af798e89f05e2782cb9cc552de57b11a606fe3ee",
+    "blob": "e6fad54239858d779573fc724a73ee6231133e52"
+  },
+  "before": "OLD DIAG1 package 2f25941491df234890036ae8cf0609e323207b67 preserved detached; never overwrite or recreate its closed ref. Old13 26b / c230 unchanged.",
+  "priorWireDiff": "c5fde2d6a7d6e5e980d4d74a3e0d12b8357bf819",
+  "codeSplices": [
+    {
+      "role": "adapter",
+      "from": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5c8123b9e66166a198add4a0593372cfef13a1db",
+        "bytes": 9911,
+        "sha256": "d608324a2270af11c0f371431079edb02bafa04a5bb0122150dd2203bd59c63c"
+      },
+      "to": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9f457450ba1e7a746117fc1498922972613df789",
+        "bytes": 20195,
+        "sha256": "e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e"
+      },
+      "unit": "UTF8 bytes, cut common exact prefix + suffix; deleted and inserted are verbatim UTF8, no newline normalization",
+      "prefixBytes": 277,
+      "suffixBytes": 826,
+      "deleted": "green20-frontier-diag1-';\nexport const markers = Object.freeze({\n  custody: 'AFW_C2_GREEN20_FRONTIER_DIAG1_CUSTODY',\n  outcome: 'AFW_C2_GREEN20_FRONTIER_DIAG1_OUTCOME',\n  fault: 'AFW_C2_GREEN20_FRONTIER_DIAG1_FAULT'\n});\nexport const flags = Object.freeze({\n  historicalCauseProven: false, receiptAuthenticated: false, operationalReadiness: false,\n  completePackage: false, PCoff: false, globalNativeDrainVerified: false, sdkNamespaceEmptyVerified: false\n});\nexport function requireFact(condition, code) {\n  if (!condition) throw Object.assign(new Error(code), { code });\n}\nexport const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);\nexport const sha = bytes => createHash('sha256').update(bytes).digest('hex');\nexport function hashes(bytes) {\n  return { bytes: bytes.length, sha256: sha(bytes),\n    git: createHash('sha1').update(Buffer.from('blob ' + bytes.length + '\\0')).update(bytes).digest('hex') };\n}\nexport function match(bytes, pin, code) {\n  const actual = hashes(bytes);\n  requireFact(actual.bytes === pin.bytes && actual.git === (pin.blob ?? pin.git)\n    && actual.sha256 === pin.sha256, code);\n  return actual;\n}\nconst numberIn = (n, lo, hi) => Number.isSafeInteger(n) && n >= lo && n <= hi;\nconst sameInode = (a,b) => a.dev === b.dev && a.ino === b.ino;\nconst stable = (a,b) => sameInode(a,b) && a.size === b.size &&\n  a.mtimeMs === b.mtimeMs && a.ctimeMs === b.ctimeMs;\nconst privateFile = v => v.isFile() && v.nlink === 1 && (v.mode & 0o777) === 0o600 &&\n  v.uid === process.getuid() && v.gid === process.getgid();\n\n// Read the actual inode and check its path again after reading; a replaced/torn file\n// is different from a stable file ending in a partial journal record.\nasync function measuredRead(path, limit, code, identity = null, privateMode = false) {\n  let handle;\n  try {\n    requireFact(await realpath(path) === resolve(path), code);\n    handle = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK);\n    const before = await handle.stat();\n    requireFact(before.isFile() && before.nlink === 1 && numberIn(before.size,0,limit)\n      && (!identity || sameInode(identity,before)) && (!privateMode || privateFile(before)), code);\n    const data = Buffer.alloc(before.size);\n    let offset = 0;\n    while (offset < data.length) {\n      const {bytesRead} = await handle.read(data,offset,data.length-offset,offset);\n      requireFact(bytesRead > 0,code);\n      offset += bytesRead;\n    }\n    const after = await handle.stat(), named = await lstat(path);\n    requireFact(stable(before,after) && stable(after,named) && (!privateMode || privateFile(named)),code);\n    return data;\n  } catch { throw Object.assign(new Error(code), {code}); }\n  finally { if (handle) await handle.close(); }\n}\nexport async function measureTargets(root, entries) {\n  requireFact(entries.length === 13 && new Set(entries.map(e=>e.path)).size === 13,'TARGET_DRIFT');\n  const observed = [];\n  for (const entry of entries) {\n    const bytes = await measuredRead(join(root,entry.path),entry.after.bytes,'TARGET_DRIFT');\n    observed.push(match(bytes,entry.after,'TARGET_DRIFT').sha256);\n  }\n  return observed;\n}\nexport async function verifySiblings(root, selection) {\n  const spec = selection.registrationTail, d = selection.driver, s = selection.originalDriver;\n  const original = await measuredRead(join(root,s.path),s.bytes,'TARGET_DRIFT');\n  const driver = await measuredRead(join(root,d.path),d.bytes,'TARGET_DRIFT');\n  const recorder = await measuredRead(join(root,selection.recorder.path),selection.recorder.bytes,'TARGET_DRIFT');\n  match(original,s,'TARGET_DRIFT'); match(driver,d,'TARGET_DRIFT'); match(recorder,selection.recorder,'TARGET_DRIFT');\n  const a=original.subarray(spec.originalOffset), b=driver.subarray(spec.driverOffset);\n  requireFact(d.path !== s.path && a.length === spec.bytes && a.equals(b) && sha(a) === spec.sha256,'TARGET_DRIFT');\n  const alias=selection.aliases.filter(x=>x.id==='D07');\n  requireFact(alias.length===1 && alias[0].path===d.path && alias[0].blob===d.git,'TARGET_DRIFT');\n  return spec.sha256;\n}\nexport async function installSiblings(root,selection,driver,recorder) {\n  match(driver,selection.driver,'TARGET_DRIFT'); match(recorder,selection.recorder,'TARGET_DRIFT');\n  requireFact(selection.driver.path!==selection.originalDriver.path,'TARGET_DRIFT');\n  await writeFile(join(root,selection.driver.path),driver,{flag:'wx',mode:0o600});\n  await writeFile(join(root,selection.recorder.path),recorder,{flag:'wx',mode:0o600});\n  return verifySiblings(root,selection);\n}\nexport async function createJournal(path) {\n  const h=await open(path,constants.O_CREAT|constants.O_EXCL|constants.O_WRONLY|constants.O_NOFOLLOW,0o600);\n  try {\n    const s=await h.stat();\n    requireFact(privateFile(s)&&s.size===0,'JOURNAL_INVALID');\n    return s;\n  } finally { await h.close(); }\n}\nexport const readJournal = (path,initial) => measuredRead(path,32768,'JOURNAL_INVALID',initial,true);\nexport async function readProbe(path) {\n  const raw=await measuredRead(path,1024,'CUSTODY_INVALID',null,true);\n  const expected={schema:'afw.c2-oauth-custody.v1',uidMatches:true,gidMatches:true,groupsCleared:true,loopbackOnly:true};\n  requireFact(raw.equals(Buffer.from(JSON.stringify(expected)+'\\n')),'CUSTODY_INVALID');\n  return sha(raw);\n}\nexport function freshProbes(before,after) {\n  const valid=names=>Array.isArray(names)&&names.length<=8&&new Set(names).size===names.length&&\n    names.every(n=>/^[1-9][0-9]*\\.json$/.test(n));\n  requireFact(valid(before)&&valid(after)&&before.every(n=>after.includes(n)),'CUSTODY_INVALID');\n  const count=after.filter(n=>!before.includes(n)).length;\n  requireFact(count>=1 && count<=7,'CUSTODY_INVALID');\n  return count;\n}\nexport function custodyFrame(context,preflightProcesses,greenProcesses,checks) {\n  const count=preflightProcesses+greenProcesses;\n  requireFact(numberIn(preflightProcesses,1,7)&&numberIn(greenProcesses,1,7)&&numberIn(count,2,8),'CUSTODY_INVALID');\n  for (const key of ['parentNonRoot','preflightOwned','preflightRemoved','uidGidGroupsLoopbackMatched',\n    'targetsBeforeMatched','targetsAfterMatched','journalOwnershipMatched','ownRootVerified','ownTempRemoved'])\n    requireFact(checks[key]===true,'CUSTODY_INVALID');\n  return {schema:family+'custody.v1',context,parentNonRoot:checks.parentNonRoot,\n    preflightOwned:checks.preflightOwned,preflightRemoved:checks.preflightRemoved,checkedLaunches:2,\n    preflightProcesses,greenProcesses,checkedProcesses:count,uidGidGroupsLoopbackMatched:checks.uidGidGroupsLoopbackMatched,\n    targetsBeforeMatched:checks.targetsBeforeMatched,targetsAfterMatched:checks.targetsAfterMatched,\n    journalOwnershipMatched:checks.journalOwnershipMatched,ownRootVerified:checks.ownRootVerified,ownTempRemoved:checks.ownTempRemoved};\n}\nconst stream = b=>({bytes:b.length,sha256:sha(b)});\nexport function collectObservation(child,raw,ids) {\n  requireFact(Buffer.isBuffer(raw)&&raw.length<=32768,'JOURNAL_INVALID');\n  requireFact(Buffer.isBuffer(child.stdout)&&child.stdout.length<=1048576&&\n    Buffer.isBuffer(child.stderr)&&child.stderr.length<=65536,'CAPTURE_INVALID');\n  const timeout=child.error?.code==='ETIMEDOUT';\n  requireFact(timeout||(!child.error&&child.signal===null&&[0,1].includes(child.status)),'CAPTURE_INVALID');\n  const known=['SIGTERM','SIGKILL','SIGABRT','SIGSEGV','SIGINT','SIGHUP','SIGPIPE'];\n  const signal=child.signal===null?'none':known.includes(child.signal)?child.signal:\n    typeof child.signal==='string'?'other':'unavailable';\n  const capture={exitCode:numberIn(child.status,0,255)?child.status:null,signal,\n    errorKind:timeout?'timeout':'none',stdout:stream(child.stdout),stderr:stream(child.stderr)};\n  const fault=[child.stdout,child.stderr].some(b=>/^(?:# )?AFW_C2_GREEN_RECORDER_FAULT$/m.test(b.toString('utf8')));\n  const journal={...stream(raw),stable:true,recorderFaultObserved:fault};\n  const witness=progress(raw,ids,timeout?'timeout':'normal',fault);\n  const native=nativePrefix(child.stdout,ids);\n  const reason=fault?'RECORDER_FAULT':({empty:'JOURNAL_EMPTY',torn:'JOURNAL_TORN',ambiguous:'JOURNAL_INVALID_RECORD'}[witness.integrity]??null);\n  requireFact(!native.cases.some(n=>n.status==='pass' && witness.events.some(e=>\n    e.id===n.id && (e.operation==='action'||e.operation==='count') && e.edge==='throw')),'EVIDENCE_CONFLICT');\n  return {capture,journal,witness,unknownReason:reason,\n    firstThrowSequence:witness.events.find(e=>e.edge==='throw')?.sequence??null,native};\n}\nexport function encodeBody(value,limit) {\n  const text=JSON.stringify(value);\n  requireFact(typeof text==='string'&&Buffer.byteLength(text,'utf8')<=limit,'PUBLICATION_INVALID');\n  return text;\n}\nexport function successPacket(context,custody,beforeSha256,afterSha256,expected,observation) {\n  requireFact(expected.length===13",
+      "inserted": "first-failure-post-diag2-';\nexport const markers = Object.freeze({\n  custody: 'AFW_C2_FIRST_FAILURE_POST_DIAG2_CUSTODY',\n  outcome: 'AFW_C2_FIRST_FAILURE_POST_DIAG2_OUTCOME',\n  fault: 'AFW_C2_FIRST_FAILURE_POST_DIAG2_FAULT'\n});\nexport const flags = Object.freeze({\n  historicalCauseProven: false, receiptAuthenticated: false, operationalReadiness: false,\n  completePackage: false, PCoff: false, globalNativeDrainVerified: false, sdkNamespaceEmptyVerified: false\n});\nexport function requireFact(condition, code) {\n  if (!condition) throw Object.assign(new Error(code), { code });\n}\nexport const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);\nexport const sha = bytes => createHash('sha256').update(bytes).digest('hex');\nexport function hashes(bytes) {\n  return { bytes: bytes.length, sha256: sha(bytes),\n    git: createHash('sha1').update(Buffer.from('blob ' + bytes.length + '\\0')).update(bytes).digest('hex') };\n}\nexport function match(bytes, pin, code) {\n  const actual = hashes(bytes);\n  requireFact(actual.bytes === pin.bytes && actual.git === (pin.blob ?? pin.git)\n    && actual.sha256 === pin.sha256, code);\n  return actual;\n}\nconst numberIn = (n, lo, hi) => Number.isSafeInteger(n) && n >= lo && n <= hi;\nconst sameInode = (a,b) => a.dev === b.dev && a.ino === b.ino;\nconst stable = (a,b) => sameInode(a,b) && a.size === b.size &&\n  a.mtimeMs === b.mtimeMs && a.ctimeMs === b.ctimeMs;\nconst privateFile = v => v.isFile() && v.nlink === 1 && (v.mode & 0o777) === 0o600 &&\n  v.uid === process.getuid() && v.gid === process.getgid();\n\n// Read the actual inode and check its path again after reading; a replaced/torn file\n// is different from a stable file ending in a partial journal record.\nasync function measuredRead(path, limit, code, identity = null, privateMode = false) {\n  let handle;\n  try {\n    requireFact(await realpath(path) === resolve(path), code);\n    handle = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW | constants.O_NONBLOCK);\n    const before = await handle.stat();\n    requireFact(before.isFile() && before.nlink === 1 && numberIn(before.size,0,limit)\n      && (!identity || sameInode(identity,before)) && (!privateMode || privateFile(before)), code);\n    const data = Buffer.alloc(before.size);\n    let offset = 0;\n    while (offset < data.length) {\n      const {bytesRead} = await handle.read(data,offset,data.length-offset,offset);\n      requireFact(bytesRead > 0,code);\n      offset += bytesRead;\n    }\n    const after = await handle.stat(), named = await lstat(path);\n    requireFact(stable(before,after) && stable(after,named) && (!privateMode || privateFile(named)),code);\n    return data;\n  } catch { throw Object.assign(new Error(code), {code}); }\n  finally { if (handle) await handle.close(); }\n}\nexport async function measureTargets(root, entries) {\n  requireFact(entries.length === 13 && new Set(entries.map(e=>e.path)).size === 13,'TARGET_DRIFT');\n  const observed = [];\n  for (const entry of entries) {\n    const bytes = await measuredRead(join(root,entry.path),entry.after.bytes,'TARGET_DRIFT');\n    observed.push(match(bytes,entry.after,'TARGET_DRIFT').sha256);\n  }\n  return observed;\n}\nexport async function verifySiblings(root, selection) {\n  const spec = selection.registrationTail, d = selection.driver, s = selection.originalDriver;\n  const original = await measuredRead(join(root,s.path),s.bytes,'TARGET_DRIFT');\n  const driver = await measuredRead(join(root,d.path),d.bytes,'TARGET_DRIFT');\n  const recorder = await measuredRead(join(root,selection.recorder.path),selection.recorder.bytes,'TARGET_DRIFT');\n  match(original,s,'TARGET_DRIFT'); match(driver,d,'TARGET_DRIFT'); match(recorder,selection.recorder,'TARGET_DRIFT');\n  const a=original.subarray(spec.originalOffset), b=driver.subarray(spec.driverOffset);\n  requireFact(d.path !== s.path && a.length === spec.bytes && a.equals(b) && sha(a) === spec.sha256,'TARGET_DRIFT');\n  const alias=selection.aliases.filter(x=>x.id==='D07');\n  requireFact(alias.length===1 && alias[0].path===d.path && alias[0].blob===d.git,'TARGET_DRIFT');\n  return spec.sha256;\n}\nexport async function installSiblings(root,selection,driver,recorder) {\n  match(driver,selection.driver,'TARGET_DRIFT'); match(recorder,selection.recorder,'TARGET_DRIFT');\n  requireFact(selection.driver.path!==selection.originalDriver.path,'TARGET_DRIFT');\n  await writeFile(join(root,selection.driver.path),driver,{flag:'wx',mode:0o600});\n  await writeFile(join(root,selection.recorder.path),recorder,{flag:'wx',mode:0o600});\n  return verifySiblings(root,selection);\n}\nexport async function createJournal(path) {\n  const h=await open(path,constants.O_CREAT|constants.O_EXCL|constants.O_WRONLY|constants.O_NOFOLLOW,0o600);\n  try {\n    const s=await h.stat();\n    requireFact(privateFile(s)&&s.size===0,'JOURNAL_INVALID');\n    return s;\n  } finally { await h.close(); }\n}\nexport const readJournal = (path,initial) => measuredRead(path,32768,'JOURNAL_INVALID',initial,true);\nexport async function readProbe(path) {\n  const raw=await measuredRead(path,1024,'CUSTODY_INVALID',null,true);\n  const expected={schema:'afw.c2-oauth-custody.v1',uidMatches:true,gidMatches:true,groupsCleared:true,loopbackOnly:true};\n  requireFact(raw.equals(Buffer.from(JSON.stringify(expected)+'\\n')),'CUSTODY_INVALID');\n  return sha(raw);\n}\nexport function freshProbes(before,after) {\n  const valid=names=>Array.isArray(names)&&names.length<=8&&new Set(names).size===names.length&&\n    names.every(n=>/^[1-9][0-9]*\\.json$/.test(n));\n  requireFact(valid(before)&&valid(after)&&before.every(n=>after.includes(n)),'CUSTODY_INVALID');\n  const count=after.filter(n=>!before.includes(n)).length;\n  requireFact(count>=1 && count<=7,'CUSTODY_INVALID');\n  return count;\n}\nexport function custodyFrame(context,preflightProcesses,greenProcesses,checks) {\n  const count=preflightProcesses+greenProcesses;\n  requireFact(numberIn(preflightProcesses,1,7)&&numberIn(greenProcesses,1,7)&&numberIn(count,2,8),'CUSTODY_INVALID');\n  for (const key of ['parentNonRoot','preflightOwned','preflightRemoved','uidGidGroupsLoopbackMatched',\n    'targetsBeforeMatched','targetsAfterMatched','journalOwnershipMatched','ownRootVerified','ownTempRemoved'])\n    requireFact(checks[key]===true,'CUSTODY_INVALID');\n  return {schema:family+'custody.v1',context,parentNonRoot:checks.parentNonRoot,\n    preflightOwned:checks.preflightOwned,preflightRemoved:checks.preflightRemoved,checkedLaunches:2,\n    preflightProcesses,greenProcesses,checkedProcesses:count,uidGidGroupsLoopbackMatched:checks.uidGidGroupsLoopbackMatched,\n    targetsBeforeMatched:checks.targetsBeforeMatched,targetsAfterMatched:checks.targetsAfterMatched,\n    journalOwnershipMatched:checks.journalOwnershipMatched,ownRootVerified:checks.ownRootVerified,ownTempRemoved:checks.ownTempRemoved};\n}\nconst targetId = 'C2T1_NOTICES', projectionSchema = 'afw.c2-first-failure-post-diag2.v1';\nconst sourceKeys = ['id','status','phase','counters','code'], counterKeys = ['upload','activation','receipts'];\nconst keyOrder = (o, keys) => o !== null && typeof o === 'object' && !Array.isArray(o) && same(Object.keys(o),keys);\nconst emptyProjection = (state,reason) => ({schema:projectionSchema,state,reason,throwSequence:null,source:null,assertion:null});\nconst unknown = reason => emptyProjection('UNKNOWN',reason);\nconst outside = reason => emptyProjection('NOT_APPLICABLE',reason);\nconst targetThrow = e => e?.id===targetId && e.operation==='action' && e.edge==='throw' &&\n  e.error?.name==='AssertionError' && e.error.code==='ERR_ASSERTION' &&\n  same(e.error.site,{file:'S08',line:41,column:12});\nconst prevPhases = ['connection','oauth',...Array(9).fill('negative'),'notices'];\n\n// C2SOURCE and the flat TAP result stream have separate ordering. Never take a\n// console row inside diagnostic text, or an assertion from another result block.\nfunction targetFromWire(lines,ids) {\n  let diagnostic=false, owner=null, targetBlocks=0, fields=null, closed=false, layout=false, duplicate=false;\n  let next=0, lastRow=-1, targetRow=null, sourceError=null;\n  const seenRows=new Set();\n  for(const line of lines) {\n    if(line==='  ---') {\n      if(diagnostic || owner===null) layout=true;\n      if(owner===targetId) { if(++targetBlocks!==1) duplicate=true; fields=new Map(); }\n      diagnostic=true;\n      continue;\n    }\n    if(line==='  ...') {\n      if(!diagnostic) layout=true;\n      if(diagnostic && owner===targetId) closed=true;\n      diagnostic=false;\n      continue;\n    }\n    if(diagnostic) {\n      if(!line.startsWith('    ') && line!=='') {\n        if(!line.startsWith('  ')) {layout=true;continue;}\n        if(owner===targetId) {\n          const m=/^  ([A-Za-z_][A-Za-z0-9_]*):(?: (.*))?$/.exec(line);\n          if(!m) {layout=true;continue;}\n          const [,key,value]=m;\n          if(fields.has(key)) duplicate=true;\n          fields.set(key,value??'');\n        }\n      }\n      continue;\n    }\n    if(line.startsWith('# Subtest: ')) {owner=null;continue;}\n    const pair=/^(?:not )?ok [1-9]\\d* - (C2T1_[A-Z_]+)$/.exec(line);\n    if(pair) {owner=pair[1];continue;}\n    if(!line.startsWith('# C2SOURCE ')) continue;\n    const encoded=line.slice(11);\n    let row;\n    try {\n      row=JSON.parse(encoded);\n      if(!keyOrder(row,sourceKeys)||!keyOrder(row.counters,counterKeys)||JSON.stringify(row)!==encoded) throw 0;\n    } catch {sourceError='AMBIGUOUS_EVIDENCE';continue;}\n    const pos=ids.indexOf(row.id);\n    if(pos<0||seenRows.has(row.id)||pos<=lastRow||(pos<=11 && pos!==next)) {\n      sourceError='AMBIGUOUS_EVIDENCE';\n    }\n    seenRows.add(row.id); lastRow=pos;\n    if(pos<=11 && pos>=0) {\n      next=pos+1;\n      if(pos===11) targetRow=row;\n      if(sourceError!=='AMBIGUOUS_EVIDENCE') {\n        const passed=pos!==11;\n        if(row.status!==(passed?'pass':'fail') || row.code!==(passed?'OK':'TEST_FAILED') || row.phase!==prevPhases[pos])\n          sourceError='CONFLICTING_EVIDENCE';\n        else if(!sourceError && !counterKeys.every(k=>numberIn(row.counters[k],0,3))) sourceError='UNSUPPORTED_SCALARS';\n      }\n    }\n  }\n  if(diagnostic && owner===targetId) return unknown('TRUNCATED_NATIVE');\n  if(layout) return unknown('NATIVE_FORMAT_UNSUPPORTED');\n  if(sourceError) return unknown(sourceError);\n  if(!targetRow) return unknown('SOURCE_ROW_UNAVAILABLE');\n  if(duplicate) return unknown('AMBIGUOUS_EVIDENCE');\n  if(!fields || !closed) return unknown('ASSERTION_SCALARS_UNAVAILABLE');\n  const tags={failureType:\"'testCodeFailure'\",code:\"'ERR_ASSERTION'\",name:\"'AssertionError'\",operator:\"'strictEqual'\"};\n  for(const [key,expected] of Object.entries(tags)) {\n    if(!fields.has(key)) return unknown('NATIVE_FORMAT_UNSUPPORTED');\n    if(fields.get(key)!==expected) return unknown('CONFLICTING_EVIDENCE');\n  }\n  if(!fields.has('actual')||!fields.has('expected')) return unknown('ASSERTION_SCALARS_UNAVAILABLE');\n  // Only calibrated top-level scalar fields. Nested map/text content is opaque.\n  if(fields.get('type')!==\"'test'\" || !/^\\d+(?:\\.\\d+)?$/.test(fields.get('duration_ms')??'') ||\n     !fields.has('location') || fields.get('error')!=='|-' || fields.get('stack')!=='|-' ||\n     [...fields.keys()].some(k=>!['duration_ms','type','location','failureType','error','code','name',\n       'expected','actual','operator','stack'].includes(k))) return unknown('NATIVE_FORMAT_UNSUPPORTED');\n  const [actual,expected]=['actual','expected'].map(key=>{\n    const scalar=fields.get(key);\n    return /^(?:0|[1-9]\\d*)$/.test(scalar) ? Number(scalar) : NaN;\n  });\n  if(!numberIn(actual,100,599)||!Number.isSafeInteger(expected)) return unknown('UNSUPPORTED_SCALARS');\n  if(actual===200||expected!==200) return unknown('CONFLICTING_EVIDENCE');\n  return {source:targetRow,assertion:{actual,expected}};\n}\n\n// Only called with the validated monotonic prefix from read-progress. The\n// projector never reconstructs a missing operation or reads any external data.\nexport function projectFirstFailure(stdout,facts,ids) {\n  const {witness,native,firstThrowSequence}=facts, events=witness.events, first=events.find(e=>e.edge==='throw');\n  requireFact((first?.sequence??null)===firstThrowSequence && ids.length===20 && ids[11]===targetId,'EVIDENCE_CONFLICT');\n  const settled=(id,op,edge)=>events.some(e=>e.id===id&&e.operation===op&&e.edge===edge);\n  if(first && !targetThrow(first)) return outside('EARLIEST_THROW_DIFFERENT');\n  const earlier=native.cases.slice(0,11), target=native.cases[11];\n  if(earlier.some(e=>e.status==='fail')) return outside('EARLIER_NATIVE_FAILURE');\n  if(target?.id===targetId && target.status==='pass')\n    return settled(targetId,'action','return') && settled(targetId,'count','return') ?\n      outside('TARGET_PASSED') : unknown('JOURNAL_UNRESOLVED');\n  if(!first) return witness.integrity==='complete' ? outside('NO_QUALIFYING_THROW') : unknown('JOURNAL_UNRESOLVED');\n  if(!ids.slice(0,11).every(id=>settled(id,'action','return')&&settled(id,'count','return')))\n    return unknown('JOURNAL_UNRESOLVED');\n  if(!settled(targetId,'count','enter')||!settled(targetId,'count','return')) return unknown('COUNTER_UNAVAILABLE');\n  if(native.integrity==='torn') return unknown('TRUNCATED_NATIVE');\n  let text;\n  try {text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(stdout);}\n  catch {return unknown('NATIVE_FORMAT_UNSUPPORTED');}\n  if(/[\\r\\t\\0]/.test(text) || (text!==''&&!text.startsWith('TAP version 13\\n'))) return unknown('NATIVE_FORMAT_UNSUPPORTED');\n  if(native.integrity==='ambiguous') return unknown('AMBIGUOUS_EVIDENCE');\n  if(earlier.length!==11 || !target || target.id!==targetId || target.status!=='fail') return unknown('TARGET_NATIVE_UNAVAILABLE');\n  const parsed=targetFromWire(text.split('\\n'),ids);\n  if(parsed.state) return parsed;\n  return {schema:projectionSchema,state:'KNOWN',reason:'TARGET_POST_ASSERTION',throwSequence:first.sequence,\n    source:parsed.source,assertion:parsed.assertion};\n}\n\nconst stream = b=>({bytes:b.length,sha256:sha(b)});\nexport function collectObservation(child,raw,ids) {\n  requireFact(Buffer.isBuffer(raw)&&raw.length<=32768,'JOURNAL_INVALID');\n  requireFact(Buffer.isBuffer(child.stdout)&&child.stdout.length<=1048576&&\n    Buffer.isBuffer(child.stderr)&&child.stderr.length<=65536,'CAPTURE_INVALID');\n  const timeout=child.error?.code==='ETIMEDOUT';\n  requireFact(timeout||(!child.error&&child.signal===null&&[0,1].includes(child.status)),'CAPTURE_INVALID');\n  const known=['SIGTERM','SIGKILL','SIGABRT','SIGSEGV','SIGINT','SIGHUP','SIGPIPE'];\n  const signal=child.signal===null?'none':known.includes(child.signal)?child.signal:\n    typeof child.signal==='string'?'other':'unavailable';\n  const capture={exitCode:numberIn(child.status,0,255)?child.status:null,signal,\n    errorKind:timeout?'timeout':'none',stdout:stream(child.stdout),stderr:stream(child.stderr)};\n  const fault=[child.stdout,child.stderr].some(b=>/^(?:# )?AFW_C2_GREEN_RECORDER_FAULT$/m.test(b.toString('utf8')));\n  const journal={...stream(raw),stable:true,recorderFaultObserved:fault};\n  const witness=progress(raw,ids,timeout?'timeout':'normal',fault);\n  const native=nativePrefix(child.stdout,ids);\n  const reason=fault?'RECORDER_FAULT':({empty:'JOURNAL_EMPTY',torn:'JOURNAL_TORN',ambiguous:'JOURNAL_INVALID_RECORD'}[witness.integrity]??null);\n  requireFact(!native.cases.some(n=>n.status==='pass' && witness.events.some(e=>\n    e.id===n.id && (e.operation==='action'||e.operation==='count') && e.edge==='throw')),'EVIDENCE_CONFLICT');\n  const facts={journal,witness,unknownReason:reason,\n    firstThrowSequence:witness.events.find(e=>e.edge==='throw')?.sequence??null,native};\n  return {capture,...facts,firstFailure:projectFirstFailure(child.stdout,facts,ids)};\n}\nexport function encodeBody(value,limit) {\n  const text=JSON.stringify(value);\n  requireFact(typeof text==='string'&&Buffer.byteLength(text,'utf8')<=limit,'PUBLICATION_INVALID');\n  return text;\n}\nconst targetHashes=[\"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210\",\"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9\",\"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8\",\"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6\",\"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b\",\"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b\",\"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4\",\"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b\",\"ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e\",\"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d\",\"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa\",\"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7\",\"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8\"];\nconst fixedPublication={\"repository\":\"tokenizartinfo-ops/agent-friendly-web\",\"baselineSource\":\"6791ce1bab9372e206d3c7b42b3e1394dc6e0c68\",\"baselineTree\":\"62e78926635d6b74f288d6c0d69e0f2516306989\",\"sourceIndexBlob\":\"e2ca46e8ecf98dd0d87f148068dd240b147db1ec\",\"proposalIndexHash\":\"87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7\",\"selectionHash\":\"b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc\",\"runAttempt\":1,\"job\":\"c2-first-failure-post-diag2\",\"node\":\"v22.23.4\"};\nconst allowedReasons=[[\"JOURNAL_UNRESOLVED\",\"TARGET_NATIVE_UNAVAILABLE\",\"COUNTER_UNAVAILABLE\",\"SOURCE_ROW_UNAVAILABLE\",\"ASSERTION_SCALARS_UNAVAILABLE\",\"UNSUPPORTED_SCALARS\",\"NATIVE_FORMAT_UNSUPPORTED\",\"AMBIGUOUS_EVIDENCE\",\"CONFLICTING_EVIDENCE\",\"TRUNCATED_NATIVE\"],[\"EARLIEST_THROW_DIFFERENT\",\"EARLIER_NATIVE_FAILURE\",\"TARGET_PASSED\",\"NO_QUALIFYING_THROW\"]];\nfunction publication(context,o) {\n  requireFact(Object.entries(fixedPublication).every(([k,v])=>context[k]===v),'PUBLICATION_INVALID');\n  requireFact(keyOrder(o,['capture','journal','witness','unknownReason','firstThrowSequence','native','firstFailure']),'PUBLICATION_INVALID');\n  const f=o.firstFailure;\n  requireFact(keyOrder(f,['schema','state','reason','throwSequence','source','assertion']) &&\n    f.schema===projectionSchema,'PUBLICATION_INVALID');\n  if(f.state==='KNOWN') {\n    const r=f.source,a=f.assertion;\n    requireFact(f.reason==='TARGET_POST_ASSERTION' && numberIn(f.throwSequence,1,128) &&\n      o.firstThrowSequence===f.throwSequence && targetThrow(o.witness.events.find(e=>e.edge==='throw')) &&\n      keyOrder(r,sourceKeys) && r.id===targetId && r.status==='fail' && r.phase==='notices' && r.code==='TEST_FAILED' &&\n      keyOrder(r.counters,counterKeys) && counterKeys.every(k=>numberIn(r.counters[k],0,3)) &&\n      keyOrder(a,['actual','expected']) && a.expected===200 && numberIn(a.actual,100,599) && a.actual!==200,\n      'PUBLICATION_INVALID');\n  } else {\n    const reasons=f.state==='UNKNOWN'?allowedReasons[0]:f.state==='NOT_APPLICABLE'?allowedReasons[1]:[];\n    requireFact(reasons.includes(f.reason) && f.throwSequence===null && f.source===null && f.assertion===null,'PUBLICATION_INVALID');\n  }\n  encodeBody(f,512);\n}\nexport function successPacket(context,custody,beforeSha256,afterSha256,expected,observation) {\n  publication(context,observation);\n  requireFact(same(expected,targetHashes)",
+      "byteEqualForwardAndReverse": true
+    },
+    {
+      "role": "runner",
+      "from": {
+        "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "dec4bb5585375423ca87d8d3baecb2edbe733b6f",
+        "bytes": 16837,
+        "sha256": "b8a84896a5daf7b8f0d102bd0ef45891e6983f57a52dfa702ec53f972e55111e"
+      },
+      "to": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c0fbc1674de5a41760598ec248d97147a33dc517",
+        "bytes": 16898,
+        "sha256": "292b9f8f0a2388c514a40ae336bc97df9b3f8571beaa00b41f0976896dea17b2"
+      },
+      "unit": "UTF8 bytes, cut common exact prefix + suffix; deleted and inserted are verbatim UTF8, no newline normalization",
+      "prefixBytes": 547,
+      "suffixBytes": 222,
+      "deleted": "6-t1-green-frontier-diag1\",\n  \"message\": \"AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116\",\n  \"job\": \"c2-green-frontier-diag1\",\n  \"runner\": \"docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs\",\n  \"prefix\": \"docs/superpowers/source-lab/c2-t1-green-frontier-diag1/\",\n  \"artifact\": \"output/c2-t1-green-frontier-diag1.json\",\n  \"childFile\": \"test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs\",\n  \"selectHash\": \"e8d4d8cd1fb4f81c5bfeec3d7c5ce98ccbda3b9dc7b1e29568527db3be7efecd\",\n  \"bootstrap\": {\n    \"path\": \".github/workflows/afw-finite-qa-bootstrap.yml\",\n    \"bytes\": 1844,\n    \"sha256\": \"ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14\",\n    \"blob\": \"22f324e480dbe0295fe23fb7415328cba7952b1b\",\n    \"fullReadback\": true\n  },\n  \"rootFiles\": [\n    \"package-lock.json\",\n    \"package.json\",\n    \"tsconfig.json\",\n    \"wrangler.a2a-canary.jsonc\",\n    \"wrangler.a2a-production.jsonc\",\n    \"wrangler.assistance-goal-context.jsonc\",\n    \"wrangler.assistance-goal-context.qa.jsonc\",\n    \"wrangler.assistance-supervision-producer.jsonc\",\n    \"wrangler.contact.jsonc\",\n    \"wrangler.delegated-canary.jsonc\",\n    \"wrangler.delegated-real-pilot.example.jsonc\",\n    \"wrangler.delegated-real-pilot.jsonc\",\n    \"wrangler.delegated.jsonc\",\n    \"wrangler.dossier-supervision-producer.jsonc\",\n    \"wrangler.independent-closure-qa.finite.jsonc\",\n    \"wrangler.independent-closure-qa.jsonc\",\n    \"wrangler.independent-closure-qa.rollback.jsonc\",\n    \"wrangler.mail-canary.jsonc\",\n    \"wrangler.mcp-own-events.example.jsonc\",\n    \"wrangler.mcp-own.finite.jsonc\",\n    \"wrangler.mcp.jsonc\",\n    \"wrangler.operations-manager.jsonc\",\n    \"wrangler.operations-producer.jsonc\",\n    \"wrangler.operations-review-qa.jsonc\",\n    \"wrangler.operations-review.jsonc\",\n    \"wrangler.operations-watchdog.jsonc\",\n    \"wrangler.operations.jsonc\",\n    \"wrangler.release-operator.jsonc\"\n  ]\n};\nconst pins={\n  \"index\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/source-index.json\",\n    \"blob\": \"26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac\",\n    \"bytes\": 11467,\n    \"sha256\": \"0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7\"\n  },\n  \"selection\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-green-frontier-diag1/mode-selection.json\",\n    \"blob\": \"2cbdeb48255afbc1a1bf7745170541e8baab0e1d\",\n    \"bytes\": 3956,\n    \"sha256\": \"e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99\"\n  },\n  \"schema\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-green-frontier-diag1/frame-schema.json\",\n    \"blob\": \"eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc\",\n    \"bytes\": 21200,\n    \"sha256\": \"a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3\"\n  },\n  \"contract\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-green-frontier-diag1/protocol-contract.json\",\n    \"blob\": \"e55a6387549a8447a5ad93356184645ae19e70de\",\n    \"bytes\": 21378,\n    \"sha256\": \"8891598c7c0ee416762ad65d139c7e9336cc33e4123e251211055e42c3265fe7\"\n  },\n  \"adapters\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-green-frontier-diag1/collection-adapters.mjs\",\n    \"blob\": \"5c8123b9e66166a198add4a0593372cfef13a1db\",\n    \"bytes\": 9911,\n    \"sha256\": \"d608324a2270af11c0f371431079edb02bafa04a5bb0122150dd2203bd59c63c\"\n  },\n  \"reader\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-green-frontier-diag1/read-progress.mjs\",\n    \"blob\": \"62a31e3c16cc710c84ebfb5b0242abb00671363c\",\n    \"bytes\": 5507,\n    \"sha256\": \"c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f\"\n  },\n  \"driver\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-green-frontier-diag1/diagnostic-driver.txt\",\n    \"blob\": \"9e29c5197207b03bdb4b10069089f37df289e88c\",\n    \"bytes\": 3169,\n    \"sha256\": \"3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc\"\n  },\n  \"recorder\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-green-frontier-diag1/progress-recorder.txt\",\n    \"blob\": \"662ec8170bbfe81831b557824d1a466e722842d7\",\n    \"bytes\": 3833,\n    \"sha256\": \"a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e\"\n  },\n  \"guard\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs\",\n    \"blob\": \"5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb\",\n    \"bytes\": 1208,\n    \"sha256\": \"c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf\"\n  },\n  \"preflight\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs\",\n    \"blob\": \"d311f579e95ab64a5f2d897d6c40f1fce784e8e2\",\n    \"bytes\": 417,\n    \"sha256\": \"3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae\"\n  }\n};\nconst flags={\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false};\n\nconst workspace=resolve(process.cwd()), node=process.execPath, uid=process.getuid(),gid=process.getgid();\nconst root=resolve(process.env.RUNNER_TEMP??''), parentEnv={PATH:dirname(node)+':/usr/bin:/bin:/usr/sbin:/sbin',HOME:root,LANG:'C.UTF-8',LC_ALL:'C.UTF-8'};\nlet phase='admission', context=null, fault=null, temp=null, tempInitial=null, target=null, adapters=null;\nlet beforeHashes, afterHashes, expected, observation, pfCount, greenCount;\nconst valid={admission:['ADMISSION_INVALID'],materialize:['MATERIALIZATION_INVALID','TARGET_DRIFT'],\n  preflight:['PREFLIGHT_INVALID','CUSTODY_INVALID'],green:['LAUNCH_INVALID','CUSTODY_INVALID','CAPTURE_INVALID'],\n  journal:['JOURNAL_INVALID','RECORDER_FAULT','TARGET_DRIFT'],native:['CAPTURE_INVALID','EVIDENCE_CONFLICT'],\n  cleanup:['CLEANUP_INVALID','TARGET_DRIFT'],publish:['PUBLICATION_INVALID']};\nconst fail=(reason=valid[phase][0])=>{throw Object.assign(new Error(reason),{code:reason});};\nconst need=(condition,reason)=>{if(!condition)fail(reason);};\nconst remain=(limit)=>{const ms=end-Date.now();need(ms>0);return Math.max(1,Math.min(ms,limit));};\nconst digest=b=>createHash('sha256').update(b).digest('hex');\nconst gitBlob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\\0')).update(b).digest('hex');\nconst existsAbsent=async p=>{try{await lstat(p);}catch(e){if(e.code==='ENOENT')return;throw e;}fail();};\nasync function pinned(rootDir,pin) {\n  const path=join(rootDir,pin.path);need((await lstat(path)).isFile() && await realpath(path)===resolve(path));\n  const data=await readFile(path);\n  need(data.length===pin.bytes&&gitBlob(data)===pin.blob&&digest(data)===pin.sha256);\n  return data;\n}\nfunction hostCmd(cmd,args,max=1048576,input) {\n  const result=spawnSync(cmd,args,{cwd:workspace,env:parentEnv,encoding:null,\n    input,stdio:['pipe','pipe','pipe'],maxBuffer:max,timeout:remain(cmd==='tar'?30000:330000)});\n  need(!result.error&&result.signal===null&&result.status===0&&Buffer.isBuffer(result.stdout)&&\n    result.stdout.length<=max&&Buffer.isBuffer(result.stderr)&&result.stderr.length<=65536);\n  return result.stdout;\n}\nconst gitText=(...args)=>new TextDecoder('utf-8',{fatal:true}).decode(hostCmd('git',args)).trim();\nasync function materialize(index,files) {\n  target=join(temp,'proposal-green'); await mkdir(target,{mode:0o700});\n  const archive=hostCmd('git',['archive','--format=tar',config.BASE,'--','lib','worker','scripts','test','db','config',\n    config.bootstrap.path,...config.rootFiles],33554432);\n  hostCmd('tar',['-xf','-','-C',target],65536,archive);\n  await pinned(target,config.bootstrap);\n  for(const e of index.entries) {\n    const destination=join(target,e.path), admitted=await pinned(workspace,{...e.after,path:e.dataPath});\n    if(e.before) {\n      const old=await readFile(destination);\n      need((await lstat(destination)).isFile()&&old.length===e.before.bytes&&gitBlob(old)===e.before.blob);\n    } else await existsAbsent(destination);\n    await mkdir(dirname(destination),{recursive:true});\n    await writeFile(destination,admitted,{flag:e.before?'w':'wx'});\n  }\n  await symlink(join(workspace,'node_modules'),join(target,'node_modules'),'dir');\n  await writeFile(join(target,'c2-source-custody-guard.mjs'),files.guard,{flag:'wx'});\n  await writeFile(join(target,'c2-source-custody-preflight.mjs'),files.preflight,{flag:'wx'});\n}\nlet previous = new Map();\nasync function probeMap() {\n  const dir=join(target,'custody-probes');\n  let names;\n  try{const stat=await lstat(dir);need(stat.isDirectory()&&stat.uid===uid&&stat.gid===gid,'CUSTODY_INVALID');names=await readdir(dir);}\n  catch(e){if(e.code==='ENOENT')return new Map();throw e;}\n  need(names.length<=8 && names.every(n=>/^[1-9][0-9]*\\.json$/.test(n)),'CUSTODY_INVALID');\n  const map=new Map();\n  for(const name of names.sort()) {\n    const path=join(dir,name), stat=await lstat(path), h=await adapters.readProbe(path);\n    const last=await lstat(path);\n    need(stat.dev===last.dev&&stat.ino===last.ino&&stat.size===last.size&&stat.ctimeMs===last.ctimeMs,'CUSTODY_INVALID');\n    map.set(name,[last.dev,last.ino,h]);\n  }\n  return map;\n}\nasync function checkedLaunch(args,limit) {\n  const prior=await probeMap();\n  need(adapters.same([...prior],[...previous]),'CUSTODY_INVALID');\n  const env={PATH:parentEnv.PATH,HOME:temp,TMPDIR:temp,RUNNER_TEMP:temp,XDG_CACHE_HOME:join(temp,'cache'),\n    XDG_CONFIG_HOME:join(temp,'config'),LANG:'C.UTF-8',LC_ALL:'C.UTF-8',CI:'true',NODE_ENV:'test',\n    GITHUB_SHA:context.head,GITHUB_REPOSITORY:config.repo,AFW_C2_DIAG_ROOT:target,\n    AFW_C2_DIAG_PARENT_UID:String(uid),AFW_C2_DIAG_PARENT_GID:String(gid)};\n  const child=spawnSync('sudo',['-n','/usr/bin/env','-i',...Object.entries(env).map(([k,v])=>k+'='+v),\n    'unshare','--net','/bin/sh','-c','uid=\"$1\"; gid=\"$2\"; shift 2; ip link set lo up && exec /usr/bin/setpriv --reuid \"$uid\" --regid \"$gid\" --clear-groups --no-new-privs \"$@\"',\n    'c2-source',String(uid),String(gid),node,'--import',join(target,'c2-source-custody-guard.mjs'),...args],\n    {cwd:target,env,encoding:null,maxBuffer:1048576,timeout:remain(limit),stdio:['ignore','pipe','pipe']});\n  const after=await probeMap();\n  for(const [key,v] of prior)need(adapters.same(after.get(key),v),'CUSTODY_INVALID');\n  const fresh=adapters.freshProbes([...prior.keys()],[...after.keys()]);\n  previous=after;\n  return {child,fresh};\n}\nconst checks={parentNonRoot:false,preflightOwned:false,preflightRemoved:false,uidGidGroupsLoopbackMatched:false,\n  targetsBeforeMatched:false,targetsAfterMatched:false,journalOwnershipMatched:false,ownRootVerified:false,ownTempRemoved:false};\ntry {\n  const e=process.env;\n  need(process.argv.length===2&&process.version==='v22.23.4'&&Number.isSafeInteger(uid)&&uid>0&&Number.isSafeInteger(gid)&&gid>=0);\n  need(e.GITHUB_REPOSITORY===config.repo&&e.GITHUB_EVENT_NAME==='push'&&e.GITHUB_REF==='refs/heads/'+config.branch\n    &&e.GITHUB_JOB===config.job&&e.GITHUB_RUN_ATTEMPT==='1'&&/^[1-9][0-9]{0,19}$/.test(e.GITHUB_RUN_ID??'')\n    &&/^[0-9a-f]{40}$/.test(e.GITHUB_SHA??'')&&e.RUNNER_TEMP&&root===await realpath(root)\n    &&workspace===resolve(e.GITHUB_WORKSPACE??'')&&fileURLToPath(import.meta.url)===join(workspace,config.runner));\n  need(gitText('rev-parse','HEAD')===e.GITHUB_SHA&&gitText('rev-parse','HEAD^')===config.BASE&&\n    gitText('rev-parse',config.BASE+'^{tree}')===config.TREE&&gitText('show','-s','--format=%B','HEAD')===config.message);\n  const tree=gitText('rev-parse','HEAD^{tree}');need(/^[0-9a-f]{40}$/.test(tree));\n  const files={};for(const [key,pin]of Object.entries(pins))files[key]=await pinned(workspace,pin);\n  const selection=JSON.parse(files.selection), index=JSON.parse(files.index);\n  need(digest(Buffer.from(JSON.stringify(selection)))===config.selectHash&&index.entries.length===13\n    &&index.context.baselineSource===config.BASE&&index.context.baselineTree===config.TREE\n    &&index.context.repository===config.repo&&index.context.status==='SOURCE_TESTS_PENDING');\n  for(const [i,entry] of index.entries.entries())need(entry.dataPath==='docs/superpowers/source-lab/c2-t1/body-'+String(i).padStart(2,'0')+'.txt');\n  need(JSON.stringify(index.caseMap.map(x=>x.id))===JSON.stringify(selection.selected)&&selection.selected.length===20);\n  const lock=await readFile(join(workspace,'package-lock.json'));\n  need(lock.equals(hostCmd('git',['show',config.BASE+':package-lock.json']))&&JSON.parse(lock).packages?.['node_modules/@cloudflare/workers-oauth-provider']?.version==='1.2.1');\n  adapters=await import('./collection-adapters.mjs');\n  context={repository:config.repo,baselineSource:config.BASE,baselineTree:config.TREE,sourceIndexBlob:pins.index.blob,\n    proposalIndexHash:pins.index.sha256,selectionHash:config.selectHash,head:e.GITHUB_SHA,tree,runId:e.GITHUB_RUN_ID,\n    runAttempt:1,job:config.job,node:process.version};\n  checks.parentNonRoot=true;\n  phase='materialize';\n  temp=await mkdtemp(join(root,'afw-green20-')); tempInitial=await lstat(temp);\n  need(dirname(temp)===root&&tempInitial.isDirectory()&&tempInitial.uid===uid&&tempInitial.gid===gid);\n  await materialize(index,files);\n  await adapters.installSiblings(target,selection,files.driver,files.recorder);\n  phase='preflight';\n  const pf=await checkedLaunch([join(target,'c2-source-custody-preflight.mjs')],10000);\n  pfCount=pf.fresh;\n  need(!pf.child.error&&pf.child.signal===null&&pf.child.status===0&&\n    pf.child.stdout?.equals(Buffer.from('AFW_C2_OAUTH_PREFLIGHT {\"schema\":\"afw.c2-oauth-preflight.v1\",\"written\":true}\\n'))&&pf.child.stderr?.length===0);\n  const pd=join(target,'preflight-owned'),probe=join(pd,'probe'),st=await lstat(probe);\n  need((await lstat(pd)).isDirectory()&&await realpath(probe)===probe&&st.isFile()&&st.nlink===1&&st.uid===uid&&st.gid===gid&&\n    st.size===15&&(await readFile(probe)).equals(Buffer.from('C2_OAUTH_OWNED\\n')));\n  checks.preflightOwned=true;await rm(pd,{recursive:true,force:false});await existsAbsent(pd);checks.preflightRemoved=true;\n  phase='materialize';\n  const journalPath=join(target,'green-progress.ndjson'),initial=await adapters.createJournal(journalPath);\n  await adapters.verifySiblings(target,selection);\n  beforeHashes=await adapters.measureTargets(target,index.entries);\n  expected=index.entries.map(e=>e.after.sha256);checks.targetsBeforeMatched=true;\n  phase='green';\n  const green=await checkedLaunch(['--experimental-vm-modules','--test','--test-reporter=tap','--test-concurrency=1',\n    config.childFile],180000);greenCount=green.fresh;\n  checks.uidGidGroupsLoopbackMatched=true;\n  phase='journal';\n  await adapters.verifySiblings(target,selection);\n  afterHashes=await adapters.measureTargets(target,index.entries);checks.targetsAfterMatched=true;\n  const raw=await adapters.readJournal(journalPath,initial);checks.journalOwnershipMatched=true;\n  phase='native';observation=adapters.collectObservation(green.child,raw,selection.selected);\n} catch(error) {\n  fault={phase,reason:valid[phase].includes(error?.code)?error.code:valid[phase][0]};\n} finally {\n  if(temp) {\n    try {\n      phase='cleanup';\n      const s=await lstat(temp);\n      need(tempInitial&&dirname(temp)===root&&await realpath(temp)===temp&&s.isDirectory()&&\n        s.dev===tempInitial.dev&&s.ino===tempInitial.ino&&s.uid===uid&&s.gid===gid);\n      checks.ownRootVerified=true;await rm(temp,{recursive:true,force:false});await existsAbsent(temp);checks.ownTempRemoved=true;\n    } catch {fault={phase:'cleanup',reason:'CLEANUP_INVALID'};}\n  }\n}\nif(!fault) {\n  try {\n    phase='publish';remain(330000);\n    const custody=adapters.custodyFrame(context,pfCount,greenCount,checks);\n    const packet=adapters.successPacket(context,custody,beforeHashes,afterHashes,expected,observation);\n    const dest=join(workspace,config.artifact),outDir=dirname(dest);\n    await mkdir(outDir,{recursive:true});\n    need(await realpath(outDir)===outDir);\n    await writeFile(dest,packet.payload,{flag:'wx',mode:0o600});\n    need((await readFile(dest)).equals(Buffer.from(packet.payload))&&Date.now()<end);\n    process.stdout.write(packet.custodyLine+packet.outcomeLine);\n  } catch {fault={phase:'publish',reason:'PUBLICATION_INVALID'};}\n}\nif(fault) {\n  process.exitCode=1;\n  const text=adapters?adapters.faultLine(context,fault.phase,fault.reason):\n    'AFW_C2_GREEN20_FRONTIER_DIAG1_FAULT '+JSON.stringify({schema:'afw.c2-green20-frontier-diag1",
+      "inserted": "7-t1-first-failure-post-diag2\",\n  \"message\": \"AFW-C2-T1-FIRST-FAILURE-POST-DIAG2-ONEUSE-20261117\",\n  \"job\": \"c2-first-failure-post-diag2\",\n  \"runner\": \"docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs\",\n  \"prefix\": \"docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/\",\n  \"artifact\": \"output/c2-t1-first-failure-post-diag2.json\",\n  \"childFile\": \"test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs\",\n  \"selectHash\": \"b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc\",\n  \"bootstrap\": {\n    \"path\": \".github/workflows/afw-finite-qa-bootstrap.yml\",\n    \"bytes\": 1844,\n    \"sha256\": \"ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14\",\n    \"blob\": \"22f324e480dbe0295fe23fb7415328cba7952b1b\",\n    \"fullReadback\": true\n  },\n  \"rootFiles\": [\n    \"package-lock.json\",\n    \"package.json\",\n    \"tsconfig.json\",\n    \"wrangler.a2a-canary.jsonc\",\n    \"wrangler.a2a-production.jsonc\",\n    \"wrangler.assistance-goal-context.jsonc\",\n    \"wrangler.assistance-goal-context.qa.jsonc\",\n    \"wrangler.assistance-supervision-producer.jsonc\",\n    \"wrangler.contact.jsonc\",\n    \"wrangler.delegated-canary.jsonc\",\n    \"wrangler.delegated-real-pilot.example.jsonc\",\n    \"wrangler.delegated-real-pilot.jsonc\",\n    \"wrangler.delegated.jsonc\",\n    \"wrangler.dossier-supervision-producer.jsonc\",\n    \"wrangler.independent-closure-qa.finite.jsonc\",\n    \"wrangler.independent-closure-qa.jsonc\",\n    \"wrangler.independent-closure-qa.rollback.jsonc\",\n    \"wrangler.mail-canary.jsonc\",\n    \"wrangler.mcp-own-events.example.jsonc\",\n    \"wrangler.mcp-own.finite.jsonc\",\n    \"wrangler.mcp.jsonc\",\n    \"wrangler.operations-manager.jsonc\",\n    \"wrangler.operations-producer.jsonc\",\n    \"wrangler.operations-review-qa.jsonc\",\n    \"wrangler.operations-review.jsonc\",\n    \"wrangler.operations-watchdog.jsonc\",\n    \"wrangler.operations.jsonc\",\n    \"wrangler.release-operator.jsonc\"\n  ]\n};\nconst pins={\n  \"index\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/source-index.json\",\n    \"blob\": \"e2ca46e8ecf98dd0d87f148068dd240b147db1ec\",\n    \"bytes\": 11467,\n    \"sha256\": \"87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7\"\n  },\n  \"selection\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/mode-selection.json\",\n    \"blob\": \"5a554a8fb75439f1549d03baf29be09572fdddac\",\n    \"bytes\": 4070,\n    \"sha256\": \"7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e\"\n  },\n  \"schema\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/frame-schema.json\",\n    \"blob\": \"90e52e44f2364355c6a25daccb4684ed41ba0f7e\",\n    \"bytes\": 26400,\n    \"sha256\": \"9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb\"\n  },\n  \"contract\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/protocol-contract.json\",\n    \"blob\": \"59ab8f6af35f43807ba68084dd6bcdc09f649d0e\",\n    \"bytes\": 41095,\n    \"sha256\": \"7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389\"\n  },\n  \"adapters\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs\",\n    \"blob\": \"9f457450ba1e7a746117fc1498922972613df789\",\n    \"bytes\": 20195,\n    \"sha256\": \"e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e\"\n  },\n  \"reader\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/read-progress.mjs\",\n    \"blob\": \"62a31e3c16cc710c84ebfb5b0242abb00671363c\",\n    \"bytes\": 5507,\n    \"sha256\": \"c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f\"\n  },\n  \"driver\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/diagnostic-driver.txt\",\n    \"blob\": \"9e29c5197207b03bdb4b10069089f37df289e88c\",\n    \"bytes\": 3169,\n    \"sha256\": \"3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc\"\n  },\n  \"recorder\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/progress-recorder.txt\",\n    \"blob\": \"662ec8170bbfe81831b557824d1a466e722842d7\",\n    \"bytes\": 3833,\n    \"sha256\": \"a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e\"\n  },\n  \"guard\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs\",\n    \"blob\": \"5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb\",\n    \"bytes\": 1208,\n    \"sha256\": \"c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf\"\n  },\n  \"preflight\": {\n    \"path\": \"docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs\",\n    \"blob\": \"d311f579e95ab64a5f2d897d6c40f1fce784e8e2\",\n    \"bytes\": 417,\n    \"sha256\": \"3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae\"\n  }\n};\nconst flags={\"historicalCauseProven\":false,\"receiptAuthenticated\":false,\"operationalReadiness\":false,\"completePackage\":false,\"PCoff\":false,\"globalNativeDrainVerified\":false,\"sdkNamespaceEmptyVerified\":false};\n\nconst workspace=resolve(process.cwd()), node=process.execPath, uid=process.getuid(),gid=process.getgid();\nconst root=resolve(process.env.RUNNER_TEMP??''), parentEnv={PATH:dirname(node)+':/usr/bin:/bin:/usr/sbin:/sbin',HOME:root,LANG:'C.UTF-8',LC_ALL:'C.UTF-8'};\nlet phase='admission', context=null, fault=null, temp=null, tempInitial=null, target=null, adapters=null;\nlet beforeHashes, afterHashes, expected, observation, pfCount, greenCount;\nconst valid={admission:['ADMISSION_INVALID'],materialize:['MATERIALIZATION_INVALID','TARGET_DRIFT'],\n  preflight:['PREFLIGHT_INVALID','CUSTODY_INVALID'],green:['LAUNCH_INVALID','CUSTODY_INVALID','CAPTURE_INVALID'],\n  journal:['JOURNAL_INVALID','RECORDER_FAULT','TARGET_DRIFT'],native:['CAPTURE_INVALID','EVIDENCE_CONFLICT'],\n  cleanup:['CLEANUP_INVALID','TARGET_DRIFT'],publish:['PUBLICATION_INVALID']};\nconst fail=(reason=valid[phase][0])=>{throw Object.assign(new Error(reason),{code:reason});};\nconst need=(condition,reason)=>{if(!condition)fail(reason);};\nconst remain=(limit)=>{const ms=end-Date.now();need(ms>0);return Math.max(1,Math.min(ms,limit));};\nconst digest=b=>createHash('sha256').update(b).digest('hex');\nconst gitBlob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\\0')).update(b).digest('hex');\nconst existsAbsent=async p=>{try{await lstat(p);}catch(e){if(e.code==='ENOENT')return;throw e;}fail();};\nasync function pinned(rootDir,pin) {\n  const path=join(rootDir,pin.path);need((await lstat(path)).isFile() && await realpath(path)===resolve(path));\n  const data=await readFile(path);\n  need(data.length===pin.bytes&&gitBlob(data)===pin.blob&&digest(data)===pin.sha256);\n  return data;\n}\nfunction hostCmd(cmd,args,max=1048576,input) {\n  const result=spawnSync(cmd,args,{cwd:workspace,env:parentEnv,encoding:null,\n    input,stdio:['pipe','pipe','pipe'],maxBuffer:max,timeout:remain(cmd==='tar'?30000:330000)});\n  need(!result.error&&result.signal===null&&result.status===0&&Buffer.isBuffer(result.stdout)&&\n    result.stdout.length<=max&&Buffer.isBuffer(result.stderr)&&result.stderr.length<=65536);\n  return result.stdout;\n}\nconst gitText=(...args)=>new TextDecoder('utf-8',{fatal:true}).decode(hostCmd('git',args)).trim();\nasync function materialize(index,files) {\n  target=join(temp,'proposal-green'); await mkdir(target,{mode:0o700});\n  const archive=hostCmd('git',['archive','--format=tar',config.BASE,'--','lib','worker','scripts','test','db','config',\n    config.bootstrap.path,...config.rootFiles],33554432);\n  hostCmd('tar',['-xf','-','-C',target],65536,archive);\n  await pinned(target,config.bootstrap);\n  for(const e of index.entries) {\n    const destination=join(target,e.path), admitted=await pinned(workspace,{...e.after,path:e.dataPath});\n    if(e.before) {\n      const old=await readFile(destination);\n      need((await lstat(destination)).isFile()&&old.length===e.before.bytes&&gitBlob(old)===e.before.blob);\n    } else await existsAbsent(destination);\n    await mkdir(dirname(destination),{recursive:true});\n    await writeFile(destination,admitted,{flag:e.before?'w':'wx'});\n  }\n  await symlink(join(workspace,'node_modules'),join(target,'node_modules'),'dir');\n  await writeFile(join(target,'c2-source-custody-guard.mjs'),files.guard,{flag:'wx'});\n  await writeFile(join(target,'c2-source-custody-preflight.mjs'),files.preflight,{flag:'wx'});\n}\nlet previous = new Map();\nasync function probeMap() {\n  const dir=join(target,'custody-probes');\n  let names;\n  try{const stat=await lstat(dir);need(stat.isDirectory()&&stat.uid===uid&&stat.gid===gid,'CUSTODY_INVALID');names=await readdir(dir);}\n  catch(e){if(e.code==='ENOENT')return new Map();throw e;}\n  need(names.length<=8 && names.every(n=>/^[1-9][0-9]*\\.json$/.test(n)),'CUSTODY_INVALID');\n  const map=new Map();\n  for(const name of names.sort()) {\n    const path=join(dir,name), stat=await lstat(path), h=await adapters.readProbe(path);\n    const last=await lstat(path);\n    need(stat.dev===last.dev&&stat.ino===last.ino&&stat.size===last.size&&stat.ctimeMs===last.ctimeMs,'CUSTODY_INVALID');\n    map.set(name,[last.dev,last.ino,h]);\n  }\n  return map;\n}\nasync function checkedLaunch(args,limit) {\n  const prior=await probeMap();\n  need(adapters.same([...prior],[...previous]),'CUSTODY_INVALID');\n  const env={PATH:parentEnv.PATH,HOME:temp,TMPDIR:temp,RUNNER_TEMP:temp,XDG_CACHE_HOME:join(temp,'cache'),\n    XDG_CONFIG_HOME:join(temp,'config'),LANG:'C.UTF-8',LC_ALL:'C.UTF-8',CI:'true',NODE_ENV:'test',\n    GITHUB_SHA:context.head,GITHUB_REPOSITORY:config.repo,AFW_C2_DIAG_ROOT:target,\n    AFW_C2_DIAG_PARENT_UID:String(uid),AFW_C2_DIAG_PARENT_GID:String(gid)};\n  const child=spawnSync('sudo',['-n','/usr/bin/env','-i',...Object.entries(env).map(([k,v])=>k+'='+v),\n    'unshare','--net','/bin/sh','-c','uid=\"$1\"; gid=\"$2\"; shift 2; ip link set lo up && exec /usr/bin/setpriv --reuid \"$uid\" --regid \"$gid\" --clear-groups --no-new-privs \"$@\"',\n    'c2-source',String(uid),String(gid),node,'--import',join(target,'c2-source-custody-guard.mjs'),...args],\n    {cwd:target,env,encoding:null,maxBuffer:1048576,timeout:remain(limit),stdio:['ignore','pipe','pipe']});\n  const after=await probeMap();\n  for(const [key,v] of prior)need(adapters.same(after.get(key),v),'CUSTODY_INVALID');\n  const fresh=adapters.freshProbes([...prior.keys()],[...after.keys()]);\n  previous=after;\n  return {child,fresh};\n}\nconst checks={parentNonRoot:false,preflightOwned:false,preflightRemoved:false,uidGidGroupsLoopbackMatched:false,\n  targetsBeforeMatched:false,targetsAfterMatched:false,journalOwnershipMatched:false,ownRootVerified:false,ownTempRemoved:false};\ntry {\n  const e=process.env;\n  need(process.argv.length===2&&process.version==='v22.23.4'&&Number.isSafeInteger(uid)&&uid>0&&Number.isSafeInteger(gid)&&gid>=0);\n  need(e.GITHUB_REPOSITORY===config.repo&&e.GITHUB_EVENT_NAME==='push'&&e.GITHUB_REF==='refs/heads/'+config.branch\n    &&e.GITHUB_JOB===config.job&&e.GITHUB_RUN_ATTEMPT==='1'&&/^[1-9][0-9]{0,19}$/.test(e.GITHUB_RUN_ID??'')\n    &&/^[0-9a-f]{40}$/.test(e.GITHUB_SHA??'')&&e.RUNNER_TEMP&&root===await realpath(root)\n    &&workspace===resolve(e.GITHUB_WORKSPACE??'')&&fileURLToPath(import.meta.url)===join(workspace,config.runner));\n  need(gitText('rev-parse','HEAD')===e.GITHUB_SHA&&gitText('rev-parse','HEAD^')===config.BASE&&\n    gitText('rev-parse',config.BASE+'^{tree}')===config.TREE&&gitText('show','-s','--format=%B','HEAD')===config.message);\n  const tree=gitText('rev-parse','HEAD^{tree}');need(/^[0-9a-f]{40}$/.test(tree));\n  const files={};for(const [key,pin]of Object.entries(pins))files[key]=await pinned(workspace,pin);\n  const selection=JSON.parse(files.selection), index=JSON.parse(files.index);\n  need(digest(Buffer.from(JSON.stringify(selection)))===config.selectHash&&index.entries.length===13\n    &&index.context.baselineSource===config.BASE&&index.context.baselineTree===config.TREE\n    &&index.context.repository===config.repo&&index.context.status==='SOURCE_TESTS_PENDING');\n  for(const [i,entry] of index.entries.entries())need(entry.dataPath==='docs/superpowers/source-lab/c2-t1/body-'+String(i).padStart(2,'0')+'.txt');\n  need(JSON.stringify(index.caseMap.map(x=>x.id))===JSON.stringify(selection.selected)&&selection.selected.length===20);\n  const lock=await readFile(join(workspace,'package-lock.json'));\n  need(lock.equals(hostCmd('git',['show',config.BASE+':package-lock.json']))&&JSON.parse(lock).packages?.['node_modules/@cloudflare/workers-oauth-provider']?.version==='1.2.1');\n  adapters=await import('./collection-adapters.mjs');\n  context={repository:config.repo,baselineSource:config.BASE,baselineTree:config.TREE,sourceIndexBlob:pins.index.blob,\n    proposalIndexHash:pins.index.sha256,selectionHash:config.selectHash,head:e.GITHUB_SHA,tree,runId:e.GITHUB_RUN_ID,\n    runAttempt:1,job:config.job,node:process.version};\n  checks.parentNonRoot=true;\n  phase='materialize';\n  temp=await mkdtemp(join(root,'afw-green20-')); tempInitial=await lstat(temp);\n  need(dirname(temp)===root&&tempInitial.isDirectory()&&tempInitial.uid===uid&&tempInitial.gid===gid);\n  await materialize(index,files);\n  await adapters.installSiblings(target,selection,files.driver,files.recorder);\n  phase='preflight';\n  const pf=await checkedLaunch([join(target,'c2-source-custody-preflight.mjs')],10000);\n  pfCount=pf.fresh;\n  need(!pf.child.error&&pf.child.signal===null&&pf.child.status===0&&\n    pf.child.stdout?.equals(Buffer.from('AFW_C2_OAUTH_PREFLIGHT {\"schema\":\"afw.c2-oauth-preflight.v1\",\"written\":true}\\n'))&&pf.child.stderr?.length===0);\n  const pd=join(target,'preflight-owned'),probe=join(pd,'probe'),st=await lstat(probe);\n  need((await lstat(pd)).isDirectory()&&await realpath(probe)===probe&&st.isFile()&&st.nlink===1&&st.uid===uid&&st.gid===gid&&\n    st.size===15&&(await readFile(probe)).equals(Buffer.from('C2_OAUTH_OWNED\\n')));\n  checks.preflightOwned=true;await rm(pd,{recursive:true,force:false});await existsAbsent(pd);checks.preflightRemoved=true;\n  phase='materialize';\n  const journalPath=join(target,'green-progress.ndjson'),initial=await adapters.createJournal(journalPath);\n  await adapters.verifySiblings(target,selection);\n  beforeHashes=await adapters.measureTargets(target,index.entries);\n  expected=index.entries.map(e=>e.after.sha256);checks.targetsBeforeMatched=true;\n  phase='green';\n  const green=await checkedLaunch(['--experimental-vm-modules','--test','--test-reporter=tap','--test-concurrency=1',\n    config.childFile],180000);greenCount=green.fresh;\n  checks.uidGidGroupsLoopbackMatched=true;\n  phase='journal';\n  await adapters.verifySiblings(target,selection);\n  afterHashes=await adapters.measureTargets(target,index.entries);checks.targetsAfterMatched=true;\n  const raw=await adapters.readJournal(journalPath,initial);checks.journalOwnershipMatched=true;\n  phase='native';observation=adapters.collectObservation(green.child,raw,selection.selected);\n} catch(error) {\n  fault={phase,reason:valid[phase].includes(error?.code)?error.code:valid[phase][0]};\n} finally {\n  if(temp) {\n    try {\n      phase='cleanup';\n      const s=await lstat(temp);\n      need(tempInitial&&dirname(temp)===root&&await realpath(temp)===temp&&s.isDirectory()&&\n        s.dev===tempInitial.dev&&s.ino===tempInitial.ino&&s.uid===uid&&s.gid===gid);\n      checks.ownRootVerified=true;await rm(temp,{recursive:true,force:false});await existsAbsent(temp);checks.ownTempRemoved=true;\n    } catch {fault={phase:'cleanup',reason:'CLEANUP_INVALID'};}\n  }\n}\nif(!fault) {\n  try {\n    phase='publish';remain(330000);\n    const custody=adapters.custodyFrame(context,pfCount,greenCount,checks);\n    const packet=adapters.successPacket(context,custody,beforeHashes,afterHashes,expected,observation);\n    const dest=join(workspace,config.artifact),outDir=dirname(dest);\n    await mkdir(outDir,{recursive:true});\n    need(await realpath(outDir)===outDir);\n    await writeFile(dest,packet.payload,{flag:'wx',mode:0o600});\n    need((await readFile(dest)).equals(Buffer.from(packet.payload))&&Date.now()<end);\n    process.stdout.write(packet.custodyLine+packet.outcomeLine);\n  } catch {fault={phase:'publish',reason:'PUBLICATION_INVALID'};}\n}\nif(fault) {\n  process.exitCode=1;\n  const text=adapters?adapters.faultLine(context,fault.phase,fault.reason):\n    'AFW_C2_FIRST_FAILURE_POST_DIAG2_FAULT '+JSON.stringify({schema:'afw.c2-first-failure-post-diag2",
+      "byteEqualForwardAndReverse": true
+    },
+    {
+      "role": "workflow",
+      "from": {
+        "path": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b7d82b817f7473f7bbc4197843f08410b7789e15",
+        "bytes": 1581,
+        "sha256": "cd7786424754a43e756aa55428da604188ebc7ddd7adf6ea8c9dfb8815b590bd"
+      },
+      "to": {
+        "path": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "29441f47097afe3760b831e7b360614ea397e4e1",
+        "bytes": 1620,
+        "sha256": "24dc2e5c5f454af60ebba59d502e42d73a75af1594b327d2400fc3b29c247069"
+      },
+      "unit": "UTF8 bytes, cut common exact prefix + suffix; deleted and inserted are verbatim UTF8, no newline normalization",
+      "prefixBytes": 13,
+      "suffixBytes": 69,
+      "deleted": "GREEN20 frontier diagnostic 1\non:\n  push:\n    branches:\n      - lab/afw-c2-source-20261116-t1-green-frontier-diag1\npermissions:\n  contents: read\njobs:\n  c2-green-frontier-diag1:\n    if: >-\n      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&\n      github.event_name == 'push' &&\n      github.ref == 'refs/heads/lab/afw-c2-source-20261116-t1-green-frontier-diag1' &&\n      github.run_attempt == 1 &&\n      github.event.head_commit.message == 'AFW-C2-T1-GREEN-FRONTIER-DIAG1-ONEUSE-20261116'\n    runs-on: ubuntu-24.04\n    timeout-minutes: 7\n    steps:\n      - name: Read the exact one-use lab head\n        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262\n        with:\n          persist-credentials: false\n          fetch-depth: 2\n      - name: Use the fixed Node runtime\n        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020\n        with:\n          node-version: 22.23.4\n      - name: Install only the existing locked dependencies\n        shell: bash\n        run: npm ci --ignore-scripts --no-audit --no-fund\n      - name: Observe isolated proposal-green boundaries\n        id: source\n        shell: bash\n        run: node docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs\n      - name: Preserve the bounded green diagnostic\n        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02\n        with:\n          name: afw-c2-t1-green-frontier-diag1\n          path: output/c2-t1-green-frontier-diag1",
+      "inserted": "first failure POST diagnostic 2\non:\n  push:\n    branches:\n      - lab/afw-c2-source-20261117-t1-first-failure-post-diag2\npermissions:\n  contents: read\njobs:\n  c2-first-failure-post-diag2:\n    if: >-\n      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&\n      github.event_name == 'push' &&\n      github.ref == 'refs/heads/lab/afw-c2-source-20261117-t1-first-failure-post-diag2' &&\n      github.run_attempt == 1 &&\n      github.event.head_commit.message == 'AFW-C2-T1-FIRST-FAILURE-POST-DIAG2-ONEUSE-20261117'\n    runs-on: ubuntu-24.04\n    timeout-minutes: 7\n    steps:\n      - name: Read the exact one-use lab head\n        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262\n        with:\n          persist-credentials: false\n          fetch-depth: 2\n      - name: Use the fixed Node runtime\n        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020\n        with:\n          node-version: 22.23.4\n      - name: Install only the existing locked dependencies\n        shell: bash\n        run: npm ci --ignore-scripts --no-audit --no-fund\n      - name: Observe full-order first NOTICES POST boundary\n        id: source\n        shell: bash\n        run: node docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs\n      - name: Preserve bounded first POST diagnostic\n        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02\n        with:\n          name: afw-c2-t1-first-failure-post-diag2\n          path: output/c2-t1-first-failure-post-diag2",
+      "byteEqualForwardAndReverse": true
+    }
+  ],
+  "businessAdditions": [
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+        "bytes": 11467,
+        "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+        "bytes": 88713,
+        "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "bytes": 1208,
+        "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "bytes": 417,
+        "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/mode-selection.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+        "bytes": 4070,
+        "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/frame-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+        "bytes": 26400,
+        "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/protocol-contract.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e",
+        "bytes": 41095,
+        "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9f457450ba1e7a746117fc1498922972613df789",
+        "bytes": 20195,
+        "sha256": "e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/read-progress.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "bytes": 5507,
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/diagnostic-driver.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+        "bytes": 3169,
+        "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/progress-recorder.txt",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+        "bytes": 3833,
+        "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "c0fbc1674de5a41760598ec248d97147a33dc517",
+        "bytes": 16898,
+        "sha256": "292b9f8f0a2388c514a40ae336bc97df9b3f8571beaa00b41f0976896dea17b2"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "29441f47097afe3760b831e7b360614ea397e4e1",
+        "bytes": 1620,
+        "sha256": "24dc2e5c5f454af60ebba59d502e42d73a75af1594b327d2400fc3b29c247069"
+      }
+    }
+  ],
+  "toolsAdditions": [
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/mode-selection.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+        "bytes": 4070,
+        "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/frame-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+        "bytes": 26400,
+        "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/protocol-contract.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e",
+        "bytes": 41095,
+        "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9f457450ba1e7a746117fc1498922972613df789",
+        "bytes": 20195,
+        "sha256": "e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/read-progress.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "bytes": 5507,
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/source-c1.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+        "bytes": 237110,
+        "sha256": "1b99b19904c748fe7fee0afd34638470a99427b0fcf43c03ef69626e389779b1"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/fixture-first.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "d1b79ae4c7987fcc8f876ffd6f7d211bb2970465",
+        "bytes": 17929,
+        "sha256": "e4bb383ae6acfdf844463188398ca6642981ec6a3427258a67a76fcc44ab5998"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/source-index.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+        "bytes": 11467,
+        "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/legacy/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5c8123b9e66166a198add4a0593372cfef13a1db",
+        "bytes": 9911,
+        "sha256": "d608324a2270af11c0f371431079edb02bafa04a5bb0122150dd2203bd59c63c"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/legacy/read-progress.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "bytes": 5507,
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/source35.test.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "763b04a5d358528beca961920af9aaadeced0101",
+        "bytes": 7154,
+        "sha256": "7a35ae0ac86a0047fe85982a756b6779bc8c9cde381bce442361698ec7324cad"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/run-source35.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "5d389b03c54a3ff01c44fc270ec186d33fb069bb",
+        "bytes": 12108,
+        "sha256": "3eafda0c3eb71140602e27ff2b9a44e9ed8c7baf445bd41664152354aad8dc4c"
+      }
+    },
+    {
+      "before": null,
+      "after": {
+        "path": ".github/workflows/afw-c2-first-failure-post-diag2-tools.yml",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "74ae2a7bded33eff15d29b4f3f436c2403968e31",
+        "bytes": 1459,
+        "sha256": "839062f469a741b1f0934a1fa02cf8838cfda7eabbf8a52ef876dd298af648a5"
+      }
+    }
+  ],
+  "reversal": "Two distinct heads, each based directly on original Git BASE. Verify BASE has each new path absent and original3203 unchanged before any activation. Forward: add exact mode/type/bytes/SHA/Git for proposal on its own head. Reversal representation: verify matching afterimage, remove only matching additions, preserving all other leaves, to recover exact BASE tree. Never apply to historical runs or a live divergent branch. Normal one-use closure removes only nominated workflow at separate commit; does not erase evidence, mutate main, or imply that full reversal was run. New25 and13 not cumulative. No authorization for refs/runs in this document.",
+  "nativeRunPerformedByAuthor": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

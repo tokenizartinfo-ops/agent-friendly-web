@@ -1,0 +1,261 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-SOURCE35-TOOLS-INDEX/1",
+  "status": "COMPLETE_TOOLS_PROPOSAL_ROOT_NATIVE_HELD",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "originalLeaves": 3203,
+  "expectedLeaves": 3216,
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+    "message": "AFW-C2-FIRST-FAILURE-POST-DIAG2-TOOLS-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-first-failure-post-diag2-tools.yml",
+    "job": "c2-first-failure-post-diag2-tools",
+    "cases": 35,
+    "Node": "22.23.4",
+    "runner": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/run-source35.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "permissions": "contentsread",
+    "attempt": 1,
+    "npm": false,
+    "sourceImports": "newadapters+unchangedread-progress only/builtins; Source businessdriver/M/QA/SDKneverimportedbytooling",
+    "proof": "exact35nativeIDs/expectedstate/reason withcounts/fixedfullinputhashes/actualcontext/orderedSourceGraph;canonicalmarker/bodyLF<=24576,ZIP1MiB/log4MiB; SourceQualified/Task1false. Testpublisheractualnewfamilymarkers/schema/source13E2, inheritedrawstream/custody/caps preserved. If extra meaningful publisher or legacyRED checks needed, list explicitly before code/native; never silentlyexpandcensus.",
+    "prefix": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/",
+    "command": "node docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/run-source35.mjs",
+    "steps": [
+      "Read the exact one-use tools head",
+      "Use the fixed Node runtime",
+      "Exercise the 35 sealed projection cases",
+      "Preserve the bounded tools proof"
+    ],
+    "artifact": {
+      "name": "afw-c2-first-failure-post-diag2-tools",
+      "path": "output/c2-first-failure-post-diag2-tools.json",
+      "fileName": "c2-first-failure-post-diag2-tools.json",
+      "retentionDays": 7
+    }
+  },
+  "mountLeaves": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+      "bytes": 4070,
+      "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e",
+      "bytes": 41095,
+      "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9f457450ba1e7a746117fc1498922972613df789",
+      "bytes": 20195,
+      "sha256": "e0b52ef0bcafa707b0586246e0cf4c7c76f05699a11fd593af3b51da2c74e48e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/source-c1.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+      "bytes": 237110,
+      "sha256": "1b99b19904c748fe7fee0afd34638470a99427b0fcf43c03ef69626e389779b1"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/fixture-first.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d1b79ae4c7987fcc8f876ffd6f7d211bb2970465",
+      "bytes": 17929,
+      "sha256": "e4bb383ae6acfdf844463188398ca6642981ec6a3427258a67a76fcc44ab5998"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/legacy/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5c8123b9e66166a198add4a0593372cfef13a1db",
+      "bytes": 9911,
+      "sha256": "d608324a2270af11c0f371431079edb02bafa04a5bb0122150dd2203bd59c63c"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/legacy/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/source35.test.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "763b04a5d358528beca961920af9aaadeced0101",
+      "bytes": 7154,
+      "sha256": "7a35ae0ac86a0047fe85982a756b6779bc8c9cde381bce442361698ec7324cad"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/run-source35.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d389b03c54a3ff01c44fc270ec186d33fb069bb",
+      "bytes": 12108,
+      "sha256": "3eafda0c3eb71140602e27ff2b9a44e9ed8c7baf445bd41664152354aad8dc4c"
+    },
+    {
+      "path": ".github/workflows/afw-c2-first-failure-post-diag2-tools.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "74ae2a7bded33eff15d29b4f3f436c2403968e31",
+      "bytes": 1459,
+      "sha256": "839062f469a741b1f0934a1fa02cf8838cfda7eabbf8a52ef876dd298af648a5"
+    }
+  ],
+  "graph": {
+    "controller": [
+      "node:assert/strict",
+      "node:crypto",
+      "node:child_process",
+      "node:fs/promises",
+      "node:path",
+      "node:url"
+    ],
+    "suite": [
+      "node:test",
+      "node:assert/strict",
+      "node:fs/promises",
+      "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+      "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/legacy/collection-adapters.mjs"
+    ],
+    "adapterNew": [
+      "node:crypto",
+      "node:fs",
+      "node:fs/promises",
+      "node:path",
+      "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/read-progress.mjs"
+    ],
+    "adapterLegacy": [
+      "node:crypto",
+      "node:fs",
+      "node:fs/promises",
+      "node:path",
+      "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/legacy/read-progress.mjs"
+    ],
+    "readProgressNew": [],
+    "readProgressLegacy": []
+  },
+  "proofSchema": {
+    "bytes": 20345,
+    "sha256": "6470e3737a6eb5e3e4e206df42538b321962e1eea36a0bc4936e7dad4f6a7f2f",
+    "blob": "0dd58cc5646b8fe74b45967d6207084a4fbf59c6"
+  },
+  "protocol": {
+    "bytes": 12193,
+    "sha256": "39aafd3e2b8c4990719084dfe43306b861d7ebc1e49f8973b9f4e6078dd86257",
+    "blob": "50cdc14fbe7e823468253067c670bf0bdee9dab8"
+  },
+  "fixtureFirst": {
+    "bytes": 17929,
+    "sha256": "e4bb383ae6acfdf844463188398ca6642981ec6a3427258a67a76fcc44ab5998",
+    "blob": "d1b79ae4c7987fcc8f876ffd6f7d211bb2970465"
+  },
+  "Source25": {
+    "bytes": 14768,
+    "sha256": "15b19b3ea359c4d3d84bcf408a87a700ddbb402b541bf8d153ed0a33694b428b",
+    "blob": "98d85420ec517978a18eab639b60c1dbb8353eee"
+  },
+  "nativeExpectation": {
+    "ids": [
+      "S01_KNOWN_503_COUNTS_222",
+      "S02_KNOWN_429_PARTIAL",
+      "S03_KNOWN_599_BOUNDS_ONLY",
+      "S04_MISSING_SOURCE",
+      "S05_DUPLICATE_SOURCE",
+      "S06_SOURCE_STATUS_CONFLICT",
+      "S07_SOURCE_WRONG_PHASE",
+      "S08_SOURCE_WRONG_CODE",
+      "S09_SOURCE_EXTRA_KEY",
+      "S10_SOURCE_NONCANONICAL",
+      "S11_MISSING_SCALAR",
+      "S12_DUPLICATE_SCALAR",
+      "S13_SCALAR_MESSAGE_FAKE",
+      "S14_SCALAR_NESTED_FAKE",
+      "S15_SCALAR_STRING",
+      "S16_SCALAR_FLOAT",
+      "S17_SCALAR_600",
+      "S18_SCALAR_200_CONFLICT",
+      "S19_WRONG_EXPECTED",
+      "S20_COUNTER_RANGE",
+      "S21_WRONG_OPERATOR",
+      "S22_WRONG_NATIVE_ORDINAL",
+      "S23_NESTED_TARGET_PAIR",
+      "S24_TORN_CANDIDATE",
+      "S25_CRLF_UNSUPPORTED",
+      "S26_SOURCE_WRONG_ORDER",
+      "S27_EARLIEST_WRONG_SITE",
+      "S28_COUNTER_THROW",
+      "S29_COUNTER_OPEN",
+      "S30_VALID_CANDIDATE_LATER_TORN",
+      "S31_EARLIER_NATIVE_FAILURE",
+      "S32_TARGET_PASS",
+      "S33_NO_QUALIFYING_THROW",
+      "S34_TARGET_RESULT_MISSING",
+      "S35_TARGET_THROW_NOT_IN_VALIDATED_PREFIX"
+    ],
+    "count": 35,
+    "expectedPass": 35,
+    "expectedFail": 0,
+    "expectedCheckpoints": 358,
+    "legacyS01ExpectedMismatch": 1
+  },
+  "realOccurrence": {
+    "head": null,
+    "tree": null,
+    "runId": null,
+    "jobId": null,
+    "synDataNotActual": true
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
