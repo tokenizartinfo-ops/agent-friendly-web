@@ -1,0 +1,81 @@
+{
+  "schema": "AFW.DROP.TOOLING_LAUNCH.INDEPENDENT_STATIC_REVIEW/1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "detached Git DATA",
+    "ORIGIN": "github.com",
+    "RESOURCE_TYPE": "immutable JSON review",
+    "RESOURCE_ID": "controller-only tooling-launch syntax1",
+    "ALLOWED_ACTION": "static text/JSON/hash comparison; create_blob and FULL readback",
+    "ROLLBACK": "discard detached proposal; no ref/runtime mutation"
+  },
+  "inputs": {
+    "brief": "ff3f06c4f56b126c9d6a5680d881e724bc9535bc",
+    "capRuling": "f91f6c44911b96b2b9b63f2e216fdc5ab0481b92",
+    "beforeNative34": "a1dc2376bd54154015f76a70ce732b5325aa581a",
+    "native34": "cde0ccf98e9500ae75aa586a7b5328f1b0c1cb7d",
+    "report": "31096b3d26d50b9fe28a14607e92782d5bdb8672",
+    "diff": "19ef3f01b934a2761eb9f2de55fa9965607a5f03",
+    "preservation": "0b35ff13673428f9f63f808b6509db0fc9f51246",
+    "runner": "5a305be156c47a8c57226e9840451d0a80c080ab",
+    "workflow": "0348499a88f6ff6c21a486a80b7b054517ef3bb2",
+    "previousReview": "74c530b9f5d803f1ac293b76ca07655642d53e84"
+  },
+  "SPEC": "PASS_STATIC",
+  "QUALITY": "PASS_STATIC",
+  "findings": [],
+  "checks": [
+    {
+      "result": "PASS",
+      "refs": "runner:11-13,323; diff.bodyChanges[0]",
+      "evidence": "Complete new runner exactly equals prior runner after only3 branch/message/job substitutions and same-line output-stat declaration/references st→childStat. Preflight st remains unchanged. No other logic, limits, target/helper inputs or transport semantics changed. This removes the particular duplicate name identified by Root; native parser acceptance remains pending."
+    },
+    {
+      "result": "PASS",
+      "refs": "workflow:1-44; diff.bodyChanges[1]; native34.nomination",
+      "evidence": "Complete new workflow exactly equals prior workflow after only nominated branch/ref/message/job changes and single bash node --check step after setup-node/before npm ci. Filename is the fresh nominated syntax1 path. All original steps, three action SHA pins, Node22.23.4, Ubuntu24.04,7min,attempt1,contents:read, nonpersistent credentials, artifact name/path/7d and installation flags remain exact."
+    },
+    {
+      "result": "PASS",
+      "refs": "native34.mountLeaves; preservation.unchangedMounts/proofSchema; previousNative34",
+      "evidence": "Exactly32 unchanged mount descriptor JSON values and immutable blobs retained. Source13/helpers/fixtures/adapters/collector and Source25/business bodies are outside patch. Source13/proof schema/63model14differential16native controls/caps/rounds all unchanged. Prior full-body hash verification applies to the identical immutable bodies; no broad historical rereview performed."
+    },
+    {
+      "result": "PASS",
+      "refs": "native34; diff.metadataChanges; report.artifacts",
+      "evidence": "Only nomination, two changed mount descriptors and canonicalMountLeaves differ in index. Nomination differences exactly4 fields plus required syntax step. Canonical mount bytes8254/SHA256feae27f46a7f38bb366feca34c60bbb09ce045b1bad9689ad056d7aab0d91247 independently recomputed. Both full-context hunks reconstruct exact prior/new slices and counts."
+    },
+    {
+      "result": "PASS",
+      "refs": "report.artifacts.runner/workflow/native34/diff/preservation",
+      "evidence": "Complete fetched five changed/support artifacts independently remeasured as UTF8 bytes/SHA256/Git blob SHA1; every descriptor matches. No Source import/eval/AST/parser/syntax/build/test/dependencies or ref/workflow execution occurred."
+    }
+  ],
+  "coveringTests": {
+    "status": "PENDING_GITHUB",
+    "commands": [
+      "node --check docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+      "node docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs"
+    ],
+    "boundary": "Static review is not syntax/native PASS. Root owns exact-tree preservation/fresh one-use admission and must inspect actual Node --check before dependencies and subsequent native result. Existing Source5 qualification remains failed;32 unchanged bodies and broader native gates do not inherit a pass from this mechanical patch."
+  },
+  "decision": "Scoped mechanical repair satisfies brief and cap ruling as DATA. Supports Root's separate one-use launch gate only; no Source6/reset, native or business authority.",
+  "sourceRound": 5,
+  "ownRound": 4,
+  "maxSameFamily": 5,
+  "noReset": true,
+  "nativeReleased": false,
+  "businessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

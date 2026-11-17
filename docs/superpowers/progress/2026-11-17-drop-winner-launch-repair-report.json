@@ -1,0 +1,140 @@
+{
+  "schema": "AFW.DROP.TOOLING_LAUNCH.REPAIR_REPORT/1",
+  "status": "DETACHED_DATA_ONLY_NATIVE_PENDING",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "detached Git DATA only",
+    "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+    "RESOURCE_TYPE": "immutable blobs",
+    "RESOURCE_ID": "tooling launch mechanical repair after controller parse failure",
+    "ALLOWED_ACTION": "github_fetch_blob, exact text/JSON/hash comparison, github_create_blob and FULL readback only",
+    "ROLLBACK": "Discard detached proposal. No ref, commit, tree, workflow execution or runtime changed."
+  },
+  "brief": "ff3f06c4f56b126c9d6a5680d881e724bc9535bc",
+  "ruling": "f91f6c44911b96b2b9b63f2e216fdc5ab0481b92",
+  "previousStaticReview": "74c530b9f5d803f1ac293b76ca07655642d53e84",
+  "beforeNative34": "a1dc2376bd54154015f76a70ce732b5325aa581a",
+  "artifacts": {
+    "runner": {
+      "label": "runner",
+      "bytes": 20922,
+      "sha256": "8e208725f4fc76e379bd858a637dd1fd2e96f6c6b2e529d3782e830929f0fb4a",
+      "blob": "5a305be156c47a8c57226e9840451d0a80c080ab",
+      "fullReadback": true
+    },
+    "workflow": {
+      "label": "workflow",
+      "bytes": 1743,
+      "sha256": "cbaf633569ef81fd776a7f846f1d043c78e321fb48692e49d15dd9cd82a13938",
+      "blob": "0348499a88f6ff6c21a486a80b7b054517ef3bb2",
+      "fullReadback": true
+    },
+    "native34": {
+      "label": "native34",
+      "bytes": 15452,
+      "sha256": "185fc7026a0ce404ad545fe6212e7efc143a6c1b69419d6717e3e9d7fe6dbd0f",
+      "blob": "cde0ccf98e9500ae75aa586a7b5328f1b0c1cb7d",
+      "fullReadback": true
+    },
+    "diff": {
+      "label": "diff",
+      "bytes": 30088,
+      "sha256": "e42dc58f4fc98ad07d7b2a4b29b0a6227a32321c4984839b00c99ff9fd0d5112",
+      "blob": "19ef3f01b934a2761eb9f2de55fa9965607a5f03",
+      "fullReadback": true
+    },
+    "preservation": {
+      "label": "preservation",
+      "bytes": 14198,
+      "sha256": "deaa08a9bdcdbb8b7a482989b329c818e9ebc8def019b735f527937b43a6015c",
+      "blob": "0b35ff13673428f9f63f808b6509db0fc9f51246",
+      "fullReadback": true
+    }
+  },
+  "exactChanges": [
+    "runner config branch/message/job literals only",
+    "runner output-stat declaration and all its same-line st references renamed childStat; preflight st and all other text unchanged",
+    "workflow branch/exactref/message/job nomination and filename only",
+    "workflow adds Check the tooling controller syntax after setup-node, before npm ci; bash node --check docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+    "native34 updates nomination, required step, two mount descriptors and canonical mount bytes/SHA256 only"
+  ],
+  "proofExpectation": {
+    "schemaUnchanged": "0ccaf3d02cc50145e5afab4557ebdb259af60600",
+    "nomination": {
+      "branch": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+      "message": "AFW-C2-DROP-WINNER-TOOLS-SYNTAX1-ONEUSE-20261117",
+      "workflow": ".github/workflows/afw-c2-drop-winner-tools-syntax1.yml",
+      "job": "c2-drop-winner-tools-syntax1",
+      "prefix": "docs/superpowers/source-lab/c2-drop-winner-tools/",
+      "runner": "docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+      "command": "node docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+      "artifact": {
+        "name": "afw-c2-drop-winner-tools",
+        "path": "output/drop-winner-tools.json",
+        "fileName": "drop-winner-tools.json",
+        "retentionDays": 7
+      },
+      "requiredSteps": [
+        "Read the exact one-use lab head",
+        "Use the fixed Node runtime",
+        "Check the tooling controller syntax",
+        "Install only the existing locked dependencies",
+        "Check the compiler, helper identity and native transport",
+        "Preserve the bounded tooling evidence"
+      ],
+      "jobMinutes": 7,
+      "activationReleased": false
+    },
+    "head": "dynamic admitted runtime GITHUB_SHA unchanged",
+    "tree": "dynamic admitted runtime HEAD^{tree} unchanged",
+    "attempt": 1,
+    "artifact": {
+      "name": "afw-c2-drop-winner-tools",
+      "path": "output/drop-winner-tools.json",
+      "fileName": "drop-winner-tools.json",
+      "retentionDays": 7
+    },
+    "controlsUnchanged": {
+      "model": 63,
+      "differentialR4": 14,
+      "wireAndFrameCalibration": 16
+    }
+  },
+  "actualVerification": {
+    "hashImplementationKnownVectors": "SHA256/SHA1 abc match published literals",
+    "inputRunnerWorkflowDescriptors": "FULL fetch; measured bytes/SHA256/GitSHA match original index",
+    "unchangedMountBodies": "32 FULL fetched and measured; immutable descriptors retained",
+    "changedArtifacts": "FULL github_fetch_blob readback string equality and bytes/SHA256/GitSHA equality",
+    "diff": "minimal exact 4 old/4 new runner lines; 4 old/7 new workflow lines; full-context hunks reconstruct exact inputs/outputs",
+    "indexPreservation": "all other index JSON values preserved, controls/caps/source13/proof schema unchanged"
+  },
+  "coveringTests": {
+    "status": "PENDING_GITHUB",
+    "commands": [
+      "node --check docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+      "node docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs"
+    ],
+    "runtime": "Node22.23.4 on Ubuntu24.04; only Root may admit ONE isolated fresh nomination after independent review",
+    "scope": "No local syntax parsing, Source execution, imports/eval/AST, tests, builds, deps or runtime performed. Native compiler/63 model/14 differential/16 native and cleanup remain pending."
+  },
+  "sourceRound": 5,
+  "ownRound": 4,
+  "maxSameFamily": 5,
+  "noReset": true,
+  "activationReleased": false,
+  "nativeReleased": false,
+  "businessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "findings": []
+}

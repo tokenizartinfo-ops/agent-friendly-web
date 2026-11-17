@@ -1,0 +1,495 @@
+{
+  "schema": "AFW.DROP.TOOLING_LAUNCH.ROOT_ONE_USE_GATE/1",
+  "timestampUTC": "2026-11-17 13:44:53 UTC",
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "private isolated GitHub-hosted tooling; Ubuntu24.04/Node22.23.4; no production credentials",
+  "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "RESOURCE_TYPE": "fresh one-use tooling ref",
+  "RESOURCE_ID": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+  "ALLOWED_ACTION": "Create exact absent ref once; observe attempt1 tooling only; capture one terminal job log and one sole-member ZIP once, preserve evidence then close only nominated workflow. No business/production/OAuth/token/OTP/mail/Max actions.",
+  "ROLLBACK": "CAS attempted head; delete only nominated workflow, retain other33 data/tool files and all3203 original leaves; add primary/closure evidence; verify full readback and protected refs; never reopen or rerun",
+  "proposal": "cde0ccf98e9500ae75aa586a7b5328f1b0c1cb7d",
+  "authorReport": "31096b3d26d50b9fe28a14607e92782d5bdb8672",
+  "staticReview": {
+    "blob": "38e2d38b724f2e860c68920617bd9baf4b454560",
+    "SPEC": "PASS_STATIC",
+    "QUALITY": "PASS_STATIC"
+  },
+  "rootDataMeasurement": "c9d843999bf4cbb52a6a794473ba111a629ccfb3",
+  "reviewPackage": "19ef3f01b934a2761eb9f2de55fa9965607a5f03",
+  "head": "b7a2cbb6abb460089b38fa31fa1d787dd8a68902",
+  "tree": "bb497eedca051300366d29548c12f0523a1bb92f",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "mounts": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "fc5b71098da76696278765f43805f0f2a1953b22",
+      "bytes": 11559,
+      "sha256": "1da326e60821aec91c7635a227b42f14b0710a3a2d5fb6f8764722fbbaa3d141"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-08.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "14b1a67b0557dbc660a3900d8767b40c5bff7755",
+      "bytes": 22615,
+      "sha256": "da134d91f132195a787c549a1d3552335efc29720506dbf2ca9cb7e4371af677"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-09.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9da84b3f0606e9cb84d8308de26c7f193c5c778a",
+      "bytes": 72687,
+      "sha256": "93c0d34a0221797c09e4602065af570ad4711fdc019eea0fbcd9b0c8f90f08b9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-10.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "955fa904a89733fabfa5c73736f59922b6e58023",
+      "bytes": 98440,
+      "sha256": "01bd570328eb52d05a5d290f391bfc3da80d8298fba25fee7beff542096a0f34"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8fe9907fb12fb71361819551df04c2830a78452b",
+      "bytes": 5173,
+      "sha256": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "81be13ca960a143d565d55dd958b4e4ff24d3c96",
+      "bytes": 34193,
+      "sha256": "c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6349fd2706b084e3c56309d6aac00a469310e73a",
+      "bytes": 59226,
+      "sha256": "1d2da1a8e853055f22cedbebb4dd813228f7641396409170c586805b6f2a9587"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "f1a26313b53079fa9a88340e15d86024d24f4cbf",
+      "bytes": 35151,
+      "sha256": "7a6adaefbaffab94258323fe214ad9d45f23816fed8a9e6f0d508cd03cdbf00e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/diagnostic-driver.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/progress-recorder.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/r4-adapter.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0465caea70e7a80aeb631fd73f267bb00dfc0f5d",
+      "bytes": 32312,
+      "sha256": "f484bbfaa879b7b0121a1ed2f0038ae358457ab636ca7e51c3c80678528448d6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/scenarios.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0625f0864da7c70f6a9b6abf0fb989c36fae22f6",
+      "bytes": 15741,
+      "sha256": "6f51b5c2cdf68fb98a15022de9b79a95dcc3c8081bb4e641626cda685322f665"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/fixture-seal.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "b00113ce95aca4c1ab95dfa7cfdf83d298e839d1",
+      "bytes": 3004,
+      "sha256": "2c0227e4411358e03fcb439abf43391f4e2bcfe54669fa21d770efb88b28694e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/check-scenarios.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "7ed4423a7ee9adba3ea6455111d88dd7d147165f",
+      "bytes": 2103,
+      "sha256": "bc4c9cebcfb098a60e5f6906f207343ece44a929dca9365aff016f844ed64da6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/scenarios-63.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a78efb5290deb184c70fc4282bf438d818d02588",
+      "bytes": 17457,
+      "sha256": "bb2383a06cb2c7a08ae248371b5ea06cbf597ee15689a98c4eba03cd64c0b709"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/model.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "430e97423c13df4b783ed90fe882f9e4eaa59386",
+      "bytes": 7398,
+      "sha256": "d6eeee3e2381747588f2bd45b9b934a38f0a6995a408730079a23eca56d043e3"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/native-controls.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "33fabf4ff364be6a0fb3d7f46cae8fd1aa2a3e5d",
+      "bytes": 5683,
+      "sha256": "3a708e993812d91668955d2a560f6f8a69a98cacc693506bdf3ed54cb466722f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/differential.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d5835da4f221adcda65339b2a30bbd123516772",
+      "bytes": 2998,
+      "sha256": "c3434c23e8abadf5d43d2d5c5e15614adc3d9f8a85a5d684e1fe6ec1fcd0b99d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/tool-child.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cb26b8de8d97b3296d3c229b24ec5681aeaba65c",
+      "bytes": 2454,
+      "sha256": "9e57d1f7b5173b8f32ec8d1c802fff3ab57cadbfe369046c33b1dde9a88a238b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5a305be156c47a8c57226e9840451d0a80c080ab",
+      "bytes": 20922,
+      "sha256": "8e208725f4fc76e379bd858a637dd1fd2e96f6c6b2e529d3782e830929f0fb4a"
+    },
+    {
+      "path": ".github/workflows/afw-c2-drop-winner-tools-syntax1.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0348499a88f6ff6c21a486a80b7b054517ef3bb2",
+      "bytes": 1743,
+      "sha256": "cbaf633569ef81fd776a7f846f1d043c78e321fb48692e49d15dd9cd82a13938"
+    }
+  ],
+  "original3203Preserved": true,
+  "totalLeaves": 3237,
+  "nomination": {
+    "branch": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+    "message": "AFW-C2-DROP-WINNER-TOOLS-SYNTAX1-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-drop-winner-tools-syntax1.yml",
+    "job": "c2-drop-winner-tools-syntax1",
+    "prefix": "docs/superpowers/source-lab/c2-drop-winner-tools/",
+    "runner": "docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+    "command": "node docs/superpowers/source-lab/c2-drop-winner-tools/run-drop-winner-tools.mjs",
+    "artifact": {
+      "name": "afw-c2-drop-winner-tools",
+      "path": "output/drop-winner-tools.json",
+      "fileName": "drop-winner-tools.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Check the tooling controller syntax",
+      "Install only the existing locked dependencies",
+      "Check the compiler, helper identity and native transport",
+      "Preserve the bounded tooling evidence"
+    ],
+    "jobMinutes": 7,
+    "activationReleased": false
+  },
+  "proofSchema": {
+    "path": "DETACHED:tool-proof-schema.json",
+    "mode": "100644",
+    "bytes": 4942,
+    "sha256": "5b78a23bd1e0afb02c85e810a7ee2f9306613a72fbae57e3e4729b29ca35e817",
+    "blob": "0ccaf3d02cc50145e5afab4557ebdb259af60600"
+  },
+  "expected": "Native attempt1 job success + sole canonical TOOLING_ONLY receipt,63 model pass/14 differential/16 native checks/compilerPASS/>=2distinct sites; UNSUPPORTED is retained nonqualification, never promote. Compiler-only stops before fixture mount/seed/dispatch and disposes provisional Miniflare.",
+  "caps": {
+    "jobMinutes": 7,
+    "childMs": 180000,
+    "totalMs": 330000,
+    "stdout": 1048576,
+    "stderr": 65536,
+    "artifactIncludingLF": 4096,
+    "journalBytes": 32768,
+    "journalRows": 128
+  },
+  "artifact": {
+    "name": "afw-c2-drop-winner-tools",
+    "path": "output/drop-winner-tools.json",
+    "fileName": "drop-winner-tools.json",
+    "retentionDays": 7,
+    "soleMember": "drop-winner-tools.json",
+    "rawCapIncludingLF": 4096,
+    "zipCap": 1048576
+  },
+  "preflight": {
+    "time": "2026-11-17 13:43:51 UTC",
+    "branchAbsent": true,
+    "headPriorRuns": 0,
+    "protectedRefs": [
+      {
+        "name": "main",
+        "branch": "main",
+        "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+      },
+      {
+        "name": "source",
+        "branch": "feat/finite-native-cleanup-20261101",
+        "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+      },
+      {
+        "name": "own42",
+        "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+        "sha": "c511b6f061fb4eb0c5594779d3123e824f34f243"
+      },
+      {
+        "name": "source35",
+        "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+        "sha": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+      },
+      {
+        "name": "diag1",
+        "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+        "sha": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
+      },
+      {
+        "name": "host",
+        "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+        "sha": "1f62e087f0d9000f9c08519cd162db1104827af8"
+      },
+      {
+        "name": "toy",
+        "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+        "sha": "5f5295265217b31a19fbed2379f697c5a6a83080"
+      },
+      {
+        "name": "diag2",
+        "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+        "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01"
+      },
+      {
+        "name": "source149",
+        "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+        "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0"
+      },
+      {
+        "name": "own73",
+        "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+        "sha": "067a012121a58f7c2baf938228765242c433a1d5"
+      },
+      {
+        "name": "diag3Business",
+        "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+        "sha": "08061db79cd0f38f25df8977e1ded8e17542e684"
+      },
+      {
+        "name": "fixture59",
+        "branch": "lab/afw-c2-source-20261117-drop-winner-fixtures",
+        "sha": "4dec9811009052b4088068a06ece37a7af70b4cf"
+      },
+      {
+        "name": "source5ToolFailedClosed",
+        "branch": "lab/afw-c2-source-20261117-drop-winner-tools",
+        "sha": "86594c358557023d41cb3cae5d000bca3c67296b"
+      }
+    ],
+    "triggerAudit": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "original62WorkflowsUnchanged": true,
+    "closedOriginThreePathsUnchanged": true
+  },
+  "authority": {
+    "ownerCurrentRequest": "que falta para hacer la prueba con mi PC apagada y continua con todo",
+    "autonomousAfwAuthorization": true,
+    "source5NativeToolingOnly": true,
+    "businessReleased": false
+  },
+  "budget": {
+    "Source": 5,
+    "OWN": 4,
+    "max": 5,
+    "noReset": true
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "previousFailureReview": "68a8fc98f3844c1c90e58502ff7d5dd3c8102480",
+  "previousFailurePrimary": "00680c0a0c9595c34c5510f48d0cf591a1574dee",
+  "previousClosure": "1a45c35d67c4cb741df47eaece25a14ee44b2d54",
+  "capRuling": "f91f6c44911b96b2b9b63f2e216fdc5ab0481b92",
+  "rootLaunchDataMeasurement": [
+    {
+      "id": "cde0ccf98e9500ae75aa586a7b5328f1b0c1cb7d",
+      "bytes": 15452,
+      "sha256": "185fc7026a0ce404ad545fe6212e7efc143a6c1b69419d6717e3e9d7fe6dbd0f",
+      "blob": "cde0ccf98e9500ae75aa586a7b5328f1b0c1cb7d"
+    },
+    {
+      "id": "19ef3f01b934a2761eb9f2de55fa9965607a5f03",
+      "bytes": 30088,
+      "sha256": "e42dc58f4fc98ad07d7b2a4b29b0a6227a32321c4984839b00c99ff9fd0d5112",
+      "blob": "19ef3f01b934a2761eb9f2de55fa9965607a5f03"
+    },
+    {
+      "id": "0b35ff13673428f9f63f808b6509db0fc9f51246",
+      "bytes": 14198,
+      "sha256": "deaa08a9bdcdbb8b7a482989b329c818e9ebc8def019b735f527937b43a6015c",
+      "blob": "0b35ff13673428f9f63f808b6509db0fc9f51246"
+    },
+    {
+      "id": "31096b3d26d50b9fe28a14607e92782d5bdb8672",
+      "bytes": 6156,
+      "sha256": "98888391ef8b363ca1acd01878313334471befa9ae9cb6dc079eec559d5ee0dc",
+      "blob": "31096b3d26d50b9fe28a14607e92782d5bdb8672"
+    },
+    {
+      "id": "5a305be156c47a8c57226e9840451d0a80c080ab",
+      "bytes": 20922,
+      "sha256": "8e208725f4fc76e379bd858a637dd1fd2e96f6c6b2e529d3782e830929f0fb4a",
+      "blob": "5a305be156c47a8c57226e9840451d0a80c080ab"
+    },
+    {
+      "id": "0348499a88f6ff6c21a486a80b7b054517ef3bb2",
+      "bytes": 1743,
+      "sha256": "cbaf633569ef81fd776a7f846f1d043c78e321fb48692e49d15dd9cd82a13938",
+      "blob": "0348499a88f6ff6c21a486a80b7b054517ef3bb2"
+    }
+  ],
+  "sourceImplementationChanged": false,
+  "noSource6OrBudgetReset": true
+}
