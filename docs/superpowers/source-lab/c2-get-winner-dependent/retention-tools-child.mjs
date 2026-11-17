@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { readFile,writeFile } from 'node:fs/promises';
+import { retentionNativeControls } from './native-retention-controls.mjs';
+const schedule=JSON.parse(await readFile('partial-tool-schedule.json','utf8'));
+const native=await retentionNativeControls();
+assert.deepEqual(native.ids,schedule.retentionIds);
+assert.equal(native.platformWaitUntilLifecycle,false);assert.equal(native.ordinaryRouteIntegration,false);
+const raw=JSON.stringify({group:'retention',native,disposed:true,SourceQualified:false,Task1Pass:false})+'\n';
+assert(Buffer.byteLength(raw)<=12288);
+await writeFile('retention-child.json',raw,{flag:'wx',mode:0o600});
