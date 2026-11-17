@@ -1,10 +1,10 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/30",
-  "timestampUTC": "2026-11-17 11:53:00 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/31",
+  "timestampUTC": "2026-11-17 12:36:12 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "40e7c737fe2f20f32d0df385800b4c967e46c3fe",
-  "phase": "EXACT_DROP_POST_WINNER_DIAGNOSTIC_DESIGN_ACTIVE",
+  "previousCheckpoint": "5a5b9910c16863bbcb81a58e24777c05712bb538",
+  "phase": "DROP_WINNER_SOURCE5_FIXTURES_FIRST_PREPARATION",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -134,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Fresh architect designs minimal exact first-drop POST/QA error/outer winner join. Root reviews against scoped frozen inputs and no-calls/no-clock-extension invariants. Then release only a concrete reversible compiler/tooling step if discriminating; never reopen previous run.",
+  "next": "Receive sealed fixture/RED proposal, inspect and stage exact fresh one-use model RED workflow. Observe named feature-absence assertion, close/readback; then resume SAME source5 author for minimal actual diagnostic helpers and compiler/native tooling proposal. No feature code before observed RED; no old business replay.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -159,15 +159,18 @@
     "sdkNamespaceEmptyVerified": false
   },
   "nextDesign": {
-    "decision": "88e8b25c0f422f41d01f1785ae87515c1425d3ec",
-    "state": "DATA_DESIGN_ONLY_NOT_RELEASED",
-    "implementationHold": true,
-    "nativeHold": true,
-    "lastRoundNotConsumed": true,
-    "costDecision": "Do not spend last5 on ZERO/TWO_PLUS alone: it separates audits without identifying repair.",
-    "nextMeaningfulBlock": "Prepare a bounded diagnostic proposal identifying the exact first drop POST and the response/error that wins the outer bridge race, with a version-verified generated-code location or honest UNKNOWN. Prefer existing data; if an isolated lab observer is required, explicitly scope reversible Source13 changes before implementation. No code or run authorized by this checkpoint.",
-    "privateBuildMapGate": "Current esbuild0.28.2 needs explicitoutfile for externalmap even write:false. Compare JS bytes from same prepared inputs in SAMEharness, select .js/.map by path (notoutputFiles[0]), no newdeps or localSourcecompile. Compilation is futureGHA only and needs Rootgate. Do not infer that metafile/sourceURL alone gives a reliable map.",
-    "zeroReplay": true
+    "design": "1a5ccbf3aa73495e3c4f4ebfe39e5693d78d91cb",
+    "review": "56e08ba3af37540421e1897d79b416c6ba4c12dc",
+    "ruling": "ada670c9bbe3741a714cec6486a20dd2751a01b6",
+    "plan": "7a27a72a1c5e01dd4db03b71e6fc04478a85797c",
+    "brief": "9ece9fd8e23bf2ad214f32ec0f1a12bbef371f95",
+    "actor": "/root/drop_winner_source5",
+    "state": "FIXTURES_AND_RED_PROPOSAL_ONLY",
+    "fixtureOracle": "0625f0864da7c70f6a9b6abf0fb989c36fae22f6",
+    "fixtureCount": 59,
+    "codeReleased": false,
+    "nativeReleased": false,
+    "oldTrialsClosed": true
   },
   "staticContracts": {
     "scopeDiagnosis": "e5570431c54ef1556692fcdf1349c503ef983ecb",
