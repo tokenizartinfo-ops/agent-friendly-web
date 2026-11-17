@@ -1,0 +1,174 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-TOY-PACKET/1",
+  "status": "IMMUTABLE_DATA_READY_ROOT_GATE_REQUIRED_NOT_EXECUTED",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Future separately gated GitHub Actions builtins-only synthetic calibration; author read/write immutable Git DATA only",
+  "authority": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+  "acceptedDesign": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+  "authorization": "Only sealed C1toy, builtins parent, literal expectedfixture, proofschema and workflow proposal. No Source parser/collector/business implementation, refs, runs or local execution.",
+  "fixtureFirst": {
+    "blob": "e8bef167b07052e5b4274b7d9fbe5f3b2301cb54",
+    "bytes": 39555,
+    "sha256": "bbb2070d49b21ab9d4f19f95421ff00d147be465e10e5e40909368704dae281d",
+    "FULLreadback": true,
+    "sealedBeforeParentCode": true,
+    "controls": 6,
+    "executed": 0,
+    "note": "Not observed RED/GREEN; Root explicitly held execution while author packaged code as inert DATA."
+  },
+  "nomination": {
+    "round": 1,
+    "maxRounds": 5,
+    "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+    "message": "AFW-C2-FIRST-FAILURE-POST-DIAG2-TOY-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-first-failure-diag2-toy.yml",
+    "job": "c2-first-failure-diag2-toy",
+    "command": "node docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/run-toy.mjs",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "head": null,
+    "tree": null,
+    "runId": null,
+    "jobId": null,
+    "node": "22.23.4",
+    "runsOn": "ubuntu-24.04",
+    "permissions": "contents:read",
+    "attempt": 1,
+    "jobMinutes": 2,
+    "parentDeadlineMs": 10000,
+    "childTimeoutMaxMs": 10000,
+    "codeActivationAllowedToAuthor": false
+  },
+  "mountLeaves": [
+    {
+      "path": "docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/toy.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "559b4c3480c3a404a41a180ae2a8dfa6afe9ade5",
+      "bytes": 1628,
+      "sha256": "988b241402d628d86c1a2513af80ba14be22540cc2c97925e8e81837f4ee5d69",
+      "FULLreadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/expected.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e8bef167b07052e5b4274b7d9fbe5f3b2301cb54",
+      "bytes": 39555,
+      "sha256": "bbb2070d49b21ab9d4f19f95421ff00d147be465e10e5e40909368704dae281d",
+      "FULLreadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/proof.schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "050f58f2d3221419c751ff1c8d0a8757dfdf270f",
+      "bytes": 9501,
+      "sha256": "6bc487ec1dadaa80ab20a8f84abeb590ceeefde762502749728d9b1167f06246",
+      "FULLreadback": true
+    },
+    {
+      "path": ".github/workflows/afw-c2-first-failure-diag2-toy.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "85d677764a3176839a23cdc95aa7568a78869c9e",
+      "bytes": 1445,
+      "sha256": "c5671a683cabb858d55669808fec771f86a7d84f92044135410b339da610c5ff",
+      "FULLreadback": true
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/run-toy.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8fa0b0e27821226ddde1f5f5ff3b6d8dda0cefff",
+      "bytes": 14326,
+      "sha256": "c880aadd96214caec37747375bd99a6b1e6f91292c09bab963aad3fb0f9e1c0d",
+      "FULLreadback": true
+    }
+  ],
+  "expectedNativeLeafCount": 3208,
+  "originalLeaves": 3203,
+  "metadata": {
+    "graph": {
+      "bytes": 5528,
+      "sha256": "a99560890484a193d09406c066d5abdab0552d65a85a3c1dfbaf88e9c57da5e1",
+      "gitBlob": "96c7668acd19aff5d1f00fe1379e8272d0c68e56"
+    },
+    "reversibles": {
+      "bytes": 79008,
+      "sha256": "b195a68a4b9a35f0ac7ea199f247383e9fc754f5ac65994a6a3bc4eaf3d39043",
+      "gitBlob": "e63eb18c629c467876f572408f9c8d9fd71869ba"
+    },
+    "admissionProtocol": {
+      "bytes": 4294,
+      "sha256": "a936536dbe2d8946eb29bcf9c13dd6652161305ab38de542df9cd47fd382f781",
+      "gitBlob": "b1c5b4da7877ebad3252ce76aad65f018b107581"
+    }
+  },
+  "runtimeGraphSummary": "FixedActionscheckout/setupNode/parent/upload only; parent5builtinimports+localread-onlygit; child2builtinimports and1launch. InertJSON fixtures/schema, noSource imports/deps/npm/MF/SDK/provider/networkbusiness calls.",
+  "proof": {
+    "schema": "050f58f2d3221419c751ff1c8d0a8757dfdf270f",
+    "payloadIncludingLFMaxBytes": 24576,
+    "normalMarker": "AFW_C2_FIRST_FAILURE_POST_DIAG2_TOY_PROOF",
+    "faultMarker": "AFW_C2_FIRST_FAILURE_POST_DIAG2_TOY_FAULT",
+    "artifact": "afw-c2-first-failure-post-diag2-toy",
+    "fileName": "c2-first-failure-post-diag2-toy-proof.json",
+    "path": "output/c2-first-failure-post-diag2-toy-proof.json",
+    "retentionDays": 7,
+    "requireRaw": "Original complete SYNTHETIC toy TAP exactUTF8/bytes/SHA retained inside proof; no Source actualraw."
+  },
+  "factsExpected": {
+    "toyCodeBytes": 1628,
+    "toyCodeSha256": "988b241402d628d86c1a2513af80ba14be22540cc2c97925e8e81837f4ee5d69",
+    "nodeNativeCases": 20,
+    "nodeNativePass": 19,
+    "nodeNativeFail": 1,
+    "targetOrdinal": 12,
+    "targetId": "C2T1_NOTICES",
+    "sourceRows": 20,
+    "targetCounts": {
+      "upload": 2,
+      "activation": 2,
+      "receipts": 1
+    },
+    "nativeAssertion": {
+      "actual": 503,
+      "expected": 200,
+      "code": "ERR_ASSERTION",
+      "name": "AssertionError",
+      "operator": "strictEqual"
+    },
+    "SourceSiteProved": false,
+    "SourceRowsSubtestAdjacencyRequired": false
+  },
+  "authorVerification": {
+    "FULLreads": "All component bodies independently hashed bytes/SHA256/GitSHA and FULLreadback-equal. Full reversible includes all5exactbody preimages afterABSENT against conserved BASE3203 tree DATA. Corpus/expectedfacts sealed before parent code.",
+    "staticOnly": "No importing/evaluating/syntax-checking/compiling/testing toy, parent or Source. No native result exists here. No ref or Actions endpoints touched.",
+    "readOnlySkillException": "Brief SKILL.md +writing-good-tests instruction reads only; no Source filesystem read/write, deps or builds.",
+    "testClaims": "6literalparentcontrols proposed/0executed;20Nodecasesproposed/0executed. Rootnative+freshindependentreview still required.",
+    "RootContext": "Actualfuturehead/tree/run/job caller expectations must be supplied by Root; nulls cannot be admitted, taken from proof, guessed from hashes or reused from closednomination."
+  },
+  "holds": [
+    "Root full packet/staticdiff/graph/context/trigger gate before one native",
+    "Sourceparser/collector code held until actualtoyformatadmitted and DIAG2outer DATA agreement",
+    "Sourcebusiness/fullTask1 qualification run not released",
+    "No M/QA/SDK/D07/recorder/newcalls/hooks/RPC/clock/caps changes",
+    "Hostfixture improvement and E2 Source13 are separate; toy503 does not prove SourceHTTP503 or cause"
+  ],
+  "toyExecuted": false,
+  "SourceCollectorExecuted": false,
+  "SourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
