@@ -1,10 +1,10 @@
 {
-  "schema": 57,
-  "timestampUTC": "2026-11-17 16:27:13 UTC",
+  "schema": 58,
+  "timestampUTC": "2026-11-17 16:49:08 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "7341416c5281ea5d74e2d9561636ce272d836964",
-  "phase": "GET_WINNER_STAGE_A_ACTUAL_REVIEW_ACCEPTED_STARTUP_FIX2_PROPOSAL",
+  "previousCheckpoint": "99f81a43de4edd2d528ebbd865663bb78fcd4f7b",
+  "phase": "GET_WINNER_STARTUP1_EXACT_NATIVE_GATE_UNATTACHED",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Original StageA author prepares bounded failure capture/bootstrap/helper proposal with fixtures first; independently review then Root decides one changed isolated launch. No unchanged retry, Source feature or business/runtime release; no user intervention.",
+  "next": "Root fresh availability check then one changed startup1 native tooling attempt; expectedRED vs diagnostic both preserved honestly, close/readback afterterminal. No Source observer/business/runtime or user action.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -516,9 +516,9 @@
   "completedOwnVmReleased": true,
   "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
   "getWinnerDependent": {
-    "phase": "STARTUP_APERTURE_FIX2_PROPOSAL_ONLY",
+    "phase": "STARTUP1_REVIEWED_GATED",
     "featureCodeReleased": false,
-    "nativeReleased": false,
+    "nativeReleased": true,
     "roundsUnchanged": true,
     "actor": "/root/get_winner_fixture_stage_a",
     "reviewer": "/root/get_winner_stage_a_review",
@@ -574,6 +574,26 @@
     "expectedREDVerified": false,
     "businessReleased": false,
     "actualReviewer": "/root/get_winner_stage_a_native_review RUNNING",
-    "actualReview": "6da29cd79d736a11f8c520b357c7ef951a76740e"
+    "actualReview": "6da29cd79d736a11f8c520b357c7ef951a76740e",
+    "startupProposal": "d21fc236f092ed787ae227617440c07e18080d34",
+    "startupReport": "eb319edf794cc8da87908c04e7e89f5f366e368d",
+    "startupReview": "b7e321c461c6a5959e6b93d5f916b908a1ddd105",
+    "startupMeasurement": "19ca6199f723d167f8f5f2aa0893fea964196a04",
+    "startupPrepared": {
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures-startup1",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "preparing": false,
+      "activationAttempted": false,
+      "refCreated": false,
+      "unattached": true,
+      "mounts": 33,
+      "tree": "e8a2623120a1680bc3c0127104c448f33cb84d20",
+      "head": "8839c37f5d3267e8a1ed372ba5dfb0d30166267e",
+      "fullTreeVerified": true,
+      "original3203Preserved": true,
+      "leaves": 3236
+    },
+    "controls46Executed": false
   }
 }

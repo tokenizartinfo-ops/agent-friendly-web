@@ -1,0 +1,111 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.STARTUP1.NATIVE_GATE/1",
+  "timestampUTC": "2026-11-17 16:49:08 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "one-use credential-free GitHub Actions isolated synthetic lab",
+  "resourceType": "fresh exact native tooling branch",
+  "resourceId": "lab/afw-c2-get-winner-20261117-fixtures-startup1",
+  "allowedAction": "Activate one materially changed StageA startup-observation attempt1. Run fixed remote syntax checks and46pure helper controls, then at most one original positive-M GET/controlledactor. Keep expectedRED41 separate from prerequisite-fault1 diagnostic. Preserve exact terminal evidence and close this workflow. No Source feature/business/live release.",
+  "authority": {
+    "ownerRequest": "que falta para hacer la prueba con mi PC apagada y continua con todo",
+    "plan": "0b8368869f60978c536b056c37e451f8c899f93f",
+    "brief": "0bbb7828abcdc702494794950083c546e0384fdf",
+    "ruling": "a8dbba23405e9bcb68bc519447f8991637152bb8",
+    "actualReview": "6da29cd79d736a11f8c520b357c7ef951a76740e",
+    "staticReview": "b7e321c461c6a5959e6b93d5f916b908a1ddd105"
+  },
+  "prepared": {
+    "branch": "lab/afw-c2-get-winner-20261117-fixtures-startup1",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "preparing": false,
+    "activationAttempted": false,
+    "refCreated": false,
+    "unattached": true,
+    "mounts": 33,
+    "tree": "e8a2623120a1680bc3c0127104c448f33cb84d20",
+    "head": "8839c37f5d3267e8a1ed372ba5dfb0d30166267e",
+    "fullTreeVerified": true,
+    "original3203Preserved": true,
+    "leaves": 3236
+  },
+  "proposal": "d21fc236f092ed787ae227617440c07e18080d34",
+  "RootFullMeasurement": "19ca6199f723d167f8f5f2aa0893fea964196a04",
+  "canonical33BodyEdges": {
+    "bytes": 8100,
+    "sha256": "61eb27d8fca7b173a0540def2bbb2432d967f77d7b4a4f32657422e8eba3b681"
+  },
+  "checks": {
+    "SPEC": true,
+    "QUALITY": true,
+    "full33ReadbackHashes": true,
+    "source13AndNativeChildAnd315Unchanged": true,
+    "previous25LeavesExact": true,
+    "literal35OperationsReversible": true,
+    "metadata25OperationsReversible": true,
+    "baseOriginal3203Preserved": true,
+    "all33PathsAbsentAtBase": true,
+    "freshNominationAbsent": true,
+    "priorBranchRuns": 0,
+    "protected18Unchanged": true,
+    "inheritedTriggerAudit": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "oldSpentWorkflowAbsent": true,
+    "capsUnchanged": true,
+    "localSourceExecuted": false
+  },
+  "expected": {
+    "syntaxChecks": 5,
+    "pureControls": 46,
+    "nativeGETsAtMost": 1,
+    "expectedRED": {
+      "exit": 41,
+      "headerMissing": null,
+      "expectedHeader": "g1.413.S.413",
+      "HTTP": 413,
+      "oneActorArrival": true,
+      "bodyOriginal": true,
+      "disposed": true,
+      "receipt": "get-winner-red.json",
+      "artifact": "afw-c2-get-winner-red"
+    },
+    "fault": {
+      "exit": 1,
+      "kind": "PREREQUISITE_FAILURE",
+      "artifact": "afw-c2-get-winner-startup-diagnostic",
+      "file": "get-winner-startup-diagnostic.json",
+      "expectedRED": false
+    },
+    "mutuallyExclusiveArtifacts": true,
+    "atMostOneActualArtifact": true,
+    "missingFaultOrREDProofNeverPasses": true
+  },
+  "priorOccurrence": {
+    "run": 44123016528,
+    "closedHead": "a360239dfbbfa3263f634042bbe7bb4a56c5b3d7",
+    "actualPrimary": "b3267a5b4245da1dbe0612c13540c54ceaa19297",
+    "closed": "a45965bd990ca2bf6190f6a473eea5198bd32bdd",
+    "expectedRED": false,
+    "underlyingCause": "UNKNOWN"
+  },
+  "rounds": {
+    "StageAFix": 2,
+    "StageAMax": 5,
+    "Source": 5,
+    "Own": 5,
+    "noReset": true
+  },
+  "rollback": "After terminal capture remove only nominated startup1 workflow and add Root primary/close evidence with CAS. Preserve original3203+remaining32 added leaves; verify close-head/complete tree/protected18/no close runs.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
