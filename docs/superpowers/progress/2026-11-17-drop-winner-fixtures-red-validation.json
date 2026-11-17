@@ -1,0 +1,40 @@
+{
+  "schema": "AFW-DROP-FIXTURES-ROOT-RED-VALIDATION/1",
+  "atUTC": "2026-11-17 12:49:29 UTC",
+  "run": 44086328643,
+  "job": 134049601692,
+  "head": "d561b138ed6906cdf90c69bdb18afaca1e2188b2",
+  "tree": "a2aa1337e9cc05a4aab820f4c879a50624420579",
+  "step": 4,
+  "expectedFailure": true,
+  "oneNamedAssertion": true,
+  "proofMatchesExactTemplate": true,
+  "apiAndCommandTimeBound": true,
+  "zipDigestCrcDeflateDescriptorValid": true,
+  "canonicalPayload": true,
+  "archive": {
+    "bytes": 815,
+    "sha256": "1fbd4c0dcd1650f252b2de2ee1f720ddadc2083116b5b5235139aa9212237b56",
+    "blob": "fdb2266ecdf190daa4f212e5d4fab78b7849dae6"
+  },
+  "payload": {
+    "bytes": 1050,
+    "sha256": "98c0c7369987f1c57242b483c14ebfea7e43adc14d047d24f863c0d0426d5b40",
+    "blob": "b77f84620c7cd3c83bc2ef48d3e53dfec5d41ac0"
+  },
+  "fixtureCount": 59,
+  "executed": 1,
+  "remaining58NotExecuted": true,
+  "MODELOnly": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
