@@ -1,0 +1,31 @@
+{
+  "schema": "AFW-DIAG3-BUSINESS-CLOSURE-RECEIPT/1",
+  "timestampUTC": "2026-11-17 05:06:47 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+  "attemptedHead": "17582e124c2728800788dcbe46c740f38aea861a",
+  "attemptedTree": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
+  "run": 44021068647,
+  "job": 133830419181,
+  "primary": "3b38e269929a88eef353f00016726d1ca3270f01",
+  "outcome": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
+  "admission": "e7530d7f55172ee36035b655d120bcae7479f862",
+  "workflowDeleted": ".github/workflows/afw-c2-finite-get-diag3.yml",
+  "retainedMounts": 24,
+  "originalLeaves": 3203,
+  "expectedClosedLeaves": 3229,
+  "diagnosticAccepted": true,
+  "full20Incomplete": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
