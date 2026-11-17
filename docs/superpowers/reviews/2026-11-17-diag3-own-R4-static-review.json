@@ -1,0 +1,407 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-OWN-R4-FINAL-INDEPENDENT-STATIC-REVIEW/1",
+  "timestampUTC": "2026-11-17 04:37:01 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "disposition": "PASS_STATIC_OWN4_FOR_ROOT_TOOLING_GATE",
+  "verdict": {
+    "SPEC": "PASS_STATIC_BOUNDED",
+    "QUALITY": "PASS_STATIC_BOUNDED",
+    "openFindings": [],
+    "nativeAccepted": false,
+    "actualSourceCaptureAccepted": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "scope": "OwnR4final520860e0,11guardmodules (6legacyfijosreutilizados),95nativeafterimages,3nuevosinputs,selección/controller/schema/WF/protocolo/bindings ymanifiestos como texto/JSONinertes. No Source/OWNguardmoduleeval/import/AST/syntax/compile/tests por elreviewer; no FS/deps/builds/refs/runs/APIterminal/log/artifactdownloads/provider/CF ni patch. Lógicaoriginaldereview para DATA/CRC/zlib/hash/shape/razonamiento solamente. Únicaescritura: constanciaGitDATA+FULLreadback.",
+  "authority": "ce4e65195fd0f02adf6de5b64748abaaf3470fbd; OwnRound4/SourceRound4/max5sinreset. Esteinforme no liberaNative niSourcebusiness.",
+  "fullReadHashes": [
+    {
+      "name": "packet",
+      "bytes": 48316,
+      "sha256": "0b49aea6cd21f1219c77c99ddb4cb9504ee5cfe7b9adc1b02bd7c730a678fc84",
+      "gitBlob": "520860e0f90337f764a34ea55f77eb4851000c48"
+    },
+    {
+      "name": "toolsIndex",
+      "bytes": 38432,
+      "sha256": "8c0b11d5b843ba0afe965d323c1912ac1747477b6bd39a24433fd4ddfc515b9c",
+      "gitBlob": "b33a7aba421b9ab3935b0bff2e072055d8f192ff"
+    },
+    {
+      "name": "graph",
+      "bytes": 40540,
+      "sha256": "41fbed67bad14bb9157e05b1445179ff829036fb167b6f856d67e940fd8ef1ee",
+      "gitBlob": "82947d4e60ffc058f3de2ef39f869deb6e443f3f"
+    },
+    {
+      "name": "runner",
+      "bytes": 6510,
+      "sha256": "f29025f5138f71ca5cc3cb1720ad56f44cf872246771bb36145f84566e5d53c9",
+      "gitBlob": "8018c5be1ce1d310a67b869b5f26d22db5e5243e"
+    },
+    {
+      "name": "workflow",
+      "bytes": 1516,
+      "sha256": "17065672114fef20850bfaaf16a774e1dd3ca0757ae39213a1ba47b21f8b1785",
+      "gitBlob": "6352cae734c36f90a4eedcfa136770aa05682939"
+    },
+    {
+      "name": "proofSchema",
+      "bytes": 69384,
+      "sha256": "3e8562f05cc4f588cd7abd71b454031f9efdc803d2fe977cb02590dd4882869f",
+      "gitBlob": "ce5896bea193625ca7534cd8833435ac7683a970"
+    },
+    {
+      "name": "protocol",
+      "bytes": 3344,
+      "sha256": "e967b2e32095bf899bfa54260b5a4b75176592857c948b787fdce1e4f3b4a828",
+      "gitBlob": "db4dfcfac66cbb52ed374fa0dc57f30091c1d482"
+    },
+    {
+      "name": "selection",
+      "bytes": 34181,
+      "sha256": "45280821703102c3a29c262fe196ba2fe915b4d6b3f8acbd8bba70cca422e440",
+      "gitBlob": "f921fe1897d1a70b2217d0925a6508c110834067"
+    },
+    {
+      "name": "ram",
+      "bytes": 21449,
+      "sha256": "90ef406391b0b36ea9d5c78b3b1988be0e822986bbd042b566da5af236ed0598",
+      "gitBlob": "9c262eb128bd50b79e57e446fdec7d2abc916491"
+    },
+    {
+      "name": "minimalDiff",
+      "bytes": 12606,
+      "sha256": "709980fc1a4e5c2aaafef54b06b002c0bf23568fcfe1db0e69392f0922a263ab",
+      "gitBlob": "01da1c2e0b4b4eddd009df568d42789c54e0a767"
+    },
+    {
+      "name": "reversibles",
+      "bytes": 57938,
+      "sha256": "129ebba64fc2474fd3ebfe52fd0a5be396354f6f739eb636038b4b980b41f96a",
+      "gitBlob": "4aec1a61499d37508ce574bc480b3134c31d8a31"
+    },
+    {
+      "name": "bindings",
+      "bytes": 64627,
+      "sha256": "05c48c3204c148f1dae31723e3f71561b9e5df31c22280e6da30743500b92e8f",
+      "gitBlob": "aaee696f0c05cda224d7f20fa7a364c445b0741c"
+    },
+    {
+      "name": "finiteGetR4",
+      "bytes": 5365,
+      "sha256": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102",
+      "gitBlob": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02"
+    },
+    {
+      "name": "finiteGetR3",
+      "bytes": 4706,
+      "sha256": "561d7b0b8c7f359d86c90a6aadf60680925d7c60cd8b6863d52d4505b2b68829",
+      "gitBlob": "5b726edfe6cdd5bd58d6eea4ddab94d2e8a9f277"
+    },
+    {
+      "name": "boundTransport",
+      "bytes": 9733,
+      "sha256": "69a23e8431af2f8daecac97a486e554f0f985f070a1d04a86ecaaff3129f9efe",
+      "gitBlob": "a03b310333cf2882314c9cfb6f6db9069389f8e1"
+    },
+    {
+      "name": "reader",
+      "bytes": 4080,
+      "sha256": "eeb28b5daa384c3b04331d5a982e8950669672483349154474c32d74cd500e4c",
+      "gitBlob": "ddaa91771171abf0dba6110184b06e631849c2ec"
+    },
+    {
+      "name": "controls",
+      "bytes": 1921,
+      "sha256": "189beee245f5a3c61510dfbb1bb02b4315f5284800fe2d728f2a984a089c79fe",
+      "gitBlob": "c3c1cc2aeb667d068d16e1fadf64fa5c1e9c4ef0"
+    },
+    {
+      "name": "fixtureIndex73",
+      "bytes": 59084,
+      "sha256": "752035ffffffdda986aab94cdb23512e97efb70281b4fa75fbf77a0a7436fc36",
+      "gitBlob": "7ddd5716920ef46ef93afbcab2e68bf62ee1e5e7"
+    },
+    {
+      "name": "fixtureSeal73",
+      "bytes": 4187,
+      "sha256": "45bf1a8c048334a75286947a17bfa1af6a2ff3df1358ebc6eca042c00b05bea9",
+      "gitBlob": "daa8f98024c58f650c8ffffbfb835abe42e4a8f5"
+    },
+    {
+      "name": "ids73",
+      "bytes": 5452,
+      "sha256": "17f35534035f93e113f0014fcadd3e6fb6093d83d23fc6bfe57c26319636290a",
+      "gitBlob": "7f911c1060aaf193ccd0ac3bf62a024d3ab0b0d0"
+    }
+  ],
+  "reused": [
+    {
+      "role": "OWNfix1original44/core",
+      "review": "247fb10edd01a5449333f15ca68a8064742202f3"
+    },
+    {
+      "role": "OWNdesign+SourcefixtureDATA",
+      "review": "0a61ac955e39fb1572532cca811ef11876490f75"
+    },
+    {
+      "role": "SourceR4static149/predicate",
+      "review": "33f8e5c242ef9f41bb0352b6590c274de0934fa4"
+    },
+    {
+      "role": "Own73fixture-first",
+      "seal": "daa8f98024c58f650c8ffffbfb835abe42e4a8f5",
+      "basis": "old70metadata/IDprefix protegido porRoot; no reread de70cuerpos. Los3nuevos síFULLread e inspección independiente decontenedores."
+    }
+  ],
+  "minimalFix": {
+    "path": "docs/superpowers/root-own/c2-t1-finite-get-diag3/finite-get.mjs",
+    "before": "5b726edfe6cdd5bd58d6eea4ddab94d2e8a9f277",
+    "after": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+    "insertionLines": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "bytesBefore": 4706,
+    "bytesAfter": 5365,
+    "sha256After": "c34f080c80703c799cf0c2bd13163cc7012997b96822129ff9944d8011173102",
+    "checks": {
+      "forwardUnique": true,
+      "reverseUnique": true,
+      "forwardExact": true,
+      "reverseExact": true,
+      "addedUTF8Bytes": 659
+    },
+    "behavior": "Única inserción de659UTF8B antesdelreturnexistente. Todoslosguardsanteriores quedanexactos; noSourceparser/import nuevo niobservable/cap nuevo. Sample/HTTPclaimsfalse,true,null seunen sóloenprefijo15 yVALID15implicaVALID14. INVALID15 noimplicaINVALID14. Despuésdevalidaciónshape/reasons, coincidecon elSourcepublisherR4."
+  },
+  "ternaryReview": {
+    "totalAbstractValidatedReasonCombinations": 735,
+    "rejectedByNewPredicateOnly": 102,
+    "mismatches": [],
+    "positives": [
+      {
+        "id": "neutralAll",
+        "a": "JOURNAL_UNRESOLVED",
+        "b": "NATIVE_UNJOINED",
+        "h": {
+          "state": "UNKNOWN",
+          "reason": "TRUNCATED_NATIVE"
+        },
+        "newPredicateReject": false
+      },
+      {
+        "id": "missingMarker14Joined15",
+        "a": "MARKER_UNAVAILABLE",
+        "b": "JOINED_SNAPSHOT",
+        "h": {
+          "state": "KNOWN",
+          "reason": "TARGET_GET_ASSERTION"
+        },
+        "newPredicateReject": false
+      },
+      {
+        "id": "valid14Invalid15",
+        "a": "JOINED_SNAPSHOT",
+        "b": "SOURCE_UNJOINED",
+        "h": {
+          "state": "UNKNOWN",
+          "reason": "SOURCE_ROW_UNAVAILABLE"
+        },
+        "newPredicateReject": false
+      },
+      {
+        "id": "globalMarker14HigherSource15",
+        "a": "MARKER_STREAM_INVALID",
+        "b": "SOURCE_UNJOINED",
+        "h": {
+          "state": "UNKNOWN",
+          "reason": "SOURCE_ROW_UNAVAILABLE"
+        },
+        "newPredicateReject": false
+      }
+    ],
+    "scope": "Own original symbolic review of reason domains, not Source/OWNartifact execution, no new sealed tests/census"
+  },
+  "ternaryScope": "Las735combinacionesabstractas sonrazonamiento independientedelreviewer sobreeldominio de razonesvalidadas, noejecución deartefactosSource/OWN, nuevoscontrolesnativos oampliación delcenso. Otrosguards siguenobligatorios.",
+  "codeAndBoundaryAssessment": [
+    {
+      "path": "finite-get.mjs",
+      "result": "Conserva prioridadjournal/native/NA/counter/torn/privatealternatives,actualHTTP!=200 yjoincountpointers. CrossAglobaltaint/crossBKNOWN/AFTERsiguen vigentes. Nuevapredicación rechazaS04INVALID15vsVALID15,S05VALID15vsINVALID15,S06VALID15vsINVALID14, sinreinterpretarNEUTRALcomoinvalid. MarkerUnavailable14+Joined15permanecelegal; Unsupported/Format/Conflict semanticasprivadasnotestificanSourceprefix."
+    },
+    {
+      "path": "reader.mjs",
+      "blob": "ddaa91771171abf0dba6110184b06e631849c2ec",
+      "result": "readBoundprivado compartido. d3ReadeligeD3_ACTUAL;d3ModelReadeligeD3_MODEL constantesfrozen, antesdeAPI/trustedmetadata. Bodyedgesexactas+hashprefijados, input6keys, log2frames/window/schema/context/custody/replay/C1/finiteGet/ZIP/listing/digest. No fallback/outcome-basedselection ni fixtureOnlyWitness/rawchildTAP tomado deinput. finalSourceBinding/SourceQualified/Task1Pass falsos."
+    },
+    {
+      "path": "bound-transport.mjs",
+      "blob": "a03b310333cf2882314c9cfb6f6db9069389f8e1",
+      "result": "Guardcoreparametrizado sólo porbindingliteral. Repo/ref/message/attempt1/parent/head/tree/run/job/requiredsteps ystepnumérico; job≤7min, timestamps yventana command. Rawtree25uniquepaths/caps/truncatedfalse/commit join. ZIPstrictbase64/singlefilename/method0o8/central-local/TLVsinZIP64/bit8zero-or-match/descriptor/CRC/fullDEFLATEconsumption ypayloadcanónico. Se reutiliza lógica heredada revisada; sin nuevo decoderSource o remotecall."
+    },
+    {
+      "path": "controls.mjs",
+      "blob": "c3c1cc2aeb667d068d16e1fadf64fa5c1e9c4ef0",
+      "result": "Invoca d2ModelReadpara44legacysinretarget y d3ModelReadparanuevos29. Rechazos sólosevalidan conerrorG20_OWN_UNQUALIFIED, noTypeError arbitrario niresultadoausente. Admitidos comparanstate/reason,firstthrow,C1real yfiniteGetcompleto, producenhashdelaproyecciónactual. No expected-asactual. Todos7nonclaimsfalse yactualSourcequalifiedno esdeducido delmodelo."
+    }
+  ],
+  "bindings": {
+    "code": "aaee696f0c05cda224d7f20fa7a364c445b0741c",
+    "actualRoot": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+    "actualTupleHash": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+    "modelTupleHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6",
+    "checks": {
+      "actualKeys": [
+        "fixed",
+        "schema",
+        "edges",
+        "edgesHash",
+        "RootMeasurement"
+      ],
+      "actualEdgesHash": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+      "modelEdgesHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6",
+      "modelExact": true,
+      "actualEdgesExactRootR4": true,
+      "actualChangedEdges": [
+        18,
+        19,
+        23
+      ],
+      "RootR4Reference": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+      "actualRootMetadata": {
+        "edgesHash": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+        "RootMeasurement": "bd26df072e8cf4f32fe1e266f7c2d639223d317e"
+      },
+      "readerUnchanged": true
+    },
+    "schemaActualExact": true,
+    "meaning": "SóloACTUALedges18/19/23 yRootmeasurement cambian desdeR3. MODELobjetoexacto, schema/Source13/E3/S08/S10cb95/selection reales exactos. Las2tablas sonJSONliteral cerrado; noenvfallback niOutcomeauthority. Actualcallerhead/tree/run/jobfuturocontinúan separados; susnullmetadata no sonwildcard admitido."
+  },
+  "containers": {
+    "checks": [
+      {
+        "id": "FG3_S04",
+        "fixtureBytes": 67934,
+        "fixtureSha256": "3ee2d3998379dc1d5bb5e3c506ac1f426fcc9fb05c67c25f58c97df6de8586fc",
+        "fixtureGit": "6b1266fe4e910a3b3547cf766f5c89106360033e",
+        "archiveBytes": 3018,
+        "archiveSha256": "9e6d39adea4bc9d69fc69595019f40ca5b77189df1c824fcdfd9d8e84aa9f720",
+        "method": 8,
+        "compressed": 2856,
+        "consumed": 2856,
+        "payloadBytes": 12839,
+        "payloadSha256": "e44ed0e0e703bd3153868a3bbf6b03d7c1d2390fa7b9158d440116eb4ae4924d",
+        "modelHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6",
+        "coherentContainer": true
+      },
+      {
+        "id": "FG3_S05",
+        "fixtureBytes": 67985,
+        "fixtureSha256": "00f2e2463418bb7a3c7cff7dae2d2417bd7b075ccf516bf1e24a4e92155d4d40",
+        "fixtureGit": "ceceb6aff92829ee3b0d0f543a8782d8d335b416",
+        "archiveBytes": 3034,
+        "archiveSha256": "83eb5ac4388b5a6b276260cddc87e93c3499f618441a62d4b2f1d71ce0940547",
+        "method": 8,
+        "compressed": 2872,
+        "consumed": 2872,
+        "payloadBytes": 12854,
+        "payloadSha256": "e000650198d1f4b078f6180819771403a5b34a1c9a9cac0a8b7a04553205d70d",
+        "modelHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6",
+        "coherentContainer": true
+      },
+      {
+        "id": "FG3_S06",
+        "fixtureBytes": 68010,
+        "fixtureSha256": "8b7d3d7677b5000933e06537315e6d875c9ed1bb354658da12af0648b3f7944e",
+        "fixtureGit": "fdd7581fab53fb1f7fb9e0e4f279ed78f952e675",
+        "archiveBytes": 3026,
+        "archiveSha256": "e5fa2c91ae9a5c9c48421c9d1ad345527f6487f31f54935be74a9d6db4f9d939",
+        "method": 8,
+        "compressed": 2864,
+        "consumed": 2864,
+        "payloadBytes": 12844,
+        "payloadSha256": "c8e6fedc8b813dddc272c51f5f2cd377aa3f1ecd86abf1fd87a78a77f1829764",
+        "modelHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6",
+        "coherentContainer": true
+      }
+    ],
+    "publicJoins": "CadaS04/S05/S06 tieneAPI/context/trusted/model25/tree/sourceframes/log/canónicoLF coherentes,14nativePASS yScope15FAIL/firstthrow58,count14return56/count15return60. CRC/fullstream/digest/payload reparados, no fallo ajeno detransportemaskenaelhallazgo. Se mantieneC1NA/EARLIEST_THROW_DIFFERENT. SonSYN2041/IDs99303001/headsa/treeb, actualExpectedSourceContextnull; noocurrenciaSource.",
+    "staticRejectAtNewRule": "S04 reclamaINVALID15yVALID15;S05VALID15yINVALID15;S06VALID15eINVALID14 conHTTPreasonneutral. Nuevo gBad sóloimpideesascontradicciones; no agregaunclaim de presencia/ausencia privada.",
+    "privateLimits": "PrivateTAP/C2SOURCE/C2FT3/rows no entran alguard. Coherente503→429/categoría1→2+ sigueindistinguible sinraw; no autenticación deProducer, tickets/receipts,preconnectioncontinuity, causaldelta oausenciadeefectos."
+  },
+  "censusAndOrdering": {
+    "nativeGroups": 8,
+    "receiverEvaluations": 73,
+    "admit": 32,
+    "reject": 41,
+    "D2": 44,
+    "D3": 29,
+    "canonicalIdsHash": "824d5a29870dc010c6024aca2a7ae47367b5f38c13b240547e1c59ef1229ebf8",
+    "physicalIdsHash": "9730902d9c4ddbd6f3f9352e8323e9532fdc53919b52749eebb488d16d11f493",
+    "RootRAMResultsHash": "98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb",
+    "receipt": "Canonicalreceipt conserva70IDsdespuésS04/S05/S06. Physicalgrouporder colocaB06/B07engrupo5yS04/S05/S06engrupo6antesW/Caller; no tiene70prefixfísico. Runnerverificaambaslistas yordenaelMapderesultadosrealesparapublicarcanonical.",
+    "preservation": "73fixturemetadata nativasmapeanexactamentealíndice73sellado;44D2+26previosD3y3nuevos. Se6legacymodulesexactospinados. Rootinformóreproducción3REDy73RAMGREEN32/41; eseRAMesRoot/author, no ejecución independiente delreviewer niNative."
+  },
+  "nativeController": {
+    "runner": "8018c5be1ce1d310a67b869b5f26d22db5e5243e",
+    "workflow": "6352cae734c36f90a4eedcfa136770aa05682939",
+    "graph": "82947d4e60ffc058f3de2ef39f869deb6e443f3f",
+    "graphPinnedFiles": 93,
+    "plusRunnerAndGraph": 95,
+    "totalNativeBytes": 5148250,
+    "ownModules": 11,
+    "SourceExecutableImports": 0,
+    "code": "AntesdeimportsOWN compruebaenv/repo/ref/message/attempt1/GitparentBase/head/tree/selfpath/graphSHA y93files byte/SHA/Git/mode/tree. Graph+selfrunnerexternamenteRootpinados paraevitarciclo; runnerSelfSHAenproof. SóloOwn11 ybuiltin; SourceJSONschema/index/selection/root25 sonDATA. Sin npm/SourceJS/harness/networkdeps.",
+    "execution": "await test por8groups,10s/groupycontrollapsedper-eval,73llamadas realesrunEvaluation. Cualquiererror marca failed y no se obtieneproofnormal. after exige73results/8natives/32admit41reject,physicalids exactos; producedigests devarsactuales. WFrepo/ref/message/attempt1/Ubuntu24/Node22.23.4/contentsread/3min, artifactúnico7d.",
+    "proof": "Canónico+LF≤24576, sin95pinsduplicados: graph/runner/selection/schemahashes seatanalRootmanifestexterno. OwnModelsExecutedtrue; actualSourceExecution/actualEntryQualifiedByModels/finalSourceBinding/SourceQualified/Task1Passfalse. Modelo prospectivo14638B LFconrun20digits pasaelschema inspeccionado; no pruebaactual.",
+    "checks": {
+      "canonicalIdsHash": "824d5a29870dc010c6024aca2a7ae47367b5f38c13b240547e1c59ef1229ebf8",
+      "physicalIdsHash": "9730902d9c4ddbd6f3f9352e8323e9532fdc53919b52749eebb488d16d11f493",
+      "resultsHash": "98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb",
+      "admit": 32,
+      "reject": 41,
+      "graphFileBytes": 5101200,
+      "actualTupleHash": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+      "modelTupleHash": "3764b41201cdc42f92f4be61a8062c3c1605bd71b8da33ccd92adc45cf1e3eb6",
+      "proofLFBytes": 14638,
+      "proofSchemaErrors": [],
+      "graphFiles": 93,
+      "plusRunnerAndGraph": 95,
+      "ownModules": 11,
+      "SourceExecutableImports": 0,
+      "original44Protected": true,
+      "old26D3Reused": true,
+      "new3Negatives": true
+    }
+  },
+  "reversibles": {
+    "minimalDiff": "01da1c2e0b4b4eddd009df568d42789c54e0a767",
+    "fullManifest": "4aec1a61499d37508ce574bc480b3134c31d8a31",
+    "largeBodyBundle": "2229fb076f823349b5fcbad85b99d1f34adc473f",
+    "reviewed": "FULLmanifiesto57,938B ydiffmínimo12,606B, before/aftercodeexactos ysplicebidireccionalúnicoverificadoporelreviewer. No relectura innecesaria delbundle987,956Bni70cuerpos previos.",
+    "RootSeparate": "RootcomunicóFULL95bytesverified yold70exacto. Se registra comoconfirmaciónRootseparada; Reader/graph/code y3inputs fueronverificados aquí. Historial/ref no modificado."
+  },
+  "remaining": [
+    "Root controla elgateNative únicoOWN8/73 yexigeAPI/TAP/proof/ZIP/schema/95bindings/cierre reales; estePASSestático no activa nada.",
+    "RAM73+modelo deproof no son evidenciaNative. Actuald3Read no se califica por losMODELS; una capturarealSourcecontext/R4yreview aparte permanecependiente.",
+    "Source149actualreciénconservado seráreviewseparado desdePrimaryc421; no se incluye suaceptación aquí ni se repitenendpoints.",
+    "FullTask1/SourceBusiness/fullreadiness y7nonclaims continúanfalse. No replay autorizado por esteinforme."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
