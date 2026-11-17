@@ -1,0 +1,64 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-ROOT-PRIORITY-FIX-RELEASE/1",
+  "timestampUTC": "2026-11-17 03:40:31 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": "Detached Source implementation only; all native refs/runs and business execution held.",
+  "basis": {
+    "sourceCodeRelease": "641256e34573b53a707298cdb26149def251e6b1",
+    "Source25ProposedNotAdopted": "dd6f6d44c577551388bffa9434baa332d1e12dfd",
+    "RootBodyMeasurementNotSemanticAcceptance": "266289bbe7e34d1a323e5140001cd3e8d7232507",
+    "earlyS08Peer": "5584f68de9521ed0d54e123f85c3fc055cb7b843",
+    "Source25StaticReview": "499730a9b58ac3329015a6d31382bd4b147d6ffe",
+    "finding": "FG3_STATIC_P2_FORMAT_BEFORE_AMBIGUITY",
+    "prior145": "4469d73e40f758e356e172c119687dde119c1fe6",
+    "newFixture146": "b307c25b01c98bdddbeafe908bf7b60ebcf438e1"
+  },
+  "finding": "The proposed collector returned AMBIGUOUS_EVIDENCE before validating fatal UTF8/control/header; publication also required this reason from public metadata. Contract609 requires FORMAT first at this tier. Static trace only, no false KNOWN or Source execution.",
+  "fixtureFirst": {
+    "wholeUTF8HashVerified": true,
+    "onlyHeader13to12Verified": true,
+    "allPrevious145Unchanged": true,
+    "newInnerID": "H_NATIVE_HEADER_FORMAT_PRIORITY",
+    "nativeGroups": 9,
+    "innerChecks": 146,
+    "perOrderedGroup": [
+      6,
+      24,
+      9,
+      4,
+      20,
+      6,
+      12,
+      35,
+      30
+    ],
+    "comparative": "Actual immutable old9ed collector AND publisher vs actual corrected candidate on same sealed buffers; old UNKNOWN/AMBIGUOUS, candidate UNKNOWN/NATIVE_FORMAT_UNSUPPORTED, counts NATIVE_UNJOINED. Also actual candidate publisher on original H_NATIVE_AMBIGUOUS expected AMBIGUOUS. No new native ID or Source business occurrence."
+  },
+  "permissions": {
+    "SourcePriorityFixCodeReleased": true,
+    "SourceRound": 3,
+    "OwnRound": 3,
+    "maximumSameFamily": 5,
+    "OwnGuardCodeReleased": false,
+    "OwnTwoAdditionalFixtureDataReleased": true,
+    "NativeReleased": false,
+    "SourceBusinessReleased": false
+  },
+  "SourceFix": "Keep C1 exact. Keep journal/earlier-native/NA/count/torn priorities. At raw-dependent tier validate fatal UTF8/control/nonempty TAP13 header before native ambiguous/target absence, reuse one bounded decoded scan. Empty data remains missing evidence. Keep all fields/enums/sites/source13/SDK/business predicates/clocks/calls/order/caps fixed. Only minimum adapter/publication/contract/Source25 index/tooling successor changes, full hashes and reversible splices required.",
+  "partialPublicBoundary": "Publication and independent OWN cannot infer a private header from native metadata. After higher-priority visible exclusions, native ambiguous permits UNKNOWN AMBIGUOUS_EVIDENCE OR NATIVE_FORMAT_UNSUPPORTED, all pointers/scalars null; missing native target/prefix at the raw-dependent tier permits UNKNOWN TARGET_NATIVE_UNAVAILABLE OR NATIVE_FORMAT_UNSUPPORTED. Native torn still requires TRUNCATED_NATIVE. Never admit KNOWN from these alternatives or JOINED counts without clean prefix. This is partial evidence, not header authentication. Marker/cross-check rules unchanged.",
+  "OwnFixtureScope": "Before guard code, preserve all old44 and new24 immutable; add FG3_B06/B07 positive ambiguous/FORMAT and ambiguous/AMBIGUOUS fixtures plus independent expected seals. Proposed native8/70=32ADMIT38REJECT; Root verifies before separate OWN code release. Explicitly acknowledge missing-target raw-tier partial alternatives too; no raw header intake or Source imports.",
+  "noReplay": "No ref/run has been created for DIAG3. Current aliases may remain because unused; old diagnostic/native histories stay immutable and closed. One future business diagnostic requires separate gate after both tooling/fresh reviews. No automatic repeat.",
+  "rollback": "Current mutation is detached proposal only. Retain all preimages; future owned tooling workflow closes by exact leased deletion, no active product paths or runtime mutated.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
