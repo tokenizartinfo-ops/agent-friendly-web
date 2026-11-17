@@ -1,0 +1,253 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-TOY-FRESH-SPEC-QUALITY-REVIEW/1",
+  "timestampUTC": "2026-11-17 00:51:06 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "reviewer": "/root/green20_own124_review; independent reviewer, not author",
+  "environment": "Immutable full Git DATA; static code text and inert JSON/strings/crypto plus builtin artifact inflation in RAM",
+  "resourceType": "One immutable fresh final review blob",
+  "allowedAction": "Full fixed-blob/RootPrimary/proof/closure reads and inert analysis, one final review with FULL readback. No toy/parent/Source execution, import, eval, AST, syntax, compile, test, local FS/dependencies, refs/runs/provider/browser or native endpoint queries.",
+  "result": {
+    "SPEC": "PASS",
+    "QUALITY": "PASS",
+    "materialFindings": 0,
+    "calibrationEligibility": "ELIGIBLE_AS_SCOPED_NODE22_ASYNC_TOY_FORMAT_CALIBRATION",
+    "summary": "Exact accepted C1 builtins-only toy produced20ordered synthetic cases,19PASS1intentionalFAIL at ordinal12NOTICES,20canonical source rows and the expected503/200 assertion. Six literal parent controls passed. Full rawTAP/proof/API/ZIP/pins/custody evidence matches the scoped contract. This is not actual Source behavior or parser qualification."
+  },
+  "authority": {
+    "ruling": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+    "acceptedDesign": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+    "earlyFixtureSeal": "e8bef167b07052e5b4274b7d9fbe5f3b2301cb54",
+    "nativeGate": "0f5a23c24cfd068bbd6021a0303f546c148e3abe"
+  },
+  "pins": {
+    "packet": "ec9d2ccca9368016ca118f77ff9ff864e6fcd96b",
+    "toy": "559b4c3480c3a404a41a180ae2a8dfa6afe9ade5",
+    "parent": "8fa0b0e27821226ddde1f5f5ff3b6d8dda0cefff",
+    "proofSchema": "050f58f2d3221419c751ff1c8d0a8757dfdf270f",
+    "workflow": "85d677764a3176839a23cdc95aa7568a78869c9e",
+    "graph": "96c7668acd19aff5d1f00fe1379e8272d0c68e56",
+    "reversibles": "e63eb18c629c467876f572408f9c8d9fd71869ba",
+    "admissionProtocol": "b1c5b4da7877ebad3252ce76aad65f018b107581"
+  },
+  "staticAssessment": [
+    {
+      "path": "docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/toy.mjs",
+      "lines": "1-25",
+      "assessment": "1628B exactly equals accepted design toolingFormatGate.toyProgramInertUtf8 and sealed SHA988b... . Only node:test/node:assert imports. Exact20selectedIDs/phases; awaitwork followed by awaitsyntheticCounts, preserved action error then counter error rethrow, finite setImmediate hops. Sole intentional503vs200 assertion at index11. No Source/helpers/HTTP/provider/business calls."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/run-toy.mjs",
+      "lines": "1-31,84-102",
+      "assessment": "Only five builtin imports and bounded read-only Git context commands. Exact one-use runtime/ref/repo/event/attempt/job/head/parent/tree/message/origin, clean tracked workspace and five input measurements. Four fixedpins plus Root-bound self; stable regular single-link bytes checked. Author null future context never treated as wildcard."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/run-toy.mjs",
+      "lines": "32-83",
+      "assessment": "Observer is explicitly narrow synthetic calibration, not Source collector. Requires childexit1/signalnone/noerror/zero stderr and complete strictUTF8/LF raw. Canonical20SourceRows independently matched in their own selected order; Node Subtest/result pairs matched separately. No SourceRow/Subtest adjacency or relative-order assumption. Unique target scalar fields and precise sample layout retained."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/run-toy.mjs",
+      "lines": "103-130",
+      "assessment": "Six presealed literal buffers are passed to actual parent observer before exactly one actual toy child. Builtins-only child runs fresh owned temp copy, stripped env, concurrency1, raw stdout<=16384 and remaining global10s deadline. Exact child bytes and original five input bodies checked again after execution."
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/run-toy.mjs",
+      "lines": "132-163",
+      "assessment": "Owned temp directory realpath/dev/ino/uid/gid verified before recursive removal and absence readback. Canonical proof is built only after cleanup, within10s total parent accounting and24576B includingLF, with exact original rawTAP fingerprint. wx output/readback, unique success marker or finite fault failure; no Source or readiness flags promoted."
+    },
+    {
+      "path": ".github/workflows/afw-c2-first-failure-diag2-toy.yml",
+      "lines": "1-37",
+      "assessment": "One exactpush branch/repo/attempt1/message gate; pinned checkout/setup-node/upload,Node22.23.4,Ubuntu24.04,contents:read,2minjob,no npm. Required reporting follows successful parent expected-observation check."
+    }
+  ],
+  "fixtureAndReversibility": {
+    "fixtureBodyMatchesEarlySeal": true,
+    "literalControls": 6,
+    "authorExecutedControls": 0,
+    "expected20NativeCasesAnd20SourceRowsAndAssertionMatchSchema": true,
+    "allFiveAdditiveImagesMatchFullBodies": true,
+    "beforeAllABSENT": true,
+    "graphLeavesExact": true,
+    "parentBuiltins": [
+      "node:crypto",
+      "node:child_process",
+      "node:fs/promises",
+      "node:path",
+      "node:url"
+    ],
+    "childBuiltins": [
+      "node:test",
+      "node:assert/strict"
+    ],
+    "SourceImports": [],
+    "packages": 0,
+    "localReviewerExecution": 0
+  },
+  "actual": {
+    "primary": "0aa44ee0c3a3dcf03e1feae495b72d43fabab4d0",
+    "proof": "9f3ec19e53267713dd037fca22a9f3bb3742cb3a",
+    "run": 43989916528,
+    "attempt": 1,
+    "job": 133727579409,
+    "head": "0911ae422b34c91c136405e1d35deaddbdd9fb05",
+    "tree": "cd694494400b4966099f629b9e83bd5a1d568603",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "Node": "v22.23.4",
+    "commandStep": 4,
+    "jobDurationMs": 15000,
+    "syntheticCases": 20,
+    "syntheticPass": 19,
+    "syntheticFail": 1,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "literalControlsPass": 6,
+    "sourceRows": 20,
+    "target": {
+      "ordinal": 12,
+      "id": "C2T1_NOTICES",
+      "failureType": "testCodeFailure",
+      "code": "ERR_ASSERTION",
+      "name": "AssertionError",
+      "actual": 503,
+      "expected": 200,
+      "operator": "strictEqual",
+      "syntheticCounters": {
+        "upload": 2,
+        "activation": 2,
+        "receipts": 1
+      }
+    },
+    "rawTAP": {
+      "bytes": 5523,
+      "sha256": "bdc15ea01639b356203ee0f26df715b557dfb3f43e142efd0d37ff82a9996b84",
+      "originalFullUTF8Preserved": true,
+      "reencodedCaptureFingerprintMatches": true,
+      "stderrBytes": 0,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "measuredLayout": {
+      "sourceRowLine": 79,
+      "subtestLine": 80,
+      "resultLine": 81,
+      "diagnosticStartLine": 82,
+      "diagnosticEndLine": 102,
+      "expectedLine": 94,
+      "actualLine": 95,
+      "operatorLine": 96
+    },
+    "layoutMeaning": "Measured exact positions for this single synthetic sample only. No guaranteed D07 SourceRow/Subtest relative placement or source code site is established.",
+    "timing": {
+      "parentElapsedMs": 281,
+      "childElapsedMs": 154,
+      "parentBoundMs": 10000,
+      "childCapMs": 10000
+    },
+    "cleanup": {
+      "ownedTempIdentityVerified": true,
+      "ownTempRemoved": true
+    },
+    "proofBytes": 12773,
+    "proofSHA256": "7c34e87e34959ec34802a32c5472e69622ddfe40865356288dd90dae0bcf790b",
+    "rawLogBytes": 28493,
+    "rawLogSHA256": "cc0aa261c8119e0091f6a7c95403d0eebdd93a22f3eda55778e6e8eb59e9a5e8",
+    "independentChecks": [
+      "Reparsed full synthetic rawTAP using reviewer inert-data logic:20Subtest/result pairs,ordinal/ID/status,20canonical independentSourceRows,one plan1..20 and every exact20/19/1 trailer.",
+      "Independently extracted unique target diagnostic scalar values and all layout positions; both facts and raw match sealed expected values and proof.",
+      "Full JSON schema subset including prefixItems/items/const/ranges and ordered object keys/input arrays validated; six exact literalcontrol results and all false claims retained.",
+      "Joined actualAPIrepo/push/ref/head/parent/tree/message/workflow/attempt1,uniquejob,requiredsteps and exactcommandstep4; unique closed commandgroup/window and canonical proof marker, no FAULT.",
+      "All five ordered input byte/SHA/Git/mode/type/size joins match full immutable bodies and rawtree. Rebuilt3208leaf Git tree equalscd694494...; removing exactfiveadditions reconstructs3203leaf BASE62e78926635d6b74f288d6c0d69e0f2516306989."
+    ],
+    "toyExecutedByRoot": true,
+    "SourceCollectorExecuted": false,
+    "SourceBusinessExecuted": false
+  },
+  "artifact": {
+    "id": 14286129914,
+    "zipBytes": 3219,
+    "zipSHA256": "28be5b77efcca372123c9c019f2b924af27abcd6e9f8dac502c0544bb9b4e2ca",
+    "filename": "c2-first-failure-post-diag2-toy-proof.json",
+    "method": 8,
+    "flags": 8,
+    "compressedBytes": 3021,
+    "CRC32": 1198351103,
+    "fullInflateConsumption": true,
+    "EOCDCentralLocalDescriptorBoundsMatched": true,
+    "noZIP64": true,
+    "singleRegularExactFilename": true,
+    "payloadEqualsFetchedProofAndLogBodyPlusOneLF": true,
+    "APIDigestSizeIdRunHeadBranchTimesAnd7DaysJoined": true,
+    "methodology": "Independent reviewer ZIP metadata/CRC table and builtin inflateRawSync info/bound on preserved DATA; no Source/OWN/parent helper executed."
+  },
+  "closure": {
+    "receipt": "e2f59e9ef81450a328c0e2b0e1ad9ceb3364bfa8",
+    "readback": "6967fb10ea015964ce7f68e1c0baf9b2b2f930ba",
+    "closedHead": "5f5295265217b31a19fbed2379f697c5a6a83080",
+    "closedTree": "e03f2a71610c6bc92a53e2e950a0930e1c5b4a5a",
+    "recordedLeaves": 3209,
+    "arithmetic": "3203originals+4retainedtoyfiles+2evidence=3209;onlynominatedworkflowremoved",
+    "linksResultsCoherent": true,
+    "RootRecordsOriginalsMainHistoryUnchanged": true,
+    "RootRecordsCloseHeadRuns": 0,
+    "limit": "FULL immutable Root closure receipt/readback checked; no fresh refs/Actions endpoint poll or independent current remote closure observation. Own-temp/workflow closure is not global physical drain."
+  },
+  "reviewIntegrity": {
+    "fullUniqueBlobs": 16,
+    "allFetchedGitBlobHashesMatched": true,
+    "allDeclaredUTF8BytesSHA256Matched": true,
+    "allFiveMountsFullReadback": true,
+    "SourceOrToyCodeExecutionByReviewer": false
+  },
+  "findings": [],
+  "calibrationLimits": [
+    "Eligible to use this preserved Node22.23.4 asynchronous synthetic envelope as format calibration evidence. It is not evidence of actual D07/Source rawTAP, real HTTP status, source S08:41:12, provider effects/counters or causality.",
+    "The intentional503/expected200 and synthetic2/2/1 counts were programmed toy values; they cannot be reported as current or historical Source observations.",
+    "One sample cannot establish invariant SourceRow/Subtest adjacency/relative order. Keep separate own-order source-row and native-block joining in any future collector design.",
+    "Source parser/collector implementation and business trial remain held until Root admits this review/calibration and separately reconciles DIAG2 outer schema/selection/OWN agreement/final Source pins/context. This report supplies no code, ref, run, repeat or business authorization.",
+    "Parent/child timing proves the scoped toy completed within its own bound, not Source speedup, complete drain, readiness, receipt authentication or Task1 qualification."
+  ],
+  "performed": {
+    "staticFullBlobReads": true,
+    "inertJSONStringsCrypto": true,
+    "builtinArtifactInflation": true,
+    "toyEval": false,
+    "toyImport": false,
+    "toyAST": false,
+    "toySyntax": false,
+    "toyCompile": false,
+    "toyTests": false,
+    "SourceEval": false,
+    "SourceImport": false,
+    "SourceAST": false,
+    "SourceSyntax": false,
+    "SourceCompile": false,
+    "SourceTests": false,
+    "localFilesystem": false,
+    "dependencies": false,
+    "refs": false,
+    "runs": false,
+    "nativeEndpoints": false,
+    "provider": false,
+    "Cloudflare": false,
+    "browser": false,
+    "credentials": false,
+    "email": false,
+    "subagents": false,
+    "codeChanges": false
+  },
+  "rollback": "Omit this additive unattached review blob; reviewer changed no code/workflow/ref/run.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
