@@ -1,0 +1,52 @@
+{
+  "schema": "AFW-DIAG3-ROOT-EARLY-E3-MEASUREMENT/1",
+  "timestampUTC": "2026-11-17 03:25:35 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "index": {
+    "blob": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+    "bytes": 11467,
+    "sha256": "3094be0e4276e7ffc31a08864f588bbdab97da67f38becc771c51344a601955e"
+  },
+  "S08": {
+    "blob": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+    "bytes": 22336,
+    "sha256": "0ea1a915b33ea380fe847c7b7bb7fe9659a207a87b922cedc4b85ce20195ecaa"
+  },
+  "indexOnlyEntry8AfterChanged": [
+    {
+      "pointer": "/entries/8/after/blob",
+      "old": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "new": "49f3fa30c6754e64c36ab5cba769c9ef88669969"
+    },
+    {
+      "pointer": "/entries/8/after/bytes",
+      "old": 18667,
+      "new": 22336
+    },
+    {
+      "pointer": "/entries/8/after/sha256",
+      "old": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+      "new": "0ea1a915b33ea380fe847c7b7bb7fe9659a207a87b922cedc4b85ce20195ecaa"
+    },
+    {
+      "pointer": "/entries/8/after/gitBlob",
+      "old": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "new": "49f3fa30c6754e64c36ab5cba769c9ef88669969"
+    },
+    {
+      "pointer": "/entries/8/after/gzipBytes",
+      "old": 5413,
+      "new": 6576
+    }
+  ],
+  "other12ByteIdentical": true,
+  "site18LineExact": true,
+  "site41LineExact": true,
+  "fullSource25BindingsPending": true,
+  "SourceSemanticsReviewPending": true,
+  "SourceExecuted": false,
+  "NativeReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false
+}
