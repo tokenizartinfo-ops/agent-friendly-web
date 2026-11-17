@@ -1,0 +1,23 @@
+{
+  "schema": "AFW-DIAG2-OWN-EXPLICIT-MODEL-ENTRYPOINT-SUPPLEMENT/1",
+  "timestampUTC": "2026-11-17 01:09:48 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "parent": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+  "RootActual25": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8",
+  "bodyEdgesHash": "d11f63d57ea36fdc9a7509ecec33b3611fe95be8197294ae7820b421394313bf",
+  "model25": "bd72d6f0e42b5c830241ae3d66ef331bbe39381a",
+  "decision": "APPROVE two explicitentrypoints d2Read(fixedRootactual25) and d2ModelRead(fixedmodeled25), sharingexactONEcommon guardimplementation. Bothrejectotherbodysets beforeAPI. No fallback, auto modelselection based onoutcome/context or configurableoverride. ProductionactualcallerRoot usesd2Read, neverd2ModelRead. Native40 isexplicitMODELED usingd2ModelRead and preservesall40literalIDs/expected/bytes.",
+  "limits": "Native40cannotbyitselfqualify actualSource d2Read or Sourcebusiness/PCoff. Rootstaticreviews bothwrappers, verifiesexactactual25data, then lateractualSourcecaptureadmission calls d2Read withrealRootAPI/head/tree/run/job context whenexists. No fabricatedcontext/no Sourcecodeeval/no census expansion/no whole124/419rerun.",
+  "nativeOrBusinessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
