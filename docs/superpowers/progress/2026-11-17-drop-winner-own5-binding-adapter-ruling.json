@@ -1,0 +1,39 @@
+{
+  "schema": "AFW.OWN5.STAGE_B.BINDING_ADAPTER_RULING/1",
+  "timestampUTC": "2026-11-17 14:43:50 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "brief": "f0eeffdd2bc4a86e9b8935f0fd737743903d7f23",
+  "scope": "new D4 append modules only; old95/D2/D3 bytes exact",
+  "finding": "Original boundTransport.gApiJoin returns selected[3]. Final actual Source26 adds Node syntax step and has6 selected steps (command fifth), while sealed MODEL26 has5 selected steps (command fourth). Count25 is also hardcoded in g20Trusted.",
+  "rulings": [
+    {
+      "what": "Reuse all complete old transport/API/log/tree/ZIP checks under each fixed binding, then select observed command step by exact fixed name with unique match; add bounded synthetic adapter controls for both6/5 layouts and shifted/foreign negative. Keep69presealedfixtures/expecteds unchanged; extraunitassertions reported separately from142fixtureevaluations.",
+      "why": "Actual6 path differs from model5; checking only current model matrix could leave actual log-window selection wrong.",
+      "boundary": "Synthetic adapter units are not ACTUAL business admission or producer proof."
+    },
+    {
+      "what": "New D4 actual/model entrypoints may use builtin Node SHA256 and bounded inflateRawSync with (input,trusted); optional extra legacy callbacks must not influence trust. OriginalD2/D3 interfaces/bodies unchanged.",
+      "why": "Deterministic builtins avoid caller-supplied crypto altering new proof checks."
+    },
+    {
+      "what": "New exact26 body-trust map must retain exact key/types/duplicates/path/mode/size/hash constraints or enforce them through exact prevalidated immutable fixed tuple equality, no wildcard relaxation.",
+      "why": "Approved Root26 fully measures all26 slots; model tuple is separate and cannot default into actual."
+    }
+  ],
+  "sourceRound": 5,
+  "ownRound": 5,
+  "max": 5,
+  "noReset": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
