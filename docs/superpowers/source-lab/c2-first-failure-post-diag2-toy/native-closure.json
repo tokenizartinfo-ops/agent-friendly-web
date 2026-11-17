@@ -1,0 +1,96 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-TOY-CLOSURE/1",
+  "timestampUTC": "2026-11-17 00:46:17 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+  "testedHead": "0911ae422b34c91c136405e1d35deaddbdd9fb05",
+  "testedTree": "cd694494400b4966099f629b9e83bd5a1d568603",
+  "run": 43989916528,
+  "job": 133727579409,
+  "primary": "0aa44ee0c3a3dcf03e1feae495b72d43fabab4d0",
+  "proof": "9f3ec19e53267713dd037fca22a9f3bb3742cb3a",
+  "result": {
+    "APIContextJoined": true,
+    "commandStep": 4,
+    "inputPins": 5,
+    "literalControls": 6,
+    "syntheticNativeCases": 20,
+    "syntheticPass": 19,
+    "syntheticFail": 1,
+    "targetAssertion": {
+      "ordinal": 12,
+      "id": "C2T1_NOTICES",
+      "failureType": "testCodeFailure",
+      "code": "ERR_ASSERTION",
+      "name": "AssertionError",
+      "actual": 503,
+      "expected": 200,
+      "operator": "strictEqual"
+    },
+    "all20SourceRowsExact": true,
+    "rawSyntheticTAPBytes": 5523,
+    "layout": {
+      "sourceRowLine": 79,
+      "subtestLine": 80,
+      "resultLine": 81,
+      "diagnosticStartLine": 82,
+      "diagnosticEndLine": 102,
+      "expectedLine": 94,
+      "actualLine": 95,
+      "operatorLine": 96
+    },
+    "canonicalLF": true,
+    "strictZIPCRCFullInflate": true,
+    "APIDigestJoined": true,
+    "cleanup": {
+      "ownedTempIdentityVerified": true,
+      "ownTempRemoved": true
+    },
+    "timing": {
+      "parentElapsedMs": 281,
+      "childElapsedMs": 154
+    },
+    "toyOnly": true,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    },
+    "zip": {
+      "bytes": 3219,
+      "sha256": "28be5b77efcca372123c9c019f2b924af27abcd6e9f8dac502c0544bb9b4e2ca",
+      "blob": "5ec4ac2509ae8d1b5f9de19a5a0041c175fac1be"
+    },
+    "payload": {
+      "bytes": 12773,
+      "sha256": "7c34e87e34959ec34802a32c5472e69622ddfe40865356288dd90dae0bcf790b",
+      "blob": "9f3ec19e53267713dd037fca22a9f3bb3742cb3a"
+    },
+    "rawLog": {
+      "bytes": 28493,
+      "sha256": "cc0aa261c8119e0091f6a7c95403d0eebdd93a22f3eda55778e6e8eb59e9a5e8",
+      "blob": "9e492642e788cca3b600328264aed41f1aa86b08"
+    }
+  },
+  "delta": "Delete only nominatedtoyworkflow,addprimary+receipt,retainoriginal3203+other4. This closesoneGHAtoyoccurrence, notphysicalglobalSourceSDK/runtime.",
+  "toyExecuted": true,
+  "SourceCollectorExecuted": false,
+  "SourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
