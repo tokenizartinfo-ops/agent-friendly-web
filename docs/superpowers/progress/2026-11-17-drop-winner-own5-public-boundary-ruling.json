@@ -1,0 +1,24 @@
+{
+  "schema": "AFW.DROP.OWN5.PUBLIC_PRIVATE_BOUNDARY_RULING/1",
+  "timestampUTC": "2026-11-17 13:55:01 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "sourceProtocol": "6349fd2706b084e3c56309d6aac00a469310e73a",
+  "ownPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
+  "ruling": "The four public DROP fields do not expose raw marker positions, source rows, Request/epoch/cell/error identities, frames or maps. Shifted/crossed/private identity guards are enforced by qualified pinned Source code and its native controls, not independently reconstructed by OWN. OWN validates exact public shape/order/allowlist, visible open15/closed15 eligibility and contradictions, inherited custody/canonical/API/ZIP/pins; missing or unqualified private evidence stays UNKNOWN. No new public scalar or hidden authentication claim is introduced.",
+  "why": "Separates producer proof obligation from what the receiver can actually verify; preserves contract intent without inventing private access.",
+  "receiptRequirement": "D4 admission receipt must return the exact admitted dropWinner component. Existing D2/D3 interfaces/results and original73 fixtures remain unchanged. ACTUAL5 is closed until Root final measured Source tuple/native proof binding, never MODEL fallback.",
+  "doesNotReleaseOwnCode": true,
+  "doesNotReleaseBusiness": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
