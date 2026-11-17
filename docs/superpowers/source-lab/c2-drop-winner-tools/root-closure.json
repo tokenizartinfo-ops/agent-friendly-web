@@ -1,0 +1,31 @@
+{
+  "schema": "AFW.DROP.TOOLING_LAUNCH.CLOSURE_INTENT/1",
+  "timestampUTC": "2026-11-17 13:48:26 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-tools-launch-20261117-drop-winner-syntax1",
+  "attemptedHead": "b7a2cbb6abb460089b38fa31fa1d787dd8a68902",
+  "attemptedTree": "bb497eedca051300366d29548c12f0523a1bb92f",
+  "run": 44095907983,
+  "job": 134082838390,
+  "outcome": "TOOLING_ONLY",
+  "primary": "7ae7b6a8cd8c2fb71e6ef59bab4298fce0bed67c",
+  "proof": "33d612dc0c5614000f8b8f89ca953b9e5f487b9d",
+  "validation": "a60e560734a2fe4e1be5a63e906a79a53fc4653f",
+  "removeOnly": ".github/workflows/afw-c2-drop-winner-tools-syntax1.yml",
+  "retainOriginalLeaves": 3203,
+  "retainMountedFiles": 33,
+  "expectedLeaves": 3238,
+  "neverRerunOrReopen": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
