@@ -1,0 +1,114 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-SOURCE-PEER-DATA-REVIEW/1",
+  "timestampUTC": "2026-11-17 00:51:40 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "disposition": "ACK_COMPATIBLE_PEER_DATA_ONLY",
+  "findings": [],
+  "reviewedBinding": "5b5e67e14d623930dc7cea9e5579a64ec98a9508",
+  "authority": [
+    "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+    "8781b614dd914f581c0a6806c4f92423242eac79"
+  ],
+  "scope": "Revisión independiente de compatibilidad DATA del binding, schema exterior, selección, protocolo completo, inventario draft25 y reversibles; comparación con C1 aceptado8e30344042e65b888d1f912a9a375d365f3e5c4e, DIAG1 y Source13E2. No revisión de implementación/ejecución ni de mi propio toy.",
+  "fullInputs": [
+    {
+      "name": "binding",
+      "bytes": 4457,
+      "sha256": "6d772a7538840dea54d6672924115883155e9386713fb45cb75d41c8e6d8d355",
+      "gitBlob": "5b5e67e14d623930dc7cea9e5579a64ec98a9508"
+    },
+    {
+      "name": "schema",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb",
+      "gitBlob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e"
+    },
+    {
+      "name": "selection",
+      "bytes": 4070,
+      "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e",
+      "gitBlob": "5a554a8fb75439f1549d03baf29be09572fdddac"
+    },
+    {
+      "name": "protocol",
+      "bytes": 41095,
+      "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389",
+      "gitBlob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e"
+    },
+    {
+      "name": "inventory",
+      "bytes": 16604,
+      "sha256": "16ff4326a8c05404148a162e2b594447a928b35a55006fb7d9577a4135111a62",
+      "gitBlob": "932a26178e388620d47e91b71384b8537860be18"
+    },
+    {
+      "name": "reversal",
+      "bytes": 17114,
+      "sha256": "cd2e9bcb7460dbdf9d31461c998986e110bd07d221b934f244e85c35e1f35415",
+      "gitBlob": "c5fde2d6a7d6e5e980d4d74a3e0d12b8357bf819"
+    },
+    {
+      "name": "E2",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+      "gitBlob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec"
+    },
+    {
+      "name": "supplement",
+      "bytes": 3938,
+      "sha256": "4295fe10c1a89cbe953e37e9e28e1c0304641f1b7cf75af378d16d8dbbd6622f",
+      "gitBlob": "8781b614dd914f581c0a6806c4f92423242eac79"
+    }
+  ],
+  "checks": {
+    "c1": "$defs.firstFailure idéntico al fragmento completo C1, incluidos orden/seiskeys, three-state reasons/nulls/scalars/counters. firstFailure.sourceProjection e interpretation idénticos a C1; corpus35referencia/sha exactos. No delta/EXTRA_KEY, noSourceRow/Subtest physical adjacency, prefixscope preserva candidato completo ante unknownsuffix y no fabrica ausencia.",
+    "components": {
+      "firstFailureSchemaSha256": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+      "sourceCorpus35Sha256": "15d470df5e7ed5350bdedb333236f648c86e69c844e5784d1d8478f6ebac5aaf"
+    },
+    "inheritance": "11defs heredadas directamente idénticas. Al restaurar SOLO las cuatro constantescontexto sourceIndexBlob/proposalIndexHash/selectionHash/job, tres stringsfamilia, slot10de ambos arrays13 y retirar la property/requiredfirstFailure, el schema completo recupera exactamente las17defs y superficieoneOf/$ref anteriores (valor y orden). Los JSONpointers de reversibles describen esos cambios y el title; no relajación adicional observada.",
+    "protocol": "custody/capture/journal/nativeAndCross/transport/fault idénticos a DIAG1. Caps C1 exactos: child180s/case120s/total330s/job7min, journal32KiB/128, Sourceoutcome24576body+LF24577, firstFailure512dentrodecap y7nonclaimsfalse. Las dos frames nuevas y requiredobservation.lastfirstFailure/versioning están explícitos.",
+    "e2": "Ambos arraysbefore/after13 del schema y los13 rows metadata del protocolo/inventario coinciden exactamente y en orden con Source13E2. Comparado con26b, el index cambia sólo afterS10(incluyegzipBytes); los otros12 se conservan. No reaudité el cuerpoS10 ni la aceptación hostfixture; eso está delegado al ruling55e95 y review independiente del host.",
+    "selection": "FicheroUTF8 4070B SHA7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e; compactwireJSONsinLF3317B SHAb1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc.20IDsorden,D07,S07,1794Btail,recorder,read-progress,Node/SDK conservados; sólo schema/indexhash y aliasS10E2 cambian.",
+    "inventory": "25paths únicos modo100644/blob,22edges conocidos y3código sinblob/bytes/sha.13bodies e index se unen a E2. Paths25 son aditivos respecto3203BASE reconstruidos de evidencia conservada; no Sourcecanonical overwrite ni cambio histórico. Inventario explícitamente noadmisible y no se copia como manifiesto runtime.",
+    "nomination": "Nominación Source futura coincide con8781, incluidojobworkflow/command/stepnames/artifact. Head/tree/runId/jobId aúnsinbind; contextschema type/pattern no se usa como autoridad. CallerRoot independiente fija todoslosbindings y falla antes de leer candidato si falta alguno.",
+    "reversibles": {
+      "splices": [
+        {
+          "kind": "selection",
+          "forwardAndReverseByteExact": true
+        },
+        {
+          "kind": "outerSchema",
+          "forwardAndReverseByteExact": true
+        },
+        {
+          "kind": "protocol",
+          "forwardAndReverseByteExact": true
+        }
+      ],
+      "selectionWireBytes": 3317,
+      "selectionWireSha256": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc"
+    },
+    "trust": "Receiver seisinputs y guards heredados; Sourcegrammar/raw assertions sólo productor fijado, noautenticación de raw privado ausente ni recuperación porSHA. Counters0..3sin jerarquía inventada ni receipt authentication/causalidad. CurrentDIAG1status/counters no se rellenan de historia/toy."
+  },
+  "unresolved": [
+    "Pins ejecutables collection-adapters/runner/workflow Source y manifest25final aúnheld.",
+    "Head/tree/run/job exactos aúnfutureRoot; ningúnnull es wildcard.",
+    "Admisión/review actual del toy y autorización de implementación las decide Root separadamente; esta revisión no las afirma.",
+    "No nuevo Sourcebusiness/native/fullTask1 autorizado por este ACK."
+  ],
+  "performed": "LecturasGitFULL + JSONDATAcomparisons/restauración17defs/splices reversibles y crypto propioRAM. Sin Source/Codeeval/import/AST/syntax/compile/test, Actions endpoints, refs/runs ni business calls. Una escritura: este informe GitDATA, con FULLreadback.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
