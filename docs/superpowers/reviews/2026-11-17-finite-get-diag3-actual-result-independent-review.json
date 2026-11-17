@@ -1,0 +1,381 @@
+{
+  "schema": "AFW-SOURCE-DIAG3-INDEPENDENT-ACTUAL-RESULT-REVIEW/1",
+  "timestampUTC": "2026-11-17 05:13:37 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewer": "c230_full_own_native_review",
+  "scope": "Fresh SPEC+QUALITY del único resultado REAL Source FINITE_GET_DIAG3 ya conservado/admitido/cerrado. Lectura Git DATA, crypto/ZIP y lógica original de revisión en RAM. Sin ejecutar Source/OWN, repetir terminal endpoints o descargar ZIP/log.",
+  "verdict": {
+    "SPEC": "PASS_DIAGNOSTIC_SCOPE",
+    "QUALITY": "PASS_DIAGNOSTIC_EVIDENCE",
+    "disposition": "DIAGNOSTIC_ACCEPTED_TASK1_INCOMPLETE",
+    "captureOrAdmissionImplementationBlockers": 0,
+    "diagnosticCollectionAccepted": true,
+    "nativeQualification": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "interpretation": "La evidencia une una captura diagnóstica ACTUAL acotada. El success del job corresponde al reporte saneado; no es pase de Task1 ni de20 casos."
+  },
+  "reusedScope": {
+    "SourceR4StaticReview": "33f8e5c242ef9f41bb0352b6590c274de0934fa4",
+    "OWN73StaticReview": "724f1f65260e0d16b2015a097e3b626a3b077bab",
+    "OWN73ActualNativeReview": "8cdeb01914b7ba49a2d34608a5ce2b7499307345",
+    "reuse": "Se conserva el análisis estático de collector/publicación/observador y del guard ACTUAL/MODEL, su corpus sellado y el native OWN73. No se reabre la implementación, los35/149/73 casos de tooling ni el callgraph completo."
+  },
+  "evidence": [
+    {
+      "kind": "primary",
+      "bytes": 1341883,
+      "sha256": "3581ab02d6e778d8e5f89a2db7a2d12b087a13f59456979442c4ce51bd5f1abb",
+      "git": "3b38e269929a88eef353f00016726d1ca3270f01",
+      "fullRead": true,
+      "gitBlobRecomputed": true
+    },
+    {
+      "kind": "outcome",
+      "bytes": 12000,
+      "sha256": "af0c1752edc2951faabdd2e73b42ca6f87bc571a59e6bfaf3a286e4076893241",
+      "git": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
+      "fullRead": true,
+      "gitBlobRecomputed": true
+    },
+    {
+      "kind": "admission",
+      "bytes": 19435,
+      "sha256": "0ffbc41a34f10b1446a8ec3ca16d6809726808bc3a821316187fd297bd43d5ec",
+      "git": "e7530d7f55172ee36035b655d120bcae7479f862",
+      "fullRead": true,
+      "gitBlobRecomputed": true
+    },
+    {
+      "kind": "close",
+      "bytes": 4798,
+      "sha256": "94d2ce8c719774c59a1bc757084fd821dffdd847ee44262dfc37d5528ee0c71b",
+      "git": "8a474ec9f52ad14abf9259b81eedefc61e97e018",
+      "fullRead": true,
+      "gitBlobRecomputed": true
+    }
+  ],
+  "fixedContext": {
+    "gate": "01565efbe0f92a8623260ee63d2b0c6a32be0a4e",
+    "run": 44021068647,
+    "attempt": 1,
+    "job": 133830419181,
+    "head": "17582e124c2728800788dcbe46c740f38aea861a",
+    "tree": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "Root25Measurement": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+    "bodyEdgesSHA256": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+    "OWNActualBindings": "aaee696f0c05cda224d7f20fa7a364c445b0741c",
+    "Source13Index": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+    "Source13IndexSHA256": "3094be0e4276e7ffc31a08864f588bbdab97da67f38becc771c51344a601955e",
+    "Source13S08": {
+      "blob": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+      "bytes": 22336,
+      "sha256": "0ea1a915b33ea380fe847c7b7bb7fe9659a207a87b922cedc4b85ce20195ecaa"
+    },
+    "SourceSchema": {
+      "blob": "bdb37d27e0c5e217d7b7249c216d674750046b73",
+      "bytes": 33199,
+      "sha256": "f4600dd644257bea198646afae5bee496cd5eea4727e59e8d52d22c47d900852"
+    },
+    "ActualAdmissionBindingKindLiteral": "ROOT_PINNED_PRODUCER_DATA_R3",
+    "labelMeaning": "El enum R3 se conserva en el guard. Los25 tuples efectivamente exigidos y usados son los R4 bd26/5ed6; no se usa el nombre del enum como autoridad de pins."
+  },
+  "independentlyVerified": {
+    "semanticsAndNativeAPI": {
+      "run": 44021068647,
+      "job": 133830419181,
+      "attempt": 1,
+      "head": "17582e124c2728800788dcbe46c740f38aea861a",
+      "tree": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
+      "commandStep": 5,
+      "requiredSteps": [
+        {
+          "name": "Read the exact one-use lab head",
+          "number": 2,
+          "conclusion": "success"
+        },
+        {
+          "name": "Use the fixed Node runtime",
+          "number": 3,
+          "conclusion": "success"
+        },
+        {
+          "name": "Install only the existing locked dependencies",
+          "number": 4,
+          "conclusion": "success"
+        },
+        {
+          "name": "Observe finite GET in the full case order",
+          "number": 5,
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve the bounded finite GET diagnostic",
+          "number": 6,
+          "conclusion": "success"
+        }
+      ],
+      "commandStartUTC": "2026-11-17T05:01:13.1178726Z",
+      "custodyUTC": "2026-11-17T05:04:13.3980325Z",
+      "outcomeUTC": "2026-11-17T05:04:13.4018151Z",
+      "commandToFramesMs": 180284,
+      "jobSeconds": 204,
+      "frameLines": [
+        146,
+        147
+      ],
+      "rawLogLines": 188,
+      "rawLogBytes": 29440,
+      "rawLogSHA256": "56808b5de6c37f6c03d9aa289956d5004eccd039f8a3b3f1d25decc1c62e01b9",
+      "schemaErrors": [],
+      "bodyBytes": {
+        "custody": 960,
+        "outcome": 11999,
+        "outcomeIncludingLF": 12000,
+        "firstFailure": 160,
+        "finiteGet": 315
+      },
+      "nativeProjection": {
+        "observed": 15,
+        "pass": 14,
+        "fail": 1,
+        "first14PASS": true,
+        "integrity": "prefix"
+      },
+      "witnessRows": 61,
+      "firstThrow": {
+        "sequence": 58,
+        "elapsedMs": 161713,
+        "id": "C2T1_SCOPE_MISSING",
+        "operation": "action",
+        "edge": "throw",
+        "error": {
+          "name": "AssertionError",
+          "code": "ERR_ASSERTION",
+          "site": {
+            "file": "S08",
+            "line": 113,
+            "column": 283
+          }
+        }
+      },
+      "monitorCount": {
+        "sequence": 56,
+        "elapsedMs": 101900,
+        "id": "C2T1_MONITOR",
+        "operation": "count",
+        "edge": "return",
+        "error": null
+      },
+      "scopeCount": {
+        "sequence": 60,
+        "elapsedMs": 161743,
+        "id": "C2T1_SCOPE_MISSING",
+        "operation": "count",
+        "edge": "return",
+        "error": null
+      },
+      "openCase": {
+        "id": "C2T1_FINITE",
+        "operation": "action"
+      },
+      "lastEnter": {
+        "sequence": 61,
+        "elapsedMs": 161743,
+        "id": "C2T1_FINITE",
+        "operation": "action",
+        "edge": "enter",
+        "error": null
+      },
+      "noAFTER": true,
+      "firstFailure": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "NOT_APPLICABLE",
+        "reason": "EARLIEST_THROW_DIFFERENT",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      },
+      "finiteGet": {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "NOT_APPLICABLE",
+          "reason": "EARLIEST_THROW_DIFFERENT",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 56
+        },
+        "afterScopeMissing": {
+          "value": "1",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        }
+      },
+      "context13BeforeAfterExact": true,
+      "ACTUALAdmissionMatchesProjection": true,
+      "nonclaimsAllFalse": true
+    },
+    "inputTree": {
+      "treeSHA": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
+      "entries": 3392,
+      "leaves": 3228,
+      "uniquePaths": true,
+      "truncated": false,
+      "mounts": 25,
+      "actualBodyEdgesEqualFixedRoot": true,
+      "trustedRoot": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+      "bodyEdgesSHA256": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+      "bindingErrors": [],
+      "baselineCount": 3203,
+      "baselineErrors": 0,
+      "additions": 25,
+      "addedPathsExactly25": true,
+      "collisionCount": 0
+    },
+    "transportZIP": {
+      "artifactId": 14300679023,
+      "bytes": 2883,
+      "sha256": "6d56791a23e49f62626a50674c7b9ebd682a6439294351afc04b3bc019d5848d",
+      "fileName": "c2-finite-get-diag3.json",
+      "method": 8,
+      "flags": 8,
+      "localCRC": 0,
+      "localCompressed": 0,
+      "localSize": 0,
+      "descriptorBytes": 16,
+      "crc32": "956470cd",
+      "compressedBytes": 2721,
+      "fullDEFLATEBytesConsumed": 2721,
+      "payloadBytes": 12000,
+      "payloadSHA256": "af0c1752edc2951faabdd2e73b42ca6f87bc571a59e6bfaf3a286e4076893241",
+      "canonicalUTF8LF": true,
+      "payloadEqualsOutcome": true,
+      "APIListingJoined": true
+    },
+    "scopeOfFull95Or25Bodies": "Se verificó el join completo path/mode/blob/size de25 y los3203 originales contra la API Git tree conservada; Source13 before/after coincide con los13 SHA fijados. La medición previa de cuerpos y la lectura real en target son comprobaciones del controller medido/Root y se atribuyen como tales; no se ejecuta ni importa código para repetirlas aquí.",
+    "actualAdmission": "El blob ACTUAL d3Read coincide exactamente con RootActualAdmission de la primaria, incluyendo context/job/step5, replay, firstFailure, finiteGet, sourceReads, custody, capture y métricas del artefacto. No se invocó localmente d3Read ni d3ModelRead.",
+    "byteAndFramePolicy": "Base64 estricta/canónica, un ZIP2883B con archivo exacto, EOCD/central/local/flags/descriptor/CRC y consumo DEFLATE2721/2721, sin ZIP64/huecos/sufijos. UTF8+JSONLF12000B exacto en outcome, ZIP y único frame OUTCOME del log. Frame CUSTODY único anterior e idéntico al embedded; sin FAULT/frames extra. Listing API id/run/head/branch/repos/digest/size unido a bytes.",
+    "schema": "Schema fijado bdb37d27 interpretado como JSON DATA: outcome y custody válidos. Custody960B<=1024; outcome11999B<=24576 y12000conLF<=24577; firstFailure160B<=512; finiteGet315B<=512.",
+    "timings": "Los cinco pasos requeridos terminan success; comando real step5. Del Run command al frame OUTCOME hay180284ms; el job dura204s y respeta7min. Frames dentro de la ventana API del step5 considerando su precisión a segundos. La clasificación timeout se deriva de ETIMEDOUT en el collector fijado y checkedLaunch(...,180000) en el runner; no se interpreta como ejecución completa.",
+    "closure": {
+      "primary": "3b38e269929a88eef353f00016726d1ca3270f01",
+      "outcome": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
+      "admission": "e7530d7f55172ee36035b655d120bcae7479f862",
+      "closedHead": "08061db79cd0f38f25df8977e1ded8e17542e684",
+      "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb",
+      "closedCommitUTC": "2026-11-17T05:06:50Z",
+      "readbackUTC": "2026-11-17 05:07:18 UTC",
+      "joins": true,
+      "closureAfterJob": true,
+      "RootReportedLeaves": 3229,
+      "arithmetic3229": true,
+      "RootReportedOriginals": true,
+      "RootReportedRetained24": true,
+      "RootReportedOnlyWorkflowDeletedTwoEvidence": true,
+      "RootReportedProtectedRefs": 10,
+      "prior9LeaseTuplesEqual": true,
+      "own73LeaseEqualsReviewedClosedHead": true,
+      "RootReportedClosedHeadRuns": 0,
+      "independentClosedFullTreeOrRunRefetch": false
+    }
+  },
+  "observedTask1Blockers": [
+    {
+      "id": "DIAG3_SCOPE_MISSING_NATIVE_FAIL",
+      "classification": "Fallo de requisito observado; no se adjudica automáticamente un defecto del collector o de un proveedor.",
+      "caseOrdinal": 15,
+      "caseId": "C2T1_SCOPE_MISSING",
+      "witnessSequence": 58,
+      "elapsedMs": 161713,
+      "error": {
+        "name": "AssertionError",
+        "code": "ERR_ASSERTION",
+        "site": {
+          "file": "S08",
+          "line": 113,
+          "column": 283
+        }
+      },
+      "exactGitPath": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "line": 113,
+      "column": 283,
+      "inertSourceReading": "La columna corresponde al else assert.equal(stats.puts,1) dentro del bucle ['drop','holder']; el branch else es drop. Se identifica el predicado desde el cuerpo fijado, sin ejecutar la fuente.",
+      "notEstablished": "El valor actual de stats.puts, su causa y los scalars de la aserción no se exportan. El bucket de tickets1 posterior es otro dato y no rellena ese scalar."
+    },
+    {
+      "id": "DIAG3_FULL20_NOT_COMPLETED",
+      "classification": "Recorrido incompleto bajo el cap congelado.",
+      "observedNativeCases": 15,
+      "pass": 14,
+      "fail": 1,
+      "openCaseOrdinal": 16,
+      "openCaseId": "C2T1_FINITE",
+      "openOperation": "action",
+      "enterSequence": 61,
+      "enterElapsedMs": 161743,
+      "notObservedOrdinals": [
+        17,
+        18,
+        19,
+        20
+      ],
+      "AFTERObserved": false,
+      "capture": {
+        "exitCode": 1,
+        "signal": "none",
+        "errorKind": "timeout",
+        "stdoutBytes": 9955,
+        "stderrBytes": 0
+      },
+      "meaning": "No hay resultado native terminal de FINITE ni observación de SELECTION/LOST_ACK/UNRESOLVED_WRITER/OWN_PROMISE en este intento. El corte no demuestra la causa del caso abierto ni un fallo definitivo suyo."
+    }
+  ],
+  "conclusions": {
+    "first14": "Los15 registros native proyectados forman el prefijo exacto de la selección: primeros14PASS, incluido NOTICES12 y MONITOR14, SCOPE_MISSING15FAIL.",
+    "firstThrow": "El primer throw del prefijo validado es58/action en SCOPE_MISSING/S08:113:283. C1 y finiteGetHTTP son NOT_APPLICABLE/EARLIEST_THROW_DIFFERENT conforme a sus sitios nominados distintos (NOTICES41 y GET18). Nulls se conservan.",
+    "counts": "afterMonitor='0'/JOINED_SNAPSHOT se une a count-return56 en101900ms; afterScopeMissing='1'/JOINED_SNAPSHOT a60 en161743ms. Son snapshots independientes de buckets de tickets del productor fijado, no un delta causal, no stats.puts, no ausencia de efectos y no recibos privados autenticados.",
+    "HTTP": "No se exporta un estado HTTP numérico de esta captura. No se afirma HTTP200 autenticado,503, arreglo de proveedor ni resolución de la causa histórica.",
+    "comparisonOnly": "El antecedente DIAG2 ya conservado situó el primer throw en el GET S08:18:118. Este intento lo sitúa en113:283; es diferencia descriptiva entre intentos, sin prueba causal de código/observador/entorno/proveedor.",
+    "trustBoundary": "El raw stdout privado9955B y el journal6523B se representan mediante bytes/SHA y la proyección del collector fijado. No están exportados para analizar/autenticar independientemente sus filas/TAP/scalars privados; el hash no recupera contenido omitido. El juicio es el de productor medido+proyección/OWN+API/frames unidos.",
+    "isolationAndCleanup": "Custody declara2launches/2processes, ownership/isolation,13targets before/after y retirada de temporales propios. Es laboratorio GHA aislado con loopback, no Cloudflare productivo ni una afirmación global sobre todos los procesos.",
+    "metadataWrappers": "La nota Root distingue el wrapper inicial con jobs/artifacts resumidos de las respuestas API completas conservadas aquí. La falta inicial de timestamps/total_count en un wrapper no se convierte en defecto del código Source/OWN. No se repitieron transferencias ni consultas por este reviewer.",
+    "closure": "Ref/commit/tree y parent del cierre se unieron; nueve lease tuples previos coinciden más own73 cerrado. Inventario3229=3203+24+2,WF retirado, diez leases y0runs son resultados Root del readback, sin segunda consulta a refs/runs ni árbol recursivo de cierre ausente en ese blob."
+  },
+  "captureImplementationFindings": [],
+  "remaining": "Task1 sigue incompleto por los dos hechos observados arriba. Esta revisión no prescribe un fix, amplía casos/caps, autoriza replay o libera otra operación.",
+  "methods": {
+    "SourceOrOWNLocalExecution": false,
+    "sourceEvalImportASTSyntaxCompileTests": false,
+    "localFilesystem": false,
+    "dependencies": false,
+    "newNative": false,
+    "refMutation": false,
+    "providerOrCloudflare": false,
+    "terminalEndpointRefetch": false,
+    "logOrZIPDownload": false,
+    "implementationChanges": false,
+    "onlyWrite": "Este JSON como Git blob detached con FULLreadback y hashes."
+  },
+  "SourceBusinessExecutedInReviewedRun": true,
+  "diagnosticCollectionAccepted": true,
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
