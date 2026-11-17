@@ -1,0 +1,180 @@
+{
+  "schema": "AFW-DIAG2-OWN-FIX1-IMPLEMENTATION-REPORT/1",
+  "status": "OWN_RAM44_PASS_NATIVE42_ROOT_PENDING",
+  "authorRole": "original independent OWN receiver implementer",
+  "authority": {
+    "round1": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+    "closedEntrypoints": "65040ab43351c843e9f5252910bf24f30f896eba",
+    "round2Fix1": "ccf33edb19d3971a8182c78200330ba9bff0fb4f",
+    "round": 2,
+    "maxRounds": 5
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+    "message": "AFW-C2-OWN-FIRST-FAILURE-POST-DIAG2-FIX1-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-first-failure-post-diag2-fix1.yml",
+    "job": "c2-own-first-failure-post-diag2-fix1",
+    "prefix": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/",
+    "artifact": {
+      "name": "afw-c2-own-first-failure-post-diag2-fix1",
+      "path": "output/c2-own-first-failure-post-diag2-fix1.json",
+      "fileName": "c2-own-first-failure-post-diag2-fix1.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "ubuntu": "24.04",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "permissions": "contentsread",
+    "attempt": 1,
+    "npm": false
+  },
+  "fixtureFirst": {
+    "original40Index": "394f7dde265fb7b3c3b5de26cede262c6f744daa",
+    "original40LiteralHashesUnchanged": true,
+    "expected42": {
+      "blob": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+      "bytes": 2415,
+      "sha256": "80b57fb40df747a1ce06acd1879502bcdf2bf70aaebe6e9253d0e19bfa24b8af",
+      "gitSha": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+      "fullReadback": true
+    },
+    "appendix4SealBeforeFix": {
+      "blob": "b362aa0310f9f1e34f488343bf206eaf17cd6ea4",
+      "bytes": 3550,
+      "sha256": "0dc50c6be8e36a945999707db01889bd59a1cc5efc211dc0e3b5d8e89a71c584",
+      "gitSha": "b362aa0310f9f1e34f488343bf206eaf17cd6ea4",
+      "fullReadback": true
+    },
+    "nativeGroups": 42,
+    "receiverEvaluations": 44,
+    "expectedAdmit": 21,
+    "expectedReject": 23,
+    "modelScope": "All Source occurrences/head/tree/run/job are fictional2039/99... in models; actual expectedSourceContext remainsnull until Root."
+  },
+  "behavior": {
+    "entrypoints": "d2Read closes exactRootactual25/hashd11f63; d2ModelRead closes exactbd72MODELED25. One common readBound guard, no configuration override, outcome-selected authority or fallback. Exact body sets checked before API. Native42 explicitly calls d2ModelRead only; default production wrapper not qualified by models alone.",
+    "preserved": "Approved OWN124 shape/partial exactimmutableblobs reused. Transport delta only25..64→exact25; strictAPI/time/tree/log/custody/source13/ZIPCRC/zero-or-equalDD/extras/version/fullDeflate retained.",
+    "newScope": "Required firstFailure6orderedkeys<=512B; canonical schema and independent current-prefix firstthrowNOTICES/action/AssertionError/ERR_ASSERTION/S08:41:12, previous11 currentnativePASS+action/countreturns, targetnativefail+countreturn, seqjoin/source5keys/counters0..3/assertion actual100..599!=200 expected200. Conditionalnulls/NA/UNKNOWN priorities enforced; no counterhierarchy or before/delta.",
+    "fix1": "Root found explicit native.integritytorn/ambiguous stillKNOWN. C1 override covers journal suffix, not explicitnativeuncertainty. Four fullinputs sealed first; one line added insideKNOWN: require native.integrity==='prefix'. MatchingUNKNOWN remains admitted, outerthrow46 retained; K06journaltorn/nativeprefix stillKNOWN.",
+    "privateBoundary": "No actual RAW child TAP supplied to OWN. Source collector source code was READ/HASHED AS DATA only to contrast lines236/241; never evaluated/imported/AST/syntaxchecked/compiled locally. Cannot authenticate privateSourceRows/scalars or coherent503→429; pinned producer behavior + actualAPI/Git/ZIP only. TARGET arrays likewise producer observations compared with independentRootE2 constants."
+  },
+  "redGreen": {
+    "oldFamily": "f844approved oldreader rejects19newfamilyvalid models (expected incompatibility, not historicalbug).",
+    "missingSemanticJoins": "Versionednewfamily shell beforejoins c280:37/40controlPASS; R01wrongseq,R02missingnative12,R15earliernativefailure falseaccept, REDf7d037.",
+    "round1RAM": "40/40green17c88 historical to thatnewcode; not Nativecoverage.",
+    "fix1RED": {
+      "blob": "d3024d1dc786048e1f5bf0288e2fbe0c1ce2d653",
+      "bytes": 2401,
+      "sha256": "e514eeff477f83912562cb7001cb000b7336bbc8c73291e7a912730801ce58c7",
+      "gitSha": "d3024d1dc786048e1f5bf0288e2fbe0c1ce2d653",
+      "fullReadback": true
+    },
+    "fix1Before": "Semanticcd1 unchanged fullreadBound acceptedbothKNOWNuncertainnative, matchingRootinputSHAexact0de1550/fcc0b58 (compactinput WITHOUTLF; computedGitdigests were not publishedRootobjects). TwoUNKNOWNpositives alreadyPASS;40prefixallPASS.",
+    "fix1After": {
+      "blob": "482f434e12855541b98cdba730afd0b28cadd4ed",
+      "bytes": 9221,
+      "sha256": "eee3d425ad6e59654c8b0c0b8b5580573aa926ac6a8f80ef02166910909d93a9",
+      "gitSha": "482f434e12855541b98cdba730afd0b28cadd4ed",
+      "fullReadback": true
+    },
+    "freshFinal": {
+      "freshFinalOwnRAM": true,
+      "original40": 40,
+      "appendix4": 4,
+      "receiver44pass": 44,
+      "receiver44fail": 0,
+      "admitted": 21,
+      "rejected": 23,
+      "OwnRunnerSyntaxOnly": true,
+      "OwnRunnerEvaluated": false,
+      "SourceCodeEvaluated": false,
+      "nativeExecuted": false
+    },
+    "SourceOrWholeHistoryReruns": false
+  },
+  "packet": {
+    "toolingIndex": {
+      "blob": "88caab27a1024a0c8e30eed5f58a8eac7f347260",
+      "bytes": 4624,
+      "sha256": "c41029a4dd3bf1500c1a02bfd849174611eb4f72e4b8d9bb27cc94ff397dbcc1",
+      "gitSha": "88caab27a1024a0c8e30eed5f58a8eac7f347260",
+      "fullReadback": true
+    },
+    "graph": {
+      "blob": "5eeb7f6370b9a1dcf678e7717ce60e084d08f619",
+      "bytes": 21643,
+      "sha256": "10656580bb8a51f1306bcc6be46192e1537a5e0634c35eeb6ec45cd70da1c450",
+      "gitSha": "5eeb7f6370b9a1dcf678e7717ce60e084d08f619",
+      "fullReadback": true
+    },
+    "graphFiles": 62,
+    "graphBytes": 3016676,
+    "runner": {
+      "blob": "8a7b0f57a46085126926e8ba989ab762eb333f0a",
+      "bytes": 6970,
+      "sha256": "a17e68805e8b51dee189d5e731c54fa234eebce93813e5942563d718ef8a4fec",
+      "gitSha": "8a7b0f57a46085126926e8ba989ab762eb333f0a",
+      "fullReadback": true
+    },
+    "proofSchema": {
+      "blob": "7c279e0c77814a6f496ead2394c5d8f6a7e3c490",
+      "bytes": 6660,
+      "sha256": "d588ebc23ae8175c86edb8c43827c0249f84558af8ee4103e1d08c8a94968f6e",
+      "gitSha": "7c279e0c77814a6f496ead2394c5d8f6a7e3c490"
+    },
+    "workflow": {
+      "blob": "4a341ec8f9e0dcc8b334b8c5b267b856d8100d47",
+      "bytes": 1554,
+      "sha256": "0f5f66482d8e53614392b22247bf9d630e7655862ae2ffb7c69db075c809c8c6",
+      "gitSha": "4a341ec8f9e0dcc8b334b8c5b267b856d8100d47"
+    },
+    "fullReversibles": {
+      "blob": "52a85514c6b679391f2e78c04f5d730fee746614",
+      "bytes": 268321,
+      "sha256": "247d3b5377fe2139dc4bbc2d4310bc38f16148a7958337a4bb846cc6122da88a",
+      "gitSha": "52a85514c6b679391f2e78c04f5d730fee746614",
+      "fullReadback": true
+    },
+    "reversalCount": 9,
+    "proofBudget": "Hypothetical shape/budget check only:20757B includingLF with20digitRunID/64fullbindings/44evaluations; no actual proof generated or native execution claimed."
+  },
+  "actualProducer": {
+    "rootAdmission": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8",
+    "bodyEdgesHash": "d11f63d57ea36fdc9a7509ecec33b3611fe95be8197294ae7820b421394313bf",
+    "Source13": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "S10": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+    "actualHeadTreeRunJobBound": false
+  },
+  "performed": {
+    "localOwnRAM": true,
+    "projectFilesystemWritten": false,
+    "SourceProgramMaterialized": false,
+    "SourceCodeExecuted": false,
+    "SourceSyntaxASTCompile": false,
+    "dependenciesInstalled": false,
+    "providerBrowserMailSecrets": false,
+    "refsOrRunsChanged": false,
+    "whole124or419orW1Rerun": false,
+    "nativeOwnExecuted": false
+  },
+  "preservation": "New OWNfix1prefix additions only. Original40 DATA and all priorOWN/Source13/c230/M/QA/SDK/Core/closed histories immutable. Oldunused40native nomination retired with0ref/run byRoot. Fullbeforeimages+byte deltas+forward/reverse reconstruct for9lineageitems; actualnewpaths before:null.",
+  "pending": [
+    "Root staticfullgraph/trigger/code and freshreview gate",
+    "Root native42exactIDs/44evaluations actualAPI/TAP/ZIPreadback and closure",
+    "ActualSource capture remains separatelyRootauthorized; futureactualcaller usesd2Read withRoot real IDs/context, nevermodelentrypoint"
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

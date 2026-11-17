@@ -1,0 +1,139 @@
+{
+  "schema": "AFW-DIAG2-OWN-FIX1-EARLY-NATIVE-TOOLING-INDEX/1",
+  "authority": "ccf33edb19d3971a8182c78200330ba9bff0fb4f",
+  "entrypointRuling": "65040ab43351c843e9f5252910bf24f30f896eba",
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+    "message": "AFW-C2-OWN-FIRST-FAILURE-POST-DIAG2-FIX1-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-first-failure-post-diag2-fix1.yml",
+    "job": "c2-own-first-failure-post-diag2-fix1",
+    "prefix": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/",
+    "artifact": {
+      "name": "afw-c2-own-first-failure-post-diag2-fix1",
+      "path": "output/c2-own-first-failure-post-diag2-fix1.json",
+      "fileName": "c2-own-first-failure-post-diag2-fix1.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "ubuntu": "24.04",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "permissions": "contentsread",
+    "attempt": 1,
+    "npm": false
+  },
+  "graph": {
+    "blob": "5eeb7f6370b9a1dcf678e7717ce60e084d08f619",
+    "bytes": 21643,
+    "sha256": "10656580bb8a51f1306bcc6be46192e1537a5e0634c35eeb6ec45cd70da1c450",
+    "gitSha": "5eeb7f6370b9a1dcf678e7717ce60e084d08f619",
+    "fullReadback": true
+  },
+  "runner": {
+    "blob": "8a7b0f57a46085126926e8ba989ab762eb333f0a",
+    "bytes": 6970,
+    "sha256": "a17e68805e8b51dee189d5e731c54fa234eebce93813e5942563d718ef8a4fec",
+    "gitSha": "8a7b0f57a46085126926e8ba989ab762eb333f0a",
+    "fullReadback": true
+  },
+  "documents": [
+    {
+      "path": "selection.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "7efb6b2ae68721eb060d6a6a8ce07a0cf67c0d94",
+        "bytes": 5056,
+        "sha256": "cc7466849be8c50f5bbeed11e6ceff882af96091cfcf00cee4cecd658ee5e060",
+        "gitSha": "7efb6b2ae68721eb060d6a6a8ce07a0cf67c0d94"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "proof-schema.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "7c279e0c77814a6f496ead2394c5d8f6a7e3c490",
+        "bytes": 6660,
+        "sha256": "d588ebc23ae8175c86edb8c43827c0249f84558af8ee4103e1d08c8a94968f6e",
+        "gitSha": "7c279e0c77814a6f496ead2394c5d8f6a7e3c490"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "native-protocol.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "fabb36f9191c4e7a575d35afcd38bb3eb72a82e9",
+        "bytes": 3777,
+        "sha256": "85f57f5e948e54d1a4f5990cf39a01eb38ee05d03948183343dc461a4284d6f5",
+        "gitSha": "fabb36f9191c4e7a575d35afcd38bb3eb72a82e9"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": ".github/workflows/afw-c2-own-first-failure-post-diag2-fix1.yml",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "4a341ec8f9e0dcc8b334b8c5b267b856d8100d47",
+        "bytes": 1554,
+        "sha256": "0f5f66482d8e53614392b22247bf9d630e7655862ae2ffb7c69db075c809c8c6",
+        "gitSha": "4a341ec8f9e0dcc8b334b8c5b267b856d8100d47"
+      },
+      "fullReadback": true
+    }
+  ],
+  "fixtureFirst": {
+    "blob": "b362aa0310f9f1e34f488343bf206eaf17cd6ea4",
+    "bytes": 3550,
+    "sha256": "0dc50c6be8e36a945999707db01889bd59a1cc5efc211dc0e3b5d8e89a71c584",
+    "gitSha": "b362aa0310f9f1e34f488343bf206eaf17cd6ea4",
+    "fullReadback": true
+  },
+  "firstFailureAfter": {
+    "blob": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+    "bytes": 3355,
+    "sha256": "b931c72cd6f4ff6d4f40ace86de7373fbccdb1be850d0f48f4ac44a2153ed76e",
+    "gitSha": "ee346f8e6a4e711a198c69db5a3a1593fbaad85e",
+    "fullReadback": true
+  },
+  "RAM": {
+    "blob": "482f434e12855541b98cdba730afd0b28cadd4ed",
+    "bytes": 9221,
+    "sha256": "eee3d425ad6e59654c8b0c0b8b5580573aa926ac6a8f80ef02166910909d93a9",
+    "gitSha": "482f434e12855541b98cdba730afd0b28cadd4ed",
+    "fullReadback": true
+  },
+  "preimageEarly": "a81579792c2378fb3935560c96bb5541fffeef07",
+  "expected": {
+    "nativeGroups": 42,
+    "receiverEvaluations": 44,
+    "admit": 21,
+    "reject": 23
+  },
+  "proofBudget": {
+    "hypotheticalBudgetOnly": true,
+    "neverNativeProof": true,
+    "bindings": 64,
+    "estimatedCanonicalLFBytes": 20757
+  },
+  "pending": [
+    "final full reversible package/report",
+    "Root actualNative42/freshreview/closure"
+  ],
+  "authorNativeRuns": 0,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
