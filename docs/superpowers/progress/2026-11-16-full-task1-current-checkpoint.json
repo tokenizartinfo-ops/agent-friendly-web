@@ -3,7 +3,7 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "812531cd82c1998f7c9b531275b1ac1aa1ecb20b",
+  "previousCheckpoint": "e831faa6259a2b8e7c2f4d76df62d96720b8a3f3",
   "phase": "TASK2_PREREQUISITE_FULL20_CARRIER_PREPARATION_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
@@ -959,7 +959,7 @@
     }
   },
   "schemaVersion": 89,
-  "updatedAtUTC": "2026-11-17 22:56:00 UTC",
+  "updatedAtUTC": "2026-11-17 22:52:43 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
