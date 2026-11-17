@@ -1,0 +1,63 @@
+{
+  "schema": "AFW.OWN5.STAGE_A.ROOT_RED_VALIDATION/1",
+  "timestampUTC": "2026-11-17 14:33:46 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "run": 44104034023,
+  "attempt": 1,
+  "job": 134111413596,
+  "head": "317b4e1f547b23ad1bcb4170a5e4f28a865deafe",
+  "tree": "b93e3075b6d7cf1cfae14e1261813b17fe96b644",
+  "outcome": "EXPECTED_NAMED_RED_OBSERVED_AFTER_OLD_MODEL_BASELINE_ADMIT",
+  "checks": {
+    "run": true,
+    "commit": true,
+    "job": true,
+    "steps": true,
+    "artifact": true,
+    "canonical": true,
+    "exactExpectedProof": true,
+    "log": true
+  },
+  "zip": {
+    "archive": {
+      "bytes": 762,
+      "sha256": "5e46b66e9a2fa016f34095490c34981054c9732a28e586541477a0720f0ba39e",
+      "blob": "e1ed4f95d9964836cbbc4e78fb0bde52e1f6a109"
+    },
+    "payload": {
+      "bytes": 914,
+      "sha256": "3376b8ef571bd5765069b0655e952df3cc1229c98c5aef61157a792b82e49485",
+      "blob": "d05e6bbff13eb9f792cd8432abcb8c45b628bcf7"
+    },
+    "crc32": "ee32683a",
+    "compressedBytes": 590,
+    "descriptorBytes": 16,
+    "flags": 8
+  },
+  "logMeasurement": {
+    "bytes": 17751,
+    "sha256": "60b6c88d93eb0c3dcf6241fef4fcb560b47f1b30e7bf50347dd8fa35848d41f4",
+    "blob": "6828fa5764856b50da9fe4c3c0a51a93f8594813"
+  },
+  "controlsExecuted": {
+    "oldModelBaseline": 1,
+    "newSemanticTwin": 1,
+    "D4Matrix": 0,
+    "old73FullSuite": 0
+  },
+  "boundary": "Synthetic originalD3 MODEL25 baseline admitted, twin sole new component rejected exact oldG20; actual named positive assertion observed by pinned parent. Missing new public component support only, no Source/business/historical cause proof. 69fixtures still sealed unexecuted. Guard unchanged; release needs closure/independent actual review.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
