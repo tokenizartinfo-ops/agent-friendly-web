@@ -1,0 +1,37 @@
+name: AFW C2 FIRST_FAILURE_POST_DIAG2 synthetic toy
+on:
+  push:
+    branches:
+      - lab/afw-c2-source-20261117-first-failure-diag2-toy
+permissions:
+  contents: read
+jobs:
+  c2-first-failure-diag2-toy:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/lab/afw-c2-source-20261117-first-failure-diag2-toy' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'AFW-C2-FIRST-FAILURE-POST-DIAG2-TOY-ONEUSE-20261117'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Read the exact one-use toy head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Use the fixed toy Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+      - name: Calibrate the sealed synthetic toy
+        shell: bash
+        run: node docs/superpowers/source-lab/c2-first-failure-post-diag2-toy/run-toy.mjs
+      - name: Preserve the complete synthetic toy proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-c2-first-failure-post-diag2-toy
+          path: output/c2-first-failure-post-diag2-toy-proof.json
+          if-no-files-found: error
+          retention-days: 7
