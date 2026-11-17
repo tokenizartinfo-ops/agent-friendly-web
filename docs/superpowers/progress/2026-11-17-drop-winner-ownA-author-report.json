@@ -1,0 +1,85 @@
+{
+  "schema": "AFW.OWN5.STAGE_A.AUTHOR_REPORT/1",
+  "state": "FIXTURES_SEALED_NATIVE_RED_PENDING_GITHUB",
+  "scope": {
+    "project": "AFW",
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "environment": "unattached synthetic data blobs",
+    "origin": "github.com",
+    "resourceType": "git blob",
+    "resourceId": "OWN5 Stage A",
+    "allowedAction": "scoped read and create_blob",
+    "rollback": "discard detached proposal"
+  },
+  "sourceRound": 5,
+  "ownRound": 4,
+  "maxRounds": 5,
+  "authored": {
+    "expectations": {
+      "blob": "a1291b71dd21b263d280f6feae8efc8d3fce0c24",
+      "bytes": 30212,
+      "sha256": "74c26493ec61dc8e442139ea412e5a629617e3b4dcdb6a235e6ab6938c9d331c"
+    },
+    "fixtureSeal": {
+      "blob": "bfff4346bdbe21bbd431df80a07d234828a89d97",
+      "bytes": 16153,
+      "sha256": "b06de3862ea2fcb5464386db0b627b963d37ed2917afe8de3be1b9e1df37b712"
+    },
+    "model26": {
+      "blob": "53bfd6716ecb04153158e6653700648140528d27",
+      "bytes": 13909,
+      "sha256": "8c65a21b836eb192bc1a6a954f5d625e55231fc2dad86229287b4ba9b831c25d"
+    },
+    "preservation": {
+      "blob": "eccc1cf19a39a1166fc163ee906a46ee627d797d",
+      "bytes": 35608,
+      "sha256": "80ed78931a28ad163a59630f16b61f2d09d150fd09d44629135b3fea46ed710e"
+    },
+    "fullContextDiff": {
+      "blob": "3830d3be889ca134a430a7b321f05c70889b01ff",
+      "bytes": 6115,
+      "sha256": "cd30cffedc0592b51c7ea8fe9f73397d42b10e83d042214cf57847edbb0a883d"
+    },
+    "nativePacket": {
+      "blob": "55d80f85696757125eab2074f8921f893877eb0b",
+      "bytes": 7406,
+      "sha256": "f317f750a896183caece37471abb84a5795456a2b22b6ebb02cb8af94515e685"
+    }
+  },
+  "fixtureCoverage": {
+    "append": 69,
+    "expectedAdmitModelOnly": 26,
+    "expectedReject": 43,
+    "rawUTF8Bytes": 3938786,
+    "original73": "32 ADMIT/41 REJECT historical result",
+    "sourceModelTuple": "Distinct synthetic Source index, Source13, canonical selection, schema, 26 body edges and sourceReads. Eleven inert slot bodies measured before binding; other fifteen edges reference immutable metadata.",
+    "actualBoundary": "New MODEL and old MODEL fed to ACTUAL are negative fixtures. ACTUAL pinned only to final Root26. expected live source context null, absence of the independent fresh run context forbids admission.",
+    "eligibility": "Open15 exact57/14. Closed15 throw/fail or return/pass, later valid case and complete journal. Native and journal prefix, torn, ambiguous, empty and early/after/count variants. All six site names and independent axes. Four exact keys with canonical duplicate test. Full public-site implication, public same-case contradictions, finite GET and inherited API/ZIP/custody/tree/journal failures.",
+    "hiddenEvidence": "Unobservable marker order and private cell/epoch/identity substitutions remain producer proof obligations. The test data expose only the bounded public projection."
+  },
+  "red": {
+    "scope": "Two-input original D3 MODEL read. 57 events, 14 native rows, old25 BODY tuple, original frozen D3 model; all other transport bytes proved equal apart from re-encoding after the single public component is added.",
+    "knownPreimage": "d3ModelRead and its ordered old D3 schema in the frozen model reject any additional member at observation. Both envelopes use D3 markers, command, branch, job, schema label, fixture pins and old binding. Both archives are opened in the test with the same old ZIP reader before running the twin. A guard exception alone never counts as RED.",
+    "test": "OLD control must ADMIT; old twin must throw exactly Error(G20_OWN_UNQUALIFIED), or its receipt must contain the desired returned component. Only on the declared absent support does the test observe AssertionError AFW_OWN_D4_RECEIPT_COMPONENT_REQUIRED. Child emits exact sanitized marker and rethrows; parent requires matching bounded output, exit=1, no signal or timeout, then creates sole fresh JSON and exits 1.",
+    "pending": "Parent must independently inspect exact run attempt, conclusion=failure, step and sole bounded receipt. No test controller or OWN/Source code was run locally. Await Root one-use admission."
+  },
+  "readbacks": "Every new body read back from GitHub in full, byte-equal, recomputed SHA256 and Git SHA1. Preservation inventory holds per-body descriptors. Unified full-context diff has 24 verified parts; aggregate hash is for their virtual concatenation. Eight original module bodies verified individually. Other original 95-body and 73-case inventories referenced immutably, no wholesale rereads/retests.",
+  "refsWritten": false,
+  "sourceExecuted": false,
+  "guardImplementationChanged": false,
+  "nativeExecuted": false,
+  "businessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
