@@ -1,0 +1,40 @@
+{
+  "schema": "AFW.OWN5.ROOT_BOUNDED_ACTUAL_DATA_READER_RULING/1",
+  "timestampUTC": "2026-11-17 15:10:42 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": "Owner permits minimal local work and pure OWN execution had been authorized; priority remains GitHub/cloud. Source/OWN first covering runs already native and accepted.",
+  "qualification": {
+    "OWNnativeProof": "aeb81a1566cf69e337db0e2ed7d09013c82d53bb",
+    "OWNactualReview": "6a76d5a3a18303e69cbdf08ad7d1eee328f17746",
+    "SourceRoot26": "1fea33135f8943707738d4f078ff3616e9b5132c"
+  },
+  "ruling": "After accepted native142+10 qualification, Root may instantiate byte-exact OWN5 reader modules in one isolated in-memory Node VM for actual captured DATA validation. Never import/eval/parse/compile/execute any Source body. Inputs are supplied JSON API/log/ZIP DATA only. No local repository files, package install, build, subprocess, real filesystem access, network, credentials or Source runtime. Binding JSON reads handled by exact allowlisted in-memory fs shim. Only builtin crypto/zlib allowed; bounded input, no dynamic/source imports. SourceTextModule native semantics preserve the qualified OWN bodies without rewriting.",
+  "why": "A brief pure-data guard invocation verifies the already cloud-executed capture using identical independently qualified code; avoids another remote runner/extra data publication just to read a bounded file. This is the owner's explicitly allowed minimal local exception, not development/runtime on PC.",
+  "cost": "Small in-memory OWN code/data evaluation; release transient VM after result is preserved. No Source code or artifacts written to disk.",
+  "limits": {
+    "moduleRoots": [
+      "docs/superpowers/root-own/c2-t1-finite-get-diag3/",
+      "docs/superpowers/root-own/c2-t1-drop-winner-diag4/"
+    ],
+    "builtins": [
+      "node:crypto:createHash",
+      "node:zlib:inflateRawSync",
+      "node:fs:readFileSync exactmemorybindingJSONonly"
+    ],
+    "inputJSONBytesMax": 4194304,
+    "rawLogBytesMax": 4194304,
+    "zipBytesMax": 1048576
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
