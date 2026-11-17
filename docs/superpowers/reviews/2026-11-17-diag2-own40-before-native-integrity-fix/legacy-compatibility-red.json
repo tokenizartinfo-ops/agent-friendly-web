@@ -1,0 +1,126 @@
+{
+  "schema": "AFW-DIAG2-OWN-LEGACY-COMPATIBILITY-RED/1",
+  "preimage": "f844dd8789012b95edaf0aec4db20edea885a4ca",
+  "fixtures": 40,
+  "expectedAccept": 19,
+  "expectedReject": 21,
+  "controlsPass": 21,
+  "controlsFail": 19,
+  "failures": [
+    {
+      "id": "OWN_D2_K01",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_K01: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_K02",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_K02: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_K03",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_K03: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_K04",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_K04: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_K05",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_K05: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_A01",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_A01: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_A02",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_A02: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_A03",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_A03: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_A04",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_A04: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_A05",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_A05: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_A06",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_A06: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_U01",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_U01: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_U02",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_U02: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_U03",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_U03: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_U04",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_U04: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_U05",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_U05: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_U06",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_U06: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_K06",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_K06: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    },
+    {
+      "id": "OWN_D2_U08",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_U08: valid diagnostic rejected\n+ actual - expected\n\n+ Error: G20_OWN_UNQUALIFIED\n+     at gBad (./shape.mjs:1:23)\n+     at g20Trusted (./transp"
+    }
+  ],
+  "scope": "Expected new-family incompatibility of approved old OWN; no historical bug claim; only sealed40 used; no Source imported"
+}

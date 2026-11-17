@@ -1,0 +1,151 @@
+{
+  "schema": "AFW-DIAG2-OWN-EARLY-CODE-INDEX/1",
+  "status": "RAM40_PASS_NATIVE_PENDING",
+  "authority": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+  "entrypointRuling": "65040ab43351c843e9f5252910bf24f30f896eba",
+  "fixtureIndex": "394f7dde265fb7b3c3b5de26cede262c6f744daa",
+  "fixedRoot25": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8",
+  "model25": "bd72d6f0e42b5c830241ae3d66ef331bbe39381a",
+  "controls": {
+    "blob": "c5dc599e94d91e16ba00ddf232fd14e4ac4a7f94",
+    "bytes": 2026,
+    "sha256": "53c3274057c5546a688193891d7260b4ba6e177f4c6d9a4bd3fe7cb2bcfcb11a",
+    "gitSha": "c5dc599e94d91e16ba00ddf232fd14e4ac4a7f94",
+    "fullReadback": true
+  },
+  "artifacts": [
+    {
+      "path": "reader-before-joins.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "c280f176511fe180b5643397410c55b0054cd65e",
+        "bytes": 3975,
+        "sha256": "9f18a99be4eb1c2da736edfc871eda35b7c03257ff0ea462eb78756da1e64073",
+        "gitSha": "c280f176511fe180b5643397410c55b0054cd65e"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "legacy-compatibility-red.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "4f42ccbacc780f4d01603e80affb9fa72e8002b2",
+        "bytes": 5512,
+        "sha256": "98d2c62f533762afff6ae2f219cf974cc5a99d10bc08506a24edd2a9032fbcd4",
+        "gitSha": "4f42ccbacc780f4d01603e80affb9fa72e8002b2"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "missing-joins-red.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "f7d037d8cda044a20c867b554cca3c8354ac1b40",
+        "bytes": 912,
+        "sha256": "8f706ce447b0a66d715de7b110ec324aaa93809072ef4adae7cefe7b46a99616",
+        "gitSha": "f7d037d8cda044a20c867b554cca3c8354ac1b40"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "fixed.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854",
+        "bytes": 35339,
+        "sha256": "9b4d2eeea993614a45390dc06ad03fd3b0e341422981cbbfd44aa2840885ee04",
+        "gitSha": "585ba9f0fe649e5d092cf93ee24442c5ebc3e854"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "transport.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "5b8b36129eb9ab3af25ead0bbba840a32bdf67c2",
+        "bytes": 9613,
+        "sha256": "2e72b645d42fa75a7d04f2e1ab5a3d057e97139f02ae35c9755442f702a6944f",
+        "gitSha": "5b8b36129eb9ab3af25ead0bbba840a32bdf67c2"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "first-failure.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "cd1aaa2c0cfaa1f278e383cc7a58cb2df59b187f",
+        "bytes": 3310,
+        "sha256": "ac771fe58dea62883f09e4eceac7c0d6696fb54986c679781944ed4117302ed0",
+        "gitSha": "cd1aaa2c0cfaa1f278e383cc7a58cb2df59b187f"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "reader.mjs",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "4fb5a8d5e5b0b14c58f9935f5fd4dbc0589c23e0",
+        "bytes": 4002,
+        "sha256": "e01335d6b38840c82dd9f0d5693fcf95a49ecdd10384dee37b302f73ad73b26c",
+        "gitSha": "4fb5a8d5e5b0b14c58f9935f5fd4dbc0589c23e0"
+      },
+      "fullReadback": true
+    },
+    {
+      "path": "ram-green.json",
+      "mode": "100644",
+      "before": null,
+      "after": {
+        "blob": "17c88b92053499e59700825f870f72582f6f00ef",
+        "bytes": 4991,
+        "sha256": "785904822737e98d2c47950f40703fe5b1d7eb0a935c3de988e584d81dac28eb",
+        "gitSha": "17c88b92053499e59700825f870f72582f6f00ef"
+      },
+      "fullReadback": true
+    }
+  ],
+  "unchangedModules": {
+    "shape": "bbb8857d3af34b7123788c5ad7895fb2f1ab5067",
+    "partial": "2ee27b4755c855c2ae4cce9ba2010a25311f81c7"
+  },
+  "results": {
+    "legacyRED19": true,
+    "missingJoinsRED": [
+      "OWN_D2_R01",
+      "OWN_D2_R02",
+      "OWN_D2_R15"
+    ],
+    "RAM": {
+      "pass": 40,
+      "fail": 0,
+      "admitted": 19,
+      "rejected": 21,
+      "entrypoint": "d2ModelRead"
+    },
+    "nativeExecuted": false,
+    "actualSourceExecution": false,
+    "finalSourceBinding": false
+  },
+  "pending": [
+    "native graph/runner/WF/proofschema/fullreversibles/report",
+    "Root actual40native and freshreview"
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

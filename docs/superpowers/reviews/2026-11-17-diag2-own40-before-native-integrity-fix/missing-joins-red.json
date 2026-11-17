@@ -1,0 +1,28 @@
+{
+  "schema": "AFW-DIAG2-OWN-MISSING-JOINS-RED/1",
+  "fixtures": 40,
+  "controlsPass": 37,
+  "controlsFail": 3,
+  "failures": [
+    {
+      "id": "OWN_D2_R01",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_R01: controlled guard rejection required\n+ actual - expected\n\n+ undefined\n- 'Error'\n"
+    },
+    {
+      "id": "OWN_D2_R02",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_R02: controlled guard rejection required\n+ actual - expected\n\n+ undefined\n- 'Error'\n"
+    },
+    {
+      "id": "OWN_D2_R15",
+      "pass": false,
+      "errorName": "AssertionError",
+      "error": "OWN_D2_R15: controlled guard rejection required\n+ actual - expected\n\n+ undefined\n- 'Error'\n"
+    }
+  ],
+  "preimage": "OWN new-family compatibility shell with no firstFailure semantic join; existing replay/API/ZIP intact",
+  "SourceExecuted": false
+}
