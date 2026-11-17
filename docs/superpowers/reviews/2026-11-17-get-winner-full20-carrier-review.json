@@ -1,0 +1,48 @@
+{
+  "schema": "AFW.C2.GET_WINNER.CARRIER_INDEPENDENT_STATIC_REVIEW/1",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewScope": "Detached full20 carrier only. Static inspection of the nominated delta and its dependencies.",
+  "brief": "524c1558cc21d1df4b950b064ef0041d48ce6163",
+  "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+  "proposal": "cf2933aaad43938e98efcc8ffd93dfe7c8160bf9",
+  "package": "ecc49a35db217683e69f9de5a86fa40fc6924ab9",
+  "rootMeasurement": "2c3b0ab6b613c1d97e4dc14bce2d09ac06a31d1b",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "candidateCommit": null,
+  "SPEC": "CHANGES_REQUESTED_CONTRACT",
+  "QUALITY": "CHANGES_REQUESTED_CONTRACT_CONSISTENCY",
+  "critical": [],
+  "important": [
+    {
+      "id": "I1",
+      "location": "protocol-contract.json:657–658; collection-adapters.mjs:322–341,398–405,411–419,595–600",
+      "finding": "The new contract calls the original scope C2FT3 incompatible and describes invalid typed records as tainting the count stream. The pinned publisher explicitly accepts C2FT3 for either monitor or scope. With an otherwise valid ordered window and closed journal, an old-format scope record can produce afterScopeMissing.reason JOINED_SNAPSHOT. Its absence of the C2FT4 winner tuple still yields getWinner UNKNOWN, and the independent HTTP result survives. The exact proposed producer emits C2FT4, so this discrepancy concerns how an unexpected or historical input is interpreted. A Task2 reader using the literal protocol would have a different expectation from the publisher. The task freezes accepted publisher semantics except the job repin. Reconcile the protocol wording with the existing count-only compatibility before freezing Task2 inputs. If a strict rejection for old counts is intended, that is a separate semantic decision."
+    }
+  ],
+  "minor": [],
+  "route": {
+    "disposition": "CONDITIONAL_STATIC_APPLICATION_PREMISE_SUPPORTED",
+    "limits": "Runtime proves neither a signature nor physical response identity across worker/host. There is no full20 execution. The fixed runner treats the exact externally admitted one-use occurrence as providing the application premise. Its verified value alone is not evidence. There is no separate in-process Root-approval check.",
+    "evidence": [
+      "S08:8–19,27–29,110–116,202–228 restrict the token and read to the exact main-world case15 GET and original response immediately before the unchanged assertion at 18:143. The old column 118 has historical significance only.",
+      "S09:103–110,355–358,772–822,830–860; S10:29–52,149–171,188–200. Only the positive ordinary compiler is selected. The first worker is the positive canary, QA is a separately named binding, and remounts map over the existing order, retain scripts and update tracked options only after setOptions succeeds. The call is a direct return of the captured Miniflare instance dispatch. The hash compares the script passed in the raw mount options with the same full20 build's resident digest. It is neither an independent runtime extraction nor equality to the ordinary TOOL resident. TOOL uses fixture revision/tree and different QA.",
+      "Pinned Miniflare 1ded0afe15a9b443240776e3ce4bf4fbc509b79d index.ts:567–581,2409–2427,3022–3073 and http/fetch.ts:87–90,215–257. The no-assets fallback is the first worker, same-origin dispatch targets the runtime, and the native response wrapper preserves values. Cross-origin redirects would use a different dispatcher. Exact S03:17–28,40–42, BASE lib/mcp-qa-finite-owner-native-bridge.mjs:30–44, and lib/mcp-qa-finite-owner-native-wire.mjs:12,88–99 close that path for this GET. Success constructs a 200 with a bounded header allowlist. Failure constructs a fresh normalized non-redirect response. No QA response header is copied into this failure. The prepared observer only marks the original terminal failure response after the original finalizer. No independent application writer, cache, forwarding of a marked non-OK response, or replay path identified in this fixed construction.",
+      "Compared a279c2e6238927b0f7b1544c0f4d058852177651, 3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c, b97a7415951e7fe4ecb988a921cc0d777ea18f35:10–40 and GB1 08b75777bb39efaad0a439082cd430044c0b07d6. The TOOL witness covers the shared factory, converter, ordinary compiler and component serialization. Its transportDirectRoute and full20BusinessRouteExecuted remain false. A coherently substituted valid tuple cannot be distinguished by the public reader. Legacy POST QA and M transport flags stay unverified."
+    ]
+  },
+  "otherChecks": [
+    "Reviewed the complete old/new runner and workflow, accepted publisher job-only substitution, protocol and native-release changes, sealed source references and Root's independent measurement. The reported 26-edge compact digest is b849e01d0da0e8a76f80fba749bcb4dff0b9b8b09e8580584e52dc6605d9f553. The measurement credits 15 unchanged bodies, 11 changed and 22 reversible directions. This reviewer did not repeat Root's whole-map hashing.",
+    "Accepted index and S08/S09/S10 pins agree. D07/recorder and case order, QA, business awaits, lease/race/cancel, caps and 13 before/after checks remain in scope unchanged. Case ordinal15 is C2T1_SCOPE_MISSING. The fixed logical job/context, push branch/message/attempt, timeout, Node, pinned actions, contents read, artifact, step order and command match the nomination. Collection-adapters.mjs:483–484,576–610 preserves the four ordered keys and QA UNKNOWN and obtains the HTTP value independently. No extra business IO found in this carrier delta."
+  ],
+  "unverified": [
+    "All carrier syntax/tests/build/runtime NOT_RUN. This review contains no new business occurrence, no cause determination and no actual head/tree/job/step/artifact binding. Task2 ACTUAL controls and external exact Root gate remain pending. Source5/OWN5/StageB are each 5/5 without reset or new round."
+  ],
+  "activationReleased": false,
+  "nativeReleased": false,
+  "businessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "receiptAuthenticated": false
+}
