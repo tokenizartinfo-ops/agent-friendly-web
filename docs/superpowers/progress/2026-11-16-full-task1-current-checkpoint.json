@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "7f4f8a084694ae05871769f067d4ecb76ad03954",
-  "phase": "GB1_ACTUAL_TOOLING_ACCEPTED_TASK2_BINDING_PREPARATION",
+  "previousCheckpoint": "26443ede37601549d2118f380a9d057925dc2a8c",
+  "phase": "TASK2_PREREQUISITE_FULL20_CARRIER_PREPARATION_READY",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Task2: independent public getWinner consumer, fixture-first; clarify/prepare exact full diagnostic Source26 DATA binding without activation before freezing actual reader. No business Task3 occurrence until OWN acceptance. Prior Source5/OWN5 and StageB cap remain5/5.",
+  "next": "Prepare and independently measure closed/unactivated full20 GET Source carrier; then Task2 public-reader fixture/guard/binding and native controls. No business run before OWN acceptance.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -941,10 +941,20 @@
         "publicConsumerNativeReleased": false,
         "PCoff": false
       }
+    },
+    "task2": {
+      "status": "SOURCE_CARRIER_PREPARATION_READY",
+      "toolingActualAccepted": "08b75777bb39efaad0a439082cd430044c0b07d6",
+      "currentReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
+      "currentBinding": "4d54d57322ea67c3a29278f75288c7c9b686105b",
+      "oldSource26": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+      "scope": "Prepare new closed full20 Source DATA before freezing actual consumer binding; Task3 execution held",
+      "actualConsumerReleased": false,
+      "nativeBusinessReleased": false
     }
   },
-  "schemaVersion": 87,
-  "updatedAtUTC": "2026-11-17 22:36:59 UTC",
+  "schemaVersion": 88,
+  "updatedAtUTC": "2026-11-17 22:44:52 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
