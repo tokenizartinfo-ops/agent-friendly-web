@@ -1,0 +1,578 @@
+{
+  "schema": "AFW-DIAG2-SOURCE35-FIXTURE-FIRST/1",
+  "status": "SEALED_BEFORE_SOURCE_IMPLEMENTATION_NO_NATIVE_RESULT",
+  "authority": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+  "corpus": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+  "componentSeals": {
+    "encoding": "SHA256 de UTF8(JSON.stringify(componente)) sinLF, excepto toyUtf8 que hashea su stringexacto",
+    "schemaSha256": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+    "sourceCorpusSha256": "15d470df5e7ed5350bdedb333236f648c86e69c844e5784d1d8478f6ebac5aaf",
+    "toyUtf8Sha256": "988b241402d628d86c1a2513af80ba14be22540cc2c97925e8e81837f4ee5d69",
+    "selectedIdsSha256": "f6718c2d0852789be60249467a37211eca1bffe17a73bb430da8e698a34d2354"
+  },
+  "projectionContract": "projectFirstFailure(stdoutBuffer,parentFacts,selection.selected); actual collectObservation and successPacket use same helper in the future business path. No fixture-ID dispatch in implementation.",
+  "calibration": "9f3ec19e53267713dd037fca22a9f3bb3742cb3a",
+  "cases": [
+    {
+      "id": "S01_KNOWN_503_COUNTS_222",
+      "parent": "P01",
+      "bytes": 3024,
+      "sha256": "ce1eaf318fb27de10ea51dc2bf376f9451cfdd0525de34ceecc9ee3afb8916f6",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION",
+        "throwSequence": 46,
+        "source": {
+          "id": "C2T1_NOTICES",
+          "status": "fail",
+          "phase": "notices",
+          "counters": {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 2
+          },
+          "code": "TEST_FAILED"
+        },
+        "assertion": {
+          "actual": 503,
+          "expected": 200
+        }
+      }
+    },
+    {
+      "id": "S02_KNOWN_429_PARTIAL",
+      "parent": "P01",
+      "bytes": 3024,
+      "sha256": "3677316f330dd04a13924a3bb54f68b6bcd0463a4de5545968e01d21e848844f",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION",
+        "throwSequence": 46,
+        "source": {
+          "id": "C2T1_NOTICES",
+          "status": "fail",
+          "phase": "notices",
+          "counters": {
+            "upload": 2,
+            "activation": 1,
+            "receipts": 1
+          },
+          "code": "TEST_FAILED"
+        },
+        "assertion": {
+          "actual": 429,
+          "expected": 200
+        }
+      }
+    },
+    {
+      "id": "S03_KNOWN_599_BOUNDS_ONLY",
+      "parent": "P01",
+      "bytes": 3024,
+      "sha256": "27f37e8f18e8399b65795a8ed63e6356121415b4e293e9d9bce3e0d7d00fa3b1",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION",
+        "throwSequence": 46,
+        "source": {
+          "id": "C2T1_NOTICES",
+          "status": "fail",
+          "phase": "notices",
+          "counters": {
+            "upload": 0,
+            "activation": 3,
+            "receipts": 0
+          },
+          "code": "TEST_FAILED"
+        },
+        "assertion": {
+          "actual": 599,
+          "expected": 200
+        }
+      }
+    },
+    {
+      "id": "S04_MISSING_SOURCE",
+      "parent": "P01",
+      "bytes": 2884,
+      "sha256": "2d307084d5b123edbd4a1dc2b499643c118f760c02615188410d5d1f77b53649",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "SOURCE_ROW_UNAVAILABLE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S05_DUPLICATE_SOURCE",
+      "parent": "P01",
+      "bytes": 3164,
+      "sha256": "853aa2eb19454612aa7426433f572d09ba24e48fcae4fee171a63167f74ea561",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S06_SOURCE_STATUS_CONFLICT",
+      "parent": "P01",
+      "bytes": 3024,
+      "sha256": "1d83b5f9a7b77718607a88d82ae1b392b032a487e7c0196db38230ad29113e9a",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "CONFLICTING_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S07_SOURCE_WRONG_PHASE",
+      "parent": "P01",
+      "bytes": 3023,
+      "sha256": "ce7978b211133c956ba41b1ef619f13eb6efd2837b0a0be299424721874a84b7",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "CONFLICTING_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S08_SOURCE_WRONG_CODE",
+      "parent": "P01",
+      "bytes": 3015,
+      "sha256": "2c73d7299f27be96755f0f8ef11e300146cc9c873aa6432c041b787e553eaa93",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "CONFLICTING_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S09_SOURCE_EXTRA_KEY",
+      "parent": "P01",
+      "bytes": 3037,
+      "sha256": "c17cccb6b1a239cfab89d16a741019a7109bbb50a974a86eb446f85a8f7bed47",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S10_SOURCE_NONCANONICAL",
+      "parent": "P01",
+      "bytes": 3025,
+      "sha256": "7aa0e113d39c57a4a005bdbbb8ecb91e67c4d239483eadfd7a03e62e180d5a8b",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S11_MISSING_SCALAR",
+      "parent": "P01",
+      "bytes": 3010,
+      "sha256": "34d821d549c16aad7bd0788d1813fd8f217893432cfa12db4852da587eb4f3cf",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "ASSERTION_SCALARS_UNAVAILABLE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S12_DUPLICATE_SCALAR",
+      "parent": "P01",
+      "bytes": 3038,
+      "sha256": "ba82c5356d9aa7ad4e484133ec7a0b825a7ca338c8739c432b91bf63b9f37eba",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S13_SCALAR_MESSAGE_FAKE",
+      "parent": "P01",
+      "bytes": 2986,
+      "sha256": "052c9803baaaebf0d5cf6960cef6c2c33e5f6a32cf1e5c2c0dc31d39ca8596a7",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "ASSERTION_SCALARS_UNAVAILABLE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S14_SCALAR_NESTED_FAKE",
+      "parent": "P01",
+      "bytes": 3036,
+      "sha256": "83346a51f33c08ef991642e847194cd88cdfb5d9dee530f9c13fd139e8daa05c",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "ASSERTION_SCALARS_UNAVAILABLE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S15_SCALAR_STRING",
+      "parent": "P01",
+      "bytes": 3026,
+      "sha256": "3a289170de5af227e853d5d56d0441b8f48c05dce56a70ffb0cbcdfe02449b07",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "UNSUPPORTED_SCALARS",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S16_SCALAR_FLOAT",
+      "parent": "P01",
+      "bytes": 3026,
+      "sha256": "86acbaff61f64789127db8decf0997a3455a8a0fb8e4ae7cddf9722c92cb022f",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "UNSUPPORTED_SCALARS",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S17_SCALAR_600",
+      "parent": "P01",
+      "bytes": 3024,
+      "sha256": "c5dbb1197864831a6489d329bc5ba73f38fee7ebaf093e1e4aa0e521f0f54365",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "UNSUPPORTED_SCALARS",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S18_SCALAR_200_CONFLICT",
+      "parent": "P01",
+      "bytes": 3024,
+      "sha256": "1c61c56a4ad211f3f8adc66113ce3c7427b9a81661a209f503e05d40a3eab817",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "CONFLICTING_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S19_WRONG_EXPECTED",
+      "parent": "P01",
+      "bytes": 3024,
+      "sha256": "5b24cfe6daf224e06315f3b153ea8a5f5362eb86a9003d87c99a8ce6d40cb05b",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "CONFLICTING_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S20_COUNTER_RANGE",
+      "parent": "P01",
+      "bytes": 3024,
+      "sha256": "274a350a20d8751de3d0b322b5bab2674f0950330cb07beb4ecdd1eacbcef631",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "UNSUPPORTED_SCALARS",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S21_WRONG_OPERATOR",
+      "parent": "P01",
+      "bytes": 3022,
+      "sha256": "ee444cf42480aa7d0c9a5863f075385db5575e380c025b9557068bce89def2c3",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "CONFLICTING_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S22_WRONG_NATIVE_ORDINAL",
+      "parent": "P02",
+      "bytes": 3024,
+      "sha256": "64da4b11cd4b2c5b23fbc926b35a52d74e476fde1ddaef2b1cd9efae5906643c",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S23_NESTED_TARGET_PAIR",
+      "parent": "P03",
+      "bytes": 3096,
+      "sha256": "0c84d3a2d4d34bc6f9b6557f788fa419dc8785c2a1ef23ff273ad871748cce66",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "TARGET_NATIVE_UNAVAILABLE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S24_TORN_CANDIDATE",
+      "parent": "P04",
+      "bytes": 3016,
+      "sha256": "ebce2a3e8c7351871a1ca2cadeca5a6e3b96c07351f2faa6f7b79cc82a43d97f",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "TRUNCATED_NATIVE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S25_CRLF_UNSUPPORTED",
+      "parent": "P05",
+      "bytes": 3120,
+      "sha256": "02936998cee72ceb6862be1ff60776829740ea12e74696cec03ce35f9e88c27c",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "NATIVE_FORMAT_UNSUPPORTED",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S26_SOURCE_WRONG_ORDER",
+      "parent": "P01",
+      "bytes": 3024,
+      "sha256": "d1fc5a6587d59a57812c0ef67ea18c4fc005628d5a9d9d14b852075766473327",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "AMBIGUOUS_EVIDENCE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S27_EARLIEST_WRONG_SITE",
+      "parent": "P06",
+      "bytes": 3024,
+      "sha256": "ce1eaf318fb27de10ea51dc2bf376f9451cfdd0525de34ceecc9ee3afb8916f6",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "NOT_APPLICABLE",
+        "reason": "EARLIEST_THROW_DIFFERENT",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S28_COUNTER_THROW",
+      "parent": "P07",
+      "bytes": 2884,
+      "sha256": "2d307084d5b123edbd4a1dc2b499643c118f760c02615188410d5d1f77b53649",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "COUNTER_UNAVAILABLE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S29_COUNTER_OPEN",
+      "parent": "P08",
+      "bytes": 2884,
+      "sha256": "2d307084d5b123edbd4a1dc2b499643c118f760c02615188410d5d1f77b53649",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "COUNTER_UNAVAILABLE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S30_VALID_CANDIDATE_LATER_TORN",
+      "parent": "P09",
+      "bytes": 3024,
+      "sha256": "ce1eaf318fb27de10ea51dc2bf376f9451cfdd0525de34ceecc9ee3afb8916f6",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "KNOWN",
+        "reason": "TARGET_POST_ASSERTION",
+        "throwSequence": 46,
+        "source": {
+          "id": "C2T1_NOTICES",
+          "status": "fail",
+          "phase": "notices",
+          "counters": {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 2
+          },
+          "code": "TEST_FAILED"
+        },
+        "assertion": {
+          "actual": 503,
+          "expected": 200
+        }
+      }
+    },
+    {
+      "id": "S31_EARLIER_NATIVE_FAILURE",
+      "parent": "P10",
+      "bytes": 3028,
+      "sha256": "2df2a0965cfe4f5c668f93571d0c946ef1a884ba7bc9b6286aafba4f03deca25",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "NOT_APPLICABLE",
+        "reason": "EARLIER_NATIVE_FAILURE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S32_TARGET_PASS",
+      "parent": "P11",
+      "bytes": 2778,
+      "sha256": "b9bfbdfd8f103b6a6084f50f08deb41e6ab4b9ab472aac2bc60ba7e86212b171",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "NOT_APPLICABLE",
+        "reason": "TARGET_PASSED",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S33_NO_QUALIFYING_THROW",
+      "parent": "P12",
+      "bytes": 3024,
+      "sha256": "ce1eaf318fb27de10ea51dc2bf376f9451cfdd0525de34ceecc9ee3afb8916f6",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "NOT_APPLICABLE",
+        "reason": "NO_QUALIFYING_THROW",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S34_TARGET_RESULT_MISSING",
+      "parent": "P03",
+      "bytes": 2514,
+      "sha256": "3c18712a34196487176e6d7dad913267eede879d19b11c4c4a616d1fcb89404f",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "TARGET_NATIVE_UNAVAILABLE",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    },
+    {
+      "id": "S35_TARGET_THROW_NOT_IN_VALIDATED_PREFIX",
+      "parent": "P13",
+      "bytes": 3024,
+      "sha256": "ce1eaf318fb27de10ea51dc2bf376f9451cfdd0525de34ceecc9ee3afb8916f6",
+      "expected": {
+        "schema": "afw.c2-first-failure-post-diag2.v1",
+        "state": "UNKNOWN",
+        "reason": "JOURNAL_UNRESOLVED",
+        "throwSequence": null,
+        "source": null,
+        "assertion": null
+      }
+    }
+  ],
+  "legacyS01": {
+    "input": "same S01 complete literal valid stdout+journal",
+    "oldCollector": "5c8123b9e66166a198add4a0593372cfef13a1db",
+    "expect": "collectObservation returns exactly six legacy keys, no own firstFailure; inherited measured fields identical under candidate. Scoped expected RED only for field requirement, not import failure; never historical regression.",
+    "classification": "AUTHOR_EXPECTATION_NOT_NATIVE",
+    "nativeMode": "S01 nested assertion, no 36th ID; legacy import requires explicit Root scope clarification before native."
+  },
+  "newPublisher": "For each of 35, compare projector, actual collector and successPacket carried value byte-for-byte to literal expected; marker, fixed E2 schema/context and before/after13 checked. Prior native layouts from toy only; optional native facts cannot grant historical attribution.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
