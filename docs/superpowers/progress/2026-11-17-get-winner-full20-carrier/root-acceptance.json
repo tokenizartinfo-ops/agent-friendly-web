@@ -1,0 +1,46 @@
+{
+  "schema": "AFW.C2.GET_WINNER.CARRIER_ROOT_ACCEPTANCE/1",
+  "timestampUTC": "2026-11-17 23:22:05 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "carrier": "de40fdd5cb0a0aabdf0f0c52281c80ecb2734ab5",
+  "rootMeasurement": "dd2899bb2c0883008ccb12dfb911f0d10aecb072",
+  "review": "ddb1a3717267674aa8a51bfe66ee5f460891e828",
+  "fixReview": "4dd9633ad96840b6415f9e443af40826f3096f4c",
+  "ruling": "Accept closed/unactivated carrier DATA and conditional STATIC application route premise for these exact Source13/mount/runner pins. Permit implementation of dependent Task2 consumer only. No business/native full20 occurrence, Source qualification or runtime release is granted.",
+  "reason": "I1 reconciled documentation with preserved count-only compatibility, all26 current bodies independently measured, 22 cumulative reversible directions remain valid, fix-only4 additional directions verified, static spec+quality and scoped fix accepted without open findings.",
+  "route": {
+    "scope": "CONDITIONAL_STATIC_APPLICATION_CONSTRUCTION_ONLY",
+    "source13": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "runner": "50acdda42fd32a706b4a33bb214dc195b4485766",
+    "notDerivedFromToolHeaderAlone": true,
+    "noFull20OccurrenceProof": true,
+    "noAuthenticationOrCrossIsolateIdentityClaim": true,
+    "externalRootOneUseGateStillRequired": true
+  },
+  "task2ImplementationReleased": true,
+  "task2NativeGateReleased": false,
+  "SourceNativeGateReleased": false,
+  "remainingBeforeFull20": [
+    "Exact four-input consumer binding and focused visible MODEL fixtures/guards",
+    "Independent static consumer review",
+    "Root-gated OWN native controls, once-only capture/closure/independent actual review",
+    "Fresh exact one-use Source activation gate including BASE/protected refs/absence/complete tree/privileges"
+  ],
+  "carrierFixRound": 1,
+  "carrierFixCap": 5,
+  "Source5": 5,
+  "OWN5": 5,
+  "StageB": 5,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
