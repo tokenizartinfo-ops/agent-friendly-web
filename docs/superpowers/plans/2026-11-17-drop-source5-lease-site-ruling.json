@@ -1,0 +1,47 @@
+{
+  "schema": "AFW-DROP-SOURCE5-LEASE-SITES-RULING/1",
+  "atUTC": "2026-11-17 13:03:10 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "allowedAction": "Extend only the diagnostic site allowlist/configuration and pre-code fixture data to two concrete original lease-guard callsites; no algorithm, guard, clock or transport changes",
+  "source": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+  "file": "lib/mcp-qa-finite-owner-preparation.mjs",
+  "sites": [
+    {
+      "label": "S01:69",
+      "meaning": "Original request lease assertCurrent rejection",
+      "anchor": "if(closed||controller.signal.aborted||!Number.isSafeInteger(at)||at<last||at>=deadline||elapsed<0||elapsed>=budget)fail();last=at;",
+      "decision": "Inspect request lease lifetime/holder and retained-work cost; do not infer which conjunct or provider cause."
+    },
+    {
+      "label": "S01:95",
+      "meaning": "Original child lease assertCurrent rejection",
+      "anchor": "if(!active||controller.signal.aborted||at<last||at>=end||elapsed<0||elapsed>=end-wall)fail();",
+      "decision": "Inspect the child operation boundary and retained work; no clock extension."
+    }
+  ],
+  "why": "These exact guards are on the pre-append path and choose a different investigation from finite prerequisites/readback. Discarding an exactly verified guard as UNKNOWN would waste the last diagnostic. Generic arbitrary locations remain excluded.",
+  "conditions": [
+    "Preserve all original59 scenario rows/IDs/order/expected values and original immutable fixture/checker artifacts; append four independently specified scenarios in a new sealed fixture version before adding these classifier entries.",
+    "Two positive exact original throw+caller mappings, two adjacent/wrong/unproved mapping controls => UNKNOWN. No nearest-line inference.",
+    "The same script/source-map/transformed-anchor provenance gates apply, including Source original bytes and exact segments. If no reliable mapping, UNKNOWN.",
+    "Allowed output remains exactly case/site/outer/publicSite; site/publicSite enum adds only S01:69 and S01:95. No raw paths/frames/identifiers.",
+    "No frozen Source01 bytes/branch/parent or request/child clock/abort behavior may change. Add data/config entries only; preserve existing call counts and response provenance.",
+    "No new native occurrence or broad test round authorized; include focused covering checks in planned tooling."
+  ],
+  "rollback": "Discard the two allowlist entries/new fixture data; retain original59 and code/model RED history unchanged.",
+  "ruling": "Proceed within source cycle5 with bounded explicit enum data; not a new diagnostic family/reset, no business repair or clock hypothesis claimed.",
+  "codeReleased": true,
+  "nativeReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
