@@ -1,0 +1,32 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.STARTUP1.CLOSE_INTENT/1",
+  "timestampUTC": "2026-11-17 16:56:14 UTC",
+  "branch": "lab/afw-c2-get-winner-20261117-fixtures-startup1",
+  "attemptedHead": "8839c37f5d3267e8a1ed372ba5dfb0d30166267e",
+  "attemptedTree": "e8a2623120a1680bc3c0127104c448f33cb84d20",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "run": 44130157151,
+  "job": 134204703237,
+  "primary": "aed235208220bc5e0689cd58920c595ec5762a18",
+  "outcome": "89a821300c3a9f5360f60e2b76eba245c56a734c",
+  "outcomeKind": "PREREQUISITE_FAILURE_WITH_BOUNDED_DIAGNOSTIC",
+  "removeOnlyWorkflow": ".github/workflows/afw-c2-get-winner-fixtures-startup1.yml",
+  "expectedLeaves": 3237,
+  "preserve": {
+    "original": 3203,
+    "survivingAdded": 32,
+    "newEvidence": 2
+  },
+  "noRerunOrNewRelease": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
