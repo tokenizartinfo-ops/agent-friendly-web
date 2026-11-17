@@ -1,0 +1,84 @@
+{
+  "schema": "AFW-DIAG2-ACTUAL-SOURCE-ROOT-CLOSE-READBACK/1",
+  "timestampUTC": "2026-11-17 02:23:17 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "primary": "16f788a652c644763d74ffa0e955375786064c2d",
+  "outcome": "f7306430e390cf69787347daa1b8b396b543dbc5",
+  "actualOwnAdmission": "6d2f2e1a54507f70e2f553512dc35472e529e96e",
+  "closedHead": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+  "closedTree": "eee20d1530be7b456648740946123c1ea52e3d22",
+  "parent": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+  "ref": {
+    "ref": "refs/heads/lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+    "node_id": "REF_kwDOUFJoltoAQXJlZnMvaGVhZHMvbGFiL2Fmdy1jMi1zb3VyY2UtMjAyNjExMTctdDEtZmlyc3QtZmFpbHVyZS1wb3N0LWRpYWcy",
+    "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/refs/heads/lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+    "object": {
+      "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+      "type": "commit",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/c4f2e09b4befa0f3faa61fe104748e3f382fdc01"
+    }
+  },
+  "commit": {
+    "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+    "node_id": "C_kwDOUFJoltoAKGM0ZjJlMDliNGJlZmEwZjNmYWE2MWZlMTA0NzQ4ZTNmMzgyZmRjMDE",
+    "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+    "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/c4f2e09b4befa0f3faa61fe104748e3f382fdc01",
+    "author": {
+      "name": "tokenizart",
+      "email": "tokenizart.info@gmail.com",
+      "date": "2026-11-17T02:22:30Z"
+    },
+    "committer": {
+      "name": "tokenizart",
+      "email": "tokenizart.info@gmail.com",
+      "date": "2026-11-17T02:22:30Z"
+    },
+    "tree": {
+      "sha": "eee20d1530be7b456648740946123c1ea52e3d22",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/trees/eee20d1530be7b456648740946123c1ea52e3d22"
+    },
+    "message": "AFW close actual full-order DIAG2 source capture; preserve admitted incomplete result",
+    "parents": [
+      {
+        "sha": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+        "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/32fe5795e31648a3f5f59e042f12edc56d92c224",
+        "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/32fe5795e31648a3f5f59e042f12edc56d92c224"
+      }
+    ],
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "leaves": 3229,
+  "allOriginal3203Preserved": true,
+  "onlyWorkflowDeletedAndTwoEvidenceAdditions": true,
+  "mainAndHistoryLeases": {
+    "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+    "source": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "own42": "c511b6f061fb4eb0c5594779d3123e824f34f243",
+    "source35": "ee43d4669d5ed63832e326ea47a3579a12190c09",
+    "diag1": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+    "host": "1f62e087f0d9000f9c08519cd162db1104827af8",
+    "toy": "5f5295265217b31a19fbed2379f697c5a6a83080"
+  },
+  "closedHeadRuns": 0,
+  "diagnosticAdmitted": true,
+  "full20Incomplete": true,
+  "noReplayAuthorized": true,
+  "SourceBusinessExecuted": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
