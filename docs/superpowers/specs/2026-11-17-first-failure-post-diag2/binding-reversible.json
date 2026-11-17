@@ -1,0 +1,438 @@
+{
+  "schema": "afw.c2-first-failure-post-diag2.reversible-bindings.v1",
+  "authority": "8781b614dd914f581c0a6806c4f92423242eac79",
+  "method": "Each entire old and new UTF-8 Git blob can be fetched directly. The byte-splice below keeps the common prefix/suffix and replaces its old middle with exactly the indicated byte slice of the pinned new raw blob. Reverse using the old raw slice. Both directions reconstructed and compared in RAM to the full originals. Lists of JSON pointers describe semantic deltas; they are not required for byte-exact reconstruction.",
+  "selection": {
+    "before": {
+      "bytes": 3956,
+      "sha256": "e596e1b7982a13d0fb0bf92d68907b2262496fae024cef149d7d297168596f99",
+      "blob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d"
+    },
+    "after": {
+      "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+      "bytes": 4070,
+      "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e",
+      "fullReadback": true
+    },
+    "prefixBytes": 22,
+    "suffixBytes": 822,
+    "oldMiddle": {
+      "offset": 22,
+      "bytes": 3112,
+      "sha256": "e405db8159cf06adafd5f4eef88ff3926a869dffcd2de17f22b7bfaa8e801eb5",
+      "readFrom": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d"
+    },
+    "newMiddle": {
+      "offset": 22,
+      "bytes": 3226,
+      "sha256": "95d8cecccc691540b5f0cf25c00eeb000fcfc3413dd5b97af1c769b521ac07e0",
+      "readFrom": "5a554a8fb75439f1549d03baf29be09572fdddac"
+    },
+    "forwardAndReverseByteExact": true,
+    "changedJsonPointers": [
+      "/schema",
+      "/sourceIndexBlob",
+      "/sourceIndexSha256",
+      "/aliases/10/blob",
+      "/aliases/10/bytes",
+      "/aliases/10/sha256"
+    ],
+    "changedTopLevelKeys": [
+      "schema",
+      "sourceIndexBlob",
+      "sourceIndexSha256",
+      "aliases"
+    ]
+  },
+  "outerSchema": {
+    "before": {
+      "bytes": 21200,
+      "sha256": "a671dd7cd1d1707af81e7a24094b105d8f1be3f6067a5aef8e5c32f3794937d3",
+      "blob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc"
+    },
+    "after": {
+      "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb",
+      "fullReadback": true
+    },
+    "prefixBytes": 79,
+    "suffixBytes": 13,
+    "oldMiddle": {
+      "offset": 79,
+      "bytes": 21108,
+      "sha256": "cc1b3144f95950b1aa157959946120c3331879c749eaf6fefa61a1a5921a3df3",
+      "readFrom": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc"
+    },
+    "newMiddle": {
+      "offset": 79,
+      "bytes": 26308,
+      "sha256": "c6c4e9f892bef25cff27329c162c907b680035d1dc5f0804aabc3e71a03dbe5b",
+      "readFrom": "90e52e44f2364355c6a25daccb4684ed41ba0f7e"
+    },
+    "forwardAndReverseByteExact": true,
+    "changedJsonPointers": [
+      "/title",
+      "/$defs/context/properties/sourceIndexBlob/const",
+      "/$defs/context/properties/proposalIndexHash/const",
+      "/$defs/context/properties/selectionHash/const",
+      "/$defs/context/properties/job/const",
+      "/$defs/custody/properties/schema/const",
+      "/$defs/observation/properties/firstFailure",
+      "/$defs/observation/required/6",
+      "/$defs/outcome/properties/schema/const",
+      "/$defs/fault/properties/schema/const",
+      "/$defs/sourceReads/properties/beforeSha256/const/10",
+      "/$defs/sourceReads/properties/afterSha256/const/10",
+      "/$defs/firstFailure"
+    ],
+    "changedTopLevelKeys": [
+      "title",
+      "$defs"
+    ]
+  },
+  "protocol": {
+    "before": {
+      "bytes": 21378,
+      "sha256": "8891598c7c0ee416762ad65d139c7e9336cc33e4123e251211055e42c3265fe7",
+      "blob": "e55a6387549a8447a5ad93356184645ae19e70de"
+    },
+    "after": {
+      "blob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e",
+      "bytes": 41095,
+      "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389",
+      "fullReadback": true
+    },
+    "prefixBytes": 22,
+    "suffixBytes": 310,
+    "oldMiddle": {
+      "offset": 22,
+      "bytes": 21046,
+      "sha256": "04a334121f648e32f7e56c5ce5b0173a213526c113fadcf3301294b312b71a0c",
+      "readFrom": "e55a6387549a8447a5ad93356184645ae19e70de"
+    },
+    "newMiddle": {
+      "offset": 22,
+      "bytes": 40763,
+      "sha256": "6a0eac80575f1b983d9f5fc9d063e606425edc561c0072baa4b8039a93dfde9b",
+      "readFrom": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e"
+    },
+    "forwardAndReverseByteExact": true,
+    "changedJsonPointers": [
+      "/schema",
+      "/status",
+      "/authority",
+      "/environment",
+      "/basis",
+      "/frozen",
+      "/sourceNomination/branch",
+      "/sourceNomination/message",
+      "/sourceNomination/workflow",
+      "/sourceNomination/job",
+      "/sourceNomination/prefix",
+      "/sourceNomination/runner",
+      "/sourceNomination/command",
+      "/sourceNomination/artifact/name",
+      "/sourceNomination/artifact/path",
+      "/sourceNomination/artifact/fileName",
+      "/sourceNomination/requiredSteps",
+      "/ownNomination",
+      "/selection/role",
+      "/selection/blob",
+      "/selection/bytes",
+      "/selection/sha256",
+      "/selectionWireHash",
+      "/schemaPin/role",
+      "/schemaPin/blob",
+      "/schemaPin/bytes",
+      "/schemaPin/sha256",
+      "/inventory",
+      "/examples",
+      "/steps",
+      "/sourceWorkflow",
+      "/wire/success/0/marker",
+      "/wire/success/1/marker",
+      "/wire/fault/marker",
+      "/wire/order/observation/6",
+      "/wire/order/firstFailure",
+      "/wire/order/firstFailureSource",
+      "/wire/order/firstFailureCounters",
+      "/wire/order/firstFailureAssertion",
+      "/wire/order/nonclaims",
+      "/wire/firstFailureBodyBytesMax",
+      "/identity/activeIndex",
+      "/gates",
+      "/purpose",
+      "/source",
+      "/selectionWireBytes",
+      "/selectionWireRule",
+      "/caps",
+      "/firstFailure",
+      "/receiver"
+    ],
+    "changedTopLevelKeys": [
+      "schema",
+      "status",
+      "authority",
+      "environment",
+      "basis",
+      "frozen",
+      "sourceNomination",
+      "ownNomination",
+      "selection",
+      "selectionWireHash",
+      "schemaPin",
+      "inventory",
+      "examples",
+      "steps",
+      "sourceWorkflow",
+      "wire",
+      "identity",
+      "gates",
+      "purpose",
+      "source",
+      "selectionWireBytes",
+      "selectionWireRule",
+      "caps",
+      "firstFailure",
+      "receiver"
+    ]
+  },
+  "inherited": {
+    "directlyIdenticalDefs": [
+      "streamOut",
+      "streamErr",
+      "capture",
+      "journal",
+      "site",
+      "error",
+      "event",
+      "openCase",
+      "witness",
+      "nativeCase",
+      "native"
+    ],
+    "sixChangedDefs": [
+      "context",
+      "sourceReads",
+      "observation",
+      "custody",
+      "outcome",
+      "fault"
+    ],
+    "check": "For each of the other six inherited defs restored ONLY old known context constants, old family strings, prior S10 sourceReads element at ordinal 10, or removed the added observation.firstFailure property/required entry as applicable. Byte-value/order identity with its old definition then verified. All 17 original definitions plus the original oneOf/$ref surface survive. One new complete C1 definition.",
+    "firstFailureFragmentRawCanonicalSha256": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+    "sourceCorpusCanonicalSha256": "15d470df5e7ed5350bdedb333236f648c86e69c844e5784d1d8478f6ebac5aaf",
+    "selected20CanonicalSha256": "f6718c2d0852789be60249467a37211eca1bffe17a73bb430da8e698a34d2354",
+    "unchangedInheritedProtocolSections": [
+      "custody",
+      "capture",
+      "journal",
+      "nativeAndCross",
+      "transport",
+      "fault"
+    ],
+    "familyIndependent": "Both NO_QUALIFYING_THROW and TARGET_PASSED require the context specified in C1, including its full ordered reason precedence. Evaluate C1 source/verifiable OWN agreements in addition to ordinary JSON Schema. Type/pattern shape alone never supplies a future occurrence ID."
+  },
+  "inventory": {
+    "original": "2f25941491df234890036ae8cf0609e323207b67",
+    "candidate": {
+      "blob": "932a26178e388620d47e91b71384b8537860be18",
+      "bytes": 16604,
+      "sha256": "16ff4326a8c05404148a162e2b594447a928b35a55006fb7d9577a4135111a62",
+      "fullReadback": true
+    },
+    "base3203Preserved": true,
+    "edgeCount": 25,
+    "rawBeforeAfter": [
+      {
+        "ordinal": 0,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/source-index.json",
+        "oldBlob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+        "newPath": "docs/superpowers/source-lab/c2-t1/source-index.json",
+        "newBlob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec"
+      },
+      {
+        "ordinal": 1,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "oldBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "newBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5"
+      },
+      {
+        "ordinal": 2,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "oldBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "newBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908"
+      },
+      {
+        "ordinal": 3,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "oldBlob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "newBlob": "8505cfe4e020c570ec37cb5943b703770e4d06c8"
+      },
+      {
+        "ordinal": 4,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "oldBlob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "newBlob": "8b43e03e96b055be49b66a6788b27f129dd894c8"
+      },
+      {
+        "ordinal": 5,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "oldBlob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "newBlob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e"
+      },
+      {
+        "ordinal": 6,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "oldBlob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "newBlob": "a177d50ff73f8fad1d60827ef904a204126796fb"
+      },
+      {
+        "ordinal": 7,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "oldBlob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "newBlob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966"
+      },
+      {
+        "ordinal": 8,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "oldBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "newBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+      },
+      {
+        "ordinal": 9,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "oldBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "newBlob": "de8a51e5a6023342b1b3aeccadf66e90611d268f"
+      },
+      {
+        "ordinal": 10,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "oldBlob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "newBlob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3"
+      },
+      {
+        "ordinal": 11,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "oldBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "newBlob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7"
+      },
+      {
+        "ordinal": 12,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "oldBlob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "newBlob": "19441f9aa4a464b9594431b6e196d4318a7809b3"
+      },
+      {
+        "ordinal": 13,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "oldBlob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "newPath": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "newBlob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd"
+      },
+      {
+        "ordinal": 14,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "oldBlob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+        "newPath": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+        "newBlob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb"
+      },
+      {
+        "ordinal": 15,
+        "oldPath": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "oldBlob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+        "newPath": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+        "newBlob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2"
+      },
+      {
+        "ordinal": 16,
+        "oldPath": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/mode-selection.json",
+        "oldBlob": "2cbdeb48255afbc1a1bf7745170541e8baab0e1d",
+        "newPath": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/mode-selection.json",
+        "newBlob": "5a554a8fb75439f1549d03baf29be09572fdddac"
+      },
+      {
+        "ordinal": 17,
+        "oldPath": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/frame-schema.json",
+        "oldBlob": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+        "newPath": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/frame-schema.json",
+        "newBlob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e"
+      },
+      {
+        "ordinal": 18,
+        "oldPath": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/protocol-contract.json",
+        "oldBlob": "e55a6387549a8447a5ad93356184645ae19e70de",
+        "newPath": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/protocol-contract.json",
+        "newBlob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e"
+      },
+      {
+        "ordinal": 19,
+        "oldPath": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/collection-adapters.mjs",
+        "oldBlob": "5c8123b9e66166a198add4a0593372cfef13a1db",
+        "newPath": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+        "newBlob": null
+      },
+      {
+        "ordinal": 20,
+        "oldPath": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/read-progress.mjs",
+        "oldBlob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "newPath": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/read-progress.mjs",
+        "newBlob": "62a31e3c16cc710c84ebfb5b0242abb00671363c"
+      },
+      {
+        "ordinal": 21,
+        "oldPath": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/diagnostic-driver.txt",
+        "oldBlob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+        "newPath": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/diagnostic-driver.txt",
+        "newBlob": "9e29c5197207b03bdb4b10069089f37df289e88c"
+      },
+      {
+        "ordinal": 22,
+        "oldPath": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/progress-recorder.txt",
+        "oldBlob": "662ec8170bbfe81831b557824d1a466e722842d7",
+        "newPath": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/progress-recorder.txt",
+        "newBlob": "662ec8170bbfe81831b557824d1a466e722842d7"
+      },
+      {
+        "ordinal": 23,
+        "oldPath": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/run-green-frontier-diag1.mjs",
+        "oldBlob": "dec4bb5585375423ca87d8d3baecb2edbe733b6f",
+        "newPath": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+        "newBlob": null
+      },
+      {
+        "ordinal": 24,
+        "oldPath": ".github/workflows/afw-c2-green-frontier-diag1.yml",
+        "oldBlob": "b7d82b817f7473f7bbc4197843f08410b7789e15",
+        "newPath": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+        "newBlob": null
+      }
+    ],
+    "meaning": "The three absent new blobs concern separately held executable DATA. No forward code image exists and this document performs or authorizes no ref action. The complete previous family and raw original 3203 tree remain recoverable by immutable hashes."
+  },
+  "performed": "Created detached JSON documents only, full immutable readback. No source business or executable code prepared, imported, evaluated, compiled, parsed by AST or tested. No references or runs.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

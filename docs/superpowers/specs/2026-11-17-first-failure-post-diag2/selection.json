@@ -1,0 +1,129 @@
+{
+  "schema": "afw.c2-first-failure-post-diag2-selection.v1",
+  "sourceIndexBlob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+  "sourceIndexSha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+  "normalGreenSelectionHash": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5",
+  "node": "v22.23.4",
+  "sdk": "1.2.1",
+  "originalDriver": {
+    "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+    "bytes": 2785,
+    "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+    "git": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+  },
+  "driver": {
+    "path": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "bytes": 3169,
+    "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+    "git": "9e29c5197207b03bdb4b10069089f37df289e88c"
+  },
+  "registrationTail": {
+    "originalOffset": 991,
+    "driverOffset": 1375,
+    "bytes": 1794,
+    "sha256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a"
+  },
+  "recorder": {
+    "path": "test/finite-green-progress-recorder.mjs",
+    "bytes": 3833,
+    "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e",
+    "git": "662ec8170bbfe81831b557824d1a466e722842d7"
+  },
+  "reader": {
+    "file": "read-progress.mjs",
+    "bytes": 5507,
+    "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f",
+    "git": "62a31e3c16cc710c84ebfb5b0242abb00671363c"
+  },
+  "aliases": [
+    {
+      "id": "S00",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5"
+    },
+    {
+      "id": "S01",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908"
+    },
+    {
+      "id": "S02",
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8"
+    },
+    {
+      "id": "S03",
+      "path": "worker/mcp-own/finite.mjs",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8"
+    },
+    {
+      "id": "S04",
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e"
+    },
+    {
+      "id": "S05",
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb"
+    },
+    {
+      "id": "S06",
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966"
+    },
+    {
+      "id": "D07",
+      "path": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c"
+    },
+    {
+      "id": "S08",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f"
+    },
+    {
+      "id": "S09",
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3"
+    },
+    {
+      "id": "S10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+    },
+    {
+      "id": "S11",
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3"
+    },
+    {
+      "id": "S12",
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd"
+    }
+  ],
+  "selected": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ]
+}

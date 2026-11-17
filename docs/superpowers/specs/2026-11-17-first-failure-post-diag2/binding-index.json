@@ -1,0 +1,109 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-BINDING-DATA-INDEX/1",
+  "status": "DETACHED_FULL_CONTRACT_READY_FOR_PEER_REVIEW_AND_ROOT_DECISION",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": {
+    "design": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+    "supplement": "8781b614dd914f581c0a6806c4f92423242eac79",
+    "C1": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+    "hostAccepted": "55e95b5018e7fef76caeef64f2982e504a5e7a60"
+  },
+  "bodies": {
+    "selection": {
+      "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+      "bytes": 4070,
+      "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e",
+      "fullReadback": true
+    },
+    "completeFrameSchema": {
+      "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb",
+      "fullReadback": true
+    },
+    "fullProtocol": {
+      "blob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e",
+      "bytes": 41095,
+      "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389",
+      "fullReadback": true
+    },
+    "orderedDraft25Edges": {
+      "blob": "932a26178e388620d47e91b71384b8537860be18",
+      "bytes": 16604,
+      "sha256": "16ff4326a8c05404148a162e2b594447a928b35a55006fb7d9577a4135111a62",
+      "fullReadback": true
+    },
+    "reversibleDiff": {
+      "blob": "c5fde2d6a7d6e5e980d4d74a3e0d12b8357bf819",
+      "bytes": 17114,
+      "sha256": "cd2e9bcb7460dbdf9d31461c998986e110bd07d221b934f244e85c35e1f35415",
+      "fullReadback": true
+    }
+  },
+  "selectionWire": {
+    "encoding": "UTF8(JSON.stringify(selection)), no LF",
+    "bytes": 3317,
+    "sha256": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc"
+  },
+  "selectionFile": {
+    "encoding": "UTF8(JSON.stringify(selection,null,2)+LF)",
+    "bytes": 4070,
+    "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e"
+  },
+  "source13": {
+    "index": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "rawBytes": 11467,
+    "rawSha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+    "S10": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+    "S10Sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+    "unchanged": 12,
+    "orderedSelectedIds": 20,
+    "registrationTailBytes": 1794
+  },
+  "verification": {
+    "schemaRetainedDefs": 17,
+    "byteIdenticalDefs": 11,
+    "checkedRestoreOfOtherInheritedDefs": 6,
+    "newRequiredLastObservationKey": "firstFailure",
+    "firstFailureObjectKeys": [
+      "schema",
+      "state",
+      "reason",
+      "throwSequence",
+      "source",
+      "assertion"
+    ],
+    "componentSeals": {
+      "encoding": "SHA256 de UTF8(JSON.stringify(componente)) sinLF, excepto toyUtf8 que hashea su stringexacto",
+      "schemaSha256": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+      "sourceCorpusSha256": "15d470df5e7ed5350bdedb333236f648c86e69c844e5784d1d8478f6ebac5aaf",
+      "toyUtf8Sha256": "988b241402d628d86c1a2513af80ba14be22540cc2c97925e8e81837f4ee5d69",
+      "selectedIdsSha256": "f6718c2d0852789be60249467a37211eca1bffe17a73bb430da8e698a34d2354"
+    },
+    "rawGitDataEdgesVerified": 22,
+    "expectedTotalEdges": 25,
+    "sourceAndOwnerPeers": "Selection/schema/protocol/inventory delivered to the Source designer and independent OWN author. OWN confirmed canonical selection/E2/firstFailure and no relaxation of inherited schema constraints by direct data comparison. Peer correspondence and definitive approval are separately held by Root.",
+    "fullBeforeAfterDiffsVerified": 3
+  },
+  "gates": {
+    "newCollectorPinBound": false,
+    "newRunnerPinBound": false,
+    "newWorkflowPinBound": false,
+    "occurrenceExpectationsBound": false,
+    "approvalForParserCode": false,
+    "businessAuthorization": false,
+    "guard": "Actual Node 22 toy-format acceptance, complete Source/OWN contract agreement and separate Root release precede parser code. No unknown field in this inventory is an admissible expectation. No accepted historical scalar/counter transfer."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
