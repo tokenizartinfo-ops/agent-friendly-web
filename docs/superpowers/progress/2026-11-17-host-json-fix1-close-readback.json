@@ -1,0 +1,85 @@
+{
+  "schema": "AFW-HOST-JSON-FIX1-TOOLS-CLOSE-READBACK/1",
+  "timestampUTC": "2026-11-17 00:21:57 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "testedHead": "b86a289c1fd856e4c972753938c7512ecd067310",
+  "closedHead": "1f62e087f0d9000f9c08519cd162db1104827af8",
+  "closedTree": "91a06578f7270a86ac18d1075ad9fc710beb661c",
+  "receipt": "3515e8797b512aaa6a8ba71b6d0db9118917e0a6",
+  "primary": "38b19d479e1f01b901e99840ff493e1764678714",
+  "proof": "6fef356140f55010261133cc6a4b19446b0bc73c",
+  "leafCount": 3227,
+  "original3203Unchanged": true,
+  "other22Unchanged": true,
+  "onlyWorkflowRemoved": true,
+  "twoEvidenceLeavesAdded": true,
+  "mainUnchanged": true,
+  "historicalUnchanged": true,
+  "closeHeadRuns": 0,
+  "result": {
+    "APIContextJoined": true,
+    "commandStep": 4,
+    "inputs": 23,
+    "rawNativeSuites": 2,
+    "old": {
+      "tests": 4,
+      "pass": 3,
+      "fail": 1,
+      "expectedRED": true,
+      "calls": 2
+    },
+    "candidate": {
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "calls": 1,
+      "checks": 13
+    },
+    "exactRawTAPBoth": true,
+    "allIndependentLiteralFactsMatched": true,
+    "target13oldNewOnlyS10Changed": true,
+    "CanonicalLF": true,
+    "ZIPStrictCRCFullInflateVerified": true,
+    "APIDigestJoined": true,
+    "ownTempRemoved": true,
+    "SourceBusinessExecution": false,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "nonclaims": {
+      "historicalCauseProven": false,
+      "receiptAuthenticated": false,
+      "operationalReadiness": false,
+      "completePackage": false,
+      "PCoff": false,
+      "globalNativeDrainVerified": false,
+      "sdkNamespaceEmptyVerified": false
+    },
+    "zip": {
+      "bytes": 4150,
+      "sha256": "ca8e41f9c1c126425666b27160d4d7891ed65a3e17a75d8f8c348a9131055fe5",
+      "blob": "df125a87228f2b47a8baef1218bfc047b9110684"
+    },
+    "payload": {
+      "bytes": 13571,
+      "sha256": "3369880046e605f7d9a0731bbfb6bc44a2510b37c31b0a776b890dc603ec0ce5",
+      "blob": "6fef356140f55010261133cc6a4b19446b0bc73c"
+    },
+    "rawLog": {
+      "bytes": 29243,
+      "sha256": "c647a220ee7574a94d54b831c27a0f982f384e9f5c04de00172e8c7461f2526d",
+      "blob": "7ed5e46edc176e55d87ca6c637b8094e18b96ee5"
+    }
+  },
+  "SourceBusinessExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
