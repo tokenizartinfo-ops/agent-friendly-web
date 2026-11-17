@@ -1,0 +1,790 @@
+{
+  "diagnosticCollectionAccepted": true,
+  "context": {
+    "repository": "tokenizartinfo-ops/agent-friendly-web",
+    "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "sourceIndexBlob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "proposalIndexHash": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+    "selectionHash": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc",
+    "head": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+    "tree": "25765b8c85c7657e7d8084647198064b4f597965",
+    "runId": "44000942332",
+    "runAttempt": 1,
+    "job": "c2-first-failure-post-diag2",
+    "node": "v22.23.4"
+  },
+  "jobId": 133764541578,
+  "commandStepNumber": 5,
+  "tree": {
+    "matchedBodyEdges": 25
+  },
+  "replay": {
+    "witness": {
+      "integrity": "prefix",
+      "frontier": "action",
+      "events": [
+        {
+          "sequence": 1,
+          "elapsedMs": 10,
+          "id": "C2T1_CONNECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 2,
+          "elapsedMs": 26269,
+          "id": "C2T1_CONNECTION",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 3,
+          "elapsedMs": 26269,
+          "id": "C2T1_CONNECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 4,
+          "elapsedMs": 26301,
+          "id": "C2T1_CONNECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 5,
+          "elapsedMs": 26302,
+          "id": "C2T1_OAUTH",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 6,
+          "elapsedMs": 41365,
+          "id": "C2T1_OAUTH",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 7,
+          "elapsedMs": 41366,
+          "id": "C2T1_OAUTH",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 8,
+          "elapsedMs": 41397,
+          "id": "C2T1_OAUTH",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 9,
+          "elapsedMs": 41398,
+          "id": "C2T1_HANDLE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 10,
+          "elapsedMs": 62312,
+          "id": "C2T1_HANDLE",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 11,
+          "elapsedMs": 62312,
+          "id": "C2T1_HANDLE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 12,
+          "elapsedMs": 62346,
+          "id": "C2T1_HANDLE",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 13,
+          "elapsedMs": 62347,
+          "id": "C2T1_PROJECTREF",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 14,
+          "elapsedMs": 65844,
+          "id": "C2T1_PROJECTREF",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 15,
+          "elapsedMs": 65844,
+          "id": "C2T1_PROJECTREF",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 16,
+          "elapsedMs": 65880,
+          "id": "C2T1_PROJECTREF",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 17,
+          "elapsedMs": 65881,
+          "id": "C2T1_SUBJECT",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 18,
+          "elapsedMs": 68143,
+          "id": "C2T1_SUBJECT",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 19,
+          "elapsedMs": 68143,
+          "id": "C2T1_SUBJECT",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 20,
+          "elapsedMs": 68173,
+          "id": "C2T1_SUBJECT",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 21,
+          "elapsedMs": 68173,
+          "id": "C2T1_PHASE_RENAME",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 22,
+          "elapsedMs": 69258,
+          "id": "C2T1_PHASE_RENAME",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 23,
+          "elapsedMs": 69258,
+          "id": "C2T1_PHASE_RENAME",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 24,
+          "elapsedMs": 69287,
+          "id": "C2T1_PHASE_RENAME",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 25,
+          "elapsedMs": 69288,
+          "id": "C2T1_SOURCE_BYTES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 26,
+          "elapsedMs": 69607,
+          "id": "C2T1_SOURCE_BYTES",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 27,
+          "elapsedMs": 69608,
+          "id": "C2T1_SOURCE_BYTES",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 28,
+          "elapsedMs": 69635,
+          "id": "C2T1_SOURCE_BYTES",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 29,
+          "elapsedMs": 69635,
+          "id": "C2T1_APPROVAL",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 30,
+          "elapsedMs": 70004,
+          "id": "C2T1_APPROVAL",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 31,
+          "elapsedMs": 70004,
+          "id": "C2T1_APPROVAL",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 32,
+          "elapsedMs": 70033,
+          "id": "C2T1_APPROVAL",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 33,
+          "elapsedMs": 70033,
+          "id": "C2T1_PREDECESSOR",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 34,
+          "elapsedMs": 70447,
+          "id": "C2T1_PREDECESSOR",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 35,
+          "elapsedMs": 70447,
+          "id": "C2T1_PREDECESSOR",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 36,
+          "elapsedMs": 70484,
+          "id": "C2T1_PREDECESSOR",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 37,
+          "elapsedMs": 70484,
+          "id": "C2T1_GRANT_REVOKED",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 38,
+          "elapsedMs": 70959,
+          "id": "C2T1_GRANT_REVOKED",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 39,
+          "elapsedMs": 70960,
+          "id": "C2T1_GRANT_REVOKED",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 40,
+          "elapsedMs": 70989,
+          "id": "C2T1_GRANT_REVOKED",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 41,
+          "elapsedMs": 70990,
+          "id": "C2T1_EXTRA_KEY",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 42,
+          "elapsedMs": 71189,
+          "id": "C2T1_EXTRA_KEY",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 43,
+          "elapsedMs": 71189,
+          "id": "C2T1_EXTRA_KEY",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 44,
+          "elapsedMs": 71216,
+          "id": "C2T1_EXTRA_KEY",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 45,
+          "elapsedMs": 71216,
+          "id": "C2T1_NOTICES",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 46,
+          "elapsedMs": 98250,
+          "id": "C2T1_NOTICES",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 47,
+          "elapsedMs": 98250,
+          "id": "C2T1_NOTICES",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 48,
+          "elapsedMs": 98284,
+          "id": "C2T1_NOTICES",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 49,
+          "elapsedMs": 98285,
+          "id": "C2T1_MONITOR_COOKIE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 50,
+          "elapsedMs": 98774,
+          "id": "C2T1_MONITOR_COOKIE",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 51,
+          "elapsedMs": 98774,
+          "id": "C2T1_MONITOR_COOKIE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 52,
+          "elapsedMs": 98805,
+          "id": "C2T1_MONITOR_COOKIE",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 53,
+          "elapsedMs": 98806,
+          "id": "C2T1_MONITOR",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 54,
+          "elapsedMs": 103598,
+          "id": "C2T1_MONITOR",
+          "operation": "action",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 55,
+          "elapsedMs": 103598,
+          "id": "C2T1_MONITOR",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 56,
+          "elapsedMs": 103627,
+          "id": "C2T1_MONITOR",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 57,
+          "elapsedMs": 103627,
+          "id": "C2T1_SCOPE_MISSING",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 58,
+          "elapsedMs": 133639,
+          "id": "C2T1_SCOPE_MISSING",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "S08",
+              "line": 18,
+              "column": 118
+            }
+          }
+        },
+        {
+          "sequence": 59,
+          "elapsedMs": 133639,
+          "id": "C2T1_SCOPE_MISSING",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 60,
+          "elapsedMs": 133682,
+          "id": "C2T1_SCOPE_MISSING",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 61,
+          "elapsedMs": 133683,
+          "id": "C2T1_FINITE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 62,
+          "elapsedMs": 161670,
+          "id": "C2T1_FINITE",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "S08",
+              "line": 18,
+              "column": 118
+            }
+          }
+        },
+        {
+          "sequence": 63,
+          "elapsedMs": 161670,
+          "id": "C2T1_FINITE",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 64,
+          "elapsedMs": 161698,
+          "id": "C2T1_FINITE",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 65,
+          "elapsedMs": 161699,
+          "id": "C2T1_SELECTION",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 66,
+          "elapsedMs": 161733,
+          "id": "C2T1_SELECTION",
+          "operation": "action",
+          "edge": "throw",
+          "error": {
+            "name": "AssertionError",
+            "code": "ERR_ASSERTION",
+            "site": {
+              "file": "S08",
+              "line": 119,
+              "column": 4
+            }
+          }
+        },
+        {
+          "sequence": 67,
+          "elapsedMs": 161733,
+          "id": "C2T1_SELECTION",
+          "operation": "count",
+          "edge": "enter",
+          "error": null
+        },
+        {
+          "sequence": 68,
+          "elapsedMs": 161782,
+          "id": "C2T1_SELECTION",
+          "operation": "count",
+          "edge": "return",
+          "error": null
+        },
+        {
+          "sequence": 69,
+          "elapsedMs": 161782,
+          "id": "C2T1_LOST_ACK_DUPLICATE",
+          "operation": "action",
+          "edge": "enter",
+          "error": null
+        }
+      ],
+      "openCase": {
+        "id": "C2T1_LOST_ACK_DUPLICATE",
+        "operation": "action"
+      },
+      "afterOpen": false
+    },
+    "unknownReason": null,
+    "firstThrowSequence": 58,
+    "native": {
+      "integrity": "prefix",
+      "cases": [
+        {
+          "id": "C2T1_CONNECTION",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_OAUTH",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_HANDLE",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_PROJECTREF",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_SUBJECT",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_PHASE_RENAME",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_SOURCE_BYTES",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_APPROVAL",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_PREDECESSOR",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_GRANT_REVOKED",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_EXTRA_KEY",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_NOTICES",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_MONITOR_COOKIE",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_MONITOR",
+          "status": "pass"
+        },
+        {
+          "id": "C2T1_SCOPE_MISSING",
+          "status": "fail"
+        },
+        {
+          "id": "C2T1_FINITE",
+          "status": "fail"
+        },
+        {
+          "id": "C2T1_SELECTION",
+          "status": "fail"
+        }
+      ]
+    }
+  },
+  "firstFailure": {
+    "schema": "afw.c2-first-failure-post-diag2.v1",
+    "state": "NOT_APPLICABLE",
+    "reason": "EARLIEST_THROW_DIFFERENT",
+    "throwSequence": null,
+    "source": null,
+    "assertion": null
+  },
+  "bindingKind": "ROOT_PINNED_PRODUCER_DATA",
+  "finalSourceBinding": false,
+  "sourceReads": {
+    "beforeSha256": [
+      "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+      "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+      "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+      "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+      "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+      "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+      "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+      "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+      "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    ],
+    "afterSha256": [
+      "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+      "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+      "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+      "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+      "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+      "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+      "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+      "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+      "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    ]
+  },
+  "custody": {
+    "schema": "afw.c2-first-failure-post-diag2-custody.v1",
+    "context": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
+      "baselineSource": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baselineTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "sourceIndexBlob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "proposalIndexHash": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+      "selectionHash": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc",
+      "head": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+      "tree": "25765b8c85c7657e7d8084647198064b4f597965",
+      "runId": "44000942332",
+      "runAttempt": 1,
+      "job": "c2-first-failure-post-diag2",
+      "node": "v22.23.4"
+    },
+    "parentNonRoot": true,
+    "preflightOwned": true,
+    "preflightRemoved": true,
+    "checkedLaunches": 2,
+    "preflightProcesses": 1,
+    "greenProcesses": 1,
+    "checkedProcesses": 2,
+    "uidGidGroupsLoopbackMatched": true,
+    "targetsBeforeMatched": true,
+    "targetsAfterMatched": true,
+    "journalOwnershipMatched": true,
+    "ownRootVerified": true,
+    "ownTempRemoved": true
+  },
+  "capture": {
+    "exitCode": 1,
+    "signal": "none",
+    "errorKind": "timeout",
+    "stdout": {
+      "bytes": 15953,
+      "sha256": "09d9a03eda42f9001684c14377c6627ae0c7cc4ed303896b368f092e945cb6d1"
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "artifact": {
+    "id": 14291893240,
+    "archiveBytes": 2908,
+    "archiveSha256": "3ce82579d04c305194a1a7099cfb12d4b4edb47eaf6fadeb5b7e09009cc6c0a5",
+    "payloadBytes": 12816,
+    "payloadSha256": "4cf086fe9c63406f3c7ecaaceab5cb60395b2bca5a88fa6f572ccef1a5f01c25"
+  },
+  "nativeQualification": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
