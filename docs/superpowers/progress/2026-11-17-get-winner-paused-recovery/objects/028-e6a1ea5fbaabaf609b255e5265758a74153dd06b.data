@@ -1,0 +1,38 @@
+export function getWinnerTuple(w,s,h) {
+  if(!Number.isInteger(s)||!Number.isInteger(h))return false;
+  if(w==='U')return s===0&&h===0;
+  if(w==='L'||w==='V')return s===0&&h===503;
+  return w==='S' && (s===0?h===503:s>=400&&s<=599&&h===([400,401,403,404,405,413,429].includes(s)?s:503));
+}
+export function createGetWinnerHost(main,directRoute) {
+  const tokens=new WeakMap(),seen=new WeakSet(),empty=()=>({w:'U',s:0,h:0});
+  let current=null,poisoned=false;
+  const safe=fn=>(...args)=>{try{return fn(...args);}catch{poisoned=true;return null;}};
+  function begin(label) {
+    if(current||poisoned||!label||tokens.has(label)){poisoned=true;return null;}
+    const entry={label,response:null,calls:0,done:false,value:empty()};
+    const token=Object.freeze({capture:safe((f,r,status)=>{
+      entry.calls++;
+      if(poisoned||entry!==current||entry.done||f!==main||entry.calls!==1||seen.has(r)){poisoned=true;return;}
+      seen.add(r);entry.response=r;
+      if(!directRoute || !(r instanceof Response) || !Number.isInteger(status) || status===200)return;
+      const raw=r.headers.get('x-afw-lab-get-winner');
+      const m=/^g1\.([45][0-9]{2})\.([LSV])\.([45][0-9]{2}|0)$/.exec(raw??'');
+      if(!m||Number(m[1])!==status||!getWinnerTuple(m[2],Number(m[3]),status))return;
+      entry.value={w:m[2],s:Number(m[3]),h:status};
+    })});
+    tokens.set(label,{entry,token});current=entry;return token;
+  }
+  function finish(label) {
+    const item=tokens.get(label);
+    if(!item||item.entry!==current||poisoned){poisoned=true;return;}
+    item.entry.done=true;current=null;
+  }
+  function take(label,f) {
+    const item=tokens.get(label);
+    if(item)tokens.delete(label);
+    if(poisoned||current||!item||f!==main||!item.entry.done||item.entry.calls!==1||!item.entry.response)return empty();
+    return item.entry.value;
+  }
+  return Object.freeze({begin:safe(begin),finish:safe(finish),take:safe(take),poison:safe(()=>{poisoned=true;})});
+}

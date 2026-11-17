@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "67f503402cf1be228bbf5eae45ddac92da8cb02a",
-  "phase": "GET_WINNER_STAGE_B_RETENTION_COMPONENT_DETACHED_IMPLEMENTATION_RELEASED",
+  "phase": "PAUSED_OWNER_RELOCATION_SAVED",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,18 +112,19 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finish sealed model/ordinary/retention component controls and exact final proposal/controller/WF, independent full packet review and Root measurement/gate before any native activation. Product/business/live remain held.",
+  "next": "Owner resume: read authoritative author checkpoint85a59a537ee5ad8ed7da05c35f686892d7f85b78 and three recovery catalogs, restore unfinished controller state4ed0ad41fab668e9158c198fdaae7cc9c9735363. Integrate exact3groups/finalpins/validator/controller/WF/proof/census; stale drafts must never be launched. Then independent fullpacket review, Root remeasurement/preflight/one-use gate. No test/runtimerelease or userauth needed before that work.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
-    "temporarilyDisconnecting": false,
+    "temporarilyDisconnecting": true,
     "resumedAtUTC": "2026-11-16 20:51:24 UTC",
     "currentBlockNeedsManualAction": false,
     "ownerAwayUntilUTC": "2026-11-17T11:00:00Z",
     "ownerLocalBoundary": "Despuésdelas08:00Argentina,17nov",
     "noManualRequestsBeforeBoundary": true,
     "pcLeftOn": true,
-    "ownerNowAvailableByLatestUserMessage": true
+    "ownerNowAvailableByLatestUserMessage": false,
+    "noManualRequestsUntilOwnerResumes": true
   },
   "SourceQualified": false,
   "Task1Pass": false,
@@ -242,8 +243,13 @@
   },
   "relay": {
     "ok": true,
-    "at": "2026-11-17 15:33:01 UTC",
-    "count": 0
+    "at": "2026-11-17 18:55:05 UTC",
+    "count": 2,
+    "newNoticeReferenceOnly": {
+      "requestComment": 6957603515,
+      "replyComment": 6957793271,
+      "action": "RECORDED_ONLY_NO_ACTIVATION_OR_CONSUMPTION"
+    }
   },
   "rulings": [
     {
@@ -665,7 +671,7 @@
       "responsePrimaryNote": "1ded0afe15a9b443240776e3ce4bf4fbc509b79d",
       "actor": "/root/get_winner_fixture_stage_a",
       "scopedReviewer": "/root/get_winner_stage_a_review",
-      "status": "SOURCE_INTERIM_REVIEW_TOOL_PACKET_PENDING",
+      "status": "PAUSED_SAVED_NOT_ACTIVATABLE",
       "currentAuthorSource": {
         "S08": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
         "S09": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
@@ -733,9 +739,45 @@
       "nativeExcludedDomainCases": [
         "M-immutable",
         "M-late-mark"
-      ]
+      ],
+      "pausedAuthorCheckpoint": "85a59a537ee5ad8ed7da05c35f686892d7f85b78",
+      "pausedCensus": "b4e4171322fe4a87ad0ff0f4ce6833a8b2740bfe",
+      "schedule": "e1c905a295251be7d2f94bb961a51a1f6c85321e",
+      "unfinishedControllerState": "4ed0ad41fab668e9158c198fdaae7cc9c9735363",
+      "faultScopedReview": "bf9a23245775a65eea74e78eab13ae59ac5ee635",
+      "cleanupReview": "b46b3fef7ecdb3ff94dfc3a07cda1dc3a792437a",
+      "recoveryArchivePrefix": "docs/superpowers/progress/2026-11-17-get-winner-paused-recovery",
+      "recoveryPointers": 110,
+      "counts": {
+        "frozen": 315,
+        "frozenModelScheduled": 274,
+        "additionalModelScheduled": 13,
+        "totalModelScheduled": 287,
+        "ordinaryDispatches": 15,
+        "retentionDispatches": 8,
+        "faultDispatches": 12,
+        "transportDispatches": 4,
+        "totalNativeDispatches": 39,
+        "toolGroups": 3,
+        "guardedNodeProcessesWithPreflight": 4,
+        "executedStageB": 0
+      },
+      "staleWorkflowMustNotRun": "ded7da7c9cb00361e598c6506017979c959837ef"
     }
   },
-  "schemaVersion": 69,
-  "updatedAtUTC": "2026-11-17 18:42:29 UTC"
+  "schemaVersion": 70,
+  "updatedAtUTC": "2026-11-17 18:58:45 UTC",
+  "pause": {
+    "requestedByOwner": true,
+    "atUTC": "2026-11-17 18:58:45 UTC",
+    "reason": "Owner disconnecting temporarily to relocate; resume only on return",
+    "tabsNeedNotClose": true,
+    "currentNativeExecution": false,
+    "actionsReadbackUTC": "2026-11-17 18:53:59 UTC",
+    "actionsInProgress": 0,
+    "actionsQueued": 0,
+    "sourceAuthorAndReviewerSavedAndStopped": true,
+    "noRuntimeMutationThisTurn": true,
+    "noLocalSourceExecution": true
+  }
 }

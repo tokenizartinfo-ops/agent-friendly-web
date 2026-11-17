@@ -1,0 +1,147 @@
+// MODEL controls. Real publisher/host code, synthetic inputs, explicit Node Response injection.
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { collectObservation, normalizeGetWinner } from './get-winner-collection-adapters.mjs';
+import { createGetWinnerHost } from './test/fixtures/finite-first-connection-publication.mjs';
+import { adaptFrozenCorpus } from './test-corpus-adapter.mjs';
+const parentProjectionIds=["H-joined","H-wrong-window","H-old-marker","H-duplicate-marker","H-missing-marker","H-wrong-case-marker","H-reordered-marker","H-torn-journal-before-count","H-body-read-reject","H-wrong-site","H-GET-pass-DROP-fails","H-later-truncation","H-earlier-native-failure"];
+const hostOnlyIds=["H-lost","H-stale","H-late","H-duplicate","H-overlap","H-case16","H-prior-same-code","H-foreign-main","H-substituted-label","H-changed-label","H-header-getter","H-missing-field","H-stripped","H-duplicate-header","H-combined-header","H-malformed","H-range","H-foreign-status","H-copy-all","H-mount-drift"];
+const heldHostIds=["H-foreign-response","H-torn-marker","H-earlier-journal-failure"];
+const unknown=()=>({case:'15:firstFiniteGET',winner:'UNKNOWN',stubStatus:'UNKNOWN',qaLastCompleted:'UNKNOWN'});
+const file=name=>readFile(new URL(name,import.meta.url));
+function collect(base,input,raw,actual) {
+ const rows=structuredClone([...base.journalPrefix,...input.targetJournal]);
+ for(const delta of input.priorJournalDelta??[])rows[delta.index]=delta.value;
+ let prefix=base.tapPrefix,suffix='';
+ for(const delta of input.priorNativeDelta??[]){
+  const prior=base.nativePrefix[delta.index],ordinal=delta.index+1;
+  const before=(prior.status==='pass'?'ok ':'not ok ')+ordinal+' - '+prior.id+'\n';
+  const after=(delta.value.status==='pass'?'ok ':'not ok ')+ordinal+' - '+delta.value.id+'\n';
+  assert.equal(prefix.split(before).length,2);prefix=prefix.replace(before,after);
+ }
+ if(input.private?.trailingAfterTarget==='unclosed 18 outside closed target prefix'){
+  for(const index of [15,16]){
+   for(const [operation,edge]of [['action','enter'],['action','return'],['count','enter'],['count','return']]){
+    const sequence=rows.length+1;
+    rows.push({sequence,elapsedMs:sequence*2,id:base.ids[index],operation,edge,error:null});
+   }
+   suffix+='# Subtest: '+base.ids[index]+'\n'+'ok '+(index+1)+' - '+base.ids[index]+'\n';
+  }
+  const sequence=rows.length+1;
+  rows.push({sequence,elapsedMs:sequence*2,id:base.ids[17],operation:'action',edge:'enter',error:null});
+  suffix+='# Subtest: '+base.ids[17]+'\n';
+ }
+ const journal=Buffer.from(rows.map(r=>JSON.stringify(r)+'\n').join(''));
+ const drop=input.dropWinner?.outer!=='UNKNOWN'&&input.dropWinner?
+  '# C2DW4 '+JSON.stringify(input.dropWinner)+'\n':'';
+ const before=input.private?.windowAfterSourceOrdinal===15?'':raw;
+ const after=input.private?.windowAfterSourceOrdinal===15?raw:'';
+ const stdout=prefix+drop+before+base.targetSource+after+
+  base.targetHttpTapBeforeActual+actual+base.targetHttpTapAfterActual+suffix;
+ return collectObservation({stdout:Buffer.from(stdout),stderr:Buffer.alloc(0),status:1,signal:null},journal,base.ids);
+}
+function modelHost(p,ids) {
+ const mains=new Map([['m1',{}],['m2',{}]]),labels=new Map(),responses=new Map(),tokens=new Map();
+ for(const name of ['t1','t2','old']){
+  const inv=p.invocations.find(x=>x.label===name);
+  labels.set(name,{id:ids[(inv?.ordinal??15)-1]});
+ }
+ const host=createGetWinnerHost(mains.get('m1'),()=>p.directPremise&&p.producerQualified,Response);
+ tokens.set('t1',host.begin(labels.get('t1')));
+ if(p.finished.close==='expired-before-response')host.finish(labels.get('t1'));
+ for(const inv of p.invocations){
+  if(inv.label==='t2')tokens.set('t2',host.begin(labels.get('t2')));
+  if(!responses.has(inv.response)){
+   const r=new Response('',{status:inv.status});
+   if(inv.header==='THREW')Object.defineProperty(r,'headers',{get(){throw new Error('model header getter');}});
+   else for(const value of inv.header)r.headers.append('x-afw-lab-get-winner',value);
+   responses.set(inv.response,r);
+  }
+  if(inv.readBody==='fulfilled')tokens.get(inv.label)?.capture(mains.get(inv.main),responses.get(inv.response),inv.status);
+ }
+ if(p.finished.close==='mutated')labels.get(p.finished.label).id='C2T1_FINITE';
+ if(p.finished.close!=='expired-before-response')host.finish(labels.get(p.finished.label));
+ return host.take(labels.get(p.finished.label),mains.get(p.finished.main))??{w:'U',s:0,h:0};
+}
+export async function modelControls() {
+ const manifest=await file('test-corpus-transformation.json');
+ const baseRaw=await file('synthetic-target-input.json'),hostRaw=await file('publisher-host-cut.json');
+ const baseAdapt=adaptFrozenCorpus('base',baseRaw,manifest),hostAdapt=adaptFrozenCorpus('host',hostRaw,manifest);
+ const base=JSON.parse(baseAdapt),hosts=JSON.parse(hostAdapt),norm=JSON.parse(await file('publisher-normalization.json'));
+ const ids=[];
+ assert.deepEqual(baseAdapt,await file('model-current-synthetic-target.json'));ids.push('ADAPT-base-pinned');
+ assert.deepEqual(hostAdapt,await file('model-current-publisher-host.json'));ids.push('ADAPT-H-pinned');
+ assert.throws(()=>adaptFrozenCorpus('base',Buffer.concat([baseRaw,Buffer.from(' ')]),manifest));ids.push('ADAPT-byte-change');
+ assert.throws(()=>adaptFrozenCorpus('foreign',baseRaw,manifest));ids.push('ADAPT-unknown-kind');
+ assert.throws(()=>adaptFrozenCorpus('base',Buffer.from('{'),manifest));ids.push('ADAPT-malformed');
+ for(const row of norm.rows) {
+  const raw=JSON.parse(row.raw.slice(8));
+  assert.deepEqual(normalizeGetWinner(raw.w,raw.s,raw.h,row.actual),row.expected,row.id);
+  const main={},label={id:base.ids[14]},host=createGetWinnerHost(main,()=>true,Response);
+  const token=host.begin(label),r=new Response('',{status:row.actual});
+  if(row.header!==null)r.headers.set('x-afw-lab-get-winner',row.header);
+  token.capture(main,r,row.actual);host.finish(label);const tuple=host.take(label,main);
+  assert.deepEqual(normalizeGetWinner(tuple.w,tuple.s,tuple.h,row.actual),row.expected,row.id);
+  const o=collect(base,{targetJournal:base.targetJournal},row.raw,row.actual);
+  assert.deepEqual(o.getWinner,row.expected,row.id);
+  assert.equal(o.finiteGet.http.state,'KNOWN',row.id);assert.equal(o.finiteGet.http.actual,row.expectedHttp,row.id);
+  assert(Buffer.byteLength(row.raw)<=96,row.id);ids.push(row.id);
+ }
+ const siteRows=[
+  ['SITE-current143',{file:'S08',line:18,column:143},true],
+  ['SITE-historical118',{file:'S08',line:18,column:118},false],
+  ['SITE-other119',{file:'S08',line:18,column:119},false],
+  ['SITE-wrongfile',{file:'S09',line:18,column:143},false]
+ ];
+ for(const [id,site,known]of siteRows){
+  const rows=structuredClone(base.targetJournal);rows[1].error.site=site;
+  const row=norm.rows.find(r=>r.id==='N418'),o=collect(base,{targetJournal:rows},row.raw,row.actual);
+  assert.equal(o.finiteGet.http.state==='KNOWN',known,id);
+  assert.equal(o.getWinner.winner==='STUB_NON_OK',known,id);ids.push(id);
+ }
+ const composed=[];
+ for(const row of hosts.rows){
+  if(heldHostIds.includes(row.id))continue;
+  const p=row.input.private,tuple=modelHost(p,base.ids);
+  const emitted='# C2FT4 '+JSON.stringify({id:base.ids[14],value:'1',w:tuple.w,s:tuple.s,h:tuple.h})+'\n';
+  const raw=p.rawMarker.join(''),o=collect(base,row.input,raw,p.originalAssertion?.actual??503);
+  // This equality is a MODEL producer/host composition check. The parent has only raw.
+  const result=emitted===raw?o.getWinner:unknown();
+  assert.deepEqual(result,row.expected.getWinner,row.id);
+  if(parentProjectionIds.includes(row.id))assert.deepEqual(o.getWinner,row.expected.getWinner,row.id);
+  if(hostOnlyIds.includes(row.id))assert.deepEqual(normalizeGetWinner(tuple.w,tuple.s,tuple.h,p.originalAssertion?.actual??503),row.expected.getWinner,row.id);
+  assert.deepEqual(o.finiteGet.http,row.expected.finiteGetHttp,row.id);
+  assert.deepEqual(o.dropWinner,row.expected.dropWinner,row.id);
+  if(row.id==='H-foreign-marker-tuple'){
+   assert.equal(tuple.s,418);assert.equal(o.getWinner.stubStatus,419);
+   assert.equal(result.winner,'UNKNOWN');
+  }
+  composed.push(row.id);ids.push(row.id);
+ }
+ const boundary=JSON.parse(await file('host-boundary-companions.json'));
+ for(const test of boundary.rows){
+  const journalCase=hosts.rows.find(r=>r.id==='H-earlier-journal-failure');
+  const tornCase=hosts.rows.find(r=>r.id==='H-torn-marker');
+  const input=structuredClone(test.id.includes('journal')?journalCase.input:tornCase.input);
+  let selectedBase=base,raw=input.private.rawMarker.join('');
+  if(test.id==='CURRENT-earlier-journal-coherent'){
+   input.priorNativeDelta=[{index:0,value:{id:base.ids[0],status:'fail'}}];
+   selectedBase=structuredClone(base);
+   const line=base.tapPrefix.split('\n')[1],source=JSON.parse(line.slice(11));
+   source.status='fail';source.code='TEST_FAILED';
+   assert.equal(selectedBase.tapPrefix.split(line).length,2);
+   selectedBase.tapPrefix=selectedBase.tapPrefix.replace(line,'# C2SOURCE '+JSON.stringify(source));
+  }
+  if(test.id==='CURRENT-malformed-marker-explicit-LF')raw+='\n';
+  if(test.expected.kind==='THROW'){
+   assert.throws(()=>collect(selectedBase,input,raw,503),error=>error.code===test.expected.code,test.id);
+  }else{
+   const result=collect(selectedBase,input,raw,503);
+   assert.equal(result.getWinner.winner,test.expected.winner,test.id);
+   assert.deepEqual(result.finiteGet.http,test.expected.http,test.id);
+  }
+  ids.push(test.id);
+ }
+ return {ids,normalization:norm.rows.length,coordinates:siteRows.length+5,composedHost:composed,boundaryIds:boundary.rows.map(r=>r.id),
+  heldHostIds,native:false,parentCanonicalReplacementIntegrity:false};
+}

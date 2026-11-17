@@ -1,0 +1,51 @@
+{
+  "schema": "AFW.GET_WINNER.STAGE_B.RETENTION_CLEANUP_FIX2_REVIEW/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private detached Git DATA",
+  "allowedAction": "Scoped cleanup sentinel DATA rereview and detached report",
+  "rollback": "Disregard detached review",
+  "ruling": "760e6e4ea9126ddd3e48f01fab4931702e91996f",
+  "priorReview": "90b4676bc1e426092c70abded90efab15adfadf6",
+  "originalReview": "276d55bc770f797f6e577d499636b311f1bbbdf5",
+  "fixRound": 2,
+  "SPEC": "PASS_SCOPED_CLEANUP_FIXES_ONLY",
+  "QUALITY": "PASS_SCOPED_CLEANUP_FIXES_ONLY",
+  "materialFindings": [],
+  "findings": [
+    {
+      "id": "RC1",
+      "status": "ADDRESSED",
+      "entry": "e599e62c93bb2fbeef2957b2c5fbb920944c8746",
+      "result": "Previously verified ON setup remains inside original-parent cleanup try; no subsequent entry change."
+    },
+    {
+      "id": "RC2",
+      "status": "ADDRESSED",
+      "retention": "c2b057585da9da62a21fe065ef31ad3bfedf02bf",
+      "ordinary": "9ab8e1fa7d0223c9339869994a7df4224373ff26",
+      "result": "Both builders now initialize primaryFailed=false, set it true in catch and rethrow the original error unchanged. Disposal-only rejection is raised only if that boolean is false. Thus every primary rejection value, including falsy values, is preserved. Promise.allSettled continues to attempt every owned disposal and a disposal rejection still fails an otherwise successful group."
+    }
+  ],
+  "verification": {
+    "retentionDelta": "53bebe0ff06b800392a847ffddede1711dbece6a: three exact replacements from edb8d2a3e6b9d0befdbd8d51b0b8ef8e1f0cf15f.",
+    "ordinaryDelta": "ef57abce938ce51b7c1a5c051089ba2afffc226f: three exact replacements from dacfb3b451086af7d386af8b838c44715caf0965.",
+    "reversible": "All six operation offsets/before spans matched; complete amended bodies reproduced forward and original preimages recovered in reverse. Only the declared sentinel changes occurred.",
+    "readback": "Complete UTF8bytes/GitSHA1/SHA256 independently measured for both builders and both deltas. Current retention8053B/SHA256ed72799a3b7600f081b3761d705efe94a808c0eee25a548bd243d808ee3c9c60; ordinary7744B/SHA2561d5af3aba7e53d082dec4b9d6274b863c9d13ccc86b605cc4e95915c46e18b35 match declared pins.",
+    "preservation": "No helper/factory/wire/fixture/oracle/coreSource or successful native-case semantics changed in these exact deltas. Ordinary review remains cleanup-scope only, not an approval of the broader ordinary-native draft."
+  },
+  "holds": "Whole packet, exact command/count schedule, externally enforced remaining child/controller budget, custody/source/resident binding, Root nomination and actual native acceptance remain held. This static report is neither test execution nor native/whole-packet release.",
+  "Source5": 5,
+  "OWN5": 5,
+  "budgetReset": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "globalNativeDrainVerified": false,
+  "nativeExecuted": false,
+  "localSourceChecks": 0,
+  "refMutations": 0,
+  "runtimeMutations": 0
+}

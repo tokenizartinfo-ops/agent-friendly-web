@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import { readFile,writeFile } from 'node:fs/promises';
+import { fixedFaultNativeControls } from './native-fixed-fault-controls.mjs';
+import { transportNativeControls } from './native-transport-controls.mjs';
+const schedule=JSON.parse(await readFile('partial-tool-schedule.json','utf8'));
+const faults=await fixedFaultNativeControls(),transport=await transportNativeControls();
+assert.deepEqual(faults.ids,schedule.faultIds);assert.deepEqual(transport.ids,schedule.transportIds);
+assert.equal(faults.disposed,true);assert.equal(transport.disposed,true);
+const raw=JSON.stringify({group:'fault-transport',faults,transport,SourceQualified:false,Task1Pass:false})+'\n';
+assert(Buffer.byteLength(raw)<=8192);
+await writeFile('fault-child.json',raw,{flag:'wx',mode:0o600});

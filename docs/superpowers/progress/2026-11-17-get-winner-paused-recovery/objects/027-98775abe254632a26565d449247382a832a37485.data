@@ -1,0 +1,49 @@
+export function prepareGetWinner(name,source) {
+  if(name==='worker/mcp-own/finite.mjs') {
+    source=dropReplace(source,' const parent=createFiniteOwnerRequestLease(request);',
+      ' const parent=createFiniteOwnerRequestLease(request);let getResponse;const getCell=globalThis.__afwGetWinner?.enter(request);');
+    source=dropReplace(source,'return await forwardFiniteOwnerChoice(input,parent.lease);',
+      'return getResponse=await forwardFiniteOwnerChoice(input,parent.lease);');
+    source=dropReplace(source,'finally{parent.finish();}',
+      'finally{parent.finish();globalThis.__afwGetWinner?.finish(getCell,request,parent.lease,getResponse);}');
+    return source+'\nglobalThis.__afwGetWinner=('+createGetWinnerObserver.toString()+')();\n';
+  }
+  if(name==='lib/mcp-qa-finite-owner-native-bridge.mjs') {
+    source=dropReplace(source,'if(readFiniteOwnerRequestContext(originalLease).root!==originalLease)fail();',
+      'if(readFiniteOwnerRequestContext(originalLease).root!==originalLease)fail();globalThis.__afwGetWinner?.bind(request,originalLease);');
+    source=dropReplace(source,'const response=await Reflect.apply(fetcher,stub,[forwarded]);',
+      'globalThis.__afwGetWinner?.forward(request,originalLease);const response=await Reflect.apply(fetcher,stub,[forwarded]);');
+    source=dropReplace(source,'if(!response.ok){try{fail([400,401,403,404,405,413,429].includes(response.status)?response.status:503);}',
+      'if(!response.ok){let getStatus;const getFail=status=>{try{fail(status);}catch(error){globalThis.__afwGetWinner?.denied(request,originalLease,response,error,getStatus);throw error;}};try{getFail([400,401,403,404,405,413,429].includes(getStatus=response.status)?response.status:503);}');
+    source=dropReplace(source,'return finiteNativeChoiceHtml(response,bytes);',
+      'globalThis.__afwGetWinner?.validate(originalLease,response);try{return finiteNativeChoiceHtml(response,bytes);}finally{globalThis.__afwGetWinner?.validationEnd(originalLease,response);}');
+    source=dropReplace(source,'globalThis.__afwDropM?.caught(request,originalLease,error,b);return b;',
+      'globalThis.__afwDropM?.caught(request,originalLease,error,b);globalThis.__afwGetWinner?.caught(request,originalLease,error,b);return b;');
+    return source;
+  }
+  assert.equal(name,'lib/mcp-qa-finite-owner-native-wire.mjs');
+  source=dropReplace(source,'globalThis.__afwDropM?.deadline(lease,error);reject(error);',
+    'globalThis.__afwDropM?.deadline(lease,error);globalThis.__afwGetWinner?.deadline(lease,error);reject(error);');
+  source=dropReplace(source,'try{return await Promise.race([actual,first,deadline]);}',
+    'try{return await Promise.race([actual,first,deadline]);}catch(error){globalThis.__afwGetWinner?.race(lease,error);throw error;}');
+  const start=source.indexOf('export function finiteNativeChoiceHtml(response,bytes){');
+  assert(start>=0 && source.indexOf('export function finiteNativeChoiceHtml(response,bytes){',start+1)<0);
+  const original=source.slice(start);
+  assert.equal((original.match(/finiteNativeFailure\(\)/g)||[]).length,4);
+  const changed=original.replaceAll('finiteNativeFailure()','getDenial()').replace(
+    'export function finiteNativeChoiceHtml(response,bytes){',
+    'export function finiteNativeChoiceHtml(response,bytes){const getDenial=()=>{try{finiteNativeFailure();}catch(error){globalThis.__afwGetWinner?.validationDenied(error);throw error;}};');
+  return source.slice(0,start)+changed;
+}
+
+function getWinnerPlugin() {
+  return {name:'first-get-winner-positive-M',setup(build) {
+    build.onLoad({filter:/(?:worker\/mcp-own\/finite|lib\/mcp-qa-finite-owner-native-(?:bridge|wire))\.mjs$/},async args=>{
+      const name=args.path.slice(process.cwd().length+1);
+      const prepared=prepareDropM(name,await readFile(args.path,'utf8'));
+      const before={"worker/mcp-own/finite.mjs":"922428af9ac17d0f11ad2928c8ad60b88b8b78fa8729cafd512e407d2ec9ab67","lib/mcp-qa-finite-owner-native-bridge.mjs":"97856b44f9b46f4110cb3e23e85d047cae895d2f39ed6d027c528f9a1c373633","lib/mcp-qa-finite-owner-native-wire.mjs":"d0b88ce5a6319ff7559f13cda5d9aea6be6bb226fc775422547abce923bab3fe"};
+      assert.equal(digest(prepared),before[name],'unchanged prepared DROP input');
+      return {contents:prepareGetWinner(name,prepared),loader:'js'};
+    });
+  }};
+}

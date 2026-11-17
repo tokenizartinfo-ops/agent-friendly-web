@@ -1,0 +1,160 @@
+import {createHash as dropHash} from 'node:crypto';
+import {createFiniteOwnerRequestLease} from '../../lib/mcp-qa-finite-owner-preparation.mjs';
+import {forwardFiniteOwnerChoice} from '../../lib/mcp-qa-finite-owner-native-bridge.mjs';
+import {forwardPrivateFiniteOwnerOAuth} from '../../lib/mcp-qa-finite-owner-oauth-forward.mjs';
+import {forwardPrivateFiniteOwnerNoticeGet,forwardPrivateFiniteOwnerNoticeConsent} from '../../lib/mcp-qa-finite-owner-notice-get-forward.mjs';
+import {finiteNativeOrigin,finiteNativePending} from '../../lib/mcp-qa-finite-owner-native-wire.mjs';
+import worker,{AfwNodeControl,AfwOwnEventNode as OwnEventNode} from './index.mjs';
+const denyLegacyWithdrawal=()=>{throw Error('Finite legacy withdrawal unavailable');};
+// Same actual SQLite constructor, namespace and inherited finite cleanup path.
+// The finite profile enables only the separately qualified C0/C1 reduction.
+// Legacy withdrawal RPCs must deny before touching any actual env/host state.
+export class AfwOwnEventNode extends OwnEventNode{
+ withdrawPermissions(){return denyLegacyWithdrawal();}
+ withdrawPermissionsForPlan(){return denyLegacyWithdrawal();}
+}
+export {AfwNodeControl};
+const finiteEntrypoint=globalThis.__AFW_FINITE_ENTRYPOINT_PROFILE__==='finite_trial_event';
+const finiteWorker={...worker,async fetch(request,env,ctx){
+ const url=new URL(request.url),path=url.pathname;
+ let decoded;try{decoded=decodeURIComponent(path);}catch{decoded=path;}
+ const reserved=value=>['/connections','/authorize','/monitoring'].some(prefix=>value===prefix||value.startsWith(prefix+'/'));
+ if(!reserved(path)&&!reserved(decoded))return worker.fetch(request,env,ctx);
+ const parent=createFiniteOwnerRequestLease(request);
+ try{
+  if(!finiteEntrypoint||url.origin!==finiteNativeOrigin||url.hash||path!==decoded)return finiteNativePending(404);
+  const input={request,env,ctx};
+  if(path==='/connections/finite-prepare'){
+   if(!['GET','POST'].includes(request.method))return finiteNativePending(405);
+   return await forwardFiniteOwnerChoice(input,parent.lease);
+  }
+  if(path==='/authorize'){
+   if(!['GET','POST'].includes(request.method))return finiteNativePending(405);
+   if(env?.AFW_DELEGATED_OAUTH_ENABLED!=='true')return finiteNativePending();
+   return await forwardPrivateFiniteOwnerOAuth(input,parent.lease);
+  }
+  if(path==='/monitoring'||path==='/monitoring/grant'){
+   if(request.method!==(path==='/monitoring'?'GET':'POST'))return finiteNativePending(405);
+   if(env?.AFW_DELEGATED_OAUTH_ENABLED!=='true'||env?.AFW_DOSSIER_MONITORING_OWNER_ENABLED!=='true')return finiteNativePending();
+   return await (path==='/monitoring'?forwardPrivateFiniteOwnerNoticeGet:forwardPrivateFiniteOwnerNoticeConsent)(input,parent.lease);
+  }
+  return finiteNativePending(404);
+ }catch{return finiteNativePending();}finally{parent.finish();finiteNativePending();}
+}};
+
+const dropM = (function createDropDiagnostic(hash) {
+  const qaHeader = 'x-afw-lab-qa-denial', outerHeader = 'x-afw-lab-m-denial';
+  const requestEpoch = new WeakMap(), qaResults = new WeakMap();
+  const cells = new WeakMap(), leases = new WeakMap(), responses = new WeakMap(), deadlines = new WeakMap();
+  const outerReads = new WeakMap();
+  const seenQa = new WeakSet(), seenOuter = new WeakSet();
+  const hex = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+  const uuid = value => typeof value === 'string' && /^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(value);
+  const join = id => uuid(id) ? hash('afw.lab.drop.uuid.v2\0' + id) : null;
+  const tag = value => typeof value === 'string' && value.length > 0 && value.length <= 128 ? hash('afw.lab.drop.form.v2\0'+value) : null;
+  const unknown = () => ({case:'15:firstDROP',site:'UNKNOWN',outer:'UNKNOWN',publicSite:'UNKNOWN'});
+  function guard(fn) { return (...args) => { try {return fn(...args);} catch {return null;} }; }
+  function writeOnce(r, name, value) {
+    if (!(r instanceof Response) || r.ok || r.status < 400 || r.status > 599 || r.headers.has(name)) return false;
+    r.headers.set(name,value);
+    return r.headers.get(name) === value;
+  }
+  function frame(line) {
+    if (typeof line !== 'string' || line.length > 768) return null;
+    const match = /^\s+at (?:[^()\n]* \()?([^ ()\n]+):([1-9][0-9]{0,7}):([1-9][0-9]{0,7})\)?$/.exec(line);
+    return match && {script:match[1],line:Number(match[2]),column:Number(match[3])};
+  }
+  function arm(scriptKey) {return {scriptKey,live:true,sealed:false,poisoned:false,request:null,entryJoin:null,formTag:null,qaStatus:0,qaEgress:false,coords:null};}
+  function enter(e,r,id,handle) {
+    if (!e || !e.live || e.sealed) return;
+    if (e.request || requestEpoch.has(r)) {e.poisoned=true;return;}
+    e.request=r;e.entryJoin=join(id);e.formTag=tag(handle);
+    if (!e.entryJoin || !e.formTag) e.poisoned=true;
+    requestEpoch.set(r,e);
+  }
+  function register(r,q,frames) {
+    const e=requestEpoch.get(r);
+    if (!e?.live || e.sealed || e.poisoned) return;
+    if (e.q || !(q instanceof Response) || q.ok || seenQa.has(q) || qaResults.has(q)) {e.poisoned=true;return;}
+    const first=frame(frames?.[0]), next=frame(frames?.[1]);
+    e.q=q;qaResults.set(q,{e,r,status:q.status,coords:first && next && first.script===next.script && first.script===e.scriptKey ? [first,next] : null});
+  }
+  function qaEnd(e,r,q) {
+    if (!e?.live || e.sealed || e.poisoned || !q) return;
+    const item=qaResults.get(q);
+    if (!item || item.e!==e || item.r!==r || e.request!==r || item.status!==q.status || seenQa.has(q)) {e.poisoned=true;return;}
+    seenQa.add(q);
+    if (!writeOnce(q,qaHeader,'q1.'+e.entryJoin+'.'+q.status)) {e.poisoned=true;return;}
+    e.qaEgress=true;e.qaStatus=q.status;e.coords=item.coords;
+  }
+  function cut(e) {
+    if (!e || !e.live || e.sealed) return null;
+    e.sealed=true;
+    return {entryJoin:e.entryJoin,formTag:e.formTag,qaEgress:e.qaEgress,qaStatus:e.qaStatus,coords:e.coords,poisoned:e.poisoned};
+  }
+  function cell(p) {
+    if (cells.has(p)) {cells.get(p).bad=true;return null;}
+    const c={p,lease:null,j:null,bad:false,d:null,status:0};cells.set(p,c);return c;
+  }
+  function bind(p,l) {
+    const c=cells.get(p);
+    if (!c) return;
+    if (c.lease || leases.has(l)) {c.bad=true;return;}
+    c.lease=l;leases.set(l,c);
+  }
+  function assign(p,id) {
+    const c=cells.get(p);
+    if (!c) return;
+    if (c.j || !c.lease) {c.bad=true;return;}
+    c.j=join(id);
+  }
+  function denied(p,l,r,d) {
+    const c=cells.get(p);
+    if (!c || c.bad || leases.get(l)!==c || c.lease!==l || !c.j || c.d || !(r instanceof Response) || r.ok || !d) return;
+    c.d=d;
+    if (r.headers.get(qaHeader)==='q1.'+c.j+'.'+r.status) c.status=r.status;
+  }
+  function deadline(l,error) {
+    const c=leases.get(l);
+    if (c && c.lease===l && !c.bad && error) deadlines.set(error,c);
+  }
+  function caught(p,l,error,b) {
+    const c=cells.get(p);
+    if (!c || c.bad || !hex(c.j) || leases.get(l)!==c || c.lease!==l || c.b || responses.has(b) || seenOuter.has(b)) return;
+    const winner=error && error===c.d ? (c.status?'V':'S') : error && deadlines.get(error)===c ? 'L' : 'U';
+    c.b=b;responses.set(b,{c,p,winner,inner:winner==='V'?c.status:0});
+  }
+  function outerEnd(c,p,b) {
+    const x=responses.get(b);
+    if (!x || !c || c.bad || x.c!==c || x.p!==p || cells.get(p)!==c || seenOuter.has(b)) return;
+    seenOuter.add(b);
+    writeOnce(b,outerHeader,'o1.'+c.j+'.'+b.status+'.'+x.winner+'.'+x.inner);
+  }
+  function tap(c,p,actual) {
+    if (!c || !(actual instanceof Promise)) return;
+    actual.then(value=>{try{outerEnd(c,p,value);}catch{}},()=>{}).catch(()=>{});
+  }
+  function receive(r) {
+    if (r instanceof Response && !outerReads.has(r)) outerReads.set(r,{status:r.status,ok:r.ok,marker:r.headers.get(outerHeader)});
+  }
+  function host(response,state,handle,unique,mapped,qaTransport,mTransport) {
+    const out=unknown();
+    const received=outerReads.get(response);
+    if (!received || !state || state.poisoned || !unique || !mTransport || state.formTag!==tag(handle) || !hex(state.entryJoin) || received.ok) return out;
+    const match=/^o1\.([a-f0-9]{64})\.([45][0-9]{2})\.([VSLU])\.([45][0-9]{2}|0)$/.exec(received.marker??'');
+    if (!match || match[1]!==state.entryJoin || +match[2]!==received.status || (match[3]==='V') !== (+match[4]!==0)) return out;
+    if (state.qaEgress && ['S01:247','S00:743','S04:37','S04:43','S01:69','S01:95'].includes(mapped)) out.site=mapped;
+    if (match[3]==='S' || match[3]==='V') out.outer='STUB_NON_OK';
+    if (match[3]==='L') out.outer='DEADLINE_OR_ABORT';
+    if (match[3]==='V' && qaTransport && state.qaEgress && state.qaStatus===+match[4]) {
+      out.outer='QA_MARKED_STUB_NON_OK';out.publicSite=out.site;
+    }
+    return out;
+  }
+  return {arm,enter:guard(enter),register:guard(register),qaEnd:guard(qaEnd),cut:guard(cut),revoke:guard(e=>{if(e)e.live=false;}),cell:guard(cell),bind:guard(bind),assign:guard(assign),denied:guard(denied),deadline:guard(deadline),caught:guard(caught),tap:guard(tap),receive:guard(receive),host:guard(host),unknown};
+})(v=>dropHash("sha256").update(v).digest("hex"));
+globalThis.__afwDropM=dropM;
+export default {...finiteWorker,fetch(p,env,ctx){
+ if(p.method!=='POST'||p.url!==finiteNativeOrigin+'/connections/finite-prepare')return finiteWorker.fetch(p,env,ctx);
+ const cell=dropM.cell(p),actual=finiteWorker.fetch(p,env,ctx);dropM.tap(cell,p,actual);return actual;
+}};
