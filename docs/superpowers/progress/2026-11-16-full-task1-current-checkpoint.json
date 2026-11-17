@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "3d453de71cac63583f54f5591a6a22248fc14761",
-  "phase": "GET_WINNER_STAGE_B_FIX5_FINAL_SCOPED_REVIEW_PENDING",
+  "previousCheckpoint": "c54ed155c5207d3d6d75d7859b2bda2fa472ef9d",
+  "phase": "GET_WINNER_STAGE_B_CAP_FP1_CARRIED_TO_GB1",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -671,7 +671,7 @@
       "responsePrimaryNote": "1ded0afe15a9b443240776e3ce4bf4fbc509b79d",
       "actor": "/root/get_winner_stage_b_fixwave5",
       "scopedReviewer": "/root/get_winner_stage_a_review",
-      "status": "FIX5_FINAL_SCOPED_REVIEW_PENDING",
+      "status": "CAPPED_5_OF_5_FP1_REAL_LOAD_BEARING",
       "currentAuthorSource": {
         "S08": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
         "S09": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
@@ -798,10 +798,11 @@
       "completedFixWaves": {
         "retentionComponent": 2,
         "controllerIntegration": 1,
-        "fullPacket": 1,
-        "totalTask1StageB": 4
+        "fullPacketFix4": 1,
+        "fullPacketFix5": 1,
+        "totalTask1StageB": 5
       },
-      "nextFixWaveIfRequired": 5,
+      "nextFixWaveIfRequired": null,
       "fullReview": "27065f2876c4c102452ccc0cf866f58c2bfb14e3",
       "currentFixWave": 5,
       "maximumFixWaves": 5,
@@ -851,11 +852,20 @@
       "fix5Integrated": false,
       "fix5StandaloneScope": "UNKNOWN emission only, incomplete snapshot, R204 unmarked; out-of-graph detached; no bucket1/known-positive/composed coverage",
       "fix5TestsExecuted": false,
-      "fix5RereviewDispatched": true
+      "fix5RereviewDispatched": true,
+      "fix5Rereview": "d1741a571aedbefa3307abb92cd7033970b1012b",
+      "fixWaveCapExhausted": true,
+      "rootAdjudication": "FP1 real/load-bearing; changed genuine-only canonical foreign-row test boundary under GB1 prerequisite. No StageB6/reset; not parked/closed.",
+      "GB1": {
+        "status": "PLAN_READY",
+        "sameOperationalGoal": true,
+        "publicConsumerStillHeld": true,
+        "nativeReleased": false
+      }
     }
   },
-  "schemaVersion": 79,
-  "updatedAtUTC": "2026-11-17 21:43:55 UTC",
+  "schemaVersion": 80,
+  "updatedAtUTC": "2026-11-17 21:49:20 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",

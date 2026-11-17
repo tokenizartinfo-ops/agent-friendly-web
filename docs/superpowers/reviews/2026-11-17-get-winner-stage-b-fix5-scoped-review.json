@@ -1,0 +1,43 @@
+{
+  "schema": "AFW.GET_WINNER.STAGE_B.FIX5.SCOPED_STATIC_REVIEW/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private detached Git DATA",
+  "resourceType": "one detached review",
+  "allowedAction": "read a standalone test and delta, store this assessment",
+  "rollback": "disregard this review",
+  "fixWave": "5/5",
+  "reviewBase": "835e4c4453a06ae6d54c84df5489c110cdace2af",
+  "proposal": "9de7d971b8a3cf51f1cccfe6908c2b9ecc392d27",
+  "brief": "dec384e1882a0a908c63bbe1f344863ba8fffdc8",
+  "authorReport": "8950c92005434dfc47af8b0eb68cc214d669345e",
+  "expectation": "974515705eef853d4af0f6ab4259d1a8353dc752",
+  "test": "37c312f8920c30106be19c4580a3684a6378a772",
+  "delta": "8872c2e732abc63d32f11542f898a3fda72eea0a",
+  "SPEC": "CHANGES_REQUIRED_FP1",
+  "QUALITY": "CHANGES_REQUIRED_FP1",
+  "FP1": {
+    "decision": "NOT ADDRESSED",
+    "severity": "Important, carried forward",
+    "locations": [
+      "test/fp1-defensive-observer-emission.test.mjs 37c312f8920c30106be19c4580a3684a6378a772 lines 21-34,38-59",
+      "model-get-controls.mjs 8d6ae83f38437d4652096086aa48bef157571777 lines 109-122 (unchanged since prior review)",
+      "body-08-get-winner.txt e488965a58b989aa1c2f05a16aa6d5b74d4e411a lines 183-199,202-232"
+    ],
+    "assessment": "The standalone test calls the exported S08 observer, takes the token, supplies an unmarked Miniflare HTTP 204, captures, finishes, and calls counts. It asserts one snapshot read, counters 2/1/0 and one actual callback message, then adds only the TAP prefix and newline to the captured bytes. Its only snapshot row is a codec-encoded ProjectRef. Both the missing ticket state and missing marker make its expected bucket and tuple UNKNOWN. This could catch a broken callback or malformed unknown output if executed, but cannot distinguish a working positive emitter from one that always emits UNKNOWN. The composed driver and its frozen discrepancy-case path have no changes. The test is outside the 91 mounts and schedule. No known-positive emission or composed comparison is covered by the addition."
+  },
+  "newCriticalFindings": [],
+  "newImportantFindings": [],
+  "integrity": "Literal DATA readback of author report, expectation, source and delta matched their UTF-8 lengths (4978/1635/2212/3572) and Git object IDs. Independent SHA256 of report eaad86c9739b6bc141bcdf80936d51322632ca5958bd2a4487ca65d5e440df3c. The three descriptor SHA256 values match the author report. The delta describes zero graph transitions and a reversible out-of-graph expectation/test pair.",
+  "limits": "No test or syntax command was run. The observed output is an expectation in a test source, not runtime evidence. The earlier FP2-FP5 static decisions were not reopened. The parent-only evidence limitation continues. No branch, ref, candidate, workflow or operational state changed in this scoped review.",
+  "shortContract": "Final bounded round 5/5; FP1 remains open. One detached negative control proposed, zero added scheduled controls, zero actual results. Workflow and controller holds remain. Task1 and PC-off trial are unqualified.",
+  "nativeGate": "HOLD",
+  "activationReleased": false,
+  "Source5": 5,
+  "OWN5": 5,
+  "testsExecuted": 0,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}

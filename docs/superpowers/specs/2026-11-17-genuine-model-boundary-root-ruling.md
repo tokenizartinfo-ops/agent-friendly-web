@@ -1,0 +1,22 @@
+# Root adjudication at StageB cap — genuine MODEL boundary (GB1)
+Date: 2026-11-17. Project AFW; repository tokenizartinfo-ops/agent-friendly-web. Authority: current owner instruction to resume and complete the diagnostic/PC-off prerequisites, with earlier explicit delegation of routine choices and opt-out from repeated questions. This is Root's technical decision, not a claim the owner approved this specific test arrangement.
+
+## Cap and evidence
+Task1 StageB: fix4 review835e4c4453a06ae6d54c84df5489c110cdace2af addressed FP2–FP5 STATIC; fix5 reviewd1741a571aedbefa3307abb92cd7033970b1012b leaves FP1 REAL/IMPORTANT/LOAD-BEARING. Five rounds are exhausted. No sixth StageB fix dispatch and no reset. Source5/OWN5 remain5/5. Neither code, unit controls nor native tools have passed actual execution in this packet.
+Accepted static base remains9de7d971b8a3cf51f1cccfe6908c2b9ecc392d27,91bodies/1502623B. Separate fix5 test37c312f8920c30106be19c4580a3684a6378a772 proves only a proposed UNKNOWN callback test, not a known-positive or composed case; NOT_RUN and outside graph.
+
+## Why carry the defect
+Downstream public consumer and the actual diagnostic must not rely on a model which reconstructs the emitter it claims to test. FP1 cannot be parked as minor or marked closed. The existing count callback is available; no technical guess about the business503 is required. Carry FP1 as a prerequisite to downstream Task2, through GB1 below. Task2 consumer implementation remains held until genuine Task1 tool acceptance.
+
+## Smallest changed test-boundary decision
+Keep the frozen H fixture DATA/expected public composed result unchanged. Exercise S08's actual exported observer/count/emitter with a valid fixed in-memory snapshot through existing codecs and exact Miniflare DispatchResponse. Use captured bytes, not a local serializer, for the expected positive composition.
+For H-foreign-marker-tuple, compare the captured genuine418 emission to the fixture's proposed419 string. The mismatch must produce the frozen composed UNKNOWN. Submit only the captured genuine emission to collectObservation for this row; assert its genuine418 projection and unchanged HTTP/drop siblings. Do not demonstrate successful acceptance of the proposed419 by the parent in this active model control.
+The earlier supplementary assertion o.getWinner.stubStatus===419 is retired from this active test path; its source/history remains immutable. It was not the frozen composed UNKNOWN oracle. Replace it with the genuine418 assertion and explicit proposed419-versus-genuine418 byte mismatch. The parent's inability to authenticate a canonically replaced unseen value remains an explicit information-limit contract established by interface/code inspection, NOT a claimed executed replacement-acceptance test and NOT a new authentication guarantee.
+This narrows the active proof surface to genuine emission plus rejection at the MODEL composition boundary. It does not change production parent/collector behavior, add hidden Response/header inputs to that parent, or claim an authenticated marker. Ruling7308d1c0fff9779d22082198c59031f51abb2477 remains historical; this decision supersedes only its execution-method expectation for the parent-only canonical replacement example.
+
+## Options considered
+Repeating the same preserve-419-acceptance request is excluded by the5/5cap and adds no justified path. Deferring FP1 as nonblocking would invalidate downstream evidence. Selected: genuine-emission/model-comparison boundary above, which preserves the actual required composed result and discloses its narrower proof. No product architecture/price/runtime/permission change.
+
+## Release and limits
+GB1 is a new bounded prerequisite task with a changed test-boundary contract, not StageB round6 or Source6. All prior budgets/outcomes remain visible. It must complete the actual positive emitter path and its integration, preserve FP2–FP5, then undergo independent static review before Root may prepare ONE finite keyless GHA tools occurrence. All36 defensive tests and inherited controls remain mandatory and UNRUN until that occurrence. Only after accepted actual tooling may original dependent Task2/Task3 continue.
+All operationalReadiness/PCoff/SourceQualified/Task1Pass/completePackage/globalNativeDrainVerified/sdkNamespaceEmptyVerified/receiptAuthenticated/historicalCauseProven remain false. No runtime, OAuth, tokens, Entry, Max, email or remote resource action. Rollback: discard detached candidate; protected refs unchanged.
