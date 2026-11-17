@@ -693,9 +693,16 @@
       "publisherBoundaryAdjudication": "7308d1c0fff9779d22082198c59031f51abb2477",
       "publisherBoundaryDisposition": "Accepted before native: frozen H-foreign-marker-tuple is MODEL composed host/producer consistency; parent-only canonical replacement detection unsupported. No hidden data channel.",
       "SourceCodeStaticScope": "CURRENT_THREE_BODIES_ONLY_NO_MATERIAL_FINDINGS",
-      "finalToolPacket": "PENDING"
+      "finalToolPacket": "PENDING",
+      "currentSourceRootMeasurement": "e38715fe3078efa0318783e171039cd7128917c5",
+      "reachableInertSourceCheckpoint": {
+        "S08": "docs/superpowers/progress/2026-11-17-get-winner-stage-b-source-checkpoint/S08.txt",
+        "S09": "docs/superpowers/progress/2026-11-17-get-winner-stage-b-source-checkpoint/S09.txt",
+        "S10": "docs/superpowers/progress/2026-11-17-get-winner-stage-b-source-checkpoint/S10.txt",
+        "notAnActivatableManifest": true
+      }
     }
   },
-  "schemaVersion": 64,
-  "updatedAtUTC": "2026-11-17 17:50:43 UTC"
+  "schemaVersion": 65,
+  "updatedAtUTC": "2026-11-17 17:58:11 UTC"
 }
