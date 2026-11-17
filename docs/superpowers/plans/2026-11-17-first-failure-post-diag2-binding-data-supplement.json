@@ -1,0 +1,62 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-ROOT-BINDING-DATA-SUPPLEMENT/1",
+  "timestampUTC": "2026-11-17 00:31:06 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "Source fullschema/selection/contract successor DATA only",
+  "allowedAction": "n3 may prepare complete JSON DATA replacements schema/selection/contract and ordered25proposedpath inventory with unknown codepins explicitnull. No executablecode/ref/native/trial.",
+  "parentDesignRuling": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+  "contractC1": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+  "hostAcceptance": "55e95b5018e7fef76caeef64f2982e504a5e7a60",
+  "Source13": {
+    "index": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "bytes": 11467,
+    "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+    "S10": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+    "S10SHA256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+    "other12Unchanged": true
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+    "message": "AFW-C2-T1-FIRST-FAILURE-POST-DIAG2-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+    "job": "c2-first-failure-post-diag2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/",
+    "runner": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+    "artifact": {
+      "name": "afw-c2-t1-first-failure-post-diag2",
+      "path": "output/c2-t1-first-failure-post-diag2.json",
+      "fileName": "c2-t1-first-failure-post-diag2.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Install only the existing locked dependencies",
+      "Observe full-order first NOTICES POST boundary",
+      "Preserve bounded first POST diagnostic"
+    ]
+  },
+  "sourceSchema": "Derive completeouterfromeda6, preserveALLdefs/limits and orderedkeys; newfamilyconstants,explicitE2Source13context/indexhash/actualnew13beforeafterarrays andnewselectioncanonicalhash; add required observation.firstFailure ref toaccepted6keyfragment. RawTAP status site notexported beyondacceptedmetadata. No impossible/future nulls inside runtime schema constants: ifbinding notknown, markdraftheld ratherthanacceptwildcard.",
+  "selection": "Derive2cb with20IDs/order unchanged, D079e29/S07d4db/tail1794exact, recorder662ec actualalias unchanged; updateS10aliasbytes/hash to88713/cb95. Any originalindex/sourcehash docs fields updateexplicitE2. canonicalcompact+rawfullJSON hashes preserved separately.",
+  "packageShape": "Propose same25businessDATAleaves:16inherited(index+13+guard+preflight),9family(selection/schema/contract/collection-adapters/read-progress/D07txt/recorderTxt/runner/WF). New firstFailure extractor will be in collection-adapters underfutureseparaterelease tokeep25; no new business calls/hooks. read-progress stays62aunless separatelyprovedneeded. Codepins3+context remainfutureRoot, no placeholdersadmissible.",
+  "holds": [
+    "No Sourcecollector/parser code until nativeformattoy accepted",
+    "No OWNguard code until fullschema agreement and nativeformattoy accepted",
+    "No businesscapture/fullqualification; nominationfutureDATAonly, no refs/runs",
+    "No M/QA/SDK/D07/recorder/newcall/clock/cap changes"
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
