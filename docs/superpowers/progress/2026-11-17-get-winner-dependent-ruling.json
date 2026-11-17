@@ -1,0 +1,33 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.DEPENDENT_TASK_RULING/1",
+  "timestampUTC": "2026-11-17 15:28:21 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": "Current owner request: continue all AFW blocks toward PC-off; prior broad scoped lab authorizations persist. SDD fix-loop breaker at Source5/OWN5 max5: real load-bearing missing evidence carried to next dependent design task; no reset or new native release.",
+  "evidence": "a7b3035185debcc4ba6db18bd21592bf4a84e2e3",
+  "finding": "First currently observed full-order failure is exact case15 finite-prepare GET 503 before DROP. Existing diagnostic truthfully returns UNKNOWN for POST winner; no same-occurrence GET winner or QA phase is retained. Later cloud acceptance cannot build on this incomplete result.",
+  "decision": "Design and independently review the smallest read-only observation contract at the existing first failing GET cut: distinguish M winning deadline/abort, original stub non-OK and post-stub validation only under an exact positive join, with safely bounded QA last-completed phase or UNKNOWN. No business repair, timer/budget increase, guard change, hidden attribution or unchanged native retry. Search saved same-occurrence evidence first; independent review found none.",
+  "costIfWrong": "Discard detached design only; baseline, sealed tests, native/runtime and credentials remain unchanged.",
+  "rounds": {
+    "Source": 5,
+    "Own": 5,
+    "maxSameFamily": 5,
+    "noReset": true
+  },
+  "release": {
+    "design": true,
+    "sourceImplementation": false,
+    "OwnImplementation": false,
+    "native": false,
+    "runtime": false
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

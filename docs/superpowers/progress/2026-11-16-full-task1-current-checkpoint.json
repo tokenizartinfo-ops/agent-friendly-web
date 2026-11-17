@@ -1,50 +1,28 @@
 {
-  "schema": 49,
-  "timestampUTC": "2026-11-17 15:20:13 UTC",
+  "schema": 50,
+  "timestampUTC": "2026-11-17 15:28:21 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "ddad17eb7da694e4ff8db6d5840fff7ff087b260",
-  "phase": "DROP_WINNER_SOURCE5_ACTUAL_GET503_CAPTURE_ADMITTED_CLOSED_REVIEW_TRIAGE_ACTIVE",
+  "previousCheckpoint": "c3a4e3b69f5bdbdabb4a88194e507905bc0567d4",
+  "phase": "ACTUAL_SOURCE5_REVIEW_ACCEPTED_GET_WINNER_DEPENDENT_DESIGN",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
-    "run": 44021068647,
-    "job": 133830419181,
-    "primary": "3b38e269929a88eef353f00016726d1ca3270f01",
-    "outcome": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
-    "OwnAdmission": "e7530d7f55172ee36035b655d120bcae7479f862",
-    "close": "8a474ec9f52ad14abf9259b81eedefc61e97e018",
-    "first14Pass": true,
-    "native15": {
-      "pass": 14,
-      "fail": 1
-    },
-    "firstFailure": "case15SCOPE_MISSING AssertionError S08:113:283",
-    "finiteGet": {
-      "schema": "afw.c2-finite-get-diag3.v1",
-      "http": {
-        "state": "NOT_APPLICABLE",
-        "reason": "EARLIEST_THROW_DIFFERENT",
-        "throwSequence": null,
-        "actual": null,
-        "expected": null
-      },
-      "afterMonitor": {
-        "value": "0",
-        "reason": "JOINED_SNAPSHOT",
-        "countSequence": 56
-      },
-      "afterScopeMissing": {
-        "value": "1",
-        "reason": "JOINED_SNAPSHOT",
-        "countSequence": 60
-      }
-    },
-    "child180sTimeout": true,
-    "openCase": "C2T1_FINITE action",
-    "qualificationIncomplete": true,
-    "freshReview": "b50ec6e9d40bfed7f252656f027429879d0b543c",
-    "staticDiagnosis": "e5570431c54ef1556692fcdf1349c503ef983ecb"
+    "run": 44110921244,
+    "job": 134135963389,
+    "primary": "7d8f310d69e718727ce2cb392e565dea90205693",
+    "outcome": "f4daf53fee3e78ba2cad36c6b525559d9fd47d67",
+    "OwnAdmission": "88edaaa27b4bd5eda5cf9664266422f6b3d5029e",
+    "close": "3ffbd94439539328587de363f8ca6444b4ee7cd5",
+    "review": "a7b3035185debcc4ba6db18bd21592bf4a84e2e3",
+    "nativeRows": 17,
+    "pass": 14,
+    "fail": 3,
+    "firstFail": "case15 GET503 vs200 seq58 S08:18:118; firstDROPPOST not reached",
+    "case16": "same assertion failed; HTTP status unknown",
+    "openCase18": true,
+    "later19and20Unobserved": true,
+    "qualificationIncomplete": true
   },
   "tooling": {
     "source149": {
@@ -134,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Independent actual Source5/OWN5 evidence + whole diagnostic interface review and bounded DATA-only GET path triage. Source/Ownsamefamilymax5 bothspent, no reset/no blind rerun. Preserve actualCauseUNKNOWN: current knownGET503 precedes the targetedPOST,14pass3fail/18open. Next dependent task only after Root smallest load-bearing ruling/evidence contract; no Sourcecode/auth/CF runtime change currently authorized bynewhypothesis. OperationalReadiness/Task1false; no useraction now.",
+  "next": "Design-only smallest GET winner/phase contract to select next correction; no new source/reader/native release or reset. User intervention not needed.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -353,7 +331,7 @@
     "businessClosure": "3ffbd94439539328587de363f8ca6444b4ee7cd5",
     "businessResult": "INCOMPLETE; GET503 BEFORE FIRST DROP POST",
     "businessRootActualAdmitted": true,
-    "actualReviewAndTriage": "/root/drop_winner_native_transport_review RUNNING",
+    "actualReviewAndTriage": "a7b3035185debcc4ba6db18bd21592bf4a84e2e3",
     "observed": {
       "nativeRows": 17,
       "pass": 14,
@@ -411,7 +389,7 @@
       "compiler": "PASS",
       "sites": 6
     },
-    "independentActualReview": "/root/drop_winner_native_transport_review RUNNING"
+    "independentActualReview": "3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c"
   },
   "own5DataPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
   "OWN5": {
@@ -454,7 +432,7 @@
     "appendCount": 69,
     "expectedModelAdmit": 26,
     "expectedReject": 43,
-    "matrixExecuted": false,
+    "matrixExecuted": true,
     "redDesignRuling": "1291992edd15c61d8f8c59ae0a93d9a60345aaad",
     "independentStaticReviewer": "/root/c2_v2_own_receiver_fix1 RUNNING",
     "staticReview": "f9896e64ac34ad52cd83ac231a200e9ba16d1587",
@@ -491,12 +469,12 @@
       "nativeGroups": 9,
       "fixtures": 142,
       "unitControls": 10,
-      "status": "PENDING_NATIVE"
+      "status": "PASS_NATIVE_TOOLING_ONLY"
     },
     "nativeIndex": "59083d99813f3490e249d59d5e91190ea1fa2780",
     "graph": "d1d28d86c2e9908ed2c3f3ee8243f61883814666",
     "diff": "4bb41bcd7e1b4d5e471329753a0ae4e4ff76e1a0",
-    "staticReviewer": "/root/c2_v2_own_receiver_fix1 RUNNING",
+    "staticReviewer": "f9896e64ac34ad52cd83ac231a200e9ba16d1587",
     "expected": {
       "groups": 9,
       "fixtures": 142,
@@ -506,7 +484,7 @@
     "nativeProof": "aeb81a1566cf69e337db0e2ed7d09013c82d53bb",
     "nativeValidation": "9615f57f2aaae476748f1af8ed06d033114b5022",
     "nativeClosure": "ab4d08ea24e98b4b14869d02a14ef5fe283788be",
-    "actualReview": "/root/drop_fixture_review RUNNING",
+    "actualReview": "6a76d5a3a18303e69cbdf08ad7d1eee328f17746",
     "nativeObserved": {
       "groups": 9,
       "fixtures": 142,
@@ -516,7 +494,14 @@
       "adapterUnits": 10,
       "old73Unchanged": true
     },
-    "actualSourceBusinessAdmitted": false,
+    "actualSourceBusinessAdmitted": true,
     "actualNativeReview": "6a76d5a3a18303e69cbdf08ad7d1eee328f17746"
+  },
+  "dependentGETDesign": {
+    "status": "BRIEF_READY",
+    "actualReview": "a7b3035185debcc4ba6db18bd21592bf4a84e2e3",
+    "roundsUnchanged": true,
+    "implementationReleased": false,
+    "nativeReleased": false
   }
 }
