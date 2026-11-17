@@ -1,0 +1,277 @@
+{
+  "schema": "AFW-OWN73-R4-INDEPENDENT-NATIVE-REVIEW/1",
+  "timestampUTC": "2026-11-17 04:56:51 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewer": "c230_full_own_native_review",
+  "scope": "Revisión fresh SPEC+QUALITY del único native OWN R4 conservado. Evidencia DATA inmutable; sin ejecución Source/OWN local, nuevos runs, refs, descarga de artefactos ni repetición de endpoints terminales.",
+  "verdict": {
+    "SPEC": "PASS",
+    "QUALITY": "PASS",
+    "disposition": "MODEL_TOOLING_ONLY",
+    "blockers": 0,
+    "openFindings": 0,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "reviewBasis": {
+    "independentStaticReview": {
+      "blob": "724f1f65260e0d16b2015a097e3b626a3b077bab",
+      "bytes": 19444,
+      "sha256": "d9c0d14418408c7cef4e9e70e03afdf1c039fd81c135589345a50a617e5993b7",
+      "reuse": "Código guard OWN, separación ACTUAL/MODEL, fixture-first73, predicado ternario, tres contrapruebas coherentes nuevas, controller/WF/schema y frontera de transporte. No se repitió el corpus histórico ni Source149."
+    },
+    "finalAuthorIndex": "520860e0f90337f764a34ea55f77eb4851000c48",
+    "nativeIndex": "b33a7aba421b9ab3935b0bff2e072055d8f192ff",
+    "nativeGate": "6933f878a2843e7e231d970f0b84510d9c167e31",
+    "actualBindingRootMeasurement": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+    "actualBindingTupleSHA256": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+    "guard": "5a49e030ba72ed7ea8c218eaa7f8232ff684ac02",
+    "evidence": [
+      {
+        "kind": "primary",
+        "bytes": 1348175,
+        "sha256": "d51aab9d25e42ec962d4c6fca335a5363728bfad1835046411315159ccd39f7c",
+        "git": "642e52b89f0eb284494435257b82bc806e4b564c",
+        "fullRead": true,
+        "gitBlobRecomputed": true
+      },
+      {
+        "kind": "proof",
+        "bytes": 14629,
+        "sha256": "06cfe54deefb035563a4aa2f025020a72e1b3d5d5e74efce61ff032b559e81e5",
+        "git": "3b223dddbe73ee40d6a5d5905b84551fcec6dd31",
+        "fullRead": true,
+        "gitBlobRecomputed": true
+      },
+      {
+        "kind": "close",
+        "bytes": 4777,
+        "sha256": "9be43de918143e9cc546d5f3fbde709b710bffa1e2669122d40806450346820f",
+        "git": "7a4a1cf1e714bd5832d0ff4eb0d0bfc3101c0948",
+        "fullRead": true,
+        "gitBlobRecomputed": true
+      }
+    ]
+  },
+  "independentChecks": {
+    "native": {
+      "run": 44019109681,
+      "attempt": 1,
+      "job": 133824068377,
+      "head": "928d9aa69b5186eacb7f043363bbdd12f2713bb3",
+      "tree": "59c261f3cf338579be961b3967ea7990afbb0d6b",
+      "commandStep": 4,
+      "jobSeconds": 17,
+      "proofMs": 142,
+      "proofStarted": "2026-11-17T04:43:30.821Z",
+      "proofCompleted": "2026-11-17T04:43:30.963Z",
+      "roundedStepStart": "2026-11-17T04:43:30Z",
+      "roundedStepCompleted": "2026-11-17T04:43:30Z",
+      "rawLogBytes": 33292,
+      "rawLogSHA256": "40ddbb0f45185426e5572d5019c3afb551c2cc5c2c60ce2abe8556b0b0bd21dd",
+      "logLines": 236,
+      "proofMarkerLine": 138,
+      "TAPstartLine": 137,
+      "TAPendLine": 195,
+      "TAP8": [
+        "FG3_OWN_D2_COMPAT",
+        "FG3_OWN_FINITE_GET_KNOWN",
+        "FG3_OWN_FINITE_GET_INDEPENDENCE",
+        "FG3_OWN_FINITE_GET_POINTERS",
+        "FG3_OWN_FINITE_GET_VISIBLE_BLOCKERS",
+        "FG3_OWN_FINITE_GET_STREAM_CONSISTENCY",
+        "FG3_OWN_FINITE_GET_WIRE",
+        "FG3_OWN_FINITE_GET_CALLER_BINDING"
+      ],
+      "stats": {
+        "tests": 8,
+        "pass": 8,
+        "fail": 0,
+        "skip": 0,
+        "todo": 0,
+        "cancelled": 0
+      },
+      "evaluations": 73,
+      "admit": 32,
+      "reject": 41,
+      "all73ValuesExact": true,
+      "nonclaimsAllFalse": true,
+      "MODEL_TOOLING_ONLY": true
+    },
+    "receipt": {
+      "schemaErrors": [],
+      "canonicalJSONLF": true,
+      "bytes": 14629,
+      "capIncludingLF": 24576,
+      "all73ActualValuesEqualSealedExpected": true,
+      "admit": 32,
+      "reject": 41,
+      "canonicalIDs73SHA256": "824d5a29870dc010c6024aca2a7ae47367b5f38c13b240547e1c59ef1229ebf8",
+      "physicalGroupedIDs73SHA256": "9730902d9c4ddbd6f3f9352e8323e9532fdc53919b52749eebb488d16d11f493",
+      "results73SHA256": "98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb",
+      "orderMeaning": "73 es orden del recibo canónico. El orden de ejecución por ocho grupos difiere y se une mediante physicalIdsSha256; no se afirma un prefijo físico de70.",
+      "observations": "Los resultados son devueltos por los helpers OWN reales ejecutados nativamente sobre modelos/literales sellados. Las tres contradicciones nuevas FG3_S04/S05/S06 se observaron REJECTED/G20_OWN_UNQUALIFIED. El recibo no es una captura Source ni un pase positivo del entrypoint ACTUAL."
+    },
+    "zip": {
+      "bytes": 3075,
+      "sha256": "c40673d9e55487814ef335bfb8b874d04cba37da57ee32baea268fbcc9181cac",
+      "fileName": "c2-own-finite-get-diag3-tools.json",
+      "method": 8,
+      "flags": 8,
+      "localCRC": 0,
+      "localCompressed": 0,
+      "localSize": 0,
+      "descriptorBytes": 16,
+      "crc32": "30ce90ba",
+      "compressedBytes": 2893,
+      "fullDEFLATEBytesConsumed": 2893,
+      "payloadBytes": 14629,
+      "payloadSHA256": "06cfe54deefb035563a4aa2f025020a72e1b3d5d5e74efce61ff032b559e81e5",
+      "centralDirectoryBytes": 80,
+      "archiveArtifactId": 14299559629,
+      "APIJoined": true,
+      "canonicalLF": true
+    },
+    "zipPolicy": "Base64 estricta y canónica; un único archivo con nombre exacto; EOCD/central/local sin ZIP64 ni huecos ni bytes finales; flags/método/versión acotados; bit8 con CRC/tamaños locales cero válidos y DD firmado exacto; CRC32 y longitud; DEFLATE consumido completo; UTF8 estricto y JSON+LF canónico; payload igual a blob proof y a único comentario del rawlog; listing API id/run/head/branch/repos/digest/size unido a los bytes ZIP.",
+    "inputTree": {
+      "treeSHA": "59c261f3cf338579be961b3967ea7990afbb0d6b",
+      "treeEntries": 3469,
+      "uniquePaths": true,
+      "truncated": false,
+      "leaves": 3298,
+      "mounts": 95,
+      "mountedBytes": 5148250,
+      "inputBindingsAll95": true,
+      "bindingErrors": [],
+      "baselineLeaves": 3203,
+      "baselineErrors": 0,
+      "baselineRemoved": 0,
+      "additions": 95,
+      "additionsExactlyMounted": true,
+      "collisions": 0,
+      "gitHubTreeMatchesProof": true
+    },
+    "inputByteMeasurementAttribution": "Se compararon independientemente los95 tuples path/mode/blob/size contra el árbol API completo y los3203 originales contra el baseline conservado. El hash de cada uno de los95 cuerpos/5148250B en disco nativo lo efectúan el controller medido y Root; la auditoría estática previa conserva sus comprobaciones y atribución. No se vuelve a importar ni ejecutar ningún módulo para esta revisión.",
+    "codeToReceiptJoin": {
+      "runner": "8018c5be1ce1d310a67b869b5f26d22db5e5243e",
+      "runnerSHA256": "f29025f5138f71ca5cc3cb1720ad56f44cf872246771bb36145f84566e5d53c9",
+      "graph": "82947d4e60ffc058f3de2ef39f869deb6e443f3f",
+      "graphSHA256": "41fbed67bad14bb9157e05b1445179ff829036fb167b6f856d67e940fd8ef1ee",
+      "selectionSHA256": "45280821703102c3a29c262fe196ba2fe915b4d6b3f8acbd8bba70cca422e440",
+      "proofSchemaSHA256": "3e8562f05cc4f588cd7abd71b454031f9efdc803d2fe977cb02590dd4882869f",
+      "source": "docs/superpowers/root-own/c2-t1-finite-get-diag3/tools-own-finite-get.mjs",
+      "receiptConstructionLines": [
+        77,
+        91
+      ],
+      "observedMarker": "rawTransportLog:138; único comentario # AFW_C2_OWN_FINITE_GET_DIAG3_PROOF",
+      "observedTAP": "rawTransportLog:137..195; ocho IDs exactos, plan1..8,8pass y0fail/cancelled/skipped/todo",
+      "timePrecision": "API expone pasos a segundos. startedUTC/completedUTC del proof y todas las líneas TAP caen dentro del segundo04:43:30 del step4; su límite superior se trata como04:43:31 exclusivo. No se confunde redondeo del API con duración cero."
+    },
+    "closure": {
+      "joins": true,
+      "closedHead": "067a012121a58f7c2baf938228765242c433a1d5",
+      "closedTree": "71c392a4b8d05912ff74224dc9762c766e83c45d",
+      "closedCommitUTC": "2026-11-17T04:50:50Z",
+      "readbackUTC": "2026-11-17 04:52:05 UTC",
+      "closureAfterJob": true,
+      "RootReportedLeaves": 3299,
+      "arithmetic": true,
+      "RootReportedOriginals": true,
+      "RootReportedRetained": true,
+      "RootReportedOnlyWFDeletedTwoEvidence": true,
+      "RootReportedProtectedRefs": [
+        {
+          "name": "main",
+          "branch": "main",
+          "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+        },
+        {
+          "name": "source",
+          "branch": "feat/finite-native-cleanup-20261101",
+          "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+        },
+        {
+          "name": "own42",
+          "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+          "sha": "c511b6f061fb4eb0c5594779d3123e824f34f243"
+        },
+        {
+          "name": "source35",
+          "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+          "sha": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+        },
+        {
+          "name": "diag1",
+          "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+          "sha": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
+        },
+        {
+          "name": "host",
+          "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+          "sha": "1f62e087f0d9000f9c08519cd162db1104827af8"
+        },
+        {
+          "name": "toy",
+          "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+          "sha": "5f5295265217b31a19fbed2379f697c5a6a83080"
+        },
+        {
+          "name": "diag2",
+          "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+          "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01"
+        },
+        {
+          "name": "source149",
+          "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+          "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0"
+        }
+      ],
+      "RootReportedClosedHeadRuns": 0,
+      "independentClosedFullTreeRescan": false,
+      "explanation": "El readback conserva el ref/commit y el resultado Root del inventario/leases; no incluye el árbol recursivo de cierre para repetirlo."
+    }
+  },
+  "findings": [],
+  "boundedLimitations": [
+    "El pase acredita sólo tooling OWN sobre modelos sellados: ocho grupos nativos/73 evaluaciones. No acredita un resultado positivo de d3Read con captura Source ACTUAL.",
+    "La tabla ACTUAL queda fijada a R4 bd26/5ed6 y permanece separada del MODEL. Los29 rechazos ACTUAL de modelos reportados en la primaria corresponden a RAM Root; no se cuentan como29 evaluaciones nativas adicionales.",
+    "El hash vincula bytes recibidos y código/fixtures medidos; no recupera contenido ausente ni autentica por sí solo afirmaciones coherentemente falsificadas de un productor.",
+    "El closeReadback conserva ref/commit,parent y el resultado Root del inventario3299=3203+94+2,WF retirado, nueve refs protegidas sin cambio y cero runs del closedHead. No trae el árbol recursivo de cierre ni las respuestas de listado de runs/refs para una segunda auditoría independiente; se atribuyen a Root sin volver a consultar endpoints.",
+    "Los flags closurePending/freshReviewPending de las evidencias son el estado de esas instantáneas. El closeReadback posterior cierra el native y este informe añade la revisión fresh; no se alteran originales."
+  ],
+  "remaining": "Ningún pendiente dentro de esta revisión de tooling. Cualquier captura Source ACTUAL y su admisión son un bloque separado bajo Root; este informe no libera operaciones.",
+  "methods": {
+    "GitImmutableReads": true,
+    "originalReviewerRAMLogic": true,
+    "builtinCrypto": true,
+    "builtinZlib": true,
+    "codeEval": false,
+    "SourceExecution": false,
+    "OWNGuardLocalExecution": false,
+    "localFilesystem": false,
+    "dependencies": false,
+    "nativeDispatch": false,
+    "refMutation": false,
+    "terminalEndpointRefetch": false,
+    "artifactDownload": false,
+    "implementationChanges": false,
+    "onlyWrite": "Este informe mediante create_blob, con FULLreadback y hashes."
+  },
+  "ownModelsExecutedInReviewedNative": true,
+  "actualSourceExecution": false,
+  "actualEntryQualifiedByModels": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
