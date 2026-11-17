@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "07af2a24472750f7b9b7b727e2e3523bc4270f16",
-  "phase": "TASK2_PUBLIC_CONSUMER_IMPLEMENTATION_READY",
+  "previousCheckpoint": "836b560b6761443b1ec3810103534f446c2b507b",
+  "phase": "TASK2_PUBLIC_CONSUMER_IMPLEMENTATION_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -945,7 +945,7 @@
       }
     },
     "task2": {
-      "status": "PUBLIC_CONSUMER_IMPLEMENTATION_READY",
+      "status": "PUBLIC_CONSUMER_IMPLEMENTATION_RUNNING",
       "toolingActualAccepted": "08b75777bb39efaad0a439082cd430044c0b07d6",
       "currentReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
       "currentBinding": "4d54d57322ea67c3a29278f75288c7c9b686105b",
@@ -954,7 +954,7 @@
       "actualConsumerReleased": false,
       "nativeBusinessReleased": false,
       "author": "/root/get_winner_full20_carrier",
-      "brief": "524c1558cc21d1df4b950b064ef0041d48ce6163",
+      "brief": "9719704de9811786ee651b163933d18fb7b56d25",
       "transportPremise": "Candidate STATIC mounted-route premise under author inspection; requires independent review and Root gate, no full20 qualification inferred from TOOL",
       "carrier": {
         "proposal": "de40fdd5cb0a0aabdf0f0c52281c80ecb2734ab5",
@@ -991,11 +991,16 @@
       },
       "publicConsumerDraft": "23d6b640443f5b96ae1c4746abcdf9e34cd53341",
       "implementationReleased": true,
-      "nativeGateReleased": false
+      "nativeGateReleased": false,
+      "implementationActor": "/root/get_winner_task2_public_consumer",
+      "frozenOwn32": "3b11a1b5224aa45a69f5cc8022bb49d5768583c6",
+      "frozenOwn32Rows": 32,
+      "frozenOwn32ExpectedAdmit": 7,
+      "frozenOwn32ExpectedReject": 25
     }
   },
-  "schemaVersion": 92,
-  "updatedAtUTC": "2026-11-17 23:22:50 UTC",
+  "schemaVersion": 93,
+  "updatedAtUTC": "2026-11-17 23:23:55 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
