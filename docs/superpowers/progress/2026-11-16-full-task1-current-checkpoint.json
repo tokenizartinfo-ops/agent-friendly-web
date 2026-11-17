@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "e831faa6259a2b8e7c2f4d76df62d96720b8a3f3",
-  "phase": "TASK2_PREREQUISITE_FULL20_CARRIER_PREPARATION_RUNNING",
+  "previousCheckpoint": "48c203234c89021480035a1ba236398dc9d44a1d",
+  "phase": "TASK2_PREREQUISITE_CARRIER_STATIC_REVIEW_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Await and fully measure exact closed/unactivated full20 Source carrier, obtain independent static review, then implement Task2 public-reader fixtures/guard/binding. No business run before OWN native acceptance.",
+  "next": "Finish independent carrier static review; resolve any findings, then fixture-first Task2 public consumer binding and native controls. No full20 business execution until OWN actual controls accepted.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -945,7 +945,7 @@
       }
     },
     "task2": {
-      "status": "SOURCE_CARRIER_PREPARATION_RUNNING",
+      "status": "CARRIER_MEASURED_STATIC_REVIEW_RUNNING",
       "toolingActualAccepted": "08b75777bb39efaad0a439082cd430044c0b07d6",
       "currentReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
       "currentBinding": "4d54d57322ea67c3a29278f75288c7c9b686105b",
@@ -955,11 +955,35 @@
       "nativeBusinessReleased": false,
       "author": "/root/get_winner_full20_carrier",
       "brief": "524c1558cc21d1df4b950b064ef0041d48ce6163",
-      "transportPremise": "Candidate STATIC mounted-route premise under author inspection; requires independent review and Root gate, no full20 qualification inferred from TOOL"
+      "transportPremise": "Candidate STATIC mounted-route premise under author inspection; requires independent review and Root gate, no full20 qualification inferred from TOOL",
+      "carrier": {
+        "proposal": "cf2933aaad43938e98efcc8ffd93dfe7c8160bf9",
+        "map": "73b5f3f784eb8d33ceb003e0b8b4f78470665056",
+        "reversible": "dc19f6b25bd9c533482171b8bec588b5b70c24f4",
+        "expectationSeal": "9fe4659058cf43df81f6d9e6ac30713bc33c1262",
+        "rootMeasurement": "2c3b0ab6b613c1d97e4dc14bce2d09ac06a31d1b",
+        "reviewPackage": "ecc49a35db217683e69f9de5a86fa40fc6924ab9",
+        "reviewer": "/root/get_winner_full20_carrier_review",
+        "source13": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+        "publicSchema": "39e692752ac8813a5a64b42fd7d38b6b00ff7d70",
+        "selection": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+        "bodies": 26,
+        "bodyBytes": 794960,
+        "bodyEdgesHash": "b849e01d0da0e8a76f80fba749bcb4dff0b9b8b09e8580584e52dc6605d9f553",
+        "literalDirectionsVerified": 22,
+        "exactBodies": 15,
+        "changedBodies": 11,
+        "relocatedExactSiblings": 3,
+        "durableCommit": "2ce4cfd7cd7b64cca5ef3d2288d76c6aae88b117",
+        "staticReviewAccepted": false,
+        "routePremiseAccepted": false,
+        "activationReleased": false,
+        "nativeExecuted": false
+      }
     }
   },
-  "schemaVersion": 89,
-  "updatedAtUTC": "2026-11-17 22:52:43 UTC",
+  "schemaVersion": 90,
+  "updatedAtUTC": "2026-11-17 23:05:37 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
