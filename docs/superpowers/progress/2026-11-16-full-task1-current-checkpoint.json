@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "1d4f8dea746d476b20b23fce6a9328ef08185cf7",
-  "phase": "GB1_EXACT_NATIVE_TOOL_GATE_READY",
+  "previousCheckpoint": "791f48a2212cc2a84852f32a663c179e04a5cf64",
+  "phase": "GB1_NATIVE_TOOL_OCCURRENCE_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -857,7 +857,7 @@
       "fixWaveCapExhausted": true,
       "rootAdjudication": "FP1 real/load-bearing; changed genuine-only canonical foreign-row test boundary under GB1 prerequisite. No StageB6/reset; not parked/closed.",
       "GB1": {
-        "status": "STATIC_ACCEPTED_NATIVE_TOOL_GATE_READY",
+        "status": "NATIVE_TOOL_OCCURRENCE_RUNNING",
         "sameOperationalGoal": true,
         "publicConsumerStillHeld": true,
         "nativeReleased": false,
@@ -865,7 +865,7 @@
         "ruling": "5ec0c3cc980b08b88b268c39e78be9596c25631a",
         "plan": "d3ba15acb445c18a471f8de33bea75445c1f900b",
         "expectationSeal": "b39e2856e9c3ac8d88ded14163328dbe4a43a0bd",
-        "sourceExecuted": false,
+        "sourceExecuted": "GHA_ONLY",
         "proposal": "597f4f4091700a2a046b37ccefb1c53ac488a284",
         "report": "6652bcb850b2857e2f798b109bfd0f5e6780dbf8",
         "measurement": "2b13a9dd51b65a6ba0d4629141e3fd5afce7b564",
@@ -888,9 +888,9 @@
           "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
           "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
           "preparing": false,
-          "activationAttempted": false,
-          "refCreated": false,
-          "unattached": true,
+          "activationAttempted": true,
+          "refCreated": true,
+          "unattached": false,
           "mounts": 91,
           "proposal": "597f4f4091700a2a046b37ccefb1c53ac488a284",
           "staticReview": "6c677054b1ad7a66688c512b777684d5f7c594cb",
@@ -898,13 +898,30 @@
           "fullTreeVerified": true,
           "original3203Preserved": true,
           "leaves": 3294,
-          "head": "3e9492c106a183c0338d21add6a7ef89851c5a3f"
-        }
+          "head": "3e9492c106a183c0338d21add6a7ef89851c5a3f",
+          "gate": "96c2eb9c32c97629daec432acd6b4311d6debe19",
+          "activationUTC": "2026-11-17 22:20:02 UTC",
+          "run": 44189016920,
+          "runStatus": "in_progress",
+          "job": 134413114234,
+          "jobStatus": "in_progress"
+        },
+        "nativeGate": "96c2eb9c32c97629daec432acd6b4311d6debe19",
+        "stepObservations": {
+          "syntax": "JOB_STEP_SUCCESS_PENDING_TERMINAL_LOG_AUDIT",
+          "defensive": "JOB_STEP_SUCCESS_PENDING_TERMINAL_LOG_AUDIT",
+          "startup": "JOB_STEP_SUCCESS_PENDING_TERMINAL_LOG_AUDIT",
+          "native": "IN_PROGRESS"
+        },
+        "nativeToolAcceptance": false,
+        "publicConsumerReleased": false,
+        "SourceQualified": false,
+        "Task1Pass": false
       }
     }
   },
-  "schemaVersion": 84,
-  "updatedAtUTC": "2026-11-17 22:19:25 UTC",
+  "schemaVersion": 85,
+  "updatedAtUTC": "2026-11-17 22:22:26 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
