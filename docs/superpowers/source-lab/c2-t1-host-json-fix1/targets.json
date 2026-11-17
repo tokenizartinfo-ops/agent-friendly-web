@@ -1,0 +1,203 @@
+{
+  "schema": "afw.c2-host-json-fix1.targets.v1",
+  "authority": "5b62cc4b148d5667f7845957012bca03c49e6be0",
+  "normalIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "candidateIndex": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+  "rows": [
+    {
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+        "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+        "bytes": 148547,
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+        "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+        "bytes": 45576,
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+        "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+        "bytes": 2497,
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+      }
+    },
+    {
+      "path": "worker/mcp-own/finite.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+        "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+        "bytes": 2810,
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "bytes": 4153,
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+        "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+        "bytes": 101380,
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+        "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+        "bytes": 22501,
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+      }
+    },
+    {
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+        "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+        "bytes": 2785,
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+      }
+    },
+    {
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+        "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+        "bytes": 18667,
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+      }
+    },
+    {
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "bytes": 61073,
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+      }
+    },
+    {
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+        "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+        "bytes": 88519,
+        "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1-host-json-fix1/s10-candidate.txt",
+        "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+        "bytes": 88713,
+        "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+      }
+    },
+    {
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+        "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+        "bytes": 58727,
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+      }
+    },
+    {
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "old": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      },
+      "candidate": {
+        "file": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+        "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+        "bytes": 6030,
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+      }
+    }
+  ]
+}

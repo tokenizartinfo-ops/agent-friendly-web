@@ -1,0 +1,154 @@
+{
+  "schema": "afw.c2-host-json-fix1.fixture-first.v1",
+  "authority": "5b62cc4b148d5667f7845957012bca03c49e6be0",
+  "plan": "0a04e29e7a72c4ef853942fc6f7093416c9e9a71",
+  "oldIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+  "oldS10": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+  "nativeIds": [
+    "HOST_ENCODE_ONCE",
+    "HOST_WIRE_EQUAL",
+    "HOST_FRESH_PER_CALL",
+    "HOST_CLOSURE"
+  ],
+  "checks": [
+    [
+      "countedActualCallback",
+      "canonicalUnicodeBodyAndTrace",
+      "singleSerialization"
+    ],
+    [
+      "largeModuleBodyHeadersAndTrace",
+      "deniedWorkflow401BodyHeadersAndTrace",
+      "nonFirstConnectionOneNativeSerialization"
+    ],
+    [
+      "initialVersionObserved",
+      "sameObjectSameUrlChanged",
+      "sameObjectSameUrlRestored",
+      "priorRowsRemainExact"
+    ],
+    [
+      "failedSerializationNoAppend",
+      "subsequentCallRemainsFresh",
+      "targets13VerifiedAndOnlyS10Changed"
+    ]
+  ],
+  "sample": {
+    "certsUrl": "https://fixture.invalid/cdn-cgi/access/certs",
+    "unicodeJwk": {
+      "kid": "SYN-é-水-🪐",
+      "quote": "\"\\\n",
+      "order": [
+        null,
+        false,
+        7
+      ]
+    },
+    "unicodeBody": "{\"keys\":[{\"kid\":\"SYN-é-水-🪐\",\"quote\":\"\\\"\\\\\\n\",\"order\":[null,false,7]}]}",
+    "unicodeBytes": 76,
+    "unicodeSha256": "bc86b9f4007c3cd0b3bf52f0beee61caf4c201c0ced40b51802d8d98d774bd05",
+    "versionId": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+    "versionUrl": "https://fixture.invalid/workers/workers/agent-friendly-web-delegated-canary/versions/aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa?include=modules",
+    "moduleContentType": "application/javascript+module",
+    "large": {
+      "moduleCharacter": "A",
+      "repeat": 2097152,
+      "wirePrefix": "{\"success\":true,\"errors\":[],\"messages\":[],\"result\":{\"id\":\"aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa\",\"modules\":[{\"name\":\"index.mjs\",\"content_type\":\"application/javascript+module\",\"content_base64\":\"",
+      "wireSuffix": "\"}]}}",
+      "bytes": 2097349,
+      "sha256": "7f376e602b669c97c9b198b0bbfcd95cf7dcd98ca4be9622694b920a1d00db49"
+    },
+    "fresh": [
+      {
+        "moduleValue": "QUJD",
+        "wire": "{\"success\":true,\"errors\":[],\"messages\":[],\"result\":{\"id\":\"aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa\",\"modules\":[{\"name\":\"index.mjs\",\"content_type\":\"application/javascript+module\",\"content_base64\":\"QUJD\"}]}}",
+        "bytes": 201,
+        "sha256": "8c6991064379168054b5bb24737e58b2dd85752d802a0dd0f5d5461e0820cb31"
+      },
+      {
+        "moduleValue": "REVG",
+        "wire": "{\"success\":true,\"errors\":[],\"messages\":[],\"result\":{\"id\":\"aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa\",\"modules\":[{\"name\":\"index.mjs\",\"content_type\":\"application/javascript+module\",\"content_base64\":\"REVG\"}]}}",
+        "bytes": 201,
+        "sha256": "df7836da48bf8d2b56276823938dbca097406ec4b999c51b6655c05c0f81dd15"
+      }
+    ],
+    "denied": {
+      "suffix": "/workflows/afw-own-qa-private-bootstrap/instances/afw-mcp-closure-d56b5e850d24cc23058a024d73bae4c830a91c1fb9659f2e96282854ccae2c04",
+      "mode": "http-401",
+      "status": 401,
+      "statusText": "",
+      "wire": "{\"success\":false,\"errors\":[],\"messages\":[],\"result\":null}",
+      "bytes": 57,
+      "sha256": "b802ca281a2ced06f4c674bbafdf6ac51b317991bee4a8c9f0655610fa014c4a"
+    },
+    "headers": {
+      "certs": [
+        [
+          "content-type",
+          "application/json"
+        ]
+      ],
+      "versionNames": [
+        "content-type",
+        "date",
+        "x-ratelimit-remaining"
+      ],
+      "remaining": "60",
+      "deniedNames": [
+        "content-type",
+        "date"
+      ],
+      "date": "actual IMF-fixdate within whole-second start/end bounds; complete response Headers against a native reference with the same supplied date"
+    }
+  },
+  "oracle": {
+    "old": {
+      "pass": 3,
+      "fail": 1,
+      "failedId": "HOST_ENCODE_ONCE",
+      "failedCheck": "singleSerialization",
+      "code": "ERR_ASSERTION",
+      "operator": "strictEqual",
+      "actual": 2,
+      "expected": 1
+    },
+    "candidate": {
+      "pass": 4,
+      "fail": 0,
+      "expectedCalls": 1
+    },
+    "both": {
+      "statusByInput": [
+        200,
+        200,
+        401
+      ],
+      "statusText": "",
+      "nonFirstCount": 1,
+      "nonFirstTraceAbsent": true,
+      "sequence": [
+        0,
+        1,
+        0
+      ],
+      "sameUrlAndIdentity": true,
+      "expectedSerializationError": "TypeError",
+      "failedResponseRowAppends": 0,
+      "restoreProducesOriginalHash": true,
+      "canonicalPathsMeasured": 13,
+      "changedCanonicalPaths": 1
+    }
+  },
+  "scope": "Real callback direct invocation in future GitHub Actions only. No network sends, Miniflare construction, SDK calls, bundling or business cases. Native OLD/NEW mode both use the same tests and expected one-call behavior. Before RED scoped to actual original comparison. No runtime has occurred in author scope.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
