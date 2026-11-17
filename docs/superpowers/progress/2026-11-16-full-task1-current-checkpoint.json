@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "295ea515e392d11e9c253977dcb21ea8b676ad35",
-  "phase": "GB1_GENUINE_MODEL_BOUNDARY_STATIC_REVIEW_RUNNING",
+  "previousCheckpoint": "aa6130b00cb19d499bd93981146af1b12cea5aa8",
+  "phase": "GB1_FIX1_PRIMITIVE_CALLBACK_GUARD_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -857,7 +857,7 @@
       "fixWaveCapExhausted": true,
       "rootAdjudication": "FP1 real/load-bearing; changed genuine-only canonical foreign-row test boundary under GB1 prerequisite. No StageB6/reset; not parked/closed.",
       "GB1": {
-        "status": "STATIC_REVIEW_RUNNING",
+        "status": "FIX1_RUNNING",
         "sameOperationalGoal": true,
         "publicConsumerStillHeld": true,
         "nativeReleased": false,
@@ -875,12 +875,19 @@
         "rootBytes": 1506876,
         "rootCanonicalFull": "6b22909538a73efa73e76d83b1381cd63905b5ccf0cd4c9a8d87841514a453f8",
         "rootCanonicalSix": "258df76ddbe54e1325088254650c60ce1d47ce37e310726be33c9448ded60595",
-        "rootLiteralTransitions": 22
+        "rootLiteralTransitions": 22,
+        "initialReview": "de268e966e1a639dfb92defb882a7dc9330bfac4",
+        "initialReviewFormat": "MARKDOWN",
+        "currentFixRound": 1,
+        "maxFixRounds": 5,
+        "openFindings": [
+          "GB1-1: reject nonprimitive callback payload before TAP framing; Array/Buffer can otherwise coerce to expected bytes"
+        ]
       }
     }
   },
-  "schemaVersion": 82,
-  "updatedAtUTC": "2026-11-17 22:03:41 UTC",
+  "schemaVersion": 83,
+  "updatedAtUTC": "2026-11-17 22:10:13 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
