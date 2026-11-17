@@ -1,0 +1,131 @@
+{
+  "schema": "AFW-DROP-FIXTURES-ROOT-CLOSE-READBACK/1",
+  "atUTC": "2026-11-17 12:50:25 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-source-20261117-drop-winner-fixtures",
+  "primary": "6f98dadad0d3ac0533d1d4399344cac1f8fb9667",
+  "proof": "b77f84620c7cd3c83bc2ef48d3e53dfec5d41ac0",
+  "validation": "e58f9364b66c10cf098e560c05da7d1607da25bf",
+  "closedHead": "4dec9811009052b4088068a06ece37a7af70b4cf",
+  "closedTree": "6de381b7d06c70cae3a98d3c1c6841a603741327",
+  "parent": "d561b138ed6906cdf90c69bdb18afaca1e2188b2",
+  "receipt": "456f4fa03e0dce82db95bfbd2f20dd9cb3faac23",
+  "ref": {
+    "ref": "refs/heads/lab/afw-c2-source-20261117-drop-winner-fixtures",
+    "node_id": "REF_kwDOUFJoltoAOnJlZnMvaGVhZHMvbGFiL2Fmdy1jMi1zb3VyY2UtMjAyNjExMTctZHJvcC13aW5uZXItZml4dHVyZXM",
+    "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/refs/heads/lab/afw-c2-source-20261117-drop-winner-fixtures",
+    "object": {
+      "sha": "4dec9811009052b4088068a06ece37a7af70b4cf",
+      "type": "commit",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/4dec9811009052b4088068a06ece37a7af70b4cf"
+    }
+  },
+  "commit": {
+    "sha": "4dec9811009052b4088068a06ece37a7af70b4cf",
+    "node_id": "C_kwDOUFJoltoAKDRkZWM5ODExMDA5MDUyYjQwODgwNjhhMDZlY2UzN2E3YWY3MGI0Y2Y",
+    "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/4dec9811009052b4088068a06ece37a7af70b4cf",
+    "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/4dec9811009052b4088068a06ece37a7af70b4cf",
+    "author": {
+      "name": "tokenizart",
+      "email": "tokenizart.info@gmail.com",
+      "date": "2026-11-17T12:50:21Z"
+    },
+    "committer": {
+      "name": "tokenizart",
+      "email": "tokenizart.info@gmail.com",
+      "date": "2026-11-17T12:50:21Z"
+    },
+    "tree": {
+      "sha": "6de381b7d06c70cae3a98d3c1c6841a603741327",
+      "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/trees/6de381b7d06c70cae3a98d3c1c6841a603741327"
+    },
+    "message": "AFW-C2-DROP-WINNER-FIXTURES-CLOSED-20261117",
+    "parents": [
+      {
+        "sha": "d561b138ed6906cdf90c69bdb18afaca1e2188b2",
+        "url": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web/git/commits/d561b138ed6906cdf90c69bdb18afaca1e2188b2",
+        "html_url": "https://github.com/tokenizartinfo-ops/agent-friendly-web/commit/d561b138ed6906cdf90c69bdb18afaca1e2188b2"
+      }
+    ],
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "leaves": 3209,
+  "original3203AndRetained4Exact": true,
+  "onlyWorkflowDeletedTwoEvidenceAdded": true,
+  "protectedRefs": [
+    {
+      "name": "main",
+      "branch": "main",
+      "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+    },
+    {
+      "name": "source",
+      "branch": "feat/finite-native-cleanup-20261101",
+      "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+    },
+    {
+      "name": "own42",
+      "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+      "sha": "c511b6f061fb4eb0c5594779d3123e824f34f243"
+    },
+    {
+      "name": "source35",
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+      "sha": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+    },
+    {
+      "name": "diag1",
+      "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+      "sha": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
+    },
+    {
+      "name": "host",
+      "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+      "sha": "1f62e087f0d9000f9c08519cd162db1104827af8"
+    },
+    {
+      "name": "toy",
+      "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+      "sha": "5f5295265217b31a19fbed2379f697c5a6a83080"
+    },
+    {
+      "name": "diag2",
+      "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+      "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01"
+    },
+    {
+      "name": "source149",
+      "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+      "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0"
+    },
+    {
+      "name": "own73",
+      "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+      "sha": "067a012121a58f7c2baf938228765242c433a1d5"
+    },
+    {
+      "name": "diag3Business",
+      "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+      "sha": "08061db79cd0f38f25df8977e1ded8e17542e684"
+    }
+  ],
+  "closedHeadRuns": 0,
+  "MODEL_RED_ONLY": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
