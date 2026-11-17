@@ -1,0 +1,401 @@
+{
+  "schema": "AFW-C2-HOST-JSON-FIX1-SOURCE-TOOLS-INDEX/1",
+  "status": "DETACHED_TESTS_PENDING_NATIVE_AND_FRESH_REVIEW",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "authority": "5b62cc4b148d5667f7845957012bca03c49e6be0",
+  "family": "HOST_JSON_FIX1",
+  "round": 1,
+  "maxRounds": 5,
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+    "message": "AFW-C2-HOST-JSON-FIX1-TOOLS-ONEUSE-20261116",
+    "workflow": ".github/workflows/afw-c2-host-json-fix1-tools.yml",
+    "job": "c2-host-json-fix1-tools",
+    "prefix": "docs/superpowers/source-lab/c2-t1-host-json-fix1/",
+    "runner": "docs/superpowers/source-lab/c2-t1-host-json-fix1/run-host-controls.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-host-json-fix1/run-host-controls.mjs",
+    "os": "ubuntu-24.04",
+    "node": "22.23.4",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "attempt": 1,
+    "permissions": "contents: read",
+    "artifact": {
+      "name": "afw-c2-host-json-fix1-tools-proof",
+      "path": "output/c2-host-json-fix1-tools-proof.json",
+      "fileName": "c2-host-json-fix1-tools-proof.json",
+      "retentionDays": 7,
+      "count": 1,
+      "payloadMaxBytes": 24576,
+      "zipMaxBytes": 1048576,
+      "logMaxBytes": 4194304
+    },
+    "activationReleased": false
+  },
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "originalLeaves": 3203,
+  "mount": "All 23 additive 100644 blobs. BASE canonical product paths remain original. Thirteen frozen body files are inert data on Git. Candidate S10 is its own inert addition. Canonical old/new versions are installed only inside separate fresh RUNNER_TEMP targets. Retain all old hash-addressed data. Total prospective leaves 3226.",
+  "mountLeaves": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/normal13.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+      "bytes": 11467,
+      "sha256": "0681cadc774fcddf7a009e86e24b22fa879857af1e900f6143d23c2d7eaa9be7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/fixture-first.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "65dd370ef52c0bcbb8fd56b2012d2c8bb93f3ae4",
+      "bytes": 5313,
+      "sha256": "9a12651e834f2c6e977424cd5d5662fac4bba2a0e51c96befdae7a5ce21b1943"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/repo-imports.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "506ca639a60e18a82f902e858cc1c08be2133d59",
+      "bytes": 26784,
+      "sha256": "22ab5754207ab7100345a1ab3884e0b282cf0f24c627c8940dd96a486664378b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/targets.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "0c1897e6306f2673df490bcb99543490243bdaeb",
+      "bytes": 8000,
+      "sha256": "84d804582c5d2abaa9d54c15ad76f6c6887654cc4096c28584843d250118b2f0"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/package-closure.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c505a9d26aac123275cbc8bb28a56d4986e7e16e",
+      "bytes": 38204,
+      "sha256": "819003b4c156576d9f43ba250a152ad2482dafbd80cdceded88c66fdee5c80d4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/candidate13.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/s10-candidate.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/host-controls.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "18bc9a01789895579428c7bddbd7c270a249b34a",
+      "bytes": 10347,
+      "sha256": "8e61495d630df333f68b441d6de7a898ebaeccb674facfe0e7bf30b1fb6ccbf9"
+    },
+    {
+      "path": ".github/workflows/afw-c2-host-json-fix1-tools.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a5e5e7aa550fa406c3f84bea6a4505becdb11e93",
+      "bytes": 1408,
+      "sha256": "048e167151a614b992e379dd7eac737ec995ae6b4c2eda31ff7d71fb5b52779f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-host-json-fix1/run-host-controls.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "ef5b42e26ef48148361f5b3b68311e0f1d9614dd",
+      "bytes": 17637,
+      "sha256": "bc664cf7c4f227840d9d9e54b08151beb794ccfb3de88ca8a91547d499b94b86"
+    }
+  ],
+  "sourceLineage": {
+    "oldIndex": "26b62b5ce8f413b6f7fd146e03b8f8cdcf6995ac",
+    "qualifier": "c230140201a6e12d9a355b2cfe6343749f083e1d",
+    "oldS10": {
+      "blob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "bytes": 88519,
+      "sha256": "79a135fbc9897463b566624a4662946089b8b5fd25baeda368663ff65be3cdc7",
+      "gitBlob": "9e7f89e3a0b5112323cd80a960daa03eb1f9e1b5",
+      "gzipBytes": 22824
+    },
+    "candidateS10": {
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+      "fullReadback": true
+    },
+    "candidateIndex": {
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+      "fullReadback": true
+    },
+    "reversible": {
+      "blob": "3ea5df08fb6e454698153050faf41e14034c32cb",
+      "bytes": 8178,
+      "sha256": "50e67f25fe6ff392a35c7e557369cd551bc41c16aa47991dd84ab5a8e8adef4c",
+      "fullReadback": true
+    }
+  },
+  "presealed": {
+    "blob": "65dd370ef52c0bcbb8fd56b2012d2c8bb93f3ae4",
+    "bytes": 5313,
+    "sha256": "9a12651e834f2c6e977424cd5d5662fac4bba2a0e51c96befdae7a5ce21b1943",
+    "fullReadback": true
+  },
+  "nativeIds": [
+    "HOST_ENCODE_ONCE",
+    "HOST_WIRE_EQUAL",
+    "HOST_FRESH_PER_CALL",
+    "HOST_CLOSURE"
+  ],
+  "checks": [
+    [
+      "countedActualCallback",
+      "canonicalUnicodeBodyAndTrace",
+      "singleSerialization"
+    ],
+    [
+      "largeModuleBodyHeadersAndTrace",
+      "deniedWorkflow401BodyHeadersAndTrace",
+      "nonFirstConnectionOneNativeSerialization"
+    ],
+    [
+      "initialVersionObserved",
+      "sameObjectSameUrlChanged",
+      "sameObjectSameUrlRestored",
+      "priorRowsRemainExact"
+    ],
+    [
+      "failedSerializationNoAppend",
+      "subsequentCallRemainsFresh",
+      "targets13VerifiedAndOnlyS10Changed"
+    ]
+  ],
+  "oldExpected": {
+    "pass": 3,
+    "fail": 1,
+    "failedId": "HOST_ENCODE_ONCE",
+    "failedCheck": "singleSerialization",
+    "code": "ERR_ASSERTION",
+    "operator": "strictEqual",
+    "actual": 2,
+    "expected": 1
+  },
+  "candidateExpected": {
+    "pass": 4,
+    "fail": 0,
+    "expectedCalls": 1
+  },
+  "nativeOrder": [
+    "old",
+    "candidate"
+  ],
+  "proof": {
+    "marker": "AFW_C2_HOST_JSON_FIX1_TOOLS_PROOF",
+    "schema": {
+      "blob": "2ce3d07042abc76c586d25d5e0cd95ad57348dab",
+      "bytes": 31067,
+      "sha256": "c90b078be6dddbdfbcb1274e12ed663a47f38abacb204ab60ae28a81a945edad",
+      "fullReadback": true
+    },
+    "independentAdmissionProtocol": {
+      "blob": "cd9c2a8af90a0f57e2dfdc34986c6f22f8d3e48d",
+      "bytes": 3086,
+      "sha256": "c89516a37d370bb0bbfd85c5828945b59a25f41c94c5618181316a2163b4093e",
+      "fullReadback": true
+    },
+    "tap": "Full UTF-8 raw native child TAP per mode + byte count/SHA256, suite+13 real input fingerprints, proof body and LF <=24576.",
+    "steps": [
+      "Read the exact host fixture head",
+      "Use the fixed Node runtime",
+      "Verify original and candidate host callbacks",
+      "Preserve the host fixture proof"
+    ]
+  },
+  "graph": {
+    "repositoryImports": {
+      "blob": "506ca639a60e18a82f902e858cc1c08be2133d59",
+      "bytes": 26784,
+      "sha256": "22ab5754207ab7100345a1ab3884e0b282cf0f24c627c8940dd96a486664378b",
+      "fullReadback": true
+    },
+    "packageClosure": {
+      "blob": "c505a9d26aac123275cbc8bb28a56d4986e7e16e",
+      "bytes": 38204,
+      "sha256": "819003b4c156576d9f43ba250a152ad2482dafbd80cdceded88c66fdee5c80d4",
+      "fullReadback": true
+    },
+    "targets": {
+      "blob": "0c1897e6306f2673df490bcb99543490243bdaeb",
+      "bytes": 8000,
+      "sha256": "84d804582c5d2abaa9d54c15ad76f6c6887654cc4096c28584843d250118b2f0",
+      "fullReadback": true
+    },
+    "packageManifest": "f4fd38ac380c46a149d8cf0f3bd828a28406f761",
+    "lock": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+    "oldNewModules": 79,
+    "initializationJsonReads": 1,
+    "directNpm": 6,
+    "potentialLockPackages": 98,
+    "controllerImports": [
+      "node:assert/strict",
+      "node:child_process",
+      "node:crypto",
+      "node:fs/promises",
+      "node:path",
+      "node:url"
+    ],
+    "childImports": [
+      "node:test",
+      "node:assert/strict",
+      "node:crypto",
+      "node:fs/promises",
+      "node:os",
+      "node:path",
+      "node:url",
+      "target/test/fixtures/finite-initial-entry-world.mjs",
+      "target/test/fixtures/finite-bootstrap-world.mjs"
+    ],
+    "childEmission": "Controller checks original23/HEAD, verifies lock integrity metadata and installs with npm ci --ignore-scripts --no-audit --no-fund in own RUNNER_TEMP ONLY. For both targets copy pinned repository module data+descriptor+all13 unique canonical target paths. Each actual callback suite runs nonroot uid/gid and cleared groups in a different network namespace from controller, stripped environment and loopback/internal only. No business harness invocation. Controller observes exact old1 and new0 exits, parses native TAP, compares real measurements and guards dev/ino/uid before deleting its temp tree."
+  },
+  "verification": {
+    "actualMountedBodiesFullyReadAndHashed": 23,
+    "distinct": 23,
+    "baselinePreserved": "Preserved Git primary24794a48 tree excluding 2f2594 additive paths gives original3203; 23 new pathnames all disjoint.",
+    "reversibleBeforeAfter": true,
+    "fixtureFirstBeforeCode": true,
+    "locallyExecutedSource": false,
+    "nativeRedObserved": false,
+    "nativeGreenObserved": false
+  },
+  "SourceBusinessExecution": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
