@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "67f503402cf1be228bbf5eae45ddac92da8cb02a",
-  "phase": "GET_WINNER_MANIFEST1_EXPECTED_RED_VERIFIED_CLOSED_ACTUAL_REVIEW",
+  "phase": "GET_WINNER_TASK1_STAGE_B_DETACHED_IMPLEMENTATION_RELEASED",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Fresh actual review from preserved exact RED evidence; if accepted release only Task1 StageB minimal GET observation/publisher. No business diagnostic/native tool activation before exact separate gate.",
+  "next": "Task1 StageB minimal GET observation/publisher detached implementation under actual RED acceptance; independent static SPEC+QUALITY, exact Root source measurement and controlled native tool gate follow. No downstream reader/business/live release.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -507,7 +507,7 @@
     "actor": "/root/get_winner_dependent_design",
     "reviewer": "/root/get_winner_design_review",
     "roundsUnchanged": true,
-    "implementationReleased": false,
+    "implementationReleased": true,
     "nativeReleased": false,
     "reversibleDiff": "4e48bd4676a74189412f26b02338807da05257bf",
     "review": "935909a1f003a661c9e39f5d99ec3dfae566cd25",
@@ -516,9 +516,9 @@
   "completedOwnVmReleased": true,
   "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
   "getWinnerDependent": {
-    "phase": "EXPECTED_RED_ROOT_VERIFIED_ACTUAL_REVIEW_PENDING",
-    "featureCodeReleased": false,
-    "nativeReleased": true,
+    "phase": "TASK1_STAGE_B_DETACHED_IMPLEMENTATION",
+    "featureCodeReleased": true,
+    "nativeReleased": false,
     "roundsUnchanged": true,
     "actor": "/root/get_winner_fixture_stage_a",
     "reviewer": "/root/get_winner_stage_a_review",
@@ -639,7 +639,7 @@
     "manifestActualPrimary": "0919eb82966125450d60922aaa40ff2f23b45133",
     "manifestActualOutcome": "b6d80077fc2504660aef6b524c6a9dc0d0c57fa3",
     "manifestActualClosure": "c572565918eb3428b4b32d09207e19e7de00e86d",
-    "manifestActualReview": "PENDING_SAVED_EVIDENCE_REVIEW",
+    "manifestActualReview": "891b47473931274f578b43988c88997407b32343",
     "actualObservation": {
       "namedMissingMarker": true,
       "actual": null,
@@ -654,8 +654,10 @@
       "syntaxChecks": 5,
       "startupControls": 46
     },
-    "nativeAttemptsQualification": "Prior two tooling failures not expected RED; current third materially changed manifest1 attempt verified expected RED only"
+    "nativeAttemptsQualification": "Prior two tooling failures not expected RED; current third materially changed manifest1 attempt verified expected RED only",
+    "implementationActor": "/root/get_winner_fixture_stage_a",
+    "stageBReleaseScope": "Detached minimal M observation and host/publisher/tool packet only; exact activation held"
   },
-  "schemaVersion": 61,
-  "updatedAtUTC": "2026-11-17 17:23:45 UTC"
+  "schemaVersion": 62,
+  "updatedAtUTC": "2026-11-17 17:27:46 UTC"
 }

@@ -1,0 +1,61 @@
+{
+  "schema": "AFW.GET_WINNER.MANIFEST1.ACTUAL_REVIEW/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "saved immutable evidence",
+  "resourceType": "detached review blob",
+  "allowedAction": "Saved-evidence review and detached report with full readback",
+  "rollback": "Disregard detached report",
+  "inputs": {
+    "p": "0919eb82966125450d60922aaa40ff2f23b45133",
+    "o": "b6d80077fc2504660aef6b524c6a9dc0d0c57fa3",
+    "c": "c572565918eb3428b4b32d09207e19e7de00e86d",
+    "g": "08922deb97dcaa81475d35acd37e10cbba1307e4",
+    "m": "4241578c4b15032f4d57c2b1baa46846d6ad8627",
+    "s": "9f287e9f1d5538954ad3bd62e357bf33866033de"
+  },
+  "SPEC": "PASS_ACTUAL_EXPECTED_RED",
+  "QUALITY": "PASS_BOUNDED_NATIVE_RED_EVIDENCE_AND_CLOSURE",
+  "materialFindings": [],
+  "run": 44134958107,
+  "attempt": 1,
+  "job": 134221843459,
+  "head": "f8fbf79837b1238a36077ad7951bc908478a9aa8",
+  "tree": "1ae6c6ce938f8e5fccc34435b9f15d3a34990234",
+  "closure": {
+    "head": "c0e5f6c8ccb58b8394faf62ffe04d7ef4f51d1a6",
+    "tree": "47f15706ce73e31f3931dcf2a2a322b85c0a8011",
+    "intent": "5aa2d0efe2605cadfd5a2aeb1fae069d193a03b7"
+  },
+  "result": "Accept the named absent-marker RED. The guarded original positive M GET reached the single fixed synthetic actor, received serialized 413, matched cache-control and exact original pending body, observed actor qualification, caught precisely the missing-marker assertion null versus g1.413.S.413, disposed Miniflare and exited child41. Controller remeasured targets, accepted one preflight and one tool probe, removed its owned temporary tree, emitted the canonical expected-RED receipt and exited41. The intentionally failed job conclusion agrees with this expected RED contract.",
+  "evidence": {
+    "api": "Complete saved API run/job/attempt/head/commit/tree match. Exactly one nominated job. Five Node syntax checks succeeded, exactly one STARTUP_HELPER_CONTROLS_46_OK output exists, dependencies installed, native step7 failed with controller41, expected-RED upload step8 succeeded, fault upload step9 skipped.",
+    "log": "Exactly one AFW_GET_WINNER_EXPECTED_MARKER, one controller exit41 and one artifact final-upload ID14352161307. No prerequisite-failure marker.",
+    "archive": "The saved artifact API names afw-c2-get-winner-red with ID14352161307 and the same run/head. Sole ZIP member get-winner-red.json, archive791 bytes SHA25633a9da3f6679d2f8ae23b34f2875d7ea47d3e739eb90b7b12d584e8a5d827760. Full saved ZIP inspection validates flag8, deflate8, compressed639, CRC32d2bf28b8, signed16-byte data descriptor, local/central offsets and terminal22-byte EOCD.",
+    "payload": "Exact1023-byte UTF8 payload SHA256fa4c3cbd0041c0dd4c75358b411642793f59f7751031cbea217ca256e8afc72e. Parsed with duplicate-key rejection, validated all declared schema constraints/required key order/additional-property exclusions against pinned schema1b26496112c09e7b8e12443f79b3128f92a02d55, then reproduced byte-for-byte canonical JSON plus LF. Compared every context field against saved API and gate. Resident observation SHA256e550e683358ca07a83db8863aa5942fdbfb8c9232293380315d9ec94d93c91f8, 2004296 bytes, dispatched1, status413, originalActorArrived/bodyMatched/disposed all true.",
+    "pins": "Independently fetched and fully hashed all33 pinned Git bodies. Every path/mode/type/GitID/bytes/SHA256 tuple matches proposal and Root measurement. Reconstructed canonical ordered edge body and compared GitID/SHA256/length with Root graph. Read exact child749506322d41c68fdbc201065f6649c88da3a682 and controller93f29a23ecb028c349d4a5a64253c18123ad185d as text. The changed child differs from original faa9e8250f3afd65f187342cc4280e23fc482af1 on physical line54 only. Source/fixture pins retain their existing identities.",
+    "semantics": "Child32\u201354 establishes script/byte/gunzip resident equality, positive script distinct from spy, and exact selected converted ES-module bytes/hash before constructing Miniflare. Child58\u201378 establishes the status/body/actor and exact named absent-marker failure before disposal. Child80\u201385 only writes the exact red-child receipt after disposal and exits41. Controller275\u2013318 requires preflight custody, exact RED flags, fulfilled bootstrap, target before/after equality and exact child receipt. Controller cleanup and artifact publication require removal before printing named RED and exit41.",
+    "closure": "Rebuilt the baseline3203-leaf Git tree, attempted3236-leaf tree and closed3237-leaf tree from complete saved path/mode/GitID maps. Their hashes match baseline, attempted and closed commit/API tree IDs. Parent linkage matches. The only removed leaf is the nominated manifest1 workflow. All3203 original plus32 added leaves are preserved, and the only new leaves are primary0919eb82966125450d60922aaa40ff2f23b45133 and closure5aa2d0efe2605cadfd5a2aeb1fae069d193a03b7. All19 protected ref records match the earlier saved closed state including startup1, and the saved close-head run query has total_count0."
+  },
+  "limits": {
+    "historicalBusiness503Cause": "UNKNOWN",
+    "historicalStartupExceptionSite": "UNKNOWN",
+    "old315ExpectationCasesExecuted": false,
+    "featureObserverReleased": false,
+    "businessReleased": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "sourceRounds": 5,
+  "ownRounds": 5,
+  "reset": false,
+  "scope": "Bounded actual evidence acceptance. Independent review performed from saved blobs as DATA. This report does not grant subsequent native, ref or runtime authority."
+}

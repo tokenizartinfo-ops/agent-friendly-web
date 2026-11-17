@@ -1,21 +1,23 @@
 # AFW — estado para preparar el ensayo con PC apagada
 
-Comprobación documental: 2026-11-17 15:31:39 UTC. Proyecto AFW, repositorio tokenizartinfo-ops/agent-friendly-web. Este registro separa evidencia del laboratorio, trabajo de fuente pendiente y requisitos de una ejecución real; no acredita disponibilidad actual del proveedor ni runtime.
+Comprobación documental: 2026-11-17 17:27:46 UTC. Proyecto AFW, repositorio tokenizartinfo-ops/agent-friendly-web. Evidencia del laboratorio, sin nueva comprobación de salud del proveedor ni del runtime.
 
-## Evidencia disponible
+## Evidencia y trabajo actual
 
-El diagnóstico Source5 run44110921244/job134135963389 quedó conservado y cerrado. La revisión independiente a7b3035185debcc4ba6db18bd21592bf4a84e2e3 verificó log, ZIP, recibo, 26 entradas y cierre. Catorce casos pasaron; el primero que falla es el GET del caso15, HTTP503 en vez de200. El caso16 falla en la misma aserción, con código propio no conservado;17 falla en selección;18 quedó abierto al límite de180s;19–20 no se observaron. El POST de DROP no se alcanzó. Tiempo y cantidad de Tickets no identifican la causa.
+El último recorrido completo Source5 (run44110921244/job134135963389, evidencia7d8f310d69e718727ce2cb392e565dea90205693, revisióna7b3035185debcc4ba6db18bd21592bf4a84e2e3) conserva catorce casos aprobados y un primer fallo de GET503 en vez de200 en el caso15, antes del POST de DROP. Los casos siguientes no completaron el recorrido; catorce pases no califican el producto. La causa del503 sigue desconocida y no se atribuye a Cloudflare.
 
-Los controles de las herramientas de diagnóstico y del lector independiente pasaron en sus ámbitos. Permiten aceptar la captura incompleta; no califican el recorrido de negocio.
+Una nueva prueba controlada del GET original preparado sí alcanzó su actor sintético y completó respuesta413, cuerpo esperado y liberación del simulador. Confirmó el RED por marcador diagnóstico ausente, salida41. Run44134958107/1, job134221843459; primaria0919eb82966125450d60922aaa40ff2f23b45133, cierre c572565918eb3428b4b32d09207e19e7de00e86d y revisión independiente aceptada891b47473931274f578b43988c88997407b32343. Cinco comprobaciones de sintaxis y46 controles de captura pasaron. Las315 expectativas de comportamiento siguen selladas, no ejecutadas. Este éxito es del control diagnóstico, no una reparación del503 ni aprobación del recorrido.
 
-## Orden de los siguientes cierres
+Ahora se implementa solo la observación mínima del GET: distinguir vencimiento/abort, respuesta no exitosa del servicio interno y una denegación explícita de validación. No se modifican guardas, tiempos, QA ni la lógica de negocio. El objetivo es elegir la corrección con evidencia. Source5/OWN5 permanecen5/5, sin reinicio.
 
-1. Identificar el ganador del fallo GET con observación mínima e inequívoca, elegir una corrección fundada y verificar el recorrido de preparación. La tarea actual solo diseña el canal diagnóstico; no autoriza otra corrida sin revisión. Los límites Source5/OWN5 no se reinician.
-2. Obtener la calificación completa de Source/Task1 bajo el protocolo congelado y sus controles positivos, negativos, mutantes y regresiones. Un diagnóstico de catorce casos no sustituye ese cierre completo. Plan condicional a4cebfbb3c91ec706429253c9809a0096774108b sigue retenido hasta evidencia material; no se despacha por este documento.
-3. Completar y revisar las tareas dependientes de material instalado, invocaciones y guardia; después la composición de aviso, adopción, lanzamiento, retirada, alarmas y restauración. El plan3434f31d432084d1b6153f85d3b8c64c8e043850 exige esos cierres antes de promover la candidata. Este documento no declara que sus implementaciones o pruebas hayan pasado.
-4. Preparar la candidata cerrada, build y rollback; contrastar fuente, bundles, bindings y vigencias, y revisar el plan completo. Revalidar después los accesos y hechos reales necesarios, sin deducirlos de CI ni de incidentes históricos.
-5. Coordinar UN ensayo real preparado para PC apagada, con arranque atendido y permisos vigentes, ejecución cloud, recepción útil/ACK, retirada de permisos y cierre verificable. La regla3d7dc69c4ccc4ec8c7e3268318a1a10fc79bb238 prohíbe consumir Entry en un ensayo completo PC-encendida separado: arranque, apagado y cierre son fases de la misma ocurrencia. No abrir Entry ni pedir apagar ahora.
+## Cierres pendientes, en orden
 
-No hay una estimación de calendario fiable mientras no esté aislado el fallo actual. No se ha hecho en este bloque una nueva lectura de salud del proveedor o del runtime. No corresponde atribuir el503 del laboratorio a Cloudflare sin evidencia. No se necesita intervención del owner para el bloque de diseño actual.
+1. Implementar y revisar ese diagnóstico; verificar sus controles nativos reales y el lector independiente; usarlo en un único recorrido completo materialmente cambiado. Aislar el fallo, elegir una corrección fundada y verificar el recorrido de preparación. Ninguna repetición idéntica ni aumento de límites está autorizado por este documento.
+2. Calificar Source/Task1 con el protocolo completo congelado (incluidos negativos, mutantes y regresiones), no solo el subconjunto del diagnóstico. El plan condicional a4cebfbb3c91ec706429253c9809a0096774108b sigue retenido hasta evidencia suficiente.
+3. Completar material instalado/invocaciones/guardia y la composición de aviso cloud, adopción, trabajo autorizado/ACK, retirada, alarmas y restauración. Plan3434f31d432084d1b6153f85d3b8c64c8e043850; su presencia no significa que haya pasado.
+4. Preparar candidata cerrada/build/rollback y revisar el plan completo. Comprobar entonces fuente, bundles, bindings, accesos y vigencias reales; CI y los incidentes históricos no los sustituyen.
+5. Coordinar UN ensayo real con PC apagada, arranque atendido y permisos vigentes, ejecución cloud, aviso útil, retirada y cierre verificable. Según3d7dc69c4ccc4ec8c7e3268318a1a10fc79bb238, arranque/apagado/cierre son fases de esa misma ocurrencia; no se consume Entry en un ensayo completo previo con PC encendida. No abrir Entry ni pedir apagar ahora.
 
-SourceQualified=false; Task1Pass=false; operationalReadiness=false; completePackage=false; PCoff=false. Todas las otras no afirmaciones permanecen false. Este trabajo usa GitHub y lectura mínima local; no instala una guardia permanente ni demuestra trabajo autónomo con el ordenador apagado.
+No hay una estimación de calendario fiable hasta aislar el fallo actual. El bloque actual no necesita intervención de Gabriel. Se trabaja principalmente en GitHub/Actions con análisis mínimo de datos en memoria local, sin instalar dependencias locales. No se acredita guardia permanente ni operación con la PC apagada.
+
+SourceQualified=false; Task1Pass=false; operationalReadiness=false; completePackage=false; PCoff=false. Todas las otras no afirmaciones permanecen false.
