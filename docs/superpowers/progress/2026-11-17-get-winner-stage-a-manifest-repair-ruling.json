@@ -1,0 +1,46 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.STAGE_A.MANIFEST_REPAIR_RULING/1",
+  "timestampUTC": "2026-11-17 17:04:00 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "actualReview": "f5696ee0d8782886a05619ef4885c0edc0e8e967",
+  "fixedDependency": {
+    "lockBlob": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+    "version": "5.20260831.0-alpha",
+    "upstreamRepository": "cloudflare/workers-sdk",
+    "tag": "miniflare@5.20260831.0-alpha",
+    "tagObject": "ba1ecf7513dcb08b215433b16da81b6aa15abb2d",
+    "commit": "b7b4ff84477982e7c770bb93928287893fcf2e03",
+    "path": "packages/miniflare/src/config/v4-convert.ts",
+    "blob": "207fa88316c56c50319d23935d5fd583b9ad7f3c",
+    "sha256": "51ae6419e2b6c42a19f952c95362bea3d5572c47099e8e0c4f304fd3847478b9",
+    "source": "https://github.com/cloudflare/workers-sdk/blob/b7b4ff84477982e7c770bb93928287893fcf2e03/packages/miniflare/src/config/v4-convert.ts#L194-L244"
+  },
+  "finding": "Pinned V4-to-V5 converter returns worker config/manifest, not worker.script. Current tool child line54 hashes undefined when that expression is reached. This is an independently verified static test API incompatibility consistent with captured TypeError; neither historic runtime site nor business503 cause is proven.",
+  "decision": "StageA fix3: adjust only physical native child line54 to select the positive worker's converted config.manifest main ESM contents and require equal resident bytes/hash. Preserve lines59/67, pre-conversion check, original M/QA/Source13,315expectations,46startupcontrols, safe aperture, clocks/caps/RED criteria. Propagate child pins and fresh manifest1 nomination only. No Source feature/business fix.",
+  "costIfWrong": "Discard isolated detached patch or preserve next failed controlled result; no production/runtime/permissions changed.",
+  "release": {
+    "codeProposal": true,
+    "localExecution": false,
+    "native": false,
+    "feature": false,
+    "business": false,
+    "runtime": false
+  },
+  "rounds": {
+    "StageA": 3,
+    "StageAMax": 5,
+    "Source": 5,
+    "Own": 5,
+    "noReset": true
+  },
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

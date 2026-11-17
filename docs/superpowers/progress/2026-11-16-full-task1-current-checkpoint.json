@@ -1,10 +1,10 @@
 {
-  "schema": 58,
-  "timestampUTC": "2026-11-17 16:49:08 UTC",
+  "schema": 59,
+  "timestampUTC": "2026-11-17 17:04:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "99f81a43de4edd2d528ebbd865663bb78fcd4f7b",
-  "phase": "GET_WINNER_STARTUP1_EXACT_NATIVE_GATE_UNATTACHED",
+  "previousCheckpoint": "32cce562feaaed4b5a96662a4377d550632bf646",
+  "phase": "GET_WINNER_STARTUP1_FAULT_CLOSED_MANIFEST_COMPATIBILITY_FIX3_PROPOSAL",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Root fresh availability check then one changed startup1 native tooling attempt; expectedRED vs diagnostic both preserved honestly, close/readback afterterminal. No Source observer/business/runtime or user action.",
+  "next": "Original author proposes one physical child-line API repair + dependent pins/fresh manifest1 nomination. Review then Root decides one changed controlled launch; no Source feature/business/runtime release or user action.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -516,9 +516,9 @@
   "completedOwnVmReleased": true,
   "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
   "getWinnerDependent": {
-    "phase": "STARTUP1_REVIEWED_GATED",
+    "phase": "MANIFEST_REPAIR_FIX3_PROPOSAL_ONLY",
     "featureCodeReleased": false,
-    "nativeReleased": true,
+    "nativeReleased": false,
     "roundsUnchanged": true,
     "actor": "/root/get_winner_fixture_stage_a",
     "reviewer": "/root/get_winner_stage_a_review",
@@ -527,7 +527,7 @@
     "originalFixtureSeal": "3d39778abe9105f20c44cc11320fad92f8574d91",
     "originalFixtureMeasurement": "d8045b31f8ad35a2603350660a9943ae6d977b72",
     "review": "9d638a8e0cd6ab05db82eaa926af83a2345b1dca",
-    "stageAFixRound": 2,
+    "stageAFixRound": 3,
     "findings": [
       "A1 duplicate controller const st in same try blocks parsing before native; rename receipt-only variable",
       "A2 copy-all oracle must preserve serialized marker while trusted classification stays UNKNOWN"
@@ -584,16 +584,31 @@
       "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
       "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
       "preparing": false,
-      "activationAttempted": false,
-      "refCreated": false,
-      "unattached": true,
+      "activationAttempted": true,
+      "refCreated": true,
+      "unattached": false,
       "mounts": 33,
       "tree": "e8a2623120a1680bc3c0127104c448f33cb84d20",
       "head": "8839c37f5d3267e8a1ed372ba5dfb0d30166267e",
       "fullTreeVerified": true,
       "original3203Preserved": true,
-      "leaves": 3236
+      "leaves": 3236,
+      "gate": "f9b52c10b8e38852b8e3fe8786184caeb49386f3",
+      "activationUTC": "2026-11-17 16:49:32 UTC",
+      "run": 44130157151,
+      "job": 134204703237,
+      "closed": true,
+      "closedHead": "3fc6c6fa561a0cce504dcc735046f440eb3f1690",
+      "closedTree": "bc9de73f6b10fec1817ade5368421cc9f85c4a80"
     },
-    "controls46Executed": false
+    "controls46Executed": false,
+    "startupActualPrimary": "aed235208220bc5e0689cd58920c595ec5762a18",
+    "startupActualOutcome": "89a821300c3a9f5360f60e2b76eba245c56a734c",
+    "startupActualClosure": "9b69988027003b2cbdb89892c0a9f917be197e86",
+    "startupActualReview": "f5696ee0d8782886a05619ef4885c0edc0e8e967",
+    "startupControls46Passed": true,
+    "manifestDefect": "child54 consults missing postconversion worker.script; fixed upstream proves config.manifest target",
+    "historicalRuntimeSite": "UNKNOWN",
+    "historicalBusiness503Cause": "UNKNOWN"
   }
 }
