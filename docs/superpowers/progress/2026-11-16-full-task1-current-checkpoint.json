@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "c54ed155c5207d3d6d75d7859b2bda2fa472ef9d",
-  "phase": "GET_WINNER_STAGE_B_CAP_FP1_CARRIED_TO_GB1",
+  "previousCheckpoint": "56c43405c1c3d46bc0f02347e59998156fcdda94",
+  "phase": "GB1_GENUINE_MODEL_BOUNDARY_IMPLEMENTATION_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -857,15 +857,20 @@
       "fixWaveCapExhausted": true,
       "rootAdjudication": "FP1 real/load-bearing; changed genuine-only canonical foreign-row test boundary under GB1 prerequisite. No StageB6/reset; not parked/closed.",
       "GB1": {
-        "status": "PLAN_READY",
+        "status": "IMPLEMENTING",
         "sameOperationalGoal": true,
         "publicConsumerStillHeld": true,
-        "nativeReleased": false
+        "nativeReleased": false,
+        "actor": "/root/gb1_genuine_model_boundary",
+        "ruling": "5ec0c3cc980b08b88b268c39e78be9596c25631a",
+        "plan": "d3ba15acb445c18a471f8de33bea75445c1f900b",
+        "expectationSeal": "b39e2856e9c3ac8d88ded14163328dbe4a43a0bd",
+        "sourceExecuted": false
       }
     }
   },
-  "schemaVersion": 80,
-  "updatedAtUTC": "2026-11-17 21:49:20 UTC",
+  "schemaVersion": 81,
+  "updatedAtUTC": "2026-11-17 21:55:15 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
