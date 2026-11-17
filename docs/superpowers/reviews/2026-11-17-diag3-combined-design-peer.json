@@ -1,0 +1,314 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-INDEPENDENT-OWN-DATA-AND-SOURCE-FIXTURE-PEER-REVIEW/1",
+  "timestampUTC": "2026-11-17 03:20:32 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "project": "AFW",
+  "disposition": "ACK_BOUNDED_DESIGN_AND_SEALED_SOURCE_FIXTURE_DATA",
+  "verdict": {
+    "SPEC": "PASS_DATA_ONLY",
+    "QUALITY": "PASS_DATA_ONLY",
+    "blockingFindings": [],
+    "implementationAccepted": false,
+    "controlsExecuted": 0,
+    "nativeAccepted": false,
+    "activationReleased": false,
+    "SourceQualified": false,
+    "Task1Pass": false
+  },
+  "scope": {
+    "main": "Review independiente FULL del índice OWN d6af36ae, plan42569afe y censo68841353 contra Source60973849 y suplemento1ebdd25b.",
+    "addedByRoot": "FULL/hash del Source fixture-first4469d73e y6componentes, comprobación completa de census/IDs/referencias y spotchecks semánticos acotados. No se afirma auditoría semántica exhaustiva ni ejecución de145inner.",
+    "reused": "Source design peer93c5f4a4855e27ace6d8bd413a2aba741e1aad46; actualDIAG2result16599e9905523b42fbb63a944182d838224de440; OWNfix1Native42review247fb10edd01a5449333f15ca68a8064742202f3 y su44evaluaciones21admit/23reject.",
+    "actions": "Sólo blobsGit como DATA, comparaciones/conteos/UTF8/hash con lógica original del reviewer en RAM y builtincrypto. Sin Source/OWNeval/import/AST/syntax/compile/tests, FS/deps/builds, refs/runs/logs/artifactdownloads/CF/provider/secretos, ni implementación. Única escritura: esta constancia GitDATA.",
+    "exclusions": "No reauditoría de M/QA/security/SDK/BASE ni de los corpus antiguos. El opcionalCost de1ebdd queda fuera de este review y no recibe autorización."
+  },
+  "fullOwnAndCrossReadHashes": [
+    {
+      "name": "ownIndex",
+      "bytes": 2338,
+      "sha256": "ef3f89a84d528e4ed16c26c89ac04becf29c8ffe6a6c1b06f05c18be69d48a49",
+      "gitBlob": "d6af36ae35d1abfb5f51476bb8e78a4c1584f820"
+    },
+    {
+      "name": "ownPlan",
+      "bytes": 14739,
+      "sha256": "884dc999600c51a65dce9d570ead12375cd16cb96dd3758621699c64e3b78f84",
+      "gitBlob": "42569afe21ac5153d0d02da438ce8fb23130d591"
+    },
+    {
+      "name": "ownCensus",
+      "bytes": 7304,
+      "sha256": "415985b035e409e9214ed0a4929e015ed4cb9f5e841f2c77ec85ed93e7330b1c",
+      "gitBlob": "68841353d0e1563bcca8116cc3450fa7157bdfba"
+    },
+    {
+      "name": "sourceCross",
+      "bytes": 10701,
+      "sha256": "1d6ebe9a25ca4495b3f393b167a182952d8333d3838a8fc6db177528e82cb7d4",
+      "gitBlob": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686"
+    }
+  ],
+  "fullSourceFixtureReadHashes": [
+    {
+      "name": "sourceFixtureIndex",
+      "bytes": 19127,
+      "sha256": "d94d9d8ad65f1251a8870bb30e6196528cd4b6641c00849c970dee87c7b6278e",
+      "gitBlob": "4469d73e40f758e356e172c119687dde119c1fe6"
+    },
+    {
+      "name": "quantizer",
+      "bytes": 52948,
+      "sha256": "e5f6d8774d0fd5124791a6a7d6d223bc31ef828faae87fc09dda3d10f61492bf",
+      "gitBlob": "b7dd795365170a1bcafa4f809cf5f6230c6f698d"
+    },
+    {
+      "name": "lifecycle",
+      "bytes": 6076,
+      "sha256": "e062f6abcf459ba3fd582c3ae7783b3f3c9b5a0f60b8577b82b5ed5ea1218413",
+      "gitBlob": "5ed9a8e4d5842ada493f6d484051c347168b9db1"
+    },
+    {
+      "name": "literalStreamAtoms",
+      "bytes": 22526,
+      "sha256": "3598bd2e983a35a162e36ac6ee56227418e37528c57d4e138d9baf9cbf71a471",
+      "gitBlob": "8301628a2141c6e125cef9e549158e3a1712f5a1"
+    },
+    {
+      "name": "rawCollector",
+      "bytes": 25482,
+      "sha256": "7c5bf36c6c17a8b688ee2d2135a09fbb4e40a9075d8d7c626c806a9b5e05b1a0",
+      "gitBlob": "1b5b319f98f678e79979c3bfadc77544917a5957"
+    },
+    {
+      "name": "originalC1",
+      "bytes": 18126,
+      "sha256": "380c5510e2b6468f7b1e3b2e465f6ee56c9be2fdce7c0cb2b428284e581fda9c",
+      "gitBlob": "62e3beb1b817523fe33b2e4ed17b6b20ffa448a8"
+    },
+    {
+      "name": "publication",
+      "bytes": 66809,
+      "sha256": "0516d6709408e35ab4123fffcf1d75ea40bad9c004f90d7f69ede0c60ce91401",
+      "gitBlob": "1ef8ffb9001be3dcbb16962a11ab982e7204e910"
+    }
+  ],
+  "ownCensus": {
+    "nativeGroups": 8,
+    "groupSum": 68,
+    "newEvaluations": 24,
+    "newSum": 24,
+    "uniqueGroups": 8,
+    "uniqueNewIDs": 24,
+    "newAdmit": 9,
+    "newReject": 15,
+    "legacyAdmit": 21,
+    "legacyReject": 23,
+    "sourceRound": 2,
+    "ownRound": 3,
+    "maxRounds": 5,
+    "contractMatch": true,
+    "supplementMatch": true,
+    "groupRowsExact": true,
+    "code": false,
+    "native": 0,
+    "fixtureInputsSupplied": false,
+    "totalAdmit": 30,
+    "totalReject": 38
+  },
+  "ownAssessment": [
+    {
+      "topic": "Compatibilidad de wire y prioridades",
+      "refs": [
+        "42569afe21ac5153d0d02da438ce8fb23130d591:38",
+        "42569afe21ac5153d0d02da438ce8fb23130d591:57-76"
+      ],
+      "result": "finiteGet obligatorio al final deobservation después deC1intacto; keys/enums/nulls/caps coinciden con4a98/609. Infraestructura/admisión/custody/N2 no se normalizan comoUNKNOWN. HTTPKNOWN sóloScope15/primerthrow/S08:18:118/nativeprefix/14PASS/settlements/counterreturn/Sourceprefix; noC16 ni histórica503. Counts tienenpunterospropios y prioridadjournal→native→source→globalmarker→missing→snapshotinvalid→joined; journalposterior no borrajoins válidos."
+    },
+    {
+      "topic": "Crossstates",
+      "refs": [
+        "42569afe21ac5153d0d02da438ce8fb23130d591:74-75",
+        "1ebdd25b23ba6a6dec7eb3569eb151a245e84686"
+      ],
+      "result": "CrossA exacta: MARKER_STREAM_INVALID global no coexiste conJOINED/MARKER_UNAVAILABLE/SNAPSHOT_INVALID delhermano; sícon blockeranteriorjournal/native/source segúnhechos. CrossB exacta: HTTPKNOWN contradice SOURCE_UNJOINED/NATIVE_UNJOINED14/15; JOURNAL_UNRESOLVED sólo conAFTERvisibleintercalado antesdelcountreturn pertinente, nunca por un supuesto blockerprivado. Resto deKNOWNHTTP permitecountsindependientes. No igualdad/monotonía/delta."
+    },
+    {
+      "topic": "Censo reproducible propuesto",
+      "refs": [
+        "68841353d0e1563bcca8116cc3450fa7157bdfba"
+      ],
+      "result": "8groups/68eval=44legacy+24new. Nuevos24IDs únicos:9ADMIT/15REJECT; con44legacy21/23 resultan30/38. Compat44 conserva entradas/oráculos/readerd2ModelReadsinmodificar, individualmente reportados dentro de1group; no dice que esos44 validen un wrapperE3 nuevo. Source9groups/145inner es otro censo. Los68son propuesta noejecutada; fixturesOWNcompletos todavía no suministrados."
+    },
+    {
+      "topic": "Fixtures futuros sin cobertura ficticia",
+      "refs": [
+        "68841353d0e1563bcca8116cc3450fa7157bdfba:196",
+        "42569afe21ac5153d0d02da438ce8fb23130d591:110"
+      ],
+      "result": "El freeze futuro debe materializar24modelos nuevos coherentes completos API/tree/log/custody/outcome/ZIP+expected independientes, además de44inmutables. Donde descripciones dicen 'or' o enumeran variantes, cada literal definitivo y su mutación concreta debe quedar explícito; una evaluación no acredita todas las variantes listadas. No se solicita añadir casos/IDs. Rechazo debe atribuirse al join/shape previsto, sin fallos ajenos de transporte que lo enmascaren."
+    },
+    {
+      "topic": "Binding y entrypoints",
+      "refs": [
+        "42569afe21ac5153d0d02da438ce8fb23130d591:104-108"
+      ],
+      "result": "Nueva familia/versionado y closedACTUAL/MODEL; sin fallback/outcome-basedselection. E3S08/index/ambas13arrays/schema/selection/protocol/collector/runner/WF y25bodyset reales futurosRoot;17frozen+8null/deferred noadmiten. E2noesdefault. Blueprintnot:{}rechaza todo hasta nuevaversiónmedida. Contextoactualhead/tree/run/job provienedelcallerRoot, nunca syntheticfixture. Proofcompact con manifest íntegro externamente sellado/hashesruntime y68ID/state/reason/projectionhash; tamaño completo aún requiere medición."
+    },
+    {
+      "topic": "Límite de privacidad y confianza",
+      "refs": [
+        "42569afe21ac5153d0d02da438ce8fb23130d591:78-84"
+      ],
+      "result": "OWN no importaS08/codec ni recibeprivateTAP/SourceRows/C2FT3/storagearrays. No puede recalcularpredicate, brackets privados, scalar ausente o autenticar un rewrite coherente429→503/count1→2+. Chequea contradiccionespúblicas yproducerpinneado. Countsdescribenrecords estructurales presentes, incluidosfiniteusados, sinreloj/active-ticket ni identidadpreconnection comparada entre snapshots; noausenciadeefectos. Noatribucióncausal alhostfix/rate-limit/provider."
+    }
+  ],
+  "sourceFixtureChecks": {
+    "nativeGroups": 9,
+    "inner": 145,
+    "groupCounts": [
+      6,
+      24,
+      9,
+      4,
+      19,
+      6,
+      12,
+      35,
+      30
+    ],
+    "uniqueInnerIDs": 145,
+    "sourceOld35": 35,
+    "sourceOld35OrderExact": true,
+    "distribution": {
+      "KNOWN": 4,
+      "UNKNOWN": 27,
+      "NOT_APPLICABLE": 4
+    },
+    "allListedPresent": true,
+    "issues": [],
+    "rawCases": 41,
+    "lifecycleCases": 9,
+    "quantizerCases": 30,
+    "publicationCases": 30
+  },
+  "sourceFixtureSpotchecks": [
+    {
+      "ids": [
+        "Q_ZERO",
+        "Q_ONE",
+        "Q_TWO",
+        "Q_THREE",
+        "Q_USED_FINITE",
+        "Q_ORDER_IRRELEVANT"
+      ],
+      "component": "b7dd795365170a1bcafa4f809cf5f6230c6f698d",
+      "result": "Rows literales conmap/connection/notices+usescanónicos y anclasworld; outputs0/1/2+/2+/1/2+ concuerdan con contar basesfinite distintas y no restar ni duplicaruses. B contienevaloropaco ajeno; el contadororiginal sólo inspecciona keyreceipt."
+    },
+    {
+      "ids": [
+        "X_INVALID_AFTER_TWO",
+        "X_WORLD_PROJECT",
+        "X_WORLD_REVISION",
+        "X_ORPHAN_USE",
+        "X_BAD_USE_TIME",
+        "X_MALFORMED_PAIR",
+        "X_OVER_512",
+        "X_OVER_16_RESERVED"
+      ],
+      "component": "b7dd795365170a1bcafa4f809cf5f6230c6f698d",
+      "result": "UNKNOWN concuerda con no saturar antes de validar todorow yconlímites/anclas/falta de base/intervalo. Pairmalformado tieneunstringkey ysinvalue; originalreceiptscounter puede inspeccionar key sin crear unTypeErrorajeno. Rows de otrosnamespaces siguen opacos; nohaydatosactuales privados."
+    },
+    {
+      "ids": [
+        "L_RETURN",
+        "L_ACTION_THROW",
+        "L_INTERNAL",
+        "L_CONCURRENT_PUBLIC",
+        "L_REARM_OVERLAP",
+        "L_OTHER_WORLD",
+        "L_ORIGINAL_REJECT",
+        "L_EMIT_REJECT"
+      ],
+      "component": "5ed9a8e4d5842ada493f6d484051c347168b9db1",
+      "result": "Expectativas usan seam/factory/count real propuesto: snapshot1porinvocación pública/interna existente, no1global. Internalcount no consume label; rejectedread ythrowdesink no reemiten; originalwork/snapshoterror identity se conserva; overlap/otherworld producennoKnown. WiringrealE3 noexiste todavía ydebeprobarseestáticamente/native después."
+    },
+    {
+      "ids": [
+        "H_KNOWN_429",
+        "H_SOURCE_ABSENT",
+        "H_NATIVE_TORN",
+        "H_N2_CONFLICT",
+        "M_DUPLICATE_SOURCE14",
+        "M_AFTER_INTERLEAVE",
+        "M_GLOBAL_HIGHER_PRIORITY"
+      ],
+      "component": "1b5b319f98f678e79979c3bfadc77544917a5957",
+      "result": "Atoms raw son literales, referencias resueltas sin Sourceejecución. FaltaSource15omite tambiénmarker15, aislandoSourceRowUnavailable; N2conflictoesFAULT. NativeTORNretieneUNKNOWN/nativeunjoined. AFTERentra59 antescount15enter60/return61: HTTPthrow58 conocido, count15JOURNAL_UNRESOLVED, count14sequence56sigueconocido. DuplicateSource14invalidaprefixsource; duplicatemarker14 concount15open conserva blockerjournal de15 sobretaintglobal."
+    },
+    {
+      "ids": [
+        "P_AFTER_EXCEPTION",
+        "P_GLOBAL_WITH_HIGHER_BLOCK",
+        "P_GLOBAL_PLUS_JOINED",
+        "P_GLOBAL_PLUS_MISSING",
+        "P_GLOBAL_PLUS_SNAPSHOT",
+        "P_KNOWN_AFTERMONITOR_JOURNAL_UNRESOLVED",
+        "P_KNOWN_AFTERSCOPEMISSING_SOURCE_UNJOINED",
+        "P_OLD13_TARGET",
+        "P_WRONG_C1"
+      ],
+      "component": "1ef8ffb9001be3dcbb16962a11ab982e7204e910",
+      "result": "Publisherliteraloracles concuerdan con crossA/B: excepciónAFTERpositiva yblockerprioritarioadmitidos; contradiccionesvisibles/oldS08/C1forjadorechazados antesframeéxito. Sonórdenes sintéticos, noactualSourcecontext; rendezvousfutureRootmedido no debe convertirdeferredenwildcard."
+    },
+    {
+      "ids": [
+        "P_BYTES_C1_EXACT",
+        "P_BYTES_C1_OVER",
+        "P_BYTES_FG_EXACT",
+        "P_BYTES_FG_OVER",
+        "P_BYTES_OUT_EXACT",
+        "P_BYTES_OUT_OVER"
+      ],
+      "component": "1ef8ffb9001be3dcbb16962a11ab982e7204e910",
+      "result": "BuiltinUTF8verificó input510B→JSON512B,511→513,24574→24576,24575→24577. Eléfinalmultibytehaceincorrecto usarJSstring.length como bytes. Tests dehelperactualEncodeBodyestán expresamenteseparados deadmisiónschema/semántica; byte-only noadmitefulloutcome. LFañade1 albodyaceptado."
+    },
+    {
+      "ids": [
+        "FG3_C1_COMPAT"
+      ],
+      "component": "62e3beb1b817523fe33b2e4ed17b6b20ffa448a8",
+      "result": "35IDs/orden/digestdeIDs/distribución4KNOWN27UNKNOWN4NA concordantes consuplemento. InputsoriginalesC1pinneados8e303; se requiereactualsuccessorprojector35veces+igualdadcanónica de6campos+hashactual independiente. Aquí no se reejecutó ni reauditaron exhaustivamente35oráculos; se reutiliza revieworiginal."
+    }
+  ],
+  "budgetsAndRounds": {
+    "sourceRound": 2,
+    "ownRound": 3,
+    "maxRounds": 5,
+    "noReset": true,
+    "finiteGetSchemaMaxBytes": 343,
+    "finiteGetLimit": 512,
+    "proofAndOutcomeCapRequiresMeasurement": true,
+    "childMs": 180000,
+    "caseMs": 120000,
+    "totalMs": 330000,
+    "jobMinutes": 7,
+    "noNewObserverOrBusinessCallsAuthorized": true
+  },
+  "pending": [
+    "Root decisión separada sobre fixture/code, sin release inferido de este ACK. OWNfixture-first sigue pendiente dentro delcenso8/68 acordado.",
+    "E3onlyS08/index y8pinesfuturos+both13arrays/sites18:118/41:12/importgraphsharedseam medidos antes de aceptar implementación. Source9/145 requiereejecuciónnativefutura; OWN8/68 también.",
+    "Proof/schema/nativepacket exactos, hashesde manifests de todosinputs/código ybody<=cap medidos; ningún PASSnativo por conteo dediseño.",
+    "FullnormalTask1 yotra captura diagnóstica siguenheld hasta gateRoot yreviews pertinentes. No replay deocurrenciascerradas."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
