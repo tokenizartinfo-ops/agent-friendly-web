@@ -714,9 +714,20 @@
       "retentionScope": "Separate native component with single reaction-free append-only test export proposed; original-route M witness separate; exact design review/Root implementation ruling pending",
       "retentionDesign": "f998f09fbe6e9299a3f524d694b4cd98ff1d237a",
       "retentionDesignReview": "db6595a72db57b477b810988f51b104929ac7cf2",
-      "retentionComponentImplementationReleased": true
+      "retentionComponentImplementationReleased": true,
+      "fiveHFeasibility": "90c62fdb04a1c1cc2d6f22416cf87e57d9a126aa",
+      "heldExactProjectionRows": [
+        "H-foreign-response",
+        "H-earlier-journal-failure",
+        "H-torn-marker"
+      ],
+      "retentionComponentFixRound": 1,
+      "retentionCurrentEntry": "e599e62c93bb2fbeef2957b2c5fbb920944c8746",
+      "retentionCurrentBuilder": "edb8d2a3e6b9d0befdbd8d51b0b8ef8e1f0cf15f",
+      "ordinaryCurrentDraft": "dacfb3b451086af7d386af8b838c44715caf0965",
+      "retentionScopeRuling": "760e6e4ea9126ddd3e48f01fab4931702e91996f"
     }
   },
-  "schemaVersion": 67,
-  "updatedAtUTC": "2026-11-17 18:14:15 UTC"
+  "schemaVersion": 68,
+  "updatedAtUTC": "2026-11-17 18:30:37 UTC"
 }

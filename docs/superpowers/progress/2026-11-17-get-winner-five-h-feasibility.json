@@ -1,0 +1,86 @@
+{
+  "schema": "AFW.GET_WINNER.STAGE_B.FIVE_H_FEASIBILITY/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "detached immutable test-design DATA",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "detached feasibility proposal",
+  "allowedAction": "Read exact five H rows and relevant host/publisher/composer text; publish this proposal only",
+  "rollback": "Disregard detached proposal",
+  "inputs": {
+    "h": "b57a4db4511a0fbd42c34ac0e1cd6e2392ec6b2f",
+    "pub": "5dad0068909814d8525f92310035c36d10653e77",
+    "draft": "cba47ee593d0376cbc69a4b99675d477b472b9b0",
+    "check": "f0b0da86c4bb9387dc60b26d361a8ab4d9238ddf",
+    "census": "9c81a095ba20a4d609125441b7c664b78a45e247",
+    "coord": "68e4788d494ccbd20d45b4f32a4c4d675054a9fc",
+    "man": "bd0e668fcf2edb2ebf8d39f62ec0e98aaaba910e",
+    "rule": "7308d1c0fff9779d22082198c59031f51abb2477"
+  },
+  "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+  "source13": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+  "related": {
+    "host": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4:830-860",
+    "actualCapture": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a:17-19",
+    "parser": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+    "base": "c8483a65fc47b9fe913dfc4875a25e2da24dca3d"
+  },
+  "status": "DESIGN_FEASIBLE_FOR_TWO_ROWS; THREE_REQUIRE_EXPLICIT_BOUNDARY_RULING",
+  "method": "Literal reading only. All five frozen IDs, inputs and expected objects retain their identities. Predictions below require actual test execution later. No runtime matcher or publisher change is proposed.",
+  "commonComposer": "Use the existing pinned coordinate adapter/manifest solely for its declared coordinate transformation. Compose fresh test input bytes from the sealed base and each row's actual deltas. Ensure nativePrefix input status is represented by both the matching TAP result and C2SOURCE status/code, because collectObservation derives native evidence from stdout rather than input.targetNative/priorNativeDelta objects. Apply priorJournalDelta at its exact index to a copied base journal. Preserve sequence and key order. Do not catch any collector fault and manufacture getWinner or finiteGet fields.",
+  "rows": [
+    {
+      "id": "H-later-truncation",
+      "boundary": "actual parent collector with synthetic complete-prefix input",
+      "feasible": true,
+      "construction": "Keep complete target15 journal through sequence60 and its completed failing TAP/assertion block and exact marker. Materialize serial cases16 C2T1_FINITE and17 C2T1_SELECTION, each with complete action-enter/return and count-enter/return records, sequences61\u201368, monotonic elapsedMs. Emit canonical C2SOURCE16 phase finite and17 phase selection with pass/OK and bounded base counters, and matching Subtest/ok16 and17. Append complete LF-terminated action-enter18 C2T1_LOST_ACK_DUPLICATE sequence69 plus LF-terminated '# Subtest: C2T1_LOST_ACK_DUPLICATE', with no result for18. This implements the supplied 'unclosed18 outside closed target prefix'. Use no partially encoded final bytes or journal torn tail.",
+      "reason": "progress yields prefix with open action18, nativePrefix yields prefix with cases1\u201317, and the completed15 join remains available. dropEligibility closed15 checks first14 and target closure, without requiring target to be the last journal case. scanFiniteWire rowError15 excludes later source issues by ordinal. getEligibility may retain the positive target result. A truly torn byte tail changes integrity and would test another premise.",
+      "expected": "Assert the existing STUB_NON_OK418, KNOWN503/sequence58 and original DROP objects directly from collectObservation. Conditional until executed. Journal69 rows fits128."
+    },
+    {
+      "id": "H-foreign-response",
+      "boundary": "actual host capture/finish API and test-input consistency",
+      "feasible": false,
+      "construction": "Invoke actual host begin/capture with supplied r1 and finish(label), then take(label,main). Preserve the supplied private finished.response=r2 as a separate fixture fact. Observe that actual finish has no response parameter or replacement operation. Original choose binds one lexical const r through body read/capture. Changing a model variable or supplying a second Response to an ignored argument does not change the host entry.",
+      "reason": "The current host has no callable transition that realizes r1-to-r2 at finish. A second capture tests duplicate-capture poisoning and is a different frozen case. Calling poison because a synthetic metadata ID differs would manufacture the outcome. The parent receives neither r1 nor r2.",
+      "expected": "Retain frozen UNKNOWN as the normative oracle. Report this exact substitution row UNCONSTRUCTIBLE_AT_CURRENT_HOST_API with oracle unasserted. Root may explicitly accept a MODEL consistency refusal for contradictory private fixture references, but that refusal has no actual host/publisher UNKNOWN result and cannot discharge the projection oracle. The prior foreign-marker ruling does not automatically cover it."
+    },
+    {
+      "id": "H-torn-marker",
+      "boundary": "physical stdout framing and actual collector",
+      "feasible": false,
+      "construction": "Exact draft concatenation places the provided unterminated fragment ending h:50 immediately before base.targetSource. That forms a single line beginning '# C2FT4', so the scanner consumes and rejects it as a marker. The embedded '# C2SOURCE' is not a separate physical line. Keep this exact construction available as a boundary test.",
+      "reason": "scanFiniteWire322\u2013331 consumes the concatenated line. Source15 never enters its rows Map. finiteAssertion373\u2013374 then returns SOURCE_ROW_UNAVAILABLE instead of the frozen KNOWN HTTP503. This is an oracle/input framing incompatibility, not a reason to broaden scanning or inject a saved HTTP projection.",
+      "alternative": "The smallest optional scoped interpretation is a malformed JSON marker fragment placed on its own LF-delimited line, by composing the unchanged fragment plus one explicit transport separator LF before Source15. This retains its incomplete JSON bytes, preserves an independently visible complete Source15 and allows real collector UNKNOWN marker with KNOWN HTTP. It changes the tested transport premise from unterminated concatenation to terminated malformed-record framing. Root must expressly accept and pin that composer framing interpretation before claiming the frozen row covered. Do not silently append LF to the fixture or rawMarker itself.",
+      "expected": "Exact noLF construction remains HELD against its KNOWN oracle. Optional framed construction remains proposed and unexecuted."
+    },
+    {
+      "id": "H-earlier-journal-failure",
+      "boundary": "collector infrastructure evidence consistency",
+      "feasible": false,
+      "construction": "Apply the frozen priorJournalDelta to journal index1, producing action throw at sequence2 for C2T1_CONNECTION. Keep priorNativeDelta empty as supplied, so TAP/C2SOURCE1 still pass. Call collectObservation once and require its actual EVIDENCE_CONFLICT fault.",
+      "reason": "Publisher479\u2013480 explicitly rejects a native PASS whose matching action/count journal has a throw before any finiteGet/getWinner projection. Therefore the existing row cannot produce its expected NOT_APPLICABLE/EARLIEST_THROW_DIFFERENT and UNKNOWN diagnostic objects through this entry point.",
+      "expected": "Record INFRASTRUCTURE_REFUSED/EVIDENCE_CONFLICT, with both projection outputs absent and frozen oracles unasserted. Root may accept infrastructure refusal as bounded negative coverage, but cannot label it a projection-pass result without an explicit scope decision. Changing prior native1 to fail would make a coherent companion example that can reach the earlier-throw branch, but exceeds the frozen row's declared empty delta and would need a separately pinned derived construction. It must not be smuggled into this row."
+    },
+    {
+      "id": "H-earlier-native-failure",
+      "boundary": "actual parent collector with coherent synthetic native delta",
+      "feasible": true,
+      "construction": "Apply priorNativeDelta index2 to C2T1_HANDLE. Change its one top-level TAP result from 'ok 3 - C2T1_HANDLE' to 'not ok 3 - C2T1_HANDLE' and its canonical C2SOURCE row status pass->fail/code OK->TEST_FAILED. Preserve id, ordinal, phase negative, counters, prior journal and target15 journal/assertion/marker. No fabricated earlier journal throw. Assert the regenerated source/native agreement before collection.",
+      "reason": "The collector derives nativePrefix from TAP rather than the supplied array. Its infrastructure contradiction rule is one-way PASS-with-throw, so native fail with returned journal is accepted evidence at this synthetic boundary. finiteCandidate278 then yields EARLIER_NATIVE_FAILURE ahead of target eligibility. This does not assert a particular original native cause for case3.",
+      "expected": "Assert existing NOT_APPLICABLE/EARLIER_NATIVE_FAILURE, UNKNOWN getWinner and original DROP directly from the actual collector. Conditional until executed."
+    }
+  ],
+  "limits": "The two feasible rows can be prepared for focused static review as actual collector MODEL inputs. The other three retain HELD projection-oracle status until their exact boundary rulings are recorded. Keep one immutable census entry per frozen ID, annotated with attempted boundary, outcome availability and execution state. No all37-parent claim, no fabricated UNKNOWN after refusal, no authentication/private-R/tamper-detection claim, and no duplicate historical census solely to rename it.",
+  "Source5": 5,
+  "OWN5": 5,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "modelExecuted": false,
+  "nativeExecuted": false,
+  "sourceExecuted": false,
+  "refsChanged": false
+}

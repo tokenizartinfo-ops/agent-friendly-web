@@ -1,0 +1,66 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.H_CURRENT_INPUT_SCOPE/1",
+  "timestampUTC": "2026-11-17 18:30:37 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "feasibility": "90c62fdb04a1c1cc2d6f22416cf87e57d9a126aa",
+  "frozenCorpus": "b57a4db4511a0fbd42c34ac0e1cd6e2392ec6b2f",
+  "decision": "Keep frozen315 bytes/IDs/oracles unchanged and record honest boundary dispositions; permit exactly two coherently framed current-input companion controls, sealed before their driver additions. No production/API/parser changes.",
+  "rows": [
+    {
+      "id": "H-later-truncation",
+      "scope": "Actual parent MODEL with target15 closed, coherent complete16/17 and complete-record open18 prefix",
+      "status": "CONSTRUCTIBLE_EXPECTATIONS_UNRUN"
+    },
+    {
+      "id": "H-earlier-native-failure",
+      "scope": "Actual parent MODEL with matching TAP3 and C2SOURCE3 failure",
+      "status": "CONSTRUCTIBLE_EXPECTATIONS_UNRUN"
+    },
+    {
+      "id": "H-foreign-response",
+      "scope": "Current host has no finish(R) transition and original capture uses lexical constR",
+      "status": "EXACT_PROJECTION_ORACLE_HELD_UNCONSTRUCTIBLE",
+      "limit": "No fake secondR argument/poisoning/composition UNKNOWN presented as actual current projection. Mandatory foreign/substitution category coverage still required through coherent admitted controls."
+    },
+    {
+      "id": "H-earlier-journal-failure",
+      "scope": "Exact supplied nativePASS plus journalThrow is refused before projection with EVIDENCE_CONFLICT",
+      "status": "EXACT_PROJECTION_ORACLE_HELD",
+      "limit": "Boundary refusal may be tested and labelled REFUSED_BEFORE_PROJECTION with absent outputs; never manufacture expected UNKNOWN/finiteGet."
+    },
+    {
+      "id": "H-torn-marker",
+      "scope": "Exact noLF fragment concatenates and hides Source15",
+      "status": "EXACT_KNOWN_HTTP_ORACLE_HELD",
+      "limit": "Record actual SOURCE_ROW_UNAVAILABLE/UNKNOWN when produced; no saved HTTP503 injected. A different framed companion has a distinct ID/premise."
+    }
+  ],
+  "newCompanionControls": [
+    {
+      "purpose": "Reach actual earlier journal throw reduction with coherent evidence",
+      "input": "Derive from frozen earlier-journal row but also fail native1 in both matching TAP/C2SOURCE. Distinct newID and pinned derived complete bytes.",
+      "expectation": "Seal actual intended earlier-throw/UNKNOWN/no-positive outputs before driver additions; assert direct actual publisher output, no generated oracle."
+    },
+    {
+      "purpose": "Malformed count marker while independent source HTTP remains visible",
+      "input": "Keep incomplete marker fragment bytes, insert an explicit transportLF before complete Source15. Distinct newID and pinned physical framing. Do not edit rawMarker field or claim exact original noLF construction covered.",
+      "expectation": "Seal UNKNOWNgetWinner plus independently KNOWNHTTP503 under complete Source15 before driver addition; direct collector only."
+    }
+  ],
+  "gate": "Final independent full-packet review must still verify required family coverage and exact executed/scheduled/held counts. No all315/all37 assertion and no native release by this ruling.",
+  "release": {
+    "detachedTestData": true,
+    "detachedDriver": true,
+    "productChanges": false,
+    "native": false,
+    "refs": false,
+    "business": false,
+    "runtime": false
+  },
+  "Source5": 5,
+  "OWN5": 5,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}
