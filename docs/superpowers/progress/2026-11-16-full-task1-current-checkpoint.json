@@ -1,9 +1,9 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/15",
-  "timestampUTC": "2026-11-17 01:20:23 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/16",
+  "timestampUTC": "2026-11-17 01:31:31 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "phase": "DIAG2_SOURCE35_PASSED_CLOSED_FRESH_REVIEW_OWN40_IMPLEMENTATION",
+  "phase": "DIAG2_SOURCE35_CLOSED_REVIEW_OWN_NATIVE_INTEGRITY_FIX1",
   "activeNativeRuns": [],
   "currentAllNativeOccurrencesClosed": true,
   "green20": {
@@ -222,9 +222,29 @@
     "OwnFixturePeer": "228ed5c858c9e62e5c3ae125372c4da6179d1471",
     "OwnFixturePeerPassed": true,
     "RootActual25BodyAdmission": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8",
-    "OwnExplicitModelEntryRuling": "65040ab43351c843e9f5252910bf24f30f896eba"
+    "OwnExplicitModelEntryRuling": "65040ab43351c843e9f5252910bf24f30f896eba",
+    "OwnFix1Release": "ccf33edb19d3971a8182c78200330ba9bff0fb4f",
+    "OwnRound": 2,
+    "OwnExpectedNative42": 42,
+    "OwnExpectedEvaluations44": {
+      "accept": 21,
+      "reject": 23
+    },
+    "SourceBusinessPrepared": {
+      "head": "32fe5795e31648a3f5f59e042f12edc56d92c224",
+      "tree": "25765b8c85c7657e7d8084647198064b4f597965",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+      "index": "98d85420ec517978a18eab639b60c1dbb8353eee",
+      "bodySeal": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8",
+      "refCreated": false,
+      "runCreated": false,
+      "SourceBusinessExecuted": false,
+      "businessActivationReleased": false
+    }
   },
-  "next": "Finish OWN40 guard, Root static and actualGHA native40, closure andfresh independentreview; Source35freshreviewpending. Then a singlefullorder20DIAG2 actualSourcecapture withactualmetadata and independentactuald2Read admission. No businesscapture releasedyet.",
+  "next": "OWNfix1 preseal42IDs/44evaluations thenminimalKNOWNnativeintegrityjoin, Rootnative/freshreview/close. Source35freshreviewfinalpending. Source25head preparedDETACHEDonly (3228=3203+25,0runs,NOREF); businessactivationhelduntilbothgates. No userinterventionneeded.",
   "preservation": "Original3203/main/history/26b/c230/DIAG1/old419 unchanged. Source locally neverexecuted; allnativeheavyworkGHA. No Cloudflare/OAuth/OTP/tokens/mail/Max/runtimeaction.",
   "SourceQualified": false,
   "Task1Pass": false,
