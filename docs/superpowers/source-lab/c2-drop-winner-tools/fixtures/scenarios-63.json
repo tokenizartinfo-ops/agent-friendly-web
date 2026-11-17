@@ -1,0 +1,719 @@
+{
+  "schema": "AFW.C2.DROP_WINNER_LITERAL_SCENARIOS/2",
+  "scope": "SYNTHETIC_MODEL_ONLY",
+  "order": "array order; first row is the sole expected Stage A failure",
+  "contract": "Each overrides object applies once to defaults (shallow). All expected fields are independent literal comparisons; unspecified axes are outside that row. Every row preserves original fulfillment/rejection and all nonreserved status/body/headers at the observer seams. Compiler flags model inputs only; native proof remains required.",
+  "defaults": {
+    "optIn": true,
+    "url": "https://drop.fixture.invalid/case15",
+    "method": "POST",
+    "uuid": "11111111-1111-4111-8111-111111111111",
+    "foreignUuid": "22222222-2222-4222-8222-222222222222",
+    "handle": "fixture-handle-A",
+    "project": "fixture-project-A",
+    "qaStatus": 403,
+    "outerStatus": 503,
+    "qaBody": "fixture QA denied",
+    "outerBody": "fixture M unavailable",
+    "unchangedHeader": [
+      "x-fixture-original",
+      "preserved"
+    ],
+    "epoch": "E1-active",
+    "qaRequest": "R1-once",
+    "qaResult": "exact-Q1",
+    "parentRequest": "P1",
+    "parentCell": "C1",
+    "lease": "L1",
+    "parentResult": "B1-after-finish",
+    "winner": "owned-stub-denial",
+    "cancel": "ordinary",
+    "qaSettlement": "before-winner",
+    "qaHop": "honest-serialize-after-tap",
+    "qaTransport": "verified-model-premise",
+    "mHop": "honest-serialize-after-tap",
+    "hostCut": "one-project-ticket-for-handle",
+    "compiler": "same-preparation-equal-js-real-provisional-matching-residency",
+    "framePair": "exact-throw-and-caller",
+    "throwSite": "S01:247",
+    "originalPutsAssertion": "ordinary"
+  },
+  "rows": [
+    {
+      "id": "qa-m-host-positive",
+      "overrides": {},
+      "expected": {
+        "qaMarker": "q1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.403",
+        "mMarker": "o1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.503.V.403",
+        "site": "S01:247",
+        "outer": "QA_MARKED_STUB_NON_OK",
+        "publicSite": "S01:247"
+      }
+    },
+    {
+      "id": "normalized-second-anchor",
+      "overrides": {
+        "throwSite": "S04:43"
+      },
+      "expected": {
+        "qaMarker": "q1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.403",
+        "mMarker": "o1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.503.V.403",
+        "site": "S04:43",
+        "outer": "QA_MARKED_STUB_NON_OK",
+        "publicSite": "S04:43"
+      }
+    },
+    {
+      "id": "prerequisite-anchor",
+      "overrides": {
+        "throwSite": "S00:743"
+      },
+      "expected": {
+        "qaMarker": "q1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.403",
+        "mMarker": "o1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.503.V.403",
+        "site": "S00:743",
+        "outer": "QA_MARKED_STUB_NON_OK",
+        "publicSite": "S00:743"
+      }
+    },
+    {
+      "id": "scope-exists-anchor",
+      "overrides": {
+        "throwSite": "S04:37"
+      },
+      "expected": {
+        "qaMarker": "q1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.403",
+        "mMarker": "o1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.503.V.403",
+        "site": "S04:37",
+        "outer": "QA_MARKED_STUB_NON_OK",
+        "publicSite": "S04:37"
+      }
+    },
+    {
+      "id": "off",
+      "overrides": {
+        "optIn": false
+      },
+      "expected": {
+        "qaMarker": null,
+        "mMarker": null,
+        "site": "UNKNOWN",
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "owned-deadline-before-qa",
+      "overrides": {
+        "winner": "original-deadline",
+        "qaSettlement": "after-cut"
+      },
+      "expected": {
+        "mMarker": "o1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.503.L.0",
+        "site": "UNKNOWN",
+        "outer": "DEADLINE_OR_ABORT",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "owned-abort-before-qa",
+      "overrides": {
+        "winner": "original-abort",
+        "qaSettlement": "after-cut"
+      },
+      "expected": {
+        "outer": "DEADLINE_OR_ABORT",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "same-status-denial-after-deadline",
+      "overrides": {
+        "winner": "original-deadline",
+        "qaSettlement": "after-winner-before-cut"
+      },
+      "expected": {
+        "outer": "DEADLINE_OR_ABORT",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "denial-wins-cancel-pending",
+      "overrides": {
+        "winner": "owned-stub-denial",
+        "cancel": "pending-at-cut"
+      },
+      "expected": {
+        "qaMarker": "q1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.403",
+        "mMarker": "o1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.503.V.403",
+        "site": "S01:247",
+        "outer": "QA_MARKED_STUB_NON_OK",
+        "publicSite": "S01:247"
+      }
+    },
+    {
+      "id": "puts-throws-after-seal",
+      "overrides": {
+        "originalPutsAssertion": "throw-after-cut"
+      },
+      "expected": {
+        "qaMarker": "q1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.403",
+        "mMarker": "o1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.503.V.403",
+        "site": "S01:247",
+        "outer": "QA_MARKED_STUB_NON_OK",
+        "publicSite": "S01:247",
+        "originalAssertionPropagated": true
+      }
+    },
+    {
+      "id": "adjacent-guard",
+      "overrides": {
+        "throwSite": "S00:747"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "shared-fail",
+      "overrides": {
+        "framePair": "shared-helper-only"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "foreign-frames",
+      "overrides": {
+        "framePair": "foreign-script"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "truncated-frames",
+      "overrides": {
+        "framePair": "throw-without-caller"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "map-sibling-mismatch",
+      "overrides": {
+        "compiler": "unequal-generated-js"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "map-other-harness",
+      "overrides": {
+        "compiler": "equal-js-other-preparation"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "wrong-residency",
+      "overrides": {
+        "compiler": "other-mounted-script"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "modeled-namespace",
+      "overrides": {
+        "compiler": "budget-compile-only"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "column-neighbor",
+      "overrides": {
+        "framePair": "adjacent-generated-column"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "collapsed-site-anchors",
+      "overrides": {
+        "compiler": "only-one-distinct-anchor"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "restored-rearmed-late",
+      "overrides": {
+        "epoch": "late-E1-after-restore-and-arm-E2"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "duplicate-actor-request",
+      "overrides": {
+        "qaRequest": "twice-in-E1"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "crossed-qa-request",
+      "overrides": {
+        "qaRequest": "foreign-R2"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "substituted-finalizer-response",
+      "overrides": {
+        "qaResult": "fresh-Q2-same-status"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-header-collision",
+      "overrides": {
+        "qaResult": "preexisting-reserved-field"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "immutable-qa-headers",
+      "overrides": {
+        "qaResult": "immutable"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-observer-throws",
+      "overrides": {
+        "qaResult": "diagnostic-write-throws"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-stripped",
+      "overrides": {
+        "qaHop": "strip"
+      },
+      "expected": {
+        "outer": "STUB_NON_OK",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-stale",
+      "overrides": {
+        "qaHop": "stale-uuid"
+      },
+      "expected": {
+        "outer": "STUB_NON_OK",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-duplicate",
+      "overrides": {
+        "qaHop": "duplicate-exact"
+      },
+      "expected": {
+        "outer": "STUB_NON_OK",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-combined",
+      "overrides": {
+        "qaHop": "combined-values"
+      },
+      "expected": {
+        "outer": "STUB_NON_OK",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-swap",
+      "overrides": {
+        "qaHop": "foreign-uuid"
+      },
+      "expected": {
+        "outer": "STUB_NON_OK",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-status-changed",
+      "overrides": {
+        "qaHop": "change-response-status"
+      },
+      "expected": {
+        "outer": "STUB_NON_OK",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "unmarked-fallback",
+      "overrides": {
+        "qaHop": "fresh-unmarked-same-status"
+      },
+      "expected": {
+        "outer": "STUB_NON_OK",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-written-after-serialize",
+      "overrides": {
+        "qaHop": "serialize-before-tap"
+      },
+      "expected": {
+        "outer": "STUB_NON_OK",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "qa-copy-unverified",
+      "overrides": {
+        "qaHop": "fallback-copy-all-fields",
+        "qaTransport": "unverified"
+      },
+      "expected": {
+        "outer": "STUB_NON_OK",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "crossed-original-request",
+      "overrides": {
+        "parentRequest": "foreign-P2"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "crossed-cell",
+      "overrides": {
+        "parentCell": "foreign-C2"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "crossed-lease",
+      "overrides": {
+        "lease": "foreign-L2"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "crossed-error",
+      "overrides": {
+        "winner": "foreign-denial-same-status"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "foreign-deadline",
+      "overrides": {
+        "winner": "foreign-deadline-same-kind"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "marked-substitute-outer",
+      "overrides": {
+        "parentResult": "substitute-previously-marked-B2"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "outer-collision",
+      "overrides": {
+        "parentResult": "preexisting-reserved-field"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "outer-immutable",
+      "overrides": {
+        "parentResult": "immutable"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "repeat-outer-egress",
+      "overrides": {
+        "parentResult": "reused-B2"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "wrong-form",
+      "overrides": {
+        "hostCut": "wrong-form"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "wrong-ticket-holder",
+      "overrides": {
+        "hostCut": "wrong-project-holder"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "missing-cut",
+      "overrides": {
+        "hostCut": "absent"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "duplicate-entry",
+      "overrides": {
+        "hostCut": "two-matching-tickets"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "wrong-host-id",
+      "overrides": {
+        "hostCut": "foreign-join"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "outer-header-stripped",
+      "overrides": {
+        "mHop": "strip"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "outer-written-after-serialize",
+      "overrides": {
+        "mHop": "serialize-before-tap"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "outer-copy-unverified",
+      "overrides": {
+        "mHop": "fallback-copy-all-fields-unverified"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "outer-status-mismatch",
+      "overrides": {
+        "mHop": "change-response-status"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "combined-outer-field",
+      "overrides": {
+        "mHop": "combined-values"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "parent-finish-substitutes",
+      "overrides": {
+        "parentResult": "fresh-B2-same-status"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "diagnostic-outer-write-throws",
+      "overrides": {
+        "parentResult": "diagnostic-write-throws"
+      },
+      "expected": {
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "parent-finish-throws",
+      "overrides": {
+        "parentResult": "original-finish-throws"
+      },
+      "expected": {
+        "settlement": "original-rejection",
+        "mMarker": null,
+        "outer": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "late-qa-cannot-rewrite-cut",
+      "overrides": {
+        "epoch": "seal-E1-before-Q1-then-arm-E2"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN",
+        "sealedUnchanged": true
+      }
+    },
+    {
+      "id": "request-lease-guard-exact",
+      "overrides": {
+        "throwSite": "S01:69"
+      },
+      "expected": {
+        "qaMarker": "q1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.403",
+        "mMarker": "o1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.503.V.403",
+        "site": "S01:69",
+        "outer": "QA_MARKED_STUB_NON_OK",
+        "publicSite": "S01:69"
+      }
+    },
+    {
+      "id": "child-lease-guard-exact",
+      "overrides": {
+        "throwSite": "S01:95"
+      },
+      "expected": {
+        "qaMarker": "q1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.403",
+        "mMarker": "o1.5871b131c1ae1524f1bc0ea5420528cfbff7ac748af0d2e87c6a1fd8415514b2.503.V.403",
+        "site": "S01:95",
+        "outer": "QA_MARKED_STUB_NON_OK",
+        "publicSite": "S01:95"
+      }
+    },
+    {
+      "id": "request-lease-adjacent-column",
+      "overrides": {
+        "throwSite": "S01:69",
+        "framePair": "adjacent-generated-column"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    },
+    {
+      "id": "child-lease-unproved-throw",
+      "overrides": {
+        "throwSite": "S01:95",
+        "framePair": "throw-without-caller"
+      },
+      "expected": {
+        "site": "UNKNOWN",
+        "publicSite": "UNKNOWN"
+      }
+    }
+  ],
+  "previous": {
+    "path": "docs/superpowers/source-lab/c2-drop-winner-tools/fixtures/scenarios.json",
+    "mode": "100644",
+    "bytes": 15741,
+    "sha256": "6f51b5c2cdf68fb98a15022de9b79a95dcc3c8081bb4e641626cda685322f665",
+    "blob": "0625f0864da7c70f6a9b6abf0fb989c36fae22f6"
+  },
+  "ruling": "713834d1311f4cd888f8505f67441fe622325077"
+}
