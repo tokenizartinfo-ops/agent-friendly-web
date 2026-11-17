@@ -1,0 +1,28 @@
+{
+  "schema": "AFW-DIAG2-OWN42-FIX1-CLOSED-RECEIPT/1",
+  "timestampUTC": "2026-11-17 01:57:12 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+  "head": "82451b46e44ed999ea57ceb64605857a1722f1bf",
+  "tree": "8f05780be2a466a1bfccb37dae61864d1d2e2496",
+  "run": 43998984564,
+  "job": 133758016801,
+  "attempt": 1,
+  "Native42Passed": true,
+  "receiver44Passed": true,
+  "admitted21rejected23": true,
+  "primary": "18b9b680de9c462f8d9595677c4c054536bcb418",
+  "proof": "56c682180663231356b9523d7d30e03a1fe1c564",
+  "closure": "DeleteonlynominatedWF,addPrimary+thisReceipt,retainall3203originals+63otherinputs,verify3268leaves/main/history/0closeruns. NoSourcequalification/runtimeactions.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
