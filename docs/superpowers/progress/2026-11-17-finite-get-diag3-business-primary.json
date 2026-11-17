@@ -27382,28 +27382,23 @@
   },
   "rootTrusted": {
     "expected": {
+      "repository": "tokenizartinfo-ops/agent-friendly-web",
       "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
-      "message": "AFW-C2-T1-FINITE-GET-DIAG3-ONEUSE-20261117",
-      "workflow": ".github/workflows/afw-c2-finite-get-diag3.yml",
+      "workflowPath": ".github/workflows/afw-c2-finite-get-diag3.yml",
+      "oneUseMessage": "AFW-C2-T1-FINITE-GET-DIAG3-ONEUSE-20261117",
       "job": "c2-finite-get-diag3",
-      "prefix": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/",
-      "runner": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
-      "command": "node docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
-      "artifact": {
-        "name": "afw-c2-finite-get-diag3",
-        "path": "output/c2-finite-get-diag3.json",
-        "fileName": "c2-finite-get-diag3.json",
-        "retentionDays": 7
-      },
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "head": "17582e124c2728800788dcbe46c740f38aea861a",
+      "tree": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
+      "runId": 44021068647,
+      "jobId": 133830419181,
       "requiredSteps": [
         "Read the exact one-use lab head",
         "Use the fixed Node runtime",
         "Install only the existing locked dependencies",
         "Observe finite GET in the full case order",
         "Preserve the bounded finite GET diagnostic"
-      ],
-      "jobMinutes": 7,
-      "activationReleased": false
+      ]
     },
     "Root25Measurement": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
     "bodyEdges": [
