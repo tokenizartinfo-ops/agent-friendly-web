@@ -1,0 +1,86 @@
+{
+  "schema": "AFW.DROP.S5.INDEPENDENT_STATIC_REVIEW/1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "detached Git DATA only",
+    "ORIGIN": "github.com",
+    "RESOURCE_TYPE": "immutable JSON review",
+    "RESOURCE_ID": "Source5 DROP diagnostic code, native pending",
+    "ALLOWED_ACTION": "static text/JSON/hash comparison; create_blob and full readback only",
+    "ROLLBACK": "discard detached review; no ref or runtime changed"
+  },
+  "inputs": {
+    "native34": "a1dc2376bd54154015f76a70ce732b5325aa581a",
+    "business25": "fae315e9ceae442a658b361ba31f5adfa6d95d4d",
+    "report": "892086045c26d2be05e4dcb62c200e7570191b69",
+    "protocol": "6349fd2706b084e3c56309d6aac00a469310e73a",
+    "fullContextReviewPackage": "251f1a4621bb9fd45d48b25b3be82da39e055a27",
+    "design": "1a5ccbf3aa73495e3c4f4ebfe39e5693d78d91cb",
+    "designReview": "56e08ba3af37540421e1897d79b416c6ba4c12dc",
+    "builtinRuling": "1fa82c9895bcb8b515de00f53d99e84a8b6a042d",
+    "sixSiteRuling": "713834d1311f4cd888f8505f67441fe622325077",
+    "oracle63": "a78efb5290deb184c70fc4282bf438d818d02588",
+    "reversibles": "59289f6688d0cb3c49ee738cbc700769c7251a21",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989"
+  },
+  "SPEC": "PASS_STATIC",
+  "QUALITY": "PASS_STATIC",
+  "findings": [],
+  "checks": [
+    {
+      "result": "PASS",
+      "refs": "native34.mountLeaves; business25.mountLeaves; full-context package12 hunks",
+      "evidence": "All36 distinct mounted blobs fully fetched; independently recomputed UTF8 bytes/SHA256/GitSHA match descriptors. All12 diff hunks have exact old/new line counts and match pinned before/after body slices. No Source text imported or executed."
+    },
+    {
+      "result": "PASS",
+      "refs": "source-index fc5b7109; previous4c62b37a; reversible slots/compiledM; S08:8-9,28,113",
+      "evidence": "Original10 Source13 descriptors and caseMap exact. Only test S08/S09/S10 overlays change. S08 captures first DROP response and emits at existing state cut before original puts assertion; original noFurther/stats/assert/finally restored path and remaining original lines preserved. Driver9e29c519 and recorder662ec817 remain pinned unchanged. Recoverable full prior3 fixture bodies and prepared3 M identities present."
+    },
+    {
+      "result": "PASS",
+      "refs": "S09:522-688; preparedM2d300dfa/bridge d53f66e7/wire b6459f82",
+      "evidence": "Same helper factory used by source/model/native controls. QA captures epoch before original fetch, binds unique Request/Q/status/script, rejects revoked/sealed/crossed/substituted/reused responses and absent/colliding/immutable marker. M binds P/cell/lease/UUID, exact denied/deadline error and surviving original B; nonthrowing tap returns original promise after parent.finish, with consumed derived rejection. Original race/cancel/retained work/timers remain effective. Only approved static node:crypto edge added to prepared S03; original raw S03 unchanged."
+    },
+    {
+      "result": "PASS",
+      "refs": "S10:29-51,130-168,400-519; S09:664",
+      "evidence": "Compiler-only path uses coupled first-connection real provisional namespace, same memoized loaders/resolution/preparation for ordinary and mapped siblings, exact JS bytes/path selection and private source-map segments. Requires unique throw+caller pairs, mounted QA/M equality and at least2 distinct sites. Provisional MF is disposed before mount/seed/dispatch. Six literal allowed anchors only; no nearest mapping or lease-conjunct cause inference."
+    },
+    {
+      "result": "PASS",
+      "refs": "oracle63; checker7ed4423a; model430e9742; native33fabf4f; differential5d5835da; childcb26b8de",
+      "evidence": "Original59 oracle rows/defaults preserved exactly;4 appended independently literal lease cases. Source helper factories exercised by planned63 model cases, actual compiler controls and16 separate native calibration/transport controls.14 focused differential cases cover ordinary R4 observation equivalence plus closed/open15 joins and negatives. Copied valid fields remain explicitly indistinguishable; wire tests alone cannot release closed-transport premise."
+    },
+    {
+      "result": "PASS",
+      "refs": "adapter f1a26313:412-448,472,545-546; protocol.dropWinner; business runner4dfc00e4:56,169-178,201; S10:164; S09:620",
+      "evidence": "C1/firstFailure and finiteGet logic unchanged apart from family/pins and appended dropWinner. Collector requires first14 ordered successful action/count/native/source rows, then exact open15 57-event prefix with14 native rows or closed15 matching action/count/native/source15; one canonical marker afterSource14/beforeSource15. Invalid/missing/duplicate/misplaced evidence downgrades UNKNOWN. Current transportRelease:null leaves both transports unverified; host returns allUNKNOWN before attribution."
+    },
+    {
+      "result": "PASS",
+      "refs": "tool runner3cfa90e6; business4dfc00e4; workflows e88dd28c/427397f5; proof-schema0ccaf3d0",
+      "evidence": "Fixed branch/message/event/job/attempt1/Node22.23.4/BASE admission and input pins;7min workflow/180s child/330s total, bounded buffers/journal/artifacts. Fixed action SHA pins, existing frozen-lock npm ci ignore-scripts only, no real credential injection. Child runs cleared environment/nonroot in loopback-only network namespace. Private scratch output/maps remain contained; owned temp cleanup precedes sanitized publication. Valid UNSUPPORTED artifact is not pass evidence."
+    }
+  ],
+  "reviewBoundary": "This is static code/spec/quality acceptance only. Syntax/import/build/runtime behavior,63 model/14 differential/16 native checks, actual compiler conventions, mounted-route transport and native cleanup have not run and remain separate Root gates. Neither this review nor a tooling success authorizes business activation. Future measured transport binding, independent readback/OWN and Root exact-tree/fresh one-use admission remain required. Candidate final3203-leaf preservation is Root staging responsibility; no candidate ref was created here.",
+  "rounds": {
+    "Source": 5,
+    "OWN": 4,
+    "max": 5,
+    "noReset": true
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
