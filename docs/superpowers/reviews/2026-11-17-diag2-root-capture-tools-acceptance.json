@@ -1,0 +1,41 @@
+{
+  "schema": "AFW-DIAG2-ROOT-CAPTURE-TOOLS-ACCEPTANCE/1",
+  "timestampUTC": "2026-11-17 02:08:25 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "Source35": {
+    "primary": "97c742290e0ba58cab5c15be7e09208f3753bc90",
+    "proof": "0c2c1f3b34fe668a17250a509528d8b4578a4134",
+    "close": "8cc0c654b4ce4fe032fb7d2f0fc937afbb0ad8c1",
+    "freshReview": "82294234ee0345d63c85d7518ae96d3857e6c649",
+    "tests": 35,
+    "checkpointGroups": 358,
+    "acceptedToolingOnly": true
+  },
+  "Own42": {
+    "primary": "18b9b680de9c462f8d9595677c4c054536bcb418",
+    "proof": "56c682180663231356b9523d7d30e03a1fe1c564",
+    "close": "bce8e38235618e56d6fd0a7e597c782c5339ad70",
+    "freshReview": "247fb10edd01a5449333f15ca68a8064742202f3",
+    "nativeCases": 42,
+    "evaluations": 44,
+    "admit": 21,
+    "reject": 23,
+    "acceptedMODELEDOnly": true,
+    "final70Index": "b5d274852deae3ce7bd1d7c08563d1e6862b8b00",
+    "all70FullHashAnd9DeltasChecked": true
+  },
+  "hostFixtureAccepted": "55e95b5018e7fef76caeef64f2982e504a5e7a60",
+  "actualProducer25BodyAdmission": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8",
+  "nextEligible": "Rootmaygateonefull-order20SourceDIAG2diagnostic withpreparedactual25; d2ReadactualSourceadmissionafteractualAPI/log/ZIP. NotnormalFullTask1/realprovider/PCoff.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
