@@ -1,0 +1,235 @@
+{
+  "schema": "AFW-FG3-SYN-LABEL-LIFECYCLE/1",
+  "group": "FG3_ONE_SNAPSHOT",
+  "fixtureRef": "Q_ONE",
+  "mainAndNegative": "Two separate SYN objects with independent spies. Set initial active=main, successful original snapshot uses Q_ONE rows/real plain and counters. Capture callback argument without Node TAP prefix. Enter/finish and publicCounts refer to the actual E3 observer API. Work-throw simulation calls finish in finally and retains original synthetic throw; world wiring is verified statically.",
+  "eventLiterals": {
+    "enterMonitor": "call actual enter(MONITOR) before work",
+    "enterScope": "call actual enter(SCOPE_MISSING) before work",
+    "finishReturn": "call actual finish on the exact same token in simulated original action finally",
+    "finishThrow": "throw the fixture sentinel inside work, call actual finish in finally, catch outside and compare referential identity",
+    "publicCounts": "invoke observer.counts",
+    "directCounts": "invoke same S08 internal count(f) on the fixture without armed-label consumption; only via a testable direct-call edge in actual fixture, no shadow formula",
+    "activeNegative": "set fake active owner to distinct negative SYN world",
+    "emitThrows": "make provided sink throw after recording one attempted marker",
+    "snapshotThrows": "next actual snapshot throws unique SYN sentinel, verify outside by object identity",
+    "snapshotRestores": "return to normal snapshot behavior",
+    "publicCountsDuringPending": "invoke observer.counts before work finishes to exercise poison rule"
+  },
+  "cases": [
+    {
+      "id": "L_RETURN",
+      "steps": [
+        "enterMonitor",
+        "finishReturn",
+        "publicCounts",
+        "publicCounts"
+      ],
+      "expected": {
+        "snapshotCalls": 2,
+        "returnedCounts": [
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          },
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          }
+        ],
+        "emitted": [
+          "C2FT3 {\"id\":\"C2T1_MONITOR\",\"value\":\"1\"}"
+        ]
+      }
+    },
+    {
+      "id": "L_ACTION_THROW",
+      "steps": [
+        "enterScope",
+        "finishThrow",
+        "publicCounts"
+      ],
+      "expected": {
+        "snapshotCalls": 1,
+        "returnedCounts": [
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          }
+        ],
+        "emitted": [
+          "C2FT3 {\"id\":\"C2T1_SCOPE_MISSING\",\"value\":\"1\"}"
+        ],
+        "sameWorkError": true
+      }
+    },
+    {
+      "id": "L_UNLABELLED",
+      "steps": [
+        "publicCounts"
+      ],
+      "expected": {
+        "snapshotCalls": 1,
+        "returnedCounts": [
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          }
+        ],
+        "emitted": []
+      }
+    },
+    {
+      "id": "L_INTERNAL",
+      "steps": [
+        "enterScope",
+        "directCounts",
+        "finishReturn",
+        "publicCounts"
+      ],
+      "expected": {
+        "snapshotCalls": 2,
+        "returnedCounts": [
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          },
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          }
+        ],
+        "emitted": [
+          "C2FT3 {\"id\":\"C2T1_SCOPE_MISSING\",\"value\":\"1\"}"
+        ]
+      }
+    },
+    {
+      "id": "L_CONCURRENT_PUBLIC",
+      "steps": [
+        "enterScope",
+        "publicCountsDuringPending",
+        "finishReturn",
+        "publicCounts"
+      ],
+      "expected": {
+        "snapshotCalls": 2,
+        "returnedCounts": [
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          },
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          }
+        ],
+        "emitted": []
+      }
+    },
+    {
+      "id": "L_REARM_OVERLAP",
+      "steps": [
+        "enterMonitor",
+        "enterScope",
+        "finishReturn",
+        "publicCounts"
+      ],
+      "expected": {
+        "snapshotCalls": 1,
+        "returnedCounts": [
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          }
+        ],
+        "emitted": []
+      }
+    },
+    {
+      "id": "L_OTHER_WORLD",
+      "steps": [
+        "enterMonitor",
+        "finishReturn",
+        "activeNegative",
+        "publicCounts"
+      ],
+      "expected": {
+        "snapshotCalls": 1,
+        "returnedCounts": [
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          }
+        ],
+        "emitted": [],
+        "mainSnapshots": 0,
+        "negativeSnapshots": 1
+      }
+    },
+    {
+      "id": "L_ORIGINAL_REJECT",
+      "steps": [
+        "enterScope",
+        "finishReturn",
+        "snapshotThrows",
+        "publicCounts",
+        "snapshotRestores",
+        "publicCounts"
+      ],
+      "expected": {
+        "snapshotCalls": 2,
+        "returnedCounts": [
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          }
+        ],
+        "emitted": [],
+        "sameSnapshotError": true
+      }
+    },
+    {
+      "id": "L_EMIT_REJECT",
+      "steps": [
+        "enterMonitor",
+        "finishReturn",
+        "emitThrows",
+        "publicCounts",
+        "publicCounts"
+      ],
+      "expected": {
+        "snapshotCalls": 2,
+        "returnedCounts": [
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          },
+          {
+            "upload": 2,
+            "activation": 2,
+            "receipts": 1
+          }
+        ],
+        "emitted": [
+          "C2FT3 {\"id\":\"C2T1_MONITOR\",\"value\":\"1\"}"
+        ],
+        "sinkAttempts": 1,
+        "sinkErrorContained": true
+      }
+    }
+  ],
+  "policy": "Close no-output branch for inactive/foreign/poisoned labels; no UNKNOWN re-emission on failed sink. No new products or external inputs."
+}

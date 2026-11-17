@@ -1,0 +1,289 @@
+{
+  "schema": "AFW-FG3-PROPOSAL-RESTORATION/1",
+  "authority": "be1fbf3eaaab07bdfaf8a3b84a7665d42d45d71c",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "oldSourceE2": {
+    "bytes": 22085,
+    "sha256": "989616b5d2e5ae803b8c2ec60d3022c02f8ca2a99363f256ad7fd86f965cdcbb",
+    "blob": "188d6a6747875bec3e1f9524427b33959416a9b4"
+  },
+  "lineage": {
+    "D2": "98d85420ec517978a18eab639b60c1dbb8353eee",
+    "R2": {
+      "bytes": 18310,
+      "sha256": "f8ccf99de51ed3ee3618b63bba318167b095ba9d8d59a47f914a678a3429f409",
+      "blob": "dd6f6d44c577551388bffa9434baa332d1e12dfd"
+    },
+    "R3": {
+      "bytes": 18499,
+      "sha256": "d50c86b56810c84e0f416879cd9628fe318eb7fd1da2a43d2fe02a1e398a502a",
+      "blob": "452895beeedf528748e51ec2ea4ccb91d684552a"
+    },
+    "toolPreimage": {
+      "bytes": 22085,
+      "sha256": "989616b5d2e5ae803b8c2ec60d3022c02f8ca2a99363f256ad7fd86f965cdcbb",
+      "blob": "188d6a6747875bec3e1f9524427b33959416a9b4"
+    },
+    "toolsR3": {
+      "bytes": 19362,
+      "sha256": "9c871eecce19f087bef0d158e78312fe805ec56821e8e886a7247ea1b2f6a926",
+      "blob": "1bf532b9fa15db9c5c4a388c1786e7bda21d5d71"
+    }
+  },
+  "d2ToR2": [
+    [
+      0,
+      {
+        "bytes": 1160,
+        "sha256": "e22f35a88bcc9d2c083f7ab918a9ac7ef1c94674b4ca8fb538041153decda9e2",
+        "blob": "4f9bafd0b1434eb62d7e04204dcf439a27e39d71"
+      }
+    ],
+    [
+      9,
+      {
+        "bytes": 41478,
+        "sha256": "c8a5c8913dcd97a833c50e13673fac3a2e3c354f5fad963149aef3c47da69c0d",
+        "blob": "2ea99ef2833aef0a7a7563c8fc18a032a96c1aae"
+      }
+    ],
+    [
+      16,
+      {
+        "bytes": 10154,
+        "sha256": "2fd34bf64536ac7338326426184621a1f2c0c4280863005710b1365dfbb9fd33",
+        "blob": "61be69da50749e6ba46328442b49626063a8923e"
+      }
+    ],
+    [
+      17,
+      {
+        "bytes": 66436,
+        "sha256": "df67e609907501f738e4e2191c16ec2b4578f1db972d1e5c058d9e0544ac501e",
+        "blob": "4d7b0e071e384988e3d626296ace61fcbefd48c6"
+      }
+    ],
+    [
+      18,
+      {
+        "bytes": 100718,
+        "sha256": "fd92646bf089207d6922b539e29f2e82fb551142df9eeeccf1a864a5d9a067f0",
+        "blob": "32dfc55dca2a568b3cbc4ccb46826628a3190038"
+      }
+    ],
+    [
+      19,
+      {
+        "bytes": 50579,
+        "sha256": "7f0336569439463178d63d7e266c9797997feb1c092447bc6254965dd015781a",
+        "blob": "1137abb83a8479d0fd422b1e79d90ba3c02b85bd"
+      }
+    ],
+    [
+      23,
+      {
+        "bytes": 33964,
+        "sha256": "b76aa908364a3c8778064bf000fa6b800186952fe7d2b61edd401e86e15b1abc",
+        "blob": "11fc3739dba647051509dc217007aacd3aa6d0bf"
+      }
+    ],
+    [
+      24,
+      {
+        "bytes": 3704,
+        "sha256": "626ae0f9ad208188a4154d77044c2f613736b10d59f80f28f8032afb459e0f80",
+        "blob": "2bbc3ea4eb866eb655ac3a152a8803e69b579742"
+      }
+    ]
+  ],
+  "r2ToR3Source": [
+    [
+      18,
+      {
+        "bytes": 106202,
+        "sha256": "99cc6f066e413e156a30284d6c513540dc747e3c5a731f0a6b73b7c6beafec2b",
+        "blob": "d4da03de7783d95596aa2b7dc7cc26a0f3a16412"
+      }
+    ],
+    [
+      19,
+      {
+        "bytes": 22261,
+        "sha256": "6454ba33a18c8bd7a5e80ec14abd3b63bafe727992f8573f2733c1d521619251",
+        "blob": "8e6363cce53001601d1797b65ed1391b32690ad5"
+      }
+    ],
+    [
+      23,
+      {
+        "bytes": 1574,
+        "sha256": "8131a11b04ec01f3dfa84f118d133b92a0d8c6ca939edfa3ffcb5ad9289f7f85",
+        "blob": "f2c82d7432bc9e0188333c320edc5aa68e6d1de6"
+      }
+    ]
+  ],
+  "r2ToR3Tools": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9ed7ad37d9912977fc9f0d6b600c9c323e2b8382",
+        "bytes": 31198,
+        "sha256": "161d29277e48fb26a062fb6b158913b79921e7e641161f2fa945839941af01b0"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "527149a4ecf3e5f4f06e0d801cef38a256b60ceb",
+        "bytes": 31647,
+        "sha256": "d3f27d5e093dd07866e3c2da6b10beb200e28949abcfcc4090f01671db3e4c04"
+      },
+      "splice": {
+        "bytes": 22252,
+        "sha256": "c27a56ad68e97bc9e5a48dd0bb52a55888b8953a80efe3887668423d06c66a9d",
+        "blob": "547179404aa1433396b363fdad56e86da39a492f"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/oracle.json",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/oracle.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "ea80212d0c31a30b983f1504fc7663205dcf6272",
+        "bytes": 50094,
+        "sha256": "bbf46cf62ce2359c60e54b88de0ffc1843b49e8559a0cf5f069fc80181f065f3"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/oracle.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "8aceac899034528b5d657f8bc7dd774b2d6ec2bd",
+        "bytes": 51184,
+        "sha256": "f54b26c93cba714fb596cb50b6d3cd341a1d570ca36f5a2a6b62b8ebf7eacc3e"
+      },
+      "splice": {
+        "bytes": 66116,
+        "sha256": "c8fd43458ba617767438acebd721bce77f8dbdb3f7712e88cd59c1dc71336d68",
+        "blob": "f0bc3e7d8e69f4cbcb1ab2b774196c8a3d8c4b3e"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/controls.mjs",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/controls.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "189224da17b9aa77054917f024ac92c0d9d6a404",
+        "bytes": 9662,
+        "sha256": "835c897379181a5bf6d7aa66a63a9845e4a9dbf1d6ad0621670a0772df4e1ed9"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/controls.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "249ae55a4ccae7126e12f8c5640691d3c5aaddf0",
+        "bytes": 11471,
+        "sha256": "f908bf5889208c58184bf15451a5368447a8f3c9d7eeaa7fed69417335d508e0"
+      },
+      "splice": {
+        "bytes": 18939,
+        "sha256": "1cedae6f79d86b2b0af36499e23a2b72a22c8709af8c22c19d18d4e5b0c89f7b",
+        "blob": "07571c74b0ead5fee3f452993b0e272e59073981"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/tool-proof-schema.json",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/tool-proof-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "a33072faa6b150a019a460c7ca86c1140e196e6b",
+        "bytes": 39297,
+        "sha256": "061b0959df79ea06c332c8a7eef25571818d6a893ba1c4f89d1529f72ca4ff71"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/tool-proof-schema.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "69a6fd5a319f57468b063474df98ae6424560c2f",
+        "bytes": 39549,
+        "sha256": "91981138dc972952728450f45ca4efaf72145e58e6ddbc636029d5572294c2f1"
+      },
+      "splice": {
+        "bytes": 82395,
+        "sha256": "0f595793d5e60c508b94b302836ff8526b6878011deec1226db19d48d935b529",
+        "blob": "bd90cd85b08397d7c737863f57452a6758021f26"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/priority.json",
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/priority.json",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "b307c25b01c98bdddbeafe908bf7b60ebcf438e1",
+        "bytes": 17838,
+        "sha256": "4ef2427d0e6efbc5e57d23679d6fd9ea39dadf3b473b28c70b84e479fe866e57"
+      },
+      "kind": "ADD_COMPLETE_BLOB"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/legacy/collection-adapters.mjs",
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/legacy/collection-adapters.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "9ed7ad37d9912977fc9f0d6b600c9c323e2b8382",
+        "bytes": 31198,
+        "sha256": "161d29277e48fb26a062fb6b158913b79921e7e641161f2fa945839941af01b0"
+      },
+      "kind": "ADD_COMPLETE_BLOB"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/legacy/read-progress.mjs",
+      "before": null,
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/legacy/read-progress.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+        "bytes": 5507,
+        "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+      },
+      "kind": "ADD_COMPLETE_BLOB"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/tools-finite-get.mjs",
+      "before": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/tools-finite-get.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "bytes": 19441,
+        "sha256": "6e2a56c06c32ea22351c948ea0b060e176a3eba9a5b43068951b2f6f1a1b946e",
+        "blob": "82a91a4aa3f053533b0fe0ee088932a5afa8506d"
+      },
+      "after": {
+        "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/tools-finite-get.mjs",
+        "mode": "100644",
+        "type": "blob",
+        "blob": "6f48584c2302f18d8b28e0138b99286678ba73ff",
+        "bytes": 20283,
+        "sha256": "ca78f36a2de86a1437588b652058c6c4ad7c522515bd3064c610ebc5f98530fd"
+      },
+      "splice": {
+        "bytes": 25918,
+        "sha256": "919ae2e848a8b8bffd7ab7f25c2cd78bee5d0468aa1a2ea49ae07fa66489a2f7",
+        "blob": "6634627947c5b146d97090e8cc6c422c6604a34f"
+      }
+    }
+  ],
+  "rootOnly": "Preserve old DATA and readback before activating. Each slot records exact immutable complete before/after Git blob and raw text splice (UTF8 byte counts, string inputs). Revert by reconstructing via after→before, verify old SHA256/Git/bytes; equivalently use the measured stored blob. Original source files canonical in BASE remain untouched; all lab mounts proposed as additions. S08 and index E2/old placements preserved, sibling D07/S07/reader unchanged. Future one-use closure removes only nominated workflow after terminal disposition using Root scope; verify remaining original3203/other proposal leaves/main/history and zero close-head runs. No refs created by author.",
+  "newOnlyRollback": "35 tooling additions and 25 business additions in independent hypothetical heads. The corresponding mountLeaves indexes completely give each absence-before/afterimage and mode. No automated rollback executed."
+}

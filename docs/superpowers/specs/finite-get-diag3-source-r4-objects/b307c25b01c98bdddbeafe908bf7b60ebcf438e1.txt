@@ -1,0 +1,142 @@
+{
+  "schema": "AFW-FG3-SOURCE-ONE-FORMAT-PRIORITY-FIXTURE/1",
+  "state": "DATA_BEFORE_FIX_CODE",
+  "round": 3,
+  "maxRounds": 5,
+  "preimage": {
+    "bytes": 31198,
+    "sha256": "161d29277e48fb26a062fb6b158913b79921e7e641161f2fa945839941af01b0",
+    "blob": "9ed7ad37d9912977fc9f0d6b600c9c323e2b8382"
+  },
+  "previous145": "4469d73e40f758e356e172c119687dde119c1fe6",
+  "unchangedOracle145": "ea80212d0c31a30b983f1504fc7663205dcf6272",
+  "group": "FG3_HTTP_EXCLUSIONS",
+  "id": "H_NATIVE_HEADER_FORMAT_PRIORITY",
+  "positionWithinGroup": 20,
+  "caseCountBefore": 19,
+  "caseCountAfter": 20,
+  "groupCounts": [
+    6,
+    24,
+    9,
+    4,
+    20,
+    6,
+    12,
+    35,
+    30
+  ],
+  "innerTotal": 146,
+  "topNativeGroups": 9,
+  "c1Inner": 35,
+  "baseFixture": "H_KNOWN_429",
+  "originalStdoutSeal": {
+    "bytes": 3816,
+    "sha256": "f2dbc968686f4d7e5885fc7a0fad9d2d6166571aae8c335099fc7ecc70f64d16",
+    "blob": "efd1944231782ebc4e177a8b65a3449ca78e84a9"
+  },
+  "replacementOnly": {
+    "oldUtf8": "TAP version 13\n",
+    "newUtf8": "TAP version 12\n",
+    "offset": 0
+  },
+  "stdoutUtf8": "TAP version 12\n# C2SOURCE {\"id\":\"C2T1_CONNECTION\",\"status\":\"pass\",\"phase\":\"connection\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_CONNECTION\nok 1 - C2T1_CONNECTION\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_OAUTH\",\"status\":\"pass\",\"phase\":\"oauth\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_OAUTH\nok 2 - C2T1_OAUTH\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_HANDLE\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_HANDLE\nok 3 - C2T1_HANDLE\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_PROJECTREF\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PROJECTREF\nok 4 - C2T1_PROJECTREF\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_SUBJECT\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SUBJECT\nok 5 - C2T1_SUBJECT\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_PHASE_RENAME\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PHASE_RENAME\nok 6 - C2T1_PHASE_RENAME\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_SOURCE_BYTES\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_SOURCE_BYTES\nok 7 - C2T1_SOURCE_BYTES\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_APPROVAL\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_APPROVAL\nok 8 - C2T1_APPROVAL\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_PREDECESSOR\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_PREDECESSOR\nok 9 - C2T1_PREDECESSOR\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_GRANT_REVOKED\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_GRANT_REVOKED\nok 10 - C2T1_GRANT_REVOKED\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_EXTRA_KEY\",\"status\":\"pass\",\"phase\":\"negative\",\"counters\":{\"upload\":1,\"activation\":1,\"receipts\":1},\"code\":\"OK\"}\n# Subtest: C2T1_EXTRA_KEY\nok 11 - C2T1_EXTRA_KEY\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_NOTICES\",\"status\":\"pass\",\"phase\":\"notices\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"}\n# Subtest: C2T1_NOTICES\nok 12 - C2T1_NOTICES\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2SOURCE {\"id\":\"C2T1_MONITOR_COOKIE\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"}\n# Subtest: C2T1_MONITOR_COOKIE\nok 13 - C2T1_MONITOR_COOKIE\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2FT3 {\"id\":\"C2T1_MONITOR\",\"value\":\"0\"}\n# C2SOURCE {\"id\":\"C2T1_MONITOR\",\"status\":\"pass\",\"phase\":\"monitor\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"OK\"}\n# Subtest: C2T1_MONITOR\nok 14 - C2T1_MONITOR\n  ---\n  duration_ms: 1\n  type: 'test'\n  ...\n# C2FT3 {\"id\":\"C2T1_SCOPE_MISSING\",\"value\":\"1\"}\n# C2SOURCE {\"id\":\"C2T1_SCOPE_MISSING\",\"status\":\"fail\",\"phase\":\"scope\",\"counters\":{\"upload\":2,\"activation\":2,\"receipts\":2},\"code\":\"TEST_FAILED\"}\n# Subtest: C2T1_SCOPE_MISSING\nnot ok 15 - C2T1_SCOPE_MISSING\n  ---\n  duration_ms: 1\n  type: 'test'\n  location: '/synthetic/finite-get-syn.mjs:15:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    SYNTHETIC_ASSERTION_TEXT_NOT_PARSED\n  code: 'ERR_ASSERTION'\n  name: 'AssertionError'\n  expected: 200\n  actual: 429\n  operator: 'strictEqual'\n  stack: |-\n    SYNTHETIC_STACK_NOT_PARSED\n  ...\n",
+  "journalUtf8": "{\"sequence\":1,\"elapsedMs\":1,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":2,\"elapsedMs\":2,\"id\":\"C2T1_CONNECTION\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":3,\"elapsedMs\":3,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":4,\"elapsedMs\":4,\"id\":\"C2T1_CONNECTION\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":5,\"elapsedMs\":5,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":6,\"elapsedMs\":6,\"id\":\"C2T1_OAUTH\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":7,\"elapsedMs\":7,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":8,\"elapsedMs\":8,\"id\":\"C2T1_OAUTH\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":9,\"elapsedMs\":9,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":10,\"elapsedMs\":10,\"id\":\"C2T1_HANDLE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":11,\"elapsedMs\":11,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":12,\"elapsedMs\":12,\"id\":\"C2T1_HANDLE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":13,\"elapsedMs\":13,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":14,\"elapsedMs\":14,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":15,\"elapsedMs\":15,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":16,\"elapsedMs\":16,\"id\":\"C2T1_PROJECTREF\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":17,\"elapsedMs\":17,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":18,\"elapsedMs\":18,\"id\":\"C2T1_SUBJECT\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":19,\"elapsedMs\":19,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":20,\"elapsedMs\":20,\"id\":\"C2T1_SUBJECT\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":21,\"elapsedMs\":21,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":22,\"elapsedMs\":22,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":23,\"elapsedMs\":23,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":24,\"elapsedMs\":24,\"id\":\"C2T1_PHASE_RENAME\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":25,\"elapsedMs\":25,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":26,\"elapsedMs\":26,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":27,\"elapsedMs\":27,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":28,\"elapsedMs\":28,\"id\":\"C2T1_SOURCE_BYTES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":29,\"elapsedMs\":29,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":30,\"elapsedMs\":30,\"id\":\"C2T1_APPROVAL\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":31,\"elapsedMs\":31,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":32,\"elapsedMs\":32,\"id\":\"C2T1_APPROVAL\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":33,\"elapsedMs\":33,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":34,\"elapsedMs\":34,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":35,\"elapsedMs\":35,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":36,\"elapsedMs\":36,\"id\":\"C2T1_PREDECESSOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":37,\"elapsedMs\":37,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":38,\"elapsedMs\":38,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":39,\"elapsedMs\":39,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":40,\"elapsedMs\":40,\"id\":\"C2T1_GRANT_REVOKED\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":41,\"elapsedMs\":41,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":42,\"elapsedMs\":42,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":43,\"elapsedMs\":43,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":44,\"elapsedMs\":44,\"id\":\"C2T1_EXTRA_KEY\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":45,\"elapsedMs\":45,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":46,\"elapsedMs\":46,\"id\":\"C2T1_NOTICES\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":47,\"elapsedMs\":47,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":48,\"elapsedMs\":48,\"id\":\"C2T1_NOTICES\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":49,\"elapsedMs\":49,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":50,\"elapsedMs\":50,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":51,\"elapsedMs\":51,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":52,\"elapsedMs\":52,\"id\":\"C2T1_MONITOR_COOKIE\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":53,\"elapsedMs\":53,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":54,\"elapsedMs\":54,\"id\":\"C2T1_MONITOR\",\"operation\":\"action\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":55,\"elapsedMs\":55,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":56,\"elapsedMs\":56,\"id\":\"C2T1_MONITOR\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n{\"sequence\":57,\"elapsedMs\":57,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":58,\"elapsedMs\":58,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"action\",\"edge\":\"throw\",\"error\":{\"name\":\"AssertionError\",\"code\":\"ERR_ASSERTION\",\"site\":{\"file\":\"S08\",\"line\":18,\"column\":118}}}\n{\"sequence\":59,\"elapsedMs\":59,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"enter\",\"error\":null}\n{\"sequence\":60,\"elapsedMs\":60,\"id\":\"C2T1_SCOPE_MISSING\",\"operation\":\"count\",\"edge\":\"return\",\"error\":null}\n",
+  "stdoutSeal": {
+    "bytes": 3816,
+    "sha256": "6b9387fa2787468e9477bca3ab8ba3ea79c9e8232cd3283245ab9284066a3794",
+    "blob": "b32c5775e97e92188ad3190e9adfc189720ee2e8"
+  },
+  "journalSeal": {
+    "bytes": 6226,
+    "sha256": "fac212a8b05680d9f7aad15e464b77ba4e0e916f87e11f8ce535755cdcd83f67",
+    "blob": "2cd6a23017dd0177462ac135409d6e1471ccdaee"
+  },
+  "child": {
+    "exitCode": 1,
+    "signal": null,
+    "errorCode": "ETIMEDOUT",
+    "stderrUtf8": ""
+  },
+  "expected": {
+    "old": {
+      "finiteGet": {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "UNKNOWN",
+          "reason": "AMBIGUOUS_EVIDENCE",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "UNKNOWN",
+          "reason": "NATIVE_UNJOINED",
+          "countSequence": null
+        },
+        "afterScopeMissing": {
+          "value": "UNKNOWN",
+          "reason": "NATIVE_UNJOINED",
+          "countSequence": null
+        }
+      },
+      "publisher": {
+        "decision": "PUBLISH",
+        "normalFrameCount": 2,
+        "payloadMatches": true
+      }
+    },
+    "candidate": {
+      "finiteGet": {
+        "schema": "afw.c2-finite-get-diag3.v1",
+        "http": {
+          "state": "UNKNOWN",
+          "reason": "NATIVE_FORMAT_UNSUPPORTED",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        },
+        "afterMonitor": {
+          "value": "UNKNOWN",
+          "reason": "NATIVE_UNJOINED",
+          "countSequence": null
+        },
+        "afterScopeMissing": {
+          "value": "UNKNOWN",
+          "reason": "NATIVE_UNJOINED",
+          "countSequence": null
+        }
+      },
+      "publisher": {
+        "decision": "PUBLISH",
+        "normalFrameCount": 2,
+        "payloadMatches": true
+      }
+    }
+  },
+  "normalized": {
+    "hash": "ea71742a1de18face028f182b69437f7cf58f51edce1bdb0cfe3962c27cf11f1",
+    "utf8Bytes": 848,
+    "state": "UNKNOWN",
+    "reason": "NATIVE_FORMAT_UNSUPPORTED",
+    "explanation": "Hash the actual old/candidate finiteGet plus observed publication/payload matching for each, attached in this order. Only id, digest, candidate http state+reason escape tooling. Neither old nor candidate execution has occurred."
+  },
+  "comparativeScope": "In this single inner control, call immutable old9ed adapter and corrected candidate actual collectObservation on these same two sealed buffers, then actual successPacket in each module against its correct identical E3 context. Capture actual firstFailure too and verify both unchanged. Require two frames with exact custody then outcome marker and the exact byte-equal outcome+LF and finiteGet carried. Old returns/publishes AMBIGUOUS and candidate returns/publishes NATIVE_FORMAT_UNSUPPORTED, all affected nullable fields null. Native prefix empty/ambiguous, not a known measurement. Also exercise existing H_NATIVE_AMBIGUOUS fixture through candidate successPacket inside the same control to corroborate that canonical TAP13 followed by bad native pair still publishes its sealed AMBIGUOUS without adding another ID or changing its original oracle. Old9ed mounted at tools-only legacy/collection-adapters.mjs and old62a in same directory, no new business edge.",
+  "minimalFixPlan": {
+    "source": "After shared journal/count/earlier-native exclusions and native.torn, validate the actual bounded bytes (fatal UTF8, CR/TAB/NUL, nonempty header exactly TAP version 13 + LF) before native.ambiguous and missing native pair. Perform this only when reaching the raw-dependent tier. Reuse one new extractor scan/decoded buffer; existing 62a independent native prefix and exact C1 function remain. Return NATIVE_FORMAT_UNSUPPORTED on bad raw envelope and AMBIGUOUS_EVIDENCE on native ambiguous with supported envelope. Empty raw is missing evidence like C1; torn stays first. No widened KNOWN.",
+    "publicationAndOwn": "Given same journal candidate and settled prefix, if native is ambiguous after reaching this tier, admit UNKNOWN AMBIGUOUS_EVIDENCE or UNKNOWN NATIVE_FORMAT_UNSUPPORTED with all scalar fields null; the public metadata cannot choose between them. If native target/prefix absent at this raw tier, allow original TARGET_NATIVE_UNAVAILABLE or NATIVE_FORMAT_UNSUPPORTED as applicable with only null fields. Earlier journal/NA gates or torn keep exact old priorities. No new enums, keys, raw facts, or positive authority. OWN must independently enforce visible blockers and same limited alternatives; projection cannot turn malformed native/header into known. Existing marker and cross-check rules unchanged."
+  },
+  "codeChangedAfterHold": false,
+  "native": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

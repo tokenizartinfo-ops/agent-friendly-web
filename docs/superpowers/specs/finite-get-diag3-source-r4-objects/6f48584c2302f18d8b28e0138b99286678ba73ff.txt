@@ -1,0 +1,170 @@
+import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {readFile,writeFile,appendFile,mkdir,mkdtemp,realpath,lstat,readdir,readlink,rm} from 'node:fs/promises';
+import {dirname,basename,join,resolve,relative,delimiter} from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const inputs=[{"path":"docs/superpowers/source-lab/c2-t1/source-index.json","mode":"100644","type":"blob","blob":"4c62b37a2e94efa057a1df97dd32c193761b8dcb","bytes":11467,"sha256":"3094be0e4276e7ffc31a08864f588bbdab97da67f38becc771c51344a601955e"},{"path":"docs/superpowers/source-lab/c2-t1/body-00.txt","mode":"100644","type":"blob","blob":"a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5","bytes":148547,"sha256":"02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"},{"path":"docs/superpowers/source-lab/c2-t1/body-01.txt","mode":"100644","type":"blob","blob":"cfbfb1656d4a013b40e770ee8335d5e1eb85a908","bytes":45576,"sha256":"fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"},{"path":"docs/superpowers/source-lab/c2-t1/body-02.txt","mode":"100644","type":"blob","blob":"8505cfe4e020c570ec37cb5943b703770e4d06c8","bytes":2497,"sha256":"644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"},{"path":"docs/superpowers/source-lab/c2-t1/body-03.txt","mode":"100644","type":"blob","blob":"8b43e03e96b055be49b66a6788b27f129dd894c8","bytes":2810,"sha256":"7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"},{"path":"docs/superpowers/source-lab/c2-t1/body-04.txt","mode":"100644","type":"blob","blob":"e2f35568a51360e3cbda4801f8d0d895d3f0dd7e","bytes":4153,"sha256":"54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"},{"path":"docs/superpowers/source-lab/c2-t1/body-05.txt","mode":"100644","type":"blob","blob":"a177d50ff73f8fad1d60827ef904a204126796fb","bytes":101380,"sha256":"5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"},{"path":"docs/superpowers/source-lab/c2-t1/body-06.txt","mode":"100644","type":"blob","blob":"4c1d7355e1759a5d597b520fcb79c2689b9bb966","bytes":22501,"sha256":"f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"},{"path":"docs/superpowers/source-lab/c2-t1/body-07.txt","mode":"100644","type":"blob","blob":"d4db10ee8a091434835a9ac28e0d607a5e9efd21","bytes":2785,"sha256":"678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"},{"path":"docs/superpowers/source-lab/c2-t1/body-08.txt","mode":"100644","type":"blob","blob":"49f3fa30c6754e64c36ab5cba769c9ef88669969","bytes":22336,"sha256":"0ea1a915b33ea380fe847c7b7bb7fe9659a207a87b922cedc4b85ce20195ecaa"},{"path":"docs/superpowers/source-lab/c2-t1/body-09.txt","mode":"100644","type":"blob","blob":"3e1d4c2695dce2d13ba064274ba441c4ce9447c3","bytes":61073,"sha256":"2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"},{"path":"docs/superpowers/source-lab/c2-t1/body-10.txt","mode":"100644","type":"blob","blob":"cb95e1f3b2e6c14d07f661f1b818c38d470564d7","bytes":88713,"sha256":"cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"},{"path":"docs/superpowers/source-lab/c2-t1/body-11.txt","mode":"100644","type":"blob","blob":"19441f9aa4a464b9594431b6e196d4318a7809b3","bytes":58727,"sha256":"d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"},{"path":"docs/superpowers/source-lab/c2-t1/body-12.txt","mode":"100644","type":"blob","blob":"e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd","bytes":6030,"sha256":"0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/mode-selection.json","mode":"100644","type":"blob","blob":"179fb6c9cd431a38f084211021843286aaa70671","bytes":4541,"sha256":"5b5c299504b143aa6c3d7093eeff28c1e0db4baecfafd2afb70283e5e278042a"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs","mode":"100644","type":"blob","blob":"527149a4ecf3e5f4f06e0d801cef38a256b60ceb","bytes":31647,"sha256":"d3f27d5e093dd07866e3c2da6b10beb200e28949abcfcc4090f01671db3e4c04"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/read-progress.mjs","mode":"100644","type":"blob","blob":"62a31e3c16cc710c84ebfb5b0242abb00671363c","bytes":5507,"sha256":"c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/fixture-seal.json","mode":"100644","type":"blob","blob":"4469d73e40f758e356e172c119687dde119c1fe6","bytes":19127,"sha256":"d94d9d8ad65f1251a8870bb30e6196528cd4b6641c00849c970dee87c7b6278e"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/quant.json","mode":"100644","type":"blob","blob":"b7dd795365170a1bcafa4f809cf5f6230c6f698d","bytes":52948,"sha256":"e5f6d8774d0fd5124791a6a7d6d223bc31ef828faae87fc09dda3d10f61492bf"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/latch.json","mode":"100644","type":"blob","blob":"5ed9a8e4d5842ada493f6d484051c347168b9db1","bytes":6076,"sha256":"e062f6abcf459ba3fd582c3ae7783b3f3c9b5a0f60b8577b82b5ed5ea1218413"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/atoms.json","mode":"100644","type":"blob","blob":"8301628a2141c6e125cef9e549158e3a1712f5a1","bytes":22526,"sha256":"3598bd2e983a35a162e36ac6ee56227418e37528c57d4e138d9baf9cbf71a471"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/collector.json","mode":"100644","type":"blob","blob":"1b5b319f98f678e79979c3bfadc77544917a5957","bytes":25482,"sha256":"7c5bf36c6c17a8b688ee2d2135a09fbb4e40a9075d8d7c626c806a9b5e05b1a0"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/c1.json","mode":"100644","type":"blob","blob":"62e3beb1b817523fe33b2e4ed17b6b20ffa448a8","bytes":18126,"sha256":"380c5510e2b6468f7b1e3b2e465f6ee56c9be2fdce7c0cb2b428284e581fda9c"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/pub.json","mode":"100644","type":"blob","blob":"1ef8ffb9001be3dcbb16962a11ab982e7204e910","bytes":66809,"sha256":"0516d6709408e35ab4123fffcf1d75ea40bad9c004f90d7f69ede0c60ce91401"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/oracle.json","mode":"100644","type":"blob","blob":"8aceac899034528b5d657f8bc7dd774b2d6ec2bd","bytes":51184,"sha256":"f54b26c93cba714fb596cb50b6d3cd341a1d570ca36f5a2a6b62b8ebf7eacc3e"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/repo-imports.json","mode":"100644","type":"blob","blob":"89cab1e859a628e3f5e94cfc27be21347a79b721","bytes":43470,"sha256":"fda2e7cd8cd9016e13edc210010a3e3842bca9dbc5c92e0175bc1668115c2b40"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/controls.mjs","mode":"100644","type":"blob","blob":"249ae55a4ccae7126e12f8c5640691d3c5aaddf0","bytes":11471,"sha256":"f908bf5889208c58184bf15451a5368447a8f3c9d7eeaa7fed69417335d508e0"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/tool-proof-schema.json","mode":"100644","type":"blob","blob":"69a6fd5a319f57468b063474df98ae6424560c2f","bytes":39549,"sha256":"91981138dc972952728450f45ca4efaf72145e58e6ddbc636029d5572294c2f1"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/legacy.json","mode":"100644","type":"blob","blob":"8e30344042e65b888d1f912a9a375d365f3e5c4e","bytes":237110,"sha256":"1b99b19904c748fe7fee0afd34638470a99427b0fcf43c03ef69626e389779b1"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/package-closure.json","mode":"100644","type":"blob","blob":"c505a9d26aac123275cbc8bb28a56d4986e7e16e","bytes":38204,"sha256":"819003b4c156576d9f43ba250a152ad2482dafbd80cdceded88c66fdee5c80d4"},{"path":".github/workflows/afw-c2-finite-get-diag3-tools.yml","mode":"100644","type":"blob","blob":"7aba56a4677aa04ffdea744f3a98f639322c0125","bytes":1792,"sha256":"a35f2feae78107c227bc0f0fd80dc8bd072c71f86dbb584fc82c2e108d87a770"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/priority.json","mode":"100644","type":"blob","blob":"b307c25b01c98bdddbeafe908bf7b60ebcf438e1","bytes":17838,"sha256":"4ef2427d0e6efbc5e57d23679d6fd9ea39dadf3b473b28c70b84e479fe866e57"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/legacy/collection-adapters.mjs","mode":"100644","type":"blob","blob":"9ed7ad37d9912977fc9f0d6b600c9c323e2b8382","bytes":31198,"sha256":"161d29277e48fb26a062fb6b158913b79921e7e641161f2fa945839941af01b0"},{"path":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/legacy/read-progress.mjs","mode":"100644","type":"blob","blob":"62a31e3c16cc710c84ebfb5b0242abb00671363c","bytes":5507,"sha256":"c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"}];
+const nom={"branch":"lab/afw-c2-source-20261117-finite-get-diag3-tools","message":"AFW-C2-FINITE-GET-DIAG3-TOOLS-ONEUSE-20261117","workflow":".github/workflows/afw-c2-finite-get-diag3-tools.yml","job":"c2-finite-get-diag3-tools","prefix":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/","runner":"docs/superpowers/source-lab/c2-t1-finite-get-diag3/tools-finite-get.mjs","command":"node docs/superpowers/source-lab/c2-t1-finite-get-diag3/tools-finite-get.mjs","artifact":{"name":"afw-c2-finite-get-diag3-tools","path":"output/c2-finite-get-diag3-tools.json","fileName":"c2-finite-get-diag3-tools.json","retentionDays":7},"requiredSteps":["Read the exact one-use tooling head","Use the fixed Node runtime","Install only the existing locked dependencies","Check finite GET projection controls","Preserve bounded finite GET tooling evidence"],"jobMinutes":3,"activationReleased":false};
+const base='6791ce1bab9372e206d3c7b42b3e1394dc6e0c68', baseTree='62e78926635d6b74f288d6c0d69e0f2516306989';
+const repo='tokenizartinfo-ops/agent-friendly-web', e=process.env;
+const ws=await realpath(e.GITHUB_WORKSPACE),temp=await realpath(e.RUNNER_TEMP),uid=process.getuid(),gid=process.getgid();
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const git=b=>createHash('sha1').update('blob '+b.length+'\0').update(b).digest('hex');
+const pack=o=>Buffer.from(JSON.stringify(o)+'\n');
+function within(root, file) {
+  const p = resolve(root, file);
+  assert.ok(p.startsWith(root + '/') && !file.split('/').some(x => !x || x === '.' || x === '..'));
+  return p;
+}
+async function checkedFile(root, file, pin, bound = 4 * 1024 * 1024) {
+  const path = within(root, file);
+  assert.equal(await realpath(path), path);
+  const a = await lstat(path);
+  assert.ok(a.isFile() && !a.isSymbolicLink() && a.size <= bound);
+  const bytes = await readFile(path);
+  const b = await lstat(path);
+  assert.ok(a.dev === b.dev && a.ino === b.ino && a.size === b.size && a.mtimeMs === b.mtimeMs && a.ctimeMs === b.ctimeMs && bytes.length === a.size);
+  if (pin) {
+    assert.equal(git(bytes), pin.blob);
+    if (pin.bytes !== undefined) assert.equal(bytes.length, pin.bytes);
+    if (pin.sha256 !== undefined) assert.equal(sha(bytes), pin.sha256);
+  }
+  return bytes;
+}
+function revision(...args) {
+  const r = spawnSync('git', args, {cwd: ws, encoding: 'utf8', maxBuffer: 32768});
+  assert.ok(!r.error && r.status === 0 && !r.signal);
+  return r.stdout.trim();
+}
+async function place(root, file, bytes) {
+  const destination = within(root, file);
+  await mkdir(dirname(destination), {recursive: true, mode: 0o700});
+  assert.equal(await realpath(dirname(destination)), dirname(destination));
+  await writeFile(destination, bytes, {flag: 'wx', mode: 0o600});
+}
+
+assert.equal(process.version,'v22.23.4');
+assert.ok(uid>0&&gid>0&&temp!==ws&&!temp.startsWith(ws+'/')&&!ws.startsWith(temp+'/'));
+assert.equal(e.GITHUB_EVENT_NAME,'push');assert.equal(e.GITHUB_REPOSITORY,repo);
+assert.equal(e.GITHUB_REF,'refs/heads/'+nom.branch);assert.equal(e.GITHUB_JOB,nom.job);
+assert.equal(e.GITHUB_RUN_ATTEMPT,'1');assert.match(e.GITHUB_RUN_ID,/^[1-9]\d{0,19}$/);
+const head=revision('rev-parse','HEAD'),tree=revision('rev-parse','HEAD^{tree}');
+assert.equal(head,e.GITHUB_SHA);assert.equal(revision('rev-parse','HEAD^'),base);
+assert.equal(revision('rev-parse',base+'^{tree}'),baseTree);assert.equal(revision('show','-s','--format=%B','HEAD'),nom.message);
+assert.equal(relative(ws,fileURLToPath(import.meta.url)),nom.runner);
+const self=await checkedFile(ws,nom.runner,{blob:revision('rev-parse','HEAD:'+nom.runner)});
+const edges=[...inputs,{path:nom.runner,mode:'100644',type:'blob',blob:git(self),bytes:self.length,sha256:sha(self)}];
+const changed=revision('diff-tree','--no-commit-id','-r','--name-status',base,head).split('\n').sort();
+assert.deepEqual(changed,edges.map(i=>'A\t'+i.path).sort());
+const blobs=new Map();
+for(const item of inputs){
+ assert.equal(revision('rev-parse','HEAD:'+item.path),item.blob);
+ blobs.set(item.path,await checkedFile(ws,item.path,item));
+}
+const bytes=name=>{const b=blobs.get(nom.prefix+name);assert.ok(b,name);return b;};
+const json=name=>JSON.parse(bytes(name));
+const graph=json('repo-imports.json'),closure=json('package-closure.json'),oracle=json('oracle.json');
+const expectedGroups=[6,24,9,4,20,6,12,35,30];
+assert.deepEqual(oracle.groups.map(g=>g.expected.length),expectedGroups);
+const indexPath='docs/superpowers/source-lab/c2-t1/source-index.json';
+const index=JSON.parse(blobs.get(indexPath));
+assert.equal(index.entries.length,13);
+const pkg=await checkedFile(ws,'package.json',graph.packages[0]),lock=await checkedFile(ws,'package-lock.json',graph.packages[1]);
+const lockJson=JSON.parse(lock);
+assert.equal(graph.files.length,80);assert.equal(graph.initData.length,1);assert.equal(closure.lock,git(lock));
+assert.deepEqual(closure.direct,graph.direct);assert.equal(Object.keys(closure.packages).length,98);
+for(const [k,v] of Object.entries(closure.packages)){
+ assert.equal(lockJson.packages[k].version,v.version);assert.equal(lockJson.packages[k].integrity,v.integrity);
+}
+const compactEnv=root=>({PATH:[dirname(process.execPath),'/usr/bin','/bin','/usr/sbin','/sbin'].join(delimiter),
+ HOME:root,TMPDIR:root,LANG:'C.UTF-8',LC_ALL:'C.UTF-8',CI:'true'});
+async function identity(root,dev,ino){
+ assert.equal(await realpath(root),root);assert.equal(dirname(root),temp);
+ assert.ok(/^afw-fg3-tools-[A-Za-z0-9]+$/.test(basename(root)));
+ const stat=await lstat(root);assert.ok(stat.isDirectory()&&!stat.isSymbolicLink()&&stat.uid===uid&&stat.gid===gid);
+ if(dev!==undefined){assert.equal(String(stat.dev),dev);assert.equal(String(stat.ino),ino);}
+ return stat;
+}
+async function remove(root,dev,ino){
+ await identity(root,dev,ino);await rm(root,{recursive:true});await assert.rejects(lstat(root),{code:'ENOENT'});
+}
+if(process.argv[2]==='--install'&&process.argv.length===3){
+ const root=await mkdtemp(join(temp,'afw-fg3-tools-')),s=await identity(root);
+ const dev=String(s.dev),ino=String(s.ino);
+ try{
+  await place(root,'package.json',pkg);await place(root,'package-lock.json',lock);
+  const r=spawnSync('npm',['ci','--ignore-scripts','--no-audit','--no-fund'],{cwd:root,env:compactEnv(root),
+   timeout:90000,stdio:['ignore','ignore','ignore']});
+  assert.ok(!r.error&&r.status===0&&!r.signal,'locked install');
+  assert.ok((await lstat(join(root,'node_modules'))).isDirectory());
+  await identity(root,dev,ino);
+  await appendFile(e.GITHUB_OUTPUT,'root='+root+'\ndev='+dev+'\nino='+ino+'\n');
+ }catch(error){await remove(root,dev,ino);throw error;}
+}else{
+ assert.equal(process.argv.length,2);
+ const root=e.FG3_TEMP,dev=e.FG3_DEV,ino=e.FG3_INO;await identity(root,dev,ino);
+ let proof;
+ try{
+  await checkedFile(root,'package.json',graph.packages[0]);await checkedFile(root,'package-lock.json',graph.packages[1]);
+  const target=join(root,'target');await mkdir(target,{mode:0o700});await mkdir(join(target,'facts'),{mode:0o700});
+  const unique=new Map();
+  for(const item of [...graph.files,...graph.initData,...graph.additionalTarget13]){
+   const previous=unique.get(item.file);
+   if(previous){assert.equal(previous.blob,item.blob);assert.equal(previous.sha256,item.sha256);continue;}
+   unique.set(item.file,item);
+   const source=blobs.get(item.input)??await checkedFile(ws,item.input,item);
+   assert.equal(git(source),item.blob);assert.equal(source.length,item.bytes);assert.equal(sha(source),item.sha256);
+   await place(target,item.file,source);
+  }
+  const overlays=async()=>Promise.all(index.entries.map(async row=>sha(await checkedFile(target,row.path,row.after))));
+  const beforeSha256=await overlays();
+  for(const name of ['controls.mjs','collection-adapters.mjs','read-progress.mjs','quant.json','latch.json','atoms.json',
+    'collector.json','c1.json','legacy.json','pub.json','oracle.json','priority.json','legacy/collection-adapters.mjs','legacy/read-progress.mjs'])await place(target,name,bytes(name));
+  await place(target,'selection.json',bytes('mode-selection.json'));await place(target,'index.json',blobs.get(indexPath));
+  const clean={...compactEnv(root),FG3_UID:String(uid),FG3_GID:String(gid),FG3_PARENT_NET:await readlink('/proc/self/ns/net')};
+  const args=['-n','unshare','--net','--','setpriv','--reuid',String(uid),'--regid',String(gid),'--clear-groups','--no-new-privs',
+   '/usr/bin/env','-i',...Object.entries(clean).map(([k,v])=>k+'='+v),process.execPath,'--test','--test-reporter=tap',
+   '--test-concurrency=1',join(target,'controls.mjs')];
+  const child=spawnSync('sudo',args,{cwd:target,timeout:90000,maxBuffer:1048576});
+  const raw=child.stdout??Buffer.alloc(0),tap=new TextDecoder('utf-8',{fatal:true}).decode(raw);
+  if(child.error||child.signal||child.status!==0){
+   const allowed=new Set(oracle.groups.flatMap(g=>g.expected.map(r=>r.id)));
+   const hints=[...tap.matchAll(/FG3 ([A-Za-z0-9_]+) actual ([a-f0-9]{64})/g)].filter(m=>allowed.has(m[1])).map(m=>m[1]+' '+m[2]);
+   const misses=tap.split('\n').filter(l=>oracle.groups.some((g,i)=>l==='not ok '+(i+1)+' - '+g.group));
+   throw Error('FG3 native suite '+[...misses,...new Set(hints)].join(', ').slice(0,1800));
+  }
+  assert.ok(raw.length>0&&raw.length<=16384&&tap.endsWith('\n')&&!/[\0\r\u001b]/.test(tap));
+  const lines=tap.split('\n');
+  const results=lines.filter(s=>/^(?:not )?ok\b/.test(s));
+  assert.deepEqual(results,oracle.groups.map((g,i)=>'ok '+(i+1)+' - '+g.group));
+  assert.deepEqual(lines.filter(s=>/^# Subtest: /.test(s)),oracle.groups.map(g=>'# Subtest: '+g.group));
+  for(const [name,value] of Object.entries({tests:9,pass:9,fail:0,skipped:0,todo:0,cancelled:0}))
+   assert.deepEqual(lines.filter(s=>s.startsWith('# '+name+' ')),['# '+name+' '+value]);
+  assert.deepEqual(lines.filter(s=>/^1\.\./.test(s)),['1..9']);
+  const groups=[];
+  assert.deepEqual((await readdir(join(target,'facts'))).sort(),oracle.groups.map((g,i)=>i+'.json'));
+  for(const [i,g] of oracle.groups.entries()){
+   const b=await checkedFile(target,'facts/'+i+'.json',null,8192),observations=JSON.parse(b);
+   assert.ok(pack(observations).equals(b));
+   assert.deepEqual(observations,g.expected.map(v=>[v.id,v.sha256,v.state,v.reason]));
+   groups.push({id:g.group,observations});
+  }
+  const afterSha256=await overlays();assert.deepEqual(beforeSha256,afterSha256);
+  const context={repository:repo,branch:nom.branch,base,baseTree,head,tree,runId:e.GITHUB_RUN_ID,attempt:1,job:nom.job,node:process.version};
+  proof={schema:'afw.c2-finite-get-diag3-tools-proof.v1',context,fixture:git(bytes('fixture-seal.json')),oracle:git(bytes('oracle.json')),
+   toolInputsSha256:sha(Buffer.from(JSON.stringify(edges))),native:{pass:results.length,fail:0,tapBytes:raw.length,tapSha256:sha(raw)},groups,
+   totalInner:groups.reduce((total,g)=>total+g.observations.length,0),c1Inner:groups[7].observations.length,
+   sourceImports:graph.files.length,initData:graph.initData.length,directPackages:graph.direct.length,potentialPackages:Object.keys(closure.packages).length,
+   beforeSha256,afterSha256,isolated:true,ownTempRemoved:false,SourceBusinessExecution:false,SourceQualified:false,Task1Pass:false,nonclaims:index.nonclaims};
+  // Only the verified top-level nine result lines leave the isolated test output.
+  for(const line of results)process.stdout.write('FG3_NATIVE '+line+'\n');
+ }finally{await remove(root,dev,ino);}
+ proof.ownTempRemoved=true;
+ const body=pack(proof);assert.ok(body.length<=24576);
+ const out=join(ws,'output');await mkdir(out,{recursive:true});assert.equal(await realpath(out),out);
+ const dest=join(ws,nom.artifact.path);assert.equal(dirname(dest),out);
+ await writeFile(dest,body,{flag:'wx',mode:0o600});assert.ok((await readFile(dest)).equals(body));
+ process.stdout.write('AFW_C2_FINITE_GET_DIAG3_TOOLS_PROOF '+body.toString('utf8'));
+}

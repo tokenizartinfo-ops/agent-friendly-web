@@ -1,0 +1,1155 @@
+{
+  "schema": "AFW-FG3-REAL-S08-REPOSITORY-IMPORTS/1",
+  "files": [
+    {
+      "file": "lib/cloudflare-access-identity.mjs",
+      "bytes": 5428,
+      "blob": "5f1fb5c2eb843252e1d5207f09fbb75467150021",
+      "sha256": "0837f1b75fd71cfc73cf599847900a2033b5070f664bf4fea06c4c50b6ce5393",
+      "input": "lib/cloudflare-access-identity.mjs",
+      "imports": [
+        "jose"
+      ]
+    },
+    {
+      "file": "lib/delegated-oauth-store.mjs",
+      "bytes": 4933,
+      "blob": "80caca043bf2f9c1f9c8a4fcf4b1082ca0f0cb8f",
+      "sha256": "5fda0cd4909df0832876cfd89c9101d8bc96d4f93d50779172c0db1558106399",
+      "input": "lib/delegated-oauth-store.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/delegated-project-repository.mjs",
+      "bytes": 5080,
+      "blob": "7e98f6c54fd799f80fbcc357638458b3b66a2d8f",
+      "sha256": "e4ac9ad670e75acb659a8b1f63850f3adfe5d8500a779a14875fb26db66cb93d",
+      "input": "lib/delegated-project-repository.mjs",
+      "imports": [
+        "./delegated-oauth-store.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-activation-observer.mjs",
+      "bytes": 7645,
+      "blob": "d739010a8eb4339413ab82b6c1893d640858b335",
+      "sha256": "7ffc13c11e813693238a02082f4893c3d28a99cc5a885cd89430c8b5d1a6ae5b",
+      "input": "lib/mcp-activation-observer.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-own-worker-execution.mjs",
+        "./mcp-publication-artifact-reader.mjs",
+        "./mcp-successor-deployment-reader.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-canary-restoration-policy.mjs",
+      "bytes": 1991,
+      "blob": "04f2f7135bfd9809b927e4a4783fcc6f0e5c4448",
+      "sha256": "fca6e99e295a61c394351b6fb10ac078c5fb82aaf4008cfeb66cf4a19f84f341",
+      "input": "lib/mcp-canary-restoration-policy.mjs",
+      "imports": [
+        "./mcp-release-operator-policy.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-finite-child-primary.mjs",
+      "bytes": 3376,
+      "blob": "8b44125a9421fcb538038f923ecdf986033f59ba",
+      "sha256": "506acf06745898764ed1f6d2fa0cfc6d4f9d44ebb118e740f034eb2fd7e0da98",
+      "input": "lib/mcp-finite-child-primary.mjs",
+      "imports": [
+        "./mcp-finite-evidence.mjs",
+        "./mcp-own-finite-cleanup-proof.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-finite-cleanup-policy.mjs",
+      "bytes": 1826,
+      "blob": "4c9e5a74715becec9d9e471244978f9f0fc88ce3",
+      "sha256": "59a4909b57ff7ad4fafa2e4b33a3d35bb3dff9a690e06a5c94df2f5250b4d909",
+      "input": "lib/mcp-finite-cleanup-policy.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-finite-evidence.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-finite-evidence.mjs",
+      "bytes": 3168,
+      "blob": "8e02e3941fc8d34fd6a13fbbd0fa55b638422d82",
+      "sha256": "5c159c38297faced63b93422bc363c5c092cd248d86c46345ac1179914b82376",
+      "input": "lib/mcp-finite-evidence.mjs",
+      "imports": [
+        "./mcp-qa-finite-launch-records.mjs",
+        "node:crypto"
+      ]
+    },
+    {
+      "file": "lib/mcp-finite-primary-inventory.mjs",
+      "bytes": 5819,
+      "blob": "be1348f33750a20d02f008c15e5b3cd975d4a60f",
+      "sha256": "2ce3215a65639fc075af393a9a852c31b49a3b328879cc7127f52cd7b2fb9b6b",
+      "input": "lib/mcp-finite-primary-inventory.mjs",
+      "imports": [
+        "./mcp-own-worker-execution.mjs",
+        "node:crypto",
+        "./mcp-release-operator-policy.mjs",
+        "./mcp-restoration-configuration.mjs",
+        "./mcp-finite-cleanup-policy.mjs",
+        "./mcp-finite-evidence.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-fixed-terminal-workflows.mjs",
+      "bytes": 16746,
+      "blob": "248fba0801852d803b40c3e112c6f51321744525",
+      "sha256": "6148a548bd702558e5895dccf052ff8332d672f379f8ccdab3665b6ff21bd4d1",
+      "input": "lib/mcp-fixed-terminal-workflows.mjs",
+      "imports": [
+        "./mcp-qa-finite-launch-inventory.mjs",
+        "./mcp-qa-finite-launch-records.mjs",
+        "./mcp-finite-evidence.mjs",
+        "./mcp-qa-finite-initial-entry-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-own-finite-cleanup-proof.mjs",
+      "bytes": 13677,
+      "blob": "59f633d8dcdbfe508719a3530ccb52572396e0b3",
+      "sha256": "fb53e168da7f7767af28cc006eccb2be28e566390066cbc230d9da74c891708c",
+      "input": "lib/mcp-own-finite-cleanup-proof.mjs",
+      "imports": [
+        "./mcp-finite-evidence.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-own-permission-withdrawal-policy.mjs",
+      "bytes": 1556,
+      "blob": "eebc22f4232ad9caf2601ecb823fdfd233fb3e8c",
+      "sha256": "c3133743ed36f0ac4aebb78cc4adfbfb1e147c99f2d837c8c3ce29202995c76f",
+      "input": "lib/mcp-own-permission-withdrawal-policy.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-own-worker-execution.mjs",
+      "bytes": 1875,
+      "blob": "dc33e45ba1c3f55aab74750bb51039c3111257ae",
+      "sha256": "bd24fa418638dc7d0f97c2c854cea77c7e7b12440b2f612ed4b28f3c64a42996",
+      "input": "lib/mcp-own-worker-execution.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-publication-artifact-reader.mjs",
+      "bytes": 4537,
+      "blob": "ddcb56c204ee961ea4d02c4cd93819204e1b15fd",
+      "sha256": "00711ea1e77f421856e61ea8ee9683a7eca30163b33ee02506b5d7c5a353baa8",
+      "input": "lib/mcp-publication-artifact-reader.mjs",
+      "imports": [
+        "node:crypto"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-closed-context.mjs",
+      "bytes": 5599,
+      "blob": "88c706e4633f9f53938bb2675c173223046b166e",
+      "sha256": "73dc8518f482e21832a42c6398bc4309e24796e78fd6f99885998176591959d9",
+      "input": "lib/mcp-qa-closed-context.mjs",
+      "imports": [
+        "./mcp-qa-execution-identity.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-cloud-closed-pins.mjs",
+      "bytes": 2069,
+      "blob": "26213123304eea25e652a52d808d25b7e0e3475e",
+      "sha256": "b4552302ae7fe0799097fba755169839101afc1536c830b4a1be69fd873fa452",
+      "input": "lib/mcp-qa-cloud-closed-pins.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-qa-execution-identity.mjs",
+      "bytes": 2190,
+      "blob": "fc0271b4ec3c22c192de78a3db966762e046464e",
+      "sha256": "50c6511ff8bfdecab4534021d62f94d9ef894fb6a2047384f430651a331d68bf",
+      "input": "lib/mcp-qa-execution-identity.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-qa-finite-bootstrap-record.mjs",
+      "bytes": 4630,
+      "blob": "8030ed7c405d4727d84a26ef8bafcb03c1a409d8",
+      "sha256": "6ad3ec6c7d4c73dfcbb9be92adff4bce0936218548446d06866b052dbf2df3d8",
+      "input": "lib/mcp-qa-finite-bootstrap-record.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-qa-finite-profile.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-connection-profile.mjs",
+      "bytes": 3427,
+      "blob": "8a06c997494a6a0e5ad9f9892a5bf0b38e74a8e5",
+      "sha256": "407258b2cb6c62e1532decfb517417e3fb1e458662531738a117ae0f093fa172",
+      "input": "lib/mcp-qa-finite-connection-profile.mjs",
+      "imports": [
+        "./mcp-finite-evidence.mjs",
+        "./mcp-qa-finite-profile.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-connection-source.mjs",
+      "bytes": 340,
+      "blob": "703bada5189efc962e1f81760ff741de518b77b9",
+      "sha256": "b0606cf15df7c72e3c8ff6ee0777f13f42db7fd98bf78135c87b12070cb22068",
+      "input": "lib/mcp-qa-finite-connection-source.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-qa-finite-custody.mjs",
+      "bytes": 2604,
+      "blob": "efcd89509c93dd4648117ffa16693a0e0423c5e6",
+      "sha256": "55c85026a537ee679c4b07f13cb6e797afa8fcb5c04df12f43c5527f97d5ca2d",
+      "input": "lib/mcp-qa-finite-custody.mjs",
+      "imports": [
+        "../scripts/mcp-qa-finite-custody-receipt.json",
+        "./mcp-finite-evidence.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+      "bytes": 7484,
+      "blob": "e131f5b22f8f0e54fb61e2f2a131c64798b1d4eb",
+      "sha256": "9e4debe5e87be5191f09aaf36438d78bf12724b292d8a3b39fb322087d563a7d",
+      "input": "lib/mcp-qa-finite-fixed-policy-engine.mjs",
+      "imports": [
+        "./mcp-finite-evidence.mjs",
+        "./mcp-qa-finite-custody.mjs",
+        "./mcp-finite-primary-inventory.mjs",
+        "./mcp-activation-observer.mjs",
+        "./mcp-restoration-configuration.mjs",
+        "./mcp-qa-finite-stage-work.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-initial-activation-wire.mjs",
+      "bytes": 5143,
+      "blob": "a4607269f9bcb71befe71fe985f40e4154b8ab01",
+      "sha256": "a0fcd896e46c65e208283bd6bb8548f28f82986fb425500093ff90d0ab9ba806",
+      "input": "lib/mcp-qa-finite-initial-activation-wire.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-initial-entry-records.mjs",
+        "./mcp-qa-finite-initial-cleanup-records.mjs",
+        "./mcp-qa-finite-initial-upload-wire.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-initial-anchors.mjs",
+      "bytes": 6333,
+      "blob": "00f743593d7670e9cb358c8512a25367d29cd6ed",
+      "sha256": "7b08df4f245c6ebf7ec7dee140684a60590ab1f6ec149321c9349e8d71151ead",
+      "input": "lib/mcp-qa-finite-initial-anchors.mjs",
+      "imports": [
+        "./mcp-qa-finite-stage-work.mjs",
+        "./mcp-qa-finite-initial-capsule-records.mjs",
+        "./mcp-qa-finite-initial-entry-records.mjs",
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-initial-cleanup-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-initial-capsule-records.mjs",
+      "bytes": 7624,
+      "blob": "fe588c8765c06edc64cdf79ac37066dfaaf42d0b",
+      "sha256": "bfd44c5ee84c1522a07f96352d5ad8056967715594079c61a9d3fcdab120b756",
+      "input": "lib/mcp-qa-finite-initial-capsule-records.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-initial-entry-records.mjs",
+        "./mcp-qa-finite-initial-cleanup-records.mjs",
+        "./mcp-qa-finite-initial-activation-wire.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-initial-cleanup-records.mjs",
+      "bytes": 5083,
+      "blob": "4553358dfbd719325d1b570c858583438fa00f7d",
+      "sha256": "efc0904faa9756df95d10806ee7a2aae6757ea53e098362e76f3675ad62839e8",
+      "input": "lib/mcp-qa-finite-initial-cleanup-records.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-cloud-closed-pins.mjs",
+        "./mcp-restoration-configuration.mjs",
+        "./mcp-qa-finite-connection-profile.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-initial-entry-records.mjs",
+      "bytes": 1715,
+      "blob": "fcb71af6776a000929b0e8ea0469410b3511b566",
+      "sha256": "cc76e716598235da3c1350d490f46833ec10a7a4194452fd65699a8f59e5ed07",
+      "input": "lib/mcp-qa-finite-initial-entry-records.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-material-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-initial-material-records.mjs",
+      "bytes": 11554,
+      "blob": "c5dec411e500c9d84c62180740d60e62e93a6755",
+      "sha256": "35974445d990927ed7cb284efc9e3654bc5379d65d9209730665aec3b238a864",
+      "input": "lib/mcp-qa-finite-initial-material-records.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-finite-evidence.mjs",
+        "./mcp-qa-finite-bootstrap-record.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-initial-upload-wire.mjs",
+      "bytes": 4918,
+      "blob": "be1c7d1f25ffd1c6184f6139acb03110b7b148bb",
+      "sha256": "d992a8f0adf7c8c07e8586364327a67efefd9055b11d8fe4da50e1ea31e72f79",
+      "input": "lib/mcp-qa-finite-initial-upload-wire.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-profile.mjs",
+        "./mcp-qa-finite-connection-profile.mjs",
+        "./mcp-restoration-configuration.mjs",
+        "./mcp-finite-primary-inventory.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-launch-inventory.mjs",
+      "bytes": 7768,
+      "blob": "0ba74abeb7bfe992eb29ebbaa1d27991afeee475",
+      "sha256": "f0671ff00fdcb51ce473bce00bb567c4d4df6c6868bdae93066f8a3e5ef11b37",
+      "input": "lib/mcp-qa-finite-launch-inventory.mjs",
+      "imports": [
+        "./mcp-qa-finite-trial-control.mjs",
+        "./mcp-qa-finite-launch-source.mjs",
+        "./mcp-fixed-terminal-workflows.mjs",
+        "./mcp-finite-evidence.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-launch-records.mjs",
+      "bytes": 3776,
+      "blob": "251e4cb8cbd3f92fa326e990713b6e6f452fa056",
+      "sha256": "da7010797a0b6ad8305964bbd41bda8e6b1ab1523cb3bacc9d802b7b35c41223",
+      "input": "lib/mcp-qa-finite-launch-records.mjs",
+      "imports": [
+        "node:crypto"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-launch-source.mjs",
+      "bytes": 909,
+      "blob": "420ce9d719836df5c16e82ec67f8c0b63d03e623",
+      "sha256": "c57d7a2196d9e013edc9bac00b2602c93549eebb587207f5da93294253964f81",
+      "input": "lib/mcp-qa-finite-launch-source.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-approved-ticket-facts.mjs",
+      "bytes": 3545,
+      "blob": "1dee3a6a4a68fe5d76a4f02d0ea568cceb0cdd7a",
+      "sha256": "3f55c7b871d0bd396a032b98aabf8f8943857d12f3229b00cf436e1dd521ceb7",
+      "input": "lib/mcp-qa-finite-owner-approved-ticket-facts.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-preparation-records.mjs",
+        "node:crypto"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-issuer-provenance-records.mjs",
+      "bytes": 5065,
+      "blob": "ee0b6c1c3730855a4be975789d990517dffa81aa",
+      "sha256": "adee4c6eb93e26134ae407b80f88517aec1c890469bd4811d8c9eeafca64ac3d",
+      "input": "lib/mcp-qa-finite-owner-issuer-provenance-records.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-preparation-issuer-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "bytes": 45576,
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "input": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "imports": [
+        "./mcp-qa-finite-owner-approved-ticket-facts.mjs",
+        "./mcp-qa-finite-owner-stage-facts.mjs",
+        "./mcp-qa-finite-policy-setup-source.mjs",
+        "./mcp-qa-finite-seed-http.mjs",
+        "./mcp-qa-finite-policy-setup.mjs",
+        "./mcp-finite-evidence.mjs",
+        "./mcp-qa-finite-stage-work.mjs",
+        "node:crypto",
+        "./cloudflare-access-identity.mjs",
+        "./delegated-oauth-store.mjs",
+        "./delegated-project-repository.mjs",
+        "./mcp-qa-finite-policy-journal.mjs",
+        "./mcp-qa-finite-preparation-records.mjs",
+        "./mcp-qa-finite-preparation-store.mjs",
+        "./mcp-qa-finite-owner-source.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-source.mjs",
+      "bytes": 651,
+      "blob": "6bc88c44eae3c0b63db514833c3f0eae43eb1c0e",
+      "sha256": "92ebea7dbd1b8432ab39273cba95791c4b1456716ca230b3d4c35c38665c9cec",
+      "input": "lib/mcp-qa-finite-owner-source.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-stage-facts.mjs",
+      "bytes": 6676,
+      "blob": "c2821f1b5806a1f8cc968425ba748d0e26f18a0b",
+      "sha256": "6ea13d06b4399c9ea35fa7f2d20863b9d6ac88ed1ca3c6c6b20020df73a0cff9",
+      "input": "lib/mcp-qa-finite-owner-stage-facts.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-preparation-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-policy-journal.mjs",
+      "bytes": 8896,
+      "blob": "6e3de33d04075740fb57e5f9afcf87dd9f68ee79",
+      "sha256": "92602e854dd82333a40bedbc237de197173baf0d82c02c4a74a8c5e3eda4bfa8",
+      "input": "lib/mcp-qa-finite-policy-journal.mjs",
+      "imports": [
+        "./mcp-qa-finite-preparation-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-policy-setup-source.mjs",
+      "bytes": 736,
+      "blob": "a2fcb074e71ca5f6d983c8cb8e9e7db993ef27fb",
+      "sha256": "8330e2c871af41ffa33d853d9fce1576267a8c479ea1830ac6c61665477d0e9f",
+      "input": "lib/mcp-qa-finite-policy-setup-source.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-qa-finite-policy-setup.mjs",
+      "bytes": 17404,
+      "blob": "34285e7c8ee3d9838763344edba2dcf6ce33da9b",
+      "sha256": "2f257b79ac6965b03439dda2cdbc2909aa7ea5eddd599e5210eec0cf90c694a8",
+      "input": "lib/mcp-qa-finite-policy-setup.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-qa-finite-policy-setup-source.mjs",
+        "./mcp-qa-finite-owner-preparation.mjs",
+        "./mcp-qa-finite-preparation-store.mjs",
+        "./mcp-qa-finite-policy-transport.mjs",
+        "./mcp-qa-finite-stage-work.mjs",
+        "./mcp-qa-finite-preparation-records.mjs",
+        "./mcp-finite-evidence.mjs",
+        "./mcp-release-operator-policy.mjs",
+        "./mcp-successor-manifest.mjs",
+        "./mcp-successor-cancellation-history.mjs",
+        "./mcp-own-permission-withdrawal-policy.mjs",
+        "./mcp-activation-observer.mjs",
+        "./mcp-restoration-configuration.mjs",
+        "./mcp-qa-finite-profile.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-policy-transport.mjs",
+      "bytes": 13134,
+      "blob": "fa1cb012d65acc0457f7263d01bb5fd88a0cb8a6",
+      "sha256": "076505432b463a0a82858b304783cdb4867d7825d07c466d450b013d02fc60cb",
+      "input": "lib/mcp-qa-finite-policy-transport.mjs",
+      "imports": [
+        "./mcp-qa-finite-fixed-policy-engine.mjs",
+        "./mcp-qa-finite-preparation-enrollment-writer.mjs",
+        "./mcp-qa-finite-policy-setup.mjs",
+        "./mcp-release-operator-policy.mjs",
+        "./mcp-qa-finite-stage-work.mjs",
+        "node:crypto",
+        "./mcp-qa-finite-owner-preparation.mjs",
+        "./mcp-qa-finite-connection-source.mjs",
+        "./mcp-qa-finite-policy-journal.mjs",
+        "./mcp-qa-finite-preparation-store.mjs",
+        "./mcp-qa-finite-preparation-records.mjs",
+        "./mcp-finite-evidence.mjs",
+        "./mcp-finite-cleanup-policy.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-preparation-cleanup-records.mjs",
+      "bytes": 2912,
+      "blob": "7ae2b380a7b9c88164e6c7934ec7b6fc1577e49b",
+      "sha256": "e09dad9e611a8c279474b4c92d68f4ee161687eb605b8b2871a55a4e2682acba",
+      "input": "lib/mcp-qa-finite-preparation-cleanup-records.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-cloud-closed-pins.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-preparation-cleanup.mjs",
+      "bytes": 4271,
+      "blob": "e9999c6ea5d086599844f86120cb0e3449f5d636",
+      "sha256": "0e62d2af2bf250f6452aad73f1198e0ee9d00dad9ea09dd55ccf23b66b466da6",
+      "input": "lib/mcp-qa-finite-preparation-cleanup.mjs",
+      "imports": [
+        "./mcp-qa-finite-preparation-enrollment-facts.mjs",
+        "./mcp-qa-finite-stage-work.mjs",
+        "./mcp-qa-finite-initial-anchors.mjs",
+        "./mcp-qa-finite-preparation-cleanup-records.mjs",
+        "./mcp-qa-finite-preparation-records.mjs",
+        "./mcp-qa-finite-initial-material-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-preparation-enrollment-facts.mjs",
+      "bytes": 7703,
+      "blob": "b5b6d6a8f55376d61da6f8bc4809a986dfe0aca7",
+      "sha256": "84f107338e60c05092caed75a42a8464b1a4b4bfeac3d078f5de31eba14f2945",
+      "input": "lib/mcp-qa-finite-preparation-enrollment-facts.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-capsule-records.mjs",
+        "./mcp-qa-finite-initial-entry-records.mjs",
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-initial-cleanup-records.mjs",
+        "./mcp-qa-finite-profile.mjs",
+        "./mcp-activation-observer.mjs",
+        "./mcp-qa-finite-preparation-cleanup-records.mjs",
+        "./mcp-qa-finite-preparation-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-preparation-enrollment-writer.mjs",
+      "bytes": 13184,
+      "blob": "6eb0f08d581faef8ee12ce4f9e0d62cebdfb57f9",
+      "sha256": "0579879851afb26b925845faaf3f2d099f6f8d11e4ab9976b79fc33781e802ee",
+      "input": "lib/mcp-qa-finite-preparation-enrollment-writer.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-anchors.mjs",
+        "./mcp-qa-finite-preparation-cleanup.mjs",
+        "./mcp-qa-finite-preparation-cleanup-records.mjs",
+        "./mcp-qa-finite-preparation-records.mjs",
+        "./mcp-qa-finite-stage-work.mjs",
+        "node:crypto",
+        "./mcp-finite-evidence.mjs",
+        "./mcp-finite-cleanup-policy.mjs",
+        "./mcp-activation-observer.mjs",
+        "./mcp-qa-finite-connection-profile.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-preparation-issuer-journal.mjs",
+      "bytes": 7005,
+      "blob": "414450aa08f797bed5a41cf5cc697342785ce16b",
+      "sha256": "bf99999978bac56fbc2a17270c5c588e2318fc16c8745416a86c665f9e940ceb",
+      "input": "lib/mcp-qa-finite-preparation-issuer-journal.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-preparation-issuer-records.mjs",
+        "./mcp-qa-finite-stage-work.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-preparation-issuer-records.mjs",
+      "bytes": 4923,
+      "blob": "50f9a013580a46ad1d445a240f47b7b2ce887d49",
+      "sha256": "5c3973b1a36070455a55ca8686f10e3c4d59b987d0098a76094fe36e6f313478",
+      "input": "lib/mcp-qa-finite-preparation-issuer-records.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-material-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-preparation-issuer-store.mjs",
+      "bytes": 35850,
+      "blob": "b3e5f890ca525f8b3eb4e40ce4473cc9690cdcfb",
+      "sha256": "c88ced455c142a3f72a54822d959fa744da426e3470ba3c19f992ab16368956a",
+      "input": "lib/mcp-qa-finite-preparation-issuer-store.mjs",
+      "imports": [
+        "./mcp-qa-finite-initial-material-records.mjs",
+        "./mcp-qa-finite-preparation-issuer-records.mjs",
+        "./mcp-qa-finite-preparation-issuer-journal.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-preparation-records.mjs",
+      "bytes": 18276,
+      "blob": "e9b66f68b6dbabbfecc46072949a0d5d9f059141",
+      "sha256": "fa22c66cbf020341eb6cd602cf692d9c033128f9f651ee7b605f3449e86b91c7",
+      "input": "lib/mcp-qa-finite-preparation-records.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-finite-cleanup-policy.mjs",
+        "./mcp-qa-finite-trial-control.mjs",
+        "./mcp-activation-observer.mjs",
+        "./mcp-restoration-configuration.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-preparation-store.mjs",
+      "bytes": 21006,
+      "blob": "122bc0e52870c71da7ae98ef73cd7762171d89ca",
+      "sha256": "0e9f61a69fbb022676fef823948877b69585a261d63f4f639ae708a9c567c153",
+      "input": "lib/mcp-qa-finite-preparation-store.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-qa-finite-preparation-records.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-profile.mjs",
+      "bytes": 16882,
+      "blob": "547eb82f4ec83a2e7bcec88dd18622fc636dc477",
+      "sha256": "7243f865b63739e8e786cdc0d494399b904e77fb1cda38e58a36e9b3476551ce",
+      "input": "lib/mcp-qa-finite-profile.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-qa-finite-seed.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-seed-http.mjs",
+      "bytes": 1929,
+      "blob": "24072d6eb623a034fef9cf1540f42b40eaba0e41",
+      "sha256": "8d01c25cfd24e6aba12a672c4853d32cdd33cbc0286b565d6a2c52282a2c528b",
+      "input": "lib/mcp-qa-finite-seed-http.mjs",
+      "imports": [
+        "./mcp-qa-finite-seed.mjs",
+        "./mcp-qa-finite-seed-wire.mjs",
+        "./mcp-qa-finite-seed-primary.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-seed-primary.mjs",
+      "bytes": 6572,
+      "blob": "8439a5d211849e4b05d98f76a92782fa977e9772",
+      "sha256": "40dd2b8c22deaec10525507c628be60c69dbf2d10559c46471ffa65376344ef4",
+      "input": "lib/mcp-qa-finite-seed-primary.mjs",
+      "imports": [
+        "node:crypto",
+        "yaml"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-seed-wire.mjs",
+      "bytes": 3964,
+      "blob": "44b81e34b68e37604bd4937ec7bd052ae00ee818",
+      "sha256": "ba153ac53d70fd66508822e057d29ed8540b6dd3f8cac4ff30122cb7d457d4c1",
+      "input": "lib/mcp-qa-finite-seed-wire.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-qa-finite-seed.mjs",
+      "bytes": 8460,
+      "blob": "644ab9fe7234950b92122daa0292c37f5ab83ec2",
+      "sha256": "de337384f2fbb2f4790dc838edda33420158305ebc967064bf77b1914906ec2e",
+      "input": "lib/mcp-qa-finite-seed.mjs",
+      "imports": [
+        "./mcp-qa-cloud-closed-pins.mjs",
+        "node:crypto"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-stage-work.mjs",
+      "bytes": 7405,
+      "blob": "068d35c2555c7dc711c487f6021ec572bd3af067",
+      "sha256": "9ffa53cb3dc37e7c115f1a01430adf8e578cf9ce6933b63da2680f670f711a6c",
+      "input": "lib/mcp-qa-finite-stage-work.mjs",
+      "imports": [
+        "./mcp-qa-finite-owner-preparation.mjs",
+        "node:async_hooks"
+      ]
+    },
+    {
+      "file": "lib/mcp-qa-finite-trial-control.mjs",
+      "bytes": 44868,
+      "blob": "18996dc32972e3e33726b242e508d9635147a7e5",
+      "sha256": "20e127cda278a0b7707de6c5b48ae5625846508542db92e659b42e098404116a",
+      "input": "lib/mcp-qa-finite-trial-control.mjs",
+      "imports": [
+        "./mcp-qa-finite-launch-records.mjs",
+        "./mcp-finite-child-primary.mjs",
+        "./mcp-finite-cleanup-policy.mjs",
+        "node:crypto",
+        "./mcp-qa-closed-context.mjs",
+        "./mcp-canary-restoration-policy.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-release-operator-policy.mjs",
+      "bytes": 8329,
+      "blob": "20518baf5f3ee05942ed56c8d5fab3fbe2f53976",
+      "sha256": "e8ed3b0073ae41a7d4119bb9b6353a49f04041b16a0dfa97ea3e29b94fc3c6ec",
+      "input": "lib/mcp-release-operator-policy.mjs",
+      "imports": [
+        "node:crypto",
+        "./mcp-activation-observer.mjs",
+        "./mcp-successor-manifest.mjs",
+        "./mcp-successor-cancellation-history.mjs"
+      ]
+    },
+    {
+      "file": "lib/mcp-restoration-configuration.mjs",
+      "bytes": 2632,
+      "blob": "a73da1af6d37a6f67302a01f2aa05c1e9fc9346c",
+      "sha256": "6be0041cf099e319eb70594898eec3bd7416d9d67af7dab29085ad037c23bb24",
+      "input": "lib/mcp-restoration-configuration.mjs",
+      "imports": [
+        "node:crypto"
+      ]
+    },
+    {
+      "file": "lib/mcp-successor-cancellation-history.mjs",
+      "bytes": 6746,
+      "blob": "2b960db7c035c751f64f68910d843a696426b494",
+      "sha256": "1bed2b070f6e9d771306a55f7320bdf67a654c5e34e1b7ca2254206e50d663be",
+      "input": "lib/mcp-successor-cancellation-history.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-successor-deployment-reader.mjs",
+      "bytes": 5340,
+      "blob": "c09e266bd1833a07fac6f97483c3397d121904e7",
+      "sha256": "0d496130d971febc102d45f63417ac191f717df594c00d07c7739506ee14377c",
+      "input": "lib/mcp-successor-deployment-reader.mjs",
+      "imports": []
+    },
+    {
+      "file": "lib/mcp-successor-manifest.mjs",
+      "bytes": 2547,
+      "blob": "a5a70c51297e3675df60d80ec27790fd9fc42551",
+      "sha256": "0e732e2c7d5909d7f08f6a5ba2a7be709b931eb9ac1293afb77af56848c99e4b",
+      "input": "lib/mcp-successor-manifest.mjs",
+      "imports": [
+        "node:crypto"
+      ]
+    },
+    {
+      "file": "scripts/build-mcp-node-program.mjs",
+      "bytes": 1026,
+      "blob": "8bb56bb45bde5dbe7a440af3edd6c171dacd7a4c",
+      "sha256": "c0db9d697ebe757b1790f8d47c509c9754e401d9bcf1105e6eecdf0e85fccb3b",
+      "input": "scripts/build-mcp-node-program.mjs",
+      "imports": [
+        "esbuild",
+        "node:crypto",
+        "node:url",
+        "node:fs/promises",
+        "node:path"
+      ]
+    },
+    {
+      "file": "scripts/mcp-qa-finite-custody-receipt.json",
+      "bytes": 929,
+      "blob": "6012e07fb3a518bfb2d18b62144067a22de02bef",
+      "sha256": "e9f778c133c5cd666160d4f85a2ff72bab017b322bbc2eb8c08d8a9e8777e906",
+      "input": "scripts/mcp-qa-finite-custody-receipt.json",
+      "imports": []
+    },
+    {
+      "file": "test/fixtures/finite-bootstrap-world.mjs",
+      "bytes": 4693,
+      "blob": "02092a0ee7a5f566632ecd7ae461386d6bdde047",
+      "sha256": "852e75ece813d38d005418c281756d8f4d7f6b923d9886d2d753d14ccff8a430",
+      "input": "test/fixtures/finite-bootstrap-world.mjs",
+      "imports": [
+        "node:fs/promises",
+        "node:crypto",
+        "../../lib/mcp-qa-finite-profile.mjs",
+        "../../lib/mcp-qa-finite-bootstrap-record.mjs"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-budget-diagnostics.mjs",
+      "bytes": 30716,
+      "blob": "3aba82b323837f3c14463875d472500d49c0c2e0",
+      "sha256": "c1a95b97e510ca6070931c9f04c44cd325f56050197b1e401ce66667b1e45e97",
+      "input": "test/fixtures/finite-budget-diagnostics.mjs",
+      "imports": [
+        "node:async_hooks"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-budget-evidence.mjs",
+      "bytes": 18963,
+      "blob": "0d95b1616a167f7f089e3a8ca59ca9628aa8aaa9",
+      "sha256": "941bb1f36a41af7f565a1893bc6effa5c6b788ab460cd043802afb9c81b0a8ac",
+      "input": "test/fixtures/finite-budget-evidence.mjs",
+      "imports": [
+        "node:assert/strict",
+        "node:util",
+        "./finite-budget-diagnostics.mjs",
+        "node:fs/promises",
+        "node:crypto",
+        "node:path"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-budget-failure-runtime.mjs",
+      "bytes": 129,
+      "blob": "83db9cda42ae828998fbe1d3007071825dc31d0c",
+      "sha256": "922c1b4398600683f9c2b6c040d5536f794a44d86077fa13cfad287b7ac2d3b9",
+      "input": "test/fixtures/finite-budget-failure-runtime.mjs",
+      "imports": []
+    },
+    {
+      "file": "test/fixtures/finite-budget-world.mjs",
+      "bytes": 253911,
+      "blob": "dce13d6e4ce0030bab8eea9c282f90336222aef5",
+      "sha256": "e0bc34629fe5e81703219ff25ef1873df36bd7ee5d6aabf710fe1b24c612071f",
+      "input": "test/fixtures/finite-budget-world.mjs",
+      "imports": [
+        "./finite-budget-failure-runtime.mjs",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:crypto",
+        "node:async_hooks",
+        "node:fs",
+        "node:util",
+        "node:path",
+        "node:url",
+        "typescript",
+        "./finite-budget-diagnostics.mjs",
+        "./finite-post-ack-diagnostic.mjs",
+        "./finite-budget-evidence.mjs"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-coupled-native.mjs",
+      "bytes": 22336,
+      "blob": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+      "sha256": "0ea1a915b33ea380fe847c7b7bb7fe9659a207a87b922cedc4b85ce20195ecaa",
+      "input": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "imports": [
+        "node:assert/strict",
+        "node:crypto",
+        "./finite-initial-entry-world.mjs",
+        "./finite-first-connection-publication.mjs",
+        "../../lib/mcp-qa-finite-preparation-records.mjs",
+        "../../lib/mcp-qa-finite-initial-material-records.mjs"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-first-connection-publication.mjs",
+      "bytes": 61073,
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "input": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "imports": [
+        "./finite-budget-world.mjs",
+        "node:assert/strict",
+        "esbuild",
+        "node:crypto",
+        "node:zlib",
+        "node:fs/promises",
+        "../../scripts/build-mcp-node-program.mjs",
+        "../../lib/mcp-qa-finite-profile.mjs"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-initial-entry-world.mjs",
+      "bytes": 88713,
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+      "input": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "imports": [
+        "./finite-budget-world.mjs",
+        "./finite-owner-cleanup.mjs",
+        "./finite-first-connection-publication.mjs",
+        "./finite-owner-notice-get.mjs",
+        "../../lib/mcp-qa-finite-preparation-issuer-store.mjs",
+        "./finite-owner-io-fanout.mjs",
+        "./finite-owner-qa-sdk.mjs",
+        "./finite-owner-phase-context.mjs",
+        "./finite-preparation-cleanup-entry.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:zlib",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "esbuild",
+        "miniflare",
+        "./finite-bootstrap-world.mjs",
+        "./finite-initial-history-world.mjs",
+        "../../lib/mcp-qa-cloud-closed-pins.mjs",
+        "../../lib/mcp-qa-finite-initial-material-records.mjs",
+        "jose",
+        "../../lib/mcp-fixed-terminal-workflows.mjs",
+        "../../lib/mcp-restoration-configuration.mjs",
+        "../../lib/mcp-qa-finite-profile.mjs"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-initial-history-world.mjs",
+      "bytes": 9418,
+      "blob": "74f9ca6470d596c0da1247bb9d9f464a80b9ec78",
+      "sha256": "1553dfc53afdbd927837ed2557342ad33400dfe1de740e3f40396302bea08f9d",
+      "input": "test/fixtures/finite-initial-history-world.mjs",
+      "imports": [
+        "node:crypto",
+        "node:fs/promises",
+        "../../lib/mcp-restoration-configuration.mjs"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-owner-cleanup.mjs",
+      "bytes": 76589,
+      "blob": "2d19cd616e342197051974abb472830dd3939261",
+      "sha256": "5f0420857833f5db065c7468f7281c91884fcd056190516b69a6768954d72678",
+      "input": "test/fixtures/finite-owner-cleanup.mjs",
+      "imports": [
+        "./finite-budget-world.mjs",
+        "./finite-budget-evidence.mjs",
+        "esbuild",
+        "miniflare",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "@modelcontextprotocol/client",
+        "./finite-initial-entry-world.mjs",
+        "./finite-first-connection-publication.mjs",
+        "../../lib/mcp-qa-finite-owner-issuer-provenance-records.mjs",
+        "../../lib/mcp-qa-finite-preparation-issuer-records.mjs"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-owner-io-fanout.mjs",
+      "bytes": 10161,
+      "blob": "e181bfd7634b6f71e4129b03fbb529a2f1b04f10",
+      "sha256": "d98a6359394c640b08d992fd5b04cd6d47ef1dbed1abf1010c8cc70fe2ac35a2",
+      "input": "test/fixtures/finite-owner-io-fanout.mjs",
+      "imports": []
+    },
+    {
+      "file": "test/fixtures/finite-owner-notice-get.mjs",
+      "bytes": 42557,
+      "blob": "3d279975e67611e72e2d1661970718ad4a3892bf",
+      "sha256": "b7ed06611676df0e421694dc3a7352e2d50f866d29def2d1db9cfedfa856d038",
+      "input": "test/fixtures/finite-owner-notice-get.mjs",
+      "imports": [
+        "node:assert/strict",
+        "@modelcontextprotocol/client",
+        "node:crypto",
+        "node:fs/promises",
+        "node:path"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-owner-phase-context.mjs",
+      "bytes": 23341,
+      "blob": "f1ddbfff29b1d5e4da4dbf70c649e0df20582b46",
+      "sha256": "d3eaf8bbb2404949dbed2f97edd256fba857309549edb7e5aa9edf308155f5a0",
+      "input": "test/fixtures/finite-owner-phase-context.mjs",
+      "imports": []
+    },
+    {
+      "file": "test/fixtures/finite-owner-qa-sdk.mjs",
+      "bytes": 26614,
+      "blob": "62fde9dcefb78bf57585a184901cb3c4d79c4c4d",
+      "sha256": "478aa67089729b630d71556953137c2170106a451ffcb2701ae4543cde73bf19",
+      "input": "test/fixtures/finite-owner-qa-sdk.mjs",
+      "imports": [
+        "./finite-owner-notice-get.mjs",
+        "esbuild",
+        "node:crypto",
+        "node:fs/promises",
+        "../../lib/mcp-qa-finite-profile.mjs"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-post-ack-diagnostic.mjs",
+      "bytes": 102842,
+      "blob": "7e1ee778add7dbe317aa261b2073fe28295a0ad6",
+      "sha256": "b7b6c453641ff93c621f78bc2f9244a52bdc734a7c2192bd85f2860c83d325ff",
+      "input": "test/fixtures/finite-post-ack-diagnostic.mjs",
+      "imports": [
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:vm",
+        "typescript"
+      ]
+    },
+    {
+      "file": "test/fixtures/finite-preparation-cleanup-entry.mjs",
+      "bytes": 8864,
+      "blob": "aea6d1f727f71d7a298b214e8a67380a60961fe6",
+      "sha256": "cf8c1927dc7f28a7720a437e03c36ab3f800d86b6fd90e83553b0efd95063404",
+      "input": "test/fixtures/finite-preparation-cleanup-entry.mjs",
+      "imports": []
+    }
+  ],
+  "initData": [
+    {
+      "file": "test/fixtures/finite-budget-descriptors.json",
+      "bytes": 329786,
+      "blob": "be695028e4c12c3cb7d3b7bf2c5f2e7508f3db15",
+      "sha256": "550ccc97d6679cbe7501939a5d737504c20ef00055e03d7776950f61eff0e0ca",
+      "input": "test/fixtures/finite-budget-descriptors.json"
+    }
+  ],
+  "packages": [
+    {
+      "file": "package.json",
+      "bytes": 4376,
+      "blob": "f4fd38ac380c46a149d8cf0f3bd828a28406f761",
+      "sha256": "153fbb285ca942f49f880c9446fc02755295093cfce3bceeaecf24df990a240a",
+      "input": "package.json"
+    },
+    {
+      "file": "package-lock.json",
+      "bytes": 445991,
+      "blob": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+      "sha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34",
+      "input": "package-lock.json"
+    }
+  ],
+  "direct": [
+    "node_modules/@modelcontextprotocol/client",
+    "node_modules/esbuild",
+    "node_modules/jose",
+    "node_modules/miniflare",
+    "node_modules/typescript",
+    "node_modules/yaml"
+  ],
+  "lockClosure": {
+    "blob": "c505a9d26aac123275cbc8bb28a56d4986e7e16e",
+    "bytes": 38204,
+    "sha256": "819003b4c156576d9f43ba250a152ad2482dafbd80cdceded88c66fdee5c80d4",
+    "fullReadback": true
+  },
+  "additionalTarget13": [
+    {
+      "file": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+      "gitBlob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "gzipBytes": 32414
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+      "gitBlob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "gzipBytes": 11301
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+      "gitBlob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "gzipBytes": 1110
+    },
+    {
+      "file": "worker/mcp-own/finite.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+      "gitBlob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "gzipBytes": 1061
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+      "gitBlob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "gzipBytes": 1592
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+      "gitBlob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "gzipBytes": 26076
+    },
+    {
+      "file": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+      "gitBlob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "gzipBytes": 6767
+    },
+    {
+      "file": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+      "gitBlob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "gzipBytes": 1050
+    },
+    {
+      "file": "test/fixtures/finite-coupled-native.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "blob": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+      "bytes": 22336,
+      "sha256": "0ea1a915b33ea380fe847c7b7bb7fe9659a207a87b922cedc4b85ce20195ecaa",
+      "gitBlob": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+      "gzipBytes": 6576
+    },
+    {
+      "file": "test/fixtures/finite-first-connection-publication.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "gitBlob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "gzipBytes": 16768
+    },
+    {
+      "file": "test/fixtures/finite-initial-entry-world.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+      "gitBlob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "gzipBytes": 22873
+    },
+    {
+      "file": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+      "gitBlob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "gzipBytes": 14307
+    },
+    {
+      "file": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "input": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+      "gitBlob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "gzipBytes": 2098
+    }
+  ],
+  "basis": "506ca639a60e18a82f902e858cc1c08be2133d59",
+  "entry": "test/fixtures/finite-coupled-native.mjs",
+  "nativeNode": "v22.23.4",
+  "scope": "80 static repository modules, 1 initialized descriptor, 2 dependency control files. Static declaration overapproximates imports that may be lazy. No world/build/provider/SDK call. Real S08 observer, real collector and publisher only."
+}

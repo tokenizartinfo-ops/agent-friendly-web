@@ -1,0 +1,198 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFile,writeFile,readlink,realpath} from 'node:fs/promises';
+import {networkInterfaces} from 'node:os';
+import {dirname,join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+const root=dirname(fileURLToPath(import.meta.url));
+assert.equal(await realpath(root),root);
+assert.equal(root,process.cwd());
+assert.equal(process.version,'v22.23.4');
+assert.ok(process.getuid()>0 && process.getuid()===Number(process.env.FG3_UID) && process.getgid()===Number(process.env.FG3_GID));
+assert.ok(process.getgroups().every(x=>x===process.getgid()));
+assert.notEqual(await readlink('/proc/self/ns/net'),process.env.FG3_PARENT_NET);
+assert.ok(Object.values(networkInterfaces()).flat().every(x=>x.internal));
+const {createFiniteSnapshotObserver,countUnlabelledSnapshot}=await import('./test/fixtures/finite-coupled-native.mjs');
+const {collectObservation,projectFirstFailure,successPacket,faultLine,encodeBody}=await import('./collection-adapters.mjs');
+const prior=await import('./legacy/collection-adapters.mjs');
+const data=async file=>JSON.parse(await readFile(join(root,file),'utf8'));
+const [quant,latch,atoms,wire,c1,legacy,pub,oracle,index,selection]=await Promise.all(
+ ['quant.json','latch.json','atoms.json','collector.json','c1.json','legacy.json','pub.json','oracle.json','index.json','selection.json'].map(data));
+const sha=b=>createHash('sha256').update(b).digest('hex'),compact=o=>sha(Buffer.from(JSON.stringify(o)));
+const priority=await data('priority.json');
+const original=legacy.sourceLiteralCorpus;
+const {selected:ids}=selection;
+const rawIndex=await readFile(join(root,'index.json'));
+const indexedHash=sha(rawIndex),indexBlob=createHash('sha1').update('blob '+rawIndex.length+'\0').update(rawIndex).digest('hex');
+const expected13=index.entries.map(e=>e.after.sha256);
+const base=pub.syntheticContextOnly;
+const context={repository:base.repository,baselineSource:base.baselineSource,baselineTree:base.baselineTree,
+ sourceIndexBlob:indexBlob,proposalIndexHash:indexedHash,selectionHash:compact(selection),
+ head:base.head,tree:base.tree,runId:base.runId,runAttempt:base.runAttempt,job:base.job,node:base.node};
+const custody={schema:'afw.c2-finite-get-diag3-custody.v1',context,...pub.custodyFacts};
+const byId=rows=>new Map(rows.map(v=>[v.id,v]));
+const qmap=byId(quant.orderedInputs),lmap=byId(latch.cases),wmap=byId(wire.cases),cmap=byId(c1.cases),pmap=byId(pub.cases);
+const prefixes=byId((await data('prefix.json')).rows);
+const sentinel=Object.freeze({synthetic:true});
+function world(input,stats,which,control) {
+ return {choice:input.world.choice,source:input.world.source,uploads:Array(input.world.uploadsLength),
+  activations:Array(input.world.activationsLength),stub:{snapshot(){
+   stats[which]++;
+   if(control.reject)throw sentinel;
+   return input.rows.map(key=>quant.rawRows[key]);
+  }}};
+}
+async function measureBucket(input){
+ const calls={main:0},messages=[];
+ const main=world(input,calls,'main',{reject:false});
+ const observer=createFiniteSnapshotObserver(main,()=>main,msg=>messages.push(msg));
+ const label=observer.enter('C2T1_MONITOR');observer.finish(label);
+ const counters=await observer.counts();
+ assert.equal(messages.length,1);
+ assert.ok(messages[0].startsWith('C2FT3 '));
+ const projected=JSON.parse(messages[0].slice(6));
+ assert.equal(projected.id,'C2T1_MONITOR');
+ assert.deepEqual(Object.keys(projected),['id','value']);
+ const value={markerValue:projected.value,snapshotCalls:calls.main,counters};
+ return [value,projected.value,null];
+}
+async function measureLifecycle(row) {
+ const calls={main:0,other:0},control={reject:false},messages=[],returned=[];
+ const input=qmap.get(latch.fixtureRef),main=world(input,calls,'main',control),other=world(input,calls,'other',control);
+ let active=main,pending,failedSink=false,sameSnapshotError=false,sameWorkError=false;
+ const observer=createFiniteSnapshotObserver(main,()=>active,message=>{messages.push(message);if(failedSink)throw sentinel;});
+ for(const action of row.steps){
+  switch(action){
+   case 'enterMonitor':pending=observer.enter('C2T1_MONITOR');break;
+   case 'enterScope':pending=observer.enter('C2T1_SCOPE_MISSING');break;
+   case 'finishReturn':observer.finish(pending);break;
+   case 'finishThrow':
+    try{try{throw sentinel;}finally{observer.finish(pending);}}catch(e){sameWorkError=e===sentinel;}
+    break;
+   case 'snapshotThrows':control.reject=true;break;
+   case 'snapshotRestores':control.reject=false;break;
+   case 'emitThrows':failedSink=true;break;
+   case 'activeNegative':active=other;break;
+   case 'directCounts':returned.push(await countUnlabelledSnapshot(active));break;
+   case 'publicCountsDuringPending':
+   case 'publicCounts':
+    try{returned.push(await observer.counts());}
+    catch(e){if(!control.reject||e!==sentinel)throw e;sameSnapshotError=e===sentinel;}
+    break;
+   default:assert.fail('lifecycle step');
+  }
+ }
+ const result={snapshotCalls:calls.main+calls.other,returnedCounts:returned,emitted:messages};
+ if(row.steps.includes('finishThrow'))result.sameWorkError=sameWorkError;
+ if(row.steps.includes('activeNegative'))Object.assign(result,{mainSnapshots:calls.main,negativeSnapshots:calls.other});
+ if(row.steps.includes('snapshotThrows'))result.sameSnapshotError=sameSnapshotError;
+ if(failedSink)Object.assign(result,{sinkAttempts:messages.length,sinkErrorContained:returned.length===2});
+ return [result,'OBSERVED',null];
+}
+function assemble(row){
+ const stdout=Buffer.from(row.stdout.map(key=>atoms.stdout[key]).join(''));
+ const journal=Buffer.from(row.journal.map(key=>atoms.journal[key]).join(''));
+ const child={status:row.child.exitCode,signal:row.child.signal,error:{code:row.child.errorCode},stdout,stderr:Buffer.from(row.child.stderrUtf8)};
+ return collectObservation(child,journal,ids);
+}
+function measureCollector(row){
+ try{
+  const o=assemble(row);
+  return [{decision:'COLLECT',finiteGet:o.finiteGet},o.finiteGet.http.state,o.finiteGet.http.reason];
+ }catch(e){if(e?.code!=='EVIDENCE_CONFLICT')throw e;return [{decision:'FAULT',reason:e.code},'FAULT',e.code];}
+}
+function headerCompatibility(){
+ const stdout=Buffer.from(priority.stdoutUtf8),raw=Buffer.from(priority.journalUtf8);
+ assert.equal(sha(stdout),priority.stdoutSeal.sha256);assert.equal(sha(raw),priority.journalSeal.sha256);
+ const child={status:priority.child.exitCode,signal:priority.child.signal,error:{code:priority.child.errorCode},
+  stdout,stderr:Buffer.from(priority.child.stderrUtf8)};
+ const result=(observe,publish)=>{
+  const o=observe(child,raw,ids),packet=publish(context,custody,expected13,expected13,expected13,o);
+  const lines=(packet.custodyLine+packet.outcomeLine).trimEnd().split('\n');
+  assert.equal(lines[0].split(' ')[0],'AFW_C2_FINITE_GET_DIAG3_CUSTODY');
+  assert.equal(lines[1].split(' ')[0],'AFW_C2_FINITE_GET_DIAG3_OUTCOME');
+  const decoded=JSON.parse(packet.payload);
+  assert.deepEqual(decoded.observation,o);
+  return {value:{finiteGet:o.finiteGet,publisher:{decision:'PUBLISH',normalFrameCount:lines.length,
+   payloadMatches:packet.outcomeLine==='AFW_C2_FINITE_GET_DIAG3_OUTCOME '+packet.payload&&JSON.stringify(decoded)+'\n'===packet.payload}},first:o.firstFailure};
+ };
+ const old=result(prior.collectObservation,prior.successPacket),candidate=result(collectObservation,successPacket);
+ assert.deepEqual(old.first,candidate.first);
+ const supported=assemble(wmap.get('H_NATIVE_AMBIGUOUS'));
+ const retry=successPacket(context,custody,expected13,expected13,expected13,supported);
+ assert.deepEqual(JSON.parse(retry.payload).observation.finiteGet,wmap.get('H_NATIVE_AMBIGUOUS').expected.finiteGet);
+ return [{old:old.value,candidate:candidate.value},candidate.value.finiteGet.http.state,candidate.value.finiteGet.http.reason];
+}
+function measureC1(row){
+ const v=original.cases[row.sourceCaseIndex],raw=Buffer.from(v.rawStdoutUtf8);
+ assert.equal(v.id,row.id);assert.equal(raw.length,row.rawStdoutSeal.bytes);assert.equal(sha(raw),row.rawStdoutSeal.sha256);
+ const f=projectFirstFailure(raw,original.observations[v.parentObservationRef],ids);
+ return [f,f.state,f.reason];
+}
+function measuredPacket(row,unchangedObservation){
+ const o=unchangedObservation??assemble(wmap.get(row.actualCollectorFixture));
+ // Positive controls retain the actual projection; negatives replace only the sealed fields.
+ if(!unchangedObservation){
+  if(!row.id.startsWith('P_JOINED') && !['P_COUNTS_ONLY','P_AFTER_EXCEPTION','P_GLOBAL_WITH_HIGHER_BLOCK'].includes(row.id))
+   o.finiteGet=structuredClone(row.replaceFiniteGet);
+  else assert.deepEqual(o.finiteGet,row.replaceFiniteGet);
+ }
+ const c={...context,...row.overrides.context},cust={...custody,context:c};
+ if(row.overrides.firstFailure)o.firstFailure=row.overrides.firstFailure;
+ const after=expected13.slice(),swap=row.overrides.replaceAfterSha256At;
+ if(swap)after[swap.index]=swap.value;
+ const out=successPacket(c,cust,expected13,after,expected13,o);
+ const actualLines=(out.custodyLine+out.outcomeLine).trimEnd().split('\n'),payload=JSON.parse(out.payload);
+ assert.deepEqual(payload.sourceReads,{beforeSha256:expected13,afterSha256:expected13});
+ assert.deepEqual(payload.observation,o);
+ return {decision:'PUBLISH',normalFrameCount:actualLines.length,firstMarker:actualLines[0].split(' ')[0],
+  secondMarker:actualLines[1].split(' ')[0],artifactMatchesOutcomePlusOneLF:out.outcomeLine.slice(actualLines[1].indexOf(' ')+1)===out.payload&&JSON.stringify(payload)+'\n'===out.payload,
+  nonclaimsFalse:Object.values(payload.nonclaims).filter(x=>x===false).length,SourceQualified:payload.SourceQualified,Task1Pass:payload.Task1Pass};
+}
+function measurePublication(row){
+ let value;
+ try{
+  if(row.layer==='actualEncodeBody'){
+   const body=encodeBody(pub.boundInputs[row.inputRef],row.limit);
+   value={decision:'ENCODE',bodyBytes:Buffer.byteLength(body),oneLFBytes:Buffer.byteLength(body+'\n')};
+  }else if(row.layer==='actualFaultGuardAndRunnerEmission'){
+   let reason;
+   try{assemble(wmap.get('H_N2_CONFLICT'));}catch(e){reason=e.code;}
+   assert.equal(reason,row.reason);
+   const line=faultLine(context,row.phase,reason),body=JSON.parse(line.slice(line.indexOf(' ')+1));
+   const markers=line.trimEnd().split('\n').map(s=>s.split(' ')[0]);
+   value={decision:'FAULT',faultMarker:markers[0],normalFrameCount:markers.filter(m=>m.endsWith('_CUSTODY')||m.endsWith('_OUTCOME')).length,
+    admissibleArtifact:body.diagnosticCollectionComplete};
+  }else value=measuredPacket(row);
+ }catch(e){
+  if(!['PUBLICATION_INVALID','TARGET_DRIFT'].includes(e?.code))throw e;
+  value={decision:'REJECT',reason:e.code};
+  if(row.layer==='successPacket')value.normalFrameCount=0;
+ }
+ return [value,value.decision,value.reason??null];
+}
+function measurePrefixPublication(row){
+ const {actualCollectorFixture,replaceFiniteGet,alsoPublishUnmodifiedActualObservation}=row.input;
+ const [contradiction,state,reason]=measurePublication({id:row.id,layer:'successPacket',actualCollectorFixture,replaceFiniteGet,overrides:{}});
+ if(!alsoPublishUnmodifiedActualObservation)return [contradiction,state,reason];
+ const observation=assemble(wmap.get(alsoPublishUnmodifiedActualObservation.id));
+ const publisher=measuredPacket({overrides:{}},observation);
+ return [{contradiction,missingMonitor:{finiteGet:observation.finiteGet,publisher}},state,reason];
+}
+for(const [i,group] of oracle.groups.entries()){
+ test(group.group,{timeout:10000},async()=>{
+  const observations=[];
+  for(const check of group.expected){
+   const id=check.id;
+   const [actual,state,reason]=i<=1?await measureBucket(qmap.get(id)):i===2?await measureLifecycle(lmap.get(id)):
+    id===priority.id?headerCompatibility():i<=6?measureCollector(wmap.get(id)):i===7?measureC1(cmap.get(id)):prefixes.has(id)?measurePrefixPublication(prefixes.get(id)):measurePublication(pmap.get(id));
+   const hash=compact(actual);
+   // Safe failure metadata: never publish private rows, measured payload or assertion text.
+   assert.ok(hash===check.sha256 && state===check.state && reason===check.reason,'FG3 '+id+' actual '+hash);
+   observations.push([id,hash,state,reason]);
+  }
+  await writeFile(join(root,'facts',String(i)+'.json'),JSON.stringify(observations)+'\n',{flag:'wx',mode:0o600});
+ });
+}

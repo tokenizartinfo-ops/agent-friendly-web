@@ -1,0 +1,239 @@
+{
+  "schema": "AFW-FG3-SOURCE-R4-RESTORATION/1",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": "ce4e65195fd0f02adf6de5b64748abaaf3470fbd",
+  "round": 4,
+  "maxRounds": 5,
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "predecessorDelivery": {
+    "bytes": 18850,
+    "sha256": "a7accf76effa8b9613de0a739b5770ce95ac5c79bf1fbd4c6e752ac3a87b8aed",
+    "blob": "7f7b1dd32b18805fd58d182ba996a03c5d47870c"
+  },
+  "predecessorReversibleToD2": {
+    "bytes": 10803,
+    "sha256": "67435cec2f2461d0765fed322b66c77d8cd3b2fdf08899766b8d2aedd4dd5df8",
+    "blob": "9682f091b099c305b58200a5d52fa6b0be1bb226"
+  },
+  "business": {
+    "before": {
+      "bytes": 18499,
+      "sha256": "d50c86b56810c84e0f416879cd9628fe318eb7fd1da2a43d2fe02a1e398a502a",
+      "blob": "452895beeedf528748e51ec2ea4ccb91d684552a"
+    },
+    "after": {
+      "bytes": 18706,
+      "sha256": "74855a01a9ac8cd450c2ac5cafd2ec26fe23b6bf458563dea22a6337b051d9ff",
+      "blob": "672455978db4210eedef61502682e03404e0f462"
+    },
+    "changedZeroBasedSlots": [
+      18,
+      19,
+      23
+    ],
+    "unchanged": 22
+  },
+  "tools": {
+    "before": {
+      "bytes": 19362,
+      "sha256": "9c871eecce19f087bef0d158e78312fe805ec56821e8e886a7247ea1b2f6a926",
+      "blob": "1bf532b9fa15db9c5c4a388c1786e7bda21d5d71"
+    },
+    "after": {
+      "bytes": 20085,
+      "sha256": "de6d410dc095cfd1337aa7e3a79b4501d8b357724a69894024121cb2d726163e",
+      "blob": "ecf5d3c3178704926eb37d21d14b1fd24b3da04b"
+    },
+    "changedExisting": 5,
+    "newMounts": 1,
+    "unchanged": 30,
+    "entryCounts": [
+      35,
+      36
+    ]
+  },
+  "edges": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/protocol-contract.json",
+      "scope": [
+        "business25"
+      ],
+      "before": {
+        "blob": "506b53c922ebc0f9a101ae1108604993143adaed",
+        "bytes": 55926,
+        "sha256": "c4e2fc98e62d6da94f024ba7a2c2cb3968e662bff7cef528f4115ec198818700"
+      },
+      "after": {
+        "blob": "290aad4bd227d604510d3adde69ec30759386160",
+        "bytes": 57085,
+        "sha256": "f9c3c5be4c01b49b42dfc7c76ab8809935c82f5a9c2d107521003d56d63eeaf1"
+      },
+      "splice": {
+        "bytes": 116282,
+        "sha256": "3f4fedb457d6ae9f55dea3bd94b7e5ff0dd8aa09f77e8718f747e401fbb1780f",
+        "blob": "448a89b7ff1133ad7d2e9554d760af75e0cff376"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/collection-adapters.mjs",
+      "scope": [
+        "business25",
+        "tools36"
+      ],
+      "before": {
+        "blob": "527149a4ecf3e5f4f06e0d801cef38a256b60ceb",
+        "bytes": 31647,
+        "sha256": "d3f27d5e093dd07866e3c2da6b10beb200e28949abcfcc4090f01671db3e4c04"
+      },
+      "after": {
+        "blob": "0465caea70e7a80aeb631fd73f267bb00dfc0f5d",
+        "bytes": 32312,
+        "sha256": "f484bbfaa879b7b0121a1ed2f0038ae358457ab636ca7e51c3c80678528448d6"
+      },
+      "splice": {
+        "bytes": 1289,
+        "sha256": "54699e9654cd9b0e54c6b70fdea87415ac95856eb0240f2490e7b70429890cad",
+        "blob": "15cc3ed7a3c8ea1fb490e4737d1cbb4eb686e373"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
+      "scope": [
+        "business25"
+      ],
+      "before": {
+        "blob": "1478619761188d61ef510a9a588bb1e1098bd067",
+        "bytes": 16767,
+        "sha256": "4a79a4468efb2c05ed705b8b30b2b519e10377788eca1a0ac2df162e0712bec2"
+      },
+      "after": {
+        "blob": "b88f9ecb3317e0e82f11eaa540d4a03846b70733",
+        "bytes": 16767,
+        "sha256": "4465b9a4a88c818b1420076617fc7677092f7cd5ea1145fae85df9757229ba57"
+      },
+      "splice": {
+        "bytes": 1483,
+        "sha256": "28ba41af2684b9f3d43b9584fa465752cfa07285d235149be4e1601c9373b9c5",
+        "blob": "cf1715d35566824aab25f5c9e8c42c3b014e3ebf"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/oracle.json",
+      "scope": [
+        "tools36"
+      ],
+      "before": {
+        "blob": "8aceac899034528b5d657f8bc7dd774b2d6ec2bd",
+        "bytes": 51184,
+        "sha256": "f54b26c93cba714fb596cb50b6d3cd341a1d570ca36f5a2a6b62b8ebf7eacc3e"
+      },
+      "after": {
+        "blob": "cef66140db83421b2cbd371a6e1b5e0a296a10ff",
+        "bytes": 52609,
+        "sha256": "1a5ffabd0018084a75b3b4b35935f3095c13661c1a49585e1b4d93df21ed686d"
+      },
+      "splice": {
+        "bytes": 2303,
+        "sha256": "6d1b061d2b3dfd8a484f96ebebf72665ddbe11727817281dd14bf2fe50d92310",
+        "blob": "9355c3182142af370e2d74f62804fabd4a3a2e26"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/controls.mjs",
+      "scope": [
+        "tools36"
+      ],
+      "before": {
+        "blob": "249ae55a4ccae7126e12f8c5640691d3c5aaddf0",
+        "bytes": 11471,
+        "sha256": "f908bf5889208c58184bf15451a5368447a8f3c9d7eeaa7fed69417335d508e0"
+      },
+      "after": {
+        "blob": "4b0474dbd5c06d0ed199ccd18c66ee0ffd40cbfc",
+        "bytes": 12271,
+        "sha256": "f4385d4c10626dcdfe3cf092bd4309d40bb85d0cbc487014ddc185b2d28535c7"
+      },
+      "splice": {
+        "bytes": 18699,
+        "sha256": "0d77eae96142e82b8e160a0f4b829cba4e2d3d153446446a071efc29e89bbef0",
+        "blob": "af4251e7e720d24aed34289937d85d3bc7a94076"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/tool-proof-schema.json",
+      "scope": [
+        "tools36"
+      ],
+      "before": {
+        "blob": "69a6fd5a319f57468b063474df98ae6424560c2f",
+        "bytes": 39549,
+        "sha256": "91981138dc972952728450f45ca4efaf72145e58e6ddbc636029d5572294c2f1"
+      },
+      "after": {
+        "blob": "296cc32a8ccff56d6fe01d17a15959a73aef864b",
+        "bytes": 40291,
+        "sha256": "159cdf25f438334279c225442c8a379c4f4a708926c226b919463066c388d396"
+      },
+      "splice": {
+        "bytes": 83418,
+        "sha256": "dbc55c6428d694790b4187712bffcfa151e9ea501e14f23d08e69cf2bf3d7947",
+        "blob": "052361dd26045cd3f6b574d03e6f08bc2741824c"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/prefix.json",
+      "scope": [
+        "tools36"
+      ],
+      "before": null,
+      "after": {
+        "blob": "dfc37b27bad9189eb368f711727fc83f672d71af",
+        "bytes": 13004,
+        "sha256": "3fc96c856f31cc6ed801968deb84af192ebf10f0a901b239c419aa47d63c4d4a"
+      },
+      "splice": {
+        "bytes": 14579,
+        "sha256": "216f0bcd99bf1ce37f0de5f950b1e48511be5cd372829ec5cfdd62e14ac2bd4e",
+        "blob": "34660aadfef9228e3eb987495edf2d908927db4f"
+      }
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/tools-finite-get.mjs",
+      "scope": [
+        "tools36"
+      ],
+      "before": {
+        "blob": "6f48584c2302f18d8b28e0138b99286678ba73ff",
+        "bytes": 20283,
+        "sha256": "ca78f36a2de86a1437588b652058c6c4ad7c522515bd3064c610ebc5f98530fd"
+      },
+      "after": {
+        "blob": "4d27c96440f354a4f3c2ea85eb4260ebe2ec7b8a",
+        "bytes": 20541,
+        "sha256": "72627325419192cc12209c804c1a301d5e53919b0ec1765aadcd46b66a335bb1"
+      },
+      "splice": {
+        "bytes": 26895,
+        "sha256": "27ca1ca9f5b402376a5f5ee8dd017ab346dd814254ae92c976d69884ff276be1",
+        "blob": "e4550d403b1c75c74c8919c23a1371f4c6db997d"
+      }
+    }
+  ],
+  "decoding": "Start from the exact hash-checked full predecessor or successor bytes. Keep commonPrefixUtf8Bytes and commonSuffixUtf8Bytes. Require the entire source middle segment to equal the supplied beforeUtf8 or afterUtf8, respectively. Replace with the other stored middle and recheck size, SHA256 and Git blob. For the added prefix.json the prior path is absent. Reading both full immutable indices provides complete mount order and metadata in either direction.",
+  "verification": "Every full before/after was read as inert text and reproduced in both directions, including the added data path treated as absent before. No shared tree, ref or occurrence was changed.",
+  "baseOverlay": "All 25 business and 36 tooling paths are additions in their respective independent proposals against the same BASE3203. Discard detached proposal to return to BASE. A separately authorized one-use occurrence uses designated workflow-only closure and readback by Root.",
+  "nativeExecuted": false,
+  "SourceBusinessExecution": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

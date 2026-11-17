@@ -1,0 +1,41 @@
+name: AFW C2 finite GET diagnostic 3
+on:
+  push:
+    branches:
+      - lab/afw-c2-source-20261117-t1-finite-get-diag3
+permissions:
+  contents: read
+jobs:
+  c2-finite-get-diag3:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/lab/afw-c2-source-20261117-t1-finite-get-diag3' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'AFW-C2-T1-FINITE-GET-DIAG3-ONEUSE-20261117'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Read the exact one-use lab head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Use the fixed Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+      - name: Install only the existing locked dependencies
+        shell: bash
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Observe finite GET in the full case order
+        id: source
+        shell: bash
+        run: node docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs
+      - name: Preserve the bounded finite GET diagnostic
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-c2-finite-get-diag3
+          path: output/c2-finite-get-diag3.json
+          if-no-files-found: error
+          retention-days: 7
