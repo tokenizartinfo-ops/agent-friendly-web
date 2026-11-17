@@ -1,0 +1,142 @@
+{
+  "schema": "AFW.DROP.SOURCE5.ACTUAL_DIAGNOSTIC_VALIDATION/1",
+  "timestampUTC": "2026-11-17 15:17:32 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "run": 44110921244,
+  "attempt": 1,
+  "job": 134135963389,
+  "head": "2457ad4bd71aa1bd7703f56fba9284ddb85f05aa",
+  "tree": "39ce40a45052f931068ef98e38da388018a8fbe6",
+  "checks": {
+    "run": true,
+    "commit": true,
+    "job": true,
+    "steps": true,
+    "artifact": true,
+    "canonical": true,
+    "actualReader": true,
+    "knownGet": true,
+    "unknownDrop": true,
+    "claimFence": true
+  },
+  "logMeasurement": {
+    "bytes": 31048,
+    "sha256": "c2feefd1b5e49a3be25fa4b94c3539dbac77e96de0fb7f84f8d952587b8ff60e",
+    "blob": "c7f6b9ced038b18eea44fc6b94afe23d768a60e4"
+  },
+  "zip": {
+    "archive": {
+      "bytes": 3073,
+      "sha256": "d9278238d116737efe8e7c9a17aee149793d62d60bd282f33a7a47ba7d55521b",
+      "blob": "ca8b2df6f8309fbea6aeff95b85058c73b192504"
+    },
+    "payload": {
+      "bytes": 13194,
+      "sha256": "691c89affba24bf50baf2c427ca7e61531147bff17ab6ee4c316c5fbfea0d12f",
+      "blob": "f4daf53fee3e78ba2cad36c6b525559d9fd47d67"
+    },
+    "crc32": "bdac77a7",
+    "compressedBytes": 2909,
+    "descriptorBytes": 16,
+    "flags": 8
+  },
+  "actualOwnAdmission": {
+    "receiptMeasurement": {
+      "bytes": 13380,
+      "sha256": "7787285165f2ede6835dcb01c509c66f5d26a616eb38908802688854f70a99f7",
+      "blob": "88edaaa27b4bd5eda5cf9664266422f6b3d5029e"
+    },
+    "qualifiedReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
+    "binding": "1fea33135f8943707738d4f078ff3616e9b5132c",
+    "bindingKind": "ROOT_PINNED_PRODUCER_DATA_R5",
+    "elapsedMs": 132,
+    "localExceptionRuling": "1b5ca9964570edccca7b54fc7445296236548d50",
+    "SourceModulesExecuted": 0
+  },
+  "transportRecovery": {
+    "requests": 2,
+    "successfulArchives": 1,
+    "ruling": "ef700c72f91122d89d60f6e803efd92c2a1efc1a",
+    "initialConnectorError": {
+      "content": [
+        {
+          "type": "text",
+          "text": "tool call error: tool call failed for `codex_apps/github.download_workflow_artifact`\n\nCaused by:\n    Mcp error: -32603: Internal error"
+        }
+      ],
+      "isError": true
+    },
+    "noJobReplay": true
+  },
+  "observed": {
+    "nativeIntegrity": "prefix",
+    "nativeCount": 17,
+    "nativePass": 14,
+    "nativeFail": 3,
+    "journalEvents": 69,
+    "openCase": {
+      "id": "C2T1_LOST_ACK_DUPLICATE",
+      "operation": "action"
+    },
+    "firstFailure": {
+      "schema": "afw.c2-first-failure-post-diag2.v1",
+      "state": "NOT_APPLICABLE",
+      "reason": "EARLIEST_THROW_DIFFERENT",
+      "throwSequence": null,
+      "source": null,
+      "assertion": null
+    },
+    "finiteGet": {
+      "schema": "afw.c2-finite-get-diag3.v1",
+      "http": {
+        "state": "KNOWN",
+        "reason": "TARGET_GET_ASSERTION",
+        "throwSequence": 58,
+        "actual": 503,
+        "expected": 200
+      },
+      "afterMonitor": {
+        "value": "0",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 56
+      },
+      "afterScopeMissing": {
+        "value": "1",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 60
+      }
+    },
+    "dropWinner": {
+      "case": "15:firstDROP",
+      "site": "UNKNOWN",
+      "outer": "UNKNOWN",
+      "publicSite": "UNKNOWN"
+    },
+    "capture": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "timeout",
+      "stdout": {
+        "bytes": 16042,
+        "sha256": "b96eb289468c87698a6b7cf6daf5d9898032b78de559cd40fbde0b36dabb7436"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "boundary": "Current first action throw at case15 GET S08:18:118, status503vs200, 30009ms action interval does not prove per-phase wait cause. First14nativePASS;15/16/17FAIL;18open;19/20unobserved. Existing finiteTicket snapshots0→1 are counts across samples, not scope writes or effect attribution. DROP first POST never reached; no new DROP branch/cause proved. Later failures may be downstream, not independent diagnoses. Jobgreen only diagnostic capture. Runtime/provider/readiness unchanged/unproved.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
