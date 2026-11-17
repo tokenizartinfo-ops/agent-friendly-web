@@ -1,14 +1,12 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/33",
-  "timestampUTC": "2026-11-17 12:47:30 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/34",
+  "timestampUTC": "2026-11-17 12:53:31 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "553d3a396ce8be143cac9af5cb85a074b266da58",
-  "phase": "DROP_WINNER_FIXTURE_RED_NATIVE_ACTIVE",
-  "activeNativeRuns": [
-    44086328643
-  ],
-  "allCurrentNativeOccurrencesClosed": false,
+  "previousCheckpoint": "62a0a33c3f2e46a7d35c3a68bcdc477f0990db10",
+  "phase": "DROP_WINNER_SOURCE5_IMPLEMENTATION_PROPOSAL_ACTIVE",
+  "activeNativeRuns": [],
+  "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
     "run": 44021068647,
     "job": 133830419181,
@@ -105,7 +103,7 @@
     "reversible8Plus3": true
   },
   "rounds": {
-    "Source": 4,
+    "Source": 5,
     "Own": 4,
     "maxSameFamily": 5,
     "noReset": true
@@ -136,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Observe THIS fixture attempt1 terminal, capture logs/soleZIP once; accept ONLY named expected model RED+uploadsuccess+exactreceipt, closeWF/readback; then release minimal implementation to SAME source5 author. NoSourcebusiness orNativeRuntime.",
+  "next": "Resume SAME source5 author with RED readback and narrow code release; author prepares detached diagnostic/compiler/native tooling proposal. Root independent code review precedes any activation; receiver and actual full-order trial remain held. Source cycle5, no reset.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -170,7 +168,7 @@
     "state": "FIXTURES_AND_RED_PROPOSAL_ONLY",
     "fixtureOracle": "0625f0864da7c70f6a9b6abf0fb989c36fae22f6",
     "fixtureCount": 59,
-    "codeReleased": false,
+    "codeReleased": true,
     "nativeReleased": false,
     "oldTrialsClosed": true,
     "fixtureProposal": "f0c9080b4b928a0ce0d01213d7c205281e0d06e0",
@@ -190,7 +188,24 @@
       "unattached": false,
       "gate": "fbc5650a521f71ef430176ce3b9bd14f3734c952",
       "activationUTC": "2026-11-17 12:46:42 UTC",
-      "run": 44086328643
+      "run": 44086328643,
+      "job": 134049601692,
+      "closed": true,
+      "closedHead": "4dec9811009052b4088068a06ece37a7af70b4cf",
+      "closedTree": "6de381b7d06c70cae3a98d3c1c6841a603741327"
+    },
+    "RED": {
+      "run": 44086328643,
+      "job": 134049601692,
+      "primary": "6f98dadad0d3ac0533d1d4399344cac1f8fb9667",
+      "proof": "b77f84620c7cd3c83bc2ef48d3e53dfec5d41ac0",
+      "validation": "e58f9364b66c10cf098e560c05da7d1607da25bf",
+      "closure": "355fe040214731112bbc8c927e42b3476f635bd0",
+      "MODELOnly": true,
+      "executed": 1,
+      "sealedNotExecuted": 58,
+      "jobFailureExpected": true,
+      "noHistoricalCauseProof": true
     }
   },
   "staticContracts": {

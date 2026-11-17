@@ -1,0 +1,60 @@
+{
+  "schema": "AFW-DROP-WINNER-SOURCE5-CODE-RELEASE/1",
+  "atUTC": "2026-11-17 12:53:31 UTC",
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "private Git unexecuted proposals; later isolated GitHub Actions only",
+  "ORIGIN": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "RESOURCE_TYPE": "detached source/fixture/compiler proposal blobs",
+  "RESOURCE_ID": "C2-source5-drop-winner",
+  "ALLOWED_ACTION": "Author source test-only diagnostic/compiler/helper/collector/schema/runner/tooling proposals as detached immutable Git blobs after observed model RED; no refs, tests locally or native/business/runtime activation.",
+  "ROLLBACK": "Discard detached proposal; original3203 and all closed histories remain unchanged; preserve complete before/after reversible overlays.",
+  "plan": "7a27a72a1c5e01dd4db03b71e6fc04478a85797c",
+  "brief": "9ece9fd8e23bf2ad214f32ec0f1a12bbef371f95",
+  "spec": "1a5ccbf3aa73495e3c4f4ebfe39e5693d78d91cb",
+  "designReview": "56e08ba3af37540421e1897d79b416c6ba4c12dc",
+  "red": {
+    "run": 44086328643,
+    "job": 134049601692,
+    "primary": "6f98dadad0d3ac0533d1d4399344cac1f8fb9667",
+    "proof": "b77f84620c7cd3c83bc2ef48d3e53dfec5d41ac0",
+    "validation": "e58f9364b66c10cf098e560c05da7d1607da25bf",
+    "closure": "355fe040214731112bbc8c927e42b3476f635bd0",
+    "MODELOnly": true,
+    "executed": 1,
+    "sealedNotExecuted": 58,
+    "jobFailureExpected": true,
+    "noHistoricalCauseProof": true
+  },
+  "ruling": "Proceed with the approved value-provenance diagnostic after verified RED; preserve the existing denial/put assertion and all timing/control semantics. This is source cycle5, not a renamed budget reset. Native compiler/transport tests and source business require separate Root gates.",
+  "constraints": [
+    "Only isolated opt-in fixture/compiler transforms; no main or product runtime edits.",
+    "No new business-path RPC/snapshot/wait/window/input-header. Exactly two lab-only error-egress markers permitted by ada670c9bbe3741a714cec6486a20dd2751a01b6.",
+    "No private IDs/digests/headers/frames/maps in normal artifact/log/error; only fixed enums.",
+    "Source index/selection/schema/runner descriptors must be fully pinned; maintain13 overlay paths when practical; all new dependencies/imports must be measured and approved, no arbitrary unbound helper.",
+    "Native tooling must exercise same actual helper factories used in compiled Source, not surrogate algorithms. MODELED and actual producer bindings remain distinct.",
+    "Compiler real provisional namespace and same prepared input JS equality/sites; no budgetCompileOnly identity. Source execution only future GHA.",
+    "C1/finiteGet/replay/custody/caps/driver/registration and guarded transaction behavior remain unchanged; no assertion relaxation or timeout extension.",
+    "No workflow/branch activation by author; no automatic rerun, no OAuth/token/mail/Max or Cloudflare production actions."
+  ],
+  "nativeReleased": false,
+  "businessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "budget": {
+    "Source": 5,
+    "Own": 4,
+    "maxSameFamily": 5,
+    "noReset": true,
+    "lastSourceCycle": true
+  }
+}
