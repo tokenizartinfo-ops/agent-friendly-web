@@ -1,0 +1,92 @@
+{
+  "schema": "AFW.OWN5.STAGE_B.INDEPENDENT_ACTUAL_AND_INTERFACE_REVIEW/1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "saved immutable Git DATA",
+    "ORIGIN": "github.com",
+    "RESOURCE_TYPE": "detached JSON review",
+    "RESOURCE_ID": "OWN5 tooling run44109040240/1 and bounded Source26 interface",
+    "ALLOWED_ACTION": "saved text/JSON/hash/archive inspection; create_blob and FULL readback",
+    "ROLLBACK": "discard detached review; no refs/runtime changed"
+  },
+  "inputs": {
+    "brief": "f0eeffdd2bc4a86e9b8935f0fd737743903d7f23",
+    "gate": "bcb9a881c96a9c67259142335effcd30fa8dd3e0",
+    "native173": "59083d99813f3490e249d59d5e91190ea1fa2780",
+    "staticReview": "f9896e64ac34ad52cd83ac231a200e9ba16d1587",
+    "primary": "916c021c0afd9a5d05b31cdf6717204de2f15eb4",
+    "proof": "aeb81a1566cf69e337db0e2ed7d09013c82d53bb",
+    "rootValidation": "9615f57f2aaae476748f1af8ed06d033114b5022",
+    "closedReadback": "ab4d08ea24e98b4b14869d02a14ef5fe283788be",
+    "closureIntent": "71024dcf818de4ea90c6f39fd502f71255b48b2e",
+    "SourceRoot26": "1fea33135f8943707738d4f078ff3616e9b5132c",
+    "finalSourceIndex": "fc11e972ceb33c8ce7cdace34aed482d71bb6224",
+    "finalSourceBindingReview": "15833146677c46b3ead84ce1583b39d43030e734",
+    "acceptedSourceNativeRouteReview": "3f93cbd6cc77b6bd195a08c3c4ea21209e20a57c"
+  },
+  "SPEC": "PASS",
+  "QUALITY": "PASS",
+  "findings": [],
+  "run": {
+    "id": 44109040240,
+    "attempt": 1,
+    "job": 134129278041,
+    "head": "724d6a2998320daf7f86a95fe12229fb21fdf621",
+    "tree": "b172c39ac7257d69bf578555b12360123449c843",
+    "conclusion": "success",
+    "syntaxStep": 4,
+    "controlsStep": 5,
+    "uploadStep": 6,
+    "artifact": 14339059173
+  },
+  "checks": [
+    {
+      "result": "PASS",
+      "refs": "primary.run/jobs/preparedCommitAPI/jobLog; native173.nomination",
+      "evidence": "Saved API/log joins exact repository,push,branch,message,parent/head/tree,attempt1/job. Node22.23.4,syntax/admissionstep4,controlsstep5 and uploaderstep6 succeed in order; log has exact timeout-wrapped nominated command and AFW_OWN_D4_TOOLING_MATCHED142. Job14:58:47–14:58:59 within3min. Action pins and keyless fixed packet match. Log rehashed18771B/SHA2562301db78a4eabe9ed8763b401428907b94961c982c003bb946826b81bb2be70b/Git5322a238."
+    },
+    {
+      "result": "PASS",
+      "refs": "primary.artifacts/zip; proof; pinned proof-schema3dcbe744",
+      "evidence": "One artifact ID14339059173/run/head binding/fixed name/7d. ZIP independently1404B SHA25635daee58f68ba3910b497bc52a257a8decf4c4d5c6aedfde1fcdb0ce5c8181e8/Gitf71f3751. Sole local/central member own-drop-winner-tools.json;one disk/entry,no comment,flags8/method8,full1238B deflate consumed,DD16,CRCf20ed79a/sizes/end exact. Inflate equals canonical JSON+LF2254B SHA256fa8bf74bb8c66e333153b3092dc63a22a36932563e1e35c267cb355e73d7cdbe/Gitaeb81a15. Proof exact key order/constants/occurrence/codehashes match schema and packet."
+    },
+    {
+      "result": "PASS_CONTROLLER_ATTESTATION",
+      "refs": "runner6f1e7cae; graphd1d28d86; testce04cc3b; proof",
+      "evidence": "Independently rehashed graph/controller/bindings/reader/drop/occurrence/units/test/proofschema/WF pins exact. Controller hashes171 files+graph+self against exact173 additions before tests, requires9 exact ordered TAP groups and terminal zero-fail/skip/todo/cancel census, one canonical summary,142 sealed results58ADMIT84REJECT and10 unique adapter units. Old73 resultSHA98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb and new69 SHA7bd0f0c8d8ca7a5280cfb2fe3238b93b42dcaeaf49e4a00203f5732e6d98ae27 match immutable packet. Individual raw TAP was not retained; results are bounded pinned-controller attestation, not reviewer-direct per-fixture observations."
+    },
+    {
+      "result": "PASS",
+      "refs": "preparedTreeAPI; closed.api.tree/ref/commit/runs/protected:*; closure intent",
+      "evidence": "Saved untruncated trees:3376 admitted matches173 packet mounts;3203 baseline leaves retained in close with172 data/helper leaves+2 exact evidence leaves=3377. Only nominated WF removed and primary/closure-intent added. Independent Git ancestor reconstruction yields admitted b172c39ac7257d69bf578555b12360123449c843,BASE62e78926635d6b74f288d6c0d69e0f2516306989,closed7ae626b4bbb58275ba31292dc9cb0cfe40010a78. Closed8b41c57cb6a8a9ba7a92c3a56820786a41f95f86 has exact attempted parent.15 saved protected tips match gate;0closeheadruns snapshot. No live refetch."
+    },
+    {
+      "result": "PASS_BOUNDED_INTERFACE",
+      "refs": "bindings4d54d573; readere8490b06; occurrence1298c105; boundTransporta03b3103; drop8e794a80; SourceRoot26",
+      "evidence": "ACTUAL exclusively pins Root measurement1fea3313,final indexfc11e972,actual schema/selection and exact26 edges. Recomputed actual6252B edgeSHA47d154b05de3d62c8d2af6f49060a82da328e1d5105975be0a883a913f8ee280 equals finalSource26;MODEL separate c9eafc12 tuple. d4Read/d4ModelRead select fixed bindings directly with no fallback and require independent caller trusted.expected+exact bodyedges. API join requires exact six Source named steps; occurrence adapter selects observed business command by name,not old positional index. Shared public guard validates ordered case/site/outer/publicSite,6site allowlist,implication/open15/closed15/visible contradictions and returns component with false qualifications. Native units cover MODEL5/ACTUAL6 command windows and missing trusted context; no actual Source positive was run."
+    }
+  ],
+  "decision": "OWN5 tooling controls and bounded Source26 interface accepted. Root may prepare its separate ONE business diagnostic admission after its own fresh tuple/tree/ref/occurrence checks. This review does not authorize execution or claim20 business cases/readiness. Source planned head2457ad4bd71aa1bd7703f56fba9284ddb85f05aa remains unexecuted/unattached per supplied Root context; no fresh endpoint assertion made here.",
+  "method": "Saved DATA only; static source text,JSON,builtin crypto/zlib and tree hashes. No Source/OWN import/eval/parser/build/test,terminal refetch,log/ZIP redownload,replay,ref/Rootdocs/runtime mutation. Source native route premise remains conditional value provenance with copied-valid-fields limitation from accepted review.",
+  "rounds": {
+    "Source": 5,
+    "OWN": 5,
+    "max": 5,
+    "noReset": true
+  },
+  "actualBusinessExecuted": false,
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
