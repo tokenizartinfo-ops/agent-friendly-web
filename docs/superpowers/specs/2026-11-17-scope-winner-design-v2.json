@@ -1,0 +1,54 @@
+{
+ "kind": "AFW.C2.DROP_JOIN/2",
+ "state": "DESIGN_ONLY; no proven bug or release",
+ "scope": {
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "private Git DATA",
+  "ORIGIN": "github.com",
+  "RESOURCE_TYPE": "DETACHED_REPORT",
+  "RESOURCE_ID": "C2-case15-first-DROP-winner-v2",
+  "ALLOWED_ACTION": "immutable reads + create_blob only",
+  "ROLLBACK": "discard proposal; no refs changed"
+ },
+ "pins": {
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "source13": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+  "checkpoint": "40e7c737fe2f20f32d0df385800b4c967e46c3fe",
+  "feasibility": [
+   "135ca8aade653df553812b4be1687d342681ec7e",
+   "73f7f85c66ce56f5debbd5418cd6814592f57952"
+  ],
+  "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+  "wire": "38285fa0149a38924c431b4d5a705bec1384216d",
+  "v1": "05b1cbbf9c42d72bc6ee797a4f070aa8d79cd949",
+  "review": "e297e38ffe595ee5feeb0536e3c7d6a2abf17bb5",
+  "ruling": "ada670c9bbe3741a714cec6486a20dd2751a01b6"
+ },
+ "historical": "44021068647/1: first14 passed, first DROP non-200/3 counters unchanged, puts != 1 (scalar unknown). GET200/ticket 0->1 not POST progress; 16 open at 180s, 17-20 unobserved. Future synthetic diagnosis only.",
+ "choice": "Two reserved synthetic error-egress headers, default OFF, no input or forwarded header. Host selects exact first DROP Response; object maps are isolate-local.",
+ "seams": [
+  "S08:110-115/S10:180: first drop post(f,form) only. Existing c2Snapshot must contain exactly one finite Ticket for SHA256(form.handle)/project. Read exact mf.dispatchFetch Response's outer marker/status before original noFurther/cancel/3 counters. Same state cut, puts assert, finally restores; missing cut means no join.",
+  "S09:175-185 arms actor-local E only for drop. Capture E BEFORE super.fetch at :152-157, bind one inbound Request R, private choice/original POST, UUID/finite cookie and actor. Duplicate poisons E. S02:25 passes R to S00. At S00:808 use S09's existing caught-error frames once (<=6); register freshly constructed pending Q → {E,R,coords,status}. S00/S02 substitute or finalizer cannot inherit that object identity.",
+  "In existing S09 observed(result), require captured E valid, unsealed, exact R and Q, registered non-ok status, unused Q/slot and absent reserved field. Set x-afw-lab-qa-denial=q1.J.S on Q then verify exact readback before recording E.qaEgress. J=lowerhex SHA256('afw.lab.drop.uuid.v2'+NUL+canonical UUID), S=exact three-digit status. Refuse duplicates/collision/immutable headers, poison evidence only. Restore/re-arm permanently revokes old E. Late callbacks cannot select a replacement epoch.",
+  "Prove from pinned mounted code plus native control that actual.then(observed,...) is registered before Initial.fetch returns/adopts native actual, or existing observed(actual) runs synchronously for immediate Response. Mark must precede QA serialization. Unknown thenable/ordering => no attribution. No added await.",
+  "Existing c2ScopeState {puts,drifted} adds bounded diag:{entryJoin,formTag,qaEgress,qaStatus,scriptKey,coords,poisoned} only when armed; seal at original cut. formTag hashes finite cookie handle with distinct domain for private comparison to form.handle. An entry can bind J before QA catch/return. No form body reread.",
+  "S09:103-109 transforms positive M only; rebuild residency S10:50-52. Allocate cell C for original Request P BEFORE S03. At bridge:6 bind originalLease to C; :33/35 records existing UUID. Wire:31 maps original deadline/abort error to exact originalLease/C before original reject. At :36-38 validate single q1 on ACTUAL non-ok stub response: exact J, status and grammar. Then bind {D,C,innerValidated,qaStatus} to error D made from that Response. Same fail/cancel whether valid or absent. Original race/order/first/cancel/waitUntil/retention unchanged.",
+  "Bridge:44 pending B → {P,C,J,winner,innerValidated,qaStatus}. V for caught===defined C.D with validated q1, S for same D without validation, L only if exact caught object's lease/C match, else U. S03 outer adapter calls original once; attach nonthrowing fulfillment tap before returning ORIGINAL promise. After parent.finish require actual B + original P + same captured C + unused record. Add single x-afw-lab-m-denial=o1.J.M.W.I to same B only on success; M=actual outer status, W=V/S/L/U, I=QA status for V else 0. Require absent field, mutable fresh B, successful readback, tap before serialization. Poison foreign/reused/colliding objects; no clone/rethrow/extra await. If tap or header write fails preserve original fulfillment/rejection and body. No marker on fallback. Gate with positive order evidence on both hops."
+ ],
+ "join": "Host requires canonical single o1 on exact DROP Response, host status=M, J/formTag match independent unique pre-cut actor entry. Local site needs returned Q + E.qaEgress. publicSite requires W=V + E.qaStatus=I + mapped QA site + both transport gates. W=S means owned stub denial only. W=L proves M deadline/abort even with no timely QA catch if entry joined. No first-vs-actual inference if both carry D. Missing forward/cut, duplicate/mismatch/late or incomplete proof => UNKNOWN for affected axis.",
+ "sites": "Exact generated throw+caller only: S01:247 consumeTicket not recorded → ticket audit; S00:743 finite prerequisites → prerequisite census; S04:37 scope key exists → restore/overlap; S04:43 missing/mismatched final readback → audit dropped write vs aggregate attribution. S00:747 is distinct. No operand inference or repair absent reproduced invariant. Deadline directs cost audit within existing leases.",
+ "compiler": "Future private GHA helper: materialize verified BASE + Source13 + approved fixture transforms, frozen lock 36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b/esbuild 0.28.2. Real S10:29 first-connection-publication,{coupledStages:true}, provisional dummy MF/getBindings/ns.idFromName :44-49 and normal M/program/bootstrap/dated approval. Stop after :129 before mount/seed/dispatch; dispose MF in finally. No budgetCompileOnly modeled IDs. Same harness, ONE memoized prepared entry/defines/onLoads/resolution for ordinary and external-map builds (write:false, explicit sibling outfile,sourcesContent:false). Select unique JS/map by path, require JS bytes/length/SHA256 identical. Recheck per occurrence QA and positive M residency equal actual mounted bytes. Bind exact script, throw+caller spans, zero/one bases and UTF-16 columns. Sidecar stays in job scratch.",
+ "matrix": [
+  "OFF unchanged. ON: two positive site anchors, exact Q→M→host incl normalized 5xx; compare all original headers/body/status/counters/teardown except reserved headers. S00:747 adjacent, shared fail, foreign/truncated frames => unmapped.",
+  "QA missing/stripped/swapped/stale/duplicate/combined marker, status changed, same-status stub fallback, response from S02 finalizer, collision or immutable headers => no V attribution. A fallback copying all valid fields requires UNKNOWN under unsupported transport, even if tests are green.",
+  "Q registration under old E, duplicate actor request, restore then re-arm with late callback, wrong form/ID/holder; crossed M cell/lease/error, foreign already-marked B, repeated egress, S03 parent.finish throw/substitute, stripped/laundered outer => reject affected axis. Explicit controlled adapters exercise before-serialization positive and both mark-too-late negatives.",
+  "Tag M deadline winning before QA settlement, same-status D rejected later, inverse order D wins with cancellation pending. No new await/poll/drain/RPC. Seal even when original puts assertion throws."
+ ],
+ "release": "Stop before business unless same-byte maps show ≥2 distinct sites, native response order/closed transport and privacy fixtures pass independently. Rollback by discarding only fixture overlays. Source13, D07/registration/order20/core3203, guards/clocks/caps/cleanup frozen. Source/OWN4of5 no reset. SourceQualified, Task1Pass and all seven checkpoint nonclaims false.",
+ "output": "Outer enums only {case:'15:firstDROP',site:allowed|UNKNOWN,outer:QA_MARKED_STUB_NON_OK|STUB_NON_OK|DEADLINE_OR_ABORT|UNKNOWN,publicSite:allowed|UNKNOWN}. Freeze before puts assertion. No IDs/digests/headers/frames/maps in outer artifacts/logs/errors. No additional RPC/snapshot/wait/window/permission.",
+ "delta": "P1-1 adds QA→M marked-value validation before D. P2-1 binds QA to Request/epoch and M to Request/lease/cell/Response, once. v1's UUID-only causal join is retired.",
+ "transport": "For each pinned Miniflare/workerd hop, verify single writer, fixed route, no synthesis, replay, fallback copying or reuse of old marked responses, via transport/error-path review and controls. Normal serialization preserving fields proves value provenance. A fabricated response copying valid fields is indistinguishable; if not excluded, publicSite=UNKNOWN; downgrade V to STUB_NON_OK if QA→M unsupported, outer=UNKNOWN if M→host unsupported. No cross-isolate object identity, body equality or authentication."
+}
