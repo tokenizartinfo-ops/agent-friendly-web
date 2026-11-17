@@ -1,0 +1,101 @@
+{
+  "schema": "AFW-DIAG2-OWN42-FIX1-ROOT-NATIVE-GATE/1",
+  "timestampUTC": "2026-11-17 01:53:35 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHubActions Ubuntu24.04 Node22.23.4 independentOWNsyntheticmodels",
+  "resourceType": "One-use native receiver validation labbranchpush",
+  "resourceId": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+  "allowedAction": "Rootcreatefreshbranchonceat exactpreparedhead; observeNative42/44modeledevaluations, preservePrimary/proof andcloseonlyWFwithindependentreadback. NativefreshreviewbeforeanySourcebusiness.",
+  "authority": [
+    "ccf33edb19d3971a8182c78200330ba9bff0fb4f",
+    "65040ab43351c843e9f5252910bf24f30f896eba"
+  ],
+  "index": "88caab27a1024a0c8e30eed5f58a8eac7f347260",
+  "graph": {
+    "blob": "5eeb7f6370b9a1dcf678e7717ce60e084d08f619",
+    "bytes": 21643,
+    "sha256": "10656580bb8a51f1306bcc6be46192e1537a5e0634c35eeb6ec45cd70da1c450",
+    "gitSha": "5eeb7f6370b9a1dcf678e7717ce60e084d08f619",
+    "fullReadback": true
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+    "message": "AFW-C2-OWN-FIRST-FAILURE-POST-DIAG2-FIX1-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-first-failure-post-diag2-fix1.yml",
+    "job": "c2-own-first-failure-post-diag2-fix1",
+    "prefix": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/",
+    "artifact": {
+      "name": "afw-c2-own-first-failure-post-diag2-fix1",
+      "path": "output/c2-own-first-failure-post-diag2-fix1.json",
+      "fileName": "c2-own-first-failure-post-diag2-fix1.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "ubuntu": "24.04",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "permissions": "contentsread",
+    "attempt": 1,
+    "npm": false
+  },
+  "head": "82451b46e44ed999ea57ceb64605857a1722f1bf",
+  "tree": "8f05780be2a466a1bfccb37dae61864d1d2e2496",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "originals": 3203,
+  "additions": 64,
+  "leaves": 3267,
+  "proofSchema": "7c279e0c77814a6f496ead2394c5d8f6a7e3c490",
+  "expected": {
+    "nativeCases": 42,
+    "receiverEvaluations": 44,
+    "admit": 21,
+    "reject": 23,
+    "allPass": true,
+    "noSkipTodoCancel": true
+  },
+  "preflight": {
+    "all64FullBytesShaAndGitChecked": true,
+    "nontruncatedExactOriginal3203Plus64": true,
+    "new64BeforeAbsent": true,
+    "mainAndHistoryLeasesMatch": {
+      "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+      "source": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "diag1": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b",
+      "host": "1f62e087f0d9000f9c08519cd162db1104827af8",
+      "toy": "5f5295265217b31a19fbed2379f697c5a6a83080",
+      "source35": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+    },
+    "exactBranchAbsent": true,
+    "headRuns": 0,
+    "RootIndependent44OwnRAMPass": true,
+    "first40LiteralBytesIdsExpectedPreserved": true,
+    "fourFullAppendixInputsSealedBeforeFix": true,
+    "minimalFixExactlyOne45ByteLine": true,
+    "noSourceCodeEvaluatedOrImported": true
+  },
+  "review": "Rootstaticfullrunner/WF/controls+allOWNguard+separateactualMODELbindingreview completed. Freshstaticreviewinprogresswithnomaterialpreliminaryfindings; RootactualNativefreshreviewmandatoryafterPrimary, priorSourcebusinessheld. Authorfinalreport/reversibledocumentationpendingdoesnotchangefrozen64code/data pins; allbeforeimagesandafterimagesalreadyRootpreserved.",
+  "moduleBoundary": "7OWNcodefiles+44completeinputfixtures andfrozenJSONDATA; noSourcehelpers/business/SDK/M/QAimports. TwoentrypointsONEguardfixedactual25vsMODELED25 beforeAPI, nativeonlyd2ModelRead.",
+  "triggerAudit": {
+    "reuse": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "allOriginalWorkflowLeavesUnchanged": true,
+    "newOnly": ".github/workflows/afw-c2-own-first-failure-post-diag2-fix1.yml",
+    "exactRepoEventBranchMessageAttempt1": true,
+    "noScheduleDispatchCreate": true
+  },
+  "reversible": "All64arebefore=null add exactafterimage blobs underexplicitnewprefix+WF. Fullreversal (notinvoked): verifyall64afterimage/modes thenomitonly64 torecoverexactBASE3203; preserveotherlegitimatefiles. Normaloneuseclosure: CASat exacthead deleteONLYWF andaddPrimary+closeReceipt; verify3203+63+2=3268,oldhistoryrefs/mainunchanged,0closedheadruns. No actualprovider/runtimechange.",
+  "guards": "CanonicalLFproof<=24576 ZIP1MiB/log4MiB; noauthrenewal/OTP/userrequests, ownerunavailablebefore2026-11-17T11:00:00Z. NoSourcebusiness trial releasedbythisgate.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
