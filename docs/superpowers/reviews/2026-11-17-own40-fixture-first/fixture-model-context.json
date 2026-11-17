@@ -1,0 +1,722 @@
+{
+  "schema": "AFW-DIAG2-OWN-FIXTURE-MODEL-CONTEXT/1",
+  "syntheticOnly": true,
+  "actualSourceBinding": false,
+  "actualExpectedSourceContext": null,
+  "authority": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+  "acceptedSource13": {
+    "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+    "bytes": 11467,
+    "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7",
+    "triples": [
+      {
+        "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+        "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210",
+        "bytes": 148547
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+        "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9",
+        "bytes": 45576
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+        "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8",
+        "bytes": 2497
+      },
+      {
+        "path": "worker/mcp-own/finite.mjs",
+        "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6",
+        "bytes": 2810
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+        "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+        "bytes": 4153
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+        "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b",
+        "bytes": 101380
+      },
+      {
+        "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+        "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4",
+        "bytes": 22501
+      },
+      {
+        "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+        "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+        "bytes": 2785
+      },
+      {
+        "path": "test/fixtures/finite-coupled-native.mjs",
+        "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e",
+        "bytes": 18667
+      },
+      {
+        "path": "test/fixtures/finite-first-connection-publication.mjs",
+        "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+        "bytes": 61073
+      },
+      {
+        "path": "test/fixtures/finite-initial-entry-world.mjs",
+        "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+        "bytes": 88713
+      },
+      {
+        "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+        "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7",
+        "bytes": 58727
+      },
+      {
+        "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+        "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8",
+        "bytes": 6030
+      }
+    ]
+  },
+  "selected": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ],
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "sourceNomination": {
+    "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+    "message": "AFW-C2-T1-FIRST-FAILURE-POST-DIAG2-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+    "job": "c2-first-failure-post-diag2",
+    "prefix": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/",
+    "runner": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+    "artifact": {
+      "name": "afw-c2-t1-first-failure-post-diag2",
+      "path": "output/c2-t1-first-failure-post-diag2.json",
+      "fileName": "c2-t1-first-failure-post-diag2.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Install only the existing locked dependencies",
+      "Observe full-order first NOTICES POST boundary",
+      "Preserve bounded first POST diagnostic"
+    ],
+    "driverSibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "activationReleased": false
+  },
+  "sourceSteps": [
+    "Read the exact one-use lab head",
+    "Use the fixed Node runtime",
+    "Install only the existing locked dependencies",
+    "Observe full-order first NOTICES POST boundary",
+    "Preserve bounded first POST diagnostic"
+  ],
+  "syntheticIds": {
+    "head": "1111111111111111111111111111111111111111",
+    "tree": "2222222222222222222222222222222222222222",
+    "runId": 99172001,
+    "jobId": 99172002,
+    "artifactId": 99172003
+  },
+  "knownCoreEdges": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+    }
+  ],
+  "familyData": {
+    "firstFailureFragment": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "AFW FIRST_FAILURE_POST_DIAG2 bounded firstFailure metadata v1",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "afw.c2-first-failure-post-diag2.v1"
+            },
+            "state": {
+              "const": "KNOWN"
+            },
+            "reason": {
+              "const": "TARGET_POST_ASSERTION"
+            },
+            "throwSequence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 128
+            },
+            "source": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "const": "C2T1_NOTICES"
+                },
+                "status": {
+                  "const": "fail"
+                },
+                "phase": {
+                  "const": "notices"
+                },
+                "counters": {
+                  "type": "object",
+                  "properties": {
+                    "upload": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 3
+                    },
+                    "activation": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 3
+                    },
+                    "receipts": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 3
+                    }
+                  },
+                  "required": [
+                    "upload",
+                    "activation",
+                    "receipts"
+                  ],
+                  "additionalProperties": false
+                },
+                "code": {
+                  "const": "TEST_FAILED"
+                }
+              },
+              "required": [
+                "id",
+                "status",
+                "phase",
+                "counters",
+                "code"
+              ],
+              "additionalProperties": false
+            },
+            "assertion": {
+              "type": "object",
+              "properties": {
+                "actual": {
+                  "type": "integer",
+                  "minimum": 100,
+                  "maximum": 599,
+                  "not": {
+                    "const": 200
+                  }
+                },
+                "expected": {
+                  "const": 200
+                }
+              },
+              "required": [
+                "actual",
+                "expected"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "schema",
+            "state",
+            "reason",
+            "throwSequence",
+            "source",
+            "assertion"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "afw.c2-first-failure-post-diag2.v1"
+            },
+            "state": {
+              "const": "UNKNOWN"
+            },
+            "reason": {
+              "enum": [
+                "JOURNAL_UNRESOLVED",
+                "TARGET_NATIVE_UNAVAILABLE",
+                "COUNTER_UNAVAILABLE",
+                "SOURCE_ROW_UNAVAILABLE",
+                "ASSERTION_SCALARS_UNAVAILABLE",
+                "UNSUPPORTED_SCALARS",
+                "NATIVE_FORMAT_UNSUPPORTED",
+                "AMBIGUOUS_EVIDENCE",
+                "CONFLICTING_EVIDENCE",
+                "TRUNCATED_NATIVE"
+              ]
+            },
+            "throwSequence": {
+              "const": null
+            },
+            "source": {
+              "const": null
+            },
+            "assertion": {
+              "const": null
+            }
+          },
+          "required": [
+            "schema",
+            "state",
+            "reason",
+            "throwSequence",
+            "source",
+            "assertion"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "const": "afw.c2-first-failure-post-diag2.v1"
+            },
+            "state": {
+              "const": "NOT_APPLICABLE"
+            },
+            "reason": {
+              "enum": [
+                "EARLIEST_THROW_DIFFERENT",
+                "EARLIER_NATIVE_FAILURE",
+                "TARGET_PASSED",
+                "NO_QUALIFYING_THROW"
+              ]
+            },
+            "throwSequence": {
+              "const": null
+            },
+            "source": {
+              "const": null
+            },
+            "assertion": {
+              "const": null
+            }
+          },
+          "required": [
+            "schema",
+            "state",
+            "reason",
+            "throwSequence",
+            "source",
+            "assertion"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "acceptedDesign": {
+      "blob": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+      "bytes": 237110,
+      "sha256": "1b99b19904c748fe7fee0afd34638470a99427b0fcf43c03ef69626e389779b1"
+    },
+    "D07": {
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    "recorder": {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/progress-recorder.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    "readProgress": {
+      "path": "docs/superpowers/source-lab/c2-t1-green-frontier-diag1/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    "outerSchema": {
+      "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb",
+      "status": "DATA_REVIEWED_PENDING_ROOT_RUNTIME_ADMISSION"
+    },
+    "selection": {
+      "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+      "bytes": 4070,
+      "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e",
+      "canonicalSha256": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc",
+      "status": "DATA_REVIEWED_PENDING_ROOT_RUNTIME_ADMISSION"
+    },
+    "runtimeProtocolData": {
+      "blob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e",
+      "bytes": 41095,
+      "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389"
+    }
+  },
+  "meaning": "OWN fixture-only contexts andAPI occurrences are synthetic2039/99...; acceptedSource13 E2 and22known Source DATA edges are explicitly pinned. Exactly3 null Source code roles in non-admissible inventory are replaced ONLY for these models by inertJSON placeholder-body hashes, not finalSource authority or implementation. Source nomination strings are proposed protocolDATA, no activation/ref/run asserted. Guard/parser remain held.",
+  "orderedBodyModelDraft": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-08.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "de8a51e5a6023342b1b3aeccadf66e90611d268f",
+      "bytes": 18667,
+      "sha256": "ac74be106ec36a0dd093cfb542ba2e8dd2220ae89c8c49879b20c1910bbcb71e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-09.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-10.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5a554a8fb75439f1549d03baf29be09572fdddac",
+      "bytes": 4070,
+      "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "90e52e44f2364355c6a25daccb4684ed41ba0f7e",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e",
+      "bytes": 41095,
+      "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": null,
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/diagnostic-driver.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/progress-recorder.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/run-first-failure-post-diag2.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": null,
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "path": ".github/workflows/afw-c2-first-failure-post-diag2.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": null,
+      "bytes": null,
+      "sha256": null
+    }
+  ],
+  "sourceBodyDraft": {
+    "blob": "932a26178e388620d47e91b71384b8537860be18",
+    "bytes": 16604,
+    "sha256": "16ff4326a8c05404148a162e2b594447a928b35a55006fb7d9577a4135111a62",
+    "status": "NON_ADMISSIBLE_DRAFT_22_KNOWN_3_NULL_SOURCE_CODE",
+    "actualExpectedContext": null
+  }
+}

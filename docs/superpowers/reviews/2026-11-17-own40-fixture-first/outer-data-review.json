@@ -1,0 +1,69 @@
+{
+  "schema": "AFW-DIAG2-OWN-OUTER-DATA-COMPATIBILITY/1",
+  "status": "DATA_COMPATIBLE_ROOT_ADMISSION_PENDING_NO_CODE",
+  "authority": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+  "fullHashes": [
+    {
+      "key": "selection",
+      "bytes": 4070,
+      "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e",
+      "gitSha": "5a554a8fb75439f1549d03baf29be09572fdddac"
+    },
+    {
+      "key": "outerSchema",
+      "bytes": 26400,
+      "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb",
+      "gitSha": "90e52e44f2364355c6a25daccb4684ed41ba0f7e"
+    },
+    {
+      "key": "protocol",
+      "bytes": 41095,
+      "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389",
+      "gitSha": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e"
+    },
+    {
+      "key": "orderedSourceDraft",
+      "bytes": 16604,
+      "sha256": "16ff4326a8c05404148a162e2b594447a928b35a55006fb7d9577a4135111a62",
+      "gitSha": "932a26178e388620d47e91b71384b8537860be18"
+    }
+  ],
+  "canonicalSelection": {
+    "bytes": 3317,
+    "sha256": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc",
+    "gitSha": "49802480de9b924e97f89ff21bf09719a771c022"
+  },
+  "firstFailureComponentSha256": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+  "source13ArraysMatchE2": true,
+  "selected20Match": true,
+  "legacySchema": "eda6cb5b77fc0eec5fd100fbd7e2aefaef0c9edc",
+  "deltaPaths": [
+    "title",
+    "$defs.context.properties.sourceIndexBlob.const",
+    "$defs.context.properties.proposalIndexHash.const",
+    "$defs.context.properties.selectionHash.const",
+    "$defs.context.properties.job.const",
+    "$defs.custody.properties.schema.const",
+    "$defs.observation.properties.firstFailure",
+    "$defs.observation.required",
+    "$defs.outcome.properties.schema.const",
+    "$defs.fault.properties.schema.const",
+    "$defs.sourceReads.properties.beforeSha256.const",
+    "$defs.sourceReads.properties.afterSha256.const",
+    "$defs.firstFailure"
+  ],
+  "finding": "No relaxed inherited definitions found in JSON DATA delta. Only family/context/E2/selection/job/constants, S10 arrays and required firstFailure addition. State semantics/key order/512B and actual!=200 need explicit later OWN semantic checks; JSON schema alone cannot authenticate private inputs.",
+  "sourceDraft": "932a26178e388620d47e91b71384b8537860be18",
+  "known22": true,
+  "threeUnboundRoles": [
+    "collection-adapters.mjs",
+    "run-first-failure-post-diag2.mjs",
+    ".github/workflows/afw-c2-first-failure-post-diag2.yml"
+  ],
+  "runtimeBindingsAdmissible": false,
+  "sourceCodeExecuted": false,
+  "ownReceiverExecuted": false,
+  "nativeRuns": 0,
+  "SourceQualified": false,
+  "Task1Pass": false
+}

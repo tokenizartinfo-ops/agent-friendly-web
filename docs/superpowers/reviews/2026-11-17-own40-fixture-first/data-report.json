@@ -1,0 +1,174 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-OWN-FIXTURE-FIRST-REPORT/1",
+  "status": "40_LITERAL_DATA_COMPLETE_GUARD_AND_NATIVE_HELD",
+  "authority": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+  "acceptedDesign": "61785e34b1e47a007ef8dfc604eb4b653eb56fb4",
+  "prefix": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fixture-first/",
+  "fixtureFirst": {
+    "idsExpected": {
+      "blob": "e4c75949c6849b2fd8f83d8ca34ad6f526d39f78",
+      "bytes": 15285,
+      "sha256": "e80ce661bce5f4e396a28fa39e4073eee84ebb675b0157678d2142b4e3511627",
+      "gitSha": "e4c75949c6849b2fd8f83d8ca34ad6f526d39f78",
+      "fullReadback": true
+    },
+    "creationOrder": [
+      "IDs and literal scalar/counter/state expectations e4c75949 sealed+FULLreadback",
+      "model context/admission and materializer DATA",
+      "40 full immutable input/trusted/expected/witness literals",
+      "byte audit/report/index"
+    ],
+    "count": 40,
+    "uniqueIds": 40,
+    "expectedAdmit": 19,
+    "expectedReject": 21,
+    "expectedStates": {
+      "KNOWN": 6,
+      "NOT_APPLICABLE": 6,
+      "UNKNOWN": 7
+    },
+    "behavioralControlsExecuted": 0,
+    "literalUtf8Bytes": 2550722,
+    "sourceCorpus35CountedAsOwn": false,
+    "legacy124or419Rerun": false
+  },
+  "completeness": {
+    "eachFixture": "Full six-key input[run,jobs,commit,tree,transport,artifact], separate three-key trusted[expected,bodyEdges,bodyEdgesHash], expected sealed result and fixture-only synthetic child/journal bytes. Two canonical markers, embedded custody match, exact outcomeJSON+LF, actual raw ZIP bytes/base64 with listing size/digest/CRC/method/DD fields. No mutation recipe is needed to read a literal.",
+    "authority": "Root expected stays separate from candidate. F01 refreshes all candidateAPI/head/tree/frames/artifact while trusted expected remains original; F02 raw tree duplicate; F03 markers outside actual command interval; F04 custody2 violation; F05 afterTARGET13 drift; F06 exactpayload/digest/CRC but four trailing compressedbytes.",
+    "context": "2039-07-08 and99172001/99172002/99172003; head111.../tree222... fictional. Proposed Source nomination strings come from read-only protocolDATA; no actual ref/run/job is claimed. actualExpectedSourceContext:null in fixture and modelAdmission.",
+    "treeLimit": "Synthetic raw tree has25 bodyedges+canonicalBASE S09. It exercises complete OWN API25join; it is not the actual3228-leaf Source tree and does not prove3203BASE preservation. That remains independent Root static admission."
+  },
+  "sourceData": {
+    "acceptedRoot": "55e95b5018e7fef76caeef64f2982e504a5e7a60",
+    "source13": {
+      "blob": "e2ca46e8ecf98dd0d87f148068dd240b147db1ec",
+      "bytes": 11467,
+      "sha256": "87049774b9728c99aa85c6a1d3eea5a16dc6e3412dea9f41a0cca984ee5325d7"
+    },
+    "S10": {
+      "blob": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa"
+    },
+    "other12Exact": true,
+    "sourceDesign": {
+      "full": {
+        "bytes": 237110,
+        "sha256": "1b99b19904c748fe7fee0afd34638470a99427b0fcf43c03ef69626e389779b1",
+        "gitSha": "8e30344042e65b888d1f912a9a375d365f3e5c4e"
+      },
+      "schema": "012c2fcc1bc208fea6a442d798577f5668e2dec7e96c61eae44ccc6218a8545d",
+      "corpus": "15d470df5e7ed5350bdedb333236f648c86e69c844e5784d1d8478f6ebac5aaf",
+      "toy": "988b241402d628d86c1a2513af80ba14be22540cc2c97925e8e81837f4ee5d69"
+    },
+    "protocolData": [
+      {
+        "key": "protocol",
+        "bytes": 41095,
+        "sha256": "7244fde1d8383114022831038fb242e76e9fb26526f3b3f6be57f8236771d389",
+        "gitSha": "59ab8f6af35f43807ba68084dd6bcdc09f649d0e"
+      },
+      {
+        "key": "orderedSourceDraft",
+        "bytes": 16604,
+        "sha256": "16ff4326a8c05404148a162e2b594447a928b35a55006fb7d9577a4135111a62",
+        "gitSha": "932a26178e388620d47e91b71384b8537860be18"
+      }
+    ],
+    "outerData": [
+      {
+        "key": "selection",
+        "bytes": 4070,
+        "sha256": "7c49cca538925c8da454f82b0f35468bbdcd5577c05893966f91719064df822e",
+        "gitSha": "5a554a8fb75439f1549d03baf29be09572fdddac"
+      },
+      {
+        "key": "outerSchema",
+        "bytes": 26400,
+        "sha256": "9b325f9aff785f6861c436f8a84b3bb65ea0ed8c2c57a2ec819f5cd153b8b2eb",
+        "gitSha": "90e52e44f2364355c6a25daccb4684ed41ba0f7e"
+      }
+    ],
+    "canonicalSelectionSha256": "b1f3468699c1a8d5ed22fe3b618727ae549ba1634859356e43ec82f941e27afc",
+    "bodyAdmission": "22 Source DATA edges known; exactly3 future code roles replaced ONLY in models by measured inertJSON placeholder bytes, never Source code/finalpins. No null wildcard runtime admission. Real final25code/bodyhash/context remains Root future.",
+    "modelAdmission": {
+      "blob": "bd72d6f0e42b5c830241ae3d66ef331bbe39381a",
+      "bytes": 25702,
+      "sha256": "ecd30f43e0b09d66a5b95e9336717960af5d33dba011bae62d7e4f97e4e5df79",
+      "gitSha": "bd72d6f0e42b5c830241ae3d66ef331bbe39381a"
+    }
+  },
+  "semantics": {
+    "prefix": "K06 preserves exact candidate46/count48 and native first11PASS even with a later torn journal suffix. Outer firstThrow46 remains; KNOWN scope is validated-prefix evidence only. Missing candidate/counter/native/scalars yields null UNKNOWN.",
+    "noThrow": "A02 deliberately has cleancomplete20+AFTER with returned action/count and framework nativeFAIL12; FAILwithreturns is valid and avoids higher-priority TARGET_PASSED, permitting NO_QUALIFYING_THROW. A01 is separate nativePASS12+returns. Expectations were sealed first and unchanged.",
+    "counters": "Only each0..3. K05 literal[upload0,activation3,receipts1] prevents invented hierarchy. No EXTRA_KEY/deltas/causality/receipt authentication or effect-absence claim.",
+    "rawBoundary": "Fixture synthetic stdout/journal are byte-provenance DATA outside receiver input, never an oracle for actual private rawTAP. OWN joins safe projection with journal/native/API/Git/ZIP. It cannot authenticate omitted private duplicates or a coherent503->429 rewrite."
+  },
+  "byteAudit": {
+    "artifact": {
+      "blob": "aad2a7657d25220f4ffb8e6be5cc0c13bfc7ef45",
+      "bytes": 17415,
+      "sha256": "33203432e04674b0423bd4dc733e805032abc1f63dd338dec06d690ced5c74bc",
+      "gitSha": "aad2a7657d25220f4ffb8e6be5cc0c13bfc7ef45"
+    },
+    "operations": "JSON/string/UTF8/hash/CRC/builtin compression/decompression only. No receiver acceptance or Source projection code executed.",
+    "all40PayloadArchiveListingCrcMatch": true,
+    "maxPayloadIncludingLF": 13955,
+    "maxFirstFailureBody": 327,
+    "F06": {
+      "compressedBytes": 2899,
+      "builtinConsumedBytes": 2895,
+      "trailingBytes": 4,
+      "crcPayloadDigestStillMatch": true
+    },
+    "zipPositiveVariants": "K01 signed DD/zero locals; K02 stored method0 version10/noDD; K03 unsignedDD; K05 deflate/noDD; K06 DD equal local fields. No production ZIP guard was run."
+  },
+  "implementation": {
+    "guardCodeProduced": false,
+    "ownReceiverExecuted": false,
+    "sourceParserCollectorExecuted": false,
+    "sourceImportsEvalCompileSyntax": false,
+    "materializerData": {
+      "blob": "fb038595c97b087ee97a5ddd47a5471253339083",
+      "bytes": 14551,
+      "sha256": "7de03b8404b818bec28e4092e31d9aa98435aeea161210e31b5766938ab42171",
+      "gitSha": "fb038595c97b087ee97a5ddd47a5471253339083"
+    },
+    "modelMaterializerInvocationsForData": 80,
+    "note": "Only OWN synthetic literal/container authoring ran in bounded RAM with builtin crypto/zlib; materializer has no Source or receiver imports, IO, services or business calls. No model/parser/module dependency installed, no filesystem written.",
+    "refsOrRunsOrWorkflowCreated": false,
+    "nativeRuns": 0,
+    "sourceBusinessExecution": false,
+    "literalAuthoringPasses": 2,
+    "authoringNote": "Two RAM-only DATA authoring generations of40 occurred before literal publication: initial draft, then A02 priority correction and removal of redundant witness objects. Only final40 literal bodies were published. These are not acceptance tests."
+  },
+  "preservation": {
+    "newAdditionsOnly": true,
+    "beforeimages": "Every proposed path is new(before:null); full afterimage blobs and hashes in index. Legacy225/370/419/124, Source13 history,c230,M/QA/Core and closed receipts not edited.",
+    "rollback": "No refs were written. Root may omit this proposed new prefix from later manifests; existing paths and historical objects need no mutation."
+  },
+  "pending": [
+    "Root actual C1toy format admission/freshreview",
+    "Root outer protocol/schema/selection reconciliation and explicit guard release",
+    "Final3Sourcecodepins and exact final25bodyadmission measured byRoot; no placeholder may admit actualSource",
+    "New OWN guard implementation/RAM/nativegraph/proof/runner/WF and freshreview only after explicit release",
+    "ActualSource occurrence head/tree/run/job caller-bound byRoot when they exist; new business trial remains unauthorized"
+  ],
+  "actualSourceExecution": false,
+  "finalSourceBinding": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  },
+  "supersedes": {
+    "blob": "05fbdb22d940b8d32af5e2d352f5040f11c4c3e8",
+    "reason": "Metadata accuracy only: record both DATA authoring generations, not just the final40. No fixture/ID/expectation/builder or Source code changed."
+  }
+}
