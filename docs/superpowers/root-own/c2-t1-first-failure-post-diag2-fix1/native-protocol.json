@@ -1,0 +1,86 @@
+{
+  "schema": "AFW-DIAG2-OWN-FIX1-NATIVE-CONTRACT/1",
+  "authority": "ccf33edb19d3971a8182c78200330ba9bff0fb4f",
+  "entrypointAuthority": "65040ab43351c843e9f5252910bf24f30f896eba",
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+    "message": "AFW-C2-OWN-FIRST-FAILURE-POST-DIAG2-FIX1-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-first-failure-post-diag2-fix1.yml",
+    "job": "c2-own-first-failure-post-diag2-fix1",
+    "prefix": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/",
+    "artifact": {
+      "name": "afw-c2-own-first-failure-post-diag2-fix1",
+      "path": "output/c2-own-first-failure-post-diag2-fix1.json",
+      "fileName": "c2-own-first-failure-post-diag2-fix1.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "ubuntu": "24.04",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "permissions": "contentsread",
+    "attempt": 1,
+    "npm": false
+  },
+  "native": {
+    "ids": 42,
+    "receiverEvaluations": 44,
+    "expectedAdmit": 21,
+    "expectedReject": 23,
+    "caseMs": 10000,
+    "guard": "d2ModelRead",
+    "onlyModels": true
+  },
+  "actualGuard": "d2Read; fixed Root actual25, separate actual caller context only when known; Native42 does not qualify it",
+  "proof": {
+    "schema": "afw.own-first-failure-post-diag2-fix1.native-proof.v1",
+    "marker": "AFW_C2_OWN_FIRST_FAILURE_POST_DIAG2_FIX1_PROOF",
+    "canonicalLFBytes": 24576,
+    "zipBytes": 1048576,
+    "logBytes": 4194304,
+    "artifact": {
+      "name": "afw-c2-own-first-failure-post-diag2-fix1",
+      "path": "output/c2-own-first-failure-post-diag2-fix1.json",
+      "fileName": "c2-own-first-failure-post-diag2-fix1.json",
+      "retentionDays": 7
+    }
+  },
+  "fixedInputs": {
+    "original40": "394f7dde265fb7b3c3b5de26cede262c6f744daa",
+    "expected42": {
+      "blob": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+      "bytes": 2415,
+      "sha256": "80b57fb40df747a1ce06acd1879502bcdf2bf70aaebe6e9253d0e19bfa24b8af",
+      "gitSha": "38de54ccb64b006440a0a6c4a1d01e396732fec2",
+      "fullReadback": true
+    },
+    "appendixBeforeFix": {
+      "blob": "b362aa0310f9f1e34f488343bf206eaf17cd6ea4",
+      "bytes": 3550,
+      "sha256": "0dc50c6be8e36a945999707db01889bd59a1cc5efc211dc0e3b5d8e89a71c584",
+      "gitSha": "b362aa0310f9f1e34f488343bf206eaf17cd6ea4",
+      "fullReadback": true
+    },
+    "actual25": "18e2c9be3dc942d82e23ab7505d4e9a6b9b6a4a8",
+    "actualHash": "d11f63d57ea36fdc9a7509ecec33b3611fe95be8197294ae7820b421394313bf",
+    "model25": "bd72d6f0e42b5c830241ae3d66ef331bbe39381a"
+  },
+  "rules": [
+    "One exact common guard and two closed entrypoints; body set checked before API. No fallback/config override/outcome-selected authority.",
+    "All42 Node native groups execute44 original receiver evaluations; pair groups each KNOWNreject and correspondingUNKNOWNadmit; first40 literal bytes/IDs/expected unchanged.",
+    "Node22.23.4 Ubuntu24.04 contentsread attempt1 job3min no npm. Source programs/helpers/producers never imported/evaluated or syntax-checked. Original Source RAW TAP absent; synthetic fixture buffers are DATA only.",
+    "Proof counts actual callbacks/evaluations; Root independently joins API/head/tree/step and TAP42 IDs/order/counts, artifactZIP/digest/CRC/full consumption. Author creates no refs/runs.",
+    "Receiver scopes remain diagnostic only; no cause/receipt/global drainage/PCoff/Source qualification claims."
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

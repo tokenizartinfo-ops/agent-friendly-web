@@ -1,0 +1,38 @@
+name: DIAG2 fix1 independent OWN model controls
+on:
+  push:
+    branches:
+      - lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1
+permissions:
+  contents: read
+jobs:
+  c2-own-first-failure-post-diag2-fix1:
+    if: >-
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'AFW-C2-OWN-FIRST-FAILURE-POST-DIAG2-FIX1-ONEUSE-20261117'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Read exact one-use OWN head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Use fixed Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+      - name: Verify 42 independent modeled groups and 44 evaluations
+        shell: bash
+        run: node --test --test-reporter=tap --test-concurrency=1 docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/run-controls.mjs
+      - name: Preserve bounded OWN proof
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-c2-own-first-failure-post-diag2-fix1
+          path: output/c2-own-first-failure-post-diag2-fix1.json
+          if-no-files-found: error
+          retention-days: 7

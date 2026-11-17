@@ -1,0 +1,275 @@
+{
+  "schema": "afw.own-first-failure-post-diag2-fix1.selection.v1",
+  "authority": "ccf33edb19d3971a8182c78200330ba9bff0fb4f",
+  "entrypoint": "d2ModelRead",
+  "modelsOnly": true,
+  "nativeCount": 42,
+  "receiverEvaluations": 44,
+  "expectedAdmit": 21,
+  "expectedReject": 23,
+  "groups": [
+    {
+      "id": "OWN_D2_K01",
+      "fixtures": [
+        "fixtures/OWN_D2_K01.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_K02",
+      "fixtures": [
+        "fixtures/OWN_D2_K02.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_K03",
+      "fixtures": [
+        "fixtures/OWN_D2_K03.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_K04",
+      "fixtures": [
+        "fixtures/OWN_D2_K04.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_K05",
+      "fixtures": [
+        "fixtures/OWN_D2_K05.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_A01",
+      "fixtures": [
+        "fixtures/OWN_D2_A01.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_A02",
+      "fixtures": [
+        "fixtures/OWN_D2_A02.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_A03",
+      "fixtures": [
+        "fixtures/OWN_D2_A03.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_A04",
+      "fixtures": [
+        "fixtures/OWN_D2_A04.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_A05",
+      "fixtures": [
+        "fixtures/OWN_D2_A05.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_A06",
+      "fixtures": [
+        "fixtures/OWN_D2_A06.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_U01",
+      "fixtures": [
+        "fixtures/OWN_D2_U01.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_U02",
+      "fixtures": [
+        "fixtures/OWN_D2_U02.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_U03",
+      "fixtures": [
+        "fixtures/OWN_D2_U03.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_U04",
+      "fixtures": [
+        "fixtures/OWN_D2_U04.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_U05",
+      "fixtures": [
+        "fixtures/OWN_D2_U05.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_U06",
+      "fixtures": [
+        "fixtures/OWN_D2_U06.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_K06",
+      "fixtures": [
+        "fixtures/OWN_D2_K06.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_U08",
+      "fixtures": [
+        "fixtures/OWN_D2_U08.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R01",
+      "fixtures": [
+        "fixtures/OWN_D2_R01.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R02",
+      "fixtures": [
+        "fixtures/OWN_D2_R02.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R03",
+      "fixtures": [
+        "fixtures/OWN_D2_R03.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R04",
+      "fixtures": [
+        "fixtures/OWN_D2_R04.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R05",
+      "fixtures": [
+        "fixtures/OWN_D2_R05.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R06",
+      "fixtures": [
+        "fixtures/OWN_D2_R06.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R07",
+      "fixtures": [
+        "fixtures/OWN_D2_R07.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R08",
+      "fixtures": [
+        "fixtures/OWN_D2_R08.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R09",
+      "fixtures": [
+        "fixtures/OWN_D2_R09.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R10",
+      "fixtures": [
+        "fixtures/OWN_D2_R10.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R11",
+      "fixtures": [
+        "fixtures/OWN_D2_R11.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R12",
+      "fixtures": [
+        "fixtures/OWN_D2_R12.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R13",
+      "fixtures": [
+        "fixtures/OWN_D2_R13.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R14",
+      "fixtures": [
+        "fixtures/OWN_D2_R14.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_R15",
+      "fixtures": [
+        "fixtures/OWN_D2_R15.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_F01",
+      "fixtures": [
+        "fixtures/OWN_D2_F01.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_F02",
+      "fixtures": [
+        "fixtures/OWN_D2_F02.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_F03",
+      "fixtures": [
+        "fixtures/OWN_D2_F03.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_F04",
+      "fixtures": [
+        "fixtures/OWN_D2_F04.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_F05",
+      "fixtures": [
+        "fixtures/OWN_D2_F05.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_F06",
+      "fixtures": [
+        "fixtures/OWN_D2_F06.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_NATIVE_AMBIGUOUS_PAIR",
+      "fixtures": [
+        "appendix/OWN_D2_NATIVE_AMBIGUOUS_PAIR_KNOWN_REJECT.json",
+        "appendix/OWN_D2_NATIVE_AMBIGUOUS_PAIR_UNKNOWN_ADMIT.json"
+      ]
+    },
+    {
+      "id": "OWN_D2_NATIVE_TORN_PAIR",
+      "fixtures": [
+        "appendix/OWN_D2_NATIVE_TORN_PAIR_KNOWN_REJECT.json",
+        "appendix/OWN_D2_NATIVE_TORN_PAIR_UNKNOWN_ADMIT.json"
+      ]
+    }
+  ],
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

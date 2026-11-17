@@ -1,0 +1,544 @@
+{
+  "schema": "AFW-FIRST-FAILURE-POST-DIAG2-OWN-FIXTURE-FIRST-IDS/1",
+  "authority": "44e29410ae8b74c762a9b22ca278f00dd24fb301",
+  "sourceDesign": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+  "acceptedCensus": "e01fc7fa1737d6498b70fc866a41ab64ae04c345",
+  "status": "LITERAL_EXPECTATIONS_SEALED_BEFORE_GUARD",
+  "caseCount": 40,
+  "accepted": 19,
+  "rejected": 21,
+  "cases": [
+    {
+      "id": "OWN_D2_K01",
+      "model": "503 with counters [2,2,2]; eligible earliest NOTICES action; native fail ordinal12/count return; timeout prefix19 and case20 open",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "KNOWN",
+        "firstFailureReason": "TARGET_POST_ASSERTION",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": {
+        "actual": 503,
+        "expected": 200,
+        "counters": {
+          "upload": 2,
+          "activation": 2,
+          "receipts": 2
+        }
+      }
+    },
+    {
+      "id": "OWN_D2_K02",
+      "model": "429 with [1,1,1]; no comparison with EXTRA_KEY",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "KNOWN",
+        "firstFailureReason": "TARGET_POST_ASSERTION",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": {
+        "actual": 429,
+        "expected": 200,
+        "counters": {
+          "upload": 1,
+          "activation": 1,
+          "receipts": 1
+        }
+      }
+    },
+    {
+      "id": "OWN_D2_K03",
+      "model": "500 with [2,1,1]; partial aggregate effects remain observable",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "KNOWN",
+        "firstFailureReason": "TARGET_POST_ASSERTION",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": {
+        "actual": 500,
+        "expected": 200,
+        "counters": {
+          "upload": 2,
+          "activation": 1,
+          "receipts": 1
+        }
+      }
+    },
+    {
+      "id": "OWN_D2_K04",
+      "model": "599 with [3,3,3]; inclusive scalar/counter upper bounds",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "KNOWN",
+        "firstFailureReason": "TARGET_POST_ASSERTION",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": {
+        "actual": 599,
+        "expected": 200,
+        "counters": {
+          "upload": 3,
+          "activation": 3,
+          "receipts": 3
+        }
+      }
+    },
+    {
+      "id": "OWN_D2_K05",
+      "model": "400 with [0,3,1]; independently bounded counters; no invented ordering relation",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "KNOWN",
+        "firstFailureReason": "TARGET_POST_ASSERTION",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": {
+        "actual": 400,
+        "expected": 200,
+        "counters": {
+          "upload": 0,
+          "activation": 3,
+          "receipts": 1
+        }
+      }
+    },
+    {
+      "id": "OWN_D2_A01",
+      "model": "NOTICES native pass, action/count return",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "NOT_APPLICABLE",
+        "firstFailureReason": "TARGET_PASSED",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_A02",
+      "model": "clean complete journal all20 plus AFTER with no qualifying throw",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "NOT_APPLICABLE",
+        "firstFailureReason": "NO_QUALIFYING_THROW",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_A03",
+      "model": "earliest throw belongs to another case",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "NOT_APPLICABLE",
+        "firstFailureReason": "EARLIEST_THROW_DIFFERENT",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_A04",
+      "model": "earliest throw is count rather than action",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "NOT_APPLICABLE",
+        "firstFailureReason": "EARLIEST_THROW_DIFFERENT",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_A05",
+      "model": "earlier native failure despite earliest journal throw at NOTICES",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "NOT_APPLICABLE",
+        "firstFailureReason": "EARLIER_NATIVE_FAILURE",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_A06",
+      "model": "earliest NOTICES action throw has a different site/code",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "NOT_APPLICABLE",
+        "firstFailureReason": "EARLIEST_THROW_DIFFERENT",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_U01",
+      "model": "eligible action throw followed by count throw",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "COUNTER_UNAVAILABLE",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_U02",
+      "model": "eligible action throw before count settlement",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "COUNTER_UNAVAILABLE",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_U03",
+      "model": "eligible action throw but native prefix has not reached ordinal12",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "TARGET_NATIVE_UNAVAILABLE",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_U04",
+      "model": "honest journal/native prefix before NOTICES with no qualifying throw",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "JOURNAL_UNRESOLVED",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_U05",
+      "model": "eligible joined case; producer reports missing canonical source row",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "SOURCE_ROW_UNAVAILABLE",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_U06",
+      "model": "eligible joined case; producer reports missing assertion scalars",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "ASSERTION_SCALARS_UNAVAILABLE",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_K06",
+      "model": "eligible complete NOTICES candidate in validated journal prefix plus later torn/unknown suffix; preserve outer firstThrow and claim prefix scope only",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "KNOWN",
+        "firstFailureReason": "TARGET_POST_ASSERTION",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": {
+        "actual": 503,
+        "expected": 200,
+        "counters": {
+          "upload": 2,
+          "activation": 2,
+          "receipts": 2
+        }
+      }
+    },
+    {
+      "id": "OWN_D2_U08",
+      "model": "eligible joined case; producer reports ambiguous/truncated/unsupported scalar input",
+      "expected": {
+        "accepted": true,
+        "firstFailureState": "UNKNOWN",
+        "firstFailureReason": "AMBIGUOUS_EVIDENCE",
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R01",
+      "model": "KNOWN throwSequence does not point to independently earliest eligible throw of the validated journal prefix",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R02",
+      "model": "KNOWN lacks exact native ordinal12 NOTICES fail",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R03",
+      "model": "native PASS contradicts same-case action/count throw (inherited N2)",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R04",
+      "model": "KNOWN source id differs from NOTICES",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R05",
+      "model": "KNOWN source phase differs from notices",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R06",
+      "model": "KNOWN source status/code differs from fail/TEST_FAILED",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R07",
+      "model": "KNOWN assertion actual equals expected200",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R08",
+      "model": "KNOWN actual99",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R09",
+      "model": "KNOWN actual600",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R10",
+      "model": "KNOWN scalar noninteger/string or expected differs from200",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R11",
+      "model": "source/assertion/projection extra keys or nested object replaces scalar",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R12",
+      "model": "UNKNOWN/NOT_APPLICABLE carries nonnull throwSequence/source/assertion",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R13",
+      "model": "counter below0/above3/noninteger",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R14",
+      "model": "counter object misses or adds a normative key",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_R15",
+      "model": "KNOWN declares first failure despite earlier native failure",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_F01",
+      "model": "coherent payload/log/ZIP rebound to head/tree differing from caller expected",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_F02",
+      "model": "coherent new-family body edge missing/duplicated/mismatched in raw Git tree",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_F03",
+      "model": "valid-looking projection appears outside actual numeric command step/time window",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_F04",
+      "model": "coherent outcome embeds invalid two-launch custody partition",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_F05",
+      "model": "TARGET before/after13 arrays differ from trusted successor Source13",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    },
+    {
+      "id": "OWN_D2_F06",
+      "model": "correct payload/digest/CRC but extra trailing compressed bytes fail fullDeflate",
+      "expected": {
+        "accepted": false,
+        "firstFailureState": null,
+        "firstFailureReason": null,
+        "SourceQualified": false,
+        "Task1Pass": false
+      },
+      "knownScalars": null
+    }
+  ],
+  "guardCodeExists": false,
+  "receiverExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false
+}
