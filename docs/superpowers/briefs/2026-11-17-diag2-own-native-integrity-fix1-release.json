@@ -1,0 +1,96 @@
+{
+  "schema": "AFW-DIAG2-OWN-NATIVE-INTEGRITY-FIX1-ROOT-RELEASE/1",
+  "timestampUTC": "2026-11-17 01:28:13 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "OWN-onlyRAM implementation; Root-gated futureGHA",
+  "resourceType": "Independentreceiver firstFailure semanticjoin and presealedappendixcontrols",
+  "allowedAction": "AfterFULLsealof42IDs/44evaluations/fourcompleteappendixinputs, sameexistingauthor may implementminimalKNOWNnativeintegrityjoin. No authorrefs/runs/native/Sourceexecution.",
+  "parentRelease": "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+  "family": "FIRST_FAILURE_POST_DIAG2_OWN",
+  "round": 2,
+  "maxRounds": 5,
+  "finding": {
+    "preimageEarlyIndex": "a81579792c2378fb3935560c96bb5541fffeef07",
+    "reader": "4fb5a8d5e5b0b14c58f9935f5fd4dbc0589c23e0",
+    "semantic": "cd1aaa2c0cfaa1f278e383cc7a58cb2df59b187f",
+    "RootReproducedFullCoherentReadBound": true,
+    "probe": [
+      {
+        "integrity": "ambiguous",
+        "readerAccepted": true,
+        "state": "KNOWN",
+        "error": null,
+        "inputHash": {
+          "bytes": 43676,
+          "sha256": "0de1550f489ea6da4ebfa0f533195e4984c19fedd18a437261044a9ecf136365",
+          "blob": "e6c0bf2f586ed5f6abdd218cc27952b302aa4eba"
+        }
+      },
+      {
+        "integrity": "torn",
+        "readerAccepted": true,
+        "state": "KNOWN",
+        "error": null,
+        "inputHash": {
+          "bytes": 43662,
+          "sha256": "fcc0b58efae1f872685ce826ba71bf260eeb8500266f3982752b507d273d6b93",
+          "blob": "8b9d07d46f9e78880b643d9950234333b2f64588"
+        }
+      }
+    ],
+    "explanation": "K01copiedmodel withnative.integrityambiguous/torn andcoherentlyreboundframe/log/ZIP/listingacceptedKNOWN. Sourceactual9f457returnsUNKNOWNforboth. C1allowslaterJOURNALuncertaintywithoutdiscardingclosedcandidate; itdoesnotlicenseignoringexplicitNATIVEuncertainty."
+  },
+  "change": "OnlyKNOWN firstFailure mustrequireo.native.integrity==='prefix'. HonestUNKNOWN withnullmetadata and correspondingAMBIGUOUS_EVIDENCE/TRUNCATED_NATIVE remainsadmissible, preserveouterfirstThrow46. ExistingK06journalTorn+nativeprefix staysKNOWN. No Source or schema/cap/Source25/transport/ZIPchanges byinference.",
+  "fixtureFirst": {
+    "original40Index": "394f7dde265fb7b3c3b5de26cede262c6f744daa",
+    "preserve40BytesIdsExpected": true,
+    "appendNativeIDs": [
+      "OWN_D2_NATIVE_AMBIGUOUS_PAIR",
+      "OWN_D2_NATIVE_TORN_PAIR"
+    ],
+    "eachPair": "Twofullimmutablecoherentinputs: KNOWNwithuncertainnativeintegrityexpectedREJECT, matchingUNKNOWNnullsource/assertion/throwSequenceexpectedADMIT withreasonmatchingintegrity. Sealallfourbeforeimplementation; no mutationrecipe-only controls.",
+    "nativeCount": 42,
+    "receiverEvaluations": 44,
+    "expectedAdmit": 21,
+    "expectedReject": 23,
+    "old40ModelRuntimeNotModified": true
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+    "message": "AFW-C2-OWN-FIRST-FAILURE-POST-DIAG2-FIX1-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-own-first-failure-post-diag2-fix1.yml",
+    "job": "c2-own-first-failure-post-diag2-fix1",
+    "prefix": "docs/superpowers/root-own/c2-t1-first-failure-post-diag2-fix1/",
+    "artifact": {
+      "name": "afw-c2-own-first-failure-post-diag2-fix1",
+      "path": "output/c2-own-first-failure-post-diag2-fix1.json",
+      "fileName": "c2-own-first-failure-post-diag2-fix1.json",
+      "retentionDays": 7
+    },
+    "node": "22.23.4",
+    "ubuntu": "24.04",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "permissions": "contentsread",
+    "attempt": 1,
+    "npm": false
+  },
+  "limits": "Exactly42nativeIDs/44receivercalls; countnativecases/checkgroups/evaluationsseparately, all42nativePASSexpected. CanonicalJSONLFproof<=24576/ZIP1MiB/log4MiB unchanged; preserveallfullgraph+pairedinputhashes+nativecounts/actualcontext andactual/modelseparation65040. RootFull25d11f63... remainsfixedactualbodydata; futureactualhead/tree/run/jobonlyRoot. Originalunused40nativeNominationretiredwithoutref/run, notconsumednativefailure. Source35nativealreadyPASS/closed anddoesnotneedrerun forthisOWN-onlygap.",
+  "RootOwnRAMOnly": true,
+  "SourceLocallyExecuted": false,
+  "nativeRefRunReleased": false,
+  "SourceBusinessReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
