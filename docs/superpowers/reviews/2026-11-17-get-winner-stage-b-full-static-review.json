@@ -1,0 +1,106 @@
+{
+  "schema": "AFW.INDEPENDENT.GET_WINNER.STAGE_B.FULL_STATIC_REVIEW/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private detached Git DATA",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "immutable proposal and detached static review",
+  "allowedAction": "read literal DATA and save this review only",
+  "rollback": "disregard this detached report",
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "nominatedUnattachedHead": "82732746d7dc7f4969283ff051f5422f2c672188",
+  "nominatedTree": "e3564f2e2683c55cea0c55db2defd4416d0fd2e5",
+  "proposal": "93162bc3f83536d55e8dfcbf9fe8092865b6da8f",
+  "reversibleIndex": "0bd74848dfaaeac9bbfd8855bcc017c7ea73ef89",
+  "brief": "dc132c7946534f5fbbf321b0801ad60e4afb7549",
+  "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+  "plan": "0b8368869f60978c536b056c37e451f8c899f93f",
+  "SPEC": "CHANGES_REQUIRED_BEFORE_NATIVE",
+  "QUALITY": "CHANGES_REQUIRED_BEFORE_NATIVE",
+  "criticalFindings": [],
+  "importantFindings": [
+    {
+      "id": "FP1",
+      "area": "SPEC and QUALITY; composed H producer-to-parent evidence",
+      "locations": [
+        "model-get-controls.mjs 8d6ae83f38437d4652096086aa48bef157571777 lines 48-69,109-122",
+        "body-08-get-winner.txt e488965a58b989aa1c2f05a16aa6d5b74d4e411a lines 202-232"
+      ],
+      "basis": "7308d1c0fff9779d22082198c59031f51abb2477 requiredControl",
+      "finding": "The fixture exercises createGetWinnerHost, then its driver builds a second C2FT4 line with a literal bucket value of 1 and its own serializer. The actual snapshot observer, count callback, bucket computation and emission at S08:221-228 are absent. The model can keep accepting if the actual emitted tuple, count, key order or target label regresses. In particular, the 418/419 comparison proves the local rendering only.",
+      "closure": "Drive the proposed observer's enter/token/finish/counts with controlled target Response, valid snapshot/context and a captured emit. Apply only the real TAP transport framing to its capture. Compare those bytes to the frozen candidate, retain the independently observed parent-only 419 limitation and preserve the original frozen oracle."
+    },
+    {
+      "id": "FP2",
+      "area": "QUALITY; strict parent proof",
+      "locations": [
+        "run-get-winner-tools.mjs fbb9da4aa49456a379fdc1f0f31cbdff2f9b37aa lines 628-630,642-645,675-687,832-838",
+        "partial-tool-proof.schema.json 81fc12b5bef6f8e35f061b23368df1fb672715f2 line 1, observation.groups dynamic SHA fields"
+      ],
+      "finding": "RegExp.test coerces the supplied digest to text. The normalizer then copies the original JSON value into the success object. Canonical JSON equality with that normalizer therefore fails to guarantee that a resident, compressed or transport digest is a primitive string as required by the schema. There is no final schema check before publication. The sealed child's current happy-path constructors produce strings; the parent independently promises typed validation.",
+      "closure": "Use one exact primitive-string/64-lower-hex predicate for every dynamic digest before retaining it, or enforce the full pinned schema before publication. Check rejection of wrong JSON types at the parent receipt boundary while preserving approved scalar-only output."
+    },
+    {
+      "id": "FP3",
+      "area": "SPEC and QUALITY; failure cleanup",
+      "locations": [
+        "retention-component-entry.mjs e599e62c93bb2fbeef2957b2c5fbb920944c8746 lines 38-52,62-73,92-98",
+        "native-retention-controls.mjs c2b057585da9da62a21fe065ef31ad3bfedf02bf lines 57-61,73-77"
+      ],
+      "basis": "760e6e4ea9126ddd3e48f01fab4931702e91996f sealed budget and cleanup",
+      "finding": "A failure during the initial native membership/lineage checks rejects real work before entered.release(), leaving exercise suspended on entered.promise. On the late path a failure prior to the cancel callback similarly leaves the cancel-entry wait unresolved. The component's finally never takes control on those paths. A host timeout/disposal can fail the case, but cannot supply the required gate releases, parent finish and component cleanup. This is a distinct failure path from the previously corrected falsy sentinel.",
+      "closure": "Make each synchronization wait observe failure/early completion of the corresponding real work in the test-only harness. Propagate the primary rejection including falsy values, enter component finally and release/finish/await its owned work. Preserve the original successful event order and keep any harness-only reactions outside ordinary M/QA."
+    },
+    {
+      "id": "FP4",
+      "area": "SPEC and QUALITY; input custody",
+      "locations": [
+        "run-get-winner-tools.mjs fbb9da4aa49456a379fdc1f0f31cbdff2f9b37aa lines 539-541,613-616,737-775,803-811,833-835",
+        "get-winner-protocol.json 6dcd86e3280d562c80950d450bfb5fd558574cb5 line 1, focusedTool.receipts"
+      ],
+      "finding": "The guard and preflight scripts are pinned in the checkout and copied into the materialization. Their materialized copies do not appear in toolFiles, which is the full list rechecked after each group. In particular the same materialized guard is loaded by every child. toolInputsMatched:true and the protocol statement that every materialized tool input was remeasured overstate the performed reads.",
+      "closure": "Include both materialized custody scripts in the applicable input remeasurements, including the preflight boundary for the shared guard. Preserve existing Source13 before/after and per-group tool checks. Emit true only after the required input checks finish."
+    },
+    {
+      "id": "FP5",
+      "area": "SPEC and QUALITY; absolute controller deadline",
+      "locations": [
+        "run-get-winner-tools.mjs fbb9da4aa49456a379fdc1f0f31cbdff2f9b37aa lines 9,506,589-599,815-840",
+        "get-winner-protocol.json 6dcd86e3280d562c80950d450bfb5fd558574cb5 line 1, focusedTool.budget",
+        "afw-c2-get-winner-tools1.yml 19cd8c49f9f489067805baf6e8e8c8679bdc3a5c lines 17,64-74"
+      ],
+      "finding": "The child launches clamp correctly to remaining time. Async filesystem operations and recursive cleanup lack an absolute supervisor. The success publication checks the clock on entry only, before asynchronous write, readback, link and unlink, then reports success without checking elapsed time again. A late completion can therefore count as success after 330 seconds. The seven-minute job cap is a different boundary.",
+      "closure": "Enforce the 330-second success boundary through the final publication and preserve failure-only semantics on expiry, including a blocked cleanup or publication. Ensure any hard outer deadline and cleanup arrangement keep the seven-minute job cap and avoid promoting an incomplete or late result."
+    }
+  ],
+  "minorDeferred": [
+    {
+      "location": "startup-diagnostics.mjs 7f19c9c2134c2582b920b78cd06f95187a8f9932 lines 8-9,37-45",
+      "note": "The bounded startup exception map still names the earlier native-red child. A failure in a current control often reduces to an UNKNOWN site. This conservative limitation preserves disclosure bounds; it need not expand the current gate."
+    }
+  ],
+  "independentlyChecked": [
+    "Fetched every one of the 83 nominated bodies as literal DATA, verified 83 distinct paths, UTF-8 lengths, Git SHA1 and SHA256. Aggregate 1,475,535 bytes. Compact full-array plus LF SHA256 44937b4f075de982878115ecf996b503310507fcdec53a98cde1a5cad0501150; agrees with the independent Root record 304d7dc058b4a6b955a560748324e9f1196f4e74. Tree attachment, preservation of 3,203 original leaves and absence of overwrite are Root tree evidence reported with the nominated HEAD; not re-enumerated by this reviewer.",
+    "All 29 reversible delta index entries expanded to 32 literal pre/post pairs. Verified 150 sequential forward spans and their exact inverse against complete pinned images. Separately verified 12 one-span fixed-M prepared fault variants both directions, manifest 58fc73389ae93be7f676d29b1f1f8221c1dce86e.",
+    "Source13 prior/current after-image object IDs differ only at S08, S09, S10. Original and new line 18 literal assert.equal(status,200) retain the equal property at columns 118 and 143. S08 consumes the one returned R/body at this cut. The selected M build adds the single lab header path only under getWinner; prepared DROP/negative/QA paths are separate. The original await forward remains. The actual race rejection is rethrown, classification matches error/P/lease, and original finish precedes synchronous marking on the returned B. No QA phase claim.",
+    "315 distinct frozen IDs; 274 intersect the 287 unique scheduled MODEL IDs and 13 are additional. All five ID-list hashes match schedule. Frozen H3 and M-B-reused dispositions, OWN32 hold, and M-immutable/M-late-mark native exclusions remain explicit. Reviewed 15 ordinary, 8 component, 12 fault and 4 transport dispatches as design only. Receipt/manifest residence checks, native actual/cancel logic, append-only component export and waitUntil spy boundaries were inspected as code; 39 dispatches remain unrun.",
+    "Workflow commands at lines31-57 provide 27 syntax checks before startup46, locked dependency install and the three proposed groups. One preflight and three guarded group processes are scheduled with 10/120/180 second nominal preflight/case/child limits and 7-minute job limit. No ref, workflow, dependency, Source or runtime execution in this review."
+  ],
+  "limits": [
+    "The direct, closed transport premise, compiled worker residence, platform serialization, native constructor compatibility, actual cancellation/retention ordering, timing, disposal and proof emission require native evidence. A header, digest or copied marker does not authenticate origin. The parent cannot observe the private R/error or independently detect a canonical valid 418-to-419 substitution. The component waitUntil spy cannot establish platform survival or global drain.",
+    "The previous scoped IC1, retention and fault reviews apply only to their stated scopes. They cannot establish full-packet readiness. No actual gate was exercised. This report does not qualify Source, Task1, OWN, live or PC-off operation."
+  ],
+  "nativeGate": "HOLD",
+  "Source5": 5,
+  "OWN5": 5,
+  "nativeExecuted": 0,
+  "modelExecuted": 0,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false,
+  "refMutations": 0,
+  "runtimeMutations": 0
+}
