@@ -1,0 +1,195 @@
+{
+  "schema": "AFW.OWN5.STAGE_B.ROOT_DATA_MEASUREMENT/1",
+  "timestampUTC": "2026-11-17 14:54:50 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authorIndex": "f486a16f72de1559952f3a2e9b8b6f1d2566426e",
+  "nativeIndex": "59083d99813f3490e249d59d5e91190ea1fa2780",
+  "topMeasurements": [
+    {
+      "id": "59083d99813f3490e249d59d5e91190ea1fa2780",
+      "bytes": 59341,
+      "sha256": "60a8a6cf96305d688dc245626f19ac43a7066f4efa7bea251720c3992003e26e",
+      "blob": "59083d99813f3490e249d59d5e91190ea1fa2780"
+    },
+    {
+      "id": "f486a16f72de1559952f3a2e9b8b6f1d2566426e",
+      "bytes": 60788,
+      "sha256": "e58212c62ee227cc50796e12bc617b1a5302703806200a6abd1b14d8f29edf6b",
+      "blob": "f486a16f72de1559952f3a2e9b8b6f1d2566426e"
+    },
+    {
+      "id": "e01d4e2d1c753e8ec211af2c46a0e72145831f3d",
+      "bytes": 8041,
+      "sha256": "1b79aaffb34e4ece6a36f8ef3a749006ee6941359f0584c6f1bb99c1a09a8083",
+      "blob": "e01d4e2d1c753e8ec211af2c46a0e72145831f3d"
+    },
+    {
+      "id": "4bb41bcd7e1b4d5e471329753a0ae4e4ff76e1a0",
+      "bytes": 96437,
+      "sha256": "c6c030a57c0e1d1234e037fe45918892c8a5ca9983132618abca0e0a825adedb",
+      "blob": "4bb41bcd7e1b4d5e471329753a0ae4e4ff76e1a0"
+    },
+    {
+      "id": "da382a77f0c183d525c44e670013d75d8f1990f7",
+      "bytes": 41738,
+      "sha256": "10e7a4151245681cafc0a7ff7a8bfdbe2998e8b76f19d51d437195adc410dac1",
+      "blob": "da382a77f0c183d525c44e670013d75d8f1990f7"
+    }
+  ],
+  "selectedBodyMeasurements": {
+    "bad": [],
+    "measurements": [
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/root-actual26.json",
+        "bytes": 17603,
+        "sha256": "53f327fcd0add7a32639c9cd172a26e91d27eafd5bfaeaa29b2acad9618c3705",
+        "blob": "1fea33135f8943707738d4f078ff3616e9b5132c"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/source-final-index.json",
+        "bytes": 13613,
+        "sha256": "31c1d325c72c4253fdac1ca2680120d3590334244b78fbeff1fced8ef51f4041",
+        "blob": "fc11e972ceb33c8ce7cdace34aed482d71bb6224"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-schema.json",
+        "bytes": 34193,
+        "sha256": "c612fe6d19707987aca278d99b77f621cddefe46184ceda22d4506406af1ac11",
+        "blob": "81be13ca960a143d565d55dd958b4e4ff24d3c96"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/actual-selection.json",
+        "bytes": 5173,
+        "sha256": "61c05384d3990612343e9a26ed413727ef869e39de5730082ea9d90a684e36c4",
+        "blob": "8fe9907fb12fb71361819551df04c2830a78452b"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model26.json",
+        "bytes": 13909,
+        "sha256": "8c65a21b836eb192bc1a6a954f5d625e55231fc2dad86229287b4ba9b831c25d",
+        "blob": "53bfd6716ecb04153158e6653700648140528d27"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-schema.json",
+        "bytes": 34193,
+        "sha256": "60a3e768fdf5e6032dcaed07a54f0dd3c7aba342926689c9e9566c3d9f832f9f",
+        "blob": "c8e05b8882728cdcfaffa18f5d311256a42851ec"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/model-selection.json",
+        "bytes": 733,
+        "sha256": "0ac2d8294c51e2f2b4735ce9d0bb995591d31bb70dc72ff01efee3d59af8de7b",
+        "blob": "162c194073a87e2a3bc906b3b605df28b17ea17f"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/expectations.json",
+        "bytes": 30212,
+        "sha256": "74c26493ec61dc8e442139ea412e5a629617e3b4dcdb6a235e6ab6938c9d331c",
+        "blob": "a1291b71dd21b263d280f6feae8efc8d3fce0c24"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/data/fixture-seal.json",
+        "bytes": 16153,
+        "sha256": "b06de3862ea2fcb5464386db0b627b963d37ed2917afe8de3be1b9e1df37b712",
+        "blob": "bfff4346bdbe21bbd431df80a07d234828a89d97"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/bindings.mjs",
+        "bytes": 3189,
+        "sha256": "df2215b4aaea2cf3428e08531c4ed74ba9a35dd8e710389e2c6f0f8c138b8a23",
+        "blob": "4d54d57322ea67c3a29278f75288c7c9b686105b"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/drop-winner.mjs",
+        "bytes": 2726,
+        "sha256": "2d24ac7238028ce13eac83eaf20539d49710f011ba8914fcb5626f1fe592ec9a",
+        "blob": "8e794a8039575694aa53064eccc4ed397e8d19a4"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/reader.mjs",
+        "bytes": 4983,
+        "sha256": "6a88e4d5844aa03b26b495046dbf3f5d42904416aefed800d1007ca1dd45b544",
+        "blob": "e8490b06eb12df0ad32ab66a41e99504f52ffe12"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/occurrence.mjs",
+        "bytes": 852,
+        "sha256": "b1fa2b21546d401801d17be7fe126ad6753bdce89de64f35089180eb1c07a5f4",
+        "blob": "1298c105fd934b0b8053596b8473aba947eb1854"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/occurrence-controls.mjs",
+        "bytes": 2216,
+        "sha256": "e3601d551581beeea438985cfa23e49788591fc5fbfbe655d50ccd09b08736e3",
+        "blob": "1e78c4a01e6f19a247134c21434a6f538f9a60fa"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/drop-winner-tools.test.mjs",
+        "bytes": 6416,
+        "sha256": "94cc0b0bac61448214b3ffaa62ecdc03409fd04bf96c705dfbb44d82710b7fe3",
+        "blob": "ce04cc3bc05e0b8e537c674bf3ef75911262f5af"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/proof-schema.json",
+        "bytes": 4136,
+        "sha256": "a9105fbdeaba0ab75281557443e1e7212fe8033c213344981afe9281153ecf29",
+        "blob": "3dcbe744f52b7b285bdfdecb4f7f124a2ef5e969"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/native-graph.json",
+        "bytes": 57020,
+        "sha256": "cd99df54188a0443781f96686f7437555616974befce4415fe1861ffa84c4ae9",
+        "blob": "d1d28d86c2e9908ed2c3f3ee8243f61883814666"
+      },
+      {
+        "path": "docs/superpowers/root-own/c2-t1-drop-winner-diag4/run-own-drop-tools.mjs",
+        "bytes": 6480,
+        "sha256": "c315f2e4875cc9ac235d64c764636feea4d06b957482bb7f4821ba28e15640b5",
+        "blob": "6f1e7cae0a00cba0152be58c6880afa5dddc788d"
+      },
+      {
+        "path": ".github/workflows/afw-c2-own-drop-winner-tools.yml",
+        "bytes": 2660,
+        "sha256": "677daa1d5002d5e43c241a3df32bd5fecfba50d8a575767fed55b8bb00402223",
+        "blob": "a713c414759a6d8e73577d24a9da5607efd4b8f3"
+      }
+    ]
+  },
+  "preservation": {
+    "oldIncluded": 85,
+    "oldUnchanged": true,
+    "old95InventoryReferenced": true,
+    "sealed69Included": true,
+    "sourceGuardLocalExecution": false
+  },
+  "boundedReadScope": "19 new/runtime/data selected bodies FULL hashed; 85 reused descriptors match original95 immutable manifest; new69 descriptors match sealed StageA index. Unchanged large fixture bodies not recopied locally. Future native controller independently measures all graph files before tests.",
+  "prepared": {
+    "branch": "lab/afw-c2-own-20261117-drop-winner-tools",
+    "tree": "b172c39ac7257d69bf578555b12360123449c843",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "activationAttempted": false,
+    "refCreated": false,
+    "unattached": true,
+    "head": "724d6a2998320daf7f86a95fe12229fb21fdf621",
+    "original3203Preserved": true,
+    "mounts": 173,
+    "leaves": 3376,
+    "fullTreeVerified": true
+  },
+  "sourceRoot26": "1fea33135f8943707738d4f078ff3616e9b5132c",
+  "OWNCodeExecuted": false,
+  "SourceExecuted": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

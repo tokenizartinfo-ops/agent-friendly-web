@@ -1,10 +1,10 @@
 {
-  "schema": 44,
-  "timestampUTC": "2026-11-17 14:40:40 UTC",
+  "schema": 45,
+  "timestampUTC": "2026-11-17 14:54:50 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "e793ac9e739d9a445bfd281423c4b9a6ad6257d0",
-  "phase": "DROP_WINNER_OWN5_STAGE_B_IMPLEMENTATION_ACTIVE_AFTER_ACTUAL_RED",
+  "previousCheckpoint": "b888949cf8a17c5c48e93d4e8beed5c5fb213578",
+  "phase": "DROP_WINNER_OWN5_STAGE_B_CODE_COMPLETE_STATIC_REVIEW_ACTIVE",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -134,7 +134,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "OWN5 author implements append D4 guard/bindings/receipt against frozen RootSource26 and matrix69, preserving old95/73/ABI. No local OWN/Source execution; static SPEC/QUALITY then Root one-use nativeall142 with Node syntax checks. OriginalStageA retiredclosed. Source businesshead2457ad...stillunattached/noNativeRun; do not activate before Own5qualification. No user action needed now.",
+  "next": "Finalize scoped independent static SPEC/QUALITY then Root one-use native OWN5 controls (9groups/142fixtures/10units), capture/save/close/review. No local OWN/Source execution; no Source business ref yet. Original StageA closed, Source5/OwN5max5nobudgetreset.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -384,7 +384,7 @@
   },
   "own5DataPlan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
   "OWN5": {
-    "stage": "B_GUARD_IMPLEMENTATION_ACTIVE",
+    "stage": "B_CODE_COMPLETE_STATIC_REVIEW",
     "brief": "b11d18f929b413d098dc368692debf71a85660a3",
     "actor": "/root/drop_own5_fixture_stage_a",
     "publicBoundaryRuling": "f1716eba86aa6d64132d1c1d6e42ef0b7a4f77fa",
@@ -394,26 +394,24 @@
     "actualFinalSourceBinding": "1fea33135f8943707738d4f078ff3616e9b5132c",
     "original73PreservedRequired": true,
     "original95PreservedRequired": true,
-    "authorIndex": "6729841042a32990606af9c6641fb9f1bebfbd57",
-    "authorReport": "e71c41472362ed4cb97b0bfaa41ab9577cb5e835",
+    "authorIndex": "f486a16f72de1559952f3a2e9b8b6f1d2566426e",
+    "authorReport": "e01d4e2d1c753e8ec211af2c46a0e72145831f3d",
     "expectations": "a1291b71dd21b263d280f6feae8efc8d3fce0c24",
     "fixtureSeal": "bfff4346bdbe21bbd431df80a07d234828a89d97",
     "nativePacket": "55d80f85696757125eab2074f8921f893877eb0b",
     "prepared": {
-      "branch": "lab/afw-c2-own-20261117-drop-winner-fixtures",
-      "tree": "b93e3075b6d7cf1cfae14e1261813b17fe96b644",
+      "branch": "lab/afw-c2-own-20261117-drop-winner-tools",
+      "tree": "b172c39ac7257d69bf578555b12360123449c843",
       "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
       "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
-      "activationAttempted": true,
-      "refCreated": true,
-      "unattached": false,
-      "head": "317b4e1f547b23ad1bcb4170a5e4f28a865deafe",
+      "activationAttempted": false,
+      "refCreated": false,
+      "unattached": true,
+      "head": "724d6a2998320daf7f86a95fe12229fb21fdf621",
       "original3203Preserved": true,
-      "mounts": 13,
-      "leaves": 3216,
-      "fullTreeVerified": true,
-      "gate": "0fb65a9269b9f882bb1cb963c900e3dc2dd09079",
-      "activationUTC": "2026-11-17 14:31:21 UTC"
+      "mounts": 173,
+      "leaves": 3376,
+      "fullTreeVerified": true
     },
     "root13FullHashesMatched": true,
     "appendCount": 69,
@@ -453,12 +451,14 @@
     "ownRound": 5,
     "noReset": true,
     "coveringTests": {
-      "old73": 73,
-      "new69": 69,
-      "total": 142,
-      "expectedAdmit": 58,
-      "expectedReject": 84,
-      "status": "PENDING_NEW_CODE_AND_NATIVE"
-    }
+      "nativeGroups": 9,
+      "fixtures": 142,
+      "unitControls": 10,
+      "status": "PENDING_NATIVE"
+    },
+    "nativeIndex": "59083d99813f3490e249d59d5e91190ea1fa2780",
+    "graph": "d1d28d86c2e9908ed2c3f3ee8243f61883814666",
+    "diff": "4bb41bcd7e1b4d5e471329753a0ae4e4ff76e1a0",
+    "staticReviewer": "/root/c2_v2_own_receiver_fix1 RUNNING"
   }
 }
