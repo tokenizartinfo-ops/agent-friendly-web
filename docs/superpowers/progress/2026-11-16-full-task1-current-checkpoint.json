@@ -1,10 +1,10 @@
 {
-  "schema": 53,
-  "timestampUTC": "2026-11-17 16:05:45 UTC",
+  "schema": 54,
+  "timestampUTC": "2026-11-17 16:11:40 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "607a4c3a81b828da9aa08cea1d9ea8b0a81bb48c",
-  "phase": "GET_WINNER_STAGE_A_FIX_ROUND1_BEFORE_NATIVE_RELEASE",
+  "previousCheckpoint": "b41ea0d1cf1239f3beecf37dbadaf9e1b6020b39",
+  "phase": "GET_WINNER_STAGE_A_NATIVE_RED_GATED_UNATTACHED",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Author fixes only two reviewed StageA findings with reversible evidence; then one scoped re-review and exact Root native RED activation gate. No Source feature/native or live runtime release; no manual user action needed.",
+  "next": "Root activates exact fresh one-use StageA branch after immediate fresh absence/run check; terminal logs/artifact once, exact expectedRED vs prerequisite failure, preserve and close/readback. No feature observer or business/runtime release.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -516,9 +516,9 @@
   "completedOwnVmReleased": true,
   "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
   "getWinnerDependent": {
-    "phase": "STAGE_A_REVIEW_FIX1",
+    "phase": "STAGE_A_REVIEWED_EXPECTED_RED_ROOT_GATE",
     "featureCodeReleased": false,
-    "nativeReleased": false,
+    "nativeReleased": true,
     "roundsUnchanged": true,
     "actor": "/root/get_winner_fixture_stage_a",
     "reviewer": "/root/get_winner_stage_a_review",
@@ -536,6 +536,27 @@
     "fixtureExpectationsExecuted": 0,
     "nativeGETsExecuted": 0,
     "allCurrentRefsClosed": true,
-    "rootChecked28NewPathsAbsentAtBase": true
+    "rootChecked28NewPathsAbsentAtBase": true,
+    "amendedProposal": "36049472ef3a71f4e2055a5a0cd6a1b03b78dfd3",
+    "amendedFixtureSeal": "eefd23a6f730a830a1d2e537c12abf25fb5baded",
+    "amendedAuthorReport": "36c0fdd20d9bb624f405be301f9feda1ff3c4e7b",
+    "amendmentDiff": "eb58c0b1ce7809ab22588f637b6bf587edc12556",
+    "acceptedReview": "aa2a07553b64317115b183b1b3ff214c205abf56",
+    "RootMeasurement": "9d0b9aa4af94479558899bb64b73cac3229a7251",
+    "prepared": {
+      "branch": "lab/afw-c2-get-winner-20261117-fixtures",
+      "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+      "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+      "preparing": false,
+      "activationAttempted": false,
+      "refCreated": false,
+      "unattached": true,
+      "mounts": 28,
+      "tree": "855d245693c37336af9069ee51b4d35cc047eacd",
+      "head": "5b93675aecccc76339fce18880f354a7c0ec42d2",
+      "fullTreeVerified": true,
+      "original3203Preserved": true,
+      "leaves": 3231
+    }
   }
 }
