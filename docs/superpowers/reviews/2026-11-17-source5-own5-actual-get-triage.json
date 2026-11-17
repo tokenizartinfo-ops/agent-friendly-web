@@ -1,0 +1,199 @@
+{
+  "schema": "AFW.SOURCE5.OWN5.ACTUAL.GET_TRIAGE.INDEPENDENT/1",
+  "atUTC": "2026-11-17T15:25:32.049975+00:00",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "scope": "Independent DATA-only outcome, producer/reader interface and bounded first GET triage. Detached evidence; no branch change or trial.",
+  "SPEC": "PASS_DIAGNOSTIC_COLLECTION_INTERFACE_ONLY",
+  "QUALITY": "PASS_SAVED_EVIDENCE_WITH_EXPLICIT_LIMITS",
+  "businessOutcome": "INCOMPLETE",
+  "inputs": {
+    "full": {
+      "bytes": 2675182,
+      "sha256": "f209bead0ef4da29c62e60315a8f87f500f990007c1b3eec0f534352ec2b07bc",
+      "blob": "7d8f310d69e718727ce2cb392e565dea90205693"
+    },
+    "out": {
+      "bytes": 13194,
+      "sha256": "691c89affba24bf50baf2c427ca7e61531147bff17ab6ee4c316c5fbfea0d12f",
+      "blob": "f4daf53fee3e78ba2cad36c6b525559d9fd47d67"
+    },
+    "own": {
+      "bytes": 13380,
+      "sha256": "7787285165f2ede6835dcb01c509c66f5d26a616eb38908802688854f70a99f7",
+      "blob": "88edaaa27b4bd5eda5cf9664266422f6b3d5029e"
+    },
+    "val": {
+      "bytes": 4521,
+      "sha256": "40a64c9e15250c839677a33712e1e6062933c9361ce0665a4a8582ae5b37309c",
+      "blob": "a889df71ff176ea52d5a5e437e2692c05b3ddc1b"
+    },
+    "close": {
+      "bytes": 1250047,
+      "sha256": "f9c7048a2536ba58a7242f4169c7f0a6bc061f54b062df42259a7a3c7f9ed9bd",
+      "blob": "3ffbd94439539328587de363f8ca6444b4ee7cd5"
+    }
+  },
+  "basis": {
+    "gate": "cd04d3d226deace907d7226e4a324ba2e918aef4",
+    "plan": "7a27a72a1c5e01dd4db03b71e6fc04478a85797c",
+    "vmrule": "1b5ca9964570edccca7b54fc7445296236548d50",
+    "recovery": "ef700c72f91122d89d60f6e803efd92c2a1efc1a",
+    "old": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
+    "s03": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+    "s12": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+    "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "wire": "38285fa0149a38924c431b4d5a705bec1384216d",
+    "s00": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+    "s01": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+    "s09": "9da84b3f0606e9cb84d8308de26c7f193c5c778a",
+    "s10": "955fa904a89733fabfa5c73736f59922b6e58023"
+  },
+  "api": {
+    "run": 44110921244,
+    "attempt": 1,
+    "job": 134135963389,
+    "head": "2457ad4bd71aa1bd7703f56fba9284ddb85f05aa",
+    "tree": "39ce40a45052f931068ef98e38da388018a8fbe6",
+    "findings": "Exact one-use push/attempt1 head, parent, tree, branch and workflow, six ordered steps, ten successful in total. Success includes capture and upload of an incomplete native result. One artifact, id 14341695903. Saved primary has the job log, not a retained per-case raw child stdout stream."
+  },
+  "transport": {
+    "log": {
+      "bytes": 31048,
+      "sha256": "c2feefd1b5e49a3be25fa4b94c3539dbac77e96de0fb7f84f8d952587b8ff60e",
+      "blob": "c7f6b9ced038b18eea44fc6b94afe23d768a60e4"
+    },
+    "archive": {
+      "bytes": 3073,
+      "sha256": "d9278238d116737efe8e7c9a17aee149793d62d60bd282f33a7a47ba7d55521b",
+      "blob": "ca8b2df6f8309fbea6aeff95b85058c73b192504"
+    },
+    "payload": {
+      "bytes": 13194,
+      "sha256": "691c89affba24bf50baf2c427ca7e61531147bff17ab6ee4c316c5fbfea0d12f",
+      "blob": "f4daf53fee3e78ba2cad36c6b525559d9fd47d67"
+    },
+    "member": "c2-drop-winner-diag4.json",
+    "flags": 8,
+    "compressedBytes": 2909,
+    "crc32": "bdac77a7",
+    "descriptorBytes": 16,
+    "checks": "Single local/central member, matching names/fields/CRC/sizes, raw-deflate fully consumed with no extra data, descriptor matches, EOCD at exact EOF. Sole LF-canonical JSON equals log outcome marker and detached outcome. Ruling documents connector -32603 then one bounded recovery for this artifact: two requests, one usable archive. No repeat Source execution."
+  },
+  "OWN": {
+    "binding": "1fea33135f8943707738d4f078ff3616e9b5132c",
+    "bindingKind": "ROOT_PINNED_PRODUCER_DATA_R5",
+    "matchedBodyEdges": 26,
+    "edgesSHA256": "47d154b05de3d62c8d2af6f49060a82da328e1d5105975be0a883a913f8ee280",
+    "qualifiedReader": "e8490b06eb12df0ad32ab66a41e99504f52ffe12",
+    "receipt": "88edaaa27b4bd5eda5cf9664266422f6b3d5029e",
+    "scope": "Compared saved OWN input run/jobs/commit/tree/log/listing/archive/payload byte-for-byte or structurally to the saved producer/API packet. Independently rehashed 17 pinned VM members (10 OWN code-as-DATA, 7 binding JSON); actual26 input manifest equals gate mounts and matches admitted tree; no MODEL substitution. Loader restricted builtins to crypto hash, zlib inflate and exact in-memory JSON fs read, denies dynamic imports. Saved root reports 132ms VM admission, zero Source modules. Independent reader did not execute OWN/Source or rerun a parser. Receipt binds full replay/capture, independent firstFailure/finiteGet/dropWinner, source reads, custody and exception flags. finalSourceBinding=false as named in actual receipt; acceptance is for this diagnostic collection, not native qualification."
+  },
+  "closure": {
+    "head": "ed9538c6b186a901f1c8ffdc3b93d9f8f18f1399",
+    "tree": "daf9d52f2dfde6eb0d5b331ef41e6f44bc4a6c14",
+    "counts": {
+      "base": 3203,
+      "retained": 25,
+      "evidence": 2,
+      "leaves": 3230
+    },
+    "checked": "Rebuilt base/prepared/closed Git tree hashes. Exact 3203 original leaves, 25 surviving added files, only primary+closure added; remove nominated workflow only. Saved guarded ref/parent exact, 16 protected names/tips unchanged and zero close-head runs (snapshot)."
+  },
+  "actual": {
+    "nativeCounts": [
+      14,
+      3,
+      17
+    ],
+    "journalEvents": 69,
+    "firstThrow": {
+      "sequence": 58,
+      "elapsedMs": 133280,
+      "id": "C2T1_SCOPE_MISSING",
+      "operation": "action",
+      "edge": "throw",
+      "error": {
+        "name": "AssertionError",
+        "code": "ERR_ASSERTION",
+        "site": {
+          "file": "S08",
+          "line": 18,
+          "column": 118
+        }
+      }
+    },
+    "actionStartMs": 103271,
+    "actionEndMs": 133280,
+    "differenceMs": 30009,
+    "finiteGet": {
+      "schema": "afw.c2-finite-get-diag3.v1",
+      "http": {
+        "state": "KNOWN",
+        "reason": "TARGET_GET_ASSERTION",
+        "throwSequence": 58,
+        "actual": 503,
+        "expected": 200
+      },
+      "afterMonitor": {
+        "value": "0",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 56
+      },
+      "afterScopeMissing": {
+        "value": "1",
+        "reason": "JOINED_SNAPSHOT",
+        "countSequence": 60
+      }
+    },
+    "firstFailure": {
+      "schema": "afw.c2-first-failure-post-diag2.v1",
+      "state": "NOT_APPLICABLE",
+      "reason": "EARLIEST_THROW_DIFFERENT",
+      "throwSequence": null,
+      "source": null,
+      "assertion": null
+    },
+    "dropWinner": {
+      "case": "15:firstDROP",
+      "site": "UNKNOWN",
+      "outer": "UNKNOWN",
+      "publicSite": "UNKNOWN"
+    },
+    "nativeQualification": false,
+    "capture": {
+      "exitCode": 1,
+      "signal": "none",
+      "errorKind": "timeout",
+      "stdout": {
+        "bytes": 16042,
+        "sha256": "b96eb289468c87698a6b7cf6daf5d9898032b78de559cd40fbde0b36dabb7436"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "frontier": "15: original finite-prepare GET returned 503 vs 200 before c2ScopeDrop, its first POST, or puts assertion; 16: same GET assertion site S08:18:118 at seq62, failed, but separate actual HTTP status is not supplied by saved finiteGet (it binds only seq58); 17: selection assertion S08:119:4; 18: action open at seq69 then 180s child cap; 19/20 unobserved. C1 NOT_APPLICABLE. Native rows and journal progression are distinct. Original case15 count snapshots seq56=0/seq60=1 are finite Ticket cardinalities, not scope put count or proof of writer/timing; R4 contained the same 0/1 but advanced past choose/GET to S08:113 puts assertion. No observed DROP/POST and no comparison proves a single historical cause."
+  },
+  "triage": {
+    "routing": "Raw M dispatches /connections/finite-prepare to the choice bridge, not S12 (notice routes only). Public GET is forwarded as a fixed private POST with original-method GET to one actor. Positive S03 drop wrapper allocates cell only for exact public POST; GET bypasses its tap. QA drop epoch is not armed before choose returns. Existing POST transport ruling does not establish a GET winner.",
+    "M": "Bridge 23-44 processes request/holders, actual stub result, non-OK to finiteNativeCancel/first; successful response still subject to lease/identity checks during original body read, HTML/content-type and header validation. Wire finiteNativeOperation races actual/first/original deadline or abort; retained actual may finish later. Bridge catch and S03 catch/finalizer can normalize errors; public 503 alone cannot distinguish an inner QA denial, transport/validation failure or M deadline.",
+    "QA": "S00:613-652 captures actual holders, forwards original lease, qualifies private envelope, revalidates source/timeline and stage. S01:153-159 rereads source and validates versions/identity around steps; original request cap is 30s, delegated boundary cannot extend it, each child is limited (5s or earlier parent bound), and source/identity expirations can shorten admission. S01:209-233 GET obtains stage context, rate check and Ticket, runs durable write plus canonical readback at 231 (176-178), then fresh ownership/source checks at 232. S00:653-659 checks stage/expiry/clock and emits HTML only if all pass. Any aggregate time, a late retained write, a replayed same-state count, changed holder/data or body path can coexist with the snapshot delta. No per-request identity/write-stage or winner appears in the saved record."
+  },
+  "minimalNextEvidenceContract": {
+    "first": "Before proposing any run, search for an already-retained same-occurrence GET winner/phase observation under the exact run and seq58. This packet has none. Do not replay unchanged or open Source6; no action authorized by this report.",
+    "ifSeparatelyAdmitted": "At existing first failed finite-prepare GET only, collect a bounded private join at current cut: original M request/lease and exact caught-object winner enum outer_deadline_abort / actual_stub_non_ok(status) / post_stub_validation / other_unknown, plus QA phase enum from the exact corresponding private request: last completed existing step before_ticket / ticket_write_return / matching_ticket_readback / post_ticket_owner_recheck / qualified_html or UNKNOWN. Keep generation/lease and ticket correlation ephemeral; export only safe fixed enums/status and optionally original deadline/abort class. No polling, extra IO, await, new clocks, greater caps, removed checks or identifiers. Do not infer a losing QA result at cut; late/missing/unbound evidence stays UNKNOWN. Split identity-confirmed inner failure versus deadline/validation first; investigate exact QA guard, ownership or read cost only if joined evidence points there. This does not propose a business fix or imply new diagnostic budget."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

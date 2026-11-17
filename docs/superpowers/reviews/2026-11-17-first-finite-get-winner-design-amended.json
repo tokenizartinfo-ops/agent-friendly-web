@@ -1,0 +1,72 @@
+{
+  "schema": "AFW.GET_WINNER.DESIGN.AMENDMENT1.INDEPENDENT_REVIEW/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private detached Git DATA",
+  "origin": "github.com",
+  "operation": "Read fixed design documents and save detached review",
+  "rollback": "Disregard detached review",
+  "SPEC": "PASS_AMENDED_DESIGN_ONLY",
+  "QUALITY": "PASS_AMENDED_DESIGN_ONLY",
+  "findings": [
+    {
+      "item": 1,
+      "status": "ADDRESSED",
+      "result": "Sections 5 and 8 assign original marker, canonical native/TAP window and private join to the pinned producer. OWN independently verifies the eligible public target, public projection and its status/sequence and count ties, qualified changed producer/reader pins, API/head/tree/job/attempt/log/ZIP/payload bindings and receipt. The capture aperture supports these obligations. Digest and byte count convey no private observation."
+    },
+    {
+      "item": 2,
+      "status": "ADDRESSED",
+      "result": "Sections 1, 4, 5 and 8 specify the fixed status map at each encoding. For positive L/V, s=0 and h=503. For S the seven preserved statuses require h=s. Every other disclosed 400..599 and undisclosed non-OK with s=0 requires h=503. U/0/0 preserves the independently recorded finiteGet.http.actual. Contradictory tuples and valid counterparts are assigned to the boundaries that can observe them. A status getter throwing ahead of deliberate failure stays unclassified."
+    }
+  ],
+  "deltaReview": "Each of five spec edits and two report edits had one matching range at its declared stage. Full-string forward and reverse applications reproduced all four retrieved immutable originals and amendments. The amended report points to the measured amended spec. The frozen case15 TAP prefix and field order yield 78 ASCII bytes including LF at maximum size under the 96-byte cap. The delta concerns the two findings and their fixtures only.",
+  "inputs": {
+    "newSpec": {
+      "bytes": 16624,
+      "sha256": "8745ed9c8d34d33b338d0715ef6047dbfb581dbe14e8d9f37c8666d5bc788f3f",
+      "git": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c"
+    },
+    "newFeas": {
+      "bytes": 7251,
+      "sha256": "b47a2bba4da750ec00dc5e847ece18145ee272a7938945467d3656844c08d3ff",
+      "git": "1bfdd67b368b3a5409bcfb8bc007e2f926b2622b"
+    },
+    "delta": {
+      "bytes": 7543,
+      "sha256": "81c27eb42ca364f6a26fd03d1995101b8929b30d21ab8a5d879d1a19ca8d972b",
+      "git": "4e48bd4676a74189412f26b02338807da05257bf"
+    },
+    "oldSpec": {
+      "bytes": 14556,
+      "sha256": "a92e2b51a5b1debd00b0479ad7542671a60b330bd2b5170322ddd413de2467b8",
+      "git": "5a4c5b4cd6a87f55488577ffc53739287c529b80"
+    },
+    "oldFeas": {
+      "bytes": 6543,
+      "sha256": "aab955e81a85246bedc54f4dd71607346802f5a559c376d3bd15220d7d7a8a57",
+      "git": "96adb986865afa25ce018bf1a837638808d5f0f0"
+    },
+    "priorReview": {
+      "bytes": 7086,
+      "sha256": "37575e768a2318fc096ca305ecf3ca0fe14e8ddad34417c33997955afdef76e2",
+      "git": "00225cfd507692bbe3f359902270101dbdd83e73"
+    }
+  },
+  "newBreakage": [],
+  "limits": {
+    "round": "design amendment 1",
+    "sourceRounds": 5,
+    "ownRounds": 5,
+    "reset": false,
+    "implementationRelease": false,
+    "nativeRelease": false,
+    "verifiedNativeGetControls": false,
+    "qaLastCompleted": "UNKNOWN",
+    "historicalCauseProven": false,
+    "businessQualification": "INCOMPLETE",
+    "PCoff": false
+  },
+  "nextDesignDependency": "Actual controlled tests on the prepared positive GET route with original parent, finish and serialization require separate release before use on a business occurrence."
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "AFW.GET_WINNER.STAGE_A.ACTUAL_REVIEW/1",
+  "dateUTC": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private detached Git evidence",
+  "resourceType": "detached immutable report blob",
+  "resourceId": "content-addressed upon write",
+  "allowedAction": "Read the fixed saved evidence and bounded literals as DATA; write one detached review with complete readback.",
+  "rollback": "Ignore detached report; no ref, run or runtime change.",
+  "inputs": {
+    "o": "23e11dac9ecf06a16d8d141bc497207392330d1d",
+    "p": "b3267a5b4245da1dbe0612c13540c54ceaa19297",
+    "c": "a45965bd990ca2bf6190f6a473eea5198bd32bdd",
+    "g": "864ee8e2afcc970593c02795f193dba525c48e11",
+    "m": "9d0b9aa4af94479558899bb64b73cac3229a7251",
+    "s": "36049472ef3a71f4e2055a5a0cd6a1b03b78dfd3",
+    "r": "aa2a07553b64317115b183b1b3ff214c205abf56",
+    "ctrl": "25d57e15212ace7b3983189808de260f55c93777",
+    "ch": "faa9e8250f3afd65f187342cc4280e23fc482af1"
+  },
+  "SPEC": "FAIL_STAGE_A_NATIVE_PREREQUISITE_NOT_EXPECTED_RED; ACCEPT_HISTORICAL_CLOSE_ONLY",
+  "QUALITY": "ACCEPT_SAVED_OUTCOME_AND_CUSTODY; BLOCK_IDENTICAL_REPLAY_AND_GREEN_FEATURE; CHILD_CAUSE_UNDETERMINED",
+  "scope": "The previous amendment-1 SPEC/QUALITY accepted a static proposal only. The result does not invalidate that classification, and it does not promote it to a runtime pass.",
+  "run": 44123016528,
+  "attempt": 1,
+  "job": 134179191125,
+  "head": "5b93675aecccc76339fce18880f354a7c0ec42d2",
+  "tree": "855d245693c37336af9069ee51b4d35cc047eacd",
+  "closedHead": "a360239dfbbfa3263f634042bbe7bb4a56c5b3d7",
+  "closedTree": "0e7bd10ff333ffa18e85582f5df73ddab5f2c2fe",
+  "outcome": {
+    "steps": "4 controller --check success, 5 lock install success, 6 native failure, 7 upload failure; one selected job, terminal failure.",
+    "actual": "GET_RED_PREREQUISITE red LAUNCH_INVALID; process exit 1; no file matched output/get-winner-red.json; saved artifact API total_count=0.",
+    "expected": "Exit 41, authenticated named missing-marker proof with original 413, body and one actor arrival/disposal. None established; no artifact/ZIP/hash/receipt exists for the attempt.",
+    "unknown": [
+      "child exit, signal, spawn error and stdout/stderr",
+      "compile/dispatch reachability, GET count, selected route, actor arrival",
+      "which red predicate or untyped exception fired; no attribution to Source or provider"
+    ],
+    "fixtures": "315 expectations sealed, zero executed; no feature observer or business release."
+  },
+  "verification": {
+    "method": "Complete saved primary/close JSON DATA. Independently recomputed Git root tree identities of attempted tree, tree after removing 28 nominated mounts, and closed tree from full leaf path/mode/hash maps; no fresh job/ref lookup, execution or checkout.",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68/tree 62e78926635d6b74f288d6c0d69e0f2516306989 reconstructed from the 3203 untouched leaves.",
+    "prepared": "All 28 mount tuples (path/mode/type/Git blob/bytes/SHA256) match the accepted packet vs root measurement. All mounted mode/type/Git IDs match attempted full tree: 3231 leaves.",
+    "close": "Closed commit parent = attempted head. Removed only nominated workflow; all 3203 base + 27 other added leaves exact; added only primary b3267a5b4245da1dbe0612c13540c54ceaa19297 and close intent afcba340a14d360b640b02cf479b041e34fbe0fd, 3232 total. All preflight vs close 17 protected ref records equal; saved close-head runs zero.",
+    "savedObjects": "Verified complete input Git SHA1s, API/run/head/job and steps/log/zero artifacts against saved outcome; prior review is not substituted for observation."
+  },
+  "literalFindings": [
+    {
+      "location": "controller lines 150\u2013182, 213\u2013229, 243\u2013269; collection-adapters f1a26313b53079fa9a88340e15d86024d24f4cbf:99\u2013111",
+      "finding": "The phase reached red after earlier materialization and preflight checks; neither fresh count is individually reported. Both pfCount===1 and redCount===1 are tested at line 228 together with error/status/signal/buffer checks. checkedLaunch also runs before/after custody reads and the deadline helper within red; untyped exceptions default to LAUNCH_INVALID. Therefore neither child launch nor any particular child instruction is proven. Known zero-fresh from freshProbes would explicitly raise CUSTODY_INVALID, not this reason."
+    },
+    {
+      "location": "child lines 1\u201385; guard 5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb; S09 9da84b3f0606e9cb84d8308de26c7f193c5c778a, S10 955fa904a89733fabfa5c73736f59922b6e58023; bridge f2c473cdd11b055a3c6037de317f73d7b3a7a968; wire 38285fa0149a38924c431b4d5a705bec1384216d",
+      "finding": "Guard checks uid/gid/groups/loopback and writes a main-thread probe. Native child uses static imports; any exception before its body can leave no tool marker. The intended original GET, internal /choice POST, actor name and pending body agree with the corresponding route and wire; the constructor conversion/upstream check has a literal S10 counterpart, and S09 supplies the worker names/bindings and compile function. These are textual correspondences, not proof that a call ran or passed. No demonstrated launch incompatibility or business fix on this evidence."
+    }
+  ],
+  "nextContract": {
+    "status": "SPECIFICATION_ONLY; NO RELEASE",
+    "target": "Change isolated tooling observation only; maintain the same positive input/actor and exact RED admission. Do not change any of the 13 Source bodies or release the feature.",
+    "controller": "Before launch, check/report typed preflight count; phase/substep for before-probes, budget, spawn, after-probes, fresh count, flags and buffer validation. Preserve bounded outcome metadata on all red faults independent of success receipt: terminal status integer or null, signal/error-code allowlist or OTHER/NONE, counts 0..8 or UNKNOWN, presence/type/size-within-cap and SHA256 of bounded captured streams only (not proof of cause); retain primary fault separately from cleanup disposition. Use fixed fault enums and fail closed on malformed/over-cap data.",
+    "child": "Separate tiny isolated bootstrap with fixed literal dynamic import of the pinned native child under the same guarded process, not a second native run. Emit an entry marker and a bounded failure site/class/code/known assertion ID or UNKNOWN; a finite progress enum can separate import/compile/config/dispatch/route/actor/assertion/dispose/file if needed. Never emit raw messages, streams, stack, URLs, env, PIDs or paths; do not trust child stderr as proof. Distinguish no bootstrap marker / evidence missing from a reached site; custody failure must still block. Keep failure diagnostics separate from get-winner-red.json; a diagnostic cannot become a RED pass.",
+    "acceptance": "Bind bounded canonical diagnostics to exact head/tree/run/attempt/job and pinned inputs. DATA-only fixtures for missing bootstrap, generic throw, wrong preflight/red count, error, signal, wrong status, empty/oversize capture, unknown site and cleanup failure; replay forward/reverse bytes and validate allowlists/non-disclosure. Preserve original named RED receipt criteria and all existing caps. Re-review SPEC and QUALITY; root separately gates a changed one-shot only if authorized. No retry, automatic budget reset, feature/Source business release, runtime or PC-off claim."
+  },
+  "sourceRounds": 5,
+  "ownRounds": 5,
+  "budgetReset": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "featureReleased": false,
+  "businessReleased": false
+}

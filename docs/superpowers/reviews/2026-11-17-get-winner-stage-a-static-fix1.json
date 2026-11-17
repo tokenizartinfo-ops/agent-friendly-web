@@ -1,0 +1,58 @@
+{
+  "schema": "AFW.GET_WINNER_STAGE_A.AMENDMENT1.INDEPENDENT_REVIEW/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private detached Git DATA",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "allowedAction": "Scoped immutable DATA re-review and detached review only",
+  "rollback": "Disregard detached review",
+  "priorReview": "9d638a8e0cd6ab05db82eaa926af83a2345b1dca",
+  "proposal": "36049472ef3a71f4e2055a5a0cd6a1b03b78dfd3",
+  "report": "36c0fdd20d9bb624f405be301f9feda1ff3c4e7b",
+  "delta": "eb58c0b1ce7809ab22588f637b6bf587edc12556",
+  "fixtureSeal": "eefd23a6f730a830a1d2e537c12abf25fb5baded",
+  "SPEC": "PASS_FIX1_STAGE_A_PROPOSAL_ONLY",
+  "QUALITY": "PASS_FIX1_STAGE_A_PROPOSAL_ONLY",
+  "findings": [
+    {
+      "id": "A1",
+      "status": "ADDRESSED",
+      "blob": "25d57e15212ace7b3983189808de260f55c93777",
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent/run-get-winner-red.mjs",
+      "lines": [
+        217,
+        233,
+        234,
+        235
+      ],
+      "result": "Preflight st remains unchanged. Only the later receipt declaration and six property accesses became redStat. The controller otherwise differs solely in the new fixture-seal blob and SHA256 pins. Literal duplicate lexical declaration defect removed. No syntax execution was performed. The unchanged workflow retains fixed-Node remote --check before installation and native launch."
+    },
+    {
+      "id": "A2",
+      "status": "ADDRESSED",
+      "blob": "aae5a5ca8cecc4b7f88486b3aa6b7cac066e34ab",
+      "path": "docs/superpowers/source-lab/c2-get-winner-dependent/m-race-egress.json",
+      "line": 1,
+      "row": "M-transport-identical-copy",
+      "result": "Semantics now explicitly distinguish actual serialized marker/header differential from accepted classification. Copy-all preserves g1.413.S.413 and one external header difference relative to OFF, equal byte-for-byte to marked direct output. Winner remains UNKNOWN, stub stays0 and QA remains UNKNOWN when directRoute=false. This specifies indistinguishability without treating a retained marker as authenticated origin."
+    }
+  ],
+  "newMaterialFindings": [],
+  "verification": {
+    "delta": "All17 sequential literal operations at declared offsets matched exactly across six files. Full forward application reproduced each retrieved amendment; reverse application in reverse order reproduced each full original. No other text changed.",
+    "fixtures": "All315 IDs and their order/counts214+32+37+32 remain unchanged. Only the identical-copy expected marker/header delta and explanatory semantics changed. Every other M row and all other fixture/index edges are unchanged. No fixture executed.",
+    "bindings": "The amended fixture seal names the new M bytes/hash. Controller pins that amended seal. Proposal mountLeaves reconcile new M/seal/controller/schema blob, byte and SHA256 triples; proofSchema names the amended schema. Schema's fixtureIndex const is amended. Author report reconciles fixture/proposal/controller/schema and preserves unchanged child faa9e8250f3afd65f187342cc4280e23fc482af1 and workflow6bbb93157f25763ae00d3b13043f29525836acba. Both source13 pins and all other mount leaves remain unchanged.",
+    "readback": "Independent complete UTF8 byte length, Git SHA1 and SHA256 measurements of all six amended bodies matched their declared delta pins. Reviewed complete delta and report as DATA; all forward/reverse operations and semantic comparisons were DATA transformations, never Source parsing/import/eval/AST/check/execution.",
+    "capsAndAdmission": "Unchanged one-native-GET proposal and job7min/case120s/child180s/total330s caps. Root still must independently gate exact full tree/custody/revision/job/attempt/log/artifact and perform remote --check before native launch. Only exact named missing-marker RED after intended arrival/status/body and successful cleanup qualifies. This review grants no native/ref/runtime action."
+  },
+  "Source5": 5,
+  "OWN5": 5,
+  "sourceQualified": false,
+  "Task1Pass": false,
+  "featureImplemented": false,
+  "nativeExecutions": 0,
+  "refMutations": 0,
+  "runtimeMutations": 0,
+  "PCoff": false
+}
