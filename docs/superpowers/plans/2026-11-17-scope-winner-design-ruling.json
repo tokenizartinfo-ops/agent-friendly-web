@@ -1,0 +1,43 @@
+{
+  "schema": "AFW-SCOPE-WINNER-DESIGN-RULING/1",
+  "atUTC": "2026-11-17 12:09:38 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Private Git design data only; future isolated GitHub Actions laboratory",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "DETACHED_DIAGNOSTIC_DESIGN",
+  "resourceId": "C2-case15-first-DROP-winner-v2",
+  "allowedAction": "Revise design and fixtures only; no code or native activation yet",
+  "rollback": "Discard detached proposal; preserve all closed refs and Source13.",
+  "design": "05b1cbbf9c42d72bc6ee797a4f070aa8d79cd949",
+  "ruling": "Allow two reserved lab-only error-response egress markers in the proposed design: QA-to-M and M-to-host, each added only to an exact already-selected fresh error Response, with no inbound/forwarded header, added RPC/snapshot/wait, or product deployment.",
+  "why": "One M-to-host marker cannot bind the QA-returned value across transport. QA's returned non-ok value needs its own closed diagnostic carrier before associating the M error and final returned response. This corrects a load-bearing design gap without changing decisions/status/body or clocks.",
+  "limits": [
+    "Default OFF outside this synthetic laboratory; do not alter production/public headers or add routes/secrets/permissions.",
+    "QA marker writer is unique to exact first DROP epoch and the Response actually returned for that Request. Require absent marker/canonical version/domain-separated UUID hash/exact actual status, no raw IDs.",
+    "M associates D only after validating that response's QA marker/request/status/selector. Then label the error which actually wins, preserving original race/cancel/waitUntil.",
+    "M host marker added only after original S03 fetch fulfills with the exact bridge-tagged Response and its finally completed. Host consumes only its exact Response before original discard.",
+    "Value provenance under a closed pinned transport, not cross-isolate JS object identity, authentication, or a native-receipt claim. If a fallback can synthesize/reemit marker fields from another invocation, attribution must stay UNKNOWN.",
+    "Do not infer public QA site on missing/late/duplicate/stale/wrong marker/status/form/request, unverified map, header collision/immutable guard/helper failure or substituted unmarked result.",
+    "Full-order20 calls/Source business guards/registration/D07/clocks/caps/custody/cleanup unchanged; any separately scoped test-only transforms must be reversible and reviewed."
+  ],
+  "next": "Author revises design against independent P1, then scoped re-review. Root may release only concrete compiler/identity tooling after clean design review; full business/native/runtime remain held.",
+  "codeReleased": false,
+  "nativeReleased": false,
+  "budget": {
+    "Source": 4,
+    "Own": 4,
+    "maxSameFamily": 5,
+    "noReset": true
+  },
+  "costIfWrong": "Discard isolated observer; no product access or deployed behavior changed.",
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

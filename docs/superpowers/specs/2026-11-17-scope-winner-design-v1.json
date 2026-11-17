@@ -1,0 +1,47 @@
+{
+ "kind": "AFW.C2.DROP_JOIN/1",
+ "state": "DESIGN_ONLY; no proven bug or release",
+ "scope": {
+  "PROJECT": "AFW",
+  "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+  "ENVIRONMENT": "private Git DATA",
+  "ORIGIN": "github.com",
+  "RESOURCE_TYPE": "DETACHED_REPORT",
+  "RESOURCE_ID": "C2-case15-first-DROP-winner-v1",
+  "ALLOWED_ACTION": "immutable reads + create_blob only",
+  "ROLLBACK": "discard proposal; no refs changed"
+ },
+ "pins": {
+  "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "main": "0c9c475b3ebaa970fc11d628b40e50a90cceb727",
+  "source13": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+  "checkpoint": "40e7c737fe2f20f32d0df385800b4c967e46c3fe",
+  "feasibility": [
+   "135ca8aade653df553812b4be1687d342681ec7e",
+   "73f7f85c66ce56f5debbd5418cd6814592f57952"
+  ],
+  "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+  "wire": "38285fa0149a38924c431b4d5a705bec1384216d"
+ },
+ "historical": "44021068647/1: first14 passed, first DROP non-200/3 counters unchanged, puts != 1 (scalar unknown). GET200/ticket 0->1 not POST progress; 16 open at 180s, 17-20 unobserved. Future synthetic diagnosis only.",
+ "choice": "Use existing UUID and two local identity tests. Close the host hop with one opt-in egress-only receipt on the completed synthetic Miniflare M response; no input/forwarded header or new RPC. Console/status/form proximity cannot prove host dispatch identity. If this lab response shape is excluded, stop at partial evidence; no exact host cause.",
+ "seams": [
+  "S08:110-115/S10:180: only first kind==='drop' post(f,form). Inspect its exact mf.dispatchFetch Response before passing unchanged to original noFurther (cancel/3 counters). Preserve c2ScopeState, puts assertion and finally. Validate unique finite Ticket for hash(form.handle)/project in existing c2Snapshot. No extra read/wait; never use latest event.",
+  "QA S09:175-185: existing c2ScopeDrop/drop arms one actor-instance epoch, never holder. S09:152-157 binds exact inbound Request, private choice target/original POST and valid UUID; duplicate/reuse poisons. S02:25 passes same Request to S00. In S09's transform of S00:808 use existing caught-error stack once; bind <=6 generated numeric frame coordinates and locally keyed Request to exact pending Response constructed once. Existing observed(super.fetch result) must see that very Response for that Request; S02 fallback/finalizer cannot substitute. No trace-array dependence or raw stack export.",
+  "c2ScopeState old {puts,drifted}; only armed lab copy adds diag:{join,frames,formTag}. join=domain-separated SHA256(forwarded random UUID), formTag=distinct domain hash(private finite cookie handle). Compare host form in RAM; never emit join/formTag. Seal original state cut; revoke on restore/error, late work cannot overwrite. At most one candidate; malformed/missing/duplicate/stale/overflow => UNKNOWN.",
+  "In S09:103-109 transform positive M only, never negative spy; rebuild residency S10:50-52. Bridge:33/35 retains existing UUID in invocation closure; :36-38 saves unique error D of THIS non-ok stub response before original finiteNativeCancel(response,D,first). Wire:31 tags original deadline/abort error in local WeakSet before same reject. At bridge:44 construct pending Response once; WeakMap.set(that Response,{join,winner}) from defined D===caught, else tagged deadline, else UNKNOWN. Preserve race members/order, first(error), waitUntil, cancel and retention. Do not infer which promise rejected first if both carry D.",
+  "Test-only positive S03 entry adapter calls original fetch once. On fulfillment use exact returned Response as M WeakMap key AFTER S03 catch/finally(parent.finish); substituted equal-status Response or rejection has no receipt. Only here add one fixed-format lab egress header (join + enum) to that fresh mutable pending Response; return same body/object. No public, input, forwarded or QA header. Collision/immutable headers/helper failure => no admissible marker; preserve original result/rejection, no clone/read/cancel. May label eligible non-ok POSTs in synthetic M, consume only at first DROP. Require MF transports it without copying/synthesizing on fallback or STOP."
+ ],
+ "join": "Admit QA_DOWNSTREAM only for exact DROP host Response + M receipt D===caught + unique pre-cut QA returned-object witness with same join and finite form. UUID binds one stub.fetch to one S02 receiver; objects prove both ends without cross-isolate identity. Tagged M_DEADLINE_OR_ABORT proves that winner even if QA later returns same-status denial. Report QA site and M winner independently; no exact public QA cause for late/absent/unknown site, mismatched join, pre-forward or invalid egress.",
+ "sites": "Allow only exact generated throw+caller for S01:247 (consumeTicket status not recorded), S00:743 (finite prerequisites), S04:37 (existing exact scope key), S04:43 (append's final absent/mismatched readback). S00:747 sibling must not label :743/:43. Respect compound predicates; site is not operand. First routes to ticket consumption audit; second to missing prerequisite census; third to preexisting scope/restore; last to dropped-write/readback vs aggregate counter attribution. Only pursue repair with independent matching invariant/counterexample. Outer deadline => inspect retained-work cost within original limits. Any other site => UNKNOWN; no broad clock change.",
+ "compiler": "Future private GHA only: BASE + verified Source13 overlay + separately reviewed fixture transforms, frozen lock 36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b, esbuild 0.28.2. One helper calls real S10:29 first-connection-publication,{coupledStages:true}, stop immediately after :129 before setOptions/seed/dispatch. Real provisional dummy MF/getBindings/ns.idFromName :44-49, normal M/program/bootstrap/dated approval, no budgetCompileOnly modeled IDs; dispose MF in finally even on failure. Use ONE prepared input set in SAME harness, memoizing onLoads/entry/defines/resolution. Compare normal build vs write:false, explicit sibling outfile,sourcemap:external,sourcesContent:false; select unique JS/map by path. Full JS equality + length/SHA256. For future actual occurrence regenerate/check there: dated approval changes. Confirm same-harness instrumented M residency and QA hashes equal actual mounted bytes; no assertion diagnostic equals baseline. Map exact transformed anchors + script/line/UTF-16 column and reject adjacent call; no shared/async/truncated guesses. Map stays private scratch.",
+ "matrix": [
+  "OFF preserves frozen source/registrations; ON two distinct allowlisted sites + neighbor/shared/truncated unknown on equal JS.",
+  "Same request/error/QA Response/D/egress => downstream. Same status but distinct D, replaced QA Response, substituted S03 result or thrown finish => never downstream.",
+  "Real tagged M deadline/abort wins before QA returns; late same-ID QA cannot overwrite. Inverted winner with pending cancel remains downstream and retains actual.",
+  "Wrong form, holder, duplicate/missing ID, different host response, pre-forward refusal, post-cut or oversize => UNKNOWN. No extra RPC/reads; compare request/body/status/original headers excluding sole lab receipt, counters and teardown."
+ ],
+ "release": "Stop before business unless compiler identity + two distinct usable sites + complete egress/QA identity & privacy controls pass in a separately gated lab. No replay. Revert fixture overlays only; default OFF; preserve Source13/D07, clocks/caps/registration, original input/outputs outside lab, 4/5 each no reset. SourceQualified=false; Task1Pass=false; historicalCauseProven/receiptAuthenticated/operationalReadiness/completePackage/PCoff/globalNativeDrainVerified/sdkNamespaceEmptyVerified all false.",
+ "output": "Only {case:'15:firstDROP',site:allowed|UNKNOWN,outer:DOWNSTREAM|DEADLINE_OR_ABORT|UNKNOWN,publicSite:allowed|UNKNOWN}. Private bounded join state never leaves child. Synchronous nonthrowing observers; no extra wait for late logs; freeze evidence before original puts assert can throw."
+}
