@@ -1,0 +1,223 @@
+{
+  "schema": "AFW-DIAG3-FINITE-GET-ROOT-ONE-USE-BUSINESS-GATE/1",
+  "timestampUTC": "2026-11-17 05:00:32 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHub-hosted Ubuntu24.04 / Node22.23.4, isolated network namespace, real pinned SDK/Miniflare synthetic lab",
+  "resourceType": "ONE new Source full-order20 diagnostic ref/workflow",
+  "resourceId": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+  "allowedAction": "Create exact absent ref once at prepared head; observe one attempt1 full-order20 diagnostic with existing caps; collect logs/one ZIP once, validate with final ACTUAL d3Read, preserve primary/outcome or fault; close only nominated workflow with CAS. No replay, no production runtime.",
+  "authority": {
+    "ownerBroadContinuation": true,
+    "rootRelease": "641256e34573b53a707298cdb26149def251e6b1",
+    "round4": "ce4e65195fd0f02adf6de5b64748abaaf3470fbd",
+    "SourceStatic": "33f8e5c242ef9f41bb0352b6590c274de0934fa4",
+    "OwnStatic": "724f1f65260e0d16b2015a097e3b626a3b077bab"
+  },
+  "tooling": {
+    "Source149": {
+      "run": 44017015847,
+      "job": 133817260473,
+      "primary": "c421639e3b9efa775aa5b022ea2ca8a65f3679e7",
+      "proof": "329f48b8973c137d3c45d20ee50d565bc3c69caa",
+      "close": "4ce1c1a2136b776f0633d1cf772ffea89c9b64b8",
+      "closedHead": "cae10ee68e5942df89fbd1906fd61b443e3eaac0",
+      "freshReview": "257d7a05391e64b1fd0371f67979b24073cbe7f7",
+      "native9Inner149": true,
+      "acceptedToolingOnly": true,
+      "SourceBusiness": false
+    },
+    "Own73": {
+      "run": 44019109681,
+      "job": 133824068377,
+      "primary": "642e52b89f0eb284494435257b82bc806e4b564c",
+      "proof": "3b223dddbe73ee40d6a5d5905b84551fcec6dd31",
+      "close": "7a4a1cf1e714bd5832d0ff4eb0d0bfc3101c0948",
+      "closedHead": "067a012121a58f7c2baf938228765242c433a1d5",
+      "native8Evaluations73": {
+        "admit": 32,
+        "reject": 41
+      },
+      "freshReviewPending": false,
+      "RootPassedClosed": true,
+      "MODELOnly": true,
+      "freshReview": "8cdeb01914b7ba49a2d34608a5ce2b7499307345",
+      "acceptedModelToolingOnly": true
+    }
+  },
+  "head": "17582e124c2728800788dcbe46c740f38aea861a",
+  "tree": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "originalLeaves": 3203,
+  "additions": 25,
+  "totalLeaves": 3228,
+  "allOriginalLeavesPreserved": true,
+  "sourceIndex": "672455978db4210eedef61502682e03404e0f462",
+  "RootFull25": "bd26df072e8cf4f32fe1e266f7c2d639223d317e",
+  "RootBodyEdgesSHA256": "5ed6f2b02ecc830a9bbe7e2840b27cc77c7f5a652333557e47e23805d2878a35",
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
+    "message": "AFW-C2-T1-FINITE-GET-DIAG3-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-finite-get-diag3.yml",
+    "job": "c2-finite-get-diag3",
+    "prefix": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/",
+    "runner": "docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-finite-get-diag3/run-finite-get-diag3.mjs",
+    "artifact": {
+      "name": "afw-c2-finite-get-diag3",
+      "path": "output/c2-finite-get-diag3.json",
+      "fileName": "c2-finite-get-diag3.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Install only the existing locked dependencies",
+      "Observe finite GET in the full case order",
+      "Preserve the bounded finite GET diagnostic"
+    ],
+    "jobMinutes": 7,
+    "activationReleased": false
+  },
+  "caps": {
+    "perCaseMs": 120000,
+    "childMs": 180000,
+    "totalMs": 330000,
+    "jobMinutes": 7,
+    "stdoutBytes": 1048576,
+    "stderrBytes": 65536,
+    "journalBytes": 32768,
+    "journalRows": 128,
+    "rawTransportLogBytes": 4194304,
+    "zipBytes": 1048576,
+    "custodyBodyBytes": 1024,
+    "outcomeBodyBytes": 24576,
+    "payloadIncludingLFBytes": 24577,
+    "firstFailureBodyBytes": 512,
+    "finiteGetBodyBytes": 512
+  },
+  "selected": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ],
+  "frozen": {
+    "Source13E3": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+    "other12Exact": true,
+    "driver": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "registrationTail1794": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "noBusinessPredicateChanges": true,
+    "noExtraSnapshotCalls": true,
+    "noExtraRPC": true,
+    "noClockExtension": true
+  },
+  "purpose": "Observe numeric HTTP at first case15 GET and saturated finite Ticket count from existing snapshots after14/15. Missing/torn/unjoined evidence stays UNKNOWN; no inference of provider/root cause. C1 NOTICES semantics remain exact.",
+  "actualReceiver": {
+    "authorIndex": "520860e0f90337f764a34ea55f77eb4851000c48",
+    "commonReader": "ddaa91771171abf0dba6110184b06e631849c2ec",
+    "bindings": "aaee696f0c05cda224d7f20fa7a364c445b0741c",
+    "protocol": "db4dfcfac66cbb52ed374fa0dc57f30091c1d482",
+    "function": "d3Read",
+    "MODELNotAllowed": true,
+    "finalActualBindingUsesRoot25": true
+  },
+  "preflight": {
+    "timestampUTC": "2026-11-17 05:00:03 UTC",
+    "branchAbsent": true,
+    "headPriorRuns": 0,
+    "protectedRefs": [
+      {
+        "name": "main",
+        "branch": "main",
+        "sha": "0c9c475b3ebaa970fc11d628b40e50a90cceb727"
+      },
+      {
+        "name": "source",
+        "branch": "feat/finite-native-cleanup-20261101",
+        "sha": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68"
+      },
+      {
+        "name": "own42",
+        "branch": "lab/afw-c2-own-receiver-20261117-first-failure-post-diag2-fix1",
+        "sha": "c511b6f061fb4eb0c5594779d3123e824f34f243"
+      },
+      {
+        "name": "source35",
+        "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+        "sha": "ee43d4669d5ed63832e326ea47a3579a12190c09"
+      },
+      {
+        "name": "diag1",
+        "branch": "lab/afw-c2-source-20261116-t1-green-frontier-diag1",
+        "sha": "f510fed43c6b3f7a024b3000ba82847ce8f6cd2b"
+      },
+      {
+        "name": "host",
+        "branch": "lab/afw-c2-source-20261116-host-json-fix1-tools",
+        "sha": "1f62e087f0d9000f9c08519cd162db1104827af8"
+      },
+      {
+        "name": "toy",
+        "branch": "lab/afw-c2-source-20261117-first-failure-diag2-toy",
+        "sha": "5f5295265217b31a19fbed2379f697c5a6a83080"
+      },
+      {
+        "name": "diag2",
+        "branch": "lab/afw-c2-source-20261117-t1-first-failure-post-diag2",
+        "sha": "c4f2e09b4befa0f3faa61fe104748e3f382fdc01"
+      },
+      {
+        "name": "source149",
+        "branch": "lab/afw-c2-source-20261117-finite-get-diag3-tools",
+        "sha": "cae10ee68e5942df89fbd1906fd61b443e3eaac0"
+      },
+      {
+        "name": "own73",
+        "branch": "lab/afw-c2-own-receiver-20261117-finite-get-diag3-tools",
+        "sha": "067a012121a58f7c2baf938228765242c433a1d5"
+      }
+    ],
+    "triggerAuditOriginal62": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "fullTreeAlreadyVerified": true
+  },
+  "rollback": "Terminal capture once. CAS from attempted head; delete only .github/workflows/afw-c2-finite-get-diag3.yml and add Root primary/closure receipt under nominated prefix. Read back original3203+24retained+2evidence=3229; 10 protected heads unchanged; zero close-head runs. Preserve old histories.",
+  "limits": {
+    "SourceDiagnosticOnly": true,
+    "normalFullTask1Held": true,
+    "CloudflareRuntime": false,
+    "OAuthOTPTokenMailMax": false,
+    "ownerNoManualRequestsBeforeUTC": "2026-11-17T11:00:00Z",
+    "SourceLocalExecution": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
