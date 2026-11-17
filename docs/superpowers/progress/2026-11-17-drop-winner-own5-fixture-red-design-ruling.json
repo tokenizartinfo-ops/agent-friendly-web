@@ -1,0 +1,29 @@
+{
+  "schema": "AFW.OWN5.FIXTURE_RED_DESIGN_RULING/1",
+  "timestampUTC": "2026-11-17 14:09:49 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "stage": "A fixture/data + old-reader RED only",
+  "authorityBrief": "b11d18f929b413d098dc368692debf71a85660a3",
+  "acceptedDesign": "Use original coherent D3 MODEL eligible open15 baseline and semantically identical twin with only observation.dropWinner=P; recompute required log/ZIP/digests consistently. Require baseline ADMIT plus exact twin semantic/wire checks; demand inspected legacy Error('G20_OWN_UNQUALIFIED') before named AssertionError('AFW_OWN_D4_RECEIPT_COMPONENT_REQUIRED'). Another setup/import/export/shape failure cannot count. The independent new matrix is D4 MODEL26, separate from this D3 MODEL25 test context.",
+  "inspectedOldErrorSource": "legacy/shape.mjs bbb8857d (actor must supply full immutable descriptor)",
+  "why": "Isolates old receiver's lack of the new public receipt component without attributing failure to an unrelated new namespace/tuple. Observed actual RED is still mandatory before guard implementation.",
+  "boundary": "MODEL-only TDD red, not actual Source/business/native cause. Original73/95/code remain exact; future ACTUAL binds only measured Root26 with no MODEL fallback.",
+  "sourceRound": 5,
+  "ownRound": 4,
+  "max": 5,
+  "noReset": true,
+  "guardCodeReleased": false,
+  "nativeReleased": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
