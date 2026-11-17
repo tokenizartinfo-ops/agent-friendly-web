@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposed scopeWrite component for a future versioned outcome",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "afw.c2-scope-write-diag4.v1"
+        },
+        "state": {
+          "const": "KNOWN"
+        },
+        "reason": {
+          "const": "TARGET_SCOPE_PUT_ASSERTION"
+        },
+        "throwSequence": {
+          "const": 58
+        },
+        "bucket": {
+          "enum": [
+            "ZERO",
+            "TWO_PLUS"
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "state",
+        "reason",
+        "throwSequence",
+        "bucket"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "afw.c2-scope-write-diag4.v1"
+        },
+        "state": {
+          "const": "UNKNOWN"
+        },
+        "reason": {
+          "enum": [
+            "JOURNAL_UNRESOLVED",
+            "TRUNCATED_NATIVE",
+            "NATIVE_FORMAT_UNSUPPORTED",
+            "AMBIGUOUS_NATIVE",
+            "TARGET_NATIVE_UNAVAILABLE",
+            "SOURCE_PREFIX_UNJOINED",
+            "ASSERTION_BLOCK_INCOMPLETE",
+            "ASSERTION_AMBIGUOUS",
+            "ASSERTION_UNAVAILABLE",
+            "ASSERTION_FORMAT_UNSUPPORTED",
+            "ASSERTION_CONFLICT",
+            "UNSUPPORTED_SCALARS"
+          ]
+        },
+        "throwSequence": {
+          "const": null
+        },
+        "bucket": {
+          "const": null
+        }
+      },
+      "required": [
+        "schema",
+        "state",
+        "reason",
+        "throwSequence",
+        "bucket"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "afw.c2-scope-write-diag4.v1"
+        },
+        "state": {
+          "const": "NOT_APPLICABLE"
+        },
+        "reason": {
+          "enum": [
+            "EARLIEST_THROW_DIFFERENT",
+            "TARGET_PASSED",
+            "NO_QUALIFYING_THROW"
+          ]
+        },
+        "throwSequence": {
+          "const": null
+        },
+        "bucket": {
+          "const": null
+        }
+      },
+      "required": [
+        "schema",
+        "state",
+        "reason",
+        "throwSequence",
+        "bucket"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

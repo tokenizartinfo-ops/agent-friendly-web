@@ -1,0 +1,205 @@
+{
+  "schema": "AFW-SCOPE-WRITE-COST-AND-TRANSACTION-STATIC-CONTRAST/1",
+  "timestampUTC": "2026-11-17 05:27:34 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "reviewer": "c230_full_own_native_review",
+  "authority": "Root: revisión de decisión/costo y pregunta1 sobre exactly-one; pregunta2 de reachability permanece a cargo de n3.",
+  "disposition": "DATA_DESIGN_COMPATIBLE_KEEP_CODE_AND_NATIVE_HELD",
+  "budget": {
+    "SourceUsed": 4,
+    "OWNUsed": 4,
+    "maxSameFamily": 5,
+    "noReset": true,
+    "designDoesNotConsumeRound": true,
+    "codeReleasedByThisReview": false,
+    "nativeReleasedByThisReview": false
+  },
+  "evidence": [
+    {
+      "kind": "diagnosis",
+      "bytes": 24220,
+      "sha256": "969015e765494334d8207a08290176d3f9139a4c171730f6fe150c0a1b136b56",
+      "git": "e5570431c54ef1556692fcdf1349c503ef983ecb",
+      "fullRead": true,
+      "GitBlobRecomputed": true
+    },
+    {
+      "kind": "design",
+      "bytes": 2776,
+      "sha256": "8d4f6cd8c818708825bb798eaa2f17b9f5a9990e769a4733ad0da5f683c98c76",
+      "git": "88e8b25c0f422f41d01f1785ae87515c1425d3ec",
+      "fullRead": true,
+      "GitBlobRecomputed": true
+    },
+    {
+      "kind": "S09",
+      "bytes": 61073,
+      "sha256": "2dc335761ac7f168532af37fd4128d2fc8b15c9b5b3072f377a9913e7b93829d",
+      "git": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+      "fullRead": true,
+      "GitBlobRecomputed": true
+    },
+    {
+      "kind": "S10",
+      "bytes": 88713,
+      "sha256": "cbff758701ae58c915efdc2489f6b770b0f22224cedfc73fcfd28df026e1b8fa",
+      "git": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+      "fullRead": true,
+      "GitBlobRecomputed": true
+    },
+    {
+      "kind": "S04",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b",
+      "git": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "fullRead": true,
+      "GitBlobRecomputed": true
+    },
+    {
+      "kind": "packageClosure",
+      "bytes": 38204,
+      "sha256": "819003b4c156576d9f43ba250a152ad2482dafbd80cdceded88c66fdee5c80d4",
+      "git": "c505a9d26aac123275cbc8bb28a56d4986e7e16e",
+      "fullRead": true,
+      "GitBlobRecomputed": true
+    },
+    {
+      "kind": "lock",
+      "bytes": 445991,
+      "sha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34",
+      "git": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+      "fullRead": true,
+      "GitBlobRecomputed": true
+    }
+  ],
+  "decisionCost": {
+    "assessment": "El dato ZERO/TWO_PLUS sería información adicional limitada; no identifica por sí solo un guard, una reparación o escrituras durables. Una captura futura mediría otra ocurrencia, no recuperaría el escalar privado perdido de DIAG3.",
+    "recommendation": "No gastar5 por inercia para elegir entre auditorías estáticas. Sellar diseño/fixtures DATA puede continuar. Resolver primero el contraste acotado exactly-one (aquí) y la reachability del negativo (n3), usando la evidencia fijada. Root integra ambas antes de cualquier decisión nueva de código/native.",
+    "ZERO": "Clasificar el negativo drop como no demostrado en su put interceptado; conservar guards y assert1. Revisar precondición/identidad/intercepción upstream y diseñar la decisión concreta de cobertura sólo con prueba; cero no nombra el guard ni prueba que sea incorrecto.",
+    "TWO_PLUS": "Investigar multiplicidad de invocaciones/callpath o trabajo pendiente del intervalo; conservar persistencia y assert1. No equiparar puts interceptados/descartados con writes durables ni declarar retry del runtime.",
+    "UNKNOWN_OR_DIFFERENT_FIRST": "Preservar diagnóstico incompleto y cerrar esta línea; sin replay automático.",
+    "scope": "No modificación Source13, observadores, RPC, snapshots, clocks, caps ni permisos. No relajación a >=1 y no nueva familia para eludir el límite."
+  },
+  "question1": {
+    "APIContract": {
+      "currentOfficialDocumentation": "https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/#transaction",
+      "consultedUTC": "2026-11-17 05:27:34 UTC",
+      "exactQuote": "a single transaction that either commits successfully or aborts",
+      "paraphrase": "La API documenta atomicidad de operaciones y commit/abort, uso de txn/rollback y particularidades SQLite. Ese texto no promete que un contador JavaScript externo acabe exactamente en1, ni fija una cantidad global de invocaciones de la aplicación.",
+      "distinction": "transaction() asíncrono es el método usado; no se traslada a él el contrato de transactionSync()."
+    },
+    "historicalRetryClaim": {
+      "source": "https://blog.cloudflare.com/durable-objects-easy-fast-correct-choose-three/#transactions",
+      "published": "2021-08-03",
+      "exactQuote": "the transaction callback can be called multiple times",
+      "paraphrase": "El artículo oficial describe conflictos concurrentes y callbacks reintentados, y advierte que mutaciones RAM requieren idempotencia. Es contexto histórico de la API KV; no prueba que ese mecanismo se aplique al backend/versión fijados ni que ocurriera en DIAG3.",
+      "status": "No usar como causa observada ni como justificación para relajar assert1."
+    },
+    "frozenRuntime": {
+      "lock": {
+        "blob": "36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b",
+        "bytes": 445991,
+        "sha256": "846c4d28819170cfd188ebf1e78fc19878c9aa97b41d73ce7710a6c0cd9ece34"
+      },
+      "miniflare": "5.20260831.0-alpha",
+      "workerd": "1.20260831.1",
+      "linuxBinaryPackage": "@cloudflare/workerd-linux-64@1.20260831.1",
+      "selection": "S09:356 y S10:43 declaran useSQLite:true para el DO del fixture.",
+      "officialVersionSource": "https://github.com/cloudflare/workerd/blob/v1.20260831.1/src/workerd/api/actor-state.c%2B%2B#L602-L672",
+      "rawSource": "https://raw.githubusercontent.com/cloudflare/workerd/v1.20260831.1/src/workerd/api/actor-state.c%2B%2B",
+      "staticFinding": "transaction entra bajo blockConcurrencyWhile. asyncTransactionImpl puede volver a intentar startTransaction antes de instalar la continuación del callback; después de invocarlo sigue a commit o rollback/excepción, sin replay del callback en esa función.",
+      "lineJoins": {
+        "entryAndGate": [
+          602,
+          624
+        ],
+        "acquisitionBeforeCallback": [
+          625,
+          646
+        ],
+        "callback": [
+          647,
+          649
+        ],
+        "commitOrError": [
+          650,
+          672
+        ]
+      },
+      "inference": "El camino inspeccionado de esta versión no sustenta atribuir múltiples puts al replay nativo por conflicto del callback ya iniciado. La recursión al adquirir la transacción no es una segunda invocación de dicho callback.",
+      "limit": "Lectura de fuente oficial del tag correspondiente a la versión de lock; no build reproducible, auditoría binaria ni medición de lo ocurrido en el run. No se afirma una garantía universal para futuras versiones, otras implementaciones o otra invocación de transaction."
+    },
+    "fixedFixture": {
+      "S09": {
+        "path": "test/fixtures/finite-first-connection-publication.mjs",
+        "blob": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+        "lines": [
+          175,
+          185
+        ]
+      },
+      "counter": "S09:177 crea un único stats fuera del callback;179 incrementa puts por cada clave del prefijo scope antes de retornar Promise.resolve() en drop, sin delegar ese put a tx.put.181 llama al fn con el wrapper.",
+      "countedUnit": "Intentos interceptados del prefijo durante la vida de ese stats, incluyendo varias llamadas a transaction si las hubiera. No contiene requestId/prepId de selección ni prueba de commit.",
+      "durability": "En drop, los puts contados por ese branch no se entregan al storage real. El contador RAM no es transaccional ni se revierte por rollback. El valor no es cantidad de registros durables, ni el bucket de tickets afterScopeMissing.",
+      "append": {
+        "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+        "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+        "lines": [
+          28,
+          43
+        ]
+      },
+      "appendReading": "S04:33–38 instala un callback y tiene un put en el camino que pasa las guardas/ausencia previa;41–43 hace sync y readback duradero. Un callsite estático no cuenta todas sus invocaciones dinámicas.",
+      "assertion": {
+        "path": "test/fixtures/finite-coupled-native.mjs",
+        "blob": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+        "line": 113,
+        "column": 283,
+        "expression": "else assert.equal(stats.puts,1)"
+      },
+      "meaning": "El1 es una condición adicional del fixture: exigir que el negativo alcance exactamente un intento interceptado en la ventana. No proviene por sí solo del contrato general de almacenamiento. Que esta expectativa falle sigue siendo evidencia de requisito/coverage no cumplido, no licencia para suavizarla."
+    },
+    "upperBound": {
+      "perInvocationConditional": "Si se demuestra una sola invocación efectiva de append, su único storage.transaction, llegada al put de S04:38 y ausencia de otras invocaciones relevantes, el camino fijado permite a lo sumo un incremento de ese callback.",
+      "globalStatsUpperBoundProven": false,
+      "exactGap": "stats pertenece al intervalo completo c2ScopeDrop→c2ScopeState/restore y cuenta cualquier transaction/clave con el prefijo; no está ligado a un request/append/prepId. El único POST nominal de S08 y D07 serial no son censo/exclusión de trabajo previo pendiente, otro callpath o trabajo tardío del mismo actor/storage.",
+      "availableEvidence": "e557 cita un append en el camino nominal S00:741–749. Se reutiliza esa revisión de Root; no se vuelve a auditar todo S00 ni el sistema.",
+      "notAssumed": "No se presupone globaldrain, ausencia de overlap ni continuidad global de actor; globalNativeDrainVerified permanecefalse.",
+      "conclusion": "No se demuestra stats<=1 para toda la ventana y no se deduce actualZERO. Un TWO_PLUS futuro requeriría distinguir múltiples invocaciones, pero no constituye prueba de replay nativo ni de escrituras persistidas."
+    }
+  },
+  "impactOnDecision": "El contraste reduce una hipótesis concreta sin gastar ronda5: no tratar el retry histórico KV como explicación del runtime SQLite fijado. No elimina por sí solo la bifurcación ZERO/TWO_PLUS; la utilidad marginal de capturarla queda condicionada a una decisión distinta y concreta tras integrar pregunta2.",
+  "observedRunStill": {
+    "run": 44021068647,
+    "review": "b50ec6e9d40bfed7f252656f027429879d0b543c",
+    "status": "DIAGNOSTIC_ACCEPTED_TASK1_INCOMPLETE",
+    "scalarNotRecovered": true
+  },
+  "methods": {
+    "inertGitDATAOnly": true,
+    "primaryOfficialWebDocsAndSourceText": true,
+    "builtinCrypto": true,
+    "SourceOrOWNExecution": false,
+    "SourceASTSyntaxCompileTest": false,
+    "localFilesystem": false,
+    "dependencies": false,
+    "codeChanges": false,
+    "native": false,
+    "refs": false,
+    "logsOrZIPReaudit": false,
+    "CloudflareRuntimeOperation": false,
+    "onlyWrite": "Este JSON detached mediante create_blob y FULLreadback."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

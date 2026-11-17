@@ -1,0 +1,74 @@
+{
+  "schema": "AFW-SCOPE-WRITE-DIAG4-DESIGN-ONLY-INDEX/1",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": "88e8b25c0f422f41d01f1785ae87515c1425d3ec",
+  "status": "HOLD_CODE_AND_RUN_PENDING_COST_DECISION",
+  "contract": {
+    "bytes": 12873,
+    "sha256": "9ee3debfa96070e95ac9f6c49b563545edeb9369abf90c76e82bbbdae61c28b4",
+    "blob": "dcfa64df1542cc747dec694ce66a5516dbbd91a1"
+  },
+  "componentSchema": {
+    "bytes": 2411,
+    "sha256": "ce093ec28161b847d952fead9d82902c10d19d346cb30479c923e038966e53f5",
+    "blob": "40e56188f2add83f6929801027318fe72df309a4"
+  },
+  "fixtureFirst": {
+    "bytes": 28443,
+    "sha256": "63ffbcab8f593f7745b7a557202b7d589282729f652f0bceb3da6af802ca01d4",
+    "blob": "9c357895afeb46d5f3e19c4c42bab63691d35102"
+  },
+  "preconditions": {
+    "bytes": 6595,
+    "sha256": "80dbef065ffc689495ee62378c93b666409246c69e6bc77f47a4873b38c97d0c",
+    "blob": "86a0d3ae1e32e5b6c61bd28a41426a725c1aecf8"
+  },
+  "fixtureCounts": {
+    "collector": 28,
+    "publicBoundary": 10,
+    "known": 5,
+    "unknown": 19,
+    "notApplicable": 3,
+    "outerFault": 1
+  },
+  "wire": {
+    "path": "observation.scopeWrite",
+    "placement": "Append immediately after finiteGet in an explicitly new outcome family. Append the complaint-free closed oneOf component as a required property in its observation definition. All inherited field definitions, exact order, bounds, seven false nonclaims and false qualification flags remain enforceable. Only data for the component is bound here. Future family/marker/command/actual-code details need a separate Root binding.",
+    "keys": [
+      "schema",
+      "state",
+      "reason",
+      "throwSequence",
+      "bucket"
+    ],
+    "encoding": "UTF8 JSON.stringify(scopeWrite), no LF; field order required. Whole outcome including exactly one LF <=24576; sibling size limit 512. Exceeding the outer limit fails publication with no normal artifact. No evidence trimming.",
+    "maxBytesAcrossLegalValues": 136,
+    "known": "Only ZERO or TWO_PLUS with throwSequence 58. The fixed sequence follows 14 completed action/count quartets and the next action enter/throw. UNKNOWN and NOT_APPLICABLE always have both throwSequence and bucket null. No actual/expected/status/ticket/row/counter/stack fields."
+  },
+  "preconditionDecision": "The targeted negative must observe its intended write to count as coverage. A valid GET and finite Ticket cannot require every later denied POST to reach append; original child/request deadlines and fresh authority checks are intervening guards.",
+  "costDecision": "The two branches currently select further investigations only. Finish the static audits before considering the last round. ScopeWrite has no actual result from the previous business capture.",
+  "budget": {
+    "SourceUsed": 4,
+    "OwnUsed": 4,
+    "maxSameFamily": 5,
+    "noReset": true,
+    "ifProceedLastRound": 5,
+    "notConsumedByDesign": true
+  },
+  "fullReadbackVerified": true,
+  "codeReleased": false,
+  "runtimeReleased": false,
+  "nomination": null,
+  "rollback": "Discard the four detached design documents; the previous closed R4 occurrence and body25 remain byte-exact. No ref, native, output or permission has been added.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

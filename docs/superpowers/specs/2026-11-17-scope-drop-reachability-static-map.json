@@ -1,0 +1,83 @@
+{
+  "schema": "AFW-SCOPE-WRITE-DIAG4-EXACT-ONE-PRECONDITIONS/1",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "decision": "Keep exact-one as a coverage assertion for the targeted fixture. The public runtime has no contract that every negative POST reaches append. Current preconditions do not make that reachability unconditional.",
+  "beforeDrop": [
+    [
+      "First 14 PASS; two earlier installed stages and monitoring checks completed",
+      "D07; S08:35–59,86–109; current outcome seq1–56.",
+      "Historical facts inside the same fixture. Authority, duration and revalidation during the next request remain open."
+    ],
+    [
+      "GET on main selected finite and produced an acceptable form/cookie",
+      "S08:17–21,110–113; reaching 113:283 implies 200 and expected form/text. S01:209–233 writes and rereads the Ticket before success.",
+      "A Ticket base is selection data. It does not confer current permission for the POST, consume itself or write cleanup scope."
+    ],
+    [
+      "Saved post-GET storage and three effect counters; dropped interceptor installed first",
+      "S08:22,30,111–114; S09:164–165,175–185. The wrapper zeroes puts; its first iteration suppresses any matched put.",
+      "The intercepted counter increments only if the transaction invokes put on the cleanup-scope prefix. No equality of all data across time or completed in-flight work is proved by those counters."
+    ],
+    [
+      "POST was denied and three counters compared equal before checking puts",
+      "S08:15,21–22,30,113.",
+      "The denied status can come from the intended dropped-write readback or any earlier fail-closed guard, and its actual numeric status is private."
+    ]
+  ],
+  "remainingBeforeScope": [
+    [
+      "New request and admitted lifetime",
+      "S03:22–28; native bridge f2c473:6–44; private factory 1f1e5b:22–30; S02:5–26; S01:53–104.",
+      "Fresh original request with 30s wall/monotonic cap; receiving boundary clipped to remaining time; 5s child ceilings and physical-work exclusion can precede any scope write. No GET-to-POST carryover of authority."
+    ],
+    [
+      "Current subject, project, ticket, history and monitoring permissions",
+      "S00:613–652; S01:128–196,235–260,378–412.",
+      "Exact grammar/cookie, original Access expiry, live grant and notice, prior receipts and complete paired facts must still qualify. Even a valid prior GET and finite Ticket do not prove validity through this phase."
+    ],
+    [
+      "Consume and approve finite stage",
+      "S01:244–260; preparation-store 122bc0:66–92,123–142; S00:661–672.",
+      "Recorded-only TicketUse, approval records read back, live in-memory original admission, fresh stage facts and clipped deadlines are prerequisites. No post-restore token use, approval or admission is exported."
+    ],
+    [
+      "Rechecks and physical version observations",
+      "S00:693–706,731–746.",
+      "The producer must verify original pointer, baseline and rollback version and requalify. Then it requires issuer reservation, SDK root/grant, grant link and notice link. No per-boundary progress/duration was captured."
+    ],
+    [
+      "Append and attempted write",
+      "S04:28–43.",
+      "Inside append a valid sealed record, active lease, stable transaction/sync and tx methods, and absent prior scope are checked before put. The code contains one put invocation per callback reaching that line. Callback count, replay/overlap and actual attempt count are unobserved. No assumption made about SDK retry guarantees."
+    ]
+  ],
+  "exampleCountermodel": "The GET can finish successfully, the next POST can install its drop wrapper and receive a legal non-200 response because its original request deadline or a clipped child expires during a fresh pre-append check. Upload/activation/receipt counts can stay equal, and puts can be zero because no matched call occurred. This is a reachable contract alternative, not a claim about elapsed time or the cause in the recorded run. A guard rejecting stale source data before append gives the same logical counterexample without assuming an actual expiration.",
+  "coverageContract": "The fixture is intended to expose the cleanup readback after a suppressing write. To certify that particular negative path, establish entry into the matching write, denial, effects unchanged and correct restoration. In the present fixture exactly one counted attempt is also required. Non-200 by itself never proves the drop branch. A failed reachability assertion properly leaves the coverage case unqualified. Guaranteeing scope on every negative would conflict with earlier guards. Whether exactly one is contractually guaranteed once a native transaction enters depends separately on callback semantics and competing work; release neither conclusion nor a relaxed assertion from this report.",
+  "decisionValue": {
+    "staticNow": "Continue with the bounded preconditions and available transaction semantics as static work. Both are useful without the scalar. The closed snapshot and stdout digest contain no further discriminator.",
+    "zero": "Allows an upstream or bypass audit and removes observed multiplicity at that frontier; identifies no individual guard.",
+    "twoPlus": "Would focus callback multiplicity/interception, without identifying retry mechanism or durable effects.",
+    "other": "Another earliest failure, timeout before the target, missing scalars, or conflicting evidence stops the line. One additional run is not assured to distinguish even these branches.",
+    "recommendation": "HOLD implementation and runtime. Reconsider only if Root first identifies concrete alternative actions with materially different cost or safety that genuinely depend on distinguishing ZERO from TWO_PLUS. Design spends none of the five rounds."
+  },
+  "evidence": {
+    "diagnosis": "e5570431c54ef1556692fcdf1349c503ef983ecb",
+    "review": "b50ec6e9d40bfed7f252656f027429879d0b543c",
+    "outcome": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
+    "source13": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+    "materializedS08": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+    "closedR4": "8a474ec9f52ad14abf9259b81eedefc61e97e018"
+  },
+  "status": "STATIC_DATA_ONLY",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

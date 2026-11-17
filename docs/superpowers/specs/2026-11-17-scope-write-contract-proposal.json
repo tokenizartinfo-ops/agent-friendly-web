@@ -1,0 +1,105 @@
+{
+  "schema": "AFW-SCOPE-WRITE-DIAG4-CONTRACT-PROPOSAL/1",
+  "status": "SEALED_DESIGN_ONLY_RECOMMEND_HOLD",
+  "authority": "88e8b25c0f422f41d01f1785ae87515c1425d3ec",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "decides": "S08:113:283 asserts one attempted scope put. Distinguish zero from at least two on that exact earliest failure only.",
+  "component": {
+    "bytes": 2411,
+    "sha256": "ce093ec28161b847d952fead9d82902c10d19d346cb30479c923e038966e53f5",
+    "blob": "40e56188f2add83f6929801027318fe72df309a4"
+  },
+  "fixtures": {
+    "bytes": 28443,
+    "sha256": "63ffbcab8f593f7745b7a557202b7d589282729f652f0bceb3da6af802ca01d4",
+    "blob": "9c357895afeb46d5f3e19c4c42bab63691d35102"
+  },
+  "wire": {
+    "path": "observation.scopeWrite",
+    "placement": "Append immediately after finiteGet in an explicitly new outcome family. Append the complaint-free closed oneOf component as a required property in its observation definition. All inherited field definitions, exact order, bounds, seven false nonclaims and false qualification flags remain enforceable. Only data for the component is bound here. Future family/marker/command/actual-code details need a separate Root binding.",
+    "keys": [
+      "schema",
+      "state",
+      "reason",
+      "throwSequence",
+      "bucket"
+    ],
+    "encoding": "UTF8 JSON.stringify(scopeWrite), no LF; field order required. Whole outcome including exactly one LF <=24576; sibling size limit 512. Exceeding the outer limit fails publication with no normal artifact. No evidence trimming.",
+    "maxBytesAcrossLegalValues": 136,
+    "known": "Only ZERO or TWO_PLUS with throwSequence 58. The fixed sequence follows 14 completed action/count quartets and the next action enter/throw. UNKNOWN and NOT_APPLICABLE always have both throwSequence and bucket null. No actual/expected/status/ticket/row/counter/stack fields."
+  },
+  "protected": {
+    "businessIndex": "672455978db4210eedef61502682e03404e0f462",
+    "source13": "4c62b37a2e94efa057a1df97dd32c193761b8dcb",
+    "S08": "49f3fa30c6754e64c36ab5cba769c9ef88669969",
+    "S09": "3e1d4c2695dce2d13ba064274ba441c4ce9447c3",
+    "S10": "cb95e1f3b2e6c14d07f661f1b818c38d470564d7",
+    "siblingDriver": "9e29c5197207b03bdb4b10069089f37df289e88c",
+    "recorder": "662ec8170bbfe81831b557824d1a466e722842d7",
+    "readProgress": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+    "selected": "179fb6c9cd431a38f084211021843286aaa70671",
+    "r4Schema": "bdb37d27e0c5e217d7b7249c216d674750046b73",
+    "r4Protocol": "290aad4bd227d604510d3adde69ec30759386160",
+    "r4Adapter": "0465caea70e7a80aeb631fd73f267bb00dfc0f5d",
+    "r4Runner": "b88f9ecb3317e0e82f11eaa540d4a03846b70733",
+    "unchanged": "20 cases in their original order, original request clock, 180000ms child, 120000ms case, 330000ms total and 7min job; unchanged S08/S09 and all 13 compiled inputs. No Worker instrumentation, additional RPC or snapshot, no child changes. FirstFailure/C1 and finiteGet values remain direct results of the frozen R4 logic. No duplicate Source build/test graph."
+  },
+  "producerPriority": [
+    "0. Preserve every old fault including N2 native PASS plus recorded throw. An infra/capture/custody fault has no normal sibling. Validate all fixed input identities, E3 target hashes, stable reads and 20 IDs under original caps before projection.",
+    "1. With recorderFaultObserved, empty or ambiguous journal integrity return UNKNOWN/JOURNAL_UNRESOLVED. A torn journal is usable only for complete previously validated records. Require firstThrowSequence to agree with earliest recorded throw; malformed outer replay remains rejected. If that throw is on a different id, op/edge, name, code or exact pinned site, return NOT_APPLICABLE/EARLIEST_THROW_DIFFERENT. Ignore all later matching throws. With no first throw, require all rows 1–15 in their expected journal order, all 15 action and count returns plus matching native prefix of 15 PASS for NOT_APPLICABLE/TARGET_PASSED. Otherwise complete journal with no throw gives NOT_APPLICABLE/NO_QUALIFYING_THROW; all other no-throw states give UNKNOWN/JOURNAL_UNRESOLVED.",
+    "2. Exact target is C2T1_SCOPE_MISSING/action/throw, AssertionError/ERR_ASSERTION/S08:113:283. Require contiguous journal events 1–56 as the 14 selected action enter/return and count enter/return quartets. Require target events 57–60 action enter, exact action throw, count enter/return in that order, without AFTER inside them. Otherwise UNKNOWN/JOURNAL_UNRESOLVED. A later torn journal tail does not invalidate those joined earlier records.",
+    "3. Native integrity torn -> UNKNOWN/TRUNCATED_NATIVE, even with an otherwise invalid envelope. Then require fatal UTF8 over the existing stdout bytes, no BOM/CR/TAB/NUL and first line exactly TAP version 13 plus LF on nonempty stdout; failure -> UNKNOWN/NATIVE_FORMAT_UNSUPPORTED. Empty stdout falls through to lack of native result. Then native ambiguous -> UNKNOWN/AMBIGUOUS_NATIVE. Require native prefix, first 14 IDs exactly in order with pass and id 15 with fail. Otherwise UNKNOWN/TARGET_NATIVE_UNAVAILABLE.",
+    "4. Use frozen scanFiniteWire C2SOURCE/rowError(15) semantics: canonical ordered unique source prefix 1..15, exact phase, status/code, typed bounded counter tuple and agreement with native. Any missing, ambiguous, conflicting or unsupported row in scope -> UNKNOWN/SOURCE_PREFIX_UNJOINED. The source prefix and native TAP streams need not be adjacent. The typed ticket markers are irrelevant to the puts bucket.",
+    "5. In the canonical Node22.23.4 native failure result block owned by case15, use scanFiniteWire field ownership and indentation. An unclosed target diagnostic -> UNKNOWN/ASSERTION_BLOCK_INCOMPLETE; structurally malformed diagnostic layout -> UNKNOWN/ASSERTION_FORMAT_UNSUPPORTED. For multiple target blocks or duplicate top-level field -> UNKNOWN/ASSERTION_AMBIGUOUS. No target block, absent actual or expected -> UNKNOWN/ASSERTION_UNAVAILABLE. In this order only top-level fields in a terminated target block are eligible. Nested error/stack/raw console text is opaque. A scalar from another result cannot satisfy the target.",
+    "6. Match calibrated field set {duration_ms,type,location,failureType,error,code,name,expected,actual,operator,stack}, type quoted test, numeric duration with optional fraction, location present, error and stack literal block headers |-. Missing structural/tag fields, extra fields or unsupported shape -> UNKNOWN/ASSERTION_FORMAT_UNSUPPORTED. A present different failureType, code, name or operator -> UNKNOWN/ASSERTION_CONFLICT. Require literal quoted testCodeFailure/ERR_ASSERTION/AssertionError/strictEqual respectively. E3 alias site comes only from the canonical journal; registration location/stack is not a substitute.",
+    "7. Both actual and expected must be bare ASCII canonical nonnegative decimal integers (0 or nonzero digit followed by digits), bounded through 9007199254740991. Lexical mismatch, nested value, or overflow -> UNKNOWN/UNSUPPORTED_SCALARS; absent top-level field already resolved by rule 5. Expected other than 1 or actual equal to 1 -> UNKNOWN/ASSERTION_CONFLICT. Otherwise return KNOWN/TARGET_SCOPE_PUT_ASSERTION at sequence 58 with ZERO for 0, TWO_PLUS for >=2."
+  ],
+  "publicValidation": [
+    "Independently replay the inherited journal/native/custody checks and R4 finiteGet/firstFailure structural and public guards. Exact outer context and Source25/SDK/build/run/ZIP/log binds are mandatory on an eventual ACTUAL occurrence; model context cannot serve as actual evidence. Implement the component oneOf plus ordered keys and semantic joins without relying on unsupported schema keywords.",
+    "For a public exact target throw (regardless of later raw) the unchanged firstFailure and finiteGet.http must both be NOT_APPLICABLE/EARLIEST_THROW_DIFFERENT with canonical empty scalars. For any other first throw apply rule 1; a joined known prior HTTP projection can coexist with scopeWrite.NOT_APPLICABLE. If the journal is ambiguous/faulted, scopeWrite.JOURNAL_UNRESOLVED wins. Never infer a closed timeline beyond the verified prefix.",
+    "Publicly replay rules 1–2 exactly. At native torn admit only TRUNCATED_NATIVE at that stage. With a native ambiguous prefix allow NATIVE_FORMAT_UNSUPPORTED or AMBIGUOUS_NATIVE, never KNOWN. When target native evidence is incomplete/wrong and not ambiguous/torn, allow NATIVE_FORMAT_UNSUPPORTED or TARGET_NATIVE_UNAVAILABLE only, after checking the envelope-consistency rule below. A complete empty stdout (capture.stdout.bytes==0) cannot be NATIVE_FORMAT_UNSUPPORTED. When native prefix actually satisfies all 15 ordered outcomes, TARGET_NATIVE_UNAVAILABLE and AMBIGUOUS_NATIVE are impossible.",
+    "Use R4 exported ternary prefix evidence. SOURCE_UNJOINED is false, JOINED_SNAPSHOT/MARKER_STREAM_INVALID/MARKER_UNAVAILABLE/SNAPSHOT_INVALID are true; NATIVE_UNJOINED and JOURNAL_UNRESOLVED are neutral. Unsupported global envelope requires no positive source claim in either sample. Under eligible joins through 15, an unsupported envelope requires both samples SOURCE_UNJOINED. A scopeWrite SOURCE_PREFIX_UNJOINED requires scope15 SOURCE_UNJOINED; scope14 can already be true. When scope15 is false, only an allowed earlier envelope failure or SOURCE_PREFIX_UNJOINED can be admitted at this stage. All assertion-layer reasons and KNOWN require positive prefix evidence from both 14 and 15. Missing markers do not invalidate a positive source claim. There is no ticket-count-to-puts relation.",
+    "Once the public prerequisites and data pins hold, private YAML ambiguity/layout/tag/scalar reasons cannot be authenticated by publisher/OWN without raw child stdout. Admit only reason classes reachable at this stage; a Source-attested ZERO versus TWO_PLUS is not independently computable from a valid outer wire/hash. Never use a fixture or absent count as an actual value."
+  ],
+  "measurements": {
+    "actualR4": "3e696f6eea89d3a4e413a756b7d3e7dffe1d0064",
+    "analysis": "e5570431c54ef1556692fcdf1349c503ef983ecb",
+    "toyFormatOnly": "9f3ec19e53267713dd037fca22a9f3bb3742cb3a",
+    "futureActualRootBinding": null,
+    "meaningOfNull": "Actuation and future native identifiers not nominated; this design cannot admit an actual run."
+  },
+  "incrementalChecks": {
+    "actualHelpersIfReleased": "Only two differential groups, actual sibling collect and publication/public-replay, using the 28 raw-input vectors and 10 public variants. No new toy calibration. Retain pinned 149 legacy projections/native result as compatibility history, plus explicit byte identity and unchanged full normalized R4 children on each differential input comparing actual old/new collect. Do not rerun 83 import files as an independent test suite. Default OWN path keeps private raw outside admission.",
+    "source149": "cef66140db83421b2cbd371a6e1b5e0a296a10ff",
+    "tools": "ecf5d3c3178704926eb37d21d14b1fd24b3da04b",
+    "dependencyGraphByReference": "89cab1e859a628e3f5e94cfc27be21347a79b721"
+  },
+  "governance": {
+    "budget": {
+      "SourceUsed": 4,
+      "OwnUsed": 4,
+      "maxSameFamily": 5,
+      "noReset": true,
+      "ifProceedLastRound": 5,
+      "notConsumedByDesign": true
+    },
+    "codeReleased": false,
+    "nativeReleased": false,
+    "decision": "HOLD. A bucket would discriminate families of investigations, not select a repair. Static precondition review is cheaper and already rules out a promise to reach append from a successful GET. ScopeWrite proposals have value only if both follow-on investigations are actionable, worth a final round and one business occurrence despite another earlier failure/timeout remaining possible.",
+    "conditionalOccurrence": "At most one fresh full-order20 business occurrence on a clean separately nominated one-use ref under a future Root release. Reuse existing isolated baseline, clock/custody, source/receiver reviews. Preserve the R4 closed history and decline reuse of its run; no nomination now.",
+    "stop": "ZERO: review only upstream guards/lease/interceptor path. TWO_PLUS: inspect actual callback/re-entry under retained fixture and rollback semantics. UNKNOWN or different first: stop this capture line. No outcome automatically authorizes code, runtime, further run or full qualification.",
+    "rollback": "Discard detached proposal; retain immutable R4 production/test graph and bidirectional restoration 9f6df627575fc2bb5ff2cf9a9cd5bbb0d74ec56a. Future coding requires separate complete before/after splice and new Root exact binding."
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
