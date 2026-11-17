@@ -1,0 +1,101 @@
+name: AFW first finite GET focused tooling
+on:
+  push:
+    branches:
+      - lab/afw-c2-get-winner-20261117-tools1
+permissions:
+  contents: read
+jobs:
+  c2-get-winner-tools:
+    if: >-
+      false &&
+      github.repository == 'tokenizartinfo-ops/agent-friendly-web' &&
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/lab/afw-c2-get-winner-20261117-tools1' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'AFW-C2-GET-WINNER-TOOLS1-ONEUSE-20261117'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Read the exact one-use lab head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Use the fixed Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22.23.4
+      - name: Check the tooling controller syntax
+        shell: bash
+        run: |
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/run-get-winner-tools.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/startup-diagnostics.test.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/startup-diagnostics.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/startup-bootstrap.mjs
+          node --check docs/superpowers/source-lab/c2-t1-drop-winner-diag4/read-progress.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/native-tools-child.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/model-get-controls.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/native-get-ordinary-controls.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/get-winner-collection-adapters.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/test-corpus-adapter.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/factory-get-model-controls.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/startup-retention-bootstrap.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/retention-tools-child.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/native-retention-controls.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/retention-component-entry.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/component-get-observer.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/startup-fault-bootstrap.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/fault-tools-child.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/native-fixed-fault-controls.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/native-transport-controls.mjs
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-08-get-winner.txt
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-09-get-winner.txt
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-10-get-winner.txt
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/body-09-fixed-fault-tool.txt
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/component-stage-work.txt
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/component-wire-off.txt
+          node --input-type=module --check < docs/superpowers/source-lab/c2-get-winner-dependent/component-wire-on.txt
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/receipt-normalization.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/receipt-normalization.test.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/controller-file-boundaries.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/controller-file-boundaries.test.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.mjs
+          node --check docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.test.mjs
+          python3 -m py_compile docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor.py docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor_test.py
+      - name: Check the four defensive boundaries
+        shell: bash
+        run: |
+          node --test --test-concurrency=1 docs/superpowers/source-lab/c2-get-winner-dependent/receipt-normalization.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/controller-file-boundaries.test.mjs docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.test.mjs
+          python3 docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor_test.py
+      - name: Check the 46 startup metadata controls
+        shell: bash
+        run: node docs/superpowers/source-lab/c2-get-winner-dependent/startup-diagnostics.test.mjs
+      - name: Install only the existing locked dependencies
+        shell: bash
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Exercise only the sealed three-group tool schedule
+        id: source
+        shell: bash
+        run: |
+          set +e
+          python3 docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor.py
+          result=$?
+          echo "controller_exit=$result" >> "$GITHUB_OUTPUT"
+          exit "$result"
+      - name: Preserve the bounded focused tool evidence
+        if: ${{ success() && steps.source.outcome == 'success' && steps.source.outputs.controller_exit == '0' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-c2-get-winner-tools
+          path: output/get-winner-tools.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Preserve the bounded startup diagnostic
+        if: ${{ failure() && steps.source.outcome == 'failure' && steps.source.outputs.controller_exit == '1' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: afw-c2-get-winner-startup-diagnostic
+          path: output/get-winner-startup-diagnostic.json
+          if-no-files-found: ignore
+          retention-days: 7

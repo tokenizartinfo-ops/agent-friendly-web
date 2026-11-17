@@ -1,0 +1,95 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { gzipSync, gunzipSync } from 'node:zlib';
+import { build } from 'esbuild';
+import { Miniflare, convertV4MiniflareOptions } from 'miniflare';
+import { prepareGetWinner } from './test/fixtures/finite-first-connection-publication.mjs';
+const inputPins={"component-work-boundaries.mjs":{"path":"docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.mjs","mode":"100644","type":"blob","kind":"SHARED_DEFENSIVE_BOUNDARY","bytes":881,"blob":"a4c15d2fc7438845ce9df890097b7857e1bb9fe5","sha256":"8d2ef712d90c3772b57e6731f25b54d44476fee33d13f9f89b88cd5cba3042fe","fullReadback":true},"retention-component-expectations.json":{"path":"docs/superpowers/source-lab/c2-get-winner-dependent/retention-component-expectations.json","mode":"100644","type":"blob","kind":"SEALED_NATIVE_COMPONENT_EXPECTATIONS","blob":"3aa978075e2ebc5c0c2b9e9469d3ed55eb666c05","bytes":5207,"sha256":"b4f4e47764fdd7bc57871af30f66fcee37648fcd04b3ac2ab42586b4a7c792d0","fullReadback":true},"retention-component-entry.mjs":{"path":"docs/superpowers/source-lab/c2-get-winner-dependent/retention-component-entry.mjs","mode":"100644","type":"blob","kind":"DRAFT_NATIVE_COMPONENT_ENTRY","blob":"b5b2e45fe2ee2e4634b8f9d9d8d92017dee54980","bytes":6928,"sha256":"1abc00b791700239360954f1af24691c47ec871388454c5a014eda07d2c662db","fullReadback":true},"component-stage-work.txt":{"path":"docs/superpowers/source-lab/c2-get-winner-dependent/component-stage-work.txt","mode":"100644","type":"blob","kind":"TEST_ONLY_APPEND_AFTERIMAGE","blob":"36cf70b0ffdc68091aef8b4734164d9233f1f000","bytes":7895,"sha256":"970f90d092b0a46508bab04f0053b4d1b8a26f19f6a9786a4bb46f37ec1bdd10","fullReadback":true},"component-wire-off.txt":{"path":"docs/superpowers/source-lab/c2-get-winner-dependent/component-wire-off.txt","mode":"100644","type":"blob","kind":"TEST_ONLY_PREPARED_WIRE_INPUT","blob":"b6459f8287b46e32ddb3b9042c3444a2f8faff82","bytes":7998,"sha256":"d0b88ce5a6319ff7559f13cda5d9aea6be6bb226fc775422547abce923bab3fe","fullReadback":true},"component-wire-on.txt":{"path":"docs/superpowers/source-lab/c2-get-winner-dependent/component-wire-on.txt","mode":"100644","type":"blob","kind":"TEST_ONLY_PREPARED_WIRE_INPUT","blob":"da7b15fad49a4fd5335b5557a72d6017ade9621c","bytes":8205,"sha256":"5d9304585bb3a73c8d23d9fe4e49a8648d4c592b95a1184b2b59ce62152024bb","fullReadback":true},"component-get-observer.mjs":{"path":"docs/superpowers/source-lab/c2-get-winner-dependent/component-get-observer.mjs","mode":"100644","type":"blob","kind":"TEST_ONLY_EXACT_FACTORY_BODY","blob":"b1576130bd8c6510e92f1992e22476460f746e9a","bytes":3927,"sha256":"adbd2d0d20eb193748e862e7036aea56bb7d1808d8fcdec65bbb0448dd0c22cf","fullReadback":true}};
+const hash=x=>createHash('sha256').update(x).digest('hex');
+async function input(name){
+ const bytes=await readFile(name),pin=inputPins[name];
+ assert(pin);assert.equal(bytes.length,pin.bytes);assert.equal(hash(bytes),pin.sha256);
+ assert.equal(createHash('sha1').update(Buffer.from('blob '+bytes.length+'\0')).update(bytes).digest('hex'),pin.blob);
+ return bytes;
+}
+function once(source,before,after){
+ assert.equal(source.split(before).length,2);return source.replace(before,after);
+}
+async function make(enabled,files){
+ const wireName='lib/mcp-qa-finite-owner-native-wire.mjs',stageName='lib/mcp-qa-finite-stage-work.mjs';
+ const originalWire=await readFile(wireName,'utf8'),stage=await readFile(stageName);
+ assert.equal(stage.length,7405);assert.equal(hash(stage),'9ffa53cb3dc37e7c115f1a01430adf8e578cf9ce6933b63da2680f670f711a6c');
+ assert.deepEqual(files['component-stage-work.txt'].subarray(0,stage.length),stage);
+ const off=once(originalWire,'catch(error){reject(error);}','catch(error){globalThis.__afwDropM?.deadline(lease,error);reject(error);}');
+ assert.equal(hash(off),'d0b88ce5a6319ff7559f13cda5d9aea6be6bb226fc775422547abce923bab3fe');
+ assert.equal(off,files['component-wire-off.txt'].toString('utf8'));
+ const on=prepareGetWinner(wireName,off);
+ assert.equal(on,files['component-wire-on.txt'].toString('utf8'));
+ const source=enabled?on:off;
+ const module=await build({bundle:true,write:false,metafile:true,platform:'neutral',mainFields:['module','main'],
+  format:'esm',target:'es2022',external:['node:*','cloudflare:*'],legalComments:'none',
+  define:{__AFW_GET_COMPONENT_ON__:String(enabled)},entryPoints:['retention-component-entry.mjs'],
+  plugins:[{name:'fixed-retention-component-overlay',setup(builder){
+   builder.onLoad({filter:/lib\/(?:mcp-qa-finite-stage-work|mcp-qa-finite-owner-native-wire)\.mjs$/},async args=>{
+    const name=args.path.slice(process.cwd().length+1);
+    assert(name===stageName||name===wireName);
+    return {contents:name===stageName?files['component-stage-work.txt'].toString('utf8'):source,loader:'js'};
+   });
+  }}]});
+ assert.equal(module.outputFiles.length,1);
+ const bytes=Buffer.from(module.outputFiles[0].contents),compressed=gzipSync(bytes,{level:9,mtime:0});
+ assert.deepEqual(gunzipSync(compressed),bytes);
+ const script=bytes.toString('utf8'),raw={upstream:'https://component.invalid',workers:[{
+  name:'get-retention-component',modules:true,script,compatibilityDate:'2026-09-07',compatibilityFlags:['nodejs_compat'],
+  outboundService:async()=>new Response(null,{status:503})}]};
+ assert.deepEqual(Buffer.from(raw.workers[0].script),bytes);
+ const options=convertV4MiniflareOptions(raw),config=options.workers[0].config,manifest=config.manifest;
+ assert.equal(config.type,'worker');assert.equal(config.name,'get-retention-component');
+ assert.equal(typeof manifest.mainModule,'string');assert.deepEqual(Object.keys(manifest.modules),[manifest.mainModule]);
+ const selected=manifest.modules[manifest.mainModule];
+ assert.equal(selected.type,'esm');assert.equal(typeof selected.contents,'string');
+ assert.deepEqual(Buffer.from(selected.contents),bytes);assert.equal(hash(selected.contents),hash(bytes));
+ return {mf:new Miniflare(options),resident:{sha256:hash(bytes),bytes:bytes.length,
+  compressedSha256:hash(compressed),compressedBytes:compressed.length,
+  preparedWireSha256:hash(source),stageWorkSha256:hash(files['component-stage-work.txt'])}};
+}
+async function boundedCase(run){
+ let timer;
+ try{return await Promise.race([run(),new Promise((_,reject)=>{
+  timer=setTimeout(()=>reject(new Error('AFW_COMPONENT_CASE_TIMEOUT')),120000);
+ })]);}finally{clearTimeout(timer);}
+}
+export async function retentionNativeControls(){
+ const files={};for(const name of Object.keys(inputPins))files[name]=await input(name);
+ const fixture=JSON.parse(files['retention-component-expectations.json']),pair=[],results=[],ids=[];
+ let primaryFailed=false;
+ try{
+  pair.push(await make(false,files));pair.push(await make(true,files));
+  assert.notEqual(pair[0].resident.sha256,pair[1].resident.sha256);
+  for(const row of fixture.rows){
+   const bytes=[];
+   for(const [index,variant]of ['OFF','ON'].entries()){
+    const raw=await boundedCase(async()=>{
+     const response=await pair[index].mf.dispatchFetch('https://component.invalid/'+row.id);
+     assert.equal(response.status,200);
+     const raw=Buffer.from(await response.arrayBuffer());assert(raw.length<=8192);return raw;
+    });
+    const result=JSON.parse(raw.toString('utf8'));
+    assert.deepEqual(Object.keys(result),['id','events','snapshots','checks']);
+    assert.equal(result.id,row.id);assert.deepEqual(result.checks,row.expected);
+    const order=row.id==='abort_before_late_actual'?'lateAbort':row.id==='timer_before_late_actual'?'lateTimer':'held';
+    assert.deepEqual(result.events,fixture.orders[order]);assert.deepEqual(result.snapshots,fixture.snapshots);
+    bytes.push(raw);ids.push(variant+':'+row.id);
+   }
+   assert.deepEqual(bytes[0],bytes[1]);
+   results.push({id:row.id,offSha256:hash(bytes[0]),onSha256:hash(bytes[1]),output:JSON.parse(bytes[0].toString('utf8'))});
+  }
+  return {ids,off:pair[0].resident,on:pair[1].resident,results,
+   evidence:'NATIVE_COMPONENT_AND_TOOL_WAITUNTIL_SPY',platformWaitUntilLifecycle:false,ordinaryRouteIntegration:false};
+ }catch(error){primaryFailed=true;throw error;}
+ finally{
+  const disposed=await Promise.allSettled(pair.map(async item=>{await item.mf.dispose();}));
+  if(!primaryFailed&&disposed.some(result=>result.status==='rejected'))throw new Error('AFW_COMPONENT_DISPOSAL_FAILED');
+ }
+}
