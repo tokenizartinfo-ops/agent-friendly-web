@@ -3,8 +3,8 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "791f48a2212cc2a84852f32a663c179e04a5cf64",
-  "phase": "GB1_NATIVE_TOOL_OCCURRENCE_RUNNING",
+  "previousCheckpoint": "484818d17f49b1c81d18112b0a8217513e9d1f13",
+  "phase": "GB1_NATIVE_TOOLS_SUCCESS_CLOSED_PENDING_ACTUAL_REVIEW",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -857,7 +857,7 @@
       "fixWaveCapExhausted": true,
       "rootAdjudication": "FP1 real/load-bearing; changed genuine-only canonical foreign-row test boundary under GB1 prerequisite. No StageB6/reset; not parked/closed.",
       "GB1": {
-        "status": "NATIVE_TOOL_OCCURRENCE_RUNNING",
+        "status": "SUCCESS_CLOSED_PENDING_ACTUAL_REVIEW",
         "sameOperationalGoal": true,
         "publicConsumerStillHeld": true,
         "nativeReleased": false,
@@ -904,7 +904,11 @@
           "run": 44189016920,
           "runStatus": "in_progress",
           "job": 134413114234,
-          "jobStatus": "in_progress"
+          "jobStatus": "in_progress",
+          "closed": true,
+          "closedHead": "6efd539c6e2861a93e065da42aa0f4fa25534689",
+          "closedTree": "dadea9603c5478d26239efef270a50aefac4038b",
+          "closedAtUTC": "2026-11-17 22:29:10 UTC"
         },
         "nativeGate": "96c2eb9c32c97629daec432acd6b4311d6debe19",
         "stepObservations": {
@@ -916,12 +920,26 @@
         "nativeToolAcceptance": false,
         "publicConsumerReleased": false,
         "SourceQualified": false,
-        "Task1Pass": false
+        "Task1Pass": false,
+        "actualPrimary": "a290e3c26382660f67c5ae8d2f8b0571c9f61956",
+        "actualOutcome": "dbf6d81998b5fc9a0e9bed04ccb1dc06ea6abec8",
+        "actualPayload": "e8d57d9f37de40d1e02c6dfd17a141bc9e68f81c",
+        "actualCounts": {
+          "syntaxInputs": 35,
+          "defensiveNodePass": 34,
+          "defensiveNodeFail": 0,
+          "defensivePythonPass": 2,
+          "startupMetadata": 46,
+          "model": 287,
+          "nativeDispatches": 39,
+          "groups": 3,
+          "guardedNodeProcesses": 4
+        }
       }
     }
   },
-  "schemaVersion": 85,
-  "updatedAtUTC": "2026-11-17 22:22:26 UTC",
+  "schemaVersion": 86,
+  "updatedAtUTC": "2026-11-17 22:29:48 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",
