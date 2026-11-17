@@ -1,0 +1,90 @@
+{
+  "schema": "AFW.OWN5.STAGE_A.INDEPENDENT_SAVED_RED_REVIEW/1",
+  "scope": {
+    "PROJECT": "AFW",
+    "REPOSITORY": "tokenizartinfo-ops/agent-friendly-web",
+    "ENVIRONMENT": "saved immutable Git DATA",
+    "ORIGIN": "github.com",
+    "RESOURCE_TYPE": "detached JSON review",
+    "RESOURCE_ID": "OWN fixture StageA run44104034023/1",
+    "ALLOWED_ACTION": "saved text/JSON/hash/ZIP comparison; create_blob and FULL readback",
+    "ROLLBACK": "discard detached review; no ref/runtime changed"
+  },
+  "inputs": {
+    "brief": "b11d18f929b413d098dc368692debf71a85660a3",
+    "ruling": "1291992edd15c61d8f8c59ae0a93d9a60345aaad",
+    "gate": "0fb65a9269b9f882bb1cb963c900e3dc2dd09079",
+    "staticReview": "4e3b80d97fce9a54383b5e9d69cbaf61ba1dd476",
+    "nativePacket": "55d80f85696757125eab2074f8921f893877eb0b",
+    "primary": "b3e8fe456e92f93b0c52506b29b3743093d5e332",
+    "proof": "d05e6bbff13eb9f792cd8432abcb8c45b628bcf7",
+    "rootValidation": "300e459a8b4b8b19df654ed71127113862723834",
+    "closedReadback": "f7c3799593cf87afabbacf60f5eb658492d9e6f7",
+    "closureIntent": "0883c8d515a09c8cee4c2d5e5c6ceb8aea814bb6"
+  },
+  "SPEC": "PASS",
+  "QUALITY": "PASS",
+  "findings": [],
+  "run": {
+    "id": 44104034023,
+    "attempt": 1,
+    "job": 134111413596,
+    "head": "317b4e1f547b23ad1bcb4170a5e4f28a865deafe",
+    "tree": "b93e3075b6d7cf1cfae14e1261813b17fe96b644",
+    "syntaxAdmissionStep": 4,
+    "syntaxAdmissionConclusion": "success",
+    "expectedRedStep": 5,
+    "expectedRedConclusion": "failure",
+    "uploadStep": 6,
+    "uploadConclusion": "success",
+    "jobConclusion": "failure",
+    "artifact": 14338405086
+  },
+  "checks": [
+    {
+      "result": "PASS",
+      "refs": "primary.run/jobs/preparedCommitAPI; gate.nomination; primary.jobLog",
+      "evidence": "Saved API/log binds exact repo,push,branch,message,HEAD,parent,tree,attempt1/job. Ordered checkout/Node22.23.4/syntax+Git admission success precede sole named expected assertion command. Step5 logs Observed AssertionError [ERR_ASSERTION]: AFW_OWN_D4_RECEIPT_COMPONENT_REQUIRED at14:31:46.4832155Z then exit1; uploaderstep6 succeeds. Job14:31:28–14:31:51 within3min; no cancel/timeout/foreign error accepted. Action pins match packet."
+    },
+    {
+      "result": "PASS",
+      "refs": "pinned test5ba4d036; controller937769a5; proof; gate.expectedProof",
+      "evidence": "Inspected as text only: baseline original d3ModelRead must ADMIT MODELED_ONLY with25 matched edges/57 journal events/14 native rows before twin checks. Twin envelope is coherently recomputed and exact sole semantic addition observation.dropWinner. Only literal Error G20_OWN_UNQUALIFIED leads to expected false→true AssertionError; controller requires exact childstdout, namedstderr,normal exit1. Proof is exact gate template after actual runId, canonical JSON+LF914B and byte-equal to saved archive payload. This isolates missing public component support, no Source/business cause."
+    },
+    {
+      "result": "PASS",
+      "refs": "primary.artifacts/jobLog/zip; detached proof",
+      "evidence": "Exactly1 artifact fixed name/sole member own-drop-winner-fixtures.json,run/head binding,ID14338405086,7d expiry. Saved ZIP independently762B SHA2565e46b66e9a2fa016f34095490c34981054c9732a28e586541477a0720f0ba39e/Gite1ed4f95d9964836cbbc4e78fb0bde52e1f6a109. One disk/entry,no comment,local/central names agree,flags8/method8,full590B deflate consumed,DD16 signature/sizes/CRCee32683a valid,central directory/EOCD exact. Inflated payload914B SHA2563376b8ef571bd5765069b0655e952df3cc1229c98c5aef61157a792b82e49485/Gitd05e6bbf equals detached proof. Log independently17751B/SHA25660b6c88d93eb0c3dcf6241fef4fcb560b47f1b30e7bf50347dd8fa35848d41f4/Git6828fa57; upload digest/size match."
+    },
+    {
+      "result": "PASS",
+      "refs": "primary.preparedTreeAPI; gate.mounts; close.api.tree",
+      "evidence": "Saved untruncated executed tree3216 leaves matches all13 nominated mounts. Independent Git ancestor reconstruction yields b93e3075b6d7cf1cfae14e1261813b17fe96b644; removing exact13 yields BASE62e78926635d6b74f288d6c0d69e0f2516306989. Old guard8 modules remain exact nominated blobs; StageB69 matrix and old73 suite are absent from mount inventory."
+    },
+    {
+      "result": "PASS",
+      "refs": "close.api.ref/commit/tree/runs/protected:*; gate.preflight; closure intent",
+      "evidence": "Saved closure ref/commit binds exact0fe46529b2c0243d977afd54b914184a5b31963c with executed parent. Leaf diff only removes nominated WF and adds exact primary+closure intent. All3203 base leaves and12 mounts retained;3217 leaves. Independent reconstruction gives closed51f3852ce6bc0f61430940129cafeeb26a5d7b61. Closure intent matches run/head/primary/proof/validation and no-replay rule. All14 saved protected names/tips match gate; saved close-head runs total0. These are saved snapshots, no live endpoint state was refetched."
+    }
+  ],
+  "boundary": "Observed StageA RED accepted only. One old MODEL baseline and one semantic twin executed;69 new matrix cases unmounted/unexecuted, original73 suite not replayed, guard implementation unchanged and not released by this reviewer. Root may separately adjudicate OWN5 code release; this report grants no implementation/ref/native/business authority. No terminal endpoint/log/ZIP download/replay, guard import/eval/parser/build/test or Source execution performed by reviewer. Builtin data crypto/zlib and Git tree hashing only.",
+  "rounds": {
+    "Source": 5,
+    "OWN": 4,
+    "max": 5,
+    "noReset": true
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
