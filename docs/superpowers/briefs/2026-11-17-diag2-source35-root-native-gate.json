@@ -1,0 +1,92 @@
+{
+  "schema": "AFW-DIAG2-SOURCE35-ROOT-NATIVE-GATE/1",
+  "timestampUTC": "2026-11-17 01:15:13 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "GitHubActions ubuntu-24.04 Node22.23.4 isolatedsinglejob",
+  "resourceType": "One-use Source35 TOOLING labbranchpush only",
+  "resourceId": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+  "allowedAction": "Createfreshnominatedbranch once at exacthead802a0e... to triggeroneToolingjob. Observeactualresult, preserveprimary+boundedproof, removeonlyworkflowwithclosure/readback. NO Sourcebusiness/Cloudflare/runtime/permissions.",
+  "authority": [
+    "7502f3b29cd8f58a70c2c77b1369a9e6e392f140",
+    "2806614c0e50975bc1a6d912b7e0b1db6038a47a"
+  ],
+  "index": "e6fad54239858d779573fc724a73ee6231133e52",
+  "packet": "7a038f22b3e6782bc089fbfebf9a8049dd16a554",
+  "head": "802a0e3624c2cf0a5ff98f0bc1d7683c4ddb68df",
+  "tree": "77c51a1663a3afbc57fc61c7c315226699e9bb70",
+  "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "originals": 3203,
+  "added": 13,
+  "leaves": 3216,
+  "preflight": {
+    "fullBodiesAndIndexAndSchema": true,
+    "fullTreeNontruncatedExact": true,
+    "allOriginal3203Unchanged": true,
+    "new13BeforeAbsent": true,
+    "mainAndClosedHistoryRefsMatch": true,
+    "branchExactAbsent": true,
+    "priorHeadRunCount": 0,
+    "threeCodeSplicesForwardReverseBytesReproduced": true,
+    "sourceCodeLocallyExecuted": false
+  },
+  "triggerAudit": {
+    "reuse": "824b2fa8237572e5175be624d9f19cf95145414a",
+    "originalWorkflowsUnchanged": true,
+    "onlyNewWorkflow": ".github/workflows/afw-c2-first-failure-post-diag2-tools.yml",
+    "repoEventExactBranchMessageAttempt1Guard": true,
+    "noDispatchScheduleOrCreate": true
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261117-first-failure-diag2-tools",
+    "message": "AFW-C2-FIRST-FAILURE-POST-DIAG2-TOOLS-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-first-failure-post-diag2-tools.yml",
+    "job": "c2-first-failure-post-diag2-tools",
+    "cases": 35,
+    "Node": "22.23.4",
+    "runner": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/run-source35.mjs",
+    "jobMinutes": 3,
+    "caseMs": 10000,
+    "permissions": "contentsread",
+    "attempt": 1,
+    "npm": false,
+    "sourceImports": "newadapters+unchangedread-progress only/builtins; Source businessdriver/M/QA/SDKneverimportedbytooling",
+    "proof": "exact35nativeIDs/expectedstate/reason withcounts/fixedfullinputhashes/actualcontext/orderedSourceGraph;canonicalmarker/bodyLF<=24576,ZIP1MiB/log4MiB; SourceQualified/Task1false. Testpublisheractualnewfamilymarkers/schema/source13E2, inheritedrawstream/custody/caps preserved. If extra meaningful publisher or legacyRED checks needed, list explicitly before code/native; never silentlyexpandcensus.",
+    "prefix": "docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/",
+    "command": "node docs/superpowers/source-lab/c2-t1-first-failure-post-diag2/tools/run-source35.mjs",
+    "steps": [
+      "Read the exact one-use tools head",
+      "Use the fixed Node runtime",
+      "Exercise the 35 sealed projection cases",
+      "Preserve the bounded tools proof"
+    ],
+    "artifact": {
+      "name": "afw-c2-first-failure-post-diag2-tools",
+      "path": "output/c2-first-failure-post-diag2-tools.json",
+      "fileName": "c2-first-failure-post-diag2-tools.json",
+      "retentionDays": 7
+    }
+  },
+  "expected": {
+    "tests": 35,
+    "pass": 35,
+    "fail": 0,
+    "checkpointGroups": 358,
+    "legacyComparator": "ValidS01 oldsixfields matchandmissingnewfirstFailure only, notnativeprocess/importfailure"
+  },
+  "SourceImportsClarification": "Nomination copiedshorttext newadapters+readprogress is supersededbyexplicit280661legacy comparator: actualtoolinggraphincludes frozenoldadapter+sameunchangedlegacyreadprogress, no businessdriver/M/QA/SDK imports.",
+  "rollback": "Afterterminal readactualmetadata/logs/artifactonce. Closeonlynominatedworkflow, addPrimary+closereceipt, CASat exacthead; independentfulltree/main/history/0closeheadrunsreadback, nevereraseprioroccurrence/evidence.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
