@@ -1,0 +1,31 @@
+{
+  "schema": "AFW-DROP-SOURCE5-BUILTIN-ARC-RULING/1",
+  "atUTC": "2026-11-17 12:56:32 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "resource": "test-only prepared positive S03 code in S09 compiler plugin",
+  "allowedAction": "Add exactly one static node:crypto createHash import in the isolated diagnostic-positive prepared S03; no new file/package or runtime binding",
+  "from": "worker/mcp-own/finite.mjs",
+  "fromPreimage": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+  "to": "node:crypto",
+  "binding": "createHash as dropHash",
+  "why": "Use a known builtin already resident in the Node-compatible M bundle for synchronous SHA256; avoid a second security algorithm. Both paired builds must include the same prepared arc.",
+  "conditions": [
+    "Only opt-in isolated test compiler transform; original S03 raw path/bytes untouched outside prepared copy.",
+    "Record the new edge and transformed S03 identity in source/tooling manifests and reversible splice; exact match count1.",
+    "No new dependency, Node flag, clock, RPC, external IO or production deployment.",
+    "Same-body guards and native before-serialization/transport tests still required; code release only, no activation."
+  ],
+  "rollback": "Discard this fixture transform; retain original S03/BASE and all closed histories.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
