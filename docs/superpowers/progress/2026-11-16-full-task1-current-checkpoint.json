@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "67f503402cf1be228bbf5eae45ddac92da8cb02a",
-  "phase": "GET_WINNER_MANIFEST1_EXACT_NATIVE_GATE_UNATTACHED",
+  "phase": "GET_WINNER_MANIFEST1_EXPECTED_RED_VERIFIED_CLOSED_ACTUAL_REVIEW",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Root fresh availability check, one materially changed manifest1 attempt, exact native RED/fault readback, preserve/close. No Source business or live runtime release; no user action.",
+  "next": "Fresh actual review from preserved exact RED evidence; if accepted release only Task1 StageB minimal GET observation/publisher. No business diagnostic/native tool activation before exact separate gate.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -516,7 +516,7 @@
   "completedOwnVmReleased": true,
   "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
   "getWinnerDependent": {
-    "phase": "MANIFEST1_REVIEWED_GATED",
+    "phase": "EXPECTED_RED_ROOT_VERIFIED_ACTUAL_REVIEW_PENDING",
     "featureCodeReleased": false,
     "nativeReleased": true,
     "roundsUnchanged": true,
@@ -534,7 +534,7 @@
     ],
     "fixtureIDs": 315,
     "fixtureExpectationsExecuted": 0,
-    "nativeGETsExecuted": "UNKNOWN_NOT_RETAINED",
+    "nativeGETsExecuted": 1,
     "allCurrentRefsClosed": true,
     "rootChecked28NewPathsAbsentAtBase": true,
     "amendedProposal": "36049472ef3a71f4e2055a5a0cd6a1b03b78dfd3",
@@ -570,8 +570,8 @@
     "actualOutcome": "23e11dac9ecf06a16d8d141bc497207392330d1d",
     "actualClosure": "a45965bd990ca2bf6190f6a473eea5198bd32bdd",
     "actualResult": "red LAUNCH_INVALID, controllerSyntaxPASS, artifact0, notExpectedRED",
-    "nativeAttempts": 1,
-    "expectedREDVerified": false,
+    "nativeAttempts": 3,
+    "expectedREDVerified": true,
     "businessReleased": false,
     "actualReviewer": "/root/get_winner_stage_a_native_review RUNNING",
     "actualReview": "6da29cd79d736a11f8c520b357c7ef951a76740e",
@@ -601,7 +601,7 @@
       "closedHead": "3fc6c6fa561a0cce504dcc735046f440eb3f1690",
       "closedTree": "bc9de73f6b10fec1817ade5368421cc9f85c4a80"
     },
-    "controls46Executed": false,
+    "controls46Executed": true,
     "startupActualPrimary": "aed235208220bc5e0689cd58920c595ec5762a18",
     "startupActualOutcome": "89a821300c3a9f5360f60e2b76eba245c56a734c",
     "startupActualClosure": "9b69988027003b2cbdb89892c0a9f917be197e86",
@@ -619,15 +619,43 @@
       "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
       "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
       "preparing": false,
-      "activationAttempted": false,
-      "refCreated": false,
-      "unattached": true,
+      "activationAttempted": true,
+      "refCreated": true,
+      "unattached": false,
       "mounts": 33,
       "tree": "1ae6c6ce938f8e5fccc34435b9f15d3a34990234",
       "head": "f8fbf79837b1238a36077ad7951bc908478a9aa8",
       "fullTreeVerified": true,
       "original3203Preserved": true,
-      "leaves": 3236
-    }
-  }
+      "leaves": 3236,
+      "gate": "08922deb97dcaa81475d35acd37e10cbba1307e4",
+      "activationUTC": "2026-11-17 17:15:22 UTC",
+      "run": 44134958107,
+      "job": 134221843459,
+      "closed": true,
+      "closedHead": "c0e5f6c8ccb58b8394faf62ffe04d7ef4f51d1a6",
+      "closedTree": "47f15706ce73e31f3931dcf2a2a322b85c0a8011"
+    },
+    "manifestActualPrimary": "0919eb82966125450d60922aaa40ff2f23b45133",
+    "manifestActualOutcome": "b6d80077fc2504660aef6b524c6a9dc0d0c57fa3",
+    "manifestActualClosure": "c572565918eb3428b4b32d09207e19e7de00e86d",
+    "manifestActualReview": "PENDING_SAVED_EVIDENCE_REVIEW",
+    "actualObservation": {
+      "namedMissingMarker": true,
+      "actual": null,
+      "expected": "g1.413.S.413",
+      "actorArrived": true,
+      "status": 413,
+      "bodyMatched": true,
+      "disposed": true,
+      "childExit": 41,
+      "preflightProcesses": 1,
+      "toolProcesses": 1,
+      "syntaxChecks": 5,
+      "startupControls": 46
+    },
+    "nativeAttemptsQualification": "Prior two tooling failures not expected RED; current third materially changed manifest1 attempt verified expected RED only"
+  },
+  "schemaVersion": 61,
+  "updatedAtUTC": "2026-11-17 17:23:45 UTC"
 }
