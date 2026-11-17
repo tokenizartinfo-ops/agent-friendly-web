@@ -1,0 +1,21 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.DESIGN_CHANNEL_CLARIFICATION/1",
+  "timestampUTC": "2026-11-17 15:31:39 UTC",
+  "parentRuling": "54b6fbf27b0d0bf71b616e9ae6c21e4f8a39de67",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "finding": "A byte-identical GET error response has no currently proven M-to-host winner channel under isolated native serialization. Requiring both byte-identical headers and new exported evidence would be an unsatisfiable design constraint.",
+  "decision": "For design only, permit one explicitly identified lab-only diagnostic error-egress header on the exact finite-prepare GET failed response, analogous to the already admitted POST error marker. Preserve original status/body, actual work/retention, clocks/guards/order and all non-diagnostic output. No new IO/await/poll/read/clock. Default OFF outside synthetic fixture. Require value-provenance limitations and separate focused actual positive transport controls before considering any future business run. M-only winner contract is preferred when QA phase cannot be joined faithfully.",
+  "costIfWrong": "Discard detached design or require smaller channel; no source implementation or native/runtime change released.",
+  "release": {
+    "designOnly": true,
+    "implementation": false,
+    "native": false,
+    "production": false
+  },
+  "rounds": {
+    "Source": 5,
+    "Own": 5,
+    "noReset": true
+  }
+}
