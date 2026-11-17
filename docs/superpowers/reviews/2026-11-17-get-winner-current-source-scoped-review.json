@@ -1,0 +1,98 @@
+{
+  "schema": "AFW.GET_WINNER.STAGE_B.EARLY_SOURCE_REVIEW/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private detached Git DATA",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "allowedAction": "Early scoped immutable Source DATA review and detached report only",
+  "rollback": "Disregard detached review",
+  "scope": "SOURCE SEAMS ONLY. Not final whole-packet approval or native release. Publisher/fixture adapter/native controls/controller/workflow still pending.",
+  "brief": "dc132c7946534f5fbbf321b0801ad60e4afb7549",
+  "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+  "plan": "0b8368869f60978c536b056c37e451f8c899f93f",
+  "acceptedRED": "891b47473931274f578b43988c88997407b32343",
+  "coordinateRuling": "805a4e93a0a87d7300c9641b510320def947d0fc",
+  "negativeSteeringRuling": "5098d356ae7ee9f08c7edab00202af854177cac1",
+  "responseApiNote": "1ded0afe15a9b443240776e3ce4bf4fbc509b79d",
+  "SPEC": "PASS_SCOPED_CURRENT_SOURCE_SEAMS_ONLY",
+  "QUALITY": "PASS_SCOPED_CURRENT_SOURCE_SEAMS_ONLY",
+  "materialFindings": [],
+  "currentSources": [
+    {
+      "slot": "S08",
+      "blob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+      "bytes": 23226,
+      "sha256": "75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046"
+    },
+    {
+      "slot": "S09",
+      "blob": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+      "bytes": 83571,
+      "sha256": "a615fbc760cd3a6b3a337a4592196d3cd807650df875865f0f8204f2d4d73f80"
+    },
+    {
+      "slot": "S10",
+      "blob": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+      "bytes": 98851,
+      "sha256": "7c8680d6b86b1ccc0acdcfecb4d8e4312e6d6971f36b00bd6dcf88c289309604"
+    }
+  ],
+  "checks": [
+    {
+      "location": "S09:692-769",
+      "result": "WeakMap cells bind original request and lease; fresh produced error facts are keyed by object identity. Existing race rejection catch records the actual escaping object, seals classification and rethrows that same object. Late recorded loser results cannot upgrade sealed winner. Deadline does not require forwarding; non-OK and validation require local forward fact. Arbitrary getter/reader/guard/validator exceptions gain no explicit classified fact. Local helpers are guarded synchronously."
+    },
+    {
+      "location": "S09:772-809",
+      "result": "Compiler defaults getWinner OFF and selects the added transform only for ordinary prepared positive M with dropWinner, no negative/budget variant. Existing prepared DROP inputs are pinned first. Method is captured in the existing original includes read; enter itself reads neither method nor URL, and occurs only after the original entrypoint/path/method branch. Bridge exact request URL and original lease/root guards precede bind. Stub normalization retains original operand evaluation/read count and passes the already evaluated status into denied. Explicit original synchronous HTML denial sites alone bind V; no added Promise reaction, await, guard invocation, clock or business IO identified."
+    },
+    {
+      "location": "S09:746-765, 778-781",
+      "result": "Caught pending native B binds the same sealed escaping error/cell/P/L and allowed tuple. Native prototype/header implementation and preexisting field checks precede marking. The original single await response is saved; original parent.finish executes before guarded synchronous finish. A throwing finish skips mark; foreign/substitute response, collision, reused B or poisoned cell does not match. Header mutation stays on the same captured native B and no body/response replacement is introduced. Actual serialization order and negative steering controls still require native proof."
+    },
+    {
+      "location": "S08:17-19,110-116,202-232; S09:830-860; S10:199-200",
+      "result": "Only the target noScope choose receives the lexical token. Capture uses the original returned R and already evaluated status after the one original body read and immediately before the unchanged assert.equal(status,200). Host token is frozen; main/label/response/call count/finish/count joins reject overlap or foreign evidence. Native response constructor is explicitly imported from miniflare and passed to host, avoiding the unsupported Node-global Response assumption. Direct route requires the captured f.call/dispatchFetch identities, fixed nominated premise and resident script hash; it is conditional route provenance, not authentication or cross-isolate identity."
+    },
+    {
+      "location": "S08:224-228; S09:701-703,824-828,841-845",
+      "result": "Scope count piggybacks the compact versioned C2FT4 fields in canonical id,value,w,s,h order, with the existing single count/emit; monitor stays C2FT3. Tuple normalization matches seven preserved S codes, other/undisclosed S503, L/V503+s0 and compact unknown U0/0. Host returns unknown absent valid closed direct evidence; the independent public HTTP projection is a pending publisher responsibility, not overwritten here."
+    },
+    {
+      "location": "S08 original18:118 and current18:143",
+      "result": "Independently measured unchanged assert.equal(status,200) expression at the exact accepted column143; old column118 retained only for historical pins. No wildcard introduced. Final frozen-corpus migration adapter, exact143 positive and118/foreign rejection controls remain pending."
+    },
+    {
+      "location": "Interim deltaec817d6415ad3b0188e17b3348c4d5f14908f159 vs current bodies",
+      "result": "Interim operations exactly reconstructed earlier S08/S09 and current S10 from original Source13 bodies. Current S08 differs from interim only in the Miniflare Response import/pass. Current S09 exactly equals interim plus removal of enter request method/URL reads, relocation of cell creation through captured original method at the correct branch, and the explicit DispatchResponse parameter/guard. It is incorrect to treat the interim delta or earlier Root measurement as complete current-body evidence; final current-source reversible delta/pins are still required."
+    },
+    {
+      "location": "Complete three current Git bodies",
+      "result": "Full readbacks independently measured UTF8 lengths/SHA256/GitSHA1 and matched all three requested identities. Source was used only as DATA for literal comparisons, coordinate measurement and hashing. No Source AST/parsing/eval/import/syntax/native execution."
+    }
+  ],
+  "holds": [
+    "Final current-source full reversible delta and Source13/manifest binding.",
+    "Publisher/selection/protocol/canonical public shape and independent raw/native/journal/HTTP joins.",
+    "Frozen315 adapter scope/unchanged oracles and exact current assertion coordinate controls.",
+    "Actual native OFF/ON resident positives separating retained L/S/V, original read/cancel/waitUntil/settlement, finalizer/collision/strip/late/copy-all limits and all-header differential.",
+    "Focused tool controller/proof/workflow/custody/tree/Root one-use activation; Task2 OWN and business/runtime remain held."
+  ],
+  "Source5": 5,
+  "OWN5": 5,
+  "reset": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "completePackage": false,
+  "PCoff": false,
+  "receiptAuthenticated": false,
+  "historicalCauseProven": false,
+  "globalNativeDrainVerified": false,
+  "sdkNamespaceEmptyVerified": false,
+  "nativeExecutions": 0,
+  "localSourceChecks": 0,
+  "refMutations": 0,
+  "runtimeMutations": 0
+}

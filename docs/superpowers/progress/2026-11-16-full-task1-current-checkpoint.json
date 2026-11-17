@@ -688,9 +688,14 @@
       "nativeReleased": false,
       "OwnReleased": false,
       "businessReleased": false,
-      "runtimeReleased": false
+      "runtimeReleased": false,
+      "scopedSourceReview": "a279c2e6238927b0f7b1544c0f4d058852177651",
+      "publisherBoundaryAdjudication": "7308d1c0fff9779d22082198c59031f51abb2477",
+      "publisherBoundaryDisposition": "Accepted before native: frozen H-foreign-marker-tuple is MODEL composed host/producer consistency; parent-only canonical replacement detection unsupported. No hidden data channel.",
+      "SourceCodeStaticScope": "CURRENT_THREE_BODIES_ONLY_NO_MATERIAL_FINDINGS",
+      "finalToolPacket": "PENDING"
     }
   },
-  "schemaVersion": 63,
-  "updatedAtUTC": "2026-11-17 17:44:54 UTC"
+  "schemaVersion": 64,
+  "updatedAtUTC": "2026-11-17 17:50:43 UTC"
 }
