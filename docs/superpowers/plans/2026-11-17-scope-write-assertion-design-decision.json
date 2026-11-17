@@ -1,0 +1,58 @@
+{
+  "schema": "AFW-DIAG3-SCOPE-WRITE-NEXT-DESIGN-DECISION/1",
+  "timestampUTC": "2026-11-17 05:17:20 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "authority": "Owner autonomous continuation; Root controller. Author report is material, not execution authority.",
+  "diagnosis": "e5570431c54ef1556692fcdf1349c503ef983ecb",
+  "actualReview": "b50ec6e9d40bfed7f252656f027429879d0b543c",
+  "primary": "3b38e269929a88eef353f00016726d1ca3270f01",
+  "decision": "Prepare one bounded data-only design for exact scope-write assertion projection from existing child TAP, independently review before any code or activation. No business repair warranted by current evidence.",
+  "why": "Current observation cannot distinguish zero attempts (earlier fail-closed path/interceptor not reached) from multiple callback attempts (single JS append, repeated transaction/interceptor path). These call for different next investigations. Existing Source data already includes the assertion and discarded scalar; no new RPC/snapshot/clock needed.",
+  "decisiveOutcomes": {
+    "ZERO": "Focus only upstream rejection/bypass/lease callpath; do not alter transactional retry semantics or weaken exact-one assertion. No automatic new experiment.",
+    "TWO_PLUS": "Focus only repeated callback/overlap in interceptor; do not count discarded puts as durable writes. No automatic repair or new experiment.",
+    "UNKNOWN_OR_DIFFERENT_FIRST": "Preserve honest incomplete diagnosis and stop this capture line, no automatic replay."
+  },
+  "designBoundary": {
+    "Source13Unchanged": true,
+    "DriverD07Unchanged": true,
+    "registrationTailUnchanged": true,
+    "recorderUnchanged": true,
+    "businessPredicatesUnchanged": true,
+    "jobMinutes": 7,
+    "childMs": 180000,
+    "perCaseMs": 120000,
+    "totalMs": 330000,
+    "newRPC": false,
+    "newSnapshot": false,
+    "newClock": false,
+    "exportRawTAP": false,
+    "newRuntimePermissions": false,
+    "CloudflareProduction": false
+  },
+  "reviewRequiredBeforeImplementation": true,
+  "fixturesBeforeImplementation": true,
+  "codeReleased": false,
+  "nativeReleased": false,
+  "budget": {
+    "SourceUsed": 4,
+    "OwnUsed": 4,
+    "maxSameFamily": 5,
+    "noReset": true,
+    "ifProceedLastRound": 5,
+    "notConsumedByDesign": true
+  },
+  "rollback": "Current R4 producer/receiver and closed histories remain immutable. Proposed code/data must be detached and reversible; old run never reopened.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
