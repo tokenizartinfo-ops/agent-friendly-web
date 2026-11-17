@@ -1,0 +1,21 @@
+{
+  "schema": "AFW.GET_WINNER.EXACT_ASSERT_COORDINATE_MIGRATION/1",
+  "timestampUTC": "2026-11-17 17:36:10 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+  "brief": "dc132c7946534f5fbbf321b0801ad60e4afb7549",
+  "decision": "Accept proposed exact same-original-assert S08:18:118 to S08:18:143 migration if independent literal/column measurement confirms it; no wildcard or runtime matcher broadening.",
+  "fixturePolicy": [
+    "Preserve frozen315 corpus bytes/IDs/oracles exactly.",
+    "Transparent test-only corpus adapter allowed only under exact corpus hash and explicit row/target-field allowlist, with separately pinned transformation manifest. Wrong-site/foreign/torn negatives retain their semantics.",
+    "Adapter never used by current producer, full20, admission or actual capture. Adapted corpus results explicitly MODEL-only.",
+    "Before execution seal additional controls for exact143 accepted, historical118 refused at current pins, and foreign/malformed adapter inputs refused; original frozen expectations are not replaced.",
+    "Historical original packet remains as-is under historical reader/schema; no retroactive current-source claim."
+  ],
+  "release": "Detached proposal and controls only; exact native activation still held",
+  "rollback": "Discard unattached proposal",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false
+}
