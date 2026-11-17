@@ -3,7 +3,7 @@
   "timestampUTC": "2026-11-17 17:15:00 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "836b560b6761443b1ec3810103534f446c2b507b",
+  "previousCheckpoint": "e326d6d6278b84298e6c9acecff2592eed0af982",
   "phase": "TASK2_PUBLIC_CONSUMER_IMPLEMENTATION_RUNNING",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
@@ -996,11 +996,22 @@
       "frozenOwn32": "3b11a1b5224aa45a69f5cc8022bb49d5768583c6",
       "frozenOwn32Rows": 32,
       "frozenOwn32ExpectedAdmit": 7,
-      "frozenOwn32ExpectedReject": 25
+      "frozenOwn32ExpectedReject": 25,
+      "fixtureSeal": "c9aee1ee60ab92081e38a59abefca45c5db3e44a",
+      "fixtureConstructionRecipe": "afcd7e0a82ff76d227a685549b58a1aaf740b642",
+      "fixtureCounts": {
+        "fullPackets": 69,
+        "expectedAdmit": 13,
+        "expectedReject": 56,
+        "bindingCalls": 5,
+        "sourceOrOwnExecution": false
+      },
+      "rootFixtureDataMeasurement": "All 6 Brotli envelopes and 69 compact records match sealed bytes/Git/SHA256; original32 order and7/25 outcomes preserved; no reader executed",
+      "apertureClarification": "875675d93ba35f662d517061b533dce44d099dc5"
     }
   },
-  "schemaVersion": 93,
-  "updatedAtUTC": "2026-11-17 23:23:55 UTC",
+  "schemaVersion": 94,
+  "updatedAtUTC": "2026-11-17 23:32:31 UTC",
   "pause": {
     "requestedByOwner": true,
     "atUTC": "2026-11-17 18:58:45 UTC",

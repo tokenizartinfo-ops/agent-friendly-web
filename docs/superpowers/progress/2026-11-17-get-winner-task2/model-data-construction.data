@@ -1,0 +1,253 @@
+// Offline MODEL DATA construction transcript. Never mount or execute this in the OWN job.
+// Seed t2actualSource=de40fdd5cb0a0aabdf0f0c52281c80ecb2734ab5, t2actualRoot=dd2899bb2c0883008ccb12dfb911f0d10aecb072,
+// t2oracle=3b11a1b5224aa45a69f5cc8022bb49d5768583c6, t2old=55635df6cbff1e7bbf72a165c2db077371f9c710, t2caseIds=selection.selected.
+// t2hash and t2zip are Node builtins crypto and zlib. nodeRepl.write reports only DATA metadata.
+
+const t2sha = (value, alg = 'sha256') => t2hash.createHash(alg).update(value).digest('hex');
+const t2git = value => t2sha(Buffer.concat([Buffer.from('blob ' + Buffer.byteLength(value) + '\0'), Buffer.from(value)]), 'sha1');
+const t2json = value => JSON.stringify(value);
+const t2line = value => t2json(value) + '\n';
+const t2copy = value => JSON.parse(t2json(value));
+const t2crc = value => {let c = ~0; for (const v of value) {c ^= v; for (let bit = 0; bit < 8; bit++) c = c >>> 1 ^ (c & 1 ? 0xedb88320 : 0);} return ~c >>> 0;};
+function t2archive(fileName, text, defect = null) {
+  const name = Buffer.from(fileName), data = Buffer.from(text);
+  let compressed = t2zip.deflateRawSync(data);
+  if (defect === 'trailing-deflate') compressed = Buffer.concat([compressed, Buffer.from([0])]);
+  const crc = t2crc(data), flags = 8 | 2048, method = 8;
+  const l = Buffer.alloc(30), dd = Buffer.alloc(16), c = Buffer.alloc(46), e = Buffer.alloc(22);
+  l.writeUInt32LE(0x04034b50, 0); l.writeUInt16LE(20, 4); l.writeUInt16LE(flags, 6); l.writeUInt16LE(method, 8); l.writeUInt16LE(name.length, 26);
+  dd.writeUInt32LE(0x08074b50, 0); dd.writeUInt32LE(defect === 'bad-dd' ? (crc ^ 1) >>> 0 : crc, 4); dd.writeUInt32LE(compressed.length, 8); dd.writeUInt32LE(data.length, 12);
+  c.writeUInt32LE(0x02014b50, 0); c.writeUInt16LE(20, 4); c.writeUInt16LE(20, 6); c.writeUInt16LE(flags, 8); c.writeUInt16LE(method, 10);
+  c.writeUInt32LE(defect === 'bad-crc' ? (crc ^ 1) >>> 0 : crc, 16); c.writeUInt32LE(compressed.length, 20); c.writeUInt32LE(data.length, 24); c.writeUInt16LE(name.length, 28);
+  if (defect === 'bad-crc') dd.writeUInt32LE((crc ^ 1) >>> 0, 4);
+  e.writeUInt32LE(0x06054b50, 0); e.writeUInt16LE(1, 8); e.writeUInt16LE(1, 10); e.writeUInt32LE(c.length + name.length, 12);
+  e.writeUInt32LE(l.length + name.length + compressed.length + dd.length, 16);
+  return Buffer.concat([l, name, compressed, dd, c, name, e]);
+}
+const t2cloneCustody = t2copy(JSON.parse(t2old.input.artifact.payloadText).custody);
+const t2schemaFamily = 'afw.c2-get-winner-observation1';
+const t2marker = 'AFW_C2_GET_WINNER_OBSERVATION1_';
+const t2artifactName = 'afw-c2-model-get-winner';
+const t2modelPrefix = 'synthetic/model/get-winner/';
+const t2nom = {
+  branch:'lab/model/get-winner', message:'SYNTHETIC-ONLY-GET-WINNER',
+  workflow:'.github/workflows/model-get-winner.yml', job:'synthetic-lab', prefix:t2modelPrefix,
+  runner:t2modelPrefix + 'observe.mjs', command:'node ' + t2modelPrefix + 'observe.mjs',
+  artifact:{name:t2artifactName,path:'output/' + t2artifactName + '.json',fileName:t2artifactName + '.json',retentionDays:7},
+  requiredSteps:t2actualSource.nomination.requiredSteps,
+  jobMinutes:7, activationReleased:false, commandStep:t2actualSource.nomination.commandStep, event:'push', attempt:1
+};
+const t2edges = Array.from({length:26}, (_, i) => {
+  const body = 'SYNTHETIC MODEL BODY ' + String(i) + '\n';
+  return {path:i === 24 ? t2nom.workflow : t2modelPrefix + String(i).padStart(2,'0') + '.txt',
+    mode:'100644',type:'blob',blob:t2git(body),bytes:Buffer.byteLength(body),sha256:t2sha(body)};
+});
+const t2model = {kind:'MODELED_ONLY', base:t2actualRoot.base, baseTree:t2actualRoot.baseTree,
+  nomination:t2nom, bodyEdges:t2edges, bodyEdgesHash:t2sha(t2json(t2edges)),
+  selectionHash:t2sha(t2json({kind:'MODELED_ONLY',selected:t2caseIds})),selected:t2caseIds};
+const t2firstFailure = {schema:'afw.c2-first-failure-post-diag2.v1',state:'NOT_APPLICABLE',
+  reason:'EARLIEST_THROW_DIFFERENT',throwSequence:null,source:null,assertion:null};
+const t2nonclaims = JSON.parse(t2old.input.artifact.payloadText).nonclaims;
+const t2readHashes = t2edges.slice(1,14).map(e=>e.sha256);
+const t2target = t2caseIds[14];
+const t2u = {case:'15:firstFiniteGET',winner:'UNKNOWN',stubStatus:'UNKNOWN',qaLastCompleted:'UNKNOWN'};
+const t2sample = sequence => ({value:'0',reason:'JOINED_SNAPSHOT',countSequence:sequence});
+const t2noSample = {value:'UNKNOWN',reason:'JOURNAL_UNRESOLVED',countSequence:null};
+const t2event = (sequence,id,operation,edge,error=null) => ({sequence,elapsedMs:sequence,id,operation,edge,error});
+const t2failure = site => ({name:'AssertionError',code:'ERR_ASSERTION',site});
+const t2journal = events => { const bytes = Buffer.from(events.map(t2line).join(''));
+  return {bytes:bytes.length,sha256:t2sha(bytes),stable:true,recorderFaultObserved:false}; };
+const t2setArtifact = (artifact,out, defect) => {
+  artifact.payloadText = t2line(out);
+  const zip=t2archive(artifact.fileName,artifact.payloadText,defect);
+  artifact.archiveBase64 = zip.toString('base64');
+  Object.assign(artifact.listing.artifacts[0],{size_in_bytes:zip.length,digest:'sha256:'+t2sha(zip)});
+};
+const t2canonicalLog = (out,custody,command = t2nom.command,outWire=t2json(out)) =>
+  '2041-04-05T01:00:31Z ##[group]Run '+command+'\n'+
+  '2041-04-05T01:00:31Z ##[endgroup]\n'+
+  '2041-04-05T01:03:30Z '+t2marker+'CUSTODY '+t2json(custody)+'\n'+
+  '2041-04-05T01:03:30Z '+t2marker+'OUTCOME '+outWire+'\n';
+const t2modelRunId = 99505001, t2modelJobId = 99505002, t2modelArtifactId = 99505003;
+const t2modelStepNumber = 6;
+const t2oldPacket = {input:t2old.input,trusted:t2old.trusted};
+const t2oldMutated = t2copy(t2oldPacket);
+const t2oldOut = JSON.parse(t2oldMutated.input.artifact.payloadText);
+t2oldOut.observation.getWinner = t2u;
+const t2oldOutcome = JSON.parse(t2oldMutated.input.artifact.payloadText);
+t2oldMutated.input.transport.rawLog = t2oldMutated.input.transport.rawLog.replace(t2json(t2oldOutcome),t2json(t2oldOut));
+t2setArtifact(t2oldMutated.input.artifact,t2oldOut);
+nodeRepl.write('MODEL DATA construction primitives ready');
+
+function t2packet(row, defect = null) {
+  const p = row.input.provenance, first = row.input.earliestThrow, count = row.input.count, h = row.input.finiteGet;
+  const oldInput = t2oldPacket.input, run = t2copy(oldInput.run), jobs = t2copy(oldInput.jobs), commit = t2copy(oldInput.commit);
+  const head = 'a'.repeat(40), treeSha = 'b'.repeat(40), r = t2modelRunId, j = t2modelJobId, a = t2modelArtifactId;
+  const expected = {repository:'tokenizartinfo-ops/agent-friendly-web',branch:t2nom.branch,workflowPath:t2nom.workflow,
+    oneUseMessage:t2nom.message,job:t2nom.job,parent:t2model.base,head,tree:treeSha,runId:r,jobId:j,requiredSteps:t2nom.requiredSteps};
+  const trusted = {expected,bodyEdges:t2copy(t2edges),bodyEdgesHash:t2model.bodyEdgesHash,
+    commandStepNumber:t2modelStepNumber,artifactId:a};
+  Object.assign(run,{id:r,head_sha:head,head_branch:t2nom.branch,path:t2nom.workflow});
+  const job = jobs.jobs[0];
+  Object.assign(job,{id:j,run_id:r,head_sha:head,name:t2nom.job});
+  const intervals = [['00:00','00:05'],['00:05','00:10'],['00:10','00:15'],['00:15','00:30'],['00:30','03:40'],['03:40','04:15']];
+  job.steps=t2nom.requiredSteps.map((name,i)=>({number:i+2,name,status:'completed',conclusion:'success',
+    started_at:'2041-04-05T01:'+intervals[i][0]+'Z',completed_at:'2041-04-05T01:'+intervals[i][1]+'Z'}));
+  Object.assign(commit,{sha:head,tree:{sha:treeSha},message:t2nom.message,parents:[{sha:t2model.base}]});
+  const tree = {sha:treeSha,truncated:false,tree:t2edges.map(x=>({path:x.path,mode:x.mode,type:x.type,sha:x.blob,size:x.bytes}))};
+  tree.tree.push(t2copy(oldInput.tree.tree.at(-1)));
+  const context = {repository:expected.repository,baselineSource:t2model.base,baselineTree:t2model.baseTree,
+    sourceIndexBlob:t2edges[0].blob,proposalIndexHash:t2edges[0].sha256,selectionHash:t2model.selectionHash,
+    head,tree:treeSha,runId:String(r),runAttempt:1,job:t2nom.job,node:'v22.23.4'};
+  const custody = {...t2cloneCustody,schema:t2schemaFamily+'-custody.v1',context};
+  const events = t2caseIds.slice(0,14).flatMap((id,i) => [
+    t2event(4*i+1,id,'action','enter'),t2event(4*i+2,id,'action','return'),
+    t2event(4*i+3,id,'count','enter'),t2event(4*i+4,id,'count','return')
+  ]);
+  const native = {integrity:'prefix',cases:t2copy(t2oracle.syntheticPrefix14)};
+  if (row.input.nativeFirst14==='one-failure') native.cases[0].status='fail';
+  if (row.input.native15!==null) native.cases.push({id:t2target,status:row.input.native15});
+  if (row.input.targetActionEntered!==null) events.push(t2event(row.input.targetActionEntered,t2target,'action','enter'));
+  if (first!==null) {
+    const site=t2copy(first.site);
+    // TEST DATA ONLY. Historical frozen row retains 118. Packet uses reviewed current 143.
+    if (site?.file==='S08'&&site.line===18&&site.column===118&&defect!=='preserve-historical-site') site.column=143;
+    events.push(t2event(first.sequence,t2target,'action','throw',t2failure(site)));
+  }
+  if (count.enter!==null) events.push(t2event(count.enter,t2target,'count','enter'));
+  if (count.returned!==null) events.push(t2event(count.returned,t2target,'count','return'));
+  let frontier=count.returned!==null?'between-cases':count.enter!==null?'count':'action';
+  let openCase=count.returned!==null?null:{id:t2target,operation:count.enter!==null?'count':'action'};
+  let integrity='prefix', unknownReason=null;
+  if (defect==='later-open') {
+    events.push(t2event(61,t2caseIds[15],'action','enter'));
+    frontier='action';openCase={id:t2caseIds[15],operation:'action'};
+  }
+  if (defect==='earlier-throw') {
+    events[1]={...events[1],edge:'throw',error:t2failure({file:'S08',line:30,column:143})};
+    native.cases[0].status='fail';
+  }
+  if (defect==='duplicate-count') events.push(t2event(61,t2target,'count','return'));
+  if (defect==='no-action-yet') {frontier='between-cases';openCase=null;}
+  if (defect==='torn-journal') {
+    integrity='torn';frontier='unknown';openCase=null;unknownReason='JOURNAL_TORN';
+  }
+  if (defect==='torn-native') native.integrity='torn';
+  const journal=t2journal(events);
+  if (integrity==='torn') {journal.bytes++;journal.sha256='3'.repeat(64);}
+  const afterMonitor=t2sample(56);
+  let afterScopeMissing=count.returned===null?t2noSample:t2sample(count.returned);
+  if (defect==='snapshot-unavailable') afterScopeMissing={value:'UNKNOWN',reason:'SNAPSHOT_INVALID',countSequence:null};
+  if (defect==='count-snapshot-sequence') afterScopeMissing=t2sample(56);
+  const getWinner=t2copy(row.input.getWinner);
+  const capture={exitCode:1,signal:'none',errorKind:'none',
+    stdout:{bytes:p.childStdoutBytes,sha256:p.childStdoutDigest},stderr:{bytes:0,sha256:t2sha('')}};
+  const observation={capture,journal,witness:{integrity,frontier,events,openCase,afterOpen:false},
+    unknownReason,firstThrowSequence:events.find(e=>e.edge==='throw')?.sequence??null,native,
+    firstFailure:first===null?{...t2firstFailure,reason:'TARGET_PASSED'}:t2firstFailure,
+    finiteGet:{schema:'afw.c2-finite-get-diag3.v1',http:t2copy(h),afterMonitor,afterScopeMissing},
+    dropWinner:{case:'15:firstDROP',site:'UNKNOWN',outer:'UNKNOWN',publicSite:'UNKNOWN'},getWinner};
+  const out={schema:t2schemaFamily+'-outcome.v1',context,diagnosticCollectionComplete:true,nativeQualification:false,
+    sourceReads:{beforeSha256:t2readHashes.slice(),afterSha256:t2readHashes.slice()},observation,custody,
+    SourceQualified:false,Task1Pass:false,nonclaims:t2nonclaims};
+  if (p.producer===null) out.sourceReads.beforeSha256[0]=null;
+  if (p.reader===null) trusted.bodyEdgesHash=null;
+  if (p.api===null) job.run_id=null;
+  if (p.head===null) run.head_sha=null;
+  if (p.tree===null) tree.sha=null;
+  if (p.job===null) job.id=null;
+  if (p.attempt===null) run.run_attempt=null;
+  if (p.receipt===null) out.context=null;
+  if (p.custody===null) out.custody=null;
+  if (defect==='custody-total') {custody.checkedProcesses++;out.custody=custody;}
+  if (defect==='source-after') out.sourceReads.afterSha256[0]=null;
+  if (defect==='tree-edge') tree.tree[9].sha='0'.repeat(40);
+  if (defect==='commit-parent') commit.parents[0].sha='f'.repeat(40);
+  if (defect==='trusted-step') trusted.commandStepNumber=7;
+  if (defect==='trusted-artifact') trusted.artifactId=a+1;
+  const transport={runId:r,jobId:j,rawLog:t2canonicalLog(out,custody)};
+  if (defect==='outside-log-window') transport.rawLog=transport.rawLog.replaceAll('01:03:30Z','01:04:10Z');
+  if (defect==='fault-frame') transport.rawLog=transport.rawLog.replace(t2marker+'OUTCOME',t2marker+'FAULT');
+  if (defect==='noncanonical-frame') transport.rawLog=t2canonicalLog(out,custody,t2nom.command,' '+t2json(out));
+  if (p.log===null) transport.rawLog=null;
+  const item={id:a,name:t2nom.artifact.name,expired:false,size_in_bytes:0,created_at:'2041-04-05T01:04:10Z',
+    expires_at:'2041-04-12T01:04:10Z',workflow_run:{id:r,head_sha:head,head_branch:t2nom.branch},digest:null};
+  const artifact={runId:r,jobId:j,listing:{total_count:1,artifacts:[item]},artifactId:a,fileName:t2nom.artifact.fileName,
+    archiveBase64:null,payloadText:null};
+  t2setArtifact(artifact,out,defect);
+  if (defect==='artifact-retention') item.expires_at='2041-04-11T01:04:10Z';
+  if (defect==='artifact-filename') artifact.fileName='unexpected.json';
+  if (defect==='artifact-listing') artifact.listing.total_count=2;
+  if (defect==='artifact-step-time') {item.created_at='2041-04-05T01:00:00Z';item.expires_at='2041-04-12T01:00:00Z';}
+  if (p.archive===null) artifact.archiveBase64=null;
+  if (p.payload===null) artifact.payloadText=null;
+  return {id:row.id,reader:'MODEL',accept:row.expect,retainedHttp:row.expect?row.independentHttpRetained:null,
+    expectedWinner:row.expect?t2copy(row.input.getWinner):null,input:{run,jobs,commit,tree,transport,artifact},trusted};
+}
+function t2extra(id,expect,defect,mutate=()=>{}) {
+  const row=t2copy(t2oracle.rows[2]);row.id=id;row.expect=expect;mutate(row.input);
+  row.independentHttpRetained=row.input.finiteGet.actual;
+  return t2packet(row,defect);
+}
+const t2noHttp = (state,reason) => ({state,reason,throwSequence:null,actual:null,expected:null});
+const t2fixtures = [...t2oracle.rows.map(row=>t2packet(row)),
+  t2extra('X-unknown-retains-401',true,null,x=>{x.getWinner=t2u;x.finiteGet.actual=401;}),
+  t2extra('X-unknown-retains-302',true,null,x=>{x.getWinner=t2u;x.finiteGet.actual=302;}),
+  t2extra('X-known-closed-later-open',true,'later-open'),
+  t2extra('X-known-snapshot-invalid',true,'snapshot-unavailable'),
+  t2extra('X-historical-site-unsupported',true,'preserve-historical-site',x=>{x.getWinner=t2u;x.finiteGet=t2noHttp('NOT_APPLICABLE','EARLIEST_THROW_DIFFERENT');}),
+  t2extra('X-historical-site-known',false,'preserve-historical-site'),
+  t2extra('X-wrong-line',false,null,x=>{x.earliestThrow.site.line=19;}),
+  t2extra('X-wrong-coordinate',false,null,x=>{x.earliestThrow.site.column=144;}),
+  t2extra('X-prior-journal-throw',false,'earlier-throw'),
+  t2extra('X-native15-pass',false,null,x=>{x.native15='pass';}),
+  t2extra('X-native15-absent',false,null,x=>{x.native15=null;}),
+  t2extra('X-torn-native',false,'torn-native'),
+  t2extra('X-torn-journal-closed-target',false,'torn-journal'),
+  t2extra('X-duplicate-count',false,'duplicate-count'),
+  t2extra('X-count-snapshot-sequence',false,'count-snapshot-sequence'),
+  t2extra('X-unsupported-http-known-winner',false,null,x=>{x.finiteGet=t2noHttp('UNKNOWN','ASSERTION_SCALARS_UNAVAILABLE');}),
+  t2extra('X-unsupported-http-unknown-winner',true,null,x=>{x.getWinner=t2u;x.finiteGet=t2noHttp('UNKNOWN','ASSERTION_SCALARS_UNAVAILABLE');}),
+  t2extra('X-type',false,null,x=>{x.getWinner.stubStatus='418';}),
+  t2extra('X-range',false,null,x=>{x.getWinner.stubStatus=600;}),
+  t2extra('X-missing',false,null,x=>{delete x.getWinner.stubStatus;}),
+  t2extra('X-noncanonical-frame',false,'noncanonical-frame'),
+  t2extra('X-fault-frame',false,'fault-frame'),
+  t2extra('X-log-window',false,'outside-log-window'),
+  t2extra('X-custody-total',false,'custody-total'),
+  t2extra('X-after-read',false,'source-after'),
+  t2extra('X-tree-leaf',false,'tree-edge'),
+  t2extra('X-commit-parent',false,'commit-parent'),
+  t2extra('X-independent-step',false,'trusted-step'),
+  t2extra('X-independent-artifact',false,'trusted-artifact'),
+  t2extra('X-artifact-step-time',false,'artifact-step-time'),
+  t2extra('X-retention',false,'artifact-retention'),
+  t2extra('X-filename',false,'artifact-filename'),
+  t2extra('X-listing',false,'artifact-listing'),
+  t2extra('X-crc',false,'bad-crc'),
+  t2extra('X-dd',false,'bad-dd'),
+  t2extra('X-deflate-tail',false,'trailing-deflate'),
+  {id:'X-old-reader-added-field',reader:'OLD_MODEL',accept:false,retainedHttp:null,expectedWinner:null,...t2oldMutated}
+];
+const t2modelWire=t2line(t2model);
+const t2shards=[];
+for(let i=0;i<t2fixtures.length;i+=4){
+  const packets=t2fixtures.slice(i,i+4), plain=t2json(packets), compressed=t2zip.deflateRawSync(Buffer.from(plain));
+  t2shards.push({body:t2line({bytes:Buffer.byteLength(plain),sha256:t2sha(plain),deflateBase64:compressed.toString('base64')}),
+    records:packets.map(({id,reader,accept,retainedHttp,expectedWinner},j)=>({id,reader,accept,retainedHttp,expectedWinner,
+      compactSha256:t2sha(t2json(packets[j]))}))});
+}
+nodeRepl.write(JSON.stringify({count:t2fixtures.length,admit:t2fixtures.filter(x=>x.accept).length,shards:t2shards.map(x=>x.body.length),
+  model:{blob:t2git(t2modelWire),bytes:Buffer.byteLength(t2modelWire),sha256:t2sha(t2modelWire)}}));
+const t2packs=[];
+for(let i=0;i<t2fixtures.length;i+=12){
+  const packets=t2fixtures.slice(i,i+12), plain=t2json(packets);
+  const compressed=t2zip.brotliCompressSync(Buffer.from(plain),
+    {params:{[t2zip.constants.BROTLI_PARAM_QUALITY]:5,[t2zip.constants.BROTLI_PARAM_LGWIN]:22}});
+  t2packs.push({body:t2line({bytes:Buffer.byteLength(plain),sha256:t2sha(plain),brotliBase64:compressed.toString('base64')}),
+    records:packets.map(({id,reader,accept,retainedHttp,expectedWinner},j)=>({id,reader,accept,retainedHttp,expectedWinner,
+      compactSha256:t2sha(t2json(packets[j]))}))});
+}
+nodeRepl.write(JSON.stringify({packs:t2packs.map(x=>[x.body.length,JSON.parse(x.body).bytes]),
+  oldOutputSha:t2sha(t2old.input.artifact.payloadText),oldHighest:t2oldPacket.input.jobs.jobs[0].steps.at(-1).number}));
+

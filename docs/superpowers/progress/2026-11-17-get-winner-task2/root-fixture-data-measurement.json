@@ -1,0 +1,234 @@
+{
+  "kind": "DATA_MEASUREMENT_NOT_READER_TEST",
+  "packs": [
+    {
+      "blob": "3054ba782b68089ba82d72b409a28ed666c2db8e",
+      "outerBytes": 27483,
+      "plainBytes": 540302,
+      "plainSha256": "3400d4b3d9e593b8d53f4d22a75a48b9bb77a5962c20431d9e1b03df312d39ff",
+      "records": 12
+    },
+    {
+      "blob": "1a31f6cb8652be0b872f81601b97479f27473245",
+      "outerBytes": 40491,
+      "plainBytes": 539191,
+      "plainSha256": "390bd1f9c70f8ac3e98fbe92b289d702e24e70d468ecde3769a3c6312ece524e",
+      "records": 12
+    },
+    {
+      "blob": "0c5506c80724a69ba195c743e84a3b599bb0954d",
+      "outerBytes": 30471,
+      "plainBytes": 504652,
+      "plainSha256": "e60d23cddc5fdb6a73426ad518b4797fc8380c5afc3d5b595f7d0064d54bbbf3",
+      "records": 12
+    },
+    {
+      "blob": "78159c47e96c25076c717998db3b5ef7bfdf61a3",
+      "outerBytes": 49431,
+      "plainBytes": 540089,
+      "plainSha256": "fdd3a19e2c056a97678489a580ddf0a76c542dd8fd34b811481434942458512a",
+      "records": 12
+    },
+    {
+      "blob": "64c1783dda3c2c831667660473e3192b8f1e8c34",
+      "outerBytes": 20695,
+      "plainBytes": 539488,
+      "plainSha256": "c5c2f8f2046883becddd93bf142473edfd146700973f47f625f95dc994d68f29",
+      "records": 12
+    },
+    {
+      "blob": "8aaa719e5444c5115ccfb6285a45309835238326",
+      "outerBytes": 20135,
+      "plainBytes": 405415,
+      "plainSha256": "f356eb058518b13aee41b841404579632659989e27f28f72757aecea5b30beee",
+      "records": 9
+    }
+  ],
+  "records": 69,
+  "firstKeys": [
+    "id",
+    "reader",
+    "accept",
+    "retainedHttp",
+    "expectedWinner",
+    "input",
+    "trusted"
+  ],
+  "first": "O-S-404-404",
+  "uniqueIds": 69,
+  "summary": {
+    "frozen32OrderMatched": true,
+    "frozen32ExpectationsMatched": true,
+    "accepted": 13,
+    "rejected": 56,
+    "selectedViews": [
+      {
+        "id": "O-order",
+        "expected": false,
+        "winnerKeys": [
+          "winner",
+          "case",
+          "stubStatus",
+          "qaLastCompleted"
+        ],
+        "winner": {
+          "winner": "STUB_NON_OK",
+          "case": "15:firstFiniteGET",
+          "stubStatus": 418,
+          "qaLastCompleted": "UNKNOWN"
+        },
+        "site": {
+          "file": "S08",
+          "line": 18,
+          "column": 143
+        },
+        "count": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        },
+        "http": {
+          "state": "KNOWN",
+          "reason": "TARGET_GET_ASSERTION",
+          "throwSequence": 58,
+          "actual": 503,
+          "expected": 200
+        }
+      },
+      {
+        "id": "O-extra",
+        "expected": false,
+        "winnerKeys": [
+          "case",
+          "winner",
+          "stubStatus",
+          "qaLastCompleted",
+          "extra"
+        ],
+        "winner": {
+          "case": "15:firstFiniteGET",
+          "winner": "STUB_NON_OK",
+          "stubStatus": 418,
+          "qaLastCompleted": "UNKNOWN",
+          "extra": true
+        },
+        "site": {
+          "file": "S08",
+          "line": 18,
+          "column": 143
+        },
+        "count": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        },
+        "http": {
+          "state": "KNOWN",
+          "reason": "TARGET_GET_ASSERTION",
+          "throwSequence": 58,
+          "actual": 503,
+          "expected": 200
+        }
+      },
+      {
+        "id": "X-known-snapshot-invalid",
+        "expected": true,
+        "winnerKeys": [
+          "case",
+          "winner",
+          "stubStatus",
+          "qaLastCompleted"
+        ],
+        "winner": {
+          "case": "15:firstFiniteGET",
+          "winner": "STUB_NON_OK",
+          "stubStatus": 418,
+          "qaLastCompleted": "UNKNOWN"
+        },
+        "site": {
+          "file": "S08",
+          "line": 18,
+          "column": 143
+        },
+        "count": {
+          "value": "UNKNOWN",
+          "reason": "SNAPSHOT_INVALID",
+          "countSequence": null
+        },
+        "http": {
+          "state": "KNOWN",
+          "reason": "TARGET_GET_ASSERTION",
+          "throwSequence": 58,
+          "actual": 503,
+          "expected": 200
+        }
+      },
+      {
+        "id": "X-historical-site-unsupported",
+        "expected": true,
+        "winnerKeys": [
+          "case",
+          "winner",
+          "stubStatus",
+          "qaLastCompleted"
+        ],
+        "winner": {
+          "case": "15:firstFiniteGET",
+          "winner": "UNKNOWN",
+          "stubStatus": "UNKNOWN",
+          "qaLastCompleted": "UNKNOWN"
+        },
+        "site": {
+          "file": "S08",
+          "line": 18,
+          "column": 118
+        },
+        "count": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        },
+        "http": {
+          "state": "NOT_APPLICABLE",
+          "reason": "EARLIEST_THROW_DIFFERENT",
+          "throwSequence": null,
+          "actual": null,
+          "expected": null
+        }
+      },
+      {
+        "id": "X-historical-site-known",
+        "expected": false,
+        "winnerKeys": [
+          "case",
+          "winner",
+          "stubStatus",
+          "qaLastCompleted"
+        ],
+        "winner": {
+          "case": "15:firstFiniteGET",
+          "winner": "STUB_NON_OK",
+          "stubStatus": 418,
+          "qaLastCompleted": "UNKNOWN"
+        },
+        "site": {
+          "file": "S08",
+          "line": 18,
+          "column": 118
+        },
+        "count": {
+          "value": "0",
+          "reason": "JOINED_SNAPSHOT",
+          "countSequence": 60
+        },
+        "http": {
+          "state": "KNOWN",
+          "reason": "TARGET_GET_ASSERTION",
+          "throwSequence": 58,
+          "actual": 503,
+          "expected": 200
+        }
+      }
+    ]
+  }
+}
