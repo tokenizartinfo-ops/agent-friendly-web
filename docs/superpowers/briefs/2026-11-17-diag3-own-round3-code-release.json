@@ -1,0 +1,68 @@
+{
+  "schema": "AFW-FINITE-GET-DIAG3-ROOT-OWN-CODE-RELEASE/1",
+  "timestampUTC": "2026-11-17 03:43:21 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached Git proposals and OWN-only RAM controls; no Source execution/native refs/runtime",
+  "allowedAction": "OWN author may implement the independent D3 admission/semantic layer and its fixed tooling package after the literal70 census sealed below.",
+  "round": 3,
+  "maximumSameFamily": 5,
+  "noResetByFamilyName": true,
+  "basis": {
+    "priorRootRuling": "be1fbf3eaaab07bdfaf8a3b84a7665d42d45d71c",
+    "originalFixtureIndex": "c758a24c92519a7928ca8f3d5d7996d59a28e316",
+    "originalFixtureSeal": "8d64186b700a6ff79e946c7353ac0279d7856fd1",
+    "appendixIDs": "08d42d217903f4f0887dd6be2b30a268ef1cc595",
+    "final70FixtureIndex": "f1046e48ffa3f571288a81cf62de0822feb183af",
+    "final70FixtureSeal": "5a9ae339da360eb7f0ef0b8892b421dd2f9571b5",
+    "report": "d70bb882854e10095116ffa09f238d05f21e51a4",
+    "SourceContract": "609738496d65c21f2cce0c2969ce14f2b64dec07",
+    "SourceSupplement": "1ebdd25b23ba6a6dec7eb3569eb151a245e84686"
+  },
+  "RootInertAudit": {
+    "originalNew37WholeHashBytes": 1765058,
+    "original44FullRehashedBytes": 2813260,
+    "original24ZIPCRCFullDeflateLF": true,
+    "appendix6WholeHash": true,
+    "appendix2ZIPCRCFullDeflateLF": true,
+    "original81ArtifactRecordsExactlyUnchanged": true,
+    "ordered68IDPrefixExact": true,
+    "noSourceExecution": true,
+    "noGuardCodeOrNativeBeforeSeal": true
+  },
+  "census": {
+    "nativeGroups": 8,
+    "innerEvaluations": 70,
+    "legacyD2Evaluations": 44,
+    "originalNewD3": 24,
+    "appendedD3": 2,
+    "expectedAdmit": 32,
+    "expectedReject": 38,
+    "orderedManifest": "68 original IDs exact prefix then B06/B07; both appended IDs are members of existing VISIBLE_BLOCKERS native group. Protocol must distinguish canonical receipt ordering from physical grouped execution ordering; do not claim prefix of execution if actual groups interleave B06/B07 earlier."
+  },
+  "implementation": "Preserve frozen original D2 reader/modules/44 inputs/oracles/IDs. Add separate explicit D3 actual/model entrypoints, caller-prebound Source25/E3 pin sets and independent finiteGet semantic joins. No Source imports or raw header/TAP/row intake, no payload-driven binding selection/fallback or wildcard. Reuse unchanged ZIP/API/tree/time/shape/replay/C1 guards where possible; no whole419 rerun.",
+  "partialReasonRule": "After higher-priority visible journal/NA/count/torn exclusions: ambiguous permits UNKNOWN+null AMBIGUOUS_EVIDENCE or NATIVE_FORMAT_UNSUPPORTED; missing target/prefix at raw-dependent tier permits UNKNOWN+null TARGET_NATIVE_UNAVAILABLE or NATIVE_FORMAT_UNSUPPORTED. No KNOWN or JOINED samples without required clean prefix. Preserve counts/global-marker/cross-blocker conditions and pointer identities. Neither reason authenticates private header.",
+  "actualBinding": "The provisional Root Source25 record266289 is not semantically adopted and must not silently become the final default. Source author has now supplied R3 proposed index452895be with changed protocol/adapter/runner only; Root FULL measurement successor is pending and will be sent. You may prepare independent code/model controls now. Final ACTUAL constants/Root data module require that explicit Root successor measurement before package/native acceptance.",
+  "proof": "Real per-evaluation normalized state/reason/projection digest tied to exact ordered IDs and sealed fixture/code graph. Root can recompute every expected hash from literals. Include actual8 native TAP groups and report70 individual evaluations, not70 native tests. Same canonical ZIP/full consumption and finite caps; no expected-as-actual.",
+  "deliverables": "FULL UTF8/SHA256/Git afterimage bytes+complete import/mount graph, literal proof schema, exact runner/WF/source-data and reversible original/new splices; own-only RAM actual70 controls permitted. GHA/native/ref activation remains Root-only and held for independent review/full hash.",
+  "permissions": {
+    "OwnImplementationReleased": true,
+    "OwnOnlyRAMControlsReleased": true,
+    "SourceLocallyExecuted": false,
+    "NativeReleased": false,
+    "SourceBusinessReleased": false,
+    "CloudflareRuntime": false,
+    "OAuthOTPTokenMailMax": false
+  },
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
