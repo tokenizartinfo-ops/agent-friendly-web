@@ -1,0 +1,71 @@
+{
+  "schema": "AFW.GB1.ACTUAL_TOOL_OUTCOME/1",
+  "atUTC": "2026-11-17 22:27:49 UTC",
+  "context": {
+    "head": "3e9492c106a183c0338d21add6a7ef89851c5a3f",
+    "tree": "ce07802318a626dc8f3f4e579a538d53fe58a764",
+    "parent": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "branch": "lab/afw-c2-get-winner-20261117-tools1",
+    "run": 44189016920,
+    "attempt": 1,
+    "job": 134413114234,
+    "workflow": ".github/workflows/afw-c2-get-winner-tools1.yml",
+    "event": "push"
+  },
+  "result": "SUCCESS_PENDING_INDEPENDENT_ACTUAL_REVIEW",
+  "rootAdmission": {
+    "contextMatched": true,
+    "bindingsMatched": true,
+    "countsMatched": true,
+    "allGroupsExitZero": true,
+    "ownedTempRemoved": true,
+    "model": 287,
+    "nativeDispatches": 39,
+    "scope": "CONTROLLED_TOOLING_ONLY",
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false
+  },
+  "observedCounts": {
+    "syntaxInputs": 35,
+    "defensiveNodePass": 34,
+    "defensiveNodeFail": 0,
+    "defensivePythonPass": 2,
+    "startupMetadata": 46,
+    "model": 287,
+    "nativeDispatches": 39,
+    "groups": 3,
+    "guardedNodeProcesses": 4
+  },
+  "zip": {
+    "archive": {
+      "bytes": 4954,
+      "sha256": "31b66fd8bb1b9dac050aee2bfd185c61a7cf68f6bc1a5c6db1c2eca90078f6ee",
+      "blob": "d8e1705ce97eed86a24ec3908de0163c0ecfd90e"
+    },
+    "payload": {
+      "bytes": 16415,
+      "sha256": "a1ce49755befb06b018ab27c1c2c8c3a469cf7fedcc681d55c5107041ff2ac27",
+      "blob": "e8d57d9f37de40d1e02c6dfd17a141bc9e68f81c"
+    },
+    "crc32": "c6890dc7",
+    "compressedBytes": 4798,
+    "descriptorBytes": 16,
+    "flags": 8
+  },
+  "limits": {
+    "controlledToolsOnly": true,
+    "parentCanonicalReplacementIntegrity": false,
+    "platformWaitUntilLifecycle": false,
+    "ordinaryRouteIntegration": false,
+    "historical503Cause": "UNKNOWN",
+    "full20NotExecuted": true,
+    "SourceQualified": false,
+    "Task1Pass": false,
+    "PCoff": false,
+    "operationalReadiness": false,
+    "receiptAuthenticated": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

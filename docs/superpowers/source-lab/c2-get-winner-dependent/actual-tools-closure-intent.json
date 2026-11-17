@@ -1,0 +1,20 @@
+{
+  "schema": "AFW.GB1.ONE_USE_CLOSURE_INTENT/1",
+  "atUTC": "2026-11-17 22:29:00 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "branch": "lab/afw-c2-get-winner-20261117-tools1",
+  "executedHead": "3e9492c106a183c0338d21add6a7ef89851c5a3f",
+  "executedTree": "ce07802318a626dc8f3f4e579a538d53fe58a764",
+  "run": 44189016920,
+  "attempt": 1,
+  "job": 134413114234,
+  "primary": "a290e3c26382660f67c5ae8d2f8b0571c9f61956",
+  "outcome": "dbf6d81998b5fc9a0e9bed04ccb1dc06ea6abec8",
+  "payload": "e8d57d9f37de40d1e02c6dfd17a141bc9e68f81c",
+  "action": "replace only one-use workflow with manual-only unconditional-false job; preserve source plus outcome/intent records",
+  "sourcePreserved": true,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "operationalReadiness": false
+}
