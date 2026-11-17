@@ -1,0 +1,91 @@
+{
+  "schema": "AFW.GET_WINNER.STAGE_B.FIX5.SCOPED_AUTHOR_ADDENDUM/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "priorReport": "919b44cbd7a061692209c8cda1eadd053932af5e",
+  "priorReview": "835e4c4453a06ae6d54c84df5489c110cdace2af",
+  "brief": "dec384e1882a0a908c63bbe1f344863ba8fffdc8",
+  "proposal": "9de7d971b8a3cf51f1cccfe6908c2b9ecc392d27",
+  "authorScope": "Root accepted a separate defensive callback test only. This addendum is not a whole-packet review.",
+  "status": "FP1_OPEN_STANDALONE_DEFENSIVE_CONTROL_NOT_RUN",
+  "descriptors": {
+    "expectation": {
+      "bytes": 1635,
+      "blob": "974515705eef853d4af0f6ab4259d1a8353dc752",
+      "sha256": "e7910dc67beab42af2050b9c4ebb6cbc48f4f62b041d045185e3b11915691432",
+      "fullReadback": true
+    },
+    "source": {
+      "bytes": 2212,
+      "blob": "37c312f8920c30106be19c4580a3684a6378a772",
+      "sha256": "1a22cd6016c42cada547eecae8c5b6b0aecd53cfd0057d8a2ad2dae91a4de265",
+      "fullReadback": true
+    },
+    "delta": {
+      "bytes": 3572,
+      "blob": "8872c2e732abc63d32f11542f898a3fda72eea0a",
+      "sha256": "7f2557243012c63f276a7110202090133f99432f8b977eab2d4db2e8bf48010b",
+      "fullReadback": true
+    }
+  },
+  "test": {
+    "id": "FP1-S08-unmarked-response-incomplete-snapshot",
+    "logicalFile": "test/fp1-defensive-observer-emission.test.mjs",
+    "context": "Isolated test under the matching materialized Source13 module layout, using its pinned Miniflare dependency and the BASE record codec.",
+    "commands": [
+      {
+        "command": "node --check test/fp1-defensive-observer-emission.test.mjs",
+        "output": "NOT_RUN"
+      },
+      {
+        "command": "node --test --test-concurrency=1 test/fp1-defensive-observer-emission.test.mjs",
+        "output": "NOT_RUN"
+      }
+    ],
+    "inCandidateSchedule": false,
+    "design": "Use one codec-encoded and round-tripped synthetic ProjectRef, an unmarked Miniflare HTTP 204 response and the exported S08 observer. Enter the label, get the token, consume the empty response, capture, finish, and call counts. Verify one snapshot read, one exact callback message, counters 2/1/0, the label, key order, unknown bucket and unknown tuple. Add only the TAP prefix and newline to the captured bytes.",
+    "limits": "The valid ProjectRef by itself does not constitute a complete ticket snapshot. This test expects conservative UNKNOWN. It cannot distinguish every internal cause for UNKNOWN or prove positive bucket recognition. It supplies no complete owner approval fixture or foreign marker replay."
+  },
+  "previousGraph": {
+    "mounts": 91,
+    "bytes": 1502623,
+    "fullArraySha256": "709ecd6917f1facd96a880ca30c6cd78afb2180f4cefe2763ff9b9f6610122e2",
+    "scope": "Historical Root readback for the unchanged proposal; this wave freshly hashed six selected pre-existing blobs and all new bodies, not the full 91.",
+    "mountsChanged": 0,
+    "frozen315Changed": 0,
+    "modelChanged": false,
+    "workflowStaticHold": true,
+    "controllerStaticHold": true,
+    "FP2throughFP5": "addressed in previous static review; all 36 focused unit tests remain NOT_RUN"
+  },
+  "remaining": "FP1 requires a known positive bucket and tuple from the real observer in the composed driver including its frozen discrepancy case. The detached defense test does not integrate this. The original model, its existing executable parent-only boundary, the original expectations, both startup holds and all past pins are preserved. Producing an activation-ready package that includes an end-to-end reproduction of acceptance of altered diagnostic evidence fell outside the scoped work accepted by Root. This limitation is not a tool failure or a request for authorization.",
+  "checks": {
+    "selfReview": "Inspected the actual observer and host interfaces and actual codec shape as text. Checked test imports against materialized S08 and BASE paths. Read back full bytes, calculated Git blob SHA1 and SHA256 in RAM for the new blobs and compared exact contents. No parser, repository import, syntax check, tests, dependency install, runtime or workflow was run.",
+    "sealWrittenAndVerifiedBeforeSource": true,
+    "proposedExtraStandaloneUnitControls": 1,
+    "scheduledExtraControls": 0,
+    "syntaxRuns": 0,
+    "testsRun": 0,
+    "nativeDispatches": 0,
+    "refsCreated": 0,
+    "refUpdates": 0,
+    "treesCreated": 0,
+    "commitsCreated": 0
+  },
+  "fixWave": 5,
+  "maxFixWaves": 5,
+  "Source5": 5,
+  "OWN5": 5,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "completePackage": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "globalNativeDrainVerified": false,
+  "sdkNamespaceEmptyVerified": false,
+  "receiptAuthenticated": false,
+  "historicalCauseProven": false,
+  "activationReleased": false,
+  "rollback": "Disregard the four detached data blobs recorded for this addendum. The reviewed mounts, refs, workflow and controller already have their prior values."
+}

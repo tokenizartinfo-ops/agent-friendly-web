@@ -1,0 +1,97 @@
+{
+  "schema": "AFW.STAGE_B.FIX5.DETACHED_DEFENSIVE_CALLBACK_DELTA/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "environment": "detached private Git DATA",
+  "resourceType": "unreferenced blob",
+  "allowedAction": "record independently measured standalone test and expectation until further review",
+  "baseline": {
+    "bytes": 16665,
+    "blob": "9de7d971b8a3cf51f1cccfe6908c2b9ecc392d27",
+    "sha256": "18a7ca2f47aa702fe85b195a1a1f036aac6237adb478e4f0eba9e5a0a6d1c8b2",
+    "fullReadback": true
+  },
+  "priorReport": "919b44cbd7a061692209c8cda1eadd053932af5e",
+  "priorReview": "835e4c4453a06ae6d54c84df5489c110cdace2af",
+  "priorMeasurement": "385e56954a381a07c1e2d22131d1137fd2553d73",
+  "changesToReviewedProposal": [],
+  "changesTo91Mounts": [],
+  "workflowChanged": false,
+  "controllerChanged": false,
+  "retainedInputs": {
+    "reviewedProposal": {
+      "bytes": 16665,
+      "blob": "9de7d971b8a3cf51f1cccfe6908c2b9ecc392d27",
+      "sha256": "18a7ca2f47aa702fe85b195a1a1f036aac6237adb478e4f0eba9e5a0a6d1c8b2",
+      "fullReadback": true
+    },
+    "observer": {
+      "bytes": 23226,
+      "blob": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+      "sha256": "75ff602cecc209575fb967e63469facbbb47ef6335a2a1ccad66710225002046",
+      "fullReadback": true
+    },
+    "baseRecordCodec": {
+      "bytes": 18276,
+      "blob": "e9b66f68b6dbabbfecc46072949a0d5d9f059141",
+      "sha256": "fa22c66cbf020341eb6cd602cf692d9c033128f9f651ee7b605f3449e86b91c7",
+      "fullReadback": true
+    },
+    "model": {
+      "bytes": 10048,
+      "blob": "8d6ae83f38437d4652096086aa48bef157571777",
+      "sha256": "85032be181a68741c78e0bb9f6867cd6170732698374cb98fadad731e424fb5c",
+      "fullReadback": true
+    },
+    "workflow": {
+      "bytes": 6691,
+      "blob": "d0f8e93ea8e9f957d1b468fa3665f40fd1d45f1f",
+      "sha256": "fc6c501a811ea7fd275bc8a380b982589ead1f905ed177aa6a148961740ac907",
+      "fullReadback": true
+    },
+    "controller": {
+      "bytes": 39401,
+      "blob": "974c658260f89cd088fa01bd5064d9b5e9dcf01a",
+      "sha256": "5a0c7620a0359e1c3ce56ca710b88c12422aeeb122c5f7161838d38edd6c975a",
+      "fullReadback": true
+    }
+  },
+  "outOfGraph": [
+    {
+      "id": "FP1-defensive-expectation",
+      "role": "expectation sorted before test authorship",
+      "before": null,
+      "after": {
+        "bytes": 1635,
+        "blob": "974515705eef853d4af0f6ab4259d1a8353dc752",
+        "sha256": "e7910dc67beab42af2050b9c4ebb6cbc48f4f62b041d045185e3b11915691432",
+        "fullReadback": true
+      }
+    },
+    {
+      "id": "FP1-defensive-test",
+      "role": "standalone source outside schedule",
+      "intendedMaterializedPath": "test/fp1-defensive-observer-emission.test.mjs",
+      "before": null,
+      "after": {
+        "bytes": 2212,
+        "blob": "37c312f8920c30106be19c4580a3684a6378a772",
+        "sha256": "1a22cd6016c42cada547eecae8c5b6b0aecd53cfd0057d8a2ad2dae91a4de265",
+        "fullReadback": true
+      }
+    }
+  ],
+  "newDetachedSourceAndExpectationBytes": 3847,
+  "forward": "Retain the two out-of-graph objects by content ID. The candidate, mounts, commands and refs have zero transitions.",
+  "reverse": "Disregard those two detached objects. The earlier proposal and both holds already remain at their original object IDs.",
+  "result": "FP1_OPEN",
+  "testsExecuted": 0,
+  "activationReleased": false,
+  "fixWave": 5,
+  "maxFixWaves": 5,
+  "Source5": 5,
+  "OWN5": 5,
+  "PCoff": false
+}

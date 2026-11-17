@@ -1,0 +1,43 @@
+{
+  "schema": "AFW.STAGE_B.FIX5.DEFENSIVE_CALLBACK_EXPECTATIONS/1",
+  "date": "2026-11-17",
+  "proposal": "9de7d971b8a3cf51f1cccfe6908c2b9ecc392d27",
+  "previousSeal": "2e4c8ebb666f0fc7736dad34b58582a3ace4560e",
+  "review": "835e4c4453a06ae6d54c84df5489c110cdace2af",
+  "source": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+  "codec": "e9b66f68b6dbabbfecc46072949a0d5d9f059141",
+  "id": "FP1-S08-unmarked-response-incomplete-snapshot",
+  "test": "test/fp1-defensive-observer-emission.test.mjs",
+  "scope": "Standalone MODEL test of the S08 callback through its public interface. It is outside the reviewed candidate and its schedule.",
+  "inputs": {
+    "active": "single in-memory main object",
+    "label": "C2T1_SCOPE_MISSING",
+    "response": "actual Miniflare DispatchResponse, HTTP 204, empty body, no marker",
+    "snapshot": "one synthetic ProjectRef encoded and round-tripped through the actual codec; no tickets or use records",
+    "uploadsEntries": 3,
+    "activationEntries": 2
+  },
+  "expected": {
+    "tokenPresent": true,
+    "outputBeforeCounts": [],
+    "snapshotReadsBeforeCounts": 0,
+    "snapshotReadsAfterCounts": 1,
+    "counters": {
+      "upload": 2,
+      "activation": 1,
+      "receipts": 0
+    },
+    "exactCallbackMessages": [
+      "C2FT4 {\"id\":\"C2T1_SCOPE_MISSING\",\"value\":\"UNKNOWN\",\"w\":\"U\",\"s\":0,\"h\":0}"
+    ],
+    "exactTapLine": "# C2FT4 {\"id\":\"C2T1_SCOPE_MISSING\",\"value\":\"UNKNOWN\",\"w\":\"U\",\"s\":0,\"h\":0}\n"
+  },
+  "status": "NOT_RUN",
+  "FP1": "OPEN",
+  "workflowHold": true,
+  "controllerHold": true,
+  "fixWave": 5,
+  "maxFixWaves": 5,
+  "Source5": 5,
+  "OWN5": 5
+}

@@ -1,0 +1,61 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { Response as DispatchResponse } from 'miniflare';
+import {
+  decodeFinitePreparationRecord,
+  encodeFinitePreparationRecord,
+} from '../lib/mcp-qa-finite-preparation-records.mjs';
+import { createFiniteSnapshotObserver } from './fixtures/finite-coupled-native.mjs';
+
+test('FP1-S08-unmarked-response-incomplete-snapshot', async () => {
+  const project = {
+    projectRef: 'a'.repeat(64),
+    preconnectionId: 'b'.repeat(64),
+    subjectHash: 'c'.repeat(64),
+    sourceRevision: 'd'.repeat(40),
+    projectId: 'synthetic-project',
+    revision: 1,
+    issuedAt: 1,
+    expiresAt: 100,
+  };
+  const encoded = encodeFinitePreparationRecord('ProjectRef', project);
+  assert.deepEqual(decodeFinitePreparationRecord('ProjectRef', encoded), project);
+  const rows = [['owner-project-ref:' + project.projectRef, encoded]];
+  let snapshotReads = 0;
+  const main = {
+    choice: { projectRef: project.projectRef },
+    source: { sourceRevision: project.sourceRevision },
+    uploads: [null, null, null],
+    activations: [null, null],
+    getWinnerDirect: () => true,
+    stub: {
+      snapshot() {
+        snapshotReads++;
+        return rows;
+      },
+    },
+  };
+  const messages = [];
+  const observer = createFiniteSnapshotObserver(main, () => main, message => messages.push(message));
+  const label = observer.enter('C2T1_SCOPE_MISSING');
+  assert.equal(label?.id, 'C2T1_SCOPE_MISSING');
+  const token = observer.getToken(label);
+  assert.equal(typeof token?.capture, 'function');
+  const response = new DispatchResponse(null, { status: 204 });
+  assert.equal(await response.text(), '');
+  token.capture(main, response, response.status);
+  observer.finish(label);
+  assert.equal(snapshotReads, 0);
+  assert.deepEqual(messages, []);
+
+  const counters = await observer.counts();
+  assert.equal(snapshotReads, 1);
+  assert.deepEqual(counters, { upload: 2, activation: 1, receipts: 0 });
+  assert.deepEqual(messages, [
+    'C2FT4 {"id":"C2T1_SCOPE_MISSING","value":"UNKNOWN","w":"U","s":0,"h":0}',
+  ]);
+  assert.equal(
+    '# ' + messages[0] + '\n',
+    '# C2FT4 {"id":"C2T1_SCOPE_MISSING","value":"UNKNOWN","w":"U","s":0,"h":0}\n',
+  );
+});
