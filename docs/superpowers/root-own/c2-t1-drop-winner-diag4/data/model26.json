@@ -1,0 +1,385 @@
+{
+  "schema": "AFW.OWN5.D4.MODEL_TUPLE/1",
+  "bindingKind": "MODELED_ONLY",
+  "syntheticOnly": true,
+  "sourceIndex": {
+    "blob": "4d931db1c79362472fd79dd0e52a3078d96fb264",
+    "bytes": 3437,
+    "sha256": "56d38218923404125a83720699ae4dc464d39d2b005d9149b7c9992d7c4ec6b6"
+  },
+  "source13": [
+    {
+      "id": "S00",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "id": "S01",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "id": "S02",
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "id": "S03",
+      "path": "worker/mcp-own/finite.mjs",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "id": "S04",
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "id": "S05",
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "id": "S06",
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "id": "S07",
+      "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "id": "S08",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "blob": "6a6c037e70fa1fa4ff5c74450b2bf331045adeb1",
+      "bytes": 191,
+      "sha256": "94fbef1c092cc17cdfdfecfa5009779dca7efe90e668e56a12bd2447754c462a"
+    },
+    {
+      "id": "S09",
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "blob": "037b8dac5a49dd8e516ed82ca053a3698ebae98c",
+      "bytes": 192,
+      "sha256": "1fdb21163f61f1c3ef97c6d56329aebcedd2813760932bbabf0655182c5fdbc3"
+    },
+    {
+      "id": "S10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "blob": "1b2a64636b4a48289f67b39dcd1f5fc0c0be40a4",
+      "bytes": 192,
+      "sha256": "a7b9c24146df7014a6e35c0c6be823ac9a17d7caa12250d4436e7d1eecd5a7c5"
+    },
+    {
+      "id": "S11",
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "id": "S12",
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    }
+  ],
+  "selected": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ],
+  "selectionHash": "e17b287dbb7245db6f033344d477106abd88a0d8a9fe8c370326dd82296d54a8",
+  "frameSchema": {
+    "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/frame-schema.json",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "c8e05b8882728cdcfaffa18f5d311256a42851ec",
+    "bytes": 34193,
+    "sha256": "60a3e768fdf5e6032dcaed07a54f0dd3c7aba342926689c9e9566c3d9f832f9f"
+  },
+  "nomination": {
+    "branch": "lab/afw-c2-source-20261117-t1-drop-winner-diag4",
+    "message": "AFW-C2-T1-DROP-WINNER-DIAG4-ONEUSE-20261117",
+    "workflow": ".github/workflows/afw-c2-drop-winner-diag4.yml",
+    "job": "c2-drop-winner-diag4",
+    "prefix": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/",
+    "runner": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+    "command": "node docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+    "artifact": {
+      "name": "afw-c2-drop-winner-diag4",
+      "path": "output/c2-drop-winner-diag4.json",
+      "fileName": "c2-drop-winner-diag4.json",
+      "retentionDays": 7
+    },
+    "requiredSteps": [
+      "Read the exact one-use lab head",
+      "Use the fixed Node runtime",
+      "Install only the existing locked dependencies",
+      "Observe first DROP in the full case order",
+      "Preserve the bounded first DROP diagnostic"
+    ],
+    "jobMinutes": 7,
+    "activationReleased": false,
+    "driverSibling": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs"
+  },
+  "bodyEdges": [
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/source-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4d931db1c79362472fd79dd0e52a3078d96fb264",
+      "bytes": 3437,
+      "sha256": "56d38218923404125a83720699ae4dc464d39d2b005d9149b7c9992d7c4ec6b6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-00.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5",
+      "bytes": 148547,
+      "sha256": "02ee98da9239dd28948db664127c579ef69941e5e9c8151b1568527509815210"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-01.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+      "bytes": 45576,
+      "sha256": "fc227b59b3b5815eadffbd582f018cbd3e64ceaa596f07bc21a2031f7cd1d6e9"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-02.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8",
+      "bytes": 2497,
+      "sha256": "644973221d5dbc3e9bdb87888840c28c370f3b1ed6dff2c89534c4de0e8642f8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-03.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+      "bytes": 2810,
+      "sha256": "7059b9ccc18fccd4da8dff42e9c04c4c7547afef9976852cbefbeef5175504f6"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-04.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e",
+      "bytes": 4153,
+      "sha256": "54e2261aac2bbe3d2446d7fa5911f2b921b4d8dc618943abd5d34e3f1125ca4b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-05.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb",
+      "bytes": 101380,
+      "sha256": "5911698fe8de72441d125414f879d725a677dbc26f3c1a40cdcd2999b6d4b40b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-06.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966",
+      "bytes": 22501,
+      "sha256": "f08b914a1e668ad36b4848d0b61cbe8b44dfb3e54bc747480564a8aacc587df4"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-07.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d4db10ee8a091434835a9ac28e0d607a5e9efd21",
+      "bytes": 2785,
+      "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-08.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "6a6c037e70fa1fa4ff5c74450b2bf331045adeb1",
+      "bytes": 191,
+      "sha256": "94fbef1c092cc17cdfdfecfa5009779dca7efe90e668e56a12bd2447754c462a"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-09.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "037b8dac5a49dd8e516ed82ca053a3698ebae98c",
+      "bytes": 192,
+      "sha256": "1fdb21163f61f1c3ef97c6d56329aebcedd2813760932bbabf0655182c5fdbc3"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/body-10.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "1b2a64636b4a48289f67b39dcd1f5fc0c0be40a4",
+      "bytes": 192,
+      "sha256": "a7b9c24146df7014a6e35c0c6be823ac9a17d7caa12250d4436e7d1eecd5a7c5"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-11.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3",
+      "bytes": 58727,
+      "sha256": "d9895052eb50bf75ca1a14d743fac5c5e4c9b4cf22ae0b6460268f05878f26f7"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/body-12.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd",
+      "bytes": 6030,
+      "sha256": "0db45a29028284a886b7e2f46b4ef0f8834b9cfefdeed2fc026aa72694a7c8e8"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+      "bytes": 1208,
+      "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+      "bytes": 417,
+      "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/mode-selection.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "162c194073a87e2a3bc906b3b605df28b17ea17f",
+      "bytes": 733,
+      "sha256": "0ac2d8294c51e2f2b4735ce9d0bb995591d31bb70dc72ff01efee3d59af8de7b"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/frame-schema.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c8e05b8882728cdcfaffa18f5d311256a42851ec",
+      "bytes": 34193,
+      "sha256": "60a3e768fdf5e6032dcaed07a54f0dd3c7aba342926689c9e9566c3d9f832f9f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/protocol-contract.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "3faaae95c942d964fbd799fcedda77bb36c810d2",
+      "bytes": 203,
+      "sha256": "8db1629746aaf1fb4ea5d0b44a06a6282b289abe5ed15d4b7699cf53b2b6d517"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/collection-adapters.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "131438921d1be2d524f7fb8937c30696c1435910",
+      "bytes": 204,
+      "sha256": "b29613441802d3d537615fe572c5f5ec085e99fe898d475a34f43b2f61fc7722"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/read-progress.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+      "bytes": 5507,
+      "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/diagnostic-driver.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c",
+      "bytes": 3169,
+      "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/progress-recorder.txt",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "662ec8170bbfe81831b557824d1a466e722842d7",
+      "bytes": 3833,
+      "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/run-drop-winner-diag4.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "8cf5d540288ef0afddb63d57ea9ff4e8eeda97d6",
+      "bytes": 206,
+      "sha256": "151fc2ac2fd07f6f66248890930ed2cba317ea3c99fcc8dc9d6d06327553818c"
+    },
+    {
+      "path": ".github/workflows/afw-c2-drop-winner-diag4.yml",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "01f04fe783fb390f0d6a583ac3860c0185856759",
+      "bytes": 209,
+      "sha256": "165f7a87e186a8f7cc241e6b57128a294573be6d8df5161940fe7ce7bae14832"
+    },
+    {
+      "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/native-release.json",
+      "mode": "100644",
+      "type": "blob",
+      "blob": "c9fcef01fdb321e566c6789344fdeb897d228a82",
+      "bytes": 200,
+      "sha256": "0f8ea538f6f11340982dd000189ad21fafee8cca73f3472311ad70f97c73521c"
+    }
+  ],
+  "bodyEdgesHash": "c9eafc12cfcb8d3b8696f18fd05cdc876728bbacd84c8638e5e334803c6aeae6",
+  "actualExpectedSourceContext": null,
+  "actualAllowed": false,
+  "sourceQualification": false,
+  "nativeQualification": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}

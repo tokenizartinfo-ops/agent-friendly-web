@@ -1,0 +1,175 @@
+{
+  "schema": "afw.c2-drop-winner-diag4-selection.v1",
+  "sourceIndexBlob": "fc5b71098da76696278765f43805f0f2a1953b22",
+  "sourceIndexSha256": "1da326e60821aec91c7635a227b42f14b0710a3a2d5fb6f8764722fbbaa3d141",
+  "normalGreenSelectionHash": "0201035afa5925bd24b218ed63cbbcf0db5c660e56a9cc13db4083778e0f1af5",
+  "node": "v22.23.4",
+  "sdk": "1.2.1",
+  "originalDriver": {
+    "path": "test/mcp-qa-finite-owner-three-stage-native.test.mjs",
+    "bytes": 2785,
+    "sha256": "678fc3c538f2fc29e70c41475794f58e5d690a7c7aae69b1b97ae9309a728b6b",
+    "git": "d4db10ee8a091434835a9ac28e0d607a5e9efd21"
+  },
+  "driver": {
+    "path": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+    "bytes": 3169,
+    "sha256": "3363ff3be3fedb244f22f965be04925c579a3cfe33b7a718ec76428e3b4ca5bc",
+    "git": "9e29c5197207b03bdb4b10069089f37df289e88c"
+  },
+  "registrationTail": {
+    "originalOffset": 991,
+    "driverOffset": 1375,
+    "bytes": 1794,
+    "sha256": "256b20445a479589e7a745c704eeaca74298f51a3a965ea8487cacfce7d3791a"
+  },
+  "recorder": {
+    "path": "test/finite-green-progress-recorder.mjs",
+    "bytes": 3833,
+    "sha256": "a3fb952458133453acde06ffe200c4b966f55e2472ea9c2263289e788be6e76e",
+    "git": "662ec8170bbfe81831b557824d1a466e722842d7"
+  },
+  "reader": {
+    "file": "read-progress.mjs",
+    "bytes": 5507,
+    "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f",
+    "git": "62a31e3c16cc710c84ebfb5b0242abb00671363c"
+  },
+  "aliases": [
+    {
+      "id": "S00",
+      "path": "lib/mcp-qa-finite-owner-phase-context.mjs",
+      "blob": "a9d70b416579e3ab6e8c5f02ec2a9b94227c43e5"
+    },
+    {
+      "id": "S01",
+      "path": "lib/mcp-qa-finite-owner-preparation.mjs",
+      "blob": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908"
+    },
+    {
+      "id": "S02",
+      "path": "lib/mcp-qa-finite-owner-native-receiver.mjs",
+      "blob": "8505cfe4e020c570ec37cb5943b703770e4d06c8"
+    },
+    {
+      "id": "S03",
+      "path": "worker/mcp-own/finite.mjs",
+      "blob": "8b43e03e96b055be49b66a6788b27f129dd894c8"
+    },
+    {
+      "id": "S04",
+      "path": "lib/mcp-qa-finite-owner-cleanup-scope.mjs",
+      "blob": "e2f35568a51360e3cbda4801f8d0d895d3f0dd7e"
+    },
+    {
+      "id": "S05",
+      "path": "lib/mcp-qa-finite-owner-cleanup.mjs",
+      "blob": "a177d50ff73f8fad1d60827ef904a204126796fb"
+    },
+    {
+      "id": "S06",
+      "path": "lib/mcp-qa-finite-initial-cleanup.mjs",
+      "blob": "4c1d7355e1759a5d597b520fcb79c2689b9bb966"
+    },
+    {
+      "id": "D07",
+      "path": "test/mcp-qa-finite-owner-three-stage-green-frontier-diag1-native.test.mjs",
+      "blob": "9e29c5197207b03bdb4b10069089f37df289e88c"
+    },
+    {
+      "id": "S08",
+      "path": "test/fixtures/finite-coupled-native.mjs",
+      "blob": "14b1a67b0557dbc660a3900d8767b40c5bff7755",
+      "bytes": 22615,
+      "sha256": "da134d91f132195a787c549a1d3552335efc29720506dbf2ca9cb7e4371af677"
+    },
+    {
+      "id": "S09",
+      "path": "test/fixtures/finite-first-connection-publication.mjs",
+      "blob": "9da84b3f0606e9cb84d8308de26c7f193c5c778a",
+      "bytes": 72687,
+      "sha256": "93c0d34a0221797c09e4602065af570ad4711fdc019eea0fbcd9b0c8f90f08b9"
+    },
+    {
+      "id": "S10",
+      "path": "test/fixtures/finite-initial-entry-world.mjs",
+      "blob": "955fa904a89733fabfa5c73736f59922b6e58023",
+      "bytes": 98440,
+      "sha256": "01bd570328eb52d05a5d290f391bfc3da80d8298fba25fee7beff542096a0f34"
+    },
+    {
+      "id": "S11",
+      "path": "test/mcp-qa-finite-first-connection-publication-native.test.mjs",
+      "blob": "19441f9aa4a464b9594431b6e196d4318a7809b3"
+    },
+    {
+      "id": "S12",
+      "path": "lib/mcp-qa-finite-owner-notice-get-forward.mjs",
+      "blob": "e3f1597c0b57e36c6c28e4321d8638b5e0eacfcd"
+    }
+  ],
+  "selected": [
+    "C2T1_CONNECTION",
+    "C2T1_OAUTH",
+    "C2T1_HANDLE",
+    "C2T1_PROJECTREF",
+    "C2T1_SUBJECT",
+    "C2T1_PHASE_RENAME",
+    "C2T1_SOURCE_BYTES",
+    "C2T1_APPROVAL",
+    "C2T1_PREDECESSOR",
+    "C2T1_GRANT_REVOKED",
+    "C2T1_EXTRA_KEY",
+    "C2T1_NOTICES",
+    "C2T1_MONITOR_COOKIE",
+    "C2T1_MONITOR",
+    "C2T1_SCOPE_MISSING",
+    "C2T1_FINITE",
+    "C2T1_SELECTION",
+    "C2T1_LOST_ACK_DUPLICATE",
+    "C2T1_UNRESOLVED_WRITER",
+    "C2T1_OWN_PROMISE"
+  ],
+  "finiteGet": {
+    "firstFailurePreimage": "8e30344042e65b888d1f912a9a375d365f3e5c4e",
+    "targetId": "C2T1_SCOPE_MISSING",
+    "ordinal": 15,
+    "site": {
+      "file": "S08",
+      "line": 18,
+      "column": 118
+    },
+    "checkpoints": [
+      "C2T1_MONITOR",
+      "C2T1_SCOPE_MISSING"
+    ],
+    "fieldSchemaGit": "4a98aa0c77c0d1eb61c5ba6ecabdbf6a4d72ec32"
+  },
+  "dropWinner": {
+    "case": "15:firstDROP",
+    "sites": [
+      "S01:247",
+      "S00:743",
+      "S04:37",
+      "S04:43",
+      "S01:69",
+      "S01:95",
+      "UNKNOWN"
+    ],
+    "outers": [
+      "QA_MARKED_STUB_NON_OK",
+      "STUB_NON_OK",
+      "DEADLINE_OR_ABORT",
+      "UNKNOWN"
+    ],
+    "cap": 512,
+    "fixture": "a78efb5290deb184c70fc4282bf438d818d02588",
+    "requiredNativeGates": [
+      "realNamespace",
+      "sameBytes",
+      "distinctExactSites",
+      "qaTransport",
+      "mTransport"
+    ]
+  }
+}

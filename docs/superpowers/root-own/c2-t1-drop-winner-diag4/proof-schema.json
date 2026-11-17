@@ -1,0 +1,174 @@
+{
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "afw.c2-own-drop-winner-tools-proof.v1"
+    },
+    "repository": {
+      "const": "tokenizartinfo-ops/agent-friendly-web"
+    },
+    "branch": {
+      "const": "lab/afw-c2-own-20261117-drop-winner-tools"
+    },
+    "workflow": {
+      "const": ".github/workflows/afw-c2-own-drop-winner-tools.yml"
+    },
+    "message": {
+      "const": "AFW-C2-OWN-DROP-WINNER-TOOLS-ONEUSE-20261117"
+    },
+    "head": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "tree": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "runId": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$"
+    },
+    "attempt": {
+      "const": 1
+    },
+    "job": {
+      "const": "own-drop-winner-tools"
+    },
+    "node": {
+      "const": "v22.23.4"
+    },
+    "platform": {
+      "const": "linux"
+    },
+    "graphSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "runnerSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "rootMeasurement": {
+      "const": "1fea33135f8943707738d4f078ff3616e9b5132c"
+    },
+    "source26EdgesSha256": {
+      "const": "47d154b05de3d62c8d2af6f49060a82da328e1d5105975be0a883a913f8ee280"
+    },
+    "model26EdgesSha256": {
+      "const": "c9eafc12cfcb8d3b8696f18fd05cdc876728bbacd84c8638e5e334803c6aeae6"
+    },
+    "fixtureSeal": {
+      "const": "bfff4346bdbe21bbd431df80a07d234828a89d97"
+    },
+    "originalResultsSha256": {
+      "const": "98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb"
+    },
+    "appendResultsSha256": {
+      "const": "7bd0f0c8d8ca7a5280cfb2fe3238b93b42dcaeaf49e4a00203f5732e6d98ae27"
+    },
+    "groups": {
+      "const": [
+        "FG3_OWN_D2_COMPAT",
+        "FG3_OWN_FINITE_GET_KNOWN",
+        "FG3_OWN_FINITE_GET_INDEPENDENCE",
+        "FG3_OWN_FINITE_GET_POINTERS",
+        "FG3_OWN_FINITE_GET_VISIBLE_BLOCKERS",
+        "FG3_OWN_FINITE_GET_STREAM_CONSISTENCY",
+        "FG3_OWN_FINITE_GET_WIRE",
+        "FG3_OWN_FINITE_GET_CALLER_BINDING",
+        "DW4_OWN_DROP_WINNER_PUBLIC"
+      ]
+    },
+    "adapterUnits": {
+      "const": [
+        "MODEL5_COMMAND_WINDOW",
+        "MODEL5_SHIFTED_MARKER",
+        "MODEL5_FOREIGN_COMMAND",
+        "MODEL5_FOREIGN_STEP",
+        "ACTUAL6_COMMAND_WINDOW",
+        "ACTUAL6_SHIFTED_MARKER",
+        "ACTUAL6_FOREIGN_COMMAND",
+        "ACTUAL6_FOREIGN_STEP",
+        "ACTUAL_MISSING_TRUSTED",
+        "MODEL_MISSING_TRUSTED"
+      ]
+    },
+    "counts": {
+      "const": {
+        "nativeGroups": 9,
+        "groupPass": 9,
+        "fixtureEvaluations": 142,
+        "matched": 142,
+        "admit": 58,
+        "reject": 84,
+        "originalAdmit": 32,
+        "originalReject": 41,
+        "appendAdmit": 26,
+        "appendReject": 43,
+        "separateUnitAssertions": 10,
+        "fail": 0,
+        "skipped": 0,
+        "todo": 0,
+        "cancelled": 0
+      }
+    },
+    "actualBusinessExecuted": {
+      "const": false
+    },
+    "nativeQualification": {
+      "const": false
+    },
+    "finalSourceBinding": {
+      "const": false
+    },
+    "SourceQualified": {
+      "const": false
+    },
+    "Task1Pass": {
+      "const": false
+    },
+    "nonclaims": {
+      "const": {
+        "historicalCauseProven": false,
+        "receiptAuthenticated": false,
+        "operationalReadiness": false,
+        "completePackage": false,
+        "PCoff": false,
+        "globalNativeDrainVerified": false,
+        "sdkNamespaceEmptyVerified": false
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "repository",
+    "branch",
+    "workflow",
+    "message",
+    "head",
+    "tree",
+    "runId",
+    "attempt",
+    "job",
+    "node",
+    "platform",
+    "graphSha256",
+    "runnerSha256",
+    "rootMeasurement",
+    "source26EdgesSha256",
+    "model26EdgesSha256",
+    "fixtureSeal",
+    "originalResultsSha256",
+    "appendResultsSha256",
+    "groups",
+    "adapterUnits",
+    "counts",
+    "actualBusinessExecuted",
+    "nativeQualification",
+    "finalSourceBinding",
+    "SourceQualified",
+    "Task1Pass",
+    "nonclaims"
+  ],
+  "additionalProperties": false
+}

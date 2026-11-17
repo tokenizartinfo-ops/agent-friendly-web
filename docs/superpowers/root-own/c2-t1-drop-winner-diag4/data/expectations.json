@@ -1,0 +1,998 @@
+{
+  "schema": "AFW.OWN5.FIXTURE.EXPECTATIONS/1",
+  "plan": "6538b796abcb0fa9d89daaefa09bec7ad8a3db68",
+  "old73": {
+    "index": "7ddd5716920ef46ef93afbcab2e68bf62ee1e5e7",
+    "canonicalResults": "98340b7d3225eb264f802f989de66a2befce4beaca4e9d23bc7a90343fce1cbb",
+    "admit": 32,
+    "reject": 41
+  },
+  "meaning": "Literal componentWire is the UTF8 source string inside observation. Expected projections are independent contract literals. Admitted projections must be returned unchanged. Historical raw private identities and hidden causes are unavailable.",
+  "red": {
+    "oldReader": "ddaa91771171abf0dba6110184b06e631849c2ec",
+    "control": "D3 MODEL open15 without dropWinner ADMIT",
+    "twin": "Identical occurrence and old MODEL binding, with only observation.dropWinner=P added and the transport/log/archive re-encoded.",
+    "expected": {
+      "case": "15:firstDROP",
+      "site": "S01:247",
+      "outer": "QA_MARKED_STUB_NON_OK",
+      "publicSite": "S01:247"
+    },
+    "oldGuardError": "G20_OWN_UNQUALIFIED",
+    "assertion": "AFW_OWN_D4_RECEIPT_COMPONENT_REQUIRED",
+    "scope": "D3 missing public component support, not a Source business reproduction."
+  },
+  "rows": [
+    {
+      "id": "DW4_O01",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S01:247",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S01:247"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_C01",
+      "profile": "closedThrow60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S01:247",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S01:247"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_C02",
+      "profile": "closedPass60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S01:247",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S01:247"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_C03",
+      "profile": "closedPass64",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S01:247",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S01:247"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_C04",
+      "profile": "complete82",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S01:247",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S01:247"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_S01",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S00:743\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S00:743\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S00:743",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S00:743"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_S02",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S04:37\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S04:37\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S04:37",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S04:37"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_S03",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S04:43\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S04:43\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S04:43",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S04:43"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_S04",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:69\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:69\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S01:69",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S01:69"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_S05",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:95\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:95\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S01:95",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S01:95"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U01",
+      "profile": "before56",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U02",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U03",
+      "profile": "torn60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U04",
+      "profile": "nativeAmbig60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U05",
+      "profile": "nativeTorn60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U06",
+      "profile": "journalEmpty",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U07",
+      "profile": "nativeEmpty57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U08",
+      "profile": "nativeFailOnly60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U09",
+      "profile": "afterThrow62",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_U10",
+      "profile": "otherThrow64",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_A01",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"STUB_NON_OK\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S01:247",
+          "outer": "STUB_NON_OK",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_A02",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_A03",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S04:37\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S04:37",
+          "outer": "UNKNOWN",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_A04",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"DEADLINE_OR_ABORT\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "UNKNOWN",
+          "outer": "DEADLINE_OR_ABORT",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_A05",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S04:43\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S04:43",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "UNKNOWN"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R01",
+      "profile": "between58",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R02",
+      "profile": "countOpen59",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R03",
+      "profile": "openNative15",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R04",
+      "profile": "countThrow60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R05",
+      "profile": "afterEarly62",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R06",
+      "profile": "torn60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R07",
+      "profile": "ambig60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R08",
+      "profile": "nativeTorn60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R09",
+      "profile": "nativeAmbig60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R10",
+      "profile": "priorNativeFail60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R11",
+      "profile": "passThrow60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R11b",
+      "profile": "passCountThrow60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R11c",
+      "profile": "passThrowTorn60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R12",
+      "profile": "getKnown60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R13",
+      "profile": "priorThrow60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R14",
+      "profile": "journalEmpty",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R15",
+      "profile": "nativeEmpty57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_R16",
+      "profile": "nativeFailOnly60",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q01",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"16:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q02",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q03",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\",\"foo\":\"x\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q04",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"site\":\"S01:247\",\"case\":\"15:firstDROP\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q05",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S00:747\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q06",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"INVALID\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q07",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S00:743\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q08",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q09",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"DEADLINE_OR_ABORT\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q10",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"UNKNOWN\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q11",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\",\"padding\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q12",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S00:747\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q13",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":null,\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_Q14",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_B01",
+      "profile": "open57",
+      "entry": "ACTUAL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_B01b",
+      "profile": "open57",
+      "entry": "ACTUAL",
+      "variant": "oldD3Model",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_B02",
+      "profile": "open57",
+      "entry": "ACTUAL",
+      "variant": "missingTuple",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_B02b",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "crossedActualEdges",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_B02c",
+      "profile": "open57",
+      "entry": "ACTUAL",
+      "variant": "crossedModelEdges",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_B03",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "standard",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"S01:247\",\"outer\":\"QA_MARKED_STUB_NON_OK\",\"publicSite\":\"S01:247\"}",
+      "expected": {
+        "accepted": true,
+        "dropWinner": {
+          "case": "15:firstDROP",
+          "site": "S01:247",
+          "outer": "QA_MARKED_STUB_NON_OK",
+          "publicSite": "S01:247"
+        }
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_I01",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "badArchiveDigest",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_I02",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "badLogOccurrence",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_I03",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "unstableJournal",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_I04",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "falseCustody",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_I05",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "badJournalDigest",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    },
+    {
+      "id": "DW4_I06",
+      "profile": "open57",
+      "entry": "MODEL",
+      "variant": "wrongTreeBlob",
+      "componentWire": "{\"case\":\"15:firstDROP\",\"site\":\"UNKNOWN\",\"outer\":\"UNKNOWN\",\"publicSite\":\"UNKNOWN\"}",
+      "expected": {
+        "accepted": false,
+        "dropWinner": null
+      },
+      "reason": ""
+    }
+  ],
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nativeQualification": false,
+  "finalSourceBinding": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
