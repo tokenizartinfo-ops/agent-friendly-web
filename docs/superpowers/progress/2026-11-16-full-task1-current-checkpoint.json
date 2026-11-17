@@ -1,12 +1,14 @@
 {
-  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/24",
-  "timestampUTC": "2026-11-17 04:54:50 UTC",
+  "schema": "AFW-FULL-TASK1-CURRENT-CHECKPOINT/25",
+  "timestampUTC": "2026-11-17 05:01:24 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "e3aeb2fa2067409dc427158a22b67fa3c7240251",
-  "phase": "FINITE_GET_DIAG3_BOTH_TOOLING_PASSED_CLOSED_OWN_FRESH_REVIEW_PENDING",
-  "activeNativeRuns": [],
-  "allCurrentNativeOccurrencesClosed": true,
+  "previousCheckpoint": "527b1ed1104cb0b14e8b8909c18668aaa7c36148",
+  "phase": "FINITE_GET_DIAG3_ONE_BUSINESS_NATIVE_ACTIVE",
+  "activeNativeRuns": [
+    44021068647
+  ],
+  "allCurrentNativeOccurrencesClosed": false,
   "lastActualBusiness": {
     "run": 44000942332,
     "primary": "16f788a652c644763d74ffa0e955375786064c2d",
@@ -47,9 +49,11 @@
         "admit": 32,
         "reject": 41
       },
-      "freshReviewPending": true,
+      "freshReviewPending": false,
       "RootPassedClosed": true,
-      "MODELOnly": true
+      "MODELOnly": true,
+      "freshReview": "8cdeb01914b7ba49a2d34608a5ce2b7499307345",
+      "acceptedModelToolingOnly": true
     }
   },
   "sourceR4": {
@@ -86,8 +90,8 @@
   "preparedBusiness": {
     "branch": "lab/afw-c2-source-20261117-t1-finite-get-diag3",
     "index": "672455978db4210eedef61502682e03404e0f462",
-    "refCreated": false,
-    "SourceBusinessReleased": false,
+    "refCreated": true,
+    "SourceBusinessReleased": true,
     "SourceBusinessExecuted": false,
     "preparing": false,
     "tree": "4b09a16864e29e3bf427a3c16cf015cbbe6be5df",
@@ -98,10 +102,14 @@
     "mounts": 25,
     "fullTreeVerified": true,
     "leaves": 3228,
-    "original3203Preserved": true
+    "original3203Preserved": true,
+    "activationAttempted": true,
+    "gate": "01565efbe0f92a8623260ee63d2b0c6a32be0a4e",
+    "activationUTC": "2026-11-17 05:00:46 UTC",
+    "run": 44021068647
   },
-  "SourceBusinessReleased": false,
-  "next": "Finish fresh OWN73 actual-native review from savedPrimary/proof/close (no logs/ZIPrefetch). Then Root accept both tooling only, gate ONE new Source full-order20 diagnostic at prepared17582/tree4b09, after fresh lease/freshbranch/0priorruns. Full25/driver/SDK/caps unchanged; sourceS08observer adds status+existing snapshot metric. Native capture/admit actuald3Read/finalclose/freshresultreview; stop at returned facts/unknown/timeout, no automatic replay. Normal fullTask1E2plan remains held until diagnosis addressed.",
+  "SourceBusinessReleased": true,
+  "next": "Observe one current diagnostic run; capture logs and ZIP once terminal; ACTUAL d3Read join, preserve, close workflow, independent result review. No replay.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
