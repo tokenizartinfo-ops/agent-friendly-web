@@ -1,0 +1,63 @@
+{
+  "schema": "AFW.ROOT.GET_WINNER.RETENTION_COMPONENT_SCOPE/1",
+  "timestampUTC": "2026-11-17 18:14:15 UTC",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "Detached keyless finite native TOOL proposal DATA only",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "authority": "Current owner task continues all authorized AFW work toward PC-off; accepted Task1StageB brief dc132c7946534f5fbbf321b0801ad60e4afb7549 and existing read-only lab observer scope. This clarifies the already required native retention evidence, not production behavior.",
+  "design": "f998f09fbe6e9299a3f524d694b4cd98ff1d237a",
+  "independentReview": "db6595a72db57b477b810988f51b104929ac7cf2",
+  "decision": "Root explicitly ACCEPTS the reviewed exact scope and RELEASES only detached test-only native component implementation under every required condition below. Ordinary original-route M witness remains separate and mandatory.",
+  "requiredConditions": [
+    {
+      "item": "Exact isolated export",
+      "rule": "Permit only one appended export readFiniteNativeRetentionForTest(ctx,originalLease) in a separately measured test after-image of the pinned7405-byte stageWork preimage. Preserve that entire original byte prefix. The helper may read outstanding.get(ctx), validate present request-mode entry.ctx/originalLease identity, and return frozen present/membership snapshots containing exact Promise references. No original function/import/Set mutation, additional state/tracker, retain/replacement, Promise reaction, guard/lease.assertCurrent call, env enumeration, hook, clock or IO. No helper/harness/reaction bytes enter ordinary M, QA, Source13 product or full20 bundles."
+    },
+    {
+      "item": "Qualified drain lineage",
+      "rule": "A frozen absent snapshot is drain evidence only after a prior qualified present snapshot from the same lexically captured ctx/originalLease identified the original outer and unique actual member. Absence alone cannot distinguish an arbitrary foreign ctx. Refuse a mismatched present lineage. Do not introduce a new helper state tracker to remember historical lineage; the fixed harness owns that qualification."
+    },
+    {
+      "item": "Genuine original functions and four bounded cases",
+      "rule": "Use original observeFiniteOwnerRequestWork, finiteNativeOperation, finiteNativeCancel and finiteNativeBytes in native workerd, a real Request/root lease and genuine native Response/ReadableStream whose underlying cancel callback returns one locally held native Promise. Preserve original implementations and original30s timer; no shortened/injected timer or replaced cancellation. Seal four fixed OFF/ON pairs: nonOK first while cancel held; original reader failure while reader.cancel held; actual Request abort before late actual; original timer before late actual. No component test establishes ordinary bridge/entry integration by itself."
+    },
+    {
+      "item": "Identity and dependency, not hand-fed classification",
+      "rule": "At entry prove exactly outer plus one unique actual member. During held cancellation and after outer rejection require retained actual and unsettled actual/derived waitUntil dependency. Finish parent once at defined outer boundary; keep actual retained until gate release and settlement. NonOK outer and actual rejection must preserve exact D; reader-failure must preserve its captured original error. After release prove actual rejection, derived waitUntil fulfillment, all required event relations and qualified same-lineage absence. OFF/ON must preserve native outcome/order/membership/error identity. ON uses genuine factory enter/bind only; no hand-fed deadline/denied/race/finish fact or modeled winner oracle."
+    },
+    {
+      "item": "Tool waitUntil spy boundary",
+      "rule": "ctx.waitUntil capture is a TOOL spy. It proves that original wire supplies the distinct actual.catch argument and its native-promise dependency/settlement order. It does not independently prove Cloudflare platform waitUntil lifecycle, survival after event/process completion or disposal, all-path/global drain or operational readiness. Raw Promise references and private values remain within the component isolate; only bounded enums/booleans/counts leave it."
+    },
+    {
+      "item": "Separate exact evidence and rollback",
+      "rule": "Ordinary original prepared positive-M OFF/ON GET/native actor/parent.finish/serialization/resident/status/body/all-header witness remains independently mandatory, including retained categories and scoped negative controls. Pin component entry, append-only after-image, OFF/ON generated module/resident bytes and explicit reversible spans separately, with no product file overwrite. Implementation and complete packet require fresh independent SPEC+QUALITY; this design report grants neither code/native/ref/runtime authority."
+    },
+    {
+      "item": "Sealed budget, counts and cleanup",
+      "rule": "Root may nominate separately named ordinary and retention CONTROL child groups, each<=180000ms, original per-case120000ms, under one controller absolute330000ms and job7min. This is not a business/full20 cap reset or Source/OWN counter reset. Before nomination seal exact groups/process counts/commands, both original timer pairs approximately120s combined plus compile/control/cleanup overhead and all existing stream/artifact bounds. Clamp each launch to remaining absolute budget. One active case, at most32 enum events/four snapshots, one cancellation gate and one operation gate as required. finally releases each held gate once, awaits captured real work within remaining budget, finishes a still-open parent and disposes Miniflare. Missing drain/release or budget/disposal failure is a failed control, never inferred from disposal/actor state."
+    }
+  ],
+  "fixtureFirst": "Seal exact four-scenario OFF/ON expectations and evidence labels before implementing new export/harness. Preserve original315 bytes/oracles; count all new controls separately and scheduled/held truthfully.",
+  "SourceBoundary": "Original full7405-byte stage-work preimage068d35c2555c7dc711c487f6021ec572bd3af067 is preserved as exact prefix; ONLY readFiniteNativeRetentionForTest append in separately compiled tool overlay. Source13/product, ordinary M, QA and full20 exclude all appended reader/harness/extra observer reactions. Existing Source/publisher after-images do not change merely for this test.",
+  "implementationOwner": "/root/get_winner_fixture_stage_a",
+  "release": {
+    "detachedComponentCode": true,
+    "finalPacketApproval": false,
+    "native": false,
+    "business": false,
+    "refs": false,
+    "runtime": false
+  },
+  "rollback": "Discard unattached test proposal; main/BASE/runtime unaffected. Root alone may later activate a separately verified one-use keyless lab head.",
+  "Source5": 5,
+  "OWN5": 5,
+  "budgetReset": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "receiptAuthenticated": false,
+  "globalNativeDrainVerified": false
+}

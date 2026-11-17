@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "67f503402cf1be228bbf5eae45ddac92da8cb02a",
-  "phase": "GET_WINNER_STAGE_B_REVIEWED_SOURCE_PUBLISHER_RETENTION_CONTROL_DESIGN",
+  "phase": "GET_WINNER_STAGE_B_RETENTION_COMPONENT_DETACHED_IMPLEMENTATION_RELEASED",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Finish exact scoped retention design review/ruling and implement only separately pinned native component controls; complete honest fixture census and final native controller/WF; full packet gate before any execution.",
+  "next": "Finish sealed model/ordinary/retention component controls and exact final proposal/controller/WF, independent full packet review and Root measurement/gate before any native activation. Product/business/live remain held.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -711,9 +711,12 @@
       "authorCompleteCurrentCheckpoint": "f0b0da86c4bb9387dc60b26d361a8ab4d9238ddf",
       "authorCensus": "9c81a095ba20a4d609125441b7c664b78a45e247",
       "retentionFeasibility": "f998f09fbe6e9299a3f524d694b4cd98ff1d237a",
-      "retentionScope": "Separate native component with single reaction-free append-only test export proposed; original-route M witness separate; exact design review/Root implementation ruling pending"
+      "retentionScope": "Separate native component with single reaction-free append-only test export proposed; original-route M witness separate; exact design review/Root implementation ruling pending",
+      "retentionDesign": "f998f09fbe6e9299a3f524d694b4cd98ff1d237a",
+      "retentionDesignReview": "db6595a72db57b477b810988f51b104929ac7cf2",
+      "retentionComponentImplementationReleased": true
     }
   },
-  "schemaVersion": 66,
-  "updatedAtUTC": "2026-11-17 18:12:40 UTC"
+  "schemaVersion": 67,
+  "updatedAtUTC": "2026-11-17 18:14:15 UTC"
 }

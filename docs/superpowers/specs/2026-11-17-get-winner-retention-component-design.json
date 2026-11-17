@@ -1,0 +1,76 @@
+{
+  "schema": "AFW.GET_WINNER.STAGE_B.RETENTION_FEASIBILITY/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "detached design DATA",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "resourceType": "detached feasibility report",
+  "allowedAction": "Bounded source-as-text inspection and detached design proposal only",
+  "rollback": "Discard detached report",
+  "inputs": {
+    "draft": "91e919948c3024190d739845c685cbe24671c08a",
+    "s08": "e488965a58b989aa1c2f05a16aa6d5b74d4e411a",
+    "s09": "b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4",
+    "s10": "9ffce28ba28961937c4f24f1cc00eb8d899bc495",
+    "idx": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+    "rule": "5098d356ae7ee9f08c7edab00202af854177cac1"
+  },
+  "originalBodies": {
+    "stageWork": "068d35c2555c7dc711c487f6021ec572bd3af067",
+    "wire": "38285fa0149a38924c431b4d5a705bec1384216d",
+    "bridge": "f2c473cdd11b055a3c6037de317f73d7b3a7a968",
+    "preparation": "cfbfb1656d4a013b40e770ee8335d5e1eb85a908",
+    "entry": "8b43e03e96b055be49b66a6788b27f129dd894c8",
+    "base": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+    "baseTree": "62e78926635d6b74f288d6c0d69e0f2516306989",
+    "stageWorkPreimage": {
+      "blob": "068d35c2555c7dc711c487f6021ec572bd3af067",
+      "bytes": 7405,
+      "sha256": "9ffa53cb3dc37e7c115f1a01430adf8e578cf9ce6933b63da2680f670f711a6c"
+    }
+  },
+  "verdict": "FEASIBLE_NATIVE_COMPONENT_PROPOSAL_WITH_EXPLICIT_SCOPE_DEVIATION_PENDING",
+  "finding": "The ordinary compiled GET draft observes the actor and serialized response, but neither crosses back into the originating isolate's private retention Set. Actor finishLate/written cannot establish cancellation or actual/first/deadline settlement in M. Original stage-work has no exported count/identity observer. Its retain function returns the exact input Promise (16\u201324), adds it to the private Set, and installs its own settled reaction. observeFiniteOwnerRequestWork creates the original scope and retains an outer operation Promise (67\u201374). wire26\u201339 retains actual before Promise.race. ctx.waitUntil receives actual.catch(()=>{}), which is a distinct derived Promise with the same settlement dependency. Requiring reference equality between actual and waitUntil's argument would be incorrect.",
+  "smallestOption": {
+    "kind": "Separate native workerd component entry, running in a local credential-free Miniflare isolate with the original native JS/stream/lease implementations.",
+    "singleSourceObservationSeam": "Append one export named readFiniteNativeRetentionForTest(ctx, originalLease) to lib/mcp-qa-finite-stage-work.mjs, Git preimage068d35c2555c7dc711c487f6021ec572bd3af067. It takes nominated ctx and originalLease, reads outstanding.get(ctx), validates entry.mode==='request', entry.ctx and entry.originalLease identity using direct comparisons, and returns a frozen snapshot {present, promises}, where promises is a frozen array of the exact private Set members. Return an explicit absent state after release and reject a different lineage. Do not invoke lease/assertCurrent, enumerate env, mutate the Set, retain/replace promises, add Promise reactions, install hooks, or emit anything from the export. No export is added to ordinary/product/QA or full20 bundles.",
+    "harness": "A new fixed component entry imports genuine createFiniteOwnerRequestLease, observeFiniteOwnerRequestWork, finiteNativeOperation, finiteNativeCancel and finiteNativeBytes plus the injected reader. It constructs one real Request/AbortController parent per case and one private ctx/env. ctx.waitUntil only captures the exact argument and returns undefined. It calls the original observe wrapper, whose callback calls original finiteNativeOperation and returns its result. Hold a real ReadableStream cancellation via its underlying source cancel callback returning a single explicitly unresolved local Promise. This source callback is test input to the original native Response/reader, not a replacement cancellation implementation. For the non-OK inverse use the exact D object created with original finiteNativeFailure(413), passed through the original finiteNativeCancel(response,D,first). Native component evidence covers that original code path only.",
+    "identity": "Store the exact outer Promise returned by observe. Inside the operation callback, snapshot the original Set before starting cancel and identify the unique actual member distinct from outer. At that point both must be present and waitUntil has received one Promise distinct from actual and outer. Use actual reference identity throughout, with the original unchanged wire call actual.catch providing the dependency evidence. Avoid exposing identities across RPC/serialization.",
+    "observations": "The harness may attach a fixed, declared pair of fulfill/reject observers to actual and to the captured waitUntil argument to record completion order, and may await outer. These extra reactions belong only to the component harness. They are excluded from ordinary M. The injected reader itself is synchronous and reaction-free. A fixed array of at most32 enum events and at most4 Set snapshots per case records cancel entry, outer rejection, parent.finish, cancel release, actual rejection and waitUntil settlement. No clocks, IDs, stack, private values or raw Promise data leave the isolate.",
+    "onBinding": "Build OFF with the exact existing prepareDropM wire and ON with exact prepareGetWinner applied to that same prepared wire, as defined by S09 b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4. Pin the complete generated module bytes independently. For ON, instantiate the genuine createGetWinnerObserver factory in the component isolate and use its real enter(Request)/bind(Request,lease) with the case's real objects. These two calls only establish the component lineage. Do not hand-feed deadline, denied, race or finish facts. Genuine prepared wire deadline/race hooks execute naturally. OFF keeps that observer absent. Component marker/winner output is never an acceptance oracle. Separate ordinary original-route tests establish the bridge/entry integration and classification."
+  },
+  "requiredCases": [
+    {
+      "id": "non_ok_first_before_cancel_completion",
+      "sequence": "Wait for the native stream cancel callback to enter. Leave its gate unresolved. Await outer rejection and require exact error identity D. Snapshot must contain only the previously captured actual Promise. actual and waitUntil observers must remain unsettled. Call original parent.finish once, require original lease signal aborted and actual still present. Release the cancellation gate once. Await actual and waitUntil. Require actual rejects with the same D and waitUntil fulfills. The helper entry must then be absent."
+    },
+    {
+      "id": "reader_failure_cancel_pending",
+      "sequence": "Use genuine native Response ReadableStream with an oversized Uint8Array so original finiteNativeBytes throws through its existing status check, calls first(error), and awaits original reader.cancel. The callback holds the native cancellation gate. Apply the same first-before-settlement, retained actual, finish/release/drain checks. Capture the rejected outer error once and require exact identity on actual rejection."
+    },
+    {
+      "id": "abort_before_late_actual",
+      "sequence": "Hold operation on a local fixed promise after its entry. Abort the real originating Request signal. Require outer rejection and actual retention before releasing a late original denial/cancellation. Finish the original parent only at the defined outer boundary. Release all gates, await actual and waitUntil, and prove final entry removal. The component checks original native retention/order, while ordinary GET evidence separately carries winner/actor/serialization claims."
+    },
+    {
+      "id": "timer_before_late_actual",
+      "sequence": "Same retained-work check with the original30-second parent lease/timer and no external abort. Do not shorten/inject time or replace guards. Release late actual work only after the original race has settled, then verify drain. The original deadline callback intentionally serves timer and abort, so callback provenance alone does not distinguish them."
+    }
+  ],
+  "differential": "Run these finite controls against pinned OFF and ON component bundles composed of the corresponding exact prepared libraries, with the same single snapshot export and harness inputs. Require identical native event relations, Set-membership/identity predicates, rejection identity and drain, plus exact component outputs. Classification from a hand-fed observer would be modeled evidence and must not be reported. The separate ordinary compiled-M OFF/ON GET controls remain responsible for status/body/ALL-headers differential modulo the sole permitted marker and original-route L/S/V/serialization. An actor state read cannot discharge this component requirement.",
+  "caps": "One case active at a time, two retained members at the entry checkpoint, one pending cancellation gate, one operation gate where required, at most32 event enums and4 snapshots per case, fixed case list. Original30s lease, per-case120s, child180s, total330s/job7min and existing artifact/stream limits remain the admission bounds. OFF/ON timer component pair consumes roughly60s of waiting, and the existing ordinary timer pair another60s. Author must reconcile compile/control overhead inside the existing child budget before nomination. Any overrun or missing gate release fails closed. finally releases held test gates, awaits captured real work within remaining budget, finishes a still-open parent and disposes Miniflare. Disposal or an actor write alone does not prove drain.",
+  "authorizationDeviation": "Root has accepted this composition in principle for independent review. Before implementation, obtain the exact scoped ruling accepting the append-only readFiniteNativeRetentionForTest export and native component evidence for retention, alongside the mandatory ordinary original-route GET witness. This clarification is needed because ruling5098d356ae7ee9f08c7edab00202af854177cac1 did not explicitly settle that evidence composition. Required controls remain HELD until the scoped review/ruling. The export and harness appear exclusively in a separately measured test bundle. BASE, full20, QA and Source13 product bytes retain their identities.",
+  "admission": "Pin the new append-only after-image, component entry, bundle/residence and reversible literal delta separately. Exact ordinary M source/bundle identity must exclude the test export and all harness reactions. Independently review SPEC and QUALITY plus budget coverage before any execution gate.",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "operationalReadiness": false,
+  "PCoff": false,
+  "Source5": 5,
+  "OWN5": 5,
+  "budgetReset": false,
+  "implementation": false,
+  "nativeExecuted": false,
+  "supersedes": "cb346617c996d162f60d333b280541227573d184"
+}
