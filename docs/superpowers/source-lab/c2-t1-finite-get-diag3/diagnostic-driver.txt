@@ -1,0 +1,59 @@
+import test,{after} from 'node:test';
+import assert from 'node:assert/strict';
+import {createFiniteCoupledOwnerWorld} from './fixtures/finite-coupled-native.mjs';
+import {mark} from './finite-green-progress-recorder.mjs';
+let w;
+after(async()=>{
+ mark('AFTER','close','enter');
+ try{await w?.close();}catch(error){mark('AFTER','close','throw',error);throw error;}
+ mark('AFTER','close','return');
+});
+const fixed=(id,phase,work)=>test(id,{timeout:120000},async()=>{
+ assert(w||id==='C2T1_CONNECTION');
+ let actionThrew=false,counterThrew=false,actionError,counterError,counts;
+ mark(id,'action','enter');
+ try{await work();mark(id,'action','return');}catch(error){actionThrew=true;actionError=error;mark(id,'action','throw',error);}
+ try{
+  if(w)mark(id,'count','enter');
+  counts=w?await w.counts():null;
+  if(w)mark(id,'count','return');
+ }catch(error){counterThrew=true;counterError=error;mark(id,'count','throw',error);}
+ // Missing counter facts cannot produce a Source frame or a qualifying receipt.
+ if(!counterThrew&&counts!==null&&counts!==undefined){
+  const passed=!actionThrew;
+  console.info('C2SOURCE '+JSON.stringify({id,status:passed?'pass':'fail',phase,counters:counts,code:passed?'OK':'TEST_FAILED'}));
+ }
+ // Preserve the exact original thrown value, including null or undefined.
+ if(actionThrew)throw actionError;
+ if(counterThrew)throw counterError;
+});
+fixed('C2T1_CONNECTION','connection',async()=>{
+ w=await createFiniteCoupledOwnerWorld();
+ await w.approve('connection');
+ assert.deepEqual(await w.counts(),{upload:1,activation:1,receipts:1});
+});
+fixed('C2T1_OAUTH','oauth',async()=>{await w.oauth();});
+fixed('C2T1_HANDLE','negative',async()=>{await w.invalidForm('handle');});
+fixed('C2T1_PROJECTREF','negative',async()=>{await w.invalidForm('projectRef');});
+fixed('C2T1_SUBJECT','negative',async()=>{await w.invalidSubject();});
+fixed('C2T1_PHASE_RENAME','negative',async()=>{await w.corruptThenDeny('phase');});
+fixed('C2T1_SOURCE_BYTES','negative',async()=>{await w.corruptThenDeny('module');});
+fixed('C2T1_APPROVAL','negative',async()=>{await w.corruptThenDeny('approval');});
+fixed('C2T1_PREDECESSOR','negative',async()=>{await w.corruptThenDeny('predecessor');});
+fixed('C2T1_GRANT_REVOKED','negative',async()=>{await w.corruptThenDeny('grant');});
+fixed('C2T1_EXTRA_KEY','negative',async()=>{await w.corruptThenDeny('extra');});
+fixed('C2T1_NOTICES','notices',async()=>{
+ await w.approve('notices');
+ assert.deepEqual(await w.counts(),{upload:2,activation:2,receipts:2});
+});
+fixed('C2T1_MONITOR_COOKIE','monitor',async()=>{await w.monitorWrongCookie();});
+fixed('C2T1_MONITOR','monitor',async()=>{await w.monitor();});
+fixed('C2T1_SCOPE_MISSING','scope',async()=>{await w.noScope();});
+fixed('C2T1_FINITE','finite',async()=>{
+ await w.approve('finite');
+ assert.deepEqual(await w.counts(),{upload:3,activation:3,receipts:3});
+});
+fixed('C2T1_SELECTION','selection',async()=>{await w.selection();});
+fixed('C2T1_LOST_ACK_DUPLICATE','negative',async()=>{await w.lostAckDuplicate();});
+fixed('C2T1_UNRESOLVED_WRITER','negative',async()=>{await w.heldWriter();});
+fixed('C2T1_OWN_PROMISE','negative',async()=>{await w.ownPromise();});
