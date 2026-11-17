@@ -1,0 +1,858 @@
+import { open } from 'node:fs/promises';
+import { normalizeReceipt } from './receipt-normalization.mjs';
+import { readPinned as pinned,checkCustodyInputs,withCustodyInputs,removeOwnedTemp,publishBounded } from './controller-file-boundaries.mjs';
+import { constants } from 'node:fs';
+import { count, exactCount, launch, flagsMatch, capturesMatch, boot, diagnostic } from './startup-diagnostics.mjs';
+import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
+import { readFile,writeFile,mkdir,mkdtemp,symlink,rm,lstat,readdir,realpath } from 'node:fs/promises';
+import { dirname,join,resolve,sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const end=performance.now()+330000;
+const config={
+  "repo": "tokenizartinfo-ops/agent-friendly-web",
+  "BASE": "6791ce1bab9372e206d3c7b42b3e1394dc6e0c68",
+  "TREE": "62e78926635d6b74f288d6c0d69e0f2516306989",
+  "branch": "lab/afw-c2-get-winner-20261117-tools1",
+  "message": "AFW-C2-GET-WINNER-TOOLS1-ONEUSE-20261117",
+  "job": "c2-get-winner-tools",
+  "runner": "docs/superpowers/source-lab/c2-get-winner-dependent/run-get-winner-tools.mjs",
+  "prefix": "docs/superpowers/source-lab/c2-get-winner-dependent/",
+  "artifact": "output/get-winner-tools.json",
+  "bootstrap": {
+    "path": ".github/workflows/afw-finite-qa-bootstrap.yml",
+    "bytes": 1844,
+    "sha256": "ff64a890db1b55f8ed922e036673ebaf0a494c4833023bbc3317f28c6ededd14",
+    "blob": "22f324e480dbe0295fe23fb7415328cba7952b1b",
+    "fullReadback": true
+  },
+  "rootFiles": [
+    "package-lock.json",
+    "package.json",
+    "tsconfig.json",
+    "wrangler.a2a-canary.jsonc",
+    "wrangler.a2a-production.jsonc",
+    "wrangler.assistance-goal-context.jsonc",
+    "wrangler.assistance-goal-context.qa.jsonc",
+    "wrangler.assistance-supervision-producer.jsonc",
+    "wrangler.contact.jsonc",
+    "wrangler.delegated-canary.jsonc",
+    "wrangler.delegated-real-pilot.example.jsonc",
+    "wrangler.delegated-real-pilot.jsonc",
+    "wrangler.delegated.jsonc",
+    "wrangler.dossier-supervision-producer.jsonc",
+    "wrangler.independent-closure-qa.finite.jsonc",
+    "wrangler.independent-closure-qa.jsonc",
+    "wrangler.independent-closure-qa.rollback.jsonc",
+    "wrangler.mail-canary.jsonc",
+    "wrangler.mcp-own-events.example.jsonc",
+    "wrangler.mcp-own.finite.jsonc",
+    "wrangler.mcp.jsonc",
+    "wrangler.operations-manager.jsonc",
+    "wrangler.operations-producer.jsonc",
+    "wrangler.operations-review-qa.jsonc",
+    "wrangler.operations-review.jsonc",
+    "wrangler.operations-watchdog.jsonc",
+    "wrangler.operations.jsonc",
+    "wrangler.release-operator.jsonc"
+  ],
+  "transportRelease": null
+};
+
+const pins={
+  "startupBootstrap": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/startup-bootstrap.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_TOOL_BOOTSTRAP",
+    "blob": "bf78b42063ed8d1e0e57ed248693ce0ab2d94140",
+    "bytes": 607,
+    "sha256": "c51cca96973cc203ec825b31fb0d013acb0e05877fef9000576ab8297faf9663",
+    "fullReadback": true
+  },
+  "startupHelper": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/startup-diagnostics.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_TOOL_METADATA_HELPER",
+    "blob": "7f19c9c2134c2582b920b78cd06f95187a8f9932",
+    "bytes": 8211,
+    "sha256": "da597c6daae4f24512ad6f0d7b0d1c5063e288773139def888ded96d2e78249b",
+    "fullReadback": true
+  },
+  "startupFixtures": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/startup-control-fixtures.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "INERT_TOOL_FIXTURES",
+    "blob": "94b9cc654ff623d41bdcba99d40522f7df48ee2e",
+    "bytes": 9000,
+    "sha256": "9d8b538acd4f33f13ccc3959dfa82cc1c89f74ab681fe3f79db458e464fdcc2f",
+    "fullReadback": true
+  },
+  "index": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/source-index-get-winner.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_SOURCE13_INDEX",
+    "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+    "bytes": 9228,
+    "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153",
+    "fullReadback": true
+  },
+  "adapters": {
+    "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/collection-adapters.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "f1a26313b53079fa9a88340e15d86024d24f4cbf",
+    "bytes": 35151,
+    "sha256": "7a6adaefbaffab94258323fe214ad9d45f23816fed8a9e6f0d508cd03cdbf00e",
+    "kind": "REUSED_CUSTODY_OR_READER_CODE"
+  },
+  "reader": {
+    "path": "docs/superpowers/source-lab/c2-t1-drop-winner-diag4/read-progress.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "62a31e3c16cc710c84ebfb5b0242abb00671363c",
+    "bytes": 5507,
+    "sha256": "c9e0fa37a70a503ea172450abe5593bce98b4218905eb8fe0af26047986c003f",
+    "kind": "REUSED_CUSTODY_OR_READER_CODE"
+  },
+  "guard": {
+    "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-guard.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "5d0f1ccc0bb1e7dcbebfd3ad2078eedd631a6efb",
+    "bytes": 1208,
+    "sha256": "c21d600503bee20abfacc36779c846a34e46023d921ef6d6ceb697abcef50ebf",
+    "kind": "REUSED_CUSTODY_OR_READER_CODE"
+  },
+  "preflight": {
+    "path": "docs/superpowers/source-lab/c2-t1/c2-source-custody-preflight.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "blob": "d311f579e95ab64a5f2d897d6c40f1fce784e8e2",
+    "bytes": 417,
+    "sha256": "3e548a2dc9527e72997bf147dedcab1b8c34f49848ece68cff498991f200a9ae",
+    "kind": "REUSED_CUSTODY_OR_READER_CODE"
+  },
+  "child": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/native-tools-child.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_TOOL_CHILD",
+    "blob": "6b8ef94d80be7ba04dd4cccdb74734a7868192b9",
+    "bytes": 1722,
+    "sha256": "3d0fbaa395220534d45bef1d1da30a1e135c904197018f8528c21b82f224fcd1",
+    "fullReadback": true
+  },
+  "fixtureIndex": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/fixture-index.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "INERT_FIXTURE",
+    "blob": "eefd23a6f730a830a1d2e537c12abf25fb5baded",
+    "bytes": 5692,
+    "sha256": "7e00829424196e1faa5c13299545130d1464f63ae23e08c9c70a46eb45fdf513",
+    "fullReadback": true
+  },
+  "model": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/model-get-controls.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "GENUINE_S08_MODEL_CONTROLS",
+    "blob": "c5d55bc3bb04b7214d71d8678f0e4ba8343dd45c",
+    "bytes": 13109,
+    "sha256": "afc680c741c2033c2b8de5861056e306809349e1b6cf2fc46a2b9591f5030203",
+    "fullReadback": true
+  },
+  "ordinary": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/native-get-ordinary-controls.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_NATIVE_TOOL_CONTROLS",
+    "blob": "b97a7415951e7fe4ecb988a921cc0d777ea18f35",
+    "bytes": 7757,
+    "sha256": "55d5a740ec32443ecb22ba4a3c8d0a08fac8774bfe2f4d204374bbfb0a1f473a",
+    "fullReadback": true
+  },
+  "publisher": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/get-winner-collection-adapters.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "PROPOSAL_PUBLISHER",
+    "blob": "5dad0068909814d8525f92310035c36d10653e77",
+    "bytes": 38293,
+    "sha256": "4aa49d8cab7f4f02a46ef350b19ba68d14823922edba51b4d496fde328a16e67",
+    "fullReadback": true
+  },
+  "corpusAdapter": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/test-corpus-adapter.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "TEST_ONLY_CORPUS_ADAPTER",
+    "blob": "68e4788d494ccbd20d45b4f32a4c4d675054a9fc",
+    "bytes": 1783,
+    "sha256": "e7461ec1e9e77b2eba8f89df3df58ee3d6d87ba73cdfc083a12bdf4b34befcf8",
+    "fullReadback": true
+  },
+  "corpusManifest": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/test-corpus-transformation.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "TEST_ONLY_TRANSFORMATION_MANIFEST",
+    "blob": "bd0e668fcf2edb2ebf8d39f62ec0e98aaaba910e",
+    "bytes": 13144,
+    "sha256": "758b315ca3d70a22d415ac20aafb371adf96ed7d6713b20b8692e70922df0b42",
+    "fullReadback": true
+  },
+  "baseAdapted": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/model-current-synthetic-target.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "TEST_ONLY_ADAPTED_CORPUS",
+    "blob": "452baec26067d052d413c8b182a1930547c88be1",
+    "bytes": 11237,
+    "sha256": "509652c0cfba1eabdb44055794a0ea476d2e1547533ca25dab4e566412159b3c",
+    "fullReadback": true
+  },
+  "hostAdapted": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/model-current-publisher-host.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "TEST_ONLY_ADAPTED_CORPUS",
+    "blob": "a8e5d09c349b85b44340321fe2be406c92d19e3d",
+    "bytes": 63121,
+    "sha256": "bab01baecc818d67101099db1d19ef35ba73c6cf455eda6734dba131260147f5",
+    "fullReadback": true
+  },
+  "baseFixture": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/synthetic-target-input.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "INERT_FIXTURE",
+    "blob": "c8483a65fc47b9fe913dfc4875a25e2da24dca3d",
+    "bytes": 11237,
+    "sha256": "96e849cd962f1a4ec36bfde2cb9672b5066468d78772345c82417be8e5c9adc7",
+    "fullReadback": true
+  },
+  "hostFixture": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/publisher-host-cut.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "INERT_FIXTURE",
+    "blob": "b57a4db4511a0fbd42c34ac0e1cd6e2392ec6b2f",
+    "bytes": 63121,
+    "sha256": "35908a56dd8a12995e2f3f0571d1c306b6e198d327225147eada8a158e9d7f24",
+    "fullReadback": true
+  },
+  "normalization": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/publisher-normalization.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "INERT_FIXTURE",
+    "blob": "e1b91042f39df3890aa35bdc37f2cecf68fc8d85",
+    "bytes": 60877,
+    "sha256": "d0f605271639bf7c3188f5d930eae784dbfa9091a679ebfb24ac24d3c395980f",
+    "fullReadback": true
+  },
+  "schedule": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/partial-tool-schedule.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SEALED_TOOL_SCHEDULE",
+    "blob": "8ff557333f747ed89ee9f44e02948a73d5cf6678",
+    "bytes": 8144,
+    "sha256": "bfe0ca3a9ffb3176d6c6ee92e49ec218c7bd7d3e4bc079a471f9d9316ac442d7",
+    "fullReadback": true
+  },
+  "factoryModel": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/factory-get-model-controls.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_FACTORY_MODEL_CONTROLS",
+    "blob": "c5ab5be37b406a23e7b59d3ce6be2092e53dddaf",
+    "bytes": 5107,
+    "sha256": "c91d2401a0152ff6cf78e867db4e88b933eeb201dd0e29aa2f62522ee8c41774",
+    "fullReadback": true
+  },
+  "factoryScope": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/factory-model-scope.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SEALED_MODEL_SCOPE",
+    "blob": "a39ba7ad4b1646c6387d51f60baab9d788ca3248",
+    "bytes": 2726,
+    "sha256": "aa1f89af01a336fe3b17cc9efeda6f157b7c92d5f4b1c5557caafedcb888168d",
+    "fullReadback": true
+  },
+  "mCorpus": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/m-race-egress.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "INERT_FIXTURE",
+    "blob": "aae5a5ca8cecc4b7f88486b3aa6b7cac066e34ab",
+    "bytes": 16606,
+    "sha256": "fcf37637175bdc411f407d33254a8a7c6ba4c21da94dce29c25199bed8a2c1d6",
+    "fullReadback": true
+  },
+  "hostBoundary": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/host-boundary-companions.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SEALED_CURRENT_BOUNDARY_EXPECTATIONS",
+    "blob": "88cdfa7f10386e8512c850b0279145c69bac094a",
+    "bytes": 1733,
+    "sha256": "898e611dbfd985e2348266b1dcf4a6340472967f4fef444cc49ff636491197fa",
+    "fullReadback": true
+  },
+  "retentionBootstrap": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/startup-retention-bootstrap.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_TOOL_BOOTSTRAP",
+    "blob": "eaded36d339e669d439e9ec219578fc04dd18c66",
+    "bytes": 630,
+    "sha256": "0e273d4f285c8ffb3249100a198d9d9a4ec63b5fe603ec3cb7a77675f50a3f92",
+    "fullReadback": true
+  },
+  "retentionChild": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/retention-tools-child.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_TOOL_CHILD",
+    "blob": "c28a07f9684c2f58c99f03fd13bac34709942c19",
+    "bytes": 674,
+    "sha256": "c555d5a2e2270dbec76ae68f7b8a2449be181f466d2756410005a39121984363",
+    "fullReadback": true
+  },
+  "retention": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/native-retention-controls.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_NATIVE_CONTROL",
+    "blob": "4f3473db3cfb6bfaf79caf2e6f8a5bc9526ec693",
+    "bytes": 8401,
+    "sha256": "fec9536f3ec707a61cbc2cd5e920704af2c26c31d0d3171b6ea9fefb5854f0c3",
+    "fullReadback": true
+  },
+  "retentionFixture": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/retention-component-expectations.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SEALED_NATIVE_COMPONENT_EXPECTATIONS",
+    "blob": "3aa978075e2ebc5c0c2b9e9469d3ed55eb666c05",
+    "bytes": 5207,
+    "sha256": "b4f4e47764fdd7bc57871af30f66fcee37648fcd04b3ac2ab42586b4a7c792d0",
+    "fullReadback": true
+  },
+  "componentWork": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SHARED_DEFENSIVE_BOUNDARY",
+    "bytes": 881,
+    "blob": "a4c15d2fc7438845ce9df890097b7857e1bb9fe5",
+    "sha256": "8d2ef712d90c3772b57e6731f25b54d44476fee33d13f9f89b88cd5cba3042fe",
+    "fullReadback": true
+  },
+  "receiptBoundary": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/receipt-normalization.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SHARED_DEFENSIVE_BOUNDARY",
+    "bytes": 3941,
+    "blob": "f4d3c9ed6ea3146368d78235e59be331c2c11ba5",
+    "sha256": "114ae9a76fabc1fec93eb8918395f5a3313594739548006f939c9e532ab2e364",
+    "fullReadback": true
+  },
+  "fileBoundaries": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/controller-file-boundaries.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SHARED_DEFENSIVE_BOUNDARY",
+    "bytes": 2317,
+    "blob": "1272ca4d684979e8385bbdf53cc779628db1b684",
+    "sha256": "657873198c47ec2c5a21fc1d9a1aafa4ca1c5594e1b6ccfd68966b7ddd7dc729",
+    "fullReadback": true
+  },
+  "deadlineSupervisor": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor.py",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SHARED_DEFENSIVE_BOUNDARY",
+    "bytes": 885,
+    "blob": "26eb9f3c12120643578819d3d4684c95bbded077",
+    "sha256": "4cca28f6871615150888a903bdc567564a2ec4f5677518e5ab3540bdd79d0482",
+    "fullReadback": true
+  },
+  "receiptControl": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/receipt-normalization.test.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "STATIC_ONLY_DEFENSIVE_REGRESSION_TEST",
+    "bytes": 3089,
+    "blob": "0d714437ed3f700f079a3b36dfca2fcfdfbe0ab2",
+    "sha256": "2e58ac3d69875ab16c4d8862b0d6e2dc7360a17bd76fc4c198deaf5936270f1c",
+    "fullReadback": true
+  },
+  "componentControl": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/component-work-boundaries.test.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "STATIC_ONLY_DEFENSIVE_REGRESSION_TEST",
+    "bytes": 2411,
+    "blob": "eed0e1d7f0d03ca18ad4df4257026c23b8800414",
+    "sha256": "0ab00a4681baf8a8825b4ef281cee4c35f6fbd0bc0a30c633b6d5bcbbc317766",
+    "fullReadback": true
+  },
+  "fileControl": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/controller-file-boundaries.test.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "STATIC_ONLY_DEFENSIVE_REGRESSION_TEST",
+    "bytes": 4908,
+    "blob": "8c0a568e8b5abaf2b4b80a959ff7f4c15b0bd20d",
+    "sha256": "3fc3625653b9564655df2aa9a2d343b5d381ca52203633a28af4744444624867",
+    "fullReadback": true
+  },
+  "supervisorControl": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/deadline_supervisor_test.py",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "STATIC_ONLY_DEFENSIVE_REGRESSION_TEST",
+    "bytes": 2051,
+    "blob": "1832ea81b6c5cfd69159d53755b6c202c7859371",
+    "sha256": "ee2300042d7b26a4b408a052967466431aa7a07017cd9e83070b666d9c5a7252",
+    "fullReadback": true
+  },
+  "componentEntry": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/retention-component-entry.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_NATIVE_COMPONENT_ENTRY",
+    "blob": "b5b2e45fe2ee2e4634b8f9d9d8d92017dee54980",
+    "bytes": 6928,
+    "sha256": "1abc00b791700239360954f1af24691c47ec871388454c5a014eda07d2c662db",
+    "fullReadback": true
+  },
+  "componentStage": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/component-stage-work.txt",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "TEST_ONLY_APPEND_AFTERIMAGE",
+    "blob": "36cf70b0ffdc68091aef8b4734164d9233f1f000",
+    "bytes": 7895,
+    "sha256": "970f90d092b0a46508bab04f0053b4d1b8a26f19f6a9786a4bb46f37ec1bdd10",
+    "fullReadback": true
+  },
+  "componentWireOff": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/component-wire-off.txt",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "TEST_ONLY_PREPARED_WIRE_INPUT",
+    "blob": "b6459f8287b46e32ddb3b9042c3444a2f8faff82",
+    "bytes": 7998,
+    "sha256": "d0b88ce5a6319ff7559f13cda5d9aea6be6bb226fc775422547abce923bab3fe",
+    "fullReadback": true
+  },
+  "componentWireOn": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/component-wire-on.txt",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "TEST_ONLY_PREPARED_WIRE_INPUT",
+    "blob": "da7b15fad49a4fd5335b5557a72d6017ade9621c",
+    "bytes": 8205,
+    "sha256": "5d9304585bb3a73c8d23d9fe4e49a8648d4c592b95a1184b2b59ce62152024bb",
+    "fullReadback": true
+  },
+  "componentObserver": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/component-get-observer.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "TEST_ONLY_EXACT_FACTORY_BODY",
+    "blob": "b1576130bd8c6510e92f1992e22476460f746e9a",
+    "bytes": 3927,
+    "sha256": "adbd2d0d20eb193748e862e7036aea56bb7d1808d8fcdec65bbb0448dd0c22cf",
+    "fullReadback": true
+  },
+  "faultBootstrap": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/startup-fault-bootstrap.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_TOOL_BOOTSTRAP",
+    "blob": "d460c0ba31f5f4ea5ae56d55c7a183fb1e24a6e8",
+    "bytes": 618,
+    "sha256": "c1c0cf57a0d90c74e75a2ac153ea6b9b38147d4215e7fd82beae0e3f4de9ff21",
+    "fullReadback": true
+  },
+  "faultChild": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/fault-tools-child.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_TOOL_CHILD",
+    "blob": "8a2f4ed9fad26730dc94b4cf09e21b6a015e15fe",
+    "bytes": 809,
+    "sha256": "ac15a9d38ff8b25205aeaab443fb218748badc0b8683593ccea79abb9c83dd23",
+    "fullReadback": true
+  },
+  "fault": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/native-fixed-fault-controls.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_NATIVE_FIXED_FAULT_CONTROLS",
+    "blob": "1f247cce84cc10c503a131e2f1f3393e697f4759",
+    "bytes": 7272,
+    "sha256": "ee355195ec0096a92ed8b66d33f068d787aaccf147dd7954da62b850958e81e5",
+    "fullReadback": true
+  },
+  "faultCompiler": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/body-09-fixed-fault-tool.txt",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "TEST_ONLY_COMPILER_AFTERIMAGE",
+    "blob": "d5ac46935496f26ecc64d60c1b94e1bbf4efad61",
+    "bytes": 85130,
+    "sha256": "4ab7257c682a1f6220051228ec322838d488a168aa94f449e40b2ab318a434d6",
+    "fullReadback": true
+  },
+  "faultFixture": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/fixed-m-fault-expectations.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SEALED_NATIVE_M_FAULT_EXPECTATIONS",
+    "blob": "0a501d363737d29791cc63cb053cf6023ab0438e",
+    "bytes": 3182,
+    "sha256": "9696c7f6aa0721f12ec245ced89baf635735e6ec0d904d9f0533c76dc6d1aea6",
+    "fullReadback": true
+  },
+  "faultSeams": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/fixed-m-fault-seams.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SEALED_REVERSIBLE_FAULT_SEAMS",
+    "blob": "58fc73389ae93be7f676d29b1f1f8221c1dce86e",
+    "bytes": 13462,
+    "sha256": "66d2f0a483d54dfe0e694a94b24f6ec448751371036a1ca6354018c5f5eb82f2",
+    "fullReadback": true
+  },
+  "transport": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/native-transport-controls.mjs",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "DRAFT_NATIVE_TRANSPORT_TOOL",
+    "blob": "484e1cea2de05d0b45a2ed7b2145987f6ad54b16",
+    "bytes": 7838,
+    "sha256": "8d31696a7dcc6a6f27c47df61f54e71af0507ebe453d8be2d201f0c96f9e72ae",
+    "fullReadback": true
+  },
+  "transportFixture": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/native-transport-expectations.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SEALED_NATIVE_TOOL_EXPECTATIONS",
+    "blob": "56a2ab1a765d3cf966c7577f2be38ec610ab5418",
+    "bytes": 1384,
+    "sha256": "c80c857cadd1876f9ce39a6c97f26d7cdff8f3e4ac74ea779549a7b61248c739",
+    "fullReadback": true
+  },
+  "ordinaryFixture": {
+    "path": "docs/superpowers/source-lab/c2-get-winner-dependent/ordinary-native-expectations.json",
+    "mode": "100644",
+    "type": "blob",
+    "kind": "SEALED_ADDITIONAL_NATIVE_EXPECTATIONS",
+    "blob": "606eac9b13f1bbcfda8ae013ea9fd3e21ad2c4cf",
+    "bytes": 1771,
+    "sha256": "26811245247b59fdea9cde15fff75675fd5aead2143fdbfd2174b711851e3cfb",
+    "fullReadback": true
+  }
+};
+
+const flags={"historicalCauseProven":false,"receiptAuthenticated":false,"operationalReadiness":false,"completePackage":false,"PCoff":false,"globalNativeDrainVerified":false,"sdkNamespaceEmptyVerified":false};
+
+const workspace=resolve(process.cwd()), node=process.execPath, uid=process.getuid(),gid=process.getgid();
+const root=resolve(process.env.RUNNER_TEMP??''), parentEnv={PATH:dirname(node)+':/usr/bin:/bin:/usr/sbin:/sbin',HOME:root,LANG:'C.UTF-8',LC_ALL:'C.UTF-8'};
+let phase='admission', context=null, fault=null, temp=null, tempInitial=null, target=null, adapters=null;
+let substep='ADMISSION', cleanup='NOT_CREATED', controllerPin=null, bootRead=false;
+let bootstrap=boot(false,null);
+let activeGroup={id:'ordinary-model',bootstrapKey:'startupBootstrap',childKey:'child',startupPrefix:''};
+const groupProof=[];
+const counts={preflight:'UNKNOWN',red:'UNKNOWN'}, children={preflight:null,red:null};
+let beforeHashes, afterHashes, observation, pfCount;
+const valid={admission:['ADMISSION_INVALID'],materialize:['MATERIALIZATION_INVALID','TARGET_DRIFT'],
+  preflight:['PREFLIGHT_INVALID','CUSTODY_INVALID'],red:['LAUNCH_INVALID','CUSTODY_INVALID','CAPTURE_INVALID'],
+  journal:['JOURNAL_INVALID','RECORDER_FAULT','TARGET_DRIFT'],native:['CAPTURE_INVALID','EVIDENCE_CONFLICT'],
+  cleanup:['CLEANUP_INVALID','TARGET_DRIFT'],publish:['PUBLICATION_INVALID']};
+const fail=(reason=valid[phase][0])=>{throw Object.assign(new Error(reason),{code:reason});};
+const need=(condition,reason)=>{if(!condition)fail(reason);};
+const remain=(limit)=>{const ms=Math.floor(end-performance.now());need(ms>0);return Math.min(ms,limit);};
+const digest=b=>createHash('sha256').update(b).digest('hex');
+const gitBlob=b=>createHash('sha1').update(Buffer.from('blob '+b.length+'\0')).update(b).digest('hex');
+const existsAbsent=async p=>{try{await lstat(p);}catch(e){if(e.code==='ENOENT')return;throw e;}fail();};
+function hostCmd(cmd,args,max=1048576,input) {
+  const result=spawnSync(cmd,args,{cwd:workspace,env:parentEnv,encoding:null,
+    input,stdio:['pipe','pipe','pipe'],maxBuffer:max,timeout:remain(cmd==='tar'?30000:330000)});
+  need(!result.error&&result.signal===null&&result.status===0&&Buffer.isBuffer(result.stdout)&&
+    result.stdout.length<=max&&Buffer.isBuffer(result.stderr)&&result.stderr.length<=65536);
+  return result.stdout;
+}
+const gitText=(...args)=>new TextDecoder('utf-8',{fatal:true}).decode(hostCmd('git',args)).trim();
+async function materialize(index,files) {
+  target=join(temp,'get-tools'); await mkdir(target,{mode:0o700});
+  const archive=hostCmd('git',['archive','--format=tar',config.BASE,'--','lib','worker','scripts','test','db','config',
+    config.bootstrap.path,...config.rootFiles],33554432);
+  hostCmd('tar',['-xf','-','-C',target],65536,archive);
+  await pinned(target,config.bootstrap);
+  for(const e of index.entries) {
+    const destination=join(target,e.path), admitted=await pinned(workspace,{...e.after,path:e.dataPath});
+    if(e.before) {
+      const old=await readFile(destination);
+      need((await lstat(destination)).isFile()&&old.length===e.before.bytes&&gitBlob(old)===e.before.blob);
+    } else await existsAbsent(destination);
+    await mkdir(dirname(destination),{recursive:true});
+    await writeFile(destination,admitted,{flag:e.before?'w':'wx'});
+  }
+  await symlink(join(workspace,'node_modules'),join(target,'node_modules'),'dir');
+  await writeFile(join(target,'c2-source-custody-guard.mjs'),files.guard,{flag:'wx'});
+  await writeFile(join(target,'c2-source-custody-preflight.mjs'),files.preflight,{flag:'wx'});
+}
+let previous = new Map();
+async function probeMap() {
+  const dir=join(target,'custody-probes');
+  let names;
+  try{const stat=await lstat(dir);need(stat.isDirectory()&&stat.uid===uid&&stat.gid===gid,'CUSTODY_INVALID');names=await readdir(dir);}
+  catch(e){if(e.code==='ENOENT')return new Map();throw e;}
+  need(names.length<=8 && names.every(n=>/^[1-9][0-9]*\.json$/.test(n)),'CUSTODY_INVALID');
+  const map=new Map();
+  for(const name of names.sort()) {
+    const path=join(dir,name), stat=await lstat(path), h=await adapters.readProbe(path);
+    const last=await lstat(path);
+    need(stat.dev===last.dev&&stat.ino===last.ino&&stat.size===last.size&&stat.ctimeMs===last.ctimeMs,'CUSTODY_INVALID');
+    map.set(name,[last.dev,last.ino,h]);
+  }
+  return map;
+}
+async function startupRecord(name,cap) {
+  const file=join(target,name);
+  let handle;
+  try {
+    handle=await open(file,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);
+    const st=await handle.stat();
+    if(!st.isFile() || st.nlink!==1 || st.uid!==uid || st.gid!==gid || st.mode%512!==384 || st.size>cap || await realpath(file)!==file)throw Error();
+    const buf=Buffer.alloc(st.size+1);
+    let n=0;
+    while(n<buf.length) {
+      const read=await handle.read(buf,n,buf.length-n,n);
+      if(read.bytesRead===0)break;
+      n+=read.bytesRead;
+    }
+    const end=await handle.stat();
+    if(n!==st.size || st.ctimeMs!==end.ctimeMs || st.ino!==end.ino || st.dev!==end.dev)throw Error();
+    const raw=buf.subarray(0,n).toString('utf8'), value=JSON.parse(raw);
+    if(raw!==JSON.stringify(value)+'\n' || value===null)throw Error();
+    return value;
+  } catch(e) { if(e?.code==='ENOENT')return null; throw e; }
+  finally { if(handle)await handle.close(); }
+}
+async function readStartup() {
+  bootRead=true;
+  try {
+    const entry=await startupRecord(activeGroup.startupPrefix+'startup-entered.json',64);
+    const term=await startupRecord(activeGroup.startupPrefix+'startup-terminal.json',1024);
+    bootstrap=boot(entry===null?false:JSON.stringify(entry)==='{"entered":true}'?true:null,term);
+  } catch { bootstrap={state:'MALFORMED',error:null}; }
+}
+const publishFile=(file,bytes,cap=4096)=>publishBounded(file,bytes,cap,()=>remain(330000));
+async function checkedLaunch(args,limit) {
+  substep='BEFORE_PROBES';
+  const prior=await probeMap();
+  need(adapters.same([...prior],[...previous]),'CUSTODY_INVALID');
+  const env={PATH:parentEnv.PATH,HOME:temp,TMPDIR:temp,RUNNER_TEMP:temp,XDG_CACHE_HOME:join(temp,'cache'),
+    XDG_CONFIG_HOME:join(temp,'config'),LANG:'C.UTF-8',LC_ALL:'C.UTF-8',CI:'true',NODE_ENV:'test',
+    
+    GITHUB_SHA:context.head,GITHUB_REPOSITORY:config.repo,AFW_C2_DIAG_ROOT:target,
+    AFW_C2_DIAG_PARENT_UID:String(uid),AFW_C2_DIAG_PARENT_GID:String(gid)};
+  substep='BUDGET';
+  const budget=remain(limit);
+  substep='SPAWN';
+  const child=spawnSync('sudo',['-n','/usr/bin/env','-i',...Object.entries(env).map(([k,v])=>k+'='+v),
+    'unshare','--net','/bin/sh','-c','uid="$1"; gid="$2"; shift 2; ip link set lo up && exec /usr/bin/setpriv --reuid "$uid" --regid "$gid" --clear-groups --no-new-privs "$@"',
+    'c2-source',String(uid),String(gid),node,'--import',join(target,'c2-source-custody-guard.mjs'),...args],
+    {cwd:target,env,encoding:null,maxBuffer:1048576,timeout:budget,stdio:['ignore','pipe','pipe']});
+  substep='CAPTURE';
+  children[phase]=launch(child);
+  substep='AFTER_PROBES';
+  const after=await probeMap();
+  for(const [key,v] of prior)need(adapters.same(after.get(key),v),'CUSTODY_INVALID');
+  substep='FRESH_COUNT';
+  counts[phase]=count(after.size-prior.size);
+  const fresh=adapters.freshProbes([...prior.keys()],[...after.keys()]);
+  previous=after;
+  return {child,fresh};
+}
+
+const checks={parentNonRoot:false,preflightOwned:false,preflightRemoved:false,uidGidGroupsLoopbackMatched:false,
+  targetsBeforeMatched:false,targetsAfterMatched:false,journalOwnershipMatched:false,ownRootVerified:false,ownTempRemoved:false};
+try {
+  const e=process.env;
+  need(process.argv.length===2&&process.version==='v22.23.4'&&Number.isSafeInteger(uid)&&uid>0&&Number.isSafeInteger(gid)&&gid>=0);
+  need(e.GITHUB_REPOSITORY===config.repo&&e.GITHUB_EVENT_NAME==='push'&&e.GITHUB_REF==='refs/heads/'+config.branch
+    &&e.GITHUB_JOB===config.job&&e.GITHUB_RUN_ATTEMPT==='1'&&/^[1-9][0-9]{0,19}$/.test(e.GITHUB_RUN_ID??'')
+    &&/^[0-9a-f]{40}$/.test(e.GITHUB_SHA??'')&&e.RUNNER_TEMP&&root===await realpath(root)
+    &&workspace===resolve(e.GITHUB_WORKSPACE??'')&&fileURLToPath(import.meta.url)===join(workspace,config.runner));
+  need(gitText('rev-parse','HEAD')===e.GITHUB_SHA&&gitText('rev-parse','HEAD^')===config.BASE&&
+    gitText('rev-parse',config.BASE+'^{tree}')===config.TREE&&gitText('show','-s','--format=%B','HEAD')===config.message);
+  const tree=gitText('rev-parse','HEAD^{tree}');need(/^[0-9a-f]{40}$/.test(tree));
+  context={head:e.GITHUB_SHA,tree,runId:e.GITHUB_RUN_ID};
+  controllerPin=gitBlob(await readFile(fileURLToPath(import.meta.url)));
+  const files={};for(const [key,pin]of Object.entries(pins))files[key]=await pinned(workspace,pin);
+  const index = JSON.parse(files.index);
+  need(index.entries.length === 13 && index.context.baselineSource === config.BASE &&
+    index.context.baselineTree === config.TREE && index.context.repository === config.repo);
+  const fixtureIndex = JSON.parse(files.fixtureIndex);
+  need(fixtureIndex.total === 315 && fixtureIndex.sections.length === 4);
+  for (const entry of fixtureIndex.edges) await pinned(workspace, entry);
+  const lock = await readFile(join(workspace, 'package-lock.json'));
+  need(gitBlob(lock) === '36a8cd4b7d369d293ffd8c1fc5a29a0b97a7265b' && lock.equals(hostCmd('git',['show',config.BASE+':package-lock.json'])));
+  adapters = await import('../c2-t1-drop-winner-diag4/collection-adapters.mjs');
+  substep='MATERIALIZE';
+  checks.parentNonRoot=true;
+  phase='materialize';
+  temp=await mkdtemp(join(root,'afw-get-tools-')); tempInitial=await lstat(temp);
+  need(dirname(temp)===root&&tempInitial.isDirectory()&&tempInitial.uid===uid&&tempInitial.gid===gid);
+  await materialize(index,files);
+  phase='preflight';
+  const pf=await withCustodyInputs(target,pins,()=>checkedLaunch([join(target,'c2-source-custody-preflight.mjs')],10000));
+  pfCount=pf.fresh;
+  need(exactCount(pfCount),'CUSTODY_INVALID');
+  substep='FLAGS';
+  need(flagsMatch(children.preflight,0));
+  substep='CAPTURE';
+  need(capturesMatch(children.preflight) &&
+    pf.child.stdout?.equals(Buffer.from('AFW_C2_OAUTH_PREFLIGHT {"schema":"afw.c2-oauth-preflight.v1","written":true}\n'))&&pf.child.stderr?.length===0);
+  substep='PREFLIGHT_RECEIPT';
+  const pd=join(target,'preflight-owned'),probe=join(pd,'probe'),st=await lstat(probe);
+  need((await lstat(pd)).isDirectory()&&await realpath(probe)===probe&&st.isFile()&&st.nlink===1&&st.uid===uid&&st.gid===gid&&
+    st.size===15&&(await readFile(probe)).equals(Buffer.from('C2_OAUTH_OWNED\n')));
+  checks.preflightOwned=true;await rm(pd,{recursive:true,force:false});await existsAbsent(pd);checks.preflightRemoved=true;
+
+  phase = 'materialize'; substep='MATERIALIZE';
+  const toolFiles={
+  "startupHelper": "startup-diagnostics.mjs",
+  "startupBootstrap": "startup-bootstrap.mjs",
+  "reader": "read-progress.mjs",
+  "child": "native-tools-child.mjs",
+  "model": "model-get-controls.mjs",
+  "ordinary": "native-get-ordinary-controls.mjs",
+  "publisher": "get-winner-collection-adapters.mjs",
+  "corpusAdapter": "test-corpus-adapter.mjs",
+  "corpusManifest": "test-corpus-transformation.json",
+  "baseAdapted": "model-current-synthetic-target.json",
+  "hostAdapted": "model-current-publisher-host.json",
+  "baseFixture": "synthetic-target-input.json",
+  "hostFixture": "publisher-host-cut.json",
+  "normalization": "publisher-normalization.json",
+  "schedule": "partial-tool-schedule.json",
+  "factoryModel": "factory-get-model-controls.mjs",
+  "factoryScope": "factory-model-scope.json",
+  "mCorpus": "m-race-egress.json",
+  "hostBoundary": "host-boundary-companions.json",
+  "retentionBootstrap": "startup-retention-bootstrap.mjs",
+  "retentionChild": "retention-tools-child.mjs",
+  "retention": "native-retention-controls.mjs",
+  "retentionFixture": "retention-component-expectations.json",
+  "componentWork": "component-work-boundaries.mjs",
+  "componentEntry": "retention-component-entry.mjs",
+  "componentStage": "component-stage-work.txt",
+  "componentWireOff": "component-wire-off.txt",
+  "componentWireOn": "component-wire-on.txt",
+  "componentObserver": "component-get-observer.mjs",
+  "faultBootstrap": "startup-fault-bootstrap.mjs",
+  "faultChild": "fault-tools-child.mjs",
+  "fault": "native-fixed-fault-controls.mjs",
+  "faultCompiler": "test/fixtures/finite-first-get-fault-tool.mjs",
+  "faultFixture": "fixed-m-fault-expectations.json",
+  "faultSeams": "fixed-m-fault-seams.json",
+  "transport": "native-transport-controls.mjs",
+  "transportFixture": "native-transport-expectations.json",
+  "ordinaryFixture": "ordinary-native-expectations.json"
+};
+  for(const [key,name]of Object.entries(toolFiles)){
+    const path=join(target,name);
+    await existsAbsent(path);
+    await writeFile(path,files[key],{flag:'wx',mode:0o600});
+  }
+  beforeHashes=await adapters.measureTargets(target,index.entries);
+  const schedule=JSON.parse(files.schedule),groups=[
+    {id:'ordinary-model',bootstrapKey:'startupBootstrap',childKey:'child',startupPrefix:''},
+    {id:'retention',bootstrapKey:'retentionBootstrap',childKey:'retentionChild',startupPrefix:'retention-'},
+    {id:'fault-transport',bootstrapKey:'faultBootstrap',childKey:'faultChild',startupPrefix:'fault-'}
+  ];
+  need(schedule.groups.length===3&&schedule.counts.guardedNodeProcesses===4);
+  observation={groups:[],modelCount:287,nativeDispatches:39};
+  for(const [position,group]of groups.entries()){
+    activeGroup=group;bootRead=false;bootstrap=boot(false,null);
+    counts.red='UNKNOWN';children.red=null;
+    const nominated=schedule.groups[position];
+    need(nominated.id===group.id&&nominated.bootstrap===toolFiles[group.bootstrapKey]&&
+      nominated.child===toolFiles[group.childKey]&&nominated.maxMs===180000);
+    phase='red';
+    const run=await withCustodyInputs(target,pins,()=>checkedLaunch([nominated.bootstrap],180000));
+    need(exactCount(run.fresh),'CUSTODY_INVALID');
+    substep='FLAGS';need(flagsMatch(children.red,0));
+    substep='CAPTURE';need(capturesMatch(children.red),'CAPTURE_INVALID');
+    substep='BOOTSTRAP';await readStartup();
+    need(bootstrap.state==='FULFILLED','CAPTURE_INVALID');
+    phase='materialize';substep='TARGET_READBACK';
+    afterHashes=await adapters.measureTargets(target,index.entries);
+    need(adapters.same(beforeHashes,afterHashes));
+    await checkCustodyInputs(target,pins);
+    for(const [key,name]of Object.entries(toolFiles))await pinned(target,{...pins[key],path:name});
+    substep='CHILD_RECEIPT';
+    const value=await startupRecord(nominated.receipt,nominated.receiptCap);
+    need(value!==null);
+    observation.groups.push(normalizeReceipt(group.id,value,schedule,files,observation.groups[0],{need,pins,digest}));
+    groupProof.push({id:group.id,processes:run.fresh,bootstrap:pins[group.bootstrapKey].blob,
+      child:pins[group.childKey].blob,exit:0,bootstrapState:'FULFILLED',targetHashesMatched:true,toolInputsMatched:true});
+  }
+  need(previous.size===4&&groupProof.length===3,'TARGET_DRIFT');
+
+} catch(error) {
+  fault={phase,substep,reason:valid[phase].includes(error?.code)?error.code:valid[phase][0]};
+} finally {
+  if(temp) {
+    if(!bootRead && target && (phase==='red' || children.red!==null))await readStartup();
+    try {
+      phase='cleanup';
+      await removeOwnedTemp(temp,root,tempInitial,uid,gid,()=>{checks.ownRootVerified=true;});
+      checks.ownTempRemoved=true;
+    } catch {cleanup='FAILED';}
+    if(checks.ownTempRemoved)cleanup='REMOVED';
+  }
+}
+if(!fault && cleanup==='REMOVED'){
+ try{
+   const artifact = {schema:'AFW.GET_WINNER.FOCUSED_TOOLS/1',head:context.head,tree:context.tree,runId:context.runId,
+     attempt:1,job:config.job,stage:'FOCUSED_TOOL_CONTROLS',observation,childExit:0,fixtureIndex:pins.fixtureIndex.blob,
+     sourceIndex:pins.index.blob,schedule:pins.schedule.blob,preflightProcesses:pfCount,toolProcesses:3,guardedNodeProcesses:4,groups:groupProof,targetHashesRechecked:true,toolInputsRechecked:true,
+     targetHashes:{beforeSha256:beforeHashes,afterSha256:afterHashes},
+     ownedTempRemoved:checks.ownTempRemoved,SourceQualified:false,Task1Pass:false,nonclaims:flags};
+   const out=join(workspace,config.artifact),bytes=Buffer.from(JSON.stringify(artifact)+'\n');
+   await publishFile(out,bytes,24577);
+   remain(330000);
+   console.info('AFW_GET_WINNER_FOCUSED_TOOL_CONTROLS');
+   process.exitCode = 0;
+ } catch { fault={phase:'publish',substep:'PUBLISH',reason:'PUBLICATION_INVALID'}; }
+}
+if (fault || cleanup==='FAILED') {
+  process.exitCode=1;
+  console.error('GET_TOOLS_PREREQUISITE '+(fault?fault.phase+' '+fault.reason:'cleanup CLEANUP_INVALID'));
+  if(context && controllerPin && fault?.phase!=='publish') {
+    try {
+      const ids={controller:controllerPin,bootstrap:pins[activeGroup.bootstrapKey].blob,helper:pins.startupHelper.blob,
+        child:pins[activeGroup.childKey].blob,sourceIndex:pins.index.blob,fixtureIndex:pins.fixtureIndex.blob,startupFixtures:pins.startupFixtures.blob};
+      const raw=diagnostic(context,ids,fault,cleanup,counts,children,bootstrap);
+      await publishFile(join(workspace,'output/get-winner-startup-diagnostic.json'),Buffer.from(raw));
+    } catch { console.error('STARTUP_DIAGNOSTIC_UNAVAILABLE'); }
+  }
+}
