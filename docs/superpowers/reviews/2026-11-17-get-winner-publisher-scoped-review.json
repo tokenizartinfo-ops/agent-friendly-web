@@ -1,0 +1,104 @@
+{
+  "schema": "AFW.GET_WINNER.STAGE_B.EARLY_PUBLISHER_PACKAGE_REVIEW/1",
+  "date": "2026-11-17",
+  "project": "AFW",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "environment": "private detached Git DATA",
+  "origin": "https://api.github.com/repos/tokenizartinfo-ops/agent-friendly-web",
+  "allowedAction": "Early scoped immutable publisher/protocol/schema/selection/Source13 review and detached report only",
+  "rollback": "Disregard detached review",
+  "scope": "STATIC PACKAGE COMPONENTS ONLY. Supplements a279c2e6238927b0f7b1544c0f4d058852177651 and boundary ruling7308d1c0fff9779d22082198c59031f51abb2477; no final whole-packet, controller/workflow, native or Task1 acceptance.",
+  "brief": "dc132c7946534f5fbbf321b0801ad60e4afb7549",
+  "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+  "coordinateAuthority": "805a4e93a0a87d7300c9641b510320def947d0fc",
+  "SPEC": "PASS_SCOPED_PUBLISHER_PACKAGE_COMPONENTS_ONLY",
+  "QUALITY": "PASS_SCOPED_PUBLISHER_PACKAGE_COMPONENTS_ONLY",
+  "materialFindings": [],
+  "inputs": [
+    {
+      "kind": "publisher",
+      "blob": "5dad0068909814d8525f92310035c36d10653e77",
+      "bytes": 38293,
+      "sha256": "4aa49d8cab7f4f02a46ef350b19ba68d14823922edba51b4d496fde328a16e67"
+    },
+    {
+      "kind": "schema",
+      "blob": "34e2a75a79f3b848d7fba6d55022b8d08a08f9b3",
+      "bytes": 35597,
+      "sha256": "23061d7301e4d69b682d036cb96b9201da1b0d7543706aa0b67496c42941cb52"
+    },
+    {
+      "kind": "selection",
+      "blob": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+      "bytes": 4403,
+      "sha256": "e454749c9bf2b2e4031bbfc10f10d54e75b4e1c7cc29edc6b0844fa0e3d10d8b"
+    },
+    {
+      "kind": "protocol",
+      "blob": "d6c08923a5461b30f24bf81fcaa4dd7460b5f273",
+      "bytes": 17354,
+      "sha256": "d924149237d0e8d031acb7125e503359b632baf3d87052de03971607c1c8f28d"
+    },
+    {
+      "kind": "field",
+      "blob": "2d012ec22c28c2f4843404e8271e4ab58de8ba7c",
+      "bytes": 540,
+      "sha256": "e26f1596871b084e271029e407764735e382be5b807f49b41806050826c6c5b5"
+    },
+    {
+      "kind": "Source13",
+      "blob": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+      "bytes": 9228,
+      "sha256": "86b346adf2a4a73f3c7cf96ad4c2991deacddd9b695dc2365757f97bc79e4153"
+    }
+  ],
+  "verification": [
+    {
+      "topic": "Current exact source deltas",
+      "result": "ab1e0f6bfc9d0c7cb579d10527ed4a857b8dd3b4 replaces the interim delta: all15 sequential literal operations across S08/S09/S10 exactly reproduced current bodies e488965a58b989aa1c2f05a16aa6d5b74d4e411a/b2b6f6c7e13f6b5f4a1275546f4294c1402b6ce4/9ffce28ba28961937c4f24f1cc00eb8d899bc495 and reversed to full old originals. Source13 changes only entries8/9/10; caseMap/regressionSelection/mutant and other10 entries are identical. Existing source-only review remains applicable."
+    },
+    {
+      "topic": "Publisher and schema reversibility",
+      "result": "All11 publisherdeltafece984e49fa085c01221fcf3d041b1434821b11 operations and13 schemadelta57a1178606bc3093a079197209152f440e3ba35a operations match exact offsets and reproduce full amendments/originals forward/reverse. Total39 exact literal edits across the three current source bodies, publisher and schema."
+    },
+    {
+      "topic": "Positive eligibility and raw join",
+      "location": "publisher255-287,290-404,429-444,576-610",
+      "result": "Positive getWinner requires clean original14 native pass/action-count returns, target action entry and exact earliest GET AssertionError143, target native fail, same closed count, known finiteGetHTTP actual/expected200/throwSequence, complete canonical top-level C2FT4 in its original window and matching h/status relation. Duplicate/combined/malformed/order/range/window/custody-independent data failures suppress the new positive. Parent code receives stdout/journal facts only, never hidden R/header data."
+    },
+    {
+      "topic": "Public shape and compatibility",
+      "result": "Field schema exactly equals full schema.$defs.getWinner; canonical key order case,winner,stubStatus,qaLastCompleted and exact enums/UNKNOWN constraints match spec. Normalizer enforces L/V503+s0, S preserved seven codes or503 for all other disclosed/undisclosed statuses. UNKNOWN emits only UNKNOWN diagnostic fields. Independent HTTP projection is computed first and is never rewritten by normalization/getWinner; original firstFailure and DROP projection algorithms remain unchanged. New checkGetPublication independently enforces visible known-positive eligibility/normalization and complete unknown shape. Protocol correctly requires relational/canonical admission beyond JSON Schema."
+    },
+    {
+      "topic": "Bindings and limits",
+      "result": "Selection Source13blob/hash, aliases S08/S09/S10, exact143 site and public field pin reconcile current bodies and protocol. Independently measured compact selection wire withoutLF=4402bytes/SHA256fb6ced1bf3690203191d271d268745b86a1fab3cbcb4174d8bec6362ff5a49fd, matching publisher/schema/protocol context. Source13 hash/13 ordered target hashes, job/node and family bindings reconcile. Existing caps and allfalse qualification claims remain; monitor C2FT3 and original20 registration/order are preserved."
+    },
+    {
+      "topic": "Honest composed boundary",
+      "result": "Protocol authority names7308d1c0fff9779d22082198c59031f51abb2477 and explicitly preserves H-foreign-marker-tuple UNKNOWN as MODEL composed host/producer consistency. It states parent-alone canonical419 with HTTP503 passes the numeric relation, arbitrary post-emission replacement is unsupported and private R/header never enters production parent. No invented parent tamper/authentication detector was introduced. Final per-ID MODEL/native/scheduled/held census still required."
+    },
+    {
+      "topic": "Readback and draft scope",
+      "result": "All nine newly supplied package/delta bodies independently matched complete GitSHA1/UTF8bytes/SHA256 identities. The currentSource delta is17576 UTF8bytes despite17570 JS code units; its Git identity matches. Draft91e919948c3024190d739845c685cbe24671c08a was read only to understand intended ordinary OFF/ON compiled/manifest/dispatch/host witness. It has not been accepted as complete native controls or executed evidence."
+    }
+  ],
+  "holds": [
+    "Final focused controls/corpus adapter and exact per-ID scheduled-versus-held evidence census.",
+    "Final native controller/proof/workflow/manifest and one-use tree/custody Root gate.",
+    "Actual OFF/ON M resident measurement and required native race/finalizer/cancellation/transport controls; no model substitution.",
+    "Task1 actual acceptance, Task2 independent OWN implementation and eventual full20 remain held."
+  ],
+  "sourceReadPolicy": "All Source/publisher/native-draft text was DATA only. JSON package data were inspected, literal strings compared/reversed and bytes hashed. No Source AST/parsing/import/eval/syntax tests, native, refs, provider or runtime operations.",
+  "Source5": 5,
+  "OWN5": 5,
+  "reset": false,
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "PCoff": false,
+  "featureRuntimeReleased": false,
+  "nativeExecutions": 0,
+  "localSourceChecks": 0,
+  "refMutations": 0,
+  "runtimeMutations": 0
+}

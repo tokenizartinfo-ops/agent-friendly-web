@@ -4,7 +4,7 @@
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
   "previousCheckpoint": "67f503402cf1be228bbf5eae45ddac92da8cb02a",
-  "phase": "GET_WINNER_STAGE_B_SOURCE_REVIEW_AND_TOOL_PACKET_PREPARATION",
+  "phase": "GET_WINNER_STAGE_B_REVIEWED_SOURCE_PUBLISHER_RETENTION_CONTROL_DESIGN",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Resolve scoped independent source findings and finish exact detached publisher/native tool packet. Then full Root DATA measurement + independent whole-packet SPEC/QUALITY gate. No native tool/business/live release yet.",
+  "next": "Finish exact scoped retention design review/ruling and implement only separately pinned native component controls; complete honest fixture census and final native controller/WF; full packet gate before any execution.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -700,9 +700,20 @@
         "S09": "docs/superpowers/progress/2026-11-17-get-winner-stage-b-source-checkpoint/S09.txt",
         "S10": "docs/superpowers/progress/2026-11-17-get-winner-stage-b-source-checkpoint/S10.txt",
         "notAnActivatableManifest": true
-      }
+      },
+      "publisherScopedReview": "9d1bace530155d9525957a9a54ab2cf4f17da8cb",
+      "source13": "adf5e3d04562a34718cce9a04ccb480bc70fa694",
+      "publisher": "5dad0068909814d8525f92310035c36d10653e77",
+      "schema": "34e2a75a79f3b848d7fba6d55022b8d08a08f9b3",
+      "selection": "2cabed0cd5d8c26fb4eb84eb41fd1034ea31dac0",
+      "protocol": "d6c08923a5461b30f24bf81fcaa4dd7460b5f273",
+      "rootSourcePublisherMeasurement": "37a3c7a11e5765ab8e0b039917ad346497cbe5a7",
+      "authorCompleteCurrentCheckpoint": "f0b0da86c4bb9387dc60b26d361a8ab4d9238ddf",
+      "authorCensus": "9c81a095ba20a4d609125441b7c664b78a45e247",
+      "retentionFeasibility": "f998f09fbe6e9299a3f524d694b4cd98ff1d237a",
+      "retentionScope": "Separate native component with single reaction-free append-only test export proposed; original-route M witness separate; exact design review/Root implementation ruling pending"
     }
   },
-  "schemaVersion": 65,
-  "updatedAtUTC": "2026-11-17 17:58:11 UTC"
+  "schemaVersion": 66,
+  "updatedAtUTC": "2026-11-17 18:12:40 UTC"
 }
