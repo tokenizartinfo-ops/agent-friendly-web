@@ -1,0 +1,64 @@
+{
+  "schema": "AFW-DIAG2-OWN-ROOT-EXPLICIT-NATIVE-INTEGRITY-FINDING/1",
+  "timestampUTC": "2026-11-17 01:33:13 UTC",
+  "repository": "tokenizartinfo-ops/agent-friendly-web",
+  "preimageIndex": "a81579792c2378fb3935560c96bb5541fffeef07",
+  "RootOriginal40": {
+    "own40Pass": 40,
+    "admit": 19,
+    "reject": 21,
+    "explicitNativeIntegrityProbe": [
+      {
+        "integrity": "ambiguous",
+        "acceptedProjection": "KNOWN",
+        "error": null
+      },
+      {
+        "integrity": "torn",
+        "acceptedProjection": "KNOWN",
+        "error": null
+      }
+    ],
+    "RootOwnCodeOnlyRAM": true,
+    "SourceExecuted": false,
+    "notNativeAcceptance": true
+  },
+  "RootFullCoherentReaderProbe": [
+    {
+      "integrity": "ambiguous",
+      "readerAccepted": true,
+      "state": "KNOWN",
+      "error": null,
+      "inputHash": {
+        "bytes": 43676,
+        "sha256": "0de1550f489ea6da4ebfa0f533195e4984c19fedd18a437261044a9ecf136365",
+        "blob": "e6c0bf2f586ed5f6abdd218cc27952b302aa4eba"
+      }
+    },
+    {
+      "integrity": "torn",
+      "readerAccepted": true,
+      "state": "KNOWN",
+      "error": null,
+      "inputHash": {
+        "bytes": 43662,
+        "sha256": "fcc0b58efae1f872685ce826ba71bf260eeb8500266f3982752b507d273d6b93",
+        "blob": "8b9d07d46f9e78880b643d9950234333b2f64588"
+      }
+    }
+  ],
+  "clarification": "inputHash.blob values inRAMprobe are computedGitobjectdigests only, NOT publishedGitblobobjects; do not fetch them. TheseareadhocRootOWN-onlyRAMreproductions, notthepresealedfixfixturepacket. Actualpublishedfourappendixinputs willbeindependentlymaterializedbyassignedauthorafter38deIDs/expectations seal; Sourcecode neverexecuted.",
+  "disposition": "Confirmedexplicitnativeintegritycontradiction. Rootround2releaseccf33ed... requiresminimalKNOWNnativeprefixjoin andpreserved40+two pairedNativeIDs=42/44evals (21admit23reject). No prior40nativewascreated orrerun; no Source35rerun needed.",
+  "RootFixRelease": "ccf33edb19d3971a8182c78200330ba9bff0fb4f",
+  "SourceQualified": false,
+  "Task1Pass": false,
+  "nonclaims": {
+    "historicalCauseProven": false,
+    "receiptAuthenticated": false,
+    "operationalReadiness": false,
+    "completePackage": false,
+    "PCoff": false,
+    "globalNativeDrainVerified": false,
+    "sdkNamespaceEmptyVerified": false
+  }
+}
