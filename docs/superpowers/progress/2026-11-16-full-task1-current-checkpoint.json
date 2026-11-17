@@ -1,10 +1,10 @@
 {
-  "schema": 51,
-  "timestampUTC": "2026-11-17 15:37:44 UTC",
+  "schema": 52,
+  "timestampUTC": "2026-11-17 15:45:53 UTC",
   "project": "AFW",
   "repository": "tokenizartinfo-ops/agent-friendly-web",
-  "previousCheckpoint": "cb347e81b4736d612eadddeaecb41e57018fb871",
-  "phase": "GET_WINNER_DEPENDENT_DESIGN_COMPLETE_REVIEW_ACTIVE",
+  "previousCheckpoint": "036c66c2648da5eed93c76f6b0132ddc8798c167",
+  "phase": "GET_WINNER_DESIGN_ACCEPTED_FIXTURE_STAGE_A_RELEASED",
   "activeNativeRuns": [],
   "allCurrentNativeOccurrencesClosed": true,
   "lastActualBusiness": {
@@ -112,7 +112,7 @@
     "closedTree": "4beafa48094455829da0cef3fd20dc63716bb4fb"
   },
   "SourceBusinessReleased": true,
-  "next": "Await scoped independent design SPEC+QUALITY review, then smallest fixture-first dependent source task only if admitted; no unchanged rerun, no Source6/OWN6 reset, no runtime/Entry.",
+  "next": "Task1 StageA author fixture seal and original prepared-M RED proposal; no featurecode or native released. Root then static review/tree gate and exact one-use RED. No user intervention needed.",
   "noLocalSourceExecution": true,
   "noCloudflareOAuthOTPTokenMailMaxRuntimeAction": true,
   "ownerAvailability": {
@@ -498,18 +498,27 @@
     "actualNativeReview": "6a76d5a3a18303e69cbdf08ad7d1eee328f17746"
   },
   "dependentGETDesign": {
-    "status": "DESIGN_COMPLETE_INDEPENDENT_REVIEW_ACTIVE",
+    "status": "ACCEPTED_DESIGN_ONLY",
     "brief": "e912dfeb0011c128c7c5edd41b870b9d5f7ccc4f",
     "ruling": "54b6fbf27b0d0bf71b616e9ae6c21e4f8a39de67",
     "channelRuling": "dc4f2041667e1080d92da65c2f4f60289c33e788",
-    "spec": "5a4c5b4cd6a87f55488577ffc53739287c529b80",
-    "report": "96adb986865afa25ce018bf1a837638808d5f0f0",
+    "spec": "2ba2cbedbbc14e75e94ff3096f918b9e9448279c",
+    "report": "1bfdd67b368b3a5409bcfb8bc007e2f926b2622b",
     "actor": "/root/get_winner_dependent_design",
     "reviewer": "/root/get_winner_design_review",
     "roundsUnchanged": true,
     "implementationReleased": false,
-    "nativeReleased": false
+    "nativeReleased": false,
+    "reversibleDiff": "4e48bd4676a74189412f26b02338807da05257bf",
+    "review": "935909a1f003a661c9e39f5d99ec3dfae566cd25",
+    "amendmentRound": 1
   },
   "completedOwnVmReleased": true,
-  "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec"
+  "readinessDocument": "ad970aabf3d0a389895c4df36728771a6de6c9ec",
+  "getWinnerDependent": {
+    "phase": "FIXTURE_FIRST_SEAL_AND_RED_PROPOSAL_ONLY",
+    "featureCodeReleased": false,
+    "nativeReleased": false,
+    "roundsUnchanged": true
+  }
 }
